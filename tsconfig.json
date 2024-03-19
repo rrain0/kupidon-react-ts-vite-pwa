@@ -1,17 +1,35 @@
 {
   "compilerOptions": {
     "target": "ESNext", // simply means which version of ECMAScript you're using to code
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "baseUrl":".", // allow resolve src folder as module. You can use: 'import Something from "src/components/SvgIcons/Something"'
-    "allowJs": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    
+
+    
+    
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true, // allow only modules (files with import/export). At least you need 'export {}'.
+    "noEmit": true,
+    "jsx": "react-jsx",
+    
+    // path aliases
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+      "@res/*": ["src/res/*"],
+      "@util/*": ["src/util/*"],
+    },
+
+    
+    
+    /* Linting */
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "exactOptionalPropertyTypes": true, // '?' means absence of property but not undefined
     "downlevelIteration": true, // use [...anyIterator]
     "noImplicitAny": false, // нет неявных any
@@ -19,17 +37,13 @@
     "allowUnreachableCode": true, // разрешить код после return, который никогда не выполнится
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true, // allow only modules (files with import/export). At least you need 'export {}'.
-    "noEmit": true,
+    "useDefineForClassFields": true,
+    
     "plugins": [
       { "name": "typescript-plugin-css-modules" }
     ],
-    "jsx": "react-jsx"
+    
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
