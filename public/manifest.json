@@ -45,7 +45,7 @@
       "type": "image/png",
       "sizes": "512x512" // REQUIRED // splashscreen icon
     }
-  ],
+  ]
   
   
   // REQUIRED: prefer_related_applications не должен присутствовать или должен быть false

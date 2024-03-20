@@ -19,7 +19,7 @@ const AppLangEnum = /** @type {const} */ ({
 
 
 /** @type {(langs: AllAppLangs | string[])=>void} */
-export const setHtmlTags = (langs)=>{
+const setHtmlTags = (langs)=>{
   /**
    * @type {{
    *  nodeEnv: 'development'|'production'|'test',
@@ -30,8 +30,8 @@ export const setHtmlTags = (langs)=>{
    * }}
    */
   const htmlProps = {
-    nodeEnv: NODE_ENV,
-    publicUrl: PUBLIC_URL,
+    nodeEnv: /* import.meta.env.MODE */ 'development',
+    publicUrl: /* import.meta.env.BASE_URL */ '/',
     lang: "en-US",
     title: "Kupidon",
     description: "Kupidon date app",
@@ -97,7 +97,8 @@ export const setHtmlTags = (langs)=>{
   
   document.title = htmlProps.title
   
-  const htmlDescription = document.querySelector('html head meta[name=description]')
+  const htmlDescription =
+    document.querySelector('html head meta[name=description]') as HTMLMetaElement
   htmlDescription.content = htmlProps.description
   
   const manifestSearchParams = new URLSearchParams({
@@ -107,7 +108,8 @@ export const setHtmlTags = (langs)=>{
   let manifestUrl = htmlProps.publicUrl + "/manifest.json"
   if (manifestSearchParams) manifestUrl += '?' + manifestSearchParams
   
-  const linkManifest = document.querySelector('html>head>link[rel=manifest]')
+  const linkManifest =
+    document.querySelector('html>head>link[rel=manifest]') as HTMLLinkElement
   linkManifest.href = manifestUrl
 }
 
@@ -118,14 +120,14 @@ export const setHtmlTags = (langs)=>{
 
 const langSettingsName = 'langSettings'
 {
-  const langSettings = JSON.parse(localStorage.getItem(langSettingsName))
+  const langSettings = JSON.parse(localStorage.getItem(langSettingsName)!)
   if (langSettings?.setting==='manual' && langSettings.manualSetting){
     setHtmlTags(langSettings.manualSetting)
   } else {
     
     /** @type {()=>string[]} */
     const getLangs = ()=>{
-      let browserLangs = navigator.languages
+      let browserLangs: readonly string[] | undefined = navigator.languages
       if ((!browserLangs || !browserLangs.length) && navigator.language)
         browserLangs = [navigator.language]
       if (!browserLangs || !browserLangs.length) browserLangs = undefined
@@ -137,7 +139,7 @@ const langSettingsName = 'langSettings'
       return browserLangs
     }
     
-    let langs = getLangs().filter(it=>AllAppLangs.includes(it))
+    let langs = getLangs()?.filter(it=>AllAppLangs.includes(it)) ?? []
     langs = [...langs,'en-US']
     
     setHtmlTags(langs)
@@ -198,7 +200,7 @@ const promptInstall = ()=>{
 }
 window.addEventListener('beforeinstallprompt', async ev=>{
   // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getInstalledRelatedApps
-  const relatedApps = await navigator.getInstalledRelatedApps?.() // => { id, platform, url, version }[]
+  const relatedApps = await navigator['getInstalledRelatedApps']?.() as { id, platform, url, version }[] | undefined
   // Search for a specific installed platform-specific app
   ev.preventDefault()
   //console.log('relatedApps',relatedApps)

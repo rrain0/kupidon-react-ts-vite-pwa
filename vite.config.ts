@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import svgr from 'vite-plugin-svgr'
+import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
 
 
 
@@ -71,7 +72,11 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    VitePWA(pwaOptions),
     tsconfigPaths(),
+    svgr({
+      svgrOptions: { exportType: 'named', ref: true, svgo: false, titleProp: true },
+      include: '**/*.svg',
+    }),
+    VitePWA(pwaOptions),
   ],
 })
