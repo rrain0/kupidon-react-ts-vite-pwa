@@ -87,13 +87,6 @@ export default [
       }
     },
     rules: {
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-      'react/jsx-no-target-blank': 'off',
-      'react/function-component-definition': 'error',
-      
       // code style rules:
       '@stylistic/js/arrow-parens': ['error', 'as-needed'],
       '@stylistic/js/arrow-spacing': ['error', { before: false, after: false }],
@@ -168,6 +161,17 @@ export default [
       '@stylistic/js/wrap-iife': 'off',
       '@stylistic/js/wrap-regex': 'off',
       '@stylistic/js/yield-star-spacing': 'off',
+      
+      
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'react/jsx-no-target-blank': 'off',
+      'react/function-component-definition': 'error',
+      
+      
+      
     },
   },
   // !!! 'ignores' must be in a standalone object to work globally

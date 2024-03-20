@@ -1,14 +1,52 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-    <link rel="manifest" href="/manifest.json">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  
+  
+  <title>Kupidon</title>
+  <meta name="description" content="Kupidon date app" />
+  
+  
+  <meta name="viewport"
+    content="width=device-width, height=device-height,
+    viewport-fit=cover, shrink-to-fit=no,
+    interactive-widget=resizes-content,
+    initial-scale=1, maximum-scale=1, user-scalable=0"
+  />
+  
+  
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="apple-touch-icon" href="/logo192.png" />
+  
+  
+  <!--
+    manifest.json provides metadata used when your web app is installed on a
+    user's mobile device or desktop.
+    See https://developers.google.com/web/fundamentals/web-app-manifest/
+  -->
+  <link rel="manifest" href="/manifest.json">
+  
+  
+  <!-- Used as color of mobile browser toolbar in site mode -->
+  <!-- Do not set it if use media="(prefers-color-scheme: ...)" -->
+  <!--<meta name="theme-color" content="green" />-->
+  
+  <!-- works on site in mobile Chrome -->
+  <!-- works in app on desktop Edge -->
+  <!-- works in app on mobile Chrome -->
+  <meta name="theme-color" content="#ffaeba" media="(prefers-color-scheme: light)" />
+  <!-- NOT works on site in mobile Chrome -->
+  <!-- works in app on desktop Edge -->
+  <!-- works in app on mobile Chrome -->
+  <meta name="theme-color" content="#992c46" media="(prefers-color-scheme: dark)" />
+  
+</head>
+<body>
+
+  <div id="root"></div>
+  
+  <script type="module" src="/src/main.tsx"></script>
+
+</body>
 </html>
