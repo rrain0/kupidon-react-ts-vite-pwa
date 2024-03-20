@@ -29,7 +29,7 @@ export default [
       '@stylistic/js/linebreak-style': ['error', 'unix'],
     },
   },
-  // !!! ignores must be in a standalone object to work globally
+  // !!! 'ignores' must be in a standalone object to work globally
   {
     ignores: ['dist', 'dev-dist', 'eslint.config.mjs'],
   }

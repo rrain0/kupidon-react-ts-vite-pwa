@@ -8,8 +8,8 @@
     "build": "tsc && vite build",
     "lint-all": "eslint . --report-unused-disable-directives --max-warnings 0",
     "lint-all-fix": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
-    "lint-linebreak": "eslint . --no-config-lookup --config eslint.linebreaks.config.mjs --report-unused-disable-directives --max-warnings 0",
-    "lint-linebreak-fix": "eslint . --fix --no-config-lookup --config eslint.linebreaks.config.mjs --report-unused-disable-directives --max-warnings 0",
+    "lint-linebreak": "eslint . --no-config-lookup --config eslint-single-configs/eslint.linebreaks.config.mjs --max-warnings 0",
+    "lint-linebreak-fix": "eslint . --fix --no-config-lookup --config eslint-single-configs/eslint.linebreaks.config.mjs --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
