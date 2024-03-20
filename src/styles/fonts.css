@@ -22,30 +22,30 @@ code {
 @font-face {
   font-family: 'Roboto';
   font-weight: 100;
-  src: local('Roboto'), url('src/res/font/Roboto/Roboto-Thin.ttf');
+  src: local('Roboto'), url('/src/res/font/Roboto/Roboto-Thin.ttf');
 }
 @font-face {
   font-family: 'Roboto';
   font-weight: 300;
-  src: local('Roboto'), url('src/res/font/Roboto/Roboto-Light.ttf');
+  src: local('Roboto'), url('/src/res/font/Roboto/Roboto-Light.ttf');
 }
 @font-face {
   font-family: 'Roboto';
   font-weight: 400;
-  src: local('Roboto'), url('src/res/font/Roboto/Roboto-Regular.ttf');
+  src: local('Roboto'), url('/src/res/font/Roboto/Roboto-Regular.ttf');
 }
 @font-face {
   font-family: 'Roboto';
   font-weight: 500;
-  src: local('Roboto'), url('src/res/font/Roboto/Roboto-Medium.ttf');
+  src: local('Roboto'), url('/src/res/font/Roboto/Roboto-Medium.ttf');
 }
 @font-face {
   font-family: 'Roboto';
   font-weight: 700;
-  src: local('Roboto'), url('src/res/font/Roboto/Roboto-Bold.ttf');
+  src: local('Roboto'), url('/src/res/font/Roboto/Roboto-Bold.ttf');
 }
 @font-face {
   font-family: 'Roboto';
   font-weight: 900;
-  src: local('Roboto'), url('src/res/font/Roboto/Roboto-Black.ttf');
+  src: local('Roboto'), url('/src/res/font/Roboto/Roboto-Black.ttf');
 }
