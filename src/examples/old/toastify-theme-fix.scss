@@ -1,0 +1,88 @@
+
+
+
+/*
+  Подготовка к переключению цветов тем реактивным путём.
+  Сохранение цветов.
+*/
+
+:root{
+  $color-light: #fff;
+  $color-dark: #121212;
+  
+  $text-color-light: #757575;
+  $text-color-dark: #fff;
+  
+  $color-progress-light: linear-gradient(
+      to right,
+      #4cd964,
+      #5ac8fa,
+      #007aff,
+      #34aadc,
+      #5856d6,
+      #ff2d55
+  );
+  $color-progress-dark: #bb86fc;
+  
+  /*--toastify-color-light__: var(--toastify-color-light);
+  --toastify-color-dark__: var(--toastify-color-dark);
+  
+  --toastify-text-color-light__: var(--toastify-text-color-light);
+  --toastify-text-color-dark__: var(--toastify-text-color-dark);
+  
+  --toastify-color-progress-light__: var(--toastify-color-progress-light);
+  --toastify-color-progress-dark__: var(--toastify-color-progress-dark);*/
+  
+  &[data-theme=light] {
+    --toastify-color-light: #{$color-light};
+    --toastify-color-dark: #{$color-dark};
+    
+    --toastify-text-color-light: #{$text-color-light};
+    --toastify-text-color-dark: #{$text-color-dark};
+    
+    --toastify-color-progress-light: #{$color-progress-light};
+    --toastify-color-progress-dark: #{$color-progress-dark};
+  }
+  &[data-theme=dark] {
+    --toastify-color-light: #{$color-dark};
+    --toastify-color-dark: #{$color-light};
+    
+    --toastify-text-color-light: #{$text-color-dark};
+    --toastify-text-color-dark: #{$text-color-light};
+    
+    --toastify-color-progress-light: #{$color-progress-dark};
+    --toastify-color-progress-dark: #{$color-progress-light};
+  }
+  
+  /*&[data-theme=light] {
+    --toastify-color-light: #fff;
+    --toastify-color-dark: #121212;
+  }
+  &[data-theme=dark] {
+    --toastify-color-light: #121212;
+    --toastify-color-dark: #fff;
+  }*/
+  
+}
+
+
+:root[data-theme=light]{
+  /*--toastify-color-light: var(--toastify-color-light__);
+  --toastify-color-dark: var(--toastify-color-dark__);*/
+  
+  /*--toastify-text-color-light: var(--toastify-text-color-light__);
+  --toastify-text-color-dark: var(--toastify-text-color-dark__);
+  
+  --toastify-color-progress-light: var(--toastify-color-progress-light__);
+  --toastify-color-progress-dark: var(--toastify-color-progress-dark__);*/
+}
+:root[data-theme=dark]{
+  /*--toastify-color-light: var(--toastify-color-dark__);
+  --toastify-color-dark: var(--toastify-color-light__);*/
+  
+  /*--toastify-text-color-light: var(--toastify-text-color-dark__);
+  --toastify-text-color-dark: var(--toastify-text-color-light__);
+  
+  --toastify-color-progress-light: var(--toastify-color-progress-dark__);
+  --toastify-color-progress-dark: var(--toastify-color-progress-light__);*/
+}

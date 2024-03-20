@@ -1,0 +1,26 @@
+
+
+
+
+
+.noScroll {
+  overflow: hidden;
+}
+.noScrollX {
+  overflow-x: hidden;
+}
+.noScrollY {
+  overflow-y: hidden;
+}
+
+
+
+.noSelect {
+  user-select: none;
+}
+.noTouchAction {
+  touch-action: none;
+}
+.instantScroll {
+  scroll-behavior: auto;
+}

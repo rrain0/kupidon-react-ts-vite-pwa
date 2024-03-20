@@ -1,0 +1,89 @@
+
+@use 'src/styles/common';
+
+
+
+$ripple-mode: var(--ripple-mode);
+$color: var(--ripple-color, white);
+$ripple-anim-duration: var(--ripple-animation-duration, 500ms);
+$dissolve-anim-duration: calc($ripple-anim-duration * 1.2);
+
+$top: var(--ripple-top, 0);
+$left: var(--ripple-left, 0);
+$w: var(--ripple-w, 0);
+$h: var(--ripple-h, 0);
+
+
+
+
+.rippleFrame {
+  @extend .abs;
+  border-radius: inherit;
+  pointer-events: none;
+  overflow: hidden;
+  
+  //--ripple-color: white;
+  //--ripple-top: 0;
+  //--ripple-left: 0;
+  //--ripple-w: 0;
+  //--ripple-h: 0;
+  //--ripple-animation-duration: 500ms;
+  //--dissolve-animation-duration: calc(var(--ripple-animation-duration) * 1.2);
+}
+
+.rippleView {
+  position: absolute;
+  top: $top;
+  left: $left;
+  width: $w;
+  height: $h;
+  border-radius: 50%;
+  background-color: $color;
+  scale: 0;
+}
+
+
+//$easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+//$easeInOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+//$easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+$easeOutSine: cubic-bezier(0.39, 0.575, 0.565, 1);
+$easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+$easeOutCubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+
+@keyframes ripple {
+  0% {
+    scale: 0;
+    opacity: 0.1;
+  }
+  100% {
+    scale: 1;
+    opacity: 0.25;
+  }
+}
+$rippleAnimation: ripple $ripple-anim-duration $easeOutCubic;
+
+
+.rippleShow {
+  animation: $rippleAnimation;
+  opacity: 0.25;
+  scale: 1;
+}
+
+
+@keyframes dissolve {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 0;
+  }
+}
+$dissolveAnimation: dissolve $dissolve-anim-duration linear;
+
+
+.rippleHide {
+  animation: $rippleAnimation, $dissolveAnimation;
+  opacity: 0;
+  scale: 1;
+}

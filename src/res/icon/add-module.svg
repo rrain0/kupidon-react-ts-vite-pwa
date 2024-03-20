@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 200 200" stroke="black" fill="black">
+  
+  <style>
+    :root {
+      --size: 78px;
+      --stroke-width: 16px;
+      --line-offset: 10px;
+    }
+    .rect {
+      rx: 14px; ry: 14px;
+      width: var(--size); height: var(--size);
+      stroke-width: var(--stroke-width);
+      fill: none;
+    }
+    .rect.top-left {
+      x: 0;
+      y: 0;
+      translate: calc(var(--stroke-width) / 2) calc(var(--stroke-width) / 2);
+    }
+    .rect.bottom-left {
+      x: 0;
+      y: calc(200px - var(--size));
+      translate: calc(var(--stroke-width) / 2) calc(-1 * var(--stroke-width) / 2);
+    }
+    .rect.bottom-right {
+      x: calc(200px - var(--size));
+      y: calc(200px - var(--size));
+      translate: calc(-1 * var(--stroke-width) / 2) calc(-1 * var(--stroke-width) / 2);
+    }
+    .line {
+      stroke: none;
+    }
+    .line.horizontal {
+      x: calc(200px - var(--size) - var(--stroke-width) / 2);
+      width: calc(var(--size));
+      y: calc((var(--size)) / 2);
+      height: var(--stroke-width);
+    }
+    .line.vertical {
+      x: calc(200px - var(--size) / 2 - var(--stroke-width));
+      width: var(--stroke-width);
+      y: calc(var(--stroke-width) / 2);
+      height: var(--size);
+    }
+  </style>
+  
+  
+  <rect class="rect top-left" />
+  <rect class="rect bottom-left" />
+  <rect class="rect bottom-right" />
+  
+  <rect class="line horizontal" />
+  <rect class="line vertical" />
+    
+</svg>

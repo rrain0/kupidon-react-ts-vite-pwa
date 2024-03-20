@@ -76,6 +76,16 @@ export default [
       '@stylistic/js': stylistic,
       //'prettier': prettier,
     },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+        alias: [
+          ['', './public']
+        ],
+      }
+    },
     rules: {
       'react-refresh/only-export-components': [
         'warn',
@@ -159,16 +169,6 @@ export default [
       '@stylistic/js/wrap-regex': 'off',
       '@stylistic/js/yield-star-spacing': 'off',
     },
-    settings: {
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-        },
-        alias: [
-          ['', './public']
-        ],
-      }
-    }
   },
   // !!! ignores must be in a standalone object to work globally
   {

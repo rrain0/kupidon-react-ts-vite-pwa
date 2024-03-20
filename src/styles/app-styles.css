@@ -1,0 +1,63 @@
+
+
+
+:root{
+  --page-vertical-padding: 50px;
+  
+  --bottom-button-bar-height: 0px;
+  
+  --bottom-nav-height: 0px;
+  --bottom-second-bar-height: 0px;
+  
+  --top-button-bar-height: 0px;
+  --top-nav-height: 0px;
+  
+  
+  
+  --bottom-bars-inset: calc(
+    var(--bottom-nav-height) +
+    var(--bottom-second-bar-height)
+  );
+  --bottom-page-inset: calc(
+    var(--bottom-nav-height) +
+    var(--bottom-second-bar-height) +
+    max(
+      var(--bottom-button-bar-height),
+      var(--page-vertical-padding)
+    )
+  );
+  
+  
+  
+  --top-bars-inset: calc(
+    var(--top-nav-height)
+  );
+  --top-page-inset: calc(
+    var(--top-nav-height) +
+    max(
+      var(--top-button-bar-height),
+      var(--page-vertical-padding)
+    )
+  );
+}
+
+
+/*
+html {
+  user-select: none;
+}
+*/
+
+
+@keyframes NoAnimation {
+  /*from { transform: scale(1) }
+  to { transform: scale(1) }*/
+}
+.no-animation {
+  animation-name: NoAnimation;
+  animation-duration: 1ms;
+}
+
+
+
+

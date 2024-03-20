@@ -21,7 +21,7 @@
     "paths": {
       "src/*": ["src/*"],
       "@res/*": ["src/res/*"],
-      "@util/*": ["src/util/*"],
+      "@util/*": ["src/utils/*"],
     },
 
     

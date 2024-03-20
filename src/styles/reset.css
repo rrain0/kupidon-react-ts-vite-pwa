@@ -1,0 +1,75 @@
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  background: none;
+  /* disable highlight on mobile devices when tapping on screen */
+  -webkit-tap-highlight-color: transparent;
+}
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  background: none;
+  /* disable highlight on mobile devices when tapping on screen */
+  -webkit-tap-highlight-color: transparent;
+}
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  background: none;
+  /* disable highlight on mobile devices when tapping on screen */
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+/*
+  https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+  Indicates that page cannot be changed by
+  autotheme browser engine.
+  And indicates that page can change theme by your own.
+*/
+html {
+  color-scheme: light dark;
+}
+
+
+
+
+
+/* WARNING! Do not apply any display property to html or body - it behaves strange */
+
+#root {
+  display: contents;
+  /*width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-flow: column nowrap;*/
+}
+
+
+/* :where() decreases specifity */
+/*:where(#app-frame) :where(*) {
+  background: none;
+}*/
+
+
+
+a {
+  display: contents;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
