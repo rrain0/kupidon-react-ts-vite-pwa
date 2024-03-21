@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import classNames from 'classnames'
 import React, { useImperativeHandle, useRef } from 'react'

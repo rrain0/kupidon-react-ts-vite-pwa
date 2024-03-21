@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { animated } from '@react-spring/web'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { css } from '@emotion/react'

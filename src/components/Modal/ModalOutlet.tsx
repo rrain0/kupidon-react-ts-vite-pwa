@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import React, { useId, useLayoutEffect } from 'react'
 import { useSetRecoilState } from 'recoil'

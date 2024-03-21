@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import classNames from 'classnames'
 import React, {
   useCallback, useEffect,

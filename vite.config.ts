@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
-
+import checker from 'vite-plugin-checker'
 
 
 /*
@@ -71,12 +71,17 @@ export default defineConfig({
     port: 40030,
   },
   plugins: [
-    react(),
-    tsconfigPaths(),
-    svgr({
-      svgrOptions: { exportType: 'named', ref: true, svgo: false, titleProp: true },
-      include: '**/*.svg',
+    react({
+      jsxImportSource: '@emotion/react',
+      babel: {
+        plugins: ['@emotion/babel-plugin']
+      }
     }),
+    tsconfigPaths(),
+    svgr(),
     VitePWA(pwaOptions),
+    checker({
+      typescript: true, // use TypeScript check
+    }),
   ],
 })

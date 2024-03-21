@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/utils/theme/AppTheme'
 import { LightSimple } from 'src/utils/theme/themes/LightSimple'

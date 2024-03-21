@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect } from 'react'
 import { AuthApi } from 'src/api/requests/AuthApi'
 import { useSetRecoilState } from 'recoil'

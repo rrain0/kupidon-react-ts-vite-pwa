@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useRef } from 'react'
 import { Pages } from 'src/components/Page/Pages'
 import { useContainerScrollState } from 'src/views/Scrollbar/useContainerScrollState'

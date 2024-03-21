@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { useRecoilValue } from 'recoil'
 import React from 'react'

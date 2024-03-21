@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useRef } from 'react'
 import { UserApi } from 'src/api/requests/UserApi'

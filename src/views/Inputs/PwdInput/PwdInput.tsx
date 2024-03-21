@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { AppTheme } from 'src/utils/theme/AppTheme'
 import { SvgIcStyle } from 'src/views/icons/SvgIcStyle'

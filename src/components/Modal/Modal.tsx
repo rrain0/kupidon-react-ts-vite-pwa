@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import React, { useImperativeHandle, useRef } from 'react'
 import { TypeUtils } from 'src/utils/common/TypeUtils'

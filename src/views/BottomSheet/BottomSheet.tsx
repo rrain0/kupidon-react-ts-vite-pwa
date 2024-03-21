@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useSpring, animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'

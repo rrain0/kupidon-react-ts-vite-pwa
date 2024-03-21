@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { Pages } from 'src/components/Page/Pages'
 import { EmotionCommon } from 'src/styles/EmotionCommon'

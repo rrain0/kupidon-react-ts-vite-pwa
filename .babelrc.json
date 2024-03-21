@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    [
+      // https://emotion.sh/docs/@emotion/babel-plugin
+      "@emotion",
+      {
+        // sourceMap is on by default
+        "sourceMap": true,
+        // autoLabel: 'dev-only' (default) | 'always' | 'never'
+        "autoLabel": "always",
+        // labelFormat: '[local]' | '[filename]' | '[dirname]'
+        "labelFormat": "[local]",
+        // cssPropOptimization is on by default
+        "cssPropOptimization": true
+      }
+    ]
+  ]
+}

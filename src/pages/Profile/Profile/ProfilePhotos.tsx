@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'

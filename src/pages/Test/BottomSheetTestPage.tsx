@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import BottomButtonBar from 'src/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/components/Page/Pages'

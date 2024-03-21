@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'

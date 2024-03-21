@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { useFakePointerRef } from 'src/components/ActionProviders/UseFakePointerRef'
 import { TypeUtils } from 'src/utils/common/TypeUtils'
 import { AppTheme } from 'src/utils/theme/AppTheme'

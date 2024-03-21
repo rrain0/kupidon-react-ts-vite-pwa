@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/styles/EmotionCommon'
