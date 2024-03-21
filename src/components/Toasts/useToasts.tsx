@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
-import { OnChangeCallback } from 'react-toastify/dist/types'
 import { TypeUtils } from 'src/utils/common/TypeUtils'
 import { UiText } from 'src/utils/lang/UiText'
 import { useUiValueArr } from 'src/utils/lang/useUiText'
@@ -8,6 +7,7 @@ import { useEffectEvent } from 'src/utils/react/useEffectEvent'
 import { ToastBody, ToastType } from 'src/components/Toasts/ToastBody'
 import falsy = TypeUtils.falsy
 import PartialUndef = TypeUtils.PartialUndef
+import Callback1 = TypeUtils.Callback1
 
 
 
@@ -106,7 +106,7 @@ export class ToastMsgData {
   
   id: string|number|undefined = undefined
   runCloseCallback = true
-  onChange: OnChangeCallback = (toast: ToastItem)=>{
+  onChange: Callback1<ToastItem> = (toast: ToastItem)=>{
     if(toast.status==='removed' && toast.data===this){
       this.id = undefined
       this.unsubscribeOnChange?.()

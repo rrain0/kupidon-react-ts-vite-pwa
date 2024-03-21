@@ -18,7 +18,7 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 
-export type InputProps = JSX.IntrinsicElements['textarea'] &
+export type InputProps = React.JSX.IntrinsicElements['textarea'] &
   PartialUndef<{
     hasError: boolean
     startViews: React.ReactNode

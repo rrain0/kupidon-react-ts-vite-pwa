@@ -11,7 +11,7 @@ import PartialUndef = TypeUtils.PartialUndef
 
 
 export type SettingsButtonCustomProps = PartialUndef<{}>
-export type SettingsButtonForwardRefProps = JSX.IntrinsicElements['button']
+export type SettingsButtonForwardRefProps = React.JSX.IntrinsicElements['button']
 export type SettingsButtonRefElement = HTMLButtonElement
 export type SettingsButtonProps = SettingsButtonCustomProps & SettingsButtonForwardRefProps
 

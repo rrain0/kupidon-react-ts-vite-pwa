@@ -19,9 +19,9 @@ export type InputCustomProps = PartialUndef<{
   endViews: React.ReactNode
   children: React.ReactNode
   childrenPosition: 'start'|'end'
-  frameProps: Omit<JSX.IntrinsicElements['label'],'ref'>
+  frameProps: Omit<React.JSX.IntrinsicElements['label'],'ref'>
 }>
-export type InputForwardRefProps = JSX.IntrinsicElements['input']
+export type InputForwardRefProps = React.JSX.IntrinsicElements['input']
 export type InputRefElement = HTMLInputElement
 export type InputProps = InputCustomProps & InputForwardRefProps
 

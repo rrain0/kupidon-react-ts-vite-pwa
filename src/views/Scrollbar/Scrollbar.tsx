@@ -36,7 +36,7 @@ export type ScrollbarCustomProps = {
 } & PartialUndef<{
   direction: ScrollDirection
 }>
-export type ScrollbarForwardRefProps = JSX.IntrinsicElements['div']
+export type ScrollbarForwardRefProps = React.JSX.IntrinsicElements['div']
 export type ScrollbarRefElement = HTMLDivElement
 
 export type ScrollbarProps = ScrollbarCustomProps & ScrollbarForwardRefProps

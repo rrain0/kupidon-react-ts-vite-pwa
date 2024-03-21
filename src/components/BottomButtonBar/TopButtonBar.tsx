@@ -31,7 +31,7 @@ export type TopButtonBarCustomProps = PartialUndef<{
   settingsBtn: boolean
   refreshBtn: boolean
 }>
-export type ForwardRefProps = JSX.IntrinsicElements['section']
+export type ForwardRefProps = React.JSX.IntrinsicElements['section']
 type RefElement = HTMLDivElement
 
 export type TopButtonBarProps = TopButtonBarCustomProps & ForwardRefProps

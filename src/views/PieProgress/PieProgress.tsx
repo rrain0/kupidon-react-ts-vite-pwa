@@ -14,7 +14,7 @@ export type PieProgressCustomProps = PartialUndef<{
   progress: number
   type: 'percent'|'oneBased'
 }>
-export type PieProgressForwardRefProps = JSX.IntrinsicElements['div']
+export type PieProgressForwardRefProps = React.JSX.IntrinsicElements['div']
 export type PieProgressRefElement = HTMLDivElement
 export type PieProgressProps = PieProgressCustomProps & PieProgressForwardRefProps
 

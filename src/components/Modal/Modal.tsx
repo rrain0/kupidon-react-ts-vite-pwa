@@ -8,7 +8,7 @@ import PartialUndef = TypeUtils.PartialUndef
 
 
 export type ModalCustomProps = PartialUndef<{}>
-export type ForwardRefProps = JSX.IntrinsicElements['article']
+export type ForwardRefProps = React.JSX.IntrinsicElements['article']
 type RefElement = HTMLDivElement
 
 export type ModalProps = ModalCustomProps & ForwardRefProps

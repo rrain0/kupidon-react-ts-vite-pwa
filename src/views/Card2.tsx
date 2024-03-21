@@ -13,7 +13,7 @@ import col = EmotionCommon.col
 export type Card2CustomProps = PartialUndef<{
   children: React.ReactNode
 }>
-export type ForwardRefProps = JSX.IntrinsicElements['article']
+export type ForwardRefProps = React.JSX.IntrinsicElements['article']
 type RefElement = HTMLDivElement
 
 export type Car2Props = Card2CustomProps & ForwardRefProps

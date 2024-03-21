@@ -21,7 +21,7 @@ import RefreshBtn = ButtonBarComponents.RefreshPageBtn
 
 
 
-export type BottomButtonBarProps = JSX.IntrinsicElements['section']
+export type BottomButtonBarProps = React.JSX.IntrinsicElements['section']
   & PartialUndef<{
     children: React.ReactNode
     leftChildren: React.ReactNode

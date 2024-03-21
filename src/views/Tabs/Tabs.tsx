@@ -27,7 +27,7 @@ export type TabsCustomProps = {
 } & PartialUndef<{
   children: (tabsProps: TabsRenderProps)=>React.ReactNode
 }>
-export type TabsForwardRefProps = Omit<JSX.IntrinsicElements['div'], 'children'>
+export type TabsForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
 export type TabsRefElement = HTMLDivElement
 export type TabsProps = TabsRefsProps & TabsCustomProps & TabsForwardRefProps
 

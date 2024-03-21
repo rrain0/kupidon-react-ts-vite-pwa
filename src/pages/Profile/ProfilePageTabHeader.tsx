@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
-import React, { useContext, useImperativeHandle, useRef } from 'react'
+import React, { useContext } from 'react'
 import { formHeaderStyle } from 'src/components/FormElements/FormHeader'
 import { EmotionCommon } from 'src/styles/EmotionCommon'
 import { ArrayUtils } from 'src/utils/common/ArrayUtils'
@@ -30,27 +30,18 @@ export type ProfilePageTabHeaderContextProps = {
 export const ProfilePageTabHeaderContext = React.createContext({} as ProfilePageTabHeaderContextProps)
 
 
-export type ProfilePageTabHeaderCustomProps = {
+export type ProfilePageTabHeaderProps = {
   thisTabIdx: TabIdx
 }
-export type ProfilePageTabHeaderForwardRefProps = Omit<JSX.IntrinsicElements['div'], 'children'>
-export type ProfilePageTabHeaderRefElement = HTMLDivElement
-export type ProfilePageTabHeaderProps = ProfilePageTabHeaderCustomProps & ProfilePageTabHeaderForwardRefProps
 
 
 
 const ProfilePageTabHeader =
 React.memo(
-React.forwardRef<ProfilePageTabHeaderRefElement, ProfilePageTabHeaderProps>(
-(props, forwardedRef)=>{
+(props: ProfilePageTabHeaderProps)=>{
   const {
     thisTabIdx: i,
-    ...restProps
   } = props
-  
-  
-  const elemRef = useRef<ProfilePageTabHeaderRefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
   
   
   const {
@@ -147,8 +138,6 @@ React.forwardRef<ProfilePageTabHeaderRefElement, ProfilePageTabHeaderProps>(
     <AnimatedHeader css={css`
       width: ${0.7*w}px;
     `}
-      {...restProps}
-      ref={elemRef}
       style={{
         x: forCenter.to(v => mapRange(v, [-1,1], [-(w/2), w/2])),
         scale: forCenter.to(v => 1 - 0.35 * Math.abs(v)),
@@ -168,7 +157,7 @@ React.forwardRef<ProfilePageTabHeaderRefElement, ProfilePageTabHeaderProps>(
     </AnimatedHeader>
     
   </Wrap>
-}))
+})
 export default ProfilePageTabHeader
 
 

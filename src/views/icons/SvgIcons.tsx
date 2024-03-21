@@ -91,7 +91,7 @@ export namespace SvgIcons {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconForwardRefProps = JSX.IntrinsicElements['svg']
+  type BaseSimpleSvgIconForwardRefProps = React.JSX.IntrinsicElements['svg']
   type BaseSimpleSvgIconRefElement = SVGSVGElement
   
   

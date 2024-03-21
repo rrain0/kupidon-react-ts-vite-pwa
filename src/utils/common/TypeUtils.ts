@@ -21,7 +21,7 @@ export namespace TypeUtils {
   
   
   
-  export function exists<T extends anyval>(value: T|{}): value is {} {
+  export function exists<T extends {}>(value: T|empty): value is T {
     return value!==null && value!==undefined
   }
   export function notExists<T>(value: T|empty): value is empty {

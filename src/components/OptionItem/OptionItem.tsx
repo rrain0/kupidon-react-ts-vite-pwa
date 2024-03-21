@@ -19,7 +19,7 @@ export type OptionItemCustomProps = PartialUndef<{
   value: React.ReactNode
   nextIcon: React.ReactNode
 }> & CommonStyle.Attr0.errorJsxProp
-export type OptionItemForwardRefProps = JSX.IntrinsicElements['article']
+export type OptionItemForwardRefProps = React.JSX.IntrinsicElements['article']
 export type OptionItemRefElement = HTMLDivElement
 
 export type OptionItemProps = OptionItemCustomProps & OptionItemForwardRefProps

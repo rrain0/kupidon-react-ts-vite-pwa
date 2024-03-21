@@ -27,7 +27,7 @@ export type RadioInputCustomProps = PartialUndef<{
   childrenPosition: 'start'|'end'
   rippleMode: RippleProps['mode']
 }>
-export type RadioInputForwardRefProps = JSX.IntrinsicElements['input']
+export type RadioInputForwardRefProps = React.JSX.IntrinsicElements['input']
 export type RadioInputRefElement = HTMLInputElement
 export type RadioInputProps = RadioInputCustomProps & RadioInputForwardRefProps
 

@@ -14,22 +14,22 @@ const pickUiValue = <V extends UiValue<any,any>>
 (uiValues: readonly V[], langs: string[]): V => {
   const used = new Set<V>()
   return uiValues
-    .toSorted((a,b)=>{
-      if (a.value===b.value) {
-        let langIdxA = langs.findIndex(it=>it===a.lang)
-        let langIdxB = langs.findIndex(it=>it===b.lang)
-        if (langIdxA===-1) langIdxA = langs.length
-        if (langIdxB===-1) langIdxB = langs.length
-        return langIdxA - langIdxB
-      }
-      return 0
-    })
-    .filter(it=>{
-      if (used.has(it.value)) return false
-      used.add(it.value)
-      return true
-    })
-    [0]
+  .toSorted((a,b)=>{
+    if (a.value===b.value) {
+      let langIdxA = langs.findIndex(it=>it===a.lang)
+      let langIdxB = langs.findIndex(it=>it===b.lang)
+      if (langIdxA===-1) langIdxA = langs.length
+      if (langIdxB===-1) langIdxB = langs.length
+      return langIdxA - langIdxB
+    }
+    return 0
+  })
+  .filter(it=>{
+    if (used.has(it.value)) return false
+    used.add(it.value)
+    return true
+  })
+  [0]
 }
 
 

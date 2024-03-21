@@ -18,7 +18,7 @@ export type RadioInputGroupCustomProps = PartialUndef<{
   hasError: boolean
   children: React.ReactNode
 }>
-export type RadioInputGroupForwardRefProps = JSX.IntrinsicElements['div']
+export type RadioInputGroupForwardRefProps = React.JSX.IntrinsicElements['div']
 export type RadioInputGroupRefElement = HTMLDivElement
 export type RadioInputGroupProps = RadioInputGroupCustomProps & RadioInputGroupForwardRefProps
 

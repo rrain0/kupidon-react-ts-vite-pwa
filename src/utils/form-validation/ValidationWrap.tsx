@@ -197,7 +197,7 @@ export default React.memo(ValidationWrap) as typeof ValidationWrap
     type InputType = ReactElement<
       React.InputHTMLAttributes<Element>,
       JSX.ElementType
-      /*React.JSXElementConstructor<JSX.IntrinsicElements['input']>*/
+      /*React.JSXElementConstructor<React.JSX.IntrinsicElements['input']>*/
     >
     let i1: InputType = <input value={'ldksfjl'}/>
     let i2: InputType = <Input value={'ldksfjl'}/>

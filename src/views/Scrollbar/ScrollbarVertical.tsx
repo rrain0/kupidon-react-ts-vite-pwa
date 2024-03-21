@@ -51,7 +51,7 @@ export type ScrollbarVerticalCustomProps = {
   // min scrollbar length in px
   //minLength: number
 }>
-export type ScrollbarVerticalForwardRefProps = JSX.IntrinsicElements['div']
+export type ScrollbarVerticalForwardRefProps = React.JSX.IntrinsicElements['div']
 export type ScrollbarVerticalRefElement = HTMLDivElement
 
 export type ScrollbarVerticalProps = ScrollbarVerticalCustomProps & ScrollbarVerticalForwardRefProps

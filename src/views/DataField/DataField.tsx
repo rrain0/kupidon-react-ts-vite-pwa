@@ -17,7 +17,7 @@ export type DataFieldCustomProps = PartialUndef<{
   hasError: boolean
   children: React.ReactNode
 }>
-export type DataFieldForwardRefProps = JSX.IntrinsicElements['div']
+export type DataFieldForwardRefProps = React.JSX.IntrinsicElements['div']
 export type DataFieldRefElement = HTMLDivElement
 export type DataFieldProps = DataFieldCustomProps & DataFieldForwardRefProps
 

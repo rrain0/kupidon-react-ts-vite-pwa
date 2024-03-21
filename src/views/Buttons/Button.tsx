@@ -21,7 +21,7 @@ export type ButtonCustomProps = PartialUndef<{
   rippleMode: RippleProps['mode']
   rippleDuration: RippleProps['rippleDuration']
 }>
-export type ButtonForwardRefProps = JSX.IntrinsicElements['button']
+export type ButtonForwardRefProps = React.JSX.IntrinsicElements['button']
 export type ButtonRefElement = HTMLButtonElement
 export type ButtonProps = ButtonCustomProps & ButtonForwardRefProps
 

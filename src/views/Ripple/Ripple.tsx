@@ -20,7 +20,7 @@ export type RippleCustomProps = PartialUndef<{
   rippleColor: string
   targetElement: React.RefObject<HTMLElement>
 }>
-export type RippleForwardRefProps = JSX.IntrinsicElements['div']
+export type RippleForwardRefProps = React.JSX.IntrinsicElements['div']
 export type RippleRefElement = HTMLDivElement
 
 

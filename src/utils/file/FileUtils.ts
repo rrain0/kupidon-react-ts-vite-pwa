@@ -1,6 +1,5 @@
-import Axios from 'axios'
+import Axios, { CreateAxiosDefaults } from 'axios'
 import axiosRetry from 'axios-retry'
-import { CreateAxiosDefaults } from 'axios/index'
 import { AxiosConfig } from 'src/api/AxiosConfig'
 import { TypeUtils } from 'src/utils/common/TypeUtils'
 import CallbackParam = TypeUtils.Callback1

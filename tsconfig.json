@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext", // simply means which version of ECMAScript you're using to code
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     
@@ -21,15 +21,17 @@
     "paths": {
       "src/*": ["src/*"],
       "@res/*": ["src/res/*"],
-      "@util/*": ["src/utils/*"],
+      "@util/*": ["src/utils/*"]
     },
-
+    
     
     
     /* Linting */
     "strict": true,
     //"noUnusedLocals": true,
     //"noUnusedParameters": true,
+    "noPropertyAccessFromIndexSignature": false, // allow access obj.prop from indexed type
+    "noUncheckedIndexedAccess": false, // add undefined when get props from indexed type
     "exactOptionalPropertyTypes": true, // '?' means absence of property but not undefined
     "downlevelIteration": true, // use [...anyIterator]
     "noImplicitAny": false, // нет неявных any
@@ -41,9 +43,8 @@
     
     "plugins": [
       { "name": "typescript-plugin-css-modules" }
-    ],
+    ]
     
   },
-  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

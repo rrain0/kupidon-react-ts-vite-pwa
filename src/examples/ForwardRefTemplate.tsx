@@ -13,8 +13,8 @@ import Theme = AppTheme.Theme
 export type ComponentCustomProps = PartialUndef<{
     
 }>
-export type ComponentForwardRefProps = JSX.IntrinsicElements['div']
-//export type ComponentForwardRefProps = Omit<JSX.IntrinsicElements['div'], 'children'>
+export type ComponentForwardRefProps = React.JSX.IntrinsicElements['div']
+//export type ComponentForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
 export type ComponentRefElement = HTMLDivElement
 export type ComponentProps = ComponentCustomProps & ComponentForwardRefProps
 
