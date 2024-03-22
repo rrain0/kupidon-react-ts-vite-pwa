@@ -1,35 +1,14 @@
 {
-  // !!! How new manifest applies:
-  // https://web.dev/manifest-updates/
-  
   "lang": "en-US",
-  // "name" or "short_name" REQUIRED
   "name": "Kupidon",
   "short_name": "Kupidon",
   "description": "Kupidon date app",
-  "start_url": ".", // REQUIRED
-  "display": "standalone",  // REQUIRED 'fullscreen' | 'standalone' | 'minimal-ui'
-  "orientation": "portrait", // only in installed app mode
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
   
-  
-  // Shlashscreen colors can't be overriden by html <meta/>
-  // When app has loaded, html <meta/> will override manifest values.
-  
-  // На нижний бар с полоской навигации андроида эти настройки не влияют
-  
-  // Title bar of window, status bar on mobile.
-  // Splashscreen status bar color.
-  // It will be overriden by <meta name="theme-color" ... />.
-  //"theme_color": "#f0f0f0",
-  //"dark_theme_color": "#282c34",
   "theme_color": "#282c34",
-  
-  // Splashscreen bgc color.
-  // NOT Window or Viewport background
-  //"background_color": "#f0f0f0",
-  //"dark_background_color": "#282c34",
   "background_color": "#282c34",
-  
   
   "icons": [
     {
@@ -39,18 +18,11 @@
     },{
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192" // REQUIRED
+      "sizes": "192x192"
     },{
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512" // REQUIRED // splashscreen icon
+      "sizes": "512x512"
     }
   ]
-  
-  
-  // REQUIRED: prefer_related_applications не должен присутствовать или должен быть false
-  // Note: На Android, если манифест веб-приложения включает
-  // related_applications и "prefer_related_applications": true,
-  // пользователь будет перенаправлен в магазин Google Play и
-  // вместо этого ему будет предложено установить указанное приложение Android.
 }

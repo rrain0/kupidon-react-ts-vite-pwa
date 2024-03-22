@@ -1,5 +1,3 @@
-
-
 console.log('setup app script: start setup')
 
 
@@ -22,7 +20,7 @@ const AppLangEnum = /** @type {const} */ ({
 const setHtmlTags = (langs)=>{
   /**
    * @type {{
-   *  nodeEnv: 'development'|'production'|'test',
+   *  nodeEnv: 'development'|'production',
    *  publicUrl: string,
    *  description: string,
    *  lang: string,
@@ -30,8 +28,8 @@ const setHtmlTags = (langs)=>{
    * }}
    */
   const htmlProps = {
-    nodeEnv: /* import.meta.env.MODE */ 'development',
-    publicUrl: /* import.meta.env.BASE_URL */ '/',
+    nodeEnv: MODE==='production' ? 'production' : 'development',
+    publicUrl: BASE_URL,
     lang: "en-US",
     title: "Kupidon",
     description: "Kupidon date app",
@@ -97,19 +95,17 @@ const setHtmlTags = (langs)=>{
   
   document.title = htmlProps.title
   
-  const htmlDescription =
-    document.querySelector('html head meta[name=description]') as HTMLMetaElement
+  const htmlDescription = document.querySelector('html head meta[name=description]')
   htmlDescription.content = htmlProps.description
   
   const manifestSearchParams = new URLSearchParams({
     nodeEnv: htmlProps.nodeEnv,
     lang: htmlProps.lang,
   }).toString()
-  let manifestUrl = htmlProps.publicUrl + "/manifest.json"
+  let manifestUrl = htmlProps.publicUrl + "manifest.json"
   if (manifestSearchParams) manifestUrl += '?' + manifestSearchParams
   
-  const linkManifest =
-    document.querySelector('html>head>link[rel=manifest]') as HTMLLinkElement
+  const linkManifest = document.querySelector('html>head>link[rel=manifest]')
   linkManifest.href = manifestUrl
 }
 
@@ -120,14 +116,14 @@ const setHtmlTags = (langs)=>{
 
 const langSettingsName = 'langSettings'
 {
-  const langSettings = JSON.parse(localStorage.getItem(langSettingsName)!)
+  const langSettings = JSON.parse(localStorage.getItem(langSettingsName))
   if (langSettings?.setting==='manual' && langSettings.manualSetting){
     setHtmlTags(langSettings.manualSetting)
   } else {
     
     /** @type {()=>string[]} */
     const getLangs = ()=>{
-      let browserLangs: readonly string[] | undefined = navigator.languages
+      let browserLangs = navigator.languages
       if ((!browserLangs || !browserLangs.length) && navigator.language)
         browserLangs = [navigator.language]
       if (!browserLangs || !browserLangs.length) browserLangs = undefined
@@ -139,7 +135,7 @@ const langSettingsName = 'langSettings'
       return browserLangs
     }
     
-    let langs = getLangs()?.filter(it=>AllAppLangs.includes(it)) ?? []
+    let langs = getLangs().filter(it=>AllAppLangs.includes(it))
     langs = [...langs,'en-US']
     
     setHtmlTags(langs)
@@ -154,12 +150,12 @@ const langSettingsName = 'langSettings'
 
 
 /*
- https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
- BeforeInstallEvent отправляется браузером, если он определил, что сайт можно установить как PWA.
- При первой отправке эвента, браузер показывает свой UI с предолжением установки (его отключаем ev.preventDefault()).
- Запрос на установку из эвента можно вызвать только 1 раз, дальше нужен новый эвент.
- При отклонении запроса на установку, браузер сразу же отправляет новый эвент.
- */
+https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
+BeforeInstallEvent отправляется браузером, если он определил, что сайт можно установить как PWA.
+При первой отправке эвента, браузер показывает свой UI с предолжением установки (его отключаем ev.preventDefault()).
+Запрос на установку из эвента можно вызвать только 1 раз, дальше нужен новый эвент.
+При отклонении запроса на установку, браузер сразу же отправляет новый эвент.
+*/
 
 
 /**
@@ -200,7 +196,7 @@ const promptInstall = ()=>{
 }
 window.addEventListener('beforeinstallprompt', async ev=>{
   // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getInstalledRelatedApps
-  const relatedApps = await navigator['getInstalledRelatedApps']?.() as { id, platform, url, version }[] | undefined
+  const relatedApps = await navigator.getInstalledRelatedApps?.() // => { id, platform, url, version }[]
   // Search for a specific installed platform-specific app
   ev.preventDefault()
   //console.log('relatedApps',relatedApps)
