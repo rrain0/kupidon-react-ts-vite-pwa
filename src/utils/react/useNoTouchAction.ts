@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
-import commonCss from 'src/styles/common.module.scss'
+import commonCss from 'src/ui/styles/common.module.scss'
 import { TypeUtils } from 'src/utils/common/TypeUtils'
 import PartialUndef = TypeUtils.PartialUndef
 

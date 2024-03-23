@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { CommonStyle } from 'src/views/CommonStyle'
+import { CommonStyle } from 'src/ui/widgets/CommonStyle.ts'
 import DataAttr = CommonStyle.DataAttr
 import Elem = CommonStyle.Elem
 import Pseudo = CommonStyle.Pseudo

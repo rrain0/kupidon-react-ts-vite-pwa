@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { TypeUtils } from 'src/utils/common/TypeUtils'
 import { ValidationActions } from 'src/utils/form-validation/ValidationActions'
 import { ValidationCore } from 'src/utils/form-validation/ValidationCore'
-import { UiText, UiTextValues } from 'src/utils/lang/UiText'
-import { ToastMsg, ToastMsgData, useToasts } from 'src/components/Toasts/useToasts'
+import { UiText, UiTextValues } from 'src/ui/lang/UiText.ts'
+import { ToastMsg, ToastMsgData, useToasts } from 'src/ui/components/Toasts/useToasts'
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values
 import awaitDelay = ValidationActions.awaitDelay

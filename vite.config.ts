@@ -44,7 +44,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
   srcDir: 'src/service-worker',
   filename: 'service-worker.ts',
 
-  // inject manifest from upper object
+  // inject manifest from the upper object
   /*
    injectManifest: {
    minify: false,
@@ -81,7 +81,8 @@ export default defineConfig({
     svgr(),
     VitePWA(pwaOptions),
     checker({
-      typescript: true, // use TypeScript check
+      // use TypeScript check
+      typescript: true,
     }),
   ],
 })

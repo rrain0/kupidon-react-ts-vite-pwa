@@ -11084,7 +11084,7 @@ vite-plugin-checker@^0.6.4:
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^3.0.2"
 
-vite-plugin-pwa@^0.19.6:
+vite-plugin-pwa@0.19.6:
   version "0.19.6"
   resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.19.6.tgz#8a12db16b13c946de38cc6b00f39cc24b070df0d"
   integrity sha512-3hoxgrDGRzh1vidcZ/GSKXBDiZqbL8DRHXkJgkbJ2Xp3+/P4nau6118L5XlJJsm/wXPpwc/JpDj6Mf073s69+A==

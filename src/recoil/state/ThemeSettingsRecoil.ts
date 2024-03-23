@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 import { resettableLocalStorageEffect } from 'src/recoil/RecoilPersist'
-import { AppTheme } from 'src/utils/theme/AppTheme'
-import { DefaultDarkTheme, DefaultLightTheme } from 'src/utils/theme/ThemeCollection'
+import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { DefaultDarkTheme, DefaultLightTheme } from 'src/ui/theme/ThemeCollection.ts'
 
 
 

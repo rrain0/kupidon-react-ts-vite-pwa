@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 import { resettableLocalStorageEffect } from 'src/recoil/RecoilPersist'
 import { ArrayUtils } from 'src/utils/common/ArrayUtils'
-import { Lang } from 'src/utils/lang/Lang'
+import { Lang } from 'src/ui/lang/Lang.ts'
 import AppLangType = Lang.AppLangType
 import NonEmptyArr = ArrayUtils.NonEmptyArr
 
