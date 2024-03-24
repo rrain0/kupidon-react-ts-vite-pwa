@@ -6,6 +6,7 @@ import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
 import checker from 'vite-plugin-checker'
 
 
+
 /*
 const manifest: VitePWAOptions['manifest'] = {
   name: 'PWA Inject Manifest',

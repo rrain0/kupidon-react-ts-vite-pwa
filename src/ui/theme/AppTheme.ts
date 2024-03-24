@@ -42,7 +42,7 @@ export namespace AppTheme {
       bgcFocus: string[]
       content:  string[]
     }
-    // just colorful button that drags some attention
+    // just a colorful button that drags some attention
     buttonAccent: {
       bgc:       string[]
       bgcFocus:  string[]
