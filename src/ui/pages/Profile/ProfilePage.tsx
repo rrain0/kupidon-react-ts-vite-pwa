@@ -1,7 +1,5 @@
-import { css, Global } from '@emotion/react'
-import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react'
-import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
@@ -13,7 +11,7 @@ import Profile from 'src/ui/pages/Profile/Profile/Profile.tsx'
 import { useRecoilState } from 'recoil'
 import {
   currentUserPhotosToProfilePhotos,profileUpdateApiRequest,
-} from 'src/ui/pages/Profile/ProfilePageParts.tsx'
+} from './actions.ts'
 import ProfilePageTabHeader, { ProfilePageTabHeaderContext } from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import {
   DefaultOperation,

@@ -1,19 +1,6 @@
-import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-import React, { useCallback, useEffect, useState } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { CurrentUser } from 'src/api/entity/CurrentUser.ts'
 import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
-import Form from 'src/ui/components/FormElements/Form.tsx'
-import OverflowWrapper from 'src/ui/components/Scrollbars/OverflowWrapper.tsx'
-import { OverflowWrapperStyle } from 'src/ui/components/Scrollbars/OverflowWrapperStyle.ts'
-import Preview from 'src/ui/pages/Profile/Preview/Preview.tsx'
-import Profile from 'src/ui/pages/Profile/Profile/Profile.tsx'
-import { useRecoilState } from 'recoil'
-import ProfilePageTabHeader, { ProfilePageTabHeaderContext } from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import {
   DefaultOperation,
   DefaultProfilePhoto,
@@ -21,42 +8,17 @@ import {
   ProfilePhoto,
 } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
-import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil.ts'
+import { AuthStateType } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import { AsyncUtils } from '@util/common/AsyncUtils.ts'
 import { MathUtils } from '@util/common/NumberUtils.ts'
-import { ObjectUtils } from '@util/common/ObjectUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { DateTime } from '@util/DateTime.ts'
-import { FileUtils } from '@util/file/FileUtils.ts'
-import { useFormFailures } from '@util/form-validation/hooks/useFormFailures.ts'
-import { useFormSubmit } from '@util/form-validation/hooks/useFormSubmit.ts'
-import { useFormToasts } from '@util/form-validation/hooks/useFormToasts.tsx'
-import { useFormValuesProps } from '@util/form-validation/hooks/useFormValuesProps.ts'
-import { ActionUiText } from 'src/ui/lang/ui-values/ActionUiText.ts'
-import { Progress } from '@util/Progress.ts'
-import { useAsyncEffect } from '@util/react/useAsyncEffect.ts'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
-import Tab from 'src/ui/widgets/Tabs/Tab.tsx'
-import Tabs from 'src/ui/widgets/Tabs/Tabs.tsx'
-import { TabsState } from 'src/ui/widgets/Tabs/useTabs.ts'
-import UseTabsState from 'src/ui/widgets/Tabs/UseTabsState.tsx'
 import * as uuid from 'uuid'
-import SoftRefreshBtn = ButtonBarComponents.SoftRefreshBtn
-import TabsPage = Pages.TabsPage
-import safePageContentPaddings = Pages.safePageContentPaddings
-import fill = EmotionCommon.fill
-import blobToDataUrl = FileUtils.blobToDataUrl
-import fetchToBlob = FileUtils.fetchToBlob
 import mapRange = MathUtils.mapRange
 import throttle = AsyncUtils.throttle
 import mapFirstToIfFoundBy = ArrayUtils.mapFirstToIfFoundBy
-import mapFailureCodeToUiText = ProfilePageValidation.mapFailureCodeToUiText
-import validators = ProfilePageValidation.validators
-import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
@@ -66,11 +28,7 @@ import photosComparator = ProfilePageValidation.photosComparator
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.AddProfilePhoto
-import userDefaultValues = ProfilePageValidation.userDefaultValues
-import ObjectKeys = ObjectUtils.ObjectKeys
 import findBy = ArrayUtils.findBy
-import PageContentPaddings = Pages.PageContentPaddings
-import row = EmotionCommon.row
 
 
 

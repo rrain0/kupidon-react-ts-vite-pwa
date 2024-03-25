@@ -683,8 +683,8 @@ const photoProgressFrameStyle = (t:AppTheme.Theme)=>css`
 
   ${bgcBorderMask};
   background-image: conic-gradient(
-          var(--grad-color) 0turn var(--rotation),
-          transparent var(--rotation) 1turn
+    var(--grad-color) 0turn var(--rotation),
+    transparent var(--rotation) 1turn
   );
 `
 
