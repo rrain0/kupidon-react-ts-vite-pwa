@@ -3,9 +3,9 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Pages } from 'src/ui/components/Page/Pages.ts'
 import { ArrayUtils } from '@util/common/ArrayUtils.ts'
-import Tab from 'src/ui/widgets/Tabs/Tab.tsx'
-import Tabs from 'src/ui/widgets/Tabs/Tabs.tsx'
-import { TabIdx, TabsState } from 'src/ui/widgets/Tabs/useTabs.ts'
+import Tab from 'src/ui/elements/Tabs/Tab.tsx'
+import Tabs from 'src/ui/elements/Tabs/Tabs.tsx'
+import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
 import SimplePage = Pages.SimplePage
 import SimpleContent = Pages.SimpleContent
 

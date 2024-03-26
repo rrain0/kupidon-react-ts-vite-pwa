@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Page/Pages.ts'
 import {
   ComputedBottomSheetDimens,
   SheetSnapIdx,
   SheetSnapPoints,
   SheetState,
-} from 'src/ui/widgets/BottomSheet/useBottomSheet.ts'
+} from 'src/ui/elements/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
@@ -14,10 +14,10 @@ import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Utils } from '@util/common/Utils.ts'
 import styled from '@emotion/styled'
-import BottomSheet from 'src/ui/widgets/BottomSheet/BottomSheet.tsx'
+import BottomSheet from 'src/ui/elements/BottomSheet/BottomSheet.tsx'
 import intOrDefault = Utils.nonNegIntOrDefault;
-import OverflowWrapper from 'src/ui/components/Scrollbars/OverflowWrapper.tsx'
-import { OverflowWrapperStyle } from 'src/ui/components/Scrollbars/OverflowWrapperStyle.ts'
+import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
+import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
 import Setter = TypeUtils.Callback1
 import SimplePage = Pages.SimplePage

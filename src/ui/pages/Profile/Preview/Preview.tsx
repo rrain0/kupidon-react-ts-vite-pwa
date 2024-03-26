@@ -6,8 +6,8 @@ import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { MathUtils } from '@util/common/NumberUtils.ts'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
-import ScrollbarVertical from 'src/ui/widgets/Scrollbar/ScrollbarVertical.tsx'
-import { ScrollbarVerticalStyle } from 'src/ui/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
+import ScrollbarVertical from 'src/ui/elements/Scrollbar/ScrollbarVertical.tsx'
+import { ScrollbarVerticalStyle } from 'src/ui/elements/Scrollbar/ScrollbarVerticalStyle.ts'
 import FormValues = ProfilePageValidation.FormValues
 import PageContentSafe = Pages.PageContentSafe
 import abs = EmotionCommon.abs

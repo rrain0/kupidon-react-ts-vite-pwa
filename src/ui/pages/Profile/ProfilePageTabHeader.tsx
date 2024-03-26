@@ -7,8 +7,8 @@ import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import { MathUtils } from '@util/common/NumberUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { TabsRenderProps } from 'src/ui/widgets/Tabs/Tabs.tsx'
-import { TabIdx, TabsState } from 'src/ui/widgets/Tabs/useTabs.ts'
+import { TabsRenderProps } from 'src/ui/elements/Tabs/Tabs.tsx'
+import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
 import fitRange2 = MathUtils.fitRange
 import mapRange = MathUtils.mapRange
 import inRange2 = MathUtils.inRange

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
-import { CommonStyle } from 'src/ui/widgets/CommonStyle.ts'
-import DataAttr = CommonStyle.DataAttr
-import Elem = CommonStyle.Elem
-import Pseudo = CommonStyle.Pseudo
-import CssProp = CommonStyle.CssProp
+import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
+import DataAttr = ElementStyle.DataAttr
+import Elem = ElementStyle.Elem
+import Pseudo = ElementStyle.Pseudo
+import CssProp = ElementStyle.CssProp
 
 
 

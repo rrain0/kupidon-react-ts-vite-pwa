@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import Button from 'src/ui/widgets/Buttons/Button'
-import { ButtonStyle } from 'src/ui/widgets/Buttons/ButtonStyle'
-import { SvgIcons } from 'src/ui/widgets/icons/SvgIcons'
+import Button from 'src/ui/elements/Buttons/Button'
+import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons'
 import ArrowReloadIc = SvgIcons.ArrowReloadIc
 
 

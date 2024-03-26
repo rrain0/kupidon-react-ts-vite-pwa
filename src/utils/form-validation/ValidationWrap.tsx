@@ -8,7 +8,7 @@ import React, {
   useState,
 } from 'react'
 import { useEffectEvent } from 'src/utils/react/useEffectEvent'
-import Input from 'src/ui/widgets/inputs/Input/Input'
+import Input from 'src/ui/elements/inputs/Input/Input'
 import { ValidationActions } from 'src/utils/form-validation/ValidationActions'
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateFailures

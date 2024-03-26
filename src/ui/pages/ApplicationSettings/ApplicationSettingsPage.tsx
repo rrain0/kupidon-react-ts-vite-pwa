@@ -2,19 +2,14 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
-import ClearSiteConfirmation from 'src/ui/components/ClearSiteConfirmation/ClearSiteConfirmation'
+import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
+import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
+import ClearSiteConfirmation from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteConfirmation'
 import FormHeader from 'src/ui/components/FormElements/FormHeader'
-import LangOptions from 'src/ui/components/options/LangOptions.tsx'
-import {
-  OptionContainer,
-  OptionHeader,
-  optionIcon,
-} from 'src/ui/components/options/OptionsCommon.tsx'
+import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Page/Pages'
-import PageScrollbars from 'src/ui/components/Scrollbars/PageScrollbars'
-import ThemeOptions from 'src/ui/components/options/ThemeOptions.tsx'
+import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
+import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import {
   ApplicationSettingsUiText
 } from 'src/ui/pages/ApplicationSettings/uiText'
@@ -25,16 +20,17 @@ import { ThemeNameUiText } from 'src/ui/ui-text/ui-values/ThemeNameUiText'
 import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui/theme/ThemeCollection.ts'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
-import Button from 'src/ui/widgets/Buttons/Button'
-import { ButtonStyle } from 'src/ui/widgets/Buttons/ButtonStyle'
-import Card from 'src/ui/widgets/Card.tsx'
-import { SvgIcons } from 'src/ui/widgets/icons/SvgIcons'
-import RadioInput from 'src/ui/widgets/inputs/RadioInput/RadioInput'
-import RadioInputGroup from 'src/ui/widgets/inputs/RadioInput/RadioInputGroup'
-import { RadioInputStyle } from 'src/ui/widgets/inputs/RadioInput/RadioInputStyle'
+import Button from 'src/ui/elements/Buttons/Button'
+import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle'
+import Card from 'src/ui/elements/cards/Card.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons'
+import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput'
+import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup'
+import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
 import Page = Pages.Page
 import AddModuleIc = SvgIcons.AddModuleIc
+import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 
 
 
@@ -98,18 +94,18 @@ React.memo(
         
         
         <Card>
-          <OptionHeader>
+          <SettingsOptions.Header>
             {uiText.theme.text}
-          </OptionHeader>
+          </SettingsOptions.Header>
           <ThemeOptions/>
         </Card>
         
         
         
         <Card>
-          <OptionHeader>
+          <SettingsOptions.Header>
             {uiText.preferredLightTheme.text}
-          </OptionHeader>
+          </SettingsOptions.Header>
           <RadioInputGroup>
             {
               lightThemeOptions.map(opt => <RadioInput
@@ -125,19 +121,19 @@ React.memo(
                   }))
                 }}
               >
-                <OptionContainer>
+                <SettingsOptions.Container>
                   {opt.icon}
                   {opt.text}
-                </OptionContainer>
+                </SettingsOptions.Container>
               </RadioInput>)
             }
           </RadioInputGroup>
         </Card>
         
         <Card>
-          <OptionHeader>
+          <SettingsOptions.Header>
             {uiText.preferredDarkTheme.text}
-          </OptionHeader>
+          </SettingsOptions.Header>
           <RadioInputGroup>
             {
               darkThemeOptions.map(opt => <RadioInput
@@ -153,10 +149,10 @@ React.memo(
                   }))
                 }}
               >
-                <OptionContainer>
+                <SettingsOptions.Container>
                   {opt.icon}
                   {opt.text}
-                </OptionContainer>
+                </SettingsOptions.Container>
               </RadioInput>)
             }
           </RadioInputGroup>
@@ -164,9 +160,9 @@ React.memo(
         
         
         <Card>
-          <OptionHeader>
+          <SettingsOptions.Header>
             {uiText.language.text}
-          </OptionHeader>
+          </SettingsOptions.Header>
           <LangOptions/>
         </Card>
         
@@ -182,7 +178,7 @@ React.memo(
               console.log('installed', installed)
             }}
           >
-            <AddModuleIc css={optionIcon}/>
+            <AddModuleIc css={SettingsOptions.icon}/>
             {uiText.installApp.text}
           </Button>}
           

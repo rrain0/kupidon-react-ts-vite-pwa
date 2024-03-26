@@ -5,7 +5,7 @@ import ItemLabel from 'src/ui/components/FormElements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
-import OptionItem from 'src/ui/components/OptionItem/OptionItem.tsx'
+import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
@@ -14,12 +14,12 @@ import {
 } from '@util/form-validation/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui/ui-text/ui-values/ActionUiText.ts'
 import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
-import Button from 'src/ui/widgets/Buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/widgets/Buttons/ButtonStyle.ts'
-import Card2 from 'src/ui/widgets/Card2.tsx'
-import { SvgIcons } from 'src/ui/widgets/icons/SvgIcons.tsx'
-import Input from 'src/ui/widgets/inputs/Input/Input.tsx'
-import { InputStyle } from 'src/ui/widgets/inputs/Input/InputStyle.ts'
+import Button from 'src/ui/elements/Buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
+import Card2 from 'src/ui/elements/cards/Card2.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import Input from 'src/ui/elements/inputs/Input/Input.tsx'
+import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import Arrow6NextIc = SvgIcons.ArrowAngledRoundedIc
 import row = EmotionCommon.row
 import GiftBoxIc = SvgIcons.GiftBoxIc
@@ -41,7 +41,7 @@ React.memo(
   return <UseBool>{boolProps =>
     <>
       
-      <OptionItem
+      <OptionAndValueItem
         icon={<GiftBoxIc css={css`height: 50%`}/>}
         title={uiText.birthDate.text}
         value={props.value}

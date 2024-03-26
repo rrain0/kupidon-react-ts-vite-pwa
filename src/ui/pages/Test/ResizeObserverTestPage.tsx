@@ -3,8 +3,8 @@ import { Pages } from 'src/ui/components/Page/Pages.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import { css } from '@emotion/react'
-import Button from 'src/ui/widgets/Buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/widgets/Buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/Buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import SimplePage = Pages.SimplePage
 import SimpleContent = Pages.SimpleContent
 

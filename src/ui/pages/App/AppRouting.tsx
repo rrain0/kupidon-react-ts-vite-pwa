@@ -5,7 +5,7 @@ import {
   RouterProvider,
   useSearchParams,
 } from 'react-router-dom'
-import BottomNavBarRouting from 'src/ui/components/BottomNavBar/routing'
+import BottomNavBarRouting from 'src/ui/widgets/BottomNavBar/routing'
 import { findPairsRouting } from 'src/ui/pages/FindPairs/routing'
 import { loginRouting } from 'src/ui/pages/Login/routing'
 import React from 'react'
