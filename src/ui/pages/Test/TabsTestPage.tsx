@@ -6,8 +6,6 @@ import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import Tab from 'src/ui/elements/Tabs/Tab.tsx'
 import Tabs from 'src/ui/elements/Tabs/Tabs.tsx'
 import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
 
 
 
@@ -27,8 +25,8 @@ const TabsTestPage = ()=>{
     tabFrameRef,
   }
   
-  return <SimplePage>
-    <SimpleContent>
+  return <Pages.SimplePage>
+    <Pages.ContentFill>
       
       <div>Tabs Test</div>
       
@@ -87,8 +85,8 @@ const TabsTestPage = ()=>{
       </div>
       
     
-    </SimpleContent>
-  </SimplePage>
+    </Pages.ContentFill>
+  </Pages.SimplePage>
 }
 export default TabsTestPage
 

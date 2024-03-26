@@ -4,8 +4,6 @@ import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
-import Page = Pages.Page
-import SimpleContent = Pages.SimpleContent
 
 
 
@@ -18,16 +16,16 @@ React.memo(
   
   
   return <>
-    <Page>
-      <SimpleContent>
+    <Pages.Page>
+      <Pages.ContentFill>
         
         <div>Здесь будут карточки людей.</div>
         
-      </SimpleContent>
+      </Pages.ContentFill>
       
       
       <PageScrollbars />
-    </Page>
+    </Pages.Page>
     
     
     <TopButtonBar />

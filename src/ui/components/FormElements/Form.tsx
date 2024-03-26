@@ -4,6 +4,7 @@ import col = EmotionCommon.col
 
 
 
+// todo replace with Pages.contentBigGap style and remove
 const Form = styled.form`
   max-width: 500px;
   width: 100%;

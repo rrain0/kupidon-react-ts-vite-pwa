@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
@@ -8,7 +8,6 @@ import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
-import Form from 'src/ui/components/FormElements/Form'
 import FormHeader from 'src/ui/components/FormElements/FormHeader'
 import ItemContainer from 'src/ui/components/FormElements/ItemContainer'
 import ItemLabel from 'src/ui/components/FormElements/ItemLabel'
@@ -46,6 +45,7 @@ import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
+import contentBigGap = Pages.contentCenterBigGap
 
 
 
@@ -221,12 +221,11 @@ React.memo(
   
   
   return <>
-    
-    <Page>
-      <Form onSubmit={formSubmitPreventDefault}>
+  
+    <Pages.Page>
+      <form css={contentBigGap} onSubmit={formSubmitPreventDefault}>
         
         <FormHeader>{uiText.account.text}</FormHeader>
-        
         
         
         <Card>
@@ -236,7 +235,7 @@ React.memo(
             <ItemLabel>{uiText.id.text}</ItemLabel>
             <Input
               css={InputStyle.input(
-                { size: 'small', textSize: 'smaller', static: true }
+                { size: 'small', textSize: 'smaller', static: true },
               )}
               readOnly
               value={user.id}
@@ -247,7 +246,7 @@ React.memo(
             <ItemLabel>{uiText.email.text}</ItemLabel>
             <Input
               css={InputStyle.input(
-                { size: 'small', static: true }
+                { size: 'small', static: true },
               )}
               readOnly
               value={user.email}
@@ -258,10 +257,10 @@ React.memo(
             <ItemLabel>{uiText.emailVerified.text}</ItemLabel>
             <Input
               css={InputStyle.input(
-                { size: 'small', static: true }
+                { size: 'small', static: true },
               )}
               readOnly
-              value={ user.emailVerified
+              value={user.emailVerified
                 ? uiText.yes.text.toLowerCase()
                 : uiText.no.text.toLowerCase()
               }
@@ -269,26 +268,26 @@ React.memo(
           </ItemContainer>
           
           {/* <ItemContainer>
-            <ItemLabel>{uiText.userCreated.text}</ItemLabel>
-            <Input
-              css={InputStyle.input(
-                { size: 'small', static: true }
-              )}
-              readOnly
-              value={new Date(user.created) + ''}
-            />
-          </ItemContainer>
-          
-          <ItemContainer>
-            <ItemLabel>{uiText.userUpdated.text}</ItemLabel>
-            <Input
-              css={InputStyle.input(
-                { size: 'small', static: true }
-              )}
-              readOnly
-              value={new Date(user.updated) + ''}
-            />
-          </ItemContainer> */}
+           <ItemLabel>{uiText.userCreated.text}</ItemLabel>
+           <Input
+           css={InputStyle.input(
+           { size: 'small', static: true }
+           )}
+           readOnly
+           value={new Date(user.created) + ''}
+           />
+           </ItemContainer>
+           
+           <ItemContainer>
+           <ItemLabel>{uiText.userUpdated.text}</ItemLabel>
+           <Input
+           css={InputStyle.input(
+           { size: 'small', static: true }
+           )}
+           readOnly
+           value={new Date(user.updated) + ''}
+           />
+           </ItemContainer> */}
           
           <ItemContainer>
             <ItemLabel>{uiText.userCreated.text}</ItemLabel>
@@ -303,13 +302,9 @@ React.memo(
               {new Date(user.updated) + ''}
             </DataField>
           </ItemContainer>
-          
-          
+        
         
         </Card>
-        
-        
-        
         
         
         <div css={notInCard}>
@@ -336,25 +331,24 @@ React.memo(
             {uiText.deleteAccount.text}
           </Button>
         </div>
-      
-      </Form>
-      
-      
-      <PageScrollbars />
-    </Page>
+    
+    </form>
+    
+    <PageScrollbars/>
+    </Pages.Page>
     
     
     <TopButtonBar backBtn/>
     
     <BottomButtonBar settingsBtn
       rightChildren={
-        canSubmit && <Button css={ButtonStyle.icon}
-          onClick={submit}
-        >
-          <FloppyDisk1Ic />
-        </Button>
-      }
-    />
+          canSubmit && <Button css={ButtonStyle.icon}
+            onClick={submit}
+          >
+            <FloppyDisk1Ic />
+          </Button>
+        }
+      />
     
   </>
 })

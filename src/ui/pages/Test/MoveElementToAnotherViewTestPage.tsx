@@ -6,8 +6,6 @@ import { createPortal } from 'react-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import center = EmotionCommon.center
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
 
 
 
@@ -25,8 +23,8 @@ const MoveElementToAnotherViewTestPage = ()=>{
   const container2 = useRef<HTMLDivElement>(null)
   
   
-  return <SimplePage>
-    <SimpleContent>
+  return <Pages.SimplePage>
+    <Pages.ContentFill>
       
       <button
         onClick={()=>setPosition(position === 0 ? 1 : 0)}
@@ -46,8 +44,8 @@ const MoveElementToAnotherViewTestPage = ()=>{
         )}</>
       }
     
-    </SimpleContent>
-  </SimplePage>
+    </Pages.ContentFill>
+  </Pages.SimplePage>
 }
 export default MoveElementToAnotherViewTestPage
 

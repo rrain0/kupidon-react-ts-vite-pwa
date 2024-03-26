@@ -10,7 +10,7 @@ import Txt = EmotionCommon.Txt
 
 
 
-export const formHeaderStyle = (t: AppTheme.Theme)=>css`
+export const formHeader = (t: AppTheme.Theme)=>css`
   ${Txt.large4};
   min-height: 1.5em;
   color: ${t.page.content1[0]};
@@ -18,7 +18,7 @@ export const formHeaderStyle = (t: AppTheme.Theme)=>css`
   text-align: center;
 `
 const FormHeader = styled.h3`
-  ${p=>formHeaderStyle(p.theme)}
+  ${p=>formHeader(p.theme)}
 `
 export default FormHeader
 

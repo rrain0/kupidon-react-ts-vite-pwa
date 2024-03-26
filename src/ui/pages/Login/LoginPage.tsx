@@ -5,7 +5,6 @@ import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
-import Form from 'src/ui/components/FormElements/Form'
 import FormHeader from 'src/ui/components/FormElements/FormHeader'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import { LoginPageUiText } from 'src/ui/pages/Login/uiText'
@@ -26,7 +25,6 @@ import { LoginPageValidation } from './validation'
 import FormValues = LoginPageValidation.FormValues
 import validators = LoginPageValidation.validators
 import { Pages } from 'src/ui/components/Pages/Pages'
-import Page = Pages.Page
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
@@ -143,9 +141,9 @@ React.memo(
   
   
   return <>
-    <Page>
+    <Pages.Page>
   
-      <Form onSubmit={onFormSubmitCallback}>
+      <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
         
         <FormHeader>{uiText.login.text}</FormHeader>
         
@@ -187,11 +185,11 @@ React.memo(
           </Button>
         </Link>
       
-      </Form>
+      </form>
       
       
       <PageScrollbars />
-    </Page>
+    </Pages.Page>
     
     
     <TopButtonBar backBtn/>

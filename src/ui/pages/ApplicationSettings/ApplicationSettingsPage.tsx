@@ -87,7 +87,7 @@ React.memo(
   return <>
     
     <Page>
-      <Content>
+      <Pages.Content>
         
         <FormHeader>{uiText.appSettings.text}</FormHeader>
         
@@ -192,7 +192,7 @@ React.memo(
         
         
       
-      </Content>
+      </Pages.Content>
       
       
       <PageScrollbars />
@@ -215,13 +215,6 @@ export default ApplicationSettingsPage
 
 
 
-
-const Content = styled.div`
-  max-width: 500px;
-  width: 100%;
-  ${col};
-  gap: 10px;
-`
 const divIcon = css`
   height: 1.6em;
   width: 1.6em;

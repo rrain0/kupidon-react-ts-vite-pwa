@@ -5,6 +5,8 @@ import {
   RouterProvider,
   useSearchParams,
 } from 'react-router-dom'
+import { bowAndArrowsRouting } from 'src/ui/pages/BowAndArrows/routing.tsx'
+import { chatRouting } from 'src/ui/pages/Chat/routing.tsx'
 import BottomNavBarRouting from 'src/ui/widgets/BottomNavBar/routing'
 import { findPairsRouting } from 'src/ui/pages/FindPairs/routing'
 import { loginRouting } from 'src/ui/pages/Login/routing'
@@ -49,7 +51,8 @@ React.memo(
 const rootRoutes: RouteObject[] = [
   {
     path: '*',
-    // If you specify 'Component' or 'element', then in it must be <Outlet/> to render children.
+    // If you specify 'Component' or 'element',
+    // then in it must be <Outlet/> to render children.
     Component: Any,
     children: [
       {
@@ -64,25 +67,33 @@ const rootRoutes: RouteObject[] = [
       
       
       {
+        path: RootRoute.profile[path]+'/*',
+        children: profileRouting,
+      },
+      {
         path: RootRoute.findPairs[path]+'/*',
         children: findPairsRouting,
       },
       {
-        path: RootRoute.profile[path]+'/*',
-        children: profileRouting,
+        path: RootRoute.bowAndArrows[path]+'/*',
+        children: bowAndArrowsRouting,
       },
-      
-      
-      
       {
-        path: RootRoute.test[path]+'/*',
-        children: testRouting,
+        path: RootRoute.chat[path]+'/*',
+        children: chatRouting,
       },
+      
+      
+      
       {
         path: RootRoute.settings[path]+'/*',
         children: settingRouting,
       },
       
+      {
+        path: RootRoute.test[path]+'/*',
+        children: testRouting,
+      },
       
       
       {

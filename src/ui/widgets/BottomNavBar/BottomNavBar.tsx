@@ -33,7 +33,7 @@ const BottomNavBar =
 React.memo(
 ()=>{
   
-  const uiOptions = useUiValues(BottomNavBarUiText)
+  const uiText = useUiValues(BottomNavBarUiText)
   
   
   return <>
@@ -54,26 +54,30 @@ React.memo(
       <NavLink to={RootRoute.profile[full]()}>
         <Button css={ButtonStyle.nav}>
           <ProfileIc/>
-          <div>{uiOptions.profile.text}</div>
+          <div>{uiText.profile.text}</div>
         </Button>
       </NavLink>
       
-      <Button css={ButtonStyle.nav}>
-        <ChatRoundIc/>
-        <div>{uiOptions.chat.text}</div>
-      </Button>
+      <NavLink to={RootRoute.chat[full]()}>
+        <Button css={ButtonStyle.nav}>
+          <ChatRoundIc/>
+          <div>{uiText.chat.text}</div>
+        </Button>
+      </NavLink>
       
       <NavLink to={RootRoute.findPairs[full]()}>
         <Button css={ButtonStyle.nav}>
           <CardsHeartIc/>
-          <div>{uiOptions.findCouples.text}</div>
+          <div>{uiText.findCouples.text}</div>
         </Button>
       </NavLink>
       
-      <Button css={ButtonStyle.nav}>
-        <BowArrowIc/>
-        <div>{uiOptions.bowAndArrows.text}</div>
-      </Button>
+      <NavLink to={RootRoute.bowAndArrows[full]()}>
+        <Button css={ButtonStyle.nav}>
+          <BowArrowIc/>
+          <div>{uiText.bowAndArrows.text}</div>
+        </Button>
+      </NavLink>
       
       <UseBool>{bool=>
         <>
@@ -84,7 +88,7 @@ React.memo(
               {...onPointerClick(bool.setTrue)}
             >
               <Gear2Ic/>
-              <div>{uiOptions.settings.text}</div>
+              <div>{uiText.settings.text}</div>
             </Button>
           </NavLink>
           <QuickSettings open={bool.value} setOpen={bool.setValue}/>

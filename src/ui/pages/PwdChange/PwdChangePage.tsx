@@ -4,7 +4,6 @@ import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'
-import Form from 'src/ui/components/FormElements/Form.tsx'
 import FormHeader from 'src/ui/components/FormElements/FormHeader.tsx'
 import ItemContainer from 'src/ui/components/FormElements/ItemContainer.tsx'
 import ItemLabel from 'src/ui/components/FormElements/ItemLabel.tsx'
@@ -25,7 +24,6 @@ import Card from 'src/ui/elements/cards/Card.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import PwdInput from 'src/ui/elements/inputs/PwdInput/PwdInput.tsx'
 import col = EmotionCommon.col
-import Page = Pages.Page
 import defaultValues = PwdChangePageValidation.defaultValues
 import validators = PwdChangePageValidation.validators
 import FormValues = PwdChangePageValidation.FormValues
@@ -144,8 +142,8 @@ React.memo(
   
   return <>
     
-    <Page>
-      <Form onSubmit={onFormSubmitCallback}>
+    <Pages.Page>
+      <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
         
         <FormHeader>{uiText.changePwd.text}</FormHeader>
         
@@ -232,11 +230,11 @@ React.memo(
           </Button>
         </div>
       
-      </Form>
+      </form>
       
       
       <PageScrollbars />
-    </Page>
+    </Pages.Page>
     
     
     <TopButtonBar backBtn/>

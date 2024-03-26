@@ -4,7 +4,6 @@ import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'
-import Form from 'src/ui/components/FormElements/Form.tsx'
 import FormHeader from 'src/ui/components/FormElements/FormHeader.tsx'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars.tsx'
 import { SignupPageUiText } from 'src/ui/pages/Signup/uiText.ts'
@@ -40,7 +39,6 @@ import { SignupPageValidation } from 'src/ui/pages/Signup/validation.ts'
 import FormValues = SignupPageValidation.FormValues
 import validators = SignupPageValidation.validators
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import Page = Pages.Page
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import full = RouteBuilder.full
@@ -193,9 +191,9 @@ React.memo(
   
   
   return <>
-    <Page>
+    <Pages.Page>
       
-      <Form onSubmit={onFormSubmitCallback}>
+      <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
         
         <FormHeader>{uiText.registration.text}</FormHeader>
         
@@ -280,11 +278,11 @@ React.memo(
           {uiText.signup.text}
         </Button>
         
-      </Form>
+      </form>
       
       
       <PageScrollbars />
-    </Page>
+    </Pages.Page>
     
     
     

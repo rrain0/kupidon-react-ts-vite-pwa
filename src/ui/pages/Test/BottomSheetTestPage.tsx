@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import {
@@ -20,9 +20,6 @@ import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
 import Setter = TypeUtils.Callback1
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
-import ValueOrMapper = TypeUtils.ValueOrMapper
 
 
 
@@ -84,11 +81,11 @@ React.memo(
   
   
   return <>
-    <SimplePage>
+    <Pages.SimplePage>
       
       <div css={css`height: 200px;`}/>
       
-      <SimpleContent>
+      <Pages.ContentFill>
         <div>Bottom Sheet Test Page</div>
         
         <div css={css`
@@ -159,13 +156,13 @@ React.memo(
             </div>)
         }
       
-      </SimpleContent>
+      </Pages.ContentFill>
       
       <div css={css`height: 1000px;`}/>
       
       
       
-    </SimplePage>
+    </Pages.SimplePage>
     
     <BottomSheet
       bottomSheetFrameRef={bottomSheetFrameRef}

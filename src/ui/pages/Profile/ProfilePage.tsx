@@ -2,10 +2,8 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
-import app from 'src/ui/pages/App/App.tsx'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import { ButtonBarComponents } from 'src/ui/widgets/BottomButtonBar/components.tsx'
-import Form from 'src/ui/components/FormElements/Form.tsx'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import Preview from 'src/ui/pages/Profile/Preview/Preview.tsx'
@@ -406,11 +404,15 @@ React.memo(
                     />
                   case 2:
                     return <PageContentPaddings>
-                      <Form><ProfilePageTabHeader thisTabIdx={2}/></Form>
+                      <div css={Pages.contentCenterBigGap}>
+                        <ProfilePageTabHeader thisTabIdx={2}/>
+                      </div>
                     </PageContentPaddings>
                   case 3:
                     return <PageContentPaddings>
-                      <Form><ProfilePageTabHeader thisTabIdx={3}/></Form>
+                      <div css={Pages.contentCenterBigGap}>
+                        <ProfilePageTabHeader thisTabIdx={3}/>
+                      </div>
                     </PageContentPaddings>
                 }
               }()}

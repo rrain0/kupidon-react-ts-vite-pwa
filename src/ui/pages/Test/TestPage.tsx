@@ -13,8 +13,6 @@ import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
 import center = EmotionCommon.center
 import mapRange = MathUtils.mapRange
 
@@ -89,8 +87,8 @@ React.memo(
   
   return <>
       
-    <SimplePage>
-      <SimpleContent>
+    <Pages.SimplePage>
+      <Pages.ContentFill>
     
       
         <div>Test Page</div>
@@ -196,8 +194,8 @@ React.memo(
         
       
       
-      </SimpleContent>
-    </SimplePage>
+      </Pages.ContentFill>
+    </Pages.SimplePage>
     
     
     <TopButtonBar backBtn/>

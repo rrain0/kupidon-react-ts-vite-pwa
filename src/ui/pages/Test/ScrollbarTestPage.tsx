@@ -10,15 +10,13 @@ import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import centerAll = EmotionCommon.centerAll
 import hideScrollbar = EmotionCommon.noScrollbars
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
 
 
 
 
 const ScrollbarTestPage = ()=>{
-  return <SimplePage>
-    <SimpleContent>
+  return <Pages.SimplePage>
+    <Pages.ContentFill>
       
       <div>Scrollbar Test Page</div>
       
@@ -26,8 +24,8 @@ const ScrollbarTestPage = ()=>{
       <ScrollbarTest showVertical={true}/>
       <ScrollbarTest showHorizontal={true}/>
       
-    </SimpleContent>
-  </SimplePage>
+    </Pages.ContentFill>
+  </Pages.SimplePage>
 }
 export default ScrollbarTestPage
 

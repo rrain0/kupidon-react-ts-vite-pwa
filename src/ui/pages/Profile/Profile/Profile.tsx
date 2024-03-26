@@ -1,8 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import { Link } from 'react-router-dom'
-import Form from 'src/ui/components/FormElements/Form.tsx'
 import ItemContainer from 'src/ui/components/FormElements/ItemContainer.tsx'
 import ItemLabel from 'src/ui/components/FormElements/ItemLabel.tsx'
 import ItemTitleContainer from 'src/ui/components/FormElements/ItemTitleContainer.tsx'
@@ -33,7 +31,6 @@ import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeUtils.Callback1
 import Callback = TypeUtils.Callback
-import PageContentPaddings = Pages.PageContentPaddings
 
 
 
@@ -65,8 +62,8 @@ React.memo(
   
   
   return <>
-    <PageContentPaddings>
-      <Form onSubmit={props.onFormSubmitCallback}>
+    <Pages.PageContentPaddings>
+      <form css={Pages.contentCenterBigGap} onSubmit={props.onFormSubmitCallback}>
         
         <ProfilePageTabHeader thisTabIdx={1}/>
         
@@ -143,8 +140,8 @@ React.memo(
         
         </div>
       
-      </Form>
-    </PageContentPaddings>
+      </form>
+    </Pages.PageContentPaddings>
     
     
     { (props.canSubmit || props.formProps.hasChanges) && <TopButtonBarFrame>

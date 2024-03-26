@@ -5,8 +5,6 @@ import col = EmotionCommon.col
 import { css } from '@emotion/react'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
 
 
 
@@ -62,8 +60,8 @@ const ResizeObserverTestPage = ()=>{
   }
   
   
-  return <SimplePage>
-    <SimpleContent>
+  return <Pages.SimplePage>
+    <Pages.ContentFill>
       
       <div>Resize Observer Test Page</div>
       
@@ -148,8 +146,8 @@ const ResizeObserverTestPage = ()=>{
         </div>)}
       </div>
       
-    </SimpleContent>
-  </SimplePage>
+    </Pages.ContentFill>
+  </Pages.SimplePage>
 }
 export default ResizeObserverTestPage
 

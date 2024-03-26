@@ -1,59 +1,17 @@
-import { CommonUiText } from 'src/ui/ui-text/ui-values/CommonUiText.ts'
-import { UiText, UiValues } from 'src/ui/ui-text/UiText.ts'
+import { TitleUiText } from 'src/ui/ui-text/ui-values/TitleUiText.ts'
+import { UiValues } from 'src/ui/ui-text/UiText.ts'
 
 
 
 export const BottomNavBarUiText = {
   
   
-  profile: CommonUiText.profile,
-  
-  
-  chat: CommonUiText.chat,
-  
-  
-  findCouples: [
-    {
-      value: 'findCouples',
-      lang: 'en-US',
-      text: 'Find couples',
-    },{
-      value: 'findCouples',
-      lang: 'ru-RU',
-      text: 'Найти пары',
-    },
-  ] as UiText<'findCouples'>[],
-  
-  
-  advices: [
-    {
-      value: 'advices',
-      lang: 'en-US',
-      text: 'Advice',
-    },{
-      value: 'advices',
-      lang: 'ru-RU',
-      text: 'Советы',
-    },
-  ] as UiText<'advices'>[],
-  
-  
-  bowAndArrows: [
-    {
-      value: 'bowAndArrows',
-      lang: 'en-US',
-      text: 'Bow and arrows',
-    },{
-      value: 'bowAndArrows',
-      lang: 'ru-RU',
-      text: 'Лук и стрелы',
-    },
-  ] as UiText<'bowAndArrows'>[],
-  
-  
-  settings: CommonUiText.settings,
-  
-  
+  profile: TitleUiText.profile,
+  chat: TitleUiText.chat,
+  findCouples: TitleUiText.findCouples,
+  advices: TitleUiText.advices,
+  bowAndArrows: TitleUiText.bowAndArrows,
+  settings: TitleUiText.settings,
   
   
 } satisfies UiValues

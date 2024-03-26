@@ -301,19 +301,6 @@ export const CommonUiText = {
   ] satisfies UiText<'deleteAccount'>[],
   
   
-  profile: [
-    {
-      value: 'profile',
-      lang: AppLangEnum.eng,
-      text: 'Profile',
-    },{
-      value: 'profile',
-      lang: AppLangEnum.rus,
-      text: 'Профиль',
-    },
-  ] satisfies UiText<'profile'>[],
-  
-  
   currentPwd: [
     {
       value: 'currentPwd',
@@ -426,32 +413,6 @@ export const CommonUiText = {
       text: 'Женский',
     },
   ] satisfies UiText<'female'>[],
-  
-  
-  chat: [
-    {
-      value: 'chat',
-      lang: AppLangEnum.eng,
-      text: 'Chat',
-    },{
-      value: 'chat',
-      lang: AppLangEnum.rus,
-      text: 'Чат',
-    },
-  ] satisfies UiText<'chat'>[],
-  
-  
-  settings: [
-    {
-      value: 'settings',
-      lang: AppLangEnum.eng,
-      text: 'Settings',
-    },{
-      value: 'settings',
-      lang: AppLangEnum.rus,
-      text: 'Настройки',
-    },
-  ] satisfies UiText<'settings'>[],
   
   
   theme: [

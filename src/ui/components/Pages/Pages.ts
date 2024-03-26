@@ -78,11 +78,29 @@ export namespace Pages {
     ${pageLayoutStyle};
     ${p=>pageColors(p.theme)}
   `
-  export const SimplePage = styled.main`
-    ${modalFrameStyle};
-    ${pageLayoutStyle};
-    ${p=>simplePageColors(p.theme)}
+  const contentBase = css`
+    max-width: 500px;
+    width: 100%;
   `
+  export const content = css`
+    ${contentBase};
+    height: fit-content;
+    min-height: 100%;
+    ${col};
+    align-items: center;
+    gap: 10px;
+  `
+  export const contentCenterBigGap = css`
+    ${contentBase};
+    ${col};
+    gap: 24px;
+  `
+  export const Content = styled.div(content)
+  export const ContentCenterBigGap = styled.div(contentCenterBigGap)
+  
+  
+  
+  
   export const TabsPage = styled.main`
     ${viewportViewStyle};
     ${p=>pageColors(p.theme)}
@@ -91,12 +109,18 @@ export namespace Pages {
   
   
   
-  export const SimpleContent = styled.div`
+  export const SimplePage = styled.main`
+    ${modalFrameStyle};
+    ${pageLayoutStyle};
+    ${p=>simplePageColors(p.theme)}
+  `
+  export const ContentFill = styled.div`
     ${fill};
     ${col};
     gap: 10px;
   `
   
+  // no max-width
   const PageContent = styled.section`
     ${col};
     align-items: center;
@@ -113,6 +137,7 @@ export namespace Pages {
   export const PageContentPaddings = styled(PageContent)`
     ${pageContentPaddings};
   `
+  
   
   
 }

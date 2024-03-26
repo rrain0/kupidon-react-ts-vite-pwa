@@ -13,23 +13,6 @@ export namespace AppRoutes {
   export const overlayParam = 'overlay'
   
   
-  const test = buildRoute({
-    [path]: 'test',
-    scrollbar: buildPath('scrollbar'),
-    bottomSheet: buildPath('bottom-sheet'),
-    resizeObserver: buildPath('resize-observer'),
-    moveElementToAnotherView: buildPath('move-element-to-another-view'),
-    pointer: buildPath('pointer'),
-    tabs: buildPath('tabs'),
-    state: buildPath('state'),
-  })
-  
-  
-  
-  const findPairs = buildRoute({
-    [path]: 'find-pairs'
-  })
-  
   
   
   const login = buildRoute({
@@ -40,13 +23,13 @@ export namespace AppRoutes {
   })
   
   
-  
   const signup = buildRoute({
     [path]: 'signup',
     [params]: {
       returnPath: 'return-path',
     }
   })
+  
   
   
   
@@ -61,6 +44,29 @@ export namespace AppRoutes {
   
   
   
+  
+  const chat = buildRoute({
+    [path]: 'chat',
+  })
+  
+  
+  
+  
+  const findPairs = buildRoute({
+    [path]: 'find-pairs'
+  })
+  
+  
+  
+  
+  const bowAndArrows = buildRoute({
+    [path]: 'bow-and-arrows',
+    allEvents: buildPath('all-events'),
+  })
+  
+  
+  
+  
   const settings = buildRoute({
     [path]: 'settings',
     account: buildPath('account'),
@@ -70,14 +76,33 @@ export namespace AppRoutes {
   
   
   
+  
+  const test = buildRoute({
+    [path]: 'test',
+    scrollbar: buildPath('scrollbar'),
+    bottomSheet: buildPath('bottom-sheet'),
+    resizeObserver: buildPath('resize-observer'),
+    moveElementToAnotherView: buildPath('move-element-to-another-view'),
+    pointer: buildPath('pointer'),
+    tabs: buildPath('tabs'),
+    state: buildPath('state'),
+  })
+  
+  
+  
+  
   export const RootRoute = buildRoute({
     [path]: '',
-    test,
-    findPairs,
     login,
     signup,
+    
     profile,
+    chat,
+    findPairs,
+    bowAndArrows,
     settings,
+    
+    test,
   })
   
 }

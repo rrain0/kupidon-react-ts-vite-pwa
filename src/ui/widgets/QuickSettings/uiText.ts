@@ -1,4 +1,5 @@
 import { CommonUiText } from 'src/ui/ui-text/ui-values/CommonUiText.ts'
+import { TitleUiText } from 'src/ui/ui-text/ui-values/TitleUiText.ts'
 import { UiValues } from 'src/ui/ui-text/UiText.ts'
 
 
@@ -6,7 +7,7 @@ import { UiValues } from 'src/ui/ui-text/UiText.ts'
 export const QuickSettingsUiText = {
   
   
-  settings: CommonUiText.settings,
+  settings: TitleUiText.settings,
   
   
   theme: CommonUiText.theme,

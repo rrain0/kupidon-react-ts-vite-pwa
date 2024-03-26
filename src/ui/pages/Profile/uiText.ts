@@ -1,5 +1,6 @@
 import { Lang } from 'src/ui/lang/Lang.ts'
 import { CommonUiText } from 'src/ui/ui-text/ui-values/CommonUiText.ts'
+import { TitleUiText } from 'src/ui/ui-text/ui-values/TitleUiText.ts'
 import { UiText, UiValues } from 'src/ui/ui-text/UiText.ts'
 import AppLangEnum = Lang.AppLangEnum
 
@@ -9,7 +10,7 @@ import AppLangEnum = Lang.AppLangEnum
 export const ProfileUiText = {
   
   
-  profile: CommonUiText.profile,
+  profile: TitleUiText.profile,
   
   reset: CommonUiText.reset,
   

@@ -3,8 +3,6 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { atom, useRecoilState, useRecoilValue } from 'recoil'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import SimplePage = Pages.SimplePage
-import SimpleContent = Pages.SimpleContent
 
 
 
@@ -52,16 +50,16 @@ React.memo(
   
   
   
-  return <SimplePage>
-    <SimpleContent> {/* not renders */}
+  return <Pages.SimplePage>
+    <Pages.ContentFill> {/* not renders */}
       
       <div>State Test</div>
         
       <InputComponent/> {/* renders */}
       <ViewComponent/> {/* renders */}
       
-    </SimpleContent>
-  </SimplePage>
+    </Pages.ContentFill>
+  </Pages.SimplePage>
 })
 export default StateTestPage
 

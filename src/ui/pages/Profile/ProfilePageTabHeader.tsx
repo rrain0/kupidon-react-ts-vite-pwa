@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
 import React, { useContext } from 'react'
-import { formHeaderStyle } from 'src/ui/components/FormElements/FormHeader.tsx'
+import { formHeader } from 'src/ui/components/FormElements/FormHeader.tsx'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import { MathUtils } from '@util/common/NumberUtils.ts'
@@ -179,7 +179,7 @@ const AnimatedHeader = styled(animated.div)`
   overflow: visible;
 `
 const HeaderTextWrap = styled.h3`
-  ${p=>formHeaderStyle(p.theme)};
+  ${p=>formHeader(p.theme)};
   overflow-wrap: anywhere;
   user-select: none;
   cursor: pointer;

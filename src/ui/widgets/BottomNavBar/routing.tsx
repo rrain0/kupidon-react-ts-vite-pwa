@@ -22,6 +22,10 @@ React.memo(
         
         RootRoute.findPairs[full](),
         
+        RootRoute.bowAndArrows[full](),
+        
+        RootRoute.chat[full](),
+        
         //RootRoute.settings[full](),
       ]
         //.map(path=>path+'/*')
