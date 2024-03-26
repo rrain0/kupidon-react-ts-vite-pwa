@@ -63,6 +63,9 @@ React.memo(
         setSheetState('opening')
         setSnapIdx(defaultOpenIdx)
       }
+      else {
+        setSheetState('closed')
+      }
     },
     [open]
   )

@@ -10,6 +10,8 @@ import params = RouteBuilder.params
 export namespace AppRoutes {
   
   
+  export const overlayParam = 'overlay'
+  
   
   const test = buildRoute({
     [path]: 'test',

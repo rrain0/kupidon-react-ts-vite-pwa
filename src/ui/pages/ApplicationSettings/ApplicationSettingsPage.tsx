@@ -7,7 +7,7 @@ import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
 import ClearSiteConfirmation from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteConfirmation'
 import FormHeader from 'src/ui/components/FormElements/FormHeader'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
-import { Pages } from 'src/ui/components/Page/Pages'
+import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import {

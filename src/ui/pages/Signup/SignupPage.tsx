@@ -39,7 +39,7 @@ import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputSty
 import { SignupPageValidation } from 'src/ui/pages/Signup/validation.ts'
 import FormValues = SignupPageValidation.FormValues
 import validators = SignupPageValidation.validators
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Page = Pages.Page
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params

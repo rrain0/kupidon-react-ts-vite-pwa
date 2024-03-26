@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import {
   ComputedBottomSheetDimens,
   SheetSnapIdx,

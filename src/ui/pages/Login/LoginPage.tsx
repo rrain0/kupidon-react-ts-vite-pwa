@@ -25,7 +25,7 @@ import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle'
 import { LoginPageValidation } from './validation'
 import FormValues = LoginPageValidation.FormValues
 import validators = LoginPageValidation.validators
-import { Pages } from 'src/ui/components/Page/Pages'
+import { Pages } from 'src/ui/components/Pages/Pages'
 import Page = Pages.Page
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { MathUtils } from '@util/common/NumberUtils.ts'

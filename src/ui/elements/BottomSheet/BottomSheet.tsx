@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
-import { useSpring, animated } from '@react-spring/web'
+import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'
-import UseFakePointerRef, { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'

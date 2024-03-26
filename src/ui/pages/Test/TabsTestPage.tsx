@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import Tab from 'src/ui/elements/Tabs/Tab.tsx'
 import Tabs from 'src/ui/elements/Tabs/Tabs.tsx'

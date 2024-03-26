@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { css } from '@emotion/react'
 import { useState } from 'react'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { AsyncUtils } from '@util/common/AsyncUtils.ts'
 import SimplePage = Pages.SimplePage
 import SimpleContent = Pages.SimpleContent

@@ -4,6 +4,7 @@ import { useBoolState } from '@util/react/useBoolState.ts'
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
 import PartialUndef = TypeUtils.PartialUndef
 import ValueOrGenerator = TypeUtils.ValueOrGenerator
+import Callback = TypeUtils.Callback
 
 
 
@@ -12,8 +13,9 @@ export type UseBoolRenderProps = {
   value: boolean
   notValue: boolean
   setValue: SetterOrUpdater<boolean>
-  setTrue: ()=>void
-  setFalse: ()=>void
+  setTrue: Callback
+  setFalse: Callback
+  toggleValue: Callback
 }
 export type UseBoolProps = PartialUndef<{
   initial: ValueOrGenerator<boolean>
@@ -27,14 +29,15 @@ React.memo(
     children
   } = props
   
-  const [value, setTrue, setFalse, , setValue] = useBoolState(initial)
+  const [value, setTrue, setFalse, toggleValue, setValue] = useBoolState(initial)
   
   return children?.({
     value,
     notValue: !value,
     setValue,
     setTrue,
-    setFalse
+    setFalse,
+    toggleValue,
   })
 })
 export default UseBool

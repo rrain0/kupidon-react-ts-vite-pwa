@@ -1,12 +1,12 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
+import { Link } from 'react-router-dom'
 import Form from 'src/ui/components/FormElements/Form.tsx'
 import ItemContainer from 'src/ui/components/FormElements/ItemContainer.tsx'
 import ItemLabel from 'src/ui/components/FormElements/ItemLabel.tsx'
 import ItemTitleContainer from 'src/ui/components/FormElements/ItemTitleContainer.tsx'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import ProfileBirthDate from 'src/ui/pages/Profile/Profile/ProfileBirthDate.tsx'
 import ProfileGender from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
 import ProfileImLookingFor
@@ -94,7 +94,9 @@ React.memo(
                 /* onClick={ev=>{
                  setImages([images[0],undefined,images[2],images[3],images[4],images[5]])
                  }} */
-              >{uiText.aboutMe.text}</ItemLabel>
+              >
+                {uiText.aboutMe.text}
+              </ItemLabel>
             </ItemTitleContainer>
             <ValidationWrap {...props.validationProps}
               fieldName="aboutMe"
@@ -112,8 +114,8 @@ React.memo(
           
           
           <Card2 css={css`
-          gap: 10px;
-        `}>
+            gap: 10px;
+          `}>
             
             
             <ValidationWrap {...props.validationProps}

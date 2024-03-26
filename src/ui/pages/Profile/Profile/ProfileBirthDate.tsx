@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useOverlayState } from '@util/react/useOverlayState.ts'
 import React from 'react'
 import ItemLabel from 'src/ui/components/FormElements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
@@ -28,6 +29,7 @@ import GiftBoxIc = SvgIcons.GiftBoxIc
 
 
 
+const overlayName = 'birthDate'
 
 
 const ProfileBirthDate =
@@ -36,69 +38,65 @@ React.memo(
   const uiText = useUiValues(ProfileUiText)
   const uiActionText = useUiValues(ActionUiText)
   
+  const [isOpen, open, close] = useOverlayState(overlayName)
   
   
-  return <UseBool>{boolProps =>
-    <>
-      
-      <OptionAndValueItem
-        icon={<GiftBoxIc css={css`height: 50%`}/>}
-        title={uiText.birthDate.text}
-        value={props.value}
-        data-error={props.highlight}
-        nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
-        onClick={boolProps.setTrue}
-      />
-      
-      { boolProps.value && <ModalPortal><Modal css={ModalStyle.modal}
-        onClick={boolProps.setFalse}
-      >
-        {/* todo upgrade & extract modal input */}
-        <div css={css`
-          width: 100%;
-          height: 100%;
-          padding: 20px;
-          padding-bottom: 140px;
-          display: grid;
-          place-items: end center;
-        `}>
-          
-          <Card2 css={css`
-            min-width: 220px;
-            width: 100%;
-            max-width: 500px;
-            gap: 10px;
-          `}
-            onClick={ev=>ev.stopPropagation()}
-          >
-            <ItemLabel>{uiText.birthDate.text}</ItemLabel>
-            <Input css={InputStyle.inputSmall}
-              autoFocus
-              inputMode="numeric"
-              placeholder={uiText.birthDatePlaceholder.text.toLowerCase()}
-              {...props.inputProps}
-              hasError={props.highlight}
-              onBlur={ev=>{
-                ev.currentTarget.focus()
-                props.inputProps.onBlur()
-              }}
-            />
-            <div css={css`
-              ${row};
-              gap: 10px;
-              justify-content: end;
-            `}>
-              <Button css={ButtonStyle.roundedSmallSecondary}
-                onClick={boolProps.setFalse}
-                children={uiActionText.ok.text}
-              />
-            </div>
-          </Card2>
-        </div>
-      </Modal></ModalPortal>}
+  return <>
+    <OptionAndValueItem
+      icon={<GiftBoxIc css={css`height: 50%`}/>}
+      title={uiText.birthDate.text}
+      value={props.value}
+      data-error={props.highlight}
+      nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
+      onClick={open}
+    />
     
-    </>
-  }</UseBool>
+    { isOpen && <ModalPortal><Modal css={ModalStyle.modal}
+      onClick={close}>
+      
+      {/* todo upgrade & extract modal input */}
+      <div css={css`
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        padding-bottom: 140px;
+        display: grid;
+        place-items: end center;
+      `}>
+        
+        <Card2 css={css`
+          min-width: 220px;
+          width: 100%;
+          max-width: 500px;
+          gap: 10px;
+        `}
+          onClick={ev=>ev.stopPropagation()}>
+          <ItemLabel>{uiText.birthDate.text}</ItemLabel>
+          <Input css={InputStyle.inputSmall}
+            autoFocus
+            inputMode="numeric"
+            placeholder={uiText.birthDatePlaceholder.text.toLowerCase()}
+            {...props.inputProps}
+            hasError={props.highlight}
+            onBlur={ev=>{
+              ev.currentTarget.focus()
+              props.inputProps.onBlur()
+            }}
+          />
+          <div css={css`
+            ${row};
+            gap: 10px;
+            justify-content: end;
+          `}>
+            <Button css={ButtonStyle.roundedSmallSecondary}
+              onClick={close}
+              children={uiActionText.ok.text}/>
+          </div>
+        </Card2>
+      </div>
+    </Modal></ModalPortal>}
+  
+  </>
 })
 export default ProfileBirthDate
 

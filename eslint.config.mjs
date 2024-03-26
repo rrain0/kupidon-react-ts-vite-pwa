@@ -12,11 +12,12 @@ import importPlugin from 'eslint-plugin-import'
 import promise from 'eslint-plugin-promise'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 // https://github.com/prettier/eslint-plugin-prettier
-import prettierConfigRecommended from 'eslint-plugin-prettier/recommended'
-import prettier from 'eslint-plugin-prettier'
+//import prettierConfigRecommended from 'eslint-plugin-prettier/recommended'
+//import prettier from 'eslint-plugin-prettier'
 // https://www.npmjs.com/package/eslint-plugin-react-refresh
 // Validate that your components can safely be updated with fast refresh.
 import reactRefresh from 'eslint-plugin-react-refresh'
+
 
 
 // use for old plugins
@@ -89,7 +90,7 @@ export default [
     rules: {
       // code style rules:
       '@stylistic/js/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/js/arrow-spacing': ['error', { before: false, after: false }],
+      //'@stylistic/js/arrow-spacing': ['error', { before: false, after: false }],
       '@stylistic/js/block-spacing': ['error', 'always'],
       '@stylistic/js/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
       '@stylistic/js/comma-dangle': ['error', {
@@ -137,7 +138,7 @@ export default [
       '@stylistic/js/object-curly-spacing': ['error', 'always'],
       '@stylistic/js/object-property-newline': ["error", { allowAllPropertiesOnSameLine: true }],
       '@stylistic/js/one-var-declaration-per-line': 'off',
-      '@stylistic/js/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
+      //'@stylistic/js/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
       '@stylistic/js/padded-blocks': 'off',
       '@stylistic/js/padding-line-between-statements': 'off',
       '@stylistic/js/quote-props': 'off',

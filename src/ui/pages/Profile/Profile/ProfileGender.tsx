@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useOverlayState } from '@util/react/useOverlayState.ts'
 import React, { useMemo } from 'react'
 import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
 import UseFakePointerRef from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
@@ -30,6 +31,8 @@ import col = EmotionCommon.col
 
 
 
+const overlayName = 'gender'
+
 
 
 const ProfileGender =
@@ -38,6 +41,7 @@ React.memo(
   const uiText = useUiValues(ProfileUiText)
   
   
+  const [isOpen, open, close] = useOverlayState(overlayName)
   
   const genderOptions = useMemo(
     ()=>[
@@ -54,49 +58,46 @@ React.memo(
   
   
   
-  return <UseBool>{bool =>
-    <>
+  return <>
+    <OptionAndValueItem
+      icon={<GenderIc css={css`height: 50%`}/>}
+      title={uiText.gender.text}
+      value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
+      nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
       
-      <OptionAndValueItem
-        icon={<GenderIc css={css`height: 50%`}/>}
-        title={uiText.gender.text}
-        value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
-        nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
-        
-        //onClick={bool.setTrue}
-        {...onPointerClick(bool.setTrue)}
-      />
-      
-      <UseBottomSheetState
-        open={bool.value}
-        onClosed={bool.setFalse}
-      >
-        {sheetProps =>
-          <ModalPortal>
-            <BottomSheetBasic
-              {...sheetProps.sheetProps}
-              header={uiText.gender.text}
-            >
-              <RadioInputGroup css={selectItemsContainer}>
-                {genderOptions.map(opt => <RadioInput
-                  css={RadioInputStyle.radio}
-                  childrenPosition="start"
-                  {...props.radioInputProps(opt.value)}
-                  value={opt.value}
-                  key={opt.value}
-                  onClick={sheetProps.setClosing}
-                >
-                  <div css={selectItemText}>
-                    {opt.text}
-                  </div>
-                </RadioInput>)}
-              
-              </RadioInputGroup>
-            </BottomSheetBasic>
-          </ModalPortal>
-        }</UseBottomSheetState>
-    </>
-  }</UseBool>
+      //onClick={bool.setTrue}
+      {...onPointerClick(open)}
+    />
+    
+    <UseBottomSheetState
+      open={isOpen}
+      onClosed={close}
+    >
+      {sheetProps =>
+        <ModalPortal>
+          <BottomSheetBasic
+            {...sheetProps.sheetProps}
+            header={uiText.gender.text}
+          >
+            <RadioInputGroup css={selectItemsContainer}>
+              {genderOptions.map(opt => <RadioInput
+                css={RadioInputStyle.radio}
+                childrenPosition="start"
+                {...props.radioInputProps(opt.value)}
+                value={opt.value}
+                key={opt.value}
+                onClick={sheetProps.setClosing}
+              >
+                <div css={selectItemText}>
+                  {opt.text}
+                </div>
+              </RadioInput>)}
+            
+            </RadioInputGroup>
+          </BottomSheetBasic>
+        </ModalPortal>
+      }</UseBottomSheetState>
+  </>
 })
 export default ProfileGender
 

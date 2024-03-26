@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { useContainerScrollState } from 'src/ui/elements/Scrollbar/useContainerScrollState.ts'
 import { css } from '@emotion/react'
 import Scrollbar from 'src/ui/elements/Scrollbar/Scrollbar.tsx'

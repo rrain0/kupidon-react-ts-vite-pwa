@@ -1,13 +1,14 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React from 'react'
-import UseBrowserBack from 'src/ui/components/ActionProviders/UseBrowserBack.tsx'
+import { useBoolState } from '@util/react/useBoolState.ts'
+import { useOverlayState } from '@util/react/useOverlayState.ts'
+import React, { useCallback, useLayoutEffect, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import ItemLabel from 'src/ui/components/FormElements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
 import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
-import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import {
@@ -28,7 +29,7 @@ import row = EmotionCommon.row
 
 
 
-
+const overlayName = 'name'
 
 
 const ProfileName =
@@ -37,73 +38,68 @@ React.memo(
   const uiText = useUiValues(ProfileUiText)
   const uiActionText = useUiValues(ActionUiText)
   
+  const [isOpen, open, close] = useOverlayState(overlayName)
   
   
-  return <UseBool>{boolProps =>
-    <>
+  return <>
       
-      <OptionAndValueItem
-        icon={<NameCardIc css={css`height: 50%`}/>}
-        title={uiText.name.text}
-        value={props.value}
-        data-error={props.highlight}
-        nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
-        onClick={boolProps.setTrue}
-      />
-      
-      { boolProps.value &&
-        <UseBrowserBack
-          onBack={boolProps.setFalse}
-        >
-          <ModalPortal><Modal css={ModalStyle.modal}
-            onClick={boolProps.setFalse}
-          >
-            <div css={css`
-              width: 100%;
-              height: 100%;
-              padding: 20px;
-              padding-bottom: 140px;
-              display: grid;
-              place-items: end center;
-            `}>
-              
-              <Card2 css={css`
-                min-width: 220px;
-                width: 100%;
-                max-width: 500px;
-                gap: 10px;
-              `}
-                onClick={ev => ev.stopPropagation()}
-              >
-                <ItemLabel>{uiText.name.text}</ItemLabel>
-                <Input css={InputStyle.inputSmall}
-                  autoFocus
-                  placeholder={uiText.name.text.toLowerCase()}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                  onBlur={ev => {
-                    ev.currentTarget.focus()
-                    props.inputProps.onBlur()
-                  }}
-                />
-                <div css={css`
-                  ${row};
-                  gap: 10px;
-                  justify-content: end;
-                `}>
-                  <Button css={ButtonStyle.roundedSmallSecondary}
-                    onClick={boolProps.setFalse}
-                    children={uiActionText.ok.text}
-                  />
-                </div>
-              </Card2>
-            </div>
-          </Modal></ModalPortal>
-        </UseBrowserBack>
-      }
+    <OptionAndValueItem
+      icon={<NameCardIc css={css`height: 50%`}/>}
+      title={uiText.name.text}
+      value={props.value}
+      data-error={props.highlight}
+      nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
+      onClick={open}
+    />
     
-    </>
-  }</UseBool>
+    { isOpen &&
+      <ModalPortal><Modal css={ModalStyle.modal}
+        onClick={close}
+      >
+        <div css={css`
+          width: 100%;
+          height: 100%;
+          padding: 20px;
+          padding-bottom: 140px;
+          display: grid;
+          place-items: end center;
+        `}>
+          
+          <Card2 css={css`
+            min-width: 220px;
+            width: 100%;
+            max-width: 500px;
+            gap: 10px;
+          `}
+            onClick={ev => ev.stopPropagation()}
+          >
+            <ItemLabel>{uiText.name.text}</ItemLabel>
+            <Input css={InputStyle.inputSmall}
+              autoFocus
+              placeholder={uiText.name.text.toLowerCase()}
+              {...props.inputProps}
+              hasError={props.highlight}
+              onBlur={ev => {
+                ev.currentTarget.focus()
+                props.inputProps.onBlur()
+              }}
+            />
+            <div css={css`
+              ${row};
+              gap: 10px;
+              justify-content: end;
+            `}>
+              <Button css={ButtonStyle.roundedSmallSecondary}
+                onClick={close}
+                children={uiActionText.ok.text}
+              />
+            </div>
+          </Card2>
+        </div>
+      </Modal></ModalPortal>
+    }
+    
+  </>
 })
 export default ProfileName
 

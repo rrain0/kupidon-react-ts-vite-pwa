@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { atom, useRecoilState, useRecoilValue } from 'recoil'
-import { Pages } from 'src/ui/components/Page/Pages.ts'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import SimplePage = Pages.SimplePage
 import SimpleContent = Pages.SimpleContent
 
