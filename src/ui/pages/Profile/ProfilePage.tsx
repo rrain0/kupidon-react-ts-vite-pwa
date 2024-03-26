@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import app from 'src/ui/pages/App/App.tsx'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import { ButtonBarComponents } from 'src/ui/widgets/BottomButtonBar/components.tsx'
 import Form from 'src/ui/components/FormElements/Form.tsx'
@@ -8,7 +10,7 @@ import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import Preview from 'src/ui/pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/ui/pages/Profile/Profile/Profile.tsx'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import {
   currentUserPhotosToProfilePhotos,profileUpdateApiRequest,
 } from './actions.ts'
@@ -69,18 +71,8 @@ const ProfilePage =
 React.memo(
 ()=>{
   
-  
-  
-  
-  
-  
+  const app = useRecoilValue(AppRecoil)
   const [auth,setAuth] = useRecoilState(AuthRecoil)
-  
-  
-  
-  
-  
-  
   
   
   const {
@@ -433,7 +425,7 @@ React.memo(
       
       
       
-        { process.env.NODE_ENV==='development' && tabsProps.tabIdx===1 && <BottomButtonBar
+        { app.showDevOverlay && <BottomButtonBar
           refreshPageBtn
           rightChildren={
             <SoftRefreshBtn
@@ -442,34 +434,6 @@ React.memo(
             />
           }
         /> }
-        
-        {/* { tabsProps.tabIdx!==0 && <TopButtonBar css={t=>css`
-          align-items: center;
-          background: ${t.page.bgcGradient[0]}ee;
-        `}
-          leftChildren={
-            <div css={css`${Txt.normal1};`}>Предпросмотр</div>
-          }
-        >
-          <Global styles={css`
-            :root{
-              //--bottom-second-bar-height: 70px;
-              //--bottom-button-bar-height: 70px;
-              --top-button-bar-height: 50px;
-            }
-          `}/>
-           <DotsFrame>
-            <Dot css={t=>[
-              tabsProps.tabIdx===1 && dotActive(t),
-            ]}/>
-            <Dot css={t=>[
-              tabsProps.tabIdx===2 && dotActive(t),
-            ]}/>
-            <Dot css={t=>[
-              tabsProps.tabIdx===3 && dotActive(t),
-            ]}/>
-          </DotsFrame>
-        </TopButtonBar>} */}
       
       </>}</UseTabsState>
       
@@ -477,10 +441,6 @@ React.memo(
     
     
     
-    
-    
-    
-  
   </>
 })
 export default ProfilePage

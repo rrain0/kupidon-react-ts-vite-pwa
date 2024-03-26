@@ -8,12 +8,15 @@ export type AppRecoilType = {
   modalOutletId: string | undefined
   isDraggingFiles: boolean
   isUsingGestures: false | string
+  
+  showDevOverlay: boolean
 }
 const defolt: AppRecoilType = {
   canInstall: false,
   modalOutletId: undefined,
   isDraggingFiles: false,
   isUsingGestures: false,
+  showDevOverlay: false,
 }
 export const AppRecoil = atom<AppRecoilType>({
   key: 'app',

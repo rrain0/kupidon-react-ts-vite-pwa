@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
@@ -48,7 +48,7 @@ React.memo(
   const { open, setOpen } = props
   
   const auth = useRecoilValue(AuthRecoil)
-  const app = useRecoilValue(AppRecoil)
+  const [app, setApp] = useRecoilState(AppRecoil)
   const uiText = useUiValues(QuickSettingsUiText)
   
   return <>
@@ -123,6 +123,12 @@ React.memo(
               
               <ClearSiteConfirmation open={bool.value} setOpen={bool.setValue}/>
             </>}</UseBool>
+            
+            {import.meta.env.DEV && <Button css={normalIconRoundButton}
+              onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
+            >
+              Show Dev Overlay
+            </Button>}
           
           
           </RoundButtonsContainer>
