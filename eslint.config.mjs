@@ -170,12 +170,13 @@ export default [
       'react/jsx-no-target-blank': 'off',
       'react/function-component-definition': 'error',
       
-      
+      'import/order': ['error', {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+        'newlines-between': 'always',
+      }],
       
     },
   },
   // !!! 'ignores' must be in a standalone object to work globally
-  {
-    ignores: ['dist', 'dev-dist'],
-  }
+  { ignores: ['dist', 'dev-dist'] },
 ]

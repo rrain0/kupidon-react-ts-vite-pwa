@@ -257,15 +257,12 @@ React.memo(
             
             <UseBool>{bool => <>
               
-              <UseFakePointerRef>{({ ref })=>
-                <Button css={normalIconRoundButton}
-                  //onClick={bool.setTrue}
-                  ref={ref as any}
-                  {...onPointerClick(bool.setTrue)}
-                >
-                  {uiText.clearAppData.text}
-                </Button>
-              }</UseFakePointerRef>
+              <Button css={normalIconRoundButton}
+                //onClick={bool.setTrue}
+                {...onPointerClick(bool.setTrue)}
+              >
+                {uiText.clearAppData.text}
+              </Button>
               
               <ClearSiteConfirmation open={bool.value} setOpen={bool.setValue}/>
             </>}</UseBool>

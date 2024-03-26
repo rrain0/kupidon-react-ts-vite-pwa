@@ -64,7 +64,6 @@
     "vite": "^5.2.2",
     "vite-plugin-checker": "^0.6.4",
     "vite-plugin-pwa": "0.19.6",
-    "vite-plugin-react-inspector": "^0.3.3",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.3.2",
     "workbox-core": "^7.0.0",

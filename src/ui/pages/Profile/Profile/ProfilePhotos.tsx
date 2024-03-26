@@ -33,7 +33,6 @@ import { ActionUiText } from 'src/ui/lang/ui-values/ActionUiText.ts'
 import { useUiValues } from 'src/ui/lang/useUiText.ts'
 import { Progress } from '@util/Progress.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
-import UseFakePointerRef from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
 import { useNoTouchAction } from '@util/react/useNoTouchAction.ts'
 import { useStateAndRef } from '@util/react/useStateAndRef.ts'
@@ -303,7 +302,6 @@ React.memo(
       {springs.map((springStyle,i) => {
         const im = images[i]
         return <div css={contents} key={im.id}>
-        <UseFakePointerRef>{({ ref, ref2, ref3, ref4 })=>
         <div css={css`
           grid-area: im${i+1};
           position: relative;
@@ -314,7 +312,7 @@ React.memo(
           
           
           <div css={contents}
-            ref={ref as any}
+            //ref={ref as any}
             {...function(){
               const onPointerDown = (ev: React.PointerEvent)=>{
                 if (ev.buttons===1){
@@ -355,7 +353,7 @@ React.memo(
                     <animated.label css={photoDraggableBox}
                       style={springStyle}
                       {...drag(i)}
-                      ref={ref2 as any}
+                      //ref={ref2 as any}
                     >
                       
                       {function(){
@@ -441,7 +439,6 @@ React.memo(
           
           
         </div>
-        }</UseFakePointerRef>
         </div>
       })}
     </div>

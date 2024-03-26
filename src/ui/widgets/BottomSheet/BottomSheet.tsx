@@ -111,59 +111,53 @@ React.memo(
   //useLayoutEffect(()=>console.log('state',state),[state])
   
   
-  useFakePointerRef(bottomSheetFrameRef,bottomSheetRef)
   
-  
-  return <UseFakePointerRef>{({ref, ref2, ref3})=>
-    <div // Pointer & Wheel events consumer
-      css={contents}
-      ref={ref3 as any}
-      {...stopPointerAndMouseEvents()}
+  return <div // Pointer & Wheel events consumer
+    css={contents}
+    {...stopPointerAndMouseEvents()}
+  >
+    
+    <animated.div /* Frame */ css={frameStyle}
+      style={{
+        background: sheetSpring.height.to(
+          height=>{
+            const bgcDimHex = function(){
+              const maxDimHeight = snapPointsPx[realDefaultOpenIdx??0]
+              const dimHeight = Math.min(height, maxDimHeight)
+              return Math.trunc(dimHeight / maxDimHeight * 256 * 0.6)
+                .toString(16).padStart(2,'0')
+            }()
+            if (!['closed',null].includes(sheetState)) return `#000000${bgcDimHex}`
+            return 'none'
+          }
+        ),
+        pointerEvents: ![null,'closed','closing'].includes(sheetState) ? 'auto' : 'none',
+      }}
+      
+      ref={bottomSheetFrameRef as any}
+      
+      // need to prevent click if dragged if frame is draggable
+      onClick={ev=>{
+        //console.log('dimmed background click')
+        setSheetState('closing')
+      }}
     >
-      
-      <animated.div /* Frame */ css={frameStyle}
-        style={{
-          background: sheetSpring.height.to(
-            height=>{
-              const bgcDimHex = function(){
-                const maxDimHeight = snapPointsPx[realDefaultOpenIdx??0]
-                const dimHeight = Math.min(height, maxDimHeight)
-                return Math.trunc(dimHeight / maxDimHeight * 256 * 0.6)
-                  .toString(16).padStart(2,'0')
-              }()
-              if (!['closed',null].includes(sheetState)) return `#000000${bgcDimHex}`
-              return 'none'
-            }
-          ),
-          pointerEvents: ![null,'closed','closing'].includes(sheetState) ? 'auto' : 'none',
-        }}
-        
-        ref={bottomSheetFrameRef as any}
-        
-        // need to prevent click if dragged if frame is draggable
-        onClick={ev=>{
-          //console.log('dimmed background click')
-          setSheetState('closing')
-        }}
+      <div // Pointer & Wheel events consumer
+        css={contents}
+        {...stopPointerAndMouseEvents()}
       >
-        <div // Pointer & Wheel events consumer
-          css={contents}
-          ref={ref2 as any}
-          {...stopPointerAndMouseEvents()}
+        <animated.div /* Bottom Sheet */ css={sheetStyle}
+          style={sheetSpring}
+          ref={bottomSheetRef as any} // Must be
         >
-          <animated.div /* Bottom Sheet */ css={sheetStyle}
-            style={sheetSpring}
-            ref={bottomSheetRef as any} // Must be
-          >
-            
-            {props.children?.({ sheetDrag })}
           
-          </animated.div>
-        </div>
-      </animated.div>
-      
-    </div>
-  }</UseFakePointerRef>
+          {props.children?.({ sheetDrag })}
+        
+        </animated.div>
+      </div>
+    </animated.div>
+    
+  </div>
 })
 export default BottomSheet
 

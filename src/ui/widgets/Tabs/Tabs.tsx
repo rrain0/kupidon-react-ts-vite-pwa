@@ -72,9 +72,6 @@ React.forwardRef<TabsRefElement, TabsProps>(
   })
   
   
-  useFakePointerRef(tabFrameRef)
-  
-  
   
   return <TabsFrame css={css`
     ${ !isReady && css`opacity: 0` }

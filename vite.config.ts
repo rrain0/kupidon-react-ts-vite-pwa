@@ -4,7 +4,6 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
 import checker from 'vite-plugin-checker'
-//import ReactInspector from 'vite-plugin-react-inspector'
 
 
 
@@ -73,7 +72,6 @@ export default defineConfig({
     port: 40030,
   },
   plugins: [
-    //ReactInspector(),
     react({
       jsxImportSource: '@emotion/react',
       babel: {

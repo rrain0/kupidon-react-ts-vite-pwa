@@ -75,7 +75,6 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
   const trackRef = useRef<ScrollbarVerticalRefElement>(null)
   useImperativeHandle(forwardedRef, ()=>trackRef.current!, [])
   const thumbBoxRef = useRef<HTMLDivElement>(null)
-  useFakePointerRef(trackRef,thumbBoxRef)
   
   
   /*

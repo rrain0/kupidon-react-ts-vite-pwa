@@ -64,19 +64,16 @@ React.memo(
   
   return <UseBool>{bool =>
     <>
-      
-      <UseFakePointerRef>{({ ref })=>
-        <OptionItem
-          icon={<Search2Ic css={css`height: 50%`}/>}
-          title={uiText.imLookingFor.text}
-          value={preferredPeopleOptions.find(it => it.value === 'notSelected')!.text}
-          nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
-          
-          //onClick={bool.setTrue}
-          ref={ref as any}
-          {...onPointerClick(bool.setTrue)}
-        />
-      }</UseFakePointerRef>
+    
+      <OptionItem
+        icon={<Search2Ic css={css`height: 50%`}/>}
+        title={uiText.imLookingFor.text}
+        value={preferredPeopleOptions.find(it => it.value === 'notSelected')!.text}
+        nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
+        
+        //onClick={bool.setTrue}
+        {...onPointerClick(bool.setTrue)}
+      />
       
       {/* <UseBottomSheetState
         open={bool.value}

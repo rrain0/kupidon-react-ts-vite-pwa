@@ -104,13 +104,10 @@ export namespace ButtonBarComponents {
   ()=>{
     return <UseBool>{bool => <>
       
-      <UseFakePointerRef>{({ ref })=>
-        <SettingsButton
-          ref={ref as any}
-          // onClick={bool.setTrue}
-          {...onPointerClick(bool.setTrue)}
-        />
-      }</UseFakePointerRef>
+      <SettingsButton
+        // onClick={bool.setTrue}
+        {...onPointerClick(bool.setTrue)}
+      />
       
       <QuickSettings open={bool.value} setOpen={bool.setValue}/>
       

@@ -57,18 +57,15 @@ React.memo(
   return <UseBool>{bool =>
     <>
       
-      <UseFakePointerRef>{({ ref })=>
-        <OptionItem
-          icon={<GenderIc css={css`height: 50%`}/>}
-          title={uiText.gender.text}
-          value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
-          nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
-          
-          //onClick={bool.setTrue}
-          ref={ref as any}
-          {...onPointerClick(bool.setTrue)}
-        />
-      }</UseFakePointerRef>
+      <OptionItem
+        icon={<GenderIc css={css`height: 50%`}/>}
+        title={uiText.gender.text}
+        value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
+        nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
+        
+        //onClick={bool.setTrue}
+        {...onPointerClick(bool.setTrue)}
+      />
       
       <UseBottomSheetState
         open={bool.value}
