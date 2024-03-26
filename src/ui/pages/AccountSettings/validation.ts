@@ -2,7 +2,7 @@ import { UserApi } from 'src/api/requests/UserApi'
 import { AccountSettingsUiText } from 'src/ui/pages/AccountSettings/uiText'
 import { ValidationValidators } from 'src/utils/form-validation/ValidationValidators'
 import { ValidationCore } from 'src/utils/form-validation/ValidationCore'
-import { UiText, UiTextValues, UiValues } from 'src/ui/lang/UiText.ts'
+import { UiText, UiTextValues, UiValues } from 'src/ui/ui-text/UiText.ts'
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd
 import PartialFailureData = ValidationCore.PartialFailureData

@@ -1,48 +1,40 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import ClearSiteConfirmation from 'src/ui/components/ClearSiteConfirmation/ClearSiteConfirmation'
 import FormHeader from 'src/ui/components/FormElements/FormHeader'
+import LangOptions from 'src/ui/components/options/LangOptions.tsx'
+import {
+  OptionContainer,
+  OptionHeader,
+  optionIcon,
+} from 'src/ui/components/options/OptionsCommon.tsx'
 import { Pages } from 'src/ui/components/Page/Pages'
 import PageScrollbars from 'src/ui/components/Scrollbars/PageScrollbars'
+import ThemeOptions from 'src/ui/components/options/ThemeOptions.tsx'
 import {
   ApplicationSettingsUiText
 } from 'src/ui/pages/ApplicationSettings/uiText'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
-import { LangRecoil } from 'src/recoil/state/LangRecoil'
-import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil'
-import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { Lang } from 'src/ui/lang/Lang.ts'
-import { ThemeNameUiText } from 'src/ui/lang/ui-values/ThemeNameUiText'
-import { CountryFlag } from 'src/ui/lang/CountryFlag.ts'
-import { useUiValues } from 'src/ui/lang/useUiText.ts'
+import { ThemeNameUiText } from 'src/ui/ui-text/ui-values/ThemeNameUiText'
+import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui/theme/ThemeCollection.ts'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
 import Button from 'src/ui/widgets/Buttons/Button'
 import { ButtonStyle } from 'src/ui/widgets/Buttons/ButtonStyle'
 import Card from 'src/ui/widgets/Card.tsx'
-import { CommonStyle } from 'src/ui/widgets/CommonStyle.ts'
 import { SvgIcons } from 'src/ui/widgets/icons/SvgIcons'
-import { SvgIcStyle } from 'src/ui/widgets/icons/SvgIcStyle'
 import RadioInput from 'src/ui/widgets/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/widgets/inputs/RadioInput/RadioInputGroup'
 import { RadioInputStyle } from 'src/ui/widgets/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
 import Page = Pages.Page
-import ThemeType = AppTheme.Type
-import BrowserIc = SvgIcons.BrowserIc
-import DayNightIc = SvgIcons.DayNightIc
-import DayIc = SvgIcons.DayIc
-import MoonIc = SvgIcons.MoonIc
-import resetH = EmotionCommon.resetH
-import row = EmotionCommon.row
 import AddModuleIc = SvgIcons.AddModuleIc
-import AppLangType = Lang.AppLangType
 
 
 
@@ -57,10 +49,7 @@ const ApplicationSettingsPage =
 React.memo(
 ()=>{
   const app = useRecoilValue(AppRecoil)
-  const lang = useRecoilValue(LangRecoil)
-  const theme = useRecoilValue(ThemeRecoil)
   const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
-  const [langSettings, setLangSettings] = useRecoilState(LangSettingsRecoil)
   
   const uiText = useUiValues(ApplicationSettingsUiText)
   const themeNameUiText = useUiValues(ThemeNameUiText)
@@ -68,68 +57,6 @@ React.memo(
   const [clearSite, setClearSite] = useState(false)
   
   
-  
-  const themeOptions = useMemo(
-    ()=>{
-      let opts = [
-        {
-          value: 'system',
-          text: uiText.systemTheme.text,
-          icon: <DayNightIc css={icon}/>,
-        },{
-          value: 'light',
-          text: uiText.lightTheme.text,
-          icon: <DayIc css={icon}/>,
-        },{
-          value: 'dark',
-          text: uiText.darkTheme.text,
-          icon: <MoonIc css={iconSmall}/>,
-        }
-      ] satisfies { value: ThemeType|'system', [prop: string]: any }[]
-      if (!theme.systemThemeAvailable) opts = opts.filter(it=>it.value!=='system')
-      return opts
-    },
-    [uiText, theme.systemThemeAvailable]
-  )
-  const themeOptionChecked = useCallback(
-    function (value: ThemeType|'system') {
-      return themeSettings.setting === 'system' && value === 'system'
-        || themeSettings.setting === 'manual' && value === themeSettings.manualSetting
-    },
-    [themeSettings]
-  )
-  
-  
-  
-  const languageOptions = useMemo(
-    ()=>{
-      let opts = [
-        {
-          value: 'system',
-          text: uiText.systemLanguage.text,
-          icon: <BrowserIc css={icon}/>,
-        },{
-          value: 'ru-RU',
-          text: uiText.russian.text,
-          icon: <Flag src={CountryFlag['ru-RU']}/>,
-        },{
-          value: 'en-US',
-          text: uiText.english.text,
-          icon: <Flag src={CountryFlag['en-US']}/>,
-        }
-      ] satisfies { value: AppLangType|'system', [prop: string]: any }[]
-      if (!lang.availableSystemLangs?.length) opts = opts.filter(it=>it.value!=='system')
-      return opts
-    },
-    [uiText, lang.availableSystemLangs]
-  )
-  const languageOptionChecked = useCallback(
-    function (value: AppLangType|'system') {
-      return langSettings.setting === 'system' && value === 'system'
-        || langSettings.setting === 'manual' && value === langSettings.manualSetting?.[0]
-    },
-    [langSettings]
-  )
   
   
   const lightThemeOptions = useMemo(
@@ -174,29 +101,7 @@ React.memo(
           <OptionHeader>
             {uiText.theme.text}
           </OptionHeader>
-          <RadioInputGroup>
-            {
-              themeOptions.map(opt => <RadioInput
-                css={RadioInputStyle.radio}
-                childrenPosition="start"
-                checked={themeOptionChecked(opt.value)}
-                value={opt.value}
-                key={opt.value}
-                onChange={ev => {
-                  setThemeSettings(s => ({
-                    ...s,
-                    setting: opt.value === 'system' ? 'system' : 'manual',
-                    manualSetting: opt.value === 'system' ? s.manualSetting : opt.value,
-                  }))
-                }}
-              >
-                <OptionContainer>
-                  {opt.icon}
-                  {opt.text}
-                </OptionContainer>
-              </RadioInput>)
-            }
-          </RadioInputGroup>
+          <ThemeOptions/>
         </Card>
         
         
@@ -262,34 +167,7 @@ React.memo(
           <OptionHeader>
             {uiText.language.text}
           </OptionHeader>
-          <RadioInputGroup>
-            {
-              languageOptions.map(opt => <RadioInput
-                css={RadioInputStyle.radio}
-                childrenPosition="start"
-                checked={languageOptionChecked(opt.value)}
-                value={opt.value}
-                key={opt.value}
-                onChange={ev => {
-                  if (opt.value === 'system') setLangSettings({
-                    ...langSettings,
-                    setting: 'system',
-                  })
-                  else {
-                    setLangSettings({
-                      setting: 'manual',
-                      manualSetting: [opt.value],
-                    })
-                  }
-                }}
-              >
-                <OptionContainer>
-                  {opt.icon}
-                  {opt.text}
-                </OptionContainer>
-              </RadioInput>)
-            }
-          </RadioInputGroup>
+          <LangOptions/>
         </Card>
         
         
@@ -304,7 +182,7 @@ React.memo(
               console.log('installed', installed)
             }}
           >
-            <AddModuleIc css={icon}/>
+            <AddModuleIc css={optionIcon}/>
             {uiText.installApp.text}
           </Button>}
           
@@ -348,49 +226,9 @@ const Content = styled.div`
   ${col};
   gap: 10px;
 `
-
-
-
-
-
-
-
-const OptionHeader = styled.h5`
-  ${resetH};
-  padding: 8px 6px 0 6px;
-  color: ${p=>p.theme.page.content3[0]};
-`
-const OptionContainer = styled.div`
-  flex: 1;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  ${row};
-  gap: 0.3em;
-  align-items: center;
-`
-const Flag = styled.img`
-  width: 1.333em;
-  aspect-ratio: 4/3;
-  object-position: center;
-  object-fit: cover;
-  vertical-align: middle;
-`
-const icon = (t:AppTheme.Theme)=>css`
-  ${SvgIcStyle.El.thiz.icon} {
-    height: 1.333em;
-    width: 1.333em;
-    ${SvgIcStyle.Prop.prop.color}: ${CommonStyle.Prop0.varr.color};
-  }
-`
 const divIcon = css`
   height: 1.6em;
   width: 1.6em;
-`
-const iconSmall = (t:AppTheme.Theme)=>css`
-  ${icon(t)};
-  ${SvgIcStyle.El.thiz.icon} {
-    height: 1.25em;
-  }
 `
 const RoundButtonsContainer = styled.div`
   ${col};

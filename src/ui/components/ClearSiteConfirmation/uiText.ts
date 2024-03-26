@@ -1,6 +1,6 @@
 import { QuickSettingsUiText } from 'src/ui/components/QuickSettings/uiText.ts'
-import { CommonUiText } from 'src/ui/lang/ui-values/CommonUiText.ts'
-import { UiValues } from 'src/ui/lang/UiText.ts'
+import { CommonUiText } from 'src/ui/ui-text/ui-values/CommonUiText.ts'
+import { UiValues } from 'src/ui/ui-text/UiText.ts'
 
 
 

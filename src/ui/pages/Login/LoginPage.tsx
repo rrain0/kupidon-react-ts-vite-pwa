@@ -15,7 +15,7 @@ import { useFormFailures } from 'src/utils/form-validation/hooks/useFormFailures
 import { useFormSubmit } from 'src/utils/form-validation/hooks/useFormSubmit'
 import { useFormToasts } from 'src/utils/form-validation/hooks/useFormToasts'
 import ValidationWrap from 'src/utils/form-validation/ValidationWrap'
-import { useUiValues } from 'src/ui/lang/useUiText.ts'
+import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/utils/react/route-builder/RouteBuilder'
 import Button from 'src/ui/widgets/Buttons/Button'
 import Input from 'src/ui/widgets/inputs/Input/Input'

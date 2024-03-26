@@ -4,7 +4,7 @@ import { SignupPageUiText } from 'src/ui/pages/Signup/uiText.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from 'src/ui/lang/UiText.ts'
+import { UiText, UiTextValues, UiValues } from 'src/ui/ui-text/UiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd

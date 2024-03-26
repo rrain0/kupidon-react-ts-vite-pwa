@@ -13,8 +13,8 @@ import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
-import { ActionUiText } from 'src/ui/lang/ui-values/ActionUiText.ts'
-import { useUiValues } from 'src/ui/lang/useUiText.ts'
+import { ActionUiText } from 'src/ui/ui-text/ui-values/ActionUiText.ts'
+import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
 import Button from 'src/ui/widgets/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/widgets/Buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/widgets/Card2.tsx'
