@@ -38,8 +38,7 @@ import Tab from 'src/ui/elements/Tabs/Tab.tsx'
 import Tabs from 'src/ui/elements/Tabs/Tabs.tsx'
 import { TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
 import UseTabsState from 'src/ui/elements/Tabs/UseTabsState.tsx'
-import TabsPage = Pages.TabsPage
-import safePageContentPaddings = Pages.safePageContentPaddings
+import safePageContentPaddings = Pages.safeInsets
 import fill = EmotionCommon.fill
 import blobToDataUrl = FileUtils.blobToDataUrl
 import fetchToBlob = FileUtils.fetchToBlob
@@ -360,7 +359,7 @@ React.memo(
   
   
   return <>
-    <TabsPage>
+    <Pages.TabsPage>
       
       <UseTabsState initialIdx={1}>{tabsProps=><>
         <Tabs css={fill} {...tabsProps}>{({ tabContainerSpring, computedTabsDimens }) => <>
@@ -439,7 +438,7 @@ React.memo(
       
       </>}</UseTabsState>
       
-    </TabsPage>
+    </Pages.TabsPage>
     
     
     

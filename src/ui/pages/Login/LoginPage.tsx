@@ -141,7 +141,7 @@ React.memo(
   
   
   return <>
-    <Pages.Page>
+    <Pages.Page0>
   
       <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
         
@@ -189,7 +189,7 @@ React.memo(
       
       
       <PageScrollbars />
-    </Pages.Page>
+    </Pages.Page0>
     
     
     <TopButtonBar backBtn/>

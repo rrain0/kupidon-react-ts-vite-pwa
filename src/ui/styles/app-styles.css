@@ -1,7 +1,7 @@
 
 
 
-:root{
+:root {
   --page-vertical-padding: 50px;
   
   --bottom-button-bar-height: 0px;
@@ -26,8 +26,6 @@
       var(--page-vertical-padding)
     )
   );
-  
-  
   
   --top-bars-inset: calc(
     var(--top-nav-height)

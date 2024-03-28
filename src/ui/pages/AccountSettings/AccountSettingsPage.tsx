@@ -35,7 +35,6 @@ import Input from 'src/ui/elements/inputs/Input/Input'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle'
 import FloppyDisk1Ic = SvgIcons.FloppyDisk1Ic
 import col = EmotionCommon.col
-import Page = Pages.Page
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues
@@ -222,7 +221,7 @@ React.memo(
   
   return <>
   
-    <Pages.Page>
+    <Pages.Page0>
       <form css={contentBigGap} onSubmit={formSubmitPreventDefault}>
         
         <FormHeader>{uiText.account.text}</FormHeader>
@@ -335,7 +334,7 @@ React.memo(
     </form>
     
     <PageScrollbars/>
-    </Pages.Page>
+    </Pages.Page0>
     
     
     <TopButtonBar backBtn/>

@@ -28,7 +28,7 @@ import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
-import Page = Pages.Page
+import Page = Pages.Page0
 import AddModuleIc = SvgIcons.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 
@@ -86,8 +86,8 @@ React.memo(
   
   return <>
     
-    <Page>
-      <Pages.Content>
+    <Pages.Page0>
+      <Pages.Content0>
         
         <FormHeader>{uiText.appSettings.text}</FormHeader>
         
@@ -192,11 +192,11 @@ React.memo(
         
         
       
-      </Pages.Content>
+      </Pages.Content0>
       
       
       <PageScrollbars />
-    </Page>
+    </Pages.Page0>
     
     
     <TopButtonBar backBtn/>

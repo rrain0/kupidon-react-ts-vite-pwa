@@ -15,25 +15,95 @@ export namespace Pages {
   
   
   
-  export const viewportViewStyle = css`
-    min-width: 220px;
-    width: 100dvw;
-    min-height: 220px;
-    height: 100dvh;
+  export const pageColors = (t: AppTheme.Theme)=>css`
+    ${SimpleGradientBgc(t)};
+    color: ${t.page.content2[0]};
   `
-  export const modalFrameStyle = css`
+  export const simplePageColors = (t: AppTheme.Theme)=>css`
+    background: ${t.page.bgc[0]};
+    color: ${t.page.content2[0]};
+  `
+  
+  
+  
+  
+  export const page = css`
     min-width: 220px;
     width: 100dvw;
     min-height: max(220px,100dvh);
     max-height: fit-content;
   `
+  export const Page = styled.main`
+    ${page};
+    position: relative;
+    ${center};
+    ${p=>pageColors(p.theme)};
+  `
+  
+  export const fillViewport = css`
+    min-width: 220px;
+    width: 100dvw;
+    min-height: 220px;
+    height: 100dvh;
+  `
+  export const TabsPage = styled.main`
+    ${fillViewport};
+    ${p=>pageColors(p.theme)}
+  `
   
   
   
-  // safe means where there is no overlapping elements
-  export const safePageContentPaddings = css`
+  
+  
+  export const fitPage = css`
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+  `
+  
+  
+  // no overlapping by bottom / top bars
+  export const safeInsets = css`
+    padding-top: var(--top-bars-inset);
     padding-bottom: var(--bottom-bars-inset);
   `
+  export const SafeInsets = styled.div`
+    ${fitPage};
+    ${safeInsets};
+    ${center};
+  `
+  
+  
+  
+  
+  
+  
+  export const content = css`
+    ${fitPage};
+    max-width: 500px;
+    ${col};
+    align-items: center;
+    gap: 10px;
+  `
+  export const Content = styled.div(content)
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -62,19 +132,10 @@ export namespace Pages {
   
   
   
-  export const pageColors = (t: AppTheme.Theme)=>css`
-    ${SimpleGradientBgc(t)};
-    color: ${t.page.content2[0]};
-  `
-  export const simplePageColors = (t: AppTheme.Theme)=>css`
-    background: ${t.page.bgc[0]};
-    color: ${t.page.content2[0]};
-  `
   
   
-  
-  export const Page = styled.main`
-    ${modalFrameStyle};
+  export const Page0 = styled.main`
+    ${page};
     ${pageLayoutStyle};
     ${p=>pageColors(p.theme)}
   `
@@ -82,7 +143,7 @@ export namespace Pages {
     max-width: 500px;
     width: 100%;
   `
-  export const content = css`
+  export const content0 = css`
     ${contentBase};
     height: fit-content;
     min-height: 100%;
@@ -95,22 +156,18 @@ export namespace Pages {
     ${col};
     gap: 24px;
   `
-  export const Content = styled.div(content)
+  export const Content0 = styled.div(content0)
   export const ContentCenterBigGap = styled.div(contentCenterBigGap)
   
   
   
   
-  export const TabsPage = styled.main`
-    ${viewportViewStyle};
-    ${p=>pageColors(p.theme)}
-  `
   
   
   
   
   export const SimplePage = styled.main`
-    ${modalFrameStyle};
+    ${page};
     ${pageLayoutStyle};
     ${p=>simplePageColors(p.theme)}
   `
@@ -129,7 +186,7 @@ export namespace Pages {
     min-height: 100%;
   `
   export const PageContentSafe = styled(PageContent)`
-    ${safePageContentPaddings};
+    ${safeInsets};
   `
   export const PageContentVerticalPaddings = styled(PageContent)`
     ${pageContentVerticalPaddings};

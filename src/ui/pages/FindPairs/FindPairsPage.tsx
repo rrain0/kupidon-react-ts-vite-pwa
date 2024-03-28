@@ -16,7 +16,7 @@ React.memo(
   
   
   return <>
-    <Pages.Page>
+    <Pages.Page0>
       <Pages.ContentFill>
         
         <div>Здесь будут карточки людей.</div>
@@ -25,7 +25,7 @@ React.memo(
       
       
       <PageScrollbars />
-    </Pages.Page>
+    </Pages.Page0>
     
     
     <TopButtonBar />

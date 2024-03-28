@@ -1,19 +1,15 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { MathUtils } from '@util/common/NumberUtils.ts'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/elements/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/elements/Scrollbar/ScrollbarVerticalStyle.ts'
 import FormValues = ProfilePageValidation.FormValues
-import PageContentSafe = Pages.PageContentSafe
-import abs = EmotionCommon.abs
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
-import loopRange = MathUtils.loopRange
 
 
 
@@ -50,7 +46,7 @@ React.memo(
   
   
   
-  return <PageContentSafe>
+  return <Pages.PageContentSafe>
     
     { firstImage && <div css={photoContainer}>
       
@@ -71,7 +67,7 @@ React.memo(
       
     </div> }
     
-  </PageContentSafe>
+  </Pages.PageContentSafe>
 })
 export default Preview
 

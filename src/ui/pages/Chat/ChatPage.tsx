@@ -5,7 +5,6 @@ import FormHeader from 'src/ui/components/FormElements/FormHeader'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
-import Page = Pages.Page
 
 
 
@@ -21,8 +20,8 @@ React.memo(
   
   return <>
     
-    <Page>
-      <Pages.Content>
+    <Pages.Page0>
+      <Pages.Content0>
         
         <FormHeader>{uiText.chat.text}</FormHeader>
         
@@ -31,11 +30,11 @@ React.memo(
         
         
       
-      </Pages.Content>
+      </Pages.Content0>
       
       
       <PageScrollbars />
-    </Page>
+    </Pages.Page0>
     
     <BottomButtonBar />
     
