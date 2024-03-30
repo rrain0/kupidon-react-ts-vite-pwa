@@ -51,7 +51,6 @@ import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectUtils.ObjectKeys
-import PageContentPaddings = Pages.PageContentPaddings
 import SoftRefreshBtn = ButtonBarComponents.SoftRefreshBtn
 
 
@@ -402,17 +401,21 @@ React.memo(
                       isLoading={isLoading}
                     />
                   case 2:
-                    return <PageContentPaddings>
-                      <div css={Pages.contentCenterBigGap}>
-                        <ProfilePageTabHeader thisTabIdx={2}/>
-                      </div>
-                    </PageContentPaddings>
+                    return <Pages.SafeInsets>
+                      <Pages.AddInsets css={css`padding-top: 20px;`}>
+                        <Pages.ContentForm>
+                            <ProfilePageTabHeader thisTabIdx={2}/>
+                        </Pages.ContentForm>
+                      </Pages.AddInsets>
+                    </Pages.SafeInsets>
                   case 3:
-                    return <PageContentPaddings>
-                      <div css={Pages.contentCenterBigGap}>
-                        <ProfilePageTabHeader thisTabIdx={3}/>
-                      </div>
-                    </PageContentPaddings>
+                    return <Pages.SafeInsets>
+                      <Pages.AddInsets css={css`padding-top: 20px;`}>
+                        <Pages.ContentForm>
+                            <ProfilePageTabHeader thisTabIdx={3}/>
+                        </Pages.ContentForm>
+                      </Pages.AddInsets>
+                    </Pages.SafeInsets>
                 }
               }()}
               </ProfilePageTabHeaderContext.Provider>

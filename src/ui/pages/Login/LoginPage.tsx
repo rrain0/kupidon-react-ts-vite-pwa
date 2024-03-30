@@ -42,7 +42,7 @@ import userDefaultValues = LoginPageValidation.userDefaultValues
 
 const LoginPage =
 React.memo(
-() => {
+()=>{
   
   const [searchParams] = useSearchParams()
   const returnPath = searchParams.get(RootRoute.login[params].returnPath) ?? undefined
@@ -141,55 +141,53 @@ React.memo(
   
   
   return <>
-    <Pages.Page0>
-  
-      <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
-        
-        <FormHeader>{uiText.login.text}</FormHeader>
-        
-        
-        
-        <ValidationWrap {...validationProps}
-          fieldName='login'
-          render={props => <Input
-            css={InputStyle.inputNormal}
-            placeholder={uiText.loginEmailPlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        <ValidationWrap {...validationProps}
-          fieldName='pwd'
-          render={props => <PwdInput
-            css={InputStyle.inputNormal}
-            placeholder={uiText.pwdPlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        
-        
-        <Button
-          css={ButtonStyle.bigRectMain}
-          type="submit"
-        >
-          {uiText.doLogin.text}
-        </Button>
-        
-        
-        <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
-          <Button css={ButtonStyle.bigRectAccent}>
-            {uiText.signup.text}
+    <Pages.Page>
+      <Pages.SafeInsets>
+        <Pages.ContentForm onSubmit={onFormSubmitCallback}>
+          
+          <FormHeader>{uiText.login.text}</FormHeader>
+          
+          
+          <ValidationWrap {...validationProps}
+            fieldName="login"
+            render={props => <Input
+              css={InputStyle.inputNormal}
+              placeholder={uiText.loginEmailPlaceholder.text}
+              {...props.inputProps}
+              hasError={props.highlight}
+            />}
+          />
+          
+          <ValidationWrap {...validationProps}
+            fieldName="pwd"
+            render={props => <PwdInput
+              css={InputStyle.inputNormal}
+              placeholder={uiText.pwdPlaceholder.text}
+              {...props.inputProps}
+              hasError={props.highlight}
+            />}
+          />
+          
+          
+          <Button
+            css={ButtonStyle.bigRectMain}
+            type="submit"
+          >
+            {uiText.doLogin.text}
           </Button>
-        </Link>
-      
-      </form>
-      
+          
+          
+          <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
+            <Button css={ButtonStyle.bigRectAccent}>
+              {uiText.signup.text}
+            </Button>
+          </Link>
+        
+        </Pages.ContentForm>
+      </Pages.SafeInsets>
       
       <PageScrollbars />
-    </Pages.Page0>
+    </Pages.Page>
     
     
     <TopButtonBar backBtn/>

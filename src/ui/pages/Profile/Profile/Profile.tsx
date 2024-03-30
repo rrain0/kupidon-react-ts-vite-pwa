@@ -59,11 +59,10 @@ React.memo(
   
   
   
-  
-  
   return <>
-    <Pages.PageContentPaddings>
-      <form css={Pages.contentCenterBigGap} onSubmit={props.onFormSubmitCallback}>
+    <Pages.SafeInsets>
+      <Pages.AddInsets css={css`padding-top: 20px;`}>
+        <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
         
         <ProfilePageTabHeader thisTabIdx={1}/>
         
@@ -140,8 +139,9 @@ React.memo(
         
         </div>
       
-      </form>
-    </Pages.PageContentPaddings>
+      </Pages.ContentForm>
+      </Pages.AddInsets>
+    </Pages.SafeInsets>
     
     
     { (props.canSubmit || props.formProps.hasChanges) && <TopButtonBarFrame>
@@ -174,7 +174,6 @@ export default Profile
 export const TopButtonBarFrame = styled.section`
   ${fixedTop};
   z-index: 10;
-  //height: var(--top-button-bar-height);
   padding: 10px;
   display: flex;
   align-items: center;

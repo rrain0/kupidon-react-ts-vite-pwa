@@ -28,7 +28,6 @@ import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
-import Page = Pages.Page0
 import AddModuleIc = SvgIcons.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 
@@ -86,117 +85,119 @@ React.memo(
   
   return <>
     
-    <Pages.Page0>
-      <Pages.Content0>
+    <Pages.Page>
+      <Pages.SafeInsets>
+        <Pages.Content>
         
-        <FormHeader>{uiText.appSettings.text}</FormHeader>
-        
-        
-        
-        <Card>
-          <SettingsOptions.Header>
-            {uiText.theme.text}
-          </SettingsOptions.Header>
-          <ThemeOptions/>
-        </Card>
-        
-        
-        
-        <Card>
-          <SettingsOptions.Header>
-            {uiText.preferredLightTheme.text}
-          </SettingsOptions.Header>
-          <RadioInputGroup>
-            {
-              lightThemeOptions.map(opt => <RadioInput
-                css={RadioInputStyle.radio}
-                childrenPosition="start"
-                checked={opt.value===themeSettings.light}
-                value={opt.value}
-                key={opt.value}
-                onChange={ev => {
-                  setThemeSettings(s => ({
-                    ...s,
-                    light: opt.value,
-                  }))
-                }}
-              >
-                <SettingsOptions.Container>
-                  {opt.icon}
-                  {opt.text}
-                </SettingsOptions.Container>
-              </RadioInput>)
-            }
-          </RadioInputGroup>
-        </Card>
-        
-        <Card>
-          <SettingsOptions.Header>
-            {uiText.preferredDarkTheme.text}
-          </SettingsOptions.Header>
-          <RadioInputGroup>
-            {
-              darkThemeOptions.map(opt => <RadioInput
-                css={RadioInputStyle.radio}
-                childrenPosition="start"
-                checked={opt.value===themeSettings.dark}
-                value={opt.value}
-                key={opt.value}
-                onChange={ev => {
-                  setThemeSettings(s => ({
-                    ...s,
-                    dark: opt.value,
-                  }))
-                }}
-              >
-                <SettingsOptions.Container>
-                  {opt.icon}
-                  {opt.text}
-                </SettingsOptions.Container>
-              </RadioInput>)
-            }
-          </RadioInputGroup>
-        </Card>
-        
-        
-        <Card>
-          <SettingsOptions.Header>
-            {uiText.language.text}
-          </SettingsOptions.Header>
-          <LangOptions/>
-        </Card>
-        
-        
-        {/* todo: Добавить настройки звука в приложении */}
-        
-        
-        <RoundButtonsContainer>
+          <FormHeader>{uiText.appSettings.text}</FormHeader>
           
-          {app.canInstall && <Button css={normalIconRoundButton}
-            onClick={async()=>{
-              const installed = await promptInstall()
-              console.log('installed', installed)
-            }}
-          >
-            <AddModuleIc css={SettingsOptions.icon}/>
-            {uiText.installApp.text}
-          </Button>}
           
-          <Button css={ButtonStyle.roundedDanger}
-            onClick={()=>setClearSite(true)}
-          >
-            {uiText.clearAppData.text}
-          </Button>
+          
+          <Card>
+            <SettingsOptions.Header>
+              {uiText.theme.text}
+            </SettingsOptions.Header>
+            <ThemeOptions/>
+          </Card>
+          
+          
+          
+          <Card>
+            <SettingsOptions.Header>
+              {uiText.preferredLightTheme.text}
+            </SettingsOptions.Header>
+            <RadioInputGroup>
+              {
+                lightThemeOptions.map(opt => <RadioInput
+                  css={RadioInputStyle.radio}
+                  childrenPosition="start"
+                  checked={opt.value===themeSettings.light}
+                  value={opt.value}
+                  key={opt.value}
+                  onChange={ev => {
+                    setThemeSettings(s => ({
+                      ...s,
+                      light: opt.value,
+                    }))
+                  }}
+                >
+                  <SettingsOptions.Container>
+                    {opt.icon}
+                    {opt.text}
+                  </SettingsOptions.Container>
+                </RadioInput>)
+              }
+            </RadioInputGroup>
+          </Card>
+          
+          <Card>
+            <SettingsOptions.Header>
+              {uiText.preferredDarkTheme.text}
+            </SettingsOptions.Header>
+            <RadioInputGroup>
+              {
+                darkThemeOptions.map(opt => <RadioInput
+                  css={RadioInputStyle.radio}
+                  childrenPosition="start"
+                  checked={opt.value===themeSettings.dark}
+                  value={opt.value}
+                  key={opt.value}
+                  onChange={ev => {
+                    setThemeSettings(s => ({
+                      ...s,
+                      dark: opt.value,
+                    }))
+                  }}
+                >
+                  <SettingsOptions.Container>
+                    {opt.icon}
+                    {opt.text}
+                  </SettingsOptions.Container>
+                </RadioInput>)
+              }
+            </RadioInputGroup>
+          </Card>
+          
+          
+          <Card>
+            <SettingsOptions.Header>
+              {uiText.language.text}
+            </SettingsOptions.Header>
+            <LangOptions/>
+          </Card>
+          
+          
+          {/* todo: Добавить настройки звука в приложении */}
+          
+          
+          <RoundButtonsContainer>
+            
+            {app.canInstall && <Button css={normalIconRoundButton}
+              onClick={async()=>{
+                const installed = await promptInstall()
+                console.log('installed', installed)
+              }}
+            >
+              <AddModuleIc css={SettingsOptions.icon}/>
+              {uiText.installApp.text}
+            </Button>}
+            
+            <Button css={ButtonStyle.roundedDanger}
+              onClick={()=>setClearSite(true)}
+            >
+              {uiText.clearAppData.text}
+            </Button>
+          
+          </RoundButtonsContainer>
         
-        </RoundButtonsContainer>
         
         
-      
-      </Pages.Content0>
+        </Pages.Content>
+      </Pages.SafeInsets>
       
       
       <PageScrollbars />
-    </Pages.Page0>
+    </Pages.Page>
     
     
     <TopButtonBar backBtn/>

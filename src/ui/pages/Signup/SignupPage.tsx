@@ -53,7 +53,7 @@ import userDefaultValues = SignupPageValidation.userDefaultValues
 
 const SignupPage =
 React.memo(
-() => {
+()=>{
   
   const [searchParams] = useSearchParams()
   const returnPath = searchParams.get(RootRoute.signup[params].returnPath) ?? undefined
@@ -191,98 +191,100 @@ React.memo(
   
   
   return <>
-    <Pages.Page0>
+    <Pages.Page>
       
-      <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
+      <Pages.SafeInsets>
+        <Pages.ContentForm onSubmit={onFormSubmitCallback}>
         
-        <FormHeader>{uiText.registration.text}</FormHeader>
-        
-        
-        
-        <ValidationWrap {...validationProps}
-          fieldName='email'
-          render={props => <Input
-            css={InputStyle.inputNormal}
-            placeholder={uiText.emailLoginPlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        <ValidationWrap {...validationProps}
-          fieldName='pwd'
-          render={props => <PwdInput
-            css={InputStyle.inputNormal}
-            placeholder={uiText.pwdPlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        <ValidationWrap {...validationProps}
-          fieldName='repeatPwd'
-          render={props => <PwdInput
-            css={InputStyle.inputNormal}
-            placeholder={uiText.repeatPwdPlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        <ValidationWrap {...validationProps}
-          fieldName='name'
-          render={props => <Input
-            css={InputStyle.inputNormal}
-            placeholder={uiText.namePlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        <ValidationWrap {...validationProps}
-          fieldName='birthDate'
-          render={props => <Input
-            css={InputStyle.inputNormal}
-            placeholder={uiText.birthDatePlaceholder.text}
-            {...props.inputProps}
-            hasError={props.highlight}
-          />}
-        />
-        
-        
-        <ValidationWrap {...validationProps}
-          fieldName='gender'
-          render={props =>
-            <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
+          <FormHeader>{uiText.registration.text}</FormHeader>
+          
+          
+          
+          <ValidationWrap {...validationProps}
+            fieldName='email'
+            render={props => <Input
+              css={InputStyle.inputNormal}
+              placeholder={uiText.emailLoginPlaceholder.text}
+              {...props.inputProps}
               hasError={props.highlight}
-            >
-              { genderOptions.map(opt=>{
-                return <RadioInput
-                  css={RadioInputStyle.radio}
-                  key={opt.value}
-                  checked={props.value===opt.value}
-                  value={opt.value}
-                  onChange={props.inputProps.onChange}
-                >
-                  {opt.text}
-                </RadioInput>
-              }) }
-            </RadioInputGroup>}
-        />
-        
-        
-        <Button
-          css={ButtonStyle.bigRectMain}
-          type='submit'
-        >
-          {uiText.signup.text}
-        </Button>
-        
-      </form>
+            />}
+          />
+          
+          <ValidationWrap {...validationProps}
+            fieldName='pwd'
+            render={props => <PwdInput
+              css={InputStyle.inputNormal}
+              placeholder={uiText.pwdPlaceholder.text}
+              {...props.inputProps}
+              hasError={props.highlight}
+            />}
+          />
+          
+          <ValidationWrap {...validationProps}
+            fieldName='repeatPwd'
+            render={props => <PwdInput
+              css={InputStyle.inputNormal}
+              placeholder={uiText.repeatPwdPlaceholder.text}
+              {...props.inputProps}
+              hasError={props.highlight}
+            />}
+          />
+          
+          <ValidationWrap {...validationProps}
+            fieldName='name'
+            render={props => <Input
+              css={InputStyle.inputNormal}
+              placeholder={uiText.namePlaceholder.text}
+              {...props.inputProps}
+              hasError={props.highlight}
+            />}
+          />
+          
+          <ValidationWrap {...validationProps}
+            fieldName='birthDate'
+            render={props => <Input
+              css={InputStyle.inputNormal}
+              placeholder={uiText.birthDatePlaceholder.text}
+              {...props.inputProps}
+              hasError={props.highlight}
+            />}
+          />
+          
+          
+          <ValidationWrap {...validationProps}
+            fieldName='gender'
+            render={props =>
+              <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
+                hasError={props.highlight}
+              >
+                { genderOptions.map(opt=>{
+                  return <RadioInput
+                    css={RadioInputStyle.radio}
+                    key={opt.value}
+                    checked={props.value===opt.value}
+                    value={opt.value}
+                    onChange={props.inputProps.onChange}
+                  >
+                    {opt.text}
+                  </RadioInput>
+                }) }
+              </RadioInputGroup>}
+          />
+          
+          
+          <Button
+            css={ButtonStyle.bigRectMain}
+            type='submit'
+          >
+            {uiText.signup.text}
+          </Button>
+          
+        </Pages.ContentForm>
+      </Pages.SafeInsets>
       
       
       <PageScrollbars />
-    </Pages.Page0>
+    </Pages.Page>
     
     
     

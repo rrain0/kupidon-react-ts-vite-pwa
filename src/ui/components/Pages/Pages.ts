@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import React from 'react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import center = EmotionCommon.center
@@ -29,8 +28,8 @@ export namespace Pages {
   
   export const page = css`
     min-width: 220px;
-    width: 100dvw;
-    min-height: max(220px,100dvh);
+    width: min(100dvw, 100%);
+    min-height: max(220px, 100dvh);
     max-height: fit-content;
   `
   export const Page = styled.main`
@@ -38,6 +37,12 @@ export namespace Pages {
     position: relative;
     ${center};
     ${p=>pageColors(p.theme)};
+  `
+  export const SimplePage = styled.main`
+    ${page};
+    position: relative;
+    ${center};
+    ${p=>simplePageColors(p.theme)}
   `
   
   export const fillViewport = css`
@@ -72,60 +77,8 @@ export namespace Pages {
     ${safeInsets};
     ${center};
   `
-  
-  
-  
-  
-  
-  
-  export const content = css`
+  export const AddInsets = styled.div`
     ${fitPage};
-    max-width: 500px;
-    ${col};
-    align-items: center;
-    gap: 10px;
-  `
-  export const Content = styled.div(content)
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  export const pageContentVerticalPaddings = css`
-    //padding-top: var(--top-page-inset);
-    padding-top: 70px;
-    padding-bottom: var(--bottom-page-inset);
-  `
-  export const pageContentHorizontalPaddings = css`
-    padding-left: 20px;
-    padding-right: 20px;
-  `
-  export const pageContentPaddings = css`
-    ${pageContentVerticalPaddings};
-    ${pageContentHorizontalPaddings};
-  `
-  
-  
-  
-  export const pageLayoutStyle = css`
-    position: relative;
-    ${pageContentPaddings};
     ${center};
   `
   
@@ -133,66 +86,31 @@ export namespace Pages {
   
   
   
-  
-  export const Page0 = styled.main`
-    ${page};
-    ${pageLayoutStyle};
-    ${p=>pageColors(p.theme)}
-  `
-  const contentBase = css`
-    max-width: 500px;
-    width: 100%;
-  `
-  export const content0 = css`
-    ${contentBase};
-    height: fit-content;
-    min-height: 100%;
+  export const content = css`
+    ${fitPage};
+    max-width: 550px;
+    padding-top: max(50px, var(--top-button-bar-height));
+    padding-bottom: max(50px, var(--bottom-button-bar-height));
+    padding-left: 16px;
+    padding-right: 16px;
     ${col};
-    align-items: center;
+    align-items: stretch;
     gap: 10px;
   `
-  export const contentCenterBigGap = css`
-    ${contentBase};
-    ${col};
+  export const Content = styled.div(content)
+  
+  export const contentForm = css`
+    ${content};
+    min-height: auto;
+    min-width: 0;
     gap: 24px;
   `
-  export const Content0 = styled.div(content0)
-  export const ContentCenterBigGap = styled.div(contentCenterBigGap)
+  export const ContentForm = styled.form(contentForm)
   
-  
-  
-  
-  
-  
-  
-  
-  export const SimplePage = styled.main`
-    ${page};
-    ${pageLayoutStyle};
-    ${p=>simplePageColors(p.theme)}
-  `
   export const ContentFill = styled.div`
-    ${fill};
-    ${col};
-    gap: 10px;
-  `
-  
-  // no max-width
-  const PageContent = styled.section`
-    ${col};
-    align-items: center;
-    width: 100%;
-    height: fit-content;
-    min-height: 100%;
-  `
-  export const PageContentSafe = styled(PageContent)`
-    ${safeInsets};
-  `
-  export const PageContentVerticalPaddings = styled(PageContent)`
-    ${pageContentVerticalPaddings};
-  `
-  export const PageContentPaddings = styled(PageContent)`
-    ${pageContentPaddings};
+    ${content};
+    max-width: unset;
+    align-items: start;
   `
   
   

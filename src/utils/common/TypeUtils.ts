@@ -8,7 +8,7 @@ export namespace TypeUtils {
   export type empty = null|undefined
   export type anyval = {}|null|undefined
   export type falsy = false | undefined | null | '' | 0
-  export type emptyObj = Record<any, never>
+  export type emptyObj = Record<keyof any, never> // need to fix
   
   export const noop = ()=>{}
   export const trueOrUndef = (value: any): true|undefined => value ? true : undefined

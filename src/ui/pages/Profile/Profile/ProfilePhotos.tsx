@@ -576,7 +576,6 @@ const radialGradKfs = (t:Theme)=>keyframes`
 const photosGridStyle = css`
   display: grid;
   width: 100%;
-  max-width: 500px;
   height: auto;
   grid:
     'im1 im1 im2' auto

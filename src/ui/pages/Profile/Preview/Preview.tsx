@@ -46,7 +46,7 @@ React.memo(
   
   
   
-  return <Pages.PageContentSafe>
+  return <Pages.SafeInsets>
     
     { firstImage && <div css={photoContainer}>
       
@@ -67,7 +67,7 @@ React.memo(
       
     </div> }
     
-  </Pages.PageContentSafe>
+  </Pages.SafeInsets>
 })
 export default Preview
 

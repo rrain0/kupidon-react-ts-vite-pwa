@@ -16,16 +16,18 @@ React.memo(
   
   
   return <>
-    <Pages.Page0>
-      <Pages.ContentFill>
+    <Pages.Page>
+      <Pages.SafeInsets>
+        <Pages.Content>
         
-        <div>Здесь будут карточки людей.</div>
+          <div>Здесь будут карточки людей.</div>
         
-      </Pages.ContentFill>
+        </Pages.Content>
+      </Pages.SafeInsets>
       
       
       <PageScrollbars />
-    </Pages.Page0>
+    </Pages.Page>
     
     
     <TopButtonBar />

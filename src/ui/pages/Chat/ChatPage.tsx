@@ -20,21 +20,22 @@ React.memo(
   
   return <>
     
-    <Pages.Page0>
-      <Pages.Content0>
+    <Pages.Page>
+      <Pages.SafeInsets>
+        <Pages.Content>
         
-        <FormHeader>{uiText.chat.text}</FormHeader>
-        
-        
-        
+          <FormHeader>{uiText.chat.text}</FormHeader>
         
         
-      
-      </Pages.Content0>
-      
+        
+        
+        
+        
+        </Pages.Content>
+      </Pages.SafeInsets>
       
       <PageScrollbars />
-    </Pages.Page0>
+    </Pages.Page>
     
     <BottomButtonBar />
     

@@ -142,99 +142,89 @@ React.memo(
   
   return <>
     
-    <Pages.Page0>
-      <form css={Pages.contentCenterBigGap} onSubmit={onFormSubmitCallback}>
-        
-        <FormHeader>{uiText.changePwd.text}</FormHeader>
-        
-        
-        
-        <Card>
-          
-          
-          
-          
-          <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>{uiText.currentPwd.text}</ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...validationProps}
-              fieldName='currentPwd'
-              render={props => <PwdInput
-                css={InputStyle.inputSmall}
-                placeholder={uiText.currentPwdPlaceholder.text}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
-            />
-          </ItemContainer>
-          
-          
-          
-          
-          <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>{uiText.newPwd.text}</ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...validationProps}
-              fieldName='pwd'
-              render={props => <PwdInput
-                css={InputStyle.inputSmall}
-                placeholder={uiText.newPwdPlaceholder.text}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
-            />
-          </ItemContainer>
-          
-          
-          
-          
-          <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>{uiText.repeatPwd.text}</ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...validationProps}
-              fieldName='repeatPwd'
-              render={props => <PwdInput
-                css={InputStyle.inputSmall}
-                placeholder={uiText.repeatPwdPlaceholder.text}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
-            />
-          </ItemContainer>
-          
-          
-          
-        
-        </Card>
-        
-        
-        
-        
-        
-        <div css={notInCard}>
-          <Button css={ButtonStyle.bigRectMain}
-            type='submit'
-          >
-            {uiText.doChangePwd.text}
-          </Button>
-        </div>
-        
-        <div css={notInCard}>
-          <Button css={ButtonStyle.bigRectAccent}
-            disabled
-          >
-            {uiText.pwdRecovery.text}
-          </Button>
-        </div>
+    <Pages.Page>
       
-      </form>
-      
+      <Pages.SafeInsets>
+        <Pages.ContentForm onSubmit={onFormSubmitCallback}>
+          
+          <FormHeader>{uiText.changePwd.text}</FormHeader>
+          
+          
+          <Card>
+            
+            
+            <ItemContainer>
+              <ItemTitleContainer>
+                <ItemLabel>{uiText.currentPwd.text}</ItemLabel>
+              </ItemTitleContainer>
+              <ValidationWrap {...validationProps}
+                fieldName="currentPwd"
+                render={props => <PwdInput
+                  css={InputStyle.inputSmall}
+                  placeholder={uiText.currentPwdPlaceholder.text}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />}
+              />
+            </ItemContainer>
+            
+            
+            <ItemContainer>
+              <ItemTitleContainer>
+                <ItemLabel>{uiText.newPwd.text}</ItemLabel>
+              </ItemTitleContainer>
+              <ValidationWrap {...validationProps}
+                fieldName="pwd"
+                render={props => <PwdInput
+                  css={InputStyle.inputSmall}
+                  placeholder={uiText.newPwdPlaceholder.text}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />}
+              />
+            </ItemContainer>
+            
+            
+            <ItemContainer>
+              <ItemTitleContainer>
+                <ItemLabel>{uiText.repeatPwd.text}</ItemLabel>
+              </ItemTitleContainer>
+              <ValidationWrap {...validationProps}
+                fieldName="repeatPwd"
+                render={props => <PwdInput
+                  css={InputStyle.inputSmall}
+                  placeholder={uiText.repeatPwdPlaceholder.text}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />}
+              />
+            </ItemContainer>
+          
+          
+          </Card>
+          
+          
+          <div css={notInCard}>
+            <Button css={ButtonStyle.bigRectMain}
+              type="submit"
+            >
+              {uiText.doChangePwd.text}
+            </Button>
+          </div>
+          
+          <div css={notInCard}>
+            <Button css={ButtonStyle.bigRectAccent}
+              disabled
+            >
+              {uiText.pwdRecovery.text}
+            </Button>
+          </div>
+        
+        </Pages.ContentForm>
+      </Pages.SafeInsets>
       
       <PageScrollbars />
-    </Pages.Page0>
+    </Pages.Page>
     
     
     <TopButtonBar backBtn/>
