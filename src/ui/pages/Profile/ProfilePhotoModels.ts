@@ -1,4 +1,4 @@
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import noop = TypeUtils.noop
 
 

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'

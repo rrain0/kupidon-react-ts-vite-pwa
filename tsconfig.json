@@ -20,8 +20,13 @@
     "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],
+      
       "@res/*": ["src/res/*"],
-      "@util/*": ["src/utils/*"]
+      "@img/*": ["src/res/img/*"],
+      "@ic/*": ["src/res/ic/*"],
+      "@vid/*": ["src/res/vid/*"],
+      
+      "@util/*": ["src/util/*"]
     },
     
     

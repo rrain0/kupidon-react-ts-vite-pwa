@@ -1,7 +1,7 @@
 import React from 'react'
 import { ChatUiText } from 'src/ui/pages/Chat/uiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
-import FormHeader from 'src/ui/components/FormElements/FormHeader'
+import FormHeader from 'src/ui/elements/basic-elements/Hs'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/ui/ui-text/useUiText.ts'

@@ -4,9 +4,9 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
-import { getElemProps } from '@util/common/ElemProps.ts'
+import { getElemProps } from 'src/util/common/ElemProps.ts'
 import css from 'src/ui/elements/Ripple/Ripple.module.scss'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import PartialUndef = TypeUtils.PartialUndef

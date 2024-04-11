@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRef, useState } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import SetterOrUpdater = TypeUtils.SetterOrUpdater

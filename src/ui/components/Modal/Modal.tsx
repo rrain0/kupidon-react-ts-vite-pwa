@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useImperativeHandle, useRef } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
 import PartialUndef = TypeUtils.PartialUndef
 

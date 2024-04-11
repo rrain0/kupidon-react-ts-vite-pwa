@@ -3,9 +3,9 @@ import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
-import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
+import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { TabIdx, TabsState, useTabs } from 'src/ui/elements/Tabs/useTabs.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import Setter = TypeUtils.Setter

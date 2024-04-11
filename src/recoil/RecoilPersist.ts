@@ -1,6 +1,6 @@
 import { AtomEffect } from 'recoil'
-import { ObjectUtils } from 'src/utils/common/ObjectUtils'
-import { TypeUtils } from 'src/utils/common/TypeUtils'
+import { ObjectUtils } from 'src/util/common/ObjectUtils'
+import { TypeUtils } from 'src/util/common/TypeUtils'
 import Mapper = TypeUtils.Mapper
 import shallowEq = ObjectUtils.shallowEq
 

@@ -16,7 +16,7 @@ import { profileRouting } from 'src/ui/pages/Profile/routing.tsx'
 import { settingRouting } from 'src/ui/pages/Settings/routing'
 import { signupRouting } from 'src/ui/pages/Signup/routing'
 import { testRouting } from 'src/ui/pages/Test/routing'
-import { RouteBuilder } from 'src/utils/react/route-builder/RouteBuilder'
+import { RouteBuilder } from '@util/react/route-builder/RouteBuilder'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams

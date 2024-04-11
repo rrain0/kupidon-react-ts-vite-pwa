@@ -1,10 +1,10 @@
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { clearUnknownPathEnding } from 'src/app-routes/ReactRouterDomUtils'
+import { clearUnknownPathEnding } from '@util/react-router/ReactRouterUtils.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
-import { RouteBuilder } from 'src/utils/react/route-builder/RouteBuilder'
+import { RouteBuilder } from '@util/react/route-builder/RouteBuilder'
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams

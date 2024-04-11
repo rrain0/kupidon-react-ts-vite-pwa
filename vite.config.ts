@@ -69,6 +69,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
+    host: true, // expose app via IP access from local network
     port: 40030,
   },
   plugins: [

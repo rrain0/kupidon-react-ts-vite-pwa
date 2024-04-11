@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { clearUnknownPathEnding } from 'src/app-routes/ReactRouterDomUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react-router/ReactRouterUtils.tsx'
 import PointerTestPage from 'src/ui/pages/Test/PointerTestPage.tsx'
 import StateTestPage from 'src/ui/pages/Test/StateTestPage.tsx'
 import TabsTestPage from 'src/ui/pages/Test/TabsTestPage.tsx'

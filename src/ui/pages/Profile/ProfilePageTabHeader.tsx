@@ -2,11 +2,12 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
 import React, { useContext } from 'react'
-import { formHeader } from 'src/ui/components/FormElements/FormHeader.tsx'
+import { formHeader } from 'src/ui/elements/basic-elements/Hs'
+import { Hs } from 'src/ui/elements/basic-elements/Hs.tsx'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
-import { MathUtils } from '@util/common/NumberUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { TabsRenderProps } from 'src/ui/elements/Tabs/Tabs.tsx'
 import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
 import fitRange2 = MathUtils.fitRange
@@ -179,7 +180,7 @@ const AnimatedHeader = styled(animated.div)`
   overflow: visible;
 `
 const HeaderTextWrap = styled.h3`
-  ${p=>formHeader(p.theme)};
+  ${p=>Hs.page(p.theme)};
   overflow-wrap: anywhere;
   user-select: none;
   cursor: pointer;

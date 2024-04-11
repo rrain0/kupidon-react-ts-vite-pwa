@@ -1,5 +1,5 @@
 import { Lang } from 'src/recoil/state/LangRecoil'
-import { ArrayUtils } from 'src/utils/common/ArrayUtils'
+import { ArrayUtils } from 'src/util/common/ArrayUtils'
 import NonEmptyArr = ArrayUtils.NonEmptyArr
 
 

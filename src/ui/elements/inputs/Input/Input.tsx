@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
 import classNames from "classnames"
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs

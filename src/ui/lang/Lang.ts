@@ -1,4 +1,4 @@
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
+import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import ArrayElement = ArrayUtils.ArrayElement
 
 

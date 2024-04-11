@@ -7,14 +7,14 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
-import { ElemProps } from '@util/common/ElemProps.ts'
-import { MathUtils } from '@util/common/NumberUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { ElemProps } from 'src/util/common/ElemProps.ts'
+import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import fitRange = MathUtils.fitRange0
 import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { CssUtils } from '@util/common/CssUtils.ts'
+import { CssUtils } from 'src/util/common/CssUtils.ts'
 import parseCssValue = CssUtils.parseCssStringValue
 import CssValue = CssUtils.CssValue
 import PartialUndef = TypeUtils.PartialUndef

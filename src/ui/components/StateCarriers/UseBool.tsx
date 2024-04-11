@@ -1,5 +1,5 @@
 import React from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useBoolState } from '@util/react/useBoolState.ts'
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
 import PartialUndef = TypeUtils.PartialUndef

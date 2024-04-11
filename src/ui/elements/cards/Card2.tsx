@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ReactUtils } from 'src/util/common/ReactUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import col = EmotionCommon.col
 

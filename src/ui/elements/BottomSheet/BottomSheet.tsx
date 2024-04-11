@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
+import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
 import {
   ComputedBottomSheetDimens,
@@ -11,7 +11,7 @@ import {
 import React, {
   useLayoutEffect,
 } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import fixed = EmotionCommon.fixed
 import PartialUndef = TypeUtils.PartialUndef
 import contents = EmotionCommon.contents

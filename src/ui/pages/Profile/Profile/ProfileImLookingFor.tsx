@@ -7,7 +7,7 @@ import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValue
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
+import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'

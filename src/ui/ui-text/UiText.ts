@@ -1,4 +1,4 @@
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
+import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { Lang } from 'src/ui/lang/Lang.ts'
 import ArrayElement = ArrayUtils.ArrayElement
 import AppLangType = Lang.AppLangType

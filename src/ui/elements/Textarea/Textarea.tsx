@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { getElemProps } from '@util/common/ElemProps.ts'
+import { getElemProps } from 'src/util/common/ElemProps.ts'
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import classNames from "classnames"
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import resetTextarea = EmotionCommon.resetTextarea

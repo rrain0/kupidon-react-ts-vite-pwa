@@ -9,10 +9,10 @@ import {
 } from 'src/ui/elements/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import col = EmotionCommon.col
-import { Utils } from '@util/common/Utils.ts'
+import { Utils } from 'src/util/common/Utils.ts'
 import styled from '@emotion/styled'
 import BottomSheet from 'src/ui/elements/BottomSheet/BottomSheet.tsx'
 import intOrDefault = Utils.nonNegIntOrDefault;

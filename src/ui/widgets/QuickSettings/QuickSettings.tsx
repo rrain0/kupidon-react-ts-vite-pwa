@@ -10,7 +10,7 @@ import { QuickSettingsUiText } from 'src/ui/widgets/QuickSettings/uiText.ts'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
+import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
@@ -20,7 +20,7 @@ import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Setter = TypeUtils.Callback1
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc

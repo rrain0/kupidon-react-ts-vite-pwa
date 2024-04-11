@@ -9,7 +9,7 @@ import { ApiRoutes } from 'src/api/ApiRoutes'
 import * as jose from 'jose'
 import { getRecoil, setRecoil, resetRecoil, getRecoilPromise } from "recoil-nexus"
 import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
-import { TypeUtils } from 'src/utils/common/TypeUtils'
+import { TypeUtils } from 'src/util/common/TypeUtils'
 import ValueOrMapper = TypeUtils.ValueOrMapper
 
 

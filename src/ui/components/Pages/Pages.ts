@@ -25,7 +25,6 @@ export namespace Pages {
   
   
   
-  
   export const page = css`
     min-width: 220px;
     width: min(100dvw, 100%);

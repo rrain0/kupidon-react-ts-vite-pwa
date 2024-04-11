@@ -1,6 +1,6 @@
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
-import { ObjectUtils } from '@util/common/ObjectUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import isObject = ObjectUtils.isObject
 import isstring = TypeUtils.isstring

@@ -4,7 +4,7 @@ import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
 import classNames from "classnames"
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import RadioActiveIc = SvgIcons.RadioActiveIc
 import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'

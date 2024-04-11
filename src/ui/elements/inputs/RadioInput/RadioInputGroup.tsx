@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import classNames from 'classnames'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import {
   RadioInputGroupStyle,
 } from 'src/ui/elements/inputs/RadioInput/RadioInputGroupStyle.ts'

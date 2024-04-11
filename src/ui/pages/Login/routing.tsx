@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom'
-import { clearUnknownPathEnding } from 'src/app-routes/ReactRouterDomUtils'
+import { clearUnknownPathEnding } from '@util/react-router/ReactRouterUtils.tsx'
 import LoginPage from './LoginPage'
 
 

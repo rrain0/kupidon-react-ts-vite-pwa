@@ -7,10 +7,10 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
-import { ElemProps } from '@util/common/ElemProps.ts'
-import { MathUtils } from '@util/common/NumberUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { ElemProps } from 'src/util/common/ElemProps.ts'
+import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
 import PartialUndef = TypeUtils.PartialUndef

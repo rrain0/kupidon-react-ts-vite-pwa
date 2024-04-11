@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { useSetRecoilState } from 'recoil'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from 'src/utils/common/TypeUtils'
+import { TypeUtils } from 'src/util/common/TypeUtils'
 import PartialUndef = TypeUtils.PartialUndef
 import contents = EmotionCommon.contents
 

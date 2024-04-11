@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { UiText } from 'src/ui/ui-text/UiText.ts'
 import { useUiValueArr } from 'src/ui/ui-text/useUiText.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'

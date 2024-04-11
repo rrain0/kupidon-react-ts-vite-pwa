@@ -4,7 +4,7 @@ import React, { useImperativeHandle, useRef } from "react"
 import classNames from "classnames"
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import abs = EmotionCommon.abs
 import resetButton = EmotionCommon.resetButton
 import row = EmotionCommon.row

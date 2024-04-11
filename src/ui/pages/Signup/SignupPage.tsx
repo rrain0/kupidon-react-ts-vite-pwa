@@ -4,7 +4,7 @@ import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'
-import FormHeader from 'src/ui/components/FormElements/FormHeader.tsx'
+import FormHeader from 'src/ui/elements/basic-elements/Hs'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars.tsx'
 import { SignupPageUiText } from 'src/ui/pages/Signup/uiText.ts'
 import React, {

@@ -1,5 +1,5 @@
-import russiaFlag from '@res/icon/country-flag/russia-flag-icon.png'
-import usaFlag from '@res/icon/country-flag/usa-flag-icon.jpg'
+import russiaFlag from '@ic/country-flag/russia-flag-icon.png'
+import usaFlag from '@ic/country-flag/usa-flag-icon.jpg'
 import { Lang } from 'src/ui/lang/Lang.ts'
 import AppLangType = Lang.AppLangType
 

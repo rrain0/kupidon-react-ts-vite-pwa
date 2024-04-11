@@ -9,10 +9,10 @@ import React, {
 } from 'react'
 import classNames from "classnames"
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { getElemProps } from '@util/common/ElemProps.ts'
-import { MathUtils } from '@util/common/NumberUtils.ts'
+import { getElemProps } from 'src/util/common/ElemProps.ts'
+import { MathUtils } from 'src/util/common/NumberUtils.ts'
 import { ScrollbarStyle } from 'src/ui/elements/Scrollbar/ScrollbarStyle.ts'
 import inRange = MathUtils.inRange0
 import fitRange = MathUtils.fitRange0

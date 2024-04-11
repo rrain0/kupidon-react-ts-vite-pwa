@@ -16,7 +16,7 @@ import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputSty
 import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
 import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Setter = TypeUtils.Callback1
 import col = EmotionCommon.col
 import row = EmotionCommon.row
