@@ -1,4 +1,4 @@
-import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
+import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { SignupPageUiText } from 'src/ui/pages/Signup/uiText.ts'
 import { DateTime } from '@util/DateTime.ts'

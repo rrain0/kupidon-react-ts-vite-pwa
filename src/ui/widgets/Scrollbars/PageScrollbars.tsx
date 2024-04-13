@@ -8,7 +8,7 @@ import {
 import ScrollbarOverlay from 'src/ui/widgets/Scrollbars/ScrollbarOverlay.tsx'
 import { ScrollbarOverlayStyle } from 'src/ui/widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import UseScrollbars from 'src/ui/widgets/Scrollbars/UseScrollbars.tsx'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import hideWindowScrollbar = EmotionCommon.hideWindowScrollbar
 import PartialUndef = TypeUtils.PartialUndef

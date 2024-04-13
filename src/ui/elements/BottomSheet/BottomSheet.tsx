@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
 import {

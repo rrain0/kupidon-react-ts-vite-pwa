@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'

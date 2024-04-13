@@ -4,7 +4,7 @@ import {
   ClearSiteConfirmationUiText
 } from 'src/ui/widgets/ClearSiteConfirmation/uiText.ts'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { clearSiteData } from 'src/util/app/clearSiteData.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useUiValues } from 'src/ui/ui-text/useUiText.ts'

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { getElemProps } from 'src/util/common/ElemProps.ts'
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'

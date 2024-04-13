@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { CurrentUser } from 'src/api/entity/CurrentUser'
+import { CurrentUser } from 'src/api/model/CurrentUser'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiRoutes as r } from 'src/api/ApiRoutes'
 import ax = AxiosConfig.ax

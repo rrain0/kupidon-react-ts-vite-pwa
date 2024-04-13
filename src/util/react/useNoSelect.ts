@@ -1,11 +1,11 @@
-import { useLayoutEffect } from 'react'
-import commonCss from 'src/ui/styles/common.module.scss'
+import { useEffect } from 'react'
+import commonCss from 'src/ui/style/common.module.scss'
 
 
 
 
 export const useNoSelect = (lock: boolean|undefined = false)=>{
-  useLayoutEffect(
+  useEffect(
     ()=>{
       const root = document.documentElement // get html
       if (lock){

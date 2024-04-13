@@ -1,4 +1,4 @@
-import { GenderEnum } from 'src/api/entity/GenderEnum'
+import { GenderEnum } from 'src/api/model/GenderEnum'
 
 
 

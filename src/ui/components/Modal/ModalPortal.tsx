@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { useRecoilValue } from 'recoil'
-import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
 
@@ -14,10 +12,9 @@ export type ModalPortalProps = PartialUndef<{
 const ModalPortal =
 React.memo(
 (props: ModalPortalProps)=>{
-  const modalId = useRecoilValue(AppRecoil).modalOutletId
   const modalView = useMemo(
-    ()=>modalId ? document.getElementById(modalId) : undefined,
-    [modalId]
+    ()=>document.getElementById('modal-outlet'),
+    []
   )
   
   /*

@@ -6,7 +6,7 @@ import { css } from '@emotion/react'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import center = EmotionCommon.center
 import PartialUndef = TypeUtils.PartialUndef

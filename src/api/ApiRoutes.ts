@@ -3,14 +3,16 @@
 export namespace ApiRoutes {
   
   
+  // todo move url to config
+  const isLocal = true
   export const api = function(){
-    switch (process.env.NODE_ENV){
-      case 'development':
-      case 'production':
-      default:
-        // todo move to ENV variable
-        return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
-    }
+    const mode = import.meta.env.MODE
+    if (mode==='development' && isLocal)
+      return 'https://localhost:40018/api'
+    
+    if (mode==='development') return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
+    if (mode==='production') return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
+    return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
   }()
   
   

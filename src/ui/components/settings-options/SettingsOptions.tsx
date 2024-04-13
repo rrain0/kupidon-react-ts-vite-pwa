@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'

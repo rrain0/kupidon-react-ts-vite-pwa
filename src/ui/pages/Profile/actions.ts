@@ -1,6 +1,6 @@
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { CurrentUser } from 'src/api/entity/CurrentUser.ts'
-import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
+import { CurrentUser } from 'src/api/model/CurrentUser.ts'
+import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import {
   DefaultOperation,
   DefaultProfilePhoto,

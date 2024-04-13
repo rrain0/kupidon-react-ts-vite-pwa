@@ -11,7 +11,7 @@ import React, {
 } from 'react'
 import classNames from "classnames"
 import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useAsRef } from '@util/react/useAsRef.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'

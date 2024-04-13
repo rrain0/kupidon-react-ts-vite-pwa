@@ -12,7 +12,7 @@ import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import row = EmotionCommon.row
 import CardsHeartIc = SvgIcons.CardsHeartIc
 import ProfileIc = SvgIcons.ProfileIc

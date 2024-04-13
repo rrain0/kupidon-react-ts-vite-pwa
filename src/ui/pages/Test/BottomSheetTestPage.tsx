@@ -8,7 +8,7 @@ import {
   SheetState,
 } from 'src/ui/elements/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import col = EmotionCommon.col

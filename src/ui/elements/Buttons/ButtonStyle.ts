@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { AppTheme } from 'src/ui/theme/AppTheme.ts'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
 import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
@@ -11,13 +11,13 @@ import hoverable = EmotionCommon.hoverable
 import Elem = ElementStyle.Elem
 import DataAttr = ElementStyle.DataAttr
 import Pseudo = ElementStyle.Pseudo
+import CssProp = ElementStyle.CssProp
 
 
 
 
 export namespace ButtonStyle {
   
-  import CssProp = ElementStyle.CssProp
   export const Attr = {
     error: DataAttr.error
   } as const

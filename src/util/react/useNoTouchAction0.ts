@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react'
-import commonCss from 'src/ui/styles/common.module.scss'
+import commonCss from 'src/ui/style/common.module.scss'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import PartialUndef = TypeUtils.PartialUndef
 

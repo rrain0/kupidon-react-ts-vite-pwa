@@ -15,7 +15,7 @@ import {
 } from 'src/ui/pages/ApplicationSettings/uiText'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ThemeNameUiText } from 'src/ui/ui-text/ui-values/ThemeNameUiText'
 import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui/theme/ThemeCollection.ts'

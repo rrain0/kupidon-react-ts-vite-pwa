@@ -70,7 +70,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
 export default defineConfig({
   server: {
     host: true, // expose app via IP access from local network
-    port: 40030,
+    port: 40029,
   },
   plugins: [
     react({

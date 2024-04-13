@@ -9,12 +9,15 @@ export namespace EmotionCommon {
     display: contents;
   `
   
-  
   export const abs = css`
     position: absolute;
     inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
   `
   
+  export const fixed = css`
+    position: fixed;
+    inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
+  `
   export const fixedTop = css`
     position: fixed;
     top: 0; right: 0; left: 0;
@@ -22,11 +25,6 @@ export namespace EmotionCommon {
   export const fixedBottom = css`
     position: fixed;
     right: 0; bottom: 0; left: 0;
-  `
-  
-  export const fixed = css`
-    position: fixed;
-    inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
   `
   
   export const row = css`
@@ -232,8 +230,34 @@ export namespace EmotionCommon {
   `
   
   
+  export const noScroll = css`
+    overflow: hidden;
+  `
+  export const noScrollX = css`
+    overflow-x: hidden;
+  `
+  export const noScrollY = css`
+    overflow-y: hidden;
+  `
   
-  export const rotateKfs = keyframes`
+  
+  export const noSelect = css`
+    user-select: none;
+  `
+  export const noTouchAction = css`
+    touch-action: none;
+  `
+  export const instantScroll = css`
+    scroll-behavior: auto;
+  `
+  
+  
+  
+  
+  
+  
+  
+  export const rotateAnim = keyframes`
     from { rotate: 0turn; }
     to { rotate: 1turn; }
   `

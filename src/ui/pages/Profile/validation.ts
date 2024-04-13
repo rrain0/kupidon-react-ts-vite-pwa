@@ -1,4 +1,4 @@
-import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
+import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'

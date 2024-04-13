@@ -1,13 +1,12 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
-import ModalOutlet from 'src/ui/components/Modal/ModalOutlet'
 import AppFrame from 'src/ui/pages/App/AppFrame'
 import ToastifySetup from 'src/ui/components/Toasts/ToastifySetup'
 import DragDetector from 'src/ui/pages/App/DragDetector'
 import LogLayer from 'src/ui/pages/App/LogLayer'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { useAppInstallationSetup } from 'src/util/app/useAppInstallationSetup'
 import { useLangSetup } from 'src/ui/lang/useLangSetup.ts'
 import { useThemeSetup } from 'src/ui/theme/useThemeSetup.ts'
@@ -47,8 +46,6 @@ React.memo(
     <DragDetector>
       <AppFrame/>
     </DragDetector>
-    
-    <ModalOutlet/>
     
     <ToastifySetup/>
     

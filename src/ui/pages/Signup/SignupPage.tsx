@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { GenderEnum } from 'src/api/entity/GenderEnum.ts'
+import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'

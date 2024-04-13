@@ -10,7 +10,7 @@ import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
 import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'

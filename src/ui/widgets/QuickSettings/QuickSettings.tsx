@@ -19,7 +19,7 @@ import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Setter = TypeUtils.Callback1
 import col = EmotionCommon.col

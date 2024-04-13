@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import { CurrentUser } from 'src/api/entity/CurrentUser'
+import { CurrentUser } from 'src/api/model/CurrentUser'
 import { resettableLocalStorageEffect } from '../RecoilPersist'
 
 

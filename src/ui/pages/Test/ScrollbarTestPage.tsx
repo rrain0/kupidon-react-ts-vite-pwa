@@ -6,7 +6,7 @@ import Scrollbar from 'src/ui/elements/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/ui/elements/Scrollbar/ScrollbarStyle.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import centerAll = EmotionCommon.centerAll
 import hideScrollbar = EmotionCommon.noScrollbars

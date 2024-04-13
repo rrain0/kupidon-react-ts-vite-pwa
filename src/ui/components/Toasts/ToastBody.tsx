@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
 import SpinnerCircleQuarterIc = SvgIcons.SpinnerCircleQuarterIc

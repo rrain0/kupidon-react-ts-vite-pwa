@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import classNames from "classnames"
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'

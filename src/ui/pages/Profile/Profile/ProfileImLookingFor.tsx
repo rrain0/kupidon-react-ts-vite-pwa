@@ -6,7 +6,7 @@ import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
   ValidationWrapRenderProps

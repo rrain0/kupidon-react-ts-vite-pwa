@@ -9,7 +9,7 @@ import EyeCrossedOutIc = SvgIcons.EyeCrossedOutIc
 import EyeIc = SvgIcons.EyeIc
 import Ripple from "src/ui/elements/Ripple/Ripple.tsx"
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import center = EmotionCommon.center
 import resetButton = EmotionCommon.resetButton

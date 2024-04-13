@@ -2,11 +2,10 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UseFakePointerRef from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import QuickSettings from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import SettingsButton from 'src/ui/elements/SettingsButton.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
-import { EmotionCommon } from 'src/ui/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useBoolState } from '@util/react/useBoolState.ts'
@@ -18,7 +17,7 @@ import fixedBottom = EmotionCommon.fixedBottom
 import row = EmotionCommon.row
 import Arrow5FwdIc = SvgIcons.ArrowLinesSharp1Ic
 import ArrowReloadIc = SvgIcons.ArrowReloadIc
-import rotateKfs = EmotionCommon.rotateKfs
+import rotateAnim = EmotionCommon.rotateAnim
 import fixedTop = EmotionCommon.fixedTop
 import PartialUndef = TypeUtils.PartialUndef
 import Callback = TypeUtils.Callback
@@ -152,7 +151,7 @@ export namespace ButtonBarComponents {
     >
       <ArrowReloadIc css={isReloading && css`
         ${SvgIcStyle.El.thiz.icon} {
-          animation: ${rotateKfs} 650ms linear infinite;
+          animation: ${rotateAnim} 650ms linear infinite;
         }
       `}
       />
@@ -181,11 +180,11 @@ export namespace ButtonBarComponents {
     >
       <ArrowReloadIc css={isAnimating && css`
         ${SvgIcStyle.El.thiz.icon} {
-          animation: ${rotateKfs} 650ms linear infinite;
+          animation: ${rotateAnim} 650ms linear infinite;
         }
       `}
         onAnimationIteration={ev=>{
-          if (ev.animationName===rotateKfs.name && !props.isLoading) finishAnimate()
+          if (ev.animationName===rotateAnim.name && !props.isLoading) finishAnimate()
         }}
       />
     </Button>

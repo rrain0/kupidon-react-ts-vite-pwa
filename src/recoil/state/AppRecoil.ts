@@ -5,7 +5,6 @@ import { atom } from 'recoil'
 
 export type AppRecoilType = {
   canInstall: boolean
-  modalOutletId: string | undefined
   isDraggingFiles: boolean
   isUsingGestures: false | string
   
@@ -13,7 +12,6 @@ export type AppRecoilType = {
 }
 const defolt: AppRecoilType = {
   canInstall: false,
-  modalOutletId: undefined,
   isDraggingFiles: false,
   isUsingGestures: false,
   showDevOverlay: false,
