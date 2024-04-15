@@ -52,43 +52,10 @@
   
   
   <script>
-    //console.log('setup app script: start setup')
+    //console.log('apply lang function - start setup')
     
-    
-    /** @type {readonly ['en-US','ru-RU']} */
-    const AllAppLangs = ['en-US','ru-RU']
-    
-    /**
-     * @type {{
-     *   readonly eng: 'en-US',
-     *   readonly us: 'ru-RU',
-     * }}
-     * */
-    const AppLangEnum = /** @type {const} */ ({
-      eng: 'en-US',
-      rus: 'ru-RU',
-    })
-    
-    /**
-     *
-     * @type {{
-     *   'ru-RU': string,
-     *   'en-US': string,
-     *   ru: string,
-     *   en: string
-     * }}
-     */
-    const AppLangsMap = {
-      'en-US': 'en-US',
-      'ru-RU': 'ru-RU',
-      'en': 'en-US',
-      'ru': 'ru-RU',
-    }
-    
-    
-    
-    /** @type {(langs: AllAppLangs | string[])=>void} */
-    const setHtmlTags = (langs)=>{
+    /** @type {(matchedLangs: NonEmptyArr<Lang.Supported>)=>void} */
+    const applyLangToHtml = (matchedLangs)=>{
       /**
        * @type {{
        *  nodeEnv: 'development'|'production',
@@ -105,61 +72,38 @@
         title: "Kupidon",
         description: "Kupidon date app",
       }
-      if (AllAppLangs.includes(langs?.[0])) {
-        htmlProps.lang = langs[0]
-        
-        const textPrefix = htmlProps.nodeEnv==='development' ? 'Dev ' : ''
-        
-        /** @type {UiText<'kupidon'>[]} */
-        const AppTitles = [
-          {
-            value: 'kupidon',
-            lang: 'en-US',
-            text: 'Kupidon',
-          },{
-            value: 'kupidon',
-            lang: 'ru-RU',
-            text: 'Купидон',
-          },
-        ]
-        /** @type {UiText<'kupidonDescription'>[]} */
-        const AppDescriptions = [
-          {
-            value: 'kupidonDescription',
-            lang: 'en-US',
-            text: 'Kupidon date app',
-          },{
-            value: 'kupidonDescription',
-            lang: 'ru-RU',
-            text: 'Купидон - приложение для свидания',
-          },
-        ]
-        
-        /** @type {<T>(uiTextValues: readonly UiText<T>[], langs: string[])=>UiText<T>}*/
-        const prepareUiText = (uiTextValues, langs)=>{
-          const used = new Set()
-          return [...uiTextValues]
-            .sort((a,b)=>{
-              if (a.value===b.value) {
-                let langIdxA = langs.findIndex(it=>it===a.lang)
-                let langIdxB = langs.findIndex(it=>it===b.lang)
-                if (langIdxA===-1) langIdxA = langs.length
-                if (langIdxB===-1) langIdxB = langs.length
-                return langIdxA - langIdxB
-              }
-              return 0
-            })
-            .filter(it=>{
-              if (used.has(it.value)) return false
-              used.add(it.value)
-              return true
-            })
-            [0]
-        }
-        
-        htmlProps.title = textPrefix + prepareUiText(AppTitles,langs).text
-        htmlProps.description = textPrefix + prepareUiText(AppDescriptions,langs).text
+      
+      /** @type {UiText} */
+      const AppTitles = {
+        'en-US': 'Kupidon',
+        'ru-RU': 'Купидон',
       }
+      /** @type {UiText} */
+      const AppDescriptions = {
+        'en-US': 'Kupidon date app',
+        'ru-RU': 'Купидон - приложение для свидания',
+      }
+      
+      /** @type {<V extends UiValue<any>>(uiValue: V, langs: string[]) => V[keyof V]} */
+      const pickUiValue =
+      (uiValue, langs) => {
+        // Some settings have implementation only in one language, e.g., language name.
+        return Object.entries(uiValue)
+          .toSorted(([a],[b])=>{
+            let aIdx = langs.findIndex(it=>it===a)
+            let bIdx = langs.findIndex(it=>it===b)
+            if (aIdx===-1) aIdx = langs.length
+            if (bIdx===-1) bIdx = langs.length
+            return aIdx - bIdx
+          })
+          [0][1]
+      }
+      
+      htmlProps.lang = matchedLangs[0]
+      
+      const textPrefix = htmlProps.nodeEnv==='development' ? 'Dev ' : ''
+      htmlProps.title = textPrefix + pickUiValue(AppTitles, matchedLangs)
+      htmlProps.description = textPrefix + pickUiValue(AppDescriptions, matchedLangs)
       
       const html = document.documentElement
       html.lang = htmlProps.lang
@@ -179,39 +123,68 @@
       const linkManifest = document.querySelector('html>head>link[rel=manifest]')
       linkManifest.href = manifestUrl
     }
-    
-    
+    //console.log('apply lang function - end setup')
+  </script>
+  
+  
+  <script>
+    //console.log('detect lang - start setup')
     
     const langSettingsLocalStorageName = 'langSettings'
     {
-      const langSettings = JSON.parse(localStorage.getItem(langSettingsLocalStorageName))
-      if (langSettings?.setting==='manual' && langSettings.manualSetting){
-        setHtmlTags(langSettings.manualSetting)
-      } else {
-        
-        /** @type {()=>string[]} */
-        const getLangs = ()=>{
-          let browserLangs = navigator.languages
-          if ((!browserLangs || !browserLangs.length) && navigator.language)
-            browserLangs = [navigator.language]
-          if (!browserLangs || !browserLangs.length) browserLangs = undefined
-          browserLangs = browserLangs?.map(it=>{
-            if (it.startsWith('en')) return 'en-US'
-            if (it.startsWith('ru')) return 'ru-RU'
+      const Lang = {
+        /** @type {Lang.Supported[]} */
+        AllSupported: ['en-US', 'ru-RU'],
+        Default: 'en-US',
+        Map: {
+          'en-US': 'en-US',
+          'ru-RU': 'ru-RU',
+          'en': 'en-US',
+          'ru': 'ru-RU',
+        }
+      }
+      
+      /** @type {(systemLangs: string[]) => Lang.Supported[]} */
+      const getMatchedLangs = (systemLangs) => {
+        let matchedLangs = systemLangs
+          .map(it=>{
+            let mapped = Lang.Map[it]
+            if (mapped) return mapped
+            mapped = Lang.Map[it.substring(0,2)]
+            if (mapped) return mapped
             return it
           })
-          return browserLangs
+          .filter(it=>Lang.AllSupported.includes(it))
+        return matchedLangs
+      }
+      
+      (()=>{
+        const langSettings = JSON.parse(localStorage.getItem(langSettingsLocalStorageName))
+          ?? {
+            setting: 'system',
+            manualSetting: undefined,
+          }
+        const lang = {
+          matchedSystemLangs: getMatchedLangs(navigator.languages)
         }
         
-        let langs = getLangs().filter(it=>AllAppLangs.includes(it))
-        langs = [...langs,'en-US']
-        
-        setHtmlTags(langs)
-      }
+        if (langSettings.setting==='system'){
+          const matched = lang.matchedSystemLangs
+          if (matched?.length) applyLangToHtml([...matched, Lang.Default])
+          else applyLangToHtml([Lang.Default])
+        }
+        else if (langSettings.setting==='manual') {
+          if (langSettings.manualSetting) applyLangToHtml([...langSettings.manualSetting, Lang.Default])
+          else applyLangToHtml([Lang.Default])
+        }
+      })()
     }
+    //console.log('detect lang - end setup')
+  </script>
     
-    
-    
+  
+  <script>
+    //console.log('app installation check - start setup')
     
     /*
     https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Trigger_install_prompt
@@ -272,7 +245,7 @@
     
     
     
-    //console.log('setup app script: end setup')
+    //console.log('app installation check - end setup')
   </script>
   
   

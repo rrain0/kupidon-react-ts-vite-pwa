@@ -10,7 +10,7 @@ import ObjectEntries = ObjectUtils.ObjectEntries
 
 
 const pickUiValue = <V extends UiValue<any>>
-(uiValue: V, langs: string[]): V[string] => {
+(uiValue: V, langs: string[]): V[keyof V] => {
   // Some settings have implementation only in one language, e.g., language name.
   return ObjectEntries(uiValue)
     .toSorted(([a],[b])=>{

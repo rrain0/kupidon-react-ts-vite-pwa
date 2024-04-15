@@ -6,7 +6,7 @@ import NonEmptyArr = ArrayUtils.NonEmptyArr
 
 declare global {
   
-  const setHtmlTags: (langs: NonEmptyArr<Lang>)=>void
+  const applyLangToHtml: (matchedLangs: NonEmptyArr<Lang.Supported>)=>void
   
   
   
@@ -40,21 +40,10 @@ declare global {
   
   
   
-  type AllAppLangsType = ['en-US','ru-RU']
-  const AllAppLangs: AllAppLangsType
-  type AppLangEnumType = {
-    readonly eng: 'en-US',
-    readonly rus: 'ru-RU',
-  }
-  const AppLangEnum: AppLangEnumType
-  
-  
-  
   const langSettingsLocalStorageName: string
   let beforeInstallPromptEvent: BeforeInstallPromptEvent | undefined
   let onBeforeInstallPromptEvent: ((ev: BeforeInstallPromptEvent|undefined)=>void) | undefined
   const setBeforeInstallPromptEvent: (ev: BeforeInstallPromptEvent|undefined)=>void
   const promptInstall: ()=>Promise<InstallationUserChoice|undefined>
-  
   
 }

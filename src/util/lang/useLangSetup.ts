@@ -18,7 +18,9 @@ import destructCopyBy = ObjectUtils.destructCopyBy
 const getMatchedLangs = (systemLangs: string[]): Lang.Supported[] => {
   let matchedLangs = systemLangs
     .map(it=>{
-      const mapped = Lang.Map[it]
+      let mapped = Lang.Map[it]
+      if (mapped) return mapped
+      mapped = Lang.Map[it.substring(0,2)]
       if (mapped) return mapped
       return it
     })
@@ -49,10 +51,13 @@ export const useLangSetup = ()=>{
     ()=>{
       if (langSettings.setting==='system'){
         const matched = lang.matchedSystemLangs
+        // language is not initialized yet, skip for next useLayoutEffect call
         if (!matched) return
+        // check if array has any language
         if (arrIsNonEmpty(matched)) setLang(destructCopyBy({
           langs: [...matched, Lang.Default],
         }))
+        // or else switch to manual mode
         else setLangSettings(destructCopyBy({
           setting: 'manual',
         }))
@@ -72,9 +77,7 @@ export const useLangSetup = ()=>{
   
   // apply to html
   useLayoutEffect(()=>{
-    if (lang.langs){
-      setHtmlTags(lang.langs)
-    }
+    if (lang.langs) applyLangToHtml(lang.langs)
   },[lang.langs])
   
 }

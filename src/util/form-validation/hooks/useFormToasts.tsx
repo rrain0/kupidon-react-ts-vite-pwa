@@ -93,7 +93,10 @@ export const useFormToasts =
         msg: <ToastMsg
           uiOption={function(){
             if (serverFailure.code==='unknown-error') {
-              return ObjectMap<UiTemplate<[string]>, UiText>(
+              return ObjectMap<
+                typeof ErrorUiText.unknownErrorTemplate,
+                UiText<keyof typeof ErrorUiText.unknownErrorTemplate>
+              >(
                 ErrorUiText.unknownErrorTemplate,
                 ([key, value])=>[key, value(JSON.stringify(serverFailure.extra.error))]
               )

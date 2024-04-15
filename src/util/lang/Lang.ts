@@ -4,7 +4,7 @@ import ArrayElement = ArrayUtils.ArrayElement
 
 export namespace Lang {
   
-  export const AllSupported = ['en-US', 'ru-RU']
+  export const AllSupported = ['en-US', 'ru-RU'] as const
   
   export type Supported = ArrayElement<typeof AllSupported>
   
