@@ -4,6 +4,7 @@ import { useMedia } from 'src/util/react/media/useMedia.ts'
 import ThemeType = AppTheme.Type
 
 
+
 /*
   https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
   css 'color-scheme: light dark;'
@@ -23,6 +24,7 @@ export const useThemeDetector = (): ThemeType|undefined => {
     edgeDesktopVersion: '79',
     feature: 'css prefers-color-scheme media feature',
   })
+  
   const isLight = useMedia('(prefers-color-scheme: light)')
   const isDark = useMedia('(prefers-color-scheme: dark)')
   if (isLight) return 'light'

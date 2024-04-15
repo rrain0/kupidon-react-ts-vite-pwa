@@ -11,13 +11,9 @@ import Theme = AppTheme.Theme
 
 export type ThemeRecoilType = {
   theme: Theme
-  themeIsReady: boolean
-  systemThemeAvailable: boolean | undefined
 }
 const Default: ThemeRecoilType = {
   theme: DefaultTheme,
-  themeIsReady: false,
-  systemThemeAvailable: undefined,
 }
 export const ThemeRecoil = atom<ThemeRecoilType>({
   key: 'theme',

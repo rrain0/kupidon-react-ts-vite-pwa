@@ -24,25 +24,23 @@ React.memo(
 ()=>{
   useAppInstallationSetup()
   useLangSetup()
-  useThemeSetup()
+  const themeIsReady = useThemeSetup()
   
   const theme = useRecoilValue(ThemeRecoil)
   
-  
-  if (!theme.themeIsReady) return <></>
   return <CheckBrowserMinimumVersion>
-    <ThemeProvider theme={theme.theme}>
+    {themeIsReady && <ThemeProvider theme={theme.theme}>
       
       <Global styles={t => css`
-      body {
-        // will be WINDOW background
-        background: ${t.page.bgc[0]};
-      }
-      
-      * {
-        ${isMobile && noScrollbars};
-      }
-    `}/>
+        body {
+          // will be WINDOW background
+          background: ${t.page.bgc[0]};
+        }
+        
+        * {
+          ${isMobile && noScrollbars};
+        }
+      `}/>
       
       <DragDetector>
         <AppFrame/>
@@ -52,7 +50,7 @@ React.memo(
       
       <LogLayer/>
     
-    </ThemeProvider>
+    </ThemeProvider>}
   </CheckBrowserMinimumVersion>
 })
 export default App

@@ -6,7 +6,7 @@ import {
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
 import { Utils } from 'src/util/common/Utils.ts'
-import copyDestrCb = ObjectUtils.copyDestrCb
+import destructCopyBy = ObjectUtils.destructCopyBy
 import versionToNumArr = Utils.versionToNumArr
 
 
@@ -42,26 +42,26 @@ export const useBrowserMinimumVersion = (minimumVersions: BrowserVersions & { fe
   
   useEffect(()=>{
     if (ArrayUtils.isGreater(versionToNumArr(chromeDesktopVersion), versionToNumArr(state.chromeDesktopVersion)))
-      set(copyDestrCb({ chromeDesktopVersion, chromeDesktopFeature: feature }))
+      set(destructCopyBy({ chromeDesktopVersion, chromeDesktopFeature: feature }))
   }, [chromeDesktopVersion, feature])
   
   useEffect(()=>{
     if (ArrayUtils.isGreater(versionToNumArr(chromeAndroidVersion), versionToNumArr(state.chromeAndroidVersion)))
-      set(copyDestrCb({ chromeAndroidVersion, chromeAndroidFeature: feature }))
+      set(destructCopyBy({ chromeAndroidVersion, chromeAndroidFeature: feature }))
   }, [chromeAndroidVersion, feature])
   
   useEffect(()=>{
     if (ArrayUtils.isGreater(versionToNumArr(safariDesktopVersion), versionToNumArr(state.safariDesktopVersion)))
-      set(copyDestrCb({ safariDesktopVersion, safariDesktopFeature: feature }))
+      set(destructCopyBy({ safariDesktopVersion, safariDesktopFeature: feature }))
   }, [safariDesktopVersion, feature])
   
   useEffect(()=>{
     if (ArrayUtils.isGreater(versionToNumArr(safariIosVersion), versionToNumArr(state.safariIosVersion)))
-      set(copyDestrCb({ safariIosVersion, safariIosFeature: feature }))
+      set(destructCopyBy({ safariIosVersion, safariIosFeature: feature }))
   }, [safariIosVersion, feature])
   
   useEffect(()=>{
     if (ArrayUtils.isGreater(versionToNumArr(edgeDesktopVersion), versionToNumArr(state.edgeDesktopVersion)))
-      set(copyDestrCb({ edgeDesktopVersion, edgeDesktopFeature: feature }))
+      set(destructCopyBy({ edgeDesktopVersion, edgeDesktopFeature: feature }))
   }, [edgeDesktopVersion, feature])
 }

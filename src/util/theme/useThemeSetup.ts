@@ -1,10 +1,12 @@
-import { useLayoutEffect, useMemo } from 'react'
-import { useRecoilState } from 'recoil'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { themeByName } from 'src/ui/theme/ThemeCollection.ts'
+import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
 import { useBrowserMinimumVersion } from 'src/util/react/useBrowserMinimumVersion.ts'
 import { useThemeDetector } from 'src/util/theme/useThemeDetector.ts'
+import destructCopyBy = ObjectUtils.destructCopyBy
 
 
 
@@ -18,74 +20,60 @@ export const useThemeSetup = ()=>{
     edgeDesktopVersion: '81',
     feature: 'css color-scheme',
   })
-  const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
+  
+  const themeSettings = useRecoilValue(ThemeSettingsRecoil)
   const [theme, setTheme] = useRecoilState(ThemeRecoil)
-  const systemTheme = useThemeDetector()
-  const systemThemeMemo = useMemo(()=>{
   
-  }, [systemTheme])
+  const systemTheme = function(){
+    const systemTheme = useThemeDetector()
+    const [systemThemeMemo, setSystemThemeMemo] = useState(systemTheme)
+    useEffect(()=>{
+      if (systemTheme) setSystemThemeMemo(systemTheme)
+    }, [systemTheme])
+    return systemThemeMemo
+  }()
   
-  
-  useLayoutEffect(
-    ()=>{
-      //console.log('systemTheme',systemTheme)
-      if (systemTheme) setTheme(s=>({
-        ...s,
-        systemThemeAvailable: true,
-      }))
-      else setTheme(s=>({
-        ...s,
-        systemThemeAvailable: false,
-      }))
-    },
-    [setTheme, systemTheme]
-  )
-  
+  const [themeIsReady, setThemeIsReady] = useState(false)
   
   useLayoutEffect(
     ()=>{
       const setting = themeSettings.setting
       if (setting==='system'){
-        if (systemTheme==='light')
-          setTheme(s=>({
-            ...s,
+        if (systemTheme==='light'){
+          setTheme(destructCopyBy({
             theme: themeByName(themeSettings.light),
-            themeIsReady: true,
           }))
-        else if (systemTheme==='dark')
-          setTheme(s=>({
-            ...s,
+          setThemeIsReady(true)
+        }
+        else if (systemTheme==='dark') {
+          setTheme(destructCopyBy({
             theme: themeByName(themeSettings.dark),
-            themeIsReady: true,
           }))
+          setThemeIsReady(true)
+        }
         else {
-          /* setThemeSettings(s=>({
-            ...s,
-            setting: 'manual',
-          })) */
-          setTheme(s=>({
-            ...s,
+          setTheme(destructCopyBy({
             theme: themeByName(themeSettings.light),
-            themeIsReady: true,
           }))
+          setThemeIsReady(true)
         }
       }
       else if (setting==='manual'){
-        if (themeSettings.manualSetting==='light')
-          setTheme(s=>({
-            ...s,
+        if (themeSettings.manualSetting==='light') {
+          setTheme(destructCopyBy({
             theme: themeByName(themeSettings.light),
-            themeIsReady: true,
           }))
-        else if (themeSettings.manualSetting==='dark')
-          setTheme(s=>({
-            ...s,
+          setThemeIsReady(true)
+        }
+        else if (themeSettings.manualSetting==='dark') {
+          setTheme(destructCopyBy({
             theme: themeByName(themeSettings.dark),
-            themeIsReady: true,
           }))
+          setThemeIsReady(true)
+        }
       }
     },
-    [setTheme, setThemeSettings, systemTheme, themeSettings]
+    [systemTheme, themeSettings]
   )
   
   
@@ -111,4 +99,5 @@ export const useThemeSetup = ()=>{
     [theme.theme]
   )
   
+  return themeIsReady
 }

@@ -44,10 +44,9 @@ const ThemeOptions = React.memo(
           icon: <MoonIc css={SettingsOptions.iconSmall}/>,
       }
     ] satisfies { value: ThemeType|'system', [prop: string]: any }[]
-      if (!theme.systemThemeAvailable) opts = opts.filter(it=>it.value!=='system')
       return opts
     },
-    [uiText, theme.systemThemeAvailable]
+    [uiText]
   )
   const themeOptionChecked = useCallback(
     function (value: ThemeType|'system') {

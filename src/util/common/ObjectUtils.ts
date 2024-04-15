@@ -3,6 +3,7 @@ import anyval = TypeUtils.anyval
 import WriteablePartial = TypeUtils.WriteablePartial
 
 
+
 export namespace ObjectUtils {
   
   
@@ -16,10 +17,10 @@ export namespace ObjectUtils {
     Object.assign(newInstance, update)
     return newInstance
   }
-  export const copyCallback =
+  export const copyBy =
     <T extends object>(update: NoInfer<WriteablePartial<T>>)=>(orig: T)=>copy(orig, update)
   
-  export const copyDestrCb =
+  export const destructCopyBy =
     <T extends object>(update: NoInfer<WriteablePartial<T>>)=>(orig: T)=>({ ...orig, ...update })
   
   
