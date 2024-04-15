@@ -1,8 +1,8 @@
-import { LoginPageUiText } from 'src/ui/pages/Login/uiText'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { AuthApi } from 'src/api/requests/AuthApi'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from '@util/ui-text0/UiText.ts'
+import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData
@@ -26,12 +26,12 @@ export namespace LoginPageValidation {
   
   
   export const mapFailureCodeToUiText = {
-    'login-required': LoginPageUiText.loginNotEntered,
-    'login-incorrect': LoginPageUiText.loginFormatIsIncorrect,
-    'pwd-required': LoginPageUiText.pwdNotEntered,
-    'NO_USER': LoginPageUiText.noUserWithSuchLoginPwd,
-    'connection-error': LoginPageUiText.connectionError,
-    'unknown-error': LoginPageUiText.unknownError,
+    'login-required': ErrorUiText.loginIsNotEntered,
+    'login-incorrect': ErrorUiText.loginFormatIsIncorrect,
+    'pwd-required': ErrorUiText.pwdIsNotEntered,
+    'NO_USER': ErrorUiText.noUserWithSuchLoginPwd,
+    'connection-error': ErrorUiText.connectionError,
+    'unknown-error': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   

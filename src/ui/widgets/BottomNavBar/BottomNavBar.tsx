@@ -4,10 +4,10 @@ import classNames from 'classnames'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { BottomNavBarUiText } from 'src/ui/widgets/BottomNavBar/uiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
@@ -33,7 +33,7 @@ const BottomNavBar =
 React.memo(
 ()=>{
   
-  const uiText = useUiValues(BottomNavBarUiText)
+  const titleText = useUiValues(TitleUiText)
   
   
   return <>
@@ -54,28 +54,28 @@ React.memo(
       <NavLink to={RootRoute.profile[full]()}>
         <Button css={ButtonStyle.nav}>
           <ProfileIc/>
-          <div>{uiText.profile.text}</div>
+          <div>{titleText.profile}</div>
         </Button>
       </NavLink>
       
       <NavLink to={RootRoute.chat[full]()}>
         <Button css={ButtonStyle.nav}>
           <ChatRoundIc/>
-          <div>{uiText.chat.text}</div>
+          <div>{titleText.chat}</div>
         </Button>
       </NavLink>
       
       <NavLink to={RootRoute.findPairs[full]()}>
         <Button css={ButtonStyle.nav}>
           <CardsHeartIc/>
-          <div>{uiText.findCouples.text}</div>
+          <div>{titleText.findCouple}</div>
         </Button>
       </NavLink>
       
       <NavLink to={RootRoute.bowAndArrows[full]()}>
         <Button css={ButtonStyle.nav}>
           <BowArrowIc/>
-          <div>{uiText.bowAndArrows.text}</div>
+          <div>{titleText.bowAndArrows}</div>
         </Button>
       </NavLink>
       
@@ -88,7 +88,7 @@ React.memo(
               {...onPointerClick(bool.setTrue)}
             >
               <Gear2Ic/>
-              <div>{uiText.settings.text}</div>
+              <div>{titleText.settings}</div>
             </Button>
           </NavLink>
           <QuickSettings open={bool.value} setOpen={bool.setValue}/>

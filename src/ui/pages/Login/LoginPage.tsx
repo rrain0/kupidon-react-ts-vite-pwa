@@ -3,18 +3,21 @@ import { AuthApi } from 'src/api/requests/AuthApi'
 import { useSetRecoilState } from 'recoil'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
+import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
+import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
-import { LoginPageUiText } from 'src/ui/pages/Login/uiText'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useFormFailures } from '@util/form-validation/hooks/useFormFailures'
 import { useFormSubmit } from '@util/form-validation/hooks/useFormSubmit'
 import { useFormToasts } from '@util/form-validation/hooks/useFormToasts'
 import ValidationWrap from '@util/form-validation/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder'
 import Button from 'src/ui/elements/Buttons/Button'
 import Input from 'src/ui/elements/inputs/Input/Input'
@@ -50,7 +53,9 @@ React.memo(
   
   const setAuth = useSetRecoilState(AuthRecoil)
   
-  const uiText = useUiValues(LoginPageUiText)
+  const actionText = useUiValues(ActionUiText)
+  const titleText = useUiValues(TitleUiText)
+  const placeholderText = useUiValues(PlaceholderUiText)
   
   const {
     formValues, setFormValues,
@@ -111,9 +116,9 @@ React.memo(
   
   useFormToasts({
     isLoading,
-    loadingText: LoginPageUiText.loggingIn,
+    loadingText: StatusUiText.loggingIn,
     isSuccess,
-    successText: LoginPageUiText.loginCompleted,
+    successText: StatusUiText.loginCompleted,
     failures: failures,
     setFailures: setFailures,
     failureCodeToUiText: mapFailureCodeToUiOption,
@@ -145,14 +150,14 @@ React.memo(
       <Pages.SafeInsets>
         <Pages.ContentForm onSubmit={onFormSubmitCallback}>
           
-          <FormHeader>{uiText.login.text}</FormHeader>
+          <FormHeader>{titleText.login}</FormHeader>
           
           
           <ValidationWrap {...validationProps}
             fieldName="login"
             render={props => <Input
               css={InputStyle.inputNormal}
-              placeholder={uiText.loginEmailPlaceholder.text}
+              placeholder={placeholderText.loginEmail}
               {...props.inputProps}
               hasError={props.highlight}
             />}
@@ -162,7 +167,7 @@ React.memo(
             fieldName="pwd"
             render={props => <PwdInput
               css={InputStyle.inputNormal}
-              placeholder={uiText.pwdPlaceholder.text}
+              placeholder={placeholderText.pwd}
               {...props.inputProps}
               hasError={props.highlight}
             />}
@@ -173,13 +178,13 @@ React.memo(
             css={ButtonStyle.bigRectMain}
             type="submit"
           >
-            {uiText.doLogin.text}
+            {actionText.login}
           </Button>
           
           
           <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
             <Button css={ButtonStyle.bigRectAccent}>
-              {uiText.signup.text}
+              {actionText.signup}
             </Button>
           </Link>
         

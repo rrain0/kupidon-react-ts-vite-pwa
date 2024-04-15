@@ -1,8 +1,8 @@
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { PwdChangeUiText } from 'src/ui/pages/PwdChange/uiText.ts'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from '@util/ui-text0/UiText.ts'
+import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd
 import PartialFailureData = ValidationCore.PartialFailureData
@@ -35,16 +35,16 @@ export namespace PwdChangePageValidation {
   
   
   export const mapFailureCodeToUiText = {
-    'current-pwd-required': PwdChangeUiText.currentPwdNotEntered,
-    'current-pwd-too-long': PwdChangeUiText.currentPwdMaxLenIs200,
-    'pwd-required': PwdChangeUiText.pwdIsNotEntered,
-    'pwd-incorrect': PwdChangeUiText.pwdFormatIsIncorrect,
-    'pwd-too-long': PwdChangeUiText.pwdMaxLenIs200,
-    'repeated-pwd-required': PwdChangeUiText.repeatPwd,
-    'repeated-pwd-not-match': PwdChangeUiText.passwordsDoNotMatch,
-    "INVALID_PWD": PwdChangeUiText.invalidPwd,
-    'connection-error': PwdChangeUiText.connectionError,
-    'unknown-error': PwdChangeUiText.unknownError,
+    'current-pwd-required': ErrorUiText.currentPwdNotEntered,
+    'current-pwd-too-long': ErrorUiText.currentPwdMaxLenIs200,
+    'pwd-required': ErrorUiText.pwdIsNotEntered,
+    'pwd-incorrect': ErrorUiText.pwdFormatIsIncorrect,
+    'pwd-too-long': ErrorUiText.pwdMaxLenIs200,
+    'repeated-pwd-required': ErrorUiText.repeatPwd,
+    'repeated-pwd-not-match': ErrorUiText.passwordsDoNotMatch,
+    "INVALID_PWD": ErrorUiText.wrongPwd,
+    'connection-error': ErrorUiText.connectionError,
+    'unknown-error': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   

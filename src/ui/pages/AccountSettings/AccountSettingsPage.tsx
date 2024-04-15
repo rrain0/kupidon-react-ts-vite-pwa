@@ -5,6 +5,9 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
+import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
@@ -12,7 +15,6 @@ import ItemContainer from 'src/ui/elements/basic-elements/ItemContainer'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
-import { AccountSettingsUiText } from 'src/ui/pages/AccountSettings/uiText'
 import { AccountSettingsPageValidation } from 'src/ui/pages/AccountSettings/validation'
 import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
@@ -20,7 +22,7 @@ import { ObjectUtils } from 'src/util/common/ObjectUtils'
 import { useFormFailures } from '@util/form-validation/hooks/useFormFailures'
 import { useFormSubmit } from '@util/form-validation/hooks/useFormSubmit'
 import { useFormToasts } from '@util/form-validation/hooks/useFormToasts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { formSubmitPreventDefault } from '@util/react/formSubmitPreventDefault'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder'
 import { useEffectEvent } from '@util/react/useEffectEvent'
@@ -54,7 +56,8 @@ const AccountSettingsPage =
 React.memo(
 ()=>{
   
-  const uiText = useUiValues(AccountSettingsUiText)
+  const titleText = useUiValues(TitleUiText)
+  const actionText = useUiValues(ActionUiText)
   
   const [auth,setAuth] = useRecoilState(AuthRecoil)
   const resetAuth = useResetRecoilState(AuthRecoil)
@@ -198,9 +201,9 @@ React.memo(
   
   useFormToasts({
     isLoading,
-    loadingText: AccountSettingsUiText.update,
+    loadingText: StatusUiText.updating,
     isSuccess,
-    successText: AccountSettingsUiText.updated,
+    successText: StatusUiText.updated,
     failures: failures,
     setFailures: setFailures,
     failureCodeToUiText: mapFailureCodeToUiText,
@@ -224,14 +227,14 @@ React.memo(
       <Pages.SafeInsets>
         <Pages.ContentForm onSubmit={formSubmitPreventDefault}>
           
-          <FormHeader>{uiText.account.text}</FormHeader>
+          <FormHeader>{titleText.account}</FormHeader>
           
           
           <Card>
             
             
             <ItemContainer>
-              <ItemLabel>{uiText.id.text}</ItemLabel>
+              <ItemLabel>{titleText.id}</ItemLabel>
               <Input
                 css={InputStyle.input(
                   { size: 'small', textSize: 'smaller', static: true },
@@ -242,7 +245,7 @@ React.memo(
             </ItemContainer>
             
             <ItemContainer>
-              <ItemLabel>{uiText.email.text}</ItemLabel>
+              <ItemLabel>{titleText.email}</ItemLabel>
               <Input
                 css={InputStyle.input(
                   { size: 'small', static: true },
@@ -253,21 +256,21 @@ React.memo(
             </ItemContainer>
             
             <ItemContainer>
-              <ItemLabel>{uiText.emailVerified.text}</ItemLabel>
+              <ItemLabel>{titleText.emailVerified}</ItemLabel>
               <Input
                 css={InputStyle.input(
                   { size: 'small', static: true },
                 )}
                 readOnly
                 value={user.emailVerified
-                  ? uiText.yes.text.toLowerCase()
-                  : uiText.no.text.toLowerCase()
+                  ? actionText.yes.toLowerCase()
+                  : actionText.no.toLowerCase()
                 }
               />
             </ItemContainer>
             
             {/* <ItemContainer>
-             <ItemLabel>{uiText.userCreated.text}</ItemLabel>
+             <ItemLabel>{titleText.userCreated}</ItemLabel>
              <Input
              css={InputStyle.input(
              { size: 'small', static: true }
@@ -278,7 +281,7 @@ React.memo(
              </ItemContainer>
              
              <ItemContainer>
-             <ItemLabel>{uiText.userUpdated.text}</ItemLabel>
+             <ItemLabel>{titleText.userUpdated}</ItemLabel>
              <Input
              css={InputStyle.input(
              { size: 'small', static: true }
@@ -289,14 +292,14 @@ React.memo(
              </ItemContainer> */}
             
             <ItemContainer>
-              <ItemLabel>{uiText.userCreated.text}</ItemLabel>
+              <ItemLabel>{titleText.userCreated}</ItemLabel>
               <DataField css={DataFieldStyle.statikSmall}>
                 {new Date(user.created) + ''}
               </DataField>
             </ItemContainer>
             
             <ItemContainer>
-              <ItemLabel>{uiText.userUpdated.text}</ItemLabel>
+              <ItemLabel>{titleText.userUpdated}</ItemLabel>
               <DataField css={DataFieldStyle.statikSmall}>
                 {new Date(user.updated) + ''}
               </DataField>
@@ -309,7 +312,7 @@ React.memo(
           <div css={notInCard}>
             <Link to={RootRoute.settings.pwdChange[full]()}>
               <Button css={ButtonStyle.bigRectAccent}>
-                {uiText.changePwd.text}
+                {titleText.pwdChange}
               </Button>
             </Link>
           </div>
@@ -318,7 +321,7 @@ React.memo(
             <Button css={ButtonStyle.bigRectAccent}
               onClick={resetAuth}
             >
-              {uiText.logOutFromAccount.text}
+              {actionText.logOutFromAccount}
             </Button>
           </div>
           
@@ -327,7 +330,7 @@ React.memo(
               onClick={undefined}
               disabled
             >
-              {uiText.deleteAccount.text}
+              {actionText.deleteAccount}
             </Button>
           </div>
         

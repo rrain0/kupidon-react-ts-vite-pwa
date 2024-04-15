@@ -1,21 +1,18 @@
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-import { useBoolState } from '@util/react/useBoolState.ts'
 import { useOverlayState } from '@util/react/useOverlayState.ts'
-import React, { useCallback, useLayoutEffect, useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import React from 'react'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
-import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/elements/cards/Card2.tsx'
@@ -35,8 +32,9 @@ const overlayName = 'name'
 const ProfileName =
 React.memo(
 (props: ValidationWrapRenderProps<string>)=>{
-  const uiText = useUiValues(ProfileUiText)
-  const uiActionText = useUiValues(ActionUiText)
+  const titleText = useUiValues(TitleUiText)
+  const actionText = useUiValues(ActionUiText)
+  
   
   const [isOpen, open, close] = useOverlayState(overlayName)
   
@@ -45,7 +43,7 @@ React.memo(
       
     <OptionAndValueItem
       icon={<NameCardIc css={css`height: 50%`}/>}
-      title={uiText.name.text}
+      title={titleText.name}
       value={props.value}
       data-error={props.highlight}
       nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
@@ -73,10 +71,10 @@ React.memo(
           `}
             onClick={ev => ev.stopPropagation()}
           >
-            <ItemLabel>{uiText.name.text}</ItemLabel>
+            <ItemLabel>{titleText.name}</ItemLabel>
             <Input css={InputStyle.inputSmall}
               autoFocus
-              placeholder={uiText.name.text.toLowerCase()}
+              placeholder={titleText.name.toLowerCase()}
               {...props.inputProps}
               hasError={props.highlight}
               onBlur={ev => {
@@ -91,7 +89,7 @@ React.memo(
             `}>
               <Button css={ButtonStyle.roundedSmallSecondary}
                 onClick={close}
-                children={uiActionText.ok.text}
+                children={actionText.ok}
               />
             </div>
           </Card2>

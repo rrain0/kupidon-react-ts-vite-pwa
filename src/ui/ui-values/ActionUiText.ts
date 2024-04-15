@@ -1,122 +1,80 @@
-import { Lang } from '@util/lang0/Lang.ts'
-import { UiText, UiValues } from '@util/ui-text0/UiText.ts'
-import AppLangEnum = Lang.AppLangEnum
-
+import { UiValues } from '@util/ui-text/UiText.ts'
 
 
 
 export const ActionUiText = {
   
-  
-  ok: [
-    {
-      value: 'ok',
-      lang: AppLangEnum.eng,
-      text: 'Ok',
-    }, {
-      value: 'ok',
-      lang: AppLangEnum.rus,
-      text: 'Ок',
-    },
-  ] satisfies UiText<'ok'>[],
-  
-  
-  remove: [
-    {
-      value: 'remove',
-      lang: AppLangEnum.eng,
-      text: 'Remove',
-    }, {
-      value: 'remove',
-      lang: AppLangEnum.rus,
-      text: 'Удалить',
-    },
-  ] satisfies UiText<'remove'>[],
-  
-  
-  replace: [
-    {
-      value: 'replace',
-      lang: AppLangEnum.eng,
-      text: 'Replace',
-    }, {
-      value: 'replace',
-      lang: AppLangEnum.rus,
-      text: 'Заменить',
-    },
-  ] satisfies UiText<'replace'>[],
-  
-  
-  download: [
-    {
-      value: 'download',
-      lang: AppLangEnum.eng,
-      text: 'Download',
-    }, {
-      value: 'download',
-      lang: AppLangEnum.rus,
-      text: 'Скачать',
-    },
-  ] satisfies UiText<'download'>[],
+  ok: {
+    'en-US': 'Ok',
+    'ru-RU': 'Ок',
+  },
+  yes: {
+    'en-US': 'Yes',
+    'ru-RU': 'Да',
+  },
+  no: {
+    'en-US': 'No',
+    'ru-RU': 'Нет',
+  },
+  reset: {
+    'en-US': 'Reset',
+    'ru-RU': 'Сброс',
+  },
+  remove: {
+    'en-US': 'Remove',
+    'ru-RU': 'Удалить',
+  },
+  replace: {
+    'en-US': 'Replace',
+    'ru-RU': 'Заменить',
+  },
+  download: {
+    'en-US': 'Download',
+    'ru-RU': 'Скачать',
+  },
+  fullScreenView: {
+    'en-US': 'Fullscreen view',
+    'ru-RU': 'В полный экран',
+  },
+  save: {
+    'en-US': 'Save',
+    'ru-RU': 'Сохранить',
+  },
+  cancel: {
+    'en-US': 'Cancel',
+    'ru-RU': 'Отменить',
+  },
   
   
-  fullScreenView: [
-    {
-      value: 'fullScreenView',
-      lang: AppLangEnum.eng,
-      text: 'Fullscreen view',
-    }, {
-      value: 'fullScreenView',
-      lang: AppLangEnum.rus,
-      text: 'В полный экран',
-    },
-  ] satisfies UiText<'fullScreenView'>[],
+  clearAppData: {
+    'en-US': 'Clear app data',
+    'ru-RU': 'Очистить данные приложения',
+  },
+  installApp: {
+    'en-US': 'Install App',
+    'ru-RU': 'Установить Приложение',
+  },
   
-  save: [
-    {
-      value: 'save',
-      lang: AppLangEnum.eng,
-      text: 'Save',
-    }, {
-      value: 'save',
-      lang: AppLangEnum.rus,
-      text: 'Сохранить',
-    },
-  ] satisfies UiText<'save'>[],
-  saving: [
-    {
-      value: 'saving',
-      lang: AppLangEnum.eng,
-      text: 'Saving',
-    }, {
-      value: 'saving',
-      lang: AppLangEnum.rus,
-      text: 'Сохранение',
-    },
-  ] satisfies UiText<'saving'>[],
-  saved: [
-    {
-      value: 'saved',
-      lang: AppLangEnum.eng,
-      text: 'Saved',
-    }, {
-      value: 'saved',
-      lang: AppLangEnum.rus,
-      text: 'Сохранено',
-    },
-  ] satisfies UiText<'saved'>[],
   
-  cancel: [
-    {
-      value: 'cancel',
-      lang: AppLangEnum.eng,
-      text: 'Cancel',
-    }, {
-      value: 'cancel',
-      lang: AppLangEnum.rus,
-      text: 'Отменить',
-    },
-  ] satisfies UiText<'cancel'>[],
-  
+  login: {
+    'en-US': 'Login',
+    'ru-RU': 'Войти',
+  },
+  signup: {
+    'en-US': 'Sign up',
+    'ru-RU': 'Зарегистрироваться',
+  },
+  logOutFromAccount: {
+    'en-US': 'Log out of your account',
+    'ru-RU': 'Выйти из аккаунта',
+  },
+  deleteAccount: {
+    'en-US': 'Delete Account',
+    'ru-RU': 'Удалить Аккаунт',
+  },
+  changePwd: {
+    'en-US': 'Change password',
+    'ru-RU': 'Изменить пароль',
+  },
   
 } satisfies UiValues

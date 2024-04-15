@@ -1,11 +1,10 @@
 import russiaFlag from '@ic/country-flag/russia-flag-icon.png'
 import usaFlag from '@ic/country-flag/usa-flag-icon.jpg'
-import { Lang } from '@util/lang0/Lang.ts'
-import AppLangType = Lang.AppLangType
+import { UiValue } from '@util/ui-text/UiText.ts'
 
 
 
-export const CountryFlag: Record<AppLangType, string> = {
+export const CountryFlag = {
   'en-US': usaFlag,
   'ru-RU': russiaFlag,
-}
+} satisfies UiValue<any>

@@ -1,7 +1,4 @@
-import { Lang } from '@util/lang0/Lang.ts'
-import { UiText, UiTextValues } from '@util/ui-text0/UiText.ts'
-import { AllThemeNamesType } from 'src/ui/theme/ThemeCollection.ts'
-import AppLangEnum = Lang.AppLangEnum
+import { UiValues } from '@util/ui-text/UiText.ts'
 
 
 
@@ -9,135 +6,54 @@ import AppLangEnum = Lang.AppLangEnum
 export const ThemeNameUiText = {
   
   
-  'Light Simple': [
-    {
-      value: 'Light Simple',
-      lang: AppLangEnum.eng,
-      text: 'Light',
-    },{
-      value: 'Light Simple',
-      lang: AppLangEnum.rus,
-      text: 'Светлая',
-    },
-  ] satisfies UiText<'Light Simple'>[],
+  'Light Simple': {
+    'en-US': 'Light',
+    'ru-RU': 'Светлая',
+  },
+  'Dark Simple': {
+    'en-US': 'Dark',
+    'ru-RU': 'Add',
+  },
   
   
-  'Dark Simple': [
-    {
-      value: 'Dark Simple',
-      lang: AppLangEnum.eng,
-      text: 'Dark',
-    },{
-      value: 'Dark Simple',
-      lang: AppLangEnum.rus,
-      text: 'Тёмная',
-    },
-  ] satisfies UiText<'Dark Simple'>[],
+  'Light Simple Pink': {
+    'en-US': 'Light Simple Pink',
+    'ru-RU': 'Светлая с розовым',
+  },
+  'Dark Simple Pink': {
+    'en-US': 'Dark Simple Pink',
+    'ru-RU': 'Тёмная с розовым',
+  },
   
   
-  'Light Simple Pink': [
-    {
-      value: 'Light Simple Pink',
-      lang: AppLangEnum.eng,
-      text: 'Light Simple Pink',
-    },{
-      value: 'Light Simple Pink',
-      lang: AppLangEnum.rus,
-      text: 'Светлая с розовым',
-    },
-  ] satisfies UiText<'Light Simple Pink'>[],
+  'Light Pink': {
+    'en-US': 'Light Pink',
+    'ru-RU': 'Светлая Розовая',
+  },
+  'Dark Pink': {
+    'en-US': 'Dark Pink',
+    'ru-RU': 'Тёмная Розовая',
+  },
   
   
-  'Dark Simple Pink': [
-    {
-      value: 'Dark Simple Pink',
-      lang: AppLangEnum.eng,
-      text: 'Dark Simple Pink',
-    },{
-      value: 'Dark Simple Pink',
-      lang: AppLangEnum.rus,
-      text: 'Тёмная с розовым',
-    },
-  ] satisfies UiText<'Dark Simple Pink'>[],
+  'Light Pink Gradient': {
+    'en-US': 'Light Pink Gradient',
+    'ru-RU': 'Светлая Розовая Градиент',
+  },
+  'Dark Pink Gradient': {
+    'en-US': 'Dark Pink Gradient',
+    'ru-RU': 'Тёмная розовая Градиент',
+  },
   
   
-  'Light Pink': [
-    {
-      value: 'Light Pink',
-      lang: AppLangEnum.eng,
-      text: 'Light Pink',
-    },{
-      value: 'Light Pink',
-      lang: AppLangEnum.rus,
-      text: 'Светлая Розовая',
-    },
-  ] satisfies UiText<'Light Pink'>[],
+  'Light Orange': {
+    'en-US': 'Light Orange',
+    'ru-RU': 'Светлая Оранжевая',
+  },
+  'Dark Orange': {
+    'en-US': 'Dark Orange',
+    'ru-RU': 'Тёмная Оранжевая',
+  },
   
   
-  'Dark Pink': [
-    {
-      value: 'Dark Pink',
-      lang: AppLangEnum.eng,
-      text: 'Dark Pink',
-    },{
-      value: 'Dark Pink',
-      lang: AppLangEnum.rus,
-      text: 'Тёмная Розовая',
-    },
-  ] satisfies UiText<'Dark Pink'>[],
-  
-  
-  'Light Pink Gradient': [
-    {
-      value: 'Light Pink Gradient',
-      lang: AppLangEnum.eng,
-      text: 'Light Pink Gradient',
-    },{
-      value: 'Light Pink Gradient',
-      lang: AppLangEnum.rus,
-      text: 'Светлая Розовая Градиент',
-    },
-  ] satisfies UiText<'Light Pink Gradient'>[],
-  
-  
-  'Dark Pink Gradient': [
-    {
-      value: 'Dark Pink Gradient',
-      lang: AppLangEnum.eng,
-      text: 'Dark Pink Gradient',
-    },{
-      value: 'Dark Pink Gradient',
-      lang: AppLangEnum.rus,
-      text: 'Тёмная розовая Градиент',
-    },
-  ] satisfies UiText<'Dark Pink Gradient'>[],
-  
-  
-  'Light Orange': [
-    {
-      value: 'Light Orange',
-      lang: AppLangEnum.eng,
-      text: 'Light Orange',
-    },{
-      value: 'Light Orange',
-      lang: AppLangEnum.rus,
-      text: 'Светлая Оранжевая',
-    },
-  ] satisfies UiText<'Light Orange'>[],
-  
-  
-  'Dark Orange': [
-    {
-      value: 'Dark Orange',
-      lang: AppLangEnum.eng,
-      text: 'Dark Orange',
-    },{
-      value: 'Dark Orange',
-      lang: AppLangEnum.rus,
-      text: 'Тёмная Оранжевая',
-    },
-  ] satisfies UiText<'Dark Orange'>[],
-  
-  
-  
-} satisfies UiTextValues<AllThemeNamesType>
+} satisfies UiValues

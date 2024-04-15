@@ -30,7 +30,7 @@ import { MathUtils } from 'src/util/common/NumberUtils.ts'
 import { DataUrl } from '@util/DataUrl.ts'
 import { ImageUtils } from 'src/util/file/ImageUtils.ts'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { Progress } from '@util/Progress.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
@@ -117,10 +117,10 @@ export type ProfilePhotosProps = {
 const ProfilePhotos =
 React.memo(
 (props: ProfilePhotosProps)=>{
+  const actionText = useUiValues(ActionUiText)
   const { images, setImages } = props
   const { theme } = useRecoilValue(ThemeRecoil)
   const { isDraggingFiles } = useRecoilValue(AppRecoil)
-  const actionUiValues = useUiValues(ActionUiText)
   
   
   const progressAnim = useMemo(
@@ -476,7 +476,7 @@ React.memo(
             }}
           >
             <OptionContainer>
-              <OptionTitle>{actionUiValues.remove.text}</OptionTitle>
+              <OptionTitle>{actionText.remove}</OptionTitle>
               <div css={optionIconBoxStyle}>
                 <CrossInCircleIc css={css`height: 120%;`}/>
               </div>
@@ -495,7 +495,7 @@ React.memo(
               <Button css={ButtonStyle.bigRectTransparent}>
                 
                 <OptionContainer>
-                  <OptionTitle>{actionUiValues.replace.text}</OptionTitle>
+                  <OptionTitle>{actionText.replace}</OptionTitle>
                   <div css={optionIconBoxStyle}>
                     <ArrowRefreshCwIc/>
                   </div>
@@ -516,7 +516,7 @@ React.memo(
                 }}
               >
                 <OptionContainer>
-                  <OptionTitle>{actionUiValues.fullScreenView.text}</OptionTitle>
+                  <OptionTitle>{actionText.fullScreenView}</OptionTitle>
                   <div css={optionIconBoxStyle}>
                     <FullscreenIc css={css`height: 120%;`}/>
                   </div>
@@ -536,7 +536,7 @@ React.memo(
                   onClick={sheet.setClosing}
                 >
                   <OptionContainer>
-                    <OptionTitle>{actionUiValues.download.text}</OptionTitle>
+                    <OptionTitle>{actionText.download}</OptionTitle>
                     <div css={optionIconBoxStyle}>
                       <Download1Ic/>
                     </div>

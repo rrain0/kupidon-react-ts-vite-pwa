@@ -1,7 +1,11 @@
 import { css } from '@emotion/react'
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
+import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
@@ -10,14 +14,13 @@ import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import ItemTitleContainer from 'src/ui/elements/basic-elements/ItemTitleContainer.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars.tsx'
-import { PwdChangeUiText } from 'src/ui/pages/PwdChange/uiText.ts'
 import { PwdChangePageValidation } from 'src/ui/pages/PwdChange/validation.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { useFormFailures } from '@util/form-validation/hooks/useFormFailures.ts'
 import { useFormSubmit } from '@util/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@util/form-validation/hooks/useFormToasts.tsx'
 import ValidationWrap from '@util/form-validation/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import Card from 'src/ui/elements/cards/Card.tsx'
@@ -40,7 +43,10 @@ const PwdChangePage =
 React.memo(
 ()=>{
   
-  const uiText = useUiValues(PwdChangeUiText)
+  
+  const actionText = useUiValues(ActionUiText)
+  const titleText = useUiValues(TitleUiText)
+  const placeholderText = useUiValues(PlaceholderUiText)
   
   
   
@@ -121,9 +127,9 @@ React.memo(
   
   useFormToasts({
     isLoading,
-    loadingText: PwdChangeUiText.update,
+    loadingText: StatusUiText.updating,
     isSuccess,
-    successText: PwdChangeUiText.updated,
+    successText: StatusUiText.updated,
     failures: failures,
     setFailures: setFailures,
     failureCodeToUiText: mapFailureCodeToUiText,
@@ -147,7 +153,7 @@ React.memo(
       <Pages.SafeInsets>
         <Pages.ContentForm onSubmit={onFormSubmitCallback}>
           
-          <FormHeader>{uiText.changePwd.text}</FormHeader>
+          <FormHeader>{titleText.pwdChange}</FormHeader>
           
           
           <Card>
@@ -155,13 +161,13 @@ React.memo(
             
             <ItemContainer>
               <ItemTitleContainer>
-                <ItemLabel>{uiText.currentPwd.text}</ItemLabel>
+                <ItemLabel>{titleText.currentPwd}</ItemLabel>
               </ItemTitleContainer>
               <ValidationWrap {...validationProps}
                 fieldName="currentPwd"
                 render={props => <PwdInput
                   css={InputStyle.inputSmall}
-                  placeholder={uiText.currentPwdPlaceholder.text}
+                  placeholder={placeholderText.currentPwd}
                   {...props.inputProps}
                   hasError={props.highlight}
                 />}
@@ -171,13 +177,13 @@ React.memo(
             
             <ItemContainer>
               <ItemTitleContainer>
-                <ItemLabel>{uiText.newPwd.text}</ItemLabel>
+                <ItemLabel>{titleText.newPwd}</ItemLabel>
               </ItemTitleContainer>
               <ValidationWrap {...validationProps}
                 fieldName="pwd"
                 render={props => <PwdInput
                   css={InputStyle.inputSmall}
-                  placeholder={uiText.newPwdPlaceholder.text}
+                  placeholder={placeholderText.newPwd}
                   {...props.inputProps}
                   hasError={props.highlight}
                 />}
@@ -187,13 +193,13 @@ React.memo(
             
             <ItemContainer>
               <ItemTitleContainer>
-                <ItemLabel>{uiText.repeatPwd.text}</ItemLabel>
+                <ItemLabel>{titleText.repeatPwd}</ItemLabel>
               </ItemTitleContainer>
               <ValidationWrap {...validationProps}
                 fieldName="repeatPwd"
                 render={props => <PwdInput
                   css={InputStyle.inputSmall}
-                  placeholder={uiText.repeatPwdPlaceholder.text}
+                  placeholder={placeholderText.repeatPwd}
                   {...props.inputProps}
                   hasError={props.highlight}
                 />}
@@ -208,7 +214,7 @@ React.memo(
             <Button css={ButtonStyle.bigRectMain}
               type="submit"
             >
-              {uiText.doChangePwd.text}
+              {actionText.changePwd}
             </Button>
           </div>
           
@@ -216,7 +222,7 @@ React.memo(
             <Button css={ButtonStyle.bigRectAccent}
               disabled
             >
-              {uiText.pwdRecovery.text}
+              {titleText.pwdRecovery}
             </Button>
           </div>
         

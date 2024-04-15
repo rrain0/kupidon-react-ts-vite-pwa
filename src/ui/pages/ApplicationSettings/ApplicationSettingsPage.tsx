@@ -2,6 +2,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
 import ClearSiteConfirmation from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteConfirmation'
@@ -10,14 +12,11 @@ import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
-import {
-  ApplicationSettingsUiText
-} from 'src/ui/pages/ApplicationSettings/uiText'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { ThemeNameUiText } from 'src/ui/ui-values/ThemeNameUiText'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { ThemeNameUiText } from 'src/ui/ui-values/ThemeNameUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui/theme/ThemeCollection.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import Button from 'src/ui/elements/Buttons/Button'
@@ -35,19 +34,15 @@ import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOpti
 
 
 
-
-
-
-
-
 const ApplicationSettingsPage =
 React.memo(
 ()=>{
   const app = useRecoilValue(AppRecoil)
   const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
   
-  const uiText = useUiValues(ApplicationSettingsUiText)
-  const themeNameUiText = useUiValues(ThemeNameUiText)
+  const actionText = useUiValues(ActionUiText)
+  const titleText = useUiValues(TitleUiText)
+  const themeNameText = useUiValues(ThemeNameUiText)
   
   const [clearSite, setClearSite] = useState(false)
   
@@ -60,12 +55,12 @@ React.memo(
         .filter(t=>t.type==='light')
         .map(t=>({
           value: t.name,
-          text: themeNameUiText[t.name].text,
+          text: themeNameText[t.name],
           icon: <t.icon css={divIcon}/>,
         }))
       return opts
     },
-    [themeNameUiText]
+    [themeNameText]
   )
   const darkThemeOptions = useMemo(
     ()=>{
@@ -73,12 +68,12 @@ React.memo(
         .filter(t=>t.type==='dark')
         .map(t=>({
           value: t.name,
-          text: themeNameUiText[t.name].text,
+          text: themeNameText[t.name],
           icon: <t.icon css={divIcon}/>,
         }))
       return opts
     },
-    [themeNameUiText]
+    [themeNameText]
   )
   
   
@@ -89,13 +84,13 @@ React.memo(
       <Pages.SafeInsets>
         <Pages.Content>
         
-          <FormHeader>{uiText.appSettings.text}</FormHeader>
+          <FormHeader>{titleText.appSettings}</FormHeader>
           
           
           
           <Card>
             <SettingsOptions.Header>
-              {uiText.theme.text}
+              {titleText.theme}
             </SettingsOptions.Header>
             <ThemeOptions/>
           </Card>
@@ -104,7 +99,7 @@ React.memo(
           
           <Card>
             <SettingsOptions.Header>
-              {uiText.preferredLightTheme.text}
+              {titleText.preferredLightTheme}
             </SettingsOptions.Header>
             <RadioInputGroup>
               {
@@ -132,7 +127,7 @@ React.memo(
           
           <Card>
             <SettingsOptions.Header>
-              {uiText.preferredDarkTheme.text}
+              {titleText.preferredDarkTheme}
             </SettingsOptions.Header>
             <RadioInputGroup>
               {
@@ -161,7 +156,7 @@ React.memo(
           
           <Card>
             <SettingsOptions.Header>
-              {uiText.language.text}
+              {titleText.language}
             </SettingsOptions.Header>
             <LangOptions/>
           </Card>
@@ -179,13 +174,13 @@ React.memo(
               }}
             >
               <AddModuleIc css={SettingsOptions.icon}/>
-              {uiText.installApp.text}
+              {actionText.installApp}
             </Button>}
             
             <Button css={ButtonStyle.roundedDanger}
               onClick={()=>setClearSite(true)}
             >
-              {uiText.clearAppData.text}
+              {actionText.clearAppData}
             </Button>
           
           </RoundButtonsContainer>

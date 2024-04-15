@@ -1,8 +1,8 @@
 import { UserApi } from 'src/api/requests/UserApi'
-import { AccountSettingsUiText } from 'src/ui/pages/AccountSettings/uiText'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from '@util/ui-text0/UiText.ts'
+import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd
 import PartialFailureData = ValidationCore.PartialFailureData
@@ -32,15 +32,15 @@ export namespace AccountSettingsPageValidation {
   
   
   export const mapFailureCodeToUiText = {
-    'pwd-not-changed': [],
-    'pwd-required': AccountSettingsUiText.pwdIsNotEntered,
-    'pwd-incorrect': AccountSettingsUiText.pwdFormatIsIncorrect,
-    'pwd-too-long': AccountSettingsUiText.pwdMaxLenIs200,
-    'repeat-pwd-not-changed': [],
-    'repeated-pwd-required': AccountSettingsUiText.repeatPwd,
-    'repeated-pwd-not-match': AccountSettingsUiText.passwordsDoNotMatch,
-    'connection-error': AccountSettingsUiText.connectionError,
-    'unknown-error': AccountSettingsUiText.unknownError,
+    'pwd-not-changed': { 'en-US': 'pwd-not-changed' },
+    'pwd-required': ErrorUiText.pwdIsNotEntered,
+    'pwd-incorrect': ErrorUiText.pwdFormatIsIncorrect,
+    'pwd-too-long': ErrorUiText.pwdMaxLenIs200,
+    'repeat-pwd-not-changed': { 'en-US': 'repeat-pwd-not-changed' },
+    'repeated-pwd-required': ErrorUiText.repeatPwd,
+    'repeated-pwd-not-match': ErrorUiText.passwordsDoNotMatch,
+    'connection-error': ErrorUiText.connectionError,
+    'unknown-error': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   

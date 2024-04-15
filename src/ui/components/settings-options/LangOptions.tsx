@@ -2,15 +2,14 @@ import React, { useCallback, useMemo } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
-import { QuickSettingsUiText } from 'src/ui/widgets/QuickSettings/uiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import { CountryFlag } from 'src/ui/ui-values/CountryFlag.ts'
-import { Lang } from '@util/lang0/Lang.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { Lang } from '@util/lang/Lang.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
-import AppLangType = Lang.AppLangType
 import BrowserIc = SvgIcons.BrowserIc
 import { SettingsOptions } from './SettingsOptions'
 
@@ -22,34 +21,33 @@ const LangOptions = React.memo(()=>{
   const [langSettings, setLangSettings] = useRecoilState(LangSettingsRecoil)
   
   
-  const uiText = useUiValues(QuickSettingsUiText)
+  const titleText = useUiValues(TitleUiText)
   
   
   const languageOptions = useMemo(
     ()=>{
-      
       let opts = [
         {
           value: 'system',
-          text: uiText.systemLanguage.text,
+          text: titleText.systemLanguage,
           icon: <BrowserIc css={SettingsOptions.icon}/>,
         },{
           value: 'ru-RU',
-          text: uiText.russian.text,
+          text: titleText.russian,
           icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']}/>,
         },{
           value: 'en-US',
-          text: uiText.english.text,
+          text: titleText.english,
           icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']}/>,
         }
-      ] satisfies { value: AppLangType|'system', [prop: string]: any }[]
-      if (!lang.availableSystemLangs?.length) opts = opts.filter(it=>it.value!=='system')
+      ] satisfies { value: Lang.Supported|'system', [prop: string]: any }[]
+      if (!lang.matchedSystemLangs?.length) opts = opts.filter(it=>it.value!=='system')
       return opts
     },
-    [uiText, lang.availableSystemLangs]
+    [titleText, lang.matchedSystemLangs]
   )
   const isLanguageOptionChecked = useCallback(
-    function (value: AppLangType|'system') {
+    function (value: Lang.Supported|'system') {
       return langSettings.setting === 'system' && value === 'system'
         || langSettings.setting === 'manual' && value === langSettings.manualSetting?.[0]
     },

@@ -48,6 +48,7 @@ export namespace ArrayUtils {
   
   
   export const compare = <T>(arr: T[], other: T[]): 1|0|-1 => {
+    if (arr===other) return 0
     for (let i = 0; i < Math.max(arr.length, other.length); i++) {
       if (i >= arr.length) return -1
       if (i >= other.length) return 1

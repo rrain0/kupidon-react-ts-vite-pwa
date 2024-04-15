@@ -2,13 +2,13 @@ import { css } from '@emotion/react'
 import React from 'react'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
-import { BowAndArrowsUiText } from 'src/ui/pages/BowAndArrows/uiText.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import { Hs } from 'src/ui/elements/basic-elements/Hs'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 import row = EmotionCommon.row
 
@@ -19,7 +19,7 @@ import row = EmotionCommon.row
 const BowAndArrowsPage =
 React.memo(
 ()=>{
-  const uiText = useUiValues(BowAndArrowsUiText)
+  const titleText = useUiValues(TitleUiText)
   
   
   return <>
@@ -28,7 +28,7 @@ React.memo(
       <Pages.SafeInsets>
         <Pages.Content>
           
-          <PageHeader>{uiText.bowAndArrows.text}</PageHeader>
+          <PageHeader>{titleText.bowAndArrows}</PageHeader>
           
           <HeaderArrow>Афиша</HeaderArrow>
           

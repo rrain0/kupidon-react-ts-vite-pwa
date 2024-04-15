@@ -1,17 +1,17 @@
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import UseFakePointerRef from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
+import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
-import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
@@ -35,7 +35,8 @@ type PreferredPeopleOption = 'notSelected'|'ofGuys'|'ofGirls'|'ofGuysAndGirls'
 const ProfileImLookingFor =
 React.memo(
 (/* props: ValidationWrapRenderProps<PreferredPeopleOption> */)=>{
-  const uiText = useUiValues(ProfileUiText)
+  const titleText = useUiValues(TitleUiText)
+  const optionText = useUiValues(OptionUiText)
   
   
   
@@ -45,19 +46,19 @@ React.memo(
     ()=>[
       {
         value: 'notSelected',
-        text: uiText.notSelected.text,
+        text: optionText.notSelected,
       },{
         value: 'ofGuys',
-        text: uiText.ofGuys.text,
+        text: optionText.ofGuys,
       },{
         value: 'ofGirls',
-        text: uiText.ofGirls.text,
+        text: optionText.ofGirls,
       },{
         value: 'ofGuysAndGirls',
-        text: uiText.ofGuysAndGirls.text,
+        text: optionText.ofGuysAndGirls,
       }
     ] satisfies { value: PreferredPeopleOption, text: string }[],
-    [uiText]
+    [optionText]
   )
   
   
@@ -67,7 +68,7 @@ React.memo(
     
       <OptionAndValueItem
         icon={<Search2Ic css={css`height: 50%`}/>}
-        title={uiText.imLookingFor.text}
+        title={titleText.imLookingFor}
         value={preferredPeopleOptions.find(it => it.value === 'notSelected')!.text}
         nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
         

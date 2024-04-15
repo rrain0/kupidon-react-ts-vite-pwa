@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
+import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
+import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { ValidationActions } from 'src/util/form-validation/ValidationActions.ts'
 import { ValidationCore } from 'src/util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues } from 'src/util/ui-text0/UiText.ts'
+import { UiTemplate, UiText, UiTextValues } from 'src/util/ui-text/UiText.ts'
 import { ToastMsg, ToastMsgData, useToasts } from 'src/ui/components/Toasts/useToasts.tsx'
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values
@@ -10,6 +12,7 @@ import awaitDelay = ValidationActions.awaitDelay
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateFailures
 import Updater = TypeUtils.Updater
+import ObjectMap = ObjectUtils.ObjectMap
 
 
 
@@ -17,9 +20,9 @@ export type UseFormToastsProps
 <Vs extends Values>
 = {
   isLoading?: boolean | undefined, 
-  loadingText?: UiText<any>[] | undefined,
+  loadingText?: UiText | undefined,
   isSuccess?: boolean | undefined, 
-  successText?: UiText<any>[] | undefined,
+  successText?: UiText | undefined,
   failures: Failures<Vs>,
   setFailures: Updater<Failures<Vs>>
   failureCodeToUiText?: UiTextValues | undefined,
@@ -88,14 +91,15 @@ export const useFormToasts =
       if (serverFailure) return new ToastMsgData({
         type: 'danger',
         msg: <ToastMsg
-          uiOption={
-            serverFailure.code==='unknown-error'
-            ? [{ value: '',
-                lang: 'en-US',
-                text: 'Unknown error: '+JSON.stringify(serverFailure.extra.error)
-              }]
-            : failureCodeToUiText?.[serverFailure.code]
-          }
+          uiOption={function(){
+            if (serverFailure.code==='unknown-error') {
+              return ObjectMap<UiTemplate<[string]>, UiText>(
+                ErrorUiText.unknownErrorTemplate,
+                ([key, value])=>[key, value(JSON.stringify(serverFailure.extra.error))]
+              )
+            }
+            return failureCodeToUiText?.[serverFailure.code]
+          }()}
           defaultText={serverFailure.msg}
         />,
         closeOnUnmount: true,
@@ -119,7 +123,7 @@ export const useFormToasts =
       msg: <ToastMsg uiOption={loadingText}/>,
       closeOnUnmount: true,
     }),
-    [loadingText,isLoading]
+    [loadingText, isLoading]
   )
   const loginSuccessMsg = useMemo(
     ()=>new ToastMsgData({
@@ -128,7 +132,7 @@ export const useFormToasts =
       lifetime: 200,
       dragToClose: true,
     }),
-    [successText,isSuccess]
+    [successText, isSuccess]
   )
   
   

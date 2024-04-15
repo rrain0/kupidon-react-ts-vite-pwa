@@ -1,86 +1,166 @@
-import { Lang } from '@util/lang0/Lang.ts'
-import { UiText, UiValues } from '@util/ui-text0/UiText.ts'
-import AppLangEnum = Lang.AppLangEnum
+import { UiValues } from '@util/ui-text/UiText.ts'
 
 
 
 
 export const TitleUiText = {
   
+  profile: {
+    'en-US': 'Profile',
+    'ru-RU': 'Профиль',
+  },
+  chat: {
+    'en-US': 'Chat',
+    'ru-RU': 'Чат',
+  },
+  findCouple: {
+    'en-US': 'Find couple',
+    'ru-RU': 'Найти пару',
+  },
+  advices: {
+    'en-US': 'Profile',
+    'ru-RU': 'Советы',
+  },
+  bowAndArrows: {
+    'en-US': 'Bow and arrows',
+    'ru-RU': 'Лук и стрелы',
+  },
+  settings: {
+    'en-US': 'Settings',
+    'ru-RU': 'Настройки',
+  },
   
   
-  profile: [
-    {
-      value: 'profile',
-      lang: AppLangEnum.eng,
-      text: 'Profile',
-    },{
-      value: 'profile',
-      lang: AppLangEnum.rus,
-      text: 'Профиль',
-    },
-  ] satisfies UiText<'profile'>[],
+  login: {
+    'en-US': 'Login',
+    'ru-RU': 'Вход',
+  },
+  appSettings: {
+    'en-US': 'Application settings',
+    'ru-RU': 'Настройки приложения',
+  },
+  accountSettings: {
+    'en-US': 'Account settings',
+    'ru-RU': 'Настройки аккаунта',
+  },
+  account: {
+    'en-US': 'Account',
+    'ru-RU': 'Аккаунт',
+  },
+  pwdChange: {
+    'en-US': 'Password Change',
+    'ru-RU': 'Смена пароля',
+  },
+  registration: {
+    'en-US': 'Registration',
+    'ru-RU': 'Регистрация',
+  },
+  testPage: {
+    'en-US': 'Test page',
+    'ru-RU': 'Тестовая страница',
+  },
   
-  chat: [
-    {
-      value: 'chat',
-      lang: AppLangEnum.eng,
-      text: 'Chat',
-    },{
-      value: 'chat',
-      lang: AppLangEnum.rus,
-      text: 'Чат',
-    },
-  ] satisfies UiText<'chat'>[],
   
-  findCouples: [
-    {
-      value: 'findCouples',
-      lang: AppLangEnum.eng,
-      text: 'Find couples',
-    },{
-      value: 'findCouples',
-      lang: AppLangEnum.rus,
-      text: 'Найти пары',
-    },
-  ] as UiText<'findCouples'>[],
+  aboutMe: {
+    'en-US': 'About me',
+    'ru-RU': 'Обо мне',
+  },
+  birthDate: {
+    'en-US': 'Birth date',
+    'ru-RU': 'Дата рождения',
+  },
+  gender: {
+    'en-US': 'Sex',
+    'ru-RU': 'Пол',
+  },
+  imLookingFor: {
+    'en-US': 'I\'m looking for',
+    'ru-RU': 'Я ищу',
+  },
+  name: {
+    'en-US': 'Name',
+    'ru-RU': 'Имя',
+  },
   
-  advices: [
-    {
-      value: 'advices',
-      lang: AppLangEnum.eng,
-      text: 'Advice',
-    },{
-      value: 'advices',
-      lang: AppLangEnum.rus,
-      text: 'Советы',
-    },
-  ] as UiText<'advices'>[],
   
-  bowAndArrows: [
-    {
-      value: 'bowAndArrows',
-      lang: AppLangEnum.eng,
-      text: 'Bow and arrows',
-    },{
-      value: 'bowAndArrows',
-      lang: AppLangEnum.rus,
-      text: 'Лук и стрелы',
-    },
-  ] as UiText<'bowAndArrows'>[],
+  theme: {
+    'en-US': 'Theme',
+    'ru-RU': 'Тема',
+  },
+  systemTheme: {
+    'en-US': 'System theme',
+    'ru-RU': 'Тема системы',
+  },
+  lightTheme: {
+    'en-US': 'Light theme',
+    'ru-RU': 'Светлая тема',
+  },
+  darkTheme: {
+    'en-US': 'Dark theme',
+    'ru-RU': 'Тёмная тема',
+  },
+  preferredLightTheme: {
+    'en-US': 'Preferred light theme',
+    'ru-RU': 'Предпочитаемая светлая тема',
+  },
+  preferredDarkTheme: {
+    'en-US': 'Preferred dark theme',
+    'ru-RU': 'Предпочитаемая тёмная тема',
+  },
   
-  settings: [
-    {
-      value: 'settings',
-      lang: AppLangEnum.eng,
-      text: 'Settings',
-    },{
-      value: 'settings',
-      lang: AppLangEnum.rus,
-      text: 'Настройки',
-    },
-  ] satisfies UiText<'settings'>[],
   
+  language: {
+    'en-US': 'Language',
+    'ru-RU': 'Язык',
+  },
+  systemLanguage: {
+    'en-US': 'System language',
+    'ru-RU': 'Язык системы',
+  },
+  russian: {
+    'ru-RU': 'Русский',
+  },
+  english: {
+    'en-US': 'English',
+  },
+  
+  
+  id: {
+    'en-US': 'id',
+  },
+  email: {
+    'en-US': 'Email',
+  },
+  emailVerified: {
+    'en-US': 'Email verified',
+    'ru-RU': 'Email верифицирован',
+  },
+  userCreated: {
+    'en-US': 'User created',
+    'ru-RU': 'Пользователь создан',
+  },
+  userUpdated: {
+    'en-US': 'User updated',
+    'ru-RU': 'Пользователь обновлён',
+  },
+  
+  
+  currentPwd: {
+    'en-US': 'Current password',
+    'ru-RU': 'Текущий пароль',
+  },
+  newPwd: {
+    'en-US': 'New password',
+    'ru-RU': 'Новый пароль',
+  },
+  repeatPwd: {
+    'en-US': 'Repeat password',
+    'ru-RU': 'Повторите пароль',
+  },
+  pwdRecovery: {
+    'en-US': 'Password recovery',
+    'ru-RU': 'Восстановление пароля',
+  },
   
   
 } satisfies UiValues

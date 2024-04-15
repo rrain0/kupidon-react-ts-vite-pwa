@@ -6,7 +6,8 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
-import { QuickSettingsUiText } from 'src/ui/widgets/QuickSettings/uiText.ts'
+import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
@@ -14,7 +15,7 @@ import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
@@ -49,7 +50,10 @@ React.memo(
   
   const auth = useRecoilValue(AuthRecoil)
   const [app, setApp] = useRecoilState(AppRecoil)
-  const uiText = useUiValues(QuickSettingsUiText)
+  
+  const titleText = useUiValues(TitleUiText)
+  const actionText = useUiValues(ActionUiText)
+  
   
   return <>
     <UseBottomSheetState
@@ -59,18 +63,18 @@ React.memo(
       {props =>
       <ModalPortal>
       <BottomSheetBasic {...props.sheetProps}
-        header={uiText.settings.text}
+        header={titleText.settings}
       >
         <Content>
           
           <SettingsOptions.Header>
-            {uiText.theme.text}:
+            {titleText.theme}:
           </SettingsOptions.Header>
           <ThemeOptions/>
           
           
           <SettingsOptions.Header>
-            {uiText.language.text}:
+            {titleText.language}:
           </SettingsOptions.Header>
           <LangOptions/>
           
@@ -84,7 +88,7 @@ React.memo(
                   SettingsOptions.icon,
                   css`translate: 0 -0.1em;`,
                 ]}/>
-                {uiText.accountSettings.text}
+                {titleText.accountSettings}
               </Button>
             </Link>}
             
@@ -93,7 +97,7 @@ React.memo(
                 onClick={props.setClosing}
               >
                 <GearIc css={SettingsOptions.icon}/>
-                {uiText.appSettings.text}
+                {titleText.appSettings}
               </Button>
             </Link>
             
@@ -101,7 +105,7 @@ React.memo(
               <Button css={normalIconRoundButton}
                 onClick={props.setClosing}
               >
-                {uiText.testPage.text}
+                {titleText.testPage}
               </Button>
             </Link>
             
@@ -109,7 +113,7 @@ React.memo(
               onClick={async () => await promptInstall()}
             >
               <AddModuleIc css={SettingsOptions.icon}/>
-              {uiText.installApp.text}
+              {actionText.installApp}
             </Button>}
             
             <UseBool>{bool => <>
@@ -118,7 +122,7 @@ React.memo(
                 //onClick={bool.setTrue}
                 {...onPointerClick(bool.setTrue)}
               >
-                {uiText.clearAppData.text}
+                {actionText.clearAppData}
               </Button>
               
               <ClearSiteConfirmation open={bool.value} setOpen={bool.setValue}/>

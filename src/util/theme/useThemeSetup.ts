@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
@@ -77,6 +77,7 @@ export const useThemeSetup = ()=>{
   )
   
   
+  // apply to html meta tags
   useLayoutEffect(
     ()=>{
       const t = theme.theme

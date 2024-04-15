@@ -1,20 +1,18 @@
 import { atom } from 'recoil'
 import { ArrayUtils } from 'src/util/common/ArrayUtils'
-import { Lang } from '@util/lang0/Lang.ts'
-import DefaultAppLang = Lang.DefaultAppLang
-import AppLangType = Lang.AppLangType
+import { Lang } from '@util/lang/Lang.ts'
 import NonEmptyArr = ArrayUtils.NonEmptyArr
 
 
 
 
 export type LangRecoilType = {
-  lang: NonEmptyArr<AppLangType>
-  availableSystemLangs: AppLangType[] | undefined
+  langs: NonEmptyArr<Lang.Supported>
+  matchedSystemLangs: Lang.Supported[] | undefined
 }
 const Default: LangRecoilType = {
-  lang: [DefaultAppLang],
-  availableSystemLangs: undefined,
+  langs: [Lang.Default],
+  matchedSystemLangs: undefined,
 }
 export const LangRecoil = atom<LangRecoilType>({
   key: 'lang',

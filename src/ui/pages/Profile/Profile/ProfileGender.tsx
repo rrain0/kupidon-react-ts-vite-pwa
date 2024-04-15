@@ -1,19 +1,17 @@
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { useOverlayState } from '@util/react/useOverlayState.ts'
 import React, { useMemo } from 'react'
 import { GenderEnum } from 'src/api/model/GenderEnum.ts'
-import UseFakePointerRef from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
+import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
-import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
-import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
@@ -38,7 +36,8 @@ const overlayName = 'gender'
 const ProfileGender =
 React.memo(
 (props: ValidationWrapRenderProps<GenderEnum|''>)=>{
-  const uiText = useUiValues(ProfileUiText)
+  const optionText = useUiValues(OptionUiText)
+  const titleText = useUiValues(TitleUiText)
   
   
   const [isOpen, open, close] = useOverlayState(overlayName)
@@ -47,13 +46,13 @@ React.memo(
     ()=>[
       {
         value: 'MALE',
-        text: uiText.male.text,
+        text: optionText.male,
       },{
         value: 'FEMALE',
-        text: uiText.female.text,
+        text: optionText.female,
       }
     ] satisfies { value: GenderEnum, text: string }[],
-    [uiText]
+    [optionText]
   )
   
   
@@ -61,7 +60,7 @@ React.memo(
   return <>
     <OptionAndValueItem
       icon={<GenderIc css={css`height: 50%`}/>}
-      title={uiText.gender.text}
+      title={titleText.gender}
       value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
       nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
       
@@ -77,7 +76,7 @@ React.memo(
         <ModalPortal>
           <BottomSheetBasic
             {...sheetProps.sheetProps}
-            header={uiText.gender.text}
+            header={titleText.gender}
           >
             <RadioInputGroup css={selectItemsContainer}>
               {genderOptions.map(opt => <RadioInput

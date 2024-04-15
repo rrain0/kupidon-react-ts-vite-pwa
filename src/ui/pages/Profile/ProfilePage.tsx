@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import { ButtonBarComponents } from 'src/ui/widgets/BottomButtonBar/components.tsx'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
@@ -197,9 +198,9 @@ React.memo(
   
   useFormToasts({
     isLoading,
-    loadingText: ActionUiText.saving,
+    loadingText: StatusUiText.saving,
     isSuccess,
-    successText: ActionUiText.saved,
+    successText: StatusUiText.saved,
     failures: failures,
     setFailures: setFailures,
     failureCodeToUiText: mapFailureCodeToUiText,

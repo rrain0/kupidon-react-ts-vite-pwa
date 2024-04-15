@@ -1,10 +1,10 @@
 import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { SignupPageUiText } from 'src/ui/pages/Signup/uiText.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from '@util/ui-text0/UiText.ts'
+import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd
@@ -49,24 +49,24 @@ export namespace SignupPageValidation {
   
   
   export const mapFailureCodeToUiText = {
-    'email-required': SignupPageUiText.emailIsNotEntered,
-    'email-incorrect': SignupPageUiText.emailFormatIsIncorrect,
-    'email-too-long': SignupPageUiText.emailMaxLenIs100,
-    'pwd-required': SignupPageUiText.pwdIsNotEntered,
-    'pwd-incorrect': SignupPageUiText.pwdFormatIsIncorrect,
-    'pwd-too-long': SignupPageUiText.pwdMaxLenIs200,
-    'repeated-pwd-required': SignupPageUiText.repeatPwd,
-    'repeated-pwd-not-match': SignupPageUiText.passwordsDoNotMatch,
-    'name-required': SignupPageUiText.nameIsNotEntered,
-    'name-too-long': SignupPageUiText.nameMaxLenIs100,
-    'gender-required': SignupPageUiText.genderIsNotChosen,
-    'birth-date-required': SignupPageUiText.birthDateIsNotEntered,
-    'birth-date-incorrect-format': SignupPageUiText.birthDateHasIncorrectFormat,
-    'birth-date-not-exists': SignupPageUiText.dateNotExists,
-    'birth-date-younger-18': SignupPageUiText.youMustBeAtLeast18YearsOld,
-    "DUPLICATE_EMAIL": SignupPageUiText.userWithSuchEmailAlreadyRegistered,
-    'connection-error': SignupPageUiText.connectionError,
-    'unknown-error': SignupPageUiText.unknownError,
+    'email-required': ErrorUiText.emailIsNotEntered,
+    'email-incorrect': ErrorUiText.emailFormatIsIncorrect,
+    'email-too-long': ErrorUiText.emailMaxLenIs100,
+    'pwd-required': ErrorUiText.pwdIsNotEntered,
+    'pwd-incorrect': ErrorUiText.pwdFormatIsIncorrect,
+    'pwd-too-long': ErrorUiText.pwdMaxLenIs200,
+    'repeated-pwd-required': ErrorUiText.repeatPwd,
+    'repeated-pwd-not-match': ErrorUiText.passwordsDoNotMatch,
+    'name-required': ErrorUiText.nameIsNotEntered,
+    'name-too-long': ErrorUiText.nameMaxLenIs100,
+    'gender-required': ErrorUiText.genderIsNotChosen,
+    'birth-date-required': ErrorUiText.birthDateIsNotEntered,
+    'birth-date-incorrect-format': ErrorUiText.birthDateHasIncorrectFormat,
+    'birth-date-not-exists': ErrorUiText.dateNotExists,
+    'birth-date-younger-18': ErrorUiText.youMustBeAtLeast18YearsOld,
+    "DUPLICATE_EMAIL": ErrorUiText.userWithSuchEmailAlreadyRegistered,
+    'connection-error': ErrorUiText.connectionError,
+    'unknown-error': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   

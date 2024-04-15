@@ -1,13 +1,12 @@
 import { css } from '@emotion/react'
-import React, { useEffect, useState } from 'react'
-import {
-  ClearSiteConfirmationUiText
-} from 'src/ui/widgets/ClearSiteConfirmation/uiText.ts'
+import React, { useEffect } from 'react'
+import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { clearSiteData } from 'src/util/app/clearSiteData.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { useBoolState } from '@util/react/useBoolState.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
@@ -41,7 +40,8 @@ React.memo(
 (props: ClearSiteConfirmationProps)=>{
   const { open, setOpen } = props
   
-  const uiText = useUiValues(ClearSiteConfirmationUiText)
+  const statusText = useUiValues(StatusUiText)
+  const actionText = useUiValues(ActionUiText)
   
   
   const [needClear, clear] = useBoolState(false)
@@ -67,7 +67,7 @@ React.memo(
     >
       {props => <ModalPortal><BottomSheetBasic
         {...props.sheetProps}
-        header={uiText.clearAppData.text + '?'}
+        header={actionText.clearAppData + '?'}
       >
         <div
           css={css`
@@ -86,14 +86,14 @@ React.memo(
             <Button css={[ButtonStyle.roundedAccent, button]}
               onClick={props.setClosing}
             >
-              {uiText.no.text}
+              {actionText.no}
             </Button>
             
             <Button css={[ButtonStyle.roundedDanger, button]}
               onClick={clear}
             >
               <ClearTrashIc css={[icon, iconOnDanger]}/>
-              {uiText.yes.text}
+              {actionText.yes}
             </Button>
           
           </div>
@@ -119,7 +119,7 @@ React.memo(
         `}
       >
         {<Spinner8LinesIc css={icon}/>}
-        {uiText.reloading.text}
+        {statusText.reloading}
       </div>
     </div> }
     

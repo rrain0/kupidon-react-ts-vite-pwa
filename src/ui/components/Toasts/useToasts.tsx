@@ -1,8 +1,8 @@
+import { useUiValue } from '@util/ui-text/useUiText.ts'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { UiText } from '@util/ui-text0/UiText.ts'
-import { useUiValueArr } from '@util/ui-text0/useUiText.ts'
+import { UiText } from '@util/ui-text/UiText.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { ToastBody, ToastType } from 'src/ui/components/Toasts/ToastBody.tsx'
 import falsy = TypeUtils.falsy
@@ -150,13 +150,13 @@ export class ToastMsgData {
 
 
 
-export type ToastMsgProps<UO extends UiText<any>[]> = PartialUndef<{
+export type ToastMsgProps<UO extends UiText> = PartialUndef<{
   uiOption: UO
   defaultText: string
 }>
 export const ToastMsg =
 React.memo(
-<UO extends UiText<any>[]>(props:ToastMsgProps<UO>)=>{
-  const uiOption = useUiValueArr(props.uiOption??[])
-  return <>{uiOption?.text ?? props.defaultText}</>
+<UO extends UiText>(props:ToastMsgProps<UO>)=>{
+  const uiOption = useUiValue(props.uiOption)
+  return <>{uiOption ?? props.defaultText}</>
 })

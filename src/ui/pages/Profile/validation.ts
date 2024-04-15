@@ -1,11 +1,11 @@
 import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
-import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
+import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiTextValues } from '@util/ui-text0/UiText.ts'
+import { UiTextValues } from '@util/ui-text/UiText.ts'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData
@@ -46,22 +46,22 @@ export namespace ProfilePageValidation {
   
   
   export const mapFailureCodeToUiText = {
-    'name-required': ProfileUiText.nameIsNotEntered,
-    'name-not-changed': [],
-    'name-too-long': ProfileUiText.nameMaxLenIs100,
-    'birth-date-not-changed': [],
-    'birth-date-required': ProfileUiText.birthDateIsNotEntered,
-    'birth-date-incorrect-format': ProfileUiText.birthDateHasIncorrectFormat,
-    'birth-date-not-exists': ProfileUiText.dateNotExists,
-    'birth-date-younger-18': ProfileUiText.youMustBeAtLeast18YearsOld,
-    'gender-not-changed': [],
-    'gender-required': ProfileUiText.genderIsNotChosen,
-    'about-me-not-changed': [],
-    'about-me-is-too-long': ProfileUiText.descriptionMaxLenIs2000,
-    'photos-not-changed': [],
-    'NO_USER': ProfileUiText.noUserWithSuchId,
-    'connection-error': ProfileUiText.connectionError,
-    'unknown-error': ProfileUiText.unknownError,
+    'name-required': ErrorUiText.nameIsNotEntered,
+    'name-not-changed': { 'en-US': 'name-not-changed' },
+    'name-too-long': ErrorUiText.nameMaxLenIs100,
+    'birth-date-not-changed': { 'en-US': 'birth-date-not-changed' },
+    'birth-date-required': ErrorUiText.birthDateIsNotEntered,
+    'birth-date-incorrect-format': ErrorUiText.birthDateHasIncorrectFormat,
+    'birth-date-not-exists': ErrorUiText.dateNotExists,
+    'birth-date-younger-18': ErrorUiText.youMustBeAtLeast18YearsOld,
+    'gender-not-changed': { 'en-US': 'gender-not-changed' },
+    'gender-required': ErrorUiText.genderIsNotChosen,
+    'about-me-not-changed': { 'en-US': 'about-me-not-changed' },
+    'about-me-is-too-long': ErrorUiText.descriptionMaxLenIs2000,
+    'photos-not-changed': { 'en-US': 'photos-not-changed' },
+    'NO_USER': ErrorUiText.noUserWithSuchId,
+    'connection-error': ErrorUiText.connectionError,
+    'unknown-error': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   

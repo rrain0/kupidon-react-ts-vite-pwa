@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import React from 'react'
 import ItemContainer from 'src/ui/elements/basic-elements/ItemContainer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
@@ -12,15 +13,14 @@ import ProfileImLookingFor
 import ProfileName from 'src/ui/pages/Profile/Profile/ProfileName.tsx'
 import ProfilePageTabHeader from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import ProfilePhotos from 'src/ui/pages/Profile/Profile/ProfilePhotos.tsx'
-import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useFormFailures } from '@util/form-validation/hooks/useFormFailures.ts'
 import { FormProps } from '@util/form-validation/hooks/useFormValuesProps.ts'
 import ValidationWrap from '@util/form-validation/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
-import { useUiValues } from '@util/ui-text0/useUiText.ts'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/elements/cards/Card2.tsx'
@@ -53,8 +53,8 @@ React.memo(
 (props: ProfileProps)=>{
   
   
-  const uiText = useUiValues(ProfileUiText)
-  const actionUiValues = useUiValues(ActionUiText)
+  const titleText = useUiValues(TitleUiText)
+  const actionText = useUiValues(ActionUiText)
   
   
   
@@ -91,7 +91,7 @@ React.memo(
                  setImages([images[0],undefined,images[2],images[3],images[4],images[5]])
                  }} */
               >
-                {uiText.aboutMe.text}
+                {titleText.aboutMe}
               </ItemLabel>
             </ItemTitleContainer>
             <ValidationWrap {...props.validationProps}
@@ -148,12 +148,12 @@ React.memo(
       { props.formProps.hasChanges &&
         <Button css={ButtonStyle.roundedSmallSecondary}
           onClick={props.formProps.resetUserFields}
-        >{actionUiValues.cancel.text}</Button>
+        >{actionText.cancel}</Button>
       }
       { props.canSubmit && !props.isLoading &&
         <Button css={ButtonStyle.roundedSmallAccent}
           onClick={props.submit}
-        >{actionUiValues.save.text}</Button>
+        >{actionText.save}</Button>
       }
     </TopButtonBarFrame>}
     

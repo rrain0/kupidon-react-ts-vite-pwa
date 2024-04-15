@@ -85,7 +85,7 @@ export namespace ObjectUtils {
   export type Entries<O extends object> =
     { [Prop in keyof O]: [Prop,O[Prop]] }[keyof O]
   export type ObjectEntriesType<O extends object> =
-    { [Prop in string & keyof O]: [Prop,O[Prop]] }[string & keyof O]
+    { [Prop in string & keyof O]: [Prop, O[Prop]] }[string & keyof O]
   /**
    * Тип для получения поэлементно типизированного массива записей объекта
    * (для собственных перечисляемых свойств),
