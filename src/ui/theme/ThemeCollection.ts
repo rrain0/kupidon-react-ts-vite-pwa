@@ -1,4 +1,4 @@
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import { DarkOrange } from 'src/ui/theme/themes/DarkOrange.ts'
 import Theme = AppTheme.Theme
 import { DarkPink } from 'src/ui/theme/themes/DarkPink.ts'

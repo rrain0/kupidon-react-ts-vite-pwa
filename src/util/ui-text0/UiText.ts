@@ -1,5 +1,5 @@
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { Lang } from 'src/util/lang/Lang.ts'
+import { Lang } from 'src/util/lang0/Lang.ts'
 import ArrayElement = ArrayUtils.ArrayElement
 import AppLangType = Lang.AppLangType
 

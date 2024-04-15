@@ -10,7 +10,7 @@ export type AppRecoilType = {
   
   showDevOverlay: boolean
 }
-const defolt: AppRecoilType = {
+const Default: AppRecoilType = {
   canInstall: false,
   isDraggingFiles: false,
   isUsingGestures: false,
@@ -18,7 +18,7 @@ const defolt: AppRecoilType = {
 }
 export const AppRecoil = atom<AppRecoilType>({
   key: 'app',
-  default: defolt,
+  default: Default,
 })
 
 

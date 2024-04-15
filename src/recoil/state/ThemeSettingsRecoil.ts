@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { resettableLocalStorageEffect } from 'src/recoil/RecoilPersist'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import { DefaultDarkTheme, DefaultLightTheme } from 'src/ui/theme/ThemeCollection.ts'
 
 
@@ -12,7 +12,7 @@ export type ThemeSettingsStateType = {
   light: string,
   dark: string,
 }
-const defolt: ThemeSettingsStateType = {
+const Default: ThemeSettingsStateType = {
   setting: 'system',
   manualSetting: 'light',
   light: DefaultLightTheme.name,
@@ -20,6 +20,6 @@ const defolt: ThemeSettingsStateType = {
 }
 export const ThemeSettingsRecoil = atom<ThemeSettingsStateType>({
   key: 'themeSettings',
-  default: defolt,
-  effects: [resettableLocalStorageEffect(defolt)],
+  default: Default,
+  effects: [resettableLocalStorageEffect(Default)],
 })

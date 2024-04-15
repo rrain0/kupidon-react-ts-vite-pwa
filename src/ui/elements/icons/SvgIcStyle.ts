@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
 import Theme = AppTheme.Theme
 import generatePropVar = ElementStyle.generatePropVar

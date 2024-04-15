@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { DefaultTheme } from 'src/ui/theme/ThemeCollection.ts'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 
 
@@ -14,14 +14,14 @@ export type ThemeRecoilType = {
   themeIsReady: boolean
   systemThemeAvailable: boolean | undefined
 }
-const defolt: ThemeRecoilType = {
+const Default: ThemeRecoilType = {
   theme: DefaultTheme,
   themeIsReady: false,
   systemThemeAvailable: undefined,
 }
 export const ThemeRecoil = atom<ThemeRecoilType>({
   key: 'theme',
-  default: defolt,
+  default: Default,
 })
 
 

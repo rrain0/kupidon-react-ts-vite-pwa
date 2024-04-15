@@ -1,6 +1,8 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
+import CheckBrowserMinimumVersion
+  from 'src/ui/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
 import AppFrame from 'src/ui/pages/App/AppFrame'
 import ToastifySetup from 'src/ui/components/Toasts/ToastifySetup'
 import DragDetector from 'src/ui/pages/App/DragDetector'
@@ -8,8 +10,8 @@ import LogLayer from 'src/ui/pages/App/LogLayer'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { useAppInstallationSetup } from 'src/util/app/useAppInstallationSetup'
-import { useLangSetup } from '@util/lang/useLangSetup.ts'
-import { useThemeSetup } from 'src/ui/theme/useThemeSetup.ts'
+import { useLangSetup } from '@util/lang0/useLangSetup.ts'
+import { useThemeSetup } from '@util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 
@@ -27,31 +29,31 @@ React.memo(
   const theme = useRecoilValue(ThemeRecoil)
   
   
-  
-  
   if (!theme.themeIsReady) return <></>
-  return <ThemeProvider theme={theme.theme}>
-    
-    <Global styles={t=>css`
+  return <CheckBrowserMinimumVersion>
+    <ThemeProvider theme={theme.theme}>
+      
+      <Global styles={t => css`
       body {
         // will be WINDOW background
         background: ${t.page.bgc[0]};
       }
       
       * {
-        ${isMobile && noScrollbars };
+        ${isMobile && noScrollbars};
       }
     `}/>
+      
+      <DragDetector>
+        <AppFrame/>
+      </DragDetector>
+      
+      <ToastifySetup/>
+      
+      <LogLayer/>
     
-    <DragDetector>
-      <AppFrame/>
-    </DragDetector>
-    
-    <ToastifySetup/>
-    
-    <LogLayer/>
-    
-  </ThemeProvider>
+    </ThemeProvider>
+  </CheckBrowserMinimumVersion>
 })
 export default App
 

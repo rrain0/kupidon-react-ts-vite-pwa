@@ -18,11 +18,11 @@ export type AuthStateType = undefined|{
   accessToken: string,
   user: CurrentUser,
 }
-const defolt: AuthStateType = undefined
+const Default: AuthStateType = undefined
 export const AuthRecoil = atom<AuthStateType>({
   key: 'auth',
-  default: defolt,
-  effects: [resettableLocalStorageEffect(defolt)],
+  default: Default,
+  effects: [resettableLocalStorageEffect(Default)],
 })
 
 

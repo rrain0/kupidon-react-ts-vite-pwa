@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React from 'react'
 import classNames from 'classnames'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import { PieProgressStyle } from 'src/ui/elements/PieProgress/PieProgressStyle.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import Theme = AppTheme.Theme

@@ -1,6 +1,8 @@
 import { useLayoutEffect, useMemo, useState } from 'react'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { Lang } from 'src/util/lang0/Lang.ts'
 import NonEmptyArr = ArrayUtils.NonEmptyArr
+import AppLangsMap = Lang.AppLangsMap
 
 
 
@@ -46,7 +48,7 @@ import NonEmptyArr = ArrayUtils.NonEmptyArr
 // returns array of at least 1 language or undefined
 export const useLangDetector = (): NonEmptyArr<string> | undefined => {
   
-  const [browserLangs,setBrowserLangs] = useState(()=>getBrowserLangs())
+  const [browserLangs, setBrowserLangs] = useState(()=>getBrowserLangs())
   
   
   useLayoutEffect(()=>{
@@ -58,9 +60,9 @@ export const useLangDetector = (): NonEmptyArr<string> | undefined => {
   
   const langs = useMemo(
     ()=>browserLangs?.map(it=>{
-        if (it.startsWith('en')) return 'en-US'
-        if (it.startsWith('ru')) return 'ru-RU'
-        return it
+      const mapped = AppLangsMap[it]
+      if (mapped) return mapped
+      return it
     }),
     [browserLangs]
   ) as NonEmptyArr<string> | undefined

@@ -15,7 +15,7 @@ import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from '@util/ui-text0/useUiText.ts'
 import Button from 'src/ui/elements/Buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/elements/cards/Card2.tsx'

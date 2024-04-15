@@ -50,7 +50,7 @@ declare global {
   
   
   
-  const langSettingsName: string
+  const langSettingsLocalStorageName: string
   let beforeInstallPromptEvent: BeforeInstallPromptEvent | undefined
   let onBeforeInstallPromptEvent: ((ev: BeforeInstallPromptEvent|undefined)=>void) | undefined
   const setBeforeInstallPromptEvent: (ev: BeforeInstallPromptEvent|undefined)=>void

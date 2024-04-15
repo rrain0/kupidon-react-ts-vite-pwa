@@ -17,6 +17,8 @@ export namespace TypeUtils {
   export type Exists<T> = Exclude<T, null|undefined>
   export type PartialUndef<O extends object> =
     { [Prop in keyof O]+?: O[Prop] | undefined }
+  export type WriteablePartial<O extends object> =
+    { -readonly [Prop in keyof O]+?: O[Prop] }
   
   
   

@@ -13,7 +13,7 @@ import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from '@util/ui-text0/useUiText.ts'
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'

@@ -1,6 +1,6 @@
 import { CommonUiText } from 'src/ui/ui-values/CommonUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import { UiValues } from '@util/ui-text/UiText.ts'
+import { UiValues } from '@util/ui-text0/UiText.ts'
 
 
 

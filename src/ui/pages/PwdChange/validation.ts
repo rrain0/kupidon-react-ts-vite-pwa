@@ -2,7 +2,7 @@ import { UserApi } from 'src/api/requests/UserApi.ts'
 import { PwdChangeUiText } from 'src/ui/pages/PwdChange/uiText.ts'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from '@util/ui-text/UiText.ts'
+import { UiText, UiTextValues, UiValues } from '@util/ui-text0/UiText.ts'
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd
 import PartialFailureData = ValidationCore.PartialFailureData

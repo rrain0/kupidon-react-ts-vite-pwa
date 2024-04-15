@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
 import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'

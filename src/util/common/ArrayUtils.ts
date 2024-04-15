@@ -15,10 +15,10 @@ import fitRange2 = MathUtils.fitRange
 
 
 
+
 export namespace ArrayUtils {
   
   
-  import anyval = TypeUtils.anyval
   export const last = <T>(arr: T[]): T => {
     if (!arr.length) throw new Error("Array is empty, can't get last element.")
     return arr[arr.length-1]
@@ -44,6 +44,21 @@ export namespace ArrayUtils {
   export const ofIndices = (len = 0): number[] => {
     return Array(len).fill(undefined).map((_,i)=>i)
   }
+  
+  
+  
+  export const compare = <T>(arr: T[], other: T[]): 1|0|-1 => {
+    for (let i = 0; i < Math.max(arr.length, other.length); i++) {
+      if (i >= arr.length) return -1
+      if (i >= other.length) return 1
+      if (arr[i] < other[i]) return -1
+      if (arr[i] > other[i]) return 1
+      if (arr[i] === other[i]) return 0
+    }
+    return 0
+  }
+  export const isLower = <T>(arr: T[], other: T[]): boolean => compare(arr,other)===-1
+  export const isGreater = <T>(arr: T[], other: T[]): boolean => compare(arr,other)===1
   
   
   

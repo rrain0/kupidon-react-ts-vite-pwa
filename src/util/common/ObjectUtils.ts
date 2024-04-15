@@ -1,20 +1,27 @@
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import anyval = TypeUtils.anyval
+import WriteablePartial = TypeUtils.WriteablePartial
 
 
 export namespace ObjectUtils {
   
   
   
-  
+  // can also copy class instance
   export function copy<T extends object>(
     orig: T,
-    update?: { -readonly [Prop in keyof T]?: T[Prop] }
+    update?: WriteablePartial<T>,
   ): T {
-    let newInstance = Object.assign(Object.create(Object.getPrototypeOf(orig)), orig) as T
+    const newInstance = Object.assign(Object.create(Object.getPrototypeOf(orig)), orig) as T
     Object.assign(newInstance, update)
     return newInstance
   }
+  export const copyCallback =
+    <T extends object>(update: NoInfer<WriteablePartial<T>>)=>(orig: T)=>copy(orig, update)
+  
+  export const copyDestrCb =
+    <T extends object>(update: NoInfer<WriteablePartial<T>>)=>(orig: T)=>({ ...orig, ...update })
+  
   
   
   export const isObject = <O>(value: O|object): value is object =>

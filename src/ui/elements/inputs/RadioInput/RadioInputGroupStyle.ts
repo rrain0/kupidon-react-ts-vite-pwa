@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
 import col = EmotionCommon.col

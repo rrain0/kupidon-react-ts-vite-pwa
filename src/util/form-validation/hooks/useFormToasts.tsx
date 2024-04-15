@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { ValidationActions } from 'src/util/form-validation/ValidationActions.ts'
 import { ValidationCore } from 'src/util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues } from 'src/util/ui-text/UiText.ts'
+import { UiText, UiTextValues } from 'src/util/ui-text0/UiText.ts'
 import { ToastMsg, ToastMsgData, useToasts } from 'src/ui/components/Toasts/useToasts.tsx'
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values

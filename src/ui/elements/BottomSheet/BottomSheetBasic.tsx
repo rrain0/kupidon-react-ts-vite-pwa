@@ -1,6 +1,6 @@
 import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { AppTheme } from 'src/ui/theme/AppTheme.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import BottomSheet, { BottomSheetOptionsProps } from 'src/ui/elements/BottomSheet/BottomSheet.tsx'
 import { css } from '@emotion/react'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'

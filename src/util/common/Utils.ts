@@ -31,7 +31,10 @@ export namespace Utils {
       if (isNaN(value) || value < 0) value = defolt
       return value
     }
-    
+  
+  
+  
+  export const versionToNumArr = (version: string)=>version.split('.').map(it=>Number.parseInt(it))
     
   
   let id = 1
