@@ -2,7 +2,7 @@ import { LoginPageUiText } from 'src/ui/pages/Login/uiText'
 import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
 import { AuthApi } from 'src/api/requests/AuthApi'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiText, UiTextValues, UiValues } from 'src/ui/ui-text/UiText.ts'
+import { UiText, UiTextValues, UiValues } from '@util/ui-text/UiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData

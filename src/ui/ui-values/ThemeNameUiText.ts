@@ -1,5 +1,5 @@
-import { Lang } from 'src/ui/lang/Lang.ts'
-import { UiText, UiTextValues } from 'src/ui/ui-text/UiText.ts'
+import { Lang } from '@util/lang/Lang.ts'
+import { UiText, UiTextValues } from '@util/ui-text/UiText.ts'
 import { AllThemeNamesType } from 'src/ui/theme/ThemeCollection.ts'
 import AppLangEnum = Lang.AppLangEnum
 

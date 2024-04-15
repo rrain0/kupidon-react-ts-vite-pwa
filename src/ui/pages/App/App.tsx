@@ -8,7 +8,7 @@ import LogLayer from 'src/ui/pages/App/LogLayer'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { useAppInstallationSetup } from 'src/util/app/useAppInstallationSetup'
-import { useLangSetup } from 'src/ui/lang/useLangSetup.ts'
+import { useLangSetup } from '@util/lang/useLangSetup.ts'
 import { useThemeSetup } from 'src/ui/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars

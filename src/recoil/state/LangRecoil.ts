@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { ArrayUtils } from 'src/util/common/ArrayUtils'
-import { Lang } from 'src/ui/lang/Lang.ts'
+import { Lang } from '@util/lang/Lang.ts'
 import DefaultAppLang = Lang.DefaultAppLang
 import AppLangType = Lang.AppLangType
 import NonEmptyArr = ArrayUtils.NonEmptyArr

@@ -5,7 +5,7 @@ import { ProfileUiText } from 'src/ui/pages/Profile/uiText.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
-import { UiTextValues } from 'src/ui/ui-text/UiText.ts'
+import { UiTextValues } from '@util/ui-text/UiText.ts'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData

@@ -8,7 +8,7 @@ import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import { Hs } from 'src/ui/elements/basic-elements/Hs'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
-import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 import row = EmotionCommon.row
 

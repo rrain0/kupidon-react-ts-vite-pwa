@@ -1,5 +1,5 @@
-import { Lang } from 'src/ui/lang/Lang.ts'
-import { UiText, UiValues } from 'src/ui/ui-text/UiText.ts'
+import { Lang } from '@util/lang/Lang.ts'
+import { UiText, UiValues } from '@util/ui-text/UiText.ts'
 import AppLangEnum = Lang.AppLangEnum
 
 

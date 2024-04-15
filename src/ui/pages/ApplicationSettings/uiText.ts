@@ -1,5 +1,5 @@
-import { CommonUiText } from 'src/ui/ui-text/ui-values/CommonUiText'
-import { UiValues } from 'src/ui/ui-text/UiText.ts'
+import { CommonUiText } from 'src/ui/ui-values/CommonUiText'
+import { UiValues } from '@util/ui-text/UiText.ts'
 
 
 

@@ -3,8 +3,8 @@ import { useRecoilState } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { LangSettingsRecoil, } from 'src/recoil/state/LangSettingsRecoil.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { Lang } from 'src/ui/lang/Lang.ts'
-import { useLangDetector } from 'src/ui/lang/useLangDetector.ts'
+import { Lang } from 'src/util/lang/Lang.ts'
+import { useLangDetector } from 'src/util/lang/useLangDetector.ts'
 import arrIsNonEmpty = ArrayUtils.arrIsNonEmpty
 import AllAppLangs = Lang.AllAppLangs
 import DefaultAppLang = Lang.DefaultAppLang

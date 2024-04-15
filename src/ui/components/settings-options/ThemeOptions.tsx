@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { ApplicationSettingsUiText } from 'src/ui/pages/ApplicationSettings/uiText.ts'
-import { useUiValues } from 'src/ui/ui-text/useUiText.ts'
+import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import DayNightIc = SvgIcons.DayNightIc
 import DayIc = SvgIcons.DayIc
