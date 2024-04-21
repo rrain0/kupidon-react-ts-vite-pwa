@@ -1,3 +1,5 @@
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import isArray = TypeUtils.isArray
 
 
 
@@ -5,7 +7,7 @@ export namespace MathUtils {
   
   
   
-  export const ifNaN = (n: number, replacement: number)=>isNaN(n) ? replacement : n
+  export const ifNaN = <T = number>(n: number, replacement: T)=>isNaN(n) ? replacement : n
   
   
   
@@ -66,21 +68,30 @@ export namespace MathUtils {
   
   
   
+  const _fitRange = (curr: number, [min, max]: readonly [number, number]): number => {
+    return curr < min ? min : curr > max ? max : curr
+  }
   /**
    * Функция, подгоняющая текущее значение под диапазон
    * @param min Минимальное значение включительно
    * @param curr Текущее значение
    * @param max Максимальное значение включительно
+   * @param minMax диапазон [min, max] включительно
    * @returns {number} Результирующее значение, находящееся в диапазоне [min,max]
    */
-  export const fitRange =
-  (curr: number, [min, max]: readonly [number, number]): number =>
-    curr < min ? min : curr > max ? max : curr
-  
-  export const fitRange0 =
-  (min: number, curr: number, max: number): number =>
-    fitRange(curr, [min,max])
-  
+  export type FitRangeArgs =
+    | [curr: number, minMax: readonly [number, number]]
+    | [min: number, curr: number, max: number]
+  export const fitRange = (...args: FitRangeArgs): number => {
+    if (isArray(args[1])){
+      const [curr, [min, max]] = args as any
+      return _fitRange(curr, [min, max])
+    }
+    else {
+      const [min, curr, max] = args as any
+      return _fitRange(curr, [min, max])
+    }
+  }
   
   /**
    * Определение, находится ли текущее значение между минимальным и максимальным включительно
@@ -131,7 +142,7 @@ export namespace MathUtils {
   
   
   
-  // useful when you try to pick next or prev value and want it to loops in range when exceeded
+  // useful when you try to pick the next or prev value and want it to loops in range when exceeded
   export const loopRange = (curr: number, range: [min: number, max: number]) => {
     if (curr<range[0]) return range[1]
     if (curr>range[1]) return range[0]

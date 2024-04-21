@@ -7,15 +7,15 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import classNames from "classnames"
+import clsx from 'clsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { getElemProps } from 'src/util/common/ElemProps.ts'
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { getElemProps } from '@util/element/ElemProps.ts'
+import { MathUtils } from '@util/common/MathUtils.ts'
 import { ScrollbarStyle } from 'src/ui/elements/Scrollbar/ScrollbarStyle.ts'
 import inRange = MathUtils.inRange0
-import fitRange = MathUtils.fitRange0
+import fitRange = MathUtils.fitRange
 import { ScrollProps } from 'src/ui/elements/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
 import PartialUndef = TypeUtils.PartialUndef
@@ -252,7 +252,7 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   
   
   const scrollbarTrackProps = {
-    className: classNames(className, ScrollbarStyle.El.track.name),
+    className: clsx(className, ScrollbarStyle.El.track.name),
     [ScrollbarStyle.Attr.direction.name]: direction,
     [ScrollbarStyle.Attr.active.name]: trueOrUndef(dragStart),
   }

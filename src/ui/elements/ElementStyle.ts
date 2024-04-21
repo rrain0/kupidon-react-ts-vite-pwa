@@ -1,8 +1,7 @@
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import isObject = ObjectUtils.isObject
+import isObject = TypeUtils.isObject
 import isstring = TypeUtils.isstring
 import SingleOrArr = ArrayUtils.SingleOrArr
 import exists = TypeUtils.exists
@@ -119,9 +118,10 @@ export namespace ElementStyle {
     name: string
     states: ElemStateDescriptor<S>
     
+    
     constructor(
       name: string,
-      states: ElemStateDescriptor<S>
+      states: ElemStateDescriptor<S>,
     ) {
       this.name = name
       this.states = states
@@ -181,7 +181,7 @@ export namespace ElementStyle {
     }
     
     
-    upFor<Down extends string>(selector: string, down: Elem<Down,any>): Elem<Down,RootS> {
+    toElem<Down extends string>(selector: string, down: Elem<Down,any>): Elem<Down,RootS> {
       const newDown = new Elem<Down,RootS>(down.name, down.states)
       newDown.#up = this
       newDown.upSelector = selector

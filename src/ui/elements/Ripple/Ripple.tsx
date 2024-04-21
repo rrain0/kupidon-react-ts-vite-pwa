@@ -1,10 +1,10 @@
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React, {
   useCallback, useEffect,
   useImperativeHandle,
   useRef,
 } from 'react'
-import { getElemProps } from 'src/util/common/ElemProps.ts'
+import { getElemProps } from '@util/element/ElemProps.ts'
 import css from 'src/ui/elements/Ripple/Ripple.module.scss'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
@@ -160,13 +160,13 @@ React.forwardRef<RippleRefElement, RippleProps>(
       const target = props.targetElement?.current
         ?? rippleFrameRef.current?.parentElement
       if (target){
-        target.addEventListener('pointerdown',showRipple)
-        target.addEventListener('pointerup',hideRipple)
-        target.addEventListener('pointerout',hideRipple) // 'out' is 'leave' + 'cancel'
+        target.addEventListener('pointerdown', showRipple)
+        target.addEventListener('pointerup', hideRipple)
+        target.addEventListener('pointerout', hideRipple) // 'out' is 'leave' + 'cancel'
         return ()=>{
-          target.removeEventListener('pointerdown',showRipple)
-          target.removeEventListener('pointerup',hideRipple)
-          target.removeEventListener('pointerout',hideRipple)
+          target.removeEventListener('pointerdown', showRipple)
+          target.removeEventListener('pointerup', hideRipple)
+          target.removeEventListener('pointerout', hideRipple)
         }
       }
     },
@@ -181,11 +181,11 @@ React.forwardRef<RippleRefElement, RippleProps>(
   return <div
     {...restProps}
     ref={rippleFrameRef}
-    className={classNames(css.rippleFrame, className, RippleStyle.El.frameClassName)}
+    className={clsx(css.rippleFrame, className, RippleStyle.El.frameClassName)}
   >
     <div
       ref={rippleViewRef}
-      className={classNames(css.rippleView, RippleStyle.El.viewClassName)}
+      className={clsx(css.rippleView, RippleStyle.El.viewClassName)}
     />
   </div>
 }))

@@ -1,10 +1,7 @@
 import React, { useLayoutEffect } from 'react'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import commonCss from 'src/ui/style/common.module.scss'
 import PartialUndef = TypeUtils.PartialUndef
-import noScrollX = EmotionCommon.noScrollX
-import noScrollY = EmotionCommon.noScrollY
 
 
 
@@ -45,18 +42,12 @@ export const useUpNodesScrollLock = (
           }
         }
         
-        /* x.forEach(el=>el.classList.add(commonCss.noScrollX))
+        x.forEach(el=>el.classList.add(commonCss.noScrollX))
         y.forEach(el=>el.classList.add(commonCss.noScrollY))
+        
         return ()=>{
           x.forEach(el=>el.classList.remove(commonCss.noScrollX))
           y.forEach(el=>el.classList.remove(commonCss.noScrollY))
-        } */
-        
-        x.forEach(el=>el.classList.add(noScrollX.name))
-        y.forEach(el=>el.classList.add(noScrollY.name))
-        return ()=>{
-          x.forEach(el=>el.classList.remove(noScrollX.name))
-          y.forEach(el=>el.classList.remove(noScrollY.name))
         }
       }
     },

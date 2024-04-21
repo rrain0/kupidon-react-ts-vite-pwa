@@ -1,6 +1,6 @@
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 
 import AddModuleSvg from '@ic/add-module.svg?react'
@@ -126,7 +126,7 @@ export namespace SvgIcons {
       `}
       width={w}
       height={h}
-      className={classNames(className,SvgIcStyle.El.clazz.icon)}
+      className={clsx(className,SvgIcStyle.El.clazz.icon)}
       {...restProps}
       ref={forwardedRef}
     />

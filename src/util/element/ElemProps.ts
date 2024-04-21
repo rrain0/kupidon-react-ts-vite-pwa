@@ -164,6 +164,11 @@ export class ElemProps {
   
   
   
+  get vpCenterXYFloat(): [number,number] {
+    return [this.vpLeftFloat + this.widthFloat/2, this.vpTopFloat + this.heightFloat/2]
+  }
+  
+  
   
   
   

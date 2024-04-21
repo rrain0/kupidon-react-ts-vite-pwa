@@ -6,10 +6,10 @@ import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { MathUtils } from '@util/common/MathUtils.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
-import Button from 'src/ui/elements/Buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams

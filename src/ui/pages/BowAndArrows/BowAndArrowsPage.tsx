@@ -1,16 +1,11 @@
-import { css } from '@emotion/react'
 import React from 'react'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import HeaderArrow from 'src/ui/pages/BowAndArrows/elements/HeaderArrow.tsx'
+import PageHeader from 'src/ui/pages/BowAndArrows/elements/PageHeader.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
-import { Hs } from 'src/ui/elements/basic-elements/Hs'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
-import row = EmotionCommon.row
 
 
 
@@ -48,22 +43,3 @@ export default BowAndArrowsPage
 
 
 
-const PageHeader = (props: { children: string }) => {
-  return <Hs.Page css={{ paddingBottom: 40 }}>
-    {props.children}
-  </Hs.Page>
-}
-
-const HeaderArrow = (props: { children: string }) => {
-  return <div css={css`
-    ${row};
-    justify-content: space-between;
-    align-items: center;
-  `}>
-    <h4 css={Hs.page}>{props.children}</h4>
-    <ArrowAngledRoundedIc css={t => css`
-      ${SvgIcStyle.Prop.prop.color}: ${t.page.content1[0]};
-      height: 26px;
-    `}/>
-  </div>
-}

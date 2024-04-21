@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React from 'react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { PieProgressStyle } from 'src/ui/elements/PieProgress/PieProgressStyle.ts'
@@ -43,7 +43,7 @@ React.forwardRef<PieProgressRefElement, PieProgressProps>(
     PieProgressStyle.defolt,
     css`--rotation: ${rotation};`,
   ]}
-    className={classNames(className, PieProgressStyle.El.clazz.pieProgress)}
+    className={clsx(className, PieProgressStyle.El.clazz.pieProgress)}
     {...restProps}
     ref={forwardedRef}
   />

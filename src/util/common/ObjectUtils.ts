@@ -9,6 +9,8 @@ export namespace ObjectUtils {
   
   
   // can also copy class instance
+  import isObject = TypeUtils.isObject
+  
   export function copy<T extends object>(
     orig: T,
     update?: WriteablePartial<T>,
@@ -23,10 +25,6 @@ export namespace ObjectUtils {
   export const destructCopyBy =
     <T extends object>(update: NoInfer<WriteablePartial<T>>)=>(orig: T)=>({ ...orig, ...update })
   
-  
-  
-  export const isObject = <O>(value: O|object): value is object =>
-    typeof value === 'object' && value!==null
   
   
   

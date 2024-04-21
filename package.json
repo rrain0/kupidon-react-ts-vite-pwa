@@ -22,7 +22,7 @@
     "axios": "^1.6.8",
     "axios-retry": "^4.0.0",
     "browser-image-compression": "^2.0.2",
-    "classnames": "^2.5.1",
+    "clsx": "^2.1.0",
     "heic2any": "^0.0.4",
     "jose": "^5.2.3",
     "lodash": "^4.17.21",

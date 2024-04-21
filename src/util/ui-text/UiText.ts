@@ -2,10 +2,10 @@ import { Lang } from 'src/util/lang/Lang.ts'
 
 
 export type UiText<L extends Lang.Supported = Lang.Supported> = {
-  [L in Lang.Supported]?: string
+  [Lang in L]?: string
 }
 export type UiTemplate<L extends Lang.Supported = Lang.Supported, Args extends any[] = any[]> = {
-  [L in Lang.Supported]?: (...args: Args)=>string
+  [Lang in L]?: (...args: Args)=>string
 }
 
 

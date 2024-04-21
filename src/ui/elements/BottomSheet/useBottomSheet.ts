@@ -8,11 +8,10 @@ import React, {
   useState,
 } from 'react'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { ElemProps } from 'src/util/common/ElemProps.ts'
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { ElemProps } from '@util/element/ElemProps.ts'
+import { MathUtils } from '@util/common/MathUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
-import fitRange = MathUtils.fitRange0
 import { useNoSelect } from '@util/react/useNoSelect.ts'
 import { CssUtils } from 'src/util/common/CssUtils.ts'
 import parseCssValue = CssUtils.parseCssStringValue
@@ -23,7 +22,7 @@ import Setter = TypeUtils.Setter
 import findLastBy3 = ArrayUtils.findLastBy3
 import exists = TypeUtils.exists
 import findBy3 = ArrayUtils.findBy3
-import fitRange2 = MathUtils.fitRange
+import fitRange = MathUtils.fitRange
 import Callback = TypeUtils.Callback
 import lastIndex = ArrayUtils.lastIndex
 import findLastBy = ArrayUtils.findLastBy
@@ -211,7 +210,7 @@ export const useBottomSheet = (
         
         const idx = options.defaultOpenIdx ?? null
         
-        if (idx!==null) return fitRange2(
+        if (idx!==null) return fitRange(
           idx,[firstOpenIdx, lastIndex(snapPointsPx)]
         )
         
@@ -324,7 +323,7 @@ export const useBottomSheet = (
         if (newState==='adjusting')
           return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
         if (newSnapIdx===null) return null
-        return fitRange2(newSnapIdx, [0,lastIndex(snapPointsPx)])
+        return fitRange(newSnapIdx, [0,lastIndex(snapPointsPx)])
       }()
       
       const toHeight = function(){
@@ -635,7 +634,7 @@ function calculateSnapPointsPx(
         startIdx: cssValueI+1,
         orElse: Number.POSITIVE_INFINITY,
       }).elem as number
-      computed = fitRange2(computed,[left,right])
+      computed = fitRange(computed,[left,right])
       
       snapPointsPx[cssValueI] = computed
     })

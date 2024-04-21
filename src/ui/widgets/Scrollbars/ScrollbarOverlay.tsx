@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 import { ScrollbarOverlayStyle } from 'src/ui/widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
@@ -38,7 +38,7 @@ React.memo(
   
   
   return <Overlay // Scrollbar Overlay
-    className={classNames(props.className, ScrollbarOverlayStyle.El.overlay.name)}
+    className={clsx(props.className, ScrollbarOverlayStyle.El.overlay.name)}
     style={props.style}
   >
     

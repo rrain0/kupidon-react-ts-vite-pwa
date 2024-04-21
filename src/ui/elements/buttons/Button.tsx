@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import React, { useImperativeHandle, useRef } from "react"
-import classNames from "classnames"
-import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
+import clsx from 'clsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import abs = EmotionCommon.abs
@@ -45,7 +45,7 @@ React.forwardRef<ButtonRefElement, ButtonProps>(
   
   const buttonProps = {
     [ButtonStyle.Attr.error.name]: trueOrUndef(hasError),
-    className: classNames(className, ButtonStyle.El.btn.name),
+    className: clsx(className, ButtonStyle.El.btn.name),
     type: type ?? 'button',
     ...restProps
   }

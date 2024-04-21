@@ -1,4 +1,4 @@
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { MathUtils } from 'src/util/common/MathUtils.ts'
 
 
 export namespace StringUtils {

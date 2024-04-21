@@ -8,15 +8,15 @@ import React, {
   useState,
 } from 'react'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { ElemProps } from 'src/util/common/ElemProps.ts'
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { ElemProps } from '@util/element/ElemProps.ts'
+import { MathUtils } from '@util/common/MathUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import { useStateAndRef } from '@util/react/useStateAndRef.ts'
 import Setter = TypeUtils.Setter
-import fitRange2 = MathUtils.fitRange
+import fitRange = MathUtils.fitRange
 import Callback = TypeUtils.Callback
 import findLastBy = ArrayUtils.findLastBy
 import notExists = TypeUtils.notExists
@@ -163,7 +163,7 @@ export const useTabs = (
         
       const realDefaultOpenIdx = function(){
         if (notExists(options.defaultOpenIdx)) return DefaultTabIdx
-        return fitRange2(
+        return fitRange(
           options.defaultOpenIdx,[0,lastTabIdx]
         )
       }()
@@ -246,7 +246,7 @@ export const useTabs = (
       const toTab = function(){
         if (newState==='adjusting')
           return getTabIdxToAdjust(currScrollLeft, snapPointsPx)
-        return fitRange2(newTabIdx, [0,lastTabIdx])
+        return fitRange(newTabIdx, [0,lastTabIdx])
       }()
       
       const toScrollLeft = snapPointsPx[toTab]
@@ -360,7 +360,7 @@ export const useTabs = (
         }
       }
       
-      const newScrollLeft = fitRange2(
+      const newScrollLeft = fitRange(
         dragStartRef.current.scrollLeft - mx,
         [0, maxScrollLeft]
       )

@@ -13,9 +13,9 @@ export namespace ScrollbarOverlayStyle {
   export const El = function(){
     const overlay = new Elem('rrainuiScrollbarOverlay',{})
     
-    const scrollbarTrack = overlay.upFor('>',ScrollbarStyle.El.track)
-    const scrollbarThumbBox = scrollbarTrack.upFor('>',ScrollbarStyle.El.thumbBox)
-    const scrollbarThumb = scrollbarThumbBox.upFor('>',ScrollbarStyle.El.thumb)
+    const scrollbarTrack = overlay.toElem('>',ScrollbarStyle.El.track)
+    const scrollbarThumbBox = scrollbarTrack.toElem('>',ScrollbarStyle.El.thumbBox)
+    const scrollbarThumb = scrollbarThumbBox.toElem('>',ScrollbarStyle.El.thumb)
     
     return { root: overlay, overlay, scrollbarTrack, scrollbarThumbBox, scrollbarThumb } as const
   }()

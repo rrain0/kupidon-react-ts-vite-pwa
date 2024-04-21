@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
-import classNames from "classnames"
+import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import RadioActiveIc = SvgIcons.RadioActiveIc
@@ -53,7 +53,7 @@ React.forwardRef<RadioInputRefElement, RadioInputProps>
   
   
   const frameProps = {
-    className: classNames(className, RadioInputStyle.El.frameClassName),
+    className: clsx(className, RadioInputStyle.El.frameClassName),
     style: style,
   }
   const inputProps = {

@@ -28,7 +28,7 @@ export namespace ComponentStyle {
       error: Attr.error,
       activeFocusVisible: [Pseudo.active, Pseudo.focusVisible],
     })
-    const secondary = main.upFor('>', new Elem('rrainuiSecondary',{}))
+    const secondary = main.toElem('>', new Elem('rrainuiSecondary',{}))
     return { root: main, main, secondary } as const
   }()
   

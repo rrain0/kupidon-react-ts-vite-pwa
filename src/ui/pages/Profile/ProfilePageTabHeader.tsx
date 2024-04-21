@@ -6,11 +6,11 @@ import { formHeader } from 'src/ui/elements/basic-elements/Hs'
 import { Hs } from 'src/ui/elements/basic-elements/Hs.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { MathUtils } from '@util/common/MathUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { TabsRenderProps } from 'src/ui/elements/Tabs/Tabs.tsx'
 import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
-import fitRange2 = MathUtils.fitRange
+import fitRange = MathUtils.fitRange
 import mapRange = MathUtils.mapRange
 import inRange2 = MathUtils.inRange
 import lastIndex = ArrayUtils.lastIndex
@@ -60,21 +60,21 @@ React.memo(
   // +1 - заголовок уехал вправо
   const forCenter = tabContainerSpring.scrollLeft.to(v=>{
     const fromRange = [(i-1)*w, (i+1)*w] as const
-    v = fitRange2(v, fromRange)
+    v = fitRange(v, fromRange)
     v = mapRange(v, fromRange, [-1,1])
     //console.log('center value',v)
     return v
   })
   const forLeft = tabContainerSpring.scrollLeft.to(v=>{
     const fromRange = [(i-2)*w, (i+0)*w] as const
-    v = fitRange2(v, fromRange)
+    v = fitRange(v, fromRange)
     v = mapRange(v, fromRange, [-1,1])
     //console.log('left value',v)
     return v
   })
   const forRight = tabContainerSpring.scrollLeft.to(v=>{
     const fromRange = [(i+0)*w, (i+2)*w] as const
-    v = fitRange2(v, fromRange)
+    v = fitRange(v, fromRange)
     v = mapRange(v, fromRange, [-1,1])
     return v
   })

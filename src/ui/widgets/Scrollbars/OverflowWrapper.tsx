@@ -10,7 +10,7 @@ import React, { useRef } from 'react'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import centerAll = EmotionCommon.centerAll
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
 import PartialUndef = TypeUtils.PartialUndef
 import ClassStyleProps = ReactUtils.ClassStyleProps
@@ -42,7 +42,7 @@ React.memo(
     Wrapper contains Scroll Container & ScrollbarOverlay
   */
   return <Wrapper
-    className={classNames(props.className, 'rrainuiOverflowWrapper')}
+    className={clsx(props.className, 'rrainuiOverflowWrapper')}
     style={props.style}
   >
     

@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -9,8 +9,8 @@ import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
-import Button from 'src/ui/elements/Buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/Buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import row = EmotionCommon.row
@@ -48,7 +48,7 @@ React.memo(
     />
     
     <Frame
-      className={classNames('rrainuiBottomNavBar')}
+      className={clsx('rrainuiBottomNavBar')}
     >
       
       <NavLink to={RootRoute.profile[full]()}>

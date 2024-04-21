@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
-import classNames from "classnames"
+import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import resetInput = EmotionCommon.resetInput
@@ -46,7 +46,7 @@ React.forwardRef<InputRefElement, InputProps>(
   
   
   const frameProps = {
-    className: classNames(className, InputStyle.El.frameClassName),
+    className: clsx(className, InputStyle.El.frameClassName),
     style: style,
     ...fProps,
   }

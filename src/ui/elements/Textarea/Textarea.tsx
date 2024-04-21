@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { getElemProps } from 'src/util/common/ElemProps.ts'
+import { getElemProps } from '@util/element/ElemProps.ts'
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
-import classNames from "classnames"
+import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
@@ -43,7 +43,7 @@ const Textarea = React.memo(React.forwardRef<HTMLTextAreaElement, InputProps>((
   
   
   const frameProps = {
-    className: classNames(className,TextareaStyle.El.frameClassName),
+    className: clsx(className,TextareaStyle.El.frameClassName),
     style: style,
   }
   const textareaProps = {

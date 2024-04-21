@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
@@ -36,7 +36,7 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
   
   
   const radioGroupProps = {
-    className: classNames(className, RadioInputGroupStyle.El.radioGroupClassName),
+    className: clsx(className, RadioInputGroupStyle.El.radioGroupClassName),
     [RadioInputGroupStyle.Attr.errorName]: trueOrUndef(hasError),
     // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role
     role: 'radiogroup',

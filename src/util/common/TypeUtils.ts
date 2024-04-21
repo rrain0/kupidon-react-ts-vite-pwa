@@ -22,7 +22,7 @@ export namespace TypeUtils {
   
   
   
-  
+  /*
   export function exists<T extends {}>(value: T|empty): value is T {
     return value!==null && value!==undefined
   }
@@ -31,8 +31,50 @@ export namespace TypeUtils {
   }
   export const isstring = <T>(value: T|string): value is string => typeof value === 'string'
   export const isnumber = <T>(value: T|number): value is number => typeof value === 'number'
+  export const isArray = <T,E>(obj: T | E[]): obj is E[] => obj instanceof Array
+  export const isObject = <O>(value: O|object): value is object =>
+    typeof value === 'object' && value!==null
+   */
   
+  export function exists<T, Ex extends {}>(value: T | Ex): value is Ex {
+    return value!==null && value!==undefined
+  }
+  export function notExists<T, NEx extends empty>(value: T | NEx): value is NEx {
+    return value===null || value===undefined
+  }
+  export function isstring<T, S extends string>(value: T | S): value is S {
+    return typeof value === 'string'
+  }
+  export function isnumber<T, N extends number>(value: T | N): value is N {
+    return typeof value === 'number'
+  }
+  export function isArray<T, A extends unknown[]>(obj: T | A): obj is A {
+    return obj instanceof Array
+  }
+  export function isObject<T, O extends object>(value: T | O): value is O {
+    return typeof value === 'object' && value !== null
+  }
   
+  /*
+  {
+    const getStrOrObj = (): 'str' | 'str2' | { a: number } => 'str'
+    
+    function f() {
+      const value = getStrOrObj()
+      if (isstring(value)) {
+        const str = value
+      }
+      if (isObject(value)) {
+        const obj = value
+        console.log(obj.substring(0, 1))
+        const num: number = obj.a
+        console.log(num)
+      } else {
+        console.log(value.a)
+      }
+    }
+  }
+   */
   
   
   export type Callback = ()=>void

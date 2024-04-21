@@ -1,35 +1,27 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'
 import React, {
-  useCallback, useEffect,
+  useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react'
-import classNames from "classnames"
-import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
+import clsx from 'clsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useAsRef } from '@util/react/useAsRef.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { getElemProps } from 'src/util/common/ElemProps.ts'
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
-import { useStateAndRef } from '@util/react/useStateAndRef.ts'
+import { getElemProps } from '@util/element/ElemProps.ts'
+import { MathUtils } from '@util/common/MathUtils.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/elements/Scrollbar/ScrollbarVerticalStyle.ts'
-import inRange = MathUtils.inRange0
-import fitRange = MathUtils.fitRange0
 import reset = EmotionCommon.reset
 import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
 import mapRange = MathUtils.mapRange
 import noop = TypeUtils.noop
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import fitRange2 = MathUtils.fitRange
-import contents = EmotionCommon.contents
-import inRange2 = MathUtils.inRange
+import fitRange = MathUtils.fitRange
 
 
 
@@ -156,13 +148,13 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
       if (first){
         setIsDragging(true)
         if (!dragStartRef.current.isByThumbBox){
-          setScroll(fitRange2(yPercent, [0,100]))
+          setScroll(fitRange(yPercent, [0,100]))
         }
       }
       if (active){
         if (yPercent<0) setScroll(0)
         else if (yPercent>100) setScroll(100)
-        else setScroll(s=>fitRange2(s+dyPercent, [0,100]))
+        else setScroll(s=>fitRange(s+dyPercent, [0,100]))
       }
       if (last){
         setIsDragging(false)
@@ -184,7 +176,7 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
   
   
   const scrollbarTrackProps = {
-    className: classNames(className, ScrollbarVerticalStyle.El.track.name),
+    className: clsx(className, ScrollbarVerticalStyle.El.track.name),
     [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging),
     ...restProps,
     ref: trackRef,

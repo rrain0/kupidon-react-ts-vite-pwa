@@ -1,4 +1,4 @@
-import { MathUtils } from 'src/util/common/NumberUtils.ts'
+import { MathUtils } from 'src/util/common/MathUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
 import ComparatorEq = TypeUtils.ComparatorEq
@@ -10,7 +10,8 @@ import exists = TypeUtils.exists
 import MergerIndexed = TypeUtils.MergerIndexed
 import CombinerIndexed = TypeUtils.CombinerIndexed
 import Exists = TypeUtils.Exists
-import fitRange2 = MathUtils.fitRange
+import fitRange = MathUtils.fitRange
+import isArray = TypeUtils.isArray
 
 
 
@@ -63,12 +64,6 @@ export namespace ArrayUtils {
   
   
   
-  /**
-   * Проверка является ли переданное значение массивом
-   * @param obj any
-   * @returns {boolean} true если obj является массивом
-   */
-  export const isArray = <T,E>(obj: T | E[]): obj is E[] => obj instanceof Array
   
   
   export type ArrayElement<ArrayType extends readonly unknown[]> =
@@ -265,7 +260,7 @@ export namespace ArrayUtils {
   <T,E>
   ({ arr, filter = defaultPredicate, startIdx = 0, orElse }: FindByElseProps<T,E>)
   : FindResult<T,E> => {
-    startIdx = fitRange2(
+    startIdx = fitRange(
       startIdx>=0 ? startIdx : (arr.length+startIdx),
       [0, arr.length]
     )
@@ -305,7 +300,7 @@ export namespace ArrayUtils {
   <T,E>
   ({ arr, filter = defaultPredicate, startIdx = -1, orElse }: FindByElseProps<T,E>)
   : FindResult<T,E> => {
-    startIdx = fitRange2(
+    startIdx = fitRange(
       startIdx>=0 ? startIdx : (arr.length+startIdx),
       [-1, arr.length-1]
     )
