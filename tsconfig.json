@@ -4,7 +4,6 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    
 
     
     
@@ -19,6 +18,11 @@
     // path aliases
     "baseUrl": ".",
     "paths": {
+      "*": [
+        "src/*",
+        "lib-types-overrides/*"
+      ],
+      
       "src/*": ["src/*"],
       
       "@res/*": ["src/res/*"],

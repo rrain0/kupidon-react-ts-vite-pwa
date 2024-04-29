@@ -187,7 +187,8 @@ export namespace MathUtils {
     if (typeof a === 'number' && typeof b === 'number'){
       from = floorTo0(a)
       to = floorTo0(b)
-    } else if (typeof a === 'number'){
+    }
+    else if (typeof a === 'number'){
       to = floorTo0(a)
     }
     if (from>to) throw new Error(`'to'=${to} must be greater-equal than 'from'=${from}`)

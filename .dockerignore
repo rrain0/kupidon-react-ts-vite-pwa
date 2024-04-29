@@ -13,11 +13,14 @@ dist-ssr
 dev-dist
 *.local
 
-### Private config ###
-react.prod.env
-#react.local.env
-#react.dev.env
-#react.template.env
+nginx
+nginx-react
+.git
+.gitignore
+Makefile
+Dockerfile
+docker-compose.yml
+*.env
 
 # Editor directories and files
 .vscode/*

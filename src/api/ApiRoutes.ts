@@ -1,19 +1,10 @@
 
 
+
 export namespace ApiRoutes {
   
   
-  // todo move url to config
-  const isLocal = true
-  export const api = function(){
-    const mode = import.meta.env.MODE
-    if (mode==='development' && isLocal)
-      return 'https://localhost:40018/api'
-    
-    if (mode==='development') return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
-    if (mode==='production') return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
-    return 'https://dev.kupidon.rrain.ydns.eu:50040/api'
-  }()
+  export const api = import.meta.env.API_BASE_URL as string
   
   
   export const authRefresh = `${api}/auth/refresh`

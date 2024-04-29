@@ -7,31 +7,6 @@ import checker from 'vite-plugin-checker'
 
 
 
-/*
-const manifest: VitePWAOptions['manifest'] = {
-  name: 'PWA Inject Manifest',
-  short_name: 'PWA Inject',
-  theme_color: '#ffffff',
-  icons: [
-    {
-      src: 'pwa-192x192.png', // <== don't add slash, for testing
-      sizes: '192x192',
-      type: 'image/png',
-    },
-    {
-      src: '/pwa-512x512.png', // <== don't remove slash, for testing
-      sizes: '512x512',
-      type: 'image/png',
-    },
-    {
-      src: 'pwa-512x512.png', // <== don't add slash, for testing
-      sizes: '512x512',
-      type: 'image/png',
-      purpose: 'any maskable',
-    },
-  ],
-}
-*/
 
 const pwaOptions: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
@@ -44,15 +19,6 @@ const pwaOptions: Partial<VitePWAOptions> = {
   strategies: 'injectManifest',
   srcDir: 'src/service-worker',
   filename: 'service-worker.ts',
-
-  // inject manifest from the upper object
-  /*
-   injectManifest: {
-   minify: false,
-   enableWorkboxModulesLogs: true,
-   },
-   manifest: manifest,
-   */
 
   // do not inject manifest, only service worker,
   // so you can write your own link to manifest in index.html
@@ -87,4 +53,8 @@ export default defineConfig({
       typescript: true,
     }),
   ],
+  define: {
+    // pass desired env variables
+    'import.meta.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL),
+  },
 })
