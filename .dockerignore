@@ -19,7 +19,7 @@ nginx-react
 .gitignore
 Makefile
 Dockerfile
-docker-compose.yml
+docker-compose-local.yml
 *.env
 
 # Editor directories and files

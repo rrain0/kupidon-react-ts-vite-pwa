@@ -14,19 +14,11 @@ services:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:
       - ./nginx-react/nginx.conf:/etc/nginx/templates/nginx.conf.template:ro
-    deploy:
-      restart_policy:
-        condition: any
-        # Time between restart attempts
-        delay: 5s
-        # 'max_attempts' can only be used with 'condition: on-failure'
-        #max_attempts: 3
-        # How long to wait before deciding if a restart has succeeded.
-        window: 120s
     environment:
       # where to find 'templates/nginx.conf.template'
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
       - REACT_PORT
+    restart: unless-stopped
 
 
   nginx:
@@ -36,15 +28,6 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/templates/nginx.conf.template:ro
       - ${CERT_FILE}:/etc/ssl/cert/cert.crt:ro
       - ${CERT_KEY}:/etc/ssl/cert/cert.key:ro
-    deploy:
-      restart_policy:
-        condition: any
-        # Time between restart attempts
-        delay: 5s
-        # 'max_attempts' can only be used with 'condition: on-failure'
-        #max_attempts: 3
-        # How long to wait before deciding if a restart has succeeded.
-        window: 120s
     environment:
       # where to find 'templates/nginx.conf.template'
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
@@ -55,6 +38,7 @@ services:
       - CERT_KEY
       - KTOR_HOST
       - KTOR_PORT
+    restart: unless-stopped
 
 
 

@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
@@ -32,29 +32,38 @@ const pwaOptions: Partial<VitePWAOptions> = {
 
 
 
+
+
 // https://vitejs.dev/config/
-export default defineConfig({
-  server: {
-    host: true, // expose app via IP access from local network
-    port: 40029,
-  },
-  plugins: [
-    react({
-      jsxImportSource: '@emotion/react',
-      babel: {
-        plugins: ['@emotion/babel-plugin']
-      }
-    }),
-    tsconfigPaths(),
-    svgr(),
-    VitePWA(pwaOptions),
-    checker({
-      // use TypeScript check
-      typescript: true,
-    }),
-  ],
-  define: {
-    // pass desired env variables
-    'import.meta.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL),
-  },
+export default defineConfig(({ command, mode }) => {
+  
+  // Load env file based on `mode` in the current working directory.
+  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+  //const env = loadEnv(mode, process.cwd(), '')
+  
+  return {
+    server: {
+      host: true, // expose app via IP access from local network
+      port: +(process.env.REACT_PORT ?? 40009),
+    },
+    plugins: [
+      react({
+        jsxImportSource: '@emotion/react',
+        babel: {
+          plugins: ['@emotion/babel-plugin']
+        }
+      }),
+      tsconfigPaths(),
+      svgr(),
+      VitePWA(pwaOptions),
+      checker({
+        // use TypeScript check
+        typescript: true,
+      }),
+    ],
+    define: {
+      // pass desired env variables
+      'import.meta.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL),
+    },
+  }
 })
