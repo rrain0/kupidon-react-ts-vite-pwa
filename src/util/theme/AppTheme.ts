@@ -32,8 +32,9 @@ export namespace AppTheme {
       content3:  string[]
     },
     containerAccent: {
-      bgc:     string[]
-      content: string[]
+      bgc:      string[]
+      content:  string[]
+      contentGradIcon: string[]
     },
     
     // main button (submit button)

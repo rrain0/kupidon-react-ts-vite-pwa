@@ -11,8 +11,8 @@ import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useBoolState } from '@util/react/useBoolState.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import fixedBottom = EmotionCommon.fixedBottom
 import row = EmotionCommon.row
 import Arrow5FwdIc = SvgIcons.ArrowLinesSharp1Ic
@@ -150,7 +150,7 @@ export namespace ButtonBarComponents {
       onClick={reload}
     >
       <ArrowReloadIc css={isReloading && css`
-        ${SvgIcStyle.El.thiz.icon} {
+        ${SvgIconsStyle.El.thiz.icon} {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}
@@ -179,7 +179,7 @@ export namespace ButtonBarComponents {
       onClick={props.refresh}
     >
       <ArrowReloadIc css={isAnimating && css`
-        ${SvgIcStyle.El.thiz.icon} {
+        ${SvgIconsStyle.El.thiz.icon} {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}

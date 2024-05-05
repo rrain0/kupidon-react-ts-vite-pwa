@@ -66,10 +66,10 @@ import SpinnerCircleQuarterSvg from '@ic/spinner-circle-quarter.svg?react'
 
 import WarnTriangleToastifySvg from '@ic/warn-triangle-toastify.svg?react'
 
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import falsishToUndef = TypeUtils.falsyToUndef
+import falsyToUndef = TypeUtils.falsyToUndef
 import exists = TypeUtils.exists
 
 
@@ -115,18 +115,18 @@ export namespace SvgIcons {
     
     return <SvgComponent
       css={css`
-        width:  ${falsishToUndef(!exists(w)) && SvgIcStyle.Prop.varr.size};
-        height: ${falsishToUndef(!exists(h)) && SvgIcStyle.Prop.varr.size};
+        width:  ${falsyToUndef(!exists(w)) && SvgIconsStyle.Prop.varr.size};
+        height: ${falsyToUndef(!exists(h)) && SvgIconsStyle.Prop.varr.size};
         //max-width: 100%;
         //max-height: 100%;
-        fill: ${color ?? SvgIcStyle.Prop.vard.color('black')};
-        stroke: ${color ?? SvgIcStyle.Prop.vard.color('black')};
-        ${SvgIcStyle.Prop.prop.accentColor}:
-                ${accentColor ?? SvgIcStyle.Prop.vard.accentColor('gray')}
+        fill: ${color ?? SvgIconsStyle.Prop.vard.color('black')};
+        stroke: ${color ?? SvgIconsStyle.Prop.vard.color('black')};
+        ${SvgIconsStyle.Prop.prop.accentColor}:
+                ${accentColor ?? SvgIconsStyle.Prop.vard.accentColor('gray')}
       `}
       width={w}
       height={h}
-      className={clsx(className,SvgIcStyle.El.clazz.icon)}
+      className={clsx(className,SvgIconsStyle.El.clazz.icon)}
       {...restProps}
       ref={forwardedRef}
     />

@@ -44,8 +44,8 @@ import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import { PieProgressStyle } from 'src/ui/elements/PieProgress/PieProgressStyle.ts'
 import SparkingLoadingLine from 'src/ui/elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
@@ -640,9 +640,9 @@ const photoOnDragBorder = (t:AppTheme.Theme)=>css`
   border-color: ${t.photos.borderDrag[0]};
 `
 const photoPlaceholderIconStyle = (t:AppTheme.Theme)=>css`
-  ${SvgIcStyle.El.thiz.icon}{
-    ${SvgIcStyle.Prop.prop.color}: ${t.photos.content[0]};
-    ${SvgIcStyle.Prop.prop.size}:  30%;
+  ${SvgIconsStyle.El.thiz.icon}{
+    ${SvgIconsStyle.Prop.prop.color}: ${t.photos.content[0]};
+    ${SvgIconsStyle.Prop.prop.size}:  30%;
   }
 `
 const profilePhotoPieProgress = (t:AppTheme.Theme)=>css`
@@ -711,8 +711,8 @@ const optionIconBoxStyle = css`
   ${center};
   height: 1.3em;
   width: 1.333em;
-  >${SvgIcStyle.El.el.icon}{
-    ${SvgIcStyle.Prop.prop.color}: ${ButtonStyle.Prop.color.sel()};
+  >${SvgIconsStyle.El.el.icon}{
+    ${SvgIconsStyle.Prop.prop.color}: ${ButtonStyle.Prop.color.var()};
   }
 `
 

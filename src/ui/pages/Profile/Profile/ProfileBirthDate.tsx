@@ -5,9 +5,13 @@ import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
+import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
+import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
+import OptionAndValueItem, {
+  OptionAndValueItemGradIconStyle,
+} from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import {
   ValidationWrapRenderProps
@@ -17,12 +21,11 @@ import { useUiValues } from '@util/ui-text/useUiText.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/elements/cards/Card2.tsx'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
-import Arrow6NextIc = SvgIcons.ArrowAngledRoundedIc
 import row = EmotionCommon.row
-import GiftBoxIc = SvgIcons.GiftBoxIc
+import GiftBoxGradIc = SvgGradIcons.GiftBoxGradIc
 
 
 
@@ -43,11 +46,10 @@ React.memo(
   
   return <>
     <OptionAndValueItem
-      icon={<GiftBoxIc css={css`height: 50%`}/>}
+      icon={<GiftBoxGradIc css={t=>OptionAndValueItemGradIconStyle(t)}/>}
       title={titleText.birthDate}
       value={props.value}
       data-error={props.highlight}
-      nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
       onClick={open}
     />
     

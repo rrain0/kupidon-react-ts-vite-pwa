@@ -12,7 +12,7 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
 import center = EmotionCommon.center
@@ -21,7 +21,7 @@ import Spinner8LinesIc = SvgIcons.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIcons.ClearTrashIc
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Setter = TypeUtils.Callback1
 import Txt = EmotionCommon.Txt
 
@@ -131,15 +131,15 @@ export default ClearSiteConfirmation
 
 
 const icon = (t:Theme)=>css`
-  ${SvgIcStyle.El.thiz.icon} {
+  ${SvgIconsStyle.El.thiz.icon} {
     height: 1.333em;
     width: 1.333em;
-    ${SvgIcStyle.Prop.prop.color}: ${t.page.content2[0]};
+    ${SvgIconsStyle.Prop.prop.color}: ${t.page.content2[0]};
   }
 `
 const iconOnDanger = (t:Theme)=>css`
-  ${SvgIcStyle.El.thiz.icon} {
-    ${SvgIcStyle.Prop.prop.color}: ${t.elementDanger.content[0]};
+  ${SvgIconsStyle.El.thiz.icon} {
+    ${SvgIconsStyle.Prop.prop.color}: ${t.elementDanger.content[0]};
   }
 `
 const button = (t:Theme)=>css`

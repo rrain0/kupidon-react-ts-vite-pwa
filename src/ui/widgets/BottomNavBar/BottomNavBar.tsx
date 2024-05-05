@@ -11,7 +11,7 @@ import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import row = EmotionCommon.row
 import CardsHeartIc = SvgIcons.CardsHeartIc

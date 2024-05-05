@@ -15,8 +15,9 @@ const DarkSimpleProps = {
     content3:  ['#7b7b7b'],
   },
   containerAccent: {
-    bgc:     ['#aaaaaa'],
-    content: ['#000000'],
+    bgc:      ['#aaaaaa'],
+    content:  ['#000000'],
+    contentGradIcon: ['#BB2649','#F75F82'],
   },
   
   buttonMain: {

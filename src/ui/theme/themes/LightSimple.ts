@@ -15,8 +15,9 @@ const LightSimpleProps = {
     content3:  ['#7b7b7b'],
   },
   containerAccent: {
-    bgc:     ['#bbbbbb'],
-    content: ['#000000'],
+    bgc:      ['#bbbbbb'],
+    content:  ['#000000'],
+    contentGradIcon: ['#BB2649','#F75F82'],
   },
   
   buttonMain: {

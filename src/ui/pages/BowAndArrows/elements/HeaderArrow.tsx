@@ -4,8 +4,8 @@ import React from 'react'
 import { Hs } from 'src/ui/elements/basic-elements/Hs.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import row = EmotionCommon.row
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
@@ -19,7 +19,7 @@ const btnStyle = (t: AppTheme.Theme)=>css`
   align-items: center;
 `
 const arrowStyle = (t: AppTheme.Theme)=>css`
-  ${SvgIcStyle.Prop.prop.color}: ${t.page.content1[0]};
+  ${SvgIconsStyle.Prop.prop.color}: ${t.page.content1[0]};
   height: 26px;
 `
 

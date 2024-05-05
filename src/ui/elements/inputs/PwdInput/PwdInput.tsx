@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Input, {InputProps} from "src/ui/elements/inputs/Input/Input.tsx"
 import { useRef, useState } from 'react'
 import React from "react"
-import {SvgIcons} from "src/ui/elements/icons/SvgIcons.tsx"
+import {SvgIcons} from "src/ui/elements/icons/SvgIcons/SvgIcons.tsx"
 import EyeCrossedOutIc = SvgIcons.EyeCrossedOutIc
 import EyeIc = SvgIcons.EyeIc
 import Ripple from "src/ui/elements/Ripple/Ripple.tsx"
@@ -87,9 +87,9 @@ EyeWrap.defaultProps = { type: 'button' }
 
 
 const iconCss = (t:AppTheme.Theme)=>css`
-  ${SvgIcStyle.El.thiz.icon}{
-    ${SvgIcStyle.Prop.prop.size}: 24px;
-    ${SvgIcStyle.Prop.prop.color}: ${t.input.content[0]};
+  ${SvgIconsStyle.El.thiz.icon}{
+    ${SvgIconsStyle.Prop.prop.size}: 24px;
+    ${SvgIconsStyle.Prop.prop.color}: ${t.input.content[0]};
   }
 `
 const rippleCss = (t:AppTheme.Theme)=>css`

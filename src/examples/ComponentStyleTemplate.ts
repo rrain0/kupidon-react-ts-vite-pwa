@@ -4,6 +4,7 @@ import DataAttr = ElementStyle.DataAttr
 import Elem = ElementStyle.Elem
 import Pseudo = ElementStyle.Pseudo
 import CssProp = ElementStyle.CssProp
+import CssPropEnum = ElementStyle.CssPropEnum
 
 
 
@@ -33,7 +34,8 @@ export namespace ComponentStyle {
   }()
   
   export const Prop = {
-    someProp: new CssProp('some-prop',[]),
+    prop: new CssProp('--prop'),
+    propEnum: new CssPropEnum('--prop-enum', ['black', 'white']),
   } as const
   
   

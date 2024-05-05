@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Theme = AppTheme.Theme
 import col = EmotionCommon.col
@@ -12,6 +12,8 @@ import Elem = ElementStyle.Elem
 import DataAttr = ElementStyle.DataAttr
 import Pseudo = ElementStyle.Pseudo
 import CssProp = ElementStyle.CssProp
+import CssPropEnum = ElementStyle.CssPropEnum
+import CssPropColor = ElementStyle.CssPropColor
 
 
 
@@ -33,16 +35,16 @@ export namespace ButtonStyle {
     })
     const border = btn.toElem('>', new Elem('rrainuiBorder',{}))
     const ripple = border.toElem('>', new Elem(RippleStyle.El.frameClassName,{}))
-    const icon = btn.toElem('>', new Elem(SvgIcStyle.El.clazz.icon,{}))
+    const icon = btn.toElem('>', new Elem(SvgIconsStyle.El.clazz.icon,{}))
     return { root: btn, btn, border, ripple, icon } as const
   }()
   
   export const Prop = {
-    color:       CssProp.color,
-    rippleMode:  new CssProp(RippleStyle.Prop.mode.substring(2),['center','cursor']),
-    rippleColor: new CssProp(RippleStyle.Prop.color.substring(2),[]),
-    iconSize:    new CssProp(SvgIcStyle.Prop.prop.size.substring(2),[]),
-    iconColor:   new CssProp(SvgIcStyle.Prop.prop.color.substring(2),[]),
+    color:       CssPropColor,
+    rippleMode:  new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
+    rippleColor: new CssProp(RippleStyle.Prop.color),
+    iconSize:    new CssProp(SvgIconsStyle.Prop.prop.size),
+    iconColor:   new CssProp(SvgIconsStyle.Prop.prop.color),
   } as const
   
   

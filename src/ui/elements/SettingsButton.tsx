@@ -3,7 +3,7 @@ import React from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import GearIc = SvgIcons.GearIc
 import PartialUndef = TypeUtils.PartialUndef
 

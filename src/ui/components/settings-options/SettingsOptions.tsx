@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import row = EmotionCommon.row
 import resetH = EmotionCommon.resetH
 
@@ -33,15 +33,15 @@ export namespace SettingsOptions {
     vertical-align: middle;
   `
   export const icon = (t:AppTheme.Theme)=>css`
-    ${SvgIcStyle.El.thiz.icon} {
+    ${SvgIconsStyle.El.thiz.icon} {
       height: 1.3em;
       width: 1.333em;
-      ${SvgIcStyle.Prop.prop.color}: ${ButtonStyle.Prop.color.sel()};
+      ${SvgIconsStyle.Prop.prop.color}: ${ButtonStyle.Prop.color.var()};
     }
   `
   export const iconSmall = (t:AppTheme.Theme)=>css`
     ${icon(t)};
-    ${SvgIcStyle.El.thiz.icon} {
+    ${SvgIconsStyle.El.thiz.icon} {
       height: 1.25em;
     }
   `

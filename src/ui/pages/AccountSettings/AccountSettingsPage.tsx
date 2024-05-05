@@ -31,7 +31,7 @@ import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle'
 import Card from 'src/ui/elements/cards/Card.tsx'
 import DataField from 'src/ui/elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/elements/DataField/DataFieldStyle'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle'
 import FloppyDisk1Ic = SvgIcons.FloppyDisk1Ic

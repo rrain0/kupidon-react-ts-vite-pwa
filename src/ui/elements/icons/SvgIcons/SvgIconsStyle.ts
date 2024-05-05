@@ -10,7 +10,8 @@ import generateElThis = ElementStyle.generateElThis
 
 
 
-export namespace SvgIcStyle {
+export namespace SvgIconsStyle {
+  
   
   export namespace El {
     export const clazz = {

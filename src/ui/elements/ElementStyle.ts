@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
@@ -249,43 +250,73 @@ export namespace ElementStyle {
   
   
   
-  
-  
-  export type CssPropState<V extends readonly string[]>
-    = Record<V[number], CssProp<any>>
-  
-  export class CssProp<const V extends readonly string[]> {
-    readonly rawName: string
+  export class CssProp {
     readonly name: string
     
-    readonly values: V
-    
-    //readonly s: PropState<V>
-    
-    constructor(rawName: string, values: V) {
-      this.rawName = rawName
-      this.name = `--${this.rawName}`
-      this.values = values
-      
-      /* const propState = {} as PropState<V>
-      this.values.forEach(value=>{
-        propState[value] = new Prop(`${this.rawName}=${value}`,[])
-      })
-      this.s = propState */
+    constructor(name: string) {
+      this.name = name
     }
     
-    sel(defaultValue?: string): string {
-      const values = [this.name]
-      if (exists(defaultValue)) values.push(defaultValue)
-      return `var(${values.join(',')})`
+    var(defaultValue?: string): string {
+      const nameAndDefault = [this.name]
+      if (exists(defaultValue)) nameAndDefault.push(defaultValue)
+      return `var(${nameAndDefault.join(', ')})`
     }
-    
-    
-    static readonly color = new CssProp('color',[])
+    withDefault(defaultValue?: string): string {
+      return `${this.name}: ${this.var(defaultValue)}`
+    }
   }
   
+  export class CssPropEnum<const V extends readonly string[]> extends CssProp {
+    readonly values: V
+    
+    constructor(name: string, values: V) {
+      super(name)
+      this.values = values
+    }
+    
+    set(value: V[number]): string {
+      return `${this.name}: ${value};`
+    }
+    override var(defaultValue?: V[number]): string {
+      return super.var(defaultValue)
+    }
+    override withDefault(defaultValue?: V[number]): string {
+      return `${this.name}: ${this.var(defaultValue)}`
+    }
+  }
+  
+  export const CssPropColor = new CssProp('--color')
   
   
+  { // CssProp Example
+    const Prop = {
+      prop: new CssProp('--prop'),
+      propEnum: new CssPropEnum('--prop-enum', ['black', 'white', 'default-value']),
+    } as const
+    
+    const cssPropExample = css`
+      // --prop: value;
+      ${Prop.prop.name}: value;
+      // --prop: var(--prop);
+      ${Prop.prop.name}: ${Prop.prop.var()};
+      // --prop: var(--prop, default-value);
+      ${Prop.prop.name}: ${Prop.prop.var('default-value')};
+      // --prop: var(--prop, default-value);
+      ${Prop.prop.withDefault('default-value')};
+      
+      // --prop-enum: black;
+      ${Prop.propEnum.set('black')};
+      // --prop-enum: black;
+      ${Prop.propEnum.name}: black;
+      // --prop-enum: var(--prop-enum);
+      ${Prop.propEnum.name}: ${Prop.propEnum.var()};
+      // --prop-enum: var(--prop-enum, default-value);
+      ${Prop.propEnum.name}: ${Prop.propEnum.var('default-value')};
+      // --prop-enum: var(--prop-enum, default-value);
+      ${Prop.propEnum.withDefault('default-value')};
+    `
+  }
   
   
   

@@ -3,9 +3,12 @@ import { useOverlayState } from '@util/react/useOverlayState.ts'
 import React, { useMemo } from 'react'
 import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
+import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
+import OptionAndValueItem, {
+  OptionAndValueItemGradIconStyle, OptionAndValueItemIconStyle,
+} from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
@@ -14,14 +17,14 @@ import {
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
-import Arrow6NextIc = SvgIcons.ArrowAngledRoundedIc
 import GenderIc = SvgIcons.GenderIc
 import onPointerClick = ReactUtils.onPointerClick
 import col = EmotionCommon.col
+import GenderGradIc = SvgGradIcons.GenderGradIc
 
 
 
@@ -59,10 +62,9 @@ React.memo(
   
   return <>
     <OptionAndValueItem
-      icon={<GenderIc css={css`height: 50%`}/>}
+      icon={<GenderGradIc css={t=>OptionAndValueItemGradIconStyle(t)}/>}
       title={titleText.gender}
       value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
-      nextIcon={<Arrow6NextIc css={css`height: 44%`}/>}
       
       //onClick={bool.setTrue}
       {...onPointerClick(open)}

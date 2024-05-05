@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { SvgIcStyle } from 'src/ui/elements/icons/SvgIcStyle.ts'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
 import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioActiveIc = SvgIcons.RadioActiveIc
 import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
 import RadioInactiveIc = SvgIcons.RadioInactiveIc
@@ -139,8 +139,8 @@ const inputStyle = css`
 const activeIcWrapStyle = css`
   display: none;
   input:checked ~ & { display: flex; }
-  ${SvgIcStyle.El.el.icon} {
-    ${SvgIcStyle.Prop.prop.color}: var(${RadioInputStyle.Prop.activeIconColor})
+  ${SvgIconsStyle.El.el.icon} {
+    ${SvgIconsStyle.Prop.prop.color}: var(${RadioInputStyle.Prop.activeIconColor})
   }
 `
 
@@ -148,8 +148,8 @@ const activeIcWrapStyle = css`
 const inactiveIcWrapStyle = css`
   display: flex;
   input:checked ~ & { display: none }
-  ${SvgIcStyle.El.el.icon} {
-    ${SvgIcStyle.Prop.prop.color}: var(${RadioInputStyle.Prop.inactiveIconColor})
+  ${SvgIconsStyle.El.el.icon} {
+    ${SvgIconsStyle.Prop.prop.color}: var(${RadioInputStyle.Prop.inactiveIconColor})
   }
 `
 

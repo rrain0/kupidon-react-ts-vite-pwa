@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons.tsx'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import DayNightIc = SvgIcons.DayNightIc
 import DayIc = SvgIcons.DayIc
 import MoonIc = SvgIcons.MoonIc
