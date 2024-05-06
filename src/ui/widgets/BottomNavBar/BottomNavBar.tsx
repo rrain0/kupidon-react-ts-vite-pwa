@@ -4,13 +4,15 @@ import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
+import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
+import { NavButtonStyle } from 'src/ui/widgets/BottomNavBar/NavButtonStyle.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import row = EmotionCommon.row
@@ -24,6 +26,10 @@ import fixedBottom = EmotionCommon.fixedBottom
 import QuickSettings from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import onPointerClick = ReactUtils.onPointerClick
 import BowArrowIc = SvgIcons.BowArrowIc
+import ProfileGradIc = SvgGradIcons.ProfileGradIc
+import ChatRoundGradIc = SvgGradIcons.ChatRoundGradIc
+import CardsHeartGradIc = SvgGradIcons.CardsHeartGradIc
+import BowArrowGradIc = SvgGradIcons.BowArrowGradIc
 
 
 
@@ -40,7 +46,7 @@ React.memo(
     
     <Global
       styles={css`
-        :root{
+        :root {
           --bottom-nav-padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) - 10px), 0px);
           --bottom-nav-height: calc(50px + var(--bottom-nav-padding-bottom));
         }
@@ -52,29 +58,29 @@ React.memo(
     >
       
       <NavLink to={RootRoute.profile[full]()}>
-        <Button css={ButtonStyle.nav}>
-          <ProfileIc/>
+        <Button css={NavButtonStyle.nav}>
+          <ProfileGradIc/>
           <div>{titleText.profile}</div>
         </Button>
       </NavLink>
       
       <NavLink to={RootRoute.chat[full]()}>
-        <Button css={ButtonStyle.nav}>
-          <ChatRoundIc/>
+        <Button css={NavButtonStyle.nav}>
+          <ChatRoundGradIc/>
           <div>{titleText.chat}</div>
         </Button>
       </NavLink>
       
       <NavLink to={RootRoute.findPairs[full]()}>
-        <Button css={ButtonStyle.nav}>
-          <CardsHeartIc/>
+        <Button css={NavButtonStyle.nav}>
+          <CardsHeartGradIc/>
           <div>{titleText.findCouple}</div>
         </Button>
       </NavLink>
       
       <NavLink to={RootRoute.bowAndArrows[full]()}>
-        <Button css={ButtonStyle.nav}>
-          <BowArrowIc/>
+        <Button css={NavButtonStyle.nav}>
+          <BowArrowGradIc/>
           <div>{titleText.bowAndArrows}</div>
         </Button>
       </NavLink>
@@ -84,7 +90,7 @@ React.memo(
           <NavLink to={RootRoute.settings[full]()}
             onClick={ev=>ev.preventDefault()} // prevent follow link
           >
-            <Button css={ButtonStyle.nav}
+            <Button css={NavButtonStyle.nav}
               {...onPointerClick(bool.setTrue)}
             >
               <Gear2Ic/>

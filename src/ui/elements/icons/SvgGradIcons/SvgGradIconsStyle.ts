@@ -11,7 +11,7 @@ export namespace SvgGradIconsStyle {
   
   
   export const El = function(){
-    const icon = new Elem('rrainuiIcon', {})
+    const icon = new Elem('rrainuiGradIcon', {})
     return { root: icon, icon } as const
   }()
   export const Prop = {

@@ -116,6 +116,7 @@ export namespace ElementStyle {
     get up(){ return this.#up }
     upSelector = ''
     
+    // just class name without dot
     name: string
     states: ElemStateDescriptor<S>
     
@@ -257,13 +258,23 @@ export namespace ElementStyle {
       this.name = name
     }
     
-    var(defaultValue?: string): string {
+    setAny(value: string): string {
+      return `${this.name}: ${value};`
+    }
+    varAny(defaultValue?: string): string {
       const nameAndDefault = [this.name]
       if (exists(defaultValue)) nameAndDefault.push(defaultValue)
       return `var(${nameAndDefault.join(', ')})`
     }
+    
+    set(value: string): string {
+      return this.setAny(value)
+    }
+    var(defaultValue?: string): string {
+      return this.varAny(defaultValue)
+    }
     withDefault(defaultValue?: string): string {
-      return `${this.name}: ${this.var(defaultValue)}`
+      return this.set(this.var(defaultValue))
     }
   }
   
@@ -275,21 +286,27 @@ export namespace ElementStyle {
       this.values = values
     }
     
-    set(value: V[number]): string {
-      return `${this.name}: ${value};`
+    override set(value: V[number]): string {
+      return this.setAny(value)
     }
     override var(defaultValue?: V[number]): string {
-      return super.var(defaultValue)
+      return this.varAny(defaultValue)
     }
     override withDefault(defaultValue?: V[number]): string {
-      return `${this.name}: ${this.var(defaultValue)}`
+      return this.setAny(this.varAny(defaultValue))
     }
   }
   
-  export const CssPropColor = new CssProp('--color')
+  export const CssPropColor = new class extends CssProp {
+    override setAny(value: string): string {
+      return `${super.setAny(value)} color: ${value};`
+    }
+  }('--color')
   
   
-  { // CssProp Example
+  
+  
+  { // CssProp EXAMPLE
     const Prop = {
       prop: new CssProp('--prop'),
       propEnum: new CssPropEnum('--prop-enum', ['black', 'white', 'default-value']),

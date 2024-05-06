@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import React from 'react'
+import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import GearIc = SvgIcons.GearIc
 import PartialUndef = TypeUtils.PartialUndef
@@ -22,7 +22,7 @@ const SettingsButton =
 React.memo(
 React.forwardRef<SettingsButtonRefElement, SettingsButtonProps>(
   (props, forwardedRef)=>{
-  return <Button css={ButtonStyle.iconBigTransparent}
+  return <Button css={IconButtonStyle.iconBigTransparent}
     {...props}
     ref={forwardedRef}
   >

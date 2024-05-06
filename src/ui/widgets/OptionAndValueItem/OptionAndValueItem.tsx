@@ -102,14 +102,16 @@ const IconFrame = styled.div`
   place-self: stretch;
   display: grid;
   place-items: center center;
+  > { ${p=>OptionAndValueItemGradIconStyle(p.theme)} }
+  > { ${p=>OptionAndValueItemIconStyle(p.theme)} }
 `
-export const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
+const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
   ${SvgGradIconsStyle.normal(t)};
   ${SvgGradIconsStyle.El.icon.thiz()}{
     width: 60%;
   }
 `
-export const OptionAndValueItemIconStyle = (t: AppTheme.Theme) => css`
+const OptionAndValueItemIconStyle = (t: AppTheme.Theme) => css`
   ${SvgIconsStyle.normal(t)};
   ${SvgIconsStyle.El.thiz.icon}{
     ${SvgIconsStyle.Prop.prop.color}: ${t.containerNormal.content3[0]};

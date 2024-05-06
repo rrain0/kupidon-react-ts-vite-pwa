@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
 import QuickSettings from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import SettingsButton from 'src/ui/elements/SettingsButton.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
@@ -123,7 +124,7 @@ export namespace ButtonBarComponents {
       [navigate]
     )
     
-    return <Button css={ButtonStyle.iconTransparent}
+    return <Button css={IconButtonStyle.iconTransparent}
       onClick={back}
     >
       <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
@@ -146,7 +147,7 @@ export namespace ButtonBarComponents {
     )
     
     
-    return <Button css={ButtonStyle.iconTransparent}
+    return <Button css={IconButtonStyle.iconTransparent}
       onClick={reload}
     >
       <ArrowReloadIc css={isReloading && css`
@@ -175,7 +176,7 @@ export namespace ButtonBarComponents {
       [props.isLoading]
     )
     
-    return <Button css={ButtonStyle.iconTransparent}
+    return <Button css={IconButtonStyle.iconTransparent}
       onClick={props.refresh}
     >
       <ArrowReloadIc css={isAnimating && css`

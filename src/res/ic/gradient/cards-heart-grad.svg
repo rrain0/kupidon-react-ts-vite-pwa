@@ -2,8 +2,8 @@
 
 <style>
   :root {
-    --first-color: #BB2649;
-    --second-color: #F75F82;
+    --icon-grad-first-color: #BB2649;
+    --icon-grad-second-color: #F75F82;
   }
 </style>
 
@@ -16,8 +16,8 @@
   <linearGradient id="paint0_linear_499_323"
     x1="12.4987" y1="6.67572e-06" x2="12.4987" y2="23.9964" gradientUnits="userSpaceOnUse"
   >
-    <stop stop-color="var(--first-color)"/>
-    <stop offset="1" stop-color="var(--second-color)"/>
+    <stop stop-color="var(--icon-grad-first-color)"/>
+    <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
   </linearGradient>
 </defs>
 

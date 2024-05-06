@@ -2,8 +2,8 @@
 
 <style>
   :root {
-    --first-color: #BB2649;
-    --second-color: #F75F82;
+    --icon-grad-first-color: #BB2649;
+    --icon-grad-second-color: #F75F82;
   }
 </style>
 
@@ -22,16 +22,16 @@
 
 <defs>
   <linearGradient id="paint0_linear_360_641" x1="12.2502" y1="0" x2="12.2502" y2="24" gradientUnits="userSpaceOnUse">
-    <stop stop-color="var(--first-color)"/>
-    <stop offset="1" stop-color="var(--second-color)"/>
+    <stop stop-color="var(--icon-grad-first-color)"/>
+    <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
   </linearGradient>
   <linearGradient id="paint1_linear_360_641" x1="8.30585" y1="1.18457" x2="8.30585" y2="12.1897" gradientUnits="userSpaceOnUse">
-    <stop stop-color="var(--first-color)"/>
-    <stop offset="1" stop-color="var(--second-color)"/>
+    <stop stop-color="var(--icon-grad-first-color)"/>
+    <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
   </linearGradient>
   <linearGradient id="paint2_linear_360_641" x1="17.5685" y1="7.8999" x2="17.5685" y2="23.9948" gradientUnits="userSpaceOnUse">
-    <stop stop-color="var(--first-color)"/>
-    <stop offset="1" stop-color="var(--second-color)"/>
+    <stop stop-color="var(--icon-grad-first-color)"/>
+    <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
   </linearGradient>
 </defs>
 

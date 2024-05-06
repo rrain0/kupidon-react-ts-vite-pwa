@@ -5,10 +5,7 @@ import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionAndValueItem, {
-  OptionAndValueItemGradIconStyle,
-  OptionAndValueItemIconStyle,
-} from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
+import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
@@ -18,13 +15,11 @@ import {
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import onPointerClick = ReactUtils.onPointerClick
 import col = EmotionCommon.col
-import Search2Ic = SvgIcons.Search2Ic
 import Search2GradIc = SvgGradIcons.Search2GradIc
 
 
@@ -71,7 +66,7 @@ React.memo(
     <>
     
       <OptionAndValueItem
-        icon={<Search2GradIc css={t=>OptionAndValueItemGradIconStyle(t)}/>}
+        icon={<Search2GradIc />}
         title={titleText.imLookingFor}
         value={preferredPeopleOptions.find(it => it.value === 'notSelected')!.text}
         

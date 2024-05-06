@@ -7,7 +7,7 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 
-const LightSimpleProps = { ...LightSimple,
+const LightSimplePinkProps = { ...LightSimple,
   containerNormal: { ...LightSimple.containerNormal,
     bgc:       ['#ffffff'],
     bgc2:      ['#f0f0f0'],
@@ -127,13 +127,13 @@ const LightSimpleProps = { ...LightSimple,
 
 
 export const LightSimplePink = {
-  ...LightSimpleProps,
+  ...LightSimplePinkProps,
   type: 'light',
   name: 'Light Simple Pink' as const,
   icon: styled.div(themeIconCss({
-    accentColor: LightSimpleProps.photos.highlightFrameAccentBgc[0],
-    bgcColor1:   LightSimpleProps.photos.highlightFrameAccentBgc[0],
-    bgcColor2:   LightSimpleProps.page.bgc[0],
+    accentColor: LightSimplePinkProps.photos.highlightFrameAccentBgc[0],
+    bgcColor1:   LightSimplePinkProps.photos.highlightFrameAccentBgc[0],
+    bgcColor2:   LightSimplePinkProps.page.bgc[0],
   })),
 } satisfies Theme
 

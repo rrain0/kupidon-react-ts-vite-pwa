@@ -5,6 +5,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
+import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
@@ -346,7 +347,7 @@ React.memo(
     
     <BottomButtonBar settingsBtn
       rightChildren={
-          canSubmit && <Button css={ButtonStyle.icon}
+          canSubmit && <Button css={IconButtonStyle.icon}
             onClick={submit}
           >
             <FloppyDisk1Ic />
