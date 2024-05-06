@@ -1,5 +1,4 @@
-import { css, keyframes } from '@emotion/react'
-import styled from '@emotion/styled'
+import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React from 'react'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
@@ -9,10 +8,17 @@ import exists = TypeUtils.exists
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 
 
+import BowArrowGradSvg from '@ic/gradient/bow-arrow-grad.svg?react'
+
+import CardsHeartGradSvg from '@ic/gradient/cards-heart-grad.svg?react'
+import ChatRoundGradSvg from '@ic/gradient/chat-round-grad.svg?react'
+
 import GenderGradSvg from '@ic/gradient/gender-grad.svg?react'
 import GiftBoxGradSvg from '@ic/gradient/gift-box-grad.svg?react'
 
 import NameCardGradSvg from '@ic/gradient/name-card-grad.svg?react'
+
+import ProfileGradSvg from '@ic/gradient/profile-grad.svg?react'
 
 import Search2GradSvg from '@ic/gradient/search-2-grad.svg?react'
 
@@ -94,10 +100,17 @@ export namespace SvgGradIcons {
   
   // Icons
   
+  export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
+  
+  export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
+  export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
+  
   export const GenderGradIc = generateSimpleSvgIcon(GenderGradSvg)
   export const GiftBoxGradIc = generateSimpleSvgIcon(GiftBoxGradSvg)
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
+  
+  export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
   
   export const Search2GradIc = generateSimpleSvgIcon(Search2GradSvg)
   

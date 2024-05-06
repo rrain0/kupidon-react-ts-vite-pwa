@@ -1,0 +1,41 @@
+<svg viewBox="0 0 25 24" xmlns="http://www.w3.org/2000/svg">
+
+<style>
+  :root {
+    --first-color: #BB2649;
+    --second-color: #F75F82;
+  }
+</style>
+
+<path
+  d="M8.75 10.5H16.75"
+  stroke="url(#paint0_linear_418_613)" stroke-width="1.5" stroke-linecap="round"
+  fill="none"
+/>
+<path
+  d="M8.75 14H14.25"
+  stroke="url(#paint1_linear_418_613)" stroke-width="1.5" stroke-linecap="round"
+  fill="none"
+/>
+<path
+  d="M17.75 3.33782C16.2791 2.48697 14.5714 2 12.75 2C7.22715 2 2.75 6.47715 2.75 12C2.75 13.5997 3.12562 15.1116 3.79346 16.4525C3.97094 16.8088 4.03001 17.2161 3.92712 17.6006L3.33151 19.8267C3.07295 20.793 3.95701 21.677 4.92335 21.4185L7.14939 20.8229C7.53393 20.72 7.94121 20.7791 8.29753 20.9565C9.63837 21.6244 11.1503 22 12.75 22C18.2728 22 22.75 17.5228 22.75 12C22.75 10.1786 22.263 8.47087 21.4122 7"
+  stroke="url(#paint2_linear_418_613)" stroke-width="1.5" stroke-linecap="round"
+  fill="none"
+/>
+
+<defs>
+  <linearGradient id="paint0_linear_418_613" x1="12.75" y1="10.5" x2="12.75" y2="11.5" gradientUnits="userSpaceOnUse">
+    <stop stop-color="var(--first-color)"/>
+    <stop offset="1" stop-color="var(--second-color)"/>
+  </linearGradient>
+  <linearGradient id="paint1_linear_418_613" x1="11.5" y1="14" x2="11.5" y2="15" gradientUnits="userSpaceOnUse">
+    <stop stop-color="var(--first-color)"/>
+    <stop offset="1" stop-color="var(--second-color)"/>
+  </linearGradient>
+  <linearGradient id="paint2_linear_418_613" x1="12.75" y1="2" x2="12.75" y2="22" gradientUnits="userSpaceOnUse">
+    <stop stop-color="var(--first-color)"/>
+    <stop offset="1" stop-color="var(--second-color)"/>
+  </linearGradient>
+</defs>
+
+</svg>
