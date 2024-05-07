@@ -87,9 +87,9 @@ EyeWrap.defaultProps = { type: 'button' }
 
 
 const iconCss = (t:AppTheme.Theme)=>css`
-  ${SvgIconsStyle.El.thiz.icon}{
-    ${SvgIconsStyle.Prop.prop.size}: 24px;
-    ${SvgIconsStyle.Prop.prop.color}: ${t.input.content[0]};
+  ${SvgIconsStyle.El.icon.thiz()}{
+    ${SvgIconsStyle.El.icon.props.size.set('24px')}
+    ${SvgIconsStyle.El.icon.props.color.set(t.input.content[0])}
   }
 `
 const rippleCss = (t:AppTheme.Theme)=>css`

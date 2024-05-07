@@ -151,7 +151,7 @@ export namespace ButtonBarComponents {
       onClick={reload}
     >
       <ArrowReloadIc css={isReloading && css`
-        ${SvgIconsStyle.El.thiz.icon} {
+        ${SvgIconsStyle.El.icon.thiz()} {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}
@@ -180,7 +180,7 @@ export namespace ButtonBarComponents {
       onClick={props.refresh}
     >
       <ArrowReloadIc css={isAnimating && css`
-        ${SvgIconsStyle.El.thiz.icon} {
+        ${SvgIconsStyle.El.icon.thiz()} {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}

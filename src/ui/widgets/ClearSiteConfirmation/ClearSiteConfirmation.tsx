@@ -131,15 +131,15 @@ export default ClearSiteConfirmation
 
 
 const icon = (t:Theme)=>css`
-  ${SvgIconsStyle.El.thiz.icon} {
+  ${SvgIconsStyle.El.icon.thiz()} {
     height: 1.333em;
     width: 1.333em;
-    ${SvgIconsStyle.Prop.prop.color}: ${t.page.content2[0]};
+    ${SvgIconsStyle.El.icon.props.color.set(t.page.content2[0])}
   }
 `
 const iconOnDanger = (t:Theme)=>css`
-  ${SvgIconsStyle.El.thiz.icon} {
-    ${SvgIconsStyle.Prop.prop.color}: ${t.elementDanger.content[0]};
+  ${SvgIconsStyle.El.icon.thiz()} {
+    ${SvgIconsStyle.El.icon.props.color.set(t.elementDanger.content[0])}
   }
 `
 const button = (t:Theme)=>css`

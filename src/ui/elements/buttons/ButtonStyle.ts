@@ -30,16 +30,20 @@ export namespace ButtonStyle {
       focusVisible: Pseudo.focusVisible,
       disabled: Pseudo.disabled,
       error: Attr.error,
+    },{
+      color: CssPropColor,
     })
-    const border = btn.toElem('>', new Elem('rrainuiBorder',{}))
-    const ripple = border.toElem('>', new Elem(RippleStyle.El.frameClassName,{}))
+    const border = btn.toElem('>', new Elem('rrainuiBorder',{},{}))
+    const ripple = border.toElem('>', new Elem(RippleStyle.El.frameClassName,{},{
+      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
+      color: new CssProp(RippleStyle.Prop.color),
+    }))
     return { root: btn, btn, border, ripple } as const
   }()
   
+  // todo remove
   export const Prop = {
-    color:       CssPropColor,
-    rippleMode:  new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
-    rippleColor: new CssProp(RippleStyle.Prop.color),
+    color: CssPropColor,
   } as const
   
   
@@ -110,11 +114,10 @@ export namespace ButtonStyle {
       // normal
       ${El.btn.thiz()} {
         background: ${t.buttonMain.bgc[0]};
-        color: ${t.buttonMain.content[0]};
-        ${Prop.color.name}: ${t.buttonMain.content[0]};
+        ${El.btn.props.color.set(t.buttonMain.content[0])}
       }
       ${El.ripple.thiz()} {
-        ${Prop.rippleColor.name}: ${t.ripple.content[0]};
+        ${El.ripple.props.color.set(t.ripple.content[0])}
       }
       
       // hover
@@ -154,7 +157,7 @@ export namespace ButtonStyle {
         ${Prop.color.name}: ${t.buttonAccent.content[0]};
       }
       ${El.ripple.thiz()} {
-        ${Prop.rippleColor.name}: ${t.ripple.content[0]};
+        ${El.ripple.props.color.set(t.ripple.content[0])}
       }
 
       // hover
@@ -188,7 +191,7 @@ export namespace ButtonStyle {
         border-color: ${t.buttonSecondary.content[0]};
       }
       ${El.ripple.thiz()} {
-        ${Prop.rippleColor.name}: ${t.ripple.contentOnTransparent[0]};
+        ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
       }
 
       // hover
@@ -223,7 +226,7 @@ export namespace ButtonStyle {
         border-color: transparent;
       }
       ${El.ripple.thiz()} {
-        ${Prop.rippleColor.name}: ${t.ripple.contentOnTransparent[0]};
+        ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
       }
 
       // hover
@@ -253,7 +256,7 @@ export namespace ButtonStyle {
         ${Prop.color.name}: ${t.elementDanger.content[0]};
       }
       ${El.ripple.thiz()} {
-        ${Prop.rippleColor.name}: ${t.ripple.content[0]};
+        ${El.ripple.props.color.set(t.ripple.content[0])}
       }
       
       // hover

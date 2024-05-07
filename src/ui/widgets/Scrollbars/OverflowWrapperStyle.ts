@@ -15,9 +15,9 @@ export namespace OverflowWrapperStyle {
   
   
   export const El = function(){
-    const wrapper = new Elem('rrainuiOverflowWrapper',{})
-    const container = wrapper.toElem('>', new Elem('rrainuiScrollContainer',{}))
-    const content = container.toElem('>', new Elem('rrainuiScrollContentWrap',{}))
+    const wrapper = new Elem('rrainuiOverflowWrapper',{}, {})
+    const container = wrapper.toElem('>', new Elem('rrainuiScrollContainer',{}, {}))
+    const content = container.toElem('>', new Elem('rrainuiScrollContentWrap',{}, {}))
     
     
     const scrollbarOverlay = wrapper.toElem('>',ScrollbarOverlayStyle.El.overlay)

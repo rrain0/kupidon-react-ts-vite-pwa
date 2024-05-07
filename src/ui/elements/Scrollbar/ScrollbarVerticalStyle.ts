@@ -22,9 +22,9 @@ export namespace ScrollbarVerticalStyle {
     const track = new Elem('rrainuiScrollbarVerticalTrack', {
       active: combineStates(ElementStyle.Pseudo.active, Attr.active),
       hover: ElementStyle.Pseudo.hover,
-    })
-    const thumbBox = track.toElem('>', new Elem('rrainuiScrollbarVerticalThumbBox', {}))
-    const thumb = thumbBox.toElem('>', new Elem('rrainuiScrollbarVerticalThumb', {}))
+    },{})
+    const thumbBox = track.toElem('>', new Elem('rrainuiScrollbarVerticalThumbBox', {}, {}))
+    const thumb = thumbBox.toElem('>', new Elem('rrainuiScrollbarVerticalThumb', {}, {}))
     return { root: track, track, thumbBox, thumb } as const
   }()
   

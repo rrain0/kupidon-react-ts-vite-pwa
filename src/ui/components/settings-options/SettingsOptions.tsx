@@ -33,15 +33,15 @@ export namespace SettingsOptions {
     vertical-align: middle;
   `
   export const icon = (t:AppTheme.Theme)=>css`
-    ${SvgIconsStyle.El.thiz.icon} {
+    ${SvgIconsStyle.El.icon.thiz()} {
       height: 1.3em;
       width: 1.333em;
-      ${SvgIconsStyle.Prop.prop.color}: ${ButtonStyle.Prop.color.var()};
+      ${SvgIconsStyle.El.icon.props.color.set(ButtonStyle.El.root.props.color.var())}
     }
   `
   export const iconSmall = (t:AppTheme.Theme)=>css`
     ${icon(t)};
-    ${SvgIconsStyle.El.thiz.icon} {
+    ${SvgIconsStyle.El.icon.thiz()} {
       height: 1.25em;
     }
   `

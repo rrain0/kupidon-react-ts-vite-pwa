@@ -28,15 +28,13 @@ export namespace ComponentStyle {
       disabled: Pseudo.disabled,
       error: Attr.error,
       activeFocusVisible: [Pseudo.active, Pseudo.focusVisible],
+    },{
+      prop: new CssProp('--prop'),
+      propEnum: new CssPropEnum('--prop-enum', ['black', 'white']),
     })
-    const secondary = main.toElem('>', new Elem('rrainuiSecondary',{}))
+    const secondary = main.toElem('>', new Elem('rrainuiSecondary',{},{}))
     return { root: main, main, secondary } as const
   }()
-  
-  export const Prop = {
-    prop: new CssProp('--prop'),
-    propEnum: new CssPropEnum('--prop-enum', ['black', 'white']),
-  } as const
   
   
   

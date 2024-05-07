@@ -33,6 +33,7 @@ export namespace ElementStyle {
     }
     
     
+    // todo remove
     static readonly empty = new Pseudo('')
     static readonly hover = new Pseudo('hover')
     static readonly active = new Pseudo('active')
@@ -40,6 +41,12 @@ export namespace ElementStyle {
     static readonly focusVisible = new Pseudo('focus-visible')
     static readonly disabled = new Pseudo('disabled')
   }
+  export const PseudoEmpty = new Pseudo('')
+  export const PseudoHover = new Pseudo('hover')
+  export const PseudoActive = new Pseudo('active')
+  export const PseudoFocus = new Pseudo('focus')
+  export const PseudoFocusVisible = new Pseudo('focus-visible')
+  export const PseudoDisabled = new Pseudo('disabled')
   
   
   
@@ -73,9 +80,10 @@ export namespace ElementStyle {
       this.s = attrState
     }
     
-    
+    // todo remove
     static readonly error = new DataAttr('error',[])
   }
+  export const DataAttrError = new DataAttr('error',[])
   
   /* { // attr test
     const AttrDirection = new DataAttr('direction',['vertical','horizontal'])
@@ -102,7 +110,7 @@ export namespace ElementStyle {
   
   
   export type StateForElem<S extends string> = {
-    elem: Elem<any,any> | 'root',
+    elem: Elem<any,any,any> | 'root',
     state: S[],
   }
   
@@ -111,22 +119,32 @@ export namespace ElementStyle {
     = Record<S, SingleOrArr<Pseudo | DataAttr<any>>>
   
   
-  export class Elem<S extends string, RootS extends string = S> {
-    #up: Elem<any,any> | undefined
+  export class Elem
+  <
+    S extends string,
+    RootS extends string = S,
+    P extends Record<string, CssProp> = Record<string, never>
+  >
+  {
+    #up: Elem<any,any,any> | undefined
     get up(){ return this.#up }
     upSelector = ''
     
-    // just class name without dot
+    // Class name without dot
     name: string
     states: ElemStateDescriptor<S>
+    
+    props: P
     
     
     constructor(
       name: string,
       states: ElemStateDescriptor<S>,
+      props: P
     ) {
       this.name = name
       this.states = states
+      this.props = props
     }
     
     s(...state: S[]): StateForElem<S> {
@@ -183,8 +201,9 @@ export namespace ElementStyle {
     }
     
     
-    toElem<Down extends string>(selector: string, down: Elem<Down,any>): Elem<Down,RootS> {
-      const newDown = new Elem<Down,RootS>(down.name, down.states)
+    toElem<Down extends string, DownP extends Record<string, CssProp>>
+    (selector: string, down: Elem<Down,any,DownP>): Elem<Down,RootS,DownP> {
+      const newDown = new Elem<Down,RootS,DownP>(down.name, down.states, down.props)
       newDown.#up = this
       newDown.upSelector = selector
       return newDown
@@ -334,6 +353,32 @@ export namespace ElementStyle {
       ${Prop.propEnum.withDefault('default-value')};
     `
   }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -640,9 +640,9 @@ const photoOnDragBorder = (t:AppTheme.Theme)=>css`
   border-color: ${t.photos.borderDrag[0]};
 `
 const photoPlaceholderIconStyle = (t:AppTheme.Theme)=>css`
-  ${SvgIconsStyle.El.thiz.icon}{
-    ${SvgIconsStyle.Prop.prop.color}: ${t.photos.content[0]};
-    ${SvgIconsStyle.Prop.prop.size}:  30%;
+  ${SvgIconsStyle.El.icon.thiz()}{
+    ${SvgIconsStyle.El.icon.props.color.set(t.photos.content[0])}
+    ${SvgIconsStyle.El.icon.props.size.set('30%')}
   }
 `
 const profilePhotoPieProgress = (t:AppTheme.Theme)=>css`
@@ -711,8 +711,8 @@ const optionIconBoxStyle = css`
   ${center};
   height: 1.3em;
   width: 1.333em;
-  >${SvgIconsStyle.El.el.icon}{
-    ${SvgIconsStyle.Prop.prop.color}: ${ButtonStyle.Prop.color.var()};
+  >${SvgIconsStyle.El.icon.name}{
+    ${SvgIconsStyle.El.icon.props.color.name}: ${ButtonStyle.El.root.props.color.var()};
   }
 `
 

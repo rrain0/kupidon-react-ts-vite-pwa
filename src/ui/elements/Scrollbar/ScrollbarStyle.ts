@@ -25,9 +25,9 @@ export namespace ScrollbarStyle {
       horizontal: Attr.direction.s.horizontal,
       active: combineStates(ElementStyle.Pseudo.active, Attr.active),
       hover: ElementStyle.Pseudo.hover,
-    })
-    const thumbBox = track.toElem('>', new Elem('rrainuiScrollbarThumbBox', {}))
-    const thumb = thumbBox.toElem('>', new Elem('rrainuiScrollbarThumb', {}))
+    },{})
+    const thumbBox = track.toElem('>', new Elem('rrainuiScrollbarThumbBox', {}, {}))
+    const thumb = thumbBox.toElem('>', new Elem('rrainuiScrollbarThumb', {}, {}))
     return { root: track, track, thumbBox, thumb } as const
   }()
   

@@ -40,8 +40,8 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.Prop.prop.color}: ${t.toast.accentLoadingBgc[0]};
-        ${SvgIconsStyle.Prop.prop.accentColor}: ${t.toast.accentLoadingContent[0]};
+        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentLoadingBgc[0]};
+        ${SvgIconsStyle.El.icon.props.accentColor.name}: ${t.toast.accentLoadingContent[0]};
       `}
     />}
     
@@ -57,7 +57,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.Prop.prop.color}: ${t.toast.accentOk[0]};
+        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentOk[0]};
       `}
     />}
     
@@ -65,7 +65,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.Prop.prop.color}: ${t.toast.accentWarn[0]};
+        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentWarn[0]};
       `}
     />}
     
@@ -73,7 +73,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.Prop.prop.color}: ${t.toast.accentDanger[0]};
+        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentDanger[0]};
       `}
     />}
     
@@ -123,15 +123,15 @@ const CloseButton = styled.button`
   ${center};
   cursor: pointer;
 
-  &>${SvgIconsStyle.El.el.icon} {
+  &>${SvgIconsStyle.El.icon.thiz()} {
     width: 100%;
     height: 100%;
-    ${SvgIconsStyle.Prop.prop.color}: ${p=>p.theme.toast.content2[0]};
+    ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.toast.content2[0]};
   }
   
   ${hoverable}{
-    :hover>${SvgIconsStyle.El.el.icon} {
-      ${SvgIconsStyle.Prop.prop.color}: ${p=>p.theme.toast.content3[0]};
+    :hover>${SvgIconsStyle.El.icon.thiz()} {
+      ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.toast.content3[0]};
     }
   }
 `

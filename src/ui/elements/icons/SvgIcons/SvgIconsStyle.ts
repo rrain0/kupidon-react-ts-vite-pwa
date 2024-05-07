@@ -1,11 +1,8 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
-import Theme = AppTheme.Theme
-import generatePropVar = ElementStyle.generatePropVar
-import generatePropVarDefault = ElementStyle.generatePropVarDefault
-import generateElDotClass = ElementStyle.generateElDotClass
-import generateElThis = ElementStyle.generateElThis
+import Elem = ElementStyle.Elem
+import CssProp = ElementStyle.CssProp
 
 
 
@@ -13,33 +10,23 @@ import generateElThis = ElementStyle.generateElThis
 export namespace SvgIconsStyle {
   
   
-  export namespace El {
-    export const clazz = {
-      icon: 'rrainuiIcon',
-    } as const
-    export const dotClazz = generateElDotClass(clazz)
-    export const el = {
-      icon: dotClazz.icon,
-    } as const
-    export const thiz = generateElThis(el)
-  }
-  export namespace Prop {
-    export const prop = {
-      size:        '--icon-size',
-      color:       '--icon-color',
-      accentColor: '--icon-accent-color',
-    } as const
-    export const varr = generatePropVar(prop)
-    export const vard = generatePropVarDefault(prop)
-  }
+  export const El = function(){
+    const icon = new Elem('rrainuiIcon',{},{
+      size: new CssProp('--icon-size'),
+      color: new CssProp('--icon-color'),
+      accentColor: new CssProp('--icon-accent-color'),
+    })
+    return { root: icon, icon } as const
+  }()
   
   
   
   
-  export const normal = (t:Theme)=>css`
-    ${El.thiz.icon} {
-      ${Prop.prop.size}: auto;
-      ${Prop.prop.color}: 'black';
+  export const normal = (t: AppTheme.Theme)=>css`
+    ${El.icon.thiz()} {
+      ${El.icon.props.size.set('auto')}
+      ${El.icon.props.color.set('black')}
+      ${El.icon.props.accentColor.set('black')}
     }
   `
   

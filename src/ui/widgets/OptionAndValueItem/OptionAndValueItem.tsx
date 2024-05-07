@@ -113,8 +113,8 @@ const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
 `
 const OptionAndValueItemIconStyle = (t: AppTheme.Theme) => css`
   ${SvgIconsStyle.normal(t)};
-  ${SvgIconsStyle.El.thiz.icon}{
-    ${SvgIconsStyle.Prop.prop.color}: ${t.containerNormal.content3[0]};
+  ${SvgIconsStyle.El.icon.thiz()}{
+    ${SvgIconsStyle.El.icon.props.color.set(t.containerNormal.content3[0])}
     height: 50%;
   }
 `
@@ -142,5 +142,5 @@ const NextIconFrame = styled.div`
 `
 const nextIconStyle = (t: AppTheme.Theme) => css`
   height: 44%;
-  ${SvgIconsStyle.Prop.prop.color}: ${t.containerNormal.content3[0]};
+  ${SvgIconsStyle.El.icon.props.color.name}: ${t.containerNormal.content3[0]};
 `

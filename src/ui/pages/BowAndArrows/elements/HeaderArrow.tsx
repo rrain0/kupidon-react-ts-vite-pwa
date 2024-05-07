@@ -19,7 +19,7 @@ const btnStyle = (t: AppTheme.Theme)=>css`
   align-items: center;
 `
 const arrowStyle = (t: AppTheme.Theme)=>css`
-  ${SvgIconsStyle.Prop.prop.color}: ${t.page.content1[0]};
+  ${SvgIconsStyle.El.icon.props.color.name}: ${t.page.content1[0]};
   height: 26px;
 `
 

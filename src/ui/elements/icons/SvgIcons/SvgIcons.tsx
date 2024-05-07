@@ -113,20 +113,23 @@ export namespace SvgIcons {
     const w = width ?? size
     const h = height ?? size
     
+    const sizeProp = SvgIconsStyle.El.root.props.size
+    const colorProp = SvgIconsStyle.El.root.props.color
+    const accentColorProp = SvgIconsStyle.El.root.props.accentColor
+    
     return <SvgComponent
       css={css`
-        width:  ${falsyToUndef(!exists(w)) && SvgIconsStyle.Prop.varr.size};
-        height: ${falsyToUndef(!exists(h)) && SvgIconsStyle.Prop.varr.size};
+        width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+        height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
         //max-width: 100%;
         //max-height: 100%;
-        fill: ${color ?? SvgIconsStyle.Prop.vard.color('black')};
-        stroke: ${color ?? SvgIconsStyle.Prop.vard.color('black')};
-        ${SvgIconsStyle.Prop.prop.accentColor}:
-                ${accentColor ?? SvgIconsStyle.Prop.vard.accentColor('gray')}
+        fill: ${color || colorProp.var('black')};
+        stroke: ${color || colorProp.var('black')};
+        ${accentColorProp.name}: ${accentColor ?? accentColorProp.var('gray')};
       `}
       width={w}
       height={h}
-      className={clsx(className,SvgIconsStyle.El.clazz.icon)}
+      className={clsx(className, SvgIconsStyle.El.icon.name)}
       {...restProps}
       ref={forwardedRef}
     />

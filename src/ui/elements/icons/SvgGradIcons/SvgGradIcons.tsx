@@ -63,13 +63,14 @@ export namespace SvgGradIcons {
     const w = width ?? size
     const h = height ?? size
     
-    const firstColorProp = SvgGradIconsStyle.Prop.firstColor
-    const secondColorProp = SvgGradIconsStyle.Prop.secondColor
+    const sizeProp = SvgGradIconsStyle.El.root.props.size
+    const firstColorProp = SvgGradIconsStyle.El.root.props.firstColor
+    const secondColorProp = SvgGradIconsStyle.El.root.props.secondColor
     
     return <SvgComponent
       css={css`
-        width:  ${falsyToUndef(!exists(w)) && SvgGradIconsStyle.Prop.size.var()};
-        height: ${falsyToUndef(!exists(h)) && SvgGradIconsStyle.Prop.size.var()};
+        width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+        height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
         //max-width: 100%;
         //max-height: 100%;
         ${firstColorProp.name}: ${firstColor || firstColorProp.var('black')};
