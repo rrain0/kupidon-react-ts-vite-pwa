@@ -5,7 +5,7 @@ import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
+import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
@@ -65,7 +65,7 @@ React.memo(
   return <UseBool>{bool =>
     <>
     
-      <OptionAndValueItem
+      <OptionItem
         icon={<Search2GradIc />}
         title={titleText.imLookingFor}
         value={preferredPeopleOptions.find(it => it.value === 'notSelected')!.text}

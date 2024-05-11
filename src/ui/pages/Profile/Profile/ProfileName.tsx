@@ -7,7 +7,7 @@ import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
+import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import {
   ValidationWrapRenderProps
@@ -40,7 +40,7 @@ React.memo(
   
   return <>
       
-    <OptionAndValueItem
+    <OptionItem
       icon={<NameCardGradIc />}
       title={titleText.name}
       value={props.value}

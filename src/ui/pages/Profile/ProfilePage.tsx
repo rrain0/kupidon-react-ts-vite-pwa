@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import Partner from 'src/ui/pages/Profile/Partner/Partner.tsx'
 import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
 import { ButtonBarComponents } from 'src/ui/widgets/BottomButtonBar/components.tsx'
@@ -388,37 +389,36 @@ React.memo(
                 setTabsState: tabsProps.setTabsState,
                 setTabIdx: tabsProps.setTabIdx,
               }}>
-              {function(){
-                switch (tabIdx) {
-                  case 0:
-                    return <Preview formValues={formValues}/>
-                  case 1:
-                    return <Profile
+                {{
+                  0:
+                    <Preview formValues={formValues}/>,
+                  1:
+                    <Profile
                       validationProps={validationProps}
                       onFormSubmitCallback={onFormSubmitCallback}
                       submit={submit}
                       canSubmit={canSubmit}
                       formProps={formProps}
                       isLoading={isLoading}
-                    />
-                  case 2:
-                    return <Pages.SafeInsets>
+                    />,
+                  2:
+                    <Partner
+                      validationProps={validationProps}
+                      onFormSubmitCallback={onFormSubmitCallback}
+                      submit={submit}
+                      canSubmit={canSubmit}
+                      formProps={formProps}
+                      isLoading={isLoading}
+                    />,
+                  3:
+                    <Pages.SafeInsets>
                       <Pages.AddInsets css={css`padding-top: 20px;`}>
                         <Pages.ContentForm>
-                            <ProfilePageTabHeader thisTabIdx={2}/>
+                          <ProfilePageTabHeader thisTabIdx={3}/>
                         </Pages.ContentForm>
                       </Pages.AddInsets>
                     </Pages.SafeInsets>
-                  case 3:
-                    return <Pages.SafeInsets>
-                      <Pages.AddInsets css={css`padding-top: 20px;`}>
-                        <Pages.ContentForm>
-                            <ProfilePageTabHeader thisTabIdx={3}/>
-                        </Pages.ContentForm>
-                      </Pages.AddInsets>
-                    </Pages.SafeInsets>
-                }
-              }()}
+                }[tabIdx]}
               </ProfilePageTabHeaderContext.Provider>
               
             </OverflowWrapper>

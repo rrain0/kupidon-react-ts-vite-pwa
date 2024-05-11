@@ -11,8 +11,12 @@ const LightSimpleProps = {
     bgc:       ['#ffffff'],
     bgc2:      ['#f0f0f0'],
     content:   ['#000000'],
+    content1b: ['#232020'],
     content2:  ['#555555'],
+    content2b: ['#5b5b5b'],
     content3:  ['#7b7b7b'],
+    content4:  ['#d1d1d1'],
+    shadow:    ['#00000026'],
   },
   containerAccent: {
     bgc:      ['#bbbbbb'],

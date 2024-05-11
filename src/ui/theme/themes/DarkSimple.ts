@@ -11,8 +11,12 @@ const DarkSimpleProps = {
     bgc:       ['#24272d'],
     bgc2:      ['#282c34'],
     content:   ['#bdbdbd'],
+    content1b: ['#dddddd'],
     content2:  ['#999999'],
+    content2b: ['#909090'],
     content3:  ['#7b7b7b'],
+    content4:  ['#666666'],
+    shadow:    ['#00000000'],
   },
   containerAccent: {
     bgc:      ['#aaaaaa'],

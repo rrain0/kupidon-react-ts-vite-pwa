@@ -53,6 +53,7 @@ import MoonSvg from '@ic/moon.svg?react'
 import NameCardSvg from '@ic/name-card.svg?react'
 import NightSvg from '@ic/night.svg?react'
 
+import PencilWrite2Svg from '@ic/pencil-write-2.svg?react'
 import PlusSvg from '@ic/plus.svg?react'
 import ProfileSvg from '@ic/profile.svg?react'
 
@@ -214,6 +215,7 @@ export namespace SvgIcons {
   export const NightIc = generateSimpleSvgIcon(NightSvg)
   
   
+  export const PencilWrite2Ic = generateSimpleSvgIcon(PencilWrite2Svg)
   export const PlusIc = generateSimpleSvgIcon(PlusSvg)
   export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
   

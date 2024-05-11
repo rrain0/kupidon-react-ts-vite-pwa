@@ -139,7 +139,7 @@ const inputStyle = css`
 const activeIcWrapStyle = css`
   display: none;
   input:checked ~ & { display: flex; }
-  ${SvgIconsStyle.El.icon.name} {
+  ${SvgIconsStyle.El.icon.sel()} {
     ${SvgIconsStyle.El.icon.props.color.name}: var(${RadioInputStyle.Prop.activeIconColor})
   }
 `
@@ -148,7 +148,7 @@ const activeIcWrapStyle = css`
 const inactiveIcWrapStyle = css`
   display: flex;
   input:checked ~ & { display: none }
-  ${SvgIconsStyle.El.icon.name} {
+  ${SvgIconsStyle.El.icon.sel()} {
     ${SvgIconsStyle.El.icon.props.color.name}: var(${RadioInputStyle.Prop.inactiveIconColor})
   }
 `

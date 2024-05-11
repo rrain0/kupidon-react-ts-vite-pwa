@@ -26,7 +26,7 @@ export type OptionItemForwardRefProps = React.JSX.IntrinsicElements['article']
 export type OptionItemRefElement = HTMLDivElement
 
 export type OptionItemProps = OptionItemCustomProps & OptionItemForwardRefProps
-const OptionAndValueItem =
+const OptionItem =
 React.memo(
 React.forwardRef<OptionItemRefElement, OptionItemProps>(
 (props, forwardedRef)=>{
@@ -57,7 +57,7 @@ React.forwardRef<OptionItemRefElement, OptionItemProps>(
     </NextIconFrame>
   </Frame>
 }))
-export default OptionAndValueItem
+export default OptionItem
 
 
 

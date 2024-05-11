@@ -15,6 +15,21 @@ export namespace ElementStyle {
   
   
   
+  // NEW
+  {
+    class CssWidget {
+    
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
   export class Pseudo {
     readonly name: string
     
@@ -33,14 +48,16 @@ export namespace ElementStyle {
     }
     
     
-    // todo remove
+    
     static readonly empty = new Pseudo('')
     static readonly hover = new Pseudo('hover')
     static readonly active = new Pseudo('active')
     static readonly focus = new Pseudo('focus')
     static readonly focusVisible = new Pseudo('focus-visible')
+    static readonly checked = new Pseudo('checked')
     static readonly disabled = new Pseudo('disabled')
   }
+  // todo remove
   export const PseudoEmpty = new Pseudo('')
   export const PseudoHover = new Pseudo('hover')
   export const PseudoActive = new Pseudo('active')
@@ -80,9 +97,10 @@ export namespace ElementStyle {
       this.s = attrState
     }
     
-    // todo remove
+    
     static readonly error = new DataAttr('error',[])
   }
+  // todo remove
   export const DataAttrError = new DataAttr('error',[])
   
   /* { // attr test

@@ -7,9 +7,9 @@ services:
 
   react:
     # You must build image before with API_BASE_URL
-    # docker build -t rrain0/kupidon-react-react:1.1.1 --build-arg API_BASE_URL=https://kupidon.rrain.fvds.ru:40010/api .
-    # docker push rrain0/kupidon-react-react:1.1.1
-    image: rrain0/kupidon-react-react:1.1.1
+    # docker build -t rrain0/kupidon-react-react:1.2.0 --build-arg API_BASE_URL=https://kupidon.rrain.fvds.ru:40010/api .
+    # docker push rrain0/kupidon-react-react:1.2.0
+    image: rrain0/kupidon-react-react:1.2.0
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:

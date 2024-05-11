@@ -7,7 +7,7 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 
-const DarkSimpleProps = { ...DarkSimple,
+const DarkSimplePinkProps = { ...DarkSimple,
   containerNormal: { ...DarkSimple.containerNormal,
     bgc:       ['#24272d'],
     bgc2:      ['#282c34'],
@@ -126,13 +126,13 @@ const DarkSimpleProps = { ...DarkSimple,
 
 
 export const DarkSimplePink = {
-  ...DarkSimpleProps,
+  ...DarkSimplePinkProps,
   type: 'dark',
   name: 'Dark Simple Pink' as const,
   icon: styled.div(themeIconCss({
-    accentColor: DarkSimpleProps.photos.highlightFrameAccentBgc[0],
-    bgcColor1:   DarkSimpleProps.photos.highlightFrameAccentBgc[0],
-    bgcColor2:   DarkSimpleProps.page.bgc[0],
+    accentColor: DarkSimplePinkProps.photos.highlightFrameAccentBgc[0],
+    bgcColor1:   DarkSimplePinkProps.photos.highlightFrameAccentBgc[0],
+    bgcColor2:   DarkSimplePinkProps.page.bgc[0],
   })),
 } satisfies Theme
 

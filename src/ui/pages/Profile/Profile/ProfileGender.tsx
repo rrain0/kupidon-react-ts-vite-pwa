@@ -6,7 +6,7 @@ import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionAndValueItem from 'src/ui/widgets/OptionAndValueItem/OptionAndValueItem.tsx'
+import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {
@@ -57,7 +57,7 @@ React.memo(
   
   
   return <>
-    <OptionAndValueItem
+    <OptionItem
       icon={<GenderGradIc />}
       title={titleText.gender}
       value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}

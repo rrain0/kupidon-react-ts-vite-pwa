@@ -8,6 +8,7 @@ import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
+import EditableTextCard from 'src/ui/widgets/EditableTextCard/EditableTextCard.tsx'
 import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import {
@@ -21,81 +22,84 @@ import Card2 from 'src/ui/elements/cards/Card2.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import row = EmotionCommon.row
-import GiftBoxGradIc = SvgGradIcons.GiftBoxGradIc
+import NameCardGradIc = SvgGradIcons.NameCardGradIc
 
 
 
 
+const overlayName = 'aboutMe'
 
-const overlayName = 'birthDate'
 
-
-const ProfileBirthDate =
+const ProfileAboutMe =
 React.memo(
 (props: ValidationWrapRenderProps<string>)=>{
   const titleText = useUiValues(TitleUiText)
   const placeholderText = useUiValues(PlaceholderUiText)
   const actionText = useUiValues(ActionUiText)
   
+  
   const [isOpen, open, close] = useOverlayState(overlayName)
   
   
   return <>
-    <OptionItem
-      icon={<GiftBoxGradIc />}
-      title={titleText.birthDate}
-      value={props.value}
+    
+    <EditableTextCard
+      title={titleText.aboutMe}
+      text={props.value}
+      placeholder={placeholderText.aboutMePlaceholder}
       data-error={props.highlight}
       onClick={open}
     />
     
-    { isOpen && <ModalPortal><Modal css={ModalStyle.modal}
-      onClick={close}>
-      
-      {/* todo upgrade & extract modal input */}
-      <div css={css`
-        width: 100%;
-        height: 100%;
-        padding: 20px;
-        padding-bottom: 140px;
-        display: grid;
-        place-items: end center;
-      `}>
-        
-        <Card2 css={css`
-          min-width: 220px;
+    { isOpen &&
+      <ModalPortal><Modal css={ModalStyle.modal}
+        onClick={close}
+      >
+        <div css={css`
           width: 100%;
-          max-width: 500px;
-          gap: 10px;
-        `}
-          onClick={ev=>ev.stopPropagation()}>
-          <ItemLabel>{titleText.birthDate}</ItemLabel>
-          <Input css={InputStyle.inputSmall}
-            autoFocus
-            inputMode="numeric"
-            placeholder={placeholderText.birthDatePlaceholder.toLowerCase()}
-            {...props.inputProps}
-            hasError={props.highlight}
-            onBlur={ev=>{
-              ev.currentTarget.focus()
-              props.inputProps.onBlur()
-            }}
-          />
-          <div css={css`
-            ${row};
+          height: 100%;
+          padding: 20px;
+          padding-bottom: 140px;
+          display: grid;
+          place-items: end center;
+        `}>
+          
+          <Card2 css={css`
+            min-width: 220px;
+            width: 100%;
+            max-width: 500px;
             gap: 10px;
-            justify-content: end;
-          `}>
-            <Button css={ButtonStyle.roundedSmallSecondary}
-              onClick={close}
-              children={actionText.ok}/>
-          </div>
-        </Card2>
-      </div>
-    </Modal></ModalPortal>}
-  
+          `}
+            onClick={ev => ev.stopPropagation()}
+          >
+            <ItemLabel>{titleText.aboutMe}</ItemLabel>
+            <Input css={InputStyle.inputSmall}
+              autoFocus
+              placeholder={titleText.aboutMe.toLowerCase()}
+              {...props.inputProps}
+              hasError={props.highlight}
+              onBlur={ev => {
+                ev.currentTarget.focus()
+                props.inputProps.onBlur()
+              }}
+            />
+            <div css={css`
+              ${row};
+              gap: 10px;
+              justify-content: end;
+            `}>
+              <Button css={ButtonStyle.roundedSmallSecondary}
+                onClick={close}
+                children={actionText.ok}
+              />
+            </div>
+          </Card2>
+        </div>
+      </Modal></ModalPortal>
+    }
+    
   </>
 })
-export default ProfileBirthDate
+export default ProfileAboutMe
 
 

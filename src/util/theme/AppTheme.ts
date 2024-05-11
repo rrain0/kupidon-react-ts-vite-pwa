@@ -28,8 +28,12 @@ export namespace AppTheme {
       bgc:       string[]
       bgc2:      string[]
       content:   string[]
+      content1b: string[]
       content2:  string[]
+      content2b: string[]
       content3:  string[]
+      content4:  string[]
+      shadow:    string[]
     },
     containerAccent: {
       bgc:      string[]

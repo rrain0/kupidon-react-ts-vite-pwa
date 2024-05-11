@@ -6,8 +6,6 @@ import ItemContainer from 'src/ui/elements/basic-elements/ItemContainer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import ItemTitleContainer from 'src/ui/elements/basic-elements/ItemTitleContainer.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import Card3 from 'src/ui/elements/cards/Card3.tsx'
-import ProfileAboutMe from 'src/ui/pages/Profile/Profile/ProfileAboutMe.tsx'
 import ProfileBirthDate from 'src/ui/pages/Profile/Profile/ProfileBirthDate.tsx'
 import ProfileGender from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
 import ProfileImLookingFor
@@ -33,6 +31,7 @@ import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeUtils.Callback1
 import Callback = TypeUtils.Callback
+import boyGirlCatShadow from '@img/bgc/boy-girl-cat-shadow.jpg'
 
 
 
@@ -40,7 +39,7 @@ import Callback = TypeUtils.Callback
 
 
 
-export type ProfileProps = {
+export type PartnerProps = {
   validationProps: ReturnType<typeof useFormFailures<FormValues>>['validationProps']
   onFormSubmitCallback: Callback1<React.FormEvent>
   submit: Callback
@@ -50,9 +49,9 @@ export type ProfileProps = {
 }
 
 
-const Profile =
+const Partner =
 React.memo(
-(props: ProfileProps)=>{
+(props: PartnerProps)=>{
   
   
   const titleText = useUiValues(TitleUiText)
@@ -66,27 +65,24 @@ React.memo(
       <Pages.AddInsets css={css`padding-top: 20px;`}>
         <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
         
-        <ProfilePageTabHeader thisTabIdx={1}/>
+        <ProfilePageTabHeader thisTabIdx={2}/>
         
         
         <div css={col}>
           
-          <ValidationWrap {...props.validationProps}
-            fieldName="photos"
-            render={props =>
-              <ProfilePhotos
-                images={props.value}
-                setImages={props.setValue}
-              />
-            }
+          <div css={css`
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            background-position: center;
+            background-size: cover;
+          `}
+            style={{ backgroundImage: `url(${boyGirlCatShadow})` }}
           />
           
           <div css={{ height: 24 }}/>
           
-          <ValidationWrap {...props.validationProps}
-            fieldName="aboutMe"
-            render={validProps => <ProfileAboutMe {...validProps}/>}
-          />
+          <div>AAAAAAAAA</div>
           
           {/* <ItemContainer>
             <ItemTitleContainer>
@@ -103,13 +99,15 @@ React.memo(
                 />
               }
             />
-          </ItemContainer> */}
+          </ItemContainer>
           
           
           <div css={{ height: 24 }}/>
           
           
-          <Card3>
+          <Card2 css={css`
+            gap: 10px;
+          `}>
             
             
             <ValidationWrap {...props.validationProps}
@@ -133,7 +131,7 @@ React.memo(
             <ProfileImLookingFor/>
           
           
-          </Card3>
+          </Card2> */}
         
         </div>
       
@@ -158,7 +156,7 @@ React.memo(
     
   </>
 })
-export default Profile
+export default Partner
 
 
 

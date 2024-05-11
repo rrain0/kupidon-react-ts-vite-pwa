@@ -7,11 +7,11 @@ import Theme = AppTheme.Theme
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import Elem = ElementStyle.Elem
-import DataAttr = ElementStyle.DataAttr
 import Pseudo = ElementStyle.Pseudo
 import CssProp = ElementStyle.CssProp
 import CssPropEnum = ElementStyle.CssPropEnum
 import CssPropColor = ElementStyle.CssPropColor
+import DataAttrError = ElementStyle.DataAttrError
 
 
 
@@ -19,11 +19,11 @@ import CssPropColor = ElementStyle.CssPropColor
 export namespace ButtonStyle {
   
   export const Attr = {
-    error: DataAttr.error
+    error: DataAttrError
   } as const
   
   export const El = function(){
-    const btn = new Elem('rrainuiButton',{
+    const btn = new Elem('rrainuiButton', {
       hover: Pseudo.hover,
       active: Pseudo.active,
       focus: Pseudo.focus,
@@ -62,7 +62,7 @@ export namespace ButtonStyle {
   `
   
   
-  namespace Shape {
+  export namespace Shape {
     
     export const bigRect = css`
       ${El.btn.thiz()} {
@@ -71,6 +71,9 @@ export namespace ButtonStyle {
         border-radius: 15px;
         padding: 8px 6px;
         ${Txt.large2};
+      }
+      ${El.border.thiz()}{
+        border: 1px solid;
       }
     `
     export const smallRect = css`
@@ -82,15 +85,22 @@ export namespace ButtonStyle {
         gap: 4px;
         ${Txt.normal1};
       }
+      ${El.border.thiz()}{
+        border: 1px solid;
+      }
     `
     
     export const rounded = css`
       ${El.btn.thiz()} {
         width: fit-content;
         min-height: 40px;
+        border: 0;
         border-radius: 1000000px;
         padding: 8px 20px;
         ${Txt.small1};
+      }
+      ${El.border.thiz()}{
+        border: 1px solid;
       }
     `
     
@@ -102,13 +112,16 @@ export namespace ButtonStyle {
         padding: 4px 16px;
         ${Txt.small1};
       }
+      ${El.border.thiz()}{
+        border: 1px solid;
+      }
     `
     
   }
   
   
   
-  namespace Color {
+  export namespace Color {
     
     export const main = (t:Theme) => css`
       // normal
@@ -187,7 +200,6 @@ export namespace ButtonStyle {
         ${Prop.color.name}: ${t.buttonSecondary.content[0]};
       }
       ${El.border.thiz()} {
-        border: 1px solid;
         border-color: ${t.buttonSecondary.content[0]};
       }
       ${El.ripple.thiz()} {
@@ -222,7 +234,6 @@ export namespace ButtonStyle {
         ${Prop.color.name}: ${t.page.content2[0]};
       }
       ${El.border.thiz()} {
-        border: 1px solid;
         border-color: transparent;
       }
       ${El.ripple.thiz()} {

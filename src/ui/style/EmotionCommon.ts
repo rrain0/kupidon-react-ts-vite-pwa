@@ -280,11 +280,21 @@ export namespace EmotionCommon {
       letter-spacing: 0.05em;
     `
     
+    export const large3b = css`
+      font-weight: 500;
+      font-size: 24px;
+    `
+    
     export const large2 = css`
       font-weight: 400;
       font-size: 18px;
       line-height: 150%;
       letter-spacing: 0.05em;
+    `
+    
+    export const large2b = css`
+      font-weight: 400;
+      font-size: 18px;
     `
     
     export const large1 = css`
