@@ -2,14 +2,17 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import UseOverlay from 'src/ui/components/StateCarriers/UseOverlay.tsx'
 import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
-import QuickSettings from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
+import QuickSettings, {
+  QuickSettingsOverlayName,
+} from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import SettingsButton from 'src/ui/elements/SettingsButton.tsx'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { useBoolState } from '@util/react/useBoolState.ts'
+import { useBool } from '@util/react/useBool.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
@@ -102,16 +105,16 @@ export namespace ButtonBarComponents {
   export const SettingsBtn =
   React.memo(
   ()=>{
-    return <UseBool>{bool => <>
+    return <UseOverlay overlayName={QuickSettingsOverlayName}>{overlay => <>
       
       <SettingsButton
-        // onClick={bool.setTrue}
-        {...onPointerClick(bool.setTrue)}
+        // onClick={overlay.open}
+        {...onPointerClick(overlay.open)}
       />
       
-      <QuickSettings open={bool.value} setOpen={bool.setValue}/>
+      <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
       
-    </>}</UseBool>
+    </>}</UseOverlay>
   })
   
   
@@ -137,7 +140,7 @@ export namespace ButtonBarComponents {
   React.memo(
   ()=>{
     
-    const [isReloading, reload] = useBoolState(false)
+    const [isReloading, reload] = useBool(false)
     
     useEffect(
       ()=>{
@@ -169,7 +172,7 @@ export namespace ButtonBarComponents {
   React.memo(
   (props: SoftRefreshBtnProps)=>{
     
-    const [isAnimating, animate, finishAnimate] = useBoolState(false)
+    const [isAnimating, animate, finishAnimate] = useBool(false)
     
     useLayoutEffect(
       ()=>{ if (props.isLoading) animate() },

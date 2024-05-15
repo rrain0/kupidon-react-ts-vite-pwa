@@ -30,7 +30,7 @@ React.memo(
 (props: BottomSheetBasicProps)=>{
   
   const { header, children, ...restProps } = props
-  const sheetState = props.sheetState
+  const { sheetState } = props
   
   
   const bottomSheetFrameRef = useRef<HTMLDivElement>(null)

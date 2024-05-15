@@ -14,15 +14,6 @@ export namespace ModalStyle {
     height: 100dvh;
     background: #0000009a;
     z-index: 1;
-
-    user-select: none;
-    touch-action: none;
-    pointer-events: none;
-    >*{
-      user-select: auto;
-      touch-action: auto;
-      pointer-events: auto;
-    }
   `
   
   

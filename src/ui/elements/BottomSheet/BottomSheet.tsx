@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'
+import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
@@ -111,10 +112,7 @@ React.memo(
   
   
   
-  return <div // Pointer & Wheel events consumer
-    css={contents}
-    {...stopPointerAndMouseEvents()}
-  >
+  return <UserActionsConsumer>
     
     <animated.div /* Frame */ css={frameStyle}
       style={{
@@ -137,14 +135,12 @@ React.memo(
       
       // need to prevent click if dragged if frame is draggable
       onClick={ev=>{
-        //console.log('dimmed background click')
+        //console.log('dimmed background click: closing...')
         setSheetState('closing')
+        //setSheetState('closed')
       }}
     >
-      <div // Pointer & Wheel events consumer
-        css={contents}
-        {...stopPointerAndMouseEvents()}
-      >
+      <UserActionsConsumer>
         <animated.div /* Bottom Sheet */ css={sheetStyle}
           style={sheetSpring}
           ref={bottomSheetRef as any} // Must be
@@ -153,10 +149,10 @@ React.memo(
           {props.children?.({ sheetDrag })}
         
         </animated.div>
-      </div>
+      </UserActionsConsumer>
     </animated.div>
     
-  </div>
+  </UserActionsConsumer>
 })
 export default BottomSheet
 

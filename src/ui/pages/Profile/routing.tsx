@@ -27,8 +27,8 @@ React.memo(
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
   const authId = auth?.user.id
-  const urlUserId = useMatch(RootRoute.profile.id.userId[full]()+'/*')
-    ?.params[RootRoute.profile.id.userId[path].slice(1)]!
+  const userIdRoute = RootRoute.profile.id.userId
+  const urlUserId = useMatch(userIdRoute[full]()+'/*')?.params[userIdRoute[path].slice(1)]!
   
   return authId===urlUserId
     ? <ProfilePage/>

@@ -28,7 +28,7 @@ React.memo(
   
   
   return <>
-    <UseBottomSheetState open={props.open} onClosed={()=>props.setOpen(false)}>
+    <UseBottomSheetState isOpen={props.open} onClosed={()=>props.setOpen(false)}>
       { ({ sheetProps })=>
       <BottomSheetBasic
         {...sheetProps}

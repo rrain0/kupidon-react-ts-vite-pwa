@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import {
   DefaultSheetOpenIdx, DefaultSheetSnaps,
@@ -8,6 +8,7 @@ import {
 } from 'src/ui/elements/BottomSheet/useBottomSheet.ts'
 import Callback = TypeUtils.Callback
 import PartialUndef = TypeUtils.PartialUndef
+import ValueOrMapper = TypeUtils.ValueOrMapper
 
 
 
@@ -17,7 +18,7 @@ export type UseBottomSheetStateRenderProps = {
   sheetProps: UseBottomSheetOptions
 }
 export type UseBottomSheetStateProps = {
-  open: boolean
+  isOpen: boolean
   onClosed: Callback
   children: (props: UseBottomSheetStateRenderProps)=>React.ReactNode
 } & PartialUndef<{
@@ -32,7 +33,7 @@ const UseBottomSheetState =
 React.memo(
 (props: UseBottomSheetStateProps)=>{
   const {
-    open,
+    isOpen,
     onClosed,
     defaultOpenIdx = DefaultSheetOpenIdx,
     snapPoints = DefaultSheetSnaps,
@@ -40,46 +41,67 @@ React.memo(
   } = props
   
   
+  /* useEffect(() => {
+    console.log('isOpen', isOpen)
+  }, [isOpen]) */
+  
+  
   const [sheetState, setSheetState] = useState<SheetState>('closed')
-  const [snapIdx,setSnapIdx] = useState<SheetSnapIdx>(0)
+  const [snapIdx, setSnapIdx] = useState<SheetSnapIdx>(defaultOpenIdx)
   
-  /* const setSheetState = useCallback(
-    (sheetState: ValueOrMapper<SheetState>)=>{
-      console.log('sheetState',sheetState)
-      setSheetState_(sheetState)
-    },
-    []
-  ) */
   
-  const setClosing = useCallback(
-    ()=>setSheetState('closing'),
-    []
-  )
+  /* const setSheetState = (s: SheetState)=>{
+    console.log('s setSheetState',s)
+    try {
+      if (s==='closed') throw new Error('s===closed')
+    }
+    // @ts-ignore
+    catch(ex: Error){
+      console.log('stack:', ex.stack)
+    }
+    setSheetState_(s)
+  } */
+  
+  
+  const outerTriggered = useRef(false)
+  
+  useEffect(() => {
+    outerTriggered.current = true
+    if (isOpen && !(['opened','open','opening',null] as SheetState[]).includes(sheetState)){
+      //console.log('opening!!!')
+      //console.log('set opening')
+      setSheetState('opening')
+      //setSheetState('opened')
+      setSnapIdx(defaultOpenIdx)
+    }
+    else if (!isOpen && !(['closed','closing','close',null] as SheetState[]).includes(sheetState)){
+      console.log('closing!!!')
+      setSheetState('closing')
+      //setSheetState('closed')
+    }
+    
+  }, [isOpen])
   
   useEffect(
     ()=>{
-      if (open){
-        //console.log('set opening')
-        setSheetState('opening')
-        setSnapIdx(defaultOpenIdx)
-      }
-      else {
-        setSheetState('closed')
-      }
-    },
-    [open]
-  )
-  
-  useEffect(
-    ()=>{
-      if (sheetState==='closed'){
-        //console.log('onClosed')
+      //if (isFirstRender) return
+      if (sheetState==='closed' && isOpen && !outerTriggered.current){
+        //console.log('onSheetClosed!!!')
         onClosed()
       }
     },
     [sheetState]
   )
   
+  useEffect(() => {
+    outerTriggered.current = false
+  }, [isOpen])
+  
+  
+  const setClosing = useCallback(()=>{
+    console.log('setClosing')
+    setSheetState('closing')
+  }, [])
   
   const sheetProps = useMemo<UseBottomSheetOptions>(
     ()=>({
@@ -96,7 +118,7 @@ React.memo(
   )
   
   
-  if (!open && closeable) return undefined
+  if (sheetState==='closed') return undefined
   return props.children({
     setClosing,
     sheetProps,

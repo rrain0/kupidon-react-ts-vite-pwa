@@ -166,8 +166,10 @@ export namespace ButtonStyle {
       // normal
       ${El.btn.thiz()} {
         background: ${t.buttonAccent.bgc[0]};
-        color: ${t.buttonAccent.content[0]};
-        ${Prop.color.name}: ${t.buttonAccent.content[0]};
+        ${El.btn.props.color.set(t.buttonAccent.content[0])}
+      }
+      ${El.border.thiz()} {
+        border-color: ${t.buttonAccent.bgc[0]};
       }
       ${El.ripple.thiz()} {
         ${El.ripple.props.color.set(t.ripple.content[0])}
@@ -186,8 +188,7 @@ export namespace ButtonStyle {
       // disabled
       ${El.btn.thiz('disabled')} {
         background: ${t.elementDisabled.bgc[0]};
-        color: ${t.elementDisabled.content[0]};
-        ${Prop.color.name}: ${t.elementDisabled.content[0]};
+        ${El.btn.props.color.set(t.elementDisabled.content[0])}
       }
     `
     
@@ -330,8 +331,10 @@ export namespace ButtonStyle {
     ${Shape.rounded};
     ${Color.accent(t)};
     ${El.btn.thiz()} {
-      color: ${t.buttonAccent.content2[0]};
-      ${Prop.color.name}: ${t.buttonAccent.content2[0]};
+      ${El.btn.props.color.set(t.buttonAccent.content2[0])}
+    }
+    ${El.border.thiz()}{
+      border: none;
     }
   `
   export const roundedSmallAccent = (t:Theme) => css`
@@ -339,8 +342,10 @@ export namespace ButtonStyle {
     ${Shape.roundedSmall};
     ${Color.accent(t)};
     ${El.btn.thiz()} {
-      color: ${t.buttonAccent.content2[0]};
-      ${Prop.color.name}: ${t.buttonAccent.content2[0]};
+      ${El.btn.props.color.set(t.buttonAccent.content2[0])}
+    }
+    ${El.border.thiz()}{
+      border: none;
     }
   `
   export const roundedSmallSecondary = (t:Theme) => css`

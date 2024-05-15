@@ -53,6 +53,7 @@ React.memo(
     ['0px','fit-header',200,'fit-content','50%','free','80%','800px']
   )
   const [animationDuration, setAnimationDuration] = useState(400)
+  const [closeable, setCloseable] = useState(true)
   const openSnapIdx = useMemo(
     ()=>{
       let openIdx = snapPoints.findIndex(it=>it==='fit-content')
@@ -70,9 +71,7 @@ React.memo(
       contentH: 0,
       headerAndContentH: 0,
     })
-  const [snapPointsPx, setSnapPointsPx] = useState(
-    undefined as number[] | undefined
-  )
+  const [snapPointsPx, setSnapPointsPx] = useState<number[] | undefined>(undefined)
   
   const [itemsCnt, setItemsCnt] = useState(12)
   
@@ -118,6 +117,15 @@ React.memo(
         >
           <div>Snap points px:</div>
           <div>{JSON.stringify(snapPointsPx)}</div>
+        </div>
+        
+        <div css={css`
+          ${row};
+          gap: 10px;
+        `}
+        >
+          <div>Closeable:</div>
+          <div>{JSON.stringify(closeable)}</div>
         </div>
         
         
@@ -177,7 +185,7 @@ React.memo(
       
       snapPoints={snapPoints}
       animationDuration={animationDuration}
-      closeable={false}
+      closeable={closeable}
       defaultOpenIdx={openSnapIdx}
       
       onSnapPointsPx={setSnapPointsPx}
@@ -195,6 +203,7 @@ React.memo(
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            touch-action: none;
           `}
           ref={bottomSheetHeaderRef as any}
           {...sheetDrag()}
@@ -269,6 +278,8 @@ React.memo(
       snapPointsPx={snapPointsPx}
       openSnapIdx={openSnapIdx}
       setSnapIdx={setSnapIdx}
+      closeable={closeable}
+      setCloseable={setCloseable}
       animationDuration={animationDuration}
       setAnimationDuration={setAnimationDuration}
       itemsCnt={itemsCnt}
@@ -289,6 +300,8 @@ const BottomSheetControlOverlay = (props:{
   snapPointsPx: number[] | undefined
   openSnapIdx: number
   setSnapIdx: Setter<number>
+  closeable: boolean
+  setCloseable: Setter<boolean>
   animationDuration: number
   setAnimationDuration: Setter<number>
   itemsCnt: number
@@ -413,6 +426,20 @@ const BottomSheetControlOverlay = (props:{
                 intOrDefault(ev.target.value, 12),
               )
             }}
+          />
+        </div>
+        
+        <div
+          css={css`
+          ${row};
+          gap: 10px;
+        `}
+        >
+          <div>Closeable:</div>
+          <input
+            type='checkbox'
+            checked={props.closeable}
+            onChange={ev=>props.setCloseable(ev.currentTarget.checked)}
           />
         </div>
       </div>

@@ -123,14 +123,14 @@ const CloseButton = styled.button`
   ${center};
   cursor: pointer;
 
-  &>${SvgIconsStyle.El.icon.thiz()} {
+  &>${SvgIconsStyle.El.icon.sel()} {
     width: 100%;
     height: 100%;
     ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.toast.content2[0]};
   }
   
   ${hoverable}{
-    :hover>${SvgIconsStyle.El.icon.thiz()} {
+    :hover>${SvgIconsStyle.El.icon.sel()} {
       ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.toast.content3[0]};
     }
   }

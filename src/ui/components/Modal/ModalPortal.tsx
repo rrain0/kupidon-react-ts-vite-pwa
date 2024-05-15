@@ -12,10 +12,7 @@ export type ModalPortalProps = PartialUndef<{
 const ModalPortal =
 React.memo(
 (props: ModalPortalProps)=>{
-  const modalView = useMemo(
-    ()=>document.getElementById('modal-outlet'),
-    []
-  )
+  const modalView = useMemo(()=>document.getElementById('modal-outlet'), [])
   
   /*
   const prevFocus = useRef<HTMLElement|SVGElement|null>()

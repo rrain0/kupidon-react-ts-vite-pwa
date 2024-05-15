@@ -6,6 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
+import UseOverlay from 'src/ui/components/StateCarriers/UseOverlay.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
@@ -33,20 +34,21 @@ import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import onPointerClick = ReactUtils.onPointerClick
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
+import Callback = TypeUtils.Callback
 
 
 
-
+export const QuickSettingsOverlayName = 'quickSettings'
 
 
 export type SettingsProps = {
-  open: boolean
-  setOpen: Setter<boolean>
+  isOpen: boolean
+  close: Callback
 }
 const QuickSettings =
 React.memo(
 (props: SettingsProps)=>{
-  const { open, setOpen } = props
+  const { isOpen, close } = props
   
   const auth = useRecoilValue(AuthRecoil)
   const [app, setApp] = useRecoilState(AppRecoil)
@@ -57,8 +59,8 @@ React.memo(
   
   return <>
     <UseBottomSheetState
-      open={open}
-      onClosed={()=>setOpen(false)}
+      isOpen={isOpen}
+      onClosed={close}
     >
       {props =>
       <ModalPortal>
@@ -116,17 +118,17 @@ React.memo(
               {actionText.installApp}
             </Button>}
             
-            <UseBool>{bool => <>
+            <UseOverlay overlayName={'clearSiteData'}>{overlay => <>
               
               <Button css={normalIconRoundButton}
-                //onClick={bool.setTrue}
-                {...onPointerClick(bool.setTrue)}
+                onClick={overlay.open}
+                //{...onPointerClick(overlay.open)}
               >
                 {actionText.clearAppData}
               </Button>
               
-              <ClearSiteConfirmation open={bool.value} setOpen={bool.setValue}/>
-            </>}</UseBool>
+              <ClearSiteConfirmation isOpen={overlay.isOpen} close={overlay.close}/>
+            </>}</UseOverlay>
             
             {import.meta.env.DEV && <Button css={normalIconRoundButton}
               onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}

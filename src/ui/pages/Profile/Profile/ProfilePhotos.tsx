@@ -449,7 +449,7 @@ React.memo(
     
     
     <UseBottomSheetState
-      open={isMenuOpen}
+      isOpen={isMenuOpen}
       onClosed={()=>setMenuOpen(false)}
     >
       {sheet =>

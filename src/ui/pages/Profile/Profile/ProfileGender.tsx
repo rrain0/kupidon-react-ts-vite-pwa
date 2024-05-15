@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { useOverlayState } from '@util/react/useOverlayState.ts'
+import { useOverlay } from '@util/react/useOverlay.ts'
 import React, { useMemo } from 'react'
 import { GenderEnum } from 'src/api/model/GenderEnum.ts'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
@@ -39,7 +39,7 @@ React.memo(
   const titleText = useUiValues(TitleUiText)
   
   
-  const [isOpen, open, close] = useOverlayState(overlayName)
+  const [isOpen, open, close] = useOverlay(overlayName)
   
   const genderOptions = useMemo(
     ()=>[
@@ -66,10 +66,7 @@ React.memo(
       {...onPointerClick(open)}
     />
     
-    <UseBottomSheetState
-      open={isOpen}
-      onClosed={close}
-    >
+    <UseBottomSheetState isOpen={isOpen} onClosed={close}>
       {sheetProps =>
         <ModalPortal>
           <BottomSheetBasic

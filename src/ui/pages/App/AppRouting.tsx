@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import { bowAndArrowsRouting } from 'src/ui/pages/BowAndArrows/routing.tsx'
 import { chatRouting } from 'src/ui/pages/Chat/routing.tsx'
-import BottomNavBarRouting from 'src/ui/widgets/BottomNavBar/routing'
+import BottomNavBarRouting from 'src/ui/widgets/NavBar/routing'
 import { findPairsRouting } from 'src/ui/pages/FindPairs/routing'
 import { loginRouting } from 'src/ui/pages/Login/routing'
 import React from 'react'

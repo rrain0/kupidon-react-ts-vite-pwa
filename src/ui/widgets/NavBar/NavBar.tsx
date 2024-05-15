@@ -4,11 +4,12 @@ import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import UseOverlay from 'src/ui/components/StateCarriers/UseOverlay.tsx'
 import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
-import { NavButtonStyle } from 'src/ui/widgets/BottomNavBar/NavButtonStyle.ts'
+import { NavButtonStyle } from 'src/ui/widgets/NavBar/NavButtonStyle.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
@@ -23,7 +24,9 @@ import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import ChatRoundIc = SvgIcons.ChatRoundIc
 import fixedBottom = EmotionCommon.fixedBottom
-import QuickSettings from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
+import QuickSettings, {
+  QuickSettingsOverlayName,
+} from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import onPointerClick = ReactUtils.onPointerClick
 import BowArrowIc = SvgIcons.BowArrowIc
 import ProfileGradIc = SvgGradIcons.ProfileGradIc
@@ -35,7 +38,7 @@ import BowArrowGradIc = SvgGradIcons.BowArrowGradIc
 
 
 
-const BottomNavBar =
+const NavBar =
 React.memo(
 ()=>{
   
@@ -85,28 +88,25 @@ React.memo(
         </Button>
       </NavLink>
       
-      <UseBool>{bool=>
+      <UseOverlay overlayName={QuickSettingsOverlayName}>{overlay=>
         <>
-          <NavLink to={RootRoute.settings[full]()}
-            onClick={ev=>ev.preventDefault()} // prevent follow link
+          <Button css={NavButtonStyle.nav}
+            onClick={overlay.open}
+            //{...onPointerClick(overlay.open)}
           >
-            <Button css={NavButtonStyle.nav}
-              {...onPointerClick(bool.setTrue)}
-            >
-              <Gear2Ic/>
-              <div>{titleText.settings}</div>
-            </Button>
-          </NavLink>
-          <QuickSettings open={bool.value} setOpen={bool.setValue}/>
+            <Gear2Ic/>
+            <div>{titleText.settings}</div>
+          </Button>
+          <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
         </>
-      }</UseBool>
+      }</UseOverlay>
         
     
     </Frame>
     
   </>
 })
-export default BottomNavBar
+export default NavBar
 
 
 

@@ -5,7 +5,7 @@ import ValueOrGenerator = TypeUtils.ValueOrGenerator
 
 
 
-export const useBoolState = (initialValue: ValueOrGenerator<boolean>) => {
+export const useBool = (initialValue: ValueOrGenerator<boolean>) => {
   const [value,setValue] = useState(initialValue)
   const setTrue = useCallback(()=>setValue(true), [])
   const setFalse = useCallback(()=>setValue(false), [])

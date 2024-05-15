@@ -34,9 +34,6 @@ import notExists = TypeUtils.notExists
 
 
 
-export const DefaultSheetSnaps = [0,'15%'/*200*/,'free','fit-content','free','50%','free','80%']
-export const DefaultSheetOpenIdx = 3
-
 
 // % высоты viewport в секунду
 const speedThreshold = 50
@@ -54,6 +51,10 @@ const dragStartInitialValue = {
   lastSpeed: null as number|null,
 }
 
+
+/*
+todo make #{ state, isOuterRequest }
+*/
 
 
 export type SheetStableState =
@@ -76,6 +77,11 @@ export type SheetState = SheetStableState | SheetIntermediateState
 
 export type SheetSnapPoints = (number | string)[]
 export type SheetSnapIdx = number | null
+
+
+export const DefaultSheetSnaps: SheetSnapPoints
+  = [0,'15%'/*200*/,'free','fit-content','free','50%','free','80%']
+export const DefaultSheetOpenIdx: number = 3
 
 
 export type ComputedBottomSheetDimens = {
@@ -115,6 +121,7 @@ export const useBottomSheet = (
   
   const [isReady, setReady] = useState(false)
   
+  // todo use spring to avoid rerenders
   const [computedSheetDimens, setComputedSheetDimens, computedSheetDimensRef] =
     useStateAndRef<ComputedBottomSheetDimens>({
       frameH: 0,
@@ -173,7 +180,54 @@ export const useBottomSheet = (
   
   
   
-  const [
+  // non-zero len
+  const snapPoints = useMemo<(number|string)[]>(()=>{
+    if (options.snapPoints?.length) return options.snapPoints
+    return DefaultSheetSnaps
+  }, [...(options.snapPoints??[])])
+  
+  // non-zero len
+  const snapPointsPx = useMemo<number[]>(()=>{
+    const snapPointsPx = calculateSnapPointsPx(snapPoints, computedSheetDimens)
+    if (isReady && snapPointsPx.every(elem=>elem===0))
+      console.warn(
+        "Every calculated snap point equals 0, bottom sheet cannot be opened."
+      )
+    return snapPointsPx
+  }, [computedSheetDimens, ...snapPoints])
+  
+  // if sheet can be opened, then realFirstOpenIdx!==null
+  const realFirstOpenIdx = useMemo<number|null>(()=>{
+    const f = findBy(snapPointsPx, elem=>elem>0)
+    if (!f.isFound) return null
+    return f.index
+  }, [snapPointsPx])
+  
+  // default open idx, if sheet can be opened, then openIdx!==null
+  const realDefaultOpenIdx = useMemo<number|null>(()=>{
+    if (realFirstOpenIdx===null) return null
+    
+    const idx = options.defaultOpenIdx ?? null
+    
+    if (idx!==null) return fitRange(
+      idx, [realFirstOpenIdx, lastIndex(snapPointsPx)]
+    )
+    
+    if (snapPoints===DefaultSheetSnaps) return DefaultSheetOpenIdx
+    
+    return Math.ceil((realFirstOpenIdx + lastIndex(snapPointsPx)) / 2)
+  }, [realFirstOpenIdx, options.defaultOpenIdx, snapPointsPx])
+  
+  // if there is snap point evaluated to 0, then closeIdx!==null
+  const closeIdx = useMemo<number|null>(()=>{
+    const f = findBy(snapPointsPx, elem=>elem===0)
+    if (!f.isFound) return null
+    return f.index
+  }, [snapPointsPx])
+  
+  
+  
+  /* const [
     snapPoints, // non-zero len
     snapPointsPx, // non-zero len
     realFirstOpenIdx, // if sheet can be opened, then realFirstOpenIdx!==null
@@ -193,7 +247,7 @@ export const useBottomSheet = (
         return DefaultSheetSnaps
       }()
       
-      const snapPointsPx = calculateSnapPointsPx(snapPoints,computedSheetDimens)
+      const snapPointsPx = calculateSnapPointsPx(snapPoints, computedSheetDimens)
       if (isReady && snapPointsPx.every(elem=>elem===0))
         console.warn(
           "Every calculated snap point equals 0, bottom sheet cannot be opened."
@@ -228,7 +282,7 @@ export const useBottomSheet = (
       return [snapPoints, snapPointsPx, firstOpenIdx, realDefaultOpenIdx, closeIdx] as const
     },
     [computedSheetDimens, options.defaultOpenIdx, ...(options.snapPoints??[])]
-  )
+  ) */
   
   
   const [prevState, setPrevState] = useState<SheetState>(null)
@@ -287,8 +341,12 @@ export const useBottomSheet = (
   
   
   
+  //console.log('newSheetState', newState)
+  
   const reactOnState = useEffectEvent(
     ()=>{
+      if (!isReady) return
+      
       const canOpen = exists(realDefaultOpenIdx)
       const canClose = newCloseable
       
@@ -307,10 +365,12 @@ export const useBottomSheet = (
       
       const setStateAndIndex = (s: SheetState, index: SheetSnapIdx)=>{
         if (s!=='dragging') dragStartRef.current = {...dragStartInitialValue}
-        if (isReady){
+        /* if (isReady){
           setNewState(s)
           setNewSnapIdx(index)
-        }
+        } */
+        setNewState(s)
+        setNewSnapIdx(index)
         setPrevState(s)
         setPrevSnapIdx(index)
         setPrevCloseable(newCloseable)
@@ -394,8 +454,13 @@ export const useBottomSheet = (
       
       
       //console.log({ canClose })
-      //console.log({ isOpened, isClosed, toOpened, toClosed })
-      //console.log({ toOpenHeight, toOpenSnap, isOpenToOpen, isOpenToClose })
+      /* console.log('---bottom-sheet-start-----------------------')
+      console.log({ prevState, newState })
+      console.log({ canOpen, canClose })
+      console.log({ isOpened, isClosed })
+      console.log({ toOpened, toClosed })
+      console.log({ toOpenHeight, toOpenSnap, isOpenToOpen, isOpenToClose })
+      console.log('---bottom-sheet-end-----------------------') */
       
       
       if (isCloseToOpen){

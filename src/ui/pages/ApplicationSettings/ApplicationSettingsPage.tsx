@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useOverlay } from '@util/react/useOverlay.ts'
 import React, { useMemo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
@@ -44,7 +45,9 @@ React.memo(
   const titleText = useUiValues(TitleUiText)
   const themeNameText = useUiValues(ThemeNameUiText)
   
-  const [clearSite, setClearSite] = useState(false)
+  
+  const [isShowClearSiteDialog, openClearSiteDialog, closeClearSiteDialog]
+    = useOverlay('clearSite')
   
   
   
@@ -178,7 +181,7 @@ React.memo(
             </Button>}
             
             <Button css={ButtonStyle.roundedDanger}
-              onClick={()=>setClearSite(true)}
+              onClick={openClearSiteDialog}
             >
               {actionText.clearAppData}
             </Button>
@@ -200,7 +203,7 @@ React.memo(
     <BottomButtonBar />
     
     
-    <ClearSiteConfirmation open={clearSite} setOpen={setClearSite} />
+    <ClearSiteConfirmation isOpen={isShowClearSiteDialog} close={closeClearSiteDialog} />
     
     
   </>

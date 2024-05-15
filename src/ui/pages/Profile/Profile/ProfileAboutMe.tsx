@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
-import { useOverlayState } from '@util/react/useOverlayState.ts'
+import { useOverlay } from '@util/react/useOverlay.ts'
 import React from 'react'
+import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
@@ -22,7 +23,6 @@ import Card2 from 'src/ui/elements/cards/Card2.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import row = EmotionCommon.row
-import NameCardGradIc = SvgGradIcons.NameCardGradIc
 
 
 
@@ -38,7 +38,7 @@ React.memo(
   const actionText = useUiValues(ActionUiText)
   
   
-  const [isOpen, open, close] = useOverlayState(overlayName)
+  const [isOpen, open, close] = useOverlay(overlayName)
   
   
   return <>
@@ -52,50 +52,52 @@ React.memo(
     />
     
     { isOpen &&
-      <ModalPortal><Modal css={ModalStyle.modal}
-        onClick={close}
-      >
-        <div css={css`
-          width: 100%;
-          height: 100%;
-          padding: 20px;
-          padding-bottom: 140px;
-          display: grid;
-          place-items: end center;
-        `}>
-          
-          <Card2 css={css`
-            min-width: 220px;
+      <ModalPortal><UserActionsConsumer>
+        <Modal css={ModalStyle.modal}
+          onClick={close}
+        >
+          <div css={css`
             width: 100%;
-            max-width: 500px;
-            gap: 10px;
-          `}
-            onClick={ev => ev.stopPropagation()}
-          >
-            <ItemLabel>{titleText.aboutMe}</ItemLabel>
-            <Input css={InputStyle.inputSmall}
-              autoFocus
-              placeholder={titleText.aboutMe.toLowerCase()}
-              {...props.inputProps}
-              hasError={props.highlight}
-              onBlur={ev => {
-                ev.currentTarget.focus()
-                props.inputProps.onBlur()
-              }}
-            />
-            <div css={css`
-              ${row};
+            height: 100%;
+            padding: 20px;
+            padding-bottom: 140px;
+            display: grid;
+            place-items: end center;
+          `}>
+            
+            <Card2 css={css`
+              min-width: 220px;
+              width: 100%;
+              max-width: 500px;
               gap: 10px;
-              justify-content: end;
-            `}>
-              <Button css={ButtonStyle.roundedSmallSecondary}
-                onClick={close}
-                children={actionText.ok}
+            `}
+              onClick={ev => ev.stopPropagation()}
+            >
+              <ItemLabel>{titleText.aboutMe}</ItemLabel>
+              <Input css={InputStyle.inputSmall}
+                autoFocus
+                placeholder={titleText.aboutMe.toLowerCase()}
+                {...props.inputProps}
+                hasError={props.highlight}
+                onBlur={ev => {
+                  ev.currentTarget.focus()
+                  props.inputProps.onBlur()
+                }}
               />
-            </div>
-          </Card2>
-        </div>
-      </Modal></ModalPortal>
+              <div css={css`
+                ${row};
+                gap: 10px;
+                justify-content: end;
+              `}>
+                <Button css={ButtonStyle.roundedSmallSecondary}
+                  onClick={close}
+                  children={actionText.ok}
+                />
+              </div>
+            </Card2>
+          </div>
+        </Modal>
+      </UserActionsConsumer></ModalPortal>
     }
     
   </>

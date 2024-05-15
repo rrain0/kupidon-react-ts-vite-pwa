@@ -7,7 +7,7 @@ import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { clearSiteData } from 'src/util/app/clearSiteData.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import { useBoolState } from '@util/react/useBoolState.ts'
+import { useBool } from '@util/react/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
@@ -22,8 +22,8 @@ import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIcons.ClearTrashIc
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import Setter = TypeUtils.Callback1
 import Txt = EmotionCommon.Txt
+import Callback = TypeUtils.Callback
 
 
 
@@ -32,19 +32,19 @@ import Txt = EmotionCommon.Txt
 
 
 export type ClearSiteConfirmationProps = {
-  open: boolean
-  setOpen: Setter<boolean>
+  isOpen: boolean
+  close: Callback
 }
 const ClearSiteConfirmation =
 React.memo(
 (props: ClearSiteConfirmationProps)=>{
-  const { open, setOpen } = props
+  const { isOpen, close } = props
   
   const statusText = useUiValues(StatusUiText)
   const actionText = useUiValues(ActionUiText)
   
   
-  const [needClear, clear] = useBoolState(false)
+  const [needClear, clear] = useBool(false)
   useEffect(
     ()=>{
       if (needClear){
@@ -61,45 +61,42 @@ React.memo(
   
   return <>
     
-    <UseBottomSheetState
-      open={open}
-      onClosed={()=>setOpen(false)}
+    <UseBottomSheetState isOpen={isOpen} onClosed={close}>
+    {props => <ModalPortal><BottomSheetBasic
+      {...props.sheetProps}
+      header={actionText.clearAppData + '?'}
     >
-      {props => <ModalPortal><BottomSheetBasic
-        {...props.sheetProps}
-        header={actionText.clearAppData + '?'}
+      <div
+        css={css`
+          ${col};
+          padding-bottom: 20px;
+        `}
       >
         <div
           css={css`
-            ${col};
-            padding-bottom: 20px;
+            ${row};
+            justify-content: center;
+            gap: 20px;
           `}
         >
-          <div
-            css={css`
-              ${row};
-              justify-content: center;
-              gap: 20px;
-            `}
-          >
-            
-            <Button css={[ButtonStyle.roundedAccent, button]}
-              onClick={props.setClosing}
-            >
-              {actionText.no}
-            </Button>
-            
-            <Button css={[ButtonStyle.roundedDanger, button]}
-              onClick={clear}
-            >
-              <ClearTrashIc css={[icon, iconOnDanger]}/>
-              {actionText.yes}
-            </Button>
           
-          </div>
+          <Button css={[ButtonStyle.roundedAccent, button]}
+            onClick={props.setClosing}
+          >
+            {actionText.no}
+          </Button>
+          
+          <Button css={[ButtonStyle.roundedDanger, button]}
+            onClick={clear}
+          >
+            <ClearTrashIc css={[icon, iconOnDanger]}/>
+            {actionText.yes}
+          </Button>
+        
         </div>
-      </BottomSheetBasic></ModalPortal>
-    }</UseBottomSheetState>
+      </div>
+    </BottomSheetBasic></ModalPortal>}
+    </UseBottomSheetState>
     
     { needClear && <div
       css={t => css`

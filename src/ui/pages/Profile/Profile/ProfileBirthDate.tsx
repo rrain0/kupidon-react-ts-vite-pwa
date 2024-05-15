@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { useOverlayState } from '@util/react/useOverlayState.ts'
+import { useOverlay } from '@util/react/useOverlay.ts'
 import React from 'react'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import Modal from 'src/ui/components/Modal/Modal.tsx'
@@ -37,7 +37,7 @@ React.memo(
   const placeholderText = useUiValues(PlaceholderUiText)
   const actionText = useUiValues(ActionUiText)
   
-  const [isOpen, open, close] = useOverlayState(overlayName)
+  const [isOpen, open, close] = useOverlay(overlayName)
   
   
   return <>
