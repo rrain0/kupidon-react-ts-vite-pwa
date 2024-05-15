@@ -62,8 +62,8 @@ React.memo(
       title={titleText.gender}
       value={genderOptions.find(opt => opt.value === props.value)?.text ?? ''}
       
-      //onClick={bool.setTrue}
-      {...onPointerClick(open)}
+      onClick={open}
+      //{...onPointerClick(open)}
     />
     
     <UseBottomSheetState isOpen={isOpen} onClosed={close}>
