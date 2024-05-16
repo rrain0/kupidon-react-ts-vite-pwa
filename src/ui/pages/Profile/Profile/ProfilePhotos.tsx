@@ -13,7 +13,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
-import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import {
   DefaultOperation,
   DefaultProfilePhoto,

@@ -33,11 +33,11 @@ export const PlaceholderUiText = {
     'en-US': 'name',
     'ru-RU': 'имя',
   },
-  birthDatePlaceholder: {
+  birthDate: {
     'en-US': 'birth date (yyyy-MM-dd) (2002-01-01)',
     'ru-RU': 'дата рождения (гггг-ММ-дд) (2002-01-01)',
   },
-  aboutMePlaceholder: {
+  aboutMe: {
     'en-US': 'Tell about yourself',
     'ru-RU': 'Расскажите о себе',
   },

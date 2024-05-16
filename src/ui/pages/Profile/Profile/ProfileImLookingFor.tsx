@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React, { useMemo, useState } from 'react'
 import UseFakePointerRef from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
-import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'

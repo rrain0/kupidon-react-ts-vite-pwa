@@ -3,9 +3,9 @@ import { useOverlay } from '@util/react/useOverlay.ts'
 import React from 'react'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
-import Modal from 'src/ui/components/Modal/Modal.tsx'
-import ModalPortal from 'src/ui/components/Modal/ModalPortal.tsx'
-import { ModalStyle } from 'src/ui/components/Modal/ModalStyle.ts'
+import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import { ModalStyle } from 'src/ui/components/modal/ModalPortal/ModalStyle.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
@@ -46,7 +46,7 @@ React.memo(
     <EditableTextCard
       title={titleText.aboutMe}
       text={props.value}
-      placeholder={placeholderText.aboutMePlaceholder}
+      placeholder={placeholderText.aboutMe}
       data-error={props.highlight}
       onClick={open}
     />

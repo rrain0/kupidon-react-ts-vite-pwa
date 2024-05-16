@@ -246,7 +246,7 @@ React.memo(
             fieldName='birthDate'
             render={props => <Input
               css={InputStyle.inputNormal}
-              placeholder={placeholderText.birthDatePlaceholder}
+              placeholder={placeholderText.birthDate}
               {...props.inputProps}
               hasError={props.highlight}
             />}
