@@ -1,5 +1,5 @@
 import { useBoolStateSync } from '@util/react/useBoolStateSync.ts'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import {
   DefaultSheetOpenIdx, DefaultSheetSnaps,
@@ -19,9 +19,9 @@ export type UseBottomSheetStateRenderProps = {
 }
 export type UseBottomSheetStateProps = {
   isOpen: boolean
-  onClosed: Callback
   children: (props: UseBottomSheetStateRenderProps)=>React.ReactNode
 } & PartialUndef<{
+  onClosed: Callback
   defaultOpenIdx: number
   snapPoints: SheetSnapPoints
   closeable: boolean
@@ -41,20 +41,29 @@ React.memo(
   } = props
   
   
+  useEffect(() => {
+    console.log('isOpenExternal', isOpenExternal)
+  }, [isOpenExternal])
+  
   
   const [sheetState, setSheetState] = useState<SheetState>('closed')
   const [snapIdx, setSnapIdx] = useState<SheetSnapIdx>(defaultOpenIdx)
   
+  useEffect(() => {
+    console.log('sheetState', sheetState)
+  }, [sheetState])
   
   
-  const setOpenExternal = (isOpen: boolean) => isOpen ? undefined : onClosed()
+  const setOpenExternal = (isOpen: boolean) => isOpen ? undefined : onClosed?.()
   const isOpen = !(['closed','closing','close',null] as SheetState[]).includes(sheetState)
   const setOpen = (isOpen: boolean)=>{
     if (isOpen) {
+      console.log('setOpening')
       setSheetState('opening')
       setSnapIdx(defaultOpenIdx)
     }
     else {
+      console.log('setClosing')
       setSheetState('closing')
     }
   }

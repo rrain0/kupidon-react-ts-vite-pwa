@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
 import { useBool } from '@util/react/useBool.ts'
 import React from 'react'
+import ModalInput from 'src/ui/components/modal-element/ModalInput/ModalInput.tsx'
+import ModalTextarea from 'src/ui/components/modal-element/ModalTextarea/ModalTextarea.tsx'
 import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
@@ -32,7 +34,6 @@ React.memo(
 (props: ValidationWrapRenderProps<string>)=>{
   const titleText = useUiValues(TitleUiText)
   const placeholderText = useUiValues(PlaceholderUiText)
-  const actionText = useUiValues(ActionUiText)
   
   
   const [isOpen, open, close, setIsOpen] = useBool(false)
@@ -53,54 +54,20 @@ React.memo(
       onClick={open}
     />
     
-    { isOpen &&
-      <ModalPortal><UserActionsConsumer>
-        <Modal css={ModalStyle.modal}
-          onClick={close}
-        >
-          <div css={css`
-            width: 100%;
-            height: 100%;
-            padding: 20px;
-            padding-bottom: 140px;
-            display: grid;
-            place-items: end center;
-          `}>
-            
-            <Card2 css={css`
-              min-width: 220px;
-              width: 100%;
-              max-width: 500px;
-              gap: 10px;
-            `}
-              onClick={ev => ev.stopPropagation()}
-            >
-              <ItemLabel>{titleText.aboutMe}</ItemLabel>
-              <Input css={InputStyle.inputSmall}
-                autoFocus
-                placeholder={titleText.aboutMe.toLowerCase()}
-                {...props.inputProps}
-                hasError={props.highlight}
-                onBlur={ev => {
-                  ev.currentTarget.focus()
-                  props.inputProps.onBlur()
-                }}
-              />
-              <div css={css`
-                ${row};
-                gap: 10px;
-                justify-content: end;
-              `}>
-                <Button css={ButtonStyle.roundedSmallSecondary}
-                  onClick={close}
-                  children={actionText.ok}
-                />
-              </div>
-            </Card2>
-          </div>
-        </Modal>
-      </UserActionsConsumer></ModalPortal>
-    }
+    <ModalTextarea
+      title={titleText.aboutMe}
+      isOpen={isOpen}
+      onClose={close}
+      
+      autoFocus
+      placeholder={titleText.aboutMe.toLowerCase()}
+      {...props.inputProps}
+      hasError={props.highlight}
+      onBlur={ev => {
+        ev.currentTarget.focus()
+        props.inputProps.onBlur()
+      }}
+    />
     
   </>
 })

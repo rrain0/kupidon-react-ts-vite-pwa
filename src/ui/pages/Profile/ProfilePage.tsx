@@ -2,6 +2,9 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
+import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Partner from 'src/ui/pages/Profile/Partner/Partner.tsx'
 import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
@@ -33,7 +36,6 @@ import { useFormFailures } from '@util/form-validation/hooks/useFormFailures.ts'
 import { useFormSubmit } from '@util/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@util/form-validation/hooks/useFormToasts.tsx'
 import { useFormValuesProps } from '@util/form-validation/hooks/useFormValuesProps.ts'
-import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { Progress } from '@util/Progress.ts'
 import { useAsyncEffect } from '@util/react/useAsyncEffect.ts'
 import Tab from 'src/ui/elements/Tabs/Tab.tsx'
@@ -358,6 +360,8 @@ React.memo(
   
   
   
+  //console.log(canSubmit , formProps.hasChanges)
+  
   
   return <>
     <Pages.TabsPage>
@@ -412,11 +416,9 @@ React.memo(
                     />,
                   3:
                     <Pages.SafeInsets>
-                      <Pages.AddInsets css={css`padding-top: 20px;`}>
-                        <Pages.ContentForm>
-                          <ProfilePageTabHeader thisTabIdx={3}/>
-                        </Pages.ContentForm>
-                      </Pages.AddInsets>
+                      <Pages.ContentForm>
+                        <ProfilePageTabHeader thisTabIdx={3}/>
+                      </Pages.ContentForm>
                     </Pages.SafeInsets>
                 }[tabIdx]}
               </ProfilePageTabHeaderContext.Provider>
@@ -427,7 +429,19 @@ React.memo(
             </Tab>
           )}
         </>}</Tabs>
-      
+        
+        
+        
+        {/* <UseBottomSheetState
+          isOpen={canSubmit || formProps.hasChanges}
+          closeable={!(canSubmit || formProps.hasChanges)}
+        >
+          {props => <ModalPortal><BottomSheetBasic
+            {...props.sheetProps}
+          >
+          
+          </BottomSheetBasic></ModalPortal>}
+        </UseBottomSheetState> */}
       
       
         { app.showDevOverlay && <BottomButtonBar

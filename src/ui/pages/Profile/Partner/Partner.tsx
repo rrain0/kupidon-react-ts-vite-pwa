@@ -62,81 +62,79 @@ React.memo(
   
   return <>
     <Pages.SafeInsets>
-      <Pages.AddInsets css={css`padding-top: 20px;`}>
-        <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
+      <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
+      
+      <ProfilePageTabHeader thisTabIdx={2}/>
+      
+      
+      <div css={col}>
         
-        <ProfilePageTabHeader thisTabIdx={2}/>
+        <div css={css`
+          width: 100%;
+          height: 200px;
+          border-radius: 20px;
+          background-position: center;
+          background-size: cover;
+        `}
+          style={{ backgroundImage: `url(${boyGirlCatShadow})` }}
+        />
+        
+        <div css={{ height: 24 }}/>
+        
+        <div>AAAAAAAAA</div>
+        
+        {/* <ItemContainer>
+          <ItemTitleContainer>
+            <ItemLabel>
+              {titleText.aboutMe}
+            </ItemLabel>
+          </ItemTitleContainer>
+          <ValidationWrap {...props.validationProps}
+            fieldName="aboutMe"
+            render={props =>
+              <Textarea css={TextareaStyle.small}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />
+            }
+          />
+        </ItemContainer>
         
         
-        <div css={col}>
+        <div css={{ height: 24 }}/>
+        
+        
+        <Card2 css={css`
+          gap: 10px;
+        `}>
           
-          <div css={css`
-            width: 100%;
-            height: 200px;
-            border-radius: 20px;
-            background-position: center;
-            background-size: cover;
-          `}
-            style={{ backgroundImage: `url(${boyGirlCatShadow})` }}
+          
+          <ValidationWrap {...props.validationProps}
+            fieldName="name"
+            render={validProps => <ProfileName {...validProps}/>}
           />
           
-          <div css={{ height: 24 }}/>
           
-          <div>AAAAAAAAA</div>
-          
-          {/* <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>
-                {titleText.aboutMe}
-              </ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...props.validationProps}
-              fieldName="aboutMe"
-              render={props =>
-                <Textarea css={TextareaStyle.small}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />
-              }
-            />
-          </ItemContainer>
+          <ValidationWrap {...props.validationProps}
+            fieldName="birthDate"
+            render={validProps => <ProfileBirthDate {...validProps}/>}
+          />
           
           
-          <div css={{ height: 24 }}/>
+          <ValidationWrap {...props.validationProps}
+            fieldName="gender"
+            render={validProps => <ProfileGender {...validProps}/>}
+          />
           
           
-          <Card2 css={css`
-            gap: 10px;
-          `}>
-            
-            
-            <ValidationWrap {...props.validationProps}
-              fieldName="name"
-              render={validProps => <ProfileName {...validProps}/>}
-            />
-            
-            
-            <ValidationWrap {...props.validationProps}
-              fieldName="birthDate"
-              render={validProps => <ProfileBirthDate {...validProps}/>}
-            />
-            
-            
-            <ValidationWrap {...props.validationProps}
-              fieldName="gender"
-              render={validProps => <ProfileGender {...validProps}/>}
-            />
-            
-            
-            <ProfileImLookingFor/>
-          
-          
-          </Card2> */}
+          <ProfileImLookingFor/>
         
-        </div>
+        
+        </Card2> */}
       
-      </Pages.ContentForm>
-      </Pages.AddInsets>
+      </div>
+    
+    </Pages.ContentForm>
     </Pages.SafeInsets>
     
     

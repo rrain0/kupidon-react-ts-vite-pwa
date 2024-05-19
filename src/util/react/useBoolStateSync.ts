@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Setter = TypeUtils.Setter
 
@@ -10,18 +10,23 @@ export const useBoolStateSync =
   boolSecondary: boolean, setBoolSecondary: Setter<boolean>
 ) => {
   
-  const [isFirstRender, setIsFirstRender] = useState(true)
+  useEffect(()=>{
+    console.log('boolMain, boolSecondary', boolMain, boolSecondary)
+  }, [boolMain, boolSecondary])
+  
   
   useEffect(() => {
-    if (boolMain !== boolSecondary) setBoolSecondary(boolMain)
-  }, [boolMain])
-  
-  useEffect(() => {
-    if (boolSecondary !== boolMain && !isFirstRender) setBoolMain(boolSecondary)
+    console.log('secondary boolMain, boolSecondary', boolMain, boolSecondary)
+    if (boolSecondary !== boolMain) setBoolMain(boolSecondary)
   }, [boolSecondary])
   
   useEffect(() => {
-    setIsFirstRender(false)
-  }, [])
+    console.log('main boolMain, boolSecondary', boolMain, boolSecondary)
+    if (boolMain !== boolSecondary) {
+      setBoolMain(boolMain)
+      setBoolSecondary(boolMain)
+    }
+  }, [boolMain])
+  
   
 }

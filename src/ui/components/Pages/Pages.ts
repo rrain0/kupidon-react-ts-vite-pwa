@@ -88,7 +88,7 @@ export namespace Pages {
   export const content = css`
     ${fitPage};
     max-width: 550px;
-    padding-top: max(50px, var(--top-button-bar-height));
+    padding-top: max(24px, var(--top-button-bar-height));
     padding-bottom: max(50px, var(--bottom-button-bar-height));
     padding-left: 16px;
     padding-right: 16px;
