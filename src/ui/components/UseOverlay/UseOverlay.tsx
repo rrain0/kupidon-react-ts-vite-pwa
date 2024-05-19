@@ -1,12 +1,27 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useBoolStateSync } from '@util/react/useBoolStateSync.ts'
+import React, { useCallback, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { useBool } from 'src/util/react/useBool.ts'
+import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import Setter = TypeUtils.Setter
 
 
 
 
-export const useOverlay = (overlayName: string) => {
+
+export type UseOverlayProps = {
+  overlayName: string
+  isOpen: boolean
+  setIsOpen: Setter<boolean>
+}
+const UseOverlay =
+React.memo(
+(props: UseOverlayProps)=>{
+  const {
+    overlayName,
+    isOpen: isOpenExternal,
+    setIsOpen: setIsOpenExternal,
+  } = props
   
   const navigate = useNavigate()
   const [search, setSearch] = useSearchParams()
@@ -34,21 +49,27 @@ export const useOverlay = (overlayName: string) => {
   }, [isOpen, search, overlayName])
   
   
-  const [needToClose, close, closed] = useBool(false)
+  
+  const close = useCallback(()=>{
+    if (isLastOpen) navigate(-1)
+  },[isLastOpen])
+  
+  const setIsOpen = useCallback((isOpen: boolean)=>{
+    isOpen ? open() : close()
+  },[open, close])
+  
+  useBoolStateSync(isOpen, setIsOpen, isOpenExternal, setIsOpenExternal)
+  
+  
+  /* const [needToClose, close, closed] = useBool(false)
   
   useEffect(()=>{
     closed()
     if (isLastOpen && needToClose) {
       navigate(-1)
     }
-  }, [needToClose])
+  }, [needToClose]) */
   
-  
-  //console.log('search', [...search])
-  //console.log('search.getAll(\'overlay\')', search.getAll('overlay'))
-  
-  
-  return [isOpen, open, close] as const
-}
-
-
+  return undefined
+})
+export default UseOverlay

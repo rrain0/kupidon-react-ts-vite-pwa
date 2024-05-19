@@ -353,6 +353,14 @@ export namespace ButtonStyle {
     ${Shape.roundedSmall};
     ${Color.secondary(t)};
   `
+  export const roundedTransparent = (t:Theme) => css`
+    ${common};
+    ${Shape.rounded};
+    ${El.btn.thiz()} {
+      ${Txt.large2b};
+    }
+    ${Color.transparent(t)};
+  `
   
   export const roundedDanger = (t:Theme) => css`
     ${common};

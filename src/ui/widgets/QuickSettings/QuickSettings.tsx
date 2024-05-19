@@ -6,13 +6,12 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import UseOverlay from 'src/ui/components/StateCarriers/UseOverlay.tsx'
+import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
+import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
-import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import { AppTheme } from '@util/theme/AppTheme.ts'
@@ -23,16 +22,16 @@ import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import Setter = TypeUtils.Callback1
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc
 import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
-import ClearSiteConfirmation from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteConfirmation.tsx'
+import ClearSiteDialog, {
+  ClearSiteDialogOverlayName,
+} from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteDialog.tsx'
 import LockIc = SvgIcons.LockIc
 import GearIc = SvgIcons.GearIc
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
-import onPointerClick = ReactUtils.onPointerClick
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 import Callback = TypeUtils.Callback
 
@@ -118,17 +117,23 @@ React.memo(
               {actionText.installApp}
             </Button>}
             
-            <UseOverlay overlayName={'clearSiteData'}>{overlay => <>
-              
-              <Button css={normalIconRoundButton}
-                onClick={overlay.open}
-                //{...onPointerClick(overlay.open)}
-              >
-                {actionText.clearAppData}
-              </Button>
-              
-              <ClearSiteConfirmation isOpen={overlay.isOpen} close={overlay.close}/>
-            </>}</UseOverlay>
+            <UseBool>{overlayBool=>
+              <>
+                <UseOverlay
+                  overlayName={ClearSiteDialogOverlayName}
+                  isOpen={overlayBool.value}
+                  setIsOpen={overlayBool.setValue}
+                />
+                
+                <Button css={normalIconRoundButton}
+                  onClick={overlayBool.setTrue}
+                >
+                  {actionText.clearAppData}
+                </Button>
+                
+                <ClearSiteDialog isOpen={overlayBool.value} close={overlayBool.setFalse}/>
+              </>
+            }</UseBool>
             
             {import.meta.env.DEV && <Button css={normalIconRoundButton}
               onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}

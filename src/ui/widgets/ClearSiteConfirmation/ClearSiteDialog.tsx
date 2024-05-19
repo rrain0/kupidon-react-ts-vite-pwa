@@ -29,15 +29,16 @@ import Callback = TypeUtils.Callback
 
 
 
+export const ClearSiteDialogOverlayName = 'clearSiteDialog'
 
 
-export type ClearSiteConfirmationProps = {
+export type ClearSiteDialogProps = {
   isOpen: boolean
   close: Callback
 }
-const ClearSiteConfirmation =
+const ClearSiteDialog =
 React.memo(
-(props: ClearSiteConfirmationProps)=>{
+(props: ClearSiteDialogProps)=>{
   const { isOpen, close } = props
   
   const statusText = useUiValues(StatusUiText)
@@ -122,7 +123,7 @@ React.memo(
     
   </>
 })
-export default ClearSiteConfirmation
+export default ClearSiteDialog
 
 
 

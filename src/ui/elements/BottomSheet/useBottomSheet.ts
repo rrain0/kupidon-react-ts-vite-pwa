@@ -453,7 +453,6 @@ export const useBottomSheet = (
       const isOpenToOpen = isOpened && toOpened
       
       
-      //console.log({ canClose })
       /* console.log('---bottom-sheet-start-----------------------')
       console.log({ prevState, newState })
       console.log({ canOpen, canClose })

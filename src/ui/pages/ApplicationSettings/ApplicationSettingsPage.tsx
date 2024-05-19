@@ -7,7 +7,7 @@ import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
-import ClearSiteConfirmation from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteConfirmation'
+import ClearSiteDialog from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteDialog.tsx'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -203,7 +203,7 @@ React.memo(
     <BottomButtonBar />
     
     
-    <ClearSiteConfirmation isOpen={isShowClearSiteDialog} close={closeClearSiteDialog} />
+    <ClearSiteDialog isOpen={isShowClearSiteDialog} close={closeClearSiteDialog} />
     
     
   </>

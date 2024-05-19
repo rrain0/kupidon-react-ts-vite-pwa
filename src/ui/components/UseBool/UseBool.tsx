@@ -1,5 +1,5 @@
 import React from 'react'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { useBool } from '@util/react/useBool.ts'
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
 import PartialUndef = TypeUtils.PartialUndef

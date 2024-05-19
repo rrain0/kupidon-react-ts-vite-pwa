@@ -2,7 +2,7 @@ import Axios, { CreateAxiosDefaults } from 'axios'
 import axiosRetry from 'axios-retry'
 import { AxiosConfig } from 'src/api/AxiosConfig.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import CallbackParam = TypeUtils.Callback1
+import Callback1 = TypeUtils.Callback1
 import exists = TypeUtils.exists
 
 
@@ -16,7 +16,7 @@ export namespace FileUtils {
   async (
     file: Blob,
     options?: {
-      onProgress?: CallbackParam<number|null>
+      onProgress?: Callback1<number|null>
       abortCtrl?: AbortController
     }
   ): Promise<string> => new Promise((resolve, reject) => {
@@ -55,7 +55,7 @@ export namespace FileUtils {
   async (
     url: string,
     options?: {
-      onProgress?: CallbackParam<number|null>
+      onProgress?: Callback1<number|null>
       abortCtrl?: AbortController
     }
   ): Promise<Blob> => {

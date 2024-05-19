@@ -53,9 +53,9 @@ React.forwardRef<ModalInputRefElement, ModalInputProps>(
           ref={forwardedRef}
         />
         <DialogButtons>
-          <Button css={ButtonStyle.roundedSmallAccent}
+          <Button css={ButtonStyle.roundedTransparent}
             onClick={onClose}
-            children={actionText.ok.toUpperCase()}
+            children={actionText.ok.toLowerCase()}
           />
         </DialogButtons>
       </Card2></UserActionsConsumer>

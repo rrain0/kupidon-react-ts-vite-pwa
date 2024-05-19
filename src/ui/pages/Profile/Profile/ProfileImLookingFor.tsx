@@ -6,7 +6,7 @@ import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.ts
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
-import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
+import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import {

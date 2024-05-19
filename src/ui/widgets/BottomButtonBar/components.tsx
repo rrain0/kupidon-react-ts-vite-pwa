@@ -2,19 +2,17 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UseOverlay from 'src/ui/components/StateCarriers/UseOverlay.tsx'
+import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import SettingsButton from 'src/ui/elements/SettingsButton.tsx'
-import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
+import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useBool } from '@util/react/useBool.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import fixedBottom = EmotionCommon.fixedBottom
@@ -25,7 +23,6 @@ import rotateAnim = EmotionCommon.rotateAnim
 import fixedTop = EmotionCommon.fixedTop
 import PartialUndef = TypeUtils.PartialUndef
 import Callback = TypeUtils.Callback
-import onPointerClick = ReactUtils.onPointerClick
 
 
 
@@ -105,16 +102,20 @@ export namespace ButtonBarComponents {
   export const SettingsBtn =
   React.memo(
   ()=>{
-    return <UseOverlay overlayName={QuickSettingsOverlayName}>{overlay => <>
+    return <UseBool>{overlayBool=>
+      <>
+        <UseOverlay
+          overlayName={QuickSettingsOverlayName}
+          isOpen={overlayBool.value}
+          setIsOpen={overlayBool.setValue}
+        />
       
       <SettingsButton
-        // onClick={overlay.open}
-        {...onPointerClick(overlay.open)}
+        onClick={overlayBool.setTrue}
       />
-      
-      <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
-      
-    </>}</UseOverlay>
+        <QuickSettings isOpen={overlayBool.value} close={overlayBool.setFalse}/>
+      </>
+    }</UseBool>
   })
   
   

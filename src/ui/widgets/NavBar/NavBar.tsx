@@ -4,31 +4,24 @@ import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import UseOverlay from 'src/ui/components/StateCarriers/UseOverlay.tsx'
-import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
+import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import UseBool from 'src/ui/components/StateCarriers/UseBool.tsx'
+import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { NavButtonStyle } from 'src/ui/widgets/NavBar/NavButtonStyle.ts'
-import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import row = EmotionCommon.row
-import CardsHeartIc = SvgIcons.CardsHeartIc
-import ProfileIc = SvgIcons.ProfileIc
 import Gear2Ic = SvgIcons.Gear2Ic
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
-import ChatRoundIc = SvgIcons.ChatRoundIc
 import fixedBottom = EmotionCommon.fixedBottom
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
-import onPointerClick = ReactUtils.onPointerClick
-import BowArrowIc = SvgIcons.BowArrowIc
 import ProfileGradIc = SvgGradIcons.ProfileGradIc
 import ChatRoundGradIc = SvgGradIcons.ChatRoundGradIc
 import CardsHeartGradIc = SvgGradIcons.CardsHeartGradIc
@@ -88,18 +81,24 @@ React.memo(
         </Button>
       </NavLink>
       
-      <UseOverlay overlayName={QuickSettingsOverlayName}>{overlay=>
+      <UseBool>{overlayBool=>
         <>
+          <UseOverlay
+            overlayName={QuickSettingsOverlayName}
+            isOpen={overlayBool.value}
+            setIsOpen={overlayBool.setValue}
+          />
+          
           <Button css={NavButtonStyle.nav}
-            onClick={overlay.open}
-            //{...onPointerClick(overlay.open)}
+            onClick={overlayBool.setTrue}
           >
             <Gear2Ic/>
             <div>{titleText.settings}</div>
           </Button>
-          <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
+          
+          <QuickSettings isOpen={overlayBool.value} close={overlayBool.setFalse}/>
         </>
-      }</UseOverlay>
+      }</UseBool>
         
     
     </Frame>
