@@ -1,3 +1,4 @@
+import { useBoolStateSync } from '@util/react/useBoolStateSync.ts'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import {
@@ -32,7 +33,7 @@ const UseBottomSheetState =
 React.memo(
 (props: UseBottomSheetStateProps)=>{
   const {
-    isOpen,
+    isOpen: isOpenExternal,
     onClosed,
     defaultOpenIdx = DefaultSheetOpenIdx,
     snapPoints = DefaultSheetSnaps,
@@ -40,67 +41,33 @@ React.memo(
   } = props
   
   
-  /* useEffect(() => {
-    console.log('isOpen', isOpen)
-  }, [isOpen]) */
-  
   
   const [sheetState, setSheetState] = useState<SheetState>('closed')
   const [snapIdx, setSnapIdx] = useState<SheetSnapIdx>(defaultOpenIdx)
   
   
-  /* const setSheetState = (s: SheetState)=>{
-    console.log('s setSheetState',s)
-    try {
-      if (s==='closed') throw new Error('s===closed')
-    }
-    // @ts-ignore
-    catch(ex: Error){
-      console.log('stack:', ex.stack)
-    }
-    setSheetState_(s)
-  } */
   
-  
-  const outerTriggered = useRef(false)
-  
-  useEffect(() => {
-    outerTriggered.current = true
-    if (isOpen && !(['opened','open','opening',null] as SheetState[]).includes(sheetState)){
-      //console.log('opening!!!')
-      //console.log('set opening')
+  const setOpenExternal = (isOpen: boolean) => isOpen ? undefined : onClosed()
+  const isOpen = !(['closed','closing','close',null] as SheetState[]).includes(sheetState)
+  const setOpen = (isOpen: boolean)=>{
+    if (isOpen) {
       setSheetState('opening')
-      //setSheetState('opened')
       setSnapIdx(defaultOpenIdx)
     }
-    else if (!isOpen && !(['closed','closing','close',null] as SheetState[]).includes(sheetState)){
-      console.log('closing!!!')
+    else {
       setSheetState('closing')
-      //setSheetState('closed')
     }
-    
-  }, [isOpen])
+  }
   
-  useEffect(
-    ()=>{
-      //if (isFirstRender) return
-      if (sheetState==='closed' && isOpen && !outerTriggered.current){
-        //console.log('onSheetClosed!!!')
-        onClosed()
-      }
-    },
-    [sheetState]
-  )
+  useBoolStateSync(isOpenExternal, setOpenExternal, isOpen, setOpen)
   
-  useEffect(() => {
-    outerTriggered.current = false
-  }, [isOpen])
   
   
   const setClosing = useCallback(()=>{
     console.log('setClosing')
     setSheetState('closing')
   }, [])
+  
   
   const sheetProps = useMemo<UseBottomSheetOptions>(
     ()=>({
