@@ -1,20 +1,17 @@
 import { css } from '@emotion/react'
-import { useOverlay } from '@util/react/useOverlay.ts'
+import { useBool } from '@util/react/useBool.ts'
 import React from 'react'
+import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { ModalStyle } from 'src/ui/components/modal/ModalPortal/ModalStyle.ts'
-import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import EditableTextCard from 'src/ui/widgets/EditableTextCard/EditableTextCard.tsx'
-import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import {
-  ValidationWrapRenderProps
-} from '@util/form-validation/ValidationWrap.tsx'
+import { ValidationWrapRenderProps } from '@util/form-validation/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
@@ -38,10 +35,15 @@ React.memo(
   const actionText = useUiValues(ActionUiText)
   
   
-  const [isOpen, open, close] = useOverlay(overlayName)
+  const [isOpen, open, close, setIsOpen] = useBool(false)
   
   
   return <>
+    <UseOverlay
+      overlayName={overlayName}
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+    />
     
     <EditableTextCard
       title={titleText.aboutMe}

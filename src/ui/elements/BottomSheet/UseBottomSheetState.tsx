@@ -1,5 +1,5 @@
 import { useBoolStateSync } from '@util/react/useBoolStateSync.ts'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import {
   DefaultSheetOpenIdx, DefaultSheetSnaps,

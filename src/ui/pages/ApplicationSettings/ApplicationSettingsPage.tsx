@@ -1,13 +1,15 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useOverlay } from '@util/react/useOverlay.ts'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
-import ClearSiteDialog from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteDialog.tsx'
+import ClearSiteDialog, {
+  ClearSiteDialogOverlayName
+} from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteDialog.tsx'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -30,6 +32,7 @@ import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputSty
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
+import UseBool from 'ui/components/UseBool/UseBool'
 
 
 
@@ -46,8 +49,6 @@ React.memo(
   const themeNameText = useUiValues(ThemeNameUiText)
   
   
-  const [isShowClearSiteDialog, openClearSiteDialog, closeClearSiteDialog]
-    = useOverlay('clearSite')
   
   
   
@@ -78,6 +79,7 @@ React.memo(
     },
     [themeNameText]
   )
+  
   
   
   
@@ -165,9 +167,6 @@ React.memo(
           </Card>
           
           
-          {/* todo: Добавить настройки звука в приложении */}
-          
-          
           <RoundButtonsContainer>
             
             {app.canInstall && <Button css={normalIconRoundButton}
@@ -180,11 +179,23 @@ React.memo(
               {actionText.installApp}
             </Button>}
             
-            <Button css={ButtonStyle.roundedDanger}
-              onClick={openClearSiteDialog}
-            >
-              {actionText.clearAppData}
-            </Button>
+            <UseBool>{overlayBool=>
+              <>
+              <UseOverlay
+                overlayName={ClearSiteDialogOverlayName}
+                isOpen={overlayBool.value}
+                setIsOpen={overlayBool.setValue}
+              />
+              
+              <Button css={ButtonStyle.roundedDanger}
+                onClick={overlayBool.setTrue}
+              >
+                {actionText.clearAppData}
+              </Button>
+                
+                <ClearSiteDialog isOpen={overlayBool.value} close={overlayBool.setFalse}/>
+              </>
+            }</UseBool>
           
           </RoundButtonsContainer>
         
@@ -201,9 +212,6 @@ React.memo(
     <TopButtonBar backBtn/>
     
     <BottomButtonBar />
-    
-    
-    <ClearSiteDialog isOpen={isShowClearSiteDialog} close={closeClearSiteDialog} />
     
     
   </>
