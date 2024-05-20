@@ -6,10 +6,10 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
 import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
@@ -24,7 +24,7 @@ import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc
-import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
+import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName,
 } from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteDialog.tsx'
@@ -55,102 +55,121 @@ React.memo(
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
+  const clearSiteDialog = useOverlay(ClearSiteDialogOverlayName)
   
   return <>
     <UseBottomSheetState
       isOpen={isOpen}
       onClosed={close}
     >
-      {props =>
-      <ModalPortal>
-      <BottomSheetBasic {...props.sheetProps}
-        header={titleText.settings}
-      >
-        <Content>
-          
-          <SettingsOptions.Header>
-            {titleText.theme}:
-          </SettingsOptions.Header>
-          <ThemeOptions/>
-          
-          
-          <SettingsOptions.Header>
-            {titleText.language}:
-          </SettingsOptions.Header>
-          <LangOptions/>
-          
-          <RoundButtonsContainer>
+      {props => <ModalPortal>
+        <BottomSheetDialogBasic {...props.sheetProps}
+          header={titleText.settings}
+        >
+          <Content>
             
-            {auth && <Link to={RootRoute.settings.account[full]()}>
-              <Button css={normalIconRoundButton}
-                onClick={props.setClosing}
-              >
-                <LockIc css={[
-                  SettingsOptions.icon,
-                  css`translate: 0 -0.1em;`,
-                ]}/>
-                {titleText.accountSettings}
-              </Button>
-            </Link>}
+            <SettingsOptions.Header>
+              {titleText.theme}:
+            </SettingsOptions.Header>
+            <ThemeOptions/>
             
-            <Link to={RootRoute.settings.app[full]()}>
-              <Button css={normalIconRoundButton}
-                onClick={props.setClosing}
-              >
-                <GearIc css={SettingsOptions.icon}/>
-                {titleText.appSettings}
-              </Button>
-            </Link>
             
-            <Link to={RootRoute.test[full]()}>
-              <Button css={normalIconRoundButton}
-                onClick={props.setClosing}
-              >
-                {titleText.testPage}
-              </Button>
-            </Link>
+            <SettingsOptions.Header>
+              {titleText.language}:
+            </SettingsOptions.Header>
+            <LangOptions/>
             
-            {app.canInstall && <Button css={normalIconRoundButton}
-              onClick={async () => await promptInstall()}
-            >
-              <AddModuleIc css={SettingsOptions.icon}/>
-              {actionText.installApp}
-            </Button>}
-            
-            <UseBool>{overlayBool=>
-              <>
-                <UseOverlay
-                  overlayName={ClearSiteDialogOverlayName}
-                  isOpen={overlayBool.value}
-                  setIsOpen={overlayBool.setValue}
-                />
-                
+            <RoundButtonsContainer>
+              
+              {auth && <Link to={RootRoute.settings.account[full]()}>
                 <Button css={normalIconRoundButton}
-                  onClick={overlayBool.setTrue}
+                  onClick={props.setClosing}
                 >
-                  {actionText.clearAppData}
+                  <LockIc css={[
+                    SettingsOptions.icon,
+                    css`translate: 0 -0.1em;`,
+                  ]}/>
+                  {titleText.accountSettings}
                 </Button>
-                
-                <ClearSiteDialog isOpen={overlayBool.value} close={overlayBool.setFalse}/>
-              </>
-            }</UseBool>
+              </Link>}
+              
+              <Link to={RootRoute.settings.app[full]()}>
+                <Button css={normalIconRoundButton}
+                  onClick={props.setClosing}
+                >
+                  <GearIc css={SettingsOptions.icon}/>
+                  {titleText.appSettings}
+                </Button>
+              </Link>
+              
+              <Link to={RootRoute.test[full]()}>
+                <Button css={normalIconRoundButton}
+                  onClick={props.setClosing}
+                >
+                  {titleText.testPage}
+                </Button>
+              </Link>
+              
+              {app.canInstall && <Button css={normalIconRoundButton}
+                onClick={async () => await promptInstall()}
+              >
+                <AddModuleIc css={SettingsOptions.icon}/>
+                {actionText.installApp}
+              </Button>}
+              
+              {/* <UseOverlay overlayName={ClearSiteDialogOverlayName}>
+                {overlay=><>
+                  <Button css={normalIconRoundButton}
+                    onClick={overlay.open}
+                  >
+                    {actionText.clearAppData}
+                  </Button>
+                  
+                  <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close}/>
+                </>}
+              </UseOverlay> */}
+              
+              <Button css={normalIconRoundButton}
+                onClick={clearSiteDialog.open}
+              >
+                {actionText.clearAppData}
+              </Button>
+              
+              {/* <UseBool>{overlayBool=>
+                <>
+                  <UseOverlay0
+                    overlayName={ClearSiteDialogOverlayName}
+                    isOpen={overlayBool.value}
+                    setIsOpen={overlayBool.setValue}
+                  />
+                  
+                  <Button css={normalIconRoundButton}
+                    onClick={overlayBool.setTrue}
+                  >
+                    {actionText.clearAppData}
+                  </Button>
+                  
+                  <ClearSiteDialog isOpen={overlayBool.value} close={overlayBool.setFalse}/>
+                </>
+              }</UseBool> */}
+              
+              {import.meta.env.DEV && <Button css={normalIconRoundButton}
+                onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
+              >
+                Show Dev Overlay
+              </Button>}
             
-            {import.meta.env.DEV && <Button css={normalIconRoundButton}
-              onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
-            >
-              Show Dev Overlay
-            </Button>}
+            
+            </RoundButtonsContainer>
           
           
-          </RoundButtonsContainer>
-        
-        
-        </Content>
-      </BottomSheetBasic>
-      </ModalPortal>
-    }</UseBottomSheetState>
+          </Content>
+        </BottomSheetDialogBasic>
+      </ModalPortal>}
+    </UseBottomSheetState>
     
     
+    <ClearSiteDialog isOpen={clearSiteDialog.isOpen} close={clearSiteDialog.close}/>
     
   </>
 })

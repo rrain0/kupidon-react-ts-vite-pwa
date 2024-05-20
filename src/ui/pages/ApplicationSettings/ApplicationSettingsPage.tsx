@@ -32,7 +32,6 @@ import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputSty
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
-import UseBool from 'ui/components/UseBool/UseBool'
 
 
 
@@ -179,23 +178,17 @@ React.memo(
               {actionText.installApp}
             </Button>}
             
-            <UseBool>{overlayBool=>
-              <>
-              <UseOverlay
-                overlayName={ClearSiteDialogOverlayName}
-                isOpen={overlayBool.value}
-                setIsOpen={overlayBool.setValue}
-              />
-              
-              <Button css={ButtonStyle.roundedDanger}
-                onClick={overlayBool.setTrue}
-              >
-                {actionText.clearAppData}
-              </Button>
+            <UseOverlay overlayName={ClearSiteDialogOverlayName}>
+              {overlay=><>
+                <Button css={ButtonStyle.roundedDanger}
+                  onClick={overlay.open}
+                >
+                  {actionText.clearAppData}
+                </Button>
                 
-                <ClearSiteDialog isOpen={overlayBool.value} close={overlayBool.setFalse}/>
-              </>
-            }</UseBool>
+                <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close}/>
+              </>}
+            </UseOverlay>
           
           </RoundButtonsContainer>
         

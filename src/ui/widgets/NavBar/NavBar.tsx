@@ -7,7 +7,6 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { NavButtonStyle } from 'src/ui/widgets/NavBar/NavButtonStyle.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
@@ -81,26 +80,19 @@ React.memo(
         </Button>
       </NavLink>
       
-      <UseBool>{overlayBool=>
-        <>
-          <UseOverlay
-            overlayName={QuickSettingsOverlayName}
-            isOpen={overlayBool.value}
-            setIsOpen={overlayBool.setValue}
-          />
-          
+      <UseOverlay overlayName={QuickSettingsOverlayName}>
+        {overlay=><>
           <Button css={NavButtonStyle.nav}
-            onClick={overlayBool.setTrue}
+            onClick={overlay.open}
           >
             <Gear2Ic/>
             <div>{titleText.settings}</div>
           </Button>
           
-          <QuickSettings isOpen={overlayBool.value} close={overlayBool.setFalse}/>
-        </>
-      }</UseBool>
-        
-    
+          <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
+        </>}
+      </UseOverlay>
+      
     </Frame>
     
   </>
@@ -118,6 +110,7 @@ const Frame = styled.nav`
   justify-content: space-between;
   background: ${p=>p.theme.nav.bgc[0]};
 `
+
 
 
 

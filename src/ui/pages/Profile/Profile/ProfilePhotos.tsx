@@ -40,7 +40,7 @@ import { useTimeout } from '@util/react/useTimeout.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import center = EmotionCommon.center
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
+import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
@@ -454,7 +454,7 @@ React.memo(
     >
       {sheet =>
       <ModalPortal>
-      <BottomSheetBasic {...sheet.sheetProps}>
+      <BottomSheetDialogBasic {...sheet.sheetProps}>
         <OptionsContent>
           
           
@@ -548,7 +548,7 @@ React.memo(
           
           
         </OptionsContent>
-      </BottomSheetBasic>
+      </BottomSheetDialogBasic>
       </ModalPortal>
     }</UseBottomSheetState>
     

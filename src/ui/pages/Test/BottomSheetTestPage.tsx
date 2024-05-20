@@ -14,7 +14,7 @@ import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Utils } from 'src/util/common/Utils.ts'
 import styled from '@emotion/styled'
-import BottomSheet from 'src/ui/elements/BottomSheet/BottomSheet.tsx'
+import BottomSheetDialog from 'src/ui/elements/BottomSheet/BottomSheetDialog.tsx'
 import intOrDefault = Utils.nonNegIntOrDefault;
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
@@ -172,7 +172,7 @@ React.memo(
       
     </Pages.SimplePage>
     
-    <BottomSheet
+    <BottomSheetDialog
       bottomSheetFrameRef={bottomSheetFrameRef}
       bottomSheetRef={bottomSheetRef}
       bottomSheetHeaderRef={bottomSheetHeaderRef}
@@ -268,7 +268,7 @@ React.memo(
         </div>
       </>}
       
-    </BottomSheet>
+    </BottomSheetDialog>
     
     
     <BottomSheetControlOverlay

@@ -1,7 +1,6 @@
-import { useBool } from '@util/react/useBool.ts'
 import React from 'react'
 import ModalInput from 'src/ui/components/modal-element/ModalInput/ModalInput.tsx'
-import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
+import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
@@ -21,16 +20,11 @@ React.memo(
   const titleText = useUiValues(TitleUiText)
   
   
-  const [isOpen, open, close, setIsOpen] = useBool(false)
+  
+  const { isOpen, open, close } = useOverlay(overlayName)
   
   
   return <>
-    <UseOverlay
-      overlayName={overlayName}
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-    />
-      
     <OptionItem
       icon={<NameCardGradIc />}
       title={titleText.name}

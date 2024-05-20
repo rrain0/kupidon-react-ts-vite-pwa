@@ -8,7 +8,6 @@ import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import SettingsButton from 'src/ui/elements/SettingsButton.tsx'
-import UseBool from 'src/ui/components/UseBool/UseBool.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useBool } from '@util/react/useBool.ts'
@@ -102,20 +101,15 @@ export namespace ButtonBarComponents {
   export const SettingsBtn =
   React.memo(
   ()=>{
-    return <UseBool>{overlayBool=>
-      <>
-        <UseOverlay
-          overlayName={QuickSettingsOverlayName}
-          isOpen={overlayBool.value}
-          setIsOpen={overlayBool.setValue}
+    return <UseOverlay overlayName={QuickSettingsOverlayName}>
+      {overlay=><>
+        <SettingsButton
+          onClick={overlay.open}
         />
-      
-      <SettingsButton
-        onClick={overlayBool.setTrue}
-      />
-        <QuickSettings isOpen={overlayBool.value} close={overlayBool.setFalse}/>
-      </>
-    }</UseBool>
+        
+        <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
+      </>}
+    </UseOverlay>
   })
   
   

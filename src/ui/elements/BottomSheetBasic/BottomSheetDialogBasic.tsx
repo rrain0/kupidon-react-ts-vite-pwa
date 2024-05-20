@@ -1,14 +1,10 @@
-import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
-import BottomSheet, { BottomSheetOptionsProps } from 'src/ui/elements/BottomSheet/BottomSheet.tsx'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
+import BottomSheetDialog, { BottomSheetOptionsProps } from 'src/ui/elements/BottomSheet/BottomSheetDialog.tsx'
 import { css } from '@emotion/react'
+import { BottomSheetBasicParts } from 'src/ui/elements/BottomSheetBasic/BottomSheetBasicParts.ts'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import col = EmotionCommon.col
-import center = EmotionCommon.center
 import PartialUndef = TypeUtils.PartialUndef
 
 
@@ -17,7 +13,7 @@ import PartialUndef = TypeUtils.PartialUndef
 
 
 
-export type BottomSheetBasicProps =
+export type BottomSheetDialogBasicProps =
   BottomSheetOptionsProps & PartialUndef<{
     header: React.ReactNode
     children: React.ReactNode
@@ -25,9 +21,9 @@ export type BottomSheetBasicProps =
 
 
 
-const BottomSheetBasic =
+const BottomSheetDialogBasic =
 React.memo(
-(props: BottomSheetBasicProps)=>{
+(props: BottomSheetDialogBasicProps)=>{
   
   const { header, children, ...restProps } = props
   const { sheetState } = props
@@ -41,7 +37,7 @@ React.memo(
   
   
   
-  return <BottomSheet
+  return <BottomSheetDialog
     {...restProps}
     bottomSheetFrameRef={bottomSheetFrameRef}
     bottomSheetRef={bottomSheetRef}
@@ -54,7 +50,7 @@ React.memo(
        // Must be without margins!!!
        */}
       <div css={t=>css`
-        ${headerStyle(t)};
+        ${BottomSheetBasicParts.headerStyle(t)};
         ${sheetState==='dragging' && css`cursor: grabbing;`}
       `}
         ref={bottomSheetHeaderRef as any}
@@ -62,11 +58,11 @@ React.memo(
       >
         
         <div /* Header handle */ css={t=>css`
-          ${headerHandleStyle(t)};
+          ${BottomSheetBasicParts.headerHandleStyle(t)};
           ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
         `}/>
         
-        <div css={headerTextStyle}>
+        <div css={BottomSheetBasicParts.headerTextStyle}>
           {header}
         </div>
       
@@ -76,7 +72,7 @@ React.memo(
        // Body Component
        // Must be without margins & paddings!!!
        */}
-      <div css={bodyStyle}>
+      <div css={BottomSheetBasicParts.bodyStyle}>
         <OverflowWrapper css={OverflowWrapperStyle.defolt}
           showVertical={
             ![null,'closed','close','closing','open','opening'].includes(sheetState)
@@ -86,7 +82,7 @@ React.memo(
            // scrollable content
            // Must be without margins!!!
            */}
-          <div css={scrollableContentStyle}
+          <div css={BottomSheetBasicParts.scrollableContentStyle}
             ref={bottomSheetContentRef as any}
           >
             { children }
@@ -95,51 +91,9 @@ React.memo(
       </div>
     </>}
     
-  </BottomSheet>
+  </BottomSheetDialog>
 })
-export default BottomSheetBasic
+export default BottomSheetDialogBasic
 
 
 
-
-const headerStyle = (t: AppTheme.Theme)=>css`
-  background: ${t.bottomSheet.bgc[0]};
-  border-radius: 16px 16px 0 0;
-  color: ${t.page.content2[0]};
-  padding: 10px;
-  ${col};
-  align-items: center;
-  gap: 6px;
-  touch-action: none;
-  cursor: grab;
-`
-const headerHandleStyle = (t: AppTheme.Theme)=>css`
-  width: 44px;
-  height: 4px;
-  border-radius: 2px;
-  background: ${t.bottomSheet.handle[0]};
-`
-const headerTextStyle = (t: AppTheme.Theme)=>css`
-  ${center};
-  min-height: 20px;
-`
-
-
-
-const bodyStyle = (t: AppTheme.Theme)=>css`
-  display: flex;
-  place-items: center;
-  overflow: hidden;
-  background: ${t.bottomSheet.bgc[0]};
-  color: ${t.page.content2[0]};
-`
-
-
-
-const scrollableContentStyle = (t: AppTheme.Theme)=>css`
-  width: 100%;
-  padding: 0 10px 10px;
-  ${col};
-  height: fit-content;
-  min-height: fit-content;
-`

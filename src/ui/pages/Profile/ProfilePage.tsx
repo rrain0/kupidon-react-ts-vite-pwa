@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
+import BottomSheetBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import Partner from 'src/ui/pages/Profile/Partner/Partner.tsx'
 import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
@@ -432,7 +432,7 @@ React.memo(
         
         
         
-        {/* <UseBottomSheetState
+        <UseBottomSheetState
           isOpen={canSubmit || formProps.hasChanges}
           closeable={!(canSubmit || formProps.hasChanges)}
         >
@@ -441,7 +441,7 @@ React.memo(
           >
           
           </BottomSheetBasic></ModalPortal>}
-        </UseBottomSheetState> */}
+        </UseBottomSheetState>
       
       
         { app.showDevOverlay && <BottomButtonBar

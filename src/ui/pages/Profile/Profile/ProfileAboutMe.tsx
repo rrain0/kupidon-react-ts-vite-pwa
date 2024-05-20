@@ -1,27 +1,11 @@
-import { css } from '@emotion/react'
-import { useBool } from '@util/react/useBool.ts'
 import React from 'react'
-import ModalInput from 'src/ui/components/modal-element/ModalInput/ModalInput.tsx'
 import ModalTextarea from 'src/ui/components/modal-element/ModalTextarea/ModalTextarea.tsx'
-import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
-import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
-import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
-import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import { ModalStyle } from 'src/ui/components/modal/ModalPortal/ModalStyle.ts'
+import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
 import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import EditableTextCard from 'src/ui/widgets/EditableTextCard/EditableTextCard.tsx'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ValidationWrapRenderProps } from '@util/form-validation/ValidationWrap.tsx'
-import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import Card2 from 'src/ui/elements/cards/Card2.tsx'
-import Input from 'src/ui/elements/inputs/Input/Input.tsx'
-import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
-import row = EmotionCommon.row
 
 
 
@@ -36,16 +20,11 @@ React.memo(
   const placeholderText = useUiValues(PlaceholderUiText)
   
   
-  const [isOpen, open, close, setIsOpen] = useBool(false)
+  
+  const { isOpen, open, close } = useOverlay(overlayName)
   
   
   return <>
-    <UseOverlay
-      overlayName={overlayName}
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
-    />
-    
     <EditableTextCard
       title={titleText.aboutMe}
       text={props.value}

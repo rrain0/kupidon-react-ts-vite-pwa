@@ -13,7 +13,7 @@ import {
   ValidationWrapRenderProps
 } from '@util/form-validation/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import BottomSheetBasic from 'src/ui/elements/BottomSheet/BottomSheetBasic.tsx'
+import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'

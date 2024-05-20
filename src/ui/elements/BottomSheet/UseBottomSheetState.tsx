@@ -41,7 +41,7 @@ React.memo(
   } = props
   
   
-  const [sheetState, setSheetState] = useState<SheetState>('closed')
+  const [sheetState, setSheetState] = useState<SheetState>(isOpenExternal ? 'opened' : 'closed')
   const [snapIdx, setSnapIdx] = useState<SheetSnapIdx>(defaultOpenIdx)
   
   
