@@ -63,14 +63,14 @@ React.memo(
     [snapPoints]
   )
   
-  const [computedSheetDimens, setComputedSheetDimens] =
+  /* const [computedSheetDimens, setComputedSheetDimens] =
     useState<ComputedBottomSheetDimens>({
       frameH: 0,
       sheetH: 0,
       headerH: 0,
       contentH: 0,
       headerAndContentH: 0,
-    })
+    }) */
   const [snapPointsPx, setSnapPointsPx] = useState<number[] | undefined>(undefined)
   
   const [itemsCnt, setItemsCnt] = useState(12)
@@ -189,7 +189,7 @@ React.memo(
       defaultOpenIdx={openSnapIdx}
       
       onSnapPointsPx={setSnapPointsPx}
-      onComputedDimens={setComputedSheetDimens}
+      //onComputedDimens={setComputedSheetDimens}
     >
       {({ sheetDrag })=><>
         <div // Header Component

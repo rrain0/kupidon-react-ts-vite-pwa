@@ -41,29 +41,30 @@ React.memo(
   } = props
   
   
-  useEffect(() => {
-    console.log('isOpenExternal', isOpenExternal)
-  }, [isOpenExternal])
-  
-  
   const [sheetState, setSheetState] = useState<SheetState>('closed')
   const [snapIdx, setSnapIdx] = useState<SheetSnapIdx>(defaultOpenIdx)
   
+  
+  
+  /* useEffect(() => {
+    console.log('isOpenExternal', isOpenExternal)
+  }, [isOpenExternal])
+  
   useEffect(() => {
     console.log('sheetState', sheetState)
-  }, [sheetState])
+  }, [sheetState]) */
   
   
   const setOpenExternal = (isOpen: boolean) => isOpen ? undefined : onClosed?.()
   const isOpen = !(['closed','closing','close',null] as SheetState[]).includes(sheetState)
   const setOpen = (isOpen: boolean)=>{
     if (isOpen) {
-      console.log('setOpening')
+      //console.log('setOpening')
       setSheetState('opening')
       setSnapIdx(defaultOpenIdx)
     }
     else {
-      console.log('setClosing')
+      //console.log('setClosing')
       setSheetState('closing')
     }
   }
@@ -73,7 +74,7 @@ React.memo(
   
   
   const setClosing = useCallback(()=>{
-    console.log('setClosing')
+    //console.log('setClosing')
     setSheetState('closing')
   }, [])
   

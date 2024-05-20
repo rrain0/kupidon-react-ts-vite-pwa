@@ -132,6 +132,8 @@ export const useBottomSheet = (
     })
   
   
+  
+  
   const updateComputedSheetDimens = useCallback(
     ()=>{
       const frame = getFrame()
@@ -225,64 +227,6 @@ export const useBottomSheet = (
     return f.index
   }, [snapPointsPx])
   
-  
-  
-  /* const [
-    snapPoints, // non-zero len
-    snapPointsPx, // non-zero len
-    realFirstOpenIdx, // if sheet can be opened, then realFirstOpenIdx!==null
-    realDefaultOpenIdx, // default open idx, if sheet can be opened, then openIdx!==null
-    closeIdx, // if there is snap point evaluated to 0, then closeIdx!==null
-  ] =
-  useMemo<[
-    (number|string)[],
-    number[],
-    number|null,
-    number|null,
-    number|null,
-  ]>(
-    ()=>{
-      const snapPoints = function(){
-        if (options.snapPoints?.length) return options.snapPoints
-        return DefaultSheetSnaps
-      }()
-      
-      const snapPointsPx = calculateSnapPointsPx(snapPoints, computedSheetDimens)
-      if (isReady && snapPointsPx.every(elem=>elem===0))
-        console.warn(
-          "Every calculated snap point equals 0, bottom sheet cannot be opened."
-        )
-      
-      const firstOpenIdx = function(){
-        const f = findBy(snapPointsPx, elem=>elem>0)
-        if (!f.isFound) return null
-        return f.index
-      }()
-      
-      const realDefaultOpenIdx = function(){
-        if (firstOpenIdx===null) return null
-        
-        const idx = options.defaultOpenIdx ?? null
-        
-        if (idx!==null) return fitRange(
-          idx,[firstOpenIdx, lastIndex(snapPointsPx)]
-        )
-        
-        if (snapPoints===DefaultSheetSnaps) return DefaultSheetOpenIdx
-        
-        return Math.ceil((firstOpenIdx + lastIndex(snapPointsPx)) / 2)
-      }()
-      
-      const closeIdx = function(){
-        const f = findBy(snapPointsPx, elem=>elem===0)
-        if (!f.isFound) return null
-        return f.index
-      }()
-      
-      return [snapPoints, snapPointsPx, firstOpenIdx, realDefaultOpenIdx, closeIdx] as const
-    },
-    [computedSheetDimens, options.defaultOpenIdx, ...(options.snapPoints??[])]
-  ) */
   
   
   const [prevState, setPrevState] = useState<SheetState>(null)

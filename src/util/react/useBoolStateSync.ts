@@ -10,20 +10,19 @@ export const useBoolStateSync =
   boolSecondary: boolean, setBoolSecondary: Setter<boolean>
 ) => {
   
-  useEffect(()=>{
+  /* useEffect(()=>{
     console.log('boolMain, boolSecondary', boolMain, boolSecondary)
-  }, [boolMain, boolSecondary])
-  
+  }, [boolMain, boolSecondary]) */
   
   useEffect(() => {
-    console.log('secondary boolMain, boolSecondary', boolMain, boolSecondary)
+    //console.log('secondary boolMain, boolSecondary', boolMain, boolSecondary)
     if (boolSecondary !== boolMain) setBoolMain(boolSecondary)
   }, [boolSecondary])
   
   useEffect(() => {
-    console.log('main boolMain, boolSecondary', boolMain, boolSecondary)
+    //console.log('main boolMain, boolSecondary', boolMain, boolSecondary)
     if (boolMain !== boolSecondary) {
-      setBoolMain(boolMain)
+      //setBoolMain(boolMain)
       setBoolSecondary(boolMain)
     }
   }, [boolMain])

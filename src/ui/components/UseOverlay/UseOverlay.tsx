@@ -1,5 +1,6 @@
+import { useBool } from '@util/react/useBool.ts'
 import { useBoolStateSync } from '@util/react/useBoolStateSync.ts'
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
@@ -50,25 +51,28 @@ React.memo(
   
   
   
-  const close = useCallback(()=>{
-    if (isLastOpen) navigate(-1)
-  },[isLastOpen])
+  
+  const [needToClose, setNeedToCloseTrue, setNeedToCloseFalse] = useBool(false)
   
   const setIsOpen = useCallback((isOpen: boolean)=>{
-    isOpen ? open() : close()
-  },[open, close])
+    isOpen ? open() : setNeedToCloseTrue()
+  },[open, needToClose])
   
   useBoolStateSync(isOpen, setIsOpen, isOpenExternal, setIsOpenExternal)
   
   
-  /* const [needToClose, close, closed] = useBool(false)
   
-  useEffect(()=>{
-    closed()
+  
+  useEffect(() => {
+    setNeedToCloseFalse()
     if (isLastOpen && needToClose) {
+      // todo make GoBackRecoil
       navigate(-1)
     }
-  }, [needToClose]) */
+  }, [needToClose])
+  
+  
+  
   
   return undefined
 })

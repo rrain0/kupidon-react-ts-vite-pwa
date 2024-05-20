@@ -15,9 +15,7 @@ import React, {
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import fixed = EmotionCommon.fixed
 import PartialUndef = TypeUtils.PartialUndef
-import contents = EmotionCommon.contents
 import Callback1 = TypeUtils.Callback1
-import stopPointerAndMouseEvents = ReactUtils.stopPointerAndMouseEvents
 
 
 
@@ -134,7 +132,7 @@ React.memo(
       ref={bottomSheetFrameRef as any}
       
       // need to prevent click if dragged if frame is draggable
-      onClick={ev=>{
+      onClick={()=>{
         //console.log('dimmed background click: closing...')
         setSheetState('closing')
         //setSheetState('closed')
