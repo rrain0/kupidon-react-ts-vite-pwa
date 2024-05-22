@@ -1,6 +1,6 @@
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { CurrentUser } from 'src/api/model/CurrentUser.ts'
-import { GenderEnum } from 'src/api/model/GenderEnum.ts'
+import { Gender } from 'src/api/model/Gender.ts'
 import {
   DefaultOperation,
   DefaultProfilePhoto,
@@ -128,7 +128,7 @@ export const profileUpdateApiRequest = (
         .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
   }
   if (!failedFields.includes('gender')){
-    userToUpdate.gender = values.gender as GenderEnum
+    userToUpdate.gender = values.gender as Gender
   }
   if (!failedFields.includes('aboutMe')){
     userToUpdate.aboutMe = values.aboutMe

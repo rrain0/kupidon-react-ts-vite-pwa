@@ -86,7 +86,7 @@ export const useTabs = (
   const getTabsContainer = ()=>getTabsFrame()?.firstElementChild?.firstElementChild
   
   
-  const [isReady, setReady] = useState(false)
+  const [isReady, setIsReady] = useState(false)
   
   const [computedTabsDimens, setComputedTabsDimens, computedTabsDimensRef] =
     useStateAndRef<ComputedTabsDimens>({
@@ -230,6 +230,8 @@ export const useTabs = (
   
   const reactOnState = useEffectEvent(
     ()=>{
+      if (!isReady) return
+      
       const currState = prevState
       const currTab = prevTabIdx
       const currScrollLeft = tabContainerSpring.scrollLeft.get()
@@ -271,10 +273,12 @@ export const useTabs = (
           dragStartRef.current.canStart = false
           dragStartRef.current.isDragging = false
         }
-        if (isReady){
+        /* if (isReady){
           setNewState(s)
           setNewTabIdx(index)
-        }
+        } */
+        setNewState(s)
+        setNewTabIdx(index)
         setPrevState(s)
         setPrevTabIdx(index)
         setPrevSnapPointsPx(prevSnapPointsPx)
@@ -398,8 +402,8 @@ export const useTabs = (
   useEffect(
     ()=>{
       const tabsContainer = getTabsContainer()
-      if (tabsContainer) setReady(true)
-      else setReady(false)
+      if (tabsContainer) setIsReady(true)
+      else setIsReady(false)
     },
     [getTabsContainer()]
   )

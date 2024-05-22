@@ -1,5 +1,5 @@
 import React from 'react'
-import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import Callback = TypeUtils.Callback
 import PartialUndef = TypeUtils.PartialUndef
@@ -7,7 +7,7 @@ import PartialUndef = TypeUtils.PartialUndef
 
 
 
-export type UseOverlayRenderProps = {
+export type UseOverlayUrlRenderProps = {
   isOpen: boolean
   open: Callback
   close: Callback
@@ -16,16 +16,16 @@ export type UseOverlayRenderProps = {
 export type UseOverlayProps = {
   overlayName: string
 } & PartialUndef<{
-  children: (props: UseOverlayRenderProps)=>React.ReactNode
+  children: (props: UseOverlayUrlRenderProps)=>React.ReactNode
 }>
 
-const UseOverlay =
+const UseOverlayUrl =
 React.memo(
 (props: UseOverlayProps)=>{
   const { overlayName } = props
   
-  const { isOpen, open, close } = useOverlay(overlayName)
+  const { isOpen, open, close } = useOverlayUrl(overlayName)
   
   return props.children?.({ isOpen, open, close })
 })
-export default UseOverlay
+export default UseOverlayUrl

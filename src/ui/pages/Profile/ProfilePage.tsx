@@ -432,9 +432,9 @@ React.memo(
         
         
         
-        <UseBottomSheetState
-          isOpen={canSubmit || formProps.hasChanges}
-          closeable={!(canSubmit || formProps.hasChanges)}
+        {/* <UseBottomSheetState
+          //isOpen={canSubmit || formProps.hasChanges}
+          //closeable={!(canSubmit || formProps.hasChanges)}
         >
           {props => <ModalPortal><BottomSheetBasic
             {...props.sheetProps}
@@ -452,7 +452,7 @@ React.memo(
               isLoading={isFetchingUser}
             />
           }
-        /> }
+        /> } */}
       
       </>}</UseTabsState>
       

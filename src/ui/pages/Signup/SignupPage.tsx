@@ -1,4 +1,4 @@
-import { GenderEnum } from 'src/api/model/GenderEnum.ts'
+import { Gender } from 'src/api/model/Gender.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
@@ -99,7 +99,7 @@ React.memo(
           email: values.email,
           pwd: values.pwd,
           name: values.name,
-          gender: values.gender as GenderEnum,
+          gender: values.gender as Gender,
           birthDate: birthDateTime,
         }, lang.langs[0])
       },
@@ -175,7 +175,7 @@ React.memo(
         value: 'FEMALE',
         text: optionText.iAmGirl,
       }
-    ] satisfies { value: GenderEnum, text: string }[],
+    ] satisfies { value: Gender, text: string }[],
     [optionText]
   )
   

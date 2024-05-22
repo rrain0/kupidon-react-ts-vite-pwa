@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
+import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import { NavButtonStyle } from 'src/ui/widgets/NavBar/NavButtonStyle.ts'
@@ -80,7 +80,7 @@ React.memo(
         </Button>
       </NavLink>
       
-      <UseOverlay overlayName={QuickSettingsOverlayName}>
+      <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
         {overlay=><>
           <Button css={NavButtonStyle.nav}
             onClick={overlay.open}
@@ -91,7 +91,7 @@ React.memo(
           
           <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
         </>}
-      </UseOverlay>
+      </UseOverlayUrl>
       
     </Frame>
     

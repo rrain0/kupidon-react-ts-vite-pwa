@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
+import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
 import QuickSettings, {
   QuickSettingsOverlayName,
@@ -101,7 +101,7 @@ export namespace ButtonBarComponents {
   export const SettingsBtn =
   React.memo(
   ()=>{
-    return <UseOverlay overlayName={QuickSettingsOverlayName}>
+    return <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
       {overlay=><>
         <SettingsButton
           onClick={overlay.open}
@@ -109,7 +109,7 @@ export namespace ButtonBarComponents {
         
         <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
       </>}
-    </UseOverlay>
+    </UseOverlayUrl>
   })
   
   

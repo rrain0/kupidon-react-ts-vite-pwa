@@ -6,8 +6,8 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
-import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
@@ -55,13 +55,10 @@ React.memo(
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
-  const clearSiteDialog = useOverlay(ClearSiteDialogOverlayName)
+  const clearSiteDialog = useOverlayUrl(ClearSiteDialogOverlayName)
   
   return <>
-    <UseBottomSheetState
-      isOpen={isOpen}
-      onClosed={close}
-    >
+    <UseBottomSheetState isOpen={isOpen} close={close}>
       {props => <ModalPortal>
         <BottomSheetDialogBasic {...props.sheetProps}
           header={titleText.settings}

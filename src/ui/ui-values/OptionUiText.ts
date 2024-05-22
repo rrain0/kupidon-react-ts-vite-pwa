@@ -42,4 +42,9 @@ export const OptionUiText = {
     'ru-RU': 'Я девушка',
   },
   
+  yearsOld: {
+    'en-US': 'years',
+    'ru-RU': 'лет',
+  }
+  
 } satisfies UiValues

@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import UseOverlay from 'src/ui/components/UseOverlay/UseOverlay.tsx'
+import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
@@ -178,7 +178,7 @@ React.memo(
               {actionText.installApp}
             </Button>}
             
-            <UseOverlay overlayName={ClearSiteDialogOverlayName}>
+            <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
               {overlay=><>
                 <Button css={ButtonStyle.roundedDanger}
                   onClick={overlay.open}
@@ -188,7 +188,7 @@ React.memo(
                 
                 <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close}/>
               </>}
-            </UseOverlay>
+            </UseOverlayUrl>
           
           </RoundButtonsContainer>
         

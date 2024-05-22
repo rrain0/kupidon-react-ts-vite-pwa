@@ -6,6 +6,9 @@ import ItemContainer from 'src/ui/elements/basic-elements/ItemContainer.tsx'
 import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import ItemTitleContainer from 'src/ui/elements/basic-elements/ItemTitleContainer.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import Card3 from 'src/ui/elements/cards/Card3.tsx'
+import PartnerSelectAge from 'src/ui/pages/Profile/Partner/PartnerSelectAge.tsx'
+import ProfileAboutMe from 'src/ui/pages/Profile/Profile/ProfileAboutMe.tsx'
 import ProfileBirthDate from 'src/ui/pages/Profile/Profile/ProfileBirthDate.tsx'
 import ProfileGender from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
 import ProfileImLookingFor
@@ -81,56 +84,14 @@ React.memo(
         
         <div css={{ height: 24 }}/>
         
-        <div>AAAAAAAAA</div>
-        
-        {/* <ItemContainer>
-          <ItemTitleContainer>
-            <ItemLabel>
-              {titleText.aboutMe}
-            </ItemLabel>
-          </ItemTitleContainer>
-          <ValidationWrap {...props.validationProps}
-            fieldName="aboutMe"
-            render={props =>
-              <Textarea css={TextareaStyle.small}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />
-            }
-          />
-        </ItemContainer>
-        
-        
-        <div css={{ height: 24 }}/>
-        
-        
-        <Card2 css={css`
-          gap: 10px;
-        `}>
-          
+        <Card3>
           
           <ValidationWrap {...props.validationProps}
-            fieldName="name"
-            render={validProps => <ProfileName {...validProps}/>}
+            fieldName="partnerAge"
+            render={validProps => <PartnerSelectAge {...validProps}/>}
           />
           
-          
-          <ValidationWrap {...props.validationProps}
-            fieldName="birthDate"
-            render={validProps => <ProfileBirthDate {...validProps}/>}
-          />
-          
-          
-          <ValidationWrap {...props.validationProps}
-            fieldName="gender"
-            render={validProps => <ProfileGender {...validProps}/>}
-          />
-          
-          
-          <ProfileImLookingFor/>
-        
-        
-        </Card2> */}
+        </Card3>
       
       </div>
     

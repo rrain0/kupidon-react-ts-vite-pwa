@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import React, { useMemo } from 'react'
-import { GenderEnum } from 'src/api/model/GenderEnum.ts'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
+import { Gender } from 'src/api/model/Gender.ts'
+import ModalRadio, { Option } from 'src/ui/components/modal-element/ModalRadio/ModalRadio.tsx'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
@@ -10,11 +10,6 @@ import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ValidationWrapRenderProps } from '@util/form-validation/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
-import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
-import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
-import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import col = EmotionCommon.col
 import GenderGradIc = SvgGradIcons.GenderGradIc
 
@@ -28,9 +23,13 @@ const overlayName = 'gender'
 
 
 
+export type GenderOptionValues = Gender | ''
+export type GenderUiOptions = Option<Gender>[]
+
+
 const ProfileGender =
 React.memo(
-(props: ValidationWrapRenderProps<GenderEnum|''>)=>{
+(props: ValidationWrapRenderProps<Gender|''>)=>{
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
@@ -45,13 +44,13 @@ React.memo(
         value: 'FEMALE',
         text: optionText.female,
       }
-    ] satisfies { value: GenderEnum, text: string }[],
+    ] satisfies GenderUiOptions,
     [optionText]
   )
   
   
   
-  const { isOpen, open, close } = useOverlay(overlayName)
+  const { isOpen, open, close } = useOverlayUrl(overlayName)
   
   
   return <>
@@ -62,7 +61,15 @@ React.memo(
       onClick={open}
     />
     
-    <UseBottomSheetState isOpen={isOpen} onClosed={close}>
+    <ModalRadio
+      isOpen={isOpen}
+      close={close}
+      title={titleText.gender}
+      options={genderOptions}
+      radioInputProps={(value: GenderOptionValues)=>props.radioInputProps(value)}
+    />
+    
+    {/* <UseBottomSheetState isOpen={isOpen} close={close}>
       {sheetProps =>
         <ModalPortal>
           <BottomSheetDialogBasic
@@ -86,7 +93,7 @@ React.memo(
             </RadioInputGroup>
           </BottomSheetDialogBasic>
         </ModalPortal>
-      }</UseBottomSheetState>
+      }</UseBottomSheetState> */}
   </>
 })
 export default ProfileGender

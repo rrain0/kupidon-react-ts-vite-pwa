@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios'
 import { ApiUtils } from 'src/api/ApiUtils'
 import { CurrentUser } from 'src/api/model/CurrentUser'
-import { GenderEnum } from 'src/api/model/GenderEnum'
+import { Gender } from 'src/api/model/Gender.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import { DataUrl } from '@util/DataUrl.ts'
 import { FileUtils } from 'src/util/file/FileUtils'
@@ -72,7 +72,7 @@ export namespace UserApi {
   export type UserToUpdate = PartialUndef<{
     name: string
     birthDate: string // '2005-11-10T00:00:00.000+08:00'
-    gender: GenderEnum
+    gender: Gender
     aboutMe: string
     currentPwd: string
     pwd: string

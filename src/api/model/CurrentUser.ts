@@ -1,4 +1,4 @@
-import { GenderEnum } from 'src/api/model/GenderEnum'
+import { Gender } from 'src/api/model/Gender.ts'
 
 
 
@@ -12,7 +12,7 @@ export type CurrentUser = {
   updated: string
   name: string
   birthDate: string
-  gender: GenderEnum
+  gender: Gender
   aboutMe: string
   photos: Array<{
     id: string,

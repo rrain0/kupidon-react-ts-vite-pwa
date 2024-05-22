@@ -16,6 +16,8 @@ import ChatRoundGradSvg from '@ic/gradient/chat-round-grad.svg?react'
 import GenderGradSvg from '@ic/gradient/gender-grad.svg?react'
 import GiftBoxGradSvg from '@ic/gradient/gift-box-grad.svg?react'
 
+import HourglassGradSvg from '@ic/gradient/hourglass-grad.svg?react'
+
 import NameCardGradSvg from '@ic/gradient/name-card-grad.svg?react'
 
 import ProfileGradSvg from '@ic/gradient/profile-grad.svg?react'
@@ -108,6 +110,8 @@ export namespace SvgGradIcons {
   
   export const GenderGradIc = generateSimpleSvgIcon(GenderGradSvg)
   export const GiftBoxGradIc = generateSimpleSvgIcon(GiftBoxGradSvg)
+  
+  export const HourglassGradIc = generateSimpleSvgIcon(HourglassGradSvg)
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   

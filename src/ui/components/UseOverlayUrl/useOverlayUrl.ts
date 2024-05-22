@@ -5,7 +5,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 
 
 
-export const useOverlay = (overlayName: string) => {
+export const useOverlayUrl = (overlayName: string) => {
   const navigate = useNavigate()
   const [search, setSearch] = useSearchParams()
   

@@ -81,6 +81,10 @@ export const TitleUiText = {
     'en-US': 'Name',
     'ru-RU': 'Имя',
   },
+  partnerAge: {
+    'en-US': 'Partner age',
+    'ru-RU': 'Возраст партнёра',
+  },
   
   
   theme: {

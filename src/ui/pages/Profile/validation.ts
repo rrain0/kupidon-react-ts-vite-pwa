@@ -1,5 +1,7 @@
-import { GenderEnum } from 'src/api/model/GenderEnum.ts'
+import { Gender } from 'src/api/model/Gender.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
+import { PartnerAgeOptionValues } from 'src/ui/pages/Profile/Partner/PartnerSelectAge.tsx'
+import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
@@ -39,6 +41,8 @@ export namespace ProfilePageValidation {
     
     | 'photos-not-changed'
     
+    | 'partner-age-not-changed'
+    
     | 'NO_USER'
     | 'connection-error'
     | 'unknown-error'
@@ -59,6 +63,7 @@ export namespace ProfilePageValidation {
     'about-me-not-changed': { 'en-US': 'about-me-not-changed' },
     'about-me-is-too-long': ErrorUiText.descriptionMaxLenIs2000,
     'photos-not-changed': { 'en-US': 'photos-not-changed' },
+    'partner-age-not-changed': { 'en-US': 'partner-age-not-changed' },
     'NO_USER': ErrorUiText.noUserWithSuchId,
     'connection-error': ErrorUiText.connectionError,
     'unknown-error': ErrorUiText.unknownError,
@@ -69,9 +74,11 @@ export namespace ProfilePageValidation {
   export type UserValues = {
     name: string
     birthDate: string
-    gender: GenderEnum|''
+    gender: GenderOptionValues
     aboutMe: string
     photos: ProfilePhoto[]
+    
+    partnerAge: PartnerAgeOptionValues
   }
   export type FromServerValue = {
     values: UserValues // значения, отправленные на сервердля проверки
@@ -100,7 +107,9 @@ export namespace ProfilePageValidation {
       isEmpty: true,
       remoteIndex: i,
       isReady: false,
-    } satisfies ProfilePhoto))
+    } satisfies ProfilePhoto)),
+    
+    partnerAge: '',
   }
   export const auxiliaryDefaultValues: AuxiliaryValues = {
     fromServer: undefined,
@@ -262,6 +271,18 @@ export namespace ProfilePageValidation {
         })
     }],
     
+    
+    
+    [['partnerAge','initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['partnerAge'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (v===ivs.partnerAge) return new PartialFailureData({
+        code: 'partner-age-not-changed' satisfies FailureCode,
+        msg: 'Field "Partner age" is not changed',
+        type: 'initial',
+        errorFields: ['partnerAge'],
+      })
+    }],
     
     
     [['fromServer'], (values)=>{

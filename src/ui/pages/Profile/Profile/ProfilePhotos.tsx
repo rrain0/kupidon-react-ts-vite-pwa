@@ -14,6 +14,10 @@ import React, {
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import ProfilePhotosPhotoOptions, {
+  ProfilePhotosPhotoOptionsOverlayName,
+} from 'src/ui/pages/Profile/Profile/ProfilePhotosPhotoOptions.tsx'
 import {
   DefaultOperation,
   DefaultProfilePhoto,
@@ -117,7 +121,6 @@ export type ProfilePhotosProps = {
 const ProfilePhotos =
 React.memo(
 (props: ProfilePhotosProps)=>{
-  const actionText = useUiValues(ActionUiText)
   const { images, setImages } = props
   const { theme } = useRecoilValue(ThemeRecoil)
   const { isDraggingFiles } = useRecoilValue(AppRecoil)
@@ -144,7 +147,7 @@ React.memo(
   const [swap, setSwap] = useState(undefined as undefined|[number,number])
   
   const [canClick, setCanClick] = useState(true)
-  const [isMenuOpen, setMenuOpen] = useState(false)
+  const photoOptions = useOverlayUrl(ProfilePhotosPhotoOptionsOverlayName)
   
   
   // forbid content selection while dragging
@@ -276,7 +279,7 @@ React.memo(
   
   
   const onFilesSelected = useCallback(
-    onFilesSelectedBuilder(images, lastIdx, setImages, setMenuOpen),
+    onFilesSelectedBuilder(images, lastIdx, setImages, photoOptions.close),
     [images, lastIdx, setImages]
   )
   
@@ -335,7 +338,7 @@ React.memo(
               }
             }()}
             onClick={ev=>{
-              if (canClick && !im.isEmpty) setMenuOpen(true)
+              if (canClick && !im.isEmpty) photoOptions.open()
             }}
           >
             
@@ -447,110 +450,14 @@ React.memo(
     
     
     
-    
-    <UseBottomSheetState
-      isOpen={isMenuOpen}
-      onClosed={()=>setMenuOpen(false)}
-    >
-      {sheet =>
-      <ModalPortal>
-      <BottomSheetDialogBasic {...sheet.sheetProps}>
-        <OptionsContent>
-          
-          
-          <Button css={ButtonStyle.bigRectTransparent}
-            onClick={()=>{
-              const im = images[lastIdx]
-              im.download?.abort()
-              im.compression?.abort()
-              const newImages = [...images]
-              newImages[lastIdx] = {
-                ...DefaultProfilePhoto,
-                type: 'local',
-                id: uuid.v4(),
-                isEmpty: true,
-                remoteIndex: newImages[lastIdx].remoteIndex,
-              } satisfies ProfilePhoto
-              setImages(newImages)
-              sheet.setClosing()
-            }}
-          >
-            <OptionContainer>
-              <OptionTitle>{actionText.remove}</OptionTitle>
-              <div css={optionIconBoxStyle}>
-                <CrossInCircleIc css={css`height: 120%;`}/>
-              </div>
-            </OptionContainer>
-          </Button>
-          
-          
-          <Dropzone
-            onDrop={(files, rejectedFiles, ev)=>onFilesSelected(files)}
-            noDrag
-            useFsAccessApi={false}
-          >
-            {({getRootProps, getInputProps}) =>
-            <div css={contents} {...getRootProps()}>
-              <input {...getInputProps()} />
-              <Button css={ButtonStyle.bigRectTransparent}>
-                
-                <OptionContainer>
-                  <OptionTitle>{actionText.replace}</OptionTitle>
-                  <div css={optionIconBoxStyle}>
-                    <ArrowRefreshCwIc/>
-                  </div>
-                </OptionContainer>
-              </Button>
-            </div>
-            }
-          </Dropzone>
-          
-          
-          {/* Fullscreen */}
-          {/* {function(){
-            const im = images[lastIdx]
-            if (im.type==='remote' && im.isDownloaded || im.type==='local' && im.isCompressed) {
-              return <Button css={ButtonStyle.bigRectTransparent}
-                onClick={()=>{
-                  sheet.setClosing()
-                }}
-              >
-                <OptionContainer>
-                  <OptionTitle>{actionText.fullScreenView}</OptionTitle>
-                  <div css={optionIconBoxStyle}>
-                    <FullscreenIc css={css`height: 120%;`}/>
-                  </div>
-                </OptionContainer>
-              </Button>
-            }
-          }()} */}
-          
-          
-          {function(){
-            const im = images[lastIdx]
-            if (im.isReady) {
-              return <a href={im.dataUrl}
-                download={`${im.name} ${im.id}.${extensionFromMimeType(im.mimeType)}`}
-              >
-                <Button css={ButtonStyle.bigRectTransparent}
-                  onClick={sheet.setClosing}
-                >
-                  <OptionContainer>
-                    <OptionTitle>{actionText.download}</OptionTitle>
-                    <div css={optionIconBoxStyle}>
-                      <Download1Ic/>
-                    </div>
-                  </OptionContainer>
-                </Button>
-              </a>
-            }
-          }()}
-          
-          
-        </OptionsContent>
-      </BottomSheetDialogBasic>
-      </ModalPortal>
-    }</UseBottomSheetState>
+    <ProfilePhotosPhotoOptions
+      isOpen={photoOptions.isOpen}
+      close={photoOptions.close}
+      images={images}
+      setImages={setImages}
+      lastIdx={lastIdx}
+      onFilesSelected={onFilesSelected}
+    />
     
     
   </>
@@ -687,34 +594,6 @@ const photoProgressFrameStyle = (t:AppTheme.Theme)=>css`
 
 
 
-const OptionsContent = styled.div`
-  width: 100%;
-  ${col};
-  padding-bottom: 20px;
-`
-const OptionContainer = styled.div`
-  width: 100%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  ${row};
-  gap: 0.3em;
-  align-items: center;
-`
-const OptionTitle = styled.h6`
-  ${resetH};
-  ${Txt.large2};
-  flex: 1;
-  ${col};
-  align-items: start;
-`
-const optionIconBoxStyle = css`
-  ${center};
-  height: 1.3em;
-  width: 1.333em;
-  >${SvgIconsStyle.El.icon.sel()}{
-    ${SvgIconsStyle.El.icon.props.color.name}: ${ButtonStyle.El.root.props.color.var()};
-  }
-`
 
 
 
@@ -734,7 +613,7 @@ const onFilesSelectedBuilder =
   images: ProfilePhoto[],
   lastIdx: number,
   setImages: SetterOrUpdater<ProfilePhoto[]>,
-  setMenuOpen: Setter<boolean>,
+  closeMenu: Callback,
 )=>
 (files: File[])=>{
   const imgFiles = files.filter(it=>it.type.startsWith('image/'))
@@ -840,7 +719,7 @@ const onFilesSelectedBuilder =
       return photo
     })
     setImages(newImages)
-    setMenuOpen(false)
+    closeMenu()
   }
 }
 

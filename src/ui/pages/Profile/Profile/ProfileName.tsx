@@ -1,6 +1,6 @@
 import React from 'react'
 import ModalInput from 'src/ui/components/modal-element/ModalInput/ModalInput.tsx'
-import { useOverlay } from 'src/ui/components/UseOverlay/useOverlay.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionAndValueItem/OptionItem.tsx'
@@ -21,7 +21,7 @@ React.memo(
   
   
   
-  const { isOpen, open, close } = useOverlay(overlayName)
+  const { isOpen, open, close } = useOverlayUrl(overlayName)
   
   
   return <>

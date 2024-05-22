@@ -119,7 +119,7 @@ export const useBottomSheet = (
   const getHeader = ()=>bottomSheetHeaderRef.current
   const getContent = ()=>bottomSheetContentRef.current
   
-  const [isReady, setReady] = useState(false)
+  const [isReady, setIsReady] = useState(false)
   
   // todo use spring to avoid rerenders
   const [computedSheetDimens, setComputedSheetDimens, computedSheetDimensRef] =
@@ -537,8 +537,8 @@ export const useBottomSheet = (
       const sheet = getSheet()
       const header = getHeader()
       const content = getContent()
-      if (frame && sheet && header && content) setReady(true)
-      else setReady(false)
+      if (frame && sheet && header && content) setIsReady(true)
+      else setIsReady(false)
     },
     [getFrame(), getSheet(), getHeader(), getContent()]
   )

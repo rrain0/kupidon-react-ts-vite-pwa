@@ -4,7 +4,6 @@ import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import center = EmotionCommon.center
 import { SimpleGradientBgc } from 'src/ui/style/bgc/SimpleGradientBgc.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import fill = EmotionCommon.fill
 import col = EmotionCommon.col
 
 
@@ -88,7 +87,8 @@ export namespace Pages {
   export const content = css`
     ${fitPage};
     max-width: 550px;
-    padding-top: max(24px, var(--top-button-bar-height));
+    // 12px
+    padding-top: max(30px, var(--top-button-bar-height));
     padding-bottom: max(50px, var(--bottom-button-bar-height));
     padding-left: 16px;
     padding-right: 16px;
@@ -102,7 +102,7 @@ export namespace Pages {
     ${content};
     min-height: auto;
     min-width: 0;
-    gap: 24px;
+    gap: 30px;
   `
   export const ContentForm = styled.form(contentForm)
   
