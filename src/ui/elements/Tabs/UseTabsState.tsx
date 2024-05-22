@@ -1,10 +1,57 @@
-import React from 'react'
+import { useStateSync } from '@util/react/useStateSync.ts'
+import React, { useEffect, useMemo } from 'react'
 import { useRef, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
+import Setter = TypeUtils.Setter
 
+
+
+
+export type UseTabsStateProps = PartialUndef<{
+  initialIdx: number
+  idx: number
+  setIdx: Setter<number>
+  children: (props: UseTabsStateRenderProps)=>React.ReactNode
+}>
+
+const UseTabsState =
+React.memo(
+(props: UseTabsStateProps)=>{
+  const {
+    idx: tabIdxExt,
+    setIdx: setTabIdxExt,
+    initialIdx,
+  } = props
+  
+  const [tabIdxExtLocal, setTabIdxExtLocal] = useState(initialIdx ?? tabIdxExt ?? 0)
+  useEffect(() => {
+    if (tabIdxExt!==undefined) setTabIdxExtLocal(tabIdxExt)
+  }, [tabIdxExt])
+  const setAvailableTabIdxExt = (idx: number)=>{
+    if (setTabIdxExt) setTabIdxExt(idx)
+    else setTabIdxExtLocal(idx)
+  }
+  
+  const [tabIdx, setTabIdx] = useState<TabIdx>(tabIdxExtLocal)
+  
+  useStateSync(tabIdxExtLocal, setAvailableTabIdxExt, tabIdx, setTabIdx)
+  
+  
+  const [tabsState, setTabsState] = useState<TabsState>('opened')
+  const tabFrameRef = useRef<HTMLDivElement>(null)
+  
+  const tabsProps = useMemo<UseTabsStateRenderProps>(() => ({
+    tabsState, setTabsState,
+    tabIdx, setTabIdx,
+    tabFrameRef,
+  }), [tabsState, tabIdx])
+  
+  return props.children?.(tabsProps)
+})
+export default UseTabsState
 
 
 
@@ -15,26 +62,3 @@ export type UseTabsStateRenderProps = {
   setTabIdx: SetterOrUpdater<TabIdx>
   tabFrameRef: React.RefObject<HTMLDivElement>
 }
-export type UseTabsStateProps = PartialUndef<{
-  initialIdx: number
-  initialState: TabsState
-  children: (props: UseTabsStateRenderProps)=>React.ReactNode
-}>
-
-
-
-const UseTabsState =
-React.memo(
-(props: UseTabsStateProps)=>{
-  const [tabsState, setTabsState] = useState<TabsState>(props.initialState ?? 'opened')
-  const [tabIdx, setTabIdx] = useState<TabIdx>(props.initialIdx ?? 0)
-  const tabFrameRef = useRef<HTMLDivElement>(null)
-  const tabsProps = {
-    tabsState, setTabsState,
-    tabIdx, setTabIdx,
-    tabFrameRef,
-  } as const
-  
-  return props.children?.(tabsProps)
-})
-export default UseTabsState

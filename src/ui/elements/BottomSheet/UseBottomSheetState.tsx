@@ -1,4 +1,4 @@
-import { useBoolStateSync } from '@util/react/useBoolStateSync.ts'
+import { useStateSync } from '@util/react/useStateSync.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import {
@@ -13,10 +13,6 @@ import PartialUndef = TypeUtils.PartialUndef
 
 
 
-export type UseBottomSheetStateRenderProps = {
-  setClosing: Callback
-  sheetProps: UseBottomSheetOptions
-}
 export type UseBottomSheetStateProps = {
   isOpen: boolean
 } & PartialUndef<{
@@ -71,7 +67,7 @@ React.memo(
     }
   }
   
-  useBoolStateSync(isOpenExternal, setOpenExternal, isOpen, setOpen)
+  useStateSync(isOpenExternal, setOpenExternal, isOpen, setOpen)
   
   
   
@@ -103,3 +99,9 @@ React.memo(
   })
 })
 export default UseBottomSheetState
+
+
+export type UseBottomSheetStateRenderProps = {
+  setClosing: Callback
+  sheetProps: UseBottomSheetOptions
+}

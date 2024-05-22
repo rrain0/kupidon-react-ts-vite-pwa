@@ -143,37 +143,25 @@ export const useTabs = (
   //console.log('tabsCnt',tabsCnt)
   
   
-  const [
-    snapPointsPx, // non-zero len
-    realDefaultOpenIdx, // 0..+inf
-    lastTabIdx, // 0..+inf
-    maxScrollLeft, // 0..+inf
-  ] =
-  useMemo<[
-    number[],
-    number,
-    number,
-    number,
-  ]>(
-    ()=>{
-      const lastTabIdx = Math.max(0,tabsCnt-1)
-      
-      const snapPointsPx = ArrayUtils.ofIndices(Math.max(tabsCnt,1))
-        .map(tab=>tab*computedTabsDimens.frameWidth)
-        
-      const realDefaultOpenIdx = function(){
-        if (notExists(options.defaultOpenIdx)) return DefaultTabIdx
-        return fitRange(
-          options.defaultOpenIdx,[0,lastTabIdx]
-        )
-      }()
-      
-      const maxScrollLeft = last(snapPointsPx)
-      
-      return [snapPointsPx, realDefaultOpenIdx, lastTabIdx, maxScrollLeft] as const
-    },
-    [tabsCnt, options.defaultOpenIdx, computedTabsDimens.frameWidth]
-  )
+  // 0..+inf
+  const lastTabIdx = Math.max(0, tabsCnt-1)
+  
+  // non-zero len
+  const snapPointsPx = useMemo(()=>{
+    return ArrayUtils.ofIndices(Math.max(tabsCnt, 1))
+      .map(tab=>tab*computedTabsDimens.frameWidth)
+  }, [tabsCnt, computedTabsDimens.frameWidth])
+  
+  // 0..+inf
+  const realDefaultOpenIdx = useMemo(()=>{
+    if (notExists(options.defaultOpenIdx)) return DefaultTabIdx
+    return fitRange(
+      options.defaultOpenIdx,[0,lastTabIdx]
+    )
+  }, [options.defaultOpenIdx, lastTabIdx])
+  
+  // 0..+inf
+  const maxScrollLeft = last(snapPointsPx)
   
   
   const [prevState, setPrevState] = useState<TabsState>('opened')

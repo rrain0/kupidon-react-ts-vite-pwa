@@ -4,10 +4,11 @@ import Setter = TypeUtils.Setter
 
 
 
-export const useBoolStateSync =
+export const useStateSync =
+<S>
 (
-  boolMain: boolean, setBoolMain: Setter<boolean>,
-  boolSecondary: boolean, setBoolSecondary: Setter<boolean>
+  boolMain: S, setBoolMain: Setter<S>,
+  boolSecondary: S, setBoolSecondary: Setter<S>
 ) => {
   
   /* useEffect(()=>{

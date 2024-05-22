@@ -55,7 +55,6 @@ import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectUtils.ObjectKeys
-import SoftRefreshBtn = ButtonBarComponents.SoftRefreshBtn
 
 
 
@@ -63,6 +62,9 @@ import SoftRefreshBtn = ButtonBarComponents.SoftRefreshBtn
 
 
 
+
+
+enum ProfileTabs { 'preview', 'profile', 'partner', 'date' }
 
 
 
@@ -363,72 +365,82 @@ React.memo(
   //console.log(canSubmit , formProps.hasChanges)
   
   
+  const [tabIdx, setTabIdx] = useState(1)
+  useEffect(() => {
+    console.log('current profile tab:', ProfileTabs[tabIdx])
+  }, [tabIdx])
+  
+  
+  
   return <>
     <Pages.TabsPage>
       
-      <UseTabsState initialIdx={1}>{tabsProps=><>
-        <Tabs css={fill} {...tabsProps}>{({ tabContainerSpring, computedTabsDimens }) => <>
-          {ArrayUtils.ofIndices(4).map(tabIdx =>
-            <Tab css={fill} key={tabIdx}
-              width={computedTabsDimens.frameWidth}
-            >
-              
-              
-            <OverflowWrapper css={css`
-              ${OverflowWrapperStyle.defolt};
-              ${OverflowWrapperStyle.El.container.thiz()}{
-                touch-action: pan-y;
-              }
-              ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
-                ${safePageContentPaddings};
-              }
-            `}
-              showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
-            >
+      <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
+        {tabsProps=><>
+          <Tabs css={fill} {...tabsProps}>
+            {({ tabContainerSpring, computedTabsDimens }) => <>
+              {ArrayUtils.ofIndices(4).map(tabIdx =>
+                <Tab css={fill} key={tabIdx}
+                  width={computedTabsDimens.frameWidth}
+                >
                   
-              <ProfilePageTabHeaderContext.Provider value={{
-                tabContainerSpring,
-                tabWidth: computedTabsDimens.frameWidth,
-                headers: ['Предпросмотр', formValues.name, 'Партнёр', 'Свидание'],
-                setTabsState: tabsProps.setTabsState,
-                setTabIdx: tabsProps.setTabIdx,
-              }}>
-                {{
-                  0:
-                    <Preview formValues={formValues}/>,
-                  1:
-                    <Profile
-                      validationProps={validationProps}
-                      onFormSubmitCallback={onFormSubmitCallback}
-                      submit={submit}
-                      canSubmit={canSubmit}
-                      formProps={formProps}
-                      isLoading={isLoading}
-                    />,
-                  2:
-                    <Partner
-                      validationProps={validationProps}
-                      onFormSubmitCallback={onFormSubmitCallback}
-                      submit={submit}
-                      canSubmit={canSubmit}
-                      formProps={formProps}
-                      isLoading={isLoading}
-                    />,
-                  3:
-                    <Pages.SafeInsets>
-                      <Pages.ContentForm>
-                        <ProfilePageTabHeader thisTabIdx={3}/>
-                      </Pages.ContentForm>
-                    </Pages.SafeInsets>
-                }[tabIdx]}
-              </ProfilePageTabHeaderContext.Provider>
-              
-            </OverflowWrapper>
-            
-            
-            </Tab>
-          )}
-        </>}</Tabs>
+                  
+                  <OverflowWrapper css={css`
+                    ${OverflowWrapperStyle.defolt};
+                    ${OverflowWrapperStyle.El.container.thiz()}{
+                      touch-action: pan-y;
+                    }
+                    ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
+                      ${safePageContentPaddings};
+                    }
+                  `}
+                    showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
+                  >
+                    
+                    <ProfilePageTabHeaderContext.Provider value={{
+                      tabContainerSpring,
+                      tabWidth: computedTabsDimens.frameWidth,
+                      headers: ['Предпросмотр', formValues.name, 'Партнёр', 'Свидание'],
+                      setTabsState: tabsProps.setTabsState,
+                      setTabIdx: tabsProps.setTabIdx,
+                    }}>
+                      {{
+                        0:
+                          <Preview formValues={formValues}/>,
+                        1:
+                          <Profile
+                            validationProps={validationProps}
+                            onFormSubmitCallback={onFormSubmitCallback}
+                            submit={submit}
+                            canSubmit={canSubmit}
+                            formProps={formProps}
+                            isLoading={isLoading}
+                          />,
+                        2:
+                          <Partner
+                            validationProps={validationProps}
+                            onFormSubmitCallback={onFormSubmitCallback}
+                            submit={submit}
+                            canSubmit={canSubmit}
+                            formProps={formProps}
+                            isLoading={isLoading}
+                          />,
+                        3:
+                          <Pages.SafeInsets>
+                            <Pages.ContentForm>
+                              <ProfilePageTabHeader thisTabIdx={3}/>
+                            </Pages.ContentForm>
+                          </Pages.SafeInsets>
+                      }[tabIdx]}
+                    </ProfilePageTabHeaderContext.Provider>
+                    
+                  </OverflowWrapper>
+                
+                
+                </Tab>
+              )}
+            </>}
+          </Tabs>
         
         
         
