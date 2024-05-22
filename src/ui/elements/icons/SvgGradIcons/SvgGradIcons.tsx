@@ -22,6 +22,8 @@ import NameCardGradSvg from '@ic/gradient/name-card-grad.svg?react'
 
 import ProfileGradSvg from '@ic/gradient/profile-grad.svg?react'
 
+import RulerVerticalGradSvg from '@ic/gradient/ruler-vertical-grad.svg?react'
+
 import Search2GradSvg from '@ic/gradient/search-2-grad.svg?react'
 
 
@@ -116,6 +118,8 @@ export namespace SvgGradIcons {
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   
   export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
+  
+  export const RulerVerticalGradIc = generateSimpleSvgIcon(RulerVerticalGradSvg)
   
   export const Search2GradIc = generateSimpleSvgIcon(Search2GradSvg)
   

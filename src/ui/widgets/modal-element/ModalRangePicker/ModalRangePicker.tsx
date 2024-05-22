@@ -1,0 +1,42 @@
+import { css } from '@emotion/react'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
+import React from 'react'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
+import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import RangePicker from 'src/ui/elements/RangePicker/RangePicker.tsx'
+import { RangeNullable } from 'src/ui/model/RangeNullable.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import Callback = TypeUtils.Callback
+
+
+
+
+
+export type ModalRangePickerProps<V extends RangeNullable> = {
+  isOpen: boolean
+  close: Callback
+  title: string
+}
+
+
+
+const ModalRangePicker =
+<V extends RangeNullable>(props: ModalRangePickerProps<V>)=>{
+  const { isOpen, close, title } = props
+  
+  return <UseBottomSheetState isOpen={isOpen} close={close}>
+    {sheetProps =>
+      <ModalPortal>
+        <BottomSheetDialogBasic
+          {...sheetProps.sheetProps}
+          header={title}
+        >
+          <RangePicker/>
+        </BottomSheetDialogBasic>
+      </ModalPortal>
+    }</UseBottomSheetState>
+}
+export default React.memo(ModalRangePicker) as typeof ModalRangePicker
+
+

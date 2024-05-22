@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import React from 'react'
-import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar'
-import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
+import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
+import PageScrollbars from 'src/ui/elements/Scrollbars/PageScrollbars'
 
 
 

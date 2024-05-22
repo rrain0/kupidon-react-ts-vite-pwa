@@ -4,7 +4,6 @@ import React, { useImperativeHandle, useRef } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import Theme = AppTheme.Theme
 
 
 
@@ -45,6 +44,6 @@ React.forwardRef<ComponentRefElement, ComponentProps>(
 
 
 
-const frameStyle = (t:Theme)=>css`
+const frameStyle = (t: AppTheme.Theme) => css`
 
 `

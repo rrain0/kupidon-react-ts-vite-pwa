@@ -23,10 +23,10 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 
-// useScroll from use-spring - BUT it is broken when child 'display: contents;'
+// useScroll from use-spring is broken when child 'display: contents;'
 // todo use @use-gesture/react and refs instead of state
 
-// maybe it is worth to do min scrollbar width
+// maybe it is worth doing min scrollbar width
 
 export type ScrollDirection = 'horizontal'|'vertical'
 

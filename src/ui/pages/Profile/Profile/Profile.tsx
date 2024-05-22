@@ -4,12 +4,12 @@ import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/elements/cards/Card3.tsx'
-import ProfileAboutMe from 'src/ui/pages/Profile/Profile/ProfileAboutMe.tsx'
-import ProfileBirthDate from 'src/ui/pages/Profile/Profile/ProfileBirthDate.tsx'
-import ProfileGender from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
-import ProfileImLookingFor
-  from 'src/ui/pages/Profile/Profile/ProfileImLookingFor.tsx'
-import ProfileName from 'src/ui/pages/Profile/Profile/ProfileName.tsx'
+import ProfileAboutMeOption from 'src/ui/pages/Profile/Profile/ProfileAboutMeOption.tsx'
+import ProfileBirthDateOption from 'src/ui/pages/Profile/Profile/ProfileBirthDateOption.tsx'
+import ProfileGenderOption from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
+import ProfileImLookingForOption
+  from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
+import ProfileNameOption from 'src/ui/pages/Profile/Profile/ProfileNameOption.tsx'
 import ProfilePageTabHeader from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import ProfilePhotos from 'src/ui/pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
@@ -75,7 +75,7 @@ React.memo(
           
           <ValidationWrap {...props.validationProps}
             fieldName="aboutMe"
-            render={validProps => <ProfileAboutMe {...validProps}/>}
+            render={validProps => <ProfileAboutMeOption {...validProps}/>}
           />
           
           <div css={{ height: 24 }}/>
@@ -86,23 +86,26 @@ React.memo(
             
             <ValidationWrap {...props.validationProps}
               fieldName="name"
-              render={validProps => <ProfileName {...validProps}/>}
+              render={validProps => <ProfileNameOption {...validProps}/>}
             />
             
             
             <ValidationWrap {...props.validationProps}
               fieldName="birthDate"
-              render={validProps => <ProfileBirthDate {...validProps}/>}
+              render={validProps => <ProfileBirthDateOption {...validProps}/>}
             />
             
             
             <ValidationWrap {...props.validationProps}
               fieldName="gender"
-              render={validProps => <ProfileGender {...validProps}/>}
+              render={validProps => <ProfileGenderOption {...validProps}/>}
             />
             
             
-            <ProfileImLookingFor/>
+            <ValidationWrap {...props.validationProps}
+              fieldName="partnerGender"
+              render={validProps => <ProfileImLookingForOption {...validProps}/>}
+            />
           
           
           </Card3>

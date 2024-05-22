@@ -1,7 +1,10 @@
 import { Gender } from 'src/api/model/Gender.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { PartnerAgeOptionValues } from 'src/ui/pages/Profile/Partner/PartnerSelectAge.tsx'
-import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
+import { PartnerAgeOptionValues } from 'src/ui/pages/Profile/Partner/PartnerAgeOption.tsx'
+import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
+import {
+  PartnerGenderOptionValues
+} from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
@@ -23,7 +26,7 @@ export namespace ProfilePageValidation {
   
   
   type FailureCode =
-    'name-required'
+    | 'name-required'
     | 'name-not-changed'
     | 'name-too-long'
     
@@ -39,9 +42,15 @@ export namespace ProfilePageValidation {
     | 'about-me-not-changed'
     | 'about-me-is-too-long'
     
+    | 'partner-gender-not-changed'
+    
     | 'photos-not-changed'
     
     | 'partner-age-not-changed'
+    // todo age validation
+    
+    | 'partner-height-not-changed'
+    // todo height validation
     
     | 'NO_USER'
     | 'connection-error'
@@ -53,17 +62,27 @@ export namespace ProfilePageValidation {
     'name-required': ErrorUiText.nameIsNotEntered,
     'name-not-changed': { 'en-US': 'name-not-changed' },
     'name-too-long': ErrorUiText.nameMaxLenIs100,
+    
     'birth-date-not-changed': { 'en-US': 'birth-date-not-changed' },
     'birth-date-required': ErrorUiText.birthDateIsNotEntered,
     'birth-date-incorrect-format': ErrorUiText.birthDateHasIncorrectFormat,
     'birth-date-not-exists': ErrorUiText.dateNotExists,
     'birth-date-younger-18': ErrorUiText.youMustBeAtLeast18YearsOld,
+    
     'gender-not-changed': { 'en-US': 'gender-not-changed' },
     'gender-required': ErrorUiText.genderIsNotChosen,
+    
     'about-me-not-changed': { 'en-US': 'about-me-not-changed' },
     'about-me-is-too-long': ErrorUiText.descriptionMaxLenIs2000,
+    
+    'partner-gender-not-changed': { 'en-US': 'partner-gender-not-changed' },
+    
     'photos-not-changed': { 'en-US': 'photos-not-changed' },
+    
     'partner-age-not-changed': { 'en-US': 'partner-age-not-changed' },
+    
+    'partner-height-not-changed': { 'en-US': 'partner-height-not-changed' },
+    
     'NO_USER': ErrorUiText.noUserWithSuchId,
     'connection-error': ErrorUiText.connectionError,
     'unknown-error': ErrorUiText.unknownError,
@@ -76,9 +95,11 @@ export namespace ProfilePageValidation {
     birthDate: string
     gender: GenderOptionValues
     aboutMe: string
+    partnerGender: PartnerGenderOptionValues
     photos: ProfilePhoto[]
     
     partnerAge: PartnerAgeOptionValues
+    partnerHeight: [number|null, number|null]
   }
   export type FromServerValue = {
     values: UserValues // значения, отправленные на сервердля проверки
@@ -100,6 +121,7 @@ export namespace ProfilePageValidation {
     birthDate: '',
     gender: '',
     aboutMe: '',
+    partnerGender: '',
     photos: ArrayUtils.ofIndices(6).map(i=>({
       ...DefaultProfilePhoto,
       type: 'remote',
@@ -110,6 +132,7 @@ export namespace ProfilePageValidation {
     } satisfies ProfilePhoto)),
     
     partnerAge: '',
+    partnerHeight: [null, null],
   }
   export const auxiliaryDefaultValues: AuxiliaryValues = {
     fromServer: undefined,
@@ -260,6 +283,19 @@ export namespace ProfilePageValidation {
     
     
     
+    [['partnerGender','initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['partnerGender'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (v===ivs.partnerGender) return new PartialFailureData({
+        code: 'partner-gender-not-changed' satisfies FailureCode,
+        msg: 'Field "Partner gender" is not changed',
+        type: 'initial',
+        errorFields: ['partnerGender'],
+      })
+    }],
+    
+    
+    
     [['photos','initialValues'], (values)=>{
       const [v,ivs] = values as [FormValues['photos'],FormValues['initialValues']]
       if (v.every((it,i)=>photosComparator(it,ivs.photos[i])))
@@ -283,6 +319,20 @@ export namespace ProfilePageValidation {
         errorFields: ['partnerAge'],
       })
     }],
+    
+    
+    
+    [['partnerHeight','initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['partnerHeight'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (ArrayUtils.eq(v, ivs.partnerHeight)) return new PartialFailureData({
+        code: 'partner-height-not-changed' satisfies FailureCode,
+        msg: 'Field "Partner height" is not changed',
+        type: 'initial',
+        errorFields: ['partnerHeight'],
+      })
+    }],
+    
     
     
     [['fromServer'], (values)=>{

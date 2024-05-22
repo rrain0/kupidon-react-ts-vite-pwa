@@ -5,10 +5,10 @@ import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { PlaceholderUiText } from 'src/ui/ui-values/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
-import TopButtonBar from 'src/ui/widgets/BottomButtonBar/TopButtonBar.tsx'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
-import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars.tsx'
+import PageScrollbars from 'src/ui/elements/Scrollbars/PageScrollbars.tsx'
 import React, {
   useCallback,
   useEffect,

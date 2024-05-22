@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react'
-import BottomButtonBar from 'src/ui/widgets/BottomButtonBar/BottomButtonBar.tsx'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import {
   ComputedBottomSheetDimens,
@@ -16,8 +16,8 @@ import { Utils } from 'src/util/common/Utils.ts'
 import styled from '@emotion/styled'
 import BottomSheetDialog from 'src/ui/elements/BottomSheet/BottomSheetDialog.tsx'
 import intOrDefault = Utils.nonNegIntOrDefault;
-import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
-import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
+import OverflowWrapper from 'src/ui/elements/Scrollbars/OverflowWrapper.tsx'
+import { OverflowWrapperStyle } from 'src/ui/elements/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
 import Setter = TypeUtils.Callback1
 

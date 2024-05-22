@@ -27,7 +27,7 @@ import AddModuleIc = SvgIcons.AddModuleIc
 import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName,
-} from 'src/ui/widgets/ClearSiteConfirmation/ClearSiteDialog.tsx'
+} from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
 import LockIc = SvgIcons.LockIc
 import GearIc = SvgIcons.GearIc
 import RootRoute = AppRoutes.RootRoute

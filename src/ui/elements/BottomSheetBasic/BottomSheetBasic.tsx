@@ -4,8 +4,8 @@ import { BottomSheetBasicParts } from 'src/ui/elements/BottomSheetBasic/BottomSh
 import {
   BottomSheetDialogBasicProps
 } from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
-import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
+import OverflowWrapper from 'src/ui/elements/Scrollbars/OverflowWrapper.tsx'
+import { OverflowWrapperStyle } from 'src/ui/elements/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
 
 

@@ -7,13 +7,14 @@ import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import ItemTitleContainer from 'src/ui/elements/basic-elements/ItemTitleContainer.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/elements/cards/Card3.tsx'
-import PartnerSelectAge from 'src/ui/pages/Profile/Partner/PartnerSelectAge.tsx'
-import ProfileAboutMe from 'src/ui/pages/Profile/Profile/ProfileAboutMe.tsx'
-import ProfileBirthDate from 'src/ui/pages/Profile/Profile/ProfileBirthDate.tsx'
-import ProfileGender from 'src/ui/pages/Profile/Profile/ProfileGender.tsx'
-import ProfileImLookingFor
-  from 'src/ui/pages/Profile/Profile/ProfileImLookingFor.tsx'
-import ProfileName from 'src/ui/pages/Profile/Profile/ProfileName.tsx'
+import PartnerAgeOption from 'src/ui/pages/Profile/Partner/PartnerAgeOption.tsx'
+import PartnerHeightOption from 'src/ui/pages/Profile/Partner/PartnerHeightOption.tsx'
+import ProfileAboutMeOption from 'src/ui/pages/Profile/Profile/ProfileAboutMeOption.tsx'
+import ProfileBirthDateOption from 'src/ui/pages/Profile/Profile/ProfileBirthDateOption.tsx'
+import ProfileGenderOption from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
+import ProfileImLookingForOption
+  from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
+import ProfileNameOption from 'src/ui/pages/Profile/Profile/ProfileNameOption.tsx'
 import ProfilePageTabHeader from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import ProfilePhotos from 'src/ui/pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
@@ -56,8 +57,6 @@ const Partner =
 React.memo(
 (props: PartnerProps)=>{
   
-  
-  const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
   
@@ -88,7 +87,12 @@ React.memo(
           
           <ValidationWrap {...props.validationProps}
             fieldName="partnerAge"
-            render={validProps => <PartnerSelectAge {...validProps}/>}
+            render={validProps => <PartnerAgeOption {...validProps}/>}
+          />
+          
+          <ValidationWrap {...props.validationProps}
+            fieldName="partnerHeight"
+            render={validProps => <PartnerHeightOption {...validProps}/>}
           />
           
         </Card3>

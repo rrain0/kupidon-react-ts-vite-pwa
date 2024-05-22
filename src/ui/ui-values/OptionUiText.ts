@@ -4,6 +4,23 @@ import { UiValues } from '@util/ui-text/UiText.ts'
 
 
 export const OptionUiText = {
+  any: {
+    'en-US': 'Any',
+    'ru-RU': 'Любой',
+  },
+  from: {
+    'en-US': 'From',
+    'ru-RU': 'От',
+  },
+  to: {
+    'en-US': 'To',
+    'ru-RU': 'До',
+  },
+  
+  cm: {
+    'en-US': 'Cm',
+    'ru-RU': 'См',
+  },
   
   male: {
     'en-US': 'Male',

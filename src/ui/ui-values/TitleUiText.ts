@@ -85,6 +85,10 @@ export const TitleUiText = {
     'en-US': 'Partner age',
     'ru-RU': 'Возраст партнёра',
   },
+  partnerHeight: {
+    'en-US': 'Partner height',
+    'ru-RU': 'Рост партнёра',
+  },
   
   
   theme: {
