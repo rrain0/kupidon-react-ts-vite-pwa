@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
@@ -8,6 +9,7 @@ import RangePicker from 'src/ui/elements/RangePicker/RangePicker.tsx'
 import { RangeNullable } from 'src/ui/model/RangeNullable.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import Callback = TypeUtils.Callback
+import col = EmotionCommon.col
 
 
 
@@ -32,11 +34,19 @@ const ModalRangePicker =
           {...sheetProps.sheetProps}
           header={title}
         >
-          <RangePicker/>
+          <Content>
+            <RangePicker/>
+          </Content>
         </BottomSheetDialogBasic>
       </ModalPortal>
     }</UseBottomSheetState>
 }
 export default React.memo(ModalRangePicker) as typeof ModalRangePicker
 
+
+const Content = styled.section`
+  ${col};
+  gap: 10px;
+  padding: 20px 10px 40px 10px;
+`
 

@@ -6,6 +6,7 @@ import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import row = EmotionCommon.row
 import resetH = EmotionCommon.resetH
+import center = EmotionCommon.center
 
 
 
@@ -16,6 +17,8 @@ export namespace SettingsOptions {
   export const Header = styled.h5`
     ${resetH};
     padding: 8px 6px;
+    ${center};
+    text-align: center;
   `
   export const Container = styled.div`
     flex: 1;

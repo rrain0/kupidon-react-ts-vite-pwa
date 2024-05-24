@@ -17,11 +17,15 @@ const LightSimpleProps = {
     content3:  ['#7b7b7b'],
     content4:  ['#d1d1d1'],
     shadow:    ['#00000026'],
+    contentAccent:   ['#333333'],
+    contentAccent2:  ['#d1d1d1'],
+    contentGradIcon: ['#444444','#444444'],
   },
   containerAccent: {
     bgc:      ['#bbbbbb'],
+    bgc2:     ['#333333'],
     content:  ['#000000'],
-    contentGradIcon: ['#BB2649','#F75F82'],
+    content2: ['#F8F8F8'],
   },
   
   buttonMain: {

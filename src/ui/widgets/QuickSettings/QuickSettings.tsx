@@ -66,20 +66,20 @@ React.memo(
           <Content>
             
             <SettingsOptions.Header>
-              {titleText.theme}:
+              {titleText.theme}
             </SettingsOptions.Header>
             <ThemeOptions/>
             
             
             <SettingsOptions.Header>
-              {titleText.language}:
+              {titleText.language}
             </SettingsOptions.Header>
             <LangOptions/>
             
             <RoundButtonsContainer>
               
               {auth && <Link to={RootRoute.settings.account[full]()}>
-                <Button css={normalIconRoundButton}
+                <Button css={ButtonStyle.roundedAccent}
                   onClick={props.setClosing}
                 >
                   <LockIc css={[
@@ -91,7 +91,7 @@ React.memo(
               </Link>}
               
               <Link to={RootRoute.settings.app[full]()}>
-                <Button css={normalIconRoundButton}
+                <Button css={ButtonStyle.roundedAccent}
                   onClick={props.setClosing}
                 >
                   <GearIc css={SettingsOptions.icon}/>
@@ -100,57 +100,27 @@ React.memo(
               </Link>
               
               <Link to={RootRoute.test[full]()}>
-                <Button css={normalIconRoundButton}
+                <Button css={ButtonStyle.roundedSecondary}
                   onClick={props.setClosing}
                 >
                   {titleText.testPage}
                 </Button>
               </Link>
               
-              {app.canInstall && <Button css={normalIconRoundButton}
+              {app.canInstall && <Button css={ButtonStyle.roundedAccent}
                 onClick={async () => await promptInstall()}
               >
                 <AddModuleIc css={SettingsOptions.icon}/>
                 {actionText.installApp}
               </Button>}
               
-              {/* <UseOverlay overlayName={ClearSiteDialogOverlayName}>
-                {overlay=><>
-                  <Button css={normalIconRoundButton}
-                    onClick={overlay.open}
-                  >
-                    {actionText.clearAppData}
-                  </Button>
-                  
-                  <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close}/>
-                </>}
-              </UseOverlay> */}
-              
-              <Button css={normalIconRoundButton}
+              <Button css={ButtonStyle.roundedAccent}
                 onClick={clearSiteDialog.open}
               >
                 {actionText.clearAppData}
               </Button>
               
-              {/* <UseBool>{overlayBool=>
-                <>
-                  <UseOverlay0
-                    overlayName={ClearSiteDialogOverlayName}
-                    isOpen={overlayBool.value}
-                    setIsOpen={overlayBool.setValue}
-                  />
-                  
-                  <Button css={normalIconRoundButton}
-                    onClick={overlayBool.setTrue}
-                  >
-                    {actionText.clearAppData}
-                  </Button>
-                  
-                  <ClearSiteDialog isOpen={overlayBool.value} close={overlayBool.setFalse}/>
-                </>
-              }</UseBool> */}
-              
-              {import.meta.env.DEV && <Button css={normalIconRoundButton}
+              {import.meta.env.DEV && <Button css={ButtonStyle.roundedSecondary}
                 onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
               >
                 Show Dev Overlay
@@ -183,14 +153,6 @@ const RoundButtonsContainer = styled.div`
   align-items: center;
   gap: 10px;
 `
-const normalIconRoundButton = (t:AppTheme.Theme)=>css`
-  ${ButtonStyle.roundedAccent(t)};
-  ${ButtonStyle.El.btn.thiz()} {
-    min-width: 90px;
-    gap: 0.6em;
-  }
-`
-
 
 
 

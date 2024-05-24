@@ -17,11 +17,15 @@ const DarkSimpleProps = {
     content3:  ['#7b7b7b'],
     content4:  ['#666666'],
     shadow:    ['#00000000'],
+    contentAccent:   ['#bdbdbd'],
+    contentAccent2:  ['#2e343f'],
+    contentGradIcon: ['#bdbdbd','#bdbdbd'],
   },
   containerAccent: {
     bgc:      ['#aaaaaa'],
+    bgc2:     ['#bdbdbd'],
     content:  ['#000000'],
-    contentGradIcon: ['#BB2649','#F75F82'],
+    content2: ['#000000'],
   },
   
   buttonMain: {

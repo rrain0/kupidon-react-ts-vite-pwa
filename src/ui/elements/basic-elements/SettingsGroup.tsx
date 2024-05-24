@@ -1,18 +1,11 @@
 import styled from '@emotion/styled'
-import React from "react"
-import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 
 
-
-
-
-const Card = styled.div`
+export const SettingsGroup = styled.section`
   ${col};
   gap: inherit;
-  padding: 12px;
+  padding: 12px 0;
   border-radius: 16px;
-  background: ${p=>p.theme.card.bgc[0]};
 `
-export default Card

@@ -12,7 +12,7 @@ export const ThemeNameUiText = {
   },
   'Dark Simple': {
     'en-US': 'Dark',
-    'ru-RU': 'Add',
+    'ru-RU': 'Тёмная',
   },
   
   

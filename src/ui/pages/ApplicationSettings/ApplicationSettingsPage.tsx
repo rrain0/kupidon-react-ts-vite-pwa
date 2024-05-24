@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
+import { SettingsGroup } from 'src/ui/elements/basic-elements/SettingsGroup.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
@@ -24,7 +25,6 @@ import { AllThemes } from 'src/ui/theme/ThemeCollection.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import Button from 'src/ui/elements/buttons/Button'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle'
-import Card from 'src/ui/elements/cards/Card.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup'
@@ -92,16 +92,16 @@ React.memo(
           
           
           
-          <Card>
+          <SettingsGroup>
             <SettingsOptions.Header>
               {titleText.theme}
             </SettingsOptions.Header>
             <ThemeOptions/>
-          </Card>
+          </SettingsGroup>
           
           
           
-          <Card>
+          <SettingsGroup>
             <SettingsOptions.Header>
               {titleText.preferredLightTheme}
             </SettingsOptions.Header>
@@ -127,9 +127,9 @@ React.memo(
                 </RadioInput>)
               }
             </RadioInputGroup>
-          </Card>
+          </SettingsGroup>
           
-          <Card>
+          <SettingsGroup>
             <SettingsOptions.Header>
               {titleText.preferredDarkTheme}
             </SettingsOptions.Header>
@@ -155,15 +155,15 @@ React.memo(
                 </RadioInput>)
               }
             </RadioInputGroup>
-          </Card>
+          </SettingsGroup>
           
           
-          <Card>
+          <SettingsGroup>
             <SettingsOptions.Header>
               {titleText.language}
             </SettingsOptions.Header>
             <LangOptions/>
-          </Card>
+          </SettingsGroup>
           
           
           <RoundButtonsContainer>
@@ -180,7 +180,7 @@ React.memo(
             
             <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
               {overlay=><>
-                <Button css={ButtonStyle.roundedDanger}
+                <Button css={ButtonStyle.roundedSecondary}
                   onClick={overlay.open}
                 >
                   {actionText.clearAppData}

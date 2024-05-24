@@ -92,11 +92,13 @@ export namespace ButtonStyle {
     
     export const rounded = css`
       ${El.btn.thiz()} {
+        min-width: 90px;
         width: fit-content;
         min-height: 40px;
         border: 0;
         border-radius: 1000000px;
         padding: 8px 20px;
+        gap: 0.6em;
         ${Txt.small1};
       }
       ${El.border.thiz()}{
@@ -331,11 +333,16 @@ export namespace ButtonStyle {
     ${Shape.rounded};
     ${Color.accent(t)};
     ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonAccent.content2[0])}
+      ${El.btn.props.color.set(t.buttonAccent.content2[0])};
     }
     ${El.border.thiz()}{
       border: none;
     }
+  `
+  export const roundedSecondary = (t:Theme) => css`
+    ${common};
+    ${Shape.rounded};
+    ${Color.secondary(t)};
   `
   export const roundedSmallAccent = (t:Theme) => css`
     ${common};

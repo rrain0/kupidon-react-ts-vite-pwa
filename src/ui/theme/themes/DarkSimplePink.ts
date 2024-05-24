@@ -14,10 +14,15 @@ const DarkSimplePinkProps = { ...DarkSimple,
     content:   ['#bdbdbd'],
     content2:  ['#999999'],
     content3:  ['#7b7b7b'],
+    contentAccent:   ['#b7405c'], // ['#984559']
+    contentAccent2:  ['#2e343f'],
+    contentGradIcon: ['#BB2649','#F75F82'],
   },
   containerAccent: { ...DarkSimple.containerAccent,
-    bgc:     ['#aaaaaa'],
-    content: ['#000000'],
+    bgc:      ['#aaaaaa'],
+    bgc2:     ['#bdbdbd'], // ['#984559']
+    content:  ['#000000'],
+    content2: ['#000000'],
   },
   
   buttonMain: { ...DarkSimple.buttonMain,

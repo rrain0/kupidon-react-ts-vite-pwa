@@ -34,11 +34,15 @@ export namespace AppTheme {
       content3:  string[]
       content4:  string[]
       shadow:    string[]
+      contentAccent:   string[]
+      contentAccent2:  string[]
+      contentGradIcon: string[]
     },
     containerAccent: {
       bgc:      string[]
+      bgc2:     string[]
       content:  string[]
-      contentGradIcon: string[]
+      content2: string[]
     },
     
     // main button (submit button)

@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
@@ -15,7 +14,6 @@ import ItemTitleContainer from 'src/ui/elements/basic-elements/ItemTitleContaine
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import PageScrollbars from 'src/ui/elements/Scrollbars/PageScrollbars.tsx'
 import { PwdChangePageValidation } from 'src/ui/pages/PwdChange/validation.ts'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { useFormFailures } from '@util/form-validation/hooks/useFormFailures.ts'
 import { useFormSubmit } from '@util/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@util/form-validation/hooks/useFormToasts.tsx'
@@ -23,10 +21,8 @@ import ValidationWrap from '@util/form-validation/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import Card from 'src/ui/elements/cards/Card.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import PwdInput from 'src/ui/elements/inputs/PwdInput/PwdInput.tsx'
-import col = EmotionCommon.col
 import defaultValues = PwdChangePageValidation.defaultValues
 import validators = PwdChangePageValidation.validators
 import FormValues = PwdChangePageValidation.FormValues
@@ -156,75 +152,67 @@ React.memo(
           <FormHeader>{titleText.pwdChange}</FormHeader>
           
           
-          <Card>
             
-            
-            <ItemContainer>
-              <ItemTitleContainer>
-                <ItemLabel>{titleText.currentPwd}</ItemLabel>
-              </ItemTitleContainer>
-              <ValidationWrap {...validationProps}
-                fieldName="currentPwd"
-                render={props => <PwdInput
-                  css={InputStyle.inputSmall}
-                  placeholder={placeholderText.currentPwd}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />}
-              />
-            </ItemContainer>
-            
-            
-            <ItemContainer>
-              <ItemTitleContainer>
-                <ItemLabel>{titleText.newPwd}</ItemLabel>
-              </ItemTitleContainer>
-              <ValidationWrap {...validationProps}
-                fieldName="pwd"
-                render={props => <PwdInput
-                  css={InputStyle.inputSmall}
-                  placeholder={placeholderText.newPwd}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />}
-              />
-            </ItemContainer>
-            
-            
-            <ItemContainer>
-              <ItemTitleContainer>
-                <ItemLabel>{titleText.repeatPwd}</ItemLabel>
-              </ItemTitleContainer>
-              <ValidationWrap {...validationProps}
-                fieldName="repeatPwd"
-                render={props => <PwdInput
-                  css={InputStyle.inputSmall}
-                  placeholder={placeholderText.repeatPwd}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />}
-              />
-            </ItemContainer>
+          <ItemContainer>
+            <ItemTitleContainer>
+              <ItemLabel>{titleText.currentPwd}</ItemLabel>
+            </ItemTitleContainer>
+            <ValidationWrap {...validationProps}
+              fieldName="currentPwd"
+              render={props => <PwdInput
+                css={InputStyle.inputSmall}
+                placeholder={placeholderText.currentPwd}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+          </ItemContainer>
           
           
-          </Card>
+          <ItemContainer>
+            <ItemTitleContainer>
+              <ItemLabel>{titleText.newPwd}</ItemLabel>
+            </ItemTitleContainer>
+            <ValidationWrap {...validationProps}
+              fieldName="pwd"
+              render={props => <PwdInput
+                css={InputStyle.inputSmall}
+                placeholder={placeholderText.newPwd}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+          </ItemContainer>
           
           
-          <div css={notInCard}>
-            <Button css={ButtonStyle.bigRectMain}
-              type="submit"
-            >
-              {actionText.changePwd}
-            </Button>
-          </div>
-          
-          <div css={notInCard}>
-            <Button css={ButtonStyle.bigRectAccent}
-              disabled
-            >
-              {titleText.pwdRecovery}
-            </Button>
-          </div>
+          <ItemContainer>
+            <ItemTitleContainer>
+              <ItemLabel>{titleText.repeatPwd}</ItemLabel>
+            </ItemTitleContainer>
+            <ValidationWrap {...validationProps}
+              fieldName="repeatPwd"
+              render={props => <PwdInput
+                css={InputStyle.inputSmall}
+                placeholder={placeholderText.repeatPwd}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+          </ItemContainer>
+        
+        
+        
+          <Button css={ButtonStyle.bigRectMain}
+            type="submit"
+          >
+            {actionText.changePwd}
+          </Button>
+        
+          <Button css={ButtonStyle.bigRectAccent}
+            disabled
+          >
+            {titleText.pwdRecovery}
+          </Button>
         
         </Pages.ContentForm>
       </Pages.SafeInsets>
@@ -244,11 +232,3 @@ export default PwdChangePage
 
 
 
-
-
-
-const notInCard = css`
-  ${col};
-  gap: inherit;
-  padding: 0 12px;
-`

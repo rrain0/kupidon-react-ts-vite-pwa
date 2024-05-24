@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilState, useResetRecoilState } from 'recoil'
@@ -29,14 +28,12 @@ import { RouteBuilder } from '@util/react/route-builder/RouteBuilder'
 import { useEffectEvent } from '@util/react/useEffectEvent'
 import Button from 'src/ui/elements/buttons/Button'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle'
-import Card from 'src/ui/elements/cards/Card.tsx'
 import DataField from 'src/ui/elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/elements/DataField/DataFieldStyle'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle'
 import FloppyDisk1Ic = SvgIcons.FloppyDisk1Ic
-import col = EmotionCommon.col
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues
@@ -231,109 +228,101 @@ React.memo(
           <FormHeader>{titleText.account}</FormHeader>
           
           
-          <Card>
             
-            
-            <ItemContainer>
-              <ItemLabel>{titleText.id}</ItemLabel>
-              <Input
-                css={InputStyle.input(
-                  { size: 'small', textSize: 'smaller', static: true },
-                )}
-                readOnly
-                value={user.id}
-              />
-            </ItemContainer>
-            
-            <ItemContainer>
-              <ItemLabel>{titleText.email}</ItemLabel>
-              <Input
-                css={InputStyle.input(
-                  { size: 'small', static: true },
-                )}
-                readOnly
-                value={user.email}
-              />
-            </ItemContainer>
-            
-            <ItemContainer>
-              <ItemLabel>{titleText.emailVerified}</ItemLabel>
-              <Input
-                css={InputStyle.input(
-                  { size: 'small', static: true },
-                )}
-                readOnly
-                value={user.emailVerified
-                  ? actionText.yes.toLowerCase()
-                  : actionText.no.toLowerCase()
-                }
-              />
-            </ItemContainer>
-            
-            {/* <ItemContainer>
-             <ItemLabel>{titleText.userCreated}</ItemLabel>
-             <Input
-             css={InputStyle.input(
-             { size: 'small', static: true }
-             )}
-             readOnly
-             value={new Date(user.created) + ''}
-             />
-             </ItemContainer>
-             
-             <ItemContainer>
-             <ItemLabel>{titleText.userUpdated}</ItemLabel>
-             <Input
-             css={InputStyle.input(
-             { size: 'small', static: true }
-             )}
-             readOnly
-             value={new Date(user.updated) + ''}
-             />
-             </ItemContainer> */}
-            
-            <ItemContainer>
-              <ItemLabel>{titleText.userCreated}</ItemLabel>
-              <DataField css={DataFieldStyle.statikSmall}>
-                {new Date(user.created) + ''}
-              </DataField>
-            </ItemContainer>
-            
-            <ItemContainer>
-              <ItemLabel>{titleText.userUpdated}</ItemLabel>
-              <DataField css={DataFieldStyle.statikSmall}>
-                {new Date(user.updated) + ''}
-              </DataField>
-            </ItemContainer>
+          
+          <ItemContainer>
+            <ItemLabel>{titleText.id}</ItemLabel>
+            <Input
+              css={InputStyle.input(
+                { size: 'small', textSize: 'smaller', static: true },
+              )}
+              readOnly
+              value={user.id}
+            />
+          </ItemContainer>
+          
+          <ItemContainer>
+            <ItemLabel>{titleText.email}</ItemLabel>
+            <Input
+              css={InputStyle.input(
+                { size: 'small', static: true },
+              )}
+              readOnly
+              value={user.email}
+            />
+          </ItemContainer>
+          
+          <ItemContainer>
+            <ItemLabel>{titleText.emailVerified}</ItemLabel>
+            <Input
+              css={InputStyle.input(
+                { size: 'small', static: true },
+              )}
+              readOnly
+              value={user.emailVerified
+                ? actionText.yes.toLowerCase()
+                : actionText.no.toLowerCase()
+              }
+            />
+          </ItemContainer>
+          
+          {/* <ItemContainer>
+           <ItemLabel>{titleText.userCreated}</ItemLabel>
+           <Input
+           css={InputStyle.input(
+           { size: 'small', static: true }
+           )}
+           readOnly
+           value={new Date(user.created) + ''}
+           />
+           </ItemContainer>
+           
+           <ItemContainer>
+           <ItemLabel>{titleText.userUpdated}</ItemLabel>
+           <Input
+           css={InputStyle.input(
+           { size: 'small', static: true }
+           )}
+           readOnly
+           value={new Date(user.updated) + ''}
+           />
+           </ItemContainer> */}
+          
+          <ItemContainer>
+            <ItemLabel>{titleText.userCreated}</ItemLabel>
+            <DataField css={DataFieldStyle.statikSmall}>
+              {new Date(user.created) + ''}
+            </DataField>
+          </ItemContainer>
+          
+          <ItemContainer>
+            <ItemLabel>{titleText.userUpdated}</ItemLabel>
+            <DataField css={DataFieldStyle.statikSmall}>
+              {new Date(user.updated) + ''}
+            </DataField>
+          </ItemContainer>
           
           
-          </Card>
           
           
-          <div css={notInCard}>
-            <Link to={RootRoute.settings.pwdChange[full]()}>
-              <Button css={ButtonStyle.bigRectAccent}>
-                {titleText.pwdChange}
-              </Button>
-            </Link>
-          </div>
-          
-          <div css={notInCard}>
-            <Button css={ButtonStyle.bigRectAccent}
-              onClick={resetAuth}
-            >
-              {actionText.logOutFromAccount}
+          <Link to={RootRoute.settings.pwdChange[full]()}>
+            <Button css={ButtonStyle.bigRectAccent}>
+              {titleText.pwdChange}
             </Button>
-          </div>
+          </Link>
           
-          <div css={notInCard}>
-            <Button css={ButtonStyle.bigRectDanger}
-              onClick={undefined}
-              disabled
-            >
-              {actionText.deleteAccount}
-            </Button>
-          </div>
+          <Button css={ButtonStyle.bigRectAccent}
+            onClick={resetAuth}
+          >
+            {actionText.logOutFromAccount}
+          </Button>
+        
+          <Button css={ButtonStyle.bigRectDanger}
+            onClick={undefined}
+            disabled
+          >
+            {actionText.deleteAccount}
+          </Button>
         
         </Pages.ContentForm>
       </Pages.SafeInsets>
@@ -360,12 +349,3 @@ React.memo(
 export default AccountSettingsPage
 
 
-
-
-
-
-const notInCard = css`
-  ${col};
-  gap: inherit;
-  padding: 0 12px;
-`

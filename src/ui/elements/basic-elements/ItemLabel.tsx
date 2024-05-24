@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { ReactUtils } from 'src/util/common/ReactUtils.ts'
 import Txt = EmotionCommon.Txt
 
 
