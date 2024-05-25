@@ -1,29 +1,34 @@
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { MathUtils } from '@util/common/MathUtils.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
+import { useRef2 } from '@util/react/useRef2.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef, useState } from 'react'
-import { ScrollbarVerticalStyle } from 'src/ui/elements/Scrollbar/ScrollbarVerticalStyle.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import Theme = AppTheme.Theme
-import noop = TypeUtils.noop
 import Setter = TypeUtils.Setter
 import fitRange = MathUtils.fitRange
+import mapRange = MathUtils.mapRange
+import Mapper = TypeUtils.Mapper
+import SetterOrUpdater = TypeUtils.SetterOrUpdater
 
 
 
 
+const tipWidth = 27
 
-export type RangePickerCustomProps = PartialUndef<{
+
+
+export type RangePickerCustomProps = {
   minMax: [number, number]
   range: [number, number]
-  setRange: Setter<[number, number]>
+  setRange: SetterOrUpdater<[number, number]>
+} & PartialUndef<{
+  displayedRange: Mapper<[number, number]> // можно сделать ступенчатый прогресс
 }>
 export type RangePickerForwardRefProps = React.JSX.IntrinsicElements['div']
 //export type RangePickerForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
@@ -37,9 +42,10 @@ React.memo(
 React.forwardRef<RangePickerRefElement, RangePickerProps>(
 (props, forwardedRef)=>{
   const {
-    /* minMax = [0, 100],
-    range = [0, 50],
-    setRange = noop, */
+    minMax,
+    range,
+    setRange,
+    displayedRange,
     className,
     ...restProps
   } = props
@@ -48,54 +54,82 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   const trackRef = useRef<RangePickerRefElement>(null)
   useImperativeHandle(forwardedRef, ()=>trackRef.current!,[])
   
-  const [progress, setProgress] = useState<[number, number]>([0, 30])
+  const getTrackDimens = ()=>{
+    const trackProps = {
+      vpx: 0,
+      width: 0,
+    }
+    const track = trackRef.current
+    if (track){
+      const d = getElemProps(track)
+      trackProps.vpx = d.vpXFloat
+      trackProps.width = d.widthFloat
+    }
+    return trackProps
+  }
+  
   
   const [isDragging, setIsDragging] = useState(false)
+  const [getActiveTip, setActiveTip] = useRef2(null as 'left' | 'right' | null)
+  const [getInitialPercent, setInitialPercent] = useRef2(0)
+  const [getPrevPercent, setPrevPercent] = useRef2(0)
   
-  const dragStartRef = useRef({ tip: null as null | 'left' | 'right' })
-  
+  // noinspection JSVoidFunctionReturnValueUsed
   const onTrackDrag = useDrag(
     gesture=>{
       const {
         first, active, last,
-        xy: [ vpx, vpy],
-        movement: [ mx, my],
-        delta: [ dx, dy],
+        xy: [vpx, vpy],
+        movement: [mx, my],
+        delta: [dx, dy],
       } = gesture
       
-      const trackProps = {
-        vpx: 0,
-        width: 0,
-      }
-      {
-        const track = trackRef.current
-        if (track){
-          const d = getElemProps(track)
-          trackProps.vpx = d.vpXFloat + 20
-          trackProps.width = d.widthFloat - 20*2
-        }
-      }
+      const trackDimens = getTrackDimens()
       
-      
-      const toPercent = (px: number) => 100 * px / trackProps.width
-      const dxPercent = toPercent(dx)
-      const xPercent = toPercent(vpx-trackProps.vpx)
+      const toDPercent = (dPx: number) =>
+        100 * dPx / (-1/2*tipWidth + trackDimens.width - 3/2*tipWidth)
+      const dPercent = toDPercent(dx)
       
       if (first){
         setIsDragging(true)
-        setProgress([0, fitRange(xPercent, [0,100])])
-        /* if (!dragStartRef.current.isByThumbBox){
-          setProgress([0, fitRange(xPercent, [0,100])])
-        } */
+        const leftPercent = toDPercent(vpx - (trackDimens.vpx + 1/2*tipWidth))
+        const rightPercent = toDPercent(vpx - (trackDimens.vpx + 3/2*tipWidth))
+        if (leftPercent < (range[0] + range[1])/2) setActiveTip('left')
+        else setActiveTip('right')
+        
+        // todo определить левый или правый в зависимости от реальных пикселей на экране (не прогресса, а пикселей)
+        if (getActiveTip()==='left') {
+          setRange(s=>([leftPercent, s[1]]))
+          setInitialPercent(leftPercent)
+          setPrevPercent(leftPercent)
+        }
+        if (getActiveTip()==='right') {
+          setRange(s=>([s[0], rightPercent]))
+          setInitialPercent(rightPercent)
+          setPrevPercent(rightPercent)
+        }
       }
       if (active){
-        if (xPercent<0) setProgress([0, 0])
-        else if (xPercent>100) setProgress([0, 100])
-        else setProgress( s=>([0, fitRange(s[1] + dxPercent, [0,100])]))
+        /*
+         todo
+          1) произошёл сдвиг виджета по оси x - пофиг, работаем так, как будто его не двигали
+          2) произошло расширение / сужение виджета - учитываем это
+          3) снаружи изменили рэндж - учитываем это
+          4) сделать невозможным установить неправильный range
+          5) отображение неправильного рэнджа как правильного (left в приоритете)
+        */
+        if (getActiveTip()==='left') {
+          setRange(s=>([s[0]+dPercent, s[1]]))
+          
+        }
+        if (getActiveTip()==='right') {
+          setRange(s=>([s[0], s[1]+dPercent]))
+          
+        }
       }
       if (last){
         setIsDragging(false)
-        //dragStartRef.current.isByThumbBox = false
+        setActiveTip(null)
       }
     }
   ) as ()=>ReactDOMAttributes
@@ -117,6 +151,19 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     ...restProps,
     ref: trackRef,
   }
+  const trackW = getTrackDimens().width
+  const progressLeft = fitRange(range[0], [0, 100])
+  const progressRight = fitRange(range[1], [progressLeft, 100])
+  const barProps = {
+    style: {
+      left: `${mapRange(progressLeft, [0, 100],
+        [0, 100 * (trackW - 2*tipWidth) / trackW ]
+      )}%`,
+      right: `${100 - mapRange(progressRight, [0, 100],
+        [100 * 2*tipWidth / trackW, 100]
+      )}%`,
+    }
+  }
   
   
   return <div css={trackStyle}
@@ -125,7 +172,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     ref={trackRef}
   >
     <div css={bar}
-      style={{ width: `${progress[1]}%` }}
+      {...barProps}
     >
       <div css={leftHandle}/>
       <div css={rightHandle}/>
@@ -142,19 +189,18 @@ const trackStyle = (t: AppTheme.Theme) => css`
   height: 42px;
   position: relative;
   border-radius: 999999px;
-  border: 2px solid ${t.containerAccent.bgc2[0]};
   border: none;
-  background: ${t.containerNormal.contentAccent2[0]};
+  background: ${t.rangePicker.trackBgc[0]};
 `
 
 const bar = (t: AppTheme.Theme) => css`
   position: absolute;
   height: 100%;
-  background: ${t.containerAccent.bgc2[0]};
+  background: ${t.rangePicker.barBgc[0]};
   border-radius: inherit;
   
   left: 0%;
-  width: 30%;
+  right: 0%;
   
   display: grid;
   grid: 'lHandle . rHandle' 100% / auto 1fr auto;
@@ -165,12 +211,12 @@ const leftHandle = (t: AppTheme.Theme) => css`
   height: 32px;
   width: 19px;
   border-radius: 16px 3px 3px 16px;
-  background: ${t.containerAccent.content2[0]};
+  background: ${t.rangePicker.handleBgc[0]};
 `
 const rightHandle = (t: AppTheme.Theme) => css`
   grid-area: rHandle;
   height: 32px;
   width: 19px;
   border-radius: 3px 16px 16px 3px;
-  background: ${t.containerAccent.content2[0]};
+  background: ${t.rangePicker.handleBgc[0]};
 `

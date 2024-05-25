@@ -8,6 +8,18 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 const DarkSimplePinkProps = { ...DarkSimple,
+  
+  page: { ...DarkSimple.page,
+    bgc:         ['#18191b'],
+    bgcGradient: ['#282c34','#282c34','#282c34'],
+  },
+  statusBar: { ...DarkSimple.statusBar,
+    bgc: ['#282c34'],
+  },
+  nav: { ...DarkSimple.nav,
+    bgc: ['#282c34'],
+  },
+  
   containerNormal: { ...DarkSimple.containerNormal,
     bgc:       ['#24272d'],
     bgc2:      ['#282c34'],
@@ -62,6 +74,10 @@ const DarkSimplePinkProps = { ...DarkSimple,
     bgcError:      ['#5e252c'],
   },
   
+  rangePicker: { ...DarkSimple.rangePicker,
+  
+  },
+  
   elementDisabled: { ...DarkSimple.elementDisabled,
     bgc:     ['#DCDCDC'],
     content: ['#555555'],
@@ -91,21 +107,6 @@ const DarkSimplePinkProps = { ...DarkSimple,
   bottomSheet: { ...DarkSimple.bottomSheet,
     bgc:    ['#121212'],
     handle: ['#8b8b8b'],
-  },
-  
-  card: { ...DarkSimple.card,
-    bgc: ['#00000000'],
-  },
-  page: { ...DarkSimple.page,
-    bgc:         ['#18191b'],
-    bgcGradient: ['#282c34','#282c34','#282c34'],
-  },
-  
-  statusBar: { ...DarkSimple.statusBar,
-    bgc: ['#282c34'],
-  },
-  nav: { ...DarkSimple.nav,
-    bgc: ['#282c34'],
   },
   
   toast: { ...DarkSimple.toast,

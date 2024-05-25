@@ -8,6 +8,14 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 const DarkOrangeProps = { ...DarkPink,
+  
+  statusBar: { ...DarkPink.statusBar,
+    bgc: ['#dd8f2f'],
+  },
+  nav: { ...DarkPink.nav,
+    bgc: ['#282c34'],
+  },
+  
   containerAccent: { ...DarkPink.containerAccent,
     bgc:     ['#dd7b39'],
   },
@@ -36,13 +44,6 @@ const DarkOrangeProps = { ...DarkPink,
   
   bottomSheet: { ...DarkPink.bottomSheet,
     handle: ['#ff935e'],
-  },
-  
-  statusBar: { ...DarkPink.statusBar,
-    bgc: ['#dd8f2f'],
-  },
-  nav: { ...DarkPink.nav,
-    bgc: ['#282c34'],
   },
 }
 

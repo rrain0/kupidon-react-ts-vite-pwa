@@ -8,6 +8,13 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 const LightOrangeProps = { ...LightPink,
+  statusBar: { ...LightPink.statusBar,
+    bgc: ['#ffdb99'],
+  },
+  nav: { ...LightPink.nav,
+    bgc: ['#ffdb99'],
+  },
+  
   containerAccent: { ...LightPink.containerAccent,
     bgc:     ['#fdca6d'],
   },
@@ -37,12 +44,6 @@ const LightOrangeProps = { ...LightPink,
     handle: ['#ff935e'],
   },
   
-  statusBar: { ...LightPink.statusBar,
-    bgc: ['#ffdb99'],
-  },
-  nav: { ...LightPink.nav,
-    bgc: ['#ffdb99'],
-  },
 }
 
 

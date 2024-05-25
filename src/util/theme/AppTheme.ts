@@ -24,6 +24,21 @@ export namespace AppTheme {
       //secondary?: {}
       //normal?: {}
     }
+    
+    page: {
+      bgc:         string[]
+      bgcGradient: string[]
+      content1:    string[]
+      content2:    string[]
+      content3:    string[]
+    }
+    statusBar: {
+      bgc: string[]
+    }
+    nav: {
+      bgc: string[]
+    }
+    
     containerNormal: {
       bgc:       string[]
       bgc2:      string[]
@@ -87,6 +102,12 @@ export namespace AppTheme {
       bgcError:      string[]
     }
     
+    rangePicker: {
+      trackBgc:      string[]
+      barBgc:        string[]
+      handleBgc:     string[]
+    }
+    
     // disabledButton
     elementDisabled: {
       bgc:     string[]
@@ -119,24 +140,6 @@ export namespace AppTheme {
     bottomSheet: {
       bgc:    string[]
       handle: string[]
-    }
-    
-    card: {
-      bgc: string[]
-    }
-    page: {
-      bgc:         string[]
-      bgcGradient: string[]
-      content1:    string[]
-      content2:    string[]
-      content3:    string[]
-    }
-    
-    statusBar: {
-      bgc: string[]
-    }
-    nav: {
-      bgc: string[]
     }
     
     toast: {

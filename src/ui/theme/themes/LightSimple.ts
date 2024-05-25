@@ -7,6 +7,21 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 const LightSimpleProps = {
+  
+  page: {
+    bgc:         ['#f5f5f5'],
+    bgcGradient: ['#f5f5f5','#f5f5f5','#f5f5f5'],
+    content1:    ['#000000'],
+    content2:    ['#000000'],
+    content3:    ['#999999'],
+  },
+  statusBar: {
+    bgc: ['#ffffff'],
+  },
+  nav: {
+    bgc: ['#ffffff'],
+  },
+  
   containerNormal: {
     bgc:       ['#ffffff'],
     bgc2:      ['#f0f0f0'],
@@ -65,6 +80,12 @@ const LightSimpleProps = {
     bgcError:      ['#ffced2'],
   },
   
+  rangePicker: {
+    trackBgc:      ['#d1d1d1'],
+    barBgc:        ['#333333'],
+    handleBgc:     ['#F8F8F8'],
+  },
+  
   elementDisabled: {
     bgc:     ['#DCDCDC'],
     content: ['#555555'],
@@ -94,24 +115,6 @@ const LightSimpleProps = {
   bottomSheet: {
     bgc:    ['#ffffff'],
     handle: ['#8b8b8b'],
-  },
-  
-  card: {
-    bgc: ['#ffffff00'],
-  },
-  page: {
-    bgc:         ['#f5f5f5'],
-    bgcGradient: ['#f5f5f5','#f5f5f5','#f5f5f5'],
-    content1:    ['#000000'],
-    content2:    ['#000000'],
-    content3:    ['#999999'],
-  },
-  
-  statusBar: {
-    bgc: ['#ffffff'],
-  },
-  nav: {
-    bgc: ['#ffffff'],
   },
   
   toast: {

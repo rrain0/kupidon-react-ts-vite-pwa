@@ -7,6 +7,21 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 const DarkSimpleProps = {
+  
+  page: {
+    bgc:         ['#18191b'],
+    bgcGradient: ['#282c34','#282c34','#282c34'],
+    content1:    ['#ffffff'],
+    content2:    ['#bdbdbd'],
+    content3:    ['#999999'],
+  },
+  statusBar: {
+    bgc: ['#282c34'],
+  },
+  nav: {
+    bgc: ['#282c34'],
+  },
+  
   containerNormal: {
     bgc:       ['#24272d'],
     bgc2:      ['#282c34'],
@@ -65,6 +80,12 @@ const DarkSimpleProps = {
     bgcError:      ['#5e252c'],
   },
   
+  rangePicker: {
+    trackBgc:      ['#2e343f'],
+    barBgc:        ['#bdbdbd'],
+    handleBgc:     ['#000000'],
+  },
+  
   elementDisabled: {
     bgc:     ['#DCDCDC'],
     content: ['#555555'],
@@ -94,24 +115,6 @@ const DarkSimpleProps = {
   bottomSheet: {
     bgc:    ['#121212'],
     handle: ['#8b8b8b'],
-  },
-  
-  card: {
-    bgc: ['#00000000'],
-  },
-  page: {
-    bgc:         ['#18191b'],
-    bgcGradient: ['#282c34','#282c34','#282c34'],
-    content1:    ['#ffffff'],
-    content2:    ['#bdbdbd'],
-    content3:    ['#999999'],
-  },
-  
-  statusBar: {
-    bgc: ['#282c34'],
-  },
-  nav: {
-    bgc: ['#282c34'],
   },
   
   toast: {

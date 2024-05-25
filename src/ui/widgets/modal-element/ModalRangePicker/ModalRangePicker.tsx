@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
-import React from 'react'
+import React, { useState } from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
@@ -27,6 +27,10 @@ const ModalRangePicker =
 <V extends RangeNullable>(props: ModalRangePickerProps<V>)=>{
   const { isOpen, close, title } = props
   
+  const heightRange = [130, 230] as [number, number]
+  
+  const [range, setRange] = useState<[number, number]>([0, 100])
+  
   return <UseBottomSheetState isOpen={isOpen} close={close}>
     {sheetProps =>
       <ModalPortal>
@@ -35,7 +39,11 @@ const ModalRangePicker =
           header={title}
         >
           <Content>
-            <RangePicker/>
+            <RangePicker
+              minMax={[0, 100]}
+              range={range}
+              setRange={setRange}
+            />
           </Content>
         </BottomSheetDialogBasic>
       </ModalPortal>

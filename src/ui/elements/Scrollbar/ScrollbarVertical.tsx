@@ -117,6 +117,7 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
     dragStartRef.current.isByThumbBox = true
   }
   
+  // noinspection JSVoidFunctionReturnValueUsed
   const onTrackDrag = useDrag(
     gesture=>{
       const {

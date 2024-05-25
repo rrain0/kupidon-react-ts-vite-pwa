@@ -9,22 +9,11 @@ import themeIconGradientCss = AppTheme.themeIconGradientCss
 
 
 const DarkPinkGradientProps = { ...DarkPink,
+  
   page: {
     ...DarkPink.page,
     bgcGradient: ['#992c46','#282c34','#282c34'],
     //bgc: ['#992c46','#282c34','#994500'],
-  },
-  inputRadio: {
-    ...DarkPink.buttonMain,
-    bgcFocus:  ['#d16780'],
-  },
-  buttonNav: {
-    ...DarkPink.buttonNav,
-    contentAccent: ['#d92a54'],
-  },
-  card: {
-    ...DarkPink.card,
-    bgc: ['#18191b77'],
   },
   statusBar: {
     ...DarkPink.statusBar,
@@ -33,7 +22,16 @@ const DarkPinkGradientProps = { ...DarkPink,
   nav: {
     ...DarkPink.nav,
     bgc: ['#282c34'],
-  }
+  },
+  
+  inputRadio: {
+    ...DarkPink.buttonMain,
+    bgcFocus:  ['#d16780'],
+  },
+  buttonNav: {
+    ...DarkPink.buttonNav,
+    contentAccent: ['#d92a54'],
+  },
 }
 
 

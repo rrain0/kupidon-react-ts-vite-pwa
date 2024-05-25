@@ -8,6 +8,19 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 const LightPinkProps = { ...LightSimple,
+  
+  page: { ...LightSimple.page,
+    bgc:         ['#f5f5f5'],
+    bgcGradient: ['#f5f5f5','#f5f5f5','#f5f5f5'],
+    content:     ['#000000'],
+  },
+  statusBar: { ...LightSimple.statusBar,
+    bgc: ['#ffffff'],
+  },
+  nav: { ...LightSimple.nav,
+    bgc: ['#ffffff'],
+  },
+  
   containerNormal: { ...LightSimple.containerNormal,
     bgc:       ['#ffffff'],
     bgc2:      ['#f0f0f0'],
@@ -81,22 +94,6 @@ const LightPinkProps = { ...LightSimple,
   bottomSheet: { ...LightSimple.bottomSheet,
     bgc:    ['#ffffff'],
     handle: ['#8b8b8b'],
-  },
-  
-  card: { ...LightSimple.card,
-    bgc: ['#ffffff00'],
-  },
-  page: { ...LightSimple.page,
-    bgc:         ['#f5f5f5'],
-    bgcGradient: ['#f5f5f5','#f5f5f5','#f5f5f5'],
-    content:     ['#000000'],
-  },
-  
-  statusBar: { ...LightSimple.statusBar,
-    bgc: ['#ffffff'],
-  },
-  nav: { ...LightSimple.nav,
-    bgc: ['#ffffff'],
   },
   
   toast: { ...LightSimple.toast,
