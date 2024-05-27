@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SettingsGroup } from 'src/ui/elements/basic-elements/SettingsGroup.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { ThemeShortNameUiText } from 'src/ui/ui-values/ThemeShortNameUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
@@ -19,7 +20,6 @@ import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { ThemeNameUiText } from 'src/ui/ui-values/ThemeNameUiText.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui/theme/ThemeCollection.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
@@ -45,7 +45,7 @@ React.memo(
   
   const actionText = useUiValues(ActionUiText)
   const titleText = useUiValues(TitleUiText)
-  const themeNameText = useUiValues(ThemeNameUiText)
+  const themeNameText = useUiValues(ThemeShortNameUiText)
   
   
   

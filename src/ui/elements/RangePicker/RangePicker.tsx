@@ -7,7 +7,7 @@ import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
 import { useRef2 } from '@util/react/useRef2.ts'
 import clsx from 'clsx'
-import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
+import React, { useImperativeHandle, useRef, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import PartialUndef = TypeUtils.PartialUndef
@@ -26,8 +26,11 @@ import zeroBasedRange = MathUtils.zeroBasedRange
 /*
 Фичи:
  
- 1) Невозможно установить неправильный range из UI
+  1) Невозможно установить неправильный range из UI
  
+TODO:
+  1) Ступенчатый Range Picker + добавить тень, которая будет двигаться вместе с пальцем
+  2) Выделение концов по нажатию (событие active)
 */
 
 

@@ -1,26 +1,26 @@
 import styled from '@emotion/styled'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { DarkSimple } from 'src/ui/theme/themes/DarkSimple.ts'
+import { Dark } from 'src/ui/theme/themes/Dark.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 
 
 
 
-const DarkSimplePinkProps = { ...DarkSimple,
+const DarkBurgundyProps = { ...Dark,
   
-  page: { ...DarkSimple.page,
+  page: { ...Dark.page,
     bgc:         ['#18191b'],
     bgcGradient: ['#282c34','#282c34','#282c34'],
   },
-  statusBar: { ...DarkSimple.statusBar,
+  statusBar: { ...Dark.statusBar,
     bgc: ['#282c34'],
   },
-  nav: { ...DarkSimple.nav,
+  nav: { ...Dark.nav,
     bgc: ['#282c34'],
   },
   
-  containerNormal: { ...DarkSimple.containerNormal,
+  containerNormal: { ...Dark.containerNormal,
     bgc:       ['#24272d'],
     bgc2:      ['#282c34'],
     content:   ['#bdbdbd'],
@@ -30,42 +30,42 @@ const DarkSimplePinkProps = { ...DarkSimple,
     contentAccent2:  ['#2e343f'],
     contentGradIcon: ['#BB2649','#F75F82'],
   },
-  containerAccent: { ...DarkSimple.containerAccent,
+  containerAccent: { ...Dark.containerAccent,
     bgc:      ['#aaaaaa'],
     bgc2:     ['#bdbdbd'], // ['#984559']
     content:  ['#000000'],
     content2: ['#000000'],
   },
   
-  buttonMain: { ...DarkSimple.buttonMain,
+  buttonMain: { ...Dark.buttonMain,
     bgc:      ['#aaaaaa'],
     bgcFocus: ['#bbbbbb'],
     content:  ['#000000'],
   },
-  buttonAccent: { ...DarkSimple.buttonAccent,
+  buttonAccent: { ...Dark.buttonAccent,
     bgc:       ['#999999'],
     bgcFocus:  ['#7b7b7b'],
     content:   ['#000000'],
     content2:  ['#000000'],
   },
-  buttonSecondary: { ...DarkSimple.buttonSecondary,
+  buttonSecondary: { ...Dark.buttonSecondary,
     bgc:       ['transparent'],
     bgcFocus:  ['#7b7b7b88'],
     content:   ['#999999'],
   },
-  inputRadio: { ...DarkSimple.inputRadio,
+  inputRadio: { ...Dark.inputRadio,
     bgcFocus:  ['#aaaaaa']
   },
-  buttonTransparent: { ...DarkSimple.buttonNav,
+  buttonTransparent: { ...Dark.buttonNav,
     bgcFocus: ['#ffffff22'],
   },
-  buttonNav: { ...DarkSimple.buttonNav,
+  buttonNav: { ...Dark.buttonNav,
     bgcFocus:      ['#2e3440'],
     content:       ['#7b7b7b'],
     contentAccent: ['#b7405c'], // ['#984559']
   },
   
-  input: { ...DarkSimple.input,
+  input: { ...Dark.input,
     bgc:           ['#282c34'],
     content:       ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
@@ -74,29 +74,29 @@ const DarkSimplePinkProps = { ...DarkSimple,
     bgcError:      ['#5e252c'],
   },
   
-  rangePicker: { ...DarkSimple.rangePicker,
+  rangePicker: { ...Dark.rangePicker,
   
   },
   
-  elementDisabled: { ...DarkSimple.elementDisabled,
+  elementDisabled: { ...Dark.elementDisabled,
     bgc:     ['#DCDCDC'],
     content: ['#555555'],
   },
-  elementDanger: { ...DarkSimple.elementDanger,
+  elementDanger: { ...Dark.elementDanger,
     bgc:      ['#bbbbbb'],
     bgcFocus: ['#cccccc'],
     content:  ['#000000'],
   },
-  elementError: { ...DarkSimple.elementError,
+  elementError: { ...Dark.elementError,
     bgc:      ['#5e252c'],
   },
   
-  ripple: { ...DarkSimple.ripple,
+  ripple: { ...Dark.ripple,
     content:              ['#000000'],
     contentOnTransparent: ['#ffffff88'],
   },
   
-  photos: { ...DarkSimple.photos,
+  photos: { ...Dark.photos,
     bgc:                     ['#ffeeee'],
     content:                 ['#291f1d'],
     borderDrag:              ['#1F8DCD'],
@@ -104,12 +104,12 @@ const DarkSimplePinkProps = { ...DarkSimple,
     highlightFrameAccentBgc: ['#ffe1e1'],
   },
   
-  bottomSheet: { ...DarkSimple.bottomSheet,
+  bottomSheet: { ...Dark.bottomSheet,
     bgc:    ['#121212'],
     handle: ['#8b8b8b'],
   },
   
-  toast: { ...DarkSimple.toast,
+  toast: { ...Dark.toast,
     bgc:                  ['#121212'],
     content:              ['#ffffff'],
     content2:             ['#b8b8b8'],
@@ -122,7 +122,7 @@ const DarkSimplePinkProps = { ...DarkSimple,
     accentWarn:           ['#f1c40f'],
     accentDanger:         ['#e74c3c'],
   },
-  scrollbar: { ...DarkSimple.scrollbar,
+  scrollbar: { ...Dark.scrollbar,
     track:       ['#F8F8F822'],
     thumb:       ['#F8F8F844'],
     thumbActive: ['#999999'],
@@ -131,14 +131,14 @@ const DarkSimplePinkProps = { ...DarkSimple,
 
 
 
-export const DarkSimplePink = {
-  ...DarkSimplePinkProps,
+export const DarkBurgundy = {
+  ...DarkBurgundyProps,
   type: 'dark',
-  name: 'Dark Simple Pink' as const,
+  name: 'Dark Burgundy' as const,
   icon: styled.div(themeIconCss({
-    accentColor: DarkSimplePinkProps.photos.highlightFrameAccentBgc[0],
-    bgcColor1:   DarkSimplePinkProps.photos.highlightFrameAccentBgc[0],
-    bgcColor2:   DarkSimplePinkProps.page.bgc[0],
+    accentColor: DarkBurgundyProps.photos.highlightFrameAccentBgc[0],
+    bgcColor1:   DarkBurgundyProps.photos.highlightFrameAccentBgc[0],
+    bgcColor2:   DarkBurgundyProps.page.bgc[0],
   })),
 } satisfies Theme
 

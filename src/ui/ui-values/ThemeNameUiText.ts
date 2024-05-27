@@ -1,4 +1,5 @@
 import { UiValues } from '@util/ui-text/UiText.ts'
+import { AllThemeNamesType } from 'src/ui/theme/ThemeCollection.ts'
 
 
 
@@ -6,23 +7,23 @@ import { UiValues } from '@util/ui-text/UiText.ts'
 export const ThemeNameUiText = {
   
   
-  'Light Simple': {
+  'Light Grey': {
     'en-US': 'Light',
     'ru-RU': 'Светлая',
   },
-  'Dark Simple': {
+  'Dark Grey': {
     'en-US': 'Dark',
     'ru-RU': 'Тёмная',
   },
   
   
-  'Light Simple Pink': {
-    'en-US': 'Light Simple Pink',
-    'ru-RU': 'Светлая с розовым',
+  'Light Burgundy': {
+    'en-US': 'Light Burgundy',
+    'ru-RU': 'Светлая Бордовая',
   },
-  'Dark Simple Pink': {
-    'en-US': 'Dark Simple Pink',
-    'ru-RU': 'Тёмная с розовым',
+  'Dark Burgundy': {
+    'en-US': 'Dark Burgundy',
+    'ru-RU': 'Тёмная Бордовая',
   },
   
   
@@ -42,7 +43,7 @@ export const ThemeNameUiText = {
   },
   'Dark Pink Gradient': {
     'en-US': 'Dark Pink Gradient',
-    'ru-RU': 'Тёмная розовая Градиент',
+    'ru-RU': 'Тёмная Розовая Градиент',
   },
   
   
@@ -56,4 +57,4 @@ export const ThemeNameUiText = {
   },
   
   
-} satisfies UiValues
+} satisfies UiValues<AllThemeNamesType>

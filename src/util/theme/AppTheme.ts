@@ -6,7 +6,7 @@ import { StyledComponent } from '@emotion/styled'
 
 export namespace AppTheme {
   
-  export type Type = 'light'|'dark'
+  export type Type = 'light' | 'dark'
   
   
   
