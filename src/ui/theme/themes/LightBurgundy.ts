@@ -139,8 +139,8 @@ export const LightBurgundy = {
   type: 'light',
   name: 'Light Burgundy' as const,
   icon: styled.div(themeIconCss({
-    accentColor: LightBurgundyProps.photos.highlightFrameAccentBgc[0],
-    bgcColor1:   LightBurgundyProps.photos.highlightFrameAccentBgc[0],
+    accentColor: LightBurgundyProps.containerNormal.contentGradIcon[1],
+    bgcColor1:   LightBurgundyProps.containerNormal.contentGradIcon[0],
     bgcColor2:   LightBurgundyProps.page.bgc[0],
   })),
 } satisfies Theme
