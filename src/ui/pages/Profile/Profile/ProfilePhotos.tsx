@@ -1,5 +1,4 @@
 import { css, keyframes } from '@emotion/react'
-import styled from '@emotion/styled'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types'
@@ -13,7 +12,6 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
@@ -33,8 +31,6 @@ import { FileUtils } from 'src/util/file/FileUtils.ts'
 import { MathUtils } from '@util/common/MathUtils.ts'
 import { DataUrl } from '@util/DataUrl.ts'
 import { ImageUtils } from 'src/util/file/ImageUtils.ts'
-import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { Progress } from '@util/Progress.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
@@ -44,10 +40,6 @@ import { useTimeout } from '@util/react/useTimeout.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import center = EmotionCommon.center
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
@@ -58,12 +50,6 @@ import bgcBorderMask = EmotionCommon.bgcInBorder
 import arrIndices = ArrayUtils.ofIndices
 import PlusIc = SvgIcons.PlusIc
 import contents = EmotionCommon.contents
-import row = EmotionCommon.row
-import col = EmotionCommon.col
-import CrossInCircleIc = SvgIcons.CrossInCircleIc
-import resetH = EmotionCommon.resetH
-import ArrowRefreshCwIc = SvgIcons.ArrowRefreshCwIc
-import Txt = EmotionCommon.Txt
 import * as uuid from 'uuid'
 import blobToDataUrl = FileUtils.blobToDataUrl
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
@@ -73,11 +59,8 @@ import Theme = AppTheme.Theme
 import ifFoundByThenReplaceTo = ArrayUtils.replaceFirstToIfFoundBy
 import findByAndMapTo = ArrayUtils.mapFirstToIfFoundBy
 import throttle = AsyncUtils.throttle
-import Download1Ic = SvgIcons.Download1Ic
-import extensionFromMimeType = FileUtils.extensionFromMimeType
 import Callback = TypeUtils.Callback
 import findBy = ArrayUtils.findBy
-import Setter = TypeUtils.Setter
 
 
 

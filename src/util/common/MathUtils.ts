@@ -7,6 +7,7 @@ export namespace MathUtils {
   
   
   
+  import NumRange = TypeUtils.NumRange
   export const ifNaN = <T = number>(n: number, replacement: T)=>isNaN(n) ? replacement : n
   
   
@@ -62,9 +63,8 @@ export namespace MathUtils {
    * @param b Значение b
    * @returns {number} (a + b) % b
    */
-  export const mod = (a: number, b: number) => (a + b) % b
-  
-  
+  type Mod = (a: number, b: number) => number
+  export const mod: Mod = (a, b) => (a + b) % b
   
   
   
@@ -92,7 +92,22 @@ export namespace MathUtils {
       return _fitRange(curr, [min, max])
     }
   }
-  
+  /*
+  type FitRange = (...args:
+    | [curr: number, minMax: readonly [number, number]]
+    | [min: number, curr: number, max: number]
+  ) => number
+  const fitRange1: FitRange = (...args): number => {
+    if (isArray(args[1])){
+      const [curr, [min, max]] = args as any
+      return _fitRange(curr, [min, max])
+    }
+    else {
+      const [min, curr, max] = args as any
+      return _fitRange(curr, [min, max])
+    }
+  }
+   */
   /**
    * Определение, находится ли текущее значение между минимальным и максимальным включительно
    * @param min Минимальное значение
@@ -130,6 +145,22 @@ export namespace MathUtils {
     return oneBasedValue * (toRange[1]-toRange[0]) + toRange[0]
   }
   
+  export const mapFitRange =
+  (value: number,
+   fromRange: readonly [minInclusive: number, maxInclusive: number],
+   toRange: readonly [minInclusive: number, maxInclusive: number],
+   fitToRange: readonly [minIncluseve: number, maxInclusive: number] = toRange
+  )
+  : number => fitRange(mapRange(value, fromRange, toRange), fitToRange)
+  
+  
+  export const zeroBasedRange = (range: NumRange): NumRange => {
+    const toRange: NumRange = [0, range[1] - range[0]]
+    return [
+      mapRange(range[0], range, toRange),
+      mapRange(range[1], range, toRange),
+    ]
+  }
   
   
   // current+1 in range inclusive

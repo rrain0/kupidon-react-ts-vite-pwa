@@ -3,18 +3,32 @@ import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { MathUtils } from '@util/common/MathUtils.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
+import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
 import { useNoSelect } from '@util/react/useNoSelect.ts'
 import { useRef2 } from '@util/react/useRef2.ts'
 import clsx from 'clsx'
-import React, { useImperativeHandle, useRef, useState } from 'react'
+import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import Setter = TypeUtils.Setter
 import fitRange = MathUtils.fitRange
 import mapRange = MathUtils.mapRange
 import Mapper = TypeUtils.Mapper
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
+import NumRange = TypeUtils.NumRange
+import mapFitRange = MathUtils.mapFitRange
+import zeroBasedRange = MathUtils.zeroBasedRange
+
+
+
+
+
+/*
+Фичи:
+ 
+ 1) Невозможно установить неправильный range из UI
+ 
+*/
 
 
 
@@ -24,14 +38,13 @@ const tipWidth = 27
 
 
 export type RangePickerCustomProps = {
-  minMax: [number, number]
-  range: [number, number]
-  setRange: SetterOrUpdater<[number, number]>
+  minMax: NumRange
+  range: NumRange
+  setRange: SetterOrUpdater<NumRange>
 } & PartialUndef<{
-  displayedRange: Mapper<[number, number]> // можно сделать ступенчатый прогресс
+  toDisplayedRange: Mapper<NumRange> // можно сделать ступенчатый прогресс
 }>
-export type RangePickerForwardRefProps = React.JSX.IntrinsicElements['div']
-//export type RangePickerForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
+export type RangePickerForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
 export type RangePickerRefElement = HTMLDivElement
 export type RangePickerProps = RangePickerCustomProps & RangePickerForwardRefProps
 
@@ -45,16 +58,15 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     minMax,
     range,
     setRange,
-    displayedRange,
+    toDisplayedRange,
     className,
     ...restProps
   } = props
   
-  
   const trackRef = useRef<RangePickerRefElement>(null)
   useImperativeHandle(forwardedRef, ()=>trackRef.current!,[])
   
-  const getTrackDimens = ()=>{
+  const getTrackDimens = () => {
     const trackProps = {
       vpx: 0,
       width: 0,
@@ -71,8 +83,8 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   
   const [isDragging, setIsDragging] = useState(false)
   const [getActiveTip, setActiveTip] = useRef2(null as 'left' | 'right' | null)
-  const [getInitialPercent, setInitialPercent] = useRef2(0)
-  const [getPrevPercent, setPrevPercent] = useRef2(0)
+  const [getInitialValue, setInitialValue] = useRef2(0)
+  const [getPrevValue, setPrevValue] = useRef2(0)
   
   // noinspection JSVoidFunctionReturnValueUsed
   const onTrackDrag = useDrag(
@@ -86,48 +98,84 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
       
       const trackDimens = getTrackDimens()
       
-      const toDPercent = (dPx: number) =>
-        100 * dPx / (-1/2*tipWidth + trackDimens.width - 3/2*tipWidth)
-      const dPercent = toDPercent(dx)
+      const toDValue = (dPx: number) => mapRange(
+        dPx,
+        [0, (-tipWidth + trackDimens.width - tipWidth)],
+        zeroBasedRange(minMax)
+      )
+      const dValue = toDValue(dx)
       
-      if (first){
+      /*
+       todo
+        0) use toDisplayedRange
+       */
+      if (first) {
         setIsDragging(true)
-        const leftPercent = toDPercent(vpx - (trackDimens.vpx + 1/2*tipWidth))
-        const rightPercent = toDPercent(vpx - (trackDimens.vpx + 3/2*tipWidth))
-        if (leftPercent < (range[0] + range[1])/2) setActiveTip('left')
+        
+        const leftInnerPxBound = trackDimens.vpx + tipWidth
+        const rightInnerPxBound = trackDimens.vpx + trackDimens.width - tipWidth
+        
+        const leftInnerPx = mapFitRange(
+          range[0],
+          minMax,
+          [leftInnerPxBound, rightInnerPxBound]
+        )
+        const rightInnerPx = mapFitRange(
+          range[1],
+          minMax,
+          [leftInnerPxBound, rightInnerPxBound]
+        )
+        
+        const innerPxAvg = (leftInnerPx + rightInnerPx)/2
+        
+        if (vpx < innerPxAvg) setActiveTip('left')
         else setActiveTip('right')
         
-        // todo определить левый или правый в зависимости от реальных пикселей на экране (не прогресса, а пикселей)
+        const leftValue = fitRange(
+          minMax[0] + toDValue(vpx - (trackDimens.vpx + 1/2*tipWidth)),
+          minMax
+        )
+        const rightValue = fitRange(
+          minMax[0] + toDValue(vpx - (trackDimens.vpx + 3/2*tipWidth)),
+          minMax
+        )
+        
         if (getActiveTip()==='left') {
-          setRange(s=>([leftPercent, s[1]]))
-          setInitialPercent(leftPercent)
-          setPrevPercent(leftPercent)
+          setRange(s=>([leftValue, s[1]]))
+          setInitialValue(leftValue)
+          setPrevValue(leftValue)
         }
         if (getActiveTip()==='right') {
-          setRange(s=>([s[0], rightPercent]))
-          setInitialPercent(rightPercent)
-          setPrevPercent(rightPercent)
+          setRange(s=>([s[0], rightValue]))
+          setInitialValue(rightValue)
+          setPrevValue(rightValue)
         }
       }
-      if (active){
+      if (active) {
         /*
          todo
+          0) use toDisplayedRange
           1) произошёл сдвиг виджета по оси x - пофиг, работаем так, как будто его не двигали
           2) произошло расширение / сужение виджета - учитываем это
           3) снаружи изменили рэндж - учитываем это
-          4) сделать невозможным установить неправильный range
           5) отображение неправильного рэнджа как правильного (left в приоритете)
         */
         if (getActiveTip()==='left') {
-          setRange(s=>([s[0]+dPercent, s[1]]))
+          setRange(s=>{
+            const v = fitRange(s[0]+dValue, [minMax[0], s[1]])
+            return [v, s[1]]
+          })
           
         }
         if (getActiveTip()==='right') {
-          setRange(s=>([s[0], s[1]+dPercent]))
+          setRange(s=>{
+            const v = fitRange(s[1]+dValue, [s[0], minMax[1]])
+            return [s[0], v]
+          })
           
         }
       }
-      if (last){
+      if (last) {
         setIsDragging(false)
         setActiveTip(null)
       }
@@ -137,8 +185,8 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   
   
   
-  
-  
+  // forbid draw to screen before data from element ref are available
+  useAwaitMounting()
   
   // forbid content selection for all elements while dragging scrollbar
   useNoSelect(isDragging)
@@ -151,17 +199,24 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     ...restProps,
     ref: trackRef,
   }
+  
   const trackW = getTrackDimens().width
-  const progressLeft = fitRange(range[0], [0, 100])
-  const progressRight = fitRange(range[1], [progressLeft, 100])
+  const progressLeft = mapFitRange(range[0], minMax, [0, 100])
+  const progressRight = mapFitRange(range[1], minMax, [0, 100], [progressLeft, 100])
+  const percentLeft = mapRange(
+    progressLeft,
+    [0, 100],
+    [0, 100 * (trackW - 2*tipWidth) / trackW ]
+  )
+  const percentRight = 100 - mapRange(
+    progressRight,
+    [0, 100],
+    [100 * 2*tipWidth / trackW, 100]
+  )
   const barProps = {
     style: {
-      left: `${mapRange(progressLeft, [0, 100],
-        [0, 100 * (trackW - 2*tipWidth) / trackW ]
-      )}%`,
-      right: `${100 - mapRange(progressRight, [0, 100],
-        [100 * 2*tipWidth / trackW, 100]
-      )}%`,
+      left: `${percentLeft}%`,
+      right: `${percentRight}%`,
     }
   }
   

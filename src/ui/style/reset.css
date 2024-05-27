@@ -34,7 +34,7 @@
   https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
   Indicates that page cannot be changed by
   autotheme browser engine.
-  And indicates that page can change theme by your own.
+  And indicates that page can change theme by its own.
 */
 html {
   color-scheme: light dark;

@@ -54,6 +54,9 @@ export namespace TypeUtils {
   export function isObject<T, O extends object>(value: T | O): value is O {
     return typeof value === 'object' && value !== null
   }
+  export function isFunction<T, F extends Function>(value: T | F): value is F {
+    return typeof value === 'function'
+  }
   
   /*
   {
@@ -102,6 +105,14 @@ export namespace TypeUtils {
   
   export type ComparatorEq<A,B = A> = (a:A,b:B)=>boolean
   export const defaultComparatorEq: ComparatorEq<any> = (a,b)=>a===b
+  
+  
+  
+  
+  
+  
+  export type NumRange = [number, number]
+  export type NumRangeNullable = [number | null, number | null]
   
   
   
