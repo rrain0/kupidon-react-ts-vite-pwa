@@ -7,26 +7,27 @@ import Setter = TypeUtils.Setter
 export const useStateSync =
 <S>
 (
-  boolMain: S, setBoolMain: Setter<S>,
-  boolSecondary: S, setBoolSecondary: Setter<S>
+  main: S, setMain: Setter<S>,
+  secondary: S, setSecondary: Setter<S>
 ) => {
   
+  
   /* useEffect(()=>{
-    console.log('boolMain, boolSecondary', boolMain, boolSecondary)
-  }, [boolMain, boolSecondary]) */
+    console.log('main, secondary', main, secondary)
+  }, [main, secondary]) */
   
   useEffect(() => {
-    //console.log('secondary boolMain, boolSecondary', boolMain, boolSecondary)
-    if (boolSecondary !== boolMain) setBoolMain(boolSecondary)
-  }, [boolSecondary])
+    //console.log('secondary main, secondary', main, secondary)
+    if (secondary !== main) setMain(secondary)
+  }, [secondary])
   
   useEffect(() => {
-    //console.log('main boolMain, boolSecondary', boolMain, boolSecondary)
-    if (boolMain !== boolSecondary) {
-      //setBoolMain(boolMain)
-      setBoolSecondary(boolMain)
+    //console.log('main main, secondary', main, secondary)
+    if (main !== secondary) {
+      //setMain(main)
+      setSecondary(main)
     }
-  }, [boolMain])
+  }, [main])
   
   
 }

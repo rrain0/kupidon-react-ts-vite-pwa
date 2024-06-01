@@ -1,6 +1,8 @@
+import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { useRef2 } from '@util/react/useRef2.ts'
 import numeral from 'numeral'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
@@ -14,8 +16,7 @@ import RulerVerticalGradIc = SvgGradIcons.RulerVerticalGradIc
 import UserValues = ProfilePageValidation.UserValues
 import NumRangeNullable = TypeUtils.NumRangeNullable
 import NumRange = TypeUtils.NumRange
-import ValueOrMapper = TypeUtils.ValueOrMapper
-import isFunction = TypeUtils.isFunction
+
 
 
 
@@ -28,7 +29,7 @@ const overlayName = 'height'
 
 const PartnerHeightOption =
 React.memo(
-(props: ValidationWrapRenderProps<UserValues['partnerHeight']>)=>{
+(props: ValidationWrapRenderProps<UserValues['partnerHeight']>) => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
@@ -41,29 +42,49 @@ React.memo(
   }
   
   
+  
   // props.value
   const [heightRange, setHeightRange] = useState<NumRangeNullable>([null, null])
+  const [widgetRange, setWidgetRange] = useState<NumRange>(
+    () => mapHeightRangeToWidgetRange(heightRange)
+  )
+  
+  /* useEffect(() => {
+    const id = setInterval(()=>{
+      setHeightRange([150, 180])
+    }, 3000)
+    return ()=>clearInterval(id)
+  }, []) */
+  
+  const [isOuter, setIsOuter] = useRef2(false)
+  useEffect(() => {
+    setIsOuter(true)
+    setWidgetRange(ReactUtils.arrMerge(
+      widgetRange, heightRange,
+      mapHeightRangeToWidgetRange(heightRange), mapWidgetRangeToHeightRange(widgetRange)
+    ))
+  }, heightRange)
+  
+  useEffect(() => {
+    if (!isOuter()){
+      setHeightRange(ReactUtils.arrMerge(
+        heightRange, widgetRange,
+        mapWidgetRangeToHeightRange(widgetRange), mapHeightRangeToWidgetRange(heightRange)
+      ))
+    }
+  }, widgetRange)
+  setIsOuter(false)
   
   const textValue = function(){
     const [from, to] = heightRange
     if (from===null && to===null) return text.any
-    if (from===null) return `${text.to} ${numeral(to).format('0')} ${text.cm}`
-    if (to===null) return `${numeral(from).format('0')}+ ${text.cm}`
-    return `${numeral(from).format('0')} - ${numeral(to).format('0')} ${text.cm}`
+    if (from===null) return `${text.to} ${to} ${text.cm}`
+    if (to===null) return `${from}+ ${text.cm}`
+    if (from===to) return `${from} ${text.cm}`
+    return `${from} - ${to} ${text.cm}`
   }()
   
   
-  
-  const uiRange = useMemo<NumRange>(
-    ()=>mapHeightRangeToUiRange(heightRange),
-    [...heightRange]
-  )
-  
-  const setUiRange = useCallback((range: ValueOrMapper<NumRange>)=>{
-    if (isFunction(range))
-      setHeightRange(s=>mapUiRangeToHeightRange(range(mapHeightRangeToUiRange(s))))
-    else setHeightRange(mapUiRangeToHeightRange(range))
-  }, [])
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   
@@ -82,8 +103,8 @@ React.memo(
       title={titleText.partnerHeight}
       text={textValue}
       
-      range={uiRange}
-      setRange={setUiRange}
+      range={widgetRange}
+      setRange={setWidgetRange}
       minMax={heightMinMax}
     />
     
@@ -94,19 +115,21 @@ export default PartnerHeightOption
 
 
 
-function mapUiRangeToHeightRange(range: NumRange): NumRangeNullable {
+function mapWidgetRangeToHeightRange(range: NumRange): NumRangeNullable {
   return [
     function(){
-      if (range[0] <= heightMinMax[0]) return null
-      return range[0]
+      const r0 = +numeral(range[0]).format('0')
+      if (r0 <= heightMinMax[0]) return null
+      return r0
     }(),
     function(){
-      if (range[1] >= heightMinMax[1]) return null
-      return range[1]
+      const r1 = +numeral(range[1]).format('0')
+      if (r1 >= heightMinMax[1]) return null
+      return r1
     }(),
   ]
 }
-function mapHeightRangeToUiRange(heightRange: NumRangeNullable): NumRange {
+function mapHeightRangeToWidgetRange(heightRange: NumRangeNullable): NumRange {
   return [
     function(){
       if (heightRange[0] === null) return heightMinMax[0]

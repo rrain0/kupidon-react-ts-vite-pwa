@@ -93,18 +93,18 @@ export namespace TypeUtils {
   export const defaultPredicate: Predicate<any> = value=>!!value
   export type Filter<T> = Predicate<T>
   
-  export type Combiner<T1, T2 = T1> = (a: T1, b: T2)=>T1
-  export type CombinerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number)=>T1
+  export type Combiner<T1, T2 = T1> = (a: T1, b: T2) => T1
+  export type CombinerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number) => T1
   export type Merger<T1, T2 = T1> = (a: T1, b: T2)=>[T1,T2]
-  export type MergerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number)=>[T1,T2]
+  export type MergerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number) => [T1,T2]
   
   export type ValueOrMapper<T> = T | Mapper<T>
   export type ValueOrGenerator<T> = T | Generator<T>
   export type Updater<T> = (mapper: Mapper<T>)=>void
-  export type SetterOrUpdater<T> = (valueOrMapper: T | Mapper<T>)=>void
+  export type SetterOrUpdater<T> = (valueOrMapper: T | Mapper<T>) => void
   
-  export type ComparatorEq<A,B = A> = (a:A,b:B)=>boolean
-  export const defaultComparatorEq: ComparatorEq<any> = (a,b)=>a===b
+  export type ComparatorEq<A, B = A> = (a: A, b: B) => boolean
+  export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a===b
   
   
   

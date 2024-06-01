@@ -15,6 +15,7 @@ export namespace ReactUtils {
   // WARNING!!! It fires before actual click events,
   // so if you change view after this so it can't capture clicks,
   // the underlying view captures click along with this view simultaneously.
+  import ComparatorEq = TypeUtils.ComparatorEq
   export const onPointerClick =
   <E extends Element>
   (callback: Callback1<React.PointerEvent<E>>)=>{
@@ -103,6 +104,41 @@ export namespace ReactUtils {
         (ref.current as T | null) = instance
     })
   }
+  
+  
+  
+  /*
+  export const arrMapAndMergeIfNotEq =
+  <T>(orig: T[], other: T[], comparator: ComparatorEq<T>): T[] => {
+    const merged = [...orig]
+    let changed = false
+    for (let i = 0; i < Math.min(orig.length, other.length); i++) {
+      if (!comparator(merged[i], other[i])) {
+        merged[i] = other[i]
+        changed = true
+      }
+    }
+    if (changed) return merged
+    return orig
+  }
+  */
+  
+  
+  export const arrMerge =
+  <A1 extends any[], A2 extends any[]>(arr1: A1, arr2: A2, arr2AsArr1: A1, arr1AsArr2: A2): A1 => {
+    const newArr1 = [...arr1] as A1
+    let changed = false
+    for (let i = 0; i < Math.min(arr2.length, arr1.length); i++) {
+      if (arr1AsArr2[i] !== arr2[i]) {
+        newArr1[i] = arr2AsArr1[i]
+        changed = true
+      }
+    }
+    if (changed) return newArr1
+    return arr1
+  }
+  
+  
   
   
 }
