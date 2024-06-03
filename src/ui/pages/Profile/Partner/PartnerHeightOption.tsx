@@ -1,8 +1,9 @@
 import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { useRef2 } from '@util/react/useRef2.ts'
+import { useStateSync } from '@util/react/useStateSync.ts'
+import { useStateSync2 } from '@util/react/useStateSync2.ts'
 import numeral from 'numeral'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
@@ -49,31 +50,18 @@ React.memo(
     () => mapHeightRangeToWidgetRange(heightRange)
   )
   
-  /* useEffect(() => {
-    const id = setInterval(()=>{
-      setHeightRange([150, 180])
-    }, 3000)
-    return ()=>clearInterval(id)
-  }, []) */
-  
-  const [isOuter, setIsOuter] = useRef2(false)
-  useEffect(() => {
-    setIsOuter(true)
-    setWidgetRange(ReactUtils.arrMerge(
-      widgetRange, heightRange,
-      mapHeightRangeToWidgetRange(heightRange), mapWidgetRangeToHeightRange(widgetRange)
-    ))
-  }, heightRange)
-  
-  useEffect(() => {
-    if (!isOuter()){
-      setHeightRange(ReactUtils.arrMerge(
-        heightRange, widgetRange,
-        mapWidgetRangeToHeightRange(widgetRange), mapHeightRangeToWidgetRange(heightRange)
-      ))
-    }
-  }, widgetRange)
-  setIsOuter(false)
+  useStateSync2(
+    heightRange, widgetRange,
+    setHeightRange, setWidgetRange,
+    (h, w) => ReactUtils.arrMerge(
+      h, w,
+      mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
+    ),
+    (h, w) => ReactUtils.arrMerge(
+      w, h,
+      mapHeightRangeToWidgetRange(h), mapWidgetRangeToHeightRange(w)
+    )
+  )
   
   const textValue = function(){
     const [from, to] = heightRange

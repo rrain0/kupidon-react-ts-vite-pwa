@@ -67,7 +67,7 @@ React.memo(
     }
   }
   
-  useStateSync(isOpenExternal, setOpenExternal, isOpen, setOpen)
+  useStateSync(isOpenExternal, isOpen, setOpenExternal, setOpen)
   
   
   

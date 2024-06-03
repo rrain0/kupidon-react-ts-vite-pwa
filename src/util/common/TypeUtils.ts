@@ -80,14 +80,15 @@ export namespace TypeUtils {
    */
   
   
-  export type Callback = ()=>void
-  export type Callback1<T> = (value: T)=>void
-  export type Callback2<T1,T2> = (value1: T1, value2: T2)=>void
-  export type CallbackN<T extends any[]> = (...args: T)=>void
+  export type Callback = () => void
+  export type Callback1<T> = (value: T) => void
+  export type Callback2<T1, T2> = (value1: T1, value2: T2) => void
+  export type CallbackN<T extends any[]> = (...args: T) => void
   export type Setter<T> = Callback1<T>
   export type Consumer<T> = Callback1<T>
-  export type Generator<T> = ()=>T
-  export type Mapper<T1,T2=T1> = (prevValue: T1)=>T2
+  export type Generator<T> = () => T
+  export type Mapper<In, Out = In> = (prevValue: In) => Out
+  export type Mapper2<In1, In2, Out = In1> = (a: In1, b: In2) => Out
   
   export type Predicate<T> = (obj: T)=>boolean
   export const defaultPredicate: Predicate<any> = value=>!!value

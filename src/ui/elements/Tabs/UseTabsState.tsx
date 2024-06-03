@@ -37,7 +37,7 @@ React.memo(
   
   const [tabIdx, setTabIdx] = useState<TabIdx>(tabIdxExtLocal)
   
-  useStateSync(tabIdxExtLocal, setAvailableTabIdxExt, tabIdx, setTabIdx)
+  useStateSync(tabIdxExtLocal, tabIdx, setAvailableTabIdxExt, setTabIdx)
   
   
   const [tabsState, setTabsState] = useState<TabsState>('opened')

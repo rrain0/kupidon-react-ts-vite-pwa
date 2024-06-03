@@ -1,33 +1,39 @@
 import { useEffect } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { useRef2 } from 'src/util/react/useRef2.ts'
 import Setter = TypeUtils.Setter
 
 
 
 export const useStateSync =
-<S>
-(
-  main: S, setMain: Setter<S>,
-  secondary: S, setSecondary: Setter<S>
+<T>(
+  main: T, secondary: T,
+  setMain: Setter<T>, setSecondary: Setter<T>
 ) => {
   
-  
-  /* useEffect(()=>{
+  /*
+  useEffect(()=>{
     console.log('main, secondary', main, secondary)
-  }, [main, secondary]) */
+  }, [main, secondary])
+  */
+  
+  const [getIsMain, setIsMain] = useRef2(false)
+  
   
   useEffect(() => {
-    //console.log('secondary main, secondary', main, secondary)
-    if (secondary !== main) setMain(secondary)
+    setIsMain(true)
+    setSecondary(main)
+  }, [main])
+  
+  useEffect(() => {
+    if (!getIsMain()) {
+      setMain(secondary)
+      //setMainFromSec(secondary)
+    }
   }, [secondary])
   
-  useEffect(() => {
-    //console.log('main main, secondary', main, secondary)
-    if (main !== secondary) {
-      //setMain(main)
-      setSecondary(main)
-    }
-  }, [main])
+  // по факту выполняется перед эффектами
+  setIsMain(false)
   
   
 }

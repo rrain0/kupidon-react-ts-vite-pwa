@@ -71,6 +71,9 @@ export namespace MathUtils {
   const _fitRange = (curr: number, [min, max]: readonly [number, number]): number => {
     return curr < min ? min : curr > max ? max : curr
   }
+  /* type FitRangeArgs =
+    | [curr: number, minMax: readonly [number, number]]
+    | [min: number, curr: number, max: number] */
   /**
    * Функция, подгоняющая текущее значение под диапазон
    * @param min Минимальное значение включительно
@@ -79,10 +82,11 @@ export namespace MathUtils {
    * @param minMax диапазон [min, max] включительно
    * @returns {number} Результирующее значение, находящееся в диапазоне [min,max]
    */
-  export type FitRangeArgs =
+  export const fitRange =
+  (...args:
     | [curr: number, minMax: readonly [number, number]]
     | [min: number, curr: number, max: number]
-  export const fitRange = (...args: FitRangeArgs): number => {
+  ): number => {
     if (isArray(args[1])){
       const [curr, [min, max]] = args as any
       return _fitRange(curr, [min, max])

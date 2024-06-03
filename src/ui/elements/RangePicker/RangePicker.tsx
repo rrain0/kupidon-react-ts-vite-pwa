@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { animated, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { MathUtils } from '@util/common/MathUtils.ts'
@@ -25,8 +26,8 @@ import zeroBasedRange = MathUtils.zeroBasedRange
 
 /*
 Фичи:
- 
   1) Невозможно установить неправильный range из UI
+  2) отображение неправильного рэнджа как правильного (left в приоритете)
  
 тодо:
   1) Ступенчатый Range Picker
@@ -59,7 +60,7 @@ export type RangePickerProps = RangePickerCustomProps & RangePickerForwardRefPro
 const RangePicker =
 React.memo(
 React.forwardRef<RangePickerRefElement, RangePickerProps>(
-(props, forwardedRef)=>{
+(props, forwardedRef) => {
   const {
     minMax,
     range,
@@ -78,7 +79,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
       width: 0,
     }
     const track = trackRef.current
-    if (track){
+    if (track) {
       const d = getElemProps(track)
       trackProps.vpx = d.vpXFloat
       trackProps.width = d.widthFloat
@@ -89,8 +90,12 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   
   const [isDragging, setIsDragging] = useState(false)
   const [getActiveTip, setActiveTip] = useRef2(null as 'left' | 'right' | null)
-  const [getInitialValue, setInitialValue] = useRef2(0)
-  const [getPrevValue, setPrevValue] = useRef2(0)
+  
+  
+  // % of bar handle values width
+  const [getStartProgress, setStartProgress] = useRef2(0)
+  const [getCurrProgress, setCurrProgress] = useRef2(0)
+  // todo add px distance between start & curr progress
   
   // noinspection JSVoidFunctionReturnValueUsed
   const onTrackDrag = useDrag(
@@ -104,18 +109,25 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
       
       const trackDimens = getTrackDimens()
       
-      const toDValue = (dPx: number) => mapRange(
+      const dPxToDProgress = (dPx: number) => mapRange(
         dPx,
-        [0, (-tipWidth + trackDimens.width - tipWidth)],
+        [0, (trackDimens.width - 2*tipWidth)],
+        [0, 100]
+      )
+      const dProgressToDValue = (dProgress: number) => mapRange(
+        dProgress,
+        [0, 100],
         zeroBasedRange(minMax)
       )
-      const dValue = toDValue(dx)
+      const progressToValue = (progress: number) => fitRange(
+        minMax[0] + dProgressToDValue(progress),
+        minMax
+      )
       
-      /*
-       todo
-        0) use toDisplayedRange
-       */
       if (first) {
+        setActiveTip(null)
+        setStartProgress(0)
+        setCurrProgress(0)
         setIsDragging(true)
         
         const leftInnerPxBound = trackDimens.vpx + tipWidth
@@ -133,57 +145,56 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
         )
         
         const innerPxAvg = (leftInnerPx + rightInnerPx)/2
+        setActiveTip(vpx < innerPxAvg ? 'left' : 'right')
         
-        if (vpx < innerPxAvg) setActiveTip('left')
-        else setActiveTip('right')
+        const leftStartProgress = dPxToDProgress(vpx - (trackDimens.vpx + 1/2*tipWidth))
+        const rightStartProgress = dPxToDProgress(vpx - (trackDimens.vpx + 3/2*tipWidth))
         
-        const leftValue = fitRange(
-          minMax[0] + toDValue(vpx - (trackDimens.vpx + 1/2*tipWidth)),
-          minMax
-        )
-        const rightValue = fitRange(
-          minMax[0] + toDValue(vpx - (trackDimens.vpx + 3/2*tipWidth)),
-          minMax
-        )
-        
-        if (getActiveTip()==='left') {
-          setRange(s=>([leftValue, s[1]]))
-          setInitialValue(leftValue)
-          setPrevValue(leftValue)
+        if (getActiveTip() === 'left') {
+          setStartProgress(leftStartProgress)
         }
-        if (getActiveTip()==='right') {
-          setRange(s=>([s[0], rightValue]))
-          setInitialValue(rightValue)
-          setPrevValue(rightValue)
+        if (getActiveTip() === 'right') {
+          setStartProgress(rightStartProgress)
         }
       }
       if (active) {
         /*
          todo
-          0) use toDisplayedRange
-          1) произошёл сдвиг виджета по оси x - пофиг, работаем так, как будто его не двигали
+          1) произошёл сдвиг виджета на экране - пофиг, работаем так, как будто его не двигали
           2) произошло расширение / сужение виджета - учитываем это
           3) снаружи изменили рэндж - учитываем это
-          5) отображение неправильного рэнджа как правильного (left в приоритете)
         */
-        if (getActiveTip()==='left') {
-          setRange(s=>{
-            const v = fitRange(s[0]+dValue, [minMax[0], s[1]])
+        
+        const dProgress = dPxToDProgress(dx)
+        /* console.log({
+          startProgress: getStartProgress(),
+          currProgress: getCurrProgress(),
+          newCurrProgress: getCurrProgress() + dProgress,
+        }) */
+        setCurrProgress(getCurrProgress() + dProgress)
+        
+        //const dValue = dProgressToDValue(dProgress)
+        if (getActiveTip() === 'left') {
+          setRange(s => {
+            const v = fitRange(
+              progressToValue(getStartProgress() + getCurrProgress()),
+              [minMax[0], s[1]]
+            )
             return [v, s[1]]
           })
-          
         }
-        if (getActiveTip()==='right') {
+        if (getActiveTip() === 'right') {
           setRange(s=>{
-            const v = fitRange(s[1]+dValue, [s[0], minMax[1]])
+            const v = fitRange(
+              progressToValue(getStartProgress() + getCurrProgress()),
+              [s[0], minMax[1]]
+            )
             return [s[0], v]
           })
-          
         }
       }
       if (last) {
         setIsDragging(false)
-        setActiveTip(null)
       }
     }
   ) as ()=>ReactDOMAttributes
@@ -219,6 +230,22 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     [0, 100],
     [100 * 2*tipWidth / trackW, 100]
   )
+  
+  /* console.log({
+    percentLeft,
+    percentRight,
+    rangeLeft: range[0],
+    rangeRight: range[1],
+  }) */
+  
+  /* const [barSpring, barSpringApi] = useSpring(()=>({
+    left: `${percentLeft}%`,
+    right: `${percentRight}%`,
+  }))
+  barSpringApi.set({
+    left: `${percentLeft}%`,
+    right: `${percentRight}%`,
+  }) */
   const barProps = {
     style: {
       left: `${percentLeft}%`,
@@ -234,6 +261,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   >
     <div css={bar}
       {...barProps}
+      //style={{...barSpring}}
     >
       <div css={leftHandle}/>
       <div css={rightHandle}/>
