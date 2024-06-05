@@ -1,6 +1,5 @@
-import { Gender } from 'src/api/model/Gender.ts'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { PartnerAgeOptionValues } from 'src/ui/pages/Profile/Partner/PartnerAgeOption.tsx'
 import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
 import {
   PartnerGenderOptionValues
@@ -22,6 +21,8 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 export namespace ProfilePageValidation {
   
   
+  import NumRangeNullable = TypeUtils.NumRangeNullable
+  import NumRangeEndNullable = TypeUtils.NumRangeEndNullable
   type SeverErrorCode = UpdateUserErrorData['code']
   
   
@@ -98,8 +99,8 @@ export namespace ProfilePageValidation {
     partnerGender: PartnerGenderOptionValues
     photos: ProfilePhoto[]
     
-    partnerAge: PartnerAgeOptionValues
-    partnerHeight: [number|null, number|null]
+    partnerAge: NumRangeEndNullable
+    partnerHeight: NumRangeNullable
   }
   export type FromServerValue = {
     values: UserValues // значения, отправленные на сервердля проверки
@@ -131,7 +132,7 @@ export namespace ProfilePageValidation {
       isReady: false,
     } satisfies ProfilePhoto)),
     
-    partnerAge: '',
+    partnerAge: [18, null],
     partnerHeight: [null, null],
   }
   export const auxiliaryDefaultValues: AuxiliaryValues = {
@@ -312,7 +313,7 @@ export namespace ProfilePageValidation {
     [['partnerAge','initialValues'], (values)=>{
       const [v,ivs] = values as [FormValues['partnerAge'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.partnerAge) return new PartialFailureData({
+      if (ArrayUtils.eq(v, ivs.partnerAge)) return new PartialFailureData({
         code: 'partner-age-not-changed' satisfies FailureCode,
         msg: 'Field "Partner age" is not changed',
         type: 'initial',

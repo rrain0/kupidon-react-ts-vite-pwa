@@ -4,4 +4,4 @@
 
 
 
-export type Gender = "MALE"|"FEMALE"
+export type Gender = 'MALE' | 'FEMALE'

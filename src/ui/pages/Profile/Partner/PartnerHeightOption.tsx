@@ -1,9 +1,8 @@
 import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { useStateSync } from '@util/react/useStateSync.ts'
 import { useStateSync2 } from '@util/react/useStateSync2.ts'
 import numeral from 'numeral'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
@@ -34,7 +33,6 @@ React.memo(
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
-  
   const text = {
     any: optionText.any.toLowerCase(),
     from: optionText.from.toLowerCase(),
@@ -42,6 +40,22 @@ React.memo(
     cm: optionText.cm.toLowerCase(),
   }
   
+  
+  /* const [heightMinMax, setHeightMinMax] = useState<NumRange>([129, 231])
+  useEffect(() => {
+    let variant = 1 as 1 | 2
+    const id = setInterval(()=>{
+      if (variant===1) {
+        setHeightMinMax([50, 400])
+        variant = 2
+      }
+      else {
+        setHeightMinMax([129, 231])
+        variant = 1
+      }
+    }, 3000)
+    return ()=>clearInterval(id)
+  }, []) */
   
   
   // props.value
@@ -53,7 +67,7 @@ React.memo(
   useStateSync2(
     heightRange, widgetRange,
     setHeightRange, setWidgetRange,
-    (h, w) => ReactUtils.arrMerge(
+    (w, h) => ReactUtils.arrMerge(
       h, w,
       mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
     ),

@@ -114,6 +114,7 @@ export namespace TypeUtils {
   
   export type NumRange = [number, number]
   export type NumRangeNullable = [number | null, number | null]
+  export type NumRangeEndNullable = [number, number | null]
   
   
   

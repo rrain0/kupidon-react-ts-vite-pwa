@@ -10,7 +10,7 @@ export const useStateSync2 =
 <M, S>(
   main: M, secondary: S,
   setMain: Setter<M>, setSecondary: Setter<S>,
-  computeMain: Mapper2<M, S, M>, computeSecondary: Mapper2<M, S, S>
+  secondaryToMain: Mapper2<S, M, M>, mainToSecondary: Mapper2<M, S, S>
 ) => {
   
   /*
@@ -20,23 +20,24 @@ export const useStateSync2 =
   */
   
   const [getHasMainFromSec, setHasMainFromSec] = useRef2(false)
-  const [getMainFromSec, setMainFromSec] = useRef2(main)
+  const [getMainFromSec, setMainFromSec] = useRef2(null as M | null)
   const [getIsMain, setIsMain] = useRef2(false)
   
   
   useEffect(() => {
     if (getHasMainFromSec() && getMainFromSec() === main) {
+      setMainFromSec(null)
       setHasMainFromSec(false)
       return
     }
     setIsMain(true)
-    const newSecondary = computeSecondary(main, secondary)
+    const newSecondary = mainToSecondary(main, secondary)
     setSecondary(newSecondary)
   }, [main])
   
   useEffect(() => {
     if (!getIsMain()) {
-      const newMain = computeMain(main, secondary)
+      const newMain = secondaryToMain(secondary, main)
       setMain(newMain)
       
       setMainFromSec(newMain)
