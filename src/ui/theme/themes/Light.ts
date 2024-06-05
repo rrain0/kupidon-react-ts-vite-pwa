@@ -53,16 +53,15 @@ const LightProps = {
     content:  ['#F8F8F8'],
   },
   buttonAccent: {
-    bgc:       ['#bbbbbb'],
-    bgcFocus:  ['#999999'],
-    content:   ['#F8F8F8'],
-    content2:  ['#000000'],
+    bgc:           ['#bbbbbb'],
+    content:       ['#000000'],
+    bgcFocus:      ['#999999'],
+    contentFocus:  ['#000000'],
   },
   buttonNormal: {
     bgc:       ['#bbbbbb'],
+    content:   ['#000000'],
     bgcFocus:  ['#999999'],
-    content:   ['#F8F8F8'],
-    content2:  ['#000000'],
   },
   buttonSecondary: {
     bgc:       ['transparent'],

@@ -42,6 +42,9 @@ export namespace ArrayUtils {
   }
   
   
+  export const contains = (value: any, arr: any[]): boolean => arr.includes(value)
+  
+  
   export const ofIndices = (len = 0): number[] => {
     return Array(len).fill(undefined).map((_,i)=>i)
   }

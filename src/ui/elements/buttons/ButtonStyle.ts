@@ -1,4 +1,6 @@
 import { css } from '@emotion/react'
+import { ArrayUtils } from '@util/common/ArrayUtils.ts'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
@@ -18,6 +20,8 @@ import DataAttrError = ElementStyle.DataAttrError
 
 export namespace ButtonStyle {
   
+  import PartialUndef = TypeUtils.PartialUndef
+  import contains = ArrayUtils.contains
   export const Attr = {
     error: DataAttrError
   } as const
@@ -180,11 +184,13 @@ export namespace ButtonStyle {
       // hover
       ${hoverable}{ ${El.btn.thiz('hover')} {
         background: ${t.buttonAccent.bgcFocus[0]};
+        ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
       }}
 
       // focus-visible
       ${El.btn.thiz('focusVisible')} {
         background: ${t.buttonAccent.bgcFocus[0]};
+        ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
       }
 
       // disabled
@@ -195,7 +201,39 @@ export namespace ButtonStyle {
     `
     
     
-    export const secondary = (t:Theme)=>css`
+    
+    export const normal = (t:Theme) => css`
+      // normal
+      ${El.btn.thiz()} {
+        background: ${t.buttonNormal.bgc[0]};
+        ${El.btn.props.color.set(t.buttonNormal.content[0])}
+      }
+      ${El.border.thiz()} {
+        border-color: ${t.buttonNormal.bgc[0]};
+      }
+      ${El.ripple.thiz()} {
+        ${El.ripple.props.color.set(t.ripple.content[0])}
+      }
+
+      // hover
+      ${hoverable}{ ${El.btn.thiz('hover')} {
+        background: ${t.buttonNormal.bgcFocus[0]};
+      }}
+
+      // focus-visible
+      ${El.btn.thiz('focusVisible')} {
+        background: ${t.buttonNormal.bgcFocus[0]};
+      }
+
+      // disabled
+      ${El.btn.thiz('disabled')} {
+        background: ${t.elementDisabled.bgc[0]};
+        ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      }
+    `
+    
+    
+    export const secondary = (t:Theme) => css`
       // normal
       ${El.btn.thiz()} {
         background: ${t.buttonSecondary.bgc[0]};
@@ -229,7 +267,7 @@ export namespace ButtonStyle {
     
     
     
-    export const transparent = (t:Theme)=>css`
+    export const transparent = (t:Theme) => css`
       // normal
       ${El.btn.thiz()} {
         background: transparent;
@@ -332,9 +370,6 @@ export namespace ButtonStyle {
     ${common};
     ${Shape.rounded};
     ${Color.accent(t)};
-    ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonAccent.content2[0])};
-    }
     ${El.border.thiz()}{
       border: none;
     }
@@ -348,9 +383,6 @@ export namespace ButtonStyle {
     ${common};
     ${Shape.roundedSmall};
     ${Color.accent(t)};
-    ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonAccent.content2[0])}
-    }
     ${El.border.thiz()}{
       border: none;
     }
@@ -374,6 +406,51 @@ export namespace ButtonStyle {
     ${Shape.rounded};
     ${Color.danger(t)};
   `
+  
+  
+  // todo 'accentOff'
+  export type ButtonStyleProps = PartialUndef<{
+    shape: 'rectBig' | 'rectSmall' | 'rounded' | 'roundedSmall'
+    color: 'main' | 'accent' | 'normal' | 'secondary' | 'transparent'
+  }>
+  export const button = (props?: ButtonStyleProps) => (t: AppTheme.Theme) => css`
+    ${common};
+    
+    ${{
+      'rectBig': Shape.bigRect,
+      'rectSmall': Shape.smallRect,
+      'rounded': Shape.rounded,
+      'roundedSmall': Shape.roundedSmall,
+    }[props?.shape ?? 'rounded']};
+    
+    ${{
+      'main': Color.main(t),
+      'accent': Color.accent(t),
+      'normal': Color.normal(t),
+      'secondary': Color.secondary(t),
+      'transparent': Color.transparent(t),
+    }[props?.color ?? 'normal']};
+    
+    ${
+      contains(props?.shape, ['rounded', 'roundedSmall'])
+      && contains(props?.color, ['accent', 'normal'])
+      && css`
+        ${El.border.thiz()}{
+          border: none;
+        }
+      `
+    };
+    ${
+      contains(props?.shape, ['rounded'])
+      && contains(props?.color, ['transparent'])
+      && css`
+        ${El.btn.thiz()} {
+          ${Txt.large2b};
+        }
+      `
+    };
+  `
+  
   
   
   

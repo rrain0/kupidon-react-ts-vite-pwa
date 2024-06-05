@@ -54,16 +54,15 @@ const DarkProps = {
     content:  ['#000000'],
   },
   buttonAccent: {
-    bgc:       ['#999999'],
-    bgcFocus:  ['#7b7b7b'],
-    content:   ['#000000'],
-    content2:  ['#000000'],
+    bgc:           ['#999999'],
+    content:       ['#000000'],
+    bgcFocus:      ['#7b7b7b'],
+    contentFocus:  ['#000000'],
   },
   buttonNormal: {
     bgc:       ['#999999'],
-    bgcFocus:  ['#7b7b7b'],
     content:   ['#000000'],
-    content2:  ['#000000'],
+    bgcFocus:  ['#7b7b7b'],
   },
   buttonSecondary: {
     bgc:       ['transparent'],

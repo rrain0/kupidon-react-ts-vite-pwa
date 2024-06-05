@@ -116,8 +116,12 @@ React.memo(
       minMax={heightMinMax}
     >
       <div css={tilesGrid}>
-        <Button css={ButtonStyle.roundedAccent}>{text.any}</Button>
-        <Button css={ButtonStyle.roundedAccent}>27 - 30 {text.cm}</Button>
+        <Button css={ButtonStyle.button({ shape: 'rounded', color: 'accent' })}>
+          {text.any}
+        </Button>
+        <Button css={ButtonStyle.roundedAccent}>
+          27 - 30 {text.cm}
+        </Button>
       </div>
     </ModalRangePicker>
     

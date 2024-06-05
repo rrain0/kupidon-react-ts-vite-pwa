@@ -68,17 +68,16 @@ export namespace AppTheme {
     }
     // just a colorful button that drags some attention
     buttonAccent: {
-      bgc:       string[]
-      bgcFocus:  string[]
-      content:   string[]
-      content2:  string[]
+      bgc:           string[]
+      content:       string[]
+      bgcFocus:      string[]
+      contentFocus:  string[]
     }
     // normal button
     buttonNormal: {
       bgc:       string[]
-      bgcFocus:  string[]
       content:   string[]
-      content2:  string[]
+      bgcFocus:  string[]
     }
     // button that almost invisible
     buttonSecondary: {
