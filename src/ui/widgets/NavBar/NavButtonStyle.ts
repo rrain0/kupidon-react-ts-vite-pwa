@@ -43,7 +43,7 @@ export namespace NavButtonStyle {
       padding: 5px 0 2px;
 
       background: none;
-      ${El.btn.props.color.set(t.buttonNav.content[0])}
+      ${El.btn.props.color.set(t.navButton.content[0])}
       
       ${Txt.small5};
     }
@@ -53,35 +53,35 @@ export namespace NavButtonStyle {
     }
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('100%')}
-      ${El.icon.props.color.set(t.buttonNav.content[0])}
+      ${El.icon.props.color.set(t.navButton.content[0])}
     }
     ${El.gradIcon.thiz()} {
       ${El.gradIcon.props.size.set('100%')}
-      ${El.gradIcon.props.firstColor.set(t.buttonNav.content[0])}
-      ${El.gradIcon.props.secondColor.set(t.buttonNav.content[0])}
+      ${El.gradIcon.props.firstColor.set(t.navButton.content[0])}
+      ${El.gradIcon.props.secondColor.set(t.navButton.content[0])}
     }
     
     // link active
     // IT IS WORKING !!!: a.active &.btnDotClass > iconDotClass
     a.active ${El.icon.thiz()} {
-      ${El.icon.props.color.set(t.buttonNav.contentAccent[0])}
+      ${El.icon.props.color.set(t.navButton.contentAccent[0])}
     }
     a.active ${El.gradIcon.thiz()} {
-      ${El.gradIcon.props.firstColor.set(t.containerNormal.contentGradIcon[0])}
-      ${El.gradIcon.props.secondColor.set(t.containerNormal.contentGradIcon[1])}
+      ${El.gradIcon.props.firstColor.set(t.iconGradient.content[0])}
+      ${El.gradIcon.props.secondColor.set(t.iconGradient.content[1])}
     }
     a.active ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonNav.contentAccent[0])}
+      ${El.btn.props.color.set(t.navButton.contentAccent[0])}
     }
     
     // hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
-      background: ${t.buttonNav.bgcFocus[0]};
+      background: ${t.navButton.bgcFocus[0]};
     }}
 
     // focus-visible
     ${El.btn.thiz('focusVisible')} {
-      background: ${t.buttonNav.bgcFocus[0]};
+      background: ${t.navButton.bgcFocus[0]};
     }
   `
   

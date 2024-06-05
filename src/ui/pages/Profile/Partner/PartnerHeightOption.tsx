@@ -1,11 +1,16 @@
+import { css } from '@emotion/react'
 import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { useStateSync2 } from '@util/react/useStateSync2.ts'
+import { AppTheme } from '@util/theme/AppTheme.ts'
 import numeral from 'numeral'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import Button from 'src/ui/elements/buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
+import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
 import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionItem from 'src/ui/elements/OptionAndValueItem/OptionItem.tsx'
@@ -16,6 +21,7 @@ import RulerVerticalGradIc = SvgGradIcons.RulerVerticalGradIc
 import UserValues = ProfilePageValidation.UserValues
 import NumRangeNullable = TypeUtils.NumRangeNullable
 import NumRange = TypeUtils.NumRange
+import rowWrap = EmotionCommon.rowWrap
 
 
 
@@ -108,12 +114,24 @@ React.memo(
       range={widgetRange}
       setRange={setWidgetRange}
       minMax={heightMinMax}
-    />
+    >
+      <div css={tilesGrid}>
+        <Button css={ButtonStyle.roundedAccent}>{text.any}</Button>
+        <Button css={ButtonStyle.roundedAccent}>27 - 30 {text.cm}</Button>
+      </div>
+    </ModalRangePicker>
     
   </>
 })
 export default PartnerHeightOption
 
+
+
+
+const tilesGrid = (t: AppTheme.Theme) => css`
+  ${rowWrap};
+  gap: 20px;
+`
 
 
 

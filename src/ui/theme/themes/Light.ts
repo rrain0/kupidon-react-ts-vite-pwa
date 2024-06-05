@@ -20,6 +20,11 @@ const LightProps = {
   nav: {
     bgc: ['#ffffff'],
   },
+  navButton: {
+    bgcFocus:      ['#f0f0f0'],
+    content:       ['#7b7b7b'],
+    contentAccent: ['#333333'],
+  },
   
   containerNormal: {
     bgc:       ['#ffffff'],
@@ -33,7 +38,7 @@ const LightProps = {
     shadow:    ['#00000026'],
     contentAccent:   ['#333333'],
     contentAccent2:  ['#d1d1d1'],
-    contentGradIcon: ['#444444','#444444'],
+    contentAccent3:  ['#d1d1d1'],
   },
   containerAccent: {
     bgc:      ['#bbbbbb'],
@@ -53,6 +58,12 @@ const LightProps = {
     content:   ['#F8F8F8'],
     content2:  ['#000000'],
   },
+  buttonNormal: {
+    bgc:       ['#bbbbbb'],
+    bgcFocus:  ['#999999'],
+    content:   ['#F8F8F8'],
+    content2:  ['#000000'],
+  },
   buttonSecondary: {
     bgc:       ['transparent'],
     bgcFocus:  ['#99999988'],
@@ -64,10 +75,9 @@ const LightProps = {
   buttonTransparent: {
     bgcFocus: ['#00000011'],
   },
-  buttonNav: {
-    bgcFocus:      ['#f0f0f0'],
-    content:       ['#7b7b7b'],
-    contentAccent: ['#333333'],
+  
+  iconGradient: {
+    content:       ['#444444','#444444'],
   },
   
   input: {

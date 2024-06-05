@@ -23,14 +23,14 @@ const DarkPinkGradientProps = { ...DarkPink,
     ...DarkPink.nav,
     bgc: ['#282c34'],
   },
+  navButton: {
+    ...DarkPink.navButton,
+    contentAccent: ['#d92a54'],
+  },
   
   inputRadio: {
     ...DarkPink.buttonMain,
     bgcFocus:  ['#d16780'],
-  },
-  buttonNav: {
-    ...DarkPink.buttonNav,
-    contentAccent: ['#d92a54'],
   },
 }
 

@@ -25,8 +25,8 @@ export namespace SvgGradIconsStyle {
   export const normal = (t: AppTheme.Theme)=>css`
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('auto')}
-      ${El.icon.props.firstColor.set(t.containerNormal.contentGradIcon[0])}
-      ${El.icon.props.secondColor.set(t.containerNormal.contentGradIcon[1])}
+      ${El.icon.props.firstColor.set(t.iconGradient.content[0])}
+      ${El.icon.props.secondColor.set(t.iconGradient.content[1])}
     }
   `
   

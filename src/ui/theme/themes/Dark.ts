@@ -21,6 +21,11 @@ const DarkProps = {
   nav: {
     bgc: ['#282c34'],
   },
+  navButton: {
+    bgcFocus:      ['#2e3440'],
+    content:       ['#7b7b7b'],
+    contentAccent: ['#bdbdbd'],
+  },
   
   containerNormal: {
     bgc:       ['#24272d'],
@@ -34,7 +39,7 @@ const DarkProps = {
     shadow:    ['#00000000'],
     contentAccent:   ['#bdbdbd'],
     contentAccent2:  ['#2e343f'],
-    contentGradIcon: ['#bdbdbd','#bdbdbd'],
+    contentAccent3:  ['#2e343f'],
   },
   containerAccent: {
     bgc:      ['#aaaaaa'],
@@ -54,6 +59,12 @@ const DarkProps = {
     content:   ['#000000'],
     content2:  ['#000000'],
   },
+  buttonNormal: {
+    bgc:       ['#999999'],
+    bgcFocus:  ['#7b7b7b'],
+    content:   ['#000000'],
+    content2:  ['#000000'],
+  },
   buttonSecondary: {
     bgc:       ['transparent'],
     bgcFocus:  ['#7b7b7b88'],
@@ -65,10 +76,9 @@ const DarkProps = {
   buttonTransparent: {
     bgcFocus: ['#ffffff22'],
   },
-  buttonNav: {
-    bgcFocus:      ['#2e3440'],
-    content:       ['#7b7b7b'],
-    contentAccent: ['#bdbdbd'],
+  
+  iconGradient: {
+    content:       ['#bdbdbd','#bdbdbd'],
   },
   
   input: {

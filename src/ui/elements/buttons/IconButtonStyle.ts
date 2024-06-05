@@ -127,8 +127,8 @@ export namespace IconButtonStyle {
       padding: 5px 0 2px;
 
       background: none;
-      color: ${t.buttonNav.content[0]};
-      ${El.btn.props.color.set(t.buttonNav.content[0])}
+      color: ${t.navButton.content[0]};
+      ${El.btn.props.color.set(t.navButton.content[0])}
       
       ${Txt.small5};
     }
@@ -138,26 +138,26 @@ export namespace IconButtonStyle {
     }
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('100%')}
-      ${El.icon.props.color.set(t.buttonNav.content[0])}
+      ${El.icon.props.color.set(t.navButton.content[0])}
     }
     
     // link active
     // IT IS WORKING !!!: a.active &.btnDotClass > iconDotClass
     a.active ${El.icon.thiz()} {
-      ${El.icon.props.color.set(t.buttonNav.contentAccent[0])}
+      ${El.icon.props.color.set(t.navButton.contentAccent[0])}
     }
     a.active ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonNav.contentAccent[0])}
+      ${El.btn.props.color.set(t.navButton.contentAccent[0])}
     }
     
     // hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
-      background: ${t.buttonNav.bgcFocus[0]};
+      background: ${t.navButton.bgcFocus[0]};
     }}
 
     // focus-visible
     ${El.btn.thiz('focusVisible')} {
-      background: ${t.buttonNav.bgcFocus[0]};
+      background: ${t.navButton.bgcFocus[0]};
     }
   `
   

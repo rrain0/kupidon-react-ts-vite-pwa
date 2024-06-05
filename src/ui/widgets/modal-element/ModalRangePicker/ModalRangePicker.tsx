@@ -11,6 +11,7 @@ import col = EmotionCommon.col
 import SetterOrUpdater = TypeUtils.SetterOrUpdater
 import NumRange = TypeUtils.NumRange
 import Txt = EmotionCommon.Txt
+import PartialUndef = TypeUtils.PartialUndef
 
 
 
@@ -25,7 +26,9 @@ export type ModalRangePickerProps = {
   range: NumRange
   setRange: SetterOrUpdater<NumRange>
   minMax: NumRange
-}
+} & PartialUndef<{
+  children: React.ReactNode
+}>
 
 
 
@@ -36,6 +39,7 @@ React.memo(
     isOpen, close,
     title, text,
     range, setRange, minMax,
+    children,
   } = props
   
   
@@ -48,14 +52,21 @@ React.memo(
           {...sheetProps.sheetProps}
           header={title}
         >
+          
           <Text>{text}</Text>
+          
           <Content>
+            
+            {children}
+            
             <RangePicker
               range={range}
               setRange={setRange}
               minMax={minMax}
             />
+            
           </Content>
+          
         </BottomSheetDialogBasic>
       </ModalPortal>
     }</UseBottomSheetState>
@@ -64,9 +75,9 @@ export default ModalRangePicker
 
 
 
-const Content = styled.section`
+const Content = styled.div`
   ${col};
-  gap: 10px;
+  gap: 20px;
   padding: 20px 10px 60px 10px;
 `
 const Text = styled.div`

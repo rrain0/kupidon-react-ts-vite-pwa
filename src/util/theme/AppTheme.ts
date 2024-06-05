@@ -51,7 +51,7 @@ export namespace AppTheme {
       shadow:    string[]
       contentAccent:   string[]
       contentAccent2:  string[]
-      contentGradIcon: string[]
+      contentAccent3:  string[]
     },
     containerAccent: {
       bgc:      string[]
@@ -73,6 +73,14 @@ export namespace AppTheme {
       content:   string[]
       content2:  string[]
     }
+    // normal button
+    buttonNormal: {
+      bgc:       string[]
+      bgcFocus:  string[]
+      content:   string[]
+      content2:  string[]
+    }
+    // button that almost invisible
     buttonSecondary: {
       bgc:       string[]
       bgcFocus:  string[]
@@ -86,10 +94,14 @@ export namespace AppTheme {
     buttonTransparent: {
       bgcFocus: string[],
     }
-    buttonNav: {
+    navButton: {
       bgcFocus:      string[]
       content:       string[]
       contentAccent: string[]
+    }
+    
+    iconGradient: {
+      content:       string[]
     }
     
     // input, dataField, textarea, radioInput, radioGroup

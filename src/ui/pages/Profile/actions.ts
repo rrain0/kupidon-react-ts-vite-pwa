@@ -55,7 +55,7 @@ export const Dot = styled.div`
   //width: 10px;
   //height: 10px;
   border-radius: 999999px;
-  //border: 2px solid ${p=>p.theme.buttonNav.contentAccent[0]};
+  //border: 2px solid ${p=>p.theme.navButton.contentAccent[0]};
 
   width: 6px;
   height: 6px;

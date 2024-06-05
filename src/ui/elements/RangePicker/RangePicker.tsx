@@ -308,7 +308,7 @@ const bar = (t: AppTheme.Theme) => css`
   background: ${t.rangePicker.barBgc[0]};
   border-radius: inherit;
   
-  // manipulate left right to display actual range data
+  // manipulate left & right to display actual range data
   left: 0%;
   right: 0%;
   
