@@ -127,6 +127,50 @@ export namespace ButtonStyle {
   
   
   
+  
+  export const filledRoundedNormalNormal = css`
+  
+  `
+  export const filledRoundedNormalAccent = css`
+  
+  `
+  export const outlinedRoundedNormalNormal = css`
+  
+  `
+  export const outlinedRoundedNormalAccent = css`
+  
+  `
+  
+  
+  
+  export namespace Type {
+    
+    export const filled = css`
+      ${El.border.thiz()} {
+        border: none;
+      }
+    `
+    
+    export const outlined = css`
+      ${El.btn.thiz()} {
+        background: none;
+      }
+    `
+    
+    export const text = css`
+      ${El.btn.thiz()} {
+        background: none;
+        ${Txt.large2b};
+      }
+      ${El.border.thiz()} {
+        border: none;
+      }
+    `
+    
+  }
+  
+  
+  
   export namespace Color {
     
     export const main = (t:Theme) => css`
@@ -410,6 +454,7 @@ export namespace ButtonStyle {
   
   // todo 'accentOff'
   export type ButtonStyleProps = PartialUndef<{
+    type: 'filled' | 'outlined' | 'text'
     shape: 'rectBig' | 'rectSmall' | 'rounded' | 'roundedSmall'
     color: 'main' | 'accent' | 'normal' | 'secondary' | 'transparent'
   }>
@@ -432,7 +477,8 @@ export namespace ButtonStyle {
     }[props?.color ?? 'normal']};
     
     ${
-      contains(props?.shape, ['rounded', 'roundedSmall'])
+      !props?.type
+      && contains(props?.shape, ['rounded', 'roundedSmall'])
       && contains(props?.color, ['accent', 'normal'])
       && css`
         ${El.border.thiz()}{
@@ -441,7 +487,8 @@ export namespace ButtonStyle {
       `
     };
     ${
-      contains(props?.shape, ['rounded'])
+      !props?.type
+      && contains(props?.shape, ['rounded'])
       && contains(props?.color, ['transparent'])
       && css`
         ${El.btn.thiz()} {
@@ -449,6 +496,24 @@ export namespace ButtonStyle {
         }
       `
     };
+    
+    ${{
+      'filled': Type.filled,
+      'outlined': Type.outlined,
+      'text': Type.text,
+    }[props?.type ?? '']};
+    
+    ${
+      contains(props?.type, ['outlined'])
+      && contains(props?.shape, ['rounded'])
+      && contains(props?.color, ['accent'])
+      && css`
+        ${El.btn.thiz()} {
+          ${El.btn.props.color.set(t.buttonAccent.bgc[0])}
+        }
+      `
+    };
+    
   `
   
   

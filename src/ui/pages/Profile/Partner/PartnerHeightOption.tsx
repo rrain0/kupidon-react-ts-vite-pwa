@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { useStateSync2 } from '@util/react/useStateSync2.ts'
@@ -83,24 +84,25 @@ React.memo(
     )
   )
   
-  const textValue = function(){
+  const textValue = (heightRange: NumRangeNullable) => {
     const [from, to] = heightRange
     if (from===null && to===null) return text.any
     if (from===null) return `${text.to} ${to} ${text.cm}`
     if (to===null) return `${from}+ ${text.cm}`
     if (from===to) return `${from} ${text.cm}`
     return `${from} - ${to} ${text.cm}`
-  }()
+  }
   
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   
+  
   return <>
     <OptionItem
       icon={<RulerVerticalGradIc />}
       title={titleText.partnerHeight}
-      value={textValue}
+      value={textValue(heightRange)}
       onClick={open}
     />
     
@@ -109,18 +111,42 @@ React.memo(
       isOpen={isOpen}
       close={close}
       title={titleText.partnerHeight}
-      text={textValue}
+      text={textValue(heightRange)}
       
       range={widgetRange}
       setRange={setWidgetRange}
       minMax={heightMinMax}
     >
       <div css={tilesGrid}>
-        <Button css={ButtonStyle.button({ shape: 'rounded', color: 'accent' })}>
-          {text.any}
+        <Button css={ArrayUtils.eq(heightRange, [null, null]) ? selectedBtnStyle : notSelectedBtnStyle}
+          onClick={()=>setHeightRange([null, null])}
+        >
+          {textValue([null, null])}
         </Button>
-        <Button css={ButtonStyle.roundedAccent}>
-          27 - 30 {text.cm}
+        <Button css={ArrayUtils.eq(heightRange, [null, 160]) ? selectedBtnStyle : notSelectedBtnStyle}
+          onClick={()=>setHeightRange([null, 160])}
+        >
+          {textValue([null, 160])}
+        </Button>
+        <Button css={ArrayUtils.eq(heightRange, [160, 170]) ? selectedBtnStyle : notSelectedBtnStyle}
+          onClick={()=>setHeightRange([160, 170])}
+        >
+          {textValue([160, 170])}
+        </Button>
+        <Button css={ArrayUtils.eq(heightRange, [170, 180]) ? selectedBtnStyle : notSelectedBtnStyle}
+          onClick={()=>setHeightRange([170, 180])}
+        >
+          {textValue([170, 180])}
+        </Button>
+        <Button css={ArrayUtils.eq(heightRange, [180, 190]) ? selectedBtnStyle : notSelectedBtnStyle}
+          onClick={()=>setHeightRange([180, 190])}
+        >
+          {textValue([180, 190])}
+        </Button>
+        <Button css={ArrayUtils.eq(heightRange, [190, null]) ? selectedBtnStyle : notSelectedBtnStyle}
+          onClick={()=>setHeightRange([190, null])}
+        >
+          {textValue([190, null])}
         </Button>
       </div>
     </ModalRangePicker>
@@ -134,8 +160,14 @@ export default PartnerHeightOption
 
 const tilesGrid = (t: AppTheme.Theme) => css`
   ${rowWrap};
-  gap: 20px;
+  gap: 8px 30px;
 `
+
+
+const selectedBtnStyle = ButtonStyle.roundedAccent
+const notSelectedBtnStyle = ButtonStyle.button({
+  type: 'outlined', shape: 'rounded', color: 'accent'
+})
 
 
 
