@@ -55,6 +55,7 @@ export namespace ButtonStyle {
   export const common = css`
     // normal
     ${El.btn.thiz()} {
+      border: none;
       transition: background linear 300ms;
       overflow-wrap: anywhere;
     }
@@ -64,6 +65,174 @@ export namespace ButtonStyle {
       display: none;
     }
   `
+  
+  
+  
+  // type: filled, shape: rounded, size: normal
+  const filledRoundedNormal = css`
+    ${common};
+    ${El.btn.thiz()} {
+      min-width: 90px;
+      width: fit-content;
+      min-height: 40px;
+      border-radius: 1000000px;
+      padding: 8px 20px;
+      gap: 0.6em;
+      ${Txt.small1};
+    }
+  `
+  
+  // type: filled, shape: rounded, size: normal, color: normal
+  export const filledRoundedNormalNormal = (t: AppTheme.Theme) => css`
+    ${filledRoundedNormal};
+    
+    // state: normal
+    ${El.btn.thiz()} {
+      background: ${t.buttonNormal.bgc[0]};
+      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.content[0])}
+    }
+    
+    // state: hover
+    ${hoverable} { ${El.btn.thiz('hover')} {
+      background: ${t.buttonNormal.bgcFocus[0]};
+    }}
+    
+    // state: focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonNormal.bgcFocus[0]};
+    }
+    
+    // state: disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
+  // type: filled, shape: rounded, size: normal, color: accent
+  export const filledRoundedNormalAccent = (t: AppTheme.Theme) => css`
+    ${filledRoundedNormal};
+    
+    // state: normal
+    ${El.btn.thiz()} {
+      background: ${t.buttonAccent.bgc[0]};
+      ${El.btn.props.color.set(t.buttonAccent.content[0])}
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.content[0])}
+    }
+
+    // state: hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonAccent.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+    }}
+
+    // state: focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonAccent.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+    }
+
+    // state: disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
+  
+  
+  // type: outlined, shape: rounded, size: normal
+  const outlinedRoundedNormal = css`
+    ${common};
+    ${El.btn.thiz()} {
+      min-width: 90px;
+      width: fit-content;
+      min-height: 40px;
+      border-radius: 1000000px;
+      background: none;
+      padding: 8px 20px;
+      gap: 0.6em;
+      ${Txt.small1};
+    }
+    ${El.border.thiz()}{
+      border: 1px solid;
+    }
+  `
+  // type: outlined, shape: rounded, size: normal, color: normal
+  export const outlinedRoundedNormalNormal = (t: AppTheme.Theme) => css`
+    ${outlinedRoundedNormal};
+    
+    // state: normal
+    ${El.btn.thiz()} {
+      ${El.btn.props.color.set(t.buttonNormal.bgc[0])}
+    }
+    ${El.border.thiz()} {
+      border-color: ${t.buttonNormal.bgc[0]};
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    }
+    
+    // state: hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonNormal.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+    }}
+    
+    // state: focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonNormal.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+    }
+    
+    // state: disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
+  // type: outlined, shape: rounded, size: normal, color: accent
+  export const outlinedRoundedNormalAccent = (t: AppTheme.Theme) => css`
+    ${outlinedRoundedNormal};
+    
+    // state: normal
+    ${El.btn.thiz()} {
+      ${El.btn.props.color.set(t.buttonAccent.bgc[0])}
+    }
+    ${El.border.thiz()} {
+      border-color: ${t.buttonAccent.bgc[0]};
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    }
+    
+    // state: hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonAccent.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+    }}
+    ${hoverable}{ ${El.border.thiz('hover')} {
+      border-color: ${t.buttonAccent.bgcFocus[0]};
+    }}
+    
+    // state: focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonAccent.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+    }
+    
+    // state: disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
+  
+  
+  
   
   
   export namespace Shape {
@@ -124,22 +293,6 @@ export namespace ButtonStyle {
     `
     
   }
-  
-  
-  
-  
-  export const filledRoundedNormalNormal = css`
-  
-  `
-  export const filledRoundedNormalAccent = css`
-  
-  `
-  export const outlinedRoundedNormalNormal = css`
-  
-  `
-  export const outlinedRoundedNormalAccent = css`
-  
-  `
   
   
   
