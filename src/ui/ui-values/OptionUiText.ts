@@ -36,6 +36,10 @@ export const OptionUiText = {
     'en-US': 'Not selected',
     'ru-RU': 'Не выбрано',
   },
+  notSpecified: {
+    'en-US': 'Not specified',
+    'ru-RU': 'Не указано',
+  },
   ofGuys: {
     'en-US': 'Guys',
     'ru-RU': 'Парней',
@@ -59,9 +63,65 @@ export const OptionUiText = {
     'ru-RU': 'Я девушка',
   },
   
+  
   yearsOld: {
     'en-US': 'years',
     'ru-RU': 'лет',
-  }
+  },
+  
+  
+  primarySchoolEducation: {
+    'en-US': 'Primary school education',
+    'ru-RU': 'Начальное образование',
+  },
+  secondarySchoolEducation: {
+    'en-US': 'Secondary School education',
+    'ru-RU': 'Среднее образование',
+  },
+  specializedSecondarySchoolEducation: {
+    'en-US': 'Specialized secondary school education',
+    'ru-RU': 'Среднее специальное образование',
+  },
+  incompleteHigherEducation: {
+    'en-US': 'Incomplete higher education',
+    'ru-RU': 'Неоконченное высшее образование',
+  },
+  higherEducation: {
+    'en-US': 'Higher education',
+    'ru-RU': 'Высшее образование',
+  },
+  
+  
+  iWorkForHire: {
+    'en-US': 'I work for hire',
+    'ru-RU': 'Работаю в найме',
+  },
+  workForMyself: {
+    'en-US': 'Work for myself',
+    'ru-RU': 'Работаю на себя',
+  },
+  temporaryUnemployed: {
+    'en-US': 'Temporary unemployed',
+    'ru-RU': 'Временно не работаю',
+  },
+  
+  
+  honestyAndOpenness: {
+    'en-US': 'Honesty and openness',
+    'ru-RU': 'Честность и открытость',
+  },
+  respectAndAttention: {
+    'en-US': 'Respect and attention',
+    'ru-RU': 'Уважение и внимание',
+  },
+  intelligenceAndEducation: {
+    'en-US': 'Intelligence and education',
+    'ru-RU': 'Интеллект и образование',
+  },
+  compatibilityOfInterests: {
+    'en-US': 'Compatibility of interests',
+    'ru-RU': 'Совместимость интересов',
+  },
+  
   
 } satisfies UiValues

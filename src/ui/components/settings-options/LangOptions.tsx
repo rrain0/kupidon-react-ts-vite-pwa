@@ -8,7 +8,7 @@ import { Lang } from '@util/lang/Lang.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
-import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
+import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import BrowserIc = SvgIcons.BrowserIc
 import { SettingsOptions } from './SettingsOptions'

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { PartnerGender } from 'src/api/model/PartnerGender.ts'
 import { Option } from 'src/ui/model/Option.ts'
-import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio.tsx'
+import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio01.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui/ui-values/OptionUiText.ts'
@@ -28,36 +28,42 @@ React.memo(
   const titleText = useUiValues(TitleUiText)
   const optionText = useUiValues(OptionUiText)
   
+  const text = useMemo(()=>({
+    ofGuys: optionText.ofGuys,
+    ofGirls: optionText.ofGirls,
+    ofGuysAndGirls: optionText.ofGuysAndGirls,
+    notSelected: optionText.notSelected,
+  }), [titleText, optionText])
   
   
   const preferredPeopleOptions = useMemo(
     ()=>[
       {
         value: 'MALE',
-        text: optionText.ofGuys,
+        text: text.ofGuys,
       },{
         value: 'FEMALE',
-        text: optionText.ofGirls,
+        text: text.ofGirls,
       },{
         value: 'MALE_FEMALE',
-        text: optionText.ofGuysAndGirls,
+        text: text.ofGuysAndGirls,
       },{
         value: '',
-        text: optionText.notSelected,
+        text: text.notSelected,
       },
     ] satisfies PartnerGenderUiOptions,
-    [optionText]
+    [text]
   )
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
-  
+  const value = preferredPeopleOptions.find(opt => opt.value === props.value)?.text ?? ''
   
   return <>
     <OptionItem
       icon={<Search2GradIc />}
       title={titleText.imLookingFor}
-      value={preferredPeopleOptions.find(opt => opt.value === props.value)?.text.toLowerCase() ?? ''}
+      value={value}
       onClick={open}
     />
     

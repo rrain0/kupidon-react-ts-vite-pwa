@@ -81,6 +81,22 @@ export const TitleUiText = {
     'en-US': 'Name',
     'ru-RU': 'Имя',
   },
+  height: {
+    'en-US': 'Height',
+    'ru-RU': 'Рост',
+  },
+  education: {
+    'en-US': 'Education',
+    'ru-RU': 'Образование',
+  },
+  job: {
+    'en-US': 'Job',
+    'ru-RU': 'Работа',
+  },
+  partnerCommunicationCharacteristics: {
+    'en-US': 'What is important to you in communicating with your partner?',
+    'ru-RU': 'Что вам важно в общении с партнёром?',
+  },
   partnerAge: {
     'en-US': 'Partner age',
     'ru-RU': 'Возраст партнёра',

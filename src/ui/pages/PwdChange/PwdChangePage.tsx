@@ -202,13 +202,13 @@ React.memo(
         
         
         
-          <Button css={ButtonStyle.bigRectMain}
+          <Button css={ButtonStyle.filledRectBigMain}
             type="submit"
           >
             {actionText.changePwd}
           </Button>
         
-          <Button css={ButtonStyle.bigRectAccent}
+          <Button css={ButtonStyle.filledRectBigMain}
             disabled
           >
             {titleText.pwdRecovery}

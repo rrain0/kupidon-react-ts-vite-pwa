@@ -23,6 +23,8 @@ import Mapper = TypeUtils.Mapper
 
 
 
+// todo remove 'render' prop
+
 
 export type ValidationWrapRenderProps<V> = {
   value: V
@@ -48,7 +50,8 @@ export type ValidationWrapProps
   failures: Failures<Vs>
   setFailures: SetterOrUpdater<Failures<Vs>>
   setValues: SetterOrUpdater<Vs>
-  render: (props: ValidationWrapRenderProps<Vs[F]>)=>React.ReactNode
+  render?: (props: ValidationWrapRenderProps<Vs[F]>)=>React.ReactNode
+  children?: (props: ValidationWrapRenderProps<Vs[F]>)=>React.ReactNode
 }
 
 
@@ -63,6 +66,7 @@ const ValidationWrap =
     setFailures,
     setValues,
     render,
+    children,
   } = props
   
   
@@ -167,7 +171,7 @@ const ValidationWrap =
   )
   
   
-  return render({
+  if (children) return children({
     value,
     highlight: trueOrUndef(highlight),
     setValue,
@@ -177,6 +181,17 @@ const ValidationWrap =
     inputProps,
     radioInputProps,
   })
+  if (render) return render({
+    value,
+    highlight: trueOrUndef(highlight),
+    setValue,
+    onBlur,
+    getChecked,
+    
+    inputProps,
+    radioInputProps,
+  })
+  return undefined
 }
 export default React.memo(ValidationWrap) as typeof ValidationWrap
 

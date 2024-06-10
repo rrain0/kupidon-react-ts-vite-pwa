@@ -6,12 +6,13 @@ import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState
 import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import { InputProps } from 'src/ui/elements/inputs/Input/Input.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
-import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
+import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import { Option } from 'src/ui/model/Option.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import Callback = TypeUtils.Callback
 import col = EmotionCommon.col
+import Callback1 = TypeUtils.Callback1
 
 
 
@@ -21,14 +22,15 @@ export type ModalRadioProps<V extends string> = {
   close: Callback
   title: string
   options: Option<V>[]
-  radioInputProps: (value: V)=>InputProps
+  value: V
+  onSelect: Callback1<V>
 }
 
 
 
 const ModalRadio =
-<V extends string>(props: ModalRadioProps<V>)=>{
-  const { isOpen, close, title, options, radioInputProps } = props
+<V extends string>(props: ModalRadioProps<V>) => {
+  const { isOpen, close, title, options, value, onSelect } = props
   
   return <UseBottomSheetState isOpen={isOpen} close={close}>
     {sheetProps =>
@@ -41,7 +43,8 @@ const ModalRadio =
             {options.map(opt => <RadioInput
               css={RadioInputStyle.radio}
               childrenPosition="start"
-              {...radioInputProps(opt.value)}
+              checked={opt.value === value}
+              onChange={() => onSelect(opt.value)}
               ref={undefined}
               value={opt.value}
               key={opt.value}

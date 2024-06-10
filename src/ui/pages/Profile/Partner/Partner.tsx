@@ -1,25 +1,19 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import React from 'react'
-import ItemContainer from 'src/ui/elements/basic-elements/ItemContainer.tsx'
-import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
-import ItemTitleContainer from 'src/ui/elements/basic-elements/ItemTitleContainer.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/elements/cards/Card3.tsx'
 import PartnerAgeOption from 'src/ui/pages/Profile/Partner/PartnerAgeOption.tsx'
+import PartnerAlcoholOption from 'src/ui/pages/Profile/Partner/PartnerAlcoholOption.tsx'
+import PartnerCharacterAndPersonalQualitiesOption
+  from 'src/ui/pages/Profile/Partner/PartnerCharacterAndPersonalQualitiesOption.tsx'
 import PartnerHeightOption from 'src/ui/pages/Profile/Partner/PartnerHeightOption.tsx'
-import ProfileAboutMeOption from 'src/ui/pages/Profile/Profile/ProfileAboutMeOption.tsx'
-import ProfileBirthDateOption from 'src/ui/pages/Profile/Profile/ProfileBirthDateOption.tsx'
-import ProfileGenderOption from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
-import ProfileImLookingForOption
-  from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
-import ProfileNameOption from 'src/ui/pages/Profile/Profile/ProfileNameOption.tsx'
+import PartnerPetsOption from 'src/ui/pages/Profile/Partner/PartnerPetsOption.tsx'
+import PartnerSmokeOption from 'src/ui/pages/Profile/Partner/PartnerSmokeOption.tsx'
 import ProfilePageTabHeader from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
-import ProfilePhotos from 'src/ui/pages/Profile/Profile/ProfilePhotos.tsx'
+import ProfileTabPicture from 'src/ui/pages/Profile/ProfileTabPicture.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { useFormFailures } from '@util/form-validation/hooks/useFormFailures.ts'
 import { FormProps } from '@util/form-validation/hooks/useFormValuesProps.ts'
@@ -27,9 +21,6 @@ import ValidationWrap from '@util/form-validation/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
-import Card2 from 'src/ui/elements/cards/Card2.tsx'
-import Textarea from 'src/ui/elements/Textarea/Textarea.tsx'
-import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
@@ -71,13 +62,7 @@ React.memo(
       
       <div css={col}>
         
-        <div css={css`
-          width: 100%;
-          height: 200px;
-          border-radius: 20px;
-          background-position: center;
-          background-size: cover;
-        `}
+        <ProfileTabPicture
           style={{ backgroundImage: `url(${boyGirlCatShadow})` }}
         />
         
@@ -94,6 +79,19 @@ React.memo(
             fieldName="partnerHeight"
             render={validProps => <PartnerHeightOption {...validProps}/>}
           />
+          
+          
+          <PartnerPetsOption />
+          
+          
+          <PartnerAlcoholOption />
+          
+          
+          <PartnerSmokeOption />
+          
+          
+          <PartnerCharacterAndPersonalQualitiesOption />
+          
           
         </Card3>
       

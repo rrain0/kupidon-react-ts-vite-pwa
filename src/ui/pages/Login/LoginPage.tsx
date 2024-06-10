@@ -175,7 +175,7 @@ React.memo(
           
           
           <Button
-            css={ButtonStyle.bigRectMain}
+            css={ButtonStyle.filledRectBigMain}
             type="submit"
           >
             {actionText.login}
@@ -183,7 +183,7 @@ React.memo(
           
           
           <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
-            <Button css={ButtonStyle.bigRectAccent}>
+            <Button css={ButtonStyle.filledRectBigNormal}>
               {actionText.signup}
             </Button>
           </Link>

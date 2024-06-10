@@ -27,7 +27,7 @@ import Button from 'src/ui/elements/buttons/Button'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput'
-import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup'
+import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc

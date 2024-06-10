@@ -30,15 +30,18 @@ import rowWrap = EmotionCommon.rowWrap
 
 const heightMinMax: NumRange = [129, 231]
 
+const tilesHeightValues: NumRangeNullable[] = [
+  [null, null], [null, 160], [160, 170], [170, 180], [180, 190], [190, null]
+]
 
-const overlayName = 'height'
+const overlayName = 'partnerHeight'
 
 
 const PartnerHeightOption =
 React.memo(
 (props: ValidationWrapRenderProps<UserValues['partnerHeight']>) => {
-  const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
+  const optionText = useUiValues(OptionUiText)
   
   const text = {
     any: optionText.any.toLowerCase(),
@@ -65,8 +68,8 @@ React.memo(
   }, []) */
   
   
-  // props.value
-  const [heightRange, setHeightRange] = useState<NumRangeNullable>([null, null])
+  const [heightRange, setHeightRange] = [props.value, props.setValue]
+  //const [heightRange, setHeightRange] = useState<NumRangeNullable>([null, null])
   const [widgetRange, setWidgetRange] = useState<NumRange>(
     () => mapHeightRangeToWidgetRange(heightRange)
   )
@@ -92,6 +95,7 @@ React.memo(
     if (from===to) return `${from} ${text.cm}`
     return `${from} - ${to} ${text.cm}`
   }
+  
   
   
   
@@ -121,36 +125,12 @@ React.memo(
       minMax={heightMinMax}
     >
       <div css={tilesGrid}>
-        <Button css={ArrayUtils.eq(heightRange, [null, null]) ? activeBtn : inactiveBtn}
-          onClick={()=>setHeightRange([null, null])}
+        {tilesHeightValues.map(it=><Button
+          css={ArrayUtils.eq(heightRange, it) ? activeBtn : inactiveBtn}
+          onClick={()=>setHeightRange(it)}
         >
-          {textValue([null, null])}
-        </Button>
-        <Button css={ArrayUtils.eq(heightRange, [null, 160]) ? activeBtn : inactiveBtn}
-          onClick={()=>setHeightRange([null, 160])}
-        >
-          {textValue([null, 160])}
-        </Button>
-        <Button css={ArrayUtils.eq(heightRange, [160, 170]) ? activeBtn : inactiveBtn}
-          onClick={()=>setHeightRange([160, 170])}
-        >
-          {textValue([160, 170])}
-        </Button>
-        <Button css={ArrayUtils.eq(heightRange, [170, 180]) ? activeBtn : inactiveBtn}
-          onClick={()=>setHeightRange([170, 180])}
-        >
-          {textValue([170, 180])}
-        </Button>
-        <Button css={ArrayUtils.eq(heightRange, [180, 190]) ? activeBtn : inactiveBtn}
-          onClick={()=>setHeightRange([180, 190])}
-        >
-          {textValue([180, 190])}
-        </Button>
-        <Button css={ArrayUtils.eq(heightRange, [190, null]) ? activeBtn : inactiveBtn}
-          onClick={()=>setHeightRange([190, null])}
-        >
-          {textValue([190, null])}
-        </Button>
+          {textValue(it)}
+        </Button>)}
       </div>
     </ModalRangePicker>
     
@@ -163,6 +143,7 @@ export default PartnerHeightOption
 
 const tilesGrid = (t: AppTheme.Theme) => css`
   ${rowWrap};
+  //justify-content: space-around;
   gap: 8px 30px;
 `
 

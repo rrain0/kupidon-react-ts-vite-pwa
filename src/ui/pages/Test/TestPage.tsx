@@ -94,22 +94,22 @@ React.memo(
         <div>Test Page</div>
         
         <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.bigRectMain}>Scrollbar test</Button>
+          <Button css={ButtonStyle.filledRectBigMain}>Scrollbar test</Button>
         </Link>
         <Link to={RootRoute.test.bottomSheet[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.bigRectMain}>Bottom Sheet test</Button>
+          <Button css={ButtonStyle.filledRectBigMain}>Bottom Sheet test</Button>
         </Link>
         <Link to={RootRoute.test.resizeObserver[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.bigRectMain}>Resize Observer test</Button>
+          <Button css={ButtonStyle.filledRectBigMain}>Resize Observer test</Button>
         </Link>
         <Link to={RootRoute.test.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.bigRectMain}>Move to another view</Button>
+          <Button css={ButtonStyle.filledRectBigMain}>Move to another view</Button>
         </Link>
         <Link to={RootRoute.test.pointer[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.bigRectMain}>Pointer test</Button>
+          <Button css={ButtonStyle.filledRectBigMain}>Pointer test</Button>
         </Link>
         <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.bigRectMain}>Tabs test</Button>
+          <Button css={ButtonStyle.filledRectBigMain}>Tabs test</Button>
         </Link>
         
         

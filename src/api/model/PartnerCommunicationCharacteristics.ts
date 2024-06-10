@@ -1,0 +1,8 @@
+
+
+
+export type PartnerCommunicationCharacteristics =
+  | 'HONESTY_AND_OPENNESS'
+  | 'RESPECT_AND_ATTENTION'
+  | 'INTELLIGENCE_AND_EDUCATION'
+  | 'COMPATIBILITY_OF_INTERESTS'

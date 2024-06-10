@@ -2,10 +2,10 @@ import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
 import {
   RadioInputGroupStyle,
-} from 'src/ui/elements/inputs/RadioInput/RadioInputGroupStyle.ts'
+} from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
 import PartialUndef = TypeUtils.PartialUndef
@@ -48,14 +48,16 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
   }
   
   
-  return <article /* RadioGroup */ css={radioGroupStyle}
+  return <article /* RadioGroup */
+    css={radioGroupStyle}
     {...radioGroupProps}
     ref={elemRef}
   >
     
     { children }
     
-    <div /* Border */ css={borderStyle}
+    <div /* Border */
+      css={borderStyle}
       {...borderProps}
     />
     

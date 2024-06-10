@@ -13,10 +13,14 @@ import BowArrowGradSvg from '@ic/gradient/bow-arrow-grad.svg?react'
 import CardsHeartGradSvg from '@ic/gradient/cards-heart-grad.svg?react'
 import ChatRoundGradSvg from '@ic/gradient/chat-round-grad.svg?react'
 
+import EducationGradSvg from '@ic/gradient/education-grad.svg?react'
+
 import GenderGradSvg from '@ic/gradient/gender-grad.svg?react'
 import GiftBoxGradSvg from '@ic/gradient/gift-box-grad.svg?react'
 
 import HourglassGradSvg from '@ic/gradient/hourglass-grad.svg?react'
+
+import WorkSuitcaseGradSvg from '@ic/gradient/work-suitcase-grad.svg?react'
 
 import NameCardGradSvg from '@ic/gradient/name-card-grad.svg?react'
 
@@ -110,10 +114,14 @@ export namespace SvgGradIcons {
   export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
   export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
   
+  export const EducationGradIc = generateSimpleSvgIcon(EducationGradSvg)
+  
   export const GenderGradIc = generateSimpleSvgIcon(GenderGradSvg)
   export const GiftBoxGradIc = generateSimpleSvgIcon(GiftBoxGradSvg)
   
   export const HourglassGradIc = generateSimpleSvgIcon(HourglassGradSvg)
+  
+  export const WorkSuitcaseGradIc = generateSimpleSvgIcon(WorkSuitcaseGradSvg)
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   

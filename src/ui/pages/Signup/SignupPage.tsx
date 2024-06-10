@@ -13,7 +13,6 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
 } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
@@ -34,8 +33,8 @@ import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import PwdInput from 'src/ui/elements/inputs/PwdInput/PwdInput.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
-import RadioInputGroup from 'src/ui/elements/inputs/RadioInput/RadioInputGroup.tsx'
-import { RadioInputGroupStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputGroupStyle.ts'
+import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
+import { RadioInputGroupStyle } from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import { SignupPageValidation } from 'src/ui/pages/Signup/validation.ts'
 import FormValues = SignupPageValidation.FormValues
@@ -275,7 +274,7 @@ React.memo(
           
           
           <Button
-            css={ButtonStyle.bigRectMain}
+            css={ButtonStyle.filledRectBigMain}
             type='submit'
           >
             {actionText.signup}

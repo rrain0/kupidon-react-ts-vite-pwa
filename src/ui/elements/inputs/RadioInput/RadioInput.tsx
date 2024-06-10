@@ -24,7 +24,7 @@ export type RadioInputCustomProps = PartialUndef<{
   startViews: React.ReactNode
   endViews: React.ReactNode
   children: React.ReactNode
-  childrenPosition: 'start'|'end'
+  childrenPosition: 'start' | 'end'
   rippleMode: RippleProps['mode']
 }>
 export type RadioInputForwardRefProps = React.JSX.IntrinsicElements['input']
@@ -37,15 +37,14 @@ const RadioInput =
 React.memo(
 React.forwardRef<RadioInputRefElement, RadioInputProps>
 ((props, forwardedRef)=> {
-  let {
+  const {
     hasError,
-    startViews, endViews, children, childrenPosition,
-    rippleMode,
+    startViews, endViews,
+    children, childrenPosition = 'end',
+    rippleMode = 'cursor',
     className, style,
     ...restProps
   } = props
-  childrenPosition ??= 'end'
-  rippleMode ??= 'cursor'
   
   
   const elemRef = useRef<RadioInputRefElement>(null)
@@ -60,14 +59,12 @@ React.forwardRef<RadioInputRefElement, RadioInputProps>
     className: RadioInputStyle.El.inputClassName,
     type: 'radio',
     [RadioInputStyle.Attr.errorName]: trueOrUndef(hasError),
-    'aria-checked': restProps.checked,
-    role: 'radio',
     ...restProps,
   }
-  const activeIcWrapProps = {
+  const activeWrapProps = {
     className: RadioInputStyle.El.iconWrapClassName
   }
-  const inactiveIcWrapProps = {
+  const inactiveWrapProps = {
     className: RadioInputStyle.El.iconWrapClassName
   }
   const borderProps = {
@@ -75,11 +72,13 @@ React.forwardRef<RadioInputRefElement, RadioInputProps>
   }
   
   
-  return <label /* Frame */ css={frameStyle}
+  return <label /* Frame */
+    css={frameStyle}
     {...frameProps}
   >
     
-    <input /* Input */ css={inputStyle}
+    <input /* Input */
+      css={inputStyle}
       {...inputProps}
       ref={elemRef}
     />
@@ -87,13 +86,15 @@ React.forwardRef<RadioInputRefElement, RadioInputProps>
     { startViews }
     { childrenPosition==='start' && children }
     
-    <div /* ActiveIcWrap */ css={activeIcWrapStyle}
-      {...activeIcWrapProps}
+    <div /* ActiveWrap */
+      css={activeIcWrapStyle}
+      {...activeWrapProps}
     >
       <RadioActiveIc/>
     </div>
-    <div /* InactiveIcWrap */ css={inactiveIcWrapStyle}
-      {...inactiveIcWrapProps}
+    <div /* InactiveWrap */
+      css={inactiveWrapStyle}
+      {...inactiveWrapProps}
     >
       <RadioInactiveIc/>
     </div>
@@ -101,7 +102,8 @@ React.forwardRef<RadioInputRefElement, RadioInputProps>
     { childrenPosition==='end' && children }
     { endViews }
     
-    <div /* Border */ css={borderStyle}
+    <div /* Border */
+      css={borderStyle}
       {...borderProps}
     >
       <Ripple
@@ -145,7 +147,7 @@ const activeIcWrapStyle = css`
 `
 
 
-const inactiveIcWrapStyle = css`
+const inactiveWrapStyle = css`
   display: flex;
   input:checked ~ & { display: none }
   ${SvgIconsStyle.El.icon.sel()} {

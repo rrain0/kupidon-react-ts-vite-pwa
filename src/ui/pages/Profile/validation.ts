@@ -1,9 +1,15 @@
 import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { PartnerCommunicationCharacteristics } from 'src/api/model/PartnerCommunicationCharacteristics.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
+import { EducationOptionValues } from 'src/ui/pages/Profile/Profile/ProfileEducationOption.tsx'
 import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
 import {
   PartnerGenderOptionValues
 } from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
+import { JobOptionValues } from 'src/ui/pages/Profile/Profile/ProfileJobOption.tsx'
+import {
+  PartnerCommunicationCharacteristicsOptionValues
+} from 'src/ui/pages/Profile/Profile/ProfilePartnerCommunicationCharacteristicsOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
@@ -43,15 +49,21 @@ export namespace ProfilePageValidation {
     | 'about-me-not-changed'
     | 'about-me-is-too-long'
     
+    | 'height-not-changed'
+    
+    | 'education-not-changed'
+    
+    | 'job-not-changed'
+    
     | 'partner-gender-not-changed'
+    
+    | 'partner-communication-characteristics-not-changed'
     
     | 'photos-not-changed'
     
     | 'partner-age-not-changed'
-    // todo age validation
     
     | 'partner-height-not-changed'
-    // todo height validation
     
     | 'NO_USER'
     | 'connection-error'
@@ -76,7 +88,16 @@ export namespace ProfilePageValidation {
     'about-me-not-changed': { 'en-US': 'about-me-not-changed' },
     'about-me-is-too-long': ErrorUiText.descriptionMaxLenIs2000,
     
+    'height-not-changed': { 'en-US': 'height-not-changed' },
+    
+    'education-not-changed': { 'en-US': 'education-not-changed' },
+    
+    'job-not-changed': { 'en-US': 'job-not-changed' },
+    
     'partner-gender-not-changed': { 'en-US': 'partner-gender-not-changed' },
+    
+    'partner-communication-characteristics-not-changed':
+      { 'en-US': 'partner-communication-characteristics-not-changed' },
     
     'photos-not-changed': { 'en-US': 'photos-not-changed' },
     
@@ -96,7 +117,11 @@ export namespace ProfilePageValidation {
     birthDate: string
     gender: GenderOptionValues
     aboutMe: string
+    height: string
+    education: EducationOptionValues
+    job: JobOptionValues
     partnerGender: PartnerGenderOptionValues
+    partnerCommunicationCharacteristics: PartnerCommunicationCharacteristicsOptionValues[]
     photos: ProfilePhoto[]
     
     partnerAge: NumRangeEndNullable
@@ -122,7 +147,11 @@ export namespace ProfilePageValidation {
     birthDate: '',
     gender: '',
     aboutMe: '',
+    height: '',
+    education: '',
+    job: '',
     partnerGender: '',
+    partnerCommunicationCharacteristics: [],
     photos: ArrayUtils.ofIndices(6).map(i=>({
       ...DefaultProfilePhoto,
       type: 'remote',
@@ -284,6 +313,45 @@ export namespace ProfilePageValidation {
     
     
     
+    [['height','initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['height'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (v===ivs.height) return new PartialFailureData({
+        code: 'height-not-changed' satisfies FailureCode,
+        msg: 'Field "Height" is not changed',
+        type: 'initial',
+        errorFields: ['height'],
+      })
+    }],
+    
+    
+    
+    [['education', 'initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['education'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (v===ivs.education) return new PartialFailureData({
+        code: 'education-not-changed' satisfies FailureCode,
+        msg: 'Field "Education" is not changed',
+        type: 'initial',
+        errorFields: ['education'],
+      })
+    }],
+    
+    
+    
+    [['job', 'initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['job'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (v===ivs.job) return new PartialFailureData({
+        code: 'job-not-changed' satisfies FailureCode,
+        msg: 'Field "Job" is not changed',
+        type: 'initial',
+        errorFields: ['job'],
+      })
+    }],
+    
+    
+    
     [['partnerGender','initialValues'], (values)=>{
       const [v,ivs] = values as [FormValues['partnerGender'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
@@ -292,6 +360,19 @@ export namespace ProfilePageValidation {
         msg: 'Field "Partner gender" is not changed',
         type: 'initial',
         errorFields: ['partnerGender'],
+      })
+    }],
+    
+    
+    
+    [['partnerCommunicationCharacteristics','initialValues'], (values)=>{
+      const [v,ivs] = values as [FormValues['partnerCommunicationCharacteristics'],FormValues['initialValues']]
+      //console.log('v:',v,'ivs:',ivs)
+      if (ArrayUtils.eqAsSet(v, ivs.partnerCommunicationCharacteristics)) return new PartialFailureData({
+        code: 'partner-communication-characteristics-not-changed' satisfies FailureCode,
+        msg: 'Field "Partner communication characteristics" is not changed',
+        type: 'initial',
+        errorFields: ['partnerCommunicationCharacteristics'],
       })
     }],
     

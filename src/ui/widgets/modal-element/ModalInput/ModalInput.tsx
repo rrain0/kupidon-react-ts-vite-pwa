@@ -41,21 +41,25 @@ React.forwardRef<ModalInputRefElement, ModalInputProps>(
   
   
   return isOpen && <ModalPortal>
-    <UserActionsConsumer><Modal css={ModalElement.modalStyle} onClick={onClose}>
-      <UserActionsConsumer><Card2 css={ModalElement.card2Style}>
-        <ItemLabel>{title}</ItemLabel>
-        <Input css={InputStyle.inputSmall}
-          {...restProps}
-          ref={forwardedRef}
-        />
-        <ModalElement.DialogButtons>
-          <Button css={ButtonStyle.roundedTransparent}
-            onClick={onClose}
-            children={actionText.ok.toLowerCase()}
-          />
-        </ModalElement.DialogButtons>
-      </Card2></UserActionsConsumer>
-    </Modal></UserActionsConsumer>
+    <UserActionsConsumer>
+      <Modal css={ModalElement.modalStyle} onClick={onClose}>
+        <UserActionsConsumer>
+          <Card2 css={ModalElement.card2Style}>
+            <ItemLabel>{title}</ItemLabel>
+            <Input css={InputStyle.inputSmall}
+              {...restProps}
+              ref={forwardedRef}
+            />
+            <ModalElement.DialogButtons>
+              <Button css={ButtonStyle.roundedTransparent}
+                onClick={onClose}
+                children={actionText.ok.toLowerCase()}
+              />
+            </ModalElement.DialogButtons>
+          </Card2>
+        </UserActionsConsumer>
+      </Modal>
+    </UserActionsConsumer>
   </ModalPortal>
 }))
 export default ModalInput

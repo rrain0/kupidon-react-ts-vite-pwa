@@ -5,6 +5,7 @@ import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import BottomSheetBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
+import Date from 'src/ui/pages/Profile/Date/Date.tsx'
 import Partner from 'src/ui/pages/Profile/Partner/Partner.tsx'
 import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
@@ -426,11 +427,14 @@ React.memo(
                             isLoading={isLoading}
                           />,
                         3:
-                          <Pages.SafeInsets>
-                            <Pages.ContentForm>
-                              <ProfilePageTabHeader thisTabIdx={3}/>
-                            </Pages.ContentForm>
-                          </Pages.SafeInsets>
+                          <Date
+                            validationProps={validationProps}
+                            onFormSubmitCallback={onFormSubmitCallback}
+                            submit={submit}
+                            canSubmit={canSubmit}
+                            formProps={formProps}
+                            isLoading={isLoading}
+                          />,
                       }[tabIdx]}
                     </ProfilePageTabHeaderContext.Provider>
                     

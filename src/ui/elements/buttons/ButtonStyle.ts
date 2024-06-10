@@ -68,6 +68,168 @@ export namespace ButtonStyle {
   
   
   
+  
+  // type: filled, shape: rect, size: big
+  const filledRectBig = css`
+    ${common};
+    ${El.btn.thiz()} {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 15px;
+      padding: 8px 6px;
+      ${Txt.large2};
+    }
+    ${El.border.thiz()}{
+      border: 1px solid;
+    }
+  `
+  // type: filled, shape: rect, size: big, color: main
+  export const filledRectBigMain = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    
+    // normal
+    ${El.btn.thiz()} {
+      background: ${t.buttonMain.bgc[0]};
+      ${El.btn.props.color.set(t.buttonMain.content[0])}
+    }
+    ${El.border.thiz()} {
+      border: none;
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.content[0])}
+    }
+    
+    // hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonMain.bgcFocus[0]};
+    }}
+    
+    // active
+    ${El.btn.thiz('active')} { }
+    
+    // focus
+    ${El.btn.thiz('focus')} { }
+    
+    // focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonMain.bgcFocus[0]};
+    }
+    
+    // disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      color: ${t.elementDisabled.content[0]};
+      ${Prop.color.name}: ${t.elementDisabled.content[0]};
+    }
+    
+    // error
+    ${El.border.thiz('error')} { }
+  `
+  // type: filled, shape: rect, size: big, color: accent
+  export const filledRectBigAccent = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    
+    // normal
+    ${El.btn.thiz()} {
+      background: ${t.buttonAccent.bgc[0]};
+      ${El.btn.props.color.set(t.buttonAccent.content[0])}
+    }
+    ${El.border.thiz()} {
+      border: none;
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.content[0])}
+    }
+    
+    // hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonAccent.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+    }}
+    
+    // focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonAccent.bgcFocus[0]};
+      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+    }
+    
+    // disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
+  // type: filled, shape: rect, size: big, color: normal
+  export const filledRectBigNormal = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    
+    // normal
+    ${El.btn.thiz()} {
+      background: ${t.buttonNormal.bgc[0]};
+      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+    }
+    ${El.border.thiz()} {
+      border: none;
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.content[0])}
+    }
+    
+    // hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonNormal.bgcFocus[0]};
+    }}
+    
+    // focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonNormal.bgcFocus[0]};
+    }
+    
+    // disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
+  // type: text, shape: rect, size: big
+  export const textRectBig = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    
+    // normal
+    ${El.btn.thiz()} {
+      background: transparent;
+      color: ${t.page.content2[0]};
+      ${Prop.color.name}: ${t.page.content2[0]};
+    }
+    ${El.border.thiz()} {
+      border: none;
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    }
+    
+    // hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    }}
+    
+    // focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    }
+    
+    // disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      color: ${t.elementDisabled.content[0]};
+      ${Prop.color.name}: ${t.elementDisabled.content[0]};
+    }
+  `
+  
+  
+  
+  
+  
   // type: filled, shape: rounded, size: normal
   const filledRoundedNormal = css`
     ${common};
@@ -81,6 +243,9 @@ export namespace ButtonStyle {
       ${Txt.small1};
     }
   `
+  
+  
+  
   
   // type: filled, shape: rounded, size: normal, color: normal
   export const filledRoundedNormalNormal = (t: AppTheme.Theme) => css`
@@ -529,21 +694,7 @@ export namespace ButtonStyle {
   
   
   
-  export const bigRectMain = (t:Theme) => css`
-    ${common};
-    ${Shape.bigRect};
-    ${Color.main(t)};
-  `
-  export const bigRectAccent = (t:Theme) => css`
-    ${common};
-    ${Shape.bigRect};
-    ${Color.accent(t)};
-  `
-  export const bigRectTransparent = (t:Theme) => css`
-    ${common};
-    ${Shape.bigRect};
-    ${Color.transparent(t)};
-  `
+  
   export const bigRectDanger = (t:Theme) => css`
     ${common};
     ${Shape.bigRect};
@@ -605,7 +756,6 @@ export namespace ButtonStyle {
   `
   
   
-  // todo 'accentOff'
   export type ButtonStyleProps = PartialUndef<{
     type: 'filled' | 'outlined' | 'text'
     shape: 'rectBig' | 'rectSmall' | 'rounded' | 'roundedSmall'

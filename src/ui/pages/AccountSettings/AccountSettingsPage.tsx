@@ -306,12 +306,12 @@ React.memo(
           
           
           <Link to={RootRoute.settings.pwdChange[full]()}>
-            <Button css={ButtonStyle.bigRectAccent}>
+            <Button css={ButtonStyle.filledRectBigNormal}>
               {titleText.pwdChange}
             </Button>
           </Link>
           
-          <Button css={ButtonStyle.bigRectAccent}
+          <Button css={ButtonStyle.filledRectBigNormal}
             onClick={resetAuth}
           >
             {actionText.logOutFromAccount}
