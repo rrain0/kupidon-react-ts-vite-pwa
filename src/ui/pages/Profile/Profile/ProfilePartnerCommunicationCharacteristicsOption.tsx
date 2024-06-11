@@ -64,7 +64,7 @@ React.memo(
   )
   
   
-  const onCheck = useCallback((value: PartnerCommunicationCharacteristicsOptionValues) => {
+  const onChange = useCallback((value: PartnerCommunicationCharacteristicsOptionValues) => {
     const i = props.value.findIndex(v => v === value)
     if (i === -1) props.setValue([...props.value, value])
     else props.setValue(props.value.toSpliced(i, 1))
@@ -94,7 +94,7 @@ React.memo(
       title={text.partnerCommunicationCharacteristics}
       options={options}
       checked={props.value}
-      onCheck={onCheck}
+      onChange={onChange}
     />
     
   </>

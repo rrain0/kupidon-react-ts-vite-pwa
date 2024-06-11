@@ -5,16 +5,18 @@
 
 export namespace TypeUtils {
   
-  export type empty = null|undefined
-  export type anyval = {}|null|undefined
+  export type empty = null | undefined
+  export type anyval = {} |null | undefined
   export type falsy = false | undefined | null | '' | 0
   export type emptyObj = Record<keyof any, never> // need to fix
+  export type HtmlBool = true | undefined
   
   export const noop = ()=>{}
-  export const trueOrUndef = (value: any): true|undefined => value ? true : undefined
+  
+  export const trueOrUndef = (value: any): HtmlBool => value ? true : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
-  export type Exists<T> = Exclude<T, null|undefined>
+  export type Exists<T> = Exclude<T, empty>
   export type PartialUndef<O extends object> =
     { [Prop in keyof O]+?: O[Prop] | undefined }
   export type WriteablePartial<O extends object> =
@@ -22,25 +24,13 @@ export namespace TypeUtils {
   
   
   
-  /*
-  export function exists<T extends {}>(value: T|empty): value is T {
-    return value!==null && value!==undefined
-  }
-  export function notExists<T>(value: T|empty): value is empty {
-    return value===null || value===undefined
-  }
-  export const isstring = <T>(value: T|string): value is string => typeof value === 'string'
-  export const isnumber = <T>(value: T|number): value is number => typeof value === 'number'
-  export const isArray = <T,E>(obj: T | E[]): obj is E[] => obj instanceof Array
-  export const isObject = <O>(value: O|object): value is object =>
-    typeof value === 'object' && value!==null
-   */
+  
   
   export function exists<T, Ex extends {}>(value: T | Ex): value is Ex {
-    return value!==null && value!==undefined
+    return value !== null && value !== undefined
   }
   export function notExists<T, NEx extends empty>(value: T | NEx): value is NEx {
-    return value===null || value===undefined
+    return value === null || value === undefined
   }
   export function isstring<T, S extends string>(value: T | S): value is S {
     return typeof value === 'string'
@@ -48,15 +38,24 @@ export namespace TypeUtils {
   export function isnumber<T, N extends number>(value: T | N): value is N {
     return typeof value === 'number'
   }
-  export function isArray<T, A extends unknown[]>(obj: T | A): obj is A {
-    return obj instanceof Array
-  }
-  export function isObject<T, O extends object>(value: T | O): value is O {
+  export function isobject<T, O extends object>(value: T | O): value is O {
     return typeof value === 'object' && value !== null
   }
-  export function isFunction<T, F extends Function>(value: T | F): value is F {
+  export function isfunction<T, F extends Function>(value: T | F): value is F {
     return typeof value === 'function'
   }
+  
+  
+  export function isObject<T, O extends object>(value: T | O): value is O {
+    return value instanceof Object
+  }
+  export function isArray<T, A extends unknown[]>(value: T | A): value is A {
+    return value instanceof Array
+  }
+  export function isFunction<T, F extends Function>(value: T | F): value is F {
+    return value instanceof Function
+  }
+  
   
   /*
   {

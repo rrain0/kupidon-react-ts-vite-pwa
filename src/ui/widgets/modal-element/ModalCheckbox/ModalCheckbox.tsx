@@ -7,7 +7,6 @@ import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheet
 import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import CheckboxInputGroup from 'src/ui/elements/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
-import { InputProps } from 'src/ui/elements/inputs/Input/Input.tsx'
 import { Option } from 'src/ui/model/Option.ts'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import Callback = TypeUtils.Callback
@@ -23,14 +22,14 @@ export type ModalCheckboxProps<V extends string> = {
   title: string
   options: Option<V>[]
   checked: V[]
-  onCheck: Callback1<V>
+  onChange: Callback1<V>
 }
 
 
 
 const ModalCheckbox =
 <V extends string>(props: ModalCheckboxProps<V>) => {
-  const { isOpen, close, title, options, checked, onCheck } = props
+  const { isOpen, close, title, options, checked, onChange } = props
   
   return <UseBottomSheetState isOpen={isOpen} close={close}>
     {sheetProps =>
@@ -44,7 +43,7 @@ const ModalCheckbox =
               css={CheckboxInputStyle.normal}
               childrenPosition="start"
               checked={checked.includes(opt.value)}
-              onChange={() => onCheck(opt.value)}
+              onChange={() => onChange(opt.value)}
               value={opt.value}
               key={opt.value}
             >

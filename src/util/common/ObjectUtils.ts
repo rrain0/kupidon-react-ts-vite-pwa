@@ -9,7 +9,7 @@ export namespace ObjectUtils {
   
   
   // can also copy class instance
-  import isObject = TypeUtils.isObject
+  import isObject = TypeUtils.isobject
   
   export function copy<T extends object>(
     orig: T,

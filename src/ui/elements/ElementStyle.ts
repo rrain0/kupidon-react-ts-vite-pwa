@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import isObject = TypeUtils.isObject
+import isObject = TypeUtils.isobject
 import isstring = TypeUtils.isstring
 import SingleOrArr = ArrayUtils.SingleOrArr
 import exists = TypeUtils.exists

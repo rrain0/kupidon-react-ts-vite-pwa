@@ -187,7 +187,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['name','initialValues'], (values)=>{
+    [['name','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['name'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.name) return new PartialFailureData({
@@ -197,7 +197,7 @@ export namespace ProfilePageValidation {
         errorFields: ['name'],
       })
     }],
-    [['name'], (values)=>{
+    [['name'], (values) => {
       const [v] = values as [FormValues['name']]
       const d = defaultValues.name
       if (v===d) return new PartialFailureData({
@@ -206,7 +206,7 @@ export namespace ProfilePageValidation {
         type: 'default',
       })
     }],
-    [['name'], (values)=>{
+    [['name'], (values) => {
       const [v] = values as [UserValues['name']]
       if (v.length>100) return new PartialFailureData({
         code: 'name-too-long' satisfies FailureCode,
@@ -217,7 +217,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['birthDate','initialValues'], (values)=>{
+    [['birthDate','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['birthDate'],FormValues['initialValues']]
       if (v===ivs.birthDate
         || DateTime.eqFrom_yyyy_MM_dd(v,ivs.birthDate)
@@ -229,7 +229,7 @@ export namespace ProfilePageValidation {
           errorFields: ['birthDate'],
         })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const d = defaultValues.birthDate
       if (v===d) return new PartialFailureData({
@@ -238,7 +238,7 @@ export namespace ProfilePageValidation {
         type: 'default',
       })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const parsed = DateTime.from_yyyy_MM_dd(v)
       if (!parsed) return new PartialFailureData({
@@ -247,7 +247,7 @@ export namespace ProfilePageValidation {
         delay,
       })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const parsed = DateTime.from_yyyy_MM_dd(v)
       const normalized = parsed?.copy().normalize()
@@ -258,7 +258,7 @@ export namespace ProfilePageValidation {
           delay,
         })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const parsed = DateTime.from_yyyy_MM_dd(v)
       if (parsed && parsed.getAge()<18)
@@ -271,7 +271,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['gender','initialValues'], (values)=>{
+    [['gender','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['gender'],FormValues['initialValues']]
       if (v===ivs.gender) return new PartialFailureData({
         code: 'gender-not-changed' satisfies FailureCode,
@@ -280,7 +280,7 @@ export namespace ProfilePageValidation {
         errorFields: ['gender'],
       })
     }],
-    [['gender'], (values)=>{
+    [['gender'], (values) => {
       const [v] = values as [UserValues['gender']]
       const d = defaultValues.gender
       if (v===d) return new PartialFailureData({
@@ -292,7 +292,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['aboutMe','initialValues'], (values)=>{
+    [['aboutMe','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['aboutMe'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.aboutMe) return new PartialFailureData({
@@ -302,7 +302,7 @@ export namespace ProfilePageValidation {
         errorFields: ['aboutMe'],
       })
     }],
-    [['aboutMe'], (values)=>{
+    [['aboutMe'], (values) => {
       const [v] = values as [FormValues['aboutMe']]
       if (v.length>2000) return new PartialFailureData({
         code: 'about-me-is-too-long' satisfies FailureCode,
@@ -313,7 +313,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['height','initialValues'], (values)=>{
+    [['height','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['height'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.height) return new PartialFailureData({
@@ -326,7 +326,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['education', 'initialValues'], (values)=>{
+    [['education', 'initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['education'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.education) return new PartialFailureData({
@@ -339,7 +339,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['job', 'initialValues'], (values)=>{
+    [['job', 'initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['job'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.job) return new PartialFailureData({
@@ -352,7 +352,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerGender','initialValues'], (values)=>{
+    [['partnerGender','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerGender'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.partnerGender) return new PartialFailureData({
@@ -365,7 +365,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerCommunicationCharacteristics','initialValues'], (values)=>{
+    [['partnerCommunicationCharacteristics','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerCommunicationCharacteristics'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (ArrayUtils.eqAsSet(v, ivs.partnerCommunicationCharacteristics)) return new PartialFailureData({
@@ -378,7 +378,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['photos','initialValues'], (values)=>{
+    [['photos','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['photos'],FormValues['initialValues']]
       if (v.every((it,i)=>photosComparator(it,ivs.photos[i])))
         return new PartialFailureData({
@@ -391,7 +391,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerAge','initialValues'], (values)=>{
+    [['partnerAge','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerAge'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (ArrayUtils.eq(v, ivs.partnerAge)) return new PartialFailureData({
@@ -404,7 +404,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerHeight','initialValues'], (values)=>{
+    [['partnerHeight','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerHeight'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (ArrayUtils.eq(v, ivs.partnerHeight)) return new PartialFailureData({
@@ -417,7 +417,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code==='NO_USER') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -428,7 +428,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code==='connection-error') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -436,7 +436,7 @@ export namespace ProfilePageValidation {
         type: 'server',
       })
     }],
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v) {
         console.log('Unknown error:',JSON.stringify(v.error))

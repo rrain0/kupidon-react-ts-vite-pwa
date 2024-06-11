@@ -1,5 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import Button from 'src/ui/elements/buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
@@ -7,50 +10,47 @@ import React, {useImperativeHandle, useRef} from "react"
 import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
-import RadioActiveIc = SvgIcons.RadioActiveIc
-import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
-import RadioInactiveIc = SvgIcons.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
 import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
 import center = EmotionCommon.center
-import CheckmarkIc = SvgIcons.CheckmarkIc
+import Checkmark2Ic = SvgIcons.Checkmark2Ic
 
 
 
 
 
-export type CheckboxInputCustomProps = PartialUndef<{
+
+
+
+type CheckboxElement = HTMLInputElement
+type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & PartialUndef<{
   hasError: boolean
   startViews: React.ReactNode
   endViews: React.ReactNode
   children: React.ReactNode
   childrenPosition: 'start' | 'end'
-  rippleMode: RippleProps['mode']
+  //rippleMode: React.ComponentProps<typeof Ripple>['mode']
 }>
-export type CheckboxInputForwardRefProps = React.JSX.IntrinsicElements['input']
-export type CheckboxInputRefElement = HTMLInputElement
-export type CheckboxInputProps = CheckboxInputCustomProps & CheckboxInputForwardRefProps
-
 
 
 const CheckboxInput =
 React.memo(
-React.forwardRef<CheckboxInputRefElement, CheckboxInputProps>
+React.forwardRef<CheckboxElement, CheckboxProps>
 ((props, forwardedRef)=> {
   const {
     hasError,
     startViews, endViews,
     children, childrenPosition = 'end',
-    rippleMode = 'cursor',
+    //rippleMode = 'cursor',
     className, style,
     ...restProps
   } = props
   
   
-  const elemRef = useRef<CheckboxInputRefElement>(null)
+  const elemRef = useRef<CheckboxElement>(null)
   useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
   
   
@@ -75,11 +75,11 @@ React.forwardRef<CheckboxInputRefElement, CheckboxInputProps>
   }
   
   
-  return <label /* Frame */
-    css={frameStyle}
+  return <Button /* Frame */
+    as='label'
+    css={t => [ButtonStyle.textRectBig(t), frameStyle]}
     {...frameProps}
   >
-    
     <input /* Input */
       css={inputStyle}
       {...inputProps}
@@ -94,7 +94,7 @@ React.forwardRef<CheckboxInputRefElement, CheckboxInputProps>
       {...checkedWrapProps}
     >
       <CheckmarkBox data-error={hasError}>
-        <CheckmarkIc color={!hasError ? 'black' : '#ff8787'} />
+        <Checkmark2Ic color={!hasError ? 'black' : '#ff8787'} />
       </CheckmarkBox>
     </div>
     <div /* UncheckedWrap */
@@ -107,19 +107,12 @@ React.forwardRef<CheckboxInputRefElement, CheckboxInputProps>
     { childrenPosition==='end' && children }
     { endViews }
     
-    <div /* Border */
-      css={borderStyle}
-      {...borderProps}
-    >
-      <Ripple
-        targetElement={elemRef}
-        mode={rippleMode}
-      />
-    </div>
-    
-  </label>
+  </Button>
 }))
 export default CheckboxInput
+
+
+
 
 
 
@@ -129,7 +122,7 @@ const frameStyle = css`
   ${row};
   justify-content: start;
   align-items: center;
-  cursor: pointer;
+  //cursor: pointer;
 `
 
 
@@ -160,19 +153,29 @@ const inactiveIcWrapStyle = css`
 
 
 const CheckmarkBox = styled.div`
-  border: 1px solid black;
+  border-radius: 4px;
   height: 100%;
   aspect-ratio: 1;
   ${center};
-  padding: 4px;
+  padding: 2px;
+  position: relative;
+  
+  ::after {
+    content: '';
+    ${abs};
+    border: 2px solid black;
+    border-radius: inherit;
+  }
 
   input:where(:active,:focus-visible,:focus) ~ * & {
-    border-width: 2px;
-    padding: 3px;
+    ::after {
+      border-width: 2.5px;
+    }
   }
   input[data-error] ~ * & {
-    //border: 2px solid red;
-    border-color: #ff8787;
+    ::after {
+      border-color: #ff8787;
+    }
   }
 `
 

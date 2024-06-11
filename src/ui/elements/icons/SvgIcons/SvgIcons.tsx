@@ -16,6 +16,7 @@ import CardsHeartSvg from '@ic/normal/cards-heart.svg?react'
 import CautionSvg from '@ic/normal/caution.svg?react'
 import ChatRoundSvg from '@ic/normal/chat-round.svg?react'
 import CheckmarkSvg from '@ic/normal/checkmark.svg?react'
+import Checkmark2Svg from '@ic/normal/checkmark-2.svg?react'
 import CheckmarkCircleToastifySvg from '@ic/normal/checkmark-circle-toastify.svg?react'
 import ClearTrashSvg from '@ic/normal/clear-trash.svg?react'
 import ClipSvg from '@ic/normal/clip.svg?react'
@@ -168,6 +169,7 @@ export namespace SvgIcons {
   export const CautionIc = generateSimpleSvgIcon(CautionSvg)
   export const ChatRoundIc = generateSimpleSvgIcon(ChatRoundSvg)
   export const CheckmarkIc = generateSimpleSvgIcon(CheckmarkSvg)
+  export const Checkmark2Ic = generateSimpleSvgIcon(Checkmark2Svg)
   export const CheckmarkCircleToastifyIc = generateSimpleSvgIcon(CheckmarkCircleToastifySvg)
   export const ClearTrashIc = generateSimpleSvgIcon(ClearTrashSvg)
   export const ClipIc = generateSimpleSvgIcon(ClipSvg)

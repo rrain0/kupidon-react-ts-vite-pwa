@@ -20,7 +20,7 @@ export namespace ValidationCore {
    */
   export type Validator
   <Vs extends Values> = [
-    NonEmptyArr<keyof Vs>,
+    (keyof Vs)[],
     (values: any[]) => ('ok' | undefined | void) | PartialFailureData<Vs>
   ]
   
@@ -30,7 +30,7 @@ export namespace ValidationCore {
   
   
   
-  export type FailureType = 'default'|'initial'|'normal'|'server'
+  export type FailureType = 'default' | 'initial' | 'normal' | 'server'
   
   export class Failure<Vs extends Values> {
     
@@ -69,8 +69,8 @@ export namespace ValidationCore {
     readonly code: string
     readonly msg: string|undefined
     readonly extra: any
-    readonly usedFields: NonEmptyArr<keyof Vs>
-    readonly usedValues: NonEmptyArr<any>
+    readonly usedFields: (keyof Vs)[]
+    readonly usedValues: any[]
     readonly type: FailureType
     readonly errorFields: (keyof Vs)[]
     readonly highlight: boolean
@@ -140,9 +140,9 @@ export namespace ValidationCore {
     type?: FailureType | undefined
     
     // использованные для валидации поля
-    usedFields: NonEmptyArr<keyof Vs>
+    usedFields: Array<keyof Vs>
     // использованные для валидации значения полей
-    usedValues: NonEmptyArr<any>
+    usedValues: Array<any>
     // поля, которые выделить как ошибочные
     errorFields?: (keyof Vs)[] | undefined
     
@@ -166,9 +166,9 @@ export namespace ValidationCore {
       type?: FailureType | undefined,
       
       // использованные для валидации поля
-      usedFields?: NonEmptyArr<keyof Vs> | undefined,
+      usedFields?: Array<keyof Vs> | undefined,
       // использованные для валидации значения полей
-      usedValues?: NonEmptyArr<any> | undefined,
+      usedValues?: Array<any> | undefined,
       // поля, которые выделить как ошибочные
       errorFields?: (keyof Vs)[] | undefined,
       
@@ -198,11 +198,11 @@ export namespace ValidationCore {
     extra?: any | undefined
     type?: FailureType | undefined
     // использованные для валидации поля
-    usedFields?: NonEmptyArr<keyof Vs> | undefined
+    usedFields?: Array<keyof Vs> | undefined
     // использованные для валидации значения полей
-    usedValues?: NonEmptyArr<any> | undefined
+    usedValues?: Array<any> | undefined
     // поля, которые выделить как ошибочные
-    errorFields?: (keyof Vs)[] | undefined
+    errorFields?: Array<keyof Vs> | undefined
     highlight?: boolean | undefined
     notify?: boolean | undefined
     canSubmit?: boolean | undefined

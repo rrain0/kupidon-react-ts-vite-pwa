@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
@@ -16,20 +17,19 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 
-export type ButtonCustomProps = PartialUndef<{
+
+
+type ButtonElement = HTMLButtonElement
+type ButtonProps = React.ComponentPropsWithoutRef<typeof ButtonFrame> & PartialUndef<{
   hasError: boolean
-  rippleMode: RippleProps['mode']
+  rippleMode: React.ComponentProps<typeof Ripple>['mode']
   rippleDuration: RippleProps['rippleDuration']
 }>
-export type ButtonForwardRefProps = React.JSX.IntrinsicElements['button']
-export type ButtonRefElement = HTMLButtonElement
-export type ButtonProps = ButtonCustomProps & ButtonForwardRefProps
-
 
 
 const Button =
 React.memo(
-React.forwardRef<ButtonRefElement, ButtonProps>(
+React.forwardRef<ButtonElement, ButtonProps>(
 (props, forwardedRef) => {
   const {
     hasError, className, type,
@@ -39,7 +39,7 @@ React.forwardRef<ButtonRefElement, ButtonProps>(
   } = props
   
   
-  const elemRef = useRef<ButtonRefElement>(null)
+  const elemRef = useRef<ButtonElement>(null)
   useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
   
   
@@ -59,7 +59,7 @@ React.forwardRef<ButtonRefElement, ButtonProps>(
   
   
   
-  return <button css={buttonStyle}
+  return <ButtonFrame css={buttonStyle}
     {...buttonProps}
     ref={elemRef}
   >
@@ -75,10 +75,14 @@ React.forwardRef<ButtonRefElement, ButtonProps>(
       />
     </div>
     
-  </button>
+  </ButtonFrame>
 }))
 export default Button
 
+
+
+
+const ButtonFrame = styled.button``
 
 
 

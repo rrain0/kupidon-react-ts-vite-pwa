@@ -162,6 +162,9 @@ export namespace EmotionCommon {
     &[type=radio]:hover {
       cursor: pointer;
     }
+    &[type=checkbox]:hover {
+      cursor: pointer;
+    }
     ::placeholder {
       opacity: 1;
     }

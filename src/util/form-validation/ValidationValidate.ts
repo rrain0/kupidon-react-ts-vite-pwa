@@ -6,7 +6,6 @@ import Failure = ValidationCore.Failure
 import Failures = ValidationCore.Failures
 import ObjectKeys = ObjectUtils.ObjectKeys
 import PartialFailureData = ValidationCore.PartialFailureData
-import NonEmptyArr = ArrayUtils.NonEmptyArr
 import Values = ValidationCore.Values
 
 
@@ -82,7 +81,7 @@ export namespace ValidationValidate {
         && usedFields.every(f=>!errorFields.has(f))
       ){
         
-        const usedValues = usedFields.map(f=>values[f]) as NonEmptyArr<Vs[keyof Vs]>
+        const usedValues = usedFields.map(f=>values[f])
         let result = vd(usedValues)
         if (result instanceof PartialFailureData){
           const newFail = new Failure({
