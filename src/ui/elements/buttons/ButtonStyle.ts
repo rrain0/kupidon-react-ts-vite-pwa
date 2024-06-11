@@ -2,26 +2,26 @@ import { css } from '@emotion/react'
 import { ArrayUtils } from '@util/common/ArrayUtils.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
-import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Theme = AppTheme.Theme
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import Elem = ElementStyle.Elem
-import Pseudo = ElementStyle.Pseudo
-import CssProp = ElementStyle.CssProp
-import CssPropEnum = ElementStyle.CssPropEnum
-import CssPropColor = ElementStyle.CssPropColor
-import DataAttrError = ElementStyle.DataAttrError
+import Elem = WidgetStyle.Elem
+import Pseudo = WidgetStyle.Pseudo
+import CssProp = WidgetStyle.CssProp
+import CssPropEnum = WidgetStyle.CssPropEnum
+import CssPropColor = WidgetStyle.CssPropColor
+import DataAttrError = WidgetStyle.DataAttrError
+import PartialUndef = TypeUtils.PartialUndef
+import contains = ArrayUtils.contains
 
 
 
 
 export namespace ButtonStyle {
   
-  import PartialUndef = TypeUtils.PartialUndef
-  import contains = ArrayUtils.contains
   export const Attr = {
     error: DataAttrError
   } as const

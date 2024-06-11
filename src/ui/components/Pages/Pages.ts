@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import center = EmotionCommon.center
-import { SimpleGradientBgc } from 'src/ui/style/bgc/SimpleGradientBgc.ts'
+import { SimpleGradientBgc } from 'src/ui-props/styles/bgc/SimpleGradientBgc.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import col = EmotionCommon.col
 

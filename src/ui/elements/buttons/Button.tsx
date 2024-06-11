@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'

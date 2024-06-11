@@ -11,10 +11,10 @@ import {
   PartnerCommunicationCharacteristicsOptionValues
 } from 'src/ui/pages/Profile/Profile/ProfilePartnerCommunicationCharacteristicsOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
-import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
+import { ErrorUiText } from 'src/ui-props/ui-values/ErrorUiText.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { DateTime } from '@util/DateTime.ts'
-import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
+import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
 import { UiTextValues } from '@util/ui-text/UiText.ts'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators

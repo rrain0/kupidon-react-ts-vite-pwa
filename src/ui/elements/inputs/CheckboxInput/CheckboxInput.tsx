@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"

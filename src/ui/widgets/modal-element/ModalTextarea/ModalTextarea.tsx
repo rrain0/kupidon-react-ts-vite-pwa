@@ -11,7 +11,7 @@ import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/elements/cards/Card2.tsx'
 import Textarea, { TextareaProps, TextareaRefElement } from 'src/ui/elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
-import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
+import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
 import Callback = TypeUtils.Callback
 
 

@@ -1,15 +1,15 @@
 import { css } from '@emotion/react'
 import React, { useEffect } from 'react'
-import { ActionUiText } from 'src/ui/ui-values/ActionUiText.ts'
-import { StatusUiText } from 'src/ui/ui-values/StatusUiText.ts'
+import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
+import { StatusUiText } from 'src/ui-props/ui-values/StatusUiText.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { clearSiteData } from '@util/app/clearSiteData.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { useBool } from '@util/react/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import UseBottomSheetState from 'src/ui/elements/BottomSheet/UseBottomSheetState.tsx'
+import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
@@ -20,7 +20,7 @@ import row = EmotionCommon.row
 import Spinner8LinesIc = SvgIcons.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIcons.ClearTrashIc
-import BottomSheetDialogBasic from 'src/ui/elements/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Txt = EmotionCommon.Txt
 import Callback = TypeUtils.Callback

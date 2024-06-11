@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import NavBar from 'src/ui/widgets/NavBar/NavBar.tsx'
-import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 

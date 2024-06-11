@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import {
   RadioInputGroupStyle,

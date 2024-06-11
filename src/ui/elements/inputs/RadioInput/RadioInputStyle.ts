@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
+import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
@@ -62,7 +62,7 @@ export namespace RadioInputStyle {
     export const rippleDisabled = inputDisabled+'~*>'+rippleFrameClass
   }
   export namespace Prop {
-    export const color = ElementStyle.Prop0.prop.color
+    export const color = WidgetStyle.Prop0.prop.color
     export const activeIconColor = '--active-icon-color'
     export const inactiveIconColor = '--inactive-icon-color'
     export const rippleColor = RippleStyle.Prop.color

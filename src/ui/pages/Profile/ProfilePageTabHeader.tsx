@@ -4,12 +4,12 @@ import { animated } from '@react-spring/web'
 import React, { useContext } from 'react'
 import { formHeader } from 'src/ui/elements/basic-elements/Hs'
 import { Hs } from 'src/ui/elements/basic-elements/Hs.tsx'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
 import { MathUtils } from '@util/common/MathUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { TabsRenderProps } from 'src/ui/elements/Tabs/Tabs.tsx'
-import { TabIdx, TabsState } from 'src/ui/elements/Tabs/useTabs.ts'
+import { TabsRenderProps } from 'src/ui/components/Tabs/Tabs.tsx'
+import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import fitRange = MathUtils.fitRange
 import mapRange = MathUtils.mapRange
 import inRange2 = MathUtils.inRange

@@ -6,18 +6,18 @@ import {
   SheetSnapIdx,
   SheetSnapPoints,
   SheetState,
-} from 'src/ui/elements/BottomSheet/useBottomSheet.ts'
+} from 'src/ui/widgets/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Utils } from 'src/util/common/Utils.ts'
 import styled from '@emotion/styled'
-import BottomSheetDialog from 'src/ui/elements/BottomSheet/BottomSheetDialog.tsx'
+import BottomSheetDialog from 'src/ui/widgets/BottomSheet/BottomSheetDialog.tsx'
 import intOrDefault = Utils.nonNegIntOrDefault;
-import OverflowWrapper from 'src/ui/elements/Scrollbars/OverflowWrapper.tsx'
-import { OverflowWrapperStyle } from 'src/ui/elements/Scrollbars/OverflowWrapperStyle.ts'
+import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
+import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
 import Setter = TypeUtils.Callback1
 

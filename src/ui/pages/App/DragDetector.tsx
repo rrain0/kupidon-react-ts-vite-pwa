@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useSetRecoilState } from 'recoil'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import PartialUndef = TypeUtils.PartialUndef
 import contents = EmotionCommon.contents

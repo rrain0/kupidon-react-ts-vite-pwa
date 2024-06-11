@@ -2,9 +2,9 @@ import React from 'react'
 import ModalInput from 'src/ui/widgets/modal-element/ModalInput/ModalInput.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
-import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
-import OptionItem from 'src/ui/elements/OptionAndValueItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from '@util/form-validation/ValidationWrap.tsx'
+import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
+import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
+import { ValidationWrapRenderProps } from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import NameCardGradIc = SvgGradIcons.NameCardGradIc
 

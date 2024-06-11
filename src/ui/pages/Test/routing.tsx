@@ -1,10 +1,10 @@
 import { RouteObject } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { clearUnknownPathEnding } from '@util/react-router/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import PointerTestPage from 'src/ui/pages/Test/PointerTestPage.tsx'
 import StateTestPage from 'src/ui/pages/Test/StateTestPage.tsx'
 import TabsTestPage from 'src/ui/pages/Test/TabsTestPage.tsx'
-import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import TestPage from 'src/ui/pages/Test/TestPage.tsx'

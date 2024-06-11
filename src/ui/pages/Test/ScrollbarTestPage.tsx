@@ -1,12 +1,12 @@
 import React, { useRef } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { useContainerScrollState } from 'src/ui/elements/Scrollbar/useContainerScrollState.ts'
+import { useContainerScrollState } from 'src/ui/widgets/Scrollbar/useContainerScrollState.ts'
 import { css } from '@emotion/react'
-import Scrollbar from 'src/ui/elements/Scrollbar/Scrollbar.tsx'
-import { ScrollbarStyle } from 'src/ui/elements/Scrollbar/ScrollbarStyle.ts'
+import Scrollbar from 'src/ui/widgets/Scrollbar/Scrollbar.tsx'
+import { ScrollbarStyle } from 'src/ui/widgets/Scrollbar/ScrollbarStyle.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import centerAll = EmotionCommon.centerAll
 import hideScrollbar = EmotionCommon.noScrollbars

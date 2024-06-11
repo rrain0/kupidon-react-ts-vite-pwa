@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router-dom'
-import { clearUnknownPathEnding } from '@util/react-router/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import ApplicationSettingsPage from 'src/ui/pages/ApplicationSettings/ApplicationSettingsPage'
 
 

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils'
-import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
+import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
 import { useAsyncEffect } from '@util/react/useAsyncEffect'
 import { useEffectEvent } from '@util/react/useEffectEvent'
 import Values = ValidationCore.Values

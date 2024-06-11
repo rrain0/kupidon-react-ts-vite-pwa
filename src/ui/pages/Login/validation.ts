@@ -1,8 +1,8 @@
-import { ValidationValidators } from '@util/form-validation/ValidationValidators.ts'
+import { ValidationValidators } from '@util/mini-libs/form-validation/core/ValidationValidators.ts'
 import { AuthApi } from 'src/api/requests/AuthApi'
-import { ValidationCore } from '@util/form-validation/ValidationCore.ts'
+import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
 import { UiTextValues } from '@util/ui-text/UiText.ts'
-import { ErrorUiText } from 'src/ui/ui-values/ErrorUiText.ts'
+import { ErrorUiText } from 'src/ui-props/ui-values/ErrorUiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData

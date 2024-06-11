@@ -10,7 +10,7 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
-import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
+import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
 import ThemeType = AppTheme.Type
 import { SettingsOptions } from './SettingsOptions'
 

@@ -1,4 +1,4 @@
-import { RouteBuilder } from '@util/react/route-builder/RouteBuilder'
+import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
 import buildRoute = RouteBuilder.buildRoute
 import buildPath = RouteBuilder.buildPath
 import path = RouteBuilder.path

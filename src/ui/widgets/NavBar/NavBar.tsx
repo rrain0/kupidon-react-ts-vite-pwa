@@ -6,13 +6,13 @@ import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
-import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
+import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
 import { NavButtonStyle } from 'src/ui/widgets/NavBar/NavButtonStyle.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import { RouteBuilder } from '@util/react/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
-import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import row = EmotionCommon.row
 import Gear2Ic = SvgIcons.Gear2Ic
 import RootRoute = AppRoutes.RootRoute
