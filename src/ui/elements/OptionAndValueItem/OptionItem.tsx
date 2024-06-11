@@ -1,53 +1,42 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import React, { useImperativeHandle, useRef } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
+import Button from 'src/ui/elements/buttons/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui/style/EmotionCommon.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { ElementStyle } from 'src/ui/elements/ElementStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
-import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import PartialUndef = TypeUtils.PartialUndef
-import hoverable = EmotionCommon.hoverable
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
+import Callback = TypeUtils.Callback
+import Txt = EmotionCommon.Txt
 
 
 
 
-export type OptionItemCustomProps = PartialUndef<{
+export type OptionItemProps = PartialUndef<{
   icon: React.ReactNode
   title: React.ReactNode
   value: React.ReactNode
-}> & ElementStyle.Attr0.errorJsxProp
-export type OptionItemForwardRefProps = React.JSX.IntrinsicElements['article']
-export type OptionItemRefElement = HTMLDivElement
+  onClick: Callback
+}>
 
-export type OptionItemProps = OptionItemCustomProps & OptionItemForwardRefProps
+
 const OptionItem =
 React.memo(
-React.forwardRef<OptionItemRefElement, OptionItemProps>(
-(props, forwardedRef)=>{
-  const {
-    icon, title, value,
-    ...restProps
-  } = props
-  
-  const elemRef = useRef<OptionItemRefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
+(props: OptionItemProps) => {
+  const { icon, title, value, onClick } = props
   
   
-  return <Frame
-    tabIndex={0}
-    {...restProps}
-    ref={elemRef}
+  
+  return <Button
+    css={buttonStyle}
+    onClick={onClick}
   >
-    <Ripple
-      targetElement={elemRef}
-      mode='cursor'
-    />
     
     <IconFrame>{icon}</IconFrame>
     <TitleFrame>{title}</TitleFrame>
@@ -55,43 +44,29 @@ React.forwardRef<OptionItemRefElement, OptionItemProps>(
     <NextIconFrame>
       <ArrowAngledRoundedIc css={t=>nextIconStyle(t)}/>
     </NextIconFrame>
-  </Frame>
-}))
+    
+  </Button>
+})
 export default OptionItem
 
 
 
-const Frame = styled.article`
-  container: option-item / size;
-  display: grid;
-  grid: 'icon title next' 1fr
-        'icon value next' 1fr
-       / 50px 1fr   40px;
-  place-items: center;
+const buttonStyle = (t: AppTheme.Theme) => css`
+  ${ButtonStyle.textRectBig(t)};
   
-  // appearance
-  width: 100%;
-  height: 50px;
-  border-radius: 15px;
-  padding: 2px 0;
-  cursor: pointer;
-  
-  // color
-  background: none;
-
-  ${RippleStyle.El.framePath}{
-    ${RippleStyle.Prop.color}: ${p=>p.theme.ripple.contentOnTransparent[0]};
-  }
-  
-  ${hoverable}{:hover{
-    background: ${p=>p.theme.buttonTransparent.bgcFocus[0]};
-  }}
-  :focus-visible {
-    background: ${p=>p.theme.buttonTransparent.bgcFocus[0]};
-  }
-  
-  ${ElementStyle.Attr0.selThis.error}{
-    background: ${p=>p.theme.input.bgcError[0]};
+  ${ButtonStyle.El.btn.thiz()} {
+    display: grid;
+    grid: 'icon title next' auto
+          'icon value next' auto
+         / auto 1fr   auto;
+    gap: 4px 0;
+    
+    width: 100%;
+    min-height: 50px;
+    height: fit-content;
+    text-align: start;
+    padding: 2px 0;
+    ${Txt.large1b};
   }
 `
 
@@ -99,9 +74,11 @@ const Frame = styled.article`
 
 const IconFrame = styled.div`
   grid-area: icon;
-  place-self: stretch;
+  place-self: start;
+  width: 50px;
+  height: 50px;
   display: grid;
-  place-items: center center;
+  place-items: center;
   > { ${p=>OptionAndValueItemGradIconStyle(p.theme)} }
   > { ${p=>OptionAndValueItemIconStyle(p.theme)} }
 `
@@ -131,16 +108,18 @@ const ValueFrame = styled.div`
   justify-self: start;
   display: grid;
   place-items: center start;
-
+  
   color: ${p=>p.theme.containerNormal.content3[0]};
 `
 const NextIconFrame = styled.div`
   grid-area: next;
-  place-self: stretch;
+  place-self: start stretch;
+  width: 40px;
+  height: 50px;
   display: grid;
-  place-items: center end;
+  place-items: center;
 `
 const nextIconStyle = (t: AppTheme.Theme) => css`
-  height: 44%;
+  height: 24px;
   ${SvgIconsStyle.El.icon.props.color.name}: ${t.containerNormal.content3[0]};
 `

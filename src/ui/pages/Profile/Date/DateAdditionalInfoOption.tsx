@@ -7,7 +7,7 @@ import { TitleUiText } from 'src/ui/ui-values/TitleUiText.ts'
 import OptionItem from 'src/ui/elements/OptionAndValueItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from '@util/form-validation/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import GenderGradIc = SvgGradIcons.GenderGradIc
+import InfoSquareRoundedGradIc = SvgGradIcons.InfoSquareRoundedGradIc
 
 
 
@@ -42,7 +42,7 @@ React.memo(
   
   return <>
     <OptionItem
-      //icon={<GenderGradIc />}
+      icon={<InfoSquareRoundedGradIc />}
       title={'Дополнительная информация о свидании, такие как предпочтения по музыке, еде или другим аспектам свидания'}
       value={'Не выбрано'}
       onClick={open}

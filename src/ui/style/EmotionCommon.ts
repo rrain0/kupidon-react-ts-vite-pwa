@@ -283,6 +283,8 @@ export namespace EmotionCommon {
     export const large3b = css`
       font-weight: 500;
       font-size: 24px;
+      line-height: normal;
+      letter-spacing: normal;
     `
     
     export const large2 = css`
@@ -295,6 +297,8 @@ export namespace EmotionCommon {
     export const large2b = css`
       font-weight: 400;
       font-size: 18px;
+      line-height: normal;
+      letter-spacing: normal;
     `
     
     export const large1 = css`
@@ -304,22 +308,32 @@ export namespace EmotionCommon {
       letter-spacing: 0.05em;
     `
     
+    export const large1b = css`
+      font-weight: 400;
+      font-size: 16px;
+      line-height: normal;
+      letter-spacing: normal;
+    `
+    
     export const normal1 = css`
       font-weight: 300;
       font-size: 16px;
       line-height: 129%;
+      letter-spacing: normal;
     `
     
     export const small1 = css`
       font-weight: 300;
       font-size: 15px;
       line-height: 129%;
+      letter-spacing: normal;
     `
     
     export const small2 = css`
       font-weight: 300;
       font-size: 14px;
       line-height: 129%;
+      letter-spacing: normal;
     `
     
     
@@ -328,6 +342,7 @@ export namespace EmotionCommon {
       font-weight: 300;
       font-size: 10px;
       line-height: 129%;
+      letter-spacing: normal;
     `
   
   }

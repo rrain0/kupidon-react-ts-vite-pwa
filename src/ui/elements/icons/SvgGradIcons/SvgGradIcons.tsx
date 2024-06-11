@@ -20,6 +20,8 @@ import GiftBoxGradSvg from '@ic/gradient/gift-box-grad.svg?react'
 
 import HourglassGradSvg from '@ic/gradient/hourglass-grad.svg?react'
 
+import InfoSquareRoundedGradSvg from '@ic/gradient/info-square-rounded-grad.svg?react'
+
 import WorkSuitcaseGradSvg from '@ic/gradient/work-suitcase-grad.svg?react'
 
 import NameCardGradSvg from '@ic/gradient/name-card-grad.svg?react'
@@ -120,6 +122,8 @@ export namespace SvgGradIcons {
   export const GiftBoxGradIc = generateSimpleSvgIcon(GiftBoxGradSvg)
   
   export const HourglassGradIc = generateSimpleSvgIcon(HourglassGradSvg)
+  
+  export const InfoSquareRoundedGradIc = generateSimpleSvgIcon(InfoSquareRoundedGradSvg)
   
   export const WorkSuitcaseGradIc = generateSimpleSvgIcon(WorkSuitcaseGradSvg)
   

@@ -51,10 +51,15 @@ React.forwardRef<RippleRefElement, RippleProps>(
   useImperativeHandle(forwardedRef, ()=>rippleFrameRef.current!,[])
   
   
+  const getTargetElement = () => props.targetElement?.current
+  const getRippleFrame = () => rippleFrameRef.current
+  const getRippleView = () => rippleViewRef.current
+  
+  
   const showRipple = useCallback(
     (ev?: CursorInfo) => {
-      const rippleFrame = rippleFrameRef.current
-      const rippleView = rippleViewRef.current
+      const rippleFrame = getRippleFrame()
+      const rippleView = getRippleView()
       if (rippleFrame && rippleView){
         rippleView.classList.remove(css.rippleHide, css.rippleShow)
         
@@ -154,27 +159,21 @@ React.forwardRef<RippleRefElement, RippleProps>(
   )
   
   
-  // must NOT be useLayoutEffect
-  useEffect(
-    ()=>{
-      const target = props.targetElement?.current
-        ?? rippleFrameRef.current?.parentElement
-      if (target){
-        target.addEventListener('pointerdown', showRipple)
-        target.addEventListener('pointerup', hideRipple)
-        target.addEventListener('pointerout', hideRipple) // 'out' is 'leave' + 'cancel'
-        return ()=>{
-          target.removeEventListener('pointerdown', showRipple)
-          target.removeEventListener('pointerup', hideRipple)
-          target.removeEventListener('pointerout', hideRipple)
-        }
+  // must be NOT useLayoutEffect
+  useEffect(()=>{
+    const target = props.targetElement?.current
+      ?? rippleFrameRef.current?.parentElement
+    if (target){
+      target.addEventListener('pointerdown', showRipple)
+      target.addEventListener('pointerup', hideRipple)
+      target.addEventListener('pointerout', hideRipple) // 'out' is 'leave' + 'cancel'
+      return ()=>{
+        target.removeEventListener('pointerdown', showRipple)
+        target.removeEventListener('pointerup', hideRipple)
+        target.removeEventListener('pointerout', hideRipple)
       }
-    },
-    [
-      props.targetElement?.current, rippleFrameRef.current,
-      showRipple, hideRipple,
-    ]
-  )
+    }
+  }, [getTargetElement(), getRippleFrame(), showRipple, hideRipple])
   
   
   
