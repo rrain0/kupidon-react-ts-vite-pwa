@@ -46,7 +46,7 @@ export namespace ArrayUtils {
     if (arr1 === arr2) return true
     if (!arr1 || !arr2) return false
     if (arr1.length !== arr2.length) return false
-    const set = new Set([...arr1, arr2])
+    const set = new Set([...arr1, ...arr2])
     if (set.size !== arr1.length) return false
     return true
   }

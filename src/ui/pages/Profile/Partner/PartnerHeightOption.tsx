@@ -127,6 +127,7 @@ React.memo(
       <div css={tilesGrid}>
         {tilesHeightValues.map(it=><Button
           css={ArrayUtils.eq(heightRange, it) ? activeBtn : inactiveBtn}
+          key={it.join(' ')}
           onClick={()=>setHeightRange(it)}
         >
           {textValue(it)}
