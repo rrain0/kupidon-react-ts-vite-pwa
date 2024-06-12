@@ -1,32 +1,12 @@
-import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
 import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import row = EmotionCommon.row
-import resetInput = EmotionCommon.resetInput
-import abs = EmotionCommon.abs
 import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
 
 
 
-/*
-
-export type InputCustomProps = PartialUndef<{
-  hasError: boolean
-  startViews: React.ReactNode
-  endViews: React.ReactNode
-  children: React.ReactNode
-  childrenPosition: 'start'|'end'
-  frameProps: Omit<React.JSX.IntrinsicElements['label'],'ref'>
-}>
-export type InputForwardRefProps = React.JSX.IntrinsicElements['input']
-export type InputRefElement = HTMLInputElement
-export type InputProps = InputCustomProps & InputForwardRefProps
-
-*/
 
 
 type InputElement = HTMLInputElement
