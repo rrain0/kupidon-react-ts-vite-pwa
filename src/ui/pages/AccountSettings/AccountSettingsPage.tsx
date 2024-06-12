@@ -233,9 +233,7 @@ React.memo(
           <ItemContainer>
             <ItemLabel>{titleText.id}</ItemLabel>
             <Input
-              css={InputStyle.input(
-                { size: 'small', textSize: 'smaller', static: true },
-              )}
+              css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
               readOnly
               value={user.id}
             />
@@ -244,9 +242,7 @@ React.memo(
           <ItemContainer>
             <ItemLabel>{titleText.email}</ItemLabel>
             <Input
-              css={InputStyle.input(
-                { size: 'small', static: true },
-              )}
+              css={InputStyle.outlinedRectOf({ size: 'small' })}
               readOnly
               value={user.email}
             />
@@ -255,9 +251,7 @@ React.memo(
           <ItemContainer>
             <ItemLabel>{titleText.emailVerified}</ItemLabel>
             <Input
-              css={InputStyle.input(
-                { size: 'small', static: true },
-              )}
+              css={InputStyle.outlinedRectOf({ size: 'small' })}
               readOnly
               value={user.emailVerified
                 ? actionText.yes.toLowerCase()

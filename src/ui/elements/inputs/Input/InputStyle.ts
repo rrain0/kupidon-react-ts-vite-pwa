@@ -3,234 +3,231 @@ import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
-import Theme = AppTheme.Theme
+import Elem = WidgetStyle.Elem
+import Pseudo = WidgetStyle.Pseudo
+import CssWidget = WidgetStyle.CssWidget
+import Attr = WidgetStyle.Attr
 import bgcInBorder = EmotionCommon.bgcInBorder
 import PartialUndef = TypeUtils.PartialUndef
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
+import CssProp = WidgetStyle.CssProp
 
 
 
 export namespace InputStyle {
   
   
-  export namespace Attr {
-    export const errorName = 'data-error'
+  
+  export const W = function(){
+    const frame = new Elem('rrainuiFrame', { })
+    const input = new Elem('rrainuiInput', {
+      normal: Pseudo.empty,
+      hover: Pseudo.hover,
+      active: Pseudo.active,
+      focus: Pseudo.focus,
+      focusVisible: Pseudo.focusVisible,
+      readOnly: Pseudo.readOnly,
+      disabled: Pseudo.disabled,
+      error: Attr.dataError,
+    })
+    const border = new Elem('rrainuiBorder', { })
     
-    export const error = `[${errorName}]`
-  }
-  export namespace El {
-    export const frameClassName = 'rrainuiFrame'
-    export const inputClassName = 'rrainuiInput'
-    export const borderClassName = 'rrainuiBorder'
+    const inputWidget = CssWidget
+      .ofRoot('frame', frame)
+      .add('frame', '>', 'border', border)
+      .add('frame', '>', 'input', input)
     
-    export const frameClass = '.'+frameClassName
-    export const inputClass = '.'+inputClassName
-    export const borderClass = '.'+borderClassName
-    
-    export const frame = '&'+frameClass
-    export const frameError = frame+`:has(>${inputClass}${Attr.error})`
-    
-    export const input = frame+'>'+inputClass
-    export const inputHover = frame+'>'+inputClass+':hover'
-    export const inputActive = frame+'>'+inputClass+':active'
-    export const inputFocus = frame+'>'+inputClass+':focus'
-    export const inputFocusVisible = frame+'>'+inputClass+':focus-visible'
-    export const inputReadOnly = frame+'>'+inputClass+':read-only'
-    export const inputDisabled = frame+'>'+inputClass+':disabled'
-    export const inputError = frame+'>'+inputClass+Attr.error
-    
-    export const border = frame+'>'+borderClass
-    export const borderHover = inputHover+'~'+borderClass
-    export const borderActive = inputActive+'~'+borderClass
-    export const borderFocus = inputFocus+'~'+borderClass
-    export const borderFocusVisible = inputFocusVisible+'~'+borderClass
-    export const borderReadOnly = inputReadOnly+'~'+borderClass
-    export const borderDisabled = inputDisabled+'~'+borderClass
-    export const borderError = inputError+'~'+borderClass
-  }
-  export namespace Prop {
-    export const color = WidgetStyle.Prop0.prop.color
+    return inputWidget
+  }()
+  
+  
+  export const Prop = {
+    color: CssProp.color
   }
   
   
   
-  namespace Shape {
-    export const normal = css`
-      // normal
-      ${El.frame} {
-        height: 50px;
-        border-radius: 15px;
-      }
-      ${El.input} {
-        padding: 4px 16px;
-        ${Txt.large2};
-      }
-      ${El.border} {
-        border: 2px solid transparent;
-        background-size: 200% 100%;
-        background-position: 100% 0;
-        transition: background-position 0.8s ease-out;
-        ${bgcInBorder};
-      }
-      
-      // hover
-      ${hoverable}{
-        ${El.inputHover} {}
-        ${El.borderHover} {
-          background-position: 0 0;
-        }
-      }
-      
-      // active
-      ${El.inputActive} {}
-      ${El.borderActive} {}
-      
-      // focus
-      ${El.inputFocus} {}
-      ${El.borderFocus} {}
-
-      // focus-visible
-      ${El.inputFocusVisible} {}
-      ${El.borderFocusVisible} {
+  
+  
+  
+  
+  
+  // type: outlined, shape: rect, size: normal
+  const outlinedRectNormal = css`
+    // normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      height: 50px;
+      border-radius: 15px;
+    }
+    ${W.use.s.normal().e.input().thisUse} {
+      padding: 4px 16px;
+      ${Txt.large2};
+    }
+    ${W.use.s.normal().e.border().thisUse} {
+      border: 2px solid transparent;
+      background-size: 200% 100%;
+      background-position: 100% 0;
+      transition: background-position 0.8s ease-out;
+      ${bgcInBorder};
+    }
+    
+    // hover
+    ${hoverable}{
+      ${W.use.s.hover().e.input().thisUse} { }
+      ${W.use.s.hover().e.border().thisUse} {
         background-position: 0 0;
       }
-
-      // read-only
-      ${El.inputReadOnly} {}
-      ${El.borderReadOnly} {}
-
-      // disabled
-      ${El.inputDisabled} {
-        cursor: auto;
-      }
-
-      // error
-      ${El.frameError}{}
-      ${El.inputError} {}
-      ${El.borderError} {}
-    `
+    }
     
-    export const small = css`
-      ${normal};
-      ${El.frame} {
-        height: 40px;
-      }
-      ${El.input} {
-        padding: 4px 12px;
-        ${Txt.large1};
-      }
-      ${El.border} {
-        border-width: 1px;
-      }
-    `
-  }
-  
-  
-  namespace Color {
-    export const normal = (t:Theme)=>css`
-      // normal
-      ${El.frame} {
-        background: ${t.input.bgc[0]};
-      }
-      ${El.input} {
-        color: ${t.input.content[0]};
-        ${Prop.color}: ${t.input.content[0]};
-  
-        ::placeholder {
-          color: ${t.input.placeholder[0]};
-        }
-      }
-      ${El.border} {
-        background-image: linear-gradient(
-          to right,
-          ${t.input.borderHover[0]},
-          ${t.input.border[0]},
-          ${t.input.border[1]}
-        );
-      }
-
-      // disabled
-      ${El.inputDisabled} {
-        color: ${t.input.content[0]};
-        ${Prop.color}: ${t.input.content[0]};
-      }
-      ${El.borderDisabled} {
-        border-color: ${t.input.content[0]};
-      }
-
-      // error
-      ${El.frameError}{
-        background: ${t.input.bgcError[0]};
-      }
-    `
+    // active
+    ${W.use.s.active().e.input().thisUse} { }
+    ${W.use.s.active().e.border().thisUse} { }
     
-    /* background-image: linear-gradient(
-         to right,
-         ${t.input.error.border[0]},
-         ${t.input.error.border[0]},
-         ${t.input.error.border[0]}
-       );
-     */
-  }
-  
-  
-  
-  
-  
-  export const inputNormal = (t:Theme)=>css`
-    ${Shape.normal};
-    ${Color.normal(t)};
-  `
-  export const inputSmall = (t:Theme)=>css`
-    ${Shape.small};
-    ${Color.normal(t)};
+    // focus
+    ${W.use.s.focus().e.input().thisUse} { }
+    ${W.use.s.focus().e.border().thisUse} { }
+
+    // focus-visible
+    ${W.use.s.focusVisible().e.input().thisUse} { }
+    ${W.use.s.focusVisible().e.border().thisUse} {
+      background-position: 0 0;
+    }
+
+    // read-only
+    ${W.use.s.readOnly().e.input().thisUse} { }
+    ${W.use.s.readOnly().e.border().thisUse} { }
+
+    // disabled
+    ${W.use.s.disabled().e.input().thisUse} {
+      cursor: auto;
+    }
+    ${W.use.s.disabled().e.border().thisUse} { }
+
+    // error
+    ${W.use.s.error().e.frame().thisUse} { }
+    ${W.use.s.error().e.input().thisUse} { }
+    ${W.use.s.error().e.border().thisUse} { }
   `
   
+  const outlinedRectAddColorNormal = (t: AppTheme.Theme) => css`
+    // normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      background: ${t.input.bgc[0]};
+    }
+    ${W.use.s.normal().e.input().thisUse} {
+      color: ${t.input.content[0]};
+      ${Prop.color.set(t.input.content[0])};
+
+      ::placeholder {
+        color: ${t.input.placeholder[0]};
+      }
+    }
+    ${W.use.s.normal().e.border().thisUse} {
+      background-image: linear-gradient(
+        to right,
+        ${t.input.borderHover[0]},
+        ${t.input.border[0]},
+        ${t.input.border[1]}
+      );
+    }
+    
+    // read-only
+    ${W.use.s.readOnly().e.frame().thisUse} {
+      cursor: auto;
+      color: ${t.input.content[0]};
+    }
+    ${W.use.s.readOnly().e.border().thisUse} {
+      border-color: ${t.page.content2[0]};
+    }
+
+    // disabled
+    ${W.use.s.disabled().e.input().thisUse} {
+      color: ${t.input.content[0]};
+      ${Prop.color.set(t.input.content[0])};
+    }
+    ${W.use.s.disabled().e.border().thisUse} {
+      border-color: ${t.input.content[0]};
+    }
+
+    // error
+    ${W.use.s.error().e.frame().thisUse} {
+      background: ${t.input.bgcError[0]};
+    }
+  `
+  /*
+   background-image: linear-gradient(
+   to right,
+   ${t.input.error.border[0]},
+   ${t.input.error.border[0]},
+   ${t.input.error.border[0]}
+   );
+   */
   
-  export const clickable = css`
-    ${El.input},${El.inputReadOnly},${El.inputDisabled} {
-      cursor: pointer;
+  
+  // type: outlined, shape: rect, + size: small
+  export const outlinedRectAddSizeSmall = css`
+    // normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      height: 40px;
+    }
+    ${W.use.s.normal().e.input().thisUse} {
+      padding: 4px 12px;
+      ${Txt.large1};
+    }
+    ${W.use.s.normal().e.border().thisUse} {
+      border-width: 1px;
     }
   `
   
   
-  export type InputStyleProps = {
-    size: 'normal'|'small'
-    textSize: 'normal'|'small'|'smaller'
-    clickable: boolean
-    static: boolean
-  }
-  export type InputStylePartialProps = PartialUndef<InputStyleProps>
-  export const input = (props?:InputStylePartialProps|undefined) =>
-  (t:Theme) =>
-  css`
-    ${props?.clickable && clickable};
-    
-    ${inputNormal(t)};
+  
+  // type: outlined, shape: rect, size: normal, color: normal
+  export const outlinedRectNormalNormal = (t: AppTheme.Theme) => css`
+    ${outlinedRectNormal};
+    ${outlinedRectAddColorNormal(t)};
+  `
+  
+  // type: outlined, shape: rect, size: small, color: normal
+  export const outlinedRectSmallNormal = (t: AppTheme.Theme) => css`
+    ${outlinedRectNormal};
+    ${outlinedRectAddSizeSmall};
+    ${outlinedRectAddColorNormal(t)};
+  `
+  
+  
+  
+  
+  
+  type InputOutlinedRectStyleProps = PartialUndef<{
+    size:     'normal' | 'small'
+    color:    'normal'
+    textSize: 'normal' | 'small' | 'smaller'
+  }>
+  export const outlinedRectOf =
+  (props?: InputOutlinedRectStyleProps) => (t: AppTheme.Theme) => css`
+    ${outlinedRectNormal};
+  
     ${{
-      'small': Shape.small,
-    }[props?.size??'normal']};
+      'normal': undefined,
+      'small':  outlinedRectAddSizeSmall,
+    }[props?.size ?? 'normal']};
     
-    ${El.input} {
+    ${{
+      'normal': outlinedRectAddColorNormal(t),
+    }[props?.color ?? 'normal']};
+    
+    ${W.use.s.normal().e.input().thisUse} {
       ${{
-        'normal': Txt.large2,
+        'normal': undefined,
         'small': Txt.large1,
         'smaller': Txt.small2,
-      }[props?.textSize??'']};
+      }[props?.textSize ?? 'normal']};
     }
-    
-    ${props?.static && css`
-      ${El.frame} {
-        cursor: auto;
-        color: ${t.input.content[0]};
-      }
-
-      ${El.border} {
-        border-color: ${t.page.content2[0]};
-      }
-    `}
   `
+  
+  
+  
   
   
 }

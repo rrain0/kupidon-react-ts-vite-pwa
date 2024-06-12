@@ -5,7 +5,7 @@ import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import hoverable = EmotionCommon.hoverable
 import DataAttr = WidgetStyle.DataAttr
 import combineStates = WidgetStyle.combineStates
-import Elem = WidgetStyle.Elem
+import Elem = WidgetStyle.Elem0
 
 
 
@@ -23,8 +23,8 @@ export namespace ScrollbarStyle {
     const track = new Elem('rrainuiScrollbarTrack', {
       vertical: Attr.direction.s.vertical,
       horizontal: Attr.direction.s.horizontal,
-      active: combineStates(WidgetStyle.Pseudo.active, Attr.active),
-      hover: WidgetStyle.Pseudo.hover,
+      active: combineStates(WidgetStyle.Pseudo0.active, Attr.active),
+      hover: WidgetStyle.Pseudo0.hover,
     },{})
     const thumbBox = track.toElem('>', new Elem('rrainuiScrollbarThumbBox', {}, {}))
     const thumb = thumbBox.toElem('>', new Elem('rrainuiScrollbarThumb', {}, {}))

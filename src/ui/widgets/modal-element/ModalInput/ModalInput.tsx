@@ -46,7 +46,7 @@ React.forwardRef<ModalInputRefElement, ModalInputProps>(
         <UserActionsConsumer>
           <Card2 css={ModalElement.card2Style}>
             <ItemLabel>{title}</ItemLabel>
-            <Input css={InputStyle.inputSmall}
+            <Input css={InputStyle.outlinedRectSmallNormal}
               {...restProps}
               ref={forwardedRef}
             />

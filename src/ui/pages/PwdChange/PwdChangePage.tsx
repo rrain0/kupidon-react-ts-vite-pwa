@@ -160,7 +160,7 @@ React.memo(
             <ValidationWrap {...validationProps}
               fieldName="currentPwd"
               render={props => <PwdInput
-                css={InputStyle.inputSmall}
+                css={InputStyle.outlinedRectSmallNormal}
                 placeholder={placeholderText.currentPwd}
                 {...props.inputProps}
                 hasError={props.highlight}
@@ -176,7 +176,7 @@ React.memo(
             <ValidationWrap {...validationProps}
               fieldName="pwd"
               render={props => <PwdInput
-                css={InputStyle.inputSmall}
+                css={InputStyle.outlinedRectSmallNormal}
                 placeholder={placeholderText.newPwd}
                 {...props.inputProps}
                 hasError={props.highlight}
@@ -192,7 +192,7 @@ React.memo(
             <ValidationWrap {...validationProps}
               fieldName="repeatPwd"
               render={props => <PwdInput
-                css={InputStyle.inputSmall}
+                css={InputStyle.outlinedRectSmallNormal}
                 placeholder={placeholderText.repeatPwd}
                 {...props.inputProps}
                 hasError={props.highlight}

@@ -1,25 +1,551 @@
 import { css } from '@emotion/react'
 import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import isObject = TypeUtils.isobject
 import isstring = TypeUtils.isstring
 import SingleOrArr = ArrayUtils.SingleOrArr
 import exists = TypeUtils.exists
+import ObjectMap = ObjectUtils.ObjectMap
 
 
 
 
 export namespace WidgetStyle {
   
-  
-  
-  
-  // NEW
-  {
-    class CssWidget {
+  /*
+  Has Element list
+  Has State List
+  Has SINGLE Root element
+  */
+  export class CssWidget<const E extends string, const S extends string> {
     
+    constructor(
+      readonly root: NoInfer<E>,
+      readonly states: Record<S, CssWidgetState>,
+      readonly elements: Record<E, CssWidgetElement>,
+    ) { }
+  
+    get use() {
+      return new UseCssWidget(this)
     }
+    
+    static ofRoot<E extends string, S extends string>
+    (name: E, element: Elem<S>): CssWidget<E, S> {
+      return new CssWidget<E, S>(
+        name,
+        // @ts-ignore
+        {
+          // @ts-ignore
+          ...ObjectMap(element.states, ([stateName, cssState]) => [
+            stateName,
+            new CssWidgetState(name, cssState),
+          ]),
+        },
+        // @ts-ignore
+        {
+          [name]: new CssWidgetElement(element),
+        }
+      )
+    }
+    
+    addRoot<NE extends Exclude<string, E>, NS extends Exclude<string, S>>
+    (name: NE, element: Elem<NS>): CssWidget<E | NE, S | NS> {
+      return new CssWidget<E | NE, S | NS>(
+        name,
+        // @ts-ignore
+        {
+          ...this.states,
+          // @ts-ignore
+          ...ObjectMap(element.states, ([stateName, cssState]) => [
+            stateName,
+            new CssWidgetState(name, cssState),
+          ]),
+        },
+        // @ts-ignore
+        {
+          ...this.elements,
+          [name]: new CssWidgetElement(element),
+        }
+      )
+    }
+    
+    add<NE extends Exclude<string, E>, NS extends Exclude<string, S>>
+    (up: E, selector: string, name: NE, element: Elem<NS>): CssWidget<E | NE, S | NS> {
+      return new CssWidget<E | NE, S | NS>(
+        this.root,
+        // @ts-ignore
+        {
+          ...this.states,
+          // @ts-ignore
+          ...ObjectMap(element.states, ([stateName, cssState]) => [
+            stateName,
+            new CssWidgetState(name, cssState),
+          ]),
+        },
+        // @ts-ignore
+        {
+          ...this.elements,
+          [name]: new CssWidgetElement(element, up, selector),
+        }
+      )
+    }
+  
+  }
+  
+  
+  export class UseCssWidget<const E extends string, const S extends string> {
+    readonly s: Record<S, () => UseCssWidget<E, S>>
+    readonly e: Record<E, () => UseCssWidget<E, S>>
+    
+    constructor(
+      readonly widget: CssWidget<E, S>,
+    ) {
+      this.s = ObjectMap(widget.states, ([name]) => [
+        name,
+        () => {
+          this.state = name
+          return this
+        }
+      ])
+      this.e = ObjectMap(widget.elements, ([name]) => [
+        name,
+        () => {
+          this.element = name
+          return this
+        }
+      ])
+    }
+    
+    state:   S | null = null
+    element: E | null = null
+    
+    get use() {
+      if (this.element === null) throw new Error('element is null')
+      
+      let selector = ''
+      let eName = this.element
+      const e = () => this.widget.elements[eName]
+      const s = this.state === null ? null : this.widget.states[this.state]
+      let stateWasApplied = false
+      
+      while (eName) {
+        if (s !== null) {
+          if (!stateWasApplied && eName === s.ownerElementName){
+            selector = s.use + selector
+            stateWasApplied = true
+          }
+          else if (!stateWasApplied && eName === this.widget.root) {
+            const startName = eName
+            let endName = s.ownerElementName
+            const end = () => this.widget.elements[endName]
+            let stateSelector = ''
+            
+            while (startName !== endName) {
+              stateSelector = end().use + stateSelector
+              endName = end().upElementName as E
+            }
+            
+            if (stateSelector) {
+              selector = `:has(${stateSelector}${s.use})` + selector
+              stateWasApplied = true
+            }
+          }
+        }
+        
+        selector = e().use + selector
+        eName = e().upElementName as E
+      }
+      
+      return selector
+    }
+    
+    get thisUse() {
+      return `&${this.use}`
+    }
+  }
+  
+  
+  export class CssWidgetElement {
+    constructor(
+      readonly element: Elem<any>,
+      // '' if this element is root
+      readonly upElementName = '',
+      readonly upSelector = '',
+    ) { }
+    
+    get use() {
+      return `${this.upSelector}${this.element.use}`
+    }
+  }
+  
+  
+  export class CssWidgetState {
+    constructor(
+      readonly ownerElementName: string,
+      readonly state: CssState,
+    ) { }
+    
+    get use() {
+      return this.state.use
+    }
+  }
+  
+  
+  
+  
+  
+  
+  export class Pseudo {
+    constructor(
+      // 'hover'
+      readonly name: string
+    ) { }
+    
+    // ':hover'
+    get use() {
+      const name = this.name
+      if (!name) return ''
+      return `:${name}`
+    }
+    // '&:hover'
+    get thisUse() {
+      const use = this.use
+      if (!use) return ''
+      return `&${use}`
+    }
+    
+    static readonly empty = new Pseudo('')
+    static readonly checked = new Pseudo('checked')
+    static readonly hover = new Pseudo('hover')
+    static readonly active = new Pseudo('active')
+    static readonly focus = new Pseudo('focus')
+    static readonly focusVisible = new Pseudo('focus-visible')
+    static readonly readOnly = new Pseudo('read-only')
+    static readonly disabled = new Pseudo('disabled')
+  }
+  
+  
+  export class Attr {
+    constructor(
+      // attr name
+      // 'checked' 'data-error'
+      readonly name: string
+    ) { }
+    
+    // attr selector
+    // '[checked]' '[data-error]'
+    get use() {
+      const name = this.name
+      if (!name) return ''
+      return `[${name}]`
+    }
+    
+    // attr this selector
+    // '&[checked]' '&[data-error]'
+    get thisUse() {
+      const use = this.use
+      if (!use) return ''
+      return `&${use}`
+    }
+    
+    static readonly empty = new Attr('')
+    static readonly checked = new Attr('checked')
+    static readonly dataError = new Attr('data-error')
+  }
+  
+  
+  export type CssState = Pseudo | Attr
+  
+  
+  
+  export class AttrEnum<const V extends string> {
+    constructor(
+      // attr name
+      // 'direction'
+      readonly name: string,
+      // possible values
+      // ['horizontal', 'vertical']
+      readonly values: V[],
+    ) { }
+    
+    // attr name-value combiner
+    // 'direction=vertical'
+    nameValue(value: V | '' = '') {
+      const name = this.name
+      if (!name) return ''
+      if (!value) return name
+      return `${name}=${value}`
+    }
+    
+    // attr selector
+    // '[direction=vertical]'
+    use(value: V | '' = '') {
+      const nameValue = this.nameValue(value)
+      if (!nameValue) return ''
+      return `[${nameValue}]`
+    }
+    
+    // attr this selector
+    // '&[direction=vertical]'
+    thisUse(value: V | '' = '') {
+      const use = this.use()
+      if (!use) return ''
+      return `&${use}`
+    }
+    
+    toAttr(value: V | '' = '') {
+      const nameValue = this.nameValue(value)
+      return new Attr(nameValue)
+    }
+    
+    
+    static readonly empty = new AttrEnum('', [])
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
+    static readonly inputType = new AttrEnum('type', ['radio', 'checkbox'])
+  }
+  
+  
+  
+  export class Elem<S extends string> {
+    constructor(
+      // classname
+      // 'rrainuiButton'
+      readonly name: string,
+      readonly states: Record<S, CssState>,
+    ) { }
+    
+    // dot classname
+    // '.rrainuiButton'
+    get use() {
+      if (!this.name) return ''
+      return `.${this.name}`
+    }
+    
+    // & dot classname
+    // '&.rrainuiButton'
+    get thisUse() {
+      const use = this.use
+      if (!use) return ''
+      return `&${use}`
+    }
+  }
+  
+  
+  
+  {
+    // TEST button:hover > input
+    const btn = new Elem('rrainuiButton', {
+      normal: Pseudo.empty,
+      hover: Pseudo.hover,
+    })
+    const border = new Elem('rrainuiBorder', { })
+    
+    {
+      const a = btn.states.hover
+      //const b = frame.states.SOMETHING_ELSE // error
+    }
+    
+    const buttonWidgetBtn = CssWidget.ofRoot('btn', btn)
+    
+    {
+      const a = buttonWidgetBtn.states.hover
+      //const b = buttonWidget.states.SOMETHING_ELSE // error
+      const c = buttonWidgetBtn.elements.btn
+      //const d = buttonWidget.elements.SOMETHING_ELSE // error
+    }
+    
+    const buttonWidget = buttonWidgetBtn.add('btn', '>', 'border', border)
+    
+    {
+      //const buttonWidget = inputWidget.add('SOMETHING_ELSE', '>', 'input', input) // error
+    }
+    
+    const hoverBorder = buttonWidget.use.s.hover().e.border().use
+    
+    {
+      //const hoverBorder1 = buttonWidget.use.s.SOMETHING_ELSE().e.input().use // error
+      //const hoverBorder2 = buttonWidget.use.s.hover().e.SOMETHING_ELSE().use // error
+    }
+    
+    // .rrainuiButton>.rrainuiBorder
+    //console.log('hoverBorder', hoverBorder)
+    
+  }
+  {
+    // TEST frame > input:hover
+    const frame = new Elem('rrainuiFrame', { })
+    const input = new Elem('rrainuiInput', {
+      normal: Pseudo.empty,
+      hover: Pseudo.hover,
+    })
+    
+    {
+      //const a = frame.states.SOMETHING_ELSE // error
+    }
+    
+    const inputWidgetFrame = CssWidget.ofRoot('frame', frame)
+    const inputWidget = inputWidgetFrame.add('frame', '>', 'input', input)
+    
+    {
+      const a = inputWidget.states.hover
+      //const b = inputWidget.states.SOMETHING_ELSE // error
+      const c = inputWidget.elements.input
+      //const d = inputWidget.elements.SOMETHING_ELSE // error
+    }
+    
+    
+    {
+      //const widget = inputWidget.add('SOMETHING_ELSE', '>', 'input', input) // error
+    }
+    
+    const hoverInput = inputWidget.use.s.hover().e.input().use
+    
+    {
+      //const hoverInput1 = inputWidget.use.s.SOMETHING_ELSE().e.input().use // error
+      //const hoverInput2 = inputWidget.use.s.hover().e.SOMETHING_ELSE().use // error
+    }
+    
+    // hoverInput .rrainuiFrame>.rrainuiInput:hover
+    //console.log('hoverInput', hoverInput)
+    
+  }
+  {
+    // TEST frame > input, frame > border:hover
+    const frame = new Elem('rrainuiFrame', { })
+    const input = new Elem('rrainuiInput', { })
+    const border = new Elem('rrainuiBorder', {
+      normal: Pseudo.empty,
+      hover: Pseudo.hover,
+    })
+    
+    {
+      //const a = frame.states.SOMETHING_ELSE // error
+    }
+    
+    const inputWidgetFrame = CssWidget.ofRoot('frame', frame)
+    const inputWidgetInput = inputWidgetFrame.add('frame', '>', 'input', input)
+    const inputWidget = inputWidgetInput.add('frame', '>', 'border', border)
+    
+    
+    const hoverInputFromBorder = inputWidget.use.s.hover().e.input().use
+    
+    // .rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
+    console.log('hoverInputFromBorder', hoverInputFromBorder)
+    
+    const thisHoverInputFromBorder = inputWidget.use.s.hover().e.input().thisUse
+    
+    // &.rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
+    //console.log('thisHoverInputFromBorder', thisHoverInputFromBorder)
+    
+  }
+  {
+    /*
+     ${W.use.s.active().e.btn().useThis} { }
+     ${El.btn.thiz('active')} { }
+    */
+  }
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  export class CssProp {
+    readonly name: string
+    
+    constructor(name: string) {
+      this.name = name
+    }
+    
+    setAny(value: string): string {
+      return `${this.name}: ${value};`
+    }
+    varAny(defaultValue?: string): string {
+      const nameAndDefault = [this.name]
+      if (exists(defaultValue)) nameAndDefault.push(defaultValue)
+      return `var(${nameAndDefault.join(', ')})`
+    }
+    
+    set(value: string): string {
+      return this.setAny(value)
+    }
+    var(defaultValue?: string): string {
+      return this.varAny(defaultValue)
+    }
+    withDefault(defaultValue?: string): string {
+      return this.set(this.var(defaultValue))
+    }
+    
+    
+    static readonly color = new class extends CssProp {
+      override setAny(value: string): string {
+        return `${super.setAny(value)} color: ${value};`
+      }
+    }('--color')
+  }
+  
+  export class CssPropEnum<const V extends readonly string[]> extends CssProp {
+    readonly values: V
+    
+    constructor(name: string, values: V) {
+      super(name)
+      this.values = values
+    }
+    
+    override set(value: V[number]): string {
+      return this.setAny(value)
+    }
+    override var(defaultValue?: V[number]): string {
+      return this.varAny(defaultValue)
+    }
+    override withDefault(defaultValue?: V[number]): string {
+      return this.setAny(this.varAny(defaultValue))
+    }
+  }
+  
+  // @deprecated todo remove
+  export const CssPropColor = new class extends CssProp {
+    override setAny(value: string): string {
+      return `${super.setAny(value)} color: ${value};`
+    }
+  }('--color')
+  
+  
+  
+  
+  { // CssProp EXAMPLE
+    const Prop = {
+      prop: new CssProp('--prop'),
+      propEnum: new CssPropEnum('--prop-enum', ['black', 'white', 'default-value']),
+    } as const
+    
+    const cssPropExample = css`
+      // --prop: value;
+      ${Prop.prop.name}: value;
+      // --prop: var(--prop);
+      ${Prop.prop.name}: ${Prop.prop.var()};
+      // --prop: var(--prop, default-value);
+      ${Prop.prop.name}: ${Prop.prop.var('default-value')};
+      // --prop: var(--prop, default-value);
+      ${Prop.prop.withDefault('default-value')};
+      
+      // --prop-enum: black;
+      ${Prop.propEnum.set('black')};
+      // --prop-enum: black;
+      ${Prop.propEnum.name}: black;
+      // --prop-enum: var(--prop-enum);
+      ${Prop.propEnum.name}: ${Prop.propEnum.var()};
+      // --prop-enum: var(--prop-enum, default-value);
+      ${Prop.propEnum.name}: ${Prop.propEnum.var('default-value')};
+      // --prop-enum: var(--prop-enum, default-value);
+      ${Prop.propEnum.withDefault('default-value')};
+    `
   }
   
   
@@ -30,7 +556,24 @@ export namespace WidgetStyle {
   
   
   
-  export class Pseudo {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // todo REMOVE ALL BELOW:
+  
+  
+  
+  export class Pseudo0 {
     readonly name: string
     
     readonly sel: string
@@ -49,21 +592,14 @@ export namespace WidgetStyle {
     
     
     
-    static readonly empty = new Pseudo('')
-    static readonly hover = new Pseudo('hover')
-    static readonly active = new Pseudo('active')
-    static readonly focus = new Pseudo('focus')
-    static readonly focusVisible = new Pseudo('focus-visible')
-    static readonly checked = new Pseudo('checked')
-    static readonly disabled = new Pseudo('disabled')
+    static readonly empty = new Pseudo0('')
+    static readonly hover = new Pseudo0('hover')
+    static readonly active = new Pseudo0('active')
+    static readonly focus = new Pseudo0('focus')
+    static readonly focusVisible = new Pseudo0('focus-visible')
+    static readonly checked = new Pseudo0('checked')
+    static readonly disabled = new Pseudo0('disabled')
   }
-  // todo remove
-  export const PseudoEmpty = new Pseudo('')
-  export const PseudoHover = new Pseudo('hover')
-  export const PseudoActive = new Pseudo('active')
-  export const PseudoFocus = new Pseudo('focus')
-  export const PseudoFocusVisible = new Pseudo('focus-visible')
-  export const PseudoDisabled = new Pseudo('disabled')
   
   
   
@@ -117,10 +653,10 @@ export namespace WidgetStyle {
   
   
   
-  export function combineStates(...states: (Pseudo|DataAttr<any>)[]): Pseudo {
-    if (states.length===0) return Pseudo.empty
+  export function combineStates(...states: (Pseudo0|DataAttr<any>)[]): Pseudo0 {
+    if (states.length===0) return Pseudo0.empty
     if (states.length===1) return states[0]
-    return new Pseudo(`is(${states.map(it=>it.sel).join(',')})`)
+    return new Pseudo0(`is(${states.map(it=>it.sel).join(',')})`)
   }
   
   
@@ -128,23 +664,23 @@ export namespace WidgetStyle {
   
   
   export type StateForElem<S extends string> = {
-    elem: Elem<any,any,any> | 'root',
+    elem: Elem0<any,any,any> | 'root',
     state: S[],
   }
   
   
   export type ElemStateDescriptor<S extends string>
-    = Record<S, SingleOrArr<Pseudo | DataAttr<any>>>
+    = Record<S, SingleOrArr<Pseudo0 | DataAttr<any>>>
   
   
-  export class Elem
+  export class Elem0
   <
     S extends string,
     RootS extends string = S,
     P extends Record<string, CssProp> = Record<string, never>
   >
   {
-    #up: Elem<any,any,any> | undefined
+    #up: Elem0<any,any,any> | undefined
     get up(){ return this.#up }
     upSelector = ''
     
@@ -220,8 +756,8 @@ export namespace WidgetStyle {
     
     
     toElem<Down extends string, DownP extends Record<string, CssProp>>
-    (selector: string, down: Elem<Down,any,DownP>): Elem<Down,RootS,DownP> {
-      const newDown = new Elem<Down,RootS,DownP>(down.name, down.states, down.props)
+    (selector: string, down: Elem0<Down,any,DownP>): Elem0<Down,RootS,DownP> {
+      const newDown = new Elem0<Down,RootS,DownP>(down.name, down.states, down.props)
       newDown.#up = this
       newDown.upSelector = selector
       return newDown
@@ -284,130 +820,6 @@ export namespace WidgetStyle {
   
   
   
-  
-  
-  
-  
-  export class CssProp {
-    readonly name: string
-    
-    constructor(name: string) {
-      this.name = name
-    }
-    
-    setAny(value: string): string {
-      return `${this.name}: ${value};`
-    }
-    varAny(defaultValue?: string): string {
-      const nameAndDefault = [this.name]
-      if (exists(defaultValue)) nameAndDefault.push(defaultValue)
-      return `var(${nameAndDefault.join(', ')})`
-    }
-    
-    set(value: string): string {
-      return this.setAny(value)
-    }
-    var(defaultValue?: string): string {
-      return this.varAny(defaultValue)
-    }
-    withDefault(defaultValue?: string): string {
-      return this.set(this.var(defaultValue))
-    }
-  }
-  
-  export class CssPropEnum<const V extends readonly string[]> extends CssProp {
-    readonly values: V
-    
-    constructor(name: string, values: V) {
-      super(name)
-      this.values = values
-    }
-    
-    override set(value: V[number]): string {
-      return this.setAny(value)
-    }
-    override var(defaultValue?: V[number]): string {
-      return this.varAny(defaultValue)
-    }
-    override withDefault(defaultValue?: V[number]): string {
-      return this.setAny(this.varAny(defaultValue))
-    }
-  }
-  
-  export const CssPropColor = new class extends CssProp {
-    override setAny(value: string): string {
-      return `${super.setAny(value)} color: ${value};`
-    }
-  }('--color')
-  
-  
-  
-  
-  { // CssProp EXAMPLE
-    const Prop = {
-      prop: new CssProp('--prop'),
-      propEnum: new CssPropEnum('--prop-enum', ['black', 'white', 'default-value']),
-    } as const
-    
-    const cssPropExample = css`
-      // --prop: value;
-      ${Prop.prop.name}: value;
-      // --prop: var(--prop);
-      ${Prop.prop.name}: ${Prop.prop.var()};
-      // --prop: var(--prop, default-value);
-      ${Prop.prop.name}: ${Prop.prop.var('default-value')};
-      // --prop: var(--prop, default-value);
-      ${Prop.prop.withDefault('default-value')};
-      
-      // --prop-enum: black;
-      ${Prop.propEnum.set('black')};
-      // --prop-enum: black;
-      ${Prop.propEnum.name}: black;
-      // --prop-enum: var(--prop-enum);
-      ${Prop.propEnum.name}: ${Prop.propEnum.var()};
-      // --prop-enum: var(--prop-enum, default-value);
-      ${Prop.propEnum.name}: ${Prop.propEnum.var('default-value')};
-      // --prop-enum: var(--prop-enum, default-value);
-      ${Prop.propEnum.withDefault('default-value')};
-    `
-  }
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  // todo REMOVE
   
   export namespace Attr0 {
     export const attr = {

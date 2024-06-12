@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import DataAttr = WidgetStyle.DataAttr
-import Elem = WidgetStyle.Elem
-import Pseudo = WidgetStyle.Pseudo
+import Elem = WidgetStyle.Elem0
+import Pseudo = WidgetStyle.Pseudo0
 import CssProp = WidgetStyle.CssProp
 import CssPropEnum = WidgetStyle.CssPropEnum
 

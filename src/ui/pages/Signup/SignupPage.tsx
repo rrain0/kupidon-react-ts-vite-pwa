@@ -204,7 +204,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName='email'
             render={props => <Input
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.matchedSystemLangs}
               {...props.inputProps}
               hasError={props.highlight}
@@ -214,7 +214,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName='pwd'
             render={props => <PwdInput
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.pwd}
               {...props.inputProps}
               hasError={props.highlight}
@@ -224,7 +224,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName='repeatPwd'
             render={props => <PwdInput
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.repeatPwd}
               {...props.inputProps}
               hasError={props.highlight}
@@ -234,7 +234,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName='name'
             render={props => <Input
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.name}
               {...props.inputProps}
               hasError={props.highlight}
@@ -244,7 +244,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName='birthDate'
             render={props => <Input
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.birthDate}
               {...props.inputProps}
               hasError={props.highlight}

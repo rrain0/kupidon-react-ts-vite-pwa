@@ -46,17 +46,17 @@ React.forwardRef<InputRefElement, InputProps>(
   
   
   const frameProps = {
-    className: clsx(className, InputStyle.El.frameClassName),
+    className: clsx(className, InputStyle.W.elements.frame.element.name),
     style: style,
     ...fProps,
   }
   const inputProps = {
-    className: InputStyle.El.inputClassName,
-    [InputStyle.Attr.errorName]: trueOrUndef(hasError),
+    className: InputStyle.W.elements.input.element.name,
+    [InputStyle.W.states.error.state.name]: trueOrUndef(hasError),
     ...restProps,
   }
   const borderProps = {
-    className: InputStyle.El.borderClassName,
+    className: InputStyle.W.elements.border.element.name,
   }
   
   

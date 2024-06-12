@@ -3,7 +3,7 @@ import { ScrollbarOverlayStyle } from 'src/ui/widgets/Scrollbars/ScrollbarOverla
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import { ScrollbarStyle } from 'src/ui/widgets/Scrollbar/ScrollbarStyle.ts'
-import Elem = WidgetStyle.Elem
+import Elem = WidgetStyle.Elem0
 import col = EmotionCommon.col
 
 

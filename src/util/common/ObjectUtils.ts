@@ -112,7 +112,7 @@ export namespace ObjectUtils {
   export function ObjectMap
   <O1 extends object, O2 extends object>
   (object: O1,
-   mapper: (entry: ObjectEntriesType<O1>, object: O1)=>ObjectEntriesType<O2>
+   mapper: (entry: ObjectEntriesType<O1>, object: O1) => ObjectEntriesType<O2>
   )
   : O2 {
     const object2 = {} as O2

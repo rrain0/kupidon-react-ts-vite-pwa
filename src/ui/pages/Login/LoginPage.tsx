@@ -156,7 +156,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName="login"
             render={props => <Input
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.loginEmail}
               {...props.inputProps}
               hasError={props.highlight}
@@ -166,7 +166,7 @@ React.memo(
           <ValidationWrap {...validationProps}
             fieldName="pwd"
             render={props => <PwdInput
-              css={InputStyle.inputNormal}
+              css={InputStyle.outlinedRectNormalNormal}
               placeholder={placeholderText.pwd}
               {...props.inputProps}
               hasError={props.highlight}

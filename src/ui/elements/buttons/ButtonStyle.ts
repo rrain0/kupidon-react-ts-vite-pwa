@@ -8,8 +8,8 @@ import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Theme = AppTheme.Theme
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import Elem = WidgetStyle.Elem
-import Pseudo = WidgetStyle.Pseudo
+import Elem = WidgetStyle.Elem0
+import Pseudo = WidgetStyle.Pseudo0
 import CssProp = WidgetStyle.CssProp
 import CssPropEnum = WidgetStyle.CssPropEnum
 import CssPropColor = WidgetStyle.CssPropColor
