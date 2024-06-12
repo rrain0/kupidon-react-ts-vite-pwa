@@ -9,28 +9,28 @@ import ItemLabel from 'src/ui/elements/basic-elements/ItemLabel.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Card2 from 'src/ui/elements/cards/Card2.tsx'
-import Input, { InputProps, InputRefElement } from 'src/ui/elements/inputs/Input/Input.tsx'
+import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
 import Callback = TypeUtils.Callback
+import PartialUndef = TypeUtils.PartialUndef
 
 
 
 
-export type ModalInputCustomProps = {
+
+
+type ModalInputProps = React.ComponentPropsWithoutRef<typeof Input> & PartialUndef<{
   isOpen: boolean
   onClose: Callback
   title: string
-}
-export type ModalInputForwardRefProps = InputProps
-export type ModalInputRefElement = InputRefElement
-export type ModalInputProps = ModalInputCustomProps & ModalInputForwardRefProps
+}>
 
 
 
 const ModalInput =
 React.memo(
-React.forwardRef<ModalInputRefElement, ModalInputProps>(
+React.forwardRef<HTMLInputElement, ModalInputProps>(
 (props, forwardedRef)=>{
   const {
     isOpen, onClose, title,

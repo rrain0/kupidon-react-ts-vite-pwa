@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import Input, {InputProps} from "src/ui/elements/inputs/Input/Input.tsx"
+import Input from "src/ui/elements/inputs/Input/Input.tsx"
 import { useRef, useState } from 'react'
 import React from "react"
-import {SvgIcons} from "src/ui/elements/icons/SvgIcons/SvgIcons.tsx"
+import { SvgIcons } from "src/ui/elements/icons/SvgIcons/SvgIcons.tsx"
 import EyeCrossedOutIc = SvgIcons.EyeCrossedOutIc
 import EyeIc = SvgIcons.EyeIc
 import Ripple from "src/ui/elements/Ripple/Ripple.tsx"
@@ -18,10 +18,14 @@ import hoverable = EmotionCommon.hoverable
 
 
 
+
 const PwdInput =
 React.memo(
-React.forwardRef<HTMLInputElement, Omit<InputProps,'type'|'children'>>(
-  (props, forwardedRef) => {
+React.forwardRef<
+  HTMLInputElement,
+  Omit<React.ComponentPropsWithoutRef<typeof Input>,'type'|'children'>
+>(
+(props, forwardedRef) => {
   const { ...restProps } = props
   
   const [pwdHidden, setPwdHidden] = useState(true)

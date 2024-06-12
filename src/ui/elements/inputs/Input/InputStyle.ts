@@ -1,5 +1,8 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import row = EmotionCommon.row
+import resetInput = EmotionCommon.resetInput
+import abs = EmotionCommon.abs
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
@@ -12,6 +15,7 @@ import PartialUndef = TypeUtils.PartialUndef
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import CssProp = WidgetStyle.CssProp
+
 
 
 
@@ -52,9 +56,35 @@ export namespace InputStyle {
   
   
   
+  const basic = css`
+    ${W.use.s.normal().e.frame().thisUse} {
+      //container: input / size;
+      ${row};
+      align-items: center;
+      width: 100%;
+      // min-height not works for stretch children while display: flex
+      height: 50px;
+      position: relative;
+    }
+    ${W.use.s.normal().e.input().thisUse} {
+      ${resetInput};
+      flex: 1;
+      align-self: stretch;
+      border-radius: inherit;
+    }
+    ${W.use.s.normal().e.border().thisUse} {
+      ${abs};
+      pointer-events: none;
+      border-radius: inherit;
+    }
+  `
+  
+  
   
   // type: outlined, shape: rect, size: normal
   const outlinedRectNormal = css`
+    ${basic};
+    
     // normal
     ${W.use.s.normal().e.frame().thisUse} {
       height: 50px;

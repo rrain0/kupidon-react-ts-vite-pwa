@@ -12,6 +12,7 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 
+/*
 
 export type InputCustomProps = PartialUndef<{
   hasError: boolean
@@ -25,11 +26,23 @@ export type InputForwardRefProps = React.JSX.IntrinsicElements['input']
 export type InputRefElement = HTMLInputElement
 export type InputProps = InputCustomProps & InputForwardRefProps
 
+*/
+
+
+type InputElement = HTMLInputElement
+type InputProps = React.ComponentPropsWithoutRef<'input'> & PartialUndef<{
+  hasError: boolean
+  startViews: React.ReactNode
+  endViews: React.ReactNode
+  children: React.ReactNode
+  childrenPosition: 'start' | 'end'
+  frameProps: React.ComponentPropsWithoutRef<'label'>
+}>
 
 
 const Input =
 React.memo(
-React.forwardRef<InputRefElement, InputProps>(
+React.forwardRef<InputElement, InputProps>(
 (props, forwardedRef) => {
   let {
     hasError,
@@ -41,7 +54,7 @@ React.forwardRef<InputRefElement, InputProps>(
   childrenPosition ??= 'end'
   
   
-  const elemRef = useRef<InputRefElement>(null)
+  const elemRef = useRef<InputElement>(null)
   useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
   
   
@@ -60,14 +73,14 @@ React.forwardRef<InputRefElement, InputProps>(
   }
   
   
-  return <label /* Frame */ css={frameStyle}
+  return <label /* Frame */
     {...frameProps}
   >
     
     { startViews }
     { childrenPosition==='start' && children }
     
-    <input /* Input */ css={inputStyle}
+    <input /* Input */
       {...inputProps}
       ref={elemRef}
     />
@@ -75,7 +88,7 @@ React.forwardRef<InputRefElement, InputProps>(
     { childrenPosition==='end' && children }
     { endViews }
     
-    <div /* Border */ css={borderStyle}
+    <div /* Border */
       {...borderProps}
     />
     
@@ -85,32 +98,4 @@ export default Input
 
 
 
-
-const frameStyle = css`
-  container: input / size;
-  ${row};
-  align-items: center;
-  width: 100%;
-  // min-height not works for stretch children while display: flex
-  height: 50px;
-  position: relative;
-`
-
-
-
-const inputStyle = css`
-  ${resetInput};
-  flex: 1;
-  align-self: stretch;
-  border-radius: inherit;
-`
-
-
-
-
-const borderStyle = css`
-  ${abs};
-  pointer-events: none;
-  border-radius: inherit;
-`
 

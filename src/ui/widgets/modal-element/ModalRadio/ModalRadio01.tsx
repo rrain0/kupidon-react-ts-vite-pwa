@@ -2,9 +2,9 @@ import { css } from '@emotion/react'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import { InputProps } from 'src/ui/elements/inputs/Input/Input.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
@@ -21,7 +21,7 @@ export type ModalRadioProps<V extends string> = {
   close: Callback
   title: string
   options: Option<V>[]
-  radioInputProps: (value: V)=>InputProps
+  radioInputProps: (value: V) => React.ComponentPropsWithoutRef<typeof Input>
 }
 
 
