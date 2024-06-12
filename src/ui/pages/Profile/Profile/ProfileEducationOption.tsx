@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Education } from 'src/api/model/Education.ts'
 import { Option } from 'src/ui/model/Option.ts'
-import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio01.tsx'
+import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-props/ui-values/OptionUiText.ts'
@@ -43,7 +43,7 @@ React.memo(
   
   
   const educationOptions = useMemo(
-    ()=>[
+    () => [
       {
         value: 'HIGHER_EDUCATION',
         text: text.higherEducation,
@@ -85,7 +85,8 @@ React.memo(
       close={close}
       title={titleText.education}
       options={educationOptions}
-      radioInputProps={(value: EducationOptionValues)=>props.radioInputProps(value)}
+      value={props.value}
+      onSelect={props.setValue}
     />
   </>
 })

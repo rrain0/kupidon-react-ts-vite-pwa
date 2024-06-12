@@ -14,7 +14,7 @@ import hoverable = EmotionCommon.hoverable
 export namespace IconButtonStyle {
   
   export const Attr = {
-    ...ButtonStyle.Attr,
+    ...ButtonStyle.Attr0,
   } as const
   
   export const El = function(){
@@ -28,7 +28,7 @@ export namespace IconButtonStyle {
   
   
   export const icon = (t:Theme) => css`
-    ${ButtonStyle.common};
+    ${ButtonStyle.basic};
     // normal
     ${El.btn.thiz()} {
       height: 50px;
@@ -116,7 +116,7 @@ export namespace IconButtonStyle {
   
   
   export const nav = (t:Theme)=>css`
-    ${ButtonStyle.common};
+    ${ButtonStyle.basic};
     // normal
     ${El.btn.thiz()} {
       height: 100%;

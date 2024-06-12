@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio01.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-props/ui-values/OptionUiText.ts'
@@ -23,7 +22,7 @@ const overlayName = 'favoriteBookGenres'
 
 const ProfileFavoriteBookGenresOption =
 React.memo(
-()=>{
+() => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   

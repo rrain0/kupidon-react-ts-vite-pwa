@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui/model/Option.ts'
-import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio01.tsx'
+import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-props/ui-values/OptionUiText.ts'
@@ -71,7 +71,8 @@ React.memo(
       close={close}
       title={text.gender}
       options={genderOptions}
-      radioInputProps={(value: GenderOptionValues)=>props.radioInputProps(value)}
+      value={props.value}
+      onSelect={props.setValue}
     />
   </>
 })

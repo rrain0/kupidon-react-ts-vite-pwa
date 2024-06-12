@@ -8,8 +8,12 @@ import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Theme = AppTheme.Theme
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import Elem = WidgetStyle.Elem0
-import Pseudo = WidgetStyle.Pseudo0
+import CssWidget = WidgetStyle.CssWidget
+import Elem = WidgetStyle.Elem
+import Pseudo = WidgetStyle.Pseudo
+import Attr = WidgetStyle.Attr
+import Elem0 = WidgetStyle.Elem0
+import Pseudo0 = WidgetStyle.Pseudo0
 import CssProp = WidgetStyle.CssProp
 import CssPropEnum = WidgetStyle.CssPropEnum
 import CssPropColor = WidgetStyle.CssPropColor
@@ -22,37 +26,66 @@ import contains = ArrayUtils.contains
 
 export namespace ButtonStyle {
   
-  export const Attr = {
+  export const Attr0 = {
     error: DataAttrError
   } as const
   
   export const El = function(){
-    const btn = new Elem('rrainuiButton', {
-      hover: Pseudo.hover,
-      active: Pseudo.active,
-      focus: Pseudo.focus,
-      focusVisible: Pseudo.focusVisible,
-      disabled: Pseudo.disabled,
-      error: Attr.error,
+    const btn = new Elem0('rrainuiButton', {
+      hover: Pseudo0.hover,
+      active: Pseudo0.active,
+      focus: Pseudo0.focus,
+      focusVisible: Pseudo0.focusVisible,
+      disabled: Pseudo0.disabled,
+      error: Attr0.error,
     },{
       color: CssPropColor,
     })
-    const border = btn.toElem('>', new Elem('rrainuiBorder',{},{}))
-    const ripple = border.toElem('>', new Elem(RippleStyle.El.frameClassName,{},{
+    const border = btn.toElem('>', new Elem0('rrainuiBorder',{},{}))
+    const ripple = border.toElem('>', new Elem0(RippleStyle.El.frameClassName,{},{
       mode: new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
       color: new CssProp(RippleStyle.Prop.color),
     }))
     return { root: btn, btn, border, ripple } as const
   }()
   
-  // todo remove
+  
+  export const W = function(){
+    const button = new Elem('rrainuiButton', {
+      normal: Pseudo.empty,
+      hover: Pseudo.hover,
+      active: Pseudo.active,
+      focus: Pseudo.focus,
+      focusVisible: Pseudo.focusVisible,
+      readOnly: Pseudo.readOnly,
+      disabled: Pseudo.disabled,
+      error: Attr.dataError,
+    })
+    const border = new Elem('rrainuiBorder', { })
+    const ripple = new Elem(RippleStyle.El.frameClassName, { })
+    
+    const buttonWidget = CssWidget
+      .ofRoot('button', button)
+      .add('button', '>', 'border', border)
+      .add('border', '>', 'ripple', ripple)
+    
+    return buttonWidget
+  }()
+  
+  
+  
   export const Prop = {
-    color: CssPropColor,
+    color: CssProp.color,
   } as const
   
   
   
-  export const common = css`
+  
+  
+  
+  
+  
+  export const basic = css`
     // normal
     ${El.btn.thiz()} {
       border: none;
@@ -71,7 +104,7 @@ export namespace ButtonStyle {
   
   // type: filled, shape: rect, size: big
   const filledRectBig = css`
-    ${common};
+    ${basic};
     ${El.btn.thiz()} {
       width: 100%;
       min-height: 50px;
@@ -232,7 +265,7 @@ export namespace ButtonStyle {
   
   // type: filled, shape: rounded, size: normal
   const filledRoundedNormal = css`
-    ${common};
+    ${basic};
     ${El.btn.thiz()} {
       min-width: 90px;
       width: fit-content;
@@ -311,7 +344,7 @@ export namespace ButtonStyle {
   
   // type: outlined, shape: rounded, size: normal
   const outlinedRoundedNormal = css`
-    ${common};
+    ${basic};
     ${El.btn.thiz()} {
       min-width: 90px;
       width: fit-content;
@@ -696,26 +729,26 @@ export namespace ButtonStyle {
   
   
   export const bigRectDanger = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.bigRect};
     ${Color.danger(t)};
   `
   
   
   export const smallRectAccent = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.smallRect};
     ${Color.accent(t)};
   `
   export const smallRectTransparent = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.smallRect};
     ${Color.transparent(t)};
   `
   
   
   export const roundedAccent = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.rounded};
     ${Color.accent(t)};
     ${El.border.thiz()}{
@@ -723,12 +756,12 @@ export namespace ButtonStyle {
     }
   `
   export const roundedSecondary = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.rounded};
     ${Color.secondary(t)};
   `
   export const roundedSmallAccent = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.roundedSmall};
     ${Color.accent(t)};
     ${El.border.thiz()}{
@@ -736,12 +769,12 @@ export namespace ButtonStyle {
     }
   `
   export const roundedSmallSecondary = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.roundedSmall};
     ${Color.secondary(t)};
   `
   export const roundedTransparent = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.rounded};
     ${El.btn.thiz()} {
       ${Txt.large2b};
@@ -750,7 +783,7 @@ export namespace ButtonStyle {
   `
   
   export const roundedDanger = (t:Theme) => css`
-    ${common};
+    ${basic};
     ${Shape.rounded};
     ${Color.danger(t)};
   `
@@ -762,7 +795,7 @@ export namespace ButtonStyle {
     color: 'main' | 'accent' | 'normal' | 'secondary' | 'transparent'
   }>
   export const button = (props?: ButtonStyleProps) => (t: AppTheme.Theme) => css`
-    ${common};
+    ${basic};
     
     ${{
       'rectBig': Shape.bigRect,

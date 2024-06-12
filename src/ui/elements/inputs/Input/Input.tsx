@@ -1,5 +1,5 @@
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
-import React, {useImperativeHandle, useRef} from "react"
+import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
@@ -35,21 +35,21 @@ React.forwardRef<InputElement, InputProps>(
   
   
   const elemRef = useRef<InputElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
+  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
   
   
   const frameProps = {
-    className: clsx(className, InputStyle.W.elements.frame.element.name),
+    className: clsx(className, InputStyle.W.e.frame.e.name),
     style: style,
     ...fProps,
   }
   const inputProps = {
-    className: InputStyle.W.elements.input.element.name,
+    className: InputStyle.W.e.input.e.name,
     [InputStyle.W.states.error.state.name]: trueOrUndef(hasError),
     ...restProps,
   }
   const borderProps = {
-    className: InputStyle.W.elements.border.element.name,
+    className: InputStyle.W.e.border.e.name,
   }
   
   

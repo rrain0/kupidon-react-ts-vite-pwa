@@ -53,7 +53,7 @@ export default EditableTextCard
 
 
 const Frame = styled(Button)`
-  ${ButtonStyle.common};
+  ${ButtonStyle.basic};
   ${p=>ButtonStyle.textRectBig(p.theme)};
   ${ButtonStyle.El.btn.thiz()}{
     ${p=>card3Style(p.theme)};

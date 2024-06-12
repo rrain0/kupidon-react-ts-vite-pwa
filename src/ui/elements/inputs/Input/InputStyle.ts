@@ -58,7 +58,7 @@ export namespace InputStyle {
   
   const basic = css`
     ${W.use.s.normal().e.frame().thisUse} {
-      //container: input / size;
+      container: input / size;
       ${row};
       align-items: center;
       width: 100%;

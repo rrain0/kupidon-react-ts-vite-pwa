@@ -26,69 +26,78 @@ export namespace WidgetStyle {
       readonly states: Record<S, CssWidgetState>,
       readonly elements: Record<E, CssWidgetElement>,
     ) { }
+    
+    // get root
+    get r() { return this.root }
+    // get root element
+    get re() { return this.elements[this.root]}
+    // get states
+    get s() { return this.states }
+    // get elements
+    get e() { return this.elements }
   
     get use() {
       return new UseCssWidget(this)
     }
     
-    static ofRoot<E extends string, S extends string>
+    static ofRoot<const E extends string, const S extends string>
     (name: E, element: Elem<S>): CssWidget<E, S> {
       return new CssWidget<E, S>(
         name,
-        // @ts-ignore
         {
-          // @ts-ignore
-          ...ObjectMap(element.states, ([stateName, cssState]) => [
-            stateName,
-            new CssWidgetState(name, cssState),
-          ]),
+          ...ObjectMap<Record<S, CssState>, Record<S, CssWidgetState>>(
+            element.states,
+            ([stateName, cssState]) => [
+              stateName,
+              new CssWidgetState(name, cssState),
+            ]
+          ),
         },
-        // @ts-ignore
         {
           [name]: new CssWidgetElement(element),
-        }
+        } as Record<E, CssWidgetElement>
       )
     }
     
-    addRoot<NE extends Exclude<string, E>, NS extends Exclude<string, S>>
+    addRoot<const NE extends Exclude<string, E>, const NS extends Exclude<string, S>>
     (name: NE, element: Elem<NS>): CssWidget<E | NE, S | NS> {
       return new CssWidget<E | NE, S | NS>(
         name,
-        // @ts-ignore
         {
           ...this.states,
-          // @ts-ignore
-          ...ObjectMap(element.states, ([stateName, cssState]) => [
-            stateName,
-            new CssWidgetState(name, cssState),
-          ]),
+          ...ObjectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
+            element.states,
+              ([stateName, cssState]) => [
+              stateName,
+              new CssWidgetState(name, cssState),
+            ]
+          ),
         },
-        // @ts-ignore
         {
           ...this.elements,
           [name]: new CssWidgetElement(element),
-        }
+        } as Record<E | NE, CssWidgetElement>
       )
     }
     
-    add<NE extends Exclude<string, E>, NS extends Exclude<string, S>>
+    add<const NE extends Exclude<string, E>, const NS extends Exclude<string, S>>
     (up: E, selector: string, name: NE, element: Elem<NS>): CssWidget<E | NE, S | NS> {
       return new CssWidget<E | NE, S | NS>(
         this.root,
-        // @ts-ignore
         {
           ...this.states,
-          // @ts-ignore
-          ...ObjectMap(element.states, ([stateName, cssState]) => [
-            stateName,
-            new CssWidgetState(name, cssState),
-          ]),
+          ...ObjectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
+            element.states,
+            ([stateName, cssState]) => [
+              stateName,
+              new CssWidgetState(name, cssState),
+            ]
+          ),
         },
-        // @ts-ignore
         {
           ...this.elements,
           [name]: new CssWidgetElement(element, up, selector),
-        }
+        } as Record<E | NE, CssWidgetElement>
       )
     }
   
@@ -96,8 +105,12 @@ export namespace WidgetStyle {
   
   
   export class UseCssWidget<const E extends string, const S extends string> {
+    
     readonly s: Record<S, () => UseCssWidget<E, S>>
     readonly e: Record<E, () => UseCssWidget<E, S>>
+    
+    currState: S | null = null
+    currElem:  E | null = null
     
     constructor(
       readonly widget: CssWidget<E, S>,
@@ -105,29 +118,29 @@ export namespace WidgetStyle {
       this.s = ObjectMap(widget.states, ([name]) => [
         name,
         () => {
-          this.state = name
+          this.currState = name
           return this
         }
       ])
       this.e = ObjectMap(widget.elements, ([name]) => [
         name,
         () => {
-          this.element = name
+          this.currElem = name
           return this
         }
       ])
     }
     
-    state:   S | null = null
-    element: E | null = null
+    // get widget
+    get w() { return this.widget }
     
     get use() {
-      if (this.element === null) throw new Error('element is null')
+      if (this.currElem === null) throw new Error('element is null')
       
       let selector = ''
-      let eName = this.element
+      let eName = this.currElem
       const e = () => this.widget.elements[eName]
-      const s = this.state === null ? null : this.widget.states[this.state]
+      const s = this.currState === null ? null : this.widget.states[this.currState]
       let stateWasApplied = false
       
       while (eName) {
@@ -168,6 +181,7 @@ export namespace WidgetStyle {
   
   
   export class CssWidgetElement {
+    
     constructor(
       readonly element: Elem<any>,
       // '' if this element is root
@@ -175,21 +189,30 @@ export namespace WidgetStyle {
       readonly upSelector = '',
     ) { }
     
+    // get element
+    get e() { return this.element }
+    
     get use() {
       return `${this.upSelector}${this.element.use}`
     }
+    
   }
   
   
   export class CssWidgetState {
+    
     constructor(
       readonly ownerElementName: string,
       readonly state: CssState,
     ) { }
     
+    // get state
+    get s() { return this.state }
+    
     get use() {
       return this.state.use
     }
+    
   }
   
   
@@ -198,6 +221,7 @@ export namespace WidgetStyle {
   
   
   export class Pseudo {
+    
     constructor(
       // 'hover'
       readonly name: string
@@ -224,10 +248,12 @@ export namespace WidgetStyle {
     static readonly focusVisible = new Pseudo('focus-visible')
     static readonly readOnly = new Pseudo('read-only')
     static readonly disabled = new Pseudo('disabled')
+    
   }
   
   
   export class Attr {
+    
     constructor(
       // attr name
       // 'checked' 'data-error'
@@ -253,6 +279,7 @@ export namespace WidgetStyle {
     static readonly empty = new Attr('')
     static readonly checked = new Attr('checked')
     static readonly dataError = new Attr('data-error')
+    
   }
   
   
@@ -261,6 +288,7 @@ export namespace WidgetStyle {
   
   
   export class AttrEnum<const V extends string> {
+    
     constructor(
       // attr name
       // 'direction'
@@ -304,11 +332,13 @@ export namespace WidgetStyle {
     static readonly empty = new AttrEnum('', [])
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
     static readonly inputType = new AttrEnum('type', ['radio', 'checkbox'])
+    
   }
   
   
   
   export class Elem<S extends string> {
+    
     constructor(
       // classname
       // 'rrainuiButton'
@@ -330,6 +360,7 @@ export namespace WidgetStyle {
       if (!use) return ''
       return `&${use}`
     }
+    
   }
   
   

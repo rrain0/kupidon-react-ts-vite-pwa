@@ -32,6 +32,7 @@ type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & PartialUndef
   endViews: React.ReactNode
   children: React.ReactNode
   childrenPosition: 'start' | 'end'
+  //rippleMode: React.ComponentProps<typeof Ripple>['mode']
 }>
 
 
@@ -92,7 +93,7 @@ React.forwardRef<CheckboxElement, CheckboxProps>
       css={activeIcWrapStyle}
       {...checkedWrapProps}
     >
-      <CheckmarkBox>
+      <CheckmarkBox data-error={hasError}>
         <Checkmark2Ic color={!hasError ? 'black' : '#ff8787'} />
       </CheckmarkBox>
     </div>

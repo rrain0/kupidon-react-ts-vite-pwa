@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Job } from 'src/api/model/Job.ts'
 import { Option } from 'src/ui/model/Option.ts'
-import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio01.tsx'
+import ModalRadio from 'src/ui/widgets/modal-element/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import {
   SvgGradIcons,
@@ -78,7 +78,8 @@ React.memo(
       close={close}
       title={titleText.job}
       options={jobOptions}
-      radioInputProps={(value: JobOptionValues)=>props.radioInputProps(value)}
+      value={props.value}
+      onSelect={props.setValue}
     />
   </>
 })
