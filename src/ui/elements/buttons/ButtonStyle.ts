@@ -60,9 +60,11 @@ export namespace ButtonStyle {
       readOnly: Pseudo.readOnly,
       disabled: Pseudo.disabled,
       error: Attr.dataError,
+    }, {
+      color: CssProp.color,
     })
-    const border = new Elem('rrainuiBorder', { })
-    const ripple = new Elem(RippleStyle.El.frameClassName, { })
+    const border = new Elem('rrainuiBorder', { }, { })
+    const ripple = new Elem(RippleStyle.El.frameClassName, { }, { })
     
     const buttonWidget = CssWidget
       .ofRoot('button', button)
@@ -71,12 +73,6 @@ export namespace ButtonStyle {
     
     return buttonWidget
   }()
-  
-  
-  
-  export const Prop = {
-    color: CssProp.color,
-  } as const
   
   
   
@@ -151,8 +147,7 @@ export namespace ButtonStyle {
     // disabled
     ${El.btn.thiz('disabled')} {
       background: ${t.elementDisabled.bgc[0]};
-      color: ${t.elementDisabled.content[0]};
-      ${Prop.color.name}: ${t.elementDisabled.content[0]};
+      ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
     
     // error
@@ -231,8 +226,7 @@ export namespace ButtonStyle {
     // normal
     ${El.btn.thiz()} {
       background: transparent;
-      color: ${t.page.content2[0]};
-      ${Prop.color.name}: ${t.page.content2[0]};
+      ${W.props.color.p.set(t.page.content2[0])};
     }
     ${El.border.thiz()} {
       border: none;
@@ -254,8 +248,7 @@ export namespace ButtonStyle {
     // disabled
     ${El.btn.thiz('disabled')} {
       background: ${t.elementDisabled.bgc[0]};
-      color: ${t.elementDisabled.content[0]};
-      ${Prop.color.name}: ${t.elementDisabled.content[0]};
+      ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
   `
   
@@ -553,8 +546,7 @@ export namespace ButtonStyle {
       // disabled
       ${El.btn.thiz('disabled')} {
         background: ${t.elementDisabled.bgc[0]};
-        color: ${t.elementDisabled.content[0]};
-        ${Prop.color.name}: ${t.elementDisabled.content[0]};
+        ${W.props.color.p.set(t.elementDisabled.content[0])};
       }
       
       // error
@@ -632,8 +624,7 @@ export namespace ButtonStyle {
       // normal
       ${El.btn.thiz()} {
         background: ${t.buttonSecondary.bgc[0]};
-        color: ${t.buttonSecondary.content[0]};
-        ${Prop.color.name}: ${t.buttonSecondary.content[0]};
+        ${W.props.color.p.set(t.buttonSecondary.content[0])};
       }
       ${El.border.thiz()} {
         border-color: ${t.buttonSecondary.content[0]};
@@ -655,8 +646,7 @@ export namespace ButtonStyle {
       // disabled
       ${El.btn.thiz('disabled')} {
         background: ${t.elementDisabled.bgc[0]};
-        color: ${t.elementDisabled.content[0]};
-        ${Prop.color.name}: ${t.elementDisabled.content[0]};
+        ${W.props.color.p.set(t.elementDisabled.content[0])};
       }
     `
     
@@ -666,8 +656,7 @@ export namespace ButtonStyle {
       // normal
       ${El.btn.thiz()} {
         background: transparent;
-        color: ${t.page.content2[0]};
-        ${Prop.color.name}: ${t.page.content2[0]};
+        ${W.props.color.p.set(t.page.content2[0])};
       }
       ${El.border.thiz()} {
         border-color: transparent;
@@ -689,8 +678,7 @@ export namespace ButtonStyle {
       // disabled
       ${El.btn.thiz('disabled')} {
         background: ${t.elementDisabled.bgc[0]};
-        color: ${t.elementDisabled.content[0]};
-        ${Prop.color.name}: ${t.elementDisabled.content[0]};
+        ${W.props.color.p.set(t.elementDisabled.content[0])};
       }
     `
     
@@ -699,8 +687,7 @@ export namespace ButtonStyle {
       // normal
       ${El.btn.thiz()} {
         background: ${t.elementDanger.bgc[0]};
-        color: ${t.elementDanger.content[0]};
-        ${Prop.color.name}: ${t.elementDanger.content[0]};
+        ${W.props.color.p.set(t.elementDanger.content[0])};
       }
       ${El.ripple.thiz()} {
         ${El.ripple.props.color.set(t.ripple.content[0])}
@@ -719,8 +706,7 @@ export namespace ButtonStyle {
       // disabled
       ${El.btn.thiz('disabled')} {
         background: ${t.elementDisabled.bgc[0]};
-        color: ${t.elementDisabled.content[0]};
-        ${Prop.color.name}: ${t.elementDisabled.content[0]};
+        ${W.props.color.p.set(t.elementDisabled.content[0])};
       }
     `
   }

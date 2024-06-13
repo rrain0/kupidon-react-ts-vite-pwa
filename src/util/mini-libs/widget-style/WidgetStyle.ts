@@ -19,12 +19,13 @@ export namespace WidgetStyle {
   Has State List
   Has SINGLE Root element
   */
-  export class CssWidget<const E extends string, const S extends string> {
+  export class CssWidget<const E extends string, const S extends string, const P extends string> {
     
     constructor(
       readonly root: NoInfer<E>,
       readonly states: Record<S, CssWidgetState>,
       readonly elements: Record<E, CssWidgetElement>,
+      readonly props: Record<P, CssWidgetProp>,
     ) { }
     
     // get root
@@ -40,49 +41,80 @@ export namespace WidgetStyle {
       return new UseCssWidget(this)
     }
     
-    static ofRoot<const E extends string, const S extends string>
-    (name: E, element: Elem<S>): CssWidget<E, S> {
-      return new CssWidget<E, S>(
-        name,
+    static ofRoot
+    <const E extends string, const S extends string, const P extends string>
+    (elementName: E, element: Elem<S, P>): CssWidget<E, S, P> {
+      return new CssWidget<E, S, P>(
+        elementName,
         {
           ...ObjectMap<Record<S, CssState>, Record<S, CssWidgetState>>(
             element.states,
             ([stateName, cssState]) => [
               stateName,
-              new CssWidgetState(name, cssState),
+              new CssWidgetState(elementName, cssState),
             ]
           ),
         },
         {
-          [name]: new CssWidgetElement(element),
-        } as Record<E, CssWidgetElement>
+          [elementName]: new CssWidgetElement(element),
+        } as Record<E, CssWidgetElement>,
+        {
+          ...ObjectMap<Record<P, CssProp>, Record<P, CssWidgetProp>>(
+            element.props,
+            ([propName, cssProp]) => [
+              propName,
+              new CssWidgetProp(elementName, cssProp),
+            ]
+          ),
+        },
       )
     }
     
-    addRoot<const NE extends Exclude<string, E>, const NS extends Exclude<string, S>>
-    (name: NE, element: Elem<NS>): CssWidget<E | NE, S | NS> {
-      return new CssWidget<E | NE, S | NS>(
-        name,
+    addRoot
+    <
+      const NE extends Exclude<string, E>,
+      const NS extends Exclude<string, S>,
+      const NP extends Exclude<string, P>,
+    >
+    (elementName: NE, element: Elem<NS, NP>): CssWidget<E | NE, S | NS, P | NP> {
+      return new CssWidget<E | NE, S | NS, P | NP>(
+        elementName,
         {
           ...this.states,
           ...ObjectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
             element.states,
               ([stateName, cssState]) => [
               stateName,
-              new CssWidgetState(name, cssState),
+              new CssWidgetState(elementName, cssState),
             ]
           ),
         },
         {
           ...this.elements,
-          [name]: new CssWidgetElement(element),
-        } as Record<E | NE, CssWidgetElement>
+          [elementName]: new CssWidgetElement(element),
+        } as Record<E | NE, CssWidgetElement>,
+        {
+          ...this.props,
+          ...ObjectMap<Record<NP, CssProp>, Record<NP, CssWidgetProp>>(
+            element.props,
+            ([propName, cssProp]) => [
+              propName,
+              new CssWidgetProp(elementName, cssProp),
+            ]
+          ),
+        },
       )
     }
     
-    add<const NE extends Exclude<string, E>, const NS extends Exclude<string, S>>
-    (up: E, selector: string, name: NE, element: Elem<NS>): CssWidget<E | NE, S | NS> {
-      return new CssWidget<E | NE, S | NS>(
+    add
+    <
+      const NE extends Exclude<string, E>,
+      const NS extends Exclude<string, S>,
+      const NP extends Exclude<string, P>,
+    >
+    (up: E, selector: string, elementName: NE, element: Elem<NS, NP>)
+    : CssWidget<E | NE, S | NS, P | NP> {
+      return new CssWidget<E | NE, S | NS, P | NP>(
         this.root,
         {
           ...this.states,
@@ -90,21 +122,32 @@ export namespace WidgetStyle {
             element.states,
             ([stateName, cssState]) => [
               stateName,
-              new CssWidgetState(name, cssState),
+              new CssWidgetState(elementName, cssState),
             ]
           ),
         },
         {
           ...this.elements,
-          [name]: new CssWidgetElement(element, up, selector),
-        } as Record<E | NE, CssWidgetElement>
+          [elementName]: new CssWidgetElement(element, up, selector),
+        } as Record<E | NE, CssWidgetElement>,
+        {
+          ...this.props,
+          ...ObjectMap<Record<NP, CssProp>, Record<NP, CssWidgetProp>>(
+            element.props,
+            ([propName, cssProp]) => [
+              propName,
+              new CssWidgetProp(elementName, cssProp),
+            ]
+          ),
+        },
       )
     }
   
   }
   
   
-  export class UseCssWidget<const E extends string, const S extends string> {
+  export class UseCssWidget
+  <const E extends string, const S extends string> {
     
     readonly s: Record<S, () => UseCssWidget<E, S>>
     readonly e: Record<E, () => UseCssWidget<E, S>>
@@ -113,7 +156,7 @@ export namespace WidgetStyle {
     currElem:  E | null = null
     
     constructor(
-      readonly widget: CssWidget<E, S>,
+      readonly widget: CssWidget<E, S, any>,
     ) {
       this.s = ObjectMap(widget.states, ([name]) => [
         name,
@@ -183,7 +226,7 @@ export namespace WidgetStyle {
   export class CssWidgetElement {
     
     constructor(
-      readonly element: Elem<any>,
+      readonly element: Elem<any, any>,
       // '' if this element is root
       readonly upElementName = '',
       readonly upSelector = '',
@@ -212,6 +255,19 @@ export namespace WidgetStyle {
     get use() {
       return this.state.use
     }
+    
+  }
+  
+  
+  export class CssWidgetProp {
+    
+    constructor(
+      readonly ownerElementName: string,
+      readonly prop: CssProp,
+    ) { }
+    
+    // get prop
+    get p() { return this.prop }
     
   }
   
@@ -337,13 +393,14 @@ export namespace WidgetStyle {
   
   
   
-  export class Elem<S extends string> {
+  export class Elem<const S extends string, const P extends string> {
     
     constructor(
       // classname
       // 'rrainuiButton'
       readonly name: string,
       readonly states: Record<S, CssState>,
+      readonly props: Record<P, CssProp>,
     ) { }
     
     // dot classname
@@ -370,8 +427,8 @@ export namespace WidgetStyle {
     const btn = new Elem('rrainuiButton', {
       normal: Pseudo.empty,
       hover: Pseudo.hover,
-    })
-    const border = new Elem('rrainuiBorder', { })
+    }, { })
+    const border = new Elem('rrainuiBorder', { }, { })
     
     {
       const a = btn.states.hover
@@ -406,11 +463,11 @@ export namespace WidgetStyle {
   }
   {
     // TEST frame > input:hover
-    const frame = new Elem('rrainuiFrame', { })
+    const frame = new Elem('rrainuiFrame', { }, { })
     const input = new Elem('rrainuiInput', {
       normal: Pseudo.empty,
       hover: Pseudo.hover,
-    })
+    }, { })
     
     {
       //const a = frame.states.SOMETHING_ELSE // error
@@ -444,12 +501,12 @@ export namespace WidgetStyle {
   }
   {
     // TEST frame > input, frame > border:hover
-    const frame = new Elem('rrainuiFrame', { })
-    const input = new Elem('rrainuiInput', { })
+    const frame = new Elem('rrainuiFrame', { }, { })
+    const input = new Elem('rrainuiInput', { }, { })
     const border = new Elem('rrainuiBorder', {
       normal: Pseudo.empty,
       hover: Pseudo.hover,
-    })
+    }, { })
     
     {
       //const a = frame.states.SOMETHING_ELSE // error
@@ -488,11 +545,11 @@ export namespace WidgetStyle {
   
   
   export class CssProp {
-    readonly name: string
-    
-    constructor(name: string) {
-      this.name = name
-    }
+    constructor(
+      // full prop name
+      // '--color'
+      readonly name: string
+    ) { }
     
     setAny(value: string): string {
       return `${this.name}: ${value};`

@@ -24,7 +24,9 @@ export namespace InputStyle {
   
   
   export const W = function(){
-    const frame = new Elem('rrainuiFrame', { })
+    const frame = new Elem('rrainuiFrame', { }, {
+      color: CssProp.color,
+    })
     const input = new Elem('rrainuiInput', {
       normal: Pseudo.empty,
       hover: Pseudo.hover,
@@ -34,8 +36,8 @@ export namespace InputStyle {
       readOnly: Pseudo.readOnly,
       disabled: Pseudo.disabled,
       error: Attr.dataError,
-    })
-    const border = new Elem('rrainuiBorder', { })
+    }, { })
+    const border = new Elem('rrainuiBorder', { }, { })
     
     const inputWidget = CssWidget
       .ofRoot('frame', frame)
@@ -44,11 +46,6 @@ export namespace InputStyle {
     
     return inputWidget
   }()
-  
-  
-  export const Prop = {
-    color: CssProp.color
-  }
   
   
   
@@ -146,8 +143,7 @@ export namespace InputStyle {
       background: ${t.input.bgc[0]};
     }
     ${W.use.s.normal().e.input().thisUse} {
-      color: ${t.input.content[0]};
-      ${Prop.color.set(t.input.content[0])};
+      ${W.props.color.p.set(t.input.content[0])};
 
       ::placeholder {
         color: ${t.input.placeholder[0]};
@@ -173,8 +169,7 @@ export namespace InputStyle {
 
     // disabled
     ${W.use.s.disabled().e.input().thisUse} {
-      color: ${t.input.content[0]};
-      ${Prop.color.set(t.input.content[0])};
+      ${W.props.color.p.set(t.input.content[0])};
     }
     ${W.use.s.disabled().e.border().thisUse} {
       border-color: ${t.input.content[0]};
