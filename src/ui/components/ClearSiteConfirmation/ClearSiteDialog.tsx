@@ -87,7 +87,7 @@ React.memo(
             {actionText.no}
           </Button>
           
-          <Button css={[ButtonStyle.roundedDanger, button]}
+          <Button css={[ButtonStyle.filledRoundedNormalDanger, button]}
             onClick={clear}
           >
             <ClearTrashIc css={[icon, iconOnDanger]}/>
@@ -141,7 +141,7 @@ const iconOnDanger = (t:Theme)=>css`
   }
 `
 const button = (t:Theme)=>css`
-  ${ButtonStyle.El.btn.thiz()} {
+  ${ButtonStyle.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;
     gap: 0.3em;
   }

@@ -77,7 +77,7 @@ React.memo(
             <RoundButtonsContainer>
               
               {auth && <Link to={RootRoute.settings.account[full]()}>
-                <Button css={ButtonStyle.button({ shape: 'rounded', color: 'normal' })}
+                <Button css={ButtonStyle.filledRoundedNormalNormal}
                   onClick={props.setClosing}
                 >
                   <LockIc css={[
@@ -89,7 +89,7 @@ React.memo(
               </Link>}
               
               <Link to={RootRoute.settings.app[full]()}>
-                <Button css={ButtonStyle.button({ shape: 'rounded', color: 'normal' })}
+                <Button css={ButtonStyle.filledRoundedNormalNormal}
                   onClick={props.setClosing}
                 >
                   <GearIc css={SettingsOptions.icon}/>
@@ -105,14 +105,14 @@ React.memo(
                 </Button>
               </Link>
               
-              {app.canInstall && <Button css={ButtonStyle.button({ shape: 'rounded', color: 'normal' })}
+              {app.canInstall && <Button css={ButtonStyle.filledRoundedNormalNormal}
                 onClick={async () => await promptInstall()}
               >
                 <AddModuleIc css={SettingsOptions.icon}/>
                 {actionText.installApp}
               </Button>}
               
-              <Button css={ButtonStyle.button({ shape: 'rounded', color: 'normal' })}
+              <Button css={ButtonStyle.filledRoundedNormalNormal}
                 onClick={clearSiteDialog.open}
               >
                 {actionText.clearAppData}

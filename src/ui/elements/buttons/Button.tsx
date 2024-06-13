@@ -44,7 +44,7 @@ React.forwardRef<ButtonElement, ButtonProps>(
   
   
   const buttonProps = {
-    [ButtonStyle.Attr0.error.name]: trueOrUndef(hasError),
+    [ButtonStyle.W.s.error.s.name]: trueOrUndef(hasError),
     className: clsx(className, ButtonStyle.El.btn.name),
     type: type ?? 'button',
     ...restProps

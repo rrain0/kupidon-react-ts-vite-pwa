@@ -60,9 +60,10 @@ const DarkProps = {
     contentFocus:  ['#000000'],
   },
   buttonNormal: {
-    bgc:       ['#999999'],
-    content:   ['#000000'],
-    bgcFocus:  ['#7b7b7b'],
+    bgc:            ['#999999'],
+    content:        ['#000000'],
+    bgcFocus:       ['#7b7b7b'],
+    contentFocus:   ['#000000'],
   },
   buttonSecondary: {
     bgc:       ['transparent'],

@@ -49,7 +49,7 @@ React.forwardRef<ModalTextareaRefElement, ModalTextareaProps>(
           ref={forwardedRef}
         />
         <ModalElement.DialogButtons>
-          <Button css={ButtonStyle.roundedTransparent}
+          <Button css={ButtonStyle.textRoundedNormalNormal}
             onClick={onClose}
             children={actionText.ok.toLowerCase()}
           />

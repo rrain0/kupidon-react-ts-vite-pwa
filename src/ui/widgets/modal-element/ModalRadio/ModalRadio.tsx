@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import RadioInput from 'src/ui/elements/inputs/RadioInput/RadioInput.tsx'
@@ -40,8 +41,19 @@ return <UseBottomSheetState isOpen={!!isOpen} close={close}>
         header={title}
       >
         <RadioInputGroup css={selectItemsContainer}>
-          {options?.map(opt => <RadioInput
-            css={RadioInputStyle.radio}
+          {options?.map(opt => <><RadioInput
+            css={[
+              RadioInputStyle.radio,
+              css`
+                ${RadioInputStyle.El.frame} {
+                  //padding: 12px 18px;
+                  //background: #f2f2f2;
+                }
+                ${RadioInputStyle.El.border} {
+                  //border: 1px solid #999999;
+                }
+              `
+            ]}
             childrenPosition="start"
             checked={opt.value === value}
             onChange={() => onSelect?.(opt.value)}
@@ -53,7 +65,13 @@ return <UseBottomSheetState isOpen={!!isOpen} close={close}>
             <div css={selectItemText}>
               {opt.text}
             </div>
-          </RadioInput>)}
+          </RadioInput>
+            {/* <div css={css`
+              height: 1px;
+              width: 100%;
+              background: black;
+            `}/> */}
+          </>)}
         
         </RadioInputGroup>
       </BottomSheetDialogBasic>
@@ -68,6 +86,7 @@ export default React.memo(ModalRadio) as typeof ModalRadio
 const selectItemsContainer = css`
   ${col};
   padding-bottom: 20px;
+  gap: 10px;
 `
 const selectItemText = css`
   flex: 1;

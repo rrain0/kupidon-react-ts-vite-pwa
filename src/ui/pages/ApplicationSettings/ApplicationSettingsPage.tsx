@@ -226,7 +226,7 @@ const RoundButtonsContainer = styled.div`
 `
 const normalIconRoundButton = (t:AppTheme.Theme)=>css`
   ${ButtonStyle.filledRoundedNormalAccent(t)};
-  ${ButtonStyle.El.btn.thiz()} {
+  ${ButtonStyle.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;
     gap: 0.6em;
   }

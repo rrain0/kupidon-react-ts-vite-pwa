@@ -54,7 +54,7 @@ export default OptionItem
 const buttonStyle = (t: AppTheme.Theme) => css`
   ${ButtonStyle.textRectBigNormal(t)};
   
-  ${ButtonStyle.El.btn.thiz()} {
+  ${ButtonStyle.W.use.s.normal().e.button().thisUse} {
     display: grid;
     grid: 'icon title next' auto
           'icon value next' auto

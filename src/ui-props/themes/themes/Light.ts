@@ -59,9 +59,10 @@ const LightProps = {
     contentFocus:  ['#000000'],
   },
   buttonNormal: {
-    bgc:       ['#bbbbbb'],
-    content:   ['#000000'],
-    bgcFocus:  ['#999999'],
+    bgc:           ['#bbbbbb'],
+    content:       ['#000000'],
+    bgcFocus:      ['#dddddd'],
+    contentFocus:  ['#000000'],
   },
   buttonSecondary: {
     bgc:       ['transparent'],

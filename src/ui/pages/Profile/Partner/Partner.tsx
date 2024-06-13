@@ -103,12 +103,12 @@ React.memo(
     
     { (props.canSubmit || props.formProps.hasChanges) && <TopButtonBarFrame>
       { props.formProps.hasChanges &&
-        <Button css={ButtonStyle.roundedSmallSecondary}
+        <Button css={ButtonStyle.outlinedRoundedSmallNormal}
           onClick={props.formProps.resetUserFields}
         >{actionText.cancel}</Button>
       }
       { props.canSubmit && !props.isLoading &&
-        <Button css={ButtonStyle.roundedSmallAccent}
+        <Button css={ButtonStyle.filledRoundedSmallAccent}
           onClick={props.submit}
         >{actionText.save}</Button>
       }

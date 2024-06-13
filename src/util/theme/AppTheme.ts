@@ -75,9 +75,10 @@ export namespace AppTheme {
     }
     // normal button
     buttonNormal: {
-      bgc:       string[]
-      content:   string[]
-      bgcFocus:  string[]
+      bgc:           string[]
+      content:       string[]
+      bgcFocus:      string[]
+      contentFocus:  string[]
     }
     // button that almost invisible
     buttonSecondary: {
