@@ -54,6 +54,7 @@ export namespace InputStyle {
   
   
   const basic = css`
+    // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
       container: input / size;
       ${row};
@@ -82,7 +83,7 @@ export namespace InputStyle {
   const outlinedRectNormal = css`
     ${basic};
     
-    // normal
+    // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
       height: 50px;
       border-radius: 15px;
@@ -99,7 +100,7 @@ export namespace InputStyle {
       ${bgcInBorder};
     }
     
-    // hover
+    // state: hover
     ${hoverable}{
       ${W.use.s.hover().e.input().thisUse} { }
       ${W.use.s.hover().e.border().thisUse} {
@@ -107,15 +108,15 @@ export namespace InputStyle {
       }
     }
     
-    // active
+    // state: active
     ${W.use.s.active().e.input().thisUse} { }
     ${W.use.s.active().e.border().thisUse} { }
     
-    // focus
+    // state: focus
     ${W.use.s.focus().e.input().thisUse} { }
     ${W.use.s.focus().e.border().thisUse} { }
 
-    // focus-visible
+    // state: focus-visible
     ${W.use.s.focusVisible().e.input().thisUse} { }
     ${W.use.s.focusVisible().e.border().thisUse} {
       background-position: 0 0;
@@ -125,20 +126,20 @@ export namespace InputStyle {
     ${W.use.s.readOnly().e.input().thisUse} { }
     ${W.use.s.readOnly().e.border().thisUse} { }
 
-    // disabled
+    // state: disabled
     ${W.use.s.disabled().e.input().thisUse} {
       cursor: auto;
     }
     ${W.use.s.disabled().e.border().thisUse} { }
 
-    // error
+    // state: error
     ${W.use.s.error().e.frame().thisUse} { }
     ${W.use.s.error().e.input().thisUse} { }
     ${W.use.s.error().e.border().thisUse} { }
   `
   
   const outlinedRectAddColorNormal = (t: AppTheme.Theme) => css`
-    // normal
+    // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
       background: ${t.input.bgc[0]};
     }
@@ -158,7 +159,7 @@ export namespace InputStyle {
       );
     }
     
-    // read-only
+    // state: read-only
     ${W.use.s.readOnly().e.frame().thisUse} {
       cursor: auto;
       color: ${t.input.content[0]};
@@ -167,7 +168,7 @@ export namespace InputStyle {
       border-color: ${t.page.content2[0]};
     }
 
-    // disabled
+    // state: disabled
     ${W.use.s.disabled().e.input().thisUse} {
       ${W.props.color.p.set(t.input.content[0])};
     }
@@ -175,7 +176,7 @@ export namespace InputStyle {
       border-color: ${t.input.content[0]};
     }
 
-    // error
+    // state: error
     ${W.use.s.error().e.frame().thisUse} {
       background: ${t.input.bgcError[0]};
     }
@@ -192,7 +193,7 @@ export namespace InputStyle {
   
   // type: outlined, shape: rect, + size: small
   export const outlinedRectAddSizeSmall = css`
-    // normal
+    // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
       height: 40px;
     }

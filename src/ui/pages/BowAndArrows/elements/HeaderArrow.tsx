@@ -13,7 +13,7 @@ import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 
 
 const btnStyle = (t: AppTheme.Theme)=>css`
-  ${ButtonStyle.smallRectTransparent(t)};
+  ${ButtonStyle.textRectNormalNormal(t)};
   ${row};
   justify-content: space-between;
   align-items: center;

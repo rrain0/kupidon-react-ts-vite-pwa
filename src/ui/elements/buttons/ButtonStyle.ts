@@ -82,14 +82,14 @@ export namespace ButtonStyle {
   
   
   export const basic = css`
-    // normal
+    // state: normal
     ${El.btn.thiz()} {
       border: none;
       transition: background linear 300ms;
       overflow-wrap: anywhere;
     }
     
-    // disabled
+    // state: disabled
     ${El.ripple.thiz('disabled')} {
       display: none;
     }
@@ -98,9 +98,10 @@ export namespace ButtonStyle {
   
   
   
-  // type: filled, shape: rect, size: big
+  // type: filled, shape: rect, default size: big
   const filledRectBig = css`
     ${basic};
+    // state: normal
     ${El.btn.thiz()} {
       width: 100%;
       min-height: 50px;
@@ -112,11 +113,9 @@ export namespace ButtonStyle {
       border: 1px solid;
     }
   `
-  // type: filled, shape: rect, size: big, color: main
-  export const filledRectBigMain = (t: AppTheme.Theme) => css`
-    ${filledRectBig};
-    
-    // normal
+  // type: filled, shape: rect, add color: main
+  const filledRectAddColorMain = (t: AppTheme.Theme) => css`
+    // state: normal
     ${El.btn.thiz()} {
       background: ${t.buttonMain.bgc[0]};
       ${El.btn.props.color.set(t.buttonMain.content[0])}
@@ -128,36 +127,34 @@ export namespace ButtonStyle {
       ${El.ripple.props.color.set(t.ripple.content[0])}
     }
     
-    // hover
+    // state: hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
       background: ${t.buttonMain.bgcFocus[0]};
     }}
     
-    // active
+    // state: active
     ${El.btn.thiz('active')} { }
     
-    // focus
+    // state: focus
     ${El.btn.thiz('focus')} { }
     
-    // focus-visible
+    // state: focus-visible
     ${El.btn.thiz('focusVisible')} {
       background: ${t.buttonMain.bgcFocus[0]};
     }
     
-    // disabled
+    // state: disabled
     ${El.btn.thiz('disabled')} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
     
-    // error
+    // state: error
     ${El.border.thiz('error')} { }
   `
-  // type: filled, shape: rect, size: big, color: accent
-  export const filledRectBigAccent = (t: AppTheme.Theme) => css`
-    ${filledRectBig};
-    
-    // normal
+  // type: filled, shape: rect, add color: accent
+  const filledRectAddColorAccent = (t: AppTheme.Theme) => css`
+    // state: normal
     ${El.btn.thiz()} {
       background: ${t.buttonAccent.bgc[0]};
       ${El.btn.props.color.set(t.buttonAccent.content[0])}
@@ -169,29 +166,27 @@ export namespace ButtonStyle {
       ${El.ripple.props.color.set(t.ripple.content[0])}
     }
     
-    // hover
+    // state: hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
       background: ${t.buttonAccent.bgcFocus[0]};
       ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
     }}
     
-    // focus-visible
+    // state: focus-visible
     ${El.btn.thiz('focusVisible')} {
       background: ${t.buttonAccent.bgcFocus[0]};
       ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
     }
     
-    // disabled
+    // state: disabled
     ${El.btn.thiz('disabled')} {
       background: ${t.elementDisabled.bgc[0]};
       ${El.btn.props.color.set(t.elementDisabled.content[0])}
     }
   `
-  // type: filled, shape: rect, size: big, color: normal
-  export const filledRectBigNormal = (t: AppTheme.Theme) => css`
-    ${filledRectBig};
-    
-    // normal
+  // type: filled, shape: rect, add color: normal
+  const filledRectAddColorNormal = (t: AppTheme.Theme) => css`
+    // state: normal
     ${El.btn.thiz()} {
       background: ${t.buttonNormal.bgc[0]};
       ${El.btn.props.color.set(t.buttonNormal.content[0])}
@@ -203,49 +198,44 @@ export namespace ButtonStyle {
       ${El.ripple.props.color.set(t.ripple.content[0])}
     }
     
-    // hover
+    // state: hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
       background: ${t.buttonNormal.bgcFocus[0]};
     }}
     
-    // focus-visible
+    // state: focus-visible
     ${El.btn.thiz('focusVisible')} {
       background: ${t.buttonNormal.bgcFocus[0]};
     }
     
-    // disabled
+    // state: disabled
     ${El.btn.thiz('disabled')} {
       background: ${t.elementDisabled.bgc[0]};
       ${El.btn.props.color.set(t.elementDisabled.content[0])}
     }
   `
-  // type: text, shape: rect, size: big
-  export const textRectBig = (t: AppTheme.Theme) => css`
-    ${filledRectBig};
-    
-    // normal
+  // type: filled, shape: rect, add color: danger
+  const filledRectAddColorDanger = (t: AppTheme.Theme) => css`
+    // state: normal
     ${El.btn.thiz()} {
-      background: transparent;
-      ${W.props.color.p.set(t.page.content2[0])};
-    }
-    ${El.border.thiz()} {
-      border: none;
+      background: ${t.elementDanger.bgc[0]};
+      ${W.props.color.p.set(t.elementDanger.content[0])};
     }
     ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+      ${El.ripple.props.color.set(t.ripple.content[0])}
     }
     
-    // hover
+    // state: hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
-      background: ${t.buttonTransparent.bgcFocus[0]};
+      background: ${t.elementDanger.bgcFocus[0]};
     }}
     
-    // focus-visible
+    // state: focus-visible
     ${El.btn.thiz('focusVisible')} {
-      background: ${t.buttonTransparent.bgcFocus[0]};
+      background: ${t.elementDanger.bgcFocus[0]};
     }
     
-    // disabled
+    // state: disabled
     ${El.btn.thiz('disabled')} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
@@ -253,30 +243,116 @@ export namespace ButtonStyle {
   `
   
   
-  
-  
-  
-  // type: filled, shape: rounded, size: normal
-  const filledRoundedNormal = css`
-    ${basic};
-    ${El.btn.thiz()} {
-      min-width: 90px;
-      width: fit-content;
-      min-height: 40px;
-      border-radius: 1000000px;
-      padding: 8px 20px;
-      gap: 0.6em;
-      ${Txt.small1};
-    }
+  // type: filled, shape: rect, size: big, color: main
+  export const filledRectBigMain = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    ${filledRectAddColorMain(t)};
+  `
+  // type: filled, shape: rect, size: big, color: accent
+  export const filledRectBigAccent = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    ${filledRectAddColorAccent(t)};
+  `
+  // type: filled, shape: rect, size: big, color: normal
+  export const filledRectBigNormal = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    ${filledRectAddColorNormal(t)};
+  `
+  // type: filled, shape: rect, size: big, color: danger
+  export const filledRectBigDanger = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    ${filledRectAddColorDanger(t)};
   `
   
   
   
   
-  // type: filled, shape: rounded, size: normal, color: normal
-  export const filledRoundedNormalNormal = (t: AppTheme.Theme) => css`
-    ${filledRoundedNormal};
+  // type: text, shape: rect, default size: big
+  export const textRectBig = css`
+    ${filledRectBig};
     
+    // state: normal
+    ${El.btn.thiz()} {
+      background: transparent;
+    }
+    ${El.border.thiz()} {
+      border: none;
+    }
+  `
+  // type: text, shape: rect, add color: normal
+  export const textRectAddColorNormal = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${El.btn.thiz()} {
+      ${W.props.color.p.set(t.page.content2[0])};
+    }
+    ${El.ripple.thiz()} {
+      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    }
+    
+    // state: hover
+    ${hoverable}{ ${El.btn.thiz('hover')} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    }}
+    
+    // state: focus-visible
+    ${El.btn.thiz('focusVisible')} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    }
+    
+    // state: disabled
+    ${El.btn.thiz('disabled')} {
+      background: ${t.elementDisabled.bgc[0]};
+      ${W.props.color.p.set(t.elementDisabled.content[0])};
+    }
+  `
+  // type: text, shape: rect, add size: normal
+  const textRectAddSizeNormal = css`
+    // state: normal
+    ${El.btn.thiz()} {
+      width: auto;
+      min-height: 30px;
+      border-radius: 10px;
+      padding: 4px 6px;
+      gap: 4px;
+      ${Txt.normal1};
+    }
+  `
+  
+  
+  // type: text, shape: rect, size: big, color: normal
+  export const textRectBigNormal = (t: AppTheme.Theme) => css`
+    ${textRectBig};
+    ${textRectAddColorNormal(t)};
+  `
+  // type: text, shape: rect, size: normal, color: normal
+  export const textRectNormalNormal = (t: AppTheme.Theme) => css`
+    ${textRectBig};
+    ${textRectAddSizeNormal};
+    ${textRectAddColorNormal(t)};
+  `
+  
+  
+  
+  
+  // type: filled, shape: rounded, default size: normal
+  const filledRoundedNormal = css`
+    ${basic};
+    // state: normal
+    ${El.btn.thiz()} {
+      min-width: 90px;
+      width: fit-content;
+      min-height: 40px;
+      border-radius: 999999px;
+      padding: 8px 20px;
+      gap: 0.6em;
+      ${Txt.small1};
+    }
+    ${El.border.thiz()}{
+      border: none;
+    }
+  `
+  // type: filled, shape: rounded, add color: normal
+  export const filledRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${El.btn.thiz()} {
       background: ${t.buttonNormal.bgc[0]};
@@ -302,10 +378,8 @@ export namespace ButtonStyle {
       ${El.btn.props.color.set(t.elementDisabled.content[0])}
     }
   `
-  // type: filled, shape: rounded, size: normal, color: accent
-  export const filledRoundedNormalAccent = (t: AppTheme.Theme) => css`
-    ${filledRoundedNormal};
-    
+  // type: filled, shape: rounded, add color: accent
+  export const filledRoundedAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
     ${El.btn.thiz()} {
       background: ${t.buttonAccent.bgc[0]};
@@ -335,9 +409,28 @@ export namespace ButtonStyle {
   `
   
   
-  // type: outlined, shape: rounded, size: normal
+  
+  
+  // type: filled, shape: rounded, size: normal, color: normal
+  export const filledRoundedNormalNormal = (t: AppTheme.Theme) => css`
+    ${filledRoundedNormal};
+    ${filledRoundedAddColorNormal(t)};
+  `
+  // type: filled, shape: rounded, size: normal, color: accent
+  export const filledRoundedNormalAccent = (t: AppTheme.Theme) => css`
+    ${filledRoundedNormal};
+    ${filledRoundedAddColorAccent(t)};
+  `
+  
+  
+  
+  
+  
+  // type: outlined, shape: rounded, default size: normal
   const outlinedRoundedNormal = css`
     ${basic};
+    
+    // state: normal
     ${El.btn.thiz()} {
       min-width: 90px;
       width: fit-content;
@@ -351,11 +444,14 @@ export namespace ButtonStyle {
     ${El.border.thiz()}{
       border: 1px solid;
     }
-  `
-  // type: outlined, shape: rounded, size: normal, color: normal
-  export const outlinedRoundedNormalNormal = (t: AppTheme.Theme) => css`
-    ${outlinedRoundedNormal};
     
+    // state: hover
+    ${El.border.thiz('hover')} {
+      border: none;
+    }
+  `
+  // type: outlined, shape: rounded, add color: normal
+  export const outlinedRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${El.btn.thiz()} {
       ${El.btn.props.color.set(t.buttonNormal.bgc[0])}
@@ -385,10 +481,8 @@ export namespace ButtonStyle {
       ${El.btn.props.color.set(t.elementDisabled.content[0])}
     }
   `
-  // type: outlined, shape: rounded, size: normal, color: accent
-  export const outlinedRoundedNormalAccent = (t: AppTheme.Theme) => css`
-    ${outlinedRoundedNormal};
-    
+  // type: outlined, shape: rounded, add color: accent
+  export const outlinedRoundedAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
     ${El.btn.thiz()} {
       ${El.btn.props.color.set(t.buttonAccent.bgc[0])}
@@ -421,6 +515,25 @@ export namespace ButtonStyle {
       ${El.btn.props.color.set(t.elementDisabled.content[0])}
     }
   `
+  
+  
+  // type: outlined, shape: rounded, size: normal, color: normal
+  export const outlinedRoundedNormalNormal = (t: AppTheme.Theme) => css`
+    ${outlinedRoundedNormal};
+    ${outlinedRoundedAddColorNormal(t)};
+  `
+  // type: outlined, shape: rounded, size: normal, color: accent
+  export const outlinedRoundedNormalAccent = (t: AppTheme.Theme) => css`
+    ${outlinedRoundedNormal};
+    ${outlinedRoundedAddColorAccent(t)};
+  `
+  
+  
+  
+  
+  
+  
+  
   
   
   
@@ -714,38 +827,8 @@ export namespace ButtonStyle {
   
   
   
-  export const bigRectDanger = (t:Theme) => css`
-    ${basic};
-    ${Shape.bigRect};
-    ${Color.danger(t)};
-  `
   
   
-  export const smallRectAccent = (t:Theme) => css`
-    ${basic};
-    ${Shape.smallRect};
-    ${Color.accent(t)};
-  `
-  export const smallRectTransparent = (t:Theme) => css`
-    ${basic};
-    ${Shape.smallRect};
-    ${Color.transparent(t)};
-  `
-  
-  
-  export const roundedAccent = (t:Theme) => css`
-    ${basic};
-    ${Shape.rounded};
-    ${Color.accent(t)};
-    ${El.border.thiz()}{
-      border: none;
-    }
-  `
-  export const roundedSecondary = (t:Theme) => css`
-    ${basic};
-    ${Shape.rounded};
-    ${Color.secondary(t)};
-  `
   export const roundedSmallAccent = (t:Theme) => css`
     ${basic};
     ${Shape.roundedSmall};
@@ -773,6 +856,8 @@ export namespace ButtonStyle {
     ${Shape.rounded};
     ${Color.danger(t)};
   `
+  
+  
   
   
   export type ButtonStyleProps = PartialUndef<{

@@ -52,7 +52,7 @@ export default OptionItem
 
 
 const buttonStyle = (t: AppTheme.Theme) => css`
-  ${ButtonStyle.textRectBig(t)};
+  ${ButtonStyle.textRectBigNormal(t)};
   
   ${ButtonStyle.El.btn.thiz()} {
     display: grid;

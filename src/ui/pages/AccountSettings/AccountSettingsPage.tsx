@@ -311,7 +311,7 @@ React.memo(
             {actionText.logOutFromAccount}
           </Button>
         
-          <Button css={ButtonStyle.bigRectDanger}
+          <Button css={ButtonStyle.filledRectBigDanger}
             onClick={undefined}
             disabled
           >

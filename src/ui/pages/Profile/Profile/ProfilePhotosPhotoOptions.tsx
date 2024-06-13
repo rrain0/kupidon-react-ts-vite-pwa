@@ -58,7 +58,7 @@ const ProfilePhotosPhotoOptions = React.memo(
           <OptionsContent>
             
             
-            <Button css={ButtonStyle.textRectBig}
+            <Button css={ButtonStyle.textRectBigNormal}
               onClick={()=>{
                 const im = images[lastIdx]
                 im.download?.abort()
@@ -92,7 +92,7 @@ const ProfilePhotosPhotoOptions = React.memo(
               {({getRootProps, getInputProps}) =>
                 <div css={contents} {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <Button css={ButtonStyle.textRectBig}>
+                  <Button css={ButtonStyle.textRectBigNormal}>
                     
                     <OptionContainer>
                       <div css={optionIconBoxStyle}>
@@ -132,7 +132,7 @@ const ProfilePhotosPhotoOptions = React.memo(
                 return <a href={im.dataUrl}
                   download={`${im.name} ${im.id}.${extensionFromMimeType(im.mimeType)}`}
                 >
-                  <Button css={ButtonStyle.textRectBig}
+                  <Button css={ButtonStyle.textRectBigNormal}
                     onClick={sheet.setClosing}
                   >
                     <OptionContainer>

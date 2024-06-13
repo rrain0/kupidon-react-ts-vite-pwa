@@ -81,7 +81,7 @@ React.memo(
           `}
         >
           
-          <Button css={[ButtonStyle.roundedAccent, button]}
+          <Button css={[ButtonStyle.filledRoundedNormalAccent, button]}
             onClick={props.setClosing}
           >
             {actionText.no}

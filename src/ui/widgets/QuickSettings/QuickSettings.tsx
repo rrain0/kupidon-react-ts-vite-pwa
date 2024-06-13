@@ -98,7 +98,7 @@ React.memo(
               </Link>
               
               <Link to={RootRoute.test[full]()}>
-                <Button css={ButtonStyle.roundedSecondary}
+                <Button css={ButtonStyle.outlinedRoundedNormalNormal}
                   onClick={props.setClosing}
                 >
                   {titleText.testPage}
@@ -118,7 +118,7 @@ React.memo(
                 {actionText.clearAppData}
               </Button>
               
-              {import.meta.env.DEV && <Button css={ButtonStyle.roundedSecondary}
+              {import.meta.env.DEV && <Button css={ButtonStyle.outlinedRoundedNormalNormal}
                 onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
               >
                 Show Dev Overlay

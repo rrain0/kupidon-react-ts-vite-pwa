@@ -180,7 +180,7 @@ React.memo(
             
             <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
               {overlay=><>
-                <Button css={ButtonStyle.roundedSecondary}
+                <Button css={ButtonStyle.outlinedRoundedNormalNormal}
                   onClick={overlay.open}
                 >
                   {actionText.clearAppData}
@@ -225,7 +225,7 @@ const RoundButtonsContainer = styled.div`
   gap: 10px;
 `
 const normalIconRoundButton = (t:AppTheme.Theme)=>css`
-  ${ButtonStyle.roundedAccent(t)};
+  ${ButtonStyle.filledRoundedNormalAccent(t)};
   ${ButtonStyle.El.btn.thiz()} {
     min-width: 90px;
     gap: 0.6em;
