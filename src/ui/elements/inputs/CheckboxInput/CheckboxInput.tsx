@@ -69,9 +69,6 @@ React.forwardRef<CheckboxElement, CheckboxProps>
   const uncheckedWrapProps = {
     className: CheckboxInputStyle.El.iconWrapClassName
   }
-  const borderProps = {
-    className: CheckboxInputStyle.El.borderClassName
-  }
   
   
   return <Button /* Frame */

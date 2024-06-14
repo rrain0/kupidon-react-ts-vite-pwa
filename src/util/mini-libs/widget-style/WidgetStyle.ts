@@ -8,6 +8,7 @@ import isstring = TypeUtils.isstring
 import SingleOrArr = ArrayUtils.SingleOrArr
 import exists = TypeUtils.exists
 import ObjectMap = ObjectUtils.ObjectMap
+import RecordRo = TypeUtils.RecordRo
 
 
 
@@ -23,9 +24,9 @@ export namespace WidgetStyle {
     
     constructor(
       readonly root: NoInfer<E>,
-      readonly states: Record<S, CssWidgetState>,
-      readonly elements: Record<E, CssWidgetElement>,
-      readonly props: Record<P, CssWidgetProp>,
+      readonly states: RecordRo<S, CssWidgetState>,
+      readonly elements: RecordRo<E, CssWidgetElement>,
+      readonly props: RecordRo<P, CssWidgetProp>,
     ) { }
     
     // get root
@@ -149,8 +150,8 @@ export namespace WidgetStyle {
   export class UseCssWidget
   <const E extends string, const S extends string> {
     
-    readonly s: Record<S, () => UseCssWidget<E, S>>
-    readonly e: Record<E, () => UseCssWidget<E, S>>
+    readonly s: RecordRo<S, () => UseCssWidget<E, S>>
+    readonly e: RecordRo<E, () => UseCssWidget<E, S>>
     
     currState: S | null = null
     currElem:  E | null = null
@@ -423,7 +424,7 @@ export namespace WidgetStyle {
   
   
   {
-    // TEST button:hover > input
+    // TEST button:hover > border
     const btn = new Elem('rrainuiButton', {
       normal: Pseudo.empty,
       hover: Pseudo.hover,
@@ -457,8 +458,8 @@ export namespace WidgetStyle {
       //const hoverBorder2 = buttonWidget.use.s.hover().e.SOMETHING_ELSE().use // error
     }
     
-    // .rrainuiButton>.rrainuiBorder
-    //console.log('hoverBorder', hoverBorder)
+    // .rrainuiButton:hover>.rrainuiBorder
+    console.log('hoverBorder', hoverBorder)
     
   }
   {
@@ -496,8 +497,7 @@ export namespace WidgetStyle {
     }
     
     // hoverInput .rrainuiFrame>.rrainuiInput:hover
-    //console.log('hoverInput', hoverInput)
-    
+    console.log('hoverInput', hoverInput)
   }
   {
     // TEST frame > input, frame > border:hover
@@ -517,16 +517,15 @@ export namespace WidgetStyle {
     const inputWidget = inputWidgetInput.add('frame', '>', 'border', border)
     
     
-    const hoverInputFromBorder = inputWidget.use.s.hover().e.input().use
+    const inputWithHoverBorder = inputWidget.use.s.hover().e.input().use
     
     // .rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
-    console.log('hoverInputFromBorder', hoverInputFromBorder)
+    console.log('inputWithHoverBorder', inputWithHoverBorder)
     
-    const thisHoverInputFromBorder = inputWidget.use.s.hover().e.input().thisUse
+    const thisInputWithHoverBorder = inputWidget.use.s.hover().e.input().thisUse
     
     // &.rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
-    //console.log('thisHoverInputFromBorder', thisHoverInputFromBorder)
-    
+    console.log('thisInputWithHoverBorder', thisInputWithHoverBorder)
   }
   {
     /*

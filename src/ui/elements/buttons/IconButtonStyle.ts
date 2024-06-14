@@ -26,7 +26,7 @@ export namespace IconButtonStyle {
   
   
   export const icon = (t:Theme) => css`
-    ${ButtonStyle.basic};
+    ${ButtonStyle.base};
     // normal
     ${El.btn.thiz()} {
       height: 50px;

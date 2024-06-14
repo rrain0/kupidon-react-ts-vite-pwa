@@ -20,7 +20,7 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 type ButtonElement = HTMLButtonElement
-type ButtonProps = React.ComponentPropsWithoutRef<typeof ButtonFrame> & PartialUndef<{
+type ButtonProps = React.ComponentPropsWithoutRef<typeof StyledButton> & PartialUndef<{
   hasError: boolean
   rippleMode: React.ComponentProps<typeof Ripple>['mode']
   rippleDuration: RippleProps['rippleDuration']
@@ -59,56 +59,27 @@ React.forwardRef<ButtonElement, ButtonProps>(
   
   
   
-  return <ButtonFrame css={buttonStyle}
+  return <StyledButton /* button */
     {...buttonProps}
     ref={elemRef}
   >
     
     { children }
     
-    <div css={borderStyle}
+    <div /* Border */
       {...borderProps}
     >
-      <Ripple
+      <Ripple /* Ripple */
         targetElement={elemRef}
         {...rippleProps}
       />
     </div>
     
-  </ButtonFrame>
+  </StyledButton>
 }))
 export default Button
 
 
 
+const StyledButton = styled.button()
 
-const ButtonFrame = styled.button``
-
-
-
-const buttonStyle = css`
-  ${resetButton};
-  position: relative;
-  ${row};
-  place-content: center;
-  place-items: center;
-
-  :active, :focus-visible {
-    cursor: pointer;
-  }
-  ${hoverable}{ :hover {
-    cursor: pointer;
-  } }
-  :disabled {
-    cursor: auto;
-  }
-`
-
-
-
-const borderStyle = css`
-  ${abs};
-  place-self: stretch;
-  pointer-events: none;
-  border-radius: inherit;
-`

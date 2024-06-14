@@ -6,12 +6,12 @@
 export namespace TypeUtils {
   
   export type empty = null | undefined
-  export type anyval = {} |null | undefined
+  export type anyval = {} | null | undefined
   export type falsy = false | undefined | null | '' | 0
-  export type emptyObj = Record<keyof any, never> // need to fix
+  export type emptyObj = Record<never, never> // need to fix
   export type HtmlBool = true | undefined
   
-  export const noop = ()=>{}
+  export const noop = () => {}
   
   export const trueOrUndef = (value: any): HtmlBool => value ? true : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
@@ -21,7 +21,9 @@ export namespace TypeUtils {
     { [Prop in keyof O]+?: O[Prop] | undefined }
   export type WriteablePartial<O extends object> =
     { -readonly [Prop in keyof O]+?: O[Prop] }
-  
+  export type RecordRo<K extends keyof any, T> = {
+    +readonly [P in K]: T
+  }
   
   
   

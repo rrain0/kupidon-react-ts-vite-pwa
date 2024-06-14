@@ -41,21 +41,25 @@ React.forwardRef<ModalTextareaRefElement, ModalTextareaProps>(
   
   
   return isOpen && <ModalPortal>
-    <UserActionsConsumer><Modal css={ModalElement.modalStyle} onClick={onClose}>
-      <UserActionsConsumer><Card2 css={ModalElement.card2Style}>
-        <ItemLabel>{title}</ItemLabel>
-        <Textarea css={TextareaStyle.small}
-          {...restProps}
-          ref={forwardedRef}
-        />
-        <ModalElement.DialogButtons>
-          <Button css={ButtonStyle.textRoundedNormalNormal}
-            onClick={onClose}
-            children={actionText.ok.toLowerCase()}
-          />
-        </ModalElement.DialogButtons>
-      </Card2></UserActionsConsumer>
-    </Modal></UserActionsConsumer>
+    <UserActionsConsumer>
+      <Modal css={ModalElement.modalStyle} onClick={onClose}>
+        <UserActionsConsumer>
+          <Card2 css={ModalElement.card2Style}>
+            <ItemLabel>{title}</ItemLabel>
+            <Textarea css={TextareaStyle.small}
+              {...restProps}
+              ref={forwardedRef}
+            />
+            <ModalElement.DialogButtons>
+              <Button css={ButtonStyle.textRoundedNormalNormal}
+                onClick={onClose}
+                children={actionText.ok.toLowerCase()}
+              />
+            </ModalElement.DialogButtons>
+          </Card2>
+        </UserActionsConsumer>
+      </Modal>
+    </UserActionsConsumer>
   </ModalPortal>
 }))
 export default ModalTextarea

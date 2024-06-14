@@ -98,7 +98,7 @@ export namespace ObjectUtils {
    * Встроенная функция {@linkcode Object.entries} с улучшенной типизацией
    */
   export function ObjectEntries
-    <O extends {}|null|undefined>
+    <O extends anyval>
     (object: O)
     : ObjectEntriesArrType<O & object>
   {
@@ -111,13 +111,14 @@ export namespace ObjectUtils {
   
   export function ObjectMap
   <O1 extends object, O2 extends object>
-  (object: O1,
-   mapper: (entry: ObjectEntriesType<O1>, object: O1) => ObjectEntriesType<O2>
+  (
+    object: O1,
+    mapper: (entry: ObjectEntriesType<O1>, object: O1) => ObjectEntriesType<O2>
   )
   : O2 {
-    const object2 = {} as O2
-    ObjectEntries(object).forEach(entry=>{
-      const entry2 = mapper(entry,object)
+    const object2 = { } as O2
+    ObjectEntries(object).forEach(entry => {
+      const entry2 = mapper(entry, object)
       object2[entry2[0]] = entry2[1]
     })
     return object2

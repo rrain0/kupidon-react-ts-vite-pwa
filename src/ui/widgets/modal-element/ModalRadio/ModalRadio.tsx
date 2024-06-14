@@ -41,7 +41,7 @@ return <UseBottomSheetState isOpen={!!isOpen} close={close}>
         header={title}
       >
         <RadioInputGroup css={selectItemsContainer}>
-          {options?.map(opt => <><RadioInput
+          {options?.map(opt => <RadioInput
             css={[
               RadioInputStyle.radio,
               css`
@@ -65,13 +65,13 @@ return <UseBottomSheetState isOpen={!!isOpen} close={close}>
             <div css={selectItemText}>
               {opt.text}
             </div>
-          </RadioInput>
+          </RadioInput>)}
             {/* <div css={css`
               height: 1px;
               width: 100%;
               background: black;
             `}/> */}
-          </>)}
+          
         
         </RadioInputGroup>
       </BottomSheetDialogBasic>

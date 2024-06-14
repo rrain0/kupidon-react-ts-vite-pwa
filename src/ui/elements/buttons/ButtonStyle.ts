@@ -15,6 +15,9 @@ import CssProp = WidgetStyle.CssProp
 import CssPropEnum = WidgetStyle.CssPropEnum
 import CssPropColor = WidgetStyle.CssPropColor
 import DataAttrError = WidgetStyle.DataAttrError
+import resetButton = EmotionCommon.resetButton
+import row = EmotionCommon.row
+import abs = EmotionCommon.abs
 
 
 
@@ -79,16 +82,30 @@ export namespace ButtonStyle {
   
   
   
-  export const basic = css`
+  export const base = css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
+      ${resetButton};
+      // it breaks button paddings
+      //container: button / size;
+      position: relative;
+      ${row};
+      place-content: center;
+      place-items: center;
       border: none;
-      transition: background linear 300ms;
       overflow-wrap: anywhere;
+      
+      transition: background linear 300ms;
+    }
+    ${W.use.s.normal().e.border().thisUse} {
+      ${abs};
+      place-self: stretch;
+      pointer-events: none;
+      border-radius: inherit;
     }
     
     // state: disabled
-    ${El.ripple.thiz('disabled')} {
+    ${W.use.s.disabled().e.ripple().thisUse} {
       display: none;
     }
   `
@@ -98,7 +115,7 @@ export namespace ButtonStyle {
   
   // type: filled, shape: rect, size: big
   const filledRectBig = css`
-    ${basic};
+    ${base};
     // state: normal
     ${El.btn.thiz()} {
       width: 100%;
@@ -335,7 +352,7 @@ export namespace ButtonStyle {
   
   // type: filled, shape: rounded, size: normal
   const filledRoundedNormal = css`
-    ${basic};
+    ${base};
     // state: normal
     ${El.btn.thiz()} {
       min-width: 90px;
@@ -483,7 +500,7 @@ export namespace ButtonStyle {
   
   // type: outlined, shape: rounded, size: normal
   const outlinedRoundedNormal = css`
-    ${basic};
+    ${base};
     
     // state: normal
     ${El.btn.thiz()} {
@@ -507,7 +524,7 @@ export namespace ButtonStyle {
   `
   // type: outlined, shape: rounded, size: small
   const outlinedRoundedSmall = css`
-    ${basic};
+    ${base};
     
     // state: normal
     ${El.btn.thiz()} {

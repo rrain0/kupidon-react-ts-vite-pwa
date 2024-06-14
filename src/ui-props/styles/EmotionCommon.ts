@@ -177,6 +177,9 @@ export namespace EmotionCommon {
       box-shadow: none;
       border: none;
     }
+    :disabled {
+      cursor: auto;
+    }
   `
   
   export const resetTextarea = css`

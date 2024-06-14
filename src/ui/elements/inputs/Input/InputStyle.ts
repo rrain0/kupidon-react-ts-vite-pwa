@@ -53,7 +53,7 @@ export namespace InputStyle {
   
   
   
-  const basic = css`
+  const base = css`
     // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
       container: input / size;
@@ -81,7 +81,7 @@ export namespace InputStyle {
   
   // type: outlined, shape: rect, size: normal
   const outlinedRectNormal = css`
-    ${basic};
+    ${base};
     
     // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
