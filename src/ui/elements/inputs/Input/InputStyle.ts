@@ -7,9 +7,9 @@ import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import Elem = WidgetStyle.Elem
-import Pseudo = WidgetStyle.Pseudo
+import CssPseudo = WidgetStyle.CssPseudo
 import CssWidget = WidgetStyle.CssWidget
-import Attr = WidgetStyle.Attr
+import CssAttr = WidgetStyle.CssAttr
 import bgcInBorder = EmotionCommon.bgcInBorder
 import PartialUndef = TypeUtils.PartialUndef
 import Txt = EmotionCommon.Txt
@@ -28,21 +28,21 @@ export namespace InputStyle {
       color: CssProp.color,
     })
     const input = new Elem('rrainuiInput', {
-      normal: Pseudo.empty,
-      hover: Pseudo.hover,
-      active: Pseudo.active,
-      focus: Pseudo.focus,
-      focusVisible: Pseudo.focusVisible,
-      readOnly: Pseudo.readOnly,
-      disabled: Pseudo.disabled,
-      error: Attr.dataError,
+      normal: CssPseudo.empty,
+      hover: CssPseudo.hover,
+      active: CssPseudo.active,
+      focus: CssPseudo.focus,
+      focusVisible: CssPseudo.focusVisible,
+      readOnly: CssPseudo.readOnly,
+      disabled: CssPseudo.disabled,
+      error: CssAttr.dataError,
     }, { })
     const border = new Elem('rrainuiBorder', { }, { })
     
     const inputWidget = CssWidget
       .ofRoot('frame', frame)
-      .add('frame', '>', 'border', border)
       .add('frame', '>', 'input', input)
+      .add('frame', '>', 'border', border)
     
     return inputWidget
   }()

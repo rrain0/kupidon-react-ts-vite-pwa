@@ -1,6 +1,7 @@
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import anyval = TypeUtils.anyval
 import WriteablePartial = TypeUtils.WriteablePartial
+import isobject = TypeUtils.isobject
 
 
 
@@ -8,9 +9,8 @@ export namespace ObjectUtils {
   
   
   
-  // can also copy class instance
-  import isObject = TypeUtils.isobject
   
+  // can also copy class instance
   export function copy<T extends object>(
     orig: T,
     update?: WriteablePartial<T>,
@@ -47,7 +47,7 @@ export namespace ObjectUtils {
     (object: O)
     : ObjectKeysArrType<O & object>
   {
-    if (!isObject(object)) return []
+    if (!isobject(object)) return []
     // The Object.keys() static method returns an array of a given object's own enumerable string-keyed property names.
     return Object.keys(object) as ObjectKeysArrType<O & object>
   }
@@ -74,7 +74,7 @@ export namespace ObjectUtils {
     (object: O)
     : ObjectValuesArrType<O & object>
   {
-    if (!isObject(object)) return []
+    if (!isobject(object)) return []
     return Object.values(object) as ObjectValuesArrType<O & object>
   }
   
@@ -102,7 +102,7 @@ export namespace ObjectUtils {
     (object: O)
     : ObjectEntriesArrType<O & object>
   {
-    if (!isObject(object)) return []
+    if (!isobject(object)) return []
     return Object.entries(object) as ObjectEntriesArrType<O & object>
   }
   
@@ -128,8 +128,8 @@ export namespace ObjectUtils {
   
   
   export const shallowEq = (obj1: any, obj2: any): boolean => {
-    if (!isObject(obj1)) return false
-    if (!isObject(obj2)) return false
+    if (!isobject(obj1)) return false
+    if (!isobject(obj2)) return false
     const entries1 = ObjectEntries(obj1) as unknown as [any,any]
     const entries2 = ObjectEntries(obj2) as unknown as [any,any]
     if (entries1.some(([k,v])=>obj2[k]!==v)) return false

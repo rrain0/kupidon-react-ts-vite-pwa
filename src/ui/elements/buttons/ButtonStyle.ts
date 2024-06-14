@@ -7,8 +7,8 @@ import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import CssWidget = WidgetStyle.CssWidget
 import Elem = WidgetStyle.Elem
-import Pseudo = WidgetStyle.Pseudo
-import Attr = WidgetStyle.Attr
+import CssPseudo = WidgetStyle.CssPseudo
+import CssAttr = WidgetStyle.CssAttr
 import Elem0 = WidgetStyle.Elem0
 import Pseudo0 = WidgetStyle.Pseudo0
 import CssProp = WidgetStyle.CssProp
@@ -50,14 +50,14 @@ export namespace ButtonStyle {
   
   export const W = function(){
     const button = new Elem('rrainuiButton', {
-      normal: Pseudo.empty,
-      hover: Pseudo.hover,
-      active: Pseudo.active,
-      focus: Pseudo.focus,
-      focusVisible: Pseudo.focusVisible,
-      readOnly: Pseudo.readOnly,
-      disabled: Pseudo.disabled,
-      error: Attr.dataError,
+      normal: CssPseudo.empty,
+      hover: CssPseudo.hover,
+      active: CssPseudo.active,
+      focus: CssPseudo.focus,
+      focusVisible: CssPseudo.focusVisible,
+      readOnly: CssPseudo.readOnly,
+      disabled: CssPseudo.disabled,
+      error: CssAttr.dataError,
     }, {
       color: CssProp.color,
     })

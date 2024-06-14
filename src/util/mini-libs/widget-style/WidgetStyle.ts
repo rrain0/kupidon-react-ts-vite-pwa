@@ -273,11 +273,22 @@ export namespace WidgetStyle {
   }
   
   
+  /*
+  STATE ORDER:
+  normal
+  checked
+  hover
+  active
+  focus
+  focusVisible
+  readOnly
+  disabled
+  error
+  */
   
   
   
-  
-  export class Pseudo {
+  export class CssPseudo {
     
     constructor(
       // 'hover'
@@ -297,28 +308,28 @@ export namespace WidgetStyle {
       return `&${use}`
     }
     
-    static readonly empty = new Pseudo('')
-    static readonly checked = new Pseudo('checked')
-    static readonly hover = new Pseudo('hover')
-    static readonly active = new Pseudo('active')
-    static readonly focus = new Pseudo('focus')
-    static readonly focusVisible = new Pseudo('focus-visible')
-    static readonly readOnly = new Pseudo('read-only')
-    static readonly disabled = new Pseudo('disabled')
+    static readonly empty = new CssPseudo('')
+    static readonly checked = new CssPseudo('checked')
+    static readonly hover = new CssPseudo('hover')
+    static readonly active = new CssPseudo('active')
+    static readonly focus = new CssPseudo('focus')
+    static readonly focusVisible = new CssPseudo('focus-visible')
+    static readonly readOnly = new CssPseudo('read-only')
+    static readonly disabled = new CssPseudo('disabled')
     
   }
   
   
-  export class Attr {
+  export class CssAttr {
     
     constructor(
       // attr name
-      // 'checked' 'data-error'
+      // 'data-error'
       readonly name: string
     ) { }
     
     // attr selector
-    // '[checked]' '[data-error]'
+    // '[data-error]'
     get use() {
       const name = this.name
       if (!name) return ''
@@ -326,25 +337,24 @@ export namespace WidgetStyle {
     }
     
     // attr this selector
-    // '&[checked]' '&[data-error]'
+    // '&[data-error]'
     get thisUse() {
       const use = this.use
       if (!use) return ''
       return `&${use}`
     }
     
-    static readonly empty = new Attr('')
-    static readonly checked = new Attr('checked')
-    static readonly dataError = new Attr('data-error')
+    static readonly empty = new CssAttr('')
+    static readonly dataError = new CssAttr('data-error')
     
   }
   
   
-  export type CssState = Pseudo | Attr
+  export type CssState = CssPseudo | CssAttr
   
   
   
-  export class AttrEnum<const V extends string> {
+  export class CssAttrEnum<const V extends string> {
     
     constructor(
       // attr name
@@ -382,13 +392,13 @@ export namespace WidgetStyle {
     
     toAttr(value: V | '' = '') {
       const nameValue = this.nameValue(value)
-      return new Attr(nameValue)
+      return new CssAttr(nameValue)
     }
     
     
-    static readonly empty = new AttrEnum('', [])
+    static readonly empty = new CssAttrEnum('', [])
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
-    static readonly inputType = new AttrEnum('type', ['radio', 'checkbox'])
+    static readonly inputType = new CssAttrEnum('type', ['radio', 'checkbox'])
     
   }
   
@@ -426,8 +436,8 @@ export namespace WidgetStyle {
   {
     // TEST button:hover > border
     const btn = new Elem('rrainuiButton', {
-      normal: Pseudo.empty,
-      hover: Pseudo.hover,
+      normal: CssPseudo.empty,
+      hover: CssPseudo.hover,
     }, { })
     const border = new Elem('rrainuiBorder', { }, { })
     
@@ -459,15 +469,14 @@ export namespace WidgetStyle {
     }
     
     // .rrainuiButton:hover>.rrainuiBorder
-    console.log('hoverBorder', hoverBorder)
-    
+    //console.log('hoverBorder', hoverBorder)
   }
   {
     // TEST frame > input:hover
     const frame = new Elem('rrainuiFrame', { }, { })
     const input = new Elem('rrainuiInput', {
-      normal: Pseudo.empty,
-      hover: Pseudo.hover,
+      normal: CssPseudo.empty,
+      hover: CssPseudo.hover,
     }, { })
     
     {
@@ -497,15 +506,15 @@ export namespace WidgetStyle {
     }
     
     // hoverInput .rrainuiFrame>.rrainuiInput:hover
-    console.log('hoverInput', hoverInput)
+    //console.log('hoverInput', hoverInput)
   }
   {
     // TEST frame > input, frame > border:hover
     const frame = new Elem('rrainuiFrame', { }, { })
     const input = new Elem('rrainuiInput', { }, { })
     const border = new Elem('rrainuiBorder', {
-      normal: Pseudo.empty,
-      hover: Pseudo.hover,
+      normal: CssPseudo.empty,
+      hover: CssPseudo.hover,
     }, { })
     
     {
@@ -518,14 +527,13 @@ export namespace WidgetStyle {
     
     
     const inputWithHoverBorder = inputWidget.use.s.hover().e.input().use
-    
-    // .rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
-    console.log('inputWithHoverBorder', inputWithHoverBorder)
-    
     const thisInputWithHoverBorder = inputWidget.use.s.hover().e.input().thisUse
     
+    
+    // .rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
+    //console.log('inputWithHoverBorder', inputWithHoverBorder)
     // &.rrainuiFrame:has(>.rrainuiBorder:hover)>.rrainuiInput
-    console.log('thisInputWithHoverBorder', thisInputWithHoverBorder)
+    //console.log('thisInputWithHoverBorder', thisInputWithHoverBorder)
   }
   {
     /*
