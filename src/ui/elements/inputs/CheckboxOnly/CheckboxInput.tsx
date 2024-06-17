@@ -1,18 +1,14 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
-import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
-import row = EmotionCommon.row
 import trueOrUndef = TypeUtils.trueOrUndef
 import center = EmotionCommon.center
 import Checkmark2Ic = SvgIcons.Checkmark2Ic
@@ -49,92 +45,54 @@ React.forwardRef<CheckboxElement, CheckboxProps>
   
   
   const frameProps = {
-    className: clsx(className, CheckboxInputStyle.El.frameClassName),
+    className: clsx(className, CheckboxInputStyle.W.e.frame.e.name),
     style: style,
   }
   const inputProps = {
-    className: CheckboxInputStyle.El.inputClassName,
+    className: CheckboxInputStyle.W.e.input.e.name,
     type: 'checkbox',
-    [CheckboxInputStyle.Attr0.errorName]: trueOrUndef(hasError),
+    [CheckboxInputStyle.W.s.error.s.name]: trueOrUndef(hasError),
     ...restProps,
   }
-  const checkedWrapProps = {
-    className: CheckboxInputStyle.El.iconWrapClassName
+  const iconBoxProps = {
+    className: CheckboxInputStyle.W.e.iconBox.e.name
   }
-  const uncheckedWrapProps = {
-    className: CheckboxInputStyle.El.iconWrapClassName
+  const iconBoxCheckedProps = {
+    className: CheckboxInputStyle.W.e.iconBoxChecked.e.name
   }
   
   
-  return <Button /* Frame */
-    as='label'
-    css={t => [ButtonStyle.textRectBigNormal(t), frameStyle]}
+  return <Button // Frame
+    as="label"
+    type={null}
     {...frameProps}
   >
-    <input /* Input */
-      css={inputStyle}
+    
+    {/* <div css={css`width: 100%;
+      height: 100%`}/> */}
+    
+    <input // Input
       {...inputProps}
       ref={elemRef}
     />
     
-    <div /* CheckedWrap */
-      css={activeIcWrapStyle}
-      {...checkedWrapProps}
+    <div // IconBox
+      {...iconBoxProps}
     >
-      <CheckmarkBox>
-        <Checkmark2Ic color={!hasError ? 'black' : '#ff8787'} />
-      </CheckmarkBox>
-    </div>
-    <div /* UncheckedWrap */
-      css={inactiveIcWrapStyle}
-      {...uncheckedWrapProps}
-    >
-      <CheckmarkBox data-error={hasError} />
+      {/* <CheckmarkBox data-error={hasError}/> */}
     </div>
     
+    <div // IconBoxChecked
+      {...iconBoxCheckedProps}
+    >
+      {/* <CheckmarkBox>
+       <Checkmark2Ic color={!hasError ? 'black' : '#ff8787'}/>
+       </CheckmarkBox> */}
+    </div>
+  
   </Button>
 }))
 export default CheckboxInput
-
-
-
-
-
-
-
-const frameStyle = css`
-  position: relative;
-  ${row};
-  justify-content: start;
-  align-items: center;
-  //cursor: pointer;
-`
-
-
-
-const inputStyle = css`
-  ${resetInput};
-  ${abs};
-  opacity: 0;
-  cursor: pointer;
-`
-
-
-
-const activeIcWrapStyle = css`
-  display: none;
-  input:checked ~ & { display: flex; }
-  ${SvgIconsStyle.El.icon.sel()} {
-    ${SvgIconsStyle.El.icon.props.color.name}: var(${CheckboxInputStyle.Prop.activeIconColor})
-  }
-`
-const inactiveIcWrapStyle = css`
-  display: flex;
-  input:checked ~ & { display: none }
-  ${SvgIconsStyle.El.icon.sel()} {
-    ${SvgIconsStyle.El.icon.props.color.name}: var(${CheckboxInputStyle.Prop.inactiveIconColor})
-  }
-`
 
 
 const CheckmarkBox = styled.div`
@@ -162,13 +120,5 @@ const CheckmarkBox = styled.div`
       border-color: #ff8787;
     }
   }
-`
-
-
-
-const borderStyle = css`
-  ${abs};
-  pointer-events: none;
-  border-radius: inherit;
 `
 

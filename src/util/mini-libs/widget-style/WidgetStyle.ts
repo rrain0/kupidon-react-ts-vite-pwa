@@ -184,7 +184,12 @@ export namespace WidgetStyle {
       let selector = ''
       let eName = this.currElem
       const e = () => this.widget.elements[eName]
-      const s = this.currState === null ? null : this.widget.states[this.currState]
+      const s = (()=>{
+        if (this.currState === null) return null
+        const s = this.widget.states[this.currState]
+        if (!s.use) return null
+        return s
+      })()
       let stateWasApplied = false
       
       while (eName) {

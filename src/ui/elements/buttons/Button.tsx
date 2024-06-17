@@ -1,16 +1,10 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
 import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import abs = EmotionCommon.abs
-import resetButton = EmotionCommon.resetButton
-import row = EmotionCommon.row
 import PartialUndef = TypeUtils.PartialUndef
-import hoverable = EmotionCommon.hoverable
 import trueOrUndef = TypeUtils.trueOrUndef
 
 
@@ -20,10 +14,11 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 type ButtonElement = HTMLButtonElement
-type ButtonProps = React.ComponentPropsWithoutRef<typeof StyledButton> & PartialUndef<{
+type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof StyledButton>, 'type'> & PartialUndef<{
   hasError: boolean
   rippleMode: React.ComponentProps<typeof Ripple>['mode']
   rippleDuration: RippleProps['rippleDuration']
+  type: React.ComponentPropsWithoutRef<typeof StyledButton>['type'] | null
 }>
 
 
@@ -40,17 +35,17 @@ React.forwardRef<ButtonElement, ButtonProps>(
   
   
   const elemRef = useRef<ButtonElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
+  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
   
   
   const buttonProps = {
     [ButtonStyle.W.s.error.s.name]: trueOrUndef(hasError),
-    className: clsx(className, ButtonStyle.El.btn.name),
-    type: type ?? 'button',
+    className: clsx(className, ButtonStyle.W.e.button.e.name),
+    type: type === undefined ? 'button' : type === null ? undefined : type,
     ...restProps
   }
   const borderProps = {
-    className: ButtonStyle.El.border.name
+    className: ButtonStyle.W.e.border.e.name
   }
   const rippleProps = {
     mode: rippleMode ?? 'cursor',
@@ -59,17 +54,17 @@ React.forwardRef<ButtonElement, ButtonProps>(
   
   
   
-  return <StyledButton /* button */
+  return <StyledButton // button
     {...buttonProps}
     ref={elemRef}
   >
     
     { children }
     
-    <div /* Border */
+    <div // Border
       {...borderProps}
     >
-      <Ripple /* Ripple */
+      <Ripple // Ripple
         targetElement={elemRef}
         {...rippleProps}
       />

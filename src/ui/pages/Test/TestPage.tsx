@@ -10,6 +10,8 @@ import { MathUtils } from '@util/common/MathUtils.ts'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import CheckboxInput from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInput.tsx'
+import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInputStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -22,7 +24,8 @@ import mapRange = MathUtils.mapRange
 
 const TestPage =
 React.memo(
-()=>{
+() => {
+  
   const [searchParams] = useSearchParams()
   
   
@@ -72,12 +75,12 @@ React.memo(
   
   const [progress, setProgress] = useState(0)
   useEffect(
-    ()=>{
+    () => {
       const id = setInterval(
-        ()=>setProgress(s=>s===0 ? 100 : 0),
+        () => setProgress(s=>s===0 ? 100 : 0),
         3000
       )
-      return ()=>clearInterval(id)
+      return () => clearInterval(id)
     },
     []
   )
@@ -94,22 +97,22 @@ React.memo(
         <div>Test Page</div>
         
         <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.filledRectBigMain}>Scrollbar test</Button>
+          <Button css={ButtonStyle.filledRectBigNormal}>Scrollbar test</Button>
         </Link>
         <Link to={RootRoute.test.bottomSheet[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.filledRectBigMain}>Bottom Sheet test</Button>
+          <Button css={ButtonStyle.filledRectBigNormal}>Bottom Sheet test</Button>
         </Link>
         <Link to={RootRoute.test.resizeObserver[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.filledRectBigMain}>Resize Observer test</Button>
+          <Button css={ButtonStyle.filledRectBigNormal}>Resize Observer test</Button>
         </Link>
         <Link to={RootRoute.test.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.filledRectBigMain}>Move to another view</Button>
+          <Button css={ButtonStyle.filledRectBigNormal}>Move to another view</Button>
         </Link>
         <Link to={RootRoute.test.pointer[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.filledRectBigMain}>Pointer test</Button>
+          <Button css={ButtonStyle.filledRectBigNormal}>Pointer test</Button>
         </Link>
         <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
-          <Button css={ButtonStyle.filledRectBigMain}>Tabs test</Button>
+          <Button css={ButtonStyle.filledRectBigNormal}>Tabs test</Button>
         </Link>
         
         
@@ -129,7 +132,7 @@ React.memo(
         
         
         <div
-          css={t=>css`
+          css={t => css`
             width: 200px;
             height: 200px;
             ${center};
@@ -147,7 +150,7 @@ React.memo(
         
         
         <div
-          css={t=>css`
+          css={t => css`
             width: 300px;
             height: 150px;
             padding: 10px;
@@ -161,7 +164,7 @@ React.memo(
         </div>
         
         <div
-          css={t=>css`
+          css={t => css`
             width: 300px;
             height: 150px;
             padding: 10px;
@@ -175,7 +178,7 @@ React.memo(
         </div>
         
         <div
-          css={t=>css`
+          css={t => css`
             width: 300px;
             height: 150px;
             padding: 10px;
@@ -187,6 +190,24 @@ React.memo(
           Контент.<br/>
           Theme.containerAccent
         </div>
+        
+        
+        
+        <div
+          css={t => css`
+            width: 300px;
+            height: 150px;
+            padding: 10px;
+            border-radius: 16px;
+            background: ${t.containerAccent.bgc[0]};
+            color:      ${t.containerAccent.content[0]};
+          `}
+        >
+          <CheckboxInput css={CheckboxInputStyle.normalNormal}/>
+          {/* <CheckboxInput css={ButtonStyle.textRectBigNormal}/> */}
+        </div>
+        
+        
         
         
         
@@ -206,6 +227,7 @@ React.memo(
   </>
 })
 export default TestPage
+
 
 
 

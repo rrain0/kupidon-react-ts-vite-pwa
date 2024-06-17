@@ -48,6 +48,8 @@ export namespace ButtonStyle {
   }()
   
   
+  
+  
   export const W = function(){
     const button = new Elem('rrainuiButton', {
       normal: CssPseudo.empty,
@@ -99,7 +101,6 @@ export namespace ButtonStyle {
     }
     ${W.use.s.normal().e.border().thisUse} {
       ${abs};
-      place-self: stretch;
       pointer-events: none;
       border-radius: inherit;
     }
@@ -117,142 +118,142 @@ export namespace ButtonStyle {
   const filledRectBig = css`
     ${base};
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       width: 100%;
       min-height: 50px;
       border-radius: 15px;
       padding: 8px 6px;
       ${Txt.large2};
     }
-    ${El.border.thiz()}{
+    ${W.use.s.normal().e.border().thisUse}{
       border: 1px solid;
     }
   `
   // type: filled, shape: rect, add color: main
   const filledRectAddColorMain = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonMain.bgc[0]};
-      ${El.btn.props.color.set(t.buttonMain.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonMain.content[0])}
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonMain.bgcFocus[0]};
     }}
     
     // state: active
-    ${El.btn.thiz('active')} { }
+    ${W.use.s.active().e.button().thisUse} { }
     
     // state: focus
-    ${El.btn.thiz('focus')} { }
+    ${W.use.s.focus().e.button().thisUse} { }
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonMain.bgcFocus[0]};
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
     
     // state: error
-    ${El.border.thiz('error')} { }
+    ${W.use.s.error().e.border().thisUse} { }
   `
   // type: filled, shape: rect, add color: accent
   const filledRectAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonAccent.bgc[0]};
-      ${El.btn.props.color.set(t.buttonAccent.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.content[0])}
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonAccent.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonAccent.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
   // type: filled, shape: rect, add color: normal
   const filledRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonNormal.bgc[0]};
-      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonNormal.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonNormal.bgcFocus[0]};
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
   // type: filled, shape: rect, add color: danger
   const filledRectAddColorDanger = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.elementDanger.bgc[0]};
       ${W.props.color.p.set(t.elementDanger.content[0])};
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.elementDanger.bgcFocus[0]};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.elementDanger.bgcFocus[0]};
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
@@ -288,35 +289,35 @@ export namespace ButtonStyle {
     ${filledRectBig};
     
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: none;
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
   `
   // type: text, shape: rect, add color: normal
   export const textRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       ${W.props.color.p.set(t.page.content2[0])};
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
@@ -324,7 +325,7 @@ export namespace ButtonStyle {
   // type: text, shape: rect, add size: normal
   const textRectAddSizeNormal = css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       width: auto;
       min-height: 30px;
       border-radius: 10px;
@@ -354,7 +355,7 @@ export namespace ButtonStyle {
   const filledRoundedNormal = css`
     ${base};
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       min-width: 90px;
       width: fit-content;
       min-height: 40px;
@@ -363,104 +364,104 @@ export namespace ButtonStyle {
       gap: 0.6em;
       ${Txt.small1};
     }
-    ${El.border.thiz()}{
+    ${W.use.s.normal().e.border().thisUse}{
       border: none;
     }
   `
   // type: filled, shape: rounded, size: small
   export const filledRoundedSmall = css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       width: fit-content;
       min-height: 30px;
       border-radius: 1000000px;
       padding: 4px 16px;
       ${Txt.small1};
     }
-    ${El.border.thiz()}{
+    ${W.use.s.normal().e.border().thisUse}{
       border: none;
     }
   `
   // type: filled, shape: rounded, add color: normal
   export const filledRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonNormal.bgc[0]};
-      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
     
     // state: hover
-    ${hoverable} { ${El.btn.thiz('hover')} {
+    ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonNormal.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonNormal.bgcFocus[0]};
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
   // type: filled, shape: rounded, add color: accent
   export const filledRoundedAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonAccent.bgc[0]};
-      ${El.btn.props.color.set(t.buttonAccent.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.content[0])}
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
 
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonAccent.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
     }}
 
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonAccent.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
     }
 
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
   // type: filled, shape: rounded, add color: danger
   export const filledRoundedAddColorDanger = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: ${t.elementDanger.bgc[0]};
       ${W.props.color.p.set(t.elementDanger.content[0])};
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.content[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.elementDanger.bgcFocus[0]};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.elementDanger.bgcFocus[0]};
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
     }
@@ -503,7 +504,7 @@ export namespace ButtonStyle {
     ${base};
     
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       min-width: 90px;
       width: fit-content;
       min-height: 40px;
@@ -513,12 +514,12 @@ export namespace ButtonStyle {
       gap: 0.6em;
       ${Txt.small1};
     }
-    ${El.border.thiz()}{
+    ${W.use.s.normal().e.border().thisUse}{
       border: 1px solid;
     }
     
     // state: hover
-    ${El.border.thiz('hover')} {
+    ${W.use.s.hover().e.border().thisUse} {
       border: none;
     }
   `
@@ -527,85 +528,85 @@ export namespace ButtonStyle {
     ${base};
     
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       width: fit-content;
       min-height: 30px;
       border-radius: 1000000px;
       padding: 4px 16px;
       ${Txt.small1};
     }
-    ${El.border.thiz()}{
+    ${W.use.s.normal().e.border().thisUse}{
       border: 1px solid;
     }
     
     // state: hover
-    ${El.border.thiz('hover')} {
+    ${W.use.s.hover().e.border().thisUse} {
       border: none;
     }
   `
   // type: outlined, shape: rounded, add color: normal
   export const outlinedRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonNormal.bgc[0])}
+    ${W.use.s.normal().e.button().thisUse} {
+      ${W.e.button.e.props.color.set(t.buttonNormal.bgc[0])}
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border-color: ${t.buttonNormal.bgc[0]};
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonNormal.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonNormal.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
   // type: outlined, shape: rounded, add color: accent
   export const outlinedRoundedAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.buttonAccent.bgc[0])}
+    ${W.use.s.normal().e.button().thisUse} {
+      ${W.e.button.e.props.color.set(t.buttonAccent.bgc[0])}
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border-color: ${t.buttonAccent.bgc[0]};
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
     }
     
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonAccent.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
     }}
-    ${hoverable}{ ${El.border.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.border().thisUse} {
       border-color: ${t.buttonAccent.bgcFocus[0]};
     }}
     
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonAccent.bgcFocus[0]};
-      ${El.btn.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
     }
     
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${El.btn.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
   
@@ -634,36 +635,36 @@ export namespace ButtonStyle {
     ${filledRoundedNormal};
     
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       background: none;
       ${Txt.large2b};
     }
-    ${El.border.thiz()} {
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
   `
   // type: text, shape: rounded, add color: normal
   export const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${El.btn.thiz()} {
+    ${W.use.s.normal().e.button().thisUse} {
       ${W.props.color.p.set(t.page.content2[0])};
     }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
     }
 
     // state: hover
-    ${hoverable}{ ${El.btn.thiz('hover')} {
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }}
 
     // state: focus-visible
-    ${El.btn.thiz('focusVisible')} {
+    ${W.use.s.focusVisible().e.button().thisUse} {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }
 
     // state: disabled
-    ${El.btn.thiz('disabled')} {
+    ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
       ${W.props.color.p.set(t.elementDisabled.content[0])};
     }

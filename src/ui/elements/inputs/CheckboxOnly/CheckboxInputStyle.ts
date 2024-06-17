@@ -12,6 +12,11 @@ import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
+import center = EmotionCommon.center
+import resetInput = EmotionCommon.resetInput
+import abs = EmotionCommon.abs
+import centerAll = EmotionCommon.centerAll
+
 
 
 
@@ -24,6 +29,7 @@ export namespace CheckboxInputStyle {
     })
     const input = new Elem('rrainuiInput', {
       normal: CssPseudo.empty,
+      checked: CssPseudo.checked,
       hover: CssPseudo.hover,
       active: CssPseudo.active,
       focus: CssPseudo.focus,
@@ -33,12 +39,14 @@ export namespace CheckboxInputStyle {
       error: CssAttr.dataError,
     }, { })
     const iconBox = new Elem('rrainuiIconBox', { }, { })
+    const iconBoxChecked = new Elem('rrainuiIconBoxChecked', { }, { })
     // todo icon, ripple
     
     const inputWidget = CssWidget
       .ofRoot('frame', frame)
       .add('frame', '>', 'input', input)
       .add('frame', '>', 'iconBox', iconBox)
+      .add('frame', '>', 'iconBoxChecked', iconBoxChecked)
     
     return inputWidget
   }()
@@ -104,7 +112,68 @@ export namespace CheckboxInputStyle {
   
   
   
-  export const normal = (t: AppTheme.Theme) => css`
+  
+  const basic = (t: AppTheme.Theme) => css`
+    ${ButtonStyle.textRectBigNormal(t)};
+    
+    // state: normal
+    /* ${W.use.s.normal().e.frame().thisUse} {
+      width: 60px;
+      height: 60px;
+      ${centerAll};
+    } */
+    ${W.use.s.normal().e.input().thisUse} {
+      ${resetInput};
+      ${abs};
+      opacity: 0;
+      cursor: pointer;
+    }
+    ${W.use.s.normal().e.iconBox().thisUse} {
+      display: flex;
+      ${SvgIconsStyle.El.icon.sel()} {
+        ${SvgIconsStyle.El.icon.props.color.name}: var(${CheckboxInputStyle.Prop.inactiveIconColor})
+      }
+    }
+    ${W.use.s.normal().e.iconBoxChecked().thisUse} {
+      display: none;
+      ${SvgIconsStyle.El.icon.sel()} {
+        ${SvgIconsStyle.El.icon.props.color.name}: var(${CheckboxInputStyle.Prop.activeIconColor})
+      }
+    }
+    
+    // state: checked
+    ${W.use.s.checked().e.iconBox().thisUse} {
+      display: none;
+    }
+    ${W.use.s.checked().e.iconBoxChecked().thisUse} {
+      display: flex;
+    }
+  `
+  
+  
+  // size: normal, color: normal
+  export const normalNormal = (t: AppTheme.Theme) => css`
+    ${basic(t)};
+    
+    // state: normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      padding: 6px;
+    }
+    ${W.use.s.normal().e.iconBox().thisUse} {
+      width: 100%;
+      height: 100%;
+    }
+    ${W.use.s.normal().e.iconBoxChecked().thisUse} {
+      width: 100%;
+      height: 100%;
+    }
+  `
+  
+  
+  
+  
+  
+  const normal = (t: AppTheme.Theme) => css`
     // normal
     ${El.frame} {
       border-radius: 15px;
