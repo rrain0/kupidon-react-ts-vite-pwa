@@ -33,6 +33,7 @@ export namespace CheckboxInputStyle {
       error: CssAttr.dataError,
     }, { })
     const iconBox = new Elem('rrainuiIconBox', { }, { })
+    // todo icon, ripple
     
     const inputWidget = CssWidget
       .ofRoot('frame', frame)

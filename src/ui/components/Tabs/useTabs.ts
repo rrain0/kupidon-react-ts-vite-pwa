@@ -236,7 +236,7 @@ export const useTabs = (
       const toTab = function(){
         if (newState==='adjusting')
           return getTabIdxToAdjust(currScrollLeft, snapPointsPx)
-        return fitRange(newTabIdx, [0,lastTabIdx])
+        return fitRange(newTabIdx, [0, lastTabIdx])
       }()
       
       const toScrollLeft = snapPointsPx[toTab]

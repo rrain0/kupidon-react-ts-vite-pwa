@@ -13,10 +13,10 @@ import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
-import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
 import center = EmotionCommon.center
 import Checkmark2Ic = SvgIcons.Checkmark2Ic
+import Puro = TypeUtils.Puro
 
 
 
@@ -26,7 +26,7 @@ import Checkmark2Ic = SvgIcons.Checkmark2Ic
 
 
 type CheckboxElement = HTMLInputElement
-type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & PartialUndef<{
+type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
   hasError: boolean
   checkedComponent: React.ReactNode
   uncheckedComponent: React.ReactNode

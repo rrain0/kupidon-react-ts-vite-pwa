@@ -17,14 +17,20 @@ export namespace TypeUtils {
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type Exists<T> = Exclude<T, empty>
-  export type PartialUndef<O extends object> =
-    { [Prop in keyof O]+?: O[Prop] | undefined }
-  export type WriteablePartial<O extends object> =
-    { -readonly [Prop in keyof O]+?: O[Prop] }
+  export type PartialUndef<O extends object> = {
+    [Prop in keyof O]+?: O[Prop] | undefined
+  }
+  export type WriteablePartial<O extends object> = {
+    -readonly [Prop in keyof O]+?: O[Prop]
+  }
   export type RecordRo<K extends keyof any, T> = {
     +readonly [P in K]: T
   }
   
+  // Add Partial Undefined ReadOnly
+  export type Puro<O extends object> = {
+    +readonly [Prop in keyof O]+?: O[Prop] | undefined
+  }
   
   
   
@@ -59,26 +65,6 @@ export namespace TypeUtils {
   }
   
   
-  /*
-  {
-    const getStrOrObj = (): 'str' | 'str2' | { a: number } => 'str'
-    
-    function f() {
-      const value = getStrOrObj()
-      if (isstring(value)) {
-        const str = value
-      }
-      if (isObject(value)) {
-        const obj = value
-        console.log(obj.substring(0, 1))
-        const num: number = obj.a
-        console.log(num)
-      } else {
-        console.log(value.a)
-      }
-    }
-  }
-   */
   
   
   export type Callback = () => void

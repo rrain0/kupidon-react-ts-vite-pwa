@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext", // simply means which version of ECMAScript you're using to code
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "target": "es2022", // target js standard version
+    "lib": ["ESNext", "DOM", "DOM.Iterable"], // used to write code
     "module": "ESNext",
     "skipLibCheck": true,
 
@@ -39,16 +39,16 @@
     "strict": true,
     //"noUnusedLocals": true,
     //"noUnusedParameters": true,
-    "noPropertyAccessFromIndexSignature": false, // allow access obj.prop from indexed type
+    "noPropertyAccessFromIndexSignature": false, // allow access obj.prop in indexed type instead of obj['prop']
     "noUncheckedIndexedAccess": false, // add undefined when get props from indexed type
     "exactOptionalPropertyTypes": true, // '?' means absence of property but not undefined
     "downlevelIteration": true, // use [...anyIterator]
-    "noImplicitAny": false, // нет неявных any
-    "noImplicitOverride": true, // при переопределении всегда надо указывать override
-    "allowUnreachableCode": true, // разрешить код после return, который никогда не выполнится
+    "noImplicitAny": false,
+    "noImplicitOverride": true,
+    "allowUnreachableCode": true, // allow code after the return statement that never runs
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "useDefineForClassFields": true,
+    "useDefineForClassFields": true, // enables some modern patterns for class properties initialization
     
     "plugins": [
       { "name": "typescript-plugin-css-modules" }

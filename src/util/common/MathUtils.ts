@@ -1,5 +1,6 @@
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import isArray = TypeUtils.isArray
+import NumRange = TypeUtils.NumRange
 
 
 
@@ -7,7 +8,6 @@ export namespace MathUtils {
   
   
   
-  import NumRange = TypeUtils.NumRange
   export const ifNaN = <T = number>(n: number, replacement: T)=>isNaN(n) ? replacement : n
   
   
@@ -76,17 +76,20 @@ export namespace MathUtils {
     | [min: number, curr: number, max: number] */
   /**
    * Функция, подгоняющая текущее значение под диапазон
-   * @param min Минимальное значение включительно
    * @param curr Текущее значение
-   * @param max Максимальное значение включительно
    * @param minMax диапазон [min, max] включительно
    * @returns {number} Результирующее значение, находящееся в диапазоне [min,max]
    */
-  export const fitRange =
-  (...args:
-    | [curr: number, minMax: readonly [number, number]]
-    | [min: number, curr: number, max: number]
-  ): number => {
+  export function fitRange(curr: number, minMax: readonly [number, number]): number
+  /**
+   * Функция, подгоняющая текущее значение под диапазон
+   * @param min Минимальное значение включительно
+   * @param curr Текущее значение
+   * @param max Максимальное значение включительно
+   * @returns {number} Результирующее значение, находящееся в диапазоне [min,max]
+   */
+  export function fitRange(min: number, curr: number, max: number): number
+  export function fitRange(...args: any[]): number {
     if (isArray(args[1])){
       const [curr, [min, max]] = args as any
       return _fitRange(curr, [min, max])

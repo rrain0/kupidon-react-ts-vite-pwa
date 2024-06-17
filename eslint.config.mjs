@@ -90,7 +90,7 @@ export default [
     rules: {
       // code style rules:
       '@stylistic/js/arrow-parens': ['error', 'as-needed'],
-      //'@stylistic/js/arrow-spacing': ['error', { before: false, after: false }],
+      '@stylistic/js/arrow-spacing': ['error', { before: true, after: true }],
       '@stylistic/js/block-spacing': ['error', 'always'],
       '@stylistic/js/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
       '@stylistic/js/comma-dangle': ['error', {
@@ -114,7 +114,8 @@ export default [
       '@stylistic/js/jsx-quotes': ['error', 'prefer-single'],
       '@stylistic/js/key-spacing': ['error', { beforeColon: false, afterColon: true }],
       '@stylistic/js/keyword-spacing': ['error', { before: true, after: true }],
-      '@stylistic/js/linebreak-style': ['error', 'unix'],
+      //'@stylistic/js/linebreak-style': ['error', 'unix'], // doesn't matter what linebreak style - git fixes it
+      '@stylistic/js/linebreak-style': 'off',
       '@stylistic/js/lines-around-comment': 'off',
       '@stylistic/js/lines-between-class-members': 'off',
       '@stylistic/js/max-len': ['error', { code: 120, tabWidth: 2 }],
@@ -138,7 +139,7 @@ export default [
       '@stylistic/js/object-curly-spacing': ['error', 'always'],
       '@stylistic/js/object-property-newline': ["error", { allowAllPropertiesOnSameLine: true }],
       '@stylistic/js/one-var-declaration-per-line': 'off',
-      //'@stylistic/js/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
+      '@stylistic/js/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
       '@stylistic/js/padded-blocks': 'off',
       '@stylistic/js/padding-line-between-statements': 'off',
       '@stylistic/js/quote-props': 'off',
@@ -149,7 +150,8 @@ export default [
       '@stylistic/js/semi-style': ['error', 'first'],
       '@stylistic/js/space-before-blocks': [
         'error',
-        { functions: 'never', keywords: 'always', classes: 'always' }
+        // can't define separate rule for anonymous function(){}()
+        { functions: 'off', keywords: 'always', classes: 'always' }
       ],
       '@stylistic/js/space-before-function-paren': ['error', 'never'],
       '@stylistic/js/space-in-parens': ['error', 'never'],
@@ -163,14 +165,19 @@ export default [
       '@stylistic/js/wrap-regex': 'off',
       '@stylistic/js/yield-star-spacing': 'off',
       
+      // ts rules:
+      '@typescript-eslint/no-unused-vars': 'off',
       
+      // react rules
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
       ],
       'react/jsx-no-target-blank': 'off',
       'react/function-component-definition': 'error',
+      'react/prop-types': 'off',
       
+      // import rules
       'import/order': ['error', {
         groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
         'newlines-between': 'always',
