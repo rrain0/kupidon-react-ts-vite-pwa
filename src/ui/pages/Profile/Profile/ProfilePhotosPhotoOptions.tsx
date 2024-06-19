@@ -8,8 +8,8 @@ import Dropzone from 'react-dropzone'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
@@ -182,6 +182,6 @@ const optionIconBoxStyle = css`
   height: 1.3em;
   width: 1.333em;
   >${SvgIconsStyle.El.icon.sel()}{
-    ${SvgIconsStyle.El.icon.props.color.name}: ${ButtonStyle.El.root.props.color.var()};
+    ${SvgIconsStyle.El.icon.props.color.name}: ${ButtonStyle.El0.root.props.color.var()};
   }
 `

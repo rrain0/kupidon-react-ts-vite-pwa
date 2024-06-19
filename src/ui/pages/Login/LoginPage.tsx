@@ -19,10 +19,10 @@ import { useFormToasts } from '@util/mini-libs/form-validation/hooks/useFormToas
 import ValidationWrap from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
-import Button from 'src/ui/elements/buttons/Button'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input'
 import PwdInput from 'src/ui/elements/inputs/PwdInput/PwdInput'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle'
 import { LoginPageValidation } from './validation'
 import FormValues = LoginPageValidation.FormValues

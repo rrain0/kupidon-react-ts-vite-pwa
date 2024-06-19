@@ -10,7 +10,7 @@ import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
 import { NavButtonStyle } from 'src/ui/widgets/NavBar/NavButtonStyle.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
-import Button from 'src/ui/elements/buttons/Button.tsx'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import row = EmotionCommon.row

@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import row = EmotionCommon.row
 import resetH = EmotionCommon.resetH
@@ -39,7 +39,7 @@ export namespace SettingsOptions {
     ${SvgIconsStyle.El.icon.thiz()} {
       height: 1.3em;
       width: 1.333em;
-      ${SvgIconsStyle.El.icon.props.color.set(ButtonStyle.El.root.props.color.var())}
+      ${SvgIconsStyle.El.icon.props.color.set(ButtonStyle.El0.root.props.color.var())}
     }
   `
   export const iconSmall = (t:AppTheme.Theme)=>css`

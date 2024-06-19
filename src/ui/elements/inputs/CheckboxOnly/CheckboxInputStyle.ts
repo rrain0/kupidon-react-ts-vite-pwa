@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
@@ -59,12 +59,12 @@ export namespace CheckboxInputStyle {
     export const error = `[${errorName}]`
   }
   export namespace El {
-    export const frameClassName = ButtonStyle.El.btn.name
+    export const frameClassName = ButtonStyle.El0.btn.name
     export const inputClassName = 'rrainuiInput'
     export const iconWrapClassName = 'rrainuiIconWrap'
     export const iconClassName = SvgIconsStyle.El.icon.name
-    export const borderClassName = ButtonStyle.El.border.name
-    export const rippleFrameClassName = ButtonStyle.El.ripple.name
+    export const borderClassName = ButtonStyle.El0.border.name
+    export const rippleFrameClassName = ButtonStyle.El0.ripple.name
     
     export const frameClass = '.'+frameClassName
     export const inputClass = '.'+inputClassName

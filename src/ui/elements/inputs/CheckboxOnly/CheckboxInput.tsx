@@ -1,6 +1,5 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import Button from 'src/ui/elements/buttons/Button.tsx'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
@@ -31,13 +30,15 @@ type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
 
 const CheckboxInput =
 React.memo(
-React.forwardRef<CheckboxElement, CheckboxProps>
-((props, forwardedRef)=> {
+React.forwardRef<CheckboxElement, CheckboxProps>(
+(props, forwardedRef)=> {
   const {
     className, style,
     hasError,
     ...restProps
   } = props
+  
+  
   
   
   const elemRef = useRef<CheckboxElement>(null)

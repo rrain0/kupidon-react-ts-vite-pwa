@@ -3,15 +3,15 @@ import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
+import { IconButtonStyle } from 'src/ui/elements/buttons/IconButton/IconButtonStyle.ts'
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
-import SettingsButton from 'src/ui/elements/SettingsButton.tsx'
+import QuickSettingsButton from 'src/ui/elements/QuickSettingsButton.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import { useBool } from '@util/react/useBool.ts'
-import Button from 'src/ui/elements/buttons/Button.tsx'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import fixedBottom = EmotionCommon.fixedBottom
@@ -100,12 +100,10 @@ export namespace ButtonBarComponents {
   
   export const SettingsBtn =
   React.memo(
-  ()=>{
+  () => {
     return <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-      {overlay=><>
-        <SettingsButton
-          onClick={overlay.open}
-        />
+      {overlay => <>
+        <QuickSettingsButton onClick={overlay.open} />
         
         <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
       </>}
@@ -115,14 +113,14 @@ export namespace ButtonBarComponents {
   
   export const BackBtn =
   React.memo(
-  ()=>{
+  () => {
     const navigate = useNavigate()
     const back = useCallback(
       ()=>navigate(-1),
       [navigate]
     )
     
-    return <Button css={IconButtonStyle.iconTransparent}
+    return <Button css={IconButtonStyle.iconNormalTransparent}
       onClick={back}
     >
       <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
@@ -133,19 +131,19 @@ export namespace ButtonBarComponents {
   
   export const RefreshPageBtn =
   React.memo(
-  ()=>{
+  () => {
     
     const [isReloading, reload] = useBool(false)
     
     useEffect(
-      ()=>{
+      () => {
         if (isReloading) window.location.reload()
       },
       [isReloading]
     )
     
     
-    return <Button css={IconButtonStyle.iconTransparent}
+    return <Button css={IconButtonStyle.iconNormalTransparent}
       onClick={reload}
     >
       <ArrowReloadIc css={isReloading && css`
@@ -170,11 +168,11 @@ export namespace ButtonBarComponents {
     const [isAnimating, animate, finishAnimate] = useBool(false)
     
     useLayoutEffect(
-      ()=>{ if (props.isLoading) animate() },
+      () => { if (props.isLoading) animate() },
       [props.isLoading]
     )
     
-    return <Button css={IconButtonStyle.iconTransparent}
+    return <Button css={IconButtonStyle.iconNormalTransparent}
       onClick={props.refresh}
     >
       <ArrowReloadIc css={isAnimating && css`
@@ -182,7 +180,7 @@ export namespace ButtonBarComponents {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}
-        onAnimationIteration={ev=>{
+        onAnimationIteration={ev => {
           if (ev.animationName===rotateAnim.name && !props.isLoading) finishAnimate()
         }}
       />

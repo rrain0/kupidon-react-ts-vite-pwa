@@ -409,6 +409,7 @@ export namespace WidgetStyle {
   
   
   
+  // todo make P extends Record<...> to remember each property
   export class Elem<const S extends string, const P extends string> {
     
     constructor(
@@ -433,6 +434,8 @@ export namespace WidgetStyle {
       if (!use) return ''
       return `&${use}`
     }
+    
+    get p() { return this.props }
     
   }
   

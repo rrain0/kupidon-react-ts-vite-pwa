@@ -3,8 +3,8 @@ import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import { css } from '@emotion/react'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 
 
 

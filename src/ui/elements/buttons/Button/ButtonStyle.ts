@@ -28,7 +28,7 @@ export namespace ButtonStyle {
     error: DataAttrError
   } as const
   
-  export const El = function(){
+  export const El0 = function(){
     const btn = new Elem0('rrainuiButton', {
       hover: Pseudo0.hover,
       active: Pseudo0.active,
@@ -48,9 +48,7 @@ export namespace ButtonStyle {
   }()
   
   
-  
-  
-  export const W = function(){
+  export const El = function(){
     const button = new Elem('rrainuiButton', {
       normal: CssPseudo.empty,
       hover: CssPseudo.hover,
@@ -65,17 +63,17 @@ export namespace ButtonStyle {
     })
     const border = new Elem('rrainuiBorder', { }, { })
     const ripple = new Elem(RippleStyle.El.frameClassName, { }, {
-      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
+      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center', 'cursor']),
       color: new CssProp(RippleStyle.Prop.color),
     })
     
-    const buttonWidget = CssWidget
-      .ofRoot('button', button)
-      .add('button', '>', 'border', border)
-      .add('border', '>', 'ripple', ripple)
-    
-    return buttonWidget
+    return { button, border, ripple } as const
   }()
+  
+  export const W = CssWidget
+    .ofRoot('button', El.button)
+    .add('button', '>', 'border', El.border)
+    .add('border', '>', 'ripple', El.ripple)
   
   
   
@@ -677,7 +675,52 @@ export namespace ButtonStyle {
     ${textRoundedAddColorNormal(t)};
   `
   
- 
+  
+  
+  
+  
+  // type: text, shape: round, size: big
+  const textRoundBig = css`
+    ${ButtonStyle.base};
+    
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      height: 50px;
+      width: 50px;
+      background: none;
+      border-radius: 999999px;
+      padding: 11px;
+    }
+  `
+  // type: text, shape: round, add color: normal
+  const textRoundAddColorNormal = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      ${W.e.button.e.p.color.set(t.buttonNormal.bgc[0])};
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
+    }
+    
+    // state: hover
+    ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    } }
+    
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.button().thisUse} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    }
+  `
+  
+  
+  // type: text, shape: round, size: big, color: normal
+  export const textRoundBigNormal = (t: AppTheme.Theme) => css`
+    ${textRoundBig};
+    ${textRoundAddColorNormal(t)};
+  `
+  
+  
   
   
 }

@@ -19,8 +19,8 @@ import { useFormSubmit } from '@util/mini-libs/form-validation/hooks/useFormSubm
 import { useFormToasts } from '@util/mini-libs/form-validation/hooks/useFormToasts.tsx'
 import ValidationWrap from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import PwdInput from 'src/ui/elements/inputs/PwdInput/PwdInput.tsx'
 import defaultValues = PwdChangePageValidation.defaultValues

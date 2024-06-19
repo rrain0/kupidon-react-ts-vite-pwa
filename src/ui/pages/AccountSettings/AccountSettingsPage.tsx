@@ -4,7 +4,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { IconButtonStyle } from 'src/ui/elements/buttons/IconButtonStyle.ts'
+import { IconButtonStyle } from 'src/ui/elements/buttons/IconButton/IconButtonStyle.ts'
 import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-props/ui-values/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
@@ -26,8 +26,8 @@ import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { formSubmitPreventDefault } from '@util/react/formSubmitPreventDefault'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
 import { useEffectEvent } from '@util/react/useEffectEvent'
-import Button from 'src/ui/elements/buttons/Button'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import DataField from 'src/ui/elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/elements/DataField/DataFieldStyle'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
@@ -52,7 +52,7 @@ import full = RouteBuilder.full
 
 const AccountSettingsPage =
 React.memo(
-()=>{
+() => {
   
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
@@ -328,15 +328,15 @@ React.memo(
     
     <TopButtonBar backBtn/>
     
-    <BottomButtonBar settingsBtn
+    {/* <BottomButtonBar settingsBtn
       rightChildren={
-          canSubmit && <Button css={IconButtonStyle.icon}
-            onClick={submit}
-          >
-            <FloppyDisk1Ic />
-          </Button>
-        }
-      />
+        canSubmit && <Button css={IconButtonStyle.icon}
+          onClick={submit}
+        >
+          <FloppyDisk1Ic />
+        </Button>
+      }
+    /> */}
     
   </>
 })

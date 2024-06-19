@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeUtils } from '@util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
 

@@ -28,8 +28,8 @@ import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFa
 import { FormProps } from '@util/mini-libs/form-validation/hooks/useFormValuesProps.ts'
 import ValidationWrap from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop

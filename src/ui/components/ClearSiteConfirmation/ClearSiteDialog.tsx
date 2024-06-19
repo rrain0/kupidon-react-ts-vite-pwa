@@ -10,8 +10,8 @@ import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { useBool } from '@util/react/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
-import Button from 'src/ui/elements/buttons/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/ButtonStyle.ts'
+import Button from 'src/ui/elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
