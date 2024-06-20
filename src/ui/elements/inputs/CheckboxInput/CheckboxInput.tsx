@@ -13,20 +13,25 @@ import Puro = TypeUtils.Puro
 
 
 
-type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
+type CheckboxInputProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
   hasError: boolean
-  checkedComponent: React.ReactNode
-  uncheckedComponent: React.ReactNode
+  
+  startViews: React.ReactNode
+  endViews: React.ReactNode
+  children: React.ReactNode
+  childrenPosition: 'start' | 'end'
 }>
 
 
 const CheckboxInput =
 React.memo(
-React.forwardRef<HTMLInputElement, CheckboxProps>(
+React.forwardRef<HTMLInputElement, CheckboxInputProps>(
 (props, forwardedRef) => {
   const {
     className, style,
     hasError,
+    startViews, endViews,
+    children, childrenPosition = 'start',
     ...restProps
   } = props
   
@@ -39,6 +44,7 @@ React.forwardRef<HTMLInputElement, CheckboxProps>(
   
   const frameProps = {
     className: clsx(className, CheckboxInputStyle.W.e.frame.e.name),
+    tabIndex: 0,
     style: style,
   }
   const inputProps = {
@@ -59,13 +65,13 @@ React.forwardRef<HTMLInputElement, CheckboxProps>(
     {...frameProps}
   >
     
-    {/* <div css={css`width: 100%;
-      height: 100%`}/> */}
-    
     <input // Input
       {...inputProps}
       ref={elemRef}
     />
+    
+    { startViews }
+    { childrenPosition === 'start' && children }
     
     <div // IconBox
       {...iconBoxProps}
@@ -77,10 +83,10 @@ React.forwardRef<HTMLInputElement, CheckboxProps>(
       <Checkmark2Ic />
     </div>
     
-    <Ripple // Ripple
-      //targetElement={elemRef}
-      mode='center'
-    />
+    { childrenPosition === 'end' && children }
+    { endViews }
+    
+    <Ripple />
   
   </label>
 }))

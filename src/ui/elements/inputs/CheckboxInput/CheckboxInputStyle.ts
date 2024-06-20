@@ -1,106 +1,207 @@
 import { css } from '@emotion/react'
-import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
+import Elem = WidgetStyle.Elem
+import CssProp = WidgetStyle.CssProp
+import CssAttr = WidgetStyle.CssAttr
+import CssPseudo = WidgetStyle.CssPseudo
+import CssWidget = WidgetStyle.CssWidget
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
-import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
+import center = EmotionCommon.center
+import resetInput = EmotionCommon.resetInput
+import abs = EmotionCommon.abs
+import reset = EmotionCommon.reset
+
 
 
 
 export namespace CheckboxInputStyle {
   
-  export namespace Attr {
-    export const errorName = 'data-error'
+  
+  import Txt = EmotionCommon.Txt
+  import row = EmotionCommon.row
+  export const El = function(){
+    const frame = new Elem('rrainuiFrame', { }, {
+      color: CssProp.color,
+    })
+    const input = new Elem('rrainuiInput', {
+      normal: CssPseudo.empty,
+      checked: CssPseudo.checked,
+      hover: CssPseudo.hover,
+      active: CssPseudo.active,
+      focus: CssPseudo.focus,
+      focusVisible: CssPseudo.focusVisible,
+      anyFocus: CssPseudo.anyFocus,
+      readOnly: CssPseudo.readOnly,
+      disabled: CssPseudo.disabled,
+      error: CssAttr.dataError,
+    }, { })
+    const iconBox = new Elem('rrainuiIconBox', { }, { })
+    const iconBoxChecked = new Elem('rrainuiIconBoxChecked', { }, { })
+    const iconChecked = new Elem(SvgIconsStyle.El.icon.name, { }, {
+      color: SvgIconsStyle.El.icon.props.color
+    })
+    const ripple = RippleStyle.El.frame
     
-    export const error = `[${errorName}]`
-  }
-  export namespace El {
-    export const frameClassName = ButtonStyle.El0.btn.name
-    export const inputClassName = 'rrainuiInput'
-    export const iconWrapClassName = 'rrainuiIconWrap'
-    export const iconClassName = SvgIconsStyle.El.icon.name
-    export const borderClassName = ButtonStyle.El0.border.name
-    export const rippleFrameClassName = ButtonStyle.El0.ripple.name
-    
-    export const frameClass = '.'+frameClassName
-    export const inputClass = '.'+inputClassName
-    export const iconWrapClass = '.'+iconWrapClassName
-    export const iconClass = '.'+iconClassName
-    export const borderClass = '.'+borderClassName
-    export const rippleFrameClass = '.'+rippleFrameClassName
-    
-    export const frame = '&'+frameClass
-    export const frameHover = frame+`:has(>${inputClass}:hover)`
-    export const frameDisabled = frame+`:has(>${inputClass}:disabled)`
-    export const frameError = frame+`:has(>${inputClass}${Attr.error})`
-    
-    export const input = frame+'>'+inputClass
-    export const inputHover = frame+'>'+inputClass+':hover'
-    export const inputFocusVisible = frame+'>'+inputClass+':focus-visible'
-    export const inputChecked = frame+'>'+inputClass+':checked'
-    export const inputDisabled = frame+'>'+inputClass+':disabled'
-    export const inputError = frame+'>'+inputClass+Attr.error
-    
-    export const iconWrap = frame+'>'+iconWrapClass
-    export const iconWrapHover = inputHover+'~'+iconWrapClass
-    export const iconWrapChecked = inputChecked+'~'+iconWrapClass
-    export const iconWrapDisabled = inputDisabled+'~'+iconWrapClass
-    export const iconWrapError = inputError+'~'+iconWrapClass
-    
-    export const icon = iconWrap+'>'+iconWrapClass
-    export const iconChecked = iconWrapChecked+'>'+iconWrapClass
-    
-    export const border = frame+'>'+borderClass
-    export const borderHover = inputHover+'~'+borderClass
-    export const borderFocusVisible = inputFocusVisible+'~'+borderClass
-    export const borderDisabled = inputDisabled+'~'+borderClass
-    export const borderError = inputError+'~'+borderClass
-    
-    export const ripple = frame+'>*>'+rippleFrameClass
-    export const rippleDisabled = inputDisabled+'~*>'+rippleFrameClass
-  }
-  export namespace Prop {
-    export const color = WidgetStyle.Prop0.prop.color
-    export const activeIconColor = '--active-icon-color'
-    export const inactiveIconColor = '--inactive-icon-color'
-    export const rippleColor = RippleStyle.Prop.color
-  }
+    return { frame, input, iconBox, iconBoxChecked, iconChecked, ripple } as const
+  }()
+  
+  export const W = CssWidget
+    .ofRoot('frame', El.frame)
+    .add('frame', '>', 'input', El.input)
+    .add('frame', '>', 'iconBox', El.iconBox)
+    .add('frame', '>', 'iconBoxChecked', El.iconBoxChecked)
+    .add('iconBoxChecked', '>', 'iconChecked', El.iconChecked)
+    .add('frame', '>', 'ripple', El.ripple)
   
   
   
-  export const normal = (t: AppTheme.Theme) => css`
-    // normal
-    ${El.frame} {
-      border-radius: 15px;
-      padding: 8px 6px;
-      gap: 8px;
+  
+  const base = css`
+    // state: normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      ${reset};
+      position: relative;
+      overflow-wrap: anywhere;
+      cursor: pointer;
       
-      ${Txt.large2};
-      color: ${t.page.content2[0]};
-      ${Prop.color}: ${t.page.content2[0]};
+      transition: background linear 300ms;
     }
-    ${El.ripple}{
-      ${Prop.rippleColor}: ${t.ripple.contentOnTransparent[0]};
+    ${W.use.s.normal().e.input().thisUse} {
+      ${resetInput};
+      ${abs};
+      opacity: 0;
+      cursor: pointer;
     }
-    ${El.iconWrap}{
-      width: 26px;
-      height: 26px;
-      ${Prop.activeIconColor}: ${t.inputRadio.bgcFocus[0]};
-      ${Prop.inactiveIconColor}: ${t.inputRadio.bgcFocus[0]};
+    ${W.use.s.normal().e.iconBox().thisUse} {
+      grid-area: 1;
+      pointer-events: none;
+      ${center};
     }
-    
-    // hover
-    ${hoverable}{
-      ${El.borderHover}{
+    ${W.use.s.normal().e.iconBoxChecked().thisUse} {
+      grid-area: 1;
+      pointer-events: none;
+      display: none;
+    }
+    // state: checked
+    ${W.use.s.checked().e.iconBox().thisUse} {
+      display: none;
+    }
+    ${W.use.s.checked().e.iconBoxChecked().thisUse} {
+      ${center};
+    }
+    // state: disabled
+    ${W.use.s.disabled().e.ripple().thisUse} {
+      display: none;
+    }
+  `
+  
+  
+  
+  const addCheckboxStyle = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.iconBox().thisUse},
+    ${W.use.s.normal().e.iconBoxChecked().thisUse} {
+      width: 22px;
+      height: 22px;
+      border-radius: 4px;
+      padding: 2px;
+      position: relative;
+      
+      ::after {
+        content: '';
+        ${abs};
+        border: 2px solid;
+        border-color: ${t.inputRadio.bgcFocus[0]};
+        border-radius: inherit;
+      }
+    }
+    ${W.use.s.normal().e.iconChecked().thisUse} {
+      width: 100%;
+      height: 100%;
+      ${W.e.iconChecked.e.p.color.set(t.inputRadio.bgcFocus[0])};
+    }
+    // state: active, focus, focus-visible
+    ${W.use.s.anyFocus().e.iconBox().thisUse},
+    ${W.use.s.anyFocus().e.iconBoxChecked().thisUse} {
+      ::after {
+        border-width: 2.5px;
+      }
+    }
+    // state: error
+    ${W.use.s.error().e.iconBox().thisUse},
+    ${W.use.s.error().e.iconBoxChecked().thisUse} {
+      ::after {
+        border-color: #ff8787;
+      }
+    }
+  `
+  
+  
+  
+  // shape: round, size: normal, color: normal
+  export const roundNormalNormal = (t: AppTheme.Theme) => css`
+    ${base};
+    ${addCheckboxStyle(t)};
+    // state: normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      height: 50px;
+      width: 50px;
+      background: none;
+      border-radius: 999999px;
+      padding: 14px;
+      ${center};
+      ${W.e.frame.e.p.color.set(t.buttonNormal.bgc[0])};
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.p.mode.set('center')};
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
+    }
+    // state: hover
+    ${hoverable} {
+      ${W.use.s.hover().e.frame().thisUse} {
         background: ${t.buttonTransparent.bgcFocus[0]};
       }
     }
-    
-    // focus-visible
-    ${El.borderFocusVisible}{
+    // state: active, focus, focus-visible
+    ${W.use.s.anyFocus().e.frame().thisUse} {
+      background: ${t.buttonTransparent.bgcFocus[0]};
+    }
+  `
+  
+  
+  
+  
+  export const rectBigNormal = (t: AppTheme.Theme) => css`
+    ${base};
+    ${addCheckboxStyle(t)};
+    // state: normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      width: 100%;
+      min-height: 50px;
+      border-radius: 15px;
+      background: none;
+      padding: 8px 10px;
+      ${Txt.large2};
+      ${row};
+      align-items: center;
+      ${W.e.frame.e.p.color.set(t.buttonNormal.content[0])};
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.p.mode.set('cursor')};
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
+    }
+    // state: hover
+    ${hoverable} {
+      ${W.use.s.hover().e.frame().thisUse} {
+        background: ${t.buttonTransparent.bgcFocus[0]};
+      }
+    }
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.frame().thisUse} {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }
   `

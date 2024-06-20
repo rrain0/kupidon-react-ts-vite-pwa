@@ -74,7 +74,7 @@ export namespace RadioInputStyle {
     // normal
     ${El.frame} {
       border-radius: 15px;
-      padding: 8px 6px;
+      padding: 8px 10px;
       gap: 8px;
       
       ${Txt.large2};

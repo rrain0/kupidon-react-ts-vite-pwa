@@ -10,8 +10,8 @@ import { MathUtils } from '@util/common/MathUtils.ts'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
-import CheckboxInput from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInput.tsx'
-import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInputStyle.ts'
+import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.tsx'
+import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
 import RootRoute = AppRoutes.RootRoute
@@ -203,7 +203,7 @@ React.memo(
             color: ${t.containerAccent.content[0]};
           `}
         >
-          <CheckboxInput css={CheckboxInputStyle.normalNormal}/>
+          <CheckboxInput css={CheckboxInputStyle.roundNormalNormal}/>
         </div>
         
         

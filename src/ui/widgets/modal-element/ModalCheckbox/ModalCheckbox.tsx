@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import CheckboxInput from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInput.tsx'
-import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInputStyle.ts'
+import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.tsx'
+import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 //import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput0.tsx'
@@ -63,18 +63,17 @@ const ModalCheckbox =
           
           <CheckboxInputGroup css={selectItemsContainer}>
             
-            {options.map(opt => <label css={selectItemContainer} key={opt.value}>
+            {options.map(opt => <CheckboxInput
+              key={opt.value}
+              css={CheckboxInputStyle.rectBigNormal}
+              checked={checked.includes(opt.value)}
+              onChange={() => onChange(opt.value)}
+              value={opt.value}
+            >
               <div css={selectItemText}>
                 {opt.text}
               </div>
-              <CheckboxInput
-                css={CheckboxInputStyle.normalNormal}
-                checked={checked.includes(opt.value)}
-                onChange={() => onChange(opt.value)}
-                value={opt.value}
-              >
-              </CheckboxInput>
-            </label>)}
+            </CheckboxInput>)}
           
           </CheckboxInputGroup>
         
