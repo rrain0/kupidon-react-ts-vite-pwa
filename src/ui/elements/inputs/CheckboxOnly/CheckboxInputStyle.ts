@@ -65,7 +65,7 @@ export namespace CheckboxInputStyle {
     ${W.use.s.normal().e.frame().thisUse} {
       ${reset};
       position: relative;
-      ${centerAll};
+      ${center};
       overflow: hidden;
       overflow-wrap: anywhere;
       cursor: pointer;
@@ -79,9 +79,11 @@ export namespace CheckboxInputStyle {
       cursor: pointer;
     }
     ${W.use.s.normal().e.iconBox().thisUse} {
+      grid-area: 1;
       ${center};
     }
     ${W.use.s.normal().e.iconBoxChecked().thisUse} {
+      grid-area: 1;
       display: none;
     }
     

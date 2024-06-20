@@ -1,6 +1,5 @@
 import React, { CSSProperties } from 'react'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
 import Callback1 = TypeUtils.Callback1
 
 
@@ -16,6 +15,7 @@ export namespace ReactUtils {
   // so if you change view after this so it can't capture clicks,
   // the underlying view captures click along with this view simultaneously.
   import ComparatorEq = TypeUtils.ComparatorEq
+  import Puro = TypeUtils.Puro
   export const onPointerClick =
   <E extends Element>
   (callback: Callback1<React.PointerEvent<E>>)=>{
@@ -88,7 +88,7 @@ export namespace ReactUtils {
   }
   
   
-  export type ClassStyleProps = PartialUndef<{
+  export type ClassStyleProps = Puro<{
     className: string
     style: CSSProperties
   }>

@@ -78,6 +78,7 @@ React.forwardRef<HTMLInputElement, CheckboxProps>(
     </div>
     
     <Ripple // Ripple
+      //targetElement={elemRef}
       mode='center'
     />
   

@@ -13,6 +13,7 @@ import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import CheckboxInput from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxOnly/CheckboxInputStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
+import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import center = EmotionCommon.center
@@ -92,8 +93,8 @@ React.memo(
       
     <Pages.SimplePage>
       <Pages.ContentFill>
-    
-      
+        
+        
         <div>Test Page</div>
         
         <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
@@ -117,18 +118,18 @@ React.memo(
         
         
         {/* <button
-          onClick={()=>toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
-        >
-          toast
-        </button> */}
+         onClick={()=>toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
+         >
+         toast
+         </button> */}
         
         
         {/*<div
-          css={css`
-            min-height: 2000px;
-            height: 2000px;
-          `}
-        />*/}
+         css={css`
+         min-height: 2000px;
+         height: 2000px;
+         `}
+         />*/}
         
         
         <div
@@ -144,7 +145,7 @@ React.memo(
             height: 30%;
             aspect-ratio: 1;
           `}
-            progress={mapRange(progress, [0,100],[5,95])}
+            progress={mapRange(progress, [0, 100], [5, 95])}
           />
         </div>
         
@@ -156,7 +157,7 @@ React.memo(
             padding: 10px;
             border-radius: 16px;
             background: ${t.containerNormal.bgc[0]};
-            color:      ${t.containerNormal.content[0]};
+            color: ${t.containerNormal.content[0]};
           `}
         >
           Контент.<br/>
@@ -170,7 +171,7 @@ React.memo(
             padding: 10px;
             border-radius: 16px;
             background: ${t.containerNormal.bgc2[0]};
-            color:      ${t.containerNormal.content[0]};
+            color: ${t.containerNormal.content[0]};
           `}
         >
           Контент.<br/>
@@ -184,13 +185,12 @@ React.memo(
             padding: 10px;
             border-radius: 16px;
             background: ${t.containerAccent.bgc[0]};
-            color:      ${t.containerAccent.content[0]};
+            color: ${t.containerAccent.content[0]};
           `}
         >
           Контент.<br/>
           Theme.containerAccent
         </div>
-        
         
         
         <div
@@ -200,18 +200,27 @@ React.memo(
             padding: 10px;
             border-radius: 16px;
             background: ${t.containerAccent.bgc[0]};
-            color:      ${t.containerAccent.content[0]};
+            color: ${t.containerAccent.content[0]};
           `}
         >
           <CheckboxInput css={CheckboxInputStyle.normalNormal}/>
         </div>
         
         
-        
-        
-        
-        
-        
+        <div
+          css={t => css`
+            width: 300px;
+            height: 150px;
+            position: relative;
+            padding: 10px;
+            border-radius: 16px;
+            background: ${t.containerNormal.bgc[0]};
+            color: ${t.containerNormal.content[0]};
+          `}
+        >
+          <div>Ripple Test</div>
+          <Ripple rippleColor='black'/>
+        </div>
       
       
       </Pages.ContentFill>
@@ -221,8 +230,8 @@ React.memo(
     <TopButtonBar backBtn/>
     
     <BottomButtonBar settingsBtn/>
-    
-    
+  
+  
   </>
 })
 export default TestPage

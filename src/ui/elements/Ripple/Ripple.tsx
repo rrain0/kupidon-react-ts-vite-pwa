@@ -1,8 +1,8 @@
+import { ReactUtils } from '@util/common/ReactUtils.ts'
 import { useElemRef } from '@util/react/useElemRef.ts'
 import clsx from 'clsx'
 import React, {
   useCallback, useEffect,
-  useImperativeHandle,
 } from 'react'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import css from 'src/ui/elements/Ripple/Ripple.module.scss'
@@ -10,6 +10,7 @@ import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
 import Puro = TypeUtils.Puro
+import ClassStyleProps = ReactUtils.ClassStyleProps
 
 
 
@@ -24,7 +25,7 @@ export type RippleMode = 'center' | 'cursor'
 
 
 
-type RippleProps = React.ComponentPropsWithoutRef<'div'> & Puro<{
+type RippleProps = ClassStyleProps & Puro<{
   rippleDuration: number // ripple animation duration per 200px
   mode: RippleMode
   rippleColor: string
@@ -34,8 +35,7 @@ type RippleProps = React.ComponentPropsWithoutRef<'div'> & Puro<{
 
 const Ripple =
 React.memo(
-React.forwardRef<HTMLDivElement, RippleProps>(
-(props, forwardedRef) => {
+(props: RippleProps) => {
   
   let {
     rippleDuration,
@@ -47,7 +47,6 @@ React.forwardRef<HTMLDivElement, RippleProps>(
   } = props
   
   const [getFrame, frameRef] = useElemRef<HTMLDivElement>()
-  useImperativeHandle(forwardedRef, () => getFrame()!,[])
   const [getRipple, rippleRef] = useElemRef<HTMLDivElement>()
   const getTargetElement = () => props.targetElement?.current
   
@@ -59,8 +58,8 @@ React.forwardRef<HTMLDivElement, RippleProps>(
     const ripple = getRipple()
     //console.log('frame', frame)
     //console.log('ripple', ripple)
-    if (frame && ripple){
-      ripple.classList.remove(css.rippleHide, css.rippleShow)
+    if (frame && ripple) {
+      ripple.classList.remove(css.rippleShow, css.rippleHide)
       
       const mode = function(){
         const modes: RippleMode[] = ['center', 'cursor']
@@ -81,7 +80,6 @@ React.forwardRef<HTMLDivElement, RippleProps>(
         w: dimens.width,
         h: dimens.height,
       }
-      console.log('el', el)
       const d = function(){
         switch (mode){
           case 'cursor': return {
@@ -130,17 +128,17 @@ React.forwardRef<HTMLDivElement, RippleProps>(
       const style = frame.style
       props.rippleColor && style.setProperty(RippleStyle.W.e.frame.e.p.color.name, props.rippleColor)
       style.setProperty(
-        '--rippleProps-animation-duration',
+        '--ripple-animation-duration',
         Math.max(400, dur * rippleProps.radius/200) + 'ms'
       )
       style.setProperty(
         '--dissolve-animation-duration',
         Math.max(500, (dur+100) * rippleProps.radius/200) + 'ms'
       )
-      style.setProperty('--rippleProps-top', rippleProps.top+'px')
-      style.setProperty('--rippleProps-left', rippleProps.left+'px')
-      style.setProperty('--rippleProps-w', rippleProps.radius*2+'px')
-      style.setProperty('--rippleProps-h', rippleProps.radius*2+'px')
+      style.setProperty('--ripple-top', rippleProps.top+'px')
+      style.setProperty('--ripple-left', rippleProps.left+'px')
+      style.setProperty('--ripple-w', rippleProps.radius*2+'px')
+      style.setProperty('--ripple-h', rippleProps.radius*2+'px')
       
       ripple.classList.add(css.rippleShow)
     }
@@ -183,5 +181,5 @@ React.forwardRef<HTMLDivElement, RippleProps>(
       className={clsx(css.rippleView, RippleStyle.W.e.ripple.e.name)}
     />
   </div>
-}))
+})
 export default Ripple
