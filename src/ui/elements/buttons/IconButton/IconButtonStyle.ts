@@ -23,16 +23,16 @@ export namespace IconButtonStyle {
     
     return {
       button: ButtonStyle.El.button,
-      border: ButtonStyle.El.border,
-      ripple: ButtonStyle.El.ripple,
+      //border: ButtonStyle.El.border,
+      //ripple: ButtonStyle.El.ripple,
       icon,
     }
   }()
   
   const W = CssWidget
     .ofRoot('button', El.button)
-    .add('button', '>', 'border', El.border)
-    .add('border', '>', 'ripple', El.ripple)
+    //.add('button', '>', 'border', El.border)
+    //.add('border', '>', 'ripple', El.ripple)
     .add('button', '>', 'icon', El.icon)
   
   
@@ -40,15 +40,8 @@ export namespace IconButtonStyle {
   
   
   
-  
-  
-  export const iconBigTransparent = (t: AppTheme.Theme) => css`
-    ${ButtonStyle.textRoundBigNormal(t)};
-    
+  const iconAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.p.mode.set('center')};
-    }
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
       ${W.e.icon.e.p.color.set(t.buttonNormal.bgc[0])};
@@ -56,13 +49,15 @@ export namespace IconButtonStyle {
   `
   
   
-  export const iconNormalTransparent = (t: AppTheme.Theme) => css`
-    ${iconBigTransparent(t)};
-    
-    // state: normal
-    ${W.use.s.normal().e.button().thisUse} {
-      padding: 14px;
-    }
+  export const iconBigTransparent = (t: AppTheme.Theme) => css`
+    ${ButtonStyle.textRoundBigNormal(t)};
+    ${iconAddColorNormal(t)};
+  `
+  
+  
+  export const iconBig2Transparent = (t: AppTheme.Theme) => css`
+    ${ButtonStyle.textRoundBig2Normal(t)};
+    ${iconAddColorNormal(t)};
   `
   
   

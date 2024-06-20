@@ -40,7 +40,7 @@ export namespace ButtonStyle {
       color: CssPropColor,
     })
     const border = btn.toElem('>', new Elem0('rrainuiBorder',{},{}))
-    const ripple = border.toElem('>', new Elem0(RippleStyle.El.frameClassName,{},{
+    const ripple = border.toElem('>', new Elem0(RippleStyle.El0.frameClassName,{},{
       mode: new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
       color: new CssProp(RippleStyle.Prop.color),
     }))
@@ -62,7 +62,7 @@ export namespace ButtonStyle {
       color: CssProp.color,
     })
     const border = new Elem('rrainuiBorder', { }, { })
-    const ripple = new Elem(RippleStyle.El.frameClassName, { }, {
+    const ripple = new Elem(RippleStyle.El0.frameClassName, { }, {
       mode: new CssPropEnum(RippleStyle.Prop.mode, ['center', 'cursor']),
       color: new CssProp(RippleStyle.Prop.color),
     })
@@ -352,6 +352,7 @@ export namespace ButtonStyle {
   // type: filled, shape: rounded, size: normal
   const filledRoundedNormal = css`
     ${base};
+    
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       min-width: 90px;
@@ -681,7 +682,7 @@ export namespace ButtonStyle {
   
   // type: text, shape: round, size: big
   const textRoundBig = css`
-    ${ButtonStyle.base};
+    ${base};
     
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
@@ -690,6 +691,9 @@ export namespace ButtonStyle {
       background: none;
       border-radius: 999999px;
       padding: 11px;
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.p.mode.set('center')};
     }
   `
   // type: text, shape: round, add color: normal
@@ -712,11 +716,24 @@ export namespace ButtonStyle {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }
   `
+  // type: text, shape: round, add size: big2
+  const textRoundAddSizeBig2 = css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      padding: 14px;
+    }
+  `
   
   
   // type: text, shape: round, size: big, color: normal
   export const textRoundBigNormal = (t: AppTheme.Theme) => css`
     ${textRoundBig};
+    ${textRoundAddColorNormal(t)};
+  `
+  // type: text, shape: round, size: big2, color: normal
+  export const textRoundBig2Normal = (t: AppTheme.Theme) => css`
+    ${textRoundBig};
+    ${textRoundAddSizeBig2};
     ${textRoundAddColorNormal(t)};
   `
   

@@ -76,7 +76,7 @@ React.forwardRef<CheckboxElement, CheckboxProps>
   
   
   return <Button /* Frame */
-    as='label'
+    //as='label'
     css={t => [ButtonStyle.textRectBigNormal(t), frameStyle]}
     {...frameProps}
   >

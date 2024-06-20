@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useImperativeHandle, useRef } from 'react'
-import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
 import { TypeUtils } from 'src/util/common/TypeUtils'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import PartialUndef = TypeUtils.PartialUndef
@@ -10,23 +9,19 @@ import PartialUndef = TypeUtils.PartialUndef
 
 
 
-
-
-
-
-
-type ComponentElement = HTMLDivElement
-type ComponentProps = React.ComponentPropsWithoutRef<'div'> & PartialUndef<{
-  // custom props
-  hasError: boolean
+export type ComponentCustomProps = PartialUndef<{
+    
 }>
-
+export type ComponentForwardRefProps = React.JSX.IntrinsicElements['div']
+//export type ComponentForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
+export type ComponentRefElement = HTMLDivElement
+export type ComponentProps = ComponentCustomProps & ComponentForwardRefProps
 
 
 
 const Component = 
 React.memo(
-React.forwardRef<ComponentElement, ComponentProps>(
+React.forwardRef<ComponentRefElement, ComponentProps>(
 (props, forwardedRef)=>{
   const { 
     
@@ -34,7 +29,7 @@ React.forwardRef<ComponentElement, ComponentProps>(
   } = props
   
   
-  const elemRef = useRef<ComponentElement>(null)
+  const elemRef = useRef<ComponentRefElement>(null)
   useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
   
   

@@ -73,7 +73,8 @@ export namespace TypeUtils {
   export type CallbackN<T extends any[]> = (...args: T) => void
   export type Setter<T> = Callback1<T>
   export type Consumer<T> = Callback1<T>
-  export type Generator<T> = () => T
+  export type Getter<T> = () => T
+  export type Generator<T> = Getter<T>
   export type Mapper<In, Out = In> = (prevValue: In) => Out
   export type Mapper2<In1, In2, Out = In1> = (a: In1, b: In2) => Out
   

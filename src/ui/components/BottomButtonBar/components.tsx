@@ -120,7 +120,7 @@ export namespace ButtonBarComponents {
       [navigate]
     )
     
-    return <Button css={IconButtonStyle.iconNormalTransparent}
+    return <Button css={IconButtonStyle.iconBig2Transparent}
       onClick={back}
     >
       <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
@@ -143,7 +143,7 @@ export namespace ButtonBarComponents {
     )
     
     
-    return <Button css={IconButtonStyle.iconNormalTransparent}
+    return <Button css={IconButtonStyle.iconBig2Transparent}
       onClick={reload}
     >
       <ArrowReloadIc css={isReloading && css`
@@ -172,7 +172,7 @@ export namespace ButtonBarComponents {
       [props.isLoading]
     )
     
-    return <Button css={IconButtonStyle.iconNormalTransparent}
+    return <Button css={IconButtonStyle.iconBig2Transparent}
       onClick={props.refresh}
     >
       <ArrowReloadIc css={isAnimating && css`

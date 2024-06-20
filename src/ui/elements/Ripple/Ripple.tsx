@@ -1,30 +1,18 @@
+import { useElemRef } from '@util/react/useElemRef.ts'
 import clsx from 'clsx'
 import React, {
   useCallback, useEffect,
   useImperativeHandle,
-  useRef,
 } from 'react'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import css from 'src/ui/elements/Ripple/Ripple.module.scss'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import empty = TypeUtils.empty
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
-import PartialUndef = TypeUtils.PartialUndef
+import Puro = TypeUtils.Puro
 
 
 
-
-export type RippleCustomProps = PartialUndef<{
-  rippleDuration: number // ripple animation duration per 200px
-  mode: 'center'|'cursor'
-  rippleColor: string
-  targetElement: React.RefObject<HTMLElement>
-}>
-export type RippleForwardRefProps = React.JSX.IntrinsicElements['div']
-export type RippleRefElement = HTMLDivElement
-
-
-export type RippleProps = RippleCustomProps & RippleForwardRefProps
 type CursorInfo = {
   clientX: number
   clientY: number
@@ -32,9 +20,21 @@ type CursorInfo = {
 }
 
 
+export type RippleMode = 'center' | 'cursor'
+
+
+
+type RippleProps = React.ComponentPropsWithoutRef<'div'> & Puro<{
+  rippleDuration: number // ripple animation duration per 200px
+  mode: RippleMode
+  rippleColor: string
+  targetElement: React.RefObject<HTMLElement>
+}>
+
+
 const Ripple =
 React.memo(
-React.forwardRef<RippleRefElement, RippleProps>(
+React.forwardRef<HTMLDivElement, RippleProps>(
 (props, forwardedRef) => {
   
   let {
@@ -46,41 +46,42 @@ React.forwardRef<RippleRefElement, RippleProps>(
     ...restProps
   } = props
   
-  const rippleFrameRef = useRef<RippleRefElement>(null)
-  const rippleViewRef = useRef<HTMLDivElement>(null)
-  useImperativeHandle(forwardedRef, ()=>rippleFrameRef.current!,[])
-  
-  
+  const [getFrame, frameRef] = useElemRef<HTMLDivElement>()
+  useImperativeHandle(forwardedRef, () => getFrame()!,[])
+  const [getRipple, rippleRef] = useElemRef<HTMLDivElement>()
   const getTargetElement = () => props.targetElement?.current
-  const getRippleFrame = () => rippleFrameRef.current
-  const getRippleView = () => rippleViewRef.current
   
   
   const showRipple = useCallback((ev?: CursorInfo) => {
     //console.log('showRipple')
     
-    const rippleFrame = getRippleFrame()
-    const rippleView = getRippleView()
-    if (rippleFrame && rippleView){
-      rippleView.classList.remove(css.rippleHide, css.rippleShow)
+    const frame = getFrame()
+    const ripple = getRipple()
+    //console.log('frame', frame)
+    //console.log('ripple', ripple)
+    if (frame && ripple){
+      ripple.classList.remove(css.rippleHide, css.rippleShow)
       
       const mode = function(){
-        const modes = ['center','cursor']
-        let mode: any = getElemProps(rippleFrame)
-          .cssPropValue(RippleStyle.Prop.mode)
+        const modes: RippleMode[] = ['center', 'cursor']
+        let mode: any = getElemProps(frame)
+          .cssPropValue(RippleStyle.W.e.frame.e.p.mode.name)
+        //console.log('mode', mode)
+        //console.log('mode name', RippleStyle.W.e.frame.e.p.mode.name)
         if (!modes.includes(mode)) mode = props.mode
         if (!ev) mode = 'center'
         if (!modes.includes(mode)) mode = 'center'
-        return mode as 'center'|'cursor'
+        return mode as RippleMode
       }()
       
-      const dimens = getElemProps(rippleFrame)
+      const dimens = getElemProps(frame)
       const el = {
         clientX: dimens.clientXFloat,
         clientY: dimens.clientYFloat,
         w: dimens.width,
         h: dimens.height,
       }
+      console.log('el', el)
       const d = function(){
         switch (mode){
           case 'cursor': return {
@@ -103,7 +104,7 @@ React.forwardRef<RippleRefElement, RippleProps>(
         toBottom: d.toBottom*d.toBottom,
         toLeft: d.toLeft*d.toLeft,
       }
-      const ripple = function(){
+      const rippleProps = function(){
         const radius = Math.max(
           Math.sqrt(dxd.toTop+dxd.toLeft), // расстояние от точки касания до левого верхнего угла
           Math.sqrt(dxd.toTop+dxd.toRight), // расстояние от точки касания до правого верхнего угла
@@ -122,32 +123,32 @@ React.forwardRef<RippleRefElement, RippleProps>(
       // console.log('el',el)
       // console.log('d',d)
       // console.log('dxd',dxd)
-      // console.log('ripple',ripple)
+      // console.log('rippleProps',rippleProps)
       
       const dur = props.rippleDuration ?? 500
       
-      const style = rippleFrame.style
-      props.rippleColor && style.setProperty(RippleStyle.Prop.color, props.rippleColor)
+      const style = frame.style
+      props.rippleColor && style.setProperty(RippleStyle.W.e.frame.e.p.color.name, props.rippleColor)
       style.setProperty(
-        '--ripple-animation-duration',
-        Math.max(400, dur * ripple.radius/200) + 'ms'
+        '--rippleProps-animation-duration',
+        Math.max(400, dur * rippleProps.radius/200) + 'ms'
       )
       style.setProperty(
         '--dissolve-animation-duration',
-        Math.max(500, (dur+100) * ripple.radius/200) + 'ms'
+        Math.max(500, (dur+100) * rippleProps.radius/200) + 'ms'
       )
-      style.setProperty('--ripple-top', ripple.top+'px')
-      style.setProperty('--ripple-left', ripple.left+'px')
-      style.setProperty('--ripple-w', ripple.radius*2+'px')
-      style.setProperty('--ripple-h', ripple.radius*2+'px')
+      style.setProperty('--rippleProps-top', rippleProps.top+'px')
+      style.setProperty('--rippleProps-left', rippleProps.left+'px')
+      style.setProperty('--rippleProps-w', rippleProps.radius*2+'px')
+      style.setProperty('--rippleProps-h', rippleProps.radius*2+'px')
       
-      rippleView.classList.add(css.rippleShow)
+      ripple.classList.add(css.rippleShow)
     }
   }, [props.mode, props.rippleColor, props.rippleDuration])
   
   
   const hideRipple = useCallback(() => {
-    const rippleView = rippleViewRef.current
+    const rippleView = rippleRef.current
     if (rippleView) {
       rippleView.classList.remove(css.rippleHide)
       rippleView.classList.add(css.rippleHide)
@@ -157,7 +158,7 @@ React.forwardRef<RippleRefElement, RippleProps>(
   
   // must be NOT useLayoutEffect
   useEffect(() => {
-    const target = getTargetElement() ?? getRippleFrame()?.parentElement
+    const target = getTargetElement() ?? getFrame()?.parentElement
     if (target) {
       target.addEventListener('pointerdown', showRipple)
       target.addEventListener('pointerup', hideRipple)
@@ -168,18 +169,18 @@ React.forwardRef<RippleRefElement, RippleProps>(
         target.removeEventListener('pointerout', hideRipple)
       }
     }
-  }, [getTargetElement(), getRippleFrame(), showRipple, hideRipple])
+  }, [getTargetElement(), getFrame(), showRipple, hideRipple])
   
   
   
   return <div
     {...restProps}
-    ref={rippleFrameRef}
-    className={clsx(css.rippleFrame, className, RippleStyle.El.frameClassName)}
+    ref={frameRef}
+    className={clsx(css.rippleFrame, className, RippleStyle.W.e.frame.e.name)}
   >
     <div
-      ref={rippleViewRef}
-      className={clsx(css.rippleView, RippleStyle.El.viewClassName)}
+      ref={rippleRef}
+      className={clsx(css.rippleView, RippleStyle.W.e.ripple.e.name)}
     />
   </div>
 }))

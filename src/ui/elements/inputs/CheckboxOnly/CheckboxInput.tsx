@@ -1,15 +1,11 @@
-import styled from '@emotion/styled'
-import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
-import abs = EmotionCommon.abs
 import trueOrUndef = TypeUtils.trueOrUndef
-import center = EmotionCommon.center
 import Checkmark2Ic = SvgIcons.Checkmark2Ic
 import Puro = TypeUtils.Puro
 
@@ -17,10 +13,6 @@ import Puro = TypeUtils.Puro
 
 
 
-
-
-
-type CheckboxElement = HTMLInputElement
 type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
   hasError: boolean
   checkedComponent: React.ReactNode
@@ -30,8 +22,8 @@ type CheckboxProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
 
 const CheckboxInput =
 React.memo(
-React.forwardRef<CheckboxElement, CheckboxProps>(
-(props, forwardedRef)=> {
+React.forwardRef<HTMLInputElement, CheckboxProps>(
+(props, forwardedRef) => {
   const {
     className, style,
     hasError,
@@ -41,7 +33,7 @@ React.forwardRef<CheckboxElement, CheckboxProps>(
   
   
   
-  const elemRef = useRef<CheckboxElement>(null)
+  const elemRef = useRef<HTMLInputElement>(null)
   useImperativeHandle(forwardedRef, () => elemRef.current!,[])
   
   
@@ -63,9 +55,7 @@ React.forwardRef<CheckboxElement, CheckboxProps>(
   }
   
   
-  return <Button // Frame
-    as="label"
-    type={null}
+  return <label // Frame
     {...frameProps}
   >
     
@@ -79,47 +69,20 @@ React.forwardRef<CheckboxElement, CheckboxProps>(
     
     <div // IconBox
       {...iconBoxProps}
-    >
-      {/* <CheckmarkBox data-error={hasError}/> */}
-    </div>
+    />
     
     <div // IconBoxChecked
       {...iconBoxCheckedProps}
     >
-      {/* <CheckmarkBox>
-       <Checkmark2Ic color={!hasError ? 'black' : '#ff8787'}/>
-       </CheckmarkBox> */}
+      <Checkmark2Ic />
     </div>
+    
+    <Ripple // Ripple
+      mode='center'
+    />
   
-  </Button>
+  </label>
 }))
 export default CheckboxInput
 
-
-const CheckmarkBox = styled.div`
-  border-radius: 4px;
-  height: 100%;
-  aspect-ratio: 1;
-  ${center};
-  padding: 2px;
-  position: relative;
-  
-  ::after {
-    content: '';
-    ${abs};
-    border: 2px solid black;
-    border-radius: inherit;
-  }
-
-  input:where(:active,:focus-visible,:focus) ~ * & {
-    ::after {
-      border-width: 2.5px;
-    }
-  }
-  input[data-error] ~ * & {
-    ::after {
-      border-color: #ff8787;
-    }
-  }
-`
 

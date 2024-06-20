@@ -1,8 +1,7 @@
-import styled from '@emotion/styled'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
-import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
 import { TypeUtils } from '@util/common/TypeUtils.ts'
 import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
@@ -12,36 +11,33 @@ import trueOrUndef = TypeUtils.trueOrUndef
 
 
 
-
-type ButtonElement = HTMLButtonElement
-type ButtonProps = Omit<React.ComponentPropsWithoutRef<typeof StyledButton>, 'type'> & PartialUndef<{
+type ButtonProps = React.ComponentPropsWithoutRef<'button'> & PartialUndef<{
   hasError: boolean
   rippleMode: React.ComponentProps<typeof Ripple>['mode']
-  rippleDuration: RippleProps['rippleDuration']
-  type: React.ComponentPropsWithoutRef<typeof StyledButton>['type'] | null
+  rippleDuration: React.ComponentProps<typeof Ripple>['rippleDuration']
 }>
 
 
 const Button =
 React.memo(
-React.forwardRef<ButtonElement, ButtonProps>(
+React.forwardRef<HTMLButtonElement, ButtonProps>(
 (props, forwardedRef) => {
   const {
-    hasError, className, type,
+    hasError, className,
     rippleMode, rippleDuration,
     children,
     ...restProps
   } = props
   
   
-  const elemRef = useRef<ButtonElement>(null)
+  const elemRef = useRef<HTMLButtonElement>(null)
   useImperativeHandle(forwardedRef, () => elemRef.current!,[])
   
   
   const buttonProps = {
     [ButtonStyle.W.s.error.s.name]: trueOrUndef(hasError),
     className: clsx(className, ButtonStyle.W.e.button.e.name),
-    type: type === undefined ? 'button' : type === null ? undefined : type,
+    type: 'button' as const, // will be overridden by 'type' from 'restProps'
     ...restProps
   }
   const borderProps = {
@@ -54,7 +50,7 @@ React.forwardRef<ButtonElement, ButtonProps>(
   
   
   
-  return <StyledButton // button
+  return <button // Button
     {...buttonProps}
     ref={elemRef}
   >
@@ -70,11 +66,9 @@ React.forwardRef<ButtonElement, ButtonProps>(
       />
     </div>
     
-  </StyledButton>
+  </button>
 }))
 export default Button
 
 
-
-const StyledButton = styled.button()
 

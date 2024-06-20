@@ -204,7 +204,6 @@ React.memo(
           `}
         >
           <CheckboxInput css={CheckboxInputStyle.normalNormal}/>
-          {/* <CheckboxInput css={ButtonStyle.textRectBigNormal}/> */}
         </div>
         
         

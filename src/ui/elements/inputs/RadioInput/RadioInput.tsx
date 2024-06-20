@@ -7,35 +7,33 @@ import clsx from 'clsx'
 import { TypeUtils } from 'src/util/common/TypeUtils.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioActiveIc = SvgIcons.RadioActiveIc
-import Ripple, { RippleProps } from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple, { RippleMode } from 'src/ui/elements/Ripple/Ripple.tsx'
 import RadioInactiveIc = SvgIcons.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
-import PartialUndef = TypeUtils.PartialUndef
 import trueOrUndef = TypeUtils.trueOrUndef
+import Puro = TypeUtils.Puro
 
 
 
 
 
-export type RadioInputCustomProps = PartialUndef<{
+
+export type RadioInputProps = React.ComponentPropsWithoutRef<'input'> & Puro<{
   hasError: boolean
   startViews: React.ReactNode
   endViews: React.ReactNode
   children: React.ReactNode
   childrenPosition: 'start' | 'end'
-  rippleMode: RippleProps['mode']
+  rippleMode: RippleMode
 }>
-export type RadioInputForwardRefProps = React.JSX.IntrinsicElements['input']
-export type RadioInputRefElement = HTMLInputElement
-export type RadioInputProps = RadioInputCustomProps & RadioInputForwardRefProps
 
 
 
 const RadioInput = 
 React.memo(
-React.forwardRef<RadioInputRefElement, RadioInputProps>
+React.forwardRef<HTMLInputElement, RadioInputProps>
 ((props, forwardedRef)=> {
   const {
     hasError,
@@ -47,7 +45,7 @@ React.forwardRef<RadioInputRefElement, RadioInputProps>
   } = props
   
   
-  const elemRef = useRef<RadioInputRefElement>(null)
+  const elemRef = useRef<HTMLInputElement>(null)
   useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
   
   

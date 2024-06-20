@@ -1,15 +1,20 @@
 import { css } from '@emotion/react'
+import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
+import Elem = WidgetStyle.Elem
+import CssPropEnum = WidgetStyle.CssPropEnum
+import CssProp = WidgetStyle.CssProp
+import CssWidget = WidgetStyle.CssWidget
 
 
 
 
 export namespace RippleStyle {
   
-  export namespace El {
+  export namespace El0 {
     export const frameClassName = 'rrainuiRippleFrame'
-    export const viewClassName = 'rrainuiRippleView'
+    export const viewClassName = 'rrainuiRippleRipple'
     
     export const frameClass = '.'+frameClassName
     export const viewClass = '.'+viewClassName
@@ -32,13 +37,30 @@ export namespace RippleStyle {
   
   
   export const normal = (t:Theme)=>css`
-    ${El.frame} {
+    ${El0.frame} {
     
     }
-    ${El.view} {
+    ${El0.view} {
 
     }
   `
+  
+  
+  
+  
+  export const El = function(){
+    const frame = new Elem('rrainuiRippleFrame', { }, {
+      mode: new CssPropEnum('--ripple-mode', ['center', 'cursor']),
+      color: new CssProp('--ripple-color'),
+    })
+    const ripple = new Elem('rrainuiRippleRipple', { }, { })
+    
+    return { frame, ripple } as const
+  }()
+  
+  export const W = CssWidget
+    .ofRoot('frame', El.frame)
+    .add('frame', '>', 'ripple', El.ripple)
   
   
   

@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
@@ -10,12 +9,13 @@ import CssPseudo = WidgetStyle.CssPseudo
 import CssWidget = WidgetStyle.CssWidget
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
-import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import center = EmotionCommon.center
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
+import stretch = EmotionCommon.stretch
 import centerAll = EmotionCommon.centerAll
+import reset = EmotionCommon.reset
 
 
 
@@ -23,7 +23,7 @@ import centerAll = EmotionCommon.centerAll
 export namespace CheckboxInputStyle {
   
   
-  export const W = function(){
+  export const El = function(){
     const frame = new Elem('rrainuiFrame', { }, {
       color: CssProp.color,
     })
@@ -34,94 +34,44 @@ export namespace CheckboxInputStyle {
       active: CssPseudo.active,
       focus: CssPseudo.focus,
       focusVisible: CssPseudo.focusVisible,
+      anyFocus: CssPseudo.anyFocus,
       readOnly: CssPseudo.readOnly,
       disabled: CssPseudo.disabled,
       error: CssAttr.dataError,
     }, { })
     const iconBox = new Elem('rrainuiIconBox', { }, { })
     const iconBoxChecked = new Elem('rrainuiIconBoxChecked', { }, { })
-    // todo icon, ripple
+    const iconChecked = new Elem(SvgIconsStyle.El.icon.name, { }, {
+      color: SvgIconsStyle.El.icon.props.color
+    })
+    const ripple = RippleStyle.El.frame
     
-    const inputWidget = CssWidget
-      .ofRoot('frame', frame)
-      .add('frame', '>', 'input', input)
-      .add('frame', '>', 'iconBox', iconBox)
-      .add('frame', '>', 'iconBoxChecked', iconBoxChecked)
-    
-    return inputWidget
+    return { frame, input, iconBox, iconBoxChecked, iconChecked, ripple } as const
   }()
   
-  
-  
-  export namespace Attr0 {
-    export const errorName = 'data-error'
-    
-    export const error = `[${errorName}]`
-  }
-  export namespace El {
-    export const frameClassName = ButtonStyle.El0.btn.name
-    export const inputClassName = 'rrainuiInput'
-    export const iconWrapClassName = 'rrainuiIconWrap'
-    export const iconClassName = SvgIconsStyle.El.icon.name
-    export const borderClassName = ButtonStyle.El0.border.name
-    export const rippleFrameClassName = ButtonStyle.El0.ripple.name
-    
-    export const frameClass = '.'+frameClassName
-    export const inputClass = '.'+inputClassName
-    export const iconWrapClass = '.'+iconWrapClassName
-    export const iconClass = '.'+iconClassName
-    export const borderClass = '.'+borderClassName
-    export const rippleFrameClass = '.'+rippleFrameClassName
-    
-    export const frame = '&'+frameClass
-    export const frameHover = frame+`:has(>${inputClass}:hover)`
-    export const frameDisabled = frame+`:has(>${inputClass}:disabled)`
-    export const frameError = frame+`:has(>${inputClass}${Attr0.error})`
-    
-    export const input = frame+'>'+inputClass
-    export const inputHover = frame+'>'+inputClass+':hover'
-    export const inputFocusVisible = frame+'>'+inputClass+':focus-visible'
-    export const inputChecked = frame+'>'+inputClass+':checked'
-    export const inputDisabled = frame+'>'+inputClass+':disabled'
-    export const inputError = frame+'>'+inputClass+Attr0.error
-    
-    export const iconWrap = frame+'>'+iconWrapClass
-    export const iconWrapHover = inputHover+'~'+iconWrapClass
-    export const iconWrapChecked = inputChecked+'~'+iconWrapClass
-    export const iconWrapDisabled = inputDisabled+'~'+iconWrapClass
-    export const iconWrapError = inputError+'~'+iconWrapClass
-    
-    export const icon = iconWrap+'>'+iconWrapClass
-    export const iconChecked = iconWrapChecked+'>'+iconWrapClass
-    
-    export const border = frame+'>'+borderClass
-    export const borderHover = inputHover+'~'+borderClass
-    export const borderFocusVisible = inputFocusVisible+'~'+borderClass
-    export const borderDisabled = inputDisabled+'~'+borderClass
-    export const borderError = inputError+'~'+borderClass
-    
-    export const ripple = frame+'>*>'+rippleFrameClass
-    export const rippleDisabled = inputDisabled+'~*>'+rippleFrameClass
-  }
-  export namespace Prop {
-    export const color = WidgetStyle.Prop0.prop.color
-    export const activeIconColor = '--active-icon-color'
-    export const inactiveIconColor = '--inactive-icon-color'
-    export const rippleColor = RippleStyle.Prop.color
-  }
+  export const W = CssWidget
+    .ofRoot('frame', El.frame)
+    .add('frame', '>', 'input', El.input)
+    .add('frame', '>', 'iconBox', El.iconBox)
+    .add('frame', '>', 'iconBoxChecked', El.iconBoxChecked)
+    .add('iconBoxChecked', '>', 'iconChecked', El.iconChecked)
+    .add('frame', '>', 'ripple', El.ripple)
   
   
   
   
-  const basic = (t: AppTheme.Theme) => css`
-    ${ButtonStyle.textRectBigNormal(t)};
-    
+  const basic = css`
     // state: normal
-    /* ${W.use.s.normal().e.frame().thisUse} {
-      width: 60px;
-      height: 60px;
+    ${W.use.s.normal().e.frame().thisUse} {
+      ${reset};
+      position: relative;
       ${centerAll};
-    } */
+      overflow: hidden;
+      overflow-wrap: anywhere;
+      cursor: pointer;
+      
+      transition: background linear 300ms;
+    }
     ${W.use.s.normal().e.input().thisUse} {
       ${resetInput};
       ${abs};
@@ -129,16 +79,10 @@ export namespace CheckboxInputStyle {
       cursor: pointer;
     }
     ${W.use.s.normal().e.iconBox().thisUse} {
-      display: flex;
-      ${SvgIconsStyle.El.icon.sel()} {
-        ${SvgIconsStyle.El.icon.props.color.name}: var(${CheckboxInputStyle.Prop.inactiveIconColor})
-      }
+      ${center};
     }
     ${W.use.s.normal().e.iconBoxChecked().thisUse} {
       display: none;
-      ${SvgIconsStyle.El.icon.sel()} {
-        ${SvgIconsStyle.El.icon.props.color.name}: var(${CheckboxInputStyle.Prop.activeIconColor})
-      }
     }
     
     // state: checked
@@ -146,66 +90,85 @@ export namespace CheckboxInputStyle {
       display: none;
     }
     ${W.use.s.checked().e.iconBoxChecked().thisUse} {
-      display: flex;
+      ${center};
+    }
+    
+    // state: disabled
+    ${W.use.s.disabled().e.ripple().thisUse} {
+      display: none;
     }
   `
   
   
   // size: normal, color: normal
   export const normalNormal = (t: AppTheme.Theme) => css`
-    ${basic(t)};
+    ${basic};
     
     // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
-      padding: 6px;
-    }
-    ${W.use.s.normal().e.iconBox().thisUse} {
-      width: 100%;
-      height: 100%;
-    }
-    ${W.use.s.normal().e.iconBoxChecked().thisUse} {
-      width: 100%;
-      height: 100%;
-    }
-  `
-  
-  
-  
-  
-  
-  const normal = (t: AppTheme.Theme) => css`
-    // normal
-    ${El.frame} {
-      border-radius: 15px;
-      padding: 8px 6px;
-      gap: 8px;
+      height: 50px;
+      width: 50px;
+      background: none;
+      border-radius: 999999px;
+      padding: 14px;
+      ${W.e.frame.e.p.color.set(t.buttonNormal.bgc[0])};
       
-      ${Txt.large2};
-      color: ${t.page.content2[0]};
-      ${Prop.color}: ${t.page.content2[0]};
-    }
-    ${El.ripple}{
-      ${Prop.rippleColor}: ${t.ripple.contentOnTransparent[0]};
-    }
-    ${El.iconWrap}{
-      width: 26px;
-      height: 26px;
-      ${Prop.activeIconColor}: ${t.inputRadio.bgcFocus[0]};
-      ${Prop.inactiveIconColor}: ${t.inputRadio.bgcFocus[0]};
+      ${W.e.ripple.e.p.mode.set('center')};
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
     }
     
-    // hover
-    ${hoverable}{
-      ${El.borderHover}{
+    // state: hover
+    ${hoverable} {
+      ${W.use.s.hover().e.frame().thisUse} {
         background: ${t.buttonTransparent.bgcFocus[0]};
       }
     }
     
-    // focus-visible
-    ${El.borderFocusVisible}{
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.frame().thisUse} {
       background: ${t.buttonTransparent.bgcFocus[0]};
     }
+    ${W.use.s.normal().e.iconBox().thisUse},
+    ${W.use.s.normal().e.iconBoxChecked().thisUse} {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      padding: 2px;
+      position: relative;
+      
+      ::after {
+        content: '';
+        ${abs};
+        border: 2px solid;
+        border-color: ${t.inputRadio.bgcFocus[0]};
+        border-radius: inherit;
+      }
+    }
+    ${W.use.s.normal().e.iconChecked().thisUse} {
+      width: 100%;
+      height: 100%;
+      ${W.e.iconChecked.e.p.color.set(t.inputRadio.bgcFocus[0])};
+    }
+    
+    // state: active, focus, focus-visible
+    ${W.use.s.anyFocus().e.iconBox().thisUse},
+    ${W.use.s.anyFocus().e.iconBoxChecked().thisUse} {
+      ::after {
+        border-width: 2.5px;
+      }
+    }
+    
+    ${W.use.s.error().e.iconBox().thisUse},
+    ${W.use.s.error().e.iconBoxChecked().thisUse} {
+      ::after {
+        border-color: #ff8787;
+      }
+    }
   `
+  
+  
+  
+  
   
   
   
