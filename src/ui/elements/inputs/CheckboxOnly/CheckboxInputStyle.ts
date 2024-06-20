@@ -13,8 +13,6 @@ import hoverable = EmotionCommon.hoverable
 import center = EmotionCommon.center
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
-import stretch = EmotionCommon.stretch
-import centerAll = EmotionCommon.centerAll
 import reset = EmotionCommon.reset
 
 

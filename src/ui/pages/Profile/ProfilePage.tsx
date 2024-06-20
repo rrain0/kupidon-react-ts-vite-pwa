@@ -56,6 +56,7 @@ import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectUtils.ObjectKeys
+import arr = ArrayUtils.arr
 
 
 
@@ -380,7 +381,7 @@ React.memo(
         {tabsProps=><>
           <Tabs css={fill} {...tabsProps}>
             {({ tabContainerSpring, computedTabsDimens }) => <>
-              {ArrayUtils.ofIndices(4).map(tabIdx =>
+              {arr(3).map(tabIdx =>
                 <Tab css={fill} key={tabIdx}
                   width={computedTabsDimens.frameWidth}
                 >
@@ -401,7 +402,7 @@ React.memo(
                     <ProfilePageTabHeaderContext.Provider value={{
                       tabContainerSpring,
                       tabWidth: computedTabsDimens.frameWidth,
-                      headers: ['Предпросмотр', formValues.name, 'Партнёр', 'Свидание'],
+                      headers: ['Предпросмотр', formValues.name, /* 'Партнёр', */ 'Свидание'],
                       setTabsState: tabsProps.setTabsState,
                       setTabIdx: tabsProps.setTabIdx,
                     }}>

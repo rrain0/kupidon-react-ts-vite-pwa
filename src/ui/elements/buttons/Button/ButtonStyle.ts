@@ -369,6 +369,8 @@ export namespace ButtonStyle {
   `
   // type: filled, shape: rounded, size: small
   export const filledRoundedSmall = css`
+    ${base};
+    
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       width: fit-content;
