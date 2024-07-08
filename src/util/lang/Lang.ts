@@ -1,5 +1,5 @@
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import ArrayElement = ArrayUtils.ArrayElement
+import { ArrayU } from 'src/util/common/ArrayU.ts'
+import ArrayElement = ArrayU.ArrayElement
 
 
 export namespace Lang {

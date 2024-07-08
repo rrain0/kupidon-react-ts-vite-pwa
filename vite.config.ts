@@ -34,9 +34,6 @@ import checker from 'vite-plugin-checker'
 
 
 
-
-
-
 const pwaOptions: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
   devOptions: {
@@ -56,9 +53,9 @@ const pwaOptions: Partial<VitePWAOptions> = {
   manifest: false,
 
   base: '/',
+  
   includeAssets: ['favicon.svg'],
 }
-
 
 
 
@@ -79,8 +76,8 @@ export default defineConfig(({ command, mode }) => {
       react({
         jsxImportSource: '@emotion/react',
         babel: {
-          plugins: ['@emotion/babel-plugin']
-        }
+          plugins: ['@emotion/babel-plugin'],
+        },
       }),
       tsconfigPaths(),
       svgr(),

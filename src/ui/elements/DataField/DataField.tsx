@@ -3,11 +3,11 @@ import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { DataFieldStyle } from 'src/ui/elements/DataField/DataFieldStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
-import PartialUndef = TypeUtils.PartialUndef
-import trueOrUndef = TypeUtils.trueOrUndef
+import PartialUndef = TypeU.PartialUndef
+import trueOrUndef = TypeU.trueOrUndef
 
 
 

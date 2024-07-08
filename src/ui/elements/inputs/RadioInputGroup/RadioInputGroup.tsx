@@ -2,14 +2,15 @@ import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { StyleConstants } from 'src/ui-props/styles/StyleConstants.ts'
 import {
   RadioInputGroupStyle,
 } from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
-import PartialUndef = TypeUtils.PartialUndef
-import trueOrUndef = TypeUtils.trueOrUndef
+import PartialUndef = TypeU.PartialUndef
+import trueOrUndef = TypeU.trueOrUndef
 
 
 
@@ -32,7 +33,7 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
   
   
   const elemRef = useRef<RadioInputGroupRefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
+  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
   
   
   const radioGroupProps = {
@@ -48,7 +49,7 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
   }
   
   
-  return <article /* RadioGroup */
+  return <article // Radio Group
     css={radioGroupStyle}
     {...radioGroupProps}
     ref={elemRef}
@@ -56,7 +57,7 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
     
     { children }
     
-    <div /* Border */
+    <div // Border
       css={borderStyle}
       {...borderProps}
     />
@@ -71,6 +72,7 @@ export default RadioInputGroup
 const radioGroupStyle = css`
   ${reset};
   position: relative;
+  gap: ${StyleConstants.itemListGap};
 `
 
 

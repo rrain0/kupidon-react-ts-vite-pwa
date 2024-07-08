@@ -18,14 +18,14 @@ import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
 import { AccountSettingsPageValidation } from 'src/ui/pages/AccountSettings/validation'
 import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils'
+import { ObjectU } from 'src/util/common/ObjectU'
 import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFailures'
 import { useFormSubmit } from '@util/mini-libs/form-validation/hooks/useFormSubmit'
 import { useFormToasts } from '@util/mini-libs/form-validation/hooks/useFormToasts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
-import { formSubmitPreventDefault } from '@util/react/formSubmitPreventDefault'
+import { formSubmitPreventDefault } from '@util/hooks/formSubmitPreventDefault'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
-import { useEffectEvent } from '@util/react/useEffectEvent'
+import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import DataField from 'src/ui/elements/DataField/DataField'
@@ -37,7 +37,7 @@ import FloppyDisk1Ic = SvgIcons.FloppyDisk1Ic
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues
-import ObjectKeys = ObjectUtils.ObjectKeys
+import ObjectKeys = ObjectU.ObjectKeys
 import validators = AccountSettingsPageValidation.validators
 import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText

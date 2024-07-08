@@ -1,4 +1,4 @@
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
 import React, {
   JSX,
@@ -14,12 +14,12 @@ import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateFailures
 import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import ValueOrUpdater = TypeUtils.ValueOrMapper
-import trueOrUndef = TypeUtils.trueOrUndef
-import Callback = TypeUtils.Callback
-import Callback1 = TypeUtils.Callback1
-import Mapper = TypeUtils.Mapper
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import ValueOrUpdater = TypeU.ValueOrMapper
+import trueOrUndef = TypeU.trueOrUndef
+import Callback = TypeU.Callback
+import Callback1 = TypeU.Callback1
+import Mapper = TypeU.Mapper
 
 
 

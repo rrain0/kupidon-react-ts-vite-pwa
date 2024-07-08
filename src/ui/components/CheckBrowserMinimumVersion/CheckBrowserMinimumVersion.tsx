@@ -1,4 +1,4 @@
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { Utils } from '@util/common/Utils.ts'
 import React, { useMemo } from 'react'
 import * as device from 'react-device-detect'
@@ -28,7 +28,7 @@ React.memo(
   
   
   if (device.isChrome && device.isDesktop) {
-    if (ArrayUtils.isLower(deviceFullVersion, versionToNumArr(minimumVersions.chromeDesktopVersion)))
+    if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.chromeDesktopVersion)))
       return <ErrorMessage
         browserName="Chrome Desktop"
         minimumVersion={minimumVersions.chromeDesktopVersion}
@@ -36,7 +36,7 @@ React.memo(
       />
   }
   if (device.isChrome && device.isAndroid) {
-    if (ArrayUtils.isLower(deviceFullVersion, versionToNumArr(minimumVersions.chromeAndroidVersion)))
+    if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.chromeAndroidVersion)))
       return <ErrorMessage
         browserName="Chrome Android"
         minimumVersion={minimumVersions.chromeAndroidVersion}
@@ -44,7 +44,7 @@ React.memo(
       />
   }
   if (device.isSafari && device.isDesktop) {
-    if (ArrayUtils.isLower(deviceFullVersion, versionToNumArr(minimumVersions.safariDesktopVersion)))
+    if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.safariDesktopVersion)))
       return <ErrorMessage
         browserName="Safari Desktop"
         minimumVersion={minimumVersions.safariDesktopVersion}
@@ -52,7 +52,7 @@ React.memo(
       />
   }
   if (device.isSafari && device.isIOS) {
-    if (ArrayUtils.isLower(deviceFullVersion, versionToNumArr(minimumVersions.safariIosVersion)))
+    if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.safariIosVersion)))
       return <ErrorMessage
         browserName="Safari iOS"
         minimumVersion={minimumVersions.safariIosVersion}
@@ -60,7 +60,7 @@ React.memo(
       />
   }
   if (device.isEdge && device.isDesktop) {
-    if (ArrayUtils.isLower(deviceFullVersion, versionToNumArr(minimumVersions.edgeDesktopVersion)))
+    if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.edgeDesktopVersion)))
       return <ErrorMessage
         browserName="Edge Desktop"
         minimumVersion={minimumVersions.edgeDesktopVersion}

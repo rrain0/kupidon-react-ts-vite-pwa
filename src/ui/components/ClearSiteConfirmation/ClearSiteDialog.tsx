@@ -5,7 +5,7 @@ import { StatusUiText } from 'src/ui-props/ui-values/StatusUiText.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { clearSiteData } from '@util/app/clearSiteData.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import { useBool } from '@util/react/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
@@ -23,7 +23,7 @@ import ClearTrashIc = SvgIcons.ClearTrashIc
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Txt = EmotionCommon.Txt
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 
 
 

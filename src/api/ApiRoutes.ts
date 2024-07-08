@@ -6,6 +6,8 @@ export namespace ApiRoutes {
   
   export const api = import.meta.env.API_BASE_URL as string
   
+  //console.log('api:', api)
+  
   
   export const authRefresh = `${api}/auth/refresh`
   export const authLogin = `${api}/auth/login`

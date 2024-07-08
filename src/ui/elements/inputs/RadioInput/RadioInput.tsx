@@ -4,7 +4,7 @@ import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, {useImperativeHandle, useRef} from "react"
 import clsx from 'clsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioActiveIc = SvgIcons.RadioActiveIc
 import Ripple, { RippleMode } from 'src/ui/elements/Ripple/Ripple.tsx'
@@ -12,8 +12,8 @@ import RadioInactiveIc = SvgIcons.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
-import trueOrUndef = TypeUtils.trueOrUndef
-import Puro = TypeUtils.Puro
+import trueOrUndef = TypeU.trueOrUndef
+import Puro = TypeU.Puro
 
 
 

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
-import { TypeUtils } from 'src/util/common/TypeUtils'
-import ValueOrGenerator = TypeUtils.ValueOrGenerator
+import { TypeU } from 'src/util/common/TypeU.ts'
+import ValueOrGenerator = TypeU.ValueOrGenerator
 
 
 

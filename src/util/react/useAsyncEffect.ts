@@ -1,24 +1,22 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { TypeUtils } from 'src/util/common/TypeUtils'
-import Consumer = TypeUtils.Consumer
-import Predicate = TypeUtils.Predicate
-import Callback = TypeUtils.Callback
-
-
+import { TypeU } from 'src/util/common/TypeU.ts'
+import Consumer = TypeU.Consumer
+import Predicate = TypeU.Predicate
+import Callback = TypeU.Callback
 
 
 
 
 export const useAsyncEffect = 
 (
-  callback: (lock: Predicate<any>, unlock: Consumer<any>)=>(void|Callback), 
+  callback: (lock: Predicate<any>, unlock: Consumer<any>)=>(void | Callback),
   deps: any[] | undefined
-)=>{
+) => {
   
   
   const inUseRef = useRef(new Set<any>())
   const lockId = useCallback(
-    (id: any)=>{
+    (id: any) => {
       if (inUseRef.current.has(id)) return false
       inUseRef.current.add(id)
       return true
@@ -26,7 +24,7 @@ export const useAsyncEffect =
     []
   )
   const unlockId = useCallback(
-    (id: any)=>{
+    (id: any) => {
       inUseRef.current.delete(id)
     },
     []
@@ -34,7 +32,7 @@ export const useAsyncEffect =
   
   
   useEffect(
-    ()=>{
+    () => {
       // local set allows multiple calls of 'unlock'
       const inUseLocal = new Set<any>()
       const lockLocal = (id: any) => {

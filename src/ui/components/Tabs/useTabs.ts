@@ -7,21 +7,19 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { ElemProps } from '@util/element/ElemProps.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
-import { useNoSelect } from '@util/react/useNoSelect.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import { useStateAndRef } from '@util/react/useStateAndRef.ts'
-import Setter = TypeUtils.Setter
-import fitRange = MathUtils.fitRange
-import Callback = TypeUtils.Callback
-import findLastBy = ArrayUtils.findLastBy
-import notExists = TypeUtils.notExists
-import last = ArrayUtils.last
-
+import { RangeU } from 'src/util/common/RangeU'
+import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import PartialUndef = TypeU.PartialUndef
+import { useStateAndRef } from 'src/util/react-ref/useStateAndRef.ts'
+import Setter = TypeU.Setter
+import Callback = TypeU.Callback
+import findLastBy = ArrayU.findLastBy
+import notExists = TypeU.notExists
+import last = ArrayU.last
 
 
 
@@ -147,16 +145,16 @@ export const useTabs = (
   const lastTabIdx = Math.max(0, tabsCnt-1)
   
   // non-zero len
-  const snapPointsPx = useMemo(()=>{
-    return ArrayUtils.ofIndices(Math.max(tabsCnt, 1))
-      .map(tab=>tab*computedTabsDimens.frameWidth)
+  const snapPointsPx = useMemo(() => {
+    return ArrayU.arrOfIndices(Math.max(tabsCnt, 1))
+      .map(tab => tab*computedTabsDimens.frameWidth)
   }, [tabsCnt, computedTabsDimens.frameWidth])
   
   // 0..+inf
-  const realDefaultOpenIdx = useMemo(()=>{
+  const realDefaultOpenIdx = useMemo(() => {
     if (notExists(options.defaultOpenIdx)) return DefaultTabIdx
-    return fitRange(
-      options.defaultOpenIdx,[0,lastTabIdx]
+    return RangeU.clamp(
+      options.defaultOpenIdx, [0, lastTabIdx]
     )
   }, [options.defaultOpenIdx, lastTabIdx])
   
@@ -233,10 +231,10 @@ export const useTabs = (
       ) return
       
       
-      const toTab = function(){
+      const toTab = function() {
         if (newState==='adjusting')
           return getTabIdxToAdjust(currScrollLeft, snapPointsPx)
-        return fitRange(newTabIdx, [0, lastTabIdx])
+        return RangeU.clamp(newTabIdx, [0, lastTabIdx])
       }()
       
       const toScrollLeft = snapPointsPx[toTab]
@@ -244,11 +242,10 @@ export const useTabs = (
       
       
       
-      
       const toDragging = newState==='dragging'
       const toAnimated =
-        (['snapping','adjusting'] as TabsState[]).includes(newState)
-      const lastSpeed = function(){
+        (['snapping', 'adjusting'] as TabsState[]).includes(newState)
+      const lastSpeed = function() {
         if (currState!=='dragging') return null
         return dragStartRef.current.lastSpeed
       }()
@@ -310,12 +307,12 @@ export const useTabs = (
   // to prevent browser gesture handling
   // noinspection JSVoidFunctionReturnValueUsed
   const tabDrag = useDrag(
-    gesture=>{
+    gesture => {
       const {
         first, active, last,
-        movement: [mx,my],
-        velocity: [spdx,spdy], // px/ms (nonnegative)
-        direction: [dirx,diry], // positive for y is from top to bottom
+        movement: [mx, my],
+        velocity: [spdx, spdy], // px/ms (nonnegative)
+        direction: [dirx, diry], // positive for y is from top to bottom
         xy: [vpx,vpy], // viewport scrollLeft, viewport y
       } = gesture
       
@@ -341,18 +338,18 @@ export const useTabs = (
         isCanDrag, isCannotStart
       }) */
       
-      if (!dragStartRef.current.isDragging){
+      if (!dragStartRef.current.isDragging) {
         if (isCannotStart) dragStartRef.current.canStart = false
       }
-      if (dragStartRef.current.canStart){
-        if (isCanDrag){
+      if (dragStartRef.current.canStart) {
+        if (isCanDrag) {
           setNewState('dragging')
           dragStartRef.current.canStart = false
           dragStartRef.current.isDragging = true
         }
       }
       
-      const newScrollLeft = fitRange(
+      const newScrollLeft = RangeU.clamp(
         dragStartRef.current.scrollLeft - mx,
         [0, maxScrollLeft]
       )
@@ -360,19 +357,21 @@ export const useTabs = (
       if (active && dragStartRef.current.isDragging) {
         tabContainerSpring.scrollLeft.set(newScrollLeft)
       }
-      if (last && dragStartRef.current.isDragging){
+      if (last && dragStartRef.current.isDragging) {
         // % ширины viewport в секунду
         const speed = pxPerMsToPercentVpHPerS(spdx)
-        if (speed>speedThreshold){
+        if (speed>speedThreshold) {
           dragStartRef.current.lastSpeed = speed
-          if (dirx<0){
+          if (dirx<0) {
             setNewState('snapping')
             setNewTabIdx(Math.min(prevTabIdx+1, lastTabIdx))
-          } else {
+          }
+          else {
             setNewState('snapping')
             setNewTabIdx(Math.max(prevTabIdx-1, 0))
           }
-        } else {
+        }
+        else {
           setNewState('adjusting')
         }
       }

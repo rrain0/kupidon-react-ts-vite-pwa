@@ -1,8 +1,8 @@
 import React from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import Callback = TypeUtils.Callback
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import Callback = TypeU.Callback
+import PartialUndef = TypeU.PartialUndef
 
 
 

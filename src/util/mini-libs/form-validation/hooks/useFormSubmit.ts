@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { ResponseData } from 'src/api/useApiRequest.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationActions } from 'src/util/mini-libs/form-validation/core/ValidationActions.ts'
 import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
 import updateFailures = ValidationActions.updateFailures
 import Values = ValidationCore.Values
 import FailureType = ValidationCore.FailureType
 import Failures = ValidationCore.Failures
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
+import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 

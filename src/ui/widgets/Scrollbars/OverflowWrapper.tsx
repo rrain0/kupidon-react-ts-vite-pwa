@@ -7,13 +7,13 @@ import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import hideScrollbar = EmotionCommon.noScrollbars
 import React, { useRef } from 'react'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
+import { ReactU } from 'src/util/common/ReactU.ts'
 import centerAll = EmotionCommon.centerAll
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
-import PartialUndef = TypeUtils.PartialUndef
-import ClassStyleProps = ReactUtils.ClassStyleProps
+import PartialUndef = TypeU.PartialUndef
+import ClassStyleProps = ReactU.ClassStyleProps
 import fill = EmotionCommon.fill
 
 

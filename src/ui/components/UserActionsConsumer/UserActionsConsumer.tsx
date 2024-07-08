@@ -1,8 +1,8 @@
-import { ReactUtils } from '@util/common/ReactUtils.ts'
+import { ReactU } from 'src/util/common/ReactU.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import contents = EmotionCommon.contents
-import stopPointerAndMouseEvents = ReactUtils.stopPointerAndMouseEvents
+import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
 
 
 

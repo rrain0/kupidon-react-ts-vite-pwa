@@ -37,7 +37,7 @@ import ProfilePageTabHeader from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import ProfilePhotos from 'src/ui/pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFailures.ts'
 import { FormProps } from '@util/mini-libs/form-validation/hooks/useFormValuesProps.ts'
 import ValidationWrap from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
@@ -47,9 +47,9 @@ import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
-import Callback1 = TypeUtils.Callback1
-import Callback = TypeUtils.Callback
-import noop = TypeUtils.noop
+import Callback1 = TypeU.Callback1
+import Callback = TypeU.Callback
+import noop = TypeU.noop
 
 
 

@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
-import { TypeUtils } from 'src/util/common/TypeUtils'
-import Callback = TypeUtils.Callback
+import { TypeU } from 'src/util/common/TypeU.ts'
+import Callback = TypeU.Callback
 
 
 
 
 export const useTimeout =
-(delay: number, callback: Callback, deps?: any[])=>{
+(delay: number, callback: Callback, deps?: any[]) => {
   useEffect(
-    ()=>{
+    () => {
       const id = setTimeout(callback, delay)
-      return ()=>clearTimeout(id)
+      return () => clearTimeout(id)
     },
     deps
   )

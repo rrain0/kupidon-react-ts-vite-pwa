@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    //"noUnusedLocals": true,
+    //"noUnusedParameters": true,
+    "noPropertyAccessFromIndexSignature": false, // allow access obj.prop in indexed type instead of obj['prop']
+    "noUncheckedIndexedAccess": false, // add undefined when get props from indexed type
+    "exactOptionalPropertyTypes": true, // '?' means absence of property but not undefined
+    "downlevelIteration": true, // use [...anyIterator]
+    "noImplicitAny": false,
+    "noImplicitOverride": true,
+    "allowUnreachableCode": true, // allow code after the return statement that never runs
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "useDefineForClassFields": true, // enables some modern patterns for class properties initialization
+    
+    "plugins": [
+      { "name": "typescript-plugin-css-modules" }
+    ],
+    
+    // path aliases
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/*",
+        "lib-types-overrides/*"
+      ],
+      
+      "src/*": ["src/*"],
+      
+      "@res/*": ["src/res/*"],
+      "@img/*": ["src/res/img/*"],
+      "@ic/*": ["src/res/ic/*"],
+      "@vid/*": ["src/res/vid/*"],
+      
+      "@util/*": ["src/util/*"]
+    }
+  },
+  "include": ["src"]
+}

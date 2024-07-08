@@ -15,6 +15,7 @@ import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperS
 import Preview from 'src/ui/pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/ui/pages/Profile/Profile/Profile.tsx'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { RangeU } from 'src/util/common/RangeU'
 import {
   currentUserPhotosToProfilePhotos,profileUpdateApiRequest,
 } from './actions.ts'
@@ -28,35 +29,34 @@ import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { AsyncUtils } from 'src/util/common/AsyncUtils.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
-import { FileUtils } from 'src/util/file/FileUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { AsyncU } from 'src/util/common/AsyncU.ts'
+import { MathU } from '@util/common/MathU.ts'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { FileU } from 'src/util/file/FileU.ts'
 import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFailures.ts'
 import { useFormSubmit } from '@util/mini-libs/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@util/mini-libs/form-validation/hooks/useFormToasts.tsx'
 import { useFormValuesProps } from '@util/mini-libs/form-validation/hooks/useFormValuesProps.ts'
 import { Progress } from '@util/Progress.ts'
-import { useAsyncEffect } from '@util/react/useAsyncEffect.ts'
+import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
 import Tab from 'src/ui/components/Tabs/Tab.tsx'
 import Tabs from 'src/ui/components/Tabs/Tabs.tsx'
 import { TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import UseTabsState from 'src/ui/components/Tabs/UseTabsState.tsx'
 import safePageContentPaddings = Pages.safeInsets
 import fill = EmotionCommon.fill
-import blobToDataUrl = FileUtils.blobToDataUrl
-import fetchToBlob = FileUtils.fetchToBlob
-import mapRange = MathUtils.mapRange
-import throttle = AsyncUtils.throttle
-import mapFirstToIfFoundBy = ArrayUtils.mapFirstToIfFoundBy
+import blobToDataUrl = FileU.blobToDataUrl
+import fetchToBlob = FileU.fetchToBlob
+import throttle = AsyncU.throttle
+import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import mapFailureCodeToUiText = ProfilePageValidation.mapFailureCodeToUiText
 import validators = ProfilePageValidation.validators
 import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
-import ObjectKeys = ObjectUtils.ObjectKeys
-import arr = ArrayUtils.arr
+import ObjectKeys = ObjectU.ObjectKeys
+import arr = ArrayU.arrOfIndices
 
 
 
@@ -149,7 +149,7 @@ React.memo(
           // we needn't take upload, because it is local
           
           // get all downloads & downloaded data from same existing photos
-          newValues.initialValues.photos = ArrayUtils.combine(
+          newValues.initialValues.photos = ArrayU.combine(
             newValues.initialValues.photos, [...s.initialValues.photos, ...s.photos],
             (initialPhoto, oldPhoto)=>({
               ...initialPhoto,
@@ -174,7 +174,7 @@ React.memo(
           })
           
           // stop operations for discarded photos
-          ArrayUtils.diff2
+          ArrayU.diff2
           (s.initialValues.photos, newValues.photos, (a,b)=>a.id===b.id)[0]
             .forEach(diff => {
               if (diff.isRemoved){
@@ -182,7 +182,7 @@ React.memo(
                 diff.fromElem.compression?.abort()
               }
             })
-          ArrayUtils.diff2
+          ArrayU.diff2
           (s.photos, newValues.photos, (a,b)=>a.id===b.id)[0]
             .forEach(diff => {
               if (diff.isRemoved){
@@ -276,9 +276,9 @@ React.memo(
             }))
           }
           const updatePhotos = throttle(
-              mapRange(Math.random(),[0,1],[1450,2000]),
-              updatePhotosNow
-            )
+            RangeU.map(Math.random(),[0,1],[1450,2000]),
+            updatePhotosNow
+          )
           
           ;(async()=>{
             try {

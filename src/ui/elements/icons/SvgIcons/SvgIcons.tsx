@@ -68,11 +68,11 @@ import SpinnerCircleQuarterSvg from '@ic/normal/spinner-circle-quarter.svg?react
 
 import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
 
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import falsyToUndef = TypeUtils.falsyToUndef
-import exists = TypeUtils.exists
+import PartialUndef = TypeU.PartialUndef
+import falsyToUndef = TypeU.falsyToUndef
+import exists = TypeU.exists
 
 
 

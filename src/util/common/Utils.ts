@@ -1,5 +1,5 @@
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import Mapper = TypeUtils.Mapper
+import { TypeU } from 'src/util/common/TypeU.ts'
+import Mapper = TypeU.Mapper
 
 
 
@@ -7,14 +7,14 @@ import Mapper = TypeUtils.Mapper
 export namespace Utils {
   
   
-  export const my = <T1,T2>(obj: T1, handler: Mapper<T1,T2>) => handler(obj)
+  export const my = <T1, T2>(obj: T1, handler: Mapper<T1, T2>) => handler(obj)
   
   
   export class Lazy<T> {
     private inited = false
     private value!: T
     constructor( private initializer: ()=>T ) {}
-    get(){
+    get() {
       if (!this.inited) {
         this.inited = true
         this.value = this.initializer()
@@ -34,11 +34,13 @@ export namespace Utils {
   
   
   
-  export const versionToNumArr = (version: string)=>version.split('.').map(it=>Number.parseInt(it))
+  export const versionToNumArr = (version: string) =>
+    version.split('.').map(it => Number.parseInt(it))
     
   
+  
   let id = 1
-  export const nextId = ()=>''+id++
+  export const nextId = () => '' + id++
   
   
   

@@ -1,9 +1,9 @@
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import trueOrUndef = TypeUtils.trueOrUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
+import trueOrUndef = TypeU.trueOrUndef
 
 
 

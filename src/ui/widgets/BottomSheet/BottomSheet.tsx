@@ -4,7 +4,7 @@ import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActio
 import { BottomSheetProps } from 'src/ui/widgets/BottomSheet/BottomSheetDialog.tsx'
 import { BottomSheetParts } from 'src/ui/widgets/BottomSheet/BottomSheetParts.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
+import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
 import { useBottomSheet } from 'src/ui/widgets/BottomSheet/useBottomSheet.ts'
 import React, { useLayoutEffect } from 'react'
 import fixed = EmotionCommon.fixed

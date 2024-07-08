@@ -4,10 +4,10 @@ import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import Setter = TypeUtils.Callback1
+import { TypeU } from '@util/common/TypeU.ts'
+import Setter = TypeU.Callback1
 import col = EmotionCommon.col
-import PartialUndef = TypeUtils.PartialUndef
+import PartialUndef = TypeU.PartialUndef
 
 
 

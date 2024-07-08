@@ -3,11 +3,11 @@ import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
-import trueOrUndef = TypeUtils.trueOrUndef
+import trueOrUndef = TypeU.trueOrUndef
 import Checkmark2Ic = SvgIcons.Checkmark2Ic
-import Puro = TypeUtils.Puro
+import Puro = TypeU.Puro
 
 
 

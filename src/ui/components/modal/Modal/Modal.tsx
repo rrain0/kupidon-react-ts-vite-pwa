@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
+import PartialUndef = TypeU.PartialUndef
 
 
 

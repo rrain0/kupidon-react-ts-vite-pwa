@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
 
 
 

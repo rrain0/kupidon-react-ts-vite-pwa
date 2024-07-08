@@ -1,5 +1,5 @@
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import exists = TypeUtils.exists
+import { TypeU } from 'src/util/common/TypeU.ts'
+import exists = TypeU.exists
 
 
 

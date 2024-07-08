@@ -1,4 +1,4 @@
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import React from 'react'
 import { ModalElement } from 'src/ui/widgets/modal-element/ModalElement.tsx'
@@ -12,8 +12,8 @@ import Card2 from 'src/ui/elements/cards/Card2.tsx'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
-import Callback = TypeUtils.Callback
-import PartialUndef = TypeUtils.PartialUndef
+import Callback = TypeU.Callback
+import PartialUndef = TypeU.PartialUndef
 
 
 

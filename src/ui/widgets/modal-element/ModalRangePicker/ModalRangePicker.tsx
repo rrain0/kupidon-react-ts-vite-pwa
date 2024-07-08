@@ -1,18 +1,18 @@
 import styled from '@emotion/styled'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import RangePicker from 'src/ui/widgets/RangePicker/RangePicker.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import Callback = TypeUtils.Callback
+import { RangeU } from 'src/util/common/RangeU'
+import Callback = TypeU.Callback
 import col = EmotionCommon.col
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import NumRange = TypeUtils.NumRange
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import NumRange = RangeU.NumRange
 import Txt = EmotionCommon.Txt
-import PartialUndef = TypeUtils.PartialUndef
-
+import PartialUndef = TypeU.PartialUndef
 
 
 
@@ -34,7 +34,7 @@ export type ModalRangePickerProps = {
 
 const ModalRangePicker =
 React.memo(
-(props: ModalRangePickerProps)=>{
+(props: ModalRangePickerProps) => {
   const {
     isOpen, close,
     title, text,

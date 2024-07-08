@@ -19,7 +19,7 @@ import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
@@ -31,7 +31,7 @@ import GearIc = SvgIcons.GearIc
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 
 
 

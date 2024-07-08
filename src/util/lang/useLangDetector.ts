@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import NonEmptyArr = ArrayUtils.NonEmptyArr
+import { ArrayU } from 'src/util/common/ArrayU.ts'
+import NonEmptyArr = ArrayU.NonEmptyArr
 
 
 

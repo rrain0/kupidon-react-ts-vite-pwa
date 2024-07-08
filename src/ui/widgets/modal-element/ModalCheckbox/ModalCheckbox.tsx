@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.tsx'
@@ -11,9 +11,9 @@ import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetD
 import CheckboxInputGroup from 'src/ui/elements/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
 import { Option } from 'src/ui/model/Option.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 import col = EmotionCommon.col
-import Callback1 = TypeUtils.Callback1
+import Callback1 = TypeU.Callback1
 import row = EmotionCommon.row
 
 
@@ -89,6 +89,7 @@ export default React.memo(ModalCheckbox) as typeof ModalCheckbox
 
 const selectItemsContainer = css`
   ${col};
+  gap: 10px;
   padding-bottom: 20px;
 `
 

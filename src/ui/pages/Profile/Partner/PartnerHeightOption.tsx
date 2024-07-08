@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { RangeU } from 'src/util/common/RangeU'
+import { ReactU } from 'src/util/common/ReactU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useStateSync2 } from '@util/react/useStateSync2.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import numeral from 'numeral'
@@ -20,10 +21,9 @@ import { useUiValues } from '@util/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/widgets/modal-element/ModalRangePicker/ModalRangePicker.tsx'
 import RulerVerticalGradIc = SvgGradIcons.RulerVerticalGradIc
 import UserValues = ProfilePageValidation.UserValues
-import NumRangeNullable = TypeUtils.NumRangeNullable
-import NumRange = TypeUtils.NumRange
+import NumRangeNullable = RangeU.NumRangeNullable
+import NumRange = RangeU.NumRange
 import rowWrap = EmotionCommon.rowWrap
-
 
 
 
@@ -77,11 +77,11 @@ React.memo(
   useStateSync2(
     heightRange, widgetRange,
     setHeightRange, setWidgetRange,
-    (w, h) => ReactUtils.arrMerge(
+    (w, h) => ReactU.arrMerge(
       h, w,
       mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
     ),
-    (h, w) => ReactUtils.arrMerge(
+    (h, w) => ReactU.arrMerge(
       w, h,
       mapHeightRangeToWidgetRange(h), mapWidgetRangeToHeightRange(w)
     )
@@ -126,7 +126,7 @@ React.memo(
     >
       <div css={tilesGrid}>
         {tilesHeightValues.map(it=><Button
-          css={ArrayUtils.eq(heightRange, it) ? activeBtn : inactiveBtn}
+          css={ArrayU.eq(heightRange, it) ? activeBtn : inactiveBtn}
           key={it.join(' ')}
           onClick={()=>setHeightRange(it)}
         >

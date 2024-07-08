@@ -2,13 +2,13 @@ import { useLayoutEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { LangSettingsRecoil, } from 'src/recoil/state/LangSettingsRecoil.ts'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
+import { ArrayU } from 'src/util/common/ArrayU.ts'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { Lang } from 'src/util/lang/Lang.ts'
 import { useLangDetector } from 'src/util/lang/useLangDetector.ts'
 import * as lo from 'lodash'
-import arrIsNonEmpty = ArrayUtils.arrIsNonEmpty
-import destructCopyBy = ObjectUtils.destructCopyBy
+import arrIsNonEmpty = ArrayU.arrIsNonEmpty
+import destructCopyBy = ObjectU.destructCopyBy
 
 
 

@@ -5,10 +5,10 @@ import styled from '@emotion/styled'
 import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState, useTabs } from 'src/ui/components/Tabs/useTabs.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import Setter = TypeUtils.Setter
+import PartialUndef = TypeU.PartialUndef
+import Setter = TypeU.Setter
 import row = EmotionCommon.row
 import contents = EmotionCommon.contents
 

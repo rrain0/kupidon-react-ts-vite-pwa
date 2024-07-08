@@ -1,11 +1,11 @@
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import BottomSheetDialog, { BottomSheetOptionsProps } from 'src/ui/widgets/BottomSheet/BottomSheetDialog.tsx'
 import { css } from '@emotion/react'
 import { BottomSheetBasicParts } from 'src/ui/widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import PartialUndef = TypeUtils.PartialUndef
+import PartialUndef = TypeU.PartialUndef
 
 
 

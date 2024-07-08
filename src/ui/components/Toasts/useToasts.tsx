@@ -1,13 +1,13 @@
 import { useUiValue } from '@util/ui-text/useUiText.ts'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { UiText } from '@util/ui-text/UiText.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { ToastBody, ToastType } from 'src/ui/components/Toasts/ToastBody.tsx'
-import falsy = TypeUtils.falsy
-import PartialUndef = TypeUtils.PartialUndef
-import Callback1 = TypeUtils.Callback1
+import falsy = TypeU.falsy
+import PartialUndef = TypeU.PartialUndef
+import Callback1 = TypeU.Callback1
 
 
 

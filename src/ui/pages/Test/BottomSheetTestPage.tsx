@@ -9,7 +9,7 @@ import {
 } from 'src/ui/widgets/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Utils } from 'src/util/common/Utils.ts'
@@ -19,7 +19,7 @@ import intOrDefault = Utils.nonNegIntOrDefault;
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
-import Setter = TypeUtils.Callback1
+import Setter = TypeU.Callback1
 
 
 

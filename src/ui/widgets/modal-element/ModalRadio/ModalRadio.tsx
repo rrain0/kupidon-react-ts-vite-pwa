@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -9,10 +9,10 @@ import RadioInputGroup from 'src/ui/elements/inputs/RadioInputGroup/RadioInputGr
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
 import { Option } from 'src/ui/model/Option.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 import col = EmotionCommon.col
-import Callback1 = TypeUtils.Callback1
-import PartialUndef = TypeUtils.PartialUndef
+import Callback1 = TypeU.Callback1
+import PartialUndef = TypeU.PartialUndef
 
 
 

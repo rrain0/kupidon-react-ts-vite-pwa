@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import falsyToUndef = TypeUtils.falsyToUndef
-import exists = TypeUtils.exists
+import { TypeU } from '@util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
+import falsyToUndef = TypeU.falsyToUndef
+import exists = TypeU.exists
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 
 

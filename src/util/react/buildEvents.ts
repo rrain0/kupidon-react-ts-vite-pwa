@@ -1,6 +1,6 @@
-import { ObjectUtils } from 'src/util/common/ObjectUtils'
-import ObjectValuesType = ObjectUtils.ObjectValuesType
-import ObjectKeysType = ObjectUtils.ObjectKeysType
+import { ObjectU } from 'src/util/common/ObjectU'
+import ObjectValuesType = ObjectU.ObjectValuesType
+import ObjectKeysType = ObjectU.ObjectKeysType
 
 
 
@@ -22,33 +22,32 @@ type AllEvents<El extends Element> = ObjectValuesType<EventNameToType<El>>
 
 
 
-
 export class EventBuilder<E extends AllEventNames<El>, El extends Element> {
   private currEventNames: E[] = []
-  private eventsMap!: Map<AllEventNames<El>,((ev: AllEvents<El>)=>void)[]>
+  private eventsMap!: Map<AllEventNames<El>, ((ev: AllEvents<El>)=>void)[]>
   
   
   events
   <Names extends AllEventNames<El>>
-  (...events: Names[]){
+  (...events: Names[]) {
     const builder = new EventBuilder<Names, El>()
     builder.currEventNames = events
     builder.eventsMap = this.eventsMap
     return builder
   }
-  handlers(...handlers: ((ev: EventNameToType<El>[E])=>void)[]){
+  handlers(...handlers: ((ev: EventNameToType<El>[E])=>void)[]) {
     this.eventsMap ??= new Map()
-    this.currEventNames.forEach(name=>{
-      if (!this.eventsMap.has(name)) this.eventsMap.set(name,[])
+    this.currEventNames.forEach(name => {
+      if (!this.eventsMap.has(name)) this.eventsMap.set(name, [])
       this.eventsMap.get(name)!.push(...handlers as any)
     })
     return this
   }
-  build(){
+  build() {
     return [...this.eventsMap.entries()].reduce(
-      (acc,[evName,evHandlers])=>{
-        acc[evName] = (ev: any)=>{
-          evHandlers.forEach(handler=>handler(ev))
+      (acc, [evName, evHandlers]) => {
+        acc[evName] = (ev: any) => {
+          evHandlers.forEach(handler => handler(ev))
         }
         return acc
       },
@@ -59,7 +58,7 @@ export class EventBuilder<E extends AllEventNames<El>, El extends Element> {
 
 
 
-export const eventBuilder = <El extends Element>()=>new EventBuilder<any,El>()
+export const eventBuilder = <El extends Element>() => new EventBuilder<any, El>()
 
 
 

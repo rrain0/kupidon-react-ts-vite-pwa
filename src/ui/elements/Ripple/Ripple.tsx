@@ -1,23 +1,22 @@
-import { ReactUtils } from '@util/common/ReactUtils.ts'
-import { useElemRef } from '@util/react/useElemRef.ts'
+import { ReactU } from 'src/util/common/ReactU.ts'
+import { useElemRef } from 'src/util/react-ref/useElemRef.ts'
 import clsx from 'clsx'
 import React, {
   useCallback, useEffect,
 } from 'react'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import css from 'src/ui/elements/Ripple/Ripple.module.scss'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import empty = TypeUtils.empty
+import { TypeU } from '@util/common/TypeU.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
-import Puro = TypeUtils.Puro
-import ClassStyleProps = ReactUtils.ClassStyleProps
+import Puro = TypeU.Puro
+import ClassStyleProps = ReactU.ClassStyleProps
 
 
 
 type CursorInfo = {
   clientX: number
   clientY: number
-  pointerId?: number|empty
+  pointerId?: number | undefined
 }
 
 
@@ -37,7 +36,7 @@ const Ripple =
 React.memo(
 (props: RippleProps) => {
   
-  let {
+  const {
     rippleDuration,
     mode,
     rippleColor,
@@ -46,8 +45,8 @@ React.memo(
     ...restProps
   } = props
   
-  const [getFrame, frameRef] = useElemRef<HTMLDivElement>()
-  const [getRipple, rippleRef] = useElemRef<HTMLDivElement>()
+  const [frameRef, getFrame] = useElemRef<HTMLDivElement>()
+  const [rippleRef, getRipple] = useElemRef<HTMLDivElement>()
   const getTargetElement = () => props.targetElement?.current
   
   
@@ -61,7 +60,7 @@ React.memo(
     if (frame && ripple) {
       ripple.classList.remove(css.rippleShow, css.rippleHide)
       
-      const mode = function(){
+      const mode = function() {
         const modes: RippleMode[] = ['center', 'cursor']
         let mode: any = getElemProps(frame)
           .cssPropValue(RippleStyle.W.e.frame.e.p.mode.name)
@@ -80,34 +79,34 @@ React.memo(
         w: dimens.width,
         h: dimens.height,
       }
-      const d = function(){
-        switch (mode){
+      const d = function() {
+        switch (mode) {
           case 'cursor': return {
-            toTop: ev!.clientY-el.clientY,
-            toRight: el.w-(ev!.clientX-el.clientX),
-            toBottom: el.h-(ev!.clientY-el.clientY),
-            toLeft: ev!.clientX-el.clientX
+            toTop: ev!.clientY - el.clientY,
+            toRight: el.w - (ev!.clientX - el.clientX),
+            toBottom: el.h - (ev!.clientY - el.clientY),
+            toLeft: ev!.clientX - el.clientX,
           }
           case 'center': default: return {
-            toTop: el.h/2,
-            toRight: el.w/2,
-            toBottom: el.h/2,
-            toLeft: el.w/2,
+            toTop: el.h / 2,
+            toRight: el.w / 2,
+            toBottom: el.h / 2,
+            toLeft: el.w / 2,
           }
         }
       }()
       const dxd = {
-        toTop: d.toTop*d.toTop,
-        toRight: d.toRight*d.toRight,
-        toBottom: d.toBottom*d.toBottom,
-        toLeft: d.toLeft*d.toLeft,
+        toTop: d.toTop * d.toTop,
+        toRight: d.toRight * d.toRight,
+        toBottom: d.toBottom * d.toBottom,
+        toLeft: d.toLeft * d.toLeft,
       }
-      const rippleProps = function(){
+      const rippleProps = function() {
         const radius = Math.max(
-          Math.sqrt(dxd.toTop+dxd.toLeft), // расстояние от точки касания до левого верхнего угла
-          Math.sqrt(dxd.toTop+dxd.toRight), // расстояние от точки касания до правого верхнего угла
-          Math.sqrt(dxd.toBottom+dxd.toRight), // расстояние от точки касания до правого нижнего угла
-          Math.sqrt(dxd.toBottom+dxd.toLeft), // расстояние от точки касания до левого нижнего угла
+          Math.sqrt(dxd.toTop + dxd.toLeft), // расстояние от точки касания до левого верхнего угла
+          Math.sqrt(dxd.toTop + dxd.toRight), // расстояние от точки касания до правого верхнего угла
+          Math.sqrt(dxd.toBottom + dxd.toRight), // расстояние от точки касания до правого нижнего угла
+          Math.sqrt(dxd.toBottom + dxd.toLeft), // расстояние от точки касания до левого нижнего угла
         )
         return {
           radius: radius,
@@ -129,16 +128,16 @@ React.memo(
       props.rippleColor && style.setProperty(RippleStyle.W.e.frame.e.p.color.name, props.rippleColor)
       style.setProperty(
         '--ripple-animation-duration',
-        Math.max(400, dur * rippleProps.radius/200) + 'ms'
+        Math.max(400, dur * rippleProps.radius / 200) + 'ms'
       )
       style.setProperty(
         '--dissolve-animation-duration',
-        Math.max(500, (dur+100) * rippleProps.radius/200) + 'ms'
+        Math.max(500, (dur + 100) * rippleProps.radius / 200) + 'ms'
       )
-      style.setProperty('--ripple-top', rippleProps.top+'px')
-      style.setProperty('--ripple-left', rippleProps.left+'px')
-      style.setProperty('--ripple-w', rippleProps.radius*2+'px')
-      style.setProperty('--ripple-h', rippleProps.radius*2+'px')
+      style.setProperty('--ripple-top', rippleProps.top + 'px')
+      style.setProperty('--ripple-left', rippleProps.left + 'px')
+      style.setProperty('--ripple-w', rippleProps.radius * 2 + 'px')
+      style.setProperty('--ripple-h', rippleProps.radius * 2 + 'px')
       
       ripple.classList.add(css.rippleShow)
     }

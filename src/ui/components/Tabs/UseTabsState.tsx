@@ -1,11 +1,11 @@
 import { useStateSync } from '@util/react/useStateSync.ts'
 import React, { useEffect, useMemo } from 'react'
 import { useRef, useState } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import Setter = TypeUtils.Setter
+import PartialUndef = TypeU.PartialUndef
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import Setter = TypeU.Setter
 
 
 

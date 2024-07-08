@@ -3,8 +3,8 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
 import col = EmotionCommon.col
 
 

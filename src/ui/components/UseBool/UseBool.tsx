@@ -1,10 +1,10 @@
 import React from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react/useBool.ts'
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import PartialUndef = TypeUtils.PartialUndef
-import ValueOrGenerator = TypeUtils.ValueOrGenerator
-import Callback = TypeUtils.Callback
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import PartialUndef = TypeU.PartialUndef
+import ValueOrGenerator = TypeU.ValueOrGenerator
+import Callback = TypeU.Callback
 
 
 

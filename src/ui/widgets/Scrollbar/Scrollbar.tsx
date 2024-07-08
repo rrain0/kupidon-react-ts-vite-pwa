@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, {
   useCallback, useEffect,
@@ -9,17 +8,15 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { useNoSelect } from '@util/react/useNoSelect.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { RangeU } from 'src/util/common/RangeU'
+import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
 import { ScrollbarStyle } from 'src/ui/widgets/Scrollbar/ScrollbarStyle.ts'
-import inRange = MathUtils.inRange0
-import fitRange = MathUtils.fitRange
 import { ScrollProps } from 'src/ui/widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
-import PartialUndef = TypeUtils.PartialUndef
-import trueOrUndef = TypeUtils.trueOrUndef
+import PartialUndef = TypeU.PartialUndef
+import trueOrUndef = TypeU.trueOrUndef
 
 
 
@@ -163,13 +160,13 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
               }
             }
           }()
-          if (inRange(p.start, p.client, p.end))
+          if (RangeU.has(p.start, [p.client, p.end]))
             return { client: p.client, scrollProgress: p.scroll / p.scrollMax }
           else {
             let newScroll = toScrollScale(p.client - p.size/2 - p.trackStart)
-            newScroll = fitRange(0, newScroll, p.scrollMax)
-            const newScrollProgress = fitRange(0, newScroll / p.scrollMax, 1)
-            switch (direction){
+            newScroll = RangeU.clamp(0, [newScroll, p.scrollMax])
+            const newScrollProgress = RangeU.clamp(0, [newScroll / p.scrollMax, 1])
+            switch (direction) {
               case 'vertical': setContainerScroll({ top: newScroll }); break
               case 'horizontal': setContainerScroll({ left: newScroll }); break
             }
@@ -189,9 +186,9 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   
   // Using css 'touch-action: none;' to prevent browser gesture handling on mobile devices
   const onPointerMove = useCallback(
-    (ev: PointerEvent)=>{
-      if (dragStart && ev.buttons===1){
-        const p = function(){
+    (ev: PointerEvent) => {
+      if (dragStart && ev.buttons === 1) {
+        const p = function() {
           switch (direction) {
             case 'vertical': return {
               client: ev.clientY,
@@ -205,9 +202,9 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
         }()
         const addTrack = p.client-dragStart.client
         let newScroll = dragStart.scrollProgress * p.scrollMax + toScrollScale(addTrack)
-        newScroll = fitRange(0, newScroll, p.scrollMax)
+        newScroll = RangeU.clamp(0, [newScroll, p.scrollMax])
         
-        switch (direction){
+        switch (direction) {
           case 'vertical': setContainerScroll({ top: newScroll }); break
           case 'horizontal': setContainerScroll({ left: newScroll }); break
         }
@@ -217,7 +214,7 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   )
   
   const onPointerEnd = useCallback(
-    (ev: PointerEvent)=>{
+    (ev: PointerEvent) => {
       setDragStart(undefined)
     },
     []
@@ -229,19 +226,19 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   
   
   useEffect(
-    ()=>{
+    () => {
       const track = trackRef.current
-      if (track){
-        track.addEventListener('pointerdown',onPointerDown)
-        track.addEventListener('pointermove',onPointerMove)
-        track.addEventListener('pointerup',onPointerEnd)
-        track.addEventListener('pointercancel',onPointerEnd)
+      if (track) {
+        track.addEventListener('pointerdown', onPointerDown)
+        track.addEventListener('pointermove', onPointerMove)
+        track.addEventListener('pointerup', onPointerEnd)
+        track.addEventListener('pointercancel', onPointerEnd)
         
-        return ()=>{
-          track.removeEventListener('pointerdown',onPointerDown)
-          track.removeEventListener('pointermove',onPointerMove)
-          track.removeEventListener('pointerup',onPointerEnd)
-          track.removeEventListener('pointercancel',onPointerEnd)
+        return () => {
+          track.removeEventListener('pointerdown', onPointerDown)
+          track.removeEventListener('pointermove', onPointerMove)
+          track.removeEventListener('pointerup', onPointerEnd)
+          track.removeEventListener('pointercancel', onPointerEnd)
         }
       }
     },

@@ -2,14 +2,15 @@ import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { StyleConstants } from 'src/ui-props/styles/StyleConstants.ts'
 import {
   CheckboxInputGroupStyle,
 } from 'src/ui/elements/inputs/CheckboxInputGroup/CheckboxInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
-import PartialUndef = TypeUtils.PartialUndef
-import trueOrUndef = TypeUtils.trueOrUndef
+import PartialUndef = TypeU.PartialUndef
+import trueOrUndef = TypeU.trueOrUndef
 
 
 
@@ -69,6 +70,7 @@ export default CheckboxInputGroup
 const radioGroupStyle = css`
   ${reset};
   position: relative;
+  gap: ${StyleConstants.itemListGap};
 `
 
 

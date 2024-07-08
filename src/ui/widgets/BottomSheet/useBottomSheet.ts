@@ -7,30 +7,26 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayUtils } from '@util/common/ArrayUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { ElemProps } from '@util/element/ElemProps.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
-import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { CssUtils } from '@util/common/CssUtils.ts'
-import parseCssValue = CssUtils.parseCssStringValue
-import CssValue = CssUtils.CssValue
-import PartialUndef = TypeUtils.PartialUndef
-import { useStateAndRef } from '@util/react/useStateAndRef.ts'
-import Setter = TypeUtils.Setter
-import findLastBy3 = ArrayUtils.findLastBy3
-import exists = TypeUtils.exists
-import findBy3 = ArrayUtils.findBy3
-import fitRange = MathUtils.fitRange
-import Callback = TypeUtils.Callback
-import lastIndex = ArrayUtils.lastIndex
-import findLastBy = ArrayUtils.findLastBy
-import findBy = ArrayUtils.findBy
-import inRange2 = MathUtils.inRange
-import notExists = TypeUtils.notExists
-
-
+import { RangeU } from 'src/util/common/RangeU'
+import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import { CssParserU } from 'src/util/css/CssParserU.ts'
+import parseCssValue = CssParserU.parseCssStringValue
+import CssValue = CssParserU.CssValue
+import PartialUndef = TypeU.PartialUndef
+import { useStateAndRef } from 'src/util/react-ref/useStateAndRef.ts'
+import Setter = TypeU.Setter
+import findLastBy3 = ArrayU.findLastBy3
+import exists = TypeU.exists
+import findBy3 = ArrayU.findBy3
+import Callback = TypeU.Callback
+import lastIndex = ArrayU.lastIndex
+import findLastBy = ArrayU.findLastBy
+import findBy = ArrayU.findBy
+import notExists = TypeU.notExists
 
 
 
@@ -114,10 +110,10 @@ export const useBottomSheet = (
   bottomSheetContentRef: React.RefObject<HTMLElement>,
   options: UseBottomSheetOptions,
 ) => {
-  const getFrame = ()=>bottomSheetFrameRef.current
-  const getSheet = ()=>bottomSheetRef.current
-  const getHeader = ()=>bottomSheetHeaderRef.current
-  const getContent = ()=>bottomSheetContentRef.current
+  const getFrame = () => bottomSheetFrameRef.current
+  const getSheet = () => bottomSheetRef.current
+  const getHeader = () => bottomSheetHeaderRef.current
+  const getContent = () => bottomSheetContentRef.current
   
   const [isReady, setIsReady] = useState(false)
   
@@ -159,19 +155,19 @@ export const useBottomSheet = (
   
   
   useEffect(
-    ()=>{
+    () => {
       const frame = getFrame()
       const sheet = getSheet()
       const header = getHeader()
       const content = getContent()
       updateComputedSheetDimens()
       if (frame || sheet || header || content){
-        const resizeObserver = new ResizeObserver(()=>updateComputedSheetDimens())
+        const resizeObserver = new ResizeObserver(() => updateComputedSheetDimens())
         frame && resizeObserver.observe(frame)
         sheet && resizeObserver.observe(sheet)
         header && resizeObserver.observe(header)
         content && resizeObserver.observe(content)
-        return ()=>resizeObserver.disconnect()
+        return () => resizeObserver.disconnect()
       }
     },
     [
@@ -183,35 +179,35 @@ export const useBottomSheet = (
   
   
   // non-zero len
-  const snapPoints = useMemo<(number|string)[]>(()=>{
+  const snapPoints = useMemo<Array<number | string>>(() => {
     if (options.snapPoints?.length) return options.snapPoints
     return DefaultSheetSnaps
   }, [...(options.snapPoints??[])])
   
   // non-zero len
-  const snapPointsPx = useMemo<number[]>(()=>{
+  const snapPointsPx = useMemo<number[]>(() => {
     const snapPointsPx = calculateSnapPointsPx(snapPoints, computedSheetDimens)
-    if (isReady && snapPointsPx.every(elem=>elem===0))
+    if (isReady && snapPointsPx.every(elem => elem === 0))
       console.warn(
-        "Every calculated snap point equals 0, bottom sheet cannot be opened."
+        'Every calculated snap point equals 0, bottom sheet cannot be opened.'
       )
     return snapPointsPx
   }, [computedSheetDimens, ...snapPoints])
   
   // if sheet can be opened, then realFirstOpenIdx!==null
-  const realFirstOpenIdx = useMemo<number|null>(()=>{
-    const f = findBy(snapPointsPx, elem=>elem>0)
+  const realFirstOpenIdx = useMemo<number|null>(() => {
+    const f = findBy(snapPointsPx, elem => elem > 0)
     if (!f.isFound) return null
     return f.index
   }, [snapPointsPx])
   
   // default open idx, if sheet can be opened, then openIdx!==null
-  const realDefaultOpenIdx = useMemo<number|null>(()=>{
+  const realDefaultOpenIdx = useMemo<number|null>(() => {
     if (realFirstOpenIdx===null) return null
     
     const idx = options.defaultOpenIdx ?? null
     
-    if (idx!==null) return fitRange(
+    if (idx !== null) return RangeU.clamp(
       idx, [realFirstOpenIdx, lastIndex(snapPointsPx)]
     )
     
@@ -221,8 +217,8 @@ export const useBottomSheet = (
   }, [realFirstOpenIdx, options.defaultOpenIdx, snapPointsPx])
   
   // if there is snap point evaluated to 0, then closeIdx!==null
-  const closeIdx = useMemo<number|null>(()=>{
-    const f = findBy(snapPointsPx, elem=>elem===0)
+  const closeIdx = useMemo<number | null>(() => {
+    const f = findBy(snapPointsPx, elem => elem === 0)
     if (!f.isFound) return null
     return f.index
   }, [snapPointsPx])
@@ -327,7 +323,7 @@ export const useBottomSheet = (
         if (newState==='adjusting')
           return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
         if (newSnapIdx===null) return null
-        return fitRange(newSnapIdx, [0,lastIndex(snapPointsPx)])
+        return RangeU.clamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
       }()
       
       const toHeight = function(){
@@ -369,24 +365,24 @@ export const useBottomSheet = (
         if (!canClose) return false
         if (!canOpen) return true
         if (newState==='adjusting') return toHeight===0
-        return (['closed','closing'] as SheetState[]).includes(newState)
+        return (['closed', 'closing'] as SheetState[]).includes(newState)
       }()
       
       const toDragging = newState==='dragging'
       const toAnimated =
-        (['closing','snapping','opening','adjusting'] as SheetState[]).includes(newState)
-      const lastSpeed = function(){
+        (['closing', 'snapping', 'opening', 'adjusting'] as SheetState[]).includes(newState)
+      const lastSpeed = function() {
         if (currState!=='dragging') return null
         return dragStartRef.current.lastSpeed
       }()
-      const toFreeHeight = function(){
+      const toFreeHeight = function() {
         if (notExists(toOpenSnap)) return false
         if (snapPoints[toOpenSnap]!=='free') return false
-        return inRange2(
+        return RangeU.has(
           sheetSpring.height.get(),
           [
             snapPointsPx[toOpenSnap],
-            snapPointsPx[toOpenSnap+1]??Number.POSITIVE_INFINITY
+            snapPointsPx[toOpenSnap+1]??Number.POSITIVE_INFINITY,
           ]
         )
       }()
@@ -480,7 +476,7 @@ export const useBottomSheet = (
   // to prevent browser gesture handling
   // noinspection JSVoidFunctionReturnValueUsed
   const sheetDrag = useDrag(
-    gesture=>{
+    gesture => {
       const {
         first, active, last,
         movement: [mx,my],
@@ -612,16 +608,14 @@ function calculateSnapPointsPx(
             case 'px':
             case '':
             case undefined:
-              return fitRange(
-                0,
-                +cssValue.value,
-                computedSheetDimens.frameH,
-              )
+              return RangeU.clamp(0, [+cssValue.value, computedSheetDimens.frameH])
             case '%':
-              return fitRange(
+              return RangeU.clamp(
                 0,
-                Math.round(+cssValue.value / 100 * computedSheetDimens.frameH),
-                computedSheetDimens.frameH,
+                [
+                  Math.round(+cssValue.value / 100 * computedSheetDimens.frameH),
+                  computedSheetDimens.frameH,
+                ],
               )
             default:
               cssValueParsingError(snapPoints[cssValueI], cssValue)
@@ -632,17 +626,17 @@ function calculateSnapPointsPx(
       
       const left = findLastBy3({
         arr: snapPointsPx,
-        filter: elem=>exists(elem),
+        filter: elem => exists(elem),
         startIdx: cssValueI-1,
         orElse: Number.NEGATIVE_INFINITY,
       }).elem as number
       const right = findBy3({
         arr: snapPointsPx,
-        filter: elem=>exists(elem),
+        filter: elem => exists(elem),
         startIdx: cssValueI+1,
         orElse: Number.POSITIVE_INFINITY,
       }).elem as number
-      computed = fitRange(computed,[left,right])
+      computed = RangeU.clamp(computed, [left, right])
       
       snapPointsPx[cssValueI] = computed
     })
@@ -676,7 +670,7 @@ function cssValueParsingError(raw: string|number, parsed: CssValue|undefined): n
 function getSnapIndexToAdjust
 (height: number, snapPoints: (number|string)[], snapPointsPx: number[]): number {
   //if (!snapPointsPx.length) return null
-  const snapStart = findLastBy(snapPointsPx, elem=>height>=elem).index
+  const snapStart = findLastBy(snapPointsPx, elem => height >= elem).index
   
   if (snapPoints[snapStart]==='free') return snapStart
   //if (height===snapPointsPx[snapStart]) return null

@@ -1,6 +1,6 @@
-import { useBrowserMinimumVersion } from 'src/util/react/useBrowserMinimumVersion.ts'
+import { useBrowserMinimumVersion } from 'src/util/app/useBrowserMinimumVersion.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
-import { useMedia } from 'src/util/react/media/useMedia.ts'
+import { useMedia } from 'src/util/css/media/useMedia.ts'
 import ThemeType = AppTheme.Type
 
 

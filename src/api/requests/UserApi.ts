@@ -2,9 +2,9 @@ import { AxiosRequestConfig } from 'axios'
 import { ApiUtils } from 'src/api/ApiUtils'
 import { CurrentUser } from 'src/api/model/CurrentUser'
 import { Gender } from 'src/api/model/Gender.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils'
+import { TypeU } from '@util/common/TypeU.ts'
 import { DataUrl } from '@util/DataUrl.ts'
-import { FileUtils } from 'src/util/file/FileUtils'
+import { FileU } from 'src/util/file/FileU'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiRoutes as r } from 'src/api/ApiRoutes'
 import axAccess = AxiosConfig.axAccess
@@ -14,10 +14,10 @@ import TechnicalError = ApiUtils.TechnicalError
 import handleAuthenticatedResponse = ApiUtils.handleAuthenticatedResponse
 import AuthenticationError = ApiUtils.AuthenticationError
 import NoUserResponseError = ApiUtils.NoUserResponseError
-import PartialUndef = TypeUtils.PartialUndef
-import fetchToBlob = FileUtils.fetchToBlob
-import Callback1 = TypeUtils.Callback1
-import exists = TypeUtils.exists
+import PartialUndef = TypeU.PartialUndef
+import fetchToBlob = FileU.fetchToBlob
+import Callback1 = TypeU.Callback1
+import exists = TypeU.exists
 
 
 

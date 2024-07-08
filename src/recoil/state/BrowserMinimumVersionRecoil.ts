@@ -1,4 +1,4 @@
-import { BrowserFeatures, BrowserVersions } from '@util/react/useBrowserMinimumVersion.ts'
+import { BrowserFeatures, BrowserVersions } from 'src/util/app/useBrowserMinimumVersion.ts'
 import { atom } from 'recoil'
 
 

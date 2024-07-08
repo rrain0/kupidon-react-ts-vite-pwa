@@ -3,10 +3,10 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { themeByName } from 'src/ui-props/themes/ThemeCollection.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
-import { useBrowserMinimumVersion } from 'src/util/react/useBrowserMinimumVersion.ts'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { useBrowserMinimumVersion } from 'src/util/app/useBrowserMinimumVersion.ts'
 import { useThemeDetector } from 'src/util/theme/useThemeDetector.ts'
-import destructCopyBy = ObjectUtils.destructCopyBy
+import destructCopyBy = ObjectU.destructCopyBy
 
 
 

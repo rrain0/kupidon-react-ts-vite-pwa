@@ -2,6 +2,6 @@ import { DOMHandlers } from '@use-gesture/core/types'
 import React from 'react'
 
 export type ReactDOMAttributes = {
-  // @ts-ignore
+  // @ts-expect-error
   [Key in keyof DOMHandlers]: React.DOMAttributes<EventTarget>[Key]
 }

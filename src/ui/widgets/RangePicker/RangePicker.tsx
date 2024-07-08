@@ -2,25 +2,21 @@ import { css } from '@emotion/react'
 import { animated, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
-import { useAsRef2 } from '@util/react/useAsRef2.ts'
+import { RangeU } from 'src/util/common/RangeU'
+import { useAsRefGetSet } from 'src/util/react-ref/useAsRefGetSet.ts'
 import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
-import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { useRef2 } from '@util/react/useRef2.ts'
+import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import { useRefGetSet } from 'src/util/react-ref/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import fitRange = MathUtils.fitRange
-import mapRange = MathUtils.mapRange
-import Mapper = TypeUtils.Mapper
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import NumRange = TypeUtils.NumRange
-import mapFitRange = MathUtils.mapFitRange
-import zeroBasedRange = MathUtils.zeroBasedRange
-
+import PartialUndef = TypeU.PartialUndef
+import Mapper = TypeU.Mapper
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import NumRange = RangeU.NumRange
+import zeroBasedRange = RangeU.zeroBasedRange
 
 
 
@@ -81,7 +77,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   } = props
   
   const trackRef = useRef<RangePickerRefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>trackRef.current!,[])
+  useImperativeHandle(forwardedRef, () => trackRef.current!, [])
   
   const getTrackDimens = () => {
     const trackProps = {
@@ -100,26 +96,26 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   const [prevMinMax, setPrevMinMax] = useState(outerMinMax)
   const [prevRange, setPrevRange] = useState(outerRange)
   
-  const getMinMax = useAsRef2(outerMinMax)
+  const getMinMax = useAsRefGetSet(outerMinMax)
   
   const [isDragging, setIsDragging] = useState(false)
-  const [getActiveTip, setActiveTip] = useRef2(null as 'left' | 'right' | null)
+  const [getActiveTip, setActiveTip] = useRefGetSet(null as 'left' | 'right' | null)
   // % of bar handle values width
-  const [getStartProgress, setStartProgress] = useRef2(0)
-  const [getCurrProgress, setCurrProgress] = useRef2(0)
+  const [getStartProgress, setStartProgress] = useRefGetSet(0)
+  const [getCurrProgress, setCurrProgress] = useRefGetSet(0)
   // todo add px distance between start & curr progress
   
-  const [getProgressRange, setProgressRange] = useRef2<NumRange>(
+  const [getProgressRange, setProgressRange] = useRefGetSet<NumRange>(
     rangeToProgress(outerRange, outerMinMax)
   )
   
   
   
-  const [barSpring, barSpringApi] = useSpring(()=>({
+  const [barSpring, barSpringApi] = useSpring(() => ({
     left: '0%',
     right: '0%',
   }))
-  useLayoutEffect(()=>{
+  useLayoutEffect(() => {
     const trackW = getTrackDimens().width
     //console.log('trackW', trackW)
     const uiPercent = progressToUiPercent(getProgressRange(), trackW)
@@ -129,7 +125,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     })
   }, [])
   
-  const [getRange, setRange] = useRef2<NumRange>(outerRange)
+  const [getRange, setRange] = useRefGetSet<NumRange>(outerRange)
   const setAllRanges = (range: NumRange) => {
     setRange(range)
     setPrevRange(range)
@@ -167,17 +163,17 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
       const minMax = getMinMax()
       const { vpx: trackX, width: trackW } = getTrackDimens()
       
-      const dPxToDProgress = (dPx: number) => mapRange(
+      const dPxToDProgress = (dPx: number) => RangeU.map(
         dPx,
         [0, (trackW - 2*tipWidth)],
         [0, 100]
       )
-      const dProgressToDValue = (dProgress: number) => mapRange(
+      const dProgressToDValue = (dProgress: number) => RangeU.map(
         dProgress,
         [0, 100],
         zeroBasedRange(minMax)
       )
-      const progressToValue = (progress: number) => fitRange(
+      const progressToValue = (progress: number) => RangeU.clamp(
         minMax[0] + dProgressToDValue(progress),
         minMax
       )
@@ -252,7 +248,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
         setIsDragging(false)
       }
     }
-  ) as ()=>ReactDOMAttributes
+  ) as () => ReactDOMAttributes
   
   
   
@@ -266,7 +262,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   
   
   const trackProps = {
-    className: clsx(className, /* ScrollbarVerticalStyle.El.track.name */),
+    className: clsx(className /* ScrollbarVerticalStyle.El.track.name */),
     /* [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging), */
     ...restProps,
     ref: trackRef,
@@ -281,7 +277,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     ref={trackRef}
   >
     <animated.div css={bar}
-      style={{...barSpring}}
+      style={{ ...barSpring }}
     >
       <div css={leftHandle}/>
       <div css={rightHandle}/>
@@ -335,24 +331,24 @@ const rightHandle = (t: AppTheme.Theme) => css`
 
 
 const progressToUiPercent = (progress: NumRange, trackW: number): NumRange => [
-  mapRange(
+  RangeU.map(
     progress[0],
     [0, 100],
     [0, 100 * (trackW - 2*tipWidth) / trackW ]
   ),
-  100 - mapRange(
+  100 - RangeU.map(
     progress[1],
     [0, 100],
     [100 * 2*tipWidth / trackW, 100]
-  )
+  ),
 ]
 
 
 const rangeToProgress = (range: NumRange, minMax: NumRange): NumRange => {
-  const progressLeft = mapFitRange(
+  const progressLeft = RangeU.mapClamp(
     range[0], minMax, [0, 100]
   )
-  const progressRight = mapFitRange(
+  const progressRight = RangeU.mapClamp(
     range[1], minMax, [0, 100], [progressLeft, 100]
   )
   return [progressLeft, progressRight]

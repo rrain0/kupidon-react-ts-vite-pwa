@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { createPortal } from 'react-dom'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
 
 
 

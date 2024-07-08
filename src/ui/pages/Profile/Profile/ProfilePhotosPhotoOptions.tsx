@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { FileUtils } from '@util/file/FileUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { FileU } from 'src/util/file/FileU.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import React from 'react'
 import Dropzone from 'react-dropzone'
@@ -16,19 +16,19 @@ import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfileP
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
 import * as uuid from 'uuid'
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 import CrossInCircleIc = SvgIcons.CrossInCircleIc
 import contents = EmotionCommon.contents
 import ArrowRefreshCwIc = SvgIcons.ArrowRefreshCwIc
 import Download1Ic = SvgIcons.Download1Ic
-import extensionFromMimeType = FileUtils.extensionFromMimeType
+import extensionFromMimeType = FileU.extensionFromMimeType
 import col = EmotionCommon.col
 import row = EmotionCommon.row
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
+import SetterOrUpdater = TypeU.SetterOrUpdater
 import center = EmotionCommon.center
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
-import Callback1 = TypeUtils.Callback1
+import Callback1 = TypeU.Callback1
 
 
 

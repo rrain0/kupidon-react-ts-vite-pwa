@@ -4,13 +4,13 @@ import { getElemProps } from '@util/element/ElemProps.ts'
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import resetTextarea = EmotionCommon.resetTextarea
-import PartialUndef = TypeUtils.PartialUndef
+import PartialUndef = TypeU.PartialUndef
 import hoverable = EmotionCommon.hoverable
-import trueOrUndef = TypeUtils.trueOrUndef
+import trueOrUndef = TypeU.trueOrUndef
 
 
 

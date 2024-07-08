@@ -9,26 +9,22 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import { useAsRef } from '@util/react/useAsRef.ts'
-import { useNoSelect } from '@util/react/useNoSelect.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { RangeU } from 'src/util/common/RangeU'
+import { useAsRef } from 'src/util/react-ref/useAsRef.ts'
+import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
-import PartialUndef = TypeUtils.PartialUndef
-import trueOrUndef = TypeUtils.trueOrUndef
-import mapRange = MathUtils.mapRange
-import noop = TypeUtils.noop
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import fitRange = MathUtils.fitRange
+import PartialUndef = TypeU.PartialUndef
+import trueOrUndef = TypeU.trueOrUndef
+import noop = TypeU.noop
+import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 
 // useScroll from use-spring - BUT it is broken when child 'display: contents;'
 // todo use @use-gesture/react and refs instead of state
-
-
 
 
 
@@ -133,7 +129,7 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
       }
       {
         const track = trackRef.current
-        if (track){
+        if (track) {
           const d = getElemProps(track)
           trackProps.vpy = d.vpYFloat
           trackProps.height = d.heightFloat
@@ -146,24 +142,23 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
       const dyPercent = toPercent(dy)
       const yPercent = toPercent(vpy-trackProps.vpy)
       
-      if (first){
+      if (first) {
         setIsDragging(true)
         if (!dragStartRef.current.isByThumbBox){
-          setScroll(fitRange(yPercent, [0,100]))
+          setScroll(RangeU.clamp(yPercent, [0, 100]))
         }
       }
-      if (active){
+      if (active) {
         if (yPercent<0) setScroll(0)
         else if (yPercent>100) setScroll(100)
-        else setScroll(s=>fitRange(s+dyPercent, [0,100]))
+        else setScroll(s => RangeU.clamp(s+dyPercent, [0,100]))
       }
-      if (last){
+      if (last) {
         setIsDragging(false)
         dragStartRef.current.isByThumbBox = false
       }
     }
   ) as ()=>ReactDOMAttributes
-  
   
   
   
@@ -186,13 +181,13 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
     className: ScrollbarVerticalStyle.El.thumbBox.name,
     style: {
       height: visiblePartPercent+'%',
-      top: mapRange(scroll, [0,100], [0, 100-visiblePartPercent])+'%',
+      top: RangeU.map(scroll, [0, 100], [0, 100-visiblePartPercent])+'%',
     },
     onPointerDown: onThumbBoxPointerDown,
     ref: thumbBoxRef,
   }
   const thumbProps = {
-    className: ScrollbarVerticalStyle.El.thumb.name
+    className: ScrollbarVerticalStyle.El.thumb.name,
   }
   
   

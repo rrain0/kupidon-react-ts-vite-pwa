@@ -1,6 +1,6 @@
 import { Lang } from 'src/recoil/state/LangRecoil'
-import { ArrayUtils } from 'src/util/common/ArrayUtils'
-import NonEmptyArr = ArrayUtils.NonEmptyArr
+import { ArrayU } from '@util/common/ArrayU.ts'
+import NonEmptyArr = ArrayU.NonEmptyArr
 
 
 

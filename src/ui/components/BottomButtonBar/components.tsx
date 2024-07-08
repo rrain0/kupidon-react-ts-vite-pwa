@@ -9,7 +9,7 @@ import QuickSettings, {
 } from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
 import QuickSettingsButton from 'src/ui/elements/QuickSettingsButton.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react/useBool.ts'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
@@ -20,8 +20,8 @@ import Arrow5FwdIc = SvgIcons.ArrowLinesSharp1Ic
 import ArrowReloadIc = SvgIcons.ArrowReloadIc
 import rotateAnim = EmotionCommon.rotateAnim
 import fixedTop = EmotionCommon.fixedTop
-import PartialUndef = TypeUtils.PartialUndef
-import Callback = TypeUtils.Callback
+import PartialUndef = TypeU.PartialUndef
+import Callback = TypeU.Callback
 
 
 

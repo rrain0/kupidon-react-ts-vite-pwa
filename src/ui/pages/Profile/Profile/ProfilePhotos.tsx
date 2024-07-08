@@ -25,21 +25,22 @@ import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { AsyncUtils } from 'src/util/common/AsyncUtils.ts'
-import { FileUtils } from 'src/util/file/FileUtils.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { AsyncU } from 'src/util/common/AsyncU.ts'
+import { RangeU } from 'src/util/common/RangeU'
+import { FileU } from 'src/util/file/FileU.ts'
+import { MathU } from '@util/common/MathU.ts'
 import { DataUrl } from '@util/DataUrl.ts'
-import { ImageUtils } from 'src/util/file/ImageUtils.ts'
+import { ImageU } from 'src/util/file/ImageU.ts'
 import { Progress } from '@util/Progress.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
-import { useNoSelect } from '@util/react/useNoSelect.ts'
-import { useNoTouchAction } from '@util/react/useNoTouchAction.ts'
-import { useStateAndRef } from '@util/react/useStateAndRef.ts'
-import { useTimeout } from '@util/react/useTimeout.ts'
+import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import { useNoTouchAction } from 'src/util/element/useNoTouchAction.ts'
+import { useStateAndRef } from 'src/util/react-ref/useStateAndRef.ts'
+import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import center = EmotionCommon.center
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
@@ -47,23 +48,19 @@ import { PieProgressStyle } from 'src/ui/elements/PieProgress/PieProgressStyle.t
 import SparkingLoadingLine from 'src/ui/elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import abs = EmotionCommon.abs
 import bgcBorderMask = EmotionCommon.bgcInBorder
-import arrIndices = ArrayUtils.ofIndices
+import arrIndices = ArrayU.arrOfIndices
 import PlusIc = SvgIcons.PlusIc
 import contents = EmotionCommon.contents
 import * as uuid from 'uuid'
-import blobToDataUrl = FileUtils.blobToDataUrl
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
-import trimExtension = FileUtils.trimExtension
-import mapRange = MathUtils.mapRange
+import blobToDataUrl = FileU.blobToDataUrl
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import trimExtension = FileU.trimExtension
 import Theme = AppTheme.Theme
-import ifFoundByThenReplaceTo = ArrayUtils.replaceFirstToIfFoundBy
-import findByAndMapTo = ArrayUtils.mapFirstToIfFoundBy
-import throttle = AsyncUtils.throttle
-import Callback = TypeUtils.Callback
-import findBy = ArrayUtils.findBy
-
-
-
+import ifFoundByThenReplaceTo = ArrayU.replaceFirstToIfFoundBy
+import findByAndMapTo = ArrayU.mapFirstToIfFoundBy
+import throttle = AsyncU.throttle
+import Callback = TypeU.Callback
+import findBy = ArrayU.findBy
 
 
 
@@ -347,7 +344,7 @@ React.memo(
                           return <div css={photoPlaceholderStyle}>
                             <PieProgress css={profilePhotoPieProgress}
                               progress={
-                                mapRange(im.compression.progress, [0, 100], [5, 95])
+                                RangeU.map(im.compression.progress, [0, 100], [5, 95])
                               }
                             />
                           </div>
@@ -360,7 +357,7 @@ React.memo(
                           return <div css={photoPlaceholderStyle}>
                             <PieProgress css={profilePhotoPieProgress}
                               progress={
-                                mapRange(im.download.progress, [0, 100], [5, 95])
+                                RangeU.map(im.download.progress, [0, 100], [5, 95])
                               }
                             />
                           </div>
@@ -381,7 +378,7 @@ React.memo(
                         <div css={photoDimmed}>
                           <PieProgress css={profilePhotoPieProgressAccent}
                             progress={
-                              mapRange(im.upload.progress, [0, 100], [5, 95])
+                              RangeU.map(im.upload.progress, [0, 100], [5, 95])
                             }
                           />
                         </div>
@@ -631,21 +628,21 @@ const onFilesSelectedBuilder =
         
         const processingPhoto = { ...photo, ...compressionStart }
         
-        const updatePhotoNow = (p: Partial<ProfilePhoto>)=>{
-          setImages(s=>findByAndMapTo(s,
-            elem=>({...elem, ...p}),
-            elem=>elem.compression?.id===compressionStart.compression.id
+        const updatePhotoNow = (p: Partial<ProfilePhoto>) => {
+          setImages(s => findByAndMapTo(s,
+            elem => ({ ...elem, ...p }),
+            elem => elem.compression?.id===compressionStart.compression.id
           ))
         }
         const updatePhoto = throttle(
-            mapRange(Math.random(),[0,1],[1500,2000]),
-            updatePhotoNow
-          )
+          RangeU.map(Math.random(), [0, 1], [1500, 2000]),
+          updatePhotoNow
+        )
         
-        ;(async()=>{
+        ;(async() => {
           try {
-            const progress = new Progress(2,[95,5])
-            const onProgress = (p: number|null)=>{
+            const progress = new Progress(2, [95, 5])
+            const onProgress = (p: number | null) => {
               progress.progress = p??0
               //console.log('progress',progress.value)
               updatePhoto({ compression: {
@@ -657,7 +654,7 @@ const onFilesSelectedBuilder =
             //await wait(10000)
             //throw 'test error'
             
-            const compressedFile = await ImageUtils.compress(imgFile,
+            const compressedFile = await ImageU.compress(imgFile,
               { onProgress, abortCtrl }
             )
             abortCtrl.signal.throwIfAborted()

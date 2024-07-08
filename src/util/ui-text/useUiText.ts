@@ -1,10 +1,10 @@
 import { useMemo } from 'react'
 import { useRecoilValue } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { PickedUiValues, UiValue, UiValues } from 'src/util/ui-text/UiText.ts'
-import ObjectMap = ObjectUtils.ObjectMap
-import ObjectEntries = ObjectUtils.ObjectEntries
+import ObjectMap = ObjectU.ObjectMap
+import ObjectEntries = ObjectU.ObjectEntries
 
 
 

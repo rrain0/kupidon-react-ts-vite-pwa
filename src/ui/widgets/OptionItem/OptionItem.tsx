@@ -7,12 +7,12 @@ import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
-import PartialUndef = TypeUtils.PartialUndef
+import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 import Txt = EmotionCommon.Txt
 
 

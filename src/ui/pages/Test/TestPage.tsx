@@ -6,7 +6,6 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.t
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
@@ -14,12 +13,10 @@ import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.ts
 import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
+import { RangeU } from 'src/util/common/RangeU'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import center = EmotionCommon.center
-import mapRange = MathUtils.mapRange
-
-
 
 
 
@@ -145,7 +142,7 @@ React.memo(
             height: 30%;
             aspect-ratio: 1;
           `}
-            progress={mapRange(progress, [0, 100], [5, 95])}
+            progress={RangeU.map(progress, [0, 100], [5, 95])}
           />
         </div>
         

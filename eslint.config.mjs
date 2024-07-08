@@ -1,22 +1,38 @@
 import { FlatCompat } from '@eslint/eslintrc'
 import * as url from 'url'
+
+// yarn add --dev globals
 import globals from 'globals'
+
+// yarn add --dev eslint @eslint/js @types/eslint__js typescript typescript-eslint
 import js from '@eslint/js'
 import ts from 'typescript-eslint'
+
+// yarn add --dev @stylistic/eslint-plugin
 import stylistic from '@stylistic/eslint-plugin'
-import react from 'eslint-plugin-react'
-import reactConfigRecommended from 'eslint-plugin-react/configs/recommended.js'
+
+// yarn add --dev eslint-plugin-react
+import reactRecommended from 'eslint-plugin-react/configs/recommended.js'
+import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js'
+
+// yarn add --dev eslint-plugin-react-hooks
 import reactHooks from 'eslint-plugin-react-hooks'
+
+// yarn add --dev eslint-plugin-import eslint-import-resolver-alias eslint-import-resolver-typescript
 import importPlugin from 'eslint-plugin-import'
-// https://github.com/eslint-community/eslint-plugin-promise
+
+// yarn add --dev eslint-plugin-promise
 import promise from 'eslint-plugin-promise'
+
+// yarn add --dev eslint-plugin-react-refresh
+import reactRefresh from 'eslint-plugin-react-refresh'
+
+// yarn add --dev eslint-plugin-jsx-a11y
 import jsxA11y from 'eslint-plugin-jsx-a11y'
+
 // https://github.com/prettier/eslint-plugin-prettier
 //import prettierConfigRecommended from 'eslint-plugin-prettier/recommended'
 //import prettier from 'eslint-plugin-prettier'
-// https://www.npmjs.com/package/eslint-plugin-react-refresh
-// Validate that your components can safely be updated with fast refresh.
-import reactRefresh from 'eslint-plugin-react-refresh'
 
 
 
@@ -34,24 +50,172 @@ const compat = new FlatCompat({
 // https://eslint.org/docs/latest/use/configure/migration-guide
 
 export default [
+  
+  // typescript config
   ...ts.config(
-    js.configs.recommended, // works
-    ...ts.configs.recommended, // works
+    js.configs.recommended,
+    ...ts.configs.recommended,
+    {
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'warn',
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/ban-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-namespace': 'off',
+      },
+    }
   ),
-  ...compat.extends('plugin:react/recommended'), // works
-  // must be after react.configs.recommended ('plugin:react/recommended')
-  ...compat.extends('plugin:react/jsx-runtime'), // seems to be working
-  ...compat.extends('plugin:react-hooks/recommended'), // works
-  ...compat.extends('plugin:import/errors'), // works
-  ...compat.extends('plugin:import/warnings'), // works
-  ...compat.extends('plugin:promise/recommended'), // works
   
-  ...compat.extends('plugin:jsx-a11y/recommended'), // NOT work
   
-  // prettier must be last
-  //prettierConfigRecommended, // works
-  
+  // react config
+  // https://www.npmjs.com/package/eslint-plugin-react
   {
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ...reactRecommended,
+    // must be after react recommended config
+    ...reactJsxRuntime,
+    languageOptions: {
+      ...reactRecommended.languageOptions,
+      globals: {
+        ...globals.serviceworker,
+        ...globals.browser,
+      },
+    },
+    rules: {
+      'react/display-name': 'off',
+      'react/jsx-no-target-blank': 'off',
+      'react/function-component-definition': 'off',
+      'react/prop-types': 'off',
+      // for emotion css property
+      'react/no-unknown-property': ['error', { 'ignore': ['css'] }],
+    },
+  },
+  
+  
+  // https://www.npmjs.com/package/eslint-plugin-react-hooks
+  // Legacy error: TypeError: context.getSource is not a function
+  //...compat.extends('plugin:react-hooks/recommended'),
+  {
+    plugins: {
+      'react-hooks': reactHooks,
+    },
+    rules: {
+    
+    },
+  },
+  
+  
+  // react-refresh config
+  // https://www.npmjs.com/package/eslint-plugin-react-refresh
+  // Validates that your components can safely be updated with fast refresh.
+  {
+    plugins: {
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+    },
+  },
+  
+  
+  // @stylistic/eslint-plugin config
+  // code style rules
+  {
+    plugins: {
+      '@stylistic': stylistic,
+    },
+    rules: {
+      '@stylistic/arrow-parens': ['error', 'as-needed'],
+      '@stylistic/arrow-spacing': ['error', { before: true, after: true }],
+      '@stylistic/block-spacing': ['error', 'always'],
+      '@stylistic/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
+      '@stylistic/comma-dangle': ['error', {
+        arrays: 'always-multiline',
+        tuples: 'only-multiline',
+        enums: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'only-multiline',
+        exports: 'always-multiline',
+        functions: 'only-multiline',
+        generics: 'only-multiline',
+      }],
+      '@stylistic/comma-spacing': ['error', { before: false, after: true }],
+      '@stylistic/comma-style': ['error', 'last'],
+      '@stylistic/computed-property-spacing': ['error', 'never'],
+      '@stylistic/dot-location': ['error', 'property'],
+      '@stylistic/eol-last': ['error', 'always'],
+      '@stylistic/function-call-spacing': ['error', 'never'],
+      '@stylistic/function-call-argument-newline': 'off',
+      '@stylistic/function-paren-newline': 'off',
+      '@stylistic/generator-star-spacing': 'off',
+      '@stylistic/implicit-arrow-linebreak': 'off',
+      /*'@stylistic/indent': ['error', 2, {
+        MemberExpression: 0,
+        ignoreComments: true,
+      }],*/
+      '@stylistic/jsx-quotes': ['error', 'prefer-single'],
+      '@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true }],
+      '@stylistic/keyword-spacing': ['error', { before: true, after: true }],
+      //'@stylistic/linebreak-style': ['error', 'unix'], // doesn't matter what linebreak style - git fixes it
+      '@stylistic/linebreak-style': 'off',
+      '@stylistic/lines-around-comment': 'off',
+      '@stylistic/lines-between-class-members': 'off',
+      '@stylistic/max-len': ['error', { code: 120, tabWidth: 2 }],
+      '@stylistic/max-statements-per-line': 'off',
+      '@stylistic/multiline-ternary': 'off',
+      '@stylistic/new-parens': ['error', 'always'],
+      '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 5 }],
+      '@stylistic/no-confusing-arrow': 'off',
+      //'@stylistic/no-extra-parens': ['error'],
+      '@stylistic/no-extra-semi': 'error',
+      '@stylistic/no-floating-decimal': 'error',
+      //'@stylistic/no-mixed-operators': 'error',
+      '@stylistic/no-mixed-spaces-and-tabs': 'error',
+      '@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true }],
+      '@stylistic/no-multiple-empty-lines': ['error', { max: 4, maxBOF: 4, maxEOF: 4 }],
+      '@stylistic/no-tabs': 'error',
+      '@stylistic/no-trailing-spaces': 'off',
+      '@stylistic/no-whitespace-before-property': 'error',
+      '@stylistic/nonblock-statement-body-position': 'off',
+      '@stylistic/object-curly-newline': 'off',
+      '@stylistic/object-curly-spacing': ['error', 'always'],
+      '@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+      '@stylistic/one-var-declaration-per-line': 'off',
+      '@stylistic/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
+      '@stylistic/padded-blocks': 'off',
+      '@stylistic/padding-line-between-statements': 'off',
+      '@stylistic/quote-props': 'off',
+      '@stylistic/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
+      '@stylistic/rest-spread-spacing': ['error', 'never'],
+      '@stylistic/semi': ['error', 'never'],
+      '@stylistic/semi-spacing': ['error', { before: false, after: true }],
+      '@stylistic/semi-style': ['error', 'first'],
+      '@stylistic/space-before-blocks': [
+        'error',
+        { functions: 'always', keywords: 'always', classes: 'always' },
+      ],
+      '@stylistic/space-before-function-paren': 'off',
+      '@stylistic/space-in-parens': 'off',
+      '@stylistic/space-infix-ops': 'off',
+      '@stylistic/space-unary-ops': ['error', { 'words': true, 'nonwords': false }],
+      '@stylistic/spaced-comment': 'off',
+      '@stylistic/switch-colon-spacing': ['error', { before: false, after: true }],
+      '@stylistic/template-curly-spacing': ['error', 'never'],
+      '@stylistic/template-tag-spacing': ['error', 'never'],
+      '@stylistic/wrap-iife': 'off',
+      '@stylistic/wrap-regex': 'off',
+      '@stylistic/yield-star-spacing': 'off',
+    },
+  },
+  
+  
+  // Legacy error
+  //...compat.extends('plugin:import/errors'),
+  //...compat.extends('plugin:import/warnings'),
+  /*{
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
@@ -68,14 +232,9 @@ export default [
         }
       },
     },
-    files: ['**/*.{ts,cts,mts,tsx,d.ts,js,cjs,mjs,jsx}'],
+    files: ['**!/!*.{ts,cts,mts,tsx,d.ts,js,cjs,mjs,jsx}'],
     plugins: {
-      'react-refresh': reactRefresh, // works
-      'react': react,
       'import': importPlugin,
-      'jsx-a11y': jsxA11y,
-      '@stylistic/js': stylistic,
-      //'prettier': prettier,
     },
     settings: {
       'import/resolver': {
@@ -88,103 +247,54 @@ export default [
       }
     },
     rules: {
-      // code style rules:
-      '@stylistic/js/arrow-parens': ['error', 'as-needed'],
-      '@stylistic/js/arrow-spacing': ['error', { before: true, after: true }],
-      '@stylistic/js/block-spacing': ['error', 'always'],
-      '@stylistic/js/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
-      '@stylistic/js/comma-dangle': ['error', {
-        arrays: 'always-multiline',
-        objects: 'always-multiline',
-        imports: 'never',
-        exports: 'always-multiline',
-        functions: 'never',
-      }],
-      '@stylistic/js/comma-spacing': ['error', { before: false, after: true }],
-      '@stylistic/js/comma-style': ['error', 'last'],
-      '@stylistic/js/computed-property-spacing': ['error', 'never'],
-      '@stylistic/js/dot-location': ['error', 'property'],
-      '@stylistic/js/eol-last': ['error', 'always'],
-      '@stylistic/js/function-call-spacing': ['error', 'never'],
-      '@stylistic/js/function-call-argument-newline': 'off',
-      '@stylistic/js/function-paren-newline': 'off',
-      '@stylistic/js/generator-star-spacing': 'off',
-      '@stylistic/js/implicit-arrow-linebreak': 'off',
-      '@stylistic/js/indent': ["error", 2, { MemberExpression: 0, ignoreComments: false }],
-      '@stylistic/js/jsx-quotes': ['error', 'prefer-single'],
-      '@stylistic/js/key-spacing': ['error', { beforeColon: false, afterColon: true }],
-      '@stylistic/js/keyword-spacing': ['error', { before: true, after: true }],
-      //'@stylistic/js/linebreak-style': ['error', 'unix'], // doesn't matter what linebreak style - git fixes it
-      '@stylistic/js/linebreak-style': 'off',
-      '@stylistic/js/lines-around-comment': 'off',
-      '@stylistic/js/lines-between-class-members': 'off',
-      '@stylistic/js/max-len': ['error', { code: 120, tabWidth: 2 }],
-      '@stylistic/js/max-statements-per-line': 'off',
-      '@stylistic/js/multiline-ternary': ['error', 'always-multiline'],
-      '@stylistic/js/new-parens': ['error', 'always'],
-      '@stylistic/js/newline-per-chained-call': ['error', { ignoreChainWithDepth: 5 }],
-      '@stylistic/js/no-confusing-arrow': 'off',
-      //'@stylistic/js/no-extra-parens': ['error'],
-      '@stylistic/js/no-extra-semi': 'error',
-      '@stylistic/js/no-floating-decimal': 'error',
-      //'@stylistic/js/no-mixed-operators': 'error',
-      '@stylistic/js/no-mixed-spaces-and-tabs': 'error',
-      '@stylistic/js/no-multi-spaces': 'error',
-      '@stylistic/js/no-multiple-empty-lines': ['error', { max: 4, maxBOF: 4, maxEOF: 4 }],
-      '@stylistic/js/no-tabs': 'error',
-      '@stylistic/js/no-trailing-spaces': 'off',
-      '@stylistic/js/no-whitespace-before-property': 'error',
-      '@stylistic/js/nonblock-statement-body-position': 'off',
-      '@stylistic/js/object-curly-newline': 'off',
-      '@stylistic/js/object-curly-spacing': ['error', 'always'],
-      '@stylistic/js/object-property-newline': ["error", { allowAllPropertiesOnSameLine: true }],
-      '@stylistic/js/one-var-declaration-per-line': 'off',
-      '@stylistic/js/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
-      '@stylistic/js/padded-blocks': 'off',
-      '@stylistic/js/padding-line-between-statements': 'off',
-      '@stylistic/js/quote-props': 'off',
-      '@stylistic/js/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
-      '@stylistic/js/rest-spread-spacing': ['error', 'never'],
-      '@stylistic/js/semi': ['error', 'never'],
-      '@stylistic/js/semi-spacing': ['error', { before: false, after: true }],
-      '@stylistic/js/semi-style': ['error', 'first'],
-      '@stylistic/js/space-before-blocks': [
-        'error',
-        // can't define separate rule for anonymous function(){}()
-        { functions: 'off', keywords: 'always', classes: 'always' }
-      ],
-      '@stylistic/js/space-before-function-paren': ['error', 'never'],
-      '@stylistic/js/space-in-parens': ['error', 'never'],
-      '@stylistic/js/space-infix-ops': 'off',
-      '@stylistic/js/space-unary-ops': ['error', { 'words': true, 'nonwords': false }],
-      '@stylistic/js/spaced-comment': 'off',
-      '@stylistic/js/switch-colon-spacing': ['error', { before: false, after: true }],
-      '@stylistic/js/template-curly-spacing': ['error', 'never'],
-      '@stylistic/js/template-tag-spacing': ['error', 'never'],
-      '@stylistic/js/wrap-iife': 'off',
-      '@stylistic/js/wrap-regex': 'off',
-      '@stylistic/js/yield-star-spacing': 'off',
-      
-      // ts rules:
-      '@typescript-eslint/no-unused-vars': 'off',
-      
-      // react rules
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-      'react/jsx-no-target-blank': 'off',
-      'react/function-component-definition': 'off',
-      'react/prop-types': 'off',
-      
       // import rules
-      'import/order': ['error', {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-        'newlines-between': 'always',
-      }],
+      // 'import/order': ['error', {
+      //   groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+      //   'newlines-between': 'always',
+      // }],
       
     },
+  },*/
+  
+  
+  // https://www.npmjs.com/package/eslint-plugin-promise
+  // works
+  ...compat.extends('plugin:promise/recommended'),
+  {
+    plugins: {
+      'promise': promise,
+    },
+    rules: {
+      // just example, it is already turned on
+      //'promise/always-return': 'error'
+    },
   },
+  
+  
+  // jsx-a11y config
+  // https://www.npmjs.com/package/eslint-plugin-jsx-a11y
+  {
+    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
+    ...jsxA11y.flatConfigs.recommended,
+    languageOptions: {
+      ...jsxA11y.flatConfigs.recommended.languageOptions,
+      globals: {
+        ...globals.serviceworker,
+        ...globals.browser,
+      },
+    },
+    rules: {
+      'jsx-a11y/tabindex-no-positive': 'off',
+    },
+  },
+  
+  
+  // prettier must be last
+  // I don't like empty lines collapsing cause code becomes harder to read:
+  // https://prettier.io/docs/en/rationale.html#empty-lines
+  //prettierConfigRecommended, // works
+  
+  
   // !!! 'ignores' must be in a standalone object to work globally
   { ignores: ['dist', 'dev-dist'] },
 ]

@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
 import row = EmotionCommon.row
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import Elem = WidgetStyle.Elem
@@ -11,7 +11,7 @@ import CssPseudo = WidgetStyle.CssPseudo
 import CssWidget = WidgetStyle.CssWidget
 import CssAttr = WidgetStyle.CssAttr
 import bgcInBorder = EmotionCommon.bgcInBorder
-import PartialUndef = TypeUtils.PartialUndef
+import PartialUndef = TypeU.PartialUndef
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import CssProp = WidgetStyle.CssProp

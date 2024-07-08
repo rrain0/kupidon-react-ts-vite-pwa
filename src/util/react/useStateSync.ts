@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import { useRef2 } from 'src/util/react/useRef2.ts'
-import Setter = TypeUtils.Setter
+import { TypeU } from 'src/util/common/TypeU.ts'
+import { useRefGetSet } from 'src/util/react-ref/useRefGetSet.ts'
+import Setter = TypeU.Setter
 
 
 
@@ -17,7 +17,7 @@ export const useStateSync =
   }, [main, secondary])
   */
   
-  const [getIsMain, setIsMain] = useRef2(false)
+  const [getIsMain, setIsMain] = useRefGetSet(false)
   
   
   useEffect(() => {

@@ -1,5 +1,5 @@
-import { FileUtils } from 'src/util/file/FileUtils.ts'
-import readToDataUrl = FileUtils.blobToDataUrl
+import { FileU } from 'src/util/file/FileU.ts'
+import readToDataUrl = FileU.blobToDataUrl
 
 
 

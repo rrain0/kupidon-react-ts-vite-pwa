@@ -10,26 +10,24 @@ import {
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { AuthStateType } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { AsyncUtils } from 'src/util/common/AsyncUtils.ts'
-import { MathUtils } from '@util/common/MathUtils.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { AsyncU } from 'src/util/common/AsyncU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { DateTime } from '@util/DateTime.ts'
+import { RangeU } from 'src/util/common/RangeU'
 import * as uuid from 'uuid'
-import mapRange = MathUtils.mapRange
-import throttle = AsyncUtils.throttle
-import mapFirstToIfFoundBy = ArrayUtils.mapFirstToIfFoundBy
+import throttle = AsyncU.throttle
+import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
 import ApiResponse = ApiUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
-import SetterOrUpdater = TypeUtils.SetterOrUpdater
+import SetterOrUpdater = TypeU.SetterOrUpdater
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.AddProfilePhoto
-import findBy = ArrayUtils.findBy
-
+import findBy = ArrayU.findBy
 
 
 
@@ -81,7 +79,7 @@ export const dotActive = (t: AppTheme.Theme)=>css`
 export const currentUserPhotosToProfilePhotos =
   (photos: CurrentUser['photos']): ProfilePhoto[] => {
     const profilePhotos: ProfilePhoto[] =
-      ArrayUtils.ofIndices(6).map(i => ({
+      ArrayU.arrOfIndices(6).map(i => ({
         ...DefaultProfilePhoto,
         type: 'remote',
         id: uuid.v4(),
@@ -136,7 +134,7 @@ export const profileUpdateApiRequest = (
   
   if (!failedFields.includes('photos')){
     const [fwd] =
-      ArrayUtils.diff2(values.initialValues.photos, values.photos, photosComparator)
+      ArrayU.diff2(values.initialValues.photos, values.photos, photosComparator)
     userToUpdate.photos = {
       remove: fwd
         .filter(it=>it.isRemoved && it.fromElem.type==='remote')
@@ -168,7 +166,7 @@ export const profileUpdateApiRequest = (
       showProgress: false,
     }))
     setFormValues(s=>({ ...s,
-      photos: ArrayUtils.combine(
+      photos: ArrayU.combine(
         s.photos, uploads,
         (photo,upload)=>({ ...photo, upload } satisfies ProfilePhoto),
         (photo,upload)=>photo.id===upload.id
@@ -195,7 +193,7 @@ export const profileUpdateApiRequest = (
     const applyUpdatedUser = ()=>{
       clearTimeout(delayTimerId)
       setFormValues(s=>({ ...s,
-        photos: ArrayUtils.combine(
+        photos: ArrayU.combine(
           s.photos, uploads,
           (photo,upload)=>(
             { ...photo, upload: undefined } satisfies ProfilePhoto
@@ -207,7 +205,7 @@ export const profileUpdateApiRequest = (
       if (u){
         // работает при условии, что во время обновления другой клиент не обновит фотки
         setFormValues(s=>({ ...s,
-          photos: ArrayUtils.combine(
+          photos: ArrayU.combine(
             s.photos, values.photos,
             (photo,usedPhoto)=>({
               ...photo,
@@ -218,7 +216,7 @@ export const profileUpdateApiRequest = (
           )
         }))
         setFormValues(s=>({ ...s,
-          photos: ArrayUtils.combine(
+          photos: ArrayU.combine(
             s.photos, values.photos,
             (photo,usedPhoto,photoI,usedPhotoI)=>({
               ...photo, remoteIndex: usedPhotoI
@@ -244,20 +242,20 @@ export const profileUpdateApiRequest = (
     }
     
     
-    for await (const photo of addPhotos){
-      const getUpload = ()=>findBy(uploads,elem=>elem.id===photo.id).elem
+    for await (const photo of addPhotos) {
+      const getUpload = () => findBy(uploads, elem => elem.id===photo.id).elem
       
-      const updatePhotoNow = (p: Partial<ProfilePhoto>)=>{
+      const updatePhotoNow = (p: Partial<ProfilePhoto>) => {
         const upload = getUpload()
-        if (upload) setFormValues(s=>({ ...s,
+        if (upload) setFormValues(s => ({ ...s,
           photos: mapFirstToIfFoundBy(s.photos,
-            elem=>({...elem, ...p}),
-            elem=>elem.upload?.id===upload.id
-          )
+            elem => ({ ...elem, ...p }),
+            elem => elem.upload?.id===upload.id
+          ),
         }))
       }
       const updatePhoto = throttle(
-        mapRange(Math.random(),[0,1],[1500,2000]),
+        RangeU.map(Math.random(), [0, 1], [1500, 2000]),
         updatePhotoNow
       )
       
@@ -271,7 +269,7 @@ export const profileUpdateApiRequest = (
       const updatedUserResponse =
         await UserApi.addProfilePhoto(photo, { onProgress })
       updatePhotoNow({ upload: undefined })
-      if (!updatedUserResponse.isSuccess){
+      if (!updatedUserResponse.isSuccess) {
         applyUpdatedUser()
         reject(updatedUserResponse)
         return undefined

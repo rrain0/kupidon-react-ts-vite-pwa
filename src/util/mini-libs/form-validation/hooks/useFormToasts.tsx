@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { ErrorUiText } from 'src/ui-props/ui-values/ErrorUiText.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationActions } from 'src/util/mini-libs/form-validation/core/ValidationActions.ts'
 import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
 import { UiTemplate, UiText, UiTextValues } from 'src/util/ui-text/UiText.ts'
@@ -11,8 +11,8 @@ import Values = ValidationCore.Values
 import awaitDelay = ValidationActions.awaitDelay
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateFailures
-import Updater = TypeUtils.Updater
-import ObjectMap = ObjectUtils.ObjectMap
+import Updater = TypeU.Updater
+import ObjectMap = ObjectU.ObjectMap
 
 
 

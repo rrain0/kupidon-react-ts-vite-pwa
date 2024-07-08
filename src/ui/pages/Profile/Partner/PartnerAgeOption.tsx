@@ -1,5 +1,6 @@
-import { ReactUtils } from '@util/common/ReactUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { RangeU } from 'src/util/common/RangeU'
+import { ReactU } from 'src/util/common/ReactU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useStateSync2 } from '@util/react/useStateSync2.ts'
 import numeral from 'numeral'
 import React, { useState } from 'react'
@@ -14,10 +15,8 @@ import { useUiValues } from '@util/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/widgets/modal-element/ModalRangePicker/ModalRangePicker.tsx'
 import HourglassGradIc = SvgGradIcons.HourglassGradIc
 import UserValues = ProfilePageValidation.UserValues
-import NumRange = TypeUtils.NumRange
-import NumRangeEndNullable = TypeUtils.NumRangeEndNullable
-
-
+import NumRange = RangeU.NumRange
+import NumRangeEndNullable = RangeU.NumRangeEndNullable
 
 
 
@@ -78,11 +77,11 @@ React.memo(
   useStateSync2(
     ageRange, widgetRange,
     setAgeRange, setWidgetRange,
-    (w, h) => ReactUtils.arrMerge(
+    (w, h) => ReactU.arrMerge(
       h, w,
       mapWidgetRangeToDataRange(w), mapDataRangeToWidgetRange(h)
     ),
-    (h, w) => ReactUtils.arrMerge(
+    (h, w) => ReactU.arrMerge(
       w, h,
       mapDataRangeToWidgetRange(h), mapWidgetRangeToDataRange(w)
     )

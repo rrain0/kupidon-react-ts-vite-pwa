@@ -1,4 +1,4 @@
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from '@util/ui-text/useUiText.ts'
 import React from 'react'
 import { ModalElement } from 'src/ui/widgets/modal-element/ModalElement.tsx'
@@ -12,7 +12,7 @@ import Card2 from 'src/ui/elements/cards/Card2.tsx'
 import Textarea, { TextareaProps, TextareaRefElement } from 'src/ui/elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
-import Callback = TypeUtils.Callback
+import Callback = TypeU.Callback
 
 
 

@@ -4,14 +4,14 @@ import clsx from 'clsx'
 import React from 'react'
 import { ScrollbarOverlayStyle } from 'src/ui/widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { ReactUtils } from '@util/common/ReactUtils.ts'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { ReactU } from 'src/util/common/ReactU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import Scrollbar from 'src/ui/widgets/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/ui/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps, SetScrollProps } from 'src/ui/widgets/Scrollbar/useContainerScrollState.ts'
 import abs = EmotionCommon.abs
-import PartialUndef = TypeUtils.PartialUndef
-import ClassStyleProps = ReactUtils.ClassStyleProps
+import PartialUndef = TypeU.PartialUndef
+import ClassStyleProps = ReactU.ClassStyleProps
 
 
 

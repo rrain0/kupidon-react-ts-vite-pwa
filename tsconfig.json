@@ -1,59 +1,11 @@
 {
-  "compilerOptions": {
-    "target": "es2022", // target js standard version
-    "lib": ["ESNext", "DOM", "DOM.Iterable"], // used to write code
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    
-    
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true, // allow only modules (files with import/export). At least you need 'export {}'.
-    "noEmit": true,
-    "jsx": "react-jsx",
-    
-    // path aliases
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "src/*",
-        "lib-types-overrides/*"
-      ],
-      
-      "src/*": ["src/*"],
-      
-      "@res/*": ["src/res/*"],
-      "@img/*": ["src/res/img/*"],
-      "@ic/*": ["src/res/ic/*"],
-      "@vid/*": ["src/res/vid/*"],
-      
-      "@util/*": ["src/util/*"]
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
     },
-    
-    
-    
-    /* Linting */
-    "strict": true,
-    //"noUnusedLocals": true,
-    //"noUnusedParameters": true,
-    "noPropertyAccessFromIndexSignature": false, // allow access obj.prop in indexed type instead of obj['prop']
-    "noUncheckedIndexedAccess": false, // add undefined when get props from indexed type
-    "exactOptionalPropertyTypes": true, // '?' means absence of property but not undefined
-    "downlevelIteration": true, // use [...anyIterator]
-    "noImplicitAny": false,
-    "noImplicitOverride": true,
-    "allowUnreachableCode": true, // allow code after the return statement that never runs
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "useDefineForClassFields": true, // enables some modern patterns for class properties initialization
-    
-    "plugins": [
-      { "name": "typescript-plugin-css-modules" }
-    ]
-    
-  },
-  "references": [{ "path": "./tsconfig.node.json" }]
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

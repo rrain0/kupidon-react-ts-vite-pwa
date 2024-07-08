@@ -4,7 +4,7 @@ import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import { BottomSheetParts } from 'src/ui/widgets/BottomSheet/BottomSheetParts.ts'
 import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { useUpNodesScrollLock } from '@util/react/useUpNodesScrollLock.ts'
+import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
 import {
   ComputedBottomSheetDimens,
   useBottomSheet, UseBottomSheetOptions,
@@ -12,10 +12,10 @@ import {
 import React, {
   useLayoutEffect,
 } from 'react'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import fixed = EmotionCommon.fixed
-import PartialUndef = TypeUtils.PartialUndef
-import Callback1 = TypeUtils.Callback1
+import PartialUndef = TypeU.PartialUndef
+import Callback1 = TypeU.Callback1
 
 
 

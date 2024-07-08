@@ -1,9 +1,9 @@
 import { Action } from '@remix-run/router'
 import React, { useLayoutEffect } from 'react'
 import { useBlocker } from 'react-router-dom'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import Callback = TypeUtils.Callback
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import Callback = TypeU.Callback
+import PartialUndef = TypeU.PartialUndef
 
 
 

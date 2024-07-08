@@ -1,11 +1,11 @@
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import empty = TypeUtils.empty
-import ObjectValues = ObjectUtils.ObjectValues
-import ObjectKeysType = ObjectUtils.ObjectKeysType
-import ObjectEntries = ObjectUtils.ObjectEntries
-import ObjectKeys = ObjectUtils.ObjectKeys
-import exists = TypeUtils.exists
+import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import empty = TypeU.empty
+import ObjectValues = ObjectU.ObjectValues
+import ObjectKeysType = ObjectU.ObjectKeysType
+import ObjectEntries = ObjectU.ObjectEntries
+import ObjectKeys = ObjectU.ObjectKeys
+import exists = TypeU.exists
 
 
 

@@ -1,5 +1,5 @@
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import anyval = TypeUtils.anyval
+import { TypeU } from 'src/util/common/TypeU.ts'
+import anyval = TypeU.anyval
 
 
 
@@ -9,7 +9,8 @@ import anyval = TypeUtils.anyval
   
   top(t) left(l) bottom(b) right(r)
   margin(M) border(B) scrollbar(S) padding(P) content-box(C)
-  (where content-box(C) is frame for part of margin(M) border(B) scrollbar(S) padding(P) content-box(C) of scrollable child)
+  (where content-box(C) is frame for part of
+    margin(M) border(B) scrollbar(S) padding(P) content-box(C) of scrollable child)
   (note: paddings are positioned 'under' content, so you can see content when it is scrolled above paddings)
   (note: distances are gotten from outer boundaries of smth (e.g. border))
   
@@ -74,7 +75,8 @@ function isWindow<T extends anyval>(view: T): view is T & Window {
 }
 
 
-export const getElemProps = (element: HTMLElement) => new ElemProps(element)
+export const getElemProps = (element: HTMLElement | Window = window) => new ElemProps(element)
+
 
 
 
@@ -116,59 +118,59 @@ export class ElemProps {
   
   // левый край viewport <---> внешняя граница левого бордера элемента
   // расстояние между левым краем viewport и внешней границей левого бордера
-  get clientXFloat(){
+  get clientXFloat() {
     if (isWindow(this.view)) return 0
     // Returns the 'top' coordinate value of the DOMRect
     // (has the same value as 'y', or 'y' + 'height' if 'height' is negative).
     return this.rect.left
   }
-  get vpXFloat(){ return this.clientXFloat }
-  get vpLeftFloat(){ return this.clientXFloat }
+  get vpXFloat() { return this.clientXFloat }
+  get vpLeftFloat() { return this.clientXFloat }
   
   // верхний край viewport <---> внешняя граница верхнего бордера элемента
   // расстояние между верхним краем viewport и внешней границей верхнего бордера
-  get clientYFloat(){
+  get clientYFloat() {
     if (isWindow(this.view)) return 0
     // Returns the 'left' coordinate value of the DOMRect
     // (has the same value as 'x', or 'x' + 'width' if 'width' is negative).
     return this.rect.top
   }
-  get vpYFloat(){ return this.clientYFloat }
-  get vpTopFloat(){ return this.clientYFloat }
+  get vpYFloat() { return this.clientYFloat }
+  get vpTopFloat() { return this.clientYFloat }
   
   // расстояние между правым краем viewport и внешней границей правого бордера
-  get clientRightFloat(){
+  get clientRightFloat() {
     if (isWindow(this.view)) return 0
     return this.rect.right
   }
-  get vpRightFloat(){ return this.clientRightFloat }
+  get vpRightFloat() { return this.clientRightFloat }
   
-  // расстояние между нижним краем viewport и внешней границей нижнего бордера
-  get clientBottomFloat(){
+  // расстояние между ВЕРХНИМ краем viewport и внешней границей нижнего бордера
+  get clientBottomFloat() {
     if (isWindow(this.view)) return 0
     return this.rect.bottom
   }
-  get vpBottomFloat(){ return this.clientBottomFloat }
+  get vpTopToElemBottomFloat() { return this.clientBottomFloat }
   
   // расстояние между внешними границами левого и правого бордеров
-  get widthFloat(){
+  get widthFloat() {
     if (isWindow(this.view)) return window.innerWidth
     return Math.abs(this.rect.width)
   }
+  get w() { return this.widthFloat }
   
   // расстояние между внешними границами верхнего и нижнего бордеров
-  get heightFloat(){
+  get heightFloat() {
     if (isWindow(this.view)) return window.innerHeight
     return Math.abs(this.rect.height)
   }
+  get h() { return this.heightFloat }
   
   
   
-  get vpCenterXYFloat(): [number,number] {
-    return [this.vpLeftFloat + this.widthFloat/2, this.vpTopFloat + this.heightFloat/2]
+  get vpCenterXYFloat(): [x: number, y: number] {
+    return [this.vpLeftFloat + this.widthFloat / 2, this.vpTopFloat + this.heightFloat / 2]
   }
-  
-  
   
   
   
@@ -176,11 +178,11 @@ export class ElemProps {
   // width / height includes border (BSPCPSB)
   // rounded int value
   // Если масштаб страницы не 100%, значения могут иметь погрешность.
-  get width(){
+  get width() {
     if (isWindow(this.view)) return window.innerWidth
     return this.view.offsetWidth
   }
-  get height(){
+  get height() {
     if (isWindow(this.view)) return window.innerHeight
     return this.view.offsetHeight
   }
@@ -191,11 +193,11 @@ export class ElemProps {
   // !!! for <img> works as offset width / height
   // rounded int value
   // Если масштаб страницы не 100%, значения остаются правильными.
-  get contentWidth(){
+  get contentWidth() {
     if (isWindow(this.view)) return this.view.innerWidth
     return this.view.clientWidth
   }
-  get contentHeight(){
+  get contentHeight() {
     if (isWindow(this.view)) return this.view.innerHeight
     return this.view.clientHeight
   }
@@ -203,17 +205,14 @@ export class ElemProps {
   
   
   
-  
-  
-  
   // Ширина / высота  левой / верхней  прокрученной части контента
   // width of horizontal-paddings + part of full content located behind the border-left inner boundary
-  get scrollLeft(){
+  get scrollLeft() {
     if (isWindow(this.view)) return window.scrollX
     return this.view.scrollLeft
   }
   // height of vertical-paddings + part of full content located behind the border-top inner boundary
-  get scrollTop(){
+  get scrollTop() {
     if (isWindow(this.view)) return window.scrollY
     return this.view.scrollTop
   }
@@ -224,14 +223,14 @@ export class ElemProps {
   // максимальная ширина невидимого контента
   get scrollLeftMax(): number {
     if (isWindow(this.view) || !this.view['scrollLeftMax'])
-      return this.scrollWidth-this.contentWidth
+      return this.scrollWidth - this.contentWidth
     return this.view['scrollLeftMax'] as number
   }
   // max height of vertical-paddings + content located behind the border-top inner boundary
   // максимальная высота невидимого контента
   get scrollTopMax(): number {
     if (isWindow(this.view) || !this.view['scrollTopMax'])
-      return this.scrollHeight-this.contentHeight
+      return this.scrollHeight - this.contentHeight
     return this.view['scrollTopMax'] as number
   }
   

@@ -5,8 +5,8 @@ import React, {
   useRef,
 } from 'react'
 import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
-import { TypeUtils } from '@util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
+import { TypeU } from '@util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
 import BottomButtonBarFrame = ButtonBarComponents.BottomButtonBarFrame
 import ButtonsContainer = ButtonBarComponents.ButtonsContainer
 import LeftButtonsContainer = ButtonBarComponents.LeftButtonsContainer

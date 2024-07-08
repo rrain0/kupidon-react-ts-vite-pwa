@@ -9,8 +9,8 @@ import { ApiRoutes } from 'src/api/ApiRoutes'
 import * as jose from 'jose'
 import { getRecoil, setRecoil, resetRecoil, getRecoilPromise } from "recoil-nexus"
 import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
-import { TypeUtils } from 'src/util/common/TypeUtils'
-import ValueOrMapper = TypeUtils.ValueOrMapper
+import { TypeU } from '@util/common/TypeU.ts'
+import ValueOrMapper = TypeU.ValueOrMapper
 
 
 
@@ -20,7 +20,7 @@ export namespace AxiosConfig {
   
   export const commonAxiosRetryConfig: IAxiosRetryConfig = {
     retries: 2,
-    retryDelay: (retryCount, error)=>500,
+    retryDelay: (retryCount, error) => 500,
     // A callback to further control if a request should be retried.
     // By default, it retries if it is a network error
     // or a 5xx error on an idempotent request (GET, HEAD, OPTIONS, PUT or DELETE).
@@ -29,7 +29,7 @@ export namespace AxiosConfig {
      }, */
   }
   
-  export const ax =  Axios.create({
+  export const ax = Axios.create({
     /* `validateStatus` defines whether to resolve or reject the promise for a given
      * HTTP response status code. If `validateStatus` returns `true` (or is set to `null`
      * or `undefined`), the promise will be resolved; otherwise, the promise will be rejected.

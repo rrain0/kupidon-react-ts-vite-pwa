@@ -1,7 +1,7 @@
-import { FileUtils } from 'src/util/file/FileUtils.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import readToDataUrl = FileUtils.blobToDataUrl
-import empty = TypeUtils.empty
+import { FileU } from 'src/util/file/FileU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import readToDataUrl = FileU.blobToDataUrl
+import empty = TypeU.empty
 
 
 /*

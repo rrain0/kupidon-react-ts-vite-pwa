@@ -1,4 +1,4 @@
-import { TypeUtils } from '@util/common/TypeUtils.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { PartnerCommunicationCharacteristics } from 'src/api/model/PartnerCommunicationCharacteristics.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { EducationOptionValues } from 'src/ui/pages/Profile/Profile/ProfileEducationOption.tsx'
@@ -12,14 +12,17 @@ import {
 } from 'src/ui/pages/Profile/Profile/ProfilePartnerCommunicationCharacteristicsOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ErrorUiText } from 'src/ui-props/ui-values/ErrorUiText.ts'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
 import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { RangeU } from 'src/util/common/RangeU'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
+import NumRangeNullable = RangeU.NumRangeNullable
+import NumRangeEndNullable = RangeU.NumRangeEndNullable
 
 
 
@@ -27,8 +30,6 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 export namespace ProfilePageValidation {
   
   
-  import NumRangeNullable = TypeUtils.NumRangeNullable
-  import NumRangeEndNullable = TypeUtils.NumRangeEndNullable
   type SeverErrorCode = UpdateUserErrorData['code']
   
   
@@ -152,7 +153,7 @@ export namespace ProfilePageValidation {
     job: '',
     partnerGender: '',
     partnerCommunicationCharacteristics: [],
-    photos: ArrayUtils.ofIndices(6).map(i=>({
+    photos: ArrayU.arrOfIndices(6).map(i=>({
       ...DefaultProfilePhoto,
       type: 'remote',
       id: uuid.v4(),
@@ -368,7 +369,7 @@ export namespace ProfilePageValidation {
     [['partnerCommunicationCharacteristics','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerCommunicationCharacteristics'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (ArrayUtils.eqAsSet(v, ivs.partnerCommunicationCharacteristics)) return new PartialFailureData({
+      if (ArrayU.eqAsSet(v, ivs.partnerCommunicationCharacteristics)) return new PartialFailureData({
         code: 'partner-communication-characteristics-not-changed' satisfies FailureCode,
         msg: 'Field "Partner communication characteristics" is not changed',
         type: 'initial',
@@ -394,7 +395,7 @@ export namespace ProfilePageValidation {
     [['partnerAge','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerAge'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (ArrayUtils.eq(v, ivs.partnerAge)) return new PartialFailureData({
+      if (ArrayU.eq(v, ivs.partnerAge)) return new PartialFailureData({
         code: 'partner-age-not-changed' satisfies FailureCode,
         msg: 'Field "Partner age" is not changed',
         type: 'initial',
@@ -407,7 +408,7 @@ export namespace ProfilePageValidation {
     [['partnerHeight','initialValues'], (values) => {
       const [v,ivs] = values as [FormValues['partnerHeight'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (ArrayUtils.eq(v, ivs.partnerHeight)) return new PartialFailureData({
+      if (ArrayU.eq(v, ivs.partnerHeight)) return new PartialFailureData({
         code: 'partner-height-not-changed' satisfies FailureCode,
         msg: 'Field "Partner height" is not changed',
         type: 'initial',

@@ -1,14 +1,14 @@
 import { css } from '@emotion/react'
-import { ArrayUtils } from 'src/util/common/ArrayUtils.ts'
-import { ObjectUtils } from 'src/util/common/ObjectUtils.ts'
-import { TypeUtils } from 'src/util/common/TypeUtils.ts'
-import PartialUndef = TypeUtils.PartialUndef
-import isObject = TypeUtils.isobject
-import isstring = TypeUtils.isstring
-import SingleOrArr = ArrayUtils.SingleOrArr
-import exists = TypeUtils.exists
-import ObjectMap = ObjectUtils.ObjectMap
-import RecordRo = TypeUtils.RecordRo
+import { ArrayU } from 'src/util/common/ArrayU.ts'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import PartialUndef = TypeU.PartialUndef
+import isObject = TypeU.isobject
+import isstring = TypeU.isstring
+import SingleOrArr = ArrayU.SingleOrArr
+import exists = TypeU.exists
+import ObjectMap = ObjectU.ObjectMap
+import RecordRo = TypeU.RecordRo
 
 
 
