@@ -9,6 +9,10 @@ export type UiTemplate<L extends Lang.Supported = Lang.Supported, Args extends a
 }
 
 
+export function asUiText(text: string): UiText<'en-US'> {
+  return { 'en-US': text }
+}
+
 
 export type UiValue<L extends Lang.Supported = Lang.Supported, Args extends any[] = any[]>
   = UiText | UiTemplate<L, Args>

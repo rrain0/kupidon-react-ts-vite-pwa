@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import BottomSheetBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -16,10 +17,11 @@ import Preview from 'src/ui/pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/ui/pages/Profile/Profile/Profile.tsx'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { RangeU } from 'src/util/common/RangeU'
+import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText'
 import {
-  currentUserPhotosToProfilePhotos,profileUpdateApiRequest,
+  currentUserPhotosToProfilePhotos, profileUpdateApiRequest,
 } from './actions.ts'
-import ProfilePageTabHeader, { ProfilePageTabHeaderContext } from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
+import { ProfilePageTabHeaderContext } from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import {
   DefaultOperation,
   ProfilePhoto,
@@ -31,7 +33,6 @@ import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
-import { MathU } from '@util/common/MathU.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { FileU } from 'src/util/file/FileU.ts'
 import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFailures.ts'
@@ -57,16 +58,6 @@ import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
 import arr = ArrayU.arrOfIndices
-
-
-
-
-
-
-
-
-
-enum ProfileTabs { 'preview', 'profile', 'partner', 'date' }
 
 
 
@@ -112,7 +103,7 @@ React.memo(
     getCanSubmit: useCallback(
       (failedFields: (keyof FormValues)[]) => {
         return failedFields
-          .filter(ff=>ff in userDefaultValues)
+          .filter(ff => ff in userDefaultValues)
           .length < ObjectKeys(userDefaultValues).length
       },
       []
@@ -133,7 +124,7 @@ React.memo(
   
   
   useEffect(
-    ()=>{
+    () => {
       const u = auth?.user
       if (u) {
         setFormValues(s => {
@@ -157,13 +148,13 @@ React.memo(
           // get all downloads & downloaded data from same existing photos
           newValues.initialValues.photos = ArrayU.combine(
             newValues.initialValues.photos, [...s.initialValues.photos, ...s.photos],
-            (initialPhoto, oldPhoto)=>({
+            (initialPhoto, oldPhoto) => ({
               ...initialPhoto,
               dataUrl: oldPhoto.dataUrl,
               isReady: oldPhoto.isReady,
               download: oldPhoto.download,
             } satisfies ProfilePhoto),
-            (a,b)=>a.id===b.id && !a.isEmpty && !b.isEmpty
+            (a, b) => a.id===b.id && !a.isEmpty && !b.isEmpty
           )
           
           // replace remote photos by new initial photos
@@ -180,18 +171,28 @@ React.memo(
           })
           
           // stop operations for discarded photos
-          ArrayU.diff2
-          (s.initialValues.photos, newValues.photos, (a,b)=>a.id===b.id)[0]
+          ArrayU.diff2(
+            s.initialValues.photos,
+            newValues.photos,
+            (a, b) => a.id === b.id
+          )
+            // eslint-disable-next-line no-unexpected-multiline
+            [0]
             .forEach(diff => {
-              if (diff.isRemoved){
+              if (diff.isRemoved) {
                 diff.fromElem.download?.abort()
                 diff.fromElem.compression?.abort()
               }
             })
-          ArrayU.diff2
-          (s.photos, newValues.photos, (a,b)=>a.id===b.id)[0]
+          ArrayU.diff2(
+            s.photos,
+            newValues.photos,
+            (a, b) => a.id === b.id
+          )
+            // eslint-disable-next-line no-unexpected-multiline
+            [0]
             .forEach(diff => {
-              if (diff.isRemoved){
+              if (diff.isRemoved) {
                 diff.fromElem.download?.abort()
                 diff.fromElem.compression?.abort()
               }
@@ -245,7 +246,7 @@ React.memo(
             isReady: false,
             download: { ...DefaultOperation,
               id: photo.id,
-              abort: ()=>{
+              abort: () => {
                 console.log('download was aborted')
                 unlock(photo.remoteUrl)
                 abortCtrl.abort('download was aborted')
@@ -367,8 +368,17 @@ React.memo(
   
   const [tabIdx, setTabIdx] = useState(1)
   useEffect(() => {
+    enum ProfileTabs { 'preview', 'profile', 'partner', 'date' }
     console.log('current profile tab:', ProfileTabs[tabIdx])
   }, [tabIdx])
+  
+  
+  
+  
+  const titleText = useUiValues(TitleUiText)
+  const headers = useMemo(() => {
+    return [titleText.preview, formValues.name, titleText.date]
+  }, [titleText, formValues.name])
   
   
   
@@ -400,7 +410,7 @@ React.memo(
                     <ProfilePageTabHeaderContext.Provider value={{
                       tabContainerSpring,
                       tabWidth: computedTabsDimens.frameWidth,
-                      headers: ['Предпросмотр', formValues.name, /* 'Партнёр', */ 'Свидание'],
+                      headers: headers,
                       setTabsState: tabsProps.setTabsState,
                       setTabIdx: tabsProps.setTabIdx,
                     }}>

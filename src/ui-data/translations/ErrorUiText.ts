@@ -1,4 +1,4 @@
-import { UiValues } from 'src/util/ui-text/UiText.ts'
+import { UiValues } from 'src/util/mini-libs/ui-text/UiText.ts'
 
 
 

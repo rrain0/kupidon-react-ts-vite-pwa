@@ -24,7 +24,7 @@ import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFa
 import { useFormSubmit } from '@util/mini-libs/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@util/mini-libs/form-validation/hooks/useFormToasts.tsx'
 import ValidationWrap from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
 import { InputStyle } from 'src/ui/elements/inputs/Input/InputStyle.ts'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'

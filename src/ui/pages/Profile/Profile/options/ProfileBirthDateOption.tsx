@@ -6,7 +6,7 @@ import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
 import GiftBoxGradIc = SvgGradIcons.GiftBoxGradIc
 
 

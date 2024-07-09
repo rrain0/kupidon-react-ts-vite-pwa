@@ -1,9 +1,10 @@
-import { UiValues } from 'src/util/ui-text/UiText.ts'
+import { UiValues } from 'src/util/mini-libs/ui-text/UiText.ts'
 
 
 
 
 export const TitleUiText = {
+  
   
   profile: {
     'en-US': 'Profile',
@@ -28,6 +29,16 @@ export const TitleUiText = {
   settings: {
     'en-US': 'Settings',
     'ru-RU': 'Настройки',
+  },
+  
+  
+  preview: {
+    'en-US': 'Preview',
+    'ru-RU': 'Предпросмотр',
+  },
+  date: {
+    'en-US': 'Date',
+    'ru-RU': 'Свидание',
   },
   
   

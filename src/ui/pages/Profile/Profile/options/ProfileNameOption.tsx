@@ -5,7 +5,7 @@ import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.ts
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
 import NameCardGradIc = SvgGradIcons.NameCardGradIc
 
 

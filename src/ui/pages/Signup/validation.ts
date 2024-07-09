@@ -3,7 +3,7 @@ import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationValidators } from '@util/mini-libs/form-validation/core/ValidationValidators.ts'
 import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
-import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { UiTextValues } from 'src/util/mini-libs/ui-text/UiText.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators

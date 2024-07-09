@@ -5,7 +5,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
 
 
 

@@ -15,7 +15,7 @@ import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
-import { UiTextValues } from '@util/ui-text/UiText.ts'
+import { UiTextValues } from 'src/util/mini-libs/ui-text/UiText.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators

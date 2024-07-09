@@ -4,7 +4,7 @@ import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationActions } from 'src/util/mini-libs/form-validation/core/ValidationActions.ts'
 import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
-import { UiTemplate, UiText, UiTextValues } from 'src/util/ui-text/UiText.ts'
+import { UiTemplate, UiText, UiTextValues } from 'src/util/mini-libs/ui-text/UiText.ts'
 import { ToastMsg, ToastMsgData, useToasts } from 'src/ui/components/Toasts/useToasts.tsx'
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values

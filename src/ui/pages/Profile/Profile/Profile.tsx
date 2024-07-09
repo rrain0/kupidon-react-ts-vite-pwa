@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useUiValues } from '@util/ui-text/useUiText.ts'
+import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
