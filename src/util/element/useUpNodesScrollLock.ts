@@ -1,8 +1,7 @@
 import React, { useLayoutEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import commonCss from 'src/ui-props/styles/common.module.scss'
+import commonCss from 'src/ui-data/styles/common.module.scss'
 import PartialUndef = TypeU.PartialUndef
-
 
 
 

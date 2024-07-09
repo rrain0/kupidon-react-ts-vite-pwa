@@ -8,10 +8,10 @@ import React, {
   useState,
 } from 'react'
 import clsx from 'clsx'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useAsRef } from 'src/util/react-ref/useAsRef.ts'
+import { useAsRef } from 'src/util/react-state-and-ref/useAsRef.ts'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
@@ -23,6 +23,7 @@ import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 
+// make any point of bar will be dragged as current position
 // useScroll from use-spring - BUT it is broken when child 'display: contents;'
 // todo use @use-gesture/react and refs instead of state
 

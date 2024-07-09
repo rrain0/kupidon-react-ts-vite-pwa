@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import empty = TypeU.empty
-import cmcss from 'src/ui-props/styles/common.module.scss'
+import cmcss from 'src/ui-data/styles/common.module.scss'
 
 
 

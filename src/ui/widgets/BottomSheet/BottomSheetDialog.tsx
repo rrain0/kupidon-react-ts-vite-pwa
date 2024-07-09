@@ -3,7 +3,7 @@ import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import { BottomSheetParts } from 'src/ui/widgets/BottomSheet/BottomSheetParts.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
 import {
   ComputedBottomSheetDimens,

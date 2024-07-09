@@ -5,13 +5,9 @@ import Callback = TypeU.Callback
 
 
 
-export const useTimeout =
-(delay: number, callback: Callback, deps?: any[]) => {
-  useEffect(
-    () => {
-      const id = setTimeout(callback, delay)
-      return () => clearTimeout(id)
-    },
-    deps
-  )
+export const useTimeout = (delay: number, callback: Callback, deps?: any[] | undefined) => {
+  useEffect(() => {
+    const id = setTimeout(callback, delay)
+    return () => clearTimeout(id)
+  }, deps)
 }

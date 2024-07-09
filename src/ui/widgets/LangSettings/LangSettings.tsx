@@ -3,7 +3,7 @@ import React from 'react'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Setter = TypeU.Callback1
 import col = EmotionCommon.col

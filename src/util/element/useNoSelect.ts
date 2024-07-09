@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import commonCss from 'src/ui-props/styles/common.module.scss'
+import commonCss from 'src/ui-data/styles/common.module.scss'
 
 
 

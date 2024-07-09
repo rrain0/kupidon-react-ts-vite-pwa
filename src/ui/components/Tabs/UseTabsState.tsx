@@ -1,4 +1,4 @@
-import { useStateSync } from '@util/react/useStateSync.ts'
+import { useStateSync } from 'src/util/react-state-and-ref/useStateSync.ts'
 import React, { useEffect, useMemo } from 'react'
 import { useRef, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'

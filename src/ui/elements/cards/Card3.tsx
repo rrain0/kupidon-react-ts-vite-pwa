@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import col = EmotionCommon.col

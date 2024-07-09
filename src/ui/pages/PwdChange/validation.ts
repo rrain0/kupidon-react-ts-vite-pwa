@@ -2,7 +2,7 @@ import { UserApi } from 'src/api/requests/UserApi.ts'
 import { ValidationValidators } from '@util/mini-libs/form-validation/core/ValidationValidators.ts'
 import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
 import { UiTextValues } from '@util/ui-text/UiText.ts'
-import { ErrorUiText } from 'src/ui-props/ui-values/ErrorUiText.ts'
+import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import Validators = ValidationCore.Validators
 import isValidPwd = ValidationValidators.isValidPwd
 import PartialFailureData = ValidationCore.PartialFailureData

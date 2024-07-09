@@ -7,7 +7,7 @@ import BottomSheetBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetBasic.t
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import Date from 'src/ui/pages/Profile/Date/Date.tsx'
 import Partner from 'src/ui/pages/Profile/Partner/Partner.tsx'
-import { StatusUiText } from 'src/ui-props/ui-values/StatusUiText.ts'
+import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
 import OverflowWrapper from 'src/ui/widgets/Scrollbars/OverflowWrapper.tsx'
@@ -28,7 +28,7 @@ import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { MathU } from '@util/common/MathU.ts'
@@ -73,10 +73,10 @@ enum ProfileTabs { 'preview', 'profile', 'partner', 'date' }
 
 const ProfilePage =
 React.memo(
-()=>{
+() => {
   
   const app = useRecoilValue(AppRecoil)
-  const [auth,setAuth] = useRecoilState(AuthRecoil)
+  const [auth, setAuth] = useRecoilState(AuthRecoil)
   
   
   const {
@@ -84,7 +84,8 @@ React.memo(
     failures, setFailures,
     failedFields, validationProps,
   } = useFormFailures({
-    defaultValues, validators
+    defaultValues,
+    validators,
   })
   
   const {
@@ -95,17 +96,19 @@ React.memo(
     values: formValues,
     failedFields,
     prepareAndRequest: useCallback(
-      (values: FormValues, failedFields: (keyof FormValues)[])=>
-        profileUpdateApiRequest(values,failedFields,setFormValues,setAuth),
+      (values: FormValues, failedFields: (keyof FormValues)[]) =>
+        profileUpdateApiRequest(values, failedFields, setFormValues, setAuth),
       []
-    )
+    ),
   })
   
   const {
     canSubmit, onFormSubmitCallback, submit,
   } = useFormSubmit({
-    failures, setFailures,
-    failedFields, setFormValues,
+    failures,
+    setFailures,
+    failedFields,
+    setFormValues,
     getCanSubmit: useCallback(
       (failedFields: (keyof FormValues)[]) => {
         return failedFields
@@ -114,8 +117,11 @@ React.memo(
       },
       []
     ),
-    request, isLoading, isError,
-    response, resetResponse,
+    request,
+    isLoading,
+    isError,
+    response,
+    resetResponse,
   })
   
   
@@ -202,7 +208,6 @@ React.memo(
   
   
   
-  
   useFormToasts({
     isLoading,
     loadingText: StatusUiText.saving,
@@ -225,15 +230,15 @@ React.memo(
   
   // todo it retries endlessly if can't obtain photos
   useAsyncEffect(
-    (lock,unlock)=>{
+    (lock, unlock) => {
       //return;
       const serverPhotos = formValues.initialValues.photos
       const photos = formValues.photos
-      ;[...serverPhotos,...photos].forEach(photo=>{
+      ;[...serverPhotos, ...photos].forEach(photo => {
         if (!photo.isEmpty && photo.type==='remote' && !photo.isReady
           && !photo.download && !photo.compression
           && lock(photo.remoteUrl)
-        ){
+        ) {
           
           const abortCtrl = new AbortController()
           const downloadStart = {
@@ -248,42 +253,42 @@ React.memo(
             },
           } satisfies Partial<ProfilePhoto>
           
-          setFormValues(s=>({ ...s,
+          setFormValues(s => ({ ...s,
             initialValues: { ...s.initialValues,
               photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                elem=>({...elem, ...downloadStart}),
-                elem=>elem.id===photo.id
+                elem => ({ ...elem, ...downloadStart }),
+                elem => elem.id===photo.id
               ),
             },
             photos: mapFirstToIfFoundBy(s.photos,
-              elem=>({...elem, ...downloadStart}),
-              elem=>elem.id===photo.id
+              elem => ({ ...elem, ...downloadStart }),
+              elem => elem.id===photo.id
             ),
           }))
           
-          const updatePhotosNow = (p: Partial<ProfilePhoto>)=>{
-            setFormValues(s=>({ ...s,
+          const updatePhotosNow = (p: Partial<ProfilePhoto>) => {
+            setFormValues(s => ({ ...s,
               initialValues: { ...s.initialValues,
                 photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                  elem=>({...elem, ...p}),
-                  elem=>elem.download?.id===downloadStart.download.id
+                  elem => ({ ...elem, ...p }),
+                  elem => elem.download?.id===downloadStart.download.id
                 ),
               },
               photos: mapFirstToIfFoundBy(s.photos,
-                elem=>({...elem, ...p}),
-                elem=>elem.download?.id===downloadStart.download.id
+                elem => ({ ...elem, ...p }),
+                elem => elem.download?.id===downloadStart.download.id
               ),
             }))
           }
           const updatePhotos = throttle(
-            RangeU.map(Math.random(),[0,1],[1450,2000]),
+            RangeU.map(Math.random(), [0, 1], [1450, 2000]),
             updatePhotosNow
           )
           
-          ;(async()=>{
+          ;(async() => {
             try {
-              const progress = new Progress(2,[90,10])
-              const onProgress = (p: number|null)=>{
+              const progress = new Progress(2, [90, 10])
+              const onProgress = (p: number | null) => {
                 progress.progress = p??0
                 //console.log('progress', photo.id, progress.value)
                 updatePhotos({ download: {
@@ -308,7 +313,7 @@ React.memo(
               //console.log('completed',photo.id)
               updatePhotosNow({ isReady: true, download: undefined, dataUrl })
             }
-            catch (ex){
+            catch (ex) {
               // TODO notify about error
               //console.log('download error', ex)
               //console.log('photo', photo)
@@ -328,27 +333,20 @@ React.memo(
   
   
   
-  
-  
-  
-  
-  
-  
-  
   const [needToFetchUser, setNeedToFetchUser] = useState(true)
   const [isFetchingUser, setFetchingUser] = useState(false)
   useAsyncEffect(
-    (lock,unlock)=>{
+    (lock, unlock) => {
       if (needToFetchUser && !isFetchingUser
         && lock(UserApi.current)
-      ){
+      ) {
         setNeedToFetchUser(false)
         setFetchingUser(true)
-        ;(async()=>{
+        ;(async() => {
           try {
             const resp = await UserApi.current()
             if (resp.isSuccess)
-              setAuth(curr=>({ ...curr!, user: resp.data.user }))
+              setAuth(curr => ({ ...curr!, user: resp.data.user }))
             else
               console.warn('failed to fetch user:', resp)
           }
@@ -378,7 +376,7 @@ React.memo(
     <Pages.TabsPage>
       
       <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
-        {tabsProps=><>
+        {tabsProps => <>
           <Tabs css={fill} {...tabsProps}>
             {({ tabContainerSpring, computedTabsDimens }) => <>
               {arr(3).map(tabIdx =>
@@ -406,37 +404,38 @@ React.memo(
                       setTabsState: tabsProps.setTabsState,
                       setTabIdx: tabsProps.setTabIdx,
                     }}>
-                      {{
-                        0:
-                          <Preview formValues={formValues}/>,
-                        1:
-                          <Profile
-                            validationProps={validationProps}
-                            onFormSubmitCallback={onFormSubmitCallback}
-                            submit={submit}
-                            canSubmit={canSubmit}
-                            formProps={formProps}
-                            isLoading={isLoading}
-                          />,
-                        2:
-                          <Partner
-                            validationProps={validationProps}
-                            onFormSubmitCallback={onFormSubmitCallback}
-                            submit={submit}
-                            canSubmit={canSubmit}
-                            formProps={formProps}
-                            isLoading={isLoading}
-                          />,
-                        3:
-                          <Date
-                            validationProps={validationProps}
-                            onFormSubmitCallback={onFormSubmitCallback}
-                            submit={submit}
-                            canSubmit={canSubmit}
-                            formProps={formProps}
-                            isLoading={isLoading}
-                          />,
-                      }[tabIdx]}
+                      {[
+                        <Preview
+                          formValues={formValues}
+                        />,
+                        <Profile
+                          validationProps={validationProps}
+                          onFormSubmitCallback={onFormSubmitCallback}
+                          submit={submit}
+                          canSubmit={canSubmit}
+                          formProps={formProps}
+                          isLoading={isLoading}
+                          tabIdx={tabIdx}
+                        />,
+                        /* <Partner
+                          validationProps={validationProps}
+                          onFormSubmitCallback={onFormSubmitCallback}
+                          submit={submit}
+                          canSubmit={canSubmit}
+                          formProps={formProps}
+                          isLoading={isLoading}
+                          tabIdx={tabIdx}
+                        />, */
+                        <Date
+                          validationProps={validationProps}
+                          onFormSubmitCallback={onFormSubmitCallback}
+                          submit={submit}
+                          canSubmit={canSubmit}
+                          formProps={formProps}
+                          isLoading={isLoading}
+                          tabIdx={tabIdx}
+                        />,
+                      ][tabIdx]}
                     </ProfilePageTabHeaderContext.Provider>
                     
                   </OverflowWrapper>

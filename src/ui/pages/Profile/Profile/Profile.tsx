@@ -4,44 +4,44 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/elements/cards/Card3.tsx'
-import ProfileAboutMeOption from 'src/ui/pages/Profile/Profile/ProfileAboutMeOption.tsx'
-import ProfileAlcoholOption from 'src/ui/pages/Profile/Profile/ProfileAlcoholOption.tsx'
-import ProfileBirthDateOption from 'src/ui/pages/Profile/Profile/ProfileBirthDateOption.tsx'
-import ProfileEducationOption from 'src/ui/pages/Profile/Profile/ProfileEducationOption.tsx'
+import ProfileAboutMeOption from 'src/ui/pages/Profile/Profile/options/ProfileAboutMeOption.tsx'
+import ProfileAlcoholOption from 'src/ui/pages/Profile/Profile/options/ProfileAlcoholOption.tsx'
+import ProfileBirthDateOption from 'src/ui/pages/Profile/Profile/options/ProfileBirthDateOption.tsx'
+import ProfileEducationOption from 'src/ui/pages/Profile/Profile/options/ProfileEducationOption.tsx'
 import ProfileFavoriteBookGenresOption
-  from 'src/ui/pages/Profile/Profile/ProfileFavoriteBookGenresOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileFavoriteBookGenresOption.tsx'
 import ProfileFavoriteMovieGenresOption
-  from 'src/ui/pages/Profile/Profile/ProfileFavoriteMovieGenresOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileFavoriteMovieGenresOption.tsx'
 import ProfileFavoriteThingsInRelationshipsOption
-  from 'src/ui/pages/Profile/Profile/ProfileFavoriteThingsInRelationshipsOption.tsx'
-import ProfileGenderOption from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
-import ProfileHeightOption from 'src/ui/pages/Profile/Profile/ProfileHeightOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileFavoriteThingsInRelationshipsOption.tsx'
+import ProfileGenderOption from 'src/ui/pages/Profile/Profile/options/ProfileGenderOption.tsx'
+import ProfileHeightOption from 'src/ui/pages/Profile/Profile/options/ProfileHeightOption.tsx'
 import ProfileImLookingForOption
-  from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileImLookingForOption.tsx'
 import ProfileInterestsAndHobbiesOption
-  from 'src/ui/pages/Profile/Profile/ProfileInterestsAndHobbiesOption.tsx'
-import ProfileJobOption from 'src/ui/pages/Profile/Profile/ProfileJobOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileInterestsAndHobbiesOption.tsx'
+import ProfileJobOption from 'src/ui/pages/Profile/Profile/options/ProfileJobOption.tsx'
 import ProfileLeastFavoriteThingsInRelationshipsOption
-  from 'src/ui/pages/Profile/Profile/ProfileLeastFavoriteThingsInRelationshipsOption.tsx'
-import ProfileMbtiOption from 'src/ui/pages/Profile/Profile/ProfileMbtiOption.tsx'
-import ProfileNameOption from 'src/ui/pages/Profile/Profile/ProfileNameOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileLeastFavoriteThingsInRelationshipsOption.tsx'
+import ProfileMbtiOption from 'src/ui/pages/Profile/Profile/options/ProfileMbtiOption.tsx'
+import ProfileNameOption from 'src/ui/pages/Profile/Profile/options/ProfileNameOption.tsx'
 import ProfilePartnerCommunicationCharacteristicsOption
-  from 'src/ui/pages/Profile/Profile/ProfilePartnerCommunicationCharacteristicsOption.tsx'
-import ProfilePetsOption from 'src/ui/pages/Profile/Profile/ProfilePetsOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfilePartnerCommunicationCharacteristicsOption.tsx'
+import ProfilePetsOption from 'src/ui/pages/Profile/Profile/options/ProfilePetsOption.tsx'
 import ProfilePreviousRelationshipsOption
-  from 'src/ui/pages/Profile/Profile/ProfilePreviousRelationshipsOption.tsx'
-import ProfileSmokeOption from 'src/ui/pages/Profile/Profile/ProfileSmokeOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfilePreviousRelationshipsOption.tsx'
+import ProfileSmokeOption from 'src/ui/pages/Profile/Profile/options/ProfileSmokeOption.tsx'
 import ProfileSportFrequencyOption
-  from 'src/ui/pages/Profile/Profile/ProfileSportFrequencyOption.tsx'
+  from 'src/ui/pages/Profile/Profile/options/ProfileSportFrequencyOption.tsx'
 import ProfilePageTabHeader from 'src/ui/pages/Profile/ProfilePageTabHeader.tsx'
 import ProfilePhotos from 'src/ui/pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useFormFailures } from '@util/mini-libs/form-validation/hooks/useFormFailures.ts'
 import { FormProps } from '@util/mini-libs/form-validation/hooks/useFormValuesProps.ts'
 import ValidationWrap from '@util/mini-libs/form-validation/components/ValidationWrap.tsx'
-import { ActionUiText } from 'src/ui-props/ui-values/ActionUiText.ts'
+import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import col = EmotionCommon.col
@@ -64,12 +64,13 @@ export type ProfileProps = {
   canSubmit: boolean
   formProps: FormProps
   isLoading: boolean
+  tabIdx: number
 }
 
 
 const Profile =
 React.memo(
-(props: ProfileProps)=>{
+(props: ProfileProps) => {
   
   const actionText = useUiValues(ActionUiText)
   
@@ -80,7 +81,7 @@ React.memo(
     <Pages.SafeInsets>
       <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
         
-        <ProfilePageTabHeader thisTabIdx={1}/>
+        <ProfilePageTabHeader thisTabIdx={props.tabIdx}/>
         
         
         <div css={col}>

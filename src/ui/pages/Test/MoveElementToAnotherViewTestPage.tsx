@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import center = EmotionCommon.center
 
 

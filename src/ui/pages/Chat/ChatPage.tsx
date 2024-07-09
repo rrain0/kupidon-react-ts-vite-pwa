@@ -1,5 +1,5 @@
 import React from 'react'
-import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
+import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import FormHeader from 'src/ui/elements/basic-elements/Hs'
 import { Pages } from 'src/ui/components/Pages/Pages'

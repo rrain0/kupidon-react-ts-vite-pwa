@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 
 

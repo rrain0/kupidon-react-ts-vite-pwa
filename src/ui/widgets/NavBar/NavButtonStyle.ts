@@ -3,7 +3,7 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable

@@ -36,11 +36,14 @@ export namespace Utils {
   
   export const versionToNumArr = (version: string) =>
     version.split('.').map(it => Number.parseInt(it))
-    
   
   
-  let id = 1
-  export const nextId = () => '' + id++
+  
+  
+  export const nextId = (() => {
+    let id = 1
+    return () => '' + id++
+  })()
   
   
   

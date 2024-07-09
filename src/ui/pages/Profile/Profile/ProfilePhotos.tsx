@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { ReactDOMAttributes } from '@use-gesture/react/src/types'
+import { ReactDOMAttributes } from 'lib-types-overrides/@use-gesture/react/src/types'
 import React, {
   useCallback,
   useEffect,
@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
-} from 'src/ui/pages/Profile/Profile/ProfilePhotosPhotoOptions.tsx'
+} from 'src/ui/pages/Profile/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import {
   DefaultOperation,
   DefaultProfilePhoto,
@@ -24,23 +24,22 @@ import {
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
-import { ArrayU } from '@util/common/ArrayU.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { FileU } from 'src/util/file/FileU.ts'
-import { MathU } from '@util/common/MathU.ts'
-import { DataUrl } from '@util/DataUrl.ts'
+import { DataUrl } from 'src/util/DataUrl.ts'
 import { ImageU } from 'src/util/file/ImageU.ts'
-import { Progress } from '@util/Progress.ts'
-import { useEffectEvent } from '@util/react/useEffectEvent.ts'
+import { Progress } from 'src/util/Progress.ts'
+import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { useNoTouchAction } from 'src/util/element/useNoTouchAction.ts'
-import { useStateAndRef } from 'src/util/react-ref/useStateAndRef.ts'
+import { useStateAndRef } from 'src/util/react-state-and-ref/useStateAndRef.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import center = EmotionCommon.center
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
@@ -61,6 +60,7 @@ import findByAndMapTo = ArrayU.mapFirstToIfFoundBy
 import throttle = AsyncU.throttle
 import Callback = TypeU.Callback
 import findBy = ArrayU.findBy
+import NumRange = RangeU.NumRange
 
 
 
@@ -78,8 +78,8 @@ const springStyle =
     opacity: 0.4,
     //scale: index===0 ? 0.5 : 1,
     zIndex: 1,
-    immediate: (key: string)=>['zIndex'].includes(key),
-    config: (key: string)=>['x','y'].includes(key) ? config.stiff : config.default
+    immediate: (key: string) => ['zIndex'].includes(key),
+    config: (key: string) => ['x', 'y'].includes(key) ? config.stiff : config.default,
   } satisfies UseSpringProps
   
   return {
@@ -100,21 +100,21 @@ export type ProfilePhotosProps = {
 }
 const ProfilePhotos =
 React.memo(
-(props: ProfilePhotosProps)=>{
+(props: ProfilePhotosProps) => {
   const { images, setImages } = props
   const { theme } = useRecoilValue(ThemeRecoil)
   const { isDraggingFiles } = useRecoilValue(AppRecoil)
   
   
   const progressAnim = useMemo(
-    ()=>radialGradKfs(theme),
+    () => radialGradKfs(theme),
     [theme]
   )
   
   const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
   useTimeout(
     3000,
-    ()=>setCanShowFetchProgress(true),
+    () => setCanShowFetchProgress(true),
     []
   )
   
@@ -124,7 +124,7 @@ React.memo(
     undefined as undefined|'initialDelay'|'progressAnim'|'dragging'
   )
   const [progressAnimLockGestures, setProgressAnimLockGestures] = useState(false)
-  const [swap, setSwap] = useState(undefined as undefined|[number,number])
+  const [swap, setSwap] = useState(undefined as undefined | NumRange)
   
   const [canClick, setCanClick] = useState(true)
   const photoOptions = useOverlayUrl(ProfilePhotosPhotoOptionsOverlayName)
@@ -137,7 +137,7 @@ React.memo(
   useNoTouchAction(isLockGestures)
   const isGesturesBusy = useLockAppGestures(isLockGestures)
   useLayoutEffect(
-    ()=>{
+    () => {
       if (isGesturesBusy) {
         setDragState(undefined)
         setCanClick(false)
@@ -149,46 +149,43 @@ React.memo(
   
   // swaps photos
   const swapPhotosEffectEvent = useEffectEvent(
-    (swap: [number,number])=>{
+    (swap: NumRange) => {
       const newImages = [...images]
       newImages[swap[0]] = images[swap[1]]
       newImages[swap[1]] = images[swap[0]]
       setImages(newImages)
     }
   )
-  useLayoutEffect(
-    ()=>{
-      if (!dragState && swap){
-        swapPhotosEffectEvent(swap)
-        setSwap(undefined)
-      }
-    },
-    [dragState, swap]
-  )
+  useLayoutEffect(() => {
+    if (!dragState && swap) {
+      swapPhotosEffectEvent(swap)
+      setSwap(undefined)
+    }
+  }, [dragState, swap])
   
   
   // starts selection animation after timeout
   useLayoutEffect(
-    ()=>{
-      if (dragState==='initialDelay'){
+    () => {
+      if (dragState === 'initialDelay') {
         const timerId = setTimeout(
-          ()=>setDragState('progressAnim'),
+          () => setDragState('progressAnim'),
           150
         )
-        return ()=>clearTimeout(timerId)
+        return () => clearTimeout(timerId)
       }
     },
     [dragState]
   )
   
   useLayoutEffect(
-    ()=>{
+    () => {
       if (dragState==='progressAnim') {
         const timerId = setTimeout(
-          ()=>setProgressAnimLockGestures(true),
+          () => setProgressAnimLockGestures(true),
           progressAnimDuration - 300
         )
-        return ()=>clearTimeout(timerId)
+        return () => clearTimeout(timerId)
       }
       else setProgressAnimLockGestures(false)
     },
@@ -197,7 +194,7 @@ React.memo(
   
   
   const photosGrid = useRef<HTMLDivElement>(null)
-  const photoFrameRefs = useRef<Array<Element|null>>(arrIndices(6).map(i=>null))
+  const photoFrameRefs = useRef<Array<Element|null>>(arrIndices(6).map(i => null))
   
   
   
@@ -208,12 +205,12 @@ React.memo(
   const applyDragRef = useRef<Callback>()
   // noinspection JSVoidFunctionReturnValueUsed
   const drag = useDrag(
-    gesture=>{
+    gesture => {
       const [i] = gesture.args as [number]
       const {
         first, active, last,
-        movement: [mx,my],
-        xy: [vpx,vpy], // viewport x, viewport y
+        movement: [mx, my],
+        xy: [vpx, vpy], // viewport x, viewport y
       } = gesture
       /* console.log(
         'mx:', mx,
@@ -226,19 +223,20 @@ React.memo(
         })])
       } */
       
-      const applyDrag = ()=>{
-        const isDragging = dragStateRef.current==='dragging' && active
+      const applyDrag = () => {
+        const isDragging = dragStateRef.current === 'dragging' && active
         springApi.start(springStyle(i, isDragging, mx, my))
-        if (isDragging){
-          const hoveredElements = document.elementsFromPoint(vpx,vpy)
+        if (isDragging) {
+          const hoveredElements = document.elementsFromPoint(vpx, vpy)
           if (!hoveredElements.includes(photosGrid.current as any)) {
             setSwap(undefined)
-          } else {
+          } 
+          else {
             const found = findBy(photoFrameRefs.current,
-                elem=>hoveredElements.includes(elem as any)
+                elem => hoveredElements.includes(elem as any)
             )
-            if (!found.isFound) {} // nothing to do, remain previous swap
-            else if (i!==found.index) setSwap([i,found.index])
+            if (!found.isFound) { /* nothing to do, remain previous swap */ }
+            else if (i!==found.index) setSwap([i, found.index])
             else setSwap(undefined)
           }
         }
@@ -252,7 +250,7 @@ React.memo(
     }
   ) as (...args: any[]) => ReactDOMAttributes
   useEffect(
-    ()=>{ if (dragState==='dragging') applyDragRef.current?.() },
+    () => { if (dragState==='dragging') applyDragRef.current?.() },
     [dragState]
   )
   
@@ -282,7 +280,7 @@ React.memo(
     <div css={photosGridStyle}
       ref={photosGrid}
     >
-      {springs.map((springStyle,i) => {
+      {springs.map((springStyle, i) => {
         const im = images[i]
         return <div css={contents} key={im.id}>
         <div css={css`
@@ -290,23 +288,23 @@ React.memo(
           position: relative;
           ${center};
         `}
-          ref={(value)=>photoFrameRefs.current[i]=value}
+          ref={value => photoFrameRefs.current[i]=value}
         >
           
           
           <div css={contents}
             //ref={ref as any}
-            {...function(){
-              const onPointerDown = (ev: React.PointerEvent)=>{
-                if (ev.buttons===1){
+            {...function() {
+              const onPointerDown = (ev: React.PointerEvent) => {
+                if (ev.buttons===1) {
                   ev.currentTarget.releasePointerCapture(ev.pointerId)
                   setLastIdx(i)
                   setDragState('initialDelay')
                   setCanClick(true)
                 }
               }
-              const onPointerRemove = ()=>{
-                if (dragState!=='dragging'){
+              const onPointerRemove = () => {
+                if (dragState!=='dragging') {
                   setDragState(undefined)
                 }
               }
@@ -317,7 +315,7 @@ React.memo(
                 onPointerOut: onPointerRemove,
               }
             }()}
-            onClick={ev=>{
+            onClick={ev => {
               if (canClick && !im.isEmpty) photoOptions.open()
             }}
           >
@@ -339,7 +337,7 @@ React.memo(
                       //ref={ref2 as any}
                     >
                       
-                      {function(){
+                      {function() {
                         if (im.compression?.showProgress)
                           return <div css={photoPlaceholderStyle}>
                             <PieProgress css={profilePhotoPieProgress}
@@ -374,8 +372,8 @@ React.memo(
                         
                       }()}
                       
-                      {im.type === 'local' && im.upload?.showProgress &&
-                        <div css={photoDimmed}>
+                      {im.type === 'local' && im.upload?.showProgress
+                        && <div css={photoDimmed}>
                           <PieProgress css={profilePhotoPieProgressAccent}
                             progress={
                               RangeU.map(im.upload.progress, [0, 100], [5, 95])
@@ -397,7 +395,7 @@ React.memo(
           
           
           
-          <div css={t=>css`
+          <div css={t => css`
             ${photoProgressFrameStyle(t)};
             
             ${lastIdx===i && dragState==='progressAnim' && css`
@@ -412,7 +410,7 @@ React.memo(
               background-color: ${t.photos.highlightFrameAccentBgc[0]};
             `}
           `}
-            onAnimationEnd={ev=>{
+            onAnimationEnd={ev => {
               if (ev.animationName===progressAnim.name) {
                 setDragState('dragging')
                 setCanClick(false)
@@ -425,7 +423,6 @@ React.memo(
         </div>
       })}
     </div>
-    
     
     
     
@@ -447,7 +444,7 @@ export default ProfilePhotos
 
 
 
-const radialGradKfs = (t:Theme)=>keyframes`
+const radialGradKfs = (t:Theme) => keyframes`
   0% {
     --rotation: 0turn;
     --grad-color: ${t.photos.highlightFrameBgc[0]};
@@ -507,7 +504,7 @@ const photoImgStyle = css`
 
 
 
-const photoPlaceholderStyle = (t:AppTheme.Theme)=>css`
+const photoPlaceholderStyle = (t:AppTheme.Theme) => css`
   ${abs};
   pointer-events: none;
   border-radius: inherit;
@@ -515,24 +512,24 @@ const photoPlaceholderStyle = (t:AppTheme.Theme)=>css`
   background: ${t.photos.bgc[0]};
   ${center};
 `
-const photoDimmed = (t:AppTheme.Theme)=>css`
+const photoDimmed = (t:AppTheme.Theme) => css`
   ${photoPlaceholderStyle(t)};
   background: #00000099;
 `
-const photoOnDragBorder = (t:AppTheme.Theme)=>css`
+const photoOnDragBorder = (t:AppTheme.Theme) => css`
   ${abs};
   inset: -4px;
   border-radius: calc(14px + 4px);
   border: 10px dashed;
   border-color: ${t.photos.borderDrag[0]};
 `
-const photoPlaceholderIconStyle = (t:AppTheme.Theme)=>css`
+const photoPlaceholderIconStyle = (t:AppTheme.Theme) => css`
   ${SvgIconsStyle.El.icon.thiz()}{
     ${SvgIconsStyle.El.icon.props.color.set(t.photos.content[0])}
     ${SvgIconsStyle.El.icon.props.size.set('30%')}
   }
 `
-const profilePhotoPieProgress = (t:AppTheme.Theme)=>css`
+const profilePhotoPieProgress = (t:AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress}{
     ${PieProgressStyle.Prop.prop.progressColor}: transparent;
     ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.content[0]};
@@ -540,13 +537,13 @@ const profilePhotoPieProgress = (t:AppTheme.Theme)=>css`
     aspect-ratio: 1;
   }
 `
-const profilePhotoPieProgressAccent = (t:AppTheme.Theme)=>css`
+const profilePhotoPieProgressAccent = (t:AppTheme.Theme) => css`
   ${profilePhotoPieProgress(t)};
   ${PieProgressStyle.El.thiz.pieProgress}{
     ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.bgc[0]};
   }
 `
-const photoProgressFrameStyle = (t:AppTheme.Theme)=>css`
+const photoProgressFrameStyle = (t:AppTheme.Theme) => css`
   pointer-events: none;
 
   ${abs};
@@ -574,41 +571,27 @@ const photoProgressFrameStyle = (t:AppTheme.Theme)=>css`
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const onFilesSelectedBuilder =
 (
   images: ProfilePhoto[],
   lastIdx: number,
   setImages: SetterOrUpdater<ProfilePhoto[]>,
   closeMenu: Callback,
-)=>
-(files: File[])=>{
-  const imgFiles = files.filter(it=>it.type.startsWith('image/'))
-  if (imgFiles.length){
+) =>
+(files: File[]) => {
+  const imgFiles = files.filter(it => it.type.startsWith('image/'))
+  if (imgFiles.length) {
     const emptyCnt = images
-      .filter((im,i)=>i===lastIdx || (i>=lastIdx && im.isEmpty)).length
+      .filter((im, i) => i===lastIdx || (i>=lastIdx && im.isEmpty)).length
     let filesI = 0
-    const newImages = images.map((photo,i)=>{
-      if (filesI < imgFiles.length &&
-        (i===lastIdx ||
-          (i>=lastIdx &&
-            (imgFiles.length<=emptyCnt ? photo.isEmpty : true)
+    const newImages = images.map((photo, i) => {
+      if (filesI < imgFiles.length
+        && (i===lastIdx
+          || (i>=lastIdx
+            && (imgFiles.length<=emptyCnt ? photo.isEmpty : true)
           )
         )
-      ){
+      ) {
         const imgFile = imgFiles[filesI++]
         
         photo.download?.abort()
@@ -619,7 +602,7 @@ const onFilesSelectedBuilder =
           isReady: false,
           compression: { ...DefaultOperation,
             id: uuid.v4(),
-            abort: ()=>{
+            abort: () => {
               //console.log('compression was aborted')
               abortCtrl.abort('compression was aborted')
             },
@@ -680,9 +663,9 @@ const onFilesSelectedBuilder =
               dataUrl: imgDataUrl,
               isReady: true,
             } satisfies ProfilePhoto
-            setImages(s=>ifFoundByThenReplaceTo(s,
+            setImages(s => ifFoundByThenReplaceTo(s,
               newPhoto,
-              elem=>elem.compression?.id===compressionStart.compression.id
+              elem => elem.compression?.id===compressionStart.compression.id
             ))
           }
           catch (ex) {
@@ -702,19 +685,6 @@ const onFilesSelectedBuilder =
     closeMenu()
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

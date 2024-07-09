@@ -14,7 +14,7 @@ import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import PartialUndef = TypeU.PartialUndef
-import { useStateAndRef } from 'src/util/react-ref/useStateAndRef.ts'
+import { useStateAndRef } from 'src/util/react-state-and-ref/useStateAndRef.ts'
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback
 import findLastBy = ArrayU.findLastBy

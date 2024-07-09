@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderArrow from 'src/ui/pages/BowAndArrows/elements/HeaderArrow.tsx'
 import PageHeader from 'src/ui/pages/BowAndArrows/elements/PageHeader.tsx'
-import { TitleUiText } from 'src/ui-props/ui-values/TitleUiText.ts'
+import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/widgets/Scrollbars/PageScrollbars'

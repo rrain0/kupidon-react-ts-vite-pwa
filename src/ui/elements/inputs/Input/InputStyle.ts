@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import row = EmotionCommon.row
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs

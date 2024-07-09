@@ -11,7 +11,7 @@ import {
   PartnerCommunicationCharacteristicsOptionValues
 } from 'src/ui/pages/Profile/Profile/ProfilePartnerCommunicationCharacteristicsOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
-import { ErrorUiText } from 'src/ui-props/ui-values/ErrorUiText.ts'
+import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'

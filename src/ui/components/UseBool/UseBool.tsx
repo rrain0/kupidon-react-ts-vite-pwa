@@ -1,6 +1,6 @@
 import React from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useBool } from '@util/react/useBool.ts'
+import { useBool } from 'src/util/react-state-and-ref/useBool.ts'
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import PartialUndef = TypeU.PartialUndef
 import ValueOrGenerator = TypeU.ValueOrGenerator

@@ -3,14 +3,13 @@ import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import FormValues = ProfilePageValidation.FormValues
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
-
 
 
 
@@ -23,15 +22,15 @@ export type PreviewProps = {
 
 const Preview =
 React.memo(
-(props: PreviewProps)=>{
+(props: PreviewProps) => {
   
   const photos = props.formValues.photos
   const firstImage = useMemo(
-    ()=>photos.filter(it=>it.isReady)[0],
+    () => photos.filter(it => it.isReady)[0],
     [photos]
   )
   
-  const [scroll,setScroll] = useState(0)
+  const [scroll, setScroll] = useState(0)
   
   /* useEffect(
     ()=>{

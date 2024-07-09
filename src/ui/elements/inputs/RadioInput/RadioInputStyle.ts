@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
@@ -11,6 +11,8 @@ import hoverable = EmotionCommon.hoverable
 
 export namespace RadioInputStyle {
   
+  import row = EmotionCommon.row
+  import center = EmotionCommon.center
   export namespace Attr {
     export const errorName = 'data-error'
     
@@ -74,8 +76,9 @@ export namespace RadioInputStyle {
     // normal
     ${El.frame} {
       border-radius: 15px;
-      padding: 8px 10px;
-      gap: 8px;
+      ${row};
+      gap: 16px;
+      padding: 8px 10px 8px 10px;
       
       ${Txt.large2};
       color: ${t.page.content2[0]};
@@ -85,6 +88,8 @@ export namespace RadioInputStyle {
       ${Prop.rippleColor}: ${t.ripple.contentOnTransparent[0]};
     }
     ${El.iconWrap}{
+      /*align-self: start;*/
+      /* ${center}; */
       width: 26px;
       height: 26px;
       ${Prop.activeIconColor}: ${t.inputRadio.bgcFocus[0]};

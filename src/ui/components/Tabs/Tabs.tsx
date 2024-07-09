@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
-import { EmotionCommon } from 'src/ui-props/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState, useTabs } from 'src/ui/components/Tabs/useTabs.ts'
 import PartialUndef = TypeU.PartialUndef
