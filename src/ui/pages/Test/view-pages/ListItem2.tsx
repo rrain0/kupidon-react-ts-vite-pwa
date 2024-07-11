@@ -1,0 +1,316 @@
+import styled from '@emotion/styled'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons'
+import row = EmotionCommon.row
+import PlusIc = SvgIcons.PlusIc
+import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
+import center = EmotionCommon.center
+import col = EmotionCommon.col
+import abs = EmotionCommon.abs
+import colC = EmotionCommon.colC
+
+
+
+const ListItem2 = () => {
+  
+  
+  const variants = [
+    'Вариант 1',
+    'Вариант 1',
+    'Ооооооооооочень длиииииииииииинннннннннннннннннннннный вариант',
+    'Невероятно максимально наидлинейше поэтически исторически эпически'
+    + 'длиииииииииииииииииииииииииииинный вариант',
+  ]
+  
+  const options = [
+    {
+      value: '1',
+      text: 'Вариант 1',
+      isSelected: false,
+      isEditable: false,
+      isAdd: false,
+    },
+    {
+      value: '2',
+      text: 'Вариант 2',
+      isSelected: true,
+      isEditable: false,
+      isAdd: false,
+    },
+    {
+      value: '3',
+      text: 'Вариант 3',
+      isSelected: false,
+      isEditable: false,
+      isAdd: false,
+    },
+    {
+      value: '4',
+      text: 'Вариант 4',
+      isSelected: true,
+      isEditable: true,
+      isAdd: false,
+    },
+    {
+      value: '5',
+      text: 'Вариант 5',
+      isSelected: false,
+      isEditable: true,
+      isAdd: false,
+    },
+    {
+      value: '6',
+      text: 'Вариант 6',
+      isSelected: false,
+      isEditable: true,
+      isAdd: true,
+    },
+  ]
+  
+  return <Pages.SimplePage>
+    <Pages.ContentFill>
+      
+      
+      <div>List Item v2</div>
+      
+      
+      <ColumnContent>
+        
+        
+        
+        <div>Невыбранный элемент списка:</div>
+        
+        { variants.map(v => <Frame>
+          
+          <IndicatorFrame>
+            <IndicatorBox>
+              <Indicator />
+            </IndicatorBox>
+          </IndicatorFrame>
+          
+          <TextBox>
+            <Text>{v}</Text>
+          </TextBox>
+        
+        </Frame>) }
+        
+        
+        
+        <div>Выбранный элемент списка:</div>
+        
+        { variants.map(v => <Frame>
+          
+          <IndicatorFrame>
+            <IndicatorBox>
+              <IndicatorSelected />
+            </IndicatorBox>
+          </IndicatorFrame>
+          
+          <TextBox>
+            <Text>{v}</Text>
+          </TextBox>
+          
+          <Border />
+        
+        </Frame>) }
+        
+        
+        
+        <div>Добавить элемент в список:</div>
+        
+        <Frame>
+          
+          <AddIconBox><PlusIc/></AddIconBox>
+        
+        </Frame>
+        
+        
+        
+        <div>Редактируемый невыбранный элемент:</div>
+        
+        { variants.map((v, i) => <Frame>
+          
+          <IndicatorFrame>
+            <IndicatorBox>
+              <Indicator />
+            </IndicatorBox>
+          </IndicatorFrame>
+          
+          <TextBox>
+            <Text>{v}</Text>
+          </TextBox>
+          
+          <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
+            <PencilWrite2Ic/>
+          </PencilIconBox>
+        
+        </Frame>) }
+        
+        
+        
+        <div>Редактируемый выбранный элемент списка:</div>
+        
+        { variants.map((v, i) => <Frame>
+          
+          <IndicatorFrame>
+            <IndicatorBox>
+              <IndicatorSelected />
+            </IndicatorBox>
+          </IndicatorFrame>
+          
+          <TextBox>
+            <Text>{v}</Text>
+          </TextBox>
+          
+          <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
+            <PencilWrite2Ic/>
+          </PencilIconBox>
+          
+          <Border />
+        
+        </Frame>) }
+        
+        
+        
+        <div>Мультивыбор:</div>
+        
+        { options.map((v, i, opts) => <Frame key={v.value}>
+          
+          { v.isAdd && <AddIconBox><PlusIc/></AddIconBox> }
+          
+          { !v.isAdd && <>
+            
+            <IndicatorFrame>
+              <IndicatorBox>
+                { opts.map(v => <>
+                  { !v.isSelected ? <Indicator /> : <IndicatorSelected /> }
+                </>)}
+              </IndicatorBox>
+            </IndicatorFrame>
+            
+            <TextBox>
+              <Text>{v.text}</Text>
+            </TextBox>
+            
+            { v.isEditable && <PencilIconBox>
+              <PencilWrite2Ic/>
+            </PencilIconBox> }
+            
+            { v.isSelected && <Border /> }
+            
+          </> }
+          
+          
+        </Frame>) }
+          
+        
+      
+      </ColumnContent>
+    
+    
+    </Pages.ContentFill>
+  </Pages.SimplePage>
+}
+export default ListItem2
+
+
+
+
+const ColumnContent = styled.div`
+  width: 350px;
+  ${col};
+  gap: 10px;
+`
+
+
+const Frame = styled.article`
+  width: 300px;
+  min-height: 80px;
+  height: fit-content;
+  border-radius: 20px;
+  
+  background: #eeeeee;
+  
+  position: relative;
+  padding: 20px 26px;
+  ${col};
+  align-items: start;
+  gap: 10px;
+  --h-content: 75px;
+`
+const Border = styled.div`
+  ${abs};
+  border-radius: inherit;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #444444;
+`
+
+
+
+const AddIconBox = styled.div`
+  width: var(--h-content);
+  height: var(--h-content);
+  border-radius: 10px;
+  
+  align-self: center;
+  //background: #ff000011;
+  ${center};
+  padding: 10px;
+`
+
+
+
+const IndicatorFrame = styled.div`
+  pointer-events: none;
+  ${abs};
+  ${colC};
+  padding: 6px;
+`
+const IndicatorBox = styled.div`
+  width: 75%;
+  align-self: center;
+  height: 6px;
+  ${row};
+  gap: 6px;
+`
+const Indicator = styled.div`
+  flex: 1;
+  height: 100%;
+  border-radius: 999999px;
+  background: #cccccc;
+`
+const IndicatorSelected = styled.div`
+  flex: 1;
+  height: 100%;
+  border-radius: 999999px;
+  background: #444444;
+`
+
+
+
+const PencilIconBox = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: inherit;
+  ${center};
+  padding: 11px;
+`
+
+
+
+const TextBox = styled.div`
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  ${center};
+`
+const Text = styled.div`
+  align-self: center;
+  //background: #ffff0022;
+  overflow-wrap: anywhere;
+`

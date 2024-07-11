@@ -9,7 +9,7 @@ import {
 } from 'src/ui/widgets/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Utils } from 'src/util/common/Utils.ts'

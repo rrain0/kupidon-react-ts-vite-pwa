@@ -1,19 +1,20 @@
 import { RouteObject } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
-import PageLifecycle from 'src/ui/pages/Test/PageLifecycle'
-import PointerTestPage from 'src/ui/pages/Test/PointerTestPage.tsx'
-import StateTestPage from 'src/ui/pages/Test/StateTestPage.tsx'
-import TabsTestPage from 'src/ui/pages/Test/TabsTestPage.tsx'
+import PageLifecycle from 'src/ui/pages/Test/pages/PageLifecycle'
+import PointerTestPage from 'src/ui/pages/Test/pages/PointerTestPage.tsx'
+import StateTestPage from 'src/ui/pages/Test/pages/StateTestPage.tsx'
+import TabsTestPage from 'src/ui/pages/Test/pages/TabsTestPage.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import TestPage from 'src/ui/pages/Test/TestPage.tsx'
-import ScrollbarTestPage from 'src/ui/pages/Test/ScrollbarTestPage.tsx'
-import ResizeObserverTestPage from 'src/ui/pages/Test/ResizeObserverTestPage.tsx'
-import BottomSheetTestPage from 'src/ui/pages/Test/BottomSheetTestPage.tsx'
-import MoveElementToAnotherViewTestPage from 'src/ui/pages/Test/MoveElementToAnotherViewTestPage.tsx'
-import ViewsTest from 'src/ui/pages/Test/ViewsTest'
+import ScrollbarTestPage from 'src/ui/pages/Test/pages/ScrollbarTestPage.tsx'
+import ResizeObserverTestPage from 'src/ui/pages/Test/pages/ResizeObserverTestPage.tsx'
+import BottomSheetTestPage from 'src/ui/pages/Test/pages/BottomSheetTestPage.tsx'
+import MoveElementToAnotherViewTestPage from 'src/ui/pages/Test/pages/MoveElementToAnotherViewTestPage.tsx'
+import ListItem1AddItem from 'src/ui/pages/Test/view-pages/ListItem1AddItem'
+import ListItem2 from 'src/ui/pages/Test/view-pages/ListItem2'
 
 
 
@@ -81,11 +82,20 @@ const pageLifecycleRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'test / views / <check here>'
-const viewsRouting: RouteObject[] = [
+
+// path: 'test / views-list-item-1-add-item / <check here>'
+const viewsListItem1AddItemRouting: RouteObject[] = [
   {
     path: '',
-    Component: ViewsTest,
+    Component: ListItem1AddItem,
+  },
+  clearUnknownPathEnding,
+]
+// path: 'test / views-list-item-2 / <check here>'
+const viewsListItem2Routing: RouteObject[] = [
+  {
+    path: '',
+    Component: ListItem2,
   },
   clearUnknownPathEnding,
 ]
@@ -131,8 +141,12 @@ export const testRouting: RouteObject[] = [
     children: testStateRouting,
   },
   {
-    path: RootRoute.test.views[path]+'/*',
-    children: viewsRouting,
+    path: RootRoute.test.viewsListItem1AddItem[path]+'/*',
+    children: viewsListItem1AddItemRouting,
+  },
+  {
+    path: RootRoute.test.viewsListItem2[path]+'/*',
+    children: viewsListItem2Routing,
   },
   clearUnknownPathEnding,
 ]

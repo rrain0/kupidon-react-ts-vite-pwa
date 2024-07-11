@@ -19,7 +19,7 @@ export namespace AppRoutes {
     [path]: 'login',
     [params]: {
       returnPath: 'return-path',
-    }
+    },
   })
   
   
@@ -27,7 +27,7 @@ export namespace AppRoutes {
     [path]: 'signup',
     [params]: {
       returnPath: 'return-path',
-    }
+    },
   })
   
   
@@ -53,7 +53,7 @@ export namespace AppRoutes {
   
   
   const findPairs = buildRoute({
-    [path]: 'find-pairs'
+    [path]: 'find-pairs',
   })
   
   
@@ -87,7 +87,9 @@ export namespace AppRoutes {
     tabs: buildPath('tabs'),
     state: buildPath('state'),
     pageLifecycle: buildPath('page-lifecycle'),
-    views: buildPath('views'),
+    
+    viewsListItem1AddItem: buildPath('views-list-item-1-add-item'),
+    viewsListItem2: buildPath('views-list-item-2'),
   })
   
   

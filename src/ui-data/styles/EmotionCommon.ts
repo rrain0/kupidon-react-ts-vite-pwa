@@ -32,6 +32,12 @@ export namespace EmotionCommon {
     flex-flow: row nowrap;
   `
   
+  export const rowC = css`
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  `
+  
   export const rowWrap = css`
     display: flex;
     flex-flow: row wrap;
@@ -40,6 +46,12 @@ export namespace EmotionCommon {
   export const col = css`
     display: flex;
     flex-flow: column nowrap;
+  `
+  
+  export const colC = css`
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
   `
   
   export const center = css`
