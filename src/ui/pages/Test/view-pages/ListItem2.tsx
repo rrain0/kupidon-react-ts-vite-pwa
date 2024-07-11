@@ -1,7 +1,9 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons'
+import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle'
 import row = EmotionCommon.row
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
@@ -203,6 +205,40 @@ const ListItem2 = () => {
           
           
         </Frame>) }
+        
+        
+        
+        <div>Мультивыбор:</div>
+        
+        { options.map((v, i, opts) => <Frame
+          key={v.value}
+          isSelected={v.isSelected}
+        >
+          
+          { v.isAdd && <AddIconBox><PlusIc/></AddIconBox> }
+          
+          { !v.isAdd && <>
+            
+            <IndicatorFrame>
+              <IndicatorBox>
+                { opts.map(v => <>
+                  { !v.isSelected ? <Indicator /> : <IndicatorSelected /> }
+                </>)}
+              </IndicatorBox>
+            </IndicatorFrame>
+            
+            <TextBox>
+              <Text>{v.text}</Text>
+            </TextBox>
+            
+            { v.isEditable && <PencilIconBox>
+              <PencilWrite2Ic/>
+            </PencilIconBox> }
+            
+          </> }
+          
+          
+        </Frame>) }
           
         
       
@@ -224,13 +260,14 @@ const ColumnContent = styled.div`
 `
 
 
-const Frame = styled.article`
+const Frame = styled.article<{ isSelected?: boolean }>`
   width: 300px;
   min-height: 80px;
   height: fit-content;
   border-radius: 20px;
   
   background: #eeeeee;
+  ${p => p.isSelected && css`background: #bbbbbb;`}
   
   position: relative;
   padding: 20px 26px;
@@ -250,14 +287,14 @@ const Border = styled.div`
 
 
 const AddIconBox = styled.div`
-  width: var(--h-content);
-  height: var(--h-content);
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
   
   align-self: center;
   //background: #ff000011;
   ${center};
-  padding: 10px;
+  padding: 2px;
 `
 
 
@@ -299,6 +336,8 @@ const PencilIconBox = styled.div`
   border-radius: inherit;
   ${center};
   padding: 11px;
+  
+  ${SvgIconsStyle.El.icon.props.color.set('#444444')}
 `
 
 
