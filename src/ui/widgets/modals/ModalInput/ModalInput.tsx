@@ -1,5 +1,5 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
 import { ModalElement } from 'src/ui/widgets/modals/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'

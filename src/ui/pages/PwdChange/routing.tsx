@@ -5,7 +5,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import PwdChangePage from 'src/ui/pages/PwdChange/PwdChangePage.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams

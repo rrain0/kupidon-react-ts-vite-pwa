@@ -1,7 +1,7 @@
-import { ValidationValidators } from '@util/mini-libs/form-validation/core/ValidationValidators.ts'
+import { ValidationValidators } from 'src/mini-libs/form-validation/core/ValidationValidators.ts'
 import { AuthApi } from 'src/api/requests/AuthApi'
-import { ValidationCore } from '@util/mini-libs/form-validation/core/ValidationCore.ts'
-import { UiTextValues } from 'src/util/mini-libs/ui-text/UiText.ts'
+import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
+import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators

@@ -4,7 +4,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams

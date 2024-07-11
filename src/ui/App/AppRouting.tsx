@@ -16,7 +16,7 @@ import { profileRouting } from 'src/ui/pages/Profile/routing.tsx'
 import { settingRouting } from 'src/ui/pages/Settings/routing'
 import { signupRouting } from 'src/ui/pages/Signup/routing'
 import { testRouting } from 'src/ui/pages/Test/routing'
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -26,7 +26,7 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 const Any =
 React.memo(
-()=>{
+() => {
   return <>
     <Outlet/> {/* Это место, где будут рендериться children */}
     <BottomNavBarRouting/>
@@ -37,7 +37,7 @@ React.memo(
 
 const AnyAny =
 React.memo(
-()=>{
+() => {
   const [searchParams] = useSearchParams()
   return <Navigate
     to={RootRoute.findPairs[fullAnySearchParams](searchParams)}

@@ -1,4 +1,4 @@
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import buildRoute = RouteBuilder.buildRoute
 import buildPath = RouteBuilder.buildPath
 import path = RouteBuilder.path
@@ -86,6 +86,8 @@ export namespace AppRoutes {
     pointer: buildPath('pointer'),
     tabs: buildPath('tabs'),
     state: buildPath('state'),
+    pageLifecycle: buildPath('page-lifecycle'),
+    views: buildPath('views'),
   })
   
   

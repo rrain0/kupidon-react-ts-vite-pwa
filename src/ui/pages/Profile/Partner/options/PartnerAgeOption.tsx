@@ -10,8 +10,8 @@ import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.ts
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/util/mini-libs/form-validation/components/ValidationWrap.tsx'
-import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
+import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
 import HourglassGradIc = SvgGradIcons.HourglassGradIc
 import UserValues = ProfilePageValidation.UserValues

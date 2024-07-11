@@ -9,7 +9,7 @@ export const Colors = {
   },
   
   darkRed: {
-    darkRed1: '#cc221f'
+    darkRed1: '#cc221f',
   },
   
   purpleRed: {

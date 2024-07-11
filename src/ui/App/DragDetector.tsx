@@ -1,10 +1,9 @@
-import { css } from '@emotion/react'
 import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useSetRecoilState } from 'recoil'
 import { AppRecoil } from 'src/recoil/state/AppRecoil'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import contents = EmotionCommon.contents
 
@@ -17,7 +16,7 @@ export type DragDetectorProps = PartialUndef<{
 
 const DragDetector =
 React.memo(
-(props: DragDetectorProps)=>{
+(props: DragDetectorProps) => {
   const setAppState = useSetRecoilState(AppRecoil)
   
   
@@ -30,9 +29,9 @@ React.memo(
     noKeyboard: true,
   })
   useEffect(
-    ()=>{
+    () => {
       //console.log('isDragActive',isDragActive)
-      setAppState(s=>({
+      setAppState(s => ({
         ...s,
         isDraggingFiles: isDragActive,
       }))
@@ -45,8 +44,6 @@ React.memo(
     },
     [acceptedFiles]
   ) */
-  
-  
   
   
   

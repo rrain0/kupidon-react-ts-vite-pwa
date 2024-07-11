@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
 import generatePropVar = WidgetStyle.generatePropVar
 import generatePropVarDefault = WidgetStyle.generatePropVarDefault
 import generateElDotClass = WidgetStyle.generateElDotClass

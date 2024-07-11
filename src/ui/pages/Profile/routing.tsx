@@ -9,7 +9,7 @@ import {
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams

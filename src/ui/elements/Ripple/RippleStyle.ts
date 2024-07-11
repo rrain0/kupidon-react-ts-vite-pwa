@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { WidgetStyle } from '@util/mini-libs/widget-style/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 import Elem = WidgetStyle.Elem

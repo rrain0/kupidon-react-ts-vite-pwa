@@ -1,10 +1,31 @@
-
+import React, { PropsWithoutRef } from 'react'
 
 
 export { }
 
 
 /* Write here what you wanna test */
+
+
+
+const withDefaultsNotTyped = (defaultProps, Component) => React.forwardRef(
+  (props, forwardedRef) => {
+    return <Component {...defaultProps} {...props} ref={forwardedRef} />
+  }
+)
+
+/*
+Don't know how to type ref
+const withDefaults =
+  <FC extends React.FC<P>, P extends object>
+  (defaultProps: NoInfer<PropsWithoutRef<P>>, Component: FC): FC =>
+    React.forwardRef<React.ElementRef<FC>, React.ComponentPropsWithoutRef<P>>(
+      (props, forwardedRef) => {
+        return <Component {...defaultProps} {...props} ref={forwardedRef} />
+      }
+    )
+*/
+
 
 
 

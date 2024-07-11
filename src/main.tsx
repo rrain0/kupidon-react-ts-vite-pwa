@@ -5,7 +5,7 @@ import 'src/ui-data/styles/setup/fonts.css'
 import 'src/ui-data/styles/setup/app-styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'animate.css'
-import App from 'src/ui/pages/App/App'
+import App from 'src/ui/App/App'
 import { RecoilRoot } from 'recoil'
 // access recoil state from a not React component
 import RecoilNexus from 'recoil-nexus'

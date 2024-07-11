@@ -3,7 +3,7 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
-import { useUiValues } from 'src/util/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 
 
 

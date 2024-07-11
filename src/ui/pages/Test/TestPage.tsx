@@ -6,7 +6,7 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.t
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.tsx'
@@ -27,55 +27,12 @@ React.memo(
   const [searchParams] = useSearchParams()
   
   
-  useLayoutEffect(
-    ()=>{
-      const onLoad = (ev: Event)=>{
-        console.log('page was loaded', ev)
-        // @ts-ignore
-        console.log('document.wasDiscarded',document.wasDiscarded)
-      }
-      const onFreeze = (ev: any)=>{
-        console.log('page was frozen',ev)
-      }
-      const onResume = (ev: any)=>{
-        console.log('page was resumed',ev)
-      }
-      const onVisibility = (ev: Event)=>{
-        switch (document.visibilityState){
-          case 'visible':
-            console.log('page is visible',ev)
-            break
-          case 'hidden':
-            console.log('page was hidden',ev)
-            /* fetch('https://dev.kupidon.rrain.ydns.eu:50040/ktor/hello',{
-              method: 'GET', mode: 'cors', cache: 'no-cache', credentials: 'same-origin',
-            })
-              .then(resp=>resp.text())
-              .then(text=>console.log('response',text)) */
-            break
-        }
-      }
-      document.addEventListener('load',onLoad)
-      document.addEventListener('visibilitychange',onVisibility)
-      document.addEventListener('freeze',onFreeze)
-      document.addEventListener('resume',onResume)
-      return ()=>{
-        document.addEventListener('load',onLoad)
-        document.removeEventListener('freeze',onFreeze)
-        document.removeEventListener('resume',onResume)
-        document.addEventListener('visibilitychange',onVisibility)
-      }
-    },
-    []
-  )
-  
-  
   
   const [progress, setProgress] = useState(0)
   useEffect(
     () => {
       const id = setInterval(
-        () => setProgress(s=>s===0 ? 100 : 0),
+        () => setProgress(s => s === 0 ? 100 : 0),
         3000
       )
       return () => clearInterval(id)
@@ -111,6 +68,12 @@ React.memo(
         </Link>
         <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Tabs test</Button>
+        </Link>
+        <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
+          <Button css={ButtonStyle.filledRectBigNormal}>Page Lifecycle test</Button>
+        </Link>
+        <Link to={RootRoute.test.views[fullAnySearchParams](searchParams)}>
+          <Button css={ButtonStyle.filledRectBigNormal}>Views test</Button>
         </Link>
         
         
@@ -232,8 +195,6 @@ React.memo(
   </>
 })
 export default TestPage
-
-
 
 
 

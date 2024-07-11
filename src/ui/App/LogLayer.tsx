@@ -1,10 +1,8 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { atom, useRecoilValue } from 'recoil'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
-
 
 
 
@@ -19,11 +17,11 @@ export const LogLayerRecoil = atom<LogLayerRecoilType>({
 
 const LogLayer =
 React.memo(
-()=>{
+() => {
   const logData = useRecoilValue(LogLayerRecoil)
   
   if (logData.length) return <Frame>
-      {logData.map((it,i)=><div key={i}>{it}</div>)}
+      {logData.map((it, i) => <div key={i}>{it}</div>)}
     </Frame>
   return undefined
 })

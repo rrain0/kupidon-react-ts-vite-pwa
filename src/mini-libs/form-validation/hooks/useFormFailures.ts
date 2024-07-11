@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
-import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
-import { ValidationValidate } from 'src/util/mini-libs/form-validation/core/ValidationValidate.ts'
+import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationValidate } from 'src/mini-libs/form-validation/core/ValidationValidate.ts'
 import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import validate = ValidationValidate.validate
 import Validators = ValidationCore.Validators

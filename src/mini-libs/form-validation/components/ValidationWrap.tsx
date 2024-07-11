@@ -1,5 +1,5 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import React, {
   JSX,
   ReactElement,
@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
-import { ValidationActions } from 'src/util/mini-libs/form-validation/core/ValidationActions.ts'
+import { ValidationActions } from 'src/mini-libs/form-validation/core/ValidationActions.ts'
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateFailures
 import awaitDelay = ValidationActions.awaitDelay

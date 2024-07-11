@@ -1,6 +1,6 @@
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
-import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import Validators = ValidationCore.Validators
 import Failure = ValidationCore.Failure
 import Failures = ValidationCore.Failures

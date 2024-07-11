@@ -1,4 +1,4 @@
-import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import Failures = ValidationCore.Failures
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values

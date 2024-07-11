@@ -1,8 +1,8 @@
-import { useUiValue } from 'src/util/mini-libs/ui-text/useUiText.ts'
+import { useUiValue } from 'src/mini-libs/ui-text/useUiText.ts'
 import React, { useEffect, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
 import { TypeU } from '@util/common/TypeU.ts'
-import { UiText } from 'src/util/mini-libs/ui-text/UiText.ts'
+import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { ToastBody, ToastType } from 'src/ui/components/Toasts/ToastBody.tsx'
 import falsy = TypeU.falsy

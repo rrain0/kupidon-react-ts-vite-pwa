@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { ValidationCore } from 'src/util/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import Values = ValidationCore.Values
 import ObjectMap = ObjectU.ObjectMap
 import Failures = ValidationCore.Failures

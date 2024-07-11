@@ -1,10 +1,11 @@
 import { RouteObject } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
+import PageLifecycle from 'src/ui/pages/Test/PageLifecycle'
 import PointerTestPage from 'src/ui/pages/Test/PointerTestPage.tsx'
 import StateTestPage from 'src/ui/pages/Test/StateTestPage.tsx'
 import TabsTestPage from 'src/ui/pages/Test/TabsTestPage.tsx'
-import { RouteBuilder } from '@util/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import TestPage from 'src/ui/pages/Test/TestPage.tsx'
@@ -12,6 +13,7 @@ import ScrollbarTestPage from 'src/ui/pages/Test/ScrollbarTestPage.tsx'
 import ResizeObserverTestPage from 'src/ui/pages/Test/ResizeObserverTestPage.tsx'
 import BottomSheetTestPage from 'src/ui/pages/Test/BottomSheetTestPage.tsx'
 import MoveElementToAnotherViewTestPage from 'src/ui/pages/Test/MoveElementToAnotherViewTestPage.tsx'
+import ViewsTest from 'src/ui/pages/Test/ViewsTest'
 
 
 
@@ -71,6 +73,22 @@ const testStateRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / page-lifecycle / <check here>'
+const pageLifecycleRouting: RouteObject[] = [
+  {
+    path: '',
+    Component: PageLifecycle,
+  },
+  clearUnknownPathEnding,
+]
+// path: 'test / views / <check here>'
+const viewsRouting: RouteObject[] = [
+  {
+    path: '',
+    Component: ViewsTest,
+  },
+  clearUnknownPathEnding,
+]
 
 
 
@@ -105,8 +123,16 @@ export const testRouting: RouteObject[] = [
     children: testTabsRouting,
   },
   {
-    path: RootRoute.test.state[path]+'/*',
+    path: RootRoute.test.pageLifecycle[path]+'/*',
+    children: pageLifecycleRouting,
+  },
+  {
+    path: RootRoute.test.pageLifecycle[path]+'/*',
     children: testStateRouting,
+  },
+  {
+    path: RootRoute.test.views[path]+'/*',
+    children: viewsRouting,
   },
   clearUnknownPathEnding,
 ]
