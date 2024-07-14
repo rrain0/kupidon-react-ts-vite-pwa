@@ -6,13 +6,16 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
 import checker from 'vite-plugin-checker'
+import dotenv from 'dotenv'
+import dotenvExpand from 'dotenv-expand'
 
 
 
-/* {
-  const root: string = Env.PROJECT_ROOT
-  const nm = path.join(root, 'node_modules');
-  const loggerFile = path.join(nm, 'vite-plugin-checker', 'dist', 'esm', 'logger.js');
+const projectRoot: string = process.cwd() // current working directory
+// partial fix for vite-plugin-checker to make file links clickable in IDE console
+{
+  const nm = path.join(projectRoot, 'node_modules')
+  const loggerFile = path.join(nm, 'vite-plugin-checker', 'dist', 'esm', 'logger.js')
   
   try {
     fs.accessSync(loggerFile)
@@ -28,8 +31,8 @@ import checker from 'vite-plugin-checker'
     
     fs.writeFileSync(loggerFile, source)
   }
-  catch (err) { }
-} */
+  catch (err) { /* empty */ }
+}
 
 
 
@@ -59,13 +62,33 @@ const pwaOptions: Partial<VitePWAOptions> = {
 
 
 
-
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   
+  const envVars: Record<string, string> = {
+    'process.env.NODE_ENV': JSON.stringify(mode),
+  }
+  const fileEnvVarsNames = [
+    'API_BASE_URL',
+  ]
+  
+  // LOAD ENVS BY VITE
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   //const env = loadEnv(mode, process.cwd(), '')
+  
+  // LOAD CUSTOM ENV FILES
+  if (mode === 'development') {
+    const envFileName = 'react.dev.env'
+    const envConfig = dotenvExpand.expand({
+      parsed: dotenv.parse(fs.readFileSync(envFileName)),
+    }).parsed as Record<string, string>
+    fileEnvVarsNames.forEach(envName => {
+      envVars[`import.meta.env.${envName}`] = JSON.stringify(envConfig[envName])
+      //envVars[`process.env.${envName}`] = JSON.stringify(envConfig[envName])
+    })
+  }
+  
   
   return {
     server: {
@@ -87,9 +110,7 @@ export default defineConfig(({ command, mode }) => {
         typescript: true,
       }),
     ],
-    define: {
-      // pass desired env variables
-      'import.meta.env.API_BASE_URL': JSON.stringify(process.env.API_BASE_URL),
-    },
+    // pass desired env variables
+    define: envVars,
   }
 })

@@ -109,13 +109,13 @@ export namespace EmotionCommon {
   
   export const hoverable = '@media (hover: hover) and (pointer: fine)'
   
-  export const onHover = (cssStyle: SerializedStyles)=>css`
+  export const onHover = (cssStyle: SerializedStyles) => css`
     ${hoverable}{ :hover {
       ${cssStyle};
     } }
   `
   
-  export const mobileWidth = (cssStyle: SerializedStyles)=>css`
+  export const mobileWidth = (cssStyle: SerializedStyles) => css`
     @media only screen and (max-width: 480px) {
       ${cssStyle};
     }
@@ -141,23 +141,25 @@ export namespace EmotionCommon {
   
   
   
-  const _reset = css`
-    // appearance: none;
-    box-sizing: border-box;
-    background: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    margin: 0;
-    padding: 0;
-    gap: 0;
-    -webkit-tap-highlight-color: transparent;
-  `
-  export const reset = css`
-    ${_reset};
-    ::before { ${_reset}; }
-    ::after { ${_reset}; }
-  `
+  export const reset = (() => {
+    const reset = css`
+      // appearance: none;
+      box-sizing: border-box;
+      background: none;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+      gap: 0;
+      -webkit-tap-highlight-color: transparent;
+    `
+    return css`
+      ${reset};
+      ::before { ${reset}; }
+      ::after { ${reset}; }
+    `
+  })()
   
   
   
@@ -272,9 +274,6 @@ export namespace EmotionCommon {
   
   
   
-  
-  
-  
   export const rotateAnim = keyframes`
     from { rotate: 0turn; }
     to { rotate: 1turn; }
@@ -368,11 +367,7 @@ export namespace EmotionCommon {
   
   
   
-  
 }
-
-
-
 
 
 

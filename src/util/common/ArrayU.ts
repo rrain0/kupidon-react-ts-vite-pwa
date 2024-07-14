@@ -76,8 +76,8 @@ export namespace ArrayU {
   
   
   
-  export const compare = <T>(arr: T[], other: T[]): 1|0|-1 => {
-    if (arr===other) return 0
+  export const compare = <T>(arr: T[], other: T[]): 1| 0 |-1 => {
+    if (arr === other) return 0
     for (let i = 0; i < Math.max(arr.length, other.length); i++) {
       if (i >= arr.length) return -1
       if (i >= other.length) return 1
@@ -87,9 +87,8 @@ export namespace ArrayU {
     }
     return 0
   }
-  export const isLower = <T>(arr: T[], other: T[]): boolean => compare(arr,other)===-1
-  export const isGreater = <T>(arr: T[], other: T[]): boolean => compare(arr,other)===1
-  
+  export const isLower = <T>(arr: T[], other: T[]): boolean => compare(arr, other) === -1
+  export const isGreater = <T>(arr: T[], other: T[]): boolean => compare(arr, other) === 1
   
   
   
@@ -102,7 +101,7 @@ export namespace ArrayU {
     return []
   }
   
-  export const arrIsNonEmpty = <T>(arr?: T[] | [T, ...T[]] | empty): arr is [T, ...T[]]  => {
+  export const arrIsNonEmpty = <T>(arr?: T[] | [T, ...T[]] | empty): arr is [T, ...T[]] => {
     return (arr?.length ?? 0) > 0
   }
   
@@ -123,24 +122,33 @@ export namespace ArrayU {
   
   
   
+  export const toggleTo = <T>(arr: T[], elem: T): T[] => {
+    const i = arr.indexOf(elem)
+    if (i === -1) return [...arr, elem]
+    return arr.toSpliced(i, 1)
+  }
+  
+  
+  
+  
   export const diff = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   comparator: ComparatorEq<T1,T2> = defaultComparatorEq
+   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   )
-  : [(number|undefined)[], (number|undefined)[]] => {
-    const fwd:  (number|undefined)[] = Array(arr1.length).fill(undefined)
-    const back: (number|undefined)[] = Array(arr2.length).fill(undefined)
-    arr1.forEach((one,i1)=>{
+  : [(number | undefined)[], (number | undefined)[]] => {
+    const fwd: (number | undefined)[] = Array(arr1.length).fill(undefined)
+    const back: (number | undefined)[] = Array(arr2.length).fill(undefined)
+    arr1.forEach((one, i1) => {
       for (let i2 = 0; i2 < arr2.length; i2++) {
         const two = arr2[i2]
-        if ((!fwd.includes(i2)) && comparator(one,two)){
+        if ((!fwd.includes(i2)) && comparator(one, two)) {
           fwd[i1] = i2
           back[i2] = i1
           break
         }
       }
     })
-    return [fwd,back] as const
+    return [fwd, back] as const
   }
   
   
@@ -168,11 +176,11 @@ export namespace ArrayU {
   }
   export const diff2 = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   comparator: ComparatorEq<T1,T2> = defaultComparatorEq
+   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   )
-  : [DiffObj<T1,T2>[], DiffObj<T2,T1>[]] => {
-    const [fwd,back] = diff(arr1,arr2,comparator)
-    const fwdObjs: DiffObj<T1,T2>[] = fwd.map((to,from)=>{
+  : [DiffObj<T1, T2>[], DiffObj<T2, T1>[]] => {
+    const [fwd, back] = diff(arr1, arr2, comparator)
+    const fwdObjs: DiffObj<T1, T2>[] = fwd.map((to, from) => {
       if (exists(to)) return {
         fromIdx: from,
         fromElem: arr1[from],
@@ -196,7 +204,7 @@ export namespace ArrayU {
         isRemoved: true,
       }
     })
-    const backObjs: DiffObj<T2,T1>[] = back.map((to,from)=>{
+    const backObjs: DiffObj<T2, T1>[] = back.map((to, from) => {
       if (exists(to)) return {
         fromIdx: from,
         fromElem: arr2[from],
@@ -220,7 +228,7 @@ export namespace ArrayU {
         isRemoved: true,
       }
     })
-    return [fwdObjs,backObjs] as const
+    return [fwdObjs, backObjs] as const
   }
   
   
@@ -228,33 +236,33 @@ export namespace ArrayU {
   
   export const merge = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   merger: MergerIndexed<T1,T2>,
-   comparator: ComparatorEq<T1,T2> = defaultComparatorEq
-  ): [T1[],T2[]] => {
+   merger: MergerIndexed<T1, T2>,
+   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
+  ): [T1[], T2[]] => {
     const newArr1 = [...arr1]
     const newArr2 = [...arr2]
-    const [fwd] = diff(arr1,arr2,comparator)
-    fwd.forEach((to,from)=>{
-      if (exists(to)){
+    const [fwd] = diff(arr1, arr2, comparator)
+    fwd.forEach((to, from) => {
+      if (exists(to)) {
         const [newElem1, newElem2] = merger(arr1[from], arr2[to], from, to)
         newArr1[from] = newElem1
-        newArr2[to]   = newElem2
+        newArr2[to] = newElem2
       }
     })
-    return [newArr1,newArr2]
+    return [newArr1, newArr2]
   }
   
   
   
   export const combine = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   combiner: CombinerIndexed<T1,T2>,
-   comparator: ComparatorEq<T1,T2> = defaultComparatorEq
+   combiner: CombinerIndexed<T1, T2>,
+   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   ): T1[] => {
     const newArr1 = [...arr1]
-    const [fwd] = diff(arr1,arr2,comparator)
-    fwd.forEach((to,from)=>{
-      if (exists(to)){
+    const [fwd] = diff(arr1, arr2, comparator)
+    fwd.forEach((to, from) => {
+      if (exists(to)) {
         const newElem1 = combiner(arr1[from], arr2[to], from, to)
         newArr1[from] = newElem1
       }
@@ -265,7 +273,7 @@ export namespace ArrayU {
   
   
   
-  export type FindResult<T,E> = {
+  export type FindResult<T, E> = {
     isFound: true
     index: number
     elem: T
@@ -286,7 +294,7 @@ export namespace ArrayU {
   
   export const findBy3 =
   <T, E>
-  ({ arr, filter = defaultPredicate, startIdx = 0, orElse }: FindByElseProps<T,E>)
+  ({ arr, filter = defaultPredicate, startIdx = 0, orElse }: FindByElseProps<T, E>)
   : FindResult<T, E> => {
     startIdx = RangeU.clamp(
       startIdx>=0 ? startIdx : (arr.length+startIdx),
@@ -312,13 +320,13 @@ export namespace ArrayU {
   export const findBy2 =
   <T>
   ({ arr, filter = defaultPredicate, startIdx = 0 }: FindByProps<T>)
-  : FindResult<T,undefined> =>
+  : FindResult<T, undefined> =>
     findBy3({ arr, filter, startIdx, orElse: undefined })
   
   export const findBy =
   <T>
   (arr: T[], filter: Filter<T> = defaultPredicate, startIdx = 0)
-  : FindResult<T,undefined> =>
+  : FindResult<T, undefined> =>
     findBy3({ arr, filter, startIdx, orElse: undefined })
   
     
@@ -326,7 +334,7 @@ export namespace ArrayU {
   
   export const findLastBy3 =
   <T, E>
-  ({ arr, filter = defaultPredicate, startIdx = -1, orElse }: FindByElseProps<T,E>)
+  ({ arr, filter = defaultPredicate, startIdx = -1, orElse }: FindByElseProps<T, E>)
   : FindResult<T, E> => {
     startIdx = RangeU.clamp(
       startIdx>=0 ? startIdx : (arr.length+startIdx),
@@ -346,21 +354,20 @@ export namespace ArrayU {
       isFound: false,
       index: -1,
       elem: orElse,
-    } satisfies FindResult<T,E>
+    } satisfies FindResult<T, E>
   }
   
   export const findLastBy2 =
   <T>
   ({ arr, filter = defaultPredicate, startIdx = -1 }: FindByProps<T>)
-  : FindResult<T,undefined> =>
+  : FindResult<T, undefined> =>
     findLastBy3({ arr, filter, startIdx, orElse: undefined })
   
   export const findLastBy =
   <T>
   (arr: T[], filter: Filter<T> = defaultPredicate, startIdx = -1)
-  : FindResult<T,undefined> =>
+  : FindResult<T, undefined> =>
     findLastBy3({ arr, filter, startIdx, orElse: undefined })
-  
   
   
   
@@ -368,7 +375,7 @@ export namespace ArrayU {
   export const replaceFirstToIfFoundBy =
   <T>(arr: T[], elem: T, filter: Filter<T> = defaultPredicate): T[] => {
     const findResult = findBy(arr, filter)
-    if (findResult.isFound){
+    if (findResult.isFound) {
       const newArr = [...arr]
       newArr[findResult.index] = elem
       return newArr
@@ -378,14 +385,13 @@ export namespace ArrayU {
   export const mapFirstToIfFoundBy =
   <T>(arr: T[], mapper: Mapper<T>, filter: Filter<T> = defaultPredicate): T[] => {
     const findResult = findBy(arr, filter)
-    if (findResult.isFound){
+    if (findResult.isFound) {
       const newArr = [...arr]
       newArr[findResult.index] = mapper(findResult.elem)
       return newArr
     }
     return arr
   }
-  
   
   
   

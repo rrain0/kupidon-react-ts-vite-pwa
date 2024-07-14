@@ -11,6 +11,7 @@ import center = EmotionCommon.center
 import col = EmotionCommon.col
 import abs = EmotionCommon.abs
 import colC = EmotionCommon.colC
+import stretch = EmotionCommon.stretch
 
 
 
@@ -271,10 +272,10 @@ const Frame = styled.article<{ isSelected?: boolean }>`
   
   position: relative;
   padding: 20px 26px;
-  ${col};
-  align-items: start;
+  display: grid;
+  grid-auto-flow: column;
+  place-items: stretch center;
   gap: 10px;
-  --h-content: 75px;
 `
 const Border = styled.div`
   ${abs};
@@ -291,7 +292,7 @@ const AddIconBox = styled.div`
   height: 44px;
   border-radius: 10px;
   
-  align-self: center;
+  place-self: center;
   //background: #ff000011;
   ${center};
   padding: 2px;
@@ -344,8 +345,7 @@ const PencilIconBox = styled.div`
 
 const TextBox = styled.div`
   width: 100%;
-  height: 100%;
-  flex: 1;
+  min-height: 100%;
   ${center};
 `
 const Text = styled.div`
