@@ -3,6 +3,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import PageLifecycle from 'src/ui/pages/Test/pages/PageLifecycle'
 import PointerTestPage from 'src/ui/pages/Test/pages/PointerTestPage.tsx'
+import EmulatedScroll from 'src/ui/pages/Test/SimulatedScroll/EmulatedScroll'
 import StateTestPage from 'src/ui/pages/Test/pages/StateTestPage.tsx'
 import TabsTestPage from 'src/ui/pages/Test/pages/TabsTestPage.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -99,6 +100,14 @@ const viewsListItem2Routing: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / emulated-scroll / <check here>'
+const emulatedScrollRouting: RouteObject[] = [
+  {
+    path: '',
+    Component: EmulatedScroll,
+  },
+  clearUnknownPathEnding,
+]
 
 
 
@@ -140,6 +149,12 @@ export const testRouting: RouteObject[] = [
     path: RootRoute.test.pageLifecycle[path]+'/*',
     children: testStateRouting,
   },
+  {
+    path: RootRoute.test.emulatedScroll[path]+'/*',
+    children: emulatedScrollRouting,
+  },
+  
+  
   {
     path: RootRoute.test.viewsListItem1AddItem[path]+'/*',
     children: viewsListItem1AddItemRouting,

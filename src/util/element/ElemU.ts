@@ -4,10 +4,10 @@
 export namespace ElemU {
   
   
-  export type Width = { w: number }
-  export type Height = { h: number }
-  export type WidthHeight = { w: number, h: number }
-  export type Bottom = { b: number }
+  export type W = { w: number }
+  export type H = { h: number }
+  export type WH = { w: number, h: number }
+  export type B = { b: number }
   
   
   export const aaaaaaaaaaaa = 1

@@ -80,64 +80,55 @@ export const useTabs = (
   tabsFrameRef: React.RefObject<HTMLElement>,
   options: UseTabsOptions,
 ) => {
-  const getTabsFrame = ()=>tabsFrameRef.current
-  const getTabsContainer = ()=>getTabsFrame()?.firstElementChild?.firstElementChild
+  const getTabsFrame = () => tabsFrameRef.current
+  const getTabsContainer = () => getTabsFrame()?.firstElementChild?.firstElementChild
   
   
   const [isReady, setIsReady] = useState(false)
   
   const [computedTabsDimens, setComputedTabsDimens, computedTabsDimensRef] =
-    useStateAndRef<ComputedTabsDimens>({
-      frameWidth: 0
-    })
+  useStateAndRef<ComputedTabsDimens>({
+    frameWidth: 0,
+  })
   
   
-  const updateComputedTabsDimens = useCallback(
-    ()=>{
-      const tabsFrame = getTabsFrame()
-      if (tabsFrame){
-        const frameD = new ElemProps(tabsFrame)
-        setComputedTabsDimens({
-          frameWidth: frameD.width,
-        })
-      }
-    },
-    [getTabsFrame()]
-  )
+  const updateComputedTabsDimens = useCallback(() => {
+    const tabsFrame = getTabsFrame()
+    if (tabsFrame) {
+      const frameD = new ElemProps(tabsFrame)
+      setComputedTabsDimens({
+        frameWidth: frameD.width,
+      })
+    }
+  }, [getTabsFrame()])
   
   
-  useEffect(
-    ()=>{
-      const tabsFrame = getTabsFrame()
-      updateComputedTabsDimens()
-      if (tabsFrame){
-        const resizeObserver = new ResizeObserver(()=>updateComputedTabsDimens())
-        resizeObserver.observe(tabsFrame)
-        return ()=>resizeObserver.disconnect()
-      }
-    },
-    [getTabsFrame()]
-  )
+  useEffect(() => {
+    const tabsFrame = getTabsFrame()
+    updateComputedTabsDimens()
+    if (tabsFrame) {
+      const resizeObserver = new ResizeObserver(() => updateComputedTabsDimens())
+      resizeObserver.observe(tabsFrame)
+      return () => resizeObserver.disconnect()
+    }
+  }, [getTabsFrame()])
   
   
   
   const [tabsCnt, setTabsCnt] = useState(0) // 0..+inf
-  useEffect(
-    ()=>{
-      const tabsContainer = getTabsContainer()
-      if (tabsContainer){
-        setTabsCnt(tabsContainer.childElementCount)
-        const callback: MutationCallback = (mutationList)=>{
-          const hasChildrenMutation = mutationList.some(mutation=>mutation.type==='childList')
-          if (hasChildrenMutation) setTabsCnt(tabsContainer.childElementCount)
-        }
-        const observer = new MutationObserver(callback)
-        observer.observe(tabsContainer, { childList: true })
-        return ()=>observer.disconnect()
+  useEffect(() => {
+    const tabsContainer = getTabsContainer()
+    if (tabsContainer) {
+      setTabsCnt(tabsContainer.childElementCount)
+      const callback: MutationCallback = mutationList => {
+        const hasChildrenMutation = mutationList.some(mutation => mutation.type==='childList')
+        if (hasChildrenMutation) setTabsCnt(tabsContainer.childElementCount)
       }
-    },
-    [getTabsContainer()]
-  )
+      const observer = new MutationObserver(callback)
+      observer.observe(tabsContainer, { childList: true })
+      return () => observer.disconnect()
+    }
+  }, [getTabsContainer()])
   //console.log('tabsCnt',tabsCnt)
   
   
@@ -147,7 +138,7 @@ export const useTabs = (
   // non-zero len
   const snapPointsPx = useMemo(() => {
     return ArrayU.arrOfIndices(Math.max(tabsCnt, 1))
-      .map(tab => tab*computedTabsDimens.frameWidth)
+      .map(tab => tab * computedTabsDimens.frameWidth)
   }, [tabsCnt, computedTabsDimens.frameWidth])
   
   // 0..+inf
@@ -174,22 +165,22 @@ export const useTabs = (
   const animationDuration = options.animationDuration ?? defaultAutoAnimationDuration
   
   
-  const dragStartRef = useRef({...dragStartInitialValue})
-  const [tabContainerSpring, tabContainerSpringApi] = useSpring(()=>({ scrollLeft: 0 }))
+  const dragStartRef = useRef({ ...dragStartInitialValue })
+  const [tabContainerSpring, tabContainerSpringApi] = useSpring(() => ({ scrollLeft: 0 }))
   
   
   
   
   const runAnimation = useCallback(
-    (endScrollLeft: number, lastSpeed: number|null, onFinish: Callback)=>{
-      const duration = function(){
+    (endScrollLeft: number, lastSpeed: number|null, onFinish: Callback) => {
+      const duration = function() {
         //console.log('lastSpeed',lastSpeed)
         if (notExists(lastSpeed)) return animationDuration
         const startScrollLeft = tabContainerSpring.scrollLeft.get()
         const pathPercent = pathProgressPercent(startScrollLeft, endScrollLeft)
         return pathPercent/lastSpeed*1.2*1000
       }()
-      ;(async()=>{
+      ;(async() => {
         const animation = await tabContainerSpring.scrollLeft.start(
           endScrollLeft,
           {
@@ -215,7 +206,7 @@ export const useTabs = (
   
   
   const reactOnState = useEffectEvent(
-    ()=>{
+    () => {
       if (!isReady) return
       
       const currState = prevState
@@ -253,7 +244,7 @@ export const useTabs = (
       
       
       
-      const setStateAndIndex = (s: TabsState, index: TabIdx)=>{
+      const setStateAndIndex = (s: TabsState, index: TabIdx) => {
         if (s!=='dragging') {
           dragStartRef.current.canStart = false
           dragStartRef.current.isDragging = false
@@ -276,18 +267,18 @@ export const useTabs = (
       //console.log({ isOpened, isClosed, toOpened, toClosed })
       
       
-      if (toDragging){
+      if (toDragging) {
         setStateAndIndex('dragging', currTab)
         return
       }
-      else if (!toAnimated){
+      else if (!toAnimated) {
         tabContainerSpring.scrollLeft.set(toScrollLeft)
         setStateAndIndex('opened', toTab)
         return
       }
       else {
         setStateAndIndex('snapping', toTab)
-        runAnimation(toScrollLeft, lastSpeed, ()=>{
+        runAnimation(toScrollLeft, lastSpeed, () => {
           setStateAndIndex('opened', toTab)
         })
         return
@@ -295,10 +286,9 @@ export const useTabs = (
     }
   )
   useEffect(
-    ()=>reactOnState(),
+    () => reactOnState(),
     [newState, newTabIdx, isReady, snapPointsPx]
   )
-  
   
   
   
@@ -313,7 +303,7 @@ export const useTabs = (
         movement: [mx, my],
         velocity: [spdx, spdy], // px/ms (nonnegative)
         direction: [dirx, diry], // positive for y is from top to bottom
-        xy: [vpx,vpy], // viewport scrollLeft, viewport y
+        xy: [vpx, vpy], // viewport scrollLeft, viewport y
       } = gesture
       
       /* console.log(
@@ -322,12 +312,12 @@ export const useTabs = (
       ) */
       
       if (first) {
-        dragStartRef.current = {...dragStartInitialValue}
+        dragStartRef.current = { ...dragStartInitialValue }
         dragStartRef.current.scrollLeft = tabContainerSpring.scrollLeft.get()
       }
       
       // drag threshold, px
-      const isMoreRadius = Math.hypot(mx,my) >= 5
+      const isMoreRadius = Math.hypot(mx, my) >= 5
       const isToSideways = Math.abs(mx) > Math.abs(my)
       
       const isCanDrag = isMoreRadius && isToSideways
@@ -387,7 +377,7 @@ export const useTabs = (
   
   
   useEffect(
-    ()=>{
+    () => {
       const tabsContainer = getTabsContainer()
       if (tabsContainer) setIsReady(true)
       else setIsReady(false)
@@ -409,11 +399,6 @@ export const useTabs = (
 
 
 
-
-
-
-
-
 // px/ms => (percent of viewport height)/s
 function pxPerMsToPercentVpHPerS(pxPerMs: number): number {
   return pxPerMs*1000 / window.innerWidth * 100
@@ -425,12 +410,9 @@ function pathProgressPercent(start: number, end: number): number {
 
 
 
-
-
-
 function getTabIdxToAdjust
 (scrollLeft: number, snapPointsPx: number[]): number {
-  const snapStart = findLastBy(snapPointsPx, elem=>scrollLeft>=elem).index
+  const snapStart = findLastBy(snapPointsPx, elem => scrollLeft>=elem).index
   
   const snapPointsPxInf = [Number.NEGATIVE_INFINITY, ...snapPointsPx, Number.POSITIVE_INFINITY]
   const threshold = Math.round(

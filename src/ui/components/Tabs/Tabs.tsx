@@ -2,15 +2,15 @@ import { animated } from '@react-spring/web'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useFakePointerRef } from 'src/ui/components/ActionProviders/UseFakePointerRef.tsx'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState, useTabs } from 'src/ui/components/Tabs/useTabs.ts'
-import PartialUndef = TypeU.PartialUndef
+import { useElemRef } from 'src/util/react-state-and-ref/useElemRef'
 import Setter = TypeU.Setter
 import row = EmotionCommon.row
 import contents = EmotionCommon.contents
+import Puro = TypeU.Puro
 
 
 
@@ -24,7 +24,7 @@ export type TabsCustomProps = {
   setTabsState: Setter<TabsState>
   tabIdx: TabIdx
   setTabIdx: Setter<TabIdx>
-} & PartialUndef<{
+} & Puro<{
   children: (tabsProps: TabsRenderProps)=>React.ReactNode
 }>
 export type TabsForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
@@ -36,7 +36,7 @@ export type TabsProps = TabsRefsProps & TabsCustomProps & TabsForwardRefProps
 const Tabs =
 React.memo(
 React.forwardRef<TabsRefElement, TabsProps>(
-(props, forwardedRef)=>{
+(props, forwardedRef) => {
   const {
     tabsState,
     setTabsState,
@@ -48,14 +48,13 @@ React.forwardRef<TabsRefElement, TabsProps>(
     ...restProps
   } = props
   
-  const tabFrameRef = useRef<HTMLDivElement>(null)
-  useImperativeHandle(forwardedRef, ()=>tabFrameRef.current!,[])
+  const [tabFrameRef] = useElemRef()
+  useImperativeHandle(forwardedRef, () => tabFrameRef.current!, [])
   
-  const isGesturesBusy = useLockAppGestures(tabsState==='dragging')
-  useLayoutEffect(
-    ()=>{ if (isGesturesBusy) setTabsState('snap')},
-    [isGesturesBusy, tabsState]
-  )
+  const isGesturesBusy = useLockAppGestures(tabsState === 'dragging')
+  useLayoutEffect(() => { 
+    if (isGesturesBusy) setTabsState('snap')
+  }, [isGesturesBusy, tabsState])
   
   const {
     isReady,
@@ -73,15 +72,16 @@ React.forwardRef<TabsRefElement, TabsProps>(
   
   
   
-  return <TabsFrame css={css`
-    ${ !isReady && css`opacity: 0` }
-  `}
+  return <TabsFrame style={{
+    opacity: !isReady ? 0 : undefined,
+  }}
     {...restProps}
     ref={tabFrameRef}
   >
     <GesturesConsumer {...tabDrag()}>
       <TabsContainer
-        style={{ left: tabContainerSpring.scrollLeft.to(v=>-v) }}
+        // @ts-expect-error
+        style={{ left: tabContainerSpring.scrollLeft.to(v => -v) }}
       >
         
         { children?.({
@@ -98,8 +98,6 @@ React.forwardRef<TabsRefElement, TabsProps>(
   </TabsFrame>
 }))
 export default Tabs
-
-
 
 
 

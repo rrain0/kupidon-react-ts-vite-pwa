@@ -28,7 +28,7 @@ export namespace MathU {
    * @returns {number} - округлённое в сторону нуля число
    */
   export const roundTo0 = (n: number): number => {
-    return n<0 ? -Math.round(-n) : Math.round(n)
+    return n < 0 ? -Math.round(-n) : Math.round(n)
   }
   
   
@@ -51,6 +51,14 @@ export namespace MathU {
     if (n > 0) return Math.ceil(n)
     if (n < 0) return -Math.ceil(-n)
     return n
+  }
+  
+  
+  
+  export function maxAbs(a: number, b: number): number {
+    if (Math.abs(a) > Math.abs(b)) return a
+    if (Math.abs(a) < Math.abs(b)) return b
+    return Math.max(a, b)
   }
   
   
@@ -123,7 +131,8 @@ export namespace MathU {
     if (typeof a === 'number' && typeof b === 'number') {
       from = a
       to = b
-    } else if (typeof a === 'number') {
+    }
+    else if (typeof a === 'number') {
       to = a
     }
     if (from >= to) throw new Error(`'to'=${to} must be greater than 'from'=${from}`)

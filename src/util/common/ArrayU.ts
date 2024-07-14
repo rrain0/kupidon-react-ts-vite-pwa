@@ -75,8 +75,66 @@ export namespace ArrayU {
   
   
   
+  export const avg = (arr: number[]): number => {
+    return arr.reduce((prev, curr) => prev + curr, 0) / arr.length
+  }
   
-  export const compare = <T>(arr: T[], other: T[]): 1| 0 |-1 => {
+  
+  
+  export const addRetainingLastElemsWithSameSign = (
+    arr: number[],
+    value: number,
+    maxLen: number | undefined = undefined
+  ): number[] => {
+    const a = [...arr, value]
+    let sign = 0
+    let lastRetainedIdx = 0
+    let i = lastIndex(a)
+    for ( ; i >= 0; i--) {
+      const s = Math.sign(a[i])
+      if (s !== 0) {
+        sign = s
+        break
+      }
+    }
+    for ( ; i >= 0; i--) {
+      const s = Math.sign(a[i])
+      if (s === -sign) {
+        lastRetainedIdx = i+1
+        break
+      }
+    }
+    const s = Math.max( 0, a.length - (maxLen ?? a.length), lastRetainedIdx )
+    return a.slice(s)
+  }
+  /*
+  console.log(addRetainingLastElemsWithSameSign([], 0, 3), 'expected: [0]')
+  console.log(addRetainingLastElemsWithSameSign([], 1, 3), 'expected: [1]')
+  console.log(addRetainingLastElemsWithSameSign([], -1, 3), 'expected: [-1]')
+  
+  console.log(addRetainingLastElemsWithSameSign([], 0, 0), 'expected: []')
+  console.log(addRetainingLastElemsWithSameSign([], 1, 0), 'expected: []')
+  console.log(addRetainingLastElemsWithSameSign([], -1, 0), 'expected: []')
+  
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 0), 'expected: []')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 0), 'expected: []')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 0), 'expected: []')
+  
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 4), 'expected: [0, 1, 0]')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 4), 'expected: [0, 1, 1]')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 4), 'expected: [-1]')
+  
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 3), 'expected: [0, 1, 0]')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 3), 'expected: [0, 1, 1]')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 3), 'expected: [-1]')
+  
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 2), 'expected: [1, 0]')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 2), 'expected: [1, 1]')
+  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 2), 'expected: [-1]')
+  */
+  
+  
+  export const compare = <T>(arr: T[], other: T[]): 1 | 0 | -1 => {
     if (arr === other) return 0
     for (let i = 0; i < Math.max(arr.length, other.length); i++) {
       if (i >= arr.length) return -1

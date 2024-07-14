@@ -11,8 +11,9 @@ import dotenvExpand from 'dotenv-expand'
 
 
 
+
 const projectRoot: string = process.cwd() // current working directory
-// partial fix for vite-plugin-checker to make file links clickable in IDE console
+// partial fix for vite-plugin-checker to make file links clickable in the IDE console
 {
   const nm = path.join(projectRoot, 'node_modules')
   const loggerFile = path.join(nm, 'vite-plugin-checker', 'dist', 'esm', 'logger.js')
@@ -65,36 +66,36 @@ const pwaOptions: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   
-  const envVars: Record<string, string> = {
+  let envFileConfig: Record<string, string> = { }
+  const envVarsRuntime: Record<string, string> = {
+    // node / legacy libs support
     'process.env.NODE_ENV': JSON.stringify(mode),
   }
-  const fileEnvVarsNames = [
-    'API_BASE_URL',
-  ]
   
-  // LOAD ENVS BY VITE
+  // LOAD ENVS BY VITE (with respect to vite env filename rules)
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   //const env = loadEnv(mode, process.cwd(), '')
   
-  // LOAD CUSTOM ENV FILES
+  // LOAD CUSTOM ENV FILES (any env filename)
   if (mode === 'development') {
     const envFileName = 'react.dev.env'
-    const envConfig = dotenvExpand.expand({
+    envFileConfig = dotenvExpand.expand({
       parsed: dotenv.parse(fs.readFileSync(envFileName)),
     }).parsed as Record<string, string>
-    fileEnvVarsNames.forEach(envName => {
-      envVars[`import.meta.env.${envName}`] = JSON.stringify(envConfig[envName])
-      //envVars[`process.env.${envName}`] = JSON.stringify(envConfig[envName])
-    })
+    envVarsRuntime[`import.meta.env.API_BASE_URL`] = JSON.stringify(envFileConfig.API_BASE_URL)
+    //envVarsRuntime[`process.env.TEST`] = JSON.stringify(envFileConfig[TEST])
   }
   
   
   return {
+    
+    // configure vite development server (yarn run dev)
     server: {
-      host: true, // expose app via IP access from local network
-      port: +(process.env.REACT_PORT ?? 40009),
+      host: true, // expose app via IP address from local network
+      port: +(envFileConfig.REACT_PORT ?? process.env.REACT_PORT ?? 40009),
     },
+    
     plugins: [
       react({
         jsxImportSource: '@emotion/react',
@@ -110,7 +111,9 @@ export default defineConfig(({ command, mode }) => {
         typescript: true,
       }),
     ],
+    
     // pass desired env variables
-    define: envVars,
+    define: envVarsRuntime,
+    
   }
 })

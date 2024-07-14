@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
@@ -72,11 +72,14 @@ React.memo(
         <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Page Lifecycle test</Button>
         </Link>
+        <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
+          <Button css={ButtonStyle.filledRectBigNormal}>Emulated Scroll</Button>
+        </Link>
+        
         
         <Link to={RootRoute.test.viewsListItem1AddItem[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Views: List Item 1: Add Item</Button>
         </Link>
-        
         <Link to={RootRoute.test.viewsListItem2[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Views: List Item 2</Button>
         </Link>

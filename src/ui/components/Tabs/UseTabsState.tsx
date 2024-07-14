@@ -3,23 +3,23 @@ import React, { useEffect, useMemo } from 'react'
 import { useRef, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
-import PartialUndef = TypeU.PartialUndef
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import Setter = TypeU.Setter
+import Puro = TypeU.Puro
 
 
 
 
-export type UseTabsStateProps = PartialUndef<{
+export type UseTabsStateProps = Puro<{
   initialIdx: number
   idx: number
   setIdx: Setter<number>
-  children: (props: UseTabsStateRenderProps)=>React.ReactNode
+  children: (props: UseTabsStateRenderProps) => React.ReactNode
 }>
 
 const UseTabsState =
 React.memo(
-(props: UseTabsStateProps)=>{
+(props: UseTabsStateProps) => {
   const {
     idx: tabIdxExt,
     setIdx: setTabIdxExt,
@@ -28,9 +28,9 @@ React.memo(
   
   const [tabIdxExtLocal, setTabIdxExtLocal] = useState(initialIdx ?? tabIdxExt ?? 0)
   useEffect(() => {
-    if (tabIdxExt!==undefined) setTabIdxExtLocal(tabIdxExt)
+    if (tabIdxExt !== undefined) setTabIdxExtLocal(tabIdxExt)
   }, [tabIdxExt])
-  const setAvailableTabIdxExt = (idx: number)=>{
+  const setAvailableTabIdxExt = (idx: number) => {
     if (setTabIdxExt) setTabIdxExt(idx)
     else setTabIdxExtLocal(idx)
   }
@@ -44,8 +44,10 @@ React.memo(
   const tabFrameRef = useRef<HTMLDivElement>(null)
   
   const tabsProps = useMemo<UseTabsStateRenderProps>(() => ({
-    tabsState, setTabsState,
-    tabIdx, setTabIdx,
+    tabsState,
+    setTabsState,
+    tabIdx,
+    setTabIdx,
     tabFrameRef,
   }), [tabsState, tabIdx])
   
