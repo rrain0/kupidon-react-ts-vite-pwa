@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { animated, useSpring, config, easings } from '@react-spring/web'
-import React from 'react'
+import React, { useState } from 'react'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Puro = TypeU.Puro
@@ -19,11 +19,56 @@ const Ripple = React.memo(
     
     console.log('isShow', isShow)
     
+    
     /*
-    TODO
-     move BezierEasing here
-     use linear-gradient for ripple to become edges darker
+    // SPRING EXAMPLE
+    const [hovered, setHover] = useState(false)
+    // if passing an object, it updates on every rerender
+    const { progress } = useSpring({
+      progress: hovered ? 1 : 0,
+      
+      // config types:
+      
+      // Predefined Spring Config
+      //import { config } from '@react-spring/web'
+      config: config.default,
+     
+      // Predefined Spring Easing Config
+      //import { easings } from '@react-spring/web'
+      config: {
+        duration: 4000,
+        easing: easings.easeOutCubic,
+      },
+     
+      // Custom Easing Config via 'bezier-easing' package
+      // css 'cubic-bezier(0.17, 0.84, 0.44, 1)'
+      //import BezierEasing from 'bezier-easing'
+      //const animationEasing = BezierEasing(0.17, 0.84, 0.44, 1)
+      config: {
+        duration: 4000,
+        easing: animationEasing,
+      },
+    })
+    */
+    
+    
+    /*
+     TODO
+      use linear-gradient for ripple to become edges darker
      */
+    const [{ opacity }] = useSpring(() => {
+      return {
+        from: { opacity: 1 },
+        to: { opacity: 0 },
+        config: {
+          duration: 4000,
+          easing: easings.easeOutCubic,
+        },
+        reset: true,
+        //import { config, easings } from '@react-spring/web'
+        //config: config.default,
+      }
+    }, [isShow])
     
     const [{ opacity }] = useSpring(() => {
       if (!isShow) return {
@@ -36,9 +81,9 @@ const Ripple = React.memo(
           duration: 4000,
           easing: easings.easeOutCubic,
         },
+        reset: true,
         //import { config, easings } from '@react-spring/web'
         //config: config.default,
-        reset: true,
       }
     }, [isShow])
     

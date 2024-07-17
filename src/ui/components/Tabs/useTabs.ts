@@ -30,9 +30,6 @@ export const DefaultTabIdx = 0
 // % ширины viewport в секунду
 const speedThreshold = 35
 const defaultAutoAnimationDuration = 400
-// 'cubic-bezier(0.17,0.84,0.44,1)'
-//import BezierEasing from 'bezier-easing'
-//const animationEasing = BezierEasing(0.17,0.84,0.44,1)
 
 
 
@@ -184,10 +181,6 @@ export const useTabs = (
         const animation = await tabContainerSpring.scrollLeft.start(
           endScrollLeft,
           {
-            /* config: {
-              duration: duration,
-              easing: animationEasing,
-            }, */
             config: {
               mass: 1 * duration / 100,
               tension: 500,
