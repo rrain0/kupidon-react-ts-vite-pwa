@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
-import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple from 'src/ui/elements/Ripple0/Ripple.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import trueOrUndef = TypeU.trueOrUndef

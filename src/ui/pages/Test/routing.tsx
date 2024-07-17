@@ -14,8 +14,9 @@ import ScrollbarTestPage from 'src/ui/pages/Test/pages/ScrollbarTestPage.tsx'
 import ResizeObserverTestPage from 'src/ui/pages/Test/pages/ResizeObserverTestPage.tsx'
 import BottomSheetTestPage from 'src/ui/pages/Test/pages/BottomSheetTestPage.tsx'
 import MoveElementToAnotherViewTestPage from 'src/ui/pages/Test/pages/MoveElementToAnotherViewTestPage.tsx'
-import ListItem1AddItem from 'src/ui/pages/Test/view-pages/ListItem1AddItem'
-import ListItem2 from 'src/ui/pages/Test/view-pages/ListItem2'
+import ListItem1AddItem from 'src/ui/pages/Test/views/ListItem1AddItem'
+import ListItem2 from 'src/ui/pages/Test/views/ListItem2'
+import RippleTest from 'src/ui/pages/Test/views/RippleTest'
 
 
 
@@ -84,6 +85,17 @@ const pageLifecycleRouting: RouteObject[] = [
   clearUnknownPathEnding,
 ]
 
+
+// path: 'test / emulated-scroll / <check here>'
+const emulatedScrollRouting: RouteObject[] = [
+  {
+    path: '',
+    Component: EmulatedScroll,
+  },
+  clearUnknownPathEnding,
+]
+
+
 // path: 'test / views-list-item-1-add-item / <check here>'
 const viewsListItem1AddItemRouting: RouteObject[] = [
   {
@@ -100,11 +112,11 @@ const viewsListItem2Routing: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'test / emulated-scroll / <check here>'
-const emulatedScrollRouting: RouteObject[] = [
+// path: 'test / ripple-test / <check here>'
+const rippleTestRouting: RouteObject[] = [
   {
     path: '',
-    Component: EmulatedScroll,
+    Component: RippleTest,
   },
   clearUnknownPathEnding,
 ]
@@ -162,6 +174,10 @@ export const testRouting: RouteObject[] = [
   {
     path: RootRoute.test.viewsListItem2[path]+'/*',
     children: viewsListItem2Routing,
+  },
+  {
+    path: RootRoute.test.rippleTest[path]+'/*',
+    children: rippleTestRouting,
   },
   clearUnknownPathEnding,
 ]

@@ -74,7 +74,7 @@ export default defineConfig(({ command, mode }) => {
   
   // LOAD ENVS BY VITE (with respect to vite env filename rules)
   // Load env file based on `mode` in the current working directory.
-  // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
+  // Set the third parameter to '' to load all env vars regardless of the `VITE_` prefix.
   //const env = loadEnv(mode, process.cwd(), '')
   
   // LOAD CUSTOM ENV FILES (any env filename)
@@ -90,7 +90,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     
-    // configure vite development server (yarn run dev)
+    // configure vite DEVELOPMENT server (yarn run dev)
     server: {
       host: true, // expose app via IP address from local network
       port: +(envFileConfig.REACT_PORT ?? process.env.REACT_PORT ?? 40009),

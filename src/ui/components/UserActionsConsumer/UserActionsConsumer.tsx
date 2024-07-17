@@ -12,13 +12,13 @@ export type UserActionsConsumerProps = {
   children: React.ReactNode
 }
 
-const UserActionsConsumer =
-React.memo(
-(props: UserActionsConsumerProps)=>{
-  return <div css={contents} {...stopPointerAndMouseEvents()}>
-    {props.children}
-  </div>
-})
+const UserActionsConsumer = React.memo(
+  (props: UserActionsConsumerProps) => {
+    return <div css={contents} {...stopPointerAndMouseEvents()}>
+      {props.children}
+    </div>
+  }
+)
 export default UserActionsConsumer
 
 

@@ -2,12 +2,12 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
 import { RadioInputStyle } from 'src/ui/elements/inputs/RadioInput/RadioInputStyle.ts'
-import React, {useImperativeHandle, useRef} from "react"
+import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioActiveIc = SvgIcons.RadioActiveIc
-import Ripple, { RippleMode } from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple, { RippleMode } from 'src/ui/elements/Ripple0/Ripple.tsx'
 import RadioInactiveIc = SvgIcons.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
@@ -34,7 +34,7 @@ export type RadioInputProps = React.ComponentPropsWithoutRef<'input'> & Puro<{
 const RadioInput = 
 React.memo(
 React.forwardRef<HTMLInputElement, RadioInputProps>
-((props, forwardedRef)=> {
+((props, forwardedRef) => {
   const {
     hasError,
     startViews, endViews,

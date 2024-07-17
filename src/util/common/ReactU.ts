@@ -48,7 +48,7 @@ export namespace ReactU {
     ev.stopPropagation()
   }
   export const stopPointerAndMouseEvents = (stop = true) => {
-    if (!stop) return {}
+    if (!stop) return { }
     return {
       onClick: stopReactEventPropagation,
       

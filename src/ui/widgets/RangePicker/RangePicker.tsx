@@ -4,7 +4,7 @@ import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useAsRefGetSet } from 'src/util/react-state-and-ref/useAsRefGetSet.ts'
+import { useAsRefGet } from 'src/util/react-state-and-ref/useAsRefGet.ts'
 import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { useRefGetSet } from 'src/util/react-state-and-ref/useRefGetSet.ts'
@@ -96,7 +96,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   const [prevMinMax, setPrevMinMax] = useState(outerMinMax)
   const [prevRange, setPrevRange] = useState(outerRange)
   
-  const getMinMax = useAsRefGetSet(outerMinMax)
+  const getMinMax = useAsRefGet(outerMinMax)
   
   const [isDragging, setIsDragging] = useState(false)
   const [getActiveTip, setActiveTip] = useRefGetSet(null as 'left' | 'right' | null)

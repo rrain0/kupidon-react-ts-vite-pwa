@@ -1,5 +1,5 @@
 import Input from 'src/ui/elements/inputs/Input/Input.tsx'
-import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple from 'src/ui/elements/Ripple0/Ripple.tsx'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'

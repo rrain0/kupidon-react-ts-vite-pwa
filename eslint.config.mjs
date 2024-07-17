@@ -57,7 +57,7 @@ export default [
     ...ts.configs.recommended,
     {
       rules: {
-        '@typescript-eslint/ban-ts-comment': 'warn',
+        '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-expect-error': false }],
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
@@ -156,7 +156,6 @@ export default [
         MemberExpression: 0,
         ignoreComments: true,
       }],*/
-      '@stylistic/jsx-quotes': ['error', 'prefer-single'],
       '@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true }],
       '@stylistic/keyword-spacing': ['error', { before: true, after: true }],
       //'@stylistic/linebreak-style': ['error', 'unix'], // doesn't matter what linebreak style - git fixes it
@@ -208,6 +207,13 @@ export default [
       '@stylistic/wrap-iife': 'off',
       '@stylistic/wrap-regex': 'off',
       '@stylistic/yield-star-spacing': 'off',
+      
+      // JSX rules
+      '@stylistic/jsx-quotes': ['error', 'prefer-single'],
+      '@stylistic/jsx-wrap-multilines': ['error', {
+        return: 'parens-new-line',
+        arrow: 'parens-new-line',
+      }],
     },
   },
   
@@ -265,8 +271,7 @@ export default [
       'promise': promise,
     },
     rules: {
-      // just example, it is already turned on
-      //'promise/always-return': 'error'
+      'promise/catch-or-return': 'off'
     },
   },
   

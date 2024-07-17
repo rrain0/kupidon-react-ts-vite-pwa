@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useImperativeHandle, useRef } from 'react'
-import { TypeU } from '@util/common/TypeU.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import PartialUndef = TypeU.PartialUndef
 
 

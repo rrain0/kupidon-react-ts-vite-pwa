@@ -7,10 +7,10 @@ import React from "react"
 import { SvgIcons } from "src/ui/elements/icons/SvgIcons/SvgIcons.tsx"
 import EyeCrossedOutIc = SvgIcons.EyeCrossedOutIc
 import EyeIc = SvgIcons.EyeIc
-import Ripple from "src/ui/elements/Ripple/Ripple.tsx"
+import Ripple from "src/ui/elements/Ripple0/Ripple.tsx"
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
+import { RippleStyle } from 'src/ui/elements/Ripple0/RippleStyle.ts'
 import center = EmotionCommon.center
 import resetButton = EmotionCommon.resetButton
 import hoverable = EmotionCommon.hoverable

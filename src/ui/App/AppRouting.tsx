@@ -100,8 +100,8 @@ const rootRoutes: RouteObject[] = [
       {
         path: '*',
         Component: AnyAny,
-      }
-    ]
+      },
+    ],
   },
 ]
 const router = createBrowserRouter(rootRoutes)
@@ -109,11 +109,11 @@ const router = createBrowserRouter(rootRoutes)
 
 
 
-const AppRouting =
-React.memo(
-()=>{
-  return <RouterProvider router={router} />
-})
+const AppRouting = React.memo(
+() => {
+    return <RouterProvider router={router} />
+  }
+)
 export default AppRouting
 
 

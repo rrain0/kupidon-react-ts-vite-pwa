@@ -12,7 +12,7 @@ import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
 import CheckboxInput from 'src/ui/elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
-import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple from 'src/ui/elements/Ripple0/Ripple.tsx'
 import { RangeU } from 'src/util/common/RangeU'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -72,6 +72,8 @@ React.memo(
         <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Page Lifecycle test</Button>
         </Link>
+        
+        
         <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Emulated Scroll</Button>
         </Link>
@@ -82,6 +84,9 @@ React.memo(
         </Link>
         <Link to={RootRoute.test.viewsListItem2[fullAnySearchParams](searchParams)}>
           <Button css={ButtonStyle.filledRectBigNormal}>Views: List Item 2</Button>
+        </Link>
+        <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>
+          <Button css={ButtonStyle.filledRectBigNormal}>Views: Ripple</Button>
         </Link>
         
         

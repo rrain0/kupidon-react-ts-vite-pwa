@@ -1,9 +1,11 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle'
+import SelectItem from 'src/ui/elements/inputs/SelectItem/SelectItem'
 import row = EmotionCommon.row
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
@@ -26,7 +28,7 @@ const ListItem2 = () => {
     + 'длиииииииииииииииииииииииииииинный вариант',
   ]
   
-  const options = [
+  const [options, setOptions] = useState([
     {
       value: '1',
       text: 'Вариант 1',
@@ -69,7 +71,18 @@ const ListItem2 = () => {
       isEditable: true,
       isAdd: true,
     },
-  ]
+  ])
+  const toggleOption = (value: string) => {
+    setOptions(options.map(it => {
+      if (it.value !== value || it.isAdd) return it
+      return {
+        ...it,
+        isSelected: !it.isSelected,
+      }
+    }))
+  }
+  
+  
   
   return <Pages.SimplePage>
     <Pages.ContentFill>
@@ -79,6 +92,20 @@ const ListItem2 = () => {
       
       
       <ColumnContent>
+        
+        { options.map((it, i) => <SelectItem
+          onClick={() => toggleOption(it.value)}
+          isSelected={it.isSelected}
+          isAdd={it.isAdd}
+          isEdit={it.isEditable}
+          isError={false}
+          selectedIndicators={(() => {
+            if (i === 0) return options.map(it => it.isSelected)
+            return options.map((it, i2) => i === i2 && it.isSelected)
+          })()}
+        >
+          {it.text}
+        </SelectItem>) }
         
         
         

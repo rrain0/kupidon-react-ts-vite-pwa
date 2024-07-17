@@ -1,4 +1,5 @@
-import React, { PropsWithoutRef } from 'react'
+import React from 'react'
+
 
 
 export { }
@@ -35,7 +36,7 @@ function test() {
   }
   const ageName = 'age' as const
   const objAddGetAge = {
-    get [ageName]() { return 8 }
+    get [ageName]() { return 8 },
   }
   const obj2 = {
     ...obj1,
@@ -43,10 +44,6 @@ function test() {
   }
   console.log(obj2.age)
 }
-
-
-
-
 
 
 
@@ -64,7 +61,7 @@ export function SmartBerryTestTasks() {
   
   
   const compress = (numbers: number[]): string => {
-    const sorted = numbers.toSorted((a,b) => a - b)
+    const sorted = numbers.toSorted((a, b) => a - b)
     console.log('sorted', sorted)
     if (!sorted.length) return ''
     if (sorted.length === 1) return sorted[0] + ''
@@ -72,7 +69,7 @@ export function SmartBerryTestTasks() {
     let startIdx = 0
     for (let i = 1; i <= sorted.length; i++) {
       if (i === sorted.length || sorted[i] !== sorted[i-1] + 1) {
-        if (startIdx !== i - 1){
+        if (startIdx !== i - 1) {
           ranges[ranges.length - 1].push(sorted[i - 1])
         }
         if (i === sorted.length) break
@@ -113,11 +110,11 @@ export function SmartBerryTestTasks() {
   }
   
   
-  console.log('canMakePalindrome("aaab")', canMakePalindrome("aaab"))
-  console.log('canMakePalindrome("xyz")', canMakePalindrome("xyz"))
-  console.log('canMakePalindrome("axyza")', canMakePalindrome("axyza"))
-  console.log('canMakePalindrome("xyaz")', canMakePalindrome("xyaz"))
-  console.log('canMakePalindrome("xayaz")', canMakePalindrome("xayaz"))
-  console.log('canMakePalindrome("abab")', canMakePalindrome("abab"))
+  console.log('canMakePalindrome("aaab")', canMakePalindrome('aaab'))
+  console.log('canMakePalindrome("xyz")', canMakePalindrome('xyz'))
+  console.log('canMakePalindrome("axyza")', canMakePalindrome('axyza'))
+  console.log('canMakePalindrome("xyaz")', canMakePalindrome('xyaz'))
+  console.log('canMakePalindrome("xayaz")', canMakePalindrome('xayaz'))
+  console.log('canMakePalindrome("abab")', canMakePalindrome('abab'))
   
 }

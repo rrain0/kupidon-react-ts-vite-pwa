@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
+import { RippleStyle } from 'src/ui/elements/Ripple0/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 

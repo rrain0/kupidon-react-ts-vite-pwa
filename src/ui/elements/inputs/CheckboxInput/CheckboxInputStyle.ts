@@ -8,7 +8,7 @@ import CssAttr = WidgetStyle.CssAttr
 import CssPseudo = WidgetStyle.CssPseudo
 import CssWidget = WidgetStyle.CssWidget
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import { RippleStyle } from 'src/ui/elements/Ripple/RippleStyle.ts'
+import { RippleStyle } from 'src/ui/elements/Ripple0/RippleStyle.ts'
 import hoverable = EmotionCommon.hoverable
 import center = EmotionCommon.center
 import resetInput = EmotionCommon.resetInput

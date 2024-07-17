@@ -2,17 +2,20 @@ import { useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import React from 'react'
 import { ArrayU } from 'src/util/common/ArrayU'
-import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
 import { TypeU } from 'src/util/common/TypeU'
 import { useRefAsGetSet } from 'src/util/react-state-and-ref/useRefAsGetSet'
 import { useRefGetSet } from 'src/util/react-state-and-ref/useRefGetSet'
 import Getter = TypeU.Getter
 import NumRange = RangeU.NumRange
-import addWithRetainingLastElemsWithSameSign = ArrayU.addRetainingLastElemsWithSameSign
-import maxAbs = MathU.maxAbs
 
 
+
+/*
+  split up into 2: x scroll & y scroll
+  
+  add snap points
+*/
 
 
 export const useEmulatedScroll = (
@@ -84,6 +87,7 @@ export const useEmulatedScroll = (
       if (isLast) {
         clearDvps()
         const spd = 500 * ArrayU.avg(getLastDvps().map(it => it.dVp / it.dT))
+        setLastDvps([])
         //console.log('spd', spd)
         if (Math.abs(spd) > 350) {
           const dProgress = RangeU.map(

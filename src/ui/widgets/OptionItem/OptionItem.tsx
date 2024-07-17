@@ -9,7 +9,7 @@ import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
-import Ripple from 'src/ui/elements/Ripple/Ripple.tsx'
+import Ripple from 'src/ui/elements/Ripple0/Ripple.tsx'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 import Callback = TypeU.Callback
