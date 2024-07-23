@@ -80,8 +80,6 @@ export namespace ButtonStyle {
   
   
   
-  
-  
   export const base = css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
@@ -160,7 +158,7 @@ export namespace ButtonStyle {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${W.props.color.p.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
     }
     
     // state: error
@@ -234,7 +232,7 @@ export namespace ButtonStyle {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background: ${t.elementDanger.bgc[0]};
-      ${W.props.color.p.set(t.elementDanger.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDanger.content[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
@@ -253,7 +251,7 @@ export namespace ButtonStyle {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${W.props.color.p.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
     }
   `
   
@@ -298,7 +296,7 @@ export namespace ButtonStyle {
   export const textRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.props.color.p.set(t.page.content2[0])};
+      ${W.e.button.e.props.color.set(t.page.content2[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
@@ -317,7 +315,7 @@ export namespace ButtonStyle {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${W.props.color.p.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
     }
   `
   // type: text, shape: rect, add size: normal
@@ -445,7 +443,7 @@ export namespace ButtonStyle {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background: ${t.elementDanger.bgc[0]};
-      ${W.props.color.p.set(t.elementDanger.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDanger.content[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
@@ -464,7 +462,7 @@ export namespace ButtonStyle {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${W.props.color.p.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
     }
   `
   
@@ -648,7 +646,7 @@ export namespace ButtonStyle {
   export const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.props.color.p.set(t.page.content2[0])};
+      ${W.e.button.e.props.color.set(t.page.content2[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
@@ -667,7 +665,7 @@ export namespace ButtonStyle {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background: ${t.elementDisabled.bgc[0]};
-      ${W.props.color.p.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
     }
   `
   

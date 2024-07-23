@@ -3,62 +3,78 @@ import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { AppTheme } from 'src/util/theme/AppTheme'
 import Elem = WidgetStyle.Elem
-import CssProp = WidgetStyle.CssProp
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
-import abs = EmotionCommon.abs
-import CssPropEnum = WidgetStyle.CssPropEnum
+import CssAttr = WidgetStyle.CssAttr
 
 
 
 
-export namespace RippleS {
-  
-  export const rippleModes = ['center', 'pointer'] as const
-  export type RippleMode = typeof rippleModes[number]
+export namespace SelectItemS {
   
   
+  import abs = EmotionCommon.abs
   export const W = (() => {
-    const frame = new Elem('rrainuiRippleFrame', {
+    const frame = new Elem('rrainuiSelectItemFrame', {
       normal: CssPseudo.empty,
+      selected: CssAttr.dataSelected,
     }, { })
-    const ripple = new Elem('rrainuiRippleRipple', { }, {
-      color: CssProp.color,
-      mode: new CssPropEnum('--mode', rippleModes),
-    })
+    const border = new Elem('rrainuiBorder', { }, { })
     
-    const rippleWidget = CssWidget
+    const selectItemWidget = CssWidget
       .ofRoot('frame', frame)
-      .add('frame', '>', 'ripple', ripple)
+      .add('frame', '>', 'border', border)
     
-    return rippleWidget
+    return selectItemWidget
   })()
   
   
-  const opacity = '66'
   
   const base = css`
     // normal
     ${W.use.s.normal().e.frame().thisUse} {
-      pointer-events: none;
-      ${abs};
+      cursor: pointer;
+      width: 300px;
+      min-height: 80px;
+      height: fit-content;
+      --br: 20px;
+      border-radius: var(--br);
+      
+      background: #eeeeee;
+      
+      position: relative;
+      display: grid;
+      grid-auto-flow: column;
+      place-items: stretch center;
+      gap: 10px;
       overflow: hidden;
     }
     // normal
-    ${W.use.s.normal().e.ripple().thisUse} {
-      position: absolute;
-      translate: -50% -50%;
-      border-radius: 999999px;
-      /*background-image: radial-gradient(
-        closest-side circle at center,
-        transparent, var(--bg-color) 90%, transparent
-      );*/
-      ${W.e.ripple.p.color.set('#ffffff' + opacity)}
-      ${W.e.ripple.p.mode.set('pointer')}
-      background-color: ${W.e.ripple.p.color.get()};
+    ${W.use.s.normal().e.border().thisUse} {
+      pointer-events: none;
+      ${abs};
+      border-radius: inherit;
+      border: none;
+    }
+    
+    // selected
+    ${W.use.s.selected().e.border().thisUse} {
+      border-width: 2px;
+      border-style: solid;
+      border-color: #444444;
     }
   `
   
+  
+  export const normal = (t: AppTheme.Theme) => css`
+    ${base};
+    ${W.use.s.normal().e.frame().thisUse} {
+      width: 100%;
+    }
+  `
+  
+   
+   /*
   
   export const filled = (t: AppTheme.Theme) => css`
     ${base};
@@ -86,8 +102,7 @@ export namespace RippleS {
       ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
     }
   `
-  
-  
+   */
   
   
   

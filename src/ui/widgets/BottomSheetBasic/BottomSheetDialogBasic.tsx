@@ -23,7 +23,7 @@ export type BottomSheetDialogBasicProps =
 
 const BottomSheetDialogBasic =
 React.memo(
-(props: BottomSheetDialogBasicProps)=>{
+(props: BottomSheetDialogBasicProps) => {
   
   const { header, children, ...restProps } = props
   const { sheetState } = props
@@ -44,12 +44,12 @@ React.memo(
     bottomSheetHeaderRef={bottomSheetHeaderRef}
     bottomSheetContentRef={bottomSheetContentRef}
   >
-    {({ sheetDrag })=><>
+    {({ sheetDrag }) => <>
       {/*
        // Header Component
        // Must be without margins!!!
        */}
-      <div css={t=>css`
+      <div css={t => css`
         ${BottomSheetBasicParts.headerStyle(t)};
         ${sheetState==='dragging' && css`cursor: grabbing;`}
       `}
@@ -57,7 +57,7 @@ React.memo(
         {...sheetDrag()}
       >
         
-        <div /* Header handle */ css={t=>css`
+        <div /* Header handle */ css={t => css`
           ${BottomSheetBasicParts.headerHandleStyle(t)};
           ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
         `}/>

@@ -235,7 +235,7 @@ export namespace WidgetStyle {
   /*
   STATE ORDER:
   normal
-  checked
+  checked / selected
   hover
   active
   focus
@@ -307,6 +307,7 @@ export namespace WidgetStyle {
     
     static readonly empty = new CssAttr('')
     static readonly dataError = new CssAttr('data-error')
+    static readonly dataSelected = new CssAttr('data-selected')
     
   }
   

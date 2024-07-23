@@ -86,6 +86,9 @@ export default defineConfig(({ command, mode }) => {
     envVarsRuntime[`import.meta.env.API_BASE_URL`] = JSON.stringify(envFileConfig.API_BASE_URL)
     //envVarsRuntime[`process.env.TEST`] = JSON.stringify(envFileConfig[TEST])
   }
+  if (mode === 'production') {
+    envVarsRuntime[`import.meta.env.API_BASE_URL`] = JSON.stringify(process.env.API_BASE_URL)
+  }
   
   
   return {

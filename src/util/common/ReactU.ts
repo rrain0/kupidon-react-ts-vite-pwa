@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
+import { ObjectU } from 'src/util/common/ObjectU'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro
 
 
@@ -9,6 +9,7 @@ import Puro = TypeU.Puro
 export namespace ReactU {
   
   
+  import ObjectMap = ObjectU.ObjectMap
   export type ChildrenProps = Puro<{ children: React.ReactNode }>
   
   export type ClassStyleProps = Puro<{
@@ -19,41 +20,6 @@ export namespace ReactU {
   
   export type First = Puro<{ first: boolean }>
   export type Last = Puro<{ last: boolean }>
-  
-  
-  
-  
-  // todo hack fix
-  // Sometimes 'click' is not fired for a couple seconds
-  // despite 'pointerdown' & 'pointerup' events are fired normally.
-  // WARNING!!! It fires before actual click events,
-  // so if you change view after this so it can't capture clicks,
-  // the underlying view captures click along with this view simultaneously.
-  export const onPointerClick =
-  <E extends Element>
-  (callback: Callback1<React.PointerEvent<E>>) => {
-    const pointers = new Set<number>()
-    return {
-      onPointerDown: (ev: React.PointerEvent<E>) => {
-        if (!pointers.has(ev.pointerId)) {
-          ev.currentTarget.releasePointerCapture(ev.pointerId)
-          pointers.add(ev.pointerId)
-        }
-      },
-      onPointerUp: (ev: React.PointerEvent<E>) => {
-        if (pointers.has(ev.pointerId)) {
-          callback(ev)
-          //console.log('pointerup')
-          pointers.delete(ev.pointerId)
-        }
-      },
-      // 'out' is 'leave' + 'cancel'
-      onPointerOut: (ev: React.PointerEvent<E>) => {
-        //console.log('pointerout')
-        pointers.delete(ev.pointerId)
-      },
-    } as const
-  }
   
   
   
@@ -110,6 +76,33 @@ export namespace ReactU {
   
   
   
+  // todo fix types
+  /* export const combineEvHandlerRecord =
+  <
+    R extends Partial<Record<keyof React.DOMAttributes<any>, React.EventHandler<E>>>,
+    O extends Partial<Record<keyof React.DOMAttributes<any>, any>>,
+  >
+  (handlers: R, otherHandlers: O): R => {
+    return ObjectMap<any, any>(handlers, ([prop, h]) => [
+      prop,
+      ev => {
+        h?.(ev)
+        otherHandlers[prop]?.(ev)
+      },
+    ]) as unknown as R
+  } */
+  export const combineEvHandlerRecord = (handlers: any, otherHandlers: any): any => {
+    return ObjectMap<any, any>(handlers, ([prop, h]) => [
+      prop,
+      ev => {
+        h?.(ev)
+        otherHandlers[prop]?.(ev)
+      },
+    ])
+  }
+  
+  
+
   
   /*
   export const arrMapAndMergeIfNotEq =

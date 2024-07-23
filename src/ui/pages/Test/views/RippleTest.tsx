@@ -19,13 +19,13 @@ const RippleTest = React.memo(
           
           <UseRipple>{rippleProps => (
             <RippleFrame {...rippleProps.target}>
-              <Ripple {...rippleProps.ripple} css={RippleS.normal}/>
+              <Ripple {...rippleProps.ripple} css={RippleS.filled} />
             </RippleFrame>
           )}</UseRipple>
           
           <UseRipple>{rippleProps => (
             <RippleFrame2 {...rippleProps.target}>
-              <Ripple {...rippleProps.ripple} css={RippleS.normal}/>
+              <Ripple {...rippleProps.ripple} css={RippleS.filled} />
             </RippleFrame2>
           )}</UseRipple>
           

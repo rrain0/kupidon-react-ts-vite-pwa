@@ -93,12 +93,16 @@ const Ripple = React.memo(
         from: { opacity: 0.1 },
         to: { opacity: 1 },
         reset: true,
+        config: {
+          duration: rippleProps.rippleDuration,
+          easing: easings.easeOutCubic,
+        },
       }
       if (!isShow) return {
         to: { opacity: 0 },
         config: {
-          duration: 2000,
-          easing: easings.easeOutCubic,
+          duration: rippleProps.dissolveDuration,
+          easing: easings.linear,
         },
       }
     }, [isShow])
@@ -108,7 +112,7 @@ const Ripple = React.memo(
         from: { scale: 0 },
         to: { scale: 1 },
         config: {
-          duration: 2000,
+          duration: rippleProps.rippleDuration,
           easing: easings.easeOutCubic,
         },
         reset: true,
@@ -136,7 +140,7 @@ const Ripple = React.memo(
     
     return (
       <RippleFrame {...frameJsxProps}>
-        <RippleAnim {...rippleJsxProps} />
+        <RippleRipple {...rippleJsxProps} />
       </RippleFrame>
     )
   }
@@ -152,7 +156,7 @@ const RippleFrame = styled.div`
 `
 
 
-const RippleAnim = styled(animated.div)`
+const RippleRipple = styled(animated.div)`
   position: absolute;
   translate: -50% -50%;
   border-radius: 999999px;

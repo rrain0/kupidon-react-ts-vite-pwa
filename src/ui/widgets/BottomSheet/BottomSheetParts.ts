@@ -1,15 +1,15 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import fixed = EmotionCommon.fixed
 
 
 
 
 export namespace BottomSheetParts {
   
-  import fixed = EmotionCommon.fixed
   export const frameStyle = css`
     ${fixed};
-    z-index: 30;
+    z-index: 1;
     background: none;
     pointer-events: none;
     //touch-action: none;

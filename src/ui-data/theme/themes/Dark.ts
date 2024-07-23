@@ -10,7 +10,7 @@ const DarkProps = {
   
   page: {
     bgc:         ['#18191b'], // #424854
-    bgcGradient: ['#282c34','#282c34','#282c34'],
+    bgcGradient: ['#282c34', '#282c34', '#282c34'],
     content1:    ['#ffffff'],
     content2:    ['#bdbdbd'],
     content3:    ['#999999'],

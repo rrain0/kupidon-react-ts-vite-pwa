@@ -27,7 +27,7 @@ export type UseBottomSheetStateProps = {
 
 const UseBottomSheetState =
 React.memo(
-(props: UseBottomSheetStateProps)=>{
+(props: UseBottomSheetStateProps) => {
   const {
     isOpen: isOpenExternal,
     close,
@@ -54,8 +54,8 @@ React.memo(
   
   
   const setOpenExternal = (isOpen: boolean) => isOpen ? undefined : close?.()
-  const isOpen = !(['closed','closing','close',null] as SheetState[]).includes(sheetState)
-  const setOpen = (isOpen: boolean)=>{
+  const isOpen = !(['closed', 'closing', 'close', null] as SheetState[]).includes(sheetState)
+  const setOpen = (isOpen: boolean) => {
     if (isOpen) {
       //console.log('setOpening')
       setSheetState('opening')
@@ -71,14 +71,14 @@ React.memo(
   
   
   
-  const setClosing = useCallback(()=>{
+  const setClosing = useCallback(() => {
     //console.log('setClosing')
     setSheetState('closing')
   }, [])
   
   
   const sheetProps = useMemo<UseBottomSheetOptions>(
-    ()=>({
+    () => ({
       sheetState,
       setSheetState,
       snapIdx,

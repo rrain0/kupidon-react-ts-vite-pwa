@@ -1,12 +1,17 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle'
-import Ripple from 'src/ui/elements/Ripple0/Ripple'
+import { SelectItemS } from 'src/ui/elements/inputs/SelectItem/SelectItemS'
+import { RippleS } from 'src/ui/elements/Ripple/RippleS'
+import UseRipple from 'src/ui/elements/Ripple/UseRipple'
+import Ripple from 'src/ui/elements/Ripple/Ripple'
 import { ArrayU } from 'src/util/common/ArrayU'
+import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import { useElemWHAsCssProps } from 'src/util/element/useElemWHAsCssProps'
 import Puro = TypeU.Puro
@@ -18,6 +23,8 @@ import row = EmotionCommon.row
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
 import arraify = ArrayU.arraify
+import combineEvHandlerRecord = ReactU.combineEvHandlerRecord
+import trueOrUndef = TypeU.trueOrUndef
 
 
 
@@ -31,10 +38,10 @@ type SelectItemProps =
   & Puro<{
     isAdd: boolean
     isEdit: boolean
-    isError: boolean
-    onClickAdd: Callback
+    //isError: boolean
+    //onClickAdd: Callback
     onClickEdit: Callback
-    selectedIndicators: boolean[]
+    indicatorsSelection: boolean[]
     children: React.ReactNode
   }>
 
@@ -46,12 +53,12 @@ const SelectItem = React.memo(
         isSelected,
         isAdd,
         isEdit,
-        isError,
+        //isError,
         
-        onClickAdd,
+        //onClickAdd,
         onClickEdit,
         
-        selectedIndicators,
+        indicatorsSelection,
         
         children,
         className,
@@ -59,7 +66,7 @@ const SelectItem = React.memo(
         ...restProps
       } = props
       
-      const indicators = selectedIndicators ?? arraify(isSelected)
+      const indicators = indicatorsSelection ?? arraify(isSelected)
       
       const elemRef = useRef<HTMLDivElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
@@ -68,86 +75,69 @@ const SelectItem = React.memo(
       
       
       
-      return <RadioItemFrame
-        ref={elemRef}
-        className={className}
-        style={style}
-        {...restProps}
-      >
-        
-        { isAdd && <AddIconBox onClick={onClickAdd}>
-            <PlusIc/>
-          </AddIconBox>
-        }
-        
-        { !isAdd && <>
+      
+      return (
+        <UseRipple>{ rippleProps => (
+          <article
+            //displayName={'RadioItemFrame'}
+            ref={elemRef}
+            className={clsx(SelectItemS.W.e.frame.e.name, className)}
+            style={style}
+            {...{
+              [SelectItemS.W.s.selected.s.name]: trueOrUndef(isSelected),
+            }}
+            {...restProps}
+            {...combineEvHandlerRecord(rippleProps.target, restProps)}
+          >
+            
+            <div
+              //displayName={'Border'}
+              className={SelectItemS.W.e.border.e.name}
+            >
+              <Ripple {...rippleProps.ripple} css={RippleS.filled}/>
+            </div>
+            
+            {isAdd && <AddIconBox>
+              <PlusIc/>
+            </AddIconBox>
+            }
+            
+            {!isAdd && <>
+              
+              <IndicatorFrame>
+                <IndicatorBox>
+                  {indicators.map((it, i) => (
+                    <React.Fragment key={`${i} ${it}`}>
+                      {it ? <IndicatorSelected/> : <Indicator/>}
+                    </React.Fragment>
+                  ))}
+                </IndicatorBox>
+              </IndicatorFrame>
+              
+              <Content>
+                <TextBox>
+                  <Text>{children}</Text>
+                </TextBox>
+              </Content>
+              
+              {isEdit && <UserActionsConsumer>
+                <UseRipple>{rippleProps => (
+                  <PencilIconBox onClick={onClickEdit} {...rippleProps.target}>
+                    <Ripple {...rippleProps.ripple} css={RippleS.icon}/>
+                    <PencilWrite2Ic/>
+                  </PencilIconBox>
+                )}</UseRipple>
+              </UserActionsConsumer>}
+            
+            </>}
           
-          <Border isSelected={isSelected}>
-            {/* TODO fix ripple & maybe useSpring */}
-            <Ripple
-              targetElement={elemRef}
-              mode='cursor'
-            />
-          </Border>
-          
-          <IndicatorFrame>
-            <IndicatorBox>
-              { indicators.map(it => it ? <IndicatorSelected /> : <Indicator />) }
-            </IndicatorBox>
-          </IndicatorFrame>
-          
-          <TextBox>
-            <Text>{children}</Text>
-          </TextBox>
-          
-          { isEdit && <UserActionsConsumer>
-            <PencilIconBox onClick={onClickEdit}>
-              <PencilWrite2Ic/>
-            </PencilIconBox>
-          </UserActionsConsumer> }
-          
-        </> }
-        
-      </RadioItemFrame>
+          </article>
+        )}</UseRipple>
+      )
     }
   )
 )
 export default SelectItem
-
-
-
-
-const RadioItemFrame = styled.article`
-  cursor: pointer;
-  width: 300px;
-  min-height: 80px;
-  height: fit-content;
-  border-radius: 20px;
-  
-  background: #eeeeee;
-  
-  position: relative;
-  padding: 20px 26px;
-  display: grid;
-  grid-auto-flow: column;
-  place-items: stretch center;
-  gap: 10px;
-`
-
-
-const Border = styled.div<IsSelected>`
-  pointer-events: none;
-  ${abs};
-  border-radius: inherit;
-  border: none;
-  ${p => p.isSelected && css`
-    border-width: 2px;
-    border-style: solid;
-    border-color: #444444;
-  `}
-`
-
-
 
 
 const AddIconBox = styled.div`
@@ -197,15 +187,23 @@ const PencilIconBox = styled.div`
   right: 0;
   width: 40px;
   height: 40px;
-  border-radius: inherit;
+  border-radius: var(--br);
   ${center};
   padding: 11px;
+  overflow: hidden;
   
   ${SvgIconsStyle.El.icon.props.color.set('#444444')}
 `
 
 
 
+
+const Content = styled.div`
+  width: 100%;
+  min-height: 100%;
+  padding: 20px 26px;
+  ${center};
+`
 const TextBox = styled.div`
   width: 100%;
   min-height: 100%;
