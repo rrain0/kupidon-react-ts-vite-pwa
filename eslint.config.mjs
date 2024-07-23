@@ -57,6 +57,7 @@ export default [
     ...ts.configs.recommended,
     {
       rules: {
+        'no-constant-condition': 'off',
         '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-expect-error': false }],
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/ban-types': 'off',
@@ -156,7 +157,8 @@ export default [
         MemberExpression: 0,
         ignoreComments: true,
       }],*/
-      '@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true }],
+      //'@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true/*, align: 'value'*/ }],
+      '@stylistic/key-spacing': 'off',
       '@stylistic/keyword-spacing': ['error', { before: true, after: true }],
       //'@stylistic/linebreak-style': ['error', 'unix'], // doesn't matter what linebreak style - git fixes it
       '@stylistic/linebreak-style': 'off',
@@ -173,8 +175,9 @@ export default [
       '@stylistic/no-floating-decimal': 'error',
       //'@stylistic/no-mixed-operators': 'error',
       '@stylistic/no-mixed-spaces-and-tabs': 'error',
-      '@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true }],
-      '@stylistic/no-multiple-empty-lines': ['error', { max: 4, maxBOF: 4, maxEOF: 4 }],
+      //'@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true, exceptions: { Property: true } }],
+      '@stylistic/no-multi-spaces': 'off',
+      '@stylistic/no-multiple-empty-lines': ['error', { max: 8, maxBOF: 8, maxEOF: 8 }],
       '@stylistic/no-tabs': 'error',
       '@stylistic/no-trailing-spaces': 'off',
       '@stylistic/no-whitespace-before-property': 'error',

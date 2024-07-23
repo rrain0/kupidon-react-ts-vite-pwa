@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { ReactDOMAttributes } from 'lib-types-overrides/@use-gesture/react/src/types'
+import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types'
 import React, {
   useCallback,
   useEffect,
@@ -12,7 +12,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/ui/pages/Profile/Profile/options/ProfilePhotosPhotoOptions.tsx'

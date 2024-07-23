@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Job } from 'src/api/model/Job.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/widgets/modals/ModalRadio/ModalRadio.tsx'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import {
   SvgGradIcons,
 } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
@@ -73,7 +73,7 @@ React.memo(
       onClick={open}
     />
     
-    <ModalRadio
+    <ModalRadio<typeof props.value>
       isOpen={isOpen}
       close={close}
       title={titleText.job}

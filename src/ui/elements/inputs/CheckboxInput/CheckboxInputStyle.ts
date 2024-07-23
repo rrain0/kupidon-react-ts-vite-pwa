@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import Elem = WidgetStyle.Elem
 import CssProp = WidgetStyle.CssProp
 import CssAttr = WidgetStyle.CssAttr
@@ -158,7 +158,7 @@ export namespace CheckboxInputStyle {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('center')};
-      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0]+'88')};
     }
     // state: hover
     ${hoverable} {
@@ -192,7 +192,7 @@ export namespace CheckboxInputStyle {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('cursor')};
-      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0]+'88')};
     }
     // state: hover
     ${hoverable} {

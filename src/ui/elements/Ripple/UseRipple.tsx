@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
+import { RippleProps } from 'src/ui/elements/Ripple/Ripple'
 import { TypeU } from 'src/util/common/TypeU'
 import { useBool } from 'src/util/react-state-and-ref/useBool'
 import Puro = TypeU.Puro
@@ -14,11 +15,13 @@ const UseRipple = React.memo(
     
     
     const [isShow, show, hide] = useBool(false)
+    const [clientXY, setClientXY] = useState({ x: 0, y: 0 })
     
     const target = useMemo<RippleTargetProps>(() => {
       return {
         onPointerDown: (ev: React.PointerEvent) => {
           ev.currentTarget.setPointerCapture(ev.pointerId)
+          setClientXY({ x: ev.clientX, y: ev.clientY })
           show()
         },
         onPointerUp: hide,
@@ -29,7 +32,7 @@ const UseRipple = React.memo(
     const useRippleRenderProps = useMemo<UseRippleRenderProps>(() => {
       return {
         target,
-        ripple: { isShow },
+        ripple: { isShow, clientXY },
       }
     }, [target, isShow])
     
@@ -47,11 +50,9 @@ export type RippleTargetProps = {
   onPointerCancel: React.PointerEventHandler<any>
 }
 
-export type RippleProps = {
-  isShow: boolean
-}
+export type RippleRippleProps = Pick<RippleProps, 'isShow' | 'clientXY'>
 
 export type UseRippleRenderProps = {
   target: RippleTargetProps
-  ripple: RippleProps
+  ripple: RippleRippleProps
 }

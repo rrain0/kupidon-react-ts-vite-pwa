@@ -13,7 +13,6 @@ import React, {
   useLayoutEffect,
 } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
-import fixed = EmotionCommon.fixed
 import PartialUndef = TypeU.PartialUndef
 import Callback1 = TypeU.Callback1
 
@@ -114,25 +113,26 @@ React.memo(
     
     <animated.div /* Frame */ css={BottomSheetParts.frameStyle}
       style={{
+        // @ts-expect-error
         background: sheetSpring.height.to(
-          height=>{
-            const bgcDimHex = function(){
+          height => {
+            const bgcDimHex = function() {
               const maxDimHeight = snapPointsPx[realDefaultOpenIdx??0]
               const dimHeight = Math.min(height, maxDimHeight)
               return Math.trunc(dimHeight / maxDimHeight * 256 * 0.6)
-                .toString(16).padStart(2,'0')
+                .toString(16).padStart(2, '0')
             }()
-            if (!['closed',null].includes(sheetState)) return `#000000${bgcDimHex}`
+            if (!['closed', null].includes(sheetState)) return `#000000${bgcDimHex}`
             return 'none'
           }
         ),
-        pointerEvents: ![null,'closed','closing'].includes(sheetState) ? 'auto' : 'none',
+        pointerEvents: ![null, 'closed', 'closing'].includes(sheetState) ? 'auto' : 'none',
       }}
       
       ref={bottomSheetFrameRef as any}
       
       // need to prevent click if dragged if frame is draggable
-      onClick={()=>{
+      onClick={() => {
         //console.log('dimmed background click: closing...')
         setSheetState('closing')
         //setSheetState('closed')
@@ -140,6 +140,7 @@ React.memo(
     >
       <UserActionsConsumer>
         <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
+          // @ts-expect-error
           style={sheetSpring}
           ref={bottomSheetRef as any} // Must be
         >

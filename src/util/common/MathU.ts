@@ -7,6 +7,7 @@ export namespace MathU {
   
   
   
+  import isnumber = TypeU.isnumber
   export const ifNaN = <T = number>(n: number, replacement: T) => isNaN(n) ? replacement : n
   
   
@@ -151,15 +152,19 @@ export namespace MathU {
   export function randomInt(to?: number): number
   export function randomInt(a?: number, b?: number): number {
     let from = 0, to = 1
-    if (typeof a === 'number' && typeof b === 'number') {
-      from = floorTo0(a)
-      to = floorTo0(b)
+    if (isnumber(a) && isnumber(b)) {
+      from = a
+      to = b
     }
-    else if (typeof a === 'number') {
-      to = floorTo0(a)
+    else if (isnumber(a)) {
+      to = a
     }
     if (from > to) throw new Error(`'to'=${to} must be greater-equal than 'from'=${from}`)
     return floorTo0(random(from, to + 1))
+  }
+  
+  export function randomNonNegInt() {
+    return randomInt(0, Number.MAX_SAFE_INTEGER)
   }
   
   

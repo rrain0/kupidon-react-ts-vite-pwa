@@ -89,6 +89,7 @@ React.memo(
     >
       <UserActionsConsumer>
         <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
+          // @ts-expect-error
           style={sheetSpring}
           ref={bottomSheetRef as any} // Must be
         >

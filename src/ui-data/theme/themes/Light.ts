@@ -70,21 +70,21 @@ const LightProps = {
     content:   ['#bbbbbb'],
   },
   inputRadio: {
-    bgcFocus:  ['#7b7b7b']
+    bgcFocus:  ['#7b7b7b'],
   },
   buttonTransparent: {
     bgcFocus: ['#00000011'],
   },
   
   iconGradient: {
-    content:       ['#444444','#444444'],
+    content:       ['#444444', '#444444'],
   },
   
   input: {
     bgc:           ['#F8F8F8'],
     content:       ['#000000'],
     placeholder:   ['#777777'],
-    border:        ['#7b7b7b','#7b7b7b'],
+    border:        ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
     bgcError:      ['#ffced2'],
   },
@@ -110,7 +110,7 @@ const LightProps = {
   
   ripple: {
     content:              ['#ffffff'],
-    contentOnTransparent: ['#00000088'],
+    contentOnTransparent: ['#666666'],
   },
   
   photos: {

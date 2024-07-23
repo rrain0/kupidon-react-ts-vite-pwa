@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/widgets/modals/ModalRadio/ModalRadio.tsx'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
@@ -66,7 +66,7 @@ React.memo(
       onClick={open}
     />
     
-    <ModalRadio
+    <ModalRadio<typeof props.value>
       isOpen={isOpen}
       close={close}
       title={text.gender}

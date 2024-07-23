@@ -5,15 +5,18 @@ import isobject = TypeU.isobject
 
 
 
-export const combineRefs =
-  <T>(...refs: (React.Ref<T> | undefined)[]): React.RefCallback<T> =>
-    (instance: T | null) => {
-      refs.forEach(ref => {
-        if (isfunction(ref))
-          ref(instance)
-        else if (isobject(ref))
-          (ref.current as T | null) = instance
-      })
-    }
+export const combineElemRefs =
+<T>(...refs: (React.Ref<T> | undefined)[]): React.RefCallback<T> => {
+  return (instance: T | null) => {
+    refs.forEach(ref => {
+      if (isfunction(ref)) {
+        ref(instance)
+      }
+      else if (isobject(ref)) {
+        (ref as { current: T | null }).current = instance
+      }
+    })
+  }
+}
   
 

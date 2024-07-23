@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'

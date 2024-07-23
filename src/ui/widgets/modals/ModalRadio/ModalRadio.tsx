@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
@@ -28,7 +29,7 @@ export type ModalRadioProps<V extends string> = PartialUndef<{
 
 
 
-const ModalRadio = (<V extends string>() => React.memo(
+const ModalRadio = ReactU.memo(
   <V extends string>(props: ModalRadioProps<V>) => {
     const { isOpen, close, title, options, value, onSelect } = props
     
@@ -78,7 +79,7 @@ const ModalRadio = (<V extends string>() => React.memo(
       }
     </UseBottomSheetState>
   }
-))()
+)
 export default ModalRadio
 
 

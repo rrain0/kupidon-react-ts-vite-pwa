@@ -5,7 +5,7 @@ import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import Elem = WidgetStyle.Elem
 import CssPseudo = WidgetStyle.CssPseudo
 import CssWidget = WidgetStyle.CssWidget
@@ -23,7 +23,7 @@ export namespace InputStyle {
   
   
   
-  export const W = function(){
+  export const W = function() {
     const frame = new Elem('rrainuiFrame', { }, {
       color: CssProp.color,
     })

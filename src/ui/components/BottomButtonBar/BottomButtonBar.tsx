@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react'
-import styled from '@emotion/styled'
 import React, {
   useImperativeHandle,
   useRef,
@@ -37,7 +36,7 @@ export type BottomButtonBarProps = React.JSX.IntrinsicElements['section']
 const BottomButtonBar =
 React.memo(
 React.forwardRef<HTMLTableSectionElement, BottomButtonBarProps>(
-(props, forwardedRef)=>{
+(props, forwardedRef) => {
   
   const thisRef = useRef<HTMLTableSectionElement>(null)
   useImperativeHandle(forwardedRef, ()=>thisRef.current!,[])

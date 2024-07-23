@@ -1,15 +1,15 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { PartnerCommunicationCharacteristics } from 'src/api/model/PartnerCommunicationCharacteristics.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { EducationOptionValues } from 'src/ui/pages/Profile/Profile/ProfileEducationOption.tsx'
-import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/ProfileGenderOption.tsx'
+import { EducationOptionValues } from 'src/ui/pages/Profile/Profile/options/ProfileEducationOption.tsx'
+import { GenderOptionValues } from 'src/ui/pages/Profile/Profile/options/ProfileGenderOption.tsx'
 import {
   PartnerGenderOptionValues
-} from 'src/ui/pages/Profile/Profile/ProfileImLookingForOption.tsx'
-import { JobOptionValues } from 'src/ui/pages/Profile/Profile/ProfileJobOption.tsx'
+} from 'src/ui/pages/Profile/Profile/options/ProfileImLookingForOption.tsx'
+import { JobOptionValues } from 'src/ui/pages/Profile/Profile/options/ProfileJobOption.tsx'
 import {
   PartnerCommunicationCharacteristicsOptionValues
-} from 'src/ui/pages/Profile/Profile/ProfilePartnerCommunicationCharacteristicsOption.tsx'
+} from 'src/ui/pages/Profile/Profile/options/ProfilePartnerCommunicationCharacteristicsOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/pages/Profile/ProfilePhotoModels.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'

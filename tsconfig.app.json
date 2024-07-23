@@ -53,5 +53,5 @@
       "@util/*": ["src/util/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "lib-types-overrides"],
 }

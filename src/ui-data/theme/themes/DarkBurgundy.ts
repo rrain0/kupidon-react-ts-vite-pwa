@@ -105,7 +105,7 @@ const DarkBurgundyProps = { ...Dark,
   
   ripple: { ...Dark.ripple,
     content:              ['#000000'],
-    contentOnTransparent: ['#ffffff88'],
+    contentOnTransparent: ['#aaaaaa'],
   },
   
   photos: { ...Dark.photos,

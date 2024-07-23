@@ -208,14 +208,14 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
         
         if (getActiveTip() === 'left') {
           const [, progressRight] = getProgressRange()
-          const progressLeft = fitRange(
+          const progressLeft = RangeU.clamp(
             getStartProgress() + getCurrProgress(),
             [0, progressRight]
           )
           setProgressRange([progressLeft, progressRight])
           
           const [, rangeR] = getRange()
-          const rangeL = fitRange(
+          const rangeL = RangeU.clamp(
             progressToValue(progressLeft),
             [minMax[0], rangeR]
           )
@@ -223,14 +223,14 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
         }
         if (getActiveTip() === 'right') {
           const [progressLeft] = getProgressRange()
-          const progressRight = fitRange(
+          const progressRight = RangeU.clamp(
             getStartProgress() + getCurrProgress(),
             [progressLeft, 100]
           )
           setProgressRange([progressLeft, progressRight])
           
           const [rangeL] = getRange()
-          const rangeR = fitRange(
+          const rangeR = RangeU.clamp(
             progressToValue(progressRight),
             [rangeL, minMax[1]]
           )
@@ -277,6 +277,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     ref={trackRef}
   >
     <animated.div css={bar}
+      // @ts-expect-error
       style={{ ...barSpring }}
     >
       <div css={leftHandle}/>

@@ -1,4 +1,6 @@
+import styled from '@emotion/styled'
 import React from 'react'
+import nextUp from '@img/test/NEXT UP.jpg'
 
 
 
@@ -26,6 +28,28 @@ const withDefaults =
       }
     )
 */
+
+const MyImg = styled.img`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: auto;
+`
+
+// Example with default props
+MyImg.defaultProps = { src: nextUp }
+
+// Example with component wrapping
+const MyImgWithSrc = React.forwardRef<HTMLImageElement, React.ComponentPropsWithoutRef<'img'>>(
+  (props, ref) => <MyImg ref={ref} {...props} src={nextUp} />
+)
+
+const MyImgUsage = () => {
+  return (
+    <MyImgWithSrc src={nextUp} />
+  )
+}
 
 
 

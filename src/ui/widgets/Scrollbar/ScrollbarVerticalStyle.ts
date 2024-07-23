@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import hoverable = EmotionCommon.hoverable
 import DataAttr = WidgetStyle.DataAttr
 import combineStates = WidgetStyle.combineStates

@@ -1,3 +1,4 @@
+import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import empty = TypeU.empty
@@ -39,6 +40,14 @@ export namespace ArrayU {
     if (!arr.length) return orElse
     return arr[arr.length-1]
   }
+  
+  
+  export const randomElem = <T>(arr: T[]): T => {
+    if (!arr.length) throw new Error("Array is empty, can't get random element.")
+    return arr[MathU.randomInt(0, arr.length - 1)]
+  }
+  
+  
   export const lastIndex = (arr: any[]): number => arr.length - 1
   export const lastIndexOr0 = (arr: any[]): number => arr.length ? (arr.length - 1) : 0
   

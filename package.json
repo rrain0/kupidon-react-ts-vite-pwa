@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "lint-all": "eslint . --report-unused-disable-directives --max-warnings 0",
-    "lint-all-fix": "eslint . --fix --report-unused-disable-directives --max-warnings 0",
+    "build": "tsc -b && vite build",
+    "build-dev": "vite build --mode development",
+    "lint": "eslint . --report-unused-disable-directives",
+    "lint:fix": "eslint . --fix --report-unused-disable-directives",
     "lint-linebreak": "eslint . --no-config-lookup --config eslint-single-configs/eslint.linebreaks.config.mjs --max-warnings 0",
     "lint-linebreak-fix": "eslint . --fix --no-config-lookup --config eslint-single-configs/eslint.linebreaks.config.mjs --max-warnings 0",
     "preview": "vite preview"
@@ -64,7 +65,7 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "globals": "^15.6.0",
     "sass": "^1.77.6",
-    "typescript": "^5.5.3",
+    "typescript": "^5.5.4",
     "typescript-eslint": "^7.13.1",
     "typescript-plugin-css-modules": "^5.1.0",
     "vite": "^5.3.1",

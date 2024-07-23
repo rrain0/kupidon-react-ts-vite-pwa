@@ -1,6 +1,6 @@
 import React from 'react'
 import ModalTextarea from 'src/ui/widgets/modals/ModalTextarea/ModalTextarea.tsx'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import EditableTextCard from 'src/ui/components/EditableTextCard/EditableTextCard.tsx'

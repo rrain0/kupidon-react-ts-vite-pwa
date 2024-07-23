@@ -87,7 +87,7 @@ const LightPinkProps = { ...Light,
   
   ripple: { ...Light.ripple,
     content:              ['#ffffff'],
-    contentOnTransparent: ['#00000088'],
+    contentOnTransparent: ['#666666'],
   },
   
   photos: { ...Light.photos,

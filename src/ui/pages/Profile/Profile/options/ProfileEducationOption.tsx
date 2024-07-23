@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Education } from 'src/api/model/Education.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/widgets/modals/ModalRadio/ModalRadio.tsx'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
@@ -47,22 +47,22 @@ React.memo(
       {
         value: 'HIGHER_EDUCATION',
         text: text.higherEducation,
-      },{
+      }, {
         value: 'INCOMPLETE_HIGHER_EDUCATION',
         text: text.incompleteHigherEducation,
-      },{
+      }, {
         value: 'SPECIALIZED_SECONDARY_EDUCATION',
         text: text.specializedSecondarySchoolEducation,
-      },{
+      }, {
         value: 'SECONDARY_SCHOOL_EDUCATION',
         text: text.secondarySchoolEducation,
-      },{
+      }, {
         value: 'PRIMARY_SCHOOL_EDUCATION',
         text: text.primarySchoolEducation,
-      },{
+      }, {
         value: '',
         text: text.notSelected,
-      }
+      },
     ] satisfies EducationUiOptions,
     [text]
   )
@@ -80,7 +80,7 @@ React.memo(
       onClick={open}
     />
     
-    <ModalRadio
+    <ModalRadio<typeof props.value>
       isOpen={isOpen}
       close={close}
       title={titleText.education}

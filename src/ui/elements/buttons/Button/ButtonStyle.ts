@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple0/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
@@ -25,10 +25,10 @@ import abs = EmotionCommon.abs
 export namespace ButtonStyle {
   
   export const Attr0 = {
-    error: DataAttrError
+    error: DataAttrError,
   } as const
   
-  export const El0 = function(){
+  export const El0 = function() {
     const btn = new Elem0('rrainuiButton', {
       hover: Pseudo0.hover,
       active: Pseudo0.active,
@@ -36,19 +36,19 @@ export namespace ButtonStyle {
       focusVisible: Pseudo0.focusVisible,
       disabled: Pseudo0.disabled,
       error: Attr0.error,
-    },{
+    }, {
       color: CssPropColor,
     })
-    const border = btn.toElem('>', new Elem0('rrainuiBorder',{},{}))
-    const ripple = border.toElem('>', new Elem0(RippleStyle.El0.frameClassName,{},{
-      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center','cursor']),
+    const border = btn.toElem('>', new Elem0('rrainuiBorder', {}, {}))
+    const ripple = border.toElem('>', new Elem0(RippleStyle.El0.frameClassName, {}, {
+      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center', 'cursor']),
       color: new CssProp(RippleStyle.Prop.color),
     }))
     return { root: btn, btn, border, ripple } as const
   }()
   
   
-  export const El = function(){
+  export const El = function() {
     const button = new Elem('rrainuiButton', {
       normal: CssPseudo.empty,
       hover: CssPseudo.hover,
@@ -301,7 +301,7 @@ export namespace ButtonStyle {
       ${W.props.color.p.set(t.page.content2[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
     }
     
     // state: hover
@@ -555,7 +555,7 @@ export namespace ButtonStyle {
       border-color: ${t.buttonNormal.bgc[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
     }
     
     // state: hover
@@ -586,7 +586,7 @@ export namespace ButtonStyle {
       border-color: ${t.buttonAccent.bgc[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
     }
     
     // state: hover
@@ -651,7 +651,7 @@ export namespace ButtonStyle {
       ${W.props.color.p.set(t.page.content2[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
     }
 
     // state: hover
@@ -705,7 +705,7 @@ export namespace ButtonStyle {
       ${W.e.button.e.p.color.set(t.buttonNormal.bgc[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0])};
+      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0]+'88')};
     }
     
     // state: hover

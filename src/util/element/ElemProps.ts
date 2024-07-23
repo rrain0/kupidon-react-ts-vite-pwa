@@ -126,6 +126,7 @@ export class ElemProps {
   }
   get vpXFloat() { return this.clientXFloat }
   get vpLeftFloat() { return this.clientXFloat }
+  get x() { return this.clientXFloat }
   
   // верхний край viewport <---> внешняя граница верхнего бордера элемента
   // расстояние между верхним краем viewport и внешней границей верхнего бордера
@@ -137,6 +138,9 @@ export class ElemProps {
   }
   get vpYFloat() { return this.clientYFloat }
   get vpTopFloat() { return this.clientYFloat }
+  get y() { return this.clientYFloat }
+  
+  get xy() { return { x: this.x, y: this.y } }
   
   // расстояние между правым краем viewport и внешней границей правого бордера
   get clientRightFloat() {
@@ -165,6 +169,8 @@ export class ElemProps {
     return Math.abs(this.rect.height)
   }
   get h() { return this.heightFloat }
+  
+  get wh() { return { w: this.w, h: this.h } }
   
   
   

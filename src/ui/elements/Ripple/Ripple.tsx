@@ -1,116 +1,142 @@
 import styled from '@emotion/styled'
 import { animated, useSpring, config, easings } from '@react-spring/web'
-import React, { useState } from 'react'
+import clsx from 'clsx'
+import React, { useMemo } from 'react'
+import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { RippleS } from 'src/ui/elements/Ripple/RippleS'
 import { ReactU } from 'src/util/common/ReactU'
-import { TypeU } from 'src/util/common/TypeU'
-import Puro = TypeU.Puro
+import { getElemProps } from 'src/util/element/ElemProps'
+import { ElemU } from 'src/util/element/ElemU'
+import { useElemRef } from 'src/util/react-state-and-ref/useElemRef'
 import ClassStyleProps = ReactU.ClassStyleProps
+import abs = EmotionCommon.abs
+import WH = ElemU.WH
+import XY = ElemU.XY
+import RippleMode = RippleS.RippleMode
 
 
 
-type RippleProps = ClassStyleProps & Puro<{
+/*
+  // SPRING EXAMPLE
+  const [hovered, setHover] = useState(false)
+  // if passing an object, it updates on every rerender
+  const { progress } = useSpring({
+  progress: hovered ? 1 : 0,
+  
+  // config types:
+  
+  // Predefined Spring Config
+  //import { config } from '@react-spring/web'
+  config: config.default,
+  
+  // Predefined Spring Easing Config
+  //import { easings } from '@react-spring/web'
+  config: {
+  duration: 4000,
+  easing: easings.easeOutCubic,
+  },
+  
+  // Custom Easing Config via 'bezier-easing' package
+  // css 'cubic-bezier(0.17, 0.84, 0.44, 1)'
+  //import BezierEasing from 'bezier-easing'
+  //const animationEasing = BezierEasing(0.17, 0.84, 0.44, 1)
+  config: {
+  duration: 4000,
+  easing: animationEasing,
+  },
+  })
+*/
+
+
+
+
+export type RippleProps = ClassStyleProps & {
   isShow: boolean
-}>
+  clientXY: { x: number, y: number }
+}
+
 
 const Ripple = React.memo(
   (props: RippleProps) => {
     
-    const { isShow, ...restProps } = props
+    const { isShow, clientXY, className, ...restProps } = props
     
-    console.log('isShow', isShow)
+    const [frameRef, getFrame] = useElemRef()
+    const [rippleRef, getRipple] = useElemRef()
     
-    
-    /*
-    // SPRING EXAMPLE
-    const [hovered, setHover] = useState(false)
-    // if passing an object, it updates on every rerender
-    const { progress } = useSpring({
-      progress: hovered ? 1 : 0,
-      
-      // config types:
-      
-      // Predefined Spring Config
-      //import { config } from '@react-spring/web'
-      config: config.default,
-     
-      // Predefined Spring Easing Config
-      //import { easings } from '@react-spring/web'
-      config: {
-        duration: 4000,
-        easing: easings.easeOutCubic,
-      },
-     
-      // Custom Easing Config via 'bezier-easing' package
-      // css 'cubic-bezier(0.17, 0.84, 0.44, 1)'
-      //import BezierEasing from 'bezier-easing'
-      //const animationEasing = BezierEasing(0.17, 0.84, 0.44, 1)
-      config: {
-        duration: 4000,
-        easing: animationEasing,
-      },
-    })
-    */
-    
-    
-    /*
-     TODO
-      use linear-gradient for ripple to become edges darker
-     */
-    const [{ opacity }] = useSpring(() => {
+    const rippleProps = useMemo(() => {
+      const frame = getFrame()
+      const ripple = getRipple()
+      if (frame && ripple) {
+        const fProps = getElemProps(frame)
+        const rProps = getElemProps(ripple)
+        return getRippleProps(
+          fProps.xy,
+          fProps.wh,
+          clientXY,
+          rProps.cssPropValue(RippleS.W.e.ripple.p.mode.name) as RippleMode,
+          500
+        )
+      }
       return {
-        from: { opacity: 1 },
-        to: { opacity: 0 },
-        config: {
-          duration: 4000,
-          easing: easings.easeOutCubic,
-        },
-        reset: true,
-        //import { config, easings } from '@react-spring/web'
-        //config: config.default,
+        dimens: { left: 0, top: 0, width: 0, height: 0 },
+        rippleDuration: 0,
+        dissolveDuration: 0,
       }
     }, [isShow])
     
+    
+    
+    
     const [{ opacity }] = useSpring(() => {
+      if (isShow) return {
+        from: { opacity: 0.1 },
+        to: { opacity: 1 },
+        reset: true,
+      }
       if (!isShow) return {
         to: { opacity: 0 },
-      }
-      return {
-        from: { opacity: 1 },
-        to: { opacity: 0 },
         config: {
-          duration: 4000,
+          duration: 2000,
+          easing: easings.easeOutCubic,
+        },
+      }
+    }, [isShow])
+    
+    const [{ scale }] = useSpring(() => {
+      if (isShow) return {
+        from: { scale: 0 },
+        to: { scale: 1 },
+        config: {
+          duration: 2000,
           easing: easings.easeOutCubic,
         },
         reset: true,
-        //import { config, easings } from '@react-spring/web'
-        //config: config.default,
       }
     }, [isShow])
     
     
-    const [{ width, height }] = useSpring(curr => {
-      return {
-        from: {
-          width: '100%',
-          height: '100%',
-        },
-        to: {
-          width: '100%',
-          height: '100%',
-        },
-      }
-    }, [isShow])
+    
+    const frameJsxProps = {
+      ref: frameRef,
+      className: clsx(RippleS.W.e.frame.e.name, className),
+      ...restProps,
+    }
+    
+    const rippleJsxProps = {
+      ref: rippleRef,
+      className: RippleS.W.e.ripple.e.name,
+      style: {
+        ...rippleProps.dimens,
+        opacity,
+        scale,
+      },
+    }
     
     
     return (
-      <RippleFrame
-        {...restProps}
-      >
-        <RippleAnim
-          style={{
-            opacity,
-          }}
-        />
+      <RippleFrame {...frameJsxProps}>
+        <RippleAnim {...rippleJsxProps} />
       </RippleFrame>
     )
   }
@@ -121,24 +147,81 @@ export default Ripple
 
 const RippleFrame = styled.div`
   pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${abs};
   overflow: hidden;
 `
 
 
 const RippleAnim = styled(animated.div)`
   position: absolute;
-  /*left: 50%;
-  top: 50%;
-  width: 0;
-  height: 0;*/
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: azure;
+  translate: -50% -50%;
+  border-radius: 999999px;
+  /*background-image: radial-gradient(
+    closest-side circle at center,
+    transparent, var(--bg-color) 90%, transparent
+  );*/
+  background-color: var(--color);
 `
+
+
+
+
+function getRippleProps(
+  frameXY: XY,
+  frameWH: WH,
+  clientXY: XY,
+  mode: RippleMode,
+  duration: number,
+) {
+  
+  // console.log('frameXY', frameXY)
+  // console.log('frameWH', frameWH)
+  // console.log('clientXY', clientXY)
+  // console.log('mode', mode)
+  // console.log('duration', duration)
+  
+  const d = (() => {
+    if (mode === 'pointer') return {
+      toTop: clientXY.y - frameXY.y,
+      toLeft: clientXY.x - frameXY.x,
+      toBottom: frameWH.h - (clientXY.y - frameXY.y),
+      toRight: frameWH.w - (clientXY.x - frameXY.x),
+    }
+    if (mode === 'center' || true) return {
+      toTop: frameWH.h / 2,
+      toLeft: frameWH.w / 2,
+      toBottom: frameWH.h / 2,
+      toRight: frameWH.w / 2,
+    }
+  })()
+  const dxd = {
+    toTop: d.toTop * d.toTop,
+    toLeft: d.toLeft * d.toLeft,
+    toBottom: d.toBottom * d.toBottom,
+    toRight: d.toRight * d.toRight,
+  }
+  const radius = Math.max(
+    Math.sqrt(dxd.toTop + dxd.toLeft), // расстояние от точки касания до левого верхнего угла
+    Math.sqrt(dxd.toTop + dxd.toRight), // расстояние от точки касания до правого верхнего угла
+    Math.sqrt(dxd.toBottom + dxd.toRight), // расстояние от точки касания до правого нижнего угла
+    Math.sqrt(dxd.toBottom + dxd.toLeft), // расстояние от точки касания до левого нижнего угла
+  )
+  
+  // console.log('el',el)
+  // console.log('d',d)
+  // console.log('dxd',dxd)
+  // console.log('radius',radius)
+  
+  const dur = duration ?? 500
+  
+  return {
+    dimens: {
+      top: d.toTop,
+      left: d.toLeft,
+      width: radius * 2,
+      height: radius * 2,
+    },
+    rippleDuration: Math.max(400, dur * radius / 200),
+    dissolveDuration: Math.max(500, (dur + 100) * radius / 200),
+  }
+}

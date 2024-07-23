@@ -93,6 +93,7 @@ React.memo(
         style={{
           x: forLeft.to(v => RangeU.map(v, [-1, 1], [-w/2 - w, w/2 - w])),
           scale: forLeft.to(v => 1 - 0.35 * Math.abs(v)),
+          // @ts-expect-error
           opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
         }}
       >
@@ -117,12 +118,13 @@ React.memo(
       `}
         style={{
           x: forRight.to(v => RangeU.map(v, [-1, 1], [-w/2 + w, w/2 + w])),
-          scale: forRight.to(v=>1 - 0.35 * Math.abs(v)),
-          opacity: forLeft.to(v=>1 - 0.6 * Math.abs(v)),
+          scale: forRight.to(v => 1 - 0.35 * Math.abs(v)),
+          // @ts-expect-error
+          opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
         }}
       >
         <HeaderTextWrap
-          onClick={()=>{
+          onClick={() => {
             setTabsState('snapping')
             setTabIdx(i+1)
           }}
@@ -138,6 +140,7 @@ React.memo(
       style={{
         x: forCenter.to(v => RangeU.map(v, [-1, 1], [-(w/2), w/2])),
         scale: forCenter.to(v => 1 - 0.35 * Math.abs(v)),
+        // @ts-expect-error
         opacity: forCenter.to(v => 1 - 0.6 * Math.abs(v)),
       }}
     >

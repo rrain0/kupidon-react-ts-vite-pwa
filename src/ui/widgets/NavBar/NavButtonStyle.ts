@@ -49,7 +49,7 @@ export namespace NavButtonStyle {
     }
     ${El.ripple.thiz()} {
       ${El.ripple.props.mode.set('center')}
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0])}
+      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
     }
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('100%')}

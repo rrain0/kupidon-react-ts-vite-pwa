@@ -1,11 +1,26 @@
 import React, { CSSProperties } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Callback1 = TypeU.Callback1
+import Puro = TypeU.Puro
 
 
 
 
 export namespace ReactU {
+  
+  
+  export type ChildrenProps = Puro<{ children: React.ReactNode }>
+  
+  export type ClassStyleProps = Puro<{
+    className: string
+    style: CSSProperties
+  }>
+  
+  
+  export type First = Puro<{ first: boolean }>
+  export type Last = Puro<{ last: boolean }>
+  
+  
   
   
   // todo hack fix
@@ -14,8 +29,6 @@ export namespace ReactU {
   // WARNING!!! It fires before actual click events,
   // so if you change view after this so it can't capture clicks,
   // the underlying view captures click along with this view simultaneously.
-  import ComparatorEq = TypeU.ComparatorEq
-  import Puro = TypeU.Puro
   export const onPointerClick =
   <E extends Element>
   (callback: Callback1<React.PointerEvent<E>>) => {
@@ -88,10 +101,12 @@ export namespace ReactU {
   }
   
   
-  export type ClassStyleProps = Puro<{
-    className: string
-    style: CSSProperties
-  }>
+  
+  export const combineEvHandlers =
+  <E extends React.SyntheticEvent<any>>
+  (...handlers: Array<React.EventHandler<E> | undefined>): React.EventHandler<E> => {
+    return ev => handlers.forEach(h => h?.(ev))
+  }
   
   
   
