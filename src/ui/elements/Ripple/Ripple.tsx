@@ -134,6 +134,7 @@ const Ripple = React.memo(
           className={RippleS.W.e.ripple.e.name}
           style={{
             ...rippleProps.dimens,
+            // @ts-expect-error
             opacity,
             scale,
           }}

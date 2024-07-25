@@ -117,10 +117,12 @@ React.memo(
                   key={opt.value}
                   onClick={() => onChange(opt.value)}
                   isSelected={props.value.includes(opt.value)}
-                  indicatorsSelection={(() => {
-                    if (i === 0) return options.map(it => props.value.includes(it.value))
-                    return options.map((it, i2) => i === i2 && props.value.includes(it.value))
-                  })()}
+                  indicatorsSelection={options.map((it, i2) => {
+                    if (!props.value.includes(it.value)) return 0
+                    //if (i !== i2) return 1
+                    if (i !== i2) return 0
+                    return 2
+                  })}
                 >
                   {opt.text}
                 </SelectItem>

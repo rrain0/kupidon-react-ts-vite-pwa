@@ -40,7 +40,7 @@ type SelectItemProps =
     //isError: boolean
     //onClickAdd: Callback
     onClickEdit: Callback
-    indicatorsSelection: boolean[]
+    indicatorsSelection: (boolean | 0 | 1 | 2)[]
     children: React.ReactNode
   }>
 
@@ -107,7 +107,11 @@ const SelectItem = React.memo(
                 <IndicatorBox>
                   {indicators.map((it, i) => (
                     <React.Fragment key={`${i} ${it}`}>
-                      {it ? <IndicatorSelected/> : <Indicator/>}
+                      {(() => {
+                        if (it === 0 || it === false) return <Indicator0/>
+                        if (it === 1) return <Indicator1/>
+                        if (it === 2 || it === true) return <Indicator2/>
+                      })()}
                     </React.Fragment>
                   ))}
                 </IndicatorBox>
@@ -166,16 +170,16 @@ const IndicatorBox = styled.div`
   ${row};
   gap: 6px;
 `
-const Indicator = styled.div`
+const Indicator0 = styled.div`
   flex: 1;
   height: 100%;
   border-radius: 999999px;
-  background: #cccccc;
+  background: #dddddd;
 `
-const IndicatorSelected = styled.div`
-  flex: 1;
-  height: 100%;
-  border-radius: 999999px;
+const Indicator1 = styled(Indicator0)`
+  background: #999999;
+`
+const Indicator2 = styled(Indicator0)`
   background: #444444;
 `
 
