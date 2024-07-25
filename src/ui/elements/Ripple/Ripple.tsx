@@ -121,51 +121,28 @@ const Ripple = React.memo(
     
     
     
-    const frameJsxProps = {
-      ref: frameRef,
-      className: clsx(RippleS.W.e.frame.e.name, className),
-      ...restProps,
-    }
-    
-    const rippleJsxProps = {
-      ref: rippleRef,
-      className: RippleS.W.e.ripple.e.name,
-      style: {
-        ...rippleProps.dimens,
-        opacity,
-        scale,
-      },
-    }
-    
-    
     return (
-      <RippleFrame {...frameJsxProps}>
-        <RippleRipple {...rippleJsxProps} />
-      </RippleFrame>
+      <div
+        //displayName={'RippleFrame'}
+        ref={frameRef}
+        className={clsx(RippleS.W.e.frame.e.name, className)}
+        {...restProps}
+      >
+        <animated.div
+          //displayName={'RippleRipple'}
+          ref={rippleRef}
+          className={RippleS.W.e.ripple.e.name}
+          style={{
+            ...rippleProps.dimens,
+            opacity,
+            scale,
+          }}
+        />
+      </div>
     )
   }
 )
 export default Ripple
-
-
-
-const RippleFrame = styled.div`
-  pointer-events: none;
-  ${abs};
-  overflow: hidden;
-`
-
-
-const RippleRipple = styled(animated.div)`
-  position: absolute;
-  translate: -50% -50%;
-  border-radius: 999999px;
-  /*background-image: radial-gradient(
-    closest-side circle at center,
-    transparent, var(--bg-color) 90%, transparent
-  );*/
-  background-color: var(--color);
-`
 
 
 

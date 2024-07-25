@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { RippleS } from 'src/ui/elements/Ripple/RippleS'
 import { AppTheme } from 'src/util/theme/AppTheme'
 import Elem = WidgetStyle.Elem
 import CssWidget = WidgetStyle.CssWidget
@@ -19,11 +20,16 @@ export namespace SelectItemS {
       normal: CssPseudo.empty,
       selected: CssAttr.dataSelected,
     }, { })
+    
     const border = new Elem('rrainuiBorder', { }, { })
+    const rippleFrame = new Elem(RippleS.W.e.frame.e.name, { }, { })
+    const rippleRipple = new Elem(RippleS.W.e.ripple.e.name, { }, { })
     
     const selectItemWidget = CssWidget
       .ofRoot('frame', frame)
       .add('frame', '>', 'border', border)
+      .add('border', '>', 'rippleFrame', rippleFrame)
+      .add('rippleFrame', '>', 'rippleRipple', rippleRipple)
     
     return selectItemWidget
   })()
@@ -49,12 +55,17 @@ export namespace SelectItemS {
       gap: 10px;
       overflow: hidden;
     }
-    // normal
     ${W.use.s.normal().e.border().thisUse} {
       pointer-events: none;
       ${abs};
       border-radius: inherit;
       border: none;
+    }
+    ${W.use.s.normal().e.rippleFrame().thisUse} {
+      ${RippleS.P.baseNormalFrame};
+    }
+    ${W.use.s.normal().e.rippleRipple().thisUse} {
+      ${RippleS.P.baseNormalRipple};
     }
     
     // selected
@@ -68,42 +79,19 @@ export namespace SelectItemS {
   
   export const normal = (t: AppTheme.Theme) => css`
     ${base};
+    
+    // normal
     ${W.use.s.normal().e.frame().thisUse} {
       width: 100%;
     }
-  `
-  
-   
-   /*
-  
-  export const filled = (t: AppTheme.Theme) => css`
-    ${base};
-    // normal
-    ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.content[0] + opacity)}
+    
+    ${W.use.s.normal().e.rippleFrame().thisUse} {
+    
+    }
+    ${W.use.s.normal().e.rippleRipple().thisUse} {
+      ${RippleS.P.testNormalRipple(t)};
     }
   `
-  
-  
-  export const text = (t: AppTheme.Theme) => css`
-    ${base};
-    // normal
-    ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
-    }
-  `
-  
-  
-  export const icon = (t: AppTheme.Theme) => css`
-    ${base};
-    // normal
-    ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.mode.set('center')}
-      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
-    }
-  `
-   */
-  
   
   
 }

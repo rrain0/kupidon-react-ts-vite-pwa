@@ -35,17 +35,18 @@ export namespace RippleS {
   })()
   
   
+  
+  
   const opacity = '66'
   
-  const base = css`
-    // normal
-    ${W.use.s.normal().e.frame().thisUse} {
+  export namespace P {
+    
+    export const baseNormalFrame = css`
       pointer-events: none;
       ${abs};
       overflow: hidden;
-    }
-    // normal
-    ${W.use.s.normal().e.ripple().thisUse} {
+    `
+    export const baseNormalRipple = css`
       position: absolute;
       translate: -50% -50%;
       border-radius: 999999px;
@@ -56,15 +57,51 @@ export namespace RippleS {
       ${W.e.ripple.p.color.set('#ffffff' + opacity)}
       ${W.e.ripple.p.mode.set('pointer')}
       background-color: ${W.e.ripple.p.color.get()};
+    `
+    
+    
+    export const filledNormalRipple = (t: AppTheme.Theme) => css`
+      ${W.e.ripple.p.color.set(t.ripple.content[0] + opacity)}
+    `
+    
+    
+    export const textNormalRipple = (t: AppTheme.Theme) => css`
+      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
+    `
+    
+    
+    export const iconNormalRipple = (t: AppTheme.Theme) => css`
+      ${W.e.ripple.p.mode.set('center')}
+      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
+    `
+    
+    
+    export const testNormalRipple = (t: AppTheme.Theme) => css`
+      ${W.e.ripple.p.color.set('#ff0000' + opacity)}
+    `
+  }
+  
+  
+  
+  
+  const base = css`
+    // normal
+    ${W.use.s.normal().e.frame().thisUse} {
+      ${P.baseNormalFrame};
+    }
+    // normal
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${P.baseNormalRipple};
     }
   `
+  
   
   
   export const filled = (t: AppTheme.Theme) => css`
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.content[0] + opacity)}
+      ${P.filledNormalRipple(t)}
     }
   `
   
@@ -73,7 +110,7 @@ export namespace RippleS {
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
+      ${P.textNormalRipple(t)}
     }
   `
   
@@ -82,12 +119,9 @@ export namespace RippleS {
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.mode.set('center')}
-      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0] + opacity)}
+      ${P.iconNormalRipple(t)};
     }
   `
-  
-  
   
   
   

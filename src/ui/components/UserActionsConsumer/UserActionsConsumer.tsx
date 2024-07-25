@@ -3,17 +3,14 @@ import React from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import contents = EmotionCommon.contents
 import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
+import ChildrenProps = ReactU.ChildrenProps
 
 
 
 // Pointer & Wheel events consumer
 
-export type UserActionsConsumerProps = {
-  children: React.ReactNode
-}
-
 const UserActionsConsumer = React.memo(
-  (props: UserActionsConsumerProps) => {
+  (props: ChildrenProps) => {
     return (
       <div css={contents} {...stopPointerAndMouseEvents()}>
         {props.children}
@@ -22,6 +19,5 @@ const UserActionsConsumer = React.memo(
   }
 )
 export default UserActionsConsumer
-
 
 
