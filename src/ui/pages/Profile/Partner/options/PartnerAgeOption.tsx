@@ -1,7 +1,7 @@
 import { RangeU } from 'src/util/common/RangeU'
 import { ReactU } from 'src/util/common/ReactU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { useStateSync2 } from 'src/util/react-state-and-ref/useStateSync2.ts'
+import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
 import numeral from 'numeral'
 import React, { useState } from 'react'
 import { ProfilePageValidation } from 'src/ui/pages/Profile/validation.ts'
@@ -74,7 +74,7 @@ React.memo(
     () => mapDataRangeToWidgetRange(ageRange)
   )
   
-  useStateSync2(
+  useStateMapperSync(
     ageRange, widgetRange,
     setAgeRange, setWidgetRange,
     (w, h) => ReactU.arrMerge(

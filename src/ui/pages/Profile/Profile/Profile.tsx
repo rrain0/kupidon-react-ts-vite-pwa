@@ -249,7 +249,7 @@ export const TopButtonBarFrame = styled.section`
   display: flex;
   align-items: center;
   justify-content: end;
-  background: ${p=>p.theme.containerNormal.bgc[0]}cc;
+  background: ${p=>p.theme.containerNormal.bg[0]}cc;
   gap: 10px;
   pointer-events: none;
   &>*{ pointer-events: auto; }

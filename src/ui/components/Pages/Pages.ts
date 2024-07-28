@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import center = EmotionCommon.center
-import { SimpleGradientBgc } from 'src/ui-data/bgc/SimpleGradientBgc.ts'
+import { SimpleGradientBg } from 'src/ui-data/bg/SimpleGradientBg.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import col = EmotionCommon.col
 
@@ -14,11 +14,11 @@ export namespace Pages {
   
   
   export const pageColors = (t: AppTheme.Theme)=>css`
-    ${SimpleGradientBgc(t)};
+    ${SimpleGradientBg(t)};
     color: ${t.page.content2[0]};
   `
   export const simplePageColors = (t: AppTheme.Theme)=>css`
-    background: ${t.page.bgc[0]};
+    background: ${t.page.bg[0]};
     color: ${t.page.content2[0]};
   `
   

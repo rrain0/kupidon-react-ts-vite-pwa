@@ -4,10 +4,10 @@ import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { getElemProps } from '@util/element/ElemProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useAsRefGet } from 'src/util/react-state-and-ref/useAsRefGet.ts'
+import { useAsRefGet } from 'src/util/react-state/useAsRefGet.ts'
 import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
-import { useRefGetSet } from 'src/util/react-state-and-ref/useRefGetSet.ts'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -296,13 +296,13 @@ const trackStyle = (t: AppTheme.Theme) => css`
   position: relative;
   border-radius: 999999px;
   border: none;
-  background: ${t.rangePicker.trackBgc[0]};
+  background: ${t.rangePicker.trackBg[0]};
 `
 
 const bar = (t: AppTheme.Theme) => css`
   position: absolute;
   height: 100%;
-  background: ${t.rangePicker.barBgc[0]};
+  background: ${t.rangePicker.barBg[0]};
   border-radius: inherit;
   
   // manipulate left & right to display actual range data
@@ -318,14 +318,14 @@ const leftHandle = (t: AppTheme.Theme) => css`
   height: 32px;
   width: 19px;
   border-radius: 16px 3px 3px 16px;
-  background: ${t.rangePicker.handleBgc[0]};
+  background: ${t.rangePicker.handleBg[0]};
 `
 const rightHandle = (t: AppTheme.Theme) => css`
   grid-area: rHandle;
   height: 32px;
   width: 19px;
   border-radius: 3px 16px 16px 3px;
-  background: ${t.rangePicker.handleBgc[0]};
+  background: ${t.rangePicker.handleBg[0]};
 `
 
 

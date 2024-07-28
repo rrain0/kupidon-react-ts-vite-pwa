@@ -7,7 +7,7 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { clearSiteData } from '@util/app/clearSiteData.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { useBool } from 'src/util/react-state-and-ref/useBool.ts'
+import { useBool } from 'src/util/react-state/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/elements/buttons/Button/Button.tsx'
@@ -103,7 +103,7 @@ React.memo(
       css={t => css`
         ${fixed};
         z-index: 40;
-        background: ${t.page.bgc[0]}9a;
+        background: ${t.page.bg[0]}9a;
         color: ${t.page.content2[0]};
         ${Txt.large2};
         ${center};

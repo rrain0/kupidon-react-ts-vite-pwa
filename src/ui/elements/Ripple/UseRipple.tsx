@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { RippleProps } from 'src/ui/elements/Ripple/Ripple'
 import { TypeU } from 'src/util/common/TypeU'
-import { useBool } from 'src/util/react-state-and-ref/useBool'
+import { useBool } from 'src/util/react-state/useBool'
 import Puro = TypeU.Puro
 
 

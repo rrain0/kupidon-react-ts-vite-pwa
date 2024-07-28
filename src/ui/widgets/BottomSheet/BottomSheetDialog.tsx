@@ -116,13 +116,13 @@ React.memo(
         // @ts-expect-error
         background: sheetSpring.height.to(
           height => {
-            const bgcDimHex = function() {
+            const bgDimHex = function() {
               const maxDimHeight = snapPointsPx[realDefaultOpenIdx??0]
               const dimHeight = Math.min(height, maxDimHeight)
               return Math.trunc(dimHeight / maxDimHeight * 256 * 0.6)
                 .toString(16).padStart(2, '0')
             }()
-            if (!['closed', null].includes(sheetState)) return `#000000${bgcDimHex}`
+            if (!['closed', null].includes(sheetState)) return `#000000${bgDimHex}`
             return 'none'
           }
         ),

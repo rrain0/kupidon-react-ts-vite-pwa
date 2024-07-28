@@ -10,7 +10,7 @@ import Elem = WidgetStyle.Elem
 import CssPseudo = WidgetStyle.CssPseudo
 import CssWidget = WidgetStyle.CssWidget
 import CssAttr = WidgetStyle.CssAttr
-import bgcInBorder = EmotionCommon.bgcInBorder
+import bgInBorder = EmotionCommon.bgInBorder
 import PartialUndef = TypeU.PartialUndef
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
@@ -97,7 +97,7 @@ export namespace InputStyle {
       background-size: 200% 100%;
       background-position: 100% 0;
       transition: background-position 0.8s ease-out;
-      ${bgcInBorder};
+      ${bgInBorder};
     }
     
     // state: hover
@@ -141,7 +141,7 @@ export namespace InputStyle {
   const outlinedRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
-      background: ${t.input.bgc[0]};
+      background: ${t.input.bg[0]};
     }
     ${W.use.s.normal().e.input().thisUse} {
       ${W.props.color.p.set(t.input.content[0])};
@@ -178,7 +178,7 @@ export namespace InputStyle {
 
     // state: error
     ${W.use.s.error().e.frame().thisUse} {
-      background: ${t.input.bgcError[0]};
+      background: ${t.input.bgError[0]};
     }
   `
   /*

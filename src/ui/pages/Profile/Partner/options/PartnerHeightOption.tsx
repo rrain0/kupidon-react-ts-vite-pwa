@@ -3,7 +3,7 @@ import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { ReactU } from 'src/util/common/ReactU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { useStateSync2 } from 'src/util/react-state-and-ref/useStateSync2.ts'
+import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import numeral from 'numeral'
 import React, { useState } from 'react'
@@ -74,7 +74,7 @@ React.memo(
     () => mapHeightRangeToWidgetRange(heightRange)
   )
   
-  useStateSync2(
+  useStateMapperSync(
     heightRange, widgetRange,
     setHeightRange, setWidgetRange,
     (w, h) => ReactU.arrMerge(

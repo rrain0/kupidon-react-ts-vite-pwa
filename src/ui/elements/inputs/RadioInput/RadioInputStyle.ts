@@ -92,20 +92,20 @@ export namespace RadioInputStyle {
       /* ${center}; */
       width: 26px;
       height: 26px;
-      ${Prop.activeIconColor}: ${t.inputRadio.bgcFocus[0]};
-      ${Prop.inactiveIconColor}: ${t.inputRadio.bgcFocus[0]};
+      ${Prop.activeIconColor}: ${t.inputRadio.bgFocus[0]};
+      ${Prop.inactiveIconColor}: ${t.inputRadio.bgFocus[0]};
     }
     
     // hover
     ${hoverable}{
       ${El.borderHover}{
-        background: ${t.buttonTransparent.bgcFocus[0]};
+        background: ${t.buttonTransparent.bgFocus[0]};
       }
     }
     
     // focus-visible
     ${El.borderFocusVisible}{
-      background: ${t.buttonTransparent.bgcFocus[0]};
+      background: ${t.buttonTransparent.bgFocus[0]};
     }
   `
   

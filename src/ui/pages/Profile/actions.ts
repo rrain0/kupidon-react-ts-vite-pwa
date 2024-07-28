@@ -63,7 +63,7 @@ export const dotActive = (t: AppTheme.Theme)=>css`
   //width: 12px;
   //height: 12px;
   
-  background: ${t.photos.highlightFrameAccentBgc[0]};
+  background: ${t.photos.highlightFrameAccentBg[0]};
 `
 */
 

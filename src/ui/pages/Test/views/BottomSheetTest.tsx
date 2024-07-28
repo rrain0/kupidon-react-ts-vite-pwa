@@ -25,7 +25,7 @@ import Setter = TypeU.Callback1
 
 
 
-const BottomSheetTestPage =
+const BottomSheetTest =
 React.memo(
 ()=>{
   
@@ -195,7 +195,7 @@ React.memo(
         <div // Header Component
           // Must be without margins!!!
           css={t=>css`
-            background: ${t.bottomSheet.bgc[0]};
+            background: ${t.bottomSheet.bg[0]};
             border-radius: 16px 16px 0 0;
             color: ${t.page.content2[0]};
             padding: 10px;
@@ -226,7 +226,7 @@ React.memo(
             display: flex;
             place-items: center;
             overflow: hidden;
-            background: ${t.bottomSheet.bgc[0]};
+            background: ${t.bottomSheet.bg[0]};
             color: ${t.page.content2[0]};
           `}
         >
@@ -288,7 +288,7 @@ React.memo(
     
   </>
 })
-export default BottomSheetTestPage
+export default BottomSheetTest
 
 
 
@@ -315,7 +315,7 @@ const BottomSheetControlOverlay = (props:{
       top: 0; left: 0;
       z-index: 40;
       ${col};
-      background: ${t.page.bgc[0]}88;
+      background: ${t.page.bg[0]}88;
       color: ${t.page.content2[0]};
     `}
     >

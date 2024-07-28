@@ -51,16 +51,16 @@ export const Colors = {
 
 export const Colors2 = {
   
-  toastLightBgc: '#ffffff',
-  toastDarkBgc: '#121212',
+  toastLightBg: '#ffffff',
+  toastDarkBg: '#121212',
   
-  toastNormalBgc: '#bb86fc',
-  toastLoadingBgc: '#e0e0e0',
-  toastLoadingBgcAccent: '#616161',
-  toastInfoBgc: '#3498db',
-  toastOkBgc: '#07bc0c',
-  toastWarnBgc: '#f1c40f',
-  toastDangerBgc: '#e74c3c',
+  toastNormalBg: '#bb86fc',
+  toastLoadingBg: '#e0e0e0',
+  toastLoadingBgAccent: '#616161',
+  toastInfoBg: '#3498db',
+  toastOkBg: '#07bc0c',
+  toastWarnBg: '#f1c40f',
+  toastDangerBg: '#e74c3c',
   
   toastLightContent: '#757575',
   toastLightContent2: '#b2b2b2',

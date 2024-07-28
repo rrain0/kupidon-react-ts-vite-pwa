@@ -10,15 +10,15 @@ import themeIconGradientCss = AppTheme.themeIconGradientCss
 const LightPinkGradientProps = { ...LightPink,
   
   page: { ...LightPink.page,
-    bgcGradient: ['#ffaeba','#f0f0f0','#f0f0f0'],
-    //bgc: ['#ffb6c1','#f5f5f5','#d8701a'],
+    bgGradient: ['#ffaeba','#f0f0f0','#f0f0f0'],
+    //bg: ['#ffb6c1','#f5f5f5','#d8701a'],
   },
   statusBar: { ...LightPink.statusBar,
-    bgc: ['#ffaeba'],
+    bg: ['#ffaeba'],
   },
   
   inputRadio: { ...LightPink.buttonMain,
-    bgcFocus:  ['#f37190'],
+    bgFocus:  ['#f37190'],
   },
 }
 
@@ -28,8 +28,8 @@ export const LightPinkGradient = {
   ...LightPinkGradientProps,
   name: 'Light Pink Gradient' as const,
   icon: styled.div(themeIconGradientCss({
-    accentColor: LightPinkGradientProps.buttonAccent.bgc[0],
-    bgcColor1:   LightPinkGradientProps.buttonAccent.bgc[0],
-    bgcColor2:   LightPinkGradientProps.containerNormal.bgc2[0],
+    accentColor: LightPinkGradientProps.buttonAccent.bg[0],
+    bgColor1:   LightPinkGradientProps.buttonAccent.bg[0],
+    bgColor2:   LightPinkGradientProps.containerNormal.bg2[0],
   })),
 } satisfies Theme

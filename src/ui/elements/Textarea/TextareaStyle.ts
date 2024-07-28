@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import Theme = AppTheme.Theme
-import bgcInBorder = EmotionCommon.bgcInBorder
+import bgInBorder = EmotionCommon.bgInBorder
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 
@@ -57,7 +57,7 @@ export namespace TextareaStyle {
     // normal
     ${El.frame} {
       border-radius: 15px;
-      background: ${t.input.bgc[0]};
+      background: ${t.input.bg[0]};
     }
     ${El.textarea} {
       width: 100%;
@@ -86,7 +86,7 @@ export namespace TextareaStyle {
       background-size: 200% 100%;
       background-position: 100% 0;
       transition: background-position 0.8s ease-out;
-      ${bgcInBorder};
+      ${bgInBorder};
     }
     
     // hover
@@ -118,7 +118,7 @@ export namespace TextareaStyle {
     
     // error
     ${El.frameError} {
-      background: ${t.input.bgcError[0]};
+      background: ${t.input.bgError[0]};
     }
   `
   

@@ -82,15 +82,15 @@ const ResizeObserverTestPage = ()=>{
           gap: 20px;
           padding: 20px;
           ${(()=>{
-            const bgcLight = ['#ffb6c1','#f5f5f5','#d8701a']
-            const bgcDark =  ['#992c46','#282c34','#994500']
-            const bgc = t.type==='dark' ? bgcDark : bgcLight
+            const bgLight = ['#ffb6c1','#f5f5f5','#d8701a']
+            const bgDark =  ['#992c46','#282c34','#994500']
+            const bg = t.type==='dark' ? bgDark : bgLight
             return css`
                 background: linear-gradient(
                         to bottom right,
-                        ${bgc[0]} 0%,
-                        ${bgc[1]} 50%,
-                        ${bgc[2]} 100%
+                        ${bg[0]} 0%,
+                        ${bg[1]} 50%,
+                        ${bg[2]} 100%
                 );
               `
           })()};
@@ -123,15 +123,15 @@ const ResizeObserverTestPage = ()=>{
           gap: 20px;
           padding: 20px;
           ${(()=>{
-            const bgcLight = ['#ffb6c1','#f5f5f5','#d8701a']
-            const bgcDark =  ['#992c46','#282c34','#994500']
-            const bgc = t.type==='dark' ? bgcDark : bgcLight
+            const bgLight = ['#ffb6c1','#f5f5f5','#d8701a']
+            const bgDark =  ['#992c46','#282c34','#994500']
+            const bg = t.type==='dark' ? bgDark : bgLight
             return css`
                 background: linear-gradient(
                         to bottom right,
-                        ${bgc[0]} 0%,
-                        ${bgc[1]} 50%,
-                        ${bgc[2]} 100%
+                        ${bg[0]} 0%,
+                        ${bg[1]} 50%,
+                        ${bg[2]} 100%
                 );
               `
           })()};

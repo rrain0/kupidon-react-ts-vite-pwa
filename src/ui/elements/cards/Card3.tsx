@@ -44,7 +44,7 @@ export default Card3
 export const card3Style = (t: AppTheme.Theme) => css`
   box-shadow: 0px 4px 15px 0px ${t.containerNormal.shadow[0]};
   border-radius: 15px;
-  background: ${t.containerNormal.bgc[0]};
+  background: ${t.containerNormal.bg[0]};
   padding: 16px 16px;
   ${col};
   gap: 10px;

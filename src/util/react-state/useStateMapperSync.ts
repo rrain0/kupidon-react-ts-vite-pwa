@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { useRefGetSet } from 'src/util/react-state-and-ref/useRefGetSet.ts'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Setter = TypeU.Setter
 import Mapper2 = TypeU.Mapper2
 
 
 
-export const useStateSync2 =
+export const useStateMapperSync =
 <M, S>(
   main: M, secondary: S,
   setMain: Setter<M>, setSecondary: Setter<S>,

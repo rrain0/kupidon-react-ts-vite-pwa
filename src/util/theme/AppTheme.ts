@@ -26,76 +26,77 @@ export namespace AppTheme {
     }
     
     page: {
-      bgc:         string[]
-      bgcGradient: string[]
+      bg:         string[]
+      bgGradient: string[]
       content1:    string[]
       content2:    string[]
       content3:    string[]
     }
     statusBar: {
-      bgc: string[]
+      bg: string[]
     }
     nav: {
-      bgc: string[]
+      bg: string[]
     }
     
     containerNormal: {
-      bgc:       string[]
-      bgc2:      string[]
+      bg:       string[]
+      bg2:      string[]
+      bg3:      string[]
       content:   string[]
       content1b: string[]
       content2:  string[]
       content2b: string[]
       content3:  string[]
       content4:  string[]
-      shadow:    string[]
       contentAccent:   string[]
       contentAccent2:  string[]
       contentAccent3:  string[]
+      shadow:    string[]
     },
     containerAccent: {
-      bgc:      string[]
-      bgc2:     string[]
+      bg:      string[]
+      bg2:     string[]
       content:  string[]
       content2: string[]
     },
     
     // main button (submit button)
     buttonMain: {
-      bgc:      string[]
-      bgcFocus: string[]
+      bg:      string[]
+      bgFocus: string[]
       content:  string[]
     }
     // just a colorful button that drags some attention
     buttonAccent: {
-      bgc:           string[]
+      bg:           string[]
       content:       string[]
-      bgcFocus:      string[]
+      bgFocus:      string[]
       contentFocus:  string[]
     }
     // normal button
     buttonNormal: {
-      bgc:           string[]
+      bg:           string[]
       content:       string[]
-      bgcFocus:      string[]
+      bgFocus:      string[]
       contentFocus:  string[]
     }
     // button that almost invisible
     buttonSecondary: {
-      bgc:       string[]
-      bgcFocus:  string[]
+      bg:       string[]
+      bgFocus:  string[]
       content:   string[]
     }
     // radio input color
     inputRadio: {
-      bgcFocus: string[]
+      bgFocus: string[]
     }
     // transparent icon button
     buttonTransparent: {
-      bgcFocus: string[],
+      bgFocus: string[],
     }
     navButton: {
-      bgcFocus:      string[]
+      bgFocus:      string[]
       content:       string[]
       contentAccent: string[]
     }
@@ -106,34 +107,34 @@ export namespace AppTheme {
     
     // input, dataField, textarea, radioInput, radioGroup
     input: {
-      bgc:           string[]
+      bg:           string[]
       content:       string[]
       placeholder:   string[]
       border:        string[]
       borderHover:   string[]
-      bgcError:      string[]
+      bgError:      string[]
     }
     
     rangePicker: {
-      trackBgc:      string[]
-      barBgc:        string[]
-      handleBgc:     string[]
+      trackBg:      string[]
+      barBg:        string[]
+      handleBg:     string[]
     }
     
     // disabledButton
     elementDisabled: {
-      bgc:     string[]
+      bg:     string[]
       content: string[]
     }
     // dangerButton
     elementDanger: {
-      bgc:      string[]
-      bgcFocus: string[]
+      bg:      string[]
+      bgFocus: string[]
       content:  string[]
     }
     // element with error
     elementError: {
-      bgc:      string[]
+      bg:      string[]
     },
     
     ripple: {
@@ -142,25 +143,25 @@ export namespace AppTheme {
     }
     
     photos: {
-      bgc:                     string[]
+      bg:                     string[]
       content:                 string[]
       borderDrag:              string[]
-      highlightFrameBgc:       string[]
-      highlightFrameAccentBgc: string[]
+      highlightFrameBg:       string[]
+      highlightFrameAccentBg: string[]
     }
     
     bottomSheet: {
-      bgc:    string[]
+      bg:    string[]
       handle: string[]
     }
     
     toast: {
-      bgc:                  string[]
+      bg:                  string[]
       content:              string[]
       content2:             string[]
       content3:             string[]
       accentNormal:         string[]
-      accentLoadingBgc:     string[]
+      accentLoadingBg:     string[]
       accentLoadingContent: string[]
       accentInfo:           string[]
       accentOk:             string[]
@@ -178,10 +179,10 @@ export namespace AppTheme {
   
   export type ThemeIconCssProps = {
     accentColor: string,
-    bgcColor1: string,
-    bgcColor2: string,
+    bgColor1: string,
+    bgColor2: string,
   }
-  export const themeIconCss = (props: ThemeIconCssProps)=>css`
+  export const themeIconCss = (props: ThemeIconCssProps) => css`
     height: 100%;
     aspect-ratio: 1;
     border-radius: 999999px;
@@ -189,16 +190,16 @@ export namespace AppTheme {
     border-color: ${props.accentColor};
     background: linear-gradient(
       to right,
-      ${props.bgcColor1} 0% 50%,
-      ${props.bgcColor2} 50% 100%
+      ${props.bgColor1} 0% 50%,
+      ${props.bgColor2} 50% 100%
     );
   `
-  export const themeIconGradientCss = (props: ThemeIconCssProps)=>css`
+  export const themeIconGradientCss = (props: ThemeIconCssProps) => css`
     ${themeIconCss(props)};
     background: linear-gradient(
       to right,
-      ${props.bgcColor1} 0% 35%,
-      ${props.bgcColor2} 75% 100%
+      ${props.bgColor1} 0% 35%,
+      ${props.bgColor2} 75% 100%
     );
   `
   

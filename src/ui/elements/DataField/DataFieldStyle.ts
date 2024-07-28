@@ -4,7 +4,7 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import Theme = AppTheme.Theme
 import Txt = EmotionCommon.Txt
-import bgcInBorder = EmotionCommon.bgcInBorder
+import bgInBorder = EmotionCommon.bgInBorder
 import hoverable = EmotionCommon.hoverable
 
 
@@ -41,7 +41,7 @@ export namespace DataFieldStyle {
     ${El.frame} {
       cursor: pointer;
       border-radius: 15px;
-      background: ${t.input.bgc[0]};
+      background: ${t.input.bg[0]};
       min-width: 0;
       width: 100%;
       min-height: 50px;
@@ -63,7 +63,7 @@ export namespace DataFieldStyle {
       background-size: 200% 100%;
       background-position: 100% 0;
       transition: background-position 0.8s ease-out;
-      ${bgcInBorder};
+      ${bgInBorder};
     }
     
     // hover
@@ -75,7 +75,7 @@ export namespace DataFieldStyle {
     
     // error
     ${El.frameError}{
-      background: ${t.input.bgcError[0]};
+      background: ${t.input.bgError[0]};
     }
   `
   

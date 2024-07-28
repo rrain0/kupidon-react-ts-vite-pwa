@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react'
-import { useBool } from 'src/util/react-state-and-ref/useBool.ts'
+import { useBool } from 'src/util/react-state/useBool.ts'
 
 
 

@@ -1,15 +1,12 @@
-import styled from '@emotion/styled'
 import { animated, useSpring, config, easings } from '@react-spring/web'
 import clsx from 'clsx'
 import React, { useMemo } from 'react'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { RippleS } from 'src/ui/elements/Ripple/RippleS'
 import { ReactU } from 'src/util/common/ReactU'
 import { getElemProps } from 'src/util/element/ElemProps'
 import { ElemU } from 'src/util/element/ElemU'
-import { useElemRef } from 'src/util/react-state-and-ref/useElemRef'
+import { useElemRef } from 'src/util/react-state/useElemRef'
 import ClassStyleProps = ReactU.ClassStyleProps
-import abs = EmotionCommon.abs
 import WH = ElemU.WH
 import XY = ElemU.XY
 import RippleMode = RippleS.RippleMode

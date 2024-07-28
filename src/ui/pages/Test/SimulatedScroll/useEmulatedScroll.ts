@@ -4,8 +4,8 @@ import React from 'react'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
 import { TypeU } from 'src/util/common/TypeU'
-import { useRefAsGetSet } from 'src/util/react-state-and-ref/useRefAsGetSet'
-import { useRefGetSet } from 'src/util/react-state-and-ref/useRefGetSet'
+import { useRefAsGetSet } from 'src/util/react-state/useRefAsGetSet'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import Getter = TypeU.Getter
 import NumRange = RangeU.NumRange
 

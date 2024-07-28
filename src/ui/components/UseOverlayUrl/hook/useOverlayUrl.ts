@@ -1,4 +1,4 @@
-import { useBool } from 'src/util/react-state-and-ref/useBool.ts'
+import { useBool } from 'src/util/react-state/useBool.ts'
 import { useCallback, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'

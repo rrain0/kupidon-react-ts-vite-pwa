@@ -6,7 +6,7 @@ import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState, useTabs } from 'src/ui/components/Tabs/useTabs.ts'
-import { useElemRef } from 'src/util/react-state-and-ref/useElemRef'
+import { useElemRef } from 'src/util/react-state/useElemRef'
 import Setter = TypeU.Setter
 import row = EmotionCommon.row
 import contents = EmotionCommon.contents

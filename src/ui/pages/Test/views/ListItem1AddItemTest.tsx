@@ -13,7 +13,7 @@ import col = EmotionCommon.col
 
 
 
-const ListItem1AddItem = () => {
+const ListItem1AddItemTest = () => {
   
   
   return <Pages.SimplePage>
@@ -134,7 +134,7 @@ const ListItem1AddItem = () => {
     </Pages.ContentFill>
   </Pages.SimplePage>
 }
-export default ListItem1AddItem
+export default ListItem1AddItemTest
 
 
 

@@ -83,10 +83,10 @@ const EyeWrap = styled.button`
   ${center};
   position: relative;
   :focus-visible {
-    background: ${p => p.theme.buttonTransparent.bgcFocus[0]};
+    background: ${p => p.theme.buttonTransparent.bgFocus[0]};
   }
   ${hoverable}{ :hover {
-    background: ${p => p.theme.buttonTransparent.bgcFocus[0]};
+    background: ${p => p.theme.buttonTransparent.bgFocus[0]};
   } }
 `
 EyeWrap.defaultProps = { type: 'button' }

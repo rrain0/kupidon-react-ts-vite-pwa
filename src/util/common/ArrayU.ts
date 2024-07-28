@@ -42,6 +42,13 @@ export namespace ArrayU {
   }
   
   
+  export const nextOr = <T1, T2>(arr: T1[], curr: T1, orElse: T2): T1 | T2 => {
+    const currIdx = arr.findIndex(it => it === curr)
+    if (currIdx === -1 || currIdx + 1 === arr.length) return orElse
+    return arr[currIdx + 1]
+  }
+  
+  
   export const randomElem = <T>(arr: T[]): T => {
     if (!arr.length) throw new Error("Array is empty, can't get random element.")
     return arr[MathU.randomInt(0, arr.length - 1)]

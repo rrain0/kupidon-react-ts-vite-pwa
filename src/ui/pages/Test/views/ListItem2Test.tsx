@@ -17,7 +17,7 @@ import colC = EmotionCommon.colC
 
 
 
-const ListItem2 = () => {
+const ListItem2Test = () => {
   
   
   const variants = [
@@ -306,7 +306,7 @@ const ListItem2 = () => {
     </Pages.SimplePage>
   )
 }
-export default ListItem2
+export default ListItem2Test
 
 
 

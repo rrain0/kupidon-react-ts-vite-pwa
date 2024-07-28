@@ -44,7 +44,7 @@ export namespace IconButtonStyle {
     // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
-      ${W.e.icon.e.p.color.set(t.buttonNormal.bgc[0])};
+      ${W.e.icon.e.p.color.set(t.buttonNormal.bg[0])};
     }
   `
   

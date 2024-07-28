@@ -111,7 +111,7 @@ React.memo(
             height: 200px;
             ${center};
             border-radius: 16px;
-            background: ${t.containerNormal.bgc[0]};
+            background: ${t.containerNormal.bg[0]};
           `}
         >
           <PieProgress css={css`
@@ -129,7 +129,7 @@ React.memo(
             height: 150px;
             padding: 10px;
             border-radius: 16px;
-            background: ${t.containerNormal.bgc[0]};
+            background: ${t.containerNormal.bg[0]};
             color: ${t.containerNormal.content[0]};
           `}
         >
@@ -143,7 +143,7 @@ React.memo(
             height: 150px;
             padding: 10px;
             border-radius: 16px;
-            background: ${t.containerNormal.bgc2[0]};
+            background: ${t.containerNormal.bg2[0]};
             color: ${t.containerNormal.content[0]};
           `}
         >
@@ -157,7 +157,7 @@ React.memo(
             height: 150px;
             padding: 10px;
             border-radius: 16px;
-            background: ${t.containerAccent.bgc[0]};
+            background: ${t.containerAccent.bg[0]};
             color: ${t.containerAccent.content[0]};
           `}
         >
@@ -172,7 +172,7 @@ React.memo(
             height: 150px;
             padding: 10px;
             border-radius: 16px;
-            background: ${t.containerAccent.bgc[0]};
+            background: ${t.containerAccent.bg[0]};
             color: ${t.containerAccent.content[0]};
           `}
         >
@@ -187,7 +187,7 @@ React.memo(
             position: relative;
             padding: 10px;
             border-radius: 16px;
-            background: ${t.containerNormal.bgc[0]};
+            background: ${t.containerNormal.bg[0]};
             color: ${t.containerNormal.content[0]};
           `}
         >

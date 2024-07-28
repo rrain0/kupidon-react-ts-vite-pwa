@@ -22,21 +22,20 @@ export namespace SelectItemS {
     }, { })
     
     const border = new Elem('rrainuiBorder', { }, { })
-    const rippleFrame = new Elem(RippleS.W.e.frame.e.name, { }, { })
-    const rippleRipple = new Elem(RippleS.W.e.ripple.e.name, { }, { })
+    const ripple = new Elem('', { }, { })
     
     const selectItemWidget = CssWidget
       .ofRoot('frame', frame)
       .add('frame', '>', 'border', border)
-      .add('border', '>', 'rippleFrame', rippleFrame)
-      .add('rippleFrame', '>', 'rippleRipple', rippleRipple)
+      .add('border', '>', 'ripple', ripple)
     
     return selectItemWidget
   })()
   
   
   
-  const base = css`
+  
+  export const base = css`
     // normal
     ${W.use.s.normal().e.frame().thisUse} {
       cursor: pointer;
@@ -53,19 +52,15 @@ export namespace SelectItemS {
       grid-auto-flow: column;
       place-items: stretch center;
       gap: 10px;
-      overflow: hidden;
-    }
+      overflow: hidden;}
     ${W.use.s.normal().e.border().thisUse} {
       pointer-events: none;
       ${abs};
       border-radius: inherit;
       border: none;
     }
-    ${W.use.s.normal().e.rippleFrame().thisUse} {
-      ${RippleS.P.baseNormalFrame};
-    }
-    ${W.use.s.normal().e.rippleRipple().thisUse} {
-      ${RippleS.P.baseNormalRipple};
+    ${W.use.s.normal().e.ripple().thisUse}{
+      ${RippleS.base}
     }
     
     // selected
@@ -84,12 +79,8 @@ export namespace SelectItemS {
     ${W.use.s.normal().e.frame().thisUse} {
       width: 100%;
     }
-    
-    ${W.use.s.normal().e.rippleFrame().thisUse} {
-    
-    }
-    ${W.use.s.normal().e.rippleRipple().thisUse} {
-      ${RippleS.P.testNormalRipple(t)};
+    ${W.use.s.normal().e.ripple().thisUse}{
+      ${RippleS.filled(t)}
     }
   `
   

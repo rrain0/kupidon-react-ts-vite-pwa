@@ -12,10 +12,10 @@ import path = RouteBuilder.path
 import TestPage from 'src/ui/pages/Test/TestPage.tsx'
 import ScrollbarTestPage from 'src/ui/pages/Test/pages/ScrollbarTestPage.tsx'
 import ResizeObserverTestPage from 'src/ui/pages/Test/pages/ResizeObserverTestPage.tsx'
-import BottomSheetTestPage from 'src/ui/pages/Test/pages/BottomSheetTestPage.tsx'
+import BottomSheetTest from 'src/ui/pages/Test/views/BottomSheetTest.tsx'
 import MoveElementToAnotherViewTestPage from 'src/ui/pages/Test/pages/MoveElementToAnotherViewTestPage.tsx'
-import ListItem1AddItem from 'src/ui/pages/Test/views/ListItem1AddItem'
-import ListItem2 from 'src/ui/pages/Test/views/ListItem2'
+import ListItem1AddItemTest from 'src/ui/pages/Test/views/ListItem1AddItemTest'
+import ListItem2Test from 'src/ui/pages/Test/views/ListItem2Test'
 import RippleTest from 'src/ui/pages/Test/views/RippleTest'
 
 
@@ -40,7 +40,7 @@ const testResizeObserverTestPageRouting: RouteObject[] = [
 const testBottomSheetTestPageRouting: RouteObject[] = [
   {
     path: '',
-    Component: BottomSheetTestPage,
+    Component: BottomSheetTest,
   },
   clearUnknownPathEnding,
 ]
@@ -100,7 +100,7 @@ const emulatedScrollRouting: RouteObject[] = [
 const viewsListItem1AddItemRouting: RouteObject[] = [
   {
     path: '',
-    Component: ListItem1AddItem,
+    Component: ListItem1AddItemTest,
   },
   clearUnknownPathEnding,
 ]
@@ -108,7 +108,7 @@ const viewsListItem1AddItemRouting: RouteObject[] = [
 const viewsListItem2Routing: RouteObject[] = [
   {
     path: '',
-    Component: ListItem2,
+    Component: ListItem2Test,
   },
   clearUnknownPathEnding,
 ]

@@ -35,7 +35,7 @@ import { Progress } from 'src/util/Progress.ts'
 import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { useNoTouchAction } from 'src/util/element/useNoTouchAction.ts'
-import { useStateAndRef } from 'src/util/react-state-and-ref/useStateAndRef.ts'
+import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import center = EmotionCommon.center
@@ -46,7 +46,7 @@ import PieProgress from 'src/ui/elements/PieProgress/PieProgress.tsx'
 import { PieProgressStyle } from 'src/ui/elements/PieProgress/PieProgressStyle.ts'
 import SparkingLoadingLine from 'src/ui/elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import abs = EmotionCommon.abs
-import bgcBorderMask = EmotionCommon.bgcInBorder
+import bgBorderMask = EmotionCommon.bgInBorder
 import arrIndices = ArrayU.arrOfIndices
 import PlusIc = SvgIcons.PlusIc
 import contents = EmotionCommon.contents
@@ -403,11 +403,11 @@ React.memo(
             `}
             ${lastIdx===i && !swap && dragState==='dragging' && css`
               background-image: none;
-              background-color: ${t.photos.highlightFrameAccentBgc[0]};
+              background-color: ${t.photos.highlightFrameAccentBg[0]};
             `}
             ${swap?.[1]===i && css`
               background-image: none;
-              background-color: ${t.photos.highlightFrameAccentBgc[0]};
+              background-color: ${t.photos.highlightFrameAccentBg[0]};
             `}
           `}
             onAnimationEnd={ev => {
@@ -447,11 +447,11 @@ export default ProfilePhotos
 const radialGradKfs = (t:Theme) => keyframes`
   0% {
     --rotation: 0turn;
-    --grad-color: ${t.photos.highlightFrameBgc[0]};
+    --grad-color: ${t.photos.highlightFrameBg[0]};
   }
   100% {
     --rotation: 1.001turn;
-    --grad-color: ${t.photos.highlightFrameBgc[0]};
+    --grad-color: ${t.photos.highlightFrameBg[0]};
   }
 `
 
@@ -509,7 +509,7 @@ const photoPlaceholderStyle = (t:AppTheme.Theme) => css`
   pointer-events: none;
   border-radius: inherit;
   overflow: hidden;
-  background: ${t.photos.bgc[0]};
+  background: ${t.photos.bg[0]};
   ${center};
 `
 const photoDimmed = (t:AppTheme.Theme) => css`
@@ -540,7 +540,7 @@ const profilePhotoPieProgress = (t:AppTheme.Theme) => css`
 const profilePhotoPieProgressAccent = (t:AppTheme.Theme) => css`
   ${profilePhotoPieProgress(t)};
   ${PieProgressStyle.El.thiz.pieProgress}{
-    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.bgc[0]};
+    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.bg[0]};
   }
 `
 const photoProgressFrameStyle = (t:AppTheme.Theme) => css`
@@ -557,11 +557,11 @@ const photoProgressFrameStyle = (t:AppTheme.Theme) => css`
   }
   @property --grad-color {
     syntax: '<color>';
-    initial-value: ${t.photos.highlightFrameBgc[0]};
+    initial-value: ${t.photos.highlightFrameBg[0]};
     inherits: false;
   }
 
-  ${bgcBorderMask};
+  ${bgBorderMask};
   background-image: conic-gradient(
     var(--grad-color) 0turn var(--rotation),
     transparent var(--rotation) 1turn

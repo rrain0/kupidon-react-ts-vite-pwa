@@ -4,7 +4,7 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
 import rowWrap = EmotionCommon.rowWrap
 import col = EmotionCommon.col
-import bgcInBorder = EmotionCommon.bgcInBorder
+import bgInBorder = EmotionCommon.bgInBorder
 import hoverable = EmotionCommon.hoverable
 
 
@@ -55,7 +55,7 @@ export namespace RadioInputGroupStyle {
       background-size: 200% 100%;
       background-position: 100% 0;
       transition: background-position 0.8s ease-out;
-      ${bgcInBorder};
+      ${bgInBorder};
     }
     
     // hover
@@ -73,7 +73,7 @@ export namespace RadioInputGroupStyle {
     
     // error
     ${El.radioGroupError} {
-      background: ${t.input.bgcError[0]};
+      background: ${t.input.bgError[0]};
     }
     ${El.borderError} {
       background-image: linear-gradient(
@@ -102,7 +102,7 @@ export namespace RadioInputGroupStyle {
       background-size: 200% 100%;
       background-position: 100% 0;
       transition: background-position 0.8s ease-out;
-      ${bgcInBorder};
+      ${bgInBorder};
     }
 
     // hover
@@ -120,7 +120,7 @@ export namespace RadioInputGroupStyle {
     
     // error
     ${El.radioGroupError} {
-      background: ${t.input.bgcError[0]};
+      background: ${t.input.bgError[0]};
     }
     ${El.borderError} {
       background-image: linear-gradient(

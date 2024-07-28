@@ -7,9 +7,9 @@ import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useGetElemWH } from 'src/util/element/useGetElemWH'
 import { useOnResize } from 'src/util/element/useOnResize'
-import { useElemRef } from 'src/util/react-state-and-ref/useElemRef'
+import { useElemRef } from 'src/util/react-state/useElemRef'
 import { Pages } from 'src/ui/components/Pages/Pages'
-import { useRefGetSet } from 'src/util/react-state-and-ref/useRefGetSet'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import NumRange = RangeU.NumRange
 import arrOfNumbers = ArrayU.arrOfNumbers
 

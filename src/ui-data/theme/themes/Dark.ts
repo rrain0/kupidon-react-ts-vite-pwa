@@ -9,72 +9,73 @@ import themeIconCss = AppTheme.themeIconCss
 const DarkProps = {
   
   page: {
-    bgc:         ['#18191b'], // #424854
-    bgcGradient: ['#282c34', '#282c34', '#282c34'],
+    bg:         ['#18191b'], // #424854
+    bgGradient: ['#282c34', '#282c34', '#282c34'],
     content1:    ['#ffffff'],
     content2:    ['#bdbdbd'],
     content3:    ['#999999'],
   },
   statusBar: {
-    bgc: ['#282c34'],
+    bg: ['#282c34'],
   },
   nav: {
-    bgc: ['#282c34'],
+    bg: ['#282c34'],
   },
   navButton: {
-    bgcFocus:      ['#2e3440'],
+    bgFocus:      ['#2e3440'],
     content:       ['#7b7b7b'],
     contentAccent: ['#bdbdbd'],
   },
   
   containerNormal: {
-    bgc:       ['#24272d'],
-    bgc2:      ['#282c34'],
+    bg:       ['#24272d'],
+    bg2:      ['#282c34'],
+    bg3:      ['#525354'],
     content:   ['#bdbdbd'],
     content1b: ['#dddddd'],
     content2:  ['#999999'],
     content2b: ['#909090'],
     content3:  ['#7b7b7b'],
     content4:  ['#666666'],
-    shadow:    ['#00000000'],
     contentAccent:   ['#bdbdbd'],
     contentAccent2:  ['#2e343f'],
     contentAccent3:  ['#2e343f'],
+    shadow:    ['#00000000'],
   },
   containerAccent: {
-    bgc:      ['#aaaaaa'],
-    bgc2:     ['#bdbdbd'],
+    bg:      ['#aaaaaa'],
+    bg2:     ['#bdbdbd'],
     content:  ['#000000'],
     content2: ['#000000'],
   },
   
   buttonMain: {
-    bgc:      ['#aaaaaa'],
-    bgcFocus: ['#bbbbbb'],
+    bg:      ['#aaaaaa'],
+    bgFocus: ['#bbbbbb'],
     content:  ['#000000'],
   },
   buttonAccent: {
-    bgc:           ['#999999'],
+    bg:           ['#999999'],
     content:       ['#000000'],
-    bgcFocus:      ['#7b7b7b'],
+    bgFocus:      ['#7b7b7b'],
     contentFocus:  ['#000000'],
   },
   buttonNormal: {
-    bgc:            ['#999999'],
+    bg:            ['#999999'],
     content:        ['#000000'],
-    bgcFocus:       ['#7b7b7b'],
+    bgFocus:       ['#7b7b7b'],
     contentFocus:   ['#000000'],
   },
   buttonSecondary: {
-    bgc:       ['transparent'],
-    bgcFocus:  ['#7b7b7b88'],
+    bg:       ['transparent'],
+    bgFocus:  ['#7b7b7b88'],
     content:   ['#999999'],
   },
   inputRadio: {
-    bgcFocus:  ['#aaaaaa']
+    bgFocus:  ['#aaaaaa']
   },
   buttonTransparent: {
-    bgcFocus: ['#ffffff22'],
+    bgFocus: ['#ffffff22'],
   },
   
   iconGradient: {
@@ -82,31 +83,31 @@ const DarkProps = {
   },
   
   input: {
-    bgc:           ['#282c34'],
+    bg:           ['#282c34'],
     content:       ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
     border:        ['#7b7b7b','#7b7b7b'],
     borderHover:   ['#7b7b7b'],
-    bgcError:      ['#5e252c'],
+    bgError:      ['#5e252c'],
   },
   
   rangePicker: {
-    trackBgc:      ['#2e343f'],
-    barBgc:        ['#bdbdbd'],
-    handleBgc:     ['#000000'],
+    trackBg:      ['#2e343f'],
+    barBg:        ['#bdbdbd'],
+    handleBg:     ['#000000'],
   },
   
   elementDisabled: {
-    bgc:     ['#DCDCDC'],
+    bg:     ['#DCDCDC'],
     content: ['#555555'],
   },
   elementDanger: {
-    bgc:      ['#bbbbbb'],
-    bgcFocus: ['#cccccc'],
+    bg:      ['#bbbbbb'],
+    bgFocus: ['#cccccc'],
     content:  ['#000000'],
   },
   elementError: {
-    bgc:      ['#5e252c'],
+    bg:      ['#5e252c'],
   },
   
   ripple: {
@@ -115,25 +116,25 @@ const DarkProps = {
   },
   
   photos: {
-    bgc:                     ['#ffeeee'],
+    bg:                     ['#ffeeee'],
     content:                 ['#291f1d'],
     borderDrag:              ['#1F8DCD'],
-    highlightFrameBgc:       ['#8B8B8B'],
-    highlightFrameAccentBgc: ['#ffffff'],
+    highlightFrameBg:       ['#8B8B8B'],
+    highlightFrameAccentBg: ['#ffffff'],
   },
   
   bottomSheet: {
-    bgc:    ['#121212'],
+    bg:    ['#121212'],
     handle: ['#8b8b8b'],
   },
   
   toast: {
-    bgc:                  ['#121212'],
+    bg:                  ['#121212'],
     content:              ['#ffffff'],
     content2:             ['#b8b8b8'],
     content3:             ['#ffffff'],
     accentNormal:         ['#bb86fc'],
-    accentLoadingBgc:     ['#e0e0e0'],
+    accentLoadingBg:     ['#e0e0e0'],
     accentLoadingContent: ['#616161'],
     accentInfo:           ['#3498db'],
     accentOk:             ['#07bc0c'],
@@ -154,8 +155,8 @@ export const Dark = {
   type: 'dark',
   name: 'Dark Grey' as const,
   icon: styled.div(themeIconCss({
-    accentColor: DarkProps.buttonAccent.bgc[0],
-    bgcColor1:   DarkProps.page.bgc[0],
-    bgcColor2:   DarkProps.page.bgc[0],
+    accentColor: DarkProps.buttonAccent.bg[0],
+    bgColor1:   DarkProps.page.bg[0],
+    bgColor2:   DarkProps.page.bg[0],
   })),
 } satisfies Theme

@@ -5,8 +5,8 @@ import ThemeType = AppTheme.Type
 
 
 
-export const PinkGrainyGradientBgc = (t: AppTheme.Theme) => css`
-  background-color: ${t.page.bgc[0]};
+export const PinkGrainyGradientBg = (t: AppTheme.Theme) => css`
+  background-color: ${t.page.bg[0]};
   
   background-image: url(${noise}),
     radial-gradient(circle at 1000px 0px, ${getGrainyGradientColors(t.type)[0]} 0% 200px, transparent 300px 100%),
@@ -43,29 +43,29 @@ export const PinkGrainyGradientBgc = (t: AppTheme.Theme) => css`
 
 
 
-const bgcPinkGradientsLight1 = [
+const bgPinkGradientsLight1 = [
   '#f39aba', '#dfc0d2', '#e3d8f6',
   '#dfa4b8', '#ee4723', '#dd8499',
   '#e35d4d', '#e5bed3', '#ed4d2b',
 ]
 
 
-const bgcPinkGradientsDark1 = [
+const bgPinkGradientsDark1 = [
   '#f39aba', '#dfc0d2', '#e3d8f6',
   '#dfa4b8', '#ee4723', '#dd8499',
   '#e35d4d', '#e5bed3', '#ed4d2b',
 ]
-  const bgcPinkGradientsDark2 = [
+  const bgPinkGradientsDark2 = [
   '#992c46', '#bc8245', '#992c46',
   '#bb8396', '#992c46', '#975492',
   '#992c46', '#3e5175', '#992c46',
 ]
-const bgcPinkGradientsDark3 = [
+const bgPinkGradientsDark3 = [
   '#992c46', '#282c34', '#992c46',
   '#282c34', '#992c46', '#282c34',
   '#992c46', '#282c34', '#992c46',
 ]
-  const bgcPinkGradientsDark4 = [
+  const bgPinkGradientsDark4 = [
   '#992c46', '#bc8245', '#992c46',
   '#282c34', '#992c46', '#282c34',
   '#992c46', '#282c34', '#992c46',
@@ -74,7 +74,7 @@ const bgcPinkGradientsDark3 = [
 
 function getGrainyGradientColors(themeType: ThemeType) {
   switch (themeType) {
-    case 'light': default: return bgcPinkGradientsLight1
-    case 'dark': return bgcPinkGradientsDark1
+    case 'light': default: return bgPinkGradientsLight1
+    case 'dark': return bgPinkGradientsDark1
   }
 }

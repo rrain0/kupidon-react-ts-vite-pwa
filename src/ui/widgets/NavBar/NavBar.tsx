@@ -108,7 +108,7 @@ const Frame = styled.nav`
   padding-bottom: var(--bottom-nav-padding-bottom);
   ${row};
   justify-content: space-between;
-  background: ${p=>p.theme.nav.bgc[0]};
+  background: ${p=>p.theme.nav.bg[0]};
 `
 
 

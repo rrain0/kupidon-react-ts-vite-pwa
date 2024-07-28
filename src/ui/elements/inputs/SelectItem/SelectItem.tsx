@@ -40,7 +40,7 @@ type SelectItemProps =
     //isError: boolean
     //onClickAdd: Callback
     onClickEdit: Callback
-    indicatorsSelection: (boolean | 0 | 1 | 2)[]
+    indicatorsSelection: (0 | false | 1 | 2 | true)[]
     children: React.ReactNode
   }>
 
@@ -93,13 +93,12 @@ const SelectItem = React.memo(
               //displayName={'Border'}
               className={SelectItemS.W.e.border.e.name}
             >
-              <Ripple {...rippleProps.ripple} css={RippleS.filled}/>
+              <Ripple {...rippleProps.ripple} />
             </div>
             
-            {isAdd && <AddIconBox>
+            { isAdd && <AddIconBox>
               <PlusIc/>
-            </AddIconBox>
-            }
+            </AddIconBox> }
             
             {!isAdd && <>
               

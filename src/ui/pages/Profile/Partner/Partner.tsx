@@ -26,7 +26,7 @@ import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
-import boyGirlCatShadow from '@img/bgc/boy-girl-cat-shadow.jpg'
+import boyGirlCatShadow from '@img/bg/boy-girl-cat-shadow.jpg'
 
 
 
@@ -126,7 +126,7 @@ export const TopButtonBarFrame = styled.section`
   display: flex;
   align-items: center;
   justify-content: end;
-  background: ${p => p.theme.containerNormal.bgc[0]}cc;
+  background: ${p => p.theme.containerNormal.bg[0]}cc;
   gap: 10px;
   pointer-events: none;
   &>*{ pointer-events: auto; }

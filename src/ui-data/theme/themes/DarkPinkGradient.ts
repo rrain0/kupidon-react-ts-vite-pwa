@@ -12,16 +12,16 @@ const DarkPinkGradientProps = { ...DarkPink,
   
   page: {
     ...DarkPink.page,
-    bgcGradient: ['#992c46','#282c34','#282c34'],
-    //bgc: ['#992c46','#282c34','#994500'],
+    bgGradient: ['#992c46','#282c34','#282c34'],
+    //bg: ['#992c46','#282c34','#994500'],
   },
   statusBar: {
     ...DarkPink.statusBar,
-    bgc: ['#992c46'],
+    bg: ['#992c46'],
   },
   nav: {
     ...DarkPink.nav,
-    bgc: ['#282c34'],
+    bg: ['#282c34'],
   },
   navButton: {
     ...DarkPink.navButton,
@@ -30,7 +30,7 @@ const DarkPinkGradientProps = { ...DarkPink,
   
   inputRadio: {
     ...DarkPink.buttonMain,
-    bgcFocus:  ['#d16780'],
+    bgFocus:  ['#d16780'],
   },
 }
 
@@ -40,9 +40,9 @@ export const DarkPinkGradient = {
   ...DarkPinkGradientProps,
   name: 'Dark Pink Gradient' as const,
   icon: styled.div(themeIconGradientCss({
-    accentColor: DarkPinkGradientProps.buttonAccent.bgc[0],
-    bgcColor1:   DarkPinkGradientProps.buttonAccent.bgc[0],
-    bgcColor2:   DarkPinkGradientProps.page.bgc[0],
+    accentColor: DarkPinkGradientProps.buttonAccent.bg[0],
+    bgColor1:   DarkPinkGradientProps.buttonAccent.bg[0],
+    bgColor2:   DarkPinkGradientProps.page.bg[0],
   })),
 } satisfies Theme
 

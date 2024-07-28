@@ -38,7 +38,7 @@ React.memo(
       <Global styles={t => css`
         body {
           // will be WINDOW background
-          background: ${t.page.bgc[0]};
+          background: ${t.page.bg[0]};
         }
         
         * {

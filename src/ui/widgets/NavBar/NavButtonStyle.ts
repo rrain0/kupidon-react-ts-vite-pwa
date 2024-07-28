@@ -76,12 +76,12 @@ export namespace NavButtonStyle {
     
     // hover
     ${hoverable}{ ${El.btn.thiz('hover')} {
-      background: ${t.navButton.bgcFocus[0]};
+      background: ${t.navButton.bgFocus[0]};
     }}
 
     // focus-visible
     ${El.btn.thiz('focusVisible')} {
-      background: ${t.navButton.bgcFocus[0]};
+      background: ${t.navButton.bgFocus[0]};
     }
   `
   

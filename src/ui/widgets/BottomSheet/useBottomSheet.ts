@@ -17,7 +17,7 @@ import { CssParserU } from 'src/util/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
 import PartialUndef = TypeU.PartialUndef
-import { useStateAndRef } from 'src/util/react-state-and-ref/useStateAndRef.ts'
+import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import Setter = TypeU.Setter
 import findLastBy3 = ArrayU.findLastBy3
 import exists = TypeU.exists

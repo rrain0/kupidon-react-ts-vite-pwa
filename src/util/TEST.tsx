@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import nextUp from '@img/test/NEXT UP.jpg'
+import { ArrayU } from 'src/util/common/ArrayU'
+import { TypeU } from 'src/util/common/TypeU'
+import Callback = TypeU.Callback
+import lastIndex = ArrayU.lastIndex
 
 
 
@@ -49,6 +53,36 @@ const MyImgUsage = () => {
   return (
     <MyImgWithSrc src={nextUp} />
   )
+}
+
+
+
+
+function onEventTest() {
+  
+  const prevValues: any[] = []
+  
+  
+  const useEvent = (onEvent: Callback, deps?: any[] | undefined) => {
+    
+    const [idx] = useState(prevValues.length)
+    
+    useEffect(() => {
+      prevValues.push([])
+      return () => void prevValues.splice(lastIndex(prevValues), 1)
+    }, [])
+    
+    
+    useEffect(() => {
+      const prev = prevValues[idx]
+      if (!ArrayU.eq(prev, deps)) {
+        prevValues[idx] = deps
+        onEvent()
+      }
+    }, deps)
+    
+  }
+  
 }
 
 
