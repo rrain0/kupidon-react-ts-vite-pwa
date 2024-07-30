@@ -12,47 +12,49 @@ import GiftBoxGradIc = SvgGradIcons.GiftBoxGradIc
 
 
 
-
 const overlayName = 'birthDate'
 
 
-const ProfileBirthDateOption =
-React.memo(
-(props: ValidationWrapRenderProps<string>)=>{
-  const titleText = useUiValues(TitleUiText)
-  const placeholderText = useUiValues(PlaceholderUiText)
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  
-  
-  return <>
-    <OptionItem
-      icon={<GiftBoxGradIc />}
-      title={titleText.birthDate}
-      value={props.value}
-      data-error={props.highlight}
-      onClick={open}
-    />
+const ProfileBirthDateOption = React.memo(
+  (props: ValidationWrapRenderProps<string>) => {
+    const titleText = useUiValues(TitleUiText)
+    const placeholderText = useUiValues(PlaceholderUiText)
     
-    <ModalInput
-      title={titleText.birthDate}
-      isOpen={isOpen}
-      onClose={close}
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    
+    return (
+      <>
+        <OptionItem
+          icon={<GiftBoxGradIc />}
+          title={titleText.birthDate}
+          value={props.value}
+          data-error={props.highlight}
+          onClick={open}
+        />
+        
+        <ModalInput
+          title={titleText.birthDate}
+          isOpen={isOpen}
+          onClose={close}
+          onClear={() => props.setValue('')}
+          
+          autoFocus
+          inputMode="numeric"
+          placeholder={placeholderText.birthDate.toLowerCase()}
+          {...props.inputProps}
+          hasError={props.highlight}
+          onBlur={ev => {
+            ev.currentTarget.focus()
+            props.inputProps.onBlur()
+          }}
+        />
       
-      autoFocus
-      inputMode="numeric"
-      placeholder={placeholderText.birthDate.toLowerCase()}
-      {...props.inputProps}
-      hasError={props.highlight}
-      onBlur={ev => {
-        ev.currentTarget.focus()
-        props.inputProps.onBlur()
-      }}
-    />
-  
-  </>
-})
+      </>
+    )
+  }
+)
 export default ProfileBirthDateOption
 
 

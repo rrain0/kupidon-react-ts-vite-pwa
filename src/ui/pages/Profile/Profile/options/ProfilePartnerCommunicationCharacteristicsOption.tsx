@@ -15,9 +15,8 @@ import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetD
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import ModalCheckbox from 'src/ui/widgets/modals/ModalCheckbox/ModalCheckbox.tsx'
 import { ArrayU } from 'src/util/common/ArrayU'
-import GenderGradIc = SvgGradIcons.GenderGradIc
+import CommunicationTwoPeopleGradIc = SvgGradIcons.CommunicationTwoPeopleGradIc
 import col = EmotionCommon.col
 import toggleTo = ArrayU.toggleTo
 
@@ -95,7 +94,7 @@ React.memo(
     <>
       
       <OptionItem
-        //icon={<GenderGradIc />}
+        icon={<CommunicationTwoPeopleGradIc />}
         title={text.partnerCommunicationCharacteristics}
         value={value}
         onClick={open}

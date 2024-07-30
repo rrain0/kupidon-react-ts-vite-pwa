@@ -1,3 +1,4 @@
+import Input from 'src/ui/elements/inputs/Input/Input'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
@@ -13,54 +14,60 @@ import Textarea, { TextareaProps, TextareaRefElement } from 'src/ui/elements/Tex
 import { TextareaStyle } from 'src/ui/elements/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
+import Puro = TypeU.Puro
 
 
 
 
-export type ModalTextareaCustomProps = {
+export type ModalTextareaProps = React.ComponentPropsWithoutRef<typeof Textarea> & Puro<{
   isOpen: boolean
   onClose: Callback
+  onClear: Callback
   title: string
-}
-export type ModalTextareaForwardRefProps = TextareaProps
-export type ModalTextareaRefElement = TextareaRefElement
-export type ModalTextareaProps = ModalTextareaCustomProps & ModalTextareaForwardRefProps
+}>
 
 
 
-const ModalTextarea =
-React.memo(
-React.forwardRef<ModalTextareaRefElement, ModalTextareaProps>(
-(props, forwardedRef)=>{
-  const {
-    isOpen, onClose, title,
-    ...restProps
-  } = props
-  
-  const actionText = useUiValues(ActionUiText)
-  
-  
-  return isOpen && <ModalPortal>
-    <UserActionsConsumer>
-      <Modal css={ModalElement.modalStyle} onClick={onClose}>
+const ModalTextarea = React.memo(
+  React.forwardRef<TextareaRefElement, ModalTextareaProps>(
+  (props, forwardedRef) => {
+    const {
+      isOpen, onClose, onClear, title,
+      ...restProps
+    } = props
+    
+    const actionText = useUiValues(ActionUiText)
+    
+    
+    if (isOpen) return (
+      <ModalPortal>
         <UserActionsConsumer>
-          <Card2 css={ModalElement.card2Style}>
-            <ItemLabel>{title}</ItemLabel>
-            <Textarea css={TextareaStyle.small}
-              {...restProps}
-              ref={forwardedRef}
-            />
-            <ModalElement.DialogButtons>
-              <Button css={ButtonStyle.textRoundedNormalNormal}
-                onClick={onClose}
-                children={actionText.ok.toLowerCase()}
-              />
-            </ModalElement.DialogButtons>
-          </Card2>
+          <Modal css={ModalElement.modalStyle} onClick={onClose}>
+            <UserActionsConsumer>
+              <Card2 css={ModalElement.card2Style}>
+                <ItemLabel>{title}</ItemLabel>
+                <Textarea css={TextareaStyle.small}
+                  {...restProps}
+                  ref={forwardedRef}
+                />
+                <ModalElement.DialogButtons>
+                  {onClear && <Button css={ButtonStyle.textRoundedNormalNormal}
+                    onClick={onClear}
+                    children={actionText.clear}
+                  />}
+                  <Button css={ButtonStyle.textUppercaseRoundedNormalNormal}
+                    onClick={onClose}
+                    children={actionText.ok}
+                  />
+                </ModalElement.DialogButtons>
+              </Card2>
+            </UserActionsConsumer>
+          </Modal>
         </UserActionsConsumer>
-      </Modal>
-    </UserActionsConsumer>
-  </ModalPortal>
-}))
+      </ModalPortal>
+    )
+    return undefined
+  })
+)
 export default ModalTextarea
 

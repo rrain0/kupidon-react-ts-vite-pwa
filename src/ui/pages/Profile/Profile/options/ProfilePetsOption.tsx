@@ -9,7 +9,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import GenderGradIc = SvgGradIcons.GenderGradIc
+import BengalCatGradIc = SvgGradIcons.BengalCatGradIc
 
 
 
@@ -37,7 +37,7 @@ React.memo(
   const [selected, setSelected] = useState('')
   
   
-  const genderOptions = useMemo(
+  const options = useMemo(
     ()=>[
       {
         value: '1',
@@ -62,12 +62,12 @@ React.memo(
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = genderOptions.find(opt => opt.value === selected)?.text ?? ''
+  const value = options.find(opt => opt.value === selected)?.text ?? ''
   
   
   return <>
     <OptionItem
-      //icon={<GenderGradIc />}
+      icon={<BengalCatGradIc />}
       title={'Отношение к домашним животным'}
       value={value}
       onClick={open}
@@ -77,7 +77,7 @@ React.memo(
       isOpen={isOpen}
       close={close}
       title={'Отношение к домашним животным'}
-      options={genderOptions}
+      options={options}
       value={selected}
       onSelect={setSelected}
     />

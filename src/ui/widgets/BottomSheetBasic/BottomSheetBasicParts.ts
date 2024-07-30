@@ -9,7 +9,7 @@ import center = EmotionCommon.center
 
 export namespace BottomSheetBasicParts {
   
-  export const headerStyle = (t: AppTheme.Theme)=>css`
+  export const headerStyle = (t: AppTheme.Theme) => css`
     background: ${t.bottomSheet.bg[0]};
     border-radius: 16px 16px 0 0;
     color: ${t.page.content2[0]};
@@ -20,20 +20,21 @@ export namespace BottomSheetBasicParts {
     touch-action: none;
     cursor: grab;
   `
-  export const headerHandleStyle = (t: AppTheme.Theme)=>css`
+  export const headerHandleStyle = (t: AppTheme.Theme) => css`
     width: 44px;
     height: 4px;
     border-radius: 2px;
     background: ${t.bottomSheet.handle[0]};
   `
-  export const headerTextStyle = (t: AppTheme.Theme)=>css`
+  export const headerTextStyle = (t: AppTheme.Theme) => css`
     ${center};
+    text-align: center;
     min-height: 20px;
   `
   
   
   
-  export const bodyStyle = (t: AppTheme.Theme)=>css`
+  export const bodyStyle = (t: AppTheme.Theme) => css`
     display: flex;
     place-items: center;
     overflow: hidden;
@@ -43,7 +44,7 @@ export namespace BottomSheetBasicParts {
   
   
   
-  export const scrollableContentStyle = (t: AppTheme.Theme)=>css`
+  export const scrollableContentStyle = (t: AppTheme.Theme) => css`
     width: 100%;
     padding: 0 10px 10px;
     ${col};

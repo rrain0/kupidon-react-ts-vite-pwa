@@ -40,7 +40,7 @@
     "paths": {
       "*": [
         "src/*",
-        "lib-types-overrides/*"
+        "node_modules_overrides/*"
       ],
       
       "src/*": ["src/*"],
@@ -53,5 +53,5 @@
       "@util/*": ["src/util/*"]
     }
   },
-  "include": ["src", "lib-types-overrides"],
+  "include": ["src", "node_modules_overrides"],
 }

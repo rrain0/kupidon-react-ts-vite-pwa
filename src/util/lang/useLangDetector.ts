@@ -12,12 +12,12 @@ export const useLangDetector = (): NonEmptyArr<string> => {
   //const [browserLangs, setBrowserLangs] = useState(["ja-JP"])
   
   
-  useLayoutEffect(()=>{
-    const onLangChange = ()=>setBrowserLangs(navigator.languages)
-    //const onLangChange = ()=>setBrowserLangs(["ja-JP"])
-    window.addEventListener('languagechange',onLangChange)
-    return ()=>window.removeEventListener('languagechange',onLangChange)
-  },[])
+  useLayoutEffect(() => {
+    const onLangChange = () => setBrowserLangs(navigator.languages)
+    //const onLangChange = () => setBrowserLangs(["ja-JP"])
+    window.addEventListener('languagechange', onLangChange)
+    return () => window.removeEventListener('languagechange', onLangChange)
+  }, [])
   
   
   return browserLangs as NonEmptyArr<string>

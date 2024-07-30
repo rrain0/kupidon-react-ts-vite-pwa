@@ -7,6 +7,7 @@ import Elem = WidgetStyle.Elem
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
 import CssAttr = WidgetStyle.CssAttr
+import abs = EmotionCommon.abs
 
 
 
@@ -14,7 +15,6 @@ import CssAttr = WidgetStyle.CssAttr
 export namespace SelectItemS {
   
   
-  import abs = EmotionCommon.abs
   export const W = (() => {
     const frame = new Elem('rrainuiSelectItemFrame', {
       normal: CssPseudo.empty,

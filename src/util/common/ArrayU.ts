@@ -205,6 +205,11 @@ export namespace ArrayU {
   
   
   
+  export const distinct = <T>(arr: T[]): T[] => [...new Set(arr)]
+  
+  
+  
+  
   export const diff = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
    comparator: ComparatorEq<T1, T2> = defaultComparatorEq

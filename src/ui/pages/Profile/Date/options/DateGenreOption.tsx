@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Gender } from 'src/api/model/Gender.ts'
-import { Option } from 'src/ui-data/models/Option.ts'
+import { Option, OPTION_CUSTOM, OPTION_NOTHING } from 'src/ui-data/models/Option.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import SelectItem from 'src/ui/elements/inputs/SelectItem/SelectItem'
@@ -14,6 +14,8 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import ModalSingleSelectList
+  from 'src/ui/widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -41,7 +43,7 @@ React.memo(
   const [selected, setSelected] = useState('')
   
   
-  const [finalCustomText, setFinalCustomText] = useState('')
+  const [customText, setCustomText] = useState('')
   
   const options = useMemo(
     () => [
@@ -76,30 +78,27 @@ React.memo(
         text: 'Фотографический жанр: «Рекомендация красивых мест для фотосессий. '
           + 'Советы по организации фотосафари или фотовыставок».',
       }, {
-        value: 'custom',
-        text: finalCustomText,
+        value: 'CUSTOM',
+        text: '',
       }, {
         value: '',
-        text: text.notSelected,
+        text: '',
       },
     ],
-    [text, finalCustomText]
+    [text]
   )
   
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = options.find(opt => opt.value === selected)?.text ?? ''
+  const value = (() => {
+    const opt = options.find(opt => opt.value === selected)!
+    if (opt.value === OPTION_NOTHING) return text.notSelected
+    if (opt.value === OPTION_CUSTOM) return customText
+    return opt.text
+  })()
   
   
-  const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayEditCustomName)
-  const [customText, setCustomText] = useState(finalCustomText)
-  const onEditClose = () => {
-    closeEdit()
-    setFinalCustomText(customText)
-    if (customText) setSelected('custom')
-    if (selected === 'custom' && !customText) setSelected('')
-  }
   
   return (
     <>
@@ -111,50 +110,16 @@ React.memo(
       />
       
       
-      <UseBottomSheetState
-        isOpen={!!isOpen}
+      <ModalSingleSelectList
+        isOpen={isOpen}
         close={close}
-      >{ sheetProps => (
-        <ModalPortal>
-          <BottomSheetDialogBasic
-            {...sheetProps.sheetProps}
-            header={'Жанр свидания'}
-          >
-            <div css={selectItemsContainer}>
-              {options.map(opt => (
-                <SelectItem
-                  css={SelectItemS.normal}
-                  key={opt.value}
-                  onClick={() => {
-                    if (opt.value !== 'custom') setSelected(opt.value)
-                    if (opt.value === 'custom' && opt.text) setSelected(opt.value)
-                    if (opt.value === 'custom' && !opt.text) openEdit()
-                  }}
-                  onClickEdit={openEdit}
-                  isSelected={opt.value === selected}
-                  isAdd={opt.value === 'custom' && !opt.text}
-                  isEdit={opt.value === 'custom'}
-                  indicatorsSelection={opt.value === selected ? [true] : [false]}
-                >
-                  {opt.text}
-                </SelectItem>
-              ))}
-            </div>
-          
-          </BottomSheetDialogBasic>
-        </ModalPortal>
-      )}</UseBottomSheetState>
-      
-      
-      <ModalInput
-        isOpen={isEditOpen}
-        onClose={onEditClose}
-        onClear={() => setCustomText('')}
-        value={customText}
-        onChange={ev => setCustomText(ev.currentTarget.value)}
-        title={'Свой жанр свидания'}
+        title={'Жанр свидания'}
+        options={options}
+        selected={selected}
+        setSelected={setSelected}
+        customText={customText}
+        setCustomText={setCustomText}
       />
-      
       
     </>
   )
@@ -162,9 +127,3 @@ React.memo(
 export default DateGenreOption
 
 
-
-const selectItemsContainer = css`
-  ${col};
-  padding-bottom: 20px;
-  gap: 10px;
-`

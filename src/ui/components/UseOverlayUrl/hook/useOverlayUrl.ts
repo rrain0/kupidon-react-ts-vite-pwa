@@ -11,7 +11,7 @@ export const useOverlayUrl = (overlayName: string) => {
   
   const [isOpen, isLastOpen] = useMemo(
     // ...?overlay=dialog1&overlay=bottomSheet2&...
-    ()=>{
+    () => {
       const overlays = search.getAll(AppRoutes.overlayParam)
       return [
         overlays.includes(overlayName),
@@ -53,5 +53,5 @@ export const useOverlayUrl = (overlayName: string) => {
     }
   }, [needToClose])
   
-  return { isOpen, open, close: setNeedToCloseTrue}
+  return { isOpen, open, close: setNeedToCloseTrue }
 }

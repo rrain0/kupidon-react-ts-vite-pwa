@@ -15,13 +15,12 @@ import RulerVerticalGradIc = SvgGradIcons.RulerVerticalGradIc
 const overlayName = 'height'
 
 
-const ProfileHeightOption =
-React.memo(
-(props: ValidationWrapRenderProps<string>)=>{
+const ProfileHeightOption = React.memo(
+(props: ValidationWrapRenderProps<string>) => {
   const titleText = useUiValues(TitleUiText)
   const optionText = useUiValues(OptionUiText)
   
-  const text = useMemo(()=>({
+  const text = useMemo(() => ({
     height: titleText.height,
     heightL: titleText.height.toLowerCase(),
     notSpecified: optionText.notSpecified,
@@ -37,37 +36,40 @@ React.memo(
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   
-  return <>
-    <OptionItem
-      icon={<RulerVerticalGradIc />}
-      title={text.height}
-      value={textValue(height)}
-      //value={props.value}
-      //data-error={props.highlight}
-      onClick={open}
-    />
-    
-    <ModalInput
-      title={text.height}
-      isOpen={isOpen}
-      onClose={close}
+  return (
+    <>
+      <OptionItem
+        icon={<RulerVerticalGradIc />}
+        title={text.height}
+        value={textValue(height)}
+        //value={props.value}
+        //data-error={props.highlight}
+        onClick={open}
+      />
       
-      autoFocus
-      type="number"
-      placeholder={text.heightL}
+      <ModalInput
+        title={text.height}
+        isOpen={isOpen}
+        onClose={close}
+        onClear={() => props.setValue('')}
+        
+        autoFocus
+        type='number'
+        placeholder={text.heightL}
+        
+        value={height}
+        onChange={ev => setHeight(ev.currentTarget.value)}
+        
+        /* {...props.inputProps}
+        hasError={props.highlight}
+        onBlur={ev => {
+          ev.currentTarget.focus()
+          props.inputProps.onBlur()
+        }} */
+      />
       
-      value={height}
-      onChange={ev=>setHeight(ev.currentTarget.value)}
-      
-      /* {...props.inputProps}
-      hasError={props.highlight}
-      onBlur={ev => {
-        ev.currentTarget.focus()
-        props.inputProps.onBlur()
-      }} */
-    />
-    
-  </>
+    </>
+  )
 })
 export default ProfileHeightOption
 

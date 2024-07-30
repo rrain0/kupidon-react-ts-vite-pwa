@@ -1,5 +1,6 @@
 
 
 export const Sizes = {
-  gap: 10,
+  g: 10,
+  pb: 20,
 } as const

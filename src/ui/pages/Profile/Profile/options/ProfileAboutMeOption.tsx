@@ -11,43 +11,45 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 const overlayName = 'aboutMe'
 
 
-const ProfileAboutMeOption =
-React.memo(
-(props: ValidationWrapRenderProps<string>)=>{
-  const titleText = useUiValues(TitleUiText)
-  const placeholderText = useUiValues(PlaceholderUiText)
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  
-  
-  return <>
-    <EditableTextCard
-      title={titleText.aboutMe}
-      text={props.value}
-      placeholder={placeholderText.aboutMe}
-      data-error={props.highlight}
-      onClick={open}
-    />
+const ProfileAboutMeOption = React.memo(
+  (props: ValidationWrapRenderProps<string>) => {
+    const titleText = useUiValues(TitleUiText)
+    const placeholderText = useUiValues(PlaceholderUiText)
     
-    <ModalTextarea
-      title={titleText.aboutMe}
-      isOpen={isOpen}
-      onClose={close}
-      
-      autoFocus
-      placeholder={titleText.aboutMe.toLowerCase()}
-      {...props.inputProps}
-      hasError={props.highlight}
-      onBlur={ev => {
-        ev.currentTarget.focus()
-        props.inputProps.onBlur()
-      }}
-    />
     
-  </>
-})
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    
+    return (
+      <>
+        <EditableTextCard
+          title={titleText.aboutMe}
+          text={props.value}
+          placeholder={placeholderText.aboutMe}
+          data-error={props.highlight}
+          onClick={open}
+        />
+        
+        <ModalTextarea
+          title={titleText.aboutMe}
+          isOpen={isOpen}
+          onClose={close}
+          onClear={() => props.setValue('')}
+          
+          autoFocus
+          placeholder={titleText.aboutMe.toLowerCase()}
+          {...props.inputProps}
+          hasError={props.highlight}
+          onBlur={ev => {
+            ev.currentTarget.focus()
+            props.inputProps.onBlur()
+          }}
+        />
+    </>
+    )
+  }
+)
 export default ProfileAboutMeOption
 
 

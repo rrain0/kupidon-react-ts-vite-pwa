@@ -675,6 +675,15 @@ export namespace ButtonStyle {
     ${textRoundedNormal};
     ${textRoundedAddColorNormal(t)};
   `
+  // type: textUppercase, shape: rounded, size: normal, color: normal
+  export const textUppercaseRoundedNormalNormal = (t: AppTheme.Theme) => css`
+    ${textRoundedNormal};
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      text-transform: uppercase;
+    }
+    ${textRoundedAddColorNormal(t)};
+  `
   
   
   

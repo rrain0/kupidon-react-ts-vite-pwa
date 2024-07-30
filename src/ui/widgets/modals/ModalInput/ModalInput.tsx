@@ -53,11 +53,11 @@ const ModalInput = React.memo(
                 <ModalElement.DialogButtons>
                   {onClear && <Button css={ButtonStyle.textRoundedNormalNormal}
                     onClick={onClear}
-                    children={actionText.clear.toLowerCase()}
+                    children={actionText.clear}
                   />}
-                  <Button css={ButtonStyle.textRoundedNormalNormal}
+                  <Button css={ButtonStyle.textUppercaseRoundedNormalNormal}
                     onClick={onClose}
-                    children={actionText.ok.toLowerCase()}
+                    children={actionText.ok}
                   />
                 </ModalElement.DialogButtons>
               </Card2>

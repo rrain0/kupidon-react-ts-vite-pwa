@@ -8,10 +8,12 @@ import exists = TypeU.exists
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 
 
+import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
 import BowArrowGradSvg from '@ic/gradient/bow-arrow-grad.svg?react'
 
 import CardsHeartGradSvg from '@ic/gradient/cards-heart-grad.svg?react'
 import ChatRoundGradSvg from '@ic/gradient/chat-round-grad.svg?react'
+import CommunicationTwoPeopleGradSvg from 'src/res/ic/gradient/communication-two-people-grad.svg?react'
 
 import EducationGradSvg from '@ic/gradient/education-grad.svg?react'
 
@@ -77,28 +79,30 @@ export namespace SvgGradIcons {
     const firstColorProp = SvgGradIconsStyle.El.root.props.firstColor
     const secondColorProp = SvgGradIconsStyle.El.root.props.secondColor
     
-    return <SvgComponent
-      css={css`
-        width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-        height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-        //max-width: 100%;
-        //max-height: 100%;
-        ${firstColorProp.name}: ${firstColor || firstColorProp.var('black')};
-        ${secondColorProp.name}: ${secondColor || secondColorProp.var('black')};
-      `}
-      width={w}
-      height={h}
-      className={clsx(className, SvgGradIconsStyle.El.icon.name)}
-      {...restProps}
-      ref={forwardedRef}
-    />
+    return (
+      <SvgComponent
+        css={css`
+          width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+          height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+          //max-width: 100%;
+          //max-height: 100%;
+          ${firstColorProp.name}: ${firstColor || firstColorProp.var('black')};
+          ${secondColorProp.name}: ${secondColor || secondColorProp.var('black')};
+        `}
+        width={w}
+        height={h}
+        className={clsx(className, SvgGradIconsStyle.El.icon.name)}
+        {...restProps}
+        ref={forwardedRef}
+      />
+    )
   }))
   
   
   
   
   export type SimpleSvgIconProps = BaseGradSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps
-  function generateSimpleSvgIcon(SvgComponent: SvgComponentType){
+  function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
     return (
     React.memo(
     React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
@@ -111,10 +115,12 @@ export namespace SvgGradIcons {
   
   // Icons
   
+  export const BengalCatGradIc = generateSimpleSvgIcon(BengalCatGradSvg)
   export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
   
   export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
   export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
+  export const CommunicationTwoPeopleGradIc = generateSimpleSvgIcon(CommunicationTwoPeopleGradSvg)
   
   export const EducationGradIc = generateSimpleSvgIcon(EducationGradSvg)
   
