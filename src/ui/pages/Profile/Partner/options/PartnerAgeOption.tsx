@@ -1,6 +1,5 @@
 import { RangeU } from 'src/util/common/RangeU'
 import { ReactU } from 'src/util/common/ReactU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
 import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
 import numeral from 'numeral'
 import React, { useState } from 'react'
@@ -29,7 +28,7 @@ const overlayName = 'partnerAge'
 
 const PartnerAgeOption =
 React.memo(
-(props: ValidationWrapRenderProps<UserValues['partnerAge']>)=>{
+(props: ValidationWrapRenderProps<UserValues['partnerAge']>) => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
@@ -129,7 +128,7 @@ export default PartnerAgeOption
 
 function mapWidgetRangeToDataRange(range: NumRange): NumRangeEndNullable {
   return [
-    function(){
+    function() {
       const r0 = +numeral(range[0]).format('0')
       if (r0 <= ageMinMax[0]) return ageMinMax[0]
       return r0
@@ -143,11 +142,11 @@ function mapWidgetRangeToDataRange(range: NumRange): NumRangeEndNullable {
 }
 function mapDataRangeToWidgetRange(dataRange: NumRangeEndNullable): NumRange {
   return [
-    function(){
+    function() {
       if (dataRange[0] < ageMinMax[0]) return ageMinMax[0]
       return dataRange[0]
     }(),
-    function(){
+    function() {
       if (dataRange[1] === null) return ageMinMax[1]
       if (dataRange[1] > ageMinMax[1]) return ageMinMax[1]
       return dataRange[1]

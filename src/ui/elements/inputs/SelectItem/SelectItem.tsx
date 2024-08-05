@@ -96,38 +96,68 @@ const SelectItem = React.memo(
               <Ripple {...rippleProps.ripple} />
             </div>
             
-            { isAdd && <AddIconBox>
+            { isAdd && <div
+              //displayName={'AddIconBox'}
+              className={SelectItemS.W.e.addIconBox.e.name}
+            >
               <PlusIc/>
-            </AddIconBox> }
+            </div> }
             
             {!isAdd && <>
               
-              <IndicatorFrame>
-                <IndicatorBox>
+              <div
+                //displayName={'IndicatorFrame'}
+                className={SelectItemS.W.e.indicatorFrame.e.name}
+              >
+                <div
+                  //displayName={'IndicatorBox'}
+                  className={SelectItemS.W.e.indicatorBox.e.name}
+                >
                   {indicators.map((it, i) => (
                     <React.Fragment key={`${i} ${it}`}>
                       {(() => {
-                        if (it === 0 || it === false) return <Indicator0/>
-                        if (it === 1) return <Indicator1/>
-                        if (it === 2 || it === true) return <Indicator2/>
+                        if (it === 0 || it === false) return (
+                          <div
+                            //displayName={'Indicator0'}
+                            className={SelectItemS.W.e.indicator0.e.name}
+                          />
+                        )
+                        if (it === 1) return (
+                          <div
+                            //displayName={'Indicator1'}
+                            className={SelectItemS.W.e.indicator1.e.name}
+                          />
+                        )
+                        if (it === 2 || it === true) return (
+                          <div
+                            //displayName={'Indicator2'}
+                            className={SelectItemS.W.e.indicator2.e.name}
+                          />
+                        )
                       })()}
                     </React.Fragment>
                   ))}
-                </IndicatorBox>
-              </IndicatorFrame>
+                </div>
+              </div>
               
-              <Content>
-                <TextBox>
-                  <Text>{children}</Text>
-                </TextBox>
-              </Content>
+              <div
+                //displayName={'Content'}
+                className={SelectItemS.W.e.content.e.name}
+              >
+                {children}
+              </div>
               
               {isEdit && <UserActionsConsumer>
                 <UseRipple>{rippleProps => (
-                  <PencilIconBox onClick={onClickEdit} {...rippleProps.target}>
+                  <div
+                    //displayName={'EditBtn'}
+                    className={SelectItemS.W.e.editBtn.e.name}
+                    onClick={onClickEdit}
+                    {...rippleProps.target}
+                  >
                     <Ripple {...rippleProps.ripple} css={RippleS.icon}/>
-                    <PencilWrite2Ic/>
-                  </PencilIconBox>
+                    <PencilWrite2Ic />
+                  </div>
                 )}</UseRipple>
               </UserActionsConsumer>}
             
@@ -143,80 +173,8 @@ export default SelectItem
 
 
 
-const AddIconBox = styled.div`
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  
-  place-self: center;
-  //background: #ff000011;
-  ${center};
-  padding: 2px;
-`
 
 
-
-const IndicatorFrame = styled.div`
-  pointer-events: none;
-  ${abs};
-  ${colC};
-  padding: 6px;
-`
-const IndicatorBox = styled.div`
-  width: 75%;
-  align-self: center;
-  height: 6px;
-  ${row};
-  gap: 6px;
-`
-const Indicator0 = styled.div`
-  flex: 1;
-  height: 100%;
-  border-radius: 999999px;
-  background: #dddddd;
-`
-const Indicator1 = styled(Indicator0)`
-  background: #999999;
-`
-const Indicator2 = styled(Indicator0)`
-  background: #444444;
-`
-
-
-
-const PencilIconBox = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--br);
-  ${center};
-  padding: 11px;
-  overflow: hidden;
-  
-  ${SvgIconsStyle.El.icon.props.color.set('#444444')}
-`
-
-
-
-
-const Content = styled.div`
-  width: 100%;
-  min-height: 100%;
-  padding: 20px 26px;
-  ${center};
-`
-const TextBox = styled.div`
-  width: 100%;
-  min-height: 100%;
-  ${center};
-`
-const Text = styled.div`
-  align-self: center;
-  //background: #ffff0022;
-  overflow-wrap: anywhere;
-`
 
 
 

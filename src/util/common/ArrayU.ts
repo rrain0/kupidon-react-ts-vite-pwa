@@ -36,7 +36,7 @@ export namespace ArrayU {
     if (!arr.length) throw new Error("Array is empty, can't get last element.")
     return arr[arr.length-1]
   }
-  export const lastOr = <T1, T2>(arr: T1[], orElse: T2): T1|T2 => {
+  export const lastOr = <T1, T2>(arr: T1[], orElse: T2): T1 | T2 => {
     if (!arr.length) return orElse
     return arr[arr.length-1]
   }

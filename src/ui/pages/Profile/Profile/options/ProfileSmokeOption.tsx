@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from 'react'
-import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
-import ModalRadio from 'src/ui/widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import ModalSingleSelectList
+  from 'src/ui/widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import GenderGradIc = SvgGradIcons.GenderGradIc
+import SmokeCigaretteGradIc = SvgGradIcons.SmokeCigaretteGradIc
 
 
 
@@ -25,11 +25,11 @@ const overlayName = 'smoke'
 
 const ProfileSmokeOption =
 React.memo(
-()=>{
+() => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
-  const text = useMemo(()=>({
+  const text = useMemo(() => ({
     notSelected: optionText.notSelected,
   }), [titleText, optionText])
   
@@ -37,30 +37,30 @@ React.memo(
   const [selected, setSelected] = useState('')
   
   
-  const genderOptions = useMemo(
-    ()=>[
+  const options = useMemo(
+    () => [
       {
         value: '1',
         text: 'Абсолютно не курю и негативно отношусь к курению',
-      },{
+      }, {
         value: '2',
         text: 'Не курю и предпочитаю партнера, который также не курит',
-      },{
+      }, {
         value: '3',
         text: 'Не курю, но меня не беспокоит, если партнер курит социально',
-      },{
+      }, {
         value: '4',
         text: 'Курю редко, только на особых случаях',
-      },{
+      }, {
         value: '5',
         text: 'Курю периодически, но не ежедневно',
-      },{
+      }, {
         value: '6',
         text: 'Курю регулярно, но не считаю это проблемой',
-      },{
+      }, {
         value: '',
         text: text.notSelected,
-      }
+      },
     ],
     [text]
   )
@@ -68,26 +68,29 @@ React.memo(
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = genderOptions.find(opt => opt.value === selected)?.text ?? ''
+  const value = options.find(opt => opt.value === selected)?.text ?? ''
   
   
-  return <>
-    <OptionItem
-      //icon={<GenderGradIc />}
-      title={'Отношение к курению'}
-      value={value}
-      onClick={open}
-    />
-    
-    <ModalRadio
-      isOpen={isOpen}
-      close={close}
-      title={'Отношение к курению'}
-      options={genderOptions}
-      value={selected}
-      onSelect={setSelected}
-    />
-  </>
+  return (
+    <>
+      <OptionItem
+        icon={<SmokeCigaretteGradIc />}
+        title={'Отношение к курению'}
+        value={value}
+        onClick={open}
+      />
+      
+      
+      <ModalSingleSelectList
+        isOpen={isOpen}
+        close={close}
+        title={'Отношение к курению'}
+        options={options}
+        selected={selected}
+        setSelected={setSelected}
+      />
+    </>
+  )
 })
 export default ProfileSmokeOption
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import contents = EmotionCommon.contents
 import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
-import ChildrenProps = ReactU.ChildrenProps
+import ChildrenProps = ReactU.Children
 
 
 

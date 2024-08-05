@@ -34,12 +34,12 @@ export type ValidationWrapRenderProps<V> = {
   getChecked: Mapper<V, boolean>
   inputProps: {
     value: V
-    onChange: Callback1<React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>>
+    onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>
     onBlur: Callback
   }
   radioInputProps: (value:V)=>({
     checked: boolean,
-    onChange: Callback1<React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>>,
+    onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>,
   })
 }
   
@@ -58,7 +58,7 @@ export type ValidationWrapProps
 
 const ValidationWrap =
 <Vs extends Values, F extends keyof Vs>
-(props: ValidationWrapProps<Vs,F>) => {
+(props: ValidationWrapProps<Vs, F>) => {
   const {
     fieldName,
     values,
@@ -74,71 +74,71 @@ const ValidationWrap =
   
   
   const [highlight, setHighlight] = useState(false)
-  useEffect(()=>{
+  useEffect(() => {
     setHighlight(false)
     const stale = [false] as [boolean]
     
     const fs = failures
-      .filter(f=>f.highlight && f.errorFields.includes(fieldName))
-      .filter(f=>{
-        const usedIdx = f.usedFields.findIndex(f=>f===fieldName)
+      .filter(f => f.highlight && f.errorFields.includes(fieldName))
+      .filter(f => {
+        const usedIdx = f.usedFields.findIndex(f => f===fieldName)
         if (usedIdx>=0) return f.usedValues[usedIdx]===value
-        const fromServerIdx = f.usedFields.findIndex(f=>f==='fromServer')
-        if (fromServerIdx>=0){
+        const fromServerIdx = f.usedFields.findIndex(f => f === 'fromServer')
+        if (fromServerIdx>=0) {
           const fromServerUsedValues = f.usedValues[fromServerIdx].values as Vs
           return f.errorFields
-            .filter(ef=>ef!=='fromServer' && f.errorFields.includes(ef))
-            .every(ef=>values[ef]===fromServerUsedValues[ef])
+            .filter(ef => ef!=='fromServer' && f.errorFields.includes(ef))
+            .every(ef => values[ef]===fromServerUsedValues[ef])
         }
         return false
       })
-    awaitDelay(fs, stale, ()=>setHighlight(true))
+    awaitDelay(fs, stale, () => setHighlight(true))
     
-    return ()=>{ stale[0]=true }
-  },[failures, fieldName, value, values])
+    return () => { stale[0] = true }
+  }, [failures, fieldName, value, values])
   
   
   const setValueEffectEvent = useEffectEvent(
-    (value: ValueOrUpdater<Vs[F]>)=>{
-      setFailures(f=>{
-        const update = f.filter(f=>(f.notify || f.highlight)
+    (value: ValueOrUpdater<Vs[F]>) => {
+      setFailures(f => {
+        const update = f.filter(f => (f.notify || f.highlight)
           && f.errorFields.includes(fieldName)
         )
         if (update.length>0)
           return updateFailures(
             failures,
-            { failures: update, },
-            { notify: false, highlight: false, }
+            { failures: update },
+            { notify: false, highlight: false }
           )
         return f
       })
-      setValues(s=>{
-        const newFieldValue = function(){
+      setValues(s => {
+        const newFieldValue = function() {
           if (value instanceof Function) return value(s[fieldName])
           return value
         }()
         return {
           ...s,
-          [fieldName]: newFieldValue
+          [fieldName]: newFieldValue,
         }
       })
     }
   )
   const setValue = useCallback(
-    (value: ValueOrUpdater<Vs[F]>)=>setValueEffectEvent(value),
+    (value: ValueOrUpdater<Vs[F]>) => setValueEffectEvent(value),
     []
   )
   
   
   
   const onChange = useCallback(
-    (ev: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
+    (ev: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
       setValue(ev.currentTarget.value as any)
     },
     []
   )
-  const onBlurEffectEvent = useEffectEvent(()=>{
-    const failsToUpdate = failures.filter(f=>
+  const onBlurEffectEvent = useEffectEvent(() => {
+    const failsToUpdate = failures.filter(f =>
       f.errorFields.includes(fieldName)
       && f.highlight
       && f.isDelayed
@@ -149,13 +149,13 @@ const ValidationWrap =
       { delay: 0 },
     ))
   })
-  const onBlur = useCallback(()=>onBlurEffectEvent(), [])
-  const getChecked = useCallback((v: Vs[F])=>v===value, [value])
+  const onBlur = useCallback(() => onBlurEffectEvent(), [])
+  const getChecked = useCallback((v: Vs[F]) => v===value, [value])
   
   
   
   const inputProps = useMemo(
-    ()=>({
+    () => ({
       value,
       onChange,
       onBlur,
@@ -163,7 +163,7 @@ const ValidationWrap =
     [value]
   )
   const radioInputProps = useCallback(
-    (value: Vs[F])=>({
+    (value: Vs[F]) => ({
       checked: getChecked(value),
       onChange,
     }),
@@ -201,14 +201,8 @@ export default React.memo(ValidationWrap) as typeof ValidationWrap
 
 
 
-
-
-
-
-
-
 {
-  const inputTypeTest = ()=>{
+  const inputTypeTest = () => {
     type InputType = ReactElement<
       React.InputHTMLAttributes<Element>,
       JSX.ElementType

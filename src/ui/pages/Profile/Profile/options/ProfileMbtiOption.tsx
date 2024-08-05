@@ -6,7 +6,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import GenderGradIc = SvgGradIcons.GenderGradIc
+import PuzzlesGradIc = SvgGradIcons.PuzzlesGradIc
 
 
 
@@ -20,36 +20,38 @@ const overlayName = 'mbti'
 
 
 
-const ProfileGenderOption =
-React.memo(
-()=>{
-  const optionText = useUiValues(OptionUiText)
-  const titleText = useUiValues(TitleUiText)
-  
-  const text = useMemo(()=>({
-  
-  }), [titleText, optionText])
-  
-  
-  
-  
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  
-  
-  return <>
-    <OptionItem
-      //icon={<GenderGradIc />}
-      title={'Тип личности MBTI'}
-      value={'Не выбрано'}
-      onClick={open}
-    />
+const ProfileGenderOption = React.memo(
+  () => {
+    const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
+    
+    const text = useMemo(() => ({
+    
+    }), [titleText, optionText])
     
     
-  </>
-})
+    
+    
+    
+    
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    
+    return (
+      <>
+        <OptionItem
+          icon={<PuzzlesGradIc />}
+          title={'Тип личности MBTI'}
+          value={'Не выбрано'}
+          onClick={open}
+        />
+        
+        
+      </>
+    )
+  }
+)
 export default ProfileGenderOption
 
 

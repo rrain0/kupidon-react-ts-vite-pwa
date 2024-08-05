@@ -7,6 +7,7 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/elements/inputs/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/elements/inputs/SelectItem/SelectItemS'
+import SelectItemText from 'src/ui/elements/inputs/SelectItem/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic'
 import ModalInput from 'src/ui/widgets/modals/ModalInput/ModalInput'
@@ -105,10 +106,12 @@ const ModalSingleSelectList = ReactU.memo(
                     isEdit={opt.value === OPTION_CUSTOM}
                     indicatorsSelection={opt.value === selected ? [true] : [false]}
                   >
-                    {(() => {
-                      if (opt.value === OPTION_CUSTOM) return customText
-                      return opt.text
-                    })()}
+                    <SelectItemText>
+                      {(() => {
+                        if (opt.value === OPTION_CUSTOM) return customText
+                        return opt.text
+                      })()}
+                    </SelectItemText>
                   </SelectItem>
                 ))}
               </div>

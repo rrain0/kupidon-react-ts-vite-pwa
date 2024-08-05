@@ -1,5 +1,4 @@
 import { ArrayU } from 'src/util/common/ArrayU.ts'
-import NonEmptyArr = ArrayU.NonEmptyArr
 
 
 
@@ -24,19 +23,58 @@ export namespace ValidationCore {
     (values: any[]) => ('ok' | undefined | void) | PartialFailureData<Vs>
   ]
   
+  
+  /*
+  type ExtractReturnTypes<T extends readonly ((...args: any[]) => any)[]> = [
+    ...{
+      [K in keyof T]: T[K] extends (...args: any[]) => infer R ? R : never;
+    },
+  ]
+  type FieldsArrToValuesArr<Fs extends readonly (keyof Vs)[], Vs extends Values> = [
+    ...{
+      [F in keyof Fs]: Fs[F] extends string ? Vs[F] : never
+    }
+  ]
+  
+  export type Validator1
+  <Vs extends Values, Fs extends (keyof Vs)[] = (keyof Vs)[]> = [
+    Fs,
+    (...args: FieldsArrToValuesArr<NoInfer<Fs>, Vs>) => ('ok' | undefined | void) | PartialFailureData<Vs>
+  ]
+  type MyValues = { a: string, b: number, c: boolean }
+  
+  const myValidators = [
+    [
+      ['a'],
+      (aVal) => {
+        const aa = aVal.substring(0, 2)
+      },
+    ],
+  ] satisfies Validator1<MyValues>[]
+  
+  
+  todo validator<values>([s => s.day, s => s.month, s => s.year], (day, month, year) => Error)
+   */
+  
+  
+  
   export type Validators<Vs extends Values> = Validator<Vs>[]
   
   export type Failures<Vs extends Values> = Failure<Vs>[]
   
   
   
-  export type FailureType = 'default' | 'initial' | 'normal' | 'server'
+  export type FailureType =
+    | 'default'
+    | 'initial'
+    | 'normal'
+    | 'server' // maybe 'async'? (maybe error from webworker...)
   
   export class Failure<Vs extends Values> {
     
     static getAwaitDelay(created: Date, delay: number): Promise<void> {
       return new Promise(
-        resolve=>setTimeout(resolve, +created + delay - +new Date())
+        resolve => setTimeout(resolve, +created + delay - +new Date())
       )
     }
     
@@ -48,16 +86,16 @@ export namespace ValidationCore {
       this.usedValues = data.usedValues
       this.type = data.type ?? 'normal'
       this.errorFields = data.errorFields ?? this.usedFields
-      this.highlight = data.highlight ?? (()=>{
-        if (['normal','server'].includes(this.type)) return true
+      this.highlight = data.highlight ?? (() => {
+        if (['normal', 'server'].includes(this.type)) return true
         return false
       })()
-      this.notify = data.notify ?? (()=>{
-        if (['normal','server'].includes(this.type)) return true
+      this.notify = data.notify ?? (() => {
+        if (['normal', 'server'].includes(this.type)) return true
         return false
       })()
-      this.canSubmit = data.canSubmit ?? (()=>{
-        if (this.type==='server') return true
+      this.canSubmit = data.canSubmit ?? (() => {
+        if (this.type === 'server') return true
         return false
       })()
       this.created = data.created ?? new Date()
@@ -80,17 +118,17 @@ export namespace ValidationCore {
     readonly delay: number
     readonly awaitDelay: Promise<void>
     
-    get id(){
+    get id() {
       return `failure-${this.code}`
     }
-    get isDelayed(){
+    get isDelayed() {
       return this.delayedFor > 0
     }
-    get delayedFor(){
+    get delayedFor() {
       const showTime = +this.created + this.delay
       const now = +new Date()
       const delay = showTime - now
-      return Math.max(delay,0)
+      return Math.max(delay, 0)
     }
     
     copy(update?: Partial<FailureData<Vs>> | undefined): Failure<Vs> {
@@ -121,7 +159,7 @@ export namespace ValidationCore {
   
   /**
    * @param code - error main code, eg 'incorrect', 'login-already-exists'
-   * @param msg - message to display to user
+   * @param msg - error description
    * @param usedFields - fields used to validate
    * @param usedValues - values used to validate
    * @param extra - some extra data of any type if needed

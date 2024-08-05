@@ -10,6 +10,7 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import SelectItem from 'src/ui/elements/inputs/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/elements/inputs/SelectItem/SelectItemS'
+import SelectItemText from 'src/ui/elements/inputs/SelectItem/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
@@ -123,7 +124,9 @@ React.memo(
                     return 2
                   })}
                 >
-                  {opt.text}
+                  <SelectItemText>
+                    {opt.text}
+                  </SelectItemText>
                 </SelectItem>
               ))}
             </div>

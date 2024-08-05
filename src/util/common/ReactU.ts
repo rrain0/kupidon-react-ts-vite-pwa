@@ -2,6 +2,7 @@ import React, { CSSProperties } from 'react'
 import { ObjectU } from 'src/util/common/ObjectU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Puro = TypeU.Puro
+import ObjectMap = ObjectU.ObjectMap
 
 
 
@@ -9,15 +10,11 @@ import Puro = TypeU.Puro
 export namespace ReactU {
   
   
-  import ObjectMap = ObjectU.ObjectMap
-  export type ChildrenProps = Puro<{ children: React.ReactNode }>
-  
-  export type ClassStyleProps = Puro<{
+  export type Children = Puro<{ children: React.ReactNode }>
+  export type ClassStyle = Puro<{
     className: string
     style: CSSProperties
   }>
-  
-  
   export type First = Puro<{ first: boolean }>
   export type Last = Puro<{ last: boolean }>
   

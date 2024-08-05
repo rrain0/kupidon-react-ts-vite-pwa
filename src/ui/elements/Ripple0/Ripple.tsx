@@ -9,7 +9,7 @@ import css from 'src/ui/elements/Ripple0/Ripple.module.scss'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RippleStyle } from 'src/ui/elements/Ripple0/RippleStyle.ts'
 import Puro = TypeU.Puro
-import ClassStyleProps = ReactU.ClassStyleProps
+import ClassStyleProps = ReactU.ClassStyle
 
 
 

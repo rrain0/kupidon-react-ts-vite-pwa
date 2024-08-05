@@ -7,18 +7,22 @@
   }
 </style>
 
-<path
-  d="M18.942 18.9322L26.5 26.5M21.5 12.75C21.5 17.5825 17.5825 21.5 12.75 21.5C7.91751 21.5 4 17.5825 4 12.75C4 7.91751 7.91751 4 12.75 4C17.5825 4 21.5 7.91751 21.5 12.75Z"
-  stroke="url(#paint0_linear_492_162)"
-  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"
-/>
-
 <defs>
-  <linearGradient id="paint0_linear_492_162" x1="15.25" y1="4" x2="15.25" y2="26.5" gradientUnits="userSpaceOnUse">
+  <linearGradient
+    id="paint0_linear_492_162"
+    x1="50%" y1="13%" x2="50%" y2="90%"
+    gradientUnits="userSpaceOnUse"
+  >
     <stop stop-color="var(--icon-grad-first-color)"/>
     <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
     <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
   </linearGradient>
 </defs>
+
+<path
+  d="M18.942 18.9322L26.5 26.5M21.5 12.75C21.5 17.5825 17.5825 21.5 12.75 21.5C7.91751 21.5 4 17.5825 4 12.75C4 7.91751 7.91751 4 12.75 4C17.5825 4 21.5 7.91751 21.5 12.75Z"
+  stroke="url(#paint0_linear_492_162)"
+  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"
+/>
 
 </svg>

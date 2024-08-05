@@ -20,9 +20,11 @@ React.memo(
 () => {
   const logData = useRecoilValue(LogLayerRecoil)
   
-  if (logData.length) return <Frame>
+  if (logData.length) return (
+    <Frame>
       {logData.map((it, i) => <div key={i}>{it}</div>)}
     </Frame>
+  )
   return undefined
 })
 export default LogLayer
@@ -40,4 +42,5 @@ const Frame = styled.article`
   overflow-wrap: anywhere;
   padding: 8px;
   ${col};
+  z-index: 10;
 `

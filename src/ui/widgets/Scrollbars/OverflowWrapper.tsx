@@ -13,7 +13,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
 import PartialUndef = TypeU.PartialUndef
-import ClassStyleProps = ReactU.ClassStyleProps
+import ClassStyleProps = ReactU.ClassStyle
 import fill = EmotionCommon.fill
 
 

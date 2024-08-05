@@ -7,6 +7,7 @@ import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons'
 import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle'
 import SelectItem from 'src/ui/elements/inputs/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/elements/inputs/SelectItem/SelectItemS'
+import SelectItemText from 'src/ui/elements/inputs/SelectItem/SelectItemText/SelectItemText'
 import row = EmotionCommon.row
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
@@ -108,7 +109,9 @@ const ListItem2Test = () => {
                 return options.map((it, i2) => i === i2 && it.isSelected)
               })()}
             >
-              {it.text}
+              <SelectItemText>
+                {it.text}
+              </SelectItemText>
             </SelectItem>
           )) }
           

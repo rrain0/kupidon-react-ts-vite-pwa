@@ -11,7 +11,7 @@ import { ScrollbarStyle } from 'src/ui/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps, SetScrollProps } from 'src/ui/widgets/Scrollbar/useContainerScrollState.ts'
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import ClassStyleProps = ReactU.ClassStyleProps
+import ClassStyleProps = ReactU.ClassStyle
 
 
 

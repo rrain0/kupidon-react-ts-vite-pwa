@@ -129,7 +129,7 @@ export default [
       '@stylistic': stylistic,
     },
     rules: {
-      '@stylistic/arrow-parens': ['error', 'as-needed'],
+      '@stylistic/arrow-parens': 'off',
       '@stylistic/arrow-spacing': ['error', { before: true, after: true }],
       '@stylistic/block-spacing': ['error', 'always'],
       '@stylistic/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],

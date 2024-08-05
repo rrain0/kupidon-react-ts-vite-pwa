@@ -6,7 +6,7 @@ import { ReactU } from 'src/util/common/ReactU'
 import { getElemProps } from 'src/util/element/ElemProps'
 import { ElemU } from 'src/util/element/ElemU'
 import { useElemRef } from 'src/util/react-state/useElemRef'
-import ClassStyleProps = ReactU.ClassStyleProps
+import ClassStyleProps = ReactU.ClassStyle
 import WH = ElemU.WH
 import XY = ElemU.XY
 import RippleMode = RippleS.RippleMode
