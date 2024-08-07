@@ -132,7 +132,8 @@ export default [
       '@stylistic/arrow-parens': 'off',
       '@stylistic/arrow-spacing': ['error', { before: true, after: true }],
       '@stylistic/block-spacing': ['error', 'always'],
-      '@stylistic/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
+      //'@stylistic/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
+      '@stylistic/brace-style': 'off',
       '@stylistic/comma-dangle': ['error', {
         arrays: 'always-multiline',
         tuples: 'only-multiline',

@@ -1,10 +1,7 @@
-import styled from '@emotion/styled'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle'
 import { SelectItemS } from 'src/ui/0-elements/selectable-items/SelectItem/SelectItem/SelectItemS'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
@@ -14,11 +11,7 @@ import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import { useElemWHAsCssProps } from 'src/util/element/useElemWHAsCssProps'
 import Puro = TypeU.Puro
-import abs = EmotionCommon.abs
 import Callback = TypeU.Callback
-import center = EmotionCommon.center
-import colC = EmotionCommon.colC
-import row = EmotionCommon.row
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
 import arraify = ArrayU.arraify
@@ -170,10 +163,6 @@ const SelectItem = React.memo(
   )
 )
 export default SelectItem
-
-
-
-
 
 
 

@@ -12,20 +12,20 @@ import exists = TypeU.exists
 export namespace RouteBuilder {
   
   
-  // null|undefined|'' for the first path means root
-  export const pathConcat = (...paths: Array<string|empty>): string => {
+  // null | undefined | '' for the first path means root
+  export const pathConcat = (...paths: Array<string | empty>): string => {
     let result = paths[0] ?? ''
     for (let i = 1; i < paths.length; i++) {
       let path = paths[i] ?? ''
-      result = result.replace(/\/$/,'')
-      path = path.replace(/^\//,'')
-      if (path) result += '/'+path
+      result = result.replace(/\/$/, '')
+      path = path.replace(/^\//, '')
+      if (path) result += '/' + path
     }
     return result
   }
   
   export const asterisk = (path: string) => {
-    return pathConcat(path,'*')
+    return pathConcat(path, '*')
   }
   
   
@@ -66,28 +66,21 @@ export namespace RouteBuilder {
   
   
   
-  export function getFull(this:RouteSegment): string {
+  export function getFull(this: RouteSegment): string {
     const upPath = this[up]?.[full]?.()
     const currentPath = this[path]
-    return pathConcat(upPath,currentPath)
+    return pathConcat(upPath, currentPath)
   }
   
   
-  export function getNext
-    (this:RouteSegment, pathSegment: string)
-    : RouteSelf & RouteProps
-  {
+  export function getNext(this:RouteSegment, pathSegment: string): RouteSelf & RouteProps {
     const next = buildPath(pathSegment)
     next[up] = this
     return next
   }
   
   
-  export function getUse
-    <R extends RouteSegment>
-    (this:R, pathSegment: string)
-    : R
-  {
+  export function getUse<R extends RouteSegment>(this:R, pathSegment: string): R {
     return {
       ...this,
       [path]: pathSegment,
@@ -98,7 +91,7 @@ export namespace RouteBuilder {
   
   export function getFullParams
     <R extends RouteSegment>
-    (this:R, applyParams?: empty | {
+    (this:R, applyParams?: {
       anySearchParams?: URLSearchParams | empty
       allowedSearchParams?: URLSearchParams | empty
       anyNameParams?: { [pathName: string]: string | empty } | empty
@@ -115,43 +108,44 @@ export namespace RouteBuilder {
     let fullPath = this[full]()
     const allowedParamNames = ObjectKeys(this[params])
     const allowedParamPaths = ObjectValues(this[params])
-    const newParams = ObjectEntries(applyParams).reduce((newParams,[type,applyParam])=>{
-      if (applyParam) switch (type){
+    const newParams = ObjectEntries(applyParams).reduce((newParams, [type, applyParam]) => {
+      
+      if (applyParam) switch (type) {
         case 'allowedSearchParams':
-          applyParam.forEach((v,n)=>{
+          applyParam.forEach((v, n) => {
             if (allowedParamPaths.includes(n) && exists(v)) newParams[n]=v
           })
           break
         case 'allowedNameParams':
-          ObjectEntries(applyParam).forEach(([n,v])=>{
-            if (allowedParamNames.includes(n) && exists(v)) newParams[this[params]![n]]=v
+          ObjectEntries(applyParam).forEach(([n, v]) => {
+            if (allowedParamNames.includes(n) && exists(v)) newParams[this[params]![n]] = v
           })
           break
         case 'allowedPathParams':
-          ObjectEntries(applyParam).forEach(([n,v])=>{
-            if (allowedParamPaths.includes(n) && exists(v)) newParams[n]=v
+          ObjectEntries(applyParam).forEach(([n, v]) => {
+            if (allowedParamPaths.includes(n) && exists(v)) newParams[n] = v
           })
           break
         case 'anySearchParams':
-          applyParam.forEach((v,n)=>{
+          applyParam.forEach((v, n) => {
             if (exists(v)) newParams[n]=v
           })
           break
         case 'anyNameParams':
-          ObjectEntries(applyParam).forEach(([n,v])=>{
-            if (exists(v)) newParams[this[params]![n]]=v
+          ObjectEntries(applyParam).forEach(([n, v]) => {
+            if (exists(v)) newParams[this[params]![n]] = v
           })
           break
         case 'anyPathParams':
-          ObjectEntries(applyParam).forEach(([n,v])=>{
+          ObjectEntries(applyParam).forEach(([n, v]) => {
             if (exists(v)) newParams[n]=v
           })
           break
       }
       return newParams
-    },{} as { [prop: string]: string })
+    }, {} as { [prop: string]: string })
     const newParamsString = new URLSearchParams(newParams).toString()
-    if (newParamsString) fullPath += '?'+newParamsString
+    if (newParamsString) fullPath += '?' + newParamsString
     return fullPath
   }
   
