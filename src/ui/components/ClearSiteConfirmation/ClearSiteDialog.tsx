@@ -9,10 +9,10 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import UseBottomSheetState from 'src/ui/widgets/BottomSheet/UseBottomSheetState.tsx'
-import Button from 'src/ui/elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
+import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
 import center = EmotionCommon.center
@@ -20,8 +20,8 @@ import row = EmotionCommon.row
 import Spinner8LinesIc = SvgIcons.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIcons.ClearTrashIc
-import BottomSheetDialogBasic from 'src/ui/widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
+import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 

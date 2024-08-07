@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
-import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
 import row = EmotionCommon.row
 import resetH = EmotionCommon.resetH
 import center = EmotionCommon.center

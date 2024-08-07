@@ -1,14 +1,14 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import styled from '@emotion/styled'
-import { Hs } from 'src/ui/elements/basic-elements/Hs.tsx'
-import Button from 'src/ui/elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/elements/buttons/Button/ButtonStyle.ts'
-import { card3Style } from 'src/ui/elements/cards/Card3.tsx'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
+import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
+import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
 import PartialUndef = TypeU.PartialUndef
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
 import Txt = EmotionCommon.Txt

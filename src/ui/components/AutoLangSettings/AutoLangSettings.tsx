@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
-import LangSettings from 'src/ui/widgets/LangSettings/LangSettings.tsx'
+import LangSettings from 'src/ui/1-widgets/LangSettings/LangSettings.tsx'
 import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
 
 

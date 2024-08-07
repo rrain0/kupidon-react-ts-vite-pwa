@@ -5,17 +5,17 @@ import {
   RouterProvider,
   useSearchParams,
 } from 'react-router-dom'
-import { bowAndArrowsRouting } from 'src/ui/pages/BowAndArrows/routing.tsx'
-import { chatRouting } from 'src/ui/pages/Chat/routing.tsx'
-import BottomNavBarRouting from 'src/ui/widgets/NavBar/routing'
-import { findPairsRouting } from 'src/ui/pages/FindPairs/routing'
-import { loginRouting } from 'src/ui/pages/Login/routing'
+import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
+import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
+import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing'
+import { findPairsRouting } from 'src/ui/2-pages/FindPairs/routing'
+import { loginRouting } from 'src/ui/2-pages/Login/routing'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { profileRouting } from 'src/ui/pages/Profile/routing.tsx'
-import { settingRouting } from 'src/ui/pages/Settings/routing'
-import { signupRouting } from 'src/ui/pages/Signup/routing'
-import { testRouting } from 'src/ui/pages/Test/routing'
+import { profileRouting } from 'src/ui/2-pages/Profile/routing.tsx'
+import { settingRouting } from 'src/ui/2-pages/Settings/routing'
+import { signupRouting } from 'src/ui/2-pages/Signup/routing'
+import { testRouting } from 'src/ui/2-pages/Test/routing'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path

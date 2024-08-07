@@ -3,17 +3,17 @@ import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { IconButtonStyle } from 'src/ui/elements/buttons/IconButton/IconButtonStyle.ts'
+import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import QuickSettings, {
   QuickSettingsOverlayName,
-} from 'src/ui/widgets/QuickSettings/QuickSettings.tsx'
-import QuickSettingsButton from 'src/ui/elements/QuickSettingsButton.tsx'
+} from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
+import QuickSettingsButton from 'src/ui/0-elements/QuickSettingsButton.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
-import Button from 'src/ui/elements/buttons/Button/Button.tsx'
-import { SvgIcons } from 'src/ui/elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconsStyle } from 'src/ui/elements/icons/SvgIcons/SvgIconsStyle.ts'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
 import fixedBottom = EmotionCommon.fixedBottom
 import row = EmotionCommon.row
 import Arrow5FwdIc = SvgIcons.ArrowLinesSharp1Ic
