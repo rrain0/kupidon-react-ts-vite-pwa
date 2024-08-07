@@ -131,12 +131,12 @@ export const useBottomSheet = (
   
   
   const updateComputedSheetDimens = useCallback(
-    ()=>{
+    () => {
       const frame = getFrame()
       const sheet = getSheet()
       const header = getHeader()
       const content = getContent()
-      if (frame && sheet && header && content){
+      if (frame && sheet && header && content) {
         const frameD = new ElemProps(frame)
         const sheetD = new ElemProps(sheet)
         const headerD = new ElemProps(header)
@@ -161,7 +161,7 @@ export const useBottomSheet = (
       const header = getHeader()
       const content = getContent()
       updateComputedSheetDimens()
-      if (frame || sheet || header || content){
+      if (frame || sheet || header || content) {
         const resizeObserver = new ResizeObserver(() => updateComputedSheetDimens())
         frame && resizeObserver.observe(frame)
         sheet && resizeObserver.observe(sheet)
@@ -240,15 +240,15 @@ export const useBottomSheet = (
   
   
   
-  const dragStartRef = useRef({...dragStartInitialValue})
-  const [sheetSpring, sheetSpringApi] = useSpring(()=>({ height: 0 }))
+  const dragStartRef = useRef({ ...dragStartInitialValue })
+  const [sheetSpring, sheetSpringApi] = useSpring(() => ({ height: 0 }))
   
   
   
   
   const runAnimation = useCallback(
-    (endH: number, lastSpeed: number|null, onFinish: Callback)=>{
-      const duration = function(){
+    (endH: number, lastSpeed: number|null, onFinish: Callback) => {
+      const duration = function() {
         //console.log('lastSpeed',lastSpeed)
         if (notExists(lastSpeed)) return animationDuration
         const startH = sheetSpring.height.get()
@@ -256,7 +256,7 @@ export const useBottomSheet = (
         const pathPercent = pathProgressPercent(startH, endH)
         return pathPercent/lastSpeed*1.2*1000
       }()
-      ;(async()=>{
+      ;(async() => {
         const animation = await sheetSpring.height.start(
           endH,
           {
@@ -284,7 +284,7 @@ export const useBottomSheet = (
   //console.log('newSheetState', newState)
   
   const reactOnState = useEffectEvent(
-    ()=>{
+    () => {
       if (!isReady) return
       
       const canOpen = exists(realDefaultOpenIdx)
@@ -297,14 +297,14 @@ export const useBottomSheet = (
       
       
       // prevent unnecessary state changes
-      if (newState===currState
-        && newSnapIdx===currSnap
-        && newCloseable===prevCloseable
-        && snapPointsPx===prevSnapPointsPx
+      if (newState === currState
+        && newSnapIdx === currSnap
+        && newCloseable === prevCloseable
+        && snapPointsPx === prevSnapPointsPx
       ) return
       
-      const setStateAndIndex = (s: SheetState, index: SheetSnapIdx)=>{
-        if (s!=='dragging') dragStartRef.current = {...dragStartInitialValue}
+      const setStateAndIndex = (s: SheetState, index: SheetSnapIdx) => {
+        if (s !== 'dragging') dragStartRef.current = { ...dragStartInitialValue }
         /* if (isReady){
           setNewState(s)
           setNewSnapIdx(index)
@@ -319,30 +319,30 @@ export const useBottomSheet = (
       }
       
       
-      const toSnap = function(){
-        if (newState==='adjusting')
+      const toSnap = function() {
+        if (newState === 'adjusting')
           return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
-        if (newSnapIdx===null) return null
+        if (newSnapIdx === null) return null
         return RangeU.clamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
       }()
       
-      const toHeight = function(){
-        if (toSnap===null) return 0
+      const toHeight = function() {
+        if (toSnap === null) return 0
         return snapPointsPx[toSnap]
       }()
       
-      const toOpenSnap = function(){
+      const toOpenSnap = function() {
         if (toHeight>0) return toSnap
-        if (newState==='adjusting') return realFirstOpenIdx
+        if (newState === 'adjusting') return realFirstOpenIdx
         return realDefaultOpenIdx
       }()
       const toCloseSnap = closeIdx
       
-      const toOpenHeight = function(){
+      const toOpenHeight = function() {
         if (toOpenSnap===null) return 0
         return snapPointsPx[toOpenSnap]
       }()
-      const toCloseHeight = function(){
+      const toCloseHeight = function() {
         if (toCloseSnap===null) return 0
         return snapPointsPx[toCloseSnap]
       }()
@@ -355,34 +355,34 @@ export const useBottomSheet = (
       
       const isOpened = ![null, 'closed'].includes(prevState)
       const isClosed = [null, 'closed'].includes(prevState)
-      const toOpened = function(){
+      const toOpened = function() {
         if (!canOpen) return false
         if (!canClose) return true
-        if (newState==='adjusting') return toHeight>0
-        return !([null,'closed','closing'] as SheetState[]).includes(newState)
+        if (newState === 'adjusting') return toHeight>0
+        return !([null, 'closed', 'closing'] as SheetState[]).includes(newState)
       }()
-      const toClosed = function(){
+      const toClosed = function() {
         if (!canClose) return false
         if (!canOpen) return true
-        if (newState==='adjusting') return toHeight===0
+        if (newState === 'adjusting') return toHeight===0
         return (['closed', 'closing'] as SheetState[]).includes(newState)
       }()
       
-      const toDragging = newState==='dragging'
+      const toDragging = newState === 'dragging'
       const toAnimated =
         (['closing', 'snapping', 'opening', 'adjusting'] as SheetState[]).includes(newState)
       const lastSpeed = function() {
-        if (currState!=='dragging') return null
+        if (currState !== 'dragging') return null
         return dragStartRef.current.lastSpeed
       }()
       const toFreeHeight = function() {
         if (notExists(toOpenSnap)) return false
-        if (snapPoints[toOpenSnap]!=='free') return false
+        if (snapPoints[toOpenSnap] !== 'free') return false
         return RangeU.has(
           sheetSpring.height.get(),
           [
             snapPointsPx[toOpenSnap],
-            snapPointsPx[toOpenSnap+1]??Number.POSITIVE_INFINITY,
+            snapPointsPx[toOpenSnap + 1] ?? Number.POSITIVE_INFINITY,
           ]
         )
       }()
@@ -402,27 +402,27 @@ export const useBottomSheet = (
       console.log('---bottom-sheet-end-----------------------') */
       
       
-      if (isCloseToOpen){
-        if (!toAnimated){
+      if (isCloseToOpen) {
+        if (!toAnimated) {
           sheetSpring.height.set(toOpenHeight)
           setStateAndIndex('opened', toOpenSnap)
           return
         }
         else {
           setStateAndIndex('opening', toOpenSnap)
-          runAnimation(toOpenHeight, lastSpeed, ()=>{
+          runAnimation(toOpenHeight, lastSpeed, () => {
             setStateAndIndex('opened', toOpenSnap)
           })
           return
         }
       }
-      else if (isCloseToClose){
+      else if (isCloseToClose) {
         sheetSpring.height.set(toCloseHeight)
         setStateAndIndex('closed', toCloseSnap)
         return
       }
-      else if (isOpenToClose){
-        if (!toAnimated){
+      else if (isOpenToClose) {
+        if (!toAnimated) {
           sheetSpring.height.set(toCloseHeight)
           setStateAndIndex('closed', toCloseSnap)
           return
@@ -435,22 +435,22 @@ export const useBottomSheet = (
           return
         }
       }
-      else if (isOpenToOpen){
-        if (toDragging){
+      else if (isOpenToOpen) {
+        if (toDragging) {
           setStateAndIndex('dragging', currSnap)
           return
         }
-        else if (toFreeHeight){
+        else if (toFreeHeight) {
           setStateAndIndex('opened', toOpenSnap)
         }
-        else if (!toAnimated){
+        else if (!toAnimated) {
           sheetSpring.height.set(toOpenHeight)
           setStateAndIndex('opened', toOpenSnap)
           return
         }
         else {
           setStateAndIndex('snapping', toOpenSnap)
-          runAnimation(toOpenHeight, lastSpeed, ()=>{
+          runAnimation(toOpenHeight, lastSpeed, () => {
             setStateAndIndex('opened', toOpenSnap)
           })
           return
@@ -458,13 +458,13 @@ export const useBottomSheet = (
       }
       else {
         sheetSpring.height.set(0)
-        setStateAndIndex(null,null)
+        setStateAndIndex(null, null)
         return
       }
     }
   )
   useEffect(
-    ()=>reactOnState(),
+    () => reactOnState(),
     [newState, newSnapIdx, newCloseable, isReady, snapPointsPx]
   )
   
@@ -479,10 +479,10 @@ export const useBottomSheet = (
     gesture => {
       const {
         first, active, last,
-        movement: [mx,my],
-        velocity: [spdx,spdy], // px/ms (nonnegative)
-        direction: [dirx,diry], // positive for y is from top to bottom
-        xy: [vpx,vpy], // viewport x, viewport y
+        movement: [mx, my],
+        velocity: [spdx, spdy], // px/ms (nonnegative)
+        direction: [dirx, diry], // positive for y is from top to bottom
+        xy: [vpx, vpy], // viewport x, viewport y
       } = gesture
       
       /* console.log(
@@ -492,7 +492,7 @@ export const useBottomSheet = (
       
       if (first) {
         setNewState('dragging')
-        dragStartRef.current = {...dragStartInitialValue}
+        dragStartRef.current = { ...dragStartInitialValue }
         dragStartRef.current.isDragging = true
         dragStartRef.current.sheetH = sheetSpring.height.get()
       }
@@ -500,12 +500,12 @@ export const useBottomSheet = (
       if (active && dragStartRef.current.isDragging) {
         sheetSpring.height.set(newSheetH)
       }
-      if (last && dragStartRef.current.isDragging){
+      if (last && dragStartRef.current.isDragging) {
         dragStartRef.current.isDragging = false
         const speed = pxPerMsToPercentVpHPerS(spdy) // % высоты viewport в секунду
-        if (speed>speedThreshold){
+        if (speed>speedThreshold) {
           dragStartRef.current.lastSpeed = speed
-          if (diry<0){
+          if (diry < 0) {
             setNewState('snapping')
             setNewSnapIdx(lastIndex(snapPoints))
           } else {
@@ -528,7 +528,7 @@ export const useBottomSheet = (
   
   
   useEffect(
-    ()=>{
+    () => {
       const frame = getFrame()
       const sheet = getSheet()
       const header = getHeader()
@@ -565,12 +565,12 @@ function pathProgressPercent(start: number, end: number): number {
 
 
 function calculateSnapPointsPx(
-  snapPoints: (number|string)[],
+  snapPoints: (number | string)[],
   computedSheetDimens: ComputedBottomSheetDimens,
 ): number[] {
-  const allowedUnits = ['px','',undefined,'%']
-  const allowedKeywords = ['fit-content','fit-header','free']
-  const snapPointsCssValues = snapPoints.map(it=>{
+  const allowedUnits = ['px', '', undefined, '%']
+  const allowedKeywords = ['fit-content', 'fit-header', 'free']
+  const snapPointsCssValues = snapPoints.map(it => {
     const cssValue = parseCssValue(it+'')
     if (
       !cssValue
@@ -582,15 +582,15 @@ function calculateSnapPointsPx(
   
   const snapPointsPx: (number|undefined)[] = Array(snapPoints.length).fill(undefined)
   
-  ;[['px','',undefined],['%'],['fit-content','fit-header'],['free']].forEach(units=>{
-    snapPointsCssValues.forEach((cssValue,cssValueI)=>{
+  ;[['px', '', undefined], ['%'], ['fit-content', 'fit-header'], ['free']].forEach(units => {
+    snapPointsCssValues.forEach((cssValue, cssValueI) => {
       
       if (
         (cssValue.type==='keyword' && !units.includes(cssValue.value))
         || (cssValue.type==='numeric' && !units.includes(cssValue.unit))
       ) return
       
-      let computed = function(){
+      let computed = function() {
         if (cssValue.type==='keyword') {
           switch (cssValue.value) {
             case 'fit-content':

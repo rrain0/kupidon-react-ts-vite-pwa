@@ -1,9 +1,7 @@
-import { css } from '@emotion/react'
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import { BottomSheetParts } from 'src/ui/1-widgets/BottomSheet/BottomSheetParts.ts'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
 import {
   ComputedBottomSheetDimens,
@@ -41,44 +39,9 @@ export type BottomSheetProps =
 
 
 
-const BottomSheetDialog =
-React.memo(
-(props: BottomSheetProps) => {
-  const {
-    sheetState,
-    setSheetState,
-    snapIdx,
-    setSnapIdx,
-    snapPoints,
-    animationDuration,
-    closeable,
-    defaultOpenIdx,
-    
-    onComputedDimens,
-    onSnapPointsPx,
-    
-    bottomSheetFrameRef,
-    bottomSheetRef,
-    bottomSheetHeaderRef,
-    bottomSheetContentRef,
-  } = props
-  
-  
-  
-  
-  
-  const {
-    computedSheetDimens,
-    snapPointsPx,
-    realDefaultOpenIdx,
-    sheetSpring,
-    sheetDrag
-  } = useBottomSheet(
-    bottomSheetFrameRef,
-    bottomSheetRef,
-    bottomSheetHeaderRef,
-    bottomSheetContentRef,
-    {
+const BottomSheetDialog = React.memo(
+  (props: BottomSheetProps) => {
+    const {
       sheetState,
       setSheetState,
       snapIdx,
@@ -87,70 +50,105 @@ React.memo(
       animationDuration,
       closeable,
       defaultOpenIdx,
-    }
-  )
-  useLayoutEffect(
-    ()=>onComputedDimens?.(computedSheetDimens),
-    [computedSheetDimens]
-  )
-  useLayoutEffect(
-    ()=>onSnapPointsPx?.(snapPointsPx),
-    [snapPointsPx]
-  )
-  
-  
-  useUpNodesScrollLock(
-    !['closed',null].includes(sheetState),
-    { elementRef: bottomSheetFrameRef }
-  )
-  
-  
-  //useLayoutEffect(()=>console.log('state',state),[state])
-  
-  
-  
-  return <UserActionsConsumer>
+      
+      onComputedDimens,
+      onSnapPointsPx,
+      
+      bottomSheetFrameRef,
+      bottomSheetRef,
+      bottomSheetHeaderRef,
+      bottomSheetContentRef,
+    } = props
     
-    <animated.div /* Frame */ css={BottomSheetParts.frameStyle}
-      style={{
-        // @ts-expect-error
-        background: sheetSpring.height.to(
-          height => {
-            const bgDimHex = function() {
-              const maxDimHeight = snapPointsPx[realDefaultOpenIdx??0]
-              const dimHeight = Math.min(height, maxDimHeight)
-              return Math.trunc(dimHeight / maxDimHeight * 256 * 0.6)
-                .toString(16).padStart(2, '0')
-            }()
-            if (!['closed', null].includes(sheetState)) return `#000000${bgDimHex}`
-            return 'none'
-          }
-        ),
-        pointerEvents: ![null, 'closed', 'closing'].includes(sheetState) ? 'auto' : 'none',
-      }}
+    
+    
+    
+    
+    const {
+      computedSheetDimens,
+      snapPointsPx,
+      realDefaultOpenIdx,
+      sheetSpring,
+      sheetDrag,
+    } = useBottomSheet(
+      bottomSheetFrameRef,
+      bottomSheetRef,
+      bottomSheetHeaderRef,
+      bottomSheetContentRef,
+      {
+        sheetState,
+        setSheetState,
+        snapIdx,
+        setSnapIdx,
+        snapPoints,
+        animationDuration,
+        closeable,
+        defaultOpenIdx,
+      }
+    )
+    useLayoutEffect(
+      () => onComputedDimens?.(computedSheetDimens),
+      [computedSheetDimens]
+    )
+    useLayoutEffect(
+      () => onSnapPointsPx?.(snapPointsPx),
+      [snapPointsPx]
+    )
+    
+    
+    useUpNodesScrollLock(
+      !['closed', null].includes(sheetState),
+      { elementRef: bottomSheetFrameRef }
+    )
+    
+    
+    //useLayoutEffect(()=>console.log('state',state),[state])
+    
+    
+    
+    return <UserActionsConsumer>
       
-      ref={bottomSheetFrameRef as any}
-      
-      // need to prevent click if dragged if frame is draggable
-      onClick={() => {
-        //console.log('dimmed background click: closing...')
-        setSheetState('closing')
-        //setSheetState('closed')
-      }}
-    >
-      <UserActionsConsumer>
-        <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
+      <animated.div /* Frame */ css={BottomSheetParts.frameStyle}
+        style={{
           // @ts-expect-error
-          style={sheetSpring}
-          ref={bottomSheetRef as any} // Must be
-        >
-          
-          {props.children?.({ sheetDrag })}
+          background: sheetSpring.height.to(
+            height => {
+              const bgDimHex = function() {
+                const maxDimHeight = snapPointsPx[realDefaultOpenIdx??0]
+                const dimHeight = Math.min(height, maxDimHeight)
+                return Math.trunc(dimHeight / maxDimHeight * 256 * 0.6)
+                  .toString(16).padStart(2, '0')
+              }()
+              if (!['closed', null].includes(sheetState)) return `#000000${bgDimHex}`
+              return 'none'
+            }
+          ),
+          pointerEvents: ![null, 'closed', 'closing'].includes(sheetState) ? 'auto' : 'none',
+        }}
         
-        </animated.div>
-      </UserActionsConsumer>
-    </animated.div>
-    
-  </UserActionsConsumer>
-})
+        ref={bottomSheetFrameRef as any}
+        
+        // need to prevent click if dragged if frame is draggable
+        onClick={() => {
+          //console.log('dimmed background click: closing...')
+          setSheetState('closing')
+          //setSheetState('closed')
+        }}
+      >
+        <UserActionsConsumer>
+          <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
+            // @ts-expect-error
+            style={sheetSpring}
+            ref={bottomSheetRef as any} // Must be
+          >
+            
+            {props.children?.({ sheetDrag })}
+          
+          </animated.div>
+        </UserActionsConsumer>
+      </animated.div>
+      
+    </UserActionsConsumer>
+  }
+)
 export default BottomSheetDialog

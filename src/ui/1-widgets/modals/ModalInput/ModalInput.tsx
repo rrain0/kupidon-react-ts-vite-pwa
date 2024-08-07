@@ -37,6 +37,8 @@ const ModalInput = React.memo(
       ...restProps
     } = props
     
+    //console.log('title', title)
+    
     const actionText = useUiValues(ActionUiText)
     
     if (isOpen) return (
