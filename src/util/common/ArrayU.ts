@@ -202,10 +202,23 @@ export namespace ArrayU {
     return arr.toSpliced(i, 1)
   }
   
+  export const pushUniqToIf = <T>(arr: T[], elem: T): T[] => {
+    if (arr.includes(elem)) return arr
+    return [...arr, elem]
+  }
   
+  export const removeToIf = <T>(arr: T[], elem: T): T[] => {
+    const i = arr.findIndex(it => it === elem)
+    if (i === -1) return arr
+    return arr.toSpliced(i, 1)
+  }
   
+  export const distinctToIf = <T>(arr: T[]): T[] => {
+    const uniq = new Set(arr)
+    if (uniq.size === arr.length) return arr
+    return [...uniq]
+  }
   
-  export const distinct = <T>(arr: T[]): T[] => [...new Set(arr)]
   
   
   

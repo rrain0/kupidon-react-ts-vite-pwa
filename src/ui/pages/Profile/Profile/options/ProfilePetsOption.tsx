@@ -23,66 +23,68 @@ const overlayName = 'pets'
 
 
 
-const ProfilePetsOption =
-React.memo(
-() => {
-  const optionText = useUiValues(OptionUiText)
-  const titleText = useUiValues(TitleUiText)
-  
-  const text = useMemo(()=>({
-    notSelected: optionText.notSelected,
-  }), [titleText, optionText])
-  
-  
-  const [selected, setSelected] = useState('')
-  
-  
-  const options = useMemo(
-    ()=>[
-      {
-        value: '1',
-        text: 'Да, у меня есть собака(и)',
-      },{
-        value: '2',
-        text: 'Да, у меня есть кошка(и)',
-      },{
-        value: '3',
-        text: 'Да, у меня есть другие животные (укажите какие)',
-      },{
-        value: '4',
-        text: 'Нет, у меня нет питомцев',
-      },{
-        value: '',
-        text: text.notSelected,
-      }
-    ],
-    [text]
-  )
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = options.find(opt => opt.value === selected)?.text ?? ''
-  
-  
-  return <>
-    <OptionItem
-      icon={<BengalCatGradIc />}
-      title={'Отношение к домашним животным'}
-      value={value}
-      onClick={open}
-    />
+const ProfilePetsOption = React.memo(
+  () => {
+    const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
     
-    <ModalRadio
-      isOpen={isOpen}
-      close={close}
-      title={'Отношение к домашним животным'}
-      options={options}
-      value={selected}
-      onSelect={setSelected}
-    />
-  </>
-})
+    const text = useMemo(()=>({
+      notSelected: optionText.notSelected,
+    }), [titleText, optionText])
+    
+    
+    const [selected, setSelected] = useState('')
+    
+    
+    const options = useMemo(
+      () => [
+        {
+          value: '1',
+          text: 'Да, у меня есть собака(и)',
+        }, {
+          value: '2',
+          text: 'Да, у меня есть кошка(и)',
+        }, {
+          value: '3',
+          text: 'Да, у меня есть другие животные (укажите какие)',
+        }, {
+          value: '4',
+          text: 'Нет, у меня нет питомцев',
+        }, {
+          value: '',
+          text: text.notSelected,
+        },
+      ],
+      [text]
+    )
+    
+    
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    
+    
+    return (
+      <>
+        <OptionItem
+          icon={<BengalCatGradIc />}
+          title={'Отношение к домашним животным'}
+          value={value}
+          onClick={open}
+        />
+        
+        <ModalRadio
+          isOpen={isOpen}
+          close={close}
+          title={'Отношение к домашним животным'}
+          options={options}
+          value={selected}
+          onSelect={setSelected}
+        />
+      </>
+    )
+  }
+)
 export default ProfilePetsOption
 
 

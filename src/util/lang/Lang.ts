@@ -25,7 +25,7 @@ export namespace Lang {
     let matchedLangs = systemLangs
       .map(it => Lang.langToFullLang[it] ?? Lang.langToFullLang[it.substring(0, 2)] ?? it)
       .filter(it => Lang.AllSupported.includes(it)) as Lang.Supported[]
-    matchedLangs = ArrayU.distinct(matchedLangs)
+    matchedLangs = ArrayU.distinctToIf(matchedLangs)
     return matchedLangs
   }
   

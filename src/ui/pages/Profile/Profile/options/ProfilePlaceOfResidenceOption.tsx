@@ -1,11 +1,9 @@
-import React, { useMemo } from 'react'
-import { Job } from 'src/api/model/Job.ts'
+import React, { useMemo, useState } from 'react'
+import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import {
-  SvgGradIcons,
-} from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
+import { SvgGradIcons } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
@@ -13,7 +11,7 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import WorkSuitcaseGradIc = SvgGradIcons.WorkSuitcaseGradIc
+import MapLocationGradIc = SvgGradIcons.MapLocationGradIc
 
 
 
@@ -21,56 +19,58 @@ import WorkSuitcaseGradIc = SvgGradIcons.WorkSuitcaseGradIc
 
 
 
-const overlayName = 'job'
+const overlayName = 'placeOfResidence'
 
 
 
-export type JobOptionValues = Job | ''
-export type JobUiOptions = Option<JobOptionValues>[]
 
 
-const ProfileJobOption = React.memo(
-  (props: ValidationWrapRenderProps<JobOptionValues>) => {
+const ProfilePlaceOfResidenceOption = React.memo(
+() => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     
     const text = useMemo(() => ({
-      iWorkForHire: optionText.iWorkForHire,
-      workForMyself: optionText.workForMyself,
-      temporaryUnemployed: optionText.temporaryUnemployed,
       notSelected: optionText.notSelected,
-    }), [optionText, titleText])
+    }), [titleText, optionText])
+    
+    
+    const [selected, setSelected] = useState('')
     
     
     const options = useMemo(
       () => [
         {
-          value: 'I_WORK_FOR_HIRE',
-          text: text.iWorkForHire,
+          value: '1',
+          text: 'Октябрьский округ',
         }, {
-          value: 'WORK_FOR_MYSELF',
-          text: text.workForMyself,
+          value: '2',
+          text: 'Свердловский округ',
         }, {
-          value: 'TEMPORARILY_UNEMPLOYED',
-          text: text.temporaryUnemployed,
+          value: '3',
+          text: 'Правобережный округ',
+        }, {
+          value: '4',
+          text: 'Ленинский округ',
         }, {
           value: '',
           text: text.notSelected,
         },
-      ] satisfies JobUiOptions,
+      ],
       [text]
     )
     
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === props.value)?.text ?? ''
+    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    
     
     return (
       <>
         <OptionItem
-          icon={<WorkSuitcaseGradIc />}
-          title={titleText.job}
+          icon={<MapLocationGradIc />}
+          title={'Место проживания'}
           value={value}
           onClick={open}
         />
@@ -79,16 +79,16 @@ const ProfileJobOption = React.memo(
         <ModalSingleSelectList
           isOpen={isOpen}
           close={close}
-          title={titleText.job}
+          title={'Место проживания'}
           options={options}
-          selected={props.value}
-          setSelected={props.setValue}
+          selected={selected}
+          setSelected={setSelected}
         />
       </>
     )
   }
 )
-export default ProfileJobOption
+export default ProfilePlaceOfResidenceOption
 
 
 

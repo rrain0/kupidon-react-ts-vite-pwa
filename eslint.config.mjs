@@ -186,7 +186,8 @@ export default [
       '@stylistic/object-curly-spacing': ['error', 'always'],
       '@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
       '@stylistic/one-var-declaration-per-line': 'off',
-      '@stylistic/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
+      '@stylistic/operator-linebreak': 'off',
+      //'@stylistic/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
       '@stylistic/padded-blocks': 'off',
       '@stylistic/padding-line-between-statements': 'off',
       '@stylistic/quote-props': 'off',
@@ -212,7 +213,7 @@ export default [
       '@stylistic/yield-star-spacing': 'off',
       
       // JSX rules
-      '@stylistic/jsx-quotes': ['error', 'prefer-single'],
+      '@stylistic/jsx-quotes': ['error', 'prefer-double'],
       '@stylistic/jsx-wrap-multilines': ['error', {
         return: 'parens-new-line',
         arrow: 'parens-new-line',

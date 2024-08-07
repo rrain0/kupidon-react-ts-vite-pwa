@@ -8,6 +8,7 @@ import exists = TypeU.exists
 import { SvgGradIconsStyle } from 'src/ui/elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
 
 
+import BasketballGradSvg from 'src/res/ic/gradient/basketball-grad.svg?react'
 import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
 import BowArrowGradSvg from '@ic/gradient/bow-arrow-grad.svg?react'
 
@@ -24,7 +25,7 @@ import HourglassGradSvg from '@ic/gradient/hourglass-grad.svg?react'
 
 import InfoSquareRoundedGradSvg from '@ic/gradient/info-square-rounded-grad.svg?react'
 
-import WorkSuitcaseGradSvg from '@ic/gradient/work-suitcase-grad.svg?react'
+import MapLocationGradSvg from '@ic/gradient/map-location-grad.svg?react'
 
 import NameCardGradSvg from '@ic/gradient/name-card-grad.svg?react'
 
@@ -37,7 +38,11 @@ import Search2GradSvg from '@ic/gradient/search-2-grad.svg?react'
 
 import SmokeCigaretteGradSvg from '@ic/gradient/smoke-cigarette-grad.svg?react'
 
+import TelescopeGradSvg from '@ic/gradient/telescope-grad.svg?react'
+
 import WineBottleAlcoholGradSvg from '@ic/gradient/wine-bottle-alcohol-grad.svg?react'
+
+import WorkSuitcaseGradSvg from '@ic/gradient/work-suitcase-grad.svg?react'
 
 
 
@@ -120,6 +125,7 @@ export namespace SvgGradIcons {
   
   // Icons
   
+  export const BasketballGradIc = generateSimpleSvgIcon(BasketballGradSvg)
   export const BengalCatGradIc = generateSimpleSvgIcon(BengalCatGradSvg)
   export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
   
@@ -136,7 +142,7 @@ export namespace SvgGradIcons {
   
   export const InfoSquareRoundedGradIc = generateSimpleSvgIcon(InfoSquareRoundedGradSvg)
   
-  export const WorkSuitcaseGradIc = generateSimpleSvgIcon(WorkSuitcaseGradSvg)
+  export const MapLocationGradIc = generateSimpleSvgIcon(MapLocationGradSvg)
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   
@@ -149,7 +155,10 @@ export namespace SvgGradIcons {
   
   export const SmokeCigaretteGradIc = generateSimpleSvgIcon(SmokeCigaretteGradSvg)
   
+  export const TelescopeGradIc = generateSimpleSvgIcon(TelescopeGradSvg)
+  
   export const WineBottleAlcoholGradIc = generateSimpleSvgIcon(WineBottleAlcoholGradSvg)
+  export const WorkSuitcaseGradIc = generateSimpleSvgIcon(WorkSuitcaseGradSvg)
   
   
   

@@ -9,7 +9,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import GenderGradIc = SvgGradIcons.GenderGradIc
+import BasketballGradIc = SvgGradIcons.BasketballGradIc
 
 
 
@@ -68,23 +68,25 @@ React.memo(
   const value = genderOptions.find(opt => opt.value === selected)?.text ?? ''
   
   
-  return <>
-    <OptionItem
-      //icon={<GenderGradIc />}
-      title={'Как часто вы занимаетесь спортом'}
-      value={value}
-      onClick={open}
-    />
-    
-    <ModalRadio
-      isOpen={isOpen}
-      close={close}
-      title={'Как часто вы занимаетесь спортом'}
-      options={genderOptions}
-      value={selected}
-      onSelect={setSelected}
-    />
-  </>
+  return (
+    <>
+      <OptionItem
+        icon={<BasketballGradIc />}
+        title={'Как часто вы занимаетесь спортом'}
+        value={value}
+        onClick={open}
+      />
+      
+      <ModalRadio
+        isOpen={isOpen}
+        close={close}
+        title={'Как часто вы занимаетесь спортом'}
+        options={genderOptions}
+        value={selected}
+        onSelect={setSelected}
+      />
+    </>
+  )
 })
 export default ProfileSportFrequencyOption
 
