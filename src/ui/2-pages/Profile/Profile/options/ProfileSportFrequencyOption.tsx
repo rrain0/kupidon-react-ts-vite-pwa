@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react'
 import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
+import ModalSingleSelectList
+  from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -23,71 +25,72 @@ const overlayName = 'sportFrequency'
 
 
 
-const ProfileSportFrequencyOption =
-React.memo(
-() => {
-  const optionText = useUiValues(OptionUiText)
-  const titleText = useUiValues(TitleUiText)
-  
-  const text = useMemo(()=>({
-    notSelected: optionText.notSelected,
-  }), [titleText, optionText])
-  
-  
-  const [selected, setSelected] = useState('')
-  
-  
-  const genderOptions = useMemo(
-    ()=>[
-      {
-        value: '1',
-        text: 'Ежедневно',
-      },{
-        value: '2',
-        text: 'Несколько раз в неделю',
-      },{
-        value: '3',
-        text: 'Периодически, в зависимости от настроения',
-      },{
-        value: '4',
-        text: 'Редко',
-      },{
-        value: '5',
-        text: 'Не занимаюсь спортом',
-      },{
-        value: '',
-        text: text.notSelected,
-      }
-    ],
-    [text]
-  )
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = genderOptions.find(opt => opt.value === selected)?.text ?? ''
-  
-  
-  return (
-    <>
-      <OptionItem
-        icon={<BasketballGradIc />}
-        title={'Как часто вы занимаетесь спортом'}
-        value={value}
-        onClick={open}
-      />
-      
-      <ModalRadio
-        isOpen={isOpen}
-        close={close}
-        title={'Как часто вы занимаетесь спортом'}
-        options={genderOptions}
-        value={selected}
-        onSelect={setSelected}
-      />
-    </>
-  )
-})
+const ProfileSportFrequencyOption = React.memo(
+  () => {
+    const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
+    
+    const text = useMemo(()=>({
+      notSelected: optionText.notSelected,
+    }), [titleText, optionText])
+    
+    
+    const [selected, setSelected] = useState('')
+    
+    
+    const options = useMemo(
+      () => [
+        {
+          value: '1',
+          text: 'Ежедневно',
+        }, {
+          value: '2',
+          text: 'Несколько раз в неделю',
+        }, {
+          value: '3',
+          text: 'Периодически по настроению',
+        }, {
+          value: '4',
+          text: 'Редко',
+        }, {
+          value: '5',
+          text: 'Не занимаюсь спортом',
+        }, {
+          value: '',
+          text: text.notSelected,
+        },
+      ],
+      [text]
+    )
+    
+    
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    
+    
+    return (
+      <>
+        <OptionItem
+          icon={<BasketballGradIc />}
+          title={'Как часто вы занимаетесь спортом'}
+          value={value}
+          onClick={open}
+        />
+        
+        
+        <ModalSingleSelectList
+          isOpen={isOpen}
+          close={close}
+          title={'Как часто вы занимаетесь спортом'}
+          options={options}
+          selected={selected}
+          setSelected={setSelected}
+        />
+      </>
+    )
+  }
+)
 export default ProfileSportFrequencyOption
 
 

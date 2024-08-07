@@ -69,12 +69,12 @@ const ModalMultiSelectList = ReactU.memo(
     
     
     return (
-      <>
-        
-        <UseBottomSheetState
-          isOpen={isOpen}
-          close={close}
-        >{ sheetProps => (
+      <UseBottomSheetState
+        isOpen={isOpen}
+        close={close}
+      >{ sheetProps => (
+        <>
+          
           <ModalPortal>
             <BottomSheetDialogBasic
               {...sheetProps.sheetProps}
@@ -116,19 +116,19 @@ const ModalMultiSelectList = ReactU.memo(
             
             </BottomSheetDialogBasic>
           </ModalPortal>
-        )}</UseBottomSheetState>
-        
-        
-        <ModalInput
-          isOpen={isEditOpen}
-          onClose={onEditClose}
-          onClear={() => setInputText('')}
-          value={inputText}
-          onChange={ev => setInputText(ev.currentTarget.value)}
-          title={title}
-        />
-      
-      </>
+          
+          
+          <ModalInput
+            isOpen={isEditOpen}
+            onClose={onEditClose}
+            onClear={() => setInputText('')}
+            value={inputText}
+            onChange={ev => setInputText(ev.currentTarget.value)}
+            title={title}
+          />
+          
+        </>
+      )}</UseBottomSheetState>
     )
   }
 )

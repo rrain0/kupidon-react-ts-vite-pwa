@@ -92,7 +92,7 @@ React.memo(
   )
   
   
-  if (sheetState==='closed') return undefined
+  if (sheetState === 'closed') return undefined
   return props.children?.({
     setClosing,
     sheetProps,

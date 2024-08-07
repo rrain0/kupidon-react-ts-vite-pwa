@@ -9,7 +9,6 @@ import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
-import Ripple from 'src/_old0/ui/0-elements/Ripple0/Ripple.tsx'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 import Callback = TypeU.Callback
@@ -26,27 +25,29 @@ export type OptionItemProps = PartialUndef<{
 }>
 
 
-const OptionItem =
-React.memo(
-(props: OptionItemProps) => {
-  const { icon, title, value, onClick } = props
-  
-  
-  
-  return <Button
-    css={buttonStyle}
-    onClick={onClick}
-  >
+const OptionItem = React.memo(
+  (props: OptionItemProps) => {
+    const { icon, title, value, onClick } = props
     
-    <IconFrame>{icon}</IconFrame>
-    <TitleFrame>{title}</TitleFrame>
-    <ValueFrame>{value}</ValueFrame>
-    <NextIconFrame>
-      <ArrowAngledRoundedIc css={t=>nextIconStyle(t)}/>
-    </NextIconFrame>
     
-  </Button>
-})
+    
+    return (
+      <Button
+        css={buttonStyle}
+        onClick={onClick}
+      >
+        
+        <IconFrame>{icon}</IconFrame>
+        <TitleFrame>{title}</TitleFrame>
+        <ValueFrame>{value}</ValueFrame>
+        <NextIconFrame>
+          <ArrowAngledRoundedIc css={t => nextIconStyle(t)}/>
+        </NextIconFrame>
+        
+      </Button>
+    )
+  }
+)
 export default OptionItem
 
 
@@ -79,8 +80,8 @@ const IconFrame = styled.div`
   height: 50px;
   display: grid;
   place-items: center;
-  > { ${p=>OptionAndValueItemGradIconStyle(p.theme)} }
-  > { ${p=>OptionAndValueItemIconStyle(p.theme)} }
+  > { ${p => OptionAndValueItemGradIconStyle(p.theme)} }
+  > { ${p => OptionAndValueItemIconStyle(p.theme)} }
 `
 const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
   ${SvgGradIconsStyle.normal(t)};
@@ -101,7 +102,7 @@ const TitleFrame = styled.div`
   display: grid;
   place-items: center start;
   
-  color: ${p=>p.theme.containerNormal.content[0]};
+  color: ${p => p.theme.containerNormal.content[0]};
 `
 const ValueFrame = styled.div`
   grid-area: value;
@@ -109,7 +110,7 @@ const ValueFrame = styled.div`
   display: grid;
   place-items: center start;
   
-  color: ${p=>p.theme.containerNormal.content3[0]};
+  color: ${p => p.theme.containerNormal.content3[0]};
 `
 const NextIconFrame = styled.div`
   grid-area: next;
@@ -123,3 +124,4 @@ const nextIconStyle = (t: AppTheme.Theme) => css`
   height: 24px;
   ${SvgIconsStyle.El.icon.props.color.name}: ${t.containerNormal.content3[0]};
 `
+

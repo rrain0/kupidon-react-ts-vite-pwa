@@ -67,6 +67,7 @@ const ProfilePartnerCommunicationCharacteristicsOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
     const value = props.value
       .map(v => options.find(o => o.value === v))
       .filter(o => !!o)

@@ -25,8 +25,6 @@ import col = EmotionCommon.col
 
 
 const overlayName = 'dateGenre'
-const overlayEditCustomName = 'editCustom'
-
 
 
 const DateGenreOption =
@@ -41,9 +39,7 @@ React.memo(
   
   
   const [selected, setSelected] = useState('')
-  
-  
-  const [customText, setCustomText] = useState('')
+  const [customOptionText, setCustomOptionText] = useState('')
   
   const options = useMemo(
     () => [
@@ -94,7 +90,7 @@ React.memo(
   const value = (() => {
     const opt = options.find(opt => opt.value === selected)!
     if (opt.value === OPTION_NOTHING) return text.notSelected
-    if (opt.value === OPTION_CUSTOM) return customText
+    if (opt.value === OPTION_CUSTOM) return customOptionText
     return opt.text
   })()
   
@@ -117,8 +113,8 @@ React.memo(
         options={options}
         selected={selected}
         setSelected={setSelected}
-        customText={customText}
-        setCustomText={setCustomText}
+        customOptionText={customOptionText}
+        setCustomOptionText={setCustomOptionText}
       />
       
     </>
