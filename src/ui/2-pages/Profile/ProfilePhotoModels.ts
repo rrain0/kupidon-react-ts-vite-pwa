@@ -16,8 +16,8 @@ export type Operation = typeof DefaultOperation
 
 export const DefaultProfilePhoto = {
   type: 'remote' as
-    |'remote' // photo from server
-    |'local', // photo from local storage
+    | 'remote' // photo from remote server
+    | 'local', // photo from a local device (file from device filesystem)
   isEmpty: false,
   
   id: '',
@@ -30,8 +30,8 @@ export const DefaultProfilePhoto = {
   
   isReady: false,
   
-  compression: undefined as Operation|undefined,
-  download: undefined as Operation|undefined,
-  upload: undefined as Operation|undefined,
+  compression: undefined as Operation | undefined,
+  download: undefined as Operation | undefined,
+  upload: undefined as Operation | undefined,
 }
 export type ProfilePhoto = typeof DefaultProfilePhoto

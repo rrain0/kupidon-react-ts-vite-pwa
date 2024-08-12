@@ -59,16 +59,15 @@ const ProfileInterestsAndHobbiesOption = React.memo(
       [text]
     )
     
+    const value = selected
+        .map(v => options.find(o => o.value === v))
+        .filter(o => !!o)
+        .map(o => o!.text)
+        .join(', ')
+      || text.notSelected
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    
-    const value = selected
-      .map(v => options.find(o => o.value === v))
-      .filter(o => !!o)
-      .map(o => o!.text)
-      .join(', ')
-      || text.notSelected
     
     
     return (

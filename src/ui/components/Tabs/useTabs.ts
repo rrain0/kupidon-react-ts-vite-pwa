@@ -14,7 +14,6 @@ import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import PartialUndef = TypeU.PartialUndef
-import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback
 import findLastBy = ArrayU.findLastBy
@@ -83,8 +82,7 @@ export const useTabs = (
   
   const [isReady, setIsReady] = useState(false)
   
-  const [computedTabsDimens, setComputedTabsDimens, computedTabsDimensRef] =
-  useStateAndRef<ComputedTabsDimens>({
+  const [computedTabsDimens, setComputedTabsDimens] = useState<ComputedTabsDimens>({
     frameWidth: 0,
   })
   

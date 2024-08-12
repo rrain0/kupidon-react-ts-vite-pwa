@@ -17,7 +17,6 @@ import { CssParserU } from 'src/util/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
 import PartialUndef = TypeU.PartialUndef
-import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import Setter = TypeU.Setter
 import findLastBy3 = ArrayU.findLastBy3
 import exists = TypeU.exists
@@ -118,14 +117,13 @@ export const useBottomSheet = (
   const [isReady, setIsReady] = useState(false)
   
   // todo use spring to avoid rerenders
-  const [computedSheetDimens, setComputedSheetDimens, computedSheetDimensRef] =
-    useStateAndRef<ComputedBottomSheetDimens>({
-      frameH: 0,
-      sheetH: 0,
-      headerH: 0,
-      contentH: 0,
-      headerAndContentH: 0,
-    })
+  const [computedSheetDimens, setComputedSheetDimens] = useState<ComputedBottomSheetDimens>({
+    frameH: 0,
+    sheetH: 0,
+    headerH: 0,
+    contentH: 0,
+    headerAndContentH: 0,
+  })
   
   
   

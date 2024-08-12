@@ -18,9 +18,9 @@ export class Progress {
   get value() {
     let total = 0 // 0..100
     this.stagesWeights.forEach((sMaxP, i) => {
-      const s = i+1
-      if (this.stage>s) total += sMaxP
-      else if (this.stage===s) total += this.progress * sMaxP/100
+      const s = i + 1
+      if (this.stage > s) total += sMaxP
+      else if (this.stage === s) total += this.progress * sMaxP / 100
     })
     return total
   }

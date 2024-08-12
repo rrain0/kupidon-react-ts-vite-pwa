@@ -1,13 +1,9 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
-import Mapper = TypeU.Mapper
 
 
 
 
 export namespace Utils {
-  
-  
-  export const my = <T1, T2>(obj: T1, handler: Mapper<T1, T2>) => handler(obj)
   
   
   export class Lazy<T> {

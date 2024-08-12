@@ -200,7 +200,7 @@ const Profile = React.memo(
                 <ProfileFavoriteBookGenresOption/>
                 
                 
-                <ProfilePreviousRelationshipsOption/>
+                {/* <ProfilePreviousRelationshipsOption/> */}
                 
                 
                 <ProfileFavoriteThingsInRelationshipsOption/>

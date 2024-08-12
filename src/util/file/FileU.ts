@@ -12,8 +12,7 @@ export namespace FileU {
   
   
   
-  export const blobToDataUrl =
-  async (
+  export const blobToDataUrl = async (
     file: Blob,
     options?: {
       onProgress?: Callback1<number | null>
@@ -51,8 +50,7 @@ export namespace FileU {
    */
   
   
-  export const fetchToBlob =
-  async (
+  export const fetchToBlob = async (
     url: string,
     options?: {
       onProgress?: Callback1<number | null>

@@ -57,7 +57,7 @@ const ModalSingleSelectList = ReactU.memo(
     }, [options])
     
     const toggleSelected = (value: T) => {
-      if (selected === value && canSelectNothing) setSelected(OPTION_NOTHING as any)
+      if (selected === value && canSelectNothing) setSelected(OPTION_NOTHING as T)
       else setSelected(value)
     }
     

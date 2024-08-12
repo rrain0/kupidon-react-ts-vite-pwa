@@ -120,7 +120,7 @@ React.memo(
   
   const [lastIdx, setLastIdx] = useState(0)
   
-  const [dragState, setDragState, dragStateRef] = useStateAndRef(
+  const [dragState, setDragState, getDragStateRef, dragStateRef] = useStateAndRef(
     undefined as undefined|'initialDelay'|'progressAnim'|'dragging'
   )
   const [progressAnimLockGestures, setProgressAnimLockGestures] = useState(false)

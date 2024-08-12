@@ -40,7 +40,7 @@ const ProfileAboutMeOption = React.memo(
           autoFocus
           placeholder={titleText.aboutMe.toLowerCase()}
           {...props.inputProps}
-          hasError={props.highlight}
+          isError={props.highlight}
           onBlur={ev => {
             ev.currentTarget.focus()
             props.inputProps.onBlur()

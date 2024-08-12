@@ -96,7 +96,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
   const [prevMinMax, setPrevMinMax] = useState(outerMinMax)
   const [prevRange, setPrevRange] = useState(outerRange)
   
-  const getMinMax = useAsRefGet(outerMinMax)
+  const [getMinMax] = useAsRefGet(outerMinMax)
   
   const [isDragging, setIsDragging] = useState(false)
   const [getActiveTip, setActiveTip] = useRefGetSet(null as 'left' | 'right' | null)

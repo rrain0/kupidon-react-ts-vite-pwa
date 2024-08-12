@@ -87,6 +87,7 @@ export namespace AppRoutes {
     tabs: buildPath('tabs'),
     state: buildPath('state'),
     pageLifecycle: buildPath('page-lifecycle'),
+    useEvent: buildPath('use-event'),
     
     emulatedScroll: buildPath('emulated-scroll'),
     

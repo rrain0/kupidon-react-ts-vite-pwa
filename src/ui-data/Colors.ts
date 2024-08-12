@@ -44,6 +44,11 @@ export const Colors = {
   } as const,
   
   
+  savedColor: {
+    lightBlue: '#5F9BEB',
+  },
+  
+  
 } as const
 
 

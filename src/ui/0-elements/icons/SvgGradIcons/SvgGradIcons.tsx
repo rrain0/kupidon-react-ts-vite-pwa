@@ -10,13 +10,17 @@ import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradI
 
 import BasketballGradSvg from 'src/res/ic/gradient/basketball-grad.svg?react'
 import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
+import BookGradSvg from 'src/res/ic/gradient/book-grad.svg?react'
 import BowArrowGradSvg from 'src/res/ic/gradient/bow-arrow-grad.svg?react'
 
 import CardsHeartGradSvg from 'src/res/ic/gradient/cards-heart-grad.svg?react'
 import ChatRoundGradSvg from 'src/res/ic/gradient/chat-round-grad.svg?react'
 import CommunicationTwoPeopleGradSvg from 'src/res/ic/gradient/communication-two-people-grad.svg?react'
+import Couple2GradSvg from 'src/res/ic/gradient/couple-2-grad.svg?react'
 
 import EducationGradSvg from 'src/res/ic/gradient/education-grad.svg?react'
+
+import FilmGradSvg from 'src/res/ic/gradient/film-grad.svg?react'
 
 import GenderGradSvg from 'src/res/ic/gradient/gender-grad.svg?react'
 import GiftBoxGradSvg from 'src/res/ic/gradient/gift-box-grad.svg?react'
@@ -32,6 +36,7 @@ import NameCardGradSvg from 'src/res/ic/gradient/name-card-grad.svg?react'
 import ProfileGradSvg from 'src/res/ic/gradient/profile-grad.svg?react'
 import PuzzlesGradSvg from 'src/res/ic/gradient/puzzles-grad.svg?react'
 
+import RelationshipMinusesGradSvg from 'src/res/ic/gradient/relationship-minuses-grad.svg?react'
 import RulerVerticalGradSvg from 'src/res/ic/gradient/ruler-vertical-grad.svg?react'
 
 import Search2GradSvg from 'src/res/ic/gradient/search-2-grad.svg?react'
@@ -127,13 +132,17 @@ export namespace SvgGradIcons {
   
   export const BasketballGradIc = generateSimpleSvgIcon(BasketballGradSvg)
   export const BengalCatGradIc = generateSimpleSvgIcon(BengalCatGradSvg)
+  export const BookGradIc = generateSimpleSvgIcon(BookGradSvg)
   export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
   
   export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
   export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
   export const CommunicationTwoPeopleGradIc = generateSimpleSvgIcon(CommunicationTwoPeopleGradSvg)
+  export const Couple2GradIc = generateSimpleSvgIcon(Couple2GradSvg)
   
   export const EducationGradIc = generateSimpleSvgIcon(EducationGradSvg)
+  
+  export const FilmGradIc = generateSimpleSvgIcon(FilmGradSvg)
   
   export const GenderGradIc = generateSimpleSvgIcon(GenderGradSvg)
   export const GiftBoxGradIc = generateSimpleSvgIcon(GiftBoxGradSvg)
@@ -149,6 +158,7 @@ export namespace SvgGradIcons {
   export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
   export const PuzzlesGradIc = generateSimpleSvgIcon(PuzzlesGradSvg)
   
+  export const RelationshipMinusesGradIc = generateSimpleSvgIcon(RelationshipMinusesGradSvg)
   export const RulerVerticalGradIc = generateSimpleSvgIcon(RulerVerticalGradSvg)
   
   export const Search2GradIc = generateSimpleSvgIcon(Search2GradSvg)

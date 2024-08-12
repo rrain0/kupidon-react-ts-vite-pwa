@@ -14,8 +14,7 @@ export namespace ImageU {
   
   
   
-  export const compress =
-  async(
+  export const compress = async (
     imgFile: File,
     options?: {
       onProgress?: CallbackParam<number>
