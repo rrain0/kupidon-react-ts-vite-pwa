@@ -8,12 +8,10 @@ import Generator = TypeU.Generator
 
 
 
-// TODO clean function
 
 // Use it to call async / imperative api.
 // Triggers only once if deps changed:
 // ● Does not trigger twice via react dev double rerender
-// ● Does not trigger at all until deps values change
 // ● Can skip first render triggering
 // Can't pass undefined as dependency,
 // because it is impossible to distinct re-renders without using state

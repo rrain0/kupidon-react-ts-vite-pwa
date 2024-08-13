@@ -81,7 +81,7 @@ export namespace SelectItemS {
       --br: 20px;
       border-radius: var(--br);
       
-      background: #eeeeee;
+      background-color: #eeeeee;
       
       position: relative;
       display: grid;
@@ -186,9 +186,10 @@ export namespace SelectItemS {
     // normal
     ${W.use.s.normal().e.frame().thisUse} {
       width: 100%;
+      background-color: ${t.containerNormal.bg2[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse}{
-      ${RippleS.filled(t)}
+      ${RippleS.onFilledNormal(t)}
     }
   `
   

@@ -431,7 +431,7 @@ export namespace WidgetStyle {
     }
     
     
-    static readonly color = new class extends CssProp {
+    static readonly color: CssProp = new class extends CssProp {
       // --color: value; color: value;
       protected override setAny(value: string): string {
         return `${super.setAny(value)} color: ${value};`

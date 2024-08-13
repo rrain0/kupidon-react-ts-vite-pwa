@@ -201,6 +201,7 @@ function getRippleProps(
       height: radius * 2,
     },
     rippleDuration: Math.max(400, dur * radius / 200),
-    dissolveDuration: Math.max(500, (dur + 100) * radius / 200),
+    //dissolveDuration: Math.max(500, (dur + 100) * radius / 200),
+    dissolveDuration: 500,
   }
 }
