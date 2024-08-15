@@ -69,7 +69,7 @@ import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.sv
 import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
 
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
@@ -115,9 +115,9 @@ export namespace SvgIcons {
     const w = width ?? size
     const h = height ?? size
     
-    const sizeProp = SvgIconsStyle.El.root.props.size
-    const colorProp = SvgIconsStyle.El.root.props.color
-    const accentColorProp = SvgIconsStyle.El.root.props.accentColor
+    const sizeProp = SvgIconS.El.root.props.size
+    const colorProp = SvgIconS.El.root.props.color
+    const accentColorProp = SvgIconS.El.root.props.accentColor
     
     return <SvgComponent
       css={css`
@@ -131,7 +131,7 @@ export namespace SvgIcons {
       `}
       width={w}
       height={h}
-      className={clsx(className, SvgIconsStyle.El.icon.name)}
+      className={clsx(className, SvgIconS.El.icon.name)}
       {...restProps}
       ref={forwardedRef}
     />

@@ -5,7 +5,7 @@ import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import row = EmotionCommon.row
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
@@ -19,7 +19,7 @@ const btnStyle = (t: AppTheme.Theme)=>css`
   align-items: center;
 `
 const arrowStyle = (t: AppTheme.Theme)=>css`
-  ${SvgIconsStyle.El.icon.props.color.name}: ${t.page.content1[0]};
+  ${SvgIconS.El.icon.props.color.name}: ${t.page.content1[0]};
   height: 26px;
 `
 

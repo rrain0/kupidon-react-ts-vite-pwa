@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import { AppTheme } from 'src/util/theme/AppTheme'
 import Elem = WidgetStyle.Elem
@@ -102,17 +102,15 @@ export namespace SelectItemS {
     }
     
     ${W.use.s.normal().e.addIconBox().thisUse} {
+      place-self: center;
       width: 44px;
       height: 44px;
       border-radius: 10px;
-      
-      place-self: center;
-      //background: #ff000011;
       ${center};
       padding: 2px;
     }
     ${W.use.s.normal().e.addIcon().thisUse}{
-      /* SvgIconsStyle */
+      ${SvgIconS.base}
     }
     
     ${W.use.s.normal().e.indicatorFrame().thisUse}{
@@ -162,7 +160,7 @@ export namespace SelectItemS {
       ${RippleS.base}
     }
     ${W.use.s.normal().e.editIcon().thisUse}{
-      ${SvgIconsStyle.El.icon.props.color.set('#444444')}
+      ${SvgIconS.base}
     }
     ${W.use.s.normal().e.content().thisUse}{
       width: 100%;
@@ -190,6 +188,76 @@ export namespace SelectItemS {
     }
     ${W.use.s.normal().e.ripple().thisUse}{
       ${RippleS.onFilledNormal(t)}
+    }
+    ${W.use.s.normal().e.addIcon().thisUse}{
+      ${SvgIconS.normal(t)}
+    }
+    
+    
+    
+    
+    
+    ${W.use.s.normal().e.indicatorFrame().thisUse}{
+      pointer-events: none;
+      ${abs};
+      ${colC};
+      padding: 6px;
+    }
+    ${W.use.s.normal().e.indicatorBox().thisUse}{
+      width: 75%;
+      align-self: center;
+      height: 6px;
+      ${row};
+      gap: 6px;
+    }
+    ${W.use.s.normal().e.indicator0().thisUse}{
+      flex: 1;
+      height: 100%;
+      border-radius: 999999px;
+      background: #dddddd;
+    }
+    ${W.use.s.normal().e.indicator1().thisUse}{
+      flex: 1;
+      height: 100%;
+      border-radius: 999999px;
+      background: #999999;
+    }
+    ${W.use.s.normal().e.indicator2().thisUse}{
+      flex: 1;
+      height: 100%;
+      border-radius: 999999px;
+      background: #444444;
+    }
+    
+    ${W.use.s.normal().e.editBtn().thisUse}{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--br);
+      ${center};
+      padding: 11px;
+      overflow: hidden;
+    }
+    ${W.use.s.normal().e.editBtnRipple().thisUse}{
+      ${RippleS.base}
+    }
+    ${W.use.s.normal().e.editIcon().thisUse}{
+      ${SvgIconS.normal(t)}
+    }
+    ${W.use.s.normal().e.content().thisUse}{
+      width: 100%;
+      min-height: 100%;
+      padding: 20px 26px;
+      ${center};
+    }
+    
+    // selected
+    ${W.use.s.selected().e.border().thisUse} {
+      border-width: 2px;
+      border-style: solid;
+      border-color: #444444;
     }
   `
   

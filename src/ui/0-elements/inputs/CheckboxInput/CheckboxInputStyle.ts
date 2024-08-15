@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
-import Elem = WidgetStyle.Elem
-import CssProp = WidgetStyle.CssProp
-import CssAttr = WidgetStyle.CssAttr
-import CssPseudo = WidgetStyle.CssPseudo
-import CssWidget = WidgetStyle.CssWidget
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
+import Elem = WidgetStyle0.Elem
+import CssProp = WidgetStyle0.CssProp
+import CssAttr = WidgetStyle0.CssAttr
+import CssPseudo = WidgetStyle0.CssPseudo
+import CssWidget = WidgetStyle0.CssWidget
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import hoverable = EmotionCommon.hoverable
 import center = EmotionCommon.center
@@ -41,8 +41,8 @@ export namespace CheckboxInputStyle {
     }, { })
     const iconBox = new Elem('rrainuiIconBox', { }, { })
     const iconBoxChecked = new Elem('rrainuiIconBoxChecked', { }, { })
-    const iconChecked = new Elem(SvgIconsStyle.El.icon.name, { }, {
-      color: SvgIconsStyle.El.icon.props.color
+    const iconChecked = new Elem(SvgIconS.El.icon.name, { }, {
+      color: SvgIconS.El.icon.props.color
     })
     const ripple = RippleStyle.El.frame
     

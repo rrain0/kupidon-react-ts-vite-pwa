@@ -8,7 +8,7 @@ import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
 import Txt = EmotionCommon.Txt
@@ -73,11 +73,11 @@ const Title = styled(Hs.Card3)`
   place-self: center start;
 `
 const PencilIcon = styled(PencilWrite2Ic)`
-  ${SvgIconsStyle.El.icon.thiz()}{
+  ${SvgIconS.El.icon.thiz()}{
     grid-area: icon;
     align-self: center;
     height: 20px;
-    ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.containerNormal.content4[0]};
+    ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.containerNormal.content4[0]};
   }
 `
 const Text = styled.div<{

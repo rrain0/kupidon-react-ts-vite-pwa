@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SpinnerCircleQuarterIc = SvgIcons.SpinnerCircleQuarterIc
 import InfoToastifyIc = SvgIcons.InfoToastifyIc
 import CheckmarkCircleToastifyIc = SvgIcons.CheckmarkCircleToastifyIc
@@ -40,8 +40,8 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentLoadingBg[0]};
-        ${SvgIconsStyle.El.icon.props.accentColor.name}: ${t.toast.accentLoadingContent[0]};
+        ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentLoadingBg[0]};
+        ${SvgIconS.El.icon.props.accentColor.name}: ${t.toast.accentLoadingContent[0]};
       `}
     />}
     
@@ -57,7 +57,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentOk[0]};
+        ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentOk[0]};
       `}
     />}
     
@@ -65,7 +65,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentWarn[0]};
+        ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentWarn[0]};
       `}
     />}
     
@@ -73,7 +73,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        ${SvgIconsStyle.El.icon.props.color.name}: ${t.toast.accentDanger[0]};
+        ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentDanger[0]};
       `}
     />}
     
@@ -123,15 +123,15 @@ const CloseButton = styled.button`
   ${center};
   cursor: pointer;
 
-  &>${SvgIconsStyle.El.icon.sel()} {
+  &>${SvgIconS.El.icon.sel()} {
     width: 100%;
     height: 100%;
-    ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.toast.content2[0]};
+    ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.content2[0]};
   }
   
   ${hoverable}{
-    :hover>${SvgIconsStyle.El.icon.sel()} {
-      ${SvgIconsStyle.El.icon.props.color.name}: ${p=>p.theme.toast.content3[0]};
+    :hover>${SvgIconS.El.icon.sel()} {
+      ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.content3[0]};
     }
   }
 `

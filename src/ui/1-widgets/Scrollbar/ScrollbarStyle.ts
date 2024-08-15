@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import hoverable = EmotionCommon.hoverable
-import DataAttr = WidgetStyle.DataAttr
-import combineStates = WidgetStyle.combineStates
-import Elem = WidgetStyle.Elem0
+import DataAttr = WidgetStyle0.DataAttr
+import combineStates = WidgetStyle0.combineStates
+import Elem = WidgetStyle0.Elem0
 
 
 
@@ -23,8 +23,8 @@ export namespace ScrollbarStyle {
     const track = new Elem('rrainuiScrollbarTrack', {
       vertical: Attr.direction.s.vertical,
       horizontal: Attr.direction.s.horizontal,
-      active: combineStates(WidgetStyle.Pseudo0.active, Attr.active),
-      hover: WidgetStyle.Pseudo0.hover,
+      active: combineStates(WidgetStyle0.Pseudo0.active, Attr.active),
+      hover: WidgetStyle0.Pseudo0.hover,
     },{})
     const thumbBox = track.toElem('>', new Elem('rrainuiScrollbarThumbBox', {}, {}))
     const thumb = thumbBox.toElem('>', new Elem('rrainuiScrollbarThumb', {}, {}))

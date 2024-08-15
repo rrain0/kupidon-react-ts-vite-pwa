@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
-import Elem = WidgetStyle.Elem0
+import Elem = WidgetStyle0.Elem0
 
 
 

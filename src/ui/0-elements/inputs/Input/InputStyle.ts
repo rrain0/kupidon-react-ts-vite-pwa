@@ -5,16 +5,16 @@ import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
-import Elem = WidgetStyle.Elem
-import CssPseudo = WidgetStyle.CssPseudo
-import CssWidget = WidgetStyle.CssWidget
-import CssAttr = WidgetStyle.CssAttr
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
+import Elem = WidgetStyle0.Elem
+import CssPseudo = WidgetStyle0.CssPseudo
+import CssWidget = WidgetStyle0.CssWidget
+import CssAttr = WidgetStyle0.CssAttr
 import bgInBorder = EmotionCommon.bgInBorder
 import PartialUndef = TypeU.PartialUndef
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import CssProp = WidgetStyle.CssProp
+import CssProp = WidgetStyle0.CssProp
 
 
 

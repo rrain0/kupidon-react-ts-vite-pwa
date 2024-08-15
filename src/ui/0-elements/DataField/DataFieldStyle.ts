@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import Theme = AppTheme.Theme
 import Txt = EmotionCommon.Txt
 import bgInBorder = EmotionCommon.bgInBorder
@@ -32,7 +32,7 @@ export namespace DataFieldStyle {
     export const borderError = frameError+'>'+borderClass
   }
   export namespace Prop {
-    export const color = WidgetStyle.Prop0.prop.color
+    export const color = WidgetStyle0.Prop0.prop.color
   }
   
   

@@ -21,17 +21,17 @@ const LightProps = {
     bg: ['#ffffff'],
   },
   navButton: {
-    bgFocus:      ['#f0f0f0'],
+    bgFocus:       ['#f0f0f0'],
     content:       ['#7b7b7b'],
     contentAccent: ['#333333'],
   },
   
   containerNormal: {
-    bg:       ['#ffffff'],
-    bg2:      ['#f0f0f0'],
-    bg3:      ['#f0f0f0'],
+    bg:        ['#ffffff'],
+    bg2:       ['#f0f0f0'],
+    bg3:       ['#f0f0f0'],
     content:   ['#000000'],
-    content1b: ['#232020'],
+    content1b: ['#444444'],
     content2:  ['#555555'],
     content2b: ['#5b5b5b'],
     content3:  ['#7b7b7b'],

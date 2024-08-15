@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
@@ -22,7 +22,7 @@ export namespace NavButtonStyle {
   
   export const El = function(){
     const btn = ButtonStyle.El0.btn
-    const icon = btn.toElem('>', SvgIconsStyle.El.icon)
+    const icon = btn.toElem('>', SvgIconS.El.icon)
     const gradIcon = btn.toElem('>', SvgGradIconsStyle.El.root)
     return { ...ButtonStyle.El0, gradIcon, icon } as const
   }()

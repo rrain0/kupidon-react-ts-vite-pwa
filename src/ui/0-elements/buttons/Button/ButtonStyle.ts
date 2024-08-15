@@ -1,20 +1,20 @@
 import { css } from '@emotion/react'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import CssWidget = WidgetStyle.CssWidget
-import Elem = WidgetStyle.Elem
-import CssPseudo = WidgetStyle.CssPseudo
-import CssAttr = WidgetStyle.CssAttr
-import Elem0 = WidgetStyle.Elem0
-import Pseudo0 = WidgetStyle.Pseudo0
-import CssProp = WidgetStyle.CssProp
-import CssPropEnum = WidgetStyle.CssPropEnum
-import CssPropColor = WidgetStyle.CssPropColor
-import DataAttrError = WidgetStyle.DataAttrError
+import CssWidget = WidgetStyle0.CssWidget
+import Elem = WidgetStyle0.Elem
+import CssPseudo = WidgetStyle0.CssPseudo
+import CssAttr = WidgetStyle0.CssAttr
+import Elem0 = WidgetStyle0.Elem0
+import Pseudo0 = WidgetStyle0.Pseudo0
+import CssProp = WidgetStyle0.CssProp
+import CssPropEnum = WidgetStyle0.CssPropEnum
+import CssPropColor = WidgetStyle0.CssPropColor
+import DataAttrError = WidgetStyle0.DataAttrError
 import resetButton = EmotionCommon.resetButton
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs

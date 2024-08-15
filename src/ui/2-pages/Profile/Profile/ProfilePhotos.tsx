@@ -41,7 +41,7 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import center = EmotionCommon.center
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
@@ -524,9 +524,9 @@ const photoOnDragBorder = (t:AppTheme.Theme) => css`
   border-color: ${t.photos.borderDrag[0]};
 `
 const photoPlaceholderIconStyle = (t:AppTheme.Theme) => css`
-  ${SvgIconsStyle.El.icon.thiz()}{
-    ${SvgIconsStyle.El.icon.props.color.set(t.photos.content[0])}
-    ${SvgIconsStyle.El.icon.props.size.set('30%')}
+  ${SvgIconS.El.icon.thiz()}{
+    ${SvgIconS.El.icon.props.color.set(t.photos.content[0])}
+    ${SvgIconS.El.icon.props.size.set('30%')}
   }
 `
 const profilePhotoPieProgress = (t:AppTheme.Theme) => css`

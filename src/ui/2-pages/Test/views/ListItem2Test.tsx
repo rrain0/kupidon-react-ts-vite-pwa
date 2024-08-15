@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
@@ -398,7 +398,7 @@ const PencilIconBox = styled.div`
   ${center};
   padding: 11px;
   
-  ${SvgIconsStyle.El.icon.props.color.set('#444444')}
+  ${SvgIconS.El.icon.props.color.set('#444444')}
 `
 
 

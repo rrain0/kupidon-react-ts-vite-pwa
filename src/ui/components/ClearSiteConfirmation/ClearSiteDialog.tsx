@@ -21,7 +21,7 @@ import Spinner8LinesIc = SvgIcons.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIcons.ClearTrashIc
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 
@@ -129,15 +129,15 @@ export default ClearSiteDialog
 
 
 const icon = (t:Theme)=>css`
-  ${SvgIconsStyle.El.icon.thiz()} {
+  ${SvgIconS.El.icon.thiz()} {
     height: 1.333em;
     width: 1.333em;
-    ${SvgIconsStyle.El.icon.props.color.set(t.page.content2[0])}
+    ${SvgIconS.El.icon.props.color.set(t.page.content2[0])}
   }
 `
 const iconOnDanger = (t:Theme)=>css`
-  ${SvgIconsStyle.El.icon.thiz()} {
-    ${SvgIconsStyle.El.icon.props.color.set(t.elementDanger.content[0])}
+  ${SvgIconS.El.icon.thiz()} {
+    ${SvgIconS.El.icon.props.color.set(t.elementDanger.content[0])}
   }
 `
 const button = (t:Theme)=>css`

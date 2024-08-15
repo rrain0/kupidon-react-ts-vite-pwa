@@ -11,7 +11,7 @@ import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomShee
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -181,7 +181,7 @@ const optionIconBoxStyle = css`
   ${center};
   height: 1.3em;
   width: 1.333em;
-  >${SvgIconsStyle.El.icon.sel()}{
-    ${SvgIconsStyle.El.icon.props.color.name}: ${ButtonStyle.El0.root.props.color.var()};
+  >${SvgIconS.El.icon.sel()}{
+    ${SvgIconS.El.icon.props.color.name}: ${ButtonStyle.El0.root.props.color.var()};
   }
 `

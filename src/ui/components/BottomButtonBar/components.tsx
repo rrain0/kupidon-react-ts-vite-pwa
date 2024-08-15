@@ -13,7 +13,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import fixedBottom = EmotionCommon.fixedBottom
 import row = EmotionCommon.row
 import Arrow5FwdIc = SvgIcons.ArrowLinesSharp1Ic
@@ -147,7 +147,7 @@ export namespace ButtonBarComponents {
       onClick={reload}
     >
       <ArrowReloadIc css={isReloading && css`
-        ${SvgIconsStyle.El.icon.thiz()} {
+        ${SvgIconS.El.icon.thiz()} {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}
@@ -176,7 +176,7 @@ export namespace ButtonBarComponents {
       onClick={props.refresh}
     >
       <ArrowReloadIc css={isAnimating && css`
-        ${SvgIconsStyle.El.icon.thiz()} {
+        ${SvgIconS.El.icon.thiz()} {
           animation: ${rotateAnim} 650ms linear infinite;
         }
       `}

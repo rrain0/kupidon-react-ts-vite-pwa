@@ -13,7 +13,7 @@ import RecordRo = TypeU.RecordRo
 
 
 
-export namespace WidgetStyle {
+export namespace WidgetStyle0 {
   
   /*
   Has Element list

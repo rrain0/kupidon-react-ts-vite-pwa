@@ -8,7 +8,7 @@ import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradI
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 import Callback = TypeU.Callback
@@ -90,9 +90,9 @@ const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
   }
 `
 const OptionAndValueItemIconStyle = (t: AppTheme.Theme) => css`
-  ${SvgIconsStyle.normal(t)};
-  ${SvgIconsStyle.El.icon.thiz()}{
-    ${SvgIconsStyle.El.icon.props.color.set(t.containerNormal.content3[0])}
+  ${SvgIconS.base};
+  ${SvgIconS.El.icon.thiz()}{
+    ${SvgIconS.El.icon.props.color.set(t.containerNormal.content3[0])}
     height: 50%;
   }
 `
@@ -122,6 +122,6 @@ const NextIconFrame = styled.div`
 `
 const nextIconStyle = (t: AppTheme.Theme) => css`
   height: 24px;
-  ${SvgIconsStyle.El.icon.props.color.name}: ${t.containerNormal.content3[0]};
+  ${SvgIconS.El.icon.props.color.name}: ${t.containerNormal.content3[0]};
 `
 

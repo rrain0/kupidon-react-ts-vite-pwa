@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import rowWrap = EmotionCommon.rowWrap
 import col = EmotionCommon.col
 import bgInBorder = EmotionCommon.bgInBorder
@@ -35,7 +35,7 @@ export namespace CheckboxInputGroupStyle {
     export const borderError = radioGroupError+'>'+borderClass
   }
   export namespace Prop {
-    export const color = WidgetStyle.Prop0.prop.color
+    export const color = WidgetStyle0.Prop0.prop.color
   }
   
   

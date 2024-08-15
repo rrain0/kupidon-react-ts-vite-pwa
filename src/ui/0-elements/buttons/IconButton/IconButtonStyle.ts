@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
-import { SvgIconsStyle } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsStyle.ts'
-import Elem = WidgetStyle.Elem
-import CssWidget = WidgetStyle.CssWidget
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import Elem = WidgetStyle0.Elem
+import CssWidget = WidgetStyle0.CssWidget
 
 
 
@@ -15,10 +15,10 @@ export namespace IconButtonStyle {
   
   
   export const El = function(){
-    const icon = new Elem(SvgIconsStyle.El.icon.name , { }, {
-      size: SvgIconsStyle.El.icon.props.size,
-      color: SvgIconsStyle.El.icon.props.color,
-      accentColor: SvgIconsStyle.El.icon.props.accentColor,
+    const icon = new Elem(SvgIconS.El.icon.name , { }, {
+      size: SvgIconS.El.icon.props.size,
+      color: SvgIconS.El.icon.props.color,
+      accentColor: SvgIconS.El.icon.props.accentColor,
     })
     
     return {

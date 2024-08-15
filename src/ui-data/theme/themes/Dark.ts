@@ -28,67 +28,67 @@ const DarkProps = {
   },
   
   containerNormal: {
-    bg:       ['#24272d'],
-    bg2:      ['#282c34'],
-    bg3:      ['#525354'],
-    content:   ['#bdbdbd'],
-    content1b: ['#dddddd'],
-    content2:  ['#999999'],
-    content2b: ['#909090'],
-    content3:  ['#7b7b7b'],
-    content4:  ['#666666'],
+    bg:              ['#24272d'],
+    bg2:             ['#282c34'],
+    bg3:             ['#525354'],
+    content:         ['#bdbdbd'],
+    content1b:       ['#dddddd'],
+    content2:        ['#999999'],
+    content2b:       ['#909090'],
+    content3:        ['#7b7b7b'],
+    content4:        ['#666666'],
     contentAccent:   ['#bdbdbd'],
     contentAccent2:  ['#2e343f'],
     contentAccent3:  ['#2e343f'],
-    shadow:    ['#00000000'],
+    shadow:          ['#00000000'],
   },
   containerAccent: {
-    bg:      ['#aaaaaa'],
-    bg2:     ['#bdbdbd'],
+    bg:       ['#aaaaaa'],
+    bg2:      ['#bdbdbd'],
     content:  ['#000000'],
     content2: ['#000000'],
   },
   
   buttonMain: {
-    bg:      ['#aaaaaa'],
-    bgFocus: ['#bbbbbb'],
+    bg:       ['#aaaaaa'],
+    bgFocus:  ['#bbbbbb'],
     content:  ['#000000'],
   },
   buttonAccent: {
-    bg:           ['#999999'],
+    bg:            ['#999999'],
     content:       ['#000000'],
-    bgFocus:      ['#7b7b7b'],
+    bgFocus:       ['#7b7b7b'],
     contentFocus:  ['#000000'],
   },
   buttonNormal: {
-    bg:            ['#999999'],
+    bg:             ['#999999'],
     content:        ['#000000'],
-    bgFocus:       ['#7b7b7b'],
+    bgFocus:        ['#7b7b7b'],
     contentFocus:   ['#000000'],
   },
   buttonSecondary: {
-    bg:       ['transparent'],
-    bgFocus:  ['#7b7b7b88'],
+    bg:        ['#00000000'],
+    bgFocus:   ['#7b7b7b88'],
     content:   ['#999999'],
   },
   inputRadio: {
-    bgFocus:  ['#aaaaaa']
+    bgFocus:  ['#aaaaaa'],
   },
   buttonTransparent: {
     bgFocus: ['#ffffff22'],
   },
   
   iconGradient: {
-    content:       ['#bdbdbd','#bdbdbd'],
+    content:       ['#bdbdbd', '#bdbdbd'],
   },
   
   input: {
-    bg:           ['#282c34'],
+    bg:            ['#282c34'],
     content:       ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
-    border:        ['#7b7b7b','#7b7b7b'],
+    border:        ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
-    bgError:      ['#5e252c'],
+    bgError:       ['#5e252c'],
   },
   
   rangePicker: {
@@ -98,12 +98,12 @@ const DarkProps = {
   },
   
   elementDisabled: {
-    bg:     ['#DCDCDC'],
+    bg:      ['#DCDCDC'],
     content: ['#555555'],
   },
   elementDanger: {
-    bg:      ['#bbbbbb'],
-    bgFocus: ['#cccccc'],
+    bg:       ['#bbbbbb'],
+    bgFocus:  ['#cccccc'],
     content:  ['#000000'],
   },
   elementError: {
@@ -116,25 +116,25 @@ const DarkProps = {
   },
   
   photos: {
-    bg:                     ['#ffeeee'],
+    bg:                      ['#ffeeee'],
     content:                 ['#291f1d'],
     borderDrag:              ['#1F8DCD'],
-    highlightFrameBg:       ['#8B8B8B'],
-    highlightFrameAccentBg: ['#ffffff'],
+    highlightFrameBg:        ['#8B8B8B'],
+    highlightFrameAccentBg:  ['#ffffff'],
   },
   
   bottomSheet: {
-    bg:    ['#121212'],
+    bg:     ['#121212'],
     handle: ['#8b8b8b'],
   },
   
   toast: {
-    bg:                  ['#121212'],
+    bg:                   ['#121212'],
     content:              ['#ffffff'],
     content2:             ['#b8b8b8'],
     content3:             ['#ffffff'],
     accentNormal:         ['#bb86fc'],
-    accentLoadingBg:     ['#e0e0e0'],
+    accentLoadingBg:      ['#e0e0e0'],
     accentLoadingContent: ['#616161'],
     accentInfo:           ['#3498db'],
     accentOk:             ['#07bc0c'],
@@ -156,7 +156,7 @@ export const Dark = {
   name: 'Dark Grey' as const,
   icon: styled.div(themeIconCss({
     accentColor: DarkProps.buttonAccent.bg[0],
-    bgColor1:   DarkProps.page.bg[0],
-    bgColor2:   DarkProps.page.bg[0],
+    bgColor1:    DarkProps.page.bg[0],
+    bgColor2:    DarkProps.page.bg[0],
   })),
 } satisfies Theme

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle0.ts'
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
-import Elem = WidgetStyle.Elem
-import CssPropEnum = WidgetStyle.CssPropEnum
-import CssProp = WidgetStyle.CssProp
-import CssWidget = WidgetStyle.CssWidget
+import Elem = WidgetStyle0.Elem
+import CssPropEnum = WidgetStyle0.CssPropEnum
+import CssProp = WidgetStyle0.CssProp
+import CssWidget = WidgetStyle0.CssWidget
 
 
 
