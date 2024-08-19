@@ -3,16 +3,17 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
 import Theme = AppTheme.Theme
 import themeIconGradientCss = AppTheme.themeIconGradientCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
 
-const DarkPinkGradientProps = { ...DarkPink,
+const DarkPinkGradientProps: ThemeProps = { ...DarkPink,
   
   page: {
     ...DarkPink.page,
-    bgGradient: ['#992c46','#282c34','#282c34'],
+    bgGradient: ['#992c46', '#282c34', '#282c34'],
     //bg: ['#992c46','#282c34','#994500'],
   },
   statusBar: {
@@ -38,6 +39,7 @@ const DarkPinkGradientProps = { ...DarkPink,
 
 export const DarkPinkGradient = {
   ...DarkPinkGradientProps,
+  type: 'dark',
   name: 'Dark Pink Gradient' as const,
   icon: styled.div(themeIconGradientCss({
     accentColor: DarkPinkGradientProps.buttonAccent.bg[0],

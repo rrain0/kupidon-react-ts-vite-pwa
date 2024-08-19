@@ -3,11 +3,12 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const LightOrangeProps = { ...LightPink,
+const LightOrangeProps: ThemeProps = { ...LightPink,
   
   statusBar: { ...LightPink.statusBar,
     bg: ['#ffdb99'],
@@ -37,7 +38,7 @@ const LightOrangeProps = { ...LightPink,
   },
   
   input: { ...LightPink.input,
-    border:      ['#ef7b7d','#ef7b7d'],
+    border:      ['#ef7b7d', '#ef7b7d'],
     borderHover: ['#00a8f3'],
   },
   
@@ -51,6 +52,7 @@ const LightOrangeProps = { ...LightPink,
 
 export const LightOrange = {
   ...LightOrangeProps,
+  type: 'light',
   name: 'Light Orange' as const,
   icon: styled.div(themeIconCss({
     accentColor: LightOrangeProps.buttonAccent.bg[0],

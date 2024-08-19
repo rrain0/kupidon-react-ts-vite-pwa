@@ -3,16 +3,16 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { Light } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const LightPinkProps = { ...Light,
+const LightPinkProps: ThemeProps = { ...Light,
   
   page: { ...Light.page,
     bg:         ['#f5f5f5'],
-    bgGradient: ['#f5f5f5','#f5f5f5','#f5f5f5'],
-    content:     ['#000000'],
+    bgGradient: ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
   },
   statusBar: { ...Light.statusBar,
     bg: ['#ffffff'],
@@ -47,27 +47,26 @@ const LightPinkProps = { ...Light,
     bg:       ['#ff8ea9'],
     bgFocus:  ['#f17492'],
     content:   ['#F8F8F8'],
-    content2:  ['#000000'],
   },
   buttonSecondary: { ...Light.buttonSecondary,
   
   },
   inputRadio: { ...Light.inputRadio,
-    bgFocus:  ['#f37190']
+    bgFocus:  ['#f37190'],
   },
   buttonTransparent: { ...Light.buttonTransparent,
     bgFocus: ['#00000011'],
   },
   
   iconGradient: { ...Light.iconGradient,
-    content:       ['#f17492','#f17492'],
+    content:       ['#f17492', '#f17492'],
   },
   
   input: { ...Light.input,
     bg:           ['#F8F8F8'],
     content:       ['#000000'],
     placeholder:   ['#777777'],
-    border:        ['#fb3570','#fb3570'],
+    border:        ['#fb3570', '#fb3570'],
     borderHover:   ['#9c20aa'],
     bgError:      ['#ffced2'],
   },

@@ -119,29 +119,31 @@ export namespace SvgIcons {
     const colorProp = SvgIconS.El.root.props.color
     const accentColorProp = SvgIconS.El.root.props.accentColor
     
-    return <SvgComponent
-      css={css`
-        width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-        height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-        //max-width: 100%;
-        //max-height: 100%;
-        fill: ${color || colorProp.var('black')};
-        stroke: ${color || colorProp.var('black')};
-        ${accentColorProp.name}: ${accentColor ?? accentColorProp.var('gray')};
-      `}
-      width={w}
-      height={h}
-      className={clsx(className, SvgIconS.El.icon.name)}
-      {...restProps}
-      ref={forwardedRef}
-    />
+    return (
+      <SvgComponent
+        css={css`
+          width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+          height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+          //max-width: 100%;
+          //max-height: 100%;
+          fill: ${color || colorProp.var('black')};
+          stroke: ${color || colorProp.var('black')};
+          ${accentColorProp.name}: ${accentColor ?? accentColorProp.var('gray')};
+        `}
+        width={w}
+        height={h}
+        className={clsx(className, SvgIconS.El.icon.name)}
+        {...restProps}
+        ref={forwardedRef}
+      />
+    )
   }))
   
   
   
   
   export type SimpleSvgIconProps = BaseSimpleSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps
-  function generateSimpleSvgIcon(SvgComponent: SvgComponentType){
+  function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
     return (
     React.memo(
     React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
@@ -228,34 +230,36 @@ export namespace SvgIcons {
   
   
   export const Search2Ic = generateSimpleSvgIcon(Search2Svg)
-  export const Spinner8LinesIc =
-  React.memo(
-  React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-  function(){
-    const rotation = keyframes`
-      100% { rotate: 1turn }
-    `
-    const Spinner8Lines_ = styled(Spinner8LinesSvg)`
-      animation: ${rotation} 3s linear infinite;
-    `
-    return (props, forwardedRef) =>
-      <BaseSimpleSvgIcon {...props} SvgComponent={Spinner8Lines_} ref={forwardedRef} />
-  }()
-  ))
-  export const SpinnerCircleQuarterIc =
-  React.memo(
-  React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-  function(){
-    const rotation = keyframes`
-      100% { rotate: 1turn }
-    `
-    const SpinnerCircleQuarter_ = styled(SpinnerCircleQuarterSvg)`
-      animation: ${rotation} .65s linear infinite;
-    `
-    return (props, forwardedRef) =>
-      <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter_} ref={forwardedRef} />
-  }()
-  ))
+  
+  export const Spinner8LinesIc = React.memo(
+    React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
+      (() => {
+        const rotation = keyframes`
+          100% { rotate: 1turn }
+        `
+        const Spinner8Lines2 = styled(Spinner8LinesSvg)`
+          animation: ${rotation} 3s linear infinite;
+        `
+        return (props, forwardedRef) =>
+          <BaseSimpleSvgIcon {...props} SvgComponent={Spinner8Lines2} ref={forwardedRef} />
+      })()
+    )
+  )
+  
+  export const SpinnerCircleQuarterIc = React.memo(
+    React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
+      (() => {
+        const rotation = keyframes`
+          100% { rotate: 1turn }
+        `
+        const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterSvg)`
+          animation: ${rotation} 650ms linear infinite;
+        `
+        return (props, forwardedRef) =>
+          <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2} ref={forwardedRef} />
+      })()
+    )
+  )
   
   
   export const WarnTriangleToastifyIc = generateSimpleSvgIcon(WarnTriangleToastifySvg)

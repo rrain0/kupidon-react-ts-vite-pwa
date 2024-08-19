@@ -2,11 +2,12 @@ import styled from '@emotion/styled'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const DarkProps = {
+const DarkProps: ThemeProps = {
   
   page: {
     bg:          ['#18191b'], // #424854

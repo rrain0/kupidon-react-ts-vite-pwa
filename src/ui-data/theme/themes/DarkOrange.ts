@@ -3,11 +3,12 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const DarkOrangeProps = { ...DarkPink,
+const DarkOrangeProps: ThemeProps = { ...DarkPink,
   
   statusBar: { ...DarkPink.statusBar,
     bg: ['#dd8f2f'],

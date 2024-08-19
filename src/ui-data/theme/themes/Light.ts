@@ -2,11 +2,12 @@ import styled from '@emotion/styled'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const LightProps = {
+const LightProps: ThemeProps = {
   
   page: {
     bg:          ['#f5f5f5'],
@@ -161,8 +162,8 @@ export const Light = {
   name: 'Light Grey' as const,
   icon: styled.div(themeIconCss({
     accentColor: LightProps.buttonAccent.bg[0],
-    bgColor1:   LightProps.page.bg[0],
-    bgColor2:   LightProps.page.bg[0],
+    bgColor1:    LightProps.page.bg[0],
+    bgColor2:    LightProps.page.bg[0],
   })),
 } satisfies Theme
 

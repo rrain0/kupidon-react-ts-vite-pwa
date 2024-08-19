@@ -9,12 +9,7 @@ export namespace AppTheme {
   export type Type = 'light' | 'dark'
   
   
-  
-  
-  export interface Theme {
-    type: Type
-    name: string
-    icon: StyledComponent<any>
+  export interface ThemeProps {
     
     // окружение
     // ambience?: {}
@@ -178,6 +173,13 @@ export namespace AppTheme {
       thumb:       string[]
       thumbActive: string[]
     }
+  }
+  
+  
+  export interface Theme extends ThemeProps {
+    type: Type
+    name: string
+    icon: StyledComponent<any>
   }
   
   

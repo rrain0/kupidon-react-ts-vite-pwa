@@ -3,16 +3,16 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { Dark } from 'src/ui-data/theme/themes/Dark.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const DarkPinkProps = { ...Dark,
+const DarkPinkProps: ThemeProps = { ...Dark,
   
   page: { ...Dark.page,
-    bg:         ['#18191b'],
-    bgGradient: ['#282c34','#282c34','#282c34'],
-    content:     ['#bdbdbd','#ffffff'],
+    bg:          ['#18191b'],
+    bgGradient:  ['#282c34', '#282c34', '#282c34'],
   },
   statusBar: { ...Dark.statusBar,
     bg: ['#984559'],
@@ -53,21 +53,21 @@ const DarkPinkProps = { ...Dark,
   
   },
   inputRadio: { ...Dark.inputRadio,
-    bgFocus:  ['#d16780']
+    bgFocus:  ['#d16780'],
   },
   buttonTransparent: { ...Dark.buttonTransparent,
     bgFocus: ['#ffffff22'],
   },
   
   iconGradient: { ...Dark.iconGradient,
-    content:       ['#984559','#984559'],
+    content:       ['#984559', '#984559'],
   },
   
   input: { ...Dark.input,
     bg:           ['#282c34'],
     content:       ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
-    border:        ['#b32e56','#b32e56'],
+    border:        ['#b32e56', '#b32e56'],
     borderHover:   ['#2393c6'],
     bgError:      ['#5e252c'],
   },

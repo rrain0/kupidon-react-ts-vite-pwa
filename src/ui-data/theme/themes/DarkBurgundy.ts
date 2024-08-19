@@ -3,15 +3,16 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { Dark } from 'src/ui-data/theme/themes/Dark.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const DarkBurgundyProps = { ...Dark,
+const DarkBurgundyProps: ThemeProps = { ...Dark,
   
   page: { ...Dark.page,
     bg:         ['#18191b'],
-    bgGradient: ['#282c34','#282c34','#282c34'],
+    bgGradient: ['#282c34', '#282c34', '#282c34'],
   },
   statusBar: { ...Dark.statusBar,
     bg: ['#282c34'],

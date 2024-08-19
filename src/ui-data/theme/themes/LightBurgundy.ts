@@ -3,16 +3,16 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { Light } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
+import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-const LightBurgundyProps = { ...Light,
+const LightBurgundyProps: ThemeProps = { ...Light,
   
   page: { ...Light.page,
     bg:         ['#f5f5f5'],
     bgGradient: ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
-    content:     ['#000000'],
   },
   statusBar: { ...Light.statusBar,
     bg: ['#ffffff'],
