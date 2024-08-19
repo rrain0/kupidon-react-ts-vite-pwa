@@ -142,6 +142,17 @@ export namespace AppTheme {
       contentOnTransparent: string[]
     }
     
+    
+    boxSpecialBlue: {
+      bg:  string[]
+      c:   string[]
+    }
+    btnSpecialBlue: {
+      bg:  string[]
+      c:   string[]
+    }
+    
+    
     photos: {
       bg:                      string[]
       content:                 string[]

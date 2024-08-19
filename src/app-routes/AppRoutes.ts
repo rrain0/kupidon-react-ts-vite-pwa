@@ -32,7 +32,10 @@ export namespace AppRoutes {
   
   
   
-  
+  /*
+  /summary
+  /preview, /main, /date
+   */
   const profileId = buildRoute({
     [path]: 'id',
     userId: buildPath(':userId'),

@@ -15,13 +15,13 @@ export const useOverlayUrl = (overlayName: string) => {
       const overlays = search.getAll(AppRoutes.overlayParam)
       return [
         overlays.includes(overlayName),
-        !!(overlays.length && overlays.at(-1)===overlayName),
+        !!(overlays.length && overlays.at(-1) === overlayName),
       ] as const
     },
     [search, overlayName]
   )
   
-  const open = useCallback(()=>{
+  const open = useCallback(() => {
     //console.log('doOpen')
     if (!isOpen) {
       //console.log('opening... (changing search params to calculate isOpen is true)')

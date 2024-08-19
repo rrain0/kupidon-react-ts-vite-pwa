@@ -121,6 +121,17 @@ export const DarkProps: ThemeProps = {
     contentOnTransparent: ['#aaaaaa'],
   },
   
+  
+  boxSpecialBlue: {
+    bg:  ['#67A9D9', '#2E85C3'],
+    c:   ['#FFFFFF'],
+  },
+  btnSpecialBlue: {
+    bg:  ['#FFFFFF'],
+    c:   ['#398CC8'],
+  },
+  
+  
   photos: {
     bg:                      ['#ffeeee'],
     content:                 ['#291f1d'],
