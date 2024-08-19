@@ -147,7 +147,7 @@ export const LightBurgundyProps: ThemeProps = { ...LightProps,
 export const LightBurgundy = {
   ...LightBurgundyProps,
   type: 'light',
-  name: 'LightProps Burgundy' as const,
+  name: 'Light Burgundy' as const,
   icon: styled.div(themeIconCss({
     accentColor: LightBurgundyProps.containerNormal.contentAccent3[0],
     bgColor1:   LightBurgundyProps.containerNormal.contentAccent2[0],

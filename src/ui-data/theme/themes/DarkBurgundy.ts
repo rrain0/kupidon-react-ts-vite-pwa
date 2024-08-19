@@ -147,7 +147,7 @@ export const DarkBurgundyProps: ThemeProps = { ...DarkProps,
 export const DarkBurgundy = {
   ...DarkBurgundyProps,
   type: 'dark',
-  name: 'DarkProps Burgundy' as const,
+  name: 'Dark Burgundy' as const,
   icon: styled.div(themeIconCss({
     accentColor: DarkBurgundyProps.containerNormal.contentAccent3[0],
     bgColor1:   DarkBurgundyProps.containerNormal.contentAccent2[0],

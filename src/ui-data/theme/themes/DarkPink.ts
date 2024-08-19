@@ -124,7 +124,7 @@ export const DarkPinkProps: ThemeProps = { ...DarkProps,
 export const DarkPink = {
   ...DarkPinkProps,
   type: 'dark',
-  name: 'DarkProps Pink' as const,
+  name: 'Dark Pink' as const,
   icon: styled.div(themeIconCss({
     accentColor: DarkPinkProps.buttonAccent.bg[0],
     bgColor1:   DarkPinkProps.buttonAccent.bg[0],

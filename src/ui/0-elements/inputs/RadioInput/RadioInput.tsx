@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'

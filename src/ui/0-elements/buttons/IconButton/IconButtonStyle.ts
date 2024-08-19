@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import Elem = WidgetStyle0.Elem
 import CssWidget = WidgetStyle0.CssWidget
 

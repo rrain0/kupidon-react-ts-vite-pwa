@@ -4,11 +4,11 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
-import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
+import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 import Callback = TypeU.Callback

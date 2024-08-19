@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
+import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'

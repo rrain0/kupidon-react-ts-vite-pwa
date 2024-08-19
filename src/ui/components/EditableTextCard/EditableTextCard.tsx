@@ -8,7 +8,7 @@ import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
 import Txt = EmotionCommon.Txt

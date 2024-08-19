@@ -5,7 +5,7 @@ import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import row = EmotionCommon.row
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc

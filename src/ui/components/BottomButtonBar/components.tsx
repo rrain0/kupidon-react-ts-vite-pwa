@@ -13,7 +13,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import fixedBottom = EmotionCommon.fixedBottom
 import row = EmotionCommon.row
 import Arrow5FwdIc = SvgIcons.ArrowLinesSharp1Ic

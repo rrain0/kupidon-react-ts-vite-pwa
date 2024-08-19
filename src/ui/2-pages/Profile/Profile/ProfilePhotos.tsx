@@ -41,7 +41,7 @@ import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import center = EmotionCommon.center
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
+import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import row = EmotionCommon.row
 import PlusIc = SvgIcons.PlusIc
 import RadioActiveIc = SvgIcons.RadioActiveIc

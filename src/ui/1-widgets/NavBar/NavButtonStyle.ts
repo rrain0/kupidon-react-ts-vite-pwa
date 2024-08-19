@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
-import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsStyle.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
