@@ -7,7 +7,7 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-const DarkProps: ThemeProps = {
+export const DarkProps: ThemeProps = {
   
   page: {
     bg:          ['#18191b'], // #424854

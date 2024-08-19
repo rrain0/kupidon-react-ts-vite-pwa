@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
-import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
+import { LightPinkProps } from 'src/ui-data/theme/themes/LightPink.ts'
 import Theme = AppTheme.Theme
 import themeIconGradientCss = AppTheme.themeIconGradientCss
 import ThemeProps = AppTheme.ThemeProps
@@ -8,17 +8,17 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-const LightPinkGradientProps: ThemeProps = { ...LightPink,
+export const LightPinkGradientProps: ThemeProps = { ...LightPinkProps,
   
-  page: { ...LightPink.page,
+  page: { ...LightPinkProps.page,
     bgGradient: ['#ffaeba', '#f0f0f0', '#f0f0f0'],
     //bg: ['#ffb6c1','#f5f5f5','#d8701a'],
   },
-  statusBar: { ...LightPink.statusBar,
+  statusBar: { ...LightPinkProps.statusBar,
     bg: ['#ffaeba'],
   },
   
-  inputRadio: { ...LightPink.buttonMain,
+  inputRadio: { ...LightPinkProps.buttonMain,
     bgFocus:  ['#f37190'],
   },
 }

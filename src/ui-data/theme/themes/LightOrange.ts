@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
-import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
+import { LightPinkProps } from 'src/ui-data/theme/themes/LightPink.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -8,41 +8,41 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-const LightOrangeProps: ThemeProps = { ...LightPink,
+export const LightOrangeProps: ThemeProps = { ...LightPinkProps,
   
-  statusBar: { ...LightPink.statusBar,
+  statusBar: { ...LightPinkProps.statusBar,
     bg: ['#ffdb99'],
   },
-  nav: { ...LightPink.nav,
+  nav: { ...LightPinkProps.nav,
     bg: ['#ffdb99'],
   },
-  navButton: { ...LightPink.navButton,
+  navButton: { ...LightPinkProps.navButton,
     bgFocus:      ['#ffffff'],
     contentAccent: ['#ff802a'],
   },
   
-  containerAccent: { ...LightPink.containerAccent,
+  containerAccent: { ...LightPinkProps.containerAccent,
     bg:     ['#fdca6d'],
   },
   
-  buttonMain: { ...LightPink.buttonMain,
+  buttonMain: { ...LightPinkProps.buttonMain,
     bg: ['#ff935e'],
     bgFocus: ['#ff802a'],
   },
-  buttonAccent: { ...LightPink.buttonAccent,
+  buttonAccent: { ...LightPinkProps.buttonAccent,
     bg:       ['#fbb027'],
     bgFocus:  ['#ffb833'],
   },
-  inputRadio: { ...LightPink.inputRadio,
+  inputRadio: { ...LightPinkProps.inputRadio,
     bgFocus:  ['#ffb833'],
   },
   
-  input: { ...LightPink.input,
+  input: { ...LightPinkProps.input,
     border:      ['#ef7b7d', '#ef7b7d'],
     borderHover: ['#00a8f3'],
   },
   
-  bottomSheet: { ...LightPink.bottomSheet,
+  bottomSheet: { ...LightPinkProps.bottomSheet,
     handle: ['#ff935e'],
   },
   

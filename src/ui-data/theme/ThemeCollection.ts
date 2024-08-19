@@ -44,5 +44,5 @@ export type AllThemeNamesType = typeof AllThemes[number]['name']
 
 
 export const themeByName = (themeName: string): Theme => {
-  return AllThemes.find(t=>t.name===themeName) ?? DefaultTheme
+  return AllThemes.find(t => t.name === themeName) ?? DefaultTheme
 }

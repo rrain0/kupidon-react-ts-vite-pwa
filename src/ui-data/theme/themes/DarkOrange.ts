@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
-import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
+import { DarkPinkProps } from 'src/ui-data/theme/themes/DarkPink.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -8,43 +8,43 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-const DarkOrangeProps: ThemeProps = { ...DarkPink,
+export const DarkOrangeProps: ThemeProps = { ...DarkPinkProps,
   
-  statusBar: { ...DarkPink.statusBar,
+  statusBar: { ...DarkPinkProps.statusBar,
     bg: ['#dd8f2f'],
   },
-  nav: { ...DarkPink.nav,
+  nav: { ...DarkPinkProps.nav,
     bg: ['#282c34'],
   },
-  navButton: { ...DarkPink.navButton,
+  navButton: { ...DarkPinkProps.navButton,
     contentAccent: ['#dd7b39'],
   },
   
-  containerAccent: { ...DarkPink.containerAccent,
+  containerAccent: { ...DarkPinkProps.containerAccent,
     bg:     ['#dd7b39'],
   },
   
-  buttonMain: { ...DarkPink.buttonMain,
+  buttonMain: { ...DarkPinkProps.buttonMain,
     bg: ['#ff935e'],
     bgFocus: ['#ff802a'],
     content:  ['#000000'],
   },
-  buttonAccent: { ...DarkPink.buttonAccent,
+  buttonAccent: { ...DarkPinkProps.buttonAccent,
     bg:           ['#dd8f2f'],
     content:       ['#000000'],
     bgFocus:      ['#f3b238'],
     contentFocus:  ['#000000'],
   },
-  inputRadio: { ...DarkPink.inputRadio,
+  inputRadio: { ...DarkPinkProps.inputRadio,
     bgFocus:  ['#d9816f'],
   },
   
-  input: { ...DarkPink.input,
-    border:      ['#ef7b7d','#ef7b7d'],
+  input: { ...DarkPinkProps.input,
+    border:      ['#ef7b7d', '#ef7b7d'],
     borderHover: ['#00a8f3'],
   },
   
-  bottomSheet: { ...DarkPink.bottomSheet,
+  bottomSheet: { ...DarkPinkProps.bottomSheet,
     handle: ['#ff935e'],
   },
 }
@@ -53,6 +53,7 @@ const DarkOrangeProps: ThemeProps = { ...DarkPink,
 
 export const DarkOrange = {
   ...DarkOrangeProps,
+  type: 'dark',
   name: 'Dark Orange' as const,
   icon: styled.div(themeIconCss({
     accentColor: DarkOrangeProps.buttonAccent.bg[0],

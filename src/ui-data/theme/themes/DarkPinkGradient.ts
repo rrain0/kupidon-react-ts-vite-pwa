@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
-import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
+import { DarkPinkProps } from 'src/ui-data/theme/themes/DarkPink.ts'
 import Theme = AppTheme.Theme
 import themeIconGradientCss = AppTheme.themeIconGradientCss
 import ThemeProps = AppTheme.ThemeProps
@@ -9,28 +9,28 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-const DarkPinkGradientProps: ThemeProps = { ...DarkPink,
+export const DarkPinkGradientProps: ThemeProps = { ...DarkPinkProps,
   
   page: {
-    ...DarkPink.page,
+    ...DarkPinkProps.page,
     bgGradient: ['#992c46', '#282c34', '#282c34'],
     //bg: ['#992c46','#282c34','#994500'],
   },
   statusBar: {
-    ...DarkPink.statusBar,
+    ...DarkPinkProps.statusBar,
     bg: ['#992c46'],
   },
   nav: {
-    ...DarkPink.nav,
+    ...DarkPinkProps.nav,
     bg: ['#282c34'],
   },
   navButton: {
-    ...DarkPink.navButton,
+    ...DarkPinkProps.navButton,
     contentAccent: ['#d92a54'],
   },
   
   inputRadio: {
-    ...DarkPink.buttonMain,
+    ...DarkPinkProps.buttonMain,
     bgFocus:  ['#d16780'],
   },
 }

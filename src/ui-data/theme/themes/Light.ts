@@ -7,7 +7,7 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-const LightProps: ThemeProps = {
+export const LightProps: ThemeProps = {
   
   page: {
     bg:          ['#f5f5f5'],
