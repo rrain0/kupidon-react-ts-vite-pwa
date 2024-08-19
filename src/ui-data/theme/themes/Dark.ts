@@ -9,8 +9,8 @@ import themeIconCss = AppTheme.themeIconCss
 const DarkProps = {
   
   page: {
-    bg:         ['#18191b'], // #424854
-    bgGradient: ['#282c34', '#282c34', '#282c34'],
+    bg:          ['#18191b'], // #424854
+    bgGradient:  ['#282c34', '#282c34', '#282c34'],
     content1:    ['#ffffff'],
     content2:    ['#bdbdbd'],
     content3:    ['#999999'],
@@ -22,7 +22,7 @@ const DarkProps = {
     bg: ['#282c34'],
   },
   navButton: {
-    bgFocus:      ['#2e3440'],
+    bgFocus:       ['#2e3440'],
     content:       ['#7b7b7b'],
     contentAccent: ['#bdbdbd'],
   },
@@ -31,15 +31,20 @@ const DarkProps = {
     bg:              ['#24272d'],
     bg2:             ['#282c34'],
     bg3:             ['#525354'],
+    
     content:         ['#bdbdbd'],
     content1b:       ['#dddddd'],
     content2:        ['#999999'],
     content2b:       ['#909090'],
     content3:        ['#7b7b7b'],
+    content3e:       ['#777777'],
     content4:        ['#666666'],
+    content4b:       ['#42414c'],
+    
     contentAccent:   ['#bdbdbd'],
     contentAccent2:  ['#2e343f'],
     contentAccent3:  ['#2e343f'],
+    
     shadow:          ['#00000000'],
   },
   containerAccent: {

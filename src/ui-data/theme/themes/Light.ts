@@ -5,11 +5,12 @@ import themeIconCss = AppTheme.themeIconCss
 
 
 
+
 const LightProps = {
   
   page: {
-    bg:         ['#f5f5f5'],
-    bgGradient: ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
+    bg:          ['#f5f5f5'],
+    bgGradient:  ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
     content1:    ['#000000'],
     content2:    ['#000000'],
     content3:    ['#999999'],
@@ -27,47 +28,52 @@ const LightProps = {
   },
   
   containerNormal: {
-    bg:        ['#ffffff'],
-    bg2:       ['#f0f0f0'],
-    bg3:       ['#f0f0f0'],
-    content:   ['#000000'],
-    content1b: ['#444444'],
-    content2:  ['#555555'],
-    content2b: ['#5b5b5b'],
-    content3:  ['#7b7b7b'],
-    content4:  ['#d1d1d1'],
+    bg:              ['#ffffff'],
+    bg2:             ['#f0f0f0'],
+    bg3:             ['#f0f0f0'],
+    
+    content:         ['#000000'],
+    content1b:       ['#444444'],
+    content2:        ['#555555'],
+    content2b:       ['#5b5b5b'],
+    content3:        ['#7b7b7b'],
+    content3e:       ['#999999'],
+    content4:        ['#d1d1d1'],
+    content4b:       ['#dddddd'],
+    
     contentAccent:   ['#333333'],
     contentAccent2:  ['#d1d1d1'],
     contentAccent3:  ['#d1d1d1'],
-    shadow:    ['#00000026'],
+    
+    shadow:          ['#00000026'],
   },
   containerAccent: {
-    bg:      ['#bbbbbb'],
-    bg2:     ['#333333'],
+    bg:       ['#bbbbbb'],
+    bg2:      ['#333333'],
     content:  ['#000000'],
     content2: ['#F8F8F8'],
   },
   
   buttonMain: {
-    bg:      ['#7b7b7b'],
-    bgFocus: ['#aaaaaa'],
+    bg:       ['#7b7b7b'],
+    bgFocus:  ['#aaaaaa'],
     content:  ['#F8F8F8'],
   },
   buttonAccent: {
-    bg:           ['#bbbbbb'],
+    bg:            ['#bbbbbb'],
     content:       ['#000000'],
-    bgFocus:      ['#999999'],
+    bgFocus:       ['#999999'],
     contentFocus:  ['#000000'],
   },
   buttonNormal: {
-    bg:           ['#bbbbbb'],
+    bg:            ['#bbbbbb'],
     content:       ['#000000'],
-    bgFocus:      ['#dddddd'],
+    bgFocus:       ['#dddddd'],
     contentFocus:  ['#000000'],
   },
   buttonSecondary: {
-    bg:       ['transparent'],
-    bgFocus:  ['#99999988'],
+    bg:        ['transparent'],
+    bgFocus:   ['#99999988'],
     content:   ['#bbbbbb'],
   },
   inputRadio: {
@@ -82,12 +88,12 @@ const LightProps = {
   },
   
   input: {
-    bg:           ['#F8F8F8'],
+    bg:            ['#F8F8F8'],
     content:       ['#000000'],
     placeholder:   ['#777777'],
     border:        ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
-    bgError:      ['#ffced2'],
+    bgError:       ['#ffced2'],
   },
   
   rangePicker: {
@@ -97,16 +103,16 @@ const LightProps = {
   },
   
   elementDisabled: {
-    bg:     ['#DCDCDC'],
+    bg:      ['#DCDCDC'],
     content: ['#555555'],
   },
   elementDanger: {
-    bg:      ['#7b7b7b'],
-    bgFocus: ['#999999'],
+    bg:       ['#7b7b7b'],
+    bgFocus:  ['#999999'],
     content:  ['#ffffff'],
   },
   elementError: {
-    bg:      ['#ffced2'],
+    bg:       ['#ffced2'],
   },
   
   ripple: {
@@ -115,25 +121,25 @@ const LightProps = {
   },
   
   photos: {
-    bg:                     ['#ffeeee'],
+    bg:                      ['#ffeeee'],
     content:                 ['#291f1d'],
     borderDrag:              ['#1F8DCD'],
-    highlightFrameBg:       ['#8B8B8B'],
-    highlightFrameAccentBg: ['#000000'],
+    highlightFrameBg:        ['#8B8B8B'],
+    highlightFrameAccentBg:  ['#000000'],
   },
   
   bottomSheet: {
-    bg:    ['#ffffff'],
+    bg:     ['#ffffff'],
     handle: ['#8b8b8b'],
   },
   
   toast: {
-    bg:                  ['#ffffff'],
+    bg:                   ['#ffffff'],
     content:              ['#757575'],
     content2:             ['#b2b2b2'],
     content3:             ['#000000'],
     accentNormal:         ['#bb86fc'],
-    accentLoadingBg:     ['#e0e0e0'],
+    accentLoadingBg:      ['#e0e0e0'],
     accentLoadingContent: ['#616161'],
     accentInfo:           ['#3498db'],
     accentOk:             ['#07bc0c'],

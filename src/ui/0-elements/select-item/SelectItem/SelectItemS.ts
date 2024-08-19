@@ -192,53 +192,14 @@ export namespace SelectItemS {
     ${W.use.s.normal().e.addIcon().thisUse}{
       ${SvgIconS.normal(t)}
     }
-    
-    
-    
-    
-    
-    ${W.use.s.normal().e.indicatorFrame().thisUse}{
-      pointer-events: none;
-      ${abs};
-      ${colC};
-      padding: 6px;
-    }
-    ${W.use.s.normal().e.indicatorBox().thisUse}{
-      width: 75%;
-      align-self: center;
-      height: 6px;
-      ${row};
-      gap: 6px;
-    }
     ${W.use.s.normal().e.indicator0().thisUse}{
-      flex: 1;
-      height: 100%;
-      border-radius: 999999px;
-      background: #dddddd;
+      background: ${t.containerNormal.content4b[0]};
     }
     ${W.use.s.normal().e.indicator1().thisUse}{
-      flex: 1;
-      height: 100%;
-      border-radius: 999999px;
-      background: #999999;
+      background: ${t.containerNormal.content3e[0]};
     }
     ${W.use.s.normal().e.indicator2().thisUse}{
-      flex: 1;
-      height: 100%;
-      border-radius: 999999px;
-      background: #444444;
-    }
-    
-    ${W.use.s.normal().e.editBtn().thisUse}{
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40px;
-      height: 40px;
-      border-radius: var(--br);
-      ${center};
-      padding: 11px;
-      overflow: hidden;
+      background: ${t.containerNormal.content1b[0]};
     }
     ${W.use.s.normal().e.editBtnRipple().thisUse}{
       ${RippleS.base}
@@ -246,18 +207,10 @@ export namespace SelectItemS {
     ${W.use.s.normal().e.editIcon().thisUse}{
       ${SvgIconS.normal(t)}
     }
-    ${W.use.s.normal().e.content().thisUse}{
-      width: 100%;
-      min-height: 100%;
-      padding: 20px 26px;
-      ${center};
-    }
     
     // selected
     ${W.use.s.selected().e.border().thisUse} {
-      border-width: 2px;
-      border-style: solid;
-      border-color: #444444;
+      border-color: ${t.containerNormal.content1b[0]};
     }
   `
   
