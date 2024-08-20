@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -366,13 +367,7 @@ React.memo(
   //console.log(canSubmit , formProps.hasChanges)
   
   
-  const [tabIdx, setTabIdx] = useState(1)
-  useEffect(() => {
-    enum ProfileTabs { 'preview', 'profile', 'partner', 'date' }
-    console.log('current profile tab:', ProfileTabs[tabIdx])
-  }, [tabIdx])
-  
-  
+  const [tabIdx, setTabIdx] = useProfileTab()
   
   
   const titleText = useUiValues(TitleUiText)
@@ -382,111 +377,114 @@ React.memo(
   
   
   
-  return <>
-    <Pages.TabsPage>
-      
-      <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
-        {tabsProps => <>
-          <Tabs css={fill} {...tabsProps}>
-            {({ tabContainerSpring, computedTabsDimens }) => <>
-              {arr(3).map(tabIdx =>
-                <Tab css={fill} key={tabIdx}
-                  width={computedTabsDimens.frameWidth}
-                >
-                  
-                  
-                  <OverflowWrapper css={css`
-                    ${OverflowWrapperStyle.defolt};
-                    ${OverflowWrapperStyle.El.container.thiz()}{
-                      touch-action: pan-y;
-                    }
-                    ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
-                      ${safePageContentPaddings};
-                    }
-                  `}
-                    showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
-                  >
-                    
-                    <ProfilePageTabHeaderContext.Provider value={{
-                      tabContainerSpring,
-                      tabWidth: computedTabsDimens.frameWidth,
-                      headers: headers,
-                      setTabsState: tabsProps.setTabsState,
-                      setTabIdx: tabsProps.setTabIdx,
-                    }}>
-                      {[
-                        <Preview
-                          formValues={formValues}
-                        />,
-                        <Profile
-                          validationProps={validationProps}
-                          onFormSubmitCallback={onFormSubmitCallback}
-                          submit={submit}
-                          canSubmit={canSubmit}
-                          formProps={formProps}
-                          isLoading={isLoading}
-                          tabIdx={tabIdx}
-                        />,
-                        /* <Partner
-                          validationProps={validationProps}
-                          onFormSubmitCallback={onFormSubmitCallback}
-                          submit={submit}
-                          canSubmit={canSubmit}
-                          formProps={formProps}
-                          isLoading={isLoading}
-                          tabIdx={tabIdx}
-                        />, */
-                        <Date
-                          validationProps={validationProps}
-                          onFormSubmitCallback={onFormSubmitCallback}
-                          submit={submit}
-                          canSubmit={canSubmit}
-                          formProps={formProps}
-                          isLoading={isLoading}
-                          tabIdx={tabIdx}
-                        />,
-                      ][tabIdx]}
-                    </ProfilePageTabHeaderContext.Provider>
-                    
-                  </OverflowWrapper>
-                
-                
-                </Tab>
-              )}
-            </>}
-          </Tabs>
+  return (
+    <>
+      <Pages.TabsPage>
         
-        
-        
-        {/* <UseBottomSheetState
-          //isOpen={canSubmit || formProps.hasChanges}
-          //closeable={!(canSubmit || formProps.hasChanges)}
-        >
-          {props => <ModalPortal><BottomSheetBasic
-            {...props.sheetProps}
-          >
+        <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
+          {tabsProps => (
+            <>
+              <Tabs css={fill} {...tabsProps}>
+                {({ tabContainerSpring, computedTabsDimens }) => (
+                  <>
+                    {arr(3).map(tabIdx => (
+                      <Tab css={fill} key={tabIdx}
+                        width={computedTabsDimens.frameWidth}
+                      >
+                        
+                        
+                        <OverflowWrapper css={css`
+                          ${OverflowWrapperStyle.defolt};
+                          ${OverflowWrapperStyle.El.container.thiz()}{
+                            touch-action: pan-y;
+                          }
+                          ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
+                            ${safePageContentPaddings};
+                          }
+                        `}
+                          showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
+                        >
+                          
+                          <ProfilePageTabHeaderContext.Provider value={{
+                            tabContainerSpring,
+                            tabWidth: computedTabsDimens.frameWidth,
+                            headers: headers,
+                            setTabsState: tabsProps.setTabsState,
+                            setTabIdx: tabsProps.setTabIdx,
+                          }}>
+                            {[
+                              <Preview
+                                formValues={formValues}
+                              />,
+                              <Profile
+                                validationProps={validationProps}
+                                onFormSubmitCallback={onFormSubmitCallback}
+                                submit={submit}
+                                canSubmit={canSubmit}
+                                formProps={formProps}
+                                isLoading={isLoading}
+                                tabIdx={tabIdx}
+                              />,
+                              /* <Partner
+                                validationProps={validationProps}
+                                onFormSubmitCallback={onFormSubmitCallback}
+                                submit={submit}
+                                canSubmit={canSubmit}
+                                formProps={formProps}
+                                isLoading={isLoading}
+                                tabIdx={tabIdx}
+                              />, */
+                              <Date
+                                validationProps={validationProps}
+                                onFormSubmitCallback={onFormSubmitCallback}
+                                submit={submit}
+                                canSubmit={canSubmit}
+                                formProps={formProps}
+                                isLoading={isLoading}
+                                tabIdx={tabIdx}
+                              />,
+                            ][tabIdx]}
+                          </ProfilePageTabHeaderContext.Provider>
+                          
+                        </OverflowWrapper>
+                      
+                      
+                      </Tab>
+                    ))}
+                  </>
+                )}
+              </Tabs>
+            
+            
+            
+            {/* <UseBottomSheetState
+              //isOpen={canSubmit || formProps.hasChanges}
+              //closeable={!(canSubmit || formProps.hasChanges)}
+            >
+              {props => <ModalPortal><BottomSheetBasic
+                {...props.sheetProps}
+              >
+              
+              </BottomSheetBasic></ModalPortal>}
+            </UseBottomSheetState>
           
-          </BottomSheetBasic></ModalPortal>}
-        </UseBottomSheetState>
-      
-      
-        { app.showDevOverlay && <BottomButtonBar
-          refreshPageBtn
-          rightChildren={
-            <SoftRefreshBtn
-              refresh={()=>setNeedToFetchUser(true)}
-              isLoading={isFetchingUser}
-            />
-          }
-        /> } */}
-      
-      </>}</UseTabsState>
-      
-    </Pages.TabsPage>
-    
-    
-    
-  </>
+          
+            { app.showDevOverlay && <BottomButtonBar
+              refreshPageBtn
+              rightChildren={
+                <SoftRefreshBtn
+                  refresh={()=>setNeedToFetchUser(true)}
+                  isLoading={isFetchingUser}
+                />
+              }
+            /> } */}
+          
+          </>
+        )}</UseTabsState>
+        
+      </Pages.TabsPage>
+    </>
+  )
 })
 export default ProfilePage
 

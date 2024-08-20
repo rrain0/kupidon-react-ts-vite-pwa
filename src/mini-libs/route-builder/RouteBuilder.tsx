@@ -46,12 +46,14 @@ export namespace RouteBuilder {
   
   
   export type RouteSelf = {
+    // this path segment
     [path]: string
   }
   export type RouteProps = {
-    [up]: undefined|RouteSegment
+    [up]: undefined | RouteSegment
     [full]: typeof getFull
     [next]: typeof getNext
+    // replace this path segment by provided string
     [use]: typeof getUse
     [fullParams]: typeof getFullParams
     [fullAnySearchParams]: typeof getFullAnySearchParams
@@ -80,11 +82,19 @@ export namespace RouteBuilder {
   }
   
   
-  export function getUse<R extends RouteSegment>(this:R, pathSegment: string): R {
-    return {
-      ...this,
-      [path]: pathSegment,
-    }
+  const copyRouteTree = <R extends RouteSegment>(node: R): R => {
+    node = { ...node }
+    ObjectEntries(node).forEach(([k, v]) => {
+      const descendant = copyRouteTree(v)
+      descendant[up] = node
+      node[k] = descendant
+    })
+    return node
+  }
+  
+  export function getUse<R extends RouteSegment>(this: R, pathSegment: string): R {
+    const node = { ...this, [path]: pathSegment }
+    return copyRouteTree(node)
   }
   
   

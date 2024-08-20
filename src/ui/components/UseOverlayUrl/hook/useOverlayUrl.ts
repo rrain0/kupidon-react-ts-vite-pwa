@@ -9,17 +9,14 @@ export const useOverlayUrl = (overlayName: string) => {
   const navigate = useNavigate()
   const [search, setSearch] = useSearchParams()
   
-  const [isOpen, isLastOpen] = useMemo(
-    // ...?overlay=dialog1&overlay=bottomSheet2&...
-    () => {
-      const overlays = search.getAll(AppRoutes.overlayParam)
-      return [
-        overlays.includes(overlayName),
-        !!(overlays.length && overlays.at(-1) === overlayName),
-      ] as const
-    },
-    [search, overlayName]
-  )
+  // ...?overlay=dialog1&overlay=bottomSheet2&...
+  const [isOpen, isLastOpen] = useMemo(() => {
+    const overlays = search.getAll(AppRoutes.overlayParam)
+    return [
+      overlays.includes(overlayName),
+      !!(overlays.length && overlays.at(-1) === overlayName),
+    ] as const
+  }, [search, overlayName])
   
   const open = useCallback(() => {
     //console.log('doOpen')
@@ -35,12 +32,6 @@ export const useOverlayUrl = (overlayName: string) => {
   
   
   const [needToClose, setNeedToCloseTrue, setNeedToCloseFalse] = useBool(false)
-  
-  /* const setIsOpen = useCallback((isOpen: boolean)=>{
-   isOpen ? open() : setNeedToCloseTrue()
-   },[open, needToClose])
-   
-   useBoolStateSync(isOpen, setIsOpen, isOpenExternal, setIsOpenExternal) */
   
   
   

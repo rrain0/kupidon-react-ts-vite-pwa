@@ -70,9 +70,9 @@ const progressAnimDuration = 400 // ms
 
 
 const springStyle =
-(dragIdx: number|undefined = undefined, active = false, dx = 0, dy = 0) =>
+(dragIdx: number | undefined = undefined, active = false, dx = 0, dy = 0) =>
 (index: number/* , ctrl: Controller */) => {
-  if (dragIdx===index && active) return {
+  if (dragIdx === index && active) return {
     x: dx,
     y: dy,
     opacity: 0.4,
@@ -121,8 +121,9 @@ React.memo(
   const [lastIdx, setLastIdx] = useState(0)
   
   const [dragState, setDragState, getDragStateRef, dragStateRef] = useStateAndRef(
-    undefined as undefined|'initialDelay'|'progressAnim'|'dragging'
+    undefined as undefined | 'initialDelay' | 'progressAnim' | 'dragging'
   )
+  //useEffect(() => console.log('dragState', dragState), [dragState])
   const [progressAnimLockGestures, setProgressAnimLockGestures] = useState(false)
   const [swap, setSwap] = useState(undefined as undefined | NumRange)
   
@@ -133,18 +134,15 @@ React.memo(
   // forbid content selection while dragging
   useNoSelect(!!dragState)
   // forbid gesture interception by browser
-  const isLockGestures = dragState==='dragging' || progressAnimLockGestures
+  const isLockGestures = dragState === 'dragging' || progressAnimLockGestures
   useNoTouchAction(isLockGestures)
   const isGesturesBusy = useLockAppGestures(isLockGestures)
-  useLayoutEffect(
-    () => {
-      if (isGesturesBusy) {
-        setDragState(undefined)
-        setCanClick(false)
-      }
-    },
-    [isGesturesBusy, dragState, canClick]
-  )
+  useLayoutEffect(() => {
+    if (isGesturesBusy) {
+      setDragState(undefined)
+      setCanClick(false)
+    }
+  }, [isGesturesBusy, dragState, canClick])
   
   
   // swaps photos
@@ -165,32 +163,26 @@ React.memo(
   
   
   // starts selection animation after timeout
-  useLayoutEffect(
-    () => {
-      if (dragState === 'initialDelay') {
-        const timerId = setTimeout(
-          () => setDragState('progressAnim'),
-          150
-        )
-        return () => clearTimeout(timerId)
-      }
-    },
-    [dragState]
-  )
+  useLayoutEffect(() => {
+    if (dragState === 'initialDelay') {
+      const timerId = setTimeout(
+        () => setDragState('progressAnim'),
+        150
+      )
+      return () => clearTimeout(timerId)
+    }
+  }, [dragState])
   
-  useLayoutEffect(
-    () => {
-      if (dragState==='progressAnim') {
-        const timerId = setTimeout(
-          () => setProgressAnimLockGestures(true),
-          progressAnimDuration - 300
-        )
-        return () => clearTimeout(timerId)
-      }
-      else setProgressAnimLockGestures(false)
-    },
-    [dragState]
-  )
+  useLayoutEffect(() => {
+    if (dragState==='progressAnim') {
+      const timerId = setTimeout(
+        () => setProgressAnimLockGestures(true),
+        progressAnimDuration - 300
+      )
+      return () => clearTimeout(timerId)
+    }
+    else setProgressAnimLockGestures(false)
+  }, [dragState])
   
   
   const photosGrid = useRef<HTMLDivElement>(null)
@@ -230,13 +222,13 @@ React.memo(
           const hoveredElements = document.elementsFromPoint(vpx, vpy)
           if (!hoveredElements.includes(photosGrid.current as any)) {
             setSwap(undefined)
-          } 
+          }
           else {
             const found = findBy(photoFrameRefs.current,
                 elem => hoveredElements.includes(elem as any)
             )
             if (!found.isFound) { /* nothing to do, remain previous swap */ }
-            else if (i!==found.index) setSwap([i, found.index])
+            else if (i !== found.index) setSwap([i, found.index])
             else setSwap(undefined)
           }
         }
@@ -249,10 +241,9 @@ React.memo(
       }
     }
   ) as (...args: any[]) => ReactDOMAttributes
-  useEffect(
-    () => { if (dragState==='dragging') applyDragRef.current?.() },
-    [dragState]
-  )
+  useEffect(() => {
+    if (dragState === 'dragging') applyDragRef.current?.()
+  }, [dragState])
   
   
   
