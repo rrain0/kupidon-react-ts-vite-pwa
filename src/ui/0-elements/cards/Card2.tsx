@@ -17,26 +17,29 @@ export type ForwardRefProps = React.JSX.IntrinsicElements['article']
 type RefElement = HTMLDivElement
 
 export type Car2Props = Card2CustomProps & ForwardRefProps
-const Card2 =
-React.memo(
-React.forwardRef<RefElement, Car2Props>(
-(props, forwardedRef)=>{
-  const {
-    children,
-    ...restProps
-  } = props
-  
-  const elemRef = useRef<RefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
-  
-  
-  return <Frame
-    {...restProps}
-    ref={elemRef}
-  >
-    {children}
-  </Frame>
-}))
+const Card2 = React.memo(
+  React.forwardRef<RefElement, Car2Props>(
+    (props, forwardedRef) => {
+      const {
+        children,
+        ...restProps
+      } = props
+      
+      const elemRef = useRef<RefElement>(null)
+      useImperativeHandle(forwardedRef, () => elemRef.current!, [])
+      
+      
+      return (
+        <Frame
+          {...restProps}
+          ref={elemRef}
+        >
+          {children}
+        </Frame>
+      )
+    }
+  )
+)
 export default Card2
 
 
@@ -46,5 +49,5 @@ const Frame = styled.article`
   gap: inherit;
   padding: 16px 12px;
   border-radius: 16px;
-  background: ${p=>p.theme.containerNormal.bg[0]};
+  background: ${p => p.theme.containerNormal.bg[0]};
 `

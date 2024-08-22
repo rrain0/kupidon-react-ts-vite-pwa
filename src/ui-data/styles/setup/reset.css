@@ -65,6 +65,7 @@ html {
 a {
   display: contents;
   text-decoration: none;
+  color: unset;
 }
 
 

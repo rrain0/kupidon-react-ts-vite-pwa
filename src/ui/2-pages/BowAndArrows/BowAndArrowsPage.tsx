@@ -11,34 +11,36 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 
 
 
-const BowAndArrowsPage =
-React.memo(
-()=>{
-  const titleText = useUiValues(TitleUiText)
-  
-  
-  return <>
+const BowAndArrowsPage = React.memo(
+  () => {
+    const titleText = useUiValues(TitleUiText)
     
-    <Pages.Page>
-      <Pages.SafeInsets>
-        <Pages.Content>
-          
-          <PageHeader>{titleText.bowAndArrows}</PageHeader>
-          
-          <HeaderArrow>Афиша</HeaderArrow>
-          
-          <HeaderArrow>Все события</HeaderArrow>
-        
-        </Pages.Content>
-      </Pages.SafeInsets>
+    
+    return (
+      <>
       
-      <PageScrollbars />
-    </Pages.Page>
-    
-    <BottomButtonBar />
-    
-  </>
-})
+        <Pages.Page>
+          <Pages.SafeInsets>
+            <Pages.Content>
+              
+              <PageHeader>{titleText.bowAndArrows}</PageHeader>
+              
+              <HeaderArrow>Афиша</HeaderArrow>
+              
+              <HeaderArrow>Все события</HeaderArrow>
+            
+            </Pages.Content>
+          </Pages.SafeInsets>
+          
+          <PageScrollbars />
+        </Pages.Page>
+        
+        <BottomButtonBar />
+        
+      </>
+    )
+  }
+)
 export default BowAndArrowsPage
 
 

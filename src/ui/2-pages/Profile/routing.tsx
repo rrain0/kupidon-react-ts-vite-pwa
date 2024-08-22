@@ -16,6 +16,7 @@ import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import use = RouteBuilder.use
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import ProfilePage from 'src/ui/2-pages/Profile/ProfilePage.tsx'
+import SummaryPage from 'src/ui/2-pages/Profile/Summary/SummaryPage'
 import full = RouteBuilder.full
 
 
@@ -33,7 +34,7 @@ const ProfileIdUserIdTab = React.memo(
     const summary = RootRoute.profile.id.userId.summary[path]
     
     if (urlUserId === authId) {
-      if (tab === summary) return <div>SUMMARY</div>
+      if (tab === summary) return <SummaryPage />
       return <ProfilePage />
     }
     
