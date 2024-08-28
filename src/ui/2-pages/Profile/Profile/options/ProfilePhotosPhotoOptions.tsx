@@ -9,7 +9,7 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
@@ -58,7 +58,7 @@ const ProfilePhotosPhotoOptions = React.memo(
           <OptionsContent>
             
             
-            <Button css={ButtonStyle.textRectBigNormal}
+            <Button css={ButtonS.textRectBigNormal}
               onClick={()=>{
                 const im = images[lastIdx]
                 im.download?.abort()
@@ -92,7 +92,7 @@ const ProfilePhotosPhotoOptions = React.memo(
               {({getRootProps, getInputProps}) =>
                 <div css={contents} {...getRootProps()}>
                   <input {...getInputProps()} />
-                  <Button css={ButtonStyle.textRectBigNormal}>
+                  <Button css={ButtonS.textRectBigNormal}>
                     
                     <OptionContainer>
                       <div css={optionIconBoxStyle}>
@@ -110,7 +110,7 @@ const ProfilePhotosPhotoOptions = React.memo(
             {/* {function(){
              const im = images[lastIdx]
              if (im.type==='remote' && im.isDownloaded || im.type==='local' && im.isCompressed) {
-             return <Button css={ButtonStyle.bigRectTransparent}
+             return <Button css={ButtonS.bigRectTransparent}
              onClick={()=>{
              sheet.setClosing()
              }}
@@ -132,7 +132,7 @@ const ProfilePhotosPhotoOptions = React.memo(
                 return <a href={im.dataUrl}
                   download={`${im.name} ${im.id}.${extensionFromMimeType(im.mimeType)}`}
                 >
-                  <Button css={ButtonStyle.textRectBigNormal}
+                  <Button css={ButtonS.textRectBigNormal}
                     onClick={sheet.setClosing}
                   >
                     <OptionContainer>
@@ -182,6 +182,6 @@ const optionIconBoxStyle = css`
   height: 1.3em;
   width: 1.333em;
   >${SvgIconS.El.icon.sel()}{
-    ${SvgIconS.El.icon.props.color.name}: ${ButtonStyle.El0.root.props.color.var()};
+    ${SvgIconS.El.icon.props.color.name}: ${ButtonS.El0.root.props.color.var()};
   }
 `

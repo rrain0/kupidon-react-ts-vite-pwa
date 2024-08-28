@@ -4,7 +4,7 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import { css } from '@emotion/react'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 
 
 
@@ -65,7 +65,7 @@ const ResizeObserverTestPage = ()=>{
       
       <div>Resize Observer Test Page</div>
       
-      <Button css={ButtonStyle.filledRectBigMain}
+      <Button css={ButtonS.filledRectBigMain}
         onClick={() => addItem1()}
       >
         +1
@@ -107,7 +107,7 @@ const ResizeObserverTestPage = ()=>{
       </div>
       
       
-      <Button css={ButtonStyle.filledRectBigMain}
+      <Button css={ButtonS.filledRectBigMain}
         onClick={() => addItem2()}
       >
         +1

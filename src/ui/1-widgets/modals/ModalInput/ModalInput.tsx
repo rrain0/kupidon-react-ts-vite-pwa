@@ -7,7 +7,7 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import ItemLabel from 'src/ui/0-elements/basic-elements/ItemLabel.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import Card2 from 'src/ui/0-elements/cards/Card2.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
@@ -53,11 +53,11 @@ const ModalInput = React.memo(
                   ref={forwardedRef}
                 />
                 <ModalElement.DialogButtons>
-                  {onClear && <Button css={ButtonStyle.textRoundedNormalNormal}
+                  {onClear && <Button css={ButtonS.textRoundedNormalNormal}
                     onClick={onClear}
                     children={actionText.clear}
                   />}
-                  <Button css={ButtonStyle.textUppercaseRoundedNormalNormal}
+                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
                     onClick={onClose}
                     children={actionText.ok}
                   />

@@ -74,7 +74,7 @@ export namespace ReactU {
   
   
   // todo fix types
-  /* export const combineEvHandlerRecord =
+  /* export const combineEvHandlersRecords =
   <
     R extends Partial<Record<keyof React.DOMAttributes<any>, React.EventHandler<E>>>,
     O extends Partial<Record<keyof React.DOMAttributes<any>, any>>,
@@ -88,7 +88,7 @@ export namespace ReactU {
       },
     ]) as unknown as R
   } */
-  export const combineEvHandlerRecord = (handlers: any, otherHandlers: any): any => {
+  export const combineEvHandlersRecords = (handlers: any, otherHandlers: any): any => {
     return ObjectMap<any, any>(handlers, ([prop, h]) => [
       prop,
       ev => {

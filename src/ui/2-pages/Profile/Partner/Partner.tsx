@@ -20,7 +20,7 @@ import { FormProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProp
 import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
@@ -101,12 +101,12 @@ React.memo(
     
     { (props.canSubmit || props.formProps.hasChanges) && <TopButtonBarFrame>
       { props.formProps.hasChanges
-        && <Button css={ButtonStyle.outlinedRoundedSmallNormal}
+        && <Button css={ButtonS.outlinedRoundedSmallNormal}
           onClick={props.formProps.resetUserFields}
         >{actionText.cancel}</Button>
       }
       { props.canSubmit && !props.isLoading
-        && <Button css={ButtonStyle.filledRoundedSmallAccent}
+        && <Button css={ButtonS.filledRoundedSmallAccent}
           onClick={props.submit}
         >{actionText.save}</Button>
       }

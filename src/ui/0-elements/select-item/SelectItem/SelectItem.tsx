@@ -15,7 +15,7 @@ import Callback = TypeU.Callback
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
 import arraify = ArrayU.arraify
-import combineEvHandlerRecord = ReactU.combineEvHandlerRecord
+import combineEvHandlersRecords = ReactU.combineEvHandlersRecords
 import trueOrUndef = TypeU.trueOrUndef
 
 
@@ -79,7 +79,7 @@ const SelectItem = React.memo(
               [SelectItemS.W.s.selected.s.name]: trueOrUndef(isSelected),
             }}
             {...restProps}
-            {...combineEvHandlerRecord(rippleProps.target, restProps)}
+            {...combineEvHandlersRecords(rippleProps.target, restProps)}
           >
             
             <div
@@ -148,7 +148,7 @@ const SelectItem = React.memo(
                     onClick={onClickEdit}
                     {...rippleProps.target}
                   >
-                    <Ripple {...rippleProps.ripple} css={RippleS.icon}/>
+                    <Ripple {...rippleProps.ripple} css={RippleS.icon} />
                     <PencilWrite2Ic />
                   </div>
                 )}</UseRipple>

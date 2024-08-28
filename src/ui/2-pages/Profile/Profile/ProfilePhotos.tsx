@@ -70,27 +70,27 @@ const progressAnimDuration = 400 // ms
 
 
 const springStyle =
-(dragIdx: number | undefined = undefined, active = false, dx = 0, dy = 0) =>
-(index: number/* , ctrl: Controller */) => {
-  if (dragIdx === index && active) return {
-    x: dx,
-    y: dy,
-    opacity: 0.4,
-    //scale: index===0 ? 0.5 : 1,
-    zIndex: 1,
-    immediate: (key: string) => ['zIndex'].includes(key),
-    config: (key: string) => ['x', 'y'].includes(key) ? config.stiff : config.default,
-  } satisfies UseSpringProps
-  
-  return {
-    x: 0,
-    y: 0,
-    opacity: 1,
-    //scale: 1,
-    zIndex: 0,
-    immediate: true,
-  } satisfies UseSpringProps
-}
+  (dragIdx: number | undefined = undefined, active = false, dx = 0, dy = 0) =>
+    (index: number/* , ctrl: Controller */) => {
+      if (dragIdx === index && active) return {
+        x: dx,
+        y: dy,
+        opacity: 0.4,
+        //scale: index===0 ? 0.5 : 1,
+        zIndex: 1,
+        immediate: p => ['zIndex'].includes(p),
+        config: p => ['x', 'y'].includes(p) ? config.stiff : config.default,
+      } satisfies UseSpringProps
+      
+      return {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        //scale: 1,
+        zIndex: 0,
+        immediate: true,
+      } satisfies UseSpringProps
+    }
 
 
 
@@ -106,17 +106,10 @@ React.memo(
   const { isDraggingFiles } = useRecoilValue(AppRecoil)
   
   
-  const progressAnim = useMemo(
-    () => radialGradKfs(theme),
-    [theme]
-  )
+  const progressAnim = useMemo(() => radialGradKfs(theme), [theme])
   
   const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
-  useTimeout(
-    3000,
-    () => setCanShowFetchProgress(true),
-    []
-  )
+  useTimeout(3000, () => setCanShowFetchProgress(true), [])
   
   const [lastIdx, setLastIdx] = useState(0)
   
@@ -266,169 +259,185 @@ React.memo(
   //console.log('canClick',canClick)
   
   
-  return <>
-    
-    <div css={photosGridStyle}
-      ref={photosGrid}
-    >
-      {springs.map((springStyle, i) => {
-        const im = images[i]
-        return <div css={contents} key={im.id}>
-        <div css={css`
-          grid-area: im${i+1};
-          position: relative;
-          ${center};
-        `}
-          ref={value => photoFrameRefs.current[i]=value}
-        >
-          
-          
-          <div css={contents}
-            //ref={ref as any}
-            {...function() {
-              const onPointerDown = (ev: React.PointerEvent) => {
-                if (ev.buttons===1) {
-                  ev.currentTarget.releasePointerCapture(ev.pointerId)
-                  setLastIdx(i)
-                  setDragState('initialDelay')
-                  setCanClick(true)
-                }
-              }
-              const onPointerRemove = () => {
-                if (dragState!=='dragging') {
-                  setDragState(undefined)
-                }
-              }
-              return {
-                onPointerDown,
-                onPointerCancel: onPointerRemove,
-                onPointerUp: onPointerRemove,
-                onPointerOut: onPointerRemove,
-              }
-            }()}
-            onClick={ev => {
-              if (canClick && !im.isEmpty) photoOptions.open()
-            }}
-          >
-            
-              <Dropzone
-                onDrop={(files, rejectedFiles, ev) => onFilesSelected(files)}
-                onDragOver={() => setLastIdx(i)}
-                noClick={!im.isEmpty || !canClick}
-                useFsAccessApi={false}
+  return (
+    <>
+      
+      <div css={photosGridStyle}
+        ref={photosGrid}
+      >
+        {springs.map((springStyle, i) => {
+          const im = images[i]
+          return (
+            <div css={contents} key={im.id}>
+              <div css={css`
+                grid-area: im${i+1};
+                position: relative;
+                ${center};
+              `}
+                ref={value => photoFrameRefs.current[i]=value}
               >
-                {({ getRootProps, getInputProps, isDragAccept }) => {
-                  //console.log('getInputProps()',getInputProps())
-                  //console.log('isDragAccept',isDragAccept)
-                  return <div css={contents} {...getRootProps()}>
-                    <input {...getInputProps()} />
-                    <animated.label css={photoDraggableBox}
-                      style={springStyle}
-                      {...drag(i)}
-                      //ref={ref2 as any}
-                    >
-                      
-                      {function() {
-                        if (im.compression?.showProgress)
-                          return <div css={photoPlaceholderStyle}>
-                            <PieProgress css={profilePhotoPieProgress}
-                              progress={
-                                RangeU.map(im.compression.progress, [0, 100], [5, 95])
-                              }
-                            />
-                          </div>
-                        
-                        else if (!canShowFetchProgress && im.type === 'remote' && !im.isReady)
-                          return <div css={photoPlaceholderStyle}>
-                            <SparkingLoadingLine/>
-                          </div>
-                        else if (im.download?.showProgress)
-                          return <div css={photoPlaceholderStyle}>
-                            <PieProgress css={profilePhotoPieProgress}
-                              progress={
-                                RangeU.map(im.download.progress, [0, 100], [5, 95])
-                              }
-                            />
-                          </div>
-                        
-                        else if (im.isEmpty)
-                          return <div css={photoPlaceholderStyle}>
-                            <PlusIc css={photoPlaceholderIconStyle}/>
-                          </div>
-                        else if (im.isReady)
-                          return <img css={photoImgStyle}
-                            src={im.dataUrl}
-                            alt={im.name}
-                          />
-                        
-                      }()}
-                      
-                      {im.type === 'local' && im.upload?.showProgress
-                        && <div css={photoDimmed}>
-                          <PieProgress css={profilePhotoPieProgressAccent}
-                            progress={
-                              RangeU.map(im.upload.progress, [0, 100], [5, 95])
-                            }
-                          />
-                        </div>
+                
+                
+                <div css={contents}
+                  //ref={ref as any}
+                  {...function() {
+                    const onPointerDown = (ev: React.PointerEvent) => {
+                      if (ev.buttons===1) {
+                        ev.currentTarget.releasePointerCapture(ev.pointerId)
+                        setLastIdx(i)
+                        setDragState('initialDelay')
+                        setCanClick(true)
                       }
-                      {isDraggingFiles && <>
-                        {isDragAccept && <div css={photoDimmed}/>}
-                        <div css={photoOnDragBorder}/>
-                      </>}
-                    
-                    </animated.label>
-                  </div>
-                }}
-              </Dropzone>
-            
-          </div>
-          
-          
-          
-          <div css={t => css`
-            ${photoProgressFrameStyle(t)};
-            
-            ${lastIdx===i && dragState==='progressAnim' && css`
-              animation: ${progressAnim} ${progressAnimDuration}ms linear forwards;
-            `}
-            ${lastIdx===i && !swap && dragState==='dragging' && css`
-              background-image: none;
-              background-color: ${t.photos.highlightFrameAccentBg[0]};
-            `}
-            ${swap?.[1]===i && css`
-              background-image: none;
-              background-color: ${t.photos.highlightFrameAccentBg[0]};
-            `}
-          `}
-            onAnimationEnd={ev => {
-              if (ev.animationName===progressAnim.name) {
-                setDragState('dragging')
-                setCanClick(false)
-              }
-            }}
-          />
-          
-          
-        </div>
-        </div>
-      })}
-    </div>
-    
-    
-    
-    
-    <ProfilePhotosPhotoOptions
-      isOpen={photoOptions.isOpen}
-      close={photoOptions.close}
-      images={images}
-      setImages={setImages}
-      lastIdx={lastIdx}
-      onFilesSelected={onFilesSelected}
-    />
-    
-    
-  </>
+                    }
+                    const onPointerRemove = () => {
+                      if (dragState!=='dragging') {
+                        setDragState(undefined)
+                      }
+                    }
+                    return {
+                      onPointerDown,
+                      onPointerCancel: onPointerRemove,
+                      onPointerUp: onPointerRemove,
+                      onPointerOut: onPointerRemove,
+                    }
+                  }()}
+                  onClick={ev => {
+                    if (canClick && !im.isEmpty) photoOptions.open()
+                  }}
+                >
+                  
+                  <Dropzone
+                    onDrop={(files, rejectedFiles, ev) => onFilesSelected(files)}
+                    onDragOver={() => setLastIdx(i)}
+                    noClick={!im.isEmpty || !canClick}
+                    useFsAccessApi={false}
+                  >
+                    {({ getRootProps, getInputProps, isDragAccept }) => {
+                      //console.log('getInputProps()',getInputProps())
+                      //console.log('isDragAccept',isDragAccept)
+                      return (
+                        <div css={contents} {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <animated.label css={photoDraggableBox}
+                            style={springStyle}
+                            {...drag(i)}
+                            //ref={ref2 as any}
+                          >
+                            
+                            {function() {
+                              if (im.compression?.showProgress)
+                                return (
+                                  <div css={photoPlaceholderStyle}>
+                                    <PieProgress css={profilePhotoPieProgress}
+                                      progress={
+                                        RangeU.map(im.compression.progress, [0, 100], [5, 95])
+                                      }
+                                    />
+                                  </div>
+                                )
+                              
+                              else if (!canShowFetchProgress && im.type === 'remote' && !im.isReady)
+                                return (
+                                  <div css={photoPlaceholderStyle}>
+                                    <SparkingLoadingLine/>
+                                  </div>
+                                )
+                              else if (im.download?.showProgress)
+                                return (
+                                  <div css={photoPlaceholderStyle}>
+                                    <PieProgress css={profilePhotoPieProgress}
+                                      progress={
+                                        RangeU.map(im.download.progress, [0, 100], [5, 95])
+                                      }
+                                    />
+                                  </div>
+                                )
+                              
+                              else if (im.isEmpty)
+                                return (
+                                  <div css={photoPlaceholderStyle}>
+                                    <PlusIc css={photoPlaceholderIconStyle}/>
+                                  </div>
+                                )
+                              else if (im.isReady)
+                                return (
+                                  <img css={photoImgStyle}
+                                    src={im.dataUrl}
+                                    alt={im.name}
+                                  />
+                                )
+                              
+                            }()}
+                            
+                            {im.type === 'local' && im.upload?.showProgress
+                              && <div css={photoDimmed}>
+                                <PieProgress css={profilePhotoPieProgressAccent}
+                                  progress={
+                                    RangeU.map(im.upload.progress, [0, 100], [5, 95])
+                                  }
+                                />
+                              </div>
+                            }
+                            {isDraggingFiles && <>
+                              {isDragAccept && <div css={photoDimmed}/>}
+                              <div css={photoOnDragBorder}/>
+                            </>}
+                          
+                          </animated.label>
+                        </div>
+                      )
+                    }}
+                  </Dropzone>
+                  
+                </div>
+                
+                
+                
+                <div css={t => css`
+                  ${photoProgressFrameStyle(t)};
+                  
+                  ${lastIdx===i && dragState==='progressAnim' && css`
+                    animation: ${progressAnim} ${progressAnimDuration}ms linear forwards;
+                  `}
+                  ${lastIdx===i && !swap && dragState==='dragging' && css`
+                    background-image: none;
+                    background-color: ${t.photos.highlightFrameAccentBg[0]};
+                  `}
+                  ${swap?.[1]===i && css`
+                    background-image: none;
+                    background-color: ${t.photos.highlightFrameAccentBg[0]};
+                  `}
+                `}
+                  onAnimationEnd={ev => {
+                    if (ev.animationName===progressAnim.name) {
+                      setDragState('dragging')
+                      setCanClick(false)
+                    }
+                  }}
+                />
+                
+                
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      
+      
+      
+      
+      <ProfilePhotosPhotoOptions
+        isOpen={photoOptions.isOpen}
+        close={photoOptions.close}
+        images={images}
+        setImages={setImages}
+        lastIdx={lastIdx}
+        onFilesSelected={onFilesSelected}
+      />
+      
+      
+    </>
+  )
 })
 export default ProfilePhotos
 

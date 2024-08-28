@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { AppTheme } from '@util/theme/AppTheme.ts'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
@@ -17,14 +17,14 @@ export namespace NavButtonStyle {
   
   
   export const Attr = {
-    ...ButtonStyle.Attr0,
+    ...ButtonS.Attr0,
   } as const
   
   export const El = function(){
-    const btn = ButtonStyle.El0.btn
+    const btn = ButtonS.El0.btn
     const icon = btn.toElem('>', SvgIconS.El.icon)
     const gradIcon = btn.toElem('>', SvgGradIconsStyle.El.root)
-    return { ...ButtonStyle.El0, gradIcon, icon } as const
+    return { ...ButtonS.El0, gradIcon, icon } as const
   }()
   
   
@@ -32,7 +32,7 @@ export namespace NavButtonStyle {
   
   
   export const nav = (t:AppTheme.Theme)=>css`
-    ${ButtonStyle.base};
+    ${ButtonS.addBase};
     // normal
     ${El.btn.thiz()} {
       height: 100%;

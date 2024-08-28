@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import Elem = WidgetStyle0.Elem
 import CssWidget = WidgetStyle0.CssWidget
@@ -22,9 +22,9 @@ export namespace IconButtonStyle {
     })
     
     return {
-      button: ButtonStyle.El.button,
-      //border: ButtonStyle.El.border,
-      //ripple: ButtonStyle.El.ripple,
+      button: ButtonS.El.button,
+      //border: ButtonS.El.border,
+      //ripple: ButtonS.El.ripple,
       icon,
     }
   }()
@@ -50,13 +50,13 @@ export namespace IconButtonStyle {
   
   
   export const iconBigTransparent = (t: AppTheme.Theme) => css`
-    ${ButtonStyle.textRoundBigNormal(t)};
+    ${ButtonS.textRoundBigNormal(t)};
     ${iconAddColorNormal(t)};
   `
   
   
   export const iconBig2Transparent = (t: AppTheme.Theme) => css`
-    ${ButtonStyle.textRoundBig2Normal(t)};
+    ${ButtonS.textRoundBig2Normal(t)};
     ${iconAddColorNormal(t)};
   `
   

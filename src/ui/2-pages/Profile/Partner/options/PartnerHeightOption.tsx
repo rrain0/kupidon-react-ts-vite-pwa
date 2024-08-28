@@ -9,7 +9,7 @@ import numeral from 'numeral'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
@@ -102,8 +102,8 @@ React.memo(
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   
   
-  const activeBtn = ButtonStyle.filledRoundedNormalAccent
-  const inactiveBtn = ButtonStyle.outlinedRoundedNormalAccent
+  const activeBtn = ButtonS.filledRoundedNormalAccent
+  const inactiveBtn = ButtonS.outlinedRoundedNormalAccent
   
   return <>
     <OptionItem

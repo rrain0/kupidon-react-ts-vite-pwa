@@ -22,7 +22,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
 import { LoginPageValidation } from './validation'
 import FormValues = LoginPageValidation.FormValues
@@ -175,7 +175,7 @@ React.memo(
           
           
           <Button
-            css={ButtonStyle.filledRectBigMain}
+            css={ButtonS.filledRectBigMain}
             type="submit"
           >
             {actionText.login}
@@ -183,7 +183,7 @@ React.memo(
           
           
           <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
-            <Button css={ButtonStyle.filledRectBigNormal}>
+            <Button css={ButtonS.filledRectBigNormal}>
               {actionText.signup}
             </Button>
           </Link>

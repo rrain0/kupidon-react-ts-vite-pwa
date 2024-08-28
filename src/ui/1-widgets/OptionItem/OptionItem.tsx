@@ -3,7 +3,7 @@ import { AppTheme } from '@util/theme/AppTheme.ts'
 import React from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
@@ -53,9 +53,9 @@ export default OptionItem
 
 
 const buttonStyle = (t: AppTheme.Theme) => css`
-  ${ButtonStyle.textRectBigNormal(t)};
+  ${ButtonS.textRectBigNormal(t)};
   
-  ${ButtonStyle.W.use.s.normal().e.button().thisUse} {
+  ${ButtonS.W.use.s.normal().e.button().thisUse} {
     display: grid;
     grid: 'icon title next' auto
           'icon value next' auto

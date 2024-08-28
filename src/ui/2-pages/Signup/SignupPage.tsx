@@ -29,7 +29,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
@@ -274,7 +274,7 @@ React.memo(
           
           
           <Button
-            css={ButtonStyle.filledRectBigMain}
+            css={ButtonS.filledRectBigMain}
             type='submit'
           >
             {actionText.signup}

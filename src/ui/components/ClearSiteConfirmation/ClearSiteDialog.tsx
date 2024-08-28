@@ -11,7 +11,7 @@ import { useBool } from 'src/util/react-state/useBool.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
@@ -81,13 +81,13 @@ React.memo(
           `}
         >
           
-          <Button css={[ButtonStyle.filledRoundedNormalAccent, button]}
+          <Button css={[ButtonS.filledRoundedNormalAccent, button]}
             onClick={props.setClosing}
           >
             {actionText.no}
           </Button>
           
-          <Button css={[ButtonStyle.filledRoundedNormalDanger, button]}
+          <Button css={[ButtonS.filledRoundedNormalDanger, button]}
             onClick={clear}
           >
             <ClearTrashIc css={[icon, iconOnDanger]}/>
@@ -141,7 +141,7 @@ const iconOnDanger = (t:Theme)=>css`
   }
 `
 const button = (t:Theme)=>css`
-  ${ButtonStyle.W.use.s.normal().e.button().thisUse} {
+  ${ButtonS.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;
     gap: 0.3em;
   }

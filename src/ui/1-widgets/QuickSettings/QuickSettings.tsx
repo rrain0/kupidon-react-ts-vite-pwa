@@ -16,7 +16,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -77,7 +77,7 @@ React.memo(
             <RoundButtonsContainer>
               
               {auth && <Link to={RootRoute.settings.account[full]()}>
-                <Button css={ButtonStyle.filledRoundedNormalNormal}
+                <Button css={ButtonS.filledRoundedNormalNormal}
                   onClick={props.setClosing}
                 >
                   <LockIc css={[
@@ -89,7 +89,7 @@ React.memo(
               </Link>}
               
               <Link to={RootRoute.settings.app[full]()}>
-                <Button css={ButtonStyle.filledRoundedNormalNormal}
+                <Button css={ButtonS.filledRoundedNormalNormal}
                   onClick={props.setClosing}
                 >
                   <GearIc css={SettingsOptions.icon}/>
@@ -98,27 +98,27 @@ React.memo(
               </Link>
               
               <Link to={RootRoute.test[full]()}>
-                <Button css={ButtonStyle.outlinedRoundedNormalNormal}
+                <Button css={ButtonS.outlinedRoundedNormalNormal}
                   onClick={props.setClosing}
                 >
                   {titleText.testPage}
                 </Button>
               </Link>
               
-              {app.canInstall && <Button css={ButtonStyle.filledRoundedNormalNormal}
+              {app.canInstall && <Button css={ButtonS.filledRoundedNormalNormal}
                 onClick={async () => await promptInstall()}
               >
                 <AddModuleIc css={SettingsOptions.icon}/>
                 {actionText.installApp}
               </Button>}
               
-              <Button css={ButtonStyle.filledRoundedNormalNormal}
+              <Button css={ButtonS.filledRoundedNormalNormal}
                 onClick={clearSiteDialog.open}
               >
                 {actionText.clearAppData}
               </Button>
               
-              {import.meta.env.DEV && <Button css={ButtonStyle.outlinedRoundedNormalNormal}
+              {import.meta.env.DEV && <Button css={ButtonS.outlinedRoundedNormalNormal}
                 onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
               >
                 Show Dev Overlay

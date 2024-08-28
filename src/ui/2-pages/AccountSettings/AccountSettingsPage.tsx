@@ -27,7 +27,7 @@ import { formSubmitPreventDefault } from '@util/hooks/formSubmitPreventDefault'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import DataField from 'src/ui/0-elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/0-elements/DataField/DataFieldStyle'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
@@ -300,18 +300,18 @@ React.memo(
           
           
           <Link to={RootRoute.settings.pwdChange[full]()}>
-            <Button css={ButtonStyle.filledRectBigNormal}>
+            <Button css={ButtonS.filledRectBigNormal}>
               {titleText.pwdChange}
             </Button>
           </Link>
           
-          <Button css={ButtonStyle.filledRectBigNormal}
+          <Button css={ButtonS.filledRectBigNormal}
             onClick={resetAuth}
           >
             {actionText.logOutFromAccount}
           </Button>
         
-          <Button css={ButtonStyle.filledRectBigDanger}
+          <Button css={ButtonS.filledRectBigDanger}
             onClick={undefined}
             disabled
           >

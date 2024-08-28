@@ -34,10 +34,12 @@ export const DarkProps: ThemeProps = {
     bg3:             ['#525354'],
     
     content:         ['#bdbdbd'],
+    content1a:       ['#bdbdbd'],
     content1b:       ['#dddddd'],
     content2:        ['#999999'],
     content2b:       ['#909090'],
     content3:        ['#7b7b7b'],
+    content3d:       ['#838383'],
     content3e:       ['#777777'],
     content4:        ['#666666'],
     content4b:       ['#42414c'],
@@ -62,6 +64,7 @@ export const DarkProps: ThemeProps = {
   },
   buttonAccent: {
     bg:            ['#999999'],
+    bg2:           ['#999999'],
     content:       ['#000000'],
     bgFocus:       ['#7b7b7b'],
     contentFocus:  ['#000000'],

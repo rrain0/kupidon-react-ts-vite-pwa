@@ -34,10 +34,12 @@ export const LightProps: ThemeProps = {
     bg3:             ['#f0f0f0'],
     
     content:         ['#000000'],
+    content1a:       ['#1b1919'],
     content1b:       ['#444444'],
     content2:        ['#555555'],
     content2b:       ['#5b5b5b'],
     content3:        ['#7b7b7b'],
+    content3d:       ['#838383'],
     content3e:       ['#999999'],
     content4:        ['#d1d1d1'],
     content4b:       ['#dddddd'],
@@ -62,6 +64,7 @@ export const LightProps: ThemeProps = {
   },
   buttonAccent: {
     bg:            ['#bbbbbb'],
+    bg2:           ['#bbbbbb'],
     content:       ['#000000'],
     bgFocus:       ['#999999'],
     contentFocus:  ['#000000'],

@@ -1,6 +1,6 @@
-import React, { useImperativeHandle, useRef } from "react"
+import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import Ripple from 'src/_old0/ui/0-elements/Ripple0/Ripple.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
@@ -18,56 +18,59 @@ type ButtonProps = React.ComponentPropsWithoutRef<'button'> & PartialUndef<{
 }>
 
 
-const Button =
-React.memo(
-React.forwardRef<HTMLButtonElement, ButtonProps>(
-(props, forwardedRef) => {
-  const {
-    hasError, className,
-    rippleMode, rippleDuration,
-    children,
-    ...restProps
-  } = props
-  
-  
-  const elemRef = useRef<HTMLButtonElement>(null)
-  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
-  
-  
-  const buttonProps = {
-    [ButtonStyle.W.s.error.s.name]: trueOrUndef(hasError),
-    className: clsx(className, ButtonStyle.W.e.button.e.name),
-    type: 'button' as const, // will be overridden by 'type' from 'restProps'
-    ...restProps
-  }
-  const borderProps = {
-    className: ButtonStyle.W.e.border.e.name
-  }
-  const rippleProps = {
-    mode: rippleMode ?? 'cursor',
-    rippleDuration,
-  }
-  
-  
-  
-  return <button // Button
-    {...buttonProps}
-    ref={elemRef}
-  >
-    
-    { children }
-    
-    <div // Border
-      {...borderProps}
-    >
-      <Ripple // Ripple
-        targetElement={elemRef}
-        {...rippleProps}
-      />
-    </div>
-    
-  </button>
-}))
+const Button = React.memo(
+  React.forwardRef<HTMLButtonElement, ButtonProps>(
+    (props, forwardedRef) => {
+      const {
+        hasError, className,
+        rippleMode, rippleDuration,
+        children,
+        ...restProps
+      } = props
+      
+      
+      const elemRef = useRef<HTMLButtonElement>(null)
+      useImperativeHandle(forwardedRef, () => elemRef.current!, [])
+      
+      
+      const buttonProps = {
+        [ButtonS.W.s.error.s.name]: trueOrUndef(hasError),
+        className: clsx(className, ButtonS.W.e.button.e.name),
+        type: 'button' as const, // will be overridden by 'type' from 'restProps'
+        ...restProps,
+      }
+      const borderProps = {
+        className: ButtonS.W.e.border.e.name,
+      }
+      const rippleProps = {
+        mode: rippleMode ?? 'cursor',
+        rippleDuration,
+      }
+      
+      
+      
+      return (
+        <button // Button
+          {...buttonProps}
+          ref={elemRef}
+        >
+          
+          { children }
+          
+          <div // Border
+            {...borderProps}
+          >
+            <Ripple // Ripple
+              targetElement={elemRef}
+              {...rippleProps}
+            />
+          </div>
+          
+        </button>
+      )
+    }
+  )
+)
 export default Button
 
 

@@ -24,7 +24,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui-data/theme/ThemeCollection.ts'
 import { AppTheme } from '@util/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
@@ -180,7 +180,7 @@ React.memo(
             
             <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
               {overlay=><>
-                <Button css={ButtonStyle.outlinedRoundedNormalNormal}
+                <Button css={ButtonS.outlinedRoundedNormalNormal}
                   onClick={overlay.open}
                 >
                   {actionText.clearAppData}
@@ -225,8 +225,8 @@ const RoundButtonsContainer = styled.div`
   gap: 10px;
 `
 const normalIconRoundButton = (t:AppTheme.Theme)=>css`
-  ${ButtonStyle.filledRoundedNormalAccent(t)};
-  ${ButtonStyle.W.use.s.normal().e.button().thisUse} {
+  ${ButtonS.filledRoundedNormalAccent(t)};
+  ${ButtonS.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;
     gap: 0.6em;
   }

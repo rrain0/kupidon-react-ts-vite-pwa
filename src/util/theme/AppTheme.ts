@@ -40,10 +40,12 @@ export namespace AppTheme {
       bg3:             string[]
       
       content:         string[]
+      content1a:       string[]
       content1b:       string[]
       content2:        string[]
       content2b:       string[]
       content3:        string[]
+      content3d:       string[]
       content3e:       string[]
       content4:        string[]
       content4b:       string[]
@@ -70,6 +72,7 @@ export namespace AppTheme {
     // just a colorful button that drags some attention
     buttonAccent: {
       bg:            string[]
+      bg2:           string[]
       content:       string[]
       bgFocus:       string[]
       contentFocus:  string[]

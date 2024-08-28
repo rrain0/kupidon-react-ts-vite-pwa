@@ -22,7 +22,7 @@ import abs = EmotionCommon.abs
 
 
 
-export namespace ButtonStyle {
+export namespace ButtonS {
   
   export const Attr0 = {
     error: DataAttrError,
@@ -80,7 +80,7 @@ export namespace ButtonStyle {
   
   
   
-  export const base = css`
+  export const addBase = css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       ${resetButton};
@@ -108,11 +108,9 @@ export namespace ButtonStyle {
   `
   
   
-  
-  
   // type: filled, shape: rect, size: big
   const filledRectBig = css`
-    ${base};
+    ${addBase};
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       width: 100%;
@@ -121,9 +119,65 @@ export namespace ButtonStyle {
       padding: 8px 6px;
       ${Txt.large2};
     }
-    ${W.use.s.normal().e.border().thisUse}{
-      border: 1px solid;
+    ${W.use.s.normal().e.border().thisUse} {
+      //border: 1px solid;
+      border: none;
     }
+  `
+  // type: filled, shape: rect, add size: normal
+  const filledRectAddSizeNormal = css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      width: 100%;
+      min-height: 43px;
+      border-radius: 10px;
+      padding: 8px 14px;
+      ${Txt.large2};
+    }
+  `
+  
+  // type: filled, shape: rect, add color
+  const filledRectAddColor = (
+    colors: Record<
+      'bg' | 'c' | 'rippleC' | 'bgFocus' | 'cFocus' | 'disabledBg' | 'disabledC',
+      string
+    >
+  ) => css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      background: ${colors.bg};
+      ${W.e.button.e.props.color.set(colors.c)}
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(colors.rippleC)}
+    }
+    
+    // state: hover
+    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
+      background: ${colors.bgFocus};
+      ${W.e.button.e.props.color.set(colors.cFocus)}
+    }}
+    
+    // state: active
+    ${W.use.s.active().e.button().thisUse} { }
+    
+    // state: focus
+    ${W.use.s.focus().e.button().thisUse} { }
+    
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.button().thisUse} {
+      background: ${colors.bgFocus};
+      ${W.e.button.e.props.color.set(colors.cFocus)}
+    }
+    
+    // state: disabled
+    ${W.use.s.disabled().e.button().thisUse} {
+      background: ${colors.disabledBg};
+      ${W.e.button.e.props.color.set(colors.disabledC)};
+    }
+    
+    // state: error
+    ${W.use.s.error().e.border().thisUse} { }
   `
   // type: filled, shape: rect, add color: main
   const filledRectAddColorMain = (t: AppTheme.Theme) => css`
@@ -131,9 +185,6 @@ export namespace ButtonStyle {
     ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonMain.bg[0]};
       ${W.e.button.e.props.color.set(t.buttonMain.content[0])}
-    }
-    ${W.use.s.normal().e.border().thisUse} {
-      border: none;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
@@ -171,9 +222,6 @@ export namespace ButtonStyle {
       background: ${t.buttonAccent.bg[0]};
       ${W.e.button.e.props.color.set(t.buttonAccent.content[0])}
     }
-    ${W.use.s.normal().e.border().thisUse} {
-      border: none;
-    }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
     }
@@ -196,15 +244,22 @@ export namespace ButtonStyle {
       ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
+  // type: filled, shape: rect, add color: accent 2
+  const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
+    bg: t.buttonAccent.bg2[0],
+    c: t.buttonAccent.content[0],
+    rippleC: t.ripple.content[0],
+    bgFocus: t.buttonAccent.bgFocus[0],
+    cFocus: t.buttonAccent.contentFocus[0],
+    disabledBg: t.elementDisabled.bg[0],
+    disabledC: t.elementDisabled.content[0],
+  })
   // type: filled, shape: rect, add color: normal
   const filledRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background: ${t.buttonNormal.bg[0]};
       ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
-    }
-    ${W.use.s.normal().e.border().thisUse} {
-      border: none;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
@@ -276,6 +331,12 @@ export namespace ButtonStyle {
     ${filledRectBig};
     ${filledRectAddColorDanger(t)};
   `
+  // type: filled, shape: rect, size: normal, color: accent
+  export const filledRectNormalAccent2 = (t: AppTheme.Theme) => css`
+    ${filledRectBig};
+    ${filledRectAddSizeNormal};
+    ${filledRectAddColorAccent2(t)};
+  `
   
   
   
@@ -287,9 +348,6 @@ export namespace ButtonStyle {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background: none;
-    }
-    ${W.use.s.normal().e.border().thisUse} {
-      border: none;
     }
   `
   // type: text, shape: rect, add color: normal
@@ -349,7 +407,7 @@ export namespace ButtonStyle {
   
   // type: filled, shape: rounded, size: normal
   const filledRoundedNormal = css`
-    ${base};
+    ${addBase};
     
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
@@ -367,7 +425,7 @@ export namespace ButtonStyle {
   `
   // type: filled, shape: rounded, size: small
   export const filledRoundedSmall = css`
-    ${base};
+    ${addBase};
     
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
@@ -438,6 +496,14 @@ export namespace ButtonStyle {
       ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
+  // type: filled, shape: rounded, add color: accent2
+  export const filledRoundedAddColorAccent2 = (t: AppTheme.Theme) => css`
+    ${filledRoundedAddColorAccent(t)};
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      background: ${t.buttonAccent.bg2[0]};
+    }
+  `
   // type: filled, shape: rounded, add color: danger
   export const filledRoundedAddColorDanger = (t: AppTheme.Theme) => css`
     // state: normal
@@ -479,6 +545,11 @@ export namespace ButtonStyle {
     ${filledRoundedNormal};
     ${filledRoundedAddColorAccent(t)};
   `
+  // type: filled, shape: rounded, size: normal, color: accent2
+  export const filledRoundedNormalAccent2 = (t: AppTheme.Theme) => css`
+    ${filledRoundedNormal};
+    ${filledRoundedAddColorAccent2(t)};
+  `
   // type: filled, shape: rounded, size: normal, color: danger
   export const filledRoundedNormalDanger = (t: AppTheme.Theme) => css`
     ${filledRoundedNormal};
@@ -500,7 +571,7 @@ export namespace ButtonStyle {
   
   // type: outlined, shape: rounded, size: normal
   const outlinedRoundedNormal = css`
-    ${base};
+    ${addBase};
     
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
@@ -524,7 +595,7 @@ export namespace ButtonStyle {
   `
   // type: outlined, shape: rounded, size: small
   const outlinedRoundedSmall = css`
-    ${base};
+    ${addBase};
     
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
@@ -638,9 +709,6 @@ export namespace ButtonStyle {
       background: none;
       ${Txt.large2b};
     }
-    ${W.use.s.normal().e.border().thisUse} {
-      border: none;
-    }
   `
   // type: text, shape: rounded, add color: normal
   export const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
@@ -691,7 +759,7 @@ export namespace ButtonStyle {
   
   // type: text, shape: round, size: big
   const textRoundBig = css`
-    ${base};
+    ${addBase};
     
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {

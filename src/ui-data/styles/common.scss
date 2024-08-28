@@ -61,7 +61,7 @@
   }
 }
 @mixin mobileFullWidth {
-  @media (max-width: 550px) {
+  @media (max-width: 480px) {
     width: 100%;
   }
 }

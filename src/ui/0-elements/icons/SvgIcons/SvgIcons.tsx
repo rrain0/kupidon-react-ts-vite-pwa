@@ -32,6 +32,7 @@ import Download2RoundSvg from 'src/res/ic/normal/download-2-round.svg?react'
 
 import EyeSvg from 'src/res/ic/normal/eye.svg?react'
 import EyeCrossedOutSvg from 'src/res/ic/normal/eye-crossed-out.svg?react'
+import EyeWideSvg from 'src/res/ic/normal/eye-wide.svg?react'
 
 import FloppyDisk1Svg from 'src/res/ic/normal/floppy-disk-1.svg?react'
 import FullscreenSvg from 'src/res/ic/normal/fullscreen.svg?react'
@@ -189,6 +190,7 @@ export namespace SvgIcons {
   
   export const EyeIc = generateSimpleSvgIcon(EyeSvg)
   export const EyeCrossedOutIc = generateSimpleSvgIcon(EyeCrossedOutSvg)
+  export const EyeWideIc = generateSimpleSvgIcon(EyeWideSvg)
   
   
   export const FloppyDisk1Ic = generateSimpleSvgIcon(FloppyDisk1Svg)

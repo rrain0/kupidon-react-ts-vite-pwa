@@ -3,7 +3,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonStyle } from 'src/ui/0-elements/buttons/Button/ButtonStyle.ts'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
@@ -53,8 +53,8 @@ export default EditableTextCard
 
 
 const Frame = styled(Button)`
-  ${p=>ButtonStyle.textRectBigNormal(p.theme)};
-  ${ButtonStyle.W.use.s.normal().e.button().thisUse}{
+  ${p=>ButtonS.textRectBigNormal(p.theme)};
+  ${ButtonS.W.use.s.normal().e.button().thisUse}{
     ${p=>card3Style(p.theme)};
     width: 100%;
     height: fit-content;
