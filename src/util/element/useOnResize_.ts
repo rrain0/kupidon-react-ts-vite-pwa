@@ -6,7 +6,7 @@ import Arraify = ArrayU.Arraify
 
 
 
-export const useOnResize = (
+export const useOnResize_ = (
   elemRef: Arraify<React.RefObject<any>>,
   onResize: ResizeObserverCallback
 ) => {

@@ -6,7 +6,7 @@ import { useEmulatedScroll } from 'src/ui/2-pages/Test/SimulatedScroll/useEmulat
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useGetElemWH } from 'src/util/element/useGetElemWH'
-import { useOnResize } from 'src/util/element/useOnResize'
+import { useOnResize_ } from 'src/util/element/useOnResize_'
 import { useElemRef } from 'src/util/react-state/useElemRef'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
@@ -38,35 +38,37 @@ const EmulatedScroll = React.memo(
       getMinMaxOffset,
       ([, dy]) => -dy,
     )
-    useOnResize([frameRef, contentRef], () => {
+    useOnResize_([frameRef, contentRef], () => {
       setScrollProgress(valueToProgress(value.get()))
       apply()
     })
     
     
-    return <Pages.SimplePage>
-        
-        
-        <ScrollFrame ref={frameRef}>
+      return (
+        <Pages.SimplePage>
           
-          <animated.div
-            css={scrollContentCss}
-            ref={contentRef}
-            {...drag()}
-            style={{
-              // @ts-expect-error
-              top: value.to(v => -v),
-            }}
-          >
-            
-            { arrOfNumbers(500).map(it => <div>Simulated Scroll {it}</div>) }
-            
-          </animated.div>
           
-        </ScrollFrame>
-        
-        
-    </Pages.SimplePage>
+          <ScrollFrame ref={frameRef}>
+            
+            <animated.div
+              css={scrollContentCss}
+              ref={contentRef}
+              {...drag()}
+              style={{
+                // @ts-expect-error
+                top: value.to(v => -v),
+              }}
+            >
+              
+              { arrOfNumbers(500).map(it => <div>Simulated Scroll {it}</div>) }
+              
+            </animated.div>
+            
+          </ScrollFrame>
+          
+          
+      </Pages.SimplePage>
+    )
   }
 )
 export default EmulatedScroll
