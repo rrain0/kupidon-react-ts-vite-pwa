@@ -94,6 +94,7 @@ export namespace AppRoutes {
     state: buildPath('state'),
     pageLifecycle: buildPath('page-lifecycle'),
     useEvent: buildPath('use-event'),
+    elemRef: buildPath('elem-ref'),
     
     emulatedScroll: buildPath('emulated-scroll'),
     

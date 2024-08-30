@@ -132,7 +132,7 @@ export namespace ButtonS {
       min-height: 43px;
       border-radius: 10px;
       padding: 8px 14px;
-      ${Txt.large2};
+      ${Txt.large1};
     }
   `
   

@@ -62,7 +62,9 @@ const SummaryPage = React.memo(
             <Pages.Content>
               
               <Card2 css={cardStyle}>
+                
                 <Ava src={profileData.ava}/>
+                
                 <Name>{profileData.name}</Name>
                 <UserActionsConsumer>
                   <Link to={RootRoute.profile.id.userId[use](authId).preview[full]()}>
@@ -74,11 +76,21 @@ const SummaryPage = React.memo(
                   </Link>
                 </UserActionsConsumer>
                 <Info>{info}</Info>
+                
                 <Link to={RootRoute.profile.id.userId[use](authId).profile[full]()}>
                   <Edit>
                     <Button css={ButtonS.filledRectNormalAccent2}>{actionText.edit}</Button>
                   </Edit>
                 </Link>
+                
+                <Divider />
+                
+                <HeaderArrowBox>
+                  <HeaderArrow>
+                    Завешите описание профиля
+                  </HeaderArrow>
+                </HeaderArrowBox>
+                
               </Card2>
             
             </Pages.Content>
@@ -104,6 +116,10 @@ const cardStyle = css`
     'ava  .    info info eye' auto
     'ava  .    .    .    .   ' 10px
     'ava  .    edit edit edit' auto
+    '.    .    .    .    .   ' 14.5px
+    'div  div  div  div  div ' auto
+    '.    .    .    .    .   ' 13.5px
+    'harr harr harr harr harr ' auto
    / auto 14px 1fr  8px  auto;
   gap: 0;
 `
@@ -157,3 +173,14 @@ const Edit = styled.div`
 `
 
 
+const Divider = styled.div`
+  grid-area: div;
+  width: 100%;
+  height: 1px;
+  background-color: ${p => p.theme.containerNormal.c5};
+`
+
+
+const HeaderArrowBox = styled.div`
+  grid-area: harr;
+`

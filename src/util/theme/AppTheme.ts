@@ -9,6 +9,12 @@ export namespace AppTheme {
   export type Type = 'light' | 'dark'
   
   
+  
+  /*
+  background => bg
+  content => c
+  contentAccent => ca
+   */
   export interface ThemeProps {
     
     // окружение
@@ -49,6 +55,7 @@ export namespace AppTheme {
       content3e:       string[]
       content4:        string[]
       content4b:       string[]
+      c5:              string
       
       contentAccent:   string[]
       contentAccent2:  string[]

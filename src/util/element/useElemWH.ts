@@ -3,7 +3,7 @@ import { getElemProps } from 'src/util/element/ElemProps'
 import { useAwaitMounting } from 'src/util/react/useAwaitMounting.ts'
 
 
-
+// TODO replace & remove - test useResize
 export const useElemWH = (elemRef: React.RefObject<HTMLElement>) => {
   
   const getElem = () => elemRef.current

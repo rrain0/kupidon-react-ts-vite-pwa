@@ -1,5 +1,6 @@
 import { RouteObject } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import ElemRefTestPage from 'src/ui/2-pages/Test/pages/ElemRefTestPage'
 import UseEventTest from 'src/ui/2-pages/Test/pages/UseEventTest'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import PageLifecycle from 'src/ui/2-pages/Test/pages/PageLifecycle'
@@ -93,6 +94,14 @@ const useEventRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / elem-ref / <check here>'
+const elemRefRouting: RouteObject[] = [
+  {
+    path: '',
+    Component: ElemRefTestPage,
+  },
+  clearUnknownPathEnding,
+]
 
 
 // path: 'test / emulated-scroll / <check here>'
@@ -174,6 +183,12 @@ export const testRouting: RouteObject[] = [
     path: RootRoute.test.useEvent[path]+'/*',
     children: useEventRouting,
   },
+  {
+    path: RootRoute.test.elemRef[path]+'/*',
+    children: elemRefRouting,
+  },
+  
+  
   {
     path: RootRoute.test.emulatedScroll[path]+'/*',
     children: emulatedScrollRouting,

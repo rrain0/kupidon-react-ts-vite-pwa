@@ -15,10 +15,12 @@ import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/Check
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import { RangeU } from 'src/util/common/RangeU'
 import { useBool } from 'src/util/react-state/useBool'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { useInterval } from 'src/util/react/useInterval'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import center = EmotionCommon.center
+
 
 
 
@@ -32,10 +34,11 @@ const TestPage = React.memo(
     useInterval(3000, () => setProgress(s => s === 0 ? 100 : 0))
     
     
+    const [isChecked , , , toggleIsChecked] = useBool(false)
     
     const [onEventVal, , , toggleOnEventVal] = useBool(false)
     
-    
+    console.log('TestPage render')
     
     return (
       <>
@@ -72,6 +75,9 @@ const TestPage = React.memo(
               </Link>
               <Link to={RootRoute.test.useEvent[fullAnySearchParams](searchParams)}>
                 <Button css={ButtonS.filledRectBigNormal}>useEvent test</Button>
+              </Link>
+              <Link to={RootRoute.test.elemRef[fullAnySearchParams](searchParams)}>
+                <Button css={ButtonS.filledRectBigNormal}>Element Ref test</Button>
               </Link>
               
               
@@ -177,7 +183,11 @@ const TestPage = React.memo(
                 color: ${t.containerAccent.content[0]};
               `}
             >
-              <CheckboxInput css={CheckboxInputStyle.roundNormalNormal}/>
+              <CheckboxInput
+                css={CheckboxInputStyle.roundNormalNormal}
+                checked={isChecked}
+                onChange={toggleIsChecked}
+              />
             </div>
             
             

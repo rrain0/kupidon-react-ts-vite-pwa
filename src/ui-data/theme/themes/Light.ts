@@ -43,6 +43,7 @@ export const LightProps: ThemeProps = {
     content3e:       ['#999999'],
     content4:        ['#d1d1d1'],
     content4b:       ['#dddddd'],
+    c5:              '#e3e3e3',
     
     contentAccent:   ['#333333'],
     contentAccent2:  ['#d1d1d1'],

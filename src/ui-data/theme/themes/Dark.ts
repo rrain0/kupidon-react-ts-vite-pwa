@@ -43,6 +43,7 @@ export const DarkProps: ThemeProps = {
     content3e:       ['#777777'],
     content4:        ['#666666'],
     content4b:       ['#42414c'],
+    c5:              '#42414c',
     
     contentAccent:   ['#bdbdbd'],
     contentAccent2:  ['#2e343f'],
