@@ -98,8 +98,26 @@ export namespace ReactU {
     ])
   }
   
+  type ReactEventHandlers<E extends HTMLElement> = {
+    [Prop in keyof React.DOMAttributes<E>]?:
+      React.DOMAttributes<E>[Prop] extends React.EventHandler<any> | undefined
+        ? React.DOMAttributes<E>[Prop] | undefined
+        : never
+  }
+  {
+    const a: ReactEventHandlers<HTMLDivElement> = {
+      onClick: () => {},
+      //onUnknown: () => {}, // it works and produces error
+    }
+  }
+  export const combineEvHandlersRecords2 =
+    <E extends HTMLElement>
+    (...handlers: Record<string, () => void>[]) => {
+    // TODO
+  }
   
-
+  
+  
   
   /*
   export const arrMapAndMergeIfNotEq =
