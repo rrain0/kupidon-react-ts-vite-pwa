@@ -154,10 +154,10 @@ export default [
       '@stylistic/function-paren-newline': 'off',
       '@stylistic/generator-star-spacing': 'off',
       '@stylistic/implicit-arrow-linebreak': 'off',
-      /*'@stylistic/indent': ['error', 2, {
-        MemberExpression: 0,
+      '@stylistic/indent': ['error', 2, {
+        MemberExpression: 1,
         ignoreComments: true,
-      }],*/
+      }],
       //'@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true/*, align: 'value'*/ }],
       '@stylistic/key-spacing': 'off',
       '@stylistic/keyword-spacing': ['error', { before: true, after: true }],
@@ -276,7 +276,7 @@ export default [
       'promise': promise,
     },
     rules: {
-      'promise/catch-or-return': 'off'
+      'promise/catch-or-return': 'off',
     },
   },
   

@@ -44,27 +44,27 @@ const EmulatedScroll = React.memo(
     })
     
     
-      return (
-        <Pages.SimplePage>
+    return (
+      <Pages.SimplePage>
+        
+        
+        <ScrollFrame ref={frameRef}>
           
+          <animated.div
+            css={scrollContentCss}
+            ref={contentRef}
+            {...drag()}
+            style={{
+              // @ts-expect-error
+              top: value.to(v => -v),
+            }}
+          >
+            
+            { arrOfNumbers(500).map(it => <div>Simulated Scroll {it}</div>) }
+            
+          </animated.div>
           
-          <ScrollFrame ref={frameRef}>
-            
-            <animated.div
-              css={scrollContentCss}
-              ref={contentRef}
-              {...drag()}
-              style={{
-                // @ts-expect-error
-                top: value.to(v => -v),
-              }}
-            >
-              
-              { arrOfNumbers(500).map(it => <div>Simulated Scroll {it}</div>) }
-              
-            </animated.div>
-            
-          </ScrollFrame>
+        </ScrollFrame>
           
           
       </Pages.SimplePage>
