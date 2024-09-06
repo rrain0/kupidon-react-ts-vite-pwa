@@ -44,7 +44,7 @@ export namespace SelectItemS {
     
     const content = new Elem('rrainuiContent', { }, { })
     
-    const selectItemWidget = CssWidget
+    return CssWidget
       .ofRoot('frame', frame)
       
       .add('frame', '>', 'border', border)
@@ -64,8 +64,6 @@ export namespace SelectItemS {
       .add('editBtn', '>', 'editIcon', editIcon)
       
       .add('frame', '>', 'content', content)
-    
-    return selectItemWidget
   })()
   
   

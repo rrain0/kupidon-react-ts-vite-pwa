@@ -39,7 +39,7 @@ export namespace SettingsOptions {
     ${SvgIconS.El.icon.thiz()} {
       height: 1.3em;
       width: 1.333em;
-      ${SvgIconS.El.icon.props.color.set(ButtonS.El0.root.props.color.var())}
+      ${SvgIconS.El.icon.props.color.set(ButtonS.El00.root.props.color.var())}
     }
   `
   export const iconSmall = (t:AppTheme.Theme)=>css`

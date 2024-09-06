@@ -21,10 +21,10 @@ export namespace NavButtonStyle {
   } as const
   
   export const El = function(){
-    const btn = ButtonS.El0.btn
+    const btn = ButtonS.El00.btn
     const icon = btn.toElem('>', SvgIconS.El.icon)
     const gradIcon = btn.toElem('>', SvgGradIconsStyle.El.root)
-    return { ...ButtonS.El0, gradIcon, icon } as const
+    return { ...ButtonS.El00, gradIcon, icon } as const
   }()
   
   

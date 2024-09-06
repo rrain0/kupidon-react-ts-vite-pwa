@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderArrow from 'src/ui/2-pages/BowAndArrows/elements/HeaderArrow.tsx'
+import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import PageHeader from 'src/ui/2-pages/BowAndArrows/elements/PageHeader.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'

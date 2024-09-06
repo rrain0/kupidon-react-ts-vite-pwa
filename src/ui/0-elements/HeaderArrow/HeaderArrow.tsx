@@ -14,9 +14,12 @@ import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 
 const btnStyle = (t: AppTheme.Theme) => css`
   ${ButtonS.textRectNormalNormal(t)};
-  ${row};
-  justify-content: space-between;
-  align-items: center;
+  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
+    ${row};
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
 `
 const arrowStyle = (t: AppTheme.Theme) => css`
   ${SvgIconS.El.icon.props.color.name}: ${t.page.content1[0]};

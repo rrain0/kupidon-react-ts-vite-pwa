@@ -37,6 +37,10 @@ export namespace WidgetStyle {
   
     get use() { return new UseCssWidget(this) }
     
+    u(props: { e: ObjectU.ObjectKeysType<Es>, s: S }): UseCssWidget<Es, S> {
+      return this.use.e[props.e]().s[props.s]()
+    }
+    
     static ofRoot
     <
       const E extends string,

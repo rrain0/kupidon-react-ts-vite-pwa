@@ -1,20 +1,28 @@
 import { css } from '@emotion/react'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import CssWidget = WidgetStyle0.CssWidget
-import Elem = WidgetStyle0.Elem
-import CssPseudo = WidgetStyle0.CssPseudo
-import CssAttr = WidgetStyle0.CssAttr
-import Elem0 = WidgetStyle0.Elem0
-import Pseudo0 = WidgetStyle0.Pseudo0
-import CssProp = WidgetStyle0.CssProp
-import CssPropEnum = WidgetStyle0.CssPropEnum
+import CssWidget0 = WidgetStyle0.CssWidget
+import Elem = WidgetStyle.Elem
+import CssPseudo0 = WidgetStyle0.CssPseudo
+import CssPseudo = WidgetStyle.CssPseudo
+import CssAttr = WidgetStyle.CssAttr
+import CssAttr0 = WidgetStyle0.CssAttr
+import Elem00 = WidgetStyle0.Elem0
+import Elem0 = WidgetStyle0.Elem
+import Pseudo0 = WidgetStyle0.CssPseudo
+import Pseudo00 = WidgetStyle0.Pseudo0
+import CssProp0 = WidgetStyle0.CssProp
+import CssProp = WidgetStyle.CssProp
+import CssPropEnum0 = WidgetStyle0.CssPropEnum
+import CssPropEnum = WidgetStyle.CssPropEnum
+import CssWidget = WidgetStyle.CssWidget
 import CssPropColor = WidgetStyle0.CssPropColor
-import DataAttrError = WidgetStyle0.DataAttrError
+import DataAttr = WidgetStyle0.DataAttr
 import resetButton = EmotionCommon.resetButton
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
@@ -23,29 +31,43 @@ import abs = EmotionCommon.abs
 
 
 export namespace ButtonS {
-  
   export const Attr0 = {
-    error: DataAttrError,
+    error: DataAttr.error,
   } as const
   
-  export const El0 = function() {
-    const btn = new Elem0('rrainuiButton', {
+  export const El00 = function() {
+    const btn = new Elem00('rrainuiButton', {
+      hover: Pseudo00.hover,
+      active: Pseudo00.active,
+      focus: Pseudo00.focus,
+      focusVisible: Pseudo00.focusVisible,
+      disabled: Pseudo00.disabled,
+      error: Attr0.error,
+    }, {
+      color: CssPropColor,
+    })
+    const border = btn.toElem('>', new Elem00('rrainuiBorder', {}, {}))
+    const ripple = border.toElem('>', new Elem00(RippleStyle.El0.frameClassName, {}, {
+      mode: new CssPropEnum0(RippleStyle.Prop.mode, ['center', 'cursor']),
+      color: new CssProp0(RippleStyle.Prop.color),
+    }))
+    return { root: btn, btn, border, ripple } as const
+  }()
+  
+  export const El0 = (() => {
+    const button = new Elem0('rrainuiButton', {
+      normal: Pseudo0.empty,
       hover: Pseudo0.hover,
       active: Pseudo0.active,
       focus: Pseudo0.focus,
       focusVisible: Pseudo0.focusVisible,
       disabled: Pseudo0.disabled,
-      error: Attr0.error,
+      error: CssAttr0.dataError,
     }, {
       color: CssPropColor,
     })
-    const border = btn.toElem('>', new Elem0('rrainuiBorder', {}, {}))
-    const ripple = border.toElem('>', new Elem0(RippleStyle.El0.frameClassName, {}, {
-      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center', 'cursor']),
-      color: new CssProp(RippleStyle.Prop.color),
-    }))
-    return { root: btn, btn, border, ripple } as const
-  }()
+    return { button }
+  })()
   
   
   export const El = function() {
@@ -770,17 +792,17 @@ export namespace ButtonS {
       padding: 11px;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.p.mode.set('center')};
+      ${W.e.ripple.p.mode.set('center')};
     }
   `
   // type: text, shape: round, add color: normal
   const textRoundAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.e.button.e.p.color.set(t.buttonNormal.bg[0])};
+      ${W.e.button.p.color.set(t.buttonNormal.bg[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.p.color.set(t.ripple.contentOnTransparent[0]+'88')};
+      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0]+'88')};
     }
     
     // state: hover

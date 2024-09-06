@@ -14,8 +14,7 @@ import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import Card2 from 'src/ui/0-elements/cards/Card2'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
-import HeaderArrow from 'src/ui/2-pages/BowAndArrows/elements/HeaderArrow.tsx'
-import PageHeader from 'src/ui/2-pages/BowAndArrows/elements/PageHeader.tsx'
+import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -23,7 +22,7 @@ import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { DateU } from 'src/util/date/DateU'
-import { ImagesMockData } from 'src/util/mock-data/ImagesMockData'
+import { MockData } from 'src/_mock-data/MockData'
 import { AppTheme } from 'src/util/theme/AppTheme'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
@@ -33,24 +32,18 @@ import center = EmotionCommon.center
 
 
 
-const profileData = {
-  ava: ImagesMockData.all[7],
-  name: 'Сатору',
-  city: 'Токио',
-  birthDate: '2000-08-23T14:33:55.609+07:00',
-}
-
-
 const SummaryPage = React.memo(
   () => {
     const lang = useRecoilValue(LangRecoil).langs[0]
     const titleText = useUiValues(TitleUiText)
     const actionText = useUiValues(ActionUiText)
     
+    const profile = MockData.profile
+    
     const auth = useRecoilValue(AuthRecoil)
     const authId = auth!.user.id
     
-    const info = [profileData.city, DateU.age(profileData.birthDate, lang)]
+    const info = [profile.city, DateU.age(profile.birthDate, lang)]
       .filter(it => it)
       .join(', ')
     
@@ -63,9 +56,9 @@ const SummaryPage = React.memo(
               
               <Card2 css={cardStyle}>
                 
-                <Ava src={profileData.ava}/>
+                <Ava src={profile.ava}/>
                 
-                <Name>{profileData.name}</Name>
+                <Name>{profile.name}</Name>
                 <UserActionsConsumer>
                   <Link to={RootRoute.profile.id.userId[use](authId).preview[full]()}>
                     <Eye>

@@ -3,8 +3,8 @@ import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { AppTheme } from 'src/util/theme/AppTheme.ts'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
-import Elem = WidgetStyle0.Elem
-import CssWidget = WidgetStyle0.CssWidget
+import Elem0 = WidgetStyle0.Elem
+import CssWidget0 = WidgetStyle0.CssWidget
 
 
 
@@ -14,22 +14,22 @@ export namespace IconButtonStyle {
   
   
   
-  export const El = function(){
-    const icon = new Elem(SvgIconS.El.icon.name , { }, {
+  export const El = function() {
+    const icon = new Elem0(SvgIconS.El.icon.name, { }, {
       size: SvgIconS.El.icon.props.size,
       color: SvgIconS.El.icon.props.color,
       accentColor: SvgIconS.El.icon.props.accentColor,
     })
     
     return {
-      button: ButtonS.El.button,
+      button: ButtonS.El0.button,
       //border: ButtonS.El.border,
       //ripple: ButtonS.El.ripple,
       icon,
     }
   }()
   
-  const W = CssWidget
+  const W = CssWidget0
     .ofRoot('button', El.button)
     //.add('button', '>', 'border', El.border)
     //.add('border', '>', 'ripple', El.ripple)

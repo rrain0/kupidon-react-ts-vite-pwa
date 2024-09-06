@@ -86,7 +86,7 @@ export namespace WidgetStyle0 {
           ...this.states,
           ...ObjectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
             element.states,
-              ([stateName, cssState]) => [
+            ([stateName, cssState]) => [
               stateName,
               new CssWidgetState(elementName, cssState),
             ]
@@ -116,7 +116,7 @@ export namespace WidgetStyle0 {
       const NP extends Exclude<string, P>,
     >
     (up: E, selector: string, elementName: NE, element: Elem<NS, NP>)
-    : CssWidget<E | NE, S | NS, P | NP> {
+      : CssWidget<E | NE, S | NS, P | NP> {
       return new CssWidget<E | NE, S | NS, P | NP>(
         this.root,
         {
