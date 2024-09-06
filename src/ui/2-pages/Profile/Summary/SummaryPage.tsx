@@ -12,6 +12,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import Card2 from 'src/ui/0-elements/cards/Card2'
+import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
@@ -79,7 +80,7 @@ const SummaryPage = React.memo(
                 <Divider />
                 
                 <HeaderArrowBox>
-                  <HeaderArrow>
+                  <HeaderArrow css={HeaderArrowS.normal}>
                     Завешите описание профиля
                   </HeaderArrow>
                 </HeaderArrowBox>

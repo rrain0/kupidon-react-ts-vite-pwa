@@ -1,44 +1,33 @@
-import { css } from '@emotion/react'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import clsx from 'clsx'
+import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import React from 'react'
-import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import row = EmotionCommon.row
 import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 
 
 
-const btnStyle = (t: AppTheme.Theme) => css`
-  ${ButtonS.textRectNormalNormal(t)};
-  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
-    ${row};
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-`
-const arrowStyle = (t: AppTheme.Theme) => css`
-  ${SvgIconS.El.icon.props.color.name}: ${t.page.content1[0]};
-  height: 26px;
-`
 
+export type HeaderArrowProps = React.ComponentPropsWithoutRef<typeof Button>
 
-
-export type HeaderArrowProps = {
-  children: string
-}
 const HeaderArrow = React.memo(
-  (props: HeaderArrowProps) => {
-    return (
-      <Button css={btnStyle}>
-        <h4 css={Hs.page}>{props.children}</h4>
-        <ArrowAngledRoundedIc css={arrowStyle}/>
-      </Button>
-    )
-  }
+  React.forwardRef<HTMLButtonElement, HeaderArrowProps>(
+    (props, forwardedRef) => {
+      return (
+        <Button
+          {...props}
+          ref={forwardedRef}
+          className={clsx(HeaderArrowS.W.e.button.e.name, props.className)}
+        >
+          <h4 className={HeaderArrowS.W.e.header.e.name}>
+            {props.children}
+          </h4>
+          <ArrowAngledRoundedIc
+            className={HeaderArrowS.W.e.arrow.e.name}
+          />
+        </Button>
+      )
+    }
+  )
 )
 export default HeaderArrow

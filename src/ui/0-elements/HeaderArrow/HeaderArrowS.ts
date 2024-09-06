@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { Hs } from 'src/ui/0-elements/basic-elements/Hs'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { AppTheme } from 'src/util/theme/AppTheme'
@@ -12,6 +13,7 @@ import row = EmotionCommon.row
 
 export namespace HeaderArrowS {
   
+  import Txt = EmotionCommon.Txt
   export const W = (() => {
     const button = new Elem('button', {
       normal: CssPseudo.empty,
@@ -36,12 +38,37 @@ export namespace HeaderArrowS {
         justify-content: space-between;
         align-items: center;
       }
+      ${W.u({ e: 'header', s: 'normal' }).thisUse} {
+        ${Hs.page(t)};
+      }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
         ${SvgIconS.El.icon.props.color.name}: ${t.page.content1[0]};
         height: 26px;
       }
     `
   }
+  
+  export const page = (t: AppTheme.Theme) => Part.base(t)
+  
+  
+  export const normal = (t: AppTheme.Theme) => css`
+    ${Part.base(t)};
+    ${W.u({ e: 'header', s: 'normal' }).thisUse} {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: normal;
+      letter-spacing: 0.05em;
+      min-height: 1.5em;
+      color: ${t.page.content1[0]};
+      align-self: center;
+      text-align: center;
+      position: relative;
+      top: 0.13em;
+    }
+    ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
+      height: 1.5em;
+    }
+  `
   
   
 }

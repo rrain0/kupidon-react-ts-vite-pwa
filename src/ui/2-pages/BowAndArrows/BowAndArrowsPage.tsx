@@ -1,5 +1,6 @@
 import React from 'react'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
+import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import PageHeader from 'src/ui/2-pages/BowAndArrows/elements/PageHeader.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
@@ -25,9 +26,13 @@ const BowAndArrowsPage = React.memo(
               
               <PageHeader>{titleText.bowAndArrows}</PageHeader>
               
-              <HeaderArrow>Афиша</HeaderArrow>
+              <HeaderArrow css={HeaderArrowS.page}>
+                Афиша
+              </HeaderArrow>
               
-              <HeaderArrow>Все события</HeaderArrow>
+              <HeaderArrow css={HeaderArrowS.page}>
+                Все события
+              </HeaderArrow>
             
             </Pages.Content>
           </Pages.SafeInsets>
