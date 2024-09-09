@@ -44,6 +44,7 @@ export const DarkProps: ThemeProps = {
     content4:        ['#666666'],
     content4b:       ['#42414c'],
     c5:              '#42414c',
+    c6:              '#505050',
     
     contentAccent:   ['#bdbdbd'],
     contentAccent2:  ['#2e343f'],
@@ -54,8 +55,10 @@ export const DarkProps: ThemeProps = {
   containerAccent: {
     bg:       ['#aaaaaa'],
     bg2:      ['#bdbdbd'],
+    bg3:      '#bdbdbd',
     content:  ['#000000'],
     content2: ['#000000'],
+    c3:       '#000000',
   },
   
   buttonMain: {

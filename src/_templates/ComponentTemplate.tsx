@@ -10,5 +10,5 @@ const ComponentTemplate = React.memo(
     )
   }
 )
-export default ComponentTemplate
+/* export default ComponentTemplate */
 

@@ -24,7 +24,7 @@ type ComponentProps =
 
 const Component = React.memo(
   React.forwardRef<HTMLDivElement, ComponentProps>(
-  (props, forwardedRef) => {
+    (props, forwardedRef) => {
       const {
         children,
         ...restProps

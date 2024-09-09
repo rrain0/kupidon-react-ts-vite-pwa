@@ -23,9 +23,9 @@ type ComponentProps =
   React.ComponentPropsWithoutRef<typeof ExtensibleComponent>
   & Children
   & Puro<{
-  // custom props
-  isError: boolean
-}>
+    // custom props
+    isError: boolean
+  }>
 
 
 

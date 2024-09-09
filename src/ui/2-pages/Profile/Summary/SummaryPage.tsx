@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
@@ -17,6 +17,8 @@ import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
+import { LineProgressS } from 'src/ui/0-elements/LineProgress/LineProgressS'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -30,6 +32,8 @@ import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import EyeWideIc = SvgIcons.EyeWideIc
 import center = EmotionCommon.center
+import row = EmotionCommon.row
+import rowC = EmotionCommon.rowC
 
 
 
@@ -40,6 +44,11 @@ const SummaryPage = React.memo(
     const actionText = useUiValues(ActionUiText)
     
     const profile = MockData.profile
+    const [progress] = useState(45)
+    
+    const [displayedProgress, setDisplayedProgress] = useState(5)
+    
+    useEffect(() => setDisplayedProgress(progress), [])
     
     const auth = useRecoilValue(AuthRecoil)
     const authId = auth!.user.id
@@ -85,6 +94,11 @@ const SummaryPage = React.memo(
                   </HeaderArrow>
                 </HeaderArrowBox>
                 
+                <ProgressBox>
+                  <LineProgress css={LineProgressS.S.normal} progress={displayedProgress} />
+                  <div>45%</div>
+                </ProgressBox>
+                
               </Card2>
             
             </Pages.Content>
@@ -114,6 +128,8 @@ const cardStyle = css`
     'div  div  div  div  div ' auto
     '.    .    .    .    .   ' 13.5px
     'harr harr harr harr harr' auto
+    '.    .    .    .    .   ' 13.5px
+    'prog prog prog prog prog' auto
    / auto 14px 1fr  8px  auto;
   gap: 0;
 `
@@ -177,4 +193,12 @@ const Divider = styled.div`
 
 const HeaderArrowBox = styled.div`
   grid-area: harr;
+`
+
+const ProgressBox = styled.div`
+  grid-area: prog;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
 `

@@ -56,6 +56,7 @@ export namespace AppTheme {
       content4:        string[]
       content4b:       string[]
       c5:              string
+      c6:              string
       
       contentAccent:   string[]
       contentAccent2:  string[]
@@ -66,8 +67,10 @@ export namespace AppTheme {
     containerAccent: {
       bg:       string[]
       bg2:      string[]
+      bg3:      string
       content:  string[]
       content2: string[]
+      c3:       string
     },
     
     // main button (submit button)

@@ -37,10 +37,12 @@ export const DarkBurgundyProps: ThemeProps = { ...DarkProps,
     contentAccent3:  ['#BB2649'],
   },
   containerAccent: { ...DarkProps.containerAccent,
-    bg:      ['#aaaaaa'],
-    bg2:     ['#bdbdbd'], // ['#984559']
+    bg:       ['#aaaaaa'],
+    bg2:      ['#bdbdbd'], // ['#984559']
+    bg3:      '#F07E98',
     content:  ['#000000'],
     content2: ['#000000'],
+    c3:       '#000000',
   },
   
   buttonMain: { ...DarkProps.buttonMain,

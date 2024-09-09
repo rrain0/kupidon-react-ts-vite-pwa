@@ -44,6 +44,7 @@ export const LightProps: ThemeProps = {
     content4:        ['#d1d1d1'],
     content4b:       ['#dddddd'],
     c5:              '#e3e3e3',
+    c6:              '#ececec',
     
     contentAccent:   ['#333333'],
     contentAccent2:  ['#d1d1d1'],
@@ -54,8 +55,10 @@ export const LightProps: ThemeProps = {
   containerAccent: {
     bg:       ['#bbbbbb'],
     bg2:      ['#333333'],
+    bg3:      '#aaaaaa',
     content:  ['#000000'],
     content2: ['#F8F8F8'],
+    c3:       '#ffffff',
   },
   
   buttonMain: {
