@@ -113,7 +113,7 @@ const cardStyle = css`
     '.    .    .    .    .   ' 14.5px
     'div  div  div  div  div ' auto
     '.    .    .    .    .   ' 13.5px
-    'harr harr harr harr harr ' auto
+    'harr harr harr harr harr' auto
    / auto 14px 1fr  8px  auto;
   gap: 0;
 `
