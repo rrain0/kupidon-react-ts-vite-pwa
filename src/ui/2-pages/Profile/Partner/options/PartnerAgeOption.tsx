@@ -133,7 +133,7 @@ function mapWidgetRangeToDataRange(range: NumRange): NumRangeEndNullable {
       if (r0 <= ageMinMax[0]) return ageMinMax[0]
       return r0
     }(),
-    function(){
+    function() {
       const r1 = +numeral(range[1]).format('0')
       if (r1 >= ageMinMax[1]) return null
       return r1

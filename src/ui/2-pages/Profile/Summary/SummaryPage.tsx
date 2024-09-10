@@ -34,6 +34,7 @@ import EyeWideIc = SvgIcons.EyeWideIc
 import center = EmotionCommon.center
 import row = EmotionCommon.row
 import rowC = EmotionCommon.rowC
+import Txt = EmotionCommon.Txt
 
 
 
@@ -44,7 +45,9 @@ const SummaryPage = React.memo(
     const actionText = useUiValues(ActionUiText)
     
     const profile = MockData.profile
-    const [progress] = useState(45)
+    const progress = 45
+    const completeProfileDescriptionText = 'Завешите описание профиля'
+    const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
     
     const [displayedProgress, setDisplayedProgress] = useState(5)
     
@@ -90,14 +93,18 @@ const SummaryPage = React.memo(
                 
                 <HeaderArrowBox>
                   <HeaderArrow css={HeaderArrowS.normal}>
-                    Завешите описание профиля
+                    {completeProfileDescriptionText}
                   </HeaderArrow>
                 </HeaderArrowBox>
                 
                 <ProgressBox>
                   <LineProgress css={LineProgressS.S.normal} progress={displayedProgress} />
-                  <div>45%</div>
+                  <Percent>{progress}%</Percent>
                 </ProgressBox>
+                
+                <CompleteProfileText>
+                  {completeProfileInCoupleSteps}
+                </CompleteProfileText>
                 
               </Card2>
             
@@ -130,6 +137,8 @@ const cardStyle = css`
     'harr harr harr harr harr' auto
     '.    .    .    .    .   ' 13.5px
     'prog prog prog prog prog' auto
+    '.    .    .    .    .   ' 10px
+    'cpt  cpt  cpt  cpt  cpt ' auto /* Complete Profile Text (cpt) */
    / auto 14px 1fr  8px  auto;
   gap: 0;
 `
@@ -202,3 +211,18 @@ const ProgressBox = styled.div`
   gap: 8px;
   align-items: center;
 `
+const Percent = styled.div`
+  ${Txt.large3b};
+  color: ${p => p.theme.containerAccent.bg3};
+`
+
+
+const CompleteProfileText = styled.div`
+  grid-area: cpt;
+  justify-self: stretch;
+  ${Txt.large1};
+  color: ${p => p.theme.containerNormal.content1a[0]};
+  text-align: center;
+`
+
+

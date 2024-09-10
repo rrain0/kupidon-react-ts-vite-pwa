@@ -1,5 +1,5 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
-import isArray = TypeU.isArray
+import isnumber = TypeU.isnumber
 
 
 
@@ -7,7 +7,6 @@ export namespace MathU {
   
   
   
-  import isnumber = TypeU.isnumber
   export const ifNaN = <T = number>(n: number, replacement: T) => isNaN(n) ? replacement : n
   
   
@@ -63,19 +62,6 @@ export namespace MathU {
   }
   
   
-  /**
-   * Получение процента
-   * @param value Значение
-   * @param total Общее значение
-   * @param scale Масштаб
-   * @returns {number}
-   */
-  export const percent =
-    (value: number, total: number, scale: number = 1): number => {
-    return round((value * 100) / total, scale)
-  }
-  
-  
   
   /**
    * Остаток от делния
@@ -99,25 +85,6 @@ export namespace MathU {
   
   
   
-  // current+1 in range inclusive
-  export const nextLooped = (curr: number, range: [min: number, max: number]) =>
-    curr <= range[0] ? range[0] + 1 : curr >= range[1] ? range[0] : curr + 1
-  
-  // current-1 in range inclusive
-  export const prevLooped = (curr: number, range: [min: number, max: number]) =>
-    curr <= range[0] ? range[1] : curr >= range[1] ? range[1] - 1 : curr - 1
-  
-  
-  
-  // useful when you try to pick the next or prev value and want it to loops in range when exceeded
-  export const loopRange = (curr: number, range: [min: number, max: number]) => {
-    if (curr < range[0]) return range[1]
-    if (curr > range[1]) return range[0]
-    return curr
-  }
-  
-  
-  
   
   /**
    * Возвращение случайного числа в диапазоне [{@linkcode from},{@linkcode to})
@@ -129,14 +96,14 @@ export namespace MathU {
   export function random(to?: number): number
   export function random(a?: number, b?: number): number {
     let from = 0, to = 1
-    if (typeof a === 'number' && typeof b === 'number') {
+    if (isnumber(a) && isnumber(b)) {
       from = a
       to = b
     }
-    else if (typeof a === 'number') {
+    else if (isnumber(a)) {
       to = a
     }
-    if (from >= to) throw new Error(`'to'=${to} must be greater than 'from'=${from}`)
+    if (from >= to) throw new Error(`'to'=${to} must be gt than 'from'=${from}`)
     return (to - from) * Math.random() + from
   }
   
@@ -145,7 +112,8 @@ export namespace MathU {
   /**
    * Возвращение целого случайного числа в диапазоне [{@linkcode from},{@linkcode to}]
    * @param [from=0] - начало диапазона включительно
-   * @param [to=1] - конец диапазона включительно, {@linkcode to} должно быть больше-равно чем {@linkcode from}
+   * @param [to=1] - конец диапазона включительно,
+   *                 {@linkcode to} должно быть больше-равно чем {@linkcode from}
    * @returns {number} - случайное число из диапазона [{@linkcode from},{@linkcode to}]
    */
   export function randomInt(from: number, to: number): number
@@ -159,7 +127,7 @@ export namespace MathU {
     else if (isnumber(a)) {
       to = a
     }
-    if (from > to) throw new Error(`'to'=${to} must be greater-equal than 'from'=${from}`)
+    if (from > to) throw new Error(`'to'=${to} must be gte than 'from'=${from}`)
     return floorTo0(random(from, to + 1))
   }
   

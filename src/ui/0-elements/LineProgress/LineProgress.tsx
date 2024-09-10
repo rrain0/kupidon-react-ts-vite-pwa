@@ -17,7 +17,6 @@ const LineProgress = React.memo(
     
     const {
       progress = 0,
-      children,
       className,
       ...restProps
     } = props

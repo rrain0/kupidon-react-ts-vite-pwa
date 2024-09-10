@@ -66,5 +66,25 @@ export namespace RangeU {
   }
   
   
+  
+  
+  // current + 1 in range inclusive
+  export const nextLooped = (curr: number, range: NumRange) =>
+    curr <= range[0] ? range[0] + 1 : curr >= range[1] ? range[0] : curr + 1
+  
+  // current - 1 in range inclusive
+  export const prevLooped = (curr: number, range: NumRange) =>
+    curr <= range[0] ? range[1] : curr >= range[1] ? range[1] - 1 : curr - 1
+  
+  
+  
+  // useful when you try to pick the next or prev value and want it to loop in range when exceeded
+  export const clampLooped = (curr: number, range: NumRange) => {
+    if (curr < range[0]) return range[1]
+    if (curr > range[1]) return range[0]
+    return curr
+  }
+  
+  
 }
 
