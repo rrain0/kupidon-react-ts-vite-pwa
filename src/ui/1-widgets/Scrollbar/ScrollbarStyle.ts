@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import hoverable = EmotionCommon.hoverable
 import DataAttr = WidgetStyle0.DataAttr

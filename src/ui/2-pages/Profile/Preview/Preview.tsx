@@ -4,7 +4,7 @@ import React, { useMemo, useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import FormValues = ProfilePageValidation.FormValues

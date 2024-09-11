@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { LightPinkProps } from 'src/ui-data/theme/themes/LightPink.ts'
 import Theme = AppTheme.Theme
 import themeIconGradientCss = AppTheme.themeIconGradientCss

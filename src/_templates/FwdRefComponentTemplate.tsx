@@ -4,7 +4,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Puro = TypeU.Puro
 import Children = ReactU.Children
 import colC = EmotionCommon.colC

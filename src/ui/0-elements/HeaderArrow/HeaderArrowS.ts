@@ -4,7 +4,7 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { Hs } from 'src/ui/0-elements/basic-elements/Hs'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
-import { AppTheme } from 'src/util/theme/AppTheme'
+import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import CssWidget = WidgetStyle.CssWidget
 import Elem = WidgetStyle.Elem
 import CssPseudo = WidgetStyle.CssPseudo

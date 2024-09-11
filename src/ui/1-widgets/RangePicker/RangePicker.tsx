@@ -11,7 +11,7 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import PartialUndef = TypeU.PartialUndef
 import Mapper = TypeU.Mapper
 import SetterOrUpdater = TypeU.SetterOrUpdater

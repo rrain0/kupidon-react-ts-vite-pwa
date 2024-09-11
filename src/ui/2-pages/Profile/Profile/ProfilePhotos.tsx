@@ -37,7 +37,7 @@ import { useNoSelect } from 'src/util/element/useNoSelect.ts'
 import { useNoTouchAction } from 'src/util/element/useNoTouchAction.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import center = EmotionCommon.center
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'

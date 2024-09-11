@@ -8,7 +8,7 @@ import PartialUndef = TypeU.PartialUndef
 import col = EmotionCommon.col
 
 
-
+// TODO Remove
 
 export type Card2CustomProps = PartialUndef<{
   children: React.ReactNode

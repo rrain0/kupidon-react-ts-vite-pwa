@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { useRef, useState } from 'react'

@@ -281,6 +281,7 @@ export namespace WidgetStyle {
     static readonly disabled = new CssPseudo('disabled')
     
     static readonly anyFocus = new CssPseudo('where(:active,:focus,:focus-visible)')
+    static readonly inFocus = new CssPseudo('where(:hover,:focus-visible)')
     
   }
   

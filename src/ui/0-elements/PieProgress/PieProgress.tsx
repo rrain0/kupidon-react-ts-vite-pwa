@@ -3,7 +3,7 @@ import React from 'react'
 import clsx from 'clsx'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
 import PartialUndef = TypeU.PartialUndef
 import ClassStyle = ReactU.ClassStyle

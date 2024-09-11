@@ -1,5 +1,5 @@
 import { useBrowserMinimumVersion } from 'src/util/app/useBrowserMinimumVersion.ts'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { useMedia } from 'src/util/css/media/useMedia.ts'
 import ThemeType = AppTheme.Type
 
@@ -15,7 +15,7 @@ import ThemeType = AppTheme.Type
 */
 
 
-export const useThemeDetector = (): ThemeType|undefined => {
+export const useThemeDetector = (): ThemeType | undefined => {
   useBrowserMinimumVersion({
     chromeDesktopVersion: '76',
     chromeAndroidVersion: '76',

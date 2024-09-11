@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss

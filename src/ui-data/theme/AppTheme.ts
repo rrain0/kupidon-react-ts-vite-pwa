@@ -156,13 +156,34 @@ export namespace AppTheme {
     }
     
     
-    boxSpecialBlue: {
-      bg:  string[]
-      c:   string[]
+    boxPink: {
+      bg: [string, string]
+      c:  string,
     }
-    btnSpecialBlue: {
+    boxWithPink: {
+      bg:  string
+      c:   string
+    },
+    
+    boxViolet: {
+      bg: [string, string]
+      c:  string
+    }
+    boxWithViolet: {
+      bg:  string
+      c:   string
+    },
+    
+    boxBlue: {
       bg:  string[]
-      c:   string[]
+      c:   string
+    }
+    boxWithBlue: {
+      bg:  string
+      c:   string
+      
+      bgFocus: [string, string]
+      cFocus:  string
     }
     
     

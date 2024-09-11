@@ -11,7 +11,6 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
-import Card2 from 'src/ui/0-elements/cards/Card2'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
@@ -26,15 +25,14 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { DateU } from 'src/util/date/DateU'
 import { MockData } from 'src/_mock-data/MockData'
-import { AppTheme } from 'src/util/theme/AppTheme'
+import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import EyeWideIc = SvgIcons.EyeWideIc
 import center = EmotionCommon.center
-import row = EmotionCommon.row
-import rowC = EmotionCommon.rowC
 import Txt = EmotionCommon.Txt
+import hoverable = EmotionCommon.hoverable
 
 
 
@@ -48,6 +46,16 @@ const SummaryPage = React.memo(
     const progress = 45
     const completeProfileDescriptionText = 'Завешите описание профиля'
     const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
+    const premiumSubscription = 'Премиум подписка'
+    const unlockAllPossibilitiesWithPremium = 'Разблокируй все возможности Купидона с премиум подпиской!'
+    const findOutMore = 'Узнать подробнее'
+    const inviteYourFriends = 'Пригласи своих друзей'
+    const maybeTheyAreLookingForOtherHalf = 'Возможно они так же ищут вторую половинку'
+    const ourSocialNetworks = 'Наши социальные сети'
+    const joinSocialNetworksToStayUpToDate =
+      'Присоединяйся к нашим социальным сетям, чтобы всегда быть в курсе новостей'
+    const invite = 'Пригласить'
+    const goto = 'Перейти'
     
     const [displayedProgress, setDisplayedProgress] = useState(5)
     
@@ -60,14 +68,16 @@ const SummaryPage = React.memo(
       .filter(it => it)
       .join(', ')
     
+    
+    
     return (
       <>
       
         <Pages.Page>
           <Pages.SafeInsets>
-            <Pages.Content>
+            <Pages.Content css={pageContentS}>
               
-              <Card2 css={cardStyle}>
+              <InfoCard>
                 
                 <Ava src={profile.ava}/>
                 
@@ -106,7 +116,27 @@ const SummaryPage = React.memo(
                   {completeProfileInCoupleSteps}
                 </CompleteProfileText>
                 
-              </Card2>
+              </InfoCard>
+              
+              
+              <PremiumCard>
+                <FeatureCardName>{premiumSubscription}</FeatureCardName>
+                <FeatureCardText>{unlockAllPossibilitiesWithPremium}</FeatureCardText>
+                <Button css={premiumCardButtonS}>{findOutMore}</Button>
+              </PremiumCard>
+              
+              <InviteFriendsCard>
+                <FeatureCardName>{inviteYourFriends}</FeatureCardName>
+                <FeatureCardText>{maybeTheyAreLookingForOtherHalf}</FeatureCardText>
+                <Button css={inviteFriendsCardButtonS}>{invite}</Button>
+              </InviteFriendsCard>
+              
+              <SocialNetworksCard>
+                <FeatureCardName>{ourSocialNetworks}</FeatureCardName>
+                <FeatureCardText>{joinSocialNetworksToStayUpToDate}</FeatureCardText>
+                <Button css={socialNetworksCardButtonS}>{goto}</Button>
+              </SocialNetworksCard>
+              
             
             </Pages.Content>
           </Pages.SafeInsets>
@@ -123,7 +153,18 @@ const SummaryPage = React.memo(
 export default SummaryPage
 
 
+const pageContentS = css`
+  gap: 16px;
+`
+
 const cardStyle = css`
+  padding: 16px;
+  border-radius: 20px;
+`
+
+const InfoCard = styled.div`
+  ${cardStyle};
+  background: ${p => p.theme.containerNormal.bg[0]};
   display: grid;
   grid:
     'ava  .    name .    eye ' auto
@@ -225,4 +266,98 @@ const CompleteProfileText = styled.div`
   text-align: center;
 `
 
+
+const featureCardS = css`
+  ${cardStyle};
+  min-height: 136px;
+  padding: 12px 16px 10px 108px;
+  display: grid;
+  grid:
+    'icon .    name' auto
+    'icon .    .   ' 4px
+    'icon .    text' 1fr
+    'icon .    .   ' 10px
+    'icon .    btn ' auto
+   / auto 14px 1fr;
+  gap: 0;
+`
+const FeatureCardName = styled.div`
+  grid-area: name;
+`
+const FeatureCardText = styled.div`
+  grid-area: text;
+  align-self: center;
+`
+const featureCardButtonS = (t: AppTheme.Theme) => css`
+  ${ButtonS.filledRectNormalAccent2(t)};
+  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
+    grid-area: btn;
+  }
+`
+
+const PremiumCard = styled.div`
+  ${featureCardS};
+  background: linear-gradient(170.72deg,
+    ${p => p.theme.boxPink.bg[0]} 7.42%,
+    ${p => p.theme.boxPink.bg[1]} 131.56%
+  );
+  color: ${p => p.theme.boxPink.c};
+`
+const premiumCardButtonS = (t: AppTheme.Theme) => css`
+  ${featureCardButtonS(t)};
+  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
+    background-color: ${t.boxWithPink.bg};
+    color: ${t.boxWithPink.c};
+  }
+`
+
+const InviteFriendsCard = styled.div`
+  ${featureCardS};
+  background: linear-gradient(180deg,
+    ${p => p.theme.boxViolet.bg[0]} 0%,
+    ${p => p.theme.boxViolet.bg[1]} 100%
+  );
+  color: ${p => p.theme.boxViolet.c};
+`
+const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
+  ${featureCardButtonS(t)};
+  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
+    background: ${t.boxWithViolet.bg};
+    color: ${t.boxWithViolet.c};
+  }
+`
+
+const SocialNetworksCard = styled.div`
+  ${featureCardS};
+  background: linear-gradient(180deg,
+    ${p => p.theme.boxBlue.bg[0]} 0%,
+    ${p => p.theme.boxBlue.bg[1]} 107.78%
+  );
+  color: ${p => p.theme.boxBlue.c};
+`
+const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
+  ${featureCardButtonS(t)};
+  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
+    background-color: ${t.boxWithBlue.bg};
+    color: ${t.boxWithBlue.c};
+  }
+  ${hoverable} {
+    ${ButtonS.W.u({ e: 'button', s: 'hover' }).thisUse} {
+      background-color: ${t.boxWithBlue.bg};
+      background-image: linear-gradient(to right,
+      ${t.boxWithBlue.bgFocus[0]} 0%,
+      ${t.boxWithBlue.bgFocus[1]} 50%
+      );
+      color: ${t.boxWithBlue.cFocus};
+    }
+  }
+  ${ButtonS.W.u({ e: 'button', s: 'focusVisible' }).thisUse} {
+    background-color: ${t.boxWithBlue.bg};
+    background-image: linear-gradient(to right,
+    ${t.boxWithBlue.bgFocus[0]} 0%,
+    ${t.boxWithBlue.bgFocus[1]} 50%
+    );
+    color: ${t.boxWithBlue.cFocus};
+  }
+`
 

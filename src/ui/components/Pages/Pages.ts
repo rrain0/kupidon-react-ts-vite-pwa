@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import center = EmotionCommon.center
 import { SimpleGradientBg } from 'src/ui-data/bg/SimpleGradientBg.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import col = EmotionCommon.col
 
 

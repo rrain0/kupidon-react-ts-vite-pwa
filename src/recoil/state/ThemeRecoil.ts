@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 import { DefaultTheme } from 'src/ui-data/theme/ThemeCollection.ts'
-import { AppTheme } from '@util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 
 

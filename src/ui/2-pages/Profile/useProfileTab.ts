@@ -1,5 +1,5 @@
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useMatch, useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import RootRoute = AppRoutes.RootRoute
@@ -42,9 +42,9 @@ export const useProfileTab = () => {
   const userId = params['userId']!
   const tab = params['tab']!
   
-  useEffect(() => {
+  /* useEffect(() => {
     console.log('tab', tab)
-  }, [tab])
+  }, [tab]) */
   
   const [search] = useSearchParams()
   

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { AppTheme } from 'src/util/theme/AppTheme.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -129,13 +129,34 @@ export const LightProps: ThemeProps = {
   },
   
   
-  boxSpecialBlue: {
-    bg:  ['#67A9D9', '#2E85C3'],
-    c:   ['#FFFFFF'],
+  boxPink: {
+    bg: ['#F0849D', '#CD617A'],
+    c:  '#FFFFFF',
   },
-  btnSpecialBlue: {
-    bg:  ['#FFFFFF'],
-    c:   ['#398CC8'],
+  boxWithPink: {
+    bg:  '#FFFFFF',
+    c:   '#DD718A',
+  },
+  
+  boxViolet: {
+    bg: ['#AB6FE7', '#8B43D3'],
+    c:  '#FFFFFF',
+  },
+  boxWithViolet: {
+    bg:  '#FFFFFF',
+    c:   '#934DD8',
+  },
+  
+  boxBlue: {
+    bg:  ['#67A9D9', '#2E85C3'],
+    c:   '#FFFFFF',
+  },
+  boxWithBlue: {
+    bg:  '#FFFFFF',
+    c:   '#398CC8',
+    
+    bgFocus: ['#bae2ff', '#ffffff'],
+    cFocus:  '#398CC8',
   },
   
   

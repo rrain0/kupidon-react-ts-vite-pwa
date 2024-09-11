@@ -11,7 +11,7 @@ import destructCopyBy = ObjectU.destructCopyBy
 
 
 
-export const useThemeSetup = ()=>{
+export const useThemeSetup = () => {
   useBrowserMinimumVersion({
     chromeDesktopVersion: '81',
     chromeAndroidVersion: '81',
@@ -24,10 +24,10 @@ export const useThemeSetup = ()=>{
   const themeSettings = useRecoilValue(ThemeSettingsRecoil)
   const [theme, setTheme] = useRecoilState(ThemeRecoil)
   
-  const systemTheme = function(){
+  const systemTheme = function() {
     const systemTheme = useThemeDetector()
     const [systemThemeMemo, setSystemThemeMemo] = useState(systemTheme)
-    useEffect(()=>{
+    useEffect(() => {
       if (systemTheme) setSystemThemeMemo(systemTheme)
     }, [systemTheme])
     return systemThemeMemo
@@ -35,70 +35,64 @@ export const useThemeSetup = ()=>{
   
   const [themeIsReady, setThemeIsReady] = useState(false)
   
-  useLayoutEffect(
-    ()=>{
-      const setting = themeSettings.setting
-      if (setting==='system'){
-        if (systemTheme==='light'){
-          setTheme(destructCopyBy({
-            theme: themeByName(themeSettings.light),
-          }))
-          setThemeIsReady(true)
-        }
-        else if (systemTheme==='dark') {
-          setTheme(destructCopyBy({
-            theme: themeByName(themeSettings.dark),
-          }))
-          setThemeIsReady(true)
-        }
-        else {
-          setTheme(destructCopyBy({
-            theme: themeByName(themeSettings.light),
-          }))
-          setThemeIsReady(true)
-        }
+  useLayoutEffect(() => {
+    const setting = themeSettings.setting
+    if (setting === 'system') {
+      if (systemTheme === 'light') {
+        setTheme(destructCopyBy({
+          theme: themeByName(themeSettings.light),
+        }))
+        setThemeIsReady(true)
       }
-      else if (setting==='manual'){
-        if (themeSettings.manualSetting==='light') {
-          setTheme(destructCopyBy({
-            theme: themeByName(themeSettings.light),
-          }))
-          setThemeIsReady(true)
-        }
-        else if (themeSettings.manualSetting==='dark') {
-          setTheme(destructCopyBy({
-            theme: themeByName(themeSettings.dark),
-          }))
-          setThemeIsReady(true)
-        }
+      else if (systemTheme === 'dark') {
+        setTheme(destructCopyBy({
+          theme: themeByName(themeSettings.dark),
+        }))
+        setThemeIsReady(true)
       }
-    },
-    [systemTheme, themeSettings]
-  )
+      else {
+        setTheme(destructCopyBy({
+          theme: themeByName(themeSettings.light),
+        }))
+        setThemeIsReady(true)
+      }
+    }
+    else if (setting === 'manual') {
+      if (themeSettings.manualSetting === 'light') {
+        setTheme(destructCopyBy({
+          theme: themeByName(themeSettings.light),
+        }))
+        setThemeIsReady(true)
+      }
+      else if (themeSettings.manualSetting === 'dark') {
+        setTheme(destructCopyBy({
+          theme: themeByName(themeSettings.dark),
+        }))
+        setThemeIsReady(true)
+      }
+    }
+  }, [systemTheme, themeSettings])
   
   
   // apply to html meta tags
-  useLayoutEffect(
-    ()=>{
-      const t = theme.theme
-      if (t){
-        const metaThemeColorElements =
-          document.querySelectorAll(
-            'html head meta[name=theme-color]'
-          ) as NodeListOf<HTMLMetaElement>
-        metaThemeColorElements
-          .forEach(meta=>meta.content=t.statusBar.bg[0])
-        
-        const metaBackgroundColorElements =
-          document.querySelectorAll(
-            'html head meta[name=background-color]'
-          ) as NodeListOf<HTMLMetaElement>
-        metaBackgroundColorElements
-          .forEach(meta=>meta.content=t.page.bg[0])
-      }
-    },
-    [theme.theme]
-  )
+  useLayoutEffect(() => {
+    const t = theme.theme
+    if (t) {
+      const metaThemeColorElements =
+        document.querySelectorAll(
+          'html head meta[name=theme-color]'
+        ) as NodeListOf<HTMLMetaElement>
+      metaThemeColorElements
+        .forEach(meta => meta.content = t.statusBar.bg[0])
+      
+      const metaBackgroundColorElements =
+        document.querySelectorAll(
+          'html head meta[name=background-color]'
+        ) as NodeListOf<HTMLMetaElement>
+      metaBackgroundColorElements
+        .forEach(meta => meta.content = t.page.bg[0])
+    }
+  }, [theme.theme])
   
   return themeIsReady
 }
