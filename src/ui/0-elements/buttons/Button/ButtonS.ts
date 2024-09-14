@@ -4,6 +4,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
+import { TypeU } from 'src/util/common/TypeU'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import CssWidget0 = WidgetStyle0.CssWidget
@@ -31,6 +32,7 @@ import abs = EmotionCommon.abs
 
 
 export namespace ButtonS {
+  import Puro = TypeU.Puro
   export const Attr0 = {
     error: DataAttr.error,
   } as const
@@ -151,32 +153,37 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       width: 100%;
-      min-height: 43px;
+      min-height: 34px;
       border-radius: 10px;
       padding: 8px 14px;
-      ${Txt.large1};
+      ${Txt.normal2};
     }
   `
   
   // type: filled, shape: rect, add color
-  const filledRectAddColor = (
-    colors: Record<
-      'bg' | 'c' | 'rippleC' | 'bgFocus' | 'cFocus' | 'disabledBg' | 'disabledC',
-      string
-    >
-  ) => css`
+  const filledRectAddColor = (colors: {
+    bg: string
+    c: string
+    cRipple?: string | undefined
+    bgFocus: string
+    bgImFocus?: string | undefined
+    cFocus: string
+    bgDisabled?: string | undefined
+    cDisabled?: string | undefined
+  }) => css`
     // state: normal
-    ${W.use.s.normal().e.button().thisUse} {
+    ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
       background-color: ${colors.bg};
       ${W.e.button.e.props.color.set(colors.c)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(colors.rippleC)}
+      ${!!colors.cRipple && W.e.ripple.e.props.color.set(colors.cRipple)}
     }
     
     // state: hover
-    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
+    ${hoverable}{ ${ButtonS.W.u({ e: 'button', s: 'hover' }).thisUse} {
       background-color: ${colors.bgFocus};
+      ${!!colors.bgImFocus && `background-image: ${colors.bgImFocus};`}
       ${W.e.button.e.props.color.set(colors.cFocus)}
     }}
     
@@ -187,15 +194,16 @@ export namespace ButtonS {
     ${W.use.s.focus().e.button().thisUse} { }
     
     // state: focus-visible
-    ${W.use.s.focusVisible().e.button().thisUse} {
+    ${ButtonS.W.u({ e: 'button', s: 'focusVisible' }).thisUse} {
       background-color: ${colors.bgFocus};
+      ${!!colors.bgImFocus && `background-image: ${colors.bgImFocus};`}
       ${W.e.button.e.props.color.set(colors.cFocus)}
     }
     
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
-      background-color: ${colors.disabledBg};
-      ${W.e.button.e.props.color.set(colors.disabledC)};
+      ${!!colors.bgDisabled && `background-color: ${colors.bgDisabled};`}
+      ${!!colors.cDisabled && W.e.button.e.props.color.set(colors.cDisabled)};
     }
     
     // state: error
@@ -213,9 +221,9 @@ export namespace ButtonS {
     }
     
     // state: hover
-    ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
+    ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonMain.bgFocus[0]};
-    }}
+    } }
     
     // state: active
     ${W.use.s.active().e.button().thisUse} { }
@@ -270,11 +278,11 @@ export namespace ButtonS {
   const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
     bg: t.buttonAccent.bg2[0],
     c: t.buttonAccent.content[0],
-    rippleC: t.ripple.content[0],
+    cRipple: t.ripple.content[0],
     bgFocus: t.buttonAccent.bgFocus[0],
     cFocus: t.buttonAccent.contentFocus[0],
-    disabledBg: t.elementDisabled.bg[0],
-    disabledC: t.elementDisabled.content[0],
+    bgDisabled: t.elementDisabled.bg[0],
+    cDisabled: t.elementDisabled.content[0],
   })
   // type: filled, shape: rect, add color: normal
   const filledRectAddColorNormal = (t: AppTheme.Theme) => css`
@@ -835,6 +843,19 @@ export namespace ButtonS {
     ${textRoundAddSizeBig2};
     ${textRoundAddColorNormal(t)};
   `
+  
+  
+  
+  
+  export namespace S {
+    export namespace Filled {
+      export namespace Rect {
+        // type: filled, shape: rect, add color
+        export const addColor = filledRectAddColor
+      }
+    }
+  }
+  
   
   
   

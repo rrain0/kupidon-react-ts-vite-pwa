@@ -32,7 +32,9 @@ import use = RouteBuilder.use
 import EyeWideIc = SvgIcons.EyeWideIc
 import center = EmotionCommon.center
 import Txt = EmotionCommon.Txt
-import hoverable = EmotionCommon.hoverable
+import heartLocks from '@img/sign/heart-locks.svg'
+import share from '@img/sign/share.svg'
+import social from '@img/sign/social.svg'
 
 
 
@@ -95,7 +97,7 @@ const SummaryPage = React.memo(
                 
                 <Link to={RootRoute.profile.id.userId[use](authId).profile[full]()}>
                   <Edit>
-                    <Button css={ButtonS.filledRectNormalAccent2}>{actionText.edit}</Button>
+                    <Button css={editBtnStyle}>{actionText.edit}</Button>
                   </Edit>
                 </Link>
                 
@@ -123,18 +125,27 @@ const SummaryPage = React.memo(
                 <FeatureCardName>{premiumSubscription}</FeatureCardName>
                 <FeatureCardText>{unlockAllPossibilitiesWithPremium}</FeatureCardText>
                 <Button css={premiumCardButtonS}>{findOutMore}</Button>
+                <FeatureCardIcBox>
+                  <PremiumCardIc />
+                </FeatureCardIcBox>
               </PremiumCard>
               
               <InviteFriendsCard>
                 <FeatureCardName>{inviteYourFriends}</FeatureCardName>
                 <FeatureCardText>{maybeTheyAreLookingForOtherHalf}</FeatureCardText>
                 <Button css={inviteFriendsCardButtonS}>{invite}</Button>
+                <FeatureCardIcBox>
+                  <InviteFriendsCardIc  />
+                </FeatureCardIcBox>
               </InviteFriendsCard>
               
               <SocialNetworksCard>
                 <FeatureCardName>{ourSocialNetworks}</FeatureCardName>
                 <FeatureCardText>{joinSocialNetworksToStayUpToDate}</FeatureCardText>
                 <Button css={socialNetworksCardButtonS}>{goto}</Button>
+                <FeatureCardIcBox>
+                  <SocialNetworksCardIc />
+                </FeatureCardIcBox>
               </SocialNetworksCard>
               
             
@@ -231,6 +242,16 @@ const Edit = styled.div`
   min-width: 142px;
   width: fit-content;
 `
+const editBtnStyle = (t: AppTheme.Theme) => css`
+  ${ButtonS.filledRectNormalAccent2(t)};
+  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
+    width: fit-content;
+    min-height: 34px;
+    padding: 8px 14px;
+    border-radius: 10px;
+  }
+`
+
 
 
 const Divider = styled.div`
@@ -267,33 +288,59 @@ const CompleteProfileText = styled.div`
 `
 
 
+const cardMinH = 136
 const featureCardS = css`
   ${cardStyle};
-  min-height: 136px;
-  padding: 12px 16px 10px 108px;
+  min-height: ${cardMinH}px;
+  padding: 0 16px 0 0;
   display: grid;
   grid:
-    'icon .    name' auto
-    'icon .    .   ' 4px
-    'icon .    text' 1fr
-    'icon .    .   ' 10px
-    'icon .    btn ' auto
-   / auto 14px 1fr;
+    'icon .   ' 12px
+    'icon name' auto
+    'icon .   ' 4px
+    'icon text' 1fr
+    'icon .   ' 10px
+    'icon btn ' auto
+    'icon .   ' 10px
+   / 118px 1fr;
   gap: 0;
 `
 const FeatureCardName = styled.div`
   grid-area: name;
+  ${Txt.large2c};
 `
 const FeatureCardText = styled.div`
   grid-area: text;
   align-self: center;
+  ${Txt.normal2};
 `
 const featureCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS.filledRectNormalAccent2(t)};
   ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
     grid-area: btn;
+    width: 160px;
+    min-height: 35px;
+    ${Txt.normal2c};
   }
 `
+const FeatureCardIcBox = styled.div`
+  grid-area: icon;
+  place-self: center start;
+  width: 100%;
+  height: ${cardMinH}px;
+  position: relative;
+  overflow: hidden;
+`
+const FeatureCardIc = styled.div`
+  position: absolute;
+  width: 160%;
+  height: 100%;
+  margin-left: -40%;
+  background-position: left center;
+  background-size: cover;
+  background-repeat: no-repeat;
+`
+
 
 const PremiumCard = styled.div`
   ${featureCardS};
@@ -305,11 +352,23 @@ const PremiumCard = styled.div`
 `
 const premiumCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
-    background-color: ${t.boxWithPink.bg};
-    color: ${t.boxWithPink.c};
-  }
+  ${ButtonS.S.Filled.Rect.addColor({
+    bg: t.boxWithPink.bg,
+    c: t.boxWithPink.c,
+    cRipple: t.containerNormal.content4[0],
+    bgFocus: t.boxWithPink.bg,
+    bgImFocus: `linear-gradient(
+      to bottom right,
+      ${t.boxWithPink.bgFocus[1]} 50%,
+      ${t.boxWithPink.bgFocus[0]} 100%
+    )`,
+    cFocus: t.boxWithPink.cFocus,
+  })};
 `
+const PremiumCardIc = styled(FeatureCardIc)`
+  background-image: url(${heartLocks});
+`
+
 
 const InviteFriendsCard = styled.div`
   ${featureCardS};
@@ -321,10 +380,25 @@ const InviteFriendsCard = styled.div`
 `
 const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
-    background: ${t.boxWithViolet.bg};
-    color: ${t.boxWithViolet.c};
-  }
+  ${ButtonS.S.Filled.Rect.addColor({
+    bg: t.boxWithViolet.bg,
+    c: t.boxWithViolet.c,
+    cRipple: t.containerNormal.content4[0],
+    bgFocus: t.boxWithViolet.bg,
+    bgImFocus: `linear-gradient(
+      to bottom right,
+      ${t.boxWithViolet.bgFocus[1]} 50%,
+      ${t.boxWithViolet.bgFocus[0]} 100%
+    )`,
+    cFocus: t.boxWithViolet.cFocus,
+  })};
+`
+const InviteFriendsCardIc = styled(FeatureCardIc)`
+  background-image: url(${share});
+  width: 150%;
+  height: 100%;
+  margin-left: -35%;
+  margin-top: 10%;
 `
 
 const SocialNetworksCard = styled.div`
@@ -337,27 +411,24 @@ const SocialNetworksCard = styled.div`
 `
 const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
-    background-color: ${t.boxWithBlue.bg};
-    color: ${t.boxWithBlue.c};
-  }
-  ${hoverable} {
-    ${ButtonS.W.u({ e: 'button', s: 'hover' }).thisUse} {
-      background-color: ${t.boxWithBlue.bg};
-      background-image: linear-gradient(to right,
-      ${t.boxWithBlue.bgFocus[0]} 0%,
-      ${t.boxWithBlue.bgFocus[1]} 50%
-      );
-      color: ${t.boxWithBlue.cFocus};
-    }
-  }
-  ${ButtonS.W.u({ e: 'button', s: 'focusVisible' }).thisUse} {
-    background-color: ${t.boxWithBlue.bg};
-    background-image: linear-gradient(to right,
-    ${t.boxWithBlue.bgFocus[0]} 0%,
-    ${t.boxWithBlue.bgFocus[1]} 50%
-    );
-    color: ${t.boxWithBlue.cFocus};
-  }
+  ${ButtonS.S.Filled.Rect.addColor({
+    bg: t.boxWithBlue.bg,
+    c: t.boxWithBlue.c,
+    cRipple: t.containerNormal.content4[0],
+    bgFocus: t.boxWithBlue.bg,
+    bgImFocus: `linear-gradient(
+      to bottom right,
+      ${t.boxWithBlue.bgFocus[1]} 50%,
+      ${t.boxWithBlue.bgFocus[0]} 100%
+    )`,
+    cFocus: t.boxWithBlue.cFocus,
+  })};
+`
+const SocialNetworksCardIc = styled(FeatureCardIc)`
+  background-image: url(${social});
+  width: 140%;
+  height: 100%;
+  background-size: contain;
+  margin-left: -20%;
 `
 

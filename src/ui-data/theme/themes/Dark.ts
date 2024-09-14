@@ -38,6 +38,7 @@ export const DarkProps: ThemeProps = {
     content1b:       ['#dddddd'],
     content2:        ['#999999'],
     content2b:       ['#909090'],
+    c2c:             '#aaaaaa',
     content3:        ['#7b7b7b'],
     content3d:       ['#838383'],
     content3e:       ['#777777'],
@@ -136,6 +137,9 @@ export const DarkProps: ThemeProps = {
   boxWithPink: {
     bg:  '#FFFFFF',
     c:   '#DD718A',
+    
+    bgFocus: ['#ffa9bd', '#ffffff'],
+    cFocus:  '#DD718A',
   },
   
   boxViolet: {
@@ -145,6 +149,9 @@ export const DarkProps: ThemeProps = {
   boxWithViolet: {
     bg:  '#FFFFFF',
     c:   '#934DD8',
+    
+    bgFocus: ['#d2abf9', '#ffffff'],
+    cFocus:  '#934DD8',
   },
   
   boxBlue: {

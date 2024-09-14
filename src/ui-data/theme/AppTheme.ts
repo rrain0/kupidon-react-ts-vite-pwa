@@ -50,6 +50,7 @@ export namespace AppTheme {
       content1b:       string[]
       content2:        string[]
       content2b:       string[]
+      c2c:             string
       content3:        string[]
       content3d:       string[]
       content3e:       string[]
@@ -163,6 +164,9 @@ export namespace AppTheme {
     boxWithPink: {
       bg:  string
       c:   string
+      
+      bgFocus: [string, string]
+      cFocus:  string
     },
     
     boxViolet: {
@@ -172,10 +176,13 @@ export namespace AppTheme {
     boxWithViolet: {
       bg:  string
       c:   string
+      
+      bgFocus: [string, string]
+      cFocus:  string
     },
     
     boxBlue: {
-      bg:  string[]
+      bg:  [string, string]
       c:   string
     }
     boxWithBlue: {
