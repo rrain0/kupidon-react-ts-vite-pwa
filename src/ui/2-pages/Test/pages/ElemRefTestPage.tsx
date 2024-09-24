@@ -1,9 +1,9 @@
 import { animated, useSpring } from '@react-spring/web'
 import React, { useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { getElemProps } from 'src/util/element/ElemProps'
-import { useResize } from 'src/util/element/useResize'
-import { useResizeToSpring } from 'src/util/element/useResizeToSpring'
+import { getViewProps } from 'src/util/view/ViewProps'
+import { useResize } from 'src/util/view/useResize'
+import { useResizeToSpring } from 'src/util/view/useResizeToSpring'
 import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 
@@ -52,7 +52,7 @@ const ChainedResize1 = () => {
     }
     else {
       setConnectedDivReady()
-      springApi.set(getElemProps(elem).wh)
+      springApi.set(getViewProps(elem).wh)
     }
   })
   const [getElem, setElem, refElem] = useRefGetSet<HTMLElement | null>(null, elem => {
@@ -107,7 +107,7 @@ const ChainedResize2 = () => {
     }
     else {
       setConnectedDivReady()
-      return getElemProps(elem).wh
+      return getViewProps(elem).wh
     }
   })
   

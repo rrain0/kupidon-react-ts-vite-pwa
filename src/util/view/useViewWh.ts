@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { getElemProps } from 'src/util/element/ElemProps'
+import { getViewProps } from 'src/util/view/ViewProps'
 import { useAwaitMounting } from 'src/util/react/useAwaitMounting.ts'
 
 
 // TODO replace & remove - test useResize
-export const useElemWH = (elemRef: React.RefObject<HTMLElement>) => {
+export const useViewWh = (elemRef: React.RefObject<HTMLElement>) => {
   
   const getElem = () => elemRef.current
   
@@ -16,7 +16,7 @@ export const useElemWH = (elemRef: React.RefObject<HTMLElement>) => {
     const elem = getElem()
     if (elem) {
       const update = () => {
-        const elemProps = getElemProps(elem)
+        const elemProps = getViewProps(elem)
         setDimens({ w: elemProps.widthFloat, h: elemProps.heightFloat })
       }
       const resizeObserver = new ResizeObserver(update)

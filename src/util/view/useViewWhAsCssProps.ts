@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { getElemProps } from 'src/util/element/ElemProps.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { useAwaitMounting } from 'src/util/react/useAwaitMounting.ts'
 
 
 
 // Set element width & height to css --w & --h
-export const useElemWHAsCssProps = (elemRef: React.RefObject<HTMLElement>) => {
+export const useViewWhAsCssProps = (elemRef: React.RefObject<HTMLElement>) => {
   
   const getElem = () => elemRef.current
   
@@ -15,7 +15,7 @@ export const useElemWHAsCssProps = (elemRef: React.RefObject<HTMLElement>) => {
     const elem = getElem()
     if (elem) {
       const update = () => {
-        const elemProps = getElemProps(elem)
+        const elemProps = getViewProps(elem)
         elem.style.setProperty('--w', `${elemProps.widthFloat}px`)
         elem.style.setProperty('--h', `${elemProps.heightFloat}px`)
       }

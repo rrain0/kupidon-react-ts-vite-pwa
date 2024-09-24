@@ -1,7 +1,7 @@
 
 
 
-export namespace ElemU {
+export namespace ViewU {
   
   
   export type W = { w: number }

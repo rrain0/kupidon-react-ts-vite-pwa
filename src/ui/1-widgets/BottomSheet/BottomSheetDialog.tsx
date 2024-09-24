@@ -2,7 +2,7 @@ import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import { BottomSheetParts } from 'src/ui/1-widgets/BottomSheet/BottomSheetParts.ts'
-import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
+import { useUpNodesScrollLock } from 'src/util/view/useUpNodesScrollLock.ts'
 import {
   ComputedBottomSheetDimens,
   useBottomSheet, UseBottomSheetOptions,

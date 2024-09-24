@@ -12,8 +12,8 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useAsRef } from 'src/util/react-state/useAsRef.ts'
-import { useNoSelect } from 'src/util/element/useNoSelect.ts'
-import { getElemProps } from '@util/element/ElemProps.ts'
+import { useNoSelect } from 'src/util/view/useNoSelect.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
 import PartialUndef = TypeU.PartialUndef
@@ -77,7 +77,7 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
   const updateTrackProps = ()=>{
     const track = trackRef.current
     if (track){
-      const d = getElemProps(track)
+      const d = getViewProps(track)
       setTrackProps({
         height: d.contentHeight,
       })
@@ -131,7 +131,7 @@ React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
       {
         const track = trackRef.current
         if (track) {
-          const d = getElemProps(track)
+          const d = getViewProps(track)
           trackProps.vpy = d.vpYFloat
           trackProps.height = d.heightFloat
         }

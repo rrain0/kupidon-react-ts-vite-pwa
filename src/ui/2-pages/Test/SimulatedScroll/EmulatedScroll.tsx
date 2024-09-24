@@ -5,8 +5,8 @@ import React from 'react'
 import { useEmulatedScroll } from 'src/ui/2-pages/Test/SimulatedScroll/useEmulatedScroll'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
-import { useGetElemWH } from 'src/util/element/useGetElemWH'
-import { useOnResize_ } from 'src/util/element/useOnResize_'
+import { useGetViewWh } from 'src/util/view/useGetViewWh'
+import { useOnResize_ } from 'src/util/view/useOnResize_'
 import { useElemRef } from 'src/util/react-state/useElemRef'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
@@ -24,10 +24,10 @@ const EmulatedScroll = React.memo(
     
     
     const [frameRef] = useElemRef()
-    const getFrameWH = useGetElemWH(frameRef)
+    const getFrameWH = useGetViewWh(frameRef)
     
     const [contentRef] = useElemRef()
-    const getContentWH = useGetElemWH(contentRef)
+    const getContentWH = useGetViewWh(contentRef)
     
     
     const getMinMaxOffset = () => [0, getContentWH.h() - getFrameWH.h()] as NumRange

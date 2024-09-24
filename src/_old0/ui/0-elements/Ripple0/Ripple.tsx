@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import React, {
   useCallback, useEffect,
 } from 'react'
-import { getElemProps } from 'src/util/element/ElemProps.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import css from 'src/_old0/ui/0-elements/Ripple0/Ripple.module.scss'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
@@ -62,7 +62,7 @@ React.memo(
       
       const mode = function() {
         const modes: RippleMode[] = ['center', 'cursor']
-        let mode: any = getElemProps(frame)
+        let mode: any = getViewProps(frame)
           .cssPropValue(RippleStyle.W.e.frame.e.p.mode.name)
         //console.log('mode', mode)
         //console.log('mode name', RippleStyle.W.e.frame.e.p.mode.name)
@@ -72,7 +72,7 @@ React.memo(
         return mode as RippleMode
       }()
       
-      const dimens = getElemProps(frame)
+      const dimens = getViewProps(frame)
       const el = {
         clientX: dimens.clientXFloat,
         clientY: dimens.clientYFloat,

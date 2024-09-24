@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
-import {ElemProps} from "@util/element/ElemProps.ts"
+import {ViewProps} from "src/util/view/ViewProps.ts"
 import { TypeU } from '@util/common/TypeU.ts'
 import Setter = TypeU.Callback1
 import Callback = TypeU.Callback
@@ -56,7 +56,7 @@ export const useContainerScrollState =
       const content = getContent()
       const view = containerIsWindow ? window : container
       if (view){
-        const containerProps = new ElemProps(view)
+        const containerProps = new ViewProps(view)
         //console.log('containerView.scrollWidth',view.scrollWidth)
         let scrollProps = {
           clientWidth: containerProps.contentWidth,
@@ -69,7 +69,7 @@ export const useContainerScrollState =
           scrollHeight: containerProps.scrollHeight,
         }
         if (content){
-          const contentProps = new ElemProps(content)
+          const contentProps = new ViewProps(content)
           // todo hack fix
           // sometimes these values from container are wrong, so better get them from content
           scrollProps = {

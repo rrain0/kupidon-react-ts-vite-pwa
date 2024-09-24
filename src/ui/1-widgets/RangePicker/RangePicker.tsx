@@ -2,11 +2,11 @@ import { css } from '@emotion/react'
 import { animated, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
-import { getElemProps } from '@util/element/ElemProps.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet.ts'
 import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
-import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
@@ -86,7 +86,7 @@ React.forwardRef<RangePickerRefElement, RangePickerProps>(
     }
     const track = trackRef.current
     if (track) {
-      const d = getElemProps(track)
+      const d = getViewProps(track)
       trackProps.vpx = d.vpXFloat
       trackProps.width = d.widthFloat
     }

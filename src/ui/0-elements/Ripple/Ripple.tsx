@@ -3,12 +3,12 @@ import clsx from 'clsx'
 import React, { useMemo } from 'react'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import { ReactU } from 'src/util/common/ReactU'
-import { getElemProps } from 'src/util/element/ElemProps'
-import { ElemU } from 'src/util/element/ElemU'
+import { getViewProps } from 'src/util/view/ViewProps'
+import { ViewU } from 'src/util/view/ViewU'
 import { useElemRef } from 'src/util/react-state/useElemRef'
 import ClassStyleProps = ReactU.ClassStyle
-import WH = ElemU.WH
-import XY = ElemU.XY
+import WH = ViewU.WH
+import XY = ViewU.XY
 import RippleMode = RippleS.RippleMode
 
 
@@ -65,8 +65,8 @@ const Ripple = React.memo(
       const frame = getFrame()
       const ripple = getRipple()
       if (frame && ripple) {
-        const fProps = getElemProps(frame)
-        const rProps = getElemProps(ripple)
+        const fProps = getViewProps(frame)
+        const rProps = getViewProps(ripple)
         return getRippleProps(
           fProps.xy,
           fProps.wh,

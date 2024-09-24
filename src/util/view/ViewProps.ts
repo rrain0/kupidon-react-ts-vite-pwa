@@ -75,12 +75,12 @@ function isWindow<T extends anyval>(view: T): view is T & Window {
 }
 
 
-export const getElemProps = (element: HTMLElement | Window = window) => new ElemProps(element)
+export const getViewProps = (view: HTMLElement | Window = window) => new ViewProps(view)
 
 
 
 
-export class ElemProps {
+export class ViewProps {
   constructor(public view: HTMLElement | Window) { }
   get html(): HTMLElement {
     if (isWindow(this.view)) return this.view.document.documentElement

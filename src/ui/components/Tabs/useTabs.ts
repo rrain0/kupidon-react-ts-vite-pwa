@@ -8,11 +8,11 @@ import React, {
   useState,
 } from 'react'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { ElemProps } from '@util/element/ElemProps.ts'
+import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import PartialUndef = TypeU.PartialUndef
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback
@@ -90,7 +90,7 @@ export const useTabs = (
   const updateComputedTabsDimens = useCallback(() => {
     const tabsFrame = getTabsFrame()
     if (tabsFrame) {
-      const frameD = new ElemProps(tabsFrame)
+      const frameD = new ViewProps(tabsFrame)
       setComputedTabsDimens({
         frameWidth: frameD.width,
       })

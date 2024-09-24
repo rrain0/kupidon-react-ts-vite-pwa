@@ -10,8 +10,8 @@ import clsx from 'clsx'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useNoSelect } from 'src/util/element/useNoSelect.ts'
-import { getElemProps } from '@util/element/ElemProps.ts'
+import { useNoSelect } from 'src/util/view/useNoSelect.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
@@ -68,7 +68,7 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   const updateTrackProps = useCallback(() => {
     const track = trackRef.current
     if (track) {
-      const d = getElemProps(track)
+      const d = getViewProps(track)
       setTrackProps({
         width: d.contentWidth,
         height: d.contentHeight,
@@ -135,8 +135,8 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
       const track = trackRef.current
       const thumbBox = thumbBoxRef.current
       if (track && thumbBox && ev.buttons===1){
-        const trackD = getElemProps(track)
-        const thumbBoxD = getElemProps(thumbBox)
+        const trackD = getViewProps(track)
+        const thumbBoxD = getViewProps(thumbBox)
         const drag = function(){
           const p = function(){
             switch (direction) {

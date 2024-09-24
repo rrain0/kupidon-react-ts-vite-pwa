@@ -8,11 +8,11 @@ import React, {
   useState,
 } from 'react'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { ElemProps } from '@util/element/ElemProps.ts'
+import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useNoSelect } from 'src/util/element/useNoSelect.ts'
+import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import { CssParserU } from 'src/util/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
@@ -135,10 +135,10 @@ export const useBottomSheet = (
       const header = getHeader()
       const content = getContent()
       if (frame && sheet && header && content) {
-        const frameD = new ElemProps(frame)
-        const sheetD = new ElemProps(sheet)
-        const headerD = new ElemProps(header)
-        const contentD = new ElemProps(content)
+        const frameD = new ViewProps(frame)
+        const sheetD = new ViewProps(sheet)
+        const headerD = new ViewProps(header)
+        const contentD = new ViewProps(content)
         setComputedSheetDimens({
           frameH: frameD.height,
           sheetH: sheetD.height,

@@ -1,5 +1,5 @@
 import React, { useImperativeHandle, useRef } from 'react'
-import { useUpNodesScrollLock } from 'src/util/element/useUpNodesScrollLock.ts'
+import { useUpNodesScrollLock } from 'src/util/view/useUpNodesScrollLock.ts'
 
 
 

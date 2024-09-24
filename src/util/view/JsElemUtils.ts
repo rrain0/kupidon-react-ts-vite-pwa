@@ -1,6 +1,6 @@
-import { getElemProps } from 'src/util/element/ElemProps'
-import { ElemU } from 'src/util/element/ElemU'
-import WH = ElemU.WH
+import { getViewProps } from 'src/util/view/ViewProps'
+import { ViewU } from 'src/util/view/ViewU'
+import WH = ViewU.WH
 
 
 
@@ -10,7 +10,7 @@ export namespace JsElemUtils {
   
   export const wh = (elem: HTMLElement | null): WH => {
     if (!elem) return { w: 0, h: 0 }
-    const elemProps = getElemProps(elem)
+    const elemProps = getViewProps(elem)
     return {
       w: elemProps.widthFloat,
       h: elemProps.heightFloat,

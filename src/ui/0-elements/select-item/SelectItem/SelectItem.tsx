@@ -9,7 +9,7 @@ import Ripple from 'src/ui/0-elements/Ripple/Ripple'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
-import { useElemWHAsCssProps } from 'src/util/element/useElemWHAsCssProps'
+import { useViewWhAsCssProps } from 'src/util/view/useViewWhAsCssProps'
 import Puro = TypeU.Puro
 import Callback = TypeU.Callback
 import PlusIc = SvgIcons.PlusIc
@@ -62,7 +62,7 @@ const SelectItem = React.memo(
       
       const elemRef = useRef<HTMLDivElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-      useElemWHAsCssProps(elemRef)
+      useViewWhAsCssProps(elemRef)
       
       
       

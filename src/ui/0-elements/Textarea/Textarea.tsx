@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
-import { getElemProps } from '@util/element/ElemProps.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import clsx from 'clsx'
@@ -138,7 +138,7 @@ const borderStyle = css`
 
 
 const textareaFitText = (textarea: HTMLTextAreaElement) => {
-  const d = getElemProps(textarea)
+  const d = getViewProps(textarea)
   if (d.scrollHeight > d.contentHeight)
     textarea.style.height = `calc(${d.height-d.contentHeight + d.scrollHeight + 'px'} + 1em)`
 }
