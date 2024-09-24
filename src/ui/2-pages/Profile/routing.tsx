@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import {
   Link,
   Navigate,
@@ -15,10 +15,10 @@ import path = RouteBuilder.path
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import use = RouteBuilder.use
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
-import ProfilePage from 'src/ui/2-pages/Profile/ProfilePage.tsx'
-import SummaryPage from 'src/ui/2-pages/Profile/Summary/SummaryPage'
 import full = RouteBuilder.full
 
+const SummaryPage = React.lazy(() => import('src/ui/2-pages/Profile/Summary/SummaryPage'))
+const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.tsx'))
 
 
 
@@ -34,8 +34,16 @@ const ProfileIdUserIdTab = React.memo(
     const summary = RootRoute.profile.id.userId.summary[path]
     
     if (urlUserId === authId) {
-      if (tab === summary) return <SummaryPage />
-      return <ProfilePage />
+      if (tab === summary) return (
+        <Suspense fallback={<div>Loading...</div>}>
+          <SummaryPage/>
+        </Suspense>
+      )
+      return (
+        <Suspense fallback={<div>Loading...</div>}>
+          <ProfilePage/>
+        </Suspense>
+      )
     }
     
     return (
@@ -113,7 +121,7 @@ const ProfileIdEmpty = React.memo(
     )
     
     return (
-        <Navigate
+      <Navigate
         to={RootRoute.profile.id.userId[use](authId)[fullAnySearchParams](searchParams)}
         replace={true}
       />

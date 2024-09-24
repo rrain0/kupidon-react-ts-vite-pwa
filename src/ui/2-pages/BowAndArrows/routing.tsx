@@ -1,8 +1,10 @@
+import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
-import BowAndArrowsPage from 'src/ui/2-pages/BowAndArrows/BowAndArrowsPage.tsx'
 
-
+const BowAndArrowsPage = React.lazy(
+  () => import('src/ui/2-pages/BowAndArrows/BowAndArrowsPage.tsx')
+)
 
 
 
@@ -12,7 +14,11 @@ import BowAndArrowsPage from 'src/ui/2-pages/BowAndArrows/BowAndArrowsPage.tsx'
 export const bowAndArrowsRouting: RouteObject[] = [
   {
     path: '',
-    Component: BowAndArrowsPage,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <BowAndArrowsPage />
+      </Suspense>
+    ),
   },
   clearUnknownPathEnding,
 ]

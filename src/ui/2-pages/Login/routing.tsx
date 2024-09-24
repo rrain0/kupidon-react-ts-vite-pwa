@@ -1,6 +1,8 @@
+import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
-import LoginPage from './LoginPage'
+
+const LoginPage = React.lazy(() => import('./LoginPage'))
 
 
 
@@ -8,7 +10,11 @@ import LoginPage from './LoginPage'
 export const loginRouting: RouteObject[] = [
   {
     path: '',
-    Component: LoginPage,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <LoginPage/>
+      </Suspense>
+    ),
   },
   clearUnknownPathEnding,
 ]

@@ -34,6 +34,7 @@ export namespace HeaderArrowS {
       // normal
       ${W.u({ e: 'button', s: 'normal' }).thisUse} {
         ${row};
+        height: 44px;
         width: 100%;
         justify-content: space-between;
         align-items: center;

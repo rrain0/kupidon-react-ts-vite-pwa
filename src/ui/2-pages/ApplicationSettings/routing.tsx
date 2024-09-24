@@ -1,6 +1,10 @@
+import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
-import ApplicationSettingsPage from 'src/ui/2-pages/ApplicationSettings/ApplicationSettingsPage'
+
+const ApplicationSettingsPage = React.lazy(
+  () => import('src/ui/2-pages/ApplicationSettings/ApplicationSettingsPage')
+)
 
 
 
@@ -12,7 +16,11 @@ import ApplicationSettingsPage from 'src/ui/2-pages/ApplicationSettings/Applicat
 export const settingsApplicationRouting: RouteObject[] = [
   {
     path: '',
-    Component: ApplicationSettingsPage,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ApplicationSettingsPage/>
+      </Suspense>
+    ),
   },
   clearUnknownPathEnding,
 ]

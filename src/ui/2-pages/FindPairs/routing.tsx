@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
@@ -8,26 +8,34 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
-import FindPairsPage from 'src/ui/2-pages/FindPairs/FindPairsPage'
+
+const FindPairsPage = React.lazy(() => import('src/ui/2-pages/FindPairs/FindPairsPage'))
 
 
 
 
 const FindPairsEmpty =
-React.memo(
-()=>{
-  const [searchParams] = useSearchParams()
-  const auth = useRecoilValue(AuthRecoil)
-  
-  return auth
-    ? <FindPairsPage/>
-    : <Navigate
-        to={RootRoute.login[fullAllowedNameParams]({
-          returnPath: RootRoute.findPairs[fullAnySearchParams](searchParams)
-        })}
-        replace={true}
-      />
-})
+  React.memo(
+    () => {
+      const [searchParams] = useSearchParams()
+      const auth = useRecoilValue(AuthRecoil)
+      
+      if (!auth) return (
+        <Navigate
+          to={RootRoute.login[fullAllowedNameParams]({
+            returnPath: RootRoute.findPairs[fullAnySearchParams](searchParams),
+          })}
+          replace={true}
+        />
+      )
+      
+      return (
+        <Suspense fallback={<div>Loading...</div>}>
+          <FindPairsPage/>
+        </Suspense>
+      )
+    }
+  )
 
 
 
@@ -35,7 +43,7 @@ React.memo(
 export const findPairsRouting: RouteObject[] = [
   {
     path: '',
-    Component: FindPairsEmpty
+    Component: FindPairsEmpty,
   },
   clearUnknownPathEnding,
 ]
