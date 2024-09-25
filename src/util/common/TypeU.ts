@@ -21,19 +21,23 @@ export namespace TypeU {
   export type PartialUndef<O extends object> = {
     [Prop in keyof O]+?: O[Prop] | undefined
   }
+  // Add Partial Undefined ReadOnly
+  export type Puro<O extends object> = {
+    +readonly [Prop in keyof O]+?: O[Prop] | undefined
+  }
   export type WriteablePartial<O extends object> = {
     -readonly [Prop in keyof O]+?: O[Prop]
   }
   export type Never<O extends object> = {
     [Prop in keyof O]: never
   }
+  
+  
   export type RecordRo<K extends keyof any, T> = {
     +readonly [P in K]: T
   }
-  
-  // Add Partial Undefined ReadOnly
-  export type Puro<O extends object> = {
-    +readonly [Prop in keyof O]+?: O[Prop] | undefined
+  export type RecordPuro<K extends keyof any, T> = {
+    +readonly [P in K]+?: T | undefined
   }
   
   

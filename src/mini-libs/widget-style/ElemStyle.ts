@@ -2,6 +2,8 @@ import { ObjectU } from 'src/util/common/ObjectU'
 import { TypeU } from 'src/util/common/TypeU'
 import RecordRo = TypeU.RecordRo
 import ObjectEntriesType = ObjectU.ObjectEntriesType
+import Puro = TypeU.Puro
+import RecordPuro = TypeU.RecordPuro
 
 
 
@@ -14,6 +16,29 @@ import ObjectEntriesType = ObjectU.ObjectEntriesType
 
 
 export namespace ElemStyle {
+  
+  const StateValues = ['hover', 'focus'] as const
+  type States = typeof StateValues[number]
+  
+  const ElementNames = ['button', 'border'] as const
+  type Elements = typeof ElementNames[number]
+  
+  type BackgroundProp = ['background' | 'bg', string]
+  type SizeProp = ['size' | 'sz', 'full' | string | number]
+  type Props = BackgroundProp[0] | SizeProp[0]
+  
+  type StateElemProp =
+    | `${States}${Capitalize<Elements>}${Capitalize<Props>}`
+    | `${States}${Capitalize<Props>}`
+    | `${Elements}${Capitalize<Props>}`
+    | Props
+  
+  const myStyle0: RecordPuro<StateElemProp, string> = {
+    bg: '#c0ffee',
+    size: 'full',
+    hoverBg: 'green',
+  }
+  
   /*
   type BackgroundProp = ['background' | 'bg', string]
   type SizeProp = ['size' | 'sz', 'full' | string]
@@ -89,18 +114,19 @@ export namespace ElemStyle {
   
   
   const hoverable = '@media (hover: hover) and (pointer: fine)'
+  const applyHover = (css: string) => `${hoverable}{ :hover { ${css} } }`
   
   const transformStateElemProp = (propAndValue: readonly [string, string]): string => {
     const [prop, value] = propAndValue
     if (prop.startsWith('Hover')) {
       const propWithoutState = prop.slice('Hover'.length)
       const css = transformElemProp([propWithoutState, value])
-      return `${hoverable} { ${css} }`
+      return applyHover(css)
     }
     if (prop.startsWith('hover')) {
       const propWithoutState = prop.slice('hover'.length)
       const css = transformElemProp([propWithoutState, value])
-      return `${hoverable} { :hover { ${css} } }`
+      return applyHover(css)
     }
     return transformElemProp([prop, value])
   }
