@@ -12,6 +12,7 @@ export namespace TypeU {
   export type HtmlBool = true | undefined
   
   export const noop = () => {}
+  export const emptyArr = []
   
   export const trueOrUndef = (value: any): HtmlBool => value ? true : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined

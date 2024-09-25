@@ -12,8 +12,7 @@ import ts from 'typescript-eslint'
 import stylistic from '@stylistic/eslint-plugin'
 
 // yarn add --dev eslint-plugin-react
-import reactRecommended from 'eslint-plugin-react/configs/recommended.js'
-import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js'
+import react from 'eslint-plugin-react'
 
 // yarn add --dev eslint-plugin-react-hooks
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -31,6 +30,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 
 // https://github.com/prettier/eslint-plugin-prettier
+// package.json.devDependencies."eslint-plugin-prettier": "^5.2.1",
 //import prettierConfigRecommended from 'eslint-plugin-prettier/recommended'
 //import prettier from 'eslint-plugin-prettier'
 
@@ -70,13 +70,13 @@ export default [
   
   // react config
   // https://www.npmjs.com/package/eslint-plugin-react
+  react.configs.flat.recommended,
+  // must be after react recommended config
+  react.configs.flat['jsx-runtime'],
   {
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-    ...reactRecommended,
-    // must be after react recommended config
-    ...reactJsxRuntime,
     languageOptions: {
-      ...reactRecommended.languageOptions,
+      ...react.configs.flat.recommended.languageOptions,
       globals: {
         ...globals.serviceworker,
         ...globals.browser,
@@ -223,6 +223,10 @@ export default [
   },
   
   
+  // https://www.npmjs.com/package/eslint-plugin-import
+  // TypeError: context.getAncestors is not a function
+  //importPlugin.flatConfigs.recommended,
+  //importPlugin.flatConfigs.typescript,
   // Legacy error
   //...compat.extends('plugin:import/errors'),
   //...compat.extends('plugin:import/warnings'),
@@ -269,23 +273,22 @@ export default [
   
   
   // https://www.npmjs.com/package/eslint-plugin-promise
-  // works
-  ...compat.extends('plugin:promise/recommended'),
+  promise.configs['flat/recommended'],
   {
-    plugins: {
+    /*plugins: {
       'promise': promise,
-    },
+    },*/
     rules: {
-      'promise/catch-or-return': 'off',
+      'promise/catch-or-return': 'error',
     },
   },
   
   
   // jsx-a11y config
   // https://www.npmjs.com/package/eslint-plugin-jsx-a11y
+  jsxA11y.flatConfigs.recommended,
   {
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],
-    ...jsxA11y.flatConfigs.recommended,
     languageOptions: {
       ...jsxA11y.flatConfigs.recommended.languageOptions,
       globals: {
@@ -293,15 +296,20 @@ export default [
         ...globals.browser,
       },
     },
+    /*plugins: {
+      'jsx-a11y': jsxA11y,
+    },*/
     rules: {
       'jsx-a11y/tabindex-no-positive': 'off',
     },
   },
   
   
-  // prettier must be last
-  // I don't like empty lines collapsing cause code becomes harder to read:
+  // I do not use prettier because it formats my code in a strange non-configurable way.
+  // Collapsing cause code becomes harder to read:
   // https://prettier.io/docs/en/rationale.html#empty-lines
+  
+  // prettier config - must be last
   //prettierConfigRecommended, // works
   
   

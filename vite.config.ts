@@ -93,6 +93,14 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+        },
+      },
+    },
+    
     // configure vite DEVELOPMENT server (yarn run dev)
     server: {
       host: true, // expose app via IP address from local network
