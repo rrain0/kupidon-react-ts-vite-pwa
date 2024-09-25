@@ -1,5 +1,10 @@
-
+import { ObjectU } from 'src/util/common/ObjectU'
+import { TypeU } from 'src/util/common/TypeU'
+import RecordRo = TypeU.RecordRo
 import ObjectEntriesType = ObjectU.ObjectEntriesType
+
+
+
 
 /*
   TODO update Typescript & vite & vite plugins & workbox & @types/node
@@ -7,7 +12,6 @@ import ObjectEntriesType = ObjectU.ObjectEntriesType
 
  */
 
-import { ObjectU } from 'src/util/common/ObjectU'
 
 export namespace ElemStyle {
   /*
@@ -39,9 +43,9 @@ export namespace ElemStyle {
     throw new Error(`Unknown [property, value]: ${propAndValue}`)
   }
   
-  /!* const transformElemProp = (propAndValue: ObjectEntriesType<ObjectStyleProps>) => {
+  const transformElemProp = (propAndValue: ObjectEntriesType<ObjectStyleProps>) => {
     const [prop, value] = propAndValue
-  } *!/
+  }
   
   const transformStateElemProp = (propAndValue: ObjectEntriesType<StateStyleProps>) => {
     const [prop, value] = propAndValue
@@ -52,5 +56,71 @@ export namespace ElemStyle {
   
   }
    */
+  
+  const transformBackground = ([prop, value]: readonly [string, string]): string => {
+    return `background: ${value};`
+  }
+  
+  const transformSize = ([prop, value]: readonly [string, string]): string => {
+    if (value === 'full') value = '100%'
+    return `width: ${value}; height: ${value};`
+  }
+  
+  const transformProp = (propAndValue: readonly [string, string]): string => {
+    const [prop, value] = propAndValue
+    if (prop === 'background') return transformBackground(propAndValue)
+    if (prop === 'Background') return transformBackground(propAndValue)
+    if (prop === 'bg') return transformBackground(propAndValue)
+    if (prop === 'Bg') return transformBackground(propAndValue)
+    if (prop === 'size') return transformSize(propAndValue)
+    if (prop === 'Size') return transformSize(propAndValue)
+    if (prop === 'sz') return transformSize(propAndValue)
+    if (prop === 'Sz') return transformSize(propAndValue)
+    throw new Error(`Unknown [property, value]: ${propAndValue}`)
+  }
+  
+  
+  
+  const transformElemProp = (propAndValue: readonly [string, string]): string => {
+    const [prop, value] = propAndValue
+    return transformProp(propAndValue)
+  }
+  
+  
+  
+  const hoverable = '@media (hover: hover) and (pointer: fine)'
+  
+  const transformStateElemProp = (propAndValue: readonly [string, string]): string => {
+    const [prop, value] = propAndValue
+    if (prop.startsWith('Hover')) {
+      const propWithoutState = prop.slice('Hover'.length)
+      const css = transformElemProp([propWithoutState, value])
+      return `${hoverable} { ${css} }`
+    }
+    if (prop.startsWith('hover')) {
+      const propWithoutState = prop.slice('hover'.length)
+      const css = transformElemProp([propWithoutState, value])
+      return `${hoverable} { :hover { ${css} } }`
+    }
+    return transformElemProp([prop, value])
+  }
+  
+  export const transformObjectStyle = (objectStyle: RecordRo<string, string>): string => {
+    const parts: string[] = []
+    Object.entries(objectStyle).forEach((propAndValue) => {
+      parts.push(transformStateElemProp(propAndValue))
+    })
+    return parts.join(' ')
+  }
+  
+  const myStyle: Record<string, string> = {
+    bg: '#c0ffee',
+    size: 'full',
+    hoverBg: 'green',
+  }
+  
+  const myCss = transformObjectStyle(myStyle)
+  
+  
 }
 

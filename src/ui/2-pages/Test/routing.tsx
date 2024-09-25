@@ -9,6 +9,7 @@ import path = RouteBuilder.path
 const TestPage = React.lazy(() => import('src/ui/2-pages/Test/TestPage.tsx'))
 
 const ElemRefTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemRefTestPage.tsx'))
+const ElemStyleTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemStyleTestPage.tsx'))
 const UseEventTest = React.lazy(() => import('src/ui/2-pages/Test/pages/UseEventTest.tsx'))
 const PageLifecycle = React.lazy(() => import('src/ui/2-pages/Test/pages/PageLifecycle.tsx'))
 const PointerTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/PointerTestPage.tsx'))
@@ -18,7 +19,9 @@ const TabsTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/TabsTest
 const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ScrollbarTestPage.tsx'))
 const ResizeObserverTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ResizeObserverTestPage.tsx'))
 const BottomSheetTest = React.lazy(() => import('src/ui/2-pages/Test/views/BottomSheetTest.tsx'))
-const MoveElementToAnotherViewTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/MoveElementToAnotherViewTestPage.tsx'))
+const MoveElementToAnotherViewTestPage = React.lazy(
+  () => import('src/ui/2-pages/Test/pages/MoveElementToAnotherViewTestPage.tsx')
+)
 const ListItem1AddItemTest = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem1AddItemTest.tsx'))
 const ListItem2Test = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem2Test.tsx'))
 const RippleTest = React.lazy(() => import('src/ui/2-pages/Test/views/RippleTest.tsx'))
@@ -145,6 +148,18 @@ const elemRefRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / elem-style / <check here>'
+const elemStyleRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ElemStyleTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
 
 
 // path: 'test / emulated-scroll / <check here>'
@@ -249,6 +264,10 @@ export const testRouting: RouteObject[] = [
   {
     path: RootRoute.test.elemRef[path]+'/*',
     children: elemRefRouting,
+  },
+  {
+    path: RootRoute.test.elemStyle[path]+'/*',
+    children: elemStyleRouting,
   },
   
   

@@ -79,6 +79,9 @@ const TestPage = React.memo(
               <Link to={RootRoute.test.elemRef[fullAnySearchParams](searchParams)}>
                 <Button css={ButtonS.filledRectBigNormal}>Element Ref test</Button>
               </Link>
+              <Link to={RootRoute.test.elemStyle[fullAnySearchParams](searchParams)}>
+                <Button css={ButtonS.filledRectBigNormal}>Element Style test</Button>
+              </Link>
               
               
               <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
