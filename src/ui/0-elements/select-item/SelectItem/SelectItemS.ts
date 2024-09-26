@@ -115,30 +115,30 @@ export namespace SelectItemS {
       pointer-events: none;
       ${abs};
       ${colC};
-      padding: 6px;
+      padding: 6px 16px;
     }
     ${W.use.s.normal().e.indicatorBox().thisUse}{
-      width: 75%;
-      align-self: center;
-      height: 6px;
+      width: 100%;
+      align-self: start;
+      height: auto;
       ${row};
       gap: 6px;
     }
     ${W.use.s.normal().e.indicator0().thisUse}{
-      flex: 1;
-      height: 100%;
+      width: 8px;
+      height: 8px;
       border-radius: 999999px;
       background: #dddddd;
     }
     ${W.use.s.normal().e.indicator1().thisUse}{
-      flex: 1;
-      height: 100%;
+      width: 8px;
+      height: 8px;
       border-radius: 999999px;
       background: #999999;
     }
     ${W.use.s.normal().e.indicator2().thisUse}{
-      flex: 1;
-      height: 100%;
+      width: 8px;
+      height: 8px;
       border-radius: 999999px;
       background: #444444;
     }
