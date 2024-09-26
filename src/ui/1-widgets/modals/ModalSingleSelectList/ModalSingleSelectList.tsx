@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useMemo, useState } from 'react'
-import { Option, OPTION_CUSTOM, OPTION_NOTHING } from 'src/ui-data/models/Option'
+import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
@@ -18,6 +18,7 @@ import Setter = TypeU.Setter
 import col = EmotionCommon.col
 import Puro = TypeU.Puro
 import noop = TypeU.noop
+import exists = TypeU.exists
 
 
 
@@ -33,6 +34,9 @@ type ModalSingleSelectListProps<T extends string> = {
   options: Option<T>[]
   selected: T
   setSelected: Setter<T>
+  
+  notSelectedValue?: T | undefined
+  customValue?: T | undefined
 } & Puro<{
   customOptionText: string
   setCustomOptionText: Setter<string>
@@ -45,27 +49,28 @@ const ModalSingleSelectList = ReactU.memo(
       isOpen,
       close,
       title,
+      
       options,
       selected,
       setSelected,
+      
+      notSelectedValue,
+      customValue,
+      
       customOptionText = '',
       setCustomOptionText = noop,
     } = props
     
-    const canSelectNothing = useMemo(() => {
-      return !!options.find(it => it.value === '')
-    }, [options])
-    
     const toggleSelected = (value: T) => {
-      if (selected === value && canSelectNothing) setSelected(OPTION_NOTHING as T)
+      if (selected === value && exists(notSelectedValue)) setSelected(notSelectedValue)
       else setSelected(value)
     }
     
     
     const defaultOption = useMemo(() => {
-      if (canSelectNothing) return OPTION_NOTHING as T
+      if (exists(notSelectedValue)) return notSelectedValue
       return options[0].value
-    }, [options, canSelectNothing])
+    }, [options, notSelectedValue])
     
     
     const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayEdit)
@@ -73,8 +78,10 @@ const ModalSingleSelectList = ReactU.memo(
     const onEditClose = () => {
       closeEdit()
       setCustomOptionText(inputText)
-      if (inputText) setSelected(OPTION_CUSTOM as T)
-      if (selected === OPTION_CUSTOM && !inputText) setSelected(defaultOption)
+      if (exists(customValue)) {
+        if (inputText) setSelected(customValue)
+        if (selected === customValue && !inputText) setSelected(defaultOption)
+      }
     }
     
     
@@ -82,55 +89,57 @@ const ModalSingleSelectList = ReactU.memo(
       <UseBottomSheetState
         isOpen={isOpen}
         close={close}
-      >{ sheetProps => (
-        <>
-          
-          <ModalPortal>
-            <BottomSheetDialogBasic
-              {...sheetProps.sheetProps}
-              header={title}
-            >
-              <div css={selectItemsContainer}>
-                {options.filter(opt => opt.value !== OPTION_NOTHING).map(opt => (
-                  <SelectItem
-                    css={SelectItemS.normal}
-                    key={opt.value}
-                    onClick={() => {
-                      if (opt.value !== OPTION_CUSTOM) toggleSelected(opt.value)
-                      if (opt.value === OPTION_CUSTOM && customOptionText) toggleSelected(opt.value)
-                      if (opt.value === OPTION_CUSTOM && !customOptionText) openEdit()
-                    }}
-                    onClickEdit={openEdit}
-                    isSelected={opt.value === selected}
-                    isAdd={opt.value === OPTION_CUSTOM && !customOptionText}
-                    isEdit={opt.value === OPTION_CUSTOM}
-                    indicatorsSelection={opt.value === selected ? [true] : [false]}
-                  >
-                    <SelectItemText>
-                      {(() => {
-                        if (opt.value === OPTION_CUSTOM) return customOptionText
-                        return opt.text
-                      })()}
-                    </SelectItemText>
-                  </SelectItem>
-                ))}
-              </div>
+      >
+        { sheetProps => (
+          <>
             
-            </BottomSheetDialogBasic>
-          </ModalPortal>
+            <ModalPortal>
+              <BottomSheetDialogBasic
+                {...sheetProps.sheetProps}
+                header={title}
+              >
+                <div css={selectItemsContainer}>
+                  {options.filter(opt => opt.value !== notSelectedValue).map(opt => (
+                    <SelectItem
+                      css={SelectItemS.normal}
+                      key={opt.value}
+                      onClick={() => {
+                        if (opt.value !== customValue) toggleSelected(opt.value)
+                        if (opt.value === customValue && customOptionText) toggleSelected(opt.value)
+                        if (opt.value === customValue && !customOptionText) openEdit()
+                      }}
+                      onClickEdit={openEdit}
+                      isSelected={opt.value === selected}
+                      isAdd={opt.value === customValue && !customOptionText}
+                      isEdit={opt.value === customValue}
+                      indicatorsSelection={opt.value === selected ? [true] : [false]}
+                    >
+                      <SelectItemText>
+                        {(() => {
+                          if (opt.value === customValue) return customOptionText
+                          return opt.text
+                        })()}
+                      </SelectItemText>
+                    </SelectItem>
+                  ))}
+                </div>
+              
+              </BottomSheetDialogBasic>
+            </ModalPortal>
+            
+            
+            <ModalInput
+              isOpen={isEditOpen}
+              onClose={onEditClose}
+              onClear={() => setInputText('')}
+              value={inputText}
+              onChange={ev => setInputText(ev.currentTarget.value)}
+              title={title}
+            />
           
-          
-          <ModalInput
-            isOpen={isEditOpen}
-            onClose={onEditClose}
-            onClear={() => setInputText('')}
-            value={inputText}
-            onChange={ev => setInputText(ev.currentTarget.value)}
-            title={title}
-          />
-        
-        </>
-      )}</UseBottomSheetState>
+          </>
+        )}
+      </UseBottomSheetState>
     )
   }
 )

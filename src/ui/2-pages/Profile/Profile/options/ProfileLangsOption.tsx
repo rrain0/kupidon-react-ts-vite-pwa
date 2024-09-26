@@ -11,7 +11,9 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import MapLocationGradIc = SvgGradIcons.MapLocationGradIc
+import WineBottleAlcoholGradIc = SvgGradIcons.WineBottleAlcoholGradIc
+import GoalGradIc = SvgGradIcons.GoalGradIc
+import PlanetFrameGradIc = SvgGradIcons.PlanetFrameGradIc
 
 
 
@@ -19,77 +21,77 @@ import MapLocationGradIc = SvgGradIcons.MapLocationGradIc
 
 
 
-const overlayName = 'placeOfResidence'
+const overlayName = 'langs'
 
 
 
 
 
-const ProfilePlaceOfResidenceOption = React.memo(
-() => {
+const ProfileLangsOption = React.memo(
+  () => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     
     const text = useMemo(() => ({
       notSelected: optionText.notSelected,
+      langs: 'Языки',
     }), [titleText, optionText])
     
     
-    const [selected, setSelected] = useState('')
+    /* const [selected, setSelected] = useState('')
     
     
     const options = useMemo(
       () => [
         {
-          value: '1',
-          text: 'Октябрьский округ',
+          value: 'Свидание',
+          text: 'Свидание',
         }, {
-          value: '2',
-          text: 'Свердловский округ',
+          value: 'Общение онлайн',
+          text: 'Общение онлайн',
         }, {
-          value: '3',
-          text: 'Правобережный округ',
+          value: 'Деловое общение',
+          text: 'Деловое общение',
         }, {
-          value: '4',
-          text: 'Ленинский округ',
+          value: 'Новый опыт',
+          text: 'Новый опыт',
         }, {
           value: '',
           text: text.notSelected,
         },
       ],
       [text]
-    )
+    ) */
     
     
     
-    const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    // const { isOpen, open, close } = useOverlayUrl(overlayName)
+    // const value = options.find(opt => opt.value === selected)?.text ?? ''
     
     
     return (
       <>
         <OptionItem
-          icon={<MapLocationGradIc />}
-          title={'Место проживания'}
-          value={value}
-          onClick={open}
+          icon={<PlanetFrameGradIc />}
+          title={text.langs}
+          value={'#ru #en #fr'}
+          //onClick={open}
         />
         
         
-        <ModalSingleSelectList
+        {/* <ModalSingleSelectList
           isOpen={isOpen}
           close={close}
-          title={'Место проживания'}
+          title={'Цель знакомства'}
           options={options}
           selected={selected}
           setSelected={setSelected}
-          notSelectedValue={''}
-        />
+        /> */}
       </>
     )
   }
 )
-export default ProfilePlaceOfResidenceOption
+export default ProfileLangsOption
 
 
 

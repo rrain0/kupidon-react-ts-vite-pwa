@@ -26,13 +26,12 @@ const pickUiValue = <V extends UiValue<any>>
 
 
 // todo refactor toasts & remove
-export const useUiValue = <V extends UiValue<any>>(uiValue: V|undefined): V[keyof V] | undefined => {
+export const useUiValue = <V extends UiValue<any>>(uiValue: V | undefined): V[keyof V] | undefined => {
   const langs = useRecoilValue(LangRecoil).langs
   
-  const pickedUiValue = useMemo(
-    () => uiValue ? pickUiValue(uiValue, langs) : undefined,
-    [langs, uiValue]
-  )
+  const pickedUiValue = useMemo(() => {
+    return uiValue ? pickUiValue(uiValue, langs) : undefined
+  }, [langs, uiValue])
   
   return pickedUiValue
 }

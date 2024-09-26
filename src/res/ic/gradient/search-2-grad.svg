@@ -10,7 +10,7 @@
 </style>
 
 <defs>
-  <!-- !!! ID MUST BE UNIQUE ACROSS ENTIRE APPLICATION so type something random -->
+  <!-- !!! ID must be unique across entire app so please type something random -->
   <linearGradient
     id="paint0_linear_492_162"
     x1="50%" y1="13%" x2="50%" y2="90%"

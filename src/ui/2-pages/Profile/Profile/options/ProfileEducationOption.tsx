@@ -87,6 +87,7 @@ const ProfileEducationOption = React.memo(
           options={options}
           selected={props.value}
           setSelected={props.setValue}
+          notSelectedValue={''}
         />
       </>
     )

@@ -26,7 +26,7 @@ const overlayName = 'alcohol'
 
 
 const ProfileAlcoholOption = React.memo(
-() => {
+  () => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     
@@ -86,6 +86,7 @@ const ProfileAlcoholOption = React.memo(
           options={options}
           selected={selected}
           setSelected={setSelected}
+          notSelectedValue={''}
         />
       </>
     )

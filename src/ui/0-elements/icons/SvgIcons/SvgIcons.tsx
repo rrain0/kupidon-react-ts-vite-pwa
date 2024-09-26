@@ -9,7 +9,7 @@ import ArrowLinesSharp1Svg from 'src/res/ic/normal/arrow-lines-sharp-1.svg?react
 import ArrowRefreshCwSvg from 'src/res/ic/normal/arrow-refresh-cw.svg?react'
 import ArrowReloadSvg from 'src/res/ic/normal/arrow-reload.svg?react'
 
-import BrowserSvg from 'src/res/ic/normal/browser.svg?react'
+import PlanetFrameSvg from 'src/res/ic/normal/planet-frame.svg?react'
 import BowArrowSvg from 'src/res/ic/normal/bow-arrow.svg?react'
 
 import CardsHeartSvg from 'src/res/ic/normal/cards-heart.svg?react'
@@ -164,7 +164,7 @@ export namespace SvgIcons {
   export const ArrowReloadIc = generateSimpleSvgIcon(ArrowReloadSvg)
   
   
-  export const BrowserIc = generateSimpleSvgIcon(BrowserSvg)
+  export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
   export const BowArrowIc = generateSimpleSvgIcon(BowArrowSvg)
   
   

@@ -2,7 +2,6 @@
 
 
 
-export const OPTION_NOTHING = ''
 export const OPTION_CUSTOM = 'CUSTOM'
 
 

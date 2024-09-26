@@ -10,7 +10,7 @@ import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
-import BrowserIc = SvgIcons.BrowserIc
+import BrowserIc = SvgIcons.PlanetFrameIc
 import { SettingsOptions } from './SettingsOptions'
 
 

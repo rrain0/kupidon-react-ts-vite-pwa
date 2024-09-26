@@ -86,6 +86,7 @@ const ProfileSportFrequencyOption = React.memo(
           options={options}
           selected={selected}
           setSelected={setSelected}
+          notSelectedValue={''}
         />
       </>
     )

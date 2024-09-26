@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react'
-import { OPTION_CUSTOM } from 'src/ui-data/models/Option'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
@@ -62,7 +61,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
           value: '8',
           text: 'Научная фантастика',
         }, {
-          value: OPTION_CUSTOM,
+          value: 'CUSTOM',
           text: '',
         },
       ],
@@ -74,7 +73,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     const value = selected
       .map(v => options.find(o => o.value === v))
       .filter(o => !!o)
-      .map(o => o!.text)
+      .map(o => o.text)
       .join(', ')
       || text.notSelected
     

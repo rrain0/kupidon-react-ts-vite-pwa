@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react'
-import { OPTION_CUSTOM } from 'src/ui-data/models/Option'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
@@ -28,10 +27,11 @@ const ProfileInterestsAndHobbiesOption = React.memo(
     
     const text = useMemo(() => ({
       notSelected: optionText.notSelected,
+      interestsAndHobbies: 'Интересы и хобби',
     }), [titleText, optionText])
     
     
-    const [selected, setSelected] = useState([] as string[])
+    /* const [selected, setSelected] = useState([] as string[])
     const [customOptionText, setCustomOptionText] = useState('')
     
     const options = useMemo(
@@ -60,36 +60,36 @@ const ProfileInterestsAndHobbiesOption = React.memo(
     )
     
     const value = selected
-        .map(v => options.find(o => o.value === v))
-        .filter(o => !!o)
-        .map(o => o!.text)
-        .join(', ')
+      .map(v => options.find(o => o.value === v))
+      .filter(o => !!o)
+      .map(o => o.text)
+      .join(', ')
       || text.notSelected
     
     
-    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    const { isOpen, open, close } = useOverlayUrl(overlayName) */
     
     
     return (
       <>
         <OptionItem
           icon={<TelescopeGradIc />}
-          title={'Интересы и хобби'}
-          value={value}
-          onClick={open}
+          title={text.interestsAndHobbies}
+          value={'#путешествия #музыка #спорт'}
+          //onClick={open}
         />
         
         
-        <ModalMultiSelectList
+        {/* <ModalMultiSelectList
           isOpen={isOpen}
           close={close}
-          title={'Интересы и хобби'}
+          title={text.interestsAndHobbies}
           options={options}
           selected={selected}
           setSelected={setSelected}
           customOptionText={customOptionText}
           setCustomOptionText={setCustomOptionText}
-        />
+        /> */}
       </>
     )
   }

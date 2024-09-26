@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Gender } from 'src/api/model/Gender.ts'
-import { Option, OPTION_CUSTOM, OPTION_NOTHING } from 'src/ui-data/models/Option.ts'
+import { Option } from 'src/ui-data/models/Option.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
@@ -89,8 +89,8 @@ React.memo(
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   const value = (() => {
     const opt = options.find(opt => opt.value === selected)!
-    if (opt.value === OPTION_NOTHING) return text.notSelected
-    if (opt.value === OPTION_CUSTOM) return customOptionText
+    if (opt.value === '') return text.notSelected
+    if (opt.value === 'CUSTOM') return customOptionText
     return opt.text
   })()
   
@@ -113,6 +113,8 @@ React.memo(
         options={options}
         selected={selected}
         setSelected={setSelected}
+        notSelectedValue={''}
+        customValue={'CUSTOM'}
         customOptionText={customOptionText}
         setCustomOptionText={setCustomOptionText}
       />

@@ -8,6 +8,7 @@ import exists = TypeU.exists
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
 
 
+import BabyGradSvg from 'src/res/ic/gradient/baby-grad.svg?react'
 import BasketballGradSvg from 'src/res/ic/gradient/basketball-grad.svg?react'
 import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
 import BookGradSvg from 'src/res/ic/gradient/book-grad.svg?react'
@@ -24,6 +25,7 @@ import FilmGradSvg from 'src/res/ic/gradient/film-grad.svg?react'
 
 import GenderGradSvg from 'src/res/ic/gradient/gender-grad.svg?react'
 import GiftBoxGradSvg from 'src/res/ic/gradient/gift-box-grad.svg?react'
+import GoalGradSvg from 'src/res/ic/gradient/goal-grad.svg?react'
 
 import HourglassGradSvg from 'src/res/ic/gradient/hourglass-grad.svg?react'
 
@@ -33,6 +35,7 @@ import MapLocationGradSvg from 'src/res/ic/gradient/map-location-grad.svg?react'
 
 import NameCardGradSvg from 'src/res/ic/gradient/name-card-grad.svg?react'
 
+import PlanetFrameGradSvg from 'src/res/ic/gradient/planet-frame-grad.svg?react'
 import ProfileGradSvg from 'src/res/ic/gradient/profile-grad.svg?react'
 import PuzzlesGradSvg from 'src/res/ic/gradient/puzzles-grad.svg?react'
 
@@ -76,42 +79,44 @@ export namespace SvgGradIcons {
     BaseGradSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps & BaseSimpleSvgIconSvgComponentProp
   
   export const BaseGradSvgIcon =
-  React.memo(
-  React.forwardRef<BaseSimpleSvgIconRefElement, BaseGradSvgIconProps>(
-  (props, forwardedRef) => {
-    const {
-      className,
-      firstColor, secondColor,
-      size, width, height,
-      SvgComponent,
-      ...restProps
-    } = props
-    
-    const w = width ?? size
-    const h = height ?? size
-    
-    const sizeProp = SvgGradIconsStyle.El.root.props.size
-    const firstColorProp = SvgGradIconsStyle.El.root.props.firstColor
-    const secondColorProp = SvgGradIconsStyle.El.root.props.secondColor
-    
-    return (
-      <SvgComponent
-        css={css`
-          width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-          height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-          //max-width: 100%;
-          //max-height: 100%;
-          ${firstColorProp.name}: ${firstColor || firstColorProp.var('black')};
-          ${secondColorProp.name}: ${secondColor || secondColorProp.var('black')};
-        `}
-        width={w}
-        height={h}
-        className={clsx(className, SvgGradIconsStyle.El.icon.name)}
-        {...restProps}
-        ref={forwardedRef}
-      />
+    React.memo(
+      React.forwardRef<BaseSimpleSvgIconRefElement, BaseGradSvgIconProps>(
+        (props, forwardedRef) => {
+          const {
+            className,
+            firstColor, secondColor,
+            size, width, height,
+            SvgComponent,
+            ...restProps
+          } = props
+          
+          const w = width ?? size
+          const h = height ?? size
+          
+          const sizeProp = SvgGradIconsStyle.El.root.props.size
+          const firstColorProp = SvgGradIconsStyle.El.root.props.firstColor
+          const secondColorProp = SvgGradIconsStyle.El.root.props.secondColor
+          
+          return (
+            <SvgComponent
+              css={css`
+                width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+                height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+                //max-width: 100%;
+                //max-height: 100%;
+                ${firstColorProp.name}: ${firstColor || firstColorProp.var('black')};
+                ${secondColorProp.name}: ${secondColor || secondColorProp.var('black')};
+              `}
+              width={w}
+              height={h}
+              className={clsx(className, SvgGradIconsStyle.El.icon.name)}
+              {...restProps}
+              ref={forwardedRef}
+            />
+          )
+        }
+      )
     )
-  }))
   
   
   
@@ -119,17 +124,20 @@ export namespace SvgGradIcons {
   export type SimpleSvgIconProps = BaseGradSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps
   function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
     return (
-    React.memo(
-    React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-      (props, forwardedRef) =>
-        <BaseGradSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef}/>
-    )))
+      React.memo(
+        React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
+          (props, forwardedRef) =>
+            <BaseGradSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef}/>
+        )
+      )
+    )
   }
   
   
   
   // Icons
   
+  export const BabyGradIc = generateSimpleSvgIcon(BabyGradSvg)
   export const BasketballGradIc = generateSimpleSvgIcon(BasketballGradSvg)
   export const BengalCatGradIc = generateSimpleSvgIcon(BengalCatGradSvg)
   export const BookGradIc = generateSimpleSvgIcon(BookGradSvg)
@@ -146,6 +154,7 @@ export namespace SvgGradIcons {
   
   export const GenderGradIc = generateSimpleSvgIcon(GenderGradSvg)
   export const GiftBoxGradIc = generateSimpleSvgIcon(GiftBoxGradSvg)
+  export const GoalGradIc = generateSimpleSvgIcon(GoalGradSvg)
   
   export const HourglassGradIc = generateSimpleSvgIcon(HourglassGradSvg)
   
@@ -155,6 +164,7 @@ export namespace SvgGradIcons {
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   
+  export const PlanetFrameGradIc = generateSimpleSvgIcon(PlanetFrameGradSvg)
   export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
   export const PuzzlesGradIc = generateSimpleSvgIcon(PuzzlesGradSvg)
   
