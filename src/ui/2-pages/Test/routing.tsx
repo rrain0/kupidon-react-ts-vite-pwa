@@ -25,6 +25,7 @@ const MoveElementToAnotherViewTestPage = React.lazy(
 const ListItem1AddItemTest = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem1AddItemTest.tsx'))
 const ListItem2Test = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem2Test.tsx'))
 const RippleTest = React.lazy(() => import('src/ui/2-pages/Test/views/RippleTest.tsx'))
+const SliderTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/SliderTestPage'))
 
 
 
@@ -200,13 +201,25 @@ const viewsListItem2Routing: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'test / ripple-test / <check here>'
-const rippleTestRouting: RouteObject[] = [
+// path: 'test / ripple / <check here>'
+const rippleRouting: RouteObject[] = [
   {
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <RippleTest />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+// path: 'test / slider / <check here>'
+const sliderRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <SliderTestPage />
       </Suspense>
     ),
   },
@@ -266,8 +279,8 @@ export const testRouting: RouteObject[] = [
     children: elemRefRouting,
   },
   {
-    path: RootRoute.test.elemStyle[path]+'/*',
-    children: elemStyleRouting,
+    path: RootRoute.test.sliderTest[path]+'/*',
+    children: sliderRouting,
   },
   
   
@@ -287,7 +300,11 @@ export const testRouting: RouteObject[] = [
   },
   {
     path: RootRoute.test.rippleTest[path]+'/*',
-    children: rippleTestRouting,
+    children: rippleRouting,
+  },
+  {
+    path: RootRoute.test.elemStyle[path]+'/*',
+    children: elemStyleRouting,
   },
   clearUnknownPathEnding,
 ]

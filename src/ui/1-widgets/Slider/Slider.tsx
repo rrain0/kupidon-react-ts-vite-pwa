@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { animated, useSpring } from '@react-spring/web'
+import { animated, to, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
@@ -63,7 +63,7 @@ export type RangePickerProps = RangePickerCustomProps & RangePickerForwardRefPro
 
 
 
-const RangePicker = React.memo(
+const Slider = React.memo(
   React.forwardRef<RangePickerRefElement, RangePickerProps>(
     (props, forwardedRef) => {
       const {
@@ -111,16 +111,16 @@ const RangePicker = React.memo(
       
       
       const [barSpring, barSpringApi] = useSpring(() => ({
-        left: '0%',
-        right: '0%',
+        left: 0,
+        right: 0,
       }))
       useLayoutEffect(() => {
         const trackW = getTrackDimens().width
         //console.log('trackW', trackW)
         const uiPercent = progressToUiPercent(getProgressRange(), trackW)
         barSpringApi.set({
-          left: `${uiPercent[0]}%`,
-          right: `${uiPercent[1]}%`,
+          left: uiPercent[0],
+          right: uiPercent[1],
         })
       }, [])
       
@@ -142,8 +142,8 @@ const RangePicker = React.memo(
           const trackW = getTrackDimens().width
           const uiPercent = progressToUiPercent(progress, trackW)
           barSpringApi.set({
-            left: `${uiPercent[0]}%`,
-            right: `${uiPercent[1]}%`,
+            left: uiPercent[0],
+            right: uiPercent[1],
           })
         }
       }, [outerRange, outerMinMax])
@@ -238,8 +238,8 @@ const RangePicker = React.memo(
             
             const uiPercent = progressToUiPercent(getProgressRange(), trackW)
             barSpringApi.set({
-              left: `${uiPercent[0]}%`,
-              right: `${uiPercent[1]}%`,
+              left: uiPercent[0],
+              right: uiPercent[1],
             })
             
           }
@@ -277,8 +277,11 @@ const RangePicker = React.memo(
           ref={trackRef}
         >
           <animated.div css={bar}
-            // @ts-expect-error
-            style={{ ...barSpring }}
+            style={{
+              // @ts-expect-error
+              left: to([barSpring.left], l => `${l}%`),
+              right: to([barSpring.right], r => `${r}%`),
+            }}
           >
             <div css={leftHandle}/>
             <div css={rightHandle}/>
@@ -288,7 +291,7 @@ const RangePicker = React.memo(
     }
   )
 )
-export default RangePicker
+export default Slider
 
 
 

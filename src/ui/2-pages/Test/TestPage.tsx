@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
@@ -15,7 +15,6 @@ import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/Check
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import { RangeU } from 'src/util/common/RangeU'
 import { useBool } from 'src/util/react-state/useBool'
-import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { useInterval } from 'src/util/react/useInterval'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -97,6 +96,9 @@ const TestPage = React.memo(
               </Link>
               <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>
                 <Button css={ButtonS.filledRectBigNormal}>Views: Ripple</Button>
+              </Link>
+              <Link to={RootRoute.test.sliderTest[fullAnySearchParams](searchParams)}>
+                <Button css={ButtonS.filledRectBigNormal}>Views: Slider</Button>
               </Link>
             </Items>
             

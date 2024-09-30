@@ -101,7 +101,8 @@ export namespace AppRoutes {
     
     viewsListItem1AddItem: buildPath('views-list-item-1-add-item'),
     viewsListItem2: buildPath('views-list-item-2'),
-    rippleTest: buildPath('ripple-test'),
+    rippleTest: buildPath('ripple'),
+    sliderTest: buildPath('slider'),
   })
   
   

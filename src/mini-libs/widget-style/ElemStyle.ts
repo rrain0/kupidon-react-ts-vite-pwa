@@ -1,31 +1,29 @@
-import { ObjectU } from 'src/util/common/ObjectU'
 import { TypeU } from 'src/util/common/TypeU'
 import RecordRo = TypeU.RecordRo
-import ObjectEntriesType = ObjectU.ObjectEntriesType
-import Puro = TypeU.Puro
 import RecordPuro = TypeU.RecordPuro
 
 
 
 
-/*
-  TODO update Typescript & vite & vite plugins & workbox & @types/node
-   Then check new Iterator types to iterate through object
 
- */
 
 
 export namespace ElemStyle {
   
-  const StateValues = ['hover', 'focus'] as const
-  type States = typeof StateValues[number]
   
-  const ElementNames = ['button', 'border'] as const
-  type Elements = typeof ElementNames[number]
+  
+  
+  type NonEmptyString = Exclude<string, ''>
+  
+  const StateValues = ['hover', 'focus'] as const
+  type States = Exclude<typeof StateValues[number], ''>
+  
+  const ElementNames = ['button'/* , 'border' */] as const
+  type Elements = Exclude<typeof ElementNames[number], ''>
   
   type BackgroundProp = ['background' | 'bg', string]
   type SizeProp = ['size' | 'sz', 'full' | string | number]
-  type Props = BackgroundProp[0] | SizeProp[0]
+  type Props = Exclude<BackgroundProp[0] | SizeProp[0], ''>
   
   type StateElemProp =
     | `${States}${Capitalize<Elements>}${Capitalize<Props>}`
@@ -36,107 +34,130 @@ export namespace ElemStyle {
   const myStyle0: RecordPuro<StateElemProp, string> = {
     bg: '#c0ffee',
     size: 'full',
+    buttonBg: 'red',
     hoverBg: 'green',
   }
   
-  /*
-  type BackgroundProp = ['background' | 'bg', string]
-  type SizeProp = ['size' | 'sz', 'full' | string]
+
   
   
   
-  export const StateValues = ['', 'hover', 'Hover', 'focus', 'Focus'] as const
-  export type States = typeof StateValues[number]
+  type PropTransformer = (value: string) => readonly [value: string, propMedia: string]
   
-  export type StateStyleProps = {
-    [`${StateValues[number]}${BackgroundProp[0]}`]: any
-  };
-  
-  const transformBackground = ([prop, value]: BackgroundProp) => {
-    return `background: ${value};`
+  const transformBackground: PropTransformer = (value) => {
+    return [`background: ${value};`, '']
   }
-  
-  const transformSize = ([prop, value]: SizeProp) => {
+  const transformSize: PropTransformer = (value) => {
     if (value === 'full') value = '100%'
-    return `width: ${value}; height: ${value};`
+    return [`width: ${value}; height: ${value};`, '']
   }
   
-  const transformProp = (propAndValue: ObjectEntriesType<StateStyleProps>) => {
-    const [prop, value] = propAndValue
-    if (prop === 'background') return transformBackground(propAndValue)
-    if (prop === 'bg') return transformBackground(propAndValue)
-    throw new Error(`Unknown [property, value]: ${propAndValue}`)
+  
+  const mapPropNameToTransformer: RecordPuro<string, PropTransformer> = {
+    'background': transformBackground,
+    'bg': transformBackground,
+    'size': transformSize,
+    'sz': transformSize,
   }
   
-  const transformElemProp = (propAndValue: ObjectEntriesType<ObjectStyleProps>) => {
-    const [prop, value] = propAndValue
+  const hoverableMedia = '(hover: hover) and (pointer: fine)'
+  
+  type StateTransformer = () => readonly [state: string, stateMedia: string]
+  /*
+  .class {
+    :focus {}
+    &[data-error] {}
   }
-  
-  const transformStateElemProp = (propAndValue: ObjectEntriesType<StateStyleProps>) => {
-    const [prop, value] = propAndValue
-    
-  }
-  
-  export const useStyle = (objectStyle: StateStyleProps): string => {
-  
+  @media (hover: hover) and (pointer: fine) {
+    .class {
+      :hover {}
+    }
   }
    */
-  
-  const transformBackground = ([prop, value]: readonly [string, string]): string => {
-    return `background: ${value};`
+  const transformHover: StateTransformer = () => {
+    return [':hover', hoverableMedia]
+  }
+  const transformError: StateTransformer = () => {
+    return ['[data-error]', '']
+  }
+  const transformAnyFocus: StateTransformer = () => {
+    return [':where(:active,:focus,:focus-visible)', '']
+  }
+  // TODO :hover must include media, but focus-visible not
+  const transformInFocus: StateTransformer = () => {
+    return [':where(:hover,:focus-visible)', '']
   }
   
-  const transformSize = ([prop, value]: readonly [string, string]): string => {
-    if (value === 'full') value = '100%'
-    return `width: ${value}; height: ${value};`
+  const mapStateNameToTransformer: RecordPuro<string, StateTransformer> = {
+    hover: transformHover,
+    error: transformError,
   }
   
-  const transformProp = (propAndValue: readonly [string, string]): string => {
-    const [prop, value] = propAndValue
-    if (prop === 'background') return transformBackground(propAndValue)
-    if (prop === 'Background') return transformBackground(propAndValue)
-    if (prop === 'bg') return transformBackground(propAndValue)
-    if (prop === 'Bg') return transformBackground(propAndValue)
-    if (prop === 'size') return transformSize(propAndValue)
-    if (prop === 'Size') return transformSize(propAndValue)
-    if (prop === 'sz') return transformSize(propAndValue)
-    if (prop === 'Sz') return transformSize(propAndValue)
-    throw new Error(`Unknown [property, value]: ${propAndValue}`)
-  }
-  
-  
-  
-  const transformElemProp = (propAndValue: readonly [string, string]): string => {
-    const [prop, value] = propAndValue
-    return transformProp(propAndValue)
-  }
-  
-  
-  
-  const hoverable = '@media (hover: hover) and (pointer: fine)'
-  const applyHover = (css: string) => `${hoverable}{ :hover { ${css} } }`
-  
-  const transformStateElemProp = (propAndValue: readonly [string, string]): string => {
-    const [prop, value] = propAndValue
-    if (prop.startsWith('Hover')) {
-      const propWithoutState = prop.slice('Hover'.length)
-      const css = transformElemProp([propWithoutState, value])
-      return applyHover(css)
+  type TransformStateElemProp = (propAndValue: readonly [string, string]) => string
+  const transformStateElemProp: TransformStateElemProp = (propAndValue) => {
+    const [stateElemProp, inputValue] = propAndValue
+    
+    let isFirstProp = true
+    const uncapitalaze = (p: string) => {
+      if (isFirstProp) {
+        isFirstProp = false
+        return p
+      }
+      return p[0].toLowerCase() + p.slice(1)
     }
-    if (prop.startsWith('hover')) {
-      const propWithoutState = prop.slice('hover'.length)
-      const css = transformElemProp([propWithoutState, value])
-      return applyHover(css)
+    
+    const [state, elemProp, stateMedia] = (() => {
+      const p = uncapitalaze(stateElemProp)
+      if (p.startsWith('hover')) {
+        return [':hover', p.slice('hover'.length), hoverableMedia]
+      }
+      return ['', stateElemProp, '']
+    })()
+    
+    const [elem, prop, elemMedia] = (() => {
+      const p = uncapitalaze(elemProp)
+      if (p.startsWith('frame')) {
+        return [`.frame${state}`, p.slice('frame'.length), '']
+      }
+      if (p.startsWith('box')) {
+        return [`.frame${state} > .box`, p.slice('box'.length), '']
+      }
+      return [`${state}`, elemProp, '']
+    })()
+    
+    const [value, propMedia] = (() => {
+      const p = uncapitalaze(prop)
+      const transformer = mapPropNameToTransformer[p]
+      if (!transformer) throw new Error(`Unknown [property, value]: ${propAndValue}`)
+      return transformer(inputValue)
+    })()
+    
+    let css = value
+    
+    if (elem) {
+      css = `&${elem} { ${css} }`
     }
-    return transformElemProp([prop, value])
+    
+    if (stateMedia) {
+      css = `@media ${stateMedia} { ${css} }`
+    }
+    if (elemMedia) {
+      css = `@media ${elemMedia} { ${css} }`
+    }
+    if (propMedia) {
+      css = `@media ${propMedia} { ${css} }`
+    }
+    
+    return css
   }
+  
   
   export const transformObjectStyle = (objectStyle: RecordRo<string, string>): string => {
     const parts: string[] = []
     Object.entries(objectStyle).forEach((propAndValue) => {
       parts.push(transformStateElemProp(propAndValue))
     })
-    return parts.join(' ')
+    return parts.join('\n')
   }
   
   const myStyle: Record<string, string> = {
