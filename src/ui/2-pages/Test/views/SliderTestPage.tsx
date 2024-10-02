@@ -61,7 +61,7 @@ const SliderBox = styled.div`
 
 
 const Slider1 = React.memo(() => {
-  const minMax = [-200, 200]
+  const minMax = [-200, 200] as const
   const [value, setValue] = useState(0)
   
   return (
@@ -79,7 +79,7 @@ const Slider1 = React.memo(() => {
 
 
 const Slider2 = React.memo(() => {
-  const minMax = [0, 2]
+  const minMax = [0, 2] as const
   const [value, setValue] = useState(1)
   
   const setProcessedValue = useCallback((value: number) => {
@@ -102,7 +102,7 @@ const Slider2 = React.memo(() => {
 
 
 const Slider3 = React.memo(() => {
-  const minMax = [0, 4]
+  const minMax = [0, 4] as const
   const [value, setValue] = useState(3)
   
   const setProcessedValue = useCallback((value: number) => {
@@ -125,7 +125,7 @@ const Slider3 = React.memo(() => {
 
 
 const Slider4 = React.memo(() => {
-  const minMax = [80, 250]
+  const minMax = [80, 250] as const
   const [value, setValue] = useState(187)
   
   const setProcessedValue = useCallback((value: number) => {

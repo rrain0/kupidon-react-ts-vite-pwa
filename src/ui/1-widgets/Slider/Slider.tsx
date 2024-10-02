@@ -13,9 +13,9 @@ import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import SetterOrUpdater = TypeU.SetterOrUpdater
-import NumRange = RangeU.NumRange
 import zeroBasedRange = RangeU.zeroBasedRange
+import Setter = TypeU.Setter
+import NumRangeRo = RangeU.NumRangeRo
 
 
 // Slider or Scale Picker
@@ -58,17 +58,17 @@ const dPxToDProgress = (dPx: number, trackW: number, tipW: number) => RangeU.map
   [0, (trackW - 2 * tipW)],
   [0, 100]
 )
-const dProgressToDValue = (dProgress: number, minMax: NumRange) => RangeU.map(
+const dProgressToDValue = (dProgress: number, minMax: NumRangeRo) => RangeU.map(
   dProgress,
   [0, 100],
   zeroBasedRange(minMax)
 )
-const progressToValue = (progress: number, minMax: NumRange) => RangeU.clamp(
+const progressToValue = (progress: number, minMax: NumRangeRo) => RangeU.clamp(
   minMax[0] + dProgressToDValue(progress, minMax),
   minMax
 )
 const progressToClampedProgress = (progress: number) => RangeU.clamp(progress, [0, 100])
-const valueToClampedValue = (value: number, minMax: NumRange) => RangeU.clamp(
+const valueToClampedValue = (value: number, minMax: NumRangeRo) => RangeU.clamp(
   value,
   minMax
 )
@@ -79,7 +79,7 @@ const progressToUiPercentRight = (progress: number, trackW: number): number => 1
 )
 
 
-const valueToProgress = (value: number, minMax: NumRange): number => RangeU.mapClamp(
+const valueToProgress = (value: number, minMax: NumRangeRo): number => RangeU.mapClamp(
   value, minMax, [0, 100]
 )
 
@@ -89,8 +89,8 @@ const valueToProgress = (value: number, minMax: NumRange): number => RangeU.mapC
 
 export type SliderExtraProps = {
   value: number
-  setValue: SetterOrUpdater<number>
-  minMax: NumRange
+  setValue: Setter<number>
+  minMax: NumRangeRo
 }
 
 
@@ -132,7 +132,6 @@ const Slider = React.memo(
       
       
       
-      const [barSpring, barSpringApi] = useSpring(() => ({ right: 0 }))
       const [shadowBarSpring, shadowBarSpringApi] = useSpring(() => ({ right: 0 }))
       
       const setValue = (value: number) => {
@@ -143,8 +142,8 @@ const Slider = React.memo(
       useLayoutEffect(() => {
         const progress = valueToProgress(outerValue, outerMinMax)
         const trackW = getTrackDimens().w
-        const uiPercent = progressToUiPercentRight(progress, trackW)
-        setBarRightPercent(uiPercent)
+        const uiPercentRight = progressToUiPercentRight(progress, trackW)
+        setBarRightPercent(uiPercentRight)
       }, [outerValue, ...outerMinMax])
       
       
@@ -220,7 +219,8 @@ const Slider = React.memo(
           <animated.div css={shadowBar}
             style={{
               // @ts-expect-error
-              display: isDragging ? 'flex' : 'none',
+              //display: isDragging ? 'flex' : 'none',
+              opacity: isDragging ? 1 : 0,
               right: to([shadowBarSpring.right], r => {
                 return `${Math.min(barRightPercent, r)}%`
               }),
@@ -234,11 +234,11 @@ const Slider = React.memo(
           <animated.div css={bar}
             style={{
               // @ts-expect-error
-              right: isDragging
-                ? to([shadowBarSpring.right], r => {
-                  return `${Math.max(barRightPercent, r)}%`
-                })
-                : `${barRightPercent}%`,
+              right: to([shadowBarSpring.right], r => {
+                console.log('isDragging, barRightPercent', isDragging, barRightPercent)
+                if (!isDragging) return `${barRightPercent}%`
+                return `${Math.max(barRightPercent, r)}%`
+              }),
               /* right: barRightPercent >= shadowBarSpring.right.get()
                 ? `${barRightPercent}%`
                 : to([shadowBarSpring.right], r => `${r}%`), */
