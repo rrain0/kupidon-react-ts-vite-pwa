@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { animated, to, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
+import { useElemRef } from 'src/util/react-state/useElemRef'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet.ts'
@@ -9,16 +10,15 @@ import { useAwaitMounting } from '@util/react/useAwaitMounting.ts'
 import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
-import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
+import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import PartialUndef = TypeU.PartialUndef
-import Mapper = TypeU.Mapper
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import NumRange = RangeU.NumRange
 import zeroBasedRange = RangeU.zeroBasedRange
 
 
+// Slider or Scale Picker
 
 
 /*
@@ -45,108 +45,107 @@ import zeroBasedRange = RangeU.zeroBasedRange
 
 
 
+// todo autocalculate as css prop
+const tipWidth = 21
 
-const tipWidth = 27
 
 
 
-export type RangePickerCustomProps = {
+
+
+const dPxToDProgress = (dPx: number, trackW: number, tipW: number) => RangeU.map(
+  dPx,
+  [0, (trackW - 2 * tipW)],
+  [0, 100]
+)
+const dProgressToDValue = (dProgress: number, minMax: NumRange) => RangeU.map(
+  dProgress,
+  [0, 100],
+  zeroBasedRange(minMax)
+)
+const progressToValue = (progress: number, minMax: NumRange) => RangeU.clamp(
+  minMax[0] + dProgressToDValue(progress, minMax),
+  minMax
+)
+const progressToClampedProgress = (progress: number) => RangeU.clamp(progress, [0, 100])
+const valueToClampedValue = (value: number, minMax: NumRange) => RangeU.clamp(
+  value,
+  minMax
+)
+const progressToUiPercentRight = (progress: number, trackW: number): number => 100 - RangeU.map(
+  progress,
+  [0, 100],
+  [100 * 2 * tipWidth / trackW, 100]
+)
+
+
+const valueToProgress = (value: number, minMax: NumRange): number => RangeU.mapClamp(
+  value, minMax, [0, 100]
+)
+
+
+
+
+
+export type SliderExtraProps = {
+  value: number
+  setValue: SetterOrUpdater<number>
   minMax: NumRange
-  range: NumRange
-  setRange: SetterOrUpdater<NumRange>
-} & PartialUndef<{
-  toDisplayedRange: Mapper<NumRange> // можно сделать ступенчатый прогресс
-}>
-export type RangePickerForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
-export type RangePickerRefElement = HTMLDivElement
-export type RangePickerProps = RangePickerCustomProps & RangePickerForwardRefProps
+}
 
+
+export type SliderRefElement = HTMLDivElement
+export type SliderProps = Omit<React.ComponentPropsWithoutRef<'div'>, 'children'> & SliderExtraProps
 
 
 const Slider = React.memo(
-  React.forwardRef<RangePickerRefElement, RangePickerProps>(
+  React.forwardRef<SliderRefElement, SliderProps>(
     (props, forwardedRef) => {
       const {
         minMax: outerMinMax,
-        range: outerRange,
-        setRange: setOuterRange,
-        toDisplayedRange,
+        value: outerValue,
+        setValue: setOuterValue,
         className,
         ...restProps
       } = props
       
-      const trackRef = useRef<RangePickerRefElement>(null)
+      const [trackRef, getTrack] = useElemRef<SliderRefElement>(null)
       useImperativeHandle(forwardedRef, () => trackRef.current!, [])
       
       const getTrackDimens = () => {
-        const trackProps = {
-          vpx: 0,
-          width: 0,
-        }
-        const track = trackRef.current
+        const track = getTrack()
         if (track) {
           const d = getViewProps(track)
-          trackProps.vpx = d.vpXFloat
-          trackProps.width = d.widthFloat
+          return { vpx: d.vpx, w: d.w }
         }
-        return trackProps
+        return { vpx: 0, w: 0 }
       }
-      
-      const [prevMinMax, setPrevMinMax] = useState(outerMinMax)
-      const [prevRange, setPrevRange] = useState(outerRange)
       
       const [getMinMax] = useAsRefGet(outerMinMax)
       
       const [isDragging, setIsDragging] = useState(false)
-      const [getActiveTip, setActiveTip] = useRefGetSet(null as 'left' | 'right' | null)
-      // % of bar handle values width
-      const [getStartProgress, setStartProgress] = useRefGetSet(0)
-      const [getCurrProgress, setCurrProgress] = useRefGetSet(0)
+      const [getDragStartProgress, setDragStartProgress] = useRefGetSet(0) // 0..100
+      const [getDragProgress, setDragProgress] = useRefGetSet(0) // any number in 0..100 units
       // todo add px distance between start & curr progress
       
-      const [getProgressRange, setProgressRange] = useRefGetSet<NumRange>(
-        rangeToProgress(outerRange, outerMinMax)
-      )
+      const [getValueProgress, setValueProgress] = useRefGetSet(0)
       
       
       
-      const [barSpring, barSpringApi] = useSpring(() => ({
-        left: 0,
-        right: 0,
-      }))
-      useLayoutEffect(() => {
-        const trackW = getTrackDimens().width
-        //console.log('trackW', trackW)
-        const uiPercent = progressToUiPercent(getProgressRange(), trackW)
-        barSpringApi.set({
-          left: uiPercent[0],
-          right: uiPercent[1],
-        })
-      }, [])
+      const [barSpring, barSpringApi] = useSpring(() => ({ right: 0 }))
+      const [shadowBarSpring, shadowBarSpringApi] = useSpring(() => ({ right: 0 }))
       
-      const [getRange, setRange] = useRefGetSet<NumRange>(outerRange)
-      const setAllRanges = (range: NumRange) => {
-        setRange(range)
-        setPrevRange(range)
-        setOuterRange(range)
+      const setValue = (value: number) => {
+        setOuterValue(value)
       }
       
-      
-      useEffect(() => {
-        if (outerMinMax !== prevMinMax || outerRange !== prevRange) {
-          setPrevMinMax(outerMinMax)
-          setPrevRange(outerRange)
-          setRange(outerRange)
-          const progress = rangeToProgress(outerRange, outerMinMax)
-          setProgressRange(progress)
-          const trackW = getTrackDimens().width
-          const uiPercent = progressToUiPercent(progress, trackW)
-          barSpringApi.set({
-            left: uiPercent[0],
-            right: uiPercent[1],
-          })
-        }
-      }, [outerRange, outerMinMax])
+      const [barRightPercent, setBarRightPercent] = useState(100)
+      useLayoutEffect(() => {
+        const progress = valueToProgress(outerValue, outerMinMax)
+        const trackW = getTrackDimens().w
+        const uiPercent = progressToUiPercentRight(progress, trackW)
+        setBarRightPercent(uiPercent)
+      }, [outerValue, ...outerMinMax])
       
       
       // noinspection JSVoidFunctionReturnValueUsed
@@ -160,95 +159,41 @@ const Slider = React.memo(
           } = gesture
           
           const minMax = getMinMax()
-          const { vpx: trackX, width: trackW } = getTrackDimens()
-          
-          const dPxToDProgress = (dPx: number) => RangeU.map(
-            dPx,
-            [0, (trackW - 2*tipWidth)],
-            [0, 100]
-          )
-          const dProgressToDValue = (dProgress: number) => RangeU.map(
-            dProgress,
-            [0, 100],
-            zeroBasedRange(minMax)
-          )
-          const progressToValue = (progress: number) => RangeU.clamp(
-            minMax[0] + dProgressToDValue(progress),
-            minMax
-          )
+          const { vpx: trackX, w: trackW } = getTrackDimens()
           
           if (first) {
-            setActiveTip(null)
-            setStartProgress(0)
-            setCurrProgress(0)
+            setDragStartProgress(0)
+            setDragProgress(0)
             setIsDragging(true)
             
-            const startProgressLeft = dPxToDProgress(vpx - (trackX + 1/2*tipWidth))
-            const startProgressRight = dPxToDProgress(vpx - (trackX + 3/2*tipWidth))
-            const [progressLeft, progressRight] = getProgressRange()
-            
-            
-            setActiveTip(
-              (startProgressLeft - progressLeft) <= (progressRight - startProgressRight)
-                ? 'left' : 'right'
+            const dragStartProgressRight = dPxToDProgress(
+              vpx - (trackX + 3 / 2 * tipWidth),
+              trackW,
+              tipWidth,
             )
-            
-            if (getActiveTip() === 'left') {
-              setStartProgress(startProgressLeft)
-            }
-            if (getActiveTip() === 'right') {
-              setStartProgress(startProgressRight)
-            }
+            setDragStartProgress(dragStartProgressRight)
           }
           if (active) {
+            const dProgress = dPxToDProgress(dx, trackW, tipWidth)
+            const dragProgress = getDragProgress() + dProgress
+            setDragProgress(dragProgress)
             
-            const dProgress = dPxToDProgress(dx)
-            setCurrProgress(getCurrProgress() + dProgress)
+            const valueProgressRight = getDragStartProgress() + getDragProgress()
+            const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
+            setValueProgress(valueProgressRightClamped)
             
-            if (getActiveTip() === 'left') {
-              const [, progressRight] = getProgressRange()
-              const progressLeft = RangeU.clamp(
-                getStartProgress() + getCurrProgress(),
-                [0, progressRight]
-              )
-              setProgressRange([progressLeft, progressRight])
-              
-              const [, rangeR] = getRange()
-              const rangeL = RangeU.clamp(
-                progressToValue(progressLeft),
-                [minMax[0], rangeR]
-              )
-              setAllRanges([rangeL, rangeR])
-            }
-            if (getActiveTip() === 'right') {
-              const [progressLeft] = getProgressRange()
-              const progressRight = RangeU.clamp(
-                getStartProgress() + getCurrProgress(),
-                [progressLeft, 100]
-              )
-              setProgressRange([progressLeft, progressRight])
-              
-              const [rangeL] = getRange()
-              const rangeR = RangeU.clamp(
-                progressToValue(progressRight),
-                [rangeL, minMax[1]]
-              )
-              setAllRanges([rangeL, rangeR])
-            }
+            const valueRight = progressToValue(valueProgressRightClamped, minMax)
+            const valueRightClamped = valueToClampedValue(valueRight, minMax)
+            setValue(valueRightClamped)
             
-            const uiPercent = progressToUiPercent(getProgressRange(), trackW)
-            barSpringApi.set({
-              left: uiPercent[0],
-              right: uiPercent[1],
-            })
-            
+            const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
+            shadowBarSpringApi.set({ right: uiPercentRight })
           }
           if (last) {
             setIsDragging(false)
           }
         }
       ) as () => ReactDOMAttributes
-      
       
       
       
@@ -259,40 +204,53 @@ const Slider = React.memo(
       useNoSelect(isDragging)
       
       
-      
-      const trackProps = {
-        className: clsx(className /* ScrollbarVerticalStyle.El.track.name */),
-        /* [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging), */
-        ...restProps,
-        ref: trackRef,
-      }
-      
-      
+      //console.log('isDragging, barRightPercent', isDragging, barRightPercent)
       
       
       return (
         <div css={trackStyle}
-          {...trackProps}
+          className={clsx(className /* ScrollbarVerticalStyle.El.track.name */)}
+          /* {...{ [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging) }} */
+          // TODO combine handlers from restProps and onTrackDrag()
+          {...restProps}
           {...onTrackDrag()}
           ref={trackRef}
         >
+          
+          <animated.div css={shadowBar}
+            style={{
+              // @ts-expect-error
+              display: isDragging ? 'flex' : 'none',
+              right: to([shadowBarSpring.right], r => {
+                return `${Math.min(barRightPercent, r)}%`
+              }),
+              /* right: barRightPercent >= shadowBarSpring.right.get()
+                ? to([shadowBarSpring.right], r => `${r}%`)
+                : `${barRightPercent}%`, */
+              //zIndex: barRightPercent >= shadowBarSpring.right.get() ? 'auto' : 1,
+            }}
+          />
+          
           <animated.div css={bar}
             style={{
               // @ts-expect-error
-              left: to([barSpring.left], l => `${l}%`),
-              right: to([barSpring.right], r => `${r}%`),
+              right: isDragging
+                ? to([shadowBarSpring.right], r => {
+                  return `${Math.max(barRightPercent, r)}%`
+                })
+                : `${barRightPercent}%`,
+              /* right: barRightPercent >= shadowBarSpring.right.get()
+                ? `${barRightPercent}%`
+                : to([shadowBarSpring.right], r => `${r}%`), */
             }}
-          >
-            <div css={leftHandle}/>
-            <div css={rightHandle}/>
-          </animated.div>
+          />
+          
         </div>
       )
     }
   )
 )
 export default Slider
-
 
 
 const trackStyle = (t: AppTheme.Theme) => css`
@@ -310,53 +268,20 @@ const bar = (t: AppTheme.Theme) => css`
   height: 100%;
   background: ${t.rangePicker.barBg[0]};
   border-radius: inherit;
+  left: 0;
   
-  // manipulate left & right to display actual range data
-  left: 0%;
-  right: 0%;
+  // manipulate right to display actual value
+  right: 100%;
+`
+
+const shadowBar = (t: AppTheme.Theme) => css`
+  position: absolute;
+  height: 100%;
+  background: #00000022;
+  border-radius: inherit;
+  left: 0;
   
-  display: grid;
-  grid: 'lHandle . rHandle' 100% / auto 1fr auto;
-  padding: 5px;
-`
-const leftHandle = (t: AppTheme.Theme) => css`
-  grid-area: lHandle;
-  height: 32px;
-  width: 19px;
-  border-radius: 16px 3px 3px 16px;
-  background: ${t.rangePicker.handleBg[0]};
-`
-const rightHandle = (t: AppTheme.Theme) => css`
-  grid-area: rHandle;
-  height: 32px;
-  width: 19px;
-  border-radius: 3px 16px 16px 3px;
-  background: ${t.rangePicker.handleBg[0]};
+  // manipulate right to display actual value
+  right: 100%;
 `
 
-
-
-
-const progressToUiPercent = (progress: NumRange, trackW: number): NumRange => [
-  RangeU.map(
-    progress[0],
-    [0, 100],
-    [0, 100 * (trackW - 2 * tipWidth) / trackW ]
-  ),
-  100 - RangeU.map(
-    progress[1],
-    [0, 100],
-    [100 * 2 * tipWidth / trackW, 100]
-  ),
-]
-
-
-const rangeToProgress = (range: NumRange, minMax: NumRange): NumRange => {
-  const progressLeft = RangeU.mapClamp(
-    range[0], minMax, [0, 100]
-  )
-  const progressRight = RangeU.mapClamp(
-    range[1], minMax, [0, 100], [progressLeft, 100]
-  )
-  return [progressLeft, progressRight]
-}

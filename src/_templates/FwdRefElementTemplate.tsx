@@ -10,20 +10,19 @@ import colC = EmotionCommon.colC
 
 
 
+type ComponentExtraProps = Puro<{
+  // custom props
+  isError: boolean
+}> & Children
 
-type ComponentProps =
-  React.ComponentPropsWithoutRef<'div'>
-  & Children
-  & Puro<{
-    // custom props
-    isError: boolean
-  }>
+type ComponentRefElement = HTMLDivElement
+type ComponentProps = React.ComponentPropsWithoutRef<'div'> & ComponentExtraProps
 
 
 
 
 const Component = React.memo(
-  React.forwardRef<HTMLDivElement, ComponentProps>(
+  React.forwardRef<ComponentRefElement, ComponentProps>(
     (props, forwardedRef) => {
       const {
         children,
@@ -31,7 +30,7 @@ const Component = React.memo(
       } = props
       
       
-      const elemRef = useRef<HTMLDivElement>(null)
+      const elemRef = useRef<ComponentRefElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       

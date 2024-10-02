@@ -126,6 +126,7 @@ export class ViewProps {
   }
   get vpXFloat() { return this.clientXFloat }
   get vpLeftFloat() { return this.clientXFloat }
+  get vpx() { return this.clientXFloat }
   get x() { return this.clientXFloat }
   
   // верхний край viewport <---> внешняя граница верхнего бордера элемента
@@ -138,6 +139,7 @@ export class ViewProps {
   }
   get vpYFloat() { return this.clientYFloat }
   get vpTopFloat() { return this.clientYFloat }
+  get vpy() { return this.clientYFloat }
   get y() { return this.clientYFloat }
   
   get xy() { return { x: this.x, y: this.y } }

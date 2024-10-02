@@ -18,20 +18,18 @@ const ExtensibleComponent = styled.button`
 `
 
 
+type ComponentExtraProps = Puro<{
+  isError: boolean
+}> & Children
 
-type ComponentProps =
-  React.ComponentPropsWithoutRef<typeof ExtensibleComponent>
-  & Children
-  & Puro<{
-    // custom props
-    isError: boolean
-  }>
+type ComponentRefElement = HTMLButtonElement
+type ComponentProps = React.ComponentPropsWithoutRef<typeof ExtensibleComponent> & ComponentExtraProps
 
 
 
 
 const Component = React.memo(
-  React.forwardRef<HTMLButtonElement, ComponentProps>(
+  React.forwardRef<ComponentRefElement, ComponentProps>(
     (props, forwardedRef) => {
       const {
         children,
@@ -39,7 +37,7 @@ const Component = React.memo(
       } = props
       
       
-      const elemRef = useRef<HTMLButtonElement>(null)
+      const elemRef = useRef<ComponentRefElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
