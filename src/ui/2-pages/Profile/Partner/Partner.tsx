@@ -68,10 +68,10 @@ React.memo(
         
         <Card3>
           
-          <ValidationWrap {...props.validationProps}
+          {/* <ValidationWrap {...props.validationProps}
             fieldName='partnerAge'
             render={validProps => <PartnerAgeOption {...validProps}/>}
-          />
+          /> */}
           
           <ValidationWrap {...props.validationProps}
             fieldName='partnerHeight'

@@ -31,45 +31,53 @@ type ModalInputProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
 
 const ModalInput = React.memo(
   React.forwardRef<HTMLInputElement, ModalInputProps>(
-  (props, forwardedRef) => {
-    const {
-      isOpen, onClose, onClear, title,
-      ...restProps
-    } = props
-    
-    //console.log('title', title)
-    
-    const actionText = useUiValues(ActionUiText)
-    
-    if (isOpen) return (
-      <ModalPortal>
-        <UserActionsConsumer>
-          <Modal css={ModalElement.modalStyle} onClick={onClose}>
-            <UserActionsConsumer>
-              <Card2 css={ModalElement.card2Style}>
-                <ItemLabel>{title}</ItemLabel>
-                <Input css={InputStyle.outlinedRectSmallNormal}
-                  {...restProps}
-                  ref={forwardedRef}
-                />
-                <ModalElement.DialogButtons>
-                  {onClear && <Button css={ButtonS.textRoundedNormalNormal}
-                    onClick={onClear}
-                    children={actionText.clear}
-                  />}
-                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
-                    onClick={onClose}
-                    children={actionText.ok}
+    (props, forwardedRef) => {
+      const {
+        isOpen, onClose, onClear, title,
+        ...restProps
+      } = props
+      
+      //console.log('title', title)
+      
+      const actionText = useUiValues(ActionUiText)
+      
+      if (isOpen) return (
+        <ModalPortal>
+          <UserActionsConsumer>
+            <Modal css={ModalElement.modalStyle} onClick={onClose}>
+              <UserActionsConsumer>
+                <Card2 css={ModalElement.card2Style}>
+                  <ItemLabel>{title}</ItemLabel>
+                  <Input css={InputStyle.outlinedRectSmallNormal}
+                    {...restProps}
+                    ref={forwardedRef}
                   />
-                </ModalElement.DialogButtons>
-              </Card2>
-            </UserActionsConsumer>
-          </Modal>
-        </UserActionsConsumer>
-      </ModalPortal>
-    )
-    return undefined
-  })
+                  <ModalElement.DialogButtons>
+                    
+                    {onClear && (
+                      <Button css={ButtonS.textRoundedNormalNormal}
+                        onClick={onClear}
+                      >
+                        {actionText.clear}
+                      </Button>
+                    )}
+                    
+                    <Button css={ButtonS.textUppercaseRoundedNormalNormal}
+                      onClick={onClose}
+                    >
+                      {actionText.ok}
+                    </Button>
+                    
+                  </ModalElement.DialogButtons>
+                </Card2>
+              </UserActionsConsumer>
+            </Modal>
+          </UserActionsConsumer>
+        </ModalPortal>
+      )
+      return undefined
+    }
+  )
 )
 export default ModalInput
 

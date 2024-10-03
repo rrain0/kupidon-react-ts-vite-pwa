@@ -98,6 +98,7 @@ export type SliderExtraProps = Ro<{
   onValueDragStart: Callback1<number>
   onValueDragging: Callback1<number>
   onValueDragEnd: Callback1<number>
+  isHideBar: boolean
 }>
 
 
@@ -115,6 +116,7 @@ const Slider = React.memo(
         onValueDragStart,
         onValueDragging,
         onValueDragEnd,
+        isHideBar,
         className,
         ...restProps
       } = props
@@ -145,8 +147,9 @@ const Slider = React.memo(
       
       
       
-      const [shadowBarSpring, shadowBarSpringApi] = useSpring(() => ({ right: 0 }))
-      const [barSpring, barSpringApi] = useSpring(() => ({ right: 0 }))
+      const shadowBarRightSpring = useSpringValue(0)
+      const barRightSpring = useSpringValue(0)
+      
       
       const [getBarRightPercent, setBarRightPercent] = useRefGetSet(100)
       
@@ -155,10 +158,10 @@ const Slider = React.memo(
         const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
         
         const shadowBarRight = Math.min(getBarRightPercent(), uiPercentRight)
-        shadowBarSpringApi.set({ right: shadowBarRight })
+        shadowBarRightSpring.set(shadowBarRight)
         
         const barRight = isDragging ? Math.max(getBarRightPercent(), uiPercentRight) : getBarRightPercent()
-        barSpringApi.set({ right: barRight })
+        barRightSpring.set(barRight)
       })
       
       useLayoutEffect(() => {
@@ -246,14 +249,15 @@ const Slider = React.memo(
             style={{
               // @ts-expect-error
               display: isDragging ? 'flex' : 'none',
-              right: to([shadowBarSpring.right], r => `${r}%`),
+              right: to([shadowBarRightSpring], r => `${r}%`),
             }}
           />
           
           <animated.div css={bar}
             style={{
               // @ts-expect-error
-              right: to([barSpring.right], r => `${r}%`),
+              display: !isHideBar ? 'flex' : 'none',
+              right: to([barRightSpring], r => `${r}%`),
             }}
           />
           

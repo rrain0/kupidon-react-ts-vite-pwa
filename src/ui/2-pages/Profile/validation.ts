@@ -118,7 +118,7 @@ export namespace ProfilePageValidation {
     birthDate: string
     gender: GenderOptionValues
     aboutMe: string
-    height: string
+    height: number | null
     education: EducationOptionValues
     job: JobOptionValues
     partnerGender: PartnerGenderOptionValues
@@ -148,12 +148,12 @@ export namespace ProfilePageValidation {
     birthDate: '',
     gender: '',
     aboutMe: '',
-    height: '',
+    height: null,
     education: '',
     job: '',
     partnerGender: '',
     partnerCommunicationCharacteristics: [],
-    photos: ArrayU.arrOfIndices(6).map(i=>({
+    photos: ArrayU.arrOfIndices(6).map(i => ({
       ...DefaultProfilePhoto,
       type: 'remote',
       id: uuid.v4(),
@@ -188,8 +188,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['name','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['name'],FormValues['initialValues']]
+    [['name', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['name'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.name) return new PartialFailureData({
         code: 'name-not-changed' satisfies FailureCode,
@@ -218,10 +218,10 @@ export namespace ProfilePageValidation {
     
     
     
-    [['birthDate','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['birthDate'],FormValues['initialValues']]
+    [['birthDate', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['birthDate'], FormValues['initialValues']]
       if (v===ivs.birthDate
-        || DateTime.eqFrom_yyyy_MM_dd(v,ivs.birthDate)
+        || DateTime.eqFrom_yyyy_MM_dd(v, ivs.birthDate)
       )
         return new PartialFailureData({
           code: 'birth-date-not-changed' satisfies FailureCode,
@@ -272,8 +272,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['gender','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['gender'],FormValues['initialValues']]
+    [['gender', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['gender'], FormValues['initialValues']]
       if (v===ivs.gender) return new PartialFailureData({
         code: 'gender-not-changed' satisfies FailureCode,
         msg: 'Gender is not changed',
@@ -293,8 +293,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['aboutMe','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['aboutMe'],FormValues['initialValues']]
+    [['aboutMe', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['aboutMe'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.aboutMe) return new PartialFailureData({
         code: 'about-me-not-changed' satisfies FailureCode,
@@ -314,10 +314,10 @@ export namespace ProfilePageValidation {
     
     
     
-    [['height','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['height'],FormValues['initialValues']]
+    [['height', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['height'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.height) return new PartialFailureData({
+      if (v === ivs.height) return new PartialFailureData({
         code: 'height-not-changed' satisfies FailureCode,
         msg: 'Field "Height" is not changed',
         type: 'initial',
@@ -328,9 +328,9 @@ export namespace ProfilePageValidation {
     
     
     [['education', 'initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['education'],FormValues['initialValues']]
+      const [v, ivs] = values as [FormValues['education'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.education) return new PartialFailureData({
+      if (v === ivs.education) return new PartialFailureData({
         code: 'education-not-changed' satisfies FailureCode,
         msg: 'Field "Education" is not changed',
         type: 'initial',
@@ -341,7 +341,7 @@ export namespace ProfilePageValidation {
     
     
     [['job', 'initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['job'],FormValues['initialValues']]
+      const [v, ivs] = values as [FormValues['job'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.job) return new PartialFailureData({
         code: 'job-not-changed' satisfies FailureCode,
@@ -353,8 +353,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerGender','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['partnerGender'],FormValues['initialValues']]
+    [['partnerGender', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['partnerGender'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v===ivs.partnerGender) return new PartialFailureData({
         code: 'partner-gender-not-changed' satisfies FailureCode,
@@ -366,8 +366,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerCommunicationCharacteristics','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['partnerCommunicationCharacteristics'],FormValues['initialValues']]
+    [['partnerCommunicationCharacteristics', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['partnerCommunicationCharacteristics'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (ArrayU.eqAsSet(v, ivs.partnerCommunicationCharacteristics)) return new PartialFailureData({
         code: 'partner-communication-characteristics-not-changed' satisfies FailureCode,
@@ -379,9 +379,9 @@ export namespace ProfilePageValidation {
     
     
     
-    [['photos','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['photos'],FormValues['initialValues']]
-      if (v.every((it,i)=>photosComparator(it,ivs.photos[i])))
+    [['photos', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['photos'], FormValues['initialValues']]
+      if (v.every((it, i) => photosComparator(it, ivs.photos[i])))
         return new PartialFailureData({
           code: 'photos-not-changed' satisfies FailureCode,
           msg: 'Photos are not changed',
@@ -392,8 +392,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerAge','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['partnerAge'],FormValues['initialValues']]
+    [['partnerAge', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['partnerAge'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (ArrayU.eq(v, ivs.partnerAge)) return new PartialFailureData({
         code: 'partner-age-not-changed' satisfies FailureCode,
@@ -405,8 +405,8 @@ export namespace ProfilePageValidation {
     
     
     
-    [['partnerHeight','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['partnerHeight'],FormValues['initialValues']]
+    [['partnerHeight', 'initialValues'], (values) => {
+      const [v, ivs] = values as [FormValues['partnerHeight'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (ArrayU.eq(v, ivs.partnerHeight)) return new PartialFailureData({
         code: 'partner-height-not-changed' satisfies FailureCode,
@@ -440,7 +440,7 @@ export namespace ProfilePageValidation {
     [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v) {
-        console.log('Unknown error:',JSON.stringify(v.error))
+        console.log('Unknown error:', JSON.stringify(v.error))
         return new PartialFailureData({
           code: 'unknown-error' satisfies FailureCode,
           msg: 'Unknown Error',

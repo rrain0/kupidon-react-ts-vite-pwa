@@ -26,102 +26,104 @@ const overlayName = 'partnerAge'
 
 
 
-const PartnerAgeOption =
-React.memo(
-(props: ValidationWrapRenderProps<UserValues['partnerAge']>) => {
-  const optionText = useUiValues(OptionUiText)
-  const titleText = useUiValues(TitleUiText)
-  
-  const text = {
-    any: optionText.any.toLowerCase(),
-    from: optionText.from.toLowerCase(),
-    to: optionText.to.toLowerCase(),
-    yearsOld: optionText.yearsOld.toLowerCase(),
-  }
-  
-  
-  /* const partnerAgeOptions = useMemo(
-    ()=>[
-      {
-        value: '18_TO_25',
-        text: `18-25 ${text.yearsOld}`,
-      },{
-        value: '25_TO_30',
-        text: `25-30 ${text.yearsOld}`,
-      },{
-        value: '30_TO_35',
-        text: `30-35 ${text.yearsOld}`,
-      },{
-        value: '35_TO_40',
-        text: `35-40 ${text.yearsOld}`,
-      },{
-        value: '40_MORE',
-        text: `40+ ${text.yearsOld}`,
-      },{
-        value: '',
-        text: text.notSelected,
-      }
-    ] satisfies PartnerAgeUiOptions,
-    [text]
-  ) */
-  
-  
-  
-  // props.value
-  const [ageRange, setAgeRange] = useState<NumRangeEndNullable>([18, null])
-  const [widgetRange, setWidgetRange] = useState<NumRange>(
-    () => mapDataRangeToWidgetRange(ageRange)
-  )
-  
-  useStateMapperSync(
-    ageRange, widgetRange,
-    setAgeRange, setWidgetRange,
-    (w, h) => ReactU.arrMerge(
-      h, w,
-      mapWidgetRangeToDataRange(w), mapDataRangeToWidgetRange(h)
-    ),
-    (h, w) => ReactU.arrMerge(
-      w, h,
-      mapDataRangeToWidgetRange(h), mapWidgetRangeToDataRange(w)
+const PartnerAgeOption = React.memo(
+  (/* props: ValidationWrapRenderProps<UserValues['partnerAge']> */) => {
+    const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
+    
+    const text = {
+      any: optionText.any.toLowerCase(),
+      from: optionText.from.toLowerCase(),
+      to: optionText.to.toLowerCase(),
+      yearsOld: optionText.yearsOld.toLowerCase(),
+    }
+    
+    
+    /* const partnerAgeOptions = useMemo(
+      ()=>[
+        {
+          value: '18_TO_25',
+          text: `18-25 ${text.yearsOld}`,
+        },{
+          value: '25_TO_30',
+          text: `25-30 ${text.yearsOld}`,
+        },{
+          value: '30_TO_35',
+          text: `30-35 ${text.yearsOld}`,
+        },{
+          value: '35_TO_40',
+          text: `35-40 ${text.yearsOld}`,
+        },{
+          value: '40_MORE',
+          text: `40+ ${text.yearsOld}`,
+        },{
+          value: '',
+          text: text.notSelected,
+        }
+      ] satisfies PartnerAgeUiOptions,
+      [text]
+    ) */
+    
+    
+    
+    // props.value
+    const [ageRange, setAgeRange] = useState<NumRangeEndNullable>([18, null])
+    const [widgetRange, setWidgetRange] = useState<NumRange>(
+      () => mapDataRangeToWidgetRange(ageRange)
     )
-  )
-  
-  const textValue = function(){
-    const [from, to] = ageRange
-    if (from===null && to===null) return text.any
-    if (from===null) return `${text.to} ${to} ${text.yearsOld}`
-    if (to===null) return `${from}+ ${text.yearsOld}`
-    if (from===to) return `${from} ${text.yearsOld}`
-    return `${from} - ${to} ${text.yearsOld}`
-  }()
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  
-  
-  return <>
-    <OptionItem
-      icon={<HourglassGradIc />}
-      title={titleText.partnerAge}
-      value={textValue}
-      onClick={open}
-    />
+    
+    useStateMapperSync(
+      ageRange, widgetRange,
+      setAgeRange, setWidgetRange,
+      (w, h) => ReactU.arrMerge(
+        h, w,
+        mapWidgetRangeToDataRange(w), mapDataRangeToWidgetRange(h)
+      ),
+      (h, w) => ReactU.arrMerge(
+        w, h,
+        mapDataRangeToWidgetRange(h), mapWidgetRangeToDataRange(w)
+      )
+    )
+    
+    const textValue = function() {
+      const [from, to] = ageRange
+      if (from === null && to === null) return text.any
+      if (from === null) return `${text.to} ${to} ${text.yearsOld}`
+      if (to === null) return `${from}+ ${text.yearsOld}`
+      if (from === to) return `${from} ${text.yearsOld}`
+      return `${from} - ${to} ${text.yearsOld}`
+    }()
     
     
-    <ModalRangePicker
-      isOpen={isOpen}
-      close={close}
-      title={titleText.partnerAge}
-      text={textValue}
-      
-      range={widgetRange}
-      setRange={setWidgetRange}
-      minMax={ageMinMax}
-    />
     
-  </>
-})
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    
+    return (
+      <>
+        <OptionItem
+          icon={<HourglassGradIc />}
+          title={titleText.partnerAge}
+          value={textValue}
+          onClick={open}
+        />
+        
+        
+        <ModalRangePicker
+          isOpen={isOpen}
+          close={close}
+          title={titleText.partnerAge}
+          text={textValue}
+          
+          range={widgetRange}
+          setRange={setWidgetRange}
+          minMax={ageMinMax}
+        />
+        
+      </>
+    )
+  }
+)
 export default PartnerAgeOption
 
 

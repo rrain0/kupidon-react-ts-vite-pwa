@@ -301,6 +301,7 @@ export default [
     },*/
     rules: {
       'jsx-a11y/tabindex-no-positive': 'off',
+      'jsx-a11y/no-autofocus': 'off',
     },
   },
   

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import { Hs } from 'src/ui/0-elements/basic-elements/Hs'
+import PartnerAgeOption from 'src/ui/2-pages/Profile/Partner/options/PartnerAgeOption'
 import ProfileHasKidsOption from 'src/ui/2-pages/Profile/Profile/options/ProfileHasKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/Profile/options/ProfileLangsOption'
 import ProfileMeetingPurposeOption
@@ -55,7 +55,6 @@ import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
-import Txt = EmotionCommon.Txt
 
 
 
@@ -221,6 +220,9 @@ const Profile = React.memo(
                   fieldName="partnerGender"
                   render={validProps => <ProfileImLookingForOption {...validProps}/>}
                 />
+                
+                <PartnerAgeOption />
+                
               
               </Card3>
               
