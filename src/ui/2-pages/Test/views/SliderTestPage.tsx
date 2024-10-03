@@ -63,15 +63,26 @@ const SliderBox = styled.div`
 const Slider1 = React.memo(() => {
   const minMax = [-200, 200] as const
   const [value, setValue] = useState(0)
+  const [endValue, setEndValue] = useState(0)
+  
+  const onValueDragEnd = useCallback((value: number) => {
+    setEndValue(value)
+  }, [])
   
   return (
     <>
       <div>Value is not rounded</div>
       <div>minMax: {JSON.stringify(minMax, undefined, 2)}</div>
       <div>immediate value: {value}</div>
+      <div>end value: {endValue}</div>
       
       <SliderBox>
-        <Slider minMax={minMax} value={value} setValue={setValue}/>
+        <Slider
+          value={value}
+          setValue={setValue}
+          minMax={minMax}
+          onValueDragEnd={onValueDragEnd}
+        />
       </SliderBox>
     </>
   )
@@ -81,10 +92,18 @@ const Slider1 = React.memo(() => {
 const Slider2 = React.memo(() => {
   const minMax = [0, 2] as const
   const [value, setValue] = useState(1)
+  const [endValue, setEndValue] = useState(0)
   
-  const setProcessedValue = useCallback((value: number) => {
-    const v = Math.round(value)
-    setValue(v)
+  const processValue = useCallback((value: number) => {
+    return Math.round(value)
+  }, [])
+  
+  const onValue = useCallback((value: number) => {
+    setValue(processValue(value))
+  }, [])
+  
+  const onValueDragEnd = useCallback((value: number) => {
+    setEndValue(processValue(value))
   }, [])
   
   return (
@@ -92,9 +111,15 @@ const Slider2 = React.memo(() => {
       <div>Value is rounded to int</div>
       <div>minMax: {JSON.stringify(minMax, undefined, 2)}</div>
       <div>value: {value}</div>
+      <div>end value: {endValue}</div>
       
       <SliderBox>
-        <Slider minMax={minMax} value={value} setValue={setProcessedValue}/>
+        <Slider
+          value={value}
+          setValue={onValue}
+          minMax={minMax}
+          onValueDragEnd={onValueDragEnd}
+        />
       </SliderBox>
     </>
   )
@@ -104,10 +129,18 @@ const Slider2 = React.memo(() => {
 const Slider3 = React.memo(() => {
   const minMax = [0, 4] as const
   const [value, setValue] = useState(3)
+  const [endValue, setEndValue] = useState(0)
   
-  const setProcessedValue = useCallback((value: number) => {
-    const v = Math.round(value)
-    setValue(v)
+  const processValue = useCallback((value: number) => {
+    return Math.round(value)
+  }, [])
+  
+  const onValue = useCallback((value: number) => {
+    setValue(processValue(value))
+  }, [])
+  
+  const onValueDragEnd = useCallback((value: number) => {
+    setEndValue(processValue(value))
   }, [])
   
   return (
@@ -115,9 +148,15 @@ const Slider3 = React.memo(() => {
       <div>Value is rounded to int</div>
       <div>minMax: {JSON.stringify(minMax, undefined, 2)}</div>
       <div>value: {value}</div>
+      <div>end value: {endValue}</div>
       
       <SliderBox>
-        <Slider minMax={minMax} value={value} setValue={setProcessedValue}/>
+        <Slider
+          value={value}
+          setValue={onValue}
+          minMax={minMax}
+          onValueDragEnd={onValueDragEnd}
+        />
       </SliderBox>
     </>
   )
@@ -127,10 +166,18 @@ const Slider3 = React.memo(() => {
 const Slider4 = React.memo(() => {
   const minMax = [80, 250] as const
   const [value, setValue] = useState(187)
+  const [endValue, setEndValue] = useState(0)
   
-  const setProcessedValue = useCallback((value: number) => {
-    const v = Math.round(value)
-    setValue(v)
+  const processValue = useCallback((value: number) => {
+    return Math.round(value)
+  }, [])
+  
+  const onValue = useCallback((value: number) => {
+    setValue(processValue(value))
+  }, [])
+  
+  const onValueDragEnd = useCallback((value: number) => {
+    setEndValue(processValue(value))
   }, [])
   
   return (
@@ -138,9 +185,15 @@ const Slider4 = React.memo(() => {
       <div>Value is rounded to int</div>
       <div>minMax: {JSON.stringify(minMax, undefined, 2)}</div>
       <div>value: {value}</div>
+      <div>end value: {endValue}</div>
       
       <SliderBox>
-        <Slider minMax={minMax} value={value} setValue={setProcessedValue}/>
+        <Slider
+          value={value}
+          setValue={onValue}
+          minMax={minMax}
+          onValueDragEnd={onValueDragEnd}
+        />
       </SliderBox>
     </>
   )

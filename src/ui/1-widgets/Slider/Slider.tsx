@@ -16,6 +16,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import zeroBasedRange = RangeU.zeroBasedRange
 import Setter = TypeU.Setter
 import NumRangeRo = RangeU.NumRangeRo
+import Callback1 = TypeU.Callback1
 
 
 // Slider or Scale Picker
@@ -91,6 +92,9 @@ export type SliderExtraProps = {
   value: number
   setValue: Setter<number>
   minMax: NumRangeRo
+  onValueDragStart?: Callback1<number> | undefined
+  onValueDragging?: Callback1<number> | undefined
+  onValueDragEnd?: Callback1<number> | undefined
 }
 
 
@@ -102,9 +106,12 @@ const Slider = React.memo(
   React.forwardRef<SliderRefElement, SliderProps>(
     (props, forwardedRef) => {
       const {
-        minMax: outerMinMax,
         value: outerValue,
         setValue: setOuterValue,
+        minMax: outerMinMax,
+        onValueDragStart,
+        onValueDragging,
+        onValueDragEnd,
         className,
         ...restProps
       } = props
@@ -122,6 +129,9 @@ const Slider = React.memo(
       }
       
       const [getMinMax] = useAsRefGet(outerMinMax)
+      const [getOnValueDragStart] = useAsRefGet(onValueDragStart)
+      const [getOnValueDragging] = useAsRefGet(onValueDragging)
+      const [getOnValueDragEnd] = useAsRefGet(onValueDragEnd)
       
       const [isDragging, setIsDragging] = useState(false)
       const [getDragStartProgress, setDragStartProgress] = useRefGetSet(0) // 0..100
@@ -133,10 +143,6 @@ const Slider = React.memo(
       
       
       const [shadowBarSpring, shadowBarSpringApi] = useSpring(() => ({ right: 0 }))
-      
-      const setValue = (value: number) => {
-        setOuterValue(value)
-      }
       
       const [barRightPercent, setBarRightPercent] = useState(100)
       useLayoutEffect(() => {
@@ -172,24 +178,28 @@ const Slider = React.memo(
             )
             setDragStartProgress(dragStartProgressRight)
           }
-          if (active) {
-            const dProgress = dPxToDProgress(dx, trackW, tipWidth)
-            const dragProgress = getDragProgress() + dProgress
-            setDragProgress(dragProgress)
-            
-            const valueProgressRight = getDragStartProgress() + getDragProgress()
-            const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
-            setValueProgress(valueProgressRightClamped)
-            
-            const valueRight = progressToValue(valueProgressRightClamped, minMax)
-            const valueRightClamped = valueToClampedValue(valueRight, minMax)
-            setValue(valueRightClamped)
-            
-            const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
-            shadowBarSpringApi.set({ right: uiPercentRight })
-          }
+          
+          const dProgress = dPxToDProgress(dx, trackW, tipWidth)
+          const dragProgress = getDragProgress() + dProgress
+          setDragProgress(dragProgress)
+          
+          const valueProgressRight = getDragStartProgress() + getDragProgress()
+          const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
+          setValueProgress(valueProgressRightClamped)
+          
+          const valueRight = progressToValue(valueProgressRightClamped, minMax)
+          const valueRightClamped = valueToClampedValue(valueRight, minMax)
+          
+          setOuterValue(valueRightClamped)
+          if (first) getOnValueDragStart()?.(valueRightClamped)
+          if (!first && !last) getOnValueDragging()?.(valueRightClamped)
+          
+          const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
+          shadowBarSpringApi.set({ right: uiPercentRight })
+          
           if (last) {
             setIsDragging(false)
+            getOnValueDragEnd()?.(valueRightClamped)
           }
         }
       ) as () => ReactDOMAttributes
@@ -208,7 +218,7 @@ const Slider = React.memo(
       
       return (
         <div css={trackStyle}
-          className={clsx(className /* ScrollbarVerticalStyle.El.track.name */)}
+          className={clsx(className/*, ScrollbarVerticalStyle.El.track.name */)}
           /* {...{ [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging) }} */
           // TODO combine handlers from restProps and onTrackDrag()
           {...restProps}
@@ -219,8 +229,8 @@ const Slider = React.memo(
           <animated.div css={shadowBar}
             style={{
               // @ts-expect-error
-              //display: isDragging ? 'flex' : 'none',
-              opacity: isDragging ? 1 : 0,
+              display: isDragging ? 'flex' : 'none',
+              //opacity: isDragging ? 1 : 0,
               right: to([shadowBarSpring.right], r => {
                 return `${Math.min(barRightPercent, r)}%`
               }),
