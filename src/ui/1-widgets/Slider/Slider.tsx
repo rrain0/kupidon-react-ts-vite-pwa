@@ -146,8 +146,21 @@ const Slider = React.memo(
       
       
       const [shadowBarSpring, shadowBarSpringApi] = useSpring(() => ({ right: 0 }))
+      const [barSpring, barSpringApi] = useSpring(() => ({ right: 0 }))
       
-      const [barRightPercent, setBarRightPercent] = useState(100)
+      const [getBarRightPercent, setBarRightPercent] = useRefGetSet(100)
+      
+      const [getUpdateBars] = useAsRefGet(() => {
+        const trackW = getTrackDimens().w
+        const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
+        
+        const shadowBarRight = Math.min(getBarRightPercent(), uiPercentRight)
+        shadowBarSpringApi.set({ right: shadowBarRight })
+        
+        const barRight = isDragging ? Math.max(getBarRightPercent(), uiPercentRight) : getBarRightPercent()
+        barSpringApi.set({ right: barRight })
+      })
+      
       useLayoutEffect(() => {
         const progress = valueToProgress(outerValue, outerMinMax)
         const trackW = getTrackDimens().w
@@ -155,10 +168,9 @@ const Slider = React.memo(
         setBarRightPercent(uiPercentRight)
       }, [outerValue, ...outerMinMax])
       
-      
-      const [getUpdateBars] = useRefGetSet(() => {
-      
-      })
+      useLayoutEffect(() => {
+        getUpdateBars()()
+      }, [isDragging, outerValue, ...outerMinMax])
       
       
       // noinspection JSVoidFunctionReturnValueUsed
@@ -202,8 +214,7 @@ const Slider = React.memo(
           if (first) getOnValueDragStart()?.(valueRightClamped)
           if (!first && !last) getOnValueDragging()?.(valueRightClamped)
           
-          const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
-          shadowBarSpringApi.set({ right: uiPercentRight })
+          getUpdateBars()()
           
           if (last) {
             setIsDragging(false)
@@ -221,16 +232,6 @@ const Slider = React.memo(
       useNoSelect(isDragging)
       
       
-      const isDraggingSpring = useSpringValue(isDragging)
-      isDraggingSpring.set(isDragging)
-      
-      const barRightPercentSpring = useSpringValue(barRightPercent)
-      barRightPercentSpring.set(barRightPercent)
-      
-      
-      //console.log('isDragging, barRightPercent', isDragging, barRightPercent)
-      
-      
       return (
         <div css={trackStyle}
           className={clsx(className/*, ScrollbarVerticalStyle.El.track.name */)}
@@ -245,28 +246,14 @@ const Slider = React.memo(
             style={{
               // @ts-expect-error
               display: isDragging ? 'flex' : 'none',
-              //opacity: isDragging ? 1 : 0,
-              right: to([shadowBarSpring.right], r => {
-                return `${Math.min(barRightPercent, r)}%`
-              }),
-              /* right: barRightPercent >= shadowBarSpring.right.get()
-                ? to([shadowBarSpring.right], r => `${r}%`)
-                : `${barRightPercent}%`, */
-              //zIndex: barRightPercent >= shadowBarSpring.right.get() ? 'auto' : 1,
+              right: to([shadowBarSpring.right], r => `${r}%`),
             }}
           />
           
           <animated.div css={bar}
             style={{
               // @ts-expect-error
-              right: to([shadowBarSpring.right], r => {
-                console.log('isDragging, barRightPercent', isDragging, barRightPercent)
-                if (!isDragging) return `${barRightPercent}%`
-                return `${Math.max(barRightPercent, r)}%`
-              }),
-              /* right: barRightPercent >= shadowBarSpring.right.get()
-                ? `${barRightPercent}%`
-                : to([shadowBarSpring.right], r => `${r}%`), */
+              right: to([barSpring.right], r => `${r}%`),
             }}
           />
           
