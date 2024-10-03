@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
-import { animated, to, useSpring } from '@react-spring/web'
+import { animated, to, useSpring, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from '@util/common/TypeU'
 import { useElemRef } from 'src/util/react-state/useElemRef'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
@@ -156,6 +156,11 @@ const Slider = React.memo(
       }, [outerValue, ...outerMinMax])
       
       
+      const [getUpdateBars] = useRefGetSet(() => {
+      
+      })
+      
+      
       // noinspection JSVoidFunctionReturnValueUsed
       const onTrackDrag = useDrag(
         gesture => {
@@ -214,6 +219,13 @@ const Slider = React.memo(
       
       // forbid content selection for all elements while dragging scrollbar
       useNoSelect(isDragging)
+      
+      
+      const isDraggingSpring = useSpringValue(isDragging)
+      isDraggingSpring.set(isDragging)
+      
+      const barRightPercentSpring = useSpringValue(barRightPercent)
+      barRightPercentSpring.set(barRightPercent)
       
       
       //console.log('isDragging, barRightPercent', isDragging, barRightPercent)
