@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { animated, to, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
+import { TypeU } from 'src/util/common/TypeU'
 import { useElemRef } from 'src/util/react-state/useElemRef'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
@@ -11,12 +12,13 @@ import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
-import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import zeroBasedRange = RangeU.zeroBasedRange
 import Setter = TypeU.Setter
 import NumRangeRo = RangeU.NumRangeRo
 import Callback1 = TypeU.Callback1
+import Puro = TypeU.Puro
+import Ro = TypeU.Ro
 
 
 // Slider or Scale Picker
@@ -88,14 +90,15 @@ const valueToProgress = (value: number, minMax: NumRangeRo): number => RangeU.ma
 
 
 
-export type SliderExtraProps = {
+export type SliderExtraProps = Ro<{
   value: number
   setValue: Setter<number>
   minMax: NumRangeRo
-  onValueDragStart?: Callback1<number> | undefined
-  onValueDragging?: Callback1<number> | undefined
-  onValueDragEnd?: Callback1<number> | undefined
-}
+}> & Puro<{
+  onValueDragStart: Callback1<number>
+  onValueDragging: Callback1<number>
+  onValueDragEnd: Callback1<number>
+}>
 
 
 export type SliderRefElement = HTMLDivElement

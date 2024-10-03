@@ -18,8 +18,14 @@ export namespace TypeU {
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type Exists<T> = Exclude<T, empty>
+  
+  // Add Partial Undefined
   export type PartialUndef<O extends object> = {
     [Prop in keyof O]+?: O[Prop] | undefined
+  }
+  // Add ReadOnly
+  export type Ro<O extends object> = {
+    +readonly [Prop in keyof O]: O[Prop]
   }
   // Add Partial Undefined ReadOnly
   export type Puro<O extends object> = {
