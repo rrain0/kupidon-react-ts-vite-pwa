@@ -37,35 +37,35 @@ const ProfileFavoriteBookGenresOption = React.memo(
     const options0 = useMemo(() => {
       return [
         {
-          value: '1',
+          id: '1',
           text: 'Научпоп',
         },
         {
-          value: '2',
+          id: '2',
           text: 'Наука',
         },
         {
-          value: '3',
+          id: '3',
           text: 'Драма',
         },
         {
-          value: '4',
+          id: '4',
           text: 'Детектив',
         },
         {
-          value: '6',
+          id: '6',
           text: 'Манга',
         },
         {
-          value: '7',
+          id: '7',
           text: 'Приключения',
         },
         {
-          value: '8',
+          id: '8',
           text: 'Научная фантастика',
         },
         {
-          value: 'CUSTOM',
+          id: 'CUSTOM',
           text: '',
         },
       ]
@@ -79,7 +79,7 @@ const ProfileFavoriteBookGenresOption = React.memo(
     )
     
     const valueText = selected
-      .map(v => options.find(o => o.value === v))
+      .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
       .map(o => o!.text)
       .join(', ')

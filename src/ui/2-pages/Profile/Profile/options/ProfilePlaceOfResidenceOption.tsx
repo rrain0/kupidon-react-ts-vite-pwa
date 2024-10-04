@@ -41,29 +41,29 @@ const ProfilePlaceOfResidenceOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: '1',
+          id: '1',
           text: 'Октябрьский округ',
         }, {
-          value: '2',
+          id: '2',
           text: 'Свердловский округ',
         }, {
-          value: '3',
+          id: '3',
           text: 'Правобережный округ',
         }, {
-          value: '4',
+          id: '4',
           text: 'Ленинский округ',
         }, {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
-      ],
+      ] satisfies Option<string>[],
       [text]
     )
     
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
     return (

@@ -33,29 +33,29 @@ const ProfileSmokeOption = React.memo(
     const genderOptions = useMemo(
       () => [
         {
-          value: '1',
+          id: '1',
           text: 'Романтика',
         }, {
-          value: '2',
+          id: '2',
           text: 'Дружба',
         }, {
-          value: '3',
+          id: '3',
           text: 'Серьезные отношения',
         }, {
-          value: '4',
+          id: '4',
           text: 'Свой ответ',
         }, {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
-      ],
+      ] satisfies Option<string>[],
       [text]
     )
     
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = genderOptions.find(opt => opt.value === selected)?.text ?? ''
+    const value = genderOptions.find(opt => opt.id === selected)?.text ?? ''
     
     
     return <>

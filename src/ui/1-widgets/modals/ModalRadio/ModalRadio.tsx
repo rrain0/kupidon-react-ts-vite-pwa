@@ -54,12 +54,12 @@ const ModalRadio = ReactU.memo(
                     }
                   `,
                 ]}
-                childrenPosition='end'
-                checked={opt.value === value}
-                onChange={() => onSelect?.(opt.value)}
+                childrenPosition="end"
+                checked={opt.id === value}
+                onChange={() => onSelect?.(opt.id)}
                 ref={undefined}
-                value={opt.value}
-                key={opt.value}
+                value={opt.id}
+                key={opt.id}
                 onClick={sheetProps.setClosing}
               >
                 <div css={selectItemText}>

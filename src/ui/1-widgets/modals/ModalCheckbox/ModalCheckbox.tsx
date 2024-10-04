@@ -64,11 +64,11 @@ const ModalCheckbox =
           <CheckboxInputGroup css={selectItemsContainer}>
             
             {options.map(opt => <CheckboxInput
-              key={opt.value}
+              key={opt.id}
               css={CheckboxInputStyle.rectBigNormal}
-              checked={checked.includes(opt.value)}
-              onChange={() => onChange(opt.value)}
-              value={opt.value}
+              checked={checked.includes(opt.id)}
+              onChange={() => onChange(opt.id)}
+              value={opt.id}
             >
               <div css={selectItemText}>
                 {opt.text}

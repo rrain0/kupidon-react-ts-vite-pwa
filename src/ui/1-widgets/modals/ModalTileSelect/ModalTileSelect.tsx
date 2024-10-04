@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
-import { Option, OPTION_CUSTOM } from 'src/ui-data/models/Option'
+import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
@@ -20,7 +20,7 @@ import col = EmotionCommon.col
 import Puro = TypeU.Puro
 import noop = TypeU.noop
 
-
+const OPTION_CUSTOM = 'CUSTOM'
 
 const overlayRemove = 'remove'
 
@@ -55,8 +55,8 @@ const ModalTileSelect = ReactU.memo(
       setCustomOptionText = noop,
     } = props
     
-    const toggleSelected = (value: T) => {
-      setSelected(ArrayU.toggleTo(selected, value))
+    const toggleSelected = (id: T) => {
+      setSelected(ArrayU.toggleTo(selected, id))
     }
     
     
@@ -83,24 +83,24 @@ const ModalTileSelect = ReactU.memo(
                 {...sheetProps.sheetProps}
                 header={title}
               >
-                <div>ПОЗЖЕ ПЕРЕДЕЛАЮ НА ВЫБОР ХЭШТЕГОВ</div>
+                <div>ПОЗЖЕ ПЕРЕДЕЛАЮ НА ВЫБОР СЛОВ И МАЛЕНЬКИХ ОКРУГЛЫХ ПЛИТОК</div>
                 <div css={selectItemsContainer}>
                   {options
                     .map((opt, i) => (
                       <SelectItem
                         css={SelectItemS.normal}
-                        key={opt.value}
+                        key={opt.id}
                         onClick={() => {
-                          if (opt.value !== OPTION_CUSTOM) toggleSelected(opt.value)
-                          if (opt.value === OPTION_CUSTOM && customOptionText) toggleSelected(opt.value)
-                          if (opt.value === OPTION_CUSTOM && !customOptionText) openEdit()
+                          if (opt.id !== OPTION_CUSTOM) toggleSelected(opt.id)
+                          if (opt.id === OPTION_CUSTOM && customOptionText) toggleSelected(opt.id)
+                          if (opt.id === OPTION_CUSTOM && !customOptionText) openEdit()
                         }}
                         onClickEdit={openEdit}
-                        isSelected={selected.includes(opt.value)}
-                        isAdd={opt.value === OPTION_CUSTOM && !customOptionText}
-                        isEdit={opt.value === OPTION_CUSTOM}
+                        isSelected={selected.includes(opt.id)}
+                        isAdd={opt.id === OPTION_CUSTOM && !customOptionText}
+                        isEdit={opt.id === OPTION_CUSTOM}
                         indicatorsSelection={options.map((it, i2) => {
-                          if (!selected.includes(it.value)) return 0
+                          if (!selected.includes(it.id)) return 0
                           //if (i !== i2) return 1
                           if (i !== i2) return 0
                           return 2
@@ -108,7 +108,7 @@ const ModalTileSelect = ReactU.memo(
                       >
                         <SelectItemText>
                           {(() => {
-                            if (opt.value === OPTION_CUSTOM) return customOptionText
+                            if (opt.id === OPTION_CUSTOM) return customOptionText
                             return opt.text
                           })()}
                         </SelectItemText>
@@ -125,8 +125,8 @@ const ModalTileSelect = ReactU.memo(
               isOpen={isEditOpen}
               onClose={onEditClose}
               onClear={() => setInputText('')}
-              value={inputText}
-              onChange={ev => setInputText(ev.currentTarget.value)}
+              id={inputText}
+              onChange={ev => setInputText(ev.currentTarget.id)}
               title={title}
             />
             

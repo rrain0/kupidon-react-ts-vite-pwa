@@ -40,32 +40,32 @@ React.memo(
   const genderOptions = useMemo(
     ()=>[
       {
-        value: '1',
+        id: '1',
         text: 'Абсолютно не употребляет алкоголь',
       },{
-        value: '2',
+        id: '2',
         text: 'Употребляю алкоголь редко, только по особым случаям',
       },{
-        value: '3',
+        id: '3',
         text: 'Употребляю алкоголь социально, в компании друзей',
       },{
-        value: '4',
+        id: '4',
         text: 'Употребляю алкоголь время от времени',
       },{
-        value: '5',
+        id: '5',
         text: 'Алкоголь является частью моей жизни и развлечений',
       },{
-        value: '',
+        id: '',
         text: text.notSelected,
       }
-    ],
+    ] satisfies Option<string>[],
     [text]
   )
   
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = genderOptions.find(opt => opt.value === selected)?.text ?? ''
+  const value = genderOptions.find(opt => opt.id === selected)?.text ?? ''
   
   
   return <>

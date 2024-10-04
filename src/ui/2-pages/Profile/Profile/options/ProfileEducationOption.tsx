@@ -42,23 +42,23 @@ const ProfileEducationOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'SECONDARY_SCHOOL_EDUCATION',
+          id: 'SECONDARY_SCHOOL_EDUCATION',
           text: text.secondarySchoolEducation,
         },
         {
-          value: 'SPECIALIZED_SECONDARY_EDUCATION',
+          id: 'SPECIALIZED_SECONDARY_EDUCATION',
           text: text.specializedSecondarySchoolEducation,
         },
         {
-          value: 'HIGHER_EDUCATION',
+          id: 'HIGHER_EDUCATION',
           text: text.higherEducation,
         },
         {
-          value: 'ACADEMIC_DEGREE_EDUCATION',
+          id: 'ACADEMIC_DEGREE_EDUCATION',
           text: text.academicDegree,
         },
         {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
       ] satisfies EducationUiOptions,
@@ -68,7 +68,7 @@ const ProfileEducationOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === props.value)?.text ?? ''
+    const value = options.find(opt => opt.id === props.value)?.text ?? ''
     
     return (
       <>

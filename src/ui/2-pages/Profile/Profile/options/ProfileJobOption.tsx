@@ -45,16 +45,16 @@ const ProfileJobOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'I_WORK_FOR_HIRE',
+          id: 'I_WORK_FOR_HIRE',
           text: text.iWorkForHire,
         }, {
-          value: 'WORK_FOR_MYSELF',
+          id: 'WORK_FOR_MYSELF',
           text: text.workForMyself,
         }, {
-          value: 'TEMPORARILY_UNEMPLOYED',
+          id: 'TEMPORARILY_UNEMPLOYED',
           text: text.temporaryUnemployed,
         }, {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
       ] satisfies JobUiOptions,
@@ -64,7 +64,7 @@ const ProfileJobOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === props.value)?.text ?? ''
+    const value = options.find(opt => opt.id === props.value)?.text ?? ''
     
     return (
       <>

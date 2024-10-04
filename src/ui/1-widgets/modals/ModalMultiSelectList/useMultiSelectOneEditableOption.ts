@@ -16,25 +16,25 @@ export const useMultiSelectOneEditableOption = <T extends string>(
   
   const options1 = useMemo(() => {
     return options.map(opt => {
-      if (opt.value === editableOptionId) return { ...opt, text: customOptionText }
+      if (opt.id === editableOptionId) return { ...opt, text: customOptionText }
       return opt
     })
   }, [editableOptionId, options, customOptionText])
   
   const add = useMemo(() => {
-    return options1.filter(opt => opt.value === editableOptionId && !opt.text).map(opt => opt.value)
+    return options1.filter(opt => opt.id === editableOptionId && !opt.text).map(opt => opt.id)
   }, [editableOptionId, options1])
   
   const edit = useMemo(() => {
-    return options1.filter(opt => opt.value === editableOptionId).map(opt => opt.value)
+    return options1.filter(opt => opt.id === editableOptionId).map(opt => opt.id)
   }, [editableOptionId, options1])
   
   const setOptionText = useCallback((opt: Option<T>) => {
-    const { value: v, text: t } = opt
-    if (v === editableOptionId) {
+    const { id, text: t } = opt
+    if (id === editableOptionId) {
       setCustomOptionText(t)
-      if (t) setSelected(ArrayU.pushUniqToIf(selected, v))
-      else setSelected(ArrayU.removeToIf(selected, v))
+      if (t) setSelected(ArrayU.pushUniqToIf(selected, id))
+      else setSelected(ArrayU.removeToIf(selected, id))
     }
   }, [editableOptionId, selected])
   

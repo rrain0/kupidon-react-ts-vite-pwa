@@ -45,13 +45,13 @@ const ProfileHasKidsOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'Есть',
+          id: 'Есть',
           text: 'Есть',
         }, {
-          value: 'Нет',
+          id: 'Нет',
           text: 'Нет',
         }, {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
       ],
@@ -61,7 +61,7 @@ const ProfileHasKidsOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
     return (

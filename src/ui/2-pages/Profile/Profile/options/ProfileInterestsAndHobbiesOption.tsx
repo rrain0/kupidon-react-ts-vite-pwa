@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
+import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSelect'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -43,27 +43,27 @@ const ProfileInterestsAndHobbiesOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'travel',
+          id: 'travel',
           text: text.hashTravel,
         },
         {
-          value: 'music',
+          id: 'music',
           text: text.hashMusic,
         },
         {
-          value: 'sport',
+          id: 'sport',
           text: text.hashSport,
         },
         {
-          value: 'movie',
+          id: 'movie',
           text: text.hashMovie,
         },
         {
-          value: 'art',
+          id: 'art',
           text: text.hashArt,
         },
         {
-          value: 'anime',
+          id: 'anime',
           text: text.hashAnime,
         },
         /* {
@@ -75,7 +75,7 @@ const ProfileInterestsAndHobbiesOption = React.memo(
     )
     
     const valueText = selected
-      .map(v => options.find(o => o.value === v))
+      .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
       .map(o => o.text)
       .join(' ')
@@ -95,7 +95,7 @@ const ProfileInterestsAndHobbiesOption = React.memo(
         />
         
         
-        <ModalMultiSelectList
+        <ModalTileSelect
           isOpen={isOpen}
           close={close}
           title={text.interestsAndHobbies}

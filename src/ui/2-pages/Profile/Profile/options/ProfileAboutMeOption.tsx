@@ -46,7 +46,7 @@ const ProfileAboutMeOption = React.memo(
             props.inputProps.onBlur()
           }}
         />
-    </>
+      </>
     )
   }
 )

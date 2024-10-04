@@ -56,8 +56,8 @@ const ModalMultiSelectList = ReactU.memo(
       setOptionText,
     } = props
     
-    const toggleSelected = (value: T) => {
-      setSelected?.(ArrayU.toggleTo(selected, value))
+    const toggleSelected = (id: T) => {
+      setSelected?.(ArrayU.toggleTo(selected, id))
     }
     
     
@@ -67,7 +67,7 @@ const ModalMultiSelectList = ReactU.memo(
     const [editableText, setEditableText] = useState('')
     
     const openOptionEdit = (opt: Option<T>) => {
-      setEditableValue(opt.value)
+      setEditableValue(opt.id)
       setEditableText(opt.text)
       openEdit()
     }
@@ -75,7 +75,7 @@ const ModalMultiSelectList = ReactU.memo(
     const onEditClose = () => {
       const v = editableValue!
       closeEdit()
-      setOptionText?.({ value: v!, text: editableText })
+      setOptionText?.({ id: v!, text: editableText })
       // if (editableText) setSelected?.(ArrayU.pushUniqToIf(selected, v))
       // else setSelected?.(ArrayU.removeToIf(selected, v))
     }
@@ -96,15 +96,15 @@ const ModalMultiSelectList = ReactU.memo(
               >
                 <div css={selectItemsContainer}>
                   {options.map((opt, i) => {
-                    const isSelected = selected.includes(opt.value)
-                    const isAdd = add.includes(opt.value)
-                    const isEdit = edit.includes(opt.value)
+                    const isSelected = selected.includes(opt.id)
+                    const isAdd = add.includes(opt.id)
+                    const isEdit = edit.includes(opt.id)
                     return (
                       <SelectItem
                         css={SelectItemS.normal}
-                        key={opt.value}
+                        key={opt.id}
                         onClick={() => {
-                          if (!isAdd) toggleSelected(opt.value)
+                          if (!isAdd) toggleSelected(opt.id)
                           if (isAdd && isEdit) openOptionEdit(opt)
                         }}
                         onClickEdit={() => openOptionEdit(opt)}
@@ -134,7 +134,7 @@ const ModalMultiSelectList = ReactU.memo(
               isOpen={isEditOpen}
               onClose={onEditClose}
               onClear={() => setEditableText('')}
-              value={editableText}
+              id={editableText}
               onChange={ev => setEditableText(ev.currentTarget.value)}
               title={title}
             />

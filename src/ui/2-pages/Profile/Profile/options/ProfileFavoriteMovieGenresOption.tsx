@@ -40,31 +40,31 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     const options0 = useMemo(
       () => [
         {
-          value: '1',
+          id: '1',
           text: 'Боевик',
         }, {
-          value: '2',
+          id: '2',
           text: 'Наука',
         }, {
-          value: '3',
+          id: '3',
           text: 'Драма',
         }, {
-          value: '4',
+          id: '4',
           text: 'Детектив',
         }, {
-          value: '5',
+          id: '5',
           text: 'Комедия',
         }, {
-          value: '6',
+          id: '6',
           text: 'Аниме',
         }, {
-          value: '7',
+          id: '7',
           text: 'Приключения',
         }, {
-          value: '8',
+          id: '8',
           text: 'Научная фантастика',
         }, {
-          value: 'CUSTOM',
+          id: 'CUSTOM',
           text: '',
         },
       ],
@@ -78,7 +78,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
   
   
     const value = selected
-      .map(v => options.find(o => o.value === v))
+      .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
       .map(o => o.text)
       .join(', ')

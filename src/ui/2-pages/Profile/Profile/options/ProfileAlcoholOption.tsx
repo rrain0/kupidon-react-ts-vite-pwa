@@ -45,19 +45,19 @@ const ProfileAlcoholOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: text.itNegative,
+          id: text.itNegative,
           text: text.itNegative,
         },
         {
-          value: text.itNeutral,
+          id: text.itNeutral,
           text: text.itNeutral,
         },
         {
-          value: text.itPositive,
+          id: text.itPositive,
           text: text.itPositive,
         },
         {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
       ],
@@ -67,7 +67,7 @@ const ProfileAlcoholOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    const valueText = options.find(opt => opt.id === selected)?.text ?? ''
     
     
     return (
@@ -75,7 +75,7 @@ const ProfileAlcoholOption = React.memo(
         <OptionItem
           icon={<WineBottleAlcoholGradIc />}
           title={text.attitudeToAlcohol}
-          value={value}
+          value={valueText}
           onClick={open}
         />
         

@@ -41,10 +41,10 @@ const ProfileGenderOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'MALE',
+          id: 'MALE',
           text: text.male,
         }, {
-          value: 'FEMALE',
+          id: 'FEMALE',
           text: text.female,
         },
       ] satisfies GenderUiOptions,
@@ -54,7 +54,7 @@ const ProfileGenderOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === props.value)?.text ?? ''
+    const value = options.find(opt => opt.id === props.value)?.text ?? ''
     
     
     return (

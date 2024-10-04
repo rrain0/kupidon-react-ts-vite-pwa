@@ -49,16 +49,16 @@ const ProfilePartnerCommunicationCharacteristicsOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'HONESTY_AND_OPENNESS',
+          id: 'HONESTY_AND_OPENNESS',
           text: text.honestyAndOpenness,
         }, {
-          value: 'RESPECT_AND_ATTENTION',
+          id: 'RESPECT_AND_ATTENTION',
           text: text.respectAndAttention,
         }, {
-          value: 'INTELLIGENCE_AND_EDUCATION',
+          id: 'INTELLIGENCE_AND_EDUCATION',
           text: text.intelligenceAndEducation,
         }, {
-          value: 'COMPATIBILITY_OF_INTERESTS',
+          id: 'COMPATIBILITY_OF_INTERESTS',
           text: text.compatibilityOfInterests,
         },
       ] satisfies PartnerCommunicationCharacteristicsUiOptions,
@@ -69,7 +69,7 @@ const ProfilePartnerCommunicationCharacteristicsOption = React.memo(
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
     const value = props.value
-      .map(v => options.find(o => o.value === v))
+      .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
       .map(o => o!.text)
       .join(', ')

@@ -42,19 +42,19 @@ const ProfileMeetingPurposeOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: 'Свидание',
+          id: 'Свидание',
           text: 'Свидание',
         }, {
-          value: 'Общение онлайн',
+          id: 'Общение онлайн',
           text: 'Общение онлайн',
         }, {
-          value: 'Деловое общение',
+          id: 'Деловое общение',
           text: 'Деловое общение',
         }, {
-          value: 'Новый опыт',
+          id: 'Новый опыт',
           text: 'Новый опыт',
         }, {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
       ],
@@ -64,7 +64,7 @@ const ProfileMeetingPurposeOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
     return (

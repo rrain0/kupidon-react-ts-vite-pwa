@@ -30,7 +30,7 @@ const ProfileSportFrequencyOption = React.memo(
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     
-    const text = useMemo(()=>({
+    const text = useMemo(() => ({
       notSelected: optionText.notSelected,
     }), [titleText, optionText])
     
@@ -41,32 +41,32 @@ const ProfileSportFrequencyOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: '1',
+          id: '1',
           text: 'Ежедневно',
         }, {
-          value: '2',
+          id: '2',
           text: 'Несколько раз в неделю',
         }, {
-          value: '3',
+          id: '3',
           text: 'Периодически по настроению',
         }, {
-          value: '4',
+          id: '4',
           text: 'Редко',
         }, {
-          value: '5',
+          id: '5',
           text: 'Не занимаюсь спортом',
         }, {
-          value: '',
+          id: '',
           text: text.notSelected,
         },
-      ],
+      ] satisfies Option<string>[],
       [text]
     )
     
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
     return (

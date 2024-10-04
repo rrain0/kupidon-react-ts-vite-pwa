@@ -3,7 +3,7 @@
 
 
 export type Option<V> = {
-  value: V
+  id: V
   text: string
 }
 

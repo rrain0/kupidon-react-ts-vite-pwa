@@ -62,15 +62,15 @@ const ModalSingleSelectList = ReactU.memo(
       setCustomOptionText = noop,
     } = props
     
-    const toggleSelected = (value: T) => {
-      if (selected === value && exists(notSelectedValue)) setSelected(notSelectedValue)
-      else setSelected(value)
+    const toggleSelected = (id: T) => {
+      if (selected === id && exists(notSelectedValue)) setSelected(notSelectedValue)
+      else setSelected(id)
     }
     
     
     const defaultOption = useMemo(() => {
       if (exists(notSelectedValue)) return notSelectedValue
-      return options[0].value
+      return options[0].id
     }, [options, notSelectedValue])
     
     
@@ -100,24 +100,24 @@ const ModalSingleSelectList = ReactU.memo(
                 header={title}
               >
                 <div css={selectItemsContainer}>
-                  {options.filter(opt => opt.value !== notSelectedValue).map(opt => (
+                  {options.filter(opt => opt.id !== notSelectedValue).map(opt => (
                     <SelectItem
                       css={SelectItemS.normal}
-                      key={opt.value}
+                      key={opt.id}
                       onClick={() => {
-                        if (opt.value !== customValue) toggleSelected(opt.value)
-                        if (opt.value === customValue && customOptionText) toggleSelected(opt.value)
-                        if (opt.value === customValue && !customOptionText) openEdit()
+                        if (opt.id !== customValue) toggleSelected(opt.id)
+                        if (opt.id === customValue && customOptionText) toggleSelected(opt.id)
+                        if (opt.id === customValue && !customOptionText) openEdit()
                       }}
                       onClickEdit={openEdit}
-                      isSelected={opt.value === selected}
-                      isAdd={opt.value === customValue && !customOptionText}
-                      isEdit={opt.value === customValue}
-                      indicatorsSelection={opt.value === selected ? [true] : [false]}
+                      isSelected={opt.id === selected}
+                      isAdd={opt.id === customValue && !customOptionText}
+                      isEdit={opt.id === customValue}
+                      indicatorsSelection={opt.id === selected ? [true] : [false]}
                     >
                       <SelectItemText>
                         {(() => {
-                          if (opt.value === customValue) return customOptionText
+                          if (opt.id === customValue) return customOptionText
                           return opt.text
                         })()}
                       </SelectItemText>
@@ -133,7 +133,7 @@ const ModalSingleSelectList = ReactU.memo(
               isOpen={isEditOpen}
               onClose={onEditClose}
               onClear={() => setInputText('')}
-              value={inputText}
+              id={inputText}
               onChange={ev => setInputText(ev.currentTarget.value)}
               title={title}
             />
