@@ -125,8 +125,8 @@ const ModalTileSelect = ReactU.memo(
               isOpen={isEditOpen}
               onClose={onEditClose}
               onClear={() => setInputText('')}
-              id={inputText}
-              onChange={ev => setInputText(ev.currentTarget.id)}
+              value={inputText}
+              onChange={ev => setInputText(ev.currentTarget.value)}
               title={title}
             />
             

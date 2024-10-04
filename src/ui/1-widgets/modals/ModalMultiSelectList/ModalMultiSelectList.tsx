@@ -134,7 +134,7 @@ const ModalMultiSelectList = ReactU.memo(
               isOpen={isEditOpen}
               onClose={onEditClose}
               onClear={() => setEditableText('')}
-              id={editableText}
+              value={editableText}
               onChange={ev => setEditableText(ev.currentTarget.value)}
               title={title}
             />

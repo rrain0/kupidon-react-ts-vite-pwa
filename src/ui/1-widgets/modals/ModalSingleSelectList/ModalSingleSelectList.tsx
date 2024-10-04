@@ -133,7 +133,7 @@ const ModalSingleSelectList = ReactU.memo(
               isOpen={isEditOpen}
               onClose={onEditClose}
               onClear={() => setInputText('')}
-              id={inputText}
+              value={inputText}
               onChange={ev => setInputText(ev.currentTarget.value)}
               title={title}
             />
