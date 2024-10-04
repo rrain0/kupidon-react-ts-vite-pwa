@@ -70,25 +70,29 @@ export const OptionUiText = {
   },
   
   
-  primarySchoolEducation: {
+  /* primarySchoolEducation: {
     'en-US': 'Primary school education',
     'ru-RU': 'Начальное образование',
-  },
+  }, */
   secondarySchoolEducation: {
-    'en-US': 'Secondary School education',
-    'ru-RU': 'Среднее образование',
+    'en-US': 'Secondary School',
+    'ru-RU': 'Среднее',
   },
   specializedSecondarySchoolEducation: {
-    'en-US': 'Specialized secondary school education',
-    'ru-RU': 'Среднее специальное образование',
+    'en-US': 'Specialized secondary school',
+    'ru-RU': 'Среднее специальное',
   },
-  incompleteHigherEducation: {
+  /* incompleteHigherEducation: {
     'en-US': 'Incomplete higher education',
     'ru-RU': 'Неоконченное высшее образование',
-  },
+  }, */
   higherEducation: {
-    'en-US': 'Higher education',
-    'ru-RU': 'Высшее образование',
+    'en-US': 'Higher',
+    'ru-RU': 'Высшее',
+  },
+  academicDegree: {
+    'en-US': 'Academic degree',
+    'ru-RU': 'Учёная степень',
   },
   
   

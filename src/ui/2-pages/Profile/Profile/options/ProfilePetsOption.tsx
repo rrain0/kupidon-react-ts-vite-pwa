@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react'
-import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
+import ModalSingleSelectList
+  from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -29,7 +30,11 @@ const ProfilePetsOption = React.memo(
     const titleText = useUiValues(TitleUiText)
     
     const text = useMemo(() => ({
+      attitudeTowardsPets: 'Отношение к домашним животным',
       notSelected: optionText.notSelected,
+      itPositive: 'Положительное',
+      itNeutral: 'Нейтральное',
+      itNegative: 'Отрицательное',
     }), [titleText, optionText])
     
     
@@ -39,18 +44,18 @@ const ProfilePetsOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: '1',
-          text: 'Да, у меня есть собака(и)',
-        }, {
-          value: '2',
-          text: 'Да, у меня есть кошка(и)',
-        }, {
-          value: '3',
-          text: 'Да, у меня есть другие животные (укажите какие)',
-        }, {
-          value: '4',
-          text: 'Нет, у меня нет питомцев',
-        }, {
+          value: text.itPositive,
+          text: text.itPositive,
+        },
+        {
+          value: text.itNeutral,
+          text: text.itNeutral,
+        },
+        {
+          value: text.itNegative,
+          text: text.itNegative,
+        },
+        {
           value: '',
           text: text.notSelected,
         },
@@ -68,18 +73,20 @@ const ProfilePetsOption = React.memo(
       <>
         <OptionItem
           icon={<BengalCatGradIc />}
-          title={'Отношение к домашним животным'}
+          title={text.attitudeTowardsPets}
           value={value}
           onClick={open}
         />
         
-        <ModalRadio
+        
+        <ModalSingleSelectList
           isOpen={isOpen}
           close={close}
-          title={'Отношение к домашним животным'}
+          title={text.attitudeTowardsPets}
           options={options}
-          value={selected}
-          onSelect={setSelected}
+          selected={selected}
+          setSelected={setSelected}
+          notSelectedValue={''}
         />
       </>
     )

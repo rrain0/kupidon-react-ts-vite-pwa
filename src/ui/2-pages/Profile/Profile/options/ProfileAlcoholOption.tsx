@@ -31,7 +31,11 @@ const ProfileAlcoholOption = React.memo(
     const titleText = useUiValues(TitleUiText)
     
     const text = useMemo(() => ({
+      attitudeToAlcohol: 'Отношение к алкоголю',
       notSelected: optionText.notSelected,
+      itNegative: 'Отрицательное',
+      itNeutral: 'Нейтральное',
+      itPositive: 'Положительное',
     }), [titleText, optionText])
     
     
@@ -41,21 +45,18 @@ const ProfileAlcoholOption = React.memo(
     const options = useMemo(
       () => [
         {
-          value: '1',
-          text: 'Не употребляю',
-        }, {
-          value: '2',
-          text: 'Редко',
-        }, {
-          value: '3',
-          text: 'В компании',
-        }, {
-          value: '4',
-          text: 'Время от времени',
-        }, {
-          value: '5',
-          text: 'Люблю выпить',
-        }, {
+          value: text.itNegative,
+          text: text.itNegative,
+        },
+        {
+          value: text.itNeutral,
+          text: text.itNeutral,
+        },
+        {
+          value: text.itPositive,
+          text: text.itPositive,
+        },
+        {
           value: '',
           text: text.notSelected,
         },
@@ -73,7 +74,7 @@ const ProfileAlcoholOption = React.memo(
       <>
         <OptionItem
           icon={<WineBottleAlcoholGradIc />}
-          title={'Отношение к алкоголю'}
+          title={text.attitudeToAlcohol}
           value={value}
           onClick={open}
         />
@@ -82,7 +83,7 @@ const ProfileAlcoholOption = React.memo(
         <ModalSingleSelectList
           isOpen={isOpen}
           close={close}
-          title={'Отношение к алкоголю'}
+          title={text.attitudeToAlcohol}
           options={options}
           selected={selected}
           setSelected={setSelected}

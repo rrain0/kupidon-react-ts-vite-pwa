@@ -31,7 +31,7 @@ const ProfileHeightOption = React.memo(
       greater2: 'более',
     }), [titleText, optionText])
     
-    const [minMax, setMinMax] = useState<NumRange>([79, 251])
+    const [minMax, setMinMax] = useState<NumRange>([99, 231])
     const [height, setHeight] = useState<number | null>(props.value)
     
     useEffect(() => {
@@ -40,8 +40,8 @@ const ProfileHeightOption = React.memo(
     
     const textValue = (height: number | null) => {
       if (height === null) return text.notSpecified
-      if (height <= minMax[0]) return `${text.lower2} ${minMax[0]+1} ${text.cm}`
-      if (height >= minMax[1]) return `${text.greater2} ${minMax[1]-1} ${text.cm}`
+      if (height <= minMax[0]) return `${text.lower2} ${minMax[0] + 1} ${text.cm}`
+      if (height >= minMax[1]) return `${text.greater2} ${minMax[1] - 1} ${text.cm}`
       return `${height} ${text.cm}`
     }
     

@@ -23,70 +23,74 @@ const overlayName = 'smoke'
 
 
 
-const ProfileSmokeOption =
-React.memo(
-() => {
-  const optionText = useUiValues(OptionUiText)
-  const titleText = useUiValues(TitleUiText)
-  
-  const text = useMemo(() => ({
-    notSelected: optionText.notSelected,
-  }), [titleText, optionText])
-  
-  
-  const [selected, setSelected] = useState('')
-  
-  
-  const options = useMemo(
-    () => [
-      {
-        value: '1',
-        text: 'Не курю',
-      }, {
-        value: '2',
-        text: 'Редко',
-      }, {
-        value: '3',
-        text: 'Периодически',
-      }, {
-        value: '4',
-        text: 'Регулярно',
-      }, {
-        value: '',
-        text: text.notSelected,
-      },
-    ],
-    [text]
-  )
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = options.find(opt => opt.value === selected)?.text ?? ''
-  
-  
-  return (
-    <>
-      <OptionItem
-        icon={<SmokeCigaretteGradIc />}
-        title={'Отношение к курению'}
-        value={value}
-        onClick={open}
-      />
-      
-      
-      <ModalSingleSelectList
-        isOpen={isOpen}
-        close={close}
-        title={'Отношение к курению'}
-        options={options}
-        selected={selected}
-        setSelected={setSelected}
-        notSelectedValue={''}
-      />
-    </>
-  )
-})
+const ProfileSmokeOption = React.memo(
+  () => {
+    const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
+    
+    const text = useMemo(() => ({
+      attitudeTowardsSmoke: 'Отношение к курению',
+      notSelected: optionText.notSelected,
+      itNegative: 'Отрицательное',
+      itNeutral: 'Нейтральное',
+      itPositive: 'Положительное',
+    }), [titleText, optionText])
+    
+    
+    const [selected, setSelected] = useState('')
+    
+    
+    const options = useMemo(
+      () => [
+        {
+          value: text.itNegative,
+          text: text.itNegative,
+        },
+        {
+          value: text.itNeutral,
+          text: text.itNeutral,
+        },
+        {
+          value: text.itPositive,
+          text: text.itPositive,
+        },
+        {
+          value: '',
+          text: text.notSelected,
+        },
+      ],
+      [text]
+    )
+    
+    
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    const value = options.find(opt => opt.value === selected)?.text ?? ''
+    
+    
+    return (
+      <>
+        <OptionItem
+          icon={<SmokeCigaretteGradIc />}
+          title={text.attitudeTowardsSmoke}
+          value={value}
+          onClick={open}
+        />
+        
+        
+        <ModalSingleSelectList
+          isOpen={isOpen}
+          close={close}
+          title={text.attitudeTowardsSmoke}
+          options={options}
+          selected={selected}
+          setSelected={setSelected}
+          notSelectedValue={''}
+        />
+      </>
+    )
+  }
+)
 export default ProfileSmokeOption
 
 

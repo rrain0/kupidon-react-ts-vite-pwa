@@ -32,32 +32,32 @@ const ProfileEducationOption = React.memo(
     const text = useMemo(() => ({
       notSelected: optionText.notSelected,
       notSelectedL: optionText.notSelected.toLowerCase(),
-      primarySchoolEducation: optionText.primarySchoolEducation,
       secondarySchoolEducation: optionText.secondarySchoolEducation,
       specializedSecondarySchoolEducation: optionText.specializedSecondarySchoolEducation,
-      incompleteHigherEducation: optionText.incompleteHigherEducation,
       higherEducation: optionText.higherEducation,
+      academicDegree: optionText.academicDegree,
     }), [optionText, titleText])
     
     
     const options = useMemo(
       () => [
         {
-          value: 'HIGHER_EDUCATION',
-          text: text.higherEducation,
-        }, {
-          value: 'INCOMPLETE_HIGHER_EDUCATION',
-          text: text.incompleteHigherEducation,
-        }, {
-          value: 'SPECIALIZED_SECONDARY_EDUCATION',
-          text: text.specializedSecondarySchoolEducation,
-        }, {
           value: 'SECONDARY_SCHOOL_EDUCATION',
           text: text.secondarySchoolEducation,
-        }, {
-          value: 'PRIMARY_SCHOOL_EDUCATION',
-          text: text.primarySchoolEducation,
-        }, {
+        },
+        {
+          value: 'SPECIALIZED_SECONDARY_EDUCATION',
+          text: text.specializedSecondarySchoolEducation,
+        },
+        {
+          value: 'HIGHER_EDUCATION',
+          text: text.higherEducation,
+        },
+        {
+          value: 'ACADEMIC_DEGREE_EDUCATION',
+          text: text.academicDegree,
+        },
+        {
           value: '',
           text: text.notSelected,
         },

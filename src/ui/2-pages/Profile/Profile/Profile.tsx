@@ -188,10 +188,10 @@ const Profile = React.memo(
                 </ValidationWrap>
                 
                 
-                <ProfileAlcoholOption/>
-                
-                
                 <ProfileSmokeOption/>
+                
+                
+                <ProfileAlcoholOption/>
                 
                 
                 <ProfilePetsOption/>
