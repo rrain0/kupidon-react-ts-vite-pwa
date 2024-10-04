@@ -7,8 +7,8 @@ export namespace TypeU {
   export type empty = null | undefined
   export type anyval = {} | null | undefined
   export type anyfun = (...args: any[]) => any
-  export type falsy = false | undefined | null | '' | 0
-  export type emptyObj = Record<never, never> // need to fix
+  export type falsy = false | undefined | null | '' | 0 | 0n
+  export type emptyObj = Record<never, never> // todo need to fix
   export type HtmlBool = true | undefined
   
   export const noop = () => {}

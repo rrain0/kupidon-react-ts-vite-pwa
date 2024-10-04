@@ -1,5 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
+import {
+  useMultiSelectOneEditableOption
+} from 'src/ui/1-widgets/modals/ModalMultiSelectList/useMultiSelectOneEditableOption'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -27,48 +30,55 @@ const ProfileFavoriteBookGenresOption = React.memo(
     
     const text = useMemo(() => ({
       notSelected: optionText.notSelected,
+      favoriteBookGenres: 'Любимые жанры книг',
     }), [titleText, optionText])
     
     
-    
-    
-    
-    
-    const [selected, setSelected] = useState([] as string[])
-    const [customOptionText, setCustomOptionText] = useState('')
-    
-    const options = useMemo(
-      () => [
+    const options0 = useMemo(() => {
+      return [
         {
           value: '1',
           text: 'Научпоп',
-        }, {
+        },
+        {
           value: '2',
           text: 'Наука',
-        }, {
+        },
+        {
           value: '3',
           text: 'Драма',
-        }, {
+        },
+        {
           value: '4',
           text: 'Детектив',
-        }, {
+        },
+        {
           value: '6',
           text: 'Манга',
-        }, {
+        },
+        {
           value: '7',
           text: 'Приключения',
-        }, {
+        },
+        {
           value: '8',
           text: 'Научная фантастика',
-        }, {
+        },
+        {
           value: 'CUSTOM',
           text: '',
         },
-      ],
-      [text]
+      ]
+    }, [text])
+    
+    
+    const [selected, setSelected] = useState([] as string[])
+    
+    const { options, add, edit, setOptionText } = useMultiSelectOneEditableOption(
+      'CUSTOM', options0, selected, setSelected
     )
     
-    const value = selected
+    const valueText = selected
       .map(v => options.find(o => o.value === v))
       .filter(o => !!o)
       .map(o => o!.text)
@@ -84,8 +94,8 @@ const ProfileFavoriteBookGenresOption = React.memo(
       <>
         <OptionItem
           icon={<BookGradIc />}
-          title={'Любимые жанры книг'}
-          value={value}
+          title={text.favoriteBookGenres}
+          value={valueText}
           onClick={open}
         />
         
@@ -93,12 +103,13 @@ const ProfileFavoriteBookGenresOption = React.memo(
         <ModalMultiSelectList
           isOpen={isOpen}
           close={close}
-          title={'Любимые жанры книг'}
+          title={text.favoriteBookGenres}
           options={options}
           selected={selected}
+          add={add}
+          edit={edit}
           setSelected={setSelected}
-          customOptionText={customOptionText}
-          setCustomOptionText={setCustomOptionText}
+          setOptionText={setOptionText}
         />
         
         

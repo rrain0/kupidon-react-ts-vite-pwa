@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
-import { Option } from 'src/ui-data/models/Option'
+import { Option, OPTION_CUSTOM } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
@@ -18,30 +18,29 @@ import Callback = TypeU.Callback
 import Setter = TypeU.Setter
 import col = EmotionCommon.col
 import Puro = TypeU.Puro
-import Ro = TypeU.Ro
-import emptyArr = TypeU.emptyArr
+import noop = TypeU.noop
 
 
 
-const overlayEdit = 'edit'
+const overlayRemove = 'remove'
 
 
 
-type ModalMultiSelectListProps<T extends string> = Ro<{
+type ModalTileSelectProps<T extends string> = {
   isOpen: boolean
   close: Callback
   title: string
+  
   options: Option<T>[]
-}> & Puro<{
   selected: T[]
-  add: T[]
-  edit: T[]
   setSelected: Setter<T[]>
-  setOptionText: Setter<Option<T>>
+} & Puro<{
+  customOptionText: string
+  setCustomOptionText: Setter<string>
 }>
 
-const ModalMultiSelectList = ReactU.memo(
-  <T extends string>(props: ModalMultiSelectListProps<T>) => {
+const ModalTileSelect = ReactU.memo(
+  <T extends string>(props: ModalTileSelectProps<T>) => {
     
     const {
       isOpen,
@@ -49,35 +48,25 @@ const ModalMultiSelectList = ReactU.memo(
       title,
       
       options,
-      selected = emptyArr,
-      add = emptyArr,
-      edit = emptyArr,
+      selected,
       setSelected,
-      setOptionText,
+      
+      customOptionText = '',
+      setCustomOptionText = noop,
     } = props
     
     const toggleSelected = (value: T) => {
-      setSelected?.(ArrayU.toggleTo(selected, value))
+      setSelected(ArrayU.toggleTo(selected, value))
     }
     
     
-    const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayEdit)
-    
-    const [editableValue, setEditableValue] = useState<T | undefined>(undefined)
-    const [editableText, setEditableText] = useState('')
-    
-    const openOptionEdit = (opt: Option<T>) => {
-      setEditableValue(opt.value)
-      setEditableText(opt.text)
-      openEdit()
-    }
-    
+    const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayRemove)
+    const [inputText, setInputText] = useState(customOptionText)
     const onEditClose = () => {
-      const v = editableValue!
       closeEdit()
-      setOptionText?.({ value: v!, text: editableText })
-      // if (editableText) setSelected?.(ArrayU.pushUniqToIf(selected, v))
-      // else setSelected?.(ArrayU.removeToIf(selected, v))
+      setCustomOptionText(inputText)
+      if (inputText) setSelected(ArrayU.pushUniqToIf(selected, OPTION_CUSTOM as T))
+      else setSelected(ArrayU.removeToIf(selected, OPTION_CUSTOM as T))
     }
     
     
@@ -94,36 +83,38 @@ const ModalMultiSelectList = ReactU.memo(
                 {...sheetProps.sheetProps}
                 header={title}
               >
+                <div>ПОЗЖЕ ПЕРЕДЕЛАЮ НА ВЫБОР ХЭШТЕГОВ</div>
                 <div css={selectItemsContainer}>
-                  {options.map((opt, i) => {
-                    const isSelected = selected.includes(opt.value)
-                    const isAdd = add.includes(opt.value)
-                    const isEdit = edit.includes(opt.value)
-                    return (
+                  {options
+                    .map((opt, i) => (
                       <SelectItem
                         css={SelectItemS.normal}
                         key={opt.value}
                         onClick={() => {
-                          if (!isAdd) toggleSelected(opt.value)
-                          if (isAdd && isEdit) openOptionEdit(opt)
+                          if (opt.value !== OPTION_CUSTOM) toggleSelected(opt.value)
+                          if (opt.value === OPTION_CUSTOM && customOptionText) toggleSelected(opt.value)
+                          if (opt.value === OPTION_CUSTOM && !customOptionText) openEdit()
                         }}
-                        onClickEdit={() => openOptionEdit(opt)}
-                        isSelected={isSelected}
-                        isAdd={isAdd}
-                        isEdit={isEdit}
+                        onClickEdit={openEdit}
+                        isSelected={selected.includes(opt.value)}
+                        isAdd={opt.value === OPTION_CUSTOM && !customOptionText}
+                        isEdit={opt.value === OPTION_CUSTOM}
                         indicatorsSelection={options.map((it, i2) => {
-                          if (!isSelected) return false
+                          if (!selected.includes(it.value)) return 0
                           //if (i !== i2) return 1
-                          if (i !== i2) return false
-                          return true
+                          if (i !== i2) return 0
+                          return 2
                         })}
                       >
                         <SelectItemText>
-                          {opt.text}
+                          {(() => {
+                            if (opt.value === OPTION_CUSTOM) return customOptionText
+                            return opt.text
+                          })()}
                         </SelectItemText>
                       </SelectItem>
-                    )
-                  })}
+                    ))
+                  }
                 </div>
               
               </BottomSheetDialogBasic>
@@ -133,9 +124,9 @@ const ModalMultiSelectList = ReactU.memo(
             <ModalInput
               isOpen={isEditOpen}
               onClose={onEditClose}
-              onClear={() => setEditableText('')}
-              value={editableText}
-              onChange={ev => setEditableText(ev.currentTarget.value)}
+              onClear={() => setInputText('')}
+              value={inputText}
+              onChange={ev => setInputText(ev.currentTarget.value)}
               title={title}
             />
             
@@ -145,7 +136,7 @@ const ModalMultiSelectList = ReactU.memo(
     )
   }
 )
-export default ModalMultiSelectList
+export default ModalTileSelect
 
 
 

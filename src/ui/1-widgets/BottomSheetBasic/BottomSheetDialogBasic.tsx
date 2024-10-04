@@ -5,15 +5,14 @@ import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomS
 import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import PartialUndef = TypeU.PartialUndef
+import Puro = TypeU.Puro
 
 
 
-export type BottomSheetDialogBasicProps =
-  BottomSheetOptionsProps & PartialUndef<{
-    header: React.ReactNode
-    children: React.ReactNode
-  }>
+export type BottomSheetDialogBasicProps = BottomSheetOptionsProps & Puro<{
+  header: React.ReactNode
+  children: React.ReactNode
+}>
 
 
 
@@ -32,61 +31,66 @@ const BottomSheetDialogBasic = React.memo(
     
     
     
-    return <BottomSheetDialog
-      {...restProps}
-      bottomSheetFrameRef={bottomSheetFrameRef}
-      bottomSheetRef={bottomSheetRef}
-      bottomSheetHeaderRef={bottomSheetHeaderRef}
-      bottomSheetContentRef={bottomSheetContentRef}
-    >
-      {({ sheetDrag }) => <>
-        {/*
-         // Header Component
-         // Must be without margins!!!
-         */}
-        <div css={t => css`
-          ${BottomSheetBasicParts.headerStyle(t)};
-          ${sheetState==='dragging' && css`cursor: grabbing;`}
-        `}
-          ref={bottomSheetHeaderRef as any}
-          {...sheetDrag()}
-        >
-          
-          <div /* Header handle */ css={t => css`
-            ${BottomSheetBasicParts.headerHandleStyle(t)};
-            ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
-          `}/>
-          
-          <div css={BottomSheetBasicParts.headerTextStyle}>
-            {header}
-          </div>
-        
-        </div>
-        
-        {/*
-         // Body Component
-         // Must be without margins & paddings!!!
-         */}
-        <div css={BottomSheetBasicParts.bodyStyle}>
-          <OverflowWrapper css={OverflowWrapperStyle.defolt}
-            showVertical={
-              ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)
-            }
-          >
+    return (
+      <BottomSheetDialog
+        {...restProps}
+        bottomSheetFrameRef={bottomSheetFrameRef}
+        bottomSheetRef={bottomSheetRef}
+        bottomSheetHeaderRef={bottomSheetHeaderRef}
+        bottomSheetContentRef={bottomSheetContentRef}
+      >
+        {({ sheetDrag }) => (
+          <>
             {/*
-             // scrollable content
+             // Header Component
              // Must be without margins!!!
              */}
-            <div css={BottomSheetBasicParts.scrollableContentStyle}
-              ref={bottomSheetContentRef as any}
+            <div
+              css={t => css`
+                ${BottomSheetBasicParts.headerStyle(t)};
+                ${sheetState === 'dragging' && 'cursor: grabbing;'}
+              `}
+              ref={bottomSheetHeaderRef as any}
+              {...sheetDrag()}
             >
-              { children }
+              
+              <div /* Header handle */ css={t => css`
+                ${BottomSheetBasicParts.headerHandleStyle(t)};
+                ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
+              `}/>
+              
+              <div css={BottomSheetBasicParts.headerTextStyle}>
+                {header}
+              </div>
+            
             </div>
-          </OverflowWrapper>
-        </div>
-      </>}
+            
+            {/*
+             // Body Component
+             // Must be without margins & paddings!!!
+             */}
+            <div css={BottomSheetBasicParts.bodyStyle}>
+              <OverflowWrapper css={OverflowWrapperStyle.defolt}
+                showVertical={
+                  ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)
+                }
+              >
+                {/*
+                 // scrollable content
+                 // Must be without margins!!!
+                 */}
+                <div css={BottomSheetBasicParts.scrollableContentStyle}
+                  ref={bottomSheetContentRef as any}
+                >
+                  { children }
+                </div>
+              </OverflowWrapper>
+            </div>
+          </>
+        )}
       
-    </BottomSheetDialog>
+      </BottomSheetDialog>
+    )
   }
 )
 export default BottomSheetDialogBasic

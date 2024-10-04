@@ -16,6 +16,7 @@ import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter
 import col = EmotionCommon.col
+import Ro = TypeU.Ro
 import Puro = TypeU.Puro
 import noop = TypeU.noop
 import exists = TypeU.exists
@@ -26,7 +27,7 @@ const overlayEdit = 'edit'
 
 
 
-type ModalSingleSelectListProps<T extends string> = {
+type ModalSingleSelectListProps<T extends string> = Ro<{
   isOpen: boolean
   close: Callback
   title: string
@@ -37,7 +38,7 @@ type ModalSingleSelectListProps<T extends string> = {
   
   notSelectedValue?: T | undefined
   customValue?: T | undefined
-} & Puro<{
+}> & Puro<{
   customOptionText: string
   setCustomOptionText: Setter<string>
 }>

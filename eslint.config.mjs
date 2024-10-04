@@ -63,6 +63,8 @@ export default [
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-namespace': 'off',
+        '@typescript-eslint/no-empty-object-type': 'off',
+        '@typescript-eslint/no-unsafe-function-type': 'off',
       },
     }
   ),

@@ -23,6 +23,7 @@ import Ro = TypeU.Ro
 
 // Slider or Scale Picker
 
+// TODO extract logic to hook useSlider
 
 /*
 Фичи:

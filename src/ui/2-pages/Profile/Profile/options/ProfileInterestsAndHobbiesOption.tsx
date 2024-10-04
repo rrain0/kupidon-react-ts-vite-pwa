@@ -28,46 +28,61 @@ const ProfileInterestsAndHobbiesOption = React.memo(
     const text = useMemo(() => ({
       notSelected: optionText.notSelected,
       interestsAndHobbies: 'Интересы и хобби',
+      hashTravel: '#путешествия',
+      hashMusic: '#музыка',
+      hashSport: '#спорт',
+      hashMovie: '#кино',
+      hashArt: '#искусство',
+      hashAnime: '#аниме',
     }), [titleText, optionText])
     
-    
-    /* const [selected, setSelected] = useState([] as string[])
-    const [customOptionText, setCustomOptionText] = useState('')
+    const [maxSelectedCnt, setMaxSelectedCnt] = useState(8)
+    const [selected, setSelected] = useState<string[]>(['travel', 'music', 'sport'])
+    //const [customOptionText, setCustomOptionText] = useState('')
     
     const options = useMemo(
       () => [
         {
-          value: '1',
-          text: 'Путешествия',
-        }, {
-          value: '2',
-          text: 'Музыка',
-        }, {
-          value: '3',
-          text: 'Спорт',
-        }, {
-          value: '4',
-          text: 'Кино',
-        }, {
-          value: '5',
-          text: 'Искусство',
-        }, {
-          value: OPTION_CUSTOM,
-          text: '',
+          value: 'travel',
+          text: text.hashTravel,
         },
+        {
+          value: 'music',
+          text: text.hashMusic,
+        },
+        {
+          value: 'sport',
+          text: text.hashSport,
+        },
+        {
+          value: 'movie',
+          text: text.hashMovie,
+        },
+        {
+          value: 'art',
+          text: text.hashArt,
+        },
+        {
+          value: 'anime',
+          text: text.hashAnime,
+        },
+        /* {
+          valueText: 'CUSTOM',
+          text: '',
+        }, */
       ],
       [text]
     )
     
-    const value = selected
+    const valueText = selected
       .map(v => options.find(o => o.value === v))
       .filter(o => !!o)
       .map(o => o.text)
-      .join(', ')
+      .join(' ')
       || text.notSelected
-    
-    
-    const { isOpen, open, close } = useOverlayUrl(overlayName) */
+     
+     
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
     
     
     return (
@@ -75,21 +90,21 @@ const ProfileInterestsAndHobbiesOption = React.memo(
         <OptionItem
           icon={<TelescopeGradIc />}
           title={text.interestsAndHobbies}
-          value={'#путешествия #музыка #спорт'}
-          //onClick={open}
+          value={valueText}
+          onClick={open}
         />
         
         
-        {/* <ModalMultiSelectList
+        <ModalMultiSelectList
           isOpen={isOpen}
           close={close}
           title={text.interestsAndHobbies}
           options={options}
           selected={selected}
           setSelected={setSelected}
-          customOptionText={customOptionText}
-          setCustomOptionText={setCustomOptionText}
-        /> */}
+          //customOptionText={customOptionText}
+          //setCustomOptionText={setCustomOptionText}
+        />
       </>
     )
   }

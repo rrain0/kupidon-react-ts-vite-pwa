@@ -1,5 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
+import {
+  useMultiSelectOneEditableOption
+} from 'src/ui/1-widgets/modals/ModalMultiSelectList/useMultiSelectOneEditableOption'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -34,7 +37,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     const [selected, setSelected] = useState([] as string[])
     const [customOptionText, setCustomOptionText] = useState('')
     
-    const options = useMemo(
+    const options0 = useMemo(
       () => [
         {
           value: '1',
@@ -67,7 +70,11 @@ const ProfileFavoriteMovieGenresOption = React.memo(
       ],
       [text]
     )
-  
+    
+    
+    const { options, add, edit, setOptionText } = useMultiSelectOneEditableOption(
+      'CUSTOM', options0, selected, setSelected
+    )
   
   
     const value = selected
@@ -97,9 +104,10 @@ const ProfileFavoriteMovieGenresOption = React.memo(
           title={'Любимые жанры фильмов'}
           options={options}
           selected={selected}
+          add={add}
+          edit={edit}
           setSelected={setSelected}
-          customOptionText={customOptionText}
-          setCustomOptionText={setCustomOptionText}
+          setOptionText={setOptionText}
         />
         
         

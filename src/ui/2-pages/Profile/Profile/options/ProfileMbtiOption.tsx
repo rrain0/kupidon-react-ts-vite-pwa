@@ -44,7 +44,7 @@ const ProfileGenderOption = React.memo(
           icon={<PuzzlesGradIc />}
           title={'Тип личности MBTI'}
           value={'Не выбрано'}
-          onClick={open}
+          //onClick={open}
         />
         
         
