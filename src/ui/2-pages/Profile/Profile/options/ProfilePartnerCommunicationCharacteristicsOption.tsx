@@ -68,7 +68,7 @@ const ProfilePartnerCommunicationCharacteristicsOption = React.memo(
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
-    const value = props.value
+    const valueText = props.value
       .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
       .map(o => o!.text)
@@ -82,7 +82,7 @@ const ProfilePartnerCommunicationCharacteristicsOption = React.memo(
         <OptionItem
           icon={<CommunicationTwoPeopleGradIc />}
           title={text.partnerCommunicationCharacteristics}
-          value={value}
+          value={valueText}
           onClick={open}
         />
         

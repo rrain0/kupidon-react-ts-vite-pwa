@@ -77,7 +77,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     )
   
   
-    const value = selected
+    const valueText = selected
       .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
       .map(o => o.text)
@@ -93,7 +93,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
         <OptionItem
           icon={<FilmGradIc />}
           title={'Любимые жанры фильмов'}
-          value={value}
+          value={valueText}
           onClick={open}
         />
         

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
@@ -18,7 +18,6 @@ import Setter = TypeU.Setter
 import col = EmotionCommon.col
 import Ro = TypeU.Ro
 import Puro = TypeU.Puro
-import noop = TypeU.noop
 import exists = TypeU.exists
 
 
@@ -31,16 +30,14 @@ type ModalSingleSelectListProps<T extends string> = Ro<{
   isOpen: boolean
   close: Callback
   title: string
-  
   options: Option<T>[]
   selected: T
-  setSelected: Setter<T>
-  
-  notSelectedValue?: T | undefined
-  customValue?: T | undefined
 }> & Puro<{
-  customOptionText: string
-  setCustomOptionText: Setter<string>
+  setSelected: Setter<T>
+  notSelectedValue: T
+  add: T[]
+  edit: T[]
+  setOptionText: Setter<Option<T>>
 }>
 
 const ModalSingleSelectList = ReactU.memo(
@@ -56,33 +53,35 @@ const ModalSingleSelectList = ReactU.memo(
       setSelected,
       
       notSelectedValue,
-      customValue,
-      
-      customOptionText = '',
-      setCustomOptionText = noop,
+      add = [],
+      edit = [],
+      setOptionText,
     } = props
     
     const toggleSelected = (id: T) => {
-      if (selected === id && exists(notSelectedValue)) setSelected(notSelectedValue)
-      else setSelected(id)
+      if (selected === id && exists(notSelectedValue)) setSelected?.(notSelectedValue)
+      else setSelected?.(id)
     }
     
-    
-    const defaultOption = useMemo(() => {
-      if (exists(notSelectedValue)) return notSelectedValue
-      return options[0].id
-    }, [options, notSelectedValue])
-    
-    
     const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayEdit)
-    const [inputText, setInputText] = useState(customOptionText)
+    
+    const [editableValue, setEditableValue] = useState<T | undefined>(undefined)
+    const [editableText, setEditableText] = useState('')
+    
+    const openOptionEdit = (opt: Option<T>) => {
+      setEditableValue(opt.id)
+      setEditableText(opt.text)
+      openEdit()
+    }
+    
     const onEditClose = () => {
+      const v = editableValue!
       closeEdit()
-      setCustomOptionText(inputText)
-      if (exists(customValue)) {
-        if (inputText) setSelected(customValue)
-        if (selected === customValue && !inputText) setSelected(defaultOption)
-      }
+      setOptionText?.({ id: v!, text: editableText })
+      // if (exists(customValue)) {
+      //   if (editableText) setSelected?.(customValue)
+      //   if (selected === customValue && !editableText) setSelected?.(defaultOption)
+      // }
     }
     
     
@@ -100,29 +99,30 @@ const ModalSingleSelectList = ReactU.memo(
                 header={title}
               >
                 <div css={selectItemsContainer}>
-                  {options.filter(opt => opt.id !== notSelectedValue).map(opt => (
-                    <SelectItem
-                      css={SelectItemS.normal}
-                      key={opt.id}
-                      onClick={() => {
-                        if (opt.id !== customValue) toggleSelected(opt.id)
-                        if (opt.id === customValue && customOptionText) toggleSelected(opt.id)
-                        if (opt.id === customValue && !customOptionText) openEdit()
-                      }}
-                      onClickEdit={openEdit}
-                      isSelected={opt.id === selected}
-                      isAdd={opt.id === customValue && !customOptionText}
-                      isEdit={opt.id === customValue}
-                      indicatorsSelection={opt.id === selected ? [true] : [false]}
-                    >
-                      <SelectItemText>
-                        {(() => {
-                          if (opt.id === customValue) return customOptionText
-                          return opt.text
-                        })()}
-                      </SelectItemText>
-                    </SelectItem>
-                  ))}
+                  {options.filter(opt => opt.id !== notSelectedValue).map(opt => {
+                    const isSelected = selected === opt.id
+                    const isAdd = add.includes(opt.id)
+                    const isEdit = edit.includes(opt.id)
+                    return (
+                      <SelectItem
+                        css={SelectItemS.normal}
+                        key={opt.id}
+                        onClick={() => {
+                          if (!isAdd) toggleSelected(opt.id)
+                          if (isAdd && isEdit) openOptionEdit(opt)
+                        }}
+                        onClickEdit={() => openOptionEdit(opt)}
+                        isSelected={isSelected}
+                        isAdd={isAdd}
+                        isEdit={isEdit}
+                        indicatorsSelection={opt.id === selected ? [true] : [false]}
+                      >
+                        <SelectItemText>
+                          {opt.text}
+                        </SelectItemText>
+                      </SelectItem>
+                    )
+                  })}
                 </div>
               
               </BottomSheetDialogBasic>
@@ -132,9 +132,9 @@ const ModalSingleSelectList = ReactU.memo(
             <ModalInput
               isOpen={isEditOpen}
               onClose={onEditClose}
-              onClear={() => setInputText('')}
-              value={inputText}
-              onChange={ev => setInputText(ev.currentTarget.value)}
+              onClear={() => setEditableText('')}
+              value={editableText}
+              onChange={ev => setEditableText(ev.currentTarget.value)}
               title={title}
             />
           

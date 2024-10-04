@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { Option } from 'src/ui-data/models/Option'
 import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSelect'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
@@ -70,7 +71,7 @@ const ProfileInterestsAndHobbiesOption = React.memo(
           valueText: 'CUSTOM',
           text: '',
         }, */
-      ],
+      ] satisfies Option<string>[],
       [text]
     )
     

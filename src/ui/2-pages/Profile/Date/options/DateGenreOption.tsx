@@ -3,6 +3,9 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import {
+  useSingleSelectOneEditableOption
+} from 'src/ui/1-widgets/modals/ModalSingleSelectList/useSingleSelectOneEditableOption'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
@@ -27,101 +30,104 @@ import col = EmotionCommon.col
 const overlayName = 'dateGenre'
 
 
-const DateGenreOption =
-React.memo(
-() => {
-  const optionText = useUiValues(OptionUiText)
-  const titleText = useUiValues(TitleUiText)
-  
-  const text = useMemo(() => ({
-    notSelected: optionText.notSelected,
-  }), [titleText, optionText])
-  
-  
-  const [selected, setSelected] = useState('')
-  const [customOptionText, setCustomOptionText] = useState('')
-  
-  const options = useMemo(
-    () => [
-      {
-        id: '1',
-        text: 'Романтическое свидание: Вечер в заведении, прогулка под луной, ужин при свечах и тд.',
-      }, {
-        id: '2',
-        text: 'Приключенческое свидание: Активные виды досуга, такие как '
-          + 'велосипедные прогулки, восхождение на гору, путешествия и экскурсии.',
-      }, {
-        id: '3',
-        text: 'Культурное свидание: Посещение музеев, галерей и выставок искусства, театров, кинофильмов.',
-      }, {
-        id: '4',
-        text: 'Спортивное свидание: Совместные занятия спортом, '
-          + 'например, игра в теннис, боулинг или даже просто фитнес-занятия вместе.',
-      }, {
-        id: '5',
-        text: 'Кулинарное свидание: Готовка или посещение кулинарных мастер-классов, '
-          + 'дегустации вин или рестораны с необычной кухней.',
-      }, {
-        id: '6',
-        text: 'Интеллектуальный жанр: «Рекомендация игр-головоломок и квестов. '
-          + 'Подсказки по участию в интеллектуальных соревнованиях и викторинах».',
-      }, {
-        id: '7',
-        text: 'Музыкальный жанр: «Рекомендация концертов и выступлений местных музыкантов. '
-          + 'Подсказки по посещению ночных клубов или баров с живой музыкой».',
-      }, {
-        id: '8',
-        text: 'Фотографический жанр: «Рекомендация красивых мест для фотосессий. '
-          + 'Советы по организации фотосафари или фотовыставок».',
-      }, {
-        id: 'CUSTOM',
-        text: '',
-      }, {
-        id: '',
-        text: '',
-      },
-    ] satisfies Option<string>[],
-    [text]
-  )
-  
-  
-  
-  const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = (() => {
-    const opt = options.find(opt => opt.id === selected)!
-    if (opt.id === '') return text.notSelected
-    if (opt.id === 'CUSTOM') return customOptionText
-    return opt.text
-  })()
-  
-  
-  
-  return (
-    <>
-      <OptionItem
-        //icon={<GenderGradIc />}
-        title={'Жанр свидания'}
-        value={value}
-        onClick={open}
-      />
-      
-      
-      <ModalSingleSelectList
-        isOpen={isOpen}
-        close={close}
-        title={'Жанр свидания'}
-        options={options}
-        selected={selected}
-        setSelected={setSelected}
-        notSelectedValue={''}
-        customValue={'CUSTOM'}
-        customOptionText={customOptionText}
-        setCustomOptionText={setCustomOptionText}
-      />
-      
-    </>
-  )
-})
+const DateGenreOption = React.memo(
+  () => {
+    const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
+    
+    const text = useMemo(() => ({
+      notSelected: optionText.notSelected,
+    }), [titleText, optionText])
+    
+    const [selected, setSelected] = useState('')
+    
+    const options0 = useMemo(() => {
+      return [
+        {
+          id: '1',
+          text: 'Романтическое свидание: Вечер в заведении, прогулка под луной, ужин при свечах и тд.',
+        },
+        {
+          id: '2',
+          text: 'Приключенческое свидание: Активные виды досуга, такие как '
+            + 'велосипедные прогулки, восхождение на гору, путешествия и экскурсии.',
+        },
+        {
+          id: '3',
+          text: 'Культурное свидание: Посещение музеев, галерей и выставок искусства, театров, кинофильмов.',
+        },
+        {
+          id: '4',
+          text: 'Спортивное свидание: Совместные занятия спортом, '
+            + 'например, игра в теннис, боулинг или даже просто фитнес-занятия вместе.',
+        },
+        {
+          id: '5',
+          text: 'Кулинарное свидание: Готовка или посещение кулинарных мастер-классов, '
+            + 'дегустации вин или рестораны с необычной кухней.',
+        },
+        {
+          id: '6',
+          text: 'Интеллектуальный жанр: «Рекомендация игр-головоломок и квестов. '
+            + 'Подсказки по участию в интеллектуальных соревнованиях и викторинах».',
+        },
+        {
+          id: '7',
+          text: 'Музыкальный жанр: «Рекомендация концертов и выступлений местных музыкантов. '
+            + 'Подсказки по посещению ночных клубов или баров с живой музыкой».',
+        },
+        {
+          id: '8',
+          text: 'Фотографический жанр: «Рекомендация красивых мест для фотосессий. '
+            + 'Советы по организации фотосафари или фотовыставок».',
+        },
+        {
+          id: 'CUSTOM',
+          text: '',
+        },
+        {
+          id: '',
+          text: '',
+        },
+      ] satisfies Option<string>[]
+    }, [text])
+    
+    const { options, add, edit, setOptionText } = useSingleSelectOneEditableOption(
+      'CUSTOM', options0, selected, setSelected, '',
+    )
+    
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const valueText = options.find(opt => opt.id === selected)?.text || text.notSelected
+    
+    
+    return (
+      <>
+        <OptionItem
+          //icon={<GenderGradIc />}
+          title={'Жанр свидания'}
+          value={valueText}
+          onClick={open}
+        />
+        
+        
+        <ModalSingleSelectList
+          isOpen={isOpen}
+          close={close}
+          title={'Жанр свидания'}
+          options={options}
+          selected={selected}
+          setSelected={setSelected}
+          notSelectedValue={''}
+          add={add}
+          edit={edit}
+          setOptionText={setOptionText}
+        />
+        
+      </>
+    )
+  }
+)
 export default DateGenreOption
 
 
