@@ -304,6 +304,10 @@ export default [
     rules: {
       'jsx-a11y/tabindex-no-positive': 'off',
       'jsx-a11y/no-autofocus': 'off',
+      // for now, I do not concern about accessibility
+      'jsx-a11y/no-static-element-interactions': 'off',
+      // for now, I do not concern about accessibility
+      'jsx-a11y/click-events-have-key-events': 'off',
     },
   },
   

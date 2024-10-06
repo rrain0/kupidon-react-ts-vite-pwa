@@ -1,18 +1,12 @@
 import React, { useMemo, useState } from 'react'
-import { Gender } from 'src/api/model/Gender.ts'
-import { Option } from 'src/ui-data/models/Option.ts'
-import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
+import { Option } from 'src/ui-data/models/Option'
+import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSelect'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import ModalSingleSelectList
-  from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import WineBottleAlcoholGradIc = SvgGradIcons.WineBottleAlcoholGradIc
-import GoalGradIc = SvgGradIcons.GoalGradIc
 import PlanetFrameGradIc = SvgGradIcons.PlanetFrameGradIc
 
 
@@ -24,7 +18,9 @@ import PlanetFrameGradIc = SvgGradIcons.PlanetFrameGradIc
 const overlayName = 'langs'
 
 
-
+interface LangOption extends Option<string> {
+  tag: string
+}
 
 
 const ProfileLangsOption = React.memo(
@@ -38,35 +34,102 @@ const ProfileLangsOption = React.memo(
     }), [titleText, optionText])
     
     
-    /* const [selected, setSelected] = useState('')
+    const [selected, setSelected] = useState(['ru', 'en', 'fr'])
     
     
-    const options = useMemo(
-      () => [
-        {
-          value: 'Свидание',
-          text: 'Свидание',
-        }, {
-          value: 'Общение онлайн',
-          text: 'Общение онлайн',
-        }, {
-          value: 'Деловое общение',
-          text: 'Деловое общение',
-        }, {
-          value: 'Новый опыт',
-          text: 'Новый опыт',
-        }, {
-          value: '',
-          text: text.notSelected,
-        },
-      ],
-      [text]
-    ) */
+    const options = useMemo(() => [
+      {
+        id: 'ru',
+        text: 'Русский',
+        tag: '#ru',
+      },
+      {
+        id: 'en',
+        text: 'Английский',
+        tag: '#en',
+      },
+      {
+        id: 'es',
+        text: 'Испанский',
+        tag: '#es',
+      },
+      {
+        id: 'pt',
+        text: 'Португальский',
+        tag: '#pt',
+      },
+      {
+        id: 'id',
+        text: 'Индонезийский',
+        tag: '#id',
+      },
+      {
+        id: 'fr',
+        text: 'Французский',
+        tag: '#fr',
+      },
+      {
+        id: 'tr',
+        text: 'Турецкий',
+        tag: '#tr',
+      },
+      {
+        id: 'de',
+        text: 'Немецкий',
+        tag: '#de',
+      },
+      {
+        id: 'zh',
+        text: 'Китайский',
+        tag: '#zh',
+      },
+      {
+        id: 'ar',
+        text: 'Арабский',
+        tag: '#ar',
+      },
+      {
+        id: 'vi',
+        text: 'Вьетнамский',
+        tag: '#vi',
+      },
+      {
+        id: 'it',
+        text: 'Итальянский',
+        tag: '#it',
+      },
+      {
+        id: 'ko',
+        text: 'Корейский',
+        tag: '#ko',
+      },
+      {
+        id: 'ja',
+        text: 'Японский',
+        tag: '#ja',
+      },
+      {
+        id: 'pl',
+        text: 'Польский',
+        tag: '#pl',
+      },
+      {
+        id: 'hi',
+        text: 'Хинди',
+        tag: '#pl',
+      },
+    ] satisfies LangOption[], [text])
     
     
     
-    // const { isOpen, open, close } = useOverlayUrl(overlayName)
-    // const value = options.find(opt => opt.value === selected)?.text ?? ''
+    const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const valueText = selected
+      .map(v => options.find(o => o.id === v))
+      .filter(o => !!o)
+      .map(o => o.tag)
+      .join(' ')
+      || text.notSelected
     
     
     return (
@@ -74,19 +137,18 @@ const ProfileLangsOption = React.memo(
         <OptionItem
           icon={<PlanetFrameGradIc />}
           title={text.langs}
-          value={'#ru #en #fr'}
-          //onClick={open}
+          value={valueText}
+          onClick={open}
         />
         
-        
-        {/* <ModalSingleSelectList
+        <ModalTileSelect
           isOpen={isOpen}
           close={close}
-          title={'Цель знакомства'}
+          title={text.langs}
           options={options}
           selected={selected}
           setSelected={setSelected}
-        /> */}
+        />
       </>
     )
   }

@@ -43,16 +43,16 @@ const ProfileSmokeOption = React.memo(
     const options = useMemo(
       () => [
         {
-          id: text.itNegative,
-          text: text.itNegative,
+          id: text.itPositive,
+          text: text.itPositive,
         },
         {
           id: text.itNeutral,
           text: text.itNeutral,
         },
         {
-          id: text.itPositive,
-          text: text.itPositive,
+          id: text.itNegative,
+          text: text.itNegative,
         },
         {
           id: '',

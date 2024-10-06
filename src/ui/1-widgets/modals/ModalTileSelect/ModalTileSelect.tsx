@@ -1,42 +1,45 @@
-import { css } from '@emotion/react'
-import React, { useState } from 'react'
+import styled from '@emotion/styled'
+import React from 'react'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
-import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
-import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
-import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
-import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter
-import col = EmotionCommon.col
 import Puro = TypeU.Puro
-import noop = TypeU.noop
+import Ro = TypeU.Ro
+import emptyArr = TypeU.emptyArr
+import Txt = EmotionCommon.Txt
+import rowWrap = EmotionCommon.rowWrap
 
-const OPTION_CUSTOM = 'CUSTOM'
+
+
+/*
+TODO
+  1) Добавить масимальное кол-во выбранного.
+  Если попытаться выбрать больше, то сделать ещё 1 шторку с предложением убрать ненужное
+  2) Сделать поиск
+ */
+
+
 
 const overlayRemove = 'remove'
 
 
 
-type ModalTileSelectProps<T extends string> = {
+type ModalTileSelectProps<T extends string> = Ro<{
   isOpen: boolean
   close: Callback
   title: string
-  
   options: Option<T>[]
+}> & Puro<{
   selected: T[]
   setSelected: Setter<T[]>
-} & Puro<{
-  customOptionText: string
-  setCustomOptionText: Setter<string>
 }>
 
 const ModalTileSelect = ReactU.memo(
@@ -48,26 +51,17 @@ const ModalTileSelect = ReactU.memo(
       title,
       
       options,
-      selected,
+      selected = emptyArr,
       setSelected,
-      
-      customOptionText = '',
-      setCustomOptionText = noop,
     } = props
     
     const toggleSelected = (id: T) => {
-      setSelected(ArrayU.toggleTo(selected, id))
+      setSelected?.(ArrayU.toggleTo(selected, id))
     }
     
     
-    const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayRemove)
-    const [inputText, setInputText] = useState(customOptionText)
-    const onEditClose = () => {
-      closeEdit()
-      setCustomOptionText(inputText)
-      if (inputText) setSelected(ArrayU.pushUniqToIf(selected, OPTION_CUSTOM as T))
-      else setSelected(ArrayU.removeToIf(selected, OPTION_CUSTOM as T))
-    }
+    //const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayRemove)
+    
     
     
     return (
@@ -83,53 +77,28 @@ const ModalTileSelect = ReactU.memo(
                 {...sheetProps.sheetProps}
                 header={title}
               >
-                <div>ПОЗЖЕ ПЕРЕДЕЛАЮ НА ВЫБОР СЛОВ И МАЛЕНЬКИХ ОКРУГЛЫХ ПЛИТОК</div>
-                <div css={selectItemsContainer}>
-                  {options
-                    .map((opt, i) => (
-                      <SelectItem
-                        css={SelectItemS.normal}
+                
+                <SearchStub>{`<Здесь будет поиск>`}</SearchStub>
+                
+                <ItemsBox>
+                  {options.map((opt, i) => {
+                    return (
+                      <Tile
                         key={opt.id}
-                        onClick={() => {
-                          if (opt.id !== OPTION_CUSTOM) toggleSelected(opt.id)
-                          if (opt.id === OPTION_CUSTOM && customOptionText) toggleSelected(opt.id)
-                          if (opt.id === OPTION_CUSTOM && !customOptionText) openEdit()
-                        }}
-                        onClickEdit={openEdit}
+                        onClick={() => toggleSelected(opt.id)}
                         isSelected={selected.includes(opt.id)}
-                        isAdd={opt.id === OPTION_CUSTOM && !customOptionText}
-                        isEdit={opt.id === OPTION_CUSTOM}
-                        indicatorsSelection={options.map((it, i2) => {
-                          if (!selected.includes(it.id)) return 0
-                          //if (i !== i2) return 1
-                          if (i !== i2) return 0
-                          return 2
-                        })}
                       >
-                        <SelectItemText>
-                          {(() => {
-                            if (opt.id === OPTION_CUSTOM) return customOptionText
-                            return opt.text
-                          })()}
-                        </SelectItemText>
-                      </SelectItem>
-                    ))
-                  }
-                </div>
+                        {opt.text}
+                      </Tile>
+                    )
+                  })}
+                </ItemsBox>
+                
+                <div style={{ height: 24 }} />
               
               </BottomSheetDialogBasic>
             </ModalPortal>
-            
-            
-            <ModalInput
-              isOpen={isEditOpen}
-              onClose={onEditClose}
-              onClear={() => setInputText('')}
-              value={inputText}
-              onChange={ev => setInputText(ev.currentTarget.value)}
-              title={title}
-            />
-            
+          
           </>
         )}
       </UseBottomSheetState>
@@ -140,8 +109,26 @@ export default ModalTileSelect
 
 
 
-const selectItemsContainer = css`
-  ${col};
-  padding-bottom: ${Sizes.pb}px;
+const ItemsBox = styled.div`
+  ${rowWrap};
+  justify-content: space-around;
   gap: ${Sizes.g}px;
 `
+
+const SearchStub = styled.div`
+  align-self: center;
+  padding: ${Sizes.g}px;
+`
+
+const Tile = React.memo(
+  styled.div<Puro<{ isSelected: boolean }>>`
+    padding: 4px ${Sizes.g}px;
+    border-radius: 999999px;
+    ${Txt.normal1};
+    ${p => p.isSelected && `
+      color: ${p.theme.containerAccent.content[0]};
+      background: ${p.theme.containerAccent.bg[0]};
+    `}
+    cursor: pointer;
+  `
+)

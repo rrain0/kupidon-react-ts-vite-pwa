@@ -37,43 +37,34 @@ const ProfileInterestsAndHobbiesOption = React.memo(
       hashAnime: '#аниме',
     }), [titleText, optionText])
     
-    const [maxSelectedCnt, setMaxSelectedCnt] = useState(8)
     const [selected, setSelected] = useState<string[]>(['travel', 'music', 'sport'])
-    //const [customOptionText, setCustomOptionText] = useState('')
     
-    const options = useMemo(
-      () => [
-        {
-          id: 'travel',
-          text: text.hashTravel,
-        },
-        {
-          id: 'music',
-          text: text.hashMusic,
-        },
-        {
-          id: 'sport',
-          text: text.hashSport,
-        },
-        {
-          id: 'movie',
-          text: text.hashMovie,
-        },
-        {
-          id: 'art',
-          text: text.hashArt,
-        },
-        {
-          id: 'anime',
-          text: text.hashAnime,
-        },
-        /* {
-          valueText: 'CUSTOM',
-          text: '',
-        }, */
-      ] satisfies Option<string>[],
-      [text]
-    )
+    const options = useMemo(() => [
+      {
+        id: 'travel',
+        text: text.hashTravel,
+      },
+      {
+        id: 'music',
+        text: text.hashMusic,
+      },
+      {
+        id: 'sport',
+        text: text.hashSport,
+      },
+      {
+        id: 'movie',
+        text: text.hashMovie,
+      },
+      {
+        id: 'art',
+        text: text.hashArt,
+      },
+      {
+        id: 'anime',
+        text: text.hashAnime,
+      },
+    ] satisfies Option<string>[], [text])
     
     const valueText = selected
       .map(v => options.find(o => o.id === v))
@@ -103,8 +94,6 @@ const ProfileInterestsAndHobbiesOption = React.memo(
           options={options}
           selected={selected}
           setSelected={setSelected}
-          //customOptionText={customOptionText}
-          //setCustomOptionText={setCustomOptionText}
         />
       </>
     )
