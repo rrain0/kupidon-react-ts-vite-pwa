@@ -17,7 +17,7 @@ export const LightProps: ThemeProps = {
     content3:    ['#999999'],
   },
   statusBar: {
-    bg: ['#ffffff'],
+    bg: ['#f5f5f5'],
   },
   nav: {
     bg: ['#ffffff'],

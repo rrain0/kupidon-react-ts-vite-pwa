@@ -10,6 +10,7 @@ import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import GenderGradIc = SvgGradIcons.GenderGradIc
+import ModalSingleSelectList from 'ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 
 
 
@@ -23,65 +24,70 @@ const overlayName = 'dateWhoPays'
 
 
 
-const DateWhoPaysOption =
-React.memo(
-()=>{
+const DateWhoPaysOption = React.memo(() => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
-  const text = useMemo(()=>({
+  const text = useMemo(() => ({
+    yourPreferenceForAPaymentOnADate: 'Ваши предпочтения по оплате на свидании',
     notSelected: optionText.notSelected,
+    iAlwaysPay: 'Я всегда оплачиваю',
+    invoiceIsPaidByPartner: 'Счёт оплачивает партнёр',
+    iPreferToSplitTheBill: 'Предпочитаю делить счёт',
+    doesNotMatter: 'Не имеет значения',
   }), [titleText, optionText])
   
   
   const [selected, setSelected] = useState('')
   
   
-  const genderOptions = useMemo(
-    ()=>[
-      {
-        id: '1',
-        text: 'Я',
-      },{
-        id: '2',
-        text: 'Партнёр',
-      },{
-        id: '3',
-        text: 'Раздельно',
-      },{
-        id: '4',
-        text: 'Как пойдёт',
-      },{
-        id: '',
-        text: text.notSelected,
-      },
-    ] satisfies Option<string>[],
-    [text]
-  )
+  const options = useMemo(() => [
+    {
+      id: text.iAlwaysPay,
+      text: text.iAlwaysPay,
+    },
+    {
+      id: text.invoiceIsPaidByPartner,
+      text: text.invoiceIsPaidByPartner,
+    },
+    {
+      id: text.iPreferToSplitTheBill,
+      text: text.iPreferToSplitTheBill,
+    },
+    {
+      id: text.doesNotMatter,
+      text: text.doesNotMatter,
+    },
+  ] satisfies Option<string>[], [text])
   
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
-  const value = genderOptions.find(opt => opt.id === selected)?.text ?? ''
+  
+  const valueText = options.find(opt => opt.id === selected)?.text ?? text.notSelected
   
   
-  return <>
-    <OptionItem
-      //icon={<GenderGradIc />}
-      title={'Кто предпочтительнее оплачивает счет '}
-      value={value}
-      onClick={open}
-    />
-    
-    <ModalRadio
-      isOpen={isOpen}
-      close={close}
-      title={'Кто предпочтительнее оплачивает счет '}
-      options={genderOptions}
-      value={selected}
-      onSelect={setSelected}
-    />
-  </>
+  return (
+    <>
+      <OptionItem
+        //icon={<GenderGradIc />}
+        title={text.yourPreferenceForAPaymentOnADate}
+        value={valueText}
+        onClick={open}
+      />
+      
+      
+      <ModalSingleSelectList
+        isOpen={isOpen}
+        close={close}
+        title={text.yourPreferenceForAPaymentOnADate}
+        options={options}
+        selected={selected}
+        setSelected={setSelected}
+        notSelectedValue={''}
+      />
+    </>
+  )
 })
 export default DateWhoPaysOption
 

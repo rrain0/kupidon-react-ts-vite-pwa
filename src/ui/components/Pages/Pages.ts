@@ -13,11 +13,11 @@ export namespace Pages {
   
   
   
-  export const pageColors = (t: AppTheme.Theme)=>css`
+  export const pageColors = (t: AppTheme.Theme) => css`
     ${SimpleGradientBg(t)};
     color: ${t.page.content2[0]};
   `
-  export const simplePageColors = (t: AppTheme.Theme)=>css`
+  export const simplePageColors = (t: AppTheme.Theme) => css`
     background: ${t.page.bg[0]};
     color: ${t.page.content2[0]};
   `
@@ -34,13 +34,13 @@ export namespace Pages {
     ${page};
     position: relative;
     ${center};
-    ${p=>pageColors(p.theme)};
+    ${p => pageColors(p.theme)};
   `
   export const SimplePage = styled.main`
     ${page};
     position: relative;
     ${center};
-    ${p=>simplePageColors(p.theme)}
+    ${p => simplePageColors(p.theme)}
   `
   
   export const fillViewport = css`
@@ -51,7 +51,7 @@ export namespace Pages {
   `
   export const TabsPage = styled.main`
     ${fillViewport};
-    ${p=>pageColors(p.theme)}
+    ${p => pageColors(p.theme)}
   `
   
   

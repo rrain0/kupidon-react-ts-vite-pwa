@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
+import DateIdealDateOption from 'src/ui/2-pages/Profile/Date/options/DateIdealDateOption'
+import DateIdealFormatOption from 'src/ui/2-pages/Profile/Date/options/DateIdealFormatOption'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import DateActionsToCheerUpPartnerOption
@@ -9,15 +11,12 @@ import DateAdditionalInfoOption from 'src/ui/2-pages/Profile/Date/options/DateAd
 import DateDesiredPlaceOrEventOption
   from 'src/ui/2-pages/Profile/Date/options/DateDesiredPlaceOrEventOption.tsx'
 import DateFavoriteCuisineOption from 'src/ui/2-pages/Profile/Date/options/DateFavoriteCuisineOption.tsx'
-import DateGenreOption from 'src/ui/2-pages/Profile/Date/options/DateGenreOption.tsx'
-import DateIdealDateOption from 'src/ui/2-pages/Profile/Date/options/DateIdealDateOption.tsx'
 import DateMostInterestingVisitedPlaceOption
   from 'src/ui/2-pages/Profile/Date/options/DateMostInterestingVisitedPlaceOption.tsx'
 import DatePeriodBeforeDateOption from 'src/ui/2-pages/Profile/Date/options/DatePeriodBeforeDateOption.tsx'
 import DatePlaceOption from 'src/ui/2-pages/Profile/Date/options/DatePlaceOption.tsx'
-import DatePlaceToMarryOption from 'src/ui/2-pages/Profile/Date/options/DatePlaceToMarryOption.tsx'
 import DatePurposeOption from 'src/ui/2-pages/Profile/Date/options/DatePurposeOption.tsx'
-import DateTimesOfDayOption from 'src/ui/2-pages/Profile/Date/options/DateTimesOfDayOption.tsx'
+import DateIdealTimeOption from 'src/ui/2-pages/Profile/Date/options/DateIdealTimeOption.tsx'
 import DateWhoPaysOption from 'src/ui/2-pages/Profile/Date/options/DateWhoPaysOption.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import ProfileTabPicture from 'src/ui/2-pages/Profile/ProfileTabPicture.tsx'
@@ -64,84 +63,72 @@ const Date = React.memo(
         <Pages.SafeInsets>
           <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
           
-          <ProfilePageTabHeader thisTabIdx={props.tabIdx}/>
-          
-          
-          <div css={col}>
+            <ProfilePageTabHeader thisTabIdx={props.tabIdx}/>
             
-            <ProfileTabPicture
-              style={{
-                backgroundImage: `url(${twoCuteCats})`,
-                backgroundPositionY: '70%',
-              }}
-            />
             
-            <div css={{ height: 24 }}/>
-            
-            <Card3>
+            <div css={col}>
               
-              {/* <ValidationWrap {...props.validationProps}
-                fieldName="partnerAge"
-                render={validProps => <PartnerAgeOption {...validProps}/>}
+              <ProfileTabPicture
+                style={{
+                  backgroundImage: `url(${twoCuteCats})`,
+                  backgroundPositionY: '70%',
+                }}
               />
               
-              <ValidationWrap {...props.validationProps}
-                fieldName="partnerHeight"
-                render={validProps => <PartnerHeightOption {...validProps}/>}
-              /> */}
+              <div css={{ height: 24 }}/>
               
+              <Card3>
+                
+                <DateIdealFormatOption />
+                
+                
+                <DateIdealTimeOption />
+                
+                
+                <DateWhoPaysOption />
+                
+                
+                <DateIdealDateOption />
+                
+                
+                
+                
+                {/*
+                <DatePurposeOption />
+                
+                
+                <DatePlaceOption />
+                
+                
+                <DatePeriodBeforeDateOption />
+                
+                
+                <DateAdditionalInfoOption /> */}
+                
+                
+              </Card3>
               
-              <DatePurposeOption />
+              {/* <div css={{ height: 24 }}/>
               
-              
-              <DateGenreOption />
-              
-              
-              <DatePlaceOption />
-              
-              
-              <DateTimesOfDayOption />
-              
-              
-              <DatePeriodBeforeDateOption />
-              
-              
-              <DateWhoPaysOption />
-              
-              
-              <DateAdditionalInfoOption />
-              
-              
-            </Card3>
+              <Card3>
+                
+                
+                <DateMostInterestingVisitedPlaceOption />
+                
+                
+                <DateActionsToCheerUpPartnerOption />
+                
+                
+                <DateFavoriteCuisineOption />
+                
+                
+                <DateDesiredPlaceOrEventOption />
+                
+              </Card3> */}
             
-            <div css={{ height: 24 }}/>
-            
-            <Card3>
-              
-              
-              <DateMostInterestingVisitedPlaceOption />
-              
-              
-              <DateActionsToCheerUpPartnerOption />
-              
-              
-              <DatePlaceToMarryOption />
-              
-              
-              <DateFavoriteCuisineOption />
-              
-              
-              <DateDesiredPlaceOrEventOption />
-              
-              
-              <DateIdealDateOption />
-              
-              
-            </Card3>
+            </div>
           
-          </div>
-        
-        </Pages.ContentForm>
+          </Pages.ContentForm>
         </Pages.SafeInsets>
         
         

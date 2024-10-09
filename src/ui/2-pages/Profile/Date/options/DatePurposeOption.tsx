@@ -35,16 +35,20 @@ const ProfileSmokeOption = React.memo(
         {
           id: '1',
           text: 'Романтика',
-        }, {
+        },
+        {
           id: '2',
           text: 'Дружба',
-        }, {
+        },
+        {
           id: '3',
           text: 'Серьезные отношения',
-        }, {
+        },
+        {
           id: '4',
           text: 'Свой ответ',
-        }, {
+        },
+        {
           id: '',
           text: text.notSelected,
         },

@@ -116,7 +116,7 @@ const ProfileLangsOption = React.memo(
       {
         id: 'hi',
         text: 'Хинди',
-        tag: '#pl',
+        tag: '#hi',
       },
     ] satisfies LangOption[], [text])
     

@@ -120,7 +120,7 @@ registerRoute(
     //console.log('request,url', request,url)
     
     
-    let manifest: Record<string,any> = {
+    let manifest: Record<string, any> = {
       "lang": "en-US",
       "name": "Kupidon",
       "short_name": "Kupidon",
@@ -208,7 +208,7 @@ registerRoute(
  This allows the web app to trigger skipWaiting via
  registration.waiting.postMessage({ type: 'skip-waiting' })
  */
-self.addEventListener('message', async ev=>{
+self.addEventListener('message', async ev => {
   switch (ev.data?.type){
     case 'skip-waiting':
       void self.skipWaiting()

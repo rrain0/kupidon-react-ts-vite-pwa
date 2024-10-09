@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { animated, to, useSpring, useSpringValue } from '@react-spring/web'
+import { animated, to, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU'
@@ -27,39 +27,49 @@ import Ro = TypeU.Ro
 
 /*
 Фичи:
-  1) Невозможно установить неправильный range из UI
-  2) отображение неправильного рэнджа как правильного (left в приоритете)
+  1) Невозможно установить неправильное value из UI
+  2) Отображение переданного неправильного value как правильного в пределах minMax
+  3) Тень.
+     3.1) При перемещении пальца правее текущего значения - тень двигается за пальцем,
+          а шкала остаётся на месте, пока значение не изменится.
+     3.2) При перемещении пальца влево, тень остаётся на месте,
+          а шкала двигается с пальцем, пока значение не изменится
+  4) Реагирует на изменения.
+     4.1) Изменение высоты не влияет на работу слайдера.
+     4.1) Изменение value мгновенно учитывается во время драгания.
+     4.2) При перемещении слайдера по экрану во время драгания,
+          драгание происходит, как будто он остался на месте.
+     4.3) Изменение minMax: просто пресчитываются новые значения dragValue, drag шкала остаётся на месте.
+          value не будет изменено, пока бар не подрагается.
+          Если сразу надо было новое value вместе с minMax,
+          то его сразу должны были пересчитать снаружи и отправить с minMax.
+     4.3) При изменении ширины слайдера во время драгания,
+          все его значения шкал пропорционально сжимаются (через проценты CSS),
+          текущая точка под пальцем сохраняет значение, но относительно неё пропорционально изменяются
+          начальное положение пальца и количество value/px пропорционально изменениям размеров слайдера
+          (происходит автоматически,
+          т.к. хранится начальный прогресс и dProgress, которые не привязаны к пикселям).
  
-тодо:
-  1) Ступенчатый Range Picker
-     Добавить тень, которая будет двигаться вместе с пальцем
-     Обычный бар будет двигаться дискретно
-     Сделать пропсы как на обычный бар, так и на тень
-  2) Выделение концов по нажатию (событие active)
- 
-тодо:
-  Правильно реагировать на изменения range / minMax / trackWidth во время перетаскивания ползунков
-  1) произошёл сдвиг виджета на экране - пофиг, работаем так, как будто его не двигали
-  2) произошло расширение / сужение виджета - учитываем это
-  3) снаружи изменили рэндж - учитываем это
-
-тодо:
-  Состояние active
+ TODO:
+  1) Какой-нибудь визуальный отклик по нажатию (состояние active)
+  2) Вынести логику вычислений в хук
+  3) Возможно стоит сделать значение через Spring
 */
 
 
 
 // todo autocalculate as css prop
-const tipWidth = 21
+const barLeftOffset = 21
+const barRightOffset = 21
 
 
 
 
 
-
-const dPxToDProgress = (dPx: number, trackW: number, tipW: number) => RangeU.map(
+// dPx -> dProgress -> dValue
+const dPxToDProgress = (dPx: number, trackW: number, lOffset: number, rOffset: number) => RangeU.map(
   dPx,
-  [0, (trackW - 2 * tipW)],
+  [0, (trackW - (lOffset + rOffset))],
   [0, 100]
 )
 const dProgressToDValue = (dProgress: number, minMax: NumRangeRo) => RangeU.map(
@@ -67,24 +77,34 @@ const dProgressToDValue = (dProgress: number, minMax: NumRangeRo) => RangeU.map(
   [0, 100],
   zeroBasedRange(minMax)
 )
+
+// progress -> clampedProgress -> value -> clampedValue
+const progressToClampedProgress = (progress: number) => RangeU.clamp(
+  progress,
+  [0, 100]
+)
 const progressToValue = (progress: number, minMax: NumRangeRo) => RangeU.clamp(
   minMax[0] + dProgressToDValue(progress, minMax),
   minMax
 )
-const progressToClampedProgress = (progress: number) => RangeU.clamp(progress, [0, 100])
 const valueToClampedValue = (value: number, minMax: NumRangeRo) => RangeU.clamp(
   value,
   minMax
 )
-const progressToUiPercentRight = (progress: number, trackW: number): number => 100 - RangeU.map(
+
+// progress -> uiPercent
+const progressToUiPercentRight =
+(progress: number, w: number, lOffset: number, rOffset: number): number => 100 - RangeU.map(
   progress,
   [0, 100],
-  [100 * 2 * tipWidth / trackW, 100]
+  [100 * (lOffset + rOffset) / w, 100]
 )
 
-
-const valueToProgress = (value: number, minMax: NumRangeRo): number => RangeU.mapClamp(
-  value, minMax, [0, 100]
+// value -> clampedProgress
+const valueToClampedProgress = (value: number, minMax: NumRangeRo): number => RangeU.mapClamp(
+  value,
+  minMax,
+  [0, 100]
 )
 
 
@@ -156,7 +176,9 @@ const Slider = React.memo(
       
       const [getUpdateBars] = useAsRefGet(() => {
         const trackW = getTrackDimens().w
-        const uiPercentRight = progressToUiPercentRight(getValueProgress(), trackW)
+        const uiPercentRight = progressToUiPercentRight(
+          getValueProgress(), trackW, barLeftOffset, barRightOffset
+        )
         
         const shadowBarRight = Math.min(getBarRightPercent(), uiPercentRight)
         shadowBarRightSpring.set(shadowBarRight)
@@ -166,9 +188,11 @@ const Slider = React.memo(
       })
       
       useLayoutEffect(() => {
-        const progress = valueToProgress(outerValue, outerMinMax)
+        const progress = valueToClampedProgress(outerValue, outerMinMax)
         const trackW = getTrackDimens().w
-        const uiPercentRight = progressToUiPercentRight(progress, trackW)
+        const uiPercentRight = progressToUiPercentRight(
+          progress, trackW, barLeftOffset, barRightOffset
+        )
         setBarRightPercent(uiPercentRight)
       }, [outerValue, ...outerMinMax])
       
@@ -195,15 +219,14 @@ const Slider = React.memo(
             setDragProgress(0)
             setIsDragging(true)
             
+            const startPx = vpx - (trackX + barLeftOffset + barRightOffset / 2)
             const dragStartProgressRight = dPxToDProgress(
-              vpx - (trackX + 3 / 2 * tipWidth),
-              trackW,
-              tipWidth,
+              startPx, trackW, barLeftOffset, barRightOffset
             )
             setDragStartProgress(dragStartProgressRight)
           }
           
-          const dProgress = dPxToDProgress(dx, trackW, tipWidth)
+          const dProgress = dPxToDProgress(dx, trackW, barLeftOffset, barRightOffset)
           const dragProgress = getDragProgress() + dProgress
           setDragProgress(dragProgress)
           

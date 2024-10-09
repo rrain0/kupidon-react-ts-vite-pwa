@@ -67,7 +67,8 @@ const ProfileAlcoholOption = React.memo(
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const valueText = options.find(opt => opt.id === selected)?.text ?? ''
+    
+    const valueText = options.find(opt => opt.id === selected)?.text ?? text.notSelected
     
     
     return (
