@@ -42,22 +42,22 @@ const BottomSheetDialogBasic = React.memo(
         {({ sheetDrag }) => (
           <>
             {/*
-             // Header Component
-             // Must be without margins!!!
-             */}
+             Header Component
+             Must be without margins!!!
+            */}
             <div
               css={t => css`
                 ${BottomSheetBasicParts.headerStyle(t)};
                 ${sheetState === 'dragging' && 'cursor: grabbing;'}
               `}
-              ref={bottomSheetHeaderRef as any}
+              ref={bottomSheetHeaderRef}
               {...sheetDrag()}
             >
               
               <div /* Header handle */
                 css={t => css`
                   ${BottomSheetBasicParts.headerHandleStyle(t)};
-                  ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
+                  ${sheetState === 'dragging' && `background: ${t.page.content2[0]};`}
                 `}
               />
               
@@ -78,11 +78,11 @@ const BottomSheetDialogBasic = React.memo(
                 }
               >
                 {/*
-                 // scrollable content
-                 // Must be without margins!!!
-                 */}
+                 Scrollable content
+                 Must be without margins!!!
+                */}
                 <div css={BottomSheetBasicParts.scrollableContentStyle}
-                  ref={bottomSheetContentRef as any}
+                  ref={bottomSheetContentRef}
                 >
                   { children }
                 </div>
