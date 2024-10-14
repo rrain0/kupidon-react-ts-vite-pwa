@@ -221,6 +221,7 @@ export default [
         return: 'parens-new-line',
         arrow: 'parens-new-line',
       }],
+      '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }]
     },
   },
   

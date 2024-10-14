@@ -22,6 +22,7 @@ export type ModalTextareaProps = React.ComponentPropsWithoutRef<typeof Textarea>
   isOpen: boolean
   onClose: Callback
   onClear: Callback
+  onCancel: Callback
   title: string
 }>
 
@@ -46,18 +47,23 @@ const ModalTextarea = React.memo(
                 <Card2 css={ModalElement.card2Style}>
                   <ItemLabel>{title}</ItemLabel>
                   <Textarea css={TextareaStyle.small}
+                    autoFocus
                     {...restProps}
                     ref={forwardedRef}
                   />
                   <ModalElement.DialogButtons>
-                    {onClear && <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onClear}
-                      children={actionText.clear}
-                    />}
+                    {onClear && (
+                      <Button css={ButtonS.textRoundedNormalNormal}
+                        onClick={onClear}
+                      >
+                        {actionText.clear}
+                      </Button>
+                    )}
                     <Button css={ButtonS.textUppercaseRoundedNormalNormal}
                       onClick={onClose}
-                      children={actionText.ok}
-                    />
+                    >
+                      {actionText.ok}
+                    </Button>
                   </ModalElement.DialogButtons>
                 </Card2>
               </UserActionsConsumer>

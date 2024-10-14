@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
-} from 'src/ui/2-pages/Profile/Profile/options/ProfilePhotosPhotoOptions.tsx'
+} from 'src/ui/2-pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import {
   DefaultOperation,
   DefaultProfilePhoto,

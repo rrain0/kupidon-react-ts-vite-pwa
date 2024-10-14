@@ -1,12 +1,12 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { PartnerCommunicationCharacteristics } from 'src/api/model/PartnerCommunicationCharacteristics.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { EducationOptionValues } from 'src/ui/2-pages/Profile/Profile/options/ProfileEducationOption.tsx'
+import { EducationOptionValues } from 'src/ui/2-pages/Profile/options/ProfileEducationOption.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/Profile/options/ProfileGenderOption.tsx'
 import {
   PartnerGenderOptionValues
 } from 'src/ui/2-pages/Profile/Profile/options/ProfileImLookingForOption.tsx'
-import { JobOptionValues } from 'src/ui/2-pages/Profile/Profile/options/ProfileJobOption.tsx'
+import { JobOptionValues } from 'src/ui/2-pages/Profile/options/ProfileJobOption.tsx'
 import {
   PartnerCommunicationCharacteristicsOptionValues
 } from 'src/ui/2-pages/Profile/Profile/options/ProfilePartnerCommunicationCharacteristicsOption.tsx'

@@ -39,7 +39,11 @@ const OptionItem = React.memo(
         
         <IconFrame>{icon}</IconFrame>
         <TitleFrame>{title}</TitleFrame>
-        <ValueFrame>{value}</ValueFrame>
+        <ValueFrame>
+          <Value>
+            {value}
+          </Value>
+        </ValueFrame>
         <NextIconFrame>
           <ArrowAngledRoundedIc css={t => nextIconStyle(t)}/>
         </NextIconFrame>
@@ -109,8 +113,18 @@ const ValueFrame = styled.div`
   justify-self: start;
   display: grid;
   place-items: center start;
+`
+const Value = styled.div`
+  display: -webkit-box;
   
   color: ${p => p.theme.containerNormal.content3[0]};
+  
+  max-height: 40px;
+  overflow: hidden;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
 `
 const NextIconFrame = styled.div`
   grid-area: next;

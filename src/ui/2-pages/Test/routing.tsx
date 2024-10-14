@@ -10,6 +10,7 @@ const TestPage = React.lazy(() => import('src/ui/2-pages/Test/TestPage.tsx'))
 
 const ElemRefTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemRefTestPage.tsx'))
 const ElemStyleTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemStyleTestPage.tsx'))
+const OldProfileOptionsPage = React.lazy(() => import('src/ui/2-pages/Test/pages/OldProfileOptionsPage.tsx'))
 const UseEventTest = React.lazy(() => import('src/ui/2-pages/Test/pages/UseEventTest.tsx'))
 const PageLifecycle = React.lazy(() => import('src/ui/2-pages/Test/pages/PageLifecycle.tsx'))
 const PointerTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/PointerTestPage.tsx'))
@@ -161,6 +162,18 @@ const elemStyleRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / old-profile-options / <check here>'
+const oldProfileOptionsRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <OldProfileOptionsPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
 
 
 // path: 'test / emulated-scroll / <check here>'
@@ -305,6 +318,10 @@ export const testRouting: RouteObject[] = [
   {
     path: RootRoute.test.elemStyle[path]+'/*',
     children: elemStyleRouting,
+  },
+  {
+    path: RootRoute.test.oldProfileOptions[path]+'/*',
+    children: oldProfileOptionsRouting,
   },
   clearUnknownPathEnding,
 ]

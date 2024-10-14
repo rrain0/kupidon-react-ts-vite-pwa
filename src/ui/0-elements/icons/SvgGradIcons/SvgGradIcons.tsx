@@ -14,7 +14,9 @@ import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
 import BookGradSvg from 'src/res/ic/gradient/book-grad.svg?react'
 import BowArrowGradSvg from 'src/res/ic/gradient/bow-arrow-grad.svg?react'
 
+import CardsDollarGradSvg from 'src/res/ic/gradient/cards-dollar-grad.svg?react'
 import CardsHeartGradSvg from 'src/res/ic/gradient/cards-heart-grad.svg?react'
+import ClockGradSvg from 'src/res/ic/gradient/clock-grad.svg?react'
 import ChatRoundGradSvg from 'src/res/ic/gradient/chat-round-grad.svg?react'
 import CommunicationTwoPeopleGradSvg from 'src/res/ic/gradient/communication-two-people-grad.svg?react'
 import Couple2GradSvg from 'src/res/ic/gradient/couple-2-grad.svg?react'
@@ -143,7 +145,9 @@ export namespace SvgGradIcons {
   export const BookGradIc = generateSimpleSvgIcon(BookGradSvg)
   export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
   
+  export const CardsDollarGradIc = generateSimpleSvgIcon(CardsDollarGradSvg)
   export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
+  export const ClockGradIc = generateSimpleSvgIcon(ClockGradSvg)
   export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
   export const CommunicationTwoPeopleGradIc = generateSimpleSvgIcon(CommunicationTwoPeopleGradSvg)
   export const Couple2GradIc = generateSimpleSvgIcon(Couple2GradSvg)

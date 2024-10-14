@@ -5,7 +5,7 @@ import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
-import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
+import SelectItem, { IndicatorSelection } from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
@@ -20,14 +20,28 @@ import col = EmotionCommon.col
 import Puro = TypeU.Puro
 import Ro = TypeU.Ro
 import emptyArr = TypeU.emptyArr
+import Callback1 = TypeU.Callback1
 
 
 
 const overlayEdit = 'edit'
 
+export type GetIndicatorsData<T extends string> =
+  (options: Option<T>[], option: Option<T>, optionI: number, isSelected: boolean) => IndicatorSelection[]
 
+export const getIndicatorsDataDefault = (
+  <T extends string>(): GetIndicatorsData<T> =>
+    (options, option, optionI, isSelected) => {
+      return options.map((it, i) => {
+        if (!isSelected) return false
+        //if (option.id !== it.id) return 1
+        if (option.id !== it.id) return false
+        return true
+      })
+    }
+)()
 
-type ModalMultiSelectListProps<T extends string> = Ro<{
+export type ModalMultiSelectListProps<T extends string> = Ro<{
   isOpen: boolean
   close: Callback
   title: string
@@ -36,8 +50,10 @@ type ModalMultiSelectListProps<T extends string> = Ro<{
   selected: T[]
   add: T[]
   edit: T[]
+  onSelect: Callback1<T>
   setSelected: Setter<T[]>
   setOptionText: Setter<Option<T>>
+  getIndicatorsData: GetIndicatorsData<T>
 }>
 
 const ModalMultiSelectList = ReactU.memo(
@@ -52,12 +68,18 @@ const ModalMultiSelectList = ReactU.memo(
       selected = emptyArr,
       add = emptyArr,
       edit = emptyArr,
+      // TODO оставить selected или onSelect
+      onSelect,
       setSelected,
       setOptionText,
+      getIndicatorsData = getIndicatorsDataDefault,
     } = props
     
     const toggleSelected = (id: T) => {
-      setSelected?.(ArrayU.toggleTo(selected, id))
+      if (onSelect) onSelect(id)
+      else {
+        setSelected?.(ArrayU.toggleTo(selected, id))
+      }
     }
     
     
@@ -76,8 +98,6 @@ const ModalMultiSelectList = ReactU.memo(
       const v = editableValue!
       closeEdit()
       setOptionText?.({ id: v!, text: editableText })
-      // if (editableText) setSelected?.(ArrayU.pushUniqToIf(selected, v))
-      // else setSelected?.(ArrayU.removeToIf(selected, v))
     }
     
     
@@ -111,12 +131,7 @@ const ModalMultiSelectList = ReactU.memo(
                         isSelected={isSelected}
                         isAdd={isAdd}
                         isEdit={isEdit}
-                        indicatorsSelection={options.map((it, i2) => {
-                          if (!isSelected) return false
-                          //if (i !== i2) return 1
-                          if (i !== i2) return false
-                          return true
-                        })}
+                        indicatorsSelection={getIndicatorsData(options, opt, i, isSelected)}
                       >
                         <SelectItemText>
                           {opt.text}

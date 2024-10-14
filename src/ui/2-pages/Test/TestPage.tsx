@@ -33,7 +33,7 @@ const TestPage = React.memo(
     useInterval(3000, () => setProgress(s => s === 0 ? 100 : 0))
     
     
-    const [isChecked , , , toggleIsChecked] = useBool(false)
+    const [isChecked, , , toggleIsChecked] = useBool(false)
     
     const [onEventVal, , , toggleOnEventVal] = useBool(false)
     
@@ -81,6 +81,9 @@ const TestPage = React.memo(
               <Link to={RootRoute.test.elemStyle[fullAnySearchParams](searchParams)}>
                 <Button css={ButtonS.filledRectBigNormal}>Element Style test</Button>
               </Link>
+              <Link to={RootRoute.test.oldProfileOptions[fullAnySearchParams](searchParams)}>
+                <Button css={ButtonS.filledRectBigNormal}>Old Profile Options</Button>
+              </Link>
               
               
               <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
@@ -126,10 +129,11 @@ const TestPage = React.memo(
                 background: ${t.containerNormal.bg[0]};
               `}
             >
-              <PieProgress css={css`
-                height: 30%;
-                aspect-ratio: 1;
-              `}
+              <PieProgress
+                css={css`
+                  height: 30%;
+                  aspect-ratio: 1;
+                `}
                 progress={RangeU.map(progress, [0, 100], [5, 95])}
               />
             </div>

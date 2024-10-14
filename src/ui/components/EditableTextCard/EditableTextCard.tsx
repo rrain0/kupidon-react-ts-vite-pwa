@@ -71,6 +71,7 @@ const Frame = styled(Button)`
 const Title = styled(Hs.Card3)`
   grid-area: title;
   place-self: center start;
+  text-align: start;
 `
 const PencilIcon = styled(PencilWrite2Ic)`
   ${SvgIconS.El.icon.thiz()}{

@@ -22,7 +22,7 @@ import trueOrUndef = TypeU.trueOrUndef
 
 type IsSelected = Puro<{ isSelected: boolean }>
 
-
+export type IndicatorSelection = 0 | false | 1 | 2 | true
 
 type SelectItemProps =
   React.ComponentPropsWithoutRef<'article'>
@@ -33,7 +33,7 @@ type SelectItemProps =
     //isError: boolean
     //onClickAdd: Callback
     onClickEdit: Callback
-    indicatorsSelection: (0 | false | 1 | 2 | true)[]
+    indicatorsSelection: IndicatorSelection[]
     children: React.ReactNode
   }>
 
