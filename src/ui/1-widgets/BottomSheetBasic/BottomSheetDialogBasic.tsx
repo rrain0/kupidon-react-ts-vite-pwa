@@ -54,10 +54,12 @@ const BottomSheetDialogBasic = React.memo(
               {...sheetDrag()}
             >
               
-              <div /* Header handle */ css={t => css`
-                ${BottomSheetBasicParts.headerHandleStyle(t)};
-                ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
-              `}/>
+              <div /* Header handle */
+                css={t => css`
+                  ${BottomSheetBasicParts.headerHandleStyle(t)};
+                  ${sheetState==='dragging' && css`background: ${t.page.content2[0]};`}
+                `}
+              />
               
               <div css={BottomSheetBasicParts.headerTextStyle}>
                 {header}
