@@ -10,6 +10,7 @@ import ProfileKidsOption from 'src/ui/2-pages/Profile/options/ProfileKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOption.tsx'
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
+import { CardTitle } from 'src/ui/2-pages/Profile/parts/CardTitle'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
@@ -91,7 +92,8 @@ const Profile = React.memo(
             
             <div css={col}>
               
-              <ValidationWrap {...props.validationProps}
+              <ValidationWrap
+                {...props.validationProps}
                 fieldName="photos"
                 render={props => (
                   <ProfilePhotos
@@ -112,14 +114,16 @@ const Profile = React.memo(
               
               <Card3>
                 
-                <ValidationWrap {...props.validationProps}
+                <ValidationWrap
+                  {...props.validationProps}
                   fieldName="name"
                   render={validProps => (
                     <ProfileNameOption {...validProps} />
                   )}
                 />
                 
-                <ValidationWrap {...props.validationProps}
+                <ValidationWrap
+                  {...props.validationProps}
                   fieldName="birthDate"
                   render={validProps => (
                     <ProfileBirthDateOption {...validProps} />
@@ -130,7 +134,8 @@ const Profile = React.memo(
               
               <div css={{ height: 24 }} />
               
-              <ValidationWrap {...props.validationProps}
+              <ValidationWrap
+                {...props.validationProps}
                 fieldName="aboutMe"
                 render={validProps => (
                   <ProfileAboutMeOption {...validProps} />
@@ -154,7 +159,8 @@ const Profile = React.memo(
                 
                 <ProfileKidsOption />
                 
-                <ValidationWrap {...props.validationProps}
+                <ValidationWrap 
+                  {...props.validationProps}
                   fieldName="height"
                 >
                   {validProps => (
@@ -177,7 +183,8 @@ const Profile = React.memo(
               
               <Card3>
                 
-                <ValidationWrap {...props.validationProps}
+                <ValidationWrap 
+                  {...props.validationProps}
                   fieldName="job"
                 >
                   {validProps => (
@@ -186,7 +193,8 @@ const Profile = React.memo(
                 </ValidationWrap>
                 
                 
-                <ValidationWrap {...props.validationProps}
+                <ValidationWrap 
+                  {...props.validationProps}
                   fieldName="education"
                 >
                   {validProps => (
@@ -232,40 +240,6 @@ const Profile = React.memo(
               <div css={{ height: 24 }} />
               
               <DateIdealDateOption />
-              
-              
-              
-              
-              
-              
-              
-              
-              <div css={{ height: 400 }} />
-              
-              <div css={{ height: 24 }} />
-              
-              <CardTitle>{'Остальное (потом удалю, оставил для примера)'}</CardTitle>
-              
-              <div css={{ height: 24 }} />
-              
-              <Card3>
-                
-                
-                <ValidationWrap {...props.validationProps}
-                  fieldName="gender"
-                  render={validProps => <ProfileGenderOption {...validProps} />}
-                />
-                
-                
-                <ValidationWrap {...props.validationProps}
-                  fieldName="partnerGender"
-                  render={validProps => <ProfileImLookingForOption {...validProps} />}
-                />
-                
-                <PartnerAgeOption />
-                
-              
-              </Card3>
             
             
             </div>
@@ -273,19 +247,29 @@ const Profile = React.memo(
           </Pages.ContentForm>
         </Pages.SafeInsets>
         
+        <div 
+          key="aa"
+          tabIndex={-1}
+        />
         
         {(props.canSubmit || props.formProps.hasChanges) && (
           <TopButtonBarFrame>
-            {props.formProps.hasChanges &&
-              <Button css={ButtonS.outlinedRoundedSmallNormal}
+            {props.formProps.hasChanges && (
+              <Button
+                css={ButtonS.outlinedRoundedSmallNormal}
                 onClick={props.formProps.resetUserFields}
-              >{actionText.cancel}</Button>
-            }
-            {props.canSubmit && !props.isLoading &&
-              <Button css={ButtonS.filledRoundedSmallAccent}
+              >
+                {actionText.cancel}
+              </Button>
+            )}
+            {props.canSubmit && !props.isLoading && (
+              <Button
+                css={ButtonS.filledRoundedSmallAccent}
                 onClick={props.submit}
-              >{actionText.save}</Button>
-            }
+              >
+                {actionText.save}
+              </Button>
+            )}
           </TopButtonBarFrame>
         )}
       
@@ -311,21 +295,6 @@ export const TopButtonBarFrame = styled.section`
   & > * {
     pointer-events: auto;
   }
-`
-
-
-const CardTitle = styled.h4`
-  align-self: center;
-  text-align: center;
-  padding-right: 15px;
-  padding-left: 15px;
-  
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 119%;
-  letter-spacing: 0.05em;
-  
-  color: ${p => p.theme.containerNormal.content3[0]};
 `
 
 

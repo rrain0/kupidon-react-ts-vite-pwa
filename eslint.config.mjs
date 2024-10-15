@@ -124,6 +124,7 @@ export default [
   },
   
   
+  // https://eslint.style/packages/default
   // @stylistic/eslint-plugin config
   // code style rules
   {
@@ -216,12 +217,51 @@ export default [
       '@stylistic/yield-star-spacing': 'off',
       
       // JSX rules
+      '@stylistic/jsx-child-element-spacing': 'warn',
+      '@stylistic/jsx-closing-bracket-location': ['error', 'line-aligned'],
+      '@stylistic/jsx-closing-tag-location': ['error', 'line-aligned'],
+      '@stylistic/jsx-curly-brace-presence': ['error', {
+        props: 'never',
+        children: 'never',
+        propElementValues: 'always',
+      }],
+      /*
+        Disabled for
+        {condition && (
+          <Elem>
+          .....
+          </Elem>
+        )}
+      */
+      '@stylistic/jsx-curly-newline': 'off',
+      '@stylistic/jsx-curly-spacing': ['error', { when: 'never' }],
+      '@stylistic/jsx-equals-spacing': ['error', 'never'],
+      '@stylistic/jsx-first-prop-new-line': 'off', /*['error', 'multiline']*/
+      '@stylistic/jsx-function-call-newline': 'off',
+      '@stylistic/jsx-indent': ['error', 2, {
+        checkAttributes: true,
+        indentLogicalExpressions: true
+      }],
+      '@stylistic/jsx-indent-props': ['error', 2],
+      '@stylistic/jsx-max-props-per-line': 'off',
+      '@stylistic/jsx-newline': 'off',
+      '@stylistic/jsx-one-expression-per-line': 'off',
+      '@stylistic/jsx-pascal-case': ['error', { allowNamespace: true }],
+      '@stylistic/jsx-props-no-multi-spaces': 'error',
       '@stylistic/jsx-quotes': ['error', 'prefer-double'],
+      '@stylistic/jsx-self-closing-comp': 'error',
+      '@stylistic/jsx-sort-props': 'off',
+      '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
       '@stylistic/jsx-wrap-multilines': ['error', {
+        declaration: 'parens-new-line',
+        assignment: 'parens-new-line',
         return: 'parens-new-line',
         arrow: 'parens-new-line',
+        condition: 'parens-new-line',
+        logical: 'parens-new-line',
+        prop: 'ignore',
+        propertyValue: 'parens-new-line',
       }],
-      '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }]
     },
   },
   

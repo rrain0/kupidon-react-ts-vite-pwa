@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
+import PartnerAgeOption from 'src/ui/2-pages/Profile/Partner/options/PartnerAgeOption'
+import ProfileGenderOption from 'src/ui/2-pages/Profile/Profile/options/ProfileGenderOption'
+import ProfileImLookingForOption
+  from 'src/ui/2-pages/Profile/Profile/options/ProfileImLookingForOption'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
@@ -20,6 +24,7 @@ import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
 import twoCuteCats from 'src/res/img/bg/two-cute-cats.jpg'
+import { CardTitle } from '../parts/CardTitle'
 
 
 
@@ -60,12 +65,44 @@ const Tests = React.memo(
                 }}
               /> */}
               
-              {/* <Card3>
+              <CardTitle>{'Это надо куда-то распределить'}</CardTitle>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card3>
+                
+                <ValidationWrap {...props.validationProps}
+                  fieldName="gender"
+                  render={validProps => (
+                    <ProfileGenderOption {...validProps} />
+                  )}
+                />
+                
+              </Card3>
+              
+              
+              
+              <div css={{ height: 24 }} />
+              
+              <CardTitle>{'Это потом будет в фильтре поиска'}</CardTitle>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card3>
+                
+                <ValidationWrap {...props.validationProps}
+                  fieldName="partnerGender"
+                  render={validProps => (
+                    <ProfileImLookingForOption {...validProps} />
+                  )}
+                />
+                
+                <PartnerAgeOption />
               
               
               </Card3>
               
-              <div css={{ height: 24 }} /> */}
+              {/* <div css={{ height: 24 }} /> */}
             
             </div>
           

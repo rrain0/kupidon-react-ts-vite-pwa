@@ -1,5 +1,3 @@
-import { TypeU } from 'src/util/common/TypeU.ts'
-import { PartnerCommunicationCharacteristics } from 'src/api/model/PartnerCommunicationCharacteristics.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { EducationOptionValues } from 'src/ui/2-pages/Profile/options/ProfileEducationOption.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/Profile/options/ProfileGenderOption.tsx'
@@ -7,9 +5,6 @@ import {
   PartnerGenderOptionValues
 } from 'src/ui/2-pages/Profile/Profile/options/ProfileImLookingForOption.tsx'
 import { JobOptionValues } from 'src/ui/2-pages/Profile/options/ProfileJobOption.tsx'
-import {
-  PartnerCommunicationCharacteristicsOptionValues
-} from 'src/ui/2-pages/Profile/Profile/options/ProfilePartnerCommunicationCharacteristicsOption.tsx'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
@@ -122,7 +117,6 @@ export namespace ProfilePageValidation {
     education: EducationOptionValues
     job: JobOptionValues
     partnerGender: PartnerGenderOptionValues
-    partnerCommunicationCharacteristics: PartnerCommunicationCharacteristicsOptionValues[]
     photos: ProfilePhoto[]
     
     partnerAge: NumRangeEndNullable
@@ -152,7 +146,6 @@ export namespace ProfilePageValidation {
     education: '',
     job: '',
     partnerGender: '',
-    partnerCommunicationCharacteristics: [],
     photos: ArrayU.arrOfIndices(6).map(i => ({
       ...DefaultProfilePhoto,
       type: 'remote',
@@ -361,19 +354,6 @@ export namespace ProfilePageValidation {
         msg: 'Field "Partner gender" is not changed',
         type: 'initial',
         errorFields: ['partnerGender'],
-      })
-    }],
-    
-    
-    
-    [['partnerCommunicationCharacteristics', 'initialValues'], (values) => {
-      const [v, ivs] = values as [FormValues['partnerCommunicationCharacteristics'], FormValues['initialValues']]
-      //console.log('v:',v,'ivs:',ivs)
-      if (ArrayU.eqAsSet(v, ivs.partnerCommunicationCharacteristics)) return new PartialFailureData({
-        code: 'partner-communication-characteristics-not-changed' satisfies FailureCode,
-        msg: 'Field "Partner communication characteristics" is not changed',
-        type: 'initial',
-        errorFields: ['partnerCommunicationCharacteristics'],
       })
     }],
     
