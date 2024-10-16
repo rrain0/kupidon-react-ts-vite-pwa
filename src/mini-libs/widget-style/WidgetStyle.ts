@@ -387,6 +387,9 @@ export namespace WidgetStyle {
     static newEmpty() {
       return new Elem('', { }, { })
     }
+    static newWithName(name: string) {
+      return new Elem(name, { }, { })
+    }
     
     // dot classname
     // '.rrainuiButton'

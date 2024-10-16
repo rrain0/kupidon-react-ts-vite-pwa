@@ -11,7 +11,7 @@ import Puro = TypeU.Puro
 
 export type BottomSheetDialogBasicProps = BottomSheetOptionsProps & Puro<{
   headerHandle: React.ReactNode
-  headerText: React.ReactNode
+  headerTitle: React.ReactNode
   children: React.ReactNode
 }>
 
@@ -20,7 +20,7 @@ export type BottomSheetDialogBasicProps = BottomSheetOptionsProps & Puro<{
 const BottomSheetDialogBasic = React.memo(
   (props: BottomSheetDialogBasicProps) => {
     
-    const { headerHandle, headerText, children, ...restProps } = props
+    const { headerHandle, headerTitle, children, ...restProps } = props
     const { sheetState } = props
     
     
@@ -65,9 +65,9 @@ const BottomSheetDialogBasic = React.memo(
                 />
               )}
               
-              {/* Header - Text */}
+              {/* Header - Title */}
               <div css={BottomSheetBasicParts.headerTextStyle}>
-                {headerText}
+                {headerTitle}
               </div>
             
             </div>

@@ -20,6 +20,8 @@ import center = EmotionCommon.center
 export namespace SelectItemS {
   
   
+  import colC = EmotionCommon.colC
+  import col = EmotionCommon.col
   export const W = (() => {
     
     const frame = new Elem('rrainuiSelectItemFrame', {
@@ -33,6 +35,7 @@ export namespace SelectItemS {
     const addIconBox = new Elem('rrainuiAddIconBox', { }, { })
     const addIcon = Elem.newEmpty()
     
+    const indicatorFrame = Elem.newWithName('rrainuiIndicatorFrame')
     const indicator = Elem.newEmpty()
     
     const editBtn = new Elem('rrainuiEditIconBox', { }, { })
@@ -50,7 +53,8 @@ export namespace SelectItemS {
       .add('frame', '>', 'addIconBox', addIconBox)
       .add('addIconBox', '>', 'addIcon', addIcon)
       
-      .add('frame', '>', 'indicator', indicator)
+      .add('frame', '>', 'indicatorFrame', indicatorFrame)
+      .add('indicatorFrame', '>', 'indicator', indicator)
       
       .add('frame', '> * >', 'editBtn', editBtn)
       .add('editBtn', '>', 'editBtnRipple', editBtnRipple)
@@ -104,9 +108,15 @@ export namespace SelectItemS {
       ${SvgIconS.base}
     }
     
+    ${W.use.s.normal().e.indicatorFrame().thisUse} {
+      ${abs};
+      ${col};
+      padding: 6px 16px;
+    }
     ${W.use.s.normal().e.indicator().thisUse} {
       ${SelectItemIndicatorS.base}
     }
+    
     
     ${W.use.s.normal().e.editBtn().thisUse}{
       position: absolute;
@@ -157,7 +167,7 @@ export namespace SelectItemS {
     }
     
     ${W.use.s.normal().e.indicator().thisUse} {
-      ${SelectItemIndicatorS.normal(t)}
+      ${SelectItemIndicatorS.base}
     }
     
     ${W.use.s.normal().e.editBtnRipple().thisUse} {

@@ -3,6 +3,11 @@ import React, { useState } from 'react'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import SelectItemIndicator
+  from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
+import {
+  SelectItemIndicatorS
+} from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem, { IndicatorSelection } from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
@@ -36,6 +41,19 @@ export const getIndicatorsDataDefault = (
         //if (option.id !== it.id) return 1
         if (option.id !== it.id) return false
         return true
+      })
+    }
+)()
+
+export type GetCommonIndicatorsData<T extends string> =
+  (options: Option<T>[], selected: T[]) => IndicatorSelection[]
+
+export const getCommonIndicatorsDataDefault = (
+  <T extends string>(): GetCommonIndicatorsData<T> =>
+    (options, selected) => {
+      return options.map((it, i) => {
+        if (selected.includes(it.id)) return true
+        return false
       })
     }
 )()
@@ -105,8 +123,13 @@ const ModalMultiSelectList = ReactU.memo(
             <ModalPortal>
               <BottomSheetDialogBasic
                 {...sheetProps.sheetProps}
-                headerText={title}
-                headerHandle={undefined}
+                headerHandle={(
+                  <SelectItemIndicator
+                    css={SelectItemIndicatorS.normal}
+                    indicators={getCommonIndicatorsDataDefault(options, selected)}
+                  />
+                )}
+                headerTitle={title}
               >
                 <div css={selectItemsContainer}>
                   {options.map((opt, i) => {
@@ -125,7 +148,7 @@ const ModalMultiSelectList = ReactU.memo(
                         isSelected={isSelected}
                         isAdd={isAdd}
                         isEdit={isEdit}
-                        indicatorsSelection={getIndicatorsData(options, opt, i, isSelected)}
+                        //indicatorsSelection={getIndicatorsData(options, opt, i, isSelected)}
                       >
                         <SelectItemText>
                           {opt.text}

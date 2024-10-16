@@ -30,39 +30,34 @@ const SelectItemIndicator = React.memo(
     
     return (
       <div
-        //displayName={'IndicatorFrame'}
-        className={clsx(SelectItemIndicatorS.W.e.indicatorFrame.e.name, className)}
+        //displayName={'IndicatorBox'}
+        className={clsx(SelectItemIndicatorS.W.e.indicatorBox.e.name, className)}
         style={style}
       >
-        <div
-          //displayName={'IndicatorBox'}
-          className={SelectItemIndicatorS.W.e.indicatorBox.e.name}
-        >
-          {indicators.map((it, i) => (
-            <React.Fragment key={`${i} ${it}`}>
-              {(() => {
-                if (it === 0 || it === false) return (
-                  <div
-                    //displayName={'Indicator0'}
-                    className={SelectItemIndicatorS.W.e.indicator0.e.name}
-                  />
-                )
-                if (it === 1) return (
-                  <div
-                    //displayName={'Indicator1'}
-                    className={SelectItemIndicatorS.W.e.indicator1.e.name}
-                  />
-                )
-                if (it === 2 || it === true) return (
-                  <div
-                    //displayName={'Indicator2'}
-                    className={SelectItemIndicatorS.W.e.indicator2.e.name}
-                  />
-                )
-              })()}
-            </React.Fragment>
-          ))}
-        </div>
+        {indicators?.map((it, i) => (
+          <React.Fragment key={`${i} ${it}`}>
+            {(() => {
+              if (it === 0 || it === false) return (
+                <div
+                  //displayName={'Indicator0'}
+                  className={SelectItemIndicatorS.W.e.indicator0.e.name}
+                />
+              )
+              if (it === 1) return (
+                <div
+                  //displayName={'Indicator1'}
+                  className={SelectItemIndicatorS.W.e.indicator1.e.name}
+                />
+              )
+              if (it === 2 || it === true) return (
+                <div
+                  //displayName={'Indicator2'}
+                  className={SelectItemIndicatorS.W.e.indicator2.e.name}
+                />
+              )
+            })()}
+          </React.Fragment>
+        ))}
       </div>
     )
   }

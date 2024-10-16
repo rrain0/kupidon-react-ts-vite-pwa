@@ -33,7 +33,7 @@ React.memo(
       <BottomSheetDialogBasic
         {...sheetProps}
         closeable={props.closeable}
-        headerText={<div css={css`height: 1em;`}/>}
+        headerTitle={<div css={css`height: 1em;`}/>}
       >
         <div css={css`
           ${col};

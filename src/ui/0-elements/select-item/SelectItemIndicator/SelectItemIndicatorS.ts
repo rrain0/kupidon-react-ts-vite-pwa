@@ -16,18 +16,16 @@ export namespace SelectItemIndicatorS {
   
   
   export const W = (() => {
-    const indicatorFrame = new Elem('rrainuiIndicatorFrame', {
+    const indicatorBox = new Elem('rrainuiIndicatorBox', {
       normal: CssPseudo.empty,
     }, { })
-    const indicatorBox = new Elem('rrainuiIndicatorBox', { }, { })
     const indicator0 = new Elem('rrainuiIndicator0', { }, { })
     const indicator1 = new Elem('rrainuiIndicator1', { }, { })
     const indicator2 = new Elem('rrainuiIndicator2', { }, { })
     
     
     return CssWidget
-      .ofRoot('indicatorFrame', indicatorFrame)
-      .add('indicatorFrame', '>', 'indicatorBox', indicatorBox)
+      .ofRoot('indicatorBox', indicatorBox)
       .add('indicatorBox', '>', 'indicator0', indicator0)
       .add('indicatorBox', '>', 'indicator1', indicator1)
       .add('indicatorBox', '>', 'indicator2', indicator2)
@@ -38,15 +36,9 @@ export namespace SelectItemIndicatorS {
   
   export const base = css`
     // normal
-    ${W.use.s.normal().e.indicatorFrame().thisUse} {
-      pointer-events: none;
-      ${abs};
-      ${colC};
-      padding: 6px 16px;
-    }
     ${W.use.s.normal().e.indicatorBox().thisUse} {
-      width: 100%;
-      align-self: start;
+      pointer-events: none;
+      width: fit-content;
       height: auto;
       ${row};
       gap: 6px;

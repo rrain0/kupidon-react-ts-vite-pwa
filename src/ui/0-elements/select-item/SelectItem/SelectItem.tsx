@@ -60,7 +60,7 @@ const SelectItem = React.memo(
         ...restProps
       } = props
       
-      const indicators = indicatorsSelection ?? arraify(isSelected)
+      //const indicators = indicatorsSelection ?? arraify(isSelected)
       
       const elemRef = useRef<HTMLDivElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
@@ -103,8 +103,16 @@ const SelectItem = React.memo(
               
               {!isAdd && (
                 <>
-                  
-                  <SelectItemIndicator indicators={indicators} />
+                
+                  {indicatorsSelection && (
+                    <div
+                      //displayName={'IndicatorFrame'}
+                      className={SelectItemS.W.e.indicatorFrame.e.name}
+                      style={style}
+                    >
+                      <SelectItemIndicator indicators={indicatorsSelection} />
+                    </div>
+                  )}
                   
                   <div
                     //displayName={'Content'}
