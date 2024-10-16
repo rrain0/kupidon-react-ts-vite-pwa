@@ -70,7 +70,7 @@ const SummaryPage = React.memo(
               
               <InfoCard>
                 
-                <Ava src={profile.ava}/>
+                <Ava src={profile.ava} />
                 
                 <Name>{profile.name}</Name>
                 <UserActionsConsumer>

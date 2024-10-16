@@ -33,9 +33,6 @@ const DateIdealTimeOption = React.memo(
       doesNotMatter: 'Не имеет значения',
     }), [titleText, optionText])
     
-    const [selected, setSelected] = useState<string[]>([])
-    const [selectedMemo, setSelectedMemo] = useState<string[]>([])
-    
     const options = useMemo(() => {
       return [
         {
@@ -61,8 +58,21 @@ const DateIdealTimeOption = React.memo(
       ] satisfies Option<string>[]
     }, [text])
     
+    const [selected, setSelected] = useState<string[]>([])
+    const [selectedMemo, setSelectedMemo] = useState<string[]>([])
+    
     const onSelect = (id: string) => {
-      if (id !== options[4].id) setSelected(ArrayU.toggleTo(selected, id))
+      if (id !== options[4].id) {
+        const newSelected = ArrayU.toggleTo(
+          ArrayU.removeToIf(selected, options[4].id),
+          id
+        )
+        setSelected(newSelected)
+        if (newSelected.length === 4) {
+          setSelectedMemo(selected)
+          setSelected([options[4].id])
+        }
+      }
       else {
         if (selected.includes(id)) {
           setSelected(selectedMemo)
@@ -118,7 +128,6 @@ const DateIdealTimeOption = React.memo(
           title={text.yourIdealTimeForDate}
           options={options}
           selected={selected}
-          setSelected={setSelected}
           onSelect={onSelect}
           getIndicatorsData={getIndicatorsData}
         />

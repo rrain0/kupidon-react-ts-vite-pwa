@@ -96,7 +96,7 @@ const ModalSingleSelectList = ReactU.memo(
             <ModalPortal>
               <BottomSheetDialogBasic
                 {...sheetProps.sheetProps}
-                header={title}
+                headerText={title}
               >
                 <div css={selectItemsContainer}>
                   {options.filter(opt => opt.id !== notSelectedValue).map(opt => {

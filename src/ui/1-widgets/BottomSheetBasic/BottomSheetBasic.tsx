@@ -20,7 +20,7 @@ const BottomSheetBasic =
   React.memo(
     (props: BottomSheetDialogBasicProps)=>{
       
-      const { header, children, ...restProps } = props
+      const { headerText, children, ...restProps } = props
       const { sheetState } = props
       
       

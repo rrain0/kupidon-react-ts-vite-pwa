@@ -9,6 +9,7 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { ArrayU } from 'src/util/common/ArrayU'
 import FilmGradIc = SvgGradIcons.FilmGradIc
 
 
@@ -31,11 +32,6 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     const text = useMemo(() => ({
       notSelected: optionText.notSelected,
     }), [titleText, optionText])
-  
-  
-  
-    const [selected, setSelected] = useState([] as string[])
-    const [customOptionText, setCustomOptionText] = useState('')
     
     const options0 = useMemo(
       () => [
@@ -72,6 +68,12 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     )
     
     
+    
+    const [selected, setSelected] = useState([] as string[])
+    
+    const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    
+    
     const { options, add, edit, setOptionText } = useMultiSelectOneEditableOption(
       'CUSTOM', options0, selected, setSelected
     )
@@ -106,7 +108,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
           selected={selected}
           add={add}
           edit={edit}
-          setSelected={setSelected}
+          onSelect={onSelect}
           setOptionText={setOptionText}
         />
         

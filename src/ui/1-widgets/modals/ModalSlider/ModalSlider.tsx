@@ -62,7 +62,7 @@ const ModalSlider = React.memo(
           <ModalPortal>
             <BottomSheetDialogBasic
               {...sheetProps.sheetProps}
-              header={title}
+              headerText={title}
             >
               
               <Text>{text}</Text>

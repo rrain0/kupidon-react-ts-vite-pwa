@@ -59,7 +59,7 @@ React.memo(
     <UseBottomSheetState isOpen={isOpen} close={close}>
       {props => <ModalPortal>
         <BottomSheetDialogBasic {...props.sheetProps}
-          header={titleText.settings}
+          headerText={titleText.settings}
         >
           <Content>
             

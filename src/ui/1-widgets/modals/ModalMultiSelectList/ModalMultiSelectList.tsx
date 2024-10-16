@@ -11,7 +11,6 @@ import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectI
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput'
-import { ArrayU } from 'src/util/common/ArrayU'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
@@ -51,7 +50,6 @@ export type ModalMultiSelectListProps<T extends string> = Ro<{
   add: T[]
   edit: T[]
   onSelect: Callback1<T>
-  setSelected: Setter<T[]>
   setOptionText: Setter<Option<T>>
   getIndicatorsData: GetIndicatorsData<T>
 }>
@@ -68,18 +66,13 @@ const ModalMultiSelectList = ReactU.memo(
       selected = emptyArr,
       add = emptyArr,
       edit = emptyArr,
-      // TODO оставить selected или onSelect
       onSelect,
-      setSelected,
       setOptionText,
       getIndicatorsData = getIndicatorsDataDefault,
     } = props
     
     const toggleSelected = (id: T) => {
-      if (onSelect) onSelect(id)
-      else {
-        setSelected?.(ArrayU.toggleTo(selected, id))
-      }
+      onSelect?.(id)
     }
     
     
@@ -112,7 +105,8 @@ const ModalMultiSelectList = ReactU.memo(
             <ModalPortal>
               <BottomSheetDialogBasic
                 {...sheetProps.sheetProps}
-                header={title}
+                headerText={title}
+                headerHandle={undefined}
               >
                 <div css={selectItemsContainer}>
                   {options.map((opt, i) => {

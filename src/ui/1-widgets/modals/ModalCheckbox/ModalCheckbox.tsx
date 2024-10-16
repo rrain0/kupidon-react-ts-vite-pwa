@@ -39,7 +39,7 @@ const ModalCheckbox =
       <ModalPortal>
         <BottomSheetDialogBasic
           {...sheetProps.sheetProps}
-          header={title}
+          headerText={title}
         >
           
           

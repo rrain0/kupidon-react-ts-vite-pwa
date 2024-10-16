@@ -75,7 +75,7 @@ const ModalTileSelect = ReactU.memo(
             <ModalPortal>
               <BottomSheetDialogBasic
                 {...sheetProps.sheetProps}
-                header={title}
+                headerText={title}
               >
                 
                 <SearchStub>{`<Здесь будет поиск>`}</SearchStub>

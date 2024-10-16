@@ -9,6 +9,7 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { ArrayU } from 'src/util/common/ArrayU'
 import BookGradIc = SvgGradIcons.BookGradIc
 
 
@@ -74,6 +75,8 @@ const ProfileFavoriteBookGenresOption = React.memo(
     
     const [selected, setSelected] = useState([] as string[])
     
+    const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    
     const { options, add, edit, setOptionText } = useMultiSelectOneEditableOption(
       'CUSTOM', options0, selected, setSelected
     )
@@ -108,7 +111,7 @@ const ProfileFavoriteBookGenresOption = React.memo(
           selected={selected}
           add={add}
           edit={edit}
-          setSelected={setSelected}
+          onSelect={onSelect}
           setOptionText={setOptionText}
         />
         

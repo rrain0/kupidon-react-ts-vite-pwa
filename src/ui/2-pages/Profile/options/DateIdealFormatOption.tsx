@@ -7,6 +7,7 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
+import { ArrayU } from 'src/util/common/ArrayU'
 import Couple2GradIc = SvgGradIcons.Couple2GradIc
 
 
@@ -28,8 +29,6 @@ const DateIdealFormatOption = React.memo(
       entertaining: 'Развлекательный',
       nonstandard: 'Нестандартный',
     }), [titleText, optionText])
-    
-    const [selected, setSelected] = useState<string[]>([])
     
     const options = useMemo(() => {
       return [
@@ -55,6 +54,10 @@ const DateIdealFormatOption = React.memo(
         },
       ] satisfies Option<string>[]
     }, [text])
+    
+    const [selected, setSelected] = useState<string[]>([])
+    
+    const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
@@ -82,7 +85,7 @@ const DateIdealFormatOption = React.memo(
           title={text.yourIdealDateFormat}
           options={options}
           selected={selected}
-          setSelected={setSelected}
+          onSelect={onSelect}
         />
         
       </>

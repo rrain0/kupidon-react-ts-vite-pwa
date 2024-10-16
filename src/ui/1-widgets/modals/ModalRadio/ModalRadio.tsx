@@ -38,7 +38,7 @@ const ModalRadio = ReactU.memo(
         <ModalPortal>
           <BottomSheetDialogBasic
             {...sheetProps.sheetProps}
-            header={title}
+            headerText={title}
           >
             <RadioInputGroup css={selectItemsContainer}>
               {options?.map(opt => <RadioInput
