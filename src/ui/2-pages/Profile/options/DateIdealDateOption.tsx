@@ -24,7 +24,6 @@ const DateIdealDateOption = React.memo(() => {
   
   const uiText = useMemo(() => ({
     whatWillMakeYourDatePerfect: 'Что сделает ваше свидание идеальным?',
-    wonderAboutYourIdealDate: 'Помечтайте о вашем идеальнои свидании!',
   }), [titleText, optionText])
   
   
@@ -40,7 +39,6 @@ const DateIdealDateOption = React.memo(() => {
       <EditableTextCard
         title={uiText.whatWillMakeYourDatePerfect}
         text={text}
-        placeholder={uiText.wonderAboutYourIdealDate}
         onClick={open}
       />
       

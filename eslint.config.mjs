@@ -247,7 +247,8 @@ export default [
       '@stylistic/jsx-newline': 'off',
       '@stylistic/jsx-one-expression-per-line': 'off',
       '@stylistic/jsx-pascal-case': ['error', { allowNamespace: true }],
-      '@stylistic/jsx-props-no-multi-spaces': 'error',
+      // it disallows empty lines between jsx props
+      '@stylistic/jsx-props-no-multi-spaces': 'off',
       '@stylistic/jsx-quotes': ['error', 'prefer-double'],
       '@stylistic/jsx-self-closing-comp': 'error',
       '@stylistic/jsx-sort-props': 'off',

@@ -80,6 +80,10 @@ export const TitleUiText = {
     'en-US': 'Birth date',
     'ru-RU': 'Дата рождения',
   },
+  age: {
+    'en-US': 'Age',
+    'ru-RU': 'Возраст',
+  },
   gender: {
     'en-US': 'Sex',
     'ru-RU': 'Пол',

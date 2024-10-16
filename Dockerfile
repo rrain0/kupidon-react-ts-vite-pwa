@@ -2,7 +2,7 @@ FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json .
 COPY yarn.lock .
-RUN yarn install
+RUN yarn install --frozen-lockfile
 COPY . .
 ARG API_BASE_URL
 ENV API_BASE_URL=$API_BASE_URL

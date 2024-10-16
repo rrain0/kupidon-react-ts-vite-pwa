@@ -65,26 +65,12 @@ const Tests = React.memo(
                 }}
               /> */}
               
-              <CardTitle>{'Это надо куда-то распределить'}</CardTitle>
+              
+              <div css={{ height: 800 }} />
               
               <div css={{ height: 24 }} />
               
-              <Card3>
-                
-                <ValidationWrap {...props.validationProps}
-                  fieldName="gender"
-                  render={validProps => (
-                    <ProfileGenderOption {...validProps} />
-                  )}
-                />
-                
-              </Card3>
-              
-              
-              
-              <div css={{ height: 24 }} />
-              
-              <CardTitle>{'Это потом будет в фильтре поиска'}</CardTitle>
+              <CardTitle>Это потом будет в фильтре поиска</CardTitle>
               
               <div css={{ height: 24 }} />
               
@@ -111,16 +97,21 @@ const Tests = React.memo(
         
         
         { (props.canSubmit || props.formProps.hasChanges) && <TopButtonBarFrame>
-          { props.formProps.hasChanges
-            && <Button css={ButtonS.outlinedRoundedSmallNormal}
+          { props.formProps.hasChanges && (
+            <Button
+              css={ButtonS.outlinedRoundedSmallNormal}
               onClick={props.formProps.resetUserFields}
-            >{actionText.cancel}</Button>
-          }
-          { props.canSubmit && !props.isLoading
-            && <Button css={ButtonS.filledRoundedSmallAccent}
+            >
+              {actionText.cancel}
+            </Button>
+          )}
+          { props.canSubmit && !props.isLoading && (
+            <Button css={ButtonS.filledRoundedSmallAccent}
               onClick={props.submit}
-            >{actionText.save}</Button>
-          }
+            >
+              {actionText.save}
+            </Button>
+          )}
         </TopButtonBarFrame>}
         
         

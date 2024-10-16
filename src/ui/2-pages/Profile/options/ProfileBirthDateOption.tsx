@@ -1,4 +1,6 @@
 import React from 'react'
+import { useRecoilValue } from 'recoil'
+import { LangRecoil } from 'src/recoil/state/LangRecoil'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
@@ -7,6 +9,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { DateU } from 'src/util/date/DateU'
 import GiftBoxGradIc = SvgGradIcons.GiftBoxGradIc
 
 
@@ -17,9 +20,11 @@ const overlayName = 'profileBirthDate'
 
 const ProfileBirthDateOption = React.memo(
   (props: ValidationWrapRenderProps<string>) => {
+    const lang = useRecoilValue(LangRecoil).langs[0]
     const titleText = useUiValues(TitleUiText)
     const placeholderText = useUiValues(PlaceholderUiText)
     
+    const age = DateU.age(props.value, lang)
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
@@ -28,8 +33,8 @@ const ProfileBirthDateOption = React.memo(
       <>
         <OptionItem
           icon={<GiftBoxGradIc />}
-          title={titleText.birthDate}
-          value={props.value}
+          title={titleText.age}
+          value={age}
           data-error={props.highlight}
           onClick={open}
         />

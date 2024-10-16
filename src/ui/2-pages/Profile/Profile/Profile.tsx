@@ -129,6 +129,14 @@ const Profile = React.memo(
                     <ProfileBirthDateOption {...validProps} />
                   )}
                 />
+                
+                <ValidationWrap
+                  {...props.validationProps}
+                  fieldName="gender"
+                  render={validProps => (
+                    <ProfileGenderOption {...validProps} />
+                  )}
+                />
               
               </Card3>
               
@@ -203,6 +211,9 @@ const Profile = React.memo(
                 </ValidationWrap>
                 
                 
+                <ProfileLangsOption />
+                
+                
                 <ProfileSmokeOption />
                 
                 
@@ -210,9 +221,6 @@ const Profile = React.memo(
                 
                 
                 <ProfilePetsOption />
-                
-                
-                <ProfileLangsOption />
               
               </Card3>
               
