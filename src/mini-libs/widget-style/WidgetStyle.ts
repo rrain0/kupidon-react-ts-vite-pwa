@@ -384,6 +384,10 @@ export namespace WidgetStyle {
       readonly props: Ps,
     ) { }
     
+    static newEmpty() {
+      return new Elem('', { }, { })
+    }
+    
     // dot classname
     // '.rrainuiButton'
     get use() {

@@ -1,5 +1,7 @@
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
+import SelectItemIndicator
+  from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
@@ -69,95 +71,71 @@ const SelectItem = React.memo(
       
       
       return (
-        <UseRipple>{ rippleProps => (
-          <article
-            //displayName={'RadioItemFrame'}
-            ref={elemRef}
-            className={clsx(SelectItemS.W.e.frame.e.name, className)}
-            style={style}
-            {...{
-              [SelectItemS.W.s.selected.s.name]: trueOrUndef(isSelected),
-            }}
-            {...restProps}
-            {...combineEvHandlersRecords(rippleProps.target, restProps)}
-          >
-            
-            <div
-              //displayName={'Border'}
-              className={SelectItemS.W.e.border.e.name}
+        <UseRipple>
+          { rippleProps => (
+            <article
+              //displayName={'RadioItemFrame'}
+              ref={elemRef}
+              className={clsx(SelectItemS.W.e.frame.e.name, className)}
+              style={style}
+              {...{
+                [SelectItemS.W.s.selected.s.name]: trueOrUndef(isSelected),
+              }}
+              {...restProps}
+              {...combineEvHandlersRecords(rippleProps.target, restProps)}
             >
-              <Ripple {...rippleProps.ripple} />
-            </div>
-            
-            { isAdd && <div
-              //displayName={'AddIconBox'}
-              className={SelectItemS.W.e.addIconBox.e.name}
-            >
-              <PlusIc/>
-            </div> }
-            
-            {!isAdd && <>
               
               <div
-                //displayName={'IndicatorFrame'}
-                className={SelectItemS.W.e.indicatorFrame.e.name}
+                //displayName={'Border'}
+                className={SelectItemS.W.e.border.e.name}
               >
+                <Ripple {...rippleProps.ripple} />
+              </div>
+              
+              { isAdd && (
                 <div
-                  //displayName={'IndicatorBox'}
-                  className={SelectItemS.W.e.indicatorBox.e.name}
+                  //displayName={'AddIconBox'}
+                  className={SelectItemS.W.e.addIconBox.e.name}
                 >
-                  {indicators.map((it, i) => (
-                    <React.Fragment key={`${i} ${it}`}>
-                      {(() => {
-                        if (it === 0 || it === false) return (
-                          <div
-                            //displayName={'Indicator0'}
-                            className={SelectItemS.W.e.indicator0.e.name}
-                          />
-                        )
-                        if (it === 1) return (
-                          <div
-                            //displayName={'Indicator1'}
-                            className={SelectItemS.W.e.indicator1.e.name}
-                          />
-                        )
-                        if (it === 2 || it === true) return (
-                          <div
-                            //displayName={'Indicator2'}
-                            className={SelectItemS.W.e.indicator2.e.name}
-                          />
-                        )
-                      })()}
-                    </React.Fragment>
-                  ))}
+                  <PlusIc />
                 </div>
-              </div>
+              ) }
               
-              <div
-                //displayName={'Content'}
-                className={SelectItemS.W.e.content.e.name}
-              >
-                {children}
-              </div>
-              
-              {isEdit && <UserActionsConsumer>
-                <UseRipple>{rippleProps => (
+              {!isAdd && (
+                <>
+                  
+                  <SelectItemIndicator indicators={indicators} />
+                  
                   <div
-                    //displayName={'EditBtn'}
-                    className={SelectItemS.W.e.editBtn.e.name}
-                    onClick={onClickEdit}
-                    {...rippleProps.target}
+                    //displayName={'Content'}
+                    className={SelectItemS.W.e.content.e.name}
                   >
-                    <Ripple {...rippleProps.ripple} css={RippleS.icon} />
-                    <PencilWrite2Ic />
+                    {children}
                   </div>
-                )}</UseRipple>
-              </UserActionsConsumer>}
-            
-            </>}
-          
-          </article>
-        )}</UseRipple>
+                  
+                  {isEdit && (
+                    <UserActionsConsumer>
+                      <UseRipple>
+                        {rippleProps => (
+                          <div
+                            //displayName={'EditBtn'}
+                            className={SelectItemS.W.e.editBtn.e.name}
+                            onClick={onClickEdit}
+                            {...rippleProps.target}
+                          >
+                            <Ripple {...rippleProps.ripple} css={RippleS.icon} />
+                            <PencilWrite2Ic />
+                          </div>
+                        )}
+                      </UseRipple>
+                    </UserActionsConsumer>
+                  )}
+                
+                </>
+              )}
+            </article>
+          )}
+        </UseRipple>
       )
     }
   )

@@ -4,14 +4,15 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import {
+  SelectItemIndicatorS
+} from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
 import Elem = WidgetStyle.Elem
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
 import CssAttr = WidgetStyle.CssAttr
 import abs = EmotionCommon.abs
 import center = EmotionCommon.center
-import colC = EmotionCommon.colC
-import row = EmotionCommon.row
 
 
 
@@ -27,16 +28,12 @@ export namespace SelectItemS {
     }, { })
     
     const border = new Elem('rrainuiBorder', { }, { })
-    const ripple = new Elem('', { }, { })
+    const ripple = Elem.newEmpty()
     
     const addIconBox = new Elem('rrainuiAddIconBox', { }, { })
-    const addIcon = new Elem('', { }, { })
+    const addIcon = Elem.newEmpty()
     
-    const indicatorFrame = new Elem('rrainuiIndicatorFrame', { }, { })
-    const indicatorBox = new Elem('rrainuiIndicatorBox', { }, { })
-    const indicator0 = new Elem('rrainuiIndicator0', { }, { })
-    const indicator1 = new Elem('rrainuiIndicator1', { }, { })
-    const indicator2 = new Elem('rrainuiIndicator2', { }, { })
+    const indicator = Elem.newEmpty()
     
     const editBtn = new Elem('rrainuiEditIconBox', { }, { })
     const editBtnRipple = new Elem('', { }, { })
@@ -53,11 +50,7 @@ export namespace SelectItemS {
       .add('frame', '>', 'addIconBox', addIconBox)
       .add('addIconBox', '>', 'addIcon', addIcon)
       
-      .add('frame', '>', 'indicatorFrame', indicatorFrame)
-      .add('indicatorFrame', '>', 'indicatorBox', indicatorBox)
-      .add('indicatorBox', '>', 'indicator0', indicator0)
-      .add('indicatorBox', '>', 'indicator1', indicator1)
-      .add('indicatorBox', '>', 'indicator2', indicator2)
+      .add('frame', '>', 'indicator', indicator)
       
       .add('frame', '> * >', 'editBtn', editBtn)
       .add('editBtn', '>', 'editBtnRipple', editBtnRipple)
@@ -95,7 +88,7 @@ export namespace SelectItemS {
       border-radius: inherit;
       border: none;
     }
-    ${W.use.s.normal().e.ripple().thisUse}{
+    ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.base}
     }
     
@@ -107,40 +100,12 @@ export namespace SelectItemS {
       ${center};
       padding: 2px;
     }
-    ${W.use.s.normal().e.addIcon().thisUse}{
+    ${W.use.s.normal().e.addIcon().thisUse} {
       ${SvgIconS.base}
     }
     
-    ${W.use.s.normal().e.indicatorFrame().thisUse}{
-      pointer-events: none;
-      ${abs};
-      ${colC};
-      padding: 6px 16px;
-    }
-    ${W.use.s.normal().e.indicatorBox().thisUse}{
-      width: 100%;
-      align-self: start;
-      height: auto;
-      ${row};
-      gap: 6px;
-    }
-    ${W.use.s.normal().e.indicator0().thisUse}{
-      width: 8px;
-      height: 8px;
-      border-radius: 999999px;
-      background: #dddddd;
-    }
-    ${W.use.s.normal().e.indicator1().thisUse}{
-      width: 8px;
-      height: 8px;
-      border-radius: 999999px;
-      background: #999999;
-    }
-    ${W.use.s.normal().e.indicator2().thisUse}{
-      width: 8px;
-      height: 8px;
-      border-radius: 999999px;
-      background: #444444;
+    ${W.use.s.normal().e.indicator().thisUse} {
+      ${SelectItemIndicatorS.base}
     }
     
     ${W.use.s.normal().e.editBtn().thisUse}{
@@ -190,19 +155,15 @@ export namespace SelectItemS {
     ${W.use.s.normal().e.addIcon().thisUse}{
       ${SvgIconS.normal(t)}
     }
-    ${W.use.s.normal().e.indicator0().thisUse}{
-      background: ${t.containerNormal.content4b[0]};
+    
+    ${W.use.s.normal().e.indicator().thisUse} {
+      ${SelectItemIndicatorS.normal(t)}
     }
-    ${W.use.s.normal().e.indicator1().thisUse}{
-      background: ${t.containerNormal.content3e[0]};
-    }
-    ${W.use.s.normal().e.indicator2().thisUse}{
-      background: ${t.containerNormal.content1b[0]};
-    }
-    ${W.use.s.normal().e.editBtnRipple().thisUse}{
+    
+    ${W.use.s.normal().e.editBtnRipple().thisUse} {
       ${RippleS.base}
     }
-    ${W.use.s.normal().e.editIcon().thisUse}{
+    ${W.use.s.normal().e.editIcon().thisUse} {
       ${SvgIconS.normal(t)}
     }
     
