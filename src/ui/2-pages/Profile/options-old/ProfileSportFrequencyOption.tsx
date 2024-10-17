@@ -35,35 +35,32 @@ const ProfileSportFrequencyOption = React.memo(
     }), [titleText, optionText])
     
     
-    const [selected, setSelected] = useState('')
     
     
-    const options = useMemo(
-      () => [
-        {
-          id: '1',
-          text: 'Ежедневно',
-        }, {
-          id: '2',
-          text: 'Несколько раз в неделю',
-        }, {
-          id: '3',
-          text: 'Периодически по настроению',
-        }, {
-          id: '4',
-          text: 'Редко',
-        }, {
-          id: '5',
-          text: 'Не занимаюсь спортом',
-        }, {
-          id: '',
-          text: text.notSelected,
-        },
-      ] satisfies Option<string>[],
-      [text]
-    )
+    const options = useMemo(() => [
+      {
+        id: '1',
+        text: 'Ежедневно',
+      }, {
+        id: '2',
+        text: 'Несколько раз в неделю',
+      }, {
+        id: '3',
+        text: 'Периодически по настроению',
+      }, {
+        id: '4',
+        text: 'Редко',
+      }, {
+        id: '5',
+        text: 'Не занимаюсь спортом',
+      }, {
+        id: '',
+        text: text.notSelected,
+      },
+    ] satisfies Option<string>[], [text])
     
     
+    const [selected, setSelected] = useState<string>('')
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     const value = options.find(opt => opt.id === selected)?.text ?? ''
@@ -81,7 +78,7 @@ const ProfileSportFrequencyOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          onClose={close}
           title={'Как часто вы занимаетесь спортом'}
           options={options}
           selected={selected}

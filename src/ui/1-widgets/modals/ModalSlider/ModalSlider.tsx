@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
 import Slider from 'src/ui/1-widgets/Slider/Slider'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
@@ -24,7 +25,7 @@ import Button from 'ui/0-elements/buttons/Button/Button'
 
 export type ModalSliderProps = {
   isOpen: boolean
-  close: Callback
+  onClose: Callback
   title: string
   text: string
   
@@ -44,9 +45,13 @@ export type ModalSliderProps = {
 const ModalSlider = React.memo(
   (props: ModalSliderProps) => {
     const {
-      isOpen, close,
-      title, text,
-      value, setValue, minMax,
+      isOpen,
+      onClose,
+      title,
+      text,
+      value,
+      setValue,
+      minMax,
       onValueDragEnd,
       isHideBar,
       onClear,
@@ -59,7 +64,7 @@ const ModalSlider = React.memo(
     
     
     return (
-      <UseBottomSheetState isOpen={isOpen} onClose={close}>
+      <UseBottomSheetState isOpen={isOpen} onClose={onClose}>
         {sheetProps => (
           <ModalPortal>
             <BottomSheetDialogBasic
@@ -81,27 +86,11 @@ const ModalSlider = React.memo(
                   isHideBar={isHideBar}
                 />
                 
-                <ModalElement.DialogButtons>
-                  {onCancel && (
-                    <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onCancel}
-                    >
-                      {actionText.cancel}
-                    </Button>
-                  )}
-                  {onClear && (
-                    <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onClear}
-                    >
-                      {actionText.clear}
-                    </Button>
-                  )}
-                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
-                    onClick={close}
-                  >
-                    {actionText.ok}
-                  </Button>
-                </ModalElement.DialogButtons>
+                <DialogButtons
+                  onCancel={onCancel}
+                  onClear={onClear}
+                  onOk={onClose}
+                />
                 
               </Content>
               

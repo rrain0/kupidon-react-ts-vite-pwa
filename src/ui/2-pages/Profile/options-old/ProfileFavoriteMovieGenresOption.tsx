@@ -103,7 +103,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
         
         <ModalMultiSelectList
           isOpen={isOpen}
-          close={close}
+          onClose={close}
           title={'Любимые жанры фильмов'}
           options={options}
           selected={selected}

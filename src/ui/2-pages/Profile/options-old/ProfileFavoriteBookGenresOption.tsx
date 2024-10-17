@@ -106,7 +106,7 @@ const ProfileFavoriteBookGenresOption = React.memo(
         
         <ModalMultiSelectList
           isOpen={isOpen}
-          close={close}
+          onClose={close}
           title={text.favoriteBookGenres}
           options={options}
           selected={selected}
