@@ -793,6 +793,30 @@ export namespace ButtonS {
     ${textRoundedAddColorNormal(t)};
   `
   
+  // type: text, shape: rounded, size: normal2, color: normal
+  export const textRoundedNormal2Normal = (t: AppTheme.Theme) => css`
+    ${textRoundedNormal};
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      padding-left: 16px;
+      padding-right: 16px;
+      ${Txt.large1b};
+    }
+    ${textRoundedAddColorNormal(t)};
+  `
+  // type: textUppercase, shape: rounded, size: normal2, color: normal
+  export const textUppercaseRoundedNormal2Normal = (t: AppTheme.Theme) => css`
+    ${textRoundedNormal};
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      padding-left: 16px;
+      padding-right: 16px;
+      ${Txt.large1b};
+      text-transform: uppercase;
+    }
+    ${textRoundedAddColorNormal(t)};
+  `
+  
   // type: text, shape: rounded, size: small, color: normal
   export const textRoundedSmallNormal = (t: AppTheme.Theme) => css`
     ${textRoundedSmall};

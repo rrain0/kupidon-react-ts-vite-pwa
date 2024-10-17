@@ -147,6 +147,7 @@ const ModalMultiSelectList = ReactU.memo(
                   onCancel={onCancel}
                   onClear={onClear}
                   onOk={onClose}
+                  variant="center"
                 />
                 
                 <div style={{ height: 24 }} />
