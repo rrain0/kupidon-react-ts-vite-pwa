@@ -49,28 +49,32 @@ const App = React.memo(
     
     return (
       <CheckBrowserMinimumVersion>
-        {themeIsReady && <ThemeProvider theme={theme.theme}>
-          
-          <Global styles={t => css`
-            body {
-              // will be WINDOW background
-              background: ${t.page.bg[0]};
-            }
+        {themeIsReady && (
+          <ThemeProvider theme={theme.theme}>
             
-            * {
-              ${isMobile && noScrollbars};
-            }
-          `}/>
+            <Global
+              styles={t => css`
+                body {
+                  // will be WINDOW background
+                  background: ${t.page.bg[0]};
+                }
+                
+                * {
+                  ${isMobile && noScrollbars};
+                }
+              `}
+            />
+            
+            <DragDetector>
+              <AppFrame />
+            </DragDetector>
+            
+            <ToastifySetup />
+            
+            <LogLayer />
           
-          <DragDetector>
-            <AppFrame/>
-          </DragDetector>
-          
-          <ToastifySetup/>
-          
-          <LogLayer/>
-        
-        </ThemeProvider>}
+          </ThemeProvider>
+        )}
       </CheckBrowserMinimumVersion>
     )
   }

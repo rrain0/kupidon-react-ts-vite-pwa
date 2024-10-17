@@ -83,7 +83,7 @@ const ProfileAlcoholOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.attitudeToAlcohol}
           options={options}
           selected={selected}

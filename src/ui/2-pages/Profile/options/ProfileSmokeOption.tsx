@@ -89,7 +89,7 @@ const ProfileSmokeOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.attitudeTowardsSmoke}
           options={options}
           selected={selected}

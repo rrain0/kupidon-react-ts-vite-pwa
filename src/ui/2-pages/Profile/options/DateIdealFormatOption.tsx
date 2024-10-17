@@ -89,7 +89,7 @@ const DateIdealFormatOption = React.memo(
         
         <ModalMultiSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.yourIdealDateFormat}
           options={options}
           selected={selected}

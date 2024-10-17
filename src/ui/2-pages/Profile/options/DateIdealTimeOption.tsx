@@ -136,7 +136,7 @@ const DateIdealTimeOption = React.memo(
         
         <ModalMultiSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.yourIdealTimeForDate}
           options={options}
           selected={selected}

@@ -34,7 +34,7 @@ const ModalCheckbox =
 <V extends string>(props: ModalCheckboxProps<V>) => {
   const { isOpen, close, title, options, checked, onChange } = props
   
-  return <UseBottomSheetState isOpen={isOpen} close={close}>
+  return <UseBottomSheetState isOpen={isOpen} onClose={close}>
     {sheetProps =>
       <ModalPortal>
         <BottomSheetDialogBasic

@@ -6,7 +6,7 @@ import NonEmptyArr = ArrayU.NonEmptyArr
 
 declare global {
   
-  const applyLangToHtml: (matchedLangs: NonEmptyArr<Lang.Supported>)=>void
+  const applyLangToHtml: (matchedLangs: NonEmptyArr<Lang.Supported>) => void
   
   
   

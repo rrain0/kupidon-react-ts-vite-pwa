@@ -152,7 +152,7 @@ const ProfileLangsOption = React.memo(
         
         <ModalTileSelect
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.langs}
           options={options}
           selected={selected}

@@ -81,7 +81,7 @@ const ProfileGenderOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          onClose={close}
           title={text.gender}
           options={options}
           selected={props.value}

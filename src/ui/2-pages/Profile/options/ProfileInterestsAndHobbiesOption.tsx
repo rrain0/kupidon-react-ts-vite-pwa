@@ -93,7 +93,7 @@ const ProfileInterestsAndHobbiesOption = React.memo(
         
         <ModalTileSelect
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.interestsAndHobbies}
           options={options}
           selected={selected}

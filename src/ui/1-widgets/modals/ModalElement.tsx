@@ -22,10 +22,5 @@ export namespace ModalElement {
     max-width: 500px;
     gap: 10px;
   `
-  export const DialogButtons = styled.div`
-    ${row};
-    gap: 10px;
-    justify-content: end;
-  `
   
 }

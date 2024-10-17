@@ -62,7 +62,7 @@ React.memo(
   
   return <>
     
-    <UseBottomSheetState isOpen={isOpen} close={close}>
+    <UseBottomSheetState isOpen={isOpen} onClose={close}>
     {props => <ModalPortal><BottomSheetDialogBasic
       {...props.sheetProps}
       headerTitle={actionText.clearAppData + '?'}

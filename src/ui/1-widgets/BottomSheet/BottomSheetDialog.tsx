@@ -26,11 +26,12 @@ export type BottomSheetRefsProps = {
   bottomSheetHeaderRef: React.RefObject<HTMLElement>
   bottomSheetContentRef: React.RefObject<HTMLElement>
 }
-export type BottomSheetOptionsProps = UseBottomSheetOptions
-& PartialUndef<{
-  onComputedDimens: Callback1<ComputedBottomSheetDimens>
-  onSnapPointsPx: Callback1<number[]>
-}>
+export type BottomSheetOptionsProps =
+  UseBottomSheetOptions
+  & PartialUndef<{
+    onComputedDimens: Callback1<ComputedBottomSheetDimens>
+    onSnapPointsPx: Callback1<number[]>
+  }>
 export type BottomSheetChildren = PartialUndef<{
   children: (renderProps: BottomSheetChildrenProps)=>React.ReactNode
 }>

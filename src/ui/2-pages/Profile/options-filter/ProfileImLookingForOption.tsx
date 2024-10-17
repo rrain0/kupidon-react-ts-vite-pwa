@@ -84,7 +84,7 @@ const ProfileImLookingForOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={titleText.imLookingFor}
           options={options}
           selected={selected}

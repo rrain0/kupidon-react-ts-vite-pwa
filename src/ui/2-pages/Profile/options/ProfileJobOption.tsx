@@ -89,7 +89,7 @@ const ProfileJobOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={titleText.job}
           options={options}
           selected={selected}

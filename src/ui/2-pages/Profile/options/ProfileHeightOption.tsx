@@ -79,7 +79,7 @@ const ProfileHeightOption = React.memo(
         
         <ModalSlider
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.height}
           text={textValue(height)}
           

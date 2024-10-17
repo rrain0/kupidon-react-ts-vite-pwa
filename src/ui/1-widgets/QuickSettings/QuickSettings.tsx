@@ -56,7 +56,7 @@ React.memo(
   const clearSiteDialog = useOverlayUrl(ClearSiteDialogOverlayName)
   
   return <>
-    <UseBottomSheetState isOpen={isOpen} close={close}>
+    <UseBottomSheetState isOpen={isOpen} onClose={close}>
       {props => <ModalPortal>
         <BottomSheetDialogBasic {...props.sheetProps}
           headerTitle={titleText.settings}

@@ -51,7 +51,7 @@ const ProfilePhotosPhotoOptions = React.memo(
   
   const actionText = useUiValues(ActionUiText)
   
-  return <UseBottomSheetState isOpen={isOpen} close={close}>
+  return <UseBottomSheetState isOpen={isOpen} onClose={close}>
     {sheet =>
       <ModalPortal>
         <BottomSheetDialogBasic {...sheet.sheetProps}>

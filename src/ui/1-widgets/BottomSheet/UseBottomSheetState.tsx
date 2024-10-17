@@ -16,7 +16,7 @@ import PartialUndef = TypeU.PartialUndef
 export type UseBottomSheetStateProps = {
   isOpen: boolean
 } & PartialUndef<{
-  close: Callback
+  onClose: Callback
   defaultOpenIdx: number
   snapPoints: SheetSnapPoints
   closeable: boolean
@@ -29,7 +29,7 @@ const UseBottomSheetState = React.memo(
   (props: UseBottomSheetStateProps) => {
     const {
       isOpen: isOpenExternal,
-      close,
+      onClose,
       defaultOpenIdx = DefaultSheetOpenIdx,
       snapPoints = DefaultSheetSnaps,
       closeable = true,
@@ -53,7 +53,7 @@ const UseBottomSheetState = React.memo(
     }, [sheetState]) */
     
     
-    const setOpenExternal = (open: boolean) => !open && close?.()
+    const setOpenExternal = (open: boolean) => !open && onClose?.()
     const isOpen = !(['closed', 'closing', 'close', null] as SheetState[]).includes(sheetState)
     const setOpen = (open: boolean) => {
       if (open) {

@@ -1,13 +1,9 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import Button from 'src/ui/0-elements/buttons/Button/Button'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
-import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement'
+import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
@@ -39,7 +35,7 @@ const overlayRemove = 'remove'
 
 type ModalTileSelectProps<T extends string> = Ro<{
   isOpen: boolean
-  close: Callback
+  onClose: Callback
   title: string
   options: Option<T>[]
 }> & Puro<{
@@ -53,7 +49,7 @@ const ModalTileSelect = ReactU.memo(
   <T extends string>(props: ModalTileSelectProps<T>) => {
     const {
       isOpen,
-      close,
+      onClose,
       title,
       
       options,
@@ -64,7 +60,6 @@ const ModalTileSelect = ReactU.memo(
       onClear,
     } = props
     
-    const actionText = useUiValues(ActionUiText)
     
     const toggleSelected = (id: T) => {
       setSelected?.(ArrayU.toggleTo(selected, id))
@@ -78,7 +73,7 @@ const ModalTileSelect = ReactU.memo(
     return (
       <UseBottomSheetState
         isOpen={isOpen}
-        close={close}
+        onClose={onClose}
       >
         { sheetProps => (
           <>
@@ -107,27 +102,13 @@ const ModalTileSelect = ReactU.memo(
                 
                 <div style={{ height: 24 }} />
                 
-                <ModalElement.DialogButtons>
-                  {onCancel && (
-                    <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onCancel}
-                    >
-                      {actionText.cancel}
-                    </Button>
-                  )}
-                  {onClear && (
-                    <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onClear}
-                    >
-                      {actionText.clear}
-                    </Button>
-                  )}
-                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
-                    onClick={close}
-                  >
-                    {actionText.ok}
-                  </Button>
-                </ModalElement.DialogButtons>
+                <DialogButtons
+                  onCancel={onCancel}
+                  onClear={onClear}
+                  onOk={onClose}
+                />
+                
+                <div style={{ height: 24 }} />
               
               </BottomSheetDialogBasic>
             </ModalPortal>

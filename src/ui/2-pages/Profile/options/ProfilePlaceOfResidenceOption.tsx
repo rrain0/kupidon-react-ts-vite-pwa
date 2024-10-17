@@ -83,7 +83,7 @@ const ProfilePlaceOfResidenceOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={'Место проживания'}
           options={options}
           selected={selected}

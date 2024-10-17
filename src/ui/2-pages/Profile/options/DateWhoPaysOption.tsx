@@ -85,7 +85,7 @@ const DateWhoPaysOption = React.memo(() => {
       
       <ModalSingleSelectList
         isOpen={isOpen}
-        close={onClose}
+        onClose={onClose}
         title={text.yourPreferenceForAPaymentOnADate}
         options={options}
         selected={selected}

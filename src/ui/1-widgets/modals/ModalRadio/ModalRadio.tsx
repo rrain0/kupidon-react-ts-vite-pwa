@@ -33,7 +33,7 @@ const ModalRadio = ReactU.memo(
   <V extends string>(props: ModalRadioProps<V>) => {
     const { isOpen, close, title, options, value, onSelect } = props
     
-    return <UseBottomSheetState isOpen={!!isOpen} close={close}>
+    return <UseBottomSheetState isOpen={!!isOpen} onClose={close}>
       {sheetProps =>
         <ModalPortal>
           <BottomSheetDialogBasic

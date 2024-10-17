@@ -13,14 +13,14 @@ import RecoilNexus from 'recoil-nexus'
 
 
 ReactDOM.createRoot(document.getElementById('root')!)
-.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <RecoilNexus />
-      <App/>
-    </RecoilRoot>
-  </React.StrictMode>
-)
+  .render(
+    <React.StrictMode>
+      <RecoilRoot>
+        <RecoilNexus />
+        <App />
+      </RecoilRoot>
+    </React.StrictMode>
+  )
 
 
 

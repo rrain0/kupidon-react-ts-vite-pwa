@@ -89,7 +89,7 @@ const ProfilePetsOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.attitudeTowardsPets}
           options={options}
           selected={selected}

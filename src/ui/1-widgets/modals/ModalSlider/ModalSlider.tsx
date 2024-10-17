@@ -59,7 +59,7 @@ const ModalSlider = React.memo(
     
     
     return (
-      <UseBottomSheetState isOpen={isOpen} close={close}>
+      <UseBottomSheetState isOpen={isOpen} onClose={close}>
         {sheetProps => (
           <ModalPortal>
             <BottomSheetDialogBasic

@@ -79,7 +79,7 @@ const ProfileKidsOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={onClose}
+          onClose={onClose}
           title={text.kids}
           options={options}
           selected={selected}

@@ -5,21 +5,19 @@ import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import Button from 'src/ui/0-elements/buttons/Button/Button'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
 import {
   SelectItemIndicatorS
 } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
-import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement'
+import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
 import {
   getCommonIndicatorsDataDefault,
   GetIndicatorsData,
 } from 'src/ui/1-widgets/modals/ModalMultiSelectList/modalMultiSelectUtils'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
-import SelectItem, { IndicatorSelection } from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
+import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
@@ -41,7 +39,7 @@ const overlayEdit = 'edit'
 
 export type ModalMultiSelectListProps<T extends string> = Ro<{
   isOpen: boolean
-  close: Callback
+  onClose: Callback
   title: string
   options: Option<T>[]
 }> & Puro<{
@@ -60,7 +58,7 @@ const ModalMultiSelectList = ReactU.memo(
     
     const {
       isOpen,
-      close,
+      onClose,
       title,
       
       options,
@@ -102,7 +100,7 @@ const ModalMultiSelectList = ReactU.memo(
     return (
       <UseBottomSheetState
         isOpen={isOpen}
-        close={close}
+        onClose={onClose}
       >
         { sheetProps => (
           <>
@@ -145,27 +143,13 @@ const ModalMultiSelectList = ReactU.memo(
                   })}
                 </div>
                 
-                <ModalElement.DialogButtons>
-                  {onCancel && (
-                    <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onCancel}
-                    >
-                      {actionText.cancel}
-                    </Button>
-                  )}
-                  {onClear && (
-                    <Button css={ButtonS.textRoundedNormalNormal}
-                      onClick={onClear}
-                    >
-                      {actionText.clear}
-                    </Button>
-                  )}
-                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
-                    onClick={close}
-                  >
-                    {actionText.ok}
-                  </Button>
-                </ModalElement.DialogButtons>
+                <DialogButtons
+                  onCancel={onCancel}
+                  onClear={onClear}
+                  onOk={onClose}
+                />
+                
+                <div style={{ height: 24 }} />
               
               </BottomSheetDialogBasic>
             </ModalPortal>

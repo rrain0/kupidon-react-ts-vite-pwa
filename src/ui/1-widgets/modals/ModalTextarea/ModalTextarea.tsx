@@ -1,3 +1,4 @@
+import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
@@ -6,8 +7,6 @@ import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import ItemLabel from 'src/ui/0-elements/basic-elements/ItemLabel.tsx'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import Card2 from 'src/ui/0-elements/cards/Card2.tsx'
 import Textarea, { TextareaRefElement } from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
@@ -60,27 +59,11 @@ const ModalTextarea = React.memo(
                     ref={forwardedRef}
                   />
                   
-                  <ModalElement.DialogButtons>
-                    {onCancel && (
-                      <Button css={ButtonS.textRoundedNormalNormal}
-                        onClick={onCancel}
-                      >
-                        {actionText.cancel}
-                      </Button>
-                    )}
-                    {onClear && (
-                      <Button css={ButtonS.textRoundedNormalNormal}
-                        onClick={onClear}
-                      >
-                        {actionText.clear}
-                      </Button>
-                    )}
-                    <Button css={ButtonS.textUppercaseRoundedNormalNormal}
-                      onClick={onClose}
-                    >
-                      {actionText.ok}
-                    </Button>
-                  </ModalElement.DialogButtons>
+                  <DialogButtons
+                    onCancel={onCancel}
+                    onClear={onClear}
+                    onOk={onClose}
+                  />
                   
                 </Card2>
               </UserActionsConsumer>
