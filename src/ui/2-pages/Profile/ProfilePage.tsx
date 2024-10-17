@@ -235,7 +235,7 @@ const ProfilePage = React.memo(
         const serverPhotos = formValues.initialValues.photos
         const photos = formValues.photos
         ;[...serverPhotos, ...photos].forEach(photo => {
-          if (!photo.isEmpty && photo.type==='remote' && !photo.isReady
+          if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
             && !photo.download && !photo.compression
             && lock(photo.remoteUrl)
           ) {
@@ -292,9 +292,9 @@ const ProfilePage = React.memo(
                   progress.progress = p ?? 0
                   //console.log('progress', photo.id, progress.value)
                   updatePhotos({ download: {
-                      ...downloadStart.download,
-                      progress: progress.value,
-                    } })
+                    ...downloadStart.download,
+                    progress: progress.value,
+                  } })
                 }
                 
                 //console.log('start download id',photo.id)

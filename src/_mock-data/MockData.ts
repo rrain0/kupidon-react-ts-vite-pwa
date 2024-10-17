@@ -51,5 +51,12 @@ export const MockData = {
     birthDate: '2000-08-23T14:33:55.609+07:00',
   },
   
+  profile2: {
+    ava: nextUp,
+    name: 'Дмитрий',
+    city: 'Иркутск',
+    birthDate: '1998-02-16T03:20:36.458+08:00',
+  },
+  
 }
 

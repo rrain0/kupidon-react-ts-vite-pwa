@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
@@ -43,7 +43,10 @@ const SummaryPage = React.memo(
     const titleText = useUiValues(TitleUiText)
     const actionText = useUiValues(ActionUiText)
     
-    const profile = MockData.profile
+    const auth = useRecoilValue(AuthRecoil)!
+    const u = auth.user
+    
+    const profile = MockData.profile2
     const progress = 45
     const completeProfileDescriptionText = 'Завешите описание профиля'
     const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
@@ -52,10 +55,8 @@ const SummaryPage = React.memo(
     
     useEffect(() => setDisplayedProgress(progress), [])
     
-    const auth = useRecoilValue(AuthRecoil)
-    const authId = auth!.user.id
     
-    const info = [profile.city, DateU.age(profile.birthDate, lang)]
+    const info = [profile.city, DateU.age(u.birthDate, lang)]
       .filter(it => it)
       .join(', ')
     
@@ -72,9 +73,9 @@ const SummaryPage = React.memo(
                 
                 <Ava src={profile.ava} />
                 
-                <Name>{profile.name}</Name>
+                <Name>{u.name}</Name>
                 <UserActionsConsumer>
-                  <Link to={RootRoute.profile.id.userId[use](authId).preview[full]()}>
+                  <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
                     <Eye>
                       <Button css={ButtonS.textRoundBigNormal}>
                         <EyeWideIc css={eyeIcS} />
@@ -84,7 +85,7 @@ const SummaryPage = React.memo(
                 </UserActionsConsumer>
                 <Info>{info}</Info>
                 
-                <Link to={RootRoute.profile.id.userId[use](authId).profile[full]()}>
+                <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>
                   <Edit>
                     <Button css={editBtnStyle}>{actionText.edit}</Button>
                   </Edit>

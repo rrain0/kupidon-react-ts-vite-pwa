@@ -33,28 +33,29 @@ const ProfileIdUserIdTab = React.memo(
     const tab = params?.['tab']
     const summary = RootRoute.profile.id.userId.summary[path]
     
-    if (urlUserId === authId) {
-      if (tab === summary) return (
-        <Suspense fallback={<div>Loading...</div>}>
-          <SummaryPage/>
-        </Suspense>
-      )
-      return (
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProfilePage/>
-        </Suspense>
-      )
-    }
-    
-    return (
+    if (urlUserId !== authId) return (
       <div>
         <div>Просмотр чужого профиля пока что не реализован.</div>
-        <Link to={RootRoute.login[fullAllowedNameParams]({
-          returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
-        })}>
+        <Link
+          to={RootRoute.login[fullAllowedNameParams]({
+            returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
+          })}
+        >
           <button>Войти</button>
         </Link>
       </div>
+    )
+    
+    
+    if (tab === summary) return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <SummaryPage />
+      </Suspense>
+    )
+    return (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProfilePage />
+      </Suspense>
     )
   }
 )
