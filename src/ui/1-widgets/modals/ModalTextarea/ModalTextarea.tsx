@@ -18,13 +18,15 @@ import Puro = TypeU.Puro
 
 
 
-export type ModalTextareaProps = React.ComponentPropsWithoutRef<typeof Textarea> & Puro<{
-  isOpen: boolean
-  onClose: Callback
-  onClear: Callback
-  onCancel: Callback
-  title: string
-}>
+export type ModalTextareaProps =
+  React.ComponentPropsWithoutRef<typeof Textarea>
+  & Puro<{
+    title: string
+    isOpen: boolean
+    onClose: Callback
+    onClear: Callback
+    onCancel: Callback
+  }>
 
 
 
@@ -32,7 +34,11 @@ const ModalTextarea = React.memo(
   React.forwardRef<TextareaRefElement, ModalTextareaProps>(
     (props, forwardedRef) => {
       const {
-        isOpen, onClose, onClear, title,
+        title,
+        isOpen,
+        onClose,
+        onClear,
+        onCancel,
         ...restProps
       } = props
       
@@ -45,13 +51,23 @@ const ModalTextarea = React.memo(
             <Modal css={ModalElement.modalStyle} onClick={onClose}>
               <UserActionsConsumer>
                 <Card2 css={ModalElement.card2Style}>
+                  
                   <ItemLabel>{title}</ItemLabel>
+                  
                   <Textarea css={TextareaStyle.small}
                     autoFocus
                     {...restProps}
                     ref={forwardedRef}
                   />
+                  
                   <ModalElement.DialogButtons>
+                    {onCancel && (
+                      <Button css={ButtonS.textRoundedNormalNormal}
+                        onClick={onCancel}
+                      >
+                        {actionText.cancel}
+                      </Button>
+                    )}
                     {onClear && (
                       <Button css={ButtonS.textRoundedNormalNormal}
                         onClick={onClear}
@@ -65,6 +81,7 @@ const ModalTextarea = React.memo(
                       {actionText.ok}
                     </Button>
                   </ModalElement.DialogButtons>
+                  
                 </Card2>
               </UserActionsConsumer>
             </Modal>

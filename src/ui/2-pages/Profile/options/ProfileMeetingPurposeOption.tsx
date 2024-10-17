@@ -1,7 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
-import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -9,20 +7,13 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import WineBottleAlcoholGradIc = SvgGradIcons.WineBottleAlcoholGradIc
 import GoalGradIc = SvgGradIcons.GoalGradIc
 
 
 
 
-
-
-
 const overlayName = 'profileMeetingPurpose'
-
-
 
 
 
@@ -36,31 +27,44 @@ const ProfileMeetingPurposeOption = React.memo(
     }), [titleText, optionText])
     
     
-    const [selected, setSelected] = useState('')
-    
-    
     const options = useMemo(() => [
       {
         id: 'Поиск серьезных отношений',
         text: 'Поиск серьезных отношений',
-      }, {
+      },
+      {
         id: 'Дружба и общение',
         text: 'Дружба и общение',
-      }, {
+      },
+      {
         id: 'Легкие романтические отношения',
         text: 'Легкие романтические отношения',
-      }, {
+      },
+      {
         id: 'Совместные хобби и увлечения',
         text: 'Совместные хобби и увлечения',
-      }, {
+      },
+      {
         id: '',
         text: text.notSelected,
       },
     ] satisfies Option<string>[], [text])
     
     
+    const [saved, setSaved] = useState('')
+    const [selected, setSelected] = useState('')
+    
+    const onCancel = () => setSelected(saved)
+    
+    
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
+    
     const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
@@ -76,12 +80,13 @@ const ProfileMeetingPurposeOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={'Цель знакомства'}
           options={options}
           selected={selected}
           setSelected={setSelected}
           notSelectedValue={''}
+          onCancel={onCancel}
         />
       </>
     )

@@ -72,6 +72,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     const [selected, setSelected] = useState([] as string[])
     
     const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    const onClear = () => setSelected([])
     
     
     const { options, add, edit, setOptionText } = useMultiSelectOneEditableOption(
@@ -110,6 +111,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
           edit={edit}
           onSelect={onSelect}
           setOptionText={setOptionText}
+          onClear={onClear}
         />
         
         

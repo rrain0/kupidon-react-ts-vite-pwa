@@ -1,8 +1,13 @@
 import { css } from '@emotion/react'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import Button from 'src/ui/0-elements/buttons/Button/Button'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
@@ -38,6 +43,7 @@ type ModalSingleSelectListProps<T extends string> = Ro<{
   add: T[]
   edit: T[]
   setOptionText: Setter<Option<T>>
+  onCancel: Callback
 }>
 
 const ModalSingleSelectList = ReactU.memo(
@@ -56,12 +62,21 @@ const ModalSingleSelectList = ReactU.memo(
       add = [],
       edit = [],
       setOptionText,
+      
+      onCancel,
     } = props
+    
+    const actionText = useUiValues(ActionUiText)
     
     const toggleSelected = (id: T) => {
       if (selected === id && exists(notSelectedValue)) setSelected?.(notSelectedValue)
       else setSelected?.(id)
     }
+    
+    const hasOnClear = exists(notSelectedValue)
+    const onClear = useCallback(() => {
+      if (hasOnClear) setSelected?.(notSelectedValue)
+    }, [hasOnClear, setSelected])
     
     const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayEdit)
     
@@ -98,6 +113,7 @@ const ModalSingleSelectList = ReactU.memo(
                 {...sheetProps.sheetProps}
                 headerTitle={title}
               >
+                
                 <div css={selectItemsContainer}>
                   {options.filter(opt => opt.id !== notSelectedValue).map(opt => {
                     const isSelected = selected === opt.id
@@ -115,7 +131,7 @@ const ModalSingleSelectList = ReactU.memo(
                         isSelected={isSelected}
                         isAdd={isAdd}
                         isEdit={isEdit}
-                        indicatorsSelection={opt.id === selected ? [true] : [false]}
+                        //indicatorsSelection={opt.id === selected ? [true] : [false]}
                       >
                         <SelectItemText>
                           {opt.text}
@@ -124,6 +140,28 @@ const ModalSingleSelectList = ReactU.memo(
                     )
                   })}
                 </div>
+                
+                <ModalElement.DialogButtons>
+                  {onCancel && (
+                    <Button css={ButtonS.textRoundedNormalNormal}
+                      onClick={onCancel}
+                    >
+                      {actionText.cancel}
+                    </Button>
+                  )}
+                  {hasOnClear && (
+                    <Button css={ButtonS.textRoundedNormalNormal}
+                      onClick={onClear}
+                    >
+                      {actionText.clear}
+                    </Button>
+                  )}
+                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
+                    onClick={close}
+                  >
+                    {actionText.ok}
+                  </Button>
+                </ModalElement.DialogButtons>
               
               </BottomSheetDialogBasic>
             </ModalPortal>

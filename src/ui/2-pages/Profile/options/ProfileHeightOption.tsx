@@ -5,7 +5,6 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import RulerVerticalGradIc = SvgGradIcons.RulerVerticalGradIc
@@ -18,7 +17,7 @@ const overlayName = 'profileHeight'
 
 
 const ProfileHeightOption = React.memo(
-  (props: ValidationWrapRenderProps<number | null>) => {
+  () => {
     const titleText = useUiValues(TitleUiText)
     const optionText = useUiValues(OptionUiText)
     
@@ -31,12 +30,16 @@ const ProfileHeightOption = React.memo(
       greater2: 'более',
     }), [titleText, optionText])
     
+    const [saved, setSaved] = useState<number | null>(null)
+    
     const [minMax, setMinMax] = useState<NumRange>([99, 231])
-    const [height, setHeight] = useState<number | null>(props.value)
+    const [height, setHeight] = useState<number | null>(saved)
+    
+    const onCancel = () => setHeight(saved)
     
     useEffect(() => {
-      setHeight(props.value)
-    }, [props.value])
+      setHeight(saved)
+    }, [saved])
     
     const textValue = (height: number | null) => {
       if (height === null) return text.notSpecified
@@ -47,16 +50,20 @@ const ProfileHeightOption = React.memo(
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
+    const onClose = () => {
+      setSaved(height)
+      close()
+    }
+    
     const onValueDragEnd = (value: number) => {
       // set value to external world
-      props.setValue(Math.round(value))
+      setHeight(Math.round(value))
     }
     const onValue = (value: number) => {
       setHeight(Math.round(value))
     }
     const onClear = () => {
       setHeight(null)
-      props.setValue(null)
     }
     
     return (
@@ -72,7 +79,7 @@ const ProfileHeightOption = React.memo(
         
         <ModalSlider
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={text.height}
           text={textValue(height)}
           
@@ -82,6 +89,7 @@ const ProfileHeightOption = React.memo(
           onValueDragEnd={onValueDragEnd}
           isHideBar={height === null}
           onClear={onClear}
+          onCancel={onCancel}
         />
         
       </>

@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
-import { PartnerGender } from 'src/api/model/PartnerGender.ts'
+import React, { useMemo, useState } from 'react'
+import { Gender } from 'src/api/model/Gender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -11,78 +11,100 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import Search2GradIc = SvgGradIcons.Search2GradIc
+import GenderGradIc = SvgGradIcons.GenderGradIc
 
 
 
 
-const overlayName = 'imLookingFor'
 
-
-export type PartnerGenderOptionValues = PartnerGender | ''
-export type PartnerGenderUiOptions = Option<PartnerGenderOptionValues>[]
+const overlayName = 'gender'
 
 
 
-const ProfileImLookingForOption = React.memo(
-(props: ValidationWrapRenderProps<PartnerGenderOptionValues>) => {
-    const titleText = useUiValues(TitleUiText)
+export type GenderOptionValues = Gender | ''
+export type GenderUiOptions = Option<Gender>[]
+
+
+const ProfileGenderOption = React.memo(
+  (props: ValidationWrapRenderProps<GenderOptionValues>) => {
     const optionText = useUiValues(OptionUiText)
+    const titleText = useUiValues(TitleUiText)
     
     const text = useMemo(() => ({
-      ofGuys: optionText.ofGuys,
-      ofGirls: optionText.ofGirls,
-      ofGuysAndGirls: optionText.ofGuysAndGirls,
-      notSelected: optionText.notSelected,
+      male: optionText.male,
+      female: optionText.female,
+      gender: titleText.gender,
     }), [titleText, optionText])
+    
     
     
     const options = useMemo(
       () => [
         {
           id: 'MALE',
-          text: text.ofGuys,
-        }, {
-          id: 'FEMALE',
-          text: text.ofGirls,
-        }, {
-          id: 'MALE_FEMALE',
-          text: text.ofGuysAndGirls,
-        }, {
-          id: '',
-          text: text.notSelected,
+          text: text.male,
         },
-      ] satisfies PartnerGenderUiOptions,
+        {
+          id: 'FEMALE',
+          text: text.female,
+        },
+      ] satisfies GenderUiOptions,
       [text]
     )
     
     
+    const [saved, setSaved] = useState(props.value)
+    
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onOpen = () => {
+      setSaved(props.value)
+      open()
+    }
+    const onCancel = () => {
+      // TODO access initial value
+      props.setValue(saved)
+    }
+    
     const value = options.find(opt => opt.id === props.value)?.text ?? ''
+    
     
     return (
       <>
         <OptionItem
-          icon={<Search2GradIc />}
-          title={titleText.imLookingFor}
+          icon={<GenderGradIc />}
+          title={text.gender}
           value={value}
-          onClick={open}
+          onClick={onOpen}
         />
         
         
         <ModalSingleSelectList
           isOpen={isOpen}
           close={close}
-          title={titleText.imLookingFor}
+          title={text.gender}
           options={options}
           selected={props.value}
           setSelected={props.setValue}
-          notSelectedValue={''}
+          onCancel={onCancel}
         />
+        
+        {/*
+         <ModalRadio<typeof props.value>
+           isOpen={isOpen}
+           close={close}
+           title={text.gender}
+           options={options}
+           value={props.value}
+           onSelect={props.setValue}
+         />
+         */}
+        
       </>
     )
   }
 )
-export default ProfileImLookingForOption
+export default ProfileGenderOption
+
 
 

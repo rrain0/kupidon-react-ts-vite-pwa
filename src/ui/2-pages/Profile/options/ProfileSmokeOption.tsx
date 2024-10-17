@@ -37,7 +37,6 @@ const ProfileSmokeOption = React.memo(
     }), [titleText, optionText])
     
     
-    const [selected, setSelected] = useState('')
     
     
     const options = useMemo(
@@ -62,9 +61,19 @@ const ProfileSmokeOption = React.memo(
       [text]
     )
     
+    const [saved, setSaved] = useState('')
+    const [selected, setSelected] = useState(saved)
+    
+    const onCancel = () => setSelected(saved)
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
+    
     const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
@@ -80,12 +89,13 @@ const ProfileSmokeOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={text.attitudeTowardsSmoke}
           options={options}
           selected={selected}
           setSelected={setSelected}
           notSelectedValue={''}
+          onCancel={onCancel}
         />
       </>
     )

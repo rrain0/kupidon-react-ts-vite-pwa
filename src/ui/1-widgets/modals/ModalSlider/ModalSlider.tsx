@@ -36,6 +36,7 @@ export type ModalSliderProps = {
   onValueDragEnd: Setter<number>
   isHideBar: boolean
   onClear: Callback
+  onCancel: Callback
 }>
 
 
@@ -49,6 +50,7 @@ const ModalSlider = React.memo(
       onValueDragEnd,
       isHideBar,
       onClear,
+      onCancel,
       children,
     } = props
     
@@ -79,7 +81,14 @@ const ModalSlider = React.memo(
                   isHideBar={isHideBar}
                 />
                 
-                {onClear && <ModalElement.DialogButtons>
+                <ModalElement.DialogButtons>
+                  {onCancel && (
+                    <Button css={ButtonS.textRoundedNormalNormal}
+                      onClick={onCancel}
+                    >
+                      {actionText.cancel}
+                    </Button>
+                  )}
                   {onClear && (
                     <Button css={ButtonS.textRoundedNormalNormal}
                       onClick={onClear}
@@ -87,7 +96,12 @@ const ModalSlider = React.memo(
                       {actionText.clear}
                     </Button>
                   )}
-                </ModalElement.DialogButtons>}
+                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
+                    onClick={close}
+                  >
+                    {actionText.ok}
+                  </Button>
+                </ModalElement.DialogButtons>
                 
               </Content>
               

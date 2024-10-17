@@ -36,9 +36,6 @@ const DateWhoPaysOption = React.memo(() => {
   }), [titleText, optionText])
   
   
-  const [selected, setSelected] = useState('')
-  
-  
   const options = useMemo(() => [
     {
       id: text.iAlwaysPay,
@@ -60,7 +57,18 @@ const DateWhoPaysOption = React.memo(() => {
   
   
   
+  const [saved, setSaved] = useState('')
+  const [selected, setSelected] = useState(saved)
+  
+  const onCancel = () => setSelected(saved)
+  
+  
   const { isOpen, open, close } = useOverlayUrl(overlayName)
+  
+  const onClose = () => {
+    setSaved(selected)
+    close()
+  }
   
   const valueText = options.find(opt => opt.id === selected)?.text ?? text.notSelected
   
@@ -77,12 +85,13 @@ const DateWhoPaysOption = React.memo(() => {
       
       <ModalSingleSelectList
         isOpen={isOpen}
-        close={close}
+        close={onClose}
         title={text.yourPreferenceForAPaymentOnADate}
         options={options}
         selected={selected}
         setSelected={setSelected}
         notSelectedValue={''}
+        onCancel={onCancel}
       />
     </>
   )

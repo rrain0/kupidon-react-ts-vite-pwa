@@ -76,6 +76,7 @@ const ProfileFavoriteBookGenresOption = React.memo(
     const [selected, setSelected] = useState([] as string[])
     
     const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    const onClear = () => setSelected([])
     
     const { options, add, edit, setOptionText } = useMultiSelectOneEditableOption(
       'CUSTOM', options0, selected, setSelected
@@ -113,6 +114,7 @@ const ProfileFavoriteBookGenresOption = React.memo(
           edit={edit}
           onSelect={onSelect}
           setOptionText={setOptionText}
+          onClear={onClear}
         />
         
         

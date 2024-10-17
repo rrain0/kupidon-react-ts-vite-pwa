@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Gender } from 'src/api/model/Gender.ts'
+import { PartnerGender } from 'src/api/model/PartnerGender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -11,44 +11,50 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import WineBottleAlcoholGradIc = SvgGradIcons.WineBottleAlcoholGradIc
-import BabyGradIc = SvgGradIcons.BabyGradIc
+import Search2GradIc = SvgGradIcons.Search2GradIc
 
 
 
-const overlayName = 'profileKids'
+
+const overlayName = 'imLookingFor'
 
 
+export type PartnerGenderOptionValues = PartnerGender | ''
+export type PartnerGenderUiOptions = Option<PartnerGenderOptionValues>[]
 
-const ProfileKidsOption = React.memo(
+
+// Partner Gender
+const ProfileImLookingForOption = React.memo(
   () => {
-    const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
+    const optionText = useUiValues(OptionUiText)
     
     const text = useMemo(() => ({
+      ofGuys: optionText.ofGuys,
+      ofGirls: optionText.ofGirls,
+      ofGuysAndGirls: optionText.ofGuysAndGirls,
       notSelected: optionText.notSelected,
-      kids: 'Дети',
-      has: 'Есть',
-      hasNot: 'Нет',
     }), [titleText, optionText])
-    
-    
     
     
     const options = useMemo(() => [
       {
-        id: 'Есть',
-        text: 'Есть',
+        id: 'MALE',
+        text: text.ofGuys,
       },
       {
-        id: 'Нет',
-        text: 'Нет',
+        id: 'FEMALE',
+        text: text.ofGirls,
+      },
+      {
+        id: 'MALE_FEMALE',
+        text: text.ofGuysAndGirls,
       },
       {
         id: '',
         text: text.notSelected,
       },
-    ], [text])
+    ] satisfies PartnerGenderUiOptions, [text])
     
     
     const [saved, setSaved] = useState('')
@@ -66,12 +72,11 @@ const ProfileKidsOption = React.memo(
     
     const value = options.find(opt => opt.id === selected)?.text ?? ''
     
-    
     return (
       <>
         <OptionItem
-          icon={<BabyGradIc />}
-          title={text.kids}
+          icon={<Search2GradIc />}
+          title={titleText.imLookingFor}
           value={value}
           onClick={open}
         />
@@ -80,7 +85,7 @@ const ProfileKidsOption = React.memo(
         <ModalSingleSelectList
           isOpen={isOpen}
           close={onClose}
-          title={text.kids}
+          title={titleText.imLookingFor}
           options={options}
           selected={selected}
           setSelected={setSelected}
@@ -91,7 +96,6 @@ const ProfileKidsOption = React.memo(
     )
   }
 )
-export default ProfileKidsOption
-
+export default ProfileImLookingForOption
 
 

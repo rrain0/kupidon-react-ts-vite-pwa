@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import PartnerAgeOption from 'src/ui/2-pages/Profile/Partner/options/PartnerAgeOption'
-import ProfileGenderOption from 'src/ui/2-pages/Profile/Profile/options/ProfileGenderOption'
+import PartnerAgeOption from 'src/ui/2-pages/Profile/options-filter/PartnerAgeOption'
+import PartnerHeightOption from 'src/ui/2-pages/Profile/options-filter/PartnerHeightOption'
+import ProfileGenderOption from 'src/ui/2-pages/Profile/options/ProfileGenderOption'
 import ProfileImLookingForOption
-  from 'src/ui/2-pages/Profile/Profile/options/ProfileImLookingForOption'
+  from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
@@ -64,6 +65,11 @@ const Tests = React.memo(
                   backgroundPositionY: '70%',
                 }}
               /> */}
+              {/*
+               <ProfileTabPicture
+                 style={{ backgroundImage: `url(${boyGirlCatShadow})` }}
+               />
+               */}
               
               
               <div css={{ height: 800 }} />
@@ -76,12 +82,9 @@ const Tests = React.memo(
               
               <Card3>
                 
-                <ValidationWrap {...props.validationProps}
-                  fieldName="partnerGender"
-                  render={validProps => (
-                    <ProfileImLookingForOption {...validProps} />
-                  )}
-                />
+                <ProfileImLookingForOption />
+                
+                <PartnerHeightOption />
                 
                 <PartnerAgeOption />
               
@@ -96,23 +99,25 @@ const Tests = React.memo(
         </Pages.SafeInsets>
         
         
-        { (props.canSubmit || props.formProps.hasChanges) && <TopButtonBarFrame>
-          { props.formProps.hasChanges && (
-            <Button
-              css={ButtonS.outlinedRoundedSmallNormal}
-              onClick={props.formProps.resetUserFields}
-            >
-              {actionText.cancel}
-            </Button>
-          )}
-          { props.canSubmit && !props.isLoading && (
-            <Button css={ButtonS.filledRoundedSmallAccent}
-              onClick={props.submit}
-            >
-              {actionText.save}
-            </Button>
-          )}
-        </TopButtonBarFrame>}
+        { (props.canSubmit || props.formProps.hasChanges) && (
+          <TopButtonBarFrame>
+            { props.formProps.hasChanges && (
+              <Button
+                css={ButtonS.outlinedRoundedSmallNormal}
+                onClick={props.formProps.resetUserFields}
+              >
+                {actionText.cancel}
+              </Button>
+            )}
+            { props.canSubmit && !props.isLoading && (
+              <Button css={ButtonS.filledRoundedSmallAccent}
+                onClick={props.submit}
+              >
+                {actionText.save}
+              </Button>
+            )}
+          </TopButtonBarFrame>
+        )}
         
         
       </>

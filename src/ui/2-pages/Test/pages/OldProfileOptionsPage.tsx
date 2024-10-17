@@ -6,6 +6,9 @@ import ProfileFavoriteMovieGenresOption
   from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteMovieGenresOption'
 import ProfileSportFrequencyOption
   from 'src/ui/2-pages/Profile/options-old/ProfileSportFrequencyOption'
+import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption'
+import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption'
+import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption'
@@ -85,6 +88,22 @@ const OldProfileOptionsPage = React.memo(
               
               
               <ProfileFavoriteBookGenresOption />
+            
+            </Card3>
+            
+            
+            
+            <div css={{ height: 24 }} />
+            
+            <Card3>
+              
+              <PartnerPetsOption />
+              
+              
+              <PartnerAlcoholOption />
+              
+              
+              <PartnerSmokeOption />
             
             </Card3>
           

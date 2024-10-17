@@ -5,7 +5,7 @@ import DateIdealDateOption from 'src/ui/2-pages/Profile/options/DateIdealDateOpt
 import DateIdealFormatOption from 'src/ui/2-pages/Profile/options/DateIdealFormatOption'
 import DateIdealTimeOption from 'src/ui/2-pages/Profile/options/DateIdealTimeOption'
 import DateWhoPaysOption from 'src/ui/2-pages/Profile/options/DateWhoPaysOption'
-import PartnerAgeOption from 'src/ui/2-pages/Profile/Partner/options/PartnerAgeOption'
+import PartnerAgeOption from 'src/ui/2-pages/Profile/options-filter/PartnerAgeOption'
 import ProfileKidsOption from 'src/ui/2-pages/Profile/options/ProfileKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOption.tsx'
 import ProfileMeetingPurposeOption
@@ -21,10 +21,10 @@ import ProfileFavoriteBookGenresOption
   from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteBookGenresOption.tsx'
 import ProfileFavoriteMovieGenresOption
   from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteMovieGenresOption.tsx'
-import ProfileGenderOption from 'src/ui/2-pages/Profile/Profile/options/ProfileGenderOption.tsx'
+import ProfileGenderOption from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import ProfileHeightOption from 'src/ui/2-pages/Profile/options/ProfileHeightOption.tsx'
 import ProfileImLookingForOption
-  from 'src/ui/2-pages/Profile/Profile/options/ProfileImLookingForOption.tsx'
+  from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import ProfileInterestsAndHobbiesOption
   from 'src/ui/2-pages/Profile/options/ProfileInterestsAndHobbiesOption.tsx'
 import ProfileJobOption from 'src/ui/2-pages/Profile/options/ProfileJobOption.tsx'
@@ -167,14 +167,7 @@ const Profile = React.memo(
                 
                 <ProfileKidsOption />
                 
-                <ValidationWrap 
-                  {...props.validationProps}
-                  fieldName="height"
-                >
-                  {validProps => (
-                    <ProfileHeightOption {...validProps} />
-                  )}
-                </ValidationWrap>
+                <ProfileHeightOption />
                 
                 <ProfileInterestsAndHobbiesOption />
               
@@ -191,24 +184,10 @@ const Profile = React.memo(
               
               <Card3>
                 
-                <ValidationWrap 
-                  {...props.validationProps}
-                  fieldName="job"
-                >
-                  {validProps => (
-                    <ProfileJobOption {...validProps} />
-                  )}
-                </ValidationWrap>
+                <ProfileJobOption />
                 
                 
-                <ValidationWrap 
-                  {...props.validationProps}
-                  fieldName="education"
-                >
-                  {validProps => (
-                    <ProfileEducationOption {...validProps} />
-                  )}
-                </ValidationWrap>
+                <ProfileEducationOption />
                 
                 
                 <ProfileLangsOption />

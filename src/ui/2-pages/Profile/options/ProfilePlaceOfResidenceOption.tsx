@@ -16,12 +16,7 @@ import MapLocationGradIc = SvgGradIcons.MapLocationGradIc
 
 
 
-
-
-
 const overlayName = 'profilePlaceOfResidence'
-
-
 
 
 
@@ -35,38 +30,44 @@ const ProfilePlaceOfResidenceOption = React.memo(
     }), [titleText, optionText])
     
     
+    const options = useMemo(() => [
+      {
+        id: '1',
+        text: 'Октябрьский округ',
+      },
+      {
+        id: '2',
+        text: 'Свердловский округ',
+      },
+      {
+        id: '3',
+        text: 'Правобережный округ',
+      },
+      {
+        id: '4',
+        text: 'Ленинский округ',
+      },
+      {
+        id: '',
+        text: text.notSelected,
+      },
+    ] satisfies Option<string>[], [text])
+    
+    
+    const [saved, setSaved] = useState('')
     const [selected, setSelected] = useState('')
     
-    
-    const options = useMemo(
-      () => [
-        {
-          id: '1',
-          text: 'Октябрьский округ',
-        },
-        {
-          id: '2',
-          text: 'Свердловский округ',
-        },
-        {
-          id: '3',
-          text: 'Правобережный округ',
-        },
-        {
-          id: '4',
-          text: 'Ленинский округ',
-        },
-        {
-          id: '',
-          text: text.notSelected,
-        },
-      ] satisfies Option<string>[],
-      [text]
-    )
+    const onCancel = () => setSelected(saved)
     
     
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
+    
     const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     
@@ -82,12 +83,13 @@ const ProfilePlaceOfResidenceOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={'Место проживания'}
           options={options}
           selected={selected}
           setSelected={setSelected}
           notSelectedValue={''}
+          onCancel={onCancel}
         />
       </>
     )

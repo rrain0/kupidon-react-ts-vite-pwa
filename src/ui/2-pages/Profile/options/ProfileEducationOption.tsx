@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Education } from 'src/api/model/Education.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -8,7 +8,6 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import EducationGradIc = SvgGradIcons.EducationGradIc
 
@@ -25,7 +24,7 @@ export type EducationUiOptions = Option<EducationOptionValues>[]
 
 
 const ProfileEducationOption = React.memo(
-  (props: ValidationWrapRenderProps<EducationOptionValues>) => {
+  () => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     
@@ -67,8 +66,20 @@ const ProfileEducationOption = React.memo(
     
     
     
+    const [saved, setSaved] = useState<EducationOptionValues>('')
+    const [selected, setSelected] = useState(saved)
+    
+    const onCancel = () => setSelected(saved)
+    
+    
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.id === props.value)?.text ?? ''
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
+    
+    const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     return (
       <>
@@ -82,12 +93,13 @@ const ProfileEducationOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={titleText.education}
           options={options}
-          selected={props.value}
-          setSelected={props.setValue}
+          selected={selected}
+          setSelected={setSelected}
           notSelectedValue={''}
+          onCancel={onCancel}
         />
       </>
     )

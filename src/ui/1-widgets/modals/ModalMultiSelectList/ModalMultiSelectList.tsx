@@ -1,13 +1,22 @@
 import { css } from '@emotion/react'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import Button from 'src/ui/0-elements/buttons/Button/Button'
+import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
 import {
   SelectItemIndicatorS
 } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
+import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement'
+import {
+  getCommonIndicatorsDataDefault,
+  GetIndicatorsData,
+} from 'src/ui/1-widgets/modals/ModalMultiSelectList/modalMultiSelectUtils'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem, { IndicatorSelection } from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
@@ -30,34 +39,6 @@ import Callback1 = TypeU.Callback1
 
 const overlayEdit = 'edit'
 
-export type GetIndicatorsData<T extends string> =
-  (options: Option<T>[], option: Option<T>, optionI: number, isSelected: boolean) => IndicatorSelection[]
-
-export const getIndicatorsDataDefault = (
-  <T extends string>(): GetIndicatorsData<T> =>
-    (options, option, optionI, isSelected) => {
-      return options.map((it, i) => {
-        if (!isSelected) return false
-        //if (option.id !== it.id) return 1
-        if (option.id !== it.id) return false
-        return true
-      })
-    }
-)()
-
-export type GetCommonIndicatorsData<T extends string> =
-  (options: Option<T>[], selected: T[]) => IndicatorSelection[]
-
-export const getCommonIndicatorsDataDefault = (
-  <T extends string>(): GetCommonIndicatorsData<T> =>
-    (options, selected) => {
-      return options.map((it, i) => {
-        if (selected.includes(it.id)) return true
-        return false
-      })
-    }
-)()
-
 export type ModalMultiSelectListProps<T extends string> = Ro<{
   isOpen: boolean
   close: Callback
@@ -70,6 +51,8 @@ export type ModalMultiSelectListProps<T extends string> = Ro<{
   onSelect: Callback1<T>
   setOptionText: Setter<Option<T>>
   getIndicatorsData: GetIndicatorsData<T>
+  onCancel: Callback
+  onClear: Callback
 }>
 
 const ModalMultiSelectList = ReactU.memo(
@@ -86,13 +69,17 @@ const ModalMultiSelectList = ReactU.memo(
       edit = emptyArr,
       onSelect,
       setOptionText,
-      getIndicatorsData = getIndicatorsDataDefault,
+      getIndicatorsData,
+      
+      onCancel,
+      onClear,
     } = props
+    
+    const actionText = useUiValues(ActionUiText)
     
     const toggleSelected = (id: T) => {
       onSelect?.(id)
     }
-    
     
     const { isOpen: isEditOpen, open: openEdit, close: closeEdit } = useOverlayUrl(overlayEdit)
     
@@ -148,7 +135,7 @@ const ModalMultiSelectList = ReactU.memo(
                         isSelected={isSelected}
                         isAdd={isAdd}
                         isEdit={isEdit}
-                        //indicatorsSelection={getIndicatorsData(options, opt, i, isSelected)}
+                        indicatorsSelection={getIndicatorsData?.(options, opt, i, isSelected)}
                       >
                         <SelectItemText>
                           {opt.text}
@@ -157,6 +144,28 @@ const ModalMultiSelectList = ReactU.memo(
                     )
                   })}
                 </div>
+                
+                <ModalElement.DialogButtons>
+                  {onCancel && (
+                    <Button css={ButtonS.textRoundedNormalNormal}
+                      onClick={onCancel}
+                    >
+                      {actionText.cancel}
+                    </Button>
+                  )}
+                  {onClear && (
+                    <Button css={ButtonS.textRoundedNormalNormal}
+                      onClick={onClear}
+                    >
+                      {actionText.clear}
+                    </Button>
+                  )}
+                  <Button css={ButtonS.textUppercaseRoundedNormalNormal}
+                    onClick={close}
+                  >
+                    {actionText.ok}
+                  </Button>
+                </ModalElement.DialogButtons>
               
               </BottomSheetDialogBasic>
             </ModalPortal>

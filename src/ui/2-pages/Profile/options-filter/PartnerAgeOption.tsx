@@ -3,17 +3,14 @@ import { ReactU } from 'src/util/common/ReactU.ts'
 import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
 import numeral from 'numeral'
 import React, { useState } from 'react'
-import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/1-widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
 import HourglassGradIc = SvgGradIcons.HourglassGradIc
-import UserValues = ProfilePageValidation.UserValues
 import NumRange = RangeU.NumRange
 import NumRangeEndNullable = RangeU.NumRangeEndNullable
 
@@ -27,7 +24,7 @@ const overlayName = 'partnerAge'
 
 
 const PartnerAgeOption = React.memo(
-  (/* props: ValidationWrapRenderProps<UserValues['partnerAge']> */) => {
+  () => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     

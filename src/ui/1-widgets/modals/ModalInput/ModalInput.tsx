@@ -22,9 +22,10 @@ import Puro = TypeU.Puro
 
 type ModalInputProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
   isOpen: boolean
-  onClose: Callback
-  onClear: Callback
   title: string
+  onClose: Callback
+  onCancel: Callback
+  onClear: Callback
 }>
 
 
@@ -33,7 +34,7 @@ const ModalInput = React.memo(
   React.forwardRef<HTMLInputElement, ModalInputProps>(
     (props, forwardedRef) => {
       const {
-        isOpen, onClose, onClear, title,
+        isOpen, title, onClose, onCancel, onClear,
         ...restProps
       } = props
       
@@ -53,6 +54,13 @@ const ModalInput = React.memo(
                     ref={forwardedRef}
                   />
                   <ModalElement.DialogButtons>
+                    {onCancel && (
+                      <Button css={ButtonS.textRoundedNormalNormal}
+                        onClick={onCancel}
+                      >
+                        {actionText.cancel}
+                      </Button>
+                    )}
                     
                     {onClear && (
                       <Button css={ButtonS.textRoundedNormalNormal}

@@ -34,9 +34,6 @@ const ProfileLangsOption = React.memo(
     }), [titleText, optionText])
     
     
-    const [selected, setSelected] = useState(['ru', 'en', 'fr'])
-    
-    
     const options = useMemo(() => [
       {
         id: 'ru',
@@ -122,7 +119,19 @@ const ProfileLangsOption = React.memo(
     
     
     
+    const [saved, setSaved] = useState<string[]>(['ru', 'en', 'fr'])
+    const [selected, setSelected] = useState<string[]>(saved)
+    
+    const onClear = () => setSelected([])
+    const onCancel = () => setSelected(saved)
+    
+    
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
     
     const valueText = selected
       .map(v => options.find(o => o.id === v))
@@ -143,11 +152,13 @@ const ProfileLangsOption = React.memo(
         
         <ModalTileSelect
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={text.langs}
           options={options}
           selected={selected}
           setSelected={setSelected}
+          onClear={onClear}
+          onCancel={onCancel}
         />
       </>
     )

@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Job } from 'src/api/model/Job.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
-import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import {
   SvgGradIcons,
@@ -11,7 +10,6 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import WorkSuitcaseGradIc = SvgGradIcons.WorkSuitcaseGradIc
 
@@ -30,7 +28,7 @@ export type JobUiOptions = Option<JobOptionValues>[]
 
 
 const ProfileJobOption = React.memo(
-  (props: ValidationWrapRenderProps<JobOptionValues>) => {
+  () => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     
@@ -47,13 +45,16 @@ const ProfileJobOption = React.memo(
         {
           id: 'I_WORK_FOR_HIRE',
           text: text.iWorkForHire,
-        }, {
+        },
+        {
           id: 'WORK_FOR_MYSELF',
           text: text.workForMyself,
-        }, {
+        },
+        {
           id: 'TEMPORARILY_UNEMPLOYED',
           text: text.temporaryUnemployed,
-        }, {
+        },
+        {
           id: '',
           text: text.notSelected,
         },
@@ -62,9 +63,19 @@ const ProfileJobOption = React.memo(
     )
     
     
+    const [saved, setSaved] = useState<JobOptionValues>('')
+    const [selected, setSelected] = useState(saved)
+    
+    const onCancel = () => setSelected(saved)
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
-    const value = options.find(opt => opt.id === props.value)?.text ?? ''
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
+    
+    const value = options.find(opt => opt.id === selected)?.text ?? ''
     
     return (
       <>
@@ -78,12 +89,13 @@ const ProfileJobOption = React.memo(
         
         <ModalSingleSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={titleText.job}
           options={options}
-          selected={props.value}
-          setSelected={props.setValue}
-          notSelectedValue={''}
+          selected={selected}
+          setSelected={setSelected}
+          notSelectedValue=""
+          onCancel={onCancel}
         />
       </>
     )

@@ -17,7 +17,7 @@ const overlayName = 'datePurpose'
 
 
 
-const ProfileSmokeOption = React.memo(
+const DatePurposeOption = React.memo(
   () => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
@@ -62,26 +62,28 @@ const ProfileSmokeOption = React.memo(
     const value = genderOptions.find(opt => opt.id === selected)?.text ?? ''
     
     
-    return <>
-      <OptionItem
-        //icon={<GenderGradIc />}
-        title={'Цель свидания'}
-        value={value}
-        onClick={open}
-      />
-      
-      <ModalRadio
-        isOpen={isOpen}
-        close={close}
-        title={'Цель свидания'}
-        options={genderOptions}
-        value={selected}
-        onSelect={setSelected}
-      />
-    </>
+    return (
+      <>
+        <OptionItem
+          //icon={<GenderGradIc />}
+          title={'Цель свидания'}
+          value={value}
+          onClick={open}
+        />
+        
+        <ModalRadio
+          isOpen={isOpen}
+          close={close}
+          title={'Цель свидания'}
+          options={genderOptions}
+          value={selected}
+          onSelect={setSelected}
+        />
+      </>
+    )
   }
 )
-export default ProfileSmokeOption
+export default DatePurposeOption
 
 
 

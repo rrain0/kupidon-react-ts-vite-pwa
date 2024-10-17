@@ -4,7 +4,7 @@ import { Option } from 'src/ui-data/models/Option.ts'
 import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons'
 import {
   GetIndicatorsData
-} from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
+} from 'src/ui/1-widgets/modals/ModalMultiSelectList/modalMultiSelectUtils.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
@@ -58,8 +58,15 @@ const DateIdealTimeOption = React.memo(
       ] satisfies Option<string>[]
     }, [text])
     
-    const [selected, setSelected] = useState<string[]>([])
+    const [saved, setSaved] = useState<string[]>([])
+    const [selected, setSelected] = useState<string[]>(saved)
     const [selectedMemo, setSelectedMemo] = useState<string[]>([])
+    
+    const onClear = () => {
+      setSelected([])
+      setSelectedMemo([])
+    }
+    const onCancel = () => setSelected(saved)
     
     const onSelect = (id: string) => {
       if (id !== options[4].id) {
@@ -104,6 +111,11 @@ const DateIdealTimeOption = React.memo(
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
+    
     const valueText = selected
       .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
@@ -124,12 +136,14 @@ const DateIdealTimeOption = React.memo(
         
         <ModalMultiSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={text.yourIdealTimeForDate}
           options={options}
           selected={selected}
           onSelect={onSelect}
-          getIndicatorsData={getIndicatorsData}
+          //getIndicatorsData={getIndicatorsData}
+          onClear={onClear}
+          onCancel={onCancel}
         />
       
       </>

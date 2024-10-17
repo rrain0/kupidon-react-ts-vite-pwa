@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ModalTextarea from 'src/ui/1-widgets/modals/ModalTextarea/ModalTextarea.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
@@ -16,7 +16,18 @@ const ProfileAboutMeOption = React.memo(
     const titleText = useUiValues(TitleUiText)
     const placeholderText = useUiValues(PlaceholderUiText)
     
+    const [saved, setSaved] = useState(props.value)
+    
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onOpen = () => {
+      setSaved(props.value)
+      open()
+    }
+    const onCancel = () => {
+      // TODO access initial value
+      props.setValue(saved)
+    }
     
     
     return (
@@ -26,7 +37,7 @@ const ProfileAboutMeOption = React.memo(
           text={props.value}
           placeholder={placeholderText.aboutMe}
           data-error={props.highlight}
-          onClick={open}
+          onClick={onOpen}
         />
         
         <ModalTextarea
@@ -34,6 +45,7 @@ const ProfileAboutMeOption = React.memo(
           isOpen={isOpen}
           onClose={close}
           onClear={() => props.setValue('')}
+          onCancel={onCancel}
           
           placeholder={titleText.aboutMe.toLowerCase()}
           {...props.inputProps}

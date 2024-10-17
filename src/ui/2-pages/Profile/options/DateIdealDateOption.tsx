@@ -8,13 +8,7 @@ import EditableTextCard from 'src/ui/components/EditableTextCard/EditableTextCar
 
 
 
-
-
-
-
 const overlayName = 'dateIdealDate'
-
-
 
 
 
@@ -27,10 +21,19 @@ const DateIdealDateOption = React.memo(() => {
   }), [titleText, optionText])
   
   
-  const [text, setText] = useState('')
+  const [saved, setSaved] = useState('')
+  const [text, setText] = useState(saved)
+  
+  const onCancel = () => setText(saved)
+  const onClear = () => setText('')
   
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
+  
+  const onClose = () => {
+    setSaved(text)
+    close()
+  }
   
   //const valueText = text || uiText.wonderAboutYourIdealDate
   
@@ -38,18 +41,19 @@ const DateIdealDateOption = React.memo(() => {
     <>
       <EditableTextCard
         title={uiText.whatWillMakeYourDatePerfect}
-        text={text}
+        text={saved}
         onClick={open}
       />
       
       
       <ModalTextarea
         isOpen={isOpen}
-        onClose={close}
+        onClose={onClose}
         title={uiText.whatWillMakeYourDatePerfect}
         value={text}
         onChange={ev => setText(ev.currentTarget.value)}
-        onClear={() => setText('')}
+        onClear={onClear}
+        onCancel={onCancel}
       />
     </>
   )

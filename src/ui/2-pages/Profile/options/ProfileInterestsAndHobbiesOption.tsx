@@ -12,13 +12,7 @@ import TelescopeGradIc = SvgGradIcons.TelescopeGradIc
 
 
 
-
-
-
 const overlayName = 'profileInterestsAndHobbies'
-
-
-
 
 
 const ProfileInterestsAndHobbiesOption = React.memo(
@@ -36,8 +30,6 @@ const ProfileInterestsAndHobbiesOption = React.memo(
       hashArt: '#искусство',
       hashAnime: '#аниме',
     }), [titleText, optionText])
-    
-    const [selected, setSelected] = useState<string[]>(['travel', 'music', 'sport'])
     
     const options = useMemo(() => [
       {
@@ -66,6 +58,13 @@ const ProfileInterestsAndHobbiesOption = React.memo(
       },
     ] satisfies Option<string>[], [text])
     
+    
+    const [saved, setSaved] = useState<string[]>(['travel', 'music', 'sport'])
+    const [selected, setSelected] = useState<string[]>(saved)
+    
+    const onClear = () => setSelected([])
+    const onCancel = () => setSelected(saved)
+    
     const valueText = selected
       .map(v => options.find(o => o.id === v))
       .filter(o => !!o)
@@ -75,6 +74,11 @@ const ProfileInterestsAndHobbiesOption = React.memo(
      
      
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
     
     
     return (
@@ -89,11 +93,13 @@ const ProfileInterestsAndHobbiesOption = React.memo(
         
         <ModalTileSelect
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={text.interestsAndHobbies}
           options={options}
           selected={selected}
           setSelected={setSelected}
+          onClear={onClear}
+          onCancel={onCancel}
         />
       </>
     )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput.tsx'
@@ -24,10 +24,20 @@ const ProfileBirthDateOption = React.memo(
     const titleText = useUiValues(TitleUiText)
     const placeholderText = useUiValues(PlaceholderUiText)
     
+    const [saved, setSaved] = useState(props.value)
+    
     const age = DateU.age(props.value, lang)
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
+    const onOpen = () => {
+      setSaved(props.value)
+      open()
+    }
+    const onCancel = () => {
+      // TODO access initial value
+      props.setValue(saved)
+    }
     
     return (
       <>
@@ -36,7 +46,7 @@ const ProfileBirthDateOption = React.memo(
           title={titleText.age}
           value={age}
           data-error={props.highlight}
-          onClick={open}
+          onClick={onOpen}
         />
         
         <ModalInput
@@ -44,6 +54,7 @@ const ProfileBirthDateOption = React.memo(
           isOpen={isOpen}
           onClose={close}
           onClear={() => props.setValue('')}
+          onCancel={onCancel}
           
           autoFocus
           inputMode="numeric"

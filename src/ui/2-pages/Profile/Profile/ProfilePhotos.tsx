@@ -342,7 +342,7 @@ const ProfilePhotos = React.memo(
                                 else if (!canShowFetchProgress && im.type === 'remote' && !im.isReady)
                                   return (
                                     <div css={photoPlaceholderStyle}>
-                                      <SparkingLoadingLine/>
+                                      <SparkingLoadingLine />
                                     </div>
                                   )
                                 else if (im.download?.showProgress)
@@ -359,7 +359,7 @@ const ProfilePhotos = React.memo(
                                 else if (im.isEmpty)
                                   return (
                                     <div css={photoPlaceholderStyle}>
-                                      <PlusIc css={photoPlaceholderIconStyle}/>
+                                      <PlusIc css={photoPlaceholderIconStyle} />
                                     </div>
                                   )
                                 else if (im.isReady)
@@ -372,19 +372,21 @@ const ProfilePhotos = React.memo(
                                 
                               }()}
                               
-                              {im.type === 'local' && im.upload?.showProgress
-                                && <div css={photoDimmed}>
+                              {im.type === 'local' && im.upload?.showProgress && (
+                                <div css={photoDimmed}>
                                   <PieProgress css={profilePhotoPieProgressAccent}
                                     progress={
                                       RangeU.map(im.upload.progress, [0, 100], [5, 95])
                                     }
                                   />
                                 </div>
-                              }
-                              {isDraggingFiles && <>
-                                {isDragAccept && <div css={photoDimmed}/>}
-                                <div css={photoOnDragBorder}/>
-                              </>}
+                              )}
+                              {isDraggingFiles && (
+                                <>
+                                  {isDragAccept && <div css={photoDimmed} />}
+                                  <div css={photoOnDragBorder} />
+                                </>
+                              )}
                             
                             </animated.label>
                           </div>

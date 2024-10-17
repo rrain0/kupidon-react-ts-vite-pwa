@@ -55,11 +55,19 @@ const DateIdealFormatOption = React.memo(
       ] satisfies Option<string>[]
     }, [text])
     
-    const [selected, setSelected] = useState<string[]>([])
+    
+    const [saved, setSaved] = useState<string[]>([])
+    const [selected, setSelected] = useState<string[]>(saved)
     
     const onSelect = (id: string) => setSelected(ArrayU.toggleTo(selected, id))
+    const onClear = () => setSelected([])
+    const onCancel = () => setSelected(saved)
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
+    const onClose = () => {
+      setSaved(selected)
+      close()
+    }
     
     const valueText = selected
       .map(v => options.find(o => o.id === v))
@@ -81,11 +89,13 @@ const DateIdealFormatOption = React.memo(
         
         <ModalMultiSelectList
           isOpen={isOpen}
-          close={close}
+          close={onClose}
           title={text.yourIdealDateFormat}
           options={options}
           selected={selected}
           onSelect={onSelect}
+          onClear={onClear}
+          onCancel={onCancel}
         />
         
       </>
