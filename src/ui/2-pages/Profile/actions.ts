@@ -16,7 +16,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import { DateTime } from 'src/util/DateTime.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import * as uuid from 'uuid'
-import throttle = AsyncU.throttle
+import throttle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData

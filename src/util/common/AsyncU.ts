@@ -10,22 +10,24 @@ export namespace AsyncU {
   
   
   export const awaitValue =
-  async <T>(delay:number, value?:T) => new Promise<T>(
+  async <T>(delay: number, value?: T) => new Promise<T>(
     resolve => setTimeout(resolve, delay, value)
   )
   export const awaitCallback =
-  async <T>(delay:number, generator:Generator<T>) => new Promise<T>(
+  async <T>(delay:number, generator: Generator<T>) => new Promise<T>(
     resolve => setTimeout(() => resolve(generator()), delay)
   )
   
   
   
-  export const throttle =
-  <T extends any[]>(interval: number, callback: CallbackN<T>): CallbackN<T> =>{
+  export const withThrottle = <Args extends any[]>(
+    interval: number,
+    callback: CallbackN<Args>
+  ): CallbackN<Args> => {
     let timerId: NodeJS.Timeout|null = null
     let prev = 0
     
-    const throttledCallback = (...args: T) => {
+    const throttledCallback: (...args: Args) => void = (...args) => {
       const now = +new Date()
       if (notExists(timerId) && (now - prev > interval)) {
         prev = +new Date()

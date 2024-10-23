@@ -49,7 +49,7 @@ import safePageContentPaddings = Pages.safeInsets
 import fill = EmotionCommon.fill
 import blobToDataUrl = FileU.blobToDataUrl
 import fetchToBlob = FileU.fetchToBlob
-import throttle = AsyncU.throttle
+import withThrottle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import mapFailureCodeToUiText = ProfilePageValidation.mapFailureCodeToUiText
 import validators = ProfilePageValidation.validators
@@ -280,7 +280,7 @@ const ProfilePage = React.memo(
                 ),
               }))
             }
-            const updatePhotos = throttle(
+            const updatePhotos = withThrottle(
               RangeU.map(Math.random(), [0, 1], [1450, 2000]),
               updatePhotosNow
             )
