@@ -8,6 +8,10 @@ export const ActionUiText = {
     'en-US': 'Ok',
     'ru-RU': 'Ок',
   },
+  accept: {
+    'en-US': 'Accept',
+    'ru-RU': 'Принять',
+  },
   yes: {
     'en-US': 'Yes',
     'ru-RU': 'Да',

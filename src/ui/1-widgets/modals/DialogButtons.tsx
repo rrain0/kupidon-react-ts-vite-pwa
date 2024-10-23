@@ -26,7 +26,7 @@ type DialogButtonsProps = Puro<{
   onClear: Callback
   onOk: Callback
 }>
-export const DialogButtons = React.memo(
+const DialogButtons = React.memo(
   (props: DialogButtonsProps) => {
     const { onCancel, onClear, onOk, variant } = props
     
@@ -53,13 +53,14 @@ export const DialogButtons = React.memo(
           </Button>
         )}
         {onOk && (
-          <Button css={ButtonS.textUppercaseRoundedNormal2Normal}
+          <Button css={ButtonS.textRoundedNormal2Normal}
             onClick={onOk}
           >
-            {actionText.ok}
+            {actionText.accept}
           </Button>
         )}
       </DialogButtonsFrame>
     )
   }
 )
+export default DialogButtons

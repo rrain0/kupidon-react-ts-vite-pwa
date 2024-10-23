@@ -3,7 +3,7 @@ import React from 'react'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
-import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
+import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
@@ -103,8 +103,8 @@ const ModalTileSelect = ReactU.memo(
                 <div style={{ height: 24 }} />
                 
                 <DialogButtons
-                  onCancel={onCancel}
-                  onClear={onClear}
+                  //onCancel={onCancel}
+                  //onClear={onClear}
                   onOk={onClose}
                 />
                 

@@ -5,7 +5,7 @@ import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
+import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
@@ -140,8 +140,8 @@ const ModalSingleSelectList = ReactU.memo(
                 </div>
                 
                 <DialogButtons
-                  onCancel={onCancel}
-                  onClear={onClear}
+                  //onCancel={onCancel}
+                  //onClear={onClear}
                   onOk={onClose}
                   variant="center"
                 />

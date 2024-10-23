@@ -1,4 +1,4 @@
-import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
+import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
@@ -54,8 +54,8 @@ const ModalInput = React.memo(
                   />
                   
                   <DialogButtons
-                    onCancel={onCancel}
-                    onClear={onClear}
+                    //onCancel={onCancel}
+                    //onClear={onClear}
                     onOk={onClose}
                   />
                 </Card2>

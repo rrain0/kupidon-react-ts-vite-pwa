@@ -10,7 +10,7 @@ import SelectItemIndicator
 import {
   SelectItemIndicatorS
 } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
-import { DialogButtons } from 'src/ui/1-widgets/modals/DialogButtons'
+import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import {
   getCommonIndicatorsDataDefault,
   GetIndicatorsData,
@@ -144,8 +144,8 @@ const ModalMultiSelectList = ReactU.memo(
                 </div>
                 
                 <DialogButtons
-                  onCancel={onCancel}
-                  onClear={onClear}
+                  //onCancel={onCancel}
+                  //onClear={onClear}
                   onOk={onClose}
                   variant="center"
                 />
