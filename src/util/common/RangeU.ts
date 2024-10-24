@@ -14,6 +14,12 @@ export namespace RangeU {
   export type NumRangeNullableRo = readonly [number | null, number | null]
   export type NumRangeEndNullableRo = readonly [number, number | null]
   
+  export type NumRanges = [number, number, ...number[]]
+  export type NumRangesNullable = [number | null, number | null, ...(number | null)[]]
+  
+  export type NumRangesRo = readonly [number, number, ...number[]]
+  export type NumRangesNullableRo = readonly [number | null, number | null, ...(number | null)[]]
+  
   
   
   export const clamp = (curr: number, [min, max]: NumRangeRo): number => {
@@ -34,15 +40,28 @@ export namespace RangeU {
   export const hasExcl = (curr: number, [min, max]: NumRangeRo): boolean => curr > min && curr < max
   
   
-  
-  export const map = (
-    value: number,
-    fromRange: readonly [minInclusive: number, maxInclusive: number],
-    toRange: readonly [minInclusive: number, maxInclusive: number]
-  )
-  : number => {
+  /**
+   *
+   * @param value
+   * @param fromRange minInclusive..maxInclusive
+   * @param toRange minInclusive..maxInclusive
+   */
+  const mapRange = (value: number, fromRange: NumRangeRo, toRange: NumRangeRo): number => {
     const oneBasedValue = mapNaN((value - fromRange[0]) / (fromRange[1] - fromRange[0]), 0)
     return oneBasedValue * (toRange[1] - toRange[0]) + toRange[0]
+  }
+  
+  
+  
+  export const map = <R extends NumRangesRo>
+  (value: number, fromRange: R, toRange: NoInfer<R>): number => {
+    for (let i = 1; ; i++) {
+      if (i === fromRange.length - 1 || value <= fromRange[i]) return mapRange(
+        value,
+        [fromRange[i - 1], fromRange[i]],
+        [toRange[i-1], toRange[i]],
+      )
+    }
   }
   
   
