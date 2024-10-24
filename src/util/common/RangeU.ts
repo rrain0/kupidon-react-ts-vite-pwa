@@ -54,22 +54,29 @@ export namespace RangeU {
   
   
   export const map = <R extends NumRangesRo>
-  (value: number, fromRange: R, toRange: NoInfer<R>): number => {
+  (value: number, fromRanges: R, toRanges: NoInfer<R>): number => {
     for (let i = 1; ; i++) {
-      if (i === fromRange.length - 1 || value <= fromRange[i]) return mapRange(
+      if (i === fromRanges.length - 1 || value <= fromRanges[i]) return mapRange(
         value,
-        [fromRange[i - 1], fromRange[i]],
-        [toRange[i-1], toRange[i]],
+        [fromRanges[i - 1], fromRanges[i]],
+        [toRanges[i-1], toRanges[i]],
       )
     }
   }
   
   
+  /**
+   *
+   * @param value
+   * @param fromRange minInclusive..maxInclusive
+   * @param toRange minInclusive..maxInclusive
+   * @param clampInRange minInclusive..maxInclusive
+   */
   export const mapClamp = (
     value: number,
-    fromRange: readonly [minInclusive: number, maxInclusive: number],
-    toRange: readonly [minInclusive: number, maxInclusive: number],
-    clampInRange: readonly [minIncluseve: number, maxInclusive: number] = toRange
+    fromRange: NumRangeRo,
+    toRange: NumRangeRo,
+    clampInRange: NumRangeRo = toRange
   )
   : number => {
     return clamp(map(value, fromRange, toRange), clampInRange)
