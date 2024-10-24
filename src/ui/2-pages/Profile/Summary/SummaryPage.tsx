@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
@@ -18,24 +18,39 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
 import { LineProgressS } from 'src/ui/0-elements/LineProgress/LineProgressS'
+import { DefaultOperation } from 'src/ui/2-pages/Profile/ProfilePhotoModels'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
+import { DefaultMainPhoto, MainPhoto } from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
 import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
+import { AsyncU } from 'src/util/common/AsyncU'
+import { RangeU } from 'src/util/common/RangeU'
 import { DateU } from 'src/util/date/DateU'
 import { MockData } from 'src/_mock-data/MockData'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { FileU } from 'src/util/file/FileU'
+import { Progress } from 'src/util/Progress'
+import { useEvent } from 'src/util/react/useEvent'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import EyeWideIc = SvgIcons.EyeWideIc
 import center = EmotionCommon.center
 import Txt = EmotionCommon.Txt
+import withThrottle = AsyncU.withThrottle
+import fetchToBlob = FileU.fetchToBlob
+import blobToDataUrl = FileU.blobToDataUrl
 
 
+
+
+// TODO показывать уведомление с кнопкой Retry, если ошибка загрузки данных
+// TODO В фотках профиля баг, что продолжается анимация инциализации, если фото пустое,
+//  и только потом показывается +
 
 const SummaryPage = React.memo(
   () => {
@@ -51,9 +66,97 @@ const SummaryPage = React.memo(
     const completeProfileDescriptionText = 'Завешите описание профиля'
     const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
     
-    const [displayedProgress, setDisplayedProgress] = useState(5)
+    const [profileProgress, setProfileProgress] = useState(5)
     
-    useEffect(() => setDisplayedProgress(progress), [])
+    useEffect(() => setProfileProgress(progress), [])
+    
+    const [mainPhoto, setMainPhoto] = useState<MainPhoto>(() => {
+      const mainPhotoRemote = u.photos.find(it => it.index === 0)
+      if (!mainPhotoRemote) return {
+        ...DefaultMainPhoto,
+        isEmpty: true,
+        needDownload: false,
+      }
+      return {
+        ...DefaultMainPhoto,
+        id: mainPhotoRemote.id,
+        name: mainPhotoRemote.name,
+        mimeType: mainPhotoRemote.mimeType,
+        remoteUrl: mainPhotoRemote.url,
+      }
+    })
+    
+    useEvent(() => {
+      if (mainPhoto.needDownload) {
+        
+        const abortCtrl = new AbortController()
+        const downloadStart = {
+          isReady: false,
+          download: { ...DefaultOperation,
+            id: mainPhoto.id,
+            abort: () => {
+              console.log('download was aborted')
+              abortCtrl.abort('download was aborted')
+            },
+          },
+        } satisfies Partial<MainPhoto>
+        
+        setMainPhoto({
+          ...mainPhoto,
+          ...downloadStart,
+          needDownload: false,
+        })
+        
+        const updatePhoto = (p: Partial<MainPhoto>) => {
+          setMainPhoto(s => ({ ...s, ...p }))
+        }
+        const updatePhotoThrottled = withThrottle(
+          RangeU.map(Math.random(), [0, 1], [1450, 2000]),
+          updatePhoto
+        )
+        
+        ;(async () => {
+          try {
+            const progress = new Progress(2, [90, 10])
+            const onProgress = (p: number | null) => {
+              progress.progress = p ?? 0
+              //console.log('progress', photo.id, progress.value)
+              updatePhotoThrottled({ download: {
+                ...downloadStart.download,
+                progress: progress.value,
+              } })
+            }
+            
+            console.log('start download')
+            const blob = await fetchToBlob(
+              mainPhoto.remoteUrl,
+              { onProgress, abortCtrl }
+            )
+            abortCtrl.signal.throwIfAborted()
+            
+            progress.stage++
+            progress.progress = 0
+            const dataUrl = await blobToDataUrl(blob,
+              { onProgress, abortCtrl }
+            )
+            abortCtrl.signal.throwIfAborted()
+            
+            //console.log('completed',photo.id)
+            updatePhoto({ isReady: true, download: undefined, dataUrl })
+          }
+          catch (ex) {
+            // TODO notify about error
+            //console.log('download error', ex)
+            //console.log('photo', photo)
+            updatePhoto({ download: undefined })
+          }
+          finally {
+            //unlock(photo.remoteUrl)
+          }
+          
+        })()
+      }
+    }, [mainPhoto.needDownload], true)
     
     
     const info = [profile.city, DateU.age(u.birthDate, lang)]
@@ -71,7 +174,7 @@ const SummaryPage = React.memo(
               
               <InfoCard>
                 
-                <Ava src={profile.ava} />
+                <Ava src={mainPhoto.dataUrl} />
                 
                 <Name>{u.name}</Name>
                 <UserActionsConsumer>
@@ -100,7 +203,7 @@ const SummaryPage = React.memo(
                 </HeaderArrowBox>
                 
                 <ProgressBox>
-                  <LineProgress css={LineProgressS.S.normal} progress={displayedProgress} />
+                  <LineProgress css={LineProgressS.S.normal} progress={profileProgress} />
                   <Percent>{progress}%</Percent>
                 </ProgressBox>
                 

@@ -257,12 +257,12 @@ const ProfilePage = React.memo(
               initialValues: { ...s.initialValues,
                 photos: mapFirstToIfFoundBy(s.initialValues.photos,
                   elem => ({ ...elem, ...downloadStart }),
-                  elem => elem.id===photo.id
+                  elem => elem.id === photo.id
                 ),
               },
               photos: mapFirstToIfFoundBy(s.photos,
                 elem => ({ ...elem, ...downloadStart }),
-                elem => elem.id===photo.id
+                elem => elem.id === photo.id
               ),
             }))
             
@@ -271,12 +271,12 @@ const ProfilePage = React.memo(
                 initialValues: { ...s.initialValues,
                   photos: mapFirstToIfFoundBy(s.initialValues.photos,
                     elem => ({ ...elem, ...p }),
-                    elem => elem.download?.id===downloadStart.download.id
+                    elem => elem.download?.id === downloadStart.download.id
                   ),
                 },
                 photos: mapFirstToIfFoundBy(s.photos,
                   elem => ({ ...elem, ...p }),
-                  elem => elem.download?.id===downloadStart.download.id
+                  elem => elem.download?.id === downloadStart.download.id
                 ),
               }))
             }
@@ -298,7 +298,8 @@ const ProfilePage = React.memo(
                 }
                 
                 //console.log('start download id',photo.id)
-                const blob = await fetchToBlob(photo.remoteUrl,
+                const blob = await fetchToBlob(
+                  photo.remoteUrl,
                   { onProgress, abortCtrl }
                 )
                 abortCtrl.signal.throwIfAborted()

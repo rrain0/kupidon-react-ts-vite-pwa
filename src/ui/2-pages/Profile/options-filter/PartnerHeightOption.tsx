@@ -152,12 +152,12 @@ const tilesGrid = (t: AppTheme.Theme) => css`
 
 function mapWidgetRangeToHeightRange(range: NumRange): NumRangeNullable {
   return [
-    function(){
+    function() {
       const r0 = +numeral(range[0]).format('0')
       if (r0 <= heightMinMax[0]) return null
       return r0
     }(),
-    function(){
+    function() {
       const r1 = +numeral(range[1]).format('0')
       if (r1 >= heightMinMax[1]) return null
       return r1
@@ -166,7 +166,7 @@ function mapWidgetRangeToHeightRange(range: NumRange): NumRangeNullable {
 }
 function mapHeightRangeToWidgetRange(heightRange: NumRangeNullable): NumRange {
   return [
-    function(){
+    function() {
       if (heightRange[0] === null) return heightMinMax[0]
       if (heightRange[0] < heightMinMax[0]) return heightMinMax[0]
       return heightRange[0]

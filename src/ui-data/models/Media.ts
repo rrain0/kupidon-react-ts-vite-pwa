@@ -62,6 +62,7 @@ export const DefaultMediaOperation: MediaOperation = {
 
 
 export interface MediaDownloadable extends Media {
+  needDownload: boolean
   download: MediaOperation | undefined
   downloadError: any // extend this interface to define a particular error type
 }

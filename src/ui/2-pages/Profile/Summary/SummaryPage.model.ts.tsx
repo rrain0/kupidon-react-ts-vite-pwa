@@ -1,12 +1,15 @@
 import { DefaultMedia, MediaDownloadable } from 'src/ui-data/models/Media'
 
 
-export interface ProfilePhoto extends MediaDownloadable {
+export interface MainPhoto extends MediaDownloadable {
+  showProgress: boolean
   downloadError: string | undefined
 }
 
-export const DefaultProfilePhoto: ProfilePhoto  = {
+export const DefaultMainPhoto: MainPhoto  = {
   ...DefaultMedia,
+  showProgress: false,
+  needDownload: true,
   download: undefined,
   downloadError: undefined,
 }

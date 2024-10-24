@@ -173,7 +173,7 @@ export const profileUpdateApiRequest = (
       )
     }))
     
-    const setUpload = (upload: Operation)=>{
+    const setUpload = (upload: Operation) => {
       setFormValues(s=>({ ...s,
         photos: mapFirstToIfFoundBy(
           s.photos,

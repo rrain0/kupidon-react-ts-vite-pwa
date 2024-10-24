@@ -1,5 +1,5 @@
 import { MathU } from 'src/util/common/MathU'
-import ifNaN = MathU.ifNaN
+import mapNaN = MathU.mapNaN
 
 
 
@@ -41,7 +41,7 @@ export namespace RangeU {
     toRange: readonly [minInclusive: number, maxInclusive: number]
   )
   : number => {
-    const oneBasedValue = ifNaN((value - fromRange[0]) / (fromRange[1] - fromRange[0]), 0)
+    const oneBasedValue = mapNaN((value - fromRange[0]) / (fromRange[1] - fromRange[0]), 0)
     return oneBasedValue * (toRange[1] - toRange[0]) + toRange[0]
   }
   

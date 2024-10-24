@@ -7,7 +7,7 @@ export namespace MathU {
   
   
   
-  export const ifNaN = <T = number>(n: number, replacement: T) => isNaN(n) ? replacement : n
+  export const mapNaN = <T = number>(n: number, replacement: T) => isNaN(n) ? replacement : n
   
   
   
