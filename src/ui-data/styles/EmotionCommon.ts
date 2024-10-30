@@ -58,6 +58,11 @@ export namespace EmotionCommon {
     display: grid;
     place-items: center;
   `
+  export const centerFlex = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  `
   export const centerContent = css`
     display: grid;
     place-content: center;

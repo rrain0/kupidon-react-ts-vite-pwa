@@ -405,18 +405,22 @@ const ProfilePage = React.memo(
                             showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
                           >
                             
-                            <ProfilePageTabHeaderContext.Provider value={{
-                              tabContainerSpring,
-                              tabWidth: computedTabsDimens.frameWidth,
-                              headers: headers,
-                              setTabsState: tabsProps.setTabsState,
-                              setTabIdx: tabsProps.setTabIdx,
-                            }}>
+                            <ProfilePageTabHeaderContext.Provider
+                              value={{
+                                tabContainerSpring,
+                                tabWidth: computedTabsDimens.frameWidth,
+                                headers: headers,
+                                setTabsState: tabsProps.setTabsState,
+                                setTabIdx: tabsProps.setTabIdx,
+                              }}
+                            >
                               {[
                                 <Preview
+                                  key="preview"
                                   formValues={formValues}
                                 />,
                                 <Profile
+                                  key="profile"
                                   validationProps={validationProps}
                                   onFormSubmitCallback={onFormSubmitCallback}
                                   submit={submit}
@@ -426,6 +430,7 @@ const ProfilePage = React.memo(
                                   tabIdx={tabIdx}
                                 />,
                                 /* <Partner
+                                  key="partner"
                                   validationProps={validationProps}
                                   onFormSubmitCallback={onFormSubmitCallback}
                                   submit={submit}
@@ -435,6 +440,7 @@ const ProfilePage = React.memo(
                                   tabIdx={tabIdx}
                                 />, */
                                 <Tests
+                                  key="tests"
                                   validationProps={validationProps}
                                   onFormSubmitCallback={onFormSubmitCallback}
                                   submit={submit}
@@ -457,30 +463,31 @@ const ProfilePage = React.memo(
               
               
               
-              {/* <UseBottomSheetState
-                //isOpen={canSubmit || formProps.hasChanges}
-                //closeable={!(canSubmit || formProps.hasChanges)}
-              >
-                {props => <ModalPortal><BottomSheetBasic
-                  {...props.sheetProps}
+                {/* <UseBottomSheetState
+                  //isOpen={canSubmit || formProps.hasChanges}
+                  //closeable={!(canSubmit || formProps.hasChanges)}
                 >
-                
-                </BottomSheetBasic></ModalPortal>}
-              </UseBottomSheetState>
-            
-            
-              { app.showDevOverlay && <BottomButtonBar
-                refreshPageBtn
-                rightChildren={
-                  <SoftRefreshBtn
-                    refresh={()=>setNeedToFetchUser(true)}
-                    isLoading={isFetchingUser}
-                  />
-                }
-              /> } */}
-            
-            </>
-          )}</UseTabsState>
+                  {props => <ModalPortal><BottomSheetBasic
+                    {...props.sheetProps}
+                  >
+                  
+                  </BottomSheetBasic></ModalPortal>}
+                </UseBottomSheetState>
+              
+              
+                { app.showDevOverlay && <BottomButtonBar
+                  refreshPageBtn
+                  rightChildren={
+                    <SoftRefreshBtn
+                      refresh={()=>setNeedToFetchUser(true)}
+                      isLoading={isFetchingUser}
+                    />
+                  }
+                /> } */}
+              
+              </>
+            )}
+          </UseTabsState>
           
         </Pages.TabsPage>
       </>

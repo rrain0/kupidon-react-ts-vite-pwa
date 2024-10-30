@@ -12,6 +12,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
+import { imPlaceholderBoxS, imPlaceholderIcS } from 'src/ui/0-elements/im/im'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
@@ -137,7 +138,7 @@ const ProfilePhotos = React.memo(
     }, [isGesturesBusy, dragState, canClick])
     
     
-    // swaps photos
+    // swap photos
     const swapPhotosEffectEvent = useEffectEvent(
       (swap: NumRange) => {
         const newImages = [...images]
@@ -166,7 +167,7 @@ const ProfilePhotos = React.memo(
     }, [dragState])
     
     useLayoutEffect(() => {
-      if (dragState==='progressAnim') {
+      if (dragState === 'progressAnim') {
         const timerId = setTimeout(
           () => setProgressAnimLockGestures(true),
           progressAnimDuration - 300
@@ -190,7 +191,7 @@ const ProfilePhotos = React.memo(
     // noinspection JSVoidFunctionReturnValueUsed
     const drag = useDrag(
       gesture => {
-        const [i] = gesture.args as [number]
+        const [i] = gesture.args as [i: number]
         const {
           first, active, last,
           movement: [mx, my],
@@ -281,10 +282,9 @@ const ProfilePhotos = React.memo(
                   
                   
                   <div css={contents}
-                    //ref={ref as any}
                     {...function() {
                       const onPointerDown = (ev: React.PointerEvent) => {
-                        if (ev.buttons===1) {
+                        if (ev.buttons === 1) {
                           ev.currentTarget.releasePointerCapture(ev.pointerId)
                           setLastIdx(i)
                           setDragState('initialDelay')
@@ -292,7 +292,7 @@ const ProfilePhotos = React.memo(
                         }
                       }
                       const onPointerRemove = () => {
-                        if (dragState!=='dragging') {
+                        if (dragState !== 'dragging') {
                           setDragState(undefined)
                         }
                       }
@@ -330,7 +330,7 @@ const ProfilePhotos = React.memo(
                               {function() {
                                 if (im.compression?.showProgress)
                                   return (
-                                    <div css={photoPlaceholderStyle}>
+                                    <div css={imPlaceholderBoxS}>
                                       <PieProgress css={profilePhotoPieProgress}
                                         progress={
                                           RangeU.map(im.compression.progress, [0, 100], [5, 95])
@@ -339,15 +339,19 @@ const ProfilePhotos = React.memo(
                                     </div>
                                   )
                                 
-                                else if (!canShowFetchProgress && im.type === 'remote' && !im.isReady)
+                                if (!canShowFetchProgress
+                                  && im.type === 'remote'
+                                  && !im.isReady
+                                  && !im.isEmpty
+                                )
                                   return (
-                                    <div css={photoPlaceholderStyle}>
+                                    <div css={imPlaceholderBoxS}>
                                       <SparkingLoadingLine />
                                     </div>
                                   )
-                                else if (im.download?.showProgress)
+                                if (im.download?.showProgress)
                                   return (
-                                    <div css={photoPlaceholderStyle}>
+                                    <div css={imPlaceholderBoxS}>
                                       <PieProgress css={profilePhotoPieProgress}
                                         progress={
                                           RangeU.map(im.download.progress, [0, 100], [5, 95])
@@ -356,13 +360,13 @@ const ProfilePhotos = React.memo(
                                     </div>
                                   )
                                 
-                                else if (im.isEmpty)
+                                if (im.isEmpty)
                                   return (
-                                    <div css={photoPlaceholderStyle}>
-                                      <PlusIc css={photoPlaceholderIconStyle} />
+                                    <div css={imPlaceholderBoxS}>
+                                      <PlusIc css={imPlaceholderIcS} />
                                     </div>
                                   )
-                                else if (im.isReady)
+                                if (im.isReady)
                                   return (
                                     <img css={photoImgStyle}
                                       src={im.dataUrl}
@@ -402,20 +406,20 @@ const ProfilePhotos = React.memo(
                     css={t => css`
                       ${photoProgressFrameStyle(t)};
                       
-                      ${lastIdx===i && dragState==='progressAnim' && css`
+                      ${lastIdx === i && dragState === 'progressAnim' && css`
                         animation: ${progressAnim} ${progressAnimDuration}ms linear forwards;
                       `}
-                      ${lastIdx===i && !swap && dragState==='dragging' && css`
+                      ${lastIdx === i && !swap && dragState === 'dragging' && css`
                         background-image: none;
                         background-color: ${t.photos.highlightFrameAccentBg[0]};
                       `}
-                      ${swap?.[1]===i && css`
+                      ${swap?.[1] === i && css`
                         background-image: none;
                         background-color: ${t.photos.highlightFrameAccentBg[0]};
                       `}
                     `}
                     onAnimationEnd={ev => {
-                      if (ev.animationName===progressAnim.name) {
+                      if (ev.animationName === progressAnim.name) {
                         setDragState('dragging')
                         setCanClick(false)
                       }
@@ -510,32 +514,18 @@ const photoImgStyle = css`
 
 
 
-const photoPlaceholderStyle = (t:AppTheme.Theme) => css`
-  ${abs};
-  pointer-events: none;
-  border-radius: inherit;
-  overflow: hidden;
-  background: ${t.photos.bg[0]};
-  ${center};
-`
-const photoDimmed = (t:AppTheme.Theme) => css`
-  ${photoPlaceholderStyle(t)};
+const photoDimmed = (t: AppTheme.Theme) => css`
+  ${imPlaceholderBoxS(t)};
   background: #00000099;
 `
-const photoOnDragBorder = (t:AppTheme.Theme) => css`
+const photoOnDragBorder = (t: AppTheme.Theme) => css`
   ${abs};
   inset: -4px;
   border-radius: calc(14px + 4px);
   border: 10px dashed;
   border-color: ${t.photos.borderDrag[0]};
 `
-const photoPlaceholderIconStyle = (t:AppTheme.Theme) => css`
-  ${SvgIconS.El.icon.thiz()}{
-    ${SvgIconS.El.icon.props.color.set(t.photos.content[0])}
-    ${SvgIconS.El.icon.props.size.set('30%')}
-  }
-`
-const profilePhotoPieProgress = (t:AppTheme.Theme) => css`
+const profilePhotoPieProgress = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress}{
     ${PieProgressStyle.Prop.prop.progressColor}: transparent;
     ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.content[0]};
@@ -543,13 +533,13 @@ const profilePhotoPieProgress = (t:AppTheme.Theme) => css`
     aspect-ratio: 1;
   }
 `
-const profilePhotoPieProgressAccent = (t:AppTheme.Theme) => css`
+const profilePhotoPieProgressAccent = (t: AppTheme.Theme) => css`
   ${profilePhotoPieProgress(t)};
   ${PieProgressStyle.El.thiz.pieProgress}{
     ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.bg[0]};
   }
 `
-const photoProgressFrameStyle = (t:AppTheme.Theme) => css`
+const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   pointer-events: none;
 
   ${abs};

@@ -3,7 +3,7 @@ import { DefaultMedia, MediaDownloadable } from 'src/ui-data/models/Media'
 
 export interface MainPhoto extends MediaDownloadable {
   showProgress: boolean
-  downloadError: string | undefined
+  downloadError: any | undefined
 }
 
 export const DefaultMainPhoto: MainPhoto  = {

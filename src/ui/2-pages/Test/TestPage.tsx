@@ -19,8 +19,9 @@ import { useInterval } from 'src/util/react/useInterval'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import center = EmotionCommon.center
-
-
+import Txt = EmotionCommon.Txt
+import col = EmotionCommon.col
+import row = EmotionCommon.row
 
 
 const TestPage = React.memo(
@@ -119,6 +120,190 @@ const TestPage = React.memo(
              `}
              />*/}
             
+            <div
+              css={css`
+                width: fit-content;
+                height: fit-content;
+                //background-color: #4d9f0c55;
+                border: 3px solid #4d9f0c55;
+                padding: 6px 10px;
+                display: grid;
+                place-items: center;
+                border-radius: 999999px;
+                ${Txt.normal2};
+              `}
+            >
+              Отлично совместимы
+            </div>
+            
+            <div
+              css={css`
+                width: fit-content;
+                height: fit-content;
+                //background-color: #EFEE97;
+                border: 3px solid #EFEE97;
+                padding: 6px 10px;
+                display: grid;
+                place-items: center;
+                border-radius: 999999px;
+                ${Txt.normal2};
+              `}
+            >
+              Средне совместимы
+            </div>
+            
+            <div
+              css={css`
+                ${row};
+                gap: 12px;
+              `}
+            >
+              <div
+                css={css`
+                  width: fit-content;
+                  height: fit-content;
+                  background-color: #DFDFDF;
+                  padding: 6px 10px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 999999px;
+                  ${Txt.normal2};
+                `}
+              >
+                INTJ
+              </div>
+              <div
+                css={css`
+                  width: fit-content;
+                  height: fit-content;
+                  background-color: #DFDFDF;
+                  padding: 6px 10px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 999999px;
+                  ${Txt.normal2};
+                `}
+              >
+                ENTP
+              </div>
+            </div>
+            
+            
+            <div
+              css={css`
+                width: 300px;
+                height: fit-content;
+                //background-color: #EFEE97;
+                border: 3px solid #EFEE97;
+                padding: 6px 10px;
+                gap: 6px;
+                border-radius: 16px;
+                ${Txt.normal2};
+                ${col};
+              `}
+            >
+              <div>Средне совместимы</div>
+              
+              <div
+                css={css`
+                  ${row};
+                  gap: 12px;
+                `}
+              >
+                <div
+                  css={css`
+                    width: fit-content;
+                    height: fit-content;
+                    //background-color: white;
+                    background-color: #DFDFDF;
+                    padding: 6px 10px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 999999px;
+                    ${Txt.normal2};
+                  `}
+                >
+                  INTJ
+                </div>
+                <div
+                  css={css`
+                    width: fit-content;
+                    height: fit-content;
+                    //background-color: white;
+                    background-color: #DFDFDF;
+                    padding: 6px 10px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 999999px;
+                    ${Txt.normal2};
+                  `}
+                >
+                  ENTP
+                </div>
+              </div>
+            </div>
+            
+            
+            <div
+              css={css`
+                width: 300px;
+                height: fit-content;
+                //background-color: #EFEE97;
+                //border: 3px solid #EFEE97;
+                padding: 6px 10px;
+                gap: 6px;
+                border-radius: 16px;
+                ${Txt.normal2};
+                ${col};
+              `}
+            >
+              <div>Средне совместимы</div>
+              
+              <div
+                css={css`
+                  ${row};
+                  gap: 12px;
+                `}
+              >
+                <div
+                  css={css`
+                    width: fit-content;
+                    height: fit-content;
+                    //background-color: white;
+                    //background-color: #DFDFDF;
+                    border: 3px solid #EFEE97;
+                    padding: 6px 10px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 999999px;
+                    ${Txt.normal2};
+                  `}
+                >
+                  INTJ
+                </div>
+                <div
+                  css={css`
+                    width: fit-content;
+                    height: fit-content;
+                    //background-color: white;
+                    //background-color: #DFDFDF;
+                    border: 3px solid #EFEE97;
+                    padding: 6px 10px;
+                    display: grid;
+                    place-items: center;
+                    border-radius: 999999px;
+                    ${Txt.normal2};
+                  `}
+                >
+                  ENTP
+                </div>
+              </div>
+            </div>
+            
+            
+            
+            
+            
             
             <div
               css={t => css`
@@ -149,7 +334,7 @@ const TestPage = React.memo(
                 color: ${t.containerNormal.content[0]};
               `}
             >
-              Контент.<br/>
+              Контент.<br />
               Theme.containerNormal
             </div>
             
@@ -163,7 +348,7 @@ const TestPage = React.memo(
                 color: ${t.containerNormal.content[0]};
               `}
             >
-              Контент.<br/>
+              Контент.<br />
               Theme.containerNormal2
             </div>
             
@@ -177,7 +362,7 @@ const TestPage = React.memo(
                 color: ${t.containerAccent.content[0]};
               `}
             >
-              Контент.<br/>
+              Контент.<br />
               Theme.containerAccent
             </div>
             
@@ -212,7 +397,7 @@ const TestPage = React.memo(
               `}
             >
               <div>onEvent Test</div>
-              <button></button>
+              <button />
             </div>
           
           
@@ -220,9 +405,9 @@ const TestPage = React.memo(
         </Pages.SimplePage>
         
         
-        <TopButtonBar backBtn/>
+        <TopButtonBar backBtn />
         
-        <BottomButtonBar settingsBtn/>
+        <BottomButtonBar settingsBtn />
       
       
       </>
@@ -230,7 +415,6 @@ const TestPage = React.memo(
   }
 )
 export default TestPage
-
 
 
 const Items = styled.div`

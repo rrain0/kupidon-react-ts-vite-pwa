@@ -11,13 +11,16 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { imPlaceholderBoxS, imPlaceholderIcS } from 'src/ui/0-elements/im/im'
 import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
 import { LineProgressS } from 'src/ui/0-elements/LineProgress/LineProgressS'
+import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import { DefaultOperation } from 'src/ui/2-pages/Profile/ProfilePhotoModels'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
 import { DefaultMainPhoto, MainPhoto } from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
@@ -35,6 +38,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { FileU } from 'src/util/file/FileU'
 import { Progress } from 'src/util/Progress'
 import { useEvent } from 'src/util/react/useEvent'
+import { useTimeout } from 'src/util/react/useTimeout'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
@@ -44,6 +48,8 @@ import Txt = EmotionCommon.Txt
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
+import centerFlex = EmotionCommon.centerFlex
+import ArrowReloadIc = SvgIcons.ArrowReloadIc
 
 
 
@@ -83,6 +89,8 @@ const SummaryPage = React.memo(
         name: mainPhotoRemote.name,
         mimeType: mainPhotoRemote.mimeType,
         remoteUrl: mainPhotoRemote.url,
+        //needDownload: false,
+        //downloadError: 'error',
       }
     })
     
@@ -148,7 +156,7 @@ const SummaryPage = React.memo(
             // TODO notify about error
             //console.log('download error', ex)
             //console.log('photo', photo)
-            updatePhoto({ download: undefined })
+            updatePhoto({ download: undefined, downloadError: ex })
           }
           finally {
             //unlock(photo.remoteUrl)
@@ -158,12 +166,20 @@ const SummaryPage = React.memo(
       }
     }, [mainPhoto.needDownload], true)
     
+    const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
+    useTimeout(3000, () => setCanShowFetchProgress(true), [])
+    
+    
+    const retry = () => {
+      setMainPhoto({ ...mainPhoto, needDownload: true, downloadError: undefined })
+    }
+    
     
     const info = [profile.city, DateU.age(u.birthDate, lang)]
       .filter(it => it)
       .join(', ')
     
-    
+    //console.log('mainPhoto', mainPhoto)
     
     return (
       <>
@@ -174,7 +190,27 @@ const SummaryPage = React.memo(
               
               <InfoCard>
                 
-                <Ava src={mainPhoto.dataUrl} />
+                <AvaBox>
+                  {(() => {
+                    if (!canShowFetchProgress && mainPhoto.type === 'remote' && !mainPhoto.isReady)
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <SparkingLoadingLine />
+                        </div>
+                      )
+                    if (mainPhoto.downloadError)
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <Button css={IconButtonStyle.imSmallPlaceholderIcFullTransparent}
+                            onClick={retry}
+                          >
+                            <ArrowReloadIc css={avaPlaceholderIcS} />
+                          </Button>
+                        </div>
+                      )
+                    if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
+                  })()}
+                </AvaBox>
                 
                 <Name>{u.name}</Name>
                 <UserActionsConsumer>
@@ -253,19 +289,32 @@ const InfoCard = styled.div`
     '.    .    .    .    .   ' 9px
     'prog prog prog prog prog' auto
     '.    .    .    .    .   ' 10px
-    'cpt  cpt  cpt  cpt  cpt ' auto /* Complete Profile Text (cpt) */
+    'cpt  cpt  cpt  cpt  cpt ' auto /* cpt - Complete Profile Text */
    / auto 14px 1fr  8px  auto;
   gap: 0;
 `
 
-const Ava = styled.img`
+const AvaBox = styled.div`
   grid-area: ava;
   align-self: center;
   width: 82px;
   height: 82px;
   border-radius: 999999px;
+  overflow: hidden;
+  position: relative;
+  ${centerFlex};
+`
+const AvaIm = styled.img`
+  width: 100%;
+  height: 100%;
   object-position: center;
   object-fit: cover;
+`
+const avaPlaceholderIcS = (t: AppTheme.Theme) => css`
+  ${imPlaceholderIcS(t)};
+  ${SvgIconS.El.icon.thiz()}{
+    ${SvgIconS.El.icon.props.size.set('50%')}
+  }
 `
 
 

@@ -61,6 +61,17 @@ export namespace IconButtonStyle {
   `
   
   
+  export const imSmallPlaceholderIcFullTransparent = (t: AppTheme.Theme) => css`
+    ${ButtonS.textRoundBig2Normal(t)};
+    ${ButtonS.W.use.s.normal().e.button().thisUse} {
+      height: 100%;
+      width: 100%;
+    }
+    ${W.use.s.normal().e.icon().thisUse} {
+      ${W.e.icon.e.p.size.set('50%')};
+      ${W.e.icon.e.p.color.set(t.photos.content[0])};
+    }
+  `
   
   
 }
