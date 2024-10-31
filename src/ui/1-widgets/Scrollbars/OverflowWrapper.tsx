@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import ScrollbarOverlay from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlay.tsx'
 import { ScrollbarOverlayStyle } from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlayStyle.ts'
@@ -27,71 +26,70 @@ export type OverflowWrapperProps = PartialUndef<{
 
 
 
-const OverflowWrapper =
-React.memo(
-(props: OverflowWrapperProps)=>{
-  const showVertical = props.showVertical ?? true
-  const showHorizontal = props.showHorizontal ?? true
-  
-  
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const scrollContentRef = useRef<HTMLDivElement>(null)
-  
-  
-  /*
-    Wrapper contains Scroll Container & ScrollbarOverlay
-  */
-  return <Wrapper
-    className={clsx(props.className, 'rrainuiOverflowWrapper')}
-    style={props.style}
-  >
+const OverflowWrapper = React.memo(
+  (props: OverflowWrapperProps) => {
+    const showVertical = props.showVertical ?? true
+    const showHorizontal = props.showHorizontal ?? true
     
     
-    {/*
-     // Container of Scrollable Content.
-     // Element that is scrollable.
-     // must be without margins & paddings!!!
-     */}
-    <ScrollContainer
-      ref={scrollContainerRef}
-      className={'rrainuiScrollContainer'}
-    >
-      
-      {/*
-       // Scrollable Content Wrapper.
-       // Wraps all scrollable content to represent its dimensions.
-       // must be without margins & paddings - just content wrapper!!!
-       */}
-      <ScrollContent
-        ref={scrollContentRef}
-        className={'rrainuiScrollContentWrap'}
+    const scrollContainerRef = useRef<HTMLDivElement>(null)
+    const scrollContentRef = useRef<HTMLDivElement>(null)
+    
+    
+    return (
+      /* Wrapper contains Scroll Container & ScrollbarOverlay */
+      <Wrapper
+        className={clsx(props.className, 'rrainuiOverflowWrapper')}
+        style={props.style}
       >
         
-        { props.children }
+        
+        {/*
+         // Container of Scrollable Content.
+         // Element that is scrollable.
+         // must be without margins & paddings!!!
+         */}
+        <ScrollContainer
+          ref={scrollContainerRef}
+          className="rrainuiScrollContainer"
+        >
+          
+          {/*
+           // Scrollable Content Wrapper.
+           // Wraps all scrollable content to represent its dimensions.
+           // must be without margins & paddings - just content wrapper!!!
+           */}
+          <ScrollContent
+            ref={scrollContentRef}
+            className="rrainuiScrollContentWrap"
+          >
+            
+            { props.children }
+          
+          </ScrollContent>
+          
+        </ScrollContainer>
+        
+        
+        { isBrowser && (
+          <UseScrollbars
+            containerRef={scrollContainerRef}
+            contentRef={scrollContentRef}
+            render={(scrollbarProps) => (
+              <ScrollbarOverlay css={ScrollbarOverlayStyle.page}
+                {...scrollbarProps}
+                showVertical={showVertical}
+                showHorizontal={showHorizontal}
+              />
+            )}
+          />
+        )}
+        
       
-      </ScrollContent>
-      
-    </ScrollContainer>
-    
-    
-    { isBrowser &&
-      <UseScrollbars
-        containerRef={scrollContainerRef}
-        contentRef={scrollContentRef}
-        render={
-          (scrollbarProps)=>
-            <ScrollbarOverlay css={ScrollbarOverlayStyle.page}
-              {...scrollbarProps}
-              showVertical={showVertical}
-              showHorizontal={showHorizontal}
-            />
-        }
-      />
-    }
-    
-  
-  </Wrapper>
-})
+      </Wrapper>
+    )
+  }
+)
 export default OverflowWrapper
 
 

@@ -66,15 +66,16 @@ const Textarea = React.memo(
       
       
       return (
-        <label /* Frame */ css={frameStyle}
+        /* Frame */
+        <label css={frameStyle}
           {...frameProps}
         >
           
           { startViews }
           { childrenPosition==='start' && children }
           
+          {/* Textarea */}
           <textarea
-            //displayName={'Textarea'}
             css={textareaStyle}
             className={TextareaStyle.El.textareaClassName}
             {...{
@@ -93,7 +94,8 @@ const Textarea = React.memo(
           { childrenPosition==='end' && children }
           { endViews }
           
-          <div /* Border */ css={borderStyle}
+          {/* Border */}
+          <div css={borderStyle}
             {...borderProps}
           />
           

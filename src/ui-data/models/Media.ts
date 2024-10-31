@@ -1,6 +1,7 @@
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import noop = TypeU.noop
+import Puro = TypeU.Puro
 
 
 
@@ -61,10 +62,11 @@ export const DefaultMediaOperation: MediaOperation = {
   abort: noop,
 }
 
-
-
-export interface MediaDownloadable extends Media {
+type Downloadable = Puro<{
   needDownload: boolean
-  download: MediaOperation | undefined
-  downloadError: any | undefined// extend this interface to define a particular error type
-}
+  download: MediaOperation
+  downloadError: any
+}>
+
+// extend this interface to define a particular error type, etc.
+export interface MediaDownloadable extends Media, Downloadable { }

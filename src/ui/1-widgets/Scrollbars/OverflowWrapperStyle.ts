@@ -14,20 +14,28 @@ export namespace OverflowWrapperStyle {
   
   
   
-  export const El = function(){
-    const wrapper = new Elem('rrainuiOverflowWrapper',{}, {})
-    const container = wrapper.toElem('>', new Elem('rrainuiScrollContainer',{}, {}))
-    const content = container.toElem('>', new Elem('rrainuiScrollContentWrap',{}, {}))
+  export const El = function() {
+    const wrapper = new Elem('rrainuiOverflowWrapper', { }, { })
+    const container = wrapper.toElem('>', new Elem('rrainuiScrollContainer', { }, { }))
+    const content = container.toElem('>', new Elem('rrainuiScrollContentWrap', { }, { }))
     
     
-    const scrollbarOverlay = wrapper.toElem('>',ScrollbarOverlayStyle.El.overlay)
+    const scrollbarOverlay = wrapper.toElem('>', ScrollbarOverlayStyle.El.overlay)
     
-    const scrollbarTrack = scrollbarOverlay.toElem('>',ScrollbarStyle.El.track)
-    const scrollbarThumbBox = scrollbarTrack.toElem('>',ScrollbarStyle.El.thumbBox)
-    const scrollbarThumb = scrollbarThumbBox.toElem('>',ScrollbarStyle.El.thumb)
+    const scrollbarTrack = scrollbarOverlay.toElem('>', ScrollbarStyle.El.track)
+    const scrollbarThumbBox = scrollbarTrack.toElem('>', ScrollbarStyle.El.thumbBox)
+    const scrollbarThumb = scrollbarThumbBox.toElem('>', ScrollbarStyle.El.thumb)
     
-    return { root: wrapper, wrapper, container, content,
-      scrollbarOverlay, scrollbarTrack, scrollbarThumbBox, scrollbarThumb,
+    return {
+      root: wrapper,
+      wrapper,
+      container,
+      content,
+      
+      scrollbarOverlay,
+      scrollbarTrack,
+      scrollbarThumbBox,
+      scrollbarThumb,
     } as const
   }()
   

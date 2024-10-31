@@ -391,68 +391,74 @@ const ProfilePage = React.memo(
                           width={computedTabsDimens.frameWidth}
                         >
                           
+                          {tabIdx === 0 && (
+                            <Preview
+                              key="preview"
+                              formValues={formValues}
+                            />
+                          )}
                           
-                          <OverflowWrapper
-                            css={css`
-                              ${OverflowWrapperStyle.defolt};
-                              ${OverflowWrapperStyle.El.container.thiz()}{
-                                touch-action: pan-y;
-                              }
-                              ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
-                                ${safePageContentPaddings};
-                              }
-                            `}
-                            showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
-                          >
-                            
-                            <ProfilePageTabHeaderContext.Provider
-                              value={{
-                                tabContainerSpring,
-                                tabWidth: computedTabsDimens.frameWidth,
-                                headers: headers,
-                                setTabsState: tabsProps.setTabsState,
-                                setTabIdx: tabsProps.setTabIdx,
-                              }}
+                          
+                          {tabIdx !== 0 && (
+                            <OverflowWrapper
+                              css={css`
+                                ${OverflowWrapperStyle.defolt};
+                                ${OverflowWrapperStyle.El.container.thiz()}{
+                                  touch-action: pan-y;
+                                }
+                                ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
+                                  ${safePageContentPaddings};
+                                }
+                              `}
+                              showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
                             >
-                              {[
-                                <Preview
-                                  key="preview"
-                                  formValues={formValues}
-                                />,
-                                <Profile
-                                  key="profile"
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
-                                  submit={submit}
-                                  canSubmit={canSubmit}
-                                  formProps={formProps}
-                                  isLoading={isLoading}
-                                  tabIdx={tabIdx}
-                                />,
-                                /* <Partner
-                                  key="partner"
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
-                                  submit={submit}
-                                  canSubmit={canSubmit}
-                                  formProps={formProps}
-                                  isLoading={isLoading}
-                                  tabIdx={tabIdx}
-                                />, */
-                                <Tests
-                                  key="tests"
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
-                                  submit={submit}
-                                  canSubmit={canSubmit}
-                                  formProps={formProps}
-                                  isLoading={isLoading}
-                                  tabIdx={tabIdx}
-                                />,
-                              ][tabIdx]}
-                            </ProfilePageTabHeaderContext.Provider>
+                              
+                              <ProfilePageTabHeaderContext.Provider
+                                value={{
+                                  tabContainerSpring,
+                                  tabWidth: computedTabsDimens.frameWidth,
+                                  headers: headers,
+                                  setTabsState: tabsProps.setTabsState,
+                                  setTabIdx: tabsProps.setTabIdx,
+                                }}
+                              >
+                                {[
+                                  undefined,
+                                  <Profile
+                                    key="profile"
+                                    validationProps={validationProps}
+                                    onFormSubmitCallback={onFormSubmitCallback}
+                                    submit={submit}
+                                    canSubmit={canSubmit}
+                                    formProps={formProps}
+                                    isLoading={isLoading}
+                                    tabIdx={tabIdx}
+                                  />,
+                                  // <Partner
+                                  //   key="partner"
+                                  //   validationProps={validationProps}
+                                  //   onFormSubmitCallback={onFormSubmitCallback}
+                                  //   submit={submit}
+                                  //   canSubmit={canSubmit}
+                                  //   formProps={formProps}
+                                  //   isLoading={isLoading}
+                                  //   tabIdx={tabIdx}
+                                  // />,
+                                  <Tests
+                                    key="tests"
+                                    validationProps={validationProps}
+                                    onFormSubmitCallback={onFormSubmitCallback}
+                                    submit={submit}
+                                    canSubmit={canSubmit}
+                                    formProps={formProps}
+                                    isLoading={isLoading}
+                                    tabIdx={tabIdx}
+                                  />,
+                                ][tabIdx]}
+                              </ProfilePageTabHeaderContext.Provider>
                             
-                          </OverflowWrapper>
+                            </OverflowWrapper>
+                          )}
                         
                         
                         </Tab>

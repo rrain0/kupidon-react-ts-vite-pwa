@@ -10,6 +10,7 @@ import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVert
 import FormValues = ProfilePageValidation.FormValues
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
+import centerAll = EmotionCommon.centerAll
 
 
 
@@ -20,57 +21,111 @@ export type PreviewProps = {
 
 
 
-const Preview =
-React.memo(
-(props: PreviewProps) => {
-  
-  const photos = props.formValues.photos
-  const firstImage = useMemo(
-    () => photos.filter(it => it.isReady)[0],
-    [photos]
-  )
-  
-  const [scroll, setScroll] = useState(0)
-  
-  /* useEffect(
-    ()=>{
-      const id = setInterval(
-        ()=>setScroll(s=>loopRange(s+3,[0,100])),
-        1000
-      )
-      return ()=>clearInterval(id)
-    },
-    []
-  ) */
-  
-  
-  
-  return <Pages.SafeInsets>
+const Preview = React.memo(
+  (props: PreviewProps) => {
     
-    { firstImage && <div css={photoContainer}>
-      
-      <img css={photoImgStyle}
-        src={firstImage.dataUrl}
-        alt={firstImage.name}
-      />
-      
-      <ScrollbarVertical css={scrollbarVerticalStyle}
-        visiblePartPercent={20}
-        scroll={scroll} setScroll={setScroll}
-      />
-      
-      <FadeButtonBar>
-       <Name>{props.formValues.name}, 26</Name>
-       <AboutMe>{props.formValues.aboutMe}</AboutMe>
-      </FadeButtonBar>
-      
-    </div> }
+    const {
+      photos,
+      name,
+      aboutMe,
+    } = props.formValues
     
-  </Pages.SafeInsets>
-})
+    
+    
+    const im = photos[0]
+    
+    console.log('photos', photos)
+    
+    const availablePhotos = useMemo(() => {
+      return photos.filter(it => it.isReady)
+    }, [photos])
+    
+    
+    
+    //const [scroll, setScroll] = useState(0)
+    
+    /* useEffect(
+      ()=>{
+        const id = setInterval(
+          ()=>setScroll(s=>loopRange(s+3,[0,100])),
+          1000
+        )
+        return ()=>clearInterval(id)
+      },
+      []
+    ) */
+    
+    
+    return (
+      <Pages.SafeInsets>
+        <PreviewFrame>
+          <PhotosBox>
+            {availablePhotos.map((p, i) => (
+              <Photo key={p.id}
+                src={p.dataUrl}
+                i={i}
+              />
+            ))}
+          </PhotosBox>
+        </PreviewFrame>
+      </Pages.SafeInsets>
+    )
+    
+    
+    /* return (
+      <Pages.SafeInsets>
+      
+        {im && (
+          <div css={photoContainer}>
+            
+            <img css={photoImgStyle}
+              src={im.dataUrl}
+              alt={im.name}
+            />
+            
+            <ScrollbarVertical css={scrollbarVerticalStyle}
+              visiblePartPercent={20}
+              scroll={scroll} setScroll={setScroll}
+            />
+            
+            <FadeButtonBar>
+              <Name>{name}, 26</Name>
+              <AboutMe>{aboutMe}</AboutMe>
+            </FadeButtonBar>
+            
+          </div>
+        )}
+      
+      </Pages.SafeInsets>
+    ) */
+  }
+)
 export default Preview
 
 
+const PreviewFrame = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 32px 16px;
+`
+const PhotosBox = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+  ${centerAll};
+  align-items: end;
+  //background-color: #7FFFD455;
+  border-radius: 16px;
+`
+const Photo = styled.img<{ i: number }>`
+  width: ${p => 100 - 5 * p.i}%;
+  height: 95%;
+  translate: 0 ${p => -p.i}%;
+  z-index: ${p => 6 - p.i};
+  border-radius: 16px;
+  object-position: center;
+  object-fit: cover;
+`
 
 const photoContainer = css`
   width: 100%;
@@ -86,7 +141,7 @@ const photoImgStyle = css`
   object-fit: cover;
 `
 
-const scrollbarVerticalStyle = (t: AppTheme.Theme)=>css`
+const scrollbarVerticalStyle = (t: AppTheme.Theme) => css`
   ${ScrollbarVerticalStyle.scrollbar(t)};
   ${ScrollbarVerticalStyle.El.track.thiz()}{
     width: 4px;
@@ -116,5 +171,5 @@ const Name = styled.div`
 `
 const AboutMe = styled.div`
   ${Txt.large2};
-  color: ${p=>p.theme.page.content2[0]}
+  color: ${p => p.theme.page.content2[0]}
 `

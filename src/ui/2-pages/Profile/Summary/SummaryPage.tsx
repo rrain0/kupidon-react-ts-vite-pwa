@@ -204,7 +204,7 @@ const SummaryPage = React.memo(
       .join(', ')
     
     
-    useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
+    //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
     
     return (
       <>

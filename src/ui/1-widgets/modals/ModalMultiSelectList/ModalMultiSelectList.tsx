@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'

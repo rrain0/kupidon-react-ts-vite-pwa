@@ -70,8 +70,8 @@ export namespace EmotionCommon {
   export const centerAll = css`
     display: grid;
     place-items: center;
-    grid: 'c';
-    & > * { grid-area: c; }
+    grid: 'stack';
+    & > * { grid-area: stack; }
   `
   export const centerV = css`
     display: grid;
