@@ -7,6 +7,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
+import { DefaultMediaOperation } from 'src/ui-data/models/Media'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
@@ -17,11 +18,11 @@ import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import { imPlaceholderBoxS, imPlaceholderIcS } from 'src/ui/0-elements/im/im'
+import { imPlaceholderBoxS, imPlaceholderIcS, imSmallPieProgressS } from 'src/ui/0-elements/im/im'
 import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
 import { LineProgressS } from 'src/ui/0-elements/LineProgress/LineProgressS'
+import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
-import { DefaultOperation } from 'src/ui/2-pages/Profile/ProfilePhotoModels'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
 import { DefaultMainPhoto, MainPhoto } from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
 import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
@@ -100,27 +101,31 @@ const SummaryPage = React.memo(
         const abortCtrl = new AbortController()
         const downloadStart = {
           isReady: false,
-          download: { ...DefaultOperation,
+          needDownload: false,
+          download: { ...DefaultMediaOperation,
             id: mainPhoto.id,
             abort: () => {
               console.log('download was aborted')
               abortCtrl.abort('download was aborted')
             },
           },
+          downloadError: undefined,
         } satisfies Partial<MainPhoto>
         
         setMainPhoto({
           ...mainPhoto,
           ...downloadStart,
-          needDownload: false,
         })
         
-        const updatePhoto = (p: Partial<MainPhoto>) => {
-          setMainPhoto(s => ({ ...s, ...p }))
+        const updateDownload = (downloadId: string, u: Partial<MainPhoto>) => {
+          setMainPhoto(s => {
+            if (s.download?.id === downloadId) return { ...s, ...u }
+            return s
+          })
         }
-        const updatePhotoThrottled = withThrottle(
+        const updateDownloadThrottled = withThrottle(
           RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-          updatePhoto
+          updateDownload,
         )
         
         ;(async () => {
@@ -129,13 +134,16 @@ const SummaryPage = React.memo(
             const onProgress = (p: number | null) => {
               progress.progress = p ?? 0
               //console.log('progress', photo.id, progress.value)
-              updatePhotoThrottled({ download: {
-                ...downloadStart.download,
-                progress: progress.value,
-              } })
+              updateDownloadThrottled(
+                downloadStart.download.id,
+                { download: {
+                  ...downloadStart.download,
+                  progress: progress.value,
+                } }
+              )
             }
             
-            console.log('start download')
+            console.log('download started')
             const blob = await fetchToBlob(
               mainPhoto.remoteUrl,
               { onProgress, abortCtrl }
@@ -144,19 +152,23 @@ const SummaryPage = React.memo(
             
             progress.stage++
             progress.progress = 0
-            const dataUrl = await blobToDataUrl(blob,
-              { onProgress, abortCtrl }
-            )
+            const dataUrl = await blobToDataUrl(blob, { onProgress, abortCtrl })
             abortCtrl.signal.throwIfAborted()
             
-            //console.log('completed',photo.id)
-            updatePhoto({ isReady: true, download: undefined, dataUrl })
+            console.log('download completed')
+            updateDownload(
+              downloadStart.download.id,
+              { isReady: true, download: undefined, dataUrl },
+            )
           }
           catch (ex) {
             // TODO notify about error
             //console.log('download error', ex)
             //console.log('photo', photo)
-            updatePhoto({ download: undefined, downloadError: ex })
+            updateDownload(
+              downloadStart.download.id,
+              { download: undefined, downloadError: ex },
+            )
           }
           finally {
             //unlock(photo.remoteUrl)
@@ -171,7 +183,13 @@ const SummaryPage = React.memo(
     
     
     const retry = () => {
-      setMainPhoto({ ...mainPhoto, needDownload: true, downloadError: undefined })
+      mainPhoto.download?.abort()
+      setMainPhoto({
+        ...mainPhoto,
+        needDownload: true,
+        download: undefined,
+        downloadError: undefined,
+      })
     }
     
     
@@ -179,7 +197,8 @@ const SummaryPage = React.memo(
       .filter(it => it)
       .join(', ')
     
-    //console.log('mainPhoto', mainPhoto)
+    
+    useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
     
     return (
       <>
@@ -192,12 +211,6 @@ const SummaryPage = React.memo(
                 
                 <AvaBox>
                   {(() => {
-                    if (!canShowFetchProgress && mainPhoto.type === 'remote' && !mainPhoto.isReady)
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <SparkingLoadingLine />
-                        </div>
-                      )
                     if (mainPhoto.downloadError)
                       return (
                         <div css={imPlaceholderBoxS}>
@@ -206,6 +219,22 @@ const SummaryPage = React.memo(
                           >
                             <ArrowReloadIc css={avaPlaceholderIcS} />
                           </Button>
+                        </div>
+                      )
+                    if (!canShowFetchProgress && mainPhoto.type === 'remote' && !mainPhoto.isReady)
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <SparkingLoadingLine />
+                        </div>
+                      )
+                    if (canShowFetchProgress && mainPhoto.download)
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <PieProgress css={imSmallPieProgressS}
+                            progress={
+                              RangeU.map(mainPhoto.download.progress, [0, 100], [5, 95])
+                            }
+                          />
                         </div>
                       )
                     if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />

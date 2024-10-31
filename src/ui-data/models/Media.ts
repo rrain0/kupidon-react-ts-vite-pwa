@@ -17,7 +17,9 @@ export interface Media {
   
   dataUrl: string
   
-  isReady: boolean // shows if media is ready to be shown immediately
+  // Shows if media data is ready to be shown immediately.
+  // If empty, it is always not ready.
+  isReady: boolean
 }
 
 export const DefaultMedia: Media = {
@@ -64,5 +66,5 @@ export const DefaultMediaOperation: MediaOperation = {
 export interface MediaDownloadable extends Media {
   needDownload: boolean
   download: MediaOperation | undefined
-  downloadError: any // extend this interface to define a particular error type
+  downloadError: any | undefined// extend this interface to define a particular error type
 }

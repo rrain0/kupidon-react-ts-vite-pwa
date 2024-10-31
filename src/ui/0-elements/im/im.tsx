@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
+import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle'
 import abs = EmotionCommon.abs
 import center = EmotionCommon.center
 
@@ -22,3 +23,25 @@ export const imPlaceholderIcS = (t: AppTheme.Theme) => css`
   }
 `
 
+export const imPieProgressS = (t: AppTheme.Theme) => css`
+  ${PieProgressStyle.El.thiz.pieProgress} {
+    ${PieProgressStyle.Prop.prop.progressColor}: transparent;
+    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.content[0]};
+    height: 30%;
+    aspect-ratio: 1;
+  }
+`
+
+export const imSmallPieProgressS = (t: AppTheme.Theme) => css`
+  ${imPieProgressS(t)};
+  ${PieProgressStyle.El.thiz.pieProgress} {
+    height: 50%;
+  }
+`
+
+export const imPieProgressAccentS = (t: AppTheme.Theme) => css`
+  ${imPieProgressS(t)};
+  ${PieProgressStyle.El.thiz.pieProgress} {
+    ${PieProgressStyle.Prop.prop.restColor}: ${t.photos.bg[0]};
+  }
+`

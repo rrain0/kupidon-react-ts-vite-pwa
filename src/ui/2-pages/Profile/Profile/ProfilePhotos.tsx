@@ -12,7 +12,12 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
-import { imPlaceholderBoxS, imPlaceholderIcS } from 'src/ui/0-elements/im/im'
+import {
+  imPieProgressAccentS,
+  imPieProgressS,
+  imPlaceholderBoxS,
+  imPlaceholderIcS,
+} from 'src/ui/0-elements/im/im'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
@@ -327,11 +332,11 @@ const ProfilePhotos = React.memo(
                               //ref={ref2 as any}
                             >
                               
-                              {function() {
+                              {(() => {
                                 if (im.compression?.showProgress)
                                   return (
                                     <div css={imPlaceholderBoxS}>
-                                      <PieProgress css={profilePhotoPieProgress}
+                                      <PieProgress css={imPieProgressS}
                                         progress={
                                           RangeU.map(im.compression.progress, [0, 100], [5, 95])
                                         }
@@ -349,10 +354,11 @@ const ProfilePhotos = React.memo(
                                       <SparkingLoadingLine />
                                     </div>
                                   )
+                                
                                 if (im.download?.showProgress)
                                   return (
                                     <div css={imPlaceholderBoxS}>
-                                      <PieProgress css={profilePhotoPieProgress}
+                                      <PieProgress css={imPieProgressS}
                                         progress={
                                           RangeU.map(im.download.progress, [0, 100], [5, 95])
                                         }
@@ -374,11 +380,11 @@ const ProfilePhotos = React.memo(
                                     />
                                   )
                                 
-                              }()}
+                              })()}
                               
                               {im.type === 'local' && im.upload?.showProgress && (
                                 <div css={photoDimmed}>
-                                  <PieProgress css={profilePhotoPieProgressAccent}
+                                  <PieProgress css={imPieProgressAccentS}
                                     progress={
                                       RangeU.map(im.upload.progress, [0, 100], [5, 95])
                                     }
@@ -388,7 +394,7 @@ const ProfilePhotos = React.memo(
                               {isDraggingFiles && (
                                 <>
                                   {isDragAccept && <div css={photoDimmed} />}
-                                  <div css={photoOnDragBorder} />
+                                  <div css={photoOnExternalDraggingBorder} />
                                 </>
                               )}
                             
@@ -518,26 +524,12 @@ const photoDimmed = (t: AppTheme.Theme) => css`
   ${imPlaceholderBoxS(t)};
   background: #00000099;
 `
-const photoOnDragBorder = (t: AppTheme.Theme) => css`
+const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
   ${abs};
   inset: -4px;
   border-radius: calc(14px + 4px);
   border: 10px dashed;
   border-color: ${t.photos.borderDrag[0]};
-`
-const profilePhotoPieProgress = (t: AppTheme.Theme) => css`
-  ${PieProgressStyle.El.thiz.pieProgress}{
-    ${PieProgressStyle.Prop.prop.progressColor}: transparent;
-    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.content[0]};
-    height: 30%;
-    aspect-ratio: 1;
-  }
-`
-const profilePhotoPieProgressAccent = (t: AppTheme.Theme) => css`
-  ${profilePhotoPieProgress(t)};
-  ${PieProgressStyle.El.thiz.pieProgress}{
-    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.bg[0]};
-  }
 `
 const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   pointer-events: none;

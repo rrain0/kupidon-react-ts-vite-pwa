@@ -21,21 +21,22 @@ const DialogButtonsFrame = styled.div`
 
 
 type DialogButtonsProps = Puro<{
-  variant: 'center' | 'end'
+  position: 'center' | 'end'
+  //variant: 'primarySmall' | 'textSmall'
   onCancel: Callback
   onClear: Callback
   onOk: Callback
 }>
 const DialogButtons = React.memo(
   (props: DialogButtonsProps) => {
-    const { onCancel, onClear, onOk, variant } = props
+    const { onCancel, onClear, onOk, position } = props
     
     const actionText = useUiValues(ActionUiText)
     
     return (
       <DialogButtonsFrame
         style={{
-          ...variant === 'center' && { justifyContent: 'center' },
+          ...position === 'center' && { justifyContent: 'center' },
         }}
       >
         {onCancel && (
