@@ -23,6 +23,13 @@ export const imPlaceholderIcS = (t: AppTheme.Theme) => css`
   }
 `
 
+export const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
+  ${imPlaceholderIcS(t)};
+  ${SvgIconS.El.icon.thiz()} {
+    ${SvgIconS.El.icon.props.size.set('50%')}
+  }
+`
+
 export const imPieProgressS = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress} {
     ${PieProgressStyle.Prop.prop.progressColor}: transparent;

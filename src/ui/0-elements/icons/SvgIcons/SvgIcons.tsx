@@ -56,6 +56,7 @@ import NameCardSvg from 'src/res/ic/normal/name-card.svg?react'
 import NightSvg from 'src/res/ic/normal/night.svg?react'
 
 import PencilWrite2Svg from 'src/res/ic/normal/pencil-write-2.svg?react'
+import PictureSvg from 'src/res/ic/normal/picture.svg?react'
 import PlusSvg from 'src/res/ic/normal/plus.svg?react'
 import ProfileSvg from 'src/res/ic/normal/profile.svg?react'
 
@@ -101,56 +102,57 @@ export namespace SvgIcons {
   export type BaseSimpleSvgIconProps =
     BaseSimpleSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps & BaseSimpleSvgIconSvgComponentProp
   
-  export const BaseSimpleSvgIcon =
-  React.memo(
-  React.forwardRef<BaseSimpleSvgIconRefElement, BaseSimpleSvgIconProps>(
-  (props, forwardedRef) => {
-    const {
-      className,
-      color, accentColor,
-      size, width, height,
-      SvgComponent,
-      ...restProps
-    } = props
-    
-    const w = width ?? size
-    const h = height ?? size
-    
-    const sizeProp = SvgIconS.El.root.props.size
-    const colorProp = SvgIconS.El.root.props.color
-    const accentColorProp = SvgIconS.El.root.props.accentColor
-    
-    return (
-      <SvgComponent
-        css={css`
-          width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-          height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-          //max-width: 100%;
-          //max-height: 100%;
-          fill: ${color || colorProp.var('black')};
-          stroke: ${color || colorProp.var('black')};
-          ${accentColorProp.name}: ${accentColor ?? accentColorProp.var('gray')};
-        `}
-        width={w}
-        height={h}
-        className={clsx(className, SvgIconS.El.icon.name)}
-        {...restProps}
-        ref={forwardedRef}
-      />
+  export const BaseSimpleSvgIcon = React.memo(
+    React.forwardRef<BaseSimpleSvgIconRefElement, BaseSimpleSvgIconProps>(
+      (props, forwardedRef) => {
+        const {
+          className,
+          color, accentColor,
+          size, width, height,
+          SvgComponent,
+          ...restProps
+        } = props
+        
+        const w = width ?? size
+        const h = height ?? size
+        
+        const sizeProp = SvgIconS.El.root.props.size
+        const colorProp = SvgIconS.El.root.props.color
+        const accentColorProp = SvgIconS.El.root.props.accentColor
+        
+        return (
+          <SvgComponent
+            css={css`
+              width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+              height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+              //max-width: 100%;
+              //max-height: 100%;
+              fill: ${color || colorProp.var('black')};
+              stroke: ${color || colorProp.var('black')};
+              ${accentColorProp.name}: ${accentColor ?? accentColorProp.var('gray')};
+            `}
+            width={w}
+            height={h}
+            className={clsx(className, SvgIconS.El.icon.name)}
+            {...restProps}
+            ref={forwardedRef}
+          />
+        )
+      }
     )
-  }))
+  )
   
   
   
   
   export type SimpleSvgIconProps = BaseSimpleSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps
   function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
-    return (
-    React.memo(
-    React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-      (props, forwardedRef) =>
-        <BaseSimpleSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef}/>
-    )))
+    return React.memo(
+      React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
+        (props, forwardedRef) =>
+          <BaseSimpleSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef} />
+      )
+    )
   }
   
   
@@ -222,6 +224,7 @@ export namespace SvgIcons {
   
   
   export const PencilWrite2Ic = generateSimpleSvgIcon(PencilWrite2Svg)
+  export const PictureIc = generateSimpleSvgIcon(PictureSvg)
   export const PlusIc = generateSimpleSvgIcon(PlusSvg)
   export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
   

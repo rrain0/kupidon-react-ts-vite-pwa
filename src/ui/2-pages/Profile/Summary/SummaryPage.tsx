@@ -18,7 +18,12 @@ import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import { imPlaceholderBoxS, imPlaceholderIcS, imSmallPieProgressS } from 'src/ui/0-elements/im/im'
+import {
+  imPlaceholderBoxS,
+  imPlaceholderIcS,
+  imSmallPieProgressS,
+  imSmallPlaceholderIcS,
+} from 'src/ui/0-elements/im/im'
 import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
 import { LineProgressS } from 'src/ui/0-elements/LineProgress/LineProgressS'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
@@ -51,6 +56,7 @@ import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
 import centerFlex = EmotionCommon.centerFlex
 import ArrowReloadIc = SvgIcons.ArrowReloadIc
+import PictureIc = SvgIcons.PictureIc
 
 
 
@@ -221,7 +227,11 @@ const SummaryPage = React.memo(
                           </Button>
                         </div>
                       )
-                    if (!canShowFetchProgress && mainPhoto.type === 'remote' && !mainPhoto.isReady)
+                    if (!canShowFetchProgress
+                      && mainPhoto.type === 'remote'
+                      && !mainPhoto.isReady
+                      && !mainPhoto.isEmpty
+                    )
                       return (
                         <div css={imPlaceholderBoxS}>
                           <SparkingLoadingLine />
@@ -237,6 +247,11 @@ const SummaryPage = React.memo(
                           />
                         </div>
                       )
+                    if (mainPhoto.isEmpty) return (
+                      <div css={imPlaceholderBoxS}>
+                        <PictureIc css={imSmallPlaceholderIcS} />
+                      </div>
+                    )
                     if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
                   })()}
                 </AvaBox>
