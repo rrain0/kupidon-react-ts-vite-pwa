@@ -453,6 +453,16 @@ export namespace ButtonS {
       border: none;
     }
   `
+  // type: filled, shape: rounded, size: normal2
+  const filledRoundedNormal2 = css`
+    ${filledRoundedNormal};
+    
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  `
   // type: filled, shape: rounded, size: small
   export const filledRoundedSmall = css`
     ${addBase};
@@ -573,6 +583,11 @@ export namespace ButtonS {
   // type: filled, shape: rounded, size: normal, color: accent
   export const filledRoundedNormalAccent = (t: AppTheme.Theme) => css`
     ${filledRoundedNormal};
+    ${filledRoundedAddColorAccent(t)};
+  `
+  // type: filled, shape: rounded, size: normal2, color: accent
+  export const filledRoundedNormal2Accent = (t: AppTheme.Theme) => css`
+    ${filledRoundedNormal2};
     ${filledRoundedAddColorAccent(t)};
   `
   // type: filled, shape: rounded, size: normal, color: accent2

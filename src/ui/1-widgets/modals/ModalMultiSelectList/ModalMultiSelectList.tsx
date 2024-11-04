@@ -144,10 +144,11 @@ const ModalMultiSelectList = ReactU.memo(
                 </div>
                 
                 <DialogButtons
+                  position="center"
                   //onCancel={onCancel}
                   //onClear={onClear}
-                  onOk={onClose}
-                  position="center"
+                  onAccept={onClose}
+                  acceptVariant="filledRounded"
                 />
                 
                 <div style={{ height: 24 }} />

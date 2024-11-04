@@ -87,9 +87,11 @@ const ModalSlider = React.memo(
                 />
                 
                 <DialogButtons
+                  position="center"
                   //onCancel={onCancel}
                   //onClear={onClear}
-                  onOk={onClose}
+                  onAccept={onClose}
+                  acceptVariant="filledRounded"
                 />
                 
               </Content>

@@ -103,9 +103,11 @@ const ModalTileSelect = ReactU.memo(
                 <div style={{ height: 24 }} />
                 
                 <DialogButtons
+                  position="center"
                   //onCancel={onCancel}
                   //onClear={onClear}
-                  onOk={onClose}
+                  onAccept={onClose}
+                  acceptVariant="filledRounded"
                 />
                 
                 <div style={{ height: 24 }} />

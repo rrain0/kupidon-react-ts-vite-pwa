@@ -26,17 +26,29 @@ type DialogButtonsProps = Puro<{
   onCancel: Callback
   onClear: Callback
   onOk: Callback
+  onAccept: Callback
+  acceptVariant: 'text' | 'filledRounded'
 }>
 const DialogButtons = React.memo(
   (props: DialogButtonsProps) => {
-    const { onCancel, onClear, onOk, position } = props
+    const {
+      position = 'end',
+      onCancel,
+      onClear,
+      onOk,
+      onAccept,
+      acceptVariant = 'text',
+    } = props
     
     const actionText = useUiValues(ActionUiText)
     
     return (
       <DialogButtonsFrame
         style={{
-          ...position === 'center' && { justifyContent: 'center' },
+          ...({
+            center: { justifyContent: 'center' },
+            end: undefined,
+          } satisfies Record<typeof position, any>)[position],
         }}
       >
         {onCancel && (
@@ -54,8 +66,19 @@ const DialogButtons = React.memo(
           </Button>
         )}
         {onOk && (
-          <Button css={ButtonS.textRoundedNormal2Normal}
+          <Button css={ButtonS.textUppercaseRoundedNormal2Normal}
             onClick={onOk}
+          >
+            {actionText.ok}
+          </Button>
+        )}
+        {onAccept && (
+          <Button 
+            css={({
+              text: ButtonS.textRoundedNormal2Normal,
+              filledRounded: ButtonS.filledRoundedNormal2Accent,
+            } satisfies Record<typeof acceptVariant, any>)[acceptVariant]}
+            onClick={onAccept}
           >
             {actionText.accept}
           </Button>
