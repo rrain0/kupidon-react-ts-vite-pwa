@@ -75,7 +75,7 @@ export type SheetSnapIdx = number | null
 
 
 export const DefaultSheetSnaps: SheetSnapPoints
-  = [0, '15%', 'free', 'fit-content', 'free', '80%']
+  = [0, '15%', 'free', 'fit-content', '50%', 'free', '80%']
 export const DefaultSheetOpenIdx: number = 3
 
 

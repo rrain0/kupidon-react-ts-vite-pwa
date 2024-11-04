@@ -16,6 +16,7 @@ import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import centerAll = EmotionCommon.centerAll
 import center = EmotionCommon.center
+import fill = EmotionCommon.fill
 
 
 
@@ -81,10 +82,9 @@ const Preview = React.memo(
           <PreviewFrame2 ref={frame2Ref}>
             <PhotosBox>
               {availablePhotos.toReversed().map((p, i) => (
-                <Photo key={p.id}
-                  src={p.dataUrl}
-                  i={5 - i}
-                />
+                <PhotoBox key={p.id} i={5 - i}>
+                  <Photo src={p.dataUrl} />
+                </PhotoBox>
               ))}
             </PhotosBox>
           </PreviewFrame2>
@@ -143,18 +143,32 @@ const PhotosBox = styled.div`
   //background-color: #7FFFD455;
   border-radius: 16px;
 `
-const Photo = styled.img<{ i: number }>`
-  min-width: 0;
-  min-height: 0;
+const PhotoBox = styled.div<{ i: number }>`
   width: ${p => 100 - 5 * p.i}%;
-  max-width: ${p => 100 - 5 * p.i}%;
   height: 95%;
-  max-height: 95%;
   translate: 0 ${p => -p.i}%;
   border-radius: 16px;
+  overflow: hidden;
+`
+const Photo = styled.img`
+  ${fill};
   object-position: center;
   object-fit: cover;
 `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const photoContainer = css`
   width: 100%;

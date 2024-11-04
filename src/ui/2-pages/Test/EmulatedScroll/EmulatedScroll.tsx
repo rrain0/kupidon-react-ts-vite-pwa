@@ -85,7 +85,7 @@ const ScrollFrame = styled.div`
   position: relative;
   width: 100%;
   max-width: 700px;
-  height: 100%;
+  height: 100dvh;
   overflow: hidden;
 `
 
