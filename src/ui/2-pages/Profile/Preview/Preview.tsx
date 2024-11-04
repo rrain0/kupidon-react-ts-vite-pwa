@@ -57,7 +57,7 @@ const Preview = React.memo(
           w: p.w,
           h: p.h,
         })
-        p.setCssProps({ '--w': `${w}px`, '--h': `${h}px` })
+        p.setWhCssProps({ w, h })
       }
     }, []))
     
