@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useMemo, useState } from 'react'
+import { StyleConstants } from 'src/ui-data/styles/StyleConstants'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
@@ -17,6 +18,8 @@ import Txt = EmotionCommon.Txt
 import centerAll = EmotionCommon.centerAll
 import center = EmotionCommon.center
 import fill = EmotionCommon.fill
+import minRatioPort = StyleConstants.minRatioPort
+import maxRatioPort = StyleConstants.maxRatioPort
 
 
 
@@ -49,8 +52,8 @@ const Preview = React.memo(
       if (elem) {
         const p = getViewProps(elem)
         const { w, h } = ViewU.clampRatio({
-          minRatio: 9 / 16,
-          maxRatio: 3 / 4,
+          minRatio: minRatioPort,
+          maxRatio: maxRatioPort,
           w: p.w,
           h: p.h,
         })

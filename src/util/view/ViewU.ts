@@ -9,42 +9,29 @@ export namespace ViewU {
   export type H = { h: number }
   export type B = { b: number }
   
-  export type WH = { w: number, h: number }
+  export type WH = W & H
   export type XY = { x: number, y: number }
   
   
-  export const wh = (elem: HTMLElement | null): WH => {
+  export const wh = (elem: HTMLElement | null | undefined): WH => {
     if (!elem) return { w: 0, h: 0 }
-    const elemProps = getViewProps(elem)
-    return {
-      w: elemProps.widthFloat,
-      h: elemProps.heightFloat,
-    }
+    const { w, h } = getViewProps(elem)
+    return { w, h }
   }
-  
-  
-  
-  export const stretchWithRatio =
-    (aspectRatio: number, maxW: number, maxH: number): WH => {
-      const maxRatio = maxW / maxH
-      if (maxRatio > aspectRatio) return { w: aspectRatio * maxH, h: maxH }
-      if (maxRatio < aspectRatio) return { w: maxW, h: maxW / aspectRatio }
-      return { w: maxW, h: maxH }
-    }
   
   
   
   
   type ClampRatioP = {
-    minRatio: number
+    minRatio?: number | undefined
     maxRatio: number
     w: number
     h: number
   }
-  export const clampRatio = ({ minRatio, maxRatio, w, h }: ClampRatioP): WH => {
-    const ratio = w / h
-    if (ratio > maxRatio) return { w: h * maxRatio, h }
-    if (ratio < minRatio) return { w, h: w / minRatio }
+  export const clampRatio = ({ minRatio = 0, maxRatio, w, h }: ClampRatioP): WH => {
+    const maxContainerRatio = w / h
+    if (maxContainerRatio > maxRatio) return { w: h * maxRatio, h }
+    if (maxContainerRatio < minRatio) return { w, h: w / minRatio }
     return { w, h }
   }
   
