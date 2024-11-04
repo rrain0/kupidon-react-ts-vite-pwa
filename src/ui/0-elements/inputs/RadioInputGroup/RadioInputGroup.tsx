@@ -72,7 +72,7 @@ export default RadioInputGroup
 const radioGroupStyle = css`
   ${reset};
   position: relative;
-  gap: ${StyleConstants.itemListGap};
+  gap: ${StyleConstants.itemListGapPx};
 `
 
 

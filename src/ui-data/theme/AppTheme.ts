@@ -91,6 +91,7 @@ export namespace AppTheme {
     // normal button
     buttonNormal: {
       bg:            string[]
+      bg2:           string
       content:       string[]
       bgFocus:       string[]
       contentFocus:  string[]

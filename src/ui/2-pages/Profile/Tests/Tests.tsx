@@ -98,8 +98,8 @@ const Tests = React.memo(
           </Pages.ContentForm>
         </Pages.SafeInsets>
         
-        
-        { (props.canSubmit || props.formProps.hasChanges) && (
+        {/*
+        {(props.canSubmit || props.formProps.hasChanges) && (
           <TopButtonBarFrame>
             { props.formProps.hasChanges && (
               <Button
@@ -118,7 +118,7 @@ const Tests = React.memo(
             )}
           </TopButtonBarFrame>
         )}
-        
+         */}
         
       </>
     )

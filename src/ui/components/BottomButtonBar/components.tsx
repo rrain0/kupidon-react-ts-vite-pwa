@@ -98,34 +98,40 @@ export namespace ButtonBarComponents {
   
   
   
-  export const SettingsBtn =
-  React.memo(
-  () => {
-    return <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-      {overlay => <>
-        <QuickSettingsButton onClick={overlay.open} />
-        
-        <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
-      </>}
-    </UseOverlayUrl>
-  })
+  export const SettingsBtn = React.memo(
+    () => {
+      return (
+        <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+          {overlay => (
+            <>
+              <QuickSettingsButton onClick={overlay.open} />
+              
+              <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
+            </>
+          )}
+        </UseOverlayUrl>
+      )
+    }
+  )
   
   
-  export const BackBtn =
-  React.memo(
-  () => {
-    const navigate = useNavigate()
-    const back = useCallback(
-      ()=>navigate(-1),
-      [navigate]
-    )
-    
-    return <Button css={IconButtonStyle.iconBig2Transparent}
-      onClick={back}
-    >
-      <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
-    </Button>
-  })
+  export const BackBtn = React.memo(
+    () => {
+      const navigate = useNavigate()
+      const back = useCallback(
+        () => navigate(-1),
+        [navigate]
+      )
+      
+      return (
+        <Button css={IconButtonStyle.iconBig2Transparent}
+          onClick={back}
+        >
+          <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
+        </Button>
+      )
+    }
+  )
   
   
   

@@ -48,7 +48,7 @@ const DialogButtons = React.memo(
           ...({
             center: { justifyContent: 'center' },
             end: undefined,
-          } satisfies Record<typeof position, any>)[position],
+          } satisfies Record<typeof position, React.CSSProperties | undefined>)[position],
         }}
       >
         {onCancel && (

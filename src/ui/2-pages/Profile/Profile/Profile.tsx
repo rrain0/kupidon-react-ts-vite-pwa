@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
+import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import DateIdealDateOption from 'src/ui/2-pages/Profile/options/DateIdealDateOption'
 import DateIdealFormatOption from 'src/ui/2-pages/Profile/options/DateIdealFormatOption'
 import DateIdealTimeOption from 'src/ui/2-pages/Profile/options/DateIdealTimeOption'
@@ -234,11 +235,7 @@ const Profile = React.memo(
           </Pages.ContentForm>
         </Pages.SafeInsets>
         
-        <div 
-          key="aa"
-          tabIndex={-1}
-        />
-        
+        {/*
         {(props.canSubmit || props.formProps.hasChanges) && (
           <TopButtonBarFrame>
             {props.formProps.hasChanges && (
@@ -259,6 +256,8 @@ const Profile = React.memo(
             )}
           </TopButtonBarFrame>
         )}
+         */}
+        
       
       
       </>

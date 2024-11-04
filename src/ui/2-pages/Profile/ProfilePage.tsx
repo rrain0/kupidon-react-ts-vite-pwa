@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
@@ -466,8 +467,15 @@ const ProfilePage = React.memo(
                     </>
                   )}
                 </Tabs>
-              
-              
+                
+                
+                
+                {tabIdx !== 0 && (canSubmit || formProps.hasChanges) && (
+                  <LeftBottomButtonBar
+                    onCancel={formProps.hasChanges && formProps.resetUserFields || undefined}
+                    onAccept={canSubmit && !isLoading && submit || undefined}
+                  />
+                )}
               
                 {/* <UseBottomSheetState
                   //isOpen={canSubmit || formProps.hasChanges}

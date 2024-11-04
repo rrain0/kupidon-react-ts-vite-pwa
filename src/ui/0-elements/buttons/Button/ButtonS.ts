@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
+import { StyleConstants } from 'src/ui-data/styles/StyleConstants'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
@@ -609,6 +610,54 @@ export namespace ButtonS {
   export const filledRoundedSmallAccent = (t: AppTheme.Theme) => css`
     ${filledRoundedSmall};
     ${filledRoundedAddColorAccent(t)};
+  `
+  
+  
+  
+  // type: filled, shape: round, size: normal
+  const filledRoundNormal = css`
+    ${addBase};
+    
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      height: 50px;
+      width: 50px;
+      border-radius: 999999px;
+      padding: 11px;
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.p.mode.set('center')};
+    }
+  `
+  // type: filled, shape: round, add size: big2
+  const filledRoundAddSizeBig2 = css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      padding: 14px;
+    }
+  `
+  
+  // type: filled, shape: round, add shadow
+  const filledRoundAddShadow = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      ${StyleConstants.shadow(t.containerNormal.shadow[0])};
+    }
+  `
+  
+  
+  
+  // type: filled, shape: round, size: big2, color: accent
+  export const filledRoundBig2Accent = (t: AppTheme.Theme) => css`
+    ${filledRoundNormal};
+    ${filledRoundAddSizeBig2};
+    ${filledRoundedAddColorAccent(t)};
+  `
+  // type: filled, shape: round, size: big2, color: normal
+  export const filledRoundBig2Normal = (t: AppTheme.Theme) => css`
+    ${filledRoundNormal};
+    ${filledRoundAddSizeBig2};
+    ${filledRoundedAddColorNormal(t)};
   `
   
   

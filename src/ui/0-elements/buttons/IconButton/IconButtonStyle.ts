@@ -40,24 +40,51 @@ export namespace IconButtonStyle {
   
   
   
-  const iconAddColorNormal = (t: AppTheme.Theme) => css`
+  const icTransparentAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
       ${W.e.icon.e.p.color.set(t.buttonNormal.bg[0])};
     }
   `
+  const icFilledAddColorNormal = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${ButtonS.W.use.s.normal().e.button().thisUse} {
+      background-color: ${t.buttonNormal.bg2};
+    }
+    ${W.use.s.normal().e.icon().thisUse} {
+      ${W.e.icon.e.p.size.set('100%')};
+      ${W.e.icon.e.p.color.set(t.buttonNormal.content[0])};
+    }
+  `
+  const icFilledAddColorAccent = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.icon().thisUse} {
+      ${W.e.icon.e.p.size.set('100%')};
+      ${W.e.icon.e.p.color.set(t.buttonAccent.content[0])};
+    }
+  `
   
   
   export const iconBigTransparent = (t: AppTheme.Theme) => css`
     ${ButtonS.textRoundBigNormal(t)};
-    ${iconAddColorNormal(t)};
+    ${icTransparentAddColorNormal(t)};
   `
   
   
   export const iconBig2Transparent = (t: AppTheme.Theme) => css`
     ${ButtonS.textRoundBig2Normal(t)};
-    ${iconAddColorNormal(t)};
+    ${icTransparentAddColorNormal(t)};
+  `
+  
+  
+  export const icBig2Normal = (t: AppTheme.Theme) => css`
+    ${ButtonS.filledRoundBig2Normal(t)};
+    ${icFilledAddColorNormal(t)};
+  `
+  export const icBig2Accent = (t: AppTheme.Theme) => css`
+    ${ButtonS.filledRoundBig2Accent(t)};
+    ${icFilledAddColorAccent(t)};
   `
   
   
