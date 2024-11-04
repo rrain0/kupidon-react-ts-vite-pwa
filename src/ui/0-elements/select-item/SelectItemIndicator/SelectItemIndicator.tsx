@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React from 'react'
 import { SelectItemIndicatorS } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle

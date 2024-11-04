@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'

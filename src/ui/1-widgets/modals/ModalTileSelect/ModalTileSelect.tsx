@@ -8,7 +8,7 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
 import { ArrayU } from 'src/util/common/ArrayU'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter

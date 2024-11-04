@@ -1,4 +1,4 @@
-import { ReactU } from 'src/util/common/ReactU.ts'
+import { ReactU } from 'src/util/react/ReactU.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import contents = EmotionCommon.contents

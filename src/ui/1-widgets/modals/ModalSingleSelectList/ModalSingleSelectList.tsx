@@ -14,7 +14,7 @@ import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectI
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter

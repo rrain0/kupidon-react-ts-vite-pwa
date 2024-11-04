@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
 import Puro = TypeU.Puro

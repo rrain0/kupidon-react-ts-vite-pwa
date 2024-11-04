@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import Children = ReactU.Children
 import center = EmotionCommon.center
 

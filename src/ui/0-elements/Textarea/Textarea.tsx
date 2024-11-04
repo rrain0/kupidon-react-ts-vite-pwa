@@ -5,7 +5,7 @@ import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import resetTextarea = EmotionCommon.resetTextarea

@@ -6,7 +6,7 @@ import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import col = EmotionCommon.col
 import hideScrollbar = EmotionCommon.noScrollbars
 import React, { useRef } from 'react'
-import { ReactU } from 'src/util/common/ReactU.ts'
+import { ReactU } from 'src/util/react/ReactU.ts'
 import centerAll = EmotionCommon.centerAll
 import { TypeU } from '@util/common/TypeU.ts'
 import clsx from 'clsx'

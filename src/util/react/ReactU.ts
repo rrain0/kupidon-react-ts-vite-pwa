@@ -114,7 +114,7 @@ export namespace ReactU {
       //onUnknown: () => {}, // it works and produces error
     }
   }
-  export const combineEvHandlersRecords2 =
+  /* export */ const combineEvHandlersRecords2 =
     <E extends HTMLElement>
     (...handlers: Record<string, () => void>[]) => {
     // TODO

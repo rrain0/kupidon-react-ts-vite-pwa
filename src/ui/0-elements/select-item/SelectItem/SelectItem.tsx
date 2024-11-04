@@ -8,7 +8,7 @@ import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItem
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple'
-import { ReactU } from 'src/util/common/ReactU'
+import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { useCssWhRef } from 'src/util/view/useCssWhRef'
