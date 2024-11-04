@@ -1,8 +1,7 @@
 import { useSpring } from '@react-spring/web'
 import { useCallback } from 'react'
 import { TypeU } from 'src/util/common/TypeU'
-import { useResize } from 'src/util/view/useResize'
-import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
+import { useResizeRef } from 'src/util/view/useResizeRef'
 import Mapper = TypeU.Mapper
 
 
@@ -20,10 +19,8 @@ export const useResizeToSpring = <T extends HTMLElement, P extends object>(
     springApi.set(props)
   }, [springApi, onResize])
   
-  const updateElem = useResize<T>(onResizeToSpring)
+  const refFunction = useResizeRef<T>(onResizeToSpring)
   
-  const [getElem, setElem, refElem] = useRefGetSet<E>(null, updateElem)
-  
-  return [spring, setElem] as const
+  return [spring, refFunction] as const
 }
 

@@ -89,6 +89,7 @@ export default [
       'react/jsx-no-target-blank': 'off',
       'react/function-component-definition': 'off',
       'react/prop-types': 'off',
+      'react/no-unescaped-entities': 'off',
       // for emotion css property
       'react/no-unknown-property': ['error', { 'ignore': ['css'] }],
     },

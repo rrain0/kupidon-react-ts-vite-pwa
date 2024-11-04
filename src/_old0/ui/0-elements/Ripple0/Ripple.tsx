@@ -63,7 +63,7 @@ React.memo(
       const mode = function() {
         const modes: RippleMode[] = ['center', 'cursor']
         let mode: any = getViewProps(frame)
-          .cssPropValue(RippleStyle.W.e.frame.e.p.mode.name)
+          .getCssPropValue(RippleStyle.W.e.frame.e.p.mode.name)
         //console.log('mode', mode)
         //console.log('mode name', RippleStyle.W.e.frame.e.p.mode.name)
         if (!modes.includes(mode)) mode = props.mode

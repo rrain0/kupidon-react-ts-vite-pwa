@@ -346,7 +346,7 @@ const AvaBox = styled.div`
   border-radius: 999999px;
   overflow: hidden;
   position: relative;
-  ${centerFlex};
+  ${center};
 `
 const AvaIm = styled.img`
   width: 100%;

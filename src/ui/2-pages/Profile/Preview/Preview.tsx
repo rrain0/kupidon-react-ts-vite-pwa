@@ -1,16 +1,21 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
+import { useCssWhRef } from 'src/util/view/useCssWhRef'
+import { useResizeRef } from 'src/util/view/useResizeRef'
+import { getViewProps } from 'src/util/view/ViewProps'
+import { ViewU } from 'src/util/view/ViewU'
 import FormValues = ProfilePageValidation.FormValues
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import centerAll = EmotionCommon.centerAll
+import center = EmotionCommon.center
 
 
 
@@ -32,7 +37,6 @@ const Preview = React.memo(
     
     
     
-    const im = photos[0]
     
     console.log('photos', photos)
     
@@ -40,8 +44,23 @@ const Preview = React.memo(
       return photos.filter(it => it.isReady)
     }, [photos])
     
+    const frame2Ref = useResizeRef<HTMLElement>(useCallback((elem) => {
+      if (elem) {
+        const p = getViewProps(elem)
+        const { w, h } = ViewU.clampRatio({
+          minRatio: 9 / 16,
+          maxRatio: 3 / 4,
+          w: p.w,
+          h: p.h,
+        })
+        p.setCssProps({ '--w': `${w}px`, '--h': `${h}px` })
+      }
+    }, []))
     
     
+    
+    
+    //const im = photos[0]
     //const [scroll, setScroll] = useState(0)
     
     /* useEffect(
@@ -59,14 +78,16 @@ const Preview = React.memo(
     return (
       <Pages.SafeInsets>
         <PreviewFrame>
-          <PhotosBox>
-            {availablePhotos.map((p, i) => (
-              <Photo key={p.id}
-                src={p.dataUrl}
-                i={i}
-              />
-            ))}
-          </PhotosBox>
+          <PreviewFrame2 ref={frame2Ref}>
+            <PhotosBox>
+              {availablePhotos.toReversed().map((p, i) => (
+                <Photo key={p.id}
+                  src={p.dataUrl}
+                  i={5 - i}
+                />
+              ))}
+            </PhotosBox>
+          </PreviewFrame2>
         </PreviewFrame>
       </Pages.SafeInsets>
     )
@@ -108,9 +129,14 @@ const PreviewFrame = styled.div`
   height: 100%;
   padding: 32px 16px;
 `
-const PhotosBox = styled.div`
+const PreviewFrame2 = styled.div`
   width: 100%;
   height: 100%;
+  ${center};
+`
+const PhotosBox = styled.div`
+  width: var(--w);
+  height: var(--h);
   position: relative;
   ${centerAll};
   align-items: end;
@@ -118,10 +144,13 @@ const PhotosBox = styled.div`
   border-radius: 16px;
 `
 const Photo = styled.img<{ i: number }>`
+  min-width: 0;
+  min-height: 0;
   width: ${p => 100 - 5 * p.i}%;
+  max-width: ${p => 100 - 5 * p.i}%;
   height: 95%;
+  max-height: 95%;
   translate: 0 ${p => -p.i}%;
-  z-index: ${p => 6 - p.i};
   border-radius: 16px;
   object-position: center;
   object-fit: cover;

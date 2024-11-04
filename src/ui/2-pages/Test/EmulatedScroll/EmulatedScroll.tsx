@@ -2,11 +2,11 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
 import React from 'react'
-import { useEmulatedScroll } from 'src/ui/2-pages/Test/SimulatedScroll/useEmulatedScroll'
+import { useEmulatedScroll } from 'src/ui/2-pages/Test/EmulatedScroll/useEmulatedScroll'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useGetViewWh } from 'src/util/view/useGetViewWh'
-import { useOnResize_ } from 'src/util/view/useOnResize_'
+import { useOnResize_ } from 'src/_old0/util/view/useOnResize_'
 import { useElemRef } from 'src/util/react-state/useElemRef'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
@@ -60,11 +60,17 @@ const EmulatedScroll = React.memo(
             }}
           >
             
-            { arrOfNumbers(500).map(it => <div>Simulated Scroll {it}</div>) }
+            { arrOfNumbers(500).map(it => <div key={it}>Simulated Scroll {it}</div>) }
             
           </animated.div>
           
         </ScrollFrame>
+        
+        {/* <div css={css`
+          width: 100%;
+          height: 100%;
+          background-color: aquamarine;
+        `}/> */}
           
           
       </Pages.SimplePage>

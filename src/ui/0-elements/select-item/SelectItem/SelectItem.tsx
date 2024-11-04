@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, { useImperativeHandle, useRef } from 'react'
+import React, { useImperativeHandle } from 'react'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
@@ -8,15 +8,14 @@ import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItem
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple'
-import { ArrayU } from 'src/util/common/ArrayU'
 import { ReactU } from 'src/util/common/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
-import { useViewWhAsCssProps } from 'src/util/view/useViewWhAsCssProps'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
+import { useCssWhRef } from 'src/util/view/useCssWhRef'
 import Puro = TypeU.Puro
 import Callback = TypeU.Callback
 import PlusIc = SvgIcons.PlusIc
 import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
-import arraify = ArrayU.arraify
 import combineEvHandlersRecords = ReactU.combineEvHandlersRecords
 import trueOrUndef = TypeU.trueOrUndef
 
@@ -62,9 +61,9 @@ const SelectItem = React.memo(
       
       //const indicators = indicatorsSelection ?? arraify(isSelected)
       
-      const elemRef = useRef<HTMLDivElement>(null)
+      const setElemForWh = useCssWhRef()
+      const [getElem, setElem, elemRef] = useRefGetSet<HTMLDivElement | null>(null, setElemForWh)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-      useViewWhAsCssProps(elemRef)
       
       
       

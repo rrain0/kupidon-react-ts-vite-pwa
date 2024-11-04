@@ -71,7 +71,7 @@ const Ripple = React.memo(
           fProps.xy,
           fProps.wh,
           clientXY,
-          rProps.cssPropValue(RippleS.W.e.ripple.p.mode.name) as RippleMode,
+          rProps.getCssPropValue(RippleS.W.e.ripple.p.mode.name) as RippleMode,
           500
         )
       }

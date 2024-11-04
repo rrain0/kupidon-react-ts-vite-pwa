@@ -5,12 +5,12 @@ import Callback1 = TypeU.Callback1
 
 
 
-export const useResize = <T extends HTMLElement>(onResize: Callback1<T | null>) => {
+// Does not trigger rerender (if you do not set state inside callback)
+export const useResizeRef = <T extends HTMLElement = HTMLElement>(onResize: Callback1<T | null>) => {
   const [getResizeObserver, setResizeObserver] = useRefGetSet(undefined as undefined | ResizeObserver)
   
-  const updateElem = useCallback<Callback1<T | null>>(elem => {
-    const r = getResizeObserver()
-    if (r) r.disconnect()
+  const elementFunctionalRef = useCallback<Callback1<T | null>>(elem => {
+    getResizeObserver()?.disconnect()
     setResizeObserver(undefined)
     
     onResize(elem)
@@ -22,6 +22,6 @@ export const useResize = <T extends HTMLElement>(onResize: Callback1<T | null>) 
     }
   }, [onResize])
   
-  return updateElem
+  return elementFunctionalRef
 }
 

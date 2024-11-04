@@ -14,7 +14,7 @@ const OldProfileOptionsPage = React.lazy(() => import('src/ui/2-pages/Test/pages
 const UseEventTest = React.lazy(() => import('src/ui/2-pages/Test/pages/UseEventTest.tsx'))
 const PageLifecycle = React.lazy(() => import('src/ui/2-pages/Test/pages/PageLifecycle.tsx'))
 const PointerTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/PointerTestPage.tsx'))
-const EmulatedScroll = React.lazy(() => import('src/ui/2-pages/Test/SimulatedScroll/EmulatedScroll.tsx'))
+const EmulatedScroll = React.lazy(() => import('src/ui/2-pages/Test/EmulatedScroll/EmulatedScroll.tsx'))
 const StateTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/StateTestPage.tsx'))
 const TabsTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/TabsTestPage.tsx'))
 const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ScrollbarTestPage.tsx'))

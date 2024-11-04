@@ -107,6 +107,15 @@ export default defineConfig(({ command, mode }) => {
       port: +(envFileConfig.REACT_PORT ?? process.env.REACT_PORT ?? 40009),
     },
     
+    // make paths in build relative to index.html (starts with './', not with '/')
+    base: './',
+    
+    esbuild: {
+      supported: {
+        'top-level-await': true, // browsers can handle top-level-await features
+      },
+    },
+    
     plugins: [
       react({
         jsxImportSource: '@emotion/react',

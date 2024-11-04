@@ -2,7 +2,7 @@ import { animated, useSpring } from '@react-spring/web'
 import React, { useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { getViewProps } from 'src/util/view/ViewProps'
-import { useResize } from 'src/util/view/useResize'
+import { useResizeRef } from 'src/util/view/useResizeRef'
 import { useResizeToSpring } from 'src/util/view/useResizeToSpring'
 import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
@@ -45,7 +45,7 @@ const ChainedResize1 = () => {
   const [isConnectedDivReady, setConnectedDivReady, setConnectedDivNotReady] = useBool(isSourceDivReady)
   
   const [spring, springApi] = useSpring(() => ({ w: 0, h: 0 }))
-  const updateElem = useResize(elem => {
+  const updateElem = useResizeRef(elem => {
     if (!elem) {
       setConnectedDivNotReady()
       springApi.set({ w: 0, h: 0 })
@@ -67,25 +67,29 @@ const ChainedResize1 = () => {
       <button onClick={toggleSourceDivReady}>Toggle Source Div</button>
       
       {!isSourceDivReady && 'Source Div is not ready'}
-      {isSourceDivReady && <div
-        style={{ width: '50%', height: '200px', background: 'aquamarine' }}
-        ref={setElem}
-      >
-        Source div.<br/>
-        Resize window to change element's dimensions.<br/>
-        And it will trigger resizing of Connected div WITHOUT RERENDER.
-      </div>}
+      {isSourceDivReady && (
+        <div
+          style={{ width: '50%', height: '200px', background: 'aquamarine' }}
+          ref={setElem}
+        >
+          Source div.<br />
+          Resize window to change element's dimensions.<br />
+          And it will trigger resizing of Connected div WITHOUT RERENDER.
+        </div>
+      )}
       
-      {isConnectedDivReady && <animated.div
-        style={{
-          // @ts-expect-error
-          width: spring.w,
-          height: spring.h,
-          background: 'aqua',
-        }}
-      >
-        Connected div
-      </animated.div>}
+      {isConnectedDivReady && (
+        <animated.div
+          style={{
+            // @ts-expect-error
+            width: spring.w,
+            height: spring.h,
+            background: 'aqua',
+          }}
+        >
+          Connected div
+        </animated.div>
+      )}
     </>
   )
 }
@@ -118,25 +122,29 @@ const ChainedResize2 = () => {
       <button onClick={toggleSourceDivReady}>Toggle Source Div</button>
       
       {!isSourceDivReady && 'Source Div is not ready'}
-      {isSourceDivReady && <div
-        style={{ width: '50%', height: '200px', background: 'aquamarine' }}
-        ref={setElem}
-      >
-        Source div.<br/>
-        Resize window to change element's dimensions.<br/>
-        And it will trigger resizing of Connected div WITHOUT RERENDER.
-      </div>}
+      {isSourceDivReady && (
+        <div
+          style={{ width: '50%', height: '200px', background: 'aquamarine' }}
+          ref={setElem}
+        >
+          Source div.<br />
+          Resize window to change element's dimensions.<br />
+          And it will trigger resizing of Connected div WITHOUT RERENDER.
+        </div>
+      )}
       
-      {isConnectedDivReady && <animated.div
-        style={{
-          // @ts-expect-error
-          width: spring.w,
-          height: spring.h,
-          background: 'aqua',
-        }}
-      >
-        Connected div
-      </animated.div>}
+      {isConnectedDivReady && (
+        <animated.div
+          style={{
+            // @ts-expect-error
+            width: spring.w,
+            height: spring.h,
+            background: 'aqua',
+          }}
+        >
+          Connected div
+        </animated.div>
+      )}
     </>
   )
 }

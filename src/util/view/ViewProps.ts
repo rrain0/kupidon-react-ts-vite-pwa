@@ -1,5 +1,6 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import anyval = TypeU.anyval
+import RecordRo = TypeU.RecordRo
 
 
 
@@ -92,9 +93,18 @@ export class ViewProps {
     if (isWindow(this.view)) return window.getComputedStyle(this.html)
     return window.getComputedStyle(this.view)
   }
-  // css custom property (variable) value
-  cssPropValue(propName: string): string {
+  
+  // get css custom property (variable) value
+  getCssPropValue(propName: string): string {
     return this.computedStyle.getPropertyValue(propName)
+  }
+  // set css custom property (variable) value
+  setCssProp(propName: string, propValue: string) {
+    const v = isWindow(this.view) ? this.html : this.view
+    v.style.setProperty(propName, propValue)
+  }
+  setCssProps(props: RecordRo<string, string>) {
+    Object.entries(props).forEach(([prop, value]) => this.setCssProp(prop, value))
   }
   
   // get element bounding rect

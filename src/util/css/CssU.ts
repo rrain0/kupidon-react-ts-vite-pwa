@@ -1,7 +1,7 @@
 
 
 
-export namespace CssElemUtils {
+export namespace CssU {
   
   
   
@@ -24,7 +24,7 @@ export namespace CssElemUtils {
    }
   */
   export const s = (w: string, h: string) => {
-    return `calc( min(${w}, ${h}) + ${CssElemUtils.abs(w, h)} / 3 )`
+    return `calc( min(${w}, ${h}) + ${abs(w, h)} / 3 )`
   }
   
   
