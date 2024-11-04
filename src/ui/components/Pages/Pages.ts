@@ -26,7 +26,7 @@ export namespace Pages {
   
   export const page = css`
     min-width: 220px;
-    width: min(100dvw, 100%);
+    width: 100dvw;
     min-height: 220px;
     height: 100dvh;
     max-height: fit-content;

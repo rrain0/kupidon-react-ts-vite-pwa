@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useEffect } from 'react'
 import { ObjectU } from 'src/util/common/ObjectU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Puro = TypeU.Puro
@@ -17,6 +17,10 @@ export namespace ReactU {
   }>
   export type First = Puro<{ first: boolean }>
   export type Last = Puro<{ last: boolean }>
+  
+  
+  
+  export const effectLog = (...args: any[]) => useEffect(() => console.log(...args), args)
   
   
   

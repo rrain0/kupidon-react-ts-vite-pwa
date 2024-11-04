@@ -42,102 +42,113 @@ export type SettingsProps = {
   isOpen: boolean
   close: Callback
 }
-const QuickSettings =
-React.memo(
-(props: SettingsProps)=>{
-  const { isOpen, close } = props
-  
-  const auth = useRecoilValue(AuthRecoil)
-  const [app, setApp] = useRecoilState(AppRecoil)
-  
-  const titleText = useUiValues(TitleUiText)
-  const actionText = useUiValues(ActionUiText)
-  
-  const clearSiteDialog = useOverlayUrl(ClearSiteDialogOverlayName)
-  
-  return <>
-    <UseBottomSheetState isOpen={isOpen} onClose={close}>
-      {props => <ModalPortal>
-        <BottomSheetDialogBasic {...props.sheetProps}
-          headerTitle={titleText.settings}
-        >
-          <Content>
-            
-            <SettingsOptions.Header>
-              {titleText.theme}
-            </SettingsOptions.Header>
-            <ThemeOptions/>
-            
-            
-            <SettingsOptions.Header>
-              {titleText.language}
-            </SettingsOptions.Header>
-            <LangOptions/>
-            
-            <RoundButtonsContainer>
-              
-              {auth && <Link to={RootRoute.settings.account[full]()}>
-                <Button css={ButtonS.filledRoundedNormalNormal}
-                  onClick={props.setClosing}
-                >
-                  <LockIc css={[
-                    SettingsOptions.icon,
-                    css`translate: 0 -0.1em;`,
-                  ]}/>
-                  {titleText.accountSettings}
-                </Button>
-              </Link>}
-              
-              <Link to={RootRoute.settings.app[full]()}>
-                <Button css={ButtonS.filledRoundedNormalNormal}
-                  onClick={props.setClosing}
-                >
-                  <GearIc css={SettingsOptions.icon}/>
-                  {titleText.appSettings}
-                </Button>
-              </Link>
-              
-              <Link to={RootRoute.test[full]()}>
-                <Button css={ButtonS.outlinedRoundedNormalNormal}
-                  onClick={props.setClosing}
-                >
-                  {titleText.testPage}
-                </Button>
-              </Link>
-              
-              {app.canInstall && <Button css={ButtonS.filledRoundedNormalNormal}
-                onClick={async () => await promptInstall()}
-              >
-                <AddModuleIc css={SettingsOptions.icon}/>
-                {actionText.installApp}
-              </Button>}
-              
-              <Button css={ButtonS.filledRoundedNormalNormal}
-                onClick={clearSiteDialog.open}
-              >
-                {actionText.clearAppData}
-              </Button>
-              
-              {import.meta.env.DEV && <Button css={ButtonS.outlinedRoundedNormalNormal}
-                onClick={()=>setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
-              >
-                Show Dev Overlay
-              </Button>}
-            
-            
-            </RoundButtonsContainer>
-          
-          
-          </Content>
-        </BottomSheetDialogBasic>
-      </ModalPortal>}
-    </UseBottomSheetState>
+const QuickSettings = React.memo(
+  (props: SettingsProps) => {
+    const { isOpen, close } = props
     
+    const auth = useRecoilValue(AuthRecoil)
+    const [app, setApp] = useRecoilState(AppRecoil)
     
-    <ClearSiteDialog isOpen={clearSiteDialog.isOpen} close={clearSiteDialog.close}/>
+    const titleText = useUiValues(TitleUiText)
+    const actionText = useUiValues(ActionUiText)
     
-  </>
-})
+    const clearSiteDialog = useOverlayUrl(ClearSiteDialogOverlayName)
+    
+    return (
+      <>
+        <UseBottomSheetState isOpen={isOpen} onClose={close}>
+          {props => (
+            <ModalPortal>
+              <BottomSheetDialogBasic {...props.sheetProps}
+                headerTitle={titleText.settings}
+              >
+                <Content>
+                  
+                  <SettingsOptions.Header>
+                    {titleText.theme}
+                  </SettingsOptions.Header>
+                  <ThemeOptions />
+                  
+                  
+                  <SettingsOptions.Header>
+                    {titleText.language}
+                  </SettingsOptions.Header>
+                  <LangOptions />
+                  
+                  <RoundButtonsContainer>
+                    
+                    {auth && (
+                      <Link to={RootRoute.settings.account[full]()}>
+                        <Button css={ButtonS.filledRoundedNormalNormal}
+                          onClick={props.setClosing}
+                        >
+                          <LockIc
+                            css={[
+                              SettingsOptions.icon,
+                              css`translate: 0 -0.1em;`,
+                            ]}
+                          />
+                          {titleText.accountSettings}
+                        </Button>
+                      </Link>
+                    )}
+                    
+                    <Link to={RootRoute.settings.app[full]()}>
+                      <Button css={ButtonS.filledRoundedNormalNormal}
+                        onClick={props.setClosing}
+                      >
+                        <GearIc css={SettingsOptions.icon} />
+                        {titleText.appSettings}
+                      </Button>
+                    </Link>
+                    
+                    <Link to={RootRoute.test[full]()}>
+                      <Button css={ButtonS.outlinedRoundedNormalNormal}
+                        onClick={props.setClosing}
+                      >
+                        {titleText.testPage}
+                      </Button>
+                    </Link>
+                    
+                    {app.canInstall && (
+                      <Button css={ButtonS.filledRoundedNormalNormal}
+                        onClick={async () => await promptInstall()}
+                      >
+                        <AddModuleIc css={SettingsOptions.icon} />
+                        {actionText.installApp}
+                      </Button>
+                    )}
+                    
+                    <Button css={ButtonS.filledRoundedNormalNormal}
+                      onClick={clearSiteDialog.open}
+                    >
+                      {actionText.clearAppData}
+                    </Button>
+                    
+                    {import.meta.env.DEV && (
+                      <Button css={ButtonS.outlinedRoundedNormalNormal}
+                        onClick={() => setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
+                      >
+                        Show Dev Overlay
+                      </Button>
+                    )}
+                  
+                  
+                  </RoundButtonsContainer>
+                
+                
+                </Content>
+              </BottomSheetDialogBasic>
+            </ModalPortal>
+          )}
+        </UseBottomSheetState>
+        
+        
+        <ClearSiteDialog isOpen={clearSiteDialog.isOpen} close={clearSiteDialog.close} />
+        
+      </>
+    )
+  })
 export default QuickSettings
 
 

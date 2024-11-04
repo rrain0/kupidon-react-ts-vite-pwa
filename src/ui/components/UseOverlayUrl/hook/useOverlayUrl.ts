@@ -1,7 +1,9 @@
+import { ReactU } from 'src/util/common/ReactU'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import { useCallback, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import effectLog = ReactU.effectLog
 
 
 
@@ -11,7 +13,7 @@ export const useOverlayUrl = (overlayName: string) => {
   
   // ...?overlay=dialog1&overlay=bottomSheet2&...
   const [isOpen, isLastOpen] = useMemo(() => {
-    const overlays = search.getAll(AppRoutes.overlayParam)
+    const overlays: string[] = search.getAll(AppRoutes.overlayParam)
     return [
       overlays.includes(overlayName),
       !!(overlays.length && overlays.at(-1) === overlayName),
@@ -26,14 +28,12 @@ export const useOverlayUrl = (overlayName: string) => {
       newSearch.append(AppRoutes.overlayParam, overlayName)
       setSearch(newSearch)
     }
-  }, [isOpen, search, overlayName])
+  }, [isOpen, search, setSearch, overlayName])
   
   
   
   
   const [needToClose, setNeedToCloseTrue, setNeedToCloseFalse] = useBool(false)
-  
-  
   
   
   useEffect(() => {

@@ -30,73 +30,77 @@ import BowArrowGradIc = SvgGradIcons.BowArrowGradIc
 
 
 
-const NavBar =
-React.memo(
-()=>{
-  
-  const titleText = useUiValues(TitleUiText)
-  
-  
-  return <>
+const NavBar = React.memo(
+  () => {
     
-    <Global
-      styles={css`
-        :root {
-          --bottom-nav-padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) - 10px), 0px);
-          --bottom-nav-height: calc(50px + var(--bottom-nav-padding-bottom));
-        }
-      `}
-    />
+    const titleText = useUiValues(TitleUiText)
     
-    <Frame
-      className={clsx('rrainuiBottomNavBar')}
-    >
-      
-      <NavLink to={RootRoute.profile[full]()}>
-        <Button css={NavButtonStyle.nav}>
-          <ProfileGradIc/>
-          <div>{titleText.profile}</div>
-        </Button>
-      </NavLink>
-      
-      <NavLink to={RootRoute.chat[full]()}>
-        <Button css={NavButtonStyle.nav}>
-          <ChatRoundGradIc/>
-          <div>{titleText.chat}</div>
-        </Button>
-      </NavLink>
-      
-      <NavLink to={RootRoute.findPairs[full]()}>
-        <Button css={NavButtonStyle.nav}>
-          <CardsHeartGradIc/>
-          <div>{titleText.findCouple}</div>
-        </Button>
-      </NavLink>
-      
-      <NavLink to={RootRoute.bowAndArrows[full]()}>
-        <Button css={NavButtonStyle.nav}>
-          <BowArrowGradIc/>
-          <div>{titleText.bowAndArrows}</div>
-        </Button>
-      </NavLink>
-      
-      <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-        {overlay=><>
-          <Button css={NavButtonStyle.nav}
-            onClick={overlay.open}
-          >
-            <Gear2Ic/>
-            <div>{titleText.settings}</div>
-          </Button>
+    
+    return (
+      <>
+        
+        <Global
+          styles={css`
+            :root {
+              --bottom-nav-padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) - 10px), 0px);
+              --bottom-nav-height: calc(50px + var(--bottom-nav-padding-bottom));
+            }
+          `}
+        />
+        
+        <Frame
+          className={clsx('rrainuiBottomNavBar')}
+        >
           
-          <QuickSettings isOpen={overlay.isOpen} close={overlay.close}/>
-        </>}
-      </UseOverlayUrl>
-      
-    </Frame>
-    
-  </>
-})
+          <NavLink to={RootRoute.profile[full]()}>
+            <Button css={NavButtonStyle.nav}>
+              <ProfileGradIc />
+              <div>{titleText.profile}</div>
+            </Button>
+          </NavLink>
+          
+          <NavLink to={RootRoute.chat[full]()}>
+            <Button css={NavButtonStyle.nav}>
+              <ChatRoundGradIc />
+              <div>{titleText.chat}</div>
+            </Button>
+          </NavLink>
+          
+          <NavLink to={RootRoute.findPairs[full]()}>
+            <Button css={NavButtonStyle.nav}>
+              <CardsHeartGradIc />
+              <div>{titleText.findCouple}</div>
+            </Button>
+          </NavLink>
+          
+          <NavLink to={RootRoute.bowAndArrows[full]()}>
+            <Button css={NavButtonStyle.nav}>
+              <BowArrowGradIc />
+              <div>{titleText.bowAndArrows}</div>
+            </Button>
+          </NavLink>
+          
+          <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+            {overlay => (
+              <>
+                <Button css={NavButtonStyle.nav}
+                  onClick={overlay.open}
+                >
+                  <Gear2Ic />
+                  <div>{titleText.settings}</div>
+                </Button>
+                
+                <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
+              </>
+            )}
+          </UseOverlayUrl>
+          
+        </Frame>
+        
+      </>
+    )
+  }
+)
 export default NavBar
 
 
@@ -108,7 +112,7 @@ const Frame = styled.nav`
   padding-bottom: var(--bottom-nav-padding-bottom);
   ${row};
   justify-content: space-between;
-  background: ${p=>p.theme.nav.bg[0]};
+  background: ${p => p.theme.nav.bg[0]};
 `
 
 
