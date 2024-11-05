@@ -53,20 +53,20 @@ todo make #{ state, isOuterRequest }
 
 
 export type SheetStableState =
-  |null // like 'closed' but when sheet can't be opened & can't be closed & sheet is not closable
-  |'opened' // sheet is opened
-  |'closed' // sheet is closed
+  | null // like 'closed' but when sheet can't be opened & can't be closed & sheet is not closable
+  | 'opened' // sheet is opened
+  | 'closed' // sheet is closed
 export type SheetIntermediateState =
-  |'open' // request to open instantly (if 'closed') (open to snap-index)
-  |'close' // request to close instantly (if not 'closed' or not 'closing')
-  |'snap' // request to snap to instantly (to snap-index)
+  | 'open' // request to open instantly (if 'closed') (open to snap-index)
+  | 'close' // request to close instantly (if not 'closed' or not 'closing')
+  | 'snap' // request to snap to instantly (to snap-index)
   
-  |'opening' // request to open animated / playing opening animation
-  |'closing' // request to close animated / playing closing animation
-  |'snapping' // request to snap animated / playing snapping animation
+  | 'opening' // request to open animated / playing opening animation
+  | 'closing' // request to close animated / playing closing animation
+  | 'snapping' // request to snap animated / playing snapping animation
   
-  |'dragging' // user is dragging the sheet
-  |'adjusting' // set state & snap according current height
+  | 'dragging' // user is dragging the sheet
+  | 'adjusting' // set state & snap according current height
 export type SheetState = SheetStableState | SheetIntermediateState
 
 
@@ -144,7 +144,7 @@ export const useBottomSheet = (
           sheetH: sheetD.height,
           headerH: headerD.height,
           contentH: contentD.height,
-          headerAndContentH: headerD.height+contentD.height,
+          headerAndContentH: headerD.height + contentD.height,
         })
       }
     },
@@ -201,7 +201,7 @@ export const useBottomSheet = (
   
   // default open idx, if sheet can be opened, then openIdx!==null
   const realDefaultOpenIdx = useMemo<number|null>(() => {
-    if (realFirstOpenIdx===null) return null
+    if (realFirstOpenIdx === null) return null
     
     const idx = options.defaultOpenIdx ?? null
     
@@ -209,7 +209,7 @@ export const useBottomSheet = (
       idx, [realFirstOpenIdx, lastIndex(snapPointsPx)]
     )
     
-    if (snapPoints===DefaultSheetSnaps) return DefaultSheetOpenIdx
+    if (snapPoints === DefaultSheetSnaps) return DefaultSheetOpenIdx
     
     return Math.ceil((realFirstOpenIdx + lastIndex(snapPointsPx)) / 2)
   }, [realFirstOpenIdx, options.defaultOpenIdx, snapPointsPx])
@@ -252,7 +252,7 @@ export const useBottomSheet = (
         const startH = sheetSpring.height.get()
         sheetSpring.height.set(startH)
         const pathPercent = pathProgressPercent(startH, endH)
-        return pathPercent/lastSpeed*1.2*1000
+        return pathPercent / lastSpeed * 1.2 * 1000
       }()
       ;(async() => {
         const animation = await sheetSpring.height.start(
@@ -337,11 +337,11 @@ export const useBottomSheet = (
       const toCloseSnap = closeIdx
       
       const toOpenHeight = function() {
-        if (toOpenSnap===null) return 0
+        if (toOpenSnap === null) return 0
         return snapPointsPx[toOpenSnap]
       }()
       const toCloseHeight = function() {
-        if (toCloseSnap===null) return 0
+        if (toCloseSnap === null) return 0
         return snapPointsPx[toCloseSnap]
       }()
       

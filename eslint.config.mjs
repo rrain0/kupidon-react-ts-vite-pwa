@@ -57,6 +57,8 @@ export default [
     ...ts.configs.recommended,
     {
       rules: {
+        'eslint no-unused-expressions': 'off',
+        '@typescript-eslint/no-unused-expressions': 'off',
         'no-constant-condition': 'off',
         '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-expect-error': false }],
         '@typescript-eslint/no-unused-vars': 'off',
@@ -158,9 +160,38 @@ export default [
       '@stylistic/function-paren-newline': 'off',
       '@stylistic/generator-star-spacing': 'off',
       '@stylistic/implicit-arrow-linebreak': 'off',
+      // https://eslint.style/rules/js/indent
       '@stylistic/indent': ['error', 2, {
+        // numbers are multipliers for base indent
+        SwitchCase: 1,
+        VariableDeclarator: 1,
+        outerIIFEBody: 1,
         MemberExpression: 1,
-        ignoreComments: true,
+        FunctionDeclaration: {
+          parameters: 1,
+          body: 1,
+        },
+        FunctionExpression: {
+          parameters: 1,
+          body: 1,
+        },
+        StaticBlock: {
+          body: 1,
+        },
+        CallExpression: {
+          arguments: 1,
+        },
+        ArrayExpression: 1,
+        ObjectExpression: 1,
+        ImportDeclaration: 1,
+        flatTernaryExpressions: false,
+        offsetTernaryExpressions: true,
+        // https://eslint.org/docs/latest/extend/selectors
+        // https://astexplorer.net/
+        // config: lang: JavaScript, parser: @typescript-eslint/parser
+        ignoredNodes: ['TsModuleBlock > BlockStatement'],
+        ignoreComments: false,
+        tabLength: 2,
       }],
       //'@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true/*, align: 'value'*/ }],
       '@stylistic/key-spacing': 'off',

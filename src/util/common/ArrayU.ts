@@ -225,7 +225,7 @@ export namespace ArrayU {
   
   export const diff = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
+    comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   )
   : [(number | undefined)[], (number | undefined)[]] => {
     const fwd: (number | undefined)[] = Array(arr1.length).fill(undefined)
@@ -268,7 +268,7 @@ export namespace ArrayU {
   }
   export const diff2 = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
+    comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   )
   : [DiffObj<T1, T2>[], DiffObj<T2, T1>[]] => {
     const [fwd, back] = diff(arr1, arr2, comparator)
@@ -328,8 +328,8 @@ export namespace ArrayU {
   
   export const merge = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   merger: MergerIndexed<T1, T2>,
-   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
+    merger: MergerIndexed<T1, T2>,
+    comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   ): [T1[], T2[]] => {
     const newArr1 = [...arr1]
     const newArr2 = [...arr2]
@@ -348,8 +348,8 @@ export namespace ArrayU {
   
   export const combine = <T1, T2 = T1>
   (arr1: T1[], arr2: T2[],
-   combiner: CombinerIndexed<T1, T2>,
-   comparator: ComparatorEq<T1, T2> = defaultComparatorEq
+    combiner: CombinerIndexed<T1, T2>,
+    comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   ): T1[] => {
     const newArr1 = [...arr1]
     const [fwd] = diff(arr1, arr2, comparator)

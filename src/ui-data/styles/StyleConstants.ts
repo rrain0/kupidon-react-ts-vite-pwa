@@ -12,6 +12,6 @@ export namespace StyleConstants {
   export const minRatioPort = 9 / 16
   export const maxRatioPort = 3 / 4
   
-  export const shadow = (color: string) => `box-shadow: 0px 4px 15px 0px ${color};`
+  //export const shadow = (color: string) => `box-shadow: 0px 4px 15px 0px ${color};`
   
 }

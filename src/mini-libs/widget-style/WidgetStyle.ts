@@ -10,6 +10,10 @@ import RecordRo = TypeU.RecordRo
 
 export namespace WidgetStyle {
   
+  {
+    const a = 1
+  }
+  
   /*
   Has Element list
   Has State List
