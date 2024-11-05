@@ -187,8 +187,8 @@ export default [
         flatTernaryExpressions: false,
         offsetTernaryExpressions: true,
         // https://eslint.org/docs/latest/extend/selectors
-        // https://astexplorer.net/
-        // config: lang: JavaScript, parser: @typescript-eslint/parser
+        // https://astexplorer.net/ config: lang: JavaScript, parser: @typescript-eslint/parser
+        // Array of selectors with AST tokens
         ignoredNodes: ['TsModuleBlock > BlockStatement'],
         ignoreComments: false,
         tabLength: 2,
