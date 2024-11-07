@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import { css } from '@emotion/react'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'

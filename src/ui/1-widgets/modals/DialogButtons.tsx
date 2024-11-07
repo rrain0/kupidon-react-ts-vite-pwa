@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'

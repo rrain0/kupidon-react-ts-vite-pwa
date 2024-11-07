@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { ScrollbarOverlayStyle } from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlayStyle.ts'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import Elem = WidgetStyle0.Elem0

@@ -12,7 +12,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import row = EmotionCommon.row
 import Gear2Ic = SvgIcons.Gear2Ic
 import RootRoute = AppRoutes.RootRoute

@@ -1,6 +1,6 @@
 import { ReactU } from 'src/util/react/ReactU.ts'
 import React from 'react'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import contents = EmotionCommon.contents
 import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
 import ChildrenProps = ReactU.Children

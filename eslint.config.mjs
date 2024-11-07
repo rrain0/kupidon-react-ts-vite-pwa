@@ -185,7 +185,7 @@ export default [
         ObjectExpression: 1,
         ImportDeclaration: 1,
         flatTernaryExpressions: false,
-        offsetTernaryExpressions: true,
+        offsetTernaryExpressions: false,
         // https://eslint.org/docs/latest/extend/selectors
         // https://astexplorer.net/ config: lang: JavaScript, parser: @typescript-eslint/parser
         // Array of selectors with AST tokens

@@ -60,15 +60,15 @@ export namespace ArrayU {
   
   
   export const eq = <A, B>(
-    arr1: A[] | empty,
-    arr2: B[] | empty,
-    comparator: ComparatorEq<A, B> = defaultComparatorEq
+    arr1: readonly A[] | empty,
+    arr2: readonly B[] | empty,
+    valueComparator: ComparatorEq<A, B> = defaultComparatorEq
   ): boolean => {
     if (arr1 === arr2) return true
     if (!arr1 || !arr2) return false
     if (arr1.length !== arr2.length) return false
     for (let i = 0; i < arr1.length; i++) {
-      if (!comparator(arr1[i], arr2[i])) return false
+      if (!valueComparator(arr1[i], arr2[i])) return false
     }
     return true
   }

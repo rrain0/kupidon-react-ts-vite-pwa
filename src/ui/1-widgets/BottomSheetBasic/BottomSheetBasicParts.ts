@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import center = EmotionCommon.center
 

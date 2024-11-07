@@ -18,7 +18,7 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import col = EmotionCommon.col
 import AddModuleIc = SvgIcons.AddModuleIc

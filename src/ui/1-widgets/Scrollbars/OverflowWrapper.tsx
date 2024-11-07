@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import ScrollbarOverlay from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlay.tsx'
 import { ScrollbarOverlayStyle } from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import UseScrollbars from 'src/ui/1-widgets/Scrollbars/UseScrollbars.tsx'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import hideScrollbar = EmotionCommon.noScrollbars
 import React, { useRef } from 'react'

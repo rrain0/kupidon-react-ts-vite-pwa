@@ -30,7 +30,7 @@ import {
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { RangeU } from 'src/util/common/RangeU'
@@ -282,7 +282,7 @@ const ProfilePhotos = React.memo(
                     position: relative;
                     ${center};
                   `}
-                  ref={value => photoFrameRefs.current[i]=value}
+                  ref={value => photoFrameRefs.current[i] = value}
                 >
                   
                   

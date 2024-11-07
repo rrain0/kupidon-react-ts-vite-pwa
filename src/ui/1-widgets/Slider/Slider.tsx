@@ -162,7 +162,6 @@ const Slider = React.memo(
       const [isDragging, setIsDragging] = useState(false)
       const [getDragStartProgress, setDragStartProgress] = useRefGetSet(0) // 0..100
       const [getDragProgress, setDragProgress] = useRefGetSet(0) // any number in 0..100 units
-      // todo add px distance between start & curr progress
       
       const [getValueProgress, setValueProgress] = useRefGetSet(0)
       
@@ -255,7 +254,7 @@ const Slider = React.memo(
       // forbid draw to screen before data from element ref are available
       useAwaitMounting()
       
-      // forbid content selection for all elements while dragging scrollbar
+      // forbid content selection for all elements while dragging
       useNoSelect(isDragging)
       
       

@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import commonCss from 'src/ui-data/styles/common.module.scss'
+import commonCss from 'src/ui-data/style/common.module.scss'
 
 
 
 
-export const useNoSelect = (lock: boolean | undefined = false) => {
+export const useNoSelect = (lock: boolean = false) => {
   useEffect(
     () => {
       const root = document.documentElement // get html

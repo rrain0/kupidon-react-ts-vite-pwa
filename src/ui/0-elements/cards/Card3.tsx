@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
-import { StyleConstants } from 'src/ui-data/styles/StyleConstants'
+import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import col = EmotionCommon.col

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'

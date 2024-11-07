@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'

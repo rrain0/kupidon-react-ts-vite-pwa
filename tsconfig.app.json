@@ -31,10 +31,6 @@
     "noFallthroughCasesInSwitch": true,
     "useDefineForClassFields": true, // enables some modern patterns for class properties initialization
     
-    "plugins": [
-      { "name": "typescript-plugin-css-modules" }
-    ],
-    
     // path aliases
     "baseUrl": ".",
     "paths": {

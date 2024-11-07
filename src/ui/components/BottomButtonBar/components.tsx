@@ -8,7 +8,7 @@ import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
 import QuickSettingsButton from 'src/ui/0-elements/QuickSettingsButton.tsx'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'

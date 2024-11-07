@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { atom, useRecoilValue } from 'recoil'
-import { EmotionCommon } from 'src/ui-data/styles/EmotionCommon.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 
 
