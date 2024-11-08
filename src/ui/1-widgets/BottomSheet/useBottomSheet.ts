@@ -26,6 +26,8 @@ import lastIndex = ArrayU.lastIndex
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
 import notExists = TypeU.notExists
+import Exists = TypeU.Exists
+import Present = TypeU.Present
 
 
 
@@ -74,13 +76,15 @@ export type SheetSnapPoints = (number | string)[]
 export type SheetSnapIdx = number | null
 
 
-export const DefaultSheetSnaps: SheetSnapPoints
-  = [0, '15%', 'free', 'fit-content', '50%', 'free', '80%']
-export const DefaultSheetOpenIdx: number = 3
-
-export const DefaultSheetSnaps2: SheetSnapPoints
-  = [0, '15%', 'free', 'fit-content', 'free', '80%']
-export const DefaultSheetOpenIdx2: number = 3
+export type SheetSnaps = Present<Pick<UseBottomSheetOptions, 'snapPoints' | 'defaultOpenIdx'>>
+export const SheetSnapsHalfScreen: SheetSnaps = {
+  snapPoints: [0, '15%', 'free', 'fit-content', '50%', 'free', '80%'] as SheetSnapPoints,
+  defaultOpenIdx: 3,
+}
+export const SheetSnaps80: SheetSnaps = {
+  snapPoints: [0, '15%', 'free', 'fit-content', 'free', '80%'] as SheetSnapPoints,
+  defaultOpenIdx: 3,
+}
 
 
 export type ComputedBottomSheetDimens = {
@@ -99,9 +103,9 @@ export type UseBottomSheetOptions = {
   setSnapIdx: Setter<SheetSnapIdx>
 } & PartialUndef<{
   snapPoints: SheetSnapPoints
+  defaultOpenIdx: number
   animationDuration: number
   closeable: boolean
-  defaultOpenIdx: number
 }>
 
 
@@ -183,7 +187,7 @@ export const useBottomSheet = (
   // non-zero len
   const snapPoints = useMemo<Array<number | string>>(() => {
     if (options.snapPoints?.length) return options.snapPoints
-    return DefaultSheetSnaps
+    return SheetSnapsHalfScreen.snapPoints
   }, [...(options.snapPoints??[])])
   
   // non-zero len
@@ -204,7 +208,7 @@ export const useBottomSheet = (
   }, [snapPointsPx])
   
   // default open idx, if sheet can be opened, then openIdx!==null
-  const realDefaultOpenIdx = useMemo<number|null>(() => {
+  const realDefaultOpenIdx = useMemo<number | null>(() => {
     if (realFirstOpenIdx === null) return null
     
     const idx = options.defaultOpenIdx ?? null
@@ -212,8 +216,6 @@ export const useBottomSheet = (
     if (idx !== null) return RangeU.clamp(
       idx, [realFirstOpenIdx, lastIndex(snapPointsPx)]
     )
-    
-    if (snapPoints === DefaultSheetSnaps) return DefaultSheetOpenIdx
     
     return Math.ceil((realFirstOpenIdx + lastIndex(snapPointsPx)) / 2)
   }, [realFirstOpenIdx, options.defaultOpenIdx, snapPointsPx])

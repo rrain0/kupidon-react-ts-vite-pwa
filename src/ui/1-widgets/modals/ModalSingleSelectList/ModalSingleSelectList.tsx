@@ -5,10 +5,7 @@ import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import {
-  DefaultSheetOpenIdx2,
-  DefaultSheetSnaps2,
-} from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
+import { SheetSnaps80 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
@@ -106,8 +103,7 @@ const ModalSingleSelectList = ReactU.memo(
       <UseBottomSheetState
         isOpen={isOpen}
         onClose={onClose}
-        snapPoints={DefaultSheetSnaps2}
-        defaultOpenIdx={DefaultSheetOpenIdx2}
+        {...SheetSnaps80}
       >
         { sheetProps => (
           <>

@@ -2,9 +2,8 @@ import { useStateSync } from 'src/util/react-state/useStateSync.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  DefaultSheetOpenIdx, DefaultSheetSnaps,
   SheetSnapIdx,
-  SheetSnapPoints,
+  SheetSnapPoints, SheetSnapsHalfScreen,
   SheetState, UseBottomSheetOptions,
 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet.ts'
 import Callback = TypeU.Callback
@@ -20,7 +19,7 @@ export type UseBottomSheetStateProps = {
   defaultOpenIdx: number
   snapPoints: SheetSnapPoints
   closeable: boolean
-  children: (props: UseBottomSheetStateRenderProps)=>React.ReactNode
+  children: (props: UseBottomSheetStateRenderProps) => React.ReactNode
 }>
 
 
@@ -30,8 +29,8 @@ const UseBottomSheetState = React.memo(
     const {
       isOpen: isOpenExternal,
       onClose,
-      defaultOpenIdx = DefaultSheetOpenIdx,
-      snapPoints = DefaultSheetSnaps,
+      snapPoints = SheetSnapsHalfScreen.snapPoints,
+      defaultOpenIdx = SheetSnapsHalfScreen.defaultOpenIdx,
       closeable = true,
     } = props
     

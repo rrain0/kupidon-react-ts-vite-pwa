@@ -23,6 +23,10 @@ export namespace TypeU {
   export type PartialUndef<O extends object> = {
     [Prop in keyof O]+?: O[Prop] | undefined
   }
+  // Remove Partial Undefined
+  export type Present<O extends object> = {
+    [Prop in keyof O]-?: Exclude<O[Prop], undefined>
+  }
   // Add ReadOnly
   export type Ro<O extends object> = {
     +readonly [Prop in keyof O]: O[Prop]
