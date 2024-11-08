@@ -10,6 +10,10 @@ import SelectItemIndicator
 import {
   SelectItemIndicatorS
 } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
+import {
+  DefaultSheetOpenIdx2,
+  DefaultSheetSnaps2,
+} from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import {
   getCommonIndicatorsDataDefault,
@@ -101,6 +105,8 @@ const ModalMultiSelectList = ReactU.memo(
       <UseBottomSheetState
         isOpen={isOpen}
         onClose={onClose}
+        snapPoints={DefaultSheetSnaps2}
+        defaultOpenIdx={DefaultSheetOpenIdx2}
       >
         { sheetProps => (
           <>
