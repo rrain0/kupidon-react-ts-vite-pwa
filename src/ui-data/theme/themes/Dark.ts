@@ -79,6 +79,7 @@ export const DarkProps: ThemeProps = {
     bg2:             '#999999',
     content:        ['#000000'],
     bgFocus:        ['#7b7b7b'],
+    bgFocus2:        '#7b7b7b',
     contentFocus:   ['#000000'],
   },
   buttonSecondary: {

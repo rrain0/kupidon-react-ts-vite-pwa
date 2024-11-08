@@ -79,6 +79,7 @@ export const LightProps: ThemeProps = {
     bg2:           '#dddddd',
     content:       ['#000000'],
     bgFocus:       ['#dddddd'],
+    bgFocus2:      '#dddddd',
     contentFocus:  ['#000000'],
   },
   buttonSecondary: {

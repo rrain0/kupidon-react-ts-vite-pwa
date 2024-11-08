@@ -61,7 +61,7 @@ const ButtonsContainer = styled.div`
 const CancelButton = React.memo(
   ({ onClick }: { onClick: Callback }) => {
     return (
-      <Button css={IconButtonStyle.icBig2Normal}
+      <Button css={IconButtonStyle.icBig2Normal2}
         onClick={onClick}
       >
         <CrossIc />

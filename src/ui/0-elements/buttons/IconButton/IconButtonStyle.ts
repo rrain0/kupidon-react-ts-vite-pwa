@@ -49,9 +49,13 @@ export namespace IconButtonStyle {
   `
   const icFilledAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
-    ${ButtonS.W.use.s.normal().e.button().thisUse} {
-      background-color: ${t.buttonNormal.bg2};
+    ${W.use.s.normal().e.icon().thisUse} {
+      ${W.e.icon.e.p.size.set('100%')};
+      ${W.e.icon.e.p.color.set(t.buttonNormal.content[0])};
     }
+  `
+  const icFilledAddColorNormal2 = (t: AppTheme.Theme) => css`
+    // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
       ${W.e.icon.e.p.color.set(t.buttonNormal.content[0])};
@@ -81,6 +85,10 @@ export namespace IconButtonStyle {
   export const icBig2Normal = (t: AppTheme.Theme) => css`
     ${ButtonS.filledRoundBig2Normal(t)};
     ${icFilledAddColorNormal(t)};
+  `
+  export const icBig2Normal2 = (t: AppTheme.Theme) => css`
+    ${ButtonS.filledRoundBig2Normal2(t)};
+    ${icFilledAddColorNormal2(t)};
   `
   export const icBig2Accent = (t: AppTheme.Theme) => css`
     ${ButtonS.filledRoundBig2Accent(t)};

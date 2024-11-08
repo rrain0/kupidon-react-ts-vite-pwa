@@ -98,28 +98,6 @@ const Tests = React.memo(
           </Pages.ContentForm>
         </Pages.SafeInsets>
         
-        {/*
-        {(props.canSubmit || props.formProps.hasChanges) && (
-          <TopButtonBarFrame>
-            { props.formProps.hasChanges && (
-              <Button
-                css={ButtonS.outlinedRoundedSmallNormal}
-                onClick={props.formProps.resetUserFields}
-              >
-                {actionText.cancel}
-              </Button>
-            )}
-            { props.canSubmit && !props.isLoading && (
-              <Button css={ButtonS.filledRoundedSmallAccent}
-                onClick={props.submit}
-              >
-                {actionText.save}
-              </Button>
-            )}
-          </TopButtonBarFrame>
-        )}
-         */}
-        
       </>
     )
   }

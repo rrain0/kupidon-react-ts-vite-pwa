@@ -94,6 +94,7 @@ export namespace AppTheme {
       bg2:           string
       content:       string[]
       bgFocus:       string[]
+      bgFocus2:      string
       contentFocus:  string[]
     }
     // button that almost invisible

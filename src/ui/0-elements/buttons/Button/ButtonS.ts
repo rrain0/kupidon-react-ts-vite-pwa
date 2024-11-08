@@ -508,6 +508,34 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
     }
   `
+  // type: filled, shape: rounded, add color: normal2
+  export const filledRoundedAddColorNormal2 = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      background-color: ${t.buttonNormal.bg2};
+      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+    }
+    
+    // state: hover
+    ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
+      background-color: ${t.buttonNormal.bgFocus2};
+      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
+    }}
+    
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.button().thisUse} {
+      background-color: ${t.buttonNormal.bgFocus2};
+    }
+    
+    // state: disabled
+    ${W.use.s.disabled().e.button().thisUse} {
+      background-color: ${t.elementDisabled.bg[0]};
+      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+    }
+  `
   // type: filled, shape: rounded, add color: accent
   export const filledRoundedAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
@@ -637,27 +665,25 @@ export namespace ButtonS {
     }
   `
   
-  // type: filled, shape: round, add shadow
-  const filledRoundAddShadow = (t: AppTheme.Theme) => css`
-    // state: normal
-    ${W.use.s.normal().e.button().thisUse} {
-      ${StyleConstants.shadow(t.containerNormal.shadow[0])};
-    }
-  `
   
   
-  
-  // type: filled, shape: round, size: big2, color: accent
-  export const filledRoundBig2Accent = (t: AppTheme.Theme) => css`
-    ${filledRoundNormal};
-    ${filledRoundAddSizeBig2};
-    ${filledRoundedAddColorAccent(t)};
-  `
   // type: filled, shape: round, size: big2, color: normal
   export const filledRoundBig2Normal = (t: AppTheme.Theme) => css`
     ${filledRoundNormal};
     ${filledRoundAddSizeBig2};
     ${filledRoundedAddColorNormal(t)};
+  `
+  // type: filled, shape: round, size: big2, color: normal2
+  export const filledRoundBig2Normal2 = (t: AppTheme.Theme) => css`
+    ${filledRoundNormal};
+    ${filledRoundAddSizeBig2};
+    ${filledRoundedAddColorNormal2(t)};
+  `
+  // type: filled, shape: round, size: big2, color: accent
+  export const filledRoundBig2Accent = (t: AppTheme.Theme) => css`
+    ${filledRoundNormal};
+    ${filledRoundAddSizeBig2};
+    ${filledRoundedAddColorAccent(t)};
   `
   
   
