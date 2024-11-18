@@ -7,10 +7,6 @@ export namespace MathU {
   
   
   
-  export const mapNaN = <T = number>(n: number, replacement: T) => isNaN(n) ? replacement : n
-  
-  
-  
   /**
    * Функция округления
    * @param n Значение

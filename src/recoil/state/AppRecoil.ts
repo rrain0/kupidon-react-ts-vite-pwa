@@ -6,14 +6,14 @@ import { atom } from 'recoil'
 export type AppRecoilType = {
   canInstall: boolean
   isDraggingFiles: boolean
-  isUsingGestures: false | string
+  gesturesBusyBy: undefined | string
   
   showDevOverlay: boolean
 }
 const Default: AppRecoilType = {
   canInstall: false,
   isDraggingFiles: false,
-  isUsingGestures: false,
+  gesturesBusyBy: undefined,
   showDevOverlay: false,
 }
 export const AppRecoil = atom<AppRecoilType>({

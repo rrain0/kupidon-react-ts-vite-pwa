@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -8,6 +8,12 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
+import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
+import { useDragProgress } from 'src/util/drag/useDragProgress'
+import { useBool } from 'src/util/react-state/useBool'
+import { ReactU } from 'src/util/react/ReactU'
+import { useNoSelect } from 'src/util/view/useNoSelect'
+import { useNoTouchAction } from 'src/util/view/useNoTouchAction'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
@@ -19,6 +25,7 @@ import center = EmotionCommon.center
 import fill = EmotionCommon.fill
 import minRatioPort = StyleConstants.minRatioPort
 import maxRatioPort = StyleConstants.maxRatioPort
+import effectLog = ReactU.effectLog
 
 
 
@@ -31,21 +38,58 @@ export type PreviewProps = {
 
 const Preview = React.memo(
   (props: PreviewProps) => {
-    
     const {
       photos,
       name,
       aboutMe,
     } = props.formValues
     
+    effectLog('photos', photos)
     
     
     
-    console.log('photos', photos)
     
     const availablePhotos = useMemo(() => {
-      return photos.filter(it => it.isReady)
+      return photos.filter(it => !it.isEmpty)
     }, [photos])
+    
+    
+    
+    
+    
+    
+    
+    const [isDragging, startDragging, endDragging] = useBool(false)
+    
+    useNoSelect(isDragging)
+    useNoTouchAction(isDragging)
+    const canUseGestures = useLockAppGestures(isDragging)
+    
+    
+    const photosBoxRef = useRef<HTMLDivElement>(null)
+    
+    
+    // todo use new value nimMax when snap to new index
+    
+    const {
+      onTrackDrag,
+    } = useDragProgress({
+      getTrackProps: () => {
+        const pb = photosBoxRef.current
+        if (pb) {
+          const p = getViewProps(photosBoxRef.current)
+          return { x: p.x, w: p.w, y: p.y, h: p.h }
+        }
+        return { x: 0, w: 0, y: 0, h: 0 }
+      },
+      onDrag: (progressX, progressY, type) => {
+        console.log('progress X, Y, type', progressX, progressY, type)
+      },
+      onDragStart: () => { startDragging() },
+      onDragging: () => { },
+      onDragEnd: () => { endDragging() },
+    })
+    
     
     const frame2Ref = useResizeRef<HTMLElement>(useCallback((elem) => {
       if (elem) {
@@ -59,7 +103,6 @@ const Preview = React.memo(
         p.setWhCssProps({ w, h })
       }
     }, []))
-    
     
     
     
@@ -82,9 +125,12 @@ const Preview = React.memo(
       <Pages.SafeInsets>
         <PreviewFrame>
           <PreviewFrame2 ref={frame2Ref}>
-            <PhotosBox>
+            <PhotosBox ref={photosBoxRef} {...onTrackDrag()}>
               {availablePhotos.toReversed().map((p, i) => (
-                <PhotoBox key={p.id} i={5 - i}>
+                <PhotoBox
+                  key={p.id}
+                  i={availablePhotos.length - 1 - i}
+                >
                   <Photo src={p.dataUrl} />
                 </PhotoBox>
               ))}
@@ -144,6 +190,9 @@ const PhotosBox = styled.div`
   align-items: end;
   //background-color: #7FFFD455;
   border-radius: 16px;
+  
+  // allow intercept only single finger up/down swipe gestures
+  touch-action: pan-y;
 `
 const PhotoBox = styled.div<{ i: number }>`
   width: ${p => 100 - 5 * p.i}%;
@@ -156,6 +205,8 @@ const Photo = styled.img`
   ${fill};
   object-position: center;
   object-fit: cover;
+  
+  pointer-events: none; // or attr draggable="false"
 `
 
 

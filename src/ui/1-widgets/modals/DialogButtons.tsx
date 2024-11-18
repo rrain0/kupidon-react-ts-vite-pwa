@@ -28,6 +28,7 @@ type DialogButtonsProps = Puro<{
   onOk: Callback
   onAccept: Callback
   acceptVariant: 'text' | 'filledRounded'
+  acceptSize: 'normal2' | 'big'
 }>
 const DialogButtons = React.memo(
   (props: DialogButtonsProps) => {

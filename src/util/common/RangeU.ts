@@ -1,5 +1,5 @@
-import { MathU } from 'src/util/common/MathU'
-import mapNaN = MathU.mapNaN
+import { TypeU } from 'src/util/common/TypeU'
+import mapNaN = TypeU.mapNaN
 
 
 

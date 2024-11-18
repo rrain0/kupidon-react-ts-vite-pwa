@@ -51,10 +51,10 @@ React.forwardRef<TabsRefElement, TabsProps>(
   const [tabFrameRef] = useElemRef()
   useImperativeHandle(forwardedRef, () => tabFrameRef.current!, [])
   
-  const isGesturesBusy = useLockAppGestures(tabsState === 'dragging')
+  const canUseGestures = useLockAppGestures(tabsState === 'dragging')
   useLayoutEffect(() => { 
-    if (isGesturesBusy) setTabsState('snap')
-  }, [isGesturesBusy, tabsState])
+    if (!canUseGestures) setTabsState('snap')
+  }, [canUseGestures, tabsState])
   
   const {
     isReady,

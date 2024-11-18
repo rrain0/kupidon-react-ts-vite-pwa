@@ -8,7 +8,7 @@ export namespace TypeU {
   export type anyval = {} | null | undefined
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
-  export type emptyObj = Record<never, never> // todo need to fix
+  //export type emptyObj = Record<never, never> // need to fix
   export type HtmlBool = true | undefined
   
   export const noop = () => {}
@@ -83,6 +83,14 @@ export namespace TypeU {
   }
   
   
+  export function isFinitenumber<T, N extends number>(v: T | N): v is N {
+    return typeof v === 'number' && isFinite(v);
+  }
+  export function isInt<T, N extends number>(v: T | N): v is N {
+    return typeof v === 'number' && Number.isInteger(v);
+  }
+  
+  
   
   
   export type Callback = () => void
@@ -114,5 +122,9 @@ export namespace TypeU {
   export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a === b
   
   
-  
+  export const mapNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
+  export const mapNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
+  export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
+  export const mapNotnumberOrNegative = <T, R>(v: T, r: R) => isnumber(v) && v >= 0 ? v : r
+  export const mapNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
 }

@@ -134,13 +134,13 @@ const ProfilePhotos = React.memo(
     // forbid gesture interception by browser
     const isLockGestures = dragState === 'dragging' || progressAnimLockGestures
     useNoTouchAction(isLockGestures)
-    const isGesturesBusy = useLockAppGestures(isLockGestures)
+    const canUseGestures = useLockAppGestures(isLockGestures)
     useLayoutEffect(() => {
-      if (isGesturesBusy) {
+      if (!canUseGestures) {
         setDragState(undefined)
         setCanClick(false)
       }
-    }, [isGesturesBusy, dragState, canClick])
+    }, [canUseGestures, dragState, canClick])
     
     
     // swap photos
@@ -508,14 +508,14 @@ const photoDraggableBox = css`
 
 
 const photoImgStyle = css`
-  pointer-events: none;
-  //user-select: none;
-  //touch-action: none;
-
   width: 100%;
   aspect-ratio: 1;
   object-position: center;
   object-fit: cover;
+
+  pointer-events: none;
+  //user-select: none;
+  //touch-action: none;
 `
 
 
