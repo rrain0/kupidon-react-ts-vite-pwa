@@ -10,6 +10,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
+import { RangeU } from 'src/util/common/RangeU'
 import { useDragProgress } from 'src/util/drag/useDragProgress'
 import { useBool } from 'src/util/react-state/useBool'
 import { ReactU } from 'src/util/react/ReactU'
@@ -69,8 +70,9 @@ const Preview = React.memo(
     
     const photosBoxRef = useRef<HTMLDivElement>(null)
     
-    
+    // start progress y in (..0..100..) * availablePhotos.length
     const spySpring = useSpringValue(0)
+    // delta progress y in (..0..100..) * availablePhotos.length
     const dpySpring = useSpringValue(0)
     
     
@@ -90,7 +92,7 @@ const Preview = React.memo(
         return { x: 0, w: 0, y: 0, h: 0 }
       },
       onDrag: ({ dpy }) => {
-        dpySpring.set(dpy)
+        dpySpring.set(dpy/*  / availablePhotos.length */)
       },
       onDragStart: () => {
         startDragging()
@@ -142,20 +144,29 @@ const Preview = React.memo(
         <PreviewFrame>
           <PreviewFrame2 ref={frame2Ref}>
             <PhotosBox ref={photosBoxRef} {...onTrackDrag()}>
-              {availablePhotos.toReversed().map((p, i) => (
-                <PhotoBox
-                  key={p.id}
-                  i={availablePhotos.length - 1 - i}
-                  style={{
-                    y: to(
-                      [spySpring, dpySpring],
-                      (spy, dpy) => `${spy + dpy}%`,
-                    ),
-                  }}
-                >
-                  <Photo src={p.dataUrl} />
-                </PhotoBox>
-              ))}
+              {availablePhotos.map((p, i) => {
+                return (
+                  <PhotoBox
+                    key={`${i} ${p.id}`}
+                    i={i}
+                    style={{
+                      y: to(
+                        [spySpring, dpySpring],
+                        (spy, dpy) => {
+                          const py = RangeU.mapClamp(
+                            spy + dpy,
+                            [i * 100, (i + 1) * 100],
+                            [0, 100],
+                          )
+                          return `${py}%`
+                        },
+                      ),
+                    }}
+                  >
+                    <Photo src={p.dataUrl} />
+                  </PhotoBox>
+                )
+              }).toReversed()}
             </PhotosBox>
           </PreviewFrame2>
         </PreviewFrame>
