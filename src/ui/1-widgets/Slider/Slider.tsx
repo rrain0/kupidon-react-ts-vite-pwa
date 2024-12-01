@@ -13,7 +13,7 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import zeroBasedRange = RangeU.zeroBasedRange
+import zeroBasedRange = RangeU.zeroBased
 import Setter = TypeU.Setter
 import NumRangeRo = RangeU.NumRangeRo
 import Callback1 = TypeU.Callback1

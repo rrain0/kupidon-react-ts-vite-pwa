@@ -10,9 +10,11 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
+import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useDragProgress } from 'src/util/drag/useDragProgress'
 import { useBool } from 'src/util/react-state/useBool'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { ReactU } from 'src/util/react/ReactU'
 import { useNoSelect } from 'src/util/view/useNoSelect'
 import { useNoTouchAction } from 'src/util/view/useNoTouchAction'
@@ -28,7 +30,16 @@ import fill = EmotionCommon.fill
 import minRatioPort = StyleConstants.minRatioPort
 import maxRatioPort = StyleConstants.maxRatioPort
 import effectLog = ReactU.effectLog
+import mod = MathU.mod
 
+
+
+/*
+TODO
+  Состояния фото: загрузка / обработка... взять из profile summary
+  Snap points & инерция
+  
+ */
 
 
 
@@ -54,6 +65,8 @@ const Preview = React.memo(
     const availablePhotos = useMemo(() => {
       return photos.filter(it => !it.isEmpty)
     }, [photos])
+    const cnt = availablePhotos.length
+    const maxCnt = 6
     
     
     
@@ -71,9 +84,17 @@ const Preview = React.memo(
     const photosBoxRef = useRef<HTMLDivElement>(null)
     
     // start progress y in (..0..100..) * availablePhotos.length
-    const spySpring = useSpringValue(0)
+    const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
     // delta progress y in (..0..100..) * availablePhotos.length
-    const dpySpring = useSpringValue(0)
+    const [getDProgressY, setDProgressY] = useRefGetSet(0)
+    
+    const pSpring = useSpringValue(0)
+    const updatePSpring = () => pSpring.set(getStartProgressY() + getDProgressY())
+    
+    /* const [currI, setCurrI] = useState(0)
+    to([spySpring, dpySpring], (spy, dpy) => {
+      setCurrI(Math.floor((spy + dpy) / 100))
+    }) */
     
     
     // todo use new value nimMax when snap to new index
@@ -92,15 +113,20 @@ const Preview = React.memo(
         return { x: 0, w: 0, y: 0, h: 0 }
       },
       onDrag: ({ dpy }) => {
-        dpySpring.set(dpy/*  / availablePhotos.length */)
+        setDProgressY(dpy)
+        updatePSpring()
       },
       onDragStart: () => {
         startDragging()
       },
       onDragging: () => { },
       onDragEnd: () => {
-        spySpring.set(spySpring.get() + dpySpring.get())
-        dpySpring.set(0)
+        setStartProgressY(RangeU.loop(
+          getStartProgressY() + getDProgressY(),
+          [0, cnt * 100]
+        ))
+        setDProgressY(0)
+        updatePSpring()
         endDragging()
       },
     })
@@ -144,21 +170,62 @@ const Preview = React.memo(
         <PreviewFrame>
           <PreviewFrame2 ref={frame2Ref}>
             <PhotosBox ref={photosBoxRef} {...onTrackDrag()}>
-              {availablePhotos.map((p, i) => {
+              {['top' as const, ...availablePhotos, 'bottom' as const].map((p, i0) => {
+                const i = i0 - 1
+                if (p === 'top') return (
+                  <React.Fragment key={p}>
+                  </React.Fragment>
+                )
+                if (p === 'bottom') return (
+                  <React.Fragment key={p}>
+                  </React.Fragment>
+                )
                 return (
                   <PhotoBox
-                    key={`${i} ${p.id}`}
-                    i={i}
+                    key={`photo ${p.id}`}
                     style={{
-                      y: to(
-                        [spySpring, dpySpring],
-                        (spy, dpy) => {
-                          const py = RangeU.mapClamp(
-                            spy + dpy,
-                            [i * 100, (i + 1) * 100],
-                            [0, 100],
+                      // @ts-expect-error
+                      order: to(
+                        [pSpring],
+                        (p) => {
+                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const o = cnt - 1 - displayedI
+                          //console.log('i o', i, o)
+                          return o
+                        },
+                      ),
+                      width: to(
+                        [pSpring],
+                        (p) => {
+                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const w = `${100 - (maxCnt - 1) * displayedI}%`
+                          //console.log('i o', i, o)
+                          return w
+                        },
+                      ),
+                      height: `${100 - (maxCnt - 1)}%`,
+                      transform: to(
+                        [pSpring],
+                        (p) => {
+                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          let y = -displayedI
+                          if (displayedI === 0) y += mod(p, 100)
+                          //console.log('i y', i, y)
+                          return `translateY(${y}%)`
+                        },
+                      ),
+                      opacity: to(
+                        [pSpring],
+                        (p) => {
+                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          let o = 100
+                          if (displayedI === 0) o = 100 - RangeU.map(
+                            mod(p, 100),
+                            [0, 30, 100],
+                            [0, 0, 100]
                           )
-                          return `${py}%`
+                          //console.log('i o', i, o)
+                          return `${o}%`
                         },
                       ),
                     }}
@@ -166,7 +233,7 @@ const Preview = React.memo(
                     <Photo src={p.dataUrl} />
                   </PhotoBox>
                 )
-              }).toReversed()}
+              })}
             </PhotosBox>
           </PreviewFrame2>
         </PreviewFrame>
@@ -226,13 +293,13 @@ const PhotosBox = styled.div`
   
   // allow intercept only single finger up/down swipe gestures
   touch-action: pan-y;
+  pointer-events: none;
 `
-const PhotoBox = styled(animated.div)<{ i: number }>`
-  width: ${p => 100 - 5 * p.i}%;
-  height: 95%;
-  translate: 0 ${p => -p.i}%;
+const PhotoBox = styled(animated.div)`
   border-radius: 16px;
   overflow: hidden;
+  
+  pointer-events: auto;
 `
 const Photo = styled.img`
   ${fill};

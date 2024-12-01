@@ -16,7 +16,7 @@ import PartialUndef = TypeU.PartialUndef
 import Mapper = TypeU.Mapper
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import NumRange = RangeU.NumRange
-import zeroBasedRange = RangeU.zeroBasedRange
+import zeroBasedRange = RangeU.zeroBased
 
 
 

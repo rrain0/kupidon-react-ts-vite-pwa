@@ -1,3 +1,4 @@
+import { MathU } from 'src/util/common/MathU'
 import { TypeU } from 'src/util/common/TypeU'
 import mapNaN = TypeU.mapNaN
 
@@ -6,6 +7,7 @@ import mapNaN = TypeU.mapNaN
 export namespace RangeU {
   
   
+  import mod = MathU.mod
   export type NumRange = [number, number]
   export type NumRangeNullable = [number | null, number | null]
   export type NumRangeEndNullable = [number, number | null]
@@ -26,18 +28,36 @@ export namespace RangeU {
     return curr < min ? min : curr > max ? max : curr
   }
   
+  
   /**
-   * Определение, находится ли текущее значение между минимальным и максимальным включительно
+   * Определение, находится ли текущее значение между минимальным и максимальным (по умолчанию включительно)
    * @param min Минимальное значение
    * @param curr Текущее значение
    * @param max Максимальное значение
-   * @returns {boolean} Результат сравнения
+   * @returns {boolean}
    */
-  export const has = (curr: number, [min, max]: NumRangeRo): boolean => curr >= min && curr <= max
+  export const has = (curr: number, [min, max]: NumRangeRo, minIncl = true, maxIncl = true): boolean => {
+    return curr > min && curr < max || minIncl && curr === min || maxIncl && curr === max
+  }
   
   
-  // hasExclusive
-  export const hasExcl = (curr: number, [min, max]: NumRangeRo): boolean => curr > min && curr < max
+  export const loop = (curr: number, range: NumRangeRo, minIncl = true, maxIncl = false): number => {
+    const zeroBasedRange = zeroBased(range)
+    const zeroBasedCurr = map(curr, range, zeroBasedRange)
+    let loopedZeroBasedCurr = mod(zeroBasedCurr, zeroBasedRange[1])
+    if (!minIncl && !maxIncl && loopedZeroBasedCurr === 0) {
+      throw new Error('Value on the edge of range and edge values not included')
+    }
+    if (!minIncl && loopedZeroBasedCurr === 0) {
+      loopedZeroBasedCurr = zeroBasedRange[1]
+    }
+    if (maxIncl && loopedZeroBasedCurr === 0 && zeroBasedCurr !== 0) {
+      loopedZeroBasedCurr = zeroBasedRange[1]
+    }
+    // @ts-expect-error
+    const loopedCurr = map(loopedZeroBasedCurr, zeroBasedRange, range)
+    return loopedCurr
+  }
   
   
   /**
@@ -83,7 +103,7 @@ export namespace RangeU {
   }
   
   
-  export const zeroBasedRange = (range: NumRangeRo): NumRange => {
+  export const zeroBased = (range: NumRangeRo): NumRange => {
     const toRange: NumRange = [0, range[1] - range[0]]
     return [
       map(range[0], range, toRange),

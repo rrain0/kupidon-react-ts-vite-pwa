@@ -60,13 +60,17 @@ export namespace MathU {
   
   
   /**
-   * Остаток от делния
-   * @param a Значение a
-   * @param b Значение b
-   * @returns {number} (a + b) % b
+   * Остаток от деления - альтернативная версия
+   * mod(2, 8) => 2
+   * mod(-2, 8) => 6
+   * mod(10, 8) => 2
+   * mod(-10, 8) => 6
+   * @param a Делимое
+   * @param b Делитель
+   * @returns {number} Остаток
    */
   export function mod(a: number, b: number): number {
-    return (a + b) % b
+    return ((a % b) + b) % b
   }
   
   // Целочисленное деление

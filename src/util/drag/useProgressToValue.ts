@@ -7,7 +7,7 @@ import { useMemoCompare } from 'src/util/react-state/useMemoCompare'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import NumRangeRo = RangeU.NumRangeRo
 import Setter = TypeU.Setter
-import zeroBasedRange = RangeU.zeroBasedRange
+import zeroBasedRange = RangeU.zeroBased
 import Puro = TypeU.Puro
 
 
