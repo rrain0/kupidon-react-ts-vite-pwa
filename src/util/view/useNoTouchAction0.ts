@@ -5,7 +5,7 @@ import PartialUndef = TypeU.PartialUndef
 
 
 
-
+// TODO remove
 /*
 * Аналогично CSS 'touch-action: none;'
 * Может отменить перехват жестов браузером уже ПОСЛЕ появления события.
