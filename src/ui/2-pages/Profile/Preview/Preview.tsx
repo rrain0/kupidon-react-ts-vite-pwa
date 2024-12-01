@@ -248,7 +248,7 @@ const Preview = React.memo(
                           backgroundImage: to(
                             [pSpring],
                             (p) => {
-                              const i = Math.floor(p / 100)
+                              const i = RangeU.loop(Math.floor(p / 100), [0, cnt])
                               if (i >= 0 && i < cnt) return `url(${availablePhotos[i].dataUrl})`
                               return undefined
                             },

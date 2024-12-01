@@ -4,10 +4,10 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 
 
-const prevent: string[] = []
+const prevent: Set<string> = new Set()
 
 const onTouch = (ev: Event) => {
-  if (prevent.length) {
+  if (prevent.size) {
     ev.preventDefault()
   }
 }
@@ -26,14 +26,14 @@ window.addEventListener('touchcancel', onTouch, { passive: false })
 export const useNoTouchAction = () => {
   const reactId = useId()
   useEffect(() => {
-    return () => void prevent.splice(prevent.findIndex(el => el === reactId), 1)
+    return () => void prevent.delete(reactId)
   }, [])
   
   const lock = useCallback(() => {
-    prevent.push(reactId)
+    prevent.add(reactId)
   }, [])
   const unlock = useCallback(() => {
-    prevent.splice(prevent.findIndex(el => el === reactId), 1)
+    prevent.delete(reactId)
   }, [])
   
   return [lock, unlock]

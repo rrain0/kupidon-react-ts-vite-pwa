@@ -24,7 +24,7 @@ export const useSnappedDrag = () => {
   const onDragging = () => {}
   const onDragEnd = () => {}
   
-  const {
+  /* const {
     setTrackStart,
     setTrackLen,
     onTrackDrag,
@@ -33,13 +33,13 @@ export const useSnappedDrag = () => {
     onDragStart,
     onDragging,
     onDragEnd,
-  })
+  }) */
   
   
   
-  setTrackStart(100)
+  /* setTrackStart(100)
   setTrackLen(100)
-  const drag = { ...onTrackDrag() }
+  const drag = { ...onTrackDrag() } */
   
   console.log('progress', getProgress())
   console.log('value', getValue())
