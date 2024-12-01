@@ -316,8 +316,8 @@ const PhotosBox = styled.div`
   //background-color: #7FFFD455;
   border-radius: 16px;
   
-  // allow intercept only single finger up/down swipe gestures
-  touch-action: pan-y;
+  // allow intercept only single finger left / right swipe gestures
+  touch-action: pan-x;
   pointer-events: none;
 `
 const PhotoBox = styled(animated.div)`
