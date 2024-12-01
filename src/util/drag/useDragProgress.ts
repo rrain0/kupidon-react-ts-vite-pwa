@@ -33,15 +33,17 @@ const dPxToDProgress = (dPx: number, trackLen: number) => RangeU.map(
 
 
 export type DragEventType = 'start' | 'dragging' | 'end'
-export type OnDragWithEventType = (
-  progressX: number, /* ..0..100.. */
-  progressY: number, /* ..0..100.. */
-  type: DragEventType,
-) => void
-export type OnDrag = (
-  progressX: number, /* ..0..100.. */
-  progressY: number, /* ..0..100.. */
-) => void
+export type OnDragProps = {
+  spx: number, // start progress x ..0..100..
+  spy: number, // start progress y ..0..100..
+  dpx: number, // delta progress x ..0..100..
+  dpy: number, // delta progress y ..0..100..
+  px: number, // progress x ..0..100..
+  py: number, // progress y ..0..100..
+}
+export type OnDragEventProps = OnDragProps & { type: DragEventType }
+export type OnDragEvent = (props: OnDragEventProps) => void
+export type OnDrag = (props: OnDragProps) => void
 
 export type TrackProps = { x: number, w: number, y: number, h: number }
 
@@ -50,7 +52,7 @@ export type GetTrackProps = () => TrackProps
 export type UseSnappedDragP = {
   getTrackProps: GetTrackProps
 } & Puro<{
-  onDrag: OnDragWithEventType // onProgress
+  onDrag: OnDragEvent // onProgress
   onDragStart: OnDrag // onProgressStart
   onDragging: OnDrag // onProgressing
   onDragEnd: OnDrag // onProgressEnd
@@ -79,10 +81,10 @@ export const useDragProgress = (props: UseSnappedDragP) => {
   
   
   const [getDragStartProgressX, setDragStartProgressX] = useRefGetSet(0) // ..0..100..
-  const [getDragProgressX, setDragProgressX] = useRefGetSet(0) // ..0..100..
+  const [getDragDProgressX, setDragDProgressX] = useRefGetSet(0) // ..0..100..
   
   const [getDragStartProgressY, setDragStartProgressY] = useRefGetSet(0) // ..0..100..
-  const [getDragProgressY, setDragProgressY] = useRefGetSet(0) // ..0..100..
+  const [getDragDProgressY, setDragDProgressY] = useRefGetSet(0) // ..0..100..
   
   
   // noinspection JSVoidFunctionReturnValueUsed
@@ -108,10 +110,10 @@ export const useDragProgress = (props: UseSnappedDragP) => {
       
       if (first) {
         setDragStartProgressX(0)
-        setDragProgressX(0)
+        setDragDProgressX(0)
         
         setDragStartProgressY(0)
-        setDragProgressY(0)
+        setDragDProgressY(0)
         
         const startPxX = vpx - trackStartX
         const dragStartProgressX = dPxToDProgress(startPxX, trackLenX)
@@ -122,29 +124,46 @@ export const useDragProgress = (props: UseSnappedDragP) => {
         setDragStartProgressY(dragStartProgressY)
       }
       
-      const dProgressX = dPxToDProgress(dx, trackLenX)
-      const dragProgressX = getDragProgressX() + dProgressX
-      setDragProgressX(dragProgressX)
+      const dragCurrDProgressX = dPxToDProgress(dx, trackLenX)
+      const dragDProgressX = getDragDProgressX() + dragCurrDProgressX
+      setDragDProgressX(dragDProgressX)
       
-      const dProgressY = dPxToDProgress(dy, trackLenY)
-      const dragProgressY = getDragProgressY() + dProgressY
-      setDragProgressY(dragProgressY)
+      const dragCurrDProgressY = dPxToDProgress(dy, trackLenY)
+      const dragDProgressY = getDragDProgressY() + dragCurrDProgressY
+      setDragDProgressY(dragDProgressY)
       
-      const valueProgressX = getDragStartProgressX() + getDragProgressX()
+      const dragProgressX = getDragStartProgressX() + getDragDProgressX()
       
-      const valueProgressY = getDragStartProgressY() + getDragProgressY()
+      const dragProgressY = getDragStartProgressY() + getDragDProgressY()
       
+      const onDragProps: OnDragProps = {
+        spx: getDragStartProgressX(),
+        spy: getDragStartProgressY(),
+        dpx: getDragDProgressX(),
+        dpy: getDragDProgressY(),
+        px: getDragStartProgressX() + getDragDProgressX(),
+        py: getDragStartProgressY() + getDragDProgressY(),
+      }
       if (first) {
-        getOnValueDrag()?.(valueProgressX, valueProgressY, 'start')
-        getOnValueDragStart()?.(valueProgressX, valueProgressY)
+        getOnValueDrag()?.({
+          ...onDragProps,
+          type: 'start',
+        })
+        getOnValueDragStart()?.({ ...onDragProps })
       }
       if (!first && !last) {
-        getOnValueDrag()?.(valueProgressX, valueProgressY, 'dragging')
-        getOnValueDragging()?.(valueProgressX, valueProgressY)
+        getOnValueDrag()?.({
+          ...onDragProps,
+          type: 'dragging',
+        })
+        getOnValueDragging()?.({ ...onDragProps })
       }
       if (last) {
-        getOnValueDrag()?.(valueProgressX, valueProgressY, 'end')
-        getOnValueDragEnd()?.(valueProgressX, valueProgressY)
+        getOnValueDrag()?.({
+          ...onDragProps,
+          type: 'end',
+        })
+        getOnValueDragEnd()?.({ ...onDragProps })
       }
     }
   ) as () => ReactDOMAttributes

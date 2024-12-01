@@ -135,11 +135,13 @@ registerRoute(
           "src": "logo64.png",
           "type": "image/png",
           "sizes": "64x64"
-        },{
+        },
+        {
           "src": "logo192.png",
           "type": "image/png",
           "sizes": "192x192"
-        },{
+        },
+        {
           "src": "logo512.png",
           "type": "image/png",
           "sizes": "512x512"
@@ -153,10 +155,10 @@ registerRoute(
     const baseId = "kupidon-react-pwa"
     const nodeEnvMap = {
       development: {
-        id: `${baseId}-development`
+        id: `${baseId}-development`,
       },
       production: {
-        id: `${baseId}-production`
+        id: `${baseId}-production`,
       },
     }
     
@@ -182,7 +184,7 @@ registerRoute(
     const lang = searchParams.get("lang")
     if (lang && lang in localizationMap) manifest = { ...manifest, ...localizationMap[lang] }
     
-    if (nodeEnv==="development") {
+    if (nodeEnv === "development") {
       manifest.name = `Dev ${manifest.name}`
       manifest.short_name = `Dev ${manifest.short_name}`
       manifest.description = `Dev ${manifest.description}`
@@ -209,7 +211,7 @@ registerRoute(
  registration.waiting.postMessage({ type: 'skip-waiting' })
  */
 self.addEventListener('message', async ev => {
-  switch (ev.data?.type){
+  switch (ev.data?.type) {
     case 'skip-waiting':
       void self.skipWaiting()
       break

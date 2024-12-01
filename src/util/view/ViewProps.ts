@@ -35,12 +35,21 @@ import exists = TypeU.exists
   const window = window
   const window = document.defaultView
   const window = element.ownerDocument.documentElement.defaultView
+
+  IFRAME WINDOW / VIEWPORT
+  ● Get window (viewport):
+  const window = <iframe-element>.contentWindow
+  const window = <iframe-element>.contentDocument.defaultView
   
   DOCUMENT
-  ● Get document
+  ● Get document:
   const document = window.document
   const document = document
   const document = element.ownerDocument
+ 
+  IFRAME DOCUMENT
+  ● Get document:
+  const window = <iframe-element>.contentDocument
   
   HTML Element
   ● Get document (html):

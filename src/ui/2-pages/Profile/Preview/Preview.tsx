@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { animated, to, useSpringValue } from '@react-spring/web'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -69,7 +70,13 @@ const Preview = React.memo(
     const photosBoxRef = useRef<HTMLDivElement>(null)
     
     
+    const spySpring = useSpringValue(0)
+    const dpySpring = useSpringValue(0)
+    
+    
     // todo use new value nimMax when snap to new index
+    
+    // TODO send startProgress & dProgress
     
     const {
       onTrackDrag,
@@ -82,12 +89,18 @@ const Preview = React.memo(
         }
         return { x: 0, w: 0, y: 0, h: 0 }
       },
-      onDrag: (progressX, progressY, type) => {
-        console.log('progress X, Y, type', progressX, progressY, type)
+      onDrag: ({ dpy }) => {
+        dpySpring.set(dpy)
       },
-      onDragStart: () => { startDragging() },
+      onDragStart: () => {
+        startDragging()
+      },
       onDragging: () => { },
-      onDragEnd: () => { endDragging() },
+      onDragEnd: () => {
+        spySpring.set(spySpring.get() + dpySpring.get())
+        dpySpring.set(0)
+        endDragging()
+      },
     })
     
     
@@ -103,6 +116,9 @@ const Preview = React.memo(
         p.setWhCssProps({ w, h })
       }
     }, []))
+    
+    
+    
     
     
     
@@ -130,6 +146,12 @@ const Preview = React.memo(
                 <PhotoBox
                   key={p.id}
                   i={availablePhotos.length - 1 - i}
+                  style={{
+                    y: to(
+                      [spySpring, dpySpring],
+                      (spy, dpy) => `${spy + dpy}%`,
+                    ),
+                  }}
                 >
                   <Photo src={p.dataUrl} />
                 </PhotoBox>
@@ -194,7 +216,7 @@ const PhotosBox = styled.div`
   // allow intercept only single finger up/down swipe gestures
   touch-action: pan-y;
 `
-const PhotoBox = styled.div<{ i: number }>`
+const PhotoBox = styled(animated.div)<{ i: number }>`
   width: ${p => 100 - 5 * p.i}%;
   height: 95%;
   translate: 0 ${p => -p.i}%;
@@ -213,15 +235,7 @@ const Photo = styled.img`
 
 
 
-
-
-
-
-
-
-
-
-
+// OLD
 
 const photoContainer = css`
   width: 100%;
