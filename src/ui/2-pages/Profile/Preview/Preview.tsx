@@ -194,22 +194,29 @@ const Preview = React.memo(
                           return o
                         },
                       ),
-                      width: to(
+                      width: '100%',
+                      height: `${100 - (maxCnt - 1)}%`,
+                      transformOrigin: '50% 0',
+                      scale: to(
                         [pSpring],
                         (p) => {
                           const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                          const w = `${100 - (maxCnt - 1) * displayedI}%`
+                          const cp = mod(p, 100)
+                          const s = 100 - (maxCnt - 1) * (() => {
+                            if (displayedI === 0) return 0
+                            return displayedI - RangeU.map(cp, [0, 80, 100], [0, 0, 1])
+                          })()
                           //console.log('i o', i, o)
-                          return w
+                          return s / 100
                         },
                       ),
-                      height: `${100 - (maxCnt - 1)}%`,
                       transform: to(
                         [pSpring],
                         (p) => {
                           const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                          let y = -displayedI
-                          if (displayedI === 0) y += mod(p, 100)
+                          const cp = mod(p, 100)
+                          let y = -displayedI + 1 + RangeU.map(cp, [0, 80, 100], [0, 0, 1])
+                          if (displayedI === 0) y = -displayedI + 1 + cp
                           //console.log('i y', i, y)
                           return `translateY(${y}%)`
                         },
@@ -218,14 +225,15 @@ const Preview = React.memo(
                         [pSpring],
                         (p) => {
                           const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const cp = mod(p, 100)
                           let o = 100
                           if (displayedI === 0) o = 100 - RangeU.map(
-                            mod(p, 100),
+                            cp,
                             [0, 30, 100],
                             [0, 0, 100]
                           )
                           //console.log('i o', i, o)
-                          return `${o}%`
+                          return o / 100
                         },
                       ),
                     }}
