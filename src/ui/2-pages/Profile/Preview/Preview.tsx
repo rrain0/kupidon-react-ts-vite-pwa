@@ -67,6 +67,7 @@ const Preview = React.memo(
     }, [photos])
     const cnt = availablePhotos.length
     const maxCnt = 6
+    const bottomI = cnt
     
     
     
@@ -170,25 +171,22 @@ const Preview = React.memo(
         <PreviewFrame>
           <PreviewFrame2 ref={frame2Ref}>
             <PhotosBox ref={photosBoxRef} {...onTrackDrag()}>
-              {['top' as const, ...availablePhotos, 'bottom' as const].map((p, i0) => {
-                const i = i0 - 1
-                if (p === 'top') return (
-                  <React.Fragment key={p}>
-                  </React.Fragment>
-                )
-                if (p === 'bottom') return (
-                  <React.Fragment key={p}>
-                  </React.Fragment>
-                )
+              {[...availablePhotos, 'bottom' as const].map((p, i) => {
                 return (
                   <PhotoBox
-                    key={`photo ${p.id}`}
+                    key={(() => {
+                      if (p === 'bottom') return p
+                      return `photo ${p.id}`
+                    })()}
                     style={{
                       // @ts-expect-error
                       order: to(
                         [pSpring],
                         (p) => {
-                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const displayedI = (() => {
+                            if (i === bottomI) return bottomI
+                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          })()
                           const o = cnt - 1 - displayedI
                           //console.log('i o', i, o)
                           return o
@@ -200,7 +198,10 @@ const Preview = React.memo(
                       scale: to(
                         [pSpring],
                         (p) => {
-                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const displayedI = (() => {
+                            if (i === bottomI) return bottomI
+                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          })()
                           const cp = mod(p, 100)
                           const s = 100 - (maxCnt - 1) * (() => {
                             if (displayedI === 0) return 0
@@ -213,7 +214,10 @@ const Preview = React.memo(
                       transform: to(
                         [pSpring],
                         (p) => {
-                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const displayedI = (() => {
+                            if (i === bottomI) return bottomI
+                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          })()
                           const cp = mod(p, 100)
                           let y = -displayedI + 1 + RangeU.map(cp, [0, 80, 100], [0, 0, 1])
                           if (displayedI === 0) y = -displayedI + 1 + cp
@@ -224,12 +228,20 @@ const Preview = React.memo(
                       opacity: to(
                         [pSpring],
                         (p) => {
-                          const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          const displayedI = (() => {
+                            if (i === bottomI) return bottomI
+                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                          })()
                           const cp = mod(p, 100)
                           let o = 100
                           if (displayedI === 0) o = 100 - RangeU.map(
                             cp,
                             [0, 30, 100],
+                            [0, 0, 100]
+                          )
+                          if (displayedI === bottomI) o = RangeU.map(
+                            cp,
+                            [0, 80, 100],
                             [0, 0, 100]
                           )
                           //console.log('i o', i, o)
@@ -238,7 +250,21 @@ const Preview = React.memo(
                       ),
                     }}
                   >
-                    <Photo src={p.dataUrl} />
+                    {p !== 'bottom' && <Photo src={p.dataUrl} />}
+                    {p === 'bottom' && (
+                      <animated.div css={bottomPhotoS}
+                        style={{
+                          // @ts-expect-error
+                          backgroundImage: to(
+                            [pSpring],
+                            (p) => {
+                              const i = Math.floor(p / 100)
+                              return `url(${availablePhotos[i].dataUrl})`
+                            },
+                          ),
+                        }}
+                      />
+                    )}
                   </PhotoBox>
                 )
               })}
@@ -315,6 +341,13 @@ const Photo = styled.img`
   object-fit: cover;
   
   pointer-events: none; // or attr draggable="false"
+`
+const bottomPhotoS = css`
+  ${fill};
+  background-position: center;
+  background-size: cover;
+  
+  pointer-events: none;
 `
 
 
