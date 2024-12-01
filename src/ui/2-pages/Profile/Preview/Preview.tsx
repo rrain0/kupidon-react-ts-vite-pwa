@@ -17,7 +17,7 @@ import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { ReactU } from 'src/util/react/ReactU'
 import { useNoSelect } from 'src/util/view/useNoSelect'
-import { useNoTouchAction } from 'src/util/view/useNoTouchAction'
+import { useNoTouchAction0 } from 'src/util/view/useNoTouchAction0'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
@@ -31,6 +31,7 @@ import minRatioPort = StyleConstants.minRatioPort
 import maxRatioPort = StyleConstants.maxRatioPort
 import effectLog = ReactU.effectLog
 import mod = MathU.mod
+import { useNoTouchAction } from 'util/view/useNoTouchAction'
 
 
 
@@ -70,15 +71,9 @@ const Preview = React.memo(
     const bottomI = cnt
     
     
-    
-    
-    
-    
-    
+    const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
     const [isDragging, startDragging, endDragging] = useBool(false)
-    
     useNoSelect(isDragging)
-    useNoTouchAction(isDragging)
     const canUseGestures = useLockAppGestures(isDragging)
     
     
@@ -92,15 +87,6 @@ const Preview = React.memo(
     const pSpring = useSpringValue(0)
     const updatePSpring = () => pSpring.set(getStartProgressY() + getDProgressY())
     
-    /* const [currI, setCurrI] = useState(0)
-    to([spySpring, dpySpring], (spy, dpy) => {
-      setCurrI(Math.floor((spy + dpy) / 100))
-    }) */
-    
-    
-    // todo use new value nimMax when snap to new index
-    
-    // TODO send startProgress & dProgress
     
     const {
       onTrackDrag,
@@ -114,13 +100,16 @@ const Preview = React.memo(
         return { x: 0, w: 0, y: 0, h: 0 }
       },
       onDrag: ({ dpy }) => {
-        setDProgressY(dpy)
-        updatePSpring()
+        if (isDragging) {
+          setDProgressY(dpy)
+          updatePSpring()
+        }
       },
-      onDragStart: () => {
-        startDragging()
+      onDragStart: () => { },
+      onDragging: ({ tryDragVertically, allowDragVertically }) => {
+        if (canUseGestures && tryDragVertically) lockTouchAction()
+        if (canUseGestures && allowDragVertically) startDragging()
       },
-      onDragging: () => { },
       onDragEnd: () => {
         setStartProgressY(RangeU.loop(
           getStartProgressY() + getDProgressY(),
@@ -129,6 +118,7 @@ const Preview = React.memo(
         setDProgressY(0)
         updatePSpring()
         endDragging()
+        unlockTouchAction()
       },
     })
     
@@ -259,7 +249,8 @@ const Preview = React.memo(
                             [pSpring],
                             (p) => {
                               const i = Math.floor(p / 100)
-                              return `url(${availablePhotos[i].dataUrl})`
+                              if (i >= 0 && i < cnt) return `url(${availablePhotos[i].dataUrl})`
+                              return undefined
                             },
                           ),
                         }}

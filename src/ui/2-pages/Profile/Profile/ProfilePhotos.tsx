@@ -40,7 +40,7 @@ import { ImageU } from 'src/util/file/ImageU.ts'
 import { Progress } from 'src/util/Progress.ts'
 import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import { useNoSelect } from 'src/util/view/useNoSelect.ts'
-import { useNoTouchAction } from 'src/util/view/useNoTouchAction.ts'
+import { useNoTouchAction0 } from 'src/util/view/useNoTouchAction0.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
@@ -133,7 +133,7 @@ const ProfilePhotos = React.memo(
     useNoSelect(!!dragState)
     // forbid gesture interception by browser
     const isLockGestures = dragState === 'dragging' || progressAnimLockGestures
-    useNoTouchAction(isLockGestures)
+    useNoTouchAction0(isLockGestures)
     const canUseGestures = useLockAppGestures(isLockGestures)
     useLayoutEffect(() => {
       if (!canUseGestures) {

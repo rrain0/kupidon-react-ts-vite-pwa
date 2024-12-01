@@ -34,6 +34,10 @@ const dPxToDProgress = (dPx: number, trackLen: number) => RangeU.map(
 
 export type DragEventType = 'start' | 'dragging' | 'end'
 export type OnDragProps = {
+  tryDragHorizontally: boolean,
+  tryDragVertically: boolean,
+  allowDragHorizontally: boolean,
+  allowDragVertically: boolean,
   spx: number, // start progress x ..0..100..
   spy: number, // start progress y ..0..100..
   dpx: number, // delta progress x ..0..100..
@@ -98,8 +102,12 @@ export const useDragProgress = (props: UseSnappedDragP) => {
         currentTarget,
       } = gesture
       
-      // const trackStart = getTrackStart()
-      // const trackLen = getTrackLen()
+      const dragThreshold = 5 // px
+      const isRadiusEnough = Math.hypot(mx, my) >= dragThreshold
+      const tryDragHorizontally = (mx || my) && Math.abs(mx) > Math.abs(my)
+      const tryDragVertically = (mx || my) && Math.abs(mx) <= Math.abs(my)
+      const allowDragHorizontally = isRadiusEnough && Math.abs(mx) > Math.abs(my)
+      const allowDragVertically = isRadiusEnough && Math.abs(mx) <= Math.abs(my)
       
       const {
         x: trackStartX,
@@ -132,11 +140,11 @@ export const useDragProgress = (props: UseSnappedDragP) => {
       const dragDProgressY = getDragDProgressY() + dragCurrDProgressY
       setDragDProgressY(dragDProgressY)
       
-      const dragProgressX = getDragStartProgressX() + getDragDProgressX()
-      
-      const dragProgressY = getDragStartProgressY() + getDragDProgressY()
-      
       const onDragProps: OnDragProps = {
+        tryDragHorizontally,
+        tryDragVertically,
+        allowDragHorizontally,
+        allowDragVertically,
         spx: getDragStartProgressX(),
         spy: getDragStartProgressY(),
         dpx: getDragDProgressX(),
