@@ -18,10 +18,9 @@ const Modal = React.memo(
       
       useUpNodesScrollLock(true, { elementRef: elemRef })
       
-      return <div
-        {...restProps}
-        ref={elemRef}
-      />
+      return (
+        <div {...restProps} ref={elemRef} />
+      )
     }
   )
 )

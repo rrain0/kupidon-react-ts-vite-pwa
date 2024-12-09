@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import fixed = EmotionCommon.fixed
+import modalFloor1 = StyleConstants.modalFloor1
 
 
 
@@ -9,7 +11,7 @@ export namespace BottomSheetParts {
   
   export const frameStyle = css`
     ${fixed};
-    z-index: 1;
+    z-index: ${modalFloor1};
     background: none;
     pointer-events: none;
     //touch-action: none;

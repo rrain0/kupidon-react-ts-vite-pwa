@@ -42,6 +42,7 @@ TODO
   
  */
 
+const maxPhotosCnt = 6
 
 
 export type PreviewProps = {
@@ -67,11 +68,11 @@ const Preview = React.memo(
       return photos.filter(it => !it.isEmpty)
     }, [photos])
     const cnt = availablePhotos.length
-    const maxCnt = 6
     const bottomI = cnt
     
     
     const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
+    //const [lockTouchAction, unlockTouchAction] = [() => {}, () => {}]
     const [isDragging, startDragging, endDragging] = useBool(false)
     useNoSelect(isDragging)
     const canUseGestures = useLockAppGestures(isDragging)
@@ -123,7 +124,7 @@ const Preview = React.memo(
     })
     
     
-    const frame2Ref = useResizeRef<HTMLElement>(useCallback((elem) => {
+    const frame2RefFun = useResizeRef<HTMLElement>(useCallback((elem) => {
       if (elem) {
         const p = getViewProps(elem)
         const { w, h } = ViewU.clampRatio({
@@ -159,107 +160,107 @@ const Preview = React.memo(
     return (
       <Pages.SafeInsets>
         <PreviewFrame>
-          <PreviewFrame2 ref={frame2Ref}>
-            <PhotosBox ref={photosBoxRef} {...onTrackDrag()}>
-              {[...availablePhotos, 'bottom' as const].map((p, i) => {
-                return (
-                  <PhotoBox
-                    key={(() => {
-                      if (p === 'bottom') return p
-                      return `photo ${p.id}`
-                    })()}
-                    style={{
-                      // @ts-expect-error
-                      order: to(
-                        [pSpring],
-                        (p) => {
-                          const displayedI = (() => {
-                            if (i === bottomI) return bottomI
-                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                          })()
-                          const o = cnt - 1 - displayedI
-                          //console.log('i o', i, o)
-                          return o
-                        },
-                      ),
-                      width: '100%',
-                      height: `${100 - (maxCnt - 1)}%`,
-                      transformOrigin: '50% 0',
-                      scale: to(
-                        [pSpring],
-                        (p) => {
-                          const displayedI = (() => {
-                            if (i === bottomI) return bottomI
-                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                          })()
-                          const cp = mod(p, 100)
-                          const s = 100 - (maxCnt - 1) * (() => {
-                            if (displayedI === 0) return 0
-                            return displayedI - RangeU.map(cp, [0, 80, 100], [0, 0, 1])
-                          })()
-                          //console.log('i o', i, o)
-                          return s / 100
-                        },
-                      ),
-                      transform: to(
-                        [pSpring],
-                        (p) => {
-                          const displayedI = (() => {
-                            if (i === bottomI) return bottomI
-                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                          })()
-                          const cp = mod(p, 100)
-                          let y = -displayedI + 1 + RangeU.map(cp, [0, 80, 100], [0, 0, 1])
-                          if (displayedI === 0) y = -displayedI + 1 + cp
-                          //console.log('i y', i, y)
-                          return `translateY(${y}%)`
-                        },
-                      ),
-                      opacity: to(
-                        [pSpring],
-                        (p) => {
-                          const displayedI = (() => {
-                            if (i === bottomI) return bottomI
-                            return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                          })()
-                          const cp = mod(p, 100)
-                          let o = 100
-                          if (displayedI === 0) o = 100 - RangeU.map(
-                            cp,
-                            [0, 30, 100],
-                            [0, 0, 100]
-                          )
-                          if (displayedI === bottomI) o = RangeU.map(
-                            cp,
-                            [0, 80, 100],
-                            [0, 0, 100]
-                          )
-                          //console.log('i o', i, o)
-                          return o / 100
-                        },
-                      ),
-                    }}
-                  >
-                    {p !== 'bottom' && <Photo src={p.dataUrl} />}
-                    {p === 'bottom' && (
-                      <animated.div css={bottomPhotoS}
-                        style={{
-                          // @ts-expect-error
-                          backgroundImage: to(
-                            [pSpring],
-                            (p) => {
-                              const i = RangeU.loop(Math.floor(p / 100), [0, cnt])
-                              if (i >= 0 && i < cnt) return `url(${availablePhotos[i].dataUrl})`
-                              return undefined
-                            },
-                          ),
-                        }}
-                      />
-                    )}
-                  </PhotoBox>
-                )
-              })}
-            </PhotosBox>
+          <PreviewFrame2 ref={frame2RefFun}>
+            <PhotosContainer>
+              <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
+                {[...availablePhotos, 'bottom' as const].map((p, i) => {
+                  return (
+                    <PhotoBox
+                      key={(() => {
+                        if (p === 'bottom') return p
+                        return `photo ${p.id}`
+                      })()}
+                      style={{
+                        // @ts-expect-error
+                        zIndex: to(
+                          [pSpring],
+                          (p) => {
+                            const displayedI = (() => {
+                              if (i === bottomI) return bottomI
+                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                            })()
+                            const o = cnt - displayedI
+                            //console.log('i o', i, o)
+                            return o
+                          },
+                        ),
+                        transformOrigin: '50% 0',
+                        transform: to(
+                          [pSpring],
+                          (p) => {
+                            const displayedI = (() => {
+                              if (i === bottomI) return bottomI
+                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                            })()
+                            const cp = mod(p, 100) // current progress
+                            let y = -displayedI + RangeU.map(cp, [0, 80, 100], [0, 0, 1])
+                            if (displayedI === 0) y = -displayedI + cp
+                            //console.log('i y', i, y)
+                            return `translateY(${y}%)`
+                          },
+                        ),
+                        scale: to(
+                          [pSpring],
+                          (p) => {
+                            const displayedI = (() => {
+                              if (i === bottomI) return bottomI
+                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                            })()
+                            const cp = mod(p, 100)
+                            const s = 100 - (maxPhotosCnt - 1) * (() => {
+                              if (displayedI === 0) return 0
+                              return displayedI - RangeU.map(cp, [0, 80, 100], [0, 0, 1])
+                            })()
+                            //console.log('i o', i, o)
+                            return s / 100
+                          },
+                        ),
+                        opacity: to(
+                          [pSpring],
+                          (p) => {
+                            const displayedI = (() => {
+                              if (i === bottomI) return bottomI
+                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+                            })()
+                            const cp = mod(p, 100)
+                            let o = 100
+                            if (displayedI === 0) o = 100 - RangeU.map(
+                              cp,
+                              [0, 30, 100],
+                              [0, 0, 100],
+                            )
+                            if (displayedI === bottomI) o = RangeU.map(
+                              cp,
+                              [0, 80, 100],
+                              [0, 0, 100],
+                            )
+                            //console.log('i o', i, o)
+                            return o / 100
+                          },
+                        ),
+                      }}
+                    >
+                      {p !== 'bottom' && <Photo src={p.dataUrl} />}
+                      {p === 'bottom' && (
+                        <animated.div css={bottomPhotoS}
+                          style={{
+                            // @ts-expect-error
+                            backgroundImage: to(
+                              [pSpring],
+                              (p) => {
+                                const i = RangeU.loop(Math.floor(p / 100), [0, cnt])
+                                if (i >= 0 && i < cnt) return `url(${availablePhotos[i].dataUrl})`
+                                return undefined
+                              },
+                            ),
+                          }}
+                        />
+                      )}
+                    </PhotoBox>
+                  )
+                })}
+              </PhotosContainer2>
+            </PhotosContainer>
           </PreviewFrame2>
         </PreviewFrame>
       </Pages.SafeInsets>
@@ -301,26 +302,42 @@ const PreviewFrame = styled.div`
   width: 100%;
   height: 100%;
   padding: 32px 16px;
+  overflow: hidden;
 `
 const PreviewFrame2 = styled.div`
   width: 100%;
   height: 100%;
   ${center};
 `
-const PhotosBox = styled.div`
+const PhotosContainer = styled.div`
   width: var(--w);
   height: var(--h);
+  display: grid;
+  place-items: end center;
+`
+const PhotosContainer2 = styled.div`
+  width: 100%;
+  height: ${100 - (maxPhotosCnt - 1)}%;
   position: relative;
-  ${centerAll};
-  align-items: end;
-  //background-color: #7FFFD455;
-  border-radius: 16px;
+  
+  /*user-select: none;
+  touch-action: none;
+  * {
+    user-select: none;
+    touch-action: none;
+  }
+  pointer-events: none;*/
   
   // allow intercept only single finger left / right swipe gestures
-  touch-action: pan-x;
+  touch-action: pan-y;
   pointer-events: none;
+  * { pointer-events: auto; }
 `
+
 const PhotoBox = styled(animated.div)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border-radius: 16px;
   overflow: hidden;
   
