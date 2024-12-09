@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated, to, useSpringValue } from '@react-spring/web'
+import { animated, to, useSprings, useSpringValue } from '@react-spring/web'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -24,7 +24,6 @@ import { ViewU } from 'src/util/view/ViewU'
 import FormValues = ProfilePageValidation.FormValues
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
-import centerAll = EmotionCommon.centerAll
 import center = EmotionCommon.center
 import fill = EmotionCommon.fill
 import minRatioPort = StyleConstants.minRatioPort
@@ -41,6 +40,51 @@ TODO
   Snap points & инерция
   
  */
+
+
+
+const getSpringStyle = (cnt: number, bottomI: number, p = 0) => (i: number) => {
+  const topI = (() => {
+    if (i === bottomI) return bottomI
+    return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
+  })()
+  const cp = mod(p, 100) // current progress
+  
+  const z = cnt - topI
+  
+  let y = -topI + RangeU.map(cp, [0, 80, 100], [0, 0, 1])
+  if (topI === 0) y = -topI + cp
+  
+  const s = 100 - (maxPhotosCnt - 1) * (() => {
+    if (topI === 0) return 0
+    return topI - RangeU.map(cp, [0, 80, 100], [0, 0, 1])
+  })()
+  
+  let o = 100
+  if (topI === 0) o = 100 - RangeU.map(
+    cp,
+    [0, 30, 100],
+    [0, 0, 100],
+  )
+  if (topI === bottomI) o = RangeU.map(
+    cp,
+    [0, 80, 100],
+    [0, 0, 100],
+  )
+  
+  const bottomImI = RangeU.loop(Math.floor(p / 100), [0, cnt])
+  
+  return {
+    bottomImI,
+    zIndex: z,
+    transform: `translateY(${y}%)`,
+    scale: s / 100,
+    opacity: o / 100,
+    //immediate: prop => ['topI', 'zIndex'].includes(prop),
+  }
+}
+
+
 
 const maxPhotosCnt = 6
 
@@ -70,6 +114,12 @@ const Preview = React.memo(
     const cnt = availablePhotos.length
     const bottomI = cnt
     
+    const photosToRender = useMemo(() => [...availablePhotos, 'bottom' as const], [availablePhotos])
+    
+    const [springs, springsApi] = useSprings(
+      photosToRender.length, getSpringStyle(cnt, bottomI), [photosToRender]
+    )
+    
     
     const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
     //const [lockTouchAction, unlockTouchAction] = [() => {}, () => {}]
@@ -85,8 +135,10 @@ const Preview = React.memo(
     // delta progress y in (..0..100..) * availablePhotos.length
     const [getDProgressY, setDProgressY] = useRefGetSet(0)
     
-    const pSpring = useSpringValue(0)
-    const updatePSpring = () => pSpring.set(getStartProgressY() + getDProgressY())
+    const updatePSpring = () => {
+      const p = getStartProgressY() + getDProgressY()
+      springsApi.set(getSpringStyle(cnt, bottomI, p))
+    }
     
     
     const {
@@ -142,6 +194,7 @@ const Preview = React.memo(
     
     
     
+    
     //const im = photos[0]
     //const [scroll, setScroll] = useState(0)
     
@@ -163,99 +216,30 @@ const Preview = React.memo(
           <PreviewFrame2 ref={frame2RefFun}>
             <PhotosContainer>
               <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
-                {[...availablePhotos, 'bottom' as const].map((p, i) => {
+                {springs.map((springStyle, i) => {
+                  const p = photosToRender[i]
                   return (
                     <PhotoBox
                       key={(() => {
                         if (p === 'bottom') return p
                         return `photo ${p.id}`
                       })()}
-                      style={{
-                        // @ts-expect-error
-                        zIndex: to(
-                          [pSpring],
-                          (p) => {
-                            const displayedI = (() => {
-                              if (i === bottomI) return bottomI
-                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                            })()
-                            const o = cnt - displayedI
-                            //console.log('i o', i, o)
-                            return o
-                          },
-                        ),
-                        transformOrigin: '50% 0',
-                        transform: to(
-                          [pSpring],
-                          (p) => {
-                            const displayedI = (() => {
-                              if (i === bottomI) return bottomI
-                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                            })()
-                            const cp = mod(p, 100) // current progress
-                            let y = -displayedI + RangeU.map(cp, [0, 80, 100], [0, 0, 1])
-                            if (displayedI === 0) y = -displayedI + cp
-                            //console.log('i y', i, y)
-                            return `translateY(${y}%)`
-                          },
-                        ),
-                        scale: to(
-                          [pSpring],
-                          (p) => {
-                            const displayedI = (() => {
-                              if (i === bottomI) return bottomI
-                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                            })()
-                            const cp = mod(p, 100)
-                            const s = 100 - (maxPhotosCnt - 1) * (() => {
-                              if (displayedI === 0) return 0
-                              return displayedI - RangeU.map(cp, [0, 80, 100], [0, 0, 1])
-                            })()
-                            //console.log('i o', i, o)
-                            return s / 100
-                          },
-                        ),
-                        opacity: to(
-                          [pSpring],
-                          (p) => {
-                            const displayedI = (() => {
-                              if (i === bottomI) return bottomI
-                              return RangeU.loop(i - Math.floor(p / 100), [0, cnt])
-                            })()
-                            const cp = mod(p, 100)
-                            let o = 100
-                            if (displayedI === 0) o = 100 - RangeU.map(
-                              cp,
-                              [0, 30, 100],
-                              [0, 0, 100],
-                            )
-                            if (displayedI === bottomI) o = RangeU.map(
-                              cp,
-                              [0, 80, 100],
-                              [0, 0, 100],
-                            )
-                            //console.log('i o', i, o)
-                            return o / 100
-                          },
-                        ),
-                      }}
+                      style={springStyle}
                     >
                       {p !== 'bottom' && <Photo src={p.dataUrl} />}
-                      {p === 'bottom' && (
+                      {/* {p === 'bottom' && (
                         <animated.div css={bottomPhotoS}
                           style={{
                             // @ts-expect-error
                             backgroundImage: to(
-                              [pSpring],
-                              (p) => {
-                                const i = RangeU.loop(Math.floor(p / 100), [0, cnt])
-                                if (i >= 0 && i < cnt) return `url(${availablePhotos[i].dataUrl})`
-                                return undefined
+                              [springStyle.bottomImI],
+                              (bottomImI) => {
+                                return `url(${photosToRender[bottomImI].dataUrl})`
                               },
                             ),
                           }}
                         />
-                      )}
+                      )} */}
                     </PhotoBox>
                   )
                 })}
@@ -320,14 +304,6 @@ const PhotosContainer2 = styled.div`
   height: ${100 - (maxPhotosCnt - 1)}%;
   position: relative;
   
-  /*user-select: none;
-  touch-action: none;
-  * {
-    user-select: none;
-    touch-action: none;
-  }
-  pointer-events: none;*/
-  
   // allow intercept only single finger left / right swipe gestures
   touch-action: pan-y;
   pointer-events: none;
@@ -341,7 +317,11 @@ const PhotoBox = styled(animated.div)`
   border-radius: 16px;
   overflow: hidden;
   
+  user-select: none;
   pointer-events: auto;
+  
+  transform-origin: 50% 0;
+  will-change: transform/*, z-index, scale, opacity*/;
 `
 const Photo = styled.img`
   ${fill};

@@ -104,6 +104,7 @@ export const useDragProgress = (props: UseSnappedDragP) => {
       
       const dragThreshold = 5 // px
       const isRadiusEnough = Math.hypot(mx, my) >= dragThreshold
+      
       const tryDragHorizontally = !!(mx || my) && Math.abs(mx) > Math.abs(my)
       const tryDragVertically = !!(mx || my) && Math.abs(mx) <= Math.abs(my)
       const allowDragHorizontally = isRadiusEnough && Math.abs(mx) > Math.abs(my)
