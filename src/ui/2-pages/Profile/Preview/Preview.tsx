@@ -150,7 +150,6 @@ const Preview = React.memo(
     
     
     const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
-    //const [lockTouchAction, unlockTouchAction] = [() => {}, () => {}]
     const [isDragging, startDragging, endDragging] = useBool(false)
     useNoSelect(isDragging)
     const canUseGestures = useLockAppGestures(isDragging)
@@ -158,16 +157,33 @@ const Preview = React.memo(
     
     const photosBoxRef = useRef<HTMLDivElement>(null)
     
+    // TODO Сделать чтобы текущий прогресс отражал именно отображаемые вьюхи (range 0..3)
+    //  Если вьюха отобразилась, то чтобы всегда отображала одну картинку,
+    //  покуда картинка источника по данному индексу не изменится
+    // TODO Дальше этот range 0..3 мапать в range источника картинок,
+    //  чтобы вычислить правильный индекс картинки
+    // TODO key отображаемых элементов всегда будет одинаковый - индекс в spring array
+    
     // start progress y in (..0..100..) * availablePhotos.length
     const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
     // delta progress y in (..0..100..) * availablePhotos.length
     const [getDProgressY, setDProgressY] = useRefGetSet(0)
-    // index of a photo for displayed photo view at top
-    const [getPhotoTopI, photoTopI, setPhotoTopI] = useRefAndState(0)
+    // index of a photo displayed at the top
+    const [getPhotoI, photoI, setPhotoI] = useRefAndState(0)
     
-    const updatePSpring = () => {
+    const updatePhotos = () => {
       const p = getStartProgressY() + getDProgressY()
+      const pi = RangeU.loop(Math.floor(p / 100), [0, cnt])
       springsApi.set(getSpringStyle(cnt, p))
+      setPhotoI(pi)
+    }
+    const finishUpdatePhotos = () => {
+      setStartProgressY(RangeU.loop(
+        getStartProgressY() + getDProgressY(),
+        [0, cnt * 100]
+      ))
+      setDProgressY(0)
+      updatePhotos()
     }
     
     
@@ -185,7 +201,7 @@ const Preview = React.memo(
       onDrag: ({ dpy }) => {
         if (isDragging) {
           setDProgressY(dpy)
-          updatePSpring()
+          updatePhotos()
         }
       },
       onDragStart: () => { },
@@ -194,12 +210,7 @@ const Preview = React.memo(
         if (cnt && canUseGestures && allowDragVertically) startDragging()
       },
       onDragEnd: () => {
-        setStartProgressY(RangeU.loop(
-          getStartProgressY() + getDProgressY(),
-          [0, cnt * 100]
-        ))
-        setDProgressY(0)
-        updatePSpring()
+        finishUpdatePhotos()
         endDragging()
         unlockTouchAction()
       },
