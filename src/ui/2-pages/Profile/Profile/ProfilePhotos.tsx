@@ -38,10 +38,10 @@ import { FileU } from 'src/util/file/FileU.ts'
 import { DataUrl } from 'src/util/DataUrl.ts'
 import { ImageU } from 'src/util/file/ImageU.ts'
 import { Progress } from 'src/util/Progress.ts'
+import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
 import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import { useNoTouchAction0 } from 'src/util/view/useNoTouchAction0.ts'
-import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import center = EmotionCommon.center
@@ -118,9 +118,10 @@ const ProfilePhotos = React.memo(
     
     const [lastIdx, setLastIdx] = useState(0)
     
-    const [dragState, setDragState, getDragRefValue] = useStateAndRef(
+    const [dragState, setDragState] = useState(
       undefined as undefined | 'initialDelay' | 'progressAnim' | 'dragging'
     )
+    const [getDragRefValue] = useAsRefGet(dragState)
     //useEffect(() => console.log('dragState', dragState), [dragState])
     const [progressAnimLockGestures, setProgressAnimLockGestures] = useState(false)
     const [swap, setSwap] = useState(undefined as undefined | NumRange)

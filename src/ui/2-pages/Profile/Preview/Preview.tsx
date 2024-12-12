@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated, to, useSprings, useSpringValue } from '@react-spring/web'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -10,14 +10,15 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
+import { ArrayU } from 'src/util/common/ArrayU'
 import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useDragProgress } from 'src/util/drag/useDragProgress'
 import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
+import { useRefAndState } from 'src/util/react-state/useRefAndState'
 import { ReactU } from 'src/util/react/ReactU'
 import { useNoSelect } from 'src/util/view/useNoSelect'
-import { useNoTouchAction0 } from 'src/util/view/useNoTouchAction0'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
@@ -43,53 +44,6 @@ TODO
 
 // максимальное кол-во отображаемых фоток (если в процессе транзишена, то будет на 1 больше)
 const maxDisplayedPhotosCnt = 3
-
-
-const getSpringStyle = (photosCnt: number, p = 0) => (i: number) => {
-  const pc = mod(p, 100) // progress current
-  
-  // index of photo
-  const iPhoto = RangeU.loop(Math.floor(p / 100) + i, [0, photosCnt])
-  
-  // z-index
-  //const z = maxDisplayedPhotosCnt - i
-  
-  // translate y
-  const y = (() => {
-    if (i === 0) return pc
-    return -(i - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-  })()
-  
-  // scale
-  const s = (() => {
-    if (i === 0) return 100
-    return 100 - 5 * (i - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-  })()
-  
-  // opacity
-  const o = (() => {
-    if (i === 0) return 100 - RangeU.map(
-      pc,
-      [0, 30, 100],
-      [0, 0, 100],
-    )
-    if (i === maxDisplayedPhotosCnt) return RangeU.map(
-      pc,
-      [0, 80, 100],
-      [0, 0, 100],
-    )
-    return 100
-  })()
-  
-  return {
-    iPhoto,
-    transform: `translateY(${y}%)`,
-    scale: s / 100,
-    opacity: o / 100,
-    //immediate: prop => ['iPhoto'].includes(prop),
-  }
-}
-
 
 
 
@@ -124,6 +78,72 @@ const Preview = React.memo(
     }, [photos])
     const cnt = availablePhotos.length
     
+    const getImages = () => availablePhotos.map(it => it.dataUrl)
+    const [images, setImages] = useState(getImages)
+    useLayoutEffect(() => {
+      setImages(getImages())
+    }, [availablePhotos])
+    
+    const [mapI, setMapI] = useState(() => availablePhotos.map((_, i) => i))
+    
+    
+    
+    const getSpringStyle = (photosCnt: number, p = 0) => (i: number) => {
+      const pc = mod(p, 100) // progress current
+      
+      // index of photo
+      const iPhoto = RangeU.loop(Math.floor(p / 100) + i, [0, photosCnt])
+      setMapI(prev => {
+        const next = prev.toSpliced(i, 1, iPhoto)
+        if (ArrayU.eq(prev, next)) return prev
+        return next
+      })
+      
+      // z-index
+      //const z = maxDisplayedPhotosCnt - i
+      
+      // translate y
+      const y = (() => {
+        if (i === 0) return pc
+        return -(i - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+      })()
+      
+      // scale
+      const s = (() => {
+        if (i === 0) return 100
+        return 100 - 5 * (i - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+      })()
+      
+      // opacity
+      const o = (() => {
+        if (i === 0) return 100 - RangeU.map(
+          pc,
+          [0, 30, 100],
+          [0, 0, 100],
+        )
+        if (i === maxDisplayedPhotosCnt) return RangeU.map(
+          pc,
+          [0, 80, 100],
+          [0, 0, 100],
+        )
+        return 100
+      })()
+      
+      return {
+        iPhoto,
+        transform: `translateY(${y}%)`,
+        scale: s / 100,
+        opacity: o / 100,
+        //immediate: true,
+        //reset: true,
+        //immediate: prop => ['iPhoto'].includes(prop),
+        //onChange: () => { console.log('onChange') },
+      }
+    }
+    
+    
+    
+    
     const [springs, springsApi] = useSprings(
       maxDisplayedPhotosCnt + 1, getSpringStyle(cnt), [availablePhotos]
     )
@@ -142,6 +162,8 @@ const Preview = React.memo(
     const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
     // delta progress y in (..0..100..) * availablePhotos.length
     const [getDProgressY, setDProgressY] = useRefGetSet(0)
+    // index of a photo for displayed photo view at top
+    const [getPhotoTopI, photoTopI, setPhotoTopI] = useRefAndState(0)
     
     const updatePSpring = () => {
       const p = getStartProgressY() + getDProgressY()
@@ -225,6 +247,10 @@ const Preview = React.memo(
             <PhotosContainer>
               <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
                 {springs.map((springStyle, i) => {
+                  /* const interpolation = to([springStyle.iPhoto], (iPhoto => {
+                    return availablePhotos[iPhoto]?.dataUrl
+                  }))
+                  console.log('interpolation', interpolation) */
                   return (
                     <PhotoBox
                       key={i}
@@ -236,14 +262,27 @@ const Preview = React.memo(
                         opacity: springStyle.opacity,
                       }}
                     >
-                      {/* <Photo
+                      <Photo key={images[mapI[i]]} src={images[mapI[i]]} />
+                      {/* <Photo2
                         src={to([springStyle.iPhoto], (iPhoto => {
-                          const url = availablePhotos[iPhoto]?.dataUrl
-                          if (url?.startsWith('data:image/webp;base64,UklGRh4XAQ')) {
-                            console.log('?? starts with', url.startsWith('data:image/webp;base64,UklGRh4XAQBXRUJQVlA4WAoAAAAgAAAA3gIAxQMASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggMBUBAJC6A50BKt8CxgM+MRiKQ6IhoRII5TggAwSzt39rcpbrtIOdPmb+5Z'))
-                          }
-                          return availablePhotos[iPhoto]?.dataUrl/* .replace(/\+/g, '%2B')
+                          return availablePhotos[iPhoto]?.dataUrl//.replace(/\+/g, '%2B')
                         }))}
+                      /> */}
+                      {/* <Photo2
+                        src={
+                          springStyle.iPhoto
+                            .to((iPhoto) => `zzz${iPhoto}zzz`)
+                            .to((zzzIPhotozzz => {
+                              return availablePhotos[zzzIPhotozzz.slice(3, -3)]?.dataUrl//.replace(/\+/g, '%2B')
+                            }))
+                            .to(url => {
+                              if (url?.startsWith('data:image/webp;base64,UklGRh4XAQ')) {
+                                // eslint-disable-next-line @stylistic/max-len
+                                console.log('?? starts with', url.startsWith('data:image/webp;base64,UklGRh4XAQBXRUJQVlA4WAoAAAAgAAAA3gIAxQMASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZWUDggMBUBAJC6A50BKt8CxgM+MRiKQ6IhoRII5TggAwSzt39rcpbrtIOdPmb+5Z'))
+                              }
+                              return url
+                            })
+                        }
                       /> */}
                       {/* {p === 'bottom' && (
                         <animated.div css={bottomPhotoS}
@@ -353,7 +392,14 @@ const PhotoBox = styled(animated.div)`
   transform-origin: 50% 0;
   will-change: transform/*, z-index, scale, opacity*/;
 `
-const Photo = styled(animated.img)`
+const Photo = React.memo(styled.img`
+  ${fill};
+  object-position: center;
+  object-fit: cover;
+  
+  pointer-events: none; // or attr draggable="false"
+`)
+const Photo2 = styled(animated.img)`
   ${fill};
   object-position: center;
   object-fit: cover;
