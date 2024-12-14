@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated, to, useSprings, useSpringValue } from '@react-spring/web'
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { animated, useSprings } from '@react-spring/web'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { StyleConstants } from 'src/ui-data/style/StyleConstants'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -16,7 +16,6 @@ import { RangeU } from 'src/util/common/RangeU'
 import { useDragProgress } from 'src/util/drag/useDragProgress'
 import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
-import { useRefAndState } from 'src/util/react-state/useRefAndState'
 import { ReactU } from 'src/util/react/ReactU'
 import { useNoSelect } from 'src/util/view/useNoSelect'
 import { useResizeRef } from 'src/util/view/useResizeRef'
@@ -32,8 +31,16 @@ import maxRatioPort = StyleConstants.maxRatioPort
 import effectLog = ReactU.effectLog
 import mod = MathU.mod
 import { useNoTouchAction } from 'util/view/useNoTouchAction'
+import arrOfIndices = ArrayU.arrOfIndices
 
 
+// Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
+//  Если вьюха отобразилась, то она всегда отображает одну картинку,
+//  покуда картинка источника по данному индексу не изменится,
+//  то есть пока вьюха не переедет из низа колоды наверх или наоборот.
+// Дальше этот range 0..3 мапается в range источника картинок,
+//  чтобы вычислить правильный индекс картинки
+// Key отображаемых элементов всегда одинаковый - индекс в spring array
 
 /*
 TODO
@@ -43,7 +50,7 @@ TODO
  */
 
 // максимальное кол-во отображаемых фоток (во время анимации пролистывания их 4)
-const visiblePhotosCnt = 4
+const maxVisiblePhotosCnt = 4
 
 
 
@@ -77,22 +84,39 @@ const Preview = React.memo(
       return photos.filter(it => !it.isEmpty)
     }, [photos])
     const photosCnt = availablePhotos.length
+    const isPhotosDraggable = photosCnt >= 2
     
-    const [mapI, setMapI] = useState(() => availablePhotos.map((_, i) => i))
+    const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt === 0 ? 0 : (photosCnt + 1))
     
     
     
-    const getSpringStyle = (p = 0) => (i = 0) => {
+    // start progress y in (..0..100..) * visiblePhotosCnt
+    const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
+    // delta progress y in (..0..100..)
+    const [getDProgressY, setDProgressY] = useRefGetSet(0)
+    // start progress for photos in (..0..100..) * availablePhotos.length
+    const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
+    // get mapped photo index by availablePhotos[viewPhotoIndices[<spring-array-index>]]
+    const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
+    
+    
+    const getSpringStyle = () => (i = 0) => {
+      const p = getStartProgressY() + getDProgressY()
+      const photoP = getStartPhotoP() + getDProgressY()
+      
       const vi = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt]) // !!displayed!! view index
       const pc = mod(p, 100) // progress current
       
-      // index of photo
-      /* const iPhoto = RangeU.loop(Math.floor(p / 100) + i, [0, photosCnt])
-      setMapI(prev => {
-        const next = prev.toSpliced(i, 1, iPhoto)
-        if (ArrayU.eq(prev, next)) return prev
-        return next
-      }) */
+      
+      
+      setViewPhotoIndices(prev => {
+        const indices = [...prev]
+        const photoI = RangeU.loop(Math.floor(photoP / 100) + vi, [0, photosCnt])
+        indices[i] = photoI
+        return indices
+      })
+      
+      
       
       // z-index
       const z = -vi + visiblePhotosCnt - 1
@@ -132,11 +156,8 @@ const Preview = React.memo(
       }
     }
     
-    
-    
-    
     const [springs, springsApi] = useSprings(
-      visiblePhotosCnt, getSpringStyle(), [availablePhotos]
+      visiblePhotosCnt, getSpringStyle(), [visiblePhotosCnt]
     )
     
     
@@ -146,37 +167,31 @@ const Preview = React.memo(
     const canUseGestures = useLockAppGestures(isDragging)
     
     
-    const photosBoxRef = useRef<HTMLDivElement>(null)
     
-    // TODO Сделать чтобы текущий прогресс отражал именно отображаемые вьюхи (range 0..3)
-    //  Если вьюха отобразилась, то чтобы всегда отображала одну картинку,
-    //  покуда картинка источника по данному индексу не изменится
-    // TODO Дальше этот range 0..3 мапать в range источника картинок,
-    //  чтобы вычислить правильный индекс картинки
-    // TODO key отображаемых элементов всегда будет одинаковый - индекс в spring array
-    
-    // start progress y in (..0..100..) * availablePhotos.length
-    const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
-    // delta progress y in (..0..100..) * availablePhotos.length
-    const [getDProgressY, setDProgressY] = useRefGetSet(0)
-    // index of a photo displayed at the top
-    const [getPhotoI, photoI, setPhotoI] = useRefAndState(0)
-    
-    const updatePhotos = () => {
+    const updateViews = () => {
+      springsApi.set(getSpringStyle())
+    }
+    const finishUpdateViews = () => {
+      const photoP = getStartPhotoP() + getDProgressY()
+      // TODO draggable
+      const photoMaxP = (photosCnt <= 1 ? 0 : photosCnt) * 100
+      setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
       const p = getStartProgressY() + getDProgressY()
-      springsApi.set(getSpringStyle(p))
-      //const pi = RangeU.loop(Math.floor(p / 100), [0, photosCnt])
-      //setPhotoI(pi)
-    }
-    const finishUpdatePhotos = () => {
-      setStartProgressY(RangeU.loop(
-        getStartProgressY() + getDProgressY(),
-        [0, visiblePhotosCnt * 100]
-      ))
+      // TODO draggable
+      const viewMaxP = (visiblePhotosCnt <= 2 ? 0 : visiblePhotosCnt) * 100
+      setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
       setDProgressY(0)
-      updatePhotos()
+      updateViews()
     }
     
+    
+    // works as immediate effect
+    useMemo(() => {
+      finishUpdateViews()
+    }, [availablePhotos])
+    
+    
+    const photosBoxRef = useRef<HTMLDivElement>(null)
     
     const {
       onTrackDrag,
@@ -192,16 +207,19 @@ const Preview = React.memo(
       onDrag: ({ dpy }) => {
         if (isDragging) {
           setDProgressY(dpy)
-          updatePhotos()
+          updateViews()
         }
       },
       onDragStart: () => { },
       onDragging: ({ tryDragVertically, allowDragVertically }) => {
-        if (canUseGestures && tryDragVertically) lockTouchAction()
-        if (canUseGestures && allowDragVertically) startDragging()
+        // TODO draggable
+        if (isPhotosDraggable) {
+          if (canUseGestures && tryDragVertically) lockTouchAction()
+          if (canUseGestures && allowDragVertically) startDragging()
+        }
       },
       onDragEnd: () => {
-        finishUpdatePhotos()
+        finishUpdateViews()
         endDragging()
         unlockTouchAction()
       },
@@ -249,19 +267,14 @@ const Preview = React.memo(
             <PhotosContainer>
               <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
                 {springs.map((springStyle, i) => {
-                  const color = ['#2b87db', 'indianred', 'coral', '#5ee7df'][i]
                   return (
                     <PhotoBox
                       key={i}
-                      number={i}
-                      color={color}
-                      style={{
-                        ...springStyle,
-                        // @ts-expect-error
-                        backgroundColor: color,
-                      }}
+                      style={springStyle}
                     >
-                      {/* <Photo key={images[mapI[i]]} src={images[mapI[i]]} /> */}
+                      <Photo
+                        src={availablePhotos[viewPhotoIndices[i]]?.dataUrl}
+                      />
                     </PhotoBox>
                   )
                 })}
@@ -323,7 +336,7 @@ const PhotosContainer = styled.div`
 `
 const PhotosContainer2 = styled.div`
   width: 100%;
-  height: ${100 - (visiblePhotosCnt - 1)}%;
+  height: ${100 - (maxVisiblePhotosCnt - 1)}%;
   position: relative;
   
   // allow intercept only single finger left / right swipe gestures
@@ -338,6 +351,7 @@ const PhotoBox = styled(animated.div)`
   height: 100%;
   border-radius: 16px;
   overflow: hidden;
+  // TODO
   background-color: indianred;
   
   user-select: none;
