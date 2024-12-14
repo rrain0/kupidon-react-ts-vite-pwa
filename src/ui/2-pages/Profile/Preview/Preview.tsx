@@ -49,7 +49,8 @@ TODO
   
  */
 
-// максимальное кол-во отображаемых фоток (во время анимации пролистывания их 4)
+// максимальное кол-во отображаемых фоток
+// (во время анимации пролистывания их 4, в дефолтном состоянии их видно 3, но 4ая прозрачная и куда-то сдвинута)
 const maxVisiblePhotosCnt = 4
 
 
@@ -107,16 +108,14 @@ const Preview = React.memo(
       const vi = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt]) // !!displayed!! view index
       const pc = mod(p, 100) // progress current
       
-      
-      
+      // set photo's indices to display
       setViewPhotoIndices(prev => {
         const indices = [...prev]
         const photoI = RangeU.loop(Math.floor(photoP / 100) + vi, [0, photosCnt])
         indices[i] = photoI
+        if (ArrayU.eq(prev, indices)) return prev
         return indices
       })
-      
-      
       
       // z-index
       const z = -vi + visiblePhotosCnt - 1
