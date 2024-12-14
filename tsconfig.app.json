@@ -42,7 +42,7 @@
       "src/*": ["src/*"],
       
       "@res/*": ["src/res/*"],
-      "@img/*": ["src/res/img/*"],
+      "@im/*": ["src/res/im/*"],
       "@ic/*": ["src/res/ic/*"],
       "@vid/*": ["src/res/vid/*"],
       

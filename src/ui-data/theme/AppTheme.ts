@@ -159,6 +159,12 @@ export namespace AppTheme {
     }
     
     
+    
+    boxTransparent: {
+      bg: string,
+      c:  string,
+    },
+    
     boxPink: {
       bg: [string, string]
       c:  string,

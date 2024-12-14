@@ -24,7 +24,7 @@ import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
-import twoCuteCats from 'src/res/img/bg/two-cute-cats.jpg'
+import twoCuteCats from 'src/res/im/bg/two-cute-cats.jpg'
 import { CardTitle } from '../parts/CardTitle'
 
 

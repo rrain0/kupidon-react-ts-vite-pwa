@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleConstants } from 'src/ui-data/style/StyleConstants'
+import { StyleVals } from 'src/ui-data/style/StyleVals'
 import fixed = EmotionCommon.fixed
-import modalFloor1 = StyleConstants.modalFloor1
+import modalFloor1 = StyleVals.modalFloor1
 
 
 

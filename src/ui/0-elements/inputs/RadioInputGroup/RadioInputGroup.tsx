@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { StyleConstants } from 'src/ui-data/style/StyleConstants.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import {
   RadioInputGroupStyle,
 } from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
@@ -72,7 +72,7 @@ export default RadioInputGroup
 const radioGroupStyle = css`
   ${reset};
   position: relative;
-  gap: ${StyleConstants.itemListGapPx};
+  gap: ${StyleVals.itemListGapPx};
 `
 
 

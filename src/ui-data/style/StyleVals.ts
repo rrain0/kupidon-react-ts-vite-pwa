@@ -2,7 +2,7 @@
 
 
 
-export namespace StyleConstants {
+export namespace StyleVals {
   
   export const itemListGap = 10
   export const itemListGapPx = `${itemListGap}px`

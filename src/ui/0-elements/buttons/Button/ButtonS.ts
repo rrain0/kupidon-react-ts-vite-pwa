@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
-import { StyleConstants } from 'src/ui-data/style/StyleConstants'
+import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'

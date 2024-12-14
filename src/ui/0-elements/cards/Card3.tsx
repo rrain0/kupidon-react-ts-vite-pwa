@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { StyleConstants } from 'src/ui-data/style/StyleConstants'
+import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'

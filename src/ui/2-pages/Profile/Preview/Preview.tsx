@@ -2,7 +2,13 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated, useSprings } from '@react-spring/web'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { StyleConstants } from 'src/ui-data/style/StyleConstants'
+import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
+import { Images } from 'src/ui-data/Images'
+import { StyleVals } from 'src/ui-data/style/StyleVals'
+import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
+import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
+import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -26,12 +32,15 @@ import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import center = EmotionCommon.center
 import fill = EmotionCommon.fill
-import minRatioPort = StyleConstants.minRatioPort
-import maxRatioPort = StyleConstants.maxRatioPort
+import minRatioPort = StyleVals.minRatioPort
+import maxRatioPort = StyleVals.maxRatioPort
 import effectLog = ReactU.effectLog
 import mod = MathU.mod
 import { useNoTouchAction } from 'util/view/useNoTouchAction'
 import arrOfIndices = ArrayU.arrOfIndices
+import centerAll = EmotionCommon.centerAll
+import PictureIc = SvgIcons.PictureIc
+import centerGrid = EmotionCommon.centerGrid
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -70,16 +79,9 @@ const Preview = React.memo(
       aboutMe,
     } = props.formValues
     
-    effectLog('photos', photos)
+    //effectLog('photos', photos)
     
-    /* useEffect(() => {
-      photos.forEach((p, i) => {
-        console.log('photo index dataUrl')
-      })
-    }, [photos]) */
-    
-    
-    
+    const textNoPhotos = useUiValue(TitleUiText.noPhotos)
     
     const availablePhotos = useMemo(() => {
       return photos.filter(it => !it.isEmpty)
@@ -87,8 +89,15 @@ const Preview = React.memo(
     const photosCnt = availablePhotos.length
     const isPhotosDraggable = photosCnt >= 2
     
-    const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt === 0 ? 0 : (photosCnt + 1))
+    // if photosCnt is 0, then display 1 placeholder
+    const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt + 1)
     
+    // TODO изначально фотки не получены, поэтому изображение грузится
+    const placeholderIm = useMemo(() => {
+      if (photosCnt) return undefined
+      //return Images.forBlur[0]
+      return ArrayU.randomElem(Images.forBlur)
+    }, [photosCnt])
     
     
     // start progress y in (..0..100..) * visiblePhotosCnt
@@ -173,11 +182,11 @@ const Preview = React.memo(
     const finishUpdateViews = () => {
       const photoP = getStartPhotoP() + getDProgressY()
       // TODO draggable
-      const photoMaxP = (photosCnt <= 1 ? 0 : photosCnt) * 100
+      const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
       setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
       const p = getStartProgressY() + getDProgressY()
       // TODO draggable
-      const viewMaxP = (visiblePhotosCnt <= 2 ? 0 : visiblePhotosCnt) * 100
+      const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
       setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
       setDProgressY(0)
       updateViews()
@@ -271,9 +280,19 @@ const Preview = React.memo(
                       key={i}
                       style={springStyle}
                     >
-                      <Photo
-                        src={availablePhotos[viewPhotoIndices[i]]?.dataUrl}
-                      />
+                      {!!photosCnt && (
+                        <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
+                      )}
+                      {!photosCnt && (
+                        <>
+                          <Photo src={placeholderIm} />
+                          <Blur />
+                          <NoImagesBox>
+                            <PictureIc css={imSmallPlaceholderIcS} />
+                            <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
+                          </NoImagesBox>
+                        </>
+                      )}
                     </PhotoBox>
                   )
                 })}
@@ -349,8 +368,9 @@ const PhotoBox = styled(animated.div)`
   width: 100%;
   height: 100%;
   border-radius: 16px;
+  ${centerAll};
   overflow: hidden;
-  // TODO
+  // TODO add some bg gradient while image not loaded already
   background-color: indianred;
   
   user-select: none;
@@ -365,6 +385,42 @@ const Photo = styled.img`
   object-fit: cover;
   
   pointer-events: none; // or attr draggable="false"
+`
+
+const Blur = styled.div`
+  ${fill};
+  backdrop-filter: blur(18px);
+  //background-color: #00000044;
+`
+
+const NoImagesBox = styled.div`
+  width: 250px;
+  height: 180px;
+  position: relative;
+  z-index: 1;
+  border-radius: 16px;
+  background-color: ${p => p.theme.boxTransparent.bg};
+  ${centerGrid};
+  grid:
+    '.' 1fr
+    'p' 1.6fr
+    't' 1fr
+    / 100%;
+  ;
+  color: ${p => p.theme.boxTransparent.c};
+`
+const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
+  ${imPlaceholderIcS(t)};
+  ${SvgIconS.El.icon.thiz()} {
+    grid-area: p;
+    ${SvgIconS.El.icon.props.size.set('112%')}
+    ${SvgIconS.El.icon.props.color.set(t.boxTransparent.c)}
+  }
+`
+const NoImagesTitle = styled.div`
+  grid-area: t;
+  ${centerGrid};
+  ${Txt.large3};
 `
 
 

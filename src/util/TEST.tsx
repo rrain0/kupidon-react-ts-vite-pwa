@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
-import nextUp from '@img/test/NEXT UP.jpg'
+import nextUp from '@im/test/NEXT UP.jpg'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback

@@ -132,6 +132,12 @@ export const DarkProps: ThemeProps = {
   },
   
   
+  
+  boxTransparent: {
+    bg: '#18191b99',
+    c:  '#dddddd',
+  },
+  
   boxPink: {
     bg: ['#F0849D', '#CD617A'],
     c:  '#FFFFFF',

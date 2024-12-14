@@ -10,9 +10,9 @@ import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
 import Txt = EmotionCommon.Txt
-import heartLocks from '@img/sign/heart-locks.svg'
-import share from '@img/sign/share.svg'
-import social from '@img/sign/social.svg'
+import heartLocks from '@im/sign/heart-locks.svg'
+import share from '@im/sign/share.svg'
+import social from '@im/sign/social.svg'
 
 
 

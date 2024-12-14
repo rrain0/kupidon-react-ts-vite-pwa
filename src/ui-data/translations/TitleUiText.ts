@@ -201,5 +201,9 @@ export const TitleUiText = {
     'ru-RU': 'Восстановление пароля',
   },
   
+  noPhotos: {
+    'en-US': 'No photos',
+    'ru-RU': 'Нет фото',
+  },
   
 } satisfies UiValues

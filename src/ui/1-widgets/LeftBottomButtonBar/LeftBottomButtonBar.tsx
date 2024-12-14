@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { StyleConstants } from 'src/ui-data/style/StyleConstants'
+import { StyleVals } from 'src/ui-data/style/StyleVals'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
@@ -51,8 +51,8 @@ const ButtonsContainer = styled.div`
     pointer-events: auto;
   }
   ${col};
-  padding: ${StyleConstants.itemListGapPx};
-  gap: ${StyleConstants.itemListGapPx};
+  padding: ${StyleVals.itemListGapPx};
+  gap: ${StyleVals.itemListGapPx};
 `
 
 

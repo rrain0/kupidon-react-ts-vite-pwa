@@ -132,6 +132,11 @@ export const LightProps: ThemeProps = {
   },
   
   
+  boxTransparent: {
+    bg: '#ffffff99',
+    c:  '#291f1d',
+  },
+  
   boxPink: {
     bg: ['#F0849D', '#CD617A'],
     c:  '#FFFFFF',
