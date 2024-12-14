@@ -357,7 +357,7 @@ const PhotoBox = styled(animated.div)`
   pointer-events: auto;
   
   transform-origin: 50% 0;
-  will-change: transform/*, z-index, scale, opacity*/;
+  will-change: transform, z-index, scale, opacity;
 `
 const Photo = styled.img`
   ${fill};
