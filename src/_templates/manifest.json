@@ -9,9 +9,12 @@
   "name": "Kupidon",
   "short_name": "Kupidon",
   "description": "Kupidon date app",
-  "start_url": ".", // REQUIRED
-  "display": "standalone",  // REQUIRED 'fullscreen' | 'standalone' | 'minimal-ui'
-  "orientation": "portrait", // only in installed app mode
+  // REQUIRED
+  "start_url": ".",
+  // REQUIRED 'fullscreen' | 'standalone' | 'minimal-ui'
+  "display": "standalone",
+  // only in installed app mode
+  "orientation": "portrait",
   
   
   // Splashscreen colors can't be overriden by html <meta/>
@@ -40,15 +43,17 @@
       "type": "image/png",
       "sizes": "64x64"
     },
+    // REQUIRED size
     {
       "src": "icon192.png",
       "type": "image/png",
-      "sizes": "192x192" // REQUIRED
+      "sizes": "192x192"
     },
+    // REQUIRED size - Splashscreen icon
     {
       "src": "icon512.png",
       "type": "image/png",
-      "sizes": "512x512" // REQUIRED - Splashscreen icon
+      "sizes": "512x512"
     }
   ]
   

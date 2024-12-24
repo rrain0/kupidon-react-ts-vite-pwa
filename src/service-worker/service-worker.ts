@@ -120,7 +120,7 @@ registerRoute(
     //console.log('request,url', request,url)
     
     /* eslint-disable @stylistic/quotes, @stylistic/comma-dangle */
-    let manifest: Record<string, any> = {
+    let m: Record<string, any> = {
       "lang": "en-US",
       "name": "Kupidon",
       "short_name": "Kupidon",
@@ -180,20 +180,20 @@ registerRoute(
     
     
     const nodeEnv = searchParams.get('nodeEnv')
-    if (nodeEnv && nodeEnv in nodeEnvMap) manifest = { ...manifest, ...nodeEnvMap[nodeEnv] }
+    if (nodeEnv && nodeEnv in nodeEnvMap) m = { ...m, ...nodeEnvMap[nodeEnv] }
     
     const lang = searchParams.get('lang')
-    if (lang && lang in localizationMap) manifest = { ...manifest, ...localizationMap[lang] }
+    if (lang && lang in localizationMap) m = { ...m, ...localizationMap[lang] }
     
     if (nodeEnv === 'development') {
-      manifest.name = `Dev ${manifest.name}`
-      manifest.short_name = `Dev ${manifest.short_name}`
-      manifest.description = `Dev ${manifest.description}`
+      m.name = `Dev ${m.name}`
+      m.short_name = `Dev ${m.short_name}`
+      m.description = `Dev ${m.description}`
     }
     
     
     return new Response(
-      JSON.stringify(manifest),
+      JSON.stringify(m),
       {
         headers: {
           'Content-Type': 'application/json',
