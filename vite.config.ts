@@ -58,7 +58,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
 
   base: '/',
   
-  includeAssets: ['favicon.svg'],
+  includeAssets: ['icon.svg'],
 }
 
 

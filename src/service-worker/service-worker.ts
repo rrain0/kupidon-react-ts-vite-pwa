@@ -132,17 +132,17 @@ registerRoute(
       "background_color": "#282c34",
       "icons": [
         {
-          "src": "logo64.png",
+          "src": "icon64.png",
           "type": "image/png",
           "sizes": "64x64"
         },
         {
-          "src": "logo192.png",
+          "src": "icon192.png",
           "type": "image/png",
           "sizes": "192x192"
         },
         {
-          "src": "logo512.png",
+          "src": "icon512.png",
           "type": "image/png",
           "sizes": "512x512"
         }

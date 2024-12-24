@@ -14,7 +14,7 @@
   "orientation": "portrait", // only in installed app mode
   
   
-  // Shlashscreen colors can't be overriden by html <meta/>
+  // Splashscreen colors can't be overriden by html <meta/>
   // When app has loaded, html <meta/> will override manifest values.
   
   // На нижний бар с полоской навигации андроида эти настройки не влияют
@@ -33,17 +33,20 @@
   "background_color": "#282c34",
   
   
+  // Favicon - PWA homescreen icon (need WITHOUT paddings) + used in browser tab + site shortcut (need WITH paddings)
   "icons": [
     {
-      "src": "logo64.png",
+      "src": "icon64.png",
       "type": "image/png",
       "sizes": "64x64"
-    },{
-      "src": "logo192.png",
+    },
+    {
+      "src": "icon192.png",
       "type": "image/png",
       "sizes": "192x192" // REQUIRED
-    },{
-      "src": "logo512.png",
+    },
+    {
+      "src": "icon512.png",
       "type": "image/png",
       "sizes": "512x512" // REQUIRED // splashscreen icon
     }
