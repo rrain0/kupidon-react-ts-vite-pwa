@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useEffect } from 'react'
+import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
@@ -36,9 +37,7 @@ export type ClearSiteDialogProps = {
   isOpen: boolean
   close: Callback
 }
-const ClearSiteDialog =
-React.memo(
-(props: ClearSiteDialogProps)=>{
+const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
   const { isOpen, close } = props
   
   const statusText = useUiValues(StatusUiText)
@@ -46,82 +45,89 @@ React.memo(
   
   
   const [needClear, clear] = useBool(false)
-  useEffect(
-    ()=>{
-      if (needClear){
-        ;(async()=>{
-          await clearSiteData()
-          window.location.reload()
-        })()
-      }
-    },
-    [needClear]
-  )
+  useEffect(() => {
+    if (needClear) {
+      // eslint-disable-next-line @stylistic/no-extra-semi
+      ;(async() => {
+        await clearSiteData()
+        window.history.pushState(undefined, '', '/')
+        window.location.reload()
+      })()
+    }
+  }, [needClear])
   
   
   
-  return <>
-    
-    <UseBottomSheetState isOpen={isOpen} onClose={close}>
-    {props => <ModalPortal><BottomSheetDialogBasic
-      {...props.sheetProps}
-      headerTitle={actionText.clearAppData + '?'}
-    >
-      <div
-        css={css`
-          ${col};
-          padding-bottom: 20px;
-        `}
-      >
+  return (
+    <>
+      
+      <UseBottomSheetState isOpen={isOpen} onClose={close}>
+        {props => (
+          <ModalPortal>
+            <BottomSheetDialogBasic
+              {...props.sheetProps}
+              headerTitle={actionText.clearAppData + '?'}
+            >
+              <div
+                css={css`
+                  ${col};
+                  padding-bottom: 20px;
+                `}
+              >
+                <div
+                  css={css`
+                    ${row};
+                    justify-content: center;
+                    gap: 20px;
+                  `}
+                >
+                  
+                  <Button css={[ButtonS.filledRoundedNormalAccent, button]}
+                    onClick={props.setClosing}
+                  >
+                    {actionText.no}
+                  </Button>
+                  
+                  <Button css={[ButtonS.filledRoundedNormalDanger, button]}
+                    onClick={clear}
+                  >
+                    <ClearTrashIc css={[icon, iconOnDanger]} />
+                    {actionText.yes}
+                  </Button>
+                
+                </div>
+              </div>
+            </BottomSheetDialogBasic>
+          </ModalPortal>
+        )}
+      </UseBottomSheetState>
+      
+      { needClear && (
         <div
-          css={css`
-            ${row};
-            justify-content: center;
-            gap: 20px;
+          css={t => css`
+            ${fixed};
+            z-index: ${StyleVals.modalFloor2};
+            background: ${t.page.bg[0]}9a;
+            color: ${t.page.content2[0]};
+            ${Txt.large2};
+            ${center};
           `}
         >
-          
-          <Button css={[ButtonS.filledRoundedNormalAccent, button]}
-            onClick={props.setClosing}
+          <div
+            css={css`
+              ${row};
+              gap: 0.3em;
+              align-items: center;
+            `}
           >
-            {actionText.no}
-          </Button>
-          
-          <Button css={[ButtonS.filledRoundedNormalDanger, button]}
-            onClick={clear}
-          >
-            <ClearTrashIc css={[icon, iconOnDanger]}/>
-            {actionText.yes}
-          </Button>
-        
+            <Spinner8LinesIc css={icon} />
+            {statusText.reloading}
+          </div>
         </div>
-      </div>
-    </BottomSheetDialogBasic></ModalPortal>}
-    </UseBottomSheetState>
-    
-    { needClear && <div
-      css={t => css`
-        ${fixed};
-        z-index: 40;
-        background: ${t.page.bg[0]}9a;
-        color: ${t.page.content2[0]};
-        ${Txt.large2};
-        ${center};
-      `}
-    >
-      <div
-        css={css`
-          ${row};
-          gap: 0.3em;
-          align-items: center;
-        `}
-      >
-        {<Spinner8LinesIc css={icon}/>}
-        {statusText.reloading}
-      </div>
-    </div> }
-    
-  </>
+      )}
+      
+    </>
+  )
 })
 export default ClearSiteDialog
 

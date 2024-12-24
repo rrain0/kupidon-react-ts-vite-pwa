@@ -82,8 +82,8 @@ cleanupOutdatedCaches()
    An example runtime caching route for requests that aren't handled by the
    precache, in this case same-origin .png requests like those from in public/
    */
-  const imgExtsList = ['webp','svg','heic','heif','jpeg','jpg','png','gif','bmp']
-  const imgExts = new RegExp(`\\.(${imgExtsList.join('|')})$`,'i')
+  const imgExtsList = ['webp', 'svg', 'heic', 'heif', 'jpeg', 'jpg', 'png', 'gif', 'bmp']
+  const imgExts = new RegExp(`\\.(${imgExtsList.join('|')})$`, 'i')
   registerRoute(
     // Add in any other file extensions or routing criteria as needed.
     ({ url }) => {
@@ -115,11 +115,11 @@ cleanupOutdatedCaches()
 
 // manifest.json interceptor & generator
 registerRoute(
-  ({ url }) => url.pathname===import.meta.env.BASE_URL + 'manifest.json',
-  async ({ event, request, url, params })=>{
+  ({ url }) => url.pathname === import.meta.env.BASE_URL + 'manifest.json',
+  async ({ event, request, url, params }) => {
     //console.log('request,url', request,url)
     
-    
+    /* eslint-disable @stylistic/quotes, @stylistic/comma-dangle */
     let manifest: Record<string, any> = {
       "lang": "en-US",
       "name": "Kupidon",
@@ -148,11 +148,12 @@ registerRoute(
         }
       ]
     }
+    /* eslint-enable @stylistic/quotes, @stylistic/comma-dangle */
     
     
     const searchParams = url.searchParams
     
-    const baseId = "kupidon-react-pwa"
+    const baseId = 'kupidon-react-pwa'
     const nodeEnvMap = {
       development: {
         id: `${baseId}-development`,
@@ -163,28 +164,28 @@ registerRoute(
     }
     
     const localizationMap = {
-      "en-US": {
-        lang: "en-US",
-        name: "Kupidon",
-        short_name: "Kupidon",
-        description: "Kupidon date app",
+      'en-US': {
+        lang: 'en-US',
+        name: 'Kupidon',
+        short_name: 'Kupidon',
+        description: 'Kupidon date app',
       },
-      "ru-RU": {
-        lang: "ru-RU",
-        name: "Купидон",
-        short_name: "Купидон",
-        description: "Купидон - приложение для свидания",
+      'ru-RU': {
+        lang: 'ru-RU',
+        name: 'Купидон',
+        short_name: 'Купидон',
+        description: 'Купидон - приложение для свидания',
       },
     }
     
     
-    const nodeEnv = searchParams.get("nodeEnv")
+    const nodeEnv = searchParams.get('nodeEnv')
     if (nodeEnv && nodeEnv in nodeEnvMap) manifest = { ...manifest, ...nodeEnvMap[nodeEnv] }
     
-    const lang = searchParams.get("lang")
+    const lang = searchParams.get('lang')
     if (lang && lang in localizationMap) manifest = { ...manifest, ...localizationMap[lang] }
     
-    if (nodeEnv === "development") {
+    if (nodeEnv === 'development') {
       manifest.name = `Dev ${manifest.name}`
       manifest.short_name = `Dev ${manifest.short_name}`
       manifest.description = `Dev ${manifest.description}`
@@ -197,7 +198,7 @@ registerRoute(
         headers: {
           'Content-Type': 'application/json',
           //'Content-Type': 'application/manifest+json',
-        }
+        },
       }
     )
   }
@@ -211,23 +212,22 @@ registerRoute(
  registration.waiting.postMessage({ type: 'skip-waiting' })
  */
 self.addEventListener('message', async ev => {
-  switch (ev.data?.type) {
-    case 'skip-waiting':
-      void self.skipWaiting()
-      break
-    case 'console.log':
-      console.log('console.log',ev)
-      break
-    case 'clear-cache':
-      // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
-      ev.waitUntil(
-        (async()=>{
-          await clearCache()
-          ev.ports[0]?.postMessage({ type: 'cache cleared' })
-        })()
-      )
-      //self.registration.unregister()
-      break
+  const t = ev.data?.type
+  if (t === 'skip-waiting') {
+    void self.skipWaiting()
+  }
+  else if (t === 'console.log') {
+    console.log('console.log', ev)
+  }
+  else if (t === 'clear-cache') {
+    // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
+    ev.waitUntil(
+      (async() => {
+        await clearCache()
+        ev.ports[0]?.postMessage({ type: 'cache cleared' })
+      })()
+    )
+    //self.registration.unregister()
   }
 })
 
@@ -236,7 +236,7 @@ self.addEventListener('message', async ev => {
 
 async function clearCache(): Promise<void> {
   const entryKeys = await caches.keys()
-  await Promise.allSettled(entryKeys.map(key=>caches.delete(key)))
+  await Promise.allSettled(entryKeys.map(key => caches.delete(key)))
 }
 
 

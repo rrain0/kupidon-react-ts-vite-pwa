@@ -135,30 +135,26 @@ export namespace ButtonBarComponents {
   
   
   
-  export const RefreshPageBtn =
-  React.memo(
-  () => {
-    
+  export const RefreshPageBtn = React.memo(() => {
     const [isReloading, reload] = useBool(false)
     
-    useEffect(
-      () => {
-        if (isReloading) window.location.reload()
-      },
-      [isReloading]
+    useEffect(() => {
+      if (isReloading) window.location.reload()
+    }, [isReloading])
+    
+    
+    return (
+      <Button css={IconButtonStyle.iconBig2Transparent}
+        onClick={reload}
+      >
+        <ArrowReloadIc css={isReloading && css`
+          ${SvgIconS.El.icon.thiz()} {
+            animation: ${rotateAnim} 650ms linear infinite;
+          }
+        `}
+        />
+      </Button>
     )
-    
-    
-    return <Button css={IconButtonStyle.iconBig2Transparent}
-      onClick={reload}
-    >
-      <ArrowReloadIc css={isReloading && css`
-        ${SvgIconS.El.icon.thiz()} {
-          animation: ${rotateAnim} 650ms linear infinite;
-        }
-      `}
-      />
-    </Button>
   })
   
   

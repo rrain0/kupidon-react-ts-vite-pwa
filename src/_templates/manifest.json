@@ -48,7 +48,7 @@
     {
       "src": "icon512.png",
       "type": "image/png",
-      "sizes": "512x512" // REQUIRED // splashscreen icon
+      "sizes": "512x512" // REQUIRED - Splashscreen icon
     }
   ]
   

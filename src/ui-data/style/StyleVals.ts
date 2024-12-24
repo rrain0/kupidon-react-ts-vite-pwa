@@ -16,5 +16,6 @@ export namespace StyleVals {
   
   // z-indices
   export const modalFloor1 = 1000
+  export const modalFloor2 = 2000
   
 }
