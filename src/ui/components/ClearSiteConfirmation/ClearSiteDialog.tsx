@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
-import React, { useEffect } from 'react'
+import styled from '@emotion/styled'
+import { useEvent } from '@util/react/useEvent.ts'
+import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
@@ -45,7 +47,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
   
   
   const [needClear, clear] = useBool(false)
-  useEffect(() => {
+  useEvent(() => {
     if (needClear) {
       // eslint-disable-next-line @stylistic/no-extra-semi
       ;(async() => {
@@ -102,28 +104,15 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
         )}
       </UseBottomSheetState>
       
-      { needClear && (
-        <div
-          css={t => css`
-            ${fixed};
-            z-index: ${StyleVals.modalFloor2};
-            background: ${t.page.bg[0]}9a;
-            color: ${t.page.content2[0]};
-            ${Txt.large2};
-            ${center};
-          `}
-        >
-          <div
-            css={css`
-              ${row};
-              gap: 0.3em;
-              align-items: center;
-            `}
-          >
-            <Spinner8LinesIc css={icon} />
-            {statusText.reloading}
-          </div>
-        </div>
+      {needClear && (
+        <ModalPortal>
+          <ModalReloading>
+            <ReloadingBox>
+              <Spinner8LinesIc css={icon} />
+              {statusText.reloading}
+            </ReloadingBox>
+          </ModalReloading>
+        </ModalPortal>
       )}
       
     </>
@@ -134,21 +123,35 @@ export default ClearSiteDialog
 
 
 
-const icon = (t:Theme)=>css`
+const icon = (t:Theme) => css`
   ${SvgIconS.El.icon.thiz()} {
     height: 1.333em;
     width: 1.333em;
     ${SvgIconS.El.icon.props.color.set(t.page.content2[0])}
   }
 `
-const iconOnDanger = (t:Theme)=>css`
+const iconOnDanger = (t:Theme) => css`
   ${SvgIconS.El.icon.thiz()} {
     ${SvgIconS.El.icon.props.color.set(t.elementDanger.content[0])}
   }
 `
-const button = (t:Theme)=>css`
+const button = (t:Theme) => css`
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;
     gap: 0.3em;
   }
+`
+
+const ModalReloading = styled.div`
+  ${fixed};
+  z-index: ${StyleVals.modalFloor2};
+  background: ${p => p.theme.page.bg[0]}9a;
+  color: ${p => p.theme.page.content2[0]};
+  ${Txt.large2};
+  ${center};
+`
+const ReloadingBox = styled.div`
+  ${row};
+  gap: 0.3em;
+  align-items: center;
 `

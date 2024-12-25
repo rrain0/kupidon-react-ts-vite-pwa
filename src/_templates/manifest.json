@@ -56,6 +56,8 @@
       "sizes": "512x512"
     }
   ]
+  // Need to include all icons in vite.config.ts:
+  // includeAssets: ['icon.svg', 'icon64.png', 'icon192.png', 'icon512.png'],
   
   
   // REQUIRED: prefer_related_applications не должен присутствовать или должен быть false

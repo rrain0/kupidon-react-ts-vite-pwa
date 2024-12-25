@@ -14,7 +14,7 @@ export async function clearSiteData(): Promise<void> {
   await clearCache()
   
   const swRegistrations = await navigator.serviceWorker.getRegistrations()
-  await Promise.allSettled(swRegistrations.map(it=>it.unregister()))
+  await Promise.allSettled(swRegistrations.map(it => it.unregister()))
   
   //await ServiceWorkerUtils.sendMsgAndWaitAnswer({ type: 'clear-cache' }).catch(()=>undefined)
 }
@@ -25,10 +25,10 @@ export async function clearSiteData(): Promise<void> {
 // this handy snippet won't work.
 // Also, httpOnly cookies are not available from javascript at all.
 const expires = 'Thu, 01 Jan 1970 00:00:00 UTC'
-export function clearCookies(){
+export function clearCookies() {
   const cookies = document.cookie.split(/(; ?)/)
-  const cookieNames = cookies.map(cookie=>cookie.split('=')[0])
-  cookieNames.forEach(name=>{
+  const cookieNames = cookies.map(cookie => cookie.split('=')[0])
+  cookieNames.forEach(name => {
     let c = name+'='
     c += '; ' + `expires=${expires}`
     document.cookie = c
@@ -39,7 +39,7 @@ export function clearCookies(){
 
 export async function clearCache(): Promise<void> {
   const entryKeys = await window.caches.keys()
-  await Promise.allSettled(entryKeys.map(key=>window.caches.delete(key)))
+  await Promise.allSettled(entryKeys.map(key => window.caches.delete(key)))
 }
 
 
