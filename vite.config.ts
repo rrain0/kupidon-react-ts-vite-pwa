@@ -13,27 +13,6 @@ import dotenvExpand from 'dotenv-expand'
 
 
 const projectRoot: string = process.cwd() // current working directory
-// partial fix for vite-plugin-checker to make file links clickable in the IDE console
-{
-  const nm = path.join(projectRoot, 'node_modules')
-  const loggerFile = path.join(nm, 'vite-plugin-checker', 'dist', 'esm', 'logger.js')
-  
-  try {
-    fs.accessSync(loggerFile)
-    let source = fs.readFileSync(loggerFile, 'utf-8')
-    
-    if (!source.includes('pathToFileURL')) {
-      source = `import { pathToFileURL } from "url";\n${source}`
-    }
-    source = source.replace(
-      /(fileLabel ?\+ ?)(d\.id)/,
-      (_m, p1, p2) => `${p1} pathToFileURL(${p2})`
-    )
-    
-    fs.writeFileSync(loggerFile, source)
-  }
-  catch (err) { /* empty */ }
-}
 
 
 

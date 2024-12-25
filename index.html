@@ -55,11 +55,8 @@
     }
   </script>
   
-  
-  <!--<script src="https://yastatic.net/share2/share.js"></script>-->
-  
   <script>
-    /** @type {'development'|'production'|string} */
+    /** @type {'development' | 'production' | string} */
     const MODE = "%MODE%"
     /** @type {string} */
     const BASE_URL = "%BASE_URL%"
@@ -71,7 +68,7 @@
     //console.log('apply lang function - start setup')
     
     /** @type {(matchedLangs: NonEmptyArr<Lang.Supported>)=>void} */
-    const applyLangToHtml = (matchedLangs)=>{
+    const applyLangToHtml = (matchedLangs) => {
       /**
        * @type {{
        *  nodeEnv: 'development'|'production',

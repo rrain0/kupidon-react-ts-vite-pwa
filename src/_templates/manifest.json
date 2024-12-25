@@ -42,7 +42,7 @@
     Define in index.html: <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     NO PADDINGS
     
-    Также используется для обычного ярлыка сайта - там уже НУЖНЫ ПАДДИНГИ, но пофиг
+    Также используется для обычного ярлыка сайта Android - там уже НУЖНЫ ПАДДИНГИ, но пофиг
   */
   /*
     Apple touch icon - Иконка PWA на iOS
