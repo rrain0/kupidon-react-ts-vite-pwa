@@ -21,7 +21,7 @@ export const LightOrangeProps: ThemeProps = { ...LightPinkProps,
     contentAccent: ['#ff802a'],
   },
   
-  containerAccent: { ...LightPinkProps.containerAccent,
+  boxAccent: { ...LightPinkProps.boxAccent,
     bg:     ['#fdca6d'],
   },
   
@@ -57,6 +57,6 @@ export const LightOrange = {
   icon: styled.div(themeIconCss({
     accentColor: LightOrangeProps.buttonAccent.bg[0],
     bgColor1:   LightOrangeProps.buttonAccent.bg[0],
-    bgColor2:   LightOrangeProps.containerNormal.bg[0],
+    bgColor2:   LightOrangeProps.boxNormal.bg[0],
   })),
 } satisfies Theme

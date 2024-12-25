@@ -127,6 +127,9 @@ export namespace ButtonS {
     }
     
     // state: disabled
+    ${W.use.s.disabled().e.button().thisUse} {
+      cursor: not-allowed;
+    }
     ${W.use.s.disabled().e.ripple().thisUse} {
       display: none;
     }
@@ -278,7 +281,7 @@ export namespace ButtonS {
   // type: filled, shape: rect, add color: accent 2
   const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
     bg: t.buttonAccent.bg2[0],
-    c: t.buttonAccent.content[0],
+    c: t.buttonAccent.ct2,
     cRipple: t.ripple.content[0],
     bgFocus: t.buttonAccent.bgFocus[0],
     cFocus: t.buttonAccent.contentFocus[0],

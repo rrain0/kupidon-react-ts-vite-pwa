@@ -157,7 +157,7 @@ export namespace SelectItemS {
     // normal
     ${W.use.s.normal().e.frame().thisUse} {
       width: 100%;
-      background-color: ${t.containerNormal.bg2[0]};
+      background-color: ${t.boxNormal.bg2[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse}{
       ${RippleS.onFilledNormal(t)}
@@ -179,7 +179,7 @@ export namespace SelectItemS {
     
     // selected
     ${W.use.s.selected().e.border().thisUse} {
-      border-color: ${t.containerNormal.content1b[0]};
+      border-color: ${t.boxNormal.content1b[0]};
     }
   `
   

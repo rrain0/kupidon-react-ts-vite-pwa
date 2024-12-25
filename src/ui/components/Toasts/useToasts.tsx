@@ -19,30 +19,30 @@ export type UseToastsProps = PartialUndef<{
 
 
 
-export const useToasts = (props?: UseToastsProps)=>{
+export const useToasts = (props?: UseToastsProps) => {
   const data = props?.toasts??[]
   
   const [prevData, setPrevData] = useState([] as UseToastDataType)
   
   
   const onData = useEffectEvent(
-    (data: UseToastDataType)=>{
-      const show = data.filter(d=>!prevData.includes(d))
-      const hide = prevData.filter(d=>!data.includes(d))
+    (data: UseToastDataType) => {
+      const show = data.filter(d => !prevData.includes(d))
+      const hide = prevData.filter(d => !data.includes(d))
       
       /* console.log(
         'USE_TOASTS: PREV_DATA',prevData,'\n',
         'USE_TOASTS: DATA',data,
       ) */
       
-      hide.forEach(d=>{
-        if (d instanceof ToastMsgData){
+      hide.forEach(d => {
+        if (d instanceof ToastMsgData) {
           d.hide()
         }
       })
       
-      show.forEach(d=>{
-        if (d instanceof ToastMsgData){
+      show.forEach(d => {
+        if (d instanceof ToastMsgData) {
           d.show()
         }
       })
@@ -50,28 +50,20 @@ export const useToasts = (props?: UseToastsProps)=>{
       setPrevData(data)
     }
   )
-  useEffect(
-    ()=>{
-      onData(data)
-    },
-    data
-  )
+  useEffect(() => { onData(data) }, data)
   
   
-  const closeOnUnmount = useEffectEvent(()=>{
-    prevData.forEach(d=>{
-      if (d instanceof ToastMsgData){
-        if(d.closeOnUnmount){
+  const closeOnUnmount = useEffectEvent(() => {
+    prevData.forEach(d => {
+      if (d instanceof ToastMsgData) {
+        if (d.closeOnUnmount) {
           //toast.dismiss(scope+d.id)
           d.hide()
         }
       }
     })
   })
-  useEffect(
-    ()=>()=>closeOnUnmount(),
-    []
-  )
+  useEffect(() => () => closeOnUnmount(), [])
   
 }
 
@@ -106,28 +98,30 @@ export class ToastMsgData {
   
   id: string|number|undefined = undefined
   runCloseCallback = true
-  onChange: Callback1<ToastItem> = (toast: ToastItem)=>{
-    if(toast.status==='removed' && toast.data===this){
+  onChange: Callback1<ToastItem> = (toast: ToastItem) => {
+    if (toast.status === 'removed' && toast.data === this) {
       this.id = undefined
       this.unsubscribeOnChange?.()
-      if (this.runCloseCallback){
+      if (this.runCloseCallback) {
         //console.log('toast removed',this)
         this.onClose?.()
       }
     }
   }
   unsubscribeOnChange: (()=>void) | undefined = undefined
-  show(){
-    if (this.id===undefined) {
+  show() {
+    if (this.id === undefined) {
       this.unsubscribeOnChange = toast.onChange(this.onChange)
       this.id = toast(
-        props=><ToastBody
-          closeToast={props.closeToast}
-          showCloseButton={this.showCloseButton}
-          type={this.type}
-        >
-          {this.msg}
-        </ToastBody>,
+        props => (
+          <ToastBody
+            closeToast={props.closeToast}
+            showCloseButton={this.showCloseButton}
+            type={this.type}
+          >
+            {this.msg}
+          </ToastBody>
+        ),
         {
           data: this,
           draggable: this.dragToClose,
@@ -136,7 +130,7 @@ export class ToastMsgData {
       )
     }
   }
-  hide(){
+  hide() {
     if (this.id!==undefined) {
       this.runCloseCallback = false
       // it is not working BEFORE toast.dismiss so need to use runCloseCallback = false
@@ -154,9 +148,10 @@ export type ToastMsgProps<UO extends UiText> = PartialUndef<{
   uiOption: UO
   defaultText: string
 }>
-export const ToastMsg =
-React.memo(
-<UO extends UiText>(props:ToastMsgProps<UO>)=>{
-  const uiOption = useUiValue(props.uiOption)
-  return <>{uiOption ?? props.defaultText}</>
-})
+export const ToastMsg = React.memo(
+  <UO extends UiText>(props: ToastMsgProps<UO>) => {
+    const uiOption = useUiValue(props.uiOption)
+    // @ts-ignore
+    return <>{uiOption ?? props.defaultText}</>
+  }
+)

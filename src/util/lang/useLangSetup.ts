@@ -13,9 +13,6 @@ import destructCopyBy = ObjectU.destructCopyBy
 
 
 
-
-
-
 export const useLangSetup = () => {
   const systemLangs = useLangDetector()
   const [langSettings, setLangSettings] = useRecoilState(LangSettingsRecoil)
@@ -33,32 +30,29 @@ export const useLangSetup = () => {
   
   
   
-  useLayoutEffect(
-    () => {
-      if (langSettings.setting==='system') {
-        const matched = lang.matchedSystemLangs
-        // language is not initialized yet, skip for next useLayoutEffect call
-        if (!matched) return
-        // check if array has any language
-        if (arrIsNonEmpty(matched)) setLang(destructCopyBy({
-          langs: [...matched, Lang.Default],
-        }))
-        // or else switch to manual mode
-        else setLangSettings(destructCopyBy({
-          setting: 'manual',
-        }))
-      }
-      else if (langSettings.setting === 'manual') {
-        if (langSettings.manualSetting) setLang(destructCopyBy({
-          langs: [...langSettings.manualSetting, Lang.Default],
-        }))
-        else setLang(destructCopyBy({
-          langs: [Lang.Default],
-        }))
-      }
-    },
-    [lang.matchedSystemLangs, langSettings]
-  )
+  useLayoutEffect(() => {
+    if (langSettings.setting==='system') {
+      const matched = lang.matchedSystemLangs
+      // language is not initialized yet, skip for next useLayoutEffect call
+      if (!matched) return
+      // check if array has any language
+      if (arrIsNonEmpty(matched)) setLang(destructCopyBy({
+        langs: [...matched, Lang.Default],
+      }))
+      // or else switch to manual mode
+      else setLangSettings(destructCopyBy({
+        setting: 'manual',
+      }))
+    }
+    else if (langSettings.setting === 'manual') {
+      if (langSettings.manualSetting) setLang(destructCopyBy({
+        langs: [...langSettings.manualSetting, Lang.Default],
+      }))
+      else setLang(destructCopyBy({
+        langs: [Lang.Default],
+      }))
+    }
+  }, [lang.matchedSystemLangs, langSettings])
   
   
   // apply to html

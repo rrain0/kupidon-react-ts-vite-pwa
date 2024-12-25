@@ -12,8 +12,8 @@ export namespace AppTheme {
   
   /*
   background => bg
-  content => c
-  contentAccent => ca
+  content => c / ct
+  contentAccent => ca / cta
    */
   export interface ThemeProps {
     
@@ -40,7 +40,7 @@ export namespace AppTheme {
       bg: string[]
     }
     
-    containerNormal: {
+    boxNormal: {
       bg:              string[]
       bg2:             string[]
       bg3:             string[]
@@ -60,14 +60,13 @@ export namespace AppTheme {
       c6:              string
       
       contentAccent:   string[]
-      contentAccent2:  string[]
+      cta2:  string
       contentAccent3:  string[]
       
       shadow:          string[]
     },
-    containerAccent: {
+    boxAccent: {
       bg:       string[]
-      bg2:      string[]
       bg3:      string
       content:  string[]
       content2: string[]
@@ -85,6 +84,7 @@ export namespace AppTheme {
       bg:            string[]
       bg2:           string[]
       content:       string[]
+      ct2:           string
       bgFocus:       string[]
       contentFocus:  string[]
     }

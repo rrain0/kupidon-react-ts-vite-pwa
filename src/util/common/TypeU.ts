@@ -84,10 +84,10 @@ export namespace TypeU {
   
   
   export function isFinitenumber<T, N extends number>(v: T | N): v is N {
-    return typeof v === 'number' && isFinite(v);
+    return typeof v === 'number' && isFinite(v)
   }
   export function isInt<T, N extends number>(v: T | N): v is N {
-    return typeof v === 'number' && Number.isInteger(v);
+    return typeof v === 'number' && Number.isInteger(v)
   }
   
   
@@ -104,7 +104,7 @@ export namespace TypeU {
   export type Mapper<In, Out = In> = (prevValue: In) => Out
   export type Mapper2<In1, In2, Out = In1> = (a: In1, b: In2) => Out
   
-  export type Predicate<T> = (obj: T)=>boolean
+  export type Predicate<T> = (obj: T) => boolean
   export const defaultPredicate: Predicate<any> = value => !!value
   export type Filter<T> = Predicate<T>
   

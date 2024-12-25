@@ -28,7 +28,7 @@ export const DarkProps: ThemeProps = {
     contentAccent: ['#bdbdbd'],
   },
   
-  containerNormal: {
+  boxNormal: {
     bg:              ['#24272d'],
     bg2:             ['#282c34'],
     bg3:             ['#525354'],
@@ -48,14 +48,13 @@ export const DarkProps: ThemeProps = {
     c6:              '#505050',
     
     contentAccent:   ['#bdbdbd'],
-    contentAccent2:  ['#2e343f'],
+    cta2:  '#2e343f',
     contentAccent3:  ['#2e343f'],
     
     shadow:          ['#00000000'],
   },
-  containerAccent: {
+  boxAccent: {
     bg:       ['#aaaaaa'],
-    bg2:      ['#bdbdbd'],
     bg3:      '#bdbdbd',
     content:  ['#000000'],
     content2: ['#000000'],
@@ -71,6 +70,7 @@ export const DarkProps: ThemeProps = {
     bg:            ['#999999'],
     bg2:           ['#999999'],
     content:       ['#000000'],
+    ct2:           '#000000',
     bgFocus:       ['#7b7b7b'],
     contentFocus:  ['#000000'],
   },

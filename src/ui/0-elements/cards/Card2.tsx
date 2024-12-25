@@ -49,5 +49,5 @@ const Frame = styled.article`
   gap: inherit;
   padding: 16px 12px;
   border-radius: 16px;
-  background: ${p => p.theme.containerNormal.bg[0]};
+  background: ${p => p.theme.boxNormal.bg[0]};
 `

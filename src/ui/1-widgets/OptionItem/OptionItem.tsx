@@ -96,7 +96,7 @@ const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
 const OptionAndValueItemIconStyle = (t: AppTheme.Theme) => css`
   ${SvgIconS.base};
   ${SvgIconS.El.icon.thiz()}{
-    ${SvgIconS.El.icon.props.color.set(t.containerNormal.content3[0])}
+    ${SvgIconS.El.icon.props.color.set(t.boxNormal.content3[0])}
     height: 50%;
   }
 `
@@ -106,7 +106,7 @@ const TitleFrame = styled.div`
   display: grid;
   place-items: center start;
   
-  color: ${p => p.theme.containerNormal.content[0]};
+  color: ${p => p.theme.boxNormal.content[0]};
 `
 const ValueFrame = styled.div`
   grid-area: value;
@@ -117,7 +117,7 @@ const ValueFrame = styled.div`
 const Value = styled.div`
   display: -webkit-box;
   
-  color: ${p => p.theme.containerNormal.content3[0]};
+  color: ${p => p.theme.boxNormal.content3[0]};
   
   max-height: 40px;
   overflow: hidden;
@@ -136,6 +136,6 @@ const NextIconFrame = styled.div`
 `
 const nextIconStyle = (t: AppTheme.Theme) => css`
   height: 24px;
-  ${SvgIconS.El.icon.props.color.name}: ${t.containerNormal.content3[0]};
+  ${SvgIconS.El.icon.props.color.name}: ${t.boxNormal.content3[0]};
 `
 

@@ -26,14 +26,14 @@ export const LightPinkProps: ThemeProps = { ...LightProps,
     contentAccent: ['#BB2649'],
   },
   
-  containerNormal: { ...LightProps.containerNormal,
+  boxNormal: { ...LightProps.boxNormal,
     bg:       ['#ffffff'],
     bg2:      ['#f0f0f0'],
     content:   ['#000000'],
     content2:  ['#555555'],
     content3:  ['#7b7b7b'],
   },
-  containerAccent: { ...LightProps.containerAccent,
+  boxAccent: { ...LightProps.boxAccent,
     bg:     ['#ffaeba'],
     content: ['#000000'],
   },
@@ -128,7 +128,7 @@ export const LightPink = {
   icon: styled.div(themeIconCss({
     accentColor: LightPinkProps.buttonAccent.bg[0],
     bgColor1:   LightPinkProps.buttonAccent.bg[0],
-    bgColor2:   LightPinkProps.containerNormal.bg2[0],
+    bgColor2:   LightPinkProps.boxNormal.bg2[0],
   })),
 } satisfies Theme
 

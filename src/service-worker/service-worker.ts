@@ -30,8 +30,7 @@ const selfWbManifest = self.__WB_MANIFEST
 // self.__WB_MANIFEST is the default injection point
 
 
-console.log('msgFromServiceWorker')
-console.log(selfWbManifest)
+console.log('service worker selfWbManifest', selfWbManifest)
 
 
 
@@ -87,11 +86,13 @@ cleanupOutdatedCaches()
   registerRoute(
     // Add in any other file extensions or routing criteria as needed.
     ({ url }) => {
-      /* console.log('url.pathname', url.pathname)
-       console.log('url.pathname is image', imgExts.test(url.pathname))
-       console.log('url.origin', url.origin)
-       console.log('self.location.origin', self.location.origin)
-       console.log('url.origin === self.location.origin', url.origin === self.location.origin) */
+      /*
+      console.log('url.pathname', url.pathname)
+      console.log('url.pathname is image', imgExts.test(url.pathname))
+      console.log('url.origin', url.origin)
+      console.log('self.location.origin', self.location.origin)
+      console.log('url.origin === self.location.origin', url.origin === self.location.origin)
+       */
       
       if (import.meta.env.DEV) return false
       
@@ -217,7 +218,7 @@ self.addEventListener('message', async ev => {
     void self.skipWaiting()
   }
   else if (t === 'console.log') {
-    console.log('console.log', ev)
+    console.log('service worker console.log', ev)
   }
   else if (t === 'clear-cache') {
     // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.

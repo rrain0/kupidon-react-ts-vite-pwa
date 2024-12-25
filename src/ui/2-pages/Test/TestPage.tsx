@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import numeral from 'numeral'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
@@ -24,108 +25,158 @@ import col = EmotionCommon.col
 import row = EmotionCommon.row
 
 
-const TestPage = React.memo(
-  () => {
-    
-    const [searchParams] = useSearchParams()
-    
-    
-    const [progress, setProgress] = useState(0)
-    useInterval(3000, () => setProgress(s => s === 0 ? 100 : 0))
-    
-    
-    const [isChecked, , , toggleIsChecked] = useBool(false)
-    
-    const [onEventVal, , , toggleOnEventVal] = useBool(false)
-    
-    console.log('TestPage render')
-    
-    return (
-      <>
-        
-        <Pages.SimplePage>
-          <Pages.ContentFill>
+const TestPage = React.memo(() => {
+  
+  /*
+   const rf = (v: number) => {
+   console.log('log from rf', v, typeof v)
+   return +v
+   }
+   console.log('numeral(12.53).format(\'0.0\')', numeral(12.53).format('0.0', rf))
+   console.log('numeral(12.55).format(\'0.0\')', numeral(12.55).format('0.0', rf))
+   console.log('numeral(12.58).format(\'0.0\')', numeral(12.58).format('0.0', rf))
+   
+   console.log('numeral(-12.53).format(\'0.0\')', numeral(-12.53).format('0.0', rf))
+   console.log('numeral(-12.55).format(\'0.0\')', numeral(-12.55).format('0.0', rf))
+   console.log('numeral(-12.58).format(\'0.0\')', numeral(-12.58).format('0.0', rf))
+   */
+  
+  const [searchParams] = useSearchParams()
+  
+  
+  const [progress, setProgress] = useState(0)
+  useInterval(3000, () => setProgress(s => s === 0 ? 100 : 0))
+  
+  
+  const [isChecked, , , toggleIsChecked] = useBool(false)
+  
+  const [onEventVal, , , toggleOnEventVal] = useBool(false)
+  
+  console.log('TestPage render')
+  
+  return (
+    <>
+      
+      <Pages.SimplePage>
+        <Pages.ContentFill>
+          
+          
+          <div>Test Page</div>
+          <Items>
+            <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Scrollbar test</Button>
+            </Link>
+            <Link to={RootRoute.test.bottomSheet[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Bottom Sheet test</Button>
+            </Link>
+            <Link to={RootRoute.test.resizeObserver[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Resize Observer test</Button>
+            </Link>
+            <Link to={RootRoute.test.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Move to another view</Button>
+            </Link>
+            <Link to={RootRoute.test.pointer[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Pointer test</Button>
+            </Link>
+            <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Tabs test</Button>
+            </Link>
+            <Link to={RootRoute.test.state[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>State test</Button>
+            </Link>
+            <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Page Lifecycle test</Button>
+            </Link>
+            <Link to={RootRoute.test.useEvent[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>useEvent test</Button>
+            </Link>
+            <Link to={RootRoute.test.elemRef[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Element Ref test</Button>
+            </Link>
+            <Link to={RootRoute.test.elemStyle[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Element Style test</Button>
+            </Link>
+            <Link to={RootRoute.test.oldProfileOptions[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Old Profile Options</Button>
+            </Link>
             
             
-            <div>Test Page</div>
-            <Items>
-              <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Scrollbar test</Button>
-              </Link>
-              <Link to={RootRoute.test.bottomSheet[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Bottom Sheet test</Button>
-              </Link>
-              <Link to={RootRoute.test.resizeObserver[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Resize Observer test</Button>
-              </Link>
-              <Link to={RootRoute.test.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Move to another view</Button>
-              </Link>
-              <Link to={RootRoute.test.pointer[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Pointer test</Button>
-              </Link>
-              <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Tabs test</Button>
-              </Link>
-              <Link to={RootRoute.test.state[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>State test</Button>
-              </Link>
-              <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Page Lifecycle test</Button>
-              </Link>
-              <Link to={RootRoute.test.useEvent[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>useEvent test</Button>
-              </Link>
-              <Link to={RootRoute.test.elemRef[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Element Ref test</Button>
-              </Link>
-              <Link to={RootRoute.test.elemStyle[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Element Style test</Button>
-              </Link>
-              <Link to={RootRoute.test.oldProfileOptions[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Old Profile Options</Button>
-              </Link>
-              
-              
-              <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Emulated Scroll</Button>
-              </Link>
-              
-              
-              <Link to={RootRoute.test.viewsListItem1AddItem[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Views: List Item 1: Add Item</Button>
-              </Link>
-              <Link to={RootRoute.test.viewsListItem2[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Views: List Item 2</Button>
-              </Link>
-              <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Views: Ripple</Button>
-              </Link>
-              <Link to={RootRoute.test.sliderTest[fullAnySearchParams](searchParams)}>
-                <Button css={ButtonS.filledRectBigNormal}>Views: Slider</Button>
-              </Link>
-            </Items>
-            
-            {/* <button
-             onClick={()=>toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
-             >
-             toast
-             </button> */}
+            <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Emulated Scroll</Button>
+            </Link>
             
             
-            {/*<div
-             css={css`
-             min-height: 2000px;
-             height: 2000px;
-             `}
-             />*/}
-            
+            <Link to={RootRoute.test.viewsListItem1AddItem[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Views: List Item 1: Add Item</Button>
+            </Link>
+            <Link to={RootRoute.test.viewsListItem2[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Views: List Item 2</Button>
+            </Link>
+            <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Views: Ripple</Button>
+            </Link>
+            <Link to={RootRoute.test.sliderTest[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS.filledRectBigNormal}>Views: Slider</Button>
+            </Link>
+          </Items>
+          
+          {/* <button
+           onClick={()=>toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
+           >
+           toast
+           </button> */}
+          
+          
+          {/*<div
+           css={css`
+           min-height: 2000px;
+           height: 2000px;
+           `}
+           />*/}
+          
+          <div
+            css={css`
+              width: fit-content;
+              height: fit-content;
+              //background-color: #4d9f0c55;
+              border: 3px solid #4d9f0c55;
+              padding: 6px 10px;
+              display: grid;
+              place-items: center;
+              border-radius: 999999px;
+              ${Txt.normal2};
+            `}
+          >
+            Отлично совместимы
+          </div>
+          
+          <div
+            css={css`
+              width: fit-content;
+              height: fit-content;
+              //background-color: #EFEE97;
+              border: 3px solid #EFEE97;
+              padding: 6px 10px;
+              display: grid;
+              place-items: center;
+              border-radius: 999999px;
+              ${Txt.normal2};
+            `}
+          >
+            Средне совместимы
+          </div>
+          
+          <div
+            css={css`
+              ${row};
+              gap: 12px;
+            `}
+          >
             <div
               css={css`
                 width: fit-content;
                 height: fit-content;
-                //background-color: #4d9f0c55;
-                border: 3px solid #4d9f0c55;
+                background-color: #DFDFDF;
                 padding: 6px 10px;
                 display: grid;
                 place-items: center;
@@ -133,15 +184,13 @@ const TestPage = React.memo(
                 ${Txt.normal2};
               `}
             >
-              Отлично совместимы
+              INTJ
             </div>
-            
             <div
               css={css`
                 width: fit-content;
                 height: fit-content;
-                //background-color: #EFEE97;
-                border: 3px solid #EFEE97;
+                background-color: #DFDFDF;
                 padding: 6px 10px;
                 display: grid;
                 place-items: center;
@@ -149,8 +198,25 @@ const TestPage = React.memo(
                 ${Txt.normal2};
               `}
             >
-              Средне совместимы
+              ENTP
             </div>
+          </div>
+          
+          
+          <div
+            css={css`
+              width: 300px;
+              height: fit-content;
+              //background-color: #EFEE97;
+              border: 3px solid #EFEE97;
+              padding: 6px 10px;
+              gap: 6px;
+              border-radius: 16px;
+              ${Txt.normal2};
+              ${col};
+            `}
+          >
+            <div>Средне совместимы</div>
             
             <div
               css={css`
@@ -162,6 +228,7 @@ const TestPage = React.memo(
                 css={css`
                   width: fit-content;
                   height: fit-content;
+                  //background-color: white;
                   background-color: #DFDFDF;
                   padding: 6px 10px;
                   display: grid;
@@ -176,6 +243,7 @@ const TestPage = React.memo(
                 css={css`
                   width: fit-content;
                   height: fit-content;
+                  //background-color: white;
                   background-color: #DFDFDF;
                   padding: 6px 10px;
                   display: grid;
@@ -187,233 +255,178 @@ const TestPage = React.memo(
                 ENTP
               </div>
             </div>
-            
+          </div>
+          
+          
+          <div
+            css={css`
+              width: 300px;
+              height: fit-content;
+              //background-color: #EFEE97;
+              //border: 3px solid #EFEE97;
+              padding: 6px 10px;
+              gap: 6px;
+              border-radius: 16px;
+              ${Txt.normal2};
+              ${col};
+            `}
+          >
+            <div>Средне совместимы</div>
             
             <div
               css={css`
-                width: 300px;
-                height: fit-content;
-                //background-color: #EFEE97;
-                border: 3px solid #EFEE97;
-                padding: 6px 10px;
-                gap: 6px;
-                border-radius: 16px;
-                ${Txt.normal2};
-                ${col};
+                ${row};
+                gap: 12px;
               `}
             >
-              <div>Средне совместимы</div>
-              
               <div
                 css={css`
-                  ${row};
-                  gap: 12px;
+                  width: fit-content;
+                  height: fit-content;
+                  //background-color: white;
+                  //background-color: #DFDFDF;
+                  border: 3px solid #EFEE97;
+                  padding: 6px 10px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 999999px;
+                  ${Txt.normal2};
                 `}
               >
-                <div
-                  css={css`
-                    width: fit-content;
-                    height: fit-content;
-                    //background-color: white;
-                    background-color: #DFDFDF;
-                    padding: 6px 10px;
-                    display: grid;
-                    place-items: center;
-                    border-radius: 999999px;
-                    ${Txt.normal2};
-                  `}
-                >
-                  INTJ
-                </div>
-                <div
-                  css={css`
-                    width: fit-content;
-                    height: fit-content;
-                    //background-color: white;
-                    background-color: #DFDFDF;
-                    padding: 6px 10px;
-                    display: grid;
-                    place-items: center;
-                    border-radius: 999999px;
-                    ${Txt.normal2};
-                  `}
-                >
-                  ENTP
-                </div>
+                INTJ
+              </div>
+              <div
+                css={css`
+                  width: fit-content;
+                  height: fit-content;
+                  //background-color: white;
+                  //background-color: #DFDFDF;
+                  border: 3px solid #EFEE97;
+                  padding: 6px 10px;
+                  display: grid;
+                  place-items: center;
+                  border-radius: 999999px;
+                  ${Txt.normal2};
+                `}
+              >
+                ENTP
               </div>
             </div>
-            
-            
-            <div
+          </div>
+          
+          
+          
+          
+          
+          
+          <div
+            css={t => css`
+              width: 200px;
+              height: 200px;
+              ${center};
+              border-radius: 16px;
+              background: ${t.boxNormal.bg[0]};
+            `}
+          >
+            <PieProgress
               css={css`
-                width: 300px;
-                height: fit-content;
-                //background-color: #EFEE97;
-                //border: 3px solid #EFEE97;
-                padding: 6px 10px;
-                gap: 6px;
-                border-radius: 16px;
-                ${Txt.normal2};
-                ${col};
+                height: 30%;
+                aspect-ratio: 1;
               `}
-            >
-              <div>Средне совместимы</div>
-              
-              <div
-                css={css`
-                  ${row};
-                  gap: 12px;
-                `}
-              >
-                <div
-                  css={css`
-                    width: fit-content;
-                    height: fit-content;
-                    //background-color: white;
-                    //background-color: #DFDFDF;
-                    border: 3px solid #EFEE97;
-                    padding: 6px 10px;
-                    display: grid;
-                    place-items: center;
-                    border-radius: 999999px;
-                    ${Txt.normal2};
-                  `}
-                >
-                  INTJ
-                </div>
-                <div
-                  css={css`
-                    width: fit-content;
-                    height: fit-content;
-                    //background-color: white;
-                    //background-color: #DFDFDF;
-                    border: 3px solid #EFEE97;
-                    padding: 6px 10px;
-                    display: grid;
-                    place-items: center;
-                    border-radius: 999999px;
-                    ${Txt.normal2};
-                  `}
-                >
-                  ENTP
-                </div>
-              </div>
-            </div>
-            
-            
-            
-            
-            
-            
-            <div
-              css={t => css`
-                width: 200px;
-                height: 200px;
-                ${center};
-                border-radius: 16px;
-                background: ${t.containerNormal.bg[0]};
-              `}
-            >
-              <PieProgress
-                css={css`
-                  height: 30%;
-                  aspect-ratio: 1;
-                `}
-                progress={RangeU.map(progress, [0, 100], [5, 95])}
-              />
-            </div>
-            
-            
-            <div
-              css={t => css`
-                width: 300px;
-                height: 150px;
-                padding: 10px;
-                border-radius: 16px;
-                background: ${t.containerNormal.bg[0]};
-                color: ${t.containerNormal.content[0]};
-              `}
-            >
-              Контент.<br />
-              Theme.containerNormal
-            </div>
-            
-            <div
-              css={t => css`
-                width: 300px;
-                height: 150px;
-                padding: 10px;
-                border-radius: 16px;
-                background: ${t.containerNormal.bg2[0]};
-                color: ${t.containerNormal.content[0]};
-              `}
-            >
-              Контент.<br />
-              Theme.containerNormal2
-            </div>
-            
-            <div
-              css={t => css`
-                width: 300px;
-                height: 150px;
-                padding: 10px;
-                border-radius: 16px;
-                background: ${t.containerAccent.bg[0]};
-                color: ${t.containerAccent.content[0]};
-              `}
-            >
-              Контент.<br />
-              Theme.containerAccent
-            </div>
-            
-            
-            <div
-              css={t => css`
-                width: 300px;
-                height: 150px;
-                padding: 10px;
-                border-radius: 16px;
-                background: ${t.containerAccent.bg[0]};
-                color: ${t.containerAccent.content[0]};
-              `}
-            >
-              <CheckboxInput
-                css={CheckboxInputStyle.roundNormalNormal}
-                checked={isChecked}
-                onChange={toggleIsChecked}
-              />
-            </div>
-            
-            
-            <div
-              css={t => css`
-                width: 300px;
-                height: 150px;
-                position: relative;
-                padding: 10px;
-                border-radius: 16px;
-                background: ${t.containerNormal.bg[0]};
-                color: ${t.containerNormal.content[0]};
-              `}
-            >
-              <div>onEvent Test</div>
-              <button />
-            </div>
+              progress={RangeU.map(progress, [0, 100], [5, 95])}
+            />
+          </div>
           
           
-          </Pages.ContentFill>
-        </Pages.SimplePage>
+          <div
+            css={t => css`
+              width: 300px;
+              height: 150px;
+              padding: 10px;
+              border-radius: 16px;
+              background: ${t.boxNormal.bg[0]};
+              color: ${t.boxNormal.content[0]};
+            `}
+          >
+            Контент.<br />
+            Theme.boxNormal
+          </div>
+          
+          <div
+            css={t => css`
+              width: 300px;
+              height: 150px;
+              padding: 10px;
+              border-radius: 16px;
+              background: ${t.boxNormal.bg2[0]};
+              color: ${t.boxNormal.content[0]};
+            `}
+          >
+            Контент.<br />
+            Theme.boxNormal2
+          </div>
+          
+          <div
+            css={t => css`
+              width: 300px;
+              height: 150px;
+              padding: 10px;
+              border-radius: 16px;
+              background: ${t.boxAccent.bg[0]};
+              color: ${t.boxAccent.content[0]};
+            `}
+          >
+            Контент.<br />
+            Theme.boxAccent
+          </div>
+          
+          
+          <div
+            css={t => css`
+              width: 300px;
+              height: 150px;
+              padding: 10px;
+              border-radius: 16px;
+              background: ${t.boxAccent.bg[0]};
+              color: ${t.boxAccent.content[0]};
+            `}
+          >
+            <CheckboxInput
+              css={CheckboxInputStyle.roundNormalNormal}
+              checked={isChecked}
+              onChange={toggleIsChecked}
+            />
+          </div>
+          
+          
+          <div
+            css={t => css`
+              width: 300px;
+              height: 150px;
+              position: relative;
+              padding: 10px;
+              border-radius: 16px;
+              background: ${t.boxNormal.bg[0]};
+              color: ${t.boxNormal.content[0]};
+            `}
+          >
+            <div>onEvent Test</div>
+            <button />
+          </div>
         
         
-        <TopButtonBar backBtn />
-        
-        <BottomButtonBar settingsBtn />
+        </Pages.ContentFill>
+      </Pages.SimplePage>
       
       
-      </>
-    )
-  }
-)
+      <TopButtonBar backBtn />
+      
+      <BottomButtonBar settingsBtn />
+    
+    
+    </>
+  )
+})
 export default TestPage
 
 

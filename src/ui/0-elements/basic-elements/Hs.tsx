@@ -38,7 +38,7 @@ export namespace Hs {
   
   export const card3 = (t: AppTheme.Theme) => css`
     ${Txt.large2b};
-    color: ${t.containerNormal.content[0]};
+    color: ${t.boxNormal.content[0]};
   `
   export const Card3 = styled.h4`${p => card3(p.theme)}`
   

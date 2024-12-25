@@ -91,7 +91,7 @@ const PencilIcon = styled(PencilWrite2Ic)`
     grid-area: icon;
     align-self: center;
     height: 20px;
-    ${SvgIconS.El.icon.props.color.name}: ${p => p.theme.containerNormal.content4[0]};
+    ${SvgIconS.El.icon.props.color.name}: ${p => p.theme.boxNormal.content4[0]};
   }
 `
 const Text = styled.div<{
@@ -104,6 +104,6 @@ const Text = styled.div<{
   
   text-align: start;
   
-  color: ${p => p.theme.containerNormal.content2b[0]};
-  ${p => p.isPlaceholder && css`color: ${p.theme.containerNormal.content4[0]};`}
+  color: ${p => p.theme.boxNormal.content2b[0]};
+  ${p => p.isPlaceholder && css`color: ${p.theme.boxNormal.content4[0]};`}
 `

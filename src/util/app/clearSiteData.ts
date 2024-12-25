@@ -20,15 +20,13 @@ export async function clearSiteData(): Promise<void> {
 
 // Beware! If your cookies are configured to use a path or domain component,
 // this handy snippet won't work.
-// Also, httpOnly cookies are not available from javascript at all.
+// Also, httpOnly cookies are not available from JavaScript at all.
 const expires = 'Thu, 01 Jan 1970 00:00:00 UTC'
 export function clearCookies() {
   const cookies = document.cookie.split(/(; ?)/)
   const cookieNames = cookies.map(cookie => cookie.split('=')[0])
   cookieNames.forEach(name => {
-    let c = name+'='
-    c += '; ' + `expires=${expires}`
-    document.cookie = c
+    document.cookie = `${name}=; expires=${expires}`
   })
 }
 

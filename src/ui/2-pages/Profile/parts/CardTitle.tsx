@@ -12,6 +12,6 @@ export const CardTitle = styled.h4`
   line-height: 119%;
   letter-spacing: 0.05em;
   
-  color: ${p => p.theme.containerNormal.content3[0]};
+  color: ${p => p.theme.boxNormal.content3[0]};
 `
 

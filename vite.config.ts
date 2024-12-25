@@ -43,6 +43,11 @@ const pwaOptions: Partial<VitePWAOptions> = {
     'icon192.png',
     'icon192-padding.png',
     'icon512.png',
+    
+    'scripts/array-toSpliced-polyfill.js',
+    'scripts/apply-lang-to-html.js',
+    'scripts/apply-saved-lang.js',
+    'scripts/scripts/app-installation-check.js.js',
   ],
 }
 

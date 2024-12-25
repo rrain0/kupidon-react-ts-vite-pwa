@@ -318,7 +318,7 @@ const pageContentS = css`
 
 const InfoCard = styled.div`
   ${SummaryPageData.cardStyle};
-  background: ${p => p.theme.containerNormal.bg[0]};
+  background: ${p => p.theme.boxNormal.bg[0]};
   display: grid;
   grid:
     'ava  .    name .    eye ' auto
@@ -373,7 +373,7 @@ const eyeIcS = (t: AppTheme.Theme) => css`
   ${SvgIconS.normal(t)}
   ${SvgIconS.W.use.s.normal().e.icon().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('100%')}
-    ${SvgIconS.W.e.icon.p.color.set(t.containerNormal.content3d[0])}
+    ${SvgIconS.W.e.icon.p.color.set(t.boxNormal.content3d[0])}
   }
 `
 
@@ -384,7 +384,7 @@ const Name = styled.div`
   font-weight: 600;
   font-size: 20px;
   line-height: 119%;
-  color: ${p => p.theme.containerNormal.content1a[0]};
+  color: ${p => p.theme.boxNormal.content1a[0]};
 `
 const Info = styled.div`
   grid-area: info;
@@ -392,7 +392,7 @@ const Info = styled.div`
   font-weight: 400;
   font-size: 17px;
   line-height: 119%;
-  color: ${p => p.theme.containerNormal.content3d[0]};
+  color: ${p => p.theme.boxNormal.content3d[0]};
 `
 const Edit = styled.div`
   grid-area: edit;
@@ -415,7 +415,7 @@ const Divider = styled.div`
   grid-area: div;
   width: 100%;
   height: 1px;
-  background-color: ${p => p.theme.containerNormal.c5};
+  background-color: ${p => p.theme.boxNormal.c5};
 `
 
 
@@ -432,7 +432,7 @@ const ProgressBox = styled.div`
 `
 const Percent = styled.div`
   ${Txt.large3b};
-  color: ${p => p.theme.containerAccent.bg3};
+  color: ${p => p.theme.boxAccent.bg3};
 `
 
 
@@ -440,6 +440,6 @@ const CompleteProfileText = styled.div`
   grid-area: cpt;
   justify-self: stretch;
   ${Txt.large1};
-  color: ${p => p.theme.containerNormal.content1a[0]};
+  color: ${p => p.theme.boxNormal.content1a[0]};
   text-align: center;
 `

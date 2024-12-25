@@ -28,7 +28,7 @@ export const LightProps: ThemeProps = {
     contentAccent: ['#333333'],
   },
   
-  containerNormal: {
+  boxNormal: {
     bg:              ['#ffffff'],
     bg2:             ['#f0f0f0'],
     bg3:             ['#f0f0f0'],
@@ -48,14 +48,13 @@ export const LightProps: ThemeProps = {
     c6:              '#ececec',
     
     contentAccent:   ['#333333'],
-    contentAccent2:  ['#d1d1d1'],
+    cta2:  '#d1d1d1',
     contentAccent3:  ['#d1d1d1'],
     
     shadow:          ['#00000026'],
   },
-  containerAccent: {
+  boxAccent: {
     bg:       ['#bbbbbb'],
-    bg2:      ['#333333'],
     bg3:      '#aaaaaa',
     content:  ['#000000'],
     content2: ['#F8F8F8'],
@@ -71,6 +70,7 @@ export const LightProps: ThemeProps = {
     bg:            ['#bbbbbb'],
     bg2:           ['#bbbbbb'],
     content:       ['#000000'],
+    ct2:           '#000000',
     bgFocus:       ['#999999'],
     contentFocus:  ['#000000'],
   },

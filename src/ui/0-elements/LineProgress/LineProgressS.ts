@@ -50,10 +50,10 @@ export namespace LineProgressS {
       ${P.base};
       // normal
       ${W.u({ e: 'frame', s: 'normal' }).thisUse} {
-        background-color: ${t.containerNormal.c5}
+        background-color: ${t.boxNormal.c5}
       }
       ${W.u({ e: 'line', s: 'normal' }).thisUse} {
-        background-color: ${t.containerAccent.bg3}
+        background-color: ${t.boxAccent.bg3}
       }
     `
   }

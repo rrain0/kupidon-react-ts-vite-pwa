@@ -1,5 +1,4 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
-import numeral from 'numeral'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
 import CheckBrowserMinimumVersion
@@ -19,66 +18,46 @@ import noScrollbars = EmotionCommon.noScrollbars
 
 
 
-const App = React.memo(
-  () => {
-    /* const { NODE_ENV, SOME_VAR } = process.env
-    console.log('NODE_MODE', NODE_ENV)
-    console.log('SOME_VAR', SOME_VAR) */
-    
-    
-    /*
-    const rf = (v: number) => {
-      console.log('log from rf', v, typeof v)
-      return +v
-    }
-    console.log('numeral(12.53).format(\'0.0\')', numeral(12.53).format('0.0', rf))
-    console.log('numeral(12.55).format(\'0.0\')', numeral(12.55).format('0.0', rf))
-    console.log('numeral(12.58).format(\'0.0\')', numeral(12.58).format('0.0', rf))
-    
-    console.log('numeral(-12.53).format(\'0.0\')', numeral(-12.53).format('0.0', rf))
-    console.log('numeral(-12.55).format(\'0.0\')', numeral(-12.55).format('0.0', rf))
-    console.log('numeral(-12.58).format(\'0.0\')', numeral(-12.58).format('0.0', rf))
-     */
-    
-    
-    useAppInstallationSetup()
-    useLangSetup()
-    const themeIsReady = useThemeSetup()
-    
-    const theme = useRecoilValue(ThemeRecoil)
-    
-    return (
-      <CheckBrowserMinimumVersion>
-        {themeIsReady && (
-          <ThemeProvider theme={theme.theme}>
-            
-            <Global
-              styles={t => css`
-                body {
-                  // will be WINDOW background
-                  background: ${t.page.bg[0]};
-                }
-                
-                * {
-                  ${isMobile && noScrollbars};
-                }
-              `}
-            />
-            
-            <DragDetector>
-              <AppFrame />
-            </DragDetector>
-            
-            <ToastifySetup />
-            
-            <LogLayer />
+const App = React.memo(() => {
+  
+  
+  useAppInstallationSetup()
+  useLangSetup()
+  const themeIsReady = useThemeSetup()
+  
+  const theme = useRecoilValue(ThemeRecoil)
+  
+  return (
+    <CheckBrowserMinimumVersion>
+      {themeIsReady && (
+        <ThemeProvider theme={theme.theme}>
           
-          </ThemeProvider>
-        )}
-      </CheckBrowserMinimumVersion>
-    )
-  }
-)
+          <Global
+            styles={t => css`
+              body {
+                // will be WINDOW background
+                background: ${t.page.bg[0]};
+              }
+              
+              * {
+                ${isMobile && noScrollbars};
+              }
+            `}
+          />
+          
+          <DragDetector>
+            <AppFrame />
+          </DragDetector>
+          
+          <ToastifySetup />
+          
+          <LogLayer />
+        
+        </ThemeProvider>
+      )}
+    </CheckBrowserMinimumVersion>
+  )
+})
 export default App
 
 

@@ -20,7 +20,7 @@ export const DarkOrangeProps: ThemeProps = { ...DarkPinkProps,
     contentAccent: ['#dd7b39'],
   },
   
-  containerAccent: { ...DarkPinkProps.containerAccent,
+  boxAccent: { ...DarkPinkProps.boxAccent,
     bg:     ['#dd7b39'],
   },
   

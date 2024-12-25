@@ -57,6 +57,7 @@ export default [
     ...ts.configs.recommended,
     {
       rules: {
+        'no-unexpected-multiline': 'off',
         'eslint no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
         'no-constant-condition': 'off',
