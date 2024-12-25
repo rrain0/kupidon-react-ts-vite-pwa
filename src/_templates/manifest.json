@@ -11,14 +11,15 @@
   "description": "Kupidon date app",
   // REQUIRED
   "start_url": ".",
-  // REQUIRED 'fullscreen' | 'standalone' | 'minimal-ui'
+  // REQUIRED
+  // 'fullscreen' | 'standalone' | 'minimal-ui'
   "display": "standalone",
-  // only in installed app mode
+  // Orientation when installed as PWA
   "orientation": "portrait",
   
   
-  // Splashscreen colors can't be overriden by html <meta/>
-  // When app has loaded, html <meta/> will override manifest values.
+  // Splashscreen colors can't be overriden by html <meta />
+  // When app has loaded, html <meta /> will override manifest values.
   
   // На нижний бар с полоской навигации андроида эти настройки не влияют
   
@@ -30,35 +31,54 @@
   "theme_color": "#282c34",
   
   // Splashscreen bg color.
-  // NOT Window or Viewport background
+  // NOT Window or Viewport bg
   //"background_color": "#f0f0f0",
   //"dark_background_color": "#282c34",
   "background_color": "#282c34",
   
   
-  // Favicon - PWA homescreen icon (need WITHOUT paddings) + used in browser tab + site shortcut (need WITH paddings)
+  /*
+    Favicon - Иконка PWA на Android / PC + used in browser tab
+    Define in index.html: <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    NO PADDINGS
+    
+    Также используется для обычного ярлыка сайта - там уже НУЖНЫ ПАДДИНГИ, но пофиг
+  */
+  /*
+    Apple touch icon - Иконка PWA на iOS
+    Define in index.html: <link rel="apple-touch-icon" type="image/png" href="/icon192-padding.png" />
+    WITH PADDINGS
+  */
   "icons": [
+    // NO PADDINGS
     {
       "src": "icon64.png",
       "type": "image/png",
       "sizes": "64x64"
     },
-    // REQUIRED size
+    // REQUIRED size, NO PADDINGS
     {
       "src": "icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
-    // REQUIRED size - Splashscreen icon
+    // REQUIRED size, NO PADDINGS - Android splashscreen icon
     {
       "src": "icon512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
-  ]
-  // Need to include all icons in vite.config.ts:
-  // includeAssets: ['icon.svg', 'icon64.png', 'icon192.png', 'icon512.png'],
-  
+  ],
+  /*
+    Need to include all icons in vite.config.ts:
+    includeAssets: [
+      'icon.svg',
+      'icon64.png',
+      'icon192.png',
+      'icon192-padding.png',
+      'icon512.png',
+    ],
+  */
   
   // REQUIRED: prefer_related_applications не должен присутствовать или должен быть false
   // Note: На Android, если манифест веб-приложения включает

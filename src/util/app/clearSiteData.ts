@@ -1,6 +1,3 @@
-import { ServiceWorkerUtils } from 'src/util/app/ServiceWorkerUtils.ts'
-
-
 
 
 /*
@@ -73,7 +70,6 @@ Cache:
    window.location.reload(true)
 
  */
-
 
 
 

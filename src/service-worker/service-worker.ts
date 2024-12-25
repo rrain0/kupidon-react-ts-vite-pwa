@@ -87,15 +87,15 @@ cleanupOutdatedCaches()
   registerRoute(
     // Add in any other file extensions or routing criteria as needed.
     ({ url }) => {
-      /* console.log('url.pathname',url.pathname)
-       console.log('url.pathname is image',imgExts.test(url.pathname))
-       console.log('url.origin',url.origin)
-       console.log('self.location.origin',self.location.origin)
-       console.log('url.origin===self.location.origin',url.origin===self.location.origin) */
+      /* console.log('url.pathname', url.pathname)
+       console.log('url.pathname is image', imgExts.test(url.pathname))
+       console.log('url.origin', url.origin)
+       console.log('self.location.origin', self.location.origin)
+       console.log('url.origin === self.location.origin', url.origin === self.location.origin) */
       
       if (import.meta.env.DEV) return false
       
-      //return url.origin===self.location.origin && imgExts.test(url.pathname)
+      //return url.origin === self.location.origin && imgExts.test(url.pathname)
       return imgExts.test(url.pathname)
     },
     // Customize this strategy as needed, e.g., by changing to CacheFirst.
@@ -156,10 +156,10 @@ registerRoute(
     const baseId = 'kupidon-react-pwa'
     const nodeEnvMap = {
       development: {
-        id: `${baseId}-development`,
+        id: `${baseId}-dev`,
       },
       production: {
-        id: `${baseId}-production`,
+        id: `${baseId}-prod`,
       },
     }
     
@@ -174,7 +174,7 @@ registerRoute(
         lang: 'ru-RU',
         name: 'Купидон',
         short_name: 'Купидон',
-        description: 'Купидон - приложение для свидания',
+        description: 'Купидон - сервис знакомств',
       },
     }
     
