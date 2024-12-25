@@ -15,7 +15,7 @@ import { SettingsOptions } from './SettingsOptions'
 
 
 
-const LangOptions = React.memo(()=>{
+const LangOptions = React.memo(() => {
   
   const lang = useRecoilValue(LangRecoil)
   const [langSettings, setLangSettings] = useRecoilState(LangSettingsRecoil)
@@ -25,23 +25,25 @@ const LangOptions = React.memo(()=>{
   
   
   const languageOptions = useMemo(
-    ()=>{
+    () => {
       let opts = [
         {
           value: 'system',
           text: titleText.systemLanguage,
-          icon: <BrowserIc css={SettingsOptions.icon}/>,
-        },{
+          icon: <BrowserIc css={SettingsOptions.icon} />,
+        },
+        {
           value: 'ru-RU',
           text: titleText.russian,
-          icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']}/>,
-        },{
+          icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']} />,
+        },
+        {
           value: 'en-US',
           text: titleText.english,
-          icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']}/>,
-        }
+          icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']} />,
+        },
       ] satisfies { value: Lang.Supported|'system', [prop: string]: any }[]
-      if (!lang.matchedSystemLangs?.length) opts = opts.filter(it=>it.value!=='system')
+      if (!lang.matchedSystemLangs?.length) opts = opts.filter(it => it.value!=='system')
       return opts
     },
     [titleText, lang.matchedSystemLangs]
@@ -55,34 +57,36 @@ const LangOptions = React.memo(()=>{
   )
   
   
-  return <RadioInputGroup>
-    { languageOptions.map(opt =>
-      <RadioInput
-        css={RadioInputStyle.radio}
-        childrenPosition="start"
-        checked={isLanguageOptionChecked(opt.value)}
-        value={opt.value}
-        key={opt.value}
-        onChange={ev => {
-          if (opt.value === 'system') setLangSettings({
-            ...langSettings,
-            setting: 'system',
-          })
-          else {
-            setLangSettings({
-              setting: 'manual',
-              manualSetting: [opt.value],
+  return (
+    <RadioInputGroup>
+      {languageOptions.map(opt => (
+        <RadioInput
+          css={RadioInputStyle.radio}
+          childrenPosition="start"
+          checked={isLanguageOptionChecked(opt.value)}
+          value={opt.value}
+          key={opt.value}
+          onChange={ev => {
+            if (opt.value === 'system') setLangSettings({
+              ...langSettings,
+              setting: 'system',
             })
-          }
-        }}
-      >
-        <SettingsOptions.Container>
-          {opt.icon}
-          {opt.text}
-        </SettingsOptions.Container>
-      </RadioInput>
-    )}
-  </RadioInputGroup>
+            else {
+              setLangSettings({
+                setting: 'manual',
+                manualSetting: [opt.value],
+              })
+            }
+          }}
+        >
+          <SettingsOptions.Container>
+            {opt.icon}
+            {opt.text}
+          </SettingsOptions.Container>
+        </RadioInput>
+      ))}
+    </RadioInputGroup>
+  )
 })
 export default LangOptions
 

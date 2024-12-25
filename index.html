@@ -17,7 +17,7 @@
   
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <!-- Используется как иконка PWA на iOS -->
-  <!-- Включена в assets в vite.config.ts -->
+  <!-- Иконка включена в assets в vite.config.ts -->
   <link rel="apple-touch-icon" type="image/png" href="/icon192-padding.png" />
   
   
@@ -79,7 +79,7 @@
        * }}
        */
       const htmlProps = {
-        nodeEnv: MODE==='production' ? 'production' : 'development',
+        nodeEnv: MODE === 'production' ? 'production' : 'development',
         publicUrl: BASE_URL,
         lang: "en-US",
         title: "Kupidon",
@@ -102,11 +102,11 @@
       (uiValue, langs) => {
         // Some settings have implementation only in one language, e.g., language name.
         return Object.entries(uiValue)
-          .toSorted(([a],[b])=>{
-            let aIdx = langs.findIndex(it=>it===a)
-            let bIdx = langs.findIndex(it=>it===b)
-            if (aIdx===-1) aIdx = langs.length
-            if (bIdx===-1) bIdx = langs.length
+          .toSorted(([a],[b]) => {
+            let aIdx = langs.findIndex(it => it === a)
+            let bIdx = langs.findIndex(it => it === b)
+            if (aIdx === -1) aIdx = langs.length
+            if (bIdx === -1) bIdx = langs.length
             return aIdx - bIdx
           })
           [0][1]
@@ -114,7 +114,7 @@
       
       htmlProps.lang = matchedLangs[0]
       
-      const textPrefix = htmlProps.nodeEnv==='development' ? 'Dev ' : ''
+      const textPrefix = htmlProps.nodeEnv === 'development' ? 'Dev ' : ''
       htmlProps.title = textPrefix + pickUiValue(AppTitles, matchedLangs)
       htmlProps.description = textPrefix + pickUiValue(AppDescriptions, matchedLangs)
       
@@ -160,18 +160,18 @@
       /** @type {(systemLangs: string[]) => Lang.Supported[]} */
       const getMatchedLangs = (systemLangs) => {
         let matchedLangs = systemLangs
-          .map(it=>{
+          .map(it => {
             let mapped = Lang.Map[it]
             if (mapped) return mapped
-            mapped = Lang.Map[it.substring(0,2)]
+            mapped = Lang.Map[it.substring(0, 2)]
             if (mapped) return mapped
             return it
           })
-          .filter(it=>Lang.AllSupported.includes(it))
+          .filter(it => Lang.AllSupported.includes(it))
         return matchedLangs
       }
       
-      (()=>{
+      ;(() => {
         const langSettings = JSON.parse(localStorage.getItem(langSettingsLocalStorageName))
           ?? {
             setting: 'system',
@@ -181,12 +181,12 @@
           matchedSystemLangs: getMatchedLangs(navigator.languages)
         }
         
-        if (langSettings.setting==='system'){
+        if (langSettings.setting === 'system'){
           const matched = lang.matchedSystemLangs
           if (matched?.length) applyLangToHtml([...matched, Lang.Default])
           else applyLangToHtml([Lang.Default])
         }
-        else if (langSettings.setting==='manual') {
+        else if (langSettings.setting === 'manual') {
           if (langSettings.manualSetting) applyLangToHtml([...langSettings.manualSetting, Lang.Default])
           else applyLangToHtml([Lang.Default])
         }
@@ -244,7 +244,7 @@
       setBeforeInstallPromptEvent(undefined)
       return ev?.prompt()
     }
-    window.addEventListener('beforeinstallprompt', async ev=>{
+    window.addEventListener('beforeinstallprompt', async ev => {
       // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/getInstalledRelatedApps
       const relatedApps = await navigator.getInstalledRelatedApps?.() // => { id, platform, url, version }[]
       // Search for a specific installed platform-specific app
@@ -252,7 +252,7 @@
       //console.log('relatedApps',relatedApps)
       if (!relatedApps?.length) setBeforeInstallPromptEvent(ev)
     })
-    window.addEventListener('appinstalled', ev=>{
+    window.addEventListener('appinstalled', ev => {
       setBeforeInstallPromptEvent(undefined)
     })
     
