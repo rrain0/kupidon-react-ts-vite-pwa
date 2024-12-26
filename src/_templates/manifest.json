@@ -1,9 +1,13 @@
+
+
+// Manifest is managed by Service Worker and BACKEND server !!!
+
+// FOR mainifest.json COMMENTS MUST BE DELETED !!!
+
+// Mechanism of applying new manifest:
+// https://web.dev/manifest-updates/
+
 {
-  // FOR mainifest.json COMMENTS MUST BE DELETED !!!
-  
-  // !!! How new manifest applies:
-  // https://web.dev/manifest-updates/
-  
   "lang": "en-US",
   // "name" or "short_name" REQUIRED
   "name": "Kupidon",

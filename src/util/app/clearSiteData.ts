@@ -1,40 +1,83 @@
-
+import { TypeU } from 'src/util/common/TypeU.ts'
+import isstring = TypeU.isstring
 
 /*
   Use this article to determine what to clear
   https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Clear-Site-Data
 */
+
 export async function clearSiteData(): Promise<void> {
+  await unregisterServiceWorkers()
+  clearLocalStorage()
+  clearSessionStorage()
+  await clearIndexedDB()
   clearCookies()
-  localStorage.clear()
-  sessionStorage.clear()
   await clearCache()
-  
+}
+
+
+export async function unregisterServiceWorkers(): Promise<void> {
   const swRegistrations = await navigator.serviceWorker.getRegistrations()
   await Promise.allSettled(swRegistrations.map(it => it.unregister()))
-  
-  //await ServiceWorkerUtils.sendMsgAndWaitAnswer({ type: 'clear-cache' }).catch(()=>undefined)
+}
+
+export function clearLocalStorage() {
+  localStorage.clear()
+}
+
+export function clearSessionStorage() {
+  sessionStorage.clear()
+}
+
+export async function clearIndexedDB() {
+  const dbs = await indexedDB.databases()
+  const pendingTasks = dbs
+    .map(db => db.name)
+    .filter(name => isstring(name))
+    .map(name => indexedDB.deleteDatabase(name))
+    .map(request => new Promise<void>((resolve, reject) => {
+      request.onsuccess = () => resolve()
+      // todo - close connections and retry
+      request.onerror = () => reject()
+      // todo - close connections and retry
+      request.onblocked = () => reject()
+    }))
+  return Promise.allSettled(pendingTasks)
 }
 
 
 
-// Beware! If your cookies are configured to use a path or domain component,
-// this handy snippet won't work.
-// Also, httpOnly cookies are not available from JavaScript at all.
-const expires = 'Thu, 01 Jan 1970 00:00:00 UTC'
+
+/*
+  1) Doesn't work for cookies with HttpOnly flag set, because they aren't accessible from js.
+  2) Doesn't work for cookies with a path or domain.
+     You need to set the same path & domain to delete such cookies.
+     But you cannot get cookie's path & domain from js.
+*/
 export function clearCookies() {
+  // Куки в строке могут быть разделены ';' или '; '
   const cookies = document.cookie.split(/(; ?)/)
-  const cookieNames = cookies.map(cookie => cookie.split('=')[0])
-  cookieNames.forEach(name => {
-    document.cookie = `${name}=; expires=${expires}`
+  cookies.forEach(cookie => {
+    // Также берёт имя безымянного куки, у которого перед первым равно пустая строка
+    const name = cookie.split('=')[0]
+    const c = {
+      [name]: '',
+      'max-age': '0', // seconds
+      //path: '/',
+    }
+    document.cookie = Object.entries(c).map(keyValue => keyValue.join('=')).join(';')
   })
 }
 
 
 
+// Clear CacheStorage (used by Service Worker)
 export async function clearCache(): Promise<void> {
   const entryKeys = await window.caches.keys()
   await Promise.allSettled(entryKeys.map(key => window.caches.delete(key)))
+  
+  // Another way to clear cache
+  //awaits ServiceWorkerUtils.sendMsgAndWaitAnswer({ type: 'clear-cache' }).catch(() => undefined)
 }
 
 
@@ -82,7 +125,8 @@ https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
   for (var c = 0; c < cookies.length; c++) {
     var d = window.location.hostname.split(".");
     while (d.length > 0) {
-      var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path=';
+      var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0])
+        + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path=';
       var p = location.pathname.split('/');
       document.cookie = cookieBase + '/';
       while (p.length > 0) {
