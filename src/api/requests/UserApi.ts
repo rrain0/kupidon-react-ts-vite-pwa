@@ -31,8 +31,9 @@ export namespace UserApi {
   export type CurrentUserErrorData =
     AuthenticationError | NoUserResponseError | TechnicalError
   export const current = async() =>
-    handleAuthenticatedResponse<CurrentUserSuccessData, CurrentUserErrorData>
-    (axAccess.get(r.userCurrent))
+    handleAuthenticatedResponse<CurrentUserSuccessData, CurrentUserErrorData>(
+      axAccess.get(r.userCurrent)
+    )
     
   
   
@@ -45,19 +46,20 @@ export namespace UserApi {
     user: CurrentUser
   }
   export type CreateErrorData = TechnicalError | {
-    code: "DUPLICATE_EMAIL"
+    code: 'DUPLICATE_EMAIL'
     msg: string
   }
   export type UserToCreate = {
     email: string,
     pwd: string,
     name: string,
-    gender: "MALE"|"FEMALE",
+    gender: 'MALE' | 'FEMALE',
     birthDate: string, // '2005-11-10T00:00:00.000+08:00'
   }
   export const create = async(user: UserToCreate, lang: string) =>
-    handleResponse<CreateSuccessData,CreateErrorData>
-    (ax.post(r.userCreate, user, { params: { lang } }))
+    handleResponse<CreateSuccessData, CreateErrorData>(
+      ax.post(r.userCreate, user, { params: { lang } })
+    )
   
   
   
@@ -66,9 +68,9 @@ export namespace UserApi {
   export type UpdateUserSuccessData = CurrentUserSuccessData
   export type UpdateUserErrorData =
     AuthenticationError | NoUserResponseError | TechnicalError | {
-    code: "INVALID_PWD"
-    msg: string
-  }
+      code: 'INVALID_PWD'
+      msg: string
+    }
   export type UserToUpdate = PartialUndef<{
     name: string
     birthDate: string // '2005-11-10T00:00:00.000+08:00'
@@ -78,12 +80,13 @@ export namespace UserApi {
     pwd: string
     photos: {
       remove: string[]
-      replace: Array<{ id: string, index: number}>
+      replace: Array<{ id: string, index: number }>
     }
   }>
   export const update = async(user: UserToUpdate) =>
-    handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>
-    (axAccess.put(r.userUpdate,user))
+    handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
+      axAccess.put(r.userUpdate, user)
+    )
   
   
   

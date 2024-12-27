@@ -167,14 +167,26 @@ export namespace AppTheme {
     
     boxPink: {
       bg: [string, string]
-      c:  string,
+      ct:  string,
     }
     boxWithPink: {
       bg:  string
-      c:   string
+      ct:   string
       
       bgFocus: [string, string]
-      cFocus:  string
+      ctFocus:  string
+    },
+    
+    boxWine: {
+      bg: [string, string]
+      ct:  string,
+    }
+    boxWithWine: {
+      bg:  string
+      ct:   string
+      
+      bgFocus: [string, string]
+      ctFocus:  string
     },
     
     boxViolet: {

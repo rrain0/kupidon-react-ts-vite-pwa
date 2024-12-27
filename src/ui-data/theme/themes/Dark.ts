@@ -140,14 +140,26 @@ export const DarkProps: ThemeProps = {
   
   boxPink: {
     bg: ['#F0849D', '#CD617A'],
-    c:  '#FFFFFF',
+    ct:  '#FFFFFF',
   },
   boxWithPink: {
     bg:  '#FFFFFF',
-    c:   '#DD718A',
+    ct:   '#DD718A',
     
     bgFocus: ['#ffa9bd', '#ffffff'],
-    cFocus:  '#DD718A',
+    ctFocus:  '#DD718A',
+  },
+  
+  boxWine: {
+    bg: ['#BB2649', '#F75F82'],
+    ct:  '#FFFFFF',
+  },
+  boxWithWine: {
+    bg:  '#FFFFFF',
+    ct:   '#BB2649',
+    
+    bgFocus: ['#ffa9bd', '#ffffff'],
+    ctFocus:  '#DD718A',
   },
   
   boxViolet: {

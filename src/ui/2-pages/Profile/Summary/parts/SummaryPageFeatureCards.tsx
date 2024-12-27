@@ -130,24 +130,24 @@ const FeatureCardIc = styled.div`
 const PremiumCard = styled.div`
   ${featureCardS};
   background: linear-gradient(170.72deg,
-    ${p => p.theme.boxPink.bg[0]} 7.42%,
-    ${p => p.theme.boxPink.bg[1]} 131.56%
+    ${p => p.theme.boxWine.bg[0]} 7.42%,
+    ${p => p.theme.boxWine.bg[1]} 131.56%
   );
-  color: ${p => p.theme.boxPink.c};
+  color: ${p => p.theme.boxWine.ct};
 `
 const premiumCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
   ${ButtonS.S.Filled.Rect.addColor({
-    bg: t.boxWithPink.bg,
-    c: t.boxWithPink.c,
+    bg: t.boxWithWine.bg,
+    c: t.boxWithWine.ct,
     cRipple: t.boxNormal.content4[0],
-    bgFocus: t.boxWithPink.bg,
+    bgFocus: t.boxWithWine.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
-        ${t.boxWithPink.bgFocus[1]} 50%,
-        ${t.boxWithPink.bgFocus[0]} 100%
+        ${t.boxWithWine.bgFocus[1]} 65%,
+        ${t.boxWithWine.bgFocus[0]} 100%
       )`,
-    cFocus: t.boxWithPink.cFocus,
+    cFocus: t.boxWithWine.ctFocus,
   })};
 `
 const PremiumCardIc = styled(FeatureCardIc)`
@@ -172,7 +172,7 @@ const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
     bgFocus: t.boxWithViolet.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
-        ${t.boxWithViolet.bgFocus[1]} 50%,
+        ${t.boxWithViolet.bgFocus[1]} 65%,
         ${t.boxWithViolet.bgFocus[0]} 100%
       )`,
     cFocus: t.boxWithViolet.cFocus,
@@ -203,7 +203,7 @@ const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
     bgFocus: t.boxWithBlue.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
-        ${t.boxWithBlue.bgFocus[1]} 50%,
+        ${t.boxWithBlue.bgFocus[1]} 65%,
         ${t.boxWithBlue.bgFocus[0]} 100%
       )`,
     cFocus: t.boxWithBlue.cFocus,
