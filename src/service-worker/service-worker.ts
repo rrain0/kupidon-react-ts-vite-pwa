@@ -120,23 +120,34 @@ registerRoute(
   async ({ event, request, url, params }) => {
     //console.log('request,url', request,url)
     
+    
+    const defaultLang = 'en-US'
+    const localizationMap = {
+      'en-US': {
+        lang: 'en-US',
+        short_name: 'Kupidon',
+        name: 'Kupidon - date app',
+        // eslint-disable-next-line @stylistic/max-len
+        description: 'Kupidon is a dating and relationship app. We offer users a selection of date ideas and places to make their meetings unforgettable.',
+      },
+      'ru-RU': {
+        lang: 'ru-RU',
+        short_name: 'Купидон',
+        name: 'Купидон - приложение для свиданий',
+        // eslint-disable-next-line @stylistic/max-len
+        description: 'Купидон — это приложение для знакомств и укрепления отношений. Мы предлагаем пользователям подборки идей и мест для свиданий, чтобы сделать их встречи незабываемыми.',
+      },
+    }
+    
     /* eslint-disable @stylistic/quotes, @stylistic/comma-dangle */
     let manifest: Record<string, any> = {
-      "lang": "en-US",
-      "name": "Kupidon",
-      "short_name": "Kupidon",
-      "description": "Kupidon date app",
+      ...localizationMap[defaultLang],
       "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
       "theme_color": "#282c34",
       "background_color": "#282c34",
       "icons": [
-        {
-          "src": "icon64.png",
-          "type": "image/png",
-          "sizes": "64x64"
-        },
         {
           "src": "icon192.png",
           "type": "image/png",
@@ -146,7 +157,7 @@ registerRoute(
           "src": "icon512.png",
           "type": "image/png",
           "sizes": "512x512"
-        }
+        },
       ]
     }
     /* eslint-enable @stylistic/quotes, @stylistic/comma-dangle */
@@ -164,21 +175,6 @@ registerRoute(
       },
     }
     
-    const localizationMap = {
-      'en-US': {
-        lang: 'en-US',
-        name: 'Kupidon',
-        short_name: 'Kupidon',
-        description: 'Kupidon - date app',
-      },
-      'ru-RU': {
-        lang: 'ru-RU',
-        name: 'Купидон',
-        short_name: 'Купидон',
-        description: 'Купидон - приложение для свиданий',
-      },
-    }
-    
     
     const nodeEnv = searchParams.get('nodeEnv')
     if (nodeEnv && nodeEnv in nodeEnvMap) manifest = { ...manifest, ...nodeEnvMap[nodeEnv] }
@@ -187,8 +183,8 @@ registerRoute(
     if (lang && lang in localizationMap) manifest = { ...manifest, ...localizationMap[lang] }
     
     if (nodeEnv === 'development') {
-      manifest.name = `Dev ${manifest.name}`
       manifest.short_name = `Dev ${manifest.short_name}`
+      manifest.name = `Dev ${manifest.name}`
       manifest.description = `Dev ${manifest.description}`
     }
     

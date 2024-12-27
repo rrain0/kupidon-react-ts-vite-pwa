@@ -10,9 +10,12 @@
 {
   "lang": "en-US",
   // "name" or "short_name" REQUIRED
-  "name": "Kupidon",
+  // PWA app / shortcut title
   "short_name": "Kupidon",
-  "description": "Kupidon - date app",
+  // As html title
+  "name": "Kupidon - date app",
+  // As html meta description
+  "description": "Kupidon is a dating and relationship app. We offer users a selection of date ideas and places to make their meetings unforgettable.",
   // REQUIRED
   "start_url": ".",
   // REQUIRED
@@ -43,35 +46,42 @@
   
   /*
     Favicon - Иконка PWA на Android / PC + used in browser tab
-    Define in index.html: <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    Define in index.html:
+    There is png because iOS does not support svg
+    <link rel="icon" type="image/png" href="/icon64.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     NO PADDINGS
     
     Также используется для обычного ярлыка сайта Android - там уже НУЖНЫ ПАДДИНГИ, но пофиг
   */
   /*
     Apple touch icon - Иконка PWA на iOS
-    Define in index.html: <link rel="apple-touch-icon" type="image/png" href="/icon192-padding.png" />
+    Define in index.html:
+    <link rel="apple-touch-icon" type="image/png" href="/icon192-padding.png" />
     WITH PADDINGS
   */
   "icons": [
-    // NO PADDINGS
-    {
-      "src": "icon64.png",
-      "type": "image/png",
-      "sizes": "64x64"
-    },
     // REQUIRED size, NO PADDINGS
     {
       "src": "icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
-    // REQUIRED size, NO PADDINGS - Android splashscreen icon
+    // REQUIRED size, NO PADDINGS
+    // Android splashscreen icon
     {
       "src": "icon512.png",
       "type": "image/png",
       "sizes": "512x512"
-    }
+    },
+    // MASKABLE WITH PADDINGS
+    // Android PWA shortcut icon
+    /*{
+      "src": "icon512-padding.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }*/
   ],
   /*
     Need to include all icons in vite.config.ts:
@@ -81,6 +91,7 @@
       'icon192.png',
       'icon192-padding.png',
       'icon512.png',
+      'icon512-padding.png',
     ],
   */
   

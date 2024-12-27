@@ -5,7 +5,7 @@ export type UiText<L extends Lang.Supported = Lang.Supported> = {
   [Lang in L]?: string
 }
 export type UiTemplate<L extends Lang.Supported = Lang.Supported, Args extends any[] = any[]> = {
-  [Lang in L]?: (...args: Args)=>string
+  [Lang in L]?: (...args: Args) => string
 }
 
 

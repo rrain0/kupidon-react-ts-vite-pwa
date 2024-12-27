@@ -3,6 +3,19 @@
 
 /** @type {(matchedLangs: NonEmptyArr<Lang.Supported>)=>void} */
 const applyLangToHtml = (matchedLangs) => {
+  
+  const defaultLang = 'en-US'
+  /** @type {UiText} */
+  const AppTitles = {
+    'en-US': 'Kupidon - date app',
+    'ru-RU': 'Купидон - приложение для свиданий',
+  }
+  /** @type {UiText} */
+  const AppDescriptions = {
+    'en-US': 'Kupidon - date app',
+    'ru-RU': 'Купидон - приложение для свиданий',
+  }
+  
   /**
    * @type {{
    *  nodeEnv: 'development'|'production',
@@ -17,20 +30,9 @@ const applyLangToHtml = (matchedLangs) => {
     nodeEnv: MODE === 'production' ? 'production' : 'development',
     // eslint-disable-next-line no-undef
     publicUrl: BASE_URL,
-    lang: 'en-US',
-    title: 'Kupidon',
-    description: 'Kupidon date app',
-  }
-  
-  /** @type {UiText} */
-  const AppTitles = {
-    'en-US': 'Kupidon',
-    'ru-RU': 'Купидон',
-  }
-  /** @type {UiText} */
-  const AppDescriptions = {
-    'en-US': 'Kupidon date app',
-    'ru-RU': 'Купидон - приложение для свидания',
+    lang: defaultLang,
+    title: AppTitles[defaultLang],
+    description: AppDescriptions[defaultLang],
   }
   
   /** @type {<V extends UiValue<any>>(uiValue: V, langs: string[]) => V[keyof V]} */
