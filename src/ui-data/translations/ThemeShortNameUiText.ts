@@ -17,13 +17,13 @@ export const ThemeShortNameUiText = {
   },
   
   
-  'Light Burgundy': {
-    'en-US': 'Burgundy',
-    'ru-RU': 'Бордовая',
+  'Light Wine': {
+    'en-US': 'Wine',
+    'ru-RU': 'Вино',
   },
-  'Dark Burgundy': {
-    'en-US': 'Burgundy',
-    'ru-RU': 'Бордовая',
+  'Dark Wine': {
+    'en-US': 'Wine',
+    'ru-RU': 'Вино',
   },
   
   

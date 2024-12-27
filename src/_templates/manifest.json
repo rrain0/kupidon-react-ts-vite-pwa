@@ -12,7 +12,7 @@
   // "name" or "short_name" REQUIRED
   "name": "Kupidon",
   "short_name": "Kupidon",
-  "description": "Kupidon date app",
+  "description": "Kupidon - date app",
   // REQUIRED
   "start_url": ".",
   // REQUIRED

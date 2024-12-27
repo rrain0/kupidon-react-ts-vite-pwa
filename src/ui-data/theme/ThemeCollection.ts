@@ -4,17 +4,17 @@ import Theme = AppTheme.Theme
 import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
 import { DarkPinkGradient } from 'src/ui-data/theme/themes/DarkPinkGradient.ts'
 import { Dark } from 'src/ui-data/theme/themes/Dark.ts'
-import { DarkBurgundy } from 'src/ui-data/theme/themes/DarkBurgundy.ts'
+import { DarkWine } from 'src/ui-data/theme/themes/DarkWine.ts'
 import { LightOrange } from 'src/ui-data/theme/themes/LightOrange.ts'
 import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
 import { LightPinkGradient } from 'src/ui-data/theme/themes/LightPinkGradient.ts'
 import { Light } from 'src/ui-data/theme/themes/Light.ts'
-import { LightBurgundy } from 'src/ui-data/theme/themes/LightBurgundy.ts'
+import { LightWine } from 'src/ui-data/theme/themes/LightWine.ts'
 
 
 
-export const DefaultLightTheme = LightBurgundy
-export const DefaultDarkTheme = DarkBurgundy
+export const DefaultLightTheme = LightWine
+export const DefaultDarkTheme = DarkWine
 export const DefaultTheme = DefaultLightTheme
 
 
@@ -23,8 +23,8 @@ export const AllThemes = [
   Light,
   Dark,
   
-  LightBurgundy,
-  DarkBurgundy,
+  LightWine,
+  DarkWine,
   
   LightPink,
   DarkPink,

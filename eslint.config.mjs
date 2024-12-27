@@ -57,6 +57,7 @@ export default [
     ...ts.configs.recommended,
     {
       rules: {
+        'no-async-promise-executor': 'off',
         'no-unexpected-multiline': 'off',
         'eslint no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',

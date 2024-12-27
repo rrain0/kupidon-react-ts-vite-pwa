@@ -15,19 +15,6 @@ export type DateTimeData = {
 
 
 export class DateTime {
-  constructor(data?:DateTimeData | undefined){ this.set(data) }
-  
-  set(data?: DateTimeData | undefined){
-    if (data?.year!==undefined) this.year = data.year
-    if (data?.month!==undefined) this.month = data.month
-    if (data?.day!==undefined) this.day = data.day
-    if (data?.hour!==undefined) this.hour = data.hour
-    if (data?.minute!==undefined) this.minute = data.minute
-    if (data?.second!==undefined) this.second = data.second
-    if (data?.millisecond!==undefined) this.millisecond = data.millisecond
-    if (data?.timezone!==undefined) this.timezone = data.timezone
-    return this
-  }
   
   year = 0 // integer (-∞,+∞) // Date fullYear: integer (-∞,+∞)
   month = 0 // integer [1,12] // Date month: integer [0,11]
@@ -37,6 +24,20 @@ export class DateTime {
   second = 0 // integer [0,59] // Date seconds: integer [0,59]
   millisecond = 0 // integer [0,999] // Date seconds: integer [0,999]
   timezone = 0 // integer in minutes
+  
+  constructor(data?: DateTimeData | undefined) { this.set(data) }
+  
+  set(data?: DateTimeData | undefined) {
+    if (data?.year !== undefined) this.year = data.year
+    if (data?.month !== undefined) this.month = data.month
+    if (data?.day !== undefined) this.day = data.day
+    if (data?.hour !== undefined) this.hour = data.hour
+    if (data?.minute !== undefined) this.minute = data.minute
+    if (data?.second !== undefined) this.second = data.second
+    if (data?.millisecond !== undefined) this.millisecond = data.millisecond
+    if (data?.timezone !== undefined) this.timezone = data.timezone
+    return this
+  }
   
   
   
@@ -57,21 +58,21 @@ export class DateTime {
     return DateTime.fromDate(new Date())
   }
   
-  public static from_dd_MM_yyyy(date?: string){
+  public static from_dd_MM_yyyy(date?: string) {
     const match = date?.match(dd_MM_yyyy_pattern)
     if (match) {
       const gs = match.groups
       return new DateTime({
         year: +gs!.year!,
         month: +gs!.month!,
-        day: +gs!.day!
+        day: +gs!.day!,
       })
     }
   }
   
   
   // from "2022-01-01T00:00" in format yyyy-MM-ddThh:mm
-  public static from_yyyy_MM_dd_hh_mm(date?: string){
+  public static from_yyyy_MM_dd_hh_mm(date?: string) {
     const match = date?.match(yyyy_MM_dd_hh_mm_pattern)
     if (match) {
       const gs = match.groups
@@ -86,7 +87,7 @@ export class DateTime {
   }
   
   // from "2022-01-01" in format yyyy-MM-dd
-  public static from_yyyy_MM_dd(date?: string){
+  public static from_yyyy_MM_dd(date?: string) {
     const match = date?.match(yyyy_MM_dd_pattern)
     if (match) {
       const gs = match.groups
@@ -99,68 +100,68 @@ export class DateTime {
   }
   
   
-  to_yyyy_MM_dd_HH_mm_ss(){
-    return `${(this.year+'').padStart(4,'0')}`
-      +`-${(this.month+'').padStart(2,'0')}`
-      +`-${(this.day+'').padStart(2,'0')}`
-      +`T${(this.hour+'').padStart(2,'0')}`
-      +`:${(this.minute+'').padStart(2,'0')}`
-      +`:${(this.second+'').padStart(2,'0')}`
+  to_yyyy_MM_dd_HH_mm_ss() {
+    return `${(this.year+'').padStart(4, '0')}`
+      +`-${(this.month+'').padStart(2, '0')}`
+      +`-${(this.day+'').padStart(2, '0')}`
+      +`T${(this.hour+'').padStart(2, '0')}`
+      +`:${(this.minute+'').padStart(2, '0')}`
+      +`:${(this.second+'').padStart(2, '0')}`
   }
   
   
   // to 2020-08-26T06:53:27.609+00:00
-  to_yyyy_MM_dd_HH_mm_ss_SSS_XXX(){
-    return `${(this.year+'').padStart(4,'0')}`
-      +`-${(this.month+'').padStart(2,'0')}`
-      +`-${(this.day+'').padStart(2,'0')}`
-      +`T${(this.hour+'').padStart(2,'0')}`
-      +`:${(this.minute+'').padStart(2,'0')}`
-      +`:${(this.second+'').padStart(2,'0')}`
-      +`.${(this.millisecond+'').padStart(3,'0')}`
+  to_yyyy_MM_dd_HH_mm_ss_SSS_XXX() {
+    return `${(this.year + '').padStart(4, '0')}`
+      +`-${(this.month + '').padStart(2, '0')}`
+      +`-${(this.day + '').padStart(2, '0')}`
+      +`T${(this.hour + '').padStart(2, '0')}`
+      +`:${(this.minute + '').padStart(2, '0')}`
+      +`:${(this.second + '').padStart(2, '0')}`
+      +`.${(this.millisecond + '').padStart(3, '0')}`
       +this.timezoneToString()
   }
   
-  to_yyyy_MM_dd_HH_mm(){
-    return `${(this.year+'').padStart(4,'0')}`
-      +`-${(this.month+'').padStart(2,'0')}`
-      +`-${(this.day+'').padStart(2,'0')}`
-      +`T${(this.hour+'').padStart(2,'0')}`
-      +`:${(this.minute+'').padStart(2,'0')}`
+  to_yyyy_MM_dd_HH_mm() {
+    return `${(this.year + '').padStart(4, '0')}`
+      +`-${(this.month + '').padStart(2, '0')}`
+      +`-${(this.day + '').padStart(2, '0')}`
+      +`T${(this.hour + '').padStart(2, '0')}`
+      +`:${(this.minute + '').padStart(2, '0')}`
   }
   
   // to 2023-01-01
-  to_yyyy_MM_dd(divider = '-'){
-    return `${(this.year+'').padStart(4,'0')}`
-      + `${divider}${(this.month+'').padStart(2,'0')}`
-      + `${divider}${(this.day+'').padStart(2,'0')}`
+  to_yyyy_MM_dd(divider = '-') {
+    return `${(this.year + '').padStart(4, '0')}`
+      + `${divider}${(this.month + '').padStart(2, '0')}`
+      + `${divider}${(this.day + '').padStart(2, '0')}`
   }
   
   // to 01-01-2023
-  to_dd_MM_yyyy(divider = '-'){
-    return `${(this.day+'').padStart(2,'0')}`
-      +`${divider}${(this.month+'').padStart(2,'0')}`
-      +`${divider}${(this.year+'').padStart(4,'0')}`
+  to_dd_MM_yyyy(divider = '-') {
+    return `${(this.day + '').padStart(2, '0')}`
+      +`${divider}${(this.month + '').padStart(2, '0')}`
+      +`${divider}${(this.year + '').padStart(4, '0')}`
   }
   
   // to 01-01-23
-  to_dd_MM_yy(divider = '-'){
-    return `${(this.day+'').padStart(2,'0')}`
-      + `${divider}${(this.month+'').padStart(2,'0')}`
-      + `${divider}${(this.year%100+'').padStart(2,'0')}`
+  to_dd_MM_yy(divider = '-') {
+    return `${(this.day + '').padStart(2, '0')}`
+      + `${divider}${(this.month + '').padStart(2, '0')}`
+      + `${divider}${(this.year%100 + '').padStart(2, '0')}`
   }
   
-  timezoneToString(){
+  timezoneToString() {
     let offset = this.timezone >= 0 ? '+' : '-'
-    const hours = Math.floor(Math.abs(this.timezone)/60)
-    const minutes = Math.floor(Math.abs(this.timezone%60))
-    offset += hours.toString().padStart(2,'0')
+    const hours = Math.floor(Math.abs(this.timezone) / 60)
+    const minutes = Math.floor(Math.abs(this.timezone % 60))
+    offset += hours.toString().padStart(2, '0')
     offset += ':'
-    offset += minutes.toString().padStart(2,'0')
+    offset += minutes.toString().padStart(2, '0')
     return offset
   }
   
-  getAge(other = DateTime.now()){
+  getAge(other = DateTime.now()) {
     let age = other.year - this.year
     const thisDate = [this.month, this.day, this.hour, this.minute, this.second]
     const otherDate = [other.month, other.day, other.hour, other.minute, other.second]
@@ -175,7 +176,7 @@ export class DateTime {
     return age
   }
   
-  normalize(){
+  normalize() {
     const d = new Date()
     // this correctly accepts 0-99 values not as 19xx
     d.setFullYear(this.year, this.month-1, this.day)
@@ -190,7 +191,7 @@ export class DateTime {
     return this
   }
   
-  copy(){
+  copy() {
     return new DateTime({
       year: this.year,
       month: this.month,
@@ -203,8 +204,8 @@ export class DateTime {
     })
   }
   
-  eq(other: any){
-    return this===other || (
+  eq(other: any) {
+    return this === other || (
       other instanceof DateTime
       && this.year === other.year
       && this.month === other.month

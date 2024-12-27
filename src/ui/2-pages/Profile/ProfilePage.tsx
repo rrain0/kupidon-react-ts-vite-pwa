@@ -63,451 +63,442 @@ import arr = ArrayU.arrOfIndices
 
 
 
-const ProfilePage = React.memo(
-  () => {
-    
-    const app = useRecoilValue(AppRecoil)
-    const [auth, setAuth] = useRecoilState(AuthRecoil)
-    
-    
-    const {
-      formValues, setFormValues,
-      failures, setFailures,
-      failedFields, validationProps,
-    } = useFormFailures({
-      defaultValues,
-      validators,
-    })
-    
-    const {
-      request,
-      isLoading, isSuccess, isError, isImmediate,
-      response, resetResponse,
-    } = useApiRequest({
-      values: formValues,
-      failedFields,
-      prepareAndRequest: useCallback(
-        (values: FormValues, failedFields: (keyof FormValues)[]) =>
-          profileUpdateApiRequest(values, failedFields, setFormValues, setAuth),
-        []
-      ),
-    })
-    
-    const {
-      canSubmit, onFormSubmitCallback, submit,
-    } = useFormSubmit({
-      failures,
-      setFailures,
-      failedFields,
-      setFormValues,
-      getCanSubmit: useCallback(
-        (failedFields: (keyof FormValues)[]) => {
-          return failedFields
-            .filter(ff => ff in userDefaultValues)
-            .length < ObjectKeys(userDefaultValues).length
-        },
-        []
-      ),
-      request,
-      isLoading,
-      isError,
-      response,
-      resetResponse,
-    })
-    
-    
-    
-    const { formProps, valuesProps } = useFormValuesProps(
-      formValues, setFormValues, userDefaultValues, failures
-    )
-    
-    
-    
-    useEffect(
-      () => {
-        const u = auth?.user
-        if (u) {
-          setFormValues(s => {
-            const newValues = { ...s, initialValues: { ...s.initialValues } }
-            newValues.initialValues.name = u.name
-            newValues.initialValues.birthDate = u.birthDate
-            newValues.initialValues.gender = u.gender
-            newValues.initialValues.aboutMe = u.aboutMe
-            
-            if (valuesProps.name.isInitial) newValues.name = u.name
-            if (valuesProps.birthDate.isInitial) newValues.birthDate = u.birthDate
-            if (valuesProps.gender.isInitial) newValues.gender = u.gender
-            if (valuesProps.aboutMe.isInitial) newValues.aboutMe = u.aboutMe
-            
-            newValues.initialValues.photos = currentUserPhotosToProfilePhotos(u.photos)
-            newValues.photos = [...s.photos]
-            
-            // we needn't take compression, because it is local
-            // we needn't take upload, because it is local
-            
-            // get all downloads & downloaded data from same existing photos
-            newValues.initialValues.photos = ArrayU.combine(
-              newValues.initialValues.photos, [...s.initialValues.photos, ...s.photos],
-              (initialPhoto, oldPhoto) => ({
-                ...initialPhoto,
-                dataUrl: oldPhoto.dataUrl,
-                isReady: oldPhoto.isReady,
-                download: oldPhoto.download,
-              } satisfies ProfilePhoto),
-              (a, b) => a.id===b.id && !a.isEmpty && !b.isEmpty
-            )
-            
-            // replace remote photos by new initial photos
-            newValues.photos = newValues.photos.map(photo => {
-              if (photo.type === 'remote') {
-                //console.log('photo',photo)
-                return {
-                  ...newValues.initialValues.photos[photo.remoteIndex],
-                  isReady: photo.isReady,
-                  compression: photo.compression,
-                } satisfies ProfilePhoto
-              }
-              return photo
-            })
-            
-            // stop operations for discarded photos
-            ArrayU.diff2(
-              s.initialValues.photos,
-              newValues.photos,
-              (a, b) => a.id === b.id
-            )
-              // eslint-disable-next-line no-unexpected-multiline
-              [0]
-              .forEach(diff => {
-                if (diff.isRemoved) {
-                  diff.fromElem.download?.abort()
-                  diff.fromElem.compression?.abort()
-                }
-              })
-            ArrayU.diff2(
-              s.photos,
-              newValues.photos,
-              (a, b) => a.id === b.id
-            )
-              // eslint-disable-next-line no-unexpected-multiline
-              [0]
-              .forEach(diff => {
-                if (diff.isRemoved) {
-                  diff.fromElem.download?.abort()
-                  diff.fromElem.compression?.abort()
-                }
-              })
-            
-            
-            return newValues
-          })
-        }
+const ProfilePage = React.memo(() => {
+  const [auth, setAuth] = useRecoilState(AuthRecoil)
+  
+  
+  const {
+    formValues, setFormValues,
+    failures, setFailures,
+    failedFields, validationProps,
+  } = useFormFailures({
+    defaultValues,
+    validators,
+  })
+  
+  const {
+    request,
+    isLoading, isSuccess, isError, isImmediate,
+    response, resetResponse,
+  } = useApiRequest({
+    values: formValues,
+    failedFields,
+    prepareAndRequest: useCallback(
+      (values: FormValues, failedFields: (keyof FormValues)[]) => {
+        return profileUpdateApiRequest(values, failedFields, setFormValues, setAuth)
       },
-      [auth]
-    )
-    
-    
-    
-    
-    useFormToasts({
-      isLoading,
-      loadingText: StatusUiText.saving,
-      isSuccess,
-      successText: StatusUiText.saved,
-      failures: failures,
-      setFailures: setFailures,
-      failureCodeToUiText: mapFailureCodeToUiText,
-    })
-    
-    
-    
-    
-    /*
-     useEffect(()=>{
-     console.log('PROFILE_CONTENT_FAILURES',failures)
-     },[failures])
-     */
-    
-    
-    // todo it retries endlessly if can't obtain photos
-    useAsyncEffect(
-      (lock, unlock) => {
-        //return;
-        const serverPhotos = formValues.initialValues.photos
-        const photos = formValues.photos
-        ;[...serverPhotos, ...photos].forEach(photo => {
-          if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
-            && !photo.download && !photo.compression
-            && lock(photo.remoteUrl)
-          ) {
-            
-            const abortCtrl = new AbortController()
-            const downloadStart = {
-              isReady: false,
-              download: { ...DefaultOperation,
-                id: photo.id,
-                abort: () => {
-                  console.log('download was aborted')
-                  unlock(photo.remoteUrl)
-                  abortCtrl.abort('download was aborted')
-                },
+      []
+    ),
+  })
+  
+  const {
+    canSubmit, onFormSubmitCallback, submit,
+  } = useFormSubmit({
+    failures,
+    setFailures,
+    failedFields,
+    setFormValues,
+    getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
+      return failedFields
+        .filter(ff => ff in userDefaultValues)
+        .length < ObjectKeys(userDefaultValues).length
+    }, []),
+    request,
+    isLoading,
+    isError,
+    response,
+    resetResponse,
+  })
+  
+  
+  
+  const { formProps, valuesProps } = useFormValuesProps(
+    formValues, setFormValues, userDefaultValues, failures
+  )
+  
+  
+  
+  useEffect(() => {
+    const u = auth?.user
+    if (u) {
+      setFormValues(s => {
+        const newValues = { ...s, initialValues: { ...s.initialValues } }
+        newValues.initialValues.name = u.name
+        newValues.initialValues.birthDate = u.birthDate
+        newValues.initialValues.gender = u.gender
+        newValues.initialValues.aboutMe = u.aboutMe
+        
+        if (valuesProps.name.isInitial) newValues.name = u.name
+        if (valuesProps.birthDate.isInitial) newValues.birthDate = u.birthDate
+        if (valuesProps.gender.isInitial) newValues.gender = u.gender
+        if (valuesProps.aboutMe.isInitial) newValues.aboutMe = u.aboutMe
+        
+        newValues.initialValues.photos = currentUserPhotosToProfilePhotos(u.photos)
+        newValues.photos = [...s.photos]
+        
+        // we needn't take compression, because it is local
+        // we needn't take upload, because it is local
+        
+        // get all downloads & downloaded data from same existing photos
+        newValues.initialValues.photos = ArrayU.combine(
+          newValues.initialValues.photos, [...s.initialValues.photos, ...s.photos],
+          (initialPhoto, oldPhoto) => ({
+            ...initialPhoto,
+            dataUrl: oldPhoto.dataUrl,
+            isReady: oldPhoto.isReady,
+            download: oldPhoto.download,
+          } satisfies ProfilePhoto),
+          (a, b) => a.id === b.id && !a.isEmpty && !b.isEmpty
+        )
+        
+        // replace remote photos by new initial photos
+        newValues.photos = newValues.photos.map(photo => {
+          if (photo.type === 'remote') {
+            //console.log('photo',photo)
+            return {
+              ...newValues.initialValues.photos[photo.remoteIndex],
+              isReady: photo.isReady,
+              compression: photo.compression,
+            } satisfies ProfilePhoto
+          }
+          return photo
+        })
+        
+        // stop operations for discarded photos
+        ArrayU.diff2(
+          s.initialValues.photos,
+          newValues.photos,
+          (a, b) => a.id === b.id
+        )
+          // eslint-disable-next-line no-unexpected-multiline
+          [0]
+          .forEach(diff => {
+            if (diff.isRemoved) {
+              diff.fromElem.download?.abort()
+              diff.fromElem.compression?.abort()
+            }
+          })
+        ArrayU.diff2(
+          s.photos,
+          newValues.photos,
+          (a, b) => a.id === b.id
+        )
+          // eslint-disable-next-line no-unexpected-multiline
+          [0]
+          .forEach(diff => {
+            if (diff.isRemoved) {
+              diff.fromElem.download?.abort()
+              diff.fromElem.compression?.abort()
+            }
+          })
+        
+        
+        return newValues
+      })
+    }
+  }, [auth])
+  
+  
+  
+  
+  useFormToasts({
+    isLoading,
+    loadingText: StatusUiText.saving,
+    isSuccess,
+    successText: StatusUiText.saved,
+    failures: failures,
+    setFailures: setFailures,
+    failureCodeToUiText: mapFailureCodeToUiText,
+  })
+  
+  
+  
+  
+  /*
+   useEffect(()=>{
+   console.log('PROFILE_CONTENT_FAILURES',failures)
+   },[failures])
+   */
+  
+  
+  // todo it retries endlessly if can't obtain photos
+  useAsyncEffect(
+    (lock, unlock) => {
+      //return;
+      const serverPhotos = formValues.initialValues.photos
+      const photos = formValues.photos
+      ;[...serverPhotos, ...photos].forEach(photo => {
+        if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
+          && !photo.download && !photo.compression
+          && lock(photo.remoteUrl)
+        ) {
+          
+          const abortCtrl = new AbortController()
+          const downloadStart = {
+            isReady: false,
+            download: { ...DefaultOperation,
+              id: photo.id,
+              abort: () => {
+                console.log('download was aborted')
+                unlock(photo.remoteUrl)
+                abortCtrl.abort('download was aborted')
               },
-            } satisfies Partial<ProfilePhoto>
-            
-            setFormValues(s => ({ ...s,
-              initialValues: { ...s.initialValues,
-                photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                  elem => ({ ...elem, ...downloadStart }),
-                  elem => elem.id === photo.id
-                ),
-              },
-              photos: mapFirstToIfFoundBy(s.photos,
+            },
+          } satisfies Partial<ProfilePhoto>
+          
+          setFormValues(s => ({ ...s,
+            initialValues: { ...s.initialValues,
+              photos: mapFirstToIfFoundBy(s.initialValues.photos,
                 elem => ({ ...elem, ...downloadStart }),
                 elem => elem.id === photo.id
               ),
-            }))
-            
-            const updatePhotosNow = (p: Partial<ProfilePhoto>) => {
-              setFormValues(s => ({ ...s,
-                initialValues: { ...s.initialValues,
-                  photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                    elem => ({ ...elem, ...p }),
-                    elem => elem.download?.id === downloadStart.download.id
-                  ),
-                },
-                photos: mapFirstToIfFoundBy(s.photos,
+            },
+            photos: mapFirstToIfFoundBy(s.photos,
+              elem => ({ ...elem, ...downloadStart }),
+              elem => elem.id === photo.id
+            ),
+          }))
+          
+          const updatePhotosNow = (p: Partial<ProfilePhoto>) => {
+            setFormValues(s => ({ ...s,
+              initialValues: { ...s.initialValues,
+                photos: mapFirstToIfFoundBy(s.initialValues.photos,
                   elem => ({ ...elem, ...p }),
                   elem => elem.download?.id === downloadStart.download.id
                 ),
-              }))
-            }
-            const updatePhotos = withThrottle(
-              RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-              updatePhotosNow
-            )
-            
-            ;(async() => {
-              try {
-                const progress = new Progress(2, [90, 10])
-                const onProgress = (p: number | null) => {
-                  progress.progress = p ?? 0
-                  //console.log('progress', photo.id, progress.value)
-                  updatePhotos({ download: {
-                    ...downloadStart.download,
-                    progress: progress.value,
-                  } })
-                }
-                
-                //console.log('start download id',photo.id)
-                const blob = await fetchToBlob(
-                  photo.remoteUrl,
-                  { onProgress, abortCtrl }
-                )
-                abortCtrl.signal.throwIfAborted()
-                
-                progress.stage++
-                progress.progress = 0
-                const dataUrl = await blobToDataUrl(blob,
-                  { onProgress, abortCtrl }
-                )
-                abortCtrl.signal.throwIfAborted()
-                
-                //console.log('completed',photo.id)
-                updatePhotosNow({ isReady: true, download: undefined, dataUrl })
-              }
-              catch (ex) {
-                // TODO notify about error
-                //console.log('download error', ex)
-                //console.log('photo', photo)
-                updatePhotosNow({ download: undefined })
-              }
-              finally {
-                unlock(photo.remoteUrl)
-              }
-            })()
-            
+              },
+              photos: mapFirstToIfFoundBy(s.photos,
+                elem => ({ ...elem, ...p }),
+                elem => elem.download?.id === downloadStart.download.id
+              ),
+            }))
           }
-        })
-      },
-      [formValues.initialValues.photos]
-    )
-    
-    
-    
-    
-    const [needToFetchUser, setNeedToFetchUser] = useState(true)
-    const [isFetchingUser, setFetchingUser] = useState(false)
-    useAsyncEffect(
-      (lock, unlock) => {
-        if (needToFetchUser && !isFetchingUser
-          && lock(UserApi.current)
-        ) {
-          setNeedToFetchUser(false)
-          setFetchingUser(true)
+          const updatePhotos = withThrottle(
+            RangeU.map(Math.random(), [0, 1], [1450, 2000]),
+            updatePhotosNow
+          )
+          
           ;(async() => {
             try {
-              const resp = await UserApi.current()
-              if (resp.isSuccess)
-                setAuth(curr => ({ ...curr!, user: resp.data.user }))
-              else
-                console.warn('failed to fetch user:', resp)
+              const progress = new Progress(2, [90, 10])
+              const onProgress = (p: number | null) => {
+                progress.progress = p ?? 0
+                //console.log('progress', photo.id, progress.value)
+                updatePhotos({ download: {
+                  ...downloadStart.download,
+                  progress: progress.value,
+                } })
+              }
+              
+              //console.log('start download id',photo.id)
+              const blob = await fetchToBlob(
+                photo.remoteUrl,
+                { onProgress, abortCtrl }
+              )
+              abortCtrl.signal.throwIfAborted()
+              
+              progress.stage++
+              progress.progress = 0
+              const dataUrl = await blobToDataUrl(blob,
+                { onProgress, abortCtrl }
+              )
+              abortCtrl.signal.throwIfAborted()
+              
+              //console.log('completed',photo.id)
+              updatePhotosNow({ isReady: true, download: undefined, dataUrl })
+            }
+            catch (ex) {
+              // TODO notify about error
+              //console.log('download error', ex)
+              //console.log('photo', photo)
+              updatePhotosNow({ download: undefined })
             }
             finally {
-              setFetchingUser(false)
-              unlock(UserApi.current)
+              unlock(photo.remoteUrl)
             }
           })()
+          
         }
-      },
-      [needToFetchUser, isFetchingUser]
-    )
-    
-    
-    
-    //console.log(canSubmit , formProps.hasChanges)
-    
-    
-    const [tabIdx, setTabIdx] = useProfileTab()
-    
-    
-    const titleText = useUiValues(TitleUiText)
-    const headers = useMemo(() => {
-      return [titleText.preview, formValues.name, 'Тесты']
-    }, [titleText, formValues.name])
-    
-    
-    
-    return (
-      <>
-        <Pages.TabsPage>
-          
-          <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
-            {tabsProps => (
-              <>
-                <Tabs css={fill} {...tabsProps}>
-                  {({ tabContainerSpring, computedTabsDimens }) => (
-                    <>
-                      {arr(3).map(tabIdx => (
-                        <Tab css={fill} key={tabIdx}
-                          width={computedTabsDimens.frameWidth}
-                        >
-                          
-                          {tabIdx === 0 && (
-                            <Preview
-                              key="preview"
-                              formValues={formValues}
-                            />
-                          )}
-                          
-                          
-                          {tabIdx !== 0 && (
-                            <OverflowWrapper
-                              css={css`
-                                ${OverflowWrapperStyle.defolt};
-                                ${OverflowWrapperStyle.El.container.thiz()}{
-                                  touch-action: pan-y;
-                                }
-                                ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
-                                  ${safePageContentPaddings};
-                                }
-                              `}
-                              showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
-                            >
-                              
-                              <ProfilePageTabHeaderContext.Provider
-                                value={{
-                                  tabContainerSpring,
-                                  tabWidth: computedTabsDimens.frameWidth,
-                                  headers: headers,
-                                  setTabsState: tabsProps.setTabsState,
-                                  setTabIdx: tabsProps.setTabIdx,
-                                }}
-                              >
-                                {[
-                                  undefined,
-                                  <Profile
-                                    key="profile"
-                                    validationProps={validationProps}
-                                    onFormSubmitCallback={onFormSubmitCallback}
-                                    submit={submit}
-                                    canSubmit={canSubmit}
-                                    formProps={formProps}
-                                    isLoading={isLoading}
-                                    tabIdx={tabIdx}
-                                  />,
-                                  // <Partner
-                                  //   key="partner"
-                                  //   validationProps={validationProps}
-                                  //   onFormSubmitCallback={onFormSubmitCallback}
-                                  //   submit={submit}
-                                  //   canSubmit={canSubmit}
-                                  //   formProps={formProps}
-                                  //   isLoading={isLoading}
-                                  //   tabIdx={tabIdx}
-                                  // />,
-                                  <Tests
-                                    key="tests"
-                                    validationProps={validationProps}
-                                    onFormSubmitCallback={onFormSubmitCallback}
-                                    submit={submit}
-                                    canSubmit={canSubmit}
-                                    formProps={formProps}
-                                    isLoading={isLoading}
-                                    tabIdx={tabIdx}
-                                  />,
-                                ][tabIdx]}
-                              </ProfilePageTabHeaderContext.Provider>
+      })
+    },
+    [formValues.initialValues.photos]
+  )
+  
+  
+  
+  
+  const [needToFetchUser, setNeedToFetchUser] = useState(true)
+  const [isFetchingUser, setFetchingUser] = useState(false)
+  useAsyncEffect(
+    (lock, unlock) => {
+      if (needToFetchUser && !isFetchingUser
+        && lock(UserApi.current)
+      ) {
+        setNeedToFetchUser(false)
+        setFetchingUser(true)
+        ;(async() => {
+          try {
+            const resp = await UserApi.current()
+            if (resp.isSuccess)
+              setAuth(curr => ({ ...curr!, user: resp.data.user }))
+            else
+              console.warn('failed to fetch user:', resp)
+          }
+          finally {
+            setFetchingUser(false)
+            unlock(UserApi.current)
+          }
+        })()
+      }
+    },
+    [needToFetchUser, isFetchingUser]
+  )
+  
+  
+  
+  //console.log(canSubmit , formProps.hasChanges)
+  
+  
+  const [tabIdx, setTabIdx] = useProfileTab()
+  
+  
+  const titleText = useUiValues(TitleUiText)
+  const headers = useMemo(() => {
+    return [titleText.preview, formValues.name, 'Тесты']
+  }, [titleText, formValues.name])
+  
+  
+  
+  return (
+    <>
+      <Pages.TabsPage>
+        
+        <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
+          {tabsProps => (
+            <>
+              <Tabs css={fill} {...tabsProps}>
+                {({ tabContainerSpring, computedTabsDimens }) => (
+                  <>
+                    {arr(3).map(tabIdx => (
+                      <Tab css={fill} key={tabIdx}
+                        width={computedTabsDimens.frameWidth}
+                      >
+                        
+                        {tabIdx === 0 && (
+                          <Preview
+                            key="preview"
+                            formValues={formValues}
+                          />
+                        )}
+                        
+                        
+                        {tabIdx !== 0 && (
+                          <OverflowWrapper
+                            css={css`
+                              ${OverflowWrapperStyle.defolt};
+                              ${OverflowWrapperStyle.El.container.thiz()}{
+                                touch-action: pan-y;
+                              }
+                              ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
+                                ${safePageContentPaddings};
+                              }
+                            `}
+                            showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
+                          >
                             
-                            </OverflowWrapper>
-                          )}
-                        
-                        
-                        </Tab>
-                      ))}
-                    </>
-                  )}
-                </Tabs>
-                
-                
-                
-                {tabIdx !== 0 && (canSubmit || formProps.hasChanges) && (
-                  <LeftBottomButtonBar
-                    onCancel={formProps.hasChanges && formProps.resetUserFields || undefined}
-                    onAccept={canSubmit && !isLoading && submit || undefined}
-                  />
+                            <ProfilePageTabHeaderContext.Provider
+                              value={{
+                                tabContainerSpring,
+                                tabWidth: computedTabsDimens.frameWidth,
+                                headers: headers,
+                                setTabsState: tabsProps.setTabsState,
+                                setTabIdx: tabsProps.setTabIdx,
+                              }}
+                            >
+                              {[
+                                undefined,
+                                <Profile
+                                  key="profile"
+                                  validationProps={validationProps}
+                                  onFormSubmitCallback={onFormSubmitCallback}
+                                  submit={submit}
+                                  canSubmit={canSubmit}
+                                  formProps={formProps}
+                                  isLoading={isLoading}
+                                  tabIdx={tabIdx}
+                                />,
+                                // <Partner
+                                //   key="partner"
+                                //   validationProps={validationProps}
+                                //   onFormSubmitCallback={onFormSubmitCallback}
+                                //   submit={submit}
+                                //   canSubmit={canSubmit}
+                                //   formProps={formProps}
+                                //   isLoading={isLoading}
+                                //   tabIdx={tabIdx}
+                                // />,
+                                <Tests
+                                  key="tests"
+                                  validationProps={validationProps}
+                                  onFormSubmitCallback={onFormSubmitCallback}
+                                  submit={submit}
+                                  canSubmit={canSubmit}
+                                  formProps={formProps}
+                                  isLoading={isLoading}
+                                  tabIdx={tabIdx}
+                                />,
+                              ][tabIdx]}
+                            </ProfilePageTabHeaderContext.Provider>
+                          
+                          </OverflowWrapper>
+                        )}
+                      
+                      
+                      </Tab>
+                    ))}
+                  </>
                 )}
+              </Tabs>
               
-                {/* <UseBottomSheetState
-                  //isOpen={canSubmit || formProps.hasChanges}
-                  //closeable={!(canSubmit || formProps.hasChanges)}
+              
+              
+              {tabIdx !== 0 && (canSubmit || formProps.hasChanges) && (
+                <LeftBottomButtonBar
+                  onCancel={formProps.hasChanges && formProps.resetUserFields || undefined}
+                  onAccept={canSubmit && !isLoading && submit || undefined}
+                />
+              )}
+            
+              {/* <UseBottomSheetState
+                //isOpen={canSubmit || formProps.hasChanges}
+                //closeable={!(canSubmit || formProps.hasChanges)}
+              >
+                {props => <ModalPortal><BottomSheetBasic
+                  {...props.sheetProps}
                 >
-                  {props => <ModalPortal><BottomSheetBasic
-                    {...props.sheetProps}
-                  >
-                  
-                  </BottomSheetBasic></ModalPortal>}
-                </UseBottomSheetState>
-              
-              
-                { app.showDevOverlay && <BottomButtonBar
-                  refreshPageBtn
-                  rightChildren={
-                    <SoftRefreshBtn
-                      refresh={()=>setNeedToFetchUser(true)}
-                      isLoading={isFetchingUser}
-                    />
-                  }
-                /> } */}
-              
-              </>
-            )}
-          </UseTabsState>
-          
-        </Pages.TabsPage>
-      </>
-    )
-  }
-)
+                
+                </BottomSheetBasic></ModalPortal>}
+              </UseBottomSheetState>
+            
+            
+              { app.showDevOverlay && <BottomButtonBar
+                refreshPageBtn
+                rightChildren={
+                  <SoftRefreshBtn
+                    refresh={()=>setNeedToFetchUser(true)}
+                    isLoading={isFetchingUser}
+                  />
+                }
+              /> } */}
+            
+            </>
+          )}
+        </UseTabsState>
+        
+      </Pages.TabsPage>
+    </>
+  )
+})
 export default ProfilePage
 
 

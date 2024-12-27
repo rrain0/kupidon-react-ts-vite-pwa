@@ -17,12 +17,12 @@ export const ThemeNameUiText = {
   },
   
   
-  'Light Burgundy': {
-    'en-US': 'Light Burgundy',
+  'Light Wine': {
+    'en-US': 'Light Wine',
     'ru-RU': 'Светлая Бордовая',
   },
-  'Dark Burgundy': {
-    'en-US': 'Dark Burgundy',
+  'Dark Wine': {
+    'en-US': 'Dark Wine',
     'ru-RU': 'Тёмная Бордовая',
   },
   

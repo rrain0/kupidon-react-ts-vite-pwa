@@ -37,9 +37,7 @@ import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOpti
 
 
 
-const ApplicationSettingsPage =
-React.memo(
-()=>{
+const ApplicationSettingsPage = React.memo(() => {
   const app = useRecoilValue(AppRecoil)
   const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
   
@@ -52,162 +50,166 @@ React.memo(
   
   
   
-  const lightThemeOptions = useMemo(
-    ()=>{
-      let opts = AllThemes
-        .filter(t=>t.type==='light')
-        .map(t=>({
-          value: t.name,
-          text: themeNameText[t.name],
-          icon: <t.icon css={divIcon}/>,
-        }))
-      return opts
-    },
-    [themeNameText]
-  )
-  const darkThemeOptions = useMemo(
-    ()=>{
-      let opts = AllThemes
-        .filter(t=>t.type==='dark')
-        .map(t=>({
-          value: t.name,
-          text: themeNameText[t.name],
-          icon: <t.icon css={divIcon}/>,
-        }))
-      return opts
-    },
-    [themeNameText]
-  )
+  const lightThemeOptions = useMemo(() => {
+    const opts = AllThemes
+      .filter(t => t.type === 'light')
+      .map(t => ({
+        value: t.name,
+        text: themeNameText[t.name],
+        icon: <t.icon css={divIcon} />,
+      }))
+    return opts
+  }, [themeNameText])
+  const darkThemeOptions = useMemo(() => {
+    const opts = AllThemes
+      .filter(t => t.type === 'dark')
+      .map(t => ({
+        value: t.name,
+        text: themeNameText[t.name],
+        icon: <t.icon css={divIcon} />,
+      }))
+    return opts
+  }, [themeNameText])
   
   
   
   
-  return <>
+  return (
+    <>
     
-    <Pages.Page>
-      <Pages.SafeInsets>
-        <Pages.Content>
-        
-          <FormHeader>{titleText.appSettings}</FormHeader>
+      <Pages.Page>
+        <Pages.SafeInsets>
+          <Pages.Content>
           
-          
-          
-          <SettingsGroup>
-            <SettingsOptions.Header>
-              {titleText.theme}
-            </SettingsOptions.Header>
-            <ThemeOptions/>
-          </SettingsGroup>
-          
-          
-          
-          <SettingsGroup>
-            <SettingsOptions.Header>
-              {titleText.preferredLightTheme}
-            </SettingsOptions.Header>
-            <RadioInputGroup>
-              {
-                lightThemeOptions.map(opt => <RadioInput
-                  css={RadioInputStyle.radio}
-                  childrenPosition="start"
-                  checked={opt.value===themeSettings.light}
-                  value={opt.value}
-                  key={opt.value}
-                  onChange={ev => {
-                    setThemeSettings(s => ({
-                      ...s,
-                      light: opt.value,
-                    }))
+            <FormHeader>{titleText.appSettings}</FormHeader>
+            
+            
+            
+            <SettingsGroup>
+              <SettingsOptions.Header>
+                {titleText.theme}
+              </SettingsOptions.Header>
+              <ThemeOptions />
+            </SettingsGroup>
+            
+            
+            
+            <SettingsGroup>
+              <SettingsOptions.Header>
+                {titleText.lightThemeColor}
+              </SettingsOptions.Header>
+              <RadioInputGroup>
+                {
+                  lightThemeOptions.map(opt => (
+                    <RadioInput
+                      css={RadioInputStyle.radio}
+                      childrenPosition="start"
+                      checked={opt.value === themeSettings.light}
+                      value={opt.value}
+                      key={opt.value}
+                      onChange={ev => {
+                        setThemeSettings(s => ({
+                          ...s,
+                          light: opt.value,
+                        }))
+                      }}
+                    >
+                      <SettingsOptions.Container>
+                        {opt.icon}
+                        {opt.text}
+                      </SettingsOptions.Container>
+                    </RadioInput>
+                  ))
+                }
+              </RadioInputGroup>
+            </SettingsGroup>
+            
+            <SettingsGroup>
+              <SettingsOptions.Header>
+                {titleText.darkThemeColor}
+              </SettingsOptions.Header>
+              <RadioInputGroup>
+                {
+                  darkThemeOptions.map(opt => (
+                    <RadioInput
+                      css={RadioInputStyle.radio}
+                      childrenPosition="start"
+                      checked={opt.value===themeSettings.dark}
+                      value={opt.value}
+                      key={opt.value}
+                      onChange={ev => {
+                        setThemeSettings(s => ({
+                          ...s,
+                          dark: opt.value,
+                        }))
+                      }}
+                    >
+                      <SettingsOptions.Container>
+                        {opt.icon}
+                        {opt.text}
+                      </SettingsOptions.Container>
+                    </RadioInput>
+                  ))
+                }
+              </RadioInputGroup>
+            </SettingsGroup>
+            
+            
+            <SettingsGroup>
+              <SettingsOptions.Header>
+                {titleText.language}
+              </SettingsOptions.Header>
+              <LangOptions />
+            </SettingsGroup>
+            
+            
+            <RoundButtonsContainer>
+              
+              {app.canInstall && (
+                <Button css={normalIconRoundButton}
+                  onClick={async () => {
+                    const installed = await promptInstall()
+                    console.log('installed', installed)
                   }}
                 >
-                  <SettingsOptions.Container>
-                    {opt.icon}
-                    {opt.text}
-                  </SettingsOptions.Container>
-                </RadioInput>)
-              }
-            </RadioInputGroup>
-          </SettingsGroup>
-          
-          <SettingsGroup>
-            <SettingsOptions.Header>
-              {titleText.preferredDarkTheme}
-            </SettingsOptions.Header>
-            <RadioInputGroup>
-              {
-                darkThemeOptions.map(opt => <RadioInput
-                  css={RadioInputStyle.radio}
-                  childrenPosition="start"
-                  checked={opt.value===themeSettings.dark}
-                  value={opt.value}
-                  key={opt.value}
-                  onChange={ev => {
-                    setThemeSettings(s => ({
-                      ...s,
-                      dark: opt.value,
-                    }))
-                  }}
-                >
-                  <SettingsOptions.Container>
-                    {opt.icon}
-                    {opt.text}
-                  </SettingsOptions.Container>
-                </RadioInput>)
-              }
-            </RadioInputGroup>
-          </SettingsGroup>
-          
-          
-          <SettingsGroup>
-            <SettingsOptions.Header>
-              {titleText.language}
-            </SettingsOptions.Header>
-            <LangOptions/>
-          </SettingsGroup>
-          
-          
-          <RoundButtonsContainer>
-            
-            {app.canInstall && <Button css={normalIconRoundButton}
-              onClick={async()=>{
-                const installed = await promptInstall()
-                console.log('installed', installed)
-              }}
-            >
-              <AddModuleIc css={SettingsOptions.icon}/>
-              {actionText.installApp}
-            </Button>}
-            
-            <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
-              {overlay=><>
-                <Button css={ButtonS.outlinedRoundedNormalNormal}
-                  onClick={overlay.open}
-                >
-                  {actionText.clearAppData}
+                  <AddModuleIc css={SettingsOptions.icon} />
+                  {actionText.installApp}
                 </Button>
-                
-                <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close}/>
-              </>}
-            </UseOverlayUrl>
+              )}
+              
+              <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
+                {overlay => (
+                  <>
+                    <Button css={ButtonS.outlinedRoundedNormalNormal}
+                      onClick={overlay.open}
+                    >
+                      {actionText.clearAppData}
+                    </Button>
+                    
+                    <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close} />
+                  </>
+                )}
+              </UseOverlayUrl>
+            
+            </RoundButtonsContainer>
           
-          </RoundButtonsContainer>
+          
+          
+          </Pages.Content>
+        </Pages.SafeInsets>
         
         
-        
-        </Pages.Content>
-      </Pages.SafeInsets>
+        <PageScrollbars />
+      </Pages.Page>
       
       
-      <PageScrollbars />
-    </Pages.Page>
-    
-    
-    <TopButtonBar backBtn/>
-    
-    <BottomButtonBar />
-    
-    
-  </>
+      <TopButtonBar backBtn />
+      
+      <BottomButtonBar />
+      
+      
+    </>
+  )
 })
 export default ApplicationSettingsPage
 
@@ -224,7 +226,7 @@ const RoundButtonsContainer = styled.div`
   align-items: center;
   gap: 10px;
 `
-const normalIconRoundButton = (t:AppTheme.Theme)=>css`
+const normalIconRoundButton = (t:AppTheme.Theme) => css`
   ${ButtonS.filledRoundedNormalAccent(t)};
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;

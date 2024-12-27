@@ -71,11 +71,6 @@ export const dotActive = (t: AppTheme.Theme)=>css`
 
 
 
-
-
-
-
-
 export const currentUserPhotosToProfilePhotos =
   (photos: CurrentUser['photos']): ProfilePhoto[] => {
     const profilePhotos: ProfilePhoto[] =
@@ -112,41 +107,41 @@ export const profileUpdateApiRequest = (
   failedFields: (keyof FormValues)[],
   setFormValues: SetterOrUpdater<FormValues>,
   setAuth: SetterOrUpdater<AuthStateType>
-)=>{
+) => {
   const userToUpdate: UserToUpdate = {}
   let addPhotos = [] as AddProfilePhoto[]
   
-  if (!failedFields.includes('name')){
+  if (!failedFields.includes('name')) {
     userToUpdate.name = values.name
   }
-  if (!failedFields.includes('birthDate')){
+  if (!failedFields.includes('birthDate')) {
     userToUpdate.birthDate =
       DateTime.from_yyyy_MM_dd(values.birthDate)!
         .set({ timezone: DateTime.fromDate(new Date()).timezone })
         .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
   }
-  if (!failedFields.includes('gender')){
+  if (!failedFields.includes('gender')) {
     userToUpdate.gender = values.gender as Gender
   }
-  if (!failedFields.includes('aboutMe')){
+  if (!failedFields.includes('aboutMe')) {
     userToUpdate.aboutMe = values.aboutMe
   }
   
-  if (!failedFields.includes('photos')){
+  if (!failedFields.includes('photos')) {
     const [fwd] =
       ArrayU.diff2(values.initialValues.photos, values.photos, photosComparator)
     userToUpdate.photos = {
       remove: fwd
-        .filter(it=>it.isRemoved && it.fromElem.type==='remote')
-        .map(it=>it.fromElem.id),
+        .filter(it => it.isRemoved && it.fromElem.type === 'remote')
+        .map(it => it.fromElem.id),
       replace: fwd
-        .filter(it=>it.isReplaced && it.fromElem.type==='remote')
-        .map(it=>({ id: it.fromElem.id, index: it.toIdx })),
+        .filter(it => it.isReplaced && it.fromElem.type === 'remote')
+        .map(it => ({ id: it.fromElem.id, index: it.toIdx })),
     }
     addPhotos = values.photos
-      .map((it,i)=>({ remoteIndex: i, photo: it }))
-      .filter(it=>it.photo.type==='local' && it.photo.isReady)
-      .map(it=>({
+      .map((it, i) => ({ remoteIndex: i, photo: it }))
+      .filter(it => it.photo.type === 'local' && it.photo.isReady)
+      .map(it => ({
         id: it.photo.id,
         index: it.remoteIndex,
         name: it.photo.name,
@@ -157,74 +152,74 @@ export const profileUpdateApiRequest = (
   const apiPromise = new Promise<ApiResponse<
     CurrentUserSuccessData,
     UpdateUserErrorData | AddProfilePhotoErrorData
-  >>(async (resolve, reject)=>{
-    let updatedUser = null as null|CurrentUser
+  >>(async (resolve, reject) => {
+    let updatedUser = null as null | CurrentUser
     
-    let uploads = addPhotos.map(it=>({
+    let uploads = addPhotos.map(it => ({
       ...DefaultOperation,
       id: it.id,
       showProgress: false,
     }))
-    setFormValues(s=>({ ...s,
+    setFormValues(s => ({ ...s,
       photos: ArrayU.combine(
         s.photos, uploads,
-        (photo,upload)=>({ ...photo, upload } satisfies ProfilePhoto),
-        (photo,upload)=>photo.id===upload.id
-      )
+        (photo, upload) => ({ ...photo, upload } satisfies ProfilePhoto),
+        (photo, upload) => photo.id === upload.id
+      ),
     }))
     
     const setUpload = (upload: Operation) => {
-      setFormValues(s=>({ ...s,
+      setFormValues(s => ({ ...s,
         photos: mapFirstToIfFoundBy(
           s.photos,
-          elem=>({ ...elem, upload }),
-          elem=>elem.upload?.id===upload.id
-        )
+          elem => ({ ...elem, upload }),
+          elem => elem.upload?.id === upload.id
+        ),
       }))
     }
     const delayTimerId = setTimeout(
-      ()=>{
-        uploads = uploads.map(it=>({ ...it, showProgress: true }))
-        uploads.forEach(upload=>setUpload(upload))
+      () => {
+        uploads = uploads.map(it => ({ ...it, showProgress: true }))
+        uploads.forEach(upload => setUpload(upload))
       },
       2000
     )
     
-    const applyUpdatedUser = ()=>{
+    const applyUpdatedUser = () => {
       clearTimeout(delayTimerId)
-      setFormValues(s=>({ ...s,
+      setFormValues(s => ({ ...s,
         photos: ArrayU.combine(
           s.photos, uploads,
-          (photo,upload)=>(
+          (photo, upload) => (
             { ...photo, upload: undefined } satisfies ProfilePhoto
           ),
-          (photo,upload)=>photo.id===upload.id
-        )
+          (photo, upload) => photo.id === upload.id
+        ),
       }))
       const u = updatedUser
-      if (u){
+      if (u) {
         // работает при условии, что во время обновления другой клиент не обновит фотки
-        setFormValues(s=>({ ...s,
+        setFormValues(s => ({ ...s,
           photos: ArrayU.combine(
             s.photos, values.photos,
-            (photo,usedPhoto)=>({
+            (photo, usedPhoto) => ({
               ...photo,
               type: 'remote',
               isReady: usedPhoto.isReady,
             } satisfies ProfilePhoto),
-            (photo,usedPhoto)=>photo.id===usedPhoto.id && usedPhoto.type==='local'
-          )
+            (photo, usedPhoto) => photo.id === usedPhoto.id && usedPhoto.type === 'local'
+          ),
         }))
-        setFormValues(s=>({ ...s,
+        setFormValues(s => ({ ...s,
           photos: ArrayU.combine(
             s.photos, values.photos,
-            (photo,usedPhoto,photoI,usedPhotoI)=>({
-              ...photo, remoteIndex: usedPhotoI
+            (photo, usedPhoto, photoI, usedPhotoI) => ({
+              ...photo, remoteIndex: usedPhotoI,
             } satisfies ProfilePhoto),
-            (photo,usedPhoto)=>photo.remoteIndex===usedPhoto.remoteIndex
-          )
+            (photo, usedPhoto) => photo.remoteIndex === usedPhoto.remoteIndex
+          ),
         }))
-        setAuth(s=>({
+        setAuth(s => ({
           accessToken: s?.accessToken ?? '',
           user: u,
         }))
@@ -243,14 +238,14 @@ export const profileUpdateApiRequest = (
     
     
     for await (const photo of addPhotos) {
-      const getUpload = () => findBy(uploads, elem => elem.id===photo.id).elem
+      const getUpload = () => findBy(uploads, elem => elem.id === photo.id).elem
       
       const updatePhotoNow = (p: Partial<ProfilePhoto>) => {
         const upload = getUpload()
         if (upload) setFormValues(s => ({ ...s,
           photos: mapFirstToIfFoundBy(s.photos,
             elem => ({ ...elem, ...p }),
-            elem => elem.upload?.id===upload.id
+            elem => elem.upload?.id === upload.id
           ),
         }))
       }
@@ -259,11 +254,11 @@ export const profileUpdateApiRequest = (
         updatePhotoNow
       )
       
-      const onProgress = (p:number|null)=>{
+      const onProgress = (p:number | null) => {
         //console.log(`progress ${photo.id} ${p}`)
         const upload = getUpload()
         if (upload) updatePhoto({ upload:
-            { ...upload, progress: p??0 }
+            { ...upload, progress: p??0 },
         })
       }
       const updatedUserResponse =

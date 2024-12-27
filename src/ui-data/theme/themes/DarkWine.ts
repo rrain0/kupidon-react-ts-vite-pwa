@@ -8,7 +8,7 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-export const DarkBurgundyProps: ThemeProps = { ...DarkProps,
+export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   page: { ...DarkProps.page,
     bg:         ['#18191b'],
@@ -126,12 +126,12 @@ export const DarkBurgundyProps: ThemeProps = { ...DarkProps,
   },
   
   toast: { ...DarkProps.toast,
-    bg:                  ['#121212'],
+    bg:                   ['#121212'],
     content:              ['#ffffff'],
     content2:             ['#b8b8b8'],
     content3:             ['#ffffff'],
     accentNormal:         ['#bb86fc'],
-    accentLoadingBg:     ['#e0e0e0'],
+    accentLoadingBg:      ['#e0e0e0'],
     accentLoadingContent: ['#616161'],
     accentInfo:           ['#3498db'],
     accentOk:             ['#07bc0c'],
@@ -147,14 +147,14 @@ export const DarkBurgundyProps: ThemeProps = { ...DarkProps,
 
 
 
-export const DarkBurgundy = {
-  ...DarkBurgundyProps,
+export const DarkWine = {
+  ...DarkWineProps,
   type: 'dark',
-  name: 'Dark Burgundy' as const,
+  name: 'Dark Wine' as const,
   icon: styled.div(themeIconCss({
-    accentColor: DarkBurgundyProps.boxNormal.contentAccent3[0],
-    bgColor1:   DarkBurgundyProps.boxNormal.cta2,
-    bgColor2:   DarkBurgundyProps.page.bg[0],
+    accentColor: DarkWineProps.boxNormal.contentAccent3[0],
+    bgColor1:   DarkWineProps.boxNormal.cta2,
+    bgColor2:   DarkWineProps.page.bg[0],
   })),
 } satisfies Theme
 

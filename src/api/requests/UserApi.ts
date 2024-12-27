@@ -98,8 +98,7 @@ export namespace UserApi {
     name: string,
     dataUrl: string
   }
-  export const addProfilePhoto =
-  async (
+  export const addProfilePhoto = async (
     photo: AddProfilePhoto,
     options?: {
       onProgress?: Callback1<number|null>
@@ -118,15 +117,16 @@ export namespace UserApi {
     const config: AxiosRequestConfig = {
       onUploadProgress: progressEvent => {
         const p = progressEvent.progress
-        options?.onProgress?.( exists(p) ? p*100 : null )
+        options?.onProgress?.( exists(p) ? p * 100 : null )
       },
     }
     const ctrl = options?.abortCtrl
     if (ctrl) config.signal = ctrl.signal
     
     // https://axios-http.com/docs/multipart
-    return handleAuthenticatedResponse<AddProfilePhotoSuccessData, AddProfilePhotoErrorData>
-    (axAccess.postForm(r.addProfilePhoto,preparedPhoto,config))
+    return handleAuthenticatedResponse<AddProfilePhotoSuccessData, AddProfilePhotoErrorData>(
+      axAccess.postForm(r.addProfilePhoto, preparedPhoto, config)
+    )
   }
   
   

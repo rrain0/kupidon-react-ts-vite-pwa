@@ -169,13 +169,13 @@ registerRoute(
         lang: 'en-US',
         name: 'Kupidon',
         short_name: 'Kupidon',
-        description: 'Kupidon date app',
+        description: 'Kupidon - date app',
       },
       'ru-RU': {
         lang: 'ru-RU',
         name: 'Купидон',
         short_name: 'Купидон',
-        description: 'Купидон - сервис знакомств',
+        description: 'Купидон - приложение для свиданий',
       },
     }
     

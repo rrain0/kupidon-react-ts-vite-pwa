@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated, useSprings } from '@react-spring/web'
+import { animated, useSprings, useTransition } from '@react-spring/web'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
@@ -108,7 +108,6 @@ const Preview = React.memo(
     const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
     // get mapped photo index by availablePhotos[viewPhotoIndices[<spring-array-index>]]
     const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
-    
     
     const getSpringStyle = () => (i = 0) => {
       const p = getStartProgressY() + getDProgressY()

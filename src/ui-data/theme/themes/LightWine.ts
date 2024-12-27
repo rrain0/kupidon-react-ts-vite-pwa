@@ -15,7 +15,7 @@ const colors = {
 */
 
 
-export const LightBurgundyProps: ThemeProps = { ...LightProps,
+export const LightWineProps: ThemeProps = { ...LightProps,
   
   page: { ...LightProps.page,
     bg:         ['#f5f5f5'],
@@ -156,14 +156,14 @@ export const LightBurgundyProps: ThemeProps = { ...LightProps,
 
 
 
-export const LightBurgundy = {
-  ...LightBurgundyProps,
+export const LightWine = {
+  ...LightWineProps,
   type: 'light',
-  name: 'Light Burgundy' as const,
+  name: 'Light Wine' as const,
   icon: styled.div(themeIconCss({
-    accentColor: LightBurgundyProps.boxNormal.contentAccent3[0],
-    bgColor1:   LightBurgundyProps.boxNormal.cta2,
-    bgColor2:   LightBurgundyProps.page.bg[0],
+    accentColor: LightWineProps.boxNormal.contentAccent3[0],
+    bgColor1:   LightWineProps.boxNormal.cta2,
+    bgColor2:   LightWineProps.page.bg[0],
   })),
 } satisfies Theme
 
