@@ -6,10 +6,10 @@ name: kupidon-prod-react
 services:
 
   react:
-    # You must build image before with API_BASE_URL
-    # docker build -t rrain0/kupidon-react-react:1.6.16 --build-arg API_BASE_URL=https://kupidon.rrain.fvds.ru:40010/api .
-    # docker push rrain0/kupidon-react-react:1.6.16
-    image: rrain0/kupidon-react-react:1.6.16
+    # You must build image with API_BASE_URL before push
+    # docker build -t rrain0/kupidon-react-react:1.6.17 --build-arg API_BASE_URL=https://kupidon.rrain.fvds.ru:40010/api .
+    # docker push rrain0/kupidon-react-react:1.6.17
+    image: rrain0/kupidon-react-react:1.6.17
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:
