@@ -86,7 +86,6 @@ const precachedPattern = new RegExp(`^(${precachedList.join('|')})`)
 
 
 
-// TODO cache only app resources - images from other profiles must not be cached
 {
   // Images cache
   const imgExtsList = ['webp', 'svg', 'heic', 'heif', 'jpeg', 'jpg', 'png', 'gif', 'bmp']
@@ -101,13 +100,12 @@ const precachedPattern = new RegExp(`^(${precachedList.join('|')})`)
       console.log('self.location.origin', self.location.origin)
       console.log('url.origin === self.location.origin', url.origin === self.location.origin)
        */
+      //if (url.origin !== self.location.origin) return false
       
       if (noCache) return false
       
-      // assets in '/public' are already precached
       if (precachedPattern.test(url.pathname)) return false
       
-      //return url.origin === self.location.origin && imgExtsPattern.test(url.pathname)
       return imgExtsPattern.test(url.pathname)
     },
     // Customize this strategy as needed (new StaleWhileRevalidate or new CacheFirst)
