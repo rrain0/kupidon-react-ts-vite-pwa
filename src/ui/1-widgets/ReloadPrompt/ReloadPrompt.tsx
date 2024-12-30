@@ -9,27 +9,25 @@ import { pwaInfo } from 'virtual:pwa-info'
 console.log(pwaInfo)
 
 const ReloadPrompt = React.memo(() => {
-  // replaced dynamically
-  const buildDate = '__DATE__'
-  // replaced dyanmicaly
-  const reloadSW = '__RELOAD_SW__'
+  const buildDate = import.meta.env.BUILD_DATE
+  const isProd = import.meta.env.PROD
 
   const {
     offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
-    onRegisteredSW(swUrl, r) {
-      console.log(`Service Worker at: ${swUrl}`)
-      // @ts-expect-error just ignore
-      if (reloadSW === 'true') {
-        r && setInterval(() => {
-          console.log('Checking for sw update')
-          r.update()
-        }, 20000 /* 20s for testing purposes */)
-      }
-      else {
-        console.log('SW Registered: ' + r)
+    onRegisteredSW(swUrl, swRegistration) {
+      console.log(`SW at: ${swUrl}`)
+      
+      console.log('SW registered: ' + swRegistration)
+      
+      if (isProd) {
+        const checkUpdateInterval = 60 * 60 * 1000 // 1h
+        swRegistration && setInterval(() => {
+          console.log('Checking for SW update...')
+          void swRegistration.update()
+        }, checkUpdateInterval)
       }
     },
     onRegisterError(error) {

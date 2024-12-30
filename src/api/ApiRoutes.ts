@@ -4,7 +4,7 @@
 export namespace ApiRoutes {
   
   
-  export const api = import.meta.env.API_BASE_URL as string
+  export const api = import.meta.env.API_BASE_URL
   
   //console.log('api:', api)
   

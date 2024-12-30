@@ -49,8 +49,9 @@ export default defineConfig(({ command, mode }) => {
   
   let envFileConfig: Record<string, string> = { }
   const envVarsRuntime: Record<string, string> = {
-    // node / legacy libs support
+    // support for node and legacy libs
     'process.env.NODE_ENV': JSON.stringify(mode),
+    'import.meta.env.BUILD_DATE': JSON.stringify(new Date().toISOString()),
   }
   
   // LOAD ENVS BY VITE (with respect to vite env filename rules)
