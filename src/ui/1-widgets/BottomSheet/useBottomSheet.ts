@@ -26,7 +26,6 @@ import lastIndex = ArrayU.lastIndex
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
 import notExists = TypeU.notExists
-import Exists = TypeU.Exists
 import Present = TypeU.Present
 
 
@@ -136,51 +135,45 @@ export const useBottomSheet = (
   
   
   
-  const updateComputedSheetDimens = useCallback(
-    () => {
-      const frame = getFrame()
-      const sheet = getSheet()
-      const header = getHeader()
-      const content = getContent()
-      if (frame && sheet && header && content) {
-        const frameD = new ViewProps(frame)
-        const sheetD = new ViewProps(sheet)
-        const headerD = new ViewProps(header)
-        const contentD = new ViewProps(content)
-        setComputedSheetDimens({
-          frameH: frameD.height,
-          sheetH: sheetD.height,
-          headerH: headerD.height,
-          contentH: contentD.height,
-          headerAndContentH: headerD.height + contentD.height,
-        })
-      }
-    },
-    [getFrame(), getSheet(), getHeader(), getContent()]
-  )
+  const updateComputedSheetDimens = useCallback(() => {
+    const frame = getFrame()
+    const sheet = getSheet()
+    const header = getHeader()
+    const content = getContent()
+    if (frame && sheet && header && content) {
+      const frameD = new ViewProps(frame)
+      const sheetD = new ViewProps(sheet)
+      const headerD = new ViewProps(header)
+      const contentD = new ViewProps(content)
+      setComputedSheetDimens({
+        frameH: frameD.height,
+        sheetH: sheetD.height,
+        headerH: headerD.height,
+        contentH: contentD.height,
+        headerAndContentH: headerD.height + contentD.height,
+      })
+    }
+  }, [getFrame(), getSheet(), getHeader(), getContent()])
   
   
-  useEffect(
-    () => {
-      const frame = getFrame()
-      const sheet = getSheet()
-      const header = getHeader()
-      const content = getContent()
-      updateComputedSheetDimens()
-      if (frame || sheet || header || content) {
-        const resizeObserver = new ResizeObserver(() => updateComputedSheetDimens())
-        frame && resizeObserver.observe(frame)
-        sheet && resizeObserver.observe(sheet)
-        header && resizeObserver.observe(header)
-        content && resizeObserver.observe(content)
-        return () => resizeObserver.disconnect()
-      }
-    },
-    [
-      getFrame(), getSheet(), getHeader(), getContent(),
-      updateComputedSheetDimens,
-    ]
-  )
+  useEffect(() => {
+    const frame = getFrame()
+    const sheet = getSheet()
+    const header = getHeader()
+    const content = getContent()
+    updateComputedSheetDimens()
+    if (frame || sheet || header || content) {
+      const resizeObserver = new ResizeObserver(() => updateComputedSheetDimens())
+      frame && resizeObserver.observe(frame)
+      sheet && resizeObserver.observe(sheet)
+      header && resizeObserver.observe(header)
+      content && resizeObserver.observe(content)
+      return () => resizeObserver.disconnect()
+    }
+  }, [
+    getFrame(), getSheet(), getHeader(), getContent(),
+    updateComputedSheetDimens,
+  ])
   
   
   
@@ -507,7 +500,7 @@ export const useBottomSheet = (
       if (last && dragStartRef.current.isDragging) {
         dragStartRef.current.isDragging = false
         const speed = pxPerMsToPercentVpHPerS(spdy) // % высоты viewport в секунду
-        if (speed>speedThreshold) {
+        if (speed > speedThreshold) {
           dragStartRef.current.lastSpeed = speed
           if (diry < 0) {
             setNewState('snapping')
@@ -527,21 +520,18 @@ export const useBottomSheet = (
   
   
   // forbid content selection for all elements while dragging
-  useNoSelect(prevState==='dragging')
+  useNoSelect(prevState === 'dragging')
   
   
   
-  useEffect(
-    () => {
-      const frame = getFrame()
-      const sheet = getSheet()
-      const header = getHeader()
-      const content = getContent()
-      if (frame && sheet && header && content) setIsReady(true)
-      else setIsReady(false)
-    },
-    [getFrame(), getSheet(), getHeader(), getContent()]
-  )
+  useEffect(() => {
+    const frame = getFrame()
+    const sheet = getSheet()
+    const header = getHeader()
+    const content = getContent()
+    if (frame && sheet && header && content) setIsReady(true)
+    else setIsReady(false)
+  }, [getFrame(), getSheet(), getHeader(), getContent()])
   
   
   return {
@@ -563,7 +553,7 @@ function pxPerMsToPercentVpHPerS(pxPerMs: number): number {
   return pxPerMs*1000 / window.innerHeight * 100
 }
 function pathProgressPercent(start: number, end: number): number {
-  return Math.abs(end-start)/window.innerHeight*100
+  return Math.abs(end - start) / window.innerHeight * 100
 }
 
 
@@ -575,11 +565,11 @@ function calculateSnapPointsPx(
   const allowedUnits = ['px', '', undefined, '%']
   const allowedKeywords = ['fit-content', 'fit-header', 'free']
   const snapPointsCssValues = snapPoints.map(it => {
-    const cssValue = parseCssValue(it+'')
+    const cssValue = parseCssValue(it + '')
     if (
       !cssValue
-      || (cssValue.type==='keyword' && !allowedKeywords.includes(cssValue.value))
-      || (cssValue.type==='numeric' && !allowedUnits.includes(cssValue.unit))
+      || (cssValue.type === 'keyword' && !allowedKeywords.includes(cssValue.value))
+      || (cssValue.type === 'numeric' && !allowedUnits.includes(cssValue.unit))
     ) cssValueParsingError(it, cssValue)
     return cssValue
   })
@@ -595,7 +585,7 @@ function calculateSnapPointsPx(
       ) return
       
       let computed = function() {
-        if (cssValue.type==='keyword') {
+        if (cssValue.type === 'keyword') {
           switch (cssValue.value) {
             case 'fit-content':
               return computedSheetDimens.headerAndContentH
@@ -607,7 +597,7 @@ function calculateSnapPointsPx(
               cssValueParsingError(snapPoints[cssValueI], cssValue)
           }
         }
-        if (cssValue.type==='numeric') {
+        if (cssValue.type === 'numeric') {
           switch (cssValue.unit) {
             case 'px':
             case '':
@@ -631,13 +621,13 @@ function calculateSnapPointsPx(
       const left = findLastBy3({
         arr: snapPointsPx,
         filter: elem => exists(elem),
-        startIdx: cssValueI-1,
+        startIdx: cssValueI - 1,
         orElse: Number.NEGATIVE_INFINITY,
       }).elem as number
       const right = findBy3({
         arr: snapPointsPx,
         filter: elem => exists(elem),
-        startIdx: cssValueI+1,
+        startIdx: cssValueI + 1,
         orElse: Number.POSITIVE_INFINITY,
       }).elem as number
       computed = RangeU.clamp(computed, [left, right])
@@ -671,19 +661,20 @@ function cssValueParsingError(raw: string|number, parsed: CssValue|undefined): n
 
 
 
-function getSnapIndexToAdjust
-(height: number, snapPoints: (number|string)[], snapPointsPx: number[]): number {
+function getSnapIndexToAdjust(
+  height: number, snapPoints: (number|string)[], snapPointsPx: number[]
+): number {
   //if (!snapPointsPx.length) return null
   const snapStart = findLastBy(snapPointsPx, elem => height >= elem).index
   
-  if (snapPoints[snapStart]==='free') return snapStart
-  //if (height===snapPointsPx[snapStart]) return null
+  if (snapPoints[snapStart] === 'free') return snapStart
+  //if (height === snapPointsPx[snapStart]) return null
   
   const snapPointsPxInf = [Number.NEGATIVE_INFINITY, ...snapPointsPx, Number.POSITIVE_INFINITY]
   const threshold = Math.round(
-    (snapPointsPxInf[snapStart+1] + snapPointsPxInf[snapStart+2]) / 2
+    (snapPointsPxInf[snapStart + 1] + snapPointsPxInf[snapStart + 2]) / 2
   )
-  if (height>threshold) return snapStart+1
+  if (height>threshold) return snapStart + 1
   return snapStart
 }
 

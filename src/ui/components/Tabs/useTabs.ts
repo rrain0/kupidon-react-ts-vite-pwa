@@ -196,86 +196,84 @@ export const useTabs = (
   
   
   
-  const reactOnState = useEffectEvent(
-    () => {
-      if (!isReady) return
-      
-      const currState = prevState
-      const currTab = prevTabIdx
-      const currScrollLeft = tabContainerSpring.scrollLeft.get()
-      
-      //console.log({ newState, prevState, toTab, prevTabIdx })
-      
-      // prevent unnecessary state changes
-      if (newState===currState
-        && newTabIdx===currTab
-        && snapPointsPx===prevSnapPointsPx
-      ) return
-      
-      
-      const toTab = function() {
-        if (newState==='adjusting')
-          return getTabIdxToAdjust(currScrollLeft, snapPointsPx)
-        return RangeU.clamp(newTabIdx, [0, lastTabIdx])
-      }()
-      
-      const toScrollLeft = snapPointsPx[toTab]
-      
-      
-      
-      
-      const toDragging = newState==='dragging'
-      const toAnimated =
-        (['snapping', 'adjusting'] as TabsState[]).includes(newState)
-      const lastSpeed = function() {
-        if (currState!=='dragging') return null
-        return dragStartRef.current.lastSpeed
-      }()
-      
-      
-      
-      
-      const setStateAndIndex = (s: TabsState, index: TabIdx) => {
-        if (s!=='dragging') {
-          dragStartRef.current.canStart = false
-          dragStartRef.current.isDragging = false
-        }
-        /* if (isReady){
-          setNewState(s)
-          setNewTabIdx(index)
-        } */
+  const reactOnState = useEffectEvent(() => {
+    if (!isReady) return
+    
+    const currState = prevState
+    const currTab = prevTabIdx
+    const currScrollLeft = tabContainerSpring.scrollLeft.get()
+    
+    //console.log({ newState, prevState, toTab, prevTabIdx })
+    
+    // prevent unnecessary state changes
+    if (newState === currState
+      && newTabIdx === currTab
+      && snapPointsPx === prevSnapPointsPx
+    ) return
+    
+    
+    const toTab = function() {
+      if (newState==='adjusting')
+        return getTabIdxToAdjust(currScrollLeft, snapPointsPx)
+      return RangeU.clamp(newTabIdx, [0, lastTabIdx])
+    }()
+    
+    const toScrollLeft = snapPointsPx[toTab]
+    
+    
+    
+    
+    const toDragging = newState==='dragging'
+    const toAnimated =
+      (['snapping', 'adjusting'] as TabsState[]).includes(newState)
+    const lastSpeed = function() {
+      if (currState!=='dragging') return null
+      return dragStartRef.current.lastSpeed
+    }()
+    
+    
+    
+    
+    const setStateAndIndex = (s: TabsState, index: TabIdx) => {
+      if (s !== 'dragging') {
+        dragStartRef.current.canStart = false
+        dragStartRef.current.isDragging = false
+      }
+      /* if (isReady){
         setNewState(s)
         setNewTabIdx(index)
-        setPrevState(s)
-        setPrevTabIdx(index)
-        setPrevSnapPointsPx(prevSnapPointsPx)
-        //console.log('setStateAndIndex:',s,index)
-      }
-      
-      
-      //console.log('i',i)
-      //console.log({ canClose })
-      //console.log({ isOpened, isClosed, toOpened, toClosed })
-      
-      
-      if (toDragging) {
-        setStateAndIndex('dragging', currTab)
-        return
-      }
-      else if (!toAnimated) {
-        tabContainerSpring.scrollLeft.set(toScrollLeft)
-        setStateAndIndex('opened', toTab)
-        return
-      }
-      else {
-        setStateAndIndex('snapping', toTab)
-        runAnimation(toScrollLeft, lastSpeed, () => {
-          setStateAndIndex('opened', toTab)
-        })
-        return
-      }
+      } */
+      setNewState(s)
+      setNewTabIdx(index)
+      setPrevState(s)
+      setPrevTabIdx(index)
+      setPrevSnapPointsPx(prevSnapPointsPx)
+      //console.log('setStateAndIndex:',s,index)
     }
-  )
+    
+    
+    //console.log('i',i)
+    //console.log({ canClose })
+    //console.log({ isOpened, isClosed, toOpened, toClosed })
+    
+    
+    if (toDragging) {
+      setStateAndIndex('dragging', currTab)
+      return
+    }
+    else if (!toAnimated) {
+      tabContainerSpring.scrollLeft.set(toScrollLeft)
+      setStateAndIndex('opened', toTab)
+      return
+    }
+    else {
+      setStateAndIndex('snapping', toTab)
+      runAnimation(toScrollLeft, lastSpeed, () => {
+        setStateAndIndex('opened', toTab)
+      })
+      return
+    }
+  })
   useEffect(
     () => reactOnState(),
     [newState, newTabIdx, isReady, snapPointsPx]
@@ -343,13 +341,13 @@ export const useTabs = (
         const speed = pxPerMsToPercentVpHPerS(spdx)
         if (speed>speedThreshold) {
           dragStartRef.current.lastSpeed = speed
-          if (dirx<0) {
+          if (dirx < 0) {
             setNewState('snapping')
-            setNewTabIdx(Math.min(prevTabIdx+1, lastTabIdx))
+            setNewTabIdx(Math.min(prevTabIdx + 1, lastTabIdx))
           }
           else {
             setNewState('snapping')
-            setNewTabIdx(Math.max(prevTabIdx-1, 0))
+            setNewTabIdx(Math.max(prevTabIdx - 1, 0))
           }
         }
         else {
@@ -358,23 +356,20 @@ export const useTabs = (
       }
       
     }
-  ) as ()=>ReactDOMAttributes
+  ) as () => ReactDOMAttributes
   
   
   
   
   // forbid content selection for all elements while dragging
-  useNoSelect(prevState==='dragging')
+  useNoSelect(prevState === 'dragging')
   
   
-  useEffect(
-    () => {
-      const tabsContainer = getTabsContainer()
-      if (tabsContainer) setIsReady(true)
-      else setIsReady(false)
-    },
-    [getTabsContainer()]
-  )
+  useEffect(() => {
+    const tabsContainer = getTabsContainer()
+    if (tabsContainer) setIsReady(true)
+    else setIsReady(false)
+  }, [getTabsContainer()])
   
   
   return {
@@ -392,10 +387,10 @@ export const useTabs = (
 
 // px/ms => (percent of viewport height)/s
 function pxPerMsToPercentVpHPerS(pxPerMs: number): number {
-  return pxPerMs*1000 / window.innerWidth * 100
+  return pxPerMs * 1000 / window.innerWidth * 100
 }
 function pathProgressPercent(start: number, end: number): number {
-  return Math.abs(end-start)/window.innerWidth*100
+  return Math.abs(end - start) / window.innerWidth * 100
 }
 
 
@@ -407,9 +402,9 @@ function getTabIdxToAdjust
   
   const snapPointsPxInf = [Number.NEGATIVE_INFINITY, ...snapPointsPx, Number.POSITIVE_INFINITY]
   const threshold = Math.round(
-    (snapPointsPxInf[snapStart+1] + snapPointsPxInf[snapStart+2]) / 2
+    (snapPointsPxInf[snapStart + 1] + snapPointsPxInf[snapStart + 2]) / 2
   )
-  if (scrollLeft>threshold) return snapStart+1
+  if (scrollLeft>threshold) return snapStart + 1
   return snapStart
 }
 

@@ -31,17 +31,17 @@ export namespace ApiUtils {
     msg: 'Unknown error'
     extra?: any
   }
-  export interface UnknownErrorResponse extends ErrorResponse<UnknownError>{}
+  export interface UnknownErrorResponse extends ErrorResponse<UnknownError> { }
   export function getUnknownError(error?: any): UnknownErrorResponse {
     const unknown: UnknownErrorResponse = {
       isSuccess: false,
       error: {
         code: 'unknown-error',
         msg: 'Unknown error',
-      }
+      },
     }
-    if (error!==undefined) unknown.error.extra = error
-    console.warn('Unknown response error',unknown)
+    if (error !== undefined) unknown.error.extra = error
+    console.warn('Unknown response error', unknown)
     return unknown
   }
   
@@ -51,14 +51,14 @@ export namespace ApiUtils {
     code: 'connection-error'
     msg: 'Connection error'
   }
-  export interface ConnectionErrorResponse extends ErrorResponse<ConnectionError>{}
+  export interface ConnectionErrorResponse extends ErrorResponse<ConnectionError> { }
   export function getConnectionError(): ConnectionErrorResponse {
     return {
       isSuccess: false,
       error: {
         code: 'connection-error',
         msg: 'Connection error',
-      }
+      },
     }
   }
   
@@ -73,17 +73,17 @@ export namespace ApiUtils {
     msg: 'Authentication error'
     extra?: any
   }
-  export interface AuthenticationErrorResponse extends ErrorResponse<AuthenticationError>{}
+  export interface AuthenticationErrorResponse extends ErrorResponse<AuthenticationError> { }
   export function getAuthenticationError(error?: any): AuthenticationErrorResponse {
     const auth: AuthenticationErrorResponse = {
       isSuccess: false,
       error: {
         code: 'authentication-error',
         msg: 'Authentication error',
-      }
+      },
     }
-    if (error!==undefined) auth.error.extra = error
-    console.warn('Authentication response error',auth)
+    if (error !== undefined) auth.error.extra = error
+    console.warn('Authentication response error', auth)
     return auth
   }
   
@@ -100,56 +100,52 @@ export namespace ApiUtils {
   
   
   
-  export type ApiResponse<D, E extends ResponseError>
-    = SuccessResponse<D> | ErrorResponse<E>
+  export type ApiResponse<D, E extends ResponseError> = SuccessResponse<D> | ErrorResponse<E>
   
   
   
   
   
   
-  export function handleErrorResponse
-  <E extends ResponseError>
-  (ex: any)
-  : ErrorResponse<E> | undefined {
+  export function handleErrorResponse<E extends ResponseError>(ex: any)
+    : ErrorResponse<E> | undefined
+  {
     if (ex instanceof AxiosError && ex.response?.status===400) {
       return {
         isSuccess: false,
-        error: ex.response.data as E
+        error: ex.response.data as E,
       } as ErrorResponse<E>
     }
   }
   
-  export function handleAuthenticationErrorResponse
-  (ex: any)
-  : AuthenticationErrorResponse | undefined {
+  export function handleAuthenticationErrorResponse(ex: any)
+    : AuthenticationErrorResponse | undefined
+  {
     if (ex instanceof AxiosError && ex.response?.status===401) {
       return getAuthenticationError(ex)
     }
   }
   
-  export function handleConnectionError
-  (ex: any)
-  : ConnectionErrorResponse | undefined {
-    if (ex instanceof AxiosError && ex.code===AxiosError.ERR_NETWORK){
+  export function handleConnectionError(ex: any)
+    : ConnectionErrorResponse | undefined
+  {
+    if (ex instanceof AxiosError && ex.code===AxiosError.ERR_NETWORK) {
       return getConnectionError()
     }
   }
   
-  export function handleSuccessResponse
-  <D = unknown>
-  (response: AxiosResponse)
-  : SuccessResponse<D> | undefined {
+  export function handleSuccessResponse<D = unknown>(response: AxiosResponse)
+    : SuccessResponse<D> | undefined
+  {
     if (response.status===200) return {
       isSuccess: true,
       data: response.data as D,
     } as SuccessResponse<D>
   }
   
-  export async function handleResponse
-  <D, E extends ResponseError>
-  (responsePromise: Promise<AxiosResponse>)
-  : Promise<ApiResponse<D, E | TechnicalError>> {
+  export async function handleResponse<D, E extends ResponseError>(
+    responsePromise: Promise<AxiosResponse>
+  ): Promise<ApiResponse<D, E | TechnicalError>> {
     try {
       const serverResponse = await responsePromise
       {
@@ -170,10 +166,9 @@ export namespace ApiUtils {
     }
   }
   
-  export async function handleAuthenticatedResponse
-  <D, E extends ResponseError>
-  (responsePromise: Promise<AxiosResponse>)
-  : Promise<ApiResponse<D, E | TechnicalError | AuthenticationError>> {
+  export async function handleAuthenticatedResponse<D, E extends ResponseError>(
+    responsePromise: Promise<AxiosResponse>
+  ): Promise<ApiResponse<D, E | TechnicalError | AuthenticationError>> {
     try {
       const serverResponse = await responsePromise
       {
@@ -209,10 +204,6 @@ export namespace ApiUtils {
       return handleErrorResponse<E>(ex)
     }
   } */
-  
-  
-  
-  
   
   
   

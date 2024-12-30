@@ -25,7 +25,7 @@ export type TabsCustomProps = {
   tabIdx: TabIdx
   setTabIdx: Setter<TabIdx>
 } & Puro<{
-  children: (tabsProps: TabsRenderProps)=>React.ReactNode
+  children: (tabsProps: TabsRenderProps) => React.ReactNode
 }>
 export type TabsForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>
 export type TabsRefElement = HTMLDivElement
@@ -33,10 +33,7 @@ export type TabsProps = TabsRefsProps & TabsCustomProps & TabsForwardRefProps
 
 
 
-const Tabs =
-React.memo(
-React.forwardRef<TabsRefElement, TabsProps>(
-(props, forwardedRef) => {
+const Tabs = React.memo(React.forwardRef<TabsRefElement, TabsProps>((props, forwardedRef) => {
   const {
     tabsState,
     setTabsState,
@@ -72,30 +69,33 @@ React.forwardRef<TabsRefElement, TabsProps>(
   
   
   
-  return <TabsFrame style={{
-    opacity: !isReady ? 0 : undefined,
-  }}
-    {...restProps}
-    ref={tabFrameRef}
-  >
-    <GesturesConsumer {...tabDrag()}>
-      <TabsContainer
-        // @ts-expect-error
-        style={{ left: tabContainerSpring.scrollLeft.to(v => -v) }}
-      >
+  return (
+    <TabsFrame
+      style={{
+        opacity: !isReady ? 0 : undefined,
+      }}
+      {...restProps}
+      ref={tabFrameRef}
+    >
+      <GesturesConsumer {...tabDrag()}>
+        <TabsContainer
+          // @ts-expect-error
+          style={{ left: tabContainerSpring.scrollLeft.to(v => -v) }}
+        >
+          
+          { children?.({
+            isReady,
+            computedTabsDimens,
+            snapPointsPx,
+            realDefaultOpenIdx,
+            tabContainerSpring,
+            tabDrag,
+          }) }
         
-        { children?.({
-          isReady,
-          computedTabsDimens,
-          snapPointsPx,
-          realDefaultOpenIdx,
-          tabContainerSpring,
-          tabDrag,
-        }) }
-      
-      </TabsContainer>
-    </GesturesConsumer>
-  </TabsFrame>
+        </TabsContainer>
+      </GesturesConsumer>
+    </TabsFrame>
+  )
 }))
 export default Tabs
 

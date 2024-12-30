@@ -58,8 +58,8 @@ TODO
   
  */
 
-// максимальное кол-во отображаемых фоток
-// (во время анимации пролистывания их 4, в дефолтном состоянии их видно 3, но 4ая прозрачная и куда-то сдвинута)
+// Максимальное кол-во отображаемых фоток.
+// Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3, потому что 4ая прозрачная.
 const maxVisiblePhotosCnt = 4
 
 
@@ -106,48 +106,52 @@ const Preview = React.memo(
     const [getDProgressY, setDProgressY] = useRefGetSet(0)
     // start progress for photos in (..0..100..) * availablePhotos.length
     const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
-    // get mapped photo index by availablePhotos[viewPhotoIndices[<spring-array-index>]]
+    // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
     const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
     
     const getSpringStyle = () => (i = 0) => {
+      // progress
       const p = getStartProgressY() + getDProgressY()
+      // photoProgress
       const photoP = getStartPhotoP() + getDProgressY()
       
-      const vi = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt]) // !!displayed!! view index
-      const pc = mod(p, 100) // progress current
+      // displayedIndex from top to bottom
+      const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+      // progressCurrent
+      const pc = mod(p, 100)
       
       // set photo's indices to display
       setViewPhotoIndices(prev => {
         const indices = [...prev]
-        const photoI = RangeU.loop(Math.floor(photoP / 100) + vi, [0, photosCnt])
+        const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
         indices[i] = photoI
         if (ArrayU.eq(prev, indices)) return prev
         return indices
       })
       
       // z-index
-      const z = -vi + visiblePhotosCnt - 1
+      const z = -di + visiblePhotosCnt - 1
       
       // translate y
       const y = (() => {
-        if (vi === 0) return pc
-        return -(vi - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+        if (di === 0) return pc
+        return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
       })()
       
       // scale
       const s = (() => {
-        if (vi === 0) return 100
-        return 100 - 5 * (vi - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+        if (di === 0) return 100
+        return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
       })()
       
       // opacity
       const o = (() => {
-        if (vi === 0) return 100 - RangeU.map(
+        if (di === 0) return 100 - RangeU.map(
           pc,
           [0, 30, 100],
           [0, 0, 100],
         )
-        if (vi === visiblePhotosCnt - 1) return RangeU.map(
+        if (di === visiblePhotosCnt - 1) return RangeU.map(
           pc,
           [0, 80, 100],
           [0, 0, 100],

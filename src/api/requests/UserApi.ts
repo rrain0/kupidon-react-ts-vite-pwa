@@ -28,8 +28,7 @@ export namespace UserApi {
   export type CurrentUserSuccessData = {
     user: CurrentUser
   }
-  export type CurrentUserErrorData =
-    AuthenticationError | NoUserResponseError | TechnicalError
+  export type CurrentUserErrorData = AuthenticationError | NoUserResponseError | TechnicalError
   export const current = async() =>
     handleAuthenticatedResponse<CurrentUserSuccessData, CurrentUserErrorData>(
       axAccess.get(r.userCurrent)
