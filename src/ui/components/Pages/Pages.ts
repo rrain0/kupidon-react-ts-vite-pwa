@@ -15,11 +15,11 @@ export namespace Pages {
   
   export const pageColors = (t: AppTheme.Theme) => css`
     ${SimpleGradientBg(t)};
-    color: ${t.page.content2[0]};
+    color: ${t.page.ct2[0]};
   `
   export const simplePageColors = (t: AppTheme.Theme) => css`
-    background: ${t.page.bg[0]};
-    color: ${t.page.content2[0]};
+    background: ${t.page.bg};
+    color: ${t.page.ct2[0]};
   `
   
   

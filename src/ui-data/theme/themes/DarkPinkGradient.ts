@@ -26,7 +26,7 @@ export const DarkPinkGradientProps: ThemeProps = { ...DarkPinkProps,
   },
   navButton: {
     ...DarkPinkProps.navButton,
-    contentAccent: ['#d92a54'],
+    cta: ['#d92a54'],
   },
   
   inputRadio: {
@@ -44,7 +44,7 @@ export const DarkPinkGradient = {
   icon: styled.div(themeIconGradientCss({
     accentColor: DarkPinkGradientProps.buttonAccent.bg[0],
     bgColor1:   DarkPinkGradientProps.buttonAccent.bg[0],
-    bgColor2:   DarkPinkGradientProps.page.bg[0],
+    bgColor2:   DarkPinkGradientProps.page.bg,
   })),
 } satisfies Theme
 

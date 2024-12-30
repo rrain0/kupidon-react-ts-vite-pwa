@@ -20,7 +20,7 @@ export namespace NavButtonStyle {
     ...ButtonS.Attr0,
   } as const
   
-  export const El = function(){
+  export const El = function() {
     const btn = ButtonS.El00.btn
     const icon = btn.toElem('>', SvgIconS.El.icon)
     const gradIcon = btn.toElem('>', SvgGradIconsStyle.El.root)
@@ -43,35 +43,35 @@ export namespace NavButtonStyle {
       padding: 5px 0 2px;
 
       background: none;
-      ${El.btn.props.color.set(t.navButton.content[0])}
+      ${El.btn.props.color.set(t.navButton.ct[0])}
       
       ${Txt.small5};
     }
     ${El.ripple.thiz()} {
       ${El.ripple.props.mode.set('center')}
-      ${El.ripple.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
+      ${El.ripple.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
     }
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('100%')}
-      ${El.icon.props.color.set(t.navButton.content[0])}
+      ${El.icon.props.color.set(t.navButton.ct[0])}
     }
     ${El.gradIcon.thiz()} {
       ${El.gradIcon.props.size.set('100%')}
-      ${El.gradIcon.props.firstColor.set(t.navButton.content[0])}
-      ${El.gradIcon.props.secondColor.set(t.navButton.content[0])}
+      ${El.gradIcon.props.firstColor.set(t.navButton.ct[0])}
+      ${El.gradIcon.props.secondColor.set(t.navButton.ct[0])}
     }
     
     // link active
     // IT IS WORKING !!!: a.active &.btnDotClass > iconDotClass
     a.active ${El.icon.thiz()} {
-      ${El.icon.props.color.set(t.navButton.contentAccent[0])}
+      ${El.icon.props.color.set(t.navButton.cta[0])}
     }
     a.active ${El.gradIcon.thiz()} {
-      ${El.gradIcon.props.firstColor.set(t.iconGradient.content[0])}
-      ${El.gradIcon.props.secondColor.set(t.iconGradient.content[1])}
+      ${El.gradIcon.props.firstColor.set(t.iconGradient.ct[0])}
+      ${El.gradIcon.props.secondColor.set(t.iconGradient.ct[1])}
     }
     a.active ${El.btn.thiz()} {
-      ${El.btn.props.color.set(t.navButton.contentAccent[0])}
+      ${El.btn.props.color.set(t.navButton.cta[0])}
     }
     
     // hover

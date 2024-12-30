@@ -68,8 +68,8 @@ export namespace TextareaStyle {
       overflow: hidden;
       padding: 8px 16px;
       ${Txt.large2};
-      color: ${t.input.content[0]};
-      ${Prop.color}: ${t.input.content[0]};
+      color: ${t.input.ct[0]};
+      ${Prop.color}: ${t.input.ct[0]};
 
       ::placeholder {
         color: ${t.input.placeholder[0]};
@@ -109,11 +109,11 @@ export namespace TextareaStyle {
     // disabled
     ${El.frameDisabled} {
       cursor: auto;
-      color: ${t.input.content[0]};
-      ${Prop.color}: ${t.input.content[0]};
+      color: ${t.input.ct[0]};
+      ${Prop.color}: ${t.input.ct[0]};
     }
     ${El.borderDisabled} {
-      border-color: ${t.input.content[0]};
+      border-color: ${t.input.ct[0]};
     }
     
     // error

@@ -43,8 +43,8 @@ export namespace SvgIconS {
     
     // normal
     ${W.use.s.normal().e.icon().thisUse} {
-      ${W.e.icon.p.color.set(t.boxNormal.content1b[0])}
-      ${W.e.icon.p.accentColor.set(t.boxNormal.content1b[0])}
+      ${W.e.icon.p.color.set(t.boxNormal.ct1b[0])}
+      ${W.e.icon.p.accentColor.set(t.boxNormal.ct1b[0])}
     }
   `
   

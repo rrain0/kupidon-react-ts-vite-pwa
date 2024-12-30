@@ -144,7 +144,7 @@ export namespace InputStyle {
       background: ${t.input.bg[0]};
     }
     ${W.use.s.normal().e.input().thisUse} {
-      ${W.props.color.p.set(t.input.content[0])};
+      ${W.props.color.p.set(t.input.ct[0])};
 
       ::placeholder {
         color: ${t.input.placeholder[0]};
@@ -162,18 +162,18 @@ export namespace InputStyle {
     // state: read-only
     ${W.use.s.readOnly().e.frame().thisUse} {
       cursor: auto;
-      color: ${t.input.content[0]};
+      color: ${t.input.ct[0]};
     }
     ${W.use.s.readOnly().e.border().thisUse} {
-      border-color: ${t.page.content2[0]};
+      border-color: ${t.page.ct2[0]};
     }
 
     // state: disabled
     ${W.use.s.disabled().e.input().thisUse} {
-      ${W.props.color.p.set(t.input.content[0])};
+      ${W.props.color.p.set(t.input.ct[0])};
     }
     ${W.use.s.disabled().e.border().thisUse} {
-      border-color: ${t.input.content[0]};
+      border-color: ${t.input.ct[0]};
     }
 
     // state: error

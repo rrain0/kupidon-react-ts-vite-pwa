@@ -78,19 +78,15 @@ export const useThemeSetup = () => {
   useLayoutEffect(() => {
     const t = theme.theme
     if (t) {
-      const metaThemeColorElements =
-        document.querySelectorAll(
-          'html head meta[name=theme-color]'
-        ) as NodeListOf<HTMLMetaElement>
-      metaThemeColorElements
-        .forEach(meta => meta.content = t.statusBar.bg[0])
+      const metaThemeColorElements = document.querySelectorAll(
+        'html head meta[name=theme-color]'
+      ) as NodeListOf<HTMLMetaElement>
+      metaThemeColorElements.forEach(meta => meta.content = t.statusBar.bg[0])
       
-      const metaBackgroundColorElements =
-        document.querySelectorAll(
-          'html head meta[name=background-color]'
-        ) as NodeListOf<HTMLMetaElement>
-      metaBackgroundColorElements
-        .forEach(meta => meta.content = t.page.bg[0])
+      const metaBackgroundColorElements = document.querySelectorAll(
+        'html head meta[name=background-color]'
+      ) as NodeListOf<HTMLMetaElement>
+      metaBackgroundColorElements.forEach(meta => meta.content = t.page.bg)
     }
   }, [theme.theme])
   

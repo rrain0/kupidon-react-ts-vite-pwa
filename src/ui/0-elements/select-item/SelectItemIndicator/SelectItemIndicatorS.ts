@@ -69,13 +69,13 @@ export namespace SelectItemIndicatorS {
     
     // normal
     ${W.use.s.normal().e.indicator0().thisUse}{
-      background: ${t.boxNormal.content4b[0]};
+      background: ${t.boxNormal.ct4b[0]};
     }
     ${W.use.s.normal().e.indicator1().thisUse}{
-      background: ${t.boxNormal.content3e[0]};
+      background: ${t.boxNormal.ct3e[0]};
     }
     ${W.use.s.normal().e.indicator2().thisUse}{
-      background: ${t.boxNormal.content1b[0]};
+      background: ${t.boxNormal.ct1b[0]};
     }
   `
   

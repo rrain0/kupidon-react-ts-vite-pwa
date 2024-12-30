@@ -51,21 +51,21 @@ export namespace IconButtonStyle {
     // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
-      ${W.e.icon.e.p.color.set(t.buttonNormal.content[0])};
+      ${W.e.icon.e.p.color.set(t.buttonNormal.ct[0])};
     }
   `
   const icFilledAddColorNormal2 = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
-      ${W.e.icon.e.p.color.set(t.buttonNormal.content[0])};
+      ${W.e.icon.e.p.color.set(t.buttonNormal.ct[0])};
     }
   `
   const icFilledAddColorAccent = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
-      ${W.e.icon.e.p.color.set(t.buttonAccent.content[0])};
+      ${W.e.icon.e.p.color.set(t.buttonAccent.ct[0])};
     }
   `
   
@@ -104,7 +104,7 @@ export namespace IconButtonStyle {
     }
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('50%')};
-      ${W.e.icon.e.p.color.set(t.photos.content[0])};
+      ${W.e.icon.e.p.color.set(t.photos.ct[0])};
     }
   `
   

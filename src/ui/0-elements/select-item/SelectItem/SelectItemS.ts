@@ -179,7 +179,7 @@ export namespace SelectItemS {
     
     // selected
     ${W.use.s.selected().e.border().thisUse} {
-      border-color: ${t.boxNormal.content1b[0]};
+      border-color: ${t.boxNormal.ct1b[0]};
     }
   `
   

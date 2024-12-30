@@ -139,15 +139,15 @@ const premiumCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
   ${ButtonS.S.Filled.Rect.addColor({
     bg: t.boxWithWine.bg,
-    c: t.boxWithWine.ct,
-    cRipple: t.boxNormal.content4[0],
+    ct: t.boxWithWine.ct,
+    cRipple: t.boxNormal.ct4[0],
     bgFocus: t.boxWithWine.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
         ${t.boxWithWine.bgFocus[1]} 65%,
         ${t.boxWithWine.bgFocus[0]} 100%
       )`,
-    cFocus: t.boxWithWine.ctFocus,
+    ctFocus: t.boxWithWine.ctFocus,
   })};
 `
 const PremiumCardIc = styled(FeatureCardIc)`
@@ -161,21 +161,21 @@ const InviteFriendsCard = styled.div`
     ${p => p.theme.boxViolet.bg[0]} 0%,
     ${p => p.theme.boxViolet.bg[1]} 100%
   );
-  color: ${p => p.theme.boxViolet.c};
+  color: ${p => p.theme.boxViolet.ct};
 `
 const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
   ${ButtonS.S.Filled.Rect.addColor({
     bg: t.boxWithViolet.bg,
-    c: t.boxWithViolet.c,
-    cRipple: t.boxNormal.content4[0],
+    ct: t.boxWithViolet.ct,
+    cRipple: t.boxNormal.ct4[0],
     bgFocus: t.boxWithViolet.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
         ${t.boxWithViolet.bgFocus[1]} 65%,
         ${t.boxWithViolet.bgFocus[0]} 100%
       )`,
-    cFocus: t.boxWithViolet.cFocus,
+    ctFocus: t.boxWithViolet.ctFocus,
   })};
 `
 const InviteFriendsCardIc = styled(FeatureCardIc)`
@@ -192,21 +192,21 @@ const SocialNetworksCard = styled.div`
     ${p => p.theme.boxBlue.bg[0]} 0%,
     ${p => p.theme.boxBlue.bg[1]} 107.78%
   );
-  color: ${p => p.theme.boxBlue.c};
+  color: ${p => p.theme.boxBlue.ct};
 `
 const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
   ${ButtonS.S.Filled.Rect.addColor({
     bg: t.boxWithBlue.bg,
-    c: t.boxWithBlue.c,
-    cRipple: t.boxNormal.content4[0],
+    ct: t.boxWithBlue.ct,
+    cRipple: t.boxNormal.ct4[0],
     bgFocus: t.boxWithBlue.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
         ${t.boxWithBlue.bgFocus[1]} 65%,
         ${t.boxWithBlue.bgFocus[0]} 100%
       )`,
-    cFocus: t.boxWithBlue.cFocus,
+    ctFocus: t.boxWithBlue.ctFocus,
   })};
 `
 const SocialNetworksCardIc = styled(FeatureCardIc)`

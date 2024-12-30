@@ -13,7 +13,7 @@ import Txt = EmotionCommon.Txt
 export const formHeader = (t: AppTheme.Theme) => css`
   ${Txt.large4};
   min-height: 1.5em;
-  color: ${t.page.content1[0]};
+  color: ${t.page.ct1[0]};
   align-self: center;
   text-align: center;
 `
@@ -29,7 +29,7 @@ export namespace Hs {
   export const page = (t: AppTheme.Theme) => css`
     ${Txt.large3};
     min-height: 1.5em;
-    color: ${t.page.content1[0]};
+    color: ${t.page.ct1[0]};
     align-self: center;
     text-align: center;
   `
@@ -38,7 +38,7 @@ export namespace Hs {
   
   export const card3 = (t: AppTheme.Theme) => css`
     ${Txt.large2b};
-    color: ${t.boxNormal.content[0]};
+    color: ${t.boxNormal.ct[0]};
   `
   export const Card3 = styled.h4`${p => card3(p.theme)}`
   

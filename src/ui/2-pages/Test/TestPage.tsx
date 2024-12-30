@@ -345,7 +345,7 @@ const TestPage = React.memo(() => {
               padding: 10px;
               border-radius: 16px;
               background: ${t.boxNormal.bg[0]};
-              color: ${t.boxNormal.content[0]};
+              color: ${t.boxNormal.ct[0]};
             `}
           >
             Контент.<br />
@@ -359,7 +359,7 @@ const TestPage = React.memo(() => {
               padding: 10px;
               border-radius: 16px;
               background: ${t.boxNormal.bg2[0]};
-              color: ${t.boxNormal.content[0]};
+              color: ${t.boxNormal.ct[0]};
             `}
           >
             Контент.<br />
@@ -373,7 +373,7 @@ const TestPage = React.memo(() => {
               padding: 10px;
               border-radius: 16px;
               background: ${t.boxAccent.bg[0]};
-              color: ${t.boxAccent.content[0]};
+              color: ${t.boxAccent.ct[0]};
             `}
           >
             Контент.<br />
@@ -388,7 +388,7 @@ const TestPage = React.memo(() => {
               padding: 10px;
               border-radius: 16px;
               background: ${t.boxAccent.bg[0]};
-              color: ${t.boxAccent.content[0]};
+              color: ${t.boxAccent.ct[0]};
             `}
           >
             <CheckboxInput
@@ -407,7 +407,7 @@ const TestPage = React.memo(() => {
               padding: 10px;
               border-radius: 16px;
               background: ${t.boxNormal.bg[0]};
-              color: ${t.boxNormal.content[0]};
+              color: ${t.boxNormal.ct[0]};
             `}
           >
             <div>onEvent Test</div>

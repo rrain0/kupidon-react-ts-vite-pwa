@@ -43,7 +43,7 @@ export namespace HeaderArrowS {
         ${Hs.page(t)};
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
-        ${SvgIconS.El.icon.props.color.name}: ${t.page.content1[0]};
+        ${SvgIconS.El.icon.props.color.name}: ${t.page.ct1[0]};
         height: 26px;
       }
     `
@@ -60,7 +60,7 @@ export namespace HeaderArrowS {
       line-height: normal;
       letter-spacing: 0.05em;
       min-height: 1.5em;
-      color: ${t.page.content1[0]};
+      color: ${t.page.ct1[0]};
       align-self: center;
       text-align: center;
       position: relative;

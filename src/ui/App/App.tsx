@@ -36,7 +36,7 @@ const App = React.memo(() => {
             styles={t => css`
               body {
                 // will be WINDOW background
-                background: ${t.page.bg[0]};
+                background: ${t.page.bg};
               }
               
               * {

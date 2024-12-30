@@ -127,12 +127,12 @@ const icon = (t:Theme) => css`
   ${SvgIconS.El.icon.thiz()} {
     height: 1.333em;
     width: 1.333em;
-    ${SvgIconS.El.icon.props.color.set(t.page.content2[0])}
+    ${SvgIconS.El.icon.props.color.set(t.page.ct2[0])}
   }
 `
 const iconOnDanger = (t:Theme) => css`
   ${SvgIconS.El.icon.thiz()} {
-    ${SvgIconS.El.icon.props.color.set(t.elementDanger.content[0])}
+    ${SvgIconS.El.icon.props.color.set(t.elementDanger.ct[0])}
   }
 `
 const button = (t:Theme) => css`
@@ -145,8 +145,8 @@ const button = (t:Theme) => css`
 const ModalReloading = styled.div`
   ${fixed};
   z-index: ${StyleVals.modalFloor2};
-  background: ${p => p.theme.page.bg[0]}9a;
-  color: ${p => p.theme.page.content2[0]};
+  background: ${p => p.theme.page.bg}9a;
+  color: ${p => p.theme.page.ct2[0]};
   ${Txt.large2};
   ${center};
 `

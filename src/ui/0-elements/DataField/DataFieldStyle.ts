@@ -37,7 +37,7 @@ export namespace DataFieldStyle {
   
   
   
-  export const interactive = (t:Theme)=>css`
+  export const interactive = (t:Theme) => css`
     ${El.frame} {
       cursor: pointer;
       border-radius: 15px;
@@ -49,8 +49,8 @@ export namespace DataFieldStyle {
 
       overflow-wrap: anywhere;
       ${Txt.large2};
-      color: ${t.input.content[0]};
-      ${Prop.color}: ${t.input.content[0]};
+      color: ${t.input.ct[0]};
+      ${Prop.color}: ${t.input.ct[0]};
     }
     ${El.border} {
       border: 2px solid transparent;
@@ -97,19 +97,19 @@ export namespace DataFieldStyle {
   `
   
   
-  export const statik = (t:Theme)=>css`
+  export const statik = (t:Theme) => css`
     ${interactive(t)};
     ${El.frame} {
       cursor: auto;
-      color: ${t.input.content[0]};
-      ${Prop.color}: ${t.input.content[0]};
+      color: ${t.input.ct[0]};
+      ${Prop.color}: ${t.input.ct[0]};
     }
     ${El.border} {
-      border: 2px solid ${t.page.content2[0]};
+      border: 2px solid ${t.page.ct2[0]};
     }
   `
   
-  export const statikSmall = (t:Theme)=>css`
+  export const statikSmall = (t:Theme) => css`
     ${statik(t)};
     ${small(t)};
   `

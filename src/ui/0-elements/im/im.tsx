@@ -18,7 +18,7 @@ export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
 
 export const imPlaceholderIcS = (t: AppTheme.Theme) => css`
   ${SvgIconS.El.icon.thiz()} {
-    ${SvgIconS.El.icon.props.color.set(t.photos.content[0])}
+    ${SvgIconS.El.icon.props.color.set(t.photos.ct[0])}
     ${SvgIconS.El.icon.props.size.set('30%')}
   }
 `
@@ -33,7 +33,7 @@ export const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
 export const imPieProgressS = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress} {
     ${PieProgressStyle.Prop.prop.progressColor}: transparent;
-    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.content[0]};
+    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.ct[0]};
     height: 30%;
     aspect-ratio: 1;
   }

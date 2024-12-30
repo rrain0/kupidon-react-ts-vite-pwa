@@ -81,11 +81,11 @@ export namespace RadioInputStyle {
       padding: 8px 10px 8px 10px;
       
       ${Txt.large2};
-      color: ${t.page.content2[0]};
-      ${Prop.color}: ${t.page.content2[0]};
+      color: ${t.page.ct2[0]};
+      ${Prop.color}: ${t.page.ct2[0]};
     }
     ${El.ripple}{
-      ${Prop.rippleColor}: ${t.ripple.contentOnTransparent[0]+'88'};
+      ${Prop.rippleColor}: ${t.ripple.ctOnTransparent[0]+'88'};
     }
     ${El.iconWrap}{
       /*align-self: start;*/

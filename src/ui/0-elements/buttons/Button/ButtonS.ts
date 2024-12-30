@@ -167,18 +167,18 @@ export namespace ButtonS {
   // type: filled, shape: rect, add color
   const filledRectAddColor = (colors: {
     bg: string
-    c: string
+    ct: string
     cRipple?: string | undefined
     bgFocus: string
     bgImFocus?: string | undefined
-    cFocus: string
+    ctFocus: string
     bgDisabled?: string | undefined
     cDisabled?: string | undefined
   }) => css`
     // state: normal
     ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
       background-color: ${colors.bg};
-      ${W.e.button.e.props.color.set(colors.c)}
+      ${W.e.button.e.props.color.set(colors.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${!!colors.cRipple && W.e.ripple.e.props.color.set(colors.cRipple)}
@@ -188,7 +188,7 @@ export namespace ButtonS {
     ${hoverable}{ ${ButtonS.W.u({ e: 'button', s: 'hover' }).thisUse} {
       background-color: ${colors.bgFocus};
       ${!!colors.bgImFocus && `background-image: ${colors.bgImFocus};`}
-      ${W.e.button.e.props.color.set(colors.cFocus)}
+      ${W.e.button.e.props.color.set(colors.ctFocus)}
     }}
     
     // state: active
@@ -201,7 +201,7 @@ export namespace ButtonS {
     ${ButtonS.W.u({ e: 'button', s: 'focusVisible' }).thisUse} {
       background-color: ${colors.bgFocus};
       ${!!colors.bgImFocus && `background-image: ${colors.bgImFocus};`}
-      ${W.e.button.e.props.color.set(colors.cFocus)}
+      ${W.e.button.e.props.color.set(colors.ctFocus)}
     }
     
     // state: disabled
@@ -218,10 +218,10 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.buttonMain.bg[0]};
-      ${W.e.button.e.props.color.set(t.buttonMain.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonMain.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
@@ -243,7 +243,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])};
     }
     
     // state: error
@@ -254,55 +254,55 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.buttonAccent.bg[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
     ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonAccent.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ctFocus[0])}
     }}
     
     // state: focus-visible
     ${W.use.s.focusVisible().e.button().thisUse} {
       background-color: ${t.buttonAccent.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ctFocus[0])}
     }
     
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   // type: filled, shape: rect, add color: accent 2
   const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
     bg: t.buttonAccent.bg2[0],
-    c: t.buttonAccent.ct2,
-    cRipple: t.ripple.content[0],
+    ct: t.buttonAccent.ct2,
+    cRipple: t.ripple.ct[0],
     bgFocus: t.buttonAccent.bgFocus[0],
-    cFocus: t.buttonAccent.contentFocus[0],
+    ctFocus: t.buttonAccent.ctFocus[0],
     bgDisabled: t.elementDisabled.bg[0],
-    cDisabled: t.elementDisabled.content[0],
+    cDisabled: t.elementDisabled.ct[0],
   })
   // type: filled, shape: rect, add color: normal
   const filledRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.buttonNormal.bg[0]};
-      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
     ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonNormal.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.ctFocus[0])};
     }}
     
     // state: focus-visible
@@ -313,7 +313,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   // type: filled, shape: rect, add color: danger
@@ -321,10 +321,10 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.elementDanger.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDanger.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDanger.ct[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
@@ -340,7 +340,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])};
     }
   `
   
@@ -388,10 +388,10 @@ export namespace ButtonS {
   export const textRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.e.button.e.props.color.set(t.page.content2[0])};
+      ${W.e.button.e.props.color.set(t.page.ct2[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
+      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
     }
     
     // state: hover
@@ -407,7 +407,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])};
     }
   `
   // type: text, shape: rect, add size: normal
@@ -488,16 +488,16 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.buttonNormal.bg[0]};
-      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
     ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonNormal.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.ctFocus[0])};
     }}
     
     // state: focus-visible
@@ -508,7 +508,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   // type: filled, shape: rounded, add color: normal2
@@ -516,16 +516,16 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.buttonNormal.bg2};
-      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
     ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonNormal.bgFocus2};
-      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.ctFocus[0])};
     }}
     
     // state: focus-visible
@@ -536,7 +536,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   // type: filled, shape: rounded, add color: accent
@@ -544,28 +544,28 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.buttonAccent.bg[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
 
     // state: hover
     ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonAccent.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ctFocus[0])}
     }}
 
     // state: focus-visible
     ${W.use.s.focusVisible().e.button().thisUse} {
       background-color: ${t.buttonAccent.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ctFocus[0])}
     }
 
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   // type: filled, shape: rounded, add color: accent2
@@ -581,10 +581,10 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background-color: ${t.elementDanger.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDanger.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDanger.ct[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.content[0])}
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
     }
     
     // state: hover
@@ -600,7 +600,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])};
     }
   `
   
@@ -747,25 +747,25 @@ export namespace ButtonS {
       border-color: ${t.buttonNormal.bg[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
+      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
     }
     
     // state: hover
     ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonNormal.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonNormal.contentFocus[0])};
+      ${W.e.button.e.props.color.set(t.buttonNormal.ctFocus[0])};
     }}
     
     // state: focus-visible
     ${W.use.s.focusVisible().e.button().thisUse} {
       background-color: ${t.buttonNormal.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonNormal.content[0])}
+      ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   // type: outlined, shape: rounded, add color: accent
@@ -778,13 +778,13 @@ export namespace ButtonS {
       border-color: ${t.buttonAccent.bg[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
+      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
     }
     
     // state: hover
     ${hoverable}{ ${W.use.s.hover().e.button().thisUse} {
       background-color: ${t.buttonAccent.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ctFocus[0])}
     }}
     ${hoverable}{ ${W.use.s.hover().e.border().thisUse} {
       border-color: ${t.buttonAccent.bgFocus[0]};
@@ -793,13 +793,13 @@ export namespace ButtonS {
     // state: focus-visible
     ${W.use.s.focusVisible().e.button().thisUse} {
       background-color: ${t.buttonAccent.bgFocus[0]};
-      ${W.e.button.e.props.color.set(t.buttonAccent.contentFocus[0])}
+      ${W.e.button.e.props.color.set(t.buttonAccent.ctFocus[0])}
     }
     
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])}
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   
@@ -847,10 +847,10 @@ export namespace ButtonS {
   export const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.e.button.e.props.color.set(t.page.content2[0])};
+      ${W.e.button.e.props.color.set(t.page.ct2[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.contentOnTransparent[0]+'88')}
+      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
     }
 
     // state: hover
@@ -866,7 +866,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
-      ${W.e.button.e.props.color.set(t.elementDisabled.content[0])};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])};
     }
   `
   
@@ -952,7 +952,7 @@ export namespace ButtonS {
       ${W.e.button.p.color.set(t.buttonNormal.bg[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.contentOnTransparent[0]+'88')};
+      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0]+'88')};
     }
     
     // state: hover

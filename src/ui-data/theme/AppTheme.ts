@@ -12,8 +12,9 @@ export namespace AppTheme {
   
   /*
   background => bg
-  content => c / ct
-  contentAccent => ca / cta
+  content => ct
+  contentAccent => cta
+  contentFocus => ctFocus
    */
   export interface ThemeProps {
     
@@ -27,11 +28,11 @@ export namespace AppTheme {
     }
     
     page: {
-      bg:          string[]
+      bg:          string
       bgGradient:  string[]
-      content1:    string[]
-      content2:    string[]
-      content3:    string[]
+      ct1:         string
+      ct2:         string
+      ct3:         string
     }
     statusBar: {
       bg: string[]
@@ -41,90 +42,90 @@ export namespace AppTheme {
     }
     
     boxNormal: {
-      bg:              string[]
-      bg2:             string[]
-      bg3:             string[]
+      bg:         string[]
+      bg2:        string[]
+      bg3:        string[]
       
-      content:         string[]
-      content1a:       string[]
-      content1b:       string[]
-      content2:        string[]
-      content2b:       string[]
-      c2c:             string
-      content3:        string[]
-      content3d:       string[]
-      content3e:       string[]
-      content4:        string[]
-      content4b:       string[]
-      c5:              string
-      c6:              string
+      ct:    string[]
+      ct1a:       string[]
+      ct1b:       string[]
+      ct2:        string[]
+      ct2b:       string[]
+      ct2c:       string
+      ct3:        string[]
+      ct3d:       string[]
+      ct3e:       string[]
+      ct4:        string[]
+      ct4b:       string[]
+      ct5:        string
+      ct6:        string
       
-      contentAccent:   string[]
-      cta2:  string
-      contentAccent3:  string[]
+      cta:        string[]
+      cta2:       string
+      cta3:       string[]
       
-      shadow:          string[]
+      shadow:     string[]
     },
     boxAccent: {
-      bg:       string[]
-      bg3:      string
-      content:  string[]
-      content2: string[]
-      c3:       string
+      bg:         string[]
+      bg3:        string
+      ct:    string[]
+      ct2:        string[]
+      ct3:        string
     },
     
     // main button (submit button)
     buttonMain: {
       bg:       string[]
       bgFocus:  string[]
-      content:  string[]
+      ct:  string[]
     }
     // just a colorful button that drags some attention
     buttonAccent: {
       bg:            string[]
       bg2:           string[]
-      content:       string[]
+      ct:       string[]
       ct2:           string
       bgFocus:       string[]
-      contentFocus:  string[]
+      ctFocus:       string[]
     }
     // normal button
     buttonNormal: {
       bg:            string[]
       bg2:           string
-      content:       string[]
+      ct:       string[]
       bgFocus:       string[]
       bgFocus2:      string
-      contentFocus:  string[]
+      ctFocus:       string[]
     }
     // button that almost invisible
     buttonSecondary: {
       bg:        string[]
       bgFocus:   string[]
-      content:   string[]
+      ct:   string[]
     }
     // radio input color
     inputRadio: {
-      bgFocus: string[]
+      bgFocus:   string[]
     }
     // transparent icon button
     buttonTransparent: {
-      bgFocus: string[],
+      bgFocus:   string[],
     }
     navButton: {
-      bgFocus:       string[]
-      content:       string[]
-      contentAccent: string[]
+      bgFocus:   string[]
+      ct:   string[]
+      cta:       string[]
     }
     
     iconGradient: {
-      content:       string[]
+      ct:   string[]
     }
     
     // input, dataField, textarea, radioInput, radioGroup
     input: {
       bg:            string[]
-      content:       string[]
+      ct:       string[]
       placeholder:   string[]
       border:        string[]
       borderHover:   string[]
@@ -139,84 +140,84 @@ export namespace AppTheme {
     
     // disabledButton
     elementDisabled: {
-      bg:      string[]
-      content: string[]
+      bg:           string[]
+      ct:      string[]
     }
     // dangerButton
     elementDanger: {
-      bg:       string[]
-      bgFocus:  string[]
-      content:  string[]
+      bg:           string[]
+      bgFocus:      string[]
+      ct:      string[]
     }
     // element with error
     elementError: {
-      bg:      string[]
+      bg:           string[]
     },
     
     ripple: {
-      content:              string[]
-      contentOnTransparent: string[]
+      ct:              string[]
+      ctOnTransparent: string[]
     }
     
     
     
     boxTransparent: {
       bg: string,
-      c:  string,
+      ct: string,
     },
     
     boxPink: {
       bg: [string, string]
-      ct:  string,
+      ct: string,
     }
     boxWithPink: {
       bg:  string
-      ct:   string
+      ct:  string
       
       bgFocus: [string, string]
-      ctFocus:  string
+      ctFocus: string
     },
     
     boxWine: {
       bg: [string, string]
-      ct:  string,
+      ct: string,
     }
     boxWithWine: {
       bg:  string
-      ct:   string
+      ct:  string
+      
+      bgFocus: [string, string]
+      ctFocus: string
+    },
+    
+    boxViolet: {
+      bg: [string, string]
+      ct: string
+    }
+    boxWithViolet: {
+      bg:  string
+      ct:  string
       
       bgFocus: [string, string]
       ctFocus:  string
     },
     
-    boxViolet: {
-      bg: [string, string]
-      c:  string
-    }
-    boxWithViolet: {
-      bg:  string
-      c:   string
-      
-      bgFocus: [string, string]
-      cFocus:  string
-    },
-    
     boxBlue: {
       bg:  [string, string]
-      c:   string
+      ct:  string
     }
     boxWithBlue: {
       bg:  string
-      c:   string
+      ct:  string
       
       bgFocus: [string, string]
-      cFocus:  string
+      ctFocus: string
     }
     
     
     photos: {
       bg:                      string[]
-      content:                 string[]
+      ct:                      string[]
       borderDrag:              string[]
       highlightFrameBg:        string[]
       highlightFrameAccentBg:  string[]
@@ -229,12 +230,12 @@ export namespace AppTheme {
     
     toast: {
       bg:                   string[]
-      content:              string[]
-      content2:             string[]
-      content3:             string[]
+      ct:                   string[]
+      ct2:                  string[]
+      ct3:                  string[]
       accentNormal:         string[]
       accentLoadingBg:      string[]
-      accentLoadingContent: string[]
+      accentLoadingCt:      string[]
       accentInfo:           string[]
       accentOk:             string[]
       accentWarn:           string[]

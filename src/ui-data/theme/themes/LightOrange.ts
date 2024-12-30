@@ -18,7 +18,7 @@ export const LightOrangeProps: ThemeProps = { ...LightPinkProps,
   },
   navButton: { ...LightPinkProps.navButton,
     bgFocus:      ['#ffffff'],
-    contentAccent: ['#ff802a'],
+    cta: ['#ff802a'],
   },
   
   boxAccent: { ...LightPinkProps.boxAccent,

@@ -410,14 +410,14 @@ const NoImagesBox = styled.div`
     't' 1fr
     / 100%;
   ;
-  color: ${p => p.theme.boxTransparent.c};
+  color: ${p => p.theme.boxTransparent.ct};
 `
 const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
   ${imPlaceholderIcS(t)};
   ${SvgIconS.El.icon.thiz()} {
     grid-area: p;
     ${SvgIconS.El.icon.props.size.set('112%')}
-    ${SvgIconS.El.icon.props.color.set(t.boxTransparent.c)}
+    ${SvgIconS.El.icon.props.color.set(t.boxTransparent.ct)}
   }
 `
 const NoImagesTitle = styled.div`
@@ -476,5 +476,5 @@ const Name = styled.div`
 `
 const AboutMe = styled.div`
   ${Txt.large2};
-  color: ${p => p.theme.page.content2[0]}
+  color: ${p => p.theme.page.ct2[0]}
 `

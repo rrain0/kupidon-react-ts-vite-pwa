@@ -30,17 +30,13 @@
   
   // На нижний бар с полоской навигации андроида эти настройки не влияют
   
-  // Title bar of window, status bar on mobile.
   // Splashscreen status bar color.
+  // Title bar of window, status bar on mobile.
   // It will be overriden by <meta name="theme-color" ... />.
-  //"theme_color": "#f0f0f0",
-  //"dark_theme_color": "#282c34",
   "theme_color": "#282c34",
   
   // Splashscreen bg color.
   // NOT Window or Viewport bg
-  //"background_color": "#f0f0f0",
-  //"dark_background_color": "#282c34",
   "background_color": "#282c34",
   
   

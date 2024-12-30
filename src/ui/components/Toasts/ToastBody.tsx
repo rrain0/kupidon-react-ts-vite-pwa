@@ -41,7 +41,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
         width: 20px;
         height: 20px;
         ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentLoadingBg[0]};
-        ${SvgIconS.El.icon.props.accentColor.name}: ${t.toast.accentLoadingContent[0]};
+        ${SvgIconS.El.icon.props.accentColor.name}: ${t.toast.accentLoadingCt[0]};
       `}
     />}
     
@@ -108,7 +108,7 @@ const Body = styled.div`
 const Content = styled.div`
   ${row};
   flex: 1;
-  color: ${p=>p.theme.toast.content[0]};
+  color: ${p=>p.theme.toast.ct[0]};
   white-space: break-spaces;
   ${Txt.small2};
 `
@@ -126,12 +126,12 @@ const CloseButton = styled.button`
   &>${SvgIconS.El.icon.sel()} {
     width: 100%;
     height: 100%;
-    ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.content2[0]};
+    ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.ct2[0]};
   }
   
   ${hoverable}{
     :hover>${SvgIconS.El.icon.sel()} {
-      ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.content3[0]};
+      ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.ct3[0]};
     }
   }
 `

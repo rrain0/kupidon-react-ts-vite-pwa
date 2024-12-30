@@ -68,10 +68,10 @@ export const Colors2 = {
   toastDangerBg: '#e74c3c',
   
   toastLightContent: '#757575',
-  toastLightContent2: '#b2b2b2',
-  toastLightContent3: '#000000',
+  toastLightct2: '#b2b2b2',
+  toastLightct3: '#000000',
   toastDarkContent: '#ffffff',
-  toastDarkContent2: '#b8b8b8',
-  toastDarkContent3: '#ffffff',
+  toastDarkct2: '#b8b8b8',
+  toastDarkct3: '#ffffff',
   
 } as const
