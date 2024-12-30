@@ -60,7 +60,7 @@ const BottomSheetDialogBasic = React.memo(
                 <div
                   css={t => css`
                     ${BottomSheetBasicParts.headerHandleStyle(t)};
-                    ${sheetState === 'dragging' && `background: ${t.page.ct2[0]};`}
+                    ${sheetState === 'dragging' && `background: ${t.page.ct2};`}
                   `}
                 />
               )}

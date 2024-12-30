@@ -15,7 +15,7 @@ export const LightPinkGradientProps: ThemeProps = { ...LightPinkProps,
     //bg: ['#ffb6c1','#f5f5f5','#d8701a'],
   },
   statusBar: { ...LightPinkProps.statusBar,
-    bg: ['#ffaeba'],
+    bg: '#ffaeba',
   },
   
   inputRadio: { ...LightPinkProps.buttonMain,

@@ -81,7 +81,7 @@ export const useThemeSetup = () => {
       const metaThemeColorElements = document.querySelectorAll(
         'html head meta[name=theme-color]'
       ) as NodeListOf<HTMLMetaElement>
-      metaThemeColorElements.forEach(meta => meta.content = t.statusBar.bg[0])
+      metaThemeColorElements.forEach(meta => meta.content = t.statusBar.bg)
       
       const metaBackgroundColorElements = document.querySelectorAll(
         'html head meta[name=background-color]'

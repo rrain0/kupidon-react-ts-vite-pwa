@@ -1,6 +1,7 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
+import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
 import CheckBrowserMinimumVersion
   from 'src/ui/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
 import AppFrame from 'src/ui/App/AppFrame'
@@ -48,6 +49,8 @@ const App = React.memo(() => {
           <DragDetector>
             <AppFrame />
           </DragDetector>
+          
+          <ReloadPrompt />
           
           <ToastifySetup />
           

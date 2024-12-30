@@ -13,7 +13,7 @@ import Txt = EmotionCommon.Txt
 export const formHeader = (t: AppTheme.Theme) => css`
   ${Txt.large4};
   min-height: 1.5em;
-  color: ${t.page.ct1[0]};
+  color: ${t.page.ct1};
   align-self: center;
   text-align: center;
 `
@@ -29,7 +29,7 @@ export namespace Hs {
   export const page = (t: AppTheme.Theme) => css`
     ${Txt.large3};
     min-height: 1.5em;
-    color: ${t.page.ct1[0]};
+    color: ${t.page.ct1};
     align-self: center;
     text-align: center;
   `

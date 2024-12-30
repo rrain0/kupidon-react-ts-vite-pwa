@@ -388,7 +388,7 @@ export namespace ButtonS {
   export const textRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.e.button.e.props.color.set(t.page.ct2[0])};
+      ${W.e.button.e.props.color.set(t.page.ct2)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
@@ -847,7 +847,7 @@ export namespace ButtonS {
   export const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      ${W.e.button.e.props.color.set(t.page.ct2[0])};
+      ${W.e.button.e.props.color.set(t.page.ct2)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}

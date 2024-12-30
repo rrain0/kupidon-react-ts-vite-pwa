@@ -127,7 +127,7 @@ const icon = (t:Theme) => css`
   ${SvgIconS.El.icon.thiz()} {
     height: 1.333em;
     width: 1.333em;
-    ${SvgIconS.El.icon.props.color.set(t.page.ct2[0])}
+    ${SvgIconS.El.icon.props.color.set(t.page.ct2)}
   }
 `
 const iconOnDanger = (t:Theme) => css`
@@ -146,7 +146,7 @@ const ModalReloading = styled.div`
   ${fixed};
   z-index: ${StyleVals.modalFloor2};
   background: ${p => p.theme.page.bg}9a;
-  color: ${p => p.theme.page.ct2[0]};
+  color: ${p => p.theme.page.ct2};
   ${Txt.large2};
   ${center};
 `

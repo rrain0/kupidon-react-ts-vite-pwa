@@ -12,7 +12,7 @@ export namespace BottomSheetBasicParts {
   export const headerStyle = (t: AppTheme.Theme) => css`
     background: ${t.bottomSheet.bg[0]};
     border-radius: 16px 16px 0 0;
-    color: ${t.page.ct2[0]};
+    color: ${t.page.ct2};
     padding: 10px;
     ${col};
     align-items: center;
@@ -39,7 +39,7 @@ export namespace BottomSheetBasicParts {
     place-items: center;
     overflow: hidden;
     background: ${t.bottomSheet.bg[0]};
-    color: ${t.page.ct2[0]};
+    color: ${t.page.ct2};
   `
   
   

@@ -17,10 +17,10 @@ export const LightProps: ThemeProps = {
     ct3:    '#999999',
   },
   statusBar: {
-    bg: ['#f5f5f5'],
+    bg: '#f5f5f5',
   },
   nav: {
-    bg: ['#ffffff'],
+    bg: '#ffffff',
   },
   navButton: {
     bgFocus:       ['#f0f0f0'],

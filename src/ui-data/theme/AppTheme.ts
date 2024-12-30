@@ -35,10 +35,10 @@ export namespace AppTheme {
       ct3:         string
     }
     statusBar: {
-      bg: string[]
+      bg: string
     }
     nav: {
-      bg: string[]
+      bg: string
     }
     
     boxNormal: {

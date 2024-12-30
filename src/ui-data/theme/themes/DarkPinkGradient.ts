@@ -18,11 +18,11 @@ export const DarkPinkGradientProps: ThemeProps = { ...DarkPinkProps,
   },
   statusBar: {
     ...DarkPinkProps.statusBar,
-    bg: ['#992c46'],
+    bg: '#992c46',
   },
   nav: {
     ...DarkPinkProps.nav,
-    bg: ['#282c34'],
+    bg: '#282c34',
   },
   navButton: {
     ...DarkPinkProps.navButton,

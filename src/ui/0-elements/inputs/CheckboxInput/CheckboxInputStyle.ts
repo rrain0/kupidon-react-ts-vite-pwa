@@ -188,7 +188,7 @@ export namespace CheckboxInputStyle {
       ${Txt.large2};
       ${row};
       align-items: center;
-      ${W.e.frame.e.p.color.set(t.page.ct2[0])};
+      ${W.e.frame.e.p.color.set(t.page.ct2)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('cursor')};

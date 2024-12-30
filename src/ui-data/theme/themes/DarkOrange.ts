@@ -11,10 +11,10 @@ import ThemeProps = AppTheme.ThemeProps
 export const DarkOrangeProps: ThemeProps = { ...DarkPinkProps,
   
   statusBar: { ...DarkPinkProps.statusBar,
-    bg: ['#dd8f2f'],
+    bg: '#dd8f2f',
   },
   nav: { ...DarkPinkProps.nav,
-    bg: ['#282c34'],
+    bg: '#282c34',
   },
   navButton: { ...DarkPinkProps.navButton,
     cta: ['#dd7b39'],

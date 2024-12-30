@@ -2,7 +2,7 @@ $imageVersion = read-host "Enter docker image version"
 # Create Dictionary
 $envs = @{}
 # Map file content to key-value pairs in dictionary
-get-content 'react.dev.env' | where { 
+get-content 'react.prod.env' | where {
 	# $name - объявление переменной name
 	# $_ - автоматическое имя элемента в итераторе
 	$name, $value = $_.split('=')
@@ -38,8 +38,9 @@ $envs.keys | foreach {
 	write-host "$($_)=$($envs[$_])"
 }
 write-host "Image version: $imageVersion"
-read-host "Type any key to build & push docker image..."
+read-host "Press any key to build & push docker image..."
 #write-host "API_BASE_URL: $($envs.API_BASE_URL)"
-docker build -t rrain0/kupidon-react-react:$imageVersion --build-arg API_BASE_URL=$envs.API_BASE_URL .
+$apiBaseUrl = $envs.API_BASE_URL
+docker build -t rrain0/kupidon-react-react:$imageVersion --build-arg API_BASE_URL=$apiBaseUrl .
 docker push rrain0/kupidon-react-react:$imageVersion
 read-host "All operations successful!"

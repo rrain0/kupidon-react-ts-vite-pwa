@@ -17,35 +17,33 @@ import { SettingsOptions } from './SettingsOptions'
 
 
 
-const ThemeOptions = React.memo(
-()=>{
+const ThemeOptions = React.memo(() => {
   const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
   
   
   const titleText = useUiValues(TitleUiText)
   
   
-  const themeOptions = useMemo(
-    ()=>{
-      let opts = [
-        {
-          value: 'system',
-          text: titleText.systemTheme,
-          icon: <DayNightIc css={SettingsOptions.icon}/>,
-    },{
+  const themeOptions = useMemo(() => {
+    const opts = [
+      {
+        value: 'system',
+        text: titleText.systemTheme,
+        icon: <DayNightIc css={SettingsOptions.icon} />,
+      },
+      {
         value: 'light',
-          text: titleText.lightTheme,
-          icon: <DayIc css={SettingsOptions.icon}/>,
-      },{
+        text: titleText.lightTheme,
+        icon: <DayIc css={SettingsOptions.icon} />,
+      },
+      {
         value: 'dark',
-          text: titleText.darkTheme,
-          icon: <MoonIc css={SettingsOptions.iconSmall}/>,
-      }
+        text: titleText.darkTheme,
+        icon: <MoonIc css={SettingsOptions.iconSmall} />,
+      },
     ] satisfies { value: ThemeType|'system', [prop: string]: any }[]
-      return opts
-    },
-    [titleText]
-  )
+    return opts
+  }, [titleText])
   const themeOptionChecked = useCallback(
     function (value: ThemeType|'system') {
       return themeSettings.setting === 'system' && value === 'system'
@@ -55,28 +53,31 @@ const ThemeOptions = React.memo(
   )
   
   
-  return <RadioInputGroup>
-    { themeOptions.map(opt =>
-      <RadioInput
-        css={RadioInputStyle.radio}
-        childrenPosition="start"
-        checked={themeOptionChecked(opt.value)}
-        value={opt.value}
-        key={opt.value}
-        onChange={ev => {
-          setThemeSettings(s => ({
-            ...s,
-            setting: opt.value === 'system' ? 'system' : 'manual',
-            manualSetting: opt.value === 'system' ? s.manualSetting : opt.value,
-          }))
-        }}
-      >
-        <SettingsOptions.Container>
-          {opt.icon}
-          {opt.text}
-        </SettingsOptions.Container>
-      </RadioInput>) }
-  </RadioInputGroup>
+  return (
+    <RadioInputGroup>
+      { themeOptions.map(opt => (
+        <RadioInput
+          css={RadioInputStyle.radio}
+          childrenPosition="start"
+          checked={themeOptionChecked(opt.value)}
+          value={opt.value}
+          key={opt.value}
+          onChange={ev => {
+            setThemeSettings(s => ({
+              ...s,
+              setting: opt.value === 'system' ? 'system' : 'manual',
+              manualSetting: opt.value === 'system' ? s.manualSetting : opt.value,
+            }))
+          }}
+        >
+          <SettingsOptions.Container>
+            {opt.icon}
+            {opt.text}
+          </SettingsOptions.Container>
+        </RadioInput>
+      )) }
+    </RadioInputGroup>
+  )
 })
 export default ThemeOptions
 

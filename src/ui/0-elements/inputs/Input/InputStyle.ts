@@ -165,7 +165,7 @@ export namespace InputStyle {
       color: ${t.input.ct[0]};
     }
     ${W.use.s.readOnly().e.border().thisUse} {
-      border-color: ${t.page.ct2[0]};
+      border-color: ${t.page.ct2};
     }
 
     // state: disabled

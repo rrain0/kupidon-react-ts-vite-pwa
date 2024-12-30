@@ -17,10 +17,10 @@ export const DarkProps: ThemeProps = {
     ct3:    '#999999',
   },
   statusBar: {
-    bg: ['#282c34'],
+    bg: '#282c34',
   },
   nav: {
-    bg: ['#282c34'],
+    bg: '#282c34',
   },
   navButton: {
     bgFocus:       ['#2e3440'],

@@ -476,5 +476,5 @@ const Name = styled.div`
 `
 const AboutMe = styled.div`
   ${Txt.large2};
-  color: ${p => p.theme.page.ct2[0]}
+  color: ${p => p.theme.page.ct2}
 `

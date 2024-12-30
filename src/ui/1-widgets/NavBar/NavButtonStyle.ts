@@ -31,7 +31,7 @@ export namespace NavButtonStyle {
   
   
   
-  export const nav = (t:AppTheme.Theme) => css`
+  export const nav = (t: AppTheme.Theme) => css`
     ${ButtonS.addBase};
     // normal
     ${El.btn.thiz()} {

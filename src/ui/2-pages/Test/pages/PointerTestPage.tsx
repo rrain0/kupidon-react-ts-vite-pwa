@@ -189,7 +189,7 @@ React.memo(
       />
       
       <div css={t=>css`
-        color: ${t.page.ct2[0]};
+        color: ${t.page.ct2};
       `}
         ref={textDivRef}
       />

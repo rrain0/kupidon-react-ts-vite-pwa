@@ -18,16 +18,18 @@ const projectRoot: string = process.cwd() // current working directory
 
 
 const pwaOptions: Partial<VitePWAOptions> = {
+  strategies: 'injectManifest',
+  srcDir: 'src/service-worker',
+  filename: 'service-worker.ts',
+  
   registerType: 'autoUpdate',
   devOptions: {
     // enable PWA in dev mode
     enabled: true,
+    // The Service Worker type - 'module' - ES module-based service worker (for modern browsers)
     type: 'module',
     navigateFallback: 'index.html',
   },
-  strategies: 'injectManifest',
-  srcDir: 'src/service-worker',
-  filename: 'service-worker.ts',
 
   // do not inject manifest, only service worker,
   // so you can write your own link to manifest in index.html
@@ -37,18 +39,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
 
   base: '/',
   
-  includeAssets: [
-    'icon.svg',
-    'icon64.png',
-    'icon192.png',
-    'icon192-padding.png',
-    'icon512.png',
-    
-    'scripts/array-toSpliced-polyfill.js',
-    'scripts/apply-lang-to-html.js',
-    'scripts/apply-saved-lang.js',
-    'scripts/scripts/app-installation-check.js.js',
-  ],
+  includeAssets: ['public/**'],
 }
 
 
@@ -90,7 +81,9 @@ export default defineConfig(({ command, mode }) => {
     },
     
     // make paths in build relative to index.html (starts with './', not with '/')
-    base: './',
+    //base: './',
+    // make paths in index.html absolute relative root
+    base: '/',
     
     esbuild: {
       supported: {
