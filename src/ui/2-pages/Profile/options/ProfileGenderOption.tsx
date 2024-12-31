@@ -38,8 +38,8 @@ const ProfileGenderOption = React.memo(
     
     
     
-    const options = useMemo(
-      () => [
+    const options = useMemo(() => {
+      return [
         {
           id: 'MALE',
           text: text.male,
@@ -48,9 +48,8 @@ const ProfileGenderOption = React.memo(
           id: 'FEMALE',
           text: text.female,
         },
-      ] satisfies GenderUiOptions,
-      [text]
-    )
+      ] satisfies GenderUiOptions
+    }, [text])
     
     
     const [saved, setSaved] = useState(props.value)

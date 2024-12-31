@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { atom, useRecoilValue } from 'recoil'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import col = EmotionCommon.col
 
 
@@ -14,10 +15,12 @@ export const LogLayerRecoil = atom<LogLayerRecoilType>({
 })
 
 
+// HOW TO USE
+// const setLogData = useSetRecoilState(LogLayerRecoil)
+// setLogData(prev => [...prev, 'DATA TO LOG'])
 
-const LogLayer =
-React.memo(
-() => {
+
+const LogLayer = React.memo(() => {
   const logData = useRecoilValue(LogLayerRecoil)
   
   if (logData.length) return (
@@ -42,5 +45,5 @@ const Frame = styled.article`
   overflow-wrap: anywhere;
   padding: 8px;
   ${col};
-  z-index: 10;
+  z-index: ${StyleVals.modalFloor10};
 `

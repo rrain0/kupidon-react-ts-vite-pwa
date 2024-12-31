@@ -56,7 +56,7 @@ const BottomSheetDialogBasic = React.memo(
             >
               
               {/* Header - Handle */}
-              { headerHandle ?? (
+              {headerHandle ?? (
                 <div
                   css={t => css`
                     ${BottomSheetBasicParts.headerHandleStyle(t)};

@@ -18,4 +18,6 @@ export namespace StyleVals {
   export const modalFloor1 = 1000
   export const modalFloor2 = 2000
   
+  export const modalFloor10 = 10000
+  
 }

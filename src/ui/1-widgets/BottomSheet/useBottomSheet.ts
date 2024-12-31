@@ -8,6 +8,8 @@ import React, {
   useState,
 } from 'react'
 import { ArrayU } from '@util/common/ArrayU.ts'
+import { useSetRecoilState } from 'recoil'
+import { LogLayerRecoil } from 'src/ui/App/LogLayer.tsx'
 import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
@@ -280,193 +282,191 @@ export const useBottomSheet = (
   
   //console.log('newSheetState', newState)
   
-  const reactOnState = useEffectEvent(
-    () => {
-      if (!isReady) return
-      
-      const canOpen = exists(realDefaultOpenIdx)
-      const canClose = newCloseable
-      
-      const currState = prevState
-      const currSnap = prevSnapIdx
-      const currHeight = sheetSpring.height.get()
-      
-      
-      
-      // prevent unnecessary state changes
-      if (newState === currState
-        && newSnapIdx === currSnap
-        && newCloseable === prevCloseable
-        && snapPointsPx === prevSnapPointsPx
-      ) return
-      
-      const setStateAndIndex = (s: SheetState, index: SheetSnapIdx) => {
-        if (s !== 'dragging') dragStartRef.current = { ...dragStartInitialValue }
-        /* if (isReady){
-          setNewState(s)
-          setNewSnapIdx(index)
-        } */
+  const reactOnState = useEffectEvent(() => {
+    if (!isReady) return
+    
+    const canOpen = exists(realDefaultOpenIdx)
+    const canClose = newCloseable
+    
+    const currState = prevState
+    const currSnap = prevSnapIdx
+    const currHeight = sheetSpring.height.get()
+    
+    
+    
+    // prevent unnecessary state changes
+    if (newState === currState
+      && newSnapIdx === currSnap
+      && newCloseable === prevCloseable
+      && snapPointsPx === prevSnapPointsPx
+    ) return
+    
+    const setStateAndIndex = (s: SheetState, index: SheetSnapIdx) => {
+      if (s !== 'dragging') dragStartRef.current = { ...dragStartInitialValue }
+      /* if (isReady){
         setNewState(s)
         setNewSnapIdx(index)
-        setPrevState(s)
-        setPrevSnapIdx(index)
-        setPrevCloseable(newCloseable)
-        setPrevSnapPointsPx(prevSnapPointsPx)
-        //console.log('setStateAndIndex:',s,index)
+      } */
+      setNewState(s)
+      setNewSnapIdx(index)
+      setPrevState(s)
+      setPrevSnapIdx(index)
+      setPrevCloseable(newCloseable)
+      setPrevSnapPointsPx(prevSnapPointsPx)
+      //console.log('setStateAndIndex:',s,index)
+    }
+    
+    
+    const toSnap = function() {
+      if (newState === 'adjusting')
+        return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
+      if (newSnapIdx === null) return null
+      return RangeU.clamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
+    }()
+    
+    const toHeight = function() {
+      if (toSnap === null) return 0
+      return snapPointsPx[toSnap]
+    }()
+    
+    const toOpenSnap = function() {
+      if (toHeight>0) return toSnap
+      if (newState === 'adjusting') return realFirstOpenIdx
+      return realDefaultOpenIdx
+    }()
+    const toCloseSnap = closeIdx
+    
+    const toOpenHeight = function() {
+      if (toOpenSnap === null) return 0
+      return snapPointsPx[toOpenSnap]
+    }()
+    const toCloseHeight = function() {
+      if (toCloseSnap === null) return 0
+      return snapPointsPx[toCloseSnap]
+    }()
+    
+    
+    
+    //console.log({ newState, prevState, toSnap, prevSnapIdx })
+    
+    
+    
+    const isOpened = ![null, 'closed'].includes(prevState)
+    const isClosed = [null, 'closed'].includes(prevState)
+    const toOpened = function() {
+      if (!canOpen) return false
+      if (!canClose) return true
+      if (newState === 'adjusting') return toHeight>0
+      return !([null, 'closed', 'closing'] as SheetState[]).includes(newState)
+    }()
+    const toClosed = function() {
+      if (!canClose) return false
+      if (!canOpen) return true
+      if (newState === 'adjusting') return toHeight===0
+      return (['closed', 'closing'] as SheetState[]).includes(newState)
+    }()
+    
+    const toDragging = newState === 'dragging'
+    const toAnimated =
+      (['closing', 'snapping', 'opening', 'adjusting'] as SheetState[]).includes(newState)
+    const lastSpeed = function() {
+      if (currState !== 'dragging') return null
+      return dragStartRef.current.lastSpeed
+    }()
+    const toFreeHeight = function() {
+      if (notExists(toOpenSnap)) return false
+      if (snapPoints[toOpenSnap] !== 'free') return false
+      return RangeU.has(
+        sheetSpring.height.get(),
+        [
+          snapPointsPx[toOpenSnap],
+          snapPointsPx[toOpenSnap + 1] ?? Number.POSITIVE_INFINITY,
+        ]
+      )
+    }()
+    
+    const isCloseToOpen = isClosed && toOpened
+    const isCloseToClose = isClosed && toClosed
+    const isOpenToClose = isOpened && toClosed
+    const isOpenToOpen = isOpened && toOpened
+    
+    
+    /* console.log('---bottom-sheet-start-----------------------')
+    console.log({ prevState, newState })
+    console.log({ canOpen, canClose })
+    console.log({ isOpened, isClosed })
+    console.log({ toOpened, toClosed })
+    console.log({ toOpenHeight, toOpenSnap, isOpenToOpen, isOpenToClose })
+    console.log('---bottom-sheet-end-----------------------') */
+    
+    
+    if (isCloseToOpen) {
+      if (!toAnimated) {
+        sheetSpring.height.set(toOpenHeight)
+        setStateAndIndex('opened', toOpenSnap)
+        return
       }
-      
-      
-      const toSnap = function() {
-        if (newState === 'adjusting')
-          return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
-        if (newSnapIdx === null) return null
-        return RangeU.clamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
-      }()
-      
-      const toHeight = function() {
-        if (toSnap === null) return 0
-        return snapPointsPx[toSnap]
-      }()
-      
-      const toOpenSnap = function() {
-        if (toHeight>0) return toSnap
-        if (newState === 'adjusting') return realFirstOpenIdx
-        return realDefaultOpenIdx
-      }()
-      const toCloseSnap = closeIdx
-      
-      const toOpenHeight = function() {
-        if (toOpenSnap === null) return 0
-        return snapPointsPx[toOpenSnap]
-      }()
-      const toCloseHeight = function() {
-        if (toCloseSnap === null) return 0
-        return snapPointsPx[toCloseSnap]
-      }()
-      
-      
-      
-      //console.log({ newState, prevState, toSnap, prevSnapIdx })
-      
-      
-      
-      const isOpened = ![null, 'closed'].includes(prevState)
-      const isClosed = [null, 'closed'].includes(prevState)
-      const toOpened = function() {
-        if (!canOpen) return false
-        if (!canClose) return true
-        if (newState === 'adjusting') return toHeight>0
-        return !([null, 'closed', 'closing'] as SheetState[]).includes(newState)
-      }()
-      const toClosed = function() {
-        if (!canClose) return false
-        if (!canOpen) return true
-        if (newState === 'adjusting') return toHeight===0
-        return (['closed', 'closing'] as SheetState[]).includes(newState)
-      }()
-      
-      const toDragging = newState === 'dragging'
-      const toAnimated =
-        (['closing', 'snapping', 'opening', 'adjusting'] as SheetState[]).includes(newState)
-      const lastSpeed = function() {
-        if (currState !== 'dragging') return null
-        return dragStartRef.current.lastSpeed
-      }()
-      const toFreeHeight = function() {
-        if (notExists(toOpenSnap)) return false
-        if (snapPoints[toOpenSnap] !== 'free') return false
-        return RangeU.has(
-          sheetSpring.height.get(),
-          [
-            snapPointsPx[toOpenSnap],
-            snapPointsPx[toOpenSnap + 1] ?? Number.POSITIVE_INFINITY,
-          ]
-        )
-      }()
-      
-      const isCloseToOpen = isClosed && toOpened
-      const isCloseToClose = isClosed && toClosed
-      const isOpenToClose = isOpened && toClosed
-      const isOpenToOpen = isOpened && toOpened
-      
-      
-      /* console.log('---bottom-sheet-start-----------------------')
-      console.log({ prevState, newState })
-      console.log({ canOpen, canClose })
-      console.log({ isOpened, isClosed })
-      console.log({ toOpened, toClosed })
-      console.log({ toOpenHeight, toOpenSnap, isOpenToOpen, isOpenToClose })
-      console.log('---bottom-sheet-end-----------------------') */
-      
-      
-      if (isCloseToOpen) {
-        if (!toAnimated) {
-          sheetSpring.height.set(toOpenHeight)
+      else {
+        setStateAndIndex('opening', toOpenSnap)
+        runAnimation(toOpenHeight, lastSpeed, () => {
           setStateAndIndex('opened', toOpenSnap)
-          return
-        }
-        else {
-          setStateAndIndex('opening', toOpenSnap)
-          runAnimation(toOpenHeight, lastSpeed, () => {
-            setStateAndIndex('opened', toOpenSnap)
-          })
-          return
-        }
+        })
+        return
       }
-      else if (isCloseToClose) {
+    }
+    else if (isCloseToClose) {
+      sheetSpring.height.set(toCloseHeight)
+      setStateAndIndex('closed', toCloseSnap)
+      return
+    }
+    else if (isOpenToClose) {
+      if (!toAnimated) {
         sheetSpring.height.set(toCloseHeight)
         setStateAndIndex('closed', toCloseSnap)
         return
       }
-      else if (isOpenToClose) {
-        if (!toAnimated) {
-          sheetSpring.height.set(toCloseHeight)
-          setStateAndIndex('closed', toCloseSnap)
-          return
-        }
-        else {
-          setStateAndIndex('closing', toCloseSnap)
-          runAnimation(toCloseHeight, lastSpeed, () => {
-            setStateAndIndex('closed', toCloseSnap)
-          })
-          return
-        }
-      }
-      else if (isOpenToOpen) {
-        if (toDragging) {
-          setStateAndIndex('dragging', currSnap)
-          return
-        }
-        else if (toFreeHeight) {
-          setStateAndIndex('opened', toOpenSnap)
-        }
-        else if (!toAnimated) {
-          sheetSpring.height.set(toOpenHeight)
-          setStateAndIndex('opened', toOpenSnap)
-          return
-        }
-        else {
-          setStateAndIndex('snapping', toOpenSnap)
-          runAnimation(toOpenHeight, lastSpeed, () => {
-            setStateAndIndex('opened', toOpenSnap)
-          })
-          return
-        }
-      }
       else {
-        sheetSpring.height.set(0)
-        setStateAndIndex(null, null)
+        setStateAndIndex('closing', toCloseSnap)
+        runAnimation(toCloseHeight, lastSpeed, () => {
+          setStateAndIndex('closed', toCloseSnap)
+        })
         return
       }
     }
-  )
+    else if (isOpenToOpen) {
+      if (toDragging) {
+        setStateAndIndex('dragging', currSnap)
+        return
+      }
+      else if (toFreeHeight) {
+        setStateAndIndex('opened', toOpenSnap)
+      }
+      else if (!toAnimated) {
+        sheetSpring.height.set(toOpenHeight)
+        setStateAndIndex('opened', toOpenSnap)
+        return
+      }
+      else {
+        setStateAndIndex('snapping', toOpenSnap)
+        runAnimation(toOpenHeight, lastSpeed, () => {
+          setStateAndIndex('opened', toOpenSnap)
+        })
+        return
+      }
+    }
+    else {
+      sheetSpring.height.set(0)
+      setStateAndIndex(null, null)
+      return
+    }
+  })
   useEffect(
     () => reactOnState(),
     [newState, newSnapIdx, newCloseable, isReady, snapPointsPx]
   )
   
   
-  
+  const setLogData = useSetRecoilState(LogLayerRecoil)
   
   
   // You MUST use css 'touch-action: none;' before start dragging
