@@ -21,8 +21,9 @@ const pwaOptions: Partial<VitePWAOptions> = {
   strategies: 'injectManifest',
   srcDir: 'src/service-worker',
   filename: 'service-worker.ts',
+  // Prompt user to reload page when SW was updated
+  registerType: 'prompt',
   
-  registerType: 'autoUpdate',
   devOptions: {
     // enable PWA in dev mode
     enabled: true,
