@@ -214,17 +214,18 @@ registerRoute(
 
 /*
  This allows the web app to trigger skipWaiting via
- registration.waiting.postMessage({ type: 'skip-waiting' })
+ registration.waiting.postMessage({ type: 'SKIP_WAITING' })
  */
 self.addEventListener('message', async ev => {
   const t = ev.data?.type
-  if (t === 'skip-waiting') {
+  // Used by VitePWA to update SW by reload button click
+  if (t === 'SKIP_WAITING') {
     void self.skipWaiting()
   }
-  else if (t === 'console.log') {
+  else if (t === 'CONSOLE_LOG') {
     console.log('service worker console.log', ev)
   }
-  else if (t === 'clear-cache') {
+  else if (t === 'CLEAR_CACHE') {
     // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
     ev.waitUntil(
       (async() => {
@@ -246,6 +247,6 @@ async function clearCache(): Promise<void> {
 
 
 
-
-void self.skipWaiting()
-clientsClaim()
+// This forces page reload when SW script is updated
+//void self.skipWaiting()
+//clientsClaim()

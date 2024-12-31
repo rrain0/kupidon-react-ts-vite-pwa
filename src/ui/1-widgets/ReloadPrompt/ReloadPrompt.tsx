@@ -6,32 +6,38 @@ import { pwaInfo } from 'virtual:pwa-info'
 
 // TODO explore
 
-console.log(pwaInfo)
+console.log('pwaInfo', pwaInfo)
 
 const ReloadPrompt = React.memo(() => {
   const buildDate = import.meta.env.BUILD_DATE
-  const isProd = import.meta.env.PROD
+  const autoCheckUpdates = true
 
   const {
     offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
+    // Вызывается при каждом монтировании компоненты, даже когда SW уже был зареган ранее
     onRegisteredSW(swUrl, swRegistration) {
       console.log(`SW at: ${swUrl}`)
       
-      console.log('SW registered: ' + swRegistration)
-      
-      if (isProd) {
-        //const checkUpdateInterval = 60 * 60 * 1000 // 1h
-        const checkUpdateInterval = 20 * 1000 // 20s
-        swRegistration && setInterval(() => {
+      if (autoCheckUpdates && swRegistration) {
+        // Check updates immediately when component was mounted
+        void swRegistration.update()
+        
+        // Then check updates by interval
+        const checkUpdateInterval = 60 * 60 * 1000 // 1h
+        setInterval(() => {
           console.log('Checking for SW update...')
           // Manually request service worker update
           // SW will be updated if a fetched SW script is different
           void swRegistration.update()
         }, checkUpdateInterval)
       }
+      else {
+        console.log('SW registered: ' + swRegistration)
+      }
+      
     },
     onRegisterError(error) {
       console.log('SW registration error', error)

@@ -19,7 +19,9 @@ const projectRoot: string = process.cwd() // current working directory
 
 const pwaOptions: Partial<VitePWAOptions> = {
   strategies: 'injectManifest',
+  // SW folder
   srcDir: 'src/service-worker',
+  // SW filename
   filename: 'service-worker.ts',
   // Prompt user to reload page when SW was updated
   registerType: 'prompt',
@@ -32,7 +34,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
     navigateFallback: 'index.html',
   },
 
-  // do not inject manifest, only service worker,
+  // Do not inject manifest, only service worker,
   // so you can write your own link to manifest in index.html
   // https://vite-pwa-org.netlify.app/guide/service-worker-without-pwa-capabilities
   injectRegister: 'script',
