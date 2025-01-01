@@ -198,20 +198,14 @@ export namespace ArrayU {
   
   
   
-  export const toggleTo = <T>(arr: T[], elem: T): T[] => {
-    const i = arr.indexOf(elem)
-    if (i === -1) return [...arr, elem]
-    return arr.toSpliced(i, 1)
-  }
-  
   export const pushUniqToIf = <T>(arr: T[], elem: T): T[] => {
     if (arr.includes(elem)) return arr
     return [...arr, elem]
   }
   
-  export const removeToIf = <T>(arr: T[], elem: T): T[] => {
-    const i = arr.findIndex(it => it === elem)
-    if (i === -1) return arr
+  export const toggleTo = <T>(arr: T[], elem: T): T[] => {
+    const i = arr.indexOf(elem)
+    if (i === -1) return [...arr, elem]
     return arr.toSpliced(i, 1)
   }
   
@@ -221,6 +215,24 @@ export namespace ArrayU {
     return [...uniq]
   }
   
+  export const remove = <T>(arr: T[], elem: T): T[] => {
+    const i = arr.findIndex(it => it === elem)
+    if (i !== -1) {
+      return arr.splice(i, 1)
+    }
+    return arr
+  }
+  
+  export const removeToIf = <T>(arr: T[], elem: T): T[] => {
+    const i = arr.findIndex(it => it === elem)
+    if (i === -1) return arr
+    return arr.toSpliced(i, 1)
+  }
+  
+  export const clear = <T>(arr: T[]): T[] => {
+    arr.splice(0, arr.length)
+    return arr
+  }
   
   
   

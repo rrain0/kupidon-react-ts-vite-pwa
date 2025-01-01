@@ -7,6 +7,9 @@ import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
+import AnimatedDiv from 'src/mini-libs/animated/elements/AnimatedDiv.tsx'
+import AnimatedImg from 'src/mini-libs/animated/elements/AnimatedImg.tsx'
+import { useAnimatedValue } from 'src/mini-libs/animated/useAnimatedValue.ts'
 import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
@@ -45,7 +48,6 @@ import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
 import PictureIc = SvgIcons.PictureIc
 import centerGrid = EmotionCommon.centerGrid
-import Sign = TypeU.Sign
 import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
@@ -172,6 +174,8 @@ const Preview = React.memo((props: PreviewProps) => {
   const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
   // curr progress y in (..0..100..) from start progress y
   const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
+  const springCurrProgressY = useSpringValue(0)
+  const animatedCurrProgressY = useAnimatedValue(0)
   // start progress for photos in (..0..100..) * availablePhotos.length
   const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
   // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
@@ -179,11 +183,11 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
-  const [springs, springsApi] = useSprings(
-    visiblePhotosCnt,
-    getSpringStyle(0, 0, photosCnt, visiblePhotosCnt, setViewPhotoIndices),
-    [visiblePhotosCnt],
-  )
+  // const [springs, springsApi] = useSprings(
+  //   visiblePhotosCnt,
+  //   getSpringStyle(0, 0, photosCnt, visiblePhotosCnt, setViewPhotoIndices),
+  //   [visiblePhotosCnt],
+  // )
   
   
   const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
@@ -207,12 +211,14 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
-  const yInertia = useSpringValue(0)
+  //const yInertia = useSpringValue(0)
   
   const updateViews = () => {
-    const p = getStartProgressY() + getCurrProgressY()
-    const photoP = getStartPhotoP() + getCurrProgressY()
-    springsApi.set(getSpringStyle(p, photoP, photosCnt, visiblePhotosCnt, setViewPhotoIndices))
+    springCurrProgressY.set(getCurrProgressY())
+    animatedCurrProgressY.set(getCurrProgressY())
+    // const p = getStartProgressY() + getCurrProgressY()
+    // const photoP = getStartPhotoP() + getCurrProgressY()
+    // springsApi.set(getSpringStyle(p, photoP, photosCnt, visiblePhotosCnt, setViewPhotoIndices))
   }
   const finishUpdateViews = (vely = 0) => {
     const photoP = getStartPhotoP() + getCurrProgressY()
@@ -225,22 +231,24 @@ const Preview = React.memo((props: PreviewProps) => {
     setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
     setCurrProgressY(0)
     updateViews()
-    if (vely) {
-      // px/ms => heightPercent/s
-      let velyPercent = vely * 1000 / getTrackProps().h * 100
-      velyPercent /= 3
-      console.log('velyPercent', velyPercent)
-      yInertia.set(0)
-      const duration = 400
-      yInertia.start(velyPercent, {
-        config: {
-          mass: 1 * duration / 100,
-          tension: 500,
-          friction: 24,
-          clamp: true,
-        },
-      })
-    }
+    
+    // if (vely) {
+    //   // px/ms => heightPercent/s
+    //   let velyPercent = vely * 1000 / getTrackProps().h * 100
+    //   velyPercent /= 3
+    //   console.log('velyPercent', velyPercent)
+    //   yInertia.set(0)
+    //   const duration = 400
+    //   yInertia.start(velyPercent, {
+    //     config: {
+    //       mass: 1 * duration / 100,
+    //       tension: 500,
+    //       friction: 24,
+    //       clamp: true,
+    //     },
+    //   })
+    // }
+    
   }
   
   
@@ -340,35 +348,112 @@ const Preview = React.memo((props: PreviewProps) => {
   ) */
   
   
+  
   return (
     <Pages.SafeInsets>
       <PreviewFrame>
         <PreviewFrame2 ref={frame2RefFun}>
           <PhotosContainer>
             <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
-              {springs.map((springStyle, i) => {
+              {arrOfIndices(visiblePhotosCnt).map(i => {
                 return (
-                  <PhotoBox
+                  <AnimatedPhotoBox
                     key={i}
-                    style={springStyle}
+                    animated={{
+                      zIndex: animatedCurrProgressY.map(cp => {
+                        const p = getStartProgressY() + cp
+                        const photoP = getStartPhotoP() + cp
+                        // displayedIndex from top to bottom
+                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                        // progressCurrent
+                        const pc = mod(p, 100)
+                        
+                        // set photo's indices to display
+                        /* setViewPhotoIndices(prev => {
+                         const indices = [...prev]
+                         const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
+                         indices[i] = photoI
+                         if (ArrayU.eq(prev, indices)) return prev
+                         return indices
+                         }) */
+                        
+                        // z-index
+                        const z = -di + visiblePhotosCnt - 1
+                        return z
+                      }),
+                      transform: animatedCurrProgressY.map(cp => {
+                        const p = getStartProgressY() + cp
+                        const photoP = getStartPhotoP() + cp
+                        // displayedIndex from top to bottom
+                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                        // progressCurrent
+                        const pc = mod(p, 100)
+                        
+                        // translate y
+                        const y = (() => {
+                          if (di === 0) return pc
+                          return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+                        })()
+                        return `translateY(${y}%)`
+                      }),
+                      scale: animatedCurrProgressY.map(cp => {
+                        const p = getStartProgressY() + cp
+                        const photoP = getStartPhotoP() + cp
+                        // displayedIndex from top to bottom
+                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                        // progressCurrent
+                        const pc = mod(p, 100)
+                        
+                        // scale
+                        const s = (() => {
+                          if (di === 0) return 100
+                          return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+                        })()
+                        return s / 100
+                      }),
+                      opacity: animatedCurrProgressY.map(cp => {
+                        const p = getStartProgressY() + cp
+                        const photoP = getStartPhotoP() + cp
+                        // displayedIndex from top to bottom
+                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                        // progressCurrent
+                        const pc = mod(p, 100)
+                        
+                        // opacity
+                        const o = (() => {
+                          if (di === 0) return 100 - RangeU.map(
+                            pc,
+                            [0, 30, 100],
+                            [0, 0, 100],
+                          )
+                          if (di === visiblePhotosCnt - 1) return RangeU.map(
+                            pc,
+                            [0, 80, 100],
+                            [0, 0, 100],
+                          )
+                          return 100
+                        })()
+                        return o / 100
+                      }),
+                    }}
                   >
-                    <animated.div
-                      style={{
-                        position: 'absolute',
-                        width: 100,
-                        height: 100,
-                        backgroundColor: 'black',
-                        zIndex: 10,
-                        y: yInertia.to(yi => {
-                          console.log('yi', yi)
-                          // setCurrProgressY(yi)
-                          // updateViews()
-                          return yi
-                        }),
-                      }}
-                    />
                     {!!photosCnt && (
-                      <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
+                      <AnimatedPhoto
+                        animated={{
+                          src: animatedCurrProgressY.map(cp => {
+                            const p = getStartProgressY() + cp
+                            const photoP = getStartPhotoP() + cp
+                            // displayedIndex from top to bottom
+                            const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                            // progressCurrent
+                            const pc = mod(p, 100)
+                            
+                            // set photo's indices to display
+                            const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
+                            return availablePhotos[photoI]?.dataUrl ?? ''
+                          }),
+                        }}
+                      />
                     )}
                     {!photosCnt && (
                       <>
@@ -380,7 +465,101 @@ const Preview = React.memo((props: PreviewProps) => {
                         </NoImagesBox>
                       </>
                     )}
-                  </PhotoBox>
+                    {/* <PhotoBox
+                      style={{
+                        // @ts-expect-error
+                        zIndex: springCurrProgressY.to(cp => {
+                          const p = getStartProgressY() + cp
+                          const photoP = getStartPhotoP() + cp
+                          // displayedIndex from top to bottom
+                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                          // progressCurrent
+                          const pc = mod(p, 100)
+                          
+                          // set photo's indices to display
+                          // setViewPhotoIndices(prev => {
+                          //   const indices = [...prev]
+                          //   const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
+                          //   indices[i] = photoI
+                          //   if (ArrayU.eq(prev, indices)) return prev
+                          //   return indices
+                          // })
+                          
+                          // z-index
+                          const z = -di + visiblePhotosCnt - 1
+                          return z
+                        }),
+                        transform: springCurrProgressY.to(cp => {
+                          const p = getStartProgressY() + cp
+                          const photoP = getStartPhotoP() + cp
+                          // displayedIndex from top to bottom
+                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                          // progressCurrent
+                          const pc = mod(p, 100)
+                          
+                          // translate y
+                          const y = (() => {
+                            if (di === 0) return pc
+                            return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+                          })()
+                          return `translateY(${y}%)`
+                        }),
+                        scale: springCurrProgressY.to(cp => {
+                          const p = getStartProgressY() + cp
+                          const photoP = getStartPhotoP() + cp
+                          // displayedIndex from top to bottom
+                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                          // progressCurrent
+                          const pc = mod(p, 100)
+                          
+                          // scale
+                          const s = (() => {
+                            if (di === 0) return 100
+                            return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+                          })()
+                          return s / 100
+                        }),
+                        opacity: springCurrProgressY.to(cp => {
+                          const p = getStartProgressY() + cp
+                          const photoP = getStartPhotoP() + cp
+                          // displayedIndex from top to bottom
+                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+                          // progressCurrent
+                          const pc = mod(p, 100)
+                          
+                          // opacity
+                          const o = (() => {
+                            if (di === 0) return 100 - RangeU.map(
+                              pc,
+                              [0, 30, 100],
+                              [0, 0, 100],
+                            )
+                            if (di === visiblePhotosCnt - 1) return RangeU.map(
+                              pc,
+                              [0, 80, 100],
+                              [0, 0, 100],
+                            )
+                            return 100
+                          })()
+                          return o / 100
+                        }),
+                      }}
+                    >
+                      {!!photosCnt && (
+                        <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
+                      )}
+                      {!photosCnt && (
+                        <>
+                          <Photo src={placeholderIm} />
+                          <Blur />
+                          <NoImagesBox>
+                            <PictureIc css={imSmallPlaceholderIcS} />
+                            <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
+                          </NoImagesBox>
+                        </>
+                      )}
+                    </PhotoBox> */}
+                  </AnimatedPhotoBox>
                 )
               })}
             </PhotosContainer2>
@@ -466,7 +645,30 @@ const PhotoBox = styled(animated.div)`
   transform-origin: 50% 0;
   will-change: transform, z-index, scale, opacity;
 `
+const AnimatedPhotoBox = styled(AnimatedDiv)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  ${centerAll};
+  overflow: hidden;
+  // TODO add some bg gradient while image not loaded already
+  background-color: indianred;
+  
+  user-select: none;
+  pointer-events: auto;
+  
+  transform-origin: 50% 0;
+  will-change: transform, z-index, scale, opacity;
+`
 const Photo = styled.img`
+  ${fill};
+  object-position: center;
+  object-fit: cover;
+  
+  pointer-events: none; // or attr draggable="false"
+`
+const AnimatedPhoto = styled(AnimatedImg)`
   ${fill};
   object-position: center;
   object-fit: cover;

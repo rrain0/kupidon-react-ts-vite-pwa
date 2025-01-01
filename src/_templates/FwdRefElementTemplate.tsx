@@ -40,7 +40,7 @@ const Component = React.memo(
           {...restProps}
           ref={elemRef}
         >
-        
+          {children}
         </div>
       )
     }
