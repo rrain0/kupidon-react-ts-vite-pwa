@@ -72,6 +72,7 @@ const maxVisiblePhotosCnt = 4
 
 
 
+/*
 
 const getSpringStyle = (
   p = 0, // progress
@@ -132,6 +133,7 @@ const getSpringStyle = (
     opacity: o / 100,
   }
 }
+*/
 
 
 
@@ -349,6 +351,17 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
+  const animatedProgress = animatedCurrProgressY.map(cp => (i: number) => {
+    const p = getStartProgressY() + cp
+    const photoP = getStartPhotoP() + cp
+    // displayedIndex from top to bottom
+    const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+    // progressCurrent
+    const pc = mod(p, 100)
+    return { p, photoP, di, pc }
+  })
+  
+  
   return (
     <Pages.SafeInsets>
       <PreviewFrame>
@@ -360,66 +373,29 @@ const Preview = React.memo((props: PreviewProps) => {
                   <AnimatedPhotoBox
                     key={i}
                     animated={{
-                      zIndex: animatedCurrProgressY.map(cp => {
-                        const p = getStartProgressY() + cp
-                        const photoP = getStartPhotoP() + cp
-                        // displayedIndex from top to bottom
-                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                        // progressCurrent
-                        const pc = mod(p, 100)
-                        
-                        // set photo's indices to display
-                        /* setViewPhotoIndices(prev => {
-                         const indices = [...prev]
-                         const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
-                         indices[i] = photoI
-                         if (ArrayU.eq(prev, indices)) return prev
-                         return indices
-                         }) */
-                        
-                        // z-index
+                      zIndex: animatedProgress.map(ap => {
+                        const { p, photoP, di, pc } = ap(i)
                         const z = -di + visiblePhotosCnt - 1
                         return z
                       }),
-                      transform: animatedCurrProgressY.map(cp => {
-                        const p = getStartProgressY() + cp
-                        const photoP = getStartPhotoP() + cp
-                        // displayedIndex from top to bottom
-                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                        // progressCurrent
-                        const pc = mod(p, 100)
-                        
-                        // translate y
+                      transform: animatedProgress.map(ap => {
+                        const { p, photoP, di, pc } = ap(i)
                         const y = (() => {
                           if (di === 0) return pc
                           return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
                         })()
                         return `translateY(${y}%)`
                       }),
-                      scale: animatedCurrProgressY.map(cp => {
-                        const p = getStartProgressY() + cp
-                        const photoP = getStartPhotoP() + cp
-                        // displayedIndex from top to bottom
-                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                        // progressCurrent
-                        const pc = mod(p, 100)
-                        
-                        // scale
+                      scale: animatedProgress.map(ap => {
+                        const { p, photoP, di, pc } = ap(i)
                         const s = (() => {
                           if (di === 0) return 100
                           return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
                         })()
                         return s / 100
                       }),
-                      opacity: animatedCurrProgressY.map(cp => {
-                        const p = getStartProgressY() + cp
-                        const photoP = getStartPhotoP() + cp
-                        // displayedIndex from top to bottom
-                        const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                        // progressCurrent
-                        const pc = mod(p, 100)
-                        
-                        // opacity
+                      opacity: animatedProgress.map(ap => {
+                        const { p, photoP, di, pc } = ap(i)
                         const o = (() => {
                           if (di === 0) return 100 - RangeU.map(
                             pc,
@@ -440,15 +416,8 @@ const Preview = React.memo((props: PreviewProps) => {
                     {!!photosCnt && (
                       <AnimatedPhoto
                         animated={{
-                          src: animatedCurrProgressY.map(cp => {
-                            const p = getStartProgressY() + cp
-                            const photoP = getStartPhotoP() + cp
-                            // displayedIndex from top to bottom
-                            const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                            // progressCurrent
-                            const pc = mod(p, 100)
-                            
-                            // set photo's indices to display
+                          src: animatedProgress.map(ap => {
+                            const { p, photoP, di, pc } = ap(i)
                             const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
                             return availablePhotos[photoI]?.dataUrl ?? ''
                           }),
@@ -465,100 +434,6 @@ const Preview = React.memo((props: PreviewProps) => {
                         </NoImagesBox>
                       </>
                     )}
-                    {/* <PhotoBox
-                      style={{
-                        // @ts-expect-error
-                        zIndex: springCurrProgressY.to(cp => {
-                          const p = getStartProgressY() + cp
-                          const photoP = getStartPhotoP() + cp
-                          // displayedIndex from top to bottom
-                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                          // progressCurrent
-                          const pc = mod(p, 100)
-                          
-                          // set photo's indices to display
-                          // setViewPhotoIndices(prev => {
-                          //   const indices = [...prev]
-                          //   const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
-                          //   indices[i] = photoI
-                          //   if (ArrayU.eq(prev, indices)) return prev
-                          //   return indices
-                          // })
-                          
-                          // z-index
-                          const z = -di + visiblePhotosCnt - 1
-                          return z
-                        }),
-                        transform: springCurrProgressY.to(cp => {
-                          const p = getStartProgressY() + cp
-                          const photoP = getStartPhotoP() + cp
-                          // displayedIndex from top to bottom
-                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                          // progressCurrent
-                          const pc = mod(p, 100)
-                          
-                          // translate y
-                          const y = (() => {
-                            if (di === 0) return pc
-                            return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-                          })()
-                          return `translateY(${y}%)`
-                        }),
-                        scale: springCurrProgressY.to(cp => {
-                          const p = getStartProgressY() + cp
-                          const photoP = getStartPhotoP() + cp
-                          // displayedIndex from top to bottom
-                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                          // progressCurrent
-                          const pc = mod(p, 100)
-                          
-                          // scale
-                          const s = (() => {
-                            if (di === 0) return 100
-                            return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-                          })()
-                          return s / 100
-                        }),
-                        opacity: springCurrProgressY.to(cp => {
-                          const p = getStartProgressY() + cp
-                          const photoP = getStartPhotoP() + cp
-                          // displayedIndex from top to bottom
-                          const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-                          // progressCurrent
-                          const pc = mod(p, 100)
-                          
-                          // opacity
-                          const o = (() => {
-                            if (di === 0) return 100 - RangeU.map(
-                              pc,
-                              [0, 30, 100],
-                              [0, 0, 100],
-                            )
-                            if (di === visiblePhotosCnt - 1) return RangeU.map(
-                              pc,
-                              [0, 80, 100],
-                              [0, 0, 100],
-                            )
-                            return 100
-                          })()
-                          return o / 100
-                        }),
-                      }}
-                    >
-                      {!!photosCnt && (
-                        <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
-                      )}
-                      {!photosCnt && (
-                        <>
-                          <Photo src={placeholderIm} />
-                          <Blur />
-                          <NoImagesBox>
-                            <PictureIc css={imSmallPlaceholderIcS} />
-                            <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
-                          </NoImagesBox>
-                        </>
-                      )}
-                    </PhotoBox> */}
                   </AnimatedPhotoBox>
                 )
               })}

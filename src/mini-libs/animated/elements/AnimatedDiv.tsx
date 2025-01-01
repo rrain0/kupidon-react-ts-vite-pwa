@@ -1,3 +1,4 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import React, {
@@ -9,6 +10,7 @@ import React, {
 import { AnimatedStyle } from 'src/mini-libs/animated/AnimatedStyle.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { animations } from 'src/mini-libs/animated/elements/AnimatedImg.tsx'
 import Puro = TypeU.Puro
 import Children = ReactU.Children
 
@@ -50,6 +52,8 @@ const AnimatedDiv = React.memo(
         }
       }, [])
       
+      
+      /*
       const requestUpdateElement = useCallback(() => {
         if (!getIsFrameRequested()) {
           setIsFrameRequested(true)
@@ -59,7 +63,9 @@ const AnimatedDiv = React.memo(
           })
         }
       }, [])
+       */
       
+      /*
       const transform = animated?.transform
       useLayoutEffect(() => {
         updateElement() // TODO это здесь чтобы обновить элемент при начальном рендере
@@ -87,7 +93,12 @@ const AnimatedDiv = React.memo(
         opacity?.onChange(requestUpdateElement)
         return () => opacity?.removeOnChange(requestUpdateElement)
       }, [opacity])
+       */
       
+      useLayoutEffect(() => {
+        animations.push(updateElement)
+        return () => { ArrayU.remove(animations, updateElement) }
+      }, [])
       
       return (
         <div // Frame

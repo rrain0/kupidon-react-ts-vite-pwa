@@ -1,3 +1,4 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import React, {
@@ -9,6 +10,17 @@ import React, {
 import { AnimatedString } from 'src/mini-libs/animated/AnimatedStyle.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Puro = TypeU.Puro
+import Callback = TypeU.Callback
+
+
+
+export const animations: Callback[] = []
+
+const runAnimations = () => {
+  animations.forEach(it => it())
+  requestAnimationFrame(runAnimations)
+}
+requestAnimationFrame(runAnimations)
 
 
 
@@ -46,6 +58,7 @@ const AnimatedImg = React.memo(
         }
       }, [])
       
+      /*
       const requestUpdateElement = useCallback(() => {
         if (!getIsFrameRequested()) {
           setIsFrameRequested(true)
@@ -62,7 +75,12 @@ const AnimatedImg = React.memo(
         src?.onChange(requestUpdateElement)
         return () => src?.removeOnChange(requestUpdateElement)
       }, [src])
+       */
       
+      useLayoutEffect(() => {
+        animations.push(updateElement)
+        return () => { ArrayU.remove(animations, updateElement) }
+      }, [])
       
       return (
         // eslint-disable-next-line jsx-a11y/alt-text

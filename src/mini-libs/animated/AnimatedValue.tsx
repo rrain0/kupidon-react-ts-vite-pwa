@@ -12,8 +12,10 @@ export class AnimatedValue<V> {
   get() { return this.value }
   
   set(value: V) {
-    this.value = value
-    this.notify()
+    if (this.value !== value) {
+      this.value = value
+      this.notify()
+    }
   }
   
   onChange(listener: Callback1<V>) {
