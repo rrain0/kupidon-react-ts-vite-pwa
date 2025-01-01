@@ -71,269 +71,268 @@ export type PreviewProps = {
 
 
 
-const Preview = React.memo(
-  (props: PreviewProps) => {
-    const {
-      photos,
-      name,
-      aboutMe,
-    } = props.formValues
+const Preview = React.memo((props: PreviewProps) => {
+  const {
+    photos,
+    name,
+    aboutMe,
+  } = props.formValues
+  
+  //effectLog('photos', photos)
+  
+  const textNoPhotos = useUiValue(TitleUiText.noPhotos)
+  
+  const availablePhotos = useMemo(() => {
+    return photos.filter(it => !it.isEmpty)
+  }, [photos])
+  const photosCnt = availablePhotos.length
+  const isPhotosDraggable = photosCnt >= 2
+  
+  // if photosCnt is 0, then display 1 placeholder
+  const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt + 1)
+  
+  // TODO изначально фотки не получены, поэтому изображение грузится
+  const placeholderIm = useMemo(() => {
+    if (photosCnt) return undefined
+    //return Images.forBlur[0]
+    return ArrayU.randomElem(Images.forBlur)
+  }, [photosCnt])
+  
+  
+  // start progress y in (..0..100..) * visiblePhotosCnt
+  const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
+  // delta progress y in (..0..100..)
+  const [getDProgressY, setDProgressY] = useRefGetSet(0)
+  // start progress for photos in (..0..100..) * availablePhotos.length
+  const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
+  // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
+  const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
+  
+  const getSpringStyle = () => (i = 0) => {
+    // progress
+    const p = getStartProgressY() + getDProgressY()
+    // photoProgress
+    const photoP = getStartPhotoP() + getDProgressY()
     
-    //effectLog('photos', photos)
+    // displayedIndex from top to bottom
+    const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+    // progressCurrent
+    const pc = mod(p, 100)
     
-    const textNoPhotos = useUiValue(TitleUiText.noPhotos)
-    
-    const availablePhotos = useMemo(() => {
-      return photos.filter(it => !it.isEmpty)
-    }, [photos])
-    const photosCnt = availablePhotos.length
-    const isPhotosDraggable = photosCnt >= 2
-    
-    // if photosCnt is 0, then display 1 placeholder
-    const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt + 1)
-    
-    // TODO изначально фотки не получены, поэтому изображение грузится
-    const placeholderIm = useMemo(() => {
-      if (photosCnt) return undefined
-      //return Images.forBlur[0]
-      return ArrayU.randomElem(Images.forBlur)
-    }, [photosCnt])
-    
-    
-    // start progress y in (..0..100..) * visiblePhotosCnt
-    const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
-    // delta progress y in (..0..100..)
-    const [getDProgressY, setDProgressY] = useRefGetSet(0)
-    // start progress for photos in (..0..100..) * availablePhotos.length
-    const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
-    // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
-    const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
-    
-    const getSpringStyle = () => (i = 0) => {
-      // progress
-      const p = getStartProgressY() + getDProgressY()
-      // photoProgress
-      const photoP = getStartPhotoP() + getDProgressY()
-      
-      // displayedIndex from top to bottom
-      const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-      // progressCurrent
-      const pc = mod(p, 100)
-      
-      // set photo's indices to display
-      setViewPhotoIndices(prev => {
-        const indices = [...prev]
-        const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
-        indices[i] = photoI
-        if (ArrayU.eq(prev, indices)) return prev
-        return indices
-      })
-      
-      // z-index
-      const z = -di + visiblePhotosCnt - 1
-      
-      // translate y
-      const y = (() => {
-        if (di === 0) return pc
-        return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-      })()
-      
-      // scale
-      const s = (() => {
-        if (di === 0) return 100
-        return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-      })()
-      
-      // opacity
-      const o = (() => {
-        if (di === 0) return 100 - RangeU.map(
-          pc,
-          [0, 30, 100],
-          [0, 0, 100],
-        )
-        if (di === visiblePhotosCnt - 1) return RangeU.map(
-          pc,
-          [0, 80, 100],
-          [0, 0, 100],
-        )
-        return 100
-      })()
-      
-      return {
-        zIndex: z,
-        transform: `translateY(${y}%)`,
-        scale: s / 100,
-        opacity: o / 100,
-      }
-    }
-    
-    const [springs, springsApi] = useSprings(
-      visiblePhotosCnt, getSpringStyle(), [visiblePhotosCnt]
-    )
-    
-    
-    const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
-    const [isDragging, startDragging, endDragging] = useBool(false)
-    useNoSelect(isDragging)
-    const canUseGestures = useLockAppGestures(isDragging)
-    
-    
-    
-    const updateViews = () => {
-      springsApi.set(getSpringStyle())
-    }
-    const finishUpdateViews = () => {
-      const photoP = getStartPhotoP() + getDProgressY()
-      // TODO draggable
-      const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
-      setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
-      const p = getStartProgressY() + getDProgressY()
-      // TODO draggable
-      const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
-      setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
-      setDProgressY(0)
-      updateViews()
-    }
-    
-    
-    // works as immediate effect
-    useMemo(() => {
-      finishUpdateViews()
-    }, [availablePhotos])
-    
-    
-    const photosBoxRef = useRef<HTMLDivElement>(null)
-    
-    const {
-      onTrackDrag,
-    } = useDragProgress({
-      getTrackProps: () => {
-        const pb = photosBoxRef.current
-        if (pb) {
-          const p = getViewProps(photosBoxRef.current)
-          return { x: p.x, w: p.w, y: p.y, h: p.h }
-        }
-        return { x: 0, w: 0, y: 0, h: 0 }
-      },
-      onDrag: ({ dpy }) => {
-        if (isDragging) {
-          setDProgressY(dpy)
-          updateViews()
-        }
-      },
-      onDragStart: () => { },
-      onDragging: ({ tryDragVertically, allowDragVertically }) => {
-        // TODO draggable
-        if (isPhotosDraggable) {
-          if (canUseGestures && tryDragVertically) lockTouchAction()
-          if (canUseGestures && allowDragVertically) startDragging()
-        }
-      },
-      onDragEnd: () => {
-        finishUpdateViews()
-        endDragging()
-        unlockTouchAction()
-      },
+    // set photo's indices to display
+    setViewPhotoIndices(prev => {
+      const indices = [...prev]
+      const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
+      indices[i] = photoI
+      if (ArrayU.eq(prev, indices)) return prev
+      return indices
     })
     
+    // z-index
+    const z = -di + visiblePhotosCnt - 1
     
-    const frame2RefFun = useResizeRef<HTMLElement>(useCallback((elem) => {
-      if (elem) {
-        const p = getViewProps(elem)
-        const { w, h } = ViewU.clampRatio({
-          minRatio: minRatioPort,
-          maxRatio: maxRatioPort,
-          w: p.w,
-          h: p.h,
-        })
-        p.setWhCssProps({ w, h })
-      }
-    }, []))
+    // translate y
+    const y = (() => {
+      if (di === 0) return pc
+      return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+    })()
     
+    // scale
+    const s = (() => {
+      if (di === 0) return 100
+      return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+    })()
     
+    // opacity
+    const o = (() => {
+      if (di === 0) return 100 - RangeU.map(
+        pc,
+        [0, 30, 100],
+        [0, 0, 100],
+      )
+      if (di === visiblePhotosCnt - 1) return RangeU.map(
+        pc,
+        [0, 80, 100],
+        [0, 0, 100],
+      )
+      return 100
+    })()
     
-    
-    
-    
-    
-    //const im = photos[0]
-    //const [scroll, setScroll] = useState(0)
-    
-    /* useEffect(
-      ()=>{
-        const id = setInterval(
-          ()=>setScroll(s=>loopRange(s+3,[0,100])),
-          1000
-        )
-        return ()=>clearInterval(id)
-      },
-      []
-    ) */
-    
-    
-    return (
-      <Pages.SafeInsets>
-        <PreviewFrame>
-          <PreviewFrame2 ref={frame2RefFun}>
-            <PhotosContainer>
-              <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
-                {springs.map((springStyle, i) => {
-                  return (
-                    <PhotoBox
-                      key={i}
-                      style={springStyle}
-                    >
-                      {!!photosCnt && (
-                        <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
-                      )}
-                      {!photosCnt && (
-                        <>
-                          <Photo src={placeholderIm} />
-                          <Blur />
-                          <NoImagesBox>
-                            <PictureIc css={imSmallPlaceholderIcS} />
-                            <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
-                          </NoImagesBox>
-                        </>
-                      )}
-                    </PhotoBox>
-                  )
-                })}
-              </PhotosContainer2>
-            </PhotosContainer>
-          </PreviewFrame2>
-        </PreviewFrame>
-      </Pages.SafeInsets>
-    )
-    
-    
-    /* return (
-      <Pages.SafeInsets>
-      
-        {im && (
-          <div css={photoContainer}>
-            
-            <img css={photoImgStyle}
-              src={im.dataUrl}
-              alt={im.name}
-            />
-            
-            <ScrollbarVertical css={scrollbarVerticalStyle}
-              visiblePartPercent={20}
-              scroll={scroll} setScroll={setScroll}
-            />
-            
-            <FadeButtonBar>
-              <Name>{name}, 26</Name>
-              <AboutMe>{aboutMe}</AboutMe>
-            </FadeButtonBar>
-            
-          </div>
-        )}
-      
-      </Pages.SafeInsets>
-    ) */
+    return {
+      zIndex: z,
+      transform: `translateY(${y}%)`,
+      scale: s / 100,
+      opacity: o / 100,
+    }
   }
+  
+  const [springs, springsApi] = useSprings(
+    visiblePhotosCnt, getSpringStyle(), [visiblePhotosCnt]
+  )
+  
+  
+  const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
+  const [isDragging, startDragging, endDragging] = useBool(false)
+  useNoSelect(isDragging)
+  const canUseGestures = useLockAppGestures(isDragging)
+  
+  
+  
+  const updateViews = () => {
+    springsApi.set(getSpringStyle())
+  }
+  const finishUpdateViews = () => {
+    const photoP = getStartPhotoP() + getDProgressY()
+    // TODO draggable
+    const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
+    setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
+    const p = getStartProgressY() + getDProgressY()
+    // TODO draggable
+    const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
+    setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
+    setDProgressY(0)
+    updateViews()
+  }
+  
+  
+  // works as immediate effect
+  useMemo(() => {
+    finishUpdateViews()
+  }, [availablePhotos])
+  
+  
+  const photosBoxRef = useRef<HTMLDivElement>(null)
+  
+  const {
+    onTrackDrag,
+  } = useDragProgress({
+    getTrackProps: () => {
+      const pb = photosBoxRef.current
+      if (pb) {
+        const p = getViewProps(photosBoxRef.current)
+        return { x: p.x, w: p.w, y: p.y, h: p.h }
+      }
+      return { x: 0, w: 0, y: 0, h: 0 }
+    },
+    onDrag: ({ dpy }) => {
+      if (isDragging) {
+        setDProgressY(dpy)
+        updateViews()
+      }
+    },
+    onDragStart: () => { },
+    onDragging: ({ tryDragVertically, allowDragVertically }) => {
+      // TODO draggable
+      if (isPhotosDraggable) {
+        if (canUseGestures && tryDragVertically) lockTouchAction()
+        if (canUseGestures && allowDragVertically) startDragging()
+      }
+    },
+    onDragEnd: () => {
+      finishUpdateViews()
+      endDragging()
+      unlockTouchAction()
+    },
+  })
+  
+  
+  const frame2RefFun = useResizeRef<HTMLElement>(useCallback((elem) => {
+    if (elem) {
+      const p = getViewProps(elem)
+      const { w, h } = ViewU.clampRatio({
+        minRatio: minRatioPort,
+        maxRatio: maxRatioPort,
+        w: p.w,
+        h: p.h,
+      })
+      p.setWhCssProps({ w, h })
+    }
+  }, []))
+  
+  
+  
+  
+  
+  
+  
+  //const im = photos[0]
+  //const [scroll, setScroll] = useState(0)
+  
+  /* useEffect(
+    ()=>{
+      const id = setInterval(
+        ()=>setScroll(s=>loopRange(s+3,[0,100])),
+        1000
+      )
+      return ()=>clearInterval(id)
+    },
+    []
+  ) */
+  
+  
+  return (
+    <Pages.SafeInsets>
+      <PreviewFrame>
+        <PreviewFrame2 ref={frame2RefFun}>
+          <PhotosContainer>
+            <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
+              {springs.map((springStyle, i) => {
+                return (
+                  <PhotoBox
+                    key={i}
+                    style={springStyle}
+                  >
+                    {!!photosCnt && (
+                      <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
+                    )}
+                    {!photosCnt && (
+                      <>
+                        <Photo src={placeholderIm} />
+                        <Blur />
+                        <NoImagesBox>
+                          <PictureIc css={imSmallPlaceholderIcS} />
+                          <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
+                        </NoImagesBox>
+                      </>
+                    )}
+                  </PhotoBox>
+                )
+              })}
+            </PhotosContainer2>
+          </PhotosContainer>
+        </PreviewFrame2>
+      </PreviewFrame>
+    </Pages.SafeInsets>
+  )
+  
+  
+  /* return (
+    <Pages.SafeInsets>
+    
+      {im && (
+        <div css={photoContainer}>
+          
+          <img css={photoImgStyle}
+            src={im.dataUrl}
+            alt={im.name}
+          />
+          
+          <ScrollbarVertical css={scrollbarVerticalStyle}
+            visiblePartPercent={20}
+            scroll={scroll} setScroll={setScroll}
+          />
+          
+          <FadeButtonBar>
+            <Name>{name}, 26</Name>
+            <AboutMe>{aboutMe}</AboutMe>
+          </FadeButtonBar>
+          
+        </div>
+      )}
+    
+    </Pages.SafeInsets>
+  ) */
+}
 )
 export default Preview
 

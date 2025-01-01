@@ -2,6 +2,7 @@ import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types'
 import { RangeU } from 'src/util/common/RangeU'
 import { TypeU } from 'src/util/common/TypeU'
+import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import Puro = TypeU.Puro
@@ -102,13 +103,7 @@ export const useDragProgress = (props: UseSnappedDragP) => {
         currentTarget,
       } = gesture
       
-      const dragThreshold = 5 // px
-      const isRadiusEnough = Math.hypot(mx, my) >= dragThreshold
-      
-      const tryDragHorizontally = !!(mx || my) && Math.abs(mx) > Math.abs(my)
-      const tryDragVertically = !!(mx || my) && Math.abs(mx) <= Math.abs(my)
-      const allowDragHorizontally = isRadiusEnough && Math.abs(mx) > Math.abs(my)
-      const allowDragVertically = isRadiusEnough && Math.abs(mx) <= Math.abs(my)
+      const { drag, horizontal, vertical } = getDragDirection({ mx, my })
       
       const {
         x: trackStartX,
@@ -142,10 +137,10 @@ export const useDragProgress = (props: UseSnappedDragP) => {
       setDragDProgressY(dragDProgressY)
       
       const onDragProps: OnDragProps = {
-        tryDragHorizontally,
-        tryDragVertically,
-        allowDragHorizontally,
-        allowDragVertically,
+        tryDragHorizontally: horizontal,
+        tryDragVertically: vertical,
+        allowDragHorizontally: drag && horizontal,
+        allowDragVertically: drag && vertical,
         spx: getDragStartProgressX(),
         spy: getDragStartProgressY(),
         dpx: getDragDProgressX(),

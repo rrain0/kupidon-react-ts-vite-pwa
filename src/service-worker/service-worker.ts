@@ -221,6 +221,7 @@ self.addEventListener('message', async ev => {
   // Used by VitePWA to update SW by reload button click
   if (t === 'SKIP_WAITING') {
     void self.skipWaiting()
+    clientsClaim()
   }
   else if (t === 'CONSOLE_LOG') {
     console.log('service worker console.log', ev)
@@ -230,7 +231,7 @@ self.addEventListener('message', async ev => {
     ev.waitUntil(
       (async() => {
         await clearCache()
-        ev.ports[0]?.postMessage({ type: 'cache cleared' })
+        ev.ports[0]?.postMessage({ type: 'CACHE_CLEARED' })
       })()
     )
     //self.registration.unregister()
@@ -246,7 +247,14 @@ async function clearCache(): Promise<void> {
 }
 
 
+// Controlled clients - pages that already being controlled by SW.
+// Uncontrolled clients - pages that have no SW worker installed for them.
 
-// This forces page reload when SW script is updated
+// If new SW was installed, it can't take control over clients until client page reload.
+
+// It will force reload all controlled clients after SW script was updated.
 //void self.skipWaiting()
+
+// clients.claim() will force reload all uncontrolled clients.
+// Another variant: self.clients.claim()
 //clientsClaim()

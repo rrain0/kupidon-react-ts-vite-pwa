@@ -12,9 +12,9 @@ export const DarkProps: ThemeProps = {
   page: {
     bg:          '#18191b', // #424854
     bgGradient:  ['#282c34', '#282c34', '#282c34'],
-    ct1:    '#ffffff',
-    ct2:    '#bdbdbd',
-    ct3:    '#999999',
+    ct1:         '#ffffff',
+    ct2:         '#bdbdbd',
+    ct3:         '#999999',
   },
   statusBar: {
     bg: '#282c34',
@@ -23,9 +23,9 @@ export const DarkProps: ThemeProps = {
     bg: '#282c34',
   },
   navButton: {
-    bgFocus:       ['#2e3440'],
-    ct:       ['#7b7b7b'],
-    cta: ['#bdbdbd'],
+    bgFocus:    ['#2e3440'],
+    ct:         ['#7b7b7b'],
+    cta:        ['#bdbdbd'],
   },
   
   boxNormal: {
@@ -38,69 +38,69 @@ export const DarkProps: ThemeProps = {
     ct1b:       ['#dddddd'],
     ct2:        ['#999999'],
     ct2b:       ['#909090'],
-    ct2c:             '#aaaaaa',
+    ct2c:       '#aaaaaa',
     ct3:        ['#7b7b7b'],
     ct3d:       ['#838383'],
     ct3e:       ['#777777'],
     ct4:        ['#666666'],
     ct4b:       ['#42414c'],
-    ct5:              '#42414c',
-    ct6:              '#505050',
+    ct5:        '#42414c',
+    ct6:        '#505050',
     
     cta:   ['#bdbdbd'],
     cta2:  '#2e343f',
     cta3:  ['#2e343f'],
     
-    shadow:          ['#00000000'],
+    shadow:     ['#00000000'],
   },
   boxAccent: {
-    bg:       ['#aaaaaa'],
-    bg3:      '#bdbdbd',
-    ct:  ['#000000'],
-    ct2: ['#000000'],
-    ct3:       '#000000',
+    bg:         ['#aaaaaa'],
+    bg3:        '#bdbdbd',
+    ct:         ['#000000'],
+    ct2:        ['#000000'],
+    ct3:        '#000000',
   },
   
   buttonMain: {
     bg:       ['#aaaaaa'],
     bgFocus:  ['#bbbbbb'],
-    ct:  ['#000000'],
+    ct:       ['#000000'],
   },
   buttonAccent: {
     bg:            ['#999999'],
     bg2:           ['#999999'],
-    ct:       ['#000000'],
+    ct:            ['#000000'],
     ct2:           '#000000',
     bgFocus:       ['#7b7b7b'],
-    ctFocus:  ['#000000'],
+    ctFocus:       ['#000000'],
   },
   buttonNormal: {
     bg:             ['#999999'],
     bg2:             '#999999',
-    ct:        ['#000000'],
+    ct:             ['#000000'],
     bgFocus:        ['#7b7b7b'],
     bgFocus2:        '#7b7b7b',
-    ctFocus:   ['#000000'],
+    ctFocus:        ['#000000'],
   },
   buttonSecondary: {
     bg:        ['#00000000'],
     bgFocus:   ['#7b7b7b88'],
-    ct:   ['#999999'],
+    ct:        ['#999999'],
   },
   inputRadio: {
-    bgFocus:  ['#aaaaaa'],
+    bgFocus:   ['#aaaaaa'],
   },
   buttonTransparent: {
-    bgFocus: ['#ffffff22'],
+    bgFocus:   ['#ffffff22'],
   },
   
   iconGradient: {
-    ct:       ['#bdbdbd', '#bdbdbd'],
+    ct:        ['#bdbdbd', '#bdbdbd'],
   },
   
   input: {
     bg:            ['#282c34'],
-    ct:       ['#cdcdcd'],
+    ct:            ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
     border:        ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
@@ -115,15 +115,15 @@ export const DarkProps: ThemeProps = {
   
   elementDisabled: {
     bg:      ['#DCDCDC'],
-    ct: ['#555555'],
+    ct:      ['#555555'],
   },
   elementDanger: {
     bg:       ['#bbbbbb'],
     bgFocus:  ['#cccccc'],
-    ct:  ['#000000'],
+    ct:       ['#000000'],
   },
   elementError: {
-    bg:      ['#5e252c'],
+    bg:       ['#5e252c'],
   },
   
   ripple: {
@@ -134,16 +134,16 @@ export const DarkProps: ThemeProps = {
   
   
   boxTransparent: {
-    bg: '#18191b99',
+    bg:  '#18191b99',
     ct:  '#dddddd',
   },
   
   boxPink: {
-    bg: ['#F0849D', '#CD617A'],
+    bg:  ['#F0849D', '#CD617A'],
     ct:  '#FFFFFF',
   },
   boxWithPink: {
-    bg:  '#FFFFFF',
+    bg:   '#FFFFFF',
     ct:   '#DD718A',
     
     bgFocus: ['#ffa9bd', '#ffffff'],
