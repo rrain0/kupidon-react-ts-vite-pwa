@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated, useSprings, useTransition } from '@react-spring/web'
+import { animated, useSprings, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import { TypeU } from '@util/common/TypeU.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
@@ -44,6 +45,8 @@ import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
 import PictureIc = SvgIcons.PictureIc
 import centerGrid = EmotionCommon.centerGrid
+import Sign = TypeU.Sign
+import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -64,6 +67,69 @@ TODO
 // Максимальное кол-во отображаемых фоток.
 // Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3, потому что 4ая прозрачная.
 const maxVisiblePhotosCnt = 4
+
+
+
+
+const getSpringStyle = (
+  p = 0, // progress
+  photoP = 0, // photoProgress
+  photosCnt: number,
+  visiblePhotosCnt: number,
+  setViewPhotoIndices: SetterOrUpdater<number[]>
+) => (i = 0) => {
+  
+  // displayedIndex from top to bottom
+  const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+  // progressCurrent
+  const pc = mod(p, 100)
+  
+  // set photo's indices to display
+  setViewPhotoIndices(prev => {
+    const indices = [...prev]
+    const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
+    indices[i] = photoI
+    if (ArrayU.eq(prev, indices)) return prev
+    return indices
+  })
+  
+  // z-index
+  const z = -di + visiblePhotosCnt - 1
+  
+  // translate y
+  const y = (() => {
+    if (di === 0) return pc
+    return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+  })()
+  
+  // scale
+  const s = (() => {
+    if (di === 0) return 100
+    return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+  })()
+  
+  // opacity
+  const o = (() => {
+    if (di === 0) return 100 - RangeU.map(
+      pc,
+      [0, 30, 100],
+      [0, 0, 100],
+    )
+    if (di === visiblePhotosCnt - 1) return RangeU.map(
+      pc,
+      [0, 80, 100],
+      [0, 0, 100],
+    )
+    return 100
+  })()
+  
+  return {
+    zIndex: z,
+    transform: `translateY(${y}%)`,
+    scale: s / 100,
+    opacity: o / 100,
+  }
+}
 
 
 
@@ -111,80 +177,44 @@ const Preview = React.memo((props: PreviewProps) => {
   // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
   const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
   
-  const getSpringStyle = () => (i = 0) => {
-    // progress
-    const p = getStartProgressY() + getCurrProgressY()
-    // photoProgress
-    const photoP = getStartPhotoP() + getCurrProgressY()
-    
-    // displayedIndex from top to bottom
-    const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-    // progressCurrent
-    const pc = mod(p, 100)
-    
-    // set photo's indices to display
-    setViewPhotoIndices(prev => {
-      const indices = [...prev]
-      const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
-      indices[i] = photoI
-      if (ArrayU.eq(prev, indices)) return prev
-      return indices
-    })
-    
-    // z-index
-    const z = -di + visiblePhotosCnt - 1
-    
-    // translate y
-    const y = (() => {
-      if (di === 0) return pc
-      return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-    })()
-    
-    // scale
-    const s = (() => {
-      if (di === 0) return 100
-      return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-    })()
-    
-    // opacity
-    const o = (() => {
-      if (di === 0) return 100 - RangeU.map(
-        pc,
-        [0, 30, 100],
-        [0, 0, 100],
-      )
-      if (di === visiblePhotosCnt - 1) return RangeU.map(
-        pc,
-        [0, 80, 100],
-        [0, 0, 100],
-      )
-      return 100
-    })()
-    
-    return {
-      zIndex: z,
-      transform: `translateY(${y}%)`,
-      scale: s / 100,
-      opacity: o / 100,
-    }
-  }
+  
   
   const [springs, springsApi] = useSprings(
-    visiblePhotosCnt, getSpringStyle(), [visiblePhotosCnt]
+    visiblePhotosCnt,
+    getSpringStyle(0, 0, photosCnt, visiblePhotosCnt, setViewPhotoIndices),
+    [visiblePhotosCnt],
   )
   
   
   const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
-  const [isDragging, startDragging, endDragging] = useBool(false)
+  const [isDragging, startDragging, finishDragging] = useBool(false)
   useNoSelect(isDragging)
   const canUseGestures = useLockAppGestures(isDragging)
   
   
   
-  const updateViews = () => {
-    springsApi.set(getSpringStyle())
+  
+  const photosBoxRef = useRef<HTMLDivElement>(null)
+  
+  const getTrackProps = () => {
+    const pb = photosBoxRef.current
+    if (pb) {
+      const p = getViewProps(photosBoxRef.current)
+      return { x: p.x, y: p.y, w: p.w, h: p.h }
+    }
+    return { x: 0, y: 0, w: 0, h: 0 }
   }
-  const finishUpdateViews = () => {
+  
+  
+  
+  const yInertia = useSpringValue(0)
+  
+  const updateViews = () => {
+    const p = getStartProgressY() + getCurrProgressY()
+    const photoP = getStartPhotoP() + getCurrProgressY()
+    springsApi.set(getSpringStyle(p, photoP, photosCnt, visiblePhotosCnt, setViewPhotoIndices))
+  }
+  const finishUpdateViews = (vely = 0) => {
     const photoP = getStartPhotoP() + getCurrProgressY()
     // TODO draggable
     const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
@@ -195,26 +225,27 @@ const Preview = React.memo((props: PreviewProps) => {
     setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
     setCurrProgressY(0)
     updateViews()
+    if (vely) {
+      // px/ms => heightPercent/s
+      let velyPercent = vely * 1000 / getTrackProps().h * 100
+      velyPercent /= 3
+      console.log('velyPercent', velyPercent)
+      yInertia.set(0)
+      const duration = 400
+      yInertia.start(velyPercent, {
+        config: {
+          mass: 1 * duration / 100,
+          tension: 500,
+          friction: 24,
+          clamp: true,
+        },
+      })
+    }
   }
-  
   
   
   // works as immediate effect
-  useMemo(() => {
-    finishUpdateViews()
-  }, [availablePhotos])
-  
-  
-  const photosBoxRef = useRef<HTMLDivElement>(null)
-  
-  const getTrackProps = () => {
-    const pb = photosBoxRef.current
-    if (pb) {
-      const p = getViewProps(photosBoxRef.current)
-      return { x: p.x, w: p.w, y: p.y, h: p.h }
-    }
-    return { x: 0, w: 0, y: 0, h: 0 }
-  }
+  useMemo(() => finishUpdateViews(), [availablePhotos])
   
   const {
     updateDragProgress,
@@ -229,7 +260,7 @@ const Preview = React.memo((props: PreviewProps) => {
   }
   const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
   
-  const onDragging = (drag: boolean, vertical: boolean) => {
+  const onDragging = (vertical: boolean, drag: boolean) => {
     // TODO draggable
     if (isPhotosDraggable && canUseGestures && vertical) {
       lockTouchAction()
@@ -238,9 +269,9 @@ const Preview = React.memo((props: PreviewProps) => {
   }
   const [getOnDragging] = useAsRefGet(onDragging)
   
-  const onDragEnd = () => {
-    finishUpdateViews()
-    endDragging()
+  const onDragEnd = (vely: number) => {
+    finishUpdateViews(vely)
+    finishDragging()
     unlockTouchAction()
   }
   const [getOnDragEnd] = useAsRefGet(onDragEnd)
@@ -251,13 +282,16 @@ const Preview = React.memo((props: PreviewProps) => {
   const onTrackDrag = useDrag(gesture => {
     const {
       first, active, last,
-      xy: [vpx, vpy],
+      xy: [vpx, vpy], // viewport x / y coordinates
       movement: [mx, my],
       delta: [dx, dy],
+      velocity: [_velx, _vely], // px/ms (nonnegative)
+      direction: [dirx, diry], // -1, 0, 1, positive diry is from top to bottom
       currentTarget,
     } = gesture
+    const [velx, vely] = [dirx * _velx, diry * _vely]
     
-    const { drag, horizontal, vertical } = getDragDirection({ mx, my })
+    const { vertical, drag } = getDragDirection({ mx, my })
     
     updateDragProgress({ first, vpx, vpy, dx, dy })
     
@@ -266,9 +300,9 @@ const Preview = React.memo((props: PreviewProps) => {
     // onDragStart
     if (first) { }
     // onDragging
-    if (!first && !last) { getOnDragging()(drag, vertical) }
+    if (!first && !last) { getOnDragging()(vertical, drag) }
     // onDragEnd
-    if (last) { getOnDragEnd()() }
+    if (last) { getOnDragEnd()(vely) }
   })
   
   
@@ -318,6 +352,21 @@ const Preview = React.memo((props: PreviewProps) => {
                     key={i}
                     style={springStyle}
                   >
+                    <animated.div
+                      style={{
+                        position: 'absolute',
+                        width: 100,
+                        height: 100,
+                        backgroundColor: 'black',
+                        zIndex: 10,
+                        y: yInertia.to(yi => {
+                          console.log('yi', yi)
+                          // setCurrProgressY(yi)
+                          // updateViews()
+                          return yi
+                        }),
+                      }}
+                    />
                     {!!photosCnt && (
                       <Photo src={availablePhotos[viewPhotoIndices[i]]?.dataUrl} />
                     )}
@@ -370,6 +419,7 @@ const Preview = React.memo((props: PreviewProps) => {
   ) */
 })
 export default Preview
+
 
 
 const PreviewFrame = styled.div`

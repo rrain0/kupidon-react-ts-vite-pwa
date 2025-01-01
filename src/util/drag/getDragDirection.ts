@@ -15,9 +15,9 @@ export const getDragDirection = (props: GetDragDirectionProps) => {
   const vertical = !!(mx || my) && Math.abs(mx) <= Math.abs(my)
   
   return {
-    drag: isRadiusEnough,
     horizontal,
     vertical,
+    drag: isRadiusEnough,
   } as const
 }
 

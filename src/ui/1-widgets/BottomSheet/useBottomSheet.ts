@@ -246,7 +246,7 @@ export const useBottomSheet = (
   
   
   const runAnimation = useCallback(
-    (endH: number, lastSpeed: number|null, onFinish: Callback) => {
+    (endH: number, lastSpeed: number | null, onFinish: Callback) => {
       const duration = function() {
         //console.log('lastSpeed',lastSpeed)
         if (notExists(lastSpeed)) return animationDuration
@@ -550,7 +550,7 @@ export const useBottomSheet = (
 
 // px/ms => (percent of viewport height)/s
 function pxPerMsToPercentVpHPerS(pxPerMs: number): number {
-  return pxPerMs*1000 / window.innerHeight * 100
+  return pxPerMs * 1000 / window.innerHeight * 100
 }
 function pathProgressPercent(start: number, end: number): number {
   return Math.abs(end - start) / window.innerHeight * 100

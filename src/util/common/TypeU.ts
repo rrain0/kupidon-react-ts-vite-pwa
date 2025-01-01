@@ -10,6 +10,7 @@ export namespace TypeU {
   export type falsy = false | undefined | null | '' | 0 | 0n
   //export type emptyObj = Record<never, never> // need to fix
   export type HtmlBool = true | undefined
+  export type Sign = -1 | 0 | 1
   
   export const noop = () => {}
   export const emptyArr = []
