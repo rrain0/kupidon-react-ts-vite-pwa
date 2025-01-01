@@ -58,6 +58,7 @@ export default [
     {
       rules: {
         'no-async-promise-executor': 'off',
+        'no-empty': 'off',
         'no-unexpected-multiline': 'off',
         'eslint no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',

@@ -1,6 +1,10 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated, useSprings, useTransition } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
+import { getDragDirection } from '@util/drag/getDragDirection.ts'
+import { useDragProgress } from '@util/drag/useDragProgress.ts'
+import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
@@ -19,7 +23,6 @@ import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
-import { useDragProgress } from 'src/util/drag/useDragProgress'
 import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { ReactU } from 'src/util/react/ReactU'
@@ -101,8 +104,8 @@ const Preview = React.memo((props: PreviewProps) => {
   
   // start progress y in (..0..100..) * visiblePhotosCnt
   const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
-  // delta progress y in (..0..100..)
-  const [getDProgressY, setDProgressY] = useRefGetSet(0)
+  // curr progress y in (..0..100..) from start progress y
+  const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
   // start progress for photos in (..0..100..) * availablePhotos.length
   const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
   // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
@@ -110,9 +113,9 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const getSpringStyle = () => (i = 0) => {
     // progress
-    const p = getStartProgressY() + getDProgressY()
+    const p = getStartProgressY() + getCurrProgressY()
     // photoProgress
-    const photoP = getStartPhotoP() + getDProgressY()
+    const photoP = getStartPhotoP() + getCurrProgressY()
     
     // displayedIndex from top to bottom
     const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
@@ -182,17 +185,18 @@ const Preview = React.memo((props: PreviewProps) => {
     springsApi.set(getSpringStyle())
   }
   const finishUpdateViews = () => {
-    const photoP = getStartPhotoP() + getDProgressY()
+    const photoP = getStartPhotoP() + getCurrProgressY()
     // TODO draggable
     const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
     setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
-    const p = getStartProgressY() + getDProgressY()
+    const p = getStartProgressY() + getCurrProgressY()
     // TODO draggable
     const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
     setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
-    setDProgressY(0)
+    setCurrProgressY(0)
     updateViews()
   }
+  
   
   
   // works as immediate effect
@@ -203,36 +207,68 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const photosBoxRef = useRef<HTMLDivElement>(null)
   
+  const getTrackProps = () => {
+    const pb = photosBoxRef.current
+    if (pb) {
+      const p = getViewProps(photosBoxRef.current)
+      return { x: p.x, w: p.w, y: p.y, h: p.h }
+    }
+    return { x: 0, w: 0, y: 0, h: 0 }
+  }
+  
   const {
-    onTrackDrag,
-  } = useDragProgress({
-    getTrackProps: () => {
-      const pb = photosBoxRef.current
-      if (pb) {
-        const p = getViewProps(photosBoxRef.current)
-        return { x: p.x, w: p.w, y: p.y, h: p.h }
-      }
-      return { x: 0, w: 0, y: 0, h: 0 }
-    },
-    onDrag: ({ dpy }) => {
-      if (isDragging) {
-        setDProgressY(dpy)
-        updateViews()
-      }
-    },
-    onDragStart: () => { },
-    onDragging: ({ tryDragVertically, allowDragVertically }) => {
-      // TODO draggable
-      if (isPhotosDraggable) {
-        if (canUseGestures && tryDragVertically) lockTouchAction()
-        if (canUseGestures && allowDragVertically) startDragging()
-      }
-    },
-    onDragEnd: () => {
-      finishUpdateViews()
-      endDragging()
-      unlockTouchAction()
-    },
+    updateDragProgress,
+    getDragCurrProgressY,
+  } = useDragProgress({ getTrackProps })
+  
+  const onAnyDrag = (cpy: number) => {
+    if (isDragging) {
+      setCurrProgressY(cpy)
+      updateViews()
+    }
+  }
+  const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
+  
+  const onDragging = (drag: boolean, vertical: boolean) => {
+    // TODO draggable
+    if (isPhotosDraggable && canUseGestures && vertical) {
+      lockTouchAction()
+      drag && startDragging()
+    }
+  }
+  const [getOnDragging] = useAsRefGet(onDragging)
+  
+  const onDragEnd = () => {
+    finishUpdateViews()
+    endDragging()
+    unlockTouchAction()
+  }
+  const [getOnDragEnd] = useAsRefGet(onDragEnd)
+  
+  
+  
+  // noinspection JSVoidFunctionReturnValueUsed
+  const onTrackDrag = useDrag(gesture => {
+    const {
+      first, active, last,
+      xy: [vpx, vpy],
+      movement: [mx, my],
+      delta: [dx, dy],
+      currentTarget,
+    } = gesture
+    
+    const { drag, horizontal, vertical } = getDragDirection({ mx, my })
+    
+    updateDragProgress({ first, vpx, vpy, dx, dy })
+    
+    // onAnyDrag
+    getOnAnyDrag()(getDragCurrProgressY())
+    // onDragStart
+    if (first) { }
+    // onDragging
+    if (!first && !last) { getOnDragging()(drag, vertical) }
+    // onDragEnd
+    if (last) { getOnDragEnd()() }
   })
   
   
@@ -332,8 +368,7 @@ const Preview = React.memo((props: PreviewProps) => {
     
     </Pages.SafeInsets>
   ) */
-}
-)
+})
 export default Preview
 
 

@@ -249,7 +249,8 @@ async function clearCache(): Promise<void> {
 // Controlled clients - pages that already being controlled by SW.
 // Uncontrolled clients - pages that have no SW worker installed for them.
 
-// If new SW was installed, it can't take control over clients until client page reload.
+// If new SW was installed, it can't take control over clients until client page reload,
+//   because there is old active SW.
 // If page already has SW - self.skipWaiting() reloads pages and applies new SW.
 // If page has no SW installed - clientsClaim() reloads such pages and applies SW,
 //   but normally page should install SW itself.
