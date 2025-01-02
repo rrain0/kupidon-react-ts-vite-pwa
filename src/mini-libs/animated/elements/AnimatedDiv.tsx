@@ -7,10 +7,10 @@ import React, {
   useLayoutEffect,
   useRef,
 } from 'react'
-import { AnimatedStyle } from 'src/mini-libs/animated/AnimatedStyle.ts'
+import { AnimatedStyle } from '@animated/AnimatedStyle.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { animations } from 'src/mini-libs/animated/elements/AnimatedImg.tsx'
+import { animations } from 'src/mini-libs/animated/runAnimations.ts'
 import Puro = TypeU.Puro
 import Children = ReactU.Children
 
@@ -42,13 +42,13 @@ const AnimatedDiv = React.memo(
       const [getAnimated] = useAsRefGet(animated)
       const [getIsFrameRequested, setIsFrameRequested] = useRefGetSet(false)
       
-      const updateElement = useCallback(() => {
+      const updateElement = useCallback((time: number) => {
         const el = elemRef.current
         if (el) {
-          el.style.transform = `${(getAnimated()?.transform?.get() ?? '')}`
-          el.style.zIndex = `${(getAnimated()?.zIndex?.get() ?? '')}`
-          el.style.scale = `${(getAnimated()?.scale?.get() ?? '')}`
-          el.style.opacity = `${(getAnimated()?.opacity?.get() ?? '')}`
+          el.style.transform = `${(getAnimated()?.transform?.get(time) ?? '')}`
+          el.style.zIndex = `${(getAnimated()?.zIndex?.get(time) ?? '')}`
+          el.style.scale = `${(getAnimated()?.scale?.get(time) ?? '')}`
+          el.style.opacity = `${(getAnimated()?.opacity?.get(time) ?? '')}`
         }
       }, [])
       
@@ -95,10 +95,12 @@ const AnimatedDiv = React.memo(
       }, [opacity])
        */
       
+      
       useLayoutEffect(() => {
         animations.push(updateElement)
         return () => { ArrayU.remove(animations, updateElement) }
-      }, [])
+      }, [animated])
+      
       
       return (
         <div // Frame

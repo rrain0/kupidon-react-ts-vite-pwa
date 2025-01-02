@@ -7,20 +7,11 @@ import React, {
   useLayoutEffect,
   useRef,
 } from 'react'
-import { AnimatedString } from 'src/mini-libs/animated/AnimatedStyle.ts'
+import { AnimatedString } from '@animated/AnimatedStyle.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { animations } from 'src/mini-libs/animated/runAnimations.ts'
 import Puro = TypeU.Puro
-import Callback = TypeU.Callback
 
-
-
-export const animations: Callback[] = []
-
-const runAnimations = () => {
-  animations.forEach(it => it())
-  requestAnimationFrame(runAnimations)
-}
-requestAnimationFrame(runAnimations)
 
 
 
@@ -51,10 +42,10 @@ const AnimatedImg = React.memo(
       const [getAnimated] = useAsRefGet(animated)
       const [getIsFrameRequested, setIsFrameRequested] = useRefGetSet(false)
       
-      const updateElement = useCallback(() => {
+      const updateElement = useCallback((time: number) => {
         const el = elemRef.current
         if (el) {
-          el.src = `${(getAnimated()?.src?.get() ?? '')}`
+          el.src = `${(getAnimated()?.src?.get(time) ?? '')}`
         }
       }, [])
       
@@ -77,10 +68,12 @@ const AnimatedImg = React.memo(
       }, [src])
        */
       
+      
       useLayoutEffect(() => {
         animations.push(updateElement)
         return () => { ArrayU.remove(animations, updateElement) }
-      }, [])
+      }, [animated])
+      
       
       return (
         // eslint-disable-next-line jsx-a11y/alt-text

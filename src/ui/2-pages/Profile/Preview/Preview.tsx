@@ -7,9 +7,9 @@ import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
-import AnimatedDiv from 'src/mini-libs/animated/elements/AnimatedDiv.tsx'
-import AnimatedImg from 'src/mini-libs/animated/elements/AnimatedImg.tsx'
-import { useAnimatedValue } from 'src/mini-libs/animated/useAnimatedValue.ts'
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
+import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
@@ -48,7 +48,6 @@ import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
 import PictureIc = SvgIcons.PictureIc
 import centerGrid = EmotionCommon.centerGrid
-import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -69,71 +68,6 @@ TODO
 // Максимальное кол-во отображаемых фоток.
 // Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3, потому что 4ая прозрачная.
 const maxVisiblePhotosCnt = 4
-
-
-
-/*
-
-const getSpringStyle = (
-  p = 0, // progress
-  photoP = 0, // photoProgress
-  photosCnt: number,
-  visiblePhotosCnt: number,
-  setViewPhotoIndices: SetterOrUpdater<number[]>
-) => (i = 0) => {
-  
-  // displayedIndex from top to bottom
-  const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-  // progressCurrent
-  const pc = mod(p, 100)
-  
-  // set photo's indices to display
-  setViewPhotoIndices(prev => {
-    const indices = [...prev]
-    const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
-    indices[i] = photoI
-    if (ArrayU.eq(prev, indices)) return prev
-    return indices
-  })
-  
-  // z-index
-  const z = -di + visiblePhotosCnt - 1
-  
-  // translate y
-  const y = (() => {
-    if (di === 0) return pc
-    return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-  })()
-  
-  // scale
-  const s = (() => {
-    if (di === 0) return 100
-    return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
-  })()
-  
-  // opacity
-  const o = (() => {
-    if (di === 0) return 100 - RangeU.map(
-      pc,
-      [0, 30, 100],
-      [0, 0, 100],
-    )
-    if (di === visiblePhotosCnt - 1) return RangeU.map(
-      pc,
-      [0, 80, 100],
-      [0, 0, 100],
-    )
-    return 100
-  })()
-  
-  return {
-    zIndex: z,
-    transform: `translateY(${y}%)`,
-    scale: s / 100,
-    opacity: o / 100,
-  }
-}
-*/
 
 
 
@@ -163,6 +97,7 @@ const Preview = React.memo((props: PreviewProps) => {
   
   // if photosCnt is 0, then display 1 placeholder
   const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt + 1)
+  //const visiblePhotosCnt = 1
   
   // TODO изначально фотки не получены, поэтому изображение грузится
   const placeholderIm = useMemo(() => {
@@ -176,7 +111,6 @@ const Preview = React.memo((props: PreviewProps) => {
   const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
   // curr progress y in (..0..100..) from start progress y
   const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
-  const springCurrProgressY = useSpringValue(0)
   const animatedCurrProgressY = useAnimatedValue(0)
   // start progress for photos in (..0..100..) * availablePhotos.length
   const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
@@ -185,18 +119,10 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
-  // const [springs, springsApi] = useSprings(
-  //   visiblePhotosCnt,
-  //   getSpringStyle(0, 0, photosCnt, visiblePhotosCnt, setViewPhotoIndices),
-  //   [visiblePhotosCnt],
-  // )
-  
-  
   const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
-  const [isDragging, startDragging, finishDragging] = useBool(false)
+  const [isDragging, startDragging, endDragging] = useBool(false)
   useNoSelect(isDragging)
   const canUseGestures = useLockAppGestures(isDragging)
-  
   
   
   
@@ -213,44 +139,46 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
-  //const yInertia = useSpringValue(0)
-  
-  const updateViews = () => {
-    springCurrProgressY.set(getCurrProgressY())
-    animatedCurrProgressY.set(getCurrProgressY())
-    // const p = getStartProgressY() + getCurrProgressY()
-    // const photoP = getStartPhotoP() + getCurrProgressY()
-    // springsApi.set(getSpringStyle(p, photoP, photosCnt, visiblePhotosCnt, setViewPhotoIndices))
-  }
-  const finishUpdateViews = (vely = 0) => {
+  const resetProgress = () => {
     const photoP = getStartPhotoP() + getCurrProgressY()
-    // TODO draggable
     const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
     setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
     const p = getStartProgressY() + getCurrProgressY()
-    // TODO draggable
     const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
     setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
     setCurrProgressY(0)
+  }
+  
+  const updateViews = () => {
+    animatedCurrProgressY.set(getCurrProgressY())
+  }
+  
+  const finishUpdateViews = (vely = 0) => {
     updateViews()
     
-    // if (vely) {
-    //   // px/ms => heightPercent/s
-    //   let velyPercent = vely * 1000 / getTrackProps().h * 100
-    //   velyPercent /= 3
-    //   console.log('velyPercent', velyPercent)
-    //   yInertia.set(0)
-    //   const duration = 400
-    //   yInertia.start(velyPercent, {
-    //     config: {
-    //       mass: 1 * duration / 100,
-    //       tension: 500,
-    //       friction: 24,
-    //       clamp: true,
-    //     },
-    //   })
-    // }
-    
+    if (vely) {
+      // px/ms => heightPercent/s
+      let velyPercent = vely * 1000 / getTrackProps().h * 100
+      velyPercent /= 3
+      //console.log('velyPercent', velyPercent)
+      animatedCurrProgressY.start({
+        startValue: getCurrProgressY(),
+        animationFunction: (s, t) => {
+          let currV = velyPercent / 400 * t
+          const finished = Math.abs(currV) >= 100
+          currV = RangeU.clamp(currV, [-100, 100])
+          const v = s + currV
+          setCurrProgressY(v)
+          return [v, finished]
+        },
+      })
+      /* ;(async () => {
+        await Promise.any([
+          animatedCurrProgressY.whenFinished,
+          animatedCurrProgressY.whenCanceled,
+        ])
+      })() */
+    }
   }
   
   
@@ -262,8 +190,15 @@ const Preview = React.memo((props: PreviewProps) => {
     getDragCurrProgressY,
   } = useDragProgress({ getTrackProps })
   
+  const [getNeedReset, setNeedReset] = useRefGetSet(true)
+  const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
+  
   const onAnyDrag = (cpy: number) => {
     if (isDragging) {
+      if (getNeedReset()) {
+        resetProgress()
+        setNeedReset(false)
+      }
       setCurrProgressY(cpy)
       updateViews()
     }
@@ -271,18 +206,27 @@ const Preview = React.memo((props: PreviewProps) => {
   const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
   
   const onDragging = (vertical: boolean, drag: boolean) => {
-    // TODO draggable
-    if (isPhotosDraggable && canUseGestures && vertical) {
+    if (isPhotosDraggable && vertical) {
       lockTouchAction()
-      drag && startDragging()
+      if (canUseGestures && drag) {
+        if (getCanStartDrag()) {
+          startDragging()
+        }
+        else {
+          unlockTouchAction()
+        }
+        setCanStartDrag(false)
+      }
     }
   }
   const [getOnDragging] = useAsRefGet(onDragging)
   
   const onDragEnd = (vely: number) => {
-    finishUpdateViews(vely)
-    finishDragging()
+    if (isDragging) finishUpdateViews(vely)
+    setNeedReset(true)
+    setCanStartDrag(true)
     unlockTouchAction()
+    endDragging()
   }
   const [getOnDragEnd] = useAsRefGet(onDragEnd)
   
@@ -361,6 +305,7 @@ const Preview = React.memo((props: PreviewProps) => {
     return { p, photoP, di, pc }
   })
   
+  //console.log('rerender')
   
   return (
     <Pages.SafeInsets>

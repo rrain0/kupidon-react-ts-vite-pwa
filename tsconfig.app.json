@@ -46,7 +46,9 @@
       "@ic/*": ["src/res/ic/*"],
       "@vid/*": ["src/res/vid/*"],
       
-      "@util/*": ["src/util/*"]
+      "@util/*": ["src/util/*"],
+      
+      "@animated/*": ["src/mini-libs/animated/*"]
     }
   },
   "include": ["src", "node_modules_overrides"],

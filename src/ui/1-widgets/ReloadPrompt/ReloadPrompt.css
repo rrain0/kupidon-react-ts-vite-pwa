@@ -4,13 +4,14 @@
     width: 0;
     height: 0;
     color: black;
+    pointer-events: auto;
 }
 .ReloadPrompt-date {
     visibility: hidden;
     color: black;
 }
 .ReloadPrompt-toast {
-    position: fixed;
+    position: absolute;
     right: 16px;
     bottom: 16px;
     width: 400px;

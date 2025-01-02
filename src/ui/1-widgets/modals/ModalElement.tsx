@@ -10,7 +10,7 @@ import row = EmotionCommon.row
 export namespace ModalElement {
   
   export const modalStyle = css`
-    ${ModalStyle.modal};
+    ${ModalStyle.modalBottom};
     padding: 20px;
     padding-bottom: 140px;
     display: grid;

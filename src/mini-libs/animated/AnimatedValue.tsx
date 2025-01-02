@@ -1,22 +1,85 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import Callback1 = TypeU.Callback1
+import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.tsx'
+import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.tsx'
+import {
+  AnimationFunction,
+  AnimationProps,
+  getTime,
+  passAnimationFunction,
+} from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
+import exists = TypeU.exists
+import Callback = TypeU.Callback
+import noop = TypeU.noop
 
 
-export class AnimatedValue<V> {
-  constructor(private value: V) { }
+
+export class AnimatedValue<V> implements AnimatedProperty<V> {
+  startValue!: V
+  startTime: number = getTime()
+  animationFunction: AnimationFunction<V> = passAnimationFunction
   
-  private listeners: Callback1<V>[] = []
+  finish: Callback = noop
+  finished = false
+  whenFinished!: Promise<void>
   
-  get() { return this.value }
+  cancel: Callback = noop
+  canceled = false
+  whenCanceled!: Promise<void>
+  
+  constructor(props: AnimationProps<V>) {
+    this.start(props)
+  }
+  
+  get(time = getTime()): V {
+    const [v, finished] = this.animationFunction(this.startValue, time - this.startTime)
+    if (!this.finished && finished) this.finish()
+    return v
+  }
   
   set(value: V) {
-    if (this.value !== value) {
-      this.value = value
-      this.notify()
-    }
+    if (!this.finished && !this.canceled) this.cancel()
+    this.startTime = getTime()
+    this.startValue = value
+    this.animationFunction = passAnimationFunction
+    this.reset()
   }
+  
+  start(props: AnimationProps<V>) {
+    if (!this.finished && !this.canceled) this.cancel()
+    this.startValue = props.startValue
+    if (exists(props.startTime)) {
+      this.startTime = props.startTime
+    }
+    if (exists(props.animationFunction)) {
+      this.animationFunction = props.animationFunction
+    }
+    this.reset()
+  }
+  
+  reset() {
+    this.finish = noop
+    this.finished = false
+    this.whenFinished = new Promise<void>(resolve => {
+      this.finish = () => {
+        this.finished = true
+        resolve()
+      }
+    })
+    
+    this.cancel = noop
+    this.canceled = false
+    this.whenCanceled = new Promise<void>(resolve => {
+      this.cancel = () => {
+        this.canceled = true
+        resolve()
+      }
+    })
+  }
+  
+  
+  /*
+  private listeners: Callback1<V>[] = []
   
   onChange(listener: Callback1<V>) {
     this.listeners.push(listener)
@@ -33,13 +96,10 @@ export class AnimatedValue<V> {
   private notify() {
     this.listeners.forEach(it => it(this.value))
   }
+   */
   
   map<R>(mapper: Mapper<V, R>) {
-    const result = new AnimatedValue(mapper(this.value))
-    const listener = (v: V) => result.set(mapper(v))
-    // TODO - need to remove old listeners
-    this.onChange(listener)
-    return result
+    return new AnimatedComputed<V, R>(this, mapper)
   }
   
 }

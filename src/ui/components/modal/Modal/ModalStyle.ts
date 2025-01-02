@@ -10,8 +10,15 @@ import fixedBottom = EmotionCommon.fixedBottom
 export namespace ModalStyle {
   
   
+  export const modalFrameBottom = css`
+    ${fixedBottom};
+    height: 100dvh;
+    z-index: ${modalFloor1};
+    pointer-events: none;
+  `
   
-  export const modal = css`
+  
+  export const modalBottom = css`
     ${fixedBottom};
     height: 100dvh;
     background: #0000009a;
