@@ -3,9 +3,11 @@ import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.tsx'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.tsx'
 import {
   AnimationFunction,
+  passAnimationFunction,
+} from 'src/mini-libs/animated/animationFunciton.ts'
+import {
   AnimationProps,
   getTime,
-  passAnimationFunction,
 } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
 import exists = TypeU.exists
