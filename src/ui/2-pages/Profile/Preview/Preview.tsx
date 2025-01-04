@@ -114,8 +114,6 @@ const Preview = React.memo((props: PreviewProps) => {
   const animatedCurrProgressY = useAnimatedValue(0)
   // start progress for photos in (..0..100..) * availablePhotos.length
   const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
-  // map view index to photo index (viewPhotoIndices[viewIndex] => photoIndex)
-  const [viewPhotoIndices, setViewPhotoIndices] = useState(arrOfIndices(visiblePhotosCnt))
   
   
   
@@ -157,27 +155,32 @@ const Preview = React.memo((props: PreviewProps) => {
     updateViews()
     
     if (vely) {
-      // px/ms => heightPercent/s
-      let velyPercent = vely * 1000 / getTrackProps().h * 100
-      velyPercent /= 3
-      //console.log('velyPercent', velyPercent)
-      animatedCurrProgressY.start({
-        startValue: getCurrProgressY(),
-        animationFunction: (s, t) => {
-          let currV = velyPercent / 400 * t
-          const finished = Math.abs(currV) >= 100
-          currV = RangeU.clamp(currV, [-100, 100])
-          const v = s + currV
-          setCurrProgressY(v)
-          return [v, finished]
-        },
-      })
-      /* ;(async () => {
-        await Promise.any([
-          animatedCurrProgressY.whenFinished,
-          animatedCurrProgressY.whenCanceled,
-        ])
-      })() */
+      // px/ms => %height/s
+      const velyPercent = vely * 1000 / getTrackProps().h * 100
+      const vThreshold = 135 // %height/s
+      if (Math.abs(velyPercent) >= vThreshold) {
+        animatedCurrProgressY.start({
+          startValue: getCurrProgressY(),
+          animationFunction: (startValue, t) => {
+            // Начальный путь
+            const s0 = startValue
+            t /= 1000 // ms => s
+            // Начальная скорость
+            let v0 = velyPercent
+            v0 = Math.sign(v0) * Math.max(Math.abs(v0), 300)
+            // Начальное ускорение
+            const a0 = -v0 / 2
+            // Время, когда скорость станет в 2 раза меньше
+            const t1 = -v0 / a0 / 2
+            
+            const finished = t >= t1
+            if (finished) t = t1
+            const s = a0 * t * t / 2 + v0 * t + s0
+            setCurrProgressY(s)
+            return [s, finished]
+          },
+        })
+      }
     }
   }
   
@@ -192,6 +195,7 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const [getNeedReset, setNeedReset] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
+  const [getIsDragging, setIsDragging] = useRefGetSet(false)
   
   const onAnyDrag = (cpy: number) => {
     if (isDragging) {
@@ -208,14 +212,13 @@ const Preview = React.memo((props: PreviewProps) => {
   const onDragging = (vertical: boolean, drag: boolean) => {
     if (isPhotosDraggable && vertical) {
       lockTouchAction()
-      if (canUseGestures && drag) {
-        if (getCanStartDrag()) {
-          startDragging()
-        }
-        else {
-          unlockTouchAction()
-        }
+      if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
+        startDragging()
+        setIsDragging(true)
         setCanStartDrag(false)
+      }
+      if (!getIsDragging() && !getCanStartDrag()) {
+        unlockTouchAction()
       }
     }
   }
@@ -227,6 +230,7 @@ const Preview = React.memo((props: PreviewProps) => {
     setCanStartDrag(true)
     unlockTouchAction()
     endDragging()
+    setIsDragging(false)
   }
   const [getOnDragEnd] = useAsRefGet(onDragEnd)
   

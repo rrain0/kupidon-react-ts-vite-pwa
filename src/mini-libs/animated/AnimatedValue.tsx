@@ -47,6 +47,7 @@ export class AnimatedValue<V> implements AnimatedProperty<V> {
     this.reset()
   }
   
+  // TODO await start() - wait for finished or cancelled
   start(props: AnimationProps<V>) {
     if (!this.finished && !this.canceled) this.cancel()
     this.startValue = props.startValue

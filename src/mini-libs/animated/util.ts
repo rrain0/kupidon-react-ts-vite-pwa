@@ -1,6 +1,7 @@
 import { AnimationFunction } from 'src/mini-libs/animated/animationFunciton.ts'
 
 
+// currentTime in ms
 export const getTime = () => (document.timeline.currentTime as number | null) ?? 0
 
 
