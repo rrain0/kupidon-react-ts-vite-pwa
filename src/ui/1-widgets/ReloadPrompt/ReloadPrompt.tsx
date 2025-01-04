@@ -53,46 +53,47 @@ const ReloadPrompt = React.memo(() => {
   }
   
   return (
-    <ModalPortal>
-      <Modal css={ModalStyle.modalFrameBottom}>
-        <div className="ReloadPrompt-container">
-          {(offlineReady || needRefresh) && (
-            <div className="ReloadPrompt-toast">
-              
-              <div className="ReloadPrompt-message">
-                {offlineReady
-                  ? <span>App ready to work offline</span>
-                  : <span>New content available, click on reload button to update.</span>
-                }
-              </div>
-              
-              {/* <strong>Reload</strong> will refresh the app. You may lose the
-               progress, if any. */}
-              {needRefresh && (
+    <>
+      <div className="ReloadPrompt-date">{buildDate}</div>
+      {(offlineReady || needRefresh) && (
+        <ModalPortal>
+          <Modal css={ModalStyle.modalFrameBottom}>
+            <div className="ReloadPrompt-container">
+              <div className="ReloadPrompt-toast">
+                
+                <div className="ReloadPrompt-message">
+                  {offlineReady
+                    ? <span>App ready to work offline</span>
+                    : <span>New content available, click on reload button to update.</span>
+                  }
+                </div>
+                
+                {/* <strong>Reload</strong> will refresh the app. You may lose the
+                 progress, if any. */}
+                {needRefresh && (
+                  <button
+                    className="ReloadPrompt-toast-button"
+                    // Reloads the current window to allow the service worker take the control.
+                    onClick={() => updateServiceWorker(true)}
+                  >
+                    Reload
+                  </button>
+                )}
+                
+                {/* <strong>Cancel</strong> will install the update next time you visit
+                 the app. */}
                 <button
                   className="ReloadPrompt-toast-button"
-                  // Reloads the current window to allow the service worker take the control.
-                  onClick={() => updateServiceWorker(true)}
+                  onClick={() => close()}
                 >
-                  Reload
+                  Close
                 </button>
-              )}
-              
-              {/* <strong>Cancel</strong> will install the update next time you visit
-               the app. */}
-              <button
-                className="ReloadPrompt-toast-button"
-                onClick={() => close()}
-              >
-                Close
-              </button>
-            
+              </div>
             </div>
-          )}
-          <div className="ReloadPrompt-date">{buildDate}</div>
-        </div>
-      </Modal>
-    </ModalPortal>
+          </Modal>
+        </ModalPortal>
+      )}
+    </>
   )
 })
 

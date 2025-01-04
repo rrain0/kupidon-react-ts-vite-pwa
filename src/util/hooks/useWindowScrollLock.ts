@@ -47,22 +47,26 @@ catch (e) { /* empty */ }
 
 // call this to disable window scroll
 function disableScroll() {
-  window.addEventListener('DOMMouseScroll', eventPreventDefault, false) // older FF
+  // older FF
+  window.addEventListener('DOMMouseScroll', eventPreventDefault, false)
+  // modern desktop
   window.addEventListener(
     'mousewheel',
     eventPreventDefault,
     supportsPassive && { passive: false }
-  ) // modern desktop
+  )
+  // modern desktop
   window.addEventListener(
     'wheel',
     eventPreventDefault,
     supportsPassive && { passive: false }
-  ) // modern desktop
+  )
+  // mobile
   /* window.addEventListener(
     'touchmove',
     eventPreventDefault,
     supportsPassive && { passive: false }
-  ) // mobile */
+  ) */
   window.addEventListener('keydown', preventDefaultForScrollKeys, false)
   
   document.body.classList.add(cmcss.noScroll)
