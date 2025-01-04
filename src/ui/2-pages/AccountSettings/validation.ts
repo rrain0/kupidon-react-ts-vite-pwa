@@ -89,7 +89,7 @@ export namespace AccountSettingsPageValidation {
     [['pwd','initialValues'], (values)=>{
       const [v,ivs] = values as [FormValues['pwd'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.pwd) return new PartialFailureData({
+      if (v === ivs.pwd) return new PartialFailureData({
         code: 'pwd-not-changed' satisfies FailureCode,
         msg: 'Password not changed',
         type: 'initial',
@@ -99,7 +99,7 @@ export namespace AccountSettingsPageValidation {
     [['pwd'], (values)=>{
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.pwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Пароль не введён',
         type: 'default',
@@ -127,7 +127,7 @@ export namespace AccountSettingsPageValidation {
     [['repeatPwd','initialValues'], (values)=>{
       const [v,ivs] = values as [FormValues['repeatPwd'],FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.repeatPwd) return new PartialFailureData({
+      if (v === ivs.repeatPwd) return new PartialFailureData({
         code: 'repeat-pwd-not-changed' satisfies FailureCode,
         msg: 'Repeated password not changed',
         type: 'initial',
@@ -137,7 +137,7 @@ export namespace AccountSettingsPageValidation {
     [['repeatPwd'], (values)=>{
       const [v] = values as [UserValues['repeatPwd']]
       const d = defaultValues.repeatPwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'repeated-pwd-required' satisfies FailureCode,
         msg: 'Повторите пароль',
         type: 'default',
@@ -157,7 +157,7 @@ export namespace AccountSettingsPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connection-error') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',

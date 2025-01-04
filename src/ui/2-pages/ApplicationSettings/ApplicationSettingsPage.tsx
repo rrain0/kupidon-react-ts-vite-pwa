@@ -134,7 +134,7 @@ const ApplicationSettingsPage = React.memo(() => {
                     <RadioInput
                       css={RadioInputStyle.radio}
                       childrenPosition="start"
-                      checked={opt.value===themeSettings.dark}
+                      checked={opt.value === themeSettings.dark}
                       value={opt.value}
                       key={opt.value}
                       onChange={ev => {

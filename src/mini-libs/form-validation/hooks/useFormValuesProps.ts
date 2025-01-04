@@ -45,11 +45,11 @@ export const useFormValuesProps =
       )
       failures.forEach(f=>{
         f.errorFields.forEach(field=>{
-          if (f.type==='initial'){
+          if (f.type === 'initial'){
             valuesProps[field].isInitial = true
             valuesProps[field].isInitialOrDefault = true
           }
-          else if (f.type==='default'){
+          else if (f.type === 'default'){
             valuesProps[field].isDefault = true
             valuesProps[field].isInitialOrDefault = true
           }

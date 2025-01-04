@@ -183,7 +183,7 @@ export namespace ButtonBarComponents {
         }
       `}
         onAnimationIteration={ev => {
-          if (ev.animationName===rotateAnim.name && !props.isLoading) finishAnimate()
+          if (ev.animationName === rotateAnim.name && !props.isLoading) finishAnimate()
         }}
       />
     </Button>

@@ -140,7 +140,7 @@ React.memo(
   const fieldIsInitial = useCallback(
     (field: keyof FormValues)=>{
       return failures
-        .some(f=>f.type==='initial' && f.errorFields.includes(field))
+        .some(f=>f.type === 'initial' && f.errorFields.includes(field))
     },
     [failures]
   )
@@ -182,9 +182,9 @@ React.memo(
         }))
         const used = response.usedValues
         if ('pwd' in used){
-          if (formValues.pwd===used.pwd)
+          if (formValues.pwd === used.pwd)
             resetField('pwd')
-          if (formValues.repeatPwd===used.pwd)
+          if (formValues.repeatPwd === used.pwd)
             resetField('repeatPwd')
         }
       }

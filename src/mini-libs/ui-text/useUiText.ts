@@ -14,10 +14,10 @@ const pickUiValue = <V extends UiValue<any>>
   // Some settings have implementation only in one language, e.g., language name.
   return ObjectEntries(uiValue)
     .toSorted(([a], [b]) => {
-      let aIdx = langs.findIndex(it => it===a)
-      let bIdx = langs.findIndex(it => it===b)
-      if (aIdx===-1) aIdx = langs.length
-      if (bIdx===-1) bIdx = langs.length
+      let aIdx = langs.findIndex(it => it === a)
+      let bIdx = langs.findIndex(it => it === b)
+      if (aIdx === -1) aIdx = langs.length
+      if (bIdx === -1) bIdx = langs.length
       return aIdx - bIdx
     })
     // eslint-disable-next-line no-unexpected-multiline

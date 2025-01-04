@@ -50,7 +50,7 @@ const PartnerHeightOption = React.memo(
     useEffect(() => {
       let variant = 1 as 1 | 2
       const id = setInterval(()=>{
-        if (variant===1) {
+        if (variant === 1) {
           setHeightMinMax([50, 400])
           variant = 2
         }
@@ -83,10 +83,10 @@ const PartnerHeightOption = React.memo(
     
     const textValue = (heightRange: NumRangeNullable) => {
       const [from, to] = heightRange
-      if (from===null && to===null) return text.any
-      if (from===null) return `${text.to} ${to} ${text.cm}`
-      if (to===null) return `${from}+ ${text.cm}`
-      if (from===to) return `${from} ${text.cm}`
+      if (from === null && to === null) return text.any
+      if (from === null) return `${text.to} ${to} ${text.cm}`
+      if (to === null) return `${from}+ ${text.cm}`
+      if (from === to) return `${from} ${text.cm}`
       return `${from} - ${to} ${text.cm}`
     }
     

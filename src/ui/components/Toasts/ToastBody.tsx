@@ -36,7 +36,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
   >
     
     
-    { type==='loading' && <SpinnerCircleQuarterIc
+    { type === 'loading' && <SpinnerCircleQuarterIc
       css={t=>css`
         width: 20px;
         height: 20px;
@@ -45,7 +45,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       `}
     />}
     
-    { type==='info' && <InfoToastifyIc
+    { type === 'info' && <InfoToastifyIc
       css={t=>css`
         width: 20px;
         height: 20px;
@@ -53,7 +53,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       `}
     />}
     
-    { type==='ok' && <CheckmarkCircleToastifyIc
+    { type === 'ok' && <CheckmarkCircleToastifyIc
       css={t=>css`
         width: 20px;
         height: 20px;
@@ -61,7 +61,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       `}
     />}
     
-    { type==='warn' && <WarnTriangleToastifyIc
+    { type === 'warn' && <WarnTriangleToastifyIc
       css={t=>css`
         width: 20px;
         height: 20px;
@@ -69,7 +69,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       `}
     />}
     
-    { type==='danger' && <DangerRoundToastifyIc
+    { type === 'danger' && <DangerRoundToastifyIc
       css={t=>css`
         width: 20px;
         height: 20px;

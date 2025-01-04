@@ -72,7 +72,7 @@ const Textarea = React.memo(
         >
           
           { startViews }
-          { childrenPosition==='start' && children }
+          { childrenPosition === 'start' && children }
           
           {/* Textarea */}
           <textarea
@@ -91,7 +91,7 @@ const Textarea = React.memo(
             }}
           />
           
-          { childrenPosition==='end' && children }
+          { childrenPosition === 'end' && children }
           { endViews }
           
           {/* Border */}

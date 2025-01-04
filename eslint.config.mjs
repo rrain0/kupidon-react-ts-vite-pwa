@@ -192,7 +192,7 @@ export default [
         // https://eslint.org/docs/latest/extend/selectors
         // https://astexplorer.net/ config: lang: JavaScript, parser: @typescript-eslint/parser
         // Array of selectors with AST tokens
-        ignoredNodes: ['TsModuleBlock > BlockStatement'],
+        ignoredNodes: ['TsModuleBlock > BlockStatement', 'TSMappedType > TSConditionalType'],
         ignoreComments: false,
         tabLength: 2,
       }],

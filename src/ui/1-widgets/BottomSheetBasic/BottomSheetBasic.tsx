@@ -44,7 +44,7 @@ const BottomSheetBasic =
               <div
                 css={t => css`
                   ${BottomSheetBasicParts.headerStyle(t)};
-                  ${sheetState==='dragging' && css`cursor: grabbing;`}
+                  ${sheetState === 'dragging' && css`cursor: grabbing;`}
                 `}
                 ref={bottomSheetHeaderRef as any}
                 {...sheetDrag()}

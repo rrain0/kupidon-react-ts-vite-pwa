@@ -82,7 +82,7 @@ React.forwardRef<HTMLInputElement, RadioInputProps>
     />
     
     { startViews }
-    { childrenPosition==='start' && children }
+    { childrenPosition === 'start' && children }
     
     <div /* ActiveWrap */
       css={activeIcWrapStyle}
@@ -97,7 +97,7 @@ React.forwardRef<HTMLInputElement, RadioInputProps>
       <RadioInactiveIc/>
     </div>
     
-    { childrenPosition==='end' && children }
+    { childrenPosition === 'end' && children }
     { endViews }
     
     <div /* Border */

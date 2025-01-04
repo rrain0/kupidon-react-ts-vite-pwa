@@ -7,8 +7,10 @@
     pointer-events: auto;
 }
 .ReloadPrompt-date {
-    visibility: hidden;
-    color: black;
+    position: absolute;
+    width: 0;
+    height: 0;
+    display: none;
 }
 .ReloadPrompt-toast {
     position: absolute;

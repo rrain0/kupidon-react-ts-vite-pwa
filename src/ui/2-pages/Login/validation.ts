@@ -76,7 +76,7 @@ export namespace LoginPageValidation {
     [['login'], (values)=>{
       const [v] = values as [UserValues['login']]
       const d = defaultValues.login
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'login-required' satisfies FailureCode,
         msg: 'Email не введён',
         type: 'default',
@@ -96,7 +96,7 @@ export namespace LoginPageValidation {
     [['pwd'], (values)=>{
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.login
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Пароль не введён',
         type: 'default',
@@ -107,7 +107,7 @@ export namespace LoginPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='NO_USER') return new PartialFailureData({
+      if (v?.error.code === 'NO_USER') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Не найдено пользователя с таким логином-паролем',
         errorFields: ['fromServer','login','pwd'],
@@ -119,7 +119,7 @@ export namespace LoginPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connection-error') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',

@@ -167,7 +167,7 @@ export class DateTime {
     const otherDate = [other.month, other.day, other.hour, other.minute, other.second]
     for (let i = 0; i < thisDate.length; i++) {
       if (otherDate[i] > thisDate[i]) break
-      else if (otherDate[i]===thisDate[i]) continue
+      else if (otherDate[i] === thisDate[i]) continue
       else if (otherDate[i] < thisDate[i]) {
         age--
         break

@@ -80,7 +80,7 @@ const springStyle =
         x: dx,
         y: dy,
         opacity: 0.4,
-        //scale: index===0 ? 0.5 : 1,
+        //scale: index === 0 ? 0.5 : 1,
         zIndex: 1,
         immediate: p => ['zIndex'].includes(p),
         config: p => ['x', 'y'].includes(p) ? config.stiff : config.default,
@@ -569,11 +569,11 @@ const onFilesSelectedBuilder =
     const imgFiles = files.filter(it => it.type.startsWith('image/'))
     if (imgFiles.length) {
       const emptyCnt = images
-        .filter((im, i) => i===lastIdx || (i>=lastIdx && im.isEmpty)).length
+        .filter((im, i) => i === lastIdx || (i>=lastIdx && im.isEmpty)).length
       let filesI = 0
       const newImages = images.map((photo, i) => {
         if (filesI < imgFiles.length
-          && (i===lastIdx
+          && (i === lastIdx
             || (i>=lastIdx
               && (imgFiles.length<=emptyCnt ? photo.isEmpty : true)
             )
@@ -652,7 +652,7 @@ const onFilesSelectedBuilder =
               } satisfies ProfilePhoto
               setImages(s => ifFoundByThenReplaceTo(s,
                 newPhoto,
-                elem => elem.compression?.id===compressionStart.compression.id
+                elem => elem.compression?.id === compressionStart.compression.id
               ))
             }
             catch (ex) {

@@ -20,8 +20,6 @@ import noScrollbars = EmotionCommon.noScrollbars
 
 
 const App = React.memo(() => {
-  
-  
   useAppInstallationSetup()
   useLangSetup()
   const themeIsReady = useThemeSetup()

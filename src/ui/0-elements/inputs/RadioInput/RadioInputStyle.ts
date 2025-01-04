@@ -6,13 +6,13 @@ import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
+import row = EmotionCommon.row
+import center = EmotionCommon.center
 
 
 
 export namespace RadioInputStyle {
   
-  import row = EmotionCommon.row
-  import center = EmotionCommon.center
   export namespace Attr {
     export const errorName = 'data-error'
     

@@ -32,7 +32,7 @@ export const localStorageEffect: LocalStorageEffect<any> =
   onSet((newValue, oldValue, isReset) => {
     const doReset = removeWhen?.some(filterNot=>{
       // we will clear local storage if there is 'reset' event && isReset
-      if (filterNot==='reset') return isReset
+      if (filterNot === 'reset') return isReset
       // we will clear local storage if current state matches state to be cleared
       return filterNot(newValue)
     })

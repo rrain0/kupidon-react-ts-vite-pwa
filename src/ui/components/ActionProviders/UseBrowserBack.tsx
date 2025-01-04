@@ -17,12 +17,12 @@ React.memo(
 (props: UseBrowserBackProps)=>{
   const { onBack, children } = props
   const blocker = useBlocker(
-    transition => transition.historyAction===Action.Pop
+    transition => transition.historyAction === Action.Pop
   )
   
   useLayoutEffect(
     ()=>{
-      if (blocker.state==='blocked'){
+      if (blocker.state === 'blocked'){
         blocker.reset()
         onBack?.()
       }

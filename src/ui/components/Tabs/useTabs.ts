@@ -10,7 +10,6 @@ import React, {
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useNoSelect } from 'src/util/view/useNoSelect.ts'
 import PartialUndef = TypeU.PartialUndef
@@ -116,7 +115,7 @@ export const useTabs = (
     if (tabsContainer) {
       setTabsCnt(tabsContainer.childElementCount)
       const callback: MutationCallback = mutationList => {
-        const hasChildrenMutation = mutationList.some(mutation => mutation.type==='childList')
+        const hasChildrenMutation = mutationList.some(mutation => mutation.type === 'childList')
         if (hasChildrenMutation) setTabsCnt(tabsContainer.childElementCount)
       }
       const observer = new MutationObserver(callback)
@@ -173,7 +172,7 @@ export const useTabs = (
         if (notExists(lastSpeed)) return animationDuration
         const startScrollLeft = tabContainerSpring.scrollLeft.get()
         const pathPercent = pathProgressPercent(startScrollLeft, endScrollLeft)
-        return pathPercent/lastSpeed*1.2*1000
+        return pathPercent / lastSpeed * 1.2 * 1000
       }()
       ;(async() => {
         const animation = await tabContainerSpring.scrollLeft.start(
@@ -196,7 +195,7 @@ export const useTabs = (
   
   
   
-  const reactOnState = useEffectEvent(() => {
+  const reactOnState = () => {
     if (!isReady) return
     
     const currState = prevState
@@ -213,7 +212,7 @@ export const useTabs = (
     
     
     const toTab = function() {
-      if (newState==='adjusting')
+      if (newState === 'adjusting')
         return getTabIdxToAdjust(currScrollLeft, snapPointsPx)
       return RangeU.clamp(newTabIdx, [0, lastTabIdx])
     }()
@@ -223,11 +222,11 @@ export const useTabs = (
     
     
     
-    const toDragging = newState==='dragging'
+    const toDragging = newState === 'dragging'
     const toAnimated =
       (['snapping', 'adjusting'] as TabsState[]).includes(newState)
     const lastSpeed = function() {
-      if (currState!=='dragging') return null
+      if (currState !== 'dragging') return null
       return dragStartRef.current.lastSpeed
     }()
     
@@ -273,11 +272,8 @@ export const useTabs = (
       })
       return
     }
-  })
-  useEffect(
-    () => reactOnState(),
-    [newState, newTabIdx, isReady, snapPointsPx]
-  )
+  }
+  useEffect(reactOnState, [newState, newTabIdx, isReady, snapPointsPx])
   
   
   

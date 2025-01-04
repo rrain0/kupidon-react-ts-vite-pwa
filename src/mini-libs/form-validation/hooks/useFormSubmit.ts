@@ -82,7 +82,7 @@ export const useFormSubmit =
       resetResponse()
       
       const serverFailures = failures
-        .filter(f=>f.type==='server' && (f.highlight || f.notify))
+        .filter(f=>f.type === 'server' && (f.highlight || f.notify))
       if (serverFailures.length) setFailures(s=>updateFailures(
         s,
         { failures: serverFailures },

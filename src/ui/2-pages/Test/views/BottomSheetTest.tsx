@@ -40,7 +40,7 @@ React.memo(
   
   /* const setState = useCallback(
     (s: ValueOrMapper<SheetState>)=>{
-      if(s==='closing'){
+      if(s === 'closing'){
         console.log('debug closing')
         debugger
       }
@@ -57,7 +57,7 @@ React.memo(
   const openSnapIdx = useMemo(
     ()=>{
       let openIdx = snapPoints.findIndex(it => it === 'fit-content')
-      if (openIdx===-1) openIdx = snapPoints.length-1
+      if (openIdx === -1) openIdx = snapPoints.length-1
       return openIdx
     },
     [snapPoints]
@@ -214,7 +214,7 @@ React.memo(
               height: 4px;
               border-radius: 2px;
               background: ${t.bottomSheet.handle[0]};
-              ${state==='dragging' && css`background: ${t.page.ct2};`}
+              ${state === 'dragging' && css`background: ${t.page.ct2};`}
             `}
           />
           <div>Header</div>

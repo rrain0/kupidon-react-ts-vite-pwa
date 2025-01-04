@@ -124,7 +124,7 @@ React.memo(
       (failedFields: (keyof FormValues)[]) => {
         return failedFields
           .filter(ff=>Object.hasOwn(userDefaultValues,ff))
-          .length===0
+          .length === 0
       },
       []
     ),
@@ -262,7 +262,7 @@ React.memo(
                   return <RadioInput
                     css={RadioInputStyle.radio}
                     key={opt.value}
-                    checked={props.value===opt.value}
+                    checked={props.value === opt.value}
                     value={opt.value}
                     onChange={props.inputProps.onChange}
                   >

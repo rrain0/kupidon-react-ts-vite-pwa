@@ -2,6 +2,8 @@ import { useCallback, useLayoutEffect, useRef } from 'react'
 
 
 
+// TODO remove
+// Этот хук даёт возможность в асинхронных операциях получить текущий стэйт, не более того
 export const useEffectEvent =
 <F extends (...args: any[])=>any>
 (callback: F): F => {
@@ -15,8 +17,3 @@ export const useEffectEvent =
   ) as F
   return runCallback
 }
-  
-  
-  
-  
-  

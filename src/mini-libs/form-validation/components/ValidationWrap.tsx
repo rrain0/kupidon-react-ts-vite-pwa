@@ -81,14 +81,14 @@ const ValidationWrap =
     const fs = failures
       .filter(f => f.highlight && f.errorFields.includes(fieldName))
       .filter(f => {
-        const usedIdx = f.usedFields.findIndex(f => f===fieldName)
-        if (usedIdx>=0) return f.usedValues[usedIdx]===value
+        const usedIdx = f.usedFields.findIndex(f => f === fieldName)
+        if (usedIdx>=0) return f.usedValues[usedIdx] === value
         const fromServerIdx = f.usedFields.findIndex(f => f === 'fromServer')
         if (fromServerIdx>=0) {
           const fromServerUsedValues = f.usedValues[fromServerIdx].values as Vs
           return f.errorFields
             .filter(ef => ef!=='fromServer' && f.errorFields.includes(ef))
-            .every(ef => values[ef]===fromServerUsedValues[ef])
+            .every(ef => values[ef] === fromServerUsedValues[ef])
         }
         return false
       })
@@ -150,7 +150,7 @@ const ValidationWrap =
     ))
   })
   const onBlur = useCallback(() => onBlurEffectEvent(), [])
-  const getChecked = useCallback((v: Vs[F]) => v===value, [value])
+  const getChecked = useCallback((v: Vs[F]) => v === value, [value])
   
   
   

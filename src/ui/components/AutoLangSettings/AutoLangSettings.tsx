@@ -18,12 +18,12 @@ React.memo(
   
   useEffect(
     ()=>{
-      if (langSettings.setting==='manual' && !langSettings.manualSetting){
+      if (langSettings.setting === 'manual' && !langSettings.manualSetting){
         setCloseable(false)
       }
       else setCloseable(true)
       
-      if (!open && langSettings.setting==='manual' && !langSettings.manualSetting){
+      if (!open && langSettings.setting === 'manual' && !langSettings.manualSetting){
         setOpen(true)
       }
     },

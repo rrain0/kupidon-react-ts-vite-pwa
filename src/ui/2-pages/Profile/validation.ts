@@ -133,7 +133,7 @@ export namespace ProfilePageValidation {
   
   export const photosComparator = (a: ProfilePhoto, b: ProfilePhoto) =>
     (a.isEmpty && b.isEmpty)
-    || a.id===b.id
+    || a.id === b.id
   
   const delay = 4000
   
@@ -146,7 +146,7 @@ export namespace ProfilePageValidation {
     [['name', 'initialValues'], (values) => {
       const [v, ivs] = values as [FormValues['name'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.name) return new PartialFailureData({
+      if (v === ivs.name) return new PartialFailureData({
         code: 'name-not-changed' satisfies FailureCode,
         msg: 'Имя не изменено',
         type: 'initial',
@@ -156,7 +156,7 @@ export namespace ProfilePageValidation {
     [['name'], (values) => {
       const [v] = values as [FormValues['name']]
       const d = defaultValues.name
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'name-required' satisfies FailureCode,
         msg: 'Имя не введено',
         type: 'default',
@@ -175,7 +175,7 @@ export namespace ProfilePageValidation {
     
     [['birthDate', 'initialValues'], (values) => {
       const [v, ivs] = values as [FormValues['birthDate'], FormValues['initialValues']]
-      if (v===ivs.birthDate
+      if (v === ivs.birthDate
         || DateTime.eqFrom_yyyy_MM_dd(v, ivs.birthDate)
       )
         return new PartialFailureData({
@@ -188,7 +188,7 @@ export namespace ProfilePageValidation {
     [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const d = defaultValues.birthDate
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'birth-date-required' satisfies FailureCode,
         msg: 'Birth date is not entered',
         type: 'default',
@@ -229,7 +229,7 @@ export namespace ProfilePageValidation {
     
     [['gender', 'initialValues'], (values) => {
       const [v, ivs] = values as [FormValues['gender'], FormValues['initialValues']]
-      if (v===ivs.gender) return new PartialFailureData({
+      if (v === ivs.gender) return new PartialFailureData({
         code: 'gender-not-changed' satisfies FailureCode,
         msg: 'Gender is not changed',
         type: 'initial',
@@ -239,7 +239,7 @@ export namespace ProfilePageValidation {
     [['gender'], (values) => {
       const [v] = values as [UserValues['gender']]
       const d = defaultValues.gender
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'gender-required' satisfies FailureCode,
         msg: 'Пол не выбран',
         type: 'default',
@@ -251,7 +251,7 @@ export namespace ProfilePageValidation {
     [['aboutMe', 'initialValues'], (values) => {
       const [v, ivs] = values as [FormValues['aboutMe'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
-      if (v===ivs.aboutMe) return new PartialFailureData({
+      if (v === ivs.aboutMe) return new PartialFailureData({
         code: 'about-me-not-changed' satisfies FailureCode,
         msg: 'Field "About me" is not changed',
         type: 'initial',
@@ -284,7 +284,7 @@ export namespace ProfilePageValidation {
     
     [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='NO_USER') return new PartialFailureData({
+      if (v?.error.code === 'NO_USER') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Не найдено пользователя с таким id',
         type: 'server',
@@ -295,7 +295,7 @@ export namespace ProfilePageValidation {
     
     [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connection-error') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',

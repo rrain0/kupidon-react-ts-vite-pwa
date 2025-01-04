@@ -93,7 +93,7 @@ export namespace PwdChangePageValidation {
     [['currentPwd'], (values)=>{
       const [v] = values as [UserValues['currentPwd']]
       const d = defaultValues.currentPwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'current-pwd-required' satisfies FailureCode,
         msg: 'Current password is not entered',
         type: 'default',
@@ -113,7 +113,7 @@ export namespace PwdChangePageValidation {
     [['pwd'], (values)=>{
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.pwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Password is not entered',
         type: 'default',
@@ -142,7 +142,7 @@ export namespace PwdChangePageValidation {
     [['repeatPwd'], (values)=>{
       const [v] = values as [UserValues['repeatPwd']]
       const d = defaultValues.repeatPwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'repeated-pwd-required' satisfies FailureCode,
         msg: 'Repeat password',
         type: 'default',
@@ -163,7 +163,7 @@ export namespace PwdChangePageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==="INVALID_PWD") return new PartialFailureData({
+      if (v?.error.code === "INVALID_PWD") return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Wrong password',
         errorFields: ['fromServer','currentPwd'],
@@ -176,7 +176,7 @@ export namespace PwdChangePageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connection-error') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Server connection error, it may be an internet error',
         type: 'server',

@@ -362,7 +362,7 @@ export const useBottomSheet = (
     const toClosed = function() {
       if (!canClose) return false
       if (!canOpen) return true
-      if (newState === 'adjusting') return toHeight===0
+      if (newState === 'adjusting') return toHeight === 0
       return (['closed', 'closing'] as SheetState[]).includes(newState)
     }()
     
@@ -469,8 +469,6 @@ export const useBottomSheet = (
   const setLogData = useSetRecoilState(LogLayerRecoil)
   
   
-  // You MUST use css 'touch-action: none;' before start dragging
-  // to prevent browser gesture handling
   // noinspection JSVoidFunctionReturnValueUsed
   const sheetDrag = useDrag(
     gesture => {
@@ -486,6 +484,8 @@ export const useBottomSheet = (
         'velocityY:', spdy,
         'directionY:', diry,
       ) */
+      
+      //setLogData(prev => [...prev, 'DRAG'])
       
       if (first) {
         setNewState('dragging')
@@ -580,8 +580,8 @@ function calculateSnapPointsPx(
     snapPointsCssValues.forEach((cssValue, cssValueI) => {
       
       if (
-        (cssValue.type==='keyword' && !units.includes(cssValue.value))
-        || (cssValue.type==='numeric' && !units.includes(cssValue.unit))
+        (cssValue.type === 'keyword' && !units.includes(cssValue.value))
+        || (cssValue.type === 'numeric' && !units.includes(cssValue.unit))
       ) return
       
       let computed = function() {
@@ -685,10 +685,10 @@ function getOpenSnapIndexToAdjust
 (height: number, snapPoints: (number|string)[], snapPointsPx: number[]): number|null {
   if (!snapPointsPx.length) return null
   const snapStart = findLastBy(snapPointsPx, elem=>elem>0 && height>=elem).index
-  if (snapStart===-1) return null
+  if (snapStart === -1) return null
   
-  // if (snapPoints[snapStart]==='free') return null
-  // if (height===snapPointsPx[snapStart]) return null
+  // if (snapPoints[snapStart] === 'free') return null
+  // if (height === snapPointsPx[snapStart]) return null
   //
   // const snapPointsPxInf = [Number.NEGATIVE_INFINITY, ...snapPointsPx, Number.POSITIVE_INFINITY]
   // const threshold = Math.round(

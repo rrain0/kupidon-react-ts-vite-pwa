@@ -39,6 +39,8 @@
   // NOT Window or Viewport bg
   "background_color": "#282c34",
   
+  // body background is WINDOW background
+  
   
   /*
     Favicon - Иконка PWA на Android / PC + used in browser tab

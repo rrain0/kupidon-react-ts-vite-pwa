@@ -83,7 +83,7 @@ React.memo(
       (failedFields: (keyof FormValues)[]) => {
         return failedFields
           .filter(ff=>ff in userDefaultValues)
-          .length===0
+          .length === 0
       },
       []
     ),
@@ -104,11 +104,11 @@ React.memo(
       ){
         const used = response.usedValues
         if ('pwd' in used){
-          if (formValues.currentPwd===used.currentPwd)
+          if (formValues.currentPwd === used.currentPwd)
             setFormValues(s=>({ ...s, currentPwd: defaultValues.currentPwd }))
-          if (formValues.pwd===used.pwd)
+          if (formValues.pwd === used.pwd)
             setFormValues(s=>({ ...s, pwd: defaultValues.pwd }))
-          if (formValues.repeatPwd===used.pwd)
+          if (formValues.repeatPwd === used.pwd)
             setFormValues(s=>({ ...s, repeatPwd: defaultValues.repeatPwd }))
         }
       }

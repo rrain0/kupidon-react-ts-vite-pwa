@@ -110,7 +110,7 @@ export namespace ApiUtils {
   export function handleErrorResponse<E extends ResponseError>(ex: any)
     : ErrorResponse<E> | undefined
   {
-    if (ex instanceof AxiosError && ex.response?.status===400) {
+    if (ex instanceof AxiosError && ex.response?.status === 400) {
       return {
         isSuccess: false,
         error: ex.response.data as E,
@@ -121,7 +121,7 @@ export namespace ApiUtils {
   export function handleAuthenticationErrorResponse(ex: any)
     : AuthenticationErrorResponse | undefined
   {
-    if (ex instanceof AxiosError && ex.response?.status===401) {
+    if (ex instanceof AxiosError && ex.response?.status === 401) {
       return getAuthenticationError(ex)
     }
   }
@@ -129,7 +129,7 @@ export namespace ApiUtils {
   export function handleConnectionError(ex: any)
     : ConnectionErrorResponse | undefined
   {
-    if (ex instanceof AxiosError && ex.code===AxiosError.ERR_NETWORK) {
+    if (ex instanceof AxiosError && ex.code === AxiosError.ERR_NETWORK) {
       return getConnectionError()
     }
   }
@@ -137,7 +137,7 @@ export namespace ApiUtils {
   export function handleSuccessResponse<D = unknown>(response: AxiosResponse)
     : SuccessResponse<D> | undefined
   {
-    if (response.status===200) return {
+    if (response.status === 200) return {
       isSuccess: true,
       data: response.data as D,
     } as SuccessResponse<D>

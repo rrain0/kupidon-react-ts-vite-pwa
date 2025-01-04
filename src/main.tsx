@@ -11,6 +11,27 @@ import { RecoilRoot } from 'recoil'
 import RecoilNexus from 'recoil-nexus'
 
 
+// TODO костыль
+// На ios шторка настроек почему-то не может драгаться сразу, поэтому это здесь
+window.addEventListener('pointerdown', () => {})
+/*
+window.addEventListener(
+  'pointerdown',
+  function(ev) {
+    (ev.target as HTMLElement).style.background = '#ff000055'
+  },
+  { capture: true },
+)
+window.addEventListener(
+  'pointerup',
+  function(ev) {
+    (ev.target as HTMLElement).style.background = ''
+  },
+  { capture: true },
+)
+*/
+
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RecoilRoot>

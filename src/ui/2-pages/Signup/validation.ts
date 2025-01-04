@@ -121,7 +121,7 @@ export namespace SignupPageValidation {
     [['email'], (values)=>{
       const [v] = values as [UserValues['email']]
       const d = defaultValues.email
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'email-required' satisfies FailureCode,
         msg: 'Email не введён',
         type: 'default',
@@ -149,7 +149,7 @@ export namespace SignupPageValidation {
     [['pwd'], (values)=>{
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.pwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Пароль не введён',
         type: 'default',
@@ -177,7 +177,7 @@ export namespace SignupPageValidation {
     [['repeatPwd'], (values)=>{
       const [v] = values as [UserValues['repeatPwd']]
       const d = defaultValues.repeatPwd
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'repeated-pwd-required' satisfies FailureCode,
         msg: 'Повторите пароль',
         type: 'default',
@@ -198,7 +198,7 @@ export namespace SignupPageValidation {
     [['name'], (values)=>{
       const [v] = values as [UserValues['name']]
       const d = defaultValues.name
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'name-required' satisfies FailureCode,
         msg: 'Имя не введено',
         type: 'default',
@@ -218,7 +218,7 @@ export namespace SignupPageValidation {
     [['birthDate'], (values)=>{
       const [v] = values as [FormValues['birthDate']]
       const d = defaultValues.birthDate
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'birth-date-required' satisfies FailureCode,
         msg: 'Birth date is not entered',
         type: 'default',
@@ -260,7 +260,7 @@ export namespace SignupPageValidation {
     [['gender'], (values)=>{
       const [v] = values as [UserValues['gender']]
       const d = defaultValues.gender
-      if (v===d) return new PartialFailureData({
+      if (v === d) return new PartialFailureData({
         code: 'gender-required' satisfies FailureCode,
         msg: 'Пол не выбран',
         type: 'default',
@@ -271,7 +271,7 @@ export namespace SignupPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='DUPLICATE_EMAIL') return new PartialFailureData({
+      if (v?.error.code === 'DUPLICATE_EMAIL') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Пользователь с таким email уже зарегестрирован',
         errorFields: ['fromServer','email'],
@@ -283,7 +283,7 @@ export namespace SignupPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code==='connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connection-error') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',

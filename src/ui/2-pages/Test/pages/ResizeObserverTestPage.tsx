@@ -84,7 +84,7 @@ const ResizeObserverTestPage = ()=>{
           ${(()=>{
             const bgLight = ['#ffb6c1','#f5f5f5','#d8701a']
             const bgDark =  ['#992c46','#282c34','#994500']
-            const bg = t.type==='dark' ? bgDark : bgLight
+            const bg = t.type === 'dark' ? bgDark : bgLight
             return css`
                 background: linear-gradient(
                         to bottom right,
@@ -125,7 +125,7 @@ const ResizeObserverTestPage = ()=>{
           ${(()=>{
             const bgLight = ['#ffb6c1','#f5f5f5','#d8701a']
             const bgDark =  ['#992c46','#282c34','#994500']
-            const bg = t.type==='dark' ? bgDark : bgLight
+            const bg = t.type === 'dark' ? bgDark : bgLight
             return css`
                 background: linear-gradient(
                         to bottom right,

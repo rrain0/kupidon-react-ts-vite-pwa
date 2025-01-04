@@ -57,7 +57,7 @@ export const useFormToasts =
     awaitDelay(userFailures, stale, setUserFailure)
     
     const serverFailures = failures
-      .filter(f=>f.type==='server' && f.notify)
+      .filter(f=>f.type === 'server' && f.notify)
     awaitDelay(serverFailures, stale, setServerFailure)
     
     return ()=>{ stale[0]=true }
@@ -92,7 +92,7 @@ export const useFormToasts =
         type: 'danger',
         msg: <ToastMsg
           uiOption={function(){
-            if (serverFailure.code==='unknown-error') {
+            if (serverFailure.code === 'unknown-error') {
               return ObjectMap<
                 typeof ErrorUiText.unknownErrorTemplate,
                 UiText<keyof typeof ErrorUiText.unknownErrorTemplate>

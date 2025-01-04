@@ -31,7 +31,7 @@ export const useLangSetup = () => {
   
   
   useLayoutEffect(() => {
-    if (langSettings.setting==='system') {
+    if (langSettings.setting === 'system') {
       const matched = lang.matchedSystemLangs
       // language is not initialized yet, skip for next useLayoutEffect call
       if (!matched) return

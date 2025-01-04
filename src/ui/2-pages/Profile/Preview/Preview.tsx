@@ -109,11 +109,11 @@ const Preview = React.memo((props: PreviewProps) => {
   
   // start progress y in (..0..100..) * visiblePhotosCnt
   const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
+  // start progress for photos in (..0..100..) * availablePhotos.length
+  const [getStartPhotoProgress, setStartPhotoProgress] = useRefGetSet(0)
   // curr progress y in (..0..100..) from start progress y
   const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
   const animatedCurrProgressY = useAnimatedValue(0)
-  // start progress for photos in (..0..100..) * availablePhotos.length
-  const [getStartPhotoP, setStartPhotoP] = useRefGetSet(0)
   
   
   
@@ -125,7 +125,6 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   const photosBoxRef = useRef<HTMLDivElement>(null)
-  
   const getTrackProps = () => {
     const pb = photosBoxRef.current
     if (pb) {
@@ -137,15 +136,6 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
-  const resetProgress = () => {
-    const photoP = getStartPhotoP() + getCurrProgressY()
-    const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
-    setStartPhotoP(RangeU.loop(photoP, [0, photoMaxP]))
-    const p = getStartProgressY() + getCurrProgressY()
-    const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
-    setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
-    setCurrProgressY(0)
-  }
   
   const updateViews = () => {
     animatedCurrProgressY.set(getCurrProgressY())
@@ -193,23 +183,21 @@ const Preview = React.memo((props: PreviewProps) => {
     getDragCurrProgressY,
   } = useDragProgress({ getTrackProps })
   
-  const [getNeedReset, setNeedReset] = useRefGetSet(true)
+  const mergeProgress = () => {
+    const p = getStartProgressY() + getCurrProgressY()
+    const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
+    setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
+    const photoP = getStartPhotoProgress() + getCurrProgressY()
+    const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
+    setStartPhotoProgress(RangeU.loop(photoP, [0, photoMaxP]))
+    setCurrProgressY(0)
+  }
+  
+  const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
   const [getIsDragging, setIsDragging] = useRefGetSet(false)
   
-  const onAnyDrag = (cpy: number) => {
-    if (isDragging) {
-      if (getNeedReset()) {
-        resetProgress()
-        setNeedReset(false)
-      }
-      setCurrProgressY(cpy)
-      updateViews()
-    }
-  }
-  const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
-  
-  const onDragging = (vertical: boolean, drag: boolean) => {
+  const onAnyDrag = (cpy: number, vertical: boolean, drag: boolean) => {
     if (isPhotosDraggable && vertical) {
       lockTouchAction()
       if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
@@ -221,12 +209,20 @@ const Preview = React.memo((props: PreviewProps) => {
         unlockTouchAction()
       }
     }
+    if (isDragging) {
+      if (getNeedMerge()) {
+        mergeProgress()
+        setNeedMerge(false)
+      }
+      setCurrProgressY(cpy)
+      updateViews()
+    }
   }
-  const [getOnDragging] = useAsRefGet(onDragging)
+  const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
   
   const onDragEnd = (vely: number) => {
     if (isDragging) finishUpdateViews(vely)
-    setNeedReset(true)
+    setNeedMerge(true)
     setCanStartDrag(true)
     unlockTouchAction()
     endDragging()
@@ -254,11 +250,11 @@ const Preview = React.memo((props: PreviewProps) => {
     updateDragProgress({ first, vpx, vpy, dx, dy })
     
     // onAnyDrag
-    getOnAnyDrag()(getDragCurrProgressY())
+    getOnAnyDrag()(getDragCurrProgressY(), vertical, drag)
     // onDragStart
     if (first) { }
     // onDragging
-    if (!first && !last) { getOnDragging()(vertical, drag) }
+    if (!first && !last) { }
     // onDragEnd
     if (last) { getOnDragEnd()(vely) }
   })
@@ -301,7 +297,7 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const animatedProgress = animatedCurrProgressY.map(cp => (i: number) => {
     const p = getStartProgressY() + cp
-    const photoP = getStartPhotoP() + cp
+    const photoP = getStartPhotoProgress() + cp
     // displayedIndex from top to bottom
     const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
     // progressCurrent

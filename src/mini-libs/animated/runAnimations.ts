@@ -1,5 +1,4 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import Callback = TypeU.Callback
 import Callback1 = TypeU.Callback1
 
 

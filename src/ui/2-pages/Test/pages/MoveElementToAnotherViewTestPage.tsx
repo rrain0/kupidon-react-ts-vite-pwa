@@ -40,7 +40,7 @@ const MoveElementToAnotherViewTestPage = ()=>{
       { container1.current && container2.current &&
         <>{createPortal(
           <Rectange/>,
-          position===0 ? container1.current! : container2.current!
+          position === 0 ? container1.current! : container2.current!
         )}</>
       }
     

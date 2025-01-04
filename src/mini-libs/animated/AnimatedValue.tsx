@@ -16,10 +16,16 @@ import noop = TypeU.noop
 
 
 
-export class AnimatedValue<V> implements AnimatedProperty<V> {
-  startValue!: V
+export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
+  constructor(props: AnimationProps<Value>) {
+    void this.start(props)
+  }
+  
+  getValue() { return this }
+  
+  startValue!: Value
   startTime: number = getTime()
-  animationFunction: AnimationFunction<V> = passAnimationFunction
+  animationFunction: AnimationFunction<Value> = passAnimationFunction
   
   finish: Callback = noop
   finished = false
@@ -29,27 +35,22 @@ export class AnimatedValue<V> implements AnimatedProperty<V> {
   canceled = false
   whenCanceled!: Promise<void>
   
-  constructor(props: AnimationProps<V>) {
-    this.start(props)
-  }
-  
-  get(time = getTime()): V {
+  get(time = getTime()): Value {
     const [v, finished] = this.animationFunction(this.startValue, time - this.startTime)
     if (!this.finished && finished) this.finish()
     return v
   }
   
-  set(value: V) {
-    if (!this.finished && !this.canceled) this.cancel()
+  set(value: Value) {
+    this.endCurrAnimation()
     this.startTime = getTime()
     this.startValue = value
     this.animationFunction = passAnimationFunction
     this.reset()
   }
   
-  // TODO await start() - wait for finished or cancelled
-  start(props: AnimationProps<V>) {
-    if (!this.finished && !this.canceled) this.cancel()
+  start(props: AnimationProps<Value>): Promise<void> {
+    this.endCurrAnimation()
     this.startValue = props.startValue
     if (exists(props.startTime)) {
       this.startTime = props.startTime
@@ -58,6 +59,15 @@ export class AnimatedValue<V> implements AnimatedProperty<V> {
       this.animationFunction = props.animationFunction
     }
     this.reset()
+    return Promise.any([this.whenFinished, this.whenCanceled])
+  }
+  
+  get isRunning() {
+    return !this.finished && !this.canceled
+  }
+  
+  endCurrAnimation() {
+    if (!this.finished && !this.canceled) this.cancel()
   }
   
   reset() {
@@ -101,8 +111,8 @@ export class AnimatedValue<V> implements AnimatedProperty<V> {
   }
    */
   
-  map<R>(mapper: Mapper<V, R>) {
-    return new AnimatedComputed<V, R>(this, mapper)
+  map<Mapped>(mapper: Mapper<Value, Mapped>) {
+    return new AnimatedComputed<Value, Value, Mapped>(this, mapper)
   }
   
 }

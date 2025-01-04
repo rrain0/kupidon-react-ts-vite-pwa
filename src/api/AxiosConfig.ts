@@ -256,7 +256,7 @@ export namespace AxiosConfig {
     response => {
       const config = response.config as typeof response.config & CustomConfig
 
-      if (config.customData?.state==='refresh-request'){
+      if (config.customData?.state === 'refresh-request'){
         const d = response.data as AuthRespData
         
         // Сохранение нового access token, refresh token автоматически сохраняется в куках
@@ -284,13 +284,13 @@ export namespace AxiosConfig {
         
         // Ошибка соединения с сервером - не пробуем снова делать запрос
         // Просто прокидываем, чтобы показать пользователю, что ошибка соединения.
-        if (error.code==='ERR_NETWORK') throw error
+        if (error.code === 'ERR_NETWORK') throw error
         
         // Берём конфиги оригинального запроса, чтобы после обновления токена повторить его
         const orig = error.config as typeof error.config & CustomConfig
 
         // Запускаем обновление токенов
-        if (!orig.customData?.state && error.response.status===401) {
+        if (!orig.customData?.state && error.response.status === 401) {
           // Попытка обновить токены
           // При ошибке на этот запрос, мы попадём в интерцептор ошибки, где она обработается
           
@@ -300,7 +300,7 @@ export namespace AxiosConfig {
           return await refreshToken(orig)
         }
         // Случай, когда сервер отказался выдавать токены при запросе на их обновление
-        else if (orig.customData?.state==='refresh-request'){
+        else if (orig.customData?.state === 'refresh-request'){
           // Разлогиниваемся
           if (error.response.status === 400){
             // если на запрос обновления токена получена ошибка, значит токены для обновления не валидны

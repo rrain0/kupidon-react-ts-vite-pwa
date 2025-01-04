@@ -58,14 +58,14 @@ React.forwardRef<InputElement, InputProps>(
   >
     
     { startViews }
-    { childrenPosition==='start' && children }
+    { childrenPosition === 'start' && children }
     
     <input /* Input */
       {...inputProps}
       ref={elemRef}
     />
     
-    { childrenPosition==='end' && children }
+    { childrenPosition === 'end' && children }
     { endViews }
     
     <div /* Border */

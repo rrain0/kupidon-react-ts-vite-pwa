@@ -79,20 +79,20 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   const toTrackScale = useCallback((v: number) => {
     switch (direction) {
       case 'vertical':
-        if (scrollProps.scrollHeight===0) return 0
+        if (scrollProps.scrollHeight === 0) return 0
         else return v/scrollProps.scrollHeight*trackProps.height
       case 'horizontal':
-        if (scrollProps.scrollWidth===0) return 0
+        if (scrollProps.scrollWidth === 0) return 0
         else return v/scrollProps.scrollWidth*trackProps.width
     }
   }, [direction, scrollProps, trackProps])
   const toScrollScale = useCallback((v: number) => {
     switch (direction) {
       case 'vertical':
-        if (trackProps.height===0) return 0
+        if (trackProps.height === 0) return 0
         else return v/trackProps.height*scrollProps.scrollHeight
       case 'horizontal':
-        if (trackProps.width===0) return 0
+        if (trackProps.width === 0) return 0
         else return v/trackProps.width*scrollProps.scrollWidth
     }
   }, [direction, scrollProps, trackProps])
@@ -134,7 +134,7 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
     function (this: HTMLElement, ev: PointerEvent){
       const track = trackRef.current
       const thumbBox = thumbBoxRef.current
-      if (track && thumbBox && ev.buttons===1){
+      if (track && thumbBox && ev.buttons === 1){
         const trackD = getViewProps(track)
         const thumbBoxD = getViewProps(thumbBox)
         const drag = function(){

@@ -741,8 +741,8 @@ export namespace WidgetStyle0 {
   
   
   export function combineStates(...states: (Pseudo0|DataAttr<any>)[]): Pseudo0 {
-    if (states.length===0) return Pseudo0.empty
-    if (states.length===1) return states[0]
+    if (states.length === 0) return Pseudo0.empty
+    if (states.length === 1) return states[0]
     return new Pseudo0(`is(${states.map(it => it.sel).join(',')})`)
   }
   
@@ -810,7 +810,7 @@ export namespace WidgetStyle0 {
           }
         }
         else if (isObject(it)) {
-          if (this===it.elem || (it.elem==='root' && applyRoot)) {
+          if (this === it.elem || (it.elem === 'root' && applyRoot)) {
             it.state.forEach(it => {
               if (it in this.states) statesSet.add(it as S)
             })

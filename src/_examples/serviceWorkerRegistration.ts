@@ -75,7 +75,7 @@ async function checkServiceWorkerValidity(swUrl: string, config?: Config): Promi
     
     // Ensure service worker exists, and that we really are getting a JS file.
     const contentType = response.headers.get('content-type')
-    if (response.status===404 || !contentType?.includes('javascript')){
+    if (response.status === 404 || !contentType?.includes('javascript')){
       // No service worker found. Probably a different app. Reload the page.
       const registration = await navigator.serviceWorker.ready
       await registration.unregister()
@@ -194,7 +194,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
       // Ensure service worker exists, and that we really are getting a JS file.
       const contentType = response.headers.get('content-type')
       if (
-        response.status===404
+        response.status === 404
         || !contentType?.includes('javascript')
       ) {
         // No service worker found. Probably a different app. Reload the page.
