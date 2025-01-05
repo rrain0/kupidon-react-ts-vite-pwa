@@ -1,24 +1,21 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import React, {
-  useCallback,
   useImperativeHandle,
-  useLayoutEffect,
   useRef,
 } from 'react'
-import { AnimatedString } from '@animated/AnimatedStyle.ts'
+import {
+  ImgAnimatedProps,
+  StyleAnimatedProp,
+} from 'src/mini-libs/animated/AnimatedProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { animations } from 'src/mini-libs/animated/runAnimations.ts'
+import { useUpdateImg, useUpdateStyle } from 'src/mini-libs/animated/elementUpdate.ts'
 import Puro = TypeU.Puro
 
 
 
 
 type AnimatedImgExtraProps = Puro<{
-  animated: Puro<{
-    src: AnimatedString
-  }>
+  animated: ImgAnimatedProps & StyleAnimatedProp
 }>
 
 type AnimatedImgRefElement = HTMLImageElement
@@ -39,40 +36,35 @@ const AnimatedImg = React.memo(
       const elemRef = useRef<AnimatedImgRefElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
-      const [getAnimated] = useAsRefGet(animated)
-      const [getIsFrameRequested, setIsFrameRequested] = useRefGetSet(false)
       
-      const updateElement = useCallback((time: number) => {
-        const el = elemRef.current
-        if (el) {
-          el.src = `${(getAnimated()?.src?.get(time) ?? '')}`
-        }
-      }, [])
+      const [getOldAnimated, setOldAnimated] = useRefGetSet(animated)
       
-      /*
-      const requestUpdateElement = useCallback(() => {
-        if (!getIsFrameRequested()) {
-          setIsFrameRequested(true)
-          requestAnimationFrame(() => {
-            updateElement()
-            setIsFrameRequested(false)
-          })
-        }
-      }, [])
+      const {
+        updateStyleOpacity,
+        updateStyleScale,
+        updateStyleTransform,
+        updateStyleZIndex,
+      } = useUpdateStyle(elemRef)
       
-      const src = animated?.src
-      useLayoutEffect(() => {
-        updateElement()
-        src?.onChange(requestUpdateElement)
-        return () => src?.removeOnChange(requestUpdateElement)
-      }, [src])
-       */
+      const {
+        updateImgSrc,
+      } = useUpdateImg(elemRef)
       
+      getOldAnimated()?.opacity?.removeOnChange(updateStyleOpacity)
+      getOldAnimated()?.scale?.removeOnChange(updateStyleScale)
+      getOldAnimated()?.transform?.removeOnChange(updateStyleTransform)
+      getOldAnimated()?.zIndex?.removeOnChange(updateStyleZIndex)
       
-      useLayoutEffect(() => {
-        animations.push(updateElement)
-        return () => { ArrayU.remove(animations, updateElement) }
-      }, [animated])
+      getOldAnimated()?.src?.removeOnChange(updateImgSrc)
+      
+      setOldAnimated(animated)
+      
+      getOldAnimated()?.opacity?.onChange(updateStyleOpacity)
+      getOldAnimated()?.scale?.onChange(updateStyleScale)
+      getOldAnimated()?.transform?.onChange(updateStyleTransform)
+      getOldAnimated()?.zIndex?.onChange(updateStyleZIndex)
+      
+      animated?.src?.onChange(updateImgSrc)
       
       
       return (

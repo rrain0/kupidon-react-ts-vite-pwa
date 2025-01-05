@@ -1,12 +1,33 @@
-import { TypeU } from '@util/common/TypeU.ts'
-import Callback1 = TypeU.Callback1
 
 
+/*
+TODO when drag there constantly add and delete from set, may be delay it (throttle)?
+ */
 
-export const animations: Callback1<number>[] = []
 
-const runAnimations = (time: number) => {
-  animations.forEach(it => it(time))
-  requestAnimationFrame(runAnimations)
+type UpdateFun = (time: number) => void
+
+const anims = new Set<UpdateFun>()
+
+let isUpdating = false
+
+const updateAnims = (time: number) => {
+  anims.forEach(it => it(time))
+  if (anims.size) requestAnimationFrame(updateAnims)
+  else isUpdating = false
 }
-requestAnimationFrame(runAnimations)
+
+export const addAnimation = (anim: UpdateFun) => {
+  anims.add(anim)
+  if (!isUpdating) {
+    isUpdating = true
+    requestAnimationFrame(updateAnims)
+  }
+}
+
+export const removeAnimation = (anim: UpdateFun) => {
+  anims.delete(anim)
+}
+
+
+

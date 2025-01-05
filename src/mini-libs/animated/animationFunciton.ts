@@ -1,5 +1,5 @@
 /**
- * @param timeElapsed - ms
+ * @param timeElapsed - time from zero in ms
  */
 export type AnimationFunction<V> = (startValue: V, timeElapsed: number) => [value: V, finished: boolean]
 

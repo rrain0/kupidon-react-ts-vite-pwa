@@ -1,4 +1,14 @@
 import { AnimatedValue } from 'src/mini-libs/animated/AnimatedValue.tsx'
+import { AnimationFunction } from 'src/mini-libs/animated/animationFunciton.ts'
+
+
+
+export type StartAnimationProps<V> = {
+  startValue: V,
+  startTime?: number | undefined,
+  animationFunction?: AnimationFunction<V> | undefined,
+}
+
 
 
 export interface AnimatedProperty<Source, Value> {
@@ -13,6 +23,9 @@ export interface AnimatedProperty<Source, Value> {
   readonly whenCanceled: Promise<void>
   
   get(time?: number): Value
+  
+  onChange(onChange: (value: Value) => void): void
+  removeOnChange(onChange: (value: Value) => void): void
 }
 
 

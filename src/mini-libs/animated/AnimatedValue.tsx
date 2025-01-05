@@ -1,23 +1,22 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.tsx'
-import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.tsx'
+import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.tsx'
 import {
   AnimationFunction,
   passAnimationFunction,
 } from 'src/mini-libs/animated/animationFunciton.ts'
-import {
-  AnimationProps,
-  getTime,
-} from 'src/mini-libs/animated/util.ts'
+import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
+import { getTime } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
 import exists = TypeU.exists
 import Callback = TypeU.Callback
 import noop = TypeU.noop
+import Callback1 = TypeU.Callback1
 
 
 
 export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
-  constructor(props: AnimationProps<Value>) {
+  constructor(props: StartAnimationProps<Value>) {
     void this.start(props)
   }
   
@@ -47,9 +46,10 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     this.startValue = value
     this.animationFunction = passAnimationFunction
     this.reset()
+    addAnimation(this.update)
   }
   
-  start(props: AnimationProps<Value>): Promise<void> {
+  start(props: StartAnimationProps<Value>): Promise<void> {
     this.endCurrAnimation()
     this.startValue = props.startValue
     if (exists(props.startTime)) {
@@ -59,7 +59,18 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
       this.animationFunction = props.animationFunction
     }
     this.reset()
+    addAnimation(this.update)
     return Promise.any([this.whenFinished, this.whenCanceled])
+  }
+  
+  update = (time = getTime()) => {
+    const v = this.get(time)
+    this.listeners.forEach(it => it(v))
+    if (this.finished) removeAnimation(this.update)
+  }
+  
+  map<Mapped>(mapper: Mapper<Value, Mapped>) {
+    return new AnimatedComputed<Value, Value, Mapped>(this, mapper)
   }
   
   get isRunning() {
@@ -91,28 +102,12 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   }
   
   
-  /*
-  private listeners: Callback1<V>[] = []
-  
-  onChange(listener: Callback1<V>) {
-    this.listeners.push(listener)
+  private listeners = new Set<Callback1<Value>>()
+  onChange(listener: Callback1<Value>) {
+    this.listeners.add(listener)
   }
-  
-  removeOnChange(listener: Callback1<V>) {
-    ArrayU.remove(this.listeners, listener)
-  }
-  
-  removeAllOnChange() {
-    ArrayU.clear(this.listeners)
-  }
-  
-  private notify() {
-    this.listeners.forEach(it => it(this.value))
-  }
-   */
-  
-  map<Mapped>(mapper: Mapper<Value, Mapped>) {
-    return new AnimatedComputed<Value, Value, Mapped>(this, mapper)
+  removeOnChange(listener: Callback1<Value>) {
+    this.listeners.delete(listener)
   }
   
 }
