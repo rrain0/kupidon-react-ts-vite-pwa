@@ -45,6 +45,7 @@ const AnimatedDiv = React.memo(
         updateStyleZIndex,
       } = useUpdateStyle(elemRef)
       
+      // TODO iterate by object keys
       getOldAnimated()?.opacity?.removeOnChange(updateStyleOpacity)
       getOldAnimated()?.scale?.removeOnChange(updateStyleScale)
       getOldAnimated()?.transform?.removeOnChange(updateStyleTransform)

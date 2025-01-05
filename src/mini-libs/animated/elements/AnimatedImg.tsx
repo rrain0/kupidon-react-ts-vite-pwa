@@ -50,6 +50,7 @@ const AnimatedImg = React.memo(
         updateImgSrc,
       } = useUpdateImg(elemRef)
       
+      // TODO iterate by object keys
       getOldAnimated()?.opacity?.removeOnChange(updateStyleOpacity)
       getOldAnimated()?.scale?.removeOnChange(updateStyleScale)
       getOldAnimated()?.transform?.removeOnChange(updateStyleTransform)

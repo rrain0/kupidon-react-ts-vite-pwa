@@ -1,9 +1,5 @@
 
 
-/*
-TODO when drag there constantly add and delete from set, may be delay it (throttle)?
- */
-
 
 type UpdateFun = (time: number) => void
 
@@ -15,6 +11,7 @@ const updateAnims = (time: number) => {
   anims.forEach(it => it(time))
   if (anims.size) requestAnimationFrame(updateAnims)
   else isUpdating = false
+  console.log('size', anims.size)
 }
 
 export const addAnimation = (anim: UpdateFun) => {

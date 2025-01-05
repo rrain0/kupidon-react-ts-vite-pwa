@@ -1,3 +1,4 @@
+import { AsyncU } from '@util/common/AsyncU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.tsx'
 import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.tsx'
@@ -12,6 +13,7 @@ import exists = TypeU.exists
 import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
+import withThrottle = AsyncU.withThrottle
 
 
 
@@ -63,11 +65,18 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     return Promise.any([this.whenFinished, this.whenCanceled])
   }
   
+  
   update = (time = getTime()) => {
     const v = this.get(time)
     this.listeners.forEach(it => it(v))
-    if (this.finished) removeAnimation(this.update)
+    if (this.finished) {
+      this.removeAnimationThrottled()
+    }
   }
+  
+  private removeAnimationThrottled = withThrottle(400, () => {
+    if (!this.isRunning) removeAnimation(this.update)
+  })
   
   map<Mapped>(mapper: Mapper<Value, Mapped>) {
     return new AnimatedComputed<Value, Value, Mapped>(this, mapper)
