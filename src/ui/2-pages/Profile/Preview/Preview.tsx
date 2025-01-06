@@ -1,12 +1,11 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated, useSprings, useSpringValue } from '@react-spring/web'
+import { animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { TypeU } from '@util/common/TypeU.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
-import React, { useCallback, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
@@ -144,33 +143,76 @@ const Preview = React.memo((props: PreviewProps) => {
   const finishUpdateViews = (vely = 0) => {
     updateViews()
     
-    if (vely) {
-      // px/ms => %height/s
-      const velyPercent = vely * 1000 / getTrackProps().h * 100
-      const vThreshold = 135 // %height/s
+    // px/ms => %height/s
+    const velyPercent = vely * 1000 / getTrackProps().h * 100
+    const vThreshold = 70 // %height/s
+    
+    const sp = getStartProgressY()
+    const cp = getCurrProgressY()
+    const p = sp + cp
+    
+    const pICurr = p % 100
+    const pI = p - pICurr
+    
+    const [nextPICurr, vel] = (() => {
       if (Math.abs(velyPercent) >= vThreshold) {
-        animatedCurrProgressY.start({
-          startValue: getCurrProgressY(),
-          animationFunction: (startValue, t) => {
-            // Начальный путь
-            const s0 = startValue
-            t /= 1000 // ms => s
-            // Начальная скорость
-            let v0 = velyPercent
-            v0 = Math.sign(v0) * Math.max(Math.abs(v0), 300)
-            // Начальное ускорение
-            const a0 = -v0 / 2
-            // Время, когда скорость станет в 2 раза меньше
-            const t1 = -v0 / a0 / 2
-            
-            const finished = t >= t1
-            if (finished) t = t1
-            const s = a0 * t * t / 2 + v0 * t + s0
-            setCurrProgressY(s)
-            return [s, finished]
-          },
-        })
+        if (pICurr > 0) {
+          if (velyPercent >= 0) return [100, velyPercent]
+          return [0, velyPercent]
+        }
+        if (pICurr < 0) {
+          if (velyPercent >= 0) return [0, velyPercent]
+          return [-100, velyPercent]
+        }
       }
+      else {
+        if (pICurr <= -50) {
+          return [-100, -vThreshold]
+        }
+        if (pICurr < 0) {
+          return [0, vThreshold]
+        }
+        if (pICurr >= 50) {
+          return [100, vThreshold]
+        }
+        if (pICurr > 0) {
+          return [0, -vThreshold]
+        }
+      }
+      return [0, 0]
+    })()
+    
+    const pNext = pI + nextPICurr
+    //console.log('pNext', pNext)
+    if (p !== pNext) {
+      const nextCp = pNext - sp
+      // Начальная скорость
+      const v0 = vel
+      const t1 = 0.2 // s
+      // Начальное ускорение
+      const a0 = 2 * (pNext - p - v0 * t1) / t1**2
+      
+      //console.log('s0', cp, 't1', t1, 'a0', a0, 'v0', v0)
+      
+      // TODO
+      //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
+      //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
+      void animatedCurrProgressY.start({
+        startValue: cp,
+        animationFunction: (startValue, t) => {
+          // Начальный путь
+          const s0 = startValue
+          t /= 1000 // ms => s
+          
+          const finished = t >= t1
+          if (finished) t = t1
+          let s = a0 * t**2 / 2 + v0 * t + s0
+          s = MathU.round(s, 3)
+          console.log('s', s)
+          setCurrProgressY(s)
+          return [s, finished]
+        },
+      })
     }
   }
   
@@ -186,10 +228,10 @@ const Preview = React.memo((props: PreviewProps) => {
   const mergeProgress = () => {
     const p = getStartProgressY() + getCurrProgressY()
     const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
-    setStartProgressY(RangeU.loop(p, [0, viewMaxP]))
+    setStartProgressY(MathU.round(RangeU.loop(p, [0, viewMaxP]), 3))
     const photoP = getStartPhotoProgress() + getCurrProgressY()
     const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
-    setStartPhotoProgress(RangeU.loop(photoP, [0, photoMaxP]))
+    setStartPhotoProgress(MathU.round(RangeU.loop(photoP, [0, photoMaxP]), 3))
     setCurrProgressY(0)
   }
   
@@ -298,11 +340,12 @@ const Preview = React.memo((props: PreviewProps) => {
   const animatedProgress = animatedCurrProgressY.map(cp => (i: number) => {
     const p = getStartProgressY() + cp
     const photoP = getStartPhotoProgress() + cp
+    //console.log('p', p, 'photoP', photoP)
     // displayedIndex from top to bottom
-    const di = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-    // progressCurrent
-    const pc = mod(p, 100)
-    return { p, photoP, di, pc }
+    const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+    // progressCurrent - nonnegative
+    const pCurr = mod(p, 100)
+    return { p, photoP, displayedI, pCurr }
   })
   
   //console.log('rerender')
@@ -319,36 +362,36 @@ const Preview = React.memo((props: PreviewProps) => {
                     key={i}
                     animated={{
                       zIndex: animatedProgress.map(ap => {
-                        const { p, photoP, di, pc } = ap(i)
-                        const z = -di + visiblePhotosCnt - 1
+                        const { p, photoP, displayedI, pCurr } = ap(i)
+                        const z = -displayedI + visiblePhotosCnt - 1
                         return z
                       }),
                       transform: animatedProgress.map(ap => {
-                        const { p, photoP, di, pc } = ap(i)
+                        const { p, photoP, displayedI, pCurr } = ap(i)
                         const y = (() => {
-                          if (di === 0) return pc
-                          return -(di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+                          if (displayedI === 0) return pCurr
+                          return -(displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
                         })()
                         return `translateY(${y}%)`
                       }),
                       scale: animatedProgress.map(ap => {
-                        const { p, photoP, di, pc } = ap(i)
+                        const { p, photoP, displayedI, pCurr } = ap(i)
                         const s = (() => {
-                          if (di === 0) return 100
-                          return 100 - 5 * (di - RangeU.map(pc, [0, 80, 100], [0, 0, 1]))
+                          if (displayedI === 0) return 100
+                          return 100 - 5 * (displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
                         })()
                         return s / 100
                       }),
                       opacity: animatedProgress.map(ap => {
-                        const { p, photoP, di, pc } = ap(i)
+                        const { p, photoP, displayedI, pCurr } = ap(i)
                         const o = (() => {
-                          if (di === 0) return 100 - RangeU.map(
-                            pc,
+                          if (displayedI === 0) return 100 - RangeU.map(
+                            pCurr,
                             [0, 30, 100],
                             [0, 0, 100],
                           )
-                          if (di === visiblePhotosCnt - 1) return RangeU.map(
-                            pc,
+                          if (displayedI === visiblePhotosCnt - 1) return RangeU.map(
+                            pCurr,
                             [0, 80, 100],
                             [0, 0, 100],
                           )
@@ -362,8 +405,12 @@ const Preview = React.memo((props: PreviewProps) => {
                       <AnimatedPhoto
                         animated={{
                           src: animatedProgress.map(ap => {
-                            const { p, photoP, di, pc } = ap(i)
-                            const photoI = RangeU.loop(Math.floor(photoP / 100) + di, [0, photosCnt])
+                            const { p, photoP, displayedI, pCurr } = ap(i)
+                            //console.log('displayedI', displayedI, 'photoP', photoP)
+                            const photoI = RangeU.loop(
+                              Math.floor(photoP / 100) + displayedI,
+                              [0, photosCnt]
+                            )
                             return availablePhotos[photoI]?.dataUrl ?? ''
                           }),
                         }}
@@ -379,6 +426,17 @@ const Preview = React.memo((props: PreviewProps) => {
                         </NoImagesBox>
                       </>
                     )}
+                    {/* <div
+                      css={css`
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        color: aquamarine;
+                        font-size: 40px;
+                      `}
+                    >
+                      {i}
+                    </div> */}
                   </AnimatedPhotoBox>
                 )
               })}

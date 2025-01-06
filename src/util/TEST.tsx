@@ -4,7 +4,7 @@ import nextUp from '@im/test/NEXT UP.jpg'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
-import lastIndex = ArrayU.lastIndex
+import lastIndex = ArrayU.lastI
 
 
 

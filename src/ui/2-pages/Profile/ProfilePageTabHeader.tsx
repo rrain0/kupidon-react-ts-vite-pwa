@@ -9,7 +9,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import { TabsRenderProps } from 'src/ui/components/Tabs/Tabs.tsx'
 import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import lastIndex = ArrayU.lastIndex
+import lastIndex = ArrayU.lastI
 import centerAll = EmotionCommon.centerAll
 import Setter = TypeU.Setter
 import col = EmotionCommon.col

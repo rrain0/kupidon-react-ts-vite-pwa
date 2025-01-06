@@ -43,4 +43,4 @@ read-host "Press any key to build & push docker image..."
 $apiBaseUrl = $envs.API_BASE_URL
 docker build -t rrain0/kupidon-react-react:$imageVersion --build-arg API_BASE_URL=$apiBaseUrl .
 docker push rrain0/kupidon-react-react:$imageVersion
-read-host "All operations SUCCESSFUL!"
+read-host "All operations FINISHED!"

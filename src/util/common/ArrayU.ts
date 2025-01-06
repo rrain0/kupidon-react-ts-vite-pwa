@@ -57,8 +57,8 @@ export namespace ArrayU {
   }
   
   
-  export const lastIndex = (arr: any[]): number => arr.length - 1
-  export const lastIndexOr0 = (arr: any[]): number => arr.length ? (arr.length - 1) : 0
+  export const lastI = (arr: any[]): number => arr.length - 1
+  export const lastIOr0 = (arr: any[]): number => arr.length ? (arr.length - 1) : 0
   
   
   export const eq = <A, B>(
@@ -107,7 +107,7 @@ export namespace ArrayU {
     const a = [...arr, value]
     let sign = 0
     let lastRetainedIdx = 0
-    let i = lastIndex(a)
+    let i = lastI(a)
     for ( ; i >= 0; i--) {
       const s = Math.sign(a[i])
       if (s !== 0) {

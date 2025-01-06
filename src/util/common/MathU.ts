@@ -64,7 +64,7 @@ export namespace MathU {
    * mod(2, 8) => 2
    * mod(-2, 8) => 6
    * mod(10, 8) => 2
-   * mod(-10, 8) => 6
+   * mod(-10, 8) => 6 ( то есть 8 * 2 + (-10) )
    * @param a Делимое
    * @param b Делитель
    * @returns {number} Остаток

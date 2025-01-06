@@ -28,10 +28,12 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   startTime: number = getTime()
   animationFunction: AnimationFunction<Value> = passAnimationFunction
   
+  // не влияет на значение, просто переводит в состояние finished
   finish: Callback = noop
   finished = false
   whenFinished!: Promise<void>
   
+  // не влияет на значение, просто переводит в состояние canceled
   cancel: Callback = noop
   canceled = false
   whenCanceled!: Promise<void>

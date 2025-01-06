@@ -335,7 +335,7 @@ export const useTabs = (
       if (last && dragStartRef.current.isDragging) {
         // % ширины viewport в секунду
         const speed = pxPerMsToPercentVpHPerS(spdx)
-        if (speed>speedThreshold) {
+        if (speed > speedThreshold) {
           dragStartRef.current.lastSpeed = speed
           if (dirx < 0) {
             setNewState('snapping')
@@ -392,15 +392,14 @@ function pathProgressPercent(start: number, end: number): number {
 
 
 
-function getTabIdxToAdjust
-(scrollLeft: number, snapPointsPx: number[]): number {
-  const snapStart = findLastBy(snapPointsPx, elem => scrollLeft>=elem).index
+function getTabIdxToAdjust(scrollLeft: number, snapPointsPx: number[]): number {
+  const snapStart = findLastBy(snapPointsPx, elem => scrollLeft >= elem).index
   
   const snapPointsPxInf = [Number.NEGATIVE_INFINITY, ...snapPointsPx, Number.POSITIVE_INFINITY]
   const threshold = Math.round(
     (snapPointsPxInf[snapStart + 1] + snapPointsPxInf[snapStart + 2]) / 2
   )
-  if (scrollLeft>threshold) return snapStart + 1
+  if (scrollLeft > threshold) return snapStart + 1
   return snapStart
 }
 
