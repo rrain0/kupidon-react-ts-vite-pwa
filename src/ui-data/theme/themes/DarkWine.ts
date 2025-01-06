@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
+import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -26,6 +27,8 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     cta: ['#b7405c'], // ['#984559']
   },
   
+  
+  
   boxNormal: { ...DarkProps.boxNormal,
     bg:       ['#24272d'],
     bg2:      ['#282c34'],
@@ -43,6 +46,8 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     ct2: ['#000000'],
     ct3:       '#000000',
   },
+  
+  
   
   buttonMain: { ...DarkProps.buttonMain,
     bg:      ['#aaaaaa'],
@@ -68,6 +73,16 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bgFocus:  ['#7b7b7b88'],
     ct:   ['#999999'],
   },
+  
+  buttonPreviewNorm: { ...LightProps.buttonPreviewNorm },
+  buttonPreviewMain: {
+    bg:        '#e9456b',
+    bgGrad:    ['#D01944', '#F75F82'],
+    ct:        '#ffffff',
+  },
+  
+  
+  
   inputRadio: { ...DarkProps.inputRadio,
     bgFocus:  ['#aaaaaa'],
   },
@@ -75,9 +90,13 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bgFocus: ['#ffffff22'],
   },
   
+  
+  
   iconGradient: { ...DarkProps.iconGradient,
     ct:       ['#BB2649', '#F75F82'],
   },
+  
+  
   
   input: { ...DarkProps.input,
     bg:           ['#282c34'],

@@ -28,6 +28,8 @@ export const LightProps: ThemeProps = {
     cta: ['#333333'],
   },
   
+  
+  
   boxNormal: {
     bg:              ['#ffffff'],
     bg2:             ['#f0f0f0'],
@@ -61,6 +63,8 @@ export const LightProps: ThemeProps = {
     ct3:       '#ffffff',
   },
   
+  
+  
   buttonMain: {
     bg:       ['#7b7b7b'],
     bgFocus:  ['#aaaaaa'],
@@ -85,8 +89,24 @@ export const LightProps: ThemeProps = {
   buttonSecondary: {
     bg:        ['transparent'],
     bgFocus:   ['#99999988'],
-    ct:   ['#bbbbbb'],
+    ct:        ['#bbbbbb'],
   },
+  
+  buttonPreviewNorm: {
+    bg:        '#ffffff',
+    ct:        '#1F1F1F',
+    ctGrad:    ['#1F1F1F', '#3C3C3C', '#6D6D6D'],
+    bgFc:      '#999999',
+    ctFc:      '#1F1F1F',
+  },
+  buttonPreviewMain: {
+    bg:        '#3C3C3C',
+    bgGrad:    ['#1F1F1F', '#6D6D6D'],
+    ct:        '#ffffff',
+  },
+  
+  
+  
   inputRadio: {
     bgFocus:  ['#7b7b7b'],
   },
@@ -94,9 +114,13 @@ export const LightProps: ThemeProps = {
     bgFocus: ['#00000011'],
   },
   
+  
+  
   iconGradient: {
     ct:       ['#444444', '#444444'],
   },
+  
+  
   
   input: {
     bg:            ['#F8F8F8'],

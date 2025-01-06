@@ -168,12 +168,12 @@ export namespace ButtonS {
   const filledRectAddColor = (colors: {
     bg: string
     ct: string
-    cRipple?: string | undefined
+    ctRipple?: string | undefined
     bgFocus: string
     bgImFocus?: string | undefined
     ctFocus: string
     bgDisabled?: string | undefined
-    cDisabled?: string | undefined
+    ctDisabled?: string | undefined
   }) => css`
     // state: normal
     ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
@@ -181,7 +181,7 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(colors.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${!!colors.cRipple && W.e.ripple.e.props.color.set(colors.cRipple)}
+      ${!!colors.ctRipple && W.e.ripple.e.props.color.set(colors.ctRipple)}
     }
     
     // state: hover
@@ -207,7 +207,7 @@ export namespace ButtonS {
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       ${!!colors.bgDisabled && `background-color: ${colors.bgDisabled};`}
-      ${!!colors.cDisabled && W.e.button.e.props.color.set(colors.cDisabled)};
+      ${!!colors.ctDisabled && W.e.button.e.props.color.set(colors.ctDisabled)};
     }
     
     // state: error
@@ -282,11 +282,11 @@ export namespace ButtonS {
   const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
     bg: t.buttonAccent.bg2[0],
     ct: t.buttonAccent.ct2,
-    cRipple: t.ripple.ct[0],
+    ctRipple: t.ripple.ct[0],
     bgFocus: t.buttonAccent.bgFocus[0],
     ctFocus: t.buttonAccent.ctFocus[0],
     bgDisabled: t.elementDisabled.bg[0],
-    cDisabled: t.elementDisabled.ct[0],
+    ctDisabled: t.elementDisabled.ct[0],
   })
   // type: filled, shape: rect, add color: normal
   const filledRectAddColorNormal = (t: AppTheme.Theme) => css`
@@ -479,7 +479,7 @@ export namespace ButtonS {
       padding: 4px 16px;
       ${Txt.small1};
     }
-    ${W.use.s.normal().e.border().thisUse}{
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
   `
@@ -601,6 +601,70 @@ export namespace ButtonS {
     ${W.use.s.disabled().e.button().thisUse} {
       background-color: ${t.elementDisabled.bg[0]};
       ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])};
+    }
+  `
+  // type: filled, shape: rounded, add color: normal
+  export const filledRoundedAddColorPreviewNormal = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      background-color: ${t.buttonPreviewNorm.bg};
+      ${W.e.button.e.props.color.set(t.buttonPreviewNorm.ct)}
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+    }
+    
+    // state: hover
+    ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
+      background-color: ${t.buttonPreviewNorm.bgFc};
+      ${W.e.button.e.props.color.set(t.buttonPreviewNorm.ctFc)};
+    }}
+    
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.button().thisUse} {
+      background-color: ${t.buttonPreviewNorm.bgFc};
+    }
+    
+    // state: disabled
+    ${W.use.s.disabled().e.button().thisUse} {
+      background-color: ${t.elementDisabled.bg[0]};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
+    }
+  `
+  // type: filled, shape: rounded, add color: normal
+  export const filledRoundedAddColorPreviewMain = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.button().thisUse} {
+      background-color: ${t.buttonPreviewMain.bg};
+      background-image: linear-gradient(
+        to bottom,
+        ${t.buttonPreviewMain.bgGrad[0]} 25%,
+        ${t.buttonPreviewMain.bgGrad[1]} 50% 100%
+      );
+      background-position: 0 0;
+      background-size: 100% 200%;
+      ${W.e.button.e.props.color.set(t.buttonPreviewMain.ct)}
+    }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+    }
+    
+    // state: hover
+    ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
+      transition: background-position 0.3s;
+      background-position: 0 100%;
+    }}
+    
+    // state: focus-visible
+    ${W.use.s.focusVisible().e.button().thisUse} {
+      transition: background-position 0.3s;
+      background-position: 0 100%;
+    }
+    
+    // state: disabled
+    ${W.use.s.disabled().e.button().thisUse} {
+      background-color: ${t.elementDisabled.bg[0]};
+      ${W.e.button.e.props.color.set(t.elementDisabled.ct[0])}
     }
   `
   
@@ -997,8 +1061,6 @@ export namespace ButtonS {
       }
     }
   }
-  
-  
   
   
   

@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
+import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import Elem0 = WidgetStyle0.Elem
 import CssWidget0 = WidgetStyle0.CssWidget
@@ -20,12 +21,18 @@ export namespace IconButtonStyle {
       color: SvgIconS.El.icon.props.color,
       accentColor: SvgIconS.El.icon.props.accentColor,
     })
+    const iconGrad = new Elem0(SvgGradIconsStyle.El.icon.name, { }, {
+      size: SvgGradIconsStyle.El.icon.props.size,
+      firstColor: SvgGradIconsStyle.El.icon.props.firstColor,
+      secondColor: SvgGradIconsStyle.El.icon.props.secondColor,
+    })
     
     return {
       button: ButtonS.El0.button,
       //border: ButtonS.El.border,
       //ripple: ButtonS.El.ripple,
       icon,
+      iconGrad,
     }
   }()
   
@@ -34,6 +41,7 @@ export namespace IconButtonStyle {
     //.add('button', '>', 'border', El.border)
     //.add('border', '>', 'ripple', El.ripple)
     .add('button', '>', 'icon', El.icon)
+    .add('button', '>', 'iconGrad', El.iconGrad)
   
   
   
@@ -66,6 +74,14 @@ export namespace IconButtonStyle {
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('100%')};
       ${W.e.icon.e.p.color.set(t.buttonAccent.ct[0])};
+    }
+  `
+  const icGradFilledAddColorPreviewNorm = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.iconGrad().thisUse} {
+      ${W.e.iconGrad.e.p.size.set('60%')};
+      ${W.e.iconGrad.e.p.firstColor.set(t.buttonPreviewNorm.ctGrad[0])};
+      ${W.e.iconGrad.e.p.secondColor.set(t.buttonPreviewNorm.ctGrad[1])};
     }
   `
   
@@ -105,6 +121,29 @@ export namespace IconButtonStyle {
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('50%')};
       ${W.e.icon.e.p.color.set(t.photos.ct[0])};
+    }
+  `
+  
+  
+  
+  export const icPreviewNormal = (t: AppTheme.Theme) => css`
+    ${ButtonS.filledRoundBig2Normal(t)};
+    ${ButtonS.filledRoundedAddColorPreviewNormal(t)};
+    ${icGradFilledAddColorPreviewNorm(t)};
+  `
+  export const icPreviewNormalBigger = (t: AppTheme.Theme) => css`
+    ${icPreviewNormal(t)};
+    ${ButtonS.W.use.s.normal().e.button().thisUse} {
+      width: 58px;
+      height: 58px;
+    }
+  `
+  export const icPreviewMain = (t: AppTheme.Theme) => css`
+    ${ButtonS.filledRoundBig2Normal(t)};
+    ${ButtonS.filledRoundedAddColorPreviewMain(t)};
+    ${ButtonS.W.use.s.normal().e.button().thisUse} {
+      width: 60px;
+      height: 60px;
     }
   `
   

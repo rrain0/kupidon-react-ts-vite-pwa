@@ -17,6 +17,7 @@ export namespace MathU {
     const mult = (n < 0 ? -1 : 1) * 10 ** scale
     return Math.round(n * mult) / mult
   }
+  export const round3 = (n: number) => round(n, 3)
   
   /**
    * Возвращение округлённого в сторону нуля числа

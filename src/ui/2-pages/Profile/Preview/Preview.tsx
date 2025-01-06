@@ -13,6 +13,8 @@ import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
 import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
@@ -47,6 +49,11 @@ import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
 import PictureIc = SvgIcons.PictureIc
 import centerGrid = EmotionCommon.centerGrid
+import colC = EmotionCommon.colC
+import ArrowReloadIc = SvgIcons.ArrowReloadIc
+import CrossIc = SvgIcons.CrossIc
+import HeartIc = SvgIcons.HeartIc
+import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -207,8 +214,7 @@ const Preview = React.memo((props: PreviewProps) => {
           const finished = t >= t1
           if (finished) t = t1
           let s = a0 * t**2 / 2 + v0 * t + s0
-          s = MathU.round(s, 3)
-          console.log('s', s)
+          s = MathU.round3(s)
           setCurrProgressY(s)
           return [s, finished]
         },
@@ -228,10 +234,10 @@ const Preview = React.memo((props: PreviewProps) => {
   const mergeProgress = () => {
     const p = getStartProgressY() + getCurrProgressY()
     const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
-    setStartProgressY(MathU.round(RangeU.loop(p, [0, viewMaxP]), 3))
+    setStartProgressY(MathU.round3(RangeU.loop(p, [0, viewMaxP])))
     const photoP = getStartPhotoProgress() + getCurrProgressY()
     const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
-    setStartPhotoProgress(MathU.round(RangeU.loop(photoP, [0, photoMaxP]), 3))
+    setStartPhotoProgress(MathU.round3(RangeU.loop(photoP, [0, photoMaxP])))
     setCurrProgressY(0)
   }
   
@@ -440,6 +446,22 @@ const Preview = React.memo((props: PreviewProps) => {
                   </AnimatedPhotoBox>
                 )
               })}
+              
+              <ActionButtonsBox>
+                <Button css={IconButtonStyle.icPreviewNormal}>
+                  <ArrowReloadIc css={arrowReloadS} />
+                </Button>
+                <Button css={IconButtonStyle.icPreviewNormalBigger}>
+                  <CrossIc />
+                </Button>
+                <Button css={IconButtonStyle.icPreviewMain}>
+                  <HeartIc />
+                </Button>
+                <Button css={IconButtonStyle.icPreviewNormal}>
+                  <ArrowAngledRoundedIc />
+                </Button>
+              </ActionButtonsBox>
+              
             </PhotosContainer2>
           </PhotosContainer>
         </PreviewFrame2>
@@ -504,7 +526,7 @@ const PhotosContainer2 = styled.div`
   // allow intercept only single finger left / right swipe gestures
   touch-action: pan-y;
   pointer-events: none;
-  * { pointer-events: auto; }
+  & > * { pointer-events: auto; }
 `
 
 const PhotoBox = styled(animated.div)`
@@ -588,6 +610,22 @@ const NoImagesTitle = styled.div`
   grid-area: t;
   ${centerGrid};
   ${Txt.large3};
+`
+
+
+
+const ActionButtonsBox = styled.div`
+  position: absolute;
+  right: 16px;
+  bottom: 36px;
+  z-index: 10;
+  ${colC};
+  gap: 22px;
+`
+const arrowReloadS = css`
+  ${SvgIconS.El.icon.thiz()} {
+    rotate: -0.125turn;
+  }
 `
 
 

@@ -7,7 +7,10 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { pwaInfo } from 'virtual:pwa-info'
 
-// TODO explore
+// Vite PWA React:
+// https://vite-pwa-org.netlify.app/examples/react
+// Vite PWA React example:
+// https://github.com/vite-pwa/vite-plugin-pwa/blob/main/examples/react-router/src/ReloadPrompt.tsx
 
 console.log('pwaInfo', pwaInfo)
 

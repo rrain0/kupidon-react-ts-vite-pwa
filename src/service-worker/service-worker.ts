@@ -86,6 +86,9 @@ const precachedPattern = new RegExp(`^(${precachedList.join('|')})`)
 
 
 
+// Workbox strategies:
+// https://developer.chrome.com/docs/workbox/modules/workbox-strategies
+
 {
   // Images cache
   const imgExtsList = ['webp', 'svg', 'heic', 'heif', 'jpeg', 'jpg', 'png', 'gif', 'bmp']

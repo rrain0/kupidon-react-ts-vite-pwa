@@ -129,7 +129,7 @@ export namespace SvgGradIcons {
       React.memo(
         React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
           (props, forwardedRef) =>
-            <BaseGradSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef}/>
+            <BaseGradSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef} />
         )
       )
     )

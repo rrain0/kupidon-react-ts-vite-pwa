@@ -61,6 +61,8 @@ export const DarkProps: ThemeProps = {
     ct3:        '#000000',
   },
   
+  
+  
   buttonMain: {
     bg:       ['#aaaaaa'],
     bgFocus:  ['#bbbbbb'],
@@ -87,6 +89,22 @@ export const DarkProps: ThemeProps = {
     bgFocus:   ['#7b7b7b88'],
     ct:        ['#999999'],
   },
+  
+  buttonPreviewNorm: {
+    bg:        '#ffffff',
+    ct:        '#1F1F1F',
+    ctGrad:    ['#1F1F1F', '#3C3C3C', '#6D6D6D'],
+    bgFc:      '#dddddd',
+    ctFc:      '#1F1F1F',
+  },
+  buttonPreviewMain: {
+    bg:        '#3C3C3C',
+    bgGrad:    ['#1F1F1F', '#6D6D6D'],
+    ct:        '#ffffff',
+  },
+  
+  
+  
   inputRadio: {
     bgFocus:   ['#aaaaaa'],
   },
@@ -94,9 +112,13 @@ export const DarkProps: ThemeProps = {
     bgFocus:   ['#ffffff22'],
   },
   
+  
+  
   iconGradient: {
     ct:        ['#bdbdbd', '#bdbdbd'],
   },
+  
+  
   
   input: {
     bg:            ['#282c34'],

@@ -140,7 +140,7 @@ const premiumCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS.S.Filled.Rect.addColor({
     bg: t.boxWithWine.bg,
     ct: t.boxWithWine.ct,
-    cRipple: t.boxNormal.ct4[0],
+    ctRipple: t.boxNormal.ct4[0],
     bgFocus: t.boxWithWine.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
@@ -168,7 +168,7 @@ const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS.S.Filled.Rect.addColor({
     bg: t.boxWithViolet.bg,
     ct: t.boxWithViolet.ct,
-    cRipple: t.boxNormal.ct4[0],
+    ctRipple: t.boxNormal.ct4[0],
     bgFocus: t.boxWithViolet.bg,
     bgImFocus: `linear-gradient(
         to bottom right,
@@ -199,7 +199,7 @@ const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS.S.Filled.Rect.addColor({
     bg: t.boxWithBlue.bg,
     ct: t.boxWithBlue.ct,
-    cRipple: t.boxNormal.ct4[0],
+    ctRipple: t.boxNormal.ct4[0],
     bgFocus: t.boxWithBlue.bg,
     bgImFocus: `linear-gradient(
         to bottom right,

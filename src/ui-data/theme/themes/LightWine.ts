@@ -33,6 +33,8 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     cta: ['#BB2649'],
   },
   
+  
+  
   boxNormal: { ...LightProps.boxNormal,
     bg:        ['#ffffff'],
     bg2:       ['#f0f0f0'],
@@ -50,6 +52,8 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     ct2: ['#F8F8F8'],
     ct3:       '#ffffff',
   },
+  
+  
   
   buttonMain: { ...LightProps.buttonMain,
     bg:        ['#e8204f'],
@@ -77,6 +81,15 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     bgFocus:   ['#99999988'],
     ct:   ['#bbbbbb'],
   },
+  
+  buttonPreviewNorm: { ...LightProps.buttonPreviewNorm },
+  buttonPreviewMain: {
+    bg:        '#e9456b',
+    bgGrad:    ['#D01944', '#F75F82'],
+    ct:        '#ffffff',
+  },
+  
+  
   inputRadio: { ...LightProps.inputRadio,
     bgFocus:   ['#7b7b7b'],
   },
@@ -84,9 +97,13 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     bgFocus:   ['#00000011'],
   },
   
+  
+  
   iconGradient: { ...LightProps.iconGradient,
     ct:       ['#BB2649', '#F75F82'],
   },
+  
+  
   
   input: { ...LightProps.input,
     bg:            ['#F8F8F8'],

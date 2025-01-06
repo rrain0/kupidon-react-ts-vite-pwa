@@ -13,8 +13,9 @@ export namespace AppTheme {
   /*
   background => bg
   content => ct
-  contentAccent => cta
-  contentFocus => ctFocus
+  contentAccent => cta / ctAcc
+  contentFocus => ctFc
+  contentGradient => ctGrad
    */
   export interface ThemeProps {
     
@@ -40,6 +41,8 @@ export namespace AppTheme {
     nav: {
       bg: string
     }
+    
+    
     
     boxNormal: {
       bg:         string[]
@@ -69,22 +72,24 @@ export namespace AppTheme {
     boxAccent: {
       bg:         string[]
       bg3:        string
-      ct:    string[]
+      ct:         string[]
       ct2:        string[]
       ct3:        string
     },
+    
+    
     
     // main button (submit button)
     buttonMain: {
       bg:       string[]
       bgFocus:  string[]
-      ct:  string[]
+      ct:       string[]
     }
     // just a colorful button that drags some attention
     buttonAccent: {
       bg:            string[]
       bg2:           string[]
-      ct:       string[]
+      ct:            string[]
       ct2:           string
       bgFocus:       string[]
       ctFocus:       string[]
@@ -93,7 +98,7 @@ export namespace AppTheme {
     buttonNormal: {
       bg:            string[]
       bg2:           string
-      ct:       string[]
+      ct:            string[]
       bgFocus:       string[]
       bgFocus2:      string
       ctFocus:       string[]
@@ -102,8 +107,26 @@ export namespace AppTheme {
     buttonSecondary: {
       bg:        string[]
       bgFocus:   string[]
-      ct:   string[]
+      ct:        string[]
     }
+    
+    // Profile preview button normal
+    buttonPreviewNorm: {
+      bg:        string
+      ct:        string
+      ctGrad:    [string, string, string]
+      bgFc:      string
+      ctFc:      string
+    }
+    // Profile preview button main
+    buttonPreviewMain: {
+      bg:        string
+      bgGrad:    [string, string]
+      ct:        string
+    }
+    
+    
+    
     // radio input color
     inputRadio: {
       bgFocus:   string[]
@@ -121,6 +144,8 @@ export namespace AppTheme {
     iconGradient: {
       ct:   string[]
     }
+    
+    
     
     // input, dataField, textarea, radioInput, radioGroup
     input: {
