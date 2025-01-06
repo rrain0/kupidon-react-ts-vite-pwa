@@ -15,8 +15,9 @@ import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -47,13 +48,14 @@ import mod = MathU.mod
 import { useNoTouchAction } from 'util/view/useNoTouchAction'
 import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
-import PictureIc = SvgIcons.PictureIc
+import PictureIc = SvgIconsPack.PictureIc
 import centerGrid = EmotionCommon.centerGrid
 import colC = EmotionCommon.colC
-import ArrowReloadIc = SvgIcons.ArrowReloadIc
-import CrossIc = SvgIcons.CrossIc
-import HeartIc = SvgIcons.HeartIc
-import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
+import Heart2Ic = SvgIconsPack.Heart2Ic
+import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
+import ArrowReload2GradIc = SvgGradIconsPack.ArrowReload2GradIc
+import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
+import contents = EmotionCommon.contents
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -361,104 +363,106 @@ const Preview = React.memo((props: PreviewProps) => {
       <PreviewFrame>
         <PreviewFrame2 ref={frame2RefFun}>
           <PhotosContainer>
-            <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
-              {arrOfIndices(visiblePhotosCnt).map(i => {
-                return (
-                  <AnimatedPhotoBox
-                    key={i}
-                    animated={{
-                      zIndex: animatedProgress.map(ap => {
-                        const { p, photoP, displayedI, pCurr } = ap(i)
-                        const z = -displayedI + visiblePhotosCnt - 1
-                        return z
-                      }),
-                      transform: animatedProgress.map(ap => {
-                        const { p, photoP, displayedI, pCurr } = ap(i)
-                        const y = (() => {
-                          if (displayedI === 0) return pCurr
-                          return -(displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                        })()
-                        return `translateY(${y}%)`
-                      }),
-                      scale: animatedProgress.map(ap => {
-                        const { p, photoP, displayedI, pCurr } = ap(i)
-                        const s = (() => {
-                          if (displayedI === 0) return 100
-                          return 100 - 5 * (displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                        })()
-                        return s / 100
-                      }),
-                      opacity: animatedProgress.map(ap => {
-                        const { p, photoP, displayedI, pCurr } = ap(i)
-                        const o = (() => {
-                          if (displayedI === 0) return 100 - RangeU.map(
-                            pCurr,
-                            [0, 30, 100],
-                            [0, 0, 100],
-                          )
-                          if (displayedI === visiblePhotosCnt - 1) return RangeU.map(
-                            pCurr,
-                            [0, 80, 100],
-                            [0, 0, 100],
-                          )
-                          return 100
-                        })()
-                        return o / 100
-                      }),
-                    }}
-                  >
-                    {!!photosCnt && (
-                      <AnimatedPhoto
-                        animated={{
-                          src: animatedProgress.map(ap => {
-                            const { p, photoP, displayedI, pCurr } = ap(i)
-                            //console.log('displayedI', displayedI, 'photoP', photoP)
-                            const photoI = RangeU.loop(
-                              Math.floor(photoP / 100) + displayedI,
-                              [0, photosCnt]
+            <PhotosContainer2 ref={photosBoxRef}>
+              <div css={contents} {...onTrackDrag()}>
+                {arrOfIndices(visiblePhotosCnt).map(i => {
+                  return (
+                    <AnimatedPhotoBox
+                      key={i}
+                      animated={{
+                        zIndex: animatedProgress.map(ap => {
+                          const { p, photoP, displayedI, pCurr } = ap(i)
+                          const z = -displayedI + visiblePhotosCnt - 1
+                          return z
+                        }),
+                        transform: animatedProgress.map(ap => {
+                          const { p, photoP, displayedI, pCurr } = ap(i)
+                          const y = (() => {
+                            if (displayedI === 0) return pCurr
+                            return -(displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                          })()
+                          return `translateY(${y}%)`
+                        }),
+                        scale: animatedProgress.map(ap => {
+                          const { p, photoP, displayedI, pCurr } = ap(i)
+                          const s = (() => {
+                            if (displayedI === 0) return 100
+                            return 100 - 5 * (displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                          })()
+                          return s / 100
+                        }),
+                        opacity: animatedProgress.map(ap => {
+                          const { p, photoP, displayedI, pCurr } = ap(i)
+                          const o = (() => {
+                            if (displayedI === 0) return 100 - RangeU.map(
+                              pCurr,
+                              [0, 30, 100],
+                              [0, 0, 100],
                             )
-                            return availablePhotos[photoI]?.dataUrl ?? ''
-                          }),
-                        }}
-                      />
-                    )}
-                    {!photosCnt && (
-                      <>
-                        <Photo src={placeholderIm} />
-                        <Blur />
-                        <NoImagesBox>
-                          <PictureIc css={imSmallPlaceholderIcS} />
-                          <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
-                        </NoImagesBox>
-                      </>
-                    )}
-                    {/* <div
-                      css={css`
-                        position: absolute;
-                        top: 20px;
-                        left: 20px;
-                        color: aquamarine;
-                        font-size: 40px;
-                      `}
+                            if (displayedI === visiblePhotosCnt - 1) return RangeU.map(
+                              pCurr,
+                              [0, 80, 100],
+                              [0, 0, 100],
+                            )
+                            return 100
+                          })()
+                          return o / 100
+                        }),
+                      }}
                     >
-                      {i}
-                    </div> */}
-                  </AnimatedPhotoBox>
-                )
-              })}
+                      {!!photosCnt && (
+                        <AnimatedPhoto
+                          animated={{
+                            src: animatedProgress.map(ap => {
+                              const { p, photoP, displayedI, pCurr } = ap(i)
+                              //console.log('displayedI', displayedI, 'photoP', photoP)
+                              const photoI = RangeU.loop(
+                                Math.floor(photoP / 100) + displayedI,
+                                [0, photosCnt],
+                              )
+                              return availablePhotos[photoI]?.dataUrl ?? ''
+                            }),
+                          }}
+                        />
+                      )}
+                      {!photosCnt && (
+                        <>
+                          <Photo src={placeholderIm} />
+                          <Blur />
+                          <NoImagesBox>
+                            <PictureIc css={imSmallPlaceholderIcS} />
+                            <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
+                          </NoImagesBox>
+                        </>
+                      )}
+                      {/* <div
+                       css={css`
+                       position: absolute;
+                       top: 20px;
+                       left: 20px;
+                       color: aquamarine;
+                       font-size: 40px;
+                       `}
+                       >
+                       {i}
+                       </div> */}
+                    </AnimatedPhotoBox>
+                  )
+                })}
+              </div>
               
               <ActionButtonsBox>
-                <Button css={IconButtonStyle.icPreviewNormal}>
-                  <ArrowReloadIc css={arrowReloadS} />
+                <Button css={backButtonS}>
+                  <ArrowReload2GradIc />
                 </Button>
-                <Button css={IconButtonStyle.icPreviewNormalBigger}>
-                  <CrossIc />
+                <Button css={dislikeButtonS}>
+                  <Cross2GradIc />
                 </Button>
-                <Button css={IconButtonStyle.icPreviewMain}>
-                  <HeartIc />
+                <Button css={likeButtonS}>
+                  <Heart2Ic />
                 </Button>
-                <Button css={IconButtonStyle.icPreviewNormal}>
-                  <ArrowAngledRoundedIc />
+                <Button css={infoButtonS}>
+                  <ArrowAngledRounded2GradIc />
                 </Button>
               </ActionButtonsBox>
               
@@ -622,9 +626,31 @@ const ActionButtonsBox = styled.div`
   ${colC};
   gap: 22px;
 `
-const arrowReloadS = css`
-  ${SvgIconS.El.icon.thiz()} {
-    rotate: -0.125turn;
+const backButtonS = (t: AppTheme.Theme) => css`
+  ${IconButtonStyle.icPreviewNormal(t)};
+  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
+    ${SvgIconS.W.e.icon.p.size.set('54%')}
+    //rotate: -0.125turn;
+    translate: 0 -6%;
+  }
+`
+const dislikeButtonS = (t: AppTheme.Theme) => css`
+  ${IconButtonStyle.icPreviewNormalBigger(t)};
+  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
+    ${SvgIconS.W.e.icon.p.size.set('35.5%')}
+  }
+`
+const likeButtonS = (t: AppTheme.Theme) => css`
+  ${IconButtonStyle.icPreviewMain(t)};
+  ${IconButtonStyle.W.use.s.normal().e.icon().thisUse} {
+    ${SvgIconS.W.e.icon.p.size.set('51.05%')}
+  }
+`
+const infoButtonS = (t: AppTheme.Theme) => css`
+  ${IconButtonStyle.icPreviewNormal(t)};
+  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
+    ${SvgIconS.W.e.icon.p.size.set('50%')};
+    translate: 0 10%;
   }
 `
 

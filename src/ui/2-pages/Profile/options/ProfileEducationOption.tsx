@@ -2,14 +2,14 @@ import React, { useMemo, useState } from 'react'
 import { Education } from 'src/api/model/Education.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import EducationGradIc = SvgGradIcons.EducationGradIc
+import EducationGradIc = SvgGradIconsPack.EducationGradIc
 
 
 

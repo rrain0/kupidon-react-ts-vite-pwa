@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import row = EmotionCommon.row
-import PlusIc = SvgIcons.PlusIc
-import RadioActiveIc = SvgIcons.RadioActiveIc
-import RadioInactiveIc = SvgIcons.RadioInactiveIc
-import CrossInCircleIc = SvgIcons.CrossInCircleIc
-import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
+import PlusIc = SvgIconsPack.PlusIc
+import RadioActiveIc = SvgIconsPack.RadioActiveIc
+import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
+import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
+import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import center = EmotionCommon.center
 import col = EmotionCommon.col
 

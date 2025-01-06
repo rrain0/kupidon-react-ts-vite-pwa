@@ -4,9 +4,9 @@ import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { useRef, useState } from 'react'
 import React from 'react'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import EyeCrossedOutIc = SvgIcons.EyeCrossedOutIc
-import EyeIc = SvgIcons.EyeIc
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import EyeCrossedOutIc = SvgIconsPack.EyeCrossedOutIc
+import EyeIc = SvgIconsPack.EyeIc
 import Ripple from 'src/_old0/ui/0-elements/Ripple0/Ripple.tsx'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'

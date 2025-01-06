@@ -17,17 +17,17 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import col = EmotionCommon.col
-import AddModuleIc = SvgIcons.AddModuleIc
+import AddModuleIc = SvgIconsPack.AddModuleIc
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName,
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
-import LockIc = SvgIcons.LockIc
-import GearIc = SvgIcons.GearIc
+import LockIc = SvgIconsPack.LockIc
+import GearIc = SvgIconsPack.GearIc
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'

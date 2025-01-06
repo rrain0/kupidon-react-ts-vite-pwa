@@ -4,14 +4,14 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Puro = TypeU.Puro
 import fixedBottom = EmotionCommon.fixedBottom
 import col = EmotionCommon.col
-import CheckmarkIc = SvgIcons.CheckmarkIc
-import CrossIc = SvgIcons.CrossIc
+import CheckmarkIc = SvgIconsPack.CheckmarkIc
+import CrossIc = SvgIconsPack.CrossIc
 
 
 export type LeftBottomButtonBarProps = Puro<{

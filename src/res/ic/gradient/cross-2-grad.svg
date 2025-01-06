@@ -1,0 +1,44 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <title>Cross</title>
+
+  <style>
+    :root {
+      --icon-grad-first-color: #1F1F1F;
+      --icon-grad-second-color: #6D6D6D;
+    }
+  </style>
+  
+  <defs>
+    <!-- !!! ID must be unique across entire app so please type something random -->
+    <linearGradient
+      id="paint0_linear_42390tjfhioihaw"
+      x1="50%" y1="13%" x2="50%" y2="90%"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="var(--icon-grad-first-color)"/>
+      <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
+      <stop offset="1" stop-color="var(--icon-grad-second-color)"/>
+    </linearGradient>
+  </defs>
+  
+  <!--<defs>
+    <linearGradient
+      id="paint0_linear_816_2800"
+      x1="10" y1="1.25" x2="10" y2="25.5"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#1F1F1F"/>
+      <stop offset="0.5" stop-color="#3C3C3C"/>
+      <stop offset="1" stop-color="#6D6D6D"/>
+    </linearGradient>
+  </defs>-->
+  
+  <path
+    fill="none"
+    stroke="url(#paint0_linear_42390tjfhioihaw)"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+    d="M18.75 1.25L1.25 18.75M1.25001 1.25L18.75 18.75"
+  />
+  
+</svg>

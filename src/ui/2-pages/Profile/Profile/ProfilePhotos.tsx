@@ -46,13 +46,13 @@ import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import center = EmotionCommon.center
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import abs = EmotionCommon.abs
 import bgBorderMask = EmotionCommon.bgInBorder
 import arrIndices = ArrayU.arrOfIndices
-import PlusIc = SvgIcons.PlusIc
+import PlusIc = SvgIconsPack.PlusIc
 import contents = EmotionCommon.contents
 import * as uuid from 'uuid'
 import blobToDataUrl = FileU.blobToDataUrl

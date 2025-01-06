@@ -5,10 +5,10 @@ import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputS
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import RadioActiveIc = SvgIcons.RadioActiveIc
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import RadioActiveIc = SvgIconsPack.RadioActiveIc
 import Ripple, { RippleMode } from 'src/_old0/ui/0-elements/Ripple0/Ripple.tsx'
-import RadioInactiveIc = SvgIcons.RadioInactiveIc
+import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row

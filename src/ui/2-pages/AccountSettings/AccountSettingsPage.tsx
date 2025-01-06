@@ -30,10 +30,10 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import DataField from 'src/ui/0-elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/0-elements/DataField/DataFieldStyle'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
-import FloppyDisk1Ic = SvgIcons.FloppyDisk1Ic
+import FloppyDisk1Ic = SvgIconsPack.FloppyDisk1Ic
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues

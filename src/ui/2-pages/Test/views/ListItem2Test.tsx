@@ -3,14 +3,14 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import row = EmotionCommon.row
-import PlusIc = SvgIcons.PlusIc
-import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
+import PlusIc = SvgIconsPack.PlusIc
+import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import center = EmotionCommon.center
 import col = EmotionCommon.col
 import abs = EmotionCommon.abs

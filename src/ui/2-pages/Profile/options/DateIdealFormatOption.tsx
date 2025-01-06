@@ -1,14 +1,14 @@
 import React, { useMemo, useState } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option.ts'
-import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
 import { ArrayU } from 'src/util/common/ArrayU'
-import Couple2GradIc = SvgGradIcons.Couple2GradIc
+import Couple2GradIc = SvgGradIconsPack.Couple2GradIc
 
 
 

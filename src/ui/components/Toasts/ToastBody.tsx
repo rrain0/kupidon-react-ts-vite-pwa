@@ -2,14 +2,14 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
-import SpinnerCircleQuarterIc = SvgIcons.SpinnerCircleQuarterIc
-import InfoToastifyIc = SvgIcons.InfoToastifyIc
-import CheckmarkCircleToastifyIc = SvgIcons.CheckmarkCircleToastifyIc
-import WarnTriangleToastifyIc = SvgIcons.WarnTriangleToastifyIc
-import DangerRoundToastifyIc = SvgIcons.DangerRoundToastifyIc
-import CrossIc = SvgIcons.CrossIc
+import SpinnerCircleQuarterIc = SvgIconsPack.SpinnerCircleQuarterIc
+import InfoToastifyIc = SvgIconsPack.InfoToastifyIc
+import CheckmarkCircleToastifyIc = SvgIconsPack.CheckmarkCircleToastifyIc
+import WarnTriangleToastifyIc = SvgIconsPack.WarnTriangleToastifyIc
+import DangerRoundToastifyIc = SvgIconsPack.DangerRoundToastifyIc
+import CrossIc = SvgIconsPack.CrossIc
 import row = EmotionCommon.row
 import resetButton = EmotionCommon.resetButton
 import center = EmotionCommon.center

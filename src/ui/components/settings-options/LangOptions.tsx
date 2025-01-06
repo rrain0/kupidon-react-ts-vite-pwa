@@ -6,11 +6,11 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { CountryFlag } from 'src/ui-data/translations/CountryFlag.ts'
 import { Lang } from '@util/lang/Lang.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
-import BrowserIc = SvgIcons.PlanetFrameIc
+import BrowserIc = SvgIconsPack.PlanetFrameIc
 import { SettingsOptions } from './SettingsOptions'
 
 

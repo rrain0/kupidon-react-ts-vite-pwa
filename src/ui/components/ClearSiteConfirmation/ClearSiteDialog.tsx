@@ -15,14 +15,14 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
 import center = EmotionCommon.center
 import row = EmotionCommon.row
-import Spinner8LinesIc = SvgIcons.Spinner8LinesIc
+import Spinner8LinesIc = SvgIconsPack.Spinner8LinesIc
 import Theme = AppTheme.Theme
-import ClearTrashIc = SvgIcons.ClearTrashIc
+import ClearTrashIc = SvgIconsPack.ClearTrashIc
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import Txt = EmotionCommon.Txt

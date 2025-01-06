@@ -1,0 +1,55 @@
+<svg viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <title>Arrow angled rounded</title>
+
+  <style>
+    :root {
+      --icon-grad-first-color: #1F1F1F;
+      --icon-grad-second-color: #6D6D6D;
+    }
+  </style>
+
+  <defs>
+    <!-- !!! ID must be unique across entire app so please type something random -->
+    <linearGradient
+      id="paint0_linear_87kumrythewg345"
+      x1="50%" y1="13%" x2="50%" y2="90%"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="var(--icon-grad-first-color)"/>
+      <stop offset="1" stop-color="var(--icon-grad-second-color)" />
+      <stop offset="1" stop-color="var(--icon-grad-second-color)" />
+    </linearGradient>
+  </defs>
+  
+  <path d="M1 1L11 11"
+    stroke="url(#paint0_linear_87kumrythewg345)"
+    stroke-width="2" stroke-linecap="round"
+  />
+  <path d="M21 1L11.0251 11.0261"
+    stroke="url(#paint0_linear_87kumrythewg345)"
+    stroke-width="2" stroke-linecap="round"
+  />
+  
+  <!--<defs>
+    <linearGradient
+      id="paint0_linear_816_2811"
+      x1="0.646447" y1="1.35355" x2="10.6464" y2="11.3536"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#1F1F1F"/>
+      <stop offset="0.495" stop-color="#3C3C3C"/>
+      <stop offset="1" stop-color="#6D6D6D"/>
+    </linearGradient>
+    <linearGradient
+      id="paint1_linear_816_2811"
+      x1="20.6455" y1="0.647352" x2="10.6706" y2="10.6734"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#1F1F1F"/>
+      <stop offset="0.495" stop-color="#3C3C3C"/>
+      <stop offset="1" stop-color="#6D6D6D"/>
+    </linearGradient>
+  </defs>-->
+  
+</svg>

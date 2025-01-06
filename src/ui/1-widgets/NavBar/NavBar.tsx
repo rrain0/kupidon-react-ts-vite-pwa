@@ -5,26 +5,26 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { NavButtonStyle } from 'src/ui/1-widgets/NavBar/NavButtonStyle.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import row = EmotionCommon.row
-import Gear2Ic = SvgIcons.Gear2Ic
+import Gear2Ic = SvgIconsPack.Gear2Ic
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import fixedBottom = EmotionCommon.fixedBottom
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
-import ProfileGradIc = SvgGradIcons.ProfileGradIc
-import ChatRoundGradIc = SvgGradIcons.ChatRoundGradIc
-import CardsHeartGradIc = SvgGradIcons.CardsHeartGradIc
-import BowArrowGradIc = SvgGradIcons.BowArrowGradIc
+import ProfileGradIc = SvgGradIconsPack.ProfileGradIc
+import ChatRoundGradIc = SvgGradIconsPack.ChatRoundGradIc
+import CardsHeartGradIc = SvgGradIconsPack.CardsHeartGradIc
+import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 
 
 

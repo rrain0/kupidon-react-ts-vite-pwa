@@ -43,6 +43,7 @@ import GenderSvg from 'src/res/ic/normal/gender.svg?react'
 import GiftBoxSvg from 'src/res/ic/normal/gift-box.svg?react'
 
 import HeartSvg from 'src/res/ic/normal/heart.svg?react'
+import Heart2Svg from 'src/res/ic/normal/heart-2.svg?react'
 import HelpSvg from 'src/res/ic/normal/help.svg?react'
 import HomeSvg from 'src/res/ic/normal/home.svg?react'
 
@@ -79,7 +80,7 @@ import exists = TypeU.exists
 
 
 
-export namespace SvgIcons {
+export namespace SvgIconsPack {
 
   // Base interface for simple svg icons
   
@@ -206,6 +207,7 @@ export namespace SvgIcons {
   
   
   export const HeartIc = generateSimpleSvgIcon(HeartSvg)
+  export const Heart2Ic = generateSimpleSvgIcon(Heart2Svg)
   export const HelpIc = generateSimpleSvgIcon(HelpSvg)
   export const HomeIc = generateSimpleSvgIcon(HomeSvg)
   

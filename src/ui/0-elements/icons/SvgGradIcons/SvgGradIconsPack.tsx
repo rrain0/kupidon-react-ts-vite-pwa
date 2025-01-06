@@ -8,6 +8,9 @@ import exists = TypeU.exists
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
 
 
+import ArrowAngledRounded2GradSvg from 'src/res/ic/gradient/arrow-angled-rounded-2-grad.svg?react'
+import ArrowReload2GradSvg from 'src/res/ic/gradient/arrow-reload-2-grad.svg?react'
+
 import BabyGradSvg from 'src/res/ic/gradient/baby-grad.svg?react'
 import BasketballGradSvg from 'src/res/ic/gradient/basketball-grad.svg?react'
 import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
@@ -20,6 +23,7 @@ import ClockGradSvg from 'src/res/ic/gradient/clock-grad.svg?react'
 import ChatRoundGradSvg from 'src/res/ic/gradient/chat-round-grad.svg?react'
 import CommunicationTwoPeopleGradSvg from 'src/res/ic/gradient/communication-two-people-grad.svg?react'
 import Couple2GradSvg from 'src/res/ic/gradient/couple-2-grad.svg?react'
+import Cross2GradSvg from 'src/res/ic/gradient/cross-2-grad.svg?react'
 
 import EducationGradSvg from 'src/res/ic/gradient/education-grad.svg?react'
 
@@ -57,7 +61,7 @@ import WorkSuitcaseGradSvg from 'src/res/ic/gradient/work-suitcase-grad.svg?reac
 
 
 
-export namespace SvgGradIcons {
+export namespace SvgGradIconsPack {
 
   // Base interface for simple svg icons
   
@@ -139,6 +143,9 @@ export namespace SvgGradIcons {
   
   // Icons
   
+  export const ArrowAngledRounded2GradIc = generateSimpleSvgIcon(ArrowAngledRounded2GradSvg)
+  export const ArrowReload2GradIc = generateSimpleSvgIcon(ArrowReload2GradSvg)
+  
   export const BabyGradIc = generateSimpleSvgIcon(BabyGradSvg)
   export const BasketballGradIc = generateSimpleSvgIcon(BasketballGradSvg)
   export const BengalCatGradIc = generateSimpleSvgIcon(BengalCatGradSvg)
@@ -151,6 +158,7 @@ export namespace SvgGradIcons {
   export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
   export const CommunicationTwoPeopleGradIc = generateSimpleSvgIcon(CommunicationTwoPeopleGradSvg)
   export const Couple2GradIc = generateSimpleSvgIcon(Couple2GradSvg)
+  export const Cross2GradIc = generateSimpleSvgIcon(Cross2GradSvg)
   
   export const EducationGradIc = generateSimpleSvgIcon(EducationGradSvg)
   

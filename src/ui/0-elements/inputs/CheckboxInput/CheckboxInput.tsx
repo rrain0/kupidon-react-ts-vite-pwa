@@ -4,9 +4,9 @@ import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from "react"
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import trueOrUndef = TypeU.trueOrUndef
-import Checkmark2Ic = SvgIcons.Checkmark2Ic
+import Checkmark2Ic = SvgIconsPack.Checkmark2Ic
 import Puro = TypeU.Puro
 
 

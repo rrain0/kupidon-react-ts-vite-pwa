@@ -10,17 +10,17 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
 import Callback = TypeU.Callback
-import CrossInCircleIc = SvgIcons.CrossInCircleIc
+import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
 import contents = EmotionCommon.contents
-import ArrowRefreshCwIc = SvgIcons.ArrowRefreshCwIc
-import Download1Ic = SvgIcons.Download1Ic
+import ArrowRefreshCwIc = SvgIconsPack.ArrowRefreshCwIc
+import Download1Ic = SvgIconsPack.Download1Ic
 import extensionFromMimeType = FileU.extensionFromMimeType
 import col = EmotionCommon.col
 import row = EmotionCommon.row

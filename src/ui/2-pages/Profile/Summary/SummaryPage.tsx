@@ -15,7 +15,7 @@ import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
@@ -48,15 +48,15 @@ import { useTimeout } from 'src/util/react/useTimeout'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
-import EyeWideIc = SvgIcons.EyeWideIc
+import EyeWideIc = SvgIconsPack.EyeWideIc
 import center = EmotionCommon.center
 import Txt = EmotionCommon.Txt
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
 import centerFlex = EmotionCommon.centerFlex
-import ArrowReloadIc = SvgIcons.ArrowReloadIc
-import PictureIc = SvgIcons.PictureIc
+import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
+import PictureIc = SvgIconsPack.PictureIc
 
 
 

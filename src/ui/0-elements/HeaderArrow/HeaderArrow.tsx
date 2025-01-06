@@ -2,8 +2,8 @@ import clsx from 'clsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import React from 'react'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import ArrowAngledRoundedIc = SvgIcons.ArrowAngledRoundedIc
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 
 
 

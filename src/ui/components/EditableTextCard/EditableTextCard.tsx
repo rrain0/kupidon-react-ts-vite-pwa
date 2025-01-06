@@ -5,12 +5,12 @@ import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
-import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
+import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 import HtmlBool = TypeU.HtmlBool

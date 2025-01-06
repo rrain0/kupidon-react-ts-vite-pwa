@@ -3,14 +3,14 @@ import { useRecoilValue } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons.tsx'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DateU } from 'src/util/date/DateU'
-import GiftBoxGradIc = SvgGradIcons.GiftBoxGradIc
+import GiftBoxGradIc = SvgGradIconsPack.GiftBoxGradIc
 
 
 

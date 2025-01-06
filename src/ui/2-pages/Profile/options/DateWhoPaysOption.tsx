@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Option } from 'src/ui-data/models/Option.ts'
-import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
@@ -8,7 +8,7 @@ import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import ModalSingleSelectList from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
-import CardsDollarGradIc = SvgGradIcons.CardsDollarGradIc
+import CardsDollarGradIc = SvgGradIconsPack.CardsDollarGradIc
 
 
 

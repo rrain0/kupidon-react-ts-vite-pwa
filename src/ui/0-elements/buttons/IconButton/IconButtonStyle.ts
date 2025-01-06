@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
@@ -15,6 +16,7 @@ export namespace IconButtonStyle {
   
   
   
+  import hoverable = EmotionCommon.hoverable
   export const El = function() {
     const icon = new Elem0(SvgIconS.El.icon.name, { }, {
       size: SvgIconS.El.icon.props.size,
@@ -36,7 +38,7 @@ export namespace IconButtonStyle {
     }
   }()
   
-  const W = CssWidget0
+  export const W = CssWidget0
     .ofRoot('button', El.button)
     //.add('button', '>', 'border', El.border)
     //.add('border', '>', 'ripple', El.ripple)
@@ -79,9 +81,14 @@ export namespace IconButtonStyle {
   const icGradFilledAddColorPreviewNorm = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.iconGrad().thisUse} {
-      ${W.e.iconGrad.e.p.size.set('60%')};
       ${W.e.iconGrad.e.p.firstColor.set(t.buttonPreviewNorm.ctGrad[0])};
-      ${W.e.iconGrad.e.p.secondColor.set(t.buttonPreviewNorm.ctGrad[1])};
+      ${W.e.iconGrad.e.p.secondColor.set(t.buttonPreviewNorm.ctGrad[2])};
+    }
+  `
+  const icFilledAddColorPreviewMain = (t: AppTheme.Theme) => css`
+    // state: normal
+    ${W.use.s.normal().e.icon().thisUse} {
+      ${W.e.icon.e.p.color.set(t.buttonPreviewMain.ct)};
     }
   `
   
@@ -130,6 +137,18 @@ export namespace IconButtonStyle {
     ${ButtonS.filledRoundBig2Normal(t)};
     ${ButtonS.filledRoundedAddColorPreviewNormal(t)};
     ${icGradFilledAddColorPreviewNorm(t)};
+    ${ButtonS.W.use.s.normal().e.button().thisUse} {
+      padding: 0;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    // state: hover
+    ${hoverable} { ${ButtonS.W.use.s.hover().e.button().thisUse} {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
+    }}
+    // state: focus-visible
+    ${ButtonS.W.use.s.focusVisible().e.button().thisUse} {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
+    }
   `
   export const icPreviewNormalBigger = (t: AppTheme.Theme) => css`
     ${icPreviewNormal(t)};
@@ -142,9 +161,20 @@ export namespace IconButtonStyle {
     ${ButtonS.filledRoundBig2Normal(t)};
     ${ButtonS.filledRoundedAddColorPreviewMain(t)};
     ${ButtonS.W.use.s.normal().e.button().thisUse} {
+      padding: 0;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
       width: 60px;
       height: 60px;
     }
+    // state: hover
+    ${hoverable} { ${ButtonS.W.use.s.hover().e.button().thisUse} {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
+    }}
+    // state: focus-visible
+    ${ButtonS.W.use.s.focusVisible().e.button().thisUse} {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    ${icFilledAddColorPreviewMain(t)};
   `
   
   

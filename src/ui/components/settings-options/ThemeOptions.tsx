@@ -2,10 +2,10 @@ import React, { useCallback, useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
-import DayNightIc = SvgIcons.DayNightIc
-import DayIc = SvgIcons.DayIc
-import MoonIc = SvgIcons.MoonIc
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import DayNightIc = SvgIconsPack.DayNightIc
+import DayIc = SvgIconsPack.DayIc
+import MoonIc = SvgIconsPack.MoonIc
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'

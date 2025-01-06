@@ -3,7 +3,7 @@ import React, { useImperativeHandle } from 'react'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
-import { SvgIcons } from 'src/ui/0-elements/icons/SvgIcons/SvgIcons.tsx'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
@@ -14,8 +14,8 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { useCssWhRef } from 'src/util/view/useCssWhRef'
 import Puro = TypeU.Puro
 import Callback = TypeU.Callback
-import PlusIc = SvgIcons.PlusIc
-import PencilWrite2Ic = SvgIcons.PencilWrite2Ic
+import PlusIc = SvgIconsPack.PlusIc
+import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import combineEvHandlersRecords = ReactU.combineEvHandlersRecords
 import trueOrUndef = TypeU.trueOrUndef
 

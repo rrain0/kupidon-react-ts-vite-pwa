@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option.ts'
-import { SvgGradIcons } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIcons'
+import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import {
   GetIndicatorsData
 } from 'src/ui/1-widgets/modals/ModalMultiSelectList/modalMultiSelectUtils.ts'
@@ -11,7 +11,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ArrayU } from 'src/util/common/ArrayU'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
-import ClockGradIc = SvgGradIcons.ClockGradIc
+import ClockGradIc = SvgGradIconsPack.ClockGradIc
 
 
 
