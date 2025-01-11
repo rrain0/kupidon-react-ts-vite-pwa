@@ -30,9 +30,20 @@ export namespace DateU {
   
   /**
    * @param birthDate date in format like '2000-08-23T14:33:55.609+07:00'
+   * @returns '23'
+   * */
+  export const age = (birthDate: string) => {
+    return intervalToDuration({
+      start: new Date(birthDate),
+      end: new Date(),
+    }).years
+  }
+  
+  /**
+   * @param birthDate date in format like '2000-08-23T14:33:55.609+07:00'
    * @returns '23 years', '23 года'
    * */
-  export const age = (birthDate: string, appLang: Lang.Supported) => {
+  export const ageYears = (birthDate: string, appLang: Lang.Supported) => {
     return formatDuration(
       intervalToDuration({
         start: new Date(birthDate),

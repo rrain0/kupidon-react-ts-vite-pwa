@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
-import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
+import { LightWineProps } from 'src/ui-data/theme/themes/LightWine.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -22,9 +22,9 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bg: '#282c34',
   },
   navButton: { ...DarkProps.navButton,
-    bgFocus:      ['#2e3440'],
+    bgFocus:  ['#2e3440'],
     ct:       ['#7b7b7b'],
-    cta: ['#b7405c'], // ['#984559']
+    cta:      ['#b7405c'], // ['#984559']
   },
   
   
@@ -40,10 +40,10 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     cta3:  ['#BB2649'],
   },
   boxAccent: { ...DarkProps.boxAccent,
-    bg:       ['#aaaaaa'],
-    bg3:      '#c51841',
-    ct:  ['#000000'],
-    ct2: ['#000000'],
+    bg:        ['#aaaaaa'],
+    bg3:       '#c51841',
+    ct:        ['#000000'],
+    ct2:       ['#000000'],
     ct3:       '#000000',
   },
   
@@ -52,7 +52,7 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   buttonMain: { ...DarkProps.buttonMain,
     bg:      ['#aaaaaa'],
     bgFocus: ['#bbbbbb'],
-    ct:  ['#000000'],
+    ct:      ['#000000'],
   },
   buttonAccent: { ...DarkProps.buttonAccent,
     bg:            ['#bdbdbd'],
@@ -74,11 +74,9 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     ct:   ['#999999'],
   },
   
-  buttonPreviewNorm: { ...LightProps.buttonPreviewNorm },
-  buttonPreviewMain: {
-    bg:        '#e9456b',
-    bgGrad:    ['#D01944', '#F75F82'],
-    ct:        '#ffffff',
+  ripple: { ...DarkProps.ripple,
+    ct:              ['#000000'],
+    ctOnTransparent: ['#aaaaaa'],
   },
   
   
@@ -126,10 +124,10 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bg:      ['#5e252c'],
   },
   
-  ripple: { ...DarkProps.ripple,
-    ct:              ['#000000'],
-    ctOnTransparent: ['#aaaaaa'],
-  },
+  
+  
+  previewButtonNorm: { ...LightWineProps.previewButtonNorm },
+  previewButtonMain: { ...LightWineProps.previewButtonMain },
   
   photos: { ...DarkProps.photos,
     bg:                     ['#ffeeee'],

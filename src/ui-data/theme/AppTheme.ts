@@ -13,10 +13,16 @@ export namespace AppTheme {
   /*
   background => bg
   content => ct
+  
+  backgroundAccent => bga / bgAcc
   contentAccent => cta / ctAcc
-  contentFocus => ctFc
+  
+  backgroundFocus => bgf / bgFc
+  contentFocus => ctf / ctFc
+  
+  backgroundGradient => bgGrad
   contentGradient => ctGrad
-   */
+  */
   export interface ThemeProps {
     
     // окружение
@@ -108,21 +114,6 @@ export namespace AppTheme {
       bg:        string[]
       bgFocus:   string[]
       ct:        string[]
-    }
-    
-    // Profile preview button normal
-    buttonPreviewNorm: {
-      bg:        string
-      ct:        string
-      ctGrad:    [string, string, string]
-      bgFc:      string
-      ctFc:      string
-    }
-    // Profile preview button main
-    buttonPreviewMain: {
-      bg:        string
-      bgGrad:    [string, string]
-      ct:        string
     }
     
     
@@ -239,6 +230,30 @@ export namespace AppTheme {
       ctFocus: string
     }
     
+    
+    
+    // Profile preview button normal
+    previewButtonNorm: {
+      bg:        string
+      ct:        string
+      ctGrad:    [string, string, string]
+      bgFc:      string
+      ctFc:      string
+      ctRipple:  string
+    }
+    // Profile preview button main
+    previewButtonMain: {
+      bg:        string
+      bgGrad:    [string, string]
+      ct:        string
+      ctRipple:  string
+    }
+    // Profile preview container for Name & AboutMe
+    previewInfoBox: {
+      bg:        string
+      ct:        string
+      ctGrad:    [string, string]
+    }
     
     photos: {
       bg:                      string[]

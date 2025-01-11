@@ -81,14 +81,14 @@ export namespace IconButtonStyle {
   const icGradFilledAddColorPreviewNorm = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.iconGrad().thisUse} {
-      ${W.e.iconGrad.e.p.firstColor.set(t.buttonPreviewNorm.ctGrad[0])};
-      ${W.e.iconGrad.e.p.secondColor.set(t.buttonPreviewNorm.ctGrad[2])};
+      ${W.e.iconGrad.e.p.firstColor.set(t.previewButtonNorm.ctGrad[0])};
+      ${W.e.iconGrad.e.p.secondColor.set(t.previewButtonNorm.ctGrad[2])};
     }
   `
   const icFilledAddColorPreviewMain = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.icon().thisUse} {
-      ${W.e.icon.e.p.color.set(t.buttonPreviewMain.ct)};
+      ${W.e.icon.e.p.color.set(t.previewButtonMain.ct)};
     }
   `
   

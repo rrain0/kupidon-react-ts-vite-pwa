@@ -43,9 +43,7 @@ import userDefaultValues = LoginPageValidation.userDefaultValues
 
 
 
-const LoginPage =
-React.memo(
-()=>{
+const LoginPage = React.memo(()=>{
   
   const [searchParams] = useSearchParams()
   const returnPath = searchParams.get(RootRoute.login[params].returnPath) ?? undefined
@@ -62,7 +60,7 @@ React.memo(
     failures, setFailures,
     failedFields, validationProps,
   } = useFormFailures({
-    defaultValues, validators
+    defaultValues, validators,
   })
   
   const {
@@ -72,26 +70,25 @@ React.memo(
   } = useApiRequest({
     values: formValues,
     failedFields,
-    prepareAndRequest: useCallback(
-      (values: FormValues)=>{
-        return AuthApi.login({
-          login: values.login,
-          pwd: values.pwd,
-        })
-      },
-      []
-    )
+    prepareAndRequest: useCallback((values: FormValues) => {
+      return AuthApi.login({
+        login: values.login,
+        pwd: values.pwd,
+      })
+    }, []),
   })
   
   const {
     canSubmit, onFormSubmitCallback, submit,
   } = useFormSubmit({
-    failures, setFailures,
-    failedFields, setFormValues,
+    failures,
+    setFailures,
+    failedFields,
+    setFormValues,
     getCanSubmit: useCallback(
       (failedFields: (keyof FormValues)[]) => {
         return failedFields
-          .filter(ff=>ff in userDefaultValues)
+          .filter(ff => ff in userDefaultValues)
           .length === 0
       },
       []
@@ -103,14 +100,11 @@ React.memo(
   
   
   
-  useEffect(
-    ()=>{
-      if (isSuccess && response?.isSuccess){
-        setAuth(response.data)
-      }
-    },
-    [isSuccess, response, setAuth]
-  )
+  useEffect(() => {
+    if (isSuccess && response?.isSuccess) {
+      setAuth(response.data)
+    }
+  }, [isSuccess, response, setAuth])
   
   
   

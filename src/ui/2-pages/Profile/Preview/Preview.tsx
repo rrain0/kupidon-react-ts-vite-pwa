@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import { DateU } from '@util/date/DateU.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
@@ -9,7 +10,9 @@ import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
+import { useRecoilValue } from 'recoil'
 import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
+import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
@@ -56,6 +59,8 @@ import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
 import ArrowReload2GradIc = SvgGradIconsPack.ArrowReload2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import contents = EmotionCommon.contents
+import row = EmotionCommon.row
+import abs = EmotionCommon.abs
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -90,6 +95,7 @@ const Preview = React.memo((props: PreviewProps) => {
   const {
     photos,
     name,
+    birthDate,
     aboutMe,
   } = props.formValues
   
@@ -356,6 +362,8 @@ const Preview = React.memo((props: PreviewProps) => {
     return { p, photoP, displayedI, pCurr }
   })
   
+  const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
+  
   //console.log('rerender')
   
   return (
@@ -451,20 +459,29 @@ const Preview = React.memo((props: PreviewProps) => {
                 })}
               </div>
               
-              <ActionButtonsBox>
-                <Button css={backButtonS}>
-                  <ArrowReload2GradIc />
-                </Button>
-                <Button css={dislikeButtonS}>
-                  <Cross2GradIc />
-                </Button>
-                <Button css={likeButtonS}>
-                  <Heart2Ic />
-                </Button>
-                <Button css={infoButtonS}>
-                  <ArrowAngledRounded2GradIc />
-                </Button>
-              </ActionButtonsBox>
+              <PreviewInfoBox>
+                
+                <ShortInfoBox>
+                  <Name>{nameAge}</Name>
+                  <AboutMe>{aboutMe}</AboutMe>
+                </ShortInfoBox>
+                
+                <ActionButtonsBox>
+                  <Button css={backButtonS}>
+                    <ArrowReload2GradIc />
+                  </Button>
+                  <Button css={dislikeButtonS}>
+                    <Cross2GradIc />
+                  </Button>
+                  <Button css={likeButtonS}>
+                    <Heart2Ic />
+                  </Button>
+                  <Button css={infoButtonS}>
+                    <ArrowAngledRounded2GradIc />
+                  </Button>
+                </ActionButtonsBox>
+                
+              </PreviewInfoBox>
               
             </PhotosContainer2>
           </PhotosContainer>
@@ -618,13 +635,26 @@ const NoImagesTitle = styled.div`
 
 
 
-const ActionButtonsBox = styled.div`
+const PreviewInfoBox = styled.div`
   position: absolute;
-  right: 16px;
-  bottom: 36px;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 10;
+  height: fit-content;
+  ${row};
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 10px;
+  pointer-events: none;
+`
+
+
+const ActionButtonsBox = styled.div`
+  padding-bottom: 36px;
   ${colC};
   gap: 22px;
+  & > * { pointer-events: auto }
 `
 const backButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
@@ -655,25 +685,47 @@ const infoButtonS = (t: AppTheme.Theme) => css`
 `
 
 
+const ShortInfoBox = styled.div`
+  flex: 1;
+  ${col};
+  align-items: start;
+  justify-content: end;
+  gap: 9px;
+  & > * { pointer-events: auto }
+`
+const Name = styled.div`
+  background-color: ${p => p.theme.previewInfoBox.bg};
+  color: ${p => p.theme.previewInfoBox.ct};
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 150%;
+  letter-spacing: normal;
+`
+const AboutMe = styled.div`
+  max-height: 94px;
+  padding-bottom: 16px;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 150%;
+  letter-spacing: normal;
+  
+  background-image: linear-gradient(
+    to bottom,
+    ${p => p.theme.previewInfoBox.ctGrad[0]} 50%,
+    ${p => p.theme.previewInfoBox.ctGrad[1]} 80%
+  );
+  background-clip: text;
+  background-size: 100% 94px;
+  
+  color: transparent;
+  overflow: hidden;
+`
+
+
 
 
 
 // OLD
-
-const photoContainer = css`
-  width: 100%;
-  height: calc(100dvh - var(--bottom-bars-inset));
-  position: relative;
-`
-
-const photoImgStyle = css`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-position: center;
-  object-fit: cover;
-`
-
 const scrollbarVerticalStyle = (t: AppTheme.Theme) => css`
   ${ScrollbarVerticalStyle.scrollbar(t)};
   ${ScrollbarVerticalStyle.El.track.thiz()}{
@@ -697,12 +749,4 @@ const FadeButtonBar = styled.div`
   gap: 4px;
   padding: 10px;
   padding-top: 30px;
-`
-
-const Name = styled.div`
-  ${Txt.large4};
-`
-const AboutMe = styled.div`
-  ${Txt.large2};
-  color: ${p => p.theme.page.ct2}
 `

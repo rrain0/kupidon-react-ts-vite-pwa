@@ -223,7 +223,8 @@ export default [
       '@stylistic/nonblock-statement-body-position': 'off',
       '@stylistic/object-curly-newline': 'off',
       '@stylistic/object-curly-spacing': ['error', 'always'],
-      '@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+      //'@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+      '@stylistic/object-property-newline': 'off',
       '@stylistic/one-var-declaration-per-line': 'off',
       '@stylistic/operator-linebreak': 'off',
       //'@stylistic/operator-linebreak': ['error', 'before', { overrides: { '=': 'after' } }],
@@ -275,7 +276,7 @@ export default [
       '@stylistic/jsx-function-call-newline': 'off',
       '@stylistic/jsx-indent': ['error', 2, {
         checkAttributes: true,
-        indentLogicalExpressions: true
+        indentLogicalExpressions: true,
       }],
       '@stylistic/jsx-indent-props': ['error', 2],
       '@stylistic/jsx-max-props-per-line': 'off',
@@ -358,7 +359,8 @@ export default [
       'promise': promise,
     },*/
     rules: {
-      'promise/catch-or-return': 'error',
+      'promise/catch-or-return': 'off',
+      'promise/always-return': 'off',
     },
   },
   

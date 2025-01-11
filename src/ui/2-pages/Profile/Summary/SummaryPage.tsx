@@ -54,7 +54,6 @@ import Txt = EmotionCommon.Txt
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
-import centerFlex = EmotionCommon.centerFlex
 import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
 import PictureIc = SvgIconsPack.PictureIc
 
@@ -199,9 +198,7 @@ const SummaryPage = React.memo(
     }
     
     
-    const info = [profile.city, DateU.age(u.birthDate, lang)]
-      .filter(it => it)
-      .join(', ')
+    const info = [profile.city, DateU.ageYears(u.birthDate, lang)].filter(it => it).join(', ')
     
     
     //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])

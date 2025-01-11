@@ -26,7 +26,7 @@ const ProfileBirthDateOption = React.memo(
     
     const [saved, setSaved] = useState(props.value)
     
-    const age = DateU.age(props.value, lang)
+    const age = DateU.ageYears(props.value, lang)
     
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     

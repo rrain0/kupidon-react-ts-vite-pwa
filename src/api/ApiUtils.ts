@@ -126,17 +126,17 @@ export namespace ApiUtils {
     }
   }
   
-  export function handleConnectionError(ex: any)
-    : ConnectionErrorResponse | undefined
-  {
+  export function handleConnectionError(
+    ex: any
+  ): ConnectionErrorResponse | undefined {
     if (ex instanceof AxiosError && ex.code === AxiosError.ERR_NETWORK) {
       return getConnectionError()
     }
   }
   
-  export function handleSuccessResponse<D = unknown>(response: AxiosResponse)
-    : SuccessResponse<D> | undefined
-  {
+  export function handleSuccessResponse<D = unknown>(
+    response: AxiosResponse
+  ): SuccessResponse<D> | undefined {
     if (response.status === 200) return {
       isSuccess: true,
       data: response.data as D,

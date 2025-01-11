@@ -607,22 +607,22 @@ export namespace ButtonS {
   export const filledRoundedAddColorPreviewNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      background-color: ${t.buttonPreviewNorm.bg};
-      ${W.e.button.e.props.color.set(t.buttonPreviewNorm.ct)}
+      background-color: ${t.previewButtonNorm.bg};
+      ${W.e.button.e.props.color.set(t.previewButtonNorm.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${W.e.ripple.e.props.color.set(t.previewButtonNorm.ctRipple)}
     }
     
     // state: hover
     ${hoverable} { ${W.use.s.hover().e.button().thisUse} {
-      background-color: ${t.buttonPreviewNorm.bgFc};
-      ${W.e.button.e.props.color.set(t.buttonPreviewNorm.ctFc)};
+      background-color: ${t.previewButtonNorm.bgFc};
+      ${W.e.button.e.props.color.set(t.previewButtonNorm.ctFc)};
     }}
     
     // state: focus-visible
     ${W.use.s.focusVisible().e.button().thisUse} {
-      background-color: ${t.buttonPreviewNorm.bgFc};
+      background-color: ${t.previewButtonNorm.bgFc};
     }
     
     // state: disabled
@@ -635,18 +635,18 @@ export namespace ButtonS {
   export const filledRoundedAddColorPreviewMain = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      background-color: ${t.buttonPreviewMain.bg};
+      background-color: ${t.previewButtonMain.bg};
       background-image: linear-gradient(
         to bottom,
-        ${t.buttonPreviewMain.bgGrad[0]} 25%,
-        ${t.buttonPreviewMain.bgGrad[1]} 50% 100%
+        ${t.previewButtonMain.bgGrad[0]} 25%,
+        ${t.previewButtonMain.bgGrad[1]} 50% 100%
       );
       background-position: 0 0;
       background-size: 100% 200%;
-      ${W.e.button.e.props.color.set(t.buttonPreviewMain.ct)}
+      ${W.e.button.e.props.color.set(t.previewButtonMain.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${W.e.ripple.e.props.color.set(t.previewButtonMain.ctRipple)}
     }
     
     // state: hover

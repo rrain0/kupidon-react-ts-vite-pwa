@@ -1,76 +1,77 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
+import { testDevWidgetStyle } from 'src/mini-libs/widget-style/dev/WidgetStyle.ts'
 import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 
 
 
-const ElemStyleTestPage = React.memo(
-  () => {
-    
-    const [inputStyle, setInputStyle] = useState(`
-    {
-      "background": "#c0ffee",
-      "size": "full",
-      "hoverFrameBg": "green",
-      "boxSz": "50%",
-      "boxBg": "white"
-    }
-    `)
-    
-    const transformedStyle = useMemo(() => {
-      try {
-        return ElemStyle.transformObjectStyle(JSON.parse(inputStyle))
-      }
-      catch (ex: any) {
-        return ex?.toString()
-      }
-    }, [inputStyle])
-    
-    return (
-      <>
-        
-        <Pages.SimplePage>
-          <Pages.ContentFill>
-            
-            
-            <div>Element Style</div>
-            
-            <Textarea
-              value={inputStyle}
-              onChange={ev => setInputStyle(ev.currentTarget.value)}
-            />
-            
-            <Text>
-              {transformedStyle}
-            </Text>
-            
-            <Box>
-              <MainTestFrame
-                className={'frame'}
-                css={css(transformedStyle)}
-              >
-                <MainTestBox
-                  className={'box'}
-                />
-              </MainTestFrame>
-            </Box>
-            
-            <TestBox1>TestBox1</TestBox1>
-            <TestBox2>TestBox2</TestBox2>
-          
-          </Pages.ContentFill>
-        </Pages.SimplePage>
-        
-        
-        <BottomButtonBar settingsBtn/>
-        
-      </>
-    )
+const ElemStyleTestPage = React.memo(() => {
+  
+  const [inputStyle, setInputStyle] = useState(`
+  {
+    "background": "#c0ffee",
+    "size": "full",
+    "hoverFrameBg": "green",
+    "boxSz": "50%",
+    "boxBg": "white"
   }
-)
+  `)
+  
+  const transformedStyle = useMemo(() => {
+    try {
+      return ElemStyle.transformObjectStyle(JSON.parse(inputStyle))
+    }
+    catch (ex: any) {
+      return ex?.toString()
+    }
+  }, [inputStyle])
+  
+  return (
+    <>
+      
+      <Pages.SimplePage>
+        <Pages.ContentFill>
+          
+          <button onClick={testDevWidgetStyle}>Test</button>
+          
+          
+          <div>Element Style</div>
+          
+          <Textarea
+            value={inputStyle}
+            onChange={ev => setInputStyle(ev.currentTarget.value)}
+          />
+          
+          <Text>
+            {transformedStyle}
+          </Text>
+          
+          <Box>
+            <MainTestFrame
+              className={'frame'}
+              css={css(transformedStyle)}
+            >
+              <MainTestBox
+                className={'box'}
+              />
+            </MainTestFrame>
+          </Box>
+          
+          <TestBox1>TestBox1</TestBox1>
+          <TestBox2>TestBox2</TestBox2>
+        
+        </Pages.ContentFill>
+      </Pages.SimplePage>
+      
+      
+      <BottomButtonBar settingsBtn />
+      
+    </>
+  )
+})
 export default ElemStyleTestPage
 
 
@@ -82,6 +83,12 @@ const Textarea = styled.textarea`
 `
 
 const Text = styled.div`
+  --var-angle: 0turn;
+  @property --prop-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0turn;
+  }
   width: 100%;
   height: fit-content;
   white-space: pre-line;

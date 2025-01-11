@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -90,17 +91,9 @@ export const DarkProps: ThemeProps = {
     ct:        ['#999999'],
   },
   
-  buttonPreviewNorm: {
-    bg:        '#ffffff',
-    ct:        '#1F1F1F',
-    ctGrad:    ['#1F1F1F', '#3C3C3C', '#6D6D6D'],
-    bgFc:      '#dddddd',
-    ctFc:      '#1F1F1F',
-  },
-  buttonPreviewMain: {
-    bg:        '#3C3C3C',
-    bgGrad:    ['#1F1F1F', '#6D6D6D'],
-    ct:        '#ffffff',
+  ripple: {
+    ct:              ['#000000'],
+    ctOnTransparent: ['#aaaaaa'],
   },
   
   
@@ -146,11 +139,6 @@ export const DarkProps: ThemeProps = {
   },
   elementError: {
     bg:       ['#5e252c'],
-  },
-  
-  ripple: {
-    ct:              ['#000000'],
-    ctOnTransparent: ['#aaaaaa'],
   },
   
   
@@ -207,6 +195,12 @@ export const DarkProps: ThemeProps = {
     bgFocus: ['#bae2ff', '#ffffff'],
     ctFocus:  '#398CC8',
   },
+  
+  
+  
+  previewButtonNorm: { ...LightProps.previewButtonNorm },
+  previewButtonMain: { ...LightProps.previewButtonMain },
+  previewInfoBox: { ...LightProps.previewInfoBox },
   
   
   photos: {

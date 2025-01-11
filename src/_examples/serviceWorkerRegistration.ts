@@ -40,16 +40,16 @@ export async function register(config?: Config): Promise<void> {
     // serve assets; see https://github.com/facebook/create-react-app/issues/2374
     if (publicUrl.origin !== window.location.origin) return
     
-    window.addEventListener('load', async()=>{
+    window.addEventListener('load', async() => {
       //console.log('public url',process.env.PUBLIC_URL)
       const swUrl = `${import.meta.env.BASE_URL}service-worker.js`
       
       let doRegister = true
       
-      if (isLocalhost){
-        doRegister &&= await checkServiceWorkerValidity(swUrl,config)
+      if (isLocalhost) {
+        doRegister &&= await checkServiceWorkerValidity(swUrl, config)
         
-        navigator.serviceWorker.ready.then(()=>{
+        navigator.serviceWorker.ready.then(() => {
           // Add some additional logging to localhost, pointing developers to the
           // service worker/PWA documentation.
           console.log(
@@ -75,7 +75,7 @@ async function checkServiceWorkerValidity(swUrl: string, config?: Config): Promi
     
     // Ensure service worker exists, and that we really are getting a JS file.
     const contentType = response.headers.get('content-type')
-    if (response.status === 404 || !contentType?.includes('javascript')){
+    if (response.status === 404 || !contentType?.includes('javascript')) {
       // No service worker found. Probably a different app. Reload the page.
       const registration = await navigator.serviceWorker.ready
       await registration.unregister()
@@ -84,7 +84,7 @@ async function checkServiceWorkerValidity(swUrl: string, config?: Config): Promi
     }
     
     return true
-  } catch (err: any){
+  } catch (err: any) {
     console.log('No internet connection found. App is running in offline mode.')
   }
   return false
@@ -95,9 +95,9 @@ async function checkServiceWorkerValidity(swUrl: string, config?: Config): Promi
 async function registerValidSW(swUrl: string, config?: Config): Promise<void> {
   try {
     const registration = await navigator.serviceWorker.register(swUrl)
-    registration.onupdatefound = ()=>{
+    registration.onupdatefound = () => {
       const installingWorker = registration.installing
-      if (installingWorker) installingWorker.onstatechange = ()=>{
+      if (installingWorker) installingWorker.onstatechange = () => {
         if (installingWorker.state === 'installed') {
           if (navigator.serviceWorker.controller) {
             // At this point, the updated precached content has been fetched,
@@ -120,20 +120,20 @@ async function registerValidSW(swUrl: string, config?: Config): Promise<void> {
         }
       }
     }
-  } catch (err: any){
+  } catch (err: any) {
     console.error('Error during service worker registration:', err)
   }
 }
 
 
 
-export async function unregister(){
+export async function unregister() {
   if ('serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.ready
       void registration.unregister()
-    } catch (err: any){
-      console.error("Unable to unregister serviceWorker", err.message)
+    } catch (err: any) {
+      console.error('Unable to unregister serviceWorker', err.message)
     }
   }
 }

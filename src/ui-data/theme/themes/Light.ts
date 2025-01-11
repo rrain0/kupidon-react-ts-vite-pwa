@@ -92,17 +92,9 @@ export const LightProps: ThemeProps = {
     ct:        ['#bbbbbb'],
   },
   
-  buttonPreviewNorm: {
-    bg:        '#ffffff',
-    ct:        '#1F1F1F',
-    ctGrad:    ['#1F1F1F', '#3C3C3C', '#6D6D6D'],
-    bgFc:      '#999999',
-    ctFc:      '#1F1F1F',
-  },
-  buttonPreviewMain: {
-    bg:        '#3C3C3C',
-    bgGrad:    ['#1F1F1F', '#6D6D6D'],
-    ct:        '#ffffff',
+  ripple: {
+    ct:              ['#ffffff'],
+    ctOnTransparent: ['#666666'],
   },
   
   
@@ -148,11 +140,6 @@ export const LightProps: ThemeProps = {
   },
   elementError: {
     bg:       ['#ffced2'],
-  },
-  
-  ripple: {
-    ct:              ['#ffffff'],
-    ctOnTransparent: ['#666666'],
   },
   
   
@@ -210,9 +197,33 @@ export const LightProps: ThemeProps = {
   },
   
   
+  
+  previewButtonNorm: {
+    bg:        '#ffffff',
+    ct:        '#1F1F1F',
+    ctGrad:    ['#1F1F1F', '#3C3C3C', '#6D6D6D'],
+    bgFc:      '#bbbbbb',
+    ctFc:      '#1F1F1F',
+    // todo new ripple
+    ctRipple:  '#1F1F1F',
+  },
+  previewButtonMain: {
+    bg:        '#3C3C3C',
+    bgGrad:    ['#1F1F1F', '#6D6D6D'],
+    ct:        '#ffffff',
+    // todo new ripple
+    ctRipple:  '#1F1F1F',
+  },
+  previewInfoBox: {
+    bg:        'transparent',
+    ct:        '#ffffff',
+    ctGrad:    ['#F1F1F1FF', '#8B8B8B00'],
+  },
+  
+  
   photos: {
     bg:                      ['#ffeeee'],
-    ct:                 ['#291f1d'],
+    ct:                      ['#291f1d'],
     borderDrag:              ['#1F8DCD'],
     highlightFrameBg:        ['#8B8B8B'],
     highlightFrameAccentBg:  ['#000000'],
