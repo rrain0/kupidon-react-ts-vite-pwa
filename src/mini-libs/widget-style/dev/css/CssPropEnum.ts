@@ -3,11 +3,11 @@ import { CssProp } from 'src/mini-libs/widget-style/dev/css/CssProp.ts'
 
 
 
-export class CssPropEnum<const V extends string> extends CssProp {
+export class CssPropEnum<const out V extends string> extends CssProp {
   
   constructor(
     name: string,
-    readonly values: V[]
+    readonly values: readonly V[]
   ) {
     super(name)
   }

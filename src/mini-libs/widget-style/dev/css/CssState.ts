@@ -1,4 +1,4 @@
-
+import { CssSelectable } from 'src/mini-libs/widget-style/dev/css/CssSelectable.ts'
 
 
 /*
@@ -15,21 +15,15 @@
 */
 
 
+
 export function useThis(used: string): string {
   if (!used) return ''
   return `&${used}`
 }
 
 
-export abstract class CssState {
-  
-  /** @returns state selector */
+export abstract class CssState implements CssSelectable {
   abstract use(): string
-  
-  /** @returns this state selector '&<selector>' */
-  useThis(): string {
-    return useThis(this.use())
-  }
-  
+  abstract useThis(): string
 }
 

@@ -67,10 +67,7 @@ export namespace ObjectU {
   /**
    * Встроенная функция {@linkcode Object.values} с улучшенной типизацией
    */
-  export function ObjectValues
-  <O extends {}|null|undefined>
-  (object: O)
-  : ObjectValuesArrType<O & object> {
+  export function ObjectValues<O extends anyval>(object: O): ObjectValuesArrType<O & object> {
     if (!isobject(object)) return []
     return Object.values(object) as ObjectValuesArrType<O & object>
   }

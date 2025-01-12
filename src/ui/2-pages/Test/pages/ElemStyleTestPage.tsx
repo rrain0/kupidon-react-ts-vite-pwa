@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
-import { testDevWidgetStyle } from 'src/mini-libs/widget-style/dev/WidgetStyle.ts'
+import { testDevWidgetStyle } from 'src/mini-libs/widget-style/dev/style/WidgetStyle.ts'
 import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'

@@ -3,26 +3,31 @@ import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
 import { CssAttrEnum } from 'src/mini-libs/widget-style/dev/css/CssAttrEnum.ts'
 import { CssProp } from 'src/mini-libs/widget-style/dev/css/CssProp.ts'
 import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
+import { CssSelectable } from 'src/mini-libs/widget-style/dev/css/CssSelectable.ts'
 import { CssState, useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
 import notExists = TypeU.notExists
+import RecordRo = TypeU.RecordRo
 
 
-export type StateToValue<S extends Record<string, CssState>> = {
-  [State in keyof S]?: undefined | '' | true | (S[State] extends CssAttrEnum<infer V> ? V : '')
+
+export type StateToValue<Ss extends RecordRo<string, CssState>> = {
+  [State in keyof Ss]?: undefined | '' | true | (Ss[State] extends CssAttrEnum<infer V> ? V : '')
 }
 
 
 export class CssElem<
-  const S extends Record<string, CssState>,
-  const P extends Record<string, CssProp>,
-> {
+  const out Ss extends RecordRo<string, CssState>,
+  const out Ps extends RecordRo<string, CssProp>,
+> implements CssSelectable {
   
   constructor(
     // classname
     // 'rrainuiButton'
     readonly name: string,
-    readonly states: S,
-    readonly props: P,
+    // stateName -> CssState
+    readonly states: Ss,
+    // propName -> CssProp
+    readonly props: Ps,
   ) { }
   
   static newEmpty() {
@@ -42,13 +47,11 @@ export class CssElem<
   // & dot classname
   // '&.rrainuiButton'
   useThis() {
-    const used = this.use()
-    if (!used) return ''
-    return `&${used}`
+    return useThis(this.use())
   }
   
   
-  useState(state: StateToValue<S> = { }) {
+  useState(state: StateToValue<Ss> = { }) {
     let used = this.use()
     Object.entries(state).forEach(([name, state]) => {
       if (notExists(state)) return
@@ -64,7 +67,7 @@ export class CssElem<
     return used
   }
   
-  useStateThis(state: StateToValue<S> = { }) {
+  useStateThis(state: StateToValue<Ss> = { }) {
     return useThis(this.useState(state))
   }
   
@@ -75,14 +78,14 @@ export class CssElem<
 
 // Examples
 {
-  const btn = new CssElem('myButton', {
+  const btn = new CssElem('rruiButton', {
     normal: CssPseudos.empty,
     hover: CssPseudos.hover,
     variant: new CssAttrEnum('variant', ['filled', 'outlined']),
     withBorder: new CssAttr('withBorder'),
   }, { })
   
-  // &.myButton:hover[variant=filled][withBorder]
+  // &.rruiButton:hover[variant=filled][withBorder]
   const btnHoverFilledWithBorderThisSelector = btn.useStateThis({
     hover: true,
     variant: 'filled',

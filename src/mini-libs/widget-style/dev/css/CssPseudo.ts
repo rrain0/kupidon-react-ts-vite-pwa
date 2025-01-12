@@ -1,4 +1,4 @@
-import { CssState } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
+import { CssState, useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
 
 
 export class CssPseudo extends CssState {
@@ -16,6 +16,10 @@ export class CssPseudo extends CssState {
     const name = this.name
     if (!name) return ''
     return `:${name}`
+  }
+  
+  useThis() {
+    return useThis(this.use())
   }
   
 }

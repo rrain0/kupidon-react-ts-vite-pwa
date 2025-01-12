@@ -3,7 +3,7 @@ import { useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
 
 
 
-export class CssAttrEnum<const V extends string> extends CssAttr {
+export class CssAttrEnum<const out V extends string> extends CssAttr {
   
   constructor(
     // Attr name
@@ -11,7 +11,7 @@ export class CssAttrEnum<const V extends string> extends CssAttr {
     name: string,
     // Possible values
     // ['horizontal', 'vertical']
-    readonly values: V[],
+    readonly values: readonly V[],
   ) {
     super(name)
   }
@@ -55,3 +55,4 @@ export const CssAttrEnums = {
   inputType: new CssAttrEnum('type', ['radio', 'checkbox']),
   
 } as const satisfies Record<string, CssAttrEnum<any>>
+

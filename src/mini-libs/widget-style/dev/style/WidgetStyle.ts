@@ -1,28 +1,43 @@
 
 import { TypeU } from '@util/common/TypeU.ts'
+import { CssElem } from 'src/mini-libs/widget-style/dev/css/CssElem.ts'
 import isnumber = TypeU.isnumber
 import isobject = TypeU.isobject
-import { CssPseudo } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
+import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
 import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
+import { CssWidget } from 'src/mini-libs/widget-style/dev/widget/CssWidget.ts'
 
 
 
 
-/* eslint-disable @stylistic/quotes, @stylistic/comma-dangle */
-/* eslint-enable @stylistic/quotes, @stylistic/comma-dangle */
 export function testDevWidgetStyle() {
   {
+    const frame = new CssElem('rruiFrame', {
+      hover: CssPseudos.hover,
+    }, { })
+    const box = new CssElem('rruiBox', {
+      hover: CssPseudos.hover,
+    }, { })
+    
+    const widget = CssWidget
+      .ofRoot('frame', frame)
+      .add('frame', '>', 'box', box)
+    
     // .frame > .box
-    const s: WidgetStyle2.Style = {
+    const s: Style = {
       background: '#c0ffee',
       size: 'full',
       frameHoverBg: 'green', // frame: { hover: { bg: 'green' } }
       boxSz: '50%', // { box: { sz: '50%' } }
       boxBg: 'white', // { box: { bg: 'white' } }
       frameHoverBoxBg: 'indianred', // frame: { hover: { box: { bg: 'green' } } }
-      hoverBoxSz: '60%', // frame: { hover: { box: { sz: '60%' } } }
+      // not supported yet
+      //hoverBoxSz: '60%', // frame: { hover: { box: { sz: '60%' } } }
     }
-    WidgetStyle2.transform(s)
+    
+    const widgetStyle = new WidgetStyle(widget)
+    widgetStyle.transform(s)
+    
   }
 }
 
@@ -30,8 +45,98 @@ export function testDevWidgetStyle() {
 
 
 
-export namespace WidgetStyle2 {
+export type StyleValue =
+  | string // pass as is if there are no special values or transformations
+  | number // transform to fractions or pixels
+  | null // set empty value (background: none, color: transparent)
+  | undefined // remove value definition
+
+export interface Style {
+  [prop: string]: StyleValue /* | Style */
+}
+
+export type TransformData = {
+  elem?: string | undefined
+  state?: string | undefined
+  prop?: string | undefined
+  value?: StyleValue | undefined
+}
+
+
+export class WidgetStyle {
   
+  constructor(
+    readonly widget: CssWidget<any>,
+  ) { }
+  
+  
+  transform(style: Style): string {
+    const data: TransformData[][] = []
+    
+    Object.entries(style).forEach(([styleSelector, value]) => {
+      const d: TransformData[] = []
+      
+      loop: while (true) {
+        if (!styleSelector.length) break
+        styleSelector = styleSelector[0].toLowerCase() + styleSelector.slice(1)
+        
+        // Check element
+        {
+          const elemNames = Object.keys(this.widget.elements)
+          for (const elemName of elemNames) {
+            if (styleSelector.startsWith(elemName)) {
+              styleSelector = styleSelector.slice(elemName.length)
+              d.push({ elem: elemName })
+              continue loop
+            }
+          }
+        }
+        
+        // Check element state
+        {
+          const e = d.at(-1)?.elem
+          if (e) {
+            const stateNames = Object.keys(this.widget.elements[e].element.states)
+            for (const stateName of stateNames) {
+              if (styleSelector.startsWith(stateName)) {
+                styleSelector = styleSelector.slice(stateName.length)
+                if (!d.length) d.push({ })
+                d.at(-1)!.state = stateName
+                continue loop
+              }
+            }
+          }
+        }
+        
+        // Check property
+        {
+          if (!d.length) d.push({ })
+          d.at(-1)!.prop = styleSelector
+          d.at(-1)!.value = value
+          break loop
+        }
+        
+        //throw new Error(`Unknown style selector "${styleSelector}"`)
+      }
+      
+      data.push(d)
+    })
+    
+    console.log('data', data)
+    // TODO
+    return ''
+  }
+  
+  
+}
+
+
+
+
+
+
+
+export namespace WidgetStyle2Test {
   
   
   export type StyleValue =
@@ -39,17 +144,13 @@ export namespace WidgetStyle2 {
     | number // transform to fractions or pixels
     | null // set empty value (background: none, color: transparent)
     | undefined // remove value definition
+  
   export interface Style {
     [prop: string]: StyleValue | Style
   }
   
-  // В зависимости от состояния каких-то элементов, какому-то элементу выставляем свойство
-  export type TransformData = {
-    media: string[]
-    elems: { [elem: string]: string[] } // states for elements
-    prop?: string | undefined
-    value?: StyleValue | undefined
-  }
+  
+  
   export type TransformData0 = {
     media?: string | undefined
     selector?: string | undefined
