@@ -5,6 +5,7 @@ import isnumber = TypeU.isnumber
 import isobject = TypeU.isobject
 import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
 import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
+import { transformers } from 'src/mini-libs/widget-style/dev/style/Transformers.ts'
 import { CssWidget } from 'src/mini-libs/widget-style/dev/widget/CssWidget.ts'
 
 
@@ -36,7 +37,10 @@ export function testDevWidgetStyle() {
     }
     
     const widgetStyle = new WidgetStyle(widget)
-    widgetStyle.transform(s)
+    const transformData = widgetStyle.styleToTransformData(s)
+    console.log('transformData', transformData)
+    const unpackedTransformData = widgetStyle.transformDataToUnpackedTransformData(transformData)
+    console.log('unpackedTransformData', unpackedTransformData)
     
   }
 }
@@ -60,7 +64,11 @@ export type TransformData = {
   state?: string | undefined
   prop?: string | undefined
   value?: StyleValue | undefined
+  media?: string | undefined
 }
+
+export type Transformer = (data: TransformData[]) => TransformData[][]
+export type Transformers = Record<string, Transformer>
 
 
 export class WidgetStyle {
@@ -70,7 +78,8 @@ export class WidgetStyle {
   ) { }
   
   
-  transform(style: Style): string {
+  
+  styleToTransformData(style: Style): TransformData[][] {
     const data: TransformData[][] = []
     
     Object.entries(style).forEach(([styleSelector, value]) => {
@@ -122,11 +131,14 @@ export class WidgetStyle {
       data.push(d)
     })
     
-    console.log('data', data)
-    // TODO
-    return ''
+    return data
   }
   
+  transformDataToUnpackedTransformData(transformData: TransformData[][]): TransformData[][] {
+    return transformData.flatMap(d => {
+      return transformers.hover(d).flatMap(it => transformers[d.at(-1)!.prop!](it))
+    })
+  }
   
 }
 

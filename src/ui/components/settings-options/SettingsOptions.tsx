@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import row = EmotionCommon.row
 import resetH = EmotionCommon.resetH
 import center = EmotionCommon.center

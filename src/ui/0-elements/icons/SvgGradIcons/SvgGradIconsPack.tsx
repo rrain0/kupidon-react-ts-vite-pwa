@@ -5,7 +5,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
-import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/style/SvgGradIconsS.ts'
+import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
 
 
 import ArrowAngledRounded2GradSvg from 'src/res/ic/gradient/arrow-angled-rounded-2-grad.svg?react'

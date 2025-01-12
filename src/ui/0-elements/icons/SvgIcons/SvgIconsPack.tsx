@@ -72,7 +72,7 @@ import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.sv
 import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
 
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists

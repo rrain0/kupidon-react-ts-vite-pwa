@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import {

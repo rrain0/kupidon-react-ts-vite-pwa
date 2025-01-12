@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
+import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
 import Elem = WidgetStyle.Elem

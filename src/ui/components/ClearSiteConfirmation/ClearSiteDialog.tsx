@@ -24,7 +24,7 @@ import Spinner8LinesIc = SvgIconsPack.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIconsPack.ClearTrashIc
 import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 

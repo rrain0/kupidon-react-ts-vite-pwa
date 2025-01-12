@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable

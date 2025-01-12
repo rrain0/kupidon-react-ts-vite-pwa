@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SpinnerCircleQuarterIc = SvgIconsPack.SpinnerCircleQuarterIc
 import InfoToastifyIc = SvgIconsPack.InfoToastifyIc
 import CheckmarkCircleToastifyIc = SvgIconsPack.CheckmarkCircleToastifyIc

@@ -11,7 +11,7 @@ import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomShee
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS.ts'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'

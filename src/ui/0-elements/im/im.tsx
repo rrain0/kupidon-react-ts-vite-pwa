@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/style/SvgIconS'
+import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle'
 import abs = EmotionCommon.abs
 import center = EmotionCommon.center
