@@ -682,7 +682,7 @@ const ShortInfoBox = styled.div`
   align-items: start;
   justify-content: end;
   gap: 14px;
-  padding: 10px;
+  padding: 10px 14px;
   border-radius: 12px;
   background: #00000066;
   & > * { pointer-events: auto }
