@@ -10,6 +10,7 @@ import { useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import { transformers } from 'src/mini-libs/widget-style-4/style/Transformers.ts'
 import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
 import uncapitalize = StringU.uncapitalize
+import camelCaseToUpperCase = StringU.camelCaseToUpperCase
 
 
 
@@ -35,6 +36,8 @@ export function testDevWidgetStyle4() {
       boxSz: '50%', // { box: { sz: '50%' } }
       boxBg: 'white', // { box: { bg: 'white' } }
       frameHoverBoxBg: 'indianred', // frame: { hover: { box: { bg: 'green' } } }
+      // not registered property will be kebab-cased and passed to styles
+      flexGrow: '1',
       // not supported yet
       //afterBg: 'red',
       // not supported yet
@@ -127,7 +130,7 @@ export class WidgetStyle {
         // Check property
         {
           if (!d.length) d.push({ })
-          d.at(-1)!.prop = styleSelector
+          d.at(-1)!.prop = camelCaseToUpperCase(styleSelector)
           d.at(-1)!.value = value
           styleSelector = ''
         }
@@ -143,7 +146,7 @@ export class WidgetStyle {
   
   transformDataToUnpackedTransformData(transformData: TransformData[][]): TransformData[][] {
     return transformData.flatMap(d => {
-      return transformers.hover(d).flatMap(it => transformers[d.at(-1)!.prop!](it))
+      return transformers.hover(d).flatMap(it => transformers[d.at(-1)!.prop!]?.(it) ?? [it])
     })
   }
   

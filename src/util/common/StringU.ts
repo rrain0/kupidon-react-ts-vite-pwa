@@ -8,16 +8,19 @@ export namespace StringU {
   export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1)
   export const uncapitalize = (str: string) => str[0].toLowerCase() + str.slice(1)
   
+  export const camelCaseToUpperCase = (str: string) => {
+    const pattern = /(\p{Lu})|(\d+)/gu
+    // '$&' - заменяется на найденную подстроку
+    str = str.replace(pattern, '-$&').toLowerCase()
+    return str
+  }
   
-  /**
-   *   Обрезает у строки хвост {tail} с начала и с конца
-   */
+  
+  /** Обрезает у строки хвост {tail} с начала и с конца */
   export const trimTails = (str: string, tail: string) =>
     str.replaceAll(RegExp(`^(${tail})|(${tail})$`, 'g'), '')
   
-  /**
-   *   Обрезает у строки '/' с начала и с конца
-   */
+  /** Обрезает у строки '/' с начала и с конца */
   export const trimSlash = (str: string) => trimTails(str, '/')
   
   
