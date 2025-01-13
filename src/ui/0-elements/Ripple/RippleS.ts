@@ -38,6 +38,7 @@ export namespace RippleS {
   
   
   
+  // todo move opacity to theme
   const opacity = '66'
   
   
@@ -67,7 +68,7 @@ export namespace RippleS {
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.ct[0] + opacity)}
+      ${W.e.ripple.p.color.set(t.ripple.ct[0])}
     }
   `
   

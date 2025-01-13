@@ -5,6 +5,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
+import { RippleS } from 'src/ui/0-elements/Ripple/RippleS.ts'
 import { TypeU } from 'src/util/common/TypeU'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
@@ -87,10 +88,7 @@ export namespace ButtonS {
       color: CssProp.color,
     })
     const border = new Elem('rrainuiBorder', { }, { })
-    const ripple = new Elem(RippleStyle.El0.frameClassName, { }, {
-      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center', 'cursor']),
-      color: new CssProp(RippleStyle.Prop.color),
-    })
+    const ripple = Elem.newEmpty()
     
     return { button, border, ripple } as const
   }()
@@ -117,6 +115,7 @@ export namespace ButtonS {
       place-items: center;
       border: none;
       overflow-wrap: anywhere;
+      overflow: hidden;
       
       transition: background linear 300ms;
     }
@@ -125,13 +124,18 @@ export namespace ButtonS {
       pointer-events: none;
       border-radius: inherit;
     }
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${RippleS.base}
+    }
     
     // state: disabled
     ${W.use.s.disabled().e.button().thisUse} {
       cursor: not-allowed;
     }
     ${W.use.s.disabled().e.ripple().thisUse} {
-      display: none;
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        display: none;
+      }
     }
   `
   
@@ -181,7 +185,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(colors.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${!!colors.ctRipple && W.e.ripple.e.props.color.set(colors.ctRipple)}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${!!colors.ctRipple && RippleS.W.e.ripple.p.color.set(colors.ctRipple)}
+      }
     }
     
     // state: hover
@@ -221,7 +227,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.buttonMain.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -257,7 +265,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.buttonAccent.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -296,7 +306,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -324,7 +336,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.elementDanger.ct[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -391,7 +405,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.page.ct2)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+      }
     }
     
     // state: hover
@@ -453,7 +469,7 @@ export namespace ButtonS {
       gap: 0.6em;
       ${Txt.small1};
     }
-    ${W.use.s.normal().e.border().thisUse}{
+    ${W.use.s.normal().e.border().thisUse} {
       border: none;
     }
   `
@@ -491,7 +507,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -519,7 +537,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.buttonNormal.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -547,7 +567,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.buttonAccent.ct[0])}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
 
     // state: hover
@@ -584,7 +606,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.elementDanger.ct[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+      }
     }
     
     // state: hover
@@ -611,7 +635,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.previewButtonNorm.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.previewButtonNorm.ctRipple)}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.previewButtonNorm.ctRipple)}
+      }
     }
     
     // state: hover
@@ -646,7 +672,9 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.previewButtonMain.ct)}
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.previewButtonMain.ctRipple)}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.previewButtonMain.ctRipple)}
+      }
     }
     
     // state: hover
@@ -721,7 +749,9 @@ export namespace ButtonS {
       padding: 11px;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.mode.set('center')};
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.p.mode.set('center')};
+      }
     }
   `
   // type: filled, shape: round, add size: big2
@@ -811,7 +841,9 @@ export namespace ButtonS {
       border-color: ${t.buttonNormal.bg[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+      }
     }
     
     // state: hover
@@ -842,7 +874,9 @@ export namespace ButtonS {
       border-color: ${t.buttonAccent.bg[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+      }
     }
     
     // state: hover
@@ -914,7 +948,10 @@ export namespace ButtonS {
       ${W.e.button.e.props.color.set(t.page.ct2)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0]+'88')}
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        // todo move opacity to theme
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+      }
     }
 
     // state: hover
@@ -1006,7 +1043,9 @@ export namespace ButtonS {
       padding: 11px;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.mode.set('center')};
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.p.mode.set('center')};
+      }
     }
   `
   // type: text, shape: round, add color: normal
@@ -1016,7 +1055,9 @@ export namespace ButtonS {
       ${W.e.button.p.color.set(t.buttonNormal.bg[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0]+'88')};
+      ${RippleS.W.use.s.normal().e.ripple().thisUse} {
+        ${RippleS.W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0] + '88')};
+      }
     }
     
     // state: hover

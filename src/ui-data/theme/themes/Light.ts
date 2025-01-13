@@ -93,7 +93,7 @@ export const LightProps: ThemeProps = {
   },
   
   ripple: {
-    ct:              ['#ffffff'],
+    ct:              ['#ffffff66'],
     ctOnTransparent: ['#666666'],
   },
   
@@ -204,15 +204,13 @@ export const LightProps: ThemeProps = {
     ctGrad:    ['#1F1F1F', '#3C3C3C', '#6D6D6D'],
     bgFc:      '#bbbbbb',
     ctFc:      '#1F1F1F',
-    // todo new ripple
-    ctRipple:  '#1F1F1F',
+    ctRipple:  '#1F1F1F66',
   },
   previewButtonMain: {
     bg:        '#3C3C3C',
     bgGrad:    ['#1F1F1F', '#6D6D6D'],
     ct:        '#ffffff',
-    // todo new ripple
-    ctRipple:  '#1F1F1F',
+    ctRipple:  '#1F1F1F66',
   },
   previewInfoBox: {
     bg:        'transparent',

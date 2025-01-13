@@ -10,36 +10,34 @@ type UseRippleProps = Puro<{
   children: (renderProps: UseRippleRenderProps) => React.ReactNode
 }>
 
-const UseRipple = React.memo(
-  (props: UseRippleProps) => {
-    
-    
-    const [isShow, show, hide] = useBool(false)
-    const [clientXY, setClientXY] = useState({ x: 0, y: 0 })
-    
-    const target = useMemo<RippleTargetProps>(() => {
-      return {
-        onPointerDown: (ev: React.PointerEvent) => {
-          ev.currentTarget.setPointerCapture(ev.pointerId)
-          setClientXY({ x: ev.clientX, y: ev.clientY })
-          show()
-        },
-        onPointerUp: hide,
-        onPointerCancel: hide,
-      }
-    }, [])
-    
-    const useRippleRenderProps = useMemo<UseRippleRenderProps>(() => {
-      return {
-        target,
-        ripple: { isShow, clientXY },
-      }
-    }, [target, isShow])
-    
-    
-    return props.children?.(useRippleRenderProps)
-  }
-)
+const UseRipple = React.memo((props: UseRippleProps) => {
+  
+  
+  const [isShow, show, hide] = useBool(false)
+  const [clientXY, setClientXY] = useState({ x: 0, y: 0 })
+  
+  const target = useMemo<RippleTargetProps>(() => {
+    return {
+      onPointerDown: (ev: React.PointerEvent) => {
+        ev.currentTarget.setPointerCapture(ev.pointerId)
+        setClientXY({ x: ev.clientX, y: ev.clientY })
+        show()
+      },
+      onPointerUp: hide,
+      onPointerCancel: hide,
+    }
+  }, [])
+  
+  const useRippleRenderProps = useMemo<UseRippleRenderProps>(() => {
+    return {
+      target,
+      ripple: { isShow, clientXY },
+    }
+  }, [target, isShow])
+  
+  
+  return props.children?.(useRippleRenderProps)
+})
 export default UseRipple
 
 

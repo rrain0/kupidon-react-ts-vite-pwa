@@ -6,7 +6,7 @@ import Setter = TypeU.Setter
 import ValueOrGenerator = TypeU.ValueOrGenerator
 
 
-export const useRefAndState = <S>(initialState: ValueOrGenerator<S>) => {
+export const useStateAndRef = <S>(initialState: ValueOrGenerator<S>) => {
   const [state, setState] = useState(initialState)
   // useState handles initial value for ref to be set
   const [getRefValue, setRefValue, ref] = useRefGetSet(state)
@@ -17,5 +17,5 @@ export const useRefAndState = <S>(initialState: ValueOrGenerator<S>) => {
     setState(value)
   }, [])
   
-  return [getRefValue, state, set, ref] as const
+  return [state, getRefValue, set, ref] as const
 }

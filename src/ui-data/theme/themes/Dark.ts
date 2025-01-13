@@ -92,7 +92,7 @@ export const DarkProps: ThemeProps = {
   },
   
   ripple: {
-    ct:              ['#000000'],
+    ct:              ['#00000066'],
     ctOnTransparent: ['#aaaaaa'],
   },
   

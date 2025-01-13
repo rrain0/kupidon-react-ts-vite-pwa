@@ -13,6 +13,7 @@ import CssPseudo = WidgetStyle.CssPseudo
 import CssAttr = WidgetStyle.CssAttr
 import abs = EmotionCommon.abs
 import center = EmotionCommon.center
+import col = EmotionCommon.col
 
 
 
@@ -20,8 +21,6 @@ import center = EmotionCommon.center
 export namespace SelectItemS {
   
   
-  import colC = EmotionCommon.colC
-  import col = EmotionCommon.col
   export const W = (() => {
     
     const frame = new Elem('rrainuiSelectItemFrame', {

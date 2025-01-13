@@ -6,6 +6,7 @@ import { DateU } from '@util/date/DateU.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
+import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
@@ -132,7 +133,7 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
-  const [isDragging, startDragging, endDragging] = useBool(false)
+  const [isDragging, getIsDragging, setIsDragging] = useStateAndRef(false)
   useNoSelect(isDragging)
   const canUseGestures = useLockAppGestures(isDragging)
   
@@ -251,15 +252,15 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const [getIsDragging, setIsDragging] = useRefGetSet(false)
+  const [getWasDragged, setWasDragged] = useRefGetSet(false)
   
   const onAnyDrag = (cpy: number, vertical: boolean, drag: boolean) => {
     if (isPhotosDraggable && vertical) {
       lockTouchAction()
       if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
-        startDragging()
         setIsDragging(true)
         setCanStartDrag(false)
+        setWasDragged(true)
       }
       if (!getIsDragging() && !getCanStartDrag()) {
         unlockTouchAction()
@@ -276,12 +277,16 @@ const Preview = React.memo((props: PreviewProps) => {
   }
   const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
   
+  const onDragStart = () => {
+    setWasDragged(false)
+  }
+  const [getOnDragStart] = useAsRefGet(onDragStart)
+  
   const onDragEnd = (vely: number) => {
     if (isDragging) finishUpdateViews(vely)
     setNeedMerge(true)
     setCanStartDrag(true)
     unlockTouchAction()
-    endDragging()
     setIsDragging(false)
   }
   const [getOnDragEnd] = useAsRefGet(onDragEnd)
@@ -308,7 +313,7 @@ const Preview = React.memo((props: PreviewProps) => {
     // onAnyDrag
     getOnAnyDrag()(getDragCurrProgressY(), vertical, drag)
     // onDragStart
-    if (first) { }
+    if (first) { getOnDragStart()() }
     // onDragging
     if (!first && !last) { }
     // onDragEnd
@@ -442,17 +447,18 @@ const Preview = React.memo((props: PreviewProps) => {
                         </NoImagesBox>
                       </>
                     )}
+                    <PhotoBottomFade />
                     {/* <div
-                     css={css`
-                     position: absolute;
-                     top: 20px;
-                     left: 20px;
-                     color: aquamarine;
-                     font-size: 40px;
-                     `}
-                     >
-                     {i}
-                     </div> */}
+                      css={css`
+                        position: absolute;
+                        top: 20px;
+                        left: 20px;
+                        color: aquamarine;
+                        font-size: 40px;
+                      `}
+                    >
+                      {i}
+                    </div> */}
                   </AnimatedPhotoBox>
                 )
               })}
@@ -468,16 +474,42 @@ const Preview = React.memo((props: PreviewProps) => {
                 
                 <ActionButtonsBox>
                   {/* todo disable onClick while dragging */}
-                  <Button css={backButtonS} onClick={() => console.log('back')}>
+                  <Button
+                    css={backButtonS}
+                    disabled={isDragging}
+                    onClick={() => {
+                      console.log('wasDragged', getWasDragged())
+                      console.log('back')
+                      if (getWasDragged()) return
+                    }}
+                  >
                     <ArrowReload2GradIc />
                   </Button>
-                  <Button css={dislikeButtonS}>
+                  <Button
+                    css={dislikeButtonS}
+                    disabled={isDragging}
+                    onClick={() => {
+                      if (getWasDragged()) return
+                    }}
+                  >
                     <Cross2GradIc />
                   </Button>
-                  <Button css={likeButtonS}>
+                  <Button
+                    css={likeButtonS}
+                    disabled={isDragging}
+                    onClick={() => {
+                      if (getWasDragged()) return
+                    }}
+                  >
                     <Heart2Ic />
                   </Button>
-                  <Button css={infoButtonS}>
+                  <Button
+                    css={infoButtonS}
+                    disabled={isDragging}
+                    onClick={() => {
+                      if (getWasDragged()) return
+                    }}
+                  >
                     <ArrowAngledRounded2GradIc />
                   </Button>
                 </ActionButtonsBox>
@@ -523,6 +555,10 @@ export default Preview
 
 
 
+const borderRadius = 16
+const fade = '#000000aa'
+
+
 const PreviewFrame = styled.div`
   width: 100%;
   height: 100%;
@@ -555,7 +591,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: ${borderRadius}px;
   ${centerAll};
   overflow: hidden;
   // TODO add some bg gradient while image not loaded already
@@ -581,6 +617,16 @@ const AnimatedPhoto = styled(AnimatedImg)`
   
   pointer-events: none; // or attr draggable="false"
 `
+const PhotoBottomFade = styled.div`
+  ${abs};
+  // todo theme - fade color
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0% 60%,
+    ${fade} 90%
+  );
+`
+
 
 const Blur = styled.div`
   ${fill};
@@ -593,7 +639,7 @@ const NoImagesBox = styled.div`
   height: 180px;
   position: relative;
   z-index: 1;
-  border-radius: 16px;
+  border-radius: ${borderRadius}px;
   background-color: ${p => p.theme.boxTransparent.bg};
   ${centerGrid};
   grid:
@@ -620,26 +666,25 @@ const NoImagesTitle = styled.div`
 
 
 
+
 const PreviewInfoBox = styled.div`
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 10;
+  border-radius: ${borderRadius}px;
   height: fit-content;
   ${row};
-  padding-left: 16px;
-  padding-right: 16px;
-  gap: 10px;
-  pointer-events: none;
+  gap: 8px;
 `
 
 
 const ActionButtonsBox = styled.div`
+  padding-right: 16px;
   padding-bottom: 36px;
   ${colC};
   gap: 22px;
-  & > * { pointer-events: auto }
 `
 const backButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
@@ -648,11 +693,21 @@ const backButtonS = (t: AppTheme.Theme) => css`
     //rotate: -0.125turn;
     translate: 0 -6%;
   }
+  // todo move to styles
+  :disabled {
+    transition: opacity 0.2s;
+    opacity: 0.3;
+  }
 `
 const dislikeButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormalBigger(t)};
   ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('35.5%')}
+  }
+  // todo move to styles
+  :disabled {
+    transition: opacity 0.2s;
+    opacity: 0.3;
   }
 `
 const likeButtonS = (t: AppTheme.Theme) => css`
@@ -660,12 +715,22 @@ const likeButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.W.use.s.normal().e.icon().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('51.05%')}
   }
+  // todo move to styles
+  :disabled {
+    transition: opacity 0.2s;
+    opacity: 0.3;
+  }
 `
 const infoButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
   ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('50%')};
     translate: 0 10%;
+  }
+  // todo move to styles
+  :disabled {
+    transition: opacity 0.2s;
+    opacity: 0.3;
   }
 `
 
@@ -675,7 +740,8 @@ const ShortInfoContainer = styled.div`
   ${col};
   align-items: start;
   justify-content: end;
-  padding-bottom: 16px;
+  //padding-left: 10px;
+  //padding-bottom: 10px;
 `
 const ShortInfoBox = styled.div`
   ${col};
@@ -683,9 +749,8 @@ const ShortInfoBox = styled.div`
   justify-content: end;
   gap: 14px;
   padding: 10px 14px;
-  border-radius: 12px;
-  background: #00000066;
-  & > * { pointer-events: auto }
+  //border-radius: 12px;
+  //background: #00000066;
 `
 const Name = styled.div`
   background-color: ${p => p.theme.previewInfoBox.bg};
@@ -703,9 +768,9 @@ const AboutMe = styled.div`
   letter-spacing: normal;
   
   background-image: linear-gradient(
-    to bottom,
-    ${p => p.theme.previewInfoBox.ctGrad[0]} 50%,
-    ${p => p.theme.previewInfoBox.ctGrad[1]} 80%
+    to top,
+    ${p => p.theme.previewInfoBox.ctGrad[1]} 8px,
+    ${p => p.theme.previewInfoBox.ctGrad[0]} 40px
   );
   background-clip: text;
   background-size: 100% 94px;
