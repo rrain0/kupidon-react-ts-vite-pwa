@@ -28,6 +28,8 @@ export const CssPseudos = {
   disabled: new CssPseudo('disabled'),
   
   // complex
+  // TODO - разбить на отдельные селекторы состояния,
+  //  да и hover всё равно должен быть отдельно под медиа
   anyFocus: new CssPseudo('where(:active,:focus,:focus-visible)'),
   // TODO - hover must be under media but focus-visible not
   inFocus: new CssPseudo('where(:hover,:focus-visible)'),

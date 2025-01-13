@@ -371,103 +371,104 @@ const Preview = React.memo((props: PreviewProps) => {
       <PreviewFrame>
         <PreviewFrame2 ref={frame2RefFun}>
           <PhotosContainer>
-            <PhotosContainer2 ref={photosBoxRef}>
-              <div css={contents} {...onTrackDrag()}>
-                {arrOfIndices(visiblePhotosCnt).map(i => {
-                  return (
-                    <AnimatedPhotoBox
-                      key={i}
-                      animated={{
-                        zIndex: animatedProgress.map(ap => {
-                          const { p, photoP, displayedI, pCurr } = ap(i)
-                          const z = -displayedI + visiblePhotosCnt - 1
-                          return z
-                        }),
-                        transform: animatedProgress.map(ap => {
-                          const { p, photoP, displayedI, pCurr } = ap(i)
-                          const y = (() => {
-                            if (displayedI === 0) return pCurr
-                            return -(displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                          })()
-                          return `translateY(${y}%)`
-                        }),
-                        scale: animatedProgress.map(ap => {
-                          const { p, photoP, displayedI, pCurr } = ap(i)
-                          const s = (() => {
-                            if (displayedI === 0) return 100
-                            return 100 - 5 * (displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                          })()
-                          return s / 100
-                        }),
-                        opacity: animatedProgress.map(ap => {
-                          const { p, photoP, displayedI, pCurr } = ap(i)
-                          const o = (() => {
-                            if (displayedI === 0) return 100 - RangeU.map(
-                              pCurr,
-                              [0, 30, 100],
-                              [0, 0, 100],
+            <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
+              {arrOfIndices(visiblePhotosCnt).map(i => {
+                return (
+                  <AnimatedPhotoBox
+                    key={i}
+                    animated={{
+                      zIndex: animatedProgress.map(ap => {
+                        const { p, photoP, displayedI, pCurr } = ap(i)
+                        const z = -displayedI + visiblePhotosCnt - 1
+                        return z
+                      }),
+                      transform: animatedProgress.map(ap => {
+                        const { p, photoP, displayedI, pCurr } = ap(i)
+                        const y = (() => {
+                          if (displayedI === 0) return pCurr
+                          return -(displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                        })()
+                        return `translateY(${y}%)`
+                      }),
+                      scale: animatedProgress.map(ap => {
+                        const { p, photoP, displayedI, pCurr } = ap(i)
+                        const s = (() => {
+                          if (displayedI === 0) return 100
+                          return 100 - 5 * (displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                        })()
+                        return s / 100
+                      }),
+                      opacity: animatedProgress.map(ap => {
+                        const { p, photoP, displayedI, pCurr } = ap(i)
+                        const o = (() => {
+                          if (displayedI === 0) return 100 - RangeU.map(
+                            pCurr,
+                            [0, 30, 100],
+                            [0, 0, 100],
+                          )
+                          if (displayedI === visiblePhotosCnt - 1) return RangeU.map(
+                            pCurr,
+                            [0, 80, 100],
+                            [0, 0, 100],
+                          )
+                          return 100
+                        })()
+                        return o / 100
+                      }),
+                    }}
+                  >
+                    {!!photosCnt && (
+                      <AnimatedPhoto
+                        animated={{
+                          src: animatedProgress.map(ap => {
+                            const { p, photoP, displayedI, pCurr } = ap(i)
+                            //console.log('displayedI', displayedI, 'photoP', photoP)
+                            const photoI = RangeU.loop(
+                              Math.floor(photoP / 100) + displayedI,
+                              [0, photosCnt],
                             )
-                            if (displayedI === visiblePhotosCnt - 1) return RangeU.map(
-                              pCurr,
-                              [0, 80, 100],
-                              [0, 0, 100],
-                            )
-                            return 100
-                          })()
-                          return o / 100
-                        }),
-                      }}
-                    >
-                      {!!photosCnt && (
-                        <AnimatedPhoto
-                          animated={{
-                            src: animatedProgress.map(ap => {
-                              const { p, photoP, displayedI, pCurr } = ap(i)
-                              //console.log('displayedI', displayedI, 'photoP', photoP)
-                              const photoI = RangeU.loop(
-                                Math.floor(photoP / 100) + displayedI,
-                                [0, photosCnt],
-                              )
-                              return availablePhotos[photoI]?.dataUrl ?? ''
-                            }),
-                          }}
-                        />
-                      )}
-                      {!photosCnt && (
-                        <>
-                          <Photo src={placeholderIm} />
-                          <Blur />
-                          <NoImagesBox>
-                            <PictureIc css={imSmallPlaceholderIcS} />
-                            <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
-                          </NoImagesBox>
-                        </>
-                      )}
-                      {/* <div
-                       css={css`
-                       position: absolute;
-                       top: 20px;
-                       left: 20px;
-                       color: aquamarine;
-                       font-size: 40px;
-                       `}
-                       >
-                       {i}
-                       </div> */}
-                    </AnimatedPhotoBox>
-                  )
-                })}
-              </div>
+                            return availablePhotos[photoI]?.dataUrl ?? ''
+                          }),
+                        }}
+                      />
+                    )}
+                    {!photosCnt && (
+                      <>
+                        <Photo src={placeholderIm} />
+                        <Blur />
+                        <NoImagesBox>
+                          <PictureIc css={imSmallPlaceholderIcS} />
+                          <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
+                        </NoImagesBox>
+                      </>
+                    )}
+                    {/* <div
+                     css={css`
+                     position: absolute;
+                     top: 20px;
+                     left: 20px;
+                     color: aquamarine;
+                     font-size: 40px;
+                     `}
+                     >
+                     {i}
+                     </div> */}
+                  </AnimatedPhotoBox>
+                )
+              })}
               
               <PreviewInfoBox>
                 
-                <ShortInfoBox>
-                  <Name>{nameAge}</Name>
-                  <AboutMe>{aboutMe}</AboutMe>
-                </ShortInfoBox>
+                <ShortInfoContainer>
+                  <ShortInfoBox>
+                    <Name>{nameAge}</Name>
+                    <AboutMe>{aboutMe}</AboutMe>
+                  </ShortInfoBox>
+                </ShortInfoContainer>
                 
                 <ActionButtonsBox>
-                  <Button css={backButtonS}>
+                  {/* todo disable onClick while dragging */}
+                  <Button css={backButtonS} onClick={() => console.log('back')}>
                     <ArrowReload2GradIc />
                   </Button>
                   <Button css={dislikeButtonS}>
@@ -550,22 +551,6 @@ const PhotosContainer2 = styled.div`
   & > * { pointer-events: auto; }
 `
 
-const PhotoBox = styled(animated.div)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  ${centerAll};
-  overflow: hidden;
-  // TODO add some bg gradient while image not loaded already
-  background-color: indianred;
-  
-  user-select: none;
-  pointer-events: auto;
-  
-  transform-origin: 50% 0;
-  will-change: transform, z-index, scale, opacity;
-`
 const AnimatedPhotoBox = styled(AnimatedDiv)`
   position: absolute;
   width: 100%;
@@ -685,12 +670,21 @@ const infoButtonS = (t: AppTheme.Theme) => css`
 `
 
 
-const ShortInfoBox = styled.div`
+const ShortInfoContainer = styled.div`
   flex: 1;
   ${col};
   align-items: start;
   justify-content: end;
-  gap: 9px;
+  padding-bottom: 16px;
+`
+const ShortInfoBox = styled.div`
+  ${col};
+  align-items: start;
+  justify-content: end;
+  gap: 14px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #00000066;
   & > * { pointer-events: auto }
 `
 const Name = styled.div`
@@ -698,15 +692,14 @@ const Name = styled.div`
   color: ${p => p.theme.previewInfoBox.ct};
   font-weight: 600;
   font-size: 32px;
-  line-height: 150%;
+  line-height: 100%;
   letter-spacing: normal;
 `
 const AboutMe = styled.div`
   max-height: 94px;
-  padding-bottom: 16px;
   font-weight: 400;
   font-size: 17px;
-  line-height: 150%;
+  line-height: 129%;
   letter-spacing: normal;
   
   background-image: linear-gradient(

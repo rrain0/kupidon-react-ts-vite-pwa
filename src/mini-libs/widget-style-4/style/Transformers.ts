@@ -83,6 +83,7 @@ const simpleTransformers = {
 } satisfies Transformers
 
 const complexTransformers = {
+  // TODO add set --sz: <value>
   // width: <value>; height: <value>;
   size: d => {
     const w = simpleTransformers.width(d)
