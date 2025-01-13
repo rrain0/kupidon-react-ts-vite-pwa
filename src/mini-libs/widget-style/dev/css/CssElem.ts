@@ -51,8 +51,8 @@ export class CssElem<
   }
   
   
-  useState(state: StateToValue<Ss> = { }) {
-    let used = this.use()
+  useOnlyState(state: StateToValue<Ss> = { }) {
+    let used = ''
     Object.entries(state).forEach(([name, state]) => {
       if (notExists(state)) return
       const s = this.states[name]
@@ -65,6 +65,11 @@ export class CssElem<
       }
     })
     return used
+  }
+  
+  
+  useState(state: StateToValue<Ss> = { }) {
+    return this.use() + this.useOnlyState(state)
   }
   
   useStateThis(state: StateToValue<Ss> = { }) {

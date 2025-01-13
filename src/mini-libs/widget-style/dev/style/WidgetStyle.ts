@@ -5,6 +5,7 @@ import isnumber = TypeU.isnumber
 import isobject = TypeU.isobject
 import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
 import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
+import { useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
 import { transformers } from 'src/mini-libs/widget-style/dev/style/Transformers.ts'
 import { CssWidget } from 'src/mini-libs/widget-style/dev/widget/CssWidget.ts'
 
@@ -41,6 +42,8 @@ export function testDevWidgetStyle() {
     console.log('transformData', transformData)
     const unpackedTransformData = widgetStyle.transformDataToUnpackedTransformData(transformData)
     console.log('unpackedTransformData', unpackedTransformData)
+    const styleString = widgetStyle.unpackedTransformDataToStyleString(unpackedTransformData)
+    console.log('styleString:', '\n' + styleString)
     
   }
 }
@@ -140,190 +143,65 @@ export class WidgetStyle {
     })
   }
   
-}
-
-
-
-
-
-
-
-export namespace WidgetStyle2Test {
-  
-  
-  export type StyleValue =
-    | string // pass as is if there are no special values or transformations
-    | number // transform to fractions or pixels
-    | null // set empty value (background: none, color: transparent)
-    | undefined // remove value definition
-  
-  export interface Style {
-    [prop: string]: StyleValue | Style
-  }
-  
-  
-  
-  export type TransformData0 = {
-    media?: string | undefined
-    selector?: string | undefined
-    prop?: string | undefined
-    value?: StyleValue | undefined
-  }
-  
-  export type Transformer = (data: TransformData0) => TransformData0[]
-  
-  export type Transformers = Record<string, Transformer>
-  
-  const hoverableMedia = '(hover: hover) and (pointer: fine)'
-  
-  // todo think about merging media & selector
-  export const simpleTransformers = {
-    width: d => {
-      if (d.prop) return [d]
-      d.prop = 'width'
-      if (isnumber(d.value)) d.value = `${d.value}px`
-      if (d.value === 'full') d.value = '100%'
-      return [d]
-    },
-    height: d => {
-      if (d.prop) return [d]
-      d.prop = 'height'
-      if (isnumber(d.value)) d.value = `${d.value}px`
-      if (d.value === 'full') d.value = '100%'
-      return [d]
-    },
-    background: d => {
-      if (d.prop) return [d]
-      d.prop = 'background'
-      if (d.value === null) d.value = 'none'
-      return [d] as const
-    },
-    hover: d => {
-      d.media = hoverableMedia
-      d.selector = d.selector + ':hover'
-      return [d] as const
-    },
-    active: d => {
-      d.selector = d.selector + ':active'
-      return [d] as const
-    },
-    focus: d => {
-      d.selector = d.selector + ':focus'
-      return [d] as const
-    },
-    focusVisible: d => {
-      d.selector = d.selector + ':focus-visible'
-      return [d] as const
-    },
-    error: d => {
-      d.selector = d.selector + '[data-error]'
-      return [d] as const
-    },
-  } satisfies Transformers
-  
-  export const complexTransformers = {
-    // width: <value>; height: <value>;
-    size: d => {
-      const w = simpleTransformers.width({ ...d })
-      const h = simpleTransformers.height({ ...d })
-      return [...w, ...h] as const
-    },
-    // :where(:active,:focus,:focus-visible)
-    anyFocus: d => {
-      const a = simpleTransformers.active({ ...d })
-      const f = simpleTransformers.focus({ ...d })
-      const fv = simpleTransformers.focusVisible({ ...d })
-      return [...a, ...f, ...fv] as const
-    },
-    // :where(:hover,:focus-visible)
-    inFocus: d => {
-      const h = simpleTransformers.hover({ ...d })
-      const fv = simpleTransformers.focusVisible({ ...d })
-      return [...h, ...fv] as const
-    },
-    
-  } satisfies Transformers
-  
-  export const elementTransformers = {
-    frame: d => {
-      d.selector = d.selector + '.frame'
-      return [d] as const
-    },
-    box: d => {
-      d.selector = d.selector + ' > .box'
-      return [d] as const
-    },
-  } satisfies Transformers
-  
-  export const transformers: Transformers = {
-    width: simpleTransformers.width,
-    w: simpleTransformers.width,
-    height: simpleTransformers.height,
-    h: simpleTransformers.height,
-    background: simpleTransformers.background,
-    bg: simpleTransformers.background,
-    size: complexTransformers.size,
-    sz: complexTransformers.size,
-    hover: simpleTransformers.hover,
-    hov: simpleTransformers.hover,
-    error: simpleTransformers.error,
-    err: simpleTransformers.error,
-    anyFocus: complexTransformers.anyFocus,
-    anyFc: complexTransformers.anyFocus,
-    inFocus: complexTransformers.inFocus,
-    inFc: complexTransformers.inFocus,
-    
-    frame: elementTransformers.frame,
-    ['']: elementTransformers.frame,
-    box: elementTransformers.box,
-  }
-  
-  
-  const deconstruct = (
-    style: Style,
-    // todo use as lexemes tree
-    keys: string[],
-    transformers: Transformers,
-    data: TransformData0[] = [{ }],
-    transformed = '',
-  ): string => {
-    // LOOP !!!
-    Object.entries(style).forEach(([styleSelector, value]) => {
-      let d = data.map(it => {
-        it = { ...it }
-        if (!isobject(value)) it.value = value
-        return it
-      })
+  // use WidgetElement selector
+  // todo add other elements' states
+  // todo batch nearest props' classes
+  unpackedTransformDataToStyleString(transformData: TransformData[][]): string {
+    const selectorToPropValues: [selector: string, propValue: string][] = []
+    transformData.forEach(dd => {
+      let propValue = ''
+      let selector = ''
+      let selectTargetElem: ((selectorUnderRoot: string) => string) | undefined = undefined
+      let media = ''
+      const underRootSelectors: string[] = []
       
-      // LOOP !!!
-      loop: while (true) {
-        if (!styleSelector.length) break
-        styleSelector = styleSelector[0].toLowerCase() + styleSelector.slice(1)
-        for (const key of keys) {
-          if (styleSelector.startsWith(key)) {
-            styleSelector = styleSelector.slice(key.length)
-            // LOOP !!!
-            d = d.flatMap(it => transformers[key](it))
-            continue loop
+      dd.toReversed().forEach(d => {
+        if (d.prop && d.value) {
+          propValue = `${d.prop}: ${d.value};`
+        }
+        if (d.media) {
+          media = `@media ${d.media}`
+        }
+        if (d.elem) {
+          const elem = this.widget.elements[d.elem]
+          if (!selectTargetElem) {
+            selectTargetElem = sel => elem.useWithRootStateSelector(sel, {
+              ...d.state && { [d.state]: true },
+            })
+          }
+          else {
+            underRootSelectors.push(elem.useStateUnderRoot({
+              ...d.state && { [d.state]: true },
+            }))
           }
         }
-        throw new Error(`Unknown style selector "${styleSelector}"`)
+      })
+      if (selectTargetElem) {
+        // @ts-expect-error
+        selector = `${selectTargetElem(underRootSelectors.join(''))}`
       }
+      let selectorToPropValue: [string, string]
+      if (media) propValue = `${media} { ${propValue} }`
+      if (selector) selectorToPropValue = [useThis(selector), propValue]
+      else selectorToPropValue = ['', propValue]
       
-      console.log('d', d)
-      
-      if (isobject(value)) transformed = deconstruct(value, keys, transformers, d, transformed)
+      selectorToPropValues.push(selectorToPropValue)
     })
     
-    return transformed
+    const groupedBySelector: Record<string, string[]> = { }
+    selectorToPropValues.forEach(([selector, propValue]) => {
+      groupedBySelector[selector] ??= []
+      groupedBySelector[selector].push(propValue)
+    })
+    
+    let style = ''
+    Object.entries(groupedBySelector).forEach(([selector, propValues]) => {
+      const propValuesStr = '\n' + propValues.join('\n') + '\n'
+      style += `${selector} { ${propValuesStr} }\n`
+    })
+    
+    return style
   }
-  
-  
-  export const transform = (style: Style): string => {
-    const keys = Object.keys(transformers).sort().reverse()
-    return deconstruct(style, keys, transformers)
-  }
-  
   
 }
 
