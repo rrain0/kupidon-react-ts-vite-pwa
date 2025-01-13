@@ -1,9 +1,9 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
-import { CssAttrEnum } from 'src/mini-libs/widget-style/dev/css/CssAttrEnum.ts'
-import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
-import { CssState } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
+import { CssAttr } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
+import { CssAttrEnum } from 'src/mini-libs/widget-style-4/css/CssAttrEnum.ts'
+import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
+import { CssState } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import RecordRo = TypeU.RecordRo
 import { CssWidgetElem } from './CssWidgetElem'
 import { CssProp } from '../css/CssProp'

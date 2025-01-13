@@ -5,6 +5,22 @@ import { MathU } from 'src/util/common/MathU.ts'
 export namespace StringU {
   
   
+  export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1)
+  export const uncapitalize = (str: string) => str[0].toLowerCase() + str.slice(1)
+  
+  
+  /**
+   *   Обрезает у строки хвост {tail} с начала и с конца
+   */
+  export const trimTails = (str: string, tail: string) =>
+    str.replaceAll(RegExp(`^(${tail})|(${tail})$`, 'g'), '')
+  
+  /**
+   *   Обрезает у строки '/' с начала и с конца
+   */
+  export const trimSlash = (str: string) => trimTails(str, '/')
+  
+  
   /**
    * Конвертация значения типа number в обычную строку (без сокращений типа 2e+67)
    * @param n Число
@@ -35,16 +51,6 @@ export namespace StringU {
   
     
   
-  /**
-   *   Обрезает у строки хвост {tail} с начала и с конца
-   */
-  export const trimTails = (str: string, tail: string) =>
-    str.replaceAll(RegExp(`^(${tail})|(${tail})$`, 'g'), '')
-  
-  /**
-   *   Обрезает у строки '/' с начала и с конца
-   */
-  export const trimSlash = (str: string) => trimTails(str, '/')
   
   
 }

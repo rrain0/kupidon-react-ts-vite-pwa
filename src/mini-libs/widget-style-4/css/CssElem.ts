@@ -1,10 +1,10 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
-import { CssAttrEnum } from 'src/mini-libs/widget-style/dev/css/CssAttrEnum.ts'
-import { CssProp } from 'src/mini-libs/widget-style/dev/css/CssProp.ts'
-import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
-import { CssSelectable } from 'src/mini-libs/widget-style/dev/css/CssSelectable.ts'
-import { CssState, useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
+import { CssAttr } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
+import { CssAttrEnum } from 'src/mini-libs/widget-style-4/css/CssAttrEnum.ts'
+import { CssProp } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
+import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
+import { CssSelectable } from 'src/mini-libs/widget-style-4/css/CssSelectable.ts'
+import { CssState, useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import notExists = TypeU.notExists
 import RecordRo = TypeU.RecordRo
 

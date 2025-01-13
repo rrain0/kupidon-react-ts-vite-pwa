@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { CssElem, StateToValue } from 'src/mini-libs/widget-style/dev/css/CssElem.ts'
-import { CssProp } from 'src/mini-libs/widget-style/dev/css/CssProp.ts'
-import { CssState } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
+import { CssElem, StateToValue } from 'src/mini-libs/widget-style-4/css/CssElem.ts'
+import { CssProp } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
+import { CssState } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import RecordRo = TypeU.RecordRo
 
 

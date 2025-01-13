@@ -33,7 +33,7 @@ import abs = EmotionCommon.abs
 
 
 export namespace ButtonS {
-  import Puro = TypeU.Puro
+  
   export const Attr0 = {
     error: DataAttr.error,
   } as const

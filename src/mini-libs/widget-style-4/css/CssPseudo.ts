@@ -1,4 +1,4 @@
-import { CssState, useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
+import { CssState, useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 
 
 export class CssPseudo extends CssState {

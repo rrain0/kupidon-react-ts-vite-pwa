@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { Transformers } from 'src/mini-libs/widget-style/dev/style/WidgetStyle.ts'
+import { Transformers } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
 import isnumber = TypeU.isnumber
 
 
@@ -13,6 +13,7 @@ const simpleTransformers = {
     p.prop = 'width'
     if (isnumber(p.value)) p.value = `${p.value}px`
     if (p.value === 'full') p.value = '100%'
+    if (p.value === null) p.value = 0
     return [[...d.slice(0, -1), p]]
   },
   height: d => {
@@ -20,6 +21,7 @@ const simpleTransformers = {
     p.prop = 'height'
     if (isnumber(p.value)) p.value = `${p.value}px`
     if (p.value === 'full') p.value = '100%'
+    if (p.value === null) p.value = 0
     return [[...d.slice(0, -1), p]]
   },
   background: d => {
@@ -28,12 +30,55 @@ const simpleTransformers = {
     if (p.value === null) p.value = 'none'
     return [[...d.slice(0, -1), p]]
   },
+  border: d => {
+    const p = { ...d.at(-1)! }
+    p.prop = 'border'
+    if (p.value === null) p.value = 'none'
+    return [[...d.slice(0, -1), p]]
+  },
+  outline: d => {
+    const p = { ...d.at(-1)! }
+    p.prop = 'outline'
+    if (p.value === null) p.value = 'none'
+    return [[...d.slice(0, -1), p]]
+  },
+  boxShadow: d => {
+    const p = { ...d.at(-1)! }
+    p.prop = 'box-shadow'
+    if (p.value === null) p.value = 'none'
+    return [[...d.slice(0, -1), p]]
+  },
+  margin: d => {
+    const p = { ...d.at(-1)! }
+    p.prop = 'margin'
+    if (p.value === null) p.value = 0
+    return [[...d.slice(0, -1), p]]
+  },
+  padding: d => {
+    const p = { ...d.at(-1)! }
+    p.prop = 'padding'
+    if (p.value === null) p.value = 0
+    return [[...d.slice(0, -1), p]]
+  },
+  gap: d => {
+    const p = { ...d.at(-1)! }
+    p.prop = 'gap'
+    if (p.value === null) p.value = 0
+    return [[...d.slice(0, -1), p]]
+  },
   
   hover: d => {
     // todo - must not check here
     const i = d.findIndex(it => it.state === 'hover')
     if (i === -1) return [d]
     return [d.toSpliced(i, 1, { ...d[i], media: hoverableMedia })]
+  },
+  
+  before: d => {
+    return [[...d, { elem: '::before' }]]
+  },
+  after: d => {
+    return [[...d, { elem: '::after' }]]
   },
 } satisfies Transformers
 
@@ -53,8 +98,19 @@ export const transformers = {
   h: simpleTransformers.height,
   background: simpleTransformers.background,
   bg: simpleTransformers.background,
+  border: simpleTransformers.border,
+  outline: simpleTransformers.outline,
+  boxShadow: simpleTransformers.boxShadow,
+  margin: simpleTransformers.margin,
+  m: simpleTransformers.margin,
+  padding: simpleTransformers.padding,
+  p: simpleTransformers.padding,
+  gap: simpleTransformers.gap,
+  g: simpleTransformers.gap,
+  
   size: complexTransformers.size,
   sz: complexTransformers.size,
+  
   hover: simpleTransformers.hover,
 } satisfies Transformers
 

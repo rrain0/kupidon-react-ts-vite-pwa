@@ -1,4 +1,4 @@
-import { CssSelectable } from 'src/mini-libs/widget-style/dev/css/CssSelectable.ts'
+import { CssSelectable } from 'src/mini-libs/widget-style-4/css/CssSelectable.ts'
 
 
 /*

@@ -1,7 +1,7 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
-import { testDevWidgetStyle } from 'src/mini-libs/widget-style/dev/style/WidgetStyle.ts'
+import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
 import CheckBrowserMinimumVersion
   from 'src/ui/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
@@ -18,7 +18,7 @@ import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 
 // todo remove
-testDevWidgetStyle()
+testDevWidgetStyle4()
 
 const App = React.memo(() => {
   useAppInstallationSetup()

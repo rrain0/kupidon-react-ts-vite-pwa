@@ -1,18 +1,20 @@
 
+import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { CssElem } from 'src/mini-libs/widget-style/dev/css/CssElem.ts'
+import { CssElem } from 'src/mini-libs/widget-style-4/css/CssElem.ts'
 import isnumber = TypeU.isnumber
 import isobject = TypeU.isobject
-import { CssPseudos } from 'src/mini-libs/widget-style/dev/css/CssPseudo.ts'
-import { CssAttr } from 'src/mini-libs/widget-style/dev/css/CssAttr.ts'
-import { useThis } from 'src/mini-libs/widget-style/dev/css/CssState.ts'
-import { transformers } from 'src/mini-libs/widget-style/dev/style/Transformers.ts'
-import { CssWidget } from 'src/mini-libs/widget-style/dev/widget/CssWidget.ts'
+import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
+import { CssAttr } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
+import { useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
+import { transformers } from 'src/mini-libs/widget-style-4/style/Transformers.ts'
+import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
+import uncapitalize = StringU.uncapitalize
 
 
 
 
-export function testDevWidgetStyle() {
+export function testDevWidgetStyle4() {
   {
     const frame = new CssElem('rruiFrame', {
       hover: CssPseudos.hover,
@@ -33,6 +35,8 @@ export function testDevWidgetStyle() {
       boxSz: '50%', // { box: { sz: '50%' } }
       boxBg: 'white', // { box: { bg: 'white' } }
       frameHoverBoxBg: 'indianred', // frame: { hover: { box: { bg: 'green' } } }
+      // not supported yet
+      //afterBg: 'red',
       // not supported yet
       //hoverBoxSz: '60%', // frame: { hover: { box: { sz: '60%' } } }
     }
@@ -90,7 +94,7 @@ export class WidgetStyle {
       
       loop: while (true) {
         if (!styleSelector.length) break
-        styleSelector = styleSelector[0].toLowerCase() + styleSelector.slice(1)
+        styleSelector = uncapitalize(styleSelector)
         
         // Check element
         {
@@ -125,7 +129,7 @@ export class WidgetStyle {
           if (!d.length) d.push({ })
           d.at(-1)!.prop = styleSelector
           d.at(-1)!.value = value
-          break loop
+          styleSelector = ''
         }
         
         //throw new Error(`Unknown style selector "${styleSelector}"`)
@@ -153,6 +157,7 @@ export class WidgetStyle {
       let selector = ''
       let selectTargetElem: ((selectorUnderRoot: string) => string) | undefined = undefined
       let media = ''
+      let pseudoElem = ''
       const underRootSelectors: string[] = []
       
       dd.toReversed().forEach(d => {
@@ -163,16 +168,21 @@ export class WidgetStyle {
           media = `@media ${d.media}`
         }
         if (d.elem) {
-          const elem = this.widget.elements[d.elem]
-          if (!selectTargetElem) {
-            selectTargetElem = sel => elem.useWithRootStateSelector(sel, {
-              ...d.state && { [d.state]: true },
-            })
+          if (['::before', '::after'].includes(d.elem)) {
+            pseudoElem = d.elem
           }
           else {
-            underRootSelectors.push(elem.useStateUnderRoot({
-              ...d.state && { [d.state]: true },
-            }))
+            const elem = this.widget.elements[d.elem]
+            if (!selectTargetElem) {
+              selectTargetElem = sel => elem.useWithRootStateSelector(sel, {
+                ...d.state && { [d.state]: true },
+              })
+            }
+            else {
+              underRootSelectors.push(elem.useStateUnderRoot({
+                ...d.state && { [d.state]: true },
+              }))
+            }
           }
         }
       })
@@ -180,12 +190,11 @@ export class WidgetStyle {
         // @ts-expect-error
         selector = `${selectTargetElem(underRootSelectors.join(''))}`
       }
-      let selectorToPropValue: [string, string]
       if (media) propValue = `${media} { ${propValue} }`
-      if (selector) selectorToPropValue = [useThis(selector), propValue]
-      else selectorToPropValue = ['', propValue]
+      selector += pseudoElem
+      if (selector) selector = useThis(selector)
       
-      selectorToPropValues.push(selectorToPropValue)
+      selectorToPropValues.push([selector, propValue])
     })
     
     const groupedBySelector: Record<string, string[]> = { }

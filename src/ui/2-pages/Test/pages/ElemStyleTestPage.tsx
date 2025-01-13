@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
-import { testDevWidgetStyle } from 'src/mini-libs/widget-style/dev/style/WidgetStyle.ts'
+import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
 import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -35,7 +35,7 @@ const ElemStyleTestPage = React.memo(() => {
       <Pages.SimplePage>
         <Pages.ContentFill>
           
-          <button onClick={testDevWidgetStyle}>Test</button>
+          <button onClick={testDevWidgetStyle4}>Test</button>
           
           
           <div>Element Style</div>

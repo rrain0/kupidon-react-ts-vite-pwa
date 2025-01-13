@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { CssProp } from 'src/mini-libs/widget-style/dev/css/CssProp.ts'
+import { CssProp } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
 
 
 
