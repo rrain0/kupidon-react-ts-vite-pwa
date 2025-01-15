@@ -17,11 +17,17 @@ import { useLangSetup } from 'src/util/lang/useLangSetup.ts'
 import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
-import camelCaseToUpperCase = StringU.camelCaseToUpperCase
+import camelCaseToUpperCase = StringU.camelCaseToKebabCase
+
+
+
 
 // todo remove
 testDevWidgetStyle4()
 console.log(camelCaseToUpperCase('placeSubType0a'))
+
+
+
 
 const App = React.memo(() => {
   useAppInstallationSetup()

@@ -51,11 +51,11 @@ const ElemStyleTestPage = React.memo(() => {
           
           <Box>
             <MainTestFrame
-              className={'frame'}
+              className="frame"
               css={css(transformedStyle)}
             >
               <MainTestBox
-                className={'box'}
+                className="box"
               />
             </MainTestFrame>
           </Box>

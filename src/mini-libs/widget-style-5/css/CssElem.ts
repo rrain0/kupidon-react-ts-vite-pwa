@@ -1,24 +1,22 @@
-// TODO replace widget-style-4 by widget-style-5
 import { TypeU } from '@util/common/TypeU.ts'
-import { CssAttr } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
-import { CssAttrEnum } from 'src/mini-libs/widget-style-4/css/CssAttrEnum.ts'
-import { CssProp } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
-import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
-import { CssSelectable } from 'src/mini-libs/widget-style-4/css/CssSelectable.ts'
-import { CssState } from 'src/mini-libs/widget-style-4/css/CssState.ts'
+import { CssAttrEnum } from 'src/mini-libs/widget-style-5/css/CssAttrEnum.ts'
+import { CssAttr } from 'src/mini-libs/widget-style-5/css/CssAttr.ts'
+import { CssProp } from 'src/mini-libs/widget-style-5/css/CssProp.ts'
+import { CssPseudo } from 'src/mini-libs/widget-style-5/css/CssPseudo.ts'
 import RecordRo = TypeU.RecordRo
-import notExists = TypeU.notExists
-import { useThis } from './utils'
 
 
 
+export type CssState = CssPseudo | CssAttr | CssAttrEnum
 export type ElemStateValue = undefined | '' | true | string
 
-export class CssElem implements CssSelectable {
+
+
+export class CssElem {
   
   constructor(
     // classname
-    // 'rrainuiButton'
+    // 'rruiButton'
     readonly name: string,
     // stateName -> CssState
     readonly states: RecordRo<string, CssState>,
@@ -29,71 +27,34 @@ export class CssElem implements CssSelectable {
   static newEmpty() {
     return new CssElem('', { }, { })
   }
-  static newNamed(name: string) {
+  static newOnlyName(name: string) {
     return new CssElem(name, { }, { })
   }
   
   // dot classname
   // '.rrainuiButton'
-  use() {
+  selectOnlyClass() {
     if (!this.name) return ''
     return `.${this.name}`
   }
   
-  // & dot classname
-  // '&.rrainuiButton'
-  useThis() {
-    return useThis(this.use())
-  }
-  
-  
-  useOnlyState(state: RecordRo<string, ElemStateValue> = { }) {
+  // state selector
+  // :hover[error]
+  selectOnlyState(state: RecordRo<string, ElemStateValue> = { }) {
     let used = ''
     Object.entries(state).forEach(([name, state]) => {
-      if (notExists(state)) return
+      if (state === undefined) return
+      if (state === true) state = ''
       const s = this.states[name]
-      if (s instanceof CssAttrEnum) {
-        if (state === true) state = ''
-        used += s.useEnum(state)
-      }
-      else {
-        used += s.use()
-      }
+      if (s instanceof CssAttrEnum) used += s.select(state)
+      else used += s.select()
     })
     return used
   }
   
-  
-  useState(state: RecordRo<string, ElemStateValue> = { }) {
-    return this.use() + this.useOnlyState(state)
-  }
-  
-  useStateThis(state: RecordRo<string, ElemStateValue> = { }) {
-    return useThis(this.useState(state))
+  select(state: RecordRo<string, ElemStateValue> = { }) {
+    return this.selectOnlyClass() + this.selectOnlyState(state)
   }
   
 }
 
-/*
-
-
-
-// Examples
-{
-  const btn = new CssElem('rruiButton', {
-    normal: CssPseudos.empty,
-    hover: CssPseudos.hover,
-    variant: new CssAttrEnum('variant', ['filled', 'outlined']),
-    withBorder: new CssAttr('withBorder'),
-  }, { })
-  
-  // &.rruiButton:hover[variant=filled][withBorder]
-  const btnHoverFilledWithBorderThisSelector = btn.useStateThis({
-    hover: true,
-    variant: 'filled',
-    withBorder: true,
-  })
-  
-  //console.log('CssElem btnHoverFilledWithBorderThisSelector', btnHoverFilledWithBorderThisSelector)
-}
-*/

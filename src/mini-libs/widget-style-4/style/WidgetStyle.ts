@@ -10,7 +10,7 @@ import { useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import { transformers } from 'src/mini-libs/widget-style-4/style/Transformers.ts'
 import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
 import uncapitalize = StringU.uncapitalize
-import camelCaseToUpperCase = StringU.camelCaseToUpperCase
+import camelCaseToUpperCase = StringU.camelCaseToKebabCase
 
 
 
