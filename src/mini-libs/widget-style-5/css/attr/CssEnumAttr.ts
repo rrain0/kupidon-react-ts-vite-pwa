@@ -1,7 +1,7 @@
-import { CssAttr } from 'src/mini-libs/widget-style-5/css/CssAttr.ts'
+import { CssAttr } from 'src/mini-libs/widget-style-5/css/attr/CssAttr.ts'
 
 
-export class CssAttrEnum extends CssAttr {
+export class CssEnumAttr extends CssAttr {
   
   constructor(
     // Attr name
@@ -34,11 +34,11 @@ export class CssAttrEnum extends CssAttr {
 
 
 
-export const CssAttrEnums = {
+export const CssEnumAttrs = {
   
-  empty: new CssAttrEnum('', []),
+  empty: new CssEnumAttr('', []),
   
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
-  inputType: new CssAttrEnum('type', ['radio', 'checkbox']),
+  inputType: new CssEnumAttr('type', ['radio', 'checkbox']),
   
-} as const satisfies Record<string, CssAttrEnum>
+} as const satisfies Record<string, CssEnumAttr>

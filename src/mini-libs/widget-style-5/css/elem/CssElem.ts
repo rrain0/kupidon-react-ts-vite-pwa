@@ -1,13 +1,12 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { CssAttrEnum } from 'src/mini-libs/widget-style-5/css/CssAttrEnum.ts'
-import { CssAttr } from 'src/mini-libs/widget-style-5/css/CssAttr.ts'
-import { CssProp } from 'src/mini-libs/widget-style-5/css/CssProp.ts'
-import { CssPseudo } from 'src/mini-libs/widget-style-5/css/CssPseudo.ts'
+import { CssEnumAttr } from 'src/mini-libs/widget-style-5/css/attr/CssEnumAttr.ts'
+import { CssVarProp } from 'src/mini-libs/widget-style-5/css/prop/CssVarProp.ts'
+import { CssState } from 'src/mini-libs/widget-style-5/css/CssState.ts'
 import RecordRo = TypeU.RecordRo
 
 
 
-export type CssState = CssPseudo | CssAttr | CssAttrEnum
+
 export type ElemStateValue = undefined | '' | true | string
 
 
@@ -21,7 +20,7 @@ export class CssElem {
     // stateName -> CssState
     readonly states: RecordRo<string, CssState>,
     // propName -> CssProp
-    readonly props: RecordRo<string, CssProp>,
+    readonly props: RecordRo<string, CssVarProp>,
   ) { }
   
   static newEmpty() {
@@ -46,7 +45,7 @@ export class CssElem {
       if (state === undefined) return
       if (state === true) state = ''
       const s = this.states[name]
-      if (s instanceof CssAttrEnum) used += s.select(state)
+      if (s instanceof CssEnumAttr) used += s.select(state)
       else used += s.select()
     })
     return used
