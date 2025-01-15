@@ -32,14 +32,14 @@ export class CssElem {
   }
   
   // dot classname
-  // '.rrainuiButton'
+  // '.rruiButton'
   selectOnlyClass() {
     if (!this.name) return ''
     return `.${this.name}`
   }
   
   // state selector
-  // :hover[error]
+  // ':hover[error]'
   selectOnlyState(state: RecordRo<string, ElemStateValue> = { }) {
     let used = ''
     Object.entries(state).forEach(([name, state]) => {
@@ -52,6 +52,8 @@ export class CssElem {
     return used
   }
   
+  // dot classname + state selector
+  // '.rruiButton:hover[error]'
   select(state: RecordRo<string, ElemStateValue> = { }) {
     return this.selectOnlyClass() + this.selectOnlyState(state)
   }

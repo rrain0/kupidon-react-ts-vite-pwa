@@ -14,8 +14,8 @@ export class CssProp {
     return `${this.name}: ${value};`
   }
   
-  // var(--prop)
-  // var(--prop, defaultValue)
+  // 'var(--prop)'
+  // 'var(--prop, defaultValue)'
   useGet(defaultValue: string = ''): string {
     const nameAndDefault = [this.name]
     if (defaultValue) nameAndDefault.push(defaultValue)
