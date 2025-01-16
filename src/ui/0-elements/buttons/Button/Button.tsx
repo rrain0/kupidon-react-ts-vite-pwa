@@ -50,7 +50,11 @@ const Button = React.memo(
               <div // Border
                 className={ButtonS.W.e.border.e.name}
               >
-                <Ripple {...rippleProps.ripple} />
+                <Ripple
+                  {...rippleProps.ripple}
+                  // todo more imperative ripple and ability to cancel
+                  {...props.disabled && { isShow: false }}
+                />
               </div>
             
             </button>

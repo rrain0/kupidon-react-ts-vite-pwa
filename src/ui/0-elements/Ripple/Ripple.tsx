@@ -49,6 +49,7 @@ import RippleMode = RippleS.RippleMode
 
 export type RippleProps = ClassStyleProps & {
   isShow: boolean
+  cancel?: boolean | undefined
   clientXY: { x: number, y: number }
 }
 
@@ -56,7 +57,7 @@ export type RippleProps = ClassStyleProps & {
 const Ripple = React.memo(
   (props: RippleProps) => {
     
-    const { isShow, clientXY, className, ...restProps } = props
+    const { isShow, cancel, clientXY, className, ...restProps } = props
     
     const [frameRef, getFrame] = useElemRef()
     const [rippleRef, getRipple] = useElemRef()
@@ -86,6 +87,11 @@ const Ripple = React.memo(
     
     
     const [{ opacity }] = useSpring(() => {
+      if (cancel) return {
+        to: { opacity: 0 },
+        reset: true,
+        immediate: true,
+      }
       if (isShow) return {
         from: { opacity: 0.1 },
         to: { opacity: 1 },
@@ -102,7 +108,7 @@ const Ripple = React.memo(
           easing: easings.linear,
         },
       }
-    }, [isShow])
+    }, [isShow, cancel])
     
     const [{ scale }] = useSpring(() => {
       if (isShow) return {
