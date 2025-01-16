@@ -1,13 +1,11 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { CssEnumAttr } from 'src/mini-libs/widget-style-5/css/attr/CssEnumAttr.ts'
 import { CssVarProp } from 'src/mini-libs/widget-style-5/css/prop/CssVarProp.ts'
-import { CssState } from 'src/mini-libs/widget-style-5/css/CssState.ts'
+import { CssState, ElemStateValue } from 'src/mini-libs/widget-style-5/css/CssState.ts'
 import RecordRo = TypeU.RecordRo
 
 
 
-
-export type ElemStateValue = undefined | '' | true | string
 
 
 
@@ -32,9 +30,8 @@ export class CssElem {
   
   // dot classname
   // '.rruiButton'
-  selectOnlyClass() {
-    if (!this.name) return ''
-    return `.${this.name}`
+  selectOnlyElem() {
+    return this.name && `.${this.name}`
   }
   
   // state selector
@@ -54,7 +51,7 @@ export class CssElem {
   // dot classname + state selector
   // '.rruiButton:hover[error]'
   select(state: RecordRo<string, ElemStateValue> = { }) {
-    return this.selectOnlyClass() + this.selectOnlyState(state)
+    return this.selectOnlyElem() + this.selectOnlyState(state)
   }
   
 }

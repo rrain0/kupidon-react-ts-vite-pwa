@@ -1,6 +1,6 @@
 
 
-export class CssPseudo {
+export class CssPseudoClass {
   
   constructor(
     // Имя псевдо-класса (без ':')
@@ -17,24 +17,24 @@ export class CssPseudo {
 
 
 
-export const CssPseudos = {
+export const CssPseudoClasses = {
   // simple
-  empty: new CssPseudo(''),
-  checked: new CssPseudo('checked'),
-  hover: new CssPseudo('hover'),
-  active: new CssPseudo('active'),
-  focus: new CssPseudo('focus'),
-  focusVisible: new CssPseudo('focus-visible'),
-  readOnly: new CssPseudo('read-only'),
-  disabled: new CssPseudo('disabled'),
+  empty: new CssPseudoClass(''),
+  checked: new CssPseudoClass('checked'),
+  hover: new CssPseudoClass('hover'),
+  active: new CssPseudoClass('active'),
+  focus: new CssPseudoClass('focus'),
+  focusVisible: new CssPseudoClass('focus-visible'),
+  readOnly: new CssPseudoClass('read-only'),
+  disabled: new CssPseudoClass('disabled'),
   
   
   // complex
   // TODO - разбить на отдельные селекторы состояния,
   //  да и hover всё равно должен быть отдельно под медиа.
   //  В общем похоже это лучше в Transformers добавить.
-  anyFocus: new CssPseudo('where(:active,:focus,:focus-visible)'),
+  anyFocus: new CssPseudoClass('where(:active,:focus,:focus-visible)'),
   // TODO - hover must be under media but focus-visible not
-  inFocus: new CssPseudo('where(:hover,:focus-visible)'),
-} as const satisfies Record<string, CssPseudo>
+  inFocus: new CssPseudoClass('where(:hover,:focus-visible)'),
+} as const satisfies Record<string, CssPseudoClass>
 

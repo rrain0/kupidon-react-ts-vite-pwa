@@ -1,5 +1,5 @@
-import { CssPseudos } from 'src/mini-libs/widget-style-5/css/pseudo/CssPseudo.ts'
-import { CssPseudo } from 'src/mini-libs/widget-style-5/css/pseudo/CssPseudo.ts'
+import { CssPseudoClasses } from 'src/mini-libs/widget-style-5/css/pseudo-class/CssPseudoClass.ts'
+import { CssPseudoClass } from 'src/mini-libs/widget-style-5/css/pseudo-class/CssPseudoClass.ts'
 import { TransformData } from 'src/mini-libs/widget-style-5/transform/TransformData.ts'
 import { hoverableMedia } from 'src/mini-libs/widget-style-5/transform/utils.ts'
 
@@ -7,7 +7,7 @@ import { hoverableMedia } from 'src/mini-libs/widget-style-5/transform/utils.ts'
 export class PseudoTransformer {
   
   constructor(
-    readonly pseudo: CssPseudo,
+    readonly pseudo: CssPseudoClass,
   ) { }
   
   transform(transformData: TransformData[]): TransformData[] {
@@ -20,7 +20,7 @@ export class PseudoTransformer {
 
 
 export const PseudoTransformers = {
-  focusVisible: new PseudoTransformer(CssPseudos.focusVisible),
+  focusVisible: new PseudoTransformer(CssPseudoClasses.focusVisible),
   hover: new class extends PseudoTransformer {
     override transform(transformData: TransformData[]): TransformData[] {
       super.transform(transformData)
@@ -28,7 +28,7 @@ export const PseudoTransformers = {
       return transformData
     }
   }(
-    CssPseudos.hover
+    CssPseudoClasses.hover
   ),
 } as const satisfies Record<string, PseudoTransformer>
 
