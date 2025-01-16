@@ -3,6 +3,7 @@ import { StringU } from '@util/common/StringU.ts'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
 import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
+import { testWidget51Transform } from 'src/mini-libs/widget-style-5.1/WidgetElemState.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
 import CheckBrowserMinimumVersion
   from 'src/ui/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
@@ -17,15 +18,15 @@ import { useLangSetup } from 'src/util/lang/useLangSetup.ts'
 import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
-import camelCaseToUpperCase = StringU.camelCaseToKebabCase
+import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 
 
 // todo remove
-testDevWidgetStyle4()
-console.log(camelCaseToUpperCase('placeSubType0a'))
-
+//testDevWidgetStyle4()
+//console.log(camelCaseToKebabCase('placeSubType0a'))
+testWidget51Transform()
 
 
 

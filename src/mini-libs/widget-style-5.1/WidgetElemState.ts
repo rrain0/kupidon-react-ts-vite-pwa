@@ -1,14 +1,24 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import uncapitalize = StringU.uncapitalize
+import anyobj = TypeU.anyobj
+import lastI = ArrayU.lastI
 
 
-type Transformed = { entity: object, value: string, media?: object }
+
+type Transformed = {
+  elem: anyobj,
+  value: string,
+  media?: anyobj
+}
+
 
 
 export class WidgetElemState {
   
   constructor(
-    readonly values: string[] = [],
+    readonly values: Record<string, any> = { },
   ) { }
   
   
@@ -22,7 +32,7 @@ export class WidgetElemState {
 
 
 const states = {
-  type: new WidgetElemState(['radio', 'checkbox']),
+  type: new WidgetElemState({ radio: '', checkbox: '' }),
 }
 
 
@@ -31,36 +41,59 @@ const states = {
 function transform(selectProp: string) {
   const data: Record<string, any>[][] = []
   
-  type Entries = Record<string, WidgetElemState | true>
-  const entries: Entries = { }
+  type EntityEntries = Record<string, WidgetElemState | any>
+  let contextStack: Array<EntityEntries | undefined> = [states]
+  // slot indexes for entities
+  const commonI = 0
+  const elemI = 1
+  const pseudoClassI = 2
+  const attrI = 3
+  const attrValueI = 4
   
   {
     const d: Record<string, any>[] = []
-    while (selectProp) {
+    loop: while (selectProp) {
       selectProp = uncapitalize(selectProp)
-      // apply state context
-      const entries2: Entries = { ...entries, ...states }
       
-      for (const [name, entity] of Object.entries(entries2)) {
-        
-        if (selectProp.startsWith(name)) {
-          selectProp = selectProp.slice(name.length)
+      for (let c = lastI(contextStack); c >= 0; c--) {
+        const context = contextStack[c]
+        if (context) for (const [name, entity] of Object.entries(context)) {
+          // TODO split 'selectProp' by capital letters and check using 'in' operator
           
-          if (entity instanceof WidgetElemState) {
-            d.push(entity)
+          if (selectProp.startsWith(name)) {
+            selectProp = selectProp.slice(name.length)
+            
+            // found attr
+            if (entity instanceof WidgetElemState) {
+              d.push({ attr: name })
+              contextStack = contextStack.slice(0, attrI + 1)
+              contextStack[attrI] = entity
+              if (entity.values) contextStack[attrValueI] = entity.values
+            }
+            // found value
+            else {
+              if (!d.length) d.push({ })
+              d.at(-1)!.value = name
+              contextStack = contextStack.slice(0, attrValueI)
+            }
+            
+            continue loop
           }
-          if (entity === true) {
           
-          }
-          
+          throw new Error(`Unknown property: ${selectProp}`)
         }
-        
-        throw new Error(`Unknown property: ${selectProp}`)
       }
     }
+    data.push(d)
   }
   
+  return data
 }
 
-transform('typeRadio')
+
+export function testWidget51Transform() {
+  console.log('transform(\'typeRadio\')', transform('typeRadio'))
+}
+
+
 

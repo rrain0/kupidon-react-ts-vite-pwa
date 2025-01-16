@@ -6,13 +6,14 @@ export namespace TypeU {
   
   export type empty = null | undefined
   export type anyval = {} | null | undefined
+  export type anyobj = Record<string, any>
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
   //export type emptyObj = Record<never, never> // need to fix
   export type HtmlBool = true | undefined
   export type Sign = -1 | 0 | 1
   
-  export const noop = () => {}
+  export const noop = () => { }
   export const emptyArr = []
   
   export const trueOrUndef = (value: any): HtmlBool => value ? true : undefined

@@ -34,6 +34,11 @@ export namespace ArrayU {
   
   
   
+  
+  export const lastI = (arr: any[]): number => arr.length - 1
+  export const lastIOr0 = (arr: any[]): number => arr.length ? (arr.length - 1) : 0
+  
+  
   export const last = <T>(arr: T[]): T => {
     if (!arr.length) throw new Error("Array is empty, can't get last element.")
     return arr[arr.length-1]
@@ -41,6 +46,12 @@ export namespace ArrayU {
   export const lastOr = <T1, T2>(arr: T1[], orElse: T2): T1 | T2 => {
     if (!arr.length) return orElse
     return arr[arr.length-1]
+  }
+  
+  
+  export const setLast = <T>(arr: T[], last: T) => {
+    if (!arr.length) throw new Error("Array is empty, can't set last element, because it does not exist.")
+    arr[arr.length-1] = last
   }
   
   
@@ -55,10 +66,6 @@ export namespace ArrayU {
     if (!arr.length) throw new Error("Array is empty, can't get random element.")
     return arr[Math.floor(Math.random() * arr.length)]
   }
-  
-  
-  export const lastI = (arr: any[]): number => arr.length - 1
-  export const lastIOr0 = (arr: any[]): number => arr.length ? (arr.length - 1) : 0
   
   
   export const eq = <A, B>(

@@ -10,7 +10,7 @@ import { useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import { transformers } from 'src/mini-libs/widget-style-4/style/Transformers.ts'
 import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
 import uncapitalize = StringU.uncapitalize
-import camelCaseToUpperCase = StringU.camelCaseToKebabCase
+import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 
@@ -130,7 +130,7 @@ export class WidgetStyle {
         // Check property
         {
           if (!d.length) d.push({ })
-          d.at(-1)!.prop = camelCaseToUpperCase(styleSelector)
+          d.at(-1)!.prop = camelCaseToKebabCase(styleSelector)
           d.at(-1)!.value = value
           styleSelector = ''
         }
