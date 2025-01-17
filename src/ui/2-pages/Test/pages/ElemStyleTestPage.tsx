@@ -62,6 +62,7 @@ const ElemStyleTestPage = React.memo(() => {
           
           <TestBox1>TestBox1</TestBox1>
           <TestBox2>TestBox2</TestBox2>
+          <TestBox3>TestBox3</TestBox3>
         
         </Pages.ContentFill>
       </Pages.SimplePage>
@@ -111,6 +112,7 @@ const TestBox1 = styled.div`
   width: 200px;
   height: 200px;
   background: aquamarine;
+  // media inside media
   @media (pointer: fine) {
     @media (hover: hover) {
       :hover {
@@ -125,8 +127,22 @@ const TestBox2 = styled.div`
   width: 200px;
   height: 200px;
   background: aquamarine;
+  // additional parenthesis
   @media ((pointer: fine)) and ((hover: hover)) {
     :hover {
+      background: red;
+    }
+  }
+`
+
+
+const TestBox3 = styled.div`
+  width: 200px;
+  height: 200px;
+  background: aquamarine;
+  // media inside selector
+  :hover {
+    @media (pointer: fine) and (hover: hover) {
       background: red;
     }
   }

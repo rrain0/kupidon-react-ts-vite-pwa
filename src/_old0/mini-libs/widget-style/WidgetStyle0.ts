@@ -5,7 +5,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import isObject = TypeU.isobject
 import isstring = TypeU.isstring
-import SingleOrArr = ArrayU.SingleOrArr
+import ValueOrArr = ArrayU.ValueOrArr
 import exists = TypeU.exists
 import ObjectMap = ObjectU.ObjectMap
 import RecordRo = TypeU.RecordRo
@@ -757,7 +757,7 @@ export namespace WidgetStyle0 {
   
   
   export type ElemStateDescriptor<S extends string>
-    = Record<S, SingleOrArr<Pseudo0 | DataAttr<any>>>
+    = Record<S, ValueOrArr<Pseudo0 | DataAttr<any>>>
   
   
   export class Elem0<

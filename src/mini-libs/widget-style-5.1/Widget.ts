@@ -1,4 +1,13 @@
-import { WidgetElem } from 'src/mini-libs/widget-style-5.1/WidgetElem.ts'
+
+
+
+export class WidgetElem {
+
+
+
+}
+
+
 
 
 export class Widget {

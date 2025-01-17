@@ -101,6 +101,7 @@ export namespace ArrayU {
   
   
   export const avg = (arr: number[]): number => {
+    if (!arr.length) return 0
     return arr.reduce((prev, curr) => prev + curr, 0) / arr.length
   }
   
@@ -194,7 +195,7 @@ export namespace ArrayU {
     ? Array<Exists<E>>
     : never
   
-  export type SingleOrArr<T> = T | T[]
+  export type ValueOrArr<T> = T | T[]
   
   export type Arraify<T> = T extends any[] ? T : T[]
   export const arraify = <T>(value: T|T[]): Arraify<T|T[]> => {
@@ -204,6 +205,11 @@ export namespace ArrayU {
   
   
   
+  
+  export const flatPush = <T>(arr: T[], elem: T | T[]): T[] => {
+    isArray(elem) ? arr.push(...elem) : arr.push(elem)
+    return arr
+  }
   
   export const pushUniqToIf = <T>(arr: T[], elem: T): T[] => {
     if (arr.includes(elem)) return arr
