@@ -7,6 +7,7 @@ import anyobj = TypeU.anyobj
 import lastI = ArrayU.lastI
 import ValueOrArr = ArrayU.ValueOrArr
 import flatPush = ArrayU.flatPush
+import isobject = TypeU.isobject
 
 
 
@@ -20,14 +21,18 @@ type Transformed = {
 
 export type ElemTransformData = { elem: string }
 export type MediaTransformData = { media: MediaTf }
-export type ElemStateTransformData = { elemState: AbstractStateTf, value?: string | undefined }
-export type PropTransformData = { prop: AbstractPropTf, value: StyleValue, aProp?: CssAProp | undefined }
+export type ElemStateTransformData = { elemState: AbstractStateTf }
+export type ElemStateValueTransformData = { stateValue: string }
+export type PropTransformData = { prop: AbstractPropTf, aProp?: CssAProp | undefined }
+export type PropValueTransformData = { propValue: StyleValue }
 
 export type TransformData =
   | ElemTransformData
   | MediaTransformData
   | ElemStateTransformData
+  | ElemStateValueTransformData
   | PropTransformData
+  | PropValueTransformData
 
 
 
@@ -39,14 +44,14 @@ export type StyleValue =
 
 
 export abstract class Transformer {
-  abstract transform(value?: string): ValueOrArr<TransformData>
+  abstract transform(value?: string): TransformData[]
 }
 
 export abstract class AbstractStateTf extends Transformer {
   abstract readonly values: Record<string, any> | null
 }
 export abstract class AbstractPropTf extends Transformer {
-  abstract override transform(value?: StyleValue): ValueOrArr<TransformData>
+  abstract override transform(value?: StyleValue): TransformData[]
 }
 
 
@@ -56,8 +61,8 @@ export class MediaTf extends Transformer {
     readonly media: string
   ) { super() }
   values = null
-  override transform(): TransformData {
-    return { media: this }
+  override transform(): TransformData[] {
+    return [{ media: this }]
   }
 }
 export class ElemPseudoTf extends AbstractStateTf {
@@ -66,8 +71,8 @@ export class ElemPseudoTf extends AbstractStateTf {
     readonly pseudoClass: string
   ) { super() }
   values = null
-  override transform(): TransformData {
-    return { elemState: this }
+  override transform(): TransformData[] {
+    return [{ elemState: this }]
   }
 }
 export class ElemAttrTf extends AbstractStateTf {
@@ -77,8 +82,8 @@ export class ElemAttrTf extends AbstractStateTf {
     // { radio: '', checkbox: '' }
     readonly values: Record<string, any> | null = null
   ) { super() }
-  override transform(value: string = ''): TransformData {
-    return { elemState: this, value }
+  override transform(value: string = ''): TransformData[] {
+    return [{ elemState: this }, { stateValue: value }]
   }
 }
 export class PropTf extends AbstractPropTf {
@@ -86,8 +91,8 @@ export class PropTf extends AbstractPropTf {
     // 'background'
     readonly prop: string
   ) { super() }
-  override transform(value: StyleValue = ''): TransformData {
-    return { prop: this, value }
+  override transform(value: StyleValue = ''): TransformData[] {
+    return [{ prop: this }, { propValue: value }]
   }
 }
 
@@ -112,6 +117,7 @@ const Medias = {
 }
 const PseudoClasses = {
   hover: new ElemPseudoTf('hover'),
+  focusVisible: new ElemPseudoTf('focus-visible'),
 }
 const Attrs = {
   type: new ElemAttrTf('type', { radio: '', checkbox: '' }),
@@ -124,28 +130,47 @@ const Props = {
 
 
 
-
-const ComplexTransformers = {
+namespace ComplexTransformers {
   
-  hover: new class extends AbstractStateTf {
+  // TODO make 'radio' instead of 'typeRadio'
+  /* export const radio = new class TypeRadio extends AbstractStateTf {
     values = null
     transform() {
       const props = [] as TransformData[]
-      flatPush(props, Medias.hoverable.transform())
-      flatPush(props, PseudoClasses.hover.transform())
+      flatPush(props, Attrs.type.transform())
+      //flatPush(props, PseudoClasses.hover.transform())
       return props
     }
-  }(),
+  }() */
   
-  size: new class extends AbstractPropTf {
-    transform(value) {
-      const props = [] as TransformData[]
-      flatPush(props, Props.width.transform(value))
-      flatPush(props, Props.height.transform(value))
-      return props
+  export const hover = new class HoverableHover extends AbstractStateTf {
+    values = null
+    transform() {
+      return [
+        ...Medias.hoverable.transform(),
+        ...PseudoClasses.hover.transform(),
+      ]
     }
-    
-  }(),
+  }()
+  
+  export const inFocus = new class InFocus extends AbstractStateTf {
+    values = null
+    transform() {
+      return [
+        ...ComplexTransformers.hover.transform(),
+        ...PseudoClasses.focusVisible.transform(),
+      ]
+    }
+  }()
+  
+  export const size = new class Size extends AbstractPropTf {
+    transform(value) {
+      return [
+        ...Props.width.transform(value),
+        ...Props.height.transform(value),
+      ]
+    }
+  }()
   
 }
 
@@ -154,7 +179,9 @@ const ComplexTransformers = {
 
 
 
-export type WidgetStyle = Record<string, StyleValue /* | WidgetStyle */>
+
+
+export type WidgetStyle = { [selectorProp: string]: StyleValue | WidgetStyle }
 
 const Common = {
   width: Props.width,
@@ -171,49 +198,63 @@ const States = {
   type: Attrs.type,
 }
 
-export function transform1(style: WidgetStyle) {
-  const data: TransformData[][] = []
+type EntitiesRecord = Record<string, Transformer>
+type EntitiesRecordArray = Array<EntitiesRecord | undefined>
+
+export function transform1(
+  style: WidgetStyle,
+  dataList: TransformData[][] = [],
+  baseContextStack: EntitiesRecordArray = [Common, undefined, States],
+  baseData: TransformData[] = []
+) {
   
-  type EntityEntries = Record<string, AbstractStateTf | any>
-  let contextStack: Array<EntityEntries | undefined> = [Common, undefined, undefined, undefined]
   // slot indexes for entities
-  const commonI = 0
-  const elementsI = 1
-  const statesI = 2 // pseudoClass, attr
-  const valuesI = 3 // attr value
-  
-  contextStack[statesI] = States
+  const ctxCommonI = 0
+  const ctxElementsI = 1
+  const ctxStatesI = 2 // record of pseudoClasses, attrs
+  const ctxStateValuesI = 3 // record of attr values
   
   for (const [selectProp, value] of Object.entries(style)) {
-    const d: TransformData[] = []
+    let contextStack = [...baseContextStack]
+    const data: TransformData[] = [...baseData]
     let p = selectProp
-    loop: while (p) {
+    
+    loop: while (true) {
+      if (!p) {
+        if (isobject(value)) {
+          dataList = transform1(value, dataList, contextStack, data)
+        }
+        break
+      }
       p = uncapitalize(p)
       
-      for (let ctx = lastI(contextStack); ctx >= 0; ctx--) {
-        const context = contextStack[ctx]
+      for (let ctxI = lastI(contextStack); ctxI >= 0; ctxI--) {
+        const context = contextStack[ctxI]
         if (context) for (const [name, entity] of Object.entries(context)) {
           // TODO split 'p' by capital letters and check using 'in' operator
           
           if (p.startsWith(name)) {
             p = p.slice(name.length)
             
-            // found elem state
+            // found elem state (attr, pseudoClass)
             if (entity instanceof AbstractStateTf) {
-              d.push({ elemState: entity })
-              contextStack = contextStack.slice(0, valuesI)
-              if (entity.values) contextStack[valuesI] = entity.values
-            }
-            // found attr value
-            else if (ctx === valuesI) {
-              if (!d.length) d.push({ } as ElemStateTransformData)
-              ;(d.at(-1) as ElemStateTransformData).value = name
-              contextStack = contextStack.slice(0, statesI + 1)
+              data.push({ elemState: entity })
+              contextStack = contextStack.slice(0, ctxStateValuesI)
+              if (entity.values) contextStack[ctxStateValuesI] = entity.values
             }
             // found prop
             else if (entity instanceof AbstractPropTf) {
-              d.push({ prop: entity, value })
+              if (!isobject(value)) {
+                data.push({ prop: entity })
+                data.push({ propValue: value })
+                dataList.push(data)
+              }
               break loop
+            }
+            // found state value (attr value)
+            else if (ctxI === ctxStateValuesI) {
+              data.push({ stateValue: name })
+              contextStack = contextStack.slice(0, ctxStateValuesI)
             }
             
             continue loop
@@ -223,20 +264,50 @@ export function transform1(style: WidgetStyle) {
       
       throw new Error(`Unknown property: ${p}`)
     }
-    data.push(d)
   }
   
-  return data
+  return dataList
 }
 
 
-export function testWidget51Transform() {
+
+export function testWidget51Transform1() {
   const widgetStyle = {
     hoverTypeRadioBg: 'white',
     typeCheckboxSz: '40%',
+    typeRadio: {
+      bg: 'black',
+      sz: 100,
+    },
+    type: {
+      checkbox: {
+        bg: 'red',
+        sz: 200,
+      },
+      radio: {
+        bg: 'green',
+        sz: 'full',
+      },
+    },
   }
-  console.log(`'transform(${JSON.stringify(widgetStyle)})'`, transform1(widgetStyle))
+  const widgetStyle2 = {
+    type: {
+      checkbox: {
+        bg: 'red',
+      },
+      radio: {
+        bg: 'green',
+      },
+    },
+  }
+  
+  console.log(`transform(${JSON.stringify(widgetStyle)})`, transform1(widgetStyle))
 }
 
+
+
+export function transform2(data: TransformData[][]) {
+
+}
 
 
