@@ -12,16 +12,16 @@ import isnumber = TypeU.isnumber
 
 
 
-export type ElemTransformData = { elem: ElemTf }
 export type MediaTransformData = { media: MediaTf }
+export type ElemTransformData = { elem: ElemTf }
 export type ElemStateTransformData = { elemState: AbstractStateTf }
 export type ElemStateValueTransformData = { stateValue: string }
 export type PropTransformData = { prop: AbstractPropTf, aProp?: CssAProp | undefined }
 export type PropValueTransformData = { propValue: StyleValue }
 
 export type TransformData =
-  | ElemTransformData
   | MediaTransformData
+  | ElemTransformData
   | ElemStateTransformData
   | ElemStateValueTransformData
   | PropTransformData
@@ -42,26 +42,6 @@ export abstract class Transformer {
 }
 
 
-export abstract class AbstractStateTf extends Transformer {
-  abstract readonly values: Record<string, any> | undefined
-}
-export abstract class AbstractPropTf extends Transformer {
-  abstract override transform(value?: StyleValue): TransformData[]
-}
-
-
-export class ElemTf extends Transformer {
-  constructor(
-    readonly name: string,
-    readonly states: Record<string, AbstractPropTf> | undefined = undefined,
-    readonly props: Record<string, AbstractPropTf> | undefined = undefined,
-  ) { super() }
-  transform(): TransformData[] {
-    return [{ elem: this }]
-  }
-}
-
-
 export class MediaTf extends Transformer {
   constructor(
     // '(hover: hover) and (pointer: fine)'
@@ -72,6 +52,26 @@ export class MediaTf extends Transformer {
     return [{ media: this }]
   }
 }
+export class ElemTf extends Transformer {
+  constructor(
+    readonly name: string,
+    readonly states: Record<string, AbstractPropTf> | undefined = undefined,
+    readonly props: Record<string, AbstractPropTf> | undefined = undefined,
+  ) { super() }
+  transform(): TransformData[] {
+    return [{ elem: this }]
+  }
+}
+export abstract class AbstractStateTf extends Transformer {
+  abstract readonly values: Record<string, any> | undefined
+}
+export abstract class AbstractPropTf extends Transformer {
+  abstract override transform(value?: StyleValue): TransformData[]
+}
+
+
+
+
 export class ElemPseudoTf extends AbstractStateTf {
   constructor(
     // 'hover'
@@ -318,7 +318,61 @@ const RootElemStates = {
   type: Attrs.type,
 } satisfies Record<string, Transformer>
 
-export function testWidget51Transform1() {
+
+
+
+type Transformed = {
+  elem: anyobj,
+  value: string,
+  media?: anyobj
+}
+
+export function transform2(dataList: TransformData[][]): TransformData[][] {
+  return dataList.map(data => {
+    const media: TransformData[] = []
+    const d: TransformData[] = []
+    
+    let propValue: PropValueTransformData | undefined
+    let stateValue: ElemStateValueTransformData | undefined
+    
+    for (let di = data.length - 1; di >= 0; di--) {
+      const entity = data[di]
+      if ('propValue' in entity) {
+        propValue = entity
+        stateValue = undefined
+      }
+      else if ('prop' in entity) {
+        d.unshift(...entity.prop.transform(propValue?.propValue))
+        propValue = undefined
+        stateValue = undefined
+      }
+      else if ('stateValue' in entity) {
+        propValue = undefined
+        stateValue = entity
+      }
+      else if ('elemState' in entity) {
+        d.unshift(...entity.elemState.transform(stateValue?.stateValue))
+        propValue = undefined
+        stateValue = undefined
+      }
+      else if ('elem' in entity) {
+        d.unshift(...entity.elem.transform())
+        propValue = undefined
+        stateValue = undefined
+      }
+      else if ('media' in entity) {
+        media.unshift(...entity.media.transform())
+      }
+      
+    }
+    return [...media, ...d]
+  })
+}
+
+
+
+
+export function testWidget51Transform() {
   const widgetStyle = {
     hoverTypeRadioBg: 'white',
     frameTypeCheckboxBoxSz: '40%',
@@ -338,24 +392,14 @@ export function testWidget51Transform1() {
       },
     },
   }
+  console.log('widgetStyle', widgetStyle)
   
-  console.log(
-    `transform ${JSON.stringify(widgetStyle)}`,
-    transform1(widgetStyle, [CommonProps, Elements, RootElemStates, undefined, undefined])
+  const transformed1 = transform1(
+    widgetStyle,
+    [CommonProps, Elements, RootElemStates, undefined, undefined]
   )
+  console.log('transformed1', transformed1)
+  
+  const transformed2 = transform2(transformed1)
+  console.log('transformed2', transformed2)
 }
-
-
-
-
-type Transformed = {
-  elem: anyobj,
-  value: string,
-  media?: anyobj
-}
-
-export function transform2(data: TransformData[][]) {
-
-}
-
-
