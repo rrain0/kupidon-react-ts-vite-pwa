@@ -27,6 +27,7 @@ export type TransformData =
   | PropTransformData
   | PropValueTransformData
 
+export type TransformDataList = (TransformData | TransformData[])[]
 
 
 export type StyleValue =
@@ -38,7 +39,7 @@ export type StyleValue =
 
 
 export abstract class Transformer {
-  abstract transform(value?: string): TransformData[]
+  abstract transform(value?: string): TransformDataList
 }
 
 
@@ -66,7 +67,7 @@ export abstract class AbstractStateTf extends Transformer {
   abstract readonly values: Record<string, any> | undefined
 }
 export abstract class AbstractPropTf extends Transformer {
-  abstract override transform(value?: StyleValue): TransformData[]
+  abstract override transform(value?: StyleValue): TransformDataList
 }
 
 
@@ -78,7 +79,7 @@ export class ElemPseudoTf extends AbstractStateTf {
     readonly pseudoClass: string
   ) { super() }
   values = undefined
-  override transform(): TransformData[] {
+  transform(): TransformData[] {
     return [{ elemState: this }]
   }
 }
@@ -89,7 +90,7 @@ export class ElemAttrTf extends AbstractStateTf {
     // { radio: '', checkbox: '' }
     readonly values: Record<string, any> | undefined = undefined
   ) { super() }
-  override transform(value: string = ''): TransformData[] {
+  transform(value: string = ''): TransformData[] {
     return [{ elemState: this }, { stateValue: value }]
   }
 }
@@ -98,7 +99,7 @@ export class PropTf extends AbstractPropTf {
     // 'background'
     readonly prop: string
   ) { super() }
-  override transform(value: StyleValue): TransformData[] {
+  transform(value: StyleValue): TransformData[] {
     return [{ prop: this }, { propValue: value }]
   }
 }
@@ -114,21 +115,19 @@ export class PropTf extends AbstractPropTf {
 
 export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 
-
-
-
-
-
 const Medias = {
   hoverable: new MediaTf(hoverableMedia),
-} satisfies Record<string, Transformer>
+}
+
 const PseudoClasses = {
   hover: new ElemPseudoTf('hover'),
   focusVisible: new ElemPseudoTf('focus-visible'),
-} satisfies Record<string, Transformer>
+}
+
 const Attrs = {
   type: new ElemAttrTf('type', { radio: '', checkbox: '' }),
-} satisfies Record<string, Transformer>
+}
+
 const Props = {
   width: new class Width extends PropTf {
     override transform(value: StyleValue): TransformData[] {
@@ -149,7 +148,7 @@ const Props = {
     }
   }('height'),
   background: new PropTf('background'),
-} satisfies Record<string, Transformer>
+}
 
 
 
@@ -166,6 +165,7 @@ namespace ComplexTransformers {
     }
   }()
   
+  // hoverable AND hover
   export const hover = new class HoverableHover extends AbstractStateTf {
     values = undefined
     transform() {
@@ -176,12 +176,13 @@ namespace ComplexTransformers {
     }
   }()
   
+  // hover OR focusVisible
   export const inFocus = new class InFocus extends AbstractStateTf {
     values = undefined
     transform() {
       return [
-        ...ComplexTransformers.hover.transform(),
-        ...PseudoClasses.focusVisible.transform(),
+        ComplexTransformers.hover.transform(),
+        PseudoClasses.focusVisible.transform(),
       ]
     }
   }()
@@ -189,8 +190,8 @@ namespace ComplexTransformers {
   export const size = new class Size extends AbstractPropTf {
     transform(value) {
       return [
-        ...Props.width.transform(value),
-        ...Props.height.transform(value),
+        Props.width.transform(value),
+        Props.height.transform(value),
       ]
     }
   }()
@@ -230,7 +231,7 @@ export function transform1(
     const data: TransformData[] = [...baseData]
     let p = selectProp
     
-    loop: while (true) {
+    pLoop: while (true) {
       if (!p) {
         if (isobject(value)) {
           dataList = transform1(value, contextStack, dataList, data)
@@ -266,14 +267,14 @@ export function transform1(
                 data.push({ propValue: value })
                 dataList.push(data)
               }
-              break loop
+              break pLoop
             }
             // found state value (attr value)
             else if (ctxI === ctxStateValuesI) {
               data.push({ stateValue: name })
             }
             
-            continue loop
+            continue pLoop
           }
         }
       }
@@ -320,29 +321,27 @@ const RootElemStates = {
 
 
 
-
-type Transformed = {
-  elem: anyobj,
-  value: string,
-  media?: anyobj
-}
-
-export function transform2(dataList: TransformData[][]): TransformData[][] {
-  return dataList.map(data => {
+export function transform2(
+  sourceDataList: TransformData[][],
+  dataList: TransformData[][] = [],
+  baseMedia: TransformData[] = [],
+  baseData: TransformData[] = [],
+): TransformData[][] {
+  return sourceDataList.map(d => {
     const media: TransformData[] = []
-    const d: TransformData[] = []
+    const data: TransformData[] = []
     
     let propValue: PropValueTransformData | undefined
     let stateValue: ElemStateValueTransformData | undefined
     
-    for (let di = data.length - 1; di >= 0; di--) {
-      const entity = data[di]
+    for (let di = d.length - 1; di >= 0; di--) {
+      const entity = d[di]
       if ('propValue' in entity) {
         propValue = entity
         stateValue = undefined
       }
       else if ('prop' in entity) {
-        d.unshift(...entity.prop.transform(propValue?.propValue))
+        data.unshift(...entity.prop.transform(propValue?.propValue))
         propValue = undefined
         stateValue = undefined
       }
@@ -351,12 +350,12 @@ export function transform2(dataList: TransformData[][]): TransformData[][] {
         stateValue = entity
       }
       else if ('elemState' in entity) {
-        d.unshift(...entity.elemState.transform(stateValue?.stateValue))
+        data.unshift(...entity.elemState.transform(stateValue?.stateValue))
         propValue = undefined
         stateValue = undefined
       }
       else if ('elem' in entity) {
-        d.unshift(...entity.elem.transform())
+        data.unshift(...entity.elem.transform())
         propValue = undefined
         stateValue = undefined
       }
@@ -365,9 +364,18 @@ export function transform2(dataList: TransformData[][]): TransformData[][] {
       }
       
     }
-    return [...media, ...d]
+    return [...media, ...data]
   })
 }
+
+export function transform2Data(
+  dataList: TransformData[][],
+  media: TransformData[],
+  data: TransformData[],
+) {
+
+}
+
 
 
 
@@ -400,6 +408,6 @@ export function testWidget51Transform() {
   )
   console.log('transformed1', transformed1)
   
-  const transformed2 = transform2(transformed1)
-  console.log('transformed2', transformed2)
+  // const transformed2 = transform2(transformed1)
+  // console.log('transformed2', transformed2)
 }
