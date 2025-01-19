@@ -3,10 +3,96 @@ import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { CssAProp } from 'src/mini-libs/widget-style-5/css/prop/CssAProp.ts'
 import uncapitalize = StringU.uncapitalize
-import anyobj = TypeU.anyobj
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
 import isnumber = TypeU.isnumber
+import isArray = TypeU.isArray
+
+
+
+
+export type StyleValue =
+  | string // pass as is if there are no special values or transformations
+  | number // transform to fractions or pixels
+  | null // set empty value (background: none, color: transparent)
+  | undefined // remove value definition
+
+
+
+export type Transformer2 = AtomicTransformer2 | MultiTransformer2
+
+export type AtomicTransformer2 =
+  | MediaTransformer2
+  | ElemTransformer2
+  | PseudoTransformer2
+  | AttrTransformer2
+  | PropTransformer2
+export type MultiTransformer2 =
+  | MultiStateTransformer2
+  | MultiPropTransformer2
+
+export type StateTransformer2 = MultiStateTransformer2 | PseudoTransformer2 | AtomicTransformer2
+
+export type AtomicTransformer2List = (AtomicTransformer2 | AtomicTransformer2[])[]
+
+
+
+export interface MediaTransformer2 {
+  readonly type: 'media'
+  readonly media: string
+  isAtomic: true
+}
+export interface ElemTransformer2 {
+  readonly type: 'elem'
+  readonly elem: string
+  isAtomic: true
+  readonly states?: Record<string, StateTransformer2> | undefined
+  readonly props?: Record<string, PropTransformer2> | undefined
+}
+export interface PseudoTransformer2 {
+  readonly type: 'pseudo'
+  readonly pseudo: string
+  isAtomic: true
+}
+export interface AttrTransformer2 {
+  readonly type: 'attr'
+  readonly attr: string
+  isAtomic: true
+}
+export interface PropTransformer2 {
+  readonly type: 'prop'
+  readonly prop: string
+  isAtomic: true
+}
+
+
+
+export interface MultiStateTransformer2 {
+  readonly type: 'state'
+  isAtomic: false
+  readonly values?: Record<string, any> | undefined
+  transform(this: MultiStateTransformer2, value?: string): AtomicTransformer2List
+}
+export interface MultiPropTransformer2 {
+  readonly type: 'prop'
+  isAtomic: false
+  transform(this: MultiPropTransformer2, value?: StyleValue): AtomicTransformer2List
+}
+
+
+
+
+
+
+
+function f(tf: Transformer2) {
+  if (tf.type === 'media') {
+    const v = tf.media
+  }
+  if ('media' in tf) {
+    const v = tf.media
+  }
+}
 
 
 
@@ -27,19 +113,14 @@ export type TransformData =
   | PropTransformData
   | PropValueTransformData
 
-export type TransformDataList = (TransformData | TransformData[])[]
+export type MultiTransformData = (TransformData | TransformData[])[]
 
 
-export type StyleValue =
-  | string // pass as is if there are no special values or transformations
-  | number // transform to fractions or pixels
-  | null // set empty value (background: none, color: transparent)
-  | undefined // remove value definition
 
 
 
 export abstract class Transformer {
-  abstract transform(value?: string): TransformDataList
+  abstract transform(value?: string): MultiTransformData
 }
 
 
@@ -67,8 +148,12 @@ export abstract class AbstractStateTf extends Transformer {
   abstract readonly values: Record<string, any> | undefined
 }
 export abstract class AbstractPropTf extends Transformer {
-  abstract override transform(value?: StyleValue): TransformDataList
+  abstract override transform(value?: StyleValue): MultiTransformData
 }
+
+
+const isMultiTransformer = (tf: Transformer) =>
+  tf instanceof AbstractStateTf || tf instanceof AbstractPropTf
 
 
 
@@ -322,58 +407,90 @@ const RootElemStates = {
 
 
 export function transform2(
-  sourceDataList: TransformData[][],
-  dataList: TransformData[][] = [],
+  dataList: MultiTransformData,
+  transformed: TransformData[][] = [],
   baseMedia: TransformData[] = [],
   baseData: TransformData[] = [],
 ): TransformData[][] {
-  return sourceDataList.map(d => {
-    const media: TransformData[] = []
-    const data: TransformData[] = []
+  dataList.forEach(d => {
+    const media: TransformData[] = [...baseMedia]
+    const data: TransformData[] = [...baseData]
     
-    let propValue: PropValueTransformData | undefined
-    let stateValue: ElemStateValueTransformData | undefined
+    if (!isArray(d)) {
+      transformed.push([...media, ...data, d])
+      return
+    }
     
-    for (let di = d.length - 1; di >= 0; di--) {
+    let state: ElemStateTransformData | undefined
+    let prop: PropTransformData | undefined
+    
+    for (let di = 0; di < d.length; di++) {
       const entity = d[di]
-      if ('propValue' in entity) {
-        propValue = entity
-        stateValue = undefined
-      }
-      else if ('prop' in entity) {
-        data.unshift(...entity.prop.transform(propValue?.propValue))
-        propValue = undefined
-        stateValue = undefined
-      }
-      else if ('stateValue' in entity) {
-        propValue = undefined
-        stateValue = entity
-      }
-      else if ('elemState' in entity) {
-        data.unshift(...entity.elemState.transform(stateValue?.stateValue))
-        propValue = undefined
-        stateValue = undefined
+      
+      if ('media' in entity) {
+        media.push(...entity.media.transform())
       }
       else if ('elem' in entity) {
-        data.unshift(...entity.elem.transform())
-        propValue = undefined
-        stateValue = undefined
+        data.push(...entity.elem.transform())
+        state = undefined
+        prop = undefined
       }
-      else if ('media' in entity) {
-        media.unshift(...entity.media.transform())
+      else if ('elemState' in entity) {
+        if (state) {
+          const t = state.elemState
+          if (isMultiTransformer(t)) {
+            // todo pass rest part of 'd'
+            transform2(t.transform(), transformed, media, data)
+            break
+          }
+          else {
+            const tt = t as Transformer
+            data.push(...tt.transform() as TransformData[])
+          }
+        }
+        state = entity
+        prop = undefined
+      }
+      else if ('stateValue' in entity) {
+        if (state) {
+          const t = state.elemState
+          if (isMultiTransformer(t)) {
+            transform2(t.transform(entity.stateValue), transformed, media, data)
+            break
+          }
+          else {
+            const tt = t as Transformer
+            data.push(...tt.transform(entity.stateValue) as TransformData[])
+          }
+        }
+        state = undefined
+        prop = undefined
+      }
+      else if ('prop' in entity) {
+        state = undefined
+        prop = entity
+      }
+      else if ('propValue' in entity) {
+        if (prop) {
+          const t = prop.prop
+          if (isMultiTransformer(t)) {
+            transform2(t.transform(entity.propValue), transformed, media, data)
+            break
+          }
+          else {
+            const tt = t as Transformer
+            data.push(...tt.transform(entity.propValue) as TransformData[])
+          }
+        }
+        state = undefined
+        prop = undefined
       }
       
+      if (di === d.length - 1) transformed.push([...media, ...data])
     }
-    return [...media, ...data]
   })
-}
-
-export function transform2Data(
-  dataList: TransformData[][],
-  media: TransformData[],
-  data: TransformData[],
-) {
-
+  
+  return transformed
 }
 
 
@@ -408,6 +525,6 @@ export function testWidget51Transform() {
   )
   console.log('transformed1', transformed1)
   
-  // const transformed2 = transform2(transformed1)
-  // console.log('transformed2', transformed2)
+  const transformed2 = transform2(transformed1)
+  console.log('transformed2', transformed2)
 }
