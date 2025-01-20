@@ -220,6 +220,8 @@ const Preview = React.memo((props: PreviewProps) => {
           const s0 = startValue
           t /= 1000 // ms => s
           
+          //const t01 = t / t1
+          
           const finished = t >= t1
           if (finished) t = t1
           let s = a0 * t**2 / 2 + v0 * t + s0
