@@ -291,7 +291,7 @@ export function transform2(
   dataList: Transformer2List,
   transformed: Transformer2[][] = [],
   baseMedia: MediaTransformer2[] = [],
-  baseData: Transformer2[] = [],
+  baseData: AtomicTransformer2[] = [],
 ): Transformer2[][] {
   dataList.forEach(data => {
     const m = [...baseMedia]
@@ -313,7 +313,7 @@ export function transform2(
       const processState = (value?: string) => {
         if (state) {
           if (state.type === 'attr') {
-            const stateData: Transformer2[] = [state]
+            const stateData: AtomicTransformer2[] = [state]
             if (value) stateData.push({ value, type: 'stateValue' })
             d.push(...stateData)
           }
