@@ -34,7 +34,7 @@ export type MultiTransformer2 =
 
 export type StateTransformer2 = MultiStateTransformer2 | PseudoTransformer2 | AtomicTransformer2
 
-export type Transformer2List = (Transformer2 | Transformer2List)[]
+export type Transformer2List = (Transformer2 | Transformer2List)[][]
 
 
 
@@ -96,7 +96,18 @@ export interface PropValueTransformer2 {
 
 
 
-
+/*
+ States order to select in CSS:
+   normal - no selector
+   checked / selected - :checked / :selected
+   hover - :hover
+   active - :active
+   focus - :focus
+   focusVisible - :focus-visible
+   readOnly - :read-only
+   disabled - :disabled
+   error - [error]
+ */
 
 export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 
@@ -108,6 +119,9 @@ namespace Medias2 {
 namespace Pseudos2 {
   export const hover: PseudoTransformer2 = {
     pseudo: 'hover', type: 'pseudo', isAtomic: true,
+  }
+  export const focus: PseudoTransformer2 = {
+    pseudo: 'focus', type: 'pseudo', isAtomic: true,
   }
   export const focusVisible: PseudoTransformer2 = {
     pseudo: 'focus-visible', type: 'pseudo', isAtomic: true,
@@ -145,22 +159,21 @@ namespace ComplexTransformers2 {
   export const radio: MultiStateTransformer2 = {
     state: 'radio', type: 'state', isAtomic: false,
     transform: () => [
-      Attrs2.type,
-      { type: 'propValue', value: 'radio' },
+      [Attrs2.type, { type: 'stateValue', value: 'radio' }],
     ],
   }
   
   // hoverable AND hover
   export const hoverableHover: MultiStateTransformer2 = {
     state: 'hoverableHover', type: 'state', isAtomic: false,
-    transform: () => [Medias2.hoverable, Pseudos2.hover],
+    transform: () => [[Medias2.hoverable, Pseudos2.hover]],
   }
   
   // hover OR focusVisible
   export const inFocus: MultiStateTransformer2 = {
     state: 'inFocus', type: 'state', isAtomic: false,
     transform: () => [
-      ComplexTransformers2.hoverableHover.transform(),
+      ...ComplexTransformers2.hoverableHover.transform(),
       [Pseudos2.focusVisible],
     ],
   }
@@ -281,11 +294,6 @@ export function transform2(
   baseData: Transformer2[] = [],
 ): Transformer2[][] {
   dataList.forEach(data => {
-    if (!isArray(data)) {
-      transformed.push([...baseMedia, ...baseData, data])
-      return
-    }
-    
     const m = [...baseMedia]
     const d = [...baseData]
     
@@ -296,45 +304,56 @@ export function transform2(
       const entity = data[dataI]
       
       if (isArray(entity)) {
-        entity.forEach(e => {
-          transform2([e, ...data.slice(dataI + 1)], transformed, m, d)
-        })
-        return
+        return transform2(
+          entity.map(e => [...e, ...data.slice(dataI + 1)]),
+          transformed, m, d
+        )
+      }
+      
+      const processState = (value?: string) => {
+        if (state) {
+          if (state.type === 'attr') {
+            const stateData: Transformer2[] = [state]
+            if (value) stateData.push({ value, type: 'stateValue' })
+            d.push(...stateData)
+          }
+          else if (state.type === 'state') {
+            const nextI = entity.type === 'stateValue' ? dataI + 1 : dataI
+            return transform2(
+              state.transform(value).map(e => [...e, ...data.slice(nextI)]),
+              transformed, m, d
+            )
+          }
+        }
       }
       
       if (entity.type === 'media') {
         m.push(entity)
       }
       else if (entity.type === 'elem') {
+        if (processState()) return
         d.push(entity)
         state = undefined
         prop = undefined
       }
       else if (entity.type === 'attr' || entity.type === 'state') {
+        if (processState()) return
         state = entity
         prop = undefined
       }
       else if (entity.type === 'pseudo') {
+        if (processState()) return
         d.push(entity)
         state = undefined
         prop = undefined
       }
       else if (entity.type === 'stateValue') {
-        if (state) {
-          if (state.type === 'attr') {
-            d.push(state, entity)
-          }
-          else if (state.type === 'state') {
-            state.transform(entity.value).forEach(e => {
-              transform2([e, ...data.slice(dataI + 1)], transformed, m, d)
-            })
-            return
-          }
-        }
+        if (processState(entity.value)) return
         state = undefined
         prop = undefined
       }
       else if (entity.type === 'prop') {
+        if (processState()) return
         state = undefined
         prop = entity
       }
@@ -344,10 +363,10 @@ export function transform2(
             d.push(prop, entity)
           }
           else {
-            prop.transform(entity.value).forEach(e => {
-              transform2([e, ...data.slice(dataI + 1)], transformed, m, d)
-            })
-            return
+            return transform2(
+              prop.transform(entity.value).map(e => [...e, ...data.slice(dataI + 1)]),
+              transformed, m, d
+            )
           }
         }
         state = undefined
@@ -375,27 +394,32 @@ const CommonProps2 = {
   background: Props2.background,
   bg: Props2.background,
 }
+const CommonStates2 = {
+  type: Attrs2.type,
+  radio: ComplexTransformers2.radio,
+  hover: ComplexTransformers2.hoverableHover,
+  focus: Pseudos2.focus,
+  focusVisible: Pseudos2.focusVisible,
+  inFocus: ComplexTransformers2.inFocus,
+}
 const Elements2 = {
   frame: {
     elem: 'frame', type: 'elem', isAtomic: true,
-    states: {
-      hover: ComplexTransformers2.hoverableHover,
-      focusVisible: Pseudos2.focusVisible,
-      inFocus: ComplexTransformers2.inFocus,
-      radio: ComplexTransformers2.radio,
-      type: Attrs2.type,
-    },
+    states: CommonStates2,
   } satisfies ElemTransformer2,
   box: {
     elem: 'box', type: 'elem', isAtomic: true,
     states: {
       hover: ComplexTransformers2.hoverableHover,
+      focus: Pseudos2.focus,
     },
   } satisfies ElemTransformer2,
 }
 const RootElemStates2 = {
-  hover: ComplexTransformers2.hoverableHover,
   type: Attrs2.type,
+  hover: ComplexTransformers2.hoverableHover,
+  focus: Pseudos2.focus,
+  focusVisible: Pseudos2.focusVisible,
 }
 
 
@@ -405,6 +429,7 @@ export function testWidget51Transform() {
     hoverTypeRadioBg: 'white',
     frameTypeCheckboxBoxSz: '40%',
     frameRadioBg: 'indianred',
+    frameRadioBoxHoverFocusBg: 'aquamarine',
     typeRadio: {
       bg: 'black',
       sz: 100,
