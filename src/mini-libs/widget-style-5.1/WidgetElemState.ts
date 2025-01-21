@@ -1,6 +1,10 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { CssAttr } from 'src/mini-libs/widget-style-5/css/attr/CssAttr.ts'
+import { CssEnumAttr } from 'src/mini-libs/widget-style-5/css/attr/CssEnumAttr.ts'
+import { CssProp } from 'src/mini-libs/widget-style-5/css/prop/CssProp.ts'
+import { CssPseudoClass } from 'src/mini-libs/widget-style-5/css/pseudo-class/CssPseudoClass.ts'
 import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
@@ -289,10 +293,10 @@ export function transform1(
 
 export function transform2(
   dataList: Transformer2List,
-  transformed: Transformer2[][] = [],
+  transformed: AtomicTransformer2[][] = [],
   baseMedia: MediaTransformer2[] = [],
   baseData: AtomicTransformer2[] = [],
-): Transformer2[][] {
+): AtomicTransformer2[][] {
   dataList.forEach(data => {
     const m = [...baseMedia]
     const d = [...baseData]
@@ -383,6 +387,114 @@ export function transform2(
 
 
 
+// Media selector
+// '@media (hover: hover) and (pointer: fine)'
+const getMediaSelector = (media: string) => media && `@media ${media}`
+// Attr selector
+// '[direction=vertical]'
+const getAttrSelector = (attr: string, value = '') => {
+  const nameValue = (() => {
+    const name = attr
+    if (!name) return ''
+    if (!value) return name
+    return `${name}=${value}`
+  })()
+  
+  return nameValue && `[${nameValue}]`
+}
+// Pseudo class selector
+// ':hover'
+const getPseudoSelector = (pseudo: string) => pseudo && `:${pseudo}`
+// Prop-value selector
+// 'background: black;'
+const getPropValueSelector = (prop: string, value: string = '') => value && `${prop}: ${value};`
+
+
+
+export type SelectPropValue = [selector: string[], [prop: string, value: string]]
+export function transform3(dataList: AtomicTransformer2[][]): SelectPropValue[] {
+  const selectorProp = dataList.map(data => {
+    const selector = ['']
+    let prop = ''
+    let propValue = ''
+    
+    let stateValue = ''
+    let propRawValue: StyleValue = undefined
+    
+    for (let di = data.length - 1; di >= 0; di--) {
+      const entity = data[di]
+      
+      if (entity.type === 'media') {
+        selector.unshift(getMediaSelector(entity.media))
+      }
+      else if (entity.type === 'elem') {
+        const s = selector.at(-1)!
+        selector[lastI(selector)] = `##${entity.elem}${s}`
+        stateValue = ''
+      }
+      else if (entity.type === 'attr') {
+        const s = selector.at(-1)!
+        selector[lastI(selector)] = `${getAttrSelector(entity.attr, stateValue)}${s}`
+        stateValue = ''
+      }
+      else if (entity.type === 'pseudo') {
+        const s = selector.at(-1)!
+        selector[lastI(selector)] = `${getPseudoSelector(entity.pseudo)}${s}`
+        stateValue = ''
+      }
+      else if (entity.type === 'stateValue') {
+        stateValue = entity.value
+      }
+      else if (entity.type === 'prop') {
+        propValue = entity.transformValue?.(propRawValue) ?? `${propRawValue}`
+        prop = entity.prop
+      }
+      else if (entity.type === 'propValue') {
+        propRawValue = entity.value
+      }
+    }
+    return [selector, [prop, propValue]] as SelectPropValue
+  })
+  return selectorProp
+}
+
+
+
+export type SelectPropValueBatch = [selector: string[], [prop: string, value: string][]]
+export const transform4 = (selectPropValue: SelectPropValue[]): SelectPropValueBatch[] => {
+  const batches: SelectPropValueBatch[] = []
+  selectPropValue.forEach(spv => {
+    const prevBatch = batches.at(-1)
+    if (prevBatch && ArrayU.eq(prevBatch[0], spv[0])) prevBatch[1].push(spv[1])
+    else batches.push([spv[0], [spv[1]]])
+  })
+  return batches
+}
+
+
+
+
+export const transform5 = (selectPropValueBatch: SelectPropValueBatch[]): string => {
+  let css = ''
+  selectPropValueBatch.forEach(batch => {
+    let propValues = ''
+    batch[1].forEach(([prop, value]) => {
+      const pv = getPropValueSelector(prop, value)
+      if (pv) propValues += pv + '\n'
+    })
+    
+    let selectPropValue = propValues
+    batch[0].toReversed().forEach(sel => {
+      selectPropValue = `${sel} {\n${selectPropValue}}`
+    })
+    
+    css += selectPropValue + '\n'
+  })
+  return css
+}
+
+
+
 
 const CommonProps2 = {
   width: Props2.width,
@@ -447,6 +559,23 @@ export function testWidget51Transform() {
   }
   console.log('widgetStyle', widgetStyle)
   
+  /* {
+    console.time('widgetStyle')
+    const transformed1 = transform1(
+      widgetStyle,
+      [CommonProps2, Elements2, RootElemStates2, undefined, undefined]
+    )
+    
+    const transformed2 = transform2(transformed1)
+    
+    const transformed3 = transform3(transformed2)
+    
+    const transformed4 = transform4(transformed3)
+    
+    const transformed5 = transform5(transformed4)
+    console.timeEnd('widgetStyle')
+  } */
+  
   const transformed1 = transform1(
     widgetStyle,
     [CommonProps2, Elements2, RootElemStates2, undefined, undefined]
@@ -455,4 +584,13 @@ export function testWidget51Transform() {
   
   const transformed2 = transform2(transformed1)
   console.log('transformed2', transformed2)
+  
+  const transformed3 = transform3(transformed2)
+  console.log('transformed3', transformed3)
+  
+  const transformed4 = transform4(transformed3)
+  console.log('transformed4', transformed4)
+  
+  const transformed5 = transform5(transformed4)
+  console.log('transformed5\n', transformed5)
 }
