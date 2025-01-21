@@ -27,72 +27,76 @@ export type AtomicTransformer2 =
   | PseudoTransformer2
   | AttrTransformer2
   | PropTransformer2
+  | AttrValueTransformer2
+  | PropValueTransformer2
 export type MultiTransformer2 =
   | MultiStateTransformer2
   | MultiPropTransformer2
 
 export type StateTransformer2 = MultiStateTransformer2 | PseudoTransformer2 | AtomicTransformer2
 
-export type AtomicTransformer2List = (AtomicTransformer2 | AtomicTransformer2[])[]
+export type Transformer2List = (Transformer2 | Transformer2List)[]
 
 
 
 export interface MediaTransformer2 {
-  readonly type: 'media'
   readonly media: string
-  isAtomic: true
+  readonly type: 'media'
+  readonly isAtomic: true
 }
 export interface ElemTransformer2 {
-  readonly type: 'elem'
   readonly elem: string
-  isAtomic: true
+  readonly type: 'elem'
+  readonly isAtomic: true
   readonly states?: Record<string, StateTransformer2> | undefined
   readonly props?: Record<string, PropTransformer2> | undefined
 }
 export interface PseudoTransformer2 {
-  readonly type: 'pseudo'
   readonly pseudo: string
-  isAtomic: true
+  readonly type: 'pseudo'
+  readonly isAtomic: true
 }
 export interface AttrTransformer2 {
-  readonly type: 'attr'
   readonly attr: string
-  isAtomic: true
+  readonly type: 'attr'
+  readonly isAtomic: true
+  readonly values?: Record<string, any> | undefined
 }
 export interface PropTransformer2 {
-  readonly type: 'prop'
   readonly prop: string
-  isAtomic: true
+  readonly type: 'prop'
+  readonly isAtomic: true
+  readonly transformValue?: (value: StyleValue) => string | undefined
 }
-
 
 
 export interface MultiStateTransformer2 {
+  readonly state: string
   readonly type: 'state'
-  isAtomic: false
+  readonly isAtomic: false
   readonly values?: Record<string, any> | undefined
-  transform(this: MultiStateTransformer2, value?: string): AtomicTransformer2List
+  readonly transform: (value?: string) => Transformer2List
 }
 export interface MultiPropTransformer2 {
+  readonly prop: string
   readonly type: 'prop'
-  isAtomic: false
-  transform(this: MultiPropTransformer2, value?: StyleValue): AtomicTransformer2List
+  readonly isAtomic: false
+  readonly transform: (value: StyleValue) => Transformer2List
+}
+
+
+export interface AttrValueTransformer2 {
+  readonly value: string
+  readonly type: 'stateValue',
+}
+export interface PropValueTransformer2 {
+  readonly value: StyleValue
+  readonly type: 'propValue',
 }
 
 
 
 
-
-
-
-function f(tf: Transformer2) {
-  if (tf.type === 'media') {
-    const v = tf.media
-  }
-  if ('media' in tf) {
-    const v = tf.media
-  }
-}
 
 
 
@@ -285,6 +289,82 @@ namespace ComplexTransformers {
 
 
 
+namespace Medias2 {
+  export const hoverable: MediaTransformer2 = {
+    media: hoverableMedia, type: 'media', isAtomic: true,
+  }
+}
+namespace Pseudos2 {
+  export const hover: PseudoTransformer2 = {
+    pseudo: 'hover', type: 'pseudo', isAtomic: true,
+  }
+  export const focusVisible: PseudoTransformer2 = {
+    pseudo: 'focus-visible', type: 'pseudo', isAtomic: true,
+  }
+}
+namespace Attrs2 {
+  export const type: AttrTransformer2 = {
+    attr: 'type', type: 'attr', isAtomic: true,
+    values: { radio: '', checkbox: '' },
+  }
+}
+namespace Props2 {
+  const transformLenValue = (value: StyleValue) => {
+    if (value === undefined) return undefined
+    if (value === null) value = 0
+    if (value === 'full') value = '100%'
+    if (isnumber(value)) value = `${value}px`
+    return value
+  }
+  export const width: PropTransformer2 = {
+    prop: 'width', type: 'prop', isAtomic: true,
+    transformValue: transformLenValue,
+  }
+  export const height: PropTransformer2 = {
+    prop: 'height', type: 'prop', isAtomic: true,
+    transformValue: transformLenValue,
+  }
+  export const background: PropTransformer2 = {
+    prop: 'background', type: 'prop', isAtomic: true,
+  }
+}
+namespace ComplexTransformers2 {
+  
+  // just 'radio' instead of 'typeRadio'
+  export const radio: MultiStateTransformer2 = {
+    state: 'radio', type: 'state', isAtomic: false,
+    transform: () => [
+      Attrs2.type,
+      { type: 'propValue', value: 'radio' },
+    ],
+  }
+  
+  // hoverable AND hover
+  export const hoverableHover: MultiStateTransformer2 = {
+    state: 'hoverableHover', type: 'state', isAtomic: false,
+    transform: () => [Medias2.hoverable, Pseudos2.hover],
+  }
+  
+  // hover OR focusVisible
+  export const inFocus: MultiStateTransformer2 = {
+    state: 'inFocus', type: 'state', isAtomic: false,
+    transform: () => [
+      ComplexTransformers2.hoverableHover.transform(),
+      [Pseudos2.focusVisible],
+    ],
+  }
+  
+  // width + height
+  export const size: MultiPropTransformer2 = {
+    prop: 'size', type: 'prop', isAtomic: false,
+    transform: (value: StyleValue) => [
+      [Props2.width, { type: 'propValue', value }],
+      [Props2.height, { type: 'propValue', value }],
+    ],
+  }
+  
+}
+
 
 
 
@@ -294,7 +374,7 @@ namespace ComplexTransformers {
 
 export type WidgetStyle = { [selectorProp: string]: StyleValue | WidgetStyle }
 
-type EntitiesRecord = Record<string, Transformer>
+type EntitiesRecord = Record<string, Transformer2>
 type EntitiesRecordArray = Array<EntitiesRecord | undefined>
 
 
@@ -308,12 +388,12 @@ const ctxElemPropI = 4 // record of elem props
 export function transform1(
   style: WidgetStyle,
   baseContextStack: EntitiesRecordArray,
-  dataList: TransformData[][] = [],
-  baseData: TransformData[] = []
+  dataList: Transformer2[][] = [],
+  baseData: Transformer2[] = []
 ) {
   for (const [selectProp, value] of Object.entries(style)) {
     const contextStack = [...baseContextStack]
-    const data: TransformData[] = [...baseData]
+    const data = [...baseData]
     let p = selectProp
     
     pLoop: while (true) {
@@ -334,29 +414,34 @@ export function transform1(
             p = p.slice(name.length)
             
             // found elem state (attr, pseudoClass)
-            if (entity instanceof ElemTf) {
-              data.push({ elem: entity })
+            if (entity.type === 'elem') {
+              data.push(entity)
               contextStack[ctxStatesI] = entity.states
               contextStack[ctxStateValuesI] = undefined
               contextStack[ctxElemPropI] = entity.props
             }
-            // found elem state (attr, pseudoClass)
-            else if (entity instanceof AbstractStateTf) {
-              data.push({ elemState: entity })
+            // found elem state (multistate, attr, pseudoClass)
+            else if (entity.type === 'state' || entity.type === 'attr') {
+              data.push(entity)
               contextStack[ctxStateValuesI] = entity.values
             }
+            // found elem state (pseudoClass)
+            else if (entity.type === 'pseudo') {
+              data.push(entity)
+              contextStack[ctxStateValuesI] = undefined
+            }
             // found prop
-            else if (entity instanceof AbstractPropTf) {
+            else if (entity.type === 'prop') {
               if (!isobject(value)) {
-                data.push({ prop: entity })
-                data.push({ propValue: value })
+                data.push(entity)
+                data.push({ value, type: 'propValue' })
                 dataList.push(data)
               }
               break pLoop
             }
             // found state value (attr value)
             else if (ctxI === ctxStateValuesI) {
-              data.push({ stateValue: name })
+              data.push({ value: name, type: 'stateValue' })
             }
             
             continue pLoop
@@ -375,37 +460,10 @@ export function transform1(
 
 
 
-const CommonProps = {
-  width: Props.width,
-  w: Props.width,
-  height: Props.height,
-  h: Props.height,
-  size: ComplexTransformers.size,
-  sz: ComplexTransformers.size,
-  background: Props.background,
-  bg: Props.background,
-} satisfies Record<string, Transformer>
-
-const Elements = {
-  frame: new ElemTf('frame', {
-    hover: ComplexTransformers.hover,
-    focusVisible: PseudoClasses.focusVisible,
-    inFocus: ComplexTransformers.inFocus,
-    radio: ComplexTransformers.radio,
-    type: Attrs.type,
-  }),
-  box: new ElemTf('box', {
-    hover: ComplexTransformers.hover,
-  }),
-} satisfies Record<string, Transformer>
-
-const RootElemStates = {
-  hover: ComplexTransformers.hover,
-  type: Attrs.type,
-} satisfies Record<string, Transformer>
 
 
 
+/*
 export function transform2(
   dataList: MultiTransformData,
   transformed: TransformData[][] = [],
@@ -492,8 +550,73 @@ export function transform2(
   
   return transformed
 }
+*/
 
 
+
+const CommonProps = {
+  width: Props.width,
+  w: Props.width,
+  height: Props.height,
+  h: Props.height,
+  size: ComplexTransformers.size,
+  sz: ComplexTransformers.size,
+  background: Props.background,
+  bg: Props.background,
+} satisfies Record<string, Transformer>
+
+const Elements = {
+  frame: new ElemTf('frame', {
+    hover: ComplexTransformers.hover,
+    focusVisible: PseudoClasses.focusVisible,
+    inFocus: ComplexTransformers.inFocus,
+    radio: ComplexTransformers.radio,
+    type: Attrs.type,
+  }),
+  box: new ElemTf('box', {
+    hover: ComplexTransformers.hover,
+  }),
+} satisfies Record<string, Transformer>
+
+const RootElemStates = {
+  hover: ComplexTransformers.hover,
+  type: Attrs.type,
+} satisfies Record<string, Transformer>
+
+
+
+const CommonProps2 = {
+  width: Props2.width,
+  w: Props2.width,
+  height: Props2.height,
+  h: Props2.height,
+  size: ComplexTransformers2.size,
+  sz: ComplexTransformers2.size,
+  background: Props2.background,
+  bg: Props2.background,
+}
+const Elements2 = {
+  frame: {
+    elem: 'frame', type: 'elem', isAtomic: true,
+    states: {
+      hover: ComplexTransformers2.hoverableHover,
+      focusVisible: Pseudos2.focusVisible,
+      inFocus: ComplexTransformers2.inFocus,
+      radio: ComplexTransformers2.radio,
+      type: Attrs2.type,
+    },
+  } satisfies ElemTransformer2,
+  box: {
+    elem: 'box', type: 'elem', isAtomic: true,
+    states: {
+      hover: ComplexTransformers2.hoverableHover,
+    },
+  } satisfies ElemTransformer2,
+}
+const RootElemStates2 = {
+  hover: ComplexTransformers2.hoverableHover,
+  type: Attrs2.type,
+}
 
 
 
@@ -521,10 +644,10 @@ export function testWidget51Transform() {
   
   const transformed1 = transform1(
     widgetStyle,
-    [CommonProps, Elements, RootElemStates, undefined, undefined]
+    [CommonProps2, Elements2, RootElemStates2, undefined, undefined]
   )
   console.log('transformed1', transformed1)
   
-  const transformed2 = transform2(transformed1)
-  console.log('transformed2', transformed2)
+  // const transformed2 = transform2(transformed1)
+  // console.log('transformed2', transformed2)
 }
