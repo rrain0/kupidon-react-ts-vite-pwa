@@ -3,7 +3,7 @@ import {
   AttrTransformer1, StateValueTransformer1, ElemTransformer1,
   MediaTransformer1,
   PropTransformer1, PropValueTransformer1, PseudoTransformer1, PseudoElemTransformer1,
-} from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform1.ts'
+} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 
 
 

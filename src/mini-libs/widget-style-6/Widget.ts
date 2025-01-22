@@ -3,7 +3,7 @@ import {
   Elements2,
   ElemTransformer1, AnyPropTransformer1,
   AnyStateTransformer1, WidgetStyle,
-} from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform1.ts'
+} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import RecordRo = TypeU.RecordRo
 
 

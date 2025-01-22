@@ -4,12 +4,12 @@ import {
   Props1, Pseudos1,
   WidgetStyle,
   transform1, PseudoElements1,
-} from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform1.ts'
-import { transform2 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform2.ts'
-import { transform3 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform3.ts'
-import { transform4 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform4.ts'
-import { transform5 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform5.ts'
-import { transform6 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform6.ts'
+} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
+import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
+import { transform4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform4.ts'
+import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
+import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 
 
 

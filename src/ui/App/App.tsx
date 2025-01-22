@@ -18,7 +18,7 @@ import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 import {
   testWidget51StyleTransform,
-} from 'src/mini-libs/widget-style-5.1/WidgetStyleTransformTest.ts'
+} from 'src/mini-libs/widget-style-6/WidgetStyleTransformTest.ts'
 import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 

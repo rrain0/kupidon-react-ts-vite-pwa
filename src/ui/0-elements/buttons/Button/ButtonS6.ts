@@ -10,7 +10,7 @@ import capitalize = StringU.capitalize
 
 
 
-export namespace ButtonS4 {
+export namespace ButtonS6 {
   
   export const buildButtonWidget = (rootConfig?: {
     widget: CssWidget<any>,

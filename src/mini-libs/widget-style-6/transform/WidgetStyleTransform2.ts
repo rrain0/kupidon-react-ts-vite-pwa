@@ -6,7 +6,7 @@ import {
   MultiPropTransformer1,
   MultiStateTransformer1, PropTransformer1,
   Transformer1List,
-} from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform1.ts'
+} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import isArray = TypeU.isArray
 
 

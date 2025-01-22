@@ -1,4 +1,4 @@
-import { SelectPropValueBatchTf5 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform5.ts'
+import { SelectPropValueBatchTf5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 
 
 
