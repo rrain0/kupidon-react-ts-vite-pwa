@@ -73,6 +73,12 @@ export function transform2(
         state = undefined
         prop = undefined
       }
+      else if (entity.type === 'pseudoElem') {
+        if (processState()) return
+        d.push(entity)
+        state = undefined
+        prop = undefined
+      }
       else if (entity.type === 'stateValue') {
         if (processState(entity.value)) return
         state = undefined

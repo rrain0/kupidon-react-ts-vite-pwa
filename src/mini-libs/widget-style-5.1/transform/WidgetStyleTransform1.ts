@@ -5,7 +5,6 @@ import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
 import isnumber = TypeU.isnumber
-import isArray = TypeU.isArray
 
 
 
@@ -26,11 +25,15 @@ export interface MediaTransformer1 {
 }
 export interface ElemTransformer1 {
   readonly elem: string
-  readonly elemType: 'class' | 'pseudo'
   readonly type: 'elem'
   readonly isAtomic: true
   readonly states?: Record<string, AnyStateTransformer1> | undefined
   readonly props?: Record<string, PropTransformer1> | undefined
+}
+export interface PseudoElemTransformer1 {
+  readonly pseudoElem: string
+  readonly type: 'pseudoElem'
+  readonly isAtomic: true
 }
 export interface PseudoTransformer1 {
   readonly pseudo: string
@@ -80,6 +83,7 @@ export interface PropValueTransformer1 {
 export type AtomicTransformer1 =
   | MediaTransformer1
   | ElemTransformer1
+  | PseudoElemTransformer1
   | PseudoTransformer1
   | AttrTransformer1
   | PropTransformer1
@@ -90,11 +94,20 @@ export type MultiTransformer1 =
   | MultiStateTransformer1
   | MultiPropTransformer1
 
+
 export type Transformer1 = AtomicTransformer1 | MultiTransformer1
 export type Transformer1List = (Transformer1 | Transformer1List)[][]
 
-export type AnyStateTransformer1 = PseudoTransformer1 | AttrTransformer1 | MultiStateTransformer1
-export type AnyPropTransformer1 = PropTransformer1 | MultiPropTransformer1
+
+export type AnyStateTransformer1 =
+  | PseudoElemTransformer1
+  | PseudoTransformer1
+  | AttrTransformer1
+  | MultiStateTransformer1
+
+export type AnyPropTransformer1 =
+  | PropTransformer1
+  | MultiPropTransformer1
 
 
 
@@ -117,6 +130,14 @@ export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 export namespace Medias1 {
   export const hoverable: MediaTransformer1 = {
     media: hoverableMedia, type: 'media', isAtomic: true,
+  }
+}
+export namespace PseudoElements1 {
+  export const before: PseudoElemTransformer1 = {
+    pseudoElem: 'before', type: 'pseudoElem', isAtomic: true,
+  }
+  export const after: PseudoElemTransformer1 = {
+    pseudoElem: 'after', type: 'pseudoElem', isAtomic: true,
   }
 }
 export namespace Pseudos1 {
@@ -254,6 +275,11 @@ export function transform1(
             }
             // found elem state (pseudoClass)
             else if (entity.type === 'pseudo') {
+              data.push(entity)
+              contextStack[ctxStateValuesI] = undefined
+            }
+            // found elem state (pseudoElement)
+            else if (entity.type === 'pseudoElem') {
               data.push(entity)
               contextStack[ctxStateValuesI] = undefined
             }

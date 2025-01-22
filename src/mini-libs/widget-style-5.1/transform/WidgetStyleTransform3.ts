@@ -2,12 +2,16 @@ import {
   AtomicTransformer1,
   AttrTransformer1, StateValueTransformer1, ElemTransformer1,
   MediaTransformer1,
-  PropTransformer1, PropValueTransformer1, PseudoTransformer1,
+  PropTransformer1, PropValueTransformer1, PseudoTransformer1, PseudoElemTransformer1,
 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform1.ts'
 
 
 
 
+export interface StatePseudoElemTf3 {
+  type: 'pseudoElem'
+  pseudoElem: PseudoElemTransformer1
+}
 export interface StatePseudoTf3 {
   type: 'pseudo'
   pseudo: PseudoTransformer1
@@ -20,7 +24,7 @@ export interface StateAttrValueTf3 {
 export interface ElemStateTf3 {
   type: 'elem'
   elem: ElemTransformer1 | undefined
-  states: (StatePseudoTf3 | StateAttrValueTf3)[]
+  states: (StatePseudoElemTf3 | StatePseudoTf3 | StateAttrValueTf3)[]
 }
 
 export interface PropValueTf3 {
@@ -28,8 +32,6 @@ export interface PropValueTf3 {
   prop?: PropTransformer1
   value?: PropValueTransformer1
 }
-
-export type Transformer3 = MediaTransformer1 | ElemStateTf3 | PropValueTf3
 
 
 export type Transformed3 = {
@@ -51,6 +53,10 @@ export function transform3(dataList: AtomicTransformer1[][]): Transformed3[] {
       }
       else if (d.type === 'elem') {
         tf3.elems.push({ type: 'elem', elem: d, states: [] })
+      }
+      else if (d.type === 'pseudoElem') {
+        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
+        tf3.elems.at(-1)!.states.push({ type: 'pseudoElem', pseudoElem: d })
       }
       else if (d.type === 'pseudo') {
         tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }

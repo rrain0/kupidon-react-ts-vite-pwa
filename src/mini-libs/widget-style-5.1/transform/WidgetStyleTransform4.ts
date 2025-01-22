@@ -9,11 +9,12 @@ import lastI = ArrayU.lastI
 // Media selector
 // '@media (hover: hover) and (pointer: fine)'
 const getMediaSelector = (media: string) => media && `@media ${media}`
-const getElemSelector = (elemName: string, elemType: 'class' | 'pseudo'): string => {
-  if (elemType === 'class') return elemName && `.${elemName}`
-  if (elemType === 'pseudo') return elemName && `::${elemName}`
-  return ''
-}
+// Element selector
+// '.elemClass'
+const getElemSelector = (elemName: string): string => elemName && `.${elemName}`
+// Pseudo element selector
+// '::elem'
+const getPseudoElemSelector = (elemName: string): string => elemName && `::${elemName}`
 // Attr selector
 // '[direction=vertical]'
 const getAttrSelector = (attr: string, value = '') => {
@@ -52,6 +53,10 @@ export function transform4(dataList: Transformed3[]): SelectPropValueTf4[] {
       const ss = element.states
       for (let si = ss.length - 1; si >= 0; si--) {
         const s = ss[si]
+        if (s.type === 'pseudoElem') {
+          const lastSel = selector.at(-1)!
+          selector[lastI(selector)] = `${getPseudoElemSelector(s.pseudoElem.pseudoElem)}${lastSel}`
+        }
         if (s.type === 'pseudo') {
           const lastSel = selector.at(-1)!
           selector[lastI(selector)] = `${getPseudoSelector(s.pseudo.pseudo)}${lastSel}`
@@ -65,7 +70,7 @@ export function transform4(dataList: Transformed3[]): SelectPropValueTf4[] {
       const el = element.elem
       if (el) {
         const lastSel = selector.at(-1)!
-        selector[lastI(selector)] = `${getElemSelector(el.elem, el.elemType)}${lastSel}`
+        selector[lastI(selector)] = `${getElemSelector(el.elem)}${lastSel}`
       }
     }
     

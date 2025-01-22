@@ -1,8 +1,9 @@
 import {
   Attrs1,
   ComplexTransformers1, ElemTransformer1,
-  Props1, Pseudos1, transform1,
+  Props1, Pseudos1,
   WidgetStyle,
+  transform1, PseudoElements1,
 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-5.1/transform/WidgetStyleTransform3.ts'
@@ -24,6 +25,8 @@ export const CommonProps2 = {
   bg: Props1.background,
 }
 export const CommonStates2 = {
+  before: PseudoElements1.before,
+  after: PseudoElements1.after,
   type: Attrs1.type,
   radio: ComplexTransformers1.radio,
   hover: ComplexTransformers1.hoverableHover,
@@ -33,13 +36,11 @@ export const CommonStates2 = {
 }
 export const Elements2 = {
   frame: {
-    elem: 'rruiFrame', elemType: 'class',
-    type: 'elem', isAtomic: true,
+    elem: 'rruiFrame', type: 'elem', isAtomic: true,
     states: CommonStates2,
   } satisfies ElemTransformer1,
   box: {
-    elem: 'rruiBox', elemType: 'class',
-    type: 'elem', isAtomic: true,
+    elem: 'rruiBox', type: 'elem', isAtomic: true,
     states: {
       hover: ComplexTransformers1.hoverableHover,
       focus: Pseudos1.focus,
@@ -58,6 +59,7 @@ export const RootElemStates2 = {
 export function testWidget51StyleTransform() {
   const widgetStyle: WidgetStyle = {
     hoverTypeRadioBg: 'white',
+    frameHoverAfterBg: 'aqua',
     frameTypeCheckboxBoxSz: '40%',
     frameRadioBg: 'indianred',
     frameRadioBoxHoverFocusBg: 'aquamarine',
@@ -77,6 +79,15 @@ export function testWidget51StyleTransform() {
     },
   }
   console.log('widgetStyle', widgetStyle)
+  
+  /*
+  console.time('transform')
+  transform6(transform5(transform4(transform3(transform2(transform1(
+    widgetStyle,
+    [CommonProps2, Elements2, RootElemStates2, undefined, undefined]
+  ))))))
+  console.timeEnd('transform')
+   */
   
   const transformed1 = transform1(
     widgetStyle,
@@ -98,4 +109,6 @@ export function testWidget51StyleTransform() {
   
   const transformed6 = transform6(transformed5)
   console.log('transformed6', transformed6)
+  
+  
 }
