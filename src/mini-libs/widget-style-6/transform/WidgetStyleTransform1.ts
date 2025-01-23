@@ -1,6 +1,7 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { CommonStates } from 'src/mini-libs/widget-style-6/Widget.ts'
 import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
@@ -17,6 +18,7 @@ export type StyleValue =
   | undefined // remove value definition
 
 
+export type TransformPropValue = (propValue: StyleValue) => StyleValue
 
 
 export interface WidgetMedia {
@@ -53,7 +55,7 @@ export interface WidgetProp {
   readonly prop: string
   readonly type: 'prop'
   readonly isAtomic: true
-  readonly transformValue?: (propValue: StyleValue) => string | undefined
+  readonly transformValue?: TransformPropValue | undefined
 }
 
 
@@ -126,6 +128,27 @@ export type WidgetAnyPropTransformer =
 
 
 
+export type NewWidgetElemParams = Omit<WidgetElem, 'type' | 'isAtomic'>
+export function newWidgetElem(params: NewWidgetElemParams): WidgetElem {
+  return {
+    type: 'elem', isAtomic: true,
+    ...params,
+  }
+}
+
+export function newWidgetProp(
+  name: WidgetProp['prop'],
+  transform?: WidgetProp['transformValue']
+): WidgetProp {
+  return {
+    prop: name, type: 'prop', isAtomic: true,
+    transformValue: transform,
+  }
+}
+
+
+
+
 export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 
 export namespace WidgetMedias {
@@ -133,6 +156,7 @@ export namespace WidgetMedias {
     media: hoverableMedia, type: 'media', isAtomic: true,
   }
 }
+
 export namespace WidgetPseudoElements {
   export const before: WidgetPseudoElem = {
     pseudoElem: 'before', type: 'pseudoElem', isAtomic: true,
@@ -141,6 +165,7 @@ export namespace WidgetPseudoElements {
     pseudoElem: 'after', type: 'pseudoElem', isAtomic: true,
   }
 }
+
 export namespace WidgetPseudos {
   export const checked: WidgetPseudo = {
     pseudo: 'checked', type: 'pseudo', isAtomic: true,
@@ -167,6 +192,7 @@ export namespace WidgetPseudos {
     pseudo: 'disabled', type: 'pseudo', isAtomic: true,
   }
 }
+
 export namespace WidgetAttrs {
   export const type: WidgetAttr = {
     attr: 'type', type: 'attr', isAtomic: true,
@@ -176,31 +202,52 @@ export namespace WidgetAttrs {
     attr: 'data-error', type: 'attr', isAtomic: true,
   }
 }
+
 export namespace WidgetProps {
-  const transformLenValue = (value: StyleValue) => {
+  
+  export const transformLenValue = (value: StyleValue) => {
     if (value === undefined) return undefined
     if (value === null) value = 0
     if (value === 'full') value = '100%'
     if (isnumber(value)) value = `${value}px`
     return value
   }
-  export const width: WidgetProp = {
-    prop: 'width', type: 'prop', isAtomic: true,
-    transformValue: transformLenValue,
+  export const transformNullToNone = (value: StyleValue) => {
+    if (value === null) return 'none'
+    return value
   }
-  export const height: WidgetProp = {
-    prop: 'height', type: 'prop', isAtomic: true,
-    transformValue: transformLenValue,
-  }
-  export const background: WidgetProp = {
-    prop: 'background', type: 'prop', isAtomic: true,
-  }
+  
+  export const position = newWidgetProp('position', value => {
+    if (value === 'abs') return 'absolute'
+    if (value === 'rel') return 'relative'
+    if (value === null) return 'static'
+    return value
+  })
+  export const top = newWidgetProp('top', transformLenValue)
+  export const right = newWidgetProp('right', transformLenValue)
+  export const bottom = newWidgetProp('bottom', transformLenValue)
+  export const left = newWidgetProp('left', transformLenValue)
+  
+  export const width = newWidgetProp('width', transformLenValue)
+  export const height = newWidgetProp('height', transformLenValue)
+  export const margin = newWidgetProp('margin', transformLenValue)
+  export const padding = newWidgetProp('padding', transformLenValue)
+  export const gap = newWidgetProp('gap', transformLenValue)
+  
+  export const background = newWidgetProp('background', transformNullToNone)
+  export const border = newWidgetProp('border', transformNullToNone)
+  export const outline = newWidgetProp('outline', transformNullToNone)
+  export const boxShadow = newWidgetProp('box-shadow', transformNullToNone)
+  
+  export const backgroundColor = newWidgetProp('background-color', transformNullToNone)
 }
+
 export namespace WidgetComplexTransformers {
   
   // just 'radio' instead of 'typeRadio'
   export const radio: WidgetMultiStateTransformer = {
-    state: 'radio', type: 'state', isAtomic: false,
+    state: 'radio -> [type=radio]',
+    type: 'state', isAtomic: false,
     transform: () => [
       [WidgetAttrs.type, { type: 'stateValue', value: 'radio' }],
     ],
@@ -208,13 +255,15 @@ export namespace WidgetComplexTransformers {
   
   // hoverable AND hover
   export const hoverableHover: WidgetMultiStateTransformer = {
-    state: 'hoverableHover', type: 'state', isAtomic: false,
+    state: `hoverableHover -> @media ${hoverableMedia} & :hover`,
+    type: 'state', isAtomic: false,
     transform: () => [[WidgetMedias.hoverable, WidgetPseudos.hover]],
   }
   
   // hover OR focusVisible
   export const inFocus: WidgetMultiStateTransformer = {
-    state: 'inFocus', type: 'state', isAtomic: false,
+    state: 'inFocus -> hoverableHover | :focus-visible',
+    type: 'state', isAtomic: false,
     transform: () => [
       ...WidgetComplexTransformers.hoverableHover.transform(),
       [WidgetPseudos.focusVisible],
@@ -223,19 +272,46 @@ export namespace WidgetComplexTransformers {
   
   // width + height
   export const size: WidgetMultiPropTransformer = {
-    prop: 'size', type: 'prop', isAtomic: false,
+    prop: 'size -> width & height',
+    type: 'prop', isAtomic: false,
     transform: (value: StyleValue) => [
       [WidgetProps.width, { type: 'propValue', value }],
       [WidgetProps.height, { type: 'propValue', value }],
     ],
   }
   
+  export const abs: WidgetMultiPropTransformer = {
+    prop: 'abs -> top & right & bottom & left',
+    type: 'prop', isAtomic: false,
+    transform: (value: StyleValue) => [
+      [WidgetProps.top, { type: 'propValue', value }],
+      [WidgetProps.right, { type: 'propValue', value }],
+      [WidgetProps.bottom, { type: 'propValue', value }],
+      [WidgetProps.left, { type: 'propValue', value }],
+    ],
+  }
+  export const absH: WidgetMultiPropTransformer = {
+    prop: 'absH -> right & left',
+    type: 'prop', isAtomic: false,
+    transform: (value: StyleValue) => [
+      [WidgetProps.right, { type: 'propValue', value }],
+      [WidgetProps.left, { type: 'propValue', value }],
+    ],
+  }
+  export const absV: WidgetMultiPropTransformer = {
+    prop: 'absV -> top & bottom ',
+    type: 'prop', isAtomic: false,
+    transform: (value: StyleValue) => [
+      [WidgetProps.top, { type: 'propValue', value }],
+      [WidgetProps.bottom, { type: 'propValue', value }],
+    ],
+  }
 }
 
 
 
-// TODO
-//  Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }
+// TODO Style split 'selP' by capital letters and check using 'in' operator
+// TODO Style Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }
 
 
 
@@ -276,7 +352,6 @@ export function transform1(
       for (let ctxI = lastI(contextStack); ctxI >= 0; ctxI--) {
         const context = contextStack[ctxI]
         if (context) for (const [name, entity] of Object.entries(context)) {
-          // TODO split 'selP' by capital letters and check using 'in' operator
           
           if (ctxI !== ctxCommonI && selP.startsWith(name)
             || ctxI === ctxCommonI && selP === name

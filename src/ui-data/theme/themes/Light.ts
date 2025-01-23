@@ -23,9 +23,9 @@ export const LightProps: ThemeProps = {
     bg: '#ffffff',
   },
   navButton: {
-    bgFocus:       ['#f0f0f0'],
-    ct:       ['#7b7b7b'],
-    cta: ['#333333'],
+    bgFocus:      ['#f0f0f0'],
+    ct:           ['#7b7b7b'],
+    cta:          ['#333333'],
   },
   
   
@@ -73,18 +73,18 @@ export const LightProps: ThemeProps = {
   buttonAccent: {
     bg:            ['#bbbbbb'],
     bg2:           ['#bbbbbb'],
-    ct:       ['#000000'],
+    ct:            ['#000000'],
     ct2:           '#000000',
     bgFocus:       ['#999999'],
-    ctFocus:  ['#000000'],
+    ctFocus:       ['#000000'],
   },
   buttonNormal: {
     bg:            ['#bbbbbb'],
     bg2:           '#dddddd',
-    ct:       ['#000000'],
+    ct:            ['#000000'],
     bgFocus:       ['#dddddd'],
     bgFocus2:      '#dddddd',
-    ctFocus:  ['#000000'],
+    ctFocus:       ['#000000'],
   },
   buttonSecondary: {
     bg:        ['transparent'],
@@ -93,8 +93,9 @@ export const LightProps: ThemeProps = {
   },
   
   ripple: {
-    ct:              ['#ffffff66'],
-    ctOnTransparent: ['#666666'],
+    ct:                '#ffffff66',
+    ctOnTransparent:   '#66666666',
+    ctOnTransparent2:  '#66666688',
   },
   
   
@@ -103,7 +104,7 @@ export const LightProps: ThemeProps = {
     bgFocus:  ['#7b7b7b'],
   },
   buttonTransparent: {
-    bgFocus: ['#00000011'],
+    bgFocus:  ['#00000011'],
   },
   
   

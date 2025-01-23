@@ -68,7 +68,7 @@ export namespace RippleS {
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.ct[0])}
+      ${W.e.ripple.p.color.set(t.ripple.ct)}
     }
   `
   
@@ -77,7 +77,7 @@ export namespace RippleS {
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0] + opacity)}
+      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent + opacity)}
     }
   `
   
@@ -86,7 +86,7 @@ export namespace RippleS {
     ${base};
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0] + opacity)}
+      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent + opacity)}
     }
   `
   
@@ -96,7 +96,7 @@ export namespace RippleS {
     // normal
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.p.mode.set('center')}
-      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0] + opacity)}
+      ${W.e.ripple.p.color.set(t.ripple.ctOnTransparent + opacity)}
     }
   `
   

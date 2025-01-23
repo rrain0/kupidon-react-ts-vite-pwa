@@ -82,10 +82,7 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     ct:            ['#bbbbbb'],
   },
   
-  ripple: { ...LightProps.ripple,
-    ct:              ['#ffffff'],
-    ctOnTransparent: ['#666666'],
-  },
+  ripple: { ...LightProps.ripple },
   
   
   inputRadio: { ...LightProps.inputRadio,

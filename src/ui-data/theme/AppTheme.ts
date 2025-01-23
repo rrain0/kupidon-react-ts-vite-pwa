@@ -55,7 +55,7 @@ export namespace AppTheme {
       bg2:        string[]
       bg3:        string[]
       
-      ct:    string[]
+      ct:         string[]
       ct1a:       string[]
       ct1b:       string[]
       ct2:        string[]
@@ -87,9 +87,9 @@ export namespace AppTheme {
     
     // main button (submit button)
     buttonMain: {
-      bg:       string[]
-      bgFocus:  string[]
-      ct:       string[]
+      bg:            string[]
+      bgFocus:       string[]
+      ct:            string[]
     }
     // just a colorful button that drags some attention
     buttonAccent: {
@@ -128,7 +128,7 @@ export namespace AppTheme {
     }
     navButton: {
       bgFocus:   string[]
-      ct:   string[]
+      ct:        string[]
       cta:       string[]
     }
     
@@ -156,23 +156,24 @@ export namespace AppTheme {
     
     // disabledButton
     elementDisabled: {
-      bg:           string[]
-      ct:      string[]
+      bg:              string[]
+      ct:              string[]
     }
     // dangerButton
     elementDanger: {
-      bg:           string[]
-      bgFocus:      string[]
-      ct:      string[]
+      bg:              string[]
+      bgFocus:         string[]
+      ct:              string[]
     }
     // element with error
     elementError: {
-      bg:           string[]
+      bg:              string[]
     },
     
     ripple: {
-      ct:              string[]
-      ctOnTransparent: string[]
+      ct:                string
+      ctOnTransparent:   string
+      ctOnTransparent2:  string
     }
     
     

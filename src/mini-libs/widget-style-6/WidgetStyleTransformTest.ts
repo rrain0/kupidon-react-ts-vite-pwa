@@ -1,7 +1,6 @@
 import {
-  WidgetElem,
   WidgetStyle,
-  transform1, WidgetMultiAnyTransformer,
+  transform1, WidgetMultiAnyTransformer, newWidgetElem,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
@@ -10,9 +9,8 @@ import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTr
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import {
   CommonProps,
-  CommonStates,
+  CommonStates, newWidget,
   transformWidgetStyle,
-  Widget,
 } from 'src/mini-libs/widget-style-6/Widget.ts'
 
 
@@ -20,25 +18,37 @@ import {
 
 
 
+/*
+ States order to select in CSS:
+   normal - no selector
+   checked / selected - :checked / :selected
+   hover - :hover
+   active - :active
+   focus - :focus
+   focusVisible - :focus-visible
+   readOnly - :read-only
+   disabled - :disabled
+   error - [error]
+ */
 
 
 
 export namespace WidgetStyle6Test {
   
-  const elemFrame: WidgetElem = {
-    className: 'rruiFrame', type: 'elem', isAtomic: true,
+  const elemFrame = newWidgetElem({
+    className: 'rruiFrame',
     states: CommonStates,
-  }
-  const elemInput: WidgetElem = {
-    className: 'rruiInput', type: 'elem', isAtomic: true,
-    states: CommonStates,
+  })
+  const elemInput = newWidgetElem({
+    className: 'rruiInput',
     upSelector: '>', upElem: elemFrame,
-  }
-  const elemBox: WidgetElem = {
-    className: 'rruiBox', type: 'elem', isAtomic: true,
     states: CommonStates,
+  })
+  const elemBox = newWidgetElem({
+    className: 'rruiBox',
     upSelector: '>', upElem: elemFrame,
-  }
+    states: CommonStates,
+  })
   const WidgetElements = {
     frame: elemFrame,
     input: elemInput,
@@ -75,18 +85,6 @@ export namespace WidgetStyle6Test {
   
   
   
-  /*
-   States order to select in CSS:
-     normal - no selector
-     checked / selected - :checked / :selected
-     hover - :hover
-     active - :active
-     focus - :focus
-     focusVisible - :focus-visible
-     readOnly - :read-only
-     disabled - :disabled
-     error - [error]
-   */
   export const inputWidgetStyle: WidgetStyle = {
     input: { '-webkit-tap-highlight-color': 'transparent' },
     hoverTypeRadioBg: 'white',
@@ -148,10 +146,7 @@ export namespace WidgetStyle6Test {
   
   
   export function testWidget() {
-    const inputWidget: Widget = {
-      rootElem: InputWidgetElements.frame,
-      elems: InputWidgetElements,
-    }
+    const inputWidget = newWidget(InputWidgetElements.frame, InputWidgetElements)
     
     const css = transformWidgetStyle(inputWidget, inputWidgetStyle)
     console.log('widget css', '\n',  css)

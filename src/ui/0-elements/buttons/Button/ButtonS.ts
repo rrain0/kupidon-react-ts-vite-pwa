@@ -228,7 +228,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -266,7 +266,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -292,7 +292,7 @@ export namespace ButtonS {
   const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
     bg: t.buttonAccent.bg2[0],
     ct: t.buttonAccent.ct2,
-    ctRipple: t.ripple.ct[0],
+    ctRipple: t.ripple.ct,
     bgFocus: t.buttonAccent.bgFocus[0],
     ctFocus: t.buttonAccent.ctFocus[0],
     bgDisabled: t.elementDisabled.bg[0],
@@ -307,7 +307,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -337,7 +337,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -406,7 +406,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
       }
     }
     
@@ -508,7 +508,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -538,7 +538,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -568,7 +568,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
 
@@ -607,7 +607,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct[0])}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ct)}
       }
     }
     
@@ -842,7 +842,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
       }
     }
     
@@ -875,7 +875,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
       }
     }
     
@@ -950,7 +950,7 @@ export namespace ButtonS {
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
         // todo move opacity to theme
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent[0] + '88')}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
       }
     }
 
@@ -1056,7 +1056,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.p.color.set(t.ripple.ctOnTransparent[0] + '88')};
+        ${RippleS.W.e.ripple.p.color.set(t.ripple.ctOnTransparent2)};
       }
     }
     

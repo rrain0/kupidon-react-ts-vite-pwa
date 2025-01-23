@@ -194,7 +194,7 @@ export namespace EmotionCommon {
   export const resetButton = css`
     ${reset};
     cursor: pointer;
-    :where(:hover, :active, :focus-visible, :focus) {
+    :where(:hover, :active, :focus, :focus-visible) {
       outline: none;
       box-shadow: none;
       border: none;
@@ -206,7 +206,7 @@ export namespace EmotionCommon {
   
   export const resetTextarea = css`
     ${reset};
-    :where(:hover, :active, :focus-visible, :focus) {
+    :where(:hover, :active, :focus, :focus-visible) {
       outline: none;
       box-shadow: none;
       border: none;

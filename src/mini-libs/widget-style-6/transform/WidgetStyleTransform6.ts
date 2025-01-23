@@ -5,8 +5,7 @@ import { SelectPropValueBatchTf5 } from 'src/mini-libs/widget-style-6/transform/
 
 
 export const transform6 = (selectPropValueBatch: SelectPropValueBatchTf5[]): string => {
-  let css = ''
-  selectPropValueBatch.forEach(batch => {
+  return selectPropValueBatch.map(batch => {
     const propValues = batch.propValues.join('\n') + '\n'
     
     let selectPropValue = propValues
@@ -14,9 +13,8 @@ export const transform6 = (selectPropValueBatch: SelectPropValueBatchTf5[]): str
       selectPropValue = `${sel} {\n${selectPropValue}}`
     })
     
-    css += selectPropValue + '\n'
-  })
-  return css
+    return selectPropValue
+  }).join('\n')
 }
 
 

@@ -12,6 +12,10 @@ import capitalize = StringU.capitalize
 
 export namespace ButtonS6 {
   
+  namespace Widget {
+  
+  }
+  
   export const buildButtonWidget = (rootConfig?: {
     widget: CssWidget<any>,
     upElementName: string,
