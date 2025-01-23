@@ -5,8 +5,8 @@ import { MathU } from 'src/util/common/MathU.ts'
 export namespace StringU {
   
   
-  export const capitalize = (str: string) => str[0].toUpperCase() + str.slice(1)
-  export const uncapitalize = (str: string) => str[0].toLowerCase() + str.slice(1)
+  export const capitalize = (str: string) => str.length ? str[0].toUpperCase() + str.slice(1) : str
+  export const uncapitalize = (str: string) => str.length ? str[0].toLowerCase() + str.slice(1) : str
   
   export const camelCaseToKebabCase = (str: string) => {
     const pattern = /(\p{Lu})|(\d+)/gu

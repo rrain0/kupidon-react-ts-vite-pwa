@@ -88,6 +88,7 @@ export namespace WidgetStyle6Test {
      error - [error]
    */
   export const inputWidgetStyle: WidgetStyle = {
+    input: { '-webkit-tap-highlight-color': 'transparent' },
     hoverTypeRadioBg: 'white',
     frameHoverAfterBg: 'aqua',
     frameTypeCheckboxBoxSz: '40%',
@@ -103,7 +104,7 @@ export namespace WidgetStyle6Test {
         sz: 200,
       },
       radioBox: {
-        bg: 'green',
+        backgroundImage: 'linear-gradient(to bottom, green, yellow)',
         sz: 'full',
       },
     },
@@ -154,6 +155,50 @@ export namespace WidgetStyle6Test {
     
     const css = transformWidgetStyle(inputWidget, inputWidgetStyle)
     console.log('widget css', '\n',  css)
+    /*
+     widget css
+     .rruiFrame>.rruiInput {
+     -webkit-tap-highlight-color: transparent;
+     }
+     @media (hover: hover) and (pointer: fine) {
+     .rruiFrame:hover>.rruiInput[type=radio] {
+     background: white;
+     }}
+     @media (hover: hover) and (pointer: fine) {
+     .rruiFrame:hover::after {
+     background: aqua;
+     }}
+     .rruiFrame[type=checkbox]>.rruiBox {
+     width: 40%;
+     height: 40%;
+     }
+     @media (hover: hover) and (pointer: fine) {
+     .rruiFrame:has(>.rruiInput[data-error])>.rruiBox:hover {
+     background: indianred;
+     }}
+     .rruiFrame:has(>.rruiInput[data-error])>.rruiBox:focus-visible {
+     background: indianred;
+     }
+     @media (hover: hover) and (pointer: fine) {
+     .rruiFrame[type=radio]>.rruiBox:hover:focus {
+     background: aquamarine;
+     }}
+     .rruiFrame:has(>.rruiInput[type=radio])>.rruiBox {
+     background: black;
+     width: 100px;
+     height: 100px;
+     }
+     .rruiFrame:has(>.rruiInput[type=checkbox])>.rruiBox {
+     background: red;
+     width: 200px;
+     height: 200px;
+     }
+     .rruiFrame:has(>.rruiInput[type=radio])>.rruiBox {
+     background-image: linear-gradient(to bottom, green, yellow);
+     width: 100%;
+     height: 100%;
+     }
+     */
   }
   
   

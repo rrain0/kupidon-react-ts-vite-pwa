@@ -5,6 +5,7 @@ import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
 import isnumber = TypeU.isnumber
+import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 
@@ -233,7 +234,8 @@ export namespace WidgetComplexTransformers {
 
 
 
-
+// TODO
+//  Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }
 
 
 
@@ -260,24 +262,26 @@ export function transform1(
   for (const [selectProp, value] of Object.entries(style)) {
     const contextStack = [...baseContextStack]
     const data = [...baseData]
-    let p = selectProp
+    let selP = selectProp
     
-    pLoop: while (true) {
-      if (!p) {
+    if (selP) pLoop: while (true) {
+      if (!selP) {
         if (isobject(value)) {
           dataList = transform1(value, contextStack, dataList, data)
         }
         break
       }
-      p = uncapitalize(p)
+      selP = uncapitalize(selP)
       
       for (let ctxI = lastI(contextStack); ctxI >= 0; ctxI--) {
         const context = contextStack[ctxI]
         if (context) for (const [name, entity] of Object.entries(context)) {
-          // TODO split 'p' by capital letters and check using 'in' operator
+          // TODO split 'selP' by capital letters and check using 'in' operator
           
-          if (p.startsWith(name)) {
-            p = p.slice(name.length)
+          if (ctxI !== ctxCommonI && selP.startsWith(name)
+            || ctxI === ctxCommonI && selP === name
+          ) {
+            selP = selP.slice(name.length)
             
             // found widget transformer
             if (entity.type === 'widget') {
@@ -312,14 +316,14 @@ export function transform1(
             else if (ctxI === ctxStateValuesI) {
               data.push({ value: name, type: 'stateValue' })
             }
-            // found prop
+            // found prop - must be last in selector
             else if (entity.type === 'prop') {
-              if (!isobject(value)) {
+              if (!selP && !isobject(value)) {
                 data.push(entity)
                 data.push({ value, type: 'propValue' })
                 dataList.push(data)
+                break pLoop
               }
-              break pLoop
             }
             
             continue pLoop
@@ -327,7 +331,19 @@ export function transform1(
         }
       }
       
-      throw new Error(`Unknown property: ${p}`)
+      // If not found then it is unregistered property
+      {
+        //throw new Error(`Unknown property: ${selP}`)
+        if (isobject(value)) {
+          throw new Error(`Found unregistered property '${selP}' but value is object: ${value}`)
+        }
+        const pKebabized = camelCaseToKebabCase(selP)
+        data.push({ prop: pKebabized, type: 'prop', isAtomic: true })
+        data.push({ value, type: 'propValue' })
+        dataList.push(data)
+        selP = ''
+      }
+      
     }
   }
   
