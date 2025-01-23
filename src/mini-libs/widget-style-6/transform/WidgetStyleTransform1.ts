@@ -18,37 +18,37 @@ export type StyleValue =
 
 
 
-export interface MediaTransformer1 {
+export interface WidgetMedia {
   readonly media: string
   readonly type: 'media'
   readonly isAtomic: true
 }
-export interface ElemTransformer1 {
+export interface WidgetElem {
   readonly className: string
   readonly type: 'elem'
   readonly isAtomic: true
-  readonly states?: Record<string, AnyStateTransformer1> | undefined
-  readonly props?: Record<string, PropTransformer1> | undefined
+  readonly states?: Record<string, WidgetAnyStateTransformer> | undefined
+  readonly props?: Record<string, WidgetProp> | undefined
   readonly upSelector?: string | undefined
-  readonly upElem?: ElemTransformer1 | undefined
+  readonly upElem?: WidgetElem | undefined
 }
-export interface PseudoElemTransformer1 {
+export interface WidgetPseudoElem {
   readonly pseudoElem: string
   readonly type: 'pseudoElem'
   readonly isAtomic: true
 }
-export interface PseudoTransformer1 {
+export interface WidgetPseudo {
   readonly pseudo: string
   readonly type: 'pseudo'
   readonly isAtomic: true
 }
-export interface AttrTransformer1 {
+export interface WidgetAttr {
   readonly attr: string
   readonly type: 'attr'
   readonly isAtomic: true
   readonly values?: Record<string, any> | undefined
 }
-export interface PropTransformer1 {
+export interface WidgetProp {
   readonly prop: string
   readonly type: 'prop'
   readonly isAtomic: true
@@ -56,70 +56,70 @@ export interface PropTransformer1 {
 }
 
 
-export interface MultiWidgetTransformer1 {
+export interface WidgetMultiAnyTransformer {
   readonly name: string
   readonly type: 'widget'
   readonly isAtomic: false
-  readonly states?: Record<string, AnyStateTransformer1> | undefined
+  readonly states?: Record<string, WidgetAnyStateTransformer> | undefined
   readonly values?: Record<string, any> | undefined
-  readonly props?: Record<string, PropTransformer1> | undefined
-  readonly transform: () => Transformer1List
+  readonly props?: Record<string, WidgetProp> | undefined
+  readonly transform: () => WidgetTransformerList
 }
-export interface MultiStateTransformer1 {
+export interface WidgetMultiStateTransformer {
   readonly state: string
   readonly type: 'state'
   readonly isAtomic: false
   readonly values?: Record<string, any> | undefined
-  readonly transform: (stateValue?: string) => Transformer1List
+  readonly transform: (stateValue?: string) => WidgetTransformerList
 }
-export interface MultiPropTransformer1 {
+export interface WidgetMultiPropTransformer {
   readonly prop: string
   readonly type: 'prop'
   readonly isAtomic: false
-  readonly transform: (propValue: StyleValue) => Transformer1List
+  readonly transform: (propValue: StyleValue) => WidgetTransformerList
 }
 
 
-export interface StateValueTransformer1 {
+export interface WidgetStateValue {
   readonly value: string
   readonly type: 'stateValue',
 }
-export interface PropValueTransformer1 {
+export interface WidgetPropValue {
   readonly value: StyleValue
   readonly type: 'propValue',
 }
 
 
 
-export type AtomicTransformer1 =
-  | MediaTransformer1
-  | ElemTransformer1
-  | PseudoElemTransformer1
-  | PseudoTransformer1
-  | AttrTransformer1
-  | PropTransformer1
-  | StateValueTransformer1
-  | PropValueTransformer1
+export type WidgetAtomicTransformer =
+  | WidgetMedia
+  | WidgetElem
+  | WidgetPseudoElem
+  | WidgetPseudo
+  | WidgetAttr
+  | WidgetProp
+  | WidgetStateValue
+  | WidgetPropValue
 
-export type MultiTransformer1 =
-  | MultiWidgetTransformer1
-  | MultiStateTransformer1
-  | MultiPropTransformer1
-
-
-export type Transformer1 = AtomicTransformer1 | MultiTransformer1
-export type Transformer1List = (Transformer1 | Transformer1List)[][]
+export type WidgetMultiTransformer =
+  | WidgetMultiAnyTransformer
+  | WidgetMultiStateTransformer
+  | WidgetMultiPropTransformer
 
 
-export type AnyStateTransformer1 =
-  | PseudoElemTransformer1
-  | PseudoTransformer1
-  | AttrTransformer1
-  | MultiStateTransformer1
+export type WidgetTransformer = WidgetAtomicTransformer | WidgetMultiTransformer
+export type WidgetTransformerList = (WidgetTransformer | WidgetTransformerList)[][]
 
-export type AnyPropTransformer1 =
-  | PropTransformer1
-  | MultiPropTransformer1
+
+export type WidgetAnyStateTransformer =
+  | WidgetPseudoElem
+  | WidgetPseudo
+  | WidgetAttr
+  | WidgetMultiStateTransformer
+
+export type WidgetAnyPropTransformer =
+  | WidgetProp
+  | WidgetMultiPropTransformer
 
 
 
@@ -127,55 +127,55 @@ export type AnyPropTransformer1 =
 
 export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 
-export namespace Medias1 {
-  export const hoverable: MediaTransformer1 = {
+export namespace WidgetMedias {
+  export const hoverable: WidgetMedia = {
     media: hoverableMedia, type: 'media', isAtomic: true,
   }
 }
-export namespace PseudoElements1 {
-  export const before: PseudoElemTransformer1 = {
+export namespace WidgetPseudoElements {
+  export const before: WidgetPseudoElem = {
     pseudoElem: 'before', type: 'pseudoElem', isAtomic: true,
   }
-  export const after: PseudoElemTransformer1 = {
+  export const after: WidgetPseudoElem = {
     pseudoElem: 'after', type: 'pseudoElem', isAtomic: true,
   }
 }
-export namespace Pseudos1 {
-  export const checked: PseudoTransformer1 = {
+export namespace WidgetPseudos {
+  export const checked: WidgetPseudo = {
     pseudo: 'checked', type: 'pseudo', isAtomic: true,
   }
-  export const selected: PseudoTransformer1 = {
+  export const selected: WidgetPseudo = {
     pseudo: 'selected', type: 'pseudo', isAtomic: true,
   }
-  export const hover: PseudoTransformer1 = {
+  export const hover: WidgetPseudo = {
     pseudo: 'hover', type: 'pseudo', isAtomic: true,
   }
-  export const active: PseudoTransformer1 = {
+  export const active: WidgetPseudo = {
     pseudo: 'active', type: 'pseudo', isAtomic: true,
   }
-  export const focus: PseudoTransformer1 = {
+  export const focus: WidgetPseudo = {
     pseudo: 'focus', type: 'pseudo', isAtomic: true,
   }
-  export const focusVisible: PseudoTransformer1 = {
+  export const focusVisible: WidgetPseudo = {
     pseudo: 'focus-visible', type: 'pseudo', isAtomic: true,
   }
-  export const readOnly: PseudoTransformer1 = {
+  export const readOnly: WidgetPseudo = {
     pseudo: 'read-only', type: 'pseudo', isAtomic: true,
   }
-  export const disabled: PseudoTransformer1 = {
+  export const disabled: WidgetPseudo = {
     pseudo: 'disabled', type: 'pseudo', isAtomic: true,
   }
 }
-export namespace Attrs1 {
-  export const type: AttrTransformer1 = {
+export namespace WidgetAttrs {
+  export const type: WidgetAttr = {
     attr: 'type', type: 'attr', isAtomic: true,
     values: { radio: '', checkbox: '' },
   }
-  export const error: AttrTransformer1 = {
+  export const error: WidgetAttr = {
     attr: 'data-error', type: 'attr', isAtomic: true,
   }
 }
-export namespace Props1 {
+export namespace WidgetProps {
   const transformLenValue = (value: StyleValue) => {
     if (value === undefined) return undefined
     if (value === null) value = 0
@@ -183,49 +183,49 @@ export namespace Props1 {
     if (isnumber(value)) value = `${value}px`
     return value
   }
-  export const width: PropTransformer1 = {
+  export const width: WidgetProp = {
     prop: 'width', type: 'prop', isAtomic: true,
     transformValue: transformLenValue,
   }
-  export const height: PropTransformer1 = {
+  export const height: WidgetProp = {
     prop: 'height', type: 'prop', isAtomic: true,
     transformValue: transformLenValue,
   }
-  export const background: PropTransformer1 = {
+  export const background: WidgetProp = {
     prop: 'background', type: 'prop', isAtomic: true,
   }
 }
-export namespace ComplexTransformers1 {
+export namespace WidgetComplexTransformers {
   
   // just 'radio' instead of 'typeRadio'
-  export const radio: MultiStateTransformer1 = {
+  export const radio: WidgetMultiStateTransformer = {
     state: 'radio', type: 'state', isAtomic: false,
     transform: () => [
-      [Attrs1.type, { type: 'stateValue', value: 'radio' }],
+      [WidgetAttrs.type, { type: 'stateValue', value: 'radio' }],
     ],
   }
   
   // hoverable AND hover
-  export const hoverableHover: MultiStateTransformer1 = {
+  export const hoverableHover: WidgetMultiStateTransformer = {
     state: 'hoverableHover', type: 'state', isAtomic: false,
-    transform: () => [[Medias1.hoverable, Pseudos1.hover]],
+    transform: () => [[WidgetMedias.hoverable, WidgetPseudos.hover]],
   }
   
   // hover OR focusVisible
-  export const inFocus: MultiStateTransformer1 = {
+  export const inFocus: WidgetMultiStateTransformer = {
     state: 'inFocus', type: 'state', isAtomic: false,
     transform: () => [
-      ...ComplexTransformers1.hoverableHover.transform(),
-      [Pseudos1.focusVisible],
+      ...WidgetComplexTransformers.hoverableHover.transform(),
+      [WidgetPseudos.focusVisible],
     ],
   }
   
   // width + height
-  export const size: MultiPropTransformer1 = {
+  export const size: WidgetMultiPropTransformer = {
     prop: 'size', type: 'prop', isAtomic: false,
     transform: (value: StyleValue) => [
-      [Props1.width, { type: 'propValue', value }],
-      [Props1.height, { type: 'propValue', value }],
+      [WidgetProps.width, { type: 'propValue', value }],
+      [WidgetProps.height, { type: 'propValue', value }],
     ],
   }
   
@@ -240,7 +240,7 @@ export namespace ComplexTransformers1 {
 
 export type WidgetStyle = { [selectorProp: string]: StyleValue | WidgetStyle }
 
-export type EntitiesRecord = Record<string, Transformer1>
+export type EntitiesRecord = Record<string, WidgetTransformer>
 export type EntitiesRecordArray = Array<EntitiesRecord | undefined>
 
 
@@ -254,9 +254,9 @@ const ctxElemPropI = 4 // record of elem props
 export function transform1(
   style: WidgetStyle,
   baseContextStack: EntitiesRecordArray,
-  dataList: Transformer1[][] = [],
-  baseData: Transformer1[] = []
-): Transformer1[][] {
+  dataList: WidgetTransformer[][] = [],
+  baseData: WidgetTransformer[] = []
+): WidgetTransformer[][] {
   for (const [selectProp, value] of Object.entries(style)) {
     const contextStack = [...baseContextStack]
     const data = [...baseData]

@@ -1,13 +1,13 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  ElemTransformer1,
+  WidgetElem,
   WidgetStyle,
   transform1,
-  Attrs1,
-  ComplexTransformers1,
-  Pseudos1,
-  Props1,
-  PseudoElements1, MultiWidgetTransformer1,
+  WidgetAttrs,
+  WidgetComplexTransformers,
+  WidgetPseudos,
+  WidgetProps,
+  WidgetPseudoElements, WidgetMultiAnyTransformer,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
@@ -21,42 +21,42 @@ import RecordRo = TypeU.RecordRo
 
 
 export interface Widget {
-  readonly rootElem: ElemTransformer1
-  readonly elems: RecordRo<string, ElemTransformer1 | MultiWidgetTransformer1>
+  readonly rootElem: WidgetElem
+  readonly elems: RecordRo<string, WidgetElem | WidgetMultiAnyTransformer>
 }
 
 
 
 
 export const CommonProps = {
-  width: Props1.width,
-  w: Props1.width,
-  height: Props1.height,
-  h: Props1.height,
-  size: ComplexTransformers1.size,
-  sz: ComplexTransformers1.size,
-  background: Props1.background,
-  bg: Props1.background,
+  width: WidgetProps.width,
+  w: WidgetProps.width,
+  height: WidgetProps.height,
+  h: WidgetProps.height,
+  size: WidgetComplexTransformers.size,
+  sz: WidgetComplexTransformers.size,
+  background: WidgetProps.background,
+  bg: WidgetProps.background,
 }
 export const CommonStates = {
-  before: PseudoElements1.before,
-  after: PseudoElements1.after,
-  type: Attrs1.type,
-  radio: ComplexTransformers1.radio,
+  before: WidgetPseudoElements.before,
+  after: WidgetPseudoElements.after,
+  type: WidgetAttrs.type,
+  radio: WidgetComplexTransformers.radio,
   
   // States
-  checked: Pseudos1.checked,
-  selected: Pseudos1.selected,
+  checked: WidgetPseudos.checked,
+  selected: WidgetPseudos.selected,
   // hoverable AND hover
-  hover: ComplexTransformers1.hoverableHover,
-  active: Pseudos1.active,
-  focus: Pseudos1.focus,
-  focusVisible: Pseudos1.focusVisible,
+  hover: WidgetComplexTransformers.hoverableHover,
+  active: WidgetPseudos.active,
+  focus: WidgetPseudos.focus,
+  focusVisible: WidgetPseudos.focusVisible,
   // hover OR focusVisible
-  inFocus: ComplexTransformers1.inFocus,
-  readOnly: Pseudos1.readOnly,
-  disabled: Pseudos1.disabled,
-  error: Attrs1.error,
+  inFocus: WidgetComplexTransformers.inFocus,
+  readOnly: WidgetPseudos.readOnly,
+  disabled: WidgetPseudos.disabled,
+  error: WidgetAttrs.error,
 }
 
 

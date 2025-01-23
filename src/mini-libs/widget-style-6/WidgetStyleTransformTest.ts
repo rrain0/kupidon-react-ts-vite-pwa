@@ -1,7 +1,7 @@
 import {
-  ElemTransformer1,
+  WidgetElem,
   WidgetStyle,
-  transform1, MultiWidgetTransformer1,
+  transform1, WidgetMultiAnyTransformer,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
@@ -25,16 +25,16 @@ import {
 
 export namespace WidgetStyle6Test {
   
-  const elemFrame: ElemTransformer1 = {
+  const elemFrame: WidgetElem = {
     className: 'rruiFrame', type: 'elem', isAtomic: true,
     states: CommonStates,
   }
-  const elemInput: ElemTransformer1 = {
+  const elemInput: WidgetElem = {
     className: 'rruiInput', type: 'elem', isAtomic: true,
     states: CommonStates,
     upSelector: '>', upElem: elemFrame,
   }
-  const elemBox: ElemTransformer1 = {
+  const elemBox: WidgetElem = {
     className: 'rruiBox', type: 'elem', isAtomic: true,
     states: CommonStates,
     upSelector: '>', upElem: elemFrame,
@@ -45,22 +45,22 @@ export namespace WidgetStyle6Test {
     box: elemBox,
   }
   
-  const radioWidgetState: MultiWidgetTransformer1 = {
+  const radioWidgetState: WidgetMultiAnyTransformer = {
     name: 'widgetHover', type: 'widget', isAtomic: false,
     transform: () => [[elemInput, CommonStates.radio]],
   }
-  const typeWidgetState: MultiWidgetTransformer1 = {
+  const typeWidgetState: WidgetMultiAnyTransformer = {
     name: 'widgetType', type: 'widget', isAtomic: false,
     values: CommonStates.type.values,
     transform: () => [
       [elemInput, CommonStates.type],
     ],
   }
-  const hoverWidgetState: MultiWidgetTransformer1 = {
+  const hoverWidgetState: WidgetMultiAnyTransformer = {
     name: 'widgetHover', type: 'widget', isAtomic: false,
     transform: () => [[elemFrame, CommonStates.hover]],
   }
-  const inFocusWidgetState: MultiWidgetTransformer1 = {
+  const inFocusWidgetState: WidgetMultiAnyTransformer = {
     name: 'widgetHover', type: 'widget', isAtomic: false,
     transform: () => [[elemFrame, CommonStates.hover], [elemInput, CommonStates.focusVisible]],
   }

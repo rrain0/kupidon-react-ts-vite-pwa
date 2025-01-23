@@ -1,5 +1,5 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { ElemTransformer1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+import { WidgetElem } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { Transformed3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
 import lastI = ArrayU.lastI
 
@@ -37,17 +37,17 @@ const getPropValueSelector = (prop: string, value: string = '') => value && `${p
 
 
 
-const getWidgetElemSelector = (elem: ElemTransformer1): string => {
+const getWidgetElemSelector = (elem: WidgetElem): string => {
   let sel = getElemSelector(elem.className)
   if (elem.upElem) sel = getWidgetElemSelector(elem.upElem) + (elem.upSelector ?? '') + sel
   return sel
 }
-const getWidgetElemSelectorUnderRoot = (elem: ElemTransformer1): string => {
+const getWidgetElemSelectorUnderRoot = (elem: WidgetElem): string => {
   let sel = getElemSelector(elem.className)
   if (elem.upElem) sel = getWidgetElemSelectorUnderRoot(elem.upElem) + (elem.upSelector ?? '') + sel
   return sel
 }
-const getRootAndElemSelector = (elem: ElemTransformer1): [root: string, elemSel: string] => {
+const getRootAndElemSelector = (elem: WidgetElem): [root: string, elemSel: string] => {
   const thisSel = getElemSelector(elem.className)
   let root = ''
   let sel = ''

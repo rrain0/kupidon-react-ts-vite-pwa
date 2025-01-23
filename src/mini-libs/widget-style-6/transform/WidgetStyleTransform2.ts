@@ -1,11 +1,11 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  AtomicTransformer1,
-  AttrTransformer1,
-  MediaTransformer1,
-  MultiPropTransformer1,
-  MultiStateTransformer1, PropTransformer1,
-  Transformer1List,
+  WidgetAtomicTransformer,
+  WidgetAttr,
+  WidgetMedia,
+  WidgetMultiPropTransformer,
+  WidgetMultiStateTransformer, WidgetProp,
+  WidgetTransformerList,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import isArray = TypeU.isArray
 
@@ -14,17 +14,17 @@ import isArray = TypeU.isArray
 
 
 export function transform2(
-  dataList: Transformer1List,
-  transformed: AtomicTransformer1[][] = [],
-  baseMedia: MediaTransformer1[] = [],
-  baseData: AtomicTransformer1[] = [],
-): AtomicTransformer1[][] {
+  dataList: WidgetTransformerList,
+  transformed: WidgetAtomicTransformer[][] = [],
+  baseMedia: WidgetMedia[] = [],
+  baseData: WidgetAtomicTransformer[] = [],
+): WidgetAtomicTransformer[][] {
   dataList.forEach(data => {
     const m = [...baseMedia]
     const d = [...baseData]
     
-    let state: MultiStateTransformer1 | AttrTransformer1 | undefined
-    let prop: MultiPropTransformer1 | PropTransformer1 | undefined
+    let state: WidgetMultiStateTransformer | WidgetAttr | undefined
+    let prop: WidgetMultiPropTransformer | WidgetProp | undefined
     
     for (let dataI = 0; dataI < data.length; dataI++) {
       const entity = data[dataI]
@@ -39,7 +39,7 @@ export function transform2(
       const processState = (value?: string) => {
         if (state) {
           if (state.type === 'attr') {
-            const stateData: AtomicTransformer1[] = [state]
+            const stateData: WidgetAtomicTransformer[] = [state]
             if (value) stateData.push({ value, type: 'stateValue' })
             d.push(...stateData)
           }

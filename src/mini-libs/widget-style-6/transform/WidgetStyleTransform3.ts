@@ -1,8 +1,8 @@
 import {
-  AtomicTransformer1,
-  AttrTransformer1, StateValueTransformer1, ElemTransformer1,
-  MediaTransformer1,
-  PropTransformer1, PropValueTransformer1, PseudoTransformer1, PseudoElemTransformer1,
+  WidgetAtomicTransformer,
+  WidgetAttr, WidgetStateValue, WidgetElem,
+  WidgetMedia,
+  WidgetProp, WidgetPropValue, WidgetPseudo, WidgetPseudoElem,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 
 
@@ -10,37 +10,37 @@ import {
 
 export interface StatePseudoElemTf3 {
   type: 'pseudoElem'
-  pseudoElem: PseudoElemTransformer1
+  pseudoElem: WidgetPseudoElem
 }
 export interface StatePseudoTf3 {
   type: 'pseudo'
-  pseudo: PseudoTransformer1
+  pseudo: WidgetPseudo
 }
 export interface StateAttrValueTf3 {
   type: 'attr'
-  attr: AttrTransformer1
-  value?: StateValueTransformer1
+  attr: WidgetAttr
+  value?: WidgetStateValue
 }
 export interface ElemStateTf3 {
   type: 'elem'
-  elem: ElemTransformer1 | undefined
+  elem: WidgetElem | undefined
   states: (StatePseudoElemTf3 | StatePseudoTf3 | StateAttrValueTf3)[]
 }
 
 export interface PropValueTf3 {
   type: 'prop'
-  prop?: PropTransformer1
-  value?: PropValueTransformer1
+  prop?: WidgetProp
+  value?: WidgetPropValue
 }
 
 
 export type Transformed3 = {
-  medias: MediaTransformer1[]
+  medias: WidgetMedia[]
   elems: ElemStateTf3[]
   prop: PropValueTf3
 }
 
-export function transform3(dataList: AtomicTransformer1[][]): Transformed3[] {
+export function transform3(dataList: WidgetAtomicTransformer[][]): Transformed3[] {
   return dataList.map(data => {
     const tf3: Transformed3 = {
       medias: [],
