@@ -56,6 +56,13 @@ export function transform2(
       if (entity.type === 'media') {
         m.push(entity)
       }
+      else if (entity.type === 'widget') {
+        if (processState()) return
+        return transform2(
+          entity.transform().map(e => [...e, ...data.slice(dataI + 1)]),
+          transformed, m, d
+        )
+      }
       else if (entity.type === 'elem') {
         if (processState()) return
         d.push(entity)

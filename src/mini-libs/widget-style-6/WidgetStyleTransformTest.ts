@@ -1,9 +1,7 @@
 import {
-  Attrs1,
-  ComplexTransformers1, ElemTransformer1,
-  Pseudos1,
+  ElemTransformer1,
   WidgetStyle,
-  transform1,
+  transform1, MultiWidgetTransformer1,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
@@ -41,18 +39,40 @@ export namespace WidgetStyle6Test {
     states: CommonStates,
     upSelector: '>', upElem: elemFrame,
   }
-  export const InputWidgetElements = {
+  const WidgetElements = {
     frame: elemFrame,
     input: elemInput,
     box: elemBox,
   }
   
-  export const RootElemStates2 = {
-    type: Attrs1.type,
-    hover: ComplexTransformers1.hoverableHover,
-    focus: Pseudos1.focus,
-    focusVisible: Pseudos1.focusVisible,
+  const radioWidgetState: MultiWidgetTransformer1 = {
+    name: 'widgetHover', type: 'widget', isAtomic: false,
+    transform: () => [[elemInput, CommonStates.radio]],
   }
+  const typeWidgetState: MultiWidgetTransformer1 = {
+    name: 'widgetType', type: 'widget', isAtomic: false,
+    values: CommonStates.type.values,
+    transform: () => [
+      [elemInput, CommonStates.type],
+    ],
+  }
+  const hoverWidgetState: MultiWidgetTransformer1 = {
+    name: 'widgetHover', type: 'widget', isAtomic: false,
+    transform: () => [[elemFrame, CommonStates.hover]],
+  }
+  const inFocusWidgetState: MultiWidgetTransformer1 = {
+    name: 'widgetHover', type: 'widget', isAtomic: false,
+    transform: () => [[elemFrame, CommonStates.hover], [elemInput, CommonStates.focusVisible]],
+  }
+  const WidgetStates = {
+    radio: radioWidgetState,
+    type: typeWidgetState,
+    hover: hoverWidgetState,
+    inFocus: inFocusWidgetState,
+  }
+  
+  export const InputWidgetElements = { ...WidgetStates, ...WidgetElements }
+  
   
   
   /*
@@ -73,16 +93,16 @@ export namespace WidgetStyle6Test {
     frameTypeCheckboxBoxSz: '40%',
     inputErrorBoxInFocusBg: 'indianred',
     frameRadioBoxHoverFocusBg: 'aquamarine',
-    typeRadio: {
+    typeRadioBox: {
       bg: 'black',
       sz: 100,
     },
     type: {
-      checkbox: {
+      checkboxBox: {
         bg: 'red',
         sz: 200,
       },
-      radio: {
+      radioBox: {
         bg: 'green',
         sz: 'full',
       },
@@ -97,7 +117,7 @@ export namespace WidgetStyle6Test {
      console.time('transform')
      transform6(transform5(transform4(transform3(transform2(transform1(
        widgetStyle,
-       [CommonProps2, Elements2, RootElemStates2, undefined, undefined]
+       [CommonProps2, Elements2, undefined, undefined, undefined]
      ))))))
      // 1.7ms is OK
      console.timeEnd('transform')
@@ -105,7 +125,7 @@ export namespace WidgetStyle6Test {
     
     const transformed1 = transform1(
       inputWidgetStyle,
-      [CommonProps, InputWidgetElements, RootElemStates2, undefined, undefined]
+      [CommonProps, InputWidgetElements, undefined, undefined, undefined]
     )
     console.log('transformed1', transformed1)
     
@@ -130,9 +150,6 @@ export namespace WidgetStyle6Test {
     const inputWidget: Widget = {
       rootElem: InputWidgetElements.frame,
       elems: InputWidgetElements,
-      states: {
-      
-      },
     }
     
     const css = transformWidgetStyle(inputWidget, inputWidgetStyle)

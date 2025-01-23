@@ -24,7 +24,6 @@ export interface MediaTransformer1 {
   readonly isAtomic: true
 }
 export interface ElemTransformer1 {
-  // className
   readonly className: string
   readonly type: 'elem'
   readonly isAtomic: true
@@ -53,22 +52,31 @@ export interface PropTransformer1 {
   readonly prop: string
   readonly type: 'prop'
   readonly isAtomic: true
-  readonly transformValue?: (value: StyleValue) => string | undefined
+  readonly transformValue?: (propValue: StyleValue) => string | undefined
 }
 
 
+export interface MultiWidgetTransformer1 {
+  readonly name: string
+  readonly type: 'widget'
+  readonly isAtomic: false
+  readonly states?: Record<string, AnyStateTransformer1> | undefined
+  readonly values?: Record<string, any> | undefined
+  readonly props?: Record<string, PropTransformer1> | undefined
+  readonly transform: () => Transformer1List
+}
 export interface MultiStateTransformer1 {
   readonly state: string
   readonly type: 'state'
   readonly isAtomic: false
   readonly values?: Record<string, any> | undefined
-  readonly transform: (value?: string) => Transformer1List
+  readonly transform: (stateValue?: string) => Transformer1List
 }
 export interface MultiPropTransformer1 {
   readonly prop: string
   readonly type: 'prop'
   readonly isAtomic: false
-  readonly transform: (value: StyleValue) => Transformer1List
+  readonly transform: (propValue: StyleValue) => Transformer1List
 }
 
 
@@ -94,6 +102,7 @@ export type AtomicTransformer1 =
   | PropValueTransformer1
 
 export type MultiTransformer1 =
+  | MultiWidgetTransformer1
   | MultiStateTransformer1
   | MultiPropTransformer1
 
@@ -270,7 +279,14 @@ export function transform1(
           if (p.startsWith(name)) {
             p = p.slice(name.length)
             
-            // found elem state (attr, pseudoClass)
+            // found widget transformer
+            if (entity.type === 'widget') {
+              data.push(entity)
+              contextStack[ctxStatesI] = entity.states
+              contextStack[ctxStateValuesI] = entity.values
+              contextStack[ctxElemPropI] = entity.props
+            }
+            // found elem
             if (entity.type === 'elem') {
               data.push(entity)
               contextStack[ctxStatesI] = entity.states
@@ -292,6 +308,10 @@ export function transform1(
               data.push(entity)
               contextStack[ctxStateValuesI] = undefined
             }
+            // found state value (attr value)
+            else if (ctxI === ctxStateValuesI) {
+              data.push({ value: name, type: 'stateValue' })
+            }
             // found prop
             else if (entity.type === 'prop') {
               if (!isobject(value)) {
@@ -300,10 +320,6 @@ export function transform1(
                 dataList.push(data)
               }
               break pLoop
-            }
-            // found state value (attr value)
-            else if (ctxI === ctxStateValuesI) {
-              data.push({ value: name, type: 'stateValue' })
             }
             
             continue pLoop

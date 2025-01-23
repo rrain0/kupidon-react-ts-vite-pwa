@@ -7,7 +7,7 @@ import {
   ComplexTransformers1,
   Pseudos1,
   Props1,
-  PseudoElements1,
+  PseudoElements1, MultiWidgetTransformer1,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
@@ -22,9 +22,7 @@ import RecordRo = TypeU.RecordRo
 
 export interface Widget {
   readonly rootElem: ElemTransformer1
-  readonly elems: RecordRo<string, ElemTransformer1>
-  // Состояние самого виджета
-  readonly states?: RecordRo<string, string> | undefined
+  readonly elems: RecordRo<string, ElemTransformer1 | MultiWidgetTransformer1>
 }
 
 
@@ -64,16 +62,10 @@ export const CommonStates = {
 
 
 
-const RootElemStates2 = {
-  type: Attrs1.type,
-  hover: ComplexTransformers1.hoverableHover,
-  focus: Pseudos1.focus,
-  focusVisible: Pseudos1.focusVisible,
-}
 
 export const transformWidgetStyle = (widget: Widget, style: WidgetStyle): string => {
   return transform6(transform5(transform4(transform3(transform2(transform1(
     style,
-    [CommonProps, widget.elems, RootElemStates2, undefined, undefined]
+    [CommonProps, widget.elems, undefined, undefined, undefined]
   ))))))
 }
