@@ -6,6 +6,7 @@ import {
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { newWidget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import abs = WidgetStyleCommon.abs
 import round = WidgetStyleCommon.round
 
@@ -13,10 +14,12 @@ import round = WidgetStyleCommon.round
 
 export namespace RippleS6 {
   
+  export type RippleMode = 'center' | 'pointer'
+  
   namespace WidgetElems {
-    export const frame = newWidgetElem({ className: '.rruiRippleFrame' })
+    export const frame = newWidgetElem({ className: 'rruiRippleFrame' })
     export const ripple = newWidgetElem({
-      className: '.rruiRippleRipple',
+      className: 'rruiRippleRipple',
       upSelector: '>', upElem: frame,
       props: {
         color: newWidgetProp('--color'),
@@ -26,15 +29,16 @@ export namespace RippleS6 {
     })
   }
   
-  const W = newWidget(WidgetElems.frame, WidgetElems)
+  export const W = newWidget(WidgetElems.frame, WidgetElems)
   
   
-  export namespace S {
+  export namespace ST {
     
     export const base: WidgetStyle = {
       frame: {
         ...abs,
         pointerEvents: 'none',
+        borderRadius: 'inherit',
         overflow: 'hidden',
       },
       ripple: {
@@ -49,7 +53,7 @@ export namespace RippleS6 {
         rippleMode: 'pointer',
         // TODO Style bgColor: '@rippleColor'
         // TODO Style bgColor: 'varRippleColor'
-        bgColor: `var(${W.elems.ripple.props!.color})`,
+        bgColor: `var(${W.elems.ripple.props!.color.prop})`,
       },
     }
     
@@ -62,19 +66,27 @@ export namespace RippleS6 {
       })
     }
     
-    export namespace OnText {
-      export const normal: AppWidgetStyle = t => ({ ...base,
-        rippleColor: t.ripple.ctOnTransparent,
-      })
-    }
+    export const onText: AppWidgetStyle = t => ({ ...base,
+      rippleColor: t.ripple.ctOnTransparent,
+    })
     
-    export namespace OnIcon {
-      export const normal: AppWidgetStyle = t => ({ ...base,
-        rippleMode: 'center',
-        rippleColor: t.ripple.ctOnTransparent,
-      })
-    }
+    export const forIcon: AppWidgetStyle = t => ({ ...base,
+      rippleMode: 'center',
+      rippleColor: t.ripple.ctOnTransparent,
+    })
     
+  }
+  
+  
+  // TODO Style
+  export namespace S {
+    export const base = () => W.t(ST.base)
+    export namespace OnFilled {
+      export const normal = (t: AppTheme.Theme) => W.t(ST.OnFilled.normal(t))
+      export const accent = (t: AppTheme.Theme) => W.t(ST.OnFilled.accent(t))
+    }
+    export const onText = (t: AppTheme.Theme) => W.t(ST.onText(t))
+    export const forIcon = (t: AppTheme.Theme) => W.t(ST.forIcon(t))
   }
   
   

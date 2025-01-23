@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import React, { useImperativeHandle } from 'react'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
-import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple'
 import { ReactU } from 'src/util/react/ReactU'
@@ -130,7 +130,7 @@ const SelectItem = React.memo(
                             onClick={onClickEdit}
                             {...rippleProps.target}
                           >
-                            <Ripple {...rippleProps.ripple} css={RippleS.icon} />
+                            <Ripple {...rippleProps.ripple} css={RippleS6.S.forIcon} />
                             <PencilWrite2Ic />
                           </div>
                         )}

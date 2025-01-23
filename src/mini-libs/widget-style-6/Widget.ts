@@ -114,13 +114,11 @@ export const CommonStates = {
 export const transformWidgetStyle = (
   widget: Widget,
   style: WidgetStyle,
-  selectThis = true
 ): string => {
-  let css = transform6(transform5(transform4(transform3(transform2(transform1(
+  const css = transform6(transform5(transform4(transform3(transform2(transform1(
     style,
     [{ ...CommonProps, ...widget.props }, widget.elems, undefined, undefined, undefined]
   ))))))
-  if (selectThis && css) css = `&${css}`
   return css
 }
 
@@ -133,8 +131,8 @@ export function newWidget(
 ): Widget {
   return {
     rootElem, elems, props,
-    t(style: WidgetStyle, selectThis = true) {
-      return transformWidgetStyle(this, style, selectThis)
+    t(style: WidgetStyle) {
+      return transformWidgetStyle(this, style)
     },
   }
 }

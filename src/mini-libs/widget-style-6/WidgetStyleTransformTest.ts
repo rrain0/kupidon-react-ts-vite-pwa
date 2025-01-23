@@ -86,6 +86,7 @@ export namespace WidgetStyle6Test {
   
   
   export const inputWidgetStyle: WidgetStyle = {
+    boxAbs: 0,
     input: { '-webkit-tap-highlight-color': 'transparent' },
     hoverTypeRadioBg: 'white',
     frameHoverAfterBg: 'aqua',

@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
-import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import {
   SelectItemIndicatorS
 } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
@@ -92,7 +92,7 @@ export namespace SelectItemS {
       border: none;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${RippleS.base}
+      ${RippleS6.S.base()}
     }
     
     ${W.use.s.normal().e.addIconBox().thisUse} {
@@ -128,13 +128,13 @@ export namespace SelectItemS {
       padding: 11px;
       overflow: hidden;
     }
-    ${W.use.s.normal().e.editBtnRipple().thisUse}{
-      ${RippleS.base}
+    ${W.use.s.normal().e.editBtnRipple().thisUse} {
+      ${RippleS6.S.base()}
     }
-    ${W.use.s.normal().e.editIcon().thisUse}{
+    ${W.use.s.normal().e.editIcon().thisUse} {
       ${SvgIconS.base}
     }
-    ${W.use.s.normal().e.content().thisUse}{
+    ${W.use.s.normal().e.content().thisUse} {
       width: 100%;
       min-height: 100%;
       padding: 20px 26px;
@@ -158,10 +158,10 @@ export namespace SelectItemS {
       width: 100%;
       background-color: ${t.boxNormal.bg2[0]};
     }
-    ${W.use.s.normal().e.ripple().thisUse}{
-      ${RippleS.onFilledNormal(t)}
+    ${W.use.s.normal().e.ripple().thisUse} {
+      ${RippleS6.S.OnFilled.normal(t)}
     }
-    ${W.use.s.normal().e.addIcon().thisUse}{
+    ${W.use.s.normal().e.addIcon().thisUse} {
       ${SvgIconS.normal(t)}
     }
     
@@ -170,7 +170,7 @@ export namespace SelectItemS {
     }
     
     ${W.use.s.normal().e.editBtnRipple().thisUse} {
-      ${RippleS.base}
+      ${RippleS6.S.base()}
     }
     ${W.use.s.normal().e.editIcon().thisUse} {
       ${SvgIconS.normal(t)}

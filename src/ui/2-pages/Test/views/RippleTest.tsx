@@ -1,47 +1,49 @@
 import styled from '@emotion/styled'
 import React from 'react'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple'
-import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
 import { Pages } from 'src/ui/components/Pages/Pages'
 
 
 
-const RippleTest = React.memo(
-  () => {
-    
-    return (
-      <>
-        
-        <Pages.SimplePage>
-          <Pages.ContentFill>
-            
-            
-            <div>Ripple</div>
-            
-            <UseRipple>{rippleProps => (
-              <RippleFrame {...rippleProps.target}>
-                <Ripple {...rippleProps.ripple} css={RippleS.onFilledAccent} />
-              </RippleFrame>
-            )}</UseRipple>
-            
-            <UseRipple>{rippleProps => (
-              <RippleFrame2 {...rippleProps.target}>
-                <Ripple {...rippleProps.ripple} css={RippleS.onFilledAccent} />
-              </RippleFrame2>
-            )}</UseRipple>
+const RippleTest = React.memo(() => {
+  
+  return (
+    <>
+      
+      <Pages.SimplePage>
+        <Pages.ContentFill>
           
-          </Pages.ContentFill>
-        </Pages.SimplePage>
+          
+          <div>Ripple</div>
+          
+          <UseRipple>
+            { rippleProps => (
+              <RippleFrame {...rippleProps.target}>
+                <Ripple {...rippleProps.ripple} css={RippleS6.S.OnFilled.accent} />
+              </RippleFrame>
+            )}
+          </UseRipple>
+          
+          <UseRipple>
+            { rippleProps => (
+              <RippleFrame2 {...rippleProps.target}>
+                <Ripple {...rippleProps.ripple} css={RippleS6.S.OnFilled.accent} />
+              </RippleFrame2>
+            )}
+          </UseRipple>
         
-        
-        <BottomButtonBar settingsBtn/>
-        
-      </>
-    )
-  }
-)
+        </Pages.ContentFill>
+      </Pages.SimplePage>
+      
+      
+      <BottomButtonBar settingsBtn />
+      
+    </>
+  )
+})
 export default RippleTest
 
 

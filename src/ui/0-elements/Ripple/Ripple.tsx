@@ -1,7 +1,8 @@
 import { animated, useSpring, config, easings } from '@react-spring/web'
 import clsx from 'clsx'
 import React, { useMemo } from 'react'
-import { RippleS } from 'src/ui/0-elements/Ripple/RippleS'
+import { WidgetElem } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
@@ -9,7 +10,7 @@ import { useElemRef } from 'src/util/react-state/useElemRef'
 import ClassStyleProps = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
-import RippleMode = RippleS.RippleMode
+import RippleMode = RippleS6.RippleMode
 
 
 
@@ -72,7 +73,8 @@ const Ripple = React.memo(
           fProps.xy,
           fProps.wh,
           clientXY,
-          rProps.getCssPropValue(RippleS.W.e.ripple.p.mode.name) as RippleMode,
+          // TODO Style
+          rProps.getCssPropValue(RippleS6.W.elems.ripple.props!.mode.prop) as RippleMode,
           500
         )
       }
@@ -128,13 +130,15 @@ const Ripple = React.memo(
       <div
         //displayName={'RippleFrame'}
         ref={frameRef}
-        className={clsx(RippleS.W.e.frame.e.name, className)}
+        // TODO Style
+        className={clsx((RippleS6.W.elems.frame as WidgetElem).className, className)}
         {...restProps}
       >
         <animated.div
           //displayName={'RippleRipple'}
           ref={rippleRef}
-          className={RippleS.W.e.ripple.e.name}
+          // TODO Style
+          className={(RippleS6.W.elems.ripple as WidgetElem).className}
           style={{
             ...rippleProps.dimens,
             // @ts-expect-error
@@ -155,6 +159,7 @@ function getRippleProps(
   frameXY: XY,
   frameWH: WH,
   clientXY: XY,
+  // TODO Style
   mode: RippleMode,
   duration: number,
 ) {

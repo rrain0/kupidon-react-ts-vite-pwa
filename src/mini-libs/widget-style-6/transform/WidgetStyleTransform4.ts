@@ -1,7 +1,5 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { Transformed3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
-import lastI = ArrayU.lastI
 
 
 
@@ -100,19 +98,21 @@ export function transform4(dataList: Transformed3[]): SelectPropValueTf4[] {
         elemsStatesSel = `${elem.root}${elemsStatesSel}${elem.sel}${elem.stateSel}`
       }
       else {
-        if (elem.sel) elemsStatesSel += `:has(${elem.sel}${elem.stateSel})`
+        if (elem.sel && elem.stateSel) elemsStatesSel += `:has(${elem.sel}${elem.stateSel})`
         else elemsStatesSel += elem.stateSel
       }
     })
+    // TODO Style - optional &
+    if (elemsStatesSel) elemsStatesSel = `&${elemsStatesSel}`
     selector.push(elemsStatesSel)
     
     
     const prop = data.prop.prop
     const value = data.prop.value?.value
     let propValue = ''
-    if (prop && value) {
+    if (prop && value !== undefined) {
       const p = prop.prop
-      const v = prop.transformValue?.(value) ?? `${value}`
+      const v = (prop.transformValue?.(value) ?? value) + ''
       propValue = getPropValueSelector(p, v)
     }
     
