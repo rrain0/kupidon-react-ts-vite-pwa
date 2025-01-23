@@ -29,39 +29,69 @@ export const CommonStates2 = {
   after: PseudoElements1.after,
   type: Attrs1.type,
   radio: ComplexTransformers1.radio,
+  
+  // States
+  checked: Pseudos1.checked,
+  selected: Pseudos1.selected,
+  // hoverable AND hover
   hover: ComplexTransformers1.hoverableHover,
+  active: Pseudos1.active,
   focus: Pseudos1.focus,
   focusVisible: Pseudos1.focusVisible,
+  // hover OR focusVisible
   inFocus: ComplexTransformers1.inFocus,
-}
-export const Elements2 = {
-  frame: {
-    elem: 'rruiFrame', type: 'elem', isAtomic: true,
-    states: CommonStates2,
-  } satisfies ElemTransformer1,
-  box: {
-    elem: 'rruiBox', type: 'elem', isAtomic: true,
-    states: {
-      hover: ComplexTransformers1.hoverableHover,
-      focus: Pseudos1.focus,
-    },
-  } satisfies ElemTransformer1,
-}
-export const RootElemStates2 = {
-  type: Attrs1.type,
-  hover: ComplexTransformers1.hoverableHover,
-  focus: Pseudos1.focus,
-  focusVisible: Pseudos1.focusVisible,
+  readOnly: Pseudos1.readOnly,
+  disabled: Pseudos1.disabled,
+  error: Attrs1.error,
 }
 
 
 
 export function testWidget51StyleTransform() {
+  const elemFrame: ElemTransformer1 = {
+    className: 'rruiFrame', type: 'elem', isAtomic: true,
+    states: CommonStates2,
+  }
+  const elemInput: ElemTransformer1 = {
+    className: 'rruiInput', type: 'elem', isAtomic: true,
+    states: CommonStates2,
+    upSelector: '>', upElem: elemFrame,
+  }
+  const elemBox: ElemTransformer1 = {
+    className: 'rruiBox', type: 'elem', isAtomic: true,
+    states: CommonStates2,
+    upSelector: '>', upElem: elemFrame,
+  }
+  const Elements2 = {
+    frame: elemFrame,
+    input: elemInput,
+    box: elemBox,
+  }
+  
+  const RootElemStates2 = {
+    type: Attrs1.type,
+    hover: ComplexTransformers1.hoverableHover,
+    focus: Pseudos1.focus,
+    focusVisible: Pseudos1.focusVisible,
+  }
+  
+  /*
+   States order to select in CSS:
+     normal - no selector
+     checked / selected - :checked / :selected
+     hover - :hover
+     active - :active
+     focus - :focus
+     focusVisible - :focus-visible
+     readOnly - :read-only
+     disabled - :disabled
+     error - [error]
+   */
   const widgetStyle: WidgetStyle = {
     hoverTypeRadioBg: 'white',
     frameHoverAfterBg: 'aqua',
     frameTypeCheckboxBoxSz: '40%',
-    frameRadioBg: 'indianred',
+    inputErrorBoxInFocusBg: 'indianred',
     frameRadioBoxHoverFocusBg: 'aquamarine',
     typeRadio: {
       bg: 'black',
@@ -108,7 +138,7 @@ export function testWidget51StyleTransform() {
   console.log('transformed5', transformed5)
   
   const transformed6 = transform6(transformed5)
-  console.log('transformed6', transformed6)
-  
-  
+  console.log('transformed6', '\n', transformed6)
 }
+
+

@@ -1,4 +1,5 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
+import { ElemTransformer1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { Transformed3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
 import lastI = ArrayU.lastI
 
@@ -36,6 +37,30 @@ const getPropValueSelector = (prop: string, value: string = '') => value && `${p
 
 
 
+const getWidgetElemSelector = (elem: ElemTransformer1): string => {
+  let sel = getElemSelector(elem.className)
+  if (elem.upElem) sel = getWidgetElemSelector(elem.upElem) + (elem.upSelector ?? '') + sel
+  return sel
+}
+const getWidgetElemSelectorUnderRoot = (elem: ElemTransformer1): string => {
+  let sel = getElemSelector(elem.className)
+  if (elem.upElem) sel = getWidgetElemSelectorUnderRoot(elem.upElem) + (elem.upSelector ?? '') + sel
+  return sel
+}
+const getRootAndElemSelector = (elem: ElemTransformer1): [root: string, elemSel: string] => {
+  const thisSel = getElemSelector(elem.className)
+  let root = ''
+  let sel = ''
+  if (elem.upElem) {
+    [root, sel] = getRootAndElemSelector(elem.upElem)
+    sel += (elem.upSelector ?? '') + thisSel
+  }
+  else root = thisSel
+  return [root, sel]
+}
+
+
+
 export type SelectPropValueTf4 = {
   selector: string[]
   propValue: string
@@ -45,34 +70,41 @@ export function transform4(dataList: Transformed3[]): SelectPropValueTf4[] {
     
     const selector = data.medias.map(m => getMediaSelector(m.media))
     
-    selector.push('')
-    const elems = data.elems
-    for (let elI = elems.length - 1; elI >= 0; elI--) {
-      const element = elems[elI]
-      
-      const ss = element.states
-      for (let si = ss.length - 1; si >= 0; si--) {
-        const s = ss[si]
+    
+    const elemsData = data.elems.map(elem => {
+      const stateSel = elem.states.map(s => {
         if (s.type === 'pseudoElem') {
-          const lastSel = selector.at(-1)!
-          selector[lastI(selector)] = `${getPseudoElemSelector(s.pseudoElem.pseudoElem)}${lastSel}`
+          return getPseudoElemSelector(s.pseudoElem.pseudoElem)
         }
         if (s.type === 'pseudo') {
-          const lastSel = selector.at(-1)!
-          selector[lastI(selector)] = `${getPseudoSelector(s.pseudo.pseudo)}${lastSel}`
+          return getPseudoSelector(s.pseudo.pseudo)
         }
         else if (s.type === 'attr') {
-          const lastSel = selector.at(-1)!
-          selector[lastI(selector)] = `${getAttrSelector(s.attr.attr, s?.value?.value)}${lastSel}`
+          return getAttrSelector(s.attr.attr, s?.value?.value)
         }
-      }
+        throw new Error(`Unknown element state: ${s}`)
+      }).join('')
       
-      const el = element.elem
+      const el = elem.elem
       if (el) {
-        const lastSel = selector.at(-1)!
-        selector[lastI(selector)] = `${getElemSelector(el.elem)}${lastSel}`
+        const [root, sel] = getRootAndElemSelector(el)
+        return { root, sel, stateSel }
       }
-    }
+      return { root: '', sel: '', stateSel }
+    })
+    
+    
+    let elemsStatesSel = ''
+    elemsData.forEach((elem, i, arr) => {
+      if (i === arr.length - 1) {
+        elemsStatesSel = `${elem.root}${elemsStatesSel}${elem.sel}${elem.stateSel}`
+      }
+      else {
+        if (elem.sel) elemsStatesSel += `:has(${elem.sel}${elem.stateSel})`
+        else elemsStatesSel += elem.stateSel
+      }
+    })
+    selector.push(elemsStatesSel)
     
     
     const prop = data.prop.prop

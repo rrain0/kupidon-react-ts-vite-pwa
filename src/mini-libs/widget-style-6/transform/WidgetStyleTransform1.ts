@@ -24,11 +24,14 @@ export interface MediaTransformer1 {
   readonly isAtomic: true
 }
 export interface ElemTransformer1 {
-  readonly elem: string
+  // className
+  readonly className: string
   readonly type: 'elem'
   readonly isAtomic: true
   readonly states?: Record<string, AnyStateTransformer1> | undefined
   readonly props?: Record<string, PropTransformer1> | undefined
+  readonly upSelector?: string | undefined
+  readonly upElem?: ElemTransformer1 | undefined
 }
 export interface PseudoElemTransformer1 {
   readonly pseudoElem: string
@@ -112,18 +115,6 @@ export type AnyPropTransformer1 =
 
 
 
-/*
- States order to select in CSS:
-   normal - no selector
-   checked / selected - :checked / :selected
-   hover - :hover
-   active - :active
-   focus - :focus
-   focusVisible - :focus-visible
-   readOnly - :read-only
-   disabled - :disabled
-   error - [error]
- */
 
 export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 
@@ -141,8 +132,17 @@ export namespace PseudoElements1 {
   }
 }
 export namespace Pseudos1 {
+  export const checked: PseudoTransformer1 = {
+    pseudo: 'checked', type: 'pseudo', isAtomic: true,
+  }
+  export const selected: PseudoTransformer1 = {
+    pseudo: 'selected', type: 'pseudo', isAtomic: true,
+  }
   export const hover: PseudoTransformer1 = {
     pseudo: 'hover', type: 'pseudo', isAtomic: true,
+  }
+  export const active: PseudoTransformer1 = {
+    pseudo: 'active', type: 'pseudo', isAtomic: true,
   }
   export const focus: PseudoTransformer1 = {
     pseudo: 'focus', type: 'pseudo', isAtomic: true,
@@ -150,11 +150,20 @@ export namespace Pseudos1 {
   export const focusVisible: PseudoTransformer1 = {
     pseudo: 'focus-visible', type: 'pseudo', isAtomic: true,
   }
+  export const readOnly: PseudoTransformer1 = {
+    pseudo: 'read-only', type: 'pseudo', isAtomic: true,
+  }
+  export const disabled: PseudoTransformer1 = {
+    pseudo: 'disabled', type: 'pseudo', isAtomic: true,
+  }
 }
 export namespace Attrs1 {
   export const type: AttrTransformer1 = {
     attr: 'type', type: 'attr', isAtomic: true,
     values: { radio: '', checkbox: '' },
+  }
+  export const error: AttrTransformer1 = {
+    attr: 'data-error', type: 'attr', isAtomic: true,
   }
 }
 export namespace Props1 {
