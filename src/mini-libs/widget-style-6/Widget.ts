@@ -1,81 +1,79 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  Elements2,
-  ElemTransformer1, AnyPropTransformer1,
-  AnyStateTransformer1, WidgetStyle,
+  ElemTransformer1,
+  WidgetStyle,
+  transform1,
+  Attrs1,
+  ComplexTransformers1,
+  Pseudos1,
+  Props1,
+  PseudoElements1,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
+import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
+import { transform4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform4.ts'
+import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
+import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import RecordRo = TypeU.RecordRo
 
 
 
 
-export interface WidgetElem {
-  readonly name: string,
-  readonly elem: ElemTransformer1,
-  // null if this element is root
-  readonly upElem?: WidgetElem | undefined,
-  readonly upSelector?: string | undefined,
-}
-
 
 export interface Widget {
-  readonly rootElem: WidgetElem
-  readonly elems: RecordRo<string, WidgetElem>
+  readonly rootElem: ElemTransformer1
+  readonly elems: RecordRo<string, ElemTransformer1>
   // Состояние самого виджета
-  readonly state?: RecordRo<string, any> | undefined
+  readonly states?: RecordRo<string, string> | undefined
 }
 
 
+
+
+export const CommonProps = {
+  width: Props1.width,
+  w: Props1.width,
+  height: Props1.height,
+  h: Props1.height,
+  size: ComplexTransformers1.size,
+  sz: ComplexTransformers1.size,
+  background: Props1.background,
+  bg: Props1.background,
+}
+export const CommonStates = {
+  before: PseudoElements1.before,
+  after: PseudoElements1.after,
+  type: Attrs1.type,
+  radio: ComplexTransformers1.radio,
+  
+  // States
+  checked: Pseudos1.checked,
+  selected: Pseudos1.selected,
+  // hoverable AND hover
+  hover: ComplexTransformers1.hoverableHover,
+  active: Pseudos1.active,
+  focus: Pseudos1.focus,
+  focusVisible: Pseudos1.focusVisible,
+  // hover OR focusVisible
+  inFocus: ComplexTransformers1.inFocus,
+  readOnly: Pseudos1.readOnly,
+  disabled: Pseudos1.disabled,
+  error: Attrs1.error,
+}
+
+
+
+
+const RootElemStates2 = {
+  type: Attrs1.type,
+  hover: ComplexTransformers1.hoverableHover,
+  focus: Pseudos1.focus,
+  focusVisible: Pseudos1.focusVisible,
+}
 
 export const transformWidgetStyle = (widget: Widget, style: WidgetStyle): string => {
-  
-  return ''
-}
-
-
-
-export function testWidget51() {
-  const elemFrame: WidgetElem = {
-    name: 'frame',
-    elem: Elements2.frame,
-  }
-  const elemBox: WidgetElem = {
-    name: 'box',
-    upElem: elemFrame, upSelector: '>', elem: Elements2.box,
-  }
-  
-  const frameWidget: Widget = {
-    rootElem: elemFrame,
-    elems: {
-      frame: elemFrame,
-      box: elemBox,
-    },
-  }
-  
-  
-  const widgetStyle: WidgetStyle = {
-    hoverTypeRadioBg: 'white',
-    frameTypeCheckboxBoxSz: '40%',
-    frameRadioBg: 'indianred',
-    frameRadioBoxHoverFocusBg: 'aquamarine',
-    typeRadio: {
-      bg: 'black',
-      sz: 100,
-    },
-    type: {
-      checkbox: {
-        bg: 'red',
-        sz: 200,
-      },
-      radio: {
-        bg: 'green',
-        sz: 'full',
-      },
-    },
-  }
-  console.log('widgetStyle', widgetStyle)
-  
-  
-  const css = transformWidgetStyle(frameWidget, widgetStyle)
-  console.log('css\n', css)
+  return transform6(transform5(transform4(transform3(transform2(transform1(
+    style,
+    [CommonProps, widget.elems, RootElemStates2, undefined, undefined]
+  ))))))
 }
