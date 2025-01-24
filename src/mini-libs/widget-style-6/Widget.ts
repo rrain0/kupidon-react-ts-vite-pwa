@@ -19,16 +19,6 @@ import RecordRo = TypeU.RecordRo
 
 
 
-
-export interface Widget {
-  readonly rootElem: WidgetElem
-  readonly elems: RecordRo<string, WidgetElem | WidgetMultiAnyTransformer>
-  readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined
-  t(this: Widget, style: WidgetStyle, selectThis?: boolean): string
-}
-
-
-
 export const CommonProps = (() => {
   const props = {
     width: WidgetProps.width,
@@ -111,28 +101,43 @@ export const CommonStates = {
 
 
 
+
+export class Widget<
+  const out Es extends Record<string, WidgetElem> = any
+> {
+  constructor(
+    readonly rootElem: WidgetElem,
+    readonly elems: Es,
+    readonly states?: RecordRo<string, WidgetMultiAnyTransformer> | undefined,
+    // Additional CSS prop transformers
+    readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
+  ) { }
+  
+  get es() { return this.elems }
+  
+  // TODO Style - selectThis = true
+  t(style: WidgetStyle) {
+    return transformWidgetStyle(this, style)
+  }
+}
+
+
+
+
 export const transformWidgetStyle = (
-  widget: Widget,
+  widget: Widget<any>,
   style: WidgetStyle,
 ): string => {
   const css = transform6(transform5(transform4(transform3(transform2(transform1(
     style,
-    [{ ...CommonProps, ...widget.props }, widget.elems, undefined, undefined, undefined]
+    [
+      { ...CommonProps, ...widget.props },
+      { ...widget.states, ...widget.elems },
+      undefined,
+      undefined,
+      undefined,
+    ]
   ))))))
   return css
 }
 
-
-
-export function newWidget(
-  rootElem: WidgetElem,
-  elems: RecordRo<string, WidgetElem | WidgetMultiAnyTransformer>,
-  props?: RecordRo<string, WidgetAnyPropTransformer>,
-): Widget {
-  return {
-    rootElem, elems, props,
-    t(style: WidgetStyle) {
-      return transformWidgetStyle(this, style)
-    },
-  }
-}

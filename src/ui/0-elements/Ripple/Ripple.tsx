@@ -73,8 +73,8 @@ const Ripple = React.memo(
           fProps.xy,
           fProps.wh,
           clientXY,
-          // TODO Style
-          rProps.getCssPropValue(RippleS6.W.elems.ripple.props!.mode.prop) as RippleMode,
+          // TODO Style - RippleMode type
+          rProps.getCssPropValue(RippleS6.W.es.ripple.ps!.mode.n) as RippleMode,
           500
         )
       }
@@ -130,15 +130,14 @@ const Ripple = React.memo(
       <div
         //displayName={'RippleFrame'}
         ref={frameRef}
-        // TODO Style
-        className={clsx((RippleS6.W.elems.frame as WidgetElem).className, className)}
+        className={clsx(RippleS6.W.es.frame.n, className)}
         {...restProps}
       >
         <animated.div
           //displayName={'RippleRipple'}
           ref={rippleRef}
           // TODO Style
-          className={(RippleS6.W.elems.ripple as WidgetElem).className}
+          className={RippleS6.W.es.ripple.n}
           style={{
             ...rippleProps.dimens,
             // @ts-expect-error

@@ -1,6 +1,6 @@
 import {
   WidgetStyle,
-  transform1, WidgetMultiAnyTransformer, newWidgetElem,
+  transform1, WidgetMultiAnyTransformer, WidgetElem, WidgetProp,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
@@ -9,8 +9,8 @@ import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTr
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import {
   CommonProps,
-  CommonStates, newWidget,
-  transformWidgetStyle,
+  CommonStates,
+  transformWidgetStyle, Widget,
 } from 'src/mini-libs/widget-style-6/Widget.ts'
 
 
@@ -35,25 +35,30 @@ import {
 
 export namespace WidgetStyle6Test {
   
-  const elemFrame = newWidgetElem({
+  const elemFrame = WidgetElem.of({
     className: 'rruiFrame',
     states: CommonStates,
+    props: { accentColor: WidgetProp.ofName('--accent-color') },
   })
-  const elemInput = newWidgetElem({
+  const elemInput = WidgetElem.of({
     className: 'rruiInput',
     upSelector: '>', upElem: elemFrame,
     states: CommonStates,
   })
-  const elemBox = newWidgetElem({
+  const elemBox = WidgetElem.of({
     className: 'rruiBox',
     upSelector: '>', upElem: elemFrame,
     states: CommonStates,
   })
-  const WidgetElements = {
+  
+  const a = elemFrame.props?.accentColor
+  
+  export const WidgetElements = {
     frame: elemFrame,
     input: elemInput,
     box: elemBox,
   }
+  
   
   const radioWidgetState: WidgetMultiAnyTransformer = {
     name: 'widgetHover', type: 'widget', isAtomic: false,
@@ -74,14 +79,13 @@ export namespace WidgetStyle6Test {
     name: 'widgetHover', type: 'widget', isAtomic: false,
     transform: () => [[elemFrame, CommonStates.hover], [elemInput, CommonStates.focusVisible]],
   }
-  const WidgetStates = {
+  
+  export const WidgetStates = {
     radio: radioWidgetState,
     type: typeWidgetState,
     hover: hoverWidgetState,
     inFocus: inFocusWidgetState,
   }
-  
-  export const InputWidgetElements = { ...WidgetStates, ...WidgetElements }
   
   
   
@@ -125,7 +129,7 @@ export namespace WidgetStyle6Test {
     
     const transformed1 = transform1(
       inputWidgetStyle,
-      [CommonProps, InputWidgetElements, undefined, undefined, undefined]
+      [CommonProps, { ...WidgetStates, ...WidgetElements }, undefined, undefined, undefined]
     )
     console.log('transformed1', transformed1)
     
@@ -147,7 +151,7 @@ export namespace WidgetStyle6Test {
   
   
   export function testWidget() {
-    const inputWidget = newWidget(InputWidgetElements.frame, InputWidgetElements)
+    const inputWidget = new Widget(WidgetElements.frame, WidgetElements, WidgetStates)
     
     const css = transformWidgetStyle(inputWidget, inputWidgetStyle)
     console.log('widget css', '\n',  css)

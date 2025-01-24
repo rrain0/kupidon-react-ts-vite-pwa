@@ -1,10 +1,8 @@
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/AppWidgetStyle.ts'
 import {
-  newWidgetElem,
-  newWidgetProp,
-  WidgetStyle,
+  WidgetElem, WidgetProp, WidgetStyle,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-import { newWidget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import abs = WidgetStyleCommon.abs
@@ -17,19 +15,19 @@ export namespace RippleS6 {
   export type RippleMode = 'center' | 'pointer'
   
   namespace WidgetElems {
-    export const frame = newWidgetElem({ className: 'rruiRippleFrame' })
-    export const ripple = newWidgetElem({
+    export const frame = WidgetElem.of({ className: 'rruiRippleFrame' })
+    export const ripple = WidgetElem.of({
       className: 'rruiRippleRipple',
       upSelector: '>', upElem: frame,
       props: {
-        color: newWidgetProp('--color'),
+        color: WidgetProp.ofName('--color'),
         // values: 'center' | 'pointer'
-        mode: newWidgetProp('--mode'),
+        mode: WidgetProp.ofName('--mode'),
       },
     })
   }
   
-  export const W = newWidget(WidgetElems.frame, WidgetElems)
+  export const W = new Widget(WidgetElems.frame, WidgetElems)
   
   
   export namespace ST {

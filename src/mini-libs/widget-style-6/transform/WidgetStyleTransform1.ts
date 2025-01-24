@@ -7,6 +7,7 @@ import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
 import isnumber = TypeU.isnumber
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
+import RecordRo = TypeU.RecordRo
 
 
 
@@ -21,42 +22,102 @@ export type StyleValue =
 export type TransformPropValue = (propValue: StyleValue) => StyleValue
 
 
-export interface WidgetMedia {
-  readonly media: string
-  readonly type: 'media'
-  readonly isAtomic: true
+export class WidgetMedia {
+  readonly type = 'media' as const
+  readonly isAtomic = true as const
+  
+  constructor(readonly media: string) { }
+  
+  static ofQuery(query: string) {
+    return new WidgetMedia(query)
+  }
+  
 }
-export interface WidgetElem {
-  readonly className: string
-  readonly type: 'elem'
-  readonly isAtomic: true
-  readonly states?: Record<string, WidgetAnyStateTransformer> | undefined
-  readonly props?: Record<string, WidgetProp> | undefined
-  readonly upSelector?: string | undefined
-  readonly upElem?: WidgetElem | undefined
+
+export class WidgetElem<
+  const out Ps extends RecordRo<string, WidgetProp> = any
+> {
+  readonly type = 'elem' as const
+  readonly isAtomic = true as const
+  
+  constructor(
+    readonly className: string,
+    readonly states?: Record<string, WidgetAnyStateTransformer> | undefined,
+    readonly props?: Ps | undefined,
+    readonly upSelector?: string | undefined,
+    readonly upElem?: WidgetElem | undefined,
+  ) { }
+  
+  static of<
+    const Ps extends RecordRo<string, WidgetProp>
+  >(props: {
+    className: string,
+    states?: Record<string, WidgetAnyStateTransformer> | undefined,
+    props?: Ps | undefined,
+    upSelector?: string | undefined,
+    upElem?: WidgetElem | undefined,
+  }): WidgetElem<Ps> {
+    return new WidgetElem<Ps>(
+      props.className, props.states, props.props, props.upSelector, props.upElem
+    )
+  }
+  
+  get n() { return this.className }
+  get ps() { return this.props }
 }
-export interface WidgetPseudoElem {
-  readonly pseudoElem: string
-  readonly type: 'pseudoElem'
-  readonly isAtomic: true
+
+export class WidgetPseudoElem {
+  readonly type = 'pseudoElem' as const
+  readonly isAtomic = true as const
+  
+  constructor(readonly pseudoElem: string) { }
+  
+  static ofName(name: string) {
+    return new WidgetPseudoElem(name)
+  }
 }
-export interface WidgetPseudo {
-  readonly pseudo: string
-  readonly type: 'pseudo'
-  readonly isAtomic: true
+
+export class WidgetPseudo {
+  readonly type = 'pseudo' as const
+  readonly isAtomic = true as const
+  
+  constructor(readonly pseudo: string) { }
+  
+  static ofName(name: string) {
+    return new WidgetPseudo(name)
+  }
 }
-export interface WidgetAttr {
-  readonly attr: string
-  readonly type: 'attr'
-  readonly isAtomic: true
-  readonly values?: Record<string, any> | undefined
+
+export class WidgetAttr {
+  readonly type = 'attr' as const
+  readonly isAtomic = true as const
+  
+  constructor(
+    readonly attr: string,
+    readonly values?: Record<string, any> | undefined,
+  ) { }
+  
+  static of(name: string, values?: Record<string, any> | undefined) {
+    return new WidgetAttr(name, values)
+  }
 }
-export interface WidgetProp {
-  readonly prop: string
-  readonly type: 'prop'
-  readonly isAtomic: true
-  readonly transformValue?: TransformPropValue | undefined
+
+export class WidgetProp {
+  readonly type = 'prop' as const
+  readonly isAtomic = true as const
+  
+  constructor(
+    readonly prop: string,
+    readonly transformValue?: TransformPropValue | undefined,
+  ) { }
+  
+  static ofName(name: string, transformValue?: TransformPropValue | undefined) {
+    return new WidgetProp(name, transformValue)
+  }
+  
+  get n() { return this.prop }
 }
+
 
 
 export interface WidgetMultiAnyTransformer {
@@ -81,6 +142,7 @@ export interface WidgetMultiPropTransformer {
   readonly isAtomic: false
   readonly transform: (propValue: StyleValue) => WidgetTransformerList
 }
+
 
 
 export interface WidgetStateValue {
@@ -128,79 +190,33 @@ export type WidgetAnyPropTransformer =
 
 
 
-export type NewWidgetElemParams = Omit<WidgetElem, 'type' | 'isAtomic'>
-export function newWidgetElem(params: NewWidgetElemParams): WidgetElem {
-  return {
-    type: 'elem', isAtomic: true,
-    ...params,
-  }
-}
-
-export function newWidgetProp(
-  name: WidgetProp['prop'],
-  transform?: WidgetProp['transformValue']
-): WidgetProp {
-  return {
-    prop: name, type: 'prop', isAtomic: true,
-    transformValue: transform,
-  }
-}
-
-
 
 
 export const hoverableMedia = '(hover: hover) and (pointer: fine)'
 
 export namespace WidgetMedias {
-  export const hoverable: WidgetMedia = {
-    media: hoverableMedia, type: 'media', isAtomic: true,
-  }
+  export const hoverable = WidgetMedia.ofQuery(hoverableMedia)
 }
 
 export namespace WidgetPseudoElements {
-  export const before: WidgetPseudoElem = {
-    pseudoElem: 'before', type: 'pseudoElem', isAtomic: true,
-  }
-  export const after: WidgetPseudoElem = {
-    pseudoElem: 'after', type: 'pseudoElem', isAtomic: true,
-  }
+  export const before = WidgetPseudoElem.ofName('before')
+  export const after = WidgetPseudoElem.ofName('after')
 }
 
 export namespace WidgetPseudos {
-  export const checked: WidgetPseudo = {
-    pseudo: 'checked', type: 'pseudo', isAtomic: true,
-  }
-  export const selected: WidgetPseudo = {
-    pseudo: 'selected', type: 'pseudo', isAtomic: true,
-  }
-  export const hover: WidgetPseudo = {
-    pseudo: 'hover', type: 'pseudo', isAtomic: true,
-  }
-  export const active: WidgetPseudo = {
-    pseudo: 'active', type: 'pseudo', isAtomic: true,
-  }
-  export const focus: WidgetPseudo = {
-    pseudo: 'focus', type: 'pseudo', isAtomic: true,
-  }
-  export const focusVisible: WidgetPseudo = {
-    pseudo: 'focus-visible', type: 'pseudo', isAtomic: true,
-  }
-  export const readOnly: WidgetPseudo = {
-    pseudo: 'read-only', type: 'pseudo', isAtomic: true,
-  }
-  export const disabled: WidgetPseudo = {
-    pseudo: 'disabled', type: 'pseudo', isAtomic: true,
-  }
+  export const checked = WidgetPseudo.ofName('checked')
+  export const selected = WidgetPseudo.ofName('selected')
+  export const hover = WidgetPseudo.ofName('hover')
+  export const active = WidgetPseudo.ofName('active')
+  export const focus = WidgetPseudo.ofName('focus')
+  export const focusVisible = WidgetPseudo.ofName('focus-visible')
+  export const readOnly = WidgetPseudo.ofName('read-only')
+  export const disabled = WidgetPseudo.ofName('disabled')
 }
 
 export namespace WidgetAttrs {
-  export const type: WidgetAttr = {
-    attr: 'type', type: 'attr', isAtomic: true,
-    values: { radio: '', checkbox: '' },
-  }
-  export const error: WidgetAttr = {
-    attr: 'data-error', type: 'attr', isAtomic: true,
-  }
+  export const type = WidgetAttr.of('type', { radio: '', checkbox: '' })
+  export const error = WidgetAttr.of('data-error')
 }
 
 export namespace WidgetProps {
@@ -217,29 +233,29 @@ export namespace WidgetProps {
     return value
   }
   
-  export const position = newWidgetProp('position', value => {
+  export const position = WidgetProp.ofName('position', value => {
     if (value === 'abs') return 'absolute'
     if (value === 'rel') return 'relative'
     if (value === null) return 'static'
     return value
   })
-  export const top = newWidgetProp('top', transformLenValue)
-  export const right = newWidgetProp('right', transformLenValue)
-  export const bottom = newWidgetProp('bottom', transformLenValue)
-  export const left = newWidgetProp('left', transformLenValue)
+  export const top = WidgetProp.ofName('top', transformLenValue)
+  export const right = WidgetProp.ofName('right', transformLenValue)
+  export const bottom = WidgetProp.ofName('bottom', transformLenValue)
+  export const left = WidgetProp.ofName('left', transformLenValue)
   
-  export const width = newWidgetProp('width', transformLenValue)
-  export const height = newWidgetProp('height', transformLenValue)
-  export const margin = newWidgetProp('margin', transformLenValue)
-  export const padding = newWidgetProp('padding', transformLenValue)
-  export const gap = newWidgetProp('gap', transformLenValue)
+  export const width = WidgetProp.ofName('width', transformLenValue)
+  export const height = WidgetProp.ofName('height', transformLenValue)
+  export const margin = WidgetProp.ofName('margin', transformLenValue)
+  export const padding = WidgetProp.ofName('padding', transformLenValue)
+  export const gap = WidgetProp.ofName('gap', transformLenValue)
   
-  export const background = newWidgetProp('background', transformNullToNone)
-  export const border = newWidgetProp('border', transformNullToNone)
-  export const outline = newWidgetProp('outline', transformNullToNone)
-  export const boxShadow = newWidgetProp('box-shadow', transformNullToNone)
+  export const background = WidgetProp.ofName('background', transformNullToNone)
+  export const border = WidgetProp.ofName('border', transformNullToNone)
+  export const outline = WidgetProp.ofName('outline', transformNullToNone)
+  export const boxShadow = WidgetProp.ofName('box-shadow', transformNullToNone)
   
-  export const backgroundColor = newWidgetProp('background-color', transformNullToNone)
+  export const backgroundColor = WidgetProp.ofName('background-color', transformNullToNone)
 }
 
 export namespace WidgetComplexTransformers {
@@ -413,7 +429,7 @@ export function transform1(
           throw new Error(`Found unregistered property '${selP}' but value is object: ${value}`)
         }
         const pKebabized = camelCaseToKebabCase(selP)
-        data.push({ prop: pKebabized, type: 'prop', isAtomic: true })
+        data.push(WidgetProp.ofName(pKebabized))
         data.push({ value, type: 'propValue' })
         dataList.push(data)
         selP = ''
