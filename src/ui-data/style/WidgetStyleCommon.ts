@@ -12,6 +12,11 @@ export namespace WidgetStyleCommon {
   export const round: WidgetStyle = { borderRadius: '999999px' }
   
   
+  export const row: WidgetStyle = { display: 'flex', flexFlow: 'row nowrap' }
+  export const rowC: WidgetStyle = { display: 'flex', flexFlow: 'row nowrap', alignItems: 'center' }
+  export const rowWrap: WidgetStyle = { display: 'flex', flexFlow: 'row wrap' }
+  
+  
   export const noPointer: WidgetStyle = { pointerEvents: 'none' }
   export const noBorderOutlineBoxShadow: WidgetStyle = {
     border: null,
@@ -48,5 +53,16 @@ export namespace WidgetStyleCommon {
     disabled: { cursor: 'not-allowed' },
   }
   
+  
+  export namespace Txt {
+    
+    export const large2: WidgetStyle = {
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: '150%',
+      letterSpacing: '0.05em',
+    }
+    
+  }
 }
 

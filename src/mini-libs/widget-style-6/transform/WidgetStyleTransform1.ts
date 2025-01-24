@@ -1,22 +1,24 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { CommonStates } from 'src/mini-libs/widget-style-6/Widget.ts'
 import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
 import isnumber = TypeU.isnumber
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 import RecordRo = TypeU.RecordRo
+import isArray = TypeU.isArray
 
 
 
 
-export type StyleValue =
+export type StyleVal =
   | string // pass as is if there are no special values or transformations
   | number // transform to fractions or pixels
   | null // set empty value (background: none, color: transparent)
   | undefined // remove value definition
+
+export type StyleValue = StyleVal | StyleVal[]
 
 
 export type TransformPropValue = (propValue: StyleValue) => StyleValue
@@ -120,14 +122,29 @@ export class WidgetProp {
 
 
 
-export interface WidgetMultiAnyTransformer {
-  readonly name: string
-  readonly type: 'widget'
-  readonly isAtomic: false
-  readonly states?: Record<string, WidgetAnyStateTransformer> | undefined
-  readonly values?: Record<string, any> | undefined
-  readonly props?: Record<string, WidgetProp> | undefined
-  readonly transform: () => WidgetTransformerList
+export class WidgetMultiAnyTransformer {
+  readonly type = 'widget' as const
+  readonly isAtomic = false as const
+  
+  constructor(
+    readonly transform: () => WidgetTransformerList,
+    readonly name?: string | undefined,
+    readonly states?: Record<string, WidgetAnyStateTransformer> | undefined,
+    readonly values?: Record<string, any> | undefined,
+    readonly props?: Record<string, WidgetProp> | undefined,
+  ) { }
+  
+  static of(params: {
+    transform: () => WidgetTransformerList,
+    name?: string | undefined,
+    states?: Record<string, WidgetAnyStateTransformer> | undefined,
+    values?: Record<string, any> | undefined,
+    props?: Record<string, WidgetProp> | undefined,
+  }) {
+    return new WidgetMultiAnyTransformer(
+      params.transform, params.name, params.states, params.values, params.props,
+    )
+  }
 }
 export interface WidgetMultiStateTransformer {
   readonly state: string
@@ -228,6 +245,10 @@ export namespace WidgetProps {
     if (isnumber(value)) value = `${value}px`
     return value
   }
+  export const transformMultiLenValue = (value: StyleValue) => {
+    if (isArray(value)) return value.map(v => transformLenValue(v)).join(' ')
+    return transformLenValue(value)
+  }
   export const transformNullToNone = (value: StyleValue) => {
     if (value === null) return 'none'
     return value
@@ -246,16 +267,20 @@ export namespace WidgetProps {
   
   export const width = WidgetProp.ofName('width', transformLenValue)
   export const height = WidgetProp.ofName('height', transformLenValue)
-  export const margin = WidgetProp.ofName('margin', transformLenValue)
-  export const padding = WidgetProp.ofName('padding', transformLenValue)
-  export const gap = WidgetProp.ofName('gap', transformLenValue)
+  export const minWidth = WidgetProp.ofName('min-width', transformLenValue)
+  export const minHeight = WidgetProp.ofName('min-height', transformLenValue)
+  export const maxWidth = WidgetProp.ofName('max-width', transformLenValue)
+  export const maxHeight = WidgetProp.ofName('max-height', transformLenValue)
+  export const margin = WidgetProp.ofName('margin', transformMultiLenValue)
+  export const padding = WidgetProp.ofName('padding', transformMultiLenValue)
+  export const gap = WidgetProp.ofName('gap', transformMultiLenValue)
   
   export const background = WidgetProp.ofName('background', transformNullToNone)
+  export const backgroundColor = WidgetProp.ofName('background-color', transformNullToNone)
   export const border = WidgetProp.ofName('border', transformNullToNone)
+  export const borderRadius = WidgetProp.ofName('border-radius', transformLenValue)
   export const outline = WidgetProp.ofName('outline', transformNullToNone)
   export const boxShadow = WidgetProp.ofName('box-shadow', transformNullToNone)
-  
-  export const backgroundColor = WidgetProp.ofName('background-color', transformNullToNone)
 }
 
 export namespace WidgetComplexTransformers {
@@ -358,7 +383,7 @@ export function transform1(
     
     if (selP) pLoop: while (true) {
       if (!selP) {
-        if (isobject(value)) {
+        if (isobject(value) && !isArray(value)) {
           dataList = transform1(value, contextStack, dataList, data)
         }
         break
@@ -409,7 +434,7 @@ export function transform1(
             }
             // found prop - must be last in selector
             else if (entity.type === 'prop') {
-              if (!selP && !isobject(value)) {
+              if (!selP && (!isobject(value) || isArray(value))) {
                 data.push(entity)
                 data.push({ value, type: 'propValue' })
                 dataList.push(data)
@@ -425,7 +450,7 @@ export function transform1(
       // If not found then it is unregistered property
       {
         //throw new Error(`Unknown property: ${selP}`)
-        if (isobject(value)) {
+        if (isobject(value) && !isArray(value)) {
           throw new Error(`Found unregistered property '${selP}' but value is object: ${value}`)
         }
         const pKebabized = camelCaseToKebabCase(selP)

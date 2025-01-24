@@ -23,10 +23,18 @@ export const CommonProps = (() => {
   const props = {
     width: WidgetProps.width,
     height: WidgetProps.height,
+    minWidth: WidgetProps.minWidth,
+    minHeight: WidgetProps.minHeight,
+    maxWidth: WidgetProps.maxWidth,
+    maxHeight: WidgetProps.maxHeight,
     size: WidgetComplexTransformers.size,
     
     w: WidgetProps.width,
     h: WidgetProps.height,
+    wMin: WidgetProps.minWidth,
+    hMin: WidgetProps.minHeight,
+    wMax: WidgetProps.maxWidth,
+    hMax: WidgetProps.maxHeight,
     sz: WidgetComplexTransformers.size,
     
     margin: WidgetProps.margin,
@@ -60,22 +68,23 @@ export const CommonProps = (() => {
     av: WidgetComplexTransformers.absV,
     
     background: WidgetProps.background,
+    backgroundColor: WidgetProps.backgroundColor,
     border: WidgetProps.border,
+    borderRadius: WidgetProps.borderRadius,
     outline: WidgetProps.outline,
     boxShadow: WidgetProps.boxShadow,
     
     bg: WidgetProps.background,
-    
-    backgroundColor: WidgetProps.backgroundColor,
-    
     bgColor: WidgetProps.backgroundColor,
-    
+    r: WidgetProps.borderRadius,
   }
   const sortedProps = Object.entries(props)
     .sort((([propA], [propB]) => propB.length - propA.length))
     .reduce((acc, curr) => { acc[curr[0]] = curr[1]; return acc }, { } as typeof props)
   return sortedProps
 })()
+
+
 export const CommonStates = {
   before: WidgetPseudoElements.before,
   after: WidgetPseudoElements.after,
@@ -90,7 +99,7 @@ export const CommonStates = {
   active: WidgetPseudos.active,
   focus: WidgetPseudos.focus,
   focusVisible: WidgetPseudos.focusVisible,
-  // hover OR focusVisible
+  // hoverable hover OR focusVisible
   inFocus: WidgetComplexTransformers.inFocus,
   readOnly: WidgetPseudos.readOnly,
   disabled: WidgetPseudos.disabled,
@@ -113,6 +122,17 @@ export class Widget<
     readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   ) { }
   
+  static of<
+    const Es extends Record<string, WidgetElem> = any
+  >(props: {
+    rootElem: WidgetElem,
+    elems: Es,
+    states?: RecordRo<string, WidgetMultiAnyTransformer> | undefined,
+    props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
+  }): Widget<Es> {
+    return new Widget(props.rootElem, props.elems, props.states, props.props)
+  }
+  
   get es() { return this.elems }
   
   // TODO Style - selectThis = true
@@ -125,7 +145,7 @@ export class Widget<
 
 
 export const transformWidgetStyle = (
-  widget: Widget<any>,
+  widget: Widget,
   style: WidgetStyle,
 ): string => {
   const css = transform6(transform5(transform4(transform3(transform2(transform1(

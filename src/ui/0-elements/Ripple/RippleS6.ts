@@ -15,7 +15,9 @@ export namespace RippleS6 {
   export type RippleMode = 'center' | 'pointer'
   
   namespace WidgetElems {
-    export const frame = WidgetElem.of({ className: 'rruiRippleFrame' })
+    export const frame = WidgetElem.of({
+      className: 'rruiRippleFrame',
+    })
     export const ripple = WidgetElem.of({
       className: 'rruiRippleRipple',
       upSelector: '>', upElem: frame,
@@ -27,7 +29,7 @@ export namespace RippleS6 {
     })
   }
   
-  export const W = new Widget(WidgetElems.frame, WidgetElems)
+  export const W = Widget.of({ rootElem: WidgetElems.frame, elems: WidgetElems })
   
   
   export namespace ST {

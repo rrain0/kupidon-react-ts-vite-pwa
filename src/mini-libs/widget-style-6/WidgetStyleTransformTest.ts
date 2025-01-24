@@ -51,8 +51,6 @@ export namespace WidgetStyle6Test {
     states: CommonStates,
   })
   
-  const a = elemFrame.props?.accentColor
-  
   export const WidgetElements = {
     frame: elemFrame,
     input: elemInput,
@@ -60,25 +58,23 @@ export namespace WidgetStyle6Test {
   }
   
   
-  const radioWidgetState: WidgetMultiAnyTransformer = {
-    name: 'widgetHover', type: 'widget', isAtomic: false,
+  const radioWidgetState = WidgetMultiAnyTransformer.of({
+    name: 'widgetHover',
     transform: () => [[elemInput, CommonStates.radio]],
-  }
-  const typeWidgetState: WidgetMultiAnyTransformer = {
-    name: 'widgetType', type: 'widget', isAtomic: false,
+  })
+  const typeWidgetState =  WidgetMultiAnyTransformer.of({
+    name: 'widgetType',
     values: CommonStates.type.values,
-    transform: () => [
-      [elemInput, CommonStates.type],
-    ],
-  }
-  const hoverWidgetState: WidgetMultiAnyTransformer = {
-    name: 'widgetHover', type: 'widget', isAtomic: false,
+    transform: () => [[elemInput, CommonStates.type]],
+  })
+  const hoverWidgetState = WidgetMultiAnyTransformer.of({
+    name: 'widgetHover',
     transform: () => [[elemFrame, CommonStates.hover]],
-  }
-  const inFocusWidgetState: WidgetMultiAnyTransformer = {
-    name: 'widgetHover', type: 'widget', isAtomic: false,
+  })
+  const inFocusWidgetState = WidgetMultiAnyTransformer.of({
+    name: 'widgetHover',
     transform: () => [[elemFrame, CommonStates.hover], [elemInput, CommonStates.focusVisible]],
-  }
+  })
   
   export const WidgetStates = {
     radio: radioWidgetState,
@@ -151,7 +147,11 @@ export namespace WidgetStyle6Test {
   
   
   export function testWidget() {
-    const inputWidget = new Widget(WidgetElements.frame, WidgetElements, WidgetStates)
+    const inputWidget = Widget.of({
+      rootElem: WidgetElements.frame,
+      elems: WidgetElements,
+      states: WidgetStates,
+    })
     
     const css = transformWidgetStyle(inputWidget, inputWidgetStyle)
     console.log('widget css', '\n',  css)

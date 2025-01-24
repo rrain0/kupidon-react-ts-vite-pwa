@@ -6,11 +6,102 @@ import { CssProp, CssProps } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
 import { CssPropEnum } from 'src/mini-libs/widget-style-4/css/CssPropEnum.ts'
 import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
 import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
+import {
+  WidgetElem,
+  WidgetMultiAnyTransformer, WidgetStyle,
+} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+import { CommonStates, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import capitalize = StringU.capitalize
+import resetButton = WidgetStyleCommon.resetButton
+import row = WidgetStyleCommon.row
+import abs = WidgetStyleCommon.abs
+import Txt = WidgetStyleCommon.Txt
+
 
 
 
 export namespace ButtonS6 {
+  
+  namespace WidgetElems {
+    export const button = WidgetElem.of({
+      className: 'rruiButton',
+      states: CommonStates,
+    })
+    export const border = WidgetElem.of({
+      className: 'rruiBorder',
+    })
+  }
+  namespace WidgetStates {
+    // TODO Style - simplify
+    export const inFocus = WidgetMultiAnyTransformer.of({
+      transform: () => [[WidgetElems.button, CommonStates.inFocus]],
+    })
+    export const disabled = WidgetMultiAnyTransformer.of({
+      transform: () => [[WidgetElems.button, CommonStates.disabled]],
+    })
+    export const error = WidgetMultiAnyTransformer.of({
+      transform: () => [[WidgetElems.button, CommonStates.error]],
+    })
+  }
+  
+  export const W = Widget.of({
+    rootElem: WidgetElems.button,
+    elems: WidgetElems,
+    states: WidgetStates,
+  })
+  
+  
+  export namespace ST {
+    
+    export const base = {
+      button: {
+        ...resetButton,
+        pos: 'rel',
+        ...row,
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflowWrap: 'anywhere',
+        overflow: 'hidden',
+        transition: 'background linear 300ms',
+      },
+      border: {
+        ...abs,
+        pointerEvents: 'none',
+        borderRadius: 'inherit',
+      },
+      ripple: { /* ripple base */ },
+      
+      disabled: {
+        button: {
+          cursor: 'not-allowed',
+        },
+      },
+    } satisfies WidgetStyle
+    
+    export namespace Filled {
+      export namespace Rect {
+        // type: filled, shape: rect, size: big
+        export const big: WidgetStyle = {
+          ...base,
+          // TODO Style - prevent style rewriting when add after 'base' - make array of objects
+          button: { ...base.button,
+            w: 'full',
+            hMin: 50,
+            r: 15,
+            p: [8, 16],
+            ...Txt.large2,
+          },
+          border: { ...base.button,
+            border: null,
+          },
+        }
+      }
+    }
+  }
+  
+  
+  
   
   
   export const buildButtonWidget = (rootConfig?: {
@@ -62,7 +153,7 @@ export namespace ButtonS6 {
     return buttonWidget
   }
   
-  export const W = buildButtonWidget()
+  export const W0 = buildButtonWidget()
   
   
 }

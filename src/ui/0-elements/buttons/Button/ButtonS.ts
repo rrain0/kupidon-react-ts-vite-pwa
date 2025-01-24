@@ -113,7 +113,6 @@ export namespace ButtonS {
       ${row};
       place-content: center;
       place-items: center;
-      border: none;
       overflow-wrap: anywhere;
       overflow: hidden;
       
