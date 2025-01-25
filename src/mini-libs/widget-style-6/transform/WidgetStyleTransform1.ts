@@ -36,9 +36,7 @@ export class WidgetMedia {
   
 }
 
-export class WidgetElem<
-  const out Ps extends RecordRo<string, WidgetProp> = any
-> {
+export class WidgetElem<const out Ps extends RecordRo<string, WidgetProp> = any> {
   readonly type = 'elem' as const
   readonly isAtomic = true as const
   
@@ -50,9 +48,7 @@ export class WidgetElem<
     readonly upElem?: WidgetElem | undefined,
   ) { }
   
-  static of<
-    const Ps extends RecordRo<string, WidgetProp>
-  >(props: {
+  static of<const Ps extends RecordRo<string, WidgetProp>>(params: {
     className: string,
     states?: Record<string, WidgetAnyStateTransformer> | undefined,
     props?: Ps | undefined,
@@ -60,7 +56,7 @@ export class WidgetElem<
     upElem?: WidgetElem | undefined,
   }): WidgetElem<Ps> {
     return new WidgetElem<Ps>(
-      props.className, props.states, props.props, props.upSelector, props.upElem
+      params.className, params.states, params.props, params.upSelector, params.upElem
     )
   }
   
@@ -128,7 +124,7 @@ export class WidgetMultiAnyTransformer {
   
   constructor(
     readonly transform: () => WidgetTransformerList,
-    readonly name?: string | undefined,
+    readonly title?: string | undefined,
     readonly states?: Record<string, WidgetAnyStateTransformer> | undefined,
     readonly values?: Record<string, any> | undefined,
     readonly props?: Record<string, WidgetProp> | undefined,
@@ -136,39 +132,70 @@ export class WidgetMultiAnyTransformer {
   
   static of(params: {
     transform: () => WidgetTransformerList,
-    name?: string | undefined,
+    title?: string | undefined,
     states?: Record<string, WidgetAnyStateTransformer> | undefined,
     values?: Record<string, any> | undefined,
     props?: Record<string, WidgetProp> | undefined,
   }) {
     return new WidgetMultiAnyTransformer(
-      params.transform, params.name, params.states, params.values, params.props,
+      params.transform, params.title, params.states, params.values, params.props,
     )
   }
 }
-export interface WidgetMultiStateTransformer {
-  readonly state: string
-  readonly type: 'state'
-  readonly isAtomic: false
-  readonly values?: Record<string, any> | undefined
-  readonly transform: (stateValue?: string) => WidgetTransformerList
+
+export class WidgetMultiStateTransformer {
+  readonly type = 'state' as const
+  readonly isAtomic = false as const
+  
+  constructor(
+    readonly transform: (stateValue?: string) => WidgetTransformerList,
+    readonly title?: string | undefined,
+    readonly values?: Record<string, any> | undefined,
+  ) { }
+  
+  static of(params: {
+    transform: (stateValue?: string) => WidgetTransformerList,
+    title: string,
+    values?: Record<string, any> | undefined,
+  }) {
+    return new WidgetMultiStateTransformer(params.transform, params.title, params.values)
+  }
 }
-export interface WidgetMultiPropTransformer {
-  readonly prop: string
-  readonly type: 'prop'
-  readonly isAtomic: false
-  readonly transform: (propValue: StyleValue) => WidgetTransformerList
+
+export class WidgetMultiPropTransformer {
+  readonly type = 'prop' as const
+  readonly isAtomic = false as const
+  
+  constructor(
+    readonly transform: (propValue: StyleValue) => WidgetTransformerList,
+    readonly title?: string | undefined,
+  ) { }
+  
+  static of(params: {
+    transform: (propValue: StyleValue) => WidgetTransformerList,
+    title?: string | undefined,
+  }) {
+    return new WidgetMultiPropTransformer(params.transform, params.title)
+  }
 }
 
 
 
-export interface WidgetStateValue {
-  readonly value: string
-  readonly type: 'stateValue',
+export class WidgetStateValue {
+  readonly type = 'stateValue' as const
+  constructor(readonly value: string) { }
+  
+  static of(value: string) {
+    return new WidgetStateValue(value)
+  }
 }
-export interface WidgetPropValue {
-  readonly value: StyleValue
-  readonly type: 'propValue',
+export class WidgetPropValue {
+  readonly type = 'propValue' as const
+  constructor(readonly value: StyleValue) { }
+  
+  static of(value: StyleValue) {
+    return new WidgetPropValue(value)
+  }
 }
 
 
@@ -290,84 +317,75 @@ export namespace WidgetProps {
 export namespace WidgetComplexTransformers {
   
   // just 'radio' instead of 'typeRadio'
-  export const radio: WidgetMultiStateTransformer = {
-    state: 'radio -> [type=radio]',
-    type: 'state', isAtomic: false,
+  export const radio = WidgetMultiStateTransformer.of({
+    title: 'radio -> [type=radio]',
     transform: () => [
-      [WidgetAttrs.type, { type: 'stateValue', value: 'radio' }],
+      [WidgetAttrs.type, WidgetStateValue.of('radio')],
     ],
-  }
+  })
   
   // hoverable AND hover
-  export const hoverableHover: WidgetMultiStateTransformer = {
-    state: `hoverableHover -> @media ${hoverableMedia} & :hover`,
-    type: 'state', isAtomic: false,
+  export const hoverableHover = WidgetMultiStateTransformer.of({
+    title: `hoverableHover -> @media ${hoverableMedia} & :hover`,
     transform: () => [[WidgetMedias.hoverable, WidgetPseudos.hover]],
-  }
+  })
   
   // hover OR focusVisible
-  export const inFocus: WidgetMultiStateTransformer = {
-    state: 'inFocus -> hoverableHover | :focus-visible',
-    type: 'state', isAtomic: false,
+  export const inFocus = WidgetMultiStateTransformer.of({
+    title: 'inFocus -> hoverableHover | :focus-visible',
     transform: () => [
       ...WidgetComplexTransformers.hoverableHover.transform(),
       [WidgetPseudos.focusVisible],
     ],
-  }
+  })
   
   // width + height
-  export const size: WidgetMultiPropTransformer = {
-    prop: 'size -> width & height',
-    type: 'prop', isAtomic: false,
+  export const size = WidgetMultiPropTransformer.of({
+    title: 'size -> width & height',
     transform: (value: StyleValue) => [
-      [WidgetProps.width, { type: 'propValue', value }],
-      [WidgetProps.height, { type: 'propValue', value }],
+      [WidgetProps.width, WidgetPropValue.of(value)],
+      [WidgetProps.height, WidgetPropValue.of(value)],
     ],
-  }
+  })
   
-  export const abs: WidgetMultiPropTransformer = {
-    prop: 'abs -> top & right & bottom & left',
-    type: 'prop', isAtomic: false,
+  export const abs = WidgetMultiPropTransformer.of({
+    title: 'abs -> top & right & bottom & left',
     transform: (value: StyleValue) => [
-      [WidgetProps.top, { type: 'propValue', value }],
-      [WidgetProps.right, { type: 'propValue', value }],
-      [WidgetProps.bottom, { type: 'propValue', value }],
-      [WidgetProps.left, { type: 'propValue', value }],
+      [WidgetProps.top, WidgetPropValue.of(value)],
+      [WidgetProps.right, WidgetPropValue.of(value)],
+      [WidgetProps.bottom, WidgetPropValue.of(value)],
+      [WidgetProps.left, WidgetPropValue.of(value)],
     ],
-  }
-  export const absH: WidgetMultiPropTransformer = {
-    prop: 'absH -> right & left',
-    type: 'prop', isAtomic: false,
+  })
+  export const absH = WidgetMultiPropTransformer.of({
+    title: 'absH -> right & left',
     transform: (value: StyleValue) => [
-      [WidgetProps.right, { type: 'propValue', value }],
-      [WidgetProps.left, { type: 'propValue', value }],
+      [WidgetProps.right, WidgetPropValue.of(value)],
+      [WidgetProps.left, WidgetPropValue.of(value)],
     ],
-  }
-  export const absV: WidgetMultiPropTransformer = {
-    prop: 'absV -> top & bottom ',
-    type: 'prop', isAtomic: false,
+  })
+  export const absV = WidgetMultiPropTransformer.of({
+    title: 'absV -> top & bottom ',
     transform: (value: StyleValue) => [
-      [WidgetProps.top, { type: 'propValue', value }],
-      [WidgetProps.bottom, { type: 'propValue', value }],
+      [WidgetProps.top, WidgetPropValue.of(value)],
+      [WidgetProps.bottom, WidgetPropValue.of(value)],
     ],
-  }
+  })
   
-  export const ph: WidgetMultiPropTransformer = {
-    prop: 'ph -> padding-left & padding-right',
-    type: 'prop', isAtomic: false,
+  export const ph = WidgetMultiPropTransformer.of({
+    title: 'ph -> padding-left & padding-right',
     transform: (value: StyleValue) => [
-      [WidgetProps.paddingRight, { type: 'propValue', value }],
-      [WidgetProps.paddingLeft, { type: 'propValue', value }],
+      [WidgetProps.paddingRight, WidgetPropValue.of(value)],
+      [WidgetProps.paddingLeft, WidgetPropValue.of(value)],
     ],
-  }
-  export const pv: WidgetMultiPropTransformer = {
-    prop: 'pv -> padding-top & padding-bottom ',
-    type: 'prop', isAtomic: false,
+  })
+  export const pv = WidgetMultiPropTransformer.of({
+    title: 'pv -> padding-top & padding-bottom ',
     transform: (value: StyleValue) => [
-      [WidgetProps.paddingTop, { type: 'propValue', value }],
-      [WidgetProps.paddingBottom, { type: 'propValue', value }],
+      [WidgetProps.paddingTop, WidgetPropValue.of(value)],
+      [WidgetProps.paddingBottom, WidgetPropValue.of(value)],
     ],
-  }
+  })
 }
 
 

@@ -59,20 +59,20 @@ export namespace WidgetStyle6Test {
   
   
   const radioWidgetState = WidgetMultiAnyTransformer.of({
-    name: 'widgetHover',
+    title: 'widgetHover',
     transform: () => [[elemInput, CommonStates.radio]],
   })
   const typeWidgetState =  WidgetMultiAnyTransformer.of({
-    name: 'widgetType',
+    title: 'widgetType',
     values: CommonStates.type.values,
     transform: () => [[elemInput, CommonStates.type]],
   })
   const hoverWidgetState = WidgetMultiAnyTransformer.of({
-    name: 'widgetHover',
+    title: 'widgetHover',
     transform: () => [[elemFrame, CommonStates.hover]],
   })
   const inFocusWidgetState = WidgetMultiAnyTransformer.of({
-    name: 'widgetHover',
+    title: 'widgetHover',
     transform: () => [[elemFrame, CommonStates.hover], [elemInput, CommonStates.focusVisible]],
   })
   

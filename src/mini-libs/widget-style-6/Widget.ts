@@ -122,9 +122,8 @@ export const CommonStates = {
 
 
 
-export class Widget<
-  const out Es extends Record<string, WidgetElem> = any
-> {
+export class Widget<const out Es extends Record<string, WidgetElem> = any> {
+  
   constructor(
     readonly rootElem: WidgetElem,
     readonly elems: Es,
@@ -133,15 +132,13 @@ export class Widget<
     readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   ) { }
   
-  static of<
-    const Es extends Record<string, WidgetElem> = any
-  >(props: {
+  static of<const Es extends Record<string, WidgetElem> = any>(params: {
     rootElem: WidgetElem,
     elems: Es,
     states?: RecordRo<string, WidgetMultiAnyTransformer> | undefined,
     props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   }): Widget<Es> {
-    return new Widget(props.rootElem, props.elems, props.states, props.props)
+    return new Widget(params.rootElem, params.elems, params.states, params.props)
   }
   
   get es() { return this.elems }
@@ -155,10 +152,7 @@ export class Widget<
 
 
 
-export const transformWidgetStyle = (
-  widget: Widget,
-  style: WidgetStyle,
-): string => {
+export const transformWidgetStyle = (widget: Widget, style: WidgetStyle): string => {
   const css = transform6(transform5(transform4(transform3(transform2(transform1(
     style,
     [
