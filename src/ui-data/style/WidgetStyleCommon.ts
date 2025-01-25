@@ -1,5 +1,4 @@
-import { WidgetStyle } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-
+import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
 export namespace WidgetStyleCommon {
@@ -9,7 +8,7 @@ export namespace WidgetStyleCommon {
   export const fixed: WidgetStyle = { pos: 'fixed', a: 0 }
   export const fixedTop: WidgetStyle = { pos: 'fixed', at: 0, ah: 0 }
   export const fixedBottom: WidgetStyle = { pos: 'fixed', ab: 0, ah: 0 }
-  export const round: WidgetStyle = { borderRadius: '999999px' }
+  export const round: WidgetStyle = { r: '999999px' }
   
   
   export const row: WidgetStyle = { display: 'flex', flexFlow: 'row nowrap' }
@@ -19,7 +18,7 @@ export namespace WidgetStyleCommon {
   
   export const noPointer: WidgetStyle = { pointerEvents: 'none' }
   export const noBorderOutlineBoxShadow: WidgetStyle = {
-    border: null,
+    bd: null,
     outline: null,
     boxShadow: null,
   }

@@ -1,6 +1,7 @@
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/AppWidgetStyle.ts'
+import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
-  WidgetElem, WidgetProp, WidgetStyle,
+  WidgetElem, WidgetProp,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
@@ -14,20 +15,24 @@ export namespace RippleS6 {
   
   export type RippleMode = 'center' | 'pointer'
   
-  namespace WidgetElems {
-    export const frame = WidgetElem.of({
+  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+    const frame = WidgetElem.of({
       className: 'rruiRippleFrame',
+      ...up,
     })
-    export const ripple = WidgetElem.of({
+    const ripple = WidgetElem.of({
       className: 'rruiRippleRipple',
-      upSelector: '>', upElem: frame,
+      upElem: frame, upSelector: '>',
       props: {
-        color: WidgetProp.ofName('--color'),
+        color: AdditionalProps.varColor,
         // values: 'center' | 'pointer'
         mode: WidgetProp.ofName('--mode'),
       },
     })
+    return { frame, ripple } as const
   }
+  
+  const WidgetElems = buildWidgetElems()
   
   export const W = Widget.of({ rootElem: WidgetElems.frame, elems: WidgetElems })
   
@@ -38,7 +43,7 @@ export namespace RippleS6 {
       frame: {
         ...abs,
         pointerEvents: 'none',
-        borderRadius: 'inherit',
+        r: 'inherit',
         overflow: 'hidden',
       },
       ripple: {
@@ -49,11 +54,11 @@ export namespace RippleS6 {
          closest-side circle at center,
          transparent, var(--bg-color) 90%, transparent
          );*/
-        rippleColor: '#ffffff66',
-        rippleMode: 'pointer',
+        color: '#ffffff66',
+        mode: 'pointer',
         // TODO Style bgColor: '@rippleColor'
         // TODO Style bgColor: 'varRippleColor'
-        bgColor: `var(${W.elems.ripple.props!.color.prop})`,
+        bgColor: `var(${W.els.ripple.ps!.color.n})`,
       },
     }
     

@@ -1,5 +1,4 @@
 import {
-  WidgetStyle,
   transform1, WidgetMultiAnyTransformer, WidgetElem, WidgetProp,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
@@ -8,10 +7,12 @@ import { transform4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTr
 import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import {
-  CommonProps,
-  CommonStates,
   transformWidgetStyle, Widget,
 } from 'src/mini-libs/widget-style-6/Widget.ts'
+import {
+  CommonProps, CommonStates,
+} from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
 
@@ -42,12 +43,12 @@ export namespace WidgetStyle6Test {
   })
   const elemInput = WidgetElem.of({
     className: 'rruiInput',
-    upSelector: '>', upElem: elemFrame,
+    upElem: elemFrame, upSelector: '>',
     states: CommonStates,
   })
   const elemBox = WidgetElem.of({
     className: 'rruiBox',
-    upSelector: '>', upElem: elemFrame,
+    upElem: elemFrame, upSelector: '>',
     states: CommonStates,
   })
   
@@ -88,6 +89,11 @@ export namespace WidgetStyle6Test {
   export const inputWidgetStyle: WidgetStyle = {
     boxAbs: 0,
     input: { '-webkit-tap-highlight-color': 'transparent' },
+    box: {
+      after: {
+        bg: 'orange',
+      },
+    },
     hoverTypeRadioBg: 'white',
     frameHoverAfterBg: 'aqua',
     frameTypeCheckboxBoxSz: '40%',

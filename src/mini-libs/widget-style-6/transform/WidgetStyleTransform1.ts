@@ -1,6 +1,7 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { StyleValue, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
@@ -12,13 +13,6 @@ import isArray = TypeU.isArray
 
 
 
-export type StyleVal =
-  | string // pass as is if there are no special values or transformations
-  | number // transform to fractions or pixels
-  | null // set empty value (background: none, color: transparent)
-  | undefined // remove value definition
-
-export type StyleValue = StyleVal /* | StyleVal[] */
 
 
 export type TransformPropValue = (propValue: StyleValue) => StyleValue
@@ -280,6 +274,10 @@ export namespace WidgetProps {
     if (value === null) return 'none'
     return value
   }
+  export const transformNullToTransparent = (value: StyleValue) => {
+    if (value === null) return 'transparent'
+    return value
+  }
   
   export const position = WidgetProp.ofName('position', value => {
     if (value === 'abs') return 'absolute'
@@ -306,6 +304,7 @@ export namespace WidgetProps {
   export const paddingLeft = WidgetProp.ofName('padding-left', transformLenValue)
   export const gap = WidgetProp.ofName('gap', transformLenValue)
   
+  export const color = WidgetProp.ofName('color', transformNullToTransparent)
   export const background = WidgetProp.ofName('background', transformNullToNone)
   export const backgroundColor = WidgetProp.ofName('background-color', transformNullToNone)
   export const border = WidgetProp.ofName('border', transformNullToNone)
@@ -396,8 +395,6 @@ export namespace WidgetComplexTransformers {
 
 
 
-export type WidgetStyle = { [selectorProp: string]: StyleValue | WidgetStyle }
-
 export type EntitiesRecord = Record<string, WidgetTransformer>
 export type EntitiesRecordArray = Array<EntitiesRecord | undefined>
 
@@ -413,7 +410,7 @@ export function transform1(
   style: WidgetStyle,
   baseContextStack: EntitiesRecordArray,
   dataList: WidgetTransformer[][] = [],
-  baseData: WidgetTransformer[] = []
+  baseData: WidgetTransformer[] = [],
 ): WidgetTransformer[][] {
   for (const [selectProp, value] of Object.entries(style)) {
     const contextStack = [...baseContextStack]
@@ -446,7 +443,7 @@ export function transform1(
               contextStack[ctxElemPropI] = entity.props
             }
             // found elem
-            if (entity.type === 'elem') {
+            else if (entity.type === 'elem') {
               data.push(entity)
               contextStack[ctxStatesI] = entity.states
               contextStack[ctxStateValuesI] = undefined

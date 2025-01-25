@@ -1,3 +1,4 @@
+import { ObjectU } from '@util/common/ObjectU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import { CssAttrs } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
@@ -8,30 +9,49 @@ import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
 import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
 import {
   WidgetElem,
-  WidgetMultiAnyTransformer, WidgetStyle,
+  WidgetMultiAnyTransformer, WidgetMultiPropTransformer,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-import { CommonStates, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import {
+  AdditionalProps,
+  CommonStates,
+} from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import capitalize = StringU.capitalize
 import resetButton = WidgetStyleCommon.resetButton
 import row = WidgetStyleCommon.row
 import abs = WidgetStyleCommon.abs
 import Txt = WidgetStyleCommon.Txt
+import ObjectPrefixKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
 
 
 export namespace ButtonS6 {
   
-  namespace WidgetElems {
-    export const button = WidgetElem.of({
+  
+  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+    const button = WidgetElem.of({
       className: 'rruiButton',
+      ...up,
       states: CommonStates,
     })
-    export const border = WidgetElem.of({
+    const border = WidgetElem.of({
       className: 'rruiBorder',
+      upElem: button, upSelector: '>',
     })
+    const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
+    return {
+      button,
+      border,
+      ...ObjectPrefixKeys('ripple', rippleElems),
+    } as const
   }
+  
+  const WidgetElems = buildWidgetElems()
   namespace WidgetStates {
     // TODO Style - simplify
     export const inFocus = WidgetMultiAnyTransformer.of({
@@ -44,17 +64,21 @@ export namespace ButtonS6 {
       transform: () => [[WidgetElems.button, CommonStates.error]],
     })
   }
+  namespace WidgetProps {
+    export const color = AdditionalProps.colorAndVarColor
+  }
   
   export const W = Widget.of({
     rootElem: WidgetElems.button,
     elems: WidgetElems,
     states: WidgetStates,
+    props: WidgetProps,
   })
   
   
   export namespace ST {
     
-    export const base = {
+    export const base: WidgetStyle = {
       button: {
         ...resetButton,
         pos: 'rel',
@@ -68,92 +92,68 @@ export namespace ButtonS6 {
       border: {
         ...abs,
         pointerEvents: 'none',
-        borderRadius: 'inherit',
+        r: 'inherit',
       },
-      ripple: { /* ripple base */ },
-      
-      disabled: {
-        button: {
-          cursor: 'not-allowed',
-        },
-      },
-    } satisfies WidgetStyle
+      //ripple: RippleS6.ST.base,
+      rippleFrame: RippleS6.ST.base.frame,
+      rippleRipple: RippleS6.ST.base.ripple,
+    }
     
     export namespace Filled {
+      
       export namespace Rect {
+        
         // type: filled, shape: rect, size: big
-        export const big: WidgetStyle = {
+        export const baseBig: WidgetStyle = {
           ...base,
           // TODO Style - prevent style rewriting when add after 'base' - make array of objects
           button: { ...base.button,
             w: 'full',
             hMin: 50,
             r: 15,
+            // TODO Style - p: [8, 16]
             pv: 8, ph: 16,
             ...Txt.large2,
           },
-          border: { ...base.button,
-            border: null,
+        }
+        
+        export const addColorMain: AppWidgetStyle = t => ({
+          buttonBgColor: t.buttonMain.bg[0],
+          buttonColor: t.buttonMain.ct[0],
+          rippleRippleColor: t.ripple.ct,
+          inFocus: {
+            buttonBgColor: t.buttonMain.bgFocus[0],
           },
+          disabled: {
+            buttonBgColor: t.elementDisabled.bg[0],
+            buttonColor: t.elementDisabled.ct[0],
+          },
+        })
+        
+        export namespace Big {
+          export const main: AppWidgetStyle = t => ({
+            ...baseBig,
+            ...addColorMain(t),
+          })
+        }
+        
+      }
+      
+    }
+    
+  }
+  
+  
+  
+  export namespace S {
+    export namespace Filled {
+      export namespace Rect {
+        export namespace Big {
+          export const main = (t: AppTheme.Theme) => W.t(ST.Filled.Rect.Big.main(t))
         }
       }
     }
   }
-  
-  
-  
-  
-  
-  export const buildButtonWidget = (rootConfig?: {
-    widget: CssWidget<any>,
-    upElementName: string,
-    upSelector: string,
-    widgetName: string,
-  }): CssWidget<any> => {
-    
-    const button = new CssElem('rruibutton', {
-      normal: CssPseudos.empty,
-      hover: CssPseudos.hover,
-      active: CssPseudos.active,
-      focus: CssPseudos.focus,
-      focusVisible: CssPseudos.focusVisible,
-      readOnly: CssPseudos.readOnly,
-      disabled: CssPseudos.disabled,
-      error: CssAttrs.dataError,
-    }, {
-      color: CssProps.color,
-    })
-    const border = new CssElem('rruiBorder', { }, { })
-    const ripple = new CssElem(RippleStyle.El0.frameClassName, { }, {
-      mode: new CssPropEnum(RippleStyle.Prop.mode, ['center', 'cursor']),
-      color: new CssProp(RippleStyle.Prop.color),
-    })
-    
-    const withPrefix = (str: string) => {
-      if (!rootConfig?.widgetName) return str
-      return `${rootConfig.widgetName}${capitalize(str)}`
-    }
-    
-    const buttonWidget = (
-      rootConfig
-        ? rootConfig.widget.add(
-          rootConfig.upElementName,
-          rootConfig.upSelector,
-          // @ts-ignore
-          withPrefix('button'),
-          button,
-        )
-        : CssWidget.ofRoot('button', button)
-    )
-      // @ts-ignore
-      .add(withPrefix('button'), '>', withPrefix('border'), border)
-      // @ts-ignore
-      .add(withPrefix('border'), '>', withPrefix('ripple'), ripple)
-    
-    return buttonWidget
-  }
-  
-  export const W0 = buildButtonWidget()
   
   
 }

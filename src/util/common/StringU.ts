@@ -9,11 +9,15 @@ export namespace StringU {
   export const uncapitalize = (str: string) => str.length ? str[0].toLowerCase() + str.slice(1) : str
   
   export const camelCaseToKebabCase = (str: string) => {
-    const pattern = /(\p{Lu})|(\d+)/gu
+    const pattern = /\p{Lu}|\d+/gu
     // '$&' - заменяется на найденную подстроку
     str = str.replace(pattern, '-$&').toLowerCase()
     return str
   }
+  
+  // 'placeSubType0123aHTMLanguage'.split(/(?<=\p{Ll}|\p{Lu})(?=\p{Lu}|\d+)/u) =>
+  // ['place', 'Sub', 'Type', '0123a', 'H', 'T', 'M', 'Language']
+  export const camelCaseToWords = (str: string) => str.split(/(?<=\p{Ll}|\p{Lu})(?=\p{Lu}|\d+)/u)
   
   
   /** Обрезает у строки хвост {tail} с начала и с конца */

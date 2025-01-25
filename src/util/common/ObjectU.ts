@@ -1,3 +1,4 @@
+import { StringU } from 'src/util/common/StringU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import anyval = TypeU.anyval
 import WriteablePartial = TypeU.WriteablePartial
@@ -11,6 +12,8 @@ export namespace ObjectU {
   
   
   // can also copy class instance
+  import capitalize = StringU.capitalize
+  
   export function copy<T extends object>(
     orig: T,
     update?: WriteablePartial<T>,
@@ -41,10 +44,7 @@ export namespace ObjectU {
   /**
    * Встроенная функция {@linkcode Object.keys} с улучшенной типизацией
    */
-  export function ObjectKeys
-  <O extends anyval>
-  (object: O)
-  : ObjectKeysArrType<O & object> {
+  export function ObjectKeys<O extends anyval>(object: O): ObjectKeysArrType<O & object> {
     if (!isobject(object)) return []
     // The Object.keys() static method returns an array of a given object's own enumerable string-keyed property names.
     return Object.keys(object) as ObjectKeysArrType<O & object>
@@ -91,10 +91,7 @@ export namespace ObjectU {
   /**
    * Встроенная функция {@linkcode Object.entries} с улучшенной типизацией
    */
-  export function ObjectEntries
-  <O extends anyval>
-  (object: O)
-  : ObjectEntriesArrType<O & object> {
+  export function ObjectEntries<O extends anyval>(object: O): ObjectEntriesArrType<O & object> {
     if (!isobject(object)) return []
     return Object.entries(object) as ObjectEntriesArrType<O & object>
   }
@@ -102,13 +99,13 @@ export namespace ObjectU {
   
   
   
-  export function ObjectMap
-  <O1 extends object, O2 extends object>
-  (
+  export function ObjectMap<
+    O1 extends object,
+    O2 extends object
+  >(
     object: O1,
     mapper: (entry: ObjectEntriesType<O1>, object: O1) => ObjectEntriesType<O2>
-  )
-  : O2 {
+  ): O2 {
     const object2 = { } as O2
     ObjectEntries(object).forEach(entry => {
       const entry2 = mapper(entry, object)
@@ -117,6 +114,17 @@ export namespace ObjectU {
     return object2
   }
   
+  
+  
+  export function ObjectPrefixCapitalizeKeys<
+    const Pref extends string,
+    const Es extends object
+  >(
+    prefix: Pref,
+    elems: Es
+  ): { [Prop in keyof Es as `${Pref}${Capitalize<string & Prop>}`]: Es[Prop] } {
+    return ObjectMap(elems, ([prop, value]) => [`${prefix}${capitalize(prop)}`, value] as any)
+  }
   
   
   

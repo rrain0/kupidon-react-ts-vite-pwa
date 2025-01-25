@@ -2,6 +2,7 @@ import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -39,7 +40,7 @@ const Button = React.memo(
             <button // Button
               ref={elemRef}
               {...{ [ButtonS.W.s.error.s.name]: trueOrUndef(hasError) }}
-              className={clsx(className, ButtonS.W.e.button.e.name)}
+              className={clsx(className, ButtonS.W.e.button.e.name, ButtonS6.W.els.button.n)}
               type="button"
               {...restProps}
               {...combineEvHandlersRecords(rippleProps.target, restProps)}
@@ -48,7 +49,7 @@ const Button = React.memo(
               {children}
               
               <div // Border
-                className={ButtonS.W.e.border.e.name}
+                className={clsx(ButtonS.W.e.border.e.name, ButtonS6.W.els.border.n)}
               >
                 <Ripple
                   {...rippleProps.ripple}
