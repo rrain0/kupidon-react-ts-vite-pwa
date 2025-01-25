@@ -93,9 +93,9 @@ export const LightProps: ThemeProps = {
   },
   
   ripple: {
-    ct:                '#ffffff66',
-    ctOnTransparent:   '#66666666',
-    ctOnTransparent2:  '#66666688',
+    ct:                '#ffffff55',
+    ctOnTransparent:   '#66666655',
+    ctOnTransparent2:  '#66666677',
   },
   
   

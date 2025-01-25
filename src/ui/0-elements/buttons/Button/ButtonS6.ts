@@ -94,10 +94,7 @@ export namespace ButtonS6 {
         pointerEvents: 'none',
         r: 'inherit',
       },
-      // TODO Style
-      //ripple: RippleS6.ST.base,
-      rippleFrame: RippleS6.ST.base.frame,
-      rippleRipple: RippleS6.ST.base.ripple,
+      ripple: RippleS6.ST.base,
     }
     
     export namespace Filled {
@@ -109,11 +106,8 @@ export namespace ButtonS6 {
           ...base,
           // TODO Style - prevent style rewriting when add after 'base' - make array of objects
           button: { ...base.button,
-            w: 'full',
-            hMin: 50,
-            r: 15,
             // TODO Style - p: [8, 16]
-            pv: 8, ph: 16,
+            w: 'full', hMin: 50, r: 15, pv: 8, ph: 16,
             ...Txt.large2,
           },
         }

@@ -9,6 +9,7 @@ import isnumber = TypeU.isnumber
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 import RecordRo = TypeU.RecordRo
 import isArray = TypeU.isArray
+import capitalize = StringU.capitalize
 
 
 
@@ -411,11 +412,13 @@ export function transform1(
   baseContextStack: EntitiesRecordArray,
   dataList: WidgetTransformer[][] = [],
   baseData: WidgetTransformer[] = [],
+  baseSelectProp = ''
 ): WidgetTransformer[][] {
   for (const [selectProp, value] of Object.entries(style)) {
     const contextStack = [...baseContextStack]
     const data = [...baseData]
     let selP = selectProp
+    if (baseSelectProp) selP = baseSelectProp + capitalize(selectProp)
     
     if (selP) pLoop: while (true) {
       if (!selP) {
@@ -486,8 +489,12 @@ export function transform1(
       // If not found then it is unregistered property
       {
         //throw new Error(`Unknown property: ${selP}`)
-        if (isobject(value)) {
+        /* if (isobject(value)) {
           throw new Error(`Found unregistered property '${selP}' but value is object: ${value}`)
+        } */
+        if (isobject(value)) {
+          dataList = transform1(value, contextStack, dataList, data, selP)
+          break
         }
         const pKebabized = camelCaseToKebabCase(selP)
         data.push(WidgetProp.ofName(pKebabized))
