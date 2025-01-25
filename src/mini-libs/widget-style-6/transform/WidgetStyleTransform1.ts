@@ -18,7 +18,7 @@ export type StyleVal =
   | null // set empty value (background: none, color: transparent)
   | undefined // remove value definition
 
-export type StyleValue = StyleVal | StyleVal[]
+export type StyleValue = StyleVal /* | StyleVal[] */
 
 
 export type TransformPropValue = (propValue: StyleValue) => StyleValue
@@ -245,10 +245,10 @@ export namespace WidgetProps {
     if (isnumber(value)) value = `${value}px`
     return value
   }
-  export const transformMultiLenValue = (value: StyleValue) => {
+  /* export const transformMultiLenValue = (value: StyleValue) => {
     if (isArray(value)) return value.map(v => transformLenValue(v)).join(' ')
     return transformLenValue(value)
-  }
+  } */
   export const transformNullToNone = (value: StyleValue) => {
     if (value === null) return 'none'
     return value
@@ -271,9 +271,13 @@ export namespace WidgetProps {
   export const minHeight = WidgetProp.ofName('min-height', transformLenValue)
   export const maxWidth = WidgetProp.ofName('max-width', transformLenValue)
   export const maxHeight = WidgetProp.ofName('max-height', transformLenValue)
-  export const margin = WidgetProp.ofName('margin', transformMultiLenValue)
-  export const padding = WidgetProp.ofName('padding', transformMultiLenValue)
-  export const gap = WidgetProp.ofName('gap', transformMultiLenValue)
+  export const margin = WidgetProp.ofName('margin', transformLenValue)
+  export const padding = WidgetProp.ofName('padding', transformLenValue)
+  export const paddingTop = WidgetProp.ofName('padding-top', transformLenValue)
+  export const paddingRight = WidgetProp.ofName('padding-right', transformLenValue)
+  export const paddingBottom = WidgetProp.ofName('padding-bottom', transformLenValue)
+  export const paddingLeft = WidgetProp.ofName('padding-left', transformLenValue)
+  export const gap = WidgetProp.ofName('gap', transformLenValue)
   
   export const background = WidgetProp.ofName('background', transformNullToNone)
   export const backgroundColor = WidgetProp.ofName('background-color', transformNullToNone)
@@ -347,6 +351,23 @@ export namespace WidgetComplexTransformers {
       [WidgetProps.bottom, { type: 'propValue', value }],
     ],
   }
+  
+  export const ph: WidgetMultiPropTransformer = {
+    prop: 'ph -> padding-left & padding-right',
+    type: 'prop', isAtomic: false,
+    transform: (value: StyleValue) => [
+      [WidgetProps.paddingRight, { type: 'propValue', value }],
+      [WidgetProps.paddingLeft, { type: 'propValue', value }],
+    ],
+  }
+  export const pv: WidgetMultiPropTransformer = {
+    prop: 'pv -> padding-top & padding-bottom ',
+    type: 'prop', isAtomic: false,
+    transform: (value: StyleValue) => [
+      [WidgetProps.paddingTop, { type: 'propValue', value }],
+      [WidgetProps.paddingBottom, { type: 'propValue', value }],
+    ],
+  }
 }
 
 
@@ -383,7 +404,7 @@ export function transform1(
     
     if (selP) pLoop: while (true) {
       if (!selP) {
-        if (isobject(value) && !isArray(value)) {
+        if (isobject(value)) {
           dataList = transform1(value, contextStack, dataList, data)
         }
         break
@@ -434,7 +455,7 @@ export function transform1(
             }
             // found prop - must be last in selector
             else if (entity.type === 'prop') {
-              if (!selP && (!isobject(value) || isArray(value))) {
+              if (!selP && !isobject(value)) {
                 data.push(entity)
                 data.push({ value, type: 'propValue' })
                 dataList.push(data)
@@ -450,7 +471,7 @@ export function transform1(
       // If not found then it is unregistered property
       {
         //throw new Error(`Unknown property: ${selP}`)
-        if (isobject(value) && !isArray(value)) {
+        if (isobject(value)) {
           throw new Error(`Found unregistered property '${selP}' but value is object: ${value}`)
         }
         const pKebabized = camelCaseToKebabCase(selP)

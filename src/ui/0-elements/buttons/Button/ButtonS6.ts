@@ -89,7 +89,7 @@ export namespace ButtonS6 {
             w: 'full',
             hMin: 50,
             r: 15,
-            p: [8, 16],
+            pv: 8, ph: 16,
             ...Txt.large2,
           },
           border: { ...base.button,

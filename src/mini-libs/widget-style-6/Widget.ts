@@ -38,11 +38,22 @@ export const CommonProps = (() => {
     sz: WidgetComplexTransformers.size,
     
     margin: WidgetProps.margin,
-    padding: WidgetProps.padding,
-    gap: WidgetProps.gap,
-    
     m: WidgetProps.margin,
+    
+    padding: WidgetProps.padding,
+    paddingTop: WidgetProps.paddingTop,
+    paddingRight: WidgetProps.paddingRight,
+    paddingBottom: WidgetProps.paddingBottom,
+    paddingLeft: WidgetProps.paddingLeft,
     p: WidgetProps.padding,
+    pt: WidgetProps.paddingTop,
+    pr: WidgetProps.paddingRight,
+    pb: WidgetProps.paddingBottom,
+    pl: WidgetProps.paddingLeft,
+    ph: WidgetComplexTransformers.ph,
+    pv: WidgetComplexTransformers.pv,
+    
+    gap: WidgetProps.gap,
     g: WidgetProps.gap,
     
     position: WidgetProps.position,
