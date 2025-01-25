@@ -2,7 +2,7 @@ import {
   WidgetAttrs,
   WidgetComplexTransformers, WidgetMultiPropTransformer, WidgetProp,
   WidgetProps, WidgetPropValue, WidgetPseudoElements, WidgetPseudos,
-} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 
 
 export const CommonProps = (() => {

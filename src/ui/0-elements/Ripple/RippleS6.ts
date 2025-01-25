@@ -2,7 +2,7 @@ import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntiti
 import { AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   WidgetElem, WidgetProp,
-} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'

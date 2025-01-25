@@ -1,127 +1,84 @@
-import { WidgetElem } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-import { Transformed3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
+import {
+  WidgetAtomicTransformer,
+  WidgetAttr, WidgetStateValue, WidgetElem,
+  WidgetMedia,
+  WidgetProp, WidgetPropValue, WidgetPseudo, WidgetPseudoElem,
+} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 
 
 
 
-
-// Media selector
-// '@media (hover: hover) and (pointer: fine)'
-const getMediaSelector = (media: string) => media && `@media ${media}`
-// Element selector
-// '.elemClass'
-const getElemSelector = (elemName: string): string => elemName && `.${elemName}`
-// Pseudo element selector
-// '::elem'
-const getPseudoElemSelector = (elemName: string): string => elemName && `::${elemName}`
-// Attr selector
-// '[direction=vertical]'
-const getAttrSelector = (attr: string, value = '') => {
-  const nameValue = (() => {
-    const name = attr
-    if (!name) return ''
-    if (!value) return name
-    return `${name}=${value}`
-  })()
-  
-  return nameValue && `[${nameValue}]`
+export interface StatePseudoElemTf4 {
+  type: 'pseudoElem'
+  pseudoElem: WidgetPseudoElem
 }
-// Pseudo class selector
-// ':hover'
-const getPseudoSelector = (pseudo: string) => pseudo && `:${pseudo}`
-// Prop-value selector
-// 'background: black;'
-const getPropValueSelector = (prop: string, value: string = '') => value && `${prop}: ${value};`
-
-
-
-const getWidgetElemSelector = (elem: WidgetElem): string => {
-  let sel = getElemSelector(elem.className)
-  if (elem.upElem) sel = getWidgetElemSelector(elem.upElem) + (elem.upSelector ?? '') + sel
-  return sel
+export interface StatePseudoTf4 {
+  type: 'pseudo'
+  pseudo: WidgetPseudo
 }
-const getWidgetElemSelectorUnderRoot = (elem: WidgetElem): string => {
-  let sel = getElemSelector(elem.className)
-  if (elem.upElem) sel = getWidgetElemSelectorUnderRoot(elem.upElem) + (elem.upSelector ?? '') + sel
-  return sel
+export interface StateAttrValueTf4 {
+  type: 'attr'
+  attr: WidgetAttr
+  value?: WidgetStateValue
 }
-const getRootAndElemSelector = (elem: WidgetElem): [root: string, elemSel: string] => {
-  const thisSel = getElemSelector(elem.className)
-  let root = ''
-  let sel = ''
-  if (elem.upElem) {
-    [root, sel] = getRootAndElemSelector(elem.upElem)
-    sel += (elem.upSelector ?? '') + thisSel
-  }
-  else root = thisSel
-  return [root, sel]
+export interface ElemStateTf4 {
+  type: 'elem'
+  elem: WidgetElem | undefined
+  states: (StatePseudoElemTf4 | StatePseudoTf4 | StateAttrValueTf4)[]
+}
+
+export interface PropValueTf4 {
+  type: 'prop'
+  prop?: WidgetProp
+  value?: WidgetPropValue
 }
 
 
-
-export type SelectPropValueTf4 = {
-  selector: string[]
-  propValue: string
+export type Transformed4 = {
+  medias: WidgetMedia[]
+  elems: ElemStateTf4[]
+  prop: PropValueTf4
 }
-export function transform4(dataList: Transformed3[]): SelectPropValueTf4[] {
-  const selectorProp = dataList.map(data => {
-    
-    const selector = data.medias.map(m => getMediaSelector(m.media))
-    
-    
-    const elemsData = data.elems.map(elem => {
-      const stateSel = elem.states.map(s => {
-        if (s.type === 'pseudoElem') {
-          return getPseudoElemSelector(s.pseudoElem.pseudoElem)
-        }
-        if (s.type === 'pseudo') {
-          return getPseudoSelector(s.pseudo.pseudo)
-        }
-        else if (s.type === 'attr') {
-          return getAttrSelector(s.attr.attr, s?.value?.value)
-        }
-        throw new Error(`Unknown element state: ${s}`)
-      }).join('')
-      
-      const el = elem.elem
-      if (el) {
-        const [root, sel] = getRootAndElemSelector(el)
-        return { root, sel, stateSel }
-      }
-      return { root: '', sel: '', stateSel }
-    })
-    
-    
-    let elemsStatesSel = ''
-    elemsData.forEach((elem, i, arr) => {
-      if (i === arr.length - 1) {
-        elemsStatesSel = `${elem.root}${elemsStatesSel}${elem.sel}${elem.stateSel}`
-      }
-      else {
-        if (elem.sel && elem.stateSel) elemsStatesSel += `:has(${elem.sel}${elem.stateSel})`
-        else elemsStatesSel += elem.stateSel
-      }
-    })
-    // TODO Style - optional &
-    if (elemsStatesSel) elemsStatesSel = `&${elemsStatesSel}`
-    selector.push(elemsStatesSel)
-    
-    
-    const prop = data.prop.prop
-    const value = data.prop.value?.value
-    let propValue = ''
-    if (prop && value !== undefined) {
-      const p = prop.prop
-      const v = (prop.transformValue?.(value) ?? value) + ''
-      propValue = getPropValueSelector(p, v)
+
+export function transform4(dataList: WidgetAtomicTransformer[][]): Transformed4[] {
+  return dataList.map(data => {
+    const tf3: Transformed4 = {
+      medias: [],
+      elems: [],
+      prop: { type: 'prop' },
     }
-    
-    
-    return { selector, propValue } as SelectPropValueTf4
+    data.forEach(d => {
+      if (d.type === 'media') {
+        tf3.medias.push(d)
+      }
+      else if (d.type === 'elem') {
+        tf3.elems.push({ type: 'elem', elem: d, states: [] })
+      }
+      else if (d.type === 'pseudoElem') {
+        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
+        tf3.elems.at(-1)!.states.push({ type: 'pseudoElem', pseudoElem: d })
+      }
+      else if (d.type === 'pseudo') {
+        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
+        tf3.elems.at(-1)!.states.push({ type: 'pseudo', pseudo: d })
+      }
+      else if (d.type === 'attr') {
+        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
+        tf3.elems.at(-1)!.states.push({ type: 'attr', attr: d })
+      }
+      else if (d.type === 'prop') {
+        tf3.prop.prop = d
+      }
+      else if (d.type === 'stateValue') {
+        const lastState = tf3.elems.at(-1)?.states.at(-1)
+        if (lastState?.type === 'attr') lastState.value = d
+      }
+      else if (d.type === 'propValue') {
+        tf3.prop.value = d
+      }
+    })
+    return tf3
   })
-  return selectorProp
 }
-
-
 
 

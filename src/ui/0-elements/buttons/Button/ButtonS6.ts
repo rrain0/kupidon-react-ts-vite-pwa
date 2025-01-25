@@ -10,7 +10,7 @@ import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
 import {
   WidgetElem,
   WidgetMultiAnyTransformer, WidgetMultiPropTransformer,
-} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import {
   AdditionalProps,
@@ -79,8 +79,7 @@ export namespace ButtonS6 {
   export namespace ST {
     
     export const base: WidgetStyle = {
-      button: {
-        ...resetButton,
+      button: [resetButton, {
         pos: 'rel',
         ...row,
         alignItems: 'center',
@@ -88,7 +87,7 @@ export namespace ButtonS6 {
         overflowWrap: 'anywhere',
         overflow: 'hidden',
         transition: 'background linear 300ms',
-      },
+      }],
       border: {
         ...abs,
         pointerEvents: 'none',
@@ -102,15 +101,13 @@ export namespace ButtonS6 {
       export namespace Rect {
         
         // type: filled, shape: rect, size: big
-        export const baseBig: WidgetStyle = {
-          ...base,
-          // TODO Style - prevent style rewriting when add after 'base' - make array of objects
-          button: { ...base.button,
+        export const baseBig: WidgetStyle = [base, {
+          button: {
             // TODO Style - p: [8, 16]
             w: 'full', hMin: 50, r: 15, pv: 8, ph: 16,
             ...Txt.large2,
           },
-        }
+        }]
         
         export const addColorMain: AppWidgetStyle = t => ({
           buttonBgColor: t.buttonMain.bg[0],
@@ -126,10 +123,7 @@ export namespace ButtonS6 {
         })
         
         export namespace Big {
-          export const main: AppWidgetStyle = t => ({
-            ...baseBig,
-            ...addColorMain(t),
-          })
+          export const main: AppWidgetStyle = t => [baseBig, addColorMain(t)]
         }
         
       }

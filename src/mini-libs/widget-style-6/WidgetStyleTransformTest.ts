@@ -1,11 +1,15 @@
+import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
-  transform1, WidgetMultiAnyTransformer, WidgetElem, WidgetProp,
-} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-import { transform2 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
+  WidgetMultiAnyTransformer, WidgetElem, WidgetProp,
+} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import {
+  transform2,
+} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { transform3 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform3.ts'
 import { transform4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform4.ts'
 import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
+import { transform7 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform7.ts'
 import {
   transformWidgetStyle, Widget,
 } from 'src/mini-libs/widget-style-6/Widget.ts'
@@ -129,13 +133,13 @@ export namespace WidgetStyle6Test {
      console.timeEnd('transform')
      */
     
-    const transformed1 = transform1(
-      inputWidgetStyle,
-      [CommonProps, { ...WidgetStates, ...WidgetElements }, undefined, undefined, undefined]
-    )
+    const transformed1 = transform1(inputWidgetStyle)
     console.log('transformed1', transformed1)
     
-    const transformed2 = transform2(transformed1)
+    const transformed2 = transform2(
+      transformed1,
+      [CommonProps, { ...WidgetStates, ...WidgetElements }, undefined, undefined, undefined]
+    )
     console.log('transformed2', transformed2)
     
     const transformed3 = transform3(transformed2)
@@ -148,7 +152,10 @@ export namespace WidgetStyle6Test {
     console.log('transformed5', transformed5)
     
     const transformed6 = transform6(transformed5)
-    console.log('transformed6', '\n', transformed6)
+    console.log('transformed6', transformed6)
+    
+    const transformed7 = transform7(transformed6)
+    console.log('transformed7', '\n', transformed7)
   }
   
   

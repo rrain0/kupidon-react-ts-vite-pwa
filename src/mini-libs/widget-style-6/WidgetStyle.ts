@@ -10,9 +10,13 @@ export type StyleVal =
 export type StyleValue = StyleVal /* | StyleVal[] */
 
 
-//export type WidgetS = { [selectorProp: string]: StyleValue | WidgetS | WidgetS[] }
-//export type WidgetStyle = WidgetS | WidgetS[]
-export type WidgetStyle = { [selectorProp: string]: StyleValue | WidgetStyle }
+
+// export type WidgetS = { [selectorProp: string]: StyleValue | WidgetS | WidgetS[] }
+// export type WidgetStyle = WidgetS | WidgetStyle[]
+
+export type WidgetStyle =
+  | { [selectorProp: string]: StyleValue | WidgetStyle | WidgetStyle[] }
+  | WidgetStyle[]
 
 
 export type AppWidgetStyle = (theme: AppTheme.Theme) => WidgetStyle

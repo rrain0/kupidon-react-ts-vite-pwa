@@ -1,21 +1,26 @@
-import { SelectPropValueBatchTf5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { SelectPropValueTf5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 
 
 
 
 
-export const transform6 = (selectPropValueBatch: SelectPropValueBatchTf5[]): string => {
-  return selectPropValueBatch.map(batch => {
-    const propValues = batch.propValues.join('\n') + '\n'
-    
-    let selectPropValue = propValues
-    batch.selector.toReversed().forEach(sel => {
-      selectPropValue = `${sel} {\n${selectPropValue}}`
-    })
-    
-    return selectPropValue
-  }).join('\n')
+
+
+
+export type SelectPropValueBatchTf6 = { selector: string[], propValues: string[] }
+
+export const transform6 = (selectPropValue: SelectPropValueTf5[]): SelectPropValueBatchTf6[] => {
+  const batches: SelectPropValueBatchTf6[] = []
+  selectPropValue.forEach(selPropVal => {
+    const prevBatch = batches.at(-1)
+    if (prevBatch && ArrayU.eq(prevBatch.selector, selPropVal.selector)) prevBatch.propValues.push(selPropVal.propValue)
+    else batches.push({ selector: selPropVal.selector, propValues: [selPropVal.propValue] })
+  })
+  return batches
 }
+
+
 
 
 

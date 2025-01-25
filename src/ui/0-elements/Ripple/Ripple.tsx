@@ -1,7 +1,7 @@
 import { animated, useSpring, config, easings } from '@react-spring/web'
 import clsx from 'clsx'
 import React, { useMemo } from 'react'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { getViewProps } from 'src/util/view/ViewProps'
@@ -136,7 +136,6 @@ const Ripple = React.memo(
         <animated.div
           //displayName={'RippleRipple'}
           ref={rippleRef}
-          // TODO Style
           className={RippleS6.W.els.ripple.n}
           style={{
             ...rippleProps.dimens,

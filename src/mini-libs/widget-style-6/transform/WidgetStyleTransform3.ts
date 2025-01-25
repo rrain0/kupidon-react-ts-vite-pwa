@@ -1,84 +1,125 @@
+import { TypeU } from '@util/common/TypeU.ts'
 import {
   WidgetAtomicTransformer,
-  WidgetAttr, WidgetStateValue, WidgetElem,
+  WidgetAttr,
   WidgetMedia,
-  WidgetProp, WidgetPropValue, WidgetPseudo, WidgetPseudoElem,
-} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
+  WidgetMultiPropTransformer,
+  WidgetMultiStateTransformer, WidgetProp,
+  WidgetTransformerList,
+} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import isArray = TypeU.isArray
 
 
 
 
-export interface StatePseudoElemTf3 {
-  type: 'pseudoElem'
-  pseudoElem: WidgetPseudoElem
-}
-export interface StatePseudoTf3 {
-  type: 'pseudo'
-  pseudo: WidgetPseudo
-}
-export interface StateAttrValueTf3 {
-  type: 'attr'
-  attr: WidgetAttr
-  value?: WidgetStateValue
-}
-export interface ElemStateTf3 {
-  type: 'elem'
-  elem: WidgetElem | undefined
-  states: (StatePseudoElemTf3 | StatePseudoTf3 | StateAttrValueTf3)[]
-}
 
-export interface PropValueTf3 {
-  type: 'prop'
-  prop?: WidgetProp
-  value?: WidgetPropValue
-}
-
-
-export type Transformed3 = {
-  medias: WidgetMedia[]
-  elems: ElemStateTf3[]
-  prop: PropValueTf3
-}
-
-export function transform3(dataList: WidgetAtomicTransformer[][]): Transformed3[] {
-  return dataList.map(data => {
-    const tf3: Transformed3 = {
-      medias: [],
-      elems: [],
-      prop: { type: 'prop' },
+export function transform3(
+  dataList: WidgetTransformerList,
+  transformed: WidgetAtomicTransformer[][] = [],
+  baseMedia: WidgetMedia[] = [],
+  baseData: WidgetAtomicTransformer[] = [],
+): WidgetAtomicTransformer[][] {
+  dataList.forEach(data => {
+    const m = [...baseMedia]
+    const d = [...baseData]
+    
+    let state: WidgetMultiStateTransformer | WidgetAttr | undefined
+    let prop: WidgetMultiPropTransformer | WidgetProp | undefined
+    
+    for (let dataI = 0; dataI < data.length; dataI++) {
+      const entity = data[dataI]
+      
+      if (isArray(entity)) {
+        return transform3(
+          entity.map(e => [...e, ...data.slice(dataI + 1)]),
+          transformed, m, d
+        )
+      }
+      
+      const processState = (value?: string) => {
+        if (state) {
+          if (state.type === 'attr') {
+            const stateData: WidgetAtomicTransformer[] = [state]
+            if (value) stateData.push({ value, type: 'stateValue' })
+            d.push(...stateData)
+          }
+          else if (state.type === 'state') {
+            const nextI = entity.type === 'stateValue' ? dataI + 1 : dataI
+            return transform3(
+              state.transform(value).map(e => [...e, ...data.slice(nextI)]),
+              transformed, m, d
+            )
+          }
+        }
+      }
+      
+      if (entity.type === 'media') {
+        m.push(entity)
+      }
+      else if (entity.type === 'widget') {
+        if (processState()) return
+        return transform3(
+          entity.transform().map(e => [...e, ...data.slice(dataI + 1)]),
+          transformed, m, d
+        )
+      }
+      else if (entity.type === 'elem') {
+        if (processState()) return
+        d.push(entity)
+        state = undefined
+        prop = undefined
+      }
+      else if (entity.type === 'attr' || entity.type === 'state') {
+        if (processState()) return
+        state = entity
+        prop = undefined
+      }
+      else if (entity.type === 'pseudo') {
+        if (processState()) return
+        d.push(entity)
+        state = undefined
+        prop = undefined
+      }
+      else if (entity.type === 'pseudoElem') {
+        if (processState()) return
+        d.push(entity)
+        state = undefined
+        prop = undefined
+      }
+      else if (entity.type === 'stateValue') {
+        if (processState(entity.value)) return
+        state = undefined
+        prop = undefined
+      }
+      else if (entity.type === 'prop') {
+        if (processState()) return
+        state = undefined
+        prop = entity
+      }
+      else if (entity.type === 'propValue') {
+        if (prop) {
+          if (prop.isAtomic) {
+            d.push(prop, entity)
+          }
+          else {
+            return transform3(
+              prop.transform(entity.value).map(e => [...e, ...data.slice(dataI + 1)]),
+              transformed, m, d
+            )
+          }
+        }
+        state = undefined
+        prop = undefined
+      }
+      
+      // last must be value after prop so no need to check 'state' & 'prop'
+      if (dataI === data.length - 1) transformed.push([...m, ...d])
     }
-    data.forEach(d => {
-      if (d.type === 'media') {
-        tf3.medias.push(d)
-      }
-      else if (d.type === 'elem') {
-        tf3.elems.push({ type: 'elem', elem: d, states: [] })
-      }
-      else if (d.type === 'pseudoElem') {
-        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
-        tf3.elems.at(-1)!.states.push({ type: 'pseudoElem', pseudoElem: d })
-      }
-      else if (d.type === 'pseudo') {
-        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
-        tf3.elems.at(-1)!.states.push({ type: 'pseudo', pseudo: d })
-      }
-      else if (d.type === 'attr') {
-        tf3.elems[0] ??= { type: 'elem', elem: undefined, states: [] }
-        tf3.elems.at(-1)!.states.push({ type: 'attr', attr: d })
-      }
-      else if (d.type === 'prop') {
-        tf3.prop.prop = d
-      }
-      else if (d.type === 'stateValue') {
-        const lastState = tf3.elems.at(-1)?.states.at(-1)
-        if (lastState?.type === 'attr') lastState.value = d
-      }
-      else if (d.type === 'propValue') {
-        tf3.prop.value = d
-      }
-    })
-    return tf3
   })
+  
+  return transformed
 }
+
+
 
 
