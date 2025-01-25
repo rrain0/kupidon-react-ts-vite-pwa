@@ -94,6 +94,7 @@ export namespace ButtonS6 {
         pointerEvents: 'none',
         r: 'inherit',
       },
+      // TODO Style
       //ripple: RippleS6.ST.base,
       rippleFrame: RippleS6.ST.base.frame,
       rippleRipple: RippleS6.ST.base.ripple,
