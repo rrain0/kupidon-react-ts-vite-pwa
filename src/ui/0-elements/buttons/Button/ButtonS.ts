@@ -378,7 +378,7 @@ export namespace ButtonS {
     ${filledRectBig};
     ${filledRectAddColorDanger(t)};
   `
-  // type: filled, shape: rect, size: normal, color: accent
+  // type: filled, shape: rect, size: normal, color: accent2
   export const filledRectNormalAccent2 = (t: AppTheme.Theme) => css`
     ${filledRectBig};
     ${filledRectAddSizeNormal};

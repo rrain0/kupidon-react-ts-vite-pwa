@@ -12,6 +12,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
@@ -397,7 +398,7 @@ const Edit = styled.div`
   width: fit-content;
 `
 const editBtnStyle = (t: AppTheme.Theme) => css`
-  ${ButtonS.filledRectNormalAccent2(t)};
+  ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
   ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
     width: fit-content;
     min-height: 34px;

@@ -21,5 +21,7 @@ export type WidgetStyle =
 
 export type AppWidgetStyle = (theme: AppTheme.Theme) => WidgetStyle
 
+export type AppStyle = (theme: AppTheme.Theme) => string
+
 
 

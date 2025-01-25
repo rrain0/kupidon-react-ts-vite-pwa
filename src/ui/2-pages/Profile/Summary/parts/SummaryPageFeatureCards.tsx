@@ -8,6 +8,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
 import Txt = EmotionCommon.Txt
 import heartLocks from '@im/sign/heart-locks.svg'
@@ -100,7 +101,7 @@ const FeatureCardText = styled.div`
   ${Txt.normal2};
 `
 const featureCardButtonS = (t: AppTheme.Theme) => css`
-  ${ButtonS.filledRectNormalAccent2(t)};
+  ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
   ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
     grid-area: btn;
     width: 160px;

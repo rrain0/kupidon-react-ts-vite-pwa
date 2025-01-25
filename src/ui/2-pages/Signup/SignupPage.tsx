@@ -5,6 +5,7 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
@@ -29,7 +30,6 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
@@ -52,9 +52,7 @@ import userDefaultValues = SignupPageValidation.userDefaultValues
 
 
 
-const SignupPage =
-React.memo(
-()=>{
+const SignupPage = React.memo(() => {
   
   const [searchParams] = useSearchParams()
   const returnPath = searchParams.get(RootRoute.signup[params].returnPath) ?? undefined
@@ -79,7 +77,7 @@ React.memo(
     validationProps,
   } = useFormFailures({
     defaultValues,
-    validators
+    validators,
   })
   
   const {
@@ -90,9 +88,9 @@ React.memo(
     values: formValues,
     failedFields,
     prepareAndRequest: useCallback(
-      (values: FormValues)=>{
+      (values: FormValues) => {
         const birthDateTime = DateTime.from_yyyy_MM_dd(values.birthDate)!
-          .set({ timezone: DateTime.fromDate(new Date()).timezone})
+          .set({ timezone: DateTime.fromDate(new Date()).timezone })
           .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
         return UserApi.create({
           email: values.email,
@@ -103,31 +101,26 @@ React.memo(
         }, lang.langs[0])
       },
       [lang.langs]
-    )
+    ),
   })
   
-  useEffect(
-    ()=>{
-      if (isSuccess && response?.isSuccess){
-        setAuth(response.data)
-      }
-    },
-    [isSuccess, response, setAuth]
-  )
+  useEffect(() => {
+    if (isSuccess && response?.isSuccess) {
+      setAuth(response.data)
+    }
+  },
+  [isSuccess, response, setAuth])
   
   const {
     canSubmit, onFormSubmitCallback, submit,
   } = useFormSubmit({
     failures, setFailures,
     failedFields, setFormValues,
-    getCanSubmit: useCallback(
-      (failedFields: (keyof FormValues)[]) => {
-        return failedFields
-          .filter(ff=>Object.hasOwn(userDefaultValues,ff))
-          .length === 0
-      },
-      []
-    ),
+    getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
+      return failedFields
+        .filter(ff => Object.hasOwn(userDefaultValues, ff))
+        .length === 0
+    }, []),
     request,
     isLoading, isError,
     response, resetResponse,
@@ -165,136 +158,136 @@ React.memo(
   
   
   
-  const genderOptions = useMemo(
-    ()=>[
-      {
-        value: 'MALE',
-        text: optionText.iAmGuy,
-      },{
-        value: 'FEMALE',
-        text: optionText.iAmGirl,
-      }
-    ] satisfies { value: Gender, text: string }[],
-    [optionText]
-  )
+  const genderOptions = useMemo(() => [
+    {
+      value: 'MALE',
+      text: optionText.iAmGuy,
+    },
+    {
+      value: 'FEMALE',
+      text: optionText.iAmGirl,
+    },
+  ] satisfies { value: Gender, text: string }[], [optionText])
   
   
   
   
   
-  useEffect(()=>{
+  useEffect(() => {
     if (isSuccess) {
       navigate(returnPath ?? RootRoute.findPairs[full]())
     }
-  },[isSuccess, navigate, returnPath])
+  }, [isSuccess, navigate, returnPath])
   
   
   
   
-  return <>
-    <Pages.Page>
-      
-      <Pages.SafeInsets>
-        <Pages.ContentForm onSubmit={onFormSubmitCallback}>
+  return (
+    <>
+      <Pages.Page>
         
-          <FormHeader>{titleText.registration}</FormHeader>
+        <Pages.SafeInsets>
+          <Pages.ContentForm onSubmit={onFormSubmitCallback}>
           
-          
-          
-          <ValidationWrap {...validationProps}
-            fieldName='email'
-            render={props => <Input
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.matchedSystemLangs}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          <ValidationWrap {...validationProps}
-            fieldName='pwd'
-            render={props => <PwdInput
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.pwd}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          <ValidationWrap {...validationProps}
-            fieldName='repeatPwd'
-            render={props => <PwdInput
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.repeatPwd}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          <ValidationWrap {...validationProps}
-            fieldName='name'
-            render={props => <Input
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.name}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          <ValidationWrap {...validationProps}
-            fieldName='birthDate'
-            render={props => <Input
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.birthDate}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          
-          <ValidationWrap {...validationProps}
-            fieldName='gender'
-            render={props =>
-              <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
+            <FormHeader>{titleText.registration}</FormHeader>
+            
+            
+            
+            <ValidationWrap {...validationProps}
+              fieldName='email'
+              render={props => <Input
+                css={InputStyle.outlinedRectNormalNormal}
+                placeholder={placeholderText.matchedSystemLangs}
+                {...props.inputProps}
                 hasError={props.highlight}
-              >
-                { genderOptions.map(opt=>{
-                  return <RadioInput
-                    css={RadioInputStyle.radio}
-                    key={opt.value}
-                    checked={props.value === opt.value}
-                    value={opt.value}
-                    onChange={props.inputProps.onChange}
-                  >
-                    {opt.text}
-                  </RadioInput>
-                }) }
-              </RadioInputGroup>}
-          />
-          
-          
-          <Button
-            css={ButtonS.filledRectBigMain}
-            type='submit'
-          >
-            {actionText.signup}
-          </Button>
-          
-        </Pages.ContentForm>
-      </Pages.SafeInsets>
+              />}
+            />
+            
+            <ValidationWrap {...validationProps}
+              fieldName='pwd'
+              render={props => <PwdInput
+                css={InputStyle.outlinedRectNormalNormal}
+                placeholder={placeholderText.pwd}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+            
+            <ValidationWrap {...validationProps}
+              fieldName='repeatPwd'
+              render={props => <PwdInput
+                css={InputStyle.outlinedRectNormalNormal}
+                placeholder={placeholderText.repeatPwd}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+            
+            <ValidationWrap {...validationProps}
+              fieldName='name'
+              render={props => <Input
+                css={InputStyle.outlinedRectNormalNormal}
+                placeholder={placeholderText.name}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+            
+            <ValidationWrap {...validationProps}
+              fieldName='birthDate'
+              render={props => <Input
+                css={InputStyle.outlinedRectNormalNormal}
+                placeholder={placeholderText.birthDate}
+                {...props.inputProps}
+                hasError={props.highlight}
+              />}
+            />
+            
+            
+            <ValidationWrap {...validationProps}
+              fieldName='gender'
+              render={props =>
+                <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
+                  hasError={props.highlight}
+                >
+                  { genderOptions.map(opt=>{
+                    return <RadioInput
+                      css={RadioInputStyle.radio}
+                      key={opt.value}
+                      checked={props.value === opt.value}
+                      value={opt.value}
+                      onChange={props.inputProps.onChange}
+                    >
+                      {opt.text}
+                    </RadioInput>
+                  }) }
+                </RadioInputGroup>}
+            />
+            
+            
+            <Button
+              css={ButtonS6.S.Filled.Rect.Big.main}
+              type='submit'
+            >
+              {actionText.signup}
+            </Button>
+            
+          </Pages.ContentForm>
+        </Pages.SafeInsets>
+        
+        
+        <PageScrollbars />
+      </Pages.Page>
       
       
-      <PageScrollbars />
-    </Pages.Page>
-    
-    
-    
-    <TopButtonBar backBtn/>
-    
-    <BottomButtonBar settingsBtn/>
-    
-    
-  </>
+      
+      <TopButtonBar backBtn />
+      
+      <BottomButtonBar settingsBtn />
+      
+      
+    </>
+  )
 })
 export default SignupPage
 

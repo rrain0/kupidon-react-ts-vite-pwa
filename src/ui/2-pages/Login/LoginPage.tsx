@@ -7,6 +7,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
@@ -169,7 +170,7 @@ const LoginPage = React.memo(()=>{
           
           
           <Button
-            css={ButtonS.filledRectBigMain}
+            css={ButtonS6.S.Filled.Rect.Big.main}
             type="submit"
           >
             {actionText.login}
@@ -177,7 +178,7 @@ const LoginPage = React.memo(()=>{
           
           
           <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
-            <Button css={ButtonS.filledRectBigNormal}>
+            <Button css={ButtonS6.S.Filled.Rect.Big.normal}>
               {actionText.signup}
             </Button>
           </Link>

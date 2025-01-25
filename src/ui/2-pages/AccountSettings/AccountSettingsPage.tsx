@@ -4,6 +4,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
@@ -50,27 +51,22 @@ import full = RouteBuilder.full
 
 
 
-const AccountSettingsPage =
-React.memo(
-() => {
+const AccountSettingsPage = React.memo(() => {
   
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
-  const [auth,setAuth] = useRecoilState(AuthRecoil)
+  const [auth, setAuth] = useRecoilState(AuthRecoil)
   const resetAuth = useResetRecoilState(AuthRecoil)
   
   
   const fetchUser = async() => {
     const resp = await UserApi.current()
     if (resp.isSuccess)
-      setAuth(curr=>({ ...curr!, user: resp.data.user }))
+      setAuth(curr => ({ ...curr!, user: resp.data.user }))
     else console.warn('Failed to fetch user:', resp)
   }
-  useEffect(
-    ()=>void fetchUser(),
-    []
-  )
+  useEffect(() => void fetchUser(), [])
   
   const user = auth!.user
   
@@ -85,7 +81,7 @@ React.memo(
     failures, setFailures,
     failedFields, validationProps,
   } = useFormFailures({
-    defaultValues, validators
+    defaultValues, validators,
   })
   
   const {
@@ -218,127 +214,129 @@ React.memo(
   
   
   
-  return <>
-    <Pages.Page>
-      
-      
-      <Pages.SafeInsets>
-        <Pages.ContentForm onSubmit={formSubmitPreventDefault}>
-          
-          <FormHeader>{titleText.account}</FormHeader>
-          
-          
+  return (
+    <>
+      <Pages.Page>
+        
+        
+        <Pages.SafeInsets>
+          <Pages.ContentForm onSubmit={formSubmitPreventDefault}>
             
-          
-          <ItemContainer>
-            <ItemLabel>{titleText.id}</ItemLabel>
-            <Input
-              css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
-              readOnly
-              value={user.id}
-            />
-          </ItemContainer>
-          
-          <ItemContainer>
-            <ItemLabel>{titleText.email}</ItemLabel>
-            <Input
-              css={InputStyle.outlinedRectOf({ size: 'small' })}
-              readOnly
-              value={user.email}
-            />
-          </ItemContainer>
-          
-          <ItemContainer>
-            <ItemLabel>{titleText.emailVerified}</ItemLabel>
-            <Input
-              css={InputStyle.outlinedRectOf({ size: 'small' })}
-              readOnly
-              value={user.emailVerified
-                ? actionText.yes.toLowerCase()
-                : actionText.no.toLowerCase()
-              }
-            />
-          </ItemContainer>
-          
-          {/* <ItemContainer>
-           <ItemLabel>{titleText.userCreated}</ItemLabel>
-           <Input
-           css={InputStyle.input(
-           { size: 'small', static: true }
-           )}
-           readOnly
-           value={new Date(user.created) + ''}
-           />
-           </ItemContainer>
-           
-           <ItemContainer>
-           <ItemLabel>{titleText.userUpdated}</ItemLabel>
-           <Input
-           css={InputStyle.input(
-           { size: 'small', static: true }
-           )}
-           readOnly
-           value={new Date(user.updated) + ''}
-           />
-           </ItemContainer> */}
-          
-          <ItemContainer>
-            <ItemLabel>{titleText.userCreated}</ItemLabel>
-            <DataField css={DataFieldStyle.statikSmall}>
-              {new Date(user.created) + ''}
-            </DataField>
-          </ItemContainer>
-          
-          <ItemContainer>
-            <ItemLabel>{titleText.userUpdated}</ItemLabel>
-            <DataField css={DataFieldStyle.statikSmall}>
-              {new Date(user.updated) + ''}
-            </DataField>
-          </ItemContainer>
-          
-          
-          
-          
-          <Link to={RootRoute.settings.pwdChange[full]()}>
-            <Button css={ButtonS.filledRectBigNormal}>
-              {titleText.pwdChange}
+            <FormHeader>{titleText.account}</FormHeader>
+            
+            
+            
+            
+            <ItemContainer>
+              <ItemLabel>{titleText.id}</ItemLabel>
+              <Input
+                css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
+                readOnly
+                value={user.id}
+              />
+            </ItemContainer>
+            
+            <ItemContainer>
+              <ItemLabel>{titleText.email}</ItemLabel>
+              <Input
+                css={InputStyle.outlinedRectOf({ size: 'small' })}
+                readOnly
+                value={user.email}
+              />
+            </ItemContainer>
+            
+            <ItemContainer>
+              <ItemLabel>{titleText.emailVerified}</ItemLabel>
+              <Input
+                css={InputStyle.outlinedRectOf({ size: 'small' })}
+                readOnly
+                value={user.emailVerified
+                  ? actionText.yes.toLowerCase()
+                  : actionText.no.toLowerCase()
+                }
+              />
+            </ItemContainer>
+            
+            {/* <ItemContainer>
+             <ItemLabel>{titleText.userCreated}</ItemLabel>
+             <Input
+             css={InputStyle.input(
+             { size: 'small', static: true }
+             )}
+             readOnly
+             value={new Date(user.created) + ''}
+             />
+             </ItemContainer>
+             
+             <ItemContainer>
+             <ItemLabel>{titleText.userUpdated}</ItemLabel>
+             <Input
+             css={InputStyle.input(
+             { size: 'small', static: true }
+             )}
+             readOnly
+             value={new Date(user.updated) + ''}
+             />
+             </ItemContainer> */}
+            
+            <ItemContainer>
+              <ItemLabel>{titleText.userCreated}</ItemLabel>
+              <DataField css={DataFieldStyle.statikSmall}>
+                {new Date(user.created) + ''}
+              </DataField>
+            </ItemContainer>
+            
+            <ItemContainer>
+              <ItemLabel>{titleText.userUpdated}</ItemLabel>
+              <DataField css={DataFieldStyle.statikSmall}>
+                {new Date(user.updated) + ''}
+              </DataField>
+            </ItemContainer>
+            
+            
+            
+            
+            <Link to={RootRoute.settings.pwdChange[full]()}>
+              <Button css={ButtonS6.S.Filled.Rect.Big.normal}>
+                {titleText.pwdChange}
+              </Button>
+            </Link>
+            
+            <Button css={ButtonS6.S.Filled.Rect.Big.normal}
+              onClick={resetAuth}
+            >
+              {actionText.logOutFromAccount}
             </Button>
-          </Link>
           
-          <Button css={ButtonS.filledRectBigNormal}
-            onClick={resetAuth}
-          >
-            {actionText.logOutFromAccount}
-          </Button>
+            <Button css={ButtonS6.S.Filled.Rect.Big.danger}
+              onClick={undefined}
+              disabled
+            >
+              {actionText.deleteAccount}
+            </Button>
+          
+          </Pages.ContentForm>
+        </Pages.SafeInsets>
         
-          <Button css={ButtonS.filledRectBigDanger}
-            onClick={undefined}
-            disabled
-          >
-            {actionText.deleteAccount}
-          </Button>
         
-        </Pages.ContentForm>
-      </Pages.SafeInsets>
+        <PageScrollbars/>
+      </Pages.Page>
       
       
-      <PageScrollbars/>
-    </Pages.Page>
-    
-    
-    <TopButtonBar backBtn/>
-    
-    {/* <BottomButtonBar settingsBtn
-      rightChildren={
-        canSubmit && <Button css={IconButtonStyle.icon}
-          onClick={submit}
-        >
-          <FloppyDisk1Ic />
-        </Button>
-      }
-    /> */}
-    
-  </>
+      <TopButtonBar backBtn/>
+      
+      {/* <BottomButtonBar settingsBtn
+        rightChildren={
+          canSubmit && <Button css={IconButtonStyle.icon}
+            onClick={submit}
+          >
+            <FloppyDisk1Ic />
+          </Button>
+        }
+      /> */}
+      
+    </>
+  )
 })
 export default AccountSettingsPage
 

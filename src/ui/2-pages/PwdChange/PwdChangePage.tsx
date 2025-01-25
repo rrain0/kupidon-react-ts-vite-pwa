@@ -5,6 +5,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
@@ -35,9 +36,7 @@ import mapFailureCodeToUiText = PwdChangePageValidation.mapFailureCodeToUiText
 
 
 
-const PwdChangePage =
-React.memo(
-()=>{
+const PwdChangePage = React.memo(() => {
   
   
   const actionText = useUiValues(ActionUiText)
@@ -53,7 +52,7 @@ React.memo(
     failures, setFailures,
     failedFields, validationProps,
   } = useFormFailures({
-    defaultValues, validators
+    defaultValues, validators,
   })
   
   const {
@@ -64,14 +63,14 @@ React.memo(
     values: formValues,
     failedFields,
     prepareAndRequest: useCallback(
-      (values: FormValues,failedFields: (keyof FormValues)[])=>{
+      (values: FormValues, failedFields: (keyof FormValues)[]) => {
         return UserApi.update({
           currentPwd: values.currentPwd,
           pwd: values.pwd,
         })
       },
       []
-    )
+    ),
   })
   
   const {
@@ -82,7 +81,7 @@ React.memo(
     getCanSubmit: useCallback(
       (failedFields: (keyof FormValues)[]) => {
         return failedFields
-          .filter(ff=>ff in userDefaultValues)
+          .filter(ff => ff in userDefaultValues)
           .length === 0
       },
       []
@@ -97,24 +96,21 @@ React.memo(
   
   
   
-  useEffect(
-    ()=>{
-      if (isSuccess && isImmediate
-        && response && 'data' in response
-      ){
-        const used = response.usedValues
-        if ('pwd' in used){
-          if (formValues.currentPwd === used.currentPwd)
-            setFormValues(s=>({ ...s, currentPwd: defaultValues.currentPwd }))
-          if (formValues.pwd === used.pwd)
-            setFormValues(s=>({ ...s, pwd: defaultValues.pwd }))
-          if (formValues.repeatPwd === used.pwd)
-            setFormValues(s=>({ ...s, repeatPwd: defaultValues.repeatPwd }))
-        }
+  useEffect(() => {
+    if (isSuccess && isImmediate
+      && response && 'data' in response
+    ) {
+      const used = response.usedValues
+      if ('pwd' in used) {
+        if (formValues.currentPwd === used.currentPwd)
+          setFormValues(s => ({ ...s, currentPwd: defaultValues.currentPwd }))
+        if (formValues.pwd === used.pwd)
+          setFormValues(s => ({ ...s, pwd: defaultValues.pwd }))
+        if (formValues.repeatPwd === used.pwd)
+          setFormValues(s => ({ ...s, repeatPwd: defaultValues.repeatPwd }))
       }
-    },
-    [isSuccess, response, formValues, setFormValues]
-  )
+    }
+  }, [isSuccess, response, formValues, setFormValues])
   
   
   
@@ -142,91 +138,99 @@ React.memo(
   
   
   
-  return <>
+  return (
+    <>
     
-    <Pages.Page>
-      
-      <Pages.SafeInsets>
-        <Pages.ContentForm onSubmit={onFormSubmitCallback}>
-          
-          <FormHeader>{titleText.pwdChange}</FormHeader>
-          
-          
+      <Pages.Page>
+        
+        <Pages.SafeInsets>
+          <Pages.ContentForm onSubmit={onFormSubmitCallback}>
             
-          <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>{titleText.currentPwd}</ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...validationProps}
-              fieldName="currentPwd"
-              render={props => <PwdInput
-                css={InputStyle.outlinedRectSmallNormal}
-                placeholder={placeholderText.currentPwd}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
-            />
-          </ItemContainer>
+            <FormHeader>{titleText.pwdChange}</FormHeader>
+            
+            
+            
+            <ItemContainer>
+              <ItemTitleContainer>
+                <ItemLabel>{titleText.currentPwd}</ItemLabel>
+              </ItemTitleContainer>
+              <ValidationWrap {...validationProps}
+                fieldName="currentPwd"
+                render={props => (
+                  <PwdInput
+                    css={InputStyle.outlinedRectSmallNormal}
+                    placeholder={placeholderText.currentPwd}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              />
+            </ItemContainer>
+            
+            
+            <ItemContainer>
+              <ItemTitleContainer>
+                <ItemLabel>{titleText.newPwd}</ItemLabel>
+              </ItemTitleContainer>
+              <ValidationWrap {...validationProps}
+                fieldName="pwd"
+                render={props => (
+                  <PwdInput
+                    css={InputStyle.outlinedRectSmallNormal}
+                    placeholder={placeholderText.newPwd}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              />
+            </ItemContainer>
+            
+            
+            <ItemContainer>
+              <ItemTitleContainer>
+                <ItemLabel>{titleText.repeatPwd}</ItemLabel>
+              </ItemTitleContainer>
+              <ValidationWrap {...validationProps}
+                fieldName="repeatPwd"
+                render={props => (
+                  <PwdInput
+                    css={InputStyle.outlinedRectSmallNormal}
+                    placeholder={placeholderText.repeatPwd}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              />
+            </ItemContainer>
           
           
-          <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>{titleText.newPwd}</ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...validationProps}
-              fieldName="pwd"
-              render={props => <PwdInput
-                css={InputStyle.outlinedRectSmallNormal}
-                placeholder={placeholderText.newPwd}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
-            />
-          </ItemContainer>
           
+            <Button css={ButtonS6.S.Filled.Rect.Big.main}
+              type="submit"
+            >
+              {actionText.changePwd}
+            </Button>
           
-          <ItemContainer>
-            <ItemTitleContainer>
-              <ItemLabel>{titleText.repeatPwd}</ItemLabel>
-            </ItemTitleContainer>
-            <ValidationWrap {...validationProps}
-              fieldName="repeatPwd"
-              render={props => <PwdInput
-                css={InputStyle.outlinedRectSmallNormal}
-                placeholder={placeholderText.repeatPwd}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
-            />
-          </ItemContainer>
+            <Button css={ButtonS6.S.Filled.Rect.Big.main}
+              disabled
+            >
+              {titleText.pwdRecovery}
+            </Button>
+          
+          </Pages.ContentForm>
+        </Pages.SafeInsets>
         
-        
-        
-          <Button css={ButtonS.filledRectBigMain}
-            type="submit"
-          >
-            {actionText.changePwd}
-          </Button>
-        
-          <Button css={ButtonS.filledRectBigMain}
-            disabled
-          >
-            {titleText.pwdRecovery}
-          </Button>
-        
-        </Pages.ContentForm>
-      </Pages.SafeInsets>
+        <PageScrollbars />
+      </Pages.Page>
       
-      <PageScrollbars />
-    </Pages.Page>
-    
-    
-    <TopButtonBar backBtn/>
-    
-    <BottomButtonBar settingsBtn/>
-    
-    
-  </>
+      
+      <TopButtonBar backBtn />
+      
+      <BottomButtonBar settingsBtn />
+      
+      
+    </>
+  )
 })
 export default PwdChangePage
 

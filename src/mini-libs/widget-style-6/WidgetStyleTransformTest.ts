@@ -124,13 +124,14 @@ export namespace WidgetStyle6Test {
     console.log('widgetStyle', inputWidgetStyle)
     
     /*
-     console.time('transform')
-     transform6(transform5(transform4(transform3(transform2(transform1(
-       widgetStyle,
-       [CommonProps2, Elements2, undefined, undefined, undefined]
-     ))))))
-     // 1.7ms is OK
-     console.timeEnd('transform')
+    console.time('transform')
+    transform7(transform6(transform5(transform4(transform3(transform2(
+      transform1(inputWidgetStyle),
+      [CommonProps, { ...WidgetStates, ...WidgetElements }, undefined, undefined, undefined],
+    ))))))
+    // 1.7ms is OK
+    // 2.6ms - after supporting of array styles
+    console.timeEnd('transform')
      */
     
     const transformed1 = transform1(inputWidgetStyle)

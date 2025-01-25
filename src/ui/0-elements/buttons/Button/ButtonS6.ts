@@ -1,31 +1,21 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
-import { StringU } from '@util/common/StringU.ts'
-import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
-import { CssAttrs } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
-import { CssElem } from 'src/mini-libs/widget-style-4/css/CssElem.ts'
-import { CssProp, CssProps } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
-import { CssPropEnum } from 'src/mini-libs/widget-style-4/css/CssPropEnum.ts'
-import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
-import { CssWidget } from 'src/mini-libs/widget-style-4/widget/CssWidget.ts'
 import {
   WidgetElem,
-  WidgetMultiAnyTransformer, WidgetMultiPropTransformer,
+  WidgetMultiAnyTransformer,
 } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import {
   AdditionalProps,
   CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
-import capitalize = StringU.capitalize
 import resetButton = WidgetStyleCommon.resetButton
 import row = WidgetStyleCommon.row
 import abs = WidgetStyleCommon.abs
 import Txt = WidgetStyleCommon.Txt
-import ObjectPrefixKeys = ObjectU.ObjectPrefixCapitalizeKeys
+import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
 
@@ -35,19 +25,23 @@ export namespace ButtonS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const button = WidgetElem.of({
-      className: 'rruiButton',
+      // TODO Style - shorten className after refactor
+      className: 'rrainuiButton',
+      //className: 'rruiButton',
       ...up,
       states: CommonStates,
     })
     const border = WidgetElem.of({
-      className: 'rruiBorder',
+      // TODO Style - shorten className after refactor
+      className: 'rrainuiBorder',
+      //className: 'rruiBorder',
       upElem: button, upSelector: '>',
     })
     const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
     return {
       button,
       border,
-      ...ObjectPrefixKeys('ripple', rippleElems),
+      ...ObjectPrefixCapitalizeKeys('ripple', rippleElems),
     } as const
   }
   
@@ -76,7 +70,7 @@ export namespace ButtonS6 {
   })
   
   
-  export namespace ST {
+  export namespace SWidget {
     
     export const base: WidgetStyle = {
       button: [resetButton, {
@@ -93,7 +87,7 @@ export namespace ButtonS6 {
         pointerEvents: 'none',
         r: 'inherit',
       },
-      ripple: RippleS6.ST.base,
+      ripple: RippleS6.SWidget.base,
     }
     
     export namespace Filled {
@@ -101,11 +95,19 @@ export namespace ButtonS6 {
       export namespace Rect {
         
         // type: filled, shape: rect, size: big
-        export const baseBig: WidgetStyle = [base, {
+        export const baseSizeBig: WidgetStyle = [base, {
           button: {
             // TODO Style - p: [8, 16]
             w: 'full', hMin: 50, r: 15, pv: 8, ph: 16,
             ...Txt.large2,
+          },
+        }]
+        
+        // type: filled, shape: rect, add size: normal
+        export const addSizeNormal: WidgetStyle = [baseSizeBig, {
+          button: {
+            w: 'full', hMin: 34, r: 10, pv: 8, ph: 14,
+            ...Txt.normal2,
           },
         }]
         
@@ -122,8 +124,95 @@ export namespace ButtonS6 {
           },
         })
         
+        export const addColorAccent: AppWidgetStyle = t => ({
+          buttonBgColor: t.buttonAccent.bg[0],
+          buttonColor: t.buttonAccent.ct[0],
+          rippleRippleColor: t.ripple.ct,
+          inFocus: {
+            buttonBgColor: t.buttonAccent.bgFocus[0],
+            buttonColor: t.buttonAccent.ctFocus[0],
+          },
+          disabled: {
+            buttonBgColor: t.elementDisabled.bg[0],
+            buttonColor: t.elementDisabled.ct[0],
+          },
+        })
+        
+        export const addColorAccent2: AppWidgetStyle = t => ({
+          buttonBgColor: t.buttonAccent.bg2[0],
+          buttonColor: t.buttonAccent.ct2,
+          rippleRippleColor: t.ripple.ct,
+          inFocus: {
+            buttonBgColor: t.buttonAccent.bgFocus[0],
+            buttonColor: t.buttonAccent.ctFocus[0],
+          },
+          disabled: {
+            buttonBgColor: t.elementDisabled.bg[0],
+            buttonColor: t.elementDisabled.ct[0],
+          },
+        })
+        
+        export const addColorNormal: AppWidgetStyle = t => ({
+          buttonBgColor: t.buttonNormal.bg[0],
+          buttonColor: t.buttonNormal.ct[0],
+          rippleRippleColor: t.ripple.ct,
+          inFocus: {
+            buttonBgColor: t.buttonNormal.bgFocus[0],
+            buttonColor: t.buttonNormal.ctFocus[0],
+          },
+          disabled: {
+            buttonBgColor: t.elementDisabled.bg[0],
+            buttonColor: t.elementDisabled.ct[0],
+          },
+        })
+        
+        export const addColorDanger: AppWidgetStyle = t => ({
+          buttonBgColor: t.elementDanger.bg[0],
+          buttonColor: t.elementDanger.ct[0],
+          rippleRippleColor: t.ripple.ct,
+          inFocus: {
+            buttonBgColor: t.elementDanger.bgFocus[0],
+          },
+          disabled: {
+            buttonBgColor: t.elementDisabled.bg[0],
+            buttonColor: t.elementDisabled.ct[0],
+          },
+        })
+        
         export namespace Big {
-          export const main: AppWidgetStyle = t => [baseBig, addColorMain(t)]
+          export const main: AppWidgetStyle = t => [baseSizeBig, addColorMain(t)]
+          export const accent: AppWidgetStyle = t => [baseSizeBig, addColorAccent(t)]
+          export const normal: AppWidgetStyle = t => [baseSizeBig, addColorNormal(t)]
+          export const danger: AppWidgetStyle = t => [baseSizeBig, addColorDanger(t)]
+          export const accent2: AppWidgetStyle = t => [baseSizeBig, addColorAccent2(t)]
+        }
+        
+        export namespace Normal {
+          export const main: AppWidgetStyle = t => [baseSizeBig, addSizeNormal, addColorMain(t)]
+          export const accent: AppWidgetStyle = t => [baseSizeBig, addSizeNormal, addColorAccent(t)]
+          export const normal: AppWidgetStyle = t => [baseSizeBig, addSizeNormal, addColorNormal(t)]
+          export const danger: AppWidgetStyle = t => [baseSizeBig, addSizeNormal, addColorDanger(t)]
+          export const accent2: AppWidgetStyle = t => [baseSizeBig, addSizeNormal, addColorAccent2(t)]
+        }
+        
+      }
+      
+    }
+    
+    export namespace Text {
+      
+      export namespace Rect {
+        
+        export const baseSizeBig: WidgetStyle = [Filled.Rect.baseSizeBig, {
+          buttonBg: null,
+        }]
+        
+        export const addColorNormal: WidgetStyle = {
+        
+        }
+        
+        export namespace Big {
+        
         }
         
       }
@@ -133,12 +222,26 @@ export namespace ButtonS6 {
   }
   
   
+  // TODO Style - Button showcase page
   
+  // TODO Style - maybe cache it by theme + style in WeakMap or Map (to control size)
   export namespace S {
+    export const base = () => W.t(SWidget.base)
     export namespace Filled {
       export namespace Rect {
         export namespace Big {
-          export const main = (t: AppTheme.Theme) => W.t(ST.Filled.Rect.Big.main(t))
+          export const main: AppStyle = t => W.t(SWidget.Filled.Rect.Big.main(t))
+          export const accent: AppStyle = t => W.t(SWidget.Filled.Rect.Big.accent(t))
+          export const normal: AppStyle = t => W.t(SWidget.Filled.Rect.Big.main(t))
+          export const danger: AppStyle = t => W.t(SWidget.Filled.Rect.Big.danger(t))
+          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rect.Big.accent2(t))
+        }
+        export namespace Normal {
+          export const main: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.main(t))
+          export const accent: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.accent(t))
+          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.accent2(t))
+          export const normal: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.main(t))
+          export const danger: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.danger(t))
         }
       }
     }

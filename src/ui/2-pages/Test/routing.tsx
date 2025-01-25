@@ -26,6 +26,7 @@ const MoveElementToAnotherViewTestPage = React.lazy(
 const ListItem1AddItemTest = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem1AddItemTest.tsx'))
 const ListItem2Test = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem2Test.tsx'))
 const RippleTest = React.lazy(() => import('src/ui/2-pages/Test/views/RippleTest.tsx'))
+const ButtonTest = React.lazy(() => import('src/ui/2-pages/Test/views/ButtonTest.tsx'))
 const SliderTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/SliderTestPage'))
 
 
@@ -36,7 +37,7 @@ const testScrollbarTestPageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ScrollbarTestPage/>
+        <ScrollbarTestPage />
       </Suspense>
     ),
   },
@@ -48,7 +49,7 @@ const testResizeObserverTestPageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ResizeObserverTestPage/>
+        <ResizeObserverTestPage />
       </Suspense>
     ),
   },
@@ -60,7 +61,7 @@ const testBottomSheetTestPageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <BottomSheetTest/>
+        <BottomSheetTest />
       </Suspense>
     ),
   },
@@ -72,7 +73,7 @@ const testMoveElementToAnotherViewRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <MoveElementToAnotherViewTestPage/>
+        <MoveElementToAnotherViewTestPage />
       </Suspense>
     ),
   },
@@ -84,7 +85,7 @@ const testPointerRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <PointerTestPage/>
+        <PointerTestPage />
       </Suspense>
     ),
   },
@@ -96,7 +97,7 @@ const testTabsRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <TabsTestPage/>
+        <TabsTestPage />
       </Suspense>
     ),
   },
@@ -108,7 +109,7 @@ const testStateRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <StateTestPage/>
+        <StateTestPage />
       </Suspense>
     ),
   },
@@ -120,7 +121,7 @@ const pageLifecycleRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <PageLifecycle/>
+        <PageLifecycle />
       </Suspense>
     ),
   },
@@ -226,6 +227,18 @@ const rippleRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / button / <check here>'
+const buttonRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ButtonTest />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
 // path: 'test / slider / <check here>'
 const sliderRouting: RouteObject[] = [
   {
@@ -247,7 +260,7 @@ export const testRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <TestPage/>
+        <TestPage />
       </Suspense>
     ),
   },
@@ -314,6 +327,10 @@ export const testRouting: RouteObject[] = [
   {
     path: RootRoute.test.rippleTest[path]+'/*',
     children: rippleRouting,
+  },
+  {
+    path: RootRoute.test.buttonTest[path]+'/*',
+    children: buttonRouting,
   },
   {
     path: RootRoute.test.elemStyle[path]+'/*',
