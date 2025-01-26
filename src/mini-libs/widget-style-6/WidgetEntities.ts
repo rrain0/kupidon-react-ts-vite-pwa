@@ -2,6 +2,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { StyleValue } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import isnumber = TypeU.isnumber
 import RecordRo = TypeU.RecordRo
+import isArray = TypeU.isArray
 
 
 
@@ -249,15 +250,24 @@ export namespace WidgetAttrs {
   export const type = WidgetAttr.of('type', { radio: '', checkbox: '' })
   export const error = WidgetAttr.of('data-error')
 }
+/*
+todo style idea: linear-gradient:
+ linear-gradient(to bottom, #ffffff 0% 30%, #bbbbbb 100%) =>
+ ['linear', 'to bottom', ['#ffffff', '0%', '30%'], ['#bbbbbb', '100%']]
 
+
+ */
 export namespace WidgetProps {
   
-  import isArray = TypeU.isArray
   export const transformLenValue = (value: StyleValue) => {
     if (value === undefined) return undefined
-    if (value === null) value = 0
-    if (value === 'full') value = '100%'
-    if (isnumber(value)) value = `${value}px`
+    if (value === null) return '0px'
+    if (value === 'inf') return '999999px'
+    if (value === 'round') return '999999px'
+    if (value === 'full') return '100%'
+    if (value === 'content') return 'fit-content'
+    if (value === 'ct') return 'fit-content'
+    if (isnumber(value)) return `${value}px`
     return value
   }
   // TODO Style - allow empty values (retain prev value) for 4-len vals:
@@ -302,7 +312,10 @@ export namespace WidgetProps {
   
   export const color = WidgetProp.ofName('color', transformNullToTransparent)
   export const background = WidgetProp.ofName('background', transformNullToNone)
-  export const backgroundColor = WidgetProp.ofName('background-color', transformNullToNone)
+  export const backgroundColor = WidgetProp.ofName('background-color', transformNullToTransparent)
+  export const backgroundImage = WidgetProp.ofName('background-image', transformNullToNone)
+  export const backgroundPosition = WidgetProp.ofName('background-position', transformMultiLenValue)
+  export const backgroundSize = WidgetProp.ofName('background-size', transformMultiLenValue)
   export const border = WidgetProp.ofName('border', transformNullToNone)
   export const borderRadius = WidgetProp.ofName('border-radius', transformLenValue)
   export const outline = WidgetProp.ofName('outline', transformNullToNone)

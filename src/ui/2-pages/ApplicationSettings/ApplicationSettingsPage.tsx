@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SettingsGroup } from 'src/ui/0-elements/basic-elements/SettingsGroup.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -227,7 +228,7 @@ const RoundButtonsContainer = styled.div`
   gap: 10px;
 `
 const normalIconRoundButton = (t:AppTheme.Theme) => css`
-  ${ButtonS.filledRoundedNormalAccent(t)};
+  ${ButtonS6.S.Filled.Rounded.Normal.accent(t)};
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     min-width: 90px;
     gap: 0.6em;

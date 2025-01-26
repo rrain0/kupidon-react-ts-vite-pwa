@@ -88,8 +88,9 @@ export namespace AppTheme {
     // main button (submit button)
     buttonMain: {
       bg:            string[]
-      bgFocus:       string[]
       ct:            string[]
+      bgFocus:       string[]
+      ctFc:          string
     }
     // just a colorful button that drags some attention
     buttonAccent: {
@@ -162,8 +163,9 @@ export namespace AppTheme {
     // dangerButton
     elementDanger: {
       bg:              string[]
-      bgFocus:         string[]
       ct:              string[]
+      bgFocus:         string[]
+      ctFocus:         string
     }
     // element with error
     elementError: {

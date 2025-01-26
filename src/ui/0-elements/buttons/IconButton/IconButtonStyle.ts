@@ -3,6 +3,7 @@ import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Elem0 = WidgetStyle0.Elem
@@ -106,15 +107,15 @@ export namespace IconButtonStyle {
   
   
   export const icBig2Normal = (t: AppTheme.Theme) => css`
-    ${ButtonS.filledRoundBig2Normal(t)};
+    ${ButtonS6.S.Filled.Round.Big2.normal(t)};
     ${icFilledAddColorNormal(t)};
   `
   export const icBig2Normal2 = (t: AppTheme.Theme) => css`
-    ${ButtonS.filledRoundBig2Normal2(t)};
+    ${ButtonS6.S.Filled.Round.Big2.normal2(t)};
     ${icFilledAddColorNormal2(t)};
   `
   export const icBig2Accent = (t: AppTheme.Theme) => css`
-    ${ButtonS.filledRoundBig2Accent(t)};
+    ${ButtonS6.S.Filled.Round.Big2.accent(t)};
     ${icFilledAddColorAccent(t)};
   `
   
@@ -134,7 +135,7 @@ export namespace IconButtonStyle {
   
   
   export const icPreviewNormal = (t: AppTheme.Theme) => css`
-    ${ButtonS.filledRoundBig2Normal(t)};
+    ${ButtonS6.S.Filled.Round.Big2.normal(t)};
     ${ButtonS.filledRoundedAddColorPreviewNormal(t)};
     ${icGradFilledAddColorPreviewNorm(t)};
     ${ButtonS.W.use.s.normal().e.button().thisUse} {
@@ -158,7 +159,7 @@ export namespace IconButtonStyle {
     }
   `
   export const icPreviewMain = (t: AppTheme.Theme) => css`
-    ${ButtonS.filledRoundBig2Normal(t)};
+    ${ButtonS6.S.Filled.Round.Big2.normal(t)};
     ${ButtonS.filledRoundedAddColorPreviewMain(t)};
     ${ButtonS.W.use.s.normal().e.button().thisUse} {
       padding: 0;

@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -79,7 +80,7 @@ const QuickSettings = React.memo(
                     
                     {auth && (
                       <Link to={RootRoute.settings.account[full]()}>
-                        <Button css={ButtonS.filledRoundedNormalNormal}
+                        <Button css={ButtonS6.S.Filled.Rounded.Normal.normal}
                           onClick={props.setClosing}
                         >
                           <LockIc
@@ -94,7 +95,7 @@ const QuickSettings = React.memo(
                     )}
                     
                     <Link to={RootRoute.settings.app[full]()}>
-                      <Button css={ButtonS.filledRoundedNormalNormal}
+                      <Button css={ButtonS6.S.Filled.Rounded.Normal.normal}
                         onClick={props.setClosing}
                       >
                         <GearIc css={SettingsOptions.icon} />
@@ -111,7 +112,7 @@ const QuickSettings = React.memo(
                     </Link>
                     
                     {app.canInstall && (
-                      <Button css={ButtonS.filledRoundedNormalNormal}
+                      <Button css={ButtonS6.S.Filled.Rounded.Normal.normal}
                         onClick={async () => await promptInstall()}
                       >
                         <AddModuleIc css={SettingsOptions.icon} />
@@ -119,7 +120,7 @@ const QuickSettings = React.memo(
                       </Button>
                     )}
                     
-                    <Button css={ButtonS.filledRoundedNormalNormal}
+                    <Button css={ButtonS6.S.Filled.Rounded.Normal.normal}
                       onClick={clearSiteDialog.open}
                     >
                       {actionText.clearAppData}

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { ReactU } from 'src/util/react/ReactU.ts'
@@ -96,7 +97,7 @@ const PartnerHeightOption = React.memo(
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
     
-    const activeBtn = ButtonS.filledRoundedNormalAccent
+    const activeBtn = ButtonS6.S.Filled.Rounded.Normal.accent
     const inactiveBtn = ButtonS.outlinedRoundedNormalAccent
     
     return (

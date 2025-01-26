@@ -26,7 +26,7 @@ export const LightOrangeProps: ThemeProps = { ...LightPinkProps,
   },
   
   buttonMain: { ...LightPinkProps.buttonMain,
-    bg: ['#ff935e'],
+    bg:      ['#ff935e'],
     bgFocus: ['#ff802a'],
   },
   buttonAccent: { ...LightPinkProps.buttonAccent,

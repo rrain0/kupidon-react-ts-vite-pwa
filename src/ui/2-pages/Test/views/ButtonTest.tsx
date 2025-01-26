@@ -22,99 +22,23 @@ const ButtonTest = React.memo(() => {
           <div>Buttons showcase</div>
           
           <BlocksContainer>
-            
-            <Buttons>
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: big, Color: main</div>
-                <ButtonBox css={{ width: 350 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Big.main}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: big, Color: accent</div>
-                <ButtonBox css={{ width: 350 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Big.accent}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: big, Color: normal</div>
-                <ButtonBox css={{ width: 350 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Big.normal}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: big, Color: danger</div>
-                <ButtonBox css={{ width: 350 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Big.danger}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: big, Color: accent2</div>
-                <ButtonBox css={{ width: 350 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Big.accent2}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-            </Buttons>
-            
-            
-            <Buttons>
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: normal, Color: main</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Normal.main}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: normal, Color: accent</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Normal.accent}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: normal, Color: normal</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Normal.normal}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: normal, Color: danger</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Normal.danger}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: filled, Shape: rect, Size: normal, Color: accent2</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Filled.Rect.Normal.accent2}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-            </Buttons>
-            
-            
-            <Buttons>
-              <ButtonDescription>
-                <div>Type: text, Shape: rect, Size: big, Color: normal</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Text.Rect.Big.normal}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-              
-              <ButtonDescription>
-                <div>Type: text, Shape: rect, Size: normal, Color: normal</div>
-                <ButtonBox css={{ width: 250 }}>
-                  <Button css={ButtonS6.S.Text.Rect.Normal.normal}>Button</Button>
-                </ButtonBox>
-              </ButtonDescription>
-            </Buttons>
-          
+            {Object.entries(ButtonS6.S).flatMap(([typeName, shapes]) =>
+              Object.entries(shapes).flatMap(([shapeName, sizes]) => (
+                Object.entries(sizes).map(([sizeName, colors]) => (
+                  <Buttons key={typeName + shapeName + sizeName}>
+                    {Object.entries(colors as object).map(([colorName, style]) => (
+                      <ButtonDescription key={colorName}>
+                        <div>Type: {typeName}, Shape: {shapeName}</div>
+                        <div>Size: {sizeName}, Color: {colorName}</div>
+                        <ButtonBox css={{ width: sizeName === 'Big' ? 350 : 200 }}>
+                          <Button css={style}>Button</Button>
+                        </ButtonBox>
+                      </ButtonDescription>
+                    ))}
+                  </Buttons>
+                ))
+              ))
+            )}
           </BlocksContainer>
         
         </Pages.ContentFill>
@@ -140,7 +64,6 @@ const Buttons = styled.div`
 const ButtonDescription = styled.div`
   ${col};
   width: 400px;
-  height: 90px;
   gap: 10px;
 `
 const ButtonBox = styled.div`

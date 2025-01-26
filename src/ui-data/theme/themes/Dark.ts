@@ -66,8 +66,9 @@ export const DarkProps: ThemeProps = {
   
   buttonMain: {
     bg:       ['#aaaaaa'],
-    bgFocus:  ['#bbbbbb'],
     ct:       ['#000000'],
+    bgFocus:  ['#bbbbbb'],
+    ctFc:     '#000000',
   },
   buttonAccent: {
     bg:            ['#999999'],
@@ -135,8 +136,9 @@ export const DarkProps: ThemeProps = {
   },
   elementDanger: {
     bg:       ['#bbbbbb'],
-    bgFocus:  ['#cccccc'],
     ct:       ['#000000'],
+    bgFocus:  ['#cccccc'],
+    ctFocus:  '#000000',
   },
   elementError: {
     bg:       ['#5e252c'],

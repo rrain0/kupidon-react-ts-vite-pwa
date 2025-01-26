@@ -67,8 +67,9 @@ export const LightProps: ThemeProps = {
   
   buttonMain: {
     bg:       ['#7b7b7b'],
-    bgFocus:  ['#aaaaaa'],
     ct:       ['#F8F8F8'],
+    bgFocus:  ['#aaaaaa'],
+    ctFc:     '#F8F8F8',
   },
   buttonAccent: {
     bg:            ['#bbbbbb'],
@@ -137,8 +138,9 @@ export const LightProps: ThemeProps = {
   },
   elementDanger: {
     bg:       ['#7b7b7b'],
-    bgFocus:  ['#999999'],
     ct:       ['#ffffff'],
+    bgFocus:  ['#999999'],
+    ctFocus:  '#ffffff',
   },
   elementError: {
     bg:       ['#ffced2'],

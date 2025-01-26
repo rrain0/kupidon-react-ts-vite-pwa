@@ -8,8 +8,8 @@ import isstring = TypeU.isstring
 export type StyleVal =
   | string // pass as is if there are no special values or transformations
   | number // transform to fractions or pixels
-  | null // set empty value (background: none, color: transparent)
-  | undefined // remove value definition
+  | null // set empty value (e.g. background: none, color: transparent, padding: 0)
+  | undefined // will not be rendered to css as if prop not exists
 
 export type StyleValue = StyleVal | StyleVal[]
 

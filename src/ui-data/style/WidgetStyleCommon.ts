@@ -80,6 +80,15 @@ export namespace WidgetStyleCommon {
       letterSpacing: 'normal',
     }
     
+    
+    
+    export const small1: WidgetStyle = {
+      fontWeight: '300',
+      fontSize: '15px',
+      lineHeight: '129%',
+      letterSpacing: 'normal',
+    }
+    
   }
 }
 

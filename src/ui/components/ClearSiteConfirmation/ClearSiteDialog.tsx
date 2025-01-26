@@ -5,6 +5,7 @@ import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { clearSiteData } from '@util/app/clearSiteData.ts'
@@ -84,13 +85,13 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
                   `}
                 >
                   
-                  <Button css={[ButtonS.filledRoundedNormalAccent, button]}
+                  <Button css={[ButtonS6.S.Filled.Rounded.Normal.accent, button]}
                     onClick={props.setClosing}
                   >
                     {actionText.no}
                   </Button>
                   
-                  <Button css={[ButtonS.filledRoundedNormalDanger, button]}
+                  <Button css={[ButtonS6.S.Filled.Rounded.Normal.danger, button]}
                     onClick={clear}
                   >
                     <ClearTrashIc css={[icon, iconOnDanger]} />

@@ -5,6 +5,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { TypeU } from 'src/util/common/TypeU'
 import Puro = TypeU.Puro
 import Callback = TypeU.Callback
@@ -77,7 +78,7 @@ const DialogButtons = React.memo(
           <Button 
             css={({
               text: ButtonS.textRoundedNormal2Normal,
-              filledRounded: ButtonS.filledRoundedNormal2Accent,
+              filledRounded: ButtonS6.S.Filled.Rounded.Normal2.accent,
             } satisfies Record<typeof acceptVariant, any>)[acceptVariant]}
             onClick={onAccept}
           >
