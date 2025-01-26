@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS6, normal } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import col = EmotionCommon.col

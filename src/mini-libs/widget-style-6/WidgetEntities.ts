@@ -252,6 +252,7 @@ export namespace WidgetAttrs {
 
 export namespace WidgetProps {
   
+  import isArray = TypeU.isArray
   export const transformLenValue = (value: StyleValue) => {
     if (value === undefined) return undefined
     if (value === null) value = 0
@@ -259,10 +260,12 @@ export namespace WidgetProps {
     if (isnumber(value)) value = `${value}px`
     return value
   }
-  /* export const transformMultiLenValue = (value: StyleValue) => {
+  // TODO Style - allow empty values (retain prev value) for 4-len vals:
+  //  p: [8, 16, '', 16] or [8, 16, undefined, 16] or [8, 16, '_', 16]
+  export const transformMultiLenValue = (value: StyleValue) => {
     if (isArray(value)) return value.map(v => transformLenValue(v)).join(' ')
     return transformLenValue(value)
-  } */
+  }
   export const transformNullToNone = (value: StyleValue) => {
     if (value === null) return 'none'
     return value
@@ -289,13 +292,13 @@ export namespace WidgetProps {
   export const minHeight = WidgetProp.ofName('min-height', transformLenValue)
   export const maxWidth = WidgetProp.ofName('max-width', transformLenValue)
   export const maxHeight = WidgetProp.ofName('max-height', transformLenValue)
-  export const margin = WidgetProp.ofName('margin', transformLenValue)
-  export const padding = WidgetProp.ofName('padding', transformLenValue)
+  export const margin = WidgetProp.ofName('margin', transformMultiLenValue)
+  export const padding = WidgetProp.ofName('padding', transformMultiLenValue)
   export const paddingTop = WidgetProp.ofName('padding-top', transformLenValue)
   export const paddingRight = WidgetProp.ofName('padding-right', transformLenValue)
   export const paddingBottom = WidgetProp.ofName('padding-bottom', transformLenValue)
   export const paddingLeft = WidgetProp.ofName('padding-left', transformLenValue)
-  export const gap = WidgetProp.ofName('gap', transformLenValue)
+  export const gap = WidgetProp.ofName('gap', transformMultiLenValue)
   
   export const color = WidgetProp.ofName('color', transformNullToTransparent)
   export const background = WidgetProp.ofName('background', transformNullToNone)
@@ -309,6 +312,7 @@ export namespace WidgetProps {
 export namespace WidgetComplexTransformers {
   
   // just 'radio' instead of 'typeRadio'
+  import isArray = TypeU.isArray
   export const radio = WidgetMultiStateTransformer.of({
     title: 'radio -> [type=radio]',
     transform: () => [
@@ -341,13 +345,36 @@ export namespace WidgetComplexTransformers {
   })
   
   export const abs = WidgetMultiPropTransformer.of({
-    title: 'abs -> top & right & bottom & left',
-    transform: (value: StyleValue) => [
-      [WidgetProps.top, WidgetPropValue.of(value)],
-      [WidgetProps.right, WidgetPropValue.of(value)],
-      [WidgetProps.bottom, WidgetPropValue.of(value)],
-      [WidgetProps.left, WidgetPropValue.of(value)],
-    ],
+    title: 'abs -> top, right, bottom, left',
+    transform: (value: StyleValue) => {
+      let t: StyleValue = undefined
+      let r: StyleValue = undefined
+      let b: StyleValue = undefined
+      let l: StyleValue = undefined
+      if (isArray(value)) {
+        if (value.length === 1) {
+          t = value[0]; r = value[0]; b = value[0]; l = value[0]
+        }
+        else if (value.length === 2) {
+          t = value[0]; r = value[1]; b = value[0]; l = value[1]
+        }
+        else if (value.length === 3) {
+          t = value[0]; r = value[1]; b = value[2]; l = value[1]
+        }
+        else if (value.length >= 4) {
+          t = value[0]; r = value[1]; b = value[2]; l = value[3]
+        }
+      }
+      else {
+        t = value; r = value; b = value; l = value
+      }
+      return [
+        [WidgetProps.top, WidgetPropValue.of(t)],
+        [WidgetProps.right, WidgetPropValue.of(r)],
+        [WidgetProps.bottom, WidgetPropValue.of(b)],
+        [WidgetProps.left, WidgetPropValue.of(l)],
+      ]
+    },
   })
   export const absH = WidgetMultiPropTransformer.of({
     title: 'absH -> right & left',

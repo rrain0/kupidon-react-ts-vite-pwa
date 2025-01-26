@@ -97,8 +97,7 @@ export namespace ButtonS6 {
         // type: filled, shape: rect, size: big
         export const baseSizeBig: WidgetStyle = [base, {
           button: {
-            // TODO Style - p: [8, 16]
-            w: 'full', hMin: 50, r: 15, pv: 8, ph: 6,
+            w: 'full', hMin: 50, r: 15, p: [8, 6],
             ...Txt.large2,
           },
         }]
@@ -106,7 +105,7 @@ export namespace ButtonS6 {
         // type: filled, shape: rect, add size: normal
         export const addSizeNormal: WidgetStyle = [baseSizeBig, {
           button: {
-            w: 'full', hMin: 34, r: 10, pv: 8, ph: 14,
+            w: 'full', hMin: 34, r: 10, p: [8, 14],
             ...Txt.normal2,
           },
         }]
@@ -209,7 +208,7 @@ export namespace ButtonS6 {
         
         export const addSizeNormal: WidgetStyle = {
           button: {
-            w: 'auto', hMin: 30, r: 10, pv: 4, ph: 6, g: 4,
+            w: 'auto', hMin: 30, r: 10, p: [4, 6], g: 4,
             ...Txt.normal1,
           },
         }

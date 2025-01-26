@@ -90,34 +90,39 @@ export namespace WidgetStyle6Test {
   
   
   
-  export const inputWidgetStyle: WidgetStyle = {
-    boxAbs: 0,
-    input: { '-webkit-tap-highlight-color': 'transparent' },
-    box: {
-      after: {
-        bg: 'orange',
-      },
+  export const inputWidgetStyle: WidgetStyle = [
+    {
+      boxP: [8, 16],
     },
-    hoverTypeRadioBg: 'white',
-    frameHoverAfterBg: 'aqua',
-    frameTypeCheckboxBoxSz: '40%',
-    inputErrorBoxInFocusBg: 'indianred',
-    frameRadioBoxHoverFocusBg: 'aquamarine',
-    typeRadioBox: {
-      bg: 'black',
-      sz: 100,
-    },
-    type: {
-      checkboxBox: {
-        bg: 'red',
-        sz: 200,
+    {
+      boxAbs: 0,
+      input: { '-webkit-tap-highlight-color': 'transparent' },
+      box: {
+        after: {
+          bg: 'orange',
+        },
       },
-      radioBox: {
-        backgroundImage: 'linear-gradient(to bottom, green, yellow)',
-        sz: 'full',
+      hoverTypeRadioBg: 'white',
+      frameHoverAfterBg: 'aqua',
+      frameTypeCheckboxBoxSz: '40%',
+      inputErrorBoxInFocusBg: 'indianred',
+      frameRadioBoxHoverFocusBg: 'aquamarine',
+      typeRadioBox: {
+        bg: 'black',
+        sz: 100,
       },
-    },
-  }
+      type: {
+        checkboxBox: {
+          bg: 'red',
+          sz: 200,
+        },
+        radioBox: {
+          backgroundImage: 'linear-gradient(to bottom, green, yellow)',
+          sz: 'full',
+        },
+      },
+    }
+  ]
   
   
   export function testTransform() {

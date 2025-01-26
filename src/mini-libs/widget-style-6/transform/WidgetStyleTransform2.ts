@@ -88,7 +88,7 @@ export function transform2(
             }
             // found prop - must be last in selector
             else if (entity.type === 'prop') {
-              if (!sProp && !isobject(value)) {
+              if (!sProp) {
                 data.push(entity)
                 data.push({ value, type: 'propValue' })
                 dataList.push(data)
