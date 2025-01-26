@@ -138,18 +138,20 @@ const PremiumCard = styled.div`
 `
 const premiumCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS.S.Filled.Rect.addColor({
-    bg: t.boxWithWine.bg,
-    ct: t.boxWithWine.ct,
-    ctRipple: t.boxNormal.ct4[0],
-    bgFocus: t.boxWithWine.bg,
-    bgImFocus: `linear-gradient(
+  ${ButtonS6.W.t({
+    buttonBgColor: t.boxWithWine.bg,
+    buttonColor: t.boxWithWine.ct,
+    rippleRippleColor: t.ripple.ct,
+    inFocus: {
+      buttonBgColor: t.boxWithWine.bg,
+      buttonBgIm: `linear-gradient(
         to bottom right,
         ${t.boxWithWine.bgFocus[1]} 65%,
         ${t.boxWithWine.bgFocus[0]} 100%
       )`,
-    ctFocus: t.boxWithWine.ctFocus,
-  })};
+      buttonColor: t.boxWithWine.ctFocus,
+    },
+  })}
 `
 const PremiumCardIc = styled(FeatureCardIc)`
   background-image: url(${heartLocks});
@@ -166,18 +168,20 @@ const InviteFriendsCard = styled.div`
 `
 const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS.S.Filled.Rect.addColor({
-    bg: t.boxWithViolet.bg,
-    ct: t.boxWithViolet.ct,
-    ctRipple: t.boxNormal.ct4[0],
-    bgFocus: t.boxWithViolet.bg,
-    bgImFocus: `linear-gradient(
+  ${ButtonS6.W.t({
+    buttonBgColor: t.boxWithViolet.bg,
+    buttonColor: t.boxWithViolet.ct,
+    rippleRippleColor: t.ripple.ct,
+    inFocus: {
+      buttonBgColor: t.boxWithViolet.bg,
+      buttonBgIm: `linear-gradient(
         to bottom right,
         ${t.boxWithViolet.bgFocus[1]} 65%,
         ${t.boxWithViolet.bgFocus[0]} 100%
       )`,
-    ctFocus: t.boxWithViolet.ctFocus,
-  })};
+      buttonColor: t.boxWithViolet.ctFocus,
+    },
+  })}
 `
 const InviteFriendsCardIc = styled(FeatureCardIc)`
   background-image: url(${share});
@@ -197,18 +201,20 @@ const SocialNetworksCard = styled.div`
 `
 const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS.S.Filled.Rect.addColor({
-    bg: t.boxWithBlue.bg,
-    ct: t.boxWithBlue.ct,
-    ctRipple: t.boxNormal.ct4[0],
-    bgFocus: t.boxWithBlue.bg,
-    bgImFocus: `linear-gradient(
+  ${ButtonS6.W.t({
+    buttonBgColor: t.boxWithBlue.bg,
+    buttonColor: t.boxWithBlue.ct,
+    rippleRippleColor: t.ripple.ct,
+    inFocus: {
+      buttonBgColor: t.boxWithBlue.bg,
+      buttonBgIm: `linear-gradient(
         to bottom right,
         ${t.boxWithBlue.bgFocus[1]} 65%,
         ${t.boxWithBlue.bgFocus[0]} 100%
       )`,
-    ctFocus: t.boxWithBlue.ctFocus,
-  })};
+      buttonColor: t.boxWithBlue.ctFocus,
+    },
+  })}
 `
 const SocialNetworksCardIc = styled(FeatureCardIc)`
   background-image: url(${social});

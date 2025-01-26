@@ -44,7 +44,6 @@ import { FormProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProp
 import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop

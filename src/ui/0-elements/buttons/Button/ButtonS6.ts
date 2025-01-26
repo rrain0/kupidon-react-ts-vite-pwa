@@ -424,6 +424,14 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonTransparent.bgFocus[0],
           },
         }]
+        // type: text, color: normal2
+        export const normal2: AppWidgetStyle = t => [baseColor(t), {
+          buttonColor: t.buttonNormal.bg[0],
+          rippleRippleColor: t.ripple.ctOnTransparent,
+          inFocus: {
+            buttonBgColor: t.buttonTransparent.bgFocus[0],
+          },
+        }]
       }
       
       export namespace Rect {
@@ -446,9 +454,11 @@ export namespace ButtonS6 {
         
         export namespace Big {
           export const normal: AppWidgetStyle = t => [sizeBig, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeBig, Color.normal2(t)]
         }
         export namespace Normal {
           export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
         }
       }
       
@@ -483,15 +493,41 @@ export namespace ButtonS6 {
         
         export namespace Normal {
           export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
         }
         export namespace Small {
           export const normal: AppWidgetStyle = t => [sizeSmall, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeSmall, Color.normal2(t)]
         }
         export namespace Normal2 {
           export const normal: AppWidgetStyle = t => [sizeNormal2, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeNormal2, Color.normal2(t)]
         }
         export namespace Normal2Uppercase {
           export const normal: AppWidgetStyle = t => [sizeNormal2Uppercase, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeNormal2Uppercase, Color.normal2(t)]
+        }
+      }
+      
+      // TODO Style - move to IconButton
+      export namespace Round {
+        // type: text, shape: round, size: big
+        export const sizeBig: WidgetStyle = [base, {
+          button: { sz: 50, r: 'round', p: 11 },
+          rippleRipple: { mode: 'center' },
+        }]
+        // type: text, shape: round, size: big2
+        export const sizeBig2: WidgetStyle = [sizeBig, {
+          button: { p: 14 },
+        }]
+        
+        export namespace Big {
+          export const normal: AppWidgetStyle = t => [sizeBig, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeBig, Color.normal2(t)]
+        }
+        export namespace Big2 {
+          export const normal: AppWidgetStyle = t => [sizeBig2, Color.normal(t)]
+          export const normal2: AppWidgetStyle = t => [sizeBig2, Color.normal2(t)]
         }
       }
       
@@ -585,23 +621,39 @@ export namespace ButtonS6 {
       export namespace Rect {
         export namespace Big {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Big.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Rect.Big.normal2(t))
         }
         export namespace Normal {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Normal.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Rect.Normal.normal2(t))
         }
       }
       export namespace Rounded {
         export namespace Normal {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Normal.normal2(t))
         }
         export namespace Small {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Small.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Small.normal2(t))
         }
         export namespace Normal2 {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2.normal2(t))
         }
         export namespace Normal2Uppercase {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2Uppercase.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2Uppercase.normal2(t))
+        }
+      }
+      export namespace Round {
+        export namespace Big {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Round.Big.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Round.Big.normal2(t))
+        }
+        export namespace Big2 {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Round.Big2.normal(t))
+          export const normal2: AppStyle = t => W.t(SWidget.Text.Round.Big2.normal2(t))
         }
       }
     }

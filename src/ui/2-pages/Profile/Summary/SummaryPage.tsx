@@ -258,7 +258,7 @@ const SummaryPage = React.memo(
                 <UserActionsConsumer>
                   <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
                     <Eye>
-                      <Button css={ButtonS.textRoundBigNormal}>
+                      <Button css={ButtonS6.S.Text.Round.Big.normal2}>
                         <EyeWideIc css={eyeIcS} />
                       </Button>
                     </Eye>

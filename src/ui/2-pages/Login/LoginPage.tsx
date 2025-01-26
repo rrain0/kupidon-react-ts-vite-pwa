@@ -23,7 +23,6 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
 import { LoginPageValidation } from './validation'
 import FormValues = LoginPageValidation.FormValues

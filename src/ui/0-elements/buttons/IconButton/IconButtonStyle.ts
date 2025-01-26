@@ -95,13 +95,13 @@ export namespace IconButtonStyle {
   
   
   export const iconBigTransparent = (t: AppTheme.Theme) => css`
-    ${ButtonS.textRoundBigNormal(t)};
+    ${ButtonS6.S.Text.Round.Big.normal2(t)};
     ${icTransparentAddColorNormal(t)};
   `
   
   
   export const iconBig2Transparent = (t: AppTheme.Theme) => css`
-    ${ButtonS.textRoundBig2Normal(t)};
+    ${ButtonS6.S.Text.Round.Big2.normal2(t)};
     ${icTransparentAddColorNormal(t)};
   `
   
@@ -121,7 +121,7 @@ export namespace IconButtonStyle {
   
   
   export const imSmallPlaceholderIcFullTransparent = (t: AppTheme.Theme) => css`
-    ${ButtonS.textRoundBig2Normal(t)};
+    ${ButtonS6.S.Text.Round.Big2.normal2(t)};
     ${ButtonS.W.use.s.normal().e.button().thisUse} {
       height: 100%;
       width: 100%;

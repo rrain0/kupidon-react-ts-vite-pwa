@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import Slider from 'src/ui/1-widgets/Slider/Slider'
 import { TypeU } from 'src/util/common/TypeU.ts'
