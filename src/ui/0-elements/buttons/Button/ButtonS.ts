@@ -941,7 +941,7 @@ export namespace ButtonS {
     }
   `
   // type: text, shape: rounded, add color: normal
-  export const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
+  const textRoundedAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       ${W.e.button.e.props.color.set(t.page.ct2)};

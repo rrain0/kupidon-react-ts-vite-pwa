@@ -80,7 +80,10 @@ export namespace ButtonS6 {
         justifyContent: 'center',
         overflowWrap: 'anywhere',
         overflow: 'hidden',
-        transition: 'background linear 300ms',
+        transition:
+          'background linear 300ms,' +
+          'color linear 300ms,' +
+          'border-color linear 300ms',
       }],
       border: {
         ...abs,
@@ -109,17 +112,15 @@ export namespace ButtonS6 {
       
       
       export namespace Color {
-        
         // type: filled, color: normal
-        export const normal: AppWidgetStyle = t => ({
+        export const normal: AppWidgetStyle = t => [baseColor(t), {
           buttonBgColor: t.buttonNormal.bg[0],
           buttonColor: t.buttonNormal.ct[0],
-          rippleRippleColor: t.ripple.ct,
           inFocus: {
             buttonBgColor: t.buttonNormal.bgFocus[0],
             buttonColor: t.buttonNormal.ctFocus[0],
           },
-        })
+        }]
         // type: filled, color: main
         export const main: AppWidgetStyle = t => [baseColor(t), {
           buttonBgColor: t.buttonMain.bg[0],
@@ -319,43 +320,179 @@ export namespace ButtonS6 {
       
     }
     
-    export namespace Text {
+    // TODO Style - on hover change only border and text color, not bg color
+    export namespace Outlined {
       
-      export namespace Rect {
-        
-        // type: text, shape: rect, size: big
-        export const baseSizeBig: WidgetStyle = [Filled.Rect.sizeBig, {
-          buttonBg: null,
-        }]
-        // type: text, shape: rect, size: normal
-        export const baseSizeNormal: WidgetStyle = {
-          button: {
-            w: 'auto', hMin: 30, r: 10, p: [4, 6], g: 4,
-            ...Txt.normal1,
+      export const baseColor: AppWidgetStyle = t => ({
+        buttonColor: t.buttonNormal.bg[0],
+        borderBdColor: t.buttonNormal.bg[0],
+        rippleRippleColor: t.ripple.ctOnTransparent,
+        inFocus: {
+          buttonBgColor: t.buttonNormal.bgFocus[0],
+          buttonColor: t.buttonNormal.ctFocus[0],
+        },
+        disabled: {
+          buttonBgColor: t.elementDisabled.bg[0],
+          buttonColor: t.elementDisabled.ct[0],
+        },
+      })
+      
+      export namespace Color {
+        // type: outlined, color: normal
+        export const normal: AppWidgetStyle = t => [baseColor(t), {
+          buttonColor: t.buttonNormal.bg[0],
+          borderBdColor: t.buttonNormal.bg[0],
+          inFocus: {
+            buttonBgColor: t.buttonNormal.bgFocus[0],
+            buttonColor: t.buttonNormal.ctFocus[0],
           },
+        }]
+        // type: outlined, color: accent
+        export const accent: AppWidgetStyle = t => [baseColor(t), {
+          buttonColor: t.buttonAccent.bg[0],
+          borderBdColor: t.buttonAccent.bg[0],
+          inFocus: {
+            buttonBgColor: t.buttonAccent.bgFocus[0],
+            buttonColor: t.buttonAccent.ctFocus[0],
+            borderBdColor: t.buttonAccent.bgFocus[0],
+          },
+        }]
+      }
+      
+      export namespace Rounded {
+        
+        // type: outlined, shape: rounded, size: normal
+        export const sizeNormal: WidgetStyle = [base, {
+          button: {
+            wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
+            ...Txt.small1,
+          },
+          border: {
+            bd: '1px solid',
+          },
+          hover: {
+            borderBd: null,
+          },
+        }]
+        // type: outlined, shape: rounded, size: small
+        export const sizeSmall: WidgetStyle = [base, {
+          button: {
+            w: 'ct', hMin: 30, r: 'round', p: [4, 16],
+            ...Txt.small1,
+          },
+          border: {
+            bd: '1px solid',
+          },
+          hover: {
+            borderBd: null,
+          },
+        }]
+        
+        export namespace Normal {
+          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
+          export const accent: AppWidgetStyle = t => [sizeNormal, Color.accent(t)]
+        }
+        export namespace Small {
+          export const normal: AppWidgetStyle = t => [sizeSmall, Color.normal(t)]
+          export const accent: AppWidgetStyle = t => [sizeSmall, Color.accent(t)]
         }
         
-        // type: text, shape: rect, add color: normal
-        export const addColorNormal: AppWidgetStyle = t => ({
+      }
+      
+    }
+    
+    export namespace Text {
+      
+      export const baseColor: AppWidgetStyle = t => ({
+        buttonColor: t.page.ct2,
+        rippleRippleColor: t.ripple.ctOnTransparent,
+        inFocus: {
+          buttonBgColor: t.buttonTransparent.bgFocus[0],
+        },
+        disabled: {
+          buttonBgColor: t.elementDisabled.bg[0],
+          buttonColor: t.elementDisabled.ct[0],
+        },
+      })
+      
+      export namespace Color {
+        // type: text, color: normal
+        export const normal: AppWidgetStyle = t => [baseColor(t), {
           buttonColor: t.page.ct2,
           rippleRippleColor: t.ripple.ctOnTransparent,
           inFocus: {
             buttonBgColor: t.buttonTransparent.bgFocus[0],
           },
-          disabled: {
-            buttonBgColor: t.elementDisabled.bg[0],
-            buttonColor: t.elementDisabled.ct[0],
+        }]
+      }
+      
+      export namespace Rect {
+        // type: text, shape: rect, size: big
+        export const sizeBig: WidgetStyle = [base, {
+          button: {
+            w: 'full', hMin: 50, r: 15, p: [8, 6],
+            ...Txt.large2,
           },
-        })
+          buttonBg: null,
+        }]
+        // type: text, shape: rect, size: normal
+        export const sizeNormal: WidgetStyle = [sizeBig, {
+          button: {
+            w: 'auto', hMin: 30, r: 10, p: [4, 6], g: 4,
+            ...Txt.normal1,
+          },
+        }]
+        
         
         export namespace Big {
-          export const normal: AppWidgetStyle = t => [baseSizeBig, addColorNormal(t)]
+          export const normal: AppWidgetStyle = t => [sizeBig, Color.normal(t)]
         }
+        export namespace Normal {
+          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
+        }
+      }
+      
+      export namespace Rounded {
+        // type: text, shape: rounded, size: normal
+        export const sizeNormal: WidgetStyle = [base, {
+          button: {
+            wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
+            ...Txt.large2b,
+          },
+        }]
+        // type: text, shape: rounded, size: small
+        export const sizeSmall: WidgetStyle = [base, {
+          button: {
+            w: 'ct', hMin: 30, r: 'round', p: [4, 16],
+            ...Txt.large1b,
+          },
+        }]
+        // type: text, shape: rounded, size: normal2
+        export const sizeNormal2: WidgetStyle = [sizeNormal, {
+          button: {
+            pH: 16,
+            ...Txt.large1b,
+          },
+        }]
+        // type: text, shape: rounded, size: normal2Uppercase
+        export const sizeNormal2Uppercase: WidgetStyle = [sizeNormal2, {
+          button: {
+            textTransform: 'uppercase',
+          },
+        }]
         
         export namespace Normal {
-          export const normal: AppWidgetStyle = t => [baseSizeBig, baseSizeNormal, addColorNormal(t)]
+          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
         }
-        
+        export namespace Small {
+          export const normal: AppWidgetStyle = t => [sizeSmall, Color.normal(t)]
+        }
+        export namespace Normal2 {
+          export const normal: AppWidgetStyle = t => [sizeNormal2, Color.normal(t)]
+        }
+        export namespace Normal2Uppercase {
+          export const normal: AppWidgetStyle = t => [sizeNormal2Uppercase, Color.normal(t)]
+        }
       }
       
     }
@@ -432,6 +569,18 @@ export namespace ButtonS6 {
         }
       }
     }
+    export namespace Outlined {
+      export namespace Rounded {
+        export namespace Normal {
+          export const accent: AppStyle = t => W.t(SWidget.Outlined.Rounded.Normal.accent(t))
+          export const normal: AppStyle = t => W.t(SWidget.Outlined.Rounded.Normal.normal(t))
+        }
+        export namespace Small {
+          export const accent: AppStyle = t => W.t(SWidget.Outlined.Rounded.Small.accent(t))
+          export const normal: AppStyle = t => W.t(SWidget.Outlined.Rounded.Small.normal(t))
+        }
+      }
+    }
     export namespace Text {
       export namespace Rect {
         export namespace Big {
@@ -439,6 +588,20 @@ export namespace ButtonS6 {
         }
         export namespace Normal {
           export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Normal.normal(t))
+        }
+      }
+      export namespace Rounded {
+        export namespace Normal {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal.normal(t))
+        }
+        export namespace Small {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Small.normal(t))
+        }
+        export namespace Normal2 {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2.normal(t))
+        }
+        export namespace Normal2Uppercase {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2Uppercase.normal(t))
         }
       }
     }

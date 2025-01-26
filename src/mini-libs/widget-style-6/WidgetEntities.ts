@@ -311,13 +311,17 @@ export namespace WidgetProps {
   export const gap = WidgetProp.ofName('gap', transformMultiLenValue)
   
   export const color = WidgetProp.ofName('color', transformNullToTransparent)
+  
   export const background = WidgetProp.ofName('background', transformNullToNone)
   export const backgroundColor = WidgetProp.ofName('background-color', transformNullToTransparent)
   export const backgroundImage = WidgetProp.ofName('background-image', transformNullToNone)
   export const backgroundPosition = WidgetProp.ofName('background-position', transformMultiLenValue)
   export const backgroundSize = WidgetProp.ofName('background-size', transformMultiLenValue)
+  
   export const border = WidgetProp.ofName('border', transformNullToNone)
+  export const borderColor = WidgetProp.ofName('border-color', transformNullToTransparent)
   export const borderRadius = WidgetProp.ofName('border-radius', transformLenValue)
+  
   export const outline = WidgetProp.ofName('outline', transformNullToNone)
   export const boxShadow = WidgetProp.ofName('box-shadow', transformNullToNone)
 }

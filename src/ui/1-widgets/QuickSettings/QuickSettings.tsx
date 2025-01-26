@@ -104,7 +104,7 @@ const QuickSettings = React.memo(
                     </Link>
                     
                     <Link to={RootRoute.test[full]()}>
-                      <Button css={ButtonS.outlinedRoundedNormalNormal}
+                      <Button css={ButtonS6.S.Outlined.Rounded.Normal.normal}
                         onClick={props.setClosing}
                       >
                         {titleText.testPage}
@@ -127,7 +127,7 @@ const QuickSettings = React.memo(
                     </Button>
                     
                     {import.meta.env.DEV && (
-                      <Button css={ButtonS.outlinedRoundedNormalNormal}
+                      <Button css={ButtonS6.S.Outlined.Rounded.Normal.normal}
                         onClick={() => setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
                       >
                         Show Dev Overlay

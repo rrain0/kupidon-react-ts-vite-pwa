@@ -98,7 +98,7 @@ const PartnerHeightOption = React.memo(
     
     
     const activeBtn = ButtonS6.S.Filled.Rounded.Normal.accent
-    const inactiveBtn = ButtonS.outlinedRoundedNormalAccent
+    const inactiveBtn = ButtonS6.S.Outlined.Rounded.Normal.accent
     
     return (
       <>

@@ -181,7 +181,7 @@ const ApplicationSettingsPage = React.memo(() => {
               <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
                 {overlay => (
                   <>
-                    <Button css={ButtonS.outlinedRoundedNormalNormal}
+                    <Button css={ButtonS6.S.Outlined.Rounded.Normal.normal}
                       onClick={overlay.open}
                     >
                       {actionText.clearAppData}

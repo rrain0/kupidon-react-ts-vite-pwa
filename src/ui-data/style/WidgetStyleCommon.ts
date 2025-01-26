@@ -63,6 +63,18 @@ export namespace WidgetStyleCommon {
       lineHeight: '150%',
       letterSpacing: '0.05em',
     }
+    export const large2b: WidgetStyle = {
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+    }
+    export const large1b: WidgetStyle = {
+      fontWeight: '400',
+      fontSize: '16px',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+    }
     
     
     
@@ -72,7 +84,6 @@ export namespace WidgetStyleCommon {
       lineHeight: '129%',
       letterSpacing: '0.05em',
     }
-    
     export const normal1: WidgetStyle = {
       fontWeight: '300',
       fontSize: '16px',

@@ -65,13 +65,17 @@ export const CommonProps = (() => {
     av: WidgetComplexTransformers.absV,
     
     color: WidgetProps.color,
+    
     background: WidgetProps.background,
     backgroundColor: WidgetProps.backgroundColor,
     backgroundImage: WidgetProps.backgroundImage,
     backgroundPosition: WidgetProps.backgroundPosition,
     backgroundSize: WidgetProps.backgroundSize,
+    
     border: WidgetProps.border,
+    borderColor: WidgetProps.borderColor,
     borderRadius: WidgetProps.borderRadius,
+    
     outline: WidgetProps.outline,
     boxShadow: WidgetProps.boxShadow,
     
@@ -80,7 +84,9 @@ export const CommonProps = (() => {
     bgIm: WidgetProps.backgroundImage,
     bgPos: WidgetProps.backgroundPosition,
     bgSz: WidgetProps.backgroundSize,
+    
     bd: WidgetProps.border,
+    bdColor: WidgetProps.borderColor,
     radius: WidgetProps.borderRadius,
     r: WidgetProps.borderRadius,
   }
