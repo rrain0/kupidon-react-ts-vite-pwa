@@ -8,6 +8,10 @@ import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradI
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Elem0 = WidgetStyle0.Elem
 import CssWidget0 = WidgetStyle0.CssWidget
+import hoverable = EmotionCommon.hoverable
+import Pseudo0 = WidgetStyle0.CssPseudo
+import CssAttr0 = WidgetStyle0.CssAttr
+import CssPropColor = WidgetStyle0.CssPropColor
 
 
 
@@ -17,7 +21,20 @@ export namespace IconButtonStyle {
   
   
   
-  import hoverable = EmotionCommon.hoverable
+  export const ButtonEl = function() {
+    const button = new Elem0(ButtonS6.W.els.button.n, {
+      normal: Pseudo0.empty,
+      hover: Pseudo0.hover,
+      active: Pseudo0.active,
+      focus: Pseudo0.focus,
+      focusVisible: Pseudo0.focusVisible,
+      disabled: Pseudo0.disabled,
+      error: CssAttr0.dataError,
+    }, {
+      color: CssPropColor,
+    })
+    return { button }
+  }()
   export const El = function() {
     const icon = new Elem0(SvgIconS.El.icon.name, { }, {
       size: SvgIconS.El.icon.props.size,
@@ -31,7 +48,7 @@ export namespace IconButtonStyle {
     })
     
     return {
-      button: ButtonS.El0.button,
+      button: ButtonEl.button,
       //border: ButtonS.El.border,
       //ripple: ButtonS.El.ripple,
       icon,

@@ -5,6 +5,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { RippleS } from 'src/ui/0-elements/Ripple/RippleS.ts'
 import { TypeU } from 'src/util/common/TypeU'
 import Txt = EmotionCommon.Txt
@@ -75,7 +76,7 @@ export namespace ButtonS {
   
   
   export const El = function() {
-    const button = new Elem('rrainuiButton', {
+    const button = new Elem(ButtonS6.W.els.button.n, {
       normal: CssPseudo.empty,
       hover: CssPseudo.hover,
       active: CssPseudo.active,
@@ -87,7 +88,7 @@ export namespace ButtonS {
     }, {
       color: CssProp.color,
     })
-    const border = new Elem('rrainuiBorder', { }, { })
+    const border = new Elem(ButtonS6.W.els.border.n, { }, { })
     const ripple = Elem.newEmpty()
     
     return { button, border, ripple } as const

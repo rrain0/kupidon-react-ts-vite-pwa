@@ -29,6 +29,7 @@ export class WidgetElem<const out Ps extends RecordRo<string, WidgetProp> = any>
   readonly isAtomic = true as const
   
   constructor(
+    // 'className' without dot
     readonly className: string,
     readonly states?: Record<string, WidgetAnyStateTransformer> | undefined,
     readonly props?: Ps | undefined,
@@ -93,6 +94,7 @@ export class WidgetProp {
   readonly isAtomic = true as const
   
   constructor(
+    // full prop name: 'background-color', '--color'
     readonly prop: string,
     readonly transformValue?: TransformPropValue | undefined,
   ) { }

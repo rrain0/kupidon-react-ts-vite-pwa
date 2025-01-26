@@ -39,8 +39,9 @@ const Button = React.memo(
           { rippleProps => (
             <button // Button
               ref={elemRef}
+              // TODO Style - get error name from style v6
               {...{ [ButtonS.W.s.error.s.name]: trueOrUndef(hasError) }}
-              className={clsx(className, ButtonS.W.e.button.e.name, ButtonS6.W.els.button.n)}
+              className={clsx(className, ButtonS6.W.els.button.n)}
               type="button"
               {...restProps}
               {...combineEvHandlersRecords(rippleProps.target, restProps)}
@@ -49,7 +50,7 @@ const Button = React.memo(
               {children}
               
               <div // Border
-                className={clsx(ButtonS.W.e.border.e.name, ButtonS6.W.els.border.n)}
+                className={ButtonS6.W.els.border.n}
               >
                 <Ripple
                   {...rippleProps.ripple}

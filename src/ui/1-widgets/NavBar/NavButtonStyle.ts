@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
@@ -8,6 +9,13 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
+import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
+import DataAttr = WidgetStyle0.DataAttr
+import Pseudo00 = WidgetStyle0.Pseudo0
+import Elem00 = WidgetStyle0.Elem0
+import CssPropEnum0 = WidgetStyle0.CssPropEnum
+import CssProp0 = WidgetStyle0.CssProp
+import CssPropColor = WidgetStyle0.CssPropColor
 
 
 
@@ -18,14 +26,32 @@ export namespace NavButtonStyle {
   
   
   export const Attr = {
-    ...ButtonS.Attr0,
+    error: DataAttr.error,
   } as const
   
+  const ButtonEl = function() {
+    const btn = new Elem00(ButtonS6.W.els.button.n, {
+      hover: Pseudo00.hover,
+      active: Pseudo00.active,
+      focus: Pseudo00.focus,
+      focusVisible: Pseudo00.focusVisible,
+      disabled: Pseudo00.disabled,
+      error: Attr.error,
+    }, {
+      color: CssPropColor,
+    })
+    const border = btn.toElem('>', new Elem00(ButtonS6.W.els.border.n, {}, {}))
+    const ripple = border.toElem('>', new Elem00(RippleStyle.El0.frameClassName, {}, {
+      mode: new CssPropEnum0(RippleStyle.Prop.mode, ['center', 'cursor']),
+      color: new CssProp0(RippleStyle.Prop.color),
+    }))
+    return { root: btn, btn, border, ripple } as const
+  }()
   export const El = function() {
-    const btn = ButtonS.El00.btn
+    const btn = ButtonEl.btn
     const icon = btn.toElem('>', SvgIconS.El.icon)
     const gradIcon = btn.toElem('>', SvgGradIconsStyle.El.root)
-    return { ...ButtonS.El00, gradIcon, icon } as const
+    return { ...ButtonEl, gradIcon, icon } as const
   }()
   
   

@@ -25,16 +25,12 @@ export namespace ButtonS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const button = WidgetElem.of({
-      // TODO Style - shorten className after refactor
-      className: 'rrainuiButton',
-      //className: 'rruiButton',
+      className: 'rruiButton',
       ...up,
       states: CommonStates,
     })
     const border = WidgetElem.of({
-      // TODO Style - shorten className after refactor
-      className: 'rrainuiBorder',
-      //className: 'rruiBorder',
+      className: 'rruiBorder',
       upElem: button, upSelector: '>',
     })
     const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
@@ -535,8 +531,6 @@ export namespace ButtonS6 {
     
   }
   
-  
-  // TODO Style - Button showcase page
   
   // TODO Style - maybe cache it by theme + style in WeakMap or Map (to control size)
   export namespace S {
