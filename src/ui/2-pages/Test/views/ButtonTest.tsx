@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { ButtonS6, normal } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import col = EmotionCommon.col
@@ -96,7 +96,23 @@ const ButtonTest = React.memo(() => {
                   <Button css={ButtonS6.S.Filled.Rect.Normal.accent2}>Button</Button>
                 </ButtonBox>
               </ButtonDescription>
+            </Buttons>
             
+            
+            <Buttons>
+              <ButtonDescription>
+                <div>Type: text, Shape: rect, Size: big, Color: normal</div>
+                <ButtonBox css={{ width: 250 }}>
+                  <Button css={ButtonS6.S.Text.Rect.Big.normal}>Button</Button>
+                </ButtonBox>
+              </ButtonDescription>
+              
+              <ButtonDescription>
+                <div>Type: text, Shape: rect, Size: normal, Color: normal</div>
+                <ButtonBox css={{ width: 250 }}>
+                  <Button css={ButtonS6.S.Text.Rect.Normal.normal}>Button</Button>
+                </ButtonBox>
+              </ButtonDescription>
             </Buttons>
           
           </BlocksContainer>

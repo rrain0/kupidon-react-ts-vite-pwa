@@ -25,7 +25,7 @@ export namespace WidgetStyleCommon {
   
   
   export const reset = (() => {
-    const reset = {
+    const reset: WidgetStyle = {
       //appearance: 'none',
       boxSizing: 'border-box',
       bg: null,
@@ -42,7 +42,7 @@ export namespace WidgetStyleCommon {
     }
   })()
   
-  export const resetButton = {
+  export const resetButton: WidgetStyle = {
     ...reset,
     cursor: 'pointer',
     hover: noBorderOutlineBoxShadow,
@@ -51,6 +51,8 @@ export namespace WidgetStyleCommon {
     focusVisible: noBorderOutlineBoxShadow,
     disabled: { cursor: 'not-allowed' },
   }
+  
+  
   
   
   export namespace Txt {
@@ -71,8 +73,12 @@ export namespace WidgetStyleCommon {
       letterSpacing: '0.05em',
     }
     
-    
-    
+    export const normal1: WidgetStyle = {
+      fontWeight: '300',
+      fontSize: '16px',
+      lineHeight: '129%',
+      letterSpacing: 'normal',
+    }
     
   }
 }

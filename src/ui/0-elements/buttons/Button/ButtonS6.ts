@@ -98,7 +98,7 @@ export namespace ButtonS6 {
         export const baseSizeBig: WidgetStyle = [base, {
           button: {
             // TODO Style - p: [8, 16]
-            w: 'full', hMin: 50, r: 15, pv: 8, ph: 16,
+            w: 'full', hMin: 50, r: 15, pv: 8, ph: 6,
             ...Txt.large2,
           },
         }]
@@ -207,12 +207,31 @@ export namespace ButtonS6 {
           buttonBg: null,
         }]
         
-        export const addColorNormal: WidgetStyle = {
-        
+        export const addSizeNormal: WidgetStyle = {
+          button: {
+            w: 'auto', hMin: 30, r: 10, pv: 4, ph: 6, g: 4,
+            ...Txt.normal1,
+          },
         }
         
-        export namespace Big {
+        export const addColorNormal: AppWidgetStyle = t => ({
+          buttonColor: t.page.ct2,
+          rippleRippleColor: t.ripple.ctOnTransparent,
+          inFocus: {
+            buttonBgColor: t.buttonTransparent.bgFocus[0],
+          },
+          disabled: {
+            buttonBgColor: t.elementDisabled.bg[0],
+            buttonColor: t.elementDisabled.ct[0],
+          },
+        })
         
+        export namespace Big {
+          export const normal: AppWidgetStyle = t => [baseSizeBig, addColorNormal(t)]
+        }
+        
+        export namespace Normal {
+          export const normal: AppWidgetStyle = t => [baseSizeBig, addSizeNormal, addColorNormal(t)]
         }
         
       }
@@ -242,6 +261,16 @@ export namespace ButtonS6 {
           export const accent2: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.accent2(t))
           export const normal: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.main(t))
           export const danger: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.danger(t))
+        }
+      }
+    }
+    export namespace Text {
+      export namespace Rect {
+        export namespace Big {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Big.normal(t))
+        }
+        export namespace Normal {
+          export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Normal.normal(t))
         }
       }
     }

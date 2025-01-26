@@ -3,6 +3,7 @@ import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { Hs } from 'src/ui/0-elements/basic-elements/Hs'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import CssWidget = WidgetStyle.CssWidget
@@ -13,7 +14,6 @@ import row = EmotionCommon.row
 
 export namespace HeaderArrowS {
   
-  import Txt = EmotionCommon.Txt
   export const W = (() => {
     const button = new Elem('button', {
       normal: CssPseudo.empty,
@@ -30,7 +30,7 @@ export namespace HeaderArrowS {
   
   export namespace Part {
     export const base = (t: AppTheme.Theme) => css`
-      ${ButtonS.textRectNormalNormal(t)};
+      ${ButtonS6.S.Text.Rect.Normal.normal(t)};
       // normal
       ${W.u({ e: 'button', s: 'normal' }).thisUse} {
         ${row};

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { FileU } from 'src/util/file/FileU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -45,112 +46,116 @@ export type ProfilePhotosPhotoOptionsProps = {
 }
 
 
-const ProfilePhotosPhotoOptions = React.memo(
-(props: ProfilePhotosPhotoOptionsProps)=>{
+const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsProps) => {
   const { isOpen, close, images, setImages, lastIdx, onFilesSelected } = props
   
   const actionText = useUiValues(ActionUiText)
   
-  return <UseBottomSheetState isOpen={isOpen} onClose={close}>
-    {sheet =>
-      <ModalPortal>
-        <BottomSheetDialogBasic {...sheet.sheetProps}>
-          <OptionsContent>
-            
-            
-            <Button css={ButtonS.textRectBigNormal}
-              onClick={()=>{
+  return (
+    <UseBottomSheetState isOpen={isOpen} onClose={close}>
+      { sheet => (
+        <ModalPortal>
+          <BottomSheetDialogBasic {...sheet.sheetProps}>
+            <OptionsContent>
+              
+              
+              <Button css={ButtonS6.S.Text.Rect.Big.normal}
+                onClick={() => {
+                  const im = images[lastIdx]
+                  im.download?.abort()
+                  im.compression?.abort()
+                  const newImages = [...images]
+                  newImages[lastIdx] = {
+                    ...DefaultProfilePhoto,
+                    type: 'local',
+                    id: uuid.v4(),
+                    isEmpty: true,
+                    remoteIndex: newImages[lastIdx].remoteIndex,
+                  } satisfies ProfilePhoto
+                  setImages(newImages)
+                  sheet.setClosing()
+                }}
+              >
+                <OptionContainer>
+                  <div css={optionIconBoxStyle}>
+                    <CrossInCircleIc css={css`height: 120%;`} />
+                  </div>
+                  <OptionTitle>{actionText.remove}</OptionTitle>
+                </OptionContainer>
+              </Button>
+              
+              
+              <Dropzone
+                onDrop={(files, rejectedFiles, ev) => onFilesSelected(files)}
+                noDrag
+                useFsAccessApi={false}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <div css={contents} {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    <Button css={ButtonS6.S.Text.Rect.Big.normal}>
+                      
+                      <OptionContainer>
+                        <div css={optionIconBoxStyle}>
+                          <ArrowRefreshCwIc />
+                        </div>
+                        <OptionTitle>{actionText.replace}</OptionTitle>
+                      </OptionContainer>
+                    </Button>
+                  </div>
+                )}
+              </Dropzone>
+              
+              
+              {/* Fullscreen */}
+              {/* {function(){
+               const im = images[lastIdx]
+               if (im.type === 'remote' && im.isDownloaded || im.type === 'local' && im.isCompressed) {
+               return <Button css={ButtonS.bigRectTransparent}
+               onClick={()=>{
+               sheet.setClosing()
+               }}
+               >
+               <OptionContainer>
+               <div css={optionIconBoxStyle}>
+               <FullscreenIc css={css`height: 120%;`}/>
+               </div>
+               <OptionTitle>{actionText.fullScreenView}</OptionTitle>
+               </OptionContainer>
+               </Button>
+               }
+               }()} */}
+              
+              
+              {function() {
                 const im = images[lastIdx]
-                im.download?.abort()
-                im.compression?.abort()
-                const newImages = [...images]
-                newImages[lastIdx] = {
-                  ...DefaultProfilePhoto,
-                  type: 'local',
-                  id: uuid.v4(),
-                  isEmpty: true,
-                  remoteIndex: newImages[lastIdx].remoteIndex,
-                } satisfies ProfilePhoto
-                setImages(newImages)
-                sheet.setClosing()
-              }}
-            >
-              <OptionContainer>
-                <div css={optionIconBoxStyle}>
-                  <CrossInCircleIc css={css`height: 120%;`}/>
-                </div>
-                <OptionTitle>{actionText.remove}</OptionTitle>
-              </OptionContainer>
-            </Button>
+                if (im.isReady) {
+                  return (
+                    <a href={im.dataUrl}
+                      download={`${im.name} ${im.id}.${extensionFromMimeType(im.mimeType)}`}
+                    >
+                      <Button css={ButtonS6.S.Text.Rect.Big.normal}
+                        onClick={sheet.setClosing}
+                      >
+                        <OptionContainer>
+                          <div css={optionIconBoxStyle}>
+                            <Download1Ic />
+                          </div>
+                          <OptionTitle>{actionText.download}</OptionTitle>
+                        </OptionContainer>
+                      </Button>
+                    </a>
+                  )
+                }
+              }()}
             
             
-            <Dropzone
-              onDrop={(files, rejectedFiles, ev)=>onFilesSelected(files)}
-              noDrag
-              useFsAccessApi={false}
-            >
-              {({getRootProps, getInputProps}) =>
-                <div css={contents} {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <Button css={ButtonS.textRectBigNormal}>
-                    
-                    <OptionContainer>
-                      <div css={optionIconBoxStyle}>
-                        <ArrowRefreshCwIc/>
-                      </div>
-                      <OptionTitle>{actionText.replace}</OptionTitle>
-                    </OptionContainer>
-                  </Button>
-                </div>
-              }
-            </Dropzone>
-            
-            
-            {/* Fullscreen */}
-            {/* {function(){
-             const im = images[lastIdx]
-             if (im.type === 'remote' && im.isDownloaded || im.type === 'local' && im.isCompressed) {
-             return <Button css={ButtonS.bigRectTransparent}
-             onClick={()=>{
-             sheet.setClosing()
-             }}
-             >
-             <OptionContainer>
-             <div css={optionIconBoxStyle}>
-             <FullscreenIc css={css`height: 120%;`}/>
-             </div>
-             <OptionTitle>{actionText.fullScreenView}</OptionTitle>
-             </OptionContainer>
-             </Button>
-             }
-             }()} */}
-            
-            
-            {function(){
-              const im = images[lastIdx]
-              if (im.isReady) {
-                return <a href={im.dataUrl}
-                  download={`${im.name} ${im.id}.${extensionFromMimeType(im.mimeType)}`}
-                >
-                  <Button css={ButtonS.textRectBigNormal}
-                    onClick={sheet.setClosing}
-                  >
-                    <OptionContainer>
-                      <div css={optionIconBoxStyle}>
-                        <Download1Ic/>
-                      </div>
-                      <OptionTitle>{actionText.download}</OptionTitle>
-                    </OptionContainer>
-                  </Button>
-                </a>
-              }
-            }()}
-          
-          
-          </OptionsContent>
-        </BottomSheetDialogBasic>
-      </ModalPortal>
-    }</UseBottomSheetState>
+            </OptionsContent>
+          </BottomSheetDialogBasic>
+        </ModalPortal>
+      )}
+    </UseBottomSheetState>
+  )
 })
 export default ProfilePhotosPhotoOptions
 

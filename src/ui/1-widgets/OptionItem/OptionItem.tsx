@@ -4,6 +4,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -57,7 +58,7 @@ export default OptionItem
 
 
 const buttonStyle = (t: AppTheme.Theme) => css`
-  ${ButtonS.textRectBigNormal(t)};
+  ${ButtonS6.S.Text.Rect.Big.normal(t)};
   
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     display: grid;

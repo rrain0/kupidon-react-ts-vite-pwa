@@ -95,6 +95,7 @@ export const LightProps: ThemeProps = {
   ripple: {
     ct:                '#ffffff55',
     ctOnTransparent:   '#66666655',
+    // TODO Style remove
     ctOnTransparent2:  '#66666677',
   },
   

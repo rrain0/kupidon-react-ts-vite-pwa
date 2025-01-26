@@ -95,7 +95,7 @@ const Ripple = React.memo(
         immediate: true,
       }
       if (isShow) return {
-        from: { opacity: 0.2 },
+        from: { opacity: 0.3 },
         to: { opacity: 1 },
         reset: true,
         config: {
