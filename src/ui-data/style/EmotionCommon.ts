@@ -27,6 +27,12 @@ export namespace EmotionCommon {
     right: 0; bottom: 0; left: 0;
   `
   
+  
+  export const round = css`
+    border-radius: 999999px;
+  `
+  
+  
   export const row = css`
     display: flex;
     flex-flow: row nowrap;

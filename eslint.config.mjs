@@ -57,12 +57,13 @@ export default [
     ...ts.configs.recommended,
     {
       rules: {
+        'eslint no-unused-expressions': 'off',
         'no-async-promise-executor': 'off',
+        'no-constant-condition': 'off',
         'no-empty': 'off',
         'no-unexpected-multiline': 'off',
-        'eslint no-unused-expressions': 'off',
+        'prefer-const': 'warn',
         '@typescript-eslint/no-unused-expressions': 'off',
-        'no-constant-condition': 'off',
         '@typescript-eslint/ban-ts-comment': ['warn', { 'ts-expect-error': false }],
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/ban-types': 'off',

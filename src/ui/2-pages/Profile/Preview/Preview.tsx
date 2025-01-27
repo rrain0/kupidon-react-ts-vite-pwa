@@ -1,8 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { DateU } from '@util/date/DateU.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
@@ -11,56 +9,39 @@ import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
-import { useRecoilValue } from 'recoil'
 import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
-import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
-import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
+import PreviewInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import ScrollbarVertical from 'src/ui/1-widgets/Scrollbar/ScrollbarVertical.tsx'
-import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
-import { useBool } from 'src/util/react-state/useBool'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
-import { ReactU } from 'src/util/react/ReactU'
 import { useNoSelect } from 'src/util/view/useNoSelect'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
 import FormValues = ProfilePageValidation.FormValues
-import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import center = EmotionCommon.center
 import fill = EmotionCommon.fill
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
-import effectLog = ReactU.effectLog
 import mod = MathU.mod
 import { useNoTouchAction } from 'util/view/useNoTouchAction'
 import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
 import PictureIc = SvgIconsPack.PictureIc
 import centerGrid = EmotionCommon.centerGrid
-import colC = EmotionCommon.colC
-import Heart2Ic = SvgIconsPack.Heart2Ic
-import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
-import ArrowReload2GradIc = SvgGradIconsPack.ArrowReload2GradIc
-import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
-import contents = EmotionCommon.contents
-import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 
 
@@ -367,7 +348,6 @@ const Preview = React.memo((props: PreviewProps) => {
     return { p, photoP, displayedI, pCurr }
   })
   
-  const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
   //console.log('rerender')
   
@@ -463,58 +443,13 @@ const Preview = React.memo((props: PreviewProps) => {
                 )
               })}
               
-              <PreviewInfoBox>
-                
-                <ShortInfoContainer>
-                  <ShortInfoBox>
-                    <Name>{nameAge}</Name>
-                    <AboutMe>{aboutMe}</AboutMe>
-                  </ShortInfoBox>
-                </ShortInfoContainer>
-                
-                <ActionButtonsBox>
-                  {/* todo disable onClick while dragging */}
-                  <Button
-                    css={backButtonS}
-                    disabled={isDragging}
-                    onClick={() => {
-                      console.log('wasDragged', getWasDragged())
-                      console.log('back')
-                      if (getWasDragged()) return
-                    }}
-                  >
-                    <ArrowReload2GradIc />
-                  </Button>
-                  <Button
-                    css={dislikeButtonS}
-                    disabled={isDragging}
-                    onClick={() => {
-                      if (getWasDragged()) return
-                    }}
-                  >
-                    <Cross2GradIc />
-                  </Button>
-                  <Button
-                    css={likeButtonS}
-                    disabled={isDragging}
-                    onClick={() => {
-                      if (getWasDragged()) return
-                    }}
-                  >
-                    <Heart2Ic />
-                  </Button>
-                  <Button
-                    css={infoButtonS}
-                    disabled={isDragging}
-                    onClick={() => {
-                      if (getWasDragged()) return
-                    }}
-                  >
-                    <ArrowAngledRounded2GradIc />
-                  </Button>
-                </ActionButtonsBox>
-                
-              </PreviewInfoBox>
+              <PreviewInfo
+                isDragging={isDragging}
+                getWasDragged={getWasDragged}
+                name={name}
+                birthDate={birthDate}
+                aboutMe={aboutMe}
+              />
               
             </PhotosContainer2>
           </PhotosContainer>
@@ -522,34 +457,6 @@ const Preview = React.memo((props: PreviewProps) => {
       </PreviewFrame>
     </Pages.SafeInsets>
   )
-  
-  
-  /* return (
-    <Pages.SafeInsets>
-    
-      {im && (
-        <div css={photoContainer}>
-          
-          <img css={photoImgStyle}
-            src={im.dataUrl}
-            alt={im.name}
-          />
-          
-          <ScrollbarVertical css={scrollbarVerticalStyle}
-            visiblePartPercent={20}
-            scroll={scroll} setScroll={setScroll}
-          />
-          
-          <FadeButtonBar>
-            <Name>{name}, 26</Name>
-            <AboutMe>{aboutMe}</AboutMe>
-          </FadeButtonBar>
-          
-        </div>
-      )}
-    
-    </Pages.SafeInsets>
-  ) */
 })
 export default Preview
 
@@ -665,146 +572,3 @@ const NoImagesTitle = styled.div`
 `
 
 
-
-
-const PreviewInfoBox = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
-  border-radius: ${borderRadius}px;
-  height: fit-content;
-  ${row};
-  gap: 8px;
-`
-
-
-const ActionButtonsBox = styled.div`
-  padding-right: 16px;
-  padding-bottom: 36px;
-  ${colC};
-  gap: 22px;
-`
-const backButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewNormal(t)};
-  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('54%')}
-    //rotate: -0.125turn;
-    translate: 0 -6%;
-  }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
-  }
-`
-const dislikeButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewNormalBigger(t)};
-  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('35.5%')}
-  }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
-  }
-`
-const likeButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewMain(t)};
-  ${IconButtonStyle.W.use.s.normal().e.icon().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('51.05%')}
-  }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
-  }
-`
-const infoButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewNormal(t)};
-  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('50%')};
-    translate: 0 10%;
-  }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
-  }
-`
-
-
-const ShortInfoContainer = styled.div`
-  flex: 1;
-  ${col};
-  align-items: start;
-  justify-content: end;
-  //padding-left: 10px;
-  //padding-bottom: 10px;
-`
-const ShortInfoBox = styled.div`
-  ${col};
-  align-items: start;
-  justify-content: end;
-  gap: 14px;
-  padding: 10px 14px;
-  //border-radius: 12px;
-  //background: #00000066;
-`
-const Name = styled.div`
-  background-color: ${p => p.theme.previewInfoBox.bg};
-  color: ${p => p.theme.previewInfoBox.ct};
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 100%;
-  letter-spacing: normal;
-`
-const AboutMe = styled.div`
-  max-height: 94px;
-  font-weight: 400;
-  font-size: 17px;
-  line-height: 129%;
-  letter-spacing: normal;
-  
-  background-image: linear-gradient(
-    to top,
-    ${p => p.theme.previewInfoBox.ctGrad[1]} 8px,
-    ${p => p.theme.previewInfoBox.ctGrad[0]} 40px
-  );
-  background-clip: text;
-  background-size: 100% 94px;
-  
-  color: transparent;
-  overflow: hidden;
-`
-
-
-
-
-
-// OLD
-const scrollbarVerticalStyle = (t: AppTheme.Theme) => css`
-  ${ScrollbarVerticalStyle.scrollbar(t)};
-  ${ScrollbarVerticalStyle.El.track.thiz()}{
-    width: 4px;
-    height: 150px;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-  }
-`
-
-const FadeButtonBar = styled.div`
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 200px;
-  background: linear-gradient(to top,
-    #ffffffff 0%, #ffffff88 10%, #ffffff88 70%, #ffffff00 100%
-  );
-  
-  ${col};
-  gap: 4px;
-  padding: 10px;
-  padding-top: 30px;
-`

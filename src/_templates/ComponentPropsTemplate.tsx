@@ -7,24 +7,25 @@ import ClassStyle = ReactU.ClassStyle
 
 
 
-/* export */ type ComponentProps = ClassStyle & Children & Puro<{
-  
-}>
 
-const Component = React.memo(
-  (props: ComponentProps) => {
-    
-    const {
-      children,
-      ...restProps
-    } = props
-    
-    return (
-      <div {...restProps}>
-        {children}
-      </div>
-    )
-  }
-)
-//export default Component
+export type MyComponentProps = ClassStyle & Children & Puro<{
+  prop: number
+}>
+export const MyComponent = React.memo((props: MyComponentProps) => {
+  const {
+    prop = 0,
+  } = props
+  
+  return (
+    <div
+      data-display-name="MyComponent"
+    >
+      <>
+      
+      </>
+    </div>
+  )
+})
+MyComponent.displayName = 'MyComponent'
+export default MyComponent
 

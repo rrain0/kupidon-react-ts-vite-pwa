@@ -88,14 +88,13 @@ const Ripple = React.memo(
     
     return (
       <div
-        data-display-name="Ripple (RippleFrame)"
+        data-display-name="Ripple"
         //displayName={'RippleFrame'}
         ref={frameRef}
         className={clsx(RippleS6.W.els.frame.n, className)}
         {...restProps}
       >
         <div
-          data-display-name="Ripple (RippleRipple)"
           ref={rippleRef}
           className={RippleS6.W.els.ripple.n}
           style={rippleProps.dimens}

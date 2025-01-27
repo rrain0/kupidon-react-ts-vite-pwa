@@ -22,6 +22,7 @@ import noop = TypeU.noop
 import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
+// TODO Доделать новый скроллбар
 
 // make any point of bar will be dragged as current position
 // useScroll from use-spring - BUT it is broken when child 'display: contents;'
