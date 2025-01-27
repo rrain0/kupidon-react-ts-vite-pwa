@@ -27,35 +27,35 @@ type EditableTextCardProps = PartialUndef<{
   onClick: Callback
 }>
 
-const EditableTextCard = React.memo(
-  (props: EditableTextCardProps) => {
-    const {
-      title, text, placeholder,
-      ...restProps
-    } = props
-    
-    const showPlaceholder = !text && !!placeholder
-    const showAnyText = !!(text || placeholder)
-    
-    return (
-      <Frame
-        tabIndex={0}
-        {...restProps}
-        showAnyText={showAnyText}
-      >
-        
-        <Title>{title}</Title>
-        <PencilIcon />
-        {showAnyText && (
-          <Text isPlaceholder={showPlaceholder}>
-            {showPlaceholder ? placeholder : text}
-          </Text>
-        )}
-        
-      </Frame>
-    )
-  }
-)
+const EditableTextCard = React.memo((props: EditableTextCardProps) => {
+  const {
+    title, text, placeholder,
+    ...restProps
+  } = props
+  
+  const showPlaceholder = !text && !!placeholder
+  const showAnyText = !!(text || placeholder)
+  
+  return (
+    <Frame
+      data-react-display-name="EditableTextCard"
+      tabIndex={0}
+      {...restProps}
+      showAnyText={showAnyText}
+    >
+      
+      <Title>{title}</Title>
+      <PencilIcon />
+      {showAnyText && (
+        <Text isPlaceholder={showPlaceholder}>
+          {showPlaceholder ? placeholder : text}
+        </Text>
+      )}
+      
+    </Frame>
+  )
+})
+EditableTextCard.displayName = 'EditableTextCard'
 export default EditableTextCard
 
 
@@ -66,18 +66,17 @@ const Frame = styled(Button, {
   ${p => ButtonS6.S.Text.Rect.Big.normal(p.theme)};
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     ${p => card3Style(p.theme)};
-    width: 100%;
-    height: fit-content;
-    min-height: 68px;
-    
-    display: grid;
-    grid:
-         'title icon' auto
-      ${p => p.showAnyText &&
-        `'text  text' auto`
-      }
-    /    1fr   auto;
   }
+  ${p => ButtonS6.W.t({
+    button: {
+      w: 'full', h: 'ct', hMin: 68,
+      display: 'grid',
+      grid:
+        `'title icon' auto` +
+        (p.showAnyText ? `'text  text' auto` : '') +
+        `/1fr   auto`,
+    },
+  })}
 `
 
 

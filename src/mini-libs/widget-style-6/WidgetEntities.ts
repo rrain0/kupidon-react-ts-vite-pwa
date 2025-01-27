@@ -24,32 +24,39 @@ export class WidgetMedia {
   
 }
 
-export class WidgetElem<const out Ps extends RecordRo<string, WidgetProp> = any> {
+export class WidgetElem<
+  const out Ps extends RecordRo<string, WidgetProp> = any,
+  const out Ss extends RecordRo<string, WidgetAnyStateTransformer> = any
+> {
   readonly type = 'elem' as const
   readonly isAtomic = true as const
   
   constructor(
     // 'className' without dot
     readonly className: string,
-    readonly states?: Record<string, WidgetAnyStateTransformer> | undefined,
+    readonly states?: Ss | undefined,
     readonly props?: Ps | undefined,
     readonly upSelector?: string | undefined,
     readonly upElem?: WidgetElem | undefined,
   ) { }
   
-  static of<const Ps extends RecordRo<string, WidgetProp>>(params: {
+  static of<
+    const Ps extends RecordRo<string, WidgetProp>,
+    const Ss extends RecordRo<string, WidgetAnyStateTransformer>
+  >(params: {
     className: string,
-    states?: Record<string, WidgetAnyStateTransformer> | undefined,
+    states?: Ss | undefined,
     props?: Ps | undefined,
     upSelector?: string | undefined,
     upElem?: WidgetElem | undefined,
-  }): WidgetElem<Ps> {
-    return new WidgetElem<Ps>(
+  }): WidgetElem<Ps, Ss> {
+    return new WidgetElem<Ps, Ss>(
       params.className, params.states, params.props, params.upSelector, params.upElem
     )
   }
   
   get n() { return this.className }
+  get ss() { return this.states }
   get ps() { return this.props }
 }
 
@@ -87,6 +94,8 @@ export class WidgetAttr {
   static of(name: string, values?: Record<string, any> | undefined) {
     return new WidgetAttr(name, values)
   }
+  
+  get n() { return this.attr }
 }
 
 export class WidgetProp {

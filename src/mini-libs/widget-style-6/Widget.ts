@@ -21,7 +21,7 @@ DESCRIPTION:
 
 CssWidget assembles html element's tree into one entity called 'Widget'
 
-
+Widget State: You needn't know which element bears the state, just use it.
 
 
  */
@@ -48,12 +48,13 @@ export class Widget<const out Es extends Record<string, WidgetElem> = any> {
     return new Widget(params.rootElem, params.elems, params.states, params.props)
   }
   
-  get els() { return this.elems }
-  
-  // TODO Style - selectThis = true
-  t(style: WidgetStyle) {
+  // TODO Style - add param 'selectThis = true'
+  transform(style: WidgetStyle) {
     return transformWidgetStyle(this, style)
   }
+  
+  get els() { return this.elems }
+  get t() { return this.transform }
 }
 
 

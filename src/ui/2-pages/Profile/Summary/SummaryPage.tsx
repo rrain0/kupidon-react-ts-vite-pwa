@@ -399,12 +399,9 @@ const Edit = styled.div`
 `
 const editBtnStyle = (t: AppTheme.Theme) => css`
   ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
-  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
-    width: fit-content;
-    min-height: 34px;
-    padding: 8px 14px;
-    border-radius: 10px;
-  }
+  ${ButtonS6.W.t({
+    button: { w: 'ct', hMin: 34, p: [8, 14], r: 10 },
+  })}
 `
 
 

@@ -1,14 +1,11 @@
 import { css } from '@emotion/react'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Elem0 = WidgetStyle0.Elem
 import CssWidget0 = WidgetStyle0.CssWidget
-import hoverable = EmotionCommon.hoverable
 import Pseudo0 = WidgetStyle0.CssPseudo
 import CssAttr0 = WidgetStyle0.CssAttr
 import CssPropColor = WidgetStyle0.CssPropColor
@@ -139,10 +136,9 @@ export namespace IconButtonStyle {
   
   export const imSmallPlaceholderIcFullTransparent = (t: AppTheme.Theme) => css`
     ${ButtonS6.S.Text.Round.Big2.normal2(t)};
-    ${ButtonS.W.use.s.normal().e.button().thisUse} {
-      height: 100%;
-      width: 100%;
-    }
+    ${ButtonS6.W.t({
+      button: { sz: 'full' },
+    })}
     ${W.use.s.normal().e.icon().thisUse} {
       ${W.e.icon.e.p.size.set('50%')};
       ${W.e.icon.e.p.color.set(t.photos.ct[0])};
@@ -153,45 +149,38 @@ export namespace IconButtonStyle {
   
   export const icPreviewNormal = (t: AppTheme.Theme) => css`
     ${ButtonS6.S.Filled.Round.Big2.normal(t)};
-    ${ButtonS.filledRoundedAddColorPreviewNormal(t)};
+    ${ButtonS6.W.t(ButtonS6.SWidget.Filled.Color.previewNormal(t))};
     ${icGradFilledAddColorPreviewNorm(t)};
-    ${ButtonS.W.use.s.normal().e.button().thisUse} {
-      padding: 0;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
-    }
-    // state: hover
-    ${hoverable} { ${ButtonS.W.use.s.hover().e.button().thisUse} {
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
-    }}
-    // state: focus-visible
-    ${ButtonS.W.use.s.focusVisible().e.button().thisUse} {
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
-    }
+    ${ButtonS6.W.t({
+      button: {
+        p: 0,
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+      // TODO Style - remove
+      inFocusButton: {
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+    })}
   `
   export const icPreviewNormalBigger = (t: AppTheme.Theme) => css`
     ${icPreviewNormal(t)};
-    ${ButtonS.W.use.s.normal().e.button().thisUse} {
-      width: 58px;
-      height: 58px;
-    }
+    ${ButtonS6.W.t({
+      button: { sz: 58 },
+    })}
   `
   export const icPreviewMain = (t: AppTheme.Theme) => css`
     ${ButtonS6.S.Filled.Round.Big2.normal(t)};
-    ${ButtonS.filledRoundedAddColorPreviewMain(t)};
-    ${ButtonS.W.use.s.normal().e.button().thisUse} {
-      padding: 0;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
-      width: 60px;
-      height: 60px;
-    }
-    // state: hover
-    ${hoverable} { ${ButtonS.W.use.s.hover().e.button().thisUse} {
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
-    }}
-    // state: focus-visible
-    ${ButtonS.W.use.s.focusVisible().e.button().thisUse} {
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15);
-    }
+    ${ButtonS6.W.t(ButtonS6.SWidget.Filled.Color.previewMain(t))};
+    ${ButtonS6.W.t({
+      button: {
+        sz: 60, p: 0,
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+      // TODO Style - remove
+      inFocusButton: {
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+    })}
     ${icFilledAddColorPreviewMain(t)};
   `
   

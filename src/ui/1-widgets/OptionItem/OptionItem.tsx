@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import React from 'react'
 import styled from '@emotion/styled'
@@ -26,54 +27,49 @@ export type OptionItemProps = PartialUndef<{
 }>
 
 
-const OptionItem = React.memo(
-  (props: OptionItemProps) => {
-    const { icon, title, value, onClick } = props
-    
-    
-    
-    return (
-      <Button
-        css={buttonStyle}
-        onClick={onClick}
-      >
-        
-        <IconFrame>{icon}</IconFrame>
-        <TitleFrame>{title}</TitleFrame>
-        <ValueFrame>
-          <Value>
-            {value}
-          </Value>
-        </ValueFrame>
-        <NextIconFrame>
-          <ArrowAngledRoundedIc css={t => nextIconStyle(t)} />
-        </NextIconFrame>
-        
-      </Button>
-    )
-  }
-)
+const OptionItem = React.memo((props: OptionItemProps) => {
+  const { icon, title, value, onClick } = props
+  
+  
+  
+  return (
+    <Button
+      css={buttonStyle}
+      onClick={onClick}
+    >
+      
+      <IconFrame>{icon}</IconFrame>
+      <TitleFrame>{title}</TitleFrame>
+      <ValueFrame>
+        <Value>
+          {value}
+        </Value>
+      </ValueFrame>
+      <NextIconFrame>
+        <ArrowAngledRoundedIc css={t => nextIconStyle(t)} />
+      </NextIconFrame>
+      
+    </Button>
+  )
+})
 export default OptionItem
 
 
 
 const buttonStyle = (t: AppTheme.Theme) => css`
   ${ButtonS6.S.Text.Rect.Big.normal(t)};
-  
-  ${ButtonS.W.use.s.normal().e.button().thisUse} {
-    display: grid;
-    grid: 'icon title next' auto
-          'icon value next' auto
-         / auto 1fr   auto;
-    gap: 4px 0;
-    
-    width: 100%;
-    min-height: 50px;
-    height: fit-content;
-    text-align: start;
-    padding: 2px 0;
-    ${Txt.large1b};
-  }
+  ${ButtonS6.W.t({
+    button: {
+      w: 'full', hMin: 50, h: 'ct', p: [2, 0],
+      textAlign: 'start', ...WidgetStyleCommon.Txt.large1b,
+      display: 'grid',
+      grid:
+        `'icon title next' auto` +
+        `'icon value next' auto` +
+        `/ auto 1fr   auto`,
+      g: [4, 0],
+    },
+  })}
 `
 
 

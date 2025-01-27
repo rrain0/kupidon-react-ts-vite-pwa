@@ -5,6 +5,49 @@ import isnumber = TypeU.isnumber
 import isstring = TypeU.isstring
 
 
+// TODO Allow insert raw string css
+function rawCss(string: TemplateStringsArray, ...args: any[]): string {
+  return ''
+}
+const withRawCss = {
+  button1: 'background-color: black;',
+  button2: [
+    'background-color: black;',
+    {
+      bgColor: 'white',
+    },
+    'background-color: indianred;',
+    {
+      bgColor: 'blue',
+    },
+  ],
+  // it will not work
+  button3: `:where(${{ inFocus: {
+    boxShadow: null,
+  } }})`,
+  // it will not work
+  button4: rawCss`:where(${{ inFocus: {
+    boxShadow: null,
+  } }})`,
+  
+  
+  // 'where' will get inside only next selector entity:
+  // ':where(:hover)>.rruiBox { ... }
+  button5WhereHoverBox: { bgColor: 'white' },
+  // 'where' will get inside only next object keys-selectors:
+  // ':where(:active)>.rruiBox { ... }
+  // ':where(:hover:,focus-visible)>.rruiBox { ... }
+  button6Where: {
+    active: { boxBgColor: 'blue' },
+    inFocus: { boxBgColor: 'blue' },
+  },
+  where: {
+    active: { buttonBoxBgColor: 'blue' },
+    inFocus: { buttonBoxBgColor: 'blue' },
+  },
+}
+
+
 export type StyleVal =
   | string // pass as is if there are no special values or transformations
   | number // transform to fractions or pixels

@@ -229,8 +229,7 @@ const RoundButtonsContainer = styled.div`
 `
 const normalIconRoundButton = (t:AppTheme.Theme) => css`
   ${ButtonS6.S.Filled.Rounded.Normal.accent(t)};
-  ${ButtonS.W.use.s.normal().e.button().thisUse} {
-    min-width: 90px;
-    gap: 0.6em;
-  }
+  ${ButtonS6.W.t({
+    button: { wMin: 90, g: '0.6em' },
+  })}
 `

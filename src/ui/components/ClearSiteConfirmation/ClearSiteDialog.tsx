@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useEvent } from '@util/react/useEvent.ts'
 import React from 'react'
+import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
@@ -136,12 +137,9 @@ const iconOnDanger = (t:Theme) => css`
     ${SvgIconS.El.icon.props.color.set(t.elementDanger.ct[0])}
   }
 `
-const button = (t:Theme) => css`
-  ${ButtonS.W.use.s.normal().e.button().thisUse} {
-    min-width: 90px;
-    gap: 0.3em;
-  }
-`
+const button: AppStyle = t => ButtonS6.W.t({
+  button: { wMin: 90, g: '0.3em' },
+})
 
 const ModalReloading = styled.div`
   ${fixed};

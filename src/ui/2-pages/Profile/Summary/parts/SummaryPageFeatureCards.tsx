@@ -3,11 +3,11 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
 import Txt = EmotionCommon.Txt
@@ -102,12 +102,12 @@ const FeatureCardText = styled.div`
 `
 const featureCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
-  ${ButtonS.W.u({ e: 'button', s: 'normal' }).thisUse} {
-    grid-area: btn;
-    width: 160px;
-    min-height: 35px;
-    ${Txt.normal2c};
-  }
+  ${ButtonS6.W.t({
+    button: {
+      gridArea: 'btn', w: 160, hMin: 35,
+      ...WidgetStyleCommon.Txt.normal2c,
+    },
+  })}
 `
 const FeatureCardIcBox = styled.div`
   grid-area: icon;

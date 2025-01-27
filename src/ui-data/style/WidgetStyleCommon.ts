@@ -84,6 +84,12 @@ export namespace WidgetStyleCommon {
       lineHeight: '129%',
       letterSpacing: '0.05em',
     }
+    export const normal2c: WidgetStyle = {
+      fontWeight: '600',
+      fontSize: '14px',
+      lineHeight: '129%',
+      letterSpacing: '0.05em',
+    }
     export const normal1: WidgetStyle = {
       fontWeight: '300',
       fontSize: '16px',
