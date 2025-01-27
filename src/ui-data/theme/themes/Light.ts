@@ -222,8 +222,9 @@ export const LightProps: ThemeProps = {
     ctGrad:    ['#F1F1F1FF', '#8B8B8B00'],
   },
   previewPhotosProgress: {
-    dotBg:       '#D9D9D999',
-    thumbBg:     '#FFFFFF',
+    bg:          '#00000066',
+    ct:          '#D9D9D999',
+    ctAcc:       '#FFFFFF',
   },
   
   

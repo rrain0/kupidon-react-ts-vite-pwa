@@ -15,6 +15,7 @@ import arr = ArrayU.arr
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
 import round3 = MathU.round3
+import abs = EmotionCommon.abs
 
 
 
@@ -41,29 +42,33 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
   
   return (
     <div
+      data-display-name="DotsScrollIndicator"
       className={className}
       style={style}
-      data-display-name="DotsScrollIndicator"
       css={frameS}
     >
-      {arr(cnt).map((_, i) => (
-        <AnimatedDiv css={dotS} key={i}
-          animated={{
-            translate: pLooped?.map(p => {
-              let yp = RangeU.mapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
-              yp = 1 - yp
-              yp = round3(yp)
-              return `0 calc( (var(--indicator-len) - var(--sz)) * ${yp} )`
-            }),
-          }}
-        />
-      ))}
-      <AnimatedDiv css={thumbS}
-        animated={{
-          top: pLooped?.map(p => `${p.p1 * 100}%`),
-          transform: pLooped?.map(p => `translateY(calc( ${p.p1} * var(--g) ))`),
-        }}
-      />
+      <div css={frame2S}>
+        <div css={frame3S}>
+          {arr(cnt).map((_, i) => (
+            <AnimatedDiv css={dotS} key={i}
+              animated={{
+                translate: pLooped?.map(p => {
+                  let yp = RangeU.mapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
+                  yp = 1 - yp
+                  yp = round3(yp)
+                  return `0 calc( (var(--indicator-len) - var(--sz)) * ${yp} )`
+                }),
+              }}
+            />
+          ))}
+          <AnimatedDiv css={thumbS}
+            animated={{
+              top: pLooped?.map(p => `${p.p1 * 100}%`),
+              transform: pLooped?.map(p => `translateY(calc( ${p.p1} * var(--g) ))`),
+            }}
+          />
+        </div>
+      </div>
     </div>
   )
 })
@@ -72,22 +77,40 @@ export default DotsScrollIndicator
 
 
 
-const frameS = css`
+const frameS = (t: AppTheme.Theme) => css`
   position: relative;
   --indicator-len: 26px;
   --sz: 7px;
   --g: 6px;
   width: fit-content;
   height: fit-content;
+  padding: 8px;
+  ${col};
+  content: '';
+  border-radius: 999999px;
+  background-color: ${t.previewPhotosProgress.bg};
+`
+const frame2S = css`
+  position: relative;
+  ${col};
+  width: fit-content;
+  height: fit-content;
+  padding-bottom: calc( (var(--indicator-len) - var(--sz)) );
+  border-radius: 999999px;
+  overflow: hidden;
+`
+const frame3S = css`
+  position: relative;
   ${col};
   gap: var(--g);
-  //padding-bottom: calc( var(--indicator-len) - var(--sz) );
+  width: fit-content;
+  height: fit-content;
 `
 
 const dotS = (t: AppTheme.Theme) => css`
   width: var(--sz);
   height: var(--sz);
-  background-color: ${t.previewPhotosProgress.dotBg};
+  background-color: ${t.previewPhotosProgress.ct};
   ${round};
 `
 
@@ -97,6 +120,6 @@ const thumbS = (t: AppTheme.Theme) => css`
   left: 0;
   width: var(--sz);
   height: var(--indicator-len);
-  background-color: ${t.previewPhotosProgress.thumbBg};
+  background-color: ${t.previewPhotosProgress.ctAcc};
   ${round};
 `

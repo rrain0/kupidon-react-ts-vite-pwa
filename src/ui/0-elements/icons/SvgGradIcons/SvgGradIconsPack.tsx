@@ -9,6 +9,7 @@ import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradI
 
 
 import ArrowAngledRounded2GradSvg from 'src/res/ic/gradient/arrow-angled-rounded-2-grad.svg?react'
+import ArrowBackGradSvg from 'src/res/ic/gradient/arrow-back-grad.svg?react'
 import ArrowReload2GradSvg from 'src/res/ic/gradient/arrow-reload-2-grad.svg?react'
 
 import BabyGradSvg from 'src/res/ic/gradient/baby-grad.svg?react'
@@ -144,6 +145,7 @@ export namespace SvgGradIconsPack {
   // Icons
   
   export const ArrowAngledRounded2GradIc = generateSimpleSvgIcon(ArrowAngledRounded2GradSvg)
+  export const ArrowBackGradIc = generateSimpleSvgIcon(ArrowBackGradSvg)
   export const ArrowReload2GradIc = generateSimpleSvgIcon(ArrowReload2GradSvg)
   
   export const BabyGradIc = generateSimpleSvgIcon(BabyGradSvg)

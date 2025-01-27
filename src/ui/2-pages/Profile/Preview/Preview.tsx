@@ -429,7 +429,7 @@ const Preview = React.memo((props: PreviewProps) => {
                         </NoImagesBox>
                       </>
                     )}
-                    <PhotoBottomFade />
+                    <PhotoFade />
                     {/* <div
                       css={css`
                         position: absolute;
@@ -528,14 +528,16 @@ const AnimatedPhoto = styled(AnimatedImg)`
   
   pointer-events: none; // or attr draggable="false"
 `
-const PhotoBottomFade = styled.div`
+const PhotoFade = styled.div`
   ${abs};
   // todo theme - fade color
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0% 60%,
-    ${fade} 90%
-  );
+  background-image:
+    linear-gradient(
+      to bottom,
+      transparent 0% 60%,
+      ${fade} 90%
+    );
+  background-size: auto, auto 150%;
 `
 
 

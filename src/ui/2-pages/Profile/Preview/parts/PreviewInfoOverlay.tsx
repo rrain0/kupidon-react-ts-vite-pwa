@@ -25,6 +25,8 @@ import Heart2Ic = SvgIconsPack.Heart2Ic
 import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
 import ArrowReload2GradIc = SvgGradIconsPack.ArrowReload2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
+import trueOrUndef = TypeU.trueOrUndef
+import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 
 
 
@@ -69,7 +71,13 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         )}
         
         <ShortInfoContainer>
-          <ShortInfoBox>
+          <ShortInfoBox
+            data-disabled={trueOrUndef(isDragging)}
+            onClick={() => {
+              if (getWasDragged?.()) return
+              openInfo()
+            }}
+          >
             <Name>{nameAge}</Name>
             <AboutMe>{aboutMe}</AboutMe>
           </ShortInfoBox>
@@ -85,7 +93,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
               if (getWasDragged?.()) return
             }}
           >
-            <ArrowReload2GradIc />
+            <ArrowBackGradIc />
           </Button>
           <Button
             css={dislikeButtonS}
@@ -156,13 +164,12 @@ const backButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
   ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('54%')}
-    //rotate: -0.125turn;
-    translate: 0 -6%;
-    scale: -1 1;
+    rotate: 0.5turn;
+    translate: -7% -5%;
   }
   // todo move to styles
   :disabled {
-    transition: opacity 0.2s;
+    transition: opacity 0.3s;
     opacity: 0.3;
   }
 `
@@ -219,6 +226,10 @@ const ShortInfoBox = styled.div`
   padding: 10px 14px;
   //border-radius: 12px;
   //background: #00000066;
+  cursor: pointer;
+  &[data-disabled] {
+    cursor: auto;
+  }
 `
 const Name = styled.div`
   background-color: ${p => p.theme.previewInfoBox.bg};

@@ -257,9 +257,11 @@ export namespace AppTheme {
       ct:        string
       ctGrad:    [string, string]
     }
+    // Profile preview photos progress indicator
     previewPhotosProgress: {
-      dotBg:       string
-      thumbBg:     string
+      bg:          string
+      ct:          string
+      ctAcc:       string
     }
     
     photos: {

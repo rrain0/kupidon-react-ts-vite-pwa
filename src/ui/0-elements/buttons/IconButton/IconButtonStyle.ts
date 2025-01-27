@@ -156,8 +156,17 @@ export namespace IconButtonStyle {
         p: 0,
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
       },
-      // TODO Style - remove
-      inFocusButton: {
+      // TODO Style - remove and apply :where to resetButton
+      buttonHover: {
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+      buttonActive: {
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+      buttonFocus: {
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+      },
+      buttonFocusVisible: {
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
       },
     })}
