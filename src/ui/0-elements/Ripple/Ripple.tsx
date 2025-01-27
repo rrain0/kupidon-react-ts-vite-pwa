@@ -1,6 +1,6 @@
 import { animated, useSpring, config, easings } from '@react-spring/web'
 import clsx from 'clsx'
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { RippleS6 } from './RippleS6.ts'
@@ -53,36 +53,43 @@ const Ripple = React.memo(
       }
     }, [isShow])
     
-    
+    const [state, setState] = useState('off' as 'off' | 'prepareShow' | 'show' | 'hide')
+    useEffect(() => {
+      if (cancel) setState('off')
+      else if (isShow) setState('prepareShow')
+      else if (!isShow) setState('hide')
+    }, [isShow, cancel])
     
     useEffect(() => {
       const r = rippleRef.current
       if (r) {
-        if (cancel) {
+        if (state === 'off') {
           r.style.transition = 'none'
           r.style.opacity = '0'
           r.style.scale = '0'
         }
-        else if (isShow) {
+        else if (state === 'prepareShow') {
           r.style.transition = 'none'
-          r.style.opacity = '0.3'
+          r.style.opacity = '0.5'
           r.style.scale = '0'
-          setTimeout(() => {
-            r.style.transition =
-              `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
-              `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
-            r.style.opacity = '1'
-            r.style.scale = '1'
-          })
+          // ensure that style changes were applied
+          requestAnimationFrame(() => setState(prev => prev === 'prepareShow' ? 'show' : prev))
         }
-        else if (!isShow) {
+        else if (state === 'show') {
+          r.style.transition =
+            `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
+            `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
+          r.style.opacity = '1'
+          r.style.scale = '1'
+        }
+        else if (state === 'hide') {
           r.style.transition =
             `opacity ${rippleProps.dissolveDuration}ms linear` +
             `,scale ${rippleProps.dissolveDuration}ms linear`
           r.style.opacity = '0'
         }
       }
-    }, [isShow, cancel])
+    }, [state])
     
     
     

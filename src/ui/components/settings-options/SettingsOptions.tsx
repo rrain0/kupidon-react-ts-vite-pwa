@@ -2,7 +2,6 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import row = EmotionCommon.row
@@ -36,14 +35,14 @@ export namespace SettingsOptions {
     object-fit: cover;
     vertical-align: middle;
   `
-  export const icon = (t:AppTheme.Theme) => css`
+  export const icon = (t: AppTheme.Theme) => css`
     ${SvgIconS.El.icon.thiz()} {
       height: 1.3em;
       width: 1.333em;
       ${SvgIconS.El.icon.props.color.set(`var(${ButtonS6.W.els.button.ps?.varColor.n})`)}
     }
   `
-  export const iconSmall = (t:AppTheme.Theme) => css`
+  export const iconSmall = (t: AppTheme.Theme) => css`
     ${icon(t)};
     ${SvgIconS.El.icon.thiz()} {
       height: 1.25em;

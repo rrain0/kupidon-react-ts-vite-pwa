@@ -16,7 +16,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
-import PreviewInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo.tsx'
+import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -445,7 +445,7 @@ const Preview = React.memo((props: PreviewProps) => {
                 )
               })}
               
-              <PreviewInfo
+              <PreviewInfoOverlay
                 isDragging={isDragging}
                 getWasDragged={getWasDragged}
                 photosCnt={photosCnt}
