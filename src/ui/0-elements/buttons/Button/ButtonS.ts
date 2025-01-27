@@ -36,6 +36,35 @@ import abs = EmotionCommon.abs
 
 export namespace ButtonS {
   
+  export const El = function() {
+    const button = new Elem(ButtonS6.W.els.button.n, {
+      normal: CssPseudo.empty,
+      hover: CssPseudo.hover,
+      active: CssPseudo.active,
+      focus: CssPseudo.focus,
+      focusVisible: CssPseudo.focusVisible,
+      readOnly: CssPseudo.readOnly,
+      disabled: CssPseudo.disabled,
+      error: CssAttr.dataError,
+    }, {
+      color: CssProp.color,
+    })
+    const border = new Elem(ButtonS6.W.els.border.n, { }, { })
+    const ripple = Elem.newEmpty()
+    
+    return { button, border, ripple } as const
+  }()
+  
+  export const W = CssWidget
+    .ofRoot('button', El.button)
+    .add('button', '>', 'border', El.border)
+    .add('border', '>', 'ripple', El.ripple)
+  
+  
+  
+  // TODO REMOVE ALL BELOW:
+  
+  
   export const Attr0 = {
     error: DataAttr.error,
   } as const
@@ -74,30 +103,6 @@ export namespace ButtonS {
     return { button }
   })()
   
-  
-  export const El = function() {
-    const button = new Elem(ButtonS6.W.els.button.n, {
-      normal: CssPseudo.empty,
-      hover: CssPseudo.hover,
-      active: CssPseudo.active,
-      focus: CssPseudo.focus,
-      focusVisible: CssPseudo.focusVisible,
-      readOnly: CssPseudo.readOnly,
-      disabled: CssPseudo.disabled,
-      error: CssAttr.dataError,
-    }, {
-      color: CssProp.color,
-    })
-    const border = new Elem(ButtonS6.W.els.border.n, { }, { })
-    const ripple = Elem.newEmpty()
-    
-    return { button, border, ripple } as const
-  }()
-  
-  export const W = CssWidget
-    .ofRoot('button', El.button)
-    .add('button', '>', 'border', El.border)
-    .add('border', '>', 'ripple', El.ripple)
   
   
   
