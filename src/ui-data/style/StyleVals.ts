@@ -20,4 +20,12 @@ export namespace StyleVals {
   
   export const modalFloor10 = 10000
   
+  
+  // Easings
+  export const easeOutCubic = 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+  export const easeInOutCirc = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)'
+  export const easeInOutCubic = 'cubic-bezier(0.645, 0.045, 0.355, 1)'
+  export const easeOutSine = 'cubic-bezier(0.39, 0.575, 0.565, 1)'
+  export const easeInOutQuart = 'cubic-bezier(0.77, 0, 0.175, 1)'
+  
 }

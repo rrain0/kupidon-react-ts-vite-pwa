@@ -19,11 +19,13 @@ import RecordRo = TypeU.RecordRo
 /*
 DESCRIPTION:
 
+The library is usage-friendly: do more while write less
+
 CssWidget assembles html element's tree into one entity called 'Widget'
 
 Widget State: You needn't know which element bears the state, just use it.
 
-
+Unregistered (unknown) CSS properties' names are automatically transformed from camelCase to kebab-case
  */
 
 

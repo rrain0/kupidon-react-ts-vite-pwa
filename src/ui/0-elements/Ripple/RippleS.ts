@@ -11,7 +11,7 @@ import CssPropEnum = WidgetStyle.CssPropEnum
 
 
 
-
+// TODO Style - Delete after removing ButtonS.ts
 export namespace RippleS {
   
   export const rippleModes = ['center', 'pointer'] as const

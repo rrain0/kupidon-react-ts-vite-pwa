@@ -1,17 +1,49 @@
 import { animated, useSpring, config, easings } from '@react-spring/web'
 import clsx from 'clsx'
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import React, { useEffect, useMemo } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { RippleS6 } from './RippleS6.ts'
-import { ReactU } from 'src/util/react/ReactU'
-import { getViewProps } from 'src/util/view/ViewProps'
-import { ViewU } from 'src/util/view/ViewU'
-import { useElemRef } from 'src/util/react-state/useElemRef'
+import { ReactU } from '@util/react/ReactU.ts'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import { ViewU } from '@util/view/ViewU.ts'
+import { useElemRef } from '@util/react-state/useElemRef.ts'
 import ClassStyleProps = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
+
+
+
+/*
+  // SPRING EXAMPLE
+  const [hovered, setHover] = useState(false)
+  // if passing an object, it updates on every rerender
+  const { progress } = useSpring({
+  progress: hovered ? 1 : 0,
+  
+  // config types:
+  
+  // Predefined Spring Config
+  //import { config } from '@react-spring/web'
+  config: config.default,
+  
+  // Predefined Spring Easing Config
+  //import { easings } from '@react-spring/web'
+  config: {
+  duration: 4000,
+  easing: easings.easeOutCubic,
+  },
+  
+  // Custom Easing Config via 'bezier-easing' package
+  // css 'cubic-bezier(0.17, 0.84, 0.44, 1)'
+  //import BezierEasing from 'bezier-easing'
+  //const animationEasing = BezierEasing(0.17, 0.84, 0.44, 1)
+  config: {
+  duration: 4000,
+  easing: animationEasing,
+  },
+  })
+*/
 
 
 
@@ -55,6 +87,45 @@ const Ripple = React.memo(
     
     
     
+    
+    const [{ opacity }] = useSpring(() => {
+      if (cancel) return {
+        to: { opacity: 0 },
+        reset: true,
+        immediate: true,
+      }
+      if (isShow) return {
+        from: { opacity: 0.3 },
+        to: { opacity: 1 },
+        reset: true,
+        config: {
+          duration: rippleProps.rippleDuration,
+          easing: easings.easeOutCubic,
+        },
+      }
+      if (!isShow) return {
+        to: { opacity: 0 },
+        config: {
+          duration: rippleProps.dissolveDuration,
+          easing: easings.linear,
+        },
+      }
+    }, [isShow, cancel])
+    
+    const [{ scale }] = useSpring(() => {
+      if (isShow) return {
+        from: { scale: 0 },
+        to: { scale: 1 },
+        config: {
+          duration: rippleProps.rippleDuration,
+          easing: easings.easeOutCubic,
+        },
+        reset: true,
+      }
+    }, [isShow])
+    
+    
+    
     useEffect(() => {
       const r = rippleRef.current
       if (r) {
@@ -88,23 +159,34 @@ const Ripple = React.memo(
     
     return (
       <div
-        data-display-name="Ripple (RippleFrame)"
         //displayName={'RippleFrame'}
         ref={frameRef}
         className={clsx(RippleS6.W.els.frame.n, className)}
         {...restProps}
       >
+        <animated.div
+          //displayName={'RippleRipple'}
+          ref={rippleRef}
+          className={RippleS6.W.els.ripple.n}
+          style={{
+            ...rippleProps.dimens,
+            // @ts-expect-error
+            opacity,
+            scale,
+          }}
+        />
+        {/*
         <div
-          data-display-name="Ripple (RippleRipple)"
+          //displayName={'RippleRipple'}
           ref={rippleRef}
           className={RippleS6.W.els.ripple.n}
           style={rippleProps.dimens}
         />
+         */}
       </div>
     )
   }
 )
-Ripple.displayName = 'Ripple'
 export default Ripple
 
 
