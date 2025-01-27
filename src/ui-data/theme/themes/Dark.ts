@@ -204,6 +204,7 @@ export const DarkProps: ThemeProps = {
   previewButtonNorm: { ...LightProps.previewButtonNorm },
   previewButtonMain: { ...LightProps.previewButtonMain },
   previewInfoBox: { ...LightProps.previewInfoBox },
+  previewPhotosProgress: { ...LightProps.previewPhotosProgress },
   
   
   photos: {

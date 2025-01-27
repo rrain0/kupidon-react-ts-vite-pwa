@@ -1,5 +1,5 @@
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import { AnimatedValue } from '@animated/AnimatedValue.tsx'
+import { AnimatedValue } from '@animated/AnimatedValue.ts'
 
 
 export const useAnimatedValue = <V>(initialValue: V) => {

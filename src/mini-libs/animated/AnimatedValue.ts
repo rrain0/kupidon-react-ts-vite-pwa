@@ -1,7 +1,7 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.tsx'
-import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.tsx'
+import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
+import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
   AnimationFunction,
   passAnimationFunction,

@@ -5,7 +5,7 @@ import {
 } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import {
-  AdditionalProps,
+  AdditionalProps, CommonProps,
   CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -28,6 +28,9 @@ export namespace ButtonS6 {
       className: 'rruiButton',
       ...up,
       states: CommonStates,
+      // TODO Style - think about it
+      // 'color' & '--color' will be passed via WidgetProps
+      props: { varColor: AdditionalProps.varColor },
     })
     const border = WidgetElem.of({
       className: 'rruiBorder',

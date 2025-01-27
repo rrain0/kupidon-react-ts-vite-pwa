@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { AnimatedProperty } from '@animated/AnimatedProperty.tsx'
+import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import Puro = TypeU.Puro
 
 
@@ -9,10 +9,17 @@ export type AnimatedStringOrNumber = AnimatedString | AnimatedNumber | AnimatedP
 
 
 export type StyleAnimatedProp = Puro<{
-  zIndex: AnimatedStringOrNumber
-  transform: AnimatedProperty<any, string>
+  transform: AnimatedString
+  translate: AnimatedString
+  rotate: AnimatedString
   scale: AnimatedStringOrNumber
   opacity: AnimatedStringOrNumber
+  
+  top: AnimatedString
+  right: AnimatedString
+  bottom: AnimatedString
+  left: AnimatedString
+  zIndex: AnimatedStringOrNumber
 }>
 
 

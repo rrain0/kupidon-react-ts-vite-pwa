@@ -23,17 +23,42 @@ export const useUpdateStyle = (
   elemRef: React.RefObject<HTMLElement>,
 ) => {
   
-  const [getUpdateStyleOpacity] = useRefGetSet((value: string | number) => {
+  const [getUpdateStyleTransform] = useRefGetSet((value: string) => {
     const el = elemRef.current
-    if (el) el.style.opacity = `${value}`
+    if (el) el.style.transform = `${value}`
+  })
+  const [getUpdateStyleTranslate] = useRefGetSet((value: string) => {
+    const el = elemRef.current
+    if (el) el.style.translate = `${value}`
+  })
+  const [getUpdateStyleRotate] = useRefGetSet((value: string) => {
+    const el = elemRef.current
+    if (el) el.style.rotate = `${value}`
   })
   const [getUpdateStyleScale] = useRefGetSet((value: string | number) => {
     const el = elemRef.current
     if (el) el.style.scale = `${value}`
   })
-  const [getUpdateStyleTransform] = useRefGetSet((value: string | number) => {
+  const [getUpdateStyleOpacity] = useRefGetSet((value: string | number) => {
     const el = elemRef.current
-    if (el) el.style.transform = `${value}`
+    if (el) el.style.opacity = `${value}`
+  })
+  
+  const [getUpdateStyleTop] = useRefGetSet((value: string) => {
+    const el = elemRef.current
+    if (el) el.style.top = `${value}`
+  })
+  const [getUpdateStyleRight] = useRefGetSet((value: string) => {
+    const el = elemRef.current
+    if (el) el.style.right = `${value}`
+  })
+  const [getUpdateStyleBottom] = useRefGetSet((value: string) => {
+    const el = elemRef.current
+    if (el) el.style.bottom = `${value}`
+  })
+  const [getUpdateStyleLeft] = useRefGetSet((value: string) => {
+    const el = elemRef.current
+    if (el) el.style.left = `${value}`
   })
   const [getUpdateStyleZIndex] = useRefGetSet((value: string | number) => {
     const el = elemRef.current
@@ -41,9 +66,16 @@ export const useUpdateStyle = (
   })
   
   return {
-    updateStyleOpacity: getUpdateStyleOpacity(),
-    updateStyleScale: getUpdateStyleScale(),
     updateStyleTransform: getUpdateStyleTransform(),
+    updateStyleTranslate: getUpdateStyleTranslate(),
+    updateStyleRotate: getUpdateStyleRotate(),
+    updateStyleScale: getUpdateStyleScale(),
+    updateStyleOpacity: getUpdateStyleOpacity(),
+    
+    updateStyleTop: getUpdateStyleTop(),
+    updateStyleRight: getUpdateStyleRight(),
+    updateStyleBottom: getUpdateStyleBottom(),
+    updateStyleLeft: getUpdateStyleLeft(),
     updateStyleZIndex: getUpdateStyleZIndex(),
   } as const
 }

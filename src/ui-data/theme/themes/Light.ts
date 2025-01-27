@@ -221,6 +221,10 @@ export const LightProps: ThemeProps = {
     ct:        '#ffffff',
     ctGrad:    ['#F1F1F1FF', '#8B8B8B00'],
   },
+  previewPhotosProgress: {
+    dotBg:       '#D9D9D999',
+    thumbBg:     '#FFFFFF',
+  },
   
   
   photos: {

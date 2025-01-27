@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.tsx'
+import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
 import Callback1 = TypeU.Callback1

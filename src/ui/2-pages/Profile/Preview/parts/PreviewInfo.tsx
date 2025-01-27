@@ -1,3 +1,4 @@
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
@@ -30,6 +31,8 @@ import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 export type PreviewInfoProps = ClassStyle & Children & Puro<{
   isDragging: boolean
   getWasDragged: Getter<boolean>
+  photoProgress: AnimatedProperty<any, number>
+  photosCnt: number
   name: string
   birthDate: string
   aboutMe: string
@@ -38,6 +41,8 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
   const {
     isDragging = false,
     getWasDragged,
+    photoProgress,
+    photosCnt = 1,
     name = '',
     birthDate = '',
     aboutMe = '',
@@ -50,9 +55,14 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
       data-display-name="PreviewInfo"
     >
       
-      <ScrollIndicatorBox>
-        <DotsScrollIndicator />
-      </ScrollIndicatorBox>
+      {photosCnt >= 2 && (
+        <ScrollIndicatorBox>
+          <DotsScrollIndicator
+            cnt={photosCnt}
+            progress={photoProgress}
+          />
+        </ScrollIndicatorBox>
+      )}
       
       <ShortInfoContainer>
         <ShortInfoBox>

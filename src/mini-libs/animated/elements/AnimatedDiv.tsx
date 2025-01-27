@@ -39,23 +39,44 @@ const AnimatedDiv = React.memo(
       const [getOldAnimated, setOldAnimated] = useRefGetSet(animated)
       
       const {
-        updateStyleOpacity,
-        updateStyleScale,
         updateStyleTransform,
+        updateStyleTranslate,
+        updateStyleRotate,
+        updateStyleScale,
+        updateStyleOpacity,
+        
+        updateStyleTop,
+        updateStyleRight,
+        updateStyleBottom,
+        updateStyleLeft,
         updateStyleZIndex,
       } = useUpdateStyle(elemRef)
       
       // TODO iterate by object keys
-      getOldAnimated()?.opacity?.removeOnChange(updateStyleOpacity)
-      getOldAnimated()?.scale?.removeOnChange(updateStyleScale)
       getOldAnimated()?.transform?.removeOnChange(updateStyleTransform)
+      getOldAnimated()?.translate?.removeOnChange(updateStyleTranslate)
+      getOldAnimated()?.rotate?.removeOnChange(updateStyleRotate)
+      getOldAnimated()?.scale?.removeOnChange(updateStyleScale)
+      getOldAnimated()?.opacity?.removeOnChange(updateStyleOpacity)
+      
+      getOldAnimated()?.top?.removeOnChange(updateStyleTop)
+      getOldAnimated()?.right?.removeOnChange(updateStyleRight)
+      getOldAnimated()?.bottom?.removeOnChange(updateStyleBottom)
+      getOldAnimated()?.left?.removeOnChange(updateStyleLeft)
       getOldAnimated()?.zIndex?.removeOnChange(updateStyleZIndex)
       
       setOldAnimated(animated)
       
-      getOldAnimated()?.opacity?.onChange(updateStyleOpacity)
-      getOldAnimated()?.scale?.onChange(updateStyleScale)
       getOldAnimated()?.transform?.onChange(updateStyleTransform)
+      getOldAnimated()?.translate?.onChange(updateStyleTranslate)
+      getOldAnimated()?.rotate?.onChange(updateStyleRotate)
+      getOldAnimated()?.scale?.onChange(updateStyleScale)
+      getOldAnimated()?.opacity?.onChange(updateStyleOpacity)
+      
+      getOldAnimated()?.top?.onChange(updateStyleTop)
+      getOldAnimated()?.right?.onChange(updateStyleRight)
+      getOldAnimated()?.bottom?.onChange(updateStyleBottom)
+      getOldAnimated()?.left?.onChange(updateStyleLeft)
       getOldAnimated()?.zIndex?.onChange(updateStyleZIndex)
       
       

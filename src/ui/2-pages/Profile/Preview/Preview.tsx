@@ -337,7 +337,9 @@ const Preview = React.memo((props: PreviewProps) => {
   
   
   
-  const animatedProgress = animatedCurrProgressY.map(cp => (i: number) => {
+  const animatedPhotoProgress = animatedCurrProgressY.map(cp => getStartPhotoProgress() + cp)
+  
+  const animatedProps = animatedCurrProgressY.map(cp => (i: number) => {
     const p = getStartProgressY() + cp
     const photoP = getStartPhotoProgress() + cp
     //console.log('p', p, 'photoP', photoP)
@@ -362,12 +364,12 @@ const Preview = React.memo((props: PreviewProps) => {
                   <AnimatedPhotoBox
                     key={i}
                     animated={{
-                      zIndex: animatedProgress.map(ap => {
+                      zIndex: animatedProps.map(ap => {
                         const { p, photoP, displayedI, pCurr } = ap(i)
                         const z = -displayedI + visiblePhotosCnt - 1
                         return z
                       }),
-                      transform: animatedProgress.map(ap => {
+                      transform: animatedProps.map(ap => {
                         const { p, photoP, displayedI, pCurr } = ap(i)
                         const y = (() => {
                           if (displayedI === 0) return pCurr
@@ -375,7 +377,7 @@ const Preview = React.memo((props: PreviewProps) => {
                         })()
                         return `translateY(${y}%)`
                       }),
-                      scale: animatedProgress.map(ap => {
+                      scale: animatedProps.map(ap => {
                         const { p, photoP, displayedI, pCurr } = ap(i)
                         const s = (() => {
                           if (displayedI === 0) return 100
@@ -383,7 +385,7 @@ const Preview = React.memo((props: PreviewProps) => {
                         })()
                         return s / 100
                       }),
-                      opacity: animatedProgress.map(ap => {
+                      opacity: animatedProps.map(ap => {
                         const { p, photoP, displayedI, pCurr } = ap(i)
                         const o = (() => {
                           if (displayedI === 0) return 100 - RangeU.map(
@@ -405,7 +407,7 @@ const Preview = React.memo((props: PreviewProps) => {
                     {!!photosCnt && (
                       <AnimatedPhoto
                         animated={{
-                          src: animatedProgress.map(ap => {
+                          src: animatedProps.map(ap => {
                             const { p, photoP, displayedI, pCurr } = ap(i)
                             //console.log('displayedI', displayedI, 'photoP', photoP)
                             const photoI = RangeU.loop(
@@ -446,6 +448,8 @@ const Preview = React.memo((props: PreviewProps) => {
               <PreviewInfo
                 isDragging={isDragging}
                 getWasDragged={getWasDragged}
+                photosCnt={photosCnt}
+                photoProgress={animatedPhotoProgress}
                 name={name}
                 birthDate={birthDate}
                 aboutMe={aboutMe}

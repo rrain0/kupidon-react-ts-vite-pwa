@@ -257,6 +257,10 @@ export namespace AppTheme {
       ct:        string
       ctGrad:    [string, string]
     }
+    previewPhotosProgress: {
+      dotBg:       string
+      thumbBg:     string
+    }
     
     photos: {
       bg:                      string[]
