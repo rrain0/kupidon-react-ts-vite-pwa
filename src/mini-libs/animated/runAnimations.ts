@@ -1,8 +1,8 @@
 
 /*
 TODO Идеи для оптимизации
- 1) Если значение такое же как предыдущее, то не рендерить и соответсвенно не подписываться на обновления от raf
- ???) Заранее вычислять всё (на каждый драг эвент) и чтобы raf только брал значение и применял к элементам
+ 1) Попробовать вместо обхода графа вычмсляемых значений сразу складывать массив готовых функций
+ в AnimatedValue. Причём индекс будет фиксированный для каждого Computed: len
  */
 
 type UpdateFun = (time: number) => void
@@ -17,7 +17,7 @@ const updateAnims = (time: number) => {
   //console.timeEnd(`raf end ${time}`)
   if (anims.size) requestAnimationFrame(updateAnims)
   else isUpdating = false
-  console.log('size', anims.size)
+  //console.log('size', anims.size)
 }
 
 export const addAnimation = (anim: UpdateFun) => {
@@ -29,7 +29,7 @@ export const addAnimation = (anim: UpdateFun) => {
 }
 
 export const removeAnimation = (anim: UpdateFun) => {
-  console.log('anims.has(anim)', anims.has(anim))
+  //console.log('anims.has(anim)', anims.has(anim))
   anims.delete(anim)
 }
 
