@@ -1,4 +1,3 @@
-import { AnimationFunction } from 'src/mini-libs/animated/animationFunciton.ts'
 
 
 // current document time in ms
