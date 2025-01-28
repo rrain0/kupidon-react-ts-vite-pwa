@@ -363,7 +363,7 @@ const Preview = React.memo((props: PreviewProps) => {
                 return (
                   <AnimatedPhotoBox
                     key={i}
-                    animated={{
+                    animatedStyle={{
                       zIndex: animatedProps.map(ap => {
                         const { p, photoP, displayedI, pCurr } = ap(i)
                         const z = -displayedI + visiblePhotosCnt - 1
@@ -406,7 +406,7 @@ const Preview = React.memo((props: PreviewProps) => {
                   >
                     {!!photosCnt && (
                       <AnimatedPhoto
-                        animated={{
+                        animatedAttrs={{
                           src: animatedProps.map(ap => {
                             const { p, photoP, displayedI, pCurr } = ap(i)
                             //console.log('displayedI', displayedI, 'photoP', photoP)

@@ -8,7 +8,7 @@ export type AnimatedNumber = AnimatedProperty<any, number>
 export type AnimatedStringOrNumber = AnimatedString | AnimatedNumber | AnimatedProperty<any, string | number>
 
 
-export type StyleAnimatedProp = Puro<{
+export type AnimatedStyle = Puro<{
   transform: AnimatedString
   translate: AnimatedString
   rotate: AnimatedString
@@ -23,7 +23,7 @@ export type StyleAnimatedProp = Puro<{
 }>
 
 
-export type ImgAnimatedProps = Puro<{
+export type AnimatedImgAttrs = Puro<{
   src: AnimatedString
 }>
 

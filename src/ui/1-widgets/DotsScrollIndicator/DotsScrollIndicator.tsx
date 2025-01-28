@@ -51,7 +51,7 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
         <div css={frame3S}>
           {arr(cnt).map((_, i) => (
             <AnimatedDiv css={dotS} key={i}
-              animated={{
+              animatedStyle={{
                 translate: pLooped?.map(p => {
                   let yp = RangeU.mapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
                   yp = 1 - yp
@@ -62,7 +62,7 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
             />
           ))}
           <AnimatedDiv css={thumbS}
-            animated={{
+            animatedStyle={{
               top: pLooped?.map(p => `${p.p1 * 100}%`),
               transform: pLooped?.map(p => `translateY(calc( ${p.p1} * var(--g) ))`),
             }}

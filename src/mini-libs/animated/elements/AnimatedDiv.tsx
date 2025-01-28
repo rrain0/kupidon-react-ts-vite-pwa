@@ -1,19 +1,20 @@
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
-import { StyleAnimatedProp } from 'src/mini-libs/animated/AnimatedProps.ts'
+import { AnimatedStyle } from 'src/mini-libs/animated/AnimatedProps.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useUpdateStyle } from 'src/mini-libs/animated/elementUpdate.ts'
+import {
+  useRefreshElemStyleUpdaters,
+} from 'src/mini-libs/animated/animatedUpdaters.ts'
 import Puro = TypeU.Puro
 import Children = ReactU.Children
 
 
 
 type AnimatedDivExtraProps = Puro<{
-  animated: StyleAnimatedProp
+  animatedStyle: AnimatedStyle
 }> & Children
 
 type AnimatedDivRefElement = HTMLDivElement
@@ -26,7 +27,7 @@ const AnimatedDiv = React.memo(
   React.forwardRef<AnimatedDivRefElement, AnimatedDivProps>(
     (props, forwardedRef) => {
       const {
-        animated,
+        animatedStyle,
         children,
         ...restProps
       } = props
@@ -36,52 +37,12 @@ const AnimatedDiv = React.memo(
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
-      const [getOldAnimated, setOldAnimated] = useRefGetSet(animated)
-      
-      const {
-        updateStyleTransform,
-        updateStyleTranslate,
-        updateStyleRotate,
-        updateStyleScale,
-        updateStyleOpacity,
-        
-        updateStyleTop,
-        updateStyleRight,
-        updateStyleBottom,
-        updateStyleLeft,
-        updateStyleZIndex,
-      } = useUpdateStyle(elemRef)
-      
-      // TODO iterate by object keys
-      getOldAnimated()?.transform?.removeOnChange(updateStyleTransform)
-      getOldAnimated()?.translate?.removeOnChange(updateStyleTranslate)
-      getOldAnimated()?.rotate?.removeOnChange(updateStyleRotate)
-      getOldAnimated()?.scale?.removeOnChange(updateStyleScale)
-      getOldAnimated()?.opacity?.removeOnChange(updateStyleOpacity)
-      
-      getOldAnimated()?.top?.removeOnChange(updateStyleTop)
-      getOldAnimated()?.right?.removeOnChange(updateStyleRight)
-      getOldAnimated()?.bottom?.removeOnChange(updateStyleBottom)
-      getOldAnimated()?.left?.removeOnChange(updateStyleLeft)
-      getOldAnimated()?.zIndex?.removeOnChange(updateStyleZIndex)
-      
-      setOldAnimated(animated)
-      
-      getOldAnimated()?.transform?.onChange(updateStyleTransform)
-      getOldAnimated()?.translate?.onChange(updateStyleTranslate)
-      getOldAnimated()?.rotate?.onChange(updateStyleRotate)
-      getOldAnimated()?.scale?.onChange(updateStyleScale)
-      getOldAnimated()?.opacity?.onChange(updateStyleOpacity)
-      
-      getOldAnimated()?.top?.onChange(updateStyleTop)
-      getOldAnimated()?.right?.onChange(updateStyleRight)
-      getOldAnimated()?.bottom?.onChange(updateStyleBottom)
-      getOldAnimated()?.left?.onChange(updateStyleLeft)
-      getOldAnimated()?.zIndex?.onChange(updateStyleZIndex)
+      useRefreshElemStyleUpdaters(elemRef, animatedStyle)
       
       
       return (
-        <div // Frame
+        <div
+          data-display-name="AnimatedDiv"
           {...restProps}
           ref={elemRef}
         >
@@ -91,6 +52,7 @@ const AnimatedDiv = React.memo(
     }
   )
 )
+AnimatedDiv.displayName = 'AnimatedDiv'
 export default AnimatedDiv
 
 
