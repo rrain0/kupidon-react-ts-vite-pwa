@@ -26,7 +26,8 @@ export class AnimatedComputed<Root, Source, Value> implements AnimatedProperty<R
   }
   
   update = (value: Source) => {
-    for (const l of this.listeners) l(this.mapper(value))
+    const v = this.mapper(value)
+    for (const l of this.listeners) l(v)
   }
   
   map<Mapped>(mapper: Mapper<Value, Mapped>) {

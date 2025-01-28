@@ -9,7 +9,6 @@ import {
 import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
-import exists = TypeU.exists
 import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
@@ -28,12 +27,12 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   startTime: number = getTime()
   animationFunction: AnimationFunction<Value> = passAnimationFunction
   
-  // не влияет на значение, просто переводит в состояние finished
+  // не влияет на анимируемое значение, просто переводит в состояние finished
   finish: Callback = noop
   finished = false
   whenFinished!: Promise<void>
   
-  // не влияет на значение, просто переводит в состояние canceled
+  // не влияет на анимируемое значение, просто переводит в состояние canceled
   cancel: Callback = noop
   canceled = false
   whenCanceled!: Promise<void>
@@ -53,13 +52,13 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     addAnimation(this.update)
   }
   
-  start(props: StartAnimationProps<Value>): Promise<void> {
+  async start(props: StartAnimationProps<Value>): Promise<void> {
     this.endCurrAnimation()
     this.startValue = props.startValue
-    if (exists(props.startTime)) {
+    if (props.startTime !== undefined) {
       this.startTime = props.startTime
     }
-    if (exists(props.animationFunction)) {
+    if (props.animationFunction !== undefined) {
       this.animationFunction = props.animationFunction
     }
     this.reset()
@@ -68,14 +67,15 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   }
   
   
-  update = (time = getTime()) => {
-    for (const l of this.listeners) l(this.get(time))
+  readonly update = (time = getTime()) => {
+    const v = this.get(time)
+    for (const l of this.listeners) l(v)
     if (this.finished) {
       this.removeAnimationThrottled()
     }
   }
   
-  private removeAnimationThrottled = withThrottle(400, () => {
+  private readonly removeAnimationThrottled = withThrottle(400, () => {
     if (!this.isRunning) removeAnimation(this.update)
   })
   

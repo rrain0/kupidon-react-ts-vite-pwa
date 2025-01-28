@@ -12,10 +12,12 @@ const anims = new Set<UpdateFun>()
 let isUpdating = false
 
 const updateAnims = (time: number) => {
+  //console.time(`raf ${time}`)
   for (const a of anims) a(time)
+  //console.timeEnd(`raf end ${time}`)
   if (anims.size) requestAnimationFrame(updateAnims)
   else isUpdating = false
-  //console.log('size', anims.size)
+  console.log('size', anims.size)
 }
 
 export const addAnimation = (anim: UpdateFun) => {
@@ -27,6 +29,7 @@ export const addAnimation = (anim: UpdateFun) => {
 }
 
 export const removeAnimation = (anim: UpdateFun) => {
+  console.log('anims.has(anim)', anims.has(anim))
   anims.delete(anim)
 }
 

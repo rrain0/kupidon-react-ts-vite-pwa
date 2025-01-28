@@ -1,10 +1,9 @@
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { AnimatedValue } from '@animated/AnimatedValue.ts'
+import { useState } from 'react'
 
 
 export const useAnimatedValue = <V>(initialValue: V) => {
-  const [getAnimatedValue] = useRefGetSet(new AnimatedValue({ startValue: initialValue }))
-  return getAnimatedValue()
+  return useState(() => new AnimatedValue({ startValue: initialValue }))[0]
 }
 
 
