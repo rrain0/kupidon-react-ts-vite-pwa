@@ -92,14 +92,20 @@ export const useRefreshElemStyleUpdaters = (
   animatedStyle?: AnimatedStyle,
 ) => {
   const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedStyle)
+  //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
   const styleUpdaters = useElemStyleUpdaters(elemRef)
   
   const prevAnimated = getPrevAnimatedStyle()
+  //const prevI = getPrevAnimatedStyleI()
   for (const s in prevAnimated) {
     prevAnimated[s].removeOnChange(styleUpdaters[s])
+    
+    //prevAnimated[s].removeOnChange2(prevI[s])
   }
   for (const s in animatedStyle) {
     animatedStyle[s].onChange(styleUpdaters[s])
+    
+    //prevI[s] = animatedStyle[s].onChange2(styleUpdaters[s])
   }
   setPrevAnimatedStyle(animatedStyle)
 }
@@ -109,14 +115,20 @@ export const useRefreshImgAttrsUpdaters = (
   animatedAttrs?: AnimatedImgAttrs,
 ) => {
   const [getPrevAnimatedImgAttrs, setPrevAnimatedStyleImgAttrs] = useRefGetSet(animatedAttrs)
+  //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
   const styleUpdaters = useImgAttrsUpdaters(imgRef)
   
   const prevAnimated = getPrevAnimatedImgAttrs()
+  //const prevI = getPrevAnimatedStyleI()
   for (const s in prevAnimated) {
     prevAnimated[s].removeOnChange(styleUpdaters[s])
+    
+    //prevAnimated[s].removeOnChange2(prevI[s])
   }
   for (const s in animatedAttrs) {
     animatedAttrs[s].onChange(styleUpdaters[s])
+    
+    //prevI[s] = animatedAttrs[s].onChange2(styleUpdaters[s])
   }
   setPrevAnimatedStyleImgAttrs(animatedAttrs)
 }

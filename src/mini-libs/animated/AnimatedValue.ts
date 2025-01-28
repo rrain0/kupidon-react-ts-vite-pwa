@@ -8,11 +8,13 @@ import {
 } from 'src/mini-libs/animated/animationFunciton.ts'
 import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
+import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import Mapper = TypeU.Mapper
 import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
+import imSmallPlaceholderIcFullTransparent = IconButtonStyle.imSmallPlaceholderIcFullTransparent
 
 
 
@@ -70,6 +72,13 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   readonly update = (time = getTime()) => {
     const v = this.get(time)
     for (const l of this.listeners) l(v)
+    
+    /*
+    const anims = this.animations
+    const aLen = anims.length
+    for (let i = 0; i < aLen; i++) anims[i]?.(v)
+     */
+    
     if (this.finished) {
       this.removeAnimationThrottled()
     }
@@ -120,5 +129,21 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     this.listeners.delete(listener)
   }
   
+  /*
+  private animations: Callback1<Value>[] = []
+  onChange2(listener: Callback1<Value>): number {
+    const i = this.animations.length
+    this.animations[i] = listener
+    return i
+  }
+  removeOnChange2(index: number) {
+    const anims = this.animations
+    const len = anims.length
+    delete anims[index]
+    //console.log('this.animations.length', anims.length)
+    //console.log('this.animations', anims)
+    //if (len >= 200) this.animations = anims.filter(it => !!it)
+  }
+   */
 }
 

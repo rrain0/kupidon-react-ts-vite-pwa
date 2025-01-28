@@ -14,7 +14,7 @@ let isUpdating = false
 const updateAnims = (time: number) => {
   //console.time(`raf ${time}`)
   for (const a of anims) a(time)
-  //console.timeEnd(`raf end ${time}`)
+  //console.timeEnd(`raf ${time}`)
   if (anims.size) requestAnimationFrame(updateAnims)
   else isUpdating = false
   //console.log('size', anims.size)
