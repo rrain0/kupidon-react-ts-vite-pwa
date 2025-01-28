@@ -12,7 +12,7 @@ const anims = new Set<UpdateFun>()
 let isUpdating = false
 
 const updateAnims = (time: number) => {
-  anims.forEach(it => it(time))
+  for (const a of anims) a(time)
   if (anims.size) requestAnimationFrame(updateAnims)
   else isUpdating = false
   //console.log('size', anims.size)

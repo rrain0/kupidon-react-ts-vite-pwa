@@ -70,7 +70,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   
   update = (time = getTime()) => {
     const v = this.get(time)
-    this.listeners.forEach(it => it(v))
+    for (const l of this.listeners) l(v)
     if (this.finished) {
       this.removeAnimationThrottled()
     }
