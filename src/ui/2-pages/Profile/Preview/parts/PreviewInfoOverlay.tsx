@@ -2,7 +2,7 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -51,6 +51,27 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
   } = props
   
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
+  
+  /*
+  const infoButtonRef = useCallback((elem: HTMLButtonElement | null) => {
+    if (elem) {
+      elem.onfocus = () => {
+        console.log('ref onfocus')
+      }
+      elem.onpointerup = (ev) => {
+        console.log('ref onpointerup')
+        elem.focus()
+      }
+      elem.onblur = () => {
+        console.log('ref onblur')
+      }
+      elem.onclick = () => {
+        console.log('ref onclick')
+        openInfo?.()
+      }
+    }
+  }, [])
+   */
   
   return (
     <PreviewInfoBox
@@ -110,6 +131,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           <Heart2Ic />
         </Button>
         <Button
+          //ref={infoButtonRef}
           css={infoButtonS}
           disabled={isDragging}
           onClick={() => {
@@ -158,21 +180,11 @@ const backButtonS = (t: AppTheme.Theme) => css`
     rotate: 0.5turn;
     translate: -7% -5%;
   }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.3s;
-    opacity: 0.3;
-  }
 `
 const dislikeButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormalBigger(t)};
   ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('35.5%')}
-  }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
   }
 `
 const likeButtonS = (t: AppTheme.Theme) => css`
@@ -180,22 +192,12 @@ const likeButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.W.use.s.normal().e.icon().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('51.05%')}
   }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
-  }
 `
 const infoButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
   ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
     ${SvgIconS.W.e.icon.p.size.set('50%')};
     translate: 0 10%;
-  }
-  // todo move to styles
-  :disabled {
-    transition: opacity 0.2s;
-    opacity: 0.3;
   }
 `
 
@@ -206,8 +208,6 @@ const ShortInfoContainer = styled.div`
   ${col};
   align-items: start;
   justify-content: end;
-  //padding-left: 10px;
-  //padding-bottom: 10px;
 `
 const ShortInfoBox = styled.div`
   ${col};
@@ -215,8 +215,6 @@ const ShortInfoBox = styled.div`
   justify-content: end;
   gap: 14px;
   padding: 10px 14px;
-  //border-radius: 12px;
-  //background: #00000066;
   cursor: pointer;
   &[data-disabled] {
     cursor: auto;

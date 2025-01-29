@@ -19,10 +19,10 @@ import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 
-/* export const batchUpdate: Map<
+export const batchUpdate: Map<
   HTMLElement,
   Record<'attrs' | 'style', Record<string, string>>
-> = new Map() */
+> = new Map()
 
 
 
@@ -97,6 +97,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     }
     batchUpdate.clear() */
     
+    // Этот вариант ещё медленее
     /*
     const anims = this.animations
     const aLen = anims.length
