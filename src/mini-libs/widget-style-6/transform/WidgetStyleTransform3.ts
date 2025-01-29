@@ -6,7 +6,7 @@ import {
   WidgetMultiPropTransformer,
   WidgetMultiStateTransformer, WidgetProp,
   WidgetTransformerList,
-} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import isArray = TypeU.isArray
 
 

@@ -1,7 +1,7 @@
 import { animated, useSpring, config, easings } from '@react-spring/web'
 import clsx from 'clsx'
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { RippleS6 } from './RippleS6.ts'
 import { ReactU } from 'src/util/react/ReactU'

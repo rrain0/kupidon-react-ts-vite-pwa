@@ -147,7 +147,7 @@ const TestPage = React.memo(() => {
               display: grid;
               place-items: center;
               border-radius: 999999px;
-              ${Txt.normal2};
+              ${Txt.md14};
             `}
           >
             Отлично совместимы
@@ -163,7 +163,7 @@ const TestPage = React.memo(() => {
               display: grid;
               place-items: center;
               border-radius: 999999px;
-              ${Txt.normal2};
+              ${Txt.md14};
             `}
           >
             Средне совместимы
@@ -184,7 +184,7 @@ const TestPage = React.memo(() => {
                 display: grid;
                 place-items: center;
                 border-radius: 999999px;
-                ${Txt.normal2};
+                ${Txt.md14};
               `}
             >
               INTJ
@@ -198,7 +198,7 @@ const TestPage = React.memo(() => {
                 display: grid;
                 place-items: center;
                 border-radius: 999999px;
-                ${Txt.normal2};
+                ${Txt.md14};
               `}
             >
               ENTP
@@ -215,7 +215,7 @@ const TestPage = React.memo(() => {
               padding: 6px 10px;
               gap: 6px;
               border-radius: 16px;
-              ${Txt.normal2};
+              ${Txt.md14};
               ${col};
             `}
           >
@@ -237,7 +237,7 @@ const TestPage = React.memo(() => {
                   display: grid;
                   place-items: center;
                   border-radius: 999999px;
-                  ${Txt.normal2};
+                  ${Txt.md14};
                 `}
               >
                 INTJ
@@ -252,7 +252,7 @@ const TestPage = React.memo(() => {
                   display: grid;
                   place-items: center;
                   border-radius: 999999px;
-                  ${Txt.normal2};
+                  ${Txt.md14};
                 `}
               >
                 ENTP
@@ -270,7 +270,7 @@ const TestPage = React.memo(() => {
               padding: 6px 10px;
               gap: 6px;
               border-radius: 16px;
-              ${Txt.normal2};
+              ${Txt.md14};
               ${col};
             `}
           >
@@ -293,7 +293,7 @@ const TestPage = React.memo(() => {
                   display: grid;
                   place-items: center;
                   border-radius: 999999px;
-                  ${Txt.normal2};
+                  ${Txt.md14};
                 `}
               >
                 INTJ
@@ -309,7 +309,7 @@ const TestPage = React.memo(() => {
                   display: grid;
                   place-items: center;
                   border-radius: 999999px;
-                  ${Txt.normal2};
+                  ${Txt.md14};
                 `}
               >
                 ENTP

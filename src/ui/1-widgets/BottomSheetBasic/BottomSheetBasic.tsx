@@ -43,7 +43,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
               ${BottomSheetBasicParts.headerStyle(t)};
               ${sheetState === 'dragging' && css`cursor: grabbing;`}
             `}
-            ref={bottomSheetHeaderRef as any}
+            ref={bottomSheetHeaderRef}
             {...sheetDrag()}
           >
             
@@ -76,7 +76,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
                // Must be without margins!!!
                */}
               <div css={BottomSheetBasicParts.scrollableContentStyle}
-                ref={bottomSheetContentRef as any}
+                ref={bottomSheetContentRef}
               >
                 { children }
               </div>

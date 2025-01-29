@@ -146,7 +146,7 @@ const ModalReloading = styled.div`
   z-index: ${StyleVals.modalFloor2};
   background: ${p => p.theme.page.bg}9a;
   color: ${p => p.theme.page.ct2};
-  ${Txt.large2};
+  ${Txt.lg18lh150};
   ${center};
 `
 const ReloadingBox = styled.div`

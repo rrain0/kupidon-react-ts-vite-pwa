@@ -49,7 +49,7 @@ export const ToastBody = React.memo((props: ToastBodyProps)=>{
       css={t=>css`
         width: 20px;
         height: 20px;
-        --icon-color: ${t.toast.accentInfo[0]};
+        --color: ${t.toast.accentInfo[0]};
       `}
     />}
     
@@ -110,7 +110,7 @@ const Content = styled.div`
   flex: 1;
   color: ${p=>p.theme.toast.ct[0]};
   white-space: break-spaces;
-  ${Txt.small2};
+  ${Txt.md14thin};
 `
 
 const CloseButton = styled.button`

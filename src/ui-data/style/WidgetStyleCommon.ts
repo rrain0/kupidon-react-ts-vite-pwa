@@ -57,19 +57,21 @@ export namespace WidgetStyleCommon {
   
   export namespace Txt {
     
-    export const large2: WidgetStyle = {
-      fontWeight: '400',
-      fontSize: '18px',
-      lineHeight: '150%',
-      letterSpacing: '0.05em',
-    }
-    export const large2b: WidgetStyle = {
+    export const lg18: WidgetStyle = {
       fontWeight: '400',
       fontSize: '18px',
       lineHeight: 'normal',
       letterSpacing: 'normal',
     }
-    export const large1b: WidgetStyle = {
+    export const lg18lh150: WidgetStyle = {
+      fontWeight: '400',
+      fontSize: '18px',
+      lineHeight: '150%',
+      letterSpacing: '0.05em',
+    }
+    
+    
+    export const lg16b: WidgetStyle = {
       fontWeight: '400',
       fontSize: '16px',
       lineHeight: 'normal',
@@ -77,20 +79,7 @@ export namespace WidgetStyleCommon {
     }
     
     
-    
-    export const normal2: WidgetStyle = {
-      fontWeight: '400',
-      fontSize: '14px',
-      lineHeight: '129%',
-      letterSpacing: '0.05em',
-    }
-    export const normal2c: WidgetStyle = {
-      fontWeight: '600',
-      fontSize: '14px',
-      lineHeight: '129%',
-      letterSpacing: '0.05em',
-    }
-    export const normal1: WidgetStyle = {
+    export const md16: WidgetStyle = {
       fontWeight: '300',
       fontSize: '16px',
       lineHeight: '129%',
@@ -99,7 +88,22 @@ export namespace WidgetStyleCommon {
     
     
     
-    export const small1: WidgetStyle = {
+    export const md14: WidgetStyle = {
+      fontWeight: '400',
+      fontSize: '14px',
+      lineHeight: '129%',
+      letterSpacing: '0.05em',
+    }
+    export const md14bold: WidgetStyle = {
+      fontWeight: '600',
+      fontSize: '14px',
+      lineHeight: '129%',
+      letterSpacing: '0.05em',
+    }
+    
+    
+    
+    export const md15thin: WidgetStyle = {
       fontWeight: '300',
       fontSize: '15px',
       lineHeight: '129%',

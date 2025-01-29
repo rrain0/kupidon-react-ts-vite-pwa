@@ -9,7 +9,7 @@ const ItemLabel =
 React.memo(
 styled.label`
   padding-left: 12px;
-  ${Txt.large1};
+  ${Txt.lg16};
   font-weight: 700;
   color: ${p=>p.theme.page.ct2}
 `)

@@ -9,9 +9,9 @@ import ArrowLinesSharp1Svg from 'src/res/ic/normal/arrow-lines-sharp-1.svg?react
 import ArrowRefreshCwSvg from 'src/res/ic/normal/arrow-refresh-cw.svg?react'
 import ArrowReloadSvg from 'src/res/ic/normal/arrow-reload.svg?react'
 
-import PlanetFrameSvg from 'src/res/ic/normal/planet-frame.svg?react'
 import BowArrowSvg from 'src/res/ic/normal/bow-arrow.svg?react'
 
+import CalendarSvg from 'src/res/ic/normal/calendar.svg?react'
 import CardsHeartSvg from 'src/res/ic/normal/cards-heart.svg?react'
 import CautionSvg from 'src/res/ic/normal/caution.svg?react'
 import ChatRoundSvg from 'src/res/ic/normal/chat-round.svg?react'
@@ -29,6 +29,7 @@ import DayNightSvg from 'src/res/ic/normal/day-night.svg?react'
 import DoubleCheckmarkSvg from 'src/res/ic/normal/double-checkmark.svg?react'
 import Download1Svg from 'src/res/ic/normal/download-1.svg?react'
 import Download2RoundSvg from 'src/res/ic/normal/download-2-round.svg?react'
+import DumbbellSvg from 'src/res/ic/normal/dumbbell.svg?react'
 
 import EyeSvg from 'src/res/ic/normal/eye.svg?react'
 import EyeCrossedOutSvg from 'src/res/ic/normal/eye-crossed-out.svg?react'
@@ -58,21 +59,24 @@ import NightSvg from 'src/res/ic/normal/night.svg?react'
 
 import PencilWrite2Svg from 'src/res/ic/normal/pencil-write-2.svg?react'
 import PictureSvg from 'src/res/ic/normal/picture.svg?react'
+import PlanetFrameSvg from 'src/res/ic/normal/planet-frame.svg?react'
 import PlusSvg from 'src/res/ic/normal/plus.svg?react'
 import ProfileSvg from 'src/res/ic/normal/profile.svg?react'
+import ProfileCardSvg from 'src/res/ic/normal/profile-card.svg?react'
 
 import RadioActiveSvg from 'src/res/ic/normal/radio-active.svg?react'
 import RadioInactiveSvg from 'src/res/ic/normal/radio-inactive.svg?react'
 import RingingBellSvg from 'src/res/ic/normal/ringing-bell.svg?react'
+import RulerCornerSvg from 'src/res/ic/normal/ruler-corner.svg?react'
 
 import Search2Svg from 'src/res/ic/normal/search-2.svg?react'
 import Spinner8LinesSvg from 'src/res/ic/normal/spinner-8-lines.svg?react'
 import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.svg?react'
 
 import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
@@ -117,9 +121,9 @@ export namespace SvgIconsPack {
         const w = width ?? size
         const h = height ?? size
         
-        const sizeProp = SvgIconS.El.root.props.size
-        const colorProp = SvgIconS.El.root.props.color
-        const accentColorProp = SvgIconS.El.root.props.accentColor
+        const sizeProp = SvgIconS6.W.els.icon.ps!.size
+        const colorProp = SvgIconS6.W.els.icon.ps!.color
+        const accentColorProp = SvgIconS6.W.els.icon.ps!.colorAcc
         
         return (
           <SvgComponent
@@ -130,11 +134,11 @@ export namespace SvgIconsPack {
               //max-height: 100%;
               fill: ${color || colorProp.var('black')};
               stroke: ${color || colorProp.var('black')};
-              ${accentColorProp.name}: ${accentColor ?? accentColorProp.var('gray')};
+              ${accentColorProp.n}: ${accentColor ?? accentColorProp.var('gray')};
             `}
             width={w}
             height={h}
-            className={clsx(className, SvgIconS.El.icon.name)}
+            className={clsx(className, SvgIconS6.W.els.icon.n)}
             {...restProps}
             ref={forwardedRef}
           />
@@ -167,10 +171,10 @@ export namespace SvgIconsPack {
   export const ArrowReloadIc = generateSimpleSvgIcon(ArrowReloadSvg)
   
   
-  export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
   export const BowArrowIc = generateSimpleSvgIcon(BowArrowSvg)
   
   
+  export const CalendarIc = generateSimpleSvgIcon(CalendarSvg)
   export const CardsHeartIc = generateSimpleSvgIcon(CardsHeartSvg)
   export const CautionIc = generateSimpleSvgIcon(CautionSvg)
   export const ChatRoundIc = generateSimpleSvgIcon(ChatRoundSvg)
@@ -189,6 +193,7 @@ export namespace SvgIconsPack {
   export const DoubleCheckmarkIc = generateSimpleSvgIcon(DoubleCheckmarkSvg)
   export const Download1Ic = generateSimpleSvgIcon(Download1Svg)
   export const Download2RoundIc = generateSimpleSvgIcon(Download2RoundSvg)
+  export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
   
   
   export const EyeIc = generateSimpleSvgIcon(EyeSvg)
@@ -227,13 +232,16 @@ export namespace SvgIconsPack {
   
   export const PencilWrite2Ic = generateSimpleSvgIcon(PencilWrite2Svg)
   export const PictureIc = generateSimpleSvgIcon(PictureSvg)
+  export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
   export const PlusIc = generateSimpleSvgIcon(PlusSvg)
   export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
+  export const ProfileCardIc = generateSimpleSvgIcon(ProfileCardSvg)
   
   
   export const RadioActiveIc = generateSimpleSvgIcon(RadioActiveSvg)
   export const RadioInactiveIc = generateSimpleSvgIcon(RadioInactiveSvg)
   export const RingingBellIc = generateSimpleSvgIcon(RingingBellSvg)
+  export const RulerCornerIc = generateSimpleSvgIcon(RulerCornerSvg)
   
   
   export const Search2Ic = generateSimpleSvgIcon(Search2Svg)

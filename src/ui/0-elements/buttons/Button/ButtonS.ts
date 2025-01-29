@@ -155,7 +155,7 @@ export namespace ButtonS {
       min-height: 50px;
       border-radius: 15px;
       padding: 8px 6px;
-      ${Txt.large2};
+      ${Txt.lg18lh150};
     }
     ${W.use.s.normal().e.border().thisUse} {
       //border: 1px solid;
@@ -170,7 +170,7 @@ export namespace ButtonS {
       min-height: 34px;
       border-radius: 10px;
       padding: 8px 14px;
-      ${Txt.normal2};
+      ${Txt.md14};
     }
   `
   
@@ -441,7 +441,7 @@ export namespace ButtonS {
       border-radius: 10px;
       padding: 4px 6px;
       gap: 4px;
-      ${Txt.normal1};
+      ${Txt.md16};
     }
   `
   
@@ -473,7 +473,7 @@ export namespace ButtonS {
       border-radius: 999999px;
       padding: 8px 20px;
       gap: 0.6em;
-      ${Txt.small1};
+      ${Txt.md15thin};
     }
     ${W.use.s.normal().e.border().thisUse} {
       border: none;
@@ -499,7 +499,7 @@ export namespace ButtonS {
       min-height: 30px;
       border-radius: 1000000px;
       padding: 4px 16px;
-      ${Txt.small1};
+      ${Txt.md15thin};
     }
     ${W.use.s.normal().e.border().thisUse} {
       border: none;
@@ -805,7 +805,7 @@ export namespace ButtonS {
       background: none;
       padding: 8px 20px;
       gap: 0.6em;
-      ${Txt.small1};
+      ${Txt.md15thin};
     }
     ${W.use.s.normal().e.border().thisUse}{
       border: 1px solid;
@@ -826,7 +826,7 @@ export namespace ButtonS {
       min-height: 30px;
       border-radius: 1000000px;
       padding: 4px 16px;
-      ${Txt.small1};
+      ${Txt.md15thin};
     }
     ${W.use.s.normal().e.border().thisUse}{
       border: 1px solid;
@@ -934,7 +934,7 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background: none;
-      ${Txt.large2b};
+      ${Txt.lg18};
     }
   `
   // type: text, shape: rounded, size: small
@@ -944,7 +944,7 @@ export namespace ButtonS {
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
       background: none;
-      ${Txt.large1b};
+      ${Txt.lg16b};
     }
   `
   // type: text, shape: rounded, add color: normal
@@ -1000,7 +1000,7 @@ export namespace ButtonS {
     ${W.use.s.normal().e.button().thisUse} {
       padding-left: 16px;
       padding-right: 16px;
-      ${Txt.large1b};
+      ${Txt.lg16b};
     }
     ${textRoundedAddColorNormal(t)};
   `
@@ -1011,7 +1011,7 @@ export namespace ButtonS {
     ${W.use.s.normal().e.button().thisUse} {
       padding-left: 16px;
       padding-right: 16px;
-      ${Txt.large1b};
+      ${Txt.lg16b};
       text-transform: uppercase;
     }
     ${textRoundedAddColorNormal(t)};

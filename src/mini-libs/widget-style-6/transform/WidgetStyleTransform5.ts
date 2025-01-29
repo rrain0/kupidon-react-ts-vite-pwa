@@ -1,4 +1,4 @@
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { Transformed4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform4.ts'
 
 

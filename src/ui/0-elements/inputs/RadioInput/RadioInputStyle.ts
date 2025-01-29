@@ -80,7 +80,7 @@ export namespace RadioInputStyle {
       gap: 16px;
       padding: 8px 10px 8px 10px;
       
-      ${Txt.large2};
+      ${Txt.lg18lh150};
       color: ${t.page.ct2};
       ${Prop.color}: ${t.page.ct2};
     }

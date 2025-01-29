@@ -93,19 +93,19 @@ const featureCardS = css`
 `
 const FeatureCardName = styled.div`
   grid-area: name;
-  ${Txt.large2c};
+  ${Txt.lg17bold};
 `
 const FeatureCardText = styled.div`
   grid-area: text;
   align-self: center;
-  ${Txt.normal2};
+  ${Txt.md14};
 `
 const featureCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
   ${ButtonS6.W.t({
     button: {
       gridArea: 'btn', w: 160, hMin: 35,
-      ...WidgetStyleCommon.Txt.normal2c,
+      ...WidgetStyleCommon.Txt.md14bold,
     },
   })}
 `

@@ -3,7 +3,7 @@ import {
   WidgetAttr, WidgetStateValue, WidgetElem,
   WidgetMedia,
   WidgetProp, WidgetPropValue, WidgetPseudo, WidgetPseudoElem,
-} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 
 
 

@@ -2,7 +2,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
   WidgetElem, WidgetMultiAnyTransformer, WidgetAnyPropTransformer,
-} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   transform2,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'

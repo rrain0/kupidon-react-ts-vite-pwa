@@ -2,10 +2,10 @@ import { ObjectU } from '@util/common/ObjectU.ts'
 import {
   WidgetElem,
   WidgetMultiAnyTransformer,
-} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import {
-  AdditionalProps, CommonProps,
+  AdditionalProps,
   CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -205,14 +205,14 @@ export namespace ButtonS6 {
         export const sizeBig: WidgetStyle = [base, {
           button: {
             w: 'full', hMin: 50, r: 15, p: [8, 6],
-            ...Txt.large2,
+            ...Txt.lg18lh150,
           },
         }]
         // type: filled, shape: rect, size: normal
         export const sizeNormal: WidgetStyle = [base, {
           button: {
             w: 'full', hMin: 34, r: 10, p: [8, 14],
-            ...Txt.normal2,
+            ...Txt.md14,
           },
         }]
         
@@ -243,7 +243,7 @@ export namespace ButtonS6 {
         export const sizeNormal: WidgetStyle = [base, {
           button: {
             wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-            ...Txt.small1,
+            ...Txt.md15thin,
           },
         }]
         // type: filled, shape: rounded, size: normal2
@@ -254,7 +254,7 @@ export namespace ButtonS6 {
         export const sizeSmall: WidgetStyle = [base, {
           button: {
             w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-            ...Txt.small1,
+            ...Txt.md15thin,
           },
         }]
         
@@ -364,7 +364,7 @@ export namespace ButtonS6 {
         export const sizeNormal: WidgetStyle = [base, {
           button: {
             wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-            ...Txt.small1,
+            ...Txt.md15thin,
           },
           border: {
             bd: '1px solid',
@@ -377,7 +377,7 @@ export namespace ButtonS6 {
         export const sizeSmall: WidgetStyle = [base, {
           button: {
             w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-            ...Txt.small1,
+            ...Txt.md15thin,
           },
           border: {
             bd: '1px solid',
@@ -438,7 +438,7 @@ export namespace ButtonS6 {
         export const sizeBig: WidgetStyle = [base, {
           button: {
             w: 'full', hMin: 50, r: 15, p: [8, 6],
-            ...Txt.large2,
+            ...Txt.lg18lh150,
           },
           buttonBg: null,
         }]
@@ -446,7 +446,7 @@ export namespace ButtonS6 {
         export const sizeNormal: WidgetStyle = [sizeBig, {
           button: {
             w: 'auto', hMin: 30, r: 10, p: [4, 6], g: 4,
-            ...Txt.normal1,
+            ...Txt.md16,
           },
         }]
         
@@ -466,21 +466,21 @@ export namespace ButtonS6 {
         export const sizeNormal: WidgetStyle = [base, {
           button: {
             wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-            ...Txt.large2b,
+            ...Txt.lg18,
           },
         }]
         // type: text, shape: rounded, size: small
         export const sizeSmall: WidgetStyle = [base, {
           button: {
             w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-            ...Txt.large1b,
+            ...Txt.lg16b,
           },
         }]
         // type: text, shape: rounded, size: normal2
         export const sizeNormal2: WidgetStyle = [sizeNormal, {
           button: {
             pH: 16,
-            ...Txt.large1b,
+            ...Txt.lg16b,
           },
         }]
         // type: text, shape: rounded, size: normal2Uppercase
@@ -534,6 +534,7 @@ export namespace ButtonS6 {
     
   }
   
+  // TODO Style MAKE STYLE CLASS to easy extend to have transform function inside !!!
   
   // TODO Style - maybe cache it by theme + style in WeakMap or Map (to control size)
   export namespace S {

@@ -2,7 +2,7 @@ import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { FlatStyleTf1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-import { WidgetProp, WidgetTransformer } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import { WidgetProp, WidgetTransformer } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject

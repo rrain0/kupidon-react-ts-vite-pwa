@@ -14,13 +14,18 @@ import Elem0 = WidgetStyle0.Elem0
 
 export namespace SvgIconS {
   
+  
+  
+  
+  
+  
   export const W = (() => {
-    const icon = new Elem('rrainuiIcon', {
+    const icon = new Elem('rruiIcon', {
       normal: CssPseudo.empty,
     }, {
-      size: new CssProp('--icon-size'),
-      color: new CssProp('--icon-color'),
-      accentColor: new CssProp('--icon-accent-color'),
+      size: new CssProp('--size'),
+      color: new CssProp('--color'),
+      accentColor: new CssProp('--accent-color'),
     })
     const iconWidget = CssWidget.ofRoot('icon', icon)
     return iconWidget
@@ -52,10 +57,10 @@ export namespace SvgIconS {
   
   // TODO remove
   export const El = function() {
-    const icon = new Elem0('rrainuiIcon', { }, {
-      size: new CssProp0('--icon-size'),
-      color: new CssProp0('--icon-color'),
-      accentColor: new CssProp0('--icon-accent-color'),
+    const icon = new Elem0('rruiIcon', { }, {
+      size: new CssProp0('--size'),
+      color: new CssProp0('--color'),
+      accentColor: new CssProp0('--accent-color'),
     })
     return { root: icon, icon } as const
   }()

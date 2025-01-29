@@ -1,7 +1,7 @@
 import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
   WidgetMultiAnyTransformer, WidgetElem, WidgetProp,
-} from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   transform2,
 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'

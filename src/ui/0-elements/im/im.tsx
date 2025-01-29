@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
+import { AppStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle'
 import abs = EmotionCommon.abs
 import center = EmotionCommon.center
@@ -16,19 +17,19 @@ export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
   ${center};
 `
 
-export const imPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${SvgIconS.El.icon.thiz()} {
-    ${SvgIconS.El.icon.props.color.set(t.photos.ct[0])}
-    ${SvgIconS.El.icon.props.size.set('30%')}
-  }
-`
-
-export const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${imPlaceholderIcS(t)};
-  ${SvgIconS.El.icon.thiz()} {
-    ${SvgIconS.El.icon.props.size.set('50%')}
-  }
-`
+export const imPlaceholderIcS: AppStyle = t => SvgIconS6.W.t([
+  SvgIconS6.SWidget.base, {
+    iconSz: '30%',
+    iconColor: t.photos.ct[0],
+  },
+])
+// TODO Style - унаследовать цыет сверху
+export const imSmallPlaceholderIcS = t => SvgIconS6.W.t([
+  SvgIconS6.SWidget.base, {
+    iconSz: '50%',
+    iconColor: t.photos.ct[0],
+  },
+])
 
 export const imPieProgressS = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress} {

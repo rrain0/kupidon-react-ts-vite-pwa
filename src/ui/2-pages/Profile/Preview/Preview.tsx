@@ -572,7 +572,7 @@ const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
 const NoImagesTitle = styled.div`
   grid-area: t;
   ${centerGrid};
-  ${Txt.large3};
+  ${Txt.lg24lh150};
 `
 
 

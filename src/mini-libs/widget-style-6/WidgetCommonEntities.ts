@@ -1,7 +1,9 @@
 import {
-  WidgetAttrs,
-  WidgetComplexTransformers, WidgetMultiPropTransformer, WidgetProp,
-  WidgetProps, WidgetPropValue, WidgetPseudoElements, WidgetPseudos,
+  WidgetMultiPropTransformer, WidgetProp,
+  WidgetPropValue
+} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import {
+  WidgetComplexTransformers, WidgetAttrs, WidgetProps, WidgetPseudoElements, WidgetPseudos,
 } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 
 
@@ -127,6 +129,8 @@ export const CommonStates = (() => {
 
 
 export namespace AdditionalProps {
+  // --color: size;
+  export const varSize = WidgetProp.ofName('--size', WidgetProps.transformLenValue)
   // --color: value;
   export const varColor = WidgetProp.ofName('--color')
   // color: value; --color: value;
@@ -136,6 +140,8 @@ export namespace AdditionalProps {
       [AdditionalProps.varColor, WidgetPropValue.of(value)],
     ],
   })
+  export const varAccentColor = WidgetProp.ofName('--accent-color')
+  // color: value; --color: value;
 }
 
 

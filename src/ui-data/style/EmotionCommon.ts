@@ -297,98 +297,129 @@ export namespace EmotionCommon {
   
   export namespace Txt {
     
-    export const large4 = css`
+    export const lg28 = css`
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 150%;
+      letter-spacing: normal;
+      `
+    export const lg28bold = css`
       font-weight: 500;
       font-size: 28px;
       line-height: 150%;
       letter-spacing: 0.05em;
     `
     
-    export const large3 = css`
+    
+    export const lg24 = css`
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    export const lg24lh150 = css`
       font-weight: 400;
       font-size: 24px;
       line-height: 150%;
       letter-spacing: 0.05em;
     `
-    
-    export const large3b = css`
+    export const lg24bold = css`
       font-weight: 500;
       font-size: 24px;
       line-height: normal;
       letter-spacing: normal;
     `
     
-    export const large2 = css`
+    
+    export const lg20 = css`
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    export const lg20bold = css`
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    
+    
+    export const lg18 = css`
+      font-weight: 400;
+      font-size: 18px;
+      line-height: normal;
+      letter-spacing: normal;
+    `
+    export const lg18lh150 = css`
       font-weight: 400;
       font-size: 18px;
       line-height: 150%;
       letter-spacing: 0.05em;
     `
     
-    export const large2b = css`
-      font-weight: 400;
-      font-size: 18px;
-      line-height: normal;
-      letter-spacing: normal;
-    `
     
-    export const large2c = css`
+    export const lg17bold = css`
       font-weight: 600;
       font-size: 17px;
       line-height: normal;
       letter-spacing: 0.05em;
     `
+    export const lg17 = css`
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
     
-    export const large1 = css`
+    
+    export const lg16 = css`
       font-weight: 400;
       font-size: 16px;
       line-height: 129%;
       letter-spacing: 0.05em;
     `
-    
-    export const large1b = css`
+    export const lg16b = css`
       font-weight: 400;
       font-size: 16px;
       line-height: normal;
       letter-spacing: normal;
     `
-    
-    export const normal3 = css`
-      font-weight: 400;
-      font-size: 15px;
-      line-height: 129%;
-      letter-spacing: 0.05em;
-    `
-    
-    export const normal2 = css`
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 129%;
-      letter-spacing: 0.05em;
-    `
-    
-    export const normal2c = css`
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 129%;
-      letter-spacing: 0.05em;
-    `
-    
-    export const normal1 = css`
+    export const md16 = css`
       font-weight: 300;
       font-size: 16px;
       line-height: 129%;
       letter-spacing: normal;
     `
     
-    export const small1 = css`
+    
+    export const md15 = css`
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 129%;
+      letter-spacing: 0.05em;
+    `
+    export const md15thin = css`
       font-weight: 300;
       font-size: 15px;
       line-height: 129%;
       letter-spacing: normal;
     `
     
-    export const small2 = css`
+    
+    export const md14 = css`
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 129%;
+      letter-spacing: 0.05em;
+    `
+    export const md14bold = css`
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 129%;
+      letter-spacing: 0.05em;
+    `
+    export const md14thin = css`
       font-weight: 300;
       font-size: 14px;
       line-height: 129%;
@@ -396,8 +427,7 @@ export namespace EmotionCommon {
     `
     
     
-    
-    export const small5 = css`
+    export const sm10 = css`
       font-weight: 300;
       font-size: 10px;
       line-height: 129%;

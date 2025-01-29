@@ -177,7 +177,7 @@ const OptionContainer = styled.div`
 `
 const OptionTitle = styled.h6`
   ${resetH};
-  ${Txt.large2};
+  ${Txt.lg18lh150};
   flex: 1;
   ${col};
   align-items: start;

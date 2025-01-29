@@ -185,7 +185,7 @@ export namespace CheckboxInputStyle {
       border-radius: 15px;
       background: none;
       padding: 8px 10px;
-      ${Txt.large2};
+      ${Txt.lg18lh150};
       ${row};
       align-items: center;
       ${W.e.frame.e.p.color.set(t.page.ct2)};

@@ -12,7 +12,7 @@ export namespace SvgGradIconsStyle {
   
   export const El = function() {
     const icon = new Elem('rrainuiGradIcon', {}, {
-      size: new CssProp('--icon-size'),
+      size: new CssProp('--size'),
       firstColor: new CssProp('--icon-grad-first-color'),
       secondColor: new CssProp('--icon-grad-second-color'),
     })

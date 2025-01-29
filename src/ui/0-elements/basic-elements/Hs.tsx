@@ -11,7 +11,7 @@ import Txt = EmotionCommon.Txt
 
 // todo replace by Headers.page
 export const formHeader = (t: AppTheme.Theme) => css`
-  ${Txt.large4};
+  ${Txt.lg28bold};
   min-height: 1.5em;
   color: ${t.page.ct1};
   align-self: center;
@@ -27,7 +27,7 @@ export default FormHeader
 export namespace Hs {
   
   export const page = (t: AppTheme.Theme) => css`
-    ${Txt.large3};
+    ${Txt.lg24lh150};
     min-height: 1.5em;
     color: ${t.page.ct1};
     align-self: center;
@@ -37,7 +37,7 @@ export namespace Hs {
   
   
   export const card3 = (t: AppTheme.Theme) => css`
-    ${Txt.large2b};
+    ${Txt.lg18};
     color: ${t.boxNormal.ct[0]};
   `
   export const Card3 = styled.h4`${p => card3(p.theme)}`

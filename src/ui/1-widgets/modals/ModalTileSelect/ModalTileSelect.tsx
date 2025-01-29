@@ -140,7 +140,7 @@ const Tile = React.memo(
   styled.div<Puro<{ isSelected: boolean }>>`
     padding: 4px ${Sizes.g}px;
     border-radius: 999999px;
-    ${Txt.normal1};
+    ${Txt.md16};
     ${p => p.isSelected && `
       color: ${p.theme.boxAccent.ct[0]};
       background: ${p.theme.boxAccent.bg[0]};

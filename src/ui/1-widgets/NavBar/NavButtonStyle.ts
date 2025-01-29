@@ -72,7 +72,7 @@ export namespace NavButtonStyle {
       background: none;
       ${El.btn.props.color.set(t.navButton.ct[0])}
       
-      ${Txt.small5};
+      ${Txt.sm10};
     }
     ${El.ripple.thiz()} {
       ${El.ripple.props.mode.set('center')}
