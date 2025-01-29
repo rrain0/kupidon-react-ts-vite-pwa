@@ -9,15 +9,13 @@ import ChildrenProps = ReactU.Children
 
 // Pointer & Wheel events consumer
 
-const UserActionsConsumer = React.memo(
-  (props: ChildrenProps) => {
-    return (
-      <div css={contents} {...stopPointerAndMouseEvents()}>
-        {props.children}
-      </div>
-    )
-  }
-)
+const UserActionsConsumer = React.memo((props: ChildrenProps) => {
+  return (
+    <div css={contents} {...stopPointerAndMouseEvents()}>
+      {props.children}
+    </div>
+  )
+})
 export default UserActionsConsumer
 
 

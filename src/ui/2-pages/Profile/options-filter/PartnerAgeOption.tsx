@@ -72,11 +72,11 @@ const PartnerAgeOption = React.memo(
     useStateMapperSync(
       ageRange, widgetRange,
       setAgeRange, setWidgetRange,
-      (w, h) => ReactU.arrMerge(
+      (w, h) => ReactU.arrMergeIf(
         h, w,
         mapWidgetRangeToDataRange(w), mapDataRangeToWidgetRange(h)
       ),
-      (h, w) => ReactU.arrMerge(
+      (h, w) => ReactU.arrMergeIf(
         w, h,
         mapDataRangeToWidgetRange(h), mapWidgetRangeToDataRange(w)
       )

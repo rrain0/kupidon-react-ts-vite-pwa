@@ -11,86 +11,83 @@ import React, { useRef } from 'react'
 
 
 
-const BottomSheetBasic =
-  React.memo(
-    (props: BottomSheetDialogBasicProps) => {
-      
-      const { headerTitle, children, ...restProps } = props
-      const { sheetState } = props
-      
-      
-      const bottomSheetFrameRef = useRef<HTMLDivElement>(null)
-      const bottomSheetRef = useRef<HTMLDivElement>(null)
-      const bottomSheetHeaderRef = useRef<HTMLDivElement>(null)
-      const bottomSheetContentRef = useRef<HTMLDivElement>(null)
-      
-      
-      
-      
-      return (
-        <BottomSheet
-          {...restProps}
-          bottomSheetFrameRef={bottomSheetFrameRef}
-          bottomSheetRef={bottomSheetRef}
-          bottomSheetHeaderRef={bottomSheetHeaderRef}
-          bottomSheetContentRef={bottomSheetContentRef}
-        >
-          {({ sheetDrag }) => (
-            <>
+const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
+  const { headerTitle, children, ...restProps } = props
+  const { sheetState } = props
+  
+  
+  const bottomSheetFrameRef = useRef<HTMLDivElement>(null)
+  const bottomSheetRef = useRef<HTMLDivElement>(null)
+  const bottomSheetHeaderRef = useRef<HTMLDivElement>(null)
+  const bottomSheetContentRef = useRef<HTMLDivElement>(null)
+  
+  
+  
+  
+  return (
+    <BottomSheet
+      {...restProps}
+      bottomSheetFrameRef={bottomSheetFrameRef}
+      bottomSheetRef={bottomSheetRef}
+      bottomSheetHeaderRef={bottomSheetHeaderRef}
+      bottomSheetContentRef={bottomSheetContentRef}
+    >
+      {({ sheetDrag }) => (
+        <>
+          {/*
+           // Header Component
+           // Must be without margins!!!
+           */}
+          <div
+            css={t => css`
+              ${BottomSheetBasicParts.headerStyle(t)};
+              ${sheetState === 'dragging' && css`cursor: grabbing;`}
+            `}
+            ref={bottomSheetHeaderRef as any}
+            {...sheetDrag()}
+          >
+            
+            {/* Header handle */ }
+            <div
+              css={t => css`
+                ${BottomSheetBasicParts.headerHandleStyle(t)};
+                ${sheetState === 'dragging' && `background: ${t.page.ct2};`}
+              `}
+            />
+            
+            <div css={BottomSheetBasicParts.headerTextStyle}>
+              {headerTitle}
+            </div>
+          
+          </div>
+          
+          {/*
+           // Body Component
+           // Must be without margins & paddings!!!
+           */}
+          <div css={BottomSheetBasicParts.bodyStyle}>
+            <OverflowWrapper css={OverflowWrapperStyle.defolt}
+              showVertical={
+                ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)
+              }
+            >
               {/*
-               // Header Component
+               // scrollable content
                // Must be without margins!!!
                */}
-              <div
-                css={t => css`
-                  ${BottomSheetBasicParts.headerStyle(t)};
-                  ${sheetState === 'dragging' && css`cursor: grabbing;`}
-                `}
-                ref={bottomSheetHeaderRef as any}
-                {...sheetDrag()}
+              <div css={BottomSheetBasicParts.scrollableContentStyle}
+                ref={bottomSheetContentRef as any}
               >
-                
-                {/* Header handle */ }
-                <div
-                  css={t => css`
-                    ${BottomSheetBasicParts.headerHandleStyle(t)};
-                    ${sheetState === 'dragging' && `background: ${t.page.ct2};`}
-                  `}
-                />
-                
-                <div css={BottomSheetBasicParts.headerTextStyle}>
-                  {headerTitle}
-                </div>
-              
+                { children }
               </div>
-              
-              {/*
-               // Body Component
-               // Must be without margins & paddings!!!
-               */}
-              <div css={BottomSheetBasicParts.bodyStyle}>
-                <OverflowWrapper css={OverflowWrapperStyle.defolt}
-                  showVertical={
-                    ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)
-                  }
-                >
-                  {/*
-                   // scrollable content
-                   // Must be without margins!!!
-                   */}
-                  <div css={BottomSheetBasicParts.scrollableContentStyle}
-                    ref={bottomSheetContentRef as any}
-                  >
-                    { children }
-                  </div>
-                </OverflowWrapper>
-              </div>
-            </>
-          )}
-        
-        </BottomSheet>
-      )
-    })
+            </OverflowWrapper>
+          </div>
+        </>
+      )}
+    
+    </BottomSheet>
+  )
+})
 export default BottomSheetBasic
 
 

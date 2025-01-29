@@ -1,3 +1,4 @@
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
@@ -18,51 +19,70 @@ type ButtonProps = React.ComponentPropsWithoutRef<'button'> & PartialUndef<{
 }>
 
 
-const Button = React.memo(
-  React.forwardRef<HTMLButtonElement, ButtonProps>(
-    (props, forwardedRef) => {
-      const {
-        hasError,
-        className, children,
-        ...restProps
-      } = props
-      
-      
-      const elemRef = useRef<HTMLButtonElement>(null)
-      useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-      
-      
-      return (
-        <UseRipple>
-          { rippleProps => (
-            <button // Button
-              ref={elemRef}
-              {...{ [ButtonS6.W.els.button.ss!.error.n]: trueOrUndef(hasError) }}
-              className={clsx(className, ButtonS6.W.els.button.n)}
-              type="button"
-              {...restProps}
-              {...combineEvHandlersRecords(rippleProps.target, restProps)}
-            >
-              
-              {children}
-              
-              <div // Border
-                className={ButtonS6.W.els.border.n}
-              >
-                <Ripple
-                  {...rippleProps.ripple}
-                  // todo more imperative ripple and ability to cancel
-                  {...props.disabled && { isShow: false }}
-                />
-              </div>
-            
-            </button>
-          )}
-        </UseRipple>
-      )
-    }
+const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((props, forwardedRef) => {
+  const {
+    hasError,
+    className, children,
+    ...restProps
+  } = props
+  
+  
+  const elemRef = useRef<HTMLButtonElement>(null)
+  useImperativeHandle(forwardedRef, () => elemRef.current!, [])
+  
+  // TODO костыль для клика
+  //const [getWasClicked, setWasClicked] = useRefGetSet(false)
+  
+  
+  return (
+    <UseRipple>
+      { rippleProps => (
+        <button
+          data-display-name="Button"
+          ref={elemRef}
+          {...{ [ButtonS6.W.els.button.ss!.error.n]: trueOrUndef(hasError) }}
+          className={clsx(className, ButtonS6.W.els.button.n)}
+          type="button"
+          {...restProps}
+          {...combineEvHandlersRecords(rippleProps.target, restProps)}
+          
+          // TODO костыль для клика
+          /*{...combineEvHandlersRecords(
+            {
+              onPointerUp: ev => {
+                setWasClicked(false)
+                ev.currentTarget.click()
+              },
+            },
+            combineEvHandlersRecords(rippleProps.target, restProps))
+          }
+          // TODO костыль для клика
+          onClick={ev => {
+            if (!getWasClicked()) {
+              setWasClicked(true)
+              restProps.onClick?.(ev)
+            }
+          }}*/
+        >
+          
+          {children}
+          
+          <div // Border
+            className={ButtonS6.W.els.border.n}
+          >
+            <Ripple
+              {...rippleProps.ripple}
+              // todo more imperative ripple and ability to cancel
+              {...props.disabled && { isShow: false }}
+            />
+          </div>
+        
+        </button>
+      )}
+    </UseRipple>
   )
-)
+}))
+Button.displayName = 'Button'
 export default Button
 
 

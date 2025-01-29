@@ -4,6 +4,7 @@ import { useDrag } from '@use-gesture/react'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
+import { useBool } from '@util/react-state/useBool.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
@@ -16,6 +17,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
+import PreviewInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo.tsx'
 import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -302,42 +304,31 @@ const Preview = React.memo((props: PreviewProps) => {
   })
   
   
-  const frame2RefFun = useResizeRef<HTMLElement>(useCallback((elem) => {
-    if (elem) {
-      const p = getViewProps(elem)
+  const [isInfoOpen, openInfo, closeInfo] = useBool(false)
+  
+  
+  const frameRefFun = useResizeRef<HTMLElement>(useCallback(frame => {
+    if (frame) {
+      const props = getViewProps(frame)
       const { w, h } = ViewU.clampRatio({
         minRatio: minRatioPort,
         maxRatio: maxRatioPort,
-        w: p.w,
-        h: p.h,
+        w: props.w - ph * 2,
+        h: props.h - pv * 2,
       })
-      p.setWhCssProps({ w, h })
+      props.setCssProps({
+        '--w': `${props.w}px`,
+        '--h': `${props.h}px`,
+        '--photos-w': `${w}px`,
+        '--photos-h': `${h}px`,
+      })
     }
   }, []))
   
   
-  
-  
-  
-  
-  
-  //const im = photos[0]
-  //const [scroll, setScroll] = useState(0)
-  
-  /* useEffect(
-    ()=>{
-      const id = setInterval(
-        ()=>setScroll(s=>loopRange(s+3,[0,100])),
-        1000
-      )
-      return ()=>clearInterval(id)
-    },
-    []
-  ) */
-  
-  
-  
-  const animatedPhotoProgress = animatedCurrProgressY.map(cp => getStartPhotoProgress() + cp)
+  const animatedPhotoProgress = useMemo(() => {
+    return animatedCurrProgressY.map(cp => getStartPhotoProgress() + cp)
+  }, [animatedCurrProgressY])
   
   const animatedProps = animatedCurrProgressY.map(cp => (i: number) => {
     const p = getStartProgressY() + cp
@@ -355,8 +346,11 @@ const Preview = React.memo((props: PreviewProps) => {
   
   return (
     <Pages.SafeInsets>
-      <PreviewFrame>
-        <PreviewFrame2 ref={frame2RefFun}>
+      <PreviewFrame ref={frameRefFun}>
+        
+        <PreviewInfo isOpen={isInfoOpen} close={closeInfo} />
+        
+        <PreviewFrame2>
           <PhotosContainer>
             <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
               {arrOfIndices(visiblePhotosCnt).map(i => {
@@ -449,6 +443,7 @@ const Preview = React.memo((props: PreviewProps) => {
                 isDragging={isDragging}
                 getWasDragged={getWasDragged}
                 photosCnt={photosCnt}
+                openInfo={openInfo}
                 photoProgress={animatedPhotoProgress}
                 name={name}
                 birthDate={birthDate}
@@ -458,6 +453,7 @@ const Preview = React.memo((props: PreviewProps) => {
             </PhotosContainer2>
           </PhotosContainer>
         </PreviewFrame2>
+        
       </PreviewFrame>
     </Pages.SafeInsets>
   )
@@ -466,14 +462,18 @@ export default Preview
 
 
 
-const borderRadius = 16
-const fade = '#000000aa'
+const pv = 32
+const ph = 16
 
 
 const PreviewFrame = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
-  padding: 32px 16px;
+  padding: ${pv}px ${ph}px;
+  --photo-r: 16px;
+  --photo-w: var(--photos-w);
+  --photo-h: calc( var(--photos-h) * (100 - ${maxVisiblePhotosCnt - 1}) / 100 );
   overflow: hidden;
 `
 const PreviewFrame2 = styled.div`
@@ -482,14 +482,15 @@ const PreviewFrame2 = styled.div`
   ${center};
 `
 const PhotosContainer = styled.div`
-  width: var(--w);
-  height: var(--h);
+  width: var(--photos-w);
+  height: var(--photos-h);
   display: grid;
   place-items: end center;
 `
 const PhotosContainer2 = styled.div`
   width: 100%;
-  height: ${100 - (maxVisiblePhotosCnt - 1)}%;
+  //height: ${100 - (maxVisiblePhotosCnt - 1)}%;
+  height: var(--photo-h);
   position: relative;
   
   // allow intercept only single finger left / right swipe gestures
@@ -502,7 +503,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: ${borderRadius}px;
+  border-radius: var(--photo-r);
   ${centerAll};
   overflow: hidden;
   // TODO add some bg gradient while image not loaded already
@@ -530,14 +531,11 @@ const AnimatedPhoto = styled(AnimatedImg)`
 `
 const PhotoFade = styled.div`
   ${abs};
-  // todo theme - fade color
-  background-image:
-    linear-gradient(
-      to bottom,
-      transparent 0% 60%,
-      ${fade} 90%
-    );
-  background-size: auto, auto 150%;
+  background-image: linear-gradient(
+    to bottom,
+    ${p => p.theme.previewInfoBox.bgFadeGrad[0]} 0% 60%,
+    ${p => p.theme.previewInfoBox.bgFadeGrad[1]} 90%
+  );
 `
 
 
@@ -552,7 +550,7 @@ const NoImagesBox = styled.div`
   height: 180px;
   position: relative;
   z-index: 1;
-  border-radius: ${borderRadius}px;
+  border-radius: var(--photo-r);
   background-color: ${p => p.theme.boxTransparent.bg};
   ${centerGrid};
   grid:

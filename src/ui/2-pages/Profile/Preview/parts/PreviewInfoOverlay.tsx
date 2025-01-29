@@ -2,7 +2,6 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
-import { useBool } from '@util/react-state/useBool.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
@@ -12,8 +11,6 @@ import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIc
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
-import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
-import PreviewInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Puro = TypeU.Puro
@@ -23,10 +20,10 @@ import colC = EmotionCommon.colC
 import Getter = TypeU.Getter
 import Heart2Ic = SvgIconsPack.Heart2Ic
 import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
-import ArrowReload2GradIc = SvgGradIconsPack.ArrowReload2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import trueOrUndef = TypeU.trueOrUndef
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
+import Callback = TypeU.Callback
 
 
 
@@ -36,6 +33,7 @@ export type PreviewInfoOverlayProps = ClassStyle & Puro<{
   getWasDragged: Getter<boolean>
   photoProgress: AnimatedProperty<any, number>
   photosCnt: number
+  openInfo: Callback
   name: string
   birthDate: string
   aboutMe: string
@@ -46,94 +44,87 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
     getWasDragged,
     photoProgress,
     photosCnt = 1,
+    openInfo,
     name = '',
     birthDate = '',
     aboutMe = '',
   } = props
   
-  const [isInfoOpen, openInfo, closeInfo] = useBool(false)
-  
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
   return (
-    <>
-      <PreviewInfoBox
-        data-display-name="PreviewInfoOverlay"
-      >
-        
-        {photosCnt >= 2 && (
-          <ScrollIndicatorBox>
-            <DotsScrollIndicator
-              cnt={photosCnt}
-              progress={photoProgress}
-            />
-          </ScrollIndicatorBox>
-        )}
-        
-        <ShortInfoContainer>
-          <ShortInfoBox
-            data-disabled={trueOrUndef(isDragging)}
-            onClick={() => {
-              if (getWasDragged?.()) return
-              openInfo()
-            }}
-          >
-            <Name>{nameAge}</Name>
-            <AboutMe>{aboutMe}</AboutMe>
-          </ShortInfoBox>
-        </ShortInfoContainer>
-        
-        <ActionButtonsBox>
-          <Button
-            css={backButtonS}
-            disabled={isDragging}
-            onClick={() => {
-              console.log('wasDragged', getWasDragged?.())
-              console.log('back')
-              if (getWasDragged?.()) return
-            }}
-          >
-            <ArrowBackGradIc />
-          </Button>
-          <Button
-            css={dislikeButtonS}
-            disabled={isDragging}
-            onClick={() => {
-              if (getWasDragged?.()) return
-            }}
-          >
-            <Cross2GradIc />
-          </Button>
-          <Button
-            css={likeButtonS}
-            disabled={isDragging}
-            onClick={() => {
-              if (getWasDragged?.()) return
-            }}
-          >
-            <Heart2Ic />
-          </Button>
-          <Button
-            css={infoButtonS}
-            disabled={isDragging}
-            onClick={() => {
-              if (getWasDragged?.()) return
-              openInfo()
-            }}
-          >
-            <ArrowAngledRounded2GradIc />
-          </Button>
-        </ActionButtonsBox>
+    <PreviewInfoBox
+      data-display-name="PreviewInfoOverlay"
+    >
       
-      </PreviewInfoBox>
+      {photosCnt >= 2 && (
+        <ScrollIndicatorBox>
+          <DotsScrollIndicator
+            cnt={photosCnt}
+            progress={photoProgress}
+          />
+        </ScrollIndicatorBox>
+      )}
       
+      <ShortInfoContainer>
+        <ShortInfoBox
+          data-disabled={trueOrUndef(isDragging)}
+          onClick={() => {
+            if (getWasDragged?.()) return
+            openInfo?.()
+          }}
+        >
+          <Name>{nameAge}</Name>
+          <AboutMe>{aboutMe}</AboutMe>
+        </ShortInfoBox>
+      </ShortInfoContainer>
       
-      
-      <PreviewInfo isOpen={isInfoOpen} close={closeInfo} />
-    </>
+      <ActionButtonsBox>
+        <Button
+          css={backButtonS}
+          disabled={isDragging}
+          onClick={() => {
+            console.log('wasDragged', getWasDragged?.())
+            console.log('back')
+            if (getWasDragged?.()) return
+          }}
+        >
+          <ArrowBackGradIc />
+        </Button>
+        <Button
+          css={dislikeButtonS}
+          disabled={isDragging}
+          onClick={() => {
+            if (getWasDragged?.()) return
+          }}
+        >
+          <Cross2GradIc />
+        </Button>
+        <Button
+          css={likeButtonS}
+          disabled={isDragging}
+          onClick={() => {
+            if (getWasDragged?.()) return
+          }}
+        >
+          <Heart2Ic />
+        </Button>
+        <Button
+          css={infoButtonS}
+          disabled={isDragging}
+          onClick={() => {
+            if (getWasDragged?.()) return
+            openInfo?.()
+          }}
+        >
+          <ArrowAngledRounded2GradIc />
+        </Button>
+      </ActionButtonsBox>
+    
+    </PreviewInfoBox>
   )
 })
-PreviewInfoOverlay.displayName = 'PreviewInfo'
+PreviewInfoOverlay.displayName = 'PreviewInfoOverlay'
 export default PreviewInfoOverlay
 
 
@@ -267,30 +258,3 @@ const ScrollIndicatorBox = styled.div`
 `
 
 
-
-
-// OLD
-const scrollbarVerticalStyle = (t: AppTheme.Theme) => css`
-  ${ScrollbarVerticalStyle.scrollbar(t)};
-  ${ScrollbarVerticalStyle.El.track.thiz()}{
-    width: 4px;
-    height: 150px;
-    position: absolute;
-    top: 16px;
-    right: 16px;
-  }
-`
-
-const FadeButtonBar = styled.div`
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 200px;
-  background: linear-gradient(to top,
-    #ffffffff 0%, #ffffff88 10%, #ffffff88 70%, #ffffff00 100%
-  );
-  
-  ${col};
-  gap: 4px;
-  padding: 10px;
-  padding-top: 30px;
-`

@@ -28,7 +28,7 @@ export namespace ReactU {
     ev.stopPropagation()
   }
   export const stopPointerAndMouseEvents = (stop = true) => {
-    if (!stop) return { }
+    if (!stop) return undefined
     return {
       onClick: stopReactEventPropagation,
       
@@ -141,8 +141,12 @@ export namespace ReactU {
   */
   
   
-  export const arrMerge =
-  <A1 extends any[], A2 extends any[]>(arr1: A1, arr2: A2, arr2AsArr1: A1, arr1AsArr2: A2): A1 => {
+  export const arrMergeIf = <A1 extends any[], A2 extends any[]>(
+    arr1: A1,
+    arr2: A2,
+    arr2AsArr1: A1,
+    arr1AsArr2: A2,
+  ): A1 => {
     const newArr1 = [...arr1] as A1
     let changed = false
     for (let i = 0; i < Math.min(arr2.length, arr1.length); i++) {

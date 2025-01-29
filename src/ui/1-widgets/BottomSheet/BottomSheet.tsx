@@ -1,22 +1,17 @@
-import { css } from '@emotion/react'
 import { animated } from '@react-spring/web'
 import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer.tsx'
 import { BottomSheetProps } from 'src/ui/1-widgets/BottomSheet/BottomSheetDialog.tsx'
 import { BottomSheetParts } from 'src/ui/1-widgets/BottomSheet/BottomSheetParts.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { useUpNodesScrollLock } from 'src/util/view/useUpNodesScrollLock.ts'
 import { useBottomSheet } from 'src/ui/1-widgets/BottomSheet/useBottomSheet.ts'
 import React, { useLayoutEffect } from 'react'
-import fixed = EmotionCommon.fixed
 
 
 
 
 
 
-const BottomSheetDialog =
-React.memo(
-(props: BottomSheetProps) => {
+const BottomSheetDialog = React.memo((props: BottomSheetProps) => {
   const {
     sheetState,
     setSheetState,
@@ -45,7 +40,7 @@ React.memo(
     snapPointsPx,
     realDefaultOpenIdx,
     sheetSpring,
-    sheetDrag
+    sheetDrag,
   } = useBottomSheet(
     bottomSheetFrameRef,
     bottomSheetRef,
@@ -62,18 +57,12 @@ React.memo(
       defaultOpenIdx,
     }
   )
-  useLayoutEffect(
-    ()=>onComputedDimens?.(computedSheetDimens),
-    [computedSheetDimens]
-  )
-  useLayoutEffect(
-    ()=>onSnapPointsPx?.(snapPointsPx),
-    [snapPointsPx]
-  )
+  useLayoutEffect(() => onComputedDimens?.(computedSheetDimens), [computedSheetDimens])
+  useLayoutEffect(() => onSnapPointsPx?.(snapPointsPx), [snapPointsPx])
   
   
   useUpNodesScrollLock(
-    !['closed',null].includes(sheetState),
+    !['closed', null].includes(sheetState),
     { elementRef: bottomSheetFrameRef }
   )
   
@@ -82,25 +71,27 @@ React.memo(
   
   
   
-  return <UserActionsConsumer>
-    
-    <div /* Frame */ css={BottomSheetParts.frameStyle}
-      ref={bottomSheetFrameRef as any}
-    >
-      <UserActionsConsumer>
-        <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
-          // @ts-expect-error
-          style={sheetSpring}
-          ref={bottomSheetRef as any} // Must be
-        >
+  return (
+    <UserActionsConsumer>
+      
+      <div /* Frame */ css={BottomSheetParts.frameStyle}
+        ref={bottomSheetFrameRef as any}
+      >
+        <UserActionsConsumer>
+          <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
+            // @ts-expect-error
+            style={sheetSpring}
+            ref={bottomSheetRef as any} // Must be
+          >
+            
+            {props.children?.({ sheetDrag })}
           
-          {props.children?.({ sheetDrag })}
-        
-        </animated.div>
-      </UserActionsConsumer>
-    </div>
-    
-  </UserActionsConsumer>
+          </animated.div>
+        </UserActionsConsumer>
+      </div>
+      
+    </UserActionsConsumer>
+  )
 })
 export default BottomSheetDialog
 

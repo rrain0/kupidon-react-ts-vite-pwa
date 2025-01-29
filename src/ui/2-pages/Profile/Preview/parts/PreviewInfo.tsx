@@ -3,8 +3,6 @@ import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
@@ -27,29 +25,43 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
   } = props
   
   return (
-    <UseBottomSheetState isOpen={isOpen} onClose={close}>
+    <UseBottomSheetState
+      isOpen={isOpen}
+      onClose={close}
+      snapPoints={['30%', '50%', '80%', '100%']}
+      defaultOpenIdx={1}
+    >
       {props => (
-        <ModalPortal>
+        <BottomSheetFrame data-display-name="PreviewInfo">
           <BottomSheetBasic {...props.sheetProps}>
             <Content>
               Здесь будет подробная инфа
             </Content>
           </BottomSheetBasic>
-        </ModalPortal>
+        </BottomSheetFrame>
       )}
     </UseBottomSheetState>
-    /* <div
-      data-display-name="PreviewInfo"
-    >
-      <>
-      
-      </>
-    </div> */
   )
 })
 PreviewInfo.displayName = 'PreviewInfo'
 export default PreviewInfo
 
+
+
+const BottomSheetFrame = styled.div`
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50%;
+  width: var(--photo-w);
+  height: calc(
+    var(--h)
+    - (var(--h) - var(--photos-h)) / 2
+    - (var(--photos-h) - var(--photo-h))
+  );
+  z-index: 20;
+  pointer-events: none;
+`
 
 const Content = styled.div`
   ${col};

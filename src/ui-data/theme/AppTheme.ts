@@ -253,9 +253,10 @@ export namespace AppTheme {
     }
     // Profile preview container for Name & AboutMe
     previewInfoBox: {
-      bg:        string
-      ct:        string
-      ctGrad:    [string, string]
+      bg:         string
+      ct:         string
+      bgFadeGrad: [string, string]
+      ctGrad:     [string, string]
     }
     // Profile preview photos progress indicator
     previewPhotosProgress: {

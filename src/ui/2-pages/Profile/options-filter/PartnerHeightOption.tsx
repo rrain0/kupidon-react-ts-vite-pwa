@@ -71,11 +71,11 @@ const PartnerHeightOption = React.memo(
     useStateMapperSync(
       heightRange, widgetRange,
       setHeightRange, setWidgetRange,
-      (w, h) => ReactU.arrMerge(
+      (w, h) => ReactU.arrMergeIf(
         h, w,
         mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
       ),
-      (h, w) => ReactU.arrMerge(
+      (h, w) => ReactU.arrMergeIf(
         w, h,
         mapHeightRangeToWidgetRange(h), mapWidgetRangeToHeightRange(w)
       )

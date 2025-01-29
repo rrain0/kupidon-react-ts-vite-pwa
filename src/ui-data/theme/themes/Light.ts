@@ -219,6 +219,7 @@ export const LightProps: ThemeProps = {
   previewInfoBox: {
     bg:        'transparent',
     ct:        '#ffffff',
+    bgFadeGrad: ['transparent', '#000000aa'],
     ctGrad:    ['#F1F1F1FF', '#8B8B8B00'],
   },
   previewPhotosProgress: {

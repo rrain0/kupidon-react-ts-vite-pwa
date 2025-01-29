@@ -1,4 +1,5 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
+import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.ts'
@@ -8,13 +9,20 @@ import {
 } from 'src/mini-libs/animated/animationFunciton.ts'
 import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
-import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import Mapper = TypeU.Mapper
 import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
-import imSmallPlaceholderIcFullTransparent = IconButtonStyle.imSmallPlaceholderIcFullTransparent
+import camelCaseToKebabCase = StringU.camelCaseToKebabCase
+
+
+
+
+/* export const batchUpdate: Map<
+  HTMLElement,
+  Record<'attrs' | 'style', Record<string, string>>
+> = new Map() */
 
 
 
@@ -72,6 +80,22 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   readonly update = (time = getTime()) => {
     const v = this.get(time)
     for (const l of this.listeners) l(v)
+    
+    // Так немного медленнее
+    /* for (const [el, props] of batchUpdate.entries()) {
+      for (const [attr, value] of Object.entries(props.attrs)) {
+        el[attr] = value
+      }
+      
+      for (const [style, value] of Object.entries(props.style)) {
+        el.style[style] = value
+      }
+      
+      // el.style.cssText += Object.entries(props.style)
+      //   .map(([style, value]) => `${camelCaseToKebabCase(style)}:${value};`)
+      //   .join('')
+    }
+    batchUpdate.clear() */
     
     /*
     const anims = this.animations
