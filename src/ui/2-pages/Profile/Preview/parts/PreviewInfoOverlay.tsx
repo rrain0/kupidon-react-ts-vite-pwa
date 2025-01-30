@@ -221,8 +221,8 @@ const ShortInfoBox = styled.div`
   }
 `
 const Name = styled.div`
-  background-color: ${p => p.theme.previewInfoBox.bg};
-  color: ${p => p.theme.previewInfoBox.ct};
+  background-color: ${p => p.theme.previewOverlayInfoBox.bg};
+  color: ${p => p.theme.previewOverlayInfoBox.ct};
   font-weight: 600;
   font-size: 32px;
   line-height: 100%;
@@ -237,8 +237,8 @@ const AboutMe = styled.div`
   
   background-image: linear-gradient(
     to top,
-    ${p => p.theme.previewInfoBox.ctGrad[1]} 8px,
-    ${p => p.theme.previewInfoBox.ctGrad[0]} 40px
+    ${p => p.theme.previewOverlayInfoBox.ctGrad[1]} 8px,
+    ${p => p.theme.previewOverlayInfoBox.ctGrad[0]} 40px
   );
   background-clip: text;
   background-size: 100% 94px;

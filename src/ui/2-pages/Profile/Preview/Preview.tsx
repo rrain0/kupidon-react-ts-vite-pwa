@@ -18,7 +18,7 @@ import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
-import PreviewInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo.tsx'
+import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInfo.tsx'
 import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -349,7 +349,11 @@ const Preview = React.memo((props: PreviewProps) => {
     <Pages.SafeInsets>
       <PreviewFrame ref={frameRefFun}>
         
-        <PreviewInfo isOpen={isInfoOpen} close={closeInfo} />
+        <PreviewFullInfo
+          isOpen={isInfoOpen}
+          close={closeInfo}
+          profile={props.formValues}
+        />
         
         <PreviewFrame2>
           <PhotosContainer>
@@ -534,8 +538,8 @@ const PhotoFade = styled.div`
   ${abs};
   background-image: linear-gradient(
     to bottom,
-    ${p => p.theme.previewInfoBox.bgFadeGrad[0]} 0% 60%,
-    ${p => p.theme.previewInfoBox.bgFadeGrad[1]} 90%
+    ${p => p.theme.previewOverlayInfoBox.bgFadeGrad[0]} 0% 60%,
+    ${p => p.theme.previewOverlayInfoBox.bgFadeGrad[1]} 90%
   );
 `
 

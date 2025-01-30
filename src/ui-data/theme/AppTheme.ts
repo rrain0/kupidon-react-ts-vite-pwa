@@ -250,12 +250,26 @@ export namespace AppTheme {
       ct:        string
       ctRipple:  string
     }
-    // Profile preview container for Name & AboutMe
-    previewInfoBox: {
+    // Profile preview container for Name & AboutMe displayed upon photo
+    previewOverlayInfoBox: {
       bg:         string
       ct:         string
       bgFadeGrad: [string, string]
       ctGrad:     [string, string]
+    }
+    // Profile preview full info container
+    previewFullInfoBox: {
+      bg:         string
+      ct:         string
+      ct2:        string
+    }
+    // Profile preview full info bubble
+    previewFullInfoBubble: {
+      bg:         string
+      ct:         string
+      ct2:        string
+      bgMainGrad: [string, string]
+      ctMain:     string
     }
     // Profile preview photos progress indicator
     previewPhotosProgress: {

@@ -138,6 +138,13 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     ct:        '#ffffff',
     ctRipple:  '#bb264966',
   },
+  previewFullInfoBox: { ...LightProps.previewFullInfoBox },
+  previewFullInfoBubble: { ...LightProps.previewFullInfoBubble,
+    bgMainGrad: ['#BB2649', '#F75F82'],
+  },
+  previewPhotosProgress: { ...LightProps.previewPhotosProgress },
+  
+  
   
   photos: { ...LightProps.photos,
     bg:                      ['#ffeeee'],

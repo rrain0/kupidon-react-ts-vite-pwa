@@ -82,6 +82,7 @@ export default defineConfig(({ command, mode }) => {
     server: {
       host: true, // expose app via IP address from local network
       port: +(envFileConfig.REACT_PORT ?? process.env.REACT_PORT ?? 40009),
+      allowedHosts: true, // allow any host
     },
     
     // make paths in build relative to index.html (starts with './', not with '/')

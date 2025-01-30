@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
-import { LightWineProps } from 'src/ui-data/theme/themes/LightWine.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -95,12 +94,12 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   
   input: { ...DarkProps.input,
-    bg:           ['#282c34'],
-    ct:       ['#cdcdcd'],
+    bg:            ['#282c34'],
+    ct:            ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
     border:        ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
-    bgError:      ['#5e252c'],
+    bgError:       ['#5e252c'],
   },
   
   rangePicker: { ...DarkProps.rangePicker,
@@ -111,12 +110,12 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   elementDisabled: { ...DarkProps.elementDisabled,
     bg:     ['#DCDCDC'],
-    ct: ['#555555'],
+    ct:     ['#555555'],
   },
   elementDanger: { ...DarkProps.elementDanger,
     bg:      ['#bbbbbb'],
     bgFocus: ['#cccccc'],
-    ct:  ['#000000'],
+    ct:      ['#000000'],
   },
   elementError: { ...DarkProps.elementError,
     bg:      ['#5e252c'],
@@ -124,19 +123,28 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   
   
-  previewButtonNorm: { ...LightWineProps.previewButtonNorm },
-  previewButtonMain: { ...LightWineProps.previewButtonMain },
+  previewButtonNorm: { ...DarkProps.previewButtonNorm },
+  previewButtonMain: { ...DarkProps.previewButtonMain,
+    bgGrad: ['#BB2649', '#F75F82'],
+  },
+  previewFullInfoBox: { ...DarkProps.previewFullInfoBox },
+  previewFullInfoBubble: { ...DarkProps.previewFullInfoBubble,
+    bgMainGrad: ['#BB2649', '#F75F82'],
+  },
+  previewPhotosProgress: { ...DarkProps.previewPhotosProgress },
+  
+  
   
   photos: { ...DarkProps.photos,
     bg:                     ['#ffeeee'],
-    ct:                 ['#291f1d'],
-    borderDrag:              ['#1F8DCD'],
+    ct:                     ['#291f1d'],
+    borderDrag:             ['#1F8DCD'],
     highlightFrameBg:       ['#8B8B8B'],
     highlightFrameAccentBg: ['#ffe1e1'],
   },
   
   bottomSheet: { ...DarkProps.bottomSheet,
-    bg:    ['#121212'],
+    bg:     ['#121212'],
     handle: ['#8b8b8b'],
   },
   

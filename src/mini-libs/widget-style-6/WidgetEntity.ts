@@ -1,8 +1,6 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { StyleValue } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import isnumber = TypeU.isnumber
 import RecordRo = TypeU.RecordRo
-import isArray = TypeU.isArray
 import exists = TypeU.exists
 
 

@@ -202,13 +202,26 @@ export const DarkProps: ThemeProps = {
   
   previewButtonNorm: { ...LightProps.previewButtonNorm },
   previewButtonMain: { ...LightProps.previewButtonMain },
-  previewInfoBox: { ...LightProps.previewInfoBox },
+  previewOverlayInfoBox: { ...LightProps.previewOverlayInfoBox },
+  previewFullInfoBox: {
+    bg:         '#282c34',
+    ct:         '#dddddd',
+    ct2:        '#999999',
+  },
+  previewFullInfoBubble: {
+    bg:         '#242528',
+    ct:         '#bdbdbd',
+    ct2:        '#999999',
+    bgMainGrad: ['#1F1F1F', '#6D6D6D'],
+    ctMain:     '#ffffff',
+  },
   previewPhotosProgress: { ...LightProps.previewPhotosProgress },
+  
   
   
   photos: {
     bg:                      ['#ffeeee'],
-    ct:                 ['#291f1d'],
+    ct:                      ['#291f1d'],
     borderDrag:              ['#1F8DCD'],
     highlightFrameBg:        ['#8B8B8B'],
     highlightFrameAccentBg:  ['#ffffff'],

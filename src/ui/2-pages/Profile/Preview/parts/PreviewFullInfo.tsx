@@ -1,13 +1,19 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { DateU } from '@util/date/DateU.ts'
 import React, { useMemo, useRef } from 'react'
-import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
+import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import BottomSheet from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
+import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
@@ -26,19 +32,57 @@ import GenderIc = SvgIconsPack.GenderIc
 import CalendarIc = SvgIconsPack.CalendarIc
 import DumbbellIc = SvgIconsPack.DumbbellIc
 import RulerCornerIc = SvgIconsPack.RulerCornerIc
+import FormValues = ProfilePageValidation.FormValues
 
 
 
 
-export type PreviewInfoProps = ClassStyle & Children & Puro<{
+export type PreviewFullInfoProps = ClassStyle & Children & Puro<{
   isOpen: boolean
   close: Callback
+  profile: FormValues
 }>
-export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
+export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   const {
     isOpen = false,
     close,
+    profile,
   } = props
+  const {
+    name,
+    birthDate,
+    gender,
+    aboutMe,
+  } = profile ?? { }
+  const height = '175'
+  const weight = 'Не выбрано'
+  const imLookingFor = 'Не выбрано'
+  const age = (birthDate && DateU.age(birthDate)) ?? ''
+  
+  const titleText = useUiValues(TitleUiText)
+  const optionText = useUiValues(OptionUiText)
+  
+  const uiText = useMemo(() => ({
+    match: 'Совпадение',
+    desiredPartner: 'Желаемый партнёр',
+    interests: 'Интересы',
+    
+    information: 'Информация',
+    
+    name: titleText.name,
+    weight: 'Вес',
+    height: titleText.height,
+    imLookingFor: titleText.imLookingFor,
+    age: titleText.age,
+    gender: titleText.gender,
+    genderValue: (() => {
+      if (gender === 'MALE') return optionText.male
+      if (gender === 'FEMALE') return optionText.female
+      return ''
+    })(),
+    
+    aboutMe: titleText.aboutMe,
+  }), [titleText, optionText])
   
   
   const bottomSheetFrameRef = useRef<HTMLDivElement>(null)
@@ -46,29 +90,49 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
   const bottomSheetHeaderRef = useRef<HTMLDivElement>(null)
   const bottomSheetContentRef = useRef<HTMLDivElement>(null)
   
+  const nameAge = [name, age].filter(it => it).join(', ')
   
   const infos = useMemo(() => {
     return [
-      { ic: <ProfileCardIc css={SvgIconS6.t(infoIcS)} />, title: 'Имя', value: 'Yura' },
-      { ic: <DumbbellIc css={SvgIconS6.t(infoIcS)} />, title: 'Вес', value: 'Не выбрано' },
-      { ic: <RulerCornerIc css={SvgIconS6.t(infoIcS)} />, title: 'Рост', value: '175' },
-      { ic: <Search2Ic css={SvgIconS6.t(infoIcS)} />, title: 'Я ищу', value: 'Не выбрано' },
-      { ic: <CalendarIc css={SvgIconS6.t(infoIcS)} />, title: 'Возраст', value: '24' },
-      { ic: <GenderIc css={SvgIconS6.t(infoIcS)} />, title: 'Пол', value: 'Мужской' },
+      {
+        title: uiText.name, value: name,
+        ic: <ProfileCardIc css={SvgIconS6.t(infoIcS)} />,
+      },
+      {
+        title: uiText.weight, value: weight,
+        ic: <DumbbellIc css={SvgIconS6.t(infoIcS)} />,
+      },
+      {
+        title: uiText.height, value: height,
+        ic: <RulerCornerIc css={SvgIconS6.t(infoIcS)} />,
+      },
+      {
+        title: uiText.imLookingFor, value: imLookingFor,
+        ic: <Search2Ic css={SvgIconS6.t(infoIcS)} />,
+      },
+      {
+        title: uiText.age, value: age,
+        ic: <CalendarIc css={SvgIconS6.t(infoIcS)} />,
+      },
+      {
+        title: uiText.gender, value: uiText.genderValue,
+        ic: <GenderIc css={SvgIconS6.t(infoIcS)} />,
+      },
     ]
-  }, [])
+  }, [profile, uiText])
   
   
   return (
     <UseBottomSheetState
       isOpen={isOpen}
       onClose={close}
-      snapPoints={['30%', '40%', 'free', '100%']}
-      defaultOpenIdx={1}
+      snapPoints={['55%', '100%']}
+      defaultOpenIdx={0}
     >
       {props => (
-        <BottomSheetFrame data-display-name="PreviewInfo">
+        <BottomSheetFrame data-display-name="PreviewFullInfo">
           <BottomSheet
+            css={bottomSheetS}
             {...props.sheetProps}
             bottomSheetFrameRef={bottomSheetFrameRef}
             bottomSheetRef={bottomSheetRef}
@@ -82,6 +146,7 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
                 <div
                   css={t => css`
                     ${BottomSheetBasicParts.headerStyle(t)};
+                    ${bottomSheetS(t)};
                     ${props.sheetProps.sheetState === 'dragging' && css`cursor: grabbing;`}
                     height: 18px;
                   `}
@@ -90,24 +155,24 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
                 />
               
                 {/* Bottom Sheet - Body - without margins & paddings */}
-                <div css={BottomSheetBasicParts.bodyStyle}>
+                <div css={[BottomSheetBasicParts.bodyStyle, bottomSheetS]}>
                   <ContentOverflowWrapper>
                     {/* Bottom Sheet - Scrollable Content - without margins */}
                     <Content ref={bottomSheetContentRef}>
                       
-                      <NameAge>Yura, 26</NameAge>
+                      <NameAge>{nameAge}</NameAge>
                       
                       <div />
                       
                       <MatchBox>
-                        <MatchBubble main>Совпадение - 85%</MatchBubble>
-                        <MatchBubble>Желаемый партнёр</MatchBubble>
-                        <MatchBubble>Интересы</MatchBubble>
+                        <MatchBubble main>{uiText.match} - 85%</MatchBubble>
+                        <MatchBubble>{uiText.desiredPartner}</MatchBubble>
+                        <MatchBubble>{uiText.interests}</MatchBubble>
                       </MatchBox>
                       
                       <div />
                       
-                      <SectionTitle>Информация</SectionTitle>
+                      <SectionTitle>{uiText.information}</SectionTitle>
                       
                       <div />
                       
@@ -126,16 +191,11 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
                       
                       <div />
                       
-                      <SectionTitle>Описание</SectionTitle>
+                      <SectionTitle>{uiText.aboutMe}</SectionTitle>
                       
                       <div />
                       
-                      <SectionText>
-                        Ищу девушку для длительных отношений.
-                        Активный, люблю долгие поездки и крепкий кофе.
-                        Могу рассказать много интересных историй,
-                        так что со мной не соскучишься)
-                      </SectionText>
+                      <SectionText>{aboutMe}</SectionText>
                       
                       <div />
                       
@@ -163,8 +223,8 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
     </UseBottomSheetState>
   )
 })
-PreviewInfo.displayName = 'PreviewInfo'
-export default PreviewInfo
+PreviewFullInfo.displayName = 'PreviewFullInfo'
+export default PreviewFullInfo
 
 
 
@@ -181,6 +241,11 @@ const BottomSheetFrame = styled.div`
   );
   z-index: 20;
   pointer-events: none;
+`
+
+const bottomSheetS = (t: AppTheme.Theme) => css`
+  background-color: ${t.previewFullInfoBox.bg};
+  color: ${t.previewFullInfoBox.ct};
 `
 
 const ContentOverflowWrapper = styled.div`
@@ -201,8 +266,6 @@ const Content = styled.div`
 
 const NameAge = styled.div`
   ${Txt.lg24bold};
-  // todo theme
-  color: #232020;
 `
 
 
@@ -216,17 +279,15 @@ const MatchBubble = styled.div<{ main?: boolean }>`
   padding: 4px 7px;
   ${round};
   ${rowC};
-  // todo theme
-  background-color: #F5F5F5;
-  color: #232020;
-  // todo theme
+  background-color: ${p => p.theme.previewFullInfoBubble.bg};
+  color: ${p => p.theme.previewFullInfoBubble.ct};
   ${p => p.main && `
     background-image: linear-gradient(
       to bottom,
-      #BB2649,
-      #F75F82
+      ${p.theme.previewFullInfoBubble.bgMainGrad[0]},
+      ${p.theme.previewFullInfoBubble.bgMainGrad[1]}
     );
-    color: #ffffff;
+    color:  ${p.theme.previewFullInfoBubble.ctMain};
   `}
   ${Txt.md16}
 `
@@ -234,8 +295,6 @@ const MatchBubble = styled.div<{ main?: boolean }>`
 
 const SectionTitle = styled.div`
   ${Txt.lg20bold};
-  // todo theme
-  color: #232020;
 `
 
 
@@ -243,32 +302,25 @@ const InfoBox = styled.div`
   ${rowWrap};
   gap: 5px 2px;
 `
-const InfoBubble = styled.div`
+const InfoBubble = styled(MatchBubble)`
   height: 30px;
-  width: fit-content;
   padding: 4px 9px;
-  ${round};
-  ${rowC};
   gap: 6px;
-  // todo theme
-  background-color: #F5F5F5;
-  color: #232020;
   ${Txt.md16};
 `
-const infoIcS: AppWidgetStyle = [SvgIconS6.S.Normal.normal, {
+const infoIcS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
   iconSz: 17,
-  iconColor: '#6A6A6A',
+  iconColor: t.previewFullInfoBubble.ct2,
 }]
 
 
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background-color: #B0B0B0;
+  background-color: ${p => p.theme.previewFullInfoBox.ct2};
 `
 
 
 const SectionText = styled.div`
   ${Txt.lg17};
-  color: #232020;
 `

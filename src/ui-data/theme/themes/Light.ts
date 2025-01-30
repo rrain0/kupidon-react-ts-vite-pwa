@@ -214,17 +214,30 @@ export const LightProps: ThemeProps = {
     ct:        '#ffffff',
     ctRipple:  '#1F1F1F66',
   },
-  previewInfoBox: {
+  previewOverlayInfoBox: {
     bg:        'transparent',
     ct:        '#ffffff',
     bgFadeGrad: ['transparent', '#000000aa'],
     ctGrad:    ['#F1F1F1FF', '#8B8B8B00'],
+  },
+  previewFullInfoBox: {
+    bg:         '#ffffff',
+    ct:         '#232020',
+    ct2:        '#B0B0B0',
+  },
+  previewFullInfoBubble: {
+    bg:         '#F5F5F5',
+    ct:         '#232020',
+    ct2:        '#6A6A6A',
+    bgMainGrad: ['#1F1F1F', '#6D6D6D'],
+    ctMain:     '#ffffff',
   },
   previewPhotosProgress: {
     bg:          '#00000066',
     ct:          '#D9D9D999',
     ctAcc:       '#FFFFFF',
   },
+  
   
   
   photos: {
