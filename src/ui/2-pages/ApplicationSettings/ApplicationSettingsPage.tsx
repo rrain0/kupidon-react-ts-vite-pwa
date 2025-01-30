@@ -181,7 +181,7 @@ const ApplicationSettingsPage = React.memo(() => {
               <UseOverlayUrl overlayName={ClearSiteDialogOverlayName}>
                 {overlay => (
                   <>
-                    <Button css={ButtonS6.S.Outlined.Rounded.Normal.normal}
+                    <Button css={ButtonS6.t(ButtonS6.S.Outlined.Rounded.Normal.normal)}
                       onClick={overlay.open}
                     >
                       {actionText.clearAppData}
@@ -228,7 +228,7 @@ const RoundButtonsContainer = styled.div`
   gap: 10px;
 `
 const normalIconRoundButton = (t:AppTheme.Theme) => css`
-  ${ButtonS6.S.Filled.Rounded.Normal.accent(t)};
+  ${ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.accent)(t)};
   ${ButtonS6.W.t(t, {
     button: { wMin: 90, g: '0.6em' },
   })}

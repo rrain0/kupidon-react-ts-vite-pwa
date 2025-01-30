@@ -29,7 +29,7 @@ export namespace HeaderArrowS {
   
   export namespace Part {
     export const base = (t: AppTheme.Theme) => css`
-      ${ButtonS6.S.Text.Rect.Normal.normal(t)};
+      ${ButtonS6.t(ButtonS6.S.Text.Rect.Normal.normal)(t)};
       // normal
       ${W.u({ e: 'button', s: 'normal' }).thisUse} {
         ${row};

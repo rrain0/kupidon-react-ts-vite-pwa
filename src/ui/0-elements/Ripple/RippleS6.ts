@@ -2,7 +2,7 @@ import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntiti
 import {
   AppStyle,
   AppWidgetStyle,
-  WidgetStyle,
+  WidgetStyle, WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   WidgetElem, WidgetProp,
@@ -45,7 +45,7 @@ export namespace RippleS6 {
   
   export namespace S {
     
-    export const base: WidgetStyle = {
+    export const base: WidgetStyleObj = {
       frame: {
         ...abs,
         pointerEvents: 'none',

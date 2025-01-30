@@ -101,7 +101,7 @@ const FeatureCardText = styled.div`
   ${Txt.md14};
 `
 const featureCardButtonS = (t: AppTheme.Theme) => css`
-  ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
+  ${ButtonS6.t(ButtonS6.S.Filled.Rect.Normal.accent2)(t)};
   ${ButtonS6.W.t(t, {
     button: {
       gridArea: 'btn', w: 160, hMin: 35,

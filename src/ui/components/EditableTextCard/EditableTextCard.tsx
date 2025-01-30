@@ -63,7 +63,7 @@ export default EditableTextCard
 const Frame = styled(Button, {
   shouldForwardProp: p => p !== 'showAnyText',
 })<{ showAnyText?: boolean }>`
-  ${p => ButtonS6.S.Text.Rect.Big.normal(p.theme)};
+  ${p => ButtonS6.t(ButtonS6.S.Text.Rect.Big.normal)(p.theme)};
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     ${p => card3Style(p.theme)};
   }

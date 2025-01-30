@@ -109,33 +109,33 @@ export namespace IconButtonStyle {
   
   
   export const iconBigTransparent = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Text.Round.Big.normal2(t)};
+    ${ButtonS6.t(ButtonS6.S.Text.Round.Big.normal2)(t)};
     ${icTransparentAddColorNormal(t)};
   `
   
   
   export const iconBig2Transparent = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Text.Round.Big2.normal2(t)};
+    ${ButtonS6.t(ButtonS6.S.Text.Round.Big2.normal2)(t)};
     ${icTransparentAddColorNormal(t)};
   `
   
   
   export const icBig2Normal = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Filled.Round.Big2.normal(t)};
+    ${ButtonS6.t(ButtonS6.S.Filled.Round.Big2.normal)(t)};
     ${icFilledAddColorNormal(t)};
   `
   export const icBig2Normal2 = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Filled.Round.Big2.normal2(t)};
+    ${ButtonS6.t(ButtonS6.S.Filled.Round.Big2.normal2)(t)};
     ${icFilledAddColorNormal2(t)};
   `
   export const icBig2Accent = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Filled.Round.Big2.accent(t)};
+    ${ButtonS6.t(ButtonS6.S.Filled.Round.Big2.accent)(t)};
     ${icFilledAddColorAccent(t)};
   `
   
   
   export const imSmallPlaceholderIcFullTransparent = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Text.Round.Big2.normal2(t)};
+    ${ButtonS6.t(ButtonS6.S.Text.Round.Big2.normal2)(t)};
     ${ButtonS6.W.t(t, {
       button: { sz: 'full' },
     })}
@@ -148,10 +148,9 @@ export namespace IconButtonStyle {
   
   
   export const icPreviewNormal = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Filled.Round.Big2.normal(t)};
-    ${ButtonS6.W.t(t, ButtonS6.SWidget.Filled.Color.previewNormal(t))};
+    ${ButtonS6.t([ButtonS6.S.Filled.Round.Big2.normal, ButtonS6.S.Filled.Color.previewNormal])(t)}
     ${icGradFilledAddColorPreviewNorm(t)};
-    ${ButtonS6.W.t(t, {
+    ${ButtonS6.t({
       button: {
         p: 0,
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
@@ -174,7 +173,7 @@ export namespace IconButtonStyle {
       buttonFocusVisible: {
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
       },
-    })}
+    })(t)}
   `
   export const icPreviewNormalBigger = (t: AppTheme.Theme) => css`
     ${icPreviewNormal(t)};
@@ -183,34 +182,33 @@ export namespace IconButtonStyle {
     })}
   `
   export const icPreviewMain = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.Filled.Round.Big2.normal(t)};
-    ${ButtonS6.W.t(t, ButtonS6.SWidget.Filled.Color.previewMain(t))};
-    ${ButtonS6.W.t(t, {
-      button: {
-        sz: 60, p: 0,
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-      },
-      disabled: {
-        buttonTransition: 'opacity 0.2s',
-        buttonOpacity: 0.3,
-      },
-      
-      // TODO Style - remove and apply :where to resetButton
-      buttonHover: {
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-      },
-      buttonActive: {
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-      },
-      buttonFocus: {
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-      },
-      buttonFocusVisible: {
-        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-      },
-    })}
-    ${icFilledAddColorPreviewMain(t)};
-  `
+  ${ButtonS6.t([ButtonS6.S.Filled.Round.Big2.normal, ButtonS6.S.Filled.Color.previewMain])(t)}
+  ${icFilledAddColorPreviewMain(t)};
+  ${ButtonS6.t({
+    button: {
+      sz: 60, p: 0,
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    disabled: {
+      buttonTransition: 'opacity 0.2s',
+      buttonOpacity: 0.3,
+    },
+    
+    // TODO Style - remove and apply :where to resetButton
+    buttonHover: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonActive: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonFocus: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonFocusVisible: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+  })(t)}
+`
   
   
 }

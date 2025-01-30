@@ -260,7 +260,7 @@ const SummaryPage = React.memo(
                 <UserActionsConsumer>
                   <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
                     <Eye>
-                      <Button css={ButtonS6.S.Text.Round.Big.normal2}>
+                      <Button css={ButtonS6.t(ButtonS6.S.Text.Round.Big.normal2)}>
                         <EyeWideIc css={SvgIconS6.t(eyeIcS)} />
                       </Button>
                     </Eye>
@@ -397,7 +397,7 @@ const Edit = styled.div`
   width: fit-content;
 `
 const editBtnStyle = (t: AppTheme.Theme) => css`
-  ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
+  ${ButtonS6.t(ButtonS6.S.Filled.Rect.Normal.accent2)(t)};
   ${ButtonS6.W.t(t, {
     button: { w: 'ct', hMin: 34, p: [8, 14], r: 10 },
   })}

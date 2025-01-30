@@ -59,7 +59,7 @@ export namespace NavButtonStyle {
   
   
   export const nav = (t: AppTheme.Theme) => css`
-    ${ButtonS6.S.base()}
+    ${ButtonS6.t0(ButtonS6.S.base)()}
     // normal
     ${El.btn.thiz()} {
       height: 100%;

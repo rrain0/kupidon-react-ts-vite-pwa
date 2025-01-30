@@ -86,13 +86,13 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
                   `}
                 >
                   
-                  <Button css={[ButtonS6.S.Filled.Rounded.Normal.accent, button]}
+                  <Button css={[ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.accent), button]}
                     onClick={props.setClosing}
                   >
                     {actionText.no}
                   </Button>
                   
-                  <Button css={[ButtonS6.S.Filled.Rounded.Normal.danger, button]}
+                  <Button css={[ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.danger), button]}
                     onClick={clear}
                   >
                     <ClearTrashIc css={[icon, iconOnDanger]} />

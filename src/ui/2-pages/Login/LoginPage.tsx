@@ -169,7 +169,7 @@ const LoginPage = React.memo(()=>{
           
           
           <Button
-            css={ButtonS6.S.Filled.Rect.Big.main}
+            css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.main)}
             type="submit"
           >
             {actionText.login}
@@ -177,7 +177,7 @@ const LoginPage = React.memo(()=>{
           
           
           <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
-            <Button css={ButtonS6.S.Filled.Rect.Big.normal}>
+            <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
               {actionText.signup}
             </Button>
           </Link>

@@ -1,31 +1,31 @@
-import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyleObj } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
 export namespace WidgetStyleCommon {
   
-  export const contents: WidgetStyleWithProps = { display: 'contents' }
-  export const abs: WidgetStyleWithProps = { pos: 'abs', a: 0 }
-  export const fixed: WidgetStyleWithProps = { pos: 'fixed', a: 0 }
-  export const fixedTop: WidgetStyleWithProps = { pos: 'fixed', at: 0, ah: 0 }
-  export const fixedBottom: WidgetStyleWithProps = { pos: 'fixed', ab: 0, ah: 0 }
-  export const round: WidgetStyleWithProps = { r: '999999px' }
+  export const contents: WidgetStyleObj = { display: 'contents' }
+  export const abs: WidgetStyleObj = { pos: 'abs', a: 0 }
+  export const fixed: WidgetStyleObj = { pos: 'fixed', a: 0 }
+  export const fixedTop: WidgetStyleObj = { pos: 'fixed', at: 0, ah: 0 }
+  export const fixedBottom: WidgetStyleObj = { pos: 'fixed', ab: 0, ah: 0 }
+  export const round: WidgetStyleObj = { r: '999999px' }
   
   
-  export const row: WidgetStyleWithProps = { display: 'flex', flexFlow: 'row nowrap' }
-  export const rowC: WidgetStyleWithProps = { display: 'flex', flexFlow: 'row nowrap', alignItems: 'center' }
-  export const rowWrap: WidgetStyleWithProps = { display: 'flex', flexFlow: 'row wrap' }
+  export const row: WidgetStyleObj = { display: 'flex', flexFlow: 'row nowrap' }
+  export const rowC: WidgetStyleObj = { display: 'flex', flexFlow: 'row nowrap', alignItems: 'center' }
+  export const rowWrap: WidgetStyleObj = { display: 'flex', flexFlow: 'row wrap' }
   
   
-  export const noPointer: WidgetStyleWithProps = { pointerEvents: 'none' }
-  export const noBorderOutlineBoxShadow: WidgetStyleWithProps = {
+  export const noPointer: WidgetStyleObj = { pointerEvents: 'none' }
+  export const noBorderOutlineBoxShadow: WidgetStyleObj = {
     bd: null,
     outline: null,
     boxShadow: null,
   }
   
   
-  export const reset = (() => {
-    const reset: WidgetStyleWithProps = {
+  export const reset: WidgetStyleObj = (() => {
+    const reset: WidgetStyleObj = {
       //appearance: 'none',
       boxSizing: 'border-box',
       bg: null,
@@ -42,7 +42,7 @@ export namespace WidgetStyleCommon {
     }
   })()
   
-  export const resetButton: WidgetStyleWithProps = {
+  export const resetButton: WidgetStyleObj = {
     ...reset,
     cursor: 'pointer',
     hover: noBorderOutlineBoxShadow,
@@ -57,13 +57,13 @@ export namespace WidgetStyleCommon {
   
   export namespace Txt {
     
-    export const lg18: WidgetStyleWithProps = {
+    export const lg18: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '18px',
       lineHeight: 'normal',
       letterSpacing: 'normal',
     }
-    export const lg18lh150: WidgetStyleWithProps = {
+    export const lg18lh150: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '18px',
       lineHeight: '150%',
@@ -71,7 +71,7 @@ export namespace WidgetStyleCommon {
     }
     
     
-    export const lg16b: WidgetStyleWithProps = {
+    export const lg16b: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '16px',
       lineHeight: 'normal',
@@ -79,7 +79,7 @@ export namespace WidgetStyleCommon {
     }
     
     
-    export const md16: WidgetStyleWithProps = {
+    export const md16: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '16px',
       lineHeight: '129%',
@@ -88,13 +88,13 @@ export namespace WidgetStyleCommon {
     
     
     
-    export const md14: WidgetStyleWithProps = {
+    export const md14: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '14px',
       lineHeight: '129%',
       letterSpacing: '0.05em',
     }
-    export const md14bold: WidgetStyleWithProps = {
+    export const md14bold: WidgetStyleObj = {
       fontWeight: '600',
       fontSize: '14px',
       lineHeight: '129%',
@@ -103,7 +103,7 @@ export namespace WidgetStyleCommon {
     
     
     
-    export const md15thin: WidgetStyleWithProps = {
+    export const md15thin: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '15px',
       lineHeight: '129%',

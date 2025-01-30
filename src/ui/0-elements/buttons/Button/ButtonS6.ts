@@ -8,7 +8,11 @@ import {
   AdditionalProps,
   CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import {
+  AppStyle,
+  AppWidgetStyle,
+  WidgetStyleObj,
+} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
@@ -73,9 +77,9 @@ export namespace ButtonS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace SWidget {
+  export namespace S {
     
-    export const base: WidgetStyle = {
+    export const base: WidgetStyleObj = {
       button: [resetButton, {
         pos: 'rel',
         ...row,
@@ -537,129 +541,6 @@ export namespace ButtonS6 {
     }
     
   }
-  
-  // TODO Style MAKE STYLE CLASS to easy extend to have transform function inside !!!
-  
-  export namespace S {
-    export const base = () => W.t(undefined, SWidget.base)
-    export namespace Filled {
-      export namespace Rect {
-        export namespace Big {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.accent2)
-        }
-        export namespace Normal {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.accent2)
-        }
-      }
-      export namespace Rounded {
-        export namespace Normal {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.accent2)
-        }
-        export namespace Normal2 {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.accent2)
-        }
-        export namespace Small {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.accent2)
-        }
-      }
-      export namespace Round {
-        export namespace Normal {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.accent2)
-        }
-        export namespace Big2 {
-          export const main: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.main)
-          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.normal)
-          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.danger)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.normal2)
-          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.accent2)
-        }
-      }
-    }
-    export namespace Outlined {
-      export namespace Rounded {
-        export namespace Normal {
-          export const accent: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Normal.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Normal.normal)
-        }
-        export namespace Small {
-          export const accent: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Small.accent)
-          export const normal: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Small.normal)
-        }
-      }
-    }
-    export namespace Text {
-      export namespace Rect {
-        export namespace Big {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rect.Big.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rect.Big.normal2)
-        }
-        export namespace Normal {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rect.Normal.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rect.Normal.normal2)
-        }
-      }
-      export namespace Rounded {
-        export namespace Normal {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal.normal2)
-        }
-        export namespace Small {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Small.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Small.normal2)
-        }
-        export namespace Normal2 {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2.normal2)
-        }
-        export namespace Normal2Uppercase {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2Uppercase.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2Uppercase.normal2)
-        }
-      }
-      export namespace Round {
-        export namespace Big {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Round.Big.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Round.Big.normal2)
-        }
-        export namespace Big2 {
-          export const normal: AppStyle = t => W.t(t, SWidget.Text.Round.Big2.normal)
-          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Round.Big2.normal2)
-        }
-      }
-    }
-  }
-  
   
 }
 

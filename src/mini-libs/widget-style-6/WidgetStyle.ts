@@ -81,6 +81,9 @@ export type WidgetStyle =
   | WidgetStyle[]
 
 
+export type WidgetStyleObj = { [selectorProp: string]: WidgetStyle }
+
+
 export type GetWidgetStyleWithProps<Props> = (props: Props) => WidgetStyleWithProps<Props>
 
 export type WidgetStyleWithProps<Props> =

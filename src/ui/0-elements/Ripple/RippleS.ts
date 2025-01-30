@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import Elem = WidgetStyle.Elem
 import CssProp = WidgetStyle.CssProp
 import CssWidget = WidgetStyle.CssWidget
@@ -14,15 +15,15 @@ import CssPropEnum = WidgetStyle.CssPropEnum
 // TODO Style - Delete after removing ButtonS.ts
 export namespace RippleS {
   
-  export const rippleModes = ['center', 'pointer'] as const
-  export type RippleMode = typeof rippleModes[number]
+  const rippleModes = ['center', 'pointer'] as const
+  type RippleMode = typeof rippleModes[number]
   
   
   export const W = (() => {
-    const frame = new Elem('rrainuiRippleFrame', {
+    const frame = new Elem(RippleS6.W.els.frame.n, {
       normal: CssPseudo.empty,
     }, { })
-    const ripple = new Elem('rrainuiRippleRipple', { }, {
+    const ripple = new Elem(RippleS6.W.els.ripple.n, { }, {
       color: CssProp.color,
       mode: new CssPropEnum('--mode', rippleModes),
     })
