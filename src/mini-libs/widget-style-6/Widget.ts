@@ -89,7 +89,10 @@ export const transformWidgetStyle = <Props>(
 ): string => {
   if (isObject(props) && isObject(style)) {
     const css = styleCache.get(props)?.get(widget)?.get(style)
-    if (css !== undefined) return css
+    if (css !== undefined) {
+      //console.log('found css !!!')
+      return css
+    }
   }
   const css = transform7(transform6(transform5(transform4(transform3(transform2(
     transform1(style, props),

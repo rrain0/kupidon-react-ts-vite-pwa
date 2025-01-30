@@ -85,7 +85,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     })(),
     
     aboutMe: titleText.aboutMe,
-  }), [titleText, optionText])
+  }), [profile, titleText, optionText])
   
   
   const bottomSheetFrameRef = useRef<HTMLDivElement>(null)
