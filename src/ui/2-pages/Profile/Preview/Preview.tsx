@@ -349,15 +349,16 @@ const Preview = React.memo((props: PreviewProps) => {
     <Pages.SafeInsets>
       <PreviewFrame ref={frameRefFun}>
         
-        <PreviewFullInfo
-          isOpen={isInfoOpen}
-          close={closeInfo}
-          profile={props.formValues}
-        />
-        
         <PreviewFrame2>
           <PhotosContainer>
-            <PhotosContainer2 ref={photosBoxRef} {...onTrackDrag()}>
+            <PhotosContainer2
+              ref={photosBoxRef}
+              {...onTrackDrag()}
+              onClick={() => {
+                if (getWasDragged?.()) return
+                closeInfo()
+              }}
+            >
               {arrOfIndices(visiblePhotosCnt).map(i => {
                 return (
                   <AnimatedPhotoBox
@@ -458,6 +459,12 @@ const Preview = React.memo((props: PreviewProps) => {
             </PhotosContainer2>
           </PhotosContainer>
         </PreviewFrame2>
+        
+        <PreviewFullInfo
+          isOpen={isInfoOpen}
+          close={closeInfo}
+          profile={props.formValues}
+        />
         
       </PreviewFrame>
     </Pages.SafeInsets>

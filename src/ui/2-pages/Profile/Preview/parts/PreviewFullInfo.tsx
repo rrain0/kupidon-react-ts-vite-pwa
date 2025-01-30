@@ -54,6 +54,8 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     gender,
     aboutMe,
   } = profile ?? { }
+  const match = 'XX'
+  const tests = 'XX'
   const height = '175'
   const weight = 'Не выбрано'
   const imLookingFor = 'Не выбрано'
@@ -64,6 +66,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   
   const uiText = useMemo(() => ({
     match: 'Совпадение',
+    tests: 'Тесты',
     desiredPartner: 'Желаемый партнёр',
     interests: 'Интересы',
     
@@ -165,7 +168,8 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
                       <div />
                       
                       <MatchBox>
-                        <MatchBubble main>{uiText.match} - 85%</MatchBubble>
+                        <MatchBubble main>{uiText.match} - {match}%</MatchBubble>
+                        <MatchBubble main>{uiText.tests} - {tests}%</MatchBubble>
                         <MatchBubble>{uiText.desiredPartner}</MatchBubble>
                         <MatchBubble>{uiText.interests}</MatchBubble>
                       </MatchBox>

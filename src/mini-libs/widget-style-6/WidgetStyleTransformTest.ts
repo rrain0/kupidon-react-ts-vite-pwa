@@ -99,9 +99,7 @@ export namespace WidgetStyle6Test {
   }
   
   export const inputWidgetStyle: WidgetStyleWithProps<InputWidgetStyleProps> = [
-    {
-      boxP: [8, 16],
-    },
+    { r: 14, boxP: [8, 16] },
     t => ({ boxM: t.sz === 'md' ? [8, 16] : t.sz === 'lg' ? [16, 32] : undefined }),
     {
       boxAbs: 0,

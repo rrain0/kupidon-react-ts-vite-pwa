@@ -10,7 +10,7 @@ export const transform7 = (selectPropValueBatch: SelectPropValueBatchTf6[]): str
     
     let selectPropValue = propValues
     batch.selector.toReversed().forEach(sel => {
-      selectPropValue = `${sel} {\n${selectPropValue}}`
+      if (sel) selectPropValue = `${sel} {\n${selectPropValue}}`
     })
     
     return selectPropValue

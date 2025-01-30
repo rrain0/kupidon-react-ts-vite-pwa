@@ -237,6 +237,11 @@ export const LightProps: ThemeProps = {
     ct:          '#D9D9D999',
     ctAcc:       '#FFFFFF',
   },
+  previewOverlayInfoMatchIndicator: {
+    bg:         '#8D8D8D99',
+    ct:         '#ffffff',
+    shadow:     'rgba(0, 0, 0, 0.15)',
+  },
   
   
   

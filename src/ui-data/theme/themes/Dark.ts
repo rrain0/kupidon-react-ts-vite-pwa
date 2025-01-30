@@ -216,6 +216,7 @@ export const DarkProps: ThemeProps = {
     ctMain:     '#ffffff',
   },
   previewPhotosProgress: { ...LightProps.previewPhotosProgress },
+  previewOverlayInfoMatchIndicator: { ...LightProps.previewOverlayInfoMatchIndicator },
   
   
   

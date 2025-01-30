@@ -277,6 +277,12 @@ export namespace AppTheme {
       ct:          string
       ctAcc:       string
     }
+    previewOverlayInfoMatchIndicator: {
+      bg:         string
+      ct:         string
+      shadow:     string
+    }
+    
     
     photos: {
       bg:                      string[]

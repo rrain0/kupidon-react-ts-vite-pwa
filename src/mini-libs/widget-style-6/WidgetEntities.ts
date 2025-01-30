@@ -97,12 +97,19 @@ export namespace WidgetProps {
   export const minHeight = WidgetProp.ofName('min-height', transformLenValue)
   export const maxWidth = WidgetProp.ofName('max-width', transformLenValue)
   export const maxHeight = WidgetProp.ofName('max-height', transformLenValue)
+  
   export const margin = WidgetProp.ofName('margin', transformMultiLenValue)
+  export const marginTop = WidgetProp.ofName('margin-top', transformLenValue)
+  export const marginRight = WidgetProp.ofName('margin-right', transformLenValue)
+  export const marginBottom = WidgetProp.ofName('margin-bottom', transformLenValue)
+  export const marginLeft = WidgetProp.ofName('margin-left', transformLenValue)
+  
   export const padding = WidgetProp.ofName('padding', transformMultiLenValue)
   export const paddingTop = WidgetProp.ofName('padding-top', transformLenValue)
   export const paddingRight = WidgetProp.ofName('padding-right', transformLenValue)
   export const paddingBottom = WidgetProp.ofName('padding-bottom', transformLenValue)
   export const paddingLeft = WidgetProp.ofName('padding-left', transformLenValue)
+  
   export const gap = WidgetProp.ofName('gap', transformMultiLenValue)
   
   export const color = WidgetProp.ofName('color', transformNullToTransparent)
@@ -115,7 +122,7 @@ export namespace WidgetProps {
   
   export const border = WidgetProp.ofName('border', transformNullToNone)
   export const borderColor = WidgetProp.ofName('border-color', transformNullToTransparent)
-  export const borderRadius = WidgetProp.ofName('border-radius', transformLenValue)
+  export const borderRadius = WidgetProp.ofName('border-radius', transformMultiLenValue)
   
   export const outline = WidgetProp.ofName('outline', transformNullToNone)
   export const boxShadow = WidgetProp.ofName('box-shadow', transformNullToNone)
@@ -215,6 +222,21 @@ export namespace WidgetComplexTransformers {
     transform: (value: StyleValue) => [
       [WidgetProps.paddingTop, WidgetPropValue.of(value)],
       [WidgetProps.paddingBottom, WidgetPropValue.of(value)],
+    ],
+  })
+  
+  export const mh = WidgetMultiPropTransformer.of({
+    title: 'mh -> margin-left & margin-right',
+    transform: (value: StyleValue) => [
+      [WidgetProps.marginRight, WidgetPropValue.of(value)],
+      [WidgetProps.marginLeft, WidgetPropValue.of(value)],
+    ],
+  })
+  export const mv = WidgetMultiPropTransformer.of({
+    title: 'mv -> margin-top & margin-bottom ',
+    transform: (value: StyleValue) => [
+      [WidgetProps.marginTop, WidgetPropValue.of(value)],
+      [WidgetProps.marginBottom, WidgetPropValue.of(value)],
     ],
   })
 }

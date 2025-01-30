@@ -71,6 +71,12 @@ export namespace WidgetStyleCommon {
     }
     
     
+    export const lg16: WidgetStyleObj = {
+      fontWeight: '400',
+      fontSize: '16px',
+      lineHeight: '129%',
+      letterSpacing: '0.05em',
+    }
     export const lg16b: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '16px',

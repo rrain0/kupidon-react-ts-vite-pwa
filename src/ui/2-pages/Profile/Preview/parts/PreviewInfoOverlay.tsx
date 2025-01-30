@@ -2,8 +2,11 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
-import React, { useCallback, useRef } from 'react'
+import React from 'react'
+import { EmptyS6 } from 'src/mini-libs/widget-style-6/EmptyS6.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
@@ -24,6 +27,8 @@ import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import trueOrUndef = TypeU.trueOrUndef
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
+import rowC = EmotionCommon.rowC
+import Txt = EmotionCommon.Txt
 
 
 
@@ -49,6 +54,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
     birthDate = '',
     aboutMe = '',
   } = props
+  
+  const match = 'XX'
   
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
@@ -78,6 +85,9 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       data-display-name="PreviewInfoOverlay"
     >
       
+      
+      <Match>Совпадение - {match}%</Match>
+      
       {photosCnt >= 2 && (
         <ScrollIndicatorBox>
           <DotsScrollIndicator
@@ -90,7 +100,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       <ShortInfoContainer>
         <ShortInfoBox
           data-disabled={trueOrUndef(isDragging)}
-          onClick={() => {
+          onClick={ev => {
+            ev.stopPropagation()
             if (getWasDragged?.()) return
             openInfo?.()
           }}
@@ -104,7 +115,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         <Button
           css={backButtonS}
           disabled={isDragging}
-          onClick={() => {
+          onClick={ev => {
+            ev.stopPropagation()
             console.log('wasDragged', getWasDragged?.())
             console.log('back')
             if (getWasDragged?.()) return
@@ -115,7 +127,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         <Button
           css={dislikeButtonS}
           disabled={isDragging}
-          onClick={() => {
+          onClick={ev => {
+            ev.stopPropagation()
             if (getWasDragged?.()) return
           }}
         >
@@ -124,7 +137,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         <Button
           css={likeButtonS}
           disabled={isDragging}
-          onClick={() => {
+          onClick={ev => {
+            ev.stopPropagation()
             if (getWasDragged?.()) return
           }}
         >
@@ -134,7 +148,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           //ref={infoButtonRef}
           css={infoButtonS}
           disabled={isDragging}
-          onClick={() => {
+          onClick={ev => {
+            ev.stopPropagation()
             if (getWasDragged?.()) return
             openInfo?.()
           }}
@@ -159,10 +174,22 @@ const PreviewInfoBox = styled.div`
   z-index: 10;
   display: grid;
   grid:
-    '.... .... ind ' auto
-    'info .... btns' auto
-    /1fr  8px  auto;
+    '.... .... match .... ind ' auto
+    'info info info  .... btns' auto
+    /1fr  auto auto  8px  1fr;
 `
+
+const Match = styled.div(({ theme: t }) => EmptyS6.W.t(t, {
+  gridArea: 'match',
+  placeSelf: 'start center',
+  h: 33, mt: 12, w: 'ct', ph: 14, r: 10,
+  ...WidgetStyleCommon.rowC,
+  bgColor: t.previewOverlayInfoMatchIndicator.bg,
+  backdropFilter: 'blur(5px)',
+  boxShadow: `0px 4px 15px ${t.previewOverlayInfoMatchIndicator.shadow}`,
+  ...WidgetStyleCommon.Txt.lg16,
+  color: t.previewOverlayInfoMatchIndicator.ct,
+}))
 
 
 const ActionButtonsBox = styled.div`

@@ -1,7 +1,11 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
-  WidgetElem, WidgetMultiAnyTransformer, WidgetAnyPropTransformer, WidgetTransformerList,
+  WidgetElem,
+  WidgetMultiAnyTransformer,
+  WidgetAnyPropTransformer,
+  WidgetTransformerList,
+  WidgetTransformer,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   transform2,
@@ -11,7 +15,9 @@ import { transform4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTr
 import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import { transform7 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform7.ts'
-import { CommonProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import {
+  CommonProps,
+} from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import RecordRo = TypeU.RecordRo
 import isObject = TypeU.isObject
@@ -35,17 +41,17 @@ Unregistered (unknown) CSS properties' names are automatically transformed from 
 export class Widget<const out Es extends Record<string, WidgetElem> = any> {
   
   constructor(
-    readonly rootElem: WidgetElem,
+    readonly rootElem: WidgetElem | undefined,
     readonly elems: Es,
-    readonly states?: RecordRo<string, WidgetMultiAnyTransformer> | undefined,
+    readonly states?: RecordRo<string, WidgetTransformer> | undefined,
     // Additional CSS prop transformers
     readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   ) { }
   
   static of<const Es extends Record<string, WidgetElem> = any>(params: {
-    rootElem: WidgetElem,
+    rootElem: WidgetElem | undefined,
     elems: Es,
-    states?: RecordRo<string, WidgetMultiAnyTransformer> | undefined,
+    states?: RecordRo<string, WidgetTransformer> | undefined,
     props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   }): Widget<Es> {
     return new Widget(params.rootElem, params.elems, params.states, params.props)
@@ -59,7 +65,6 @@ export class Widget<const out Es extends Record<string, WidgetElem> = any> {
   get els() { return this.elems }
   get t() { return this.transform }
 }
-
 
 
 
