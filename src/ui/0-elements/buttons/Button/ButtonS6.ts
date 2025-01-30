@@ -537,6 +537,8 @@ export namespace ButtonS6 {
   // TODO Style MAKE STYLE CLASS to easy extend to have transform function inside !!!
   
   // TODO Style - maybe cache it by theme + style in WeakMap or Map (to control size)
+  //   style -> theme -> css-string
+  
   export namespace S {
     export const base = () => W.t(SWidget.base)
     export namespace Filled {
