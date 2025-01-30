@@ -67,7 +67,7 @@ const Frame = styled(Button, {
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     ${p => card3Style(p.theme)};
   }
-  ${p => ButtonS6.W.t({
+  ${p => ButtonS6.W.t(p.theme, {
     button: {
       w: 'full', h: 'ct', hMin: 68,
       display: 'grid',

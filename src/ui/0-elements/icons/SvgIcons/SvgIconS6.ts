@@ -1,7 +1,11 @@
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { AdditionalProps, CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import {
+  AppStyle,
+  AppWidgetStyle,
+  WidgetStyle,
+} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
 
@@ -55,9 +59,9 @@ export namespace SvgIconS6 {
   
   
   export namespace S {
-    export const base = () => W.t(SWidget.base)
+    export const base = () => W.t(undefined, SWidget.base)
     export namespace Normal {
-      export const normal: AppStyle = t => W.t(SWidget.Normal.normal(t))
+      export const normal: AppStyle = t => W.t(t, SWidget.Normal.normal)
     }
   }
   

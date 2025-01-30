@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { AppStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -17,19 +17,17 @@ export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
   ${center};
 `
 
-export const imPlaceholderIcS: AppStyle = t => SvgIconS6.W.t([
+export const imPlaceholderIcS: AppWidgetStyle = t => [
   SvgIconS6.SWidget.base, {
     iconSz: '30%',
     iconColor: t.photos.ct[0],
   },
-])
-// TODO Style - унаследовать цыет сверху
-export const imSmallPlaceholderIcS = t => SvgIconS6.W.t([
-  SvgIconS6.SWidget.base, {
+]
+export const imSmallPlaceholderIcS: AppWidgetStyle = [
+  imPlaceholderIcS, {
     iconSz: '50%',
-    iconColor: t.photos.ct[0],
   },
-])
+]
 
 export const imPieProgressS = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress} {

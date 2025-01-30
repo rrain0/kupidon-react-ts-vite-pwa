@@ -137,7 +137,7 @@ const iconOnDanger = (t:Theme) => css`
     ${SvgIconS.El.icon.props.color.set(t.elementDanger.ct[0])}
   }
 `
-const button: AppStyle = t => ButtonS6.W.t({
+const button: AppStyle = t => ButtonS6.W.t(t, {
   button: { wMin: 90, g: '0.3em' },
 })
 

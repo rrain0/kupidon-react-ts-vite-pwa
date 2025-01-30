@@ -8,7 +8,8 @@ import {
   AdditionalProps,
   CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import resetButton = WidgetStyleCommon.resetButton
@@ -112,7 +113,7 @@ export namespace ButtonS6 {
       
       export namespace Color {
         // type: filled, color: normal
-        export const normal: AppWidgetStyle = t => [baseColor(t), {
+        export const normal: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.buttonNormal.bg[0],
           buttonColor: t.buttonNormal.ct[0],
           inFocus: {
@@ -121,7 +122,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: filled, color: main
-        export const main: AppWidgetStyle = t => [baseColor(t), {
+        export const main: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.buttonMain.bg[0],
           buttonColor: t.buttonMain.ct[0],
           inFocus: {
@@ -130,7 +131,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: filled, color: accent
-        export const accent: AppWidgetStyle = t => [baseColor(t), {
+        export const accent: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.buttonAccent.bg[0],
           buttonColor: t.buttonAccent.ct[0],
           inFocus: {
@@ -139,7 +140,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: filled, color: danger
-        export const danger: AppWidgetStyle = t => [baseColor(t), {
+        export const danger: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.elementDanger.bg[0],
           buttonColor: t.elementDanger.ct[0],
           inFocus: {
@@ -148,7 +149,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: filled, color: normal2
-        export const normal2: AppWidgetStyle = t => [baseColor(t), {
+        export const normal2: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.buttonNormal.bg2,
           buttonColor: t.buttonNormal.ct[0],
           inFocus: {
@@ -157,7 +158,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: filled, color: accent2
-        export const accent2: AppWidgetStyle = t => [baseColor(t), {
+        export const accent2: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.buttonAccent.bg2[0],
           buttonColor: t.buttonAccent.ct2,
           inFocus: {
@@ -167,7 +168,7 @@ export namespace ButtonS6 {
         }]
         // TODO Style - extract to preview
         // type: filled, color: previewNormal
-        export const previewNormal: AppWidgetStyle = t => [baseColor(t), {
+        export const previewNormal: AppWidgetStyle = t => [baseColor, {
           buttonBgColor: t.previewButtonNorm.bg,
           buttonColor: t.previewButtonNorm.ct,
           rippleRippleColor: t.previewButtonNorm.ctRipple,
@@ -178,7 +179,7 @@ export namespace ButtonS6 {
         }]
         // TODO Style - extract to preview
         // type: filled, color: previewMain
-        export const previewMain: AppWidgetStyle = t => [baseColor(t), {
+        export const previewMain: AppWidgetStyle = t => [baseColor, {
           buttonBg: {
             color: t.previewButtonMain.bg,
             im: `linear-gradient(
@@ -218,21 +219,21 @@ export namespace ButtonS6 {
         
         
         export namespace Big {
-          export const main: AppWidgetStyle = t => [sizeBig, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeBig, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeBig, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeBig, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeBig, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [sizeBig, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeBig, Color.main]
+          export const accent: AppWidgetStyle = [sizeBig, Color.accent]
+          export const normal: AppWidgetStyle = [sizeBig, Color.normal]
+          export const danger: AppWidgetStyle = [sizeBig, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeBig, Color.normal2]
+          export const accent2: AppWidgetStyle = [sizeBig, Color.accent2]
         }
         
         export namespace Normal {
-          export const main: AppWidgetStyle = t => [sizeNormal, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeNormal, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeNormal, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [ sizeNormal, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeNormal, Color.main]
+          export const accent: AppWidgetStyle = [sizeNormal, Color.accent]
+          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
+          export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
+          export const accent2: AppWidgetStyle = [ sizeNormal, Color.accent2]
         }
         
       }
@@ -259,28 +260,28 @@ export namespace ButtonS6 {
         }]
         
         export namespace Normal {
-          export const main: AppWidgetStyle = t => [sizeNormal, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeNormal, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeNormal, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [sizeNormal, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeNormal, Color.main]
+          export const accent: AppWidgetStyle = [sizeNormal, Color.accent]
+          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
+          export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
+          export const accent2: AppWidgetStyle = [sizeNormal, Color.accent2]
         }
         export namespace Normal2 {
-          export const main: AppWidgetStyle = t => [sizeNormal2, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeNormal2, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeNormal2, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeNormal2, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [ sizeNormal2, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeNormal2, Color.main]
+          export const accent: AppWidgetStyle = [sizeNormal2, Color.accent]
+          export const normal: AppWidgetStyle = [sizeNormal2, Color.normal]
+          export const danger: AppWidgetStyle = [sizeNormal2, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
+          export const accent2: AppWidgetStyle = [ sizeNormal2, Color.accent2]
         }
         export namespace Small {
-          export const main: AppWidgetStyle = t => [sizeSmall, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeSmall, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeSmall, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeSmall, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeSmall, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [ sizeSmall, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeSmall, Color.main]
+          export const accent: AppWidgetStyle = [sizeSmall, Color.accent]
+          export const normal: AppWidgetStyle = [sizeSmall, Color.normal]
+          export const danger: AppWidgetStyle = [sizeSmall, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeSmall, Color.normal2]
+          export const accent2: AppWidgetStyle = [ sizeSmall, Color.accent2]
         }
         
       }
@@ -299,20 +300,20 @@ export namespace ButtonS6 {
         }]
         
         export namespace Normal {
-          export const main: AppWidgetStyle = t => [sizeNormal, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeNormal, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeNormal, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [sizeNormal, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeNormal, Color.main]
+          export const accent: AppWidgetStyle = [sizeNormal, Color.accent]
+          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
+          export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
+          export const accent2: AppWidgetStyle = [sizeNormal, Color.accent2]
         }
         export namespace Big2 {
-          export const main: AppWidgetStyle = t => [sizeBig2, Color.main(t)]
-          export const accent: AppWidgetStyle = t => [sizeBig2, Color.accent(t)]
-          export const normal: AppWidgetStyle = t => [sizeBig2, Color.normal(t)]
-          export const danger: AppWidgetStyle = t => [sizeBig2, Color.danger(t)]
-          export const normal2: AppWidgetStyle = t => [sizeBig2, Color.normal2(t)]
-          export const accent2: AppWidgetStyle = t => [sizeBig2, Color.accent2(t)]
+          export const main: AppWidgetStyle = [sizeBig2, Color.main]
+          export const accent: AppWidgetStyle = [sizeBig2, Color.accent]
+          export const normal: AppWidgetStyle = [sizeBig2, Color.normal]
+          export const danger: AppWidgetStyle = [sizeBig2, Color.danger]
+          export const normal2: AppWidgetStyle = [sizeBig2, Color.normal2]
+          export const accent2: AppWidgetStyle = [sizeBig2, Color.accent2]
         }
         
       }
@@ -338,7 +339,7 @@ export namespace ButtonS6 {
       
       export namespace Color {
         // type: outlined, color: normal
-        export const normal: AppWidgetStyle = t => [baseColor(t), {
+        export const normal: AppWidgetStyle = t => [baseColor, {
           buttonColor: t.buttonNormal.bg[0],
           borderBdColor: t.buttonNormal.bg[0],
           inFocus: {
@@ -347,7 +348,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: outlined, color: accent
-        export const accent: AppWidgetStyle = t => [baseColor(t), {
+        export const accent: AppWidgetStyle = t => [baseColor, {
           buttonColor: t.buttonAccent.bg[0],
           borderBdColor: t.buttonAccent.bg[0],
           inFocus: {
@@ -388,12 +389,12 @@ export namespace ButtonS6 {
         }]
         
         export namespace Normal {
-          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
-          export const accent: AppWidgetStyle = t => [sizeNormal, Color.accent(t)]
+          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
+          export const accent: AppWidgetStyle = [sizeNormal, Color.accent]
         }
         export namespace Small {
-          export const normal: AppWidgetStyle = t => [sizeSmall, Color.normal(t)]
-          export const accent: AppWidgetStyle = t => [sizeSmall, Color.accent(t)]
+          export const normal: AppWidgetStyle = [sizeSmall, Color.normal]
+          export const accent: AppWidgetStyle = [sizeSmall, Color.accent]
         }
         
       }
@@ -416,7 +417,7 @@ export namespace ButtonS6 {
       
       export namespace Color {
         // type: text, color: normal
-        export const normal: AppWidgetStyle = t => [baseColor(t), {
+        export const normal: AppWidgetStyle = t => [baseColor, {
           buttonColor: t.page.ct2,
           rippleRippleColor: t.ripple.ctOnTransparent,
           inFocus: {
@@ -424,7 +425,7 @@ export namespace ButtonS6 {
           },
         }]
         // type: text, color: normal2
-        export const normal2: AppWidgetStyle = t => [baseColor(t), {
+        export const normal2: AppWidgetStyle = t => [baseColor, {
           buttonColor: t.buttonNormal.bg[0],
           rippleRippleColor: t.ripple.ctOnTransparent,
           inFocus: {
@@ -452,12 +453,12 @@ export namespace ButtonS6 {
         
         
         export namespace Big {
-          export const normal: AppWidgetStyle = t => [sizeBig, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeBig, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeBig, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeBig, Color.normal2]
         }
         export namespace Normal {
-          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
         }
       }
       
@@ -491,20 +492,20 @@ export namespace ButtonS6 {
         }]
         
         export namespace Normal {
-          export const normal: AppWidgetStyle = t => [sizeNormal, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
         }
         export namespace Small {
-          export const normal: AppWidgetStyle = t => [sizeSmall, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeSmall, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeSmall, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeSmall, Color.normal2]
         }
         export namespace Normal2 {
-          export const normal: AppWidgetStyle = t => [sizeNormal2, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal2, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeNormal2, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeNormal2, Color.normal2]
         }
         export namespace Normal2Uppercase {
-          export const normal: AppWidgetStyle = t => [sizeNormal2Uppercase, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeNormal2Uppercase, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeNormal2Uppercase, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeNormal2Uppercase, Color.normal2]
         }
       }
       
@@ -521,12 +522,12 @@ export namespace ButtonS6 {
         }]
         
         export namespace Big {
-          export const normal: AppWidgetStyle = t => [sizeBig, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeBig, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeBig, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeBig, Color.normal2]
         }
         export namespace Big2 {
-          export const normal: AppWidgetStyle = t => [sizeBig2, Color.normal(t)]
-          export const normal2: AppWidgetStyle = t => [sizeBig2, Color.normal2(t)]
+          export const normal: AppWidgetStyle = [sizeBig2, Color.normal]
+          export const normal2: AppWidgetStyle = [sizeBig2, Color.normal2]
         }
       }
       
@@ -536,124 +537,121 @@ export namespace ButtonS6 {
   
   // TODO Style MAKE STYLE CLASS to easy extend to have transform function inside !!!
   
-  // TODO Style - maybe cache it by theme + style in WeakMap or Map (to control size)
-  //   style -> theme -> css-string
-  
   export namespace S {
-    export const base = () => W.t(SWidget.base)
+    export const base = () => W.t(undefined, SWidget.base)
     export namespace Filled {
       export namespace Rect {
         export namespace Big {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Rect.Big.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Rect.Big.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Rect.Big.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Rect.Big.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Rect.Big.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rect.Big.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Big.accent2)
         }
         export namespace Normal {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rect.Normal.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rect.Normal.accent2)
         }
       }
       export namespace Rounded {
         export namespace Normal {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal.accent2)
         }
         export namespace Normal2 {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal2.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal2.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal2.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal2.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal2.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rounded.Normal2.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Normal2.accent2)
         }
         export namespace Small {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Rounded.Small.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Rounded.Small.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Rounded.Small.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Rounded.Small.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Rounded.Small.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Rounded.Small.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Rounded.Small.accent2)
         }
       }
       export namespace Round {
         export namespace Normal {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Round.Normal.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Round.Normal.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Round.Normal.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Round.Normal.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Round.Normal.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Round.Normal.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Round.Normal.accent2)
         }
         export namespace Big2 {
-          export const main: AppStyle = t => W.t(SWidget.Filled.Round.Big2.main(t))
-          export const accent: AppStyle = t => W.t(SWidget.Filled.Round.Big2.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Filled.Round.Big2.normal(t))
-          export const danger: AppStyle = t => W.t(SWidget.Filled.Round.Big2.danger(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Filled.Round.Big2.normal2(t))
-          export const accent2: AppStyle = t => W.t(SWidget.Filled.Round.Big2.accent2(t))
+          export const main: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.main)
+          export const accent: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.normal)
+          export const danger: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.danger)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.normal2)
+          export const accent2: AppStyle = t => W.t(t, SWidget.Filled.Round.Big2.accent2)
         }
       }
     }
     export namespace Outlined {
       export namespace Rounded {
         export namespace Normal {
-          export const accent: AppStyle = t => W.t(SWidget.Outlined.Rounded.Normal.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Outlined.Rounded.Normal.normal(t))
+          export const accent: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Normal.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Normal.normal)
         }
         export namespace Small {
-          export const accent: AppStyle = t => W.t(SWidget.Outlined.Rounded.Small.accent(t))
-          export const normal: AppStyle = t => W.t(SWidget.Outlined.Rounded.Small.normal(t))
+          export const accent: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Small.accent)
+          export const normal: AppStyle = t => W.t(t, SWidget.Outlined.Rounded.Small.normal)
         }
       }
     }
     export namespace Text {
       export namespace Rect {
         export namespace Big {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Big.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Rect.Big.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rect.Big.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rect.Big.normal2)
         }
         export namespace Normal {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Rect.Normal.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Rect.Normal.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rect.Normal.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rect.Normal.normal2)
         }
       }
       export namespace Rounded {
         export namespace Normal {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Normal.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal.normal2)
         }
         export namespace Small {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Small.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Small.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Small.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Small.normal2)
         }
         export namespace Normal2 {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2.normal2)
         }
         export namespace Normal2Uppercase {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2Uppercase.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Rounded.Normal2Uppercase.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2Uppercase.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Rounded.Normal2Uppercase.normal2)
         }
       }
       export namespace Round {
         export namespace Big {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Round.Big.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Round.Big.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Round.Big.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Round.Big.normal2)
         }
         export namespace Big2 {
-          export const normal: AppStyle = t => W.t(SWidget.Text.Round.Big2.normal(t))
-          export const normal2: AppStyle = t => W.t(SWidget.Text.Round.Big2.normal2(t))
+          export const normal: AppStyle = t => W.t(t, SWidget.Text.Round.Big2.normal)
+          export const normal2: AppStyle = t => W.t(t, SWidget.Text.Round.Big2.normal2)
         }
       }
     }

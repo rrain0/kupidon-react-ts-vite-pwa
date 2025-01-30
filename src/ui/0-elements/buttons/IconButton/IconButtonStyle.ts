@@ -136,7 +136,7 @@ export namespace IconButtonStyle {
   
   export const imSmallPlaceholderIcFullTransparent = (t: AppTheme.Theme) => css`
     ${ButtonS6.S.Text.Round.Big2.normal2(t)};
-    ${ButtonS6.W.t({
+    ${ButtonS6.W.t(t, {
       button: { sz: 'full' },
     })}
     ${W.use.s.normal().e.icon().thisUse} {
@@ -149,9 +149,9 @@ export namespace IconButtonStyle {
   
   export const icPreviewNormal = (t: AppTheme.Theme) => css`
     ${ButtonS6.S.Filled.Round.Big2.normal(t)};
-    ${ButtonS6.W.t(ButtonS6.SWidget.Filled.Color.previewNormal(t))};
+    ${ButtonS6.W.t(t, ButtonS6.SWidget.Filled.Color.previewNormal(t))};
     ${icGradFilledAddColorPreviewNorm(t)};
-    ${ButtonS6.W.t({
+    ${ButtonS6.W.t(t, {
       button: {
         p: 0,
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
@@ -178,14 +178,14 @@ export namespace IconButtonStyle {
   `
   export const icPreviewNormalBigger = (t: AppTheme.Theme) => css`
     ${icPreviewNormal(t)};
-    ${ButtonS6.W.t({
+    ${ButtonS6.W.t(t, {
       button: { sz: 58 },
     })}
   `
   export const icPreviewMain = (t: AppTheme.Theme) => css`
     ${ButtonS6.S.Filled.Round.Big2.normal(t)};
-    ${ButtonS6.W.t(ButtonS6.SWidget.Filled.Color.previewMain(t))};
-    ${ButtonS6.W.t({
+    ${ButtonS6.W.t(t, ButtonS6.SWidget.Filled.Color.previewMain(t))};
+    ${ButtonS6.W.t(t, {
       button: {
         sz: 60, p: 0,
         boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',

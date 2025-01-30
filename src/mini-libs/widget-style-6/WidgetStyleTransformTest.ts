@@ -16,7 +16,7 @@ import {
 import {
   CommonProps, CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
 
@@ -88,12 +88,21 @@ export namespace WidgetStyle6Test {
     inFocus: inFocusWidgetState,
   }
   
+  export type InputWidgetStyleProps = {
+    mode: 'light' | 'dark'
+    sz: 'md' | 'lg'
+  }
   
+  export const inputWidgetStyleProps: InputWidgetStyleProps = {
+    mode: 'dark',
+    sz: 'lg',
+  }
   
-  export const inputWidgetStyle: WidgetStyle = [
+  export const inputWidgetStyle: WidgetStyleWithProps<InputWidgetStyleProps> = [
     {
       boxP: [8, 16],
     },
+    t => ({ boxM: t.sz === 'md' ? [8, 16] : t.sz === 'lg' ? [16, 32] : undefined }),
     {
       boxAbs: 0,
       input: { '-webkit-tap-highlight-color': 'transparent' },
@@ -121,7 +130,7 @@ export namespace WidgetStyle6Test {
           sz: 'full',
         },
       },
-    }
+    },
   ]
   
   
@@ -139,7 +148,7 @@ export namespace WidgetStyle6Test {
     console.timeEnd('transform')
      */
     
-    const transformed1 = transform1(inputWidgetStyle)
+    const transformed1 = transform1(inputWidgetStyle, inputWidgetStyleProps)
     console.log('transformed1', transformed1)
     
     const transformed2 = transform2(
@@ -172,51 +181,59 @@ export namespace WidgetStyle6Test {
       states: WidgetStates,
     })
     
-    const css = transformWidgetStyle(inputWidget, inputWidgetStyle)
+    const css = transformWidgetStyle(inputWidget, inputWidgetStyleProps, inputWidgetStyle)
     console.log('widget css', '\n',  css)
     /*
-     widget css
-     .rruiFrame>.rruiInput {
-     -webkit-tap-highlight-color: transparent;
-     }
-     @media (hover: hover) and (pointer: fine) {
-     .rruiFrame:hover>.rruiInput[type=radio] {
-     background: white;
-     }}
-     @media (hover: hover) and (pointer: fine) {
-     .rruiFrame:hover::after {
-     background: aqua;
-     }}
-     .rruiFrame[type=checkbox]>.rruiBox {
-     width: 40%;
-     height: 40%;
-     }
-     @media (hover: hover) and (pointer: fine) {
-     .rruiFrame:has(>.rruiInput[data-error])>.rruiBox:hover {
-     background: indianred;
-     }}
-     .rruiFrame:has(>.rruiInput[data-error])>.rruiBox:focus-visible {
-     background: indianred;
-     }
-     @media (hover: hover) and (pointer: fine) {
-     .rruiFrame[type=radio]>.rruiBox:hover:focus {
-     background: aquamarine;
-     }}
-     .rruiFrame:has(>.rruiInput[type=radio])>.rruiBox {
-     background: black;
-     width: 100px;
-     height: 100px;
-     }
-     .rruiFrame:has(>.rruiInput[type=checkbox])>.rruiBox {
-     background: red;
-     width: 200px;
-     height: 200px;
-     }
-     .rruiFrame:has(>.rruiInput[type=radio])>.rruiBox {
-     background-image: linear-gradient(to bottom, green, yellow);
-     width: 100%;
-     height: 100%;
-     }
+&.rruiFrame>.rruiBox {
+padding: 8px 16px;
+margin: 16px 32px;
+top: 0px;
+right: 0px;
+bottom: 0px;
+left: 0px;
+}
+&.rruiFrame>.rruiInput {
+-webkit-tap-highlight-color: transparent;
+}
+&.rruiFrame>.rruiBox::after {
+background: orange;
+}
+@media (hover: hover) and (pointer: fine) {
+&.rruiFrame:hover>.rruiInput[type=radio] {
+background: white;
+}}
+@media (hover: hover) and (pointer: fine) {
+&.rruiFrame:hover::after {
+background: aqua;
+}}
+&.rruiFrame[type=checkbox]>.rruiBox {
+width: 40%;
+height: 40%;
+}
+@media (hover: hover) and (pointer: fine) {
+&.rruiFrame:has(>.rruiInput[data-error])>.rruiBox:hover {
+background: indianred;
+}}
+&.rruiFrame:has(>.rruiInput[data-error])>.rruiBox:focus-visible {
+background: indianred;
+}
+@media (hover: hover) and (pointer: fine) {
+&.rruiFrame[type=radio]>.rruiBox:hover:focus {
+background: aquamarine;
+}}
+&.rruiFrame:has(>.rruiInput[type=radio])>.rruiBox {
+background: black;
+width: 100%;
+height: 100%;
+}
+&.rruiFrame:has(>.rruiInput[type=checkbox])>.rruiBox {
+background: red;
+width: 200px;
+height: 200px;
+}
+&.rruiFrame:has(>.rruiInput[type=radio])>.rruiBox {
+background-image: linear-gradient(to bottom, green, yellow);
+}
      */
   }
   

@@ -15,6 +15,7 @@ import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
 import PreviewInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo.tsx'
@@ -562,7 +563,7 @@ const NoImagesBox = styled.div`
   color: ${p => p.theme.boxTransparent.ct};
 `
 const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${imPlaceholderIcS(t)};
+  ${SvgIconS6.W.t(t, imPlaceholderIcS)};
   ${SvgIconS.El.icon.thiz()} {
     grid-area: p;
     ${SvgIconS.El.icon.props.size.set('112%')}

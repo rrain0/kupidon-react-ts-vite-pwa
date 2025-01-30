@@ -1,5 +1,10 @@
 import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import {
+  AppStyle,
+  AppWidgetStyle,
+  WidgetStyle,
+  WidgetStyleWithProps,
+} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   WidgetElem, WidgetProp,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
@@ -84,13 +89,14 @@ export namespace RippleS6 {
   
   
   export namespace S {
-    export const base = () => W.t(SWidget.base)
+    // TODO Style
+    export const base = () => W.t(undefined, SWidget.base)
     export namespace OnFilled {
-      export const normal: AppStyle = t => W.t(SWidget.OnFilled.normal(t))
-      export const accent: AppStyle = t => W.t(SWidget.OnFilled.accent(t))
+      export const normal: AppStyle = t => W.t(t, SWidget.OnFilled.normal)
+      export const accent: AppStyle = t => W.t(t, SWidget.OnFilled.accent)
     }
-    export const onText: AppStyle = t => W.t(SWidget.onText(t))
-    export const forIcon: AppStyle = t => W.t(SWidget.forIcon(t))
+    export const onText: AppStyle = t => W.t(t, SWidget.onText)
+    export const forIcon: AppStyle = t => W.t(t, SWidget.forIcon)
   }
   
   

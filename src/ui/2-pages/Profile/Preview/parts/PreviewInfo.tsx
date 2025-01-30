@@ -255,8 +255,8 @@ const InfoBubble = styled.div`
   color: #232020;
   ${Txt.md16};
 `
-const infoIcS: AppStyle = t => SvgIconS6.W.t([
-  SvgIconS6.SWidget.Normal.normal(t), {
+const infoIcS: AppStyle = t => SvgIconS6.W.t(t, [
+  SvgIconS6.SWidget.Normal.normal, {
     iconSz: 17,
     iconColor: '#6A6A6A',
   },

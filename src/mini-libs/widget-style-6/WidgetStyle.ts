@@ -71,15 +71,29 @@ export function isStyleValue<T, SV extends StyleValue>(value: T | SV): value is 
 
 
 
-// export type WidgetS = { [selectorProp: string]: StyleValue | WidgetS | WidgetS[] }
-// export type WidgetStyle = WidgetS | WidgetStyle[]
+
+// TODO Доделать StyleValue в перемешку с остальным
+// Если быть точным в массиве пока что может быть или StyleValue или всё остальное, но не в перемешку
 
 export type WidgetStyle =
-  | { [selectorProp: string]: StyleValue | WidgetStyle | WidgetStyle[] }
+  | StyleValue
+  | { [selectorProp: string]: WidgetStyle }
   | WidgetStyle[]
 
 
-export type AppWidgetStyle = (theme: AppTheme.Theme) => WidgetStyle
+export type GetWidgetStyleWithProps<Props> = (props: Props) => WidgetStyleWithProps<Props>
+
+export type WidgetStyleWithProps<Props> =
+  | StyleValue
+  | WidgetStyle
+  | { [selectorProp: string]: WidgetStyleWithProps<Props> }
+  | GetWidgetStyleWithProps<Props>
+  | WidgetStyleWithProps<Props>[]
+
+
+
+
+export type AppWidgetStyle = WidgetStyleWithProps<AppTheme.Theme>
 
 export type AppStyle = (theme: AppTheme.Theme) => string
 

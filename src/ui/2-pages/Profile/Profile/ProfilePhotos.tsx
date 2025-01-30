@@ -12,6 +12,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   imPieProgressAccentS,
   imPieProgressS,
@@ -368,7 +369,7 @@ const ProfilePhotos = React.memo(
                                 if (im.isEmpty)
                                   return (
                                     <div css={imPlaceholderBoxS}>
-                                      <PlusIc css={imPlaceholderIcS} />
+                                      <PlusIc css={t => SvgIconS6.W.t(t, imPlaceholderIcS)} />
                                     </div>
                                   )
                                 if (im.isReady)

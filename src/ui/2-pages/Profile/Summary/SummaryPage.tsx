@@ -16,6 +16,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
@@ -247,7 +248,8 @@ const SummaryPage = React.memo(
                       )
                     if (mainPhoto.isEmpty) return (
                       <div css={imPlaceholderBoxS}>
-                        <PictureIc css={imSmallPlaceholderIcS} />
+                        {/* TODO Style */}
+                        <PictureIc css={t => SvgIconS6.W.t(t, imSmallPlaceholderIcS)} />
                       </div>
                     )
                     if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
@@ -353,7 +355,7 @@ const AvaIm = styled.img`
   object-fit: cover;
 `
 const avaPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${imPlaceholderIcS(t)};
+  ${SvgIconS6.W.t(t, imPlaceholderIcS)};
   ${SvgIconS.El.icon.thiz()}{
     ${SvgIconS.El.icon.props.size.set('50%')}
   }
@@ -399,7 +401,7 @@ const Edit = styled.div`
 `
 const editBtnStyle = (t: AppTheme.Theme) => css`
   ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
-  ${ButtonS6.W.t({
+  ${ButtonS6.W.t(t, {
     button: { w: 'ct', hMin: 34, p: [8, 14], r: 10 },
   })}
 `

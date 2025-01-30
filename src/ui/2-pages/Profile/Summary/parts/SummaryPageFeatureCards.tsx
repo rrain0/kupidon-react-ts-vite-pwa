@@ -102,7 +102,7 @@ const FeatureCardText = styled.div`
 `
 const featureCardButtonS = (t: AppTheme.Theme) => css`
   ${ButtonS6.S.Filled.Rect.Normal.accent2(t)};
-  ${ButtonS6.W.t({
+  ${ButtonS6.W.t(t, {
     button: {
       gridArea: 'btn', w: 160, hMin: 35,
       ...WidgetStyleCommon.Txt.md14bold,
@@ -138,7 +138,7 @@ const PremiumCard = styled.div`
 `
 const premiumCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS6.W.t({
+  ${ButtonS6.W.t(t, {
     buttonBgColor: t.boxWithWine.bg,
     buttonColor: t.boxWithWine.ct,
     rippleRippleColor: t.ripple.ct,
@@ -168,7 +168,7 @@ const InviteFriendsCard = styled.div`
 `
 const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS6.W.t({
+  ${ButtonS6.W.t(t, {
     buttonBgColor: t.boxWithViolet.bg,
     buttonColor: t.boxWithViolet.ct,
     rippleRippleColor: t.ripple.ct,
@@ -201,7 +201,7 @@ const SocialNetworksCard = styled.div`
 `
 const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
   ${featureCardButtonS(t)};
-  ${ButtonS6.W.t({
+  ${ButtonS6.W.t(t, {
     buttonBgColor: t.boxWithBlue.bg,
     buttonColor: t.boxWithBlue.ct,
     rippleRippleColor: t.ripple.ct,

@@ -66,6 +66,7 @@ export namespace TypeU {
   export function isnumber<T, N extends number>(value: T | N): value is N {
     return typeof value === 'number'
   }
+  // Need to exclude any function but i don't know how
   export function isobject<T, O extends object>(value: T | O): value is O {
     return typeof value === 'object' && value !== null
   }

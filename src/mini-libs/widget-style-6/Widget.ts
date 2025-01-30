@@ -12,8 +12,9 @@ import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTr
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import { transform7 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform7.ts'
 import { CommonProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import RecordRo = TypeU.RecordRo
+import isObject = TypeU.isObject
 
 
 /*
@@ -51,8 +52,8 @@ export class Widget<const out Es extends Record<string, WidgetElem> = any> {
   }
   
   // TODO Style - add param 'selectThis = true'
-  transform(style: WidgetStyle) {
-    return transformWidgetStyle(this, style)
+  transform<Props>(props: Props, style: WidgetStyleWithProps<Props>) {
+    return transformWidgetStyle(this, props, style)
   }
   
   get els() { return this.elems }
@@ -64,11 +65,23 @@ export class Widget<const out Es extends Record<string, WidgetElem> = any> {
 
 
 
+const styleCache: WeakMap<object,
+  WeakMap<object,
+    WeakMap<object, string>
+  >
+> = new WeakMap()
 
-
-export const transformWidgetStyle = (widget: Widget, style: WidgetStyle): string => {
+export const transformWidgetStyle = <Props>(
+  widget: Widget,
+  props: Props,
+  style: WidgetStyleWithProps<Props>,
+): string => {
+  if (isObject(props) && isObject(style)) {
+    const css = styleCache.get(props)?.get(widget)?.get(style)
+    if (css !== undefined) return css
+  }
   const css = transform7(transform6(transform5(transform4(transform3(transform2(
-    transform1(style),
+    transform1(style, props),
     [
       { ...CommonProps, ...widget.props },
       { ...widget.states, ...widget.elems },
@@ -77,6 +90,13 @@ export const transformWidgetStyle = (widget: Widget, style: WidgetStyle): string
       undefined,
     ]
   ))))))
+  if (isObject(props) && isObject(style)) {
+    let widgetsMap = styleCache.get(props)
+    if (!widgetsMap) styleCache.set(props, widgetsMap = new WeakMap())
+    let stylesMap = widgetsMap.get(widget)
+    if (!stylesMap) widgetsMap.set(widget, stylesMap = new WeakMap())
+    stylesMap.set(style, css)
+  }
   return css
 }
 

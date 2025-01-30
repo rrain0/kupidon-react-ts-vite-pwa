@@ -92,6 +92,7 @@ export namespace RadioInputStyle {
       /* ${center}; */
       width: 26px;
       height: 26px;
+      --size: auto;
       ${Prop.activeIconColor}: ${t.inputRadio.bgFocus[0]};
       ${Prop.inactiveIconColor}: ${t.inputRadio.bgFocus[0]};
     }

@@ -68,7 +68,7 @@ const ResizeObserverTestPage = () => {
         
         <Button
           //css={ButtonS6.S.Filled.Rect.Big.main}
-          css={t => ButtonS6.W.t(ButtonS6.SWidget.Filled.Rect.Big.main(t))}
+          css={t => ButtonS6.W.t(t, ButtonS6.SWidget.Filled.Rect.Big.main(t))}
           onClick={() => addItem1()}
         >
           +1
