@@ -11,7 +11,7 @@ import React, { useLayoutEffect } from 'react'
 
 
 
-const BottomSheetDialog = React.memo((props: BottomSheetProps) => {
+const BottomSheet = React.memo((props: BottomSheetProps) => {
   const {
     sheetState,
     setSheetState,
@@ -74,11 +74,15 @@ const BottomSheetDialog = React.memo((props: BottomSheetProps) => {
   return (
     <UserActionsConsumer>
       
-      <div /* Frame */ css={BottomSheetParts.frameStyle}
+      <div
+        data-display-name="Bottom Sheet Frame"
+        css={BottomSheetParts.frameStyle}
         ref={bottomSheetFrameRef as any}
       >
         <UserActionsConsumer>
-          <animated.div /* Bottom Sheet */ css={BottomSheetParts.sheetStyle}
+          <animated.div
+            data-display-name="Bottom Sheet"
+            css={BottomSheetParts.sheetStyle}
             // @ts-expect-error
             style={sheetSpring}
             ref={bottomSheetRef as any} // Must be
@@ -93,5 +97,5 @@ const BottomSheetDialog = React.memo((props: BottomSheetProps) => {
     </UserActionsConsumer>
   )
 })
-export default BottomSheetDialog
+export default BottomSheet
 

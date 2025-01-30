@@ -179,7 +179,7 @@ const PreviewInfoBox = styled.div`
     /1fr  auto auto  8px  1fr;
 `
 
-const Match = styled.div(({ theme: t }) => EmptyS6.W.t(t, {
+const matchS: AppWidgetStyle = t => ({
   gridArea: 'match',
   placeSelf: 'start center',
   h: 33, mt: 12, w: 'ct', ph: 14, r: 10,
@@ -189,7 +189,8 @@ const Match = styled.div(({ theme: t }) => EmptyS6.W.t(t, {
   boxShadow: `0px 4px 15px ${t.previewOverlayInfoMatchIndicator.shadow}`,
   ...WidgetStyleCommon.Txt.lg16,
   color: t.previewOverlayInfoMatchIndicator.ct,
-}))
+})
+const Match = styled.div(({ theme: t }) => EmptyS6.W.t(t, matchS))
 
 
 const ActionButtonsBox = styled.div`
