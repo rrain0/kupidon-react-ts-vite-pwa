@@ -22,7 +22,7 @@ const RippleTest = React.memo(() => {
           <UseRipple>
             { rippleProps => (
               <RippleFrame {...rippleProps.target}>
-                <Ripple {...rippleProps.ripple} css={RippleS6.S.OnFilled.accent} />
+                <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.OnFilled.accent)} />
               </RippleFrame>
             )}
           </UseRipple>
@@ -30,7 +30,7 @@ const RippleTest = React.memo(() => {
           <UseRipple>
             { rippleProps => (
               <RippleFrame2 {...rippleProps.target}>
-                <Ripple {...rippleProps.ripple} css={RippleS6.S.OnFilled.accent} />
+                <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.OnFilled.accent)} />
               </RippleFrame2>
             )}
           </UseRipple>

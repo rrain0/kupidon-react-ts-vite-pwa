@@ -69,6 +69,9 @@ export namespace ButtonS6 {
     props: WidgetProps,
   })
   
+  export const t0 = (style: WidgetStyle) => () => W.t(undefined, style)
+  export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
+  
   
   export namespace SWidget {
     
@@ -90,7 +93,7 @@ export namespace ButtonS6 {
         pointerEvents: 'none',
         r: 'inherit',
       },
-      ripple: RippleS6.SWidget.base,
+      ripple: RippleS6.S.base,
     }
     
     export namespace Filled {

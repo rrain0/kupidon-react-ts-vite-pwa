@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
 import { DefaultMediaOperation } from 'src/ui-data/models/Media'
@@ -248,8 +249,7 @@ const SummaryPage = React.memo(
                       )
                     if (mainPhoto.isEmpty) return (
                       <div css={imPlaceholderBoxS}>
-                        {/* TODO Style */}
-                        <PictureIc css={t => SvgIconS6.W.t(t, imSmallPlaceholderIcS)} />
+                        <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
                       </div>
                     )
                     if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
@@ -261,7 +261,7 @@ const SummaryPage = React.memo(
                   <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
                     <Eye>
                       <Button css={ButtonS6.S.Text.Round.Big.normal2}>
-                        <EyeWideIc css={eyeIcS} />
+                        <EyeWideIc css={SvgIconS6.t(eyeIcS)} />
                       </Button>
                     </Eye>
                   </Link>
@@ -355,7 +355,7 @@ const AvaIm = styled.img`
   object-fit: cover;
 `
 const avaPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${SvgIconS6.W.t(t, imPlaceholderIcS)};
+  ${SvgIconS6.t(imPlaceholderIcS)(t)};
   ${SvgIconS.El.icon.thiz()}{
     ${SvgIconS.El.icon.props.size.set('50%')}
   }
@@ -369,13 +369,10 @@ const Eye = styled.div`
   margin-top: -14px;
   margin-right: -6px;
 `
-const eyeIcS = (t: AppTheme.Theme) => css`
-  ${SvgIconS.normal(t)}
-  ${SvgIconS.W.use.s.normal().e.icon().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('100%')}
-    ${SvgIconS.W.e.icon.p.color.set(t.boxNormal.ct3d[0])}
-  }
-`
+const eyeIcS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+  iconSz: 'full',
+  iconColor: t.boxNormal.ct3d[0],
+}]
 
 
 const Name = styled.div`

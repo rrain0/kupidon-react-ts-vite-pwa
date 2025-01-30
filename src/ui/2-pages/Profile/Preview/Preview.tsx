@@ -563,7 +563,7 @@ const NoImagesBox = styled.div`
   color: ${p => p.theme.boxTransparent.ct};
 `
 const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${SvgIconS6.W.t(t, imPlaceholderIcS)};
+  ${SvgIconS6.t(imPlaceholderIcS)(t)};
   ${SvgIconS.El.icon.thiz()} {
     grid-area: p;
     ${SvgIconS.El.icon.props.size.set('112%')}

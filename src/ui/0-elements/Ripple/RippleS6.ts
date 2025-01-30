@@ -39,8 +39,11 @@ export namespace RippleS6 {
   
   export const W = Widget.of({ rootElem: WidgetElems.frame, elems: WidgetElems })
   
+  export const t0 = (style: WidgetStyle) => () => W.t(undefined, style)
+  export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
-  export namespace SWidget {
+  
+  export namespace S {
     
     export const base: WidgetStyle = {
       frame: {
@@ -84,18 +87,6 @@ export namespace RippleS6 {
     }]
     
   }
-  
-  
-  export namespace S {
-    export const base = () => W.t(undefined, SWidget.base)
-    export namespace OnFilled {
-      export const normal: AppStyle = t => W.t(t, SWidget.OnFilled.normal)
-      export const accent: AppStyle = t => W.t(t, SWidget.OnFilled.accent)
-    }
-    export const onText: AppStyle = t => W.t(t, SWidget.onText)
-    export const forIcon: AppStyle = t => W.t(t, SWidget.forIcon)
-  }
-  
   
   
 }

@@ -1,5 +1,3 @@
-import { css } from '@emotion/react'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle.ts'
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
@@ -12,11 +10,8 @@ import Elem0 = WidgetStyle0.Elem0
 
 
 
+// TODO remove
 export namespace SvgIconS {
-  
-  
-  
-  
   
   
   export const W = (() => {
@@ -33,29 +28,8 @@ export namespace SvgIconS {
   
   
   
-  export const base = css`
-    // normal
-    ${W.use.s.normal().e.icon().thisUse} {
-       ${W.e.icon.p.size.set('auto')}
-       ${W.e.icon.p.color.set('black')}
-       ${W.e.icon.p.accentColor.set('black')}
-    }
-  `
   
   
-  export const normal = (t: AppTheme.Theme) => css`
-    ${base};
-    
-    // normal
-    ${W.use.s.normal().e.icon().thisUse} {
-      ${W.e.icon.p.color.set(t.boxNormal.ct1b[0])}
-      ${W.e.icon.p.accentColor.set(t.boxNormal.ct1b[0])}
-    }
-  `
-  
-  
-  
-  // TODO remove
   export const El = function() {
     const icon = new Elem0('rruiIcon', { }, {
       size: new CssProp0('--size'),

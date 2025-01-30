@@ -37,8 +37,11 @@ export namespace SvgIconS6 {
     elems: WidgetElems,
   })
   
+  export const t0 = (style: WidgetStyle) => () => W.t(undefined, style)
+  export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
-  export namespace SWidget {
+  
+  export namespace S {
     
     export const base: WidgetStyle = {
       icon: {
@@ -55,14 +58,6 @@ export namespace SvgIconS6 {
       }]
     }
     
-  }
-  
-  
-  export namespace S {
-    export const base = () => W.t(undefined, SWidget.base)
-    export namespace Normal {
-      export const normal: AppStyle = t => W.t(t, SWidget.Normal.normal)
-    }
   }
   
   

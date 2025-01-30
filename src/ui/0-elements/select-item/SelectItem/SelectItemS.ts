@@ -3,6 +3,7 @@ import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import {
   SelectItemIndicatorS
@@ -92,7 +93,7 @@ export namespace SelectItemS {
       border: none;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${RippleS6.S.base()}
+      ${RippleS6.t0(RippleS6.S.base)()}
     }
     
     ${W.use.s.normal().e.addIconBox().thisUse} {
@@ -104,7 +105,7 @@ export namespace SelectItemS {
       padding: 2px;
     }
     ${W.use.s.normal().e.addIcon().thisUse} {
-      ${SvgIconS.base}
+      ${SvgIconS6.t0(SvgIconS6.S.base)()}
     }
     
     ${W.use.s.normal().e.indicatorFrame().thisUse} {
@@ -129,10 +130,10 @@ export namespace SelectItemS {
       overflow: hidden;
     }
     ${W.use.s.normal().e.editBtnRipple().thisUse} {
-      ${RippleS6.S.base()}
+      ${RippleS6.t0(RippleS6.S.base)()}
     }
     ${W.use.s.normal().e.editIcon().thisUse} {
-      ${SvgIconS.base}
+      ${SvgIconS6.t0(SvgIconS6.S.base)()}
     }
     ${W.use.s.normal().e.content().thisUse} {
       width: 100%;
@@ -159,10 +160,10 @@ export namespace SelectItemS {
       background-color: ${t.boxNormal.bg2[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${RippleS6.S.OnFilled.normal(t)}
+      ${RippleS6.t(RippleS6.S.OnFilled.normal)(t)}
     }
     ${W.use.s.normal().e.addIcon().thisUse} {
-      ${SvgIconS.normal(t)}
+      ${SvgIconS6.t(SvgIconS6.S.Normal.normal)(t)}
     }
     
     ${W.use.s.normal().e.indicator().thisUse} {
@@ -170,10 +171,10 @@ export namespace SelectItemS {
     }
     
     ${W.use.s.normal().e.editBtnRipple().thisUse} {
-      ${RippleS6.S.base()}
+      ${RippleS6.t0(RippleS6.S.base)()}
     }
     ${W.use.s.normal().e.editIcon().thisUse} {
-      ${SvgIconS.normal(t)}
+      ${SvgIconS6.t(SvgIconS6.S.Normal.normal)(t)}
     }
     
     // selected

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useRef } from 'react'
-import { AppStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
@@ -49,12 +49,12 @@ export const PreviewInfo = React.memo((props: PreviewInfoProps) => {
   
   const infos = useMemo(() => {
     return [
-      { ic: <ProfileCardIc css={infoIcS} />, title: 'Имя', value: 'Yura' },
-      { ic: <DumbbellIc css={infoIcS} />, title: 'Вес', value: 'Не выбрано' },
-      { ic: <RulerCornerIc css={infoIcS} />, title: 'Рост', value: '175' },
-      { ic: <Search2Ic css={infoIcS} />, title: 'Я ищу', value: 'Не выбрано' },
-      { ic: <CalendarIc css={infoIcS} />, title: 'Возраст', value: '24' },
-      { ic: <GenderIc css={infoIcS} />, title: 'Пол', value: 'Мужской' },
+      { ic: <ProfileCardIc css={SvgIconS6.t(infoIcS)} />, title: 'Имя', value: 'Yura' },
+      { ic: <DumbbellIc css={SvgIconS6.t(infoIcS)} />, title: 'Вес', value: 'Не выбрано' },
+      { ic: <RulerCornerIc css={SvgIconS6.t(infoIcS)} />, title: 'Рост', value: '175' },
+      { ic: <Search2Ic css={SvgIconS6.t(infoIcS)} />, title: 'Я ищу', value: 'Не выбрано' },
+      { ic: <CalendarIc css={SvgIconS6.t(infoIcS)} />, title: 'Возраст', value: '24' },
+      { ic: <GenderIc css={SvgIconS6.t(infoIcS)} />, title: 'Пол', value: 'Мужской' },
     ]
   }, [])
   
@@ -255,12 +255,10 @@ const InfoBubble = styled.div`
   color: #232020;
   ${Txt.md16};
 `
-const infoIcS: AppStyle = t => SvgIconS6.W.t(t, [
-  SvgIconS6.SWidget.Normal.normal, {
-    iconSz: 17,
-    iconColor: '#6A6A6A',
-  },
-])
+const infoIcS: AppWidgetStyle = [SvgIconS6.S.Normal.normal, {
+  iconSz: 17,
+  iconColor: '#6A6A6A',
+}]
 
 
 const Divider = styled.div`

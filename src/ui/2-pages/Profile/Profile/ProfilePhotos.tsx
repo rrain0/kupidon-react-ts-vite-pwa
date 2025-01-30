@@ -369,7 +369,7 @@ const ProfilePhotos = React.memo(
                                 if (im.isEmpty)
                                   return (
                                     <div css={imPlaceholderBoxS}>
-                                      <PlusIc css={t => SvgIconS6.W.t(t, imPlaceholderIcS)} />
+                                      <PlusIc css={SvgIconS6.t(imPlaceholderIcS)} />
                                     </div>
                                   )
                                 if (im.isReady)

@@ -130,7 +130,7 @@ const SelectItem = React.memo(
                             onClick={onClickEdit}
                             {...rippleProps.target}
                           >
-                            <Ripple {...rippleProps.ripple} css={RippleS6.S.forIcon} />
+                            <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.forIcon)} />
                             <PencilWrite2Ic />
                           </div>
                         )}
