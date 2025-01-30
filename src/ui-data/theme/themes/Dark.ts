@@ -95,7 +95,6 @@ export const DarkProps: ThemeProps = {
   ripple: {
     ct:                '#00000055',
     ctOnTransparent:   '#aaaaaa55',
-    ctOnTransparent2:  '#aaaaaa77',
   },
   
   

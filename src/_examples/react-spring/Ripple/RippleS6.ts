@@ -87,20 +87,6 @@ export namespace RippleS6 {
     
   }
   
-  
-  export namespace S {
-    // TODO Style
-    export const base = () => W.t(undefined, SWidget.base)
-    export namespace OnFilled {
-      export const normal: AppStyle = t => W.t(t, SWidget.OnFilled.normal)
-      export const accent: AppStyle = t => W.t(t, SWidget.OnFilled.accent)
-    }
-    export const onText: AppStyle = t => W.t(t, SWidget.onText)
-    export const forIcon: AppStyle = t => W.t(t, SWidget.forIcon)
-  }
-  
-  
-  
 }
 
 

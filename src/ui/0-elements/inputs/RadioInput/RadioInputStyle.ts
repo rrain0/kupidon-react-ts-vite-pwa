@@ -85,7 +85,7 @@ export namespace RadioInputStyle {
       ${Prop.color}: ${t.page.ct2};
     }
     ${El.ripple}{
-      ${Prop.rippleColor}: ${t.ripple.ctOnTransparent2};
+      ${Prop.rippleColor}: ${t.ripple.ctOnTransparent};
     }
     ${El.iconWrap}{
       /*align-self: start;*/

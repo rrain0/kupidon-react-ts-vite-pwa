@@ -99,7 +99,7 @@ export class WidgetAttr {
   get n() { return this.attr }
 }
 
-export class WidgetProp {
+export class WidgetProp<const out Vs extends string = any> {
   readonly type = 'prop' as const
   readonly isAtomic = true as const
   
@@ -109,8 +109,11 @@ export class WidgetProp {
     readonly transformValue?: TransformPropValue | undefined,
   ) { }
   
-  static ofName(name: string, transformValue?: TransformPropValue | undefined) {
-    return new WidgetProp(name, transformValue)
+  static ofName<const Vs extends string = any>(
+    name: string,
+    transformValue?: TransformPropValue | undefined
+  ) {
+    return new WidgetProp<Vs>(name, transformValue)
   }
   
   get n() { return this.prop }
@@ -123,6 +126,8 @@ export class WidgetProp {
     return `var(${nameAndDefault.join(', ')})`
   }
 }
+export type WidgetPropValueType<WP extends WidgetProp> =
+  WP extends WidgetProp<infer Vs> ? Vs : never
 
 
 

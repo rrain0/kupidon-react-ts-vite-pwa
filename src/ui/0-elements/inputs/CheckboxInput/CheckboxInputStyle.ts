@@ -158,7 +158,7 @@ export namespace CheckboxInputStyle {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('center')};
-      ${W.e.ripple.e.p.color.set(t.ripple.ctOnTransparent2)};
+      ${W.e.ripple.e.p.color.set(t.ripple.ctOnTransparent)};
     }
     // state: hover
     ${hoverable} {
@@ -192,7 +192,7 @@ export namespace CheckboxInputStyle {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('cursor')};
-      ${W.e.ripple.e.p.color.set(t.ripple.ctOnTransparent2)};
+      ${W.e.ripple.e.p.color.set(t.ripple.ctOnTransparent)};
     }
     // state: hover
     ${hoverable} {

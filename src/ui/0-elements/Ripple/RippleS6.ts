@@ -5,7 +5,7 @@ import {
   WidgetStyle, WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
-  WidgetElem, WidgetProp,
+  WidgetElem, WidgetProp, WidgetPropValueType,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
@@ -16,7 +16,6 @@ import round = WidgetStyleCommon.round
 
 export namespace RippleS6 {
   
-  export type RippleMode = 'center' | 'pointer'
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const frame = WidgetElem.of({
@@ -28,14 +27,15 @@ export namespace RippleS6 {
       upElem: frame, upSelector: '>',
       props: {
         color: AdditionalProps.varColor,
-        // values: 'center' | 'pointer'
-        mode: WidgetProp.ofName('--mode'),
+        mode: WidgetProp.ofName<'center' | 'pointer'>('--mode'),
       },
     })
     return { frame, ripple } as const
   }
   
   const WidgetElems = buildWidgetElems()
+  const modeProp = WidgetElems.ripple.ps!.mode
+  export type RippleMode = WidgetPropValueType<typeof modeProp>
   
   export const W = Widget.of({ rootElem: WidgetElems.frame, elems: WidgetElems })
   

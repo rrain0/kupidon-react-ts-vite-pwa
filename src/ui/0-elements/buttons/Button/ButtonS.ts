@@ -412,7 +412,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent)}
       }
     }
     
@@ -848,7 +848,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent)}
       }
     }
     
@@ -881,7 +881,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent)}
       }
     }
     
@@ -956,7 +956,7 @@ export namespace ButtonS {
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
         // todo move opacity to theme
-        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent2)}
+        ${RippleS.W.e.ripple.e.props.color.set(t.ripple.ctOnTransparent)}
       }
     }
 
@@ -1062,7 +1062,7 @@ export namespace ButtonS {
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${RippleS.W.use.s.normal().e.ripple().thisUse} {
-        ${RippleS.W.e.ripple.p.color.set(t.ripple.ctOnTransparent2)};
+        ${RippleS.W.e.ripple.p.color.set(t.ripple.ctOnTransparent)};
       }
     }
     

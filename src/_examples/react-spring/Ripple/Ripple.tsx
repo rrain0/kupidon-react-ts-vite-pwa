@@ -73,7 +73,6 @@ const Ripple = React.memo(
           fProps.xy,
           fProps.wh,
           clientXY,
-          // TODO Style - RippleMode type
           rProps.getCssPropValue(RippleS6.W.els.ripple.ps!.mode.n) as RippleMode,
           500
         )
@@ -196,7 +195,6 @@ function getRippleProps(
   frameXY: XY,
   frameWH: WH,
   clientXY: XY,
-  // TODO Style
   mode: RippleMode,
   duration: number,
 ) {

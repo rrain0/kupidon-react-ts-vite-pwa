@@ -3,7 +3,7 @@ import {
   WidgetElem,
   WidgetMultiAnyTransformer,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { createWidgetState, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import {
   AdditionalProps,
   CommonStates,
@@ -51,16 +51,9 @@ export namespace ButtonS6 {
   
   const WidgetElems = buildWidgetElems()
   namespace WidgetStates {
-    // TODO Style - simplify
-    export const inFocus = WidgetMultiAnyTransformer.of({
-      transform: () => [[WidgetElems.button, CommonStates.inFocus]],
-    })
-    export const disabled = WidgetMultiAnyTransformer.of({
-      transform: () => [[WidgetElems.button, CommonStates.disabled]],
-    })
-    export const error = WidgetMultiAnyTransformer.of({
-      transform: () => [[WidgetElems.button, CommonStates.error]],
-    })
+    export const inFocus = createWidgetState([WidgetElems.button, CommonStates.inFocus])
+    export const disabled = createWidgetState([WidgetElems.button, CommonStates.disabled])
+    export const error = createWidgetState([WidgetElems.button, CommonStates.error])
   }
   namespace WidgetProps {
     export const color = AdditionalProps.colorAndVarColor

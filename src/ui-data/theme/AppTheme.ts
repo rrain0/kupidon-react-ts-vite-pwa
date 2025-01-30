@@ -175,7 +175,6 @@ export namespace AppTheme {
     ripple: {
       ct:                string
       ctOnTransparent:   string
-      ctOnTransparent2:  string
     }
     
     

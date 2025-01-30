@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
-  WidgetElem, WidgetMultiAnyTransformer, WidgetAnyPropTransformer,
+  WidgetElem, WidgetMultiAnyTransformer, WidgetAnyPropTransformer, WidgetTransformerList,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   transform2,
@@ -62,6 +62,12 @@ export class Widget<const out Es extends Record<string, WidgetElem> = any> {
 
 
 
+
+export function createWidgetState(...transformerList: WidgetTransformerList) {
+  return WidgetMultiAnyTransformer.of({
+    transform: () => transformerList,
+  })
+}
 
 
 

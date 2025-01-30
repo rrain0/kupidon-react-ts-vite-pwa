@@ -101,6 +101,6 @@ const iconCss = (t: AppTheme.Theme) => css`
 const rippleCss = (t: AppTheme.Theme) => css`
   ${RippleStyle.El0.frame}{
     ${RippleStyle.Prop.mode}: center;
-    ${RippleStyle.Prop.color}: ${t.ripple.ctOnTransparent2};
+    ${RippleStyle.Prop.color}: ${t.ripple.ctOnTransparent};
   }
 `
