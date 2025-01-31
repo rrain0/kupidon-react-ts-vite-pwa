@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
+import { Light } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -94,7 +94,7 @@ export const DarkProps: ThemeProps = {
   
   ripple: {
     ct:                '#00000055',
-    ctOnTransparent:   '#aaaaaa55',
+    ctOnTransparent:   '#aaaaaa33',
   },
   
   
@@ -150,59 +150,23 @@ export const DarkProps: ThemeProps = {
     ct:  '#dddddd',
   },
   
-  boxPink: {
-    bg:  ['#F0849D', '#CD617A'],
-    ct:  '#FFFFFF',
-  },
-  boxWithPink: {
-    bg:   '#FFFFFF',
-    ct:   '#DD718A',
-    
-    bgFocus: ['#ffa9bd', '#ffffff'],
-    ctFocus:  '#DD718A',
-  },
+  boxPink: { ...Light.boxPink },
+  boxWithPink: { ...Light.boxWithPink },
   
-  boxWine: {
-    bg: ['#BB2649', '#F75F82'],
-    ct:  '#FFFFFF',
-  },
-  boxWithWine: {
-    bg:  '#FFFFFF',
-    ct:   '#BB2649',
-    
-    bgFocus: ['#ffa9bd', '#ffffff'],
-    ctFocus:  '#DD718A',
-  },
+  boxWine: { ...Light.boxWine },
+  boxWithWine: { ...Light.boxWithWine },
   
-  boxViolet: {
-    bg: ['#AB6FE7', '#8B43D3'],
-    ct:  '#FFFFFF',
-  },
-  boxWithViolet: {
-    bg:  '#FFFFFF',
-    ct:   '#934DD8',
-    
-    bgFocus: ['#d2abf9', '#ffffff'],
-    ctFocus:  '#934DD8',
-  },
+  boxViolet: { ...Light.boxViolet },
+  boxWithViolet: { ...Light.boxWithViolet },
   
-  boxBlue: {
-    bg:  ['#67A9D9', '#2E85C3'],
-    ct:   '#FFFFFF',
-  },
-  boxWithBlue: {
-    bg:  '#FFFFFF',
-    ct:   '#398CC8',
-    
-    bgFocus: ['#bae2ff', '#ffffff'],
-    ctFocus:  '#398CC8',
-  },
+  boxBlue: { ...Light.boxBlue },
+  boxWithBlue: { ...Light.boxWithBlue },
   
   
   
-  previewButtonNorm: { ...LightProps.previewButtonNorm },
-  previewButtonMain: { ...LightProps.previewButtonMain },
-  previewOverlayInfoBox: { ...LightProps.previewOverlayInfoBox },
+  previewButtonNorm: { ...Light.previewButtonNorm },
+  previewButtonMain: { ...Light.previewButtonMain },
+  previewOverlayInfoBox: { ...Light.previewOverlayInfoBox },
   previewFullInfoBox: {
     bg:         '#282c34',
     ct:         '#dddddd',
@@ -215,8 +179,8 @@ export const DarkProps: ThemeProps = {
     bgMainGrad: ['#1F1F1F', '#6D6D6D'],
     ctMain:     '#ffffff',
   },
-  previewPhotosProgress: { ...LightProps.previewPhotosProgress },
-  previewOverlayInfoMatchIndicator: { ...LightProps.previewOverlayInfoMatchIndicator },
+  previewPhotosProgress: { ...Light.previewPhotosProgress },
+  previewOverlayInfoMatchIndicator: { ...Light.previewOverlayInfoMatchIndicator },
   
   
   

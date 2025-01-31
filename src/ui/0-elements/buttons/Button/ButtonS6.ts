@@ -233,7 +233,7 @@ export namespace ButtonS6 {
           export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
           export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
           export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
-          export const accent2: AppWidgetStyle = [ sizeNormal, Color.accent2]
+          export const accent2: AppWidgetStyle = [sizeNormal, Color.accent2]
         }
         
       }

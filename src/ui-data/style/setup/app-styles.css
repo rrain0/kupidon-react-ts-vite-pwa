@@ -2,6 +2,10 @@
 
 
 :root {
+  user-select: none;
+  
+  
+  
   --page-vertical-padding: 50px;
   
   --bottom-button-bar-height: 0px;

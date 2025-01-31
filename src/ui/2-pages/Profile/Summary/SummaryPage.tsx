@@ -78,7 +78,7 @@ const SummaryPage = React.memo(
     
     const profile = MockData.profile2
     const progress = 45
-    const completeProfileDescriptionText = 'Завешите описание профиля'
+    const completeProfileDescriptionText = 'Завершите описание профиля'
     const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
     
     const [profileProgress, setProfileProgress] = useState(5)

@@ -16,8 +16,8 @@ import Puro = TypeU.Puro
 import Callback = TypeU.Callback
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
-import combineEvHandlersRecords = ReactU.combineEvHandlersRecords
 import trueOrUndef = TypeU.trueOrUndef
+import combineProps = ReactU.combineProps
 
 
 
@@ -80,8 +80,7 @@ const SelectItem = React.memo(
               {...{
                 [SelectItemS.W.s.selected.s.name]: trueOrUndef(isSelected),
               }}
-              {...restProps}
-              {...combineEvHandlersRecords(rippleProps.target, restProps)}
+              {...combineProps(restProps, rippleProps.target)}
             >
               
               <div

@@ -77,29 +77,24 @@ export namespace ReactU {
   
   
   
-  // todo fix types
-  /* export const combineEvHandlersRecords =
-  <
-    R extends Partial<Record<keyof React.DOMAttributes<any>, React.EventHandler<E>>>,
-    O extends Partial<Record<keyof React.DOMAttributes<any>, any>>,
-  >
-  (handlers: R, otherHandlers: O): R => {
-    return ObjectMap<any, any>(handlers, ([prop, h]) => [
-      prop,
-      ev => {
-        h?.(ev)
-        otherHandlers[prop]?.(ev)
-      },
-    ]) as unknown as R
-  } */
-  export const combineEvHandlersRecords = (handlers: any, otherHandlers: any): any => {
-    return ObjectMap<any, any>(handlers, ([prop, h]) => [
-      prop,
-      ev => {
-        h?.(ev)
-        otherHandlers[prop]?.(ev)
-      },
-    ])
+  export const combineProps = <T extends object>(
+    ...propsList: T[]
+  ): T => {
+    const combinedProps = { ...propsList[0] }
+    for (let i = 1; i < propsList.length; i++) {
+      const props = propsList[i]
+      for (const [prop, value] of Object.entries(props)) {
+        if (Object.hasOwn(combinedProps, prop) && funProps.has(prop)) {
+          const prevFun = combinedProps[prop]
+          combinedProps[prop] = (...args) => {
+            prevFun(...args)
+            value(...args)
+          }
+        }
+        else combinedProps[prop] = value
+      }
+    }
+    return combinedProps
   }
   
   type ReactEventHandlers<E extends HTMLElement> = {
@@ -164,5 +159,77 @@ export namespace ReactU {
   
 }
 
+
+
+
+
+
+
+const funProps = new Set([
+  'onClick', 'onCopy', 'onCopyCapture', 'onCut',
+  'onCutCapture', 'onPaste', 'onPasteCapture',
+  
+  'onCompositionEnd', 'onCompositionEndCapture',
+  'onCompositionStart', 'onCompositionStartCapture',
+  'onCompositionUpdate', 'onCompositionUpdateCapture',
+  
+  'onFocus', 'onFocusCapture', 'onBlur', 'onBlurCapture',
+  
+  'onChange', 'onChangeCapture', 'onBeforeInput', 'onBeforeInputCapture',
+  'onInput', 'onInputCapture', 'onReset', 'onResetCapture',
+  'onSubmit', 'onSubmitCapture', 'onInvalid', 'onInvalidCapture',
+  
+  'onLoad', 'onLoadCapture', 'onError', 'onErrorCapture',
+  
+  'onKeyDown', 'onKeyDownCapture', 'onKeyPress', 'onKeyPressCapture',
+  'onKeyUp', 'onKeyUpCapture',
+  
+  'onAbort', 'onAbortCapture', 'onCanPlay', 'onCanPlayCapture',
+  'onCanPlayThrough', 'onCanPlayThroughCapture',
+  'onDurationChange', 'onDurationChangeCapture',
+  'onEmptied', 'onEmptiedCapture', 'onEncrypted', 'onEncryptedCapture',
+  'onEnded', 'onEndedCapture', 'onLoadedData', 'onLoadedDataCapture',
+  'onLoadedMetadata', 'onLoadedMetadataCapture', 'onLoadStart', 'onLoadStartCapture',
+  'onPause', 'onPauseCapture', 'onPlay', 'onPlayCapture',
+  'onPlaying', 'onPlayingCapture', 'onProgress', 'onProgressCapture',
+  'onRateChange', 'onRateChangeCapture', 'onResize', 'onResizeCapture',
+  'onSeeked', 'onSeekedCapture', 'onSeeking', 'onSeekingCapture',
+  'onStalled', 'onStalledCapture', 'onSuspend', 'onSuspendCapture',
+  'onTimeUpdate', 'onTimeUpdateCapture', 'onVolumeChange', 'onVolumeChangeCapture',
+  'onWaiting', 'onWaitingCapture',
+  
+  'onAuxClick', 'onAuxClickCapture', 'onClick', 'onClickCapture',
+  'onContextMenu', 'onContextMenuCapture', 'onDoubleClick', 'onDoubleClickCapture',
+  'onDrag', 'onDragCapture', 'onDragEnd', 'onDragEndCapture',
+  'onDragEnter', 'onDragEnterCapture', 'onDragExit', 'onDragExitCapture',
+  'onDragLeave', 'onDragLeaveCapture', 'onDragOver', 'onDragOverCapture',
+  'onDragStart', 'onDragStartCapture', 'onDrop', 'onDropCapture',
+  'onMouseDown', 'onMouseDownCapture', 'onMouseEnter', 'onMouseLeave',
+  'onMouseMove', 'onMouseMoveCapture', 'onMouseOut', 'onMouseOutCapture',
+  'onMouseOver', 'onMouseOverCapture', 'onMouseUp', 'onMouseUpCapture',
+  
+  'onSelect', 'onSelectCapture',
+  
+  'onTouchCancel', 'onTouchCancelCapture', 'onTouchEnd', 'onTouchEndCapture',
+  'onTouchMove', 'onTouchMoveCapture', 'onTouchStart', 'onTouchStartCapture',
+  
+  'onPointerDown', 'onPointerDownCapture', 'onPointerMove', 'onPointerMoveCapture',
+  'onPointerUp', 'onPointerUpCapture', 'onPointerCancel', 'onPointerCancelCapture',
+  'onPointerEnter', 'onPointerLeave', 'onPointerOver', 'onPointerOverCapture',
+  'onPointerOut', 'onPointerOutCapture',
+  'onGotPointerCapture', 'onGotPointerCaptureCapture',
+  'onLostPointerCapture', 'onLostPointerCaptureCapture',
+  
+  'onScroll', 'onScrollCapture',
+  
+  'onWheel', 'onWheelCapture',
+  
+  
+  'onAnimationStart', 'onAnimationStartCapture',
+  'onAnimationEnd', 'onAnimationEndCapture',
+  'onAnimationIteration', 'onAnimationIterationCapture',
+  
+  'onTransitionEnd', 'onTransitionEndCapture',
+])
 
 

@@ -2,9 +2,11 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { LightWine } from 'src/ui-data/theme/themes/LightWine.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
@@ -41,7 +43,7 @@ const SummaryPageFeatureCards = React.memo(
         <PremiumCard>
           <FeatureCardName>{premiumSubscription}</FeatureCardName>
           <FeatureCardText>{unlockAllPossibilitiesWithPremium}</FeatureCardText>
-          <Button css={premiumCardButtonS}>{findOutMore}</Button>
+          <Button css={ButtonS6.t(premiumCardButtonS)}>{findOutMore}</Button>
           <FeatureCardIcBox>
             <PremiumCardIc />
           </FeatureCardIcBox>
@@ -50,7 +52,7 @@ const SummaryPageFeatureCards = React.memo(
         <InviteFriendsCard>
           <FeatureCardName>{inviteYourFriends}</FeatureCardName>
           <FeatureCardText>{maybeTheyAreLookingForOtherHalf}</FeatureCardText>
-          <Button css={inviteFriendsCardButtonS}>{invite}</Button>
+          <Button css={ButtonS6.t(inviteFriendsCardButtonS)}>{invite}</Button>
           <FeatureCardIcBox>
             <InviteFriendsCardIc  />
           </FeatureCardIcBox>
@@ -59,7 +61,7 @@ const SummaryPageFeatureCards = React.memo(
         <SocialNetworksCard>
           <FeatureCardName>{ourSocialNetworks}</FeatureCardName>
           <FeatureCardText>{joinSocialNetworksToStayUpToDate}</FeatureCardText>
-          <Button css={socialNetworksCardButtonS}>{goto}</Button>
+          <Button css={ButtonS6.t(socialNetworksCardButtonS)}>{goto}</Button>
           <FeatureCardIcBox>
             <SocialNetworksCardIc />
           </FeatureCardIcBox>
@@ -100,15 +102,12 @@ const FeatureCardText = styled.div`
   align-self: center;
   ${Txt.md14};
 `
-const featureCardButtonS = (t: AppTheme.Theme) => css`
-  ${ButtonS6.t(ButtonS6.S.Filled.Rect.Normal.accent2)(t)};
-  ${ButtonS6.W.t(t, {
-    button: {
-      gridArea: 'btn', w: 160, hMin: 35,
-      ...WidgetStyleCommon.Txt.md14bold,
-    },
-  })}
-`
+const featureCardButtonS: AppWidgetStyle = [ButtonS6.S.Filled.Rect.Normal.accent2, {
+  button: {
+    gridArea: 'btn', w: 160, hMin: 35,
+    ...WidgetStyleCommon.Txt.md14bold,
+  },
+}]
 const FeatureCardIcBox = styled.div`
   grid-area: icon;
   place-self: center start;
@@ -136,26 +135,25 @@ const PremiumCard = styled.div`
   );
   color: ${p => p.theme.boxWine.ct};
 `
-const premiumCardButtonS = (t: AppTheme.Theme) => css`
-  ${featureCardButtonS(t)};
-  ${ButtonS6.W.t(t, {
+const premiumCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
+  buttonBgColor: t.boxWithWine.bg,
+  buttonColor: t.boxWithWine.ct,
+  rippleRippleColor: t.boxWithWine.ctRipple,
+  inFocus: {
     buttonBgColor: t.boxWithWine.bg,
-    buttonColor: t.boxWithWine.ct,
-    rippleRippleColor: t.ripple.ct,
-    inFocus: {
-      buttonBgColor: t.boxWithWine.bg,
-      buttonBgIm: `linear-gradient(
-        to bottom right,
-        ${t.boxWithWine.bgFocus[1]} 65%,
-        ${t.boxWithWine.bgFocus[0]} 100%
-      )`,
-      buttonColor: t.boxWithWine.ctFocus,
-    },
-  })}
-`
+    buttonBgIm: `linear-gradient(
+      to bottom right,
+      ${t.boxWithWine.bgFocus[1]} 65%,
+      ${t.boxWithWine.bgFocus[0]} 100%
+    )`,
+    buttonColor: t.boxWithWine.ctFocus,
+  },
+}]
 const PremiumCardIc = styled(FeatureCardIc)`
   background-image: url(${heartLocks});
 `
+
+
 
 
 const InviteFriendsCard = styled.div`
@@ -166,23 +164,20 @@ const InviteFriendsCard = styled.div`
   );
   color: ${p => p.theme.boxViolet.ct};
 `
-const inviteFriendsCardButtonS = (t: AppTheme.Theme) => css`
-  ${featureCardButtonS(t)};
-  ${ButtonS6.W.t(t, {
+const inviteFriendsCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
+  buttonBgColor: t.boxWithViolet.bg,
+  buttonColor: t.boxWithViolet.ct,
+  rippleRippleColor: t.boxWithViolet.ctRipple,
+  inFocus: {
     buttonBgColor: t.boxWithViolet.bg,
-    buttonColor: t.boxWithViolet.ct,
-    rippleRippleColor: t.ripple.ct,
-    inFocus: {
-      buttonBgColor: t.boxWithViolet.bg,
-      buttonBgIm: `linear-gradient(
-        to bottom right,
-        ${t.boxWithViolet.bgFocus[1]} 65%,
-        ${t.boxWithViolet.bgFocus[0]} 100%
-      )`,
-      buttonColor: t.boxWithViolet.ctFocus,
-    },
-  })}
-`
+    buttonBgIm: `linear-gradient(
+      to bottom right,
+      ${t.boxWithViolet.bgFocus[1]} 65%,
+      ${t.boxWithViolet.bgFocus[0]} 100%
+    )`,
+    buttonColor: t.boxWithViolet.ctFocus,
+  },
+}]
 const InviteFriendsCardIc = styled(FeatureCardIc)`
   background-image: url(${share});
   width: 150%;
@@ -199,23 +194,20 @@ const SocialNetworksCard = styled.div`
   );
   color: ${p => p.theme.boxBlue.ct};
 `
-const socialNetworksCardButtonS = (t: AppTheme.Theme) => css`
-  ${featureCardButtonS(t)};
-  ${ButtonS6.W.t(t, {
+const socialNetworksCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
+  buttonBgColor: t.boxWithBlue.bg,
+  buttonColor: t.boxWithBlue.ct,
+  rippleRippleColor: t.boxWithBlue.ctRipple,
+  inFocus: {
     buttonBgColor: t.boxWithBlue.bg,
-    buttonColor: t.boxWithBlue.ct,
-    rippleRippleColor: t.ripple.ct,
-    inFocus: {
-      buttonBgColor: t.boxWithBlue.bg,
-      buttonBgIm: `linear-gradient(
-        to bottom right,
-        ${t.boxWithBlue.bgFocus[1]} 65%,
-        ${t.boxWithBlue.bgFocus[0]} 100%
-      )`,
-      buttonColor: t.boxWithBlue.ctFocus,
-    },
-  })}
-`
+    buttonBgIm: `linear-gradient(
+      to bottom right,
+      ${t.boxWithBlue.bgFocus[1]} 65%,
+      ${t.boxWithBlue.bgFocus[0]} 100%
+    )`,
+    buttonColor: t.boxWithBlue.ctFocus,
+  },
+}]
 const SocialNetworksCardIc = styled(FeatureCardIc)`
   background-image: url(${social});
   width: 140%;

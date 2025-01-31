@@ -189,11 +189,12 @@ export namespace AppTheme {
       ct: string,
     }
     boxWithPink: {
-      bg:  string
-      ct:  string
+      bg:       string
+      ct:       string
+      ctRipple: string
       
-      bgFocus: [string, string]
-      ctFocus: string
+      bgFocus:  [string, string]
+      ctFocus:  string
     },
     
     boxWine: {
@@ -201,8 +202,9 @@ export namespace AppTheme {
       ct: string,
     }
     boxWithWine: {
-      bg:  string
-      ct:  string
+      bg:       string
+      ct:       string
+      ctRipple: string
       
       bgFocus: [string, string]
       ctFocus: string
@@ -213,8 +215,9 @@ export namespace AppTheme {
       ct: string
     }
     boxWithViolet: {
-      bg:  string
-      ct:  string
+      bg:       string
+      ct:       string
+      ctRipple: string
       
       bgFocus: [string, string]
       ctFocus:  string
@@ -225,8 +228,9 @@ export namespace AppTheme {
       ct:  string
     }
     boxWithBlue: {
-      bg:  string
-      ct:  string
+      bg:       string
+      ct:       string
+      ctRipple: string
       
       bgFocus: [string, string]
       ctFocus: string

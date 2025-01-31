@@ -149,6 +149,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           css={infoButtonS}
           disabled={isDragging}
           onClick={ev => {
+            console.log('click')
             ev.stopPropagation()
             if (getWasDragged?.()) return
             openInfo?.()
@@ -190,7 +191,7 @@ const matchS: AppWidgetStyle = t => ({
   ...WidgetStyleCommon.Txt.lg16,
   color: t.previewOverlayInfoMatchIndicator.ct,
 })
-const Match = styled.div(({ theme: t }) => EmptyS6.W.t(t, matchS))
+const Match = styled.div(p => EmptyS6.t(matchS)(p.theme))
 
 
 const ActionButtonsBox = styled.div`

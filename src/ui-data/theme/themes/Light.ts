@@ -95,7 +95,7 @@ export const LightProps: ThemeProps = {
   
   ripple: {
     ct:                '#ffffff55',
-    ctOnTransparent:   '#66666655',
+    ctOnTransparent:   '#66666633',
   },
   
   
@@ -155,47 +155,51 @@ export const LightProps: ThemeProps = {
     ct:  '#FFFFFF',
   },
   boxWithPink: {
-    bg:   '#FFFFFF',
-    ct:   '#DD718A',
+    bg:       '#FFFFFF',
+    ct:       '#DD718A',
+    ctRipple: '#66666688',
     
     bgFocus:  ['#ffa9bd', '#ffffff'],
     ctFocus:  '#DD718A',
   },
   
   boxWine: {
-    bg:  ['#BB2649', '#F75F82'],
-    ct:  '#FFFFFF',
+    bg:        ['#BB2649', '#F75F82'],
+    ct:        '#FFFFFF',
   },
   boxWithWine: {
-    bg:   '#FFFFFF',
-    ct:   '#BB2649',
+    bg:        '#FFFFFF',
+    ct:        '#BB2649',
+    ctRipple:  '#F75F8288',
     
-    bgFocus:  ['#F75F82', '#ffffff'],
-    ctFocus:  '#BB2649',
+    bgFocus:   ['#F75F82', '#ffffff'],
+    ctFocus:   '#BB2649',
   },
   
   boxViolet: {
-    bg:  ['#AB6FE7', '#8B43D3'],
-    ct:  '#FFFFFF',
+    bg:        ['#AB6FE7', '#8B43D3'],
+    ct:        '#FFFFFF',
   },
   boxWithViolet: {
-    bg:   '#FFFFFF',
-    ct:   '#934DD8',
+    bg:        '#FFFFFF',
+    ct:        '#934DD8',
+    ctRipple:  '#d2abf988',
     
-    bgFocus:  ['#d2abf9', '#ffffff'],
-    ctFocus:  '#934DD8',
+    bgFocus:   ['#d2abf9', '#ffffff'],
+    ctFocus:   '#934DD8',
   },
   
   boxBlue: {
-    bg:   ['#67A9D9', '#2E85C3'],
-    ct:   '#FFFFFF',
+    bg:        ['#67A9D9', '#2E85C3'],
+    ct:        '#FFFFFF',
   },
   boxWithBlue: {
-    bg:   '#FFFFFF',
-    ct:   '#398CC8',
+    bg:        '#FFFFFF',
+    ct:        '#398CC8',
+    ctRipple:  '#bae2ff88',
     
-    bgFocus:  ['#bae2ff', '#ffffff'],
-    ctFocus:  '#398CC8',
+    bgFocus:   ['#bae2ff', '#ffffff'],
+    ctFocus:   '#398CC8',
   },
   
   

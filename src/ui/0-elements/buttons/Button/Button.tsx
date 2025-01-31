@@ -8,7 +8,7 @@ import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import trueOrUndef = TypeU.trueOrUndef
-import combineEvHandlersRecords = ReactU.combineEvHandlersRecords
+import combineProps = ReactU.combineProps
 
 
 
@@ -30,8 +30,9 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
   const elemRef = useRef<HTMLButtonElement>(null)
   useImperativeHandle(forwardedRef, () => elemRef.current!, [])
   
-  // TODO костыль для клика
-  //const [getWasClicked, setWasClicked] = useRefGetSet(false)
+  // TODO костыль для клика.
+  //  Без костыля если при закрывании шторки на андроиде жать кнопку, то клик не работает, хотя всё ок.
+  const [getWasClicked, setWasClicked] = useRefGetSet(false)
   
   
   return (
@@ -43,26 +44,21 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           {...{ [ButtonS6.W.els.button.ss!.error.n]: trueOrUndef(hasError) }}
           className={clsx(className, ButtonS6.W.els.button.n)}
           type="button"
-          {...restProps}
-          {...combineEvHandlersRecords(rippleProps.target, restProps)}
-          
+          {...combineProps(restProps, rippleProps.target)}
           // TODO костыль для клика
-          /*{...combineEvHandlersRecords(
-            {
-              onPointerUp: ev => {
-                setWasClicked(false)
-                ev.currentTarget.click()
-              },
-            },
-            combineEvHandlersRecords(rippleProps.target, restProps))
-          }
+          onPointerUp={ev => {
+            rippleProps.target.onPointerUp(ev)
+            restProps.onPointerUp?.(ev)
+            setWasClicked(false)
+            setTimeout(() => {
+              if (!getWasClicked()) elemRef.current?.click()
+            }, 50)
+          }}
           // TODO костыль для клика
           onClick={ev => {
-            if (!getWasClicked()) {
-              setWasClicked(true)
-              restProps.onClick?.(ev)
-            }
-          }}*/
+            setWasClicked(true)
+            restProps.onClick?.(ev)
+          }}
         >
           
           {children}
