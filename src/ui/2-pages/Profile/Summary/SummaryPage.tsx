@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { ReactU } from '@util/react/ReactU.ts'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -12,7 +13,6 @@ import { DefaultMediaOperation } from 'src/ui-data/models/Media'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
@@ -38,7 +38,6 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { AsyncU } from 'src/util/common/AsyncU'
 import { RangeU } from 'src/util/common/RangeU'
 import { DateU } from 'src/util/date/DateU'
@@ -257,15 +256,13 @@ const SummaryPage = React.memo(
                 </AvaBox>
                 
                 <Name>{u.name}</Name>
-                <UserActionsConsumer>
-                  <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
-                    <Eye>
-                      <Button css={ButtonS6.t(ButtonS6.S.Text.Round.Big.normal2)}>
-                        <EyeWideIc css={SvgIconS6.t(eyeIcS)} />
-                      </Button>
-                    </Eye>
-                  </Link>
-                </UserActionsConsumer>
+                <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
+                  <Eye>
+                    <Button css={ButtonS6.t(ButtonS6.S.Text.Round.Big.normal2)}>
+                      <EyeWideIc css={SvgIconS6.t(eyeIcS)} />
+                    </Button>
+                  </Eye>
+                </Link>
                 <Info>{info}</Info>
                 
                 <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>

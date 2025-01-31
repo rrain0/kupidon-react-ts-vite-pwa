@@ -5,7 +5,7 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 //import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput0.tsx'
 //import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import CheckboxInputGroup from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
@@ -37,7 +37,7 @@ const ModalCheckbox =
   return <UseBottomSheetState isOpen={isOpen} onClose={close}>
     {sheetProps =>
       <ModalPortal>
-        <BottomSheetDialogBasic
+        <BottomSheetBasic
           {...sheetProps.sheetProps}
           headerTitle={title}
         >
@@ -78,7 +78,7 @@ const ModalCheckbox =
           </CheckboxInputGroup>
         
         
-        </BottomSheetDialogBasic>
+        </BottomSheetBasic>
       </ModalPortal>
     }</UseBottomSheetState>
 }

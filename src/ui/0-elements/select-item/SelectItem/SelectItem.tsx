@@ -3,7 +3,6 @@ import React, { useImperativeHandle } from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import SelectItemIndicator
   from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
-import UserActionsConsumer from 'src/ui/components/UserActionsConsumer/UserActionsConsumer'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
@@ -18,6 +17,7 @@ import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import trueOrUndef = TypeU.trueOrUndef
 import combineProps = ReactU.combineProps
+import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
 
 
 
@@ -120,21 +120,22 @@ const SelectItem = React.memo(
                   </div>
                   
                   {isEdit && (
-                    <UserActionsConsumer>
-                      <UseRipple>
-                        {rippleProps => (
-                          <div
-                            //displayName={'EditBtn'}
-                            className={SelectItemS.W.e.editBtn.e.name}
-                            onClick={onClickEdit}
-                            {...rippleProps.target}
-                          >
-                            <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.forIcon)} />
-                            <PencilWrite2Ic />
-                          </div>
-                        )}
-                      </UseRipple>
-                    </UserActionsConsumer>
+                    <UseRipple>
+                      {rippleProps => (
+                        <div
+                          //displayName={'EditBtn'}
+                          className={SelectItemS.W.e.editBtn.e.name}
+                          {...combineProps(
+                            { onClick: onClickEdit },
+                            rippleProps.target,
+                            stopPointerAndMouseEvents(),
+                          )}
+                        >
+                          <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.forIcon)} />
+                          <PencilWrite2Ic />
+                        </div>
+                      )}
+                    </UseRipple>
                   )}
                 
                 </>

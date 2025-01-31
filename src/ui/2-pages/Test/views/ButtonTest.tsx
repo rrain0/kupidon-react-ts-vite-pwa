@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -22,6 +23,45 @@ const ButtonTest = React.memo(() => {
         <Pages.ContentFill>
           
           
+          
+          
+          <button
+            css={css`width: 250px; height: 100px;`}
+            onPointerDown={ev => {
+              console.log('onPointerDown', ev.pointerId)
+            }}
+            
+            onPointerEnter={ev => {
+              console.log('onPointerEnter')
+            }}
+            onPointerLeave={ev => {
+              console.log('onPointerLeave')
+            }}
+            onPointerOut={ev => {
+              console.log('onPointerOut')
+            }}
+            onPointerOver={ev => {
+              console.log('onPointerOver')
+            }}
+            onPointerMove={ev => {
+              console.log('onPointerMove')
+            }}
+            
+            onPointerCancel={ev => {
+              console.log('onPointerCancel')
+            }}
+            onPointerUp={ev => {
+              console.log('onPointerUp')
+            }}
+            
+            onClick={ev => {
+              console.log('onClick')
+            }}
+          >
+            TEEEST
+          </button>
+          
+          
           <div>Buttons showcase</div>
           
           <BlocksContainer>
@@ -40,7 +80,7 @@ const ButtonTest = React.memo(() => {
                     ))}
                   </Buttons>
                 ))
-              ))
+              )),
             )}
           </BlocksContainer>
         
@@ -72,8 +112,6 @@ const ButtonDescription = styled.div`
 const ButtonBox = styled.div`
   height: fit-content;
 `
-
-
 
 
 namespace AllButtonStyles {

@@ -30,77 +30,75 @@ import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 
 
 
-const NavBar = React.memo(
-  () => {
+const NavBar = React.memo(() => {
     
-    const titleText = useUiValues(TitleUiText)
-    
-    
-    return (
-      <>
+  const titleText = useUiValues(TitleUiText)
+  
+  
+  return (
+    <>
+      
+      <Global
+        styles={css`
+          :root {
+            --bottom-nav-padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) - 10px), 0px);
+            --bottom-nav-height: calc(50px + var(--bottom-nav-padding-bottom));
+          }
+        `}
+      />
+      
+      <Frame
+        className={clsx('rrainuiBottomNavBar')}
+      >
         
-        <Global
-          styles={css`
-            :root {
-              --bottom-nav-padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) - 10px), 0px);
-              --bottom-nav-height: calc(50px + var(--bottom-nav-padding-bottom));
-            }
-          `}
-        />
+        <NavLink to={RootRoute.profile[full]()}>
+          <Button css={NavButtonStyle.nav}>
+            <ProfileGradIc />
+            <div>{titleText.profile}</div>
+          </Button>
+        </NavLink>
         
-        <Frame
-          className={clsx('rrainuiBottomNavBar')}
-        >
-          
-          <NavLink to={RootRoute.profile[full]()}>
-            <Button css={NavButtonStyle.nav}>
-              <ProfileGradIc />
-              <div>{titleText.profile}</div>
-            </Button>
-          </NavLink>
-          
-          <NavLink to={RootRoute.chat[full]()}>
-            <Button css={NavButtonStyle.nav}>
-              <ChatRoundGradIc />
-              <div>{titleText.chat}</div>
-            </Button>
-          </NavLink>
-          
-          <NavLink to={RootRoute.findPairs[full]()}>
-            <Button css={NavButtonStyle.nav}>
-              <CardsHeartGradIc />
-              <div>{titleText.findCouple}</div>
-            </Button>
-          </NavLink>
-          
-          <NavLink to={RootRoute.bowAndArrows[full]()}>
-            <Button css={NavButtonStyle.nav}>
-              <BowArrowGradIc />
-              <div>{titleText.bowAndArrows}</div>
-            </Button>
-          </NavLink>
-          
-          <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-            {overlay => (
-              <>
-                <Button css={NavButtonStyle.nav}
-                  onClick={overlay.open}
-                >
-                  <Gear2Ic />
-                  <div>{titleText.settings}</div>
-                </Button>
-                
-                <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
-              </>
-            )}
-          </UseOverlayUrl>
-          
-        </Frame>
+        <NavLink to={RootRoute.chat[full]()}>
+          <Button css={NavButtonStyle.nav}>
+            <ChatRoundGradIc />
+            <div>{titleText.chat}</div>
+          </Button>
+        </NavLink>
         
-      </>
-    )
-  }
-)
+        <NavLink to={RootRoute.findPairs[full]()}>
+          <Button css={NavButtonStyle.nav}>
+            <CardsHeartGradIc />
+            <div>{titleText.findCouple}</div>
+          </Button>
+        </NavLink>
+        
+        <NavLink to={RootRoute.bowAndArrows[full]()}>
+          <Button css={NavButtonStyle.nav}>
+            <BowArrowGradIc />
+            <div>{titleText.bowAndArrows}</div>
+          </Button>
+        </NavLink>
+        
+        <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+          {overlay => (
+            <>
+              <Button css={NavButtonStyle.nav}
+                onClick={overlay.open}
+              >
+                <Gear2Ic />
+                <div>{titleText.settings}</div>
+              </Button>
+              
+              <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
+            </>
+          )}
+        </UseOverlayUrl>
+        
+      </Frame>
+      
+    </>
+  )
+})
 export default NavBar
 
 

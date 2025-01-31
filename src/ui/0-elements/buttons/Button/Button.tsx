@@ -30,7 +30,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
   const elemRef = useRef<HTMLButtonElement>(null)
   useImperativeHandle(forwardedRef, () => elemRef.current!, [])
   
-  // TODO костыль для клика.
+  // TODO Pointer // TODO костыль для клика.
   //  Без костыля если при закрывании шторки на андроиде жать кнопку, то клик не работает, хотя всё ок.
   const [getWasClicked, setWasClicked] = useRefGetSet(false)
   
@@ -45,16 +45,16 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           className={clsx(className, ButtonS6.W.els.button.n)}
           type="button"
           {...combineProps(restProps, rippleProps.target)}
-          // TODO костыль для клика
+          // TODO костыль для клика // TODO Pointer
           onPointerUp={ev => {
             rippleProps.target.onPointerUp(ev)
             restProps.onPointerUp?.(ev)
             setWasClicked(false)
             setTimeout(() => {
               if (!getWasClicked()) elemRef.current?.click()
-            }, 50)
+            }, 1)
           }}
-          // TODO костыль для клика
+          // TODO костыль для клика // TODO Pointer
           onClick={ev => {
             setWasClicked(true)
             restProps.onClick?.(ev)
@@ -68,8 +68,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           >
             <Ripple
               {...rippleProps.ripple}
-              // todo more imperative ripple and ability to cancel
-              {...props.disabled && { isShow: false }}
+              {...props.disabled && { cancel: true }}
             />
           </div>
         

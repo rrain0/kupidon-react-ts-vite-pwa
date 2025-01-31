@@ -25,7 +25,7 @@ import row = EmotionCommon.row
 import Spinner8LinesIc = SvgIconsPack.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import ClearTrashIc = SvgIconsPack.ClearTrashIc
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
@@ -68,7 +68,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
       <UseBottomSheetState isOpen={isOpen} onClose={close}>
         {props => (
           <ModalPortal>
-            <BottomSheetDialogBasic
+            <BottomSheetBasic
               {...props.sheetProps}
               headerTitle={actionText.clearAppData + '?'}
             >
@@ -101,7 +101,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
                 
                 </div>
               </div>
-            </BottomSheetDialogBasic>
+            </BottomSheetBasic>
           </ModalPortal>
         )}
       </UseBottomSheetState>

@@ -474,6 +474,7 @@ const ProfilePage = React.memo(() => {
                 //closeable={!(canSubmit || formProps.hasChanges)}
               >
                 {props => <ModalPortal><BottomSheetBasic
+                  bgDim={false}
                   {...props.sheetProps}
                 >
                 

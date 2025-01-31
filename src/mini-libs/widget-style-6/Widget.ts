@@ -77,6 +77,8 @@ export function createWidgetState(...transformerList: WidgetTransformerList) {
 
 
 
+
+
 // TODO Style - Classes - задуматься как выделять классы
 // TODO Style - <div w={Widget} wst={WidgetStyle} />
 

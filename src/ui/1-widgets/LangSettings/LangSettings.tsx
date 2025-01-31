@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -30,7 +30,7 @@ React.memo(
   return <>
     <UseBottomSheetState isOpen={props.open} onClose={()=>props.setOpen(false)}>
       { ({ sheetProps })=>
-      <BottomSheetDialogBasic
+      <BottomSheetBasic
         {...sheetProps}
         closeable={props.closeable}
         headerTitle={<div css={css`height: 1em;`}/>}
@@ -44,7 +44,7 @@ React.memo(
           <LangOptions />
           
         </div>
-      </BottomSheetDialogBasic>}
+      </BottomSheetBasic>}
     </UseBottomSheetState>
   </>
 })

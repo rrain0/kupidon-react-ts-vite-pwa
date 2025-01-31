@@ -56,7 +56,7 @@ export namespace SelectItemS {
       .add('frame', '>', 'indicatorFrame', indicatorFrame)
       .add('indicatorFrame', '>', 'indicator', indicator)
       
-      .add('frame', '> * >', 'editBtn', editBtn)
+      .add('frame', '>', 'editBtn', editBtn)
       .add('editBtn', '>', 'editBtnRipple', editBtnRipple)
       .add('editBtn', '>', 'editIcon', editIcon)
       

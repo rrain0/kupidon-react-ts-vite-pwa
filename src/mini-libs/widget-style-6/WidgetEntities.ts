@@ -75,6 +75,10 @@ export namespace WidgetProps {
     if (value === null) return 'none'
     return value
   }
+  export const transformNullToAuto = (value: StyleValue) => {
+    if (value === null) return 'auto'
+    return value
+  }
   export const transformNullToTransparent = (value: StyleValue) => {
     if (value === null) return 'transparent'
     return value
@@ -90,6 +94,7 @@ export namespace WidgetProps {
   export const right = WidgetProp.ofName('right', transformLenValue)
   export const bottom = WidgetProp.ofName('bottom', transformLenValue)
   export const left = WidgetProp.ofName('left', transformLenValue)
+  export const zIndex = WidgetProp.ofName('z-index', transformNullToAuto)
   
   export const width = WidgetProp.ofName('width', transformLenValue)
   export const height = WidgetProp.ofName('height', transformLenValue)
@@ -126,12 +131,19 @@ export namespace WidgetProps {
   
   export const outline = WidgetProp.ofName('outline', transformNullToNone)
   export const boxShadow = WidgetProp.ofName('box-shadow', transformNullToNone)
+  
+  export const gridTemplateRows = WidgetProp.ofName('grid-template-rows')
+  export const gridTemplateColumns = WidgetProp.ofName('grid-template-columns')
+  export const gridTemplateAreas = WidgetProp.ofName('grid-template-areas')
+  export const gridAutoRows = WidgetProp.ofName('grid-auto-rows')
+  export const gridAutoColumns = WidgetProp.ofName('grid-auto-columns')
+  export const gridAutoFlow = WidgetProp.ofName('grid-auto-flow')
+  export const gridArea = WidgetProp.ofName('grid-area')
 }
 
 export namespace WidgetComplexTransformers {
   
   // just 'radio' instead of 'typeRadio'
-  import isArray = TypeU.isArray
   export const radio = WidgetMultiStateTransformer.of({
     title: 'radio -> [type=radio]',
     transform: () => [

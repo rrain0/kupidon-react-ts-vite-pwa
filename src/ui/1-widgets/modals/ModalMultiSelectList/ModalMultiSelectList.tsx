@@ -22,7 +22,7 @@ import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
@@ -108,7 +108,7 @@ const ModalMultiSelectList = ReactU.memo(
           <>
             
             <ModalPortal>
-              <BottomSheetDialogBasic
+              <BottomSheetBasic
                 {...sheetProps.sheetProps}
                 headerHandle={(
                   <SelectItemIndicator
@@ -155,7 +155,7 @@ const ModalMultiSelectList = ReactU.memo(
                 
                 <div style={{ height: 24 }} />
               
-              </BottomSheetDialogBasic>
+              </BottomSheetBasic>
             </ModalPortal>
             
             

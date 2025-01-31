@@ -12,13 +12,26 @@ type UseRippleProps = Puro<{
 
 const UseRipple = React.memo((props: UseRippleProps) => {
   
-  
+  // TODO Pointer
+  // TODO 'show' | 'hide' | 'resume' | 'stop'
+  // TODO попробовать зажать одним пальцем, потом другим, по идее на другой палец должен быть второй риппл
+  //  Посмотерть когда событие клика при таком раскладе работает
+  // TODO если поинтер вышел за пределы - 'hide', еесли вошёл обратно - 'resume'
+  // 'show' сбрасывает параметры для нвого риппла
+  // 'hide' прячет текущий риппл, делая прозрачным
+  // 'resume' возобновляет спрятанный риппл
+  // 'stop' немедленно безвозвратно завершает текущий риппл
+  // 'stop' -> 'show'
+  // 'show' | 'resume' -> 'hide'
+  // 'hide' -> 'resume'
+  // any -> 'stop'
   const [isShow, show, hide] = useBool(false)
   const [clientXY, setClientXY] = useState({ x: 0, y: 0 })
   
   const target = useMemo<RippleTargetProps>(() => {
     return {
       onPointerDown: (ev: React.PointerEvent) => {
+        // TODO
         ev.currentTarget.setPointerCapture(ev.pointerId)
         setClientXY({ x: ev.clientX, y: ev.clientY })
         show()

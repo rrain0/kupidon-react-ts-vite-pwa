@@ -3,7 +3,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import RangePicker from 'src/ui/1-widgets/RangePicker/RangePicker.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { RangeU } from 'src/util/common/RangeU'
@@ -48,7 +48,7 @@ const ModalRangePicker = React.memo(
       <UseBottomSheetState isOpen={isOpen} onClose={close}>
         {sheetProps => (
           <ModalPortal>
-            <BottomSheetDialogBasic
+            <BottomSheetBasic
               {...sheetProps.sheetProps}
               headerTitle={title}
             >
@@ -67,7 +67,7 @@ const ModalRangePicker = React.memo(
                 
               </Content>
               
-            </BottomSheetDialogBasic>
+            </BottomSheetBasic>
           </ModalPortal>
         )}
       </UseBottomSheetState>

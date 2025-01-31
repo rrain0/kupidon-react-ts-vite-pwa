@@ -1,18 +1,26 @@
-import BottomSheet from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
+import { TypeU } from '@util/common/TypeU.ts'
 import { css } from '@emotion/react'
 import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
-import {
-  BottomSheetDialogBasicProps
-} from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheet, {
+  BottomSheetOptionsProps,
+} from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
 import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
+import Puro = TypeU.Puro
 
 
 
+export type BottomSheetBasicProps = BottomSheetOptionsProps & Puro<{
+  headerHandle: React.ReactNode
+  headerTitle: React.ReactNode
+  children: React.ReactNode
+}>
 
-const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
-  const { headerTitle, children, ...restProps } = props
+
+
+const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
+  const { headerHandle, headerTitle, children, ...restProps } = props
   const { sheetState } = props
   
   
@@ -35,27 +43,35 @@ const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
       {({ sheetDrag }) => (
         <>
           {/*
-           // Header Component
-           // Must be without margins!!!
-           */}
+           Header Component
+           Must be without margins!!!
+          */}
           <div
+            data-display-name="Bottom Sheet Basic - Header"
             css={t => css`
               ${BottomSheetBasicParts.headerStyle(t)};
-              ${sheetState === 'dragging' && css`cursor: grabbing;`}
+              ${sheetState === 'dragging' && 'cursor: grabbing;'}
             `}
             ref={bottomSheetHeaderRef}
             {...sheetDrag()}
           >
             
-            {/* Header handle */ }
-            <div
-              css={t => css`
-                ${BottomSheetBasicParts.headerHandleStyle(t)};
-                ${sheetState === 'dragging' && `background: ${t.page.ct2};`}
-              `}
-            />
+            {/* Header - Handle */}
+            {headerHandle ?? (
+              <div
+                data-display-name="Bottom Sheet Basic - Header Handle"
+                css={t => css`
+                  ${BottomSheetBasicParts.headerHandleStyle(t)};
+                  ${sheetState === 'dragging' && `background: ${t.page.ct2};`}
+                `}
+              />
+            )}
             
-            <div css={BottomSheetBasicParts.headerTextStyle}>
+            {/* Header - Title */}
+            <div
+              data-display-name="Bottom Sheet Basic - Header Title"
+              css={BottomSheetBasicParts.headerTextStyle}
+            >
               {headerTitle}
             </div>
           
@@ -65,17 +81,22 @@ const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
            // Body Component
            // Must be without margins & paddings!!!
            */}
-          <div css={BottomSheetBasicParts.bodyStyle}>
+          <div
+            data-display-name="Bottom Sheet Basic - Body"
+            css={BottomSheetBasicParts.bodyStyle}
+          >
             <OverflowWrapper css={OverflowWrapperStyle.defolt}
               showVertical={
                 ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)
               }
             >
               {/*
-               // scrollable content
-               // Must be without margins!!!
-               */}
-              <div css={BottomSheetBasicParts.scrollableContentStyle}
+               Scrollable content
+               Must be without margins!!!
+              */}
+              <div
+                data-display-name="Bottom Sheet Basic - Scrollable Content"
+                css={BottomSheetBasicParts.scrollableContentStyle}
                 ref={bottomSheetContentRef}
               >
                 { children }
@@ -87,7 +108,8 @@ const BottomSheetBasic = React.memo((props: BottomSheetDialogBasicProps) => {
     
     </BottomSheet>
   )
-})
+}
+)
 export default BottomSheetBasic
 
 

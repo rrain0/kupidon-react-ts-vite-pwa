@@ -1,5 +1,4 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
-import { StringU } from '@util/common/StringU.ts'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'

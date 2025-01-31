@@ -6,7 +6,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
@@ -79,7 +79,7 @@ const ModalTileSelect = ReactU.memo(
           <>
             
             <ModalPortal>
-              <BottomSheetDialogBasic
+              <BottomSheetBasic
                 {...sheetProps.sheetProps}
                 headerTitle={title}
               >
@@ -112,7 +112,7 @@ const ModalTileSelect = ReactU.memo(
                 
                 <div style={{ height: 24 }} />
               
-              </BottomSheetDialogBasic>
+              </BottomSheetBasic>
             </ModalPortal>
           
           </>

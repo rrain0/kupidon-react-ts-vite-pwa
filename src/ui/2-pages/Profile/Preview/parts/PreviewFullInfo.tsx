@@ -10,9 +10,9 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import BottomSheet from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
+import BottomSheet from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
@@ -135,7 +135,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
       {props => (
         <BottomSheetFrame data-display-name="PreviewFullInfo">
           <BottomSheet
-            css={bottomSheetS}
+            bgDim={false}
             {...props.sheetProps}
             bottomSheetFrameRef={bottomSheetFrameRef}
             bottomSheetRef={bottomSheetRef}

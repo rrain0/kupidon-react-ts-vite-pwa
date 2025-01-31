@@ -1,8 +1,7 @@
 import React, { CSSProperties, useEffect } from 'react'
-import { ObjectU } from 'src/util/common/ObjectU'
 import { TypeU } from 'src/util/common/TypeU.ts'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Puro = TypeU.Puro
-import ObjectMap = ObjectU.ObjectMap
 
 
 
@@ -10,6 +9,7 @@ import ObjectMap = ObjectU.ObjectMap
 export namespace ReactU {
   
   
+  import falsy = TypeU.falsy
   export type Children = Puro<{ children: React.ReactNode }>
   export type ClassStyle = Puro<{
     className: string
@@ -24,9 +24,7 @@ export namespace ReactU {
   
   
   
-  const stopReactEventPropagation = (ev: React.BaseSyntheticEvent) => {
-    ev.stopPropagation()
-  }
+  // Consume Pointer & Wheel events
   export const stopPointerAndMouseEvents = (stop = true) => {
     if (!stop) return undefined
     return {
@@ -61,29 +59,51 @@ export namespace ReactU {
   }
   
   
+  
+  export const useOnThisClick = <T extends Element>() => {
+    const [getCanCloseByClickEv, setCanCloseByClickEv] = useRefGetSet(0)
+    
+    return (onClick?: React.MouseEventHandler<T>) => ({
+      onPointerDown: (ev: React.PointerEvent) => {
+        if (ev.currentTarget === ev.target) setCanCloseByClickEv(1)
+      },
+      onPointerUp: (ev: React.PointerEvent) => {
+        if (ev.currentTarget === ev.target && getCanCloseByClickEv() === 1) {
+          setCanCloseByClickEv(2)
+        }
+      },
+      onClick: (ev: React.MouseEvent<T>) => {
+        if (getCanCloseByClickEv() === 2) onClick?.(ev)
+        setCanCloseByClickEv(0)
+      },
+    })
+  }
+  
+  
+  
   // todo hack fix
-  // React.memo wrapper if component's generics are not consumed properly by ts
+  // React.memo wrapper if component's generics are not consumed properly by TS
   export const memo = <C>(Component: C): C => {
     return React.memo(Component as any) as C
   }
   
   
   
-  export const combineEvHandlers =
-  <E extends React.SyntheticEvent<any>>
-  (...handlers: Array<React.EventHandler<E> | undefined>): React.EventHandler<E> => {
+  export const combineEvHandlers = <E extends React.SyntheticEvent<any>>(
+    ...handlers: Array<React.EventHandler<E> | undefined>
+  ): React.EventHandler<E> => {
     return ev => handlers.forEach(h => h?.(ev))
   }
   
   
   
-  export const combineProps = <T extends object>(
-    ...propsList: T[]
-  ): T => {
-    const combinedProps = { ...propsList[0] }
+  export const combineProps = <T extends (object | falsy)[]>(
+    ...propsList: T
+  ): T[number] & object => {
+    const combinedProps = { ...propsList?.[0] }
     for (let i = 1; i < propsList.length; i++) {
       const props = propsList[i]
-      for (const [prop, value] of Object.entries(props)) {
+      if (props) for (const [prop, value] of Object.entries(props)) {
         if (Object.hasOwn(combinedProps, prop) && funProps.has(prop)) {
           const prevFun = combinedProps[prop]
           combinedProps[prop] = (...args) => {
@@ -154,15 +174,15 @@ export namespace ReactU {
     return arr1
   }
   
-  
-  
-  
 }
 
 
 
 
 
+const stopReactEventPropagation = (ev: React.BaseSyntheticEvent) => {
+  ev.stopPropagation()
+}
 
 
 const funProps = new Set([

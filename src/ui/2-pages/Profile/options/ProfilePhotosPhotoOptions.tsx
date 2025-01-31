@@ -8,7 +8,7 @@ import React from 'react'
 import Dropzone from 'react-dropzone'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
@@ -55,7 +55,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
     <UseBottomSheetState isOpen={isOpen} onClose={close}>
       { sheet => (
         <ModalPortal>
-          <BottomSheetDialogBasic {...sheet.sheetProps}>
+          <BottomSheetBasic {...sheet.sheetProps}>
             <OptionsContent>
               
               
@@ -151,7 +151,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
             
             
             </OptionsContent>
-          </BottomSheetDialogBasic>
+          </BottomSheetBasic>
         </ModalPortal>
       )}
     </UseBottomSheetState>

@@ -7,7 +7,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { RangeU } from 'src/util/common/RangeU'
@@ -66,7 +66,7 @@ const ModalSlider = React.memo(
       <UseBottomSheetState isOpen={isOpen} onClose={onClose}>
         {sheetProps => (
           <ModalPortal>
-            <BottomSheetDialogBasic
+            <BottomSheetBasic
               {...sheetProps.sheetProps}
               headerTitle={title}
             >
@@ -95,7 +95,7 @@ const ModalSlider = React.memo(
                 
               </Content>
               
-            </BottomSheetDialogBasic>
+            </BottomSheetBasic>
           </ModalPortal>
         )}
       </UseBottomSheetState>

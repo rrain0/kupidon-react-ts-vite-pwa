@@ -3,7 +3,11 @@ import {
   WidgetPropValue
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
-  WidgetComplexTransformers, WidgetAttrs, WidgetProps, WidgetPseudoElements, WidgetPseudos,
+  WidgetComplexTransformers,
+  WidgetAttrs,
+  WidgetProps,
+  WidgetPseudoElements,
+  WidgetPseudos,
 } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 
 
@@ -59,6 +63,7 @@ export const CommonProps = (() => {
     right: WidgetProps.right,
     bottom: WidgetProps.bottom,
     left: WidgetProps.left,
+    zIndex: WidgetProps.zIndex,
     
     pos: WidgetProps.position,
     abs: WidgetComplexTransformers.abs,
@@ -75,6 +80,7 @@ export const CommonProps = (() => {
     al: WidgetProps.left,
     ah: WidgetComplexTransformers.absH,
     av: WidgetComplexTransformers.absV,
+    z: WidgetProps.zIndex,
     
     color: WidgetProps.color,
     
@@ -101,6 +107,22 @@ export const CommonProps = (() => {
     bdColor: WidgetProps.borderColor,
     radius: WidgetProps.borderRadius,
     r: WidgetProps.borderRadius,
+    
+    gridTemplateRows: WidgetProps.gridTemplateRows,
+    gridTemplateColumns: WidgetProps.gridTemplateColumns,
+    gridTemplateAreas: WidgetProps.gridTemplateAreas,
+    gridAutoRows: WidgetProps.gridAutoRows,
+    gridAutoColumns: WidgetProps.gridAutoColumns,
+    gridAutoFlow: WidgetProps.gridAutoFlow,
+    gridArea: WidgetProps.gridArea,
+    
+    rows: WidgetProps.gridTemplateRows,
+    cols: WidgetProps.gridTemplateColumns,
+    areas: WidgetProps.gridTemplateAreas,
+    autoRows: WidgetProps.gridAutoRows,
+    autoCols: WidgetProps.gridAutoColumns,
+    autoFlow: WidgetProps.gridAutoFlow,
+    area: WidgetProps.gridArea,
   }
   const sortedProps = Object.entries(props)
     .sort((([propA], [propB]) => propB.length - propA.length))

@@ -11,7 +11,7 @@ import { RecoilRoot } from 'recoil'
 import RecoilNexus from 'recoil-nexus'
 
 
-// TODO костыль
+// TODO костыль // TODO Pointer
 // На ios шторка настроек почему-то не может драгаться сразу, поэтому это здесь
 window.addEventListener('pointerdown', () => {})
 /*

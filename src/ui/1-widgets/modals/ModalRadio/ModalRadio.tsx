@@ -4,7 +4,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import BottomSheetDialogBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetDialogBasic.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
@@ -36,7 +36,7 @@ const ModalRadio = ReactU.memo(
     return <UseBottomSheetState isOpen={!!isOpen} onClose={close}>
       {sheetProps =>
         <ModalPortal>
-          <BottomSheetDialogBasic
+          <BottomSheetBasic
             {...sheetProps.sheetProps}
             headerTitle={title}
           >
@@ -74,7 +74,7 @@ const ModalRadio = ReactU.memo(
               
             
             </RadioInputGroup>
-          </BottomSheetDialogBasic>
+          </BottomSheetBasic>
         </ModalPortal>
       }
     </UseBottomSheetState>

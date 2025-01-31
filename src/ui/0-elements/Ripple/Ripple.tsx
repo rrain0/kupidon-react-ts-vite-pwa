@@ -23,91 +23,89 @@ export type RippleProps = ClassStyleProps & {
 }
 
 
-const Ripple = React.memo(
-  (props: RippleProps) => {
-    
-    const { isShow, cancel, clientXY, className, ...restProps } = props
-    
-    const [frameRef, getFrame] = useElemRef()
-    const [rippleRef, getRipple] = useElemRef()
-    
-    const rippleProps = useMemo(() => {
-      const frame = getFrame()
-      const ripple = getRipple()
-      if (frame && ripple) {
-        const fProps = getViewProps(frame)
-        const rProps = getViewProps(ripple)
-        return getRippleProps(
-          fProps.xy,
-          fProps.wh,
-          clientXY,
-          rProps.getCssPropValue(RippleS6.W.els.ripple.ps!.mode.n) as RippleMode,
-          500
-        )
+const Ripple = React.memo((props: RippleProps) => {
+  const { isShow, cancel, clientXY, className, ...restProps } = props
+  
+  const [frameRef, getFrame] = useElemRef()
+  const [rippleRef, getRipple] = useElemRef()
+  
+  const rippleProps = useMemo(() => {
+    const frame = getFrame()
+    const ripple = getRipple()
+    if (frame && ripple) {
+      const fProps = getViewProps(frame)
+      const rProps = getViewProps(ripple)
+      return getRippleProps(
+        fProps.xy,
+        fProps.wh,
+        clientXY,
+        rProps.getCssPropValue(RippleS6.W.els.ripple.ps!.mode.n) as RippleMode,
+        500
+      )
+    }
+    return {
+      dimens: { left: 0, top: 0, width: 0, height: 0 },
+      rippleDuration: 0,
+      dissolveDuration: 0,
+    }
+  }, [isShow])
+  
+  const [state, setState] = useState('off' as 'off' | 'prepareShow' | 'show' | 'hide')
+  useEffect(() => {
+    if (cancel) setState('off')
+    else if (isShow) setState('prepareShow')
+    else if (!isShow) setState('hide')
+  }, [isShow, cancel])
+  
+  useEffect(() => {
+    const r = rippleRef.current
+    if (r) {
+      if (state === 'off') {
+        r.style.transition = 'none'
+        r.style.opacity = '0'
+        r.style.scale = '0'
       }
-      return {
-        dimens: { left: 0, top: 0, width: 0, height: 0 },
-        rippleDuration: 0,
-        dissolveDuration: 0,
+      else if (state === 'prepareShow') {
+        r.style.transition = 'none'
+        r.style.opacity = '0.5'
+        r.style.scale = '0'
+        // ensure that style changes were applied
+        requestAnimationFrame(() => setState(prev => prev === 'prepareShow' ? 'show' : prev))
       }
-    }, [isShow])
-    
-    const [state, setState] = useState('off' as 'off' | 'prepareShow' | 'show' | 'hide')
-    useEffect(() => {
-      if (cancel) setState('off')
-      else if (isShow) setState('prepareShow')
-      else if (!isShow) setState('hide')
-    }, [isShow, cancel])
-    
-    useEffect(() => {
-      const r = rippleRef.current
-      if (r) {
-        if (state === 'off') {
-          r.style.transition = 'none'
-          r.style.opacity = '0'
-          r.style.scale = '0'
-        }
-        else if (state === 'prepareShow') {
-          r.style.transition = 'none'
-          r.style.opacity = '0.5'
-          r.style.scale = '0'
-          // ensure that style changes were applied
-          requestAnimationFrame(() => setState(prev => prev === 'prepareShow' ? 'show' : prev))
-        }
-        else if (state === 'show') {
-          r.style.transition =
-            `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
-            `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
-          r.style.opacity = '1'
-          r.style.scale = '1'
-        }
-        else if (state === 'hide') {
-          r.style.transition =
-            `opacity ${rippleProps.dissolveDuration}ms linear` +
-            `,scale ${rippleProps.dissolveDuration}ms linear`
-          r.style.opacity = '0'
-        }
+      else if (state === 'show') {
+        r.style.transition =
+          `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
+          `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
+        r.style.opacity = '1'
+        r.style.scale = '1'
       }
-    }, [state])
-    
-    
-    
-    return (
+      else if (state === 'hide') {
+        r.style.transition =
+          `opacity ${rippleProps.dissolveDuration}ms linear` +
+          `,scale ${rippleProps.dissolveDuration}ms linear`
+        r.style.opacity = '0'
+      }
+    }
+  }, [state])
+  
+  
+  
+  return (
+    <div
+      data-display-name="Ripple"
+      //displayName={'RippleFrame'}
+      ref={frameRef}
+      className={clsx(RippleS6.W.els.frame.n, className)}
+      {...restProps}
+    >
       <div
-        data-display-name="Ripple"
-        //displayName={'RippleFrame'}
-        ref={frameRef}
-        className={clsx(RippleS6.W.els.frame.n, className)}
-        {...restProps}
-      >
-        <div
-          ref={rippleRef}
-          className={RippleS6.W.els.ripple.n}
-          style={rippleProps.dimens}
-        />
-      </div>
-    )
-  }
+        ref={rippleRef}
+        className={RippleS6.W.els.ripple.n}
+        style={rippleProps.dimens}
+      />
+    </div>
+  )
+}
 )
 Ripple.displayName = 'Ripple'
 export default Ripple
