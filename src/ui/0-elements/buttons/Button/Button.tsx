@@ -1,4 +1,5 @@
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
+import { PointerU } from '@util/react/PointerU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
@@ -9,7 +10,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import trueOrUndef = TypeU.trueOrUndef
 import combineProps = ReactU.combineProps
-import useClickFix = ReactU.useClickFix
+import useClickFix = PointerU.useClickFix
 
 
 

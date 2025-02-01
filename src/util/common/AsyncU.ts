@@ -11,7 +11,7 @@ export namespace AsyncU {
     resolve => setTimeout(resolve, delay, value)
   )
   export const awaitCallback = async <T>(
-    delay:number, generator: Generator<T>
+    delay: number, generator: Generator<T>
   ) => new Promise<T>(
     resolve => setTimeout(() => resolve(generator()), delay)
   )

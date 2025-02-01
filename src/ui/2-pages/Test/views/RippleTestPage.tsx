@@ -1,13 +1,10 @@
 import styled from '@emotion/styled'
-import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
 import { Pages } from 'src/ui/components/Pages/Pages'
-import combineProps = ReactU.combineProps
-import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
 
 
 

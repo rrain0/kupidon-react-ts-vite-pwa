@@ -1,3 +1,4 @@
+import { PointerU } from '@util/react/PointerU.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle } from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
@@ -17,7 +18,7 @@ import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import trueOrUndef = TypeU.trueOrUndef
 import combineProps = ReactU.combineProps
-import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
+import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 
 
 

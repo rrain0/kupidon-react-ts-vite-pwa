@@ -19,7 +19,7 @@ import {
   imPlaceholderBoxS,
   imPlaceholderIcS,
 } from 'src/ui/0-elements/im/im'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/ui/2-pages/Profile/options/ProfilePhotosPhotoOptions.tsx'

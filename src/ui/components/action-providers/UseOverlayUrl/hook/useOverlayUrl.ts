@@ -1,5 +1,5 @@
-import { ReactU } from 'src/util/react/ReactU'
-import { useBool } from 'src/util/react-state/useBool.ts'
+import { ReactU } from '@util/react/ReactU.ts'
+import { useBool } from '@util/react-state/useBool.ts'
 import { useCallback, useEffect, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'

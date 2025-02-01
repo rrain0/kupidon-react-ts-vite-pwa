@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import ModalSlider from 'src/ui/1-widgets/modals/ModalSlider/ModalSlider'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'

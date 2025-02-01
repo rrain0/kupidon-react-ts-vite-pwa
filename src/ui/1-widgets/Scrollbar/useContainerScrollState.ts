@@ -68,7 +68,7 @@ export const useContainerScrollState =
           scrollTopMax: containerProps.scrollTopMax,
           scrollHeight: containerProps.scrollHeight,
         }
-        if (content){
+        if (content) {
           const contentProps = new ViewProps(content)
           // todo hack fix
           // sometimes these values from container are wrong, so better get them from content

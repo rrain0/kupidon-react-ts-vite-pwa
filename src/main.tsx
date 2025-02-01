@@ -7,29 +7,22 @@ import 'react-toastify/dist/ReactToastify.css'
 import 'animate.css'
 import App from 'src/ui/App/App'
 import { RecoilRoot } from 'recoil'
-// access recoil state from a not React component
+// access recoil state outside a React component
 import RecoilNexus from 'recoil-nexus'
 
 
-// TODO костыль // TODO Pointer
-// На ios шторка настроек почему-то не может драгаться сразу, поэтому это здесь
+// TODO костыль // TODO Pointer // todo hack fix
+//  На ios шторка настроек почему-то не может драгаться сразу, поэтому это здесь
 window.addEventListener('pointerdown', () => {})
-/*
-window.addEventListener(
-  'pointerdown',
-  function(ev) {
-    (ev.target as HTMLElement).style.background = '#ff000055'
-  },
-  { capture: true },
-)
-window.addEventListener(
-  'pointerup',
-  function(ev) {
-    (ev.target as HTMLElement).style.background = ''
-  },
-  { capture: true },
-)
-*/
+
+
+// Для тестов
+/* window.addEventListener('pointerdown', function(ev) {
+  (ev.target as HTMLElement).style.background = '#ff000055'
+}, { capture: true })
+window.addEventListener('pointerup', function(ev) {
+  (ev.target as HTMLElement).style.background = ''
+}, { capture: true }) */
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

@@ -4,13 +4,13 @@ import React from 'react'
 
 
 
-
-const PushNotifications =
-React.memo(
-()=>{
+// TODO PushNotifications
+const PushNotifications = React.memo(() => {
   
   
   
-  return <></>
+  return (
+    <></>
+  )
 })
 export default PushNotifications

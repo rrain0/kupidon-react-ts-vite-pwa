@@ -1,6 +1,7 @@
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { PointerU } from '@util/react/PointerU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { BottomSheetParts } from 'src/ui/1-widgets/BottomSheet/BottomSheetParts.ts'
 import { useUpNodesScrollLock } from '@util/view/useUpNodesScrollLock.ts'
@@ -11,7 +12,7 @@ import {
 import React, {
   useLayoutEffect,
 } from 'react'
-import stopPointerAndMouseEvents = ReactU.stopPointerAndMouseEvents
+import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 import combineProps = ReactU.combineProps
 import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro

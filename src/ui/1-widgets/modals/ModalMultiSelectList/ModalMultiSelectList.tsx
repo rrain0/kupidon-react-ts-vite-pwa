@@ -17,7 +17,7 @@ import {
   GetIndicatorsData,
 } from 'src/ui/1-widgets/modals/ModalMultiSelectList/modalMultiSelectUtils'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
-import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
+import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
