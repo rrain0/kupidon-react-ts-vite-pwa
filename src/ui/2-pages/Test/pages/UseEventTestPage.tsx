@@ -12,7 +12,7 @@ import center = EmotionCommon.center
 
 
 
-const UseEventTest = () => {
+const UseEventTestPage = () => {
   
   
   
@@ -28,7 +28,7 @@ const UseEventTest = () => {
     </Pages.SimplePage>
   )
 }
-export default UseEventTest
+export default UseEventTestPage
 
 
 

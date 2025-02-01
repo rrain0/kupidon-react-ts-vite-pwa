@@ -14,53 +14,13 @@ import rowWrap = EmotionCommon.rowWrap
 
 
 
-const ButtonTest = React.memo(() => {
+const ButtonsTestPage = React.memo(() => {
   
   return (
     <>
       
       <Pages.SimplePage>
         <Pages.ContentFill>
-          
-          
-          
-          
-          <button
-            css={css`width: 250px; height: 100px;`}
-            onPointerDown={ev => {
-              console.log('onPointerDown', ev.pointerId)
-            }}
-            
-            onPointerEnter={ev => {
-              console.log('onPointerEnter')
-            }}
-            onPointerLeave={ev => {
-              console.log('onPointerLeave')
-            }}
-            onPointerOut={ev => {
-              console.log('onPointerOut')
-            }}
-            onPointerOver={ev => {
-              console.log('onPointerOver')
-            }}
-            onPointerMove={ev => {
-              console.log('onPointerMove')
-            }}
-            
-            onPointerCancel={ev => {
-              console.log('onPointerCancel')
-            }}
-            onPointerUp={ev => {
-              console.log('onPointerUp')
-            }}
-            
-            onClick={ev => {
-              console.log('onClick')
-            }}
-          >
-            TEEEST
-          </button>
-          
           
           <div>Buttons showcase</div>
           
@@ -93,7 +53,7 @@ const ButtonTest = React.memo(() => {
     </>
   )
 })
-export default ButtonTest
+export default ButtonsTestPage
 
 const BlocksContainer = styled.div`
   ${rowWrap};

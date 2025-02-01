@@ -25,7 +25,7 @@ import Setter = TypeU.Callback1
 
 
 
-const BottomSheetTest =
+const BottomSheetTestPage =
 React.memo(
 ()=>{
   
@@ -288,7 +288,7 @@ React.memo(
     
   </>
 })
-export default BottomSheetTest
+export default BottomSheetTestPage
 
 
 

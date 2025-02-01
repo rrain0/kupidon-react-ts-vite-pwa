@@ -85,8 +85,14 @@ export namespace AppRoutes {
   
   const test = buildRoute({
     [path]: 'test',
+    
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
+    viewsListItem2: buildPath('views-list-item-2'),
+    rippleTest: buildPath('ripple'),
+    buttonsTest: buildPath('buttons'),
+    sliderTest: buildPath('slider'),
+    
     resizeObserver: buildPath('resize-observer'),
     moveElementToAnotherView: buildPath('move-element-to-another-view'),
     pointer: buildPath('pointer'),
@@ -97,14 +103,9 @@ export namespace AppRoutes {
     elemRef: buildPath('elem-ref'),
     elemStyle: buildPath('elem-style'),
     oldProfileOptions: buildPath('old-profile-options'),
+    shadowDOMTest: buildPath('shadow-dom'),
     
     emulatedScroll: buildPath('emulated-scroll'),
-    
-    viewsListItem1AddItem: buildPath('views-list-item-1-add-item'),
-    viewsListItem2: buildPath('views-list-item-2'),
-    rippleTest: buildPath('ripple'),
-    buttonTest: buildPath('button'),
-    sliderTest: buildPath('slider'),
   })
   
   

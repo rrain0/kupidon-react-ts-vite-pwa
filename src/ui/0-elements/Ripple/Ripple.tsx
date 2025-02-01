@@ -1,7 +1,6 @@
-import { animated, useSpring, config, easings } from '@react-spring/web'
+import { TypeU } from '@util/common/TypeU.ts'
 import clsx from 'clsx'
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { RippleS6 } from './RippleS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
@@ -12,30 +11,41 @@ import ClassStyleProps = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
+import Puro = TypeU.Puro
 
 
 
 
-export type RippleProps = ClassStyleProps & {
-  isShow: boolean
-  cancel?: boolean | undefined
+export type RippleState = 'show' | 'hide' | 'resume' | 'end' | 'stop'
+export type RippleStateInternal = 'reset' | 'show' | 'hide' | 'resume' | 'end' | 'stop'
+
+export type RippleProps = ClassStyleProps & Puro<{
+  state: RippleState
+  disabled: boolean
   clientXY: { x: number, y: number }
-}
+}>
 
 
 const Ripple = React.memo((props: RippleProps) => {
-  const { isShow, cancel, clientXY, className, ...restProps } = props
+  const {
+    state: outState = 'stop', 
+    disabled,
+    clientXY, 
+    className, 
+    ...restProps 
+  } = props
   
   const [frameRef, getFrame] = useElemRef()
   const [rippleRef, getRipple] = useElemRef()
   
-  const rippleProps = useMemo(() => {
+  
+  const rippleProps = (() => {
     const frame = getFrame()
     const ripple = getRipple()
     if (frame && ripple) {
       const fProps = getViewProps(frame)
       const rProps = getViewProps(ripple)
-      return getRippleProps(
+      return calculateRippleProps(
         fProps.xy,
         fProps.wh,
         clientXY,
@@ -48,30 +58,53 @@ const Ripple = React.memo((props: RippleProps) => {
       rippleDuration: 0,
       dissolveDuration: 0,
     }
-  }, [isShow])
+  })()
   
-  const [state, setState] = useState('off' as 'off' | 'prepareShow' | 'show' | 'hide')
+  const [state, setState] = useState('stop' as RippleStateInternal)
   useEffect(() => {
-    if (cancel) setState('off')
-    else if (isShow) setState('prepareShow')
-    else if (!isShow) setState('hide')
-  }, [isShow, cancel])
-  
+    if (disabled) {
+      setState('stop')
+    }
+    else if (outState === 'stop') {
+      setState('stop')
+    }
+    else if (outState === 'show') {
+      setState('reset')
+    }
+    else if (outState === 'hide' && (state === 'show' || state === 'resume')) {
+      setState('hide')
+    }
+    else if (outState === 'end' && (state === 'show' || state === 'resume' || state === 'hide')) {
+      setState('end')
+    }
+    else if (outState === 'resume' && state === 'hide') {
+      setState('resume')
+    }
+  }, [outState, disabled])
+  useEffect(() => {
+    console.log('state', state)
+    // In case if 'hide' is set when there was 'reset' that become 'show'
+    if (outState === 'hide' && state === 'show') setState('hide')
+  }, [state])
+
   useEffect(() => {
     const r = rippleRef.current
     if (r) {
-      if (state === 'off') {
+      // 'stop' немедленно безвозвратно завершает текущий риппл
+      if (state === 'stop') {
         r.style.transition = 'none'
         r.style.opacity = '0'
         r.style.scale = '0'
       }
-      else if (state === 'prepareShow') {
+      // 'reset' сбрпсывает риппл
+      else if (state === 'reset') {
         r.style.transition = 'none'
         r.style.opacity = '0.5'
         r.style.scale = '0'
         // ensure that style changes were applied
-        requestAnimationFrame(() => setState(prev => prev === 'prepareShow' ? 'show' : prev))
+        requestAnimationFrame(() => setState(prev => prev === 'reset' ? 'show' : prev))
       }
+      // 'show' начинает показывать риппл или означает, что он сейчас показывается
       else if (state === 'show') {
         r.style.transition =
           `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
@@ -79,11 +112,19 @@ const Ripple = React.memo((props: RippleProps) => {
         r.style.opacity = '1'
         r.style.scale = '1'
       }
-      else if (state === 'hide') {
+      // 'hide' прячет текущий риппл, делая прозрачным, показ можно возобновить по 'resume'
+      else if (state === 'hide' || state === 'end') {
         r.style.transition =
           `opacity ${rippleProps.dissolveDuration}ms linear` +
           `,scale ${rippleProps.dissolveDuration}ms linear`
         r.style.opacity = '0'
+      }
+      // 'resume' возобновляет показ риппл или означает, что он сейчас показывается
+      else if (state === 'resume') {
+        r.style.transition =
+          `opacity ${rippleProps.rippleDuration}ms linear` +
+          `,scale ${rippleProps.rippleDuration}ms linear`
+        r.style.opacity = '1'
       }
     }
   }, [state])
@@ -105,18 +146,17 @@ const Ripple = React.memo((props: RippleProps) => {
       />
     </div>
   )
-}
-)
+})
 Ripple.displayName = 'Ripple'
 export default Ripple
 
 
 
 
-function getRippleProps(
+function calculateRippleProps(
   frameXY: XY,
   frameWH: WH,
-  clientXY: XY,
+  clientXY: XY | undefined,
   mode: RippleMode,
   duration: number,
 ) {
@@ -128,18 +168,19 @@ function getRippleProps(
   // console.log('duration', duration)
   
   const d = (() => {
-    if (mode === 'pointer') return {
+    if (mode === 'pointer' && clientXY) return {
       toTop: clientXY.y - frameXY.y,
       toLeft: clientXY.x - frameXY.x,
       toBottom: frameWH.h - (clientXY.y - frameXY.y),
       toRight: frameWH.w - (clientXY.x - frameXY.x),
     }
-    if (mode === 'center' || true) return {
+    if (mode === 'center' || !clientXY) return {
       toTop: frameWH.h / 2,
       toLeft: frameWH.w / 2,
       toBottom: frameWH.h / 2,
       toRight: frameWH.w / 2,
     }
+    throw new Error(`Unknown ripple mode: ${mode}. Or wrong mode conditions`)
   })()
   const dxd = {
     toTop: d.toTop * d.toTop,

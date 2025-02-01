@@ -1,7 +1,7 @@
 import { useLayoutEffect } from 'react'
 
 
-const PageLifecycle = () => {
+const PageLifecycleTestPage = () => {
   
   useLayoutEffect(
     () => {
@@ -53,6 +53,6 @@ const PageLifecycle = () => {
     <div>Go to console to see callbacks</div>
   </div>
 }
-export default PageLifecycle
+export default PageLifecycleTestPage
 
 

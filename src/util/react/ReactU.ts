@@ -104,11 +104,16 @@ export namespace ReactU {
     for (let i = 1; i < propsList.length; i++) {
       const props = propsList[i]
       if (props) for (const [prop, value] of Object.entries(props)) {
-        if (Object.hasOwn(combinedProps, prop) && funProps.has(prop)) {
-          const prevFun = combinedProps[prop]
-          combinedProps[prop] = (...args) => {
-            prevFun(...args)
-            value(...args)
+        if (Object.hasOwn(combinedProps, prop)) {
+          if (funProps.has(prop)) {
+            const prevFun = combinedProps[prop]
+            if (!prevFun) combinedProps[prop] = value
+            else if (value) {
+              combinedProps[prop] = (...args) => {
+                prevFun(...args)
+                value(...args)
+              }
+            }
           }
         }
         else combinedProps[prop] = value

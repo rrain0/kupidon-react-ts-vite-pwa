@@ -47,7 +47,6 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           {...combineProps(restProps, rippleProps.target)}
           // TODO костыль для клика // TODO Pointer
           onPointerUp={ev => {
-            rippleProps.target.onPointerUp(ev)
             restProps.onPointerUp?.(ev)
             setWasClicked(false)
             setTimeout(() => {
@@ -63,12 +62,13 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           
           {children}
           
-          <div // Border
+          <div
+            data-display-name="Button Border"
             className={ButtonS6.W.els.border.n}
           >
             <Ripple
               {...rippleProps.ripple}
-              {...props.disabled && { cancel: true }}
+              disabled={props.disabled}
             />
           </div>
         

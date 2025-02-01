@@ -19,7 +19,7 @@ import DatePurposeOption from 'src/ui/2-pages/Profile/options-old/DatePurposeOpt
 
 
 
-const OldProfileOptionsPage = React.memo(
+const OldProfileOptionsTestPage = React.memo(
   () => {
     
     
@@ -117,5 +117,5 @@ const OldProfileOptionsPage = React.memo(
     )
   }
 )
-export default OldProfileOptionsPage
+export default OldProfileOptionsTestPage
 

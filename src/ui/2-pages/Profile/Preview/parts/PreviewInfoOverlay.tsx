@@ -27,8 +27,6 @@ import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import trueOrUndef = TypeU.trueOrUndef
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
-import rowC = EmotionCommon.rowC
-import Txt = EmotionCommon.Txt
 
 
 
@@ -58,27 +56,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
   const match = 'XX'
   
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
-  
-  /*
-  const infoButtonRef = useCallback((elem: HTMLButtonElement | null) => {
-    if (elem) {
-      elem.onfocus = () => {
-        console.log('ref onfocus')
-      }
-      elem.onpointerup = (ev) => {
-        console.log('ref onpointerup')
-        elem.focus()
-      }
-      elem.onblur = () => {
-        console.log('ref onblur')
-      }
-      elem.onclick = () => {
-        console.log('ref onclick')
-        openInfo?.()
-      }
-    }
-  }, [])
-   */
   
   return (
     <PreviewInfoBox
@@ -117,8 +94,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           disabled={isDragging}
           onClick={ev => {
             ev.stopPropagation()
-            console.log('wasDragged', getWasDragged?.())
-            console.log('back')
             if (getWasDragged?.()) return
           }}
         >
@@ -145,11 +120,9 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           <Heart2Ic />
         </Button>
         <Button
-          //ref={infoButtonRef}
           css={infoButtonS}
           disabled={isDragging}
           onClick={ev => {
-            console.log('click')
             ev.stopPropagation()
             if (getWasDragged?.()) return
             openInfo?.()

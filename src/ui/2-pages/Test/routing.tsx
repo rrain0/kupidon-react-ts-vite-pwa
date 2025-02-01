@@ -8,29 +8,45 @@ import path = RouteBuilder.path
 
 const TestPage = React.lazy(() => import('src/ui/2-pages/Test/TestPage.tsx'))
 
-const ElemRefTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemRefTestPage.tsx'))
-const ElemStyleTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemStyleTestPage.tsx'))
-const OldProfileOptionsPage = React.lazy(() => import('src/ui/2-pages/Test/pages/OldProfileOptionsPage.tsx'))
-const UseEventTest = React.lazy(() => import('src/ui/2-pages/Test/pages/UseEventTest.tsx'))
-const PageLifecycle = React.lazy(() => import('src/ui/2-pages/Test/pages/PageLifecycle.tsx'))
-const PointerTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/PointerTestPage.tsx'))
-const EmulatedScroll = React.lazy(() => import('src/ui/2-pages/Test/EmulatedScroll/EmulatedScroll.tsx'))
-const StateTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/StateTestPage.tsx'))
-const TabsTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/TabsTestPage.tsx'))
 const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ScrollbarTestPage.tsx'))
+const BottomSheetTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/BottomSheetTestPage.tsx'))
+const ListItem2TestPage = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem2TestPage.tsx'))
+const RippleTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/RippleTestPage.tsx'))
+const ButtonsTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/ButtonsTestPage.tsx'))
+const SliderTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/SliderTestPage'))
 const ResizeObserverTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ResizeObserverTestPage.tsx'))
-const BottomSheetTest = React.lazy(() => import('src/ui/2-pages/Test/views/BottomSheetTest.tsx'))
 const MoveElementToAnotherViewTestPage = React.lazy(
   () => import('src/ui/2-pages/Test/pages/MoveElementToAnotherViewTestPage.tsx')
 )
-const ListItem1AddItemTest = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem1AddItemTest.tsx'))
-const ListItem2Test = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem2Test.tsx'))
-const RippleTest = React.lazy(() => import('src/ui/2-pages/Test/views/RippleTest.tsx'))
-const ButtonTest = React.lazy(() => import('src/ui/2-pages/Test/views/ButtonTest.tsx'))
-const SliderTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/SliderTestPage'))
+const PointerTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/PointerTestPage.tsx'))
+const TabsTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/TabsTestPage.tsx'))
+const StateTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/StateTestPage.tsx'))
+const PageLifecycleTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/PageLifecycleTestPage.tsx'))
+const UseEventTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/UseEventTestPage.tsx'))
+const ElemRefTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemRefTestPage.tsx'))
+const ElemStyleTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ElemStyleTestPage.tsx'))
+const OldProfileOptionsPage = React.lazy(() => import('src/ui/2-pages/Test/pages/OldProfileOptionsTestPage.tsx'))
+const EmulatedScroll = React.lazy(
+  () => import('src/ui/2-pages/Test/pages/EmulatedScrollTestPage/EmulatedScrollTestPage.tsx')
+)
+const ShadowDOMTestPage = React.lazy(
+  () => import('src/ui/2-pages/Test/pages/ShadowDOMTestPage.tsx')
+)
 
 
 
+// path: 'test / bottomSheet / <check here>'
+const testBottomSheetTestPageRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <BottomSheetTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
 // path: 'test / scrollbar / <check here>'
 const testScrollbarTestPageRouting: RouteObject[] = [
   {
@@ -43,6 +59,54 @@ const testScrollbarTestPageRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / views-list-item-2 / <check here>'
+const viewsListItem2Routing: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ListItem2TestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+// path: 'test / ripple / <check here>'
+const rippleRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <RippleTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+// path: 'test / buttons / <check here>'
+const buttonsRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ButtonsTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+// path: 'test / slider / <check here>'
+const sliderRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <SliderTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
 // path: 'test / resizeObserver / <check here>'
 const testResizeObserverTestPageRouting: RouteObject[] = [
   {
@@ -50,18 +114,6 @@ const testResizeObserverTestPageRouting: RouteObject[] = [
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <ResizeObserverTestPage />
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
-// path: 'test / bottomSheet / <check here>'
-const testBottomSheetTestPageRouting: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <BottomSheetTest />
       </Suspense>
     ),
   },
@@ -121,7 +173,7 @@ const pageLifecycleRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <PageLifecycle />
+        <PageLifecycleTestPage />
       </Suspense>
     ),
   },
@@ -133,7 +185,7 @@ const useEventRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <UseEventTest />
+        <UseEventTestPage />
       </Suspense>
     ),
   },
@@ -175,8 +227,6 @@ const oldProfileOptionsRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-
-
 // path: 'test / emulated-scroll / <check here>'
 const emulatedScrollRouting: RouteObject[] = [
   {
@@ -189,68 +239,19 @@ const emulatedScrollRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'test / shadow-dom / <check here>'
+const shadowDOMRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ShadowDOMTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
 
-
-// path: 'test / views-list-item-1-add-item / <check here>'
-const viewsListItem1AddItemRouting: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <ListItem1AddItemTest />
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
-// path: 'test / views-list-item-2 / <check here>'
-const viewsListItem2Routing: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <ListItem2Test />
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
-// path: 'test / ripple / <check here>'
-const rippleRouting: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <RippleTest />
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
-// path: 'test / button / <check here>'
-const buttonRouting: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <ButtonTest />
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
-// path: 'test / slider / <check here>'
-const sliderRouting: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <SliderTestPage />
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
 
 
 
@@ -264,17 +265,35 @@ export const testRouting: RouteObject[] = [
       </Suspense>
     ),
   },
+  
+  
+  {
+    path: RootRoute.test.bottomSheet[path]+'/*',
+    children: testBottomSheetTestPageRouting,
+  },
   {
     path: RootRoute.test.scrollbar[path]+'/*',
     children: testScrollbarTestPageRouting,
   },
   {
-    path: RootRoute.test.resizeObserver[path]+'/*',
-    children: testResizeObserverTestPageRouting,
+    path: RootRoute.test.viewsListItem2[path]+'/*',
+    children: viewsListItem2Routing,
   },
   {
-    path: RootRoute.test.bottomSheet[path]+'/*',
-    children: testBottomSheetTestPageRouting,
+    path: RootRoute.test.rippleTest[path]+'/*',
+    children: rippleRouting,
+  },
+  {
+    path: RootRoute.test.buttonsTest[path]+'/*',
+    children: buttonsRouting,
+  },
+  {
+    path: RootRoute.test.sliderTest[path]+'/*',
+    children: sliderRouting,
+  },
+  {
+    path: RootRoute.test.resizeObserver[path]+'/*',
+    children: testResizeObserverTestPageRouting,
   },
   {
     path: RootRoute.test.moveElementToAnotherView[path]+'/*',
@@ -289,7 +308,7 @@ export const testRouting: RouteObject[] = [
     children: testTabsRouting,
   },
   {
-    path: RootRoute.test.pageLifecycle[path]+'/*',
+    path: RootRoute.test.state[path]+'/*',
     children: testStateRouting,
   },
   {
@@ -305,40 +324,20 @@ export const testRouting: RouteObject[] = [
     children: elemRefRouting,
   },
   {
-    path: RootRoute.test.sliderTest[path]+'/*',
-    children: sliderRouting,
-  },
-  
-  
-  {
-    path: RootRoute.test.emulatedScroll[path]+'/*',
-    children: emulatedScrollRouting,
-  },
-  
-  
-  {
-    path: RootRoute.test.viewsListItem1AddItem[path]+'/*',
-    children: viewsListItem1AddItemRouting,
-  },
-  {
-    path: RootRoute.test.viewsListItem2[path]+'/*',
-    children: viewsListItem2Routing,
-  },
-  {
-    path: RootRoute.test.rippleTest[path]+'/*',
-    children: rippleRouting,
-  },
-  {
-    path: RootRoute.test.buttonTest[path]+'/*',
-    children: buttonRouting,
-  },
-  {
     path: RootRoute.test.elemStyle[path]+'/*',
     children: elemStyleRouting,
   },
   {
     path: RootRoute.test.oldProfileOptions[path]+'/*',
     children: oldProfileOptionsRouting,
+  },
+  {
+    path: RootRoute.test.emulatedScroll[path]+'/*',
+    children: emulatedScrollRouting,
+  },
+  {
+    path: RootRoute.test.shadowDOMTest[path]+'/*',
+    children: shadowDOMRouting,
   },
   clearUnknownPathEnding,
 ]
