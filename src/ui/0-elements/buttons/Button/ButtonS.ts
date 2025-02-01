@@ -296,8 +296,8 @@ export namespace ButtonS {
   `
   // type: filled, shape: rect, add color: accent 2
   const filledRectAddColorAccent2 = (t: AppTheme.Theme) => filledRectAddColor({
-    bg: t.buttonAccent.bg2[0],
-    ct: t.buttonAccent.ct2,
+    bg: t.buttonAccent2.bg,
+    ct: t.buttonAccent2.ct,
     ctRipple: t.ripple.ct,
     bgFocus: t.buttonAccent.bgFocus[0],
     ctFocus: t.buttonAccent.ctFocus[0],
@@ -601,7 +601,7 @@ export namespace ButtonS {
     ${filledRoundedAddColorAccent(t)};
     // state: normal
     ${W.use.s.normal().e.button().thisUse} {
-      background-color: ${t.buttonAccent.bg2[0]};
+      background-color: ${t.buttonAccent2.bg};
     }
   `
   // type: filled, shape: rounded, add color: danger

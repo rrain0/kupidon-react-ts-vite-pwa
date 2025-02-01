@@ -159,11 +159,11 @@ export namespace ButtonS6 {
         }]
         // type: filled, color: accent2
         export const accent2: AppWidgetStyle = t => [baseColor, {
-          buttonBgColor: t.buttonAccent.bg2[0],
-          buttonColor: t.buttonAccent.ct2,
+          buttonBgColor: t.buttonAccent2.bg,
+          buttonColor: t.buttonAccent2.ct,
           inFocus: {
-            buttonBgColor: t.buttonAccent.bgFocus[0],
-            buttonColor: t.buttonAccent.ctFocus[0],
+            buttonBgColor: t.buttonAccent2.bgFc,
+            buttonColor: t.buttonAccent2.ctFc,
           },
         }]
         // TODO Style - extract to preview

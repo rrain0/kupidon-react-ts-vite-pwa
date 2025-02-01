@@ -95,11 +95,15 @@ export namespace AppTheme {
     // just a colorful button that drags some attention
     buttonAccent: {
       bg:            string[]
-      bg2:           string[]
       ct:            string[]
-      ct2:           string
       bgFocus:       string[]
       ctFocus:       string[]
+    }
+    buttonAccent2: {
+      bg:            string
+      ct:            string
+      bgFc:          string
+      ctFc:          string
     }
     // normal button
     buttonNormal: {

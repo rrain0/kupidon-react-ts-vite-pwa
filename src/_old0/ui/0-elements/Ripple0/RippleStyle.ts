@@ -1,7 +1,4 @@
-import { css } from '@emotion/react'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import Theme = AppTheme.Theme
 import Elem = WidgetStyle0.Elem
 import CssPropEnum = WidgetStyle0.CssPropEnum
 import CssProp = WidgetStyle0.CssProp
@@ -9,7 +6,7 @@ import CssWidget = WidgetStyle0.CssWidget
 
 
 
-
+// TODO Style - Remove old ripple style & component
 export namespace RippleStyle {
   
   export namespace El0 {
@@ -32,18 +29,6 @@ export namespace RippleStyle {
     export const color = '--ripple-color'
     export const colorVar = `var(${color})`
   }
-  
-  
-  
-  
-  export const normal = (t:Theme)=>css`
-    ${El0.frame} {
-    
-    }
-    ${El0.view} {
-
-    }
-  `
   
   
   

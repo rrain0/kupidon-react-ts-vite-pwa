@@ -60,6 +60,7 @@ const Ripple = React.memo((props: RippleProps) => {
     }
   })()
   
+  
   const [state, setState] = useState('stop' as RippleStateInternal)
   useEffect(() => {
     if (disabled) {
@@ -122,8 +123,8 @@ const Ripple = React.memo((props: RippleProps) => {
       // 'resume' возобновляет показ риппл или означает, что он сейчас показывается
       else if (state === 'resume') {
         r.style.transition =
-          `opacity ${rippleProps.rippleDuration}ms linear` +
-          `,scale ${rippleProps.rippleDuration}ms linear`
+          `opacity ${rippleProps.dissolveDuration}ms linear` +
+          `,scale ${rippleProps.dissolveDuration}ms linear`
         r.style.opacity = '1'
       }
     }

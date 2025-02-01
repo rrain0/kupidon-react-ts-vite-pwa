@@ -1,7 +1,5 @@
 import { css } from '@emotion/react'
-import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
@@ -10,6 +8,7 @@ import col = EmotionCommon.col
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import DataAttr = WidgetStyle0.DataAttr
 import Pseudo00 = WidgetStyle0.Pseudo0
 import Elem00 = WidgetStyle0.Elem0
@@ -21,9 +20,6 @@ import CssPropColor = WidgetStyle0.CssPropColor
 
 
 export namespace NavButtonStyle {
-  
-  
-  
   
   export const Attr = {
     error: DataAttr.error,
@@ -40,10 +36,10 @@ export namespace NavButtonStyle {
     }, {
       color: CssPropColor,
     })
-    const border = btn.toElem('>', new Elem00(ButtonS6.W.els.border.n, {}, {}))
-    const ripple = border.toElem('>', new Elem00(RippleStyle.El0.frameClassName, {}, {
-      mode: new CssPropEnum0(RippleStyle.Prop.mode, ['center', 'cursor']),
-      color: new CssProp0(RippleStyle.Prop.color),
+    const border = btn.toElem('>', new Elem00(ButtonS6.W.els.border.n, { }, { }))
+    const ripple = border.toElem('>', new Elem00(RippleS6.W.els.ripple.n, { }, {
+      mode: new CssPropEnum0(RippleS6.W.els.ripple.ps!.mode.n, ['center', 'cursor']),
+      color: new CssProp0(RippleS6.W.els.ripple.ps!.color.n),
     }))
     return { root: btn, btn, border, ripple } as const
   }()
@@ -59,7 +55,7 @@ export namespace NavButtonStyle {
   
   
   export const nav = (t: AppTheme.Theme) => css`
-    ${ButtonS6.t0(ButtonS6.S.base)()}
+    ${ButtonS6.t(ButtonS6.S.Text.Rect.Normal.normal)(t)}
     // normal
     ${El.btn.thiz()} {
       height: 100%;
@@ -73,10 +69,6 @@ export namespace NavButtonStyle {
       ${El.btn.props.color.set(t.navButton.ct[0])}
       
       ${Txt.sm10};
-    }
-    ${El.ripple.thiz()} {
-      ${El.ripple.props.mode.set('center')}
-      ${El.ripple.props.color.set(t.ripple.ctOnTransparent)}
     }
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('100%')}

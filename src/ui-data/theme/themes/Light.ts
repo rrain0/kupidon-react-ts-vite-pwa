@@ -73,11 +73,15 @@ export const LightProps: ThemeProps = {
   },
   buttonAccent: {
     bg:            ['#bbbbbb'],
-    bg2:           ['#bbbbbb'],
     ct:            ['#000000'],
-    ct2:           '#000000',
     bgFocus:       ['#999999'],
     ctFocus:       ['#000000'],
+  },
+  buttonAccent2: {
+    bg:            '#bbbbbb',
+    ct:            '#000000',
+    bgFc:          '#999999',
+    ctFc:          '#000000',
   },
   buttonNormal: {
     bg:            ['#bbbbbb'],
