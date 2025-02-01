@@ -82,7 +82,7 @@ const Ripple = React.memo((props: RippleProps) => {
     }
   }, [outState, disabled])
   useEffect(() => {
-    console.log('state', state)
+    //console.log('state', state)
     // In case if 'hide' is set when there was 'reset' that become 'show'
     if (outState === 'hide' && state === 'show') setState('hide')
   }, [state])

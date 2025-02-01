@@ -13,7 +13,7 @@ import PartialUndef = TypeU.PartialUndef
 import hoverable = EmotionCommon.hoverable
 import trueOrUndef = TypeU.trueOrUndef
 import Callback1 = TypeU.Callback1
-import combineEvHandlers = ReactU.combineEvHandlers
+import combineProps = ReactU.combineProps
 
 
 
@@ -81,14 +81,17 @@ const Textarea = React.memo(
             {...{
               [TextareaStyle.Attr.errorName]: trueOrUndef(isError),
             }}
-            {...restProps}
-            onChange={combineEvHandlers(restProps.onChange, ev => onValue?.(ev.currentTarget.value))}
             ref={textareaRef}
             
-            onScroll={ev => {
-              textareaFitText(ev.currentTarget)
-              restProps.onScroll?.(ev)
-            }}
+            {...combineProps(restProps, {
+              onChange: (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
+                onValue?.(ev.currentTarget.value)
+              },
+              onScroll: (ev: React.UIEvent<HTMLTextAreaElement>) => {
+                textareaFitText(ev.currentTarget)
+                restProps.onScroll?.(ev)
+              },
+            })}
           />
           
           { childrenPosition === 'end' && children }

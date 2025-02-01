@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 
 
-export const useDebounce =
-(callback: Function, delay: number, deps: any[] | undefined = []) => {
+export const useDebounce = (
+  callback: Function,
+  delay: number,
+  deps: any[] | undefined = []
+) => {
   
   const [start, setStart] = useState(() => +new Date())
   useEffect(() => setStart(+new Date()), deps)
@@ -10,8 +13,8 @@ export const useDebounce =
   const cb = useCallback(callback, deps)
   
   useEffect(() => {
-    const timerId = setTimeout(cb,delay - (+new Date() - start))
+    const timerId = setTimeout(cb, delay - (+new Date() - start))
     return () => clearTimeout(timerId)
-  },[cb, start, delay])
+  }, [cb, start, delay])
   
 }

@@ -515,4 +515,49 @@ export namespace ArrayU {
   
   
   
+  
+  export const mergeIf = <T>(
+    arr1: T[], arr2: T[], comparator: ComparatorEq<T>
+  ): T[] => {
+    const newArr1 = [...arr1]
+    let changed = false
+    const iters = Math.min(arr2.length, arr1.length)
+    for (let i = 0; i < iters; i++) {
+      if (!comparator(newArr1[i], arr2[i])) {
+        newArr1[i] = arr2[i]
+        changed = true
+      }
+    }
+    if (changed) return newArr1
+    return arr1
+  }
+  
+  
+  
+  
+  // Если (замапанное значение arr1[i]) !== arr2[i],
+  // тогда берём из arr2 значение, мапем его и ложим в arr1.
+  export const mergeMappedIf = <A1 extends any[], A2 extends any[]>(
+    arr1: A1,
+    arr2: A2,
+    // Массив, где значения arr2 замапаны по типу в значения arr1
+    arr2AsArr1: A1,
+    // Массив, где значения arr1 замапаны по типу в значения arr2
+    arr1AsArr2: A2,
+  ): A1 => {
+    const newArr1 = [...arr1] as A1
+    let changed = false
+    const iters = Math.min(arr2.length, arr1.length)
+    for (let i = 0; i < iters; i++) {
+      if (arr1AsArr2[i] !== arr2[i]) {
+        newArr1[i] = arr2AsArr1[i]
+        changed = true
+      }
+    }
+    if (changed) return newArr1
+    return arr1
+  }
+  
+  
+  
 }

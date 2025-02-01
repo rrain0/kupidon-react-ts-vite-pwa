@@ -110,7 +110,10 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   }
   
   private readonly removeAnimationThrottled = withThrottle(400, () => {
-    if (!this.isRunning) removeAnimation(this.update)
+    if (!this.isRunning) {
+      //console.log('remove')
+      removeAnimation(this.update)
+    }
   })
   
   map<Mapped>(mapper: Mapper<Value, Mapped>) {

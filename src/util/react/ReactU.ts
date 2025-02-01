@@ -2,14 +2,13 @@ import React, { CSSProperties, useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Puro = TypeU.Puro
+import falsy = TypeU.falsy
 
 
 
 
 export namespace ReactU {
   
-  
-  import falsy = TypeU.falsy
   export type Children = Puro<{ children: React.ReactNode }>
   export type ClassStyle = Puro<{
     className: string
@@ -81,19 +80,39 @@ export namespace ReactU {
   
   
   
-  // todo hack fix
+  // todo hack fix for click
+  // TODO Pointer // TODO костыль для клика.
+  //  Без костыля если при закрывании шторки на андроиде жать кнопку, то клик не работает, хотя всё ок.
+  export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
+    const [getWasClicked, setWasClicked] = useRefGetSet(0)
+    return {
+      onPointerDown: (ev: React.PointerEvent) => {
+        // Pointer & Mouse Left Button is 0
+        if (ev.button === 0) setWasClicked(1)
+      },
+      onPointerUp: (ev: React.PointerEvent<E>) => {
+        if (getWasClicked() === 1) {
+          setWasClicked(2)
+          const ct = ev.currentTarget
+          setTimeout(() => {
+            if (getWasClicked() === 2) ct.click()
+          }, 50)
+        }
+      },
+      onClick: (ev: React.MouseEvent) => {
+        setWasClicked(3)
+      },
+    } as const
+  }
+  
+  
+  
+  // todo hack fix for TS
   // React.memo wrapper if component's generics are not consumed properly by TS
   export const memo = <C>(Component: C): C => {
     return React.memo(Component as any) as C
   }
   
-  
-  
-  export const combineEvHandlers = <E extends React.SyntheticEvent<any>>(
-    ...handlers: Array<React.EventHandler<E> | undefined>
-  ): React.EventHandler<E> => {
-    return ev => handlers.forEach(h => h?.(ev))
-  }
   
   
   
@@ -122,62 +141,6 @@ export namespace ReactU {
     return combinedProps
   }
   
-  type ReactEventHandlers<E extends HTMLElement> = {
-    [Prop in keyof React.DOMAttributes<E>]?:
-      React.DOMAttributes<E>[Prop] extends React.EventHandler<any> | undefined
-        ? React.DOMAttributes<E>[Prop] | undefined
-        : never
-  }
-  {
-    const a: ReactEventHandlers<HTMLDivElement> = {
-      onClick: () => {},
-      //onUnknown: () => {}, // it works and produces error
-    }
-  }
-  
-  /* export */ const combineEvHandlersRecords2 =
-    <E extends HTMLElement>
-    (...handlers: Record<string, () => void>[]) => {
-      // TODO
-    }
-  
-  
-  
-  
-  /*
-  export const arrMapAndMergeIfNotEq =
-  <T>(orig: T[], other: T[], comparator: ComparatorEq<T>): T[] => {
-    const merged = [...orig]
-    let changed = false
-    for (let i = 0; i < Math.min(orig.length, other.length); i++) {
-      if (!comparator(merged[i], other[i])) {
-        merged[i] = other[i]
-        changed = true
-      }
-    }
-    if (changed) return merged
-    return orig
-  }
-  */
-  
-  
-  export const arrMergeIf = <A1 extends any[], A2 extends any[]>(
-    arr1: A1,
-    arr2: A2,
-    arr2AsArr1: A1,
-    arr1AsArr2: A2,
-  ): A1 => {
-    const newArr1 = [...arr1] as A1
-    let changed = false
-    for (let i = 0; i < Math.min(arr2.length, arr1.length); i++) {
-      if (arr1AsArr2[i] !== arr2[i]) {
-        newArr1[i] = arr2AsArr1[i]
-        changed = true
-      }
-    }
-    if (changed) return newArr1
-    return arr1
-  }
   
 }
 

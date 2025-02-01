@@ -124,6 +124,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           disabled={isDragging}
           onClick={ev => {
             ev.stopPropagation()
+            console.log('click openInfo')
             if (getWasDragged?.()) return
             openInfo?.()
           }}

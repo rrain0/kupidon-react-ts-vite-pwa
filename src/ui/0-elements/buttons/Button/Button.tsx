@@ -9,6 +9,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import trueOrUndef = TypeU.trueOrUndef
 import combineProps = ReactU.combineProps
+import useClickFix = ReactU.useClickFix
 
 
 
@@ -32,7 +33,9 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
   
   // TODO Pointer // TODO костыль для клика.
   //  Без костыля если при закрывании шторки на андроиде жать кнопку, то клик не работает, хотя всё ок.
-  const [getWasClicked, setWasClicked] = useRefGetSet(false)
+  const [getWasClicked, setWasClicked] = useRefGetSet(0)
+  
+  const clickFix = useClickFix()
   
   
   return (
@@ -44,20 +47,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           {...{ [ButtonS6.W.els.button.ss!.error.n]: trueOrUndef(hasError) }}
           className={clsx(className, ButtonS6.W.els.button.n)}
           type="button"
-          {...combineProps(restProps, rippleProps.target)}
-          // TODO костыль для клика // TODO Pointer
-          onPointerUp={ev => {
-            restProps.onPointerUp?.(ev)
-            setWasClicked(false)
-            setTimeout(() => {
-              if (!getWasClicked()) elemRef.current?.click()
-            }, 1)
-          }}
-          // TODO костыль для клика // TODO Pointer
-          onClick={ev => {
-            setWasClicked(true)
-            restProps.onClick?.(ev)
-          }}
+          {...combineProps(clickFix, restProps, rippleProps.target)}
         >
           
           {children}

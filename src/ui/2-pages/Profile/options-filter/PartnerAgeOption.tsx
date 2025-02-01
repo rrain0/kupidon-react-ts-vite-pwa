@@ -1,3 +1,4 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { ReactU } from 'src/util/react/ReactU.ts'
 import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
@@ -72,11 +73,11 @@ const PartnerAgeOption = React.memo(
     useStateMapperSync(
       ageRange, widgetRange,
       setAgeRange, setWidgetRange,
-      (w, h) => ReactU.arrMergeIf(
+      (w, h) => ArrayU.mergeMappedIf(
         h, w,
         mapWidgetRangeToDataRange(w), mapDataRangeToWidgetRange(h)
       ),
-      (h, w) => ReactU.arrMergeIf(
+      (h, w) => ArrayU.mergeMappedIf(
         w, h,
         mapDataRangeToWidgetRange(h), mapWidgetRangeToDataRange(w)
       )
