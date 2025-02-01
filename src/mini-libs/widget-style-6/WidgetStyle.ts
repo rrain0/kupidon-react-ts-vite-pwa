@@ -51,6 +51,7 @@ const withRawCss = {
 export type StyleVal =
   | string // pass as is if there are no special values or transformations
   | number // transform to fractions or pixels
+  | boolean
   | null // set empty value (e.g. background: none, color: transparent, padding: 0)
   | undefined // will not be rendered to css as if prop not exists
 
@@ -59,7 +60,9 @@ export type StyleValue = StyleVal | StyleVal[]
 
 
 export function isPrimitiveStyleValue<T, SV extends StyleVal>(value: T | SV): value is SV {
-  return isstring(value) || isnumber(value) || value === null || value === undefined
+  return isstring(value) || isnumber(value)
+    || value === true || value === false
+    || value === null || value === undefined
 }
 export function isStyleValue<T, SV extends StyleValue>(value: T | SV): value is SV {
   if (isArray(value)) {

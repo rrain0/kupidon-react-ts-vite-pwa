@@ -57,7 +57,7 @@ const ReloadPrompt = React.memo(() => {
   
   return (
     <>
-      <div className="ReloadPrompt-date">{buildDate}</div>
+      <div className="ReloadPrompt-buildDate">{buildDate}</div>
       {(offlineReady || needRefresh) && (
         <ModalPortal>
           <Modal css={ModalStyle.modalFrameBottom}>

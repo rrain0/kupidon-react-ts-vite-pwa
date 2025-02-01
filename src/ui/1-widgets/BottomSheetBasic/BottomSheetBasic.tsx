@@ -1,5 +1,6 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { css } from '@emotion/react'
+import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
 import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
 import BottomSheet, {
   BottomSheetOptionsProps,
@@ -34,6 +35,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
   
   return (
     <BottomSheet
+      css={BottomSheetS6.t(BottomSheetS6.S.Normal.normal)}
       {...restProps}
       bottomSheetFrameRef={bottomSheetFrameRef}
       bottomSheetRef={bottomSheetRef}

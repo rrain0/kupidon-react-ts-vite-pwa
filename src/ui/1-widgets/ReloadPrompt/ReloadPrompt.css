@@ -6,7 +6,7 @@
     color: black;
     pointer-events: auto;
 }
-.ReloadPrompt-date {
+.ReloadPrompt-buildDate {
     position: absolute;
     width: 0;
     height: 0;

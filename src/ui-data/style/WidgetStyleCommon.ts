@@ -16,7 +16,6 @@ export namespace WidgetStyleCommon {
   export const rowWrap: WidgetStyleObj = { display: 'flex', flexFlow: 'row wrap' }
   
   
-  export const noPointer: WidgetStyleObj = { pointerEvents: 'none' }
   export const noBorderOutlineBoxShadow: WidgetStyleObj = {
     bd: null,
     outline: null,

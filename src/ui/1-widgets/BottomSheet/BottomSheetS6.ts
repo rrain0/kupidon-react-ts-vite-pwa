@@ -11,10 +11,9 @@ import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import fixed = WidgetStyleCommon.fixed
 import modalFloor1 = StyleVals.modalFloor1
-import noPointer = WidgetStyleCommon.noPointer
 
 
-export namespace BottomSheetS {
+export namespace BottomSheetS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const frame = WidgetElem.of({
@@ -24,7 +23,7 @@ export namespace BottomSheetS {
     })
     const sheet = WidgetElem.of({
       className: 'rruiBottomSheet',
-      upElem: frame, upSelector: '>*>',
+      upElem: frame, upSelector: '>',
     })
     return {
       frame,
@@ -49,9 +48,9 @@ export namespace BottomSheetS {
       frame: {
         ...fixed,
         z: modalFloor1,
-        ...noPointer,
         display: 'grid',
         placeItems: 'end center',
+        pointer: false,
       },
       sheet: {
         w: 'full',
@@ -59,8 +58,12 @@ export namespace BottomSheetS {
         display: 'grid',
         rows: 'auto 1fr',
         justifyItems: 'stretch',
-        ...noPointer,
+        pointer: true,
       },
+    }
+    
+    export namespace Normal {
+      export const normal: AppWidgetStyle = base
     }
     
   }

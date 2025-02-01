@@ -3,8 +3,9 @@ import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { PointerU } from '@util/react/PointerU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import { BottomSheetParts } from 'src/ui/1-widgets/BottomSheet/BottomSheetParts.ts'
+import clsx from 'clsx'
 import { useUpNodesScrollLock } from '@util/view/useUpNodesScrollLock.ts'
+import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
 import {
   ComputedBottomSheetDimens,
   useBottomSheet, UseBottomSheetOptions,
@@ -112,8 +113,7 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
   return (
     <animated.div
       data-display-name="Bottom Sheet Frame"
-      css={BottomSheetParts.frameStyle}
-      className={className}
+      className={clsx(BottomSheetS6.W.els.frame.n, className)}
       // @ts-expect-error
       style={{
         ...bgDim && {
@@ -145,7 +145,7 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
     >
       <animated.div
         data-display-name="Bottom Sheet"
-        css={BottomSheetParts.sheetStyle}
+        className={BottomSheetS6.W.els.sheet.n}
         // @ts-expect-error
         style={sheetSpring}
         ref={bottomSheetRef} // Must be

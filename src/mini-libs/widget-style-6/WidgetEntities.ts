@@ -57,6 +57,7 @@ export namespace WidgetProps {
   export const transformLenValue = (value: StyleValue) => {
     if (value === undefined) return undefined
     if (value === null) return '0px'
+    if (value === false) return '0px'
     if (value === 'inf') return '999999px'
     if (value === 'round') return '999999px'
     if (value === 'full') return '100%'
@@ -71,16 +72,22 @@ export namespace WidgetProps {
     if (isArray(value)) return value.map(v => transformLenValue(v)).join(' ')
     return transformLenValue(value)
   }
-  export const transformNullToNone = (value: StyleValue) => {
+  export const transformNullFalseToNone = (value: StyleValue) => {
     if (value === null) return 'none'
+    if (value === false) return 'none'
     return value
   }
   export const transformNullToAuto = (value: StyleValue) => {
     if (value === null) return 'auto'
     return value
   }
-  export const transformNullToTransparent = (value: StyleValue) => {
+  export const transformNullFalseToTransparent = (value: StyleValue) => {
     if (value === null) return 'transparent'
+    if (value === false) return 'transparent'
+    return value
+  }
+  export const transformTrueToAuto = (value: StyleValue) => {
+    if (value === true) return 'auto'
     return value
   }
   
@@ -117,20 +124,20 @@ export namespace WidgetProps {
   
   export const gap = WidgetProp.ofName('gap', transformMultiLenValue)
   
-  export const color = WidgetProp.ofName('color', transformNullToTransparent)
+  export const color = WidgetProp.ofName('color', transformNullFalseToTransparent)
   
-  export const background = WidgetProp.ofName('background', transformNullToNone)
-  export const backgroundColor = WidgetProp.ofName('background-color', transformNullToTransparent)
-  export const backgroundImage = WidgetProp.ofName('background-image', transformNullToNone)
+  export const background = WidgetProp.ofName('background', transformNullFalseToNone)
+  export const backgroundColor = WidgetProp.ofName('background-color', transformNullFalseToTransparent)
+  export const backgroundImage = WidgetProp.ofName('background-image', transformNullFalseToNone)
   export const backgroundPosition = WidgetProp.ofName('background-position', transformMultiLenValue)
   export const backgroundSize = WidgetProp.ofName('background-size', transformMultiLenValue)
   
-  export const border = WidgetProp.ofName('border', transformNullToNone)
-  export const borderColor = WidgetProp.ofName('border-color', transformNullToTransparent)
+  export const border = WidgetProp.ofName('border', transformNullFalseToNone)
+  export const borderColor = WidgetProp.ofName('border-color', transformNullFalseToTransparent)
   export const borderRadius = WidgetProp.ofName('border-radius', transformMultiLenValue)
   
-  export const outline = WidgetProp.ofName('outline', transformNullToNone)
-  export const boxShadow = WidgetProp.ofName('box-shadow', transformNullToNone)
+  export const outline = WidgetProp.ofName('outline', transformNullFalseToNone)
+  export const boxShadow = WidgetProp.ofName('box-shadow', transformNullFalseToNone)
   
   export const gridTemplateRows = WidgetProp.ofName('grid-template-rows')
   export const gridTemplateColumns = WidgetProp.ofName('grid-template-columns')
@@ -139,6 +146,10 @@ export namespace WidgetProps {
   export const gridAutoColumns = WidgetProp.ofName('grid-auto-columns')
   export const gridAutoFlow = WidgetProp.ofName('grid-auto-flow')
   export const gridArea = WidgetProp.ofName('grid-area')
+  
+  export const pointerEvents = WidgetProp.ofName('pointer-events', v => {
+    return transformNullFalseToNone(transformTrueToAuto(v))
+  })
 }
 
 export namespace WidgetComplexTransformers {

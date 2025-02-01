@@ -123,6 +123,10 @@ export const CommonProps = (() => {
     autoCols: WidgetProps.gridAutoColumns,
     autoFlow: WidgetProps.gridAutoFlow,
     area: WidgetProps.gridArea,
+    
+    pointerEvents: WidgetProps.pointerEvents,
+    
+    pointer: WidgetProps.pointerEvents,
   }
   const sortedProps = Object.entries(props)
     .sort((([propA], [propB]) => propB.length - propA.length))
