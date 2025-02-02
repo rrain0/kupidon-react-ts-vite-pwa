@@ -112,7 +112,7 @@ export const DarkProps: ThemeProps = {
   
   
   
-  iconGradient: {
+  gradIcon: {
     ct:        ['#bdbdbd', '#bdbdbd'],
   },
   

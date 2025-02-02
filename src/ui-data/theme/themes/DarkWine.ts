@@ -92,7 +92,7 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   
   
-  iconGradient: { ...DarkProps.iconGradient,
+  gradIcon: { ...DarkProps.gradIcon,
     ct:       ['#BB2649', '#F75F82'],
   },
   

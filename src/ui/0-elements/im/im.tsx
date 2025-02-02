@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle'
 import abs = EmotionCommon.abs
@@ -24,6 +25,13 @@ export const imPlaceholderIcS: AppWidgetStyle = t => [SvgIconS6.S.base, {
 export const imSmallPlaceholderIcS: AppWidgetStyle = [imPlaceholderIcS, {
   iconSz: '50%',
 }]
+export const imSmallPlaceholderIcFullTrans: AppWidgetStyle = t => [
+  IconButtonS6.S.Trans.Round.Big2.normal2, {
+    buttonSz: 'full',
+    iconSz: '50%',
+    iconColor: t.photos.ct[0],
+  },
+]
 
 export const imPieProgressS = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress} {

@@ -343,6 +343,14 @@ export namespace AdditionalProps {
 
 export namespace AdditionalStates {
   
+  // before + content: ''
+  export const before = WidgetMultiStateTransformer.of({
+    title: `after + content: ''`,
+    transform: () => [[
+      // TODO Style - to make ::before content: '' work, remove selectProp linearization
+      WidgetPseudoElements.before, //WidgetProps.content, WidgetPropValue.of("''"),
+    ]],
+  })
   // after + content: ''
   export const after = WidgetMultiStateTransformer.of({
     title: `after + content: ''`,

@@ -10,7 +10,7 @@ import Elem0 = WidgetStyle0.Elem0
 
 
 
-// TODO remove
+// TODO Style - remove
 export namespace SvgIconS {
   
   

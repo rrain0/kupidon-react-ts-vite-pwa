@@ -99,7 +99,7 @@ export const LightWineProps: ThemeProps = { ...LightProps,
   
   
   
-  iconGradient: { ...LightProps.iconGradient,
+  gradIcon: { ...LightProps.gradIcon,
     ct:       ['#BB2649', '#F75F82'],
   },
   

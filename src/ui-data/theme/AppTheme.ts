@@ -137,7 +137,7 @@ export namespace AppTheme {
       cta:       string[]
     }
     
-    iconGradient: {
+    gradIcon: {
       ct:   string[]
     }
     
@@ -355,7 +355,7 @@ export namespace AppTheme {
       ${props.bgColor2} 50% 100%
     );
   `
-  export const themeIconGradientCss = (props: ThemeIconCssProps) => css`
+  export const themegradIconCss = (props: ThemeIconCssProps) => css`
     ${themeIconCss(props)};
     background: linear-gradient(
       to right,

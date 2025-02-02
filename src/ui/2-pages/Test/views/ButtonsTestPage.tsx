@@ -1,14 +1,16 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import col = EmotionCommon.col
 import rowWrap = EmotionCommon.rowWrap
+import GearIc = SvgIconsPack.GearIc
 
 
 
@@ -25,6 +27,7 @@ const ButtonsTestPage = React.memo(() => {
           <div>Buttons showcase</div>
           
           <BlocksContainer>
+            
             {Object.entries(AllButtonStyles).flatMap(([typeName, shapes]) =>
               Object.entries(shapes).flatMap(([shapeName, sizes]) => (
                 Object.entries(sizes).map(([sizeName, colors]) => (
@@ -42,6 +45,25 @@ const ButtonsTestPage = React.memo(() => {
                 ))
               )),
             )}
+            
+            {Object.entries(AllIconButtonStyles).flatMap(([typeName, shapes]) =>
+              Object.entries(shapes).flatMap(([shapeName, sizes]) => (
+                Object.entries(sizes).map(([sizeName, colors]) => (
+                  <Buttons key={typeName + shapeName + sizeName}>
+                    {Object.entries(colors as object).map(([colorName, style]) => (
+                      <ButtonDescription key={colorName}>
+                        <div>Type: {typeName}, Shape: {shapeName}</div>
+                        <div>Size: {sizeName}, Color: {colorName}</div>
+                        <ButtonBox css={{ width: sizeName === 'Big' ? 350 : 200 }}>
+                          <Button css={ButtonS6.t(style)}><GearIc /></Button>
+                        </ButtonBox>
+                      </ButtonDescription>
+                    ))}
+                  </Buttons>
+                ))
+              )),
+            )}
+            
           </BlocksContainer>
         
         </Pages.ContentFill>
@@ -120,24 +142,6 @@ namespace AllButtonStyles {
         export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Small.accent2
       }
     }
-    export namespace Round {
-      export namespace Normal {
-        export const main: AppWidgetStyle = ButtonS6.S.Filled.Round.Normal.main
-        export const accent: AppWidgetStyle = ButtonS6.S.Filled.Round.Normal.accent
-        export const normal: AppWidgetStyle = ButtonS6.S.Filled.Round.Normal.normal
-        export const danger: AppWidgetStyle = ButtonS6.S.Filled.Round.Normal.danger
-        export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Round.Normal.normal2
-        export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Round.Normal.accent2
-      }
-      export namespace Big2 {
-        export const main: AppWidgetStyle = ButtonS6.S.Filled.Round.Big2.main
-        export const accent: AppWidgetStyle = ButtonS6.S.Filled.Round.Big2.accent
-        export const normal: AppWidgetStyle = ButtonS6.S.Filled.Round.Big2.normal
-        export const danger: AppWidgetStyle = ButtonS6.S.Filled.Round.Big2.danger
-        export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Round.Big2.normal2
-        export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Round.Big2.accent2
-      }
-    }
   }
   export namespace Outlined {
     export namespace Rounded {
@@ -180,14 +184,29 @@ namespace AllButtonStyles {
         export const normal2: AppWidgetStyle = ButtonS6.S.Text.Rounded.Normal2Uppercase.normal2
       }
     }
+  }
+}
+
+namespace AllIconButtonStyles {
+  export namespace Filled {
     export namespace Round {
-      export namespace Big {
-        export const normal: AppWidgetStyle = ButtonS6.S.Text.Round.Big.normal
-        export const normal2: AppWidgetStyle = ButtonS6.S.Text.Round.Big.normal2
+      export namespace Normal {
+        export const accent: AppWidgetStyle = IconButtonS6.S.Filled.Round.Normal.accent
+        export const normal2: AppWidgetStyle = IconButtonS6.S.Filled.Round.Normal.normal2
       }
       export namespace Big2 {
-        export const normal: AppWidgetStyle = ButtonS6.S.Text.Round.Big2.normal
-        export const normal2: AppWidgetStyle = ButtonS6.S.Text.Round.Big2.normal2
+        export const accent: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big2.accent
+        export const normal2: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big2.normal2
+      }
+    }
+  }
+  export namespace Trans {
+    export namespace Round {
+      export namespace Big {
+        export const normal2: AppWidgetStyle = IconButtonS6.S.Trans.Round.Big.normal2
+      }
+      export namespace Big2 {
+        export const normal2: AppWidgetStyle = IconButtonS6.S.Trans.Round.Big2.normal2
       }
     }
   }

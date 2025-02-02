@@ -28,6 +28,7 @@ export namespace ButtonS6 {
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const button = WidgetElem.of({
       ...up, className: 'rruiButton',
+      // TODO Style - remove
       // TODO Style - think about it
       // 'color' & '--color' will be passed via WidgetProps
       props: { varColor: AdditionalProps.varColor },
@@ -44,13 +45,14 @@ export namespace ButtonS6 {
   }
   
   const WidgetElems = buildWidgetElems()
-  namespace WidgetStates {
-    export const inFocus = WidgetState.of([WidgetElems.button, CommonStates.inFocus])
-    export const disabled = WidgetState.of([WidgetElems.button, CommonStates.disabled])
-    export const error = WidgetState.of([WidgetElems.button, CommonStates.error])
+  const WidgetStates = {
+    inFocus: WidgetState.of([WidgetElems.button, CommonStates.inFocus]),
+    disabled: WidgetState.of([WidgetElems.button, CommonStates.disabled]),
+    error: WidgetState.of([WidgetElems.button, CommonStates.error]),
   }
-  namespace WidgetProps {
-    export const color = AdditionalProps.colorAndVarColor
+  // TODO Style - remove
+  const WidgetProps = {
+    color: AdditionalProps.colorAndVarColor,
   }
   
   export const W = Widget.of({
@@ -160,38 +162,6 @@ export namespace ButtonS6 {
             buttonColor: t.buttonAccent2.ctFc,
           },
         }]
-        // TODO Style - extract to preview
-        // type: filled, color: previewNormal
-        export const previewNormal: AppWidgetStyle = t => [baseColor, {
-          buttonBgColor: t.previewButtonNorm.bg,
-          buttonColor: t.previewButtonNorm.ct,
-          rippleRippleColor: t.previewButtonNorm.ctRipple,
-          inFocus: {
-            buttonBgColor: t.previewButtonNorm.bgFc,
-            buttonColor: t.previewButtonNorm.ctFc,
-          },
-        }]
-        // TODO Style - extract to preview
-        // type: filled, color: previewMain
-        export const previewMain: AppWidgetStyle = t => [baseColor, {
-          buttonBg: {
-            color: t.previewButtonMain.bg,
-            im: `linear-gradient(
-              to bottom,
-              ${t.previewButtonMain.bgGrad[0]} 25%,
-              ${t.previewButtonMain.bgGrad[1]} 50% 100%
-            )`,
-            pos: '0 0',
-            sz: '100% 200%',
-          },
-          buttonColor: t.previewButtonMain.ct,
-          rippleRippleColor: t.previewButtonMain.ctRipple,
-          inFocus: {
-            buttonTransition: 'background-position 0.3s',
-            buttonBgPos: '0 100%',
-          },
-        }]
-        
       }
       
       export namespace Rect {
@@ -275,39 +245,7 @@ export namespace ButtonS6 {
           export const normal: AppWidgetStyle = [sizeSmall, Color.normal]
           export const danger: AppWidgetStyle = [sizeSmall, Color.danger]
           export const normal2: AppWidgetStyle = [sizeSmall, Color.normal2]
-          export const accent2: AppWidgetStyle = [ sizeSmall, Color.accent2]
-        }
-        
-      }
-      
-      // TODO Style - extract to IconButton
-      export namespace Round {
-        
-        // type: filled, shape: round, size: normal
-        export const sizeNormal: WidgetStyle = [base, {
-          button: { sz: 50, r: 'round', p: 11 },
-          rippleRipple: { mode: 'center' },
-        }]
-        // type: filled, shape: round, size: big2
-        export const sizeBig2: WidgetStyle = [sizeNormal, {
-          buttonP: 14,
-        }]
-        
-        export namespace Normal {
-          export const main: AppWidgetStyle = [sizeNormal, Color.main]
-          export const accent: AppWidgetStyle = [sizeNormal, Color.accent]
-          export const normal: AppWidgetStyle = [sizeNormal, Color.normal]
-          export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
-          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
-          export const accent2: AppWidgetStyle = [sizeNormal, Color.accent2]
-        }
-        export namespace Big2 {
-          export const main: AppWidgetStyle = [sizeBig2, Color.main]
-          export const accent: AppWidgetStyle = [sizeBig2, Color.accent]
-          export const normal: AppWidgetStyle = [sizeBig2, Color.normal]
-          export const danger: AppWidgetStyle = [sizeBig2, Color.danger]
-          export const normal2: AppWidgetStyle = [sizeBig2, Color.normal2]
-          export const accent2: AppWidgetStyle = [sizeBig2, Color.accent2]
+          export const accent2: AppWidgetStyle = [sizeSmall, Color.accent2]
         }
         
       }
@@ -500,28 +438,6 @@ export namespace ButtonS6 {
         export namespace Normal2Uppercase {
           export const normal: AppWidgetStyle = [sizeNormal2Uppercase, Color.normal]
           export const normal2: AppWidgetStyle = [sizeNormal2Uppercase, Color.normal2]
-        }
-      }
-      
-      // TODO Style - move to IconButton
-      export namespace Round {
-        // type: text, shape: round, size: big
-        export const sizeBig: WidgetStyle = [base, {
-          button: { sz: 50, r: 'round', p: 11 },
-          rippleRipple: { mode: 'center' },
-        }]
-        // type: text, shape: round, size: big2
-        export const sizeBig2: WidgetStyle = [sizeBig, {
-          button: { p: 14 },
-        }]
-        
-        export namespace Big {
-          export const normal: AppWidgetStyle = [sizeBig, Color.normal]
-          export const normal2: AppWidgetStyle = [sizeBig, Color.normal2]
-        }
-        export namespace Big2 {
-          export const normal: AppWidgetStyle = [sizeBig2, Color.normal]
-          export const normal2: AppWidgetStyle = [sizeBig2, Color.normal2]
         }
       }
       

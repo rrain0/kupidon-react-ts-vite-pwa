@@ -86,8 +86,8 @@ export namespace NavButtonStyle {
       ${El.icon.props.color.set(t.navButton.cta[0])}
     }
     a.active ${El.gradIcon.thiz()} {
-      ${El.gradIcon.props.firstColor.set(t.iconGradient.ct[0])}
-      ${El.gradIcon.props.secondColor.set(t.iconGradient.ct[1])}
+      ${El.gradIcon.props.firstColor.set(t.gradIcon.ct[0])}
+      ${El.gradIcon.props.secondColor.set(t.gradIcon.ct[1])}
     }
     a.active ${El.btn.thiz()} {
       ${El.btn.props.color.set(t.navButton.cta[0])}

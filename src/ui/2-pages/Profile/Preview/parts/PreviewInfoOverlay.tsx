@@ -9,9 +9,9 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
 import { ReactU } from 'src/util/react/ReactU'
@@ -178,30 +178,34 @@ const ActionButtonsBox = styled.div`
 `
 const backButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
-  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('54%')}
-    rotate: 0.5turn;
-    translate: -7% -5%;
-  }
+  ${IconButtonS6.t({
+    gradIcon: {
+      sz: '54%',
+      rotate: '0.5turn',
+      translate: '-7% -5%',
+    },
+  })(t)}
 `
 const dislikeButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormalBigger(t)};
-  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('35.5%')}
-  }
+  ${IconButtonS6.t({
+    gradIconSz: '35.5%',
+  })(t)}
 `
 const likeButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewMain(t)};
-  ${IconButtonStyle.W.use.s.normal().e.icon().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('51.05%')}
-  }
+  ${IconButtonS6.t({
+    iconSz: '51.05%',
+  })(t)}
 `
 const infoButtonS = (t: AppTheme.Theme) => css`
   ${IconButtonStyle.icPreviewNormal(t)};
-  ${IconButtonStyle.W.use.s.normal().e.iconGrad().thisUse} {
-    ${SvgIconS.W.e.icon.p.size.set('50%')};
-    translate: 0 10%;
-  }
+  ${IconButtonS6.t({
+    gradIcon: {
+      sz: '50%',
+      translate: '0 10%',
+    },
+  })(t)}
 `
 
 

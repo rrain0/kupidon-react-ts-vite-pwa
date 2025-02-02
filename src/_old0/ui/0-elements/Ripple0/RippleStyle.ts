@@ -6,7 +6,7 @@ import CssWidget = WidgetStyle0.CssWidget
 
 
 
-// TODO Style - Remove old ripple style & component
+// TODO Style - remove old ripple style & component
 export namespace RippleStyle {
   
   export namespace El0 {

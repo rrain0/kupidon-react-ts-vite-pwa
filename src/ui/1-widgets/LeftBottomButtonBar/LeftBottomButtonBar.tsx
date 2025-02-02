@@ -3,7 +3,7 @@ import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
-import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
@@ -58,26 +58,24 @@ const ButtonsContainer = styled.div`
 
 
 
-const CancelButton = React.memo(
-  ({ onClick }: { onClick: Callback }) => {
-    return (
-      <Button css={IconButtonStyle.icBig2Normal2}
-        onClick={onClick}
-      >
-        <CrossIc />
-      </Button>
-    )
-  }
-)
+const CancelButton = React.memo(({ onClick }: { onClick: Callback }) => {
+  return (
+    <Button
+      css={IconButtonS6.t(IconButtonS6.S.Filled.Round.Big2.normal2)}
+      onClick={onClick}
+    >
+      <CrossIc />
+    </Button>
+  )
+})
 
-const AcceptButton = React.memo(
-  ({ onClick }: { onClick: Callback }) => {
-    return (
-      <Button css={IconButtonStyle.icBig2Accent}
-        onClick={onClick}
-      >
-        <CheckmarkIc />
-      </Button>
-    )
-  }
-)
+const AcceptButton = React.memo(({ onClick }: { onClick: Callback }) => {
+  return (
+    <Button
+      css={IconButtonS6.t(IconButtonS6.S.Filled.Round.Big2.accent)}
+      onClick={onClick}
+    >
+      <CheckmarkIc />
+    </Button>
+  )
+})

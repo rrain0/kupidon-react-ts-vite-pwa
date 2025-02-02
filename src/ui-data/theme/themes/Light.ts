@@ -113,7 +113,7 @@ export const LightProps: ThemeProps = {
   
   
   
-  iconGradient: {
+  gradIcon: {
     ct:       ['#444444', '#444444'],
   },
   

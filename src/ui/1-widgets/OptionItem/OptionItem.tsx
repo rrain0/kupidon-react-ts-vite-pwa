@@ -5,18 +5,15 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import React from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
+import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import Callback = TypeU.Callback
-import Txt = EmotionCommon.Txt
 
 
 
@@ -32,8 +29,6 @@ export type OptionItemProps = PartialUndef<{
 const OptionItem = React.memo((props: OptionItemProps) => {
   const { icon, title, value, onClick } = props
   
-  
-  
   return (
     <Button
       css={buttonStyle}
@@ -48,7 +43,7 @@ const OptionItem = React.memo((props: OptionItemProps) => {
         </Value>
       </ValueFrame>
       <NextIconFrame>
-        <ArrowAngledRoundedIc css={t => nextIconStyle(t)} />
+        <ArrowAngledRoundedIc css={SvgIconS6.t(nextIconS)} />
       </NextIconFrame>
       
     </Button>
@@ -83,15 +78,17 @@ const IconFrame = styled.div`
   height: 50px;
   display: grid;
   place-items: center;
-  > { ${p => OptionAndValueItemGradIconStyle(p.theme)} }
-  > { ${p => SvgIconS6.t(optionAndValueItemIconS)(p.theme)} }
-`
-const OptionAndValueItemGradIconStyle = (t: AppTheme.Theme) => css`
-  ${SvgGradIconsStyle.normal(t)};
-  ${SvgGradIconsStyle.El.icon.thiz()}{
-    width: 60%;
+  > {
+    ${p => SvgGradIconS6.t(optionAndValueItemGradIconS)(p.theme)}
+  }
+  > {
+    ${p => SvgIconS6.t(optionAndValueItemIconS)(p.theme)}
   }
 `
+
+const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.Normal.normal, {
+  gradIconW: '60%',
+}]
 const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.S.base, {
   iconH: '50%',
   iconColor: t.boxNormal.ct3[0],
@@ -130,8 +127,7 @@ const NextIconFrame = styled.div`
   display: grid;
   place-items: center;
 `
-const nextIconStyle = (t: AppTheme.Theme) => css`
-  height: 24px;
-  ${SvgIconS.El.icon.props.color.name}: ${t.boxNormal.ct3[0]};
-`
+const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+  iconSz: 24, iconColor: t.boxNormal.ct3[0],
+}]
 

@@ -130,7 +130,7 @@ export const CommonProps = (() => {
 
 export const CommonStates = (() => {
   const states = {
-    before: WidgetPseudoElements.before,
+    before: AdditionalStates.before,
     after: AdditionalStates.after,
     
     type: WidgetAttrs.type,

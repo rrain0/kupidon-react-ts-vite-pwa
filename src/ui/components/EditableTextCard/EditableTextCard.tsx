@@ -6,6 +6,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -15,6 +16,7 @@ import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 import HtmlBool = TypeU.HtmlBool
+import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 
 
 
@@ -45,7 +47,7 @@ const EditableTextCard = React.memo((props: EditableTextCardProps) => {
     >
       
       <Title>{title}</Title>
-      <PencilIcon />
+      <PencilWrite2Ic css={SvgIconS6.t(pencilIconS)} />
       {showAnyText && (
         <Text isPlaceholder={showPlaceholder}>
           {showPlaceholder ? placeholder : text}
@@ -86,14 +88,14 @@ const Title = styled(Hs.Card3)`
   place-self: center start;
   text-align: start;
 `
-const PencilIcon = styled(PencilWrite2Ic)`
-  ${SvgIconS.El.icon.thiz()}{
-    grid-area: icon;
-    align-self: center;
-    height: 20px;
-    ${SvgIconS.El.icon.props.color.name}: ${p => p.theme.boxNormal.ct4[0]};
-  }
-`
+const pencilIconS: AppWidgetStyle = t => [SvgIconS6.S.base, {
+  icon: {
+    area: 'icon',
+    alignSelf: 'center',
+    sz: 20,
+    color: t.boxNormal.ct4[0],
+  },
+}]
 const Text = styled.div<{
   isPlaceholder: boolean
 }>`

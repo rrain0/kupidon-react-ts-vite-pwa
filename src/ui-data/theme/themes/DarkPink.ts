@@ -60,7 +60,7 @@ export const DarkPinkProps: ThemeProps = { ...DarkProps,
     bgFocus: ['#ffffff22'],
   },
   
-  iconGradient: { ...DarkProps.iconGradient,
+  gradIcon: { ...DarkProps.gradIcon,
     ct:       ['#984559', '#984559'],
   },
   

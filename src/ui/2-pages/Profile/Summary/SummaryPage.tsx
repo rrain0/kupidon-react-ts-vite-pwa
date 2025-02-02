@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { ReactU } from '@util/react/ReactU.ts'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -14,7 +13,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -24,7 +23,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
   imPlaceholderBoxS,
   imPlaceholderIcS,
-  imSmallPieProgressS,
+  imSmallPieProgressS, imSmallPlaceholderIcFullTrans,
   imSmallPlaceholderIcS,
 } from 'src/ui/0-elements/im/im'
 import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
@@ -66,246 +65,245 @@ import PictureIc = SvgIconsPack.PictureIc
 // TODO В фотках профиля баг, что продолжается анимация инциализации, если фото пустое,
 //  и только потом показывается +
 
-const SummaryPage = React.memo(
-  () => {
-    const lang = useRecoilValue(LangRecoil).langs[0]
-    const titleText = useUiValues(TitleUiText)
-    const actionText = useUiValues(ActionUiText)
-    
-    const auth = useRecoilValue(AuthRecoil)!
-    const u = auth.user
-    
-    const profile = MockData.profile2
-    const progress = 45
-    const completeProfileDescriptionText = 'Завершите описание профиля'
-    const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
-    
-    const [profileProgress, setProfileProgress] = useState(5)
-    
-    useEffect(() => setProfileProgress(progress), [])
-    
-    const [mainPhoto, setMainPhoto] = useState<MainPhoto>(() => {
-      const mainPhotoRemote = u.photos.find(it => it.index === 0)
-      if (!mainPhotoRemote) return {
-        ...DefaultMainPhoto,
-        isEmpty: true,
+const SummaryPage = React.memo(() => {
+  const lang = useRecoilValue(LangRecoil).langs[0]
+  const titleText = useUiValues(TitleUiText)
+  const actionText = useUiValues(ActionUiText)
+  
+  const auth = useRecoilValue(AuthRecoil)!
+  const u = auth.user
+  
+  const profile = MockData.profile2
+  const progress = 45
+  const completeProfileDescriptionText = 'Завершите описание профиля'
+  const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
+  
+  const [profileProgress, setProfileProgress] = useState(5)
+  
+  useEffect(() => setProfileProgress(progress), [])
+  
+  const [mainPhoto, setMainPhoto] = useState<MainPhoto>(() => {
+    const mainPhotoRemote = u.photos.find(it => it.index === 0)
+    if (!mainPhotoRemote) return {
+      ...DefaultMainPhoto,
+      isEmpty: true,
+      needDownload: false,
+    }
+    return {
+      ...DefaultMainPhoto,
+      id: mainPhotoRemote.id,
+      name: mainPhotoRemote.name,
+      mimeType: mainPhotoRemote.mimeType,
+      remoteUrl: mainPhotoRemote.url,
+      //needDownload: false,
+      //downloadError: 'error',
+    }
+  })
+  
+  useEvent(() => {
+    if (mainPhoto.needDownload) {
+      
+      const abortCtrl = new AbortController()
+      const downloadStart = {
+        isReady: false,
         needDownload: false,
-      }
-      return {
-        ...DefaultMainPhoto,
-        id: mainPhotoRemote.id,
-        name: mainPhotoRemote.name,
-        mimeType: mainPhotoRemote.mimeType,
-        remoteUrl: mainPhotoRemote.url,
-        //needDownload: false,
-        //downloadError: 'error',
-      }
-    })
-    
-    useEvent(() => {
-      if (mainPhoto.needDownload) {
-        
-        const abortCtrl = new AbortController()
-        const downloadStart = {
-          isReady: false,
-          needDownload: false,
-          download: { ...DefaultMediaOperation,
-            id: mainPhoto.id,
-            abort: () => {
-              console.log('download was aborted')
-              abortCtrl.abort('download was aborted')
-            },
+        download: { ...DefaultMediaOperation,
+          id: mainPhoto.id,
+          abort: () => {
+            console.log('download was aborted')
+            abortCtrl.abort('download was aborted')
           },
-          downloadError: undefined,
-        } satisfies Partial<MainPhoto>
-        
-        setMainPhoto({
-          ...mainPhoto,
-          ...downloadStart,
-        })
-        
-        const updateDownload = (downloadId: string, u: Partial<MainPhoto>) => {
-          setMainPhoto(s => {
-            if (s.download?.id === downloadId) return { ...s, ...u }
-            return s
-          })
-        }
-        const updateDownloadThrottled = withThrottle(
-          RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-          updateDownload,
-        )
-        
-        ;(async () => {
-          try {
-            const progress = new Progress(2, [90, 10])
-            const onProgress = (p: number | null) => {
-              progress.progress = p ?? 0
-              //console.log('progress', photo.id, progress.value)
-              updateDownloadThrottled(
-                downloadStart.download.id,
-                { download: {
-                  ...downloadStart.download,
-                  progress: progress.value,
-                } }
-              )
-            }
-            
-            console.log('download started')
-            const blob = await fetchToBlob(
-              mainPhoto.remoteUrl,
-              { onProgress, abortCtrl }
-            )
-            abortCtrl.signal.throwIfAborted()
-            
-            progress.stage++
-            progress.progress = 0
-            const dataUrl = await blobToDataUrl(blob, { onProgress, abortCtrl })
-            abortCtrl.signal.throwIfAborted()
-            
-            console.log('download completed')
-            updateDownload(
-              downloadStart.download.id,
-              { isReady: true, download: undefined, dataUrl },
-            )
-          }
-          catch (ex) {
-            // TODO notify about error
-            //console.log('download error', ex)
-            //console.log('photo', photo)
-            updateDownload(
-              downloadStart.download.id,
-              { download: undefined, downloadError: ex },
-            )
-          }
-          finally {
-            //unlock(photo.remoteUrl)
-          }
-          
-        })()
-      }
-    }, [mainPhoto.needDownload], true)
-    
-    const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
-    useTimeout(3000, () => setCanShowFetchProgress(true), [])
-    
-    
-    const retry = () => {
-      mainPhoto.download?.abort()
+        },
+        downloadError: undefined,
+      } satisfies Partial<MainPhoto>
+      
       setMainPhoto({
         ...mainPhoto,
-        needDownload: true,
-        download: undefined,
-        downloadError: undefined,
+        ...downloadStart,
       })
-    }
-    
-    
-    const info = [profile.city, DateU.ageYears(u.birthDate, lang)].filter(it => it).join(', ')
-    
-    
-    //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
-    
-    return (
-      <>
       
-        <Pages.Page>
-          <Pages.SafeInsets>
-            <Pages.Content css={pageContentS}>
+      const updateDownload = (downloadId: string, u: Partial<MainPhoto>) => {
+        setMainPhoto(s => {
+          if (s.download?.id === downloadId) return { ...s, ...u }
+          return s
+        })
+      }
+      const updateDownloadThrottled = withThrottle(
+        RangeU.map(Math.random(), [0, 1], [1450, 2000]),
+        updateDownload,
+      )
+      
+      ;(async () => {
+        try {
+          const progress = new Progress(2, [90, 10])
+          const onProgress = (p: number | null) => {
+            progress.progress = p ?? 0
+            //console.log('progress', photo.id, progress.value)
+            updateDownloadThrottled(
+              downloadStart.download.id,
+              { download: {
+                ...downloadStart.download,
+                progress: progress.value,
+              } }
+            )
+          }
+          
+          console.log('download started')
+          const blob = await fetchToBlob(
+            mainPhoto.remoteUrl,
+            { onProgress, abortCtrl }
+          )
+          abortCtrl.signal.throwIfAborted()
+          
+          progress.stage++
+          progress.progress = 0
+          const dataUrl = await blobToDataUrl(blob, { onProgress, abortCtrl })
+          abortCtrl.signal.throwIfAborted()
+          
+          console.log('download completed')
+          updateDownload(
+            downloadStart.download.id,
+            { isReady: true, download: undefined, dataUrl },
+          )
+        }
+        catch (ex) {
+          // TODO notify about error
+          //console.log('download error', ex)
+          //console.log('photo', photo)
+          updateDownload(
+            downloadStart.download.id,
+            { download: undefined, downloadError: ex },
+          )
+        }
+        finally {
+          //unlock(photo.remoteUrl)
+        }
+        
+      })()
+    }
+  }, [mainPhoto.needDownload], true)
+  
+  const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
+  useTimeout(3000, () => setCanShowFetchProgress(true), [])
+  
+  
+  const retry = () => {
+    mainPhoto.download?.abort()
+    setMainPhoto({
+      ...mainPhoto,
+      needDownload: true,
+      download: undefined,
+      downloadError: undefined,
+    })
+  }
+  
+  
+  const info = [profile.city, DateU.ageYears(u.birthDate, lang)].filter(it => it).join(', ')
+  
+  
+  //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
+  
+  return (
+    <>
+    
+      <Pages.Page>
+        <Pages.SafeInsets>
+          <Pages.Content css={pageContentS}>
+            
+            <InfoCard>
               
-              <InfoCard>
-                
-                <AvaBox>
-                  {(() => {
-                    if (mainPhoto.downloadError)
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <Button css={IconButtonStyle.imSmallPlaceholderIcFullTransparent}
-                            onClick={retry}
-                          >
-                            <ArrowReloadIc css={avaPlaceholderIcS} />
-                          </Button>
-                        </div>
-                      )
-                    if (!canShowFetchProgress
-                      && mainPhoto.type === 'remote'
-                      && !mainPhoto.isReady
-                      && !mainPhoto.isEmpty
-                    )
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <SparkingLoadingLine />
-                        </div>
-                      )
-                    if (canShowFetchProgress && mainPhoto.download)
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <PieProgress css={imSmallPieProgressS}
-                            progress={
-                              RangeU.map(mainPhoto.download.progress, [0, 100], [5, 95])
-                            }
-                          />
-                        </div>
-                      )
-                    if (mainPhoto.isEmpty) return (
+              <AvaBox>
+                {(() => {
+                  if (mainPhoto.downloadError)
+                    return (
                       <div css={imPlaceholderBoxS}>
-                        <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
+                        <Button
+                          css={IconButtonS6.t(imSmallPlaceholderIcFullTrans)}
+                          onClick={retry}
+                        >
+                          <ArrowReloadIc css={avaPlaceholderIcS} />
+                        </Button>
                       </div>
                     )
-                    if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
-                  })()}
-                </AvaBox>
-                
-                <Name>{u.name}</Name>
-                <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
-                  <Eye>
-                    <Button css={ButtonS6.t(ButtonS6.S.Text.Round.Big.normal2)}>
-                      <EyeWideIc css={SvgIconS6.t(eyeIcS)} />
-                    </Button>
-                  </Eye>
-                </Link>
-                <Info>{info}</Info>
-                
-                <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>
-                  <Edit>
-                    <Button css={editBtnStyle}>{actionText.edit}</Button>
-                  </Edit>
-                </Link>
-                
-                <Divider />
-                
-                <HeaderArrowBox>
-                  <HeaderArrow css={HeaderArrowS.normal}>
-                    {completeProfileDescriptionText}
-                  </HeaderArrow>
-                </HeaderArrowBox>
-                
-                <ProgressBox>
-                  <LineProgress css={LineProgressS.S.normal} progress={profileProgress} />
-                  <Percent>{progress}%</Percent>
-                </ProgressBox>
-                
-                <CompleteProfileText>
-                  {completeProfileInCoupleSteps}
-                </CompleteProfileText>
-                
-              </InfoCard>
+                  if (!canShowFetchProgress
+                    && mainPhoto.type === 'remote'
+                    && !mainPhoto.isReady
+                    && !mainPhoto.isEmpty
+                  )
+                    return (
+                      <div css={imPlaceholderBoxS}>
+                        <SparkingLoadingLine />
+                      </div>
+                    )
+                  if (canShowFetchProgress && mainPhoto.download)
+                    return (
+                      <div css={imPlaceholderBoxS}>
+                        <PieProgress css={imSmallPieProgressS}
+                          progress={
+                            RangeU.map(mainPhoto.download.progress, [0, 100], [5, 95])
+                          }
+                        />
+                      </div>
+                    )
+                  if (mainPhoto.isEmpty) return (
+                    <div css={imPlaceholderBoxS}>
+                      <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
+                    </div>
+                  )
+                  if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
+                })()}
+              </AvaBox>
               
+              <Name>{u.name}</Name>
+              <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
+                <Eye>
+                  <Button css={IconButtonS6.t(eyeIcS)}>
+                    <EyeWideIc />
+                  </Button>
+                </Eye>
+              </Link>
+              <Info>{info}</Info>
               
-              <SummaryPageFeatureCards />
+              <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>
+                <Edit>
+                  <Button css={editBtnStyle}>{actionText.edit}</Button>
+                </Edit>
+              </Link>
               
+              <Divider />
+              
+              <HeaderArrowBox>
+                <HeaderArrow css={HeaderArrowS.normal}>
+                  {completeProfileDescriptionText}
+                </HeaderArrow>
+              </HeaderArrowBox>
+              
+              <ProgressBox>
+                <LineProgress css={LineProgressS.S.normal} progress={profileProgress} />
+                <Percent>{progress}%</Percent>
+              </ProgressBox>
+              
+              <CompleteProfileText>
+                {completeProfileInCoupleSteps}
+              </CompleteProfileText>
+              
+            </InfoCard>
             
-            </Pages.Content>
-          </Pages.SafeInsets>
+            
+            <SummaryPageFeatureCards />
+            
           
-          <PageScrollbars />
-        </Pages.Page>
+          </Pages.Content>
+        </Pages.SafeInsets>
         
-        <BottomButtonBar />
-        
-      </>
-    )
-  }
-)
+        <PageScrollbars />
+      </Pages.Page>
+      
+      <BottomButtonBar />
+      
+    </>
+  )
+})
 export default SummaryPage
 
 
@@ -366,7 +364,11 @@ const Eye = styled.div`
   margin-top: -14px;
   margin-right: -6px;
 `
-const eyeIcS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+const eyeIcS0: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+  iconSz: 'full',
+  iconColor: t.boxNormal.ct3d[0],
+}]
+const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.Trans.Round.Big.normal2, {
   iconSz: 'full',
   iconColor: t.boxNormal.ct3d[0],
 }]

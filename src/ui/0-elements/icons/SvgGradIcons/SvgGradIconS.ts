@@ -6,15 +6,15 @@ import CssProp = WidgetStyle0.CssProp
 
 
 
-
+// TODO Style - remove after NavButton Refactor
 export namespace SvgGradIconsStyle {
   
   
   export const El = function() {
-    const icon = new Elem('rrainuiGradIcon', {}, {
+    const icon = new Elem('rruiGradIcon', {}, {
       size: new CssProp('--size'),
-      firstColor: new CssProp('--icon-grad-first-color'),
-      secondColor: new CssProp('--icon-grad-second-color'),
+      firstColor: new CssProp('--grad-icon-color-0'),
+      secondColor: new CssProp('--grad-icon-color-1'),
     })
     return { root: icon, icon } as const
   }()
@@ -25,8 +25,8 @@ export namespace SvgGradIconsStyle {
   export const normal = (t: AppTheme.Theme) => css`
     ${El.icon.thiz()} {
       ${El.icon.props.size.set('auto')}
-      ${El.icon.props.firstColor.set(t.iconGradient.ct[0])}
-      ${El.icon.props.secondColor.set(t.iconGradient.ct[1])}
+      ${El.icon.props.firstColor.set(t.gradIcon.ct[0])}
+      ${El.icon.props.secondColor.set(t.gradIcon.ct[1])}
     }
   `
   

@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import UseOverlayUrl from 'src/ui/components/action-providers/UseOverlayUrl/UseOverlayUrl.tsx'
-import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
@@ -98,40 +98,34 @@ export namespace ButtonBarComponents {
   
   
   
-  export const SettingsBtn = React.memo(
-    () => {
-      return (
-        <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-          {overlay => (
-            <>
-              <QuickSettingsButton onClick={overlay.open} />
-              
-              <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
-            </>
-          )}
-        </UseOverlayUrl>
-      )
-    }
-  )
+  export const SettingsBtn = React.memo(() => {
+    return (
+      <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+        {overlay => (
+          <>
+            <QuickSettingsButton onClick={overlay.open} />
+            
+            <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
+          </>
+        )}
+      </UseOverlayUrl>
+    )
+  })
   
   
-  export const BackBtn = React.memo(
-    () => {
-      const navigate = useNavigate()
-      const back = useCallback(
-        () => navigate(-1),
-        [navigate]
-      )
-      
-      return (
-        <Button css={IconButtonStyle.iconBig2Transparent}
-          onClick={back}
-        >
-          <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
-        </Button>
-      )
-    }
-  )
+  export const BackBtn = React.memo(() => {
+    const navigate = useNavigate()
+    const back = useCallback(() => navigate(-1), [navigate])
+    
+    return (
+      <Button
+        css={IconButtonS6.t(IconButtonS6.S.Trans.Round.Big2.normal2)}
+        onClick={back}
+      >
+        <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
+      </Button>
+    )
+  })
   
   
   
@@ -144,7 +138,8 @@ export namespace ButtonBarComponents {
     
     
     return (
-      <Button css={IconButtonStyle.iconBig2Transparent}
+      <Button
+        css={IconButtonS6.t(IconButtonS6.S.Trans.Round.Big2.normal2)}
         onClick={reload}
       >
         <ArrowReloadIc css={isReloading && css`
@@ -163,30 +158,31 @@ export namespace ButtonBarComponents {
     isLoading: boolean
     refresh: Callback
   }>
-  export const SoftRefreshBtn =
-  React.memo(
-  (props: SoftRefreshBtnProps)=>{
+  export const SoftRefreshBtn = React.memo((props: SoftRefreshBtnProps) => {
     
     const [isAnimating, animate, finishAnimate] = useBool(false)
     
-    useLayoutEffect(
-      () => { if (props.isLoading) animate() },
-      [props.isLoading]
-    )
+    useLayoutEffect(() => {
+      if (props.isLoading) animate()
+    }, [props.isLoading])
     
-    return <Button css={IconButtonStyle.iconBig2Transparent}
-      onClick={props.refresh}
-    >
-      <ArrowReloadIc css={isAnimating && css`
-        ${SvgIconS.El.icon.thiz()} {
-          animation: ${rotateAnim} 650ms linear infinite;
-        }
-      `}
-        onAnimationIteration={ev => {
-          if (ev.animationName === rotateAnim.name && !props.isLoading) finishAnimate()
-        }}
-      />
-    </Button>
+    return (
+      <Button
+        css={IconButtonS6.t(IconButtonS6.S.Trans.Round.Big2.normal2)}
+        onClick={props.refresh}
+      >
+        <ArrowReloadIc
+          css={isAnimating && css`
+            ${SvgIconS.El.icon.thiz()} {
+              animation: ${rotateAnim} 650ms linear infinite;
+            }
+          `}
+          onAnimationIteration={ev => {
+            if (ev.animationName === rotateAnim.name && !props.isLoading) finishAnimate()
+          }}
+        />
+      </Button>
+    )
   })
   
   

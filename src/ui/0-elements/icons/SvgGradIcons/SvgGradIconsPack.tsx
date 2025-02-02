@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React from 'react'
+import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
-import { SvgGradIconsStyle } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS.ts'
 
 
 import ArrowAngledRounded2GradSvg from 'src/res/ic/gradient/arrow-angled-rounded-2-grad.svg?react'
@@ -67,9 +67,9 @@ export namespace SvgGradIconsPack {
   // Base interface for simple svg icons
   
   type BaseGradSvgIconCustomProps = PartialUndef<{
-    firstColor: string
-    secondColor: string
-    size: number|string
+    color0: string
+    color1: string
+    size: number | string
   }>
   
   type SvgProps = React.SVGProps<SVGSVGElement> & { title?: string }
@@ -85,45 +85,44 @@ export namespace SvgGradIconsPack {
   export type BaseGradSvgIconProps =
     BaseGradSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps & BaseSimpleSvgIconSvgComponentProp
   
-  export const BaseGradSvgIcon =
-    React.memo(
-      React.forwardRef<BaseSimpleSvgIconRefElement, BaseGradSvgIconProps>(
-        (props, forwardedRef) => {
-          const {
-            className,
-            firstColor, secondColor,
-            size, width, height,
-            SvgComponent,
-            ...restProps
-          } = props
-          
-          const w = width ?? size
-          const h = height ?? size
-          
-          const sizeProp = SvgGradIconsStyle.El.root.props.size
-          const firstColorProp = SvgGradIconsStyle.El.root.props.firstColor
-          const secondColorProp = SvgGradIconsStyle.El.root.props.secondColor
-          
-          return (
-            <SvgComponent
-              css={css`
-                width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-                height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-                //max-width: 100%;
-                //max-height: 100%;
-                ${firstColorProp.name}: ${firstColor || firstColorProp.var('black')};
-                ${secondColorProp.name}: ${secondColor || secondColorProp.var('black')};
-              `}
-              width={w}
-              height={h}
-              className={clsx(className, SvgGradIconsStyle.El.icon.name)}
-              {...restProps}
-              ref={forwardedRef}
-            />
-          )
-        }
-      )
+  export const BaseGradSvgIcon = React.memo(
+    React.forwardRef<BaseSimpleSvgIconRefElement, BaseGradSvgIconProps>(
+      (props, forwardedRef) => {
+        const {
+          className,
+          color0, color1,
+          size, width, height,
+          SvgComponent,
+          ...restProps
+        } = props
+        
+        const w = width ?? size
+        const h = height ?? size
+        
+        const sizeProp = SvgGradIconS6.W.els.gradIcon.ps!.sz
+        const color0Prop = SvgGradIconS6.W.els.gradIcon.ps!.color0
+        const color1Prop = SvgGradIconS6.W.els.gradIcon.ps!.color1
+        
+        return (
+          <SvgComponent
+            css={css`
+              width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+              height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+              //max-width: 100%;
+              //max-height: 100%;
+              ${color0Prop.n}: ${color0 || color0Prop.var('black')};
+              ${color1Prop.n}: ${color1 || color1Prop.var('black')};
+            `}
+            width={w}
+            height={h}
+            className={clsx(className, SvgGradIconS6.W.els.gradIcon.n)}
+            {...restProps}
+            ref={forwardedRef}
+          />
+        )
+      }
     )
+  )
   
   
   

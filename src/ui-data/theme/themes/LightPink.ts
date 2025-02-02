@@ -59,7 +59,7 @@ export const LightPinkProps: ThemeProps = { ...LightProps,
     bgFocus: ['#00000011'],
   },
   
-  iconGradient: { ...LightProps.iconGradient,
+  gradIcon: { ...LightProps.gradIcon,
     ct:       ['#f17492', '#f17492'],
   },
   
