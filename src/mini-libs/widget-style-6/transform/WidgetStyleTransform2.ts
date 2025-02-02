@@ -46,7 +46,7 @@ export function transform2(
       sProp = uncapitalize(sProp)
       
       for (let ctxI = lastI(contextStack); ctxI >= 0; ctxI--) {
-        let context = contextStack[ctxI]
+        const context = contextStack[ctxI]
         if (context) for (const [name, entity] of
           // TODO Style - найти место для сортировки
           Object.entries(context).sort(([a], [b]) => b.length - a.length)

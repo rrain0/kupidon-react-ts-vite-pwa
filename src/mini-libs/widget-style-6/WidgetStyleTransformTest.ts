@@ -96,16 +96,19 @@ export namespace WidgetStyle6Test {
   }
   
   export const inputWidgetStyle: WidgetStyleWithProps<InputWidgetStyleProps> = [
-    { r: 14, boxP: [8, 16] },
-    t => ({ boxM: t.sz === 'md' ? [8, 16] : t.sz === 'lg' ? [16, 32] : undefined }),
     {
-      boxAbs: 0,
-      input: { '-webkit-tap-highlight-color': 'transparent' },
       box: {
         after: {
           bg: 'orange',
         },
       },
+      r: 14,
+      boxP: [8, 16],
+    },
+    t => ({ boxM: t.sz === 'md' ? [8, 16] : t.sz === 'lg' ? [16, 32] : undefined }),
+    {
+      boxAbs: 0,
+      input: { '-webkit-tap-highlight-color': 'transparent' },
       hoverTypeRadioBg: 'white',
       frameHoverAfterBg: 'aqua',
       frameTypeCheckboxBoxSz: '40%',

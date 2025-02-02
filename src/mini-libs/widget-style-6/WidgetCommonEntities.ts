@@ -18,7 +18,6 @@ export const CommonProps = (() => {
     maxWidth: WidgetProps.maxWidth,
     maxHeight: WidgetProps.maxHeight,
     size: AdditionalProps.size,
-    
     w: WidgetProps.width,
     h: WidgetProps.height,
     wMin: WidgetProps.minWidth,
@@ -27,12 +26,12 @@ export const CommonProps = (() => {
     hMax: WidgetProps.maxHeight,
     sz: AdditionalProps.size,
     
-    margin: WidgetProps.margin,
+    margin: AdditionalProps.margin,
     marginTop: WidgetProps.marginTop,
     marginRight: WidgetProps.marginRight,
     marginBottom: WidgetProps.marginBottom,
     marginLeft: WidgetProps.marginLeft,
-    m: WidgetProps.margin,
+    m: AdditionalProps.margin,
     mt: WidgetProps.marginTop,
     mr: WidgetProps.marginRight,
     mb: WidgetProps.marginBottom,
@@ -40,12 +39,12 @@ export const CommonProps = (() => {
     mh: AdditionalProps.mh,
     mv: AdditionalProps.mv,
     
-    padding: WidgetProps.padding,
+    padding: AdditionalProps.padding,
     paddingTop: WidgetProps.paddingTop,
     paddingRight: WidgetProps.paddingRight,
     paddingBottom: WidgetProps.paddingBottom,
     paddingLeft: WidgetProps.paddingLeft,
-    p: WidgetProps.padding,
+    p: AdditionalProps.padding,
     pt: WidgetProps.paddingTop,
     pr: WidgetProps.paddingRight,
     pb: WidgetProps.paddingBottom,
@@ -62,7 +61,6 @@ export const CommonProps = (() => {
     bottom: WidgetProps.bottom,
     left: WidgetProps.left,
     zIndex: WidgetProps.zIndex,
-    
     pos: WidgetProps.position,
     abs: AdditionalProps.abs,
     absT: WidgetProps.top,
@@ -87,24 +85,22 @@ export const CommonProps = (() => {
     backgroundImage: WidgetProps.backgroundImage,
     backgroundPosition: WidgetProps.backgroundPosition,
     backgroundSize: WidgetProps.backgroundSize,
-    
-    border: WidgetProps.border,
-    borderColor: WidgetProps.borderColor,
-    borderRadius: WidgetProps.borderRadius,
-    
-    outline: WidgetProps.outline,
-    boxShadow: WidgetProps.boxShadow,
-    
     bg: WidgetProps.background,
     bgColor: WidgetProps.backgroundColor,
     bgIm: WidgetProps.backgroundImage,
     bgPos: WidgetProps.backgroundPosition,
     bgSz: WidgetProps.backgroundSize,
     
+    border: WidgetProps.border,
+    borderColor: WidgetProps.borderColor,
+    borderRadius: WidgetProps.borderRadius,
     bd: WidgetProps.border,
     bdColor: WidgetProps.borderColor,
     radius: WidgetProps.borderRadius,
     r: WidgetProps.borderRadius,
+    
+    outline: WidgetProps.outline,
+    boxShadow: WidgetProps.boxShadow,
     
     gridTemplateRows: WidgetProps.gridTemplateRows,
     gridTemplateColumns: WidgetProps.gridTemplateColumns,
@@ -113,7 +109,6 @@ export const CommonProps = (() => {
     gridAutoColumns: WidgetProps.gridAutoColumns,
     gridAutoFlow: WidgetProps.gridAutoFlow,
     gridArea: WidgetProps.gridArea,
-    
     rows: WidgetProps.gridTemplateRows,
     cols: WidgetProps.gridTemplateColumns,
     areas: WidgetProps.gridTemplateAreas,
@@ -123,8 +118,8 @@ export const CommonProps = (() => {
     area: WidgetProps.gridArea,
     
     pointerEvents: WidgetProps.pointerEvents,
-    
     pointer: WidgetProps.pointerEvents,
+    content: WidgetProps.content,
   }
   const sortedProps = Object.entries(props)
     .sort((([propA], [propB]) => propB.length - propA.length))
@@ -136,7 +131,7 @@ export const CommonProps = (() => {
 export const CommonStates = (() => {
   const states = {
     before: WidgetPseudoElements.before,
-    after: WidgetPseudoElements.after,
+    after: AdditionalStates.after,
     
     type: WidgetAttrs.type,
     radio: AdditionalStates.radio,

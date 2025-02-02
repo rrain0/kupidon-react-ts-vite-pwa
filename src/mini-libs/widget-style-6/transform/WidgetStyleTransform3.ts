@@ -99,7 +99,7 @@ export function transform3(
       else if (entity.type === 'propValue') {
         if (prop) {
           if (prop.isAtomic) {
-            d.push(prop, entity)
+            transformed.push([...m, ...d, prop, entity])
           }
           else {
             return transform3(
@@ -111,9 +111,6 @@ export function transform3(
         state = undefined
         prop = undefined
       }
-      
-      // last must be value after prop so no need to check 'state' & 'prop'
-      if (dataI === data.length - 1) transformed.push([...m, ...d])
     }
   })
   

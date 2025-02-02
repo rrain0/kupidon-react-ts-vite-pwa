@@ -221,25 +221,6 @@ const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.Normal.normal, {
     pos: 'rel', z: 1,
     h: 50, mb: -30,
   },
-  
-  
-  
-  /* headerTitle: {
-    w: 'full', h: 30, mb: -30,
-    
-    
-    pos: 'rel',
-    after: {
-      // TODO Style - wrap in after & before
-      content: '""',
-      pos: 'abs',
-      // TODO Style - null for absent len value
-      //a: ['full', 0, null, 0],
-      at: 'full', al: 0, ar: 0,
-      h: 30,
-      pointer: false,
-    },
-  }, */
   overflowCont: { p: 0 },
 }]
 

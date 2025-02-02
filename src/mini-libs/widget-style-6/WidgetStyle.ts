@@ -49,13 +49,30 @@ const withRawCss = {
 
 
 export type StyleVal =
-  | string // pass as is if there are no special values or transformations
-  | number // transform to fractions or pixels
-  | boolean
-  | null // set empty value (e.g. background: none, color: transparent, padding: 0)
-  | undefined // will not be rendered to css as if prop not exists
+  // absence of property - will not be rendered to
+  | undefined
+  // transform to empty value
+  // background: none, color: transparent, width: undefined
+  | null
+  // transform to undefined
+  | ''
+  // transform to some meaningful enabled value
+  // pointer-events: auto
+  | true
+  // transform to some meaningful disabled value
+  // pointer-events: none, width: 0
+  | false
+  // transform to string or px
+  // opacity: 1, width: 100px
+  | number
+  // usually pass as is except special values or cases
+  | string
 
 export type StyleValue = StyleVal | StyleVal[]
+
+
+// TODO Style - CssValue
+type CssValue = undefined | Exclude<string, ''>
 
 
 
