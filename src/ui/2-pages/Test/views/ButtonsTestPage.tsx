@@ -188,18 +188,6 @@ namespace AllButtonStyles {
 }
 
 namespace AllIconButtonStyles {
-  export namespace Filled {
-    export namespace Round {
-      export namespace Normal {
-        export const accent: AppWidgetStyle = IconButtonS6.S.Filled.Round.Normal.accent
-        export const normal2: AppWidgetStyle = IconButtonS6.S.Filled.Round.Normal.normal2
-      }
-      export namespace Big2 {
-        export const accent: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big2.accent
-        export const normal2: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big2.normal2
-      }
-    }
-  }
   export namespace Trans {
     export namespace Round {
       export namespace Big {
@@ -207,6 +195,18 @@ namespace AllIconButtonStyles {
       }
       export namespace Big2 {
         export const normal2: AppWidgetStyle = IconButtonS6.S.Trans.Round.Big2.normal2
+      }
+    }
+  }
+  export namespace Filled {
+    export namespace Round {
+      export namespace Big {
+        export const accent: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big.accent
+        export const normal2: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big.normal2
+      }
+      export namespace Big2 {
+        export const accent: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big2.accent
+        export const normal2: AppWidgetStyle = IconButtonS6.S.Filled.Round.Big2.normal2
       }
     }
   }

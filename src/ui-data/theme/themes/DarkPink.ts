@@ -97,8 +97,11 @@ export const DarkPinkProps: ThemeProps = { ...DarkProps,
   },
   
   bottomSheet: { ...DarkProps.bottomSheet,
-    bg:    ['#121212'],
-    handle: ['#8b8b8b'],
+    bg:     '#121212',
+  },
+  
+  bottomSheetHandle: { ...DarkProps.bottomSheetHandle,
+    bg:     '#8b8b8b',
   },
   
   toast: { ...DarkProps.toast,

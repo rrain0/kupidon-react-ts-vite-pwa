@@ -96,8 +96,11 @@ export const LightPinkProps: ThemeProps = { ...LightProps,
   },
   
   bottomSheet: { ...LightProps.bottomSheet,
-    bg:    ['#ffffff'],
-    handle: ['#8b8b8b'],
+    bg:     '#ffffff',
+  },
+  
+  bottomSheetHandle: { ...LightProps.bottomSheetHandle,
+    bg:     '#8b8b8b',
   },
   
   toast: { ...LightProps.toast,

@@ -42,13 +42,18 @@ export namespace SvgIconS6 {
     export const base: WidgetStyleObj = {
       icon: {
         sz: 'auto',
-        color: '#6A6A6A',
-        colorAcc: '#006A6A',
       },
     }
     
+    export const baseColor: AppWidgetStyle = t => ({
+      icon: {
+        color: '#6A6A6A',
+        colorAcc: '#006A6A',
+      },
+    })
+    
     export namespace Normal {
-      export const normal: AppWidgetStyle = t => [base, {
+      export const normal: AppWidgetStyle = t => [base, baseColor, {
         iconColor: t.boxNormal.ct1b[0],
         iconColorAcc: t.boxNormal.ct1b[0],
       }]

@@ -10,7 +10,6 @@ import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { IconButtonStyle } from 'src/ui/0-elements/buttons/IconButton/IconButtonStyle.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
@@ -90,7 +89,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       
       <ActionButtonsBox>
         <Button
-          css={backButtonS}
+          css={IconButtonS6.t(backButtonS)}
           disabled={isDragging}
           onClick={ev => {
             ev.stopPropagation()
@@ -100,7 +99,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           <ArrowBackGradIc />
         </Button>
         <Button
-          css={dislikeButtonS}
+          css={IconButtonS6.t(dislikeButtonS)}
           disabled={isDragging}
           onClick={ev => {
             ev.stopPropagation()
@@ -110,7 +109,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           <Cross2GradIc />
         </Button>
         <Button
-          css={likeButtonS}
+          css={IconButtonS6.t(likeButtonS)}
           disabled={isDragging}
           onClick={ev => {
             ev.stopPropagation()
@@ -120,7 +119,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           <Heart2Ic />
         </Button>
         <Button
-          css={infoButtonS}
+          css={IconButtonS6.t(infoButtonS)}
           disabled={isDragging}
           onClick={ev => {
             ev.stopPropagation()
@@ -176,37 +175,121 @@ const ActionButtonsBox = styled.div`
   ${colC};
   gap: 22px;
 `
-const backButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewNormal(t)};
-  ${IconButtonS6.t({
-    gradIcon: {
-      sz: '54%',
-      rotate: '0.5turn',
-      translate: '-7% -5%',
+
+
+
+const icPreviewNormal: AppWidgetStyle = t => [
+  IconButtonS6.S.Filled.Round.sizeBig2,
+  IconButtonS6.S.Filled.baseColor,
+  {
+    buttonBgColor: t.previewButtonNorm.bg,
+    buttonColor: t.previewButtonNorm.ct,
+    rippleRippleColor: t.previewButtonNorm.ctRipple,
+    gradIconColor0: t.previewButtonNorm.ctGrad[0],
+    gradIconColor1: t.previewButtonNorm.ctGrad[2],
+    inFocus: {
+      buttonBgColor: t.previewButtonNorm.bgFc,
+      buttonColor: t.previewButtonNorm.ctFc,
     },
-  })(t)}
-`
-const dislikeButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewNormalBigger(t)};
-  ${IconButtonS6.t({
-    gradIconSz: '35.5%',
-  })(t)}
-`
-const likeButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewMain(t)};
-  ${IconButtonS6.t({
-    iconSz: '51.05%',
-  })(t)}
-`
-const infoButtonS = (t: AppTheme.Theme) => css`
-  ${IconButtonStyle.icPreviewNormal(t)};
-  ${IconButtonS6.t({
-    gradIcon: {
-      sz: '50%',
-      translate: '0 10%',
+  },
+  {
+    button: {
+      p: 0,
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
     },
-  })(t)}
-`
+    disabled: {
+      buttonTransition: 'opacity 0.2s',
+      buttonOpacity: 0.3,
+    },
+    
+    // TODO Style - remove and apply :where to resetButton
+    buttonHover: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonActive: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonFocus: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonFocusVisible: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+  },
+
+]
+const icPreviewMain: AppWidgetStyle = t => [
+  IconButtonS6.S.Filled.Round.sizeBig2,
+  IconButtonS6.S.Filled.baseColor,
+  {
+    buttonBg: {
+      color: t.previewButtonMain.bg,
+      im: `linear-gradient(
+        to bottom,
+        ${t.previewButtonMain.bgGrad[0]} 25%,
+        ${t.previewButtonMain.bgGrad[1]} 50% 100%
+      )`,
+      pos: '0 0',
+      sz: '100% 200%',
+    },
+    buttonColor: t.previewButtonMain.ct,
+    rippleRippleColor: t.previewButtonMain.ctRipple,
+    iconColor: t.previewButtonMain.ct,
+    inFocus: {
+      buttonTransition: 'background-position 0.3s',
+      buttonBgPos: '0 100%',
+    },
+  },
+  {
+    button: {
+      sz: 60, p: 0,
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    disabled: {
+      buttonTransition: 'opacity 0.2s',
+      buttonOpacity: 0.3,
+    },
+    
+    // TODO Style - remove and apply :where to resetButton
+    buttonHover: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonActive: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonFocus: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+    buttonFocusVisible: {
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
+    },
+  },
+]
+
+
+
+
+
+const backButtonS: AppWidgetStyle = t => [icPreviewNormal, {
+  gradIcon: {
+    sz: '54%',
+    rotate: '0.5turn',
+    translate: '-7% -5%',
+  },
+}]
+const dislikeButtonS: AppWidgetStyle = t => [icPreviewNormal, {
+  buttonSz: 58,
+  gradIconSz: '35.5%',
+}]
+const likeButtonS: AppWidgetStyle = t => [icPreviewMain, {
+  iconSz: '51.05%',
+}]
+const infoButtonS: AppWidgetStyle = t => [icPreviewNormal, {
+  gradIcon: {
+    sz: '50%',
+    translate: '0 10%',
+  },
+}]
 
 
 const ShortInfoContainer = styled.div`

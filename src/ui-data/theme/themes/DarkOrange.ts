@@ -45,8 +45,8 @@ export const DarkOrangeProps: ThemeProps = { ...DarkPinkProps,
     borderHover: ['#00a8f3'],
   },
   
-  bottomSheet: { ...DarkPinkProps.bottomSheet,
-    handle: ['#ff935e'],
+  bottomSheetHandle: { ...DarkPinkProps.bottomSheetHandle,
+    bg: '#ff935e',
   },
 }
 

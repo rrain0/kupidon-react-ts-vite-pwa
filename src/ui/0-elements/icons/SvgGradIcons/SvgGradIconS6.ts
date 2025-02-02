@@ -42,13 +42,18 @@ export namespace SvgGradIconS6 {
     export const base: WidgetStyleObj = {
       gradIcon: {
         sz: 'auto',
-        color0: '#6A6A6A',
-        color1: '#006A6A',
       },
     }
     
+    export const baseColor: AppWidgetStyle = t => ({
+      icon: {
+        color0: '#6A6A6A',
+        color1: '#006A6A',
+      },
+    })
+    
     export namespace Normal {
-      export const normal: AppWidgetStyle = t => [base, {
+      export const normal: AppWidgetStyle = t => [base, baseColor, {
         gradIconColor0: t.gradIcon.ct[0],
         gradIconColor1: t.gradIcon.ct[1],
       }]

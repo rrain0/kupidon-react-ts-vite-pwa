@@ -25,7 +25,7 @@ export namespace IconButtonS6 {
   const WidgetElems = buildWidgetElems()
   const WidgetStates = ButtonS6.W.states!
   
-  const W = Widget.of({
+  export const W = Widget.of({
     rootElem: WidgetElems.button,
     elems: WidgetElems,
     states: WidgetStates,
@@ -46,9 +46,13 @@ export namespace IconButtonS6 {
     // Transparent
     export namespace Trans {
       
+      export const baseColor: AppWidgetStyle = t => [
+        ButtonS6.S.Text.baseColor, SvgIconS6.S.baseColor, SvgGradIconS6.S.baseColor,
+      ]
+      
       export namespace Color {
         // type: trans, color: normal2
-        export const normal2: AppWidgetStyle = t => [ButtonS6.S.Text.Color.normal2, {
+        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.S.Text.Color.normal2, {
           iconColor: t.buttonNormal.bg[0],
           // todo gradIcon
         }]
@@ -79,15 +83,19 @@ export namespace IconButtonS6 {
     
     export namespace Filled {
       
+      export const baseColor: AppWidgetStyle = t => [
+        ButtonS6.S.Text.baseColor, SvgIconS6.S.baseColor, SvgGradIconS6.S.baseColor,
+      ]
+      
       export namespace Color {
-        // type: filled, color: normal2
-        export const normal2: AppWidgetStyle = t => [ButtonS6.S.Filled.Color.normal2, {
-          iconColor: t.buttonNormal.ct[0],
+        // type: filled, color: accent
+        export const accent: AppWidgetStyle = t => [baseColor, ButtonS6.S.Filled.Color.accent, {
+          iconColor: t.buttonAccent.ct[0],
           // todo gradIcon
         }]
-        // type: filled, color: accent
-        export const accent: AppWidgetStyle = t => [ButtonS6.S.Filled.Color.accent, {
-          iconColor: t.buttonAccent.ct[0],
+        // type: filled, color: normal2
+        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.S.Filled.Color.normal2, {
+          iconColor: t.buttonNormal.ct[0],
           // todo gradIcon
         }]
       }
@@ -95,19 +103,19 @@ export namespace IconButtonS6 {
       export namespace Round {
         
         // type: filled, shape: round, size: normal
-        export const sizeNormal: WidgetStyle = [base, {
+        export const sizeBig: WidgetStyle = [base, {
           button: { sz: 50, r: 'round', p: 11 },
           rippleRipple: { mode: 'center' },
         }]
         // type: filled, shape: round, size: big2
-        export const sizeBig2: WidgetStyle = [sizeNormal, {
+        export const sizeBig2: WidgetStyle = [sizeBig, {
           buttonP: 14,
           iconSz: 'full',
         }]
         
-        export namespace Normal {
-          export const accent: AppWidgetStyle = [sizeNormal, Color.accent]
-          export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
+        export namespace Big {
+          export const accent: AppWidgetStyle = [sizeBig, Color.accent]
+          export const normal2: AppWidgetStyle = [sizeBig, Color.normal2]
         }
         export namespace Big2 {
           export const accent: AppWidgetStyle = [sizeBig2, Color.accent]
