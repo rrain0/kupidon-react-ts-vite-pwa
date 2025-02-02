@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { FileU } from 'src/util/file/FileU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -55,7 +56,10 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
     <UseBottomSheetState isOpen={isOpen} onClose={close}>
       { sheet => (
         <ModalPortal>
-          <BottomSheetBasic {...sheet.sheetProps}>
+          <BottomSheetBasic
+            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
+            {...sheet.sheetProps}
+          >
             <OptionsContent>
               
               

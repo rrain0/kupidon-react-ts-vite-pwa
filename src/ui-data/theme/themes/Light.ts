@@ -11,7 +11,7 @@ export const LightProps: ThemeProps = {
   
   page: {
     bg:          '#f5f5f5',
-    bgGradient:  ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
+    bgGrad:  ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
     ct1:    '#000000',
     ct2:    '#000000',
     ct3:    '#999999',
@@ -262,8 +262,12 @@ export const LightProps: ThemeProps = {
   },
   
   bottomSheet: {
-    bg:     ['#ffffff'],
-    handle: ['#8b8b8b'],
+    bg:        '#ffffff',
+    ct:        '#000000',
+  },
+  bottomSheetHandle: {
+    bg:        '#8b8b8b',
+    bgFc:      '#000000',
   },
   
   toast: {

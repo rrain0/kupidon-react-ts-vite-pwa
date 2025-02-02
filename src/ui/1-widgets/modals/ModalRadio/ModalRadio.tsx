@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
@@ -37,8 +38,9 @@ const ModalRadio = ReactU.memo(
       {sheetProps =>
         <ModalPortal>
           <BottomSheetBasic
+            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
             {...sheetProps.sheetProps}
-            headerTitle={title}
+            title={title}
           >
             <RadioInputGroup css={selectItemsContainer}>
               {options?.map(opt => <RadioInput

@@ -1,13 +1,10 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
 import {
   WidgetElem,
-  WidgetMultiAnyTransformer,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { createWidgetState, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import {
-  AdditionalProps,
-  CommonStates,
-} from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import {
   AppStyle,
   AppWidgetStyle,
@@ -30,16 +27,13 @@ export namespace ButtonS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const button = WidgetElem.of({
-      className: 'rruiButton',
-      ...up,
-      states: CommonStates,
+      ...up, className: 'rruiButton',
       // TODO Style - think about it
       // 'color' & '--color' will be passed via WidgetProps
       props: { varColor: AdditionalProps.varColor },
     })
     const border = WidgetElem.of({
-      className: 'rruiBorder',
-      upElem: button, upSelector: '>',
+      upElem: button, upSelector: '>', className: 'rruiBorder',
     })
     const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
     return {
@@ -51,9 +45,9 @@ export namespace ButtonS6 {
   
   const WidgetElems = buildWidgetElems()
   namespace WidgetStates {
-    export const inFocus = createWidgetState([WidgetElems.button, CommonStates.inFocus])
-    export const disabled = createWidgetState([WidgetElems.button, CommonStates.disabled])
-    export const error = createWidgetState([WidgetElems.button, CommonStates.error])
+    export const inFocus = WidgetState.of([WidgetElems.button, CommonStates.inFocus])
+    export const disabled = WidgetState.of([WidgetElems.button, CommonStates.disabled])
+    export const error = WidgetState.of([WidgetElems.button, CommonStates.error])
   }
   namespace WidgetProps {
     export const color = AdditionalProps.colorAndVarColor

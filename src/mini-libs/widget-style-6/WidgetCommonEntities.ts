@@ -1,14 +1,12 @@
 import {
-  WidgetMultiPropTransformer, WidgetProp,
-  WidgetPropValue
-} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import {
-  WidgetComplexTransformers,
+  AdditionalStates,
   WidgetAttrs,
   WidgetProps,
   WidgetPseudoElements,
-  WidgetPseudos,
+  WidgetPseudos, AdditionalProps,
 } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+
+
 
 
 export const CommonProps = (() => {
@@ -19,7 +17,7 @@ export const CommonProps = (() => {
     minHeight: WidgetProps.minHeight,
     maxWidth: WidgetProps.maxWidth,
     maxHeight: WidgetProps.maxHeight,
-    size: WidgetComplexTransformers.size,
+    size: AdditionalProps.size,
     
     w: WidgetProps.width,
     h: WidgetProps.height,
@@ -27,7 +25,7 @@ export const CommonProps = (() => {
     hMin: WidgetProps.minHeight,
     wMax: WidgetProps.maxWidth,
     hMax: WidgetProps.maxHeight,
-    sz: WidgetComplexTransformers.size,
+    sz: AdditionalProps.size,
     
     margin: WidgetProps.margin,
     marginTop: WidgetProps.marginTop,
@@ -39,8 +37,8 @@ export const CommonProps = (() => {
     mr: WidgetProps.marginRight,
     mb: WidgetProps.marginBottom,
     ml: WidgetProps.marginLeft,
-    mh: WidgetComplexTransformers.mh,
-    mv: WidgetComplexTransformers.mv,
+    mh: AdditionalProps.mh,
+    mv: AdditionalProps.mv,
     
     padding: WidgetProps.padding,
     paddingTop: WidgetProps.paddingTop,
@@ -52,8 +50,8 @@ export const CommonProps = (() => {
     pr: WidgetProps.paddingRight,
     pb: WidgetProps.paddingBottom,
     pl: WidgetProps.paddingLeft,
-    ph: WidgetComplexTransformers.ph,
-    pv: WidgetComplexTransformers.pv,
+    ph: AdditionalProps.ph,
+    pv: AdditionalProps.pv,
     
     gap: WidgetProps.gap,
     g: WidgetProps.gap,
@@ -66,20 +64,20 @@ export const CommonProps = (() => {
     zIndex: WidgetProps.zIndex,
     
     pos: WidgetProps.position,
-    abs: WidgetComplexTransformers.abs,
+    abs: AdditionalProps.abs,
     absT: WidgetProps.top,
     absR: WidgetProps.right,
     absB: WidgetProps.bottom,
     absL: WidgetProps.left,
-    absH: WidgetComplexTransformers.absH,
-    absV: WidgetComplexTransformers.absV,
-    a: WidgetComplexTransformers.abs,
+    absH: AdditionalProps.absH,
+    absV: AdditionalProps.absV,
+    a: AdditionalProps.abs,
     at: WidgetProps.top,
     ar: WidgetProps.right,
     ab: WidgetProps.bottom,
     al: WidgetProps.left,
-    ah: WidgetComplexTransformers.absH,
-    av: WidgetComplexTransformers.absV,
+    ah: AdditionalProps.absH,
+    av: AdditionalProps.absV,
     z: WidgetProps.zIndex,
     
     color: WidgetProps.color,
@@ -139,19 +137,21 @@ export const CommonStates = (() => {
   const states = {
     before: WidgetPseudoElements.before,
     after: WidgetPseudoElements.after,
+    
     type: WidgetAttrs.type,
-    radio: WidgetComplexTransformers.radio,
+    radio: AdditionalStates.radio,
+    checkbox: AdditionalStates.checkbox,
     
     // States
     checked: WidgetPseudos.checked,
     selected: WidgetPseudos.selected,
     // hoverable AND hover
-    hover: WidgetComplexTransformers.hoverableHover,
+    hover: AdditionalStates.hoverableHover,
     active: WidgetPseudos.active,
     focus: WidgetPseudos.focus,
     focusVisible: WidgetPseudos.focusVisible,
     // hoverable hover OR focusVisible
-    inFocus: WidgetComplexTransformers.inFocus,
+    inFocus: AdditionalStates.inFocus,
     readOnly: WidgetPseudos.readOnly,
     disabled: WidgetPseudos.disabled,
     error: WidgetAttrs.error,
@@ -161,23 +161,5 @@ export const CommonStates = (() => {
     .reduce((acc, curr) => { acc[curr[0]] = curr[1]; return acc }, { } as typeof states)
   return sortedProps
 })()
-
-
-
-export namespace AdditionalProps {
-  // --color: size;
-  export const varSize = WidgetProp.ofName('--size', WidgetProps.transformLenValue)
-  // --color: value;
-  export const varColor = WidgetProp.ofName('--color')
-  // color: value; --color: value;
-  export const colorAndVarColor = WidgetMultiPropTransformer.of({
-    transform: value => [
-      [WidgetProps.color, WidgetPropValue.of(value)],
-      [AdditionalProps.varColor, WidgetPropValue.of(value)],
-    ],
-  })
-  export const varAccentColor = WidgetProp.ofName('--accent-color')
-  // color: value; --color: value;
-}
 
 

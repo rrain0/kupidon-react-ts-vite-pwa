@@ -18,6 +18,7 @@ import combineProps = ReactU.combineProps
 import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
+import trueOrUndef = TypeU.trueOrUndef
 
 
 
@@ -32,7 +33,7 @@ export type BottomSheetRefsProps = {
   bottomSheetHeaderRef: React.RefObject<HTMLDivElement>
   bottomSheetContentRef: React.RefObject<HTMLDivElement>
 }
-export type BottomSheetOptionsProps = UseBottomSheetOptions & Puro<{
+export type BottomSheetOptionsProps = ClassStyle & UseBottomSheetOptions & Puro<{
   onComputedDimens: Callback1<ComputedBottomSheetDimens>
   onSnapPointsPx: Callback1<number[]>
   bgDim: boolean
@@ -41,7 +42,7 @@ export type BottomSheetChildren = Puro<{
   children: (renderProps: BottomSheetChildrenProps) => React.ReactNode
 }>
 export type BottomSheetProps =
-  ClassStyle & BottomSheetRefsProps & BottomSheetOptionsProps & BottomSheetChildren
+  BottomSheetRefsProps & BottomSheetOptionsProps & BottomSheetChildren
 
 
 
@@ -110,6 +111,8 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
   
   //useLayoutEffect(() => console.log('state',state), [state])
   
+  const dataDragging = BottomSheetS6.W.els.frame.ss!.dragging.n
+  
   return (
     <animated.div
       data-display-name="Bottom Sheet Frame"
@@ -131,6 +134,7 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
         ...style,
       }}
       ref={bottomSheetFrameRef}
+      {...{ [dataDragging]: trueOrUndef(sheetState === 'dragging') }}
       
       {...combineProps({
         ...bgDim && {

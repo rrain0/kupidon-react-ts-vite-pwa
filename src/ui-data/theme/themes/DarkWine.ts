@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
+import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -12,18 +13,18 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   page: { ...DarkProps.page,
     bg:         '#18191b',
-    bgGradient: ['#282c34', '#282c34', '#282c34'],
+    bgGrad:     ['#282c34', '#282c34', '#282c34'],
   },
   statusBar: { ...DarkProps.statusBar,
-    bg: '#282c34',
+    bg:         '#282c34',
   },
   nav: { ...DarkProps.nav,
-    bg: '#282c34',
+    bg:         '#282c34',
   },
   navButton: { ...DarkProps.navButton,
-    bgFocus:  ['#2e3440'],
-    ct:       ['#7b7b7b'],
-    cta:      ['#b7405c'], // ['#984559']
+    bgFocus:   ['#2e3440'],
+    ct:        ['#7b7b7b'],
+    cta:       ['#b7405c'], // ['#984559']
   },
   
   
@@ -31,12 +32,12 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   boxNormal: { ...DarkProps.boxNormal,
     bg:       ['#24272d'],
     bg2:      ['#282c34'],
-    ct:   ['#bdbdbd'],
-    ct2:  ['#999999'],
-    ct3:  ['#7b7b7b'],
-    cta:   ['#b7405c'], // ['#984559']
-    cta2:  '#b7405c',
-    cta3:  ['#BB2649'],
+    ct:       ['#bdbdbd'],
+    ct2:      ['#999999'],
+    ct3:      ['#7b7b7b'],
+    cta:      ['#b7405c'], // ['#984559']
+    cta2:     '#b7405c',
+    cta3:     ['#BB2649'],
   },
   boxAccent: { ...DarkProps.boxAccent,
     bg:        ['#aaaaaa'],
@@ -147,10 +148,8 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     highlightFrameAccentBg: ['#ffe1e1'],
   },
   
-  bottomSheet: { ...DarkProps.bottomSheet,
-    bg:     ['#121212'],
-    handle: ['#8b8b8b'],
-  },
+  bottomSheet: { ...DarkProps.bottomSheet },
+  bottomSheetHandle: { ...LightProps.bottomSheetHandle },
   
   toast: { ...DarkProps.toast,
     bg:                   ['#121212'],

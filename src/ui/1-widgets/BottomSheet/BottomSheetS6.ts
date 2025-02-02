@@ -1,6 +1,5 @@
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { WidgetAttr, WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle,
@@ -13,17 +12,18 @@ import fixed = WidgetStyleCommon.fixed
 import modalFloor1 = StyleVals.modalFloor1
 
 
+
 export namespace BottomSheetS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const frame = WidgetElem.of({
-      className: 'rruiBottomSheetFrame',
-      ...up,
-      states: CommonStates,
+      ...up, className: 'rruiBottomSheetFrame',
+      states: {
+        dragging: WidgetAttr.of('data-dragging'),
+      },
     })
     const sheet = WidgetElem.of({
-      className: 'rruiBottomSheet',
-      upElem: frame, upSelector: '>',
+      upElem: frame, upSelector: '>', className: 'rruiBottomSheet',
     })
     return {
       frame,
@@ -32,10 +32,14 @@ export namespace BottomSheetS6 {
   }
   
   const WidgetElems = buildWidgetElems()
+  const WidgetStates = {
+    dragging: WidgetState.of([WidgetElems.frame, WidgetElems.frame.ss!.dragging]),
+  }
   
   export const W = Widget.of({
     rootElem: WidgetElems.frame,
     elems: WidgetElems,
+    states: WidgetStates,
   })
   
   export const t0 = (style: WidgetStyle) => () => W.t(undefined, style)
@@ -55,10 +59,14 @@ export namespace BottomSheetS6 {
       sheet: {
         w: 'full',
         hMax: 'full', // must be here
+        r: [16, 16, 0, 0],
         display: 'grid',
         rows: 'auto 1fr',
         justifyItems: 'stretch',
+        bgColor: '#ffffff',
+        color: '#000000',
         pointer: true,
+        overflow: 'hidden',
       },
     }
     

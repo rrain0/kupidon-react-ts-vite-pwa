@@ -3,6 +3,7 @@ import { PointerU } from '@util/react/PointerU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
+import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
@@ -45,7 +46,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
         <button
           data-display-name="Button"
           ref={elemRef}
-          {...{ [ButtonS6.W.els.button.ss!.error.n]: trueOrUndef(hasError) }}
+          {...{ [CommonStates.error.n]: trueOrUndef(hasError) }}
           className={clsx(className, ButtonS6.W.els.button.n)}
           type="button"
           {...combineProps(clickFix, restProps, rippleProps.target)}

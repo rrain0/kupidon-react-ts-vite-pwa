@@ -196,7 +196,7 @@ const BottomSheetTestPage = React.memo(() => {
             <div // Header Component
               // Must be without margins!!!
               css={t => css`
-                background: ${t.bottomSheet.bg[0]};
+                background: ${t.bottomSheet.bg};
                 border-radius: 16px 16px 0 0;
                 color: ${t.page.ct2};
                 padding: 10px;
@@ -214,7 +214,7 @@ const BottomSheetTestPage = React.memo(() => {
                   width: 60px;
                   height: 4px;
                   border-radius: 2px;
-                  background: ${t.bottomSheet.handle[0]};
+                  background: ${t.bottomSheetHandle.bg};
                   ${state === 'dragging' && css`background: ${t.page.ct2};`}
                 `}
               />
@@ -227,7 +227,7 @@ const BottomSheetTestPage = React.memo(() => {
                 display: flex;
                 place-items: center;
                 overflow: hidden;
-                background: ${t.bottomSheet.bg[0]};
+                background: ${t.bottomSheet.bg};
                 color: ${t.page.ct2};
               `}
             >

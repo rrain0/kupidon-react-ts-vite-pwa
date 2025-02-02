@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import React from 'react'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -31,9 +32,10 @@ React.memo(
     <UseBottomSheetState isOpen={props.open} onClose={()=>props.setOpen(false)}>
       { ({ sheetProps })=>
       <BottomSheetBasic
+        css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
         {...sheetProps}
         closeable={props.closeable}
-        headerTitle={<div css={css`height: 1em;`}/>}
+        title={<div css={css`height: 1em;`}/>}
       >
         <div css={css`
           ${col};

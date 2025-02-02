@@ -15,8 +15,11 @@ export namespace OverflowWrapperStyle {
   
   
   export const El = function() {
+    // Wrapper
     const wrapper = new Elem('rrainuiOverflowWrapper', { }, { })
+    // Scroll
     const container = wrapper.toElem('>', new Elem('rrainuiScrollContainer', { }, { }))
+    // Content
     const content = container.toElem('>', new Elem('rrainuiScrollContentWrap', { }, { }))
     
     

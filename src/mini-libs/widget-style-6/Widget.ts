@@ -15,9 +15,7 @@ import { transform4 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTr
 import { transform5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 import { transform6 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform6.ts'
 import { transform7 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform7.ts'
-import {
-  CommonProps,
-} from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { CommonProps, CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import RecordRo = TypeU.RecordRo
 import isObject = TypeU.isObject
@@ -38,22 +36,28 @@ Unregistered (unknown) CSS properties' names are automatically transformed from 
 
 
 
-export class Widget<const out Es extends Record<string, WidgetElem> = any> {
+export class Widget<
+  const out Es extends RecordRo<string, WidgetElem> = any,
+  const out Ss extends RecordRo<string, WidgetTransformer> = any,
+> {
   
   constructor(
     readonly rootElem: WidgetElem | undefined,
     readonly elems: Es,
-    readonly states?: RecordRo<string, WidgetTransformer> | undefined,
+    readonly states?: Ss,
     // Additional CSS prop transformers
     readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   ) { }
   
-  static of<const Es extends Record<string, WidgetElem> = any>(params: {
+  static of<
+    const Es extends RecordRo<string, WidgetElem> = any,
+    const Ss extends RecordRo<string, WidgetTransformer> = any,
+  >(params: {
     rootElem: WidgetElem | undefined,
     elems: Es,
-    states?: RecordRo<string, WidgetTransformer> | undefined,
+    states?: Ss | undefined,
     props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
-  }): Widget<Es> {
+  }): Widget<Es, Ss> {
     return new Widget(params.rootElem, params.elems, params.states, params.props)
   }
   
@@ -72,6 +76,9 @@ export function createWidgetState(...transformerList: WidgetTransformerList) {
   return WidgetMultiAnyTransformer.of({
     transform: () => transformerList,
   })
+}
+export namespace WidgetState {
+  export const of = createWidgetState
 }
 
 
@@ -103,8 +110,8 @@ export const transformWidgetStyle = <Props>(
   const css = transform7(transform6(transform5(transform4(transform3(transform2(
     transform1(style, props),
     [
-      { ...CommonProps, ...widget.props },
-      { ...widget.states, ...widget.elems },
+      { ...CommonProps, ...widget.props }, // под индеком 0 идёт поиск через ===
+      { ...CommonStates, ...widget.states, ...widget.elems },
       undefined,
       undefined,
       undefined,

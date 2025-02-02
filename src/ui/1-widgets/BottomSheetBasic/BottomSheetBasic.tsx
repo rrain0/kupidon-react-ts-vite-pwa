@@ -1,10 +1,8 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { css } from '@emotion/react'
-import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
-import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
 import BottomSheet, {
   BottomSheetOptionsProps,
 } from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
@@ -15,13 +13,20 @@ import Puro = TypeU.Puro
 export type BottomSheetBasicProps = BottomSheetOptionsProps & Puro<{
   headerHandle: React.ReactNode
   headerTitle: React.ReactNode
+  title: React.ReactNode
   children: React.ReactNode
 }>
 
 
 
 const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
-  const { headerHandle, headerTitle, children, ...restProps } = props
+  const {
+    headerHandle,
+    headerTitle,
+    title,
+    children,
+    ...restProps
+  } = props
   const { sheetState } = props
   
   
@@ -35,7 +40,6 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
   
   return (
     <BottomSheet
-      css={BottomSheetS6.t(BottomSheetS6.S.Normal.normal)}
       {...restProps}
       bottomSheetFrameRef={bottomSheetFrameRef}
       bottomSheetRef={bottomSheetRef}
@@ -50,10 +54,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
           */}
           <div
             data-display-name="Bottom Sheet Basic - Header"
-            css={t => css`
-              ${BottomSheetBasicParts.headerStyle(t)};
-              ${sheetState === 'dragging' && 'cursor: grabbing;'}
-            `}
+            className={BottomSheetBasicS6.W.els.header.n}
             ref={bottomSheetHeaderRef}
             {...sheetDrag()}
           >
@@ -62,20 +63,19 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
             {headerHandle ?? (
               <div
                 data-display-name="Bottom Sheet Basic - Header Handle"
-                css={t => css`
-                  ${BottomSheetBasicParts.headerHandleStyle(t)};
-                  ${sheetState === 'dragging' && `background: ${t.page.ct2};`}
-                `}
+                className={BottomSheetBasicS6.W.els.headerHandle.n}
               />
             )}
             
             {/* Header - Title */}
-            <div
-              data-display-name="Bottom Sheet Basic - Header Title"
-              css={BottomSheetBasicParts.headerTextStyle}
-            >
-              {headerTitle}
-            </div>
+            {headerTitle ?? (
+              <div
+                data-display-name="Bottom Sheet Basic - Header Title"
+                className={BottomSheetBasicS6.W.els.headerTitle.n}
+              >
+                {title}
+              </div>
+            )}
           
           </div>
           
@@ -85,9 +85,11 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
            */}
           <div
             data-display-name="Bottom Sheet Basic - Body"
-            css={BottomSheetBasicParts.bodyStyle}
+            className={BottomSheetBasicS6.W.els.body.n}
           >
-            <OverflowWrapper css={OverflowWrapperStyle.defolt}
+            <OverflowWrapper
+              // TODO Style - allow text styles and move this to BottomSheetBasicS6
+              css={OverflowWrapperStyle.defolt}
               showVertical={
                 ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)
               }
@@ -98,7 +100,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
               */}
               <div
                 data-display-name="Bottom Sheet Basic - Scrollable Content"
-                css={BottomSheetBasicParts.scrollableContentStyle}
+                className={BottomSheetBasicS6.W.els.overflowCont.n}
                 ref={bottomSheetContentRef}
               >
                 { children }
@@ -110,8 +112,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
     
     </BottomSheet>
   )
-}
-)
+})
 export default BottomSheetBasic
 
 

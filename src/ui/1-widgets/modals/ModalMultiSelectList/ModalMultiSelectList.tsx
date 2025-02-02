@@ -11,6 +11,7 @@ import {
   SelectItemIndicatorS
 } from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
 import { SheetSnaps80 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import {
   getCommonIndicatorsDataDefault,
@@ -109,6 +110,7 @@ const ModalMultiSelectList = ReactU.memo(
             
             <ModalPortal>
               <BottomSheetBasic
+                css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
                 {...sheetProps.sheetProps}
                 headerHandle={(
                   <SelectItemIndicator
@@ -116,7 +118,7 @@ const ModalMultiSelectList = ReactU.memo(
                     indicators={getCommonIndicatorsDataDefault(options, selected)}
                   />
                 )}
-                headerTitle={title}
+                title={title}
               >
                 <div css={selectItemsContainer}>
                   {options.map((opt, i) => {

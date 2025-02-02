@@ -1,5 +1,6 @@
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { AdditionalProps, CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { AppStyle, AppWidgetStyle, WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 

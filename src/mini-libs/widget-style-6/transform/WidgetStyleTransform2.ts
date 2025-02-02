@@ -7,6 +7,7 @@ import uncapitalize = StringU.uncapitalize
 import lastI = ArrayU.lastI
 import isobject = TypeU.isobject
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
+import { CommonStates } from '../WidgetCommonEntities'
 
 
 
@@ -45,8 +46,11 @@ export function transform2(
       sProp = uncapitalize(sProp)
       
       for (let ctxI = lastI(contextStack); ctxI >= 0; ctxI--) {
-        const context = contextStack[ctxI]
-        if (context) for (const [name, entity] of Object.entries(context)) {
+        let context = contextStack[ctxI]
+        if (context) for (const [name, entity] of
+          // TODO Style - найти место для сортировки
+          Object.entries(context).sort(([a], [b]) => b.length - a.length)
+        ) {
           
           if (ctxI !== ctxCommonI && sProp.startsWith(name)
             || ctxI === ctxCommonI && sProp === name

@@ -36,7 +36,7 @@ export namespace AppTheme {
     
     page: {
       bg:          string
-      bgGradient:  string[]
+      bgGrad:  string[]
       ct1:         string
       ct2:         string
       ct3:         string
@@ -301,8 +301,12 @@ export namespace AppTheme {
     }
     
     bottomSheet: {
-      bg:    string[]
-      handle: string[]
+      bg:        string
+      ct:        string
+    }
+    bottomSheetHandle: {
+      bg:        string
+      bgFc:      string
     }
     
     toast: {

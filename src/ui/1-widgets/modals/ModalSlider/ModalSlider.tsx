@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import Slider from 'src/ui/1-widgets/Slider/Slider'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -67,8 +68,9 @@ const ModalSlider = React.memo(
         {sheetProps => (
           <ModalPortal>
             <BottomSheetBasic
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
               {...sheetProps.sheetProps}
-              headerTitle={title}
+              title={title}
             >
               
               <Text>{text}</Text>

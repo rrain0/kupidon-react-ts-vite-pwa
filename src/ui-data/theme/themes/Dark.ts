@@ -12,7 +12,7 @@ export const DarkProps: ThemeProps = {
   
   page: {
     bg:          '#18191b', // #424854
-    bgGradient:  ['#282c34', '#282c34', '#282c34'],
+    bgGrad:  ['#282c34', '#282c34', '#282c34'],
     ct1:         '#ffffff',
     ct2:         '#bdbdbd',
     ct3:         '#999999',
@@ -197,8 +197,12 @@ export const DarkProps: ThemeProps = {
   },
   
   bottomSheet: {
-    bg:     ['#121212'],
-    handle: ['#8b8b8b'],
+    bg:        '#121212',
+    ct:        '#bdbdbd',
+  },
+  bottomSheetHandle: {
+    bg:        '#8b8b8b',
+    bgFc:      '#bdbdbd',
   },
   
   toast: {

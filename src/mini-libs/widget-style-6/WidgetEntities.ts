@@ -56,8 +56,8 @@ export namespace WidgetProps {
   
   export const transformLenValue = (value: StyleValue) => {
     if (value === undefined) return undefined
-    if (value === null) return '0px'
-    if (value === false) return '0px'
+    if (value === null) return undefined
+    if (value === false) return undefined
     if (value === 'inf') return '999999px'
     if (value === 'round') return '999999px'
     if (value === 'full') return '100%'
@@ -152,30 +152,9 @@ export namespace WidgetProps {
   })
 }
 
-export namespace WidgetComplexTransformers {
-  
-  // just 'radio' instead of 'typeRadio'
-  export const radio = WidgetMultiStateTransformer.of({
-    title: 'radio -> [type=radio]',
-    transform: () => [
-      [WidgetAttrs.type, WidgetStateValue.of('radio')],
-    ],
-  })
-  
-  // hoverable AND hover
-  export const hoverableHover = WidgetMultiStateTransformer.of({
-    title: `hoverableHover -> @media ${hoverableMedia} & :hover`,
-    transform: () => [[WidgetMedias.hoverable, WidgetPseudos.hover]],
-  })
-  
-  // hover OR focusVisible
-  export const inFocus = WidgetMultiStateTransformer.of({
-    title: 'inFocus -> hoverableHover | :focus-visible',
-    transform: () => [
-      ...WidgetComplexTransformers.hoverableHover.transform(),
-      [WidgetPseudos.focusVisible],
-    ],
-  })
+
+
+export namespace AdditionalProps {
   
   // width + height
   export const size = WidgetMultiPropTransformer.of({
@@ -260,6 +239,52 @@ export namespace WidgetComplexTransformers {
     transform: (value: StyleValue) => [
       [WidgetProps.marginTop, WidgetPropValue.of(value)],
       [WidgetProps.marginBottom, WidgetPropValue.of(value)],
+    ],
+  })
+  
+  // --color: size;
+  export const varSize = WidgetProp.ofName('--size', WidgetProps.transformLenValue)
+  // --color: value;
+  export const varColor = WidgetProp.ofName('--color')
+  // color: value; --color: value;
+  export const colorAndVarColor = WidgetMultiPropTransformer.of({
+    transform: value => [
+      [WidgetProps.color, WidgetPropValue.of(value)],
+      [AdditionalProps.varColor, WidgetPropValue.of(value)],
+    ],
+  })
+  export const varAccentColor = WidgetProp.ofName('--accent-color')
+  // color: value; --color: value;
+}
+
+
+
+
+export namespace AdditionalStates {
+  
+  // just 'radio' instead of 'typeRadio'
+  export const radio = WidgetMultiStateTransformer.of({
+    title: 'radio -> [type=radio]',
+    transform: () => [[WidgetAttrs.type, WidgetStateValue.of('radio')]],
+  })
+  // just 'checkbox' instead of 'typeCheckbox'
+  export const checkbox = WidgetMultiStateTransformer.of({
+    title: 'checkbox -> [type=checkbox]',
+    transform: () => [[WidgetAttrs.type, WidgetStateValue.of('checkbox')]],
+  })
+  
+  // hoverable AND hover
+  export const hoverableHover = WidgetMultiStateTransformer.of({
+    title: `hoverableHover -> @media ${hoverableMedia} & :hover`,
+    transform: () => [[WidgetMedias.hoverable, WidgetPseudos.hover]],
+  })
+  
+  // hover OR focusVisible
+  export const inFocus = WidgetMultiStateTransformer.of({
+    title: 'inFocus -> hoverableHover | :focus-visible',
+    transform: () => [
+      ...AdditionalStates.hoverableHover.transform(),
+      [WidgetPseudos.focusVisible],
     ],
   })
 }

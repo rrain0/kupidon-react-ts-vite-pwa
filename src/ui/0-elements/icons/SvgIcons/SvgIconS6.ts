@@ -1,5 +1,5 @@
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { AdditionalProps, CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -14,9 +14,7 @@ export namespace SvgIconS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const icon = WidgetElem.of({
-      className: 'rruiIcon',
-      ...up,
-      states: CommonStates,
+      ...up, className: 'rruiIcon',
       // TODO Style - think about it
       // 'color' & '--color' will be passed via WidgetProps
       props: { 

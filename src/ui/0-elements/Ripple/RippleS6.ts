@@ -1,4 +1,4 @@
-import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import {
   AppStyle,
   AppWidgetStyle,
@@ -10,7 +10,6 @@ import {
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import abs = WidgetStyleCommon.abs
-import round = WidgetStyleCommon.round
 
 
 
@@ -19,12 +18,10 @@ export namespace RippleS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const frame = WidgetElem.of({
-      className: 'rruiRippleFrame',
-      ...up,
+      ...up, className: 'rruiRippleFrame',
     })
     const ripple = WidgetElem.of({
-      className: 'rruiRippleRipple',
-      upElem: frame, upSelector: '>',
+      upElem: frame, upSelector: '>', className: 'rruiRippleRipple',
       props: {
         color: AdditionalProps.varColor,
         mode: WidgetProp.ofName<'center' | 'pointer'>('--mode'),
@@ -55,7 +52,7 @@ export namespace RippleS6 {
       ripple: {
         pos: 'abs',
         translate: '-50% -50%',
-        ...round,
+        r: 'round',
         /*background-image: radial-gradient(
          closest-side circle at center,
          transparent, var(--bg-color) 90%, transparent

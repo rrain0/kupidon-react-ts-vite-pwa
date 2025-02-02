@@ -6,6 +6,7 @@ import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { SheetSnaps80 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl'
@@ -110,8 +111,9 @@ const ModalSingleSelectList = ReactU.memo(
             
             <ModalPortal>
               <BottomSheetBasic
+                css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
                 {...sheetProps.sheetProps}
-                headerTitle={title}
+                title={title}
               >
                 
                 <div css={selectItemsContainer}>

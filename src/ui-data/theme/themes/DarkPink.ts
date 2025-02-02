@@ -12,7 +12,7 @@ export const DarkPinkProps: ThemeProps = { ...DarkProps,
   
   page: { ...DarkProps.page,
     bg:          '#18191b',
-    bgGradient:  ['#282c34', '#282c34', '#282c34'],
+    bgGrad:  ['#282c34', '#282c34', '#282c34'],
   },
   statusBar: { ...DarkProps.statusBar,
     bg: '#282c34',

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -58,8 +59,10 @@ const QuickSettings = React.memo((props: SettingsProps) => {
       <UseBottomSheetState isOpen={isOpen} onClose={close}>
         {props => (
           <ModalPortal>
-            <BottomSheetBasic {...props.sheetProps}
-              headerTitle={titleText.settings}
+            <BottomSheetBasic
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
+              {...props.sheetProps}
+              title={titleText.settings}
             >
               <Content>
                 

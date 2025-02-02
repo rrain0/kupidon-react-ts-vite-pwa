@@ -8,12 +8,35 @@ export namespace WidgetStyleCommon {
   export const fixed: WidgetStyleObj = { pos: 'fixed', a: 0 }
   export const fixedTop: WidgetStyleObj = { pos: 'fixed', at: 0, ah: 0 }
   export const fixedBottom: WidgetStyleObj = { pos: 'fixed', ab: 0, ah: 0 }
-  export const round: WidgetStyleObj = { r: '999999px' }
   
   
-  export const row: WidgetStyleObj = { display: 'flex', flexFlow: 'row nowrap' }
-  export const rowC: WidgetStyleObj = { display: 'flex', flexFlow: 'row nowrap', alignItems: 'center' }
-  export const rowWrap: WidgetStyleObj = { display: 'flex', flexFlow: 'row wrap' }
+  export const row: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'row nowrap',
+  }
+  export const rowC: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'row nowrap', alignItems: 'center',
+  }
+  export const rowWrap: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'row wrap',
+  }
+  export const col: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'column nowrap',
+  }
+  export const colC: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'column nowrap', alignItems: 'center',
+  }
+  export const flexC: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'column nowrap',
+    alignItems: 'center', justifyContent: 'center',
+  }
+  export const gridC: WidgetStyleObj = {
+    display: 'grid', placeItems: 'center',
+  }
+  export const ___gridStackC: WidgetStyleObj = {
+    display: 'grid', placeItems: 'center', grid: 'stack',
+    // TODO Style
+    '& > *': { area: 'stack' },
+  }
   
   
   export const noBorderOutlineBoxShadow: WidgetStyleObj = {
@@ -29,9 +52,7 @@ export namespace WidgetStyleCommon {
       boxSizing: 'border-box',
       bg: null,
       ...noBorderOutlineBoxShadow,
-      m: 0,
-      p: 0,
-      g: 0,
+      m: 0, p: 0, g: 0,
       '-webkit-tap-highlight-color': 'transparent',
     }
     return {

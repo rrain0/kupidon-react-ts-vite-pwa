@@ -31,7 +31,9 @@ const getAttrSelector = (attr: string, value = '') => {
 const getPseudoSelector = (pseudo: string) => pseudo && `:${pseudo}`
 // Prop-value selector
 // 'background: black;'
-const getPropValueSelector = (prop: string, value: string = '') => value && `${prop}: ${value};`
+const getPropValueSelector = (prop: string, value: string = '') => {
+  return value && `${prop}: ${value};`
+}
 
 
 
@@ -110,9 +112,12 @@ export function transform5(dataList: Transformed4[]): SelectPropValueTf5[] {
     const prop = data.prop.prop
     const value = data.prop.value?.value
     let propValue = ''
-    if (prop && value !== undefined) {
+    if (prop && value !== undefined && value !== '') {
       const p = prop.prop
-      const v = (prop.transformValue?.(value) ?? value) + ''
+      const v = (() => {
+        if (prop.transformValue) return prop.transformValue(value) + ''
+        return `${value}`
+      })()
       propValue = getPropValueSelector(p, v)
     }
     

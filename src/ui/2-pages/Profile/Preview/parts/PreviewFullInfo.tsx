@@ -5,28 +5,24 @@ import React, { useMemo, useRef } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import { BottomSheetBasicParts } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicParts.ts'
-import BottomSheet from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
-import col = EmotionCommon.col
 import Callback = TypeU.Callback
 import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC
 import round = EmotionCommon.round
-import noScrollbars = EmotionCommon.noScrollbars
 import ProfileCardIc = SvgIconsPack.ProfileCardIc
 import Search2Ic = SvgIconsPack.Search2Ic
 import GenderIc = SvgIconsPack.GenderIc
@@ -88,12 +84,6 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     aboutMe: titleText.aboutMe,
   }), [profile, titleText, optionText])
   
-  
-  const bottomSheetFrameRef = useRef<HTMLDivElement>(null)
-  const bottomSheetRef = useRef<HTMLDivElement>(null)
-  const bottomSheetHeaderRef = useRef<HTMLDivElement>(null)
-  const bottomSheetContentRef = useRef<HTMLDivElement>(null)
-  
   const nameAge = [name, age].filter(it => it).join(', ')
   
   const infos = useMemo(() => {
@@ -135,95 +125,68 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     >
       {props => (
         <BottomSheetFrame data-display-name="PreviewFullInfo">
-          <BottomSheet
-            css={BottomSheetS6.t(BottomSheetS6.S.Normal.normal)}
+          <BottomSheetBasic
+            css={BottomSheetBasicS6.t(bottomSheetS)}
             bgDim={false}
+            headerTitle={false}
             {...props.sheetProps}
-            bottomSheetFrameRef={bottomSheetFrameRef}
-            bottomSheetRef={bottomSheetRef}
-            bottomSheetHeaderRef={bottomSheetHeaderRef}
-            bottomSheetContentRef={bottomSheetContentRef}
           >
-            {({ sheetDrag }) => (
-              <>
-                
-                {/* Bottom Sheet - Header - without margins */}
-                <div
-                  css={t => css`
-                    ${BottomSheetBasicParts.headerStyle(t)};
-                    ${bottomSheetS(t)};
-                    ${props.sheetProps.sheetState === 'dragging' && css`cursor: grabbing;`}
-                    height: 18px;
-                  `}
-                  ref={bottomSheetHeaderRef}
-                  {...sheetDrag()}
-                />
+            <Content>
               
-                {/* Bottom Sheet - Body - without margins & paddings */}
-                <div css={[BottomSheetBasicParts.bodyStyle, bottomSheetS]}>
-                  <ContentOverflowWrapper>
-                    {/* Bottom Sheet - Scrollable Content - without margins */}
-                    <Content ref={bottomSheetContentRef}>
-                      
-                      <NameAge>{nameAge}</NameAge>
-                      
-                      <div />
-                      
-                      <MatchBox>
-                        <MatchBubble main>{uiText.match} - {match}%</MatchBubble>
-                        <MatchBubble main>{uiText.tests} - {tests}%</MatchBubble>
-                        <MatchBubble>{uiText.desiredPartner}</MatchBubble>
-                        <MatchBubble>{uiText.interests}</MatchBubble>
-                      </MatchBox>
-                      
-                      <div />
-                      
-                      <SectionTitle>{uiText.information}</SectionTitle>
-                      
-                      <div />
-                      
-                      <InfoBox>
-                        {infos.map(info => (
-                          <InfoBubble key={info.title}>
-                            {info.ic}
-                            <div>{info.title}: {info.value}</div>
-                          </InfoBubble>
-                        ))}
-                      </InfoBox>
-                      
-                      <div />
-                      
-                      <Divider />
-                      
-                      <div />
-                      
-                      <SectionTitle>{uiText.aboutMe}</SectionTitle>
-                      
-                      <div />
-                      
-                      <SectionText>{aboutMe}</SectionText>
-                      
-                      <div />
-                      
-                      <Divider />
-                      
-                      <div />
-                      
-                      <SectionTitle>Интересы</SectionTitle>
-                      
-                      <div />
-                      
-                      <SectionText>
-                        Активный отдых в пригороде
-                      </SectionText>
-                    
-                    </Content>
-                  </ContentOverflowWrapper>
-                </div>
+              <NameAge>{nameAge}</NameAge>
               
-              </>
-            )}
-          </BottomSheet>
+              <div />
+              
+              <MatchBox>
+                <MatchBubble main>{uiText.match} - {match}%</MatchBubble>
+                <MatchBubble main>{uiText.tests} - {tests}%</MatchBubble>
+                <MatchBubble>{uiText.desiredPartner}</MatchBubble>
+                <MatchBubble>{uiText.interests}</MatchBubble>
+              </MatchBox>
+              
+              <div />
+              
+              <SectionTitle>{uiText.information}</SectionTitle>
+              
+              <div />
+              
+              <InfoBox>
+                {infos.map(info => (
+                  <InfoBubble key={info.title}>
+                    {info.ic}
+                    <div>{info.title}: {info.value}</div>
+                  </InfoBubble>
+                ))}
+              </InfoBox>
+              
+              <div />
+              
+              <Divider />
+              
+              <div />
+              
+              <SectionTitle>{uiText.aboutMe}</SectionTitle>
+              
+              <div />
+              
+              <SectionText>{aboutMe}</SectionText>
+              
+              <div />
+              
+              <Divider />
+              
+              <div />
+              
+              <SectionTitle>Интересы</SectionTitle>
+              
+              <div />
+              
+              <SectionText>
+                Активный отдых в пригороде
+              </SectionText>
+            
+            </Content>
+          </BottomSheetBasic>
         </BottomSheetFrame>
       )}
     </UseBottomSheetState>
@@ -249,18 +212,37 @@ const BottomSheetFrame = styled.div`
   pointer-events: none;
 `
 
-const bottomSheetS = (t: AppTheme.Theme) => css`
-  background-color: ${t.previewFullInfoBox.bg};
-  color: ${t.previewFullInfoBox.ct};
-`
+const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.Normal.normal, {
+  sheet: {
+    bgColor: t.previewFullInfoBox.bg,
+    color: t.previewFullInfoBox.ct,
+  },
+  header: {
+    pos: 'rel', z: 1,
+    h: 50, mb: -30,
+  },
+  
+  
+  
+  /* headerTitle: {
+    w: 'full', h: 30, mb: -30,
+    
+    
+    pos: 'rel',
+    after: {
+      // TODO Style - wrap in after & before
+      content: '""',
+      pos: 'abs',
+      // TODO Style - null for absent len value
+      //a: ['full', 0, null, 0],
+      at: 'full', al: 0, ar: 0,
+      h: 30,
+      pointer: false,
+    },
+  }, */
+  overflowCont: { p: 0 },
+}]
 
-const ContentOverflowWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  ${col};
-  overflow: auto;
-  ${noScrollbars};
-`
 const Content = styled.div`
   padding: 0 18px 20px;
   display: grid;

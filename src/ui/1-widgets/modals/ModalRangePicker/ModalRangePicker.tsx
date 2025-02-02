@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
@@ -49,8 +50,9 @@ const ModalRangePicker = React.memo(
         {sheetProps => (
           <ModalPortal>
             <BottomSheetBasic
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
               {...sheetProps.sheetProps}
-              headerTitle={title}
+              title={title}
             >
               
               <Text>{text}</Text>

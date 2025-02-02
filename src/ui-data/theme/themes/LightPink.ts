@@ -12,7 +12,7 @@ export const LightPinkProps: ThemeProps = { ...LightProps,
   
   page: { ...LightProps.page,
     bg:         '#f5f5f5',
-    bgGradient: ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
+    bgGrad: ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
   },
   statusBar: { ...LightProps.statusBar,
     bg: '#f5f5f5',

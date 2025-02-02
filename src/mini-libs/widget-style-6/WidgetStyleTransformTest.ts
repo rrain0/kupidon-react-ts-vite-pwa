@@ -17,6 +17,8 @@ import {
   CommonProps, CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { Light } from 'src/ui-data/theme/themes/Light.ts'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 
 
 
@@ -42,18 +44,13 @@ export namespace WidgetStyle6Test {
   
   const elemFrame = WidgetElem.of({
     className: 'rruiFrame',
-    states: CommonStates,
     props: { accentColor: WidgetProp.ofName('--accent-color') },
   })
   const elemInput = WidgetElem.of({
-    className: 'rruiInput',
-    upElem: elemFrame, upSelector: '>',
-    states: CommonStates,
+    upElem: elemFrame, upSelector: '>', className: 'rruiInput',
   })
   const elemBox = WidgetElem.of({
-    className: 'rruiBox',
-    upElem: elemFrame, upSelector: '>',
-    states: CommonStates,
+    upElem: elemFrame, upSelector: '>', className: 'rruiBox',
   })
   
   export const WidgetElements = {
@@ -132,8 +129,22 @@ export namespace WidgetStyle6Test {
   ]
   
   
+  const widgetStyle = inputWidgetStyle
+  const widgetStyleProps = inputWidgetStyleProps
+  const widgetProps = { }
+  const widgetStates = WidgetStates
+  const widgetElements = WidgetElements
+  
+  // const widgetStyle = bottomSheetS
+  // const widgetStyleProps = Light
+  // const widgetProps = BottomSheetBasicS6.W.props
+  // const widgetStates = BottomSheetBasicS6.W.states
+  // const widgetElements = BottomSheetBasicS6.W.els
+  
+  
+  
   export function testTransform() {
-    console.log('widgetStyle', inputWidgetStyle)
+    console.log('widgetStyle', widgetStyle)
     
     /*
     console.time('transform')
@@ -146,12 +157,18 @@ export namespace WidgetStyle6Test {
     console.timeEnd('transform')
      */
     
-    const transformed1 = transform1(inputWidgetStyle, inputWidgetStyleProps)
+    const transformed1 = transform1(widgetStyle, widgetStyleProps)
     console.log('transformed1', transformed1)
     
     const transformed2 = transform2(
       transformed1,
-      [CommonProps, { ...WidgetStates, ...WidgetElements }, undefined, undefined, undefined]
+      [
+        { ...CommonProps, ...widgetProps }, // под индеком 0 идёт поиск через ===
+        { ...CommonStates, ...widgetStates, ...widgetElements },
+        undefined,
+        undefined,
+        undefined,
+      ]
     )
     console.log('transformed2', transformed2)
     

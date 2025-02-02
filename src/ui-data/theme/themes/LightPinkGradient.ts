@@ -11,7 +11,7 @@ import ThemeProps = AppTheme.ThemeProps
 export const LightPinkGradientProps: ThemeProps = { ...LightPinkProps,
   
   page: { ...LightPinkProps.page,
-    bgGradient: ['#ffaeba', '#f0f0f0', '#f0f0f0'],
+    bgGrad: ['#ffaeba', '#f0f0f0', '#f0f0f0'],
     //bg: ['#ffb6c1','#f5f5f5','#d8701a'],
   },
   statusBar: { ...LightPinkProps.statusBar,
