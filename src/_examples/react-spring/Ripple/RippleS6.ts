@@ -55,8 +55,6 @@ export namespace RippleS6 {
          );*/
         color: '#ffffff66',
         mode: 'pointer',
-        // TODO Style bgColor: '@rippleColor'
-        // TODO Style bgColor: 'varRippleColor'
         bgColor: `var(${W.els.ripple.ps!.color.n})`,
       },
     }

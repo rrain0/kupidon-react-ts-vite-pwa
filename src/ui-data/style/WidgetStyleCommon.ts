@@ -34,7 +34,7 @@ export namespace WidgetStyleCommon {
   }
   export const ___gridStackC: WidgetStyleObj = {
     display: 'grid', placeItems: 'center', grid: 'stack',
-    // TODO Style
+    // TODO Style  '& > *': { area: 'stack' }
     '& > *': { area: 'stack' },
   }
   
@@ -57,8 +57,8 @@ export namespace WidgetStyleCommon {
     }
     return {
       ...reset,
-      before: reset,
-      after: reset,
+      before: { content: 'unset', ...reset },
+      after: { content: 'unset', ...reset },
     }
   })()
   

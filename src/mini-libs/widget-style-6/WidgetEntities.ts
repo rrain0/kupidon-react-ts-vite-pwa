@@ -221,20 +221,20 @@ export namespace AdditionalProps {
           return [[pMulti, WidgetPropValue.of(`${t} ${r} ${b} ${l}`)]]
         }
         
-        return [
-          t ? [p0, WidgetPropValue.of(t)] : [],
-          r ? [p1, WidgetPropValue.of(r)] : [],
-          b ? [p2, WidgetPropValue.of(b)] : [],
-          l ? [p3, WidgetPropValue.of(l)] : [],
-        ]
+        return [[
+          ...t ? [p0, WidgetPropValue.of(t)] : [],
+          ...r ? [p1, WidgetPropValue.of(r)] : [],
+          ...b ? [p2, WidgetPropValue.of(b)] : [],
+          ...l ? [p3, WidgetPropValue.of(l)] : [],
+        ]]
       }
       if (pMulti) return [[pMulti, WidgetPropValue.of(value)]]
-      return [
-        [p0, WidgetPropValue.of(value)],
-        [p1, WidgetPropValue.of(value)],
-        [p2, WidgetPropValue.of(value)],
-        [p3, WidgetPropValue.of(value)],
-      ]
+      return [[
+        p0, WidgetPropValue.of(value),
+        p1, WidgetPropValue.of(value),
+        p2, WidgetPropValue.of(value),
+        p3, WidgetPropValue.of(value),
+      ]]
     }
   
   
@@ -242,10 +242,10 @@ export namespace AdditionalProps {
   // width + height
   export const size = WidgetMultiPropTransformer.of({
     title: 'size -> width & height',
-    transform: (value: StyleValue) => [
-      [WidgetProps.width, WidgetPropValue.of(value)],
-      [WidgetProps.height, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.width, WidgetPropValue.of(value),
+      WidgetProps.height, WidgetPropValue.of(value),
+    ]],
   })
   
   export const abs = WidgetMultiPropTransformer.of({
@@ -260,17 +260,17 @@ export namespace AdditionalProps {
   })
   export const absH = WidgetMultiPropTransformer.of({
     title: 'absH -> right & left',
-    transform: (value: StyleValue) => [
-      [WidgetProps.right, WidgetPropValue.of(value)],
-      [WidgetProps.left, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.right, WidgetPropValue.of(value),
+      WidgetProps.left, WidgetPropValue.of(value),
+    ]],
   })
   export const absV = WidgetMultiPropTransformer.of({
     title: 'absV -> top & bottom ',
-    transform: (value: StyleValue) => [
-      [WidgetProps.top, WidgetPropValue.of(value)],
-      [WidgetProps.bottom, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.top, WidgetPropValue.of(value),
+      WidgetProps.bottom, WidgetPropValue.of(value),
+    ]],
   })
   
   export const padding = WidgetMultiPropTransformer.of({
@@ -285,17 +285,17 @@ export namespace AdditionalProps {
   })
   export const ph = WidgetMultiPropTransformer.of({
     title: 'ph -> padding-left & padding-right',
-    transform: (value: StyleValue) => [
-      [WidgetProps.paddingRight, WidgetPropValue.of(value)],
-      [WidgetProps.paddingLeft, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.paddingRight, WidgetPropValue.of(value),
+      WidgetProps.paddingLeft, WidgetPropValue.of(value),
+    ]],
   })
   export const pv = WidgetMultiPropTransformer.of({
     title: 'pv -> padding-top & padding-bottom ',
-    transform: (value: StyleValue) => [
-      [WidgetProps.paddingTop, WidgetPropValue.of(value)],
-      [WidgetProps.paddingBottom, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.paddingTop, WidgetPropValue.of(value),
+      WidgetProps.paddingBottom, WidgetPropValue.of(value),
+    ]],
   })
   
   export const margin = WidgetMultiPropTransformer.of({
@@ -310,17 +310,17 @@ export namespace AdditionalProps {
   })
   export const mh = WidgetMultiPropTransformer.of({
     title: 'mh -> margin-left & margin-right',
-    transform: (value: StyleValue) => [
-      [WidgetProps.marginRight, WidgetPropValue.of(value)],
-      [WidgetProps.marginLeft, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.marginRight, WidgetPropValue.of(value),
+      WidgetProps.marginLeft, WidgetPropValue.of(value),
+    ]],
   })
   export const mv = WidgetMultiPropTransformer.of({
     title: 'mv -> margin-top & margin-bottom ',
-    transform: (value: StyleValue) => [
-      [WidgetProps.marginTop, WidgetPropValue.of(value)],
-      [WidgetProps.marginBottom, WidgetPropValue.of(value)],
-    ],
+    transform: (value: StyleValue) => [[
+      WidgetProps.marginTop, WidgetPropValue.of(value),
+      WidgetProps.marginBottom, WidgetPropValue.of(value),
+    ]],
   })
   
   // --color: size;
@@ -329,10 +329,10 @@ export namespace AdditionalProps {
   export const varColor = WidgetProp.ofName('--color')
   // color: value; --color: value;
   export const colorAndVarColor = WidgetMultiPropTransformer.of({
-    transform: value => [
-      [WidgetProps.color, WidgetPropValue.of(value)],
-      [AdditionalProps.varColor, WidgetPropValue.of(value)],
-    ],
+    transform: value => [[
+      WidgetProps.color, WidgetPropValue.of(value),
+      AdditionalProps.varColor, WidgetPropValue.of(value),
+    ]],
   })
   export const varAccentColor = WidgetProp.ofName('--accent-color')
   // color: value; --color: value;
@@ -346,9 +346,10 @@ export namespace AdditionalStates {
   // after + content: ''
   export const after = WidgetMultiStateTransformer.of({
     title: `after + content: ''`,
-    transform: () => [
-      [WidgetPseudoElements.after, WidgetProps.content, WidgetPropValue.of("''")],
-    ],
+    transform: () => [[
+      // TODO Style - to make ::after content: '' work, remove selectProp linearization
+      WidgetPseudoElements.after, //WidgetProps.content, WidgetPropValue.of("''"),
+    ]],
   })
   
   // just 'radio' instead of 'typeRadio'

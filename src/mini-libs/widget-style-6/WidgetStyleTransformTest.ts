@@ -99,8 +99,10 @@ export namespace WidgetStyle6Test {
     {
       box: {
         after: {
+          content: 'unset',
           bg: 'orange',
         },
+        r: 20,
       },
       r: 14,
       boxP: [8, 16],

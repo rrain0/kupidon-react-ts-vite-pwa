@@ -71,7 +71,7 @@ export type StyleVal =
 export type StyleValue = StyleVal | StyleVal[]
 
 
-// TODO Style - CssValue
+// TODO Style - CssValue type
 type CssValue = undefined | Exclude<string, ''>
 
 

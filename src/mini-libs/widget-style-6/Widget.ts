@@ -86,7 +86,7 @@ export namespace WidgetState {
 
 
 
-// TODO Style - Classes - задуматься как выделять классы
+// TODO Style - css class - задуматься как выделять css классы
 // TODO Style - <div w={Widget} wst={WidgetStyle} />
 
 const styleCache: WeakMap<object,

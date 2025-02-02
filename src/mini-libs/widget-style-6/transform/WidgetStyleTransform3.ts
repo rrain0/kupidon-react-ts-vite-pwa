@@ -4,7 +4,7 @@ import {
   WidgetAttr,
   WidgetMedia,
   WidgetMultiPropTransformer,
-  WidgetMultiStateTransformer, WidgetProp,
+  WidgetMultiStateTransformer, WidgetProp, WidgetStateValue,
   WidgetTransformerList,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import isArray = TypeU.isArray
@@ -36,17 +36,22 @@ export function transform3(
         )
       }
       
-      const processState = (value?: string) => {
+      const processState = (value?: WidgetStateValue) => {
         if (state) {
           if (state.type === 'attr') {
             const stateData: WidgetAtomicTransformer[] = [state]
-            if (value) stateData.push({ value, type: 'stateValue' })
+            if (value) stateData.push({ value: value.value, type: 'stateValue' })
             d.push(...stateData)
           }
           else if (state.type === 'state') {
-            const nextI = entity.type === 'stateValue' ? dataI + 1 : dataI
+            if (value) {
+              return transform3(
+                state.transform(value.value).map(e => [...e, ...data.slice(dataI + 1)]),
+                transformed, m, d
+              )
+            }
             return transform3(
-              state.transform(value).map(e => [...e, ...data.slice(nextI)]),
+              state.transform().map(e => [...e, ...data.slice(dataI)]),
               transformed, m, d
             )
           }
@@ -87,7 +92,7 @@ export function transform3(
         prop = undefined
       }
       else if (entity.type === 'stateValue') {
-        if (processState(entity.value)) return
+        if (processState(entity)) return
         state = undefined
         prop = undefined
       }

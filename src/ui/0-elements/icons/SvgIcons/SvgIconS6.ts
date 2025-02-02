@@ -15,8 +15,6 @@ export namespace SvgIconS6 {
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const icon = WidgetElem.of({
       ...up, className: 'rruiIcon',
-      // TODO Style - think about it
-      // 'color' & '--color' will be passed via WidgetProps
       props: { 
         size: AdditionalProps.varSize,
         sz: AdditionalProps.varSize,
