@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import { ToastAnimations } from 'src/ui/components/Toasts/ToastAnimations.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import mobileWidth = EmotionCommon.mobileWidth
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 
 
 
@@ -45,7 +45,7 @@ React.memo(
             
             .Toastify__close-button {
               flex-shrink: 0;
-              ${center};
+              ${flexC};
             }
           }
         }

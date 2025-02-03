@@ -4,6 +4,8 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SimpleGradientBg } from 'src/ui-data/bg/SimpleGradientBg.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import col = EmotionCommon.col
+import colC = EmotionCommon.colC
+
 
 
 
@@ -12,7 +14,6 @@ export namespace Pages {
   
   
   
-  import colC = EmotionCommon.colC
   export const pageColors = (t: AppTheme.Theme) => css`
     ${SimpleGradientBg(t)};
     color: ${t.page.ct2};

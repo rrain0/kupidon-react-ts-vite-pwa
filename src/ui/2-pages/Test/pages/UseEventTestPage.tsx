@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { useEvent } from 'src/util/react/useEvent'
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 
 
 

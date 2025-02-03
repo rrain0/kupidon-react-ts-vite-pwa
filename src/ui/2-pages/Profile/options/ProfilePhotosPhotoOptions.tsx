@@ -28,7 +28,7 @@ import extensionFromMimeType = FileU.extensionFromMimeType
 import col = EmotionCommon.col
 import row = EmotionCommon.row
 import SetterOrUpdater = TypeU.SetterOrUpdater
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import Callback1 = TypeU.Callback1
@@ -189,7 +189,7 @@ const OptionTitle = styled.h6`
   align-items: start;
 `
 const optionIconBoxStyle = css`
-  ${center};
+  ${flexC};
   height: 1.3em;
   width: 1.333em;
 `

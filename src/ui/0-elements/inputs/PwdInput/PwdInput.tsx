@@ -9,7 +9,7 @@ import EyeCrossedOutIc = SvgIconsPack.EyeCrossedOutIc
 import EyeIc = SvgIconsPack.EyeIc
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import evPreventDefault = PointerU.evPreventDefault
 
@@ -34,8 +34,9 @@ const PwdInput = React.memo(React.forwardRef<HTMLInputElement, PwdInputProps>(
         <EyeFrame>
           <Button
             css={IconButtonS6.t(eyeButtonS)}
-            onClick={() => setPwdHidden(!pwdHidden)}
-            // prevent input focus
+            onClick={() => setTimeout(() => setPwdHidden(!pwdHidden), 50)}
+            // Prevent input focus.
+            // todo hack fix костыль - But focus preventing works only if setTimeout in click
             onPointerDown={evPreventDefault}
           >
             {pwdHidden
@@ -54,7 +55,7 @@ export default PwdInput
 
 
 const EyeFrame = styled.div`
-  ${center};
+  ${flexC};
   width: min(50px, 100cqh);
   height: min(50px, 100cqh);
   padding: 3px;

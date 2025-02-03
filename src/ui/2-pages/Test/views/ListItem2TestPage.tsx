@@ -11,7 +11,7 @@ import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectI
 import row = EmotionCommon.row
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import col = EmotionCommon.col
 import abs = EmotionCommon.abs
 import colC = EmotionCommon.colC
@@ -354,7 +354,7 @@ const AddIconBox = styled.div`
   
   place-self: center;
   //background: #ff000011;
-  ${center};
+  ${flexC};
   padding: 2px;
 `
 
@@ -395,7 +395,7 @@ const PencilIconBox = styled.div`
   width: 40px;
   height: 40px;
   border-radius: inherit;
-  ${center};
+  ${flexC};
   padding: 11px;
   
   ${SvgIconS.El.icon.props.color.set('#444444')}
@@ -406,7 +406,7 @@ const PencilIconBox = styled.div`
 const TextBox = styled.div`
   width: 100%;
   min-height: 100%;
-  ${center};
+  ${flexC};
 `
 const Text = styled.div`
   align-self: center;

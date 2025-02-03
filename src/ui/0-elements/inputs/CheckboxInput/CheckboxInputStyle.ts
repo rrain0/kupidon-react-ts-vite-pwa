@@ -11,7 +11,7 @@ import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import hoverable = EmotionCommon.hoverable
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import reset = EmotionCommon.reset
@@ -80,7 +80,7 @@ export namespace CheckboxInputStyle {
     ${W.use.s.normal().e.iconBox().thisUse} {
       grid-area: 1;
       pointer-events: none;
-      ${center};
+      ${flexC};
     }
     ${W.use.s.normal().e.iconBoxChecked().thisUse} {
       grid-area: 1;
@@ -92,7 +92,7 @@ export namespace CheckboxInputStyle {
       display: none;
     }
     ${W.use.s.checked().e.iconBoxChecked().thisUse} {
-      ${center};
+      ${flexC};
     }
     // state: disabled
     ${W.use.s.disabled().e.ripple().thisUse} {
@@ -154,7 +154,7 @@ export namespace CheckboxInputStyle {
       background: none;
       border-radius: 999999px;
       padding: 14px;
-      ${center};
+      ${flexC};
       ${W.e.frame.e.p.color.set(t.buttonNormal.bg[0])};
     }
     ${W.use.s.normal().e.ripple().thisUse} {

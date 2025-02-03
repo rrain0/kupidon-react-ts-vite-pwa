@@ -13,7 +13,7 @@ import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
 import CssAttr = WidgetStyle.CssAttr
 import abs = EmotionCommon.abs
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import col = EmotionCommon.col
 
 
@@ -101,7 +101,7 @@ export namespace SelectItemS {
       width: 44px;
       height: 44px;
       border-radius: 10px;
-      ${center};
+      ${flexC};
       padding: 2px;
     }
     ${W.use.s.normal().e.addIcon().thisUse} {
@@ -125,7 +125,7 @@ export namespace SelectItemS {
       width: 40px;
       height: 40px;
       border-radius: var(--br);
-      ${center};
+      ${flexC};
       padding: 11px;
       overflow: hidden;
     }
@@ -139,7 +139,7 @@ export namespace SelectItemS {
       width: 100%;
       min-height: 100%;
       padding: 20px 26px;
-      ${center};
+      ${flexC};
     }
     
     // selected

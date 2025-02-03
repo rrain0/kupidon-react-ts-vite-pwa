@@ -285,6 +285,7 @@ export const useTabs = (
   const tabDrag = useDrag(
     gesture => {
       const {
+        event: ev, currentTarget,
         first, active, last,
         movement: [mx, my],
         velocity: [spdx, spdy], // px/ms (nonnegative)
@@ -354,7 +355,7 @@ export const useTabs = (
         }
       }
       
-    }
+    },
   ) as () => ReactDOMAttributes
   
   

@@ -45,7 +45,7 @@ import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
@@ -280,7 +280,7 @@ const ProfilePhotos = React.memo(
                   css={css`
                     grid-area: im${i+1};
                     position: relative;
-                    ${center};
+                    ${flexC};
                   `}
                   ref={value => photoFrameRefs.current[i] = value}
                 >

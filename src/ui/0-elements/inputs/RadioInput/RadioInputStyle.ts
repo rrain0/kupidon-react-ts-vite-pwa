@@ -7,7 +7,7 @@ import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import row = EmotionCommon.row
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 
 
 
@@ -67,7 +67,7 @@ export namespace RadioInputStyle {
     export const color = WidgetStyle0.Prop0.prop.color
     export const activeIconColor = '--active-icon-color'
     export const inactiveIconColor = '--inactive-icon-color'
-    export const rippleColor = RippleS6.W.els.ripple.ps!.color
+    export const rippleColor = RippleS6.W.els.ripple.ps!.color.n
   }
   
   
@@ -89,7 +89,7 @@ export namespace RadioInputStyle {
     }
     ${El.iconWrap}{
       /*align-self: start;*/
-      /* ${center}; */
+      /* ${flexC}; */
       width: 26px;
       height: 26px;
       --size: auto;

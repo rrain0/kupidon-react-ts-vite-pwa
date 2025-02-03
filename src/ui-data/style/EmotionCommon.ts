@@ -61,22 +61,17 @@ export namespace EmotionCommon {
   `
   
   
-  export const centerGrid = css`
+  export const gridC = css`
     display: grid;
     place-items: center;
   `
-  export const centerFlex = css`
+  export const flexC = css`
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     justify-content: center;
   `
-  export const center = centerFlex
-  export const centerContent = css`
-    display: grid;
-    place-content: center;
-  `
-  export const centerAll = css`
+  export const gridStackC = css`
     display: grid;
     place-items: center;
     grid: 'stack';

@@ -16,56 +16,9 @@ export namespace PointerU {
   
   
   
-  export const useOnThisClick = <T extends Element>() => {
-    const [getCanCloseByClickEv, setCanCloseByClickEv] = useRefGetSet(0)
-    
-    return (onClick?: React.MouseEventHandler<T>) => ({
-      onPointerDown: (ev: React.PointerEvent) => {
-        if (ev.currentTarget === ev.target) setCanCloseByClickEv(1)
-      },
-      onPointerUp: (ev: React.PointerEvent) => {
-        if (ev.currentTarget === ev.target && getCanCloseByClickEv() === 1) {
-          setCanCloseByClickEv(2)
-        }
-      },
-      onClick: (ev: React.MouseEvent<T>) => {
-        if (getCanCloseByClickEv() === 2) onClick?.(ev)
-        setCanCloseByClickEv(0)
-      },
-    })
-  }
   
   
   
-  // todo hack fix for click
-  // TODO Pointer // TODO костыль для клика.
-  //  Без костыля если при закрывании шторки на андроиде жать кнопку, то клик не работает, хотя всё ок.
-  export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
-    const [getWasClicked, setWasClicked] = useRefGetSet(0)
-    const { getWasDragged } = useAppPointerAction()
-    
-    return {
-      onPointerDown: (ev: React.PointerEvent) => {
-        // Pointer & Mouse Left Button is 0
-        if (ev.button === 0) setWasClicked(1)
-      },
-      onPointerUp: (ev: React.PointerEvent<E>) => {
-        if (getWasClicked() === 1 && !getWasDragged()) {
-          setWasClicked(2)
-          const elem = ev.currentTarget
-          setTimeout(() => {
-            // TODO Pointer - click fix 2
-            if (getWasClicked() === 2) {
-              elem.click()
-            }
-          }, 50)
-        }
-      },
-      onClick: (ev: React.MouseEvent) => {
-        setWasClicked(0)
-      },
-    } as const
-  }
   
   
   

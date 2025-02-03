@@ -1,4 +1,4 @@
-import { PointerU } from '@util/pointer/PointerU.ts'
+import { useClickFix } from '@util/pointer/useClickFix.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import React, { useImperativeHandle, useRef } from 'react'
@@ -11,7 +11,6 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import trueOrUndef = TypeU.trueOrUndef
 import combineProps = ReactU.combineProps
-import useClickFix = PointerU.useClickFix
 
 
 

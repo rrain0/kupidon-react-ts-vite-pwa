@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 
 
 
@@ -52,7 +52,7 @@ export default MoveElementToAnotherViewTestPage
 
 
 const Container = styled.div`
-  ${center};
+  ${flexC};
   padding: 50px;
 `
 

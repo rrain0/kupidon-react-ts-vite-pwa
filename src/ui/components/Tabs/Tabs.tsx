@@ -102,7 +102,6 @@ export default Tabs
 
 
 const TabsFrame = styled.article`
-  //container: tabs-frame / inline-size;
   width: 100%;
   height: 100%;
   
@@ -121,7 +120,5 @@ const TabsContainer = styled(animated.div)`
   ${row};
   align-items: stretch;
   overflow: hidden;
-
-  //translate: -100cqw 0;
 `
 

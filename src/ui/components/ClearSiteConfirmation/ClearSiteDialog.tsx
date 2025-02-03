@@ -21,7 +21,7 @@ import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import row = EmotionCommon.row
 import Spinner8LinesIc = SvgIconsPack.Spinner8LinesIc
 import Theme = AppTheme.Theme
@@ -149,7 +149,7 @@ const ModalReloading = styled.div`
   background: ${p => p.theme.page.bg}9a;
   color: ${p => p.theme.page.ct2};
   ${Txt.lg18Lh150};
-  ${center};
+  ${flexC};
 `
 const ReloadingBox = styled.div`
   ${row};

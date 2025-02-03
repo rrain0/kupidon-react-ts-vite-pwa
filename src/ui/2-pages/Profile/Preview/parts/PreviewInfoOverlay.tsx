@@ -2,6 +2,7 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
+import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import React from 'react'
 import { EmptyS6 } from 'src/mini-libs/widget-style-6/EmptyS6.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -32,7 +33,6 @@ import Callback = TypeU.Callback
 
 export type PreviewInfoOverlayProps = ClassStyle & Puro<{
   isDragging: boolean
-  getWasDragged: Getter<boolean>
   photoProgress: AnimatedProperty<any, number>
   photosCnt: number
   openInfo: Callback
@@ -43,7 +43,6 @@ export type PreviewInfoOverlayProps = ClassStyle & Puro<{
 export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) => {
   const {
     isDragging = false,
-    getWasDragged,
     photoProgress,
     photosCnt = 1,
     openInfo,
@@ -53,6 +52,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
   } = props
   
   const match = 'XX'
+  
+  const { getWasDragged } = useAppPointerAction()
   
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   

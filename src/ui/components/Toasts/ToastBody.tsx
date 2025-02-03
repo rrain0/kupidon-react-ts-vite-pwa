@@ -12,7 +12,7 @@ import DangerRoundToastifyIc = SvgIconsPack.DangerRoundToastifyIc
 import CrossIc = SvgIconsPack.CrossIc
 import row = EmotionCommon.row
 import resetButton = EmotionCommon.resetButton
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 
@@ -120,7 +120,7 @@ const CloseButton = styled.button`
   width: 28px;
   height: 28px;
   padding: 7px;
-  ${center};
+  ${flexC};
   cursor: pointer;
 
   &>${SvgIconS.El.icon.sel()} {

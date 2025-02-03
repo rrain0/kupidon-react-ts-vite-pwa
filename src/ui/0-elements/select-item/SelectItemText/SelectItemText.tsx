@@ -3,7 +3,7 @@ import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ReactU } from 'src/util/react/ReactU'
 import Children = ReactU.Children
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 
 
 
@@ -31,7 +31,7 @@ export default SelectItemText
 const TextBox = styled.div`
   width: 100%;
   min-height: 100%;
-  ${center};
+  ${flexC};
 `
 const Text = styled.div`
   align-self: center;

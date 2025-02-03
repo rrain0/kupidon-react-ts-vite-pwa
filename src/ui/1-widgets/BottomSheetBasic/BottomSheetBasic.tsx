@@ -88,7 +88,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
             className={BottomSheetBasicS6.W.els.body.n}
           >
             <OverflowWrapper
-              // TODO Style - allow text styles and move this to BottomSheetBasicS6
+              // TODO Style - allow string styles and move this to BottomSheetBasicS6
               css={OverflowWrapperStyle.defolt}
               showVertical={
                 ![null, 'closed', 'close', 'closing', 'open', 'opening'].includes(sheetState)

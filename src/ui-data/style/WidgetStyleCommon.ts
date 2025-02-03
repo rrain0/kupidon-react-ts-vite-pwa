@@ -1,6 +1,7 @@
 import { WidgetStyleObj } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
+
 export namespace WidgetStyleCommon {
   
   export const contents: WidgetStyleObj = { display: 'contents' }

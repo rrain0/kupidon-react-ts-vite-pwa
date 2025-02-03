@@ -106,6 +106,35 @@ const Tests = React.memo((props: DateProps) => {
               <Button
                 css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.accent3)}
                 onClick={() => console.log('take the test')}
+                
+                /*
+                onPointerDown={ev => {
+                  console.log('onPointerDown #', ev.pointerId)
+                }}
+                
+                onPointerEnter={ev => {
+                  console.log('onPointerEnter #', ev.pointerId)
+                }}
+                onPointerLeave={ev => {
+                  console.log('onPointerLeave #', ev.pointerId)
+                }}
+                onPointerOut={ev => {
+                  console.log('onPointerOut #', ev.pointerId)
+                }}
+                onPointerOver={ev => {
+                  console.log('onPointerOver #', ev.pointerId)
+                }}
+                onPointerMove={ev => {
+                  console.log('onPointerMove #', ev.pointerId)
+                }}
+                
+                onPointerCancel={ev => {
+                  console.log('onPointerCancel #', ev.pointerId)
+                }}
+                onPointerUp={ev => {
+                  console.log('onPointerUp #', ev.pointerId)
+                }}
+                 */
               >
                 {uiText.takeTheTest}
               </Button>

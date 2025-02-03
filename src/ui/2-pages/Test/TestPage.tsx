@@ -19,7 +19,7 @@ import { useBool } from 'src/util/react-state/useBool'
 import { useInterval } from 'src/util/react/useInterval'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import col = EmotionCommon.col
 import row = EmotionCommon.row
@@ -391,7 +391,7 @@ const TestPage = React.memo(() => {
             css={t => css`
               width: 200px;
               height: 200px;
-              ${center};
+              ${flexC};
               border-radius: 16px;
               background: ${t.boxNormal.bg[0]};
             `}

@@ -1,11 +1,11 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { PointerU } from '@util/pointer/PointerU.ts'
+import { useOnThisClick } from '@util/pointer/useOnThisClick.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import { useUpNodesScrollLock } from '@util/pointer/useUpNodesScrollLock.ts'
 import Puro = TypeU.Puro
 import combineProps = ReactU.combineProps
-import useOnThisClick = PointerU.useOnThisClick
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 
 

@@ -6,7 +6,7 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle'
 import abs = EmotionCommon.abs
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 
 
 export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
@@ -15,7 +15,7 @@ export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
   border-radius: inherit;
   overflow: hidden;
   background: ${t.photos.bg[0]};
-  ${center};
+  ${flexC};
 `
 
 export const imPlaceholderIcS: AppWidgetStyle = t => [SvgIconS6.S.base, {

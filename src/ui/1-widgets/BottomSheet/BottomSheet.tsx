@@ -2,6 +2,7 @@ import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { PointerU } from '@util/pointer/PointerU.ts'
+import { useOnThisClick } from '@util/pointer/useOnThisClick.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import clsx from 'clsx'
 import { useUpNodesScrollLock } from '@util/pointer/useUpNodesScrollLock.ts'
@@ -19,7 +20,6 @@ import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import trueOrUndef = TypeU.trueOrUndef
-import useOnThisClick = PointerU.useOnThisClick
 
 
 

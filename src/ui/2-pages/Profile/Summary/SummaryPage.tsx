@@ -50,7 +50,7 @@ import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import EyeWideIc = SvgIconsPack.EyeWideIc
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
@@ -341,7 +341,7 @@ const AvaBox = styled.div`
   border-radius: 999999px;
   overflow: hidden;
   position: relative;
-  ${center};
+  ${flexC};
 `
 const AvaIm = styled.img`
   width: 100%;
@@ -360,7 +360,7 @@ const avaPlaceholderIcS = (t: AppTheme.Theme) => css`
 const Eye = styled.div`
   grid-area: eye;
   place-self: start end;
-  ${center};
+  ${flexC};
   margin-top: -14px;
   margin-right: -6px;
 `

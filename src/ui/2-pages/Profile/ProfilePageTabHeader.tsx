@@ -10,7 +10,7 @@ import { TabsRenderProps } from 'src/ui/components/Tabs/Tabs.tsx'
 import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import lastIndex = ArrayU.lastI
-import centerAll = EmotionCommon.centerAll
+import gridStackC = EmotionCommon.gridStackC
 import Setter = TypeU.Setter
 import col = EmotionCommon.col
 
@@ -170,7 +170,7 @@ const Wrap = styled.div`
   height: fit-content;
   position: relative;
   overflow: hidden;
-  ${centerAll};
+  ${gridStackC};
   place-items: start center;
 `
 

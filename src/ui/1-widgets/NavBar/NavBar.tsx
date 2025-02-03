@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { Light } from 'src/ui-data/theme/themes/Light.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import UseOverlayUrl from 'src/ui/components/action-providers/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
@@ -82,7 +83,10 @@ const NavBar = React.memo(() => {
           {overlay => (
             <>
               <Button css={nav}
-                onClick={overlay.open}
+                onClick={() => {
+                  console.log('settings')
+                  overlay.open()
+                }}
               >
                 <Gear2Ic />
                 <div>{titleText.settings}</div>
@@ -139,24 +143,20 @@ const nav = (t: AppTheme.Theme) => css`
   // TODO Style - a.active ...selector - Doesn't work if single style because it expands to multiple classes
   // link active selector
   // a.active &.btnClass > .iconClass
-  a.active ${IconButtonS6.t({
+  a.active ${IconButtonS6.t(t => ({
     buttonColor: t.navButton.cta[0],
-  })(t)}
-  a.active ${IconButtonS6.t({
+  }))(t)}
+  a.active ${IconButtonS6.t(t => ({
     iconColor: t.navButton.cta[0],
-  })(t)}
-  a.active ${IconButtonS6.t({
+  }))(t)}
+  a.active ${IconButtonS6.t(t => ({
     gradIconColor0: t.gradIcon.ct[0],
     gradIconColor1: t.gradIcon.ct[1],
-  })(t)}
+  }))(t)}
   
   
-  ${IconButtonS6.t({
+  ${IconButtonS6.t(t => ({
     inFocusButtonBg: t.navButton.bgFocus[0],
-  })(t)}
+  }))(t)}
 `
-
-
-
-
 

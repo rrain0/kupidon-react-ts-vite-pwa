@@ -8,7 +8,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import empty = TypeU.empty
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
-import centerAll = EmotionCommon.centerAll
+import gridStackC = EmotionCommon.gridStackC
 import hideScrollbar = EmotionCommon.noScrollbars
 
 
@@ -69,7 +69,7 @@ const ScrollbarTest = (
     <div css={t=>css`
       width: auto; min-width: 200px; max-width: 400px;
       height: 340px;
-      ${centerAll};
+      ${gridStackC};
     `}>
       <div css={t=>css`
         width: 100%; height: 100%;

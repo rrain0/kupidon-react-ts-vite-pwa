@@ -8,8 +8,6 @@ import React, {
   useState,
 } from 'react'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { useSetRecoilState } from 'recoil'
-import { LogLayerRecoil } from 'src/ui/App/LogLayer.tsx'
 import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
@@ -466,26 +464,24 @@ export const useBottomSheet = (
   )
   
   
-  const setLogData = useSetRecoilState(LogLayerRecoil)
   
   
   // noinspection JSVoidFunctionReturnValueUsed
   const sheetDrag = useDrag(
     gesture => {
       const {
+        event,
         first, active, last,
         movement: [mx, my],
         velocity: [spdx, spdy], // px/ms (nonnegative)
         direction: [dirx, diry], // positive for y is from top to bottom
         xy: [vpx, vpy], // viewport x, viewport y
       } = gesture
-      
+      console.log('event', event)
       /* console.log(
         'velocityY:', spdy,
         'directionY:', diry,
       ) */
-      
-      //setLogData(prev => [...prev, 'DRAG'])
       
       if (first) {
         setNewState('dragging')
@@ -513,7 +509,7 @@ export const useBottomSheet = (
         }
       }
       
-    }
+    },
   ) as (...args: any[]) => ReactDOMAttributes
   
   

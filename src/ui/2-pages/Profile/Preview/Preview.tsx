@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { useDrag } from '@use-gesture/react'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { useDragProgress } from '@util/drag/useDragProgress.ts'
+import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useBool } from '@util/react-state/useBool.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
@@ -35,16 +36,16 @@ import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
 import FormValues = ProfilePageValidation.FormValues
 import Txt = EmotionCommon.Txt
-import center = EmotionCommon.center
+import flexC = EmotionCommon.flexC
 import fill = EmotionCommon.fill
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import mod = MathU.mod
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import arrOfIndices = ArrayU.arrOfIndices
-import centerAll = EmotionCommon.centerAll
+import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
-import centerGrid = EmotionCommon.centerGrid
+import gridC = EmotionCommon.gridC
 import abs = EmotionCommon.abs
 
 
@@ -236,7 +237,7 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const [getWasDragged, setWasDragged] = useRefGetSet(false)
+  const { getWasDragged, setWasDragged } = useAppPointerAction()
   
   const onAnyDrag = (cpy: number, vertical: boolean, drag: boolean) => {
     if (isPhotosDraggable && vertical) {
@@ -261,9 +262,7 @@ const Preview = React.memo((props: PreviewProps) => {
   }
   const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
   
-  const onDragStart = () => {
-    setWasDragged(false)
-  }
+  const onDragStart = () => { }
   const [getOnDragStart] = useAsRefGet(onDragStart)
   
   const onDragEnd = (vely: number) => {
@@ -447,7 +446,6 @@ const Preview = React.memo((props: PreviewProps) => {
               
               <PreviewInfoOverlay
                 isDragging={isDragging}
-                getWasDragged={getWasDragged}
                 photosCnt={photosCnt}
                 openInfo={openInfo}
                 photoProgress={animatedPhotoProgress}
@@ -491,7 +489,7 @@ const PreviewFrame = styled.div`
 const PreviewFrame2 = styled.div`
   width: 100%;
   height: 100%;
-  ${center};
+  ${flexC};
 `
 const PhotosContainer = styled.div`
   width: var(--photos-w);
@@ -516,7 +514,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   width: 100%;
   height: 100%;
   border-radius: var(--photo-r);
-  ${centerAll};
+  ${gridStackC};
   overflow: hidden;
   // TODO add some bg gradient while image not loaded already
   background-color: indianred;
@@ -564,7 +562,7 @@ const NoImagesBox = styled.div`
   z-index: 1;
   border-radius: var(--photo-r);
   background-color: ${p => p.theme.boxTransparent.bg};
-  ${centerGrid};
+  ${gridC};
   grid:
     '.' 1fr
     'p' 1.6fr
@@ -583,7 +581,7 @@ const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
 `
 const NoImagesTitle = styled.div`
   grid-area: t;
-  ${centerGrid};
+  ${gridC};
   ${Txt.lg24Lh150};
 `
 

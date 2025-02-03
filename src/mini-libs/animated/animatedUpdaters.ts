@@ -209,7 +209,7 @@ export const useElemStyleUpdaters = (
 
 
 
-
+// TODO Animated - make default event handler if unknown property
 export const useRefreshElemStyleUpdaters = (
   elemRef: React.RefObject<HTMLElement>,
   animatedStyle?: AnimatedStyle,
