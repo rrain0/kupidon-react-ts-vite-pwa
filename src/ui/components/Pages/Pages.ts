@@ -13,6 +13,7 @@ export namespace Pages {
   
   
   
+  import colC = EmotionCommon.colC
   export const pageColors = (t: AppTheme.Theme) => css`
     ${SimpleGradientBg(t)};
     color: ${t.page.ct2};
@@ -28,19 +29,17 @@ export namespace Pages {
     min-width: 220px;
     width: 100dvw;
     min-height: max(100dvh, 220px);
-    height: auto;
-    max-height: fit-content;
+    //height: auto;
+    //max-height: fit-content;
+    position: relative;
+    ${col};
   `
   export const Page = styled.main`
     ${page};
-    position: relative;
-    ${center};
     ${p => pageColors(p.theme)};
   `
   export const SimplePage = styled.main`
     ${page};
-    position: relative;
-    ${center};
     ${p => simplePageColors(p.theme)}
   `
   
@@ -71,14 +70,12 @@ export namespace Pages {
     padding-top: var(--top-bars-inset);
     padding-bottom: var(--bottom-bars-inset);
   `
-  export const SafeInsets = styled.div`
+  export const NoInsets = styled.div`
     ${colFitScreen};
-    ${safeInsets};
-    ${center};
+    ${colC};
   `
-  export const AddInsets = styled.div`
-    ${colFitScreen};
-    ${center};
+  export const SafeInsets = styled(NoInsets)`
+    ${safeInsets};
   `
   
   
@@ -89,7 +86,6 @@ export namespace Pages {
     max-width: 550px;
     min-width: 0;
     width: 100%;
-    min-height: 100%;
     height: fit-content;
     // 12px
     padding-top: max(30px, var(--top-button-bar-height));

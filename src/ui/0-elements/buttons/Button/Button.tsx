@@ -1,6 +1,7 @@
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { PointerU } from '@util/react/PointerU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
+import { useAppPointerAction } from '@util/view/useAppPointerAction.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
@@ -38,6 +39,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
   const [getWasClicked, setWasClicked] = useRefGetSet(0)
   
   const clickFix = useClickFix()
+  const { getWasDragged } = useAppPointerAction()
   
   
   return (
@@ -50,6 +52,12 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>((prop
           className={clsx(className, ButtonS6.W.els.button.n)}
           type="button"
           {...combineProps(clickFix, restProps, rippleProps.target)}
+          onClick={(ev) => {
+            clickFix.onClick(ev)
+            // TODO Pointer - click fix 2
+            if (getWasDragged()) return
+            restProps.onClick?.(ev)
+          }}
         >
           
           {children}

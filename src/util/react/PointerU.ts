@@ -43,6 +43,7 @@ export namespace PointerU {
   export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
     const [getWasClicked, setWasClicked] = useRefGetSet(0)
     const { getWasDragged } = useAppPointerAction()
+    
     return {
       onPointerDown: (ev: React.PointerEvent) => {
         // Pointer & Mouse Left Button is 0
@@ -53,6 +54,7 @@ export namespace PointerU {
           setWasClicked(2)
           const ct = ev.currentTarget
           setTimeout(() => {
+            // TODO Pointer - click fix 2
             if (getWasClicked() === 2 && !getWasDragged()) {
               ct.click()
             }
