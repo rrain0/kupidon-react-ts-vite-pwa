@@ -484,15 +484,13 @@ export namespace ButtonS6 {
   export type StyleTypes = { Size: StyleSizes, Color: StyleColors }
   export type StyleParts = { Type: { [type: string]: StyleTypes } }
   
-  export type CombinedStyles<Parts> = Parts extends StyleParts
-    ? {
-      [Type in keyof Parts['Type']]: {
-        [Size in keyof Parts['Type'][Type]['Size']]: {
-          [Color in keyof Parts['Type'][Type]['Color']]: AppWidgetStyle
-        }
+  export type CombinedStyles<Parts extends StyleParts> = {
+    [Type in keyof Parts['Type']]: {
+      [Size in keyof Parts['Type'][Type]['Size']]: {
+        [Color in keyof Parts['Type'][Type]['Color']]: AppWidgetStyle
       }
     }
-    : never
+  }
   
   export function combineStyles<Parts extends StyleParts>(parts: Parts): CombinedStyles<Parts> {
     const acc = { }
@@ -513,6 +511,7 @@ export namespace ButtonS6 {
   }
   
   export const S2 = combineStyles(Parts)
+  const a = S2.filled.lg.accent
   
   console.log('Button S2', S2)
   
