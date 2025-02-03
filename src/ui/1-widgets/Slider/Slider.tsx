@@ -3,7 +3,7 @@ import { animated, to, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU'
-import { useElemRef } from 'src/util/react-state/useElemRef'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet.ts'
@@ -127,168 +127,166 @@ export type SliderRefElement = HTMLDivElement
 export type SliderProps = Omit<React.ComponentPropsWithoutRef<'div'>, 'children'> & SliderExtraProps
 
 
-const Slider = React.memo(
-  React.forwardRef<SliderRefElement, SliderProps>(
-    (props, forwardedRef) => {
-      const {
-        value: outerValue,
-        setValue: setOuterValue,
-        minMax: outerMinMax,
-        onValueDragStart,
-        onValueDragging,
-        onValueDragEnd,
-        isHideBar,
-        className,
-        ...restProps
-      } = props
-      
-      const [trackRef, getTrack] = useElemRef<SliderRefElement>(null)
-      useImperativeHandle(forwardedRef, () => trackRef.current!, [])
-      
-      const getTrackDimens = () => {
-        const track = getTrack()
-        if (track) {
-          const d = getViewProps(track)
-          return { vpx: d.vpx, w: d.w }
-        }
-        return { vpx: 0, w: 0 }
+const Slider = React.memo(React.forwardRef<SliderRefElement, SliderProps>(
+  (props, forwardedRef) => {
+    const {
+      value: outerValue,
+      setValue: setOuterValue,
+      minMax: outerMinMax,
+      onValueDragStart,
+      onValueDragging,
+      onValueDragEnd,
+      isHideBar,
+      className,
+      ...restProps
+    } = props
+    
+    const [getTrack, , trackRef] = useElemRefGetSet<SliderRefElement>()
+    useImperativeHandle(forwardedRef, () => trackRef.current!, [])
+    
+    const getTrackDimens = () => {
+      const track = getTrack()
+      if (track) {
+        const d = getViewProps(track)
+        return { vpx: d.vpx, w: d.w }
       }
-      
-      const [getMinMax] = useAsRefGet(outerMinMax)
-      const [getOnValueDragStart] = useAsRefGet(onValueDragStart)
-      const [getOnValueDragging] = useAsRefGet(onValueDragging)
-      const [getOnValueDragEnd] = useAsRefGet(onValueDragEnd)
-      
-      const [isDragging, setIsDragging] = useState(false)
-      const [getDragStartProgress, setDragStartProgress] = useRefGetSet(0) // 0..100
-      const [getDragProgress, setDragProgress] = useRefGetSet(0) // any number in 0..100 units
-      
-      const [getValueProgress, setValueProgress] = useRefGetSet(0)
-      
-      
-      
-      const shadowBarRightSpring = useSpringValue(0)
-      const barRightSpring = useSpringValue(0)
-      
-      
-      const [getBarRightPercent, setBarRightPercent] = useRefGetSet(100)
-      
-      const [getUpdateBars] = useAsRefGet(() => {
-        const trackW = getTrackDimens().w
-        const uiPercentRight = progressToUiPercentRight(
-          getValueProgress(), trackW, barLeftOffset, barRightOffset
-        )
-        
-        const shadowBarRight = Math.min(getBarRightPercent(), uiPercentRight)
-        shadowBarRightSpring.set(shadowBarRight)
-        
-        const barRight = isDragging ? Math.max(getBarRightPercent(), uiPercentRight) : getBarRightPercent()
-        barRightSpring.set(barRight)
-      })
-      
-      useLayoutEffect(() => {
-        const progress = valueToClampedProgress(outerValue, outerMinMax)
-        const trackW = getTrackDimens().w
-        const uiPercentRight = progressToUiPercentRight(
-          progress, trackW, barLeftOffset, barRightOffset
-        )
-        setBarRightPercent(uiPercentRight)
-      }, [outerValue, ...outerMinMax])
-      
-      useLayoutEffect(() => {
-        getUpdateBars()()
-      }, [isDragging, outerValue, ...outerMinMax])
-      
-      
-      // noinspection JSVoidFunctionReturnValueUsed
-      const onTrackDrag = useDrag(
-        gesture => {
-          const {
-            first, active, last,
-            xy: [vpx, vpy],
-            movement: [mx, my],
-            delta: [dx, dy],
-          } = gesture
-          
-          const minMax = getMinMax()
-          const { vpx: trackX, w: trackW } = getTrackDimens()
-          
-          if (first) {
-            setDragStartProgress(0)
-            setDragProgress(0)
-            setIsDragging(true)
-            
-            const startPx = vpx - (trackX + barLeftOffset + barRightOffset / 2)
-            const dragStartProgressRight = dPxToDProgress(
-              startPx, trackW, barLeftOffset, barRightOffset
-            )
-            setDragStartProgress(dragStartProgressRight)
-          }
-          
-          const dProgress = dPxToDProgress(dx, trackW, barLeftOffset, barRightOffset)
-          const dragProgress = getDragProgress() + dProgress
-          setDragProgress(dragProgress)
-          
-          const valueProgressRight = getDragStartProgress() + getDragProgress()
-          const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
-          setValueProgress(valueProgressRightClamped)
-          
-          const valueRight = progressToValue(valueProgressRightClamped, minMax)
-          const valueRightClamped = valueToClampedValue(valueRight, minMax)
-          
-          setOuterValue(valueRightClamped)
-          if (first) getOnValueDragStart()?.(valueRightClamped)
-          if (!first && !last) getOnValueDragging()?.(valueRightClamped)
-          
-          getUpdateBars()()
-          
-          if (last) {
-            setIsDragging(false)
-            getOnValueDragEnd()?.(valueRightClamped)
-          }
-        }
-      ) as () => ReactDOMAttributes
-      
-      
-      
-      // forbid draw to screen before data from element ref are available
-      useAwaitMounting()
-      
-      // forbid content selection for all elements while dragging
-      useNoSelect(isDragging)
-      
-      
-      return (
-        <div css={trackStyle}
-          className={clsx(className/*, ScrollbarVerticalStyle.El.track.name */)}
-          /* {...{ [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging) }} */
-          // TODO combine handlers from restProps and onTrackDrag()
-          {...restProps}
-          {...onTrackDrag()}
-          ref={trackRef}
-        >
-          
-          <animated.div css={shadowBar}
-            style={{
-              // @ts-expect-error
-              display: isDragging ? 'flex' : 'none',
-              right: to([shadowBarRightSpring], r => `${r}%`),
-            }}
-          />
-          
-          <animated.div css={bar}
-            style={{
-              // @ts-expect-error
-              display: !isHideBar ? 'flex' : 'none',
-              right: to([barRightSpring], r => `${r}%`),
-            }}
-          />
-          
-        </div>
-      )
+      return { vpx: 0, w: 0 }
     }
-  )
-)
+    
+    const [getMinMax] = useAsRefGet(outerMinMax)
+    const [getOnValueDragStart] = useAsRefGet(onValueDragStart)
+    const [getOnValueDragging] = useAsRefGet(onValueDragging)
+    const [getOnValueDragEnd] = useAsRefGet(onValueDragEnd)
+    
+    const [isDragging, setIsDragging] = useState(false)
+    const [getDragStartProgress, setDragStartProgress] = useRefGetSet(0) // 0..100
+    const [getDragProgress, setDragProgress] = useRefGetSet(0) // any number in 0..100 units
+    
+    const [getValueProgress, setValueProgress] = useRefGetSet(0)
+    
+    
+    
+    const shadowBarRightSpring = useSpringValue(0)
+    const barRightSpring = useSpringValue(0)
+    
+    
+    const [getBarRightPercent, setBarRightPercent] = useRefGetSet(100)
+    
+    const [getUpdateBars] = useAsRefGet(() => {
+      const trackW = getTrackDimens().w
+      const uiPercentRight = progressToUiPercentRight(
+        getValueProgress(), trackW, barLeftOffset, barRightOffset
+      )
+      
+      const shadowBarRight = Math.min(getBarRightPercent(), uiPercentRight)
+      shadowBarRightSpring.set(shadowBarRight)
+      
+      const barRight = isDragging ? Math.max(getBarRightPercent(), uiPercentRight) : getBarRightPercent()
+      barRightSpring.set(barRight)
+    })
+    
+    useLayoutEffect(() => {
+      const progress = valueToClampedProgress(outerValue, outerMinMax)
+      const trackW = getTrackDimens().w
+      const uiPercentRight = progressToUiPercentRight(
+        progress, trackW, barLeftOffset, barRightOffset
+      )
+      setBarRightPercent(uiPercentRight)
+    }, [outerValue, ...outerMinMax])
+    
+    useLayoutEffect(() => {
+      getUpdateBars()()
+    }, [isDragging, outerValue, ...outerMinMax])
+    
+    
+    // noinspection JSVoidFunctionReturnValueUsed
+    const onTrackDrag = useDrag(
+      gesture => {
+        const {
+          first, active, last,
+          xy: [vpx, vpy],
+          movement: [mx, my],
+          delta: [dx, dy],
+        } = gesture
+        
+        const minMax = getMinMax()
+        const { vpx: trackX, w: trackW } = getTrackDimens()
+        
+        if (first) {
+          setDragStartProgress(0)
+          setDragProgress(0)
+          setIsDragging(true)
+          
+          const startPx = vpx - (trackX + barLeftOffset + barRightOffset / 2)
+          const dragStartProgressRight = dPxToDProgress(
+            startPx, trackW, barLeftOffset, barRightOffset
+          )
+          setDragStartProgress(dragStartProgressRight)
+        }
+        
+        const dProgress = dPxToDProgress(dx, trackW, barLeftOffset, barRightOffset)
+        const dragProgress = getDragProgress() + dProgress
+        setDragProgress(dragProgress)
+        
+        const valueProgressRight = getDragStartProgress() + getDragProgress()
+        const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
+        setValueProgress(valueProgressRightClamped)
+        
+        const valueRight = progressToValue(valueProgressRightClamped, minMax)
+        const valueRightClamped = valueToClampedValue(valueRight, minMax)
+        
+        setOuterValue(valueRightClamped)
+        if (first) getOnValueDragStart()?.(valueRightClamped)
+        if (!first && !last) getOnValueDragging()?.(valueRightClamped)
+        
+        getUpdateBars()()
+        
+        if (last) {
+          setIsDragging(false)
+          getOnValueDragEnd()?.(valueRightClamped)
+        }
+      }
+    ) as () => ReactDOMAttributes
+    
+    
+    
+    // forbid draw to screen before data from element ref are available
+    useAwaitMounting()
+    
+    // forbid content selection for all elements while dragging
+    useNoSelect(isDragging)
+    
+    
+    return (
+      <div css={trackStyle}
+        className={clsx(className/*, ScrollbarVerticalStyle.El.track.name */)}
+        /* {...{ [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging) }} */
+        // TODO combine handlers from restProps and onTrackDrag()
+        {...restProps}
+        {...onTrackDrag()}
+        ref={trackRef}
+      >
+        
+        <animated.div css={shadowBar}
+          style={{
+            // @ts-expect-error
+            display: isDragging ? 'flex' : 'none',
+            right: to([shadowBarRightSpring], r => `${r}%`),
+          }}
+        />
+        
+        <animated.div css={bar}
+          style={{
+            // @ts-expect-error
+            display: !isHideBar ? 'flex' : 'none',
+            right: to([barRightSpring], r => `${r}%`),
+          }}
+        />
+        
+      </div>
+    )
+  }
+))
 export default Slider
 
 

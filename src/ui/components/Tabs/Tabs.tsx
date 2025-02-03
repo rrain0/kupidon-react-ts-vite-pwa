@@ -1,12 +1,11 @@
 import { animated } from '@react-spring/web'
-import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
-import { css } from '@emotion/react'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
+import React, { useImperativeHandle, useLayoutEffect } from 'react'
 import styled from '@emotion/styled'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState, useTabs } from 'src/ui/components/Tabs/useTabs.ts'
-import { useElemRef } from 'src/util/react-state/useElemRef'
 import Setter = TypeU.Setter
 import row = EmotionCommon.row
 import contents = EmotionCommon.contents
@@ -45,7 +44,7 @@ const Tabs = React.memo(React.forwardRef<TabsRefElement, TabsProps>((props, forw
     ...restProps
   } = props
   
-  const [tabFrameRef] = useElemRef()
+  const [, , tabFrameRef] = useElemRefGetSet()
   useImperativeHandle(forwardedRef, () => tabFrameRef.current!, [])
   
   const canUseGestures = useLockAppGestures(tabsState === 'dragging')

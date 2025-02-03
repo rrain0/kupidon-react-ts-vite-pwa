@@ -1,4 +1,5 @@
 import { animated, useSpring, config, easings } from '@react-spring/web'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useMemo } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -6,7 +7,6 @@ import { RippleS6 } from './RippleS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { ViewU } from '@util/view/ViewU.ts'
-import { useElemRef } from '@util/react-state/useElemRef.ts'
 import ClassStyleProps = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
@@ -60,8 +60,8 @@ const Ripple = React.memo(
     
     const { isShow, cancel, clientXY, className, ...restProps } = props
     
-    const [frameRef, getFrame] = useElemRef()
-    const [rippleRef, getRipple] = useElemRef()
+    const [getFrame, , frameRef] = useElemRefGetSet()
+    const [getRipple, , rippleRef] = useElemRefGetSet()
     
     const rippleProps = useMemo(() => {
       const frame = getFrame()

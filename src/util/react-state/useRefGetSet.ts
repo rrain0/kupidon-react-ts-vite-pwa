@@ -3,12 +3,21 @@ import { TypeU } from 'src/util/common/TypeU'
 import Callback1 = TypeU.Callback1
 
 
-export const useRefGetSet = <T>(initialValue: T, onSet?: Callback1<T>, deps: any[] = []) => {
+
+export const useRefGetSet = <T>(
+  initialValue: T,
+  onSet?: Callback1<T>,
+) => {
   const ref = useRef(initialValue)
   const get = useCallback(() => ref.current, [])
+  
+  const setRef = useRef(onSet)
+  setRef.current = onSet
+  
   const set = useCallback((value: T) => {
     ref.current = value
-    onSet?.(ref.current)
-  }, deps)
+    setRef.current?.(value)
+  }, [])
+  
   return [get, set, ref] as const
 }

@@ -2,23 +2,27 @@
 
 
 
-export const findFirstFocusableElement = (container: HTMLElement|SVGElement|null|undefined) => {
+export const findFirstFocusableElement = (
+  container: HTMLElement | SVGElement |null | undefined
+) => {
   if (!container) return container
-  return Array.from(container.getElementsByTagName('*')).find(isFocusable) as HTMLElement|SVGElement
+  return Array
+    .from(container.getElementsByTagName('*'))
+    .find(isFocusable) as HTMLElement | SVGElement
 }
 
-const isFocusable = item => {
+const isFocusable = (item/* : HTMLElement | SVGElement */) => {
   if (item.tabIndex < 0) {
-    return false;
+    return false
   }
   switch (item.tagName) {
-    case "A":
+    case 'A':
       return !!item.href
-    case "INPUT":
-      return item.type !== "hidden" && !item.disabled
-    case "SELECT":
-    case "TEXTAREA":
-    case "BUTTON":
+    case 'INPUT':
+      return item.type !== 'hidden' && !item.disabled
+    case 'SELECT':
+    case 'TEXTAREA':
+    case 'BUTTON':
       return !item.disabled
     default:
       return false

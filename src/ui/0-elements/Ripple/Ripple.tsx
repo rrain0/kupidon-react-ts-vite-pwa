@@ -1,4 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -6,7 +7,6 @@ import { RippleS6 } from './RippleS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
-import { useElemRef } from 'src/util/react-state/useElemRef'
 import ClassStyleProps = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
@@ -35,8 +35,8 @@ const Ripple = React.memo((props: RippleProps) => {
     ...restProps 
   } = props
   
-  const [frameRef, getFrame] = useElemRef()
-  const [rippleRef, getRipple] = useElemRef()
+  const [getFrame, , frameRef] = useElemRefGetSet()
+  const [getRipple, , rippleRef] = useElemRefGetSet()
   
   
   const rippleProps = (() => {

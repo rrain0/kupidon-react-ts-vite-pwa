@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
+import { useResizeRef } from '@util/view/useResizeRef.ts'
+import { getViewProps } from '@util/view/ViewProps.ts'
 import React from 'react'
 import { useEmulatedScroll } from 'src/ui/2-pages/Test/pages/EmulatedScrollTestPage/useEmulatedScroll.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
-import { useGetViewWh } from '@util/view/useGetViewWh.ts'
-import { useOnResize_ } from 'src/_old0/util/view/useOnResize_.ts'
-import { useElemRef } from '@util/react-state/useElemRef.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import NumRange = RangeU.NumRange
@@ -20,38 +20,54 @@ const EmulatedScrollTestPage = React.memo(() => {
   // can save it upper this component and pass via props
   const [, setScrollProgress, scrollProgress] = useRefGetSet(0)
   
+  const [getGetFrameH, setGetFrameH] = useRefGetSet(() => 0 as number)
+  const [getGetContentH, setGetContentH] = useRefGetSet(() => 0 as number)
   
-  
-  const [frameRef] = useElemRef()
-  const getFrameWH = useGetViewWh(frameRef)
-  
-  const [contentRef] = useElemRef()
-  const getContentWH = useGetViewWh(contentRef)
-  
-  
-  const getMinMaxOffset = () => [0, getContentWH.h() - getFrameWH.h()] as NumRange
-  
+  const getMinMaxOffset = () => [0, getGetContentH()() - getGetFrameH()()] as NumRange
   
   const { drag, value, apply, valueToProgress } = useEmulatedScroll(
     scrollProgress,
     getMinMaxOffset,
     ([, dy]) => -dy,
   )
-  useOnResize_([frameRef, contentRef], () => {
+  
+  const frameResizeRef = useResizeRef(() => {
     setScrollProgress(valueToProgress(value.get()))
     apply()
   })
+  const contentResizeRef = useResizeRef(() => {
+    setScrollProgress(valueToProgress(value.get()))
+    apply()
+  })
+  
+  
+  const [getFrame, setFrame, frameRef] = useElemRefGetSet(null, elem => {
+    frameResizeRef(elem)
+    if (elem) setGetFrameH(() => getViewProps(elem).h)
+  })
+  const [getContent, setContent, contentRef] = useElemRefGetSet(null, elem => {
+    contentResizeRef(elem)
+    if (elem) setGetContentH(() => getViewProps(elem).h)
+  })
+  
+  //const getFrameWH = useGetViewWh(frameRef)
+  //const getContentWH = useGetViewWh(contentRef)
+  
+  
+  
+  
+  
   
   
   return (
     <Pages.SimplePage>
       
       
-      <ScrollFrame ref={frameRef}>
+      <ScrollFrame ref={setFrame}>
         
         <animated.div
           css={scrollContentCss}
-          ref={contentRef}
+          ref={setContent}
           {...drag()}
           style={{
             // @ts-expect-error
