@@ -1,6 +1,7 @@
 import { useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
+import { useAppPointerAction } from '@util/view/useAppPointerAction.ts'
 import React, {
   useCallback,
   useEffect,
@@ -276,7 +277,7 @@ export const useTabs = (
   useEffect(reactOnState, [newState, newTabIdx, isReady, snapPointsPx])
   
   
-  
+  const { setWasDragged } = useAppPointerAction()
   
   // You MUST use css 'touch-action: none;' before start dragging
   // to prevent browser gesture handling
@@ -297,6 +298,7 @@ export const useTabs = (
       ) */
       
       if (first) {
+        setWasDragged(false)
         dragStartRef.current = { ...dragStartInitialValue }
         dragStartRef.current.scrollLeft = tabContainerSpring.scrollLeft.get()
       }
@@ -321,6 +323,7 @@ export const useTabs = (
           setNewState('dragging')
           dragStartRef.current.canStart = false
           dragStartRef.current.isDragging = true
+          setWasDragged(true)
         }
       }
       

@@ -23,7 +23,7 @@ const BottomNavBarRouting = React.memo(
             RootRoute.profile.id.userId.summary[full](),
             RootRoute.profile.id.userId.preview[full](),
             RootRoute.profile.id.userId.profile[full](),
-            RootRoute.profile.id.userId.date[full](),
+            RootRoute.profile.id.userId.tests[full](),
             
             RootRoute.findPairs[full](),
             

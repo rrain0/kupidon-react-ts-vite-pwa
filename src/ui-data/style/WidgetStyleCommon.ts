@@ -83,7 +83,7 @@ export namespace WidgetStyleCommon {
       lineHeight: 'normal',
       letterSpacing: 'normal',
     }
-    export const lg18lh150: WidgetStyleObj = {
+    export const lg18Lh150: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '18px',
       lineHeight: '150%',
@@ -94,14 +94,14 @@ export namespace WidgetStyleCommon {
     export const lg16: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '16px',
-      lineHeight: '129%',
-      letterSpacing: '0.05em',
-    }
-    export const lg16b: WidgetStyleObj = {
-      fontWeight: '400',
-      fontSize: '16px',
       lineHeight: 'normal',
       letterSpacing: 'normal',
+    }
+    export const lg16Wide: WidgetStyleObj = {
+      fontWeight: '400',
+      fontSize: '16px',
+      lineHeight: '129%',
+      letterSpacing: '0.05em',
     }
     
     
@@ -120,7 +120,7 @@ export namespace WidgetStyleCommon {
       lineHeight: '129%',
       letterSpacing: '0.05em',
     }
-    export const md14bold: WidgetStyleObj = {
+    export const md14Bold: WidgetStyleObj = {
       fontWeight: '600',
       fontSize: '14px',
       lineHeight: '129%',
@@ -129,7 +129,7 @@ export namespace WidgetStyleCommon {
     
     
     
-    export const md15thin: WidgetStyleObj = {
+    export const md15Thin: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '15px',
       lineHeight: '129%',

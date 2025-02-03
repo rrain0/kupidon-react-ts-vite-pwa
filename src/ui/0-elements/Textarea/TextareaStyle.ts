@@ -67,7 +67,7 @@ export namespace TextareaStyle {
       resize: none;
       overflow: hidden;
       padding: 8px 16px;
-      ${Txt.lg18lh150};
+      ${Txt.lg18Lh150};
       color: ${t.input.ct[0]};
       ${Prop.color}: ${t.input.ct[0]};
 
@@ -128,7 +128,7 @@ export namespace TextareaStyle {
     ${El.textarea} {
       width: 100%;
       padding: 8px 12px;
-      ${Txt.md15thin};
+      ${Txt.md15Thin};
     }
     ${El.border} {
       border-width: 1px;

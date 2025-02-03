@@ -14,8 +14,6 @@ import GearIc = SvgIconsPack.GearIc
 
 
 
-
-
 const ButtonsTestPage = React.memo(() => {
   
   return (
@@ -106,6 +104,7 @@ namespace AllButtonStyles {
         export const danger: AppWidgetStyle = ButtonS6.S.Filled.Rect.Big.danger
         export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Rect.Big.normal2
         export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Rect.Big.accent2
+        export const accent3: AppWidgetStyle = ButtonS6.S.Filled.Rect.Big.accent3
       }
       export namespace Normal {
         export const main: AppWidgetStyle = ButtonS6.S.Filled.Rect.Normal.main
@@ -114,6 +113,7 @@ namespace AllButtonStyles {
         export const danger: AppWidgetStyle = ButtonS6.S.Filled.Rect.Normal.danger
         export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Rect.Normal.normal2
         export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Rect.Normal.accent2
+        export const accent3: AppWidgetStyle = ButtonS6.S.Filled.Rect.Normal.accent3
       }
     }
     export namespace Rounded {
@@ -124,6 +124,7 @@ namespace AllButtonStyles {
         export const danger: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal.danger
         export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal.normal2
         export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal.accent2
+        export const accent3: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal.accent3
       }
       export namespace Normal2 {
         export const main: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal2.main
@@ -132,6 +133,7 @@ namespace AllButtonStyles {
         export const danger: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal2.danger
         export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal2.normal2
         export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal2.accent2
+        export const accent3: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Normal2.accent3
       }
       export namespace Small {
         export const main: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Small.main
@@ -140,6 +142,7 @@ namespace AllButtonStyles {
         export const danger: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Small.danger
         export const normal2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Small.normal2
         export const accent2: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Small.accent2
+        export const accent3: AppWidgetStyle = ButtonS6.S.Filled.Rounded.Small.accent3
       }
     }
   }

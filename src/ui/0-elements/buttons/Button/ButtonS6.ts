@@ -154,6 +154,15 @@ export namespace ButtonS6 {
             buttonColor: t.buttonAccent2.ctFc,
           },
         }]
+        // type: filled, color: accent3
+        export const accent3: AppWidgetStyle = t => [baseColor, {
+          buttonBgColor: t.buttonAccent3.bg,
+          buttonColor: t.buttonAccent3.ct,
+          inFocus: {
+            buttonBgColor: t.buttonAccent3.bgFc,
+            buttonColor: t.buttonAccent3.ctFc,
+          },
+        }]
       }
       
       export namespace Rect {
@@ -162,7 +171,7 @@ export namespace ButtonS6 {
         export const sizeBig: WidgetStyle = [base, {
           button: {
             w: 'full', hMin: 50, r: 15, p: [8, 6],
-            ...Txt.lg18lh150,
+            ...Txt.lg18Lh150,
           },
         }]
         // type: filled, shape: rect, size: normal
@@ -181,6 +190,7 @@ export namespace ButtonS6 {
           export const danger: AppWidgetStyle = [sizeBig, Color.danger]
           export const normal2: AppWidgetStyle = [sizeBig, Color.normal2]
           export const accent2: AppWidgetStyle = [sizeBig, Color.accent2]
+          export const accent3: AppWidgetStyle = [sizeBig, Color.accent3]
         }
         
         export namespace Normal {
@@ -190,6 +200,7 @@ export namespace ButtonS6 {
           export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
           export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
           export const accent2: AppWidgetStyle = [sizeNormal, Color.accent2]
+          export const accent3: AppWidgetStyle = [sizeNormal, Color.accent3]
         }
         
       }
@@ -200,7 +211,7 @@ export namespace ButtonS6 {
         export const sizeNormal: WidgetStyle = [base, {
           button: {
             wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-            ...Txt.md15thin,
+            ...Txt.md15Thin,
           },
         }]
         // type: filled, shape: rounded, size: normal2
@@ -211,7 +222,7 @@ export namespace ButtonS6 {
         export const sizeSmall: WidgetStyle = [base, {
           button: {
             w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-            ...Txt.md15thin,
+            ...Txt.md15Thin,
           },
         }]
         
@@ -222,6 +233,7 @@ export namespace ButtonS6 {
           export const danger: AppWidgetStyle = [sizeNormal, Color.danger]
           export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
           export const accent2: AppWidgetStyle = [sizeNormal, Color.accent2]
+          export const accent3: AppWidgetStyle = [sizeNormal, Color.accent3]
         }
         export namespace Normal2 {
           export const main: AppWidgetStyle = [sizeNormal2, Color.main]
@@ -230,6 +242,7 @@ export namespace ButtonS6 {
           export const danger: AppWidgetStyle = [sizeNormal2, Color.danger]
           export const normal2: AppWidgetStyle = [sizeNormal, Color.normal2]
           export const accent2: AppWidgetStyle = [ sizeNormal2, Color.accent2]
+          export const accent3: AppWidgetStyle = [ sizeNormal2, Color.accent3]
         }
         export namespace Small {
           export const main: AppWidgetStyle = [sizeSmall, Color.main]
@@ -238,6 +251,7 @@ export namespace ButtonS6 {
           export const danger: AppWidgetStyle = [sizeSmall, Color.danger]
           export const normal2: AppWidgetStyle = [sizeSmall, Color.normal2]
           export const accent2: AppWidgetStyle = [sizeSmall, Color.accent2]
+          export const accent3: AppWidgetStyle = [sizeSmall, Color.accent3]
         }
         
       }
@@ -289,7 +303,7 @@ export namespace ButtonS6 {
         export const sizeNormal: WidgetStyle = [base, {
           button: {
             wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-            ...Txt.md15thin,
+            ...Txt.md15Thin,
           },
           border: {
             bd: '1px solid',
@@ -302,7 +316,7 @@ export namespace ButtonS6 {
         export const sizeSmall: WidgetStyle = [base, {
           button: {
             w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-            ...Txt.md15thin,
+            ...Txt.md15Thin,
           },
           border: {
             bd: '1px solid',
@@ -363,7 +377,7 @@ export namespace ButtonS6 {
         export const sizeBig: WidgetStyle = [base, {
           button: {
             w: 'full', hMin: 50, r: 15, p: [8, 6],
-            ...Txt.lg18lh150,
+            ...Txt.lg18Lh150,
           },
           buttonBg: null,
         }]
@@ -398,14 +412,14 @@ export namespace ButtonS6 {
         export const sizeSmall: WidgetStyle = [base, {
           button: {
             w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-            ...Txt.lg16b,
+            ...Txt.lg16,
           },
         }]
         // type: text, shape: rounded, size: normal2
         export const sizeNormal2: WidgetStyle = [sizeNormal, {
           button: {
             pH: 16,
-            ...Txt.lg16b,
+            ...Txt.lg16,
           },
         }]
         // type: text, shape: rounded, size: normal2Uppercase

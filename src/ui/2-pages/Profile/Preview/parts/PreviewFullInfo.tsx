@@ -234,7 +234,7 @@ const Content = styled.div`
 
 
 const NameAge = styled.div`
-  ${Txt.lg24bold};
+  ${Txt.lg24Bold};
 `
 
 
@@ -258,7 +258,7 @@ const MatchBubble = styled.div<{ main?: boolean }>`
     );
     color:  ${p.theme.previewFullInfoBubble.ctMain};
   `}
-  ${Txt.md16}
+  ${Txt.lg16Thin}
 `
 
 
@@ -275,7 +275,7 @@ const InfoBubble = styled(MatchBubble)`
   height: 30px;
   padding: 4px 9px;
   gap: 6px;
-  ${Txt.md16};
+  ${Txt.lg16Thin};
 `
 const infoIcS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
   iconSz: 17,

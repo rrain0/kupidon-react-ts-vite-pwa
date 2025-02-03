@@ -110,7 +110,7 @@ const Content = styled.div`
   flex: 1;
   color: ${p=>p.theme.toast.ct[0]};
   white-space: break-spaces;
-  ${Txt.md14thin};
+  ${Txt.md14Thin};
 `
 
 const CloseButton = styled.button`

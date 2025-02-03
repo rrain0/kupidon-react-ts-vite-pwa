@@ -82,6 +82,12 @@ export const DarkProps: ThemeProps = {
     bgFc:          '#7b7b7b',
     ctFc:          '#000000',
   },
+  buttonAccent3: {
+    bg:            '#999999',
+    ct:            '#000000',
+    bgFc:          '#7b7b7b',
+    ctFc:          '#000000',
+  },
   buttonNormal: {
     bg:             ['#999999'],
     bg2:             '#999999',

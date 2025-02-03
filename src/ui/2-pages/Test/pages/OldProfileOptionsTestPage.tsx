@@ -15,7 +15,7 @@ import ProfileSportFrequencyOption
 import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption'
 import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption'
 import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption'
-import { CardTitle } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
+import { CardTitleSecondary } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption'
@@ -41,7 +41,7 @@ const OldProfileOptionsTestPage = React.memo(
             
             <div css={css`width: 600px; ${col}`}>
               
-              <CardTitle>Это потом будет в фильтре поиска</CardTitle>
+              <CardTitleSecondary>Это потом будет в фильтре поиска</CardTitleSecondary>
               
               <div css={{ height: 24 }} />
               

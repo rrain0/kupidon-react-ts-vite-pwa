@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { Dark, DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
-import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -65,6 +64,12 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bg:            '#c51841',
     ct:            '#ffffff',
     bgFc:          '#e83f66',
+    ctFc:          '#ffffff',
+  },
+  buttonAccent3: {
+    bg:            '#F59CB1',
+    ct:            '#ffffff',
+    bgFc:          '#f6839e',
     ctFc:          '#ffffff',
   },
   buttonNormal: { ...DarkProps.buttonNormal,

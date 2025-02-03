@@ -13,9 +13,9 @@ import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
 import Txt = EmotionCommon.Txt
-import heartLocks from '@im/sign/heart-locks.svg'
-import share from '@im/sign/share.svg'
-import social from '@im/sign/social.svg'
+import heartLocks from '@im/ic/heart-locks.svg'
+import share from '@im/ic/share.svg'
+import social from '@im/ic/social.svg'
 
 
 
@@ -95,7 +95,7 @@ const featureCardS = css`
 `
 const FeatureCardName = styled.div`
   grid-area: name;
-  ${Txt.lg17bold};
+  ${Txt.lg17Bold};
 `
 const FeatureCardText = styled.div`
   grid-area: text;
@@ -105,7 +105,7 @@ const FeatureCardText = styled.div`
 const featureCardButtonS: AppWidgetStyle = [ButtonS6.S.Filled.Rect.Normal.accent2, {
   button: {
     gridArea: 'btn', w: 160, hMin: 35,
-    ...WidgetStyleCommon.Txt.md14bold,
+    ...WidgetStyleCommon.Txt.md14Bold,
   },
 }]
 const FeatureCardIcBox = styled.div`

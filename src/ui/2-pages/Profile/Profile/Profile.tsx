@@ -11,7 +11,7 @@ import ProfileKidsOption from 'src/ui/2-pages/Profile/options/ProfileKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOption.tsx'
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
-import { CardTitle } from 'src/ui/2-pages/Profile/parts/CardTitle'
+import { CardTitleSecondary } from 'src/ui/2-pages/Profile/parts/CardTitle'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
@@ -67,178 +67,176 @@ export type ProfileProps = {
 }
 
 
-const Profile = React.memo(
-  (props: ProfileProps) => {
-    
-    const actionText = useUiValues(ActionUiText)
-    
-    const text = {
-      bio: 'Био',
-      itImportant: 'Важное',
-      interestingToKnow: 'Интересно узнать',
-      myDate: 'Моё свидание',
-    }
-    
-    
-    
-    
-    return (
-      <>
-        <Pages.SafeInsets>
-          <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
-            
-            <ProfilePageTabHeader thisTabIdx={props.tabIdx} />
-            
-            
-            <div css={col}>
-              
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName="photos"
-                render={props => (
-                  <ProfilePhotos
-                    images={props.value}
-                    setImages={props.setValue}
-                  />
-                )}
-              />
-              
-              <div css={{ height: 24 }} />
-              
-              
-              
-              
-              <CardTitle>{text.bio}</CardTitle>
-              
-              <div css={{ height: 24 }} />
-              
-              <Card3>
-                
-                <ValidationWrap
-                  {...props.validationProps}
-                  fieldName="name"
-                  render={validProps => (
-                    <ProfileNameOption {...validProps} />
-                  )}
-                />
-                
-                <ValidationWrap
-                  {...props.validationProps}
-                  fieldName="birthDate"
-                  render={validProps => (
-                    <ProfileBirthDateOption {...validProps} />
-                  )}
-                />
-                
-                <ValidationWrap
-                  {...props.validationProps}
-                  fieldName="gender"
-                  render={validProps => (
-                    <ProfileGenderOption {...validProps} />
-                  )}
-                />
-              
-              </Card3>
-              
-              <div css={{ height: 24 }} />
-              
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName="aboutMe"
-                render={validProps => (
-                  <ProfileAboutMeOption {...validProps} />
-                )}
-              />
-              
-              <div css={{ height: 24 }} />
-              
-              
-              
-              
-              <CardTitle>{text.itImportant}</CardTitle>
-              
-              <div css={{ height: 24 }} />
-              
-              <Card3>
-                
-                <ProfileMeetingPurposeOption />
-                
-                <ProfilePlaceOfResidenceOption />
-                
-                <ProfileKidsOption />
-                
-                <ProfileHeightOption />
-                
-                <ProfileInterestsAndHobbiesOption />
-              
-              </Card3>
-              
-              <div css={{ height: 24 }} />
-              
-              
-              
-              
-              <CardTitle>{text.interestingToKnow}</CardTitle>
-              
-              <div css={{ height: 24 }} />
-              
-              <Card3>
-                
-                <ProfileJobOption />
-                
-                
-                <ProfileEducationOption />
-                
-                
-                <ProfileLangsOption />
-                
-                
-                <ProfileSmokeOption />
-                
-                
-                <ProfileAlcoholOption />
-                
-                
-                <ProfilePetsOption />
-              
-              </Card3>
-              
-              <div css={{ height: 24 }} />
-              
-              
-              
-              
-              <CardTitle>{text.myDate}</CardTitle>
-              
-              <div css={{ height: 24 }} />
-              
-              <Card3>
-                
-                <DateIdealFormatOption />
-                
-                
-                <DateIdealTimeOption />
-                
-                
-                <DateWhoPaysOption />
-              
-              </Card3>
-              
-              <div css={{ height: 24 }} />
-              
-              <DateIdealDateOption />
-            
-            
-            </div>
-          
-          </Pages.ContentForm>
-        </Pages.SafeInsets>
-      
-      
-      </>
-    )
+const Profile = React.memo((props: ProfileProps) => {
+  
+  const actionText = useUiValues(ActionUiText)
+  
+  const text = {
+    bio: 'Био',
+    itImportant: 'Важное',
+    interestingToKnow: 'Интересно узнать',
+    myDate: 'Моё свидание',
   }
-)
+  
+  
+  
+  
+  return (
+    <>
+      <Pages.SafeInsets>
+        <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
+          
+          <ProfilePageTabHeader thisTabIdx={props.tabIdx} />
+          
+          
+          <div css={col}>
+            
+            <ValidationWrap
+              {...props.validationProps}
+              fieldName="photos"
+              render={props => (
+                <ProfilePhotos
+                  images={props.value}
+                  setImages={props.setValue}
+                />
+              )}
+            />
+            
+            <div css={{ height: 24 }} />
+            
+            
+            
+            
+            <CardTitleSecondary>{text.bio}</CardTitleSecondary>
+            
+            <div css={{ height: 24 }} />
+            
+            <Card3>
+              
+              <ValidationWrap
+                {...props.validationProps}
+                fieldName="name"
+                render={validProps => (
+                  <ProfileNameOption {...validProps} />
+                )}
+              />
+              
+              <ValidationWrap
+                {...props.validationProps}
+                fieldName="birthDate"
+                render={validProps => (
+                  <ProfileBirthDateOption {...validProps} />
+                )}
+              />
+              
+              <ValidationWrap
+                {...props.validationProps}
+                fieldName="gender"
+                render={validProps => (
+                  <ProfileGenderOption {...validProps} />
+                )}
+              />
+            
+            </Card3>
+            
+            <div css={{ height: 24 }} />
+            
+            <ValidationWrap
+              {...props.validationProps}
+              fieldName="aboutMe"
+              render={validProps => (
+                <ProfileAboutMeOption {...validProps} />
+              )}
+            />
+            
+            <div css={{ height: 24 }} />
+            
+            
+            
+            
+            <CardTitleSecondary>{text.itImportant}</CardTitleSecondary>
+            
+            <div css={{ height: 24 }} />
+            
+            <Card3>
+              
+              <ProfileMeetingPurposeOption />
+              
+              <ProfilePlaceOfResidenceOption />
+              
+              <ProfileKidsOption />
+              
+              <ProfileHeightOption />
+              
+              <ProfileInterestsAndHobbiesOption />
+            
+            </Card3>
+            
+            <div css={{ height: 24 }} />
+            
+            
+            
+            
+            <CardTitleSecondary>{text.interestingToKnow}</CardTitleSecondary>
+            
+            <div css={{ height: 24 }} />
+            
+            <Card3>
+              
+              <ProfileJobOption />
+              
+              
+              <ProfileEducationOption />
+              
+              
+              <ProfileLangsOption />
+              
+              
+              <ProfileSmokeOption />
+              
+              
+              <ProfileAlcoholOption />
+              
+              
+              <ProfilePetsOption />
+            
+            </Card3>
+            
+            <div css={{ height: 24 }} />
+            
+            
+            
+            
+            <CardTitleSecondary>{text.myDate}</CardTitleSecondary>
+            
+            <div css={{ height: 24 }} />
+            
+            <Card3>
+              
+              <DateIdealFormatOption />
+              
+              
+              <DateIdealTimeOption />
+              
+              
+              <DateWhoPaysOption />
+            
+            </Card3>
+            
+            <div css={{ height: 24 }} />
+            
+            <DateIdealDateOption />
+          
+          
+          </div>
+        
+        </Pages.ContentForm>
+      </Pages.SafeInsets>
+    
+    
+    </>
+  )
+})
 export default Profile
 
 

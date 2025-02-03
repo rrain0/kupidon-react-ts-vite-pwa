@@ -424,7 +424,7 @@ const ProgressBox = styled.div`
   align-items: center;
 `
 const Percent = styled.div`
-  ${Txt.lg24bold};
+  ${Txt.lg24Bold};
   color: ${p => p.theme.boxAccent.bg3};
 `
 
@@ -432,7 +432,7 @@ const Percent = styled.div`
 const CompleteProfileText = styled.div`
   grid-area: cpt;
   justify-self: stretch;
-  ${Txt.lg16};
+  ${Txt.lg16Wide};
   color: ${p => p.theme.boxNormal.ct1a[0]};
   text-align: center;
 `

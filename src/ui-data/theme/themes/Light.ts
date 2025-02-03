@@ -83,6 +83,12 @@ export const LightProps: ThemeProps = {
     bgFc:          '#999999',
     ctFc:          '#000000',
   },
+  buttonAccent3: {
+    bg:            '#bbbbbb',
+    ct:            '#000000',
+    bgFc:          '#999999',
+    ctFc:          '#000000',
+  },
   buttonNormal: {
     bg:            ['#bbbbbb'],
     bg2:           '#dddddd',

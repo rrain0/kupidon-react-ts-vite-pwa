@@ -105,6 +105,12 @@ export namespace AppTheme {
       bgFc:          string
       ctFc:          string
     }
+    buttonAccent3: {
+      bg:            string
+      ct:            string
+      bgFc:          string
+      ctFc:          string
+    }
     // normal button
     buttonNormal: {
       bg:            string[]

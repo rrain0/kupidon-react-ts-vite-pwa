@@ -22,60 +22,56 @@ const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.
 
 
 
-const ProfileIdUserIdTab = React.memo(
-  () => {
-    const [searchParams] = useSearchParams()
-    const auth = useRecoilValue(AuthRecoil)
-    const authId = auth?.user.id
-    const tabRoute = RootRoute.profile.id.userId[use](':userId').profile[use](':tab')
-    const params = useMatch(tabRoute[full]()+'/*')?.params
-    const urlUserId = params?.['userId']
-    const tab = params?.['tab']
-    const summary = RootRoute.profile.id.userId.summary[path]
-    
-    if (urlUserId !== authId) return (
-      <div>
-        <div>Просмотр чужого профиля пока что не реализован.</div>
-        <Link
-          to={RootRoute.login[fullAllowedNameParams]({
-            returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
-          })}
-        >
-          <button>Войти</button>
-        </Link>
-      </div>
-    )
-    
-    
-    if (tab === summary) return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <SummaryPage />
-      </Suspense>
-    )
-    return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <ProfilePage />
-      </Suspense>
-    )
-  }
-)
+const ProfileIdUserIdTab = React.memo(() => {
+  const [searchParams] = useSearchParams()
+  const auth = useRecoilValue(AuthRecoil)
+  const authId = auth?.user.id
+  const tabRoute = RootRoute.profile.id.userId[use](':userId').profile[use](':tab')
+  const params = useMatch(tabRoute[full]()+'/*')?.params
+  const urlUserId = params?.['userId']
+  const tab = params?.['tab']
+  const summary = RootRoute.profile.id.userId.summary[path]
+  
+  if (urlUserId !== authId) return (
+    <div>
+      <div>Просмотр чужого профиля пока что не реализован.</div>
+      <Link
+        to={RootRoute.login[fullAllowedNameParams]({
+          returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
+        })}
+      >
+        <button>Войти</button>
+      </Link>
+    </div>
+  )
+  
+  
+  if (tab === summary) return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SummaryPage />
+    </Suspense>
+  )
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProfilePage />
+    </Suspense>
+  )
+})
 
 
 
-const ProfileIdUserIdAny = React.memo(
-  () => {
-    const [searchParams] = useSearchParams()
-    const userIdRoute = RootRoute.profile.id.userId[use](':userId')
-    const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
-    
-    return (
-      <Navigate
-        to={RootRoute.profile.id.userId[use](urlUserId).summary[fullAnySearchParams](searchParams)}
-        replace={true}
-      />
-    )
-  }
-)
+const ProfileIdUserIdAny = React.memo(() => {
+  const [searchParams] = useSearchParams()
+  const userIdRoute = RootRoute.profile.id.userId[use](':userId')
+  const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
+  
+  return (
+    <Navigate
+      to={RootRoute.profile.id.userId[use](urlUserId).summary[fullAnySearchParams](searchParams)}
+      replace={true}
+    />
+  )
+})
 
 
 
@@ -94,7 +90,7 @@ const profileIdUserIdRouting: RouteObject[] = [
     Component: ProfileIdUserIdTab,
   },
   {
-    path: RootRoute.profile.id.userId.date[path]+'/*',
+    path: RootRoute.profile.id.userId.tests[path]+'/*',
     Component: ProfileIdUserIdTab,
   },
   {

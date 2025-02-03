@@ -59,7 +59,7 @@ export namespace Pages {
   
   
   
-  export const fitPage = css`
+  export const colFitScreen = css`
     width: 100%;
     min-height: 100dvh;
     height: fit-content;
@@ -72,12 +72,12 @@ export namespace Pages {
     padding-bottom: var(--bottom-bars-inset);
   `
   export const SafeInsets = styled.div`
-    ${fitPage};
+    ${colFitScreen};
     ${safeInsets};
     ${center};
   `
   export const AddInsets = styled.div`
-    ${fitPage};
+    ${colFitScreen};
     ${center};
   `
   
@@ -86,8 +86,11 @@ export namespace Pages {
   
   
   export const content = css`
-    ${fitPage};
     max-width: 550px;
+    min-width: 0;
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
     // 12px
     padding-top: max(30px, var(--top-button-bar-height));
     padding-bottom: max(50px, var(--bottom-button-bar-height));
@@ -101,8 +104,6 @@ export namespace Pages {
   
   export const contentForm = css`
     ${content};
-    min-height: auto;
-    min-width: 0;
     gap: 30px;
   `
   export const ContentForm = styled.form(contentForm)

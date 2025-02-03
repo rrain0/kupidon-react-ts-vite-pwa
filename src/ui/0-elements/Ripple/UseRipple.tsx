@@ -17,7 +17,7 @@ const UseRipple = React.memo((props: UseRippleProps) => {
   
   useEffect(() => {
     const end = () => {
-      console.log('ripple end')
+      //console.log('ripple end')
       setState('end')
     }
     window.addEventListener('pointerup', end, { capture: true })

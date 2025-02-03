@@ -161,7 +161,7 @@ const matchS: AppWidgetStyle = t => ({
   bgColor: t.previewOverlayInfoMatchIndicator.bg,
   backdropFilter: 'blur(5px)',
   boxShadow: `0px 4px 15px ${t.previewOverlayInfoMatchIndicator.shadow}`,
-  ...WidgetStyleCommon.Txt.lg16,
+  ...WidgetStyleCommon.Txt.lg16Wide,
   color: t.previewOverlayInfoMatchIndicator.ct,
 })
 const Match = styled.div(p => EmptyS6.t(matchS)(p.theme))

@@ -58,7 +58,7 @@ const buttonStyle = (t: AppTheme.Theme) => css`
   ${ButtonS6.W.t(t, {
     button: {
       w: 'full', hMin: 50, h: 'ct', p: [2, 0],
-      textAlign: 'start', ...WidgetStyleCommon.Txt.lg16b,
+      textAlign: 'start', ...WidgetStyleCommon.Txt.lg16,
       display: 'grid',
       grid:
         `'icon title next' auto` +

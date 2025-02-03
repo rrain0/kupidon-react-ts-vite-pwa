@@ -22,8 +22,8 @@ const profileTab = {
   i: 1,
 }
 const dateTab = {
-  pathSegment: RootRoute.profile.id.userId.date[path],
-  route: (userId: string) => RootRoute.profile.id.userId[use](userId).date,
+  pathSegment: RootRoute.profile.id.userId.tests[path],
+  route: (userId: string) => RootRoute.profile.id.userId[use](userId).tests,
   i: 2,
 }
 const tabs = [previewTab, profileTab, dateTab]

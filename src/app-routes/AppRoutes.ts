@@ -43,7 +43,7 @@ export namespace AppRoutes {
         summary: buildPath('summary'),
         preview: buildPath('preview'),
         profile: buildPath('profile'),
-        date: buildPath('date'),
+        tests: buildPath('tests'),
       }),
     }),
   })
