@@ -1,4 +1,4 @@
-import { PointerU } from '@util/react/PointerU.ts'
+import { PointerU } from '@util/pointer/PointerU.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'

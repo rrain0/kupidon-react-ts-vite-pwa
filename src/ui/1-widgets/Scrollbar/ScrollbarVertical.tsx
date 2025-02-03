@@ -12,7 +12,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
-import { useNoSelect } from 'src/util/view/useNoSelect.ts'
+import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset

@@ -14,7 +14,7 @@ import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useNoSelect } from 'src/util/view/useNoSelect.ts'
+import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { CssParserU } from 'src/util/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue

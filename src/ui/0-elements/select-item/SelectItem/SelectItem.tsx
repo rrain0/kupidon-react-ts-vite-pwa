@@ -1,4 +1,4 @@
-import { PointerU } from '@util/react/PointerU.ts'
+import { PointerU } from '@util/pointer/PointerU.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle } from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'

@@ -29,7 +29,7 @@ import { ArrayU } from 'src/util/common/ArrayU'
 import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
-import { useNoSelect } from 'src/util/view/useNoSelect'
+import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
@@ -40,7 +40,7 @@ import fill = EmotionCommon.fill
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import mod = MathU.mod
-import { useNoTouchAction } from 'util/view/useNoTouchAction'
+import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import centerAll = EmotionCommon.centerAll
 import PictureIc = SvgIconsPack.PictureIc

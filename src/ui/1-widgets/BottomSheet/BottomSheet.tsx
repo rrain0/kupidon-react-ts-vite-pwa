@@ -1,10 +1,10 @@
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { PointerU } from '@util/react/PointerU.ts'
+import { PointerU } from '@util/pointer/PointerU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import clsx from 'clsx'
-import { useUpNodesScrollLock } from '@util/view/useUpNodesScrollLock.ts'
+import { useUpNodesScrollLock } from '@util/pointer/useUpNodesScrollLock.ts'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
 import {
   ComputedBottomSheetDimens,

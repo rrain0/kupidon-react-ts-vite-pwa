@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
-import { useAppPointerAction } from 'src/util/view/useAppPointerAction.ts'
+import { useAppPointerAction } from 'src/util/pointer/useAppPointerAction.ts'
 
 
 
@@ -50,19 +50,19 @@ export namespace PointerU {
         if (ev.button === 0) setWasClicked(1)
       },
       onPointerUp: (ev: React.PointerEvent<E>) => {
-        if (getWasClicked() === 1) {
+        if (getWasClicked() === 1 && !getWasDragged()) {
           setWasClicked(2)
-          const ct = ev.currentTarget
+          const elem = ev.currentTarget
           setTimeout(() => {
             // TODO Pointer - click fix 2
-            if (getWasClicked() === 2 && !getWasDragged()) {
-              ct.click()
+            if (getWasClicked() === 2) {
+              elem.click()
             }
           }, 50)
         }
       },
       onClick: (ev: React.MouseEvent) => {
-        setWasClicked(3)
+        setWasClicked(0)
       },
     } as const
   }

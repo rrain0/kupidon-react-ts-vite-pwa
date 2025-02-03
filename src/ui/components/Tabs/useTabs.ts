@@ -1,7 +1,7 @@
 import { useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
-import { useAppPointerAction } from '@util/view/useAppPointerAction.ts'
+import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import React, {
   useCallback,
   useEffect,
@@ -12,7 +12,7 @@ import { ArrayU } from '@util/common/ArrayU.ts'
 import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { useNoSelect } from 'src/util/view/useNoSelect.ts'
+import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import PartialUndef = TypeU.PartialUndef
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback

@@ -2,6 +2,7 @@ import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps, to } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types'
+import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import React, {
   useCallback,
   useEffect,
@@ -41,8 +42,7 @@ import { ImageU } from 'src/util/file/ImageU.ts'
 import { Progress } from 'src/util/Progress.ts'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
 import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
-import { useNoSelect } from 'src/util/view/useNoSelect.ts'
-import { useNoTouchAction0 } from 'src/util/view/useNoTouchAction0.ts'
+import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import center = EmotionCommon.center
@@ -133,7 +133,7 @@ const ProfilePhotos = React.memo(
     useNoSelect(!!dragState)
     // forbid gesture interception by browser
     const isLockGestures = dragState === 'dragging' || progressAnimLockGestures
-    useNoTouchAction0(isLockGestures)
+    useNoTouchAction(isLockGestures)
     const canUseGestures = useLockAppGestures(isLockGestures)
     useLayoutEffect(() => {
       if (!canUseGestures) {
