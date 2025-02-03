@@ -24,6 +24,8 @@ import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 export namespace ButtonS6 {
   
   
+  import ObjectEntries = ObjectU.ObjectEntries
+  
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const button = WidgetElem.of({
       ...up, className: 'rruiButton',
@@ -450,6 +452,69 @@ export namespace ButtonS6 {
     }
     
   }
+  
+  
+  
+  export namespace Parts {
+    
+    export const base: WidgetStyleObj = { }
+    
+    export namespace Type {
+      export namespace filled {
+        export const baseSize: WidgetStyleObj = { ...base }
+        export const baseColor: WidgetStyleObj = { }
+        
+        export namespace Size {
+          export const md: AppWidgetStyle = [baseSize, { }]
+          export const lg: AppWidgetStyle = [baseSize, { }]
+        }
+        export namespace Color {
+          export const normal: AppWidgetStyle = t => [baseColor, { }]
+          export const accent: AppWidgetStyle = t => [baseColor, { }]
+        }
+      }
+    }
+    
+  }
+  
+  
+  
+  export type StyleSizes = { [size: string]: AppWidgetStyle }
+  export type StyleColors = { [color: string]: AppWidgetStyle }
+  export type StyleTypes = { Size: StyleSizes, Color: StyleColors }
+  export type StyleParts = { Type: { [type: string]: StyleTypes } }
+  
+  export type CombinedStyles<Parts> = Parts extends StyleParts
+    ? {
+      [Type in keyof Parts['Type']]: {
+        [Size in keyof Parts['Type'][Type]['Size']]: {
+          [Color in keyof Parts['Type'][Type]['Color']]: AppWidgetStyle
+        }
+      }
+    }
+    : never
+  
+  export function combineStyles<Parts extends StyleParts>(parts: Parts): CombinedStyles<Parts> {
+    const acc = { }
+    for (const typeKey in Parts.Type) {
+      acc[typeKey] = { }
+      const sizes = Parts.Type[typeKey].Size
+      const colors = Parts.Type[typeKey].Color
+      for (const sizeKey in sizes) {
+        acc[typeKey][sizeKey] = { }
+        const size = sizes[sizeKey]
+        for (const colorKey in colors) {
+          const color = colors[colorKey]
+          acc[typeKey][sizeKey][colorKey] = [size, color]
+        }
+      }
+    }
+    return acc as CombinedStyles<Parts>
+  }
+  
+  export const S2 = combineStyles(Parts)
+  
+  console.log('Button S2', S2)
   
 }
 

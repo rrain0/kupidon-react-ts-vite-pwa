@@ -1,14 +1,14 @@
 import React from 'react'
 import { useAppPointerAction } from 'src/util/pointer/useAppPointerAction.ts'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 
 
 
 
 // todo hack fix for click
 // TODO Pointer // TODO костыль для клика.
-//  Без костыля если при закрывании шторки на андроиде жать кнопку, то клик не работает, хотя всё ок.
-import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
-
+//  Без костыля если при закрывании шторки на андроиде жать кнопку,
+//  то клик не работает, хотя всё ок.
 export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
   const [getWasClicked, setWasClicked] = useRefGetSet(0)
   const { getWasDragged } = useAppPointerAction()

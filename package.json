@@ -14,6 +14,7 @@
     "lint-linebreak-fix": "eslint . --fix --no-config-lookup --config eslint-single-configs/eslint.linebreaks.config.mjs --max-warnings 0"
   },
   "dependencies": {
+    "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@react-spring/web": "^9.7.5",
@@ -69,10 +70,10 @@
     "vite-plugin-svgr": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4",
     "workbox-core": "^7.3.0",
-    "workbox-precaching": "^7.3.0",
-    "workbox-strategies": "^7.3.0",
     "workbox-expiration": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
     "workbox-routing": "^7.3.0",
+    "workbox-strategies": "^7.3.0",
     "workbox-window": "^7.3.0"
   }
 }

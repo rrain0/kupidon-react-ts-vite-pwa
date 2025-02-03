@@ -470,14 +470,14 @@ export const useBottomSheet = (
   const sheetDrag = useDrag(
     gesture => {
       const {
-        event,
+        event: ev,
         first, active, last,
         movement: [mx, my],
         velocity: [spdx, spdy], // px/ms (nonnegative)
         direction: [dirx, diry], // positive for y is from top to bottom
         xy: [vpx, vpy], // viewport x, viewport y
       } = gesture
-      console.log('event', event)
+      
       /* console.log(
         'velocityY:', spdy,
         'directionY:', diry,

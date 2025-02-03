@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { css as emcss } from '@emotion/css'
 import numeral from 'numeral'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
@@ -40,6 +41,11 @@ const cssStyle2 = css`height: 100%; ${cssStyle}`
 console.log('cssStyle2.name', cssStyle2.name)
 console.log('cssStyle2.next', cssStyle2.next)
 
+const emcssStyle = emcss`height: 100%;`
+console.log('emcssStyle', emcssStyle)
+//console.log('emcssStyle.name', emcssStyle.name)
+//console.log('emcssStyle.next', emcssStyle.next)
+
 
 
 const TestPage = React.memo(() => {
@@ -77,7 +83,7 @@ const TestPage = React.memo(() => {
       <Pages.SimplePage>
         <Pages.ContentFill>
           
-          <div css={cssStyle} />
+          <div css={cssStyle}>A</div>
           <div className={`css-${cssStyle.name}`}>Test Page</div>
           
           <div>Views:</div>
