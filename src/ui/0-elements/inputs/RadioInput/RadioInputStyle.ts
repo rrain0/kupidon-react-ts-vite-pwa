@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
-import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import row = EmotionCommon.row
@@ -24,7 +24,7 @@ export namespace RadioInputStyle {
     export const iconWrapClassName = 'rrainuiIconWrap'
     export const iconClassName = SvgIconS.El.icon.name
     export const borderClassName = 'rrainuiBorder'
-    export const rippleFrameClassName = RippleStyle.El0.frameClassName
+    export const rippleFrameClassName = RippleS6.W.els.frame.n
     
     export const frameClass = '.'+frameClassName
     export const inputClass = '.'+inputClassName
@@ -67,7 +67,7 @@ export namespace RadioInputStyle {
     export const color = WidgetStyle0.Prop0.prop.color
     export const activeIconColor = '--active-icon-color'
     export const inactiveIconColor = '--inactive-icon-color'
-    export const rippleColor = RippleStyle.Prop.color
+    export const rippleColor = RippleS6.W.els.ripple.ps!.color
   }
   
   

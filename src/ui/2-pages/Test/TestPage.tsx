@@ -25,6 +25,23 @@ import col = EmotionCommon.col
 import row = EmotionCommon.row
 
 
+
+/*
+При создании стиля через css, имя его класса можно взять через:
+`css-${cssStyle.name}`
+Но чтобы стиль был отправлен браузеру, его надо дать элементу.
+ */
+const cssStyle = css`width: 100%`
+//console.log('cssStyle', cssStyle)
+console.log('cssStyle.name', cssStyle.name)
+console.log('cssStyle.next', cssStyle.next)
+
+const cssStyle2 = css`height: 100%; ${cssStyle}`
+console.log('cssStyle2.name', cssStyle2.name)
+console.log('cssStyle2.next', cssStyle2.next)
+
+
+
 const TestPage = React.memo(() => {
   
   /*
@@ -52,7 +69,7 @@ const TestPage = React.memo(() => {
   
   const [onEventVal, , , toggleOnEventVal] = useBool(false)
   
-  console.log('TestPage render')
+  //console.log('TestPage render')
   
   return (
     <>
@@ -60,8 +77,8 @@ const TestPage = React.memo(() => {
       <Pages.SimplePage>
         <Pages.ContentFill>
           
-          
-          <div>Test Page</div>
+          <div css={cssStyle} />
+          <div className={`css-${cssStyle.name}`}>Test Page</div>
           
           <div>Views:</div>
           

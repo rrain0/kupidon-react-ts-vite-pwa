@@ -1,52 +1,25 @@
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import Elem = WidgetStyle0.Elem
 import CssPropEnum = WidgetStyle0.CssPropEnum
 import CssProp = WidgetStyle0.CssProp
-import CssWidget = WidgetStyle0.CssWidget
 
 
 
-// TODO Style - remove old ripple style & component
+// TODO Style - remove old ripple style
 export namespace RippleStyle {
   
-  export namespace El0 {
-    export const frameClassName = 'rrainuiRippleFrame'
-    export const viewClassName = 'rrainuiRippleRipple'
-    
-    export const frameClass = '.'+frameClassName
-    export const viewClass = '.'+viewClassName
-    
-    export const framePath = frameClass
-    export const frame = '&'+frameClass
-    
-    export const viewPath = framePath+'>'+viewClass
-    export const view = frame+'>'+viewClass
-  }
-  export namespace Prop {
-    export const mode = '--ripple-mode'
-    export const modeVar = `var(${mode})`
-    
-    export const color = '--ripple-color'
-    export const colorVar = `var(${color})`
-  }
-  
-  
-  
-  
-  export const El = function(){
-    const frame = new Elem('rrainuiRippleFrame', { }, {
-      mode: new CssPropEnum('--ripple-mode', ['center', 'cursor']),
-      color: new CssProp('--ripple-color'),
+  export const El = function() {
+    const frame = new Elem(RippleS6.W.els.frame.n, { }, {
+      mode: new CssPropEnum(
+        RippleS6.W.els.ripple.ps!.mode.n,
+        ['center', 'pointer']
+      ),
+      color: new CssProp(RippleS6.W.els.ripple.ps!.color.n),
     })
-    const ripple = new Elem('rrainuiRippleRipple', { }, { })
+    const ripple = new Elem(RippleS6.W.els.ripple.n, { }, { })
     
     return { frame, ripple } as const
   }()
-  
-  export const W = CssWidget
-    .ofRoot('frame', El.frame)
-    .add('frame', '>', 'ripple', El.ripple)
-  
-  
   
 }

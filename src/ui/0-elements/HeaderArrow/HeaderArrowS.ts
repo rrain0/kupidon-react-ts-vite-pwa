@@ -3,12 +3,13 @@ import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { Hs } from 'src/ui/0-elements/basic-elements/Hs'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import CssWidget = WidgetStyle.CssWidget
 import Elem = WidgetStyle.Elem
 import CssPseudo = WidgetStyle.CssPseudo
 import row = EmotionCommon.row
+
 
 
 export namespace HeaderArrowS {
@@ -42,7 +43,7 @@ export namespace HeaderArrowS {
         ${Hs.page(t)};
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
-        ${SvgIconS.El.icon.props.color.name}: ${t.page.ct1};
+        ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct1};
         height: 26px;
       }
     `

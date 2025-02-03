@@ -1,5 +1,5 @@
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
-import React, { useImperativeHandle, useRef } from "react"
+import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
@@ -20,60 +20,61 @@ type InputProps = React.ComponentPropsWithoutRef<'input'> & PartialUndef<{
 }>
 
 
-const Input =
-React.memo(
-React.forwardRef<InputElement, InputProps>(
-(props, forwardedRef) => {
-  let {
-    hasError,
-    startViews, endViews, children, childrenPosition,
-    className, style,
-    frameProps: fProps,
-    ...restProps
-  } = props
-  childrenPosition ??= 'end'
-  
-  
-  const elemRef = useRef<InputElement>(null)
-  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
-  
-  
-  const frameProps = {
-    className: clsx(className, InputStyle.W.e.frame.e.name),
-    style: style,
-    ...fProps,
-  }
-  const inputProps = {
-    className: InputStyle.W.e.input.e.name,
-    [InputStyle.W.states.error.state.name]: trueOrUndef(hasError),
-    ...restProps,
-  }
-  const borderProps = {
-    className: InputStyle.W.e.border.e.name,
-  }
-  
-  
-  return <label /* Frame */
-    {...frameProps}
-  >
+const Input = React.memo(React.forwardRef<InputElement, InputProps>(
+  (props, forwardedRef) => {
+    let {
+      hasError,
+      startViews, endViews, children, childrenPosition,
+      className, style,
+      frameProps: fProps,
+      ...restProps
+    } = props
+    childrenPosition ??= 'end'
     
-    { startViews }
-    { childrenPosition === 'start' && children }
     
-    <input /* Input */
-      {...inputProps}
-      ref={elemRef}
-    />
+    const elemRef = useRef<InputElement>(null)
+    useImperativeHandle(forwardedRef, () => elemRef.current!, [])
     
-    { childrenPosition === 'end' && children }
-    { endViews }
     
-    <div /* Border */
-      {...borderProps}
-    />
+    const frameProps = {
+      className: clsx(className, InputStyle.W.e.frame.e.name),
+      style: style,
+      ...fProps,
+    }
+    const inputProps = {
+      className: InputStyle.W.e.input.e.name,
+      [InputStyle.W.states.error.state.name]: trueOrUndef(hasError),
+      ...restProps,
+    }
+    const borderProps = {
+      className: InputStyle.W.e.border.e.name,
+    }
     
-  </label>
-}))
+    
+    return (
+      <label /* Frame */
+        {...frameProps}
+      >
+        
+        { startViews }
+        { childrenPosition === 'start' && children }
+        
+        <input /* Input */
+          {...inputProps}
+          ref={elemRef}
+        />
+        
+        { childrenPosition === 'end' && children }
+        { endViews }
+        
+        <div /* Border */
+          {...borderProps}
+        />
+        
+      </label>
+    )
+  })
+)
 export default Input
 
 

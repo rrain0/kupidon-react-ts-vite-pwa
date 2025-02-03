@@ -2,7 +2,6 @@ import {
   AdditionalStates,
   WidgetAttrs,
   WidgetProps,
-  WidgetPseudoElements,
   WidgetPseudos, AdditionalProps,
 } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 
@@ -78,7 +77,7 @@ export const CommonProps = (() => {
     av: AdditionalProps.absV,
     z: WidgetProps.zIndex,
     
-    color: WidgetProps.color,
+    color: AdditionalProps.colorAndVarColor,
     
     background: WidgetProps.background,
     backgroundColor: WidgetProps.backgroundColor,

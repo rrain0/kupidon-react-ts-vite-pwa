@@ -136,6 +136,14 @@ export namespace WidgetStyleCommon {
       letterSpacing: 'normal',
     }
     
+    
+    export const sm10: WidgetStyleObj = {
+      fontWeight: '300',
+      fontSize: '10px',
+      lineHeight: '129%',
+      letterSpacing: 'normal',
+    }
+    
   }
 }
 

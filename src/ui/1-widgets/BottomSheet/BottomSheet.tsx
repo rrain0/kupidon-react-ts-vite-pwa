@@ -19,6 +19,7 @@ import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import trueOrUndef = TypeU.trueOrUndef
+import useOnThisClick = PointerU.useOnThisClick
 
 
 
@@ -108,6 +109,7 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
     { elementRef: bottomSheetFrameRef }
   )
   
+  const onThisClick = useOnThisClick()
   
   //useLayoutEffect(() => console.log('state',state), [state])
   
@@ -136,16 +138,16 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
       ref={bottomSheetFrameRef}
       {...{ [dataDragging]: trueOrUndef(sheetState === 'dragging') }}
       
-      {...combineProps({
-        ...bgDim && {
-          // need to prevent click if dragged if frame is draggable
-          onClick: () => {
-            //console.log('dimmed background click: closing...')
-            setSheetState('closing')
-            //setSheetState('closed')
-          },
-        },
-      }, stopPointerAndMouseEvents())}
+      {...combineProps(
+        // TODO Bottom Sheet - need to prevent click if dragged if frame is draggable & sheet is dragging
+        //  For this need to do frame drag threshold, but not handle
+        bgDim && onThisClick(() => {
+          //console.log('dimmed background click: closing...')
+          setSheetState('closing')
+          //setSheetState('closed')
+        }),
+        stopPointerAndMouseEvents()
+      )}
     >
       <animated.div
         data-display-name="Bottom Sheet"

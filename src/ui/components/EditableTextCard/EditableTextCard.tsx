@@ -67,6 +67,7 @@ const Frame = styled(Button, {
 })<{ showAnyText?: boolean }>`
   ${p => ButtonS6.t(ButtonS6.S.Text.Rect.Big.normal)(p.theme)};
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
+    // TODO Style - need support for text / emotion styles
     ${p => card3Style(p.theme)};
   }
   ${p => ButtonS6.W.t(p.theme, {

@@ -6,6 +6,15 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 export namespace PointerU {
   
   
+  export const evStopPropagation = (ev: React.BaseSyntheticEvent | Event) => {
+    ev.stopPropagation()
+  }
+  export const evPreventDefault = (ev: React.BaseSyntheticEvent | Event) => {
+    ev.preventDefault()
+  }
+  
+  
+  
   export const useOnThisClick = <T extends Element>() => {
     const [getCanCloseByClickEv, setCanCloseByClickEv] = useRefGetSet(0)
     
@@ -58,41 +67,39 @@ export namespace PointerU {
   export const stopPointerAndMouseEvents = (stop = true) => {
     if (!stop) return undefined
     return {
-      onClick: stopReactEventPropagation,
+      onClick: evStopPropagation,
       
-      onMouseDown: stopReactEventPropagation,
-      onMouseMove: stopReactEventPropagation,
-      onMouseUp: stopReactEventPropagation,
-      onMouseOut: stopReactEventPropagation,
+      onMouseDown: evStopPropagation,
+      onMouseMove: evStopPropagation,
+      onMouseUp: evStopPropagation,
+      onMouseOut: evStopPropagation,
       
-      onMouseEnter: stopReactEventPropagation,
-      onMouseOver: stopReactEventPropagation,
-      onMouseLeave: stopReactEventPropagation,
+      onMouseEnter: evStopPropagation,
+      onMouseOver: evStopPropagation,
+      onMouseLeave: evStopPropagation,
       
-      onWheel: stopReactEventPropagation,
+      onWheel: evStopPropagation,
       
-      onPointerDown: stopReactEventPropagation,
-      onPointerMove: stopReactEventPropagation,
-      onPointerUp: stopReactEventPropagation,
-      onPointerOut: stopReactEventPropagation,
-      onPointerCancel: stopReactEventPropagation,
+      onPointerDown: evStopPropagation,
+      onPointerMove: evStopPropagation,
+      onPointerUp: evStopPropagation,
+      onPointerOut: evStopPropagation,
+      onPointerCancel: evStopPropagation,
       
-      onPointerEnter: stopReactEventPropagation,
-      onPointerOver: stopReactEventPropagation,
-      onPointerLeave: stopReactEventPropagation,
+      onPointerEnter: evStopPropagation,
+      onPointerOver: evStopPropagation,
+      onPointerLeave: evStopPropagation,
       
-      onTouchStart: stopReactEventPropagation,
-      onTouchMove: stopReactEventPropagation,
-      onTouchEnd: stopReactEventPropagation,
-      onTouchCancel: stopReactEventPropagation,
+      onTouchStart: evStopPropagation,
+      onTouchMove: evStopPropagation,
+      onTouchEnd: evStopPropagation,
+      onTouchCancel: evStopPropagation,
     }
   }
+  
   
 }
 
 
 
-const stopReactEventPropagation = (ev: React.BaseSyntheticEvent) => {
-  ev.stopPropagation()
-}
 

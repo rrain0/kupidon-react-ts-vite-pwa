@@ -38,7 +38,7 @@ const BottomNavBarRouting = React.memo(
               <Route
                 key={path}
                 path={path}
-                element={<NavBar/>}
+                element={<NavBar />}
               />
             ))
         }

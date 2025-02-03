@@ -24,7 +24,7 @@ export namespace RippleS6 {
       upElem: frame, upSelector: '>', className: 'rruiRippleRipple',
       props: {
         color: AdditionalProps.varColor,
-        mode: WidgetProp.ofName<'center' | 'pointer'>('--mode'),
+        mode: WidgetProp.ofName<'center' | 'pointer'>('--ripple-mode'),
       },
     })
     return { frame, ripple } as const
@@ -74,10 +74,12 @@ export namespace RippleS6 {
       }]
     }
     
+    // TODO Style - Ripple
     export const onText: AppWidgetStyle = t => [base, {
       rippleColor: t.ripple.ctOnTransparent,
     }]
     
+    // TODO Style - Ripple
     export const forIcon: AppWidgetStyle = t => [base, {
       rippleMode: 'center',
       rippleColor: t.ripple.ctOnTransparent,

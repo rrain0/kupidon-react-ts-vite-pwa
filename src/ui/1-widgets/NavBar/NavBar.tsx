@@ -1,13 +1,14 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import UseOverlayUrl from 'src/ui/components/action-providers/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import { NavButtonStyle } from 'src/ui/1-widgets/NavBar/NavButtonStyle.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -47,33 +48,31 @@ const NavBar = React.memo(() => {
         `}
       />
       
-      <Frame
-        className={clsx('rrainuiBottomNavBar')}
-      >
+      <Frame>
         
         <NavLink to={RootRoute.profile[full]()}>
-          <Button css={NavButtonStyle.nav}>
+          <Button css={nav}>
             <ProfileGradIc />
             <div>{titleText.profile}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.chat[full]()}>
-          <Button css={NavButtonStyle.nav}>
+          <Button css={nav}>
             <ChatRoundGradIc />
             <div>{titleText.chat}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.findPairs[full]()}>
-          <Button css={NavButtonStyle.nav}>
+          <Button css={nav}>
             <CardsHeartGradIc />
             <div>{titleText.findCouple}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.bowAndArrows[full]()}>
-          <Button css={NavButtonStyle.nav}>
+          <Button css={nav}>
             <BowArrowGradIc />
             <div>{titleText.bowAndArrows}</div>
           </Button>
@@ -82,7 +81,7 @@ const NavBar = React.memo(() => {
         <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
           {overlay => (
             <>
-              <Button css={NavButtonStyle.nav}
+              <Button css={nav}
                 onClick={overlay.open}
               >
                 <Gear2Ic />
@@ -111,6 +110,50 @@ const Frame = styled.nav`
   ${row};
   justify-content: space-between;
   background: ${p => p.theme.nav.bg};
+`
+
+
+
+
+const nav = (t: AppTheme.Theme) => css`
+  ${IconButtonS6.t([IconButtonS6.S.base, {
+    button: {
+      w: 'auto', h: 'full', r: 10, p: [5, 0, 2],
+      ...WidgetStyleCommon.colC, g: 3, flex: 1,
+      bg: null,
+      color: t.navButton.ct[0],
+      ...WidgetStyleCommon.Txt.sm10,
+    },
+    icon: {
+      sz: 'full',
+      color: t.navButton.ct[0],
+    },
+    gradIcon: {
+      sz: 'full',
+      color0: t.navButton.ct[0],
+      color1: t.navButton.ct[0],
+    },
+  }])(t)}
+  
+  
+  // TODO Style - a.active ...selector - Doesn't work if single style because it expands to multiple classes
+  // link active selector
+  // a.active &.btnClass > .iconClass
+  a.active ${IconButtonS6.t({
+    buttonColor: t.navButton.cta[0],
+  })(t)}
+  a.active ${IconButtonS6.t({
+    iconColor: t.navButton.cta[0],
+  })(t)}
+  a.active ${IconButtonS6.t({
+    gradIconColor0: t.gradIcon.ct[0],
+    gradIconColor1: t.gradIcon.ct[1],
+  })(t)}
+  
+  
+  ${IconButtonS6.t({
+    inFocusButtonBg: t.navButton.bgFocus[0],
+  })(t)}
 `
 
 

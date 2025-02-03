@@ -6,14 +6,17 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import RadioActiveIc = SvgIconsPack.RadioActiveIc
-import Ripple, { RippleMode } from 'src/_old0/ui/0-elements/Ripple0/Ripple.tsx'
+import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
 import trueOrUndef = TypeU.trueOrUndef
 import Puro = TypeU.Puro
+import RippleMode = RippleS6.RippleMode
 
 
 
@@ -26,92 +29,96 @@ export type RadioInputProps = React.ComponentPropsWithoutRef<'input'> & Puro<{
   endViews: React.ReactNode
   children: React.ReactNode
   childrenPosition: 'start' | 'end'
-  rippleMode: RippleMode
 }>
 
 
 
-const RadioInput = 
-React.memo(
-React.forwardRef<HTMLInputElement, RadioInputProps>
-((props, forwardedRef) => {
-  const {
-    hasError,
-    startViews, endViews,
-    children, childrenPosition = 'end',
-    rippleMode = 'cursor',
-    className, style,
-    ...restProps
-  } = props
-  
-  
-  const elemRef = useRef<HTMLInputElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
-  
-  
-  const frameProps = {
-    className: clsx(className, RadioInputStyle.El.frameClassName),
-    style: style,
-  }
-  const inputProps = {
-    className: RadioInputStyle.El.inputClassName,
-    type: 'radio',
-    [RadioInputStyle.Attr.errorName]: trueOrUndef(hasError),
-    ...restProps,
-  }
-  const activeWrapProps = {
-    className: RadioInputStyle.El.iconWrapClassName
-  }
-  const inactiveWrapProps = {
-    className: RadioInputStyle.El.iconWrapClassName
-  }
-  const borderProps = {
-    className: RadioInputStyle.El.borderClassName
-  }
-  
-  
-  return <label /* Frame */
-    css={frameStyle}
-    {...frameProps}
-  >
+const RadioInput = React.memo(React.forwardRef<HTMLInputElement, RadioInputProps>(
+  (props, forwardedRef) => {
+    const {
+      hasError,
+      startViews, endViews,
+      children, childrenPosition = 'end',
+      className, style,
+      ...restProps
+    } = props
     
-    <input /* Input */
-      css={inputStyle}
-      {...inputProps}
-      ref={elemRef}
-    />
     
-    { startViews }
-    { childrenPosition === 'start' && children }
+    const elemRef = useRef<HTMLInputElement>(null)
+    useImperativeHandle(forwardedRef, () => elemRef.current!, [])
     
-    <div /* ActiveWrap */
-      css={activeIcWrapStyle}
-      {...activeWrapProps}
-    >
-      <RadioActiveIc/>
-    </div>
-    <div /* InactiveWrap */
-      css={inactiveWrapStyle}
-      {...inactiveWrapProps}
-    >
-      <RadioInactiveIc/>
-    </div>
     
-    { childrenPosition === 'end' && children }
-    { endViews }
+    const frameProps = {
+      className: clsx(className, RadioInputStyle.El.frameClassName),
+      style: style,
+    }
+    const inputProps = {
+      className: RadioInputStyle.El.inputClassName,
+      type: 'radio',
+      [RadioInputStyle.Attr.errorName]: trueOrUndef(hasError),
+      ...restProps,
+    }
+    const activeWrapProps = {
+      className: RadioInputStyle.El.iconWrapClassName,
+    }
+    const inactiveWrapProps = {
+      className: RadioInputStyle.El.iconWrapClassName,
+    }
+    const borderProps = {
+      className: RadioInputStyle.El.borderClassName,
+    }
     
-    <div /* Border */
-      css={borderStyle}
-      {...borderProps}
-    >
-      <Ripple
-        targetElement={elemRef}
-        mode={rippleMode}
-      />
-    </div>
     
-  </label>
-}))
+    return (
+      <UseRipple>
+        {rippleProps => (
+          <label /* Frame */
+            css={frameStyle}
+            {...frameProps}
+            {...rippleProps.target}
+          >
+            
+            <input /* Input */
+              css={inputStyle}
+              {...inputProps}
+              ref={elemRef}
+            />
+            
+            {startViews}
+            {childrenPosition === 'start' && children}
+            
+            <div /* ActiveWrap */
+              css={activeIcWrapStyle}
+              {...activeWrapProps}
+            >
+              <RadioActiveIc />
+            </div>
+            <div /* InactiveWrap */
+              css={inactiveWrapStyle}
+              {...inactiveWrapProps}
+            >
+              <RadioInactiveIc />
+            </div>
+            
+            {childrenPosition === 'end' && children}
+            {endViews}
+            
+            <div /* Border */
+              css={borderStyle}
+              {...borderProps}
+            >
+              <Ripple
+                css={RippleS6.t(RippleS6.S.onText)}
+                {...rippleProps.ripple}
+              />
+            </div>
+          
+          </label>
+        )}
+      </UseRipple>
+    )
+  })
+)
 export default RadioInput
 
 

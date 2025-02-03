@@ -5,7 +5,7 @@ import isArray = TypeU.isArray
 import {
   WidgetAnyPropTransformer,
   WidgetAttr,
-  WidgetMedia, WidgetMultiAnyTransformer,
+  WidgetMedia,
   WidgetMultiPropTransformer,
   WidgetMultiStateTransformer,
   WidgetProp,

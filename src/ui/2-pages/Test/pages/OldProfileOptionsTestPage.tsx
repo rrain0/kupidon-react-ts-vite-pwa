@@ -1,5 +1,11 @@
+import { css } from '@emotion/react'
 import React from 'react'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3'
+import PartnerAgeOption from 'src/ui/2-pages/Profile/options-filter/PartnerAgeOption.tsx'
+import PartnerHeightOption from 'src/ui/2-pages/Profile/options-filter/PartnerHeightOption.tsx'
+import ProfileImLookingForOption
+  from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import ProfileFavoriteBookGenresOption
   from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteBookGenresOption'
 import ProfileFavoriteMovieGenresOption
@@ -9,6 +15,7 @@ import ProfileSportFrequencyOption
 import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption'
 import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption'
 import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption'
+import { CardTitle } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption'
@@ -16,6 +23,7 @@ import DateMostInterestingVisitedPlaceOption
   from 'src/ui/2-pages/Profile/options-old/DateMostInterestingVisitedPlaceOption'
 import DatePeriodBeforeDateOption from 'src/ui/2-pages/Profile/options-old/DatePeriodBeforeDateOption'
 import DatePurposeOption from 'src/ui/2-pages/Profile/options-old/DatePurposeOption'
+import col = EmotionCommon.col
 
 
 
@@ -28,6 +36,30 @@ const OldProfileOptionsTestPage = React.memo(
         
         <Pages.SimplePage>
           <Pages.ContentFill>
+            
+            
+            
+            <div css={css`width: 600px; ${col}`}>
+              
+              <CardTitle>Это потом будет в фильтре поиска</CardTitle>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card3>
+                
+                <ProfileImLookingForOption />
+                
+                <PartnerHeightOption />
+                
+                <PartnerAgeOption />
+                
+              </Card3>
+              
+            </div>
+            
+            
+            <div css={{ height: 24 }} />
+            
             
             <div>Old Profile Options</div>
             

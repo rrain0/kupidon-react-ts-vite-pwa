@@ -3,7 +3,6 @@ import {
   WidgetElem,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import {
   AppStyle,
@@ -28,10 +27,6 @@ export namespace ButtonS6 {
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const button = WidgetElem.of({
       ...up, className: 'rruiButton',
-      // TODO Style - remove
-      // TODO Style - think about it
-      // 'color' & '--color' will be passed via WidgetProps
-      props: { varColor: AdditionalProps.varColor },
     })
     const border = WidgetElem.of({
       upElem: button, upSelector: '>', className: 'rruiBorder',
@@ -50,10 +45,7 @@ export namespace ButtonS6 {
     disabled: WidgetState.of([WidgetElems.button, CommonStates.disabled]),
     error: WidgetState.of([WidgetElems.button, CommonStates.error]),
   }
-  // TODO Style - remove
-  const WidgetProps = {
-    color: AdditionalProps.colorAndVarColor,
-  }
+  const WidgetProps = { }
   
   export const W = Widget.of({
     rootElem: WidgetElems.button,
@@ -376,7 +368,7 @@ export namespace ButtonS6 {
           buttonBg: null,
         }]
         // type: text, shape: rect, size: normal
-        export const sizeNormal: WidgetStyle = [sizeBig, {
+        export const sizeNormal: WidgetStyle = [base, {
           button: {
             w: 'auto', hMin: 30, r: 10, p: [4, 6], g: 4,
             ...Txt.md16,

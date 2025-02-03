@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { FileU } from 'src/util/file/FileU.ts'
@@ -31,6 +32,7 @@ import center = EmotionCommon.center
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import Callback1 = TypeU.Callback1
+import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 
 
 
@@ -82,7 +84,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
               >
                 <OptionContainer>
                   <div css={optionIconBoxStyle}>
-                    <CrossInCircleIc css={css`height: 120%;`} />
+                    <CrossInCircleIc css={SvgIconS6.t(crossS)} />
                   </div>
                   <OptionTitle>{actionText.remove}</OptionTitle>
                 </OptionContainer>
@@ -190,7 +192,8 @@ const optionIconBoxStyle = css`
   ${center};
   height: 1.3em;
   width: 1.333em;
-  >${SvgIconS.El.icon.sel()}{
-    ${SvgIconS.El.icon.props.color.name}: var(${ButtonS6.W.els.button.ps!.varColor.n});
-  }
 `
+
+const crossS: AppWidgetStyle = t => [SvgIconS6.S.base, {
+  iconH: '120%',
+}]
