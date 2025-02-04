@@ -7,33 +7,30 @@ import {
   WidgetStyle,
   WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 
 
 
-
-/* export */ namespace WidgetS6 {
+export namespace SelectMeterS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const frame = WidgetElem.of({
-      ...up, className: 'rruiWidgetFrame',
+      ...up, className: 'rruiMeterFrame',
     })
-    const box = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiBox',
+    const meter0 = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiMeter0',
     })
-    //const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
-    return {
-      frame,
-      box,
-      //...ObjectPrefixCapitalizeKeys('ripple', rippleElems),
-    } as const
+    const meter1 = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiMeter1',
+    })
+    const meter2 = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiMeter2',
+    })
+    return { frame, meter0, meter1, meter2 } as const
   }
   
   const WidgetElems = buildWidgetElems()
-  const WidgetStates = {
-    inFocus: WidgetState.of([WidgetElems.frame, CommonStates.inFocus]),
-    disabled: WidgetState.of([WidgetElems.frame, CommonStates.disabled]),
-    error: WidgetState.of([WidgetElems.frame, CommonStates.error]),
-  }
+  const WidgetStates = { }
   const WidgetProps = { }
   
   export const W = Widget.of({
@@ -48,40 +45,47 @@ import {
   
   
   export namespace Parts {
+    import row = WidgetStyleCommon.row
     export const base: WidgetStyleObj = {
-    
+      frame: {
+        w: 'ct', h: 'auto',
+        ...row, g: 6,
+        pointer: false,
+      },
+      meter0: {
+        sz: 8, r: 'round',
+        bgColor: '#dddddd',
+      },
+      meter1: {
+        sz: 8, r: 'round',
+        bgColor: '#999999',
+      },
+      meter2: {
+        sz: 8, r: 'round',
+        bgColor: '#444444',
+      },
     }
     
     export namespace Type {
       
-      export namespace typeName {
+      export namespace row {
         export namespace Shape {
-          export namespace shapeName {
+          export namespace round {
             //export const baseSize: WidgetStyleObj = { ...base }
             export namespace Size {
-              // type: typeName, shape: shapeName, size: md
-              export const md: WidgetStyle = [base, {
-              
-              }]
-              // type: typeName, shape: shapeName, size: lg
-              export const lg: WidgetStyle = [base, {
-              
-              }]
+              // type: row, shape: round, size: md
+              export const md: WidgetStyle = [base, { }]
             }
           }
         }
         
-        export const baseColor: AppWidgetStyle = t => ({
-        
-        })
+        export const baseColor: AppWidgetStyle = t => ({ })
         export namespace Color {
-          // type: typeName, color: normal
+          // type: row, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-          
-          }]
-          // type: typeName, color: accent
-          export const accent: AppWidgetStyle = t => [baseColor, {
-          
+            meter0BgColor: t.boxNormal.ct4b[0],
+            meter1BgColor: t.boxNormal.ct3e[0],
+            meter2BgColor: t.boxNormal.ct1b[0],
           }]
         }
       }

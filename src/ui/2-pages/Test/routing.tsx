@@ -10,7 +10,7 @@ const TestPage = React.lazy(() => import('src/ui/2-pages/Test/TestPage.tsx'))
 
 const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/Test/pages/ScrollbarTestPage.tsx'))
 const BottomSheetTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/BottomSheetTestPage.tsx'))
-const ListItem2TestPage = React.lazy(() => import('src/ui/2-pages/Test/views/ListItem2TestPage.tsx'))
+const SelectItemTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/SelectItemTestPage.tsx'))
 const RippleTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/RippleTestPage.tsx'))
 const ButtonsTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/ButtonsTestPage.tsx'))
 const SliderTestPage = React.lazy(() => import('src/ui/2-pages/Test/views/SliderTestPage'))
@@ -59,13 +59,13 @@ const testScrollbarTestPageRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'test / views-list-item-2 / <check here>'
-const viewsListItem2Routing: RouteObject[] = [
+// path: 'test / views-select-item / <check here>'
+const viewsSelectItemRouting: RouteObject[] = [
   {
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ListItem2TestPage />
+        <SelectItemTestPage />
       </Suspense>
     ),
   },
@@ -276,8 +276,8 @@ export const testRouting: RouteObject[] = [
     children: testScrollbarTestPageRouting,
   },
   {
-    path: RootRoute.test.viewsListItem2[path]+'/*',
-    children: viewsListItem2Routing,
+    path: RootRoute.test.viewsSelectItem[path]+'/*',
+    children: viewsSelectItemRouting,
   },
   {
     path: RootRoute.test.rippleTest[path]+'/*',

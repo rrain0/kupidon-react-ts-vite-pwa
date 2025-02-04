@@ -88,7 +88,7 @@ export namespace AppRoutes {
     
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
-    viewsListItem2: buildPath('views-list-item-2'),
+    viewsSelectItem: buildPath('views-select-item'),
     rippleTest: buildPath('ripple'),
     buttonsTest: buildPath('buttons'),
     sliderTest: buildPath('slider'),

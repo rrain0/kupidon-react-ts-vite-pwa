@@ -2,8 +2,7 @@ import { PointerU } from '@util/pointer/PointerU.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle } from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
-import SelectItemIndicator
-  from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
+import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
@@ -60,7 +59,7 @@ const SelectItem = React.memo(
         ...restProps
       } = props
       
-      //const indicators = indicatorsSelection ?? arraify(isSelected)
+      //const metersValues = indicatorsSelection ?? arraify(isSelected)
       
       const setElemForWh = useCssWhRef()
       const [getElem, setElem, elemRef] = useRefGetSet<HTMLDivElement | null>(null, setElemForWh)
@@ -109,7 +108,7 @@ const SelectItem = React.memo(
                       className={SelectItemS.W.e.indicatorFrame.e.name}
                       style={style}
                     >
-                      <SelectItemIndicator indicators={indicatorsSelection} />
+                      <SelectMeter metersValues={indicatorsSelection} />
                     </div>
                   )}
                   

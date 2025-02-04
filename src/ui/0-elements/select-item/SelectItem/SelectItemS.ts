@@ -1,13 +1,10 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
-import {
-  SelectItemIndicatorS
-} from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
+import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
 import Elem = WidgetStyle.Elem
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
@@ -114,7 +111,7 @@ export namespace SelectItemS {
       padding: 6px 16px;
     }
     ${W.use.s.normal().e.indicator().thisUse} {
-      ${SelectItemIndicatorS.base}
+      ${SelectMeterS6.Parts.base}
     }
     
     
@@ -167,7 +164,7 @@ export namespace SelectItemS {
     }
     
     ${W.use.s.normal().e.indicator().thisUse} {
-      ${SelectItemIndicatorS.base}
+      ${SelectMeterS6.t(SelectMeterS6.S.row.round.md.normal)(t)}
     }
     
     ${W.use.s.normal().e.editBtnRipple().thisUse} {

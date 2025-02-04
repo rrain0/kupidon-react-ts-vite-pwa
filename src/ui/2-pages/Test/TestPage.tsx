@@ -99,9 +99,9 @@ const TestPage = React.memo(() => {
                 Bottom Sheet
               </Button>
             </Link>
-            <Link to={RootRoute.test.viewsListItem2[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.test.viewsSelectItem[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                List Item 2
+                Select Item
               </Button>
             </Link>
             <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>

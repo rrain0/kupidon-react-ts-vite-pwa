@@ -12,16 +12,16 @@ import row = EmotionCommon.row
 
 
 
-export namespace SelectItemIndicatorS {
+export namespace SelectMeterS {
   
   
   export const W = (() => {
-    const indicatorBox = new Elem('rrainuiIndicatorBox', {
+    const indicatorBox = new Elem('rruiMeterFrame', {
       normal: CssPseudo.empty,
     }, { })
-    const indicator0 = new Elem('rrainuiIndicator0', { }, { })
-    const indicator1 = new Elem('rrainuiIndicator1', { }, { })
-    const indicator2 = new Elem('rrainuiIndicator2', { }, { })
+    const indicator0 = new Elem('rruiMeter0', { }, { })
+    const indicator1 = new Elem('rruiMeter1', { }, { })
+    const indicator2 = new Elem('rruiMeter2', { }, { })
     
     
     return CssWidget

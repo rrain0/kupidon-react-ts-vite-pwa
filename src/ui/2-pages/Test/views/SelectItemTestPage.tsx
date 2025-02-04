@@ -18,7 +18,7 @@ import colC = EmotionCommon.colC
 
 
 
-const ListItem2TestPage = () => {
+const SelectItemTestPage = () => {
   
   
   const variants = [
@@ -90,7 +90,7 @@ const ListItem2TestPage = () => {
       <Pages.ContentFill>
         
         
-        <div>List Item v2</div>
+        <div>Select Item</div>
         
         
         <ColumnContent>
@@ -163,7 +163,7 @@ const ListItem2TestPage = () => {
           
           <Frame>
             
-            <AddIconBox><PlusIc/></AddIconBox>
+            <AddIconBox> <PlusIc /> </AddIconBox>
           
           </Frame>
           
@@ -185,7 +185,7 @@ const ListItem2TestPage = () => {
               </TextBox>
               
               <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
-                <PencilWrite2Ic/>
+                <PencilWrite2Ic />
               </PencilIconBox>
             
             </Frame>
@@ -209,7 +209,7 @@ const ListItem2TestPage = () => {
               </TextBox>
               
               <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
-                <PencilWrite2Ic/>
+                <PencilWrite2Ic />
               </PencilIconBox>
               
               <Border />
@@ -224,7 +224,7 @@ const ListItem2TestPage = () => {
           { options.map((v, i, opts) => (
             <Frame key={v.value}>
               
-              { v.isAdd && <AddIconBox><PlusIc/></AddIconBox> }
+              { v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox> }
               
               { !v.isAdd && (
                 <>
@@ -245,9 +245,11 @@ const ListItem2TestPage = () => {
                     <Text>{v.text}</Text>
                   </TextBox>
                   
-                  { v.isEditable && <PencilIconBox>
-                    <PencilWrite2Ic/>
-                  </PencilIconBox> }
+                  { v.isEditable && (
+                    <PencilIconBox>
+                      <PencilWrite2Ic />
+                    </PencilIconBox>
+                  ) }
                   
                   { v.isSelected && <Border /> }
                   
@@ -266,9 +268,9 @@ const ListItem2TestPage = () => {
             <Frame
               key={v.value}
               isSelected={v.isSelected}
-          >
+            >
               
-              { v.isAdd && <AddIconBox><PlusIc/></AddIconBox> }
+              { v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox> }
               
               { !v.isAdd && (
                 <>
@@ -289,9 +291,11 @@ const ListItem2TestPage = () => {
                     <Text>{v.text}</Text>
                   </TextBox>
                   
-                  { v.isEditable && <PencilIconBox>
-                    <PencilWrite2Ic/>
-                  </PencilIconBox> }
+                  { v.isEditable && (
+                    <PencilIconBox>
+                      <PencilWrite2Ic />
+                    </PencilIconBox>
+                  ) }
                   
                 </>
               ) }
@@ -309,7 +313,7 @@ const ListItem2TestPage = () => {
     </Pages.SimplePage>
   )
 }
-export default ListItem2TestPage
+export default SelectItemTestPage
 
 
 

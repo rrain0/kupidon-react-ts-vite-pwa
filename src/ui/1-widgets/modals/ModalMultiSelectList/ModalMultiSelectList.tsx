@@ -5,11 +5,9 @@ import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import SelectItemIndicator
-  from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicator'
-import {
-  SelectItemIndicatorS
-} from 'src/ui/0-elements/select-item/SelectItemIndicator/SelectItemIndicatorS'
+import SelectMeter
+  from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
+import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
 import { SheetSnaps80 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
@@ -113,9 +111,9 @@ const ModalMultiSelectList = ReactU.memo(
                 css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
                 {...sheetProps.sheetProps}
                 headerHandle={(
-                  <SelectItemIndicator
-                    css={SelectItemIndicatorS.normal}
-                    indicators={getCommonIndicatorsDataDefault(options, selected)}
+                  <SelectMeter
+                    css={SelectMeterS6.t(SelectMeterS6.S.row.round.md.normal)}
+                    metersValues={getCommonIndicatorsDataDefault(options, selected)}
                   />
                 )}
                 title={title}
