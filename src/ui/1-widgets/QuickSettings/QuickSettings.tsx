@@ -60,7 +60,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
         {props => (
           <ModalPortal>
             <BottomSheetBasic
-              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
               {...props.sheetProps}
               title={titleText.settings}
             >

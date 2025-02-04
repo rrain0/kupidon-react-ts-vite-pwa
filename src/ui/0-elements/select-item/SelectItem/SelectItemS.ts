@@ -24,25 +24,25 @@ export namespace SelectItemS {
   
   export const W = (() => {
     
-    const frame = new Elem('rrainuiSelectItemFrame', {
+    const frame = new Elem('rruiSelectItemFrame', {
       normal: CssPseudo.empty,
       selected: CssAttr.dataSelected,
     }, { })
     
-    const border = new Elem('rrainuiBorder', { }, { })
+    const border = new Elem('rruiBorder', { }, { })
     const ripple = Elem.newEmpty()
     
-    const addIconBox = new Elem('rrainuiAddIconBox', { }, { })
+    const addIconBox = new Elem('rruiAddIconBox', { }, { })
     const addIcon = Elem.newEmpty()
     
-    const indicatorFrame = Elem.newWithName('rrainuiIndicatorFrame')
+    const indicatorFrame = Elem.newWithName('rruiIndicatorFrame')
     const indicator = Elem.newEmpty()
     
-    const editBtn = new Elem('rrainuiEditIconBox', { }, { })
+    const editBtn = new Elem('rruiEditIconBox', { }, { })
     const editBtnRipple = new Elem('', { }, { })
     const editIcon = new Elem('', { }, { })
     
-    const content = new Elem('rrainuiContent', { }, { })
+    const content = new Elem('rruiContent', { }, { })
     
     return CssWidget
       .ofRoot('frame', frame)
@@ -93,7 +93,7 @@ export namespace SelectItemS {
       border: none;
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${RippleS6.t0(RippleS6.S.base)()}
+      ${RippleS6.t0(RippleS6.Parts.base)()}
     }
     
     ${W.use.s.normal().e.addIconBox().thisUse} {
@@ -105,7 +105,7 @@ export namespace SelectItemS {
       padding: 2px;
     }
     ${W.use.s.normal().e.addIcon().thisUse} {
-      ${SvgIconS6.t0(SvgIconS6.S.base)()}
+      ${SvgIconS6.t0(SvgIconS6.Parts.base)()}
     }
     
     ${W.use.s.normal().e.indicatorFrame().thisUse} {
@@ -130,10 +130,10 @@ export namespace SelectItemS {
       overflow: hidden;
     }
     ${W.use.s.normal().e.editBtnRipple().thisUse} {
-      ${RippleS6.t0(RippleS6.S.base)()}
+      ${RippleS6.t0(RippleS6.Parts.base)()}
     }
     ${W.use.s.normal().e.editIcon().thisUse} {
-      ${SvgIconS6.t0(SvgIconS6.S.base)()}
+      ${SvgIconS6.t0(SvgIconS6.Parts.base)()}
     }
     ${W.use.s.normal().e.content().thisUse} {
       width: 100%;
@@ -160,10 +160,10 @@ export namespace SelectItemS {
       background-color: ${t.boxNormal.bg2[0]};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
-      ${RippleS6.t(RippleS6.S.OnFilled.normal)(t)}
+      ${RippleS6.t(RippleS6.S.onFilled.round.full.normal)(t)}
     }
     ${W.use.s.normal().e.addIcon().thisUse} {
-      ${SvgIconS6.t(SvgIconS6.S.Normal.normal)(t)}
+      ${SvgIconS6.t(SvgIconS6.S.icon.icon.auto.normal)(t)}
     }
     
     ${W.use.s.normal().e.indicator().thisUse} {
@@ -171,10 +171,10 @@ export namespace SelectItemS {
     }
     
     ${W.use.s.normal().e.editBtnRipple().thisUse} {
-      ${RippleS6.t0(RippleS6.S.base)()}
+      ${RippleS6.t0(RippleS6.Parts.base)()}
     }
     ${W.use.s.normal().e.editIcon().thisUse} {
-      ${SvgIconS6.t(SvgIconS6.S.Normal.normal)(t)}
+      ${SvgIconS6.t(SvgIconS6.S.icon.icon.auto.normal)(t)}
     }
     
     // selected

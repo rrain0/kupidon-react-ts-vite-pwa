@@ -6,7 +6,7 @@ import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import {
   AppStyle,
-  AppWidgetStyle, combinePartsToTypeSizeColor,
+  AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -78,7 +78,7 @@ export namespace ButtonS6 {
         pointerEvents: 'none',
         r: 'inherit',
       },
-      ripple: RippleS6.S.base,
+      ripple: RippleS6.Parts.base,
     }
     
     export namespace Type {
@@ -374,7 +374,7 @@ export namespace ButtonS6 {
   }
   
   
-  export const S = combinePartsToTypeSizeColor(Parts)
+  export const S = combinePartsToTypeShapeSizeColor(Parts)
   
 }
 

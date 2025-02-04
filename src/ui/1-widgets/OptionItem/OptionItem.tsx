@@ -10,7 +10,6 @@ import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import Callback = TypeU.Callback
@@ -86,10 +85,10 @@ const IconFrame = styled.div`
   }
 `
 
-const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.Normal.normal, {
+const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.auto.normal, {
   gradIconW: '60%',
 }]
-const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.S.base, {
+const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconH: '50%',
   iconColor: t.boxNormal.ct3[0],
 }]
@@ -127,7 +126,7 @@ const NextIconFrame = styled.div`
   display: grid;
   place-items: center;
 `
-const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.auto.normal, {
   iconSz: 24, iconColor: t.boxNormal.ct3[0],
 }]
 

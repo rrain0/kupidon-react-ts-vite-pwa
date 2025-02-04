@@ -212,7 +212,7 @@ const BottomSheetFrame = styled.div`
   pointer-events: none;
 `
 
-const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.Normal.normal, {
+const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.bottom.sheet.full.normal, {
   sheet: {
     bgColor: t.previewFullInfoBox.bg,
     color: t.previewFullInfoBox.ct,
@@ -277,7 +277,7 @@ const InfoBubble = styled(MatchBubble)`
   gap: 6px;
   ${Txt.lg16Thin};
 `
-const infoIcS: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+const infoIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.auto.normal, {
   iconSz: 17,
   iconColor: t.previewFullInfoBubble.ct2,
 }]

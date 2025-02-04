@@ -2,7 +2,7 @@ import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetAttr, WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
-  AppWidgetStyle,
+  AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
   WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -46,8 +46,8 @@ export namespace BottomSheetS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace S {
-    
+  
+  export namespace Parts {
     export const base: WidgetStyleObj = {
       frame: {
         ...fixed,
@@ -70,12 +70,32 @@ export namespace BottomSheetS6 {
       },
     }
     
-    export namespace Normal {
-      export const normal: AppWidgetStyle = base
+    export namespace Type {
+      
+      export namespace bottom {
+        export namespace Shape {
+          export namespace sheet {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: bottom, shape: sheet, size: full
+              export const full: WidgetStyle = [base, {
+                
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => ({ })
+        export namespace Color {
+          // type: bottom, color: normal
+          export const normal: AppWidgetStyle = t => [baseColor, { }]
+        }
+      }
+      
     }
-    
   }
   
+  export const S = combinePartsToTypeShapeSizeColor(Parts)
   
 }
 

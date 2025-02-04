@@ -171,7 +171,7 @@ const BottomSheetTestPage = React.memo(() => {
       </Pages.SimplePage>
       
       <BottomSheet
-        css={BottomSheetS6.t(BottomSheetS6.S.Normal.normal)}
+        css={BottomSheetS6.t(BottomSheetS6.S.bottom.sheet.full.normal)}
         
         bottomSheetFrameRef={bottomSheetFrameRef}
         bottomSheetRef={bottomSheetRef}

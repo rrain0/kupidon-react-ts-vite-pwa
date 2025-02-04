@@ -89,7 +89,7 @@ const Title = styled(Hs.Card3)`
   place-self: center start;
   text-align: start;
 `
-const pencilIconS: AppWidgetStyle = t => [SvgIconS6.S.base, {
+const pencilIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   icon: {
     area: 'icon',
     alignSelf: 'center',

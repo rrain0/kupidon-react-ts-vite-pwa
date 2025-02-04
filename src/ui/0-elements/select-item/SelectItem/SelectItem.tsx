@@ -132,7 +132,7 @@ const SelectItem = React.memo(
                             stopPointerAndMouseEvents(),
                           )}
                         >
-                          <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.forIcon)} />
+                          <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onTrans.round.icon.normal)} />
                           <PencilWrite2Ic />
                         </div>
                       )}

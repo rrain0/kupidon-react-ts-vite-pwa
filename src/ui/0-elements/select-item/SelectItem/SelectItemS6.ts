@@ -11,19 +11,39 @@ import {
 
 
 
-/* export */ namespace WidgetS6 {
+export namespace SelectItemS6 {
   
   export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
     const frame = WidgetElem.of({
-      ...up, className: 'rruiFrame',
+      ...up, className: 'rruiSelectItemFrame',
     })
-    const box = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiBox',
+    
+    const border = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiBorder',
     })
     //const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
+    
+    const indicatorFrame = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiIndicatorFrame',
+    })
+    //const indicator
+    
+    const editBtn = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiEditIconBox',
+    })
+    //const editRippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
+    //const editIconElems
+    
+    const cont = WidgetElem.of({
+      upElem: frame, upSelector: '>', className: 'rruiContent',
+    })
+    
     return {
       frame,
-      box,
+      border, //...rippleElems,
+      editBtn, //...editRippleElems, ...editIconElems,
+      indicatorFrame, //indicator,
+      cont,
       //...ObjectPrefixCapitalizeKeys('ripple', rippleElems),
     } as const
   }

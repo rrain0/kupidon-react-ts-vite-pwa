@@ -364,7 +364,7 @@ const Eye = styled.div`
   margin-top: -14px;
   margin-right: -6px;
 `
-const eyeIcS0: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
+const eyeIcS0: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.auto.normal, {
   iconSz: 'full',
   iconColor: t.boxNormal.ct3d[0],
 }]

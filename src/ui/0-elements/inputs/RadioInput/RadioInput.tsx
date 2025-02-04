@@ -108,7 +108,7 @@ const RadioInput = React.memo(React.forwardRef<HTMLInputElement, RadioInputProps
               {...borderProps}
             >
               <Ripple
-                css={RippleS6.t(RippleS6.S.onText)}
+                css={RippleS6.t(RippleS6.S.onTrans.round.full.normal)}
                 {...rippleProps.ripple}
               />
             </div>

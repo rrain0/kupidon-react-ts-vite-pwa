@@ -3,7 +3,7 @@ import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem, WidgetProp } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
-  AppWidgetStyle,
+  AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle, WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
@@ -37,7 +37,7 @@ export namespace SvgGradIconS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace S {
+  export namespace S0 {
     
     export const base: WidgetStyleObj = {
       gradIcon: {
@@ -46,7 +46,7 @@ export namespace SvgGradIconS6 {
     }
     
     export const baseColor: AppWidgetStyle = t => ({
-      icon: {
+      gradIcon: {
         color0: '#6A6A6A',
         color1: '#006A6A',
       },
@@ -60,6 +60,53 @@ export namespace SvgGradIconS6 {
     }
     
   }
+  
+  
+  
+  export namespace Parts {
+    export const base: WidgetStyleObj = {
+      gradIcon: {
+        sz: 'auto',
+      },
+    }
+    
+    export namespace Type {
+      
+      export namespace icon {
+        export namespace Shape {
+          export namespace icon {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: icon, shape: icon, size: auto
+              export const auto: WidgetStyle = [base, {
+                gradIcon: {
+                  sz: 'auto',
+                },
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => ({
+          gradIcon: {
+            color0: '#6A6A6A',
+            color1: '#006A6A',
+          },
+        })
+        export namespace Color {
+          // type: icon, color: normal
+          export const normal: AppWidgetStyle = t => [baseColor, {
+            gradIconColor0: t.gradIcon.ct[0],
+            gradIconColor1: t.gradIcon.ct[1],
+          }]
+        }
+      }
+      
+    }
+  }
+  
+  export const S = combinePartsToTypeShapeSizeColor(Parts)
+  
   
   
 }

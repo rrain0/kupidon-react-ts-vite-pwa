@@ -68,7 +68,7 @@ const ModalSlider = React.memo(
         {sheetProps => (
           <ModalPortal>
             <BottomSheetBasic
-              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
               {...sheetProps.sheetProps}
               title={title}
             >

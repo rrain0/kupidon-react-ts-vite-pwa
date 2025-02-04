@@ -91,7 +91,7 @@ const CheckboxInput = React.memo(React.forwardRef<HTMLInputElement, CheckboxInpu
             { endViews }
             
             <Ripple
-              css={RippleS6.t(RippleS6.S.forIcon)}
+              css={RippleS6.t(RippleS6.S.onTrans.round.icon.normal)}
               {...rippleProps.ripple}
             />
           

@@ -32,7 +32,7 @@ React.memo(
     <UseBottomSheetState isOpen={props.open} onClose={()=>props.setOpen(false)}>
       { ({ sheetProps })=>
       <BottomSheetBasic
-        css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
+        css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
         {...sheetProps}
         closeable={props.closeable}
         title={<div css={css`height: 1em;`}/>}

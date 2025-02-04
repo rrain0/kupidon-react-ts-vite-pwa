@@ -59,7 +59,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
       { sheet => (
         <ModalPortal>
           <BottomSheetBasic
-            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.Normal.normal)}
+            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
             {...sheet.sheetProps}
           >
             <OptionsContent>
@@ -194,6 +194,6 @@ const optionIconBoxStyle = css`
   width: 1.333em;
 `
 
-const crossS: AppWidgetStyle = t => [SvgIconS6.S.base, {
+const crossS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconH: '120%',
 }]

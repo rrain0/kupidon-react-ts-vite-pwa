@@ -18,7 +18,7 @@ export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
   ${flexC};
 `
 
-export const imPlaceholderIcS: AppWidgetStyle = t => [SvgIconS6.S.base, {
+export const imPlaceholderIcS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconSz: '30%',
   iconColor: t.photos.ct[0],
 }]

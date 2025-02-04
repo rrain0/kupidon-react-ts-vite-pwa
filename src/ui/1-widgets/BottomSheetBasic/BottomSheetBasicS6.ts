@@ -1,6 +1,12 @@
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { AppStyle, AppWidgetStyle, WidgetStyle, WidgetStyleObj } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import {
+  AppStyle,
+  AppWidgetStyle,
+  combinePartsToTypeShapeSizeColor,
+  WidgetStyle,
+  WidgetStyleObj,
+} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
@@ -74,10 +80,10 @@ export namespace BottomSheetBasicS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace S {
-    
+  
+  export namespace Parts {
     export const base: WidgetStyleObj = {
-      ...BottomSheetS6.S.base,
+      ...BottomSheetS6.Parts.base,
       header: {
         p: 10, ...colC, g: 6,
         touchAction: 'none',
@@ -104,21 +110,45 @@ export namespace BottomSheetBasicS6 {
       },
     }
     
-    export namespace Normal {
-      export const normal: AppWidgetStyle = t => [base, {
-        sheet: {
-          bgColor: t.bottomSheet.bg,
-          color: t.bottomSheet.ct,
-        },
-        headerHandle: {
-          bgColor: t.bottomSheetHandle.bg,
-        },
-        dragging: {
-          headerHandleBgColor: t.bottomSheetHandle.bgFc,
-        },
-      }]
+    export namespace Type {
+      
+      export namespace bottom {
+        export namespace Shape {
+          export namespace sheet {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: bottom, shape: sheet, size: full
+              export const full: WidgetStyle = [base, {
+                
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => ({ })
+        export namespace Color {
+          // type: bottom, color: normal
+          export const normal: AppWidgetStyle = t => [baseColor, {
+            sheet: {
+              bgColor: t.bottomSheet.bg,
+              color: t.bottomSheet.ct,
+            },
+            headerHandle: {
+              bgColor: t.bottomSheetHandle.bg,
+            },
+            dragging: {
+              headerHandleBgColor: t.bottomSheetHandle.bgFc,
+            },
+          }]
+        }
+      }
+      
     }
   }
+  
+  export const S = combinePartsToTypeShapeSizeColor(Parts)
+  
+  
   
 }
 

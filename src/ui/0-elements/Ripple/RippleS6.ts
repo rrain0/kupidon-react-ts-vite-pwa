@@ -1,7 +1,7 @@
 import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import {
   AppStyle,
-  AppWidgetStyle,
+  AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle, WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
@@ -40,8 +40,8 @@ export namespace RippleS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace S {
-    
+  
+  export namespace Parts {
     export const base: WidgetStyleObj = {
       frame: {
         ...abs,
@@ -65,27 +65,61 @@ export namespace RippleS6 {
       },
     }
     
-    export namespace OnFilled {
-      export const accent: AppWidgetStyle = t => [base, {
-        rippleColor: t.ripple.ct,
-      }]
-      export const normal: AppWidgetStyle = t => [base, {
-        rippleColor: t.ripple.ctOnTransparent,
-      }]
+    export namespace Type {
+      
+      export namespace onFilled {
+        export namespace Shape {
+          export namespace round {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: onFilled, shape: round, size: full
+              export const full: WidgetStyle = [base, { }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => ({ })
+        export namespace Color {
+          // type: onFilled, color: normal
+          export const normal: AppWidgetStyle = t => [baseColor, {
+            rippleColor: t.ripple.ctOnTransparent,
+          }]
+          // type: onFilled, color: accent
+          export const accent: AppWidgetStyle = t => [baseColor, {
+            rippleColor: t.ripple.ct,
+          }]
+        }
+      }
+      
+      export namespace onTrans {
+        export namespace Shape {
+          export namespace round {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: onTrans, shape: round, size: full
+              export const full: WidgetStyle = [base, { }]
+              // type: onTrans, shape: round, size: icon
+              export const icon: WidgetStyle = [full, {
+                rippleMode: 'center',
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => ({ })
+        export namespace Color {
+          // type: onTrans, color: normal
+          export const normal: AppWidgetStyle = t => [baseColor, {
+            rippleColor: t.ripple.ctOnTransparent,
+          }]
+        }
+      }
+      
     }
-    
-    // TODO Style - Ripple
-    export const onText: AppWidgetStyle = t => [base, {
-      rippleColor: t.ripple.ctOnTransparent,
-    }]
-    
-    // TODO Style - Ripple
-    export const forIcon: AppWidgetStyle = t => [base, {
-      rippleMode: 'center',
-      rippleColor: t.ripple.ctOnTransparent,
-    }]
-    
   }
+  
+  export const S = combinePartsToTypeShapeSizeColor(Parts)
+  
   
   
 }
