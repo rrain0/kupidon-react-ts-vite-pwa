@@ -2,7 +2,7 @@ import { ObjectU } from '@util/common/ObjectU.ts'
 import {
   WidgetElem,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import {
   AppStyle,
@@ -23,7 +23,7 @@ import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 export namespace ButtonS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const button = WidgetElem.of({
       ...up, className: 'rruiButton',
     })
@@ -60,7 +60,7 @@ export namespace ButtonS6 {
   
   export namespace Parts {
     
-    export const base: WidgetStyleObj = {
+    export const base = {
       button: [resetButton, {
         pos: 'rel',
         ...row,
@@ -79,7 +79,7 @@ export namespace ButtonS6 {
         r: 'inherit',
       },
       ripple: RippleS6.Parts.base,
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

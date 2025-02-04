@@ -1,7 +1,9 @@
 import { PointerU } from '@util/pointer/PointerU.ts'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle } from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
+import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
@@ -9,7 +11,6 @@ import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
-import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import { useCssWhRef } from 'src/util/view/useCssWhRef'
 import Puro = TypeU.Puro
 import Callback = TypeU.Callback
@@ -38,115 +39,110 @@ type SelectItemProps =
     children: React.ReactNode
   }>
 
-const SelectItem = React.memo(
-  React.forwardRef<HTMLDivElement, SelectItemProps>(
-    (props, forwardedRef) => {
+const SelectItem = React.memo(React.forwardRef<HTMLDivElement, SelectItemProps>(
+  (props, forwardedRef) => {
+    const {
+      isSelected,
+      isAdd,
+      isEdit,
+      //isError,
       
-      const {
-        isSelected,
-        isAdd,
-        isEdit,
-        //isError,
-        
-        //onClickAdd,
-        onClickEdit,
-        
-        indicatorsSelection,
-        
-        children,
-        className,
-        style,
-        ...restProps
-      } = props
+      //onClickAdd,
+      onClickEdit,
       
-      //const metersValues = indicatorsSelection ?? arraify(isSelected)
+      indicatorsSelection,
       
-      const setElemForWh = useCssWhRef()
-      const [getElem, setElem, elemRef] = useRefGetSet<HTMLDivElement | null>(null, setElemForWh)
-      useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-      
-      
-      
-      
-      
-      return (
-        <UseRipple>
-          { rippleProps => (
-            <article
-              //displayName={'RadioItemFrame'}
-              ref={elemRef}
-              className={clsx(SelectItemS.W.e.frame.e.name, className)}
-              style={style}
-              {...{
-                [SelectItemS.W.s.selected.s.name]: trueOrUndef(isSelected),
-              }}
-              {...combineProps(restProps, rippleProps.target)}
+      children,
+      className,
+      ...restProps
+    } = props
+    
+    //const metersValues = indicatorsSelection ?? arraify(isSelected)
+    
+    const setElemForWh = useCssWhRef()
+    const [, setElem, elemRef] = useElemRefGetSet<HTMLDivElement>(null, setElemForWh)
+    useImperativeHandle(forwardedRef, () => elemRef.current!, [])
+    
+    
+    
+    const dataSelected = SelectItemS6.W.els.selectItem.ss!.selected.n
+    
+    return (
+      <UseRipple>
+        { rippleProps => (
+          <article
+            data-display-name="SelectItem - Frame"
+            ref={setElem}
+            className={clsx(SelectItemS6.W.els.selectItem.n, className)}
+            {...{ [dataSelected]: trueOrUndef(isSelected) }}
+            {...combineProps(restProps, rippleProps.target)}
+          >
+            
+            <div
+              //displayName={'Border'}
+              className={SelectItemS.W.e.border.e.name}
             >
-              
+              <Ripple {...rippleProps.ripple} />
+            </div>
+            
+            { isAdd && (
               <div
-                //displayName={'Border'}
-                className={SelectItemS.W.e.border.e.name}
+                //displayName={'AddIconBox'}
+                className={SelectItemS.W.e.addIconBox.e.name}
               >
-                <Ripple {...rippleProps.ripple} />
+                <PlusIc />
               </div>
+            ) }
+            
+            {!isAdd && (
+              <>
               
-              { isAdd && (
-                <div
-                  //displayName={'AddIconBox'}
-                  className={SelectItemS.W.e.addIconBox.e.name}
-                >
-                  <PlusIc />
-                </div>
-              ) }
-              
-              {!isAdd && (
-                <>
-                
-                  {indicatorsSelection && (
-                    <div
-                      //displayName={'IndicatorFrame'}
-                      className={SelectItemS.W.e.indicatorFrame.e.name}
-                      style={style}
-                    >
-                      <SelectMeter metersValues={indicatorsSelection} />
-                    </div>
-                  )}
-                  
+                {indicatorsSelection && (
                   <div
-                    //displayName={'Content'}
-                    className={SelectItemS.W.e.content.e.name}
+                    //displayName={'IndicatorFrame'}
+                    className={SelectItemS.W.e.indicatorFrame.e.name}
                   >
-                    {children}
+                    <SelectMeter metersValues={indicatorsSelection} />
                   </div>
-                  
-                  {isEdit && (
-                    <UseRipple>
-                      {rippleProps => (
-                        <div
-                          //displayName={'EditBtn'}
-                          className={SelectItemS.W.e.editBtn.e.name}
-                          {...combineProps(
-                            { onClick: onClickEdit },
-                            rippleProps.target,
-                            stopPointerAndMouseEvents(),
-                          )}
-                        >
-                          <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onTrans.round.icon.normal)} />
-                          <PencilWrite2Ic />
-                        </div>
-                      )}
-                    </UseRipple>
-                  )}
+                )}
                 
-                </>
-              )}
-            </article>
-          )}
-        </UseRipple>
-      )
-    }
-  )
-)
+                <div
+                  //displayName={'Content'}
+                  className={SelectItemS.W.e.content.e.name}
+                >
+                  {children}
+                </div>
+                
+                {isEdit && (
+                  <UseRipple>
+                    {rippleProps => (
+                      <div
+                        //displayName={'EditBtn'}
+                        className={SelectItemS.W.e.editBtn.e.name}
+                        {...combineProps(
+                          { onClick: onClickEdit },
+                          rippleProps.target,
+                          stopPointerAndMouseEvents(),
+                        )}
+                      >
+                        <Ripple
+                          {...rippleProps.ripple}
+                          css={RippleS6.t(RippleS6.S.onTrans.round.icon.normal)}
+                        />
+                        <PencilWrite2Ic />
+                      </div>
+                    )}
+                  </UseRipple>
+                )}
+              
+              </>
+            )}
+          </article>
+        )}
+      </UseRipple>
+    )
+  }
+))
 export default SelectItem
 
 

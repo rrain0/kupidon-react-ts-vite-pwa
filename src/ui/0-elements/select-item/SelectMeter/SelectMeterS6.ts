@@ -1,5 +1,4 @@
-import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -8,25 +7,26 @@ import {
   WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import row = WidgetStyleCommon.row
 
 
 
 export namespace SelectMeterS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
-    const frame = WidgetElem.of({
+  export function buildWidgetElems(up?: AttachRootElemParams) {
+    const meter = WidgetElem.of({
       ...up, className: 'rruiMeterFrame',
     })
     const meter0 = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiMeter0',
+      upElem: meter, upSelector: '>', className: 'rruiMeter0',
     })
     const meter1 = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiMeter1',
+      upElem: meter, upSelector: '>', className: 'rruiMeter1',
     })
     const meter2 = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiMeter2',
+      upElem: meter, upSelector: '>', className: 'rruiMeter2',
     })
-    return { frame, meter0, meter1, meter2 } as const
+    return { meter, meter0, meter1, meter2 } as const
   }
   
   const WidgetElems = buildWidgetElems()
@@ -34,7 +34,7 @@ export namespace SelectMeterS6 {
   const WidgetProps = { }
   
   export const W = Widget.of({
-    rootElem: WidgetElems.frame,
+    rootElem: WidgetElems.meter,
     elems: WidgetElems,
     states: WidgetStates,
     props: WidgetProps,
@@ -45,9 +45,8 @@ export namespace SelectMeterS6 {
   
   
   export namespace Parts {
-    import row = WidgetStyleCommon.row
-    export const base: WidgetStyleObj = {
-      frame: {
+    export const base = {
+      meter: {
         w: 'ct', h: 'auto',
         ...row, g: 6,
         pointer: false,
@@ -64,7 +63,7 @@ export namespace SelectMeterS6 {
         sz: 8, r: 'round',
         bgColor: '#444444',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

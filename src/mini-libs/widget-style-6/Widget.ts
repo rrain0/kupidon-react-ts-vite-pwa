@@ -83,6 +83,13 @@ export namespace WidgetState {
 
 
 
+export type AttachRootElemParams = {
+  upElem: WidgetElem
+  upSelector: string
+  className?: string | undefined
+}
+
+
 
 
 

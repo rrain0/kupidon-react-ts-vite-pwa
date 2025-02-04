@@ -6,7 +6,7 @@ import {
 import {
   WidgetElem, WidgetProp,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import abs = WidgetStyleCommon.abs
 
@@ -16,7 +16,7 @@ export namespace RippleS6 {
   
   export type RippleMode = 'center' | 'pointer'
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const frame = WidgetElem.of({
       ...up, className: 'rruiRippleFrame',
     })

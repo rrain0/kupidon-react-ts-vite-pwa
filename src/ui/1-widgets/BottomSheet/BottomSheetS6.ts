@@ -1,4 +1,4 @@
-import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetAttr, WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -15,7 +15,7 @@ import modalFloor1 = StyleVals.modalFloor1
 
 export namespace BottomSheetS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const frame = WidgetElem.of({
       ...up, className: 'rruiBottomSheetFrame',
       states: {
@@ -48,7 +48,7 @@ export namespace BottomSheetS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
+    export const base = {
       frame: {
         ...fixed,
         z: modalFloor1,
@@ -68,7 +68,7 @@ export namespace BottomSheetS6 {
         pointer: true,
         overflow: 'hidden',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

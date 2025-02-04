@@ -45,6 +45,7 @@ export namespace WidgetPseudos {
 export namespace WidgetAttrs {
   export const type = WidgetAttr.of('type', { radio: '', checkbox: '' })
   export const error = WidgetAttr.of('data-error')
+  export const selected = WidgetAttr.of('data-selected')
 }
 /*
 todo style idea: linear-gradient:
@@ -167,7 +168,10 @@ export namespace WidgetProps {
   export const gridTemplateAreas = WidgetProp.ofName('grid-template-areas')
   export const gridAutoRows = WidgetProp.ofName('grid-auto-rows')
   export const gridAutoColumns = WidgetProp.ofName('grid-auto-columns')
-  export const gridAutoFlow = WidgetProp.ofName('grid-auto-flow')
+  export const gridAutoFlow = WidgetProp.ofName('grid-auto-flow', v => {
+    if (v === 'column') return 'col'
+    return v
+  })
   export const gridArea = WidgetProp.ofName('grid-area')
   
   export const pointerEvents = WidgetProp.ofName('pointer-events', v => {
@@ -385,5 +389,7 @@ export namespace AdditionalStates {
       [WidgetPseudos.focusVisible],
     ],
   })
+  
+  export const selected = WidgetAttrs.selected
 }
 

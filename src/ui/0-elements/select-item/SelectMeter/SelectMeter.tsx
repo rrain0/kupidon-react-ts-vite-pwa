@@ -26,7 +26,7 @@ const SelectMeter = React.memo((props: SelectItemProps) => {
   return (
     <div
       data-display-name="SelectMeter - Frame"
-      className={clsx(SelectMeterS6.W.els.frame.n, className)}
+      className={clsx(SelectMeterS6.W.els.meter.n, className)}
       style={style}
     >
       {metersValues?.map((it, i) => (

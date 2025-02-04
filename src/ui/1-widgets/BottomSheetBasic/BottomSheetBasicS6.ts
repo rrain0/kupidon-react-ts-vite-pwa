@@ -1,4 +1,4 @@
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -18,7 +18,7 @@ import flexC = WidgetStyleCommon.flexC
 
 export namespace BottomSheetBasicS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const sheet = BottomSheetS6.buildWidgetElems(up)
     
     const header = WidgetElem.of({
@@ -82,7 +82,7 @@ export namespace BottomSheetBasicS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
+    export const base = {
       ...BottomSheetS6.Parts.base,
       header: {
         p: 10, ...colC, g: 6,
@@ -108,7 +108,7 @@ export namespace BottomSheetBasicS6 {
         headerCursor: 'grabbing',
         headerHandleBgColor: '#000000',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

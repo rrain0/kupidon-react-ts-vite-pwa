@@ -1,5 +1,6 @@
-import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { ObjectU } from '@util/common/ObjectU.ts'
+import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -7,57 +8,59 @@ import {
   WidgetStyle,
   WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
+import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import flexC = WidgetStyleCommon.flexC
+import abs = WidgetStyleCommon.abs
 
 
 
 
 export namespace SelectItemS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
-    const frame = WidgetElem.of({
+  import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
+  
+  export function buildWidgetElems(up?: AttachRootElemParams) {
+    const selectItem = WidgetElem.of({
       ...up, className: 'rruiSelectItemFrame',
+      states: { 
+        selected: AdditionalStates.selected,
+      },
     })
     
-    const border = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiBorder',
-    })
-    //const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
+    const buttonElems = ButtonS6.buildWidgetElems({ upElem: selectItem, upSelector: '>' })
     
-    const indicatorFrame = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiIndicatorFrame',
+    const meterFrame = WidgetElem.of({
+      upElem: selectItem, upSelector: '>', className: 'rruiMeterFrame',
     })
-    //const indicator
+    const meterElems = SelectMeterS6.buildWidgetElems({ upElem: meterFrame, upSelector: '>' })
     
-    const editBtn = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiEditIconBox',
-    })
-    //const editRippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
-    //const editIconElems
+    const editBtnElems = ObjectPrefixCapitalizeKeys(
+      'edit',
+      IconButtonS6.buildWidgetElems({ upElem: selectItem, upSelector: '>' })
+    )
     
-    const cont = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiContent',
-    })
+    //const addIconBox = 0
     
     return {
-      frame,
-      border, //...rippleElems,
-      editBtn, //...editRippleElems, ...editIconElems,
-      indicatorFrame, //indicator,
-      cont,
-      //...ObjectPrefixCapitalizeKeys('ripple', rippleElems),
+      selectItem,
+      ...buttonElems,
+      meterFrame, ...meterElems,
+      ...editBtnElems,
     } as const
   }
   
   const WidgetElems = buildWidgetElems()
   const WidgetStates = {
-    inFocus: WidgetState.of([WidgetElems.frame, CommonStates.inFocus]),
-    disabled: WidgetState.of([WidgetElems.frame, CommonStates.disabled]),
-    error: WidgetState.of([WidgetElems.frame, CommonStates.error]),
+    ...ButtonS6.W.states!,
+    selected: WidgetState.of([WidgetElems.selectItem, WidgetElems.selectItem.ss!.selected]),
   }
   const WidgetProps = { }
   
   export const W = Widget.of({
-    rootElem: WidgetElems.frame,
+    rootElem: WidgetElems.selectItem,
     elems: WidgetElems,
     states: WidgetStates,
     props: WidgetProps,
@@ -68,22 +71,35 @@ export namespace SelectItemS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
-    
-    }
+    export const base = {
+      selectItem: {
+        pos: 'rel',
+        w: 300, hMin: 80, h: 'ct', '--br': '20px', r: 'var(--br)',
+        ...flexC,
+        overflow: 'hidden',
+      },
+      ...ButtonS6.Parts.base,
+      button: { ...ButtonS6.Parts.base.button,
+        ...abs,
+        display: 'grid', autoFlow: 'col', placeItems: 'stretch center', g: 10,
+      },
+      
+      //addIconBox
+      
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       
-      export namespace typeName {
+      export namespace filled {
         export namespace Shape {
-          export namespace shapeName {
+          export namespace rect {
             //export const baseSize: WidgetStyleObj = { ...base }
             export namespace Size {
-              // type: typeName, shape: shapeName, size: md
-              export const md: WidgetStyle = [base, {
+              // type: filled, shape: rect, size: md
+              /* export const md: WidgetStyle = [base, {
               
-              }]
-              // type: typeName, shape: shapeName, size: lg
+              }] */
+              // type: filled, shape: rect, size: lg
               export const lg: WidgetStyle = [base, {
               
               }]
@@ -95,12 +111,8 @@ export namespace SelectItemS6 {
         
         })
         export namespace Color {
-          // type: typeName, color: normal
+          // type: filled, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-          
-          }]
-          // type: typeName, color: accent
-          export const accent: AppWidgetStyle = t => [baseColor, {
           
           }]
         }

@@ -7,7 +7,7 @@ import {
 import {
   WidgetElem, WidgetProp, WidgetPropValueType,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import abs = WidgetStyleCommon.abs
 
@@ -16,7 +16,7 @@ import abs = WidgetStyleCommon.abs
 export namespace RippleS6 {
   
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const frame = WidgetElem.of({
       ...up, className: 'rruiRippleFrame',
     })
@@ -42,7 +42,7 @@ export namespace RippleS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
+    export const base = {
       frame: {
         ...abs,
         pointerEvents: 'none',
@@ -63,7 +63,7 @@ export namespace RippleS6 {
         // TODO Style bgColor: 'varRippleColor'
         bgColor: `var(${W.els.ripple.ps!.color.n})`,
       },
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

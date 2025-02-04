@@ -1,5 +1,6 @@
-import { Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -13,16 +14,20 @@ import {
 
 /* export */ namespace WidgetS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
-    const frame = WidgetElem.of({
+  export function buildWidgetElems(up?: AttachRootElemParams) {
+    // widget or widgetFrame
+    const widget = WidgetElem.of({
       ...up, className: 'rruiWidgetFrame',
+      states: {
+        selected: AdditionalStates.selected,
+      },
     })
     const box = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiBox',
+      upElem: widget, upSelector: '>', className: 'rruiBox',
     })
     //const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
     return {
-      frame,
+      widget,
       box,
       //...ObjectPrefixCapitalizeKeys('ripple', rippleElems),
     } as const
@@ -30,14 +35,15 @@ import {
   
   const WidgetElems = buildWidgetElems()
   const WidgetStates = {
-    inFocus: WidgetState.of([WidgetElems.frame, CommonStates.inFocus]),
-    disabled: WidgetState.of([WidgetElems.frame, CommonStates.disabled]),
-    error: WidgetState.of([WidgetElems.frame, CommonStates.error]),
+    inFocus: WidgetState.of([WidgetElems.widget, CommonStates.inFocus]),
+    disabled: WidgetState.of([WidgetElems.widget, CommonStates.disabled]),
+    error: WidgetState.of([WidgetElems.widget, CommonStates.error]),
+    selected: WidgetState.of([WidgetElems.widget, WidgetElems.widget.ss!.selected]),
   }
   const WidgetProps = { }
   
   export const W = Widget.of({
-    rootElem: WidgetElems.frame,
+    rootElem: WidgetElems.widget,
     elems: WidgetElems,
     states: WidgetStates,
     props: WidgetProps,
@@ -48,9 +54,9 @@ import {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
+    export const base = {
     
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

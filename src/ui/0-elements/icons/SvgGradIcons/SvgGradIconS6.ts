@@ -1,4 +1,4 @@
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem, WidgetProp } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
@@ -12,7 +12,7 @@ import {
 
 export namespace SvgGradIconS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const gradIcon = WidgetElem.of({
       ...up, className: 'rruiGradIcon',
       props: { 
@@ -39,11 +39,11 @@ export namespace SvgGradIconS6 {
   
   export namespace S0 {
     
-    export const base: WidgetStyleObj = {
+    export const base = {
       gradIcon: {
         sz: 'auto',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export const baseColor: AppWidgetStyle = t => ({
       gradIcon: {
@@ -64,11 +64,11 @@ export namespace SvgGradIconS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
+    export const base = {
       gradIcon: {
         sz: 'auto',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       

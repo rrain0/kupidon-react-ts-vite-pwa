@@ -1,4 +1,4 @@
-import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
@@ -12,7 +12,7 @@ import {
 
 export namespace SvgIconS6 {
   
-  export function buildWidgetElems(up?: { upElem: WidgetElem, upSelector: string }) {
+  export function buildWidgetElems(up?: AttachRootElemParams) {
     const icon = WidgetElem.of({
       ...up, className: 'rruiIcon',
       props: { 
@@ -39,11 +39,11 @@ export namespace SvgIconS6 {
   
   export namespace S0 {
     
-    export const base: WidgetStyleObj = {
+    export const base = {
       icon: {
         sz: 'auto',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export const baseColor: AppWidgetStyle = t => ({
       icon: {
@@ -63,11 +63,11 @@ export namespace SvgIconS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyleObj = {
+    export const base = {
       icon: {
         sz: 'auto',
       },
-    }
+    } satisfies WidgetStyleObj
     
     export namespace Type {
       
