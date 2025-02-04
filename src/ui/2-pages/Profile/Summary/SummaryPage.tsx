@@ -368,7 +368,7 @@ const eyeIcS0: AppWidgetStyle = t => [SvgIconS6.S.Normal.normal, {
   iconSz: 'full',
   iconColor: t.boxNormal.ct3d[0],
 }]
-const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.Trans.Round.Big.normal2, {
+const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal2, {
   iconSz: 'full',
   iconColor: t.boxNormal.ct3d[0],
 }]
@@ -396,7 +396,7 @@ const Edit = styled.div`
   width: fit-content;
 `
 const editBtnStyle = (t: AppTheme.Theme) => css`
-  ${ButtonS6.t(ButtonS6.S.Filled.Rect.Normal.accent2)(t)};
+  ${ButtonS6.t(ButtonS6.S.filled.rect.md.accent2)(t)};
   ${ButtonS6.W.t(t, {
     button: { w: 'ct', hMin: 34, p: [8, 14], r: 10 },
   })}

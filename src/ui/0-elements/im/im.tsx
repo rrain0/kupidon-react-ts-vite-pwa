@@ -26,7 +26,7 @@ export const imSmallPlaceholderIcS: AppWidgetStyle = [imPlaceholderIcS, {
   iconSz: '50%',
 }]
 export const imSmallPlaceholderIcFullTrans: AppWidgetStyle = t => [
-  IconButtonS6.S.Trans.Round.Big2.normal2, {
+  IconButtonS6.S.trans.round.lg2.normal2, {
     buttonSz: 'full',
     iconSz: '50%',
     iconColor: t.photos.ct[0],

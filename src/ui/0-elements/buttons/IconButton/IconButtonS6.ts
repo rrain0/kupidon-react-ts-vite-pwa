@@ -1,4 +1,10 @@
-import { AppStyle, AppWidgetStyle, WidgetStyle, WidgetStyleObj } from 'mini-libs/widget-style-6/WidgetStyle'
+import {
+  AppStyle,
+  AppWidgetStyle,
+  combinePartsToTypeSizeColor,
+  WidgetStyle,
+  WidgetStyleObj,
+} from 'mini-libs/widget-style-6/WidgetStyle'
 import { Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
@@ -35,10 +41,10 @@ export namespace IconButtonS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace S {
+  export namespace S0 {
     
     export const base: WidgetStyleObj = {
-      ...ButtonS6.S.base,
+      ...ButtonS6.Parts.base,
       ...SvgIconS6.S.base,
       ...SvgGradIconS6.S.base,
     }
@@ -47,12 +53,12 @@ export namespace IconButtonS6 {
     export namespace Trans {
       
       export const baseColor: AppWidgetStyle = t => [
-        ButtonS6.S.Text.baseColor, SvgIconS6.S.baseColor, SvgGradIconS6.S.baseColor,
+        ButtonS6.Parts.Type.text.baseColor, SvgIconS6.S.baseColor, SvgGradIconS6.S.baseColor,
       ]
       
       export namespace Color {
         // type: trans, color: normal2
-        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.S.Text.Color.normal2, {
+        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.Parts.Type.text.Color.normal2, {
           iconColor: t.buttonNormal.bg[0],
           // todo gradIcon
         }]
@@ -84,17 +90,17 @@ export namespace IconButtonS6 {
     export namespace Filled {
       
       export const baseColor: AppWidgetStyle = t => [
-        ButtonS6.S.Text.baseColor, SvgIconS6.S.baseColor, SvgGradIconS6.S.baseColor,
+        ButtonS6.Parts.Type.text.baseColor, SvgIconS6.S.baseColor, SvgGradIconS6.S.baseColor,
       ]
       
       export namespace Color {
         // type: filled, color: accent
-        export const accent: AppWidgetStyle = t => [baseColor, ButtonS6.S.Filled.Color.accent, {
+        export const accent: AppWidgetStyle = t => [baseColor, ButtonS6.Parts.Type.filled.Color.accent, {
           iconColor: t.buttonAccent.ct[0],
           // todo gradIcon
         }]
         // type: filled, color: normal2
-        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.S.Filled.Color.normal2, {
+        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.Parts.Type.filled.Color.normal2, {
           iconColor: t.buttonNormal.ct[0],
           // todo gradIcon
         }]
@@ -127,5 +133,103 @@ export namespace IconButtonS6 {
     }
     
   }
+  
+  
+  export namespace Parts {
+    export const base: WidgetStyleObj = {
+      ...ButtonS6.Parts.base,
+      ...SvgIconS6.S.base,
+      ...SvgGradIconS6.S.base,
+    }
+    
+    export namespace Type {
+      
+      export namespace trans {
+        export namespace Shape {
+          export namespace round {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: trans, shape: round, size: lg
+              export const lg: WidgetStyle = [base, {
+                button: { sz: 50, r: 'round', p: 11 },
+                rippleRipple: { mode: 'center' },
+                iconSz: 'full',
+              }]
+              // type: trans, shape: round, size: lg2
+              export const lg2: WidgetStyle = [lg, {
+                button: { p: 14 },
+                iconSz: 'full',
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => [
+          ButtonS6.Parts.Type.text.baseColor,
+          SvgIconS6.S.baseColor,
+          SvgGradIconS6.S.baseColor,
+        ]
+        export namespace Color {
+          // type: trans, color: normal2
+          export const normal2: AppWidgetStyle = t => [
+            baseColor,
+            ButtonS6.Parts.Type.text.Color.normal2,
+            {
+              iconColor: t.buttonNormal.bg[0],
+              // todo gradIcon
+            },
+          ]
+        }
+      }
+      
+      export namespace filled {
+        export namespace Shape {
+          export namespace round {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: filled, shape: round, size: lg
+              export const lg: WidgetStyle = [base, {
+                button: { sz: 50, r: 'round', p: 11 },
+                rippleRipple: { mode: 'center' },
+              }]
+              // type: filled, shape: round, size: lg2
+              export const lg2: WidgetStyle = [lg, {
+                buttonP: 14,
+                iconSz: 'full',
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => [
+          ButtonS6.Parts.Type.text.baseColor,
+          SvgIconS6.S.baseColor,
+          SvgGradIconS6.S.baseColor,
+        ]
+        export namespace Color {
+          // type: filled, color: normal2
+          export const normal2: AppWidgetStyle = t => [
+            baseColor, ButtonS6.Parts.Type.filled.Color.normal2,
+            {
+              iconColor: t.buttonNormal.ct[0],
+              // todo gradIcon
+            },
+          ]
+          // type: filled, color: accent
+          export const accent: AppWidgetStyle = t => [
+            baseColor,
+            ButtonS6.Parts.Type.filled.Color.accent,
+            {
+              iconColor: t.buttonAccent.ct[0],
+              // todo gradIcon
+            },
+          ]
+        }
+      }
+      
+    }
+  }
+  
+  export const S = combinePartsToTypeSizeColor(Parts)
   
 }

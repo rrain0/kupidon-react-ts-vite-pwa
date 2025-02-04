@@ -145,7 +145,7 @@ export type CombinedStyles<Parts extends StyleParts> = {
 
 
 
-export function combineStyles<const Parts extends StyleParts>(
+export function combinePartsToTypeSizeColor<const Parts extends StyleParts>(
   parts: Parts
 ): CombinedStyles<Parts> {
   const acc = { }

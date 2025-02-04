@@ -39,11 +39,7 @@ import userDefaultValues = LoginPageValidation.userDefaultValues
 
 
 
-
-
-
-
-const LoginPage = React.memo(()=>{
+const LoginPage = React.memo(() => {
   
   const [searchParams] = useSearchParams()
   const returnPath = searchParams.get(RootRoute.login[params].returnPath) ?? undefined
@@ -131,69 +127,75 @@ const LoginPage = React.memo(()=>{
   
   
   
-  useEffect(()=>{
+  useEffect(() => {
     if (isSuccess) {
       navigate(returnPath ?? RootRoute.findPairs[full]())
     }
-  },[isSuccess, navigate, returnPath])
+  }, [isSuccess, navigate, returnPath])
   
   
   
-  return <>
-    <Pages.Page>
-      <Pages.SafeInsets>
-        <Pages.ContentForm onSubmit={onFormSubmitCallback}>
-          
-          <FormHeader>{titleText.login}</FormHeader>
-          
-          
-          <ValidationWrap {...validationProps}
-            fieldName="login"
-            render={props => <Input
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.loginEmail}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          <ValidationWrap {...validationProps}
-            fieldName="pwd"
-            render={props => <PwdInput
-              css={InputStyle.outlinedRectNormalNormal}
-              placeholder={placeholderText.pwd}
-              {...props.inputProps}
-              hasError={props.highlight}
-            />}
-          />
-          
-          
-          <Button
-            css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.main)}
-            type="submit"
-          >
-            {actionText.login}
-          </Button>
-          
-          
-          <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
-            <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
-              {actionText.signup}
+  return (
+    <>
+      <Pages.Page>
+        <Pages.SafeInsets>
+          <Pages.ContentForm onSubmit={onFormSubmitCallback}>
+            
+            <FormHeader>{titleText.login}</FormHeader>
+            
+            
+            <ValidationWrap {...validationProps}
+              fieldName="login"
+              render={props => (
+                <Input
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.loginEmail}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
+            />
+            
+            <ValidationWrap {...validationProps}
+              fieldName="pwd"
+              render={props => (
+                <PwdInput
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.pwd}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
+            />
+            
+            
+            <Button
+              css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
+              type="submit"
+            >
+              {actionText.login}
             </Button>
-          </Link>
+            
+            
+            <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                {actionText.signup}
+              </Button>
+            </Link>
+          
+          </Pages.ContentForm>
+        </Pages.SafeInsets>
         
-        </Pages.ContentForm>
-      </Pages.SafeInsets>
+        <PageScrollbars />
+      </Pages.Page>
       
-      <PageScrollbars />
-    </Pages.Page>
-    
-    
-    <TopButtonBar backBtn/>
-    
-    <BottomButtonBar settingsBtn/>
-    
-  </>
+      
+      <TopButtonBar backBtn />
+      
+      <BottomButtonBar settingsBtn />
+      
+    </>
+  )
 })
 export default LoginPage
 

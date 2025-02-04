@@ -104,7 +104,7 @@ const Tests = React.memo((props: DateProps) => {
             
             {testState === 'notStarted' && (
               <Button
-                css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.accent3)}
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
                 onClick={() => console.log('take the test')}
                 
                 /*

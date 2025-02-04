@@ -120,7 +120,7 @@ const Frame = styled.nav`
 
 
 const nav = (t: AppTheme.Theme) => css`
-  ${IconButtonS6.t([IconButtonS6.S.base, {
+  ${IconButtonS6.t([IconButtonS6.Parts.base, {
     button: {
       w: 'auto', h: 'full', r: 10, p: [5, 0, 2],
       ...WidgetStyleCommon.colC, g: 3, flex: 1,

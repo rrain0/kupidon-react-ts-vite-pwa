@@ -102,7 +102,7 @@ const FeatureCardText = styled.div`
   align-self: center;
   ${Txt.md14};
 `
-const featureCardButtonS: AppWidgetStyle = [ButtonS6.S.Filled.Rect.Normal.accent2, {
+const featureCardButtonS: AppWidgetStyle = [ButtonS6.S.filled.rect.md.accent2, {
   button: {
     gridArea: 'btn', w: 160, hMin: 35,
     ...WidgetStyleCommon.Txt.md14Bold,

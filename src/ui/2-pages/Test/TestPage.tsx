@@ -90,32 +90,32 @@ const TestPage = React.memo(() => {
           
           <Items>
             <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Scrollbar test
               </Button>
             </Link>
             <Link to={RootRoute.test.bottomSheet[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Bottom Sheet
               </Button>
             </Link>
             <Link to={RootRoute.test.viewsListItem2[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 List Item 2
               </Button>
             </Link>
             <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Ripple
               </Button>
             </Link>
             <Link to={RootRoute.test.buttonsTest[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Buttons
               </Button>
             </Link>
             <Link to={RootRoute.test.sliderTest[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Slider
               </Button>
             </Link>
@@ -127,57 +127,57 @@ const TestPage = React.memo(() => {
           
           <Items>
             <Link to={RootRoute.test.resizeObserver[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Resize Observer test
               </Button>
             </Link>
             <Link to={RootRoute.test.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Move to another view
               </Button>
             </Link>
             <Link to={RootRoute.test.pointer[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Pointer test
               </Button>
             </Link>
             <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Tabs test
               </Button>
             </Link>
             <Link to={RootRoute.test.state[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 State test
               </Button>
             </Link>
             <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Page Lifecycle test
               </Button>
             </Link>
             <Link to={RootRoute.test.useEvent[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 useEvent test
               </Button>
             </Link>
             <Link to={RootRoute.test.elemRef[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Element Ref test
               </Button>
             </Link>
             <Link to={RootRoute.test.elemStyle[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Element Style test
               </Button>
             </Link>
             <Link to={RootRoute.test.oldProfileOptions[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Old Profile Options
               </Button>
             </Link>
             <Link to={RootRoute.test.shadowDOMTest[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Shadow DOM Test
               </Button>
             </Link>
@@ -188,7 +188,7 @@ const TestPage = React.memo(() => {
           
           <Items>
             <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Emulated Scroll
               </Button>
             </Link>

@@ -180,8 +180,8 @@ const ActionButtonsBox = styled.div`
 
 
 const icPreviewNormal: AppWidgetStyle = t => [
-  IconButtonS6.S.Filled.Round.sizeBig2,
-  IconButtonS6.S.Filled.baseColor,
+  IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
+  IconButtonS6.Parts.Type.filled.baseColor,
   {
     buttonBgColor: t.previewButtonNorm.bg,
     buttonColor: t.previewButtonNorm.ct,
@@ -220,8 +220,8 @@ const icPreviewNormal: AppWidgetStyle = t => [
 
 ]
 const icPreviewMain: AppWidgetStyle = t => [
-  IconButtonS6.S.Filled.Round.sizeBig2,
-  IconButtonS6.S.Filled.baseColor,
+  IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
+  IconButtonS6.Parts.Type.filled.baseColor,
   {
     buttonBg: {
       color: t.previewButtonMain.bg,

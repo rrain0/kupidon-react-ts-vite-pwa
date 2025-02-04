@@ -81,7 +81,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                   
                   {auth && (
                     <Link to={RootRoute.settings.account[full]()}>
-                      <Button css={ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.normal)}
+                      <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                         onClick={props.setClosing}
                       >
                         <LockIc
@@ -96,7 +96,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                   )}
                   
                   <Link to={RootRoute.settings.app[full]()}>
-                    <Button css={ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.normal)}
+                    <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                       onClick={props.setClosing}
                     >
                       <GearIc css={SettingsOptions.icon} />
@@ -105,7 +105,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                   </Link>
                   
                   <Link to={RootRoute.test[full]()}>
-                    <Button css={ButtonS6.t(ButtonS6.S.Outlined.Rounded.Normal.normal)}
+                    <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
                       onClick={props.setClosing}
                     >
                       {titleText.testPage}
@@ -113,7 +113,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                   </Link>
                   
                   {app.canInstall && (
-                    <Button css={ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.normal)}
+                    <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                       onClick={async () => await promptInstall()}
                     >
                       <AddModuleIc css={SettingsOptions.icon} />
@@ -121,14 +121,14 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     </Button>
                   )}
                   
-                  <Button css={ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.normal)}
+                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                     onClick={clearSiteDialog.open}
                   >
                     {actionText.clearAppData}
                   </Button>
                   
                   {import.meta.env.DEV && (
-                    <Button css={ButtonS6.t(ButtonS6.S.Outlined.Rounded.Normal.normal)}
+                    <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
                       onClick={() => setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
                     >
                       Show Dev Overlay

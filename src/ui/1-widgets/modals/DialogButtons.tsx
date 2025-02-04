@@ -53,21 +53,21 @@ const DialogButtons = React.memo(
         }}
       >
         {onCancel && (
-          <Button css={ButtonS6.t(ButtonS6.S.Text.Rounded.Normal2.normal)}
+          <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
             onClick={onCancel}
           >
             {actionText.cancel}
           </Button>
         )}
         {onClear && (
-          <Button css={ButtonS6.t(ButtonS6.S.Text.Rounded.Normal2.normal)}
+          <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
             onClick={onClear}
           >
             {actionText.clear}
           </Button>
         )}
         {onOk && (
-          <Button css={ButtonS6.t(ButtonS6.S.Text.Rounded.Normal2Uppercase.normal)}
+          <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2Uppercase.normal)}
             onClick={onOk}
           >
             {actionText.ok}
@@ -76,8 +76,8 @@ const DialogButtons = React.memo(
         {onAccept && (
           <Button 
             css={({
-              text: ButtonS6.t(ButtonS6.S.Text.Rounded.Normal2.normal),
-              filledRounded: ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal2.accent),
+              text: ButtonS6.t(ButtonS6.S.text.rounded.md2.normal),
+              filledRounded: ButtonS6.t(ButtonS6.S.filled.rounded.md2.accent),
             } satisfies Record<typeof acceptVariant, any>)[acceptVariant]}
             onClick={onAccept}
           >

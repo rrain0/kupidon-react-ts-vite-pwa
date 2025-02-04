@@ -291,18 +291,18 @@ const AccountSettingsPage = React.memo(() => {
             
             
             <Link to={RootRoute.settings.pwdChange[full]()}>
-              <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 {titleText.pwdChange}
               </Button>
             </Link>
             
-            <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.normal)}
+            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
               onClick={resetAuth}
             >
               {actionText.logOutFromAccount}
             </Button>
           
-            <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.danger)}
+            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.danger)}
               onClick={undefined}
               disabled
             >

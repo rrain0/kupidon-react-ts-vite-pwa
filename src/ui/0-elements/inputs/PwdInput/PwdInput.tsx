@@ -62,7 +62,7 @@ const EyeFrame = styled.div`
 `
 
 
-const eyeButtonS: AppWidgetStyle = t => [IconButtonS6.S.Trans.Round.Big.normal2, {
+const eyeButtonS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal2, {
   button: { sz: 'full', p: 10 },
   icon: { sz: 24, color: t.input.ct[0] },
   inFocus: {

@@ -54,7 +54,7 @@ export default OptionItem
 
 
 const buttonStyle = (t: AppTheme.Theme) => css`
-  ${ButtonS6.t(ButtonS6.S.Text.Rect.Big.normal)(t)};
+  ${ButtonS6.t(ButtonS6.S.text.rect.lg.normal)(t)};
   ${ButtonS6.W.t(t, {
     button: {
       w: 'full', hMin: 50, h: 'ct', p: [2, 0],

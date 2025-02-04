@@ -96,8 +96,8 @@ const PartnerHeightOption = React.memo(
     const { isOpen, open, close } = useOverlayUrl(overlayName)
     
     
-    const activeBtn = ButtonS6.t(ButtonS6.S.Filled.Rounded.Normal.accent)
-    const inactiveBtn = ButtonS6.t(ButtonS6.S.Outlined.Rounded.Normal.accent)
+    const activeBtn = ButtonS6.t(ButtonS6.S.filled.rounded.md.accent)
+    const inactiveBtn = ButtonS6.t(ButtonS6.S.outlined.rounded.md.accent)
     
     return (
       <>

@@ -119,7 +119,7 @@ export namespace ButtonBarComponents {
     
     return (
       <Button
-        css={IconButtonS6.t(IconButtonS6.S.Trans.Round.Big2.normal2)}
+        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
         onClick={back}
       >
         <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
@@ -139,7 +139,7 @@ export namespace ButtonBarComponents {
     
     return (
       <Button
-        css={IconButtonS6.t(IconButtonS6.S.Trans.Round.Big2.normal2)}
+        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
         onClick={reload}
       >
         <ArrowReloadIc css={isReloading && css`
@@ -168,7 +168,7 @@ export namespace ButtonBarComponents {
     
     return (
       <Button
-        css={IconButtonS6.t(IconButtonS6.S.Trans.Round.Big2.normal2)}
+        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
         onClick={props.refresh}
       >
         <ArrowReloadIc

@@ -204,13 +204,13 @@ const PwdChangePage = React.memo(() => {
           
           
           
-            <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.main)}
+            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
               type="submit"
             >
               {actionText.changePwd}
             </Button>
           
-            <Button css={ButtonS6.t(ButtonS6.S.Filled.Rect.Big.main)}
+            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
               disabled
             >
               {titleText.pwdRecovery}
