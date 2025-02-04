@@ -18,7 +18,7 @@ export namespace RippleS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const frame = WidgetElem.of({
-      ...up, className: 'rruiRippleFrame',
+      className: 'rruiRippleFrame', ...up,
     })
     const ripple = WidgetElem.of({
       upElem: frame, upSelector: '>', className: 'rruiRippleRipple',

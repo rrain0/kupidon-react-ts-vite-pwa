@@ -94,7 +94,9 @@ export namespace IconButtonS6 {
     export namespace Filled {
       
       export const baseColor: AppWidgetStyle = t => [
-        ButtonS6.Parts.Type.text.baseColor, SvgIconS6.Parts.Type.icon.baseColor, SvgGradIconS6.Parts.Type.icon.baseColor,
+        ButtonS6.Parts.Type.text.baseColor,
+        SvgIconS6.Parts.Type.icon.baseColor,
+        SvgGradIconS6.Parts.Type.icon.baseColor,
       ]
       
       export namespace Color {
@@ -213,7 +215,8 @@ export namespace IconButtonS6 {
         export namespace Color {
           // type: filled, color: normal2
           export const normal2: AppWidgetStyle = t => [
-            baseColor, ButtonS6.Parts.Type.filled.Color.normal2,
+            baseColor,
+            ButtonS6.Parts.Type.filled.Color.normal2,
             {
               iconColor: t.buttonNormal.ct[0],
               // todo gradIcon

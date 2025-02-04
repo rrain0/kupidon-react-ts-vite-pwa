@@ -14,7 +14,7 @@ export namespace SvgIconS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const icon = WidgetElem.of({
-      ...up, className: 'rruiIcon',
+      className: 'rruiIcon', ...up,
       props: { 
         size: AdditionalProps.varSize,
         sz: AdditionalProps.varSize,

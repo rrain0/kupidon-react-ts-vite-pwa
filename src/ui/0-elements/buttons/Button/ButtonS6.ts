@@ -22,7 +22,7 @@ export namespace ButtonS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const button = WidgetElem.of({
-      ...up, className: 'rruiButton',
+      className: 'rruiButton', ...up,
     })
     const border = WidgetElem.of({
       upElem: button, upSelector: '>', className: 'rruiBorder',
@@ -57,26 +57,28 @@ export namespace ButtonS6 {
   
   export namespace Parts {
     
-    export const base: WidgetStyle = {
-      button: [resetButton, {
-        pos: 'rel',
-        ...row,
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflowWrap: 'anywhere',
-        overflow: 'hidden',
-        transition:
-          'background linear 300ms,' +
-          'color linear 300ms,' +
-          'border-color linear 300ms',
-      }],
-      border: {
-        ...abs,
-        pointerEvents: 'none',
-        r: 'inherit',
+    export const base: WidgetStyle = [
+      {
+        button: [resetButton, {
+          pos: 'rel',
+          ...row,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflowWrap: 'anywhere',
+          overflow: 'hidden',
+          transition:
+            'background linear 300ms,' +
+            'color linear 300ms,' +
+            'border-color linear 300ms',
+        }],
+        border: {
+          ...abs,
+          pointerEvents: 'none',
+          r: 'inherit',
+        },
       },
-      ripple: RippleS6.Parts.base,
-    }
+      RippleS6.Parts.base,
+    ]
     
     export namespace Type {
       

@@ -2,11 +2,12 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
+import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
-import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
 import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import row = EmotionCommon.row
 import PlusIc = SvgIconsPack.PlusIc
@@ -85,231 +86,236 @@ const SelectItemTestPage = () => {
   
   
   return (
-    <Pages.SimplePage>
-      <Pages.ContentFill>
+    <>
+      <Pages.SimplePage>
+        <Pages.ContentFill>
+          
+          
+          <div>Select Item</div>
+          
+          
+          <ColumnContent>
+            
+            {options.map((it, i) => (
+              <SelectItem
+                css={SelectItemS6.t(SelectItemS6.S.filled.rect.lg.normal)}
+                key={it.value}
+                onClick={() => toggleOption(it.value)}
+                isSelected={it.isSelected}
+                isAdd={it.isAdd}
+                isEdit={it.isEditable}
+                //isError={false}
+                metersValues={(() => {
+                  if (i === 0) return options.map(it => it.isSelected)
+                  return options.map((it, i2) => i === i2 && it.isSelected)
+                })()}
+              >
+                <SelectItemText>
+                  {it.text}
+                </SelectItemText>
+              </SelectItem>
+            ))}
+            
+            
+            
+            <div>Невыбранный элемент списка:</div>
+            
+            {variants.map(v => (
+              <Frame key={v}>
+                
+                <IndicatorFrame>
+                  <IndicatorBox>
+                    <Indicator />
+                  </IndicatorBox>
+                </IndicatorFrame>
+                
+                <TextBox>
+                  <Text>{v}</Text>
+                </TextBox>
+              
+              </Frame>
+            ))}
+            
+            
+            
+            <div>Выбранный элемент списка:</div>
+            
+            {variants.map(v => (
+              <Frame key={v}>
+                
+                <IndicatorFrame>
+                  <IndicatorBox>
+                    <IndicatorSelected />
+                  </IndicatorBox>
+                </IndicatorFrame>
+                
+                <TextBox>
+                  <Text>{v}</Text>
+                </TextBox>
+                
+                <Border />
+              
+              </Frame>
+            ))}
+            
+            
+            
+            <div>Добавить элемент в список:</div>
+            
+            <Frame>
+              
+              <AddIconBox> <PlusIc /> </AddIconBox>
+            
+            </Frame>
+            
+            
+            
+            <div>Редактируемый невыбранный элемент:</div>
+            
+            {variants.map((v, i) => (
+              <Frame key={v}>
+                
+                <IndicatorFrame>
+                  <IndicatorBox>
+                    <Indicator />
+                  </IndicatorBox>
+                </IndicatorFrame>
+                
+                <TextBox>
+                  <Text>{v}</Text>
+                </TextBox>
+                
+                <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
+                  <PencilWrite2Ic />
+                </PencilIconBox>
+              
+              </Frame>
+            ))}
+            
+            
+            
+            <div>Редактируемый выбранный элемент списка:</div>
+            
+            {variants.map((v, i) => (
+              <Frame key={v}>
+                
+                <IndicatorFrame>
+                  <IndicatorBox>
+                    <IndicatorSelected />
+                  </IndicatorBox>
+                </IndicatorFrame>
+                
+                <TextBox>
+                  <Text>{v}</Text>
+                </TextBox>
+                
+                <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
+                  <PencilWrite2Ic />
+                </PencilIconBox>
+                
+                <Border />
+              
+              </Frame>
+            ))}
+            
+            
+            
+            <div>Мультивыбор:</div>
+            
+            {options.map((v, i, opts) => (
+              <Frame key={v.value}>
+                
+                {v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox>}
+                
+                {!v.isAdd && (
+                  <>
+                    <IndicatorFrame>
+                      <IndicatorBox>
+                        {opts.map(v => (
+                          <React.Fragment key={`${v.value} ${v.isSelected}`}>
+                            {!v.isSelected
+                              ? <Indicator />
+                              : <IndicatorSelected />
+                            }
+                          </React.Fragment>
+                        ))}
+                      </IndicatorBox>
+                    </IndicatorFrame>
+                    
+                    <TextBox>
+                      <Text>{v.text}</Text>
+                    </TextBox>
+                    
+                    {v.isEditable && (
+                      <PencilIconBox>
+                        <PencilWrite2Ic />
+                      </PencilIconBox>
+                    )}
+                    
+                    {v.isSelected && <Border />}
+                  
+                  </>
+                )}
+              
+              
+              </Frame>
+            ))}
+            
+            
+            
+            <div>Мультивыбор:</div>
+            
+            {options.map((v, i, opts) => (
+              <Frame
+                key={v.value}
+                isSelected={v.isSelected}
+              >
+                
+                {v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox>}
+                
+                {!v.isAdd && (
+                  <>
+                    <IndicatorFrame>
+                      <IndicatorBox>
+                        {opts.map(v => (
+                          <React.Fragment key={`${v.value} ${v.isSelected}`}>
+                            {!v.isSelected
+                              ? <Indicator />
+                              : <IndicatorSelected />
+                            }
+                          </React.Fragment>
+                        ))}
+                      </IndicatorBox>
+                    </IndicatorFrame>
+                    
+                    <TextBox>
+                      <Text>{v.text}</Text>
+                    </TextBox>
+                    
+                    {v.isEditable && (
+                      <PencilIconBox>
+                        <PencilWrite2Ic />
+                      </PencilIconBox>
+                    )}
+                  
+                  </>
+                )}
+              
+              
+              </Frame>
+            ))}
+          
+          
+          
+          </ColumnContent>
         
         
-        <div>Select Item</div>
-        
-        
-        <ColumnContent>
-          
-          { options.map((it, i) => (
-            <SelectItem
-              css={SelectItemS.normal}
-              key={it.value}
-              onClick={() => toggleOption(it.value)}
-              isSelected={it.isSelected}
-              isAdd={it.isAdd}
-              isEdit={it.isEditable}
-              //isError={false}
-              indicatorsSelection={(() => {
-                if (i === 0) return options.map(it => it.isSelected)
-                return options.map((it, i2) => i === i2 && it.isSelected)
-              })()}
-            >
-              <SelectItemText>
-                {it.text}
-              </SelectItemText>
-            </SelectItem>
-          )) }
-          
-          
-          
-          <div>Невыбранный элемент списка:</div>
-          
-          { variants.map(v => (
-            <Frame key={v}>
-              
-              <IndicatorFrame>
-                <IndicatorBox>
-                  <Indicator />
-                </IndicatorBox>
-              </IndicatorFrame>
-              
-              <TextBox>
-                <Text>{v}</Text>
-              </TextBox>
-            
-            </Frame>
-          )) }
-          
-          
-          
-          <div>Выбранный элемент списка:</div>
-          
-          { variants.map(v => (
-            <Frame key={v}>
-              
-              <IndicatorFrame>
-                <IndicatorBox>
-                  <IndicatorSelected />
-                </IndicatorBox>
-              </IndicatorFrame>
-              
-              <TextBox>
-                <Text>{v}</Text>
-              </TextBox>
-              
-              <Border />
-            
-            </Frame>
-          )) }
-          
-          
-          
-          <div>Добавить элемент в список:</div>
-          
-          <Frame>
-            
-            <AddIconBox> <PlusIc /> </AddIconBox>
-          
-          </Frame>
-          
-          
-          
-          <div>Редактируемый невыбранный элемент:</div>
-          
-          { variants.map((v, i) => (
-            <Frame key={v}>
-            
-              <IndicatorFrame>
-                <IndicatorBox>
-                  <Indicator />
-                </IndicatorBox>
-              </IndicatorFrame>
-              
-              <TextBox>
-                <Text>{v}</Text>
-              </TextBox>
-              
-              <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
-                <PencilWrite2Ic />
-              </PencilIconBox>
-            
-            </Frame>
-          )) }
-          
-          
-          
-          <div>Редактируемый выбранный элемент списка:</div>
-          
-          { variants.map((v, i) => (
-            <Frame key={v}>
-            
-              <IndicatorFrame>
-                <IndicatorBox>
-                  <IndicatorSelected />
-                </IndicatorBox>
-              </IndicatorFrame>
-              
-              <TextBox>
-                <Text>{v}</Text>
-              </TextBox>
-              
-              <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
-                <PencilWrite2Ic />
-              </PencilIconBox>
-              
-              <Border />
-            
-            </Frame>
-          )) }
-          
-          
-          
-          <div>Мультивыбор:</div>
-          
-          { options.map((v, i, opts) => (
-            <Frame key={v.value}>
-              
-              { v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox> }
-              
-              { !v.isAdd && (
-                <>
-                  <IndicatorFrame>
-                    <IndicatorBox>
-                      { opts.map(v => (
-                        <React.Fragment key={`${v.value} ${v.isSelected}`}>
-                          { !v.isSelected
-                            ? <Indicator />
-                            : <IndicatorSelected />
-                          }
-                        </React.Fragment>
-                      ))}
-                    </IndicatorBox>
-                  </IndicatorFrame>
-                  
-                  <TextBox>
-                    <Text>{v.text}</Text>
-                  </TextBox>
-                  
-                  { v.isEditable && (
-                    <PencilIconBox>
-                      <PencilWrite2Ic />
-                    </PencilIconBox>
-                  ) }
-                  
-                  { v.isSelected && <Border /> }
-                  
-                </>
-              ) }
-              
-              
-            </Frame>
-          )) }
-          
-          
-          
-          <div>Мультивыбор:</div>
-          
-          { options.map((v, i, opts) => (
-            <Frame
-              key={v.value}
-              isSelected={v.isSelected}
-            >
-              
-              { v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox> }
-              
-              { !v.isAdd && (
-                <>
-                  <IndicatorFrame>
-                    <IndicatorBox>
-                      { opts.map(v => (
-                        <React.Fragment key={`${v.value} ${v.isSelected}`}>
-                          { !v.isSelected
-                            ? <Indicator />
-                            : <IndicatorSelected />
-                          }
-                        </React.Fragment>
-                      ))}
-                    </IndicatorBox>
-                  </IndicatorFrame>
-                  
-                  <TextBox>
-                    <Text>{v.text}</Text>
-                  </TextBox>
-                  
-                  { v.isEditable && (
-                    <PencilIconBox>
-                      <PencilWrite2Ic />
-                    </PencilIconBox>
-                  ) }
-                  
-                </>
-              ) }
-              
-              
-            </Frame>
-          )) }
-          
-          
-        
-        </ColumnContent>
+        </Pages.ContentFill>
+      </Pages.SimplePage>
       
       
-      </Pages.ContentFill>
-    </Pages.SimplePage>
+      <BottomButtonBar settingsBtn />
+    </>
   )
 }
 export default SelectItemTestPage

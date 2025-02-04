@@ -28,22 +28,16 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   
   
-  boxNormal: { ...DarkProps.boxNormal,
-    bg:       ['#24272d'],
-    bg2:      ['#282c34'],
-    ct:       ['#bdbdbd'],
-    ct2:      ['#999999'],
-    ct3:      ['#7b7b7b'],
-    cta:      ['#b7405c'], // ['#984559']
-    cta2:     '#b7405c',
-    cta3:     ['#BB2649'],
-  },
+  boxNormal: { ...DarkProps.boxNormal },
   boxAccent: { ...DarkProps.boxAccent,
     bg:        ['#aaaaaa'],
     bg3:       '#c51841',
     ct:        ['#000000'],
     ct2:       ['#000000'],
     ct3:       '#000000',
+    // cta:      ['#b7405c'], // ['#984559']
+    // cta2:     '#b7405c',
+    // cta3:     ['#BB2649'],
   },
   
   

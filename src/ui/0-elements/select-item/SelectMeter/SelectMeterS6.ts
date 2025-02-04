@@ -14,7 +14,7 @@ export namespace SelectMeterS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const meter = WidgetElem.of({
-      ...up, className: 'rruiMeterFrame',
+      className: 'rruiMeterFrame', ...up,
     })
     const meter0 = WidgetElem.of({
       upElem: meter, upSelector: '>', className: 'rruiMeter0',

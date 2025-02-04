@@ -14,7 +14,7 @@ export namespace SvgGradIconS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const gradIcon = WidgetElem.of({
-      ...up, className: 'rruiGradIcon',
+      className: 'rruiGradIcon', ...up,
       props: { 
         size: AdditionalProps.varSize,
         sz: AdditionalProps.varSize,

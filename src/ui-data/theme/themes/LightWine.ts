@@ -35,22 +35,16 @@ export const LightWineProps: ThemeProps = { ...LightProps,
   
   
   
-  boxNormal: { ...LightProps.boxNormal,
-    bg:        ['#ffffff'],
-    bg2:       ['#f0f0f0'],
-    ct:   ['#000000'],
-    ct2:  ['#555555'],
-    ct3:  ['#7b7b7b'],
-    cta:    ['#ffdde5'],
-    cta2:             '#dd2e57',
-    cta3:   ['#BB2649'],
-  },
+  boxNormal: { ...LightProps.boxNormal },
   boxAccent: { ...LightProps.boxAccent,
     bg:       ['#bbbbbb'],
     bg3:      '#e8204f',
     ct:  ['#000000'],
     ct2: ['#F8F8F8'],
     ct3:       '#ffffff',
+    // cta:    ['#ffdde5'],
+    // cta2:             '#dd2e57',
+    // cta3:   ['#BB2649'],
   },
   
   

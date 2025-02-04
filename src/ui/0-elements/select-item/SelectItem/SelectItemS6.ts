@@ -1,5 +1,6 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
+import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
@@ -10,12 +11,12 @@ import {
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import flexC = WidgetStyleCommon.flexC
 import abs = WidgetStyleCommon.abs
 import col = WidgetStyleCommon.col
+import Txt = WidgetStyleCommon.Txt
 import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
@@ -26,7 +27,7 @@ export namespace SelectItemS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const selectItem = WidgetElem.of({
-      ...up, className: 'rruiSelectItemFrame',
+      className: 'rruiSelectItemFrame', ...up,
       states: { 
         selected: AdditionalStates.selected,
       },
@@ -35,7 +36,7 @@ export namespace SelectItemS6 {
     const buttonElems = ButtonS6.buildWidgetElems({ upElem: selectItem, upSelector: '>' })
     
     const meterBox = WidgetElem.of({
-      upElem: selectItem, upSelector: '>', className: 'rruiMeterFrame',
+      upElem: selectItem, upSelector: '>', className: 'rruiMeterBox',
     })
     const meterElems = SelectMeterS6.buildWidgetElems({ upElem: meterBox, upSelector: '>' })
     
@@ -47,9 +48,13 @@ export namespace SelectItemS6 {
       SvgIconS6.buildWidgetElems({ upElem: addBox, upSelector: '>' })
     )
     
+    const editBox = WidgetElem.of({
+      upElem: selectItem, upSelector: '>', className: 'rruiEditButtonBox',
+    })
+    // TODO Style - edit widget states - include them in elements build function
     const editElems = ObjectPrefixCapitalizeKeys(
       'edit',
-      IconButtonS6.buildWidgetElems({ upElem: selectItem, upSelector: '>' })
+      IconButtonS6.buildWidgetElems({ upElem: editBox, upSelector: '>' })
     )
     
     return {
@@ -57,13 +62,15 @@ export namespace SelectItemS6 {
       ...buttonElems,
       meterBox, ...meterElems,
       addBox, ...addElems,
-      ...editElems,
+      editBox, ...editElems,
     } as const
   }
   
   const WidgetElems = buildWidgetElems()
   const WidgetStates = {
-    ...ButtonS6.W.states!,
+    inFocus: WidgetState.of([WidgetElems.button, CommonStates.inFocus]),
+    disabled: WidgetState.of([WidgetElems.button, CommonStates.disabled]),
+    error: WidgetState.of([WidgetElems.button, CommonStates.error]),
     selected: WidgetState.of([WidgetElems.selectItem, WidgetElems.selectItem.ss!.selected]),
   }
   const WidgetProps = { }
@@ -84,7 +91,7 @@ export namespace SelectItemS6 {
       ButtonS6.Parts.base,
       { add: SvgIconS6.Parts.base },
       SelectMeterS6.Parts.base,
-      { edit: ButtonS6.Parts.base },
+      { edit: IconButtonS6.Parts.base },
       {
         selectItem: {
           pos: 'rel',
@@ -95,7 +102,8 @@ export namespace SelectItemS6 {
         
         
         button: {
-          ...abs, p: [20, 26], ...flexC, g: 10,
+          ...abs, p: [20, 26], ...flexC, g: 10, r: 'inherit',
+          ...Txt.lg16,
         },
         
         add: {
@@ -106,13 +114,16 @@ export namespace SelectItemS6 {
         },
         
         meterBox: {
-          ...abs, ...col, p: [6, 16],
+          ...abs, ...col, p: [6, 16], pointer: false,
         },
         
         edit: {
+          box: {
+            pos: 'abs', a: [0, 0, null, null], sz: 40, r: 'var(--br)',
+            overflow: 'hidden',
+          },
           button: {
-            pos: 'abs', a: [0, 0], sz: 40, r: 'var(--br)', p: 11,
-            ...flexC,
+            ...abs, p: 11, ...flexC,
             overflow: 'hidden',
           },
         },
@@ -144,20 +155,22 @@ export namespace SelectItemS6 {
           }
         }
         
-        export const baseColor: AppWidgetStyle = t => ({
-        
-        })
+        export const baseColor: AppWidgetStyle = t => ({ })
         export namespace Color {
           // type: filled, color: normal
           export const normal: AppWidgetStyle = t => [
             baseColor,
-            RippleS6.S.onFilled.round.full.normal,
-            { add: SvgIconS6.S.icon.icon.auto.normal },
-            SelectMeterS6.S.row.round.md.normal,
-            { edit: RippleS6.Parts.base },
-            { edit: SvgIconS6.S.icon.icon.auto.normal },
+            ButtonS6.Parts.Type.filled.Color.normal,
+            { add: SvgIconS6.Parts.Type.icon.Color.normal },
+            SelectMeterS6.Parts.Type.row.Color.normal,
+            { edit: IconButtonS6.Parts.Type.trans.Color.normal2 },
             {
+              buttonColor: t.boxNormal.ct[0],
               buttonBgColor: t.boxNormal.bg2[0],
+              inFocus: {
+                buttonColor: t.boxNormal.ct[0],
+                buttonBgColor: t.boxNormal.cta2,
+              },
               selected: {
                 borderBdColor: t.boxNormal.ct1b[0],
               },

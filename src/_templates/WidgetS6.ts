@@ -16,7 +16,7 @@ import {
   export function buildWidgetElems(up?: AttachRootElemParams) {
     // widget or widgetFrame
     const widget = WidgetElem.of({
-      ...up, className: 'rruiWidgetFrame',
+      className: 'rruiWidgetFrame', ...up,
       states: {
         selected: AdditionalStates.selected,
       },

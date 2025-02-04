@@ -5,6 +5,7 @@ import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter
   from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
@@ -125,7 +126,7 @@ const ModalMultiSelectList = ReactU.memo(
                     const isEdit = edit.includes(opt.id)
                     return (
                       <SelectItem
-                        css={SelectItemS.normal}
+                        css={SelectItemS6.t(SelectItemS6.S.filled.rect.lg.normal)}
                         key={opt.id}
                         onClick={() => {
                           if (!isAdd) toggleSelected(opt.id)
@@ -135,7 +136,7 @@ const ModalMultiSelectList = ReactU.memo(
                         isSelected={isSelected}
                         isAdd={isAdd}
                         isEdit={isEdit}
-                        indicatorsSelection={getIndicatorsData?.(options, opt, i, isSelected)}
+                        metersValues={getIndicatorsData?.(options, opt, i, isSelected)}
                       >
                         <SelectItemText>
                           {opt.text}

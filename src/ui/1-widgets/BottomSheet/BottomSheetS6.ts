@@ -16,7 +16,7 @@ export namespace BottomSheetS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const sheetFrame = WidgetElem.of({
-      ...up, className: 'rruiBottomSheetFrame',
+      className: 'rruiBottomSheetFrame', ...up,
       states: {
         dragging: WidgetAttr.of('data-dragging'),
       },

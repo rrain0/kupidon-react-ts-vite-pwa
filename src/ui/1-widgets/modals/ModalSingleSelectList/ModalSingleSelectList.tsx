@@ -5,6 +5,7 @@ import { Option } from 'src/ui-data/models/Option'
 import { Sizes } from 'src/ui-data/Sizes'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import { SheetSnaps80 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
@@ -123,7 +124,7 @@ const ModalSingleSelectList = ReactU.memo(
                     const isEdit = edit.includes(opt.id)
                     return (
                       <SelectItem
-                        css={SelectItemS.normal}
+                        css={SelectItemS6.t(SelectItemS6.S.filled.rect.lg.normal)}
                         key={opt.id}
                         onClick={() => {
                           if (!isAdd) toggleSelected(opt.id)
@@ -133,7 +134,7 @@ const ModalSingleSelectList = ReactU.memo(
                         isSelected={isSelected}
                         isAdd={isAdd}
                         isEdit={isEdit}
-                        //indicatorsSelection={opt.id === selected ? [true] : [false]}
+                        //metersValues={opt.id === selected ? [true] : [false]}
                       >
                         <SelectItemText>
                           {opt.text}

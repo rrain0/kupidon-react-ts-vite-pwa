@@ -1,15 +1,9 @@
-import { PointerU } from '@util/pointer/PointerU.ts'
-import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
-import React, { useImperativeHandle } from 'react'
-import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
+import React from 'react'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
-import UseRipple from 'src/ui/0-elements/Ripple/UseRipple'
-import Ripple from 'src/ui/0-elements/Ripple/Ripple'
-import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import { useCssWhRef } from 'src/util/view/useCssWhRef'
 import Puro = TypeU.Puro
@@ -17,8 +11,6 @@ import Callback = TypeU.Callback
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import trueOrUndef = TypeU.trueOrUndef
-import combineProps = ReactU.combineProps
-import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 
 
 
@@ -27,7 +19,7 @@ type IsSelected = Puro<{ isSelected: boolean }>
 export type IndicatorSelection = 0 | false | 1 | 2 | true
 
 type SelectItemProps =
-  React.ComponentPropsWithoutRef<'article'>
+  React.ComponentPropsWithoutRef<'button'>
   & IsSelected
   & Puro<{
     isAdd: boolean
@@ -35,11 +27,11 @@ type SelectItemProps =
     //isError: boolean
     //onClickAdd: Callback
     onClickEdit: Callback
-    indicatorsSelection: IndicatorSelection[]
+    metersValues: IndicatorSelection[]
     children: React.ReactNode
   }>
 
-const SelectItem = React.memo(React.forwardRef<HTMLDivElement, SelectItemProps>(
+const SelectItem = React.memo(React.forwardRef<HTMLButtonElement, SelectItemProps>(
   (props, forwardedRef) => {
     const {
       isSelected,
@@ -50,96 +42,69 @@ const SelectItem = React.memo(React.forwardRef<HTMLDivElement, SelectItemProps>(
       //onClickAdd,
       onClickEdit,
       
-      indicatorsSelection,
+      metersValues,
       
       children,
       className,
+      style,
       ...restProps
     } = props
     
-    //const metersValues = indicatorsSelection ?? arraify(isSelected)
+    //const metersValues = metersValues ?? arraify(isSelected)
     
-    const setElemForWh = useCssWhRef()
-    const [, setElem, elemRef] = useElemRefGetSet<HTMLDivElement>(null, setElemForWh)
-    useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-    
-    
+    const setSelectItemFrame = useCssWhRef()
     
     const dataSelected = SelectItemS6.W.els.selectItem.ss!.selected.n
     
     return (
-      <UseRipple>
-        { rippleProps => (
-          <article
-            data-display-name="SelectItem - Frame"
-            ref={setElem}
-            className={clsx(SelectItemS6.W.els.selectItem.n, className)}
-            {...{ [dataSelected]: trueOrUndef(isSelected) }}
-            {...combineProps(restProps, rippleProps.target)}
-          >
-            
+      <article
+        data-display-name="SelectItem - Frame"
+        ref={setSelectItemFrame}
+        className={clsx(SelectItemS6.W.els.selectItem.n, className)}
+        {...{ [dataSelected]: trueOrUndef(isSelected) }}
+        style={style}
+      >
+        
+        <Button {...restProps} ref={forwardedRef}>
+          {isAdd && (
             <div
-              //displayName={'Border'}
-              className={SelectItemS.W.e.border.e.name}
+              data-display-name="SelectItem - Add Icon Box"
+              className={SelectItemS6.W.els.addBox.n}
             >
-              <Ripple {...rippleProps.ripple} />
+              <PlusIc />
             </div>
-            
-            { isAdd && (
+          )}
+          {!isAdd && (
+            <>
+              {children}
+            </>
+          )}
+        </Button>
+        
+        {!isAdd && (
+          <>
+            {metersValues && (
               <div
-                //displayName={'AddIconBox'}
-                className={SelectItemS.W.e.addIconBox.e.name}
+                data-display-name="SelectItem - Meter Box"
+                className={SelectItemS6.W.els.meterBox.n}
               >
-                <PlusIc />
+                <SelectMeter metersValues={metersValues} />
               </div>
-            ) }
-            
-            {!isAdd && (
-              <>
-              
-                {indicatorsSelection && (
-                  <div
-                    //displayName={'IndicatorFrame'}
-                    className={SelectItemS.W.e.indicatorFrame.e.name}
-                  >
-                    <SelectMeter metersValues={indicatorsSelection} />
-                  </div>
-                )}
-                
-                <div
-                  //displayName={'Content'}
-                  className={SelectItemS.W.e.content.e.name}
-                >
-                  {children}
-                </div>
-                
-                {isEdit && (
-                  <UseRipple>
-                    {rippleProps => (
-                      <div
-                        //displayName={'EditBtn'}
-                        className={SelectItemS.W.e.editBtn.e.name}
-                        {...combineProps(
-                          { onClick: onClickEdit },
-                          rippleProps.target,
-                          stopPointerAndMouseEvents(),
-                        )}
-                      >
-                        <Ripple
-                          {...rippleProps.ripple}
-                          css={RippleS6.t(RippleS6.S.onTrans.round.icon.normal)}
-                        />
-                        <PencilWrite2Ic />
-                      </div>
-                    )}
-                  </UseRipple>
-                )}
-              
-              </>
             )}
-          </article>
+            {isEdit && (
+              <div
+                data-display-name="SelectItem - Edit Button Box"
+                className={SelectItemS6.W.els.editBox.n}
+              >
+                <Button onClick={onClickEdit}>
+                  <PencilWrite2Ic />
+                </Button>
+              </div>
+            )}
+          </>
         )}
-      </UseRipple>
+        
+      </article>
     )
   }
 ))
