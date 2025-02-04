@@ -19,8 +19,6 @@ import {
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
 import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
-import { SelectItemS } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS'
-import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput'
@@ -138,9 +136,7 @@ const ModalMultiSelectList = ReactU.memo(
                         isEdit={isEdit}
                         metersValues={getIndicatorsData?.(options, opt, i, isSelected)}
                       >
-                        <SelectItemText>
-                          {opt.text}
-                        </SelectItemText>
+                        {opt.text}
                       </SelectItem>
                     )
                   })}

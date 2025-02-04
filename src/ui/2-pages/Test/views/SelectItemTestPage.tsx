@@ -8,7 +8,6 @@ import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
-import SelectItemText from 'src/ui/0-elements/select-item/SelectItemText/SelectItemText'
 import row = EmotionCommon.row
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
@@ -110,9 +109,7 @@ const SelectItemTestPage = () => {
                   return options.map((it, i2) => i === i2 && it.isSelected)
                 })()}
               >
-                <SelectItemText>
-                  {it.text}
-                </SelectItemText>
+                {it.text}
               </SelectItem>
             ))}
             
