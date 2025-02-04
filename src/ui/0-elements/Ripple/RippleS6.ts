@@ -43,7 +43,7 @@ export namespace RippleS6 {
   
   export namespace Parts {
     export const base = {
-      frame: {
+      rippleFrame: {
         ...abs,
         pointerEvents: 'none',
         r: 'inherit',

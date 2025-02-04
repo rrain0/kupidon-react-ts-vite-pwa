@@ -185,7 +185,7 @@ const icPreviewNormal: AppWidgetStyle = t => [
   {
     buttonBgColor: t.previewButtonNorm.bg,
     buttonColor: t.previewButtonNorm.ct,
-    rippleRippleColor: t.previewButtonNorm.ctRipple,
+    rippleColor: t.previewButtonNorm.ctRipple,
     gradIconColor0: t.previewButtonNorm.ctGrad[0],
     gradIconColor1: t.previewButtonNorm.ctGrad[2],
     inFocus: {
@@ -234,7 +234,7 @@ const icPreviewMain: AppWidgetStyle = t => [
       sz: '100% 200%',
     },
     buttonColor: t.previewButtonMain.ct,
-    rippleRippleColor: t.previewButtonMain.ctRipple,
+    rippleColor: t.previewButtonMain.ctRipple,
     iconColor: t.previewButtonMain.ct,
     inFocus: {
       buttonTransition: 'background-position 0.3s',

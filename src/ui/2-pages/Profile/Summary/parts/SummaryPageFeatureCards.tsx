@@ -138,7 +138,7 @@ const PremiumCard = styled.div`
 const premiumCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
   buttonBgColor: t.boxWithWine.bg,
   buttonColor: t.boxWithWine.ct,
-  rippleRippleColor: t.boxWithWine.ctRipple,
+  rippleColor: t.boxWithWine.ctRipple,
   inFocus: {
     buttonBgColor: t.boxWithWine.bg,
     buttonBgIm: `linear-gradient(
@@ -167,7 +167,7 @@ const InviteFriendsCard = styled.div`
 const inviteFriendsCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
   buttonBgColor: t.boxWithViolet.bg,
   buttonColor: t.boxWithViolet.ct,
-  rippleRippleColor: t.boxWithViolet.ctRipple,
+  rippleColor: t.boxWithViolet.ctRipple,
   inFocus: {
     buttonBgColor: t.boxWithViolet.bg,
     buttonBgIm: `linear-gradient(
@@ -197,7 +197,7 @@ const SocialNetworksCard = styled.div`
 const socialNetworksCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
   buttonBgColor: t.boxWithBlue.bg,
   buttonColor: t.boxWithBlue.ct,
-  rippleRippleColor: t.boxWithBlue.ctRipple,
+  rippleColor: t.boxWithBlue.ctRipple,
   inFocus: {
     buttonBgColor: t.boxWithBlue.bg,
     buttonBgIm: `linear-gradient(

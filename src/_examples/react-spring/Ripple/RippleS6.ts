@@ -39,7 +39,7 @@ export namespace RippleS6 {
   export namespace SWidget {
     
     export const base: WidgetStyle = {
-      frame: {
+      rippleFrame: {
         ...abs,
         pointerEvents: 'none',
         r: 'inherit',

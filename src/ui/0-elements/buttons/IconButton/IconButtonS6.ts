@@ -74,7 +74,7 @@ export namespace IconButtonS6 {
         // type: text, shape: round, size: big
         export const sizeBig: WidgetStyle = [base, {
           button: { sz: 50, r: 'round', p: 11 },
-          rippleRipple: { mode: 'center' },
+          ripple: { mode: 'center' },
           iconSz: 'full',
         }]
         // type: text, shape: round, size: big2
@@ -117,7 +117,7 @@ export namespace IconButtonS6 {
         // type: filled, shape: round, size: normal
         export const sizeBig: WidgetStyle = [base, {
           button: { sz: 50, r: 'round', p: 11 },
-          rippleRipple: { mode: 'center' },
+          ripple: { mode: 'center' },
         }]
         // type: filled, shape: round, size: big2
         export const sizeBig2: WidgetStyle = [sizeBig, {
@@ -158,7 +158,7 @@ export namespace IconButtonS6 {
               // type: trans, shape: round, size: lg
               export const lg: WidgetStyle = [base, {
                 button: { sz: 50, r: 'round', p: 11 },
-                rippleRipple: { mode: 'center' },
+                ripple: { mode: 'center' },
                 iconSz: 'full',
               }]
               // type: trans, shape: round, size: lg2
@@ -196,7 +196,7 @@ export namespace IconButtonS6 {
               // type: filled, shape: round, size: lg
               export const lg: WidgetStyle = [base, {
                 button: { sz: 50, r: 'round', p: 11 },
-                rippleRipple: { mode: 'center' },
+                ripple: { mode: 'center' },
               }]
               // type: filled, shape: round, size: lg2
               export const lg2: WidgetStyle = [lg, {

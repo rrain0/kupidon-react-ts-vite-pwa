@@ -16,28 +16,28 @@ import modalFloor1 = StyleVals.modalFloor1
 export namespace BottomSheetS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
-    const frame = WidgetElem.of({
+    const sheetFrame = WidgetElem.of({
       ...up, className: 'rruiBottomSheetFrame',
       states: {
         dragging: WidgetAttr.of('data-dragging'),
       },
     })
     const sheet = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiBottomSheet',
+      upElem: sheetFrame, upSelector: '>', className: 'rruiBottomSheet',
     })
     return {
-      frame,
+      sheetFrame,
       sheet,
     } as const
   }
   
   const WidgetElems = buildWidgetElems()
   const WidgetStates = {
-    dragging: WidgetState.of([WidgetElems.frame, WidgetElems.frame.ss!.dragging]),
+    dragging: WidgetState.of([WidgetElems.sheetFrame, WidgetElems.sheetFrame.ss!.dragging]),
   }
   
   export const W = Widget.of({
-    rootElem: WidgetElems.frame,
+    rootElem: WidgetElems.sheetFrame,
     elems: WidgetElems,
     states: WidgetStates,
   })
@@ -49,7 +49,7 @@ export namespace BottomSheetS6 {
   
   export namespace Parts {
     export const base = {
-      frame: {
+      sheetFrame: {
         ...fixed,
         z: modalFloor1,
         display: 'grid',

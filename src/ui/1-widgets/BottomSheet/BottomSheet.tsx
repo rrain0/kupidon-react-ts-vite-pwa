@@ -113,12 +113,12 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
   
   //useLayoutEffect(() => console.log('state',state), [state])
   
-  const dataDragging = BottomSheetS6.W.els.frame.ss!.dragging.n
+  const dataDragging = BottomSheetS6.W.els.sheetFrame.ss!.dragging.n
   
   return (
     <animated.div
       data-display-name="Bottom Sheet Frame"
-      className={clsx(BottomSheetS6.W.els.frame.n, className)}
+      className={clsx(BottomSheetS6.W.els.sheetFrame.n, className)}
       // @ts-expect-error
       style={{
         ...bgDim && {

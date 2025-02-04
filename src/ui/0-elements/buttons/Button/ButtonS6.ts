@@ -1,4 +1,3 @@
-import { ObjectU } from '@util/common/ObjectU.ts'
 import {
   WidgetElem,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
@@ -16,7 +15,6 @@ import resetButton = WidgetStyleCommon.resetButton
 import row = WidgetStyleCommon.row
 import abs = WidgetStyleCommon.abs
 import Txt = WidgetStyleCommon.Txt
-import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
 
@@ -34,7 +32,7 @@ export namespace ButtonS6 {
     return {
       button,
       border,
-      ...ObjectPrefixCapitalizeKeys('ripple', rippleElems),
+      ...rippleElems,
     } as const
   }
   
@@ -134,7 +132,7 @@ export namespace ButtonS6 {
         export const baseColor: AppWidgetStyle = t => ({
           buttonBgColor: t.buttonNormal.bg[0],
           buttonColor: t.buttonNormal.ct[0],
-          rippleRippleColor: t.ripple.ct,
+          rippleColor: t.ripple.ct,
           inFocus: {
             buttonBgColor: t.buttonNormal.bgFocus[0],
             buttonColor: t.buttonNormal.ctFocus[0],
@@ -250,7 +248,7 @@ export namespace ButtonS6 {
         export const baseColor: AppWidgetStyle = t => ({
           buttonColor: t.buttonNormal.bg[0],
           borderBdColor: t.buttonNormal.bg[0],
-          rippleRippleColor: t.ripple.ctOnTransparent,
+          rippleColor: t.ripple.ctOnTransparent,
           inFocus: {
             buttonBgColor: t.buttonNormal.bgFocus[0],
             buttonColor: t.buttonNormal.ctFocus[0],
@@ -341,7 +339,7 @@ export namespace ButtonS6 {
         
         export const baseColor: AppWidgetStyle = t => ({
           buttonColor: t.page.ct2,
-          rippleRippleColor: t.ripple.ctOnTransparent,
+          rippleColor: t.ripple.ctOnTransparent,
           inFocus: {
             buttonBgColor: t.buttonTransparent.bgFocus[0],
           },
@@ -354,7 +352,7 @@ export namespace ButtonS6 {
           // type: text, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
             buttonColor: t.page.ct2,
-            rippleRippleColor: t.ripple.ctOnTransparent,
+            rippleColor: t.ripple.ctOnTransparent,
             inFocus: {
               buttonBgColor: t.buttonTransparent.bgFocus[0],
             },
@@ -362,7 +360,7 @@ export namespace ButtonS6 {
           // type: text, color: normal2
           export const normal2: AppWidgetStyle = t => [baseColor, {
             buttonColor: t.buttonNormal.bg[0],
-            rippleRippleColor: t.ripple.ctOnTransparent,
+            rippleColor: t.ripple.ctOnTransparent,
             inFocus: {
               buttonBgColor: t.buttonTransparent.bgFocus[0],
             },
