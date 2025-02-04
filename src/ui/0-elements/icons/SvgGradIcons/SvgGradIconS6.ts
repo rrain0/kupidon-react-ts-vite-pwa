@@ -4,7 +4,7 @@ import { WidgetElem, WidgetProp } from 'src/mini-libs/widget-style-6/WidgetEntit
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-  WidgetStyle, WidgetStyleObj,
+  WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
@@ -39,11 +39,11 @@ export namespace SvgGradIconS6 {
   
   export namespace S0 {
     
-    export const base = {
+    export const base: WidgetStyle = {
       gradIcon: {
         sz: 'auto',
       },
-    } satisfies WidgetStyleObj
+    }
     
     export const baseColor: AppWidgetStyle = t => ({
       gradIcon: {
@@ -64,11 +64,11 @@ export namespace SvgGradIconS6 {
   
   
   export namespace Parts {
-    export const base = {
+    export const base: WidgetStyle = {
       gradIcon: {
         sz: 'auto',
       },
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

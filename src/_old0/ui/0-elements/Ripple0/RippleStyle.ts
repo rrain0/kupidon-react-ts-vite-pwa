@@ -10,7 +10,7 @@ import CssProp = WidgetStyle0.CssProp
 export namespace RippleStyle {
   
   export const El = function() {
-    const frame = new Elem(RippleS6.W.els.frame.n, { }, {
+    const frame = new Elem(RippleS6.W.els.rippleFrame.n, { }, {
       mode: new CssPropEnum(
         RippleS6.W.els.ripple.ps!.mode.n,
         ['center', 'pointer']

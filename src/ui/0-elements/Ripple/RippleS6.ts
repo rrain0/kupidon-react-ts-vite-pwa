@@ -2,7 +2,7 @@ import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-  WidgetStyle, WidgetStyleObj,
+  WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   WidgetElem, WidgetProp, WidgetPropValueType,
@@ -17,24 +17,24 @@ export namespace RippleS6 {
   
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
-    const frame = WidgetElem.of({
+    const rippleFrame = WidgetElem.of({
       ...up, className: 'rruiRippleFrame',
     })
     const ripple = WidgetElem.of({
-      upElem: frame, upSelector: '>', className: 'rruiRippleRipple',
+      upElem: rippleFrame, upSelector: '>', className: 'rruiRippleRipple',
       props: {
         color: AdditionalProps.varColor,
         mode: WidgetProp.ofName<'center' | 'pointer'>('--ripple-mode'),
       },
     })
-    return { frame, ripple } as const
+    return { rippleFrame, ripple } as const
   }
   
   const WidgetElems = buildWidgetElems()
   const modeProp = WidgetElems.ripple.ps!.mode
   export type RippleMode = WidgetPropValueType<typeof modeProp>
   
-  export const W = Widget.of({ rootElem: WidgetElems.frame, elems: WidgetElems })
+  export const W = Widget.of({ rootElem: WidgetElems.rippleFrame, elems: WidgetElems })
   
   export const t0 = (style: WidgetStyle) => () => W.t(undefined, style)
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
@@ -42,7 +42,7 @@ export namespace RippleS6 {
   
   
   export namespace Parts {
-    export const base = {
+    export const base: WidgetStyle = {
       rippleFrame: {
         ...abs,
         pointerEvents: 'none',
@@ -63,7 +63,7 @@ export namespace RippleS6 {
         // TODO Style bgColor: 'varRippleColor'
         bgColor: `var(${W.els.ripple.ps!.color.n})`,
       },
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

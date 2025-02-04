@@ -157,6 +157,8 @@ export namespace WidgetProps {
   export const backgroundSize = WidgetProp.ofName('background-size', transformArrLenValue)
   
   export const border = WidgetProp.ofName('border', transformNullFalseToNone)
+  export const borderWidth = WidgetProp.ofName('border-width', transformLenValue)
+  export const borderStyle = WidgetProp.ofName('border-style', transformNullFalseToNone)
   export const borderColor = WidgetProp.ofName('border-color', transformNullFalseToTransparent)
   export const borderRadius = WidgetProp.ofName('border-radius', transformRadiusAnyValue)
   

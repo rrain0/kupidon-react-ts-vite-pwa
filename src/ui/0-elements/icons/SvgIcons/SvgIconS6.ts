@@ -4,7 +4,7 @@ import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-  WidgetStyle, WidgetStyleObj,
+  WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
@@ -39,11 +39,11 @@ export namespace SvgIconS6 {
   
   export namespace S0 {
     
-    export const base = {
+    export const base: WidgetStyle = {
       icon: {
         sz: 'auto',
       },
-    } satisfies WidgetStyleObj
+    }
     
     export const baseColor: AppWidgetStyle = t => ({
       icon: {
@@ -63,11 +63,11 @@ export namespace SvgIconS6 {
   
   
   export namespace Parts {
-    export const base = {
+    export const base: WidgetStyle = {
       icon: {
         sz: 'auto',
       },
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

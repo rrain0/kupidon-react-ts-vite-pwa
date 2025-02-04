@@ -1,4 +1,4 @@
-import { WidgetStyleObj } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyle, WidgetStyleObj } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
 
@@ -33,7 +33,7 @@ export namespace WidgetStyleCommon {
   export const gridC: WidgetStyleObj = {
     display: 'grid', placeItems: 'center',
   }
-  export const ___gridStackC: WidgetStyleObj = {
+  export const ___gridStackC: WidgetStyle = {
     display: 'grid', placeItems: 'center', grid: 'stack',
     // TODO Style  '& > *': { area: 'stack' }
     '& > *': { area: 'stack' },
@@ -47,7 +47,7 @@ export namespace WidgetStyleCommon {
   }
   
   
-  export const reset: WidgetStyleObj = (() => {
+  export const reset: WidgetStyle = (() => {
     const reset: WidgetStyleObj = {
       //appearance: 'none',
       boxSizing: 'border-box',
@@ -63,7 +63,7 @@ export namespace WidgetStyleCommon {
     }
   })()
   
-  export const resetButton: WidgetStyleObj = {
+  export const resetButton: WidgetStyle = {
     ...reset,
     cursor: 'pointer',
     hover: noBorderOutlineBoxShadow,

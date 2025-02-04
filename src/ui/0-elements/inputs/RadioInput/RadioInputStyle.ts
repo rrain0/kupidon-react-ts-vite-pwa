@@ -24,7 +24,7 @@ export namespace RadioInputStyle {
     export const iconWrapClassName = 'rrainuiIconWrap'
     export const iconClassName = SvgIconS.El.icon.name
     export const borderClassName = 'rrainuiBorder'
-    export const rippleFrameClassName = RippleS6.W.els.frame.n
+    export const rippleFrameClassName = RippleS6.W.els.rippleFrame.n
     
     export const frameClass = '.'+frameClassName
     export const inputClass = '.'+inputClassName

@@ -92,6 +92,11 @@ export function isStyleValue<T, SV extends StyleValue>(value: T | SV): value is 
 
 
 
+export type WidgetStyleObj = { [selectorProp: string]: StyleValue }
+
+
+
+
 // TODO Доделать StyleValue в перемешку со StyleRecord & StyleArray
 // Если быть точным в массиве пока что может быть или StyleValue или всё остальное, но не в перемешку
 
@@ -101,7 +106,6 @@ export type WidgetStyle =
   | WidgetStyle[]
 
 
-export type WidgetStyleObj = { [selectorProp: string]: WidgetStyle }
 
 
 export type GetWidgetStyleWithProps<Props> = (props: Props) => WidgetStyleWithProps<Props>

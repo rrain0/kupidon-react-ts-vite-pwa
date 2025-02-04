@@ -5,7 +5,6 @@ import {
   AppWidgetStyle,
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-  WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
@@ -71,7 +70,7 @@ export namespace BottomSheetBasicS6 {
   const WidgetStates = BottomSheetS6.W.states
   
   export const W = Widget.of({
-    rootElem: WidgetElems.frame,
+    rootElem: WidgetElems.sheetFrame,
     elems: WidgetElems,
     states: WidgetStates,
   })
@@ -82,8 +81,7 @@ export namespace BottomSheetBasicS6 {
   
   
   export namespace Parts {
-    export const base = {
-      ...BottomSheetS6.Parts.base,
+    export const base: WidgetStyle = [BottomSheetS6.Parts.base, {
       header: {
         p: 10, ...colC, g: 6,
         touchAction: 'none',
@@ -108,7 +106,7 @@ export namespace BottomSheetBasicS6 {
         headerCursor: 'grabbing',
         headerHandleBgColor: '#000000',
       },
-    } satisfies WidgetStyleObj
+    }]
     
     export namespace Type {
       

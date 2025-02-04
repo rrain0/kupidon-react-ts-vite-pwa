@@ -20,7 +20,7 @@ export namespace RippleS {
   
   
   export const W = (() => {
-    const frame = new Elem(RippleS6.W.els.frame.n, {
+    const frame = new Elem(RippleS6.W.els.rippleFrame.n, {
       normal: CssPseudo.empty,
     }, { })
     const ripple = new Elem(RippleS6.W.els.ripple.n, { }, {

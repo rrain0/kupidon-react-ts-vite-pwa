@@ -6,7 +6,6 @@ import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-  WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 
 
@@ -54,9 +53,9 @@ import {
   
   
   export namespace Parts {
-    export const base = {
+    export const base: WidgetStyle = {
     
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

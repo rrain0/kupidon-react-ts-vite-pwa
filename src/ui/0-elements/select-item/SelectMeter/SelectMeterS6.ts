@@ -4,7 +4,6 @@ import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-  WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import row = WidgetStyleCommon.row
@@ -45,7 +44,7 @@ export namespace SelectMeterS6 {
   
   
   export namespace Parts {
-    export const base = {
+    export const base: WidgetStyle = {
       meter: {
         w: 'ct', h: 'auto',
         ...row, g: 6,
@@ -63,7 +62,7 @@ export namespace SelectMeterS6 {
         sz: 8, r: 'round',
         bgColor: '#444444',
       },
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

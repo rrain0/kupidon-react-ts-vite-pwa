@@ -4,7 +4,6 @@ import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-  WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
@@ -48,7 +47,7 @@ export namespace BottomSheetS6 {
   
   
   export namespace Parts {
-    export const base = {
+    export const base: WidgetStyle = {
       sheetFrame: {
         ...fixed,
         z: modalFloor1,
@@ -68,7 +67,7 @@ export namespace BottomSheetS6 {
         pointer: true,
         overflow: 'hidden',
       },
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

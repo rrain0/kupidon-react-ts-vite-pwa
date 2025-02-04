@@ -91,9 +91,13 @@ export const CommonProps = (() => {
     bgSz: WidgetProps.backgroundSize,
     
     border: WidgetProps.border,
+    borderWidth: WidgetProps.borderWidth,
+    borderStyle: WidgetProps.borderStyle,
     borderColor: WidgetProps.borderColor,
     borderRadius: WidgetProps.borderRadius,
     bd: WidgetProps.border,
+    bdWidth: WidgetProps.borderWidth,
+    bdStyle: WidgetProps.borderStyle,
     bdColor: WidgetProps.borderColor,
     radius: WidgetProps.borderRadius,
     r: WidgetProps.borderRadius,

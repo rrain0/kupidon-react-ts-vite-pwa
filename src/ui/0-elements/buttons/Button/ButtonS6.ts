@@ -6,7 +6,6 @@ import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-  WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
@@ -58,7 +57,7 @@ export namespace ButtonS6 {
   
   export namespace Parts {
     
-    export const base = {
+    export const base: WidgetStyle = {
       button: [resetButton, {
         pos: 'rel',
         ...row,
@@ -77,7 +76,7 @@ export namespace ButtonS6 {
         r: 'inherit',
       },
       ripple: RippleS6.Parts.base,
-    } satisfies WidgetStyleObj
+    }
     
     export namespace Type {
       

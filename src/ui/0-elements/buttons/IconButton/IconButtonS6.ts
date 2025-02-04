@@ -3,10 +3,8 @@ import {
   AppWidgetStyle,
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-  WidgetStyleObj,
 } from 'mini-libs/widget-style-6/WidgetStyle'
 import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -43,11 +41,11 @@ export namespace IconButtonS6 {
   
   export namespace S0 {
     
-    export const base = {
-      ...ButtonS6.Parts.base,
-      ...SvgIconS6.Parts.base,
-      ...SvgGradIconS6.Parts.base,
-    } satisfies WidgetStyleObj
+    export const base: WidgetStyle = [
+      ButtonS6.Parts.base,
+      SvgIconS6.Parts.base,
+      SvgGradIconS6.Parts.base,
+    ]
     
     // Transparent
     export namespace Trans {
@@ -142,11 +140,11 @@ export namespace IconButtonS6 {
   
   
   export namespace Parts {
-    export const base = {
-      ...ButtonS6.Parts.base,
-      ...SvgIconS6.Parts.base,
-      ...SvgGradIconS6.Parts.base,
-    } satisfies WidgetStyleObj
+    export const base: WidgetStyle = [
+      ButtonS6.Parts.base,
+      SvgIconS6.Parts.base,
+      SvgGradIconS6.Parts.base,
+    ]
     
     export namespace Type {
       
