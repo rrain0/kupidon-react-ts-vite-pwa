@@ -92,7 +92,7 @@ export function isStyleValue<T, SV extends StyleValue>(value: T | SV): value is 
 
 
 
-// TODO Доделать StyleValue в перемешку с остальным
+// TODO Доделать StyleValue в перемешку со StyleRecord & StyleArray
 // Если быть точным в массиве пока что может быть или StyleValue или всё остальное, но не в перемешку
 
 export type WidgetStyle =
@@ -121,4 +121,47 @@ export type AppWidgetStyle = WidgetStyleWithProps<AppTheme.Theme>
 export type AppStyle = (theme: AppTheme.Theme) => string
 
 
+
+
+
+
+export type StyleColors = { [color: string]: AppWidgetStyle }
+export type StyleSizes = { [size: string]: AppWidgetStyle }
+export type StyleSize = { Size: StyleSizes }
+export type StyleShapes = { [shape: string]: StyleSize }
+export type StyleType = { Shape: StyleShapes, Color: StyleColors }
+export type StyleParts = { Type: { [type: string]: StyleType } }
+
+
+export type CombinedStyles<Parts extends StyleParts> = {
+  [Type in keyof Parts['Type']]: {
+    [Shape in keyof Parts['Type'][Type]['Shape']]: {
+      [Size in keyof Parts['Type'][Type]['Shape'][Shape]['Size']]: {
+        [Color in keyof Parts['Type'][Type]['Color']]: AppWidgetStyle
+      }
+    }
+  }
+}
+
+
+
+export function combineStyles<const Parts extends StyleParts>(
+  parts: Parts
+): CombinedStyles<Parts> {
+  const acc = { }
+  for (const [typeKey, sizesColors] of Object.entries(parts.Type)) {
+    const { Shape: shapes, Color: colors } = sizesColors
+    const colorEntries = Object.entries(colors)
+    for (const [shapeKey, shape] of Object.entries(shapes)) {
+      const { Size: sizes } = shape
+      for (const [sizeKey, size] of Object.entries(sizes)) {
+        for (const [colorKey, color] of colorEntries) {
+          (((acc[typeKey] ??= { })[shapeKey] ??= { })[sizeKey] ??= { })
+            [colorKey] = [size, color]
+        }
+      }
+    }
+  }
+  return acc as CombinedStyles<Parts>
+}
 
