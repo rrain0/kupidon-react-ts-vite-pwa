@@ -74,11 +74,8 @@ const SelectItem = React.memo(React.forwardRef<HTMLButtonElement, SelectItemProp
               <PlusIc />
             </div>
           )}
-          {!isAdd && (
-            <>
-              {children}
-            </>
-          )}
+          {!isAdd && children}
+          {/* TODO Style - add next action button */}
         </Button>
         
         {!isAdd && (

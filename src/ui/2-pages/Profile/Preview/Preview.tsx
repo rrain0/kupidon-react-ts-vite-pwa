@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useDrag } from '@use-gesture/react'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
@@ -15,7 +14,6 @@ import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
@@ -24,7 +22,6 @@ import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { MathU } from 'src/util/common/MathU'
@@ -47,6 +44,7 @@ import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
 import gridC = EmotionCommon.gridC
 import abs = EmotionCommon.abs
+import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 
 
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
@@ -423,7 +421,7 @@ const Preview = React.memo((props: PreviewProps) => {
                         <Photo src={placeholderIm} />
                         <Blur />
                         <NoImagesBox>
-                          <PictureIc css={imSmallPlaceholderIcS} />
+                          <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
                           <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
                         </NoImagesBox>
                       </>
@@ -571,14 +569,11 @@ const NoImagesBox = styled.div`
   ;
   color: ${p => p.theme.boxTransparent.ct};
 `
-const imSmallPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${SvgIconS6.t(imPlaceholderIcS)(t)};
-  ${SvgIconS.El.icon.thiz()} {
-    grid-area: p;
-    ${SvgIconS.El.icon.props.size.set('112%')}
-    ${SvgIconS.El.icon.props.color.set(t.boxTransparent.ct)}
-  }
-`
+const imSmallPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
+  icon: {
+    area: 'p', sz: '112%', color: t.boxTransparent.ct,
+  },
+}]
 const NoImagesTitle = styled.div`
   grid-area: t;
   ${gridC};

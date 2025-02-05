@@ -25,9 +25,9 @@ export namespace Pages {
   
   
   
-  export const page = css`
+  export const pageCol = css`
     min-width: 220px;
-    width: 100dvw;
+    width: min(100%, 100dvw);
     min-height: max(100dvh, 220px);
     //height: auto;
     //max-height: fit-content;
@@ -35,11 +35,11 @@ export namespace Pages {
     ${col};
   `
   export const Page = styled.main`
-    ${page};
+    ${pageCol};
     ${p => pageColors(p.theme)};
   `
   export const SimplePage = styled.main`
-    ${page};
+    ${pageCol};
     ${p => simplePageColors(p.theme)}
   `
   

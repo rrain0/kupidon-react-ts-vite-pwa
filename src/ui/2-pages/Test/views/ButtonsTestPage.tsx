@@ -77,11 +77,13 @@ export default ButtonsTestPage
 
 
 const BlocksContainer = styled.div`
+  max-width: 100%;
   ${rowWrap};
   gap: 30px;
 `
 
 const Buttons = styled.div`
+  max-width: 100%;
   ${col};
   gap: 10px;
   padding: 10px;
@@ -91,8 +93,10 @@ const Buttons = styled.div`
 const ButtonContainer = styled.div`
   ${col};
   width: 400px;
+  max-width: 100%;
   gap: 10px;
 `
 const ButtonBox = styled.div`
   height: fit-content;
+  max-width: 100%;
 `

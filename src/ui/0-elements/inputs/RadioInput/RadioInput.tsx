@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
@@ -146,6 +147,10 @@ const inputStyle = css`
 const activeIcWrapStyle = css`
   display: none;
   input:checked ~ & { display: flex; }
+  // TODO Style - make NOT this selector
+  /* ${SvgIconS6.t0({
+    iconColor: `var(${RadioInputStyle.Prop.activeIconColor})`,
+  })()} */
   ${SvgIconS.El.icon.sel()} {
     ${SvgIconS.El.icon.props.color.name}: var(${RadioInputStyle.Prop.activeIconColor})
   }
@@ -155,6 +160,10 @@ const activeIcWrapStyle = css`
 const inactiveWrapStyle = css`
   display: flex;
   input:checked ~ & { display: none }
+  // TODO Style - make NOT this selector
+  /* ${SvgIconS6.t0({
+    iconColor: `var(${RadioInputStyle.Prop.inactiveIconColor})`,
+  })()} */
   ${SvgIconS.El.icon.sel()} {
     ${SvgIconS.El.icon.props.color.name}: var(${RadioInputStyle.Prop.inactiveIconColor})
   }

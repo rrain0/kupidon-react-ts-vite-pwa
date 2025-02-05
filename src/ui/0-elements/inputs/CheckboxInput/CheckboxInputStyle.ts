@@ -4,10 +4,10 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import Elem = WidgetStyle0.Elem
 import CssProp = WidgetStyle0.CssProp
+import CssPropEnum = WidgetStyle0.CssPropEnum
 import CssAttr = WidgetStyle0.CssAttr
 import CssPseudo = WidgetStyle0.CssPseudo
 import CssWidget = WidgetStyle0.CssWidget
-import { RippleStyle } from 'src/_old0/ui/0-elements/Ripple0/RippleStyle.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import hoverable = EmotionCommon.hoverable
@@ -23,7 +23,18 @@ import row = EmotionCommon.row
 
 export namespace CheckboxInputStyle {
   
-  
+  const RippleEl = function() {
+    const frame = new Elem(RippleS6.W.els.rippleFrame.n, { }, {
+      mode: new CssPropEnum(
+        RippleS6.W.els.ripple.ps!.mode.n,
+        ['center', 'pointer']
+      ),
+      color: new CssProp(RippleS6.W.els.ripple.ps!.color.n),
+    })
+    const ripple = new Elem(RippleS6.W.els.ripple.n, { }, { })
+    
+    return { frame, ripple } as const
+  }()
   export const El = function() {
     const frame = new Elem('rrainuiFrame', { }, {
       color: CssProp.color,
@@ -45,7 +56,7 @@ export namespace CheckboxInputStyle {
     const iconChecked = new Elem(SvgIconS6.W.els.icon.n, { }, {
       color: new CssProp(SvgIconS6.W.els.icon.ps!.color.n),
     })
-    const ripple = RippleStyle.El.frame
+    const ripple = RippleEl.frame
     
     return { frame, input, iconBox, iconBoxChecked, iconChecked, ripple } as const
   }()

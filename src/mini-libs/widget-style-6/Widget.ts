@@ -39,6 +39,7 @@ Unregistered (unknown) CSS properties' names are automatically transformed from 
 export class Widget<
   const out Es extends RecordRo<string, WidgetElem> = any,
   const out Ss extends RecordRo<string, WidgetTransformer> = any,
+  const out Ps extends RecordRo<string, WidgetAnyPropTransformer> = any,
 > {
   
   constructor(
@@ -46,7 +47,9 @@ export class Widget<
     readonly elems: Es,
     readonly states?: Ss,
     // Additional CSS prop transformers
-    readonly props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
+    readonly props?: Ps,
+    readonly commonStates?: RecordRo<string, WidgetTransformer>,
+    readonly commonProps?: RecordRo<string, WidgetAnyPropTransformer>,
   ) { }
   
   static of<

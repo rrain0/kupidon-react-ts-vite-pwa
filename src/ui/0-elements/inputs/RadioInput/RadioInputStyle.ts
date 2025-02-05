@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
@@ -22,7 +22,7 @@ export namespace RadioInputStyle {
     export const frameClassName = 'rrainuiFrame'
     export const inputClassName = 'rrainuiInput'
     export const iconWrapClassName = 'rrainuiIconWrap'
-    export const iconClassName = SvgIconS.El.icon.name
+    export const iconClassName = SvgIconS6.W.els.icon.n
     export const borderClassName = 'rrainuiBorder'
     export const rippleFrameClassName = RippleS6.W.els.rippleFrame.n
     

@@ -61,7 +61,7 @@ const ButtonsContainer = styled.div`
 const CancelButton = React.memo(({ onClick }: { onClick: Callback }) => {
   return (
     <Button
-      css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
+      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg2.normal2)}
       onClick={onClick}
     >
       <CrossIc />
@@ -72,7 +72,7 @@ const CancelButton = React.memo(({ onClick }: { onClick: Callback }) => {
 const AcceptButton = React.memo(({ onClick }: { onClick: Callback }) => {
   return (
     <Button
-      css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.accent)}
+      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg2.accent)}
       onClick={onClick}
     >
       <CheckmarkIc />

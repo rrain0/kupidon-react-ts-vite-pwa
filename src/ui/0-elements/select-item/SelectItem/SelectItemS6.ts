@@ -48,6 +48,12 @@ export namespace SelectItemS6 {
       SvgIconS6.buildWidgetElems({ upElem: addBox, upSelector: '>' })
     )
     
+    // TODO Style - make widget builders with its elems, states & props
+    // Element consumes underlying button WIDGET state
+    const edit = WidgetElem.of({
+      upElem: selectItem, upSelector: '>', className: '',
+      //states: ButtonS6.W.states!,
+    })
     const editBox = WidgetElem.of({
       upElem: selectItem, upSelector: '>', className: 'rruiEditButtonBox',
     })
@@ -167,6 +173,7 @@ export namespace SelectItemS6 {
             {
               buttonColor: t.boxNormal.ct[0],
               buttonBgColor: t.boxNormal.bg2[0],
+              editIconColor: t.boxNormal.ct1b[0],
               inFocus: {
                 buttonColor: t.boxNormal.ct[0],
                 buttonBgColor: t.boxNormal.cta2,
