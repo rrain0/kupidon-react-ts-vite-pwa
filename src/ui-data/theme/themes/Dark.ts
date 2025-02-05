@@ -26,7 +26,7 @@ export const DarkProps: ThemeProps = {
   navButton: {
     bgFocus:    ['#2e3440'],
     ct:         ['#7b7b7b'],
-    cta:        ['#bdbdbd'],
+    cta:        '#bdbdbd',
   },
   
   boxNormal: {
@@ -40,7 +40,7 @@ export const DarkProps: ThemeProps = {
     ct2:        ['#999999'],
     ct2b:       ['#909090'],
     ct2c:       '#aaaaaa',
-    ct3:        ['#7b7b7b'],
+    ct3:        '#7b7b7b',
     ct3d:       ['#838383'],
     ct3e:       ['#777777'],
     ct4:        ['#666666'],
@@ -48,9 +48,9 @@ export const DarkProps: ThemeProps = {
     ct5:        '#42414c',
     ct6:        '#505050',
     
-    cta:   ['#bdbdbd'],
+    cta:   '#bdbdbd',
     cta2:  '#2e343f',
-    cta3:  ['#2e343f'],
+    cta3:  '#2e343f',
     
     shadow:     ['#00000000'],
   },
@@ -215,7 +215,7 @@ export const DarkProps: ThemeProps = {
     bg:                   ['#121212'],
     ct:              ['#ffffff'],
     ct2:             ['#b8b8b8'],
-    ct3:             ['#ffffff'],
+    ct3:             '#ffffff',
     accentNormal:         ['#bb86fc'],
     accentLoadingBg:      ['#e0e0e0'],
     accentLoadingCt: ['#616161'],

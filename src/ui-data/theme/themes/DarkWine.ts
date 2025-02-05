@@ -23,7 +23,7 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   navButton: { ...DarkProps.navButton,
     bgFocus:   ['#2e3440'],
     ct:        ['#7b7b7b'],
-    cta:       ['#b7405c'], // ['#984559']
+    cta:       '#b7405c', // ['#984559']
   },
   
   
@@ -35,9 +35,9 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     ct:        ['#000000'],
     ct2:       ['#000000'],
     ct3:       '#000000',
-    // cta:      ['#b7405c'], // ['#984559']
+    // cta:      '#b7405c', // ['#984559'
     // cta2:     '#b7405c',
-    // cta3:     ['#BB2649'],
+    // cta3:     '#BB2649',
   },
   
   
@@ -154,7 +154,7 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bg:                   ['#121212'],
     ct:              ['#ffffff'],
     ct2:             ['#b8b8b8'],
-    ct3:             ['#ffffff'],
+    ct3:             '#ffffff',
     accentNormal:         ['#bb86fc'],
     accentLoadingBg:      ['#e0e0e0'],
     accentLoadingCt: ['#616161'],
@@ -177,7 +177,7 @@ export const DarkWine = {
   type: 'dark',
   name: 'Dark Wine' as const,
   icon: styled.div(themeIconCss({
-    accentColor: DarkWineProps.boxNormal.cta3[0],
+    accentColor: DarkWineProps.boxNormal.cta3,
     bgColor1:   DarkWineProps.boxNormal.cta2,
     bgColor2:   DarkWineProps.page.bg,
   })),

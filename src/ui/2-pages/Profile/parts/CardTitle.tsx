@@ -12,7 +12,7 @@ export const CardTitleSecondary = styled.h4`
   
   ${Txt.lg20Wide};
   
-  color: ${p => p.theme.boxNormal.ct3[0]};
+  color: ${p => p.theme.boxNormal.ct3};
 `
 
 export const CardTitleNormal = styled(CardTitleSecondary)`

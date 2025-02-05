@@ -25,7 +25,7 @@ export const LightProps: ThemeProps = {
   navButton: {
     bgFocus:      ['#f0f0f0'],
     ct:           ['#7b7b7b'],
-    cta:          ['#333333'],
+    cta:          '#333333',
   },
   
   
@@ -41,7 +41,7 @@ export const LightProps: ThemeProps = {
     ct2:        ['#555555'],
     ct2b:       ['#5b5b5b'],
     ct2c:       '#666666',
-    ct3:        ['#7b7b7b'],
+    ct3:        '#7b7b7b',
     ct3d:       ['#838383'],
     ct3e:       ['#999999'],
     ct4:        ['#d1d1d1'],
@@ -49,9 +49,9 @@ export const LightProps: ThemeProps = {
     ct5:        '#e3e3e3',
     ct6:        '#ececec',
     
-    cta:   ['#333333'],
-    cta2:  '#d1d1d1',
-    cta3:  ['#d1d1d1'],
+    cta:   '#333333',
+    cta2:  '#cbcad0',
+    cta3:  '#d1d1d1',
     
     shadow:          ['#00000026'],
   },
@@ -249,7 +249,7 @@ export const LightProps: ThemeProps = {
   previewPhotosProgress: {
     bg:          '#00000066',
     ct:          '#D9D9D999',
-    ctAcc:       '#FFFFFF',
+    cta:       '#FFFFFF',
   },
   previewOverlayInfoMatchIndicator: {
     bg:         '#8D8D8D99',
@@ -280,7 +280,7 @@ export const LightProps: ThemeProps = {
     bg:                   ['#ffffff'],
     ct:              ['#757575'],
     ct2:             ['#b2b2b2'],
-    ct3:             ['#000000'],
+    ct3:             '#000000',
     accentNormal:         ['#bb86fc'],
     accentLoadingBg:      ['#e0e0e0'],
     accentLoadingCt: ['#616161'],

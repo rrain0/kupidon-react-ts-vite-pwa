@@ -35,7 +35,7 @@ Unregistered (unknown) CSS properties' names are automatically transformed from 
 
 
 
-
+// TODO Style - WidgetElem is Widget !!!
 export class Widget<
   const out Es extends RecordRo<string, WidgetElem> = any,
   const out Ss extends RecordRo<string, WidgetTransformer> = any,
@@ -55,13 +55,22 @@ export class Widget<
   static of<
     const Es extends RecordRo<string, WidgetElem> = any,
     const Ss extends RecordRo<string, WidgetTransformer> = any,
-  >(params: {
+  >({
+    rootElem,
+    elems,
+    states,
+    props,
+    commonStates = CommonStates,
+    commonProps = CommonProps,
+  }: {
     rootElem: WidgetElem | undefined,
     elems: Es,
     states?: Ss | undefined,
     props?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
+    commonStates?: RecordRo<string, WidgetTransformer> | undefined,
+    commonProps?: RecordRo<string, WidgetAnyPropTransformer> | undefined,
   }): Widget<Es, Ss> {
-    return new Widget(params.rootElem, params.elems, params.states, params.props)
+    return new Widget(rootElem, elems, states, props, commonStates, commonProps)
   }
   
   // TODO Style - add param 'selectThis = true'
@@ -119,11 +128,14 @@ export const transformWidgetStyle = <Props>(
   const css = transform7(transform6(transform5(transform4(transform3(transform2(
     transform1(style, props),
     [
-      { ...CommonProps, ...widget.props }, // под индеком 0 идёт поиск через ===
-      { ...CommonStates, ...widget.states, ...widget.elems },
-      undefined,
-      undefined,
-      undefined,
+      widget.commonProps, // поиск через ===
+      widget.props, // поиск через ===
+      widget.commonStates, // поиск через startsWith
+      widget.states, // поиск через startsWith
+      widget.elems, // поиск через startsWith
+      undefined, // поиск через startsWith
+      undefined, // поиск через startsWith
+      undefined, // поиск через startsWith
     ]
   ))))))
   if (isObject(props) && isObject(style)) {

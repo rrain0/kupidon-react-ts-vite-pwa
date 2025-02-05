@@ -120,6 +120,6 @@ const thumbS = (t: AppTheme.Theme) => css`
   left: 0;
   width: var(--sz);
   height: var(--indicator-len);
-  background-color: ${t.previewPhotosProgress.ctAcc};
+  background-color: ${t.previewPhotosProgress.cta};
   ${round};
 `

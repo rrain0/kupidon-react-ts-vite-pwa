@@ -90,7 +90,7 @@ const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.a
 }]
 const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconH: '50%',
-  iconColor: t.boxNormal.ct3[0],
+  iconColor: t.boxNormal.ct3,
 }]
 const TitleFrame = styled.div`
   grid-area: title;
@@ -109,7 +109,7 @@ const ValueFrame = styled.div`
 const Value = styled.div`
   display: -webkit-box;
   
-  color: ${p => p.theme.boxNormal.ct3[0]};
+  color: ${p => p.theme.boxNormal.ct3};
   
   max-height: 40px;
   overflow: hidden;
@@ -127,6 +127,6 @@ const NextIconFrame = styled.div`
   place-items: center;
 `
 const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.auto.normal, {
-  iconSz: 24, iconColor: t.boxNormal.ct3[0],
+  iconSz: 24, iconColor: t.boxNormal.ct3,
 }]
 

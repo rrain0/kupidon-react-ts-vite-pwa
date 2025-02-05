@@ -61,7 +61,7 @@ export namespace AppTheme {
       ct2:        string[]
       ct2b:       string[]
       ct2c:       string
-      ct3:        string[]
+      ct3:        string
       ct3d:       string[]
       ct3e:       string[]
       ct4:        string[]
@@ -69,9 +69,9 @@ export namespace AppTheme {
       ct5:        string
       ct6:        string
       
-      cta:        string[]
+      cta:        string
       cta2:       string
-      cta3:       string[]
+      cta3:       string
       
       shadow:     string[]
     },
@@ -140,7 +140,7 @@ export namespace AppTheme {
     navButton: {
       bgFocus:   string[]
       ct:        string[]
-      cta:       string[]
+      cta:       string
     }
     
     gradIcon: {
@@ -289,7 +289,7 @@ export namespace AppTheme {
     previewPhotosProgress: {
       bg:          string
       ct:          string
-      ctAcc:       string
+      cta:       string
     }
     previewOverlayInfoMatchIndicator: {
       bg:         string
@@ -319,7 +319,7 @@ export namespace AppTheme {
       bg:                   string[]
       ct:                   string[]
       ct2:                  string[]
-      ct3:                  string[]
+      ct3:                  string
       accentNormal:         string[]
       accentLoadingBg:      string[]
       accentLoadingCt:      string[]

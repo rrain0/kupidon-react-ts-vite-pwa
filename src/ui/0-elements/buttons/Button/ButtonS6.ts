@@ -35,12 +35,16 @@ export namespace ButtonS6 {
     } as const
   }
   
-  const WidgetElems = buildWidgetElems()
-  const WidgetStates = {
-    inFocus: WidgetState.of([WidgetElems.button, CommonStates.inFocus]),
-    disabled: WidgetState.of([WidgetElems.button, CommonStates.disabled]),
-    error: WidgetState.of([WidgetElems.button, CommonStates.error]),
+  export function buildWidgetStates(elems: ReturnType<typeof buildWidgetElems>) {
+    return {
+      inFocus: WidgetState.of([elems.button, CommonStates.inFocus]),
+      disabled: WidgetState.of([elems.button, CommonStates.disabled]),
+      error: WidgetState.of([elems.button, CommonStates.error]),
+    } as const
   }
+  
+  const WidgetElems = buildWidgetElems()
+  const WidgetStates = buildWidgetStates(WidgetElems)
   const WidgetProps = { }
   
   export const W = Widget.of({

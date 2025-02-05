@@ -1,5 +1,4 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
 import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
@@ -8,7 +7,6 @@ import { EmptyS6 } from 'src/mini-libs/widget-style-6/EmptyS6.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
@@ -20,7 +18,6 @@ import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
-import Getter = TypeU.Getter
 import Heart2Ic = SvgIconsPack.Heart2Ic
 import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
@@ -217,7 +214,6 @@ const icPreviewNormal: AppWidgetStyle = t => [
       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
     },
   },
-
 ]
 const icPreviewMain: AppWidgetStyle = t => [
   IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
@@ -238,7 +234,7 @@ const icPreviewMain: AppWidgetStyle = t => [
     iconColor: t.previewButtonMain.ct,
     inFocus: {
       buttonTransition: 'background-position 0.3s',
-      buttonBgPos: '0 100%',
+      buttonBgPos: '0 30%',
     },
   },
   {

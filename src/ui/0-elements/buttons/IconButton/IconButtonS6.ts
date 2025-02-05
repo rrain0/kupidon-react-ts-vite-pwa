@@ -26,13 +26,19 @@ export namespace IconButtonS6 {
     return { ...buttonElems, ...iconElems, ...gradIconElems } as const
   }
   
+  export function buildWidgetStates(elems: ReturnType<typeof buildWidgetElems>) {
+    return ButtonS6.buildWidgetStates(elems)
+  }
+  
   const WidgetElems = buildWidgetElems()
-  const WidgetStates = ButtonS6.W.states!
+  const WidgetStates = buildWidgetStates(WidgetElems)
+  const WidgetProps = { }
   
   export const W = Widget.of({
     rootElem: WidgetElems.button,
     elems: WidgetElems,
     states: WidgetStates,
+    props: WidgetProps,
   })
   
   export const t0 = (style: WidgetStyle) => () => W.t(undefined, style)
@@ -101,15 +107,22 @@ export namespace IconButtonS6 {
       
       export namespace Color {
         // type: filled, color: accent
-        export const accent: AppWidgetStyle = t => [baseColor, ButtonS6.Parts.Type.filled.Color.accent, {
-          iconColor: t.buttonAccent.ct[0],
-          // todo gradIcon
-        }]
+        export const accent: AppWidgetStyle = t => [
+          baseColor,
+          ButtonS6.Parts.Type.filled.Color.accent,
+          {
+            iconColor: t.buttonAccent.ct[0],
+            // todo gradIcon
+          },
+        ]
         // type: filled, color: normal2
-        export const normal2: AppWidgetStyle = t => [baseColor, ButtonS6.Parts.Type.filled.Color.normal2, {
-          iconColor: t.buttonNormal.ct[0],
-          // todo gradIcon
-        }]
+        export const normal2: AppWidgetStyle = t => [
+          baseColor,
+          ButtonS6.Parts.Type.filled.Color.normal2, {
+            iconColor: t.buttonNormal.ct[0],
+            // todo gradIcon
+          },
+        ]
       }
       
       export namespace Round {

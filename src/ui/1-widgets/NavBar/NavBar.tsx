@@ -144,10 +144,10 @@ const nav = (t: AppTheme.Theme) => css`
   // link active selector
   // a.active &.btnClass > .iconClass
   a.active ${IconButtonS6.t(t => ({
-    buttonColor: t.navButton.cta[0],
+    buttonColor: t.navButton.cta,
   }))(t)}
   a.active ${IconButtonS6.t(t => ({
-    iconColor: t.navButton.cta[0],
+    iconColor: t.navButton.cta,
   }))(t)}
   a.active ${IconButtonS6.t(t => ({
     gradIconColor0: t.gradIcon.ct[0],

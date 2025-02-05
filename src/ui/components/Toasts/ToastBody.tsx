@@ -131,7 +131,7 @@ const CloseButton = styled.button`
   
   ${hoverable}{
     :hover>${SvgIconS.El.icon.sel()} {
-      ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.ct3[0]};
+      ${SvgIconS.El.icon.props.color.name}: ${p=>p.theme.toast.ct3};
     }
   }
 `

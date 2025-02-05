@@ -33,52 +33,60 @@ export namespace SelectItemS6 {
       },
     })
     
-    const buttonElems = ButtonS6.buildWidgetElems({ upElem: selectItem, upSelector: '>' })
+    const buttonElems = ButtonS6.buildWidgetElems({
+      upElem: selectItem, upSelector: '>',
+    })
     
     const meterBox = WidgetElem.of({
       upElem: selectItem, upSelector: '>', className: 'rruiMeterBox',
     })
-    const meterElems = SelectMeterS6.buildWidgetElems({ upElem: meterBox, upSelector: '>' })
+    const meterElems = SelectMeterS6.buildWidgetElems({
+      upElem: meterBox, upSelector: '>',
+    })
     
     const addBox = WidgetElem.of({
       upElem: buttonElems.button, upSelector: '>', className: 'rruiAddIconBox',
     })
-    const addElems = ObjectPrefixCapitalizeKeys(
-      'add',
-      SvgIconS6.buildWidgetElems({ upElem: addBox, upSelector: '>' })
-    )
+    const addElems = ObjectPrefixCapitalizeKeys('add', SvgIconS6.buildWidgetElems({
+      upElem: addBox, upSelector: '>',
+    }))
     
+    // TODO Style - make WidgetElem to become Widget
     // TODO Style - make widget builders with its elems, states & props
     // Element consumes underlying button WIDGET state
-    const edit = WidgetElem.of({
-      upElem: selectItem, upSelector: '>', className: '',
-      //states: ButtonS6.W.states!,
-    })
     const editBox = WidgetElem.of({
       upElem: selectItem, upSelector: '>', className: 'rruiEditButtonBox',
     })
+    const edit = WidgetElem.of({
+      upElem: editBox, upSelector: '', className: '',
+    })
     // TODO Style - edit widget states - include them in elements build function
-    const editElems = ObjectPrefixCapitalizeKeys(
-      'edit',
-      IconButtonS6.buildWidgetElems({ upElem: editBox, upSelector: '>' })
-    )
+    const _editElems = IconButtonS6.buildWidgetElems({
+      upElem: edit, upSelector: '>',
+    })
+    const editElems = ObjectPrefixCapitalizeKeys('edit', _editElems)
+    const _editStates = IconButtonS6.buildWidgetStates(_editElems)
+    // @ts-ignore // TODO Style
+    ;(edit.states as any) = _editStates
     
     return {
       selectItem,
       ...buttonElems,
       meterBox, ...meterElems,
       addBox, ...addElems,
-      editBox, ...editElems,
+      editBox, edit, ...editElems,
+    } as const
+  }
+  
+  export function buildWidgetStates(elems: ReturnType<typeof buildWidgetElems>) {
+    return {
+      ...ButtonS6.buildWidgetStates(elems),
+      selected: WidgetState.of([elems.selectItem, elems.selectItem.ss!.selected]),
     } as const
   }
   
   const WidgetElems = buildWidgetElems()
-  const WidgetStates = {
-    inFocus: WidgetState.of([WidgetElems.button, CommonStates.inFocus]),
-    disabled: WidgetState.of([WidgetElems.button, CommonStates.disabled]),
-    error: WidgetState.of([WidgetElems.button, CommonStates.error]),
-    selected: WidgetState.of([WidgetElems.selectItem, WidgetElems.selectItem.ss!.selected]),
-  }
+  const WidgetStates = buildWidgetStates(WidgetElems)
   const WidgetProps = { }
   
   export const W = Widget.of({

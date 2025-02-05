@@ -1,13 +1,8 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
 import { FlatStyleTf1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { WidgetProp, WidgetTransformer } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import uncapitalize = StringU.uncapitalize
-import lastI = ArrayU.lastI
-import isobject = TypeU.isobject
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
-import { CommonStates } from '../WidgetCommonEntities'
 
 
 
@@ -23,12 +18,22 @@ export type EntitiesRecordTf2 = Record<string, WidgetTransformer>
 export type EntitiesRecordArrayTf2 = Array<EntitiesRecordTf2 | undefined>
 
 
-// slot indexes for context entities
-const ctxCommonI = 0
-const ctxElementsI = 1
-const ctxStatesI = 2 // record of pseudoClasses, attrs
-const ctxStateValuesI = 3 // record of attr values
-const ctxElemPropI = 4 // record of elem props
+// Indexes of slots for various contexts
+
+// Search by ===
+const ctxCommonPropsI = 0
+const ctxWidgetPropsI = 1
+
+// Search by startsWith
+const ctxCommonStatesI = 2
+const ctxWidgetStatesI = 3
+
+const ctxWidgetElementsI = 4
+const ctxWidgetElementStatesI = 5 // record of pseudoClasses, attrs
+const ctxWidgetElementStateValuesI = 6 // record of attr values
+const ctxWidgetElementPropsI = 7 // record of elem props
+
+const ctxLastI = ctxWidgetElementPropsI
 
 
 export function transform2(
@@ -45,49 +50,50 @@ export function transform2(
     pLoop: while (sProp) {
       sProp = uncapitalize(sProp)
       
-      for (let ctxI = lastI(contextStack); ctxI >= 0; ctxI--) {
+      for (let ctxI = ctxLastI; ctxI >= 0; ctxI--) {
         const context = contextStack[ctxI]
         if (context) for (const [name, entity] of
           // TODO Style - найти место для сортировки
           Object.entries(context).sort(([a], [b]) => b.length - a.length)
         ) {
           
-          if (ctxI !== ctxCommonI && sProp.startsWith(name)
-            || ctxI === ctxCommonI && sProp === name
+          if (
+            (ctxI === ctxCommonPropsI || ctxI === ctxWidgetPropsI) && sProp === name
+            || (ctxI !== ctxCommonPropsI && ctxI !== ctxWidgetPropsI) && sProp.startsWith(name)
           ) {
             sProp = sProp.slice(name.length)
             
             // found widget transformer
             if (entity.type === 'widget') {
               data.push(entity)
-              contextStack[ctxStatesI] = entity.states
-              contextStack[ctxStateValuesI] = entity.values
-              contextStack[ctxElemPropI] = entity.props
+              contextStack[ctxWidgetElementStatesI] = entity.states
+              contextStack[ctxWidgetElementStateValuesI] = entity.values
+              contextStack[ctxWidgetElementPropsI] = entity.props
             }
             // found elem
             else if (entity.type === 'elem') {
               data.push(entity)
-              contextStack[ctxStatesI] = entity.states
-              contextStack[ctxStateValuesI] = undefined
-              contextStack[ctxElemPropI] = entity.props
+              contextStack[ctxWidgetElementStatesI] = entity.states
+              contextStack[ctxWidgetElementStateValuesI] = undefined
+              contextStack[ctxWidgetElementPropsI] = entity.props
             }
             // found elem state (multistate, attr, pseudoClass)
             else if (entity.type === 'state' || entity.type === 'attr') {
               data.push(entity)
-              contextStack[ctxStateValuesI] = entity.values
+              contextStack[ctxWidgetElementStateValuesI] = entity.values
             }
             // found elem state (pseudoClass)
             else if (entity.type === 'pseudo') {
               data.push(entity)
-              contextStack[ctxStateValuesI] = undefined
+              contextStack[ctxWidgetElementStateValuesI] = undefined
             }
             // found elem state (pseudoElement)
             else if (entity.type === 'pseudoElem') {
               data.push(entity)
-              contextStack[ctxStateValuesI] = undefined
+              contextStack[ctxWidgetElementStateValuesI] = undefined
             }
             // found state value (attr value)
-            else if (ctxI === ctxStateValuesI) {
+            else if (ctxI === ctxWidgetElementStateValuesI) {
               data.push({ value: name, type: 'stateValue' })
             }
             // found prop - must be last in selector
