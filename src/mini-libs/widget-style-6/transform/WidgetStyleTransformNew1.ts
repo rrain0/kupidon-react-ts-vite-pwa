@@ -64,11 +64,10 @@ export function transformNew1<Props>(
   styleProps: NoInfer<Props>,
   baseContextStack: EntitiesRecordArrayTf0,
   baseTree: WordsTree<WidgetTransformer> | undefined = undefined,
-  transformerFound = false,
+  findAnyMode = false,
   readyWords: string[] = [],
   baseWords: string[] = [],
 ): MappedStyle | undefined {
-  const mappedStyle: MappedStyle = { nodes: [] }
   
   if (baseTree) {
     let transformer: WidgetTransformer | undefined
@@ -78,25 +77,29 @@ export function transformNew1<Props>(
       if (baseTree) {
         transformer = baseTree[nodeValue]
         if (transformer) {
-          mappedStyle.transformer = transformer
           const nestedStyle = transformNew1(
             style, styleProps,
-            baseContextStack, baseTree, true,
+            baseContextStack, baseTree, findAnyMode,
             [...readyWords, ...baseWords.slice(0, i + 1)], baseWords.slice(i + 1),
           )
-          if (nestedStyle) mappedStyle.nodes.push(nestedStyle)
-          return mappedStyle
+          if (nestedStyle) {
+            if (nestedStyle.transformer?.type === 'propValue') {
+              return { transformer, nodes: [nestedStyle] }
+            }
+            return nestedStyle
+          }
+          return { transformer, nodes: [] }
         }
       }
-      else {
-        if (transformerFound) return undefined
-        else break
-      }
+      else return undefined
     }
-    // Если слова кончились, а дерево - нет, то идём дальше
+    // Если слова кончились, а дерево - нет, то идём дальше в следующий объект
   }
   // Если дерева не было, то идём дальше создавать его из контекста
   
+  
+  
+  const mappedStyle: MappedStyle = { nodes: [] }
   
   
   
@@ -125,7 +128,7 @@ export function transformNew1<Props>(
       if (baseTree) {
         const nestedStyle = transformNew1(
           subStyle, styleProps,
-          baseContextStack, baseTree, transformerFound,
+          baseContextStack, baseTree, findAnyMode,
           readyWords, words,
         )
         return nestedStyle
@@ -142,7 +145,7 @@ export function transformNew1<Props>(
             const tree = createCamelCaseWordsTree(context)
             const nestedStyle = transformNew1(
               subStyle, styleProps,
-              baseContextStack, tree, false,
+              baseContextStack, tree, ctxI === 0,
               readyWords, words,
             )
             if (nestedStyle) {
