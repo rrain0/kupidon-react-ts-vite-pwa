@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
@@ -12,26 +13,26 @@ import fixedBottom = EmotionCommon.fixedBottom
 import col = EmotionCommon.col
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CrossIc = SvgIconsPack.CrossIc
+import Children = ReactU.Children
 
 
-export type LeftBottomButtonBarProps = Puro<{
+export type LeftBottomButtonBarProps = Children & Puro<{
   onCancel?: Callback
   onAccept?: Callback
 }>
-const LeftBottomButtonBar = React.memo(
-  (props: LeftBottomButtonBarProps) => {
-    const { onCancel, onAccept } = props
-    
-    return (
-      <LeftBottomButtonBarFrame>
-        <ButtonsContainer>
-          {onCancel && <CancelButton onClick={onCancel} />}
-          {onAccept && <AcceptButton onClick={onAccept} />}
-        </ButtonsContainer>
-      </LeftBottomButtonBarFrame>
-    )
-  }
-)
+const LeftBottomButtonBar = React.memo((props: LeftBottomButtonBarProps) => {
+  const { onCancel, onAccept, children } = props
+  
+  return (
+    <LeftBottomButtonBarFrame>
+      <ButtonsContainer>
+        {onCancel && <CancelButton onClick={onCancel} />}
+        {onAccept && <AcceptButton onClick={onAccept} />}
+        {children}
+      </ButtonsContainer>
+    </LeftBottomButtonBarFrame>
+  )
+})
 export default LeftBottomButtonBar
 
 

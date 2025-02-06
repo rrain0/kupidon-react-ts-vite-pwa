@@ -143,10 +143,10 @@ const premiumCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
     buttonBgColor: t.boxWithWine.bg,
     buttonBgIm: `linear-gradient(
       to bottom right,
-      ${t.boxWithWine.bgFocus[1]} 65%,
-      ${t.boxWithWine.bgFocus[0]} 100%
+      ${t.boxWithWine.bgFc[1]} 65%,
+      ${t.boxWithWine.bgFc[0]} 100%
     )`,
-    buttonColor: t.boxWithWine.ctFocus,
+    buttonColor: t.boxWithWine.ctFc,
   },
 }]
 const PremiumCardIc = styled(FeatureCardIc)`
@@ -172,10 +172,10 @@ const inviteFriendsCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
     buttonBgColor: t.boxWithViolet.bg,
     buttonBgIm: `linear-gradient(
       to bottom right,
-      ${t.boxWithViolet.bgFocus[1]} 65%,
-      ${t.boxWithViolet.bgFocus[0]} 100%
+      ${t.boxWithViolet.bgFc[1]} 65%,
+      ${t.boxWithViolet.bgFc[0]} 100%
     )`,
-    buttonColor: t.boxWithViolet.ctFocus,
+    buttonColor: t.boxWithViolet.ctFc,
   },
 }]
 const InviteFriendsCardIc = styled(FeatureCardIc)`
@@ -202,10 +202,10 @@ const socialNetworksCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
     buttonBgColor: t.boxWithBlue.bg,
     buttonBgIm: `linear-gradient(
       to bottom right,
-      ${t.boxWithBlue.bgFocus[1]} 65%,
-      ${t.boxWithBlue.bgFocus[0]} 100%
+      ${t.boxWithBlue.bgFc[1]} 65%,
+      ${t.boxWithBlue.bgFc[0]} 100%
     )`,
-    buttonColor: t.boxWithBlue.ctFocus,
+    buttonColor: t.boxWithBlue.ctFc,
   },
 }]
 const SocialNetworksCardIc = styled(FeatureCardIc)`

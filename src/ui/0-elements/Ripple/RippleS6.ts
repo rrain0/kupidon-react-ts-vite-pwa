@@ -82,7 +82,7 @@ export namespace RippleS6 {
         export namespace Color {
           // type: onFilled, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-            rippleColor: t.ripple.ctOnTransparent,
+            rippleColor: t.ripple.ctOnTrans,
           }]
           // type: onFilled, color: accent
           export const accent: AppWidgetStyle = t => [baseColor, {
@@ -110,7 +110,7 @@ export namespace RippleS6 {
         export namespace Color {
           // type: onTrans, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-            rippleColor: t.ripple.ctOnTransparent,
+            rippleColor: t.ripple.ctOnTrans,
           }]
         }
       }

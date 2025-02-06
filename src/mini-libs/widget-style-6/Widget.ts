@@ -31,6 +31,9 @@ CssWidget assembles html element's tree into one entity called 'Widget'
 Widget State: You needn't know which element bears the state, just use it.
 
 Unregistered (unknown) CSS properties' names are automatically transformed from camelCase to kebab-case
+
+Нельзя использовать в качестве имён элементов наименования css свойств
+или можно но, нужно css свойствам сделать алиасы с другим именем
  */
 
 

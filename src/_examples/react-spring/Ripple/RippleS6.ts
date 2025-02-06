@@ -64,17 +64,17 @@ export namespace RippleS6 {
         rippleColor: t.ripple.ct,
       }]
       export const normal: AppWidgetStyle = t => [base, {
-        rippleColor: t.ripple.ctOnTransparent,
+        rippleColor: t.ripple.ctOnTrans,
       }]
     }
     
     export const onText: AppWidgetStyle = t => [base, {
-      rippleColor: t.ripple.ctOnTransparent,
+      rippleColor: t.ripple.ctOnTrans,
     }]
     
     export const forIcon: AppWidgetStyle = t => [base, {
       rippleMode: 'center',
-      rippleColor: t.ripple.ctOnTransparent,
+      rippleColor: t.ripple.ctOnTrans,
     }]
     
   }

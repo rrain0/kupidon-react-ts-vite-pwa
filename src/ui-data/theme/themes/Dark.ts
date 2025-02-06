@@ -24,7 +24,7 @@ export const DarkProps: ThemeProps = {
     bg: '#282c34',
   },
   navButton: {
-    bgFocus:    ['#2e3440'],
+    bgFc:    ['#2e3440'],
     ct:         ['#7b7b7b'],
     cta:        '#bdbdbd',
   },
@@ -64,17 +64,31 @@ export const DarkProps: ThemeProps = {
   
   
   
+  buttonNormal: {
+    bg:             ['#999999'],
+    ct:             ['#000000'],
+    bgFc:           ['#7b7b7b'],
+    ctFc:           '#000000',
+    
+    bg2:             '#999999',
+    bgFc2:          '#7b7b7b',
+    
+    bg3:            '#909090',
+    ct3:            '#000000',
+    bg3Fc:          '#c5c5c5',
+    ct3Fc:          '#000000',
+  },
   buttonMain: {
     bg:       ['#aaaaaa'],
     ct:       ['#000000'],
-    bgFocus:  ['#bbbbbb'],
+    bgFc:  ['#bbbbbb'],
     ctFc:     '#000000',
   },
   buttonAccent: {
     bg:            ['#999999'],
     ct:            ['#000000'],
-    bgFocus:       ['#7b7b7b'],
-    ctFocus:       ['#000000'],
+    bgFc:          ['#7b7b7b'],
+    ctFc:          '#000000',
   },
   buttonAccent2: {
     bg:            '#999999',
@@ -88,32 +102,24 @@ export const DarkProps: ThemeProps = {
     bgFc:          '#7b7b7b',
     ctFc:          '#000000',
   },
-  buttonNormal: {
-    bg:             ['#999999'],
-    bg2:             '#999999',
-    ct:             ['#000000'],
-    bgFocus:        ['#7b7b7b'],
-    bgFocus2:        '#7b7b7b',
-    ctFocus:        ['#000000'],
-  },
   buttonSecondary: {
     bg:        ['#00000000'],
-    bgFocus:   ['#7b7b7b88'],
+    bgFc:      ['#7b7b7b88'],
     ct:        ['#999999'],
   },
   
   ripple: {
     ct:                '#00000055',
-    ctOnTransparent:   '#aaaaaa33',
+    ctOnTrans:   '#aaaaaa33',
   },
   
   
   
   inputRadio: {
-    bgFocus:   ['#aaaaaa'],
+    bgFc:   ['#aaaaaa'],
   },
-  buttonTransparent: {
-    bgFocus:   ['#ffffff22'],
+  buttonTrans: {
+    bgFc:   ['#ffffff22'],
   },
   
   
@@ -146,8 +152,8 @@ export const DarkProps: ThemeProps = {
   elementDanger: {
     bg:       ['#bbbbbb'],
     ct:       ['#000000'],
-    bgFocus:  ['#cccccc'],
-    ctFocus:  '#000000',
+    bgFc:  ['#cccccc'],
+    ctFc:  '#000000',
   },
   elementError: {
     bg:       ['#5e252c'],

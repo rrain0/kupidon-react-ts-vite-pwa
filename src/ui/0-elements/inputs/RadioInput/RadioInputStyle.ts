@@ -85,7 +85,7 @@ export namespace RadioInputStyle {
       ${Prop.color}: ${t.page.ct2};
     }
     ${El.ripple}{
-      ${Prop.rippleColor}: ${t.ripple.ctOnTransparent};
+      ${Prop.rippleColor}: ${t.ripple.ctOnTrans};
     }
     ${El.iconWrap}{
       /*align-self: start;*/
@@ -93,20 +93,20 @@ export namespace RadioInputStyle {
       width: 26px;
       height: 26px;
       --size: auto;
-      ${Prop.activeIconColor}: ${t.inputRadio.bgFocus[0]};
-      ${Prop.inactiveIconColor}: ${t.inputRadio.bgFocus[0]};
+      ${Prop.activeIconColor}: ${t.inputRadio.bgFc[0]};
+      ${Prop.inactiveIconColor}: ${t.inputRadio.bgFc[0]};
     }
     
     // hover
     ${hoverable}{
       ${El.borderHover}{
-        background: ${t.buttonTransparent.bgFocus[0]};
+        background: ${t.buttonTrans.bgFc[0]};
       }
     }
     
     // focus-visible
     ${El.borderFocusVisible}{
-      background: ${t.buttonTransparent.bgFocus[0]};
+      background: ${t.buttonTrans.bgFc[0]};
     }
   `
   

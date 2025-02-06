@@ -55,6 +55,22 @@ const ReloadPrompt = React.memo(() => {
     setNeedRefresh(false)
   }
   
+  
+  const uiTextOrig = {
+    appReadyToWorkOffline: 'App ready to work offline',
+    updateDownloaded: 'New content available, click on reload button to update',
+    reload: 'Reload',
+    later: 'Later',
+    ok: 'OK',
+  }
+  const uiText = {
+    appReadyToWorkOffline: 'Ресурсы приложения хагружены и оно готово работать оффлайн',
+    updateDownloaded: 'Обновление загружено. Чтобы оно вступило в силу, нужно обновить страницу',
+    reload: 'Обновить',
+    later: 'Позже',
+    ok: 'ОК',
+  }
+  
   return (
     <>
       <div className="ReloadPrompt-buildDate">{buildDate}</div>
@@ -66,31 +82,42 @@ const ReloadPrompt = React.memo(() => {
                 
                 <div className="ReloadPrompt-message">
                   {offlineReady
-                    ? <span>App ready to work offline</span>
-                    : <span>New content available, click on reload button to update.</span>
+                    ? <span>{uiText.appReadyToWorkOffline}</span>
+                    : <span>{uiText.updateDownloaded}</span>
                   }
                 </div>
                 
                 {/* <strong>Reload</strong> will refresh the app. You may lose the
                  progress, if any. */}
                 {needRefresh && (
-                  <button
-                    className="ReloadPrompt-toast-button"
-                    // Reloads the current window to allow the service worker take the control.
-                    onClick={() => updateServiceWorker(true)}
-                  >
-                    Reload
-                  </button>
+                  <>
+                    <button
+                      className="ReloadPrompt-toast-button"
+                      // Reloads the current window to allow the service worker take the control.
+                      onClick={() => updateServiceWorker(true)}
+                    >
+                      {uiText.reload}
+                    </button>
+                    {/* <strong>Cancel</strong> will install the update next time you visit
+                     the app. */}
+                    <button
+                      className="ReloadPrompt-toast-button"
+                      onClick={() => close()}
+                    >
+                      {uiText.later}
+                    </button>
+                  </>
                 )}
                 
-                {/* <strong>Cancel</strong> will install the update next time you visit
-                 the app. */}
-                <button
-                  className="ReloadPrompt-toast-button"
-                  onClick={() => close()}
-                >
-                  Close
-                </button>
+                {!needRefresh && (
+                  <button
+                    className="ReloadPrompt-toast-button"
+                    onClick={() => close()}
+                  >
+                    {uiText.ok}
+                  </button>
+                )}
+              
               </div>
             </div>
           </Modal>

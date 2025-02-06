@@ -48,7 +48,7 @@ const withRawCss = {
 }
 
 
-export type StyleVal =
+export type PrimitiveStyleValue =
   // absence of property - will not be rendered to
   | undefined
   // transform to empty value
@@ -68,7 +68,9 @@ export type StyleVal =
   // usually pass as is except special values or cases
   | string
 
-export type StyleValue = StyleVal | StyleVal[]
+
+// Пустой массив не является StyleValue
+export type StyleValue = PrimitiveStyleValue | PrimitiveStyleValue[]
 
 
 // TODO Style - CssValue type
@@ -76,7 +78,7 @@ type CssValue = undefined | Exclude<string, ''>
 
 
 
-export function isPrimitiveStyleValue<T, SV extends StyleVal>(value: T | SV): value is SV {
+export function isPrimitiveStyleValue<T, SV extends PrimitiveStyleValue>(value: T | SV): value is SV {
   return isstring(value) || isnumber(value)
     || value === true || value === false
     || value === null || value === undefined
@@ -101,6 +103,7 @@ export type WidgetStyleObj = { [selectorProp: string]: StyleValue }
 // Если быть точным в массиве пока что может быть или StyleValue или всё остальное, но не в перемешку
 
 export type WidgetStyle =
+  | undefined
   | StyleValue
   | { [selectorProp: string]: WidgetStyle }
   | WidgetStyle[]
@@ -111,6 +114,7 @@ export type WidgetStyle =
 export type GetWidgetStyleWithProps<Props> = (props: Props) => WidgetStyleWithProps<Props>
 
 export type WidgetStyleWithProps<Props> =
+  | undefined
   | StyleValue
   | WidgetStyle
   | { [selectorProp: string]: WidgetStyleWithProps<Props> }

@@ -66,7 +66,7 @@ const eyeButtonS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal2, 
   button: { sz: 'full', p: 10 },
   icon: { sz: 24, color: t.input.ct[0] },
   inFocus: {
-    buttonBgColor: t.buttonTransparent.bgFocus[0],
+    buttonBgColor: t.buttonTrans.bgFc[0],
   },
 }]
 

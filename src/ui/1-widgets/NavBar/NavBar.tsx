@@ -156,7 +156,7 @@ const nav = (t: AppTheme.Theme) => css`
   
   
   ${IconButtonS6.t(t => ({
-    inFocusButtonBg: t.navButton.bgFocus[0],
+    inFocusButtonBg: t.navButton.bgFc[0],
   }))(t)}
 `
 

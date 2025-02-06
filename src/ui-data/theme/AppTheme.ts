@@ -11,17 +11,21 @@ export namespace AppTheme {
   
   
   /*
-  background => bg
-  content => ct
+  bg => background
+  ct => content
+  any 'bgXXX' must be paired with 'ctXXX'
   
-  backgroundAccent => bga / bgAcc
-  contentAccent => cta / ctAcc
+  'XXXa' / 'XXXAcc' => 'XXXAccent'
+  bga / bgAcc => backgroundAccent
+  cta / ctAcc => contentAccent
   
-  backgroundFocus => bgf / bgFc
-  contentFocus => ctf / ctFc
+  'XXXf' / 'XXXFc' => 'XXXAccent'
+  bgf / bgFc => backgroundFocus
+  ctf / ctFc => contentFocus
   
-  backgroundGradient => bgGrad
-  contentGradient => ctGrad
+  'XXXTrans' => 'XXXTransparent'
+  'XXXGrad' => 'XXXGradient'
+  any gradient must be named 'XXXGrad'
   */
   export interface ThemeProps {
     
@@ -85,19 +89,34 @@ export namespace AppTheme {
     
     
     
+    // normal button
+    buttonNormal: {
+      bg:            string[]
+      ct:            string[]
+      bgFc:          string[]
+      ctFc:          string
+      
+      bg2:           string
+      bgFc2:         string
+      
+      bg3:           string
+      ct3:           string
+      bg3Fc:         string,
+      ct3Fc:         string,
+    }
     // main button (submit button)
     buttonMain: {
       bg:            string[]
       ct:            string[]
-      bgFocus:       string[]
+      bgFc:          string[]
       ctFc:          string
     }
     // just a colorful button that drags some attention
     buttonAccent: {
       bg:            string[]
       ct:            string[]
-      bgFocus:       string[]
-      ctFocus:       string[]
+      bgFc:          string[]
+      ctFc:          string
     }
     buttonAccent2: {
       bg:            string
@@ -111,19 +130,10 @@ export namespace AppTheme {
       bgFc:          string
       ctFc:          string
     }
-    // normal button
-    buttonNormal: {
-      bg:            string[]
-      bg2:           string
-      ct:            string[]
-      bgFocus:       string[]
-      bgFocus2:      string
-      ctFocus:       string[]
-    }
     // button that almost invisible
     buttonSecondary: {
       bg:        string[]
-      bgFocus:   string[]
+      bgFc:      string[]
       ct:        string[]
     }
     
@@ -131,14 +141,14 @@ export namespace AppTheme {
     
     // radio input color
     inputRadio: {
-      bgFocus:   string[]
+      bgFc:      string[]
     }
     // transparent icon button
-    buttonTransparent: {
-      bgFocus:   string[],
+    buttonTrans: {
+      bgFc:      string[],
     }
     navButton: {
-      bgFocus:   string[]
+      bgFc:      string[]
       ct:        string[]
       cta:       string
     }
@@ -174,8 +184,8 @@ export namespace AppTheme {
     elementDanger: {
       bg:              string[]
       ct:              string[]
-      bgFocus:         string[]
-      ctFocus:         string
+      bgFc:            string[]
+      ctFc:            string
     }
     // element with error
     elementError: {
@@ -184,7 +194,7 @@ export namespace AppTheme {
     
     ripple: {
       ct:                string
-      ctOnTransparent:   string
+      ctOnTrans:   string
     }
     
     
@@ -203,8 +213,8 @@ export namespace AppTheme {
       ct:       string
       ctRipple: string
       
-      bgFocus:  [string, string]
-      ctFocus:  string
+      bgFc:     [string, string]
+      ctFc:     string
     },
     
     boxWine: {
@@ -216,21 +226,21 @@ export namespace AppTheme {
       ct:       string
       ctRipple: string
       
-      bgFocus: [string, string]
-      ctFocus: string
+      bgFc:     [string, string]
+      ctFc:     string
     },
     
     boxViolet: {
-      bg: [string, string]
-      ct: string
+      bg:       [string, string]
+      ct:       string
     }
     boxWithViolet: {
       bg:       string
       ct:       string
       ctRipple: string
       
-      bgFocus: [string, string]
-      ctFocus:  string
+      bgFc:     [string, string]
+      ctFc:     string
     },
     
     boxBlue: {
@@ -242,8 +252,8 @@ export namespace AppTheme {
       ct:       string
       ctRipple: string
       
-      bgFocus: [string, string]
-      ctFocus: string
+      bgFc:     [string, string]
+      ctFc:     string
     }
     
     

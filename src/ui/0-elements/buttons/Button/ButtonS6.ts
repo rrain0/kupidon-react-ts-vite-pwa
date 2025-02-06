@@ -139,8 +139,8 @@ export namespace ButtonS6 {
           buttonColor: t.buttonNormal.ct[0],
           rippleColor: t.ripple.ct,
           inFocus: {
-            buttonBgColor: t.buttonNormal.bgFocus[0],
-            buttonColor: t.buttonNormal.ctFocus[0],
+            buttonBgColor: t.buttonNormal.bgFc[0],
+            buttonColor: t.buttonNormal.ctFc,
           },
           disabled: {
             buttonBgColor: t.elementDisabled.bg[0],
@@ -153,8 +153,8 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonNormal.bg[0],
             buttonColor: t.buttonNormal.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFocus[0],
-              buttonColor: t.buttonNormal.ctFocus[0],
+              buttonBgColor: t.buttonNormal.bgFc[0],
+              buttonColor: t.buttonNormal.ctFc,
             },
           }]
           // type: filled, color: normal2
@@ -162,8 +162,17 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonNormal.bg2,
             buttonColor: t.buttonNormal.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFocus2,
-              buttonColor: t.buttonNormal.ctFocus[0],
+              buttonBgColor: t.buttonNormal.bgFc2,
+              buttonColor: t.buttonNormal.ctFc,
+            },
+          }]
+          // type: filled, color: normal3
+          export const normal3: AppWidgetStyle = t => [baseColor, {
+            buttonBgColor: t.buttonNormal.bg3,
+            buttonColor:   t.buttonNormal.ct3,
+            inFocus: {
+              buttonBgColor: t.buttonNormal.bg3Fc,
+              buttonColor: t.buttonNormal.ct3Fc,
             },
           }]
           // type: filled, color: accent
@@ -171,8 +180,8 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonAccent.bg[0],
             buttonColor: t.buttonAccent.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonAccent.bgFocus[0],
-              buttonColor: t.buttonAccent.ctFocus[0],
+              buttonBgColor: t.buttonAccent.bgFc[0],
+              buttonColor: t.buttonAccent.ctFc,
             },
           }]
           // type: filled, color: accent2
@@ -198,7 +207,7 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonMain.bg[0],
             buttonColor: t.buttonMain.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonMain.bgFocus[0],
+              buttonBgColor: t.buttonMain.bgFc[0],
               buttonColor: t.buttonMain.ctFc,
             },
           }]
@@ -207,8 +216,8 @@ export namespace ButtonS6 {
             buttonBgColor: t.elementDanger.bg[0],
             buttonColor: t.elementDanger.ct[0],
             inFocus: {
-              buttonBgColor: t.elementDanger.bgFocus[0],
-              buttonColor: t.elementDanger.ctFocus,
+              buttonBgColor: t.elementDanger.bgFc[0],
+              buttonColor: t.elementDanger.ctFc,
             },
           }]
         }
@@ -253,10 +262,10 @@ export namespace ButtonS6 {
         export const baseColor: AppWidgetStyle = t => ({
           buttonColor: t.buttonNormal.bg[0],
           borderBdColor: t.buttonNormal.bg[0],
-          rippleColor: t.ripple.ctOnTransparent,
+          rippleColor: t.ripple.ctOnTrans,
           inFocus: {
-            buttonBgColor: t.buttonNormal.bgFocus[0],
-            buttonColor: t.buttonNormal.ctFocus[0],
+            buttonBgColor: t.buttonNormal.bgFc[0],
+            buttonColor: t.buttonNormal.ctFc,
           },
           disabled: {
             buttonBgColor: t.elementDisabled.bg[0],
@@ -269,8 +278,8 @@ export namespace ButtonS6 {
             buttonColor: t.buttonNormal.bg[0],
             borderBdColor: t.buttonNormal.bg[0],
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFocus[0],
-              buttonColor: t.buttonNormal.ctFocus[0],
+              buttonBgColor: t.buttonNormal.bgFc[0],
+              buttonColor: t.buttonNormal.ctFc,
             },
           }]
           // type: outlined, color: accent
@@ -278,9 +287,9 @@ export namespace ButtonS6 {
             buttonColor: t.buttonAccent.bg[0],
             borderBdColor: t.buttonAccent.bg[0],
             inFocus: {
-              buttonBgColor: t.buttonAccent.bgFocus[0],
-              buttonColor: t.buttonAccent.ctFocus[0],
-              borderBdColor: t.buttonAccent.bgFocus[0],
+              buttonBgColor: t.buttonAccent.bgFc[0],
+              buttonColor: t.buttonAccent.ctFc,
+              borderBdColor: t.buttonAccent.bgFc[0],
             },
           }]
         }
@@ -344,9 +353,9 @@ export namespace ButtonS6 {
         
         export const baseColor: AppWidgetStyle = t => ({
           buttonColor: t.page.ct2,
-          rippleColor: t.ripple.ctOnTransparent,
+          rippleColor: t.ripple.ctOnTrans,
           inFocus: {
-            buttonBgColor: t.buttonTransparent.bgFocus[0],
+            buttonBgColor: t.buttonTrans.bgFc[0],
           },
           disabled: {
             buttonBgColor: t.elementDisabled.bg[0],
@@ -357,17 +366,17 @@ export namespace ButtonS6 {
           // type: text, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
             buttonColor: t.page.ct2,
-            rippleColor: t.ripple.ctOnTransparent,
+            rippleColor: t.ripple.ctOnTrans,
             inFocus: {
-              buttonBgColor: t.buttonTransparent.bgFocus[0],
+              buttonBgColor: t.buttonTrans.bgFc[0],
             },
           }]
           // type: text, color: normal2
           export const normal2: AppWidgetStyle = t => [baseColor, {
             buttonColor: t.buttonNormal.bg[0],
-            rippleColor: t.ripple.ctOnTransparent,
+            rippleColor: t.ripple.ctOnTrans,
             inFocus: {
-              buttonBgColor: t.buttonTransparent.bgFocus[0],
+              buttonBgColor: t.buttonTrans.bgFc[0],
             },
           }]
         }

@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { StyleVal, StyleValue } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { PrimitiveStyleValue, StyleValue } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import isnumber = TypeU.isnumber
 import isArray = TypeU.isArray
 import {
@@ -196,7 +196,7 @@ export namespace AdditionalProps {
     (value: StyleValue): WidgetTransformerList => {
       if (isArray(value)) {
         let t: StyleValue, r: StyleValue, b: StyleValue, l: StyleValue
-        value = value.map(v => WidgetProps.transformLenValue(v)) as StyleVal[]
+        value = value.map(v => WidgetProps.transformLenValue(v)) as PrimitiveStyleValue[]
         
         if (value.length === 0) {
           t = undefined; r = undefined; b = undefined; l = undefined

@@ -23,7 +23,7 @@ export const LightProps: ThemeProps = {
     bg: '#ffffff',
   },
   navButton: {
-    bgFocus:      ['#f0f0f0'],
+    bgFc:      ['#f0f0f0'],
     ct:           ['#7b7b7b'],
     cta:          '#333333',
   },
@@ -65,17 +65,31 @@ export const LightProps: ThemeProps = {
   
   
   
+  buttonNormal: {
+    bg:            ['#bbbbbb'],
+    ct:            ['#000000'],
+    bgFc:          ['#dddddd'],
+    ctFc:          '#000000',
+    
+    bg2:           '#dddddd',
+    bgFc2:         '#dddddd',
+    
+    bg3:           '#b5b5b5',
+    ct3:           '#ffffff',
+    bg3Fc:         '#c5c5c5',
+    ct3Fc:         '#ffffff',
+  },
   buttonMain: {
     bg:       ['#7b7b7b'],
     ct:       ['#F8F8F8'],
-    bgFocus:  ['#aaaaaa'],
+    bgFc:     ['#aaaaaa'],
     ctFc:     '#F8F8F8',
   },
   buttonAccent: {
     bg:            ['#bbbbbb'],
     ct:            ['#000000'],
-    bgFocus:       ['#999999'],
-    ctFocus:       ['#000000'],
+    bgFc:          ['#999999'],
+    ctFc:          '#000000',
   },
   buttonAccent2: {
     bg:            '#bbbbbb',
@@ -89,32 +103,24 @@ export const LightProps: ThemeProps = {
     bgFc:          '#999999',
     ctFc:          '#000000',
   },
-  buttonNormal: {
-    bg:            ['#bbbbbb'],
-    bg2:           '#dddddd',
-    ct:            ['#000000'],
-    bgFocus:       ['#dddddd'],
-    bgFocus2:      '#dddddd',
-    ctFocus:       ['#000000'],
-  },
   buttonSecondary: {
-    bg:        ['transparent'],
-    bgFocus:   ['#99999988'],
-    ct:        ['#bbbbbb'],
+    bg:            ['transparent'],
+    bgFc:          ['#99999988'],
+    ct:            ['#bbbbbb'],
   },
   
   ripple: {
     ct:                '#ffffff55',
-    ctOnTransparent:   '#66666633',
+    ctOnTrans:         '#66666633',
   },
   
   
   
   inputRadio: {
-    bgFocus:  ['#7b7b7b'],
+    bgFc:  ['#7b7b7b'],
   },
-  buttonTransparent: {
-    bgFocus:  ['#00000011'],
+  buttonTrans: {
+    bgFc:  ['#00000011'],
   },
   
   
@@ -147,8 +153,8 @@ export const LightProps: ThemeProps = {
   elementDanger: {
     bg:       ['#7b7b7b'],
     ct:       ['#ffffff'],
-    bgFocus:  ['#999999'],
-    ctFocus:  '#ffffff',
+    bgFc:  ['#999999'],
+    ctFc:  '#ffffff',
   },
   elementError: {
     bg:       ['#ffced2'],
@@ -169,8 +175,8 @@ export const LightProps: ThemeProps = {
     ct:       '#DD718A',
     ctRipple: '#66666688',
     
-    bgFocus:  ['#ffa9bd', '#ffffff'],
-    ctFocus:  '#DD718A',
+    bgFc:  ['#ffa9bd', '#ffffff'],
+    ctFc:  '#DD718A',
   },
   
   boxWine: {
@@ -182,8 +188,8 @@ export const LightProps: ThemeProps = {
     ct:        '#BB2649',
     ctRipple:  '#F75F8288',
     
-    bgFocus:   ['#F75F82', '#ffffff'],
-    ctFocus:   '#BB2649',
+    bgFc:   ['#F75F82', '#ffffff'],
+    ctFc:   '#BB2649',
   },
   
   boxViolet: {
@@ -195,8 +201,8 @@ export const LightProps: ThemeProps = {
     ct:        '#934DD8',
     ctRipple:  '#d2abf988',
     
-    bgFocus:   ['#d2abf9', '#ffffff'],
-    ctFocus:   '#934DD8',
+    bgFc:   ['#d2abf9', '#ffffff'],
+    ctFc:   '#934DD8',
   },
   
   boxBlue: {
@@ -208,8 +214,8 @@ export const LightProps: ThemeProps = {
     ct:        '#398CC8',
     ctRipple:  '#bae2ff88',
     
-    bgFocus:   ['#bae2ff', '#ffffff'],
-    ctFocus:   '#398CC8',
+    bgFc:   ['#bae2ff', '#ffffff'],
+    ctFc:   '#398CC8',
   },
   
   

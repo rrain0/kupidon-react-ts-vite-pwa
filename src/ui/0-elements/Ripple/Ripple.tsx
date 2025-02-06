@@ -181,7 +181,12 @@ function calculateRippleProps(
       toBottom: frameWH.h / 2,
       toRight: frameWH.w / 2,
     }
-    throw new Error(`Unknown ripple mode: ${mode}. Or wrong mode conditions`)
+    return {
+      toTop: 0,
+      toLeft: 0,
+      toBottom: 0,
+      toRight: 0,
+    }
   })()
   const dxd = {
     toTop: d.toTop * d.toTop,

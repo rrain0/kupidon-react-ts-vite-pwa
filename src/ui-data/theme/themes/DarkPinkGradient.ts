@@ -26,12 +26,12 @@ export const DarkPinkGradientProps: ThemeProps = { ...DarkPinkProps,
   },
   navButton: {
     ...DarkPinkProps.navButton,
-    cta: ['#d92a54'],
+    cta: '#d92a54',
   },
   
   inputRadio: {
     ...DarkPinkProps.buttonMain,
-    bgFocus:  ['#d16780'],
+    bgFc:  ['#d16780'],
   },
 }
 

@@ -292,12 +292,26 @@ export namespace EmotionCommon {
   
   export namespace Txt {
     
+    export const lg36Bold = css`
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 150%;
+      letter-spacing: normal;
+    `
+    
+    export const lg32Bold = css`
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    
     export const lg28 = css`
       font-weight: 400;
       font-size: 28px;
       line-height: 150%;
       letter-spacing: normal;
-      `
+    `
     export const lg28Bold = css`
       font-weight: 500;
       font-size: 28px;
@@ -334,6 +348,12 @@ export namespace EmotionCommon {
     `
     export const lg20bold = css`
       font-weight: 500;
+      font-size: 20px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    export const s20bold2 = css`
+      font-weight: 600;
       font-size: 20px;
       line-height: 129%;
       letter-spacing: normal;
@@ -380,6 +400,12 @@ export namespace EmotionCommon {
       line-height: normal;
       letter-spacing: normal;
     `
+    export const lg16Bold = css`
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
     export const lg16Wide = css`
       font-weight: 400;
       font-size: 16px;
@@ -399,6 +425,12 @@ export namespace EmotionCommon {
       font-size: 15px;
       line-height: 129%;
       letter-spacing: 0.05em;
+    `
+    export const s15Bold = css`
+      font-weight: 500;
+      font-size: 15px;
+      line-height: 129%;
+      letter-spacing: normal;
     `
     export const md15Thin = css`
       font-weight: 300;

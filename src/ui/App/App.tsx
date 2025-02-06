@@ -1,6 +1,10 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
 import { useRecoilValue } from 'recoil'
 import React from 'react'
+import {
+  testWordsTreeGenerator
+} from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
+import { WidgetStyle6NewTest } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTestNew.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
 import CheckBrowserMinimumVersion
   from 'src/ui/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
@@ -21,8 +25,10 @@ import { WidgetStyle6Test } from 'src/mini-libs/widget-style-6/WidgetStyleTransf
 
 
 // todo remove
-WidgetStyle6Test.testTransform()
-WidgetStyle6Test.testWidget()
+//WidgetStyle6Test.testTransform()
+//WidgetStyle6Test.testWidget()
+//testWordsTreeGenerator()
+WidgetStyle6NewTest.testTransformSimple()
 
 
 
