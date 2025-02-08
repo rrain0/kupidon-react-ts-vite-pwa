@@ -221,23 +221,18 @@ const Tests = React.memo((props: DateProps) => {
               setTestState('paused')
               setPersonalityType(null)
             }
-            if (testState === 'paused') {
+            else if (testState === 'paused') {
               setTestState('complete')
               setPersonalityType('INTP')
             }
-            if (testState === 'complete') {
+            else if (testState === 'complete') {
               setTestState('idle')
               setPersonalityType(null)
             }
-            // TODO Pointer click fix does not work properly
             else {
               setTestState('idle')
               setPersonalityType(null)
             }
-            // if (testState === 'testing') {
-            //   setTestState('idle')
-            //   setPersonalityType(null)
-            // }
           }}
         >
           <GearIc />
