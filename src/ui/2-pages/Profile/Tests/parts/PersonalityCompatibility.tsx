@@ -71,7 +71,7 @@ const Card = styled.div<{ compatibility: Compatibility }>`
       backgroundColor: '#FAB76A70', color: '#9E5F14',
     }
     if (p.compatibility === 'low') return {
-      backgroundColor: '#FA6A6A70', color: '#F22323',
+      backgroundColor: '#FA6A6A70', color: '#c52525',
     }
   }}
 `

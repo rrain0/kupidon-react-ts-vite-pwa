@@ -1,10 +1,13 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useRecoilValue } from 'recoil'
+import { Link, useSearchParams } from 'react-router-dom'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { PersonalityType } from 'src/api/model/PersonalityType.ts'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
-import { TestMbtiRecoilTestState } from 'src/recoil/state/TestMbtiRecoil.ts'
+import { TestMbtiRecoil, TestMbtiRecoilTestState } from 'src/recoil/state/TestMbtiRecoil.ts'
 import { PersonalityTypeData } from 'src/ui-data/PersonalityTypeData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
@@ -15,7 +18,6 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
-import TestMbtiPage from 'src/ui/2-pages/Profile/Tests/parts/TestMbtiPage.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
@@ -41,12 +43,15 @@ import colC = EmotionCommon.colC
 import flexC = WidgetStyleCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
 import GearIc = SvgIconsPack.GearIc
+import RootRoute = AppRoutes.RootRoute
+import full = RouteBuilder.full
+import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
 
 
-export type DateProps = {
+export type TestsProps = {
   validationProps: ReturnType<typeof useFormFailures<FormValues>>['validationProps']
   onFormSubmitCallback: Callback1<React.FormEvent>
   submit: Callback
@@ -57,7 +62,9 @@ export type DateProps = {
 }
 
 
-const Tests = React.memo((props: DateProps) => {
+const Tests = React.memo((props: TestsProps) => {
+  
+  const [answers, setAnswers] = useRecoilState(TestMbtiRecoil)
   
   const actionText = useUiValues(ActionUiText)
   
@@ -79,13 +86,11 @@ const Tests = React.memo((props: DateProps) => {
     startTheTestAgain: 'Начать тест заново',
   }), [personalityTypeUiText])
   
-  //const testState = useRecoilValue(TestMbtiRecoilTestState)
-  
-  const [testState, setTestState] = useState(
-    'complete' as 'idle' | 'testing' | 'paused' | 'complete'
-  )
+  const testState = useRecoilValue(TestMbtiRecoilTestState)
   
   const color = PersonalityTypeData[personalityType ?? 'INTP'].color
+  
+  const [searchParams] = useSearchParams()
   
   
   return (
@@ -154,36 +159,42 @@ const Tests = React.memo((props: DateProps) => {
             )}
             
             {testState === 'idle' && (
-              <Button
-                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
-                onClick={() => setTestState('testing')}
-              >
-                {uiText.takeTheTest}
-              </Button>
+              <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+                <Button
+                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
+                >
+                  {uiText.takeTheTest}
+                </Button>
+              </Link>
             )}
             {testState === 'paused' && (
               <div css={css`${col}; gap: 15px;`}>
-                <Button
-                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
-                  onClick={() => console.log('0')}
-                >
-                  {uiText.continue}
-                </Button>
-                <Button
-                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                  onClick={() => console.log('0')}
-                >
-                  {uiText.startOver}
-                </Button>
+                <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+                  <Button
+                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
+                  >
+                    {uiText.continue}
+                  </Button>
+                </Link>
+                <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+                  <Button
+                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                    onClick={() => setAnswers(prev => ({ ...prev, answers: [] }))}
+                  >
+                    {uiText.startOver}
+                  </Button>
+                </Link>
               </div>
             )}
             {testState === 'complete' && (
-              <Button
-                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
-                onClick={() => setTestState('testing')}
-              >
-                {uiText.startTheTestAgain}
-              </Button>
+              <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+                <Button
+                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
+                  onClick={() => setAnswers(prev => ({ ...prev, answers: [] }))}
+                >
+                  {uiText.startTheTestAgain}
+                </Button>
+              </Link>
             )}
             
             {testState === 'complete' && (
@@ -212,32 +223,16 @@ const Tests = React.memo((props: DateProps) => {
       </Pages.SafeInsets>
       
       
-      <LeftBottomButtonBar>
+      {/* <LeftBottomButtonBar>
         <Button
           css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.normal2)}
           onClick={() => {
-            console.log(testState)
-            if (testState === 'idle') {
-              setTestState('paused')
-              setPersonalityType(null)
-            }
-            else if (testState === 'paused') {
-              setTestState('complete')
-              setPersonalityType('INTP')
-            }
-            else if (testState === 'complete') {
-              setTestState('idle')
-              setPersonalityType(null)
-            }
-            else {
-              setTestState('idle')
-              setPersonalityType(null)
-            }
+          
           }}
         >
           <GearIc />
         </Button>
-      </LeftBottomButtonBar>
+      </LeftBottomButtonBar> */}
     </>
   )
 })
