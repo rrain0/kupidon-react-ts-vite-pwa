@@ -154,18 +154,20 @@ export namespace WidgetStyle6NewTest {
   
   export function testTransformSimple() {
     const style = {
-      wMin: 8,
-      /* minHeight: 10,
-      gridTemplateRows: 'auto',
+      /* wMin: 8,
       gridRandomProp: true,
       background: {
         position: 'absolute',
         color: 'white',
       }, */
+      //hover: true,
+      hover: {
+        bdColor: 'orange',
+      },
     }
     const transformedNew1 = transformNew1(
       style, undefined, [
-        CommonProps, undefined, undefined, undefined,
+        CommonProps, undefined, CommonStates, undefined,
         undefined, undefined, undefined, undefined,
       ]
     )
@@ -193,8 +195,11 @@ export namespace WidgetStyle6NewTest {
     const transformed2 = transform2(
       transformed1,
       [
-        { ...CommonProps, ...widgetProps }, // под индеком 0 идёт поиск через ===
-        { ...CommonStates, ...widgetStates, ...widgetElements },
+        CommonProps,
+        undefined,
+        CommonStates,
+        undefined,
+        undefined,
         undefined,
         undefined,
         undefined,

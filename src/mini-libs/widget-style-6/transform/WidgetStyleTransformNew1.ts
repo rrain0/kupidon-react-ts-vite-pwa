@@ -36,7 +36,7 @@ export type EntitiesRecordArrayTf0 = (EntitiesRecordTf0 | undefined)[]
 
 export type MappedStyle = {
   transformer?: WidgetTransformer | undefined
-  nodes: MappedStyle[]
+  nodes?: MappedStyle[] | undefined
 }
 
 
@@ -64,49 +64,65 @@ export function transformNew1<Props>(
   styleProps: NoInfer<Props>,
   baseContextStack: EntitiesRecordArrayTf0,
   baseTree: WordsTree<WidgetTransformer> | undefined = undefined,
-  findAnyMode = false,
-  readyWords: string[] = [],
   baseWords: string[] = [],
+  readyWords: string[] = [],
+  findRest = false,
 ): MappedStyle | undefined {
   
   if (baseTree) {
-    let transformer: WidgetTransformer | undefined
     for (let i = 0; i < baseWords.length; i++) {
       const word = baseWords[i]
       baseTree = baseTree[word]
       if (baseTree) {
-        transformer = baseTree[nodeValue]
+        const transformer = baseTree[nodeValue]
         if (transformer) {
-          const nestedStyle = transformNew1(
+          let nestedStyle = transformNew1(
             style, styleProps,
-            baseContextStack, baseTree, findAnyMode,
-            [...readyWords, ...baseWords.slice(0, i + 1)], baseWords.slice(i + 1),
+            baseContextStack, baseTree, baseWords.slice(i + 1),
+            findRest ? [...readyWords, ...baseWords.slice(0, i + 1)] : [], findRest,
           )
           if (nestedStyle) {
-            if (nestedStyle.transformer?.type === 'propValue') {
-              return { transformer, nodes: [nestedStyle] }
-            }
-            return nestedStyle
+            return { transformer, nodes: [nestedStyle] }
           }
-          return { transformer, nodes: [] }
+          nestedStyle = transformNew1(
+            style, styleProps,
+            baseContextStack, undefined, baseWords.slice(i + 1),
+            findRest ? [...readyWords, ...baseWords.slice(0, i + 1)] : [], findRest,
+          )
+          if (nestedStyle) {
+            return { transformer, nodes: [nestedStyle] }
+          }
+          return { transformer }
         }
       }
-      else return undefined
+      else if (i >= 1) {
+        // Если дерево было и кончилось, то идём рекурсивно дальше с оставшимися словами
+        const nestedStyle = transformNew1(
+          style, styleProps,
+          baseContextStack, undefined, baseWords.slice(i),
+          [...readyWords, ...baseWords.slice(0, i)], findRest,
+        )
+        return nestedStyle
+      }
+      else break
     }
-    // Если слова кончились, а дерево - нет, то идём дальше в следующий объект
   }
-  // Если дерева не было, то идём дальше создавать его из контекста
   
-  
-  
-  const mappedStyle: MappedStyle = { nodes: [] }
-  
-  
+  // 1) Если дерева не было, то идём дальше создавать его из контекста
+  // 2) Если слова кончились, а дерево - нет, то идём дальше в следующий объект
   
   if (isStyleValue(style)) {
+    /* if (findRest) {
+      return {
+        transformer: WidgetProp.ofName(readyWords.join('-')),
+        nodes: [{
+          transformer: { type: 'propValue', value: style },
+          nodes: [],
+        }],
+      }
+    } */
     return {
       transformer: { type: 'propValue', value: style },
-      nodes: [],
     }
   }
   else if (isArray(style)) {
@@ -116,6 +132,7 @@ export function transformNew1<Props>(
   
   }
   else if (isobject(style)) {
+    const mappedStyle: MappedStyle = { nodes: [] }
     for (const [selector, subStyle] of Object.entries(style)) {
       const words = [
         ...baseWords,
@@ -128,35 +145,37 @@ export function transformNew1<Props>(
       if (baseTree) {
         const nestedStyle = transformNew1(
           subStyle, styleProps,
-          baseContextStack, baseTree, findAnyMode,
-          readyWords, words,
+          baseContextStack, baseTree, words,
+          readyWords, findRest,
         )
-        return nestedStyle
+        if (nestedStyle) (mappedStyle.nodes ??= []).push(nestedStyle)
       }
       else {
-        const contextStack = [...baseContextStack]
+        baseContextStack = [...baseContextStack]
         // Конекст создаёт новое дерево и отправляет его  дальше
         // Если в результате undefined, то берём следующий контекст.
         // Если получили стиль, то добавляем его и переходим к следующему свойству объекта
         
         for (let ctxI = ctxLastI; ctxI >= 0; ctxI--) {
-          const context = contextStack[ctxI]
+          const context = baseContextStack[ctxI]
           if (context) {
             const tree = createCamelCaseWordsTree(context)
             const nestedStyle = transformNew1(
               subStyle, styleProps,
-              baseContextStack, tree, ctxI === 0,
-              readyWords, words,
+              baseContextStack, tree, words,
+              readyWords, ctxI === 0,
             )
             if (nestedStyle) {
-              mappedStyle.nodes.push(nestedStyle)
+              (mappedStyle.nodes ??= []).push(nestedStyle)
+              break
             }
           }
         }
       }
     }
+    return mappedStyle
   }
-  return mappedStyle
+  return undefined
 }
 
 
