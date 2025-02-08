@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { useEvent } from 'src/util/react/useEvent'
+import { useEvent } from '@util/react/useEvent.ts'
 import flexC = EmotionCommon.flexC
 
 

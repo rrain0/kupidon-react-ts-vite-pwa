@@ -15,9 +15,9 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
-import { RangeU } from 'src/util/common/RangeU'
-import { useBool } from 'src/util/react-state/useBool'
-import { useInterval } from 'src/util/react/useInterval'
+import { RangeU } from '@util/common/RangeU.ts'
+import { useBool } from '@util/react-state/useBool.ts'
+import { useInterval } from '@util/react/useInterval.ts'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import flexC = EmotionCommon.flexC
@@ -48,7 +48,7 @@ console.log('emcssStyle', emcssStyle)
 
 
 
-const TestPage = React.memo(() => {
+const DevPage = React.memo(() => {
   
   /*
    const rf = (v: number) => {
@@ -89,32 +89,32 @@ const TestPage = React.memo(() => {
           <div>Views:</div>
           
           <Items>
-            <Link to={RootRoute.test.scrollbar[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.scrollbar[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Scrollbar test
               </Button>
             </Link>
-            <Link to={RootRoute.test.bottomSheet[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.bottomSheet[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Bottom Sheet
               </Button>
             </Link>
-            <Link to={RootRoute.test.viewsSelectItem[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.viewsSelectItem[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Select Item
               </Button>
             </Link>
-            <Link to={RootRoute.test.rippleTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.rippleTest[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Ripple
               </Button>
             </Link>
-            <Link to={RootRoute.test.buttonsTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.buttonsTest[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Buttons
               </Button>
             </Link>
-            <Link to={RootRoute.test.sliderTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.sliderTest[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Slider
               </Button>
@@ -126,57 +126,57 @@ const TestPage = React.memo(() => {
           <div>Other:</div>
           
           <Items>
-            <Link to={RootRoute.test.resizeObserver[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.resizeObserver[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Resize Observer test
               </Button>
             </Link>
-            <Link to={RootRoute.test.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Move to another view
               </Button>
             </Link>
-            <Link to={RootRoute.test.pointer[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.pointer[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Pointer test
               </Button>
             </Link>
-            <Link to={RootRoute.test.tabs[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.tabs[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Tabs test
               </Button>
             </Link>
-            <Link to={RootRoute.test.state[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.state[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 State test
               </Button>
             </Link>
-            <Link to={RootRoute.test.pageLifecycle[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.pageLifecycle[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Page Lifecycle test
               </Button>
             </Link>
-            <Link to={RootRoute.test.useEvent[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.useEvent[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 useEvent test
               </Button>
             </Link>
-            <Link to={RootRoute.test.elemRef[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.elemRef[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Element Ref test
               </Button>
             </Link>
-            <Link to={RootRoute.test.elemStyle[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.elemStyle[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Element Style test
               </Button>
             </Link>
-            <Link to={RootRoute.test.oldProfileOptions[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.oldProfileOptions[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Old Profile Options
               </Button>
             </Link>
-            <Link to={RootRoute.test.shadowDOMTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.shadowDOMTest[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Shadow DOM Test
               </Button>
@@ -187,7 +187,7 @@ const TestPage = React.memo(() => {
           <div style={{ height: 20 }} />
           
           <Items>
-            <Link to={RootRoute.test.emulatedScroll[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.emulatedScroll[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Emulated Scroll
               </Button>
@@ -501,7 +501,7 @@ const TestPage = React.memo(() => {
     </>
   )
 })
-export default TestPage
+export default DevPage
 
 
 const Items = styled.div`

@@ -62,7 +62,7 @@ export function transformNew1<Props>(
   entityLvl = 0,
 ): MappedStyle | undefined {
   
-  console.log(baseTree, baseWords, readyWords, findRestProp, entityLvl)
+  //console.log(baseTree, baseWords, readyWords, findRestProp, entityLvl)
   
   {
     const word = baseWords[0]
@@ -84,11 +84,18 @@ export function transformNew1<Props>(
       if (transformer && !nestedNodes) return { transformer, entityLvl }
       if (!transformer && nestedNodes) return nestedNodes
       if (transformer && nestedNodes) {
-        if (nestedNodes.transformer && nestedNodes.entityLvl > entityLvl) {
-          return { transformer, entityLvl, nodes: [nestedNodes] }
+        if (nestedNodes.transformer) {
+          if (nestedNodes.entityLvl > entityLvl) {
+            return { transformer, entityLvl, nodes: [nestedNodes] }
+          }
+          if (nestedNodes.entityLvl === entityLvl) {
+            return nestedNodes
+          }
         }
-        if (nestedNodes.transformer && nestedNodes.entityLvl === entityLvl) {
-          return nestedNodes
+        if (!nestedNodes.transformer) {
+          if (nestedNodes.entityLvl === entityLvl) {
+            return nestedNodes
+          }
         }
         nestedNodes.transformer = transformer
         return nestedNodes

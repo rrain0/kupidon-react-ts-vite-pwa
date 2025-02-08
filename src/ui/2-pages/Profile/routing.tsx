@@ -102,29 +102,27 @@ const profileIdUserIdRouting: RouteObject[] = [
 
 
 
-const ProfileIdEmpty = React.memo(
-  () => {
-    const [searchParams] = useSearchParams()
-    const auth = useRecoilValue(AuthRecoil)
-    const authId = auth?.user.id
-    
-    if (!authId) return (
-      <Navigate
-        to={RootRoute.login[fullAllowedNameParams]({
-          returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
-        })}
-        replace={true}
-      />
-    )
-    
-    return (
-      <Navigate
-        to={RootRoute.profile.id.userId[use](authId)[fullAnySearchParams](searchParams)}
-        replace={true}
-      />
-    )
-  }
-)
+const ProfileIdEmpty = React.memo(() => {
+  const [searchParams] = useSearchParams()
+  const auth = useRecoilValue(AuthRecoil)
+  const authId = auth?.user.id
+  
+  if (!authId) return (
+    <Navigate
+      to={RootRoute.login[fullAllowedNameParams]({
+        returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
+      })}
+      replace={true}
+    />
+  )
+  
+  return (
+    <Navigate
+      to={RootRoute.profile.id.userId[use](authId)[fullAnySearchParams](searchParams)}
+      replace={true}
+    />
+  )
+})
 
 
 
@@ -144,17 +142,15 @@ export const profileIdRouting: RouteObject[] = [
 
 
 
-const ProfileAny = React.memo(
-  () => {
-    const [searchParams] = useSearchParams()
-    return (
-      <Navigate
-        to={RootRoute.profile.id[fullAnySearchParams](searchParams)}
-        replace={true}
-      />
-    )
-  }
-)
+const ProfileAny = React.memo(() => {
+  const [searchParams] = useSearchParams()
+  return (
+    <Navigate
+      to={RootRoute.profile.id[fullAnySearchParams](searchParams)}
+      replace={true}
+    />
+  )
+})
 
 
 

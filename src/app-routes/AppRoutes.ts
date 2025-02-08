@@ -82,9 +82,16 @@ export namespace AppRoutes {
   
   
   
-  
   const test = buildRoute({
     [path]: 'test',
+    mbti: buildPath('mbti'),
+  })
+  
+  
+  
+  
+  const dev = buildRoute({
+    [path]: 'dev',
     
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
@@ -123,6 +130,8 @@ export namespace AppRoutes {
     settings,
     
     test,
+    
+    dev,
   })
   
 }

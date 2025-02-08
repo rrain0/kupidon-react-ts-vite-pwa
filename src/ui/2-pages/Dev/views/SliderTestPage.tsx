@@ -1,10 +1,10 @@
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useState } from 'react'
-import Slider from 'src/ui/1-widgets/Slider/Slider'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import { RangeU } from 'src/util/common/RangeU'
+import Slider from 'src/ui/1-widgets/Slider/Slider.tsx'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import { RangeU } from '@util/common/RangeU.ts'
 import NumRange = RangeU.NumRange
 
 

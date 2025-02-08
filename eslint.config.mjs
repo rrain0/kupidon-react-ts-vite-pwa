@@ -289,7 +289,7 @@ export default [
       // it disallows empty lines between jsx props
       '@stylistic/jsx-props-no-multi-spaces': 'off',
       '@stylistic/jsx-quotes': ['error', 'prefer-double'],
-      '@stylistic/jsx-self-closing-comp': 'error',
+      '@stylistic/jsx-self-closing-comp': 'warn',
       '@stylistic/jsx-sort-props': 'off',
       '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
       '@stylistic/jsx-wrap-multilines': ['error', {

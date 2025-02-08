@@ -2,9 +2,9 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
-import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import { Pages } from 'src/ui/components/Pages/Pages'
+import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle.ts'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 
 
 

@@ -154,23 +154,22 @@ export namespace WidgetStyle6NewTest {
   
   export function testTransformSimple() {
     const style = {
-      //wMin: 8,
-      randomProp: 'random',
-      gridRandomProp: true,
+      wMin: 8,
+      //randomProp: 'random',
+      //gridRandomProp: true,
       background: {
         position: 'absolute',
         color: 'white',
       },
-      //hover: true,
-      /* bd: 'orange',
-      bdColor: 'orange', */
-      // hover: {
-      //   bdColor: 'orange',
-      //   color: 'orange',
-      //   /* active: {
-      //     randomProp: 'green',
-      //   }, */
-      // },
+      bd: 'orange',
+      bdColor: 'orange',
+      hover: {
+        bdColor: 'orange',
+        color: 'orange',
+        /* active: {
+          randomProp: 'green',
+        }, */
+      },
     }
     const transformedNew1 = transformNew1(
       style, undefined, [

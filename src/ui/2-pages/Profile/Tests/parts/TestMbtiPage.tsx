@@ -20,14 +20,14 @@ import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
 
 export type TestQuestionsProps = Puro<{
 }>
-export const TestQuestions = React.memo((props: TestQuestionsProps) => {
+export const TestMbtiPage = React.memo((props: TestQuestionsProps) => {
   const { } = props
   
   
   
   return (
     <div
-      data-display-name="TestQuestions"
+      data-display-name="TestMbtiPage"
       css={css`${col}`}
     >
       
@@ -52,8 +52,8 @@ export const TestQuestions = React.memo((props: TestQuestionsProps) => {
     </div>
   )
 })
-TestQuestions.displayName = 'TestQuestions'
-export default TestQuestions
+TestMbtiPage.displayName = 'TestQuestions'
+export default TestMbtiPage
 
 
 

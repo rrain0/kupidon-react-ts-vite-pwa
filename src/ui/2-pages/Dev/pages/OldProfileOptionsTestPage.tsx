@@ -1,28 +1,28 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import Card3 from 'src/ui/0-elements/cards/Card3'
+import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import PartnerAgeOption from 'src/ui/2-pages/Profile/options-filter/PartnerAgeOption.tsx'
 import PartnerHeightOption from 'src/ui/2-pages/Profile/options-filter/PartnerHeightOption.tsx'
 import ProfileImLookingForOption
   from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import ProfileFavoriteBookGenresOption
-  from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteBookGenresOption'
+  from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteBookGenresOption.tsx'
 import ProfileFavoriteMovieGenresOption
-  from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteMovieGenresOption'
+  from 'src/ui/2-pages/Profile/options-old/ProfileFavoriteMovieGenresOption.tsx'
 import ProfileSportFrequencyOption
-  from 'src/ui/2-pages/Profile/options-old/ProfileSportFrequencyOption'
-import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption'
-import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption'
-import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption'
+  from 'src/ui/2-pages/Profile/options-old/ProfileSportFrequencyOption.tsx'
+import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption.tsx'
+import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption.tsx'
+import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption.tsx'
 import { CardTitleSecondary } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption.tsx'
 import DateMostInterestingVisitedPlaceOption
-  from 'src/ui/2-pages/Profile/options-old/DateMostInterestingVisitedPlaceOption'
-import DatePeriodBeforeDateOption from 'src/ui/2-pages/Profile/options-old/DatePeriodBeforeDateOption'
-import DatePurposeOption from 'src/ui/2-pages/Profile/options-old/DatePurposeOption'
+  from 'src/ui/2-pages/Profile/options-old/DateMostInterestingVisitedPlaceOption.tsx'
+import DatePeriodBeforeDateOption from 'src/ui/2-pages/Profile/options-old/DatePeriodBeforeDateOption.tsx'
+import DatePurposeOption from 'src/ui/2-pages/Profile/options-old/DatePurposeOption.tsx'
 import col = EmotionCommon.col
 
 

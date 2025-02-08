@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
-import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
+import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem.tsx'
 import row = EmotionCommon.row
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic

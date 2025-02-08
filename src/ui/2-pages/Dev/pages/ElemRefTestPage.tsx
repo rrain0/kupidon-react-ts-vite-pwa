@@ -1,11 +1,11 @@
 import { animated, useSpring } from '@react-spring/web'
 import React, { useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { getViewProps } from 'src/util/view/ViewProps'
-import { useResizeRef } from 'src/util/view/useResizeRef'
-import { useResizeToSpring } from 'src/util/view/useResizeToSpring'
-import { useBool } from 'src/util/react-state/useBool'
-import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import { useResizeRef } from '@util/view/useResizeRef.ts'
+import { useResizeToSpring } from '@util/view/useResizeToSpring.ts'
+import { useBool } from '@util/react-state/useBool.ts'
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 
 
 /*

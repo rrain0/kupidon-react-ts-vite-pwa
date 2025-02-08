@@ -104,7 +104,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     </Button>
                   </Link>
                   
-                  <Link to={RootRoute.test[full]()}>
+                  <Link to={RootRoute.dev[full]()}>
                     <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
                       onClick={props.setClosing}
                     >

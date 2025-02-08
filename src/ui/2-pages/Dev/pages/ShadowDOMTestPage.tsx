@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import { Pages } from 'src/ui/components/Pages/Pages'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
 
 
 

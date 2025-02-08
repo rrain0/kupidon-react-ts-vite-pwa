@@ -10,10 +10,10 @@ import {
 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import col = EmotionCommon.col
-import { Utils } from 'src/util/common/Utils.ts'
+import { Utils } from '@util/common/Utils.ts'
 import styled from '@emotion/styled'
 import BottomSheet from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'
 import intOrDefault = Utils.nonNegIntOrDefault

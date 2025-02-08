@@ -15,8 +15,9 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { profileRouting } from 'src/ui/2-pages/Profile/routing.tsx'
 import { settingRouting } from 'src/ui/2-pages/Settings/routing'
 import { signupRouting } from 'src/ui/2-pages/Signup/routing'
-import { testRouting } from 'src/ui/2-pages/Test/routing'
+import { devRouting } from 'src/ui/2-pages/Dev/routing.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
+import { testRouting } from 'src/ui/2-pages/Test/routing.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -24,25 +25,25 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
-const Any =
-React.memo(
-() => {
-  return <>
-    <Outlet/> {/* Это место, где будут рендериться children */}
-    <BottomNavBarRouting/>
-  </>
+const Any = React.memo(() => {
+  return (
+    <>
+      <Outlet /> {/* Это место, где будут рендериться children */}
+      <BottomNavBarRouting />
+    </>
+  )
 })
 
 
 
-const AnyAny =
-React.memo(
-() => {
+const AnyAny = React.memo(() => {
   const [searchParams] = useSearchParams()
-  return <Navigate
-    to={RootRoute.findPairs[fullAnySearchParams](searchParams)}
-    replace={true}
-  />
+  return (
+    <Navigate
+      to={RootRoute.findPairs[fullAnySearchParams](searchParams)}
+      replace={true}
+    />
+  )
 })
 
 
@@ -90,9 +91,19 @@ const rootRoutes: RouteObject[] = [
         children: settingRouting,
       },
       
+      
+      
       {
         path: RootRoute.test[path]+'/*',
         children: testRouting,
+      },
+      
+      
+      
+      
+      {
+        path: RootRoute.dev[path]+'/*',
+        children: devRouting,
       },
       
       
@@ -109,11 +120,9 @@ const router = createBrowserRouter(rootRoutes)
 
 
 
-const AppRouting = React.memo(
-() => {
-    return <RouterProvider router={router} />
-  }
-)
+const AppRouting = React.memo(() => {
+  return <RouterProvider router={router} />
+})
 export default AppRouting
 
 
