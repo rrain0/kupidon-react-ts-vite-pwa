@@ -1,21 +1,11 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
   createCamelCaseWordsTree, nodeValue, WordsTree,
 } from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
-import { FlatStyleTf1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
-import {
-  EntitiesRecordArrayTf2
-} from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform2.ts'
 import { WidgetProp, WidgetTransformer } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { isStyleValue, WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import uncapitalize = StringU.uncapitalize
-import camelCaseToKebabCase = StringU.camelCaseToKebabCase
-import RecordRo = TypeU.RecordRo
 import camelCaseToWords = StringU.camelCaseToWords
-import lastI = ArrayU.lastI
 import isArray = TypeU.isArray
 import isfunction = TypeU.isfunction
 import isobject = TypeU.isobject
@@ -25,8 +15,8 @@ import isobject = TypeU.isobject
 
 
 
-// TODO Style split 'selP' by capital letters and check using 'in' operator
-// TODO Style Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }
+// TODO COMPLETED Style split 'selP' by capital letters and check using 'in' operator
+// TODO ????????? Style Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }
 
 
 
@@ -36,6 +26,7 @@ export type EntitiesRecordArrayTf0 = (EntitiesRecordTf0 | undefined)[]
 
 export type MappedStyle = {
   transformer?: WidgetTransformer | undefined
+  entityLvl: number
   nodes?: MappedStyle[] | undefined
 }
 
@@ -66,63 +57,114 @@ export function transformNew1<Props>(
   baseTree: WordsTree<WidgetTransformer> | undefined = undefined,
   baseWords: string[] = [],
   readyWords: string[] = [],
-  findRest = false,
+  findRestProp = false,
+  foundExactProp = false,
+  entityLvl = 0,
 ): MappedStyle | undefined {
   
-  if (baseTree) {
-    for (let i = 0; i < baseWords.length; i++) {
-      const word = baseWords[i]
+  console.log(baseTree, baseWords, readyWords, findRestProp, entityLvl)
+  
+  {
+    const word = baseWords[0]
+    if (baseTree && word) {
       baseTree = baseTree[word]
-      if (baseTree) {
-        const transformer = baseTree[nodeValue]
-        if (transformer) {
-          let nestedStyle = transformNew1(
-            style, styleProps,
-            baseContextStack, baseTree, baseWords.slice(i + 1),
-            findRest ? [...readyWords, ...baseWords.slice(0, i + 1)] : [], findRest,
-          )
-          if (nestedStyle) {
-            return { transformer, nodes: [nestedStyle] }
-          }
-          nestedStyle = transformNew1(
-            style, styleProps,
-            baseContextStack, undefined, baseWords.slice(i + 1),
-            findRest ? [...readyWords, ...baseWords.slice(0, i + 1)] : [], findRest,
-          )
-          if (nestedStyle) {
-            return { transformer, nodes: [nestedStyle] }
-          }
-          return { transformer }
-        }
-      }
-      else if (i >= 1) {
-        // Если дерево было и кончилось, то идём рекурсивно дальше с оставшимися словами
-        const nestedStyle = transformNew1(
+      const transformer = baseTree?.[nodeValue]
+      let nestedNodes: MappedStyle | undefined
+      const nextWords = baseWords.slice(1)
+      if (transformer || findRestProp) {
+        nestedNodes = transformNew1(
           style, styleProps,
-          baseContextStack, undefined, baseWords.slice(i),
-          [...readyWords, ...baseWords.slice(0, i)], findRest,
+          baseContextStack, baseTree, nextWords,
+          findRestProp ? [...readyWords, word] : [],
+          findRestProp, findRestProp && !!transformer,
+          entityLvl,
         )
-        return nestedStyle
       }
-      else break
+      if (!transformer && !nestedNodes) return undefined
+      if (transformer && !nestedNodes) return { transformer, entityLvl }
+      if (!transformer && nestedNodes) return nestedNodes
+      if (transformer && nestedNodes) {
+        if (nestedNodes.transformer && nestedNodes.entityLvl > entityLvl) {
+          return { transformer, entityLvl, nodes: [nestedNodes] }
+        }
+        if (nestedNodes.transformer && nestedNodes.entityLvl === entityLvl) {
+          return nestedNodes
+        }
+        nestedNodes.transformer = transformer
+        return nestedNodes
+      }
     }
   }
+  
+  
+  
+  /*
+  if (baseTree && baseWords[0]) {
+    baseTree = baseTree?.[baseWords[0]]
+    if (baseTree) {
+      const transformer = baseTree[nodeValue]
+      if (transformer) {
+        let nestedNodes = transformNew1(
+          style, styleProps,
+          baseContextStack, baseTree, baseWords.slice(1),
+          findRestProp ? [...readyWords, ...baseWords.slice(0, 1)] : [],
+          findRestProp, entityLvl,
+        )
+        if (nestedNodes) {
+          if (nestedNodes.entityLvl > entityLvl || !nestedNodes.transformer) {
+            return { transformer, entityLvl, nodes: [nestedNodes] }
+          }
+          return nestedNodes
+        }
+        nestedNodes = transformNew1(
+          style, styleProps,
+          baseContextStack, undefined, baseWords.slice(1),
+          findRestProp ? [...readyWords, ...baseWords.slice(0, 1)] : [],
+          findRestProp, entityLvl + 1,
+        )
+        if (nestedNodes) {
+          if (nestedNodes.entityLvl > entityLvl || !nestedNodes.transformer) {
+            return { transformer, entityLvl, nodes: [nestedNodes] }
+          }
+          return nestedNodes
+        }
+        return { transformer, entityLvl }
+      }
+    }
+    else {
+      // Если дерево было и кончилось, то идём рекурсивно дальше с оставшимися словами
+      const nestedNodes = transformNew1(
+        style, styleProps,
+        baseContextStack, undefined, baseWords,
+        findRestProp ? readyWords : [],
+        findRestProp, entityLvl + 1,
+      )
+      return nestedNodes
+    }
+    
+    // Мы прошлись по циклу, слова закончились, а дерево ещё нет
+    readyWords = [...readyWords, ...baseWords]
+    baseWords = []
+  }
+   */
   
   // 1) Если дерева не было, то идём дальше создавать его из контекста
   // 2) Если слова кончились, а дерево - нет, то идём дальше в следующий объект
   
-  if (isStyleValue(style)) {
-    /* if (findRest) {
+  if (isStyleValue(style) && findRestProp && !baseWords.length) {
+    if (readyWords.length && !foundExactProp) {
       return {
         transformer: WidgetProp.ofName(readyWords.join('-')),
+        entityLvl: entityLvl,
         nodes: [{
           transformer: { type: 'propValue', value: style },
-          nodes: [],
+          entityLvl: entityLvl + 1,
         }],
       }
-    } */
+    }
     return {
       transformer: { type: 'propValue', value: style },
+      entityLvl: entityLvl + 1,
     }
   }
   else if (isArray(style)) {
@@ -132,7 +174,8 @@ export function transformNew1<Props>(
   
   }
   else if (isobject(style)) {
-    const mappedStyle: MappedStyle = { nodes: [] }
+    //entityLvl++
+    const mappedStyle: MappedStyle = { entityLvl }
     for (const [selector, subStyle] of Object.entries(style)) {
       const words = [
         ...baseWords,
@@ -143,12 +186,25 @@ export function transformNew1<Props>(
       // Иначе возвращаемя до ближайшего найденного трансформера,
       // либо в начало запуска дерева, где пробуем следующий контекст
       if (baseTree) {
-        const nestedStyle = transformNew1(
+        //const transformer = baseTree[nodeValue]
+        const nestedNodes = transformNew1(
           subStyle, styleProps,
           baseContextStack, baseTree, words,
-          readyWords, findRest,
+          readyWords,
+          findRestProp, false,
+          entityLvl,
         )
-        if (nestedStyle) (mappedStyle.nodes ??= []).push(nestedStyle)
+        if (nestedNodes) {
+          const nn = nestedNodes
+          const { transformer: t, nodes: n } = nn
+          if (!t && n) {
+            if (!mappedStyle.nodes) mappedStyle.nodes = n
+            else mappedStyle.nodes.push(...n)
+          }
+          else if (t) {
+            (mappedStyle.nodes ??= []).push(nn)
+          }
+        }
       }
       else {
         baseContextStack = [...baseContextStack]
@@ -160,19 +216,31 @@ export function transformNew1<Props>(
           const context = baseContextStack[ctxI]
           if (context) {
             const tree = createCamelCaseWordsTree(context)
-            const nestedStyle = transformNew1(
+            const nestedNodes = transformNew1(
               subStyle, styleProps,
               baseContextStack, tree, words,
-              readyWords, ctxI === 0,
+              [],
+              ctxI === 0, false,
+              entityLvl + 1,
             )
-            if (nestedStyle) {
-              (mappedStyle.nodes ??= []).push(nestedStyle)
-              break
+            if (nestedNodes) {
+              const nn = nestedNodes
+              const { transformer: t, nodes: n } = nn
+              if (!t && n) {
+                if (!mappedStyle.nodes) mappedStyle.nodes = n
+                else mappedStyle.nodes.push(...n)
+                break
+              }
+              else if (t) {
+                (mappedStyle.nodes ??= []).push(nn)
+                break
+              }
             }
           }
         }
       }
     }
+    if (!mappedStyle.transformer && !mappedStyle.nodes) return undefined
     return mappedStyle
   }
   return undefined
