@@ -58,6 +58,7 @@ export const MbtiData: RecordRo<MbtiType, {
   color: string
   highCompatibility: MbtiType[],
   mediumCompatibility: MbtiType[],
+  shortDescription: string,
 }> = {
   ESTJ: { 
     icon: secretary,
@@ -65,6 +66,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E94DA',
     highCompatibility: ['ISTJ', 'ESFJ'],
     mediumCompatibility: ['INFP', 'ENFP'],
+    shortDescription: 'Организованные, практичные, склонные к лидерству и ответственности',
   },
   ESTP: { 
     icon: carpenter,
@@ -72,6 +74,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#EABF4B',
     highCompatibility: ['ISTP', 'ESFP'],
     mediumCompatibility: ['INTJ', 'ISTJ'],
+    shortDescription: 'Энергичные, практичные, любят новые впечатления и приключения',
   },
   ESFJ: { 
     icon: showman,
@@ -79,6 +82,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E94DA',
     highCompatibility: ['ISFJ', 'ESTJ'],
     mediumCompatibility: ['INTP', 'INTJ'],
+    shortDescription: 'Заботливые, организованные, стремящиеся к гармонии в отношениях',
   },
   ESFP: { 
     icon: clown,
@@ -86,6 +90,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#EABF4B',
     highCompatibility: ['ISFP', 'ESTP'],
     mediumCompatibility: ['INTJ', 'ISTJ'],
+    shortDescription: 'Живые, общительные, любящие наслаждаться жизнью и развлекать других',
   },
   ENTJ: { 
     icon: manager,
@@ -93,6 +98,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#9C2B87',
     highCompatibility: ['INTJ', 'ENTP'],
     mediumCompatibility: ['ISFP', 'INFP'],
+    shortDescription: 'Лидеры, стратегически мыслящие, нацеленные на достижение целей',
   },
   ENTP: { 
     icon: politician,
@@ -100,6 +106,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#9C2B87',
     highCompatibility: ['INTP', 'INFJ'],
     mediumCompatibility: ['ISFJ', 'ESTJ'],
+    shortDescription: 'Изобретательные, любящие обсуждения и новые идеи, склонные к вызовам',
   },
   ENFJ: { 
     icon: pensioner,
@@ -107,6 +114,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E9C2B',
     highCompatibility: ['INFP', 'ENFP'],
     mediumCompatibility: ['ISTP', 'ESTP'],
+    shortDescription: 'Эмпатичные, организованные, умеющие вдохновлять и вести за собой',
   },
   ENFP: { 
     icon: athlete,
@@ -114,6 +122,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E9C2B',
     highCompatibility: ['INFJ', 'INTJ'],
     mediumCompatibility: ['ISTJ', 'ESTJ'],
+    shortDescription: 'Энергичные, креативные, ориентированные на идеи и возможности',
   },
   ISTJ: { 
     icon: support,
@@ -121,6 +130,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E94DA',
     highCompatibility: ['ESTJ', 'ISFJ'],
     mediumCompatibility: ['ENFP', 'INFP'],
+    shortDescription: 'Практичные, организованные, надежные, ценят порядок и традиции',
   },
   ISTP: { 
     icon: mechanic,
@@ -128,6 +138,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#EABF4B',
     highCompatibility: ['ESTP', 'ISFP'],
     mediumCompatibility: ['ENFJ', 'INFJ'],
+    shortDescription: 'Практичные, решительные, стремящиеся к действию и приключениям',
   },
   ISFJ: { 
     icon: nurse,
@@ -135,6 +146,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E94DA',
     highCompatibility: ['ESFJ', 'ISTJ'],
     mediumCompatibility: ['ENTP', 'INTP'],
+    shortDescription: 'Заботливые, преданные, внимательные к деталям, ориентированные на других',
   },
   ISFP: { 
     icon: singer,
@@ -142,6 +154,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#EABF4B',
     highCompatibility: ['ESFP', 'ISTP'],
     mediumCompatibility: ['ESTJ', 'ENTJ'],
+    shortDescription: 'Творческие, чувствительные, ценят гармонию и эстетику',
   },
   INTJ: { 
     icon: postman,
@@ -149,6 +162,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#9C2B87',
     highCompatibility: ['ENFP', 'INFJ'],
     mediumCompatibility: ['ESFJ', 'ESTP'],
+    shortDescription: 'Независимые, стратегически мыслящие, ориентированные на долгосрочные цели',
   },
   INTP: { 
     icon: scientist,
@@ -156,6 +170,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#9C2B87',
     highCompatibility: ['ENTP', 'INFJ'],
     mediumCompatibility: ['ESFJ', 'ISFJ'],
+    shortDescription: 'Аналитические, любящие идеи и теории, стремящиеся к глубокому пониманию',
   },
   INFJ: { 
     icon: photographer,
@@ -163,6 +178,7 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E9C2B',
     highCompatibility: ['ENFP', 'INTJ'],
     mediumCompatibility: ['ESTP', 'ISTP'],
+    shortDescription: 'Интуитивные, идеалистичные, стремящиеся к пониманию других',
   },
   INFP: { 
     icon: magician,
@@ -170,5 +186,6 @@ export const MbtiData: RecordRo<MbtiType, {
     color: '#3E9C2B',
     highCompatibility: ['ENFJ', 'INFJ'],
     mediumCompatibility: ['ESTP', 'ENTJ'],
+    shortDescription: 'Идеалистичные, чувствительные, стремящиеся к внутреннему пониманию',
   },
 }

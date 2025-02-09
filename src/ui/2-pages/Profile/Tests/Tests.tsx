@@ -144,27 +144,31 @@ const Tests = React.memo((props: TestsProps) => {
             )}
             
             {mbtiType && (
-              <Card3 css={yourPersonalityTypeCardS}>
+              <>
+                <Card3 css={yourPersonalityTypeCardS}>
+                  
+                  <PersonalityTypePictureBox>
+                    <PersonalityTypePicture
+                      src={mbtiData.picture}
+                      alt={mbtiType}
+                    />
+                  </PersonalityTypePictureBox>
+                  
+                  <PersonalityTypeTextBox
+                    style={{ color: color }}
+                  >
+                    <PersonalityTypeCodeName>
+                      {mbtiType}
+                    </PersonalityTypeCodeName>
+                    <PersonalityTypeName>
+                      {uiText.personalityTypeName}
+                    </PersonalityTypeName>
+                  </PersonalityTypeTextBox>
                 
-                <PersonalityTypePictureBox>
-                  <PersonalityTypePicture
-                    src={mbtiData.picture}
-                    alt={mbtiType}
-                  />
-                </PersonalityTypePictureBox>
+                </Card3>
                 
-                <PersonalityTypeTextBox
-                  style={{ color: color }}
-                >
-                  <PersonalityTypeCodeName>
-                    {mbtiType}
-                  </PersonalityTypeCodeName>
-                  <PersonalityTypeName>
-                    {uiText.personalityTypeName}
-                  </PersonalityTypeName>
-                </PersonalityTypeTextBox>
-              
-              </Card3>
+                <ShortDescription>{mbtiData.shortDescription}</ShortDescription>
+              </>
             )}
             
             {testState === 'idle' && (
@@ -319,6 +323,11 @@ const PersonalityTypeCodeName = styled.div`
 `
 const PersonalityTypeName = styled.div`
   ${Txt.lg24Bold};
+`
+
+const ShortDescription = styled.div`
+  color: #000000;
+  ${Txt.s17Bold};
 `
 
 

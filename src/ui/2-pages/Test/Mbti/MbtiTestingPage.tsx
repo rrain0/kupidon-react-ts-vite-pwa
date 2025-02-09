@@ -17,6 +17,8 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { MbtiUiText } from 'src/ui-data/translations/MbtiUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { CardTitleNormal } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
@@ -29,6 +31,8 @@ import flexC = EmotionCommon.flexC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
+import gridC = EmotionCommon.gridC
+import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 
 
 
@@ -38,6 +42,7 @@ const MbtiTestingPage = React.memo(() => {
   
   const uiText = useMemo(() => {
     return {
+      question: 'Вопрос',
       questions: [
         {
           q: mbtiUiText.question1,
@@ -209,6 +214,24 @@ const MbtiTestingPage = React.memo(() => {
                 css={css`${col}`}
               >
                 
+                <QuestionNumberBox>
+                  <Button
+                    css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
+                  >
+                    <ArrowAngledRoundedIc />
+                  </Button>
+                  <QuestionNumber>
+                    {displayedQuestion + 1} {uiText.question.toLowerCase()}
+                  </QuestionNumber>
+                  <Button
+                    css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
+                  >
+                    <ArrowAngledRoundedIc />
+                  </Button>
+                </QuestionNumberBox>
+                
+                <div style={{ height: 26 }} />
+                
                 <Picture src={spendingTimeGuitar} />
                 
                 <div style={{ height: 6 }} />
@@ -255,6 +278,19 @@ const MbtiTestingPage = React.memo(() => {
 MbtiTestingPage.displayName = 'MbtiPage'
 export default MbtiTestingPage
 
+
+
+
+const QuestionNumberBox = styled.div`
+  ${gridC};
+  grid-template-columns: auto 1fr auto;
+`
+const QuestionNumber = styled.div`
+  ${gridC};
+  // TODO Theme
+  color: #000000;
+  ${Txt.lg20bold};
+`
 
 
 const Picture = styled.img`

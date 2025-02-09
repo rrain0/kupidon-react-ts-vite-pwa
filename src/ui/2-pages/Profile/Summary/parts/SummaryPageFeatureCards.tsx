@@ -95,7 +95,7 @@ const featureCardS = css`
 `
 const FeatureCardName = styled.div`
   grid-area: name;
-  ${Txt.lg17Bold};
+  ${Txt.s17Bold600Wide};
 `
 const FeatureCardText = styled.div`
   grid-area: text;

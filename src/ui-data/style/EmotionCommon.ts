@@ -386,17 +386,23 @@ export namespace EmotionCommon {
     `
     
     
-    export const lg17Bold = css`
-      font-weight: 600;
-      font-size: 17px;
-      line-height: normal;
-      letter-spacing: 0.05em;
-    `
-    export const lg17 = css`
+    export const s17 = css`
       font-weight: 400;
       font-size: 17px;
       line-height: 129%;
       letter-spacing: normal;
+    `
+    export const s17Bold = css`
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    export const s17Bold600Wide = css`
+      font-weight: 600;
+      font-size: 17px;
+      line-height: normal;
+      letter-spacing: 0.05em;
     `
     
     

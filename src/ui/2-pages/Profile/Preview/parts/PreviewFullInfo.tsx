@@ -291,5 +291,5 @@ const Divider = styled.div`
 
 
 const SectionText = styled.div`
-  ${Txt.lg17};
+  ${Txt.s17};
 `

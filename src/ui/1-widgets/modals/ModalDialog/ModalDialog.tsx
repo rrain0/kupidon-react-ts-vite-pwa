@@ -9,7 +9,7 @@ import React from 'react'
 import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import { ItemTitle, ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
+import { ItemTitle } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import Card2 from 'src/ui/0-elements/cards/Card2.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
