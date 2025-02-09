@@ -10,7 +10,7 @@ import {
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import trueOrUndef = TypeU.trueOrUndef
+import attrExists = TypeU.attrExists
 
 
 
@@ -38,7 +38,7 @@ React.forwardRef<CheckboxInputGroupRefElement, CheckboxInputGroupProps>(
   
   const radioGroupProps = {
     className: clsx(className, CheckboxInputGroupStyle.El.radioGroupClassName),
-    [CheckboxInputGroupStyle.Attr.errorName]: trueOrUndef(hasError),
+    [CheckboxInputGroupStyle.Attr.errorName]: attrExists(hasError),
     tabIndex: 0,
     ...restProps,
   }

@@ -353,8 +353,8 @@ export namespace ArrayU {
   
   
   
-  export const merge = <T1, T2 = T1>
-  (arr1: T1[], arr2: T2[],
+  export const merge = <T1, T2 = T1>(
+    arr1: T1[], arr2: T2[],
     merger: MergerIndexed<T1, T2>,
     comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   ): [T1[], T2[]] => {

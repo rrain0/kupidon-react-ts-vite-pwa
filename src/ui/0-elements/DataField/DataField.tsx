@@ -7,7 +7,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import trueOrUndef = TypeU.trueOrUndef
+import attrExists = TypeU.attrExists
 
 
 
@@ -41,7 +41,7 @@ React.forwardRef<DataFieldRefElement, DataFieldProps>(
   
   const frameProps = {
     className: clsx(className,DataFieldStyle.El.frameClassName),
-    [DataFieldStyle.Attr.errorName]: trueOrUndef(hasError),
+    [DataFieldStyle.Attr.errorName]: attrExists(hasError),
     ...restProps,
   }
   const borderProps = {

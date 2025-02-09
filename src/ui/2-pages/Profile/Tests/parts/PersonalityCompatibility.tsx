@@ -4,14 +4,14 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from 'src/util/common/TypeU'
 import Puro = TypeU.Puro
 import col = EmotionCommon.col
-import rowWrap = EmotionCommon.rowWrap
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
+import rowWrapC = EmotionCommon.rowWrapC
 
 
 
-type Compatibility = 'high' | 'medium' | 'low'
+export type Compatibility = 'high' | 'medium' | 'low'
 
 export type PersonalityCompatibilityProps = Puro<{
   compatibility: Compatibility
@@ -27,7 +27,7 @@ export const PersonalityCompatibility = React.memo((props: PersonalityCompatibil
   
   const title = (() => {
     if (compatibility === 'high') return 'Отлично совместимы'
-    if (compatibility === 'medium') return 'Средне совместитмы'
+    if (compatibility === 'medium') return 'Совместитмы'
     if (compatibility === 'low') return 'Менее совместимы'
   })()
   
@@ -36,19 +36,21 @@ export const PersonalityCompatibility = React.memo((props: PersonalityCompatibil
       data-display-name="PersonalityCompatibility"
       compatibility={compatibility}
     >
-      <Title>{title}</Title>
-      <List>
-        <Types>
-          {compatibles?.map(c => (
-            <TypeBox key={c}>
-              <TypeContent>
-                {c}
-              </TypeContent>
-            </TypeBox>
-          ))}
-        </Types>
-        <Percent>{percent}</Percent>
-      </List>
+      <TitleBox>
+        <Title>{title}</Title>
+        {/* <PercentTopRight>{percent}</PercentTopRight> */}
+      </TitleBox>
+      <Types>
+        {compatibles?.map(c => (
+          <TypeBox key={c}>
+            <TypeContent>
+              {c}
+            </TypeContent>
+          </TypeBox>
+        ))}
+        <PercentRight>{percent}</PercentRight>
+      </Types>
+      {/* <PercentBottom>{percent}</PercentBottom> */}
     </Card>
   )
 })
@@ -64,29 +66,37 @@ const Card = styled.div<{ compatibility: Compatibility }>`
   ${col};
   gap: 16px;
   ${p => {
+    // TODO Style - extract colors to goodBox, warnBox, dangerBox
     if (p.compatibility === 'high') return {
-      backgroundColor: '#A2C17770', color: '#1B842F',
+      backgroundColor: '#d0debd', color: '#1B842F',
+    }
+    if (false && p.compatibility === 'medium') return {
+      backgroundColor: '#f7d9b8', color: '#9E5F14',
     }
     if (p.compatibility === 'medium') return {
-      backgroundColor: '#FAB76A70', color: '#9E5F14',
+      backgroundColor: '#cccccc', color: '#333333',
     }
     if (p.compatibility === 'low') return {
-      backgroundColor: '#FA6A6A70', color: '#c52525',
+      backgroundColor: '#f7b8b8', color: '#c52525',
     }
   }}
 `
 
+
+
+
+const TitleBox = styled.div`
+  ${row};
+  justify-content: space-between;
+  gap: 15px;
+`
 const Title = styled.div`
   ${Txt.lg16Bold};
 `
 
-const List = styled.div`
-  ${row};
-  gap: 15px;
-`
 
 const Types = styled.div`
-  ${rowWrap};
+  ${rowWrapC};
   flex: 1;
   gap: 15px;
 `
@@ -100,11 +110,27 @@ const TypeBox = styled.div`
 const TypeContent = styled.div`
   color: #171717;
   ${Txt.lg16Bold};
-  
 `
 
-const Percent = styled.div`
+const PercentTopRight = styled.div`
+  align-self: center;
+  //color: #171717;
+  color: #676767;
+  ${Txt.s15Bold};
+`
+const PercentRight = styled.div`
+  min-width: 60px;
+  flex: 1;
+  ${row};
+  justify-content: end;
+  //color: #171717;
+  color: #676767;
+  ${Txt.s15Bold};
+`
+const PercentBottom = styled.div`
+  align-self: end;
   color: #171717;
   ${Txt.s15Bold};
 `
+
 

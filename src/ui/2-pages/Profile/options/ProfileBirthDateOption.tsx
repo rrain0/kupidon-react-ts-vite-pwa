@@ -1,3 +1,4 @@
+import { TypeU } from '@util/common/TypeU.ts'
 import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
@@ -11,6 +12,7 @@ import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/compone
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DateU } from 'src/util/date/DateU'
 import GiftBoxGradIc = SvgGradIconsPack.GiftBoxGradIc
+import attrExists = TypeU.attrExists
 
 
 
@@ -44,7 +46,7 @@ const ProfileBirthDateOption = React.memo((props: ValidationWrapRenderProps<stri
         icon={<GiftBoxGradIc />}
         title={titleText.age}
         value={age}
-        data-error={props.highlight}
+        data-error={attrExists(props.highlight)}
         onClick={onOpen}
       />
       

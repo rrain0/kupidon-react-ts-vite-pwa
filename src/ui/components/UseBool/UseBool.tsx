@@ -3,7 +3,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import PartialUndef = TypeU.PartialUndef
-import ValueOrGenerator = TypeU.ValueOrGenerator
+import ValueOrProducer = TypeU.ValueOrProducer
 import Callback = TypeU.Callback
 
 
@@ -18,7 +18,7 @@ export type UseBoolRenderProps = {
   toggleValue: Callback
 }
 export type UseBoolProps = PartialUndef<{
-  initial: ValueOrGenerator<boolean>
+  initial: ValueOrProducer<boolean>
   children: ((props: UseBoolRenderProps)=>React.ReactNode)
 }>
 const UseBool =

@@ -10,13 +10,12 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import PartialUndef = TypeU.PartialUndef
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
-import HtmlBool = TypeU.HtmlBool
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import HtmlAttrExistence = TypeU.HtmlAttrExistence
 
 
 
@@ -25,7 +24,7 @@ type EditableTextCardProps = PartialUndef<{
   title: string
   text: string
   placeholder: string
-  'data-error': HtmlBool
+  'data-error': HtmlAttrExistence
   onClick: Callback
 }>
 

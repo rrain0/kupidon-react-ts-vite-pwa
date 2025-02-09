@@ -2,7 +2,7 @@ import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 
 
 
-export const MbtiUiValues = {
+export const MbtiUiText = {
   
   question1: {
     'ru-RU': 'Вы предпочитаете:',

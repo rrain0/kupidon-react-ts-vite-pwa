@@ -17,9 +17,9 @@ import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
 import PartialUndef = TypeU.PartialUndef
-import trueOrUndef = TypeU.trueOrUndef
 import noop = TypeU.noop
 import SetterOrUpdater = TypeU.SetterOrUpdater
+import attrExists = TypeU.attrExists
 
 
 // TODO Доделать новый скроллбар
@@ -169,7 +169,7 @@ const ScrollbarVertical = React.memo(
       
       const scrollbarTrackProps = {
         className: clsx(className, ScrollbarVerticalStyle.El.track.name),
-        [ScrollbarVerticalStyle.Attr.active.name]: trueOrUndef(isDragging),
+        [ScrollbarVerticalStyle.Attr.active.name]: attrExists(isDragging),
         ...restProps,
         ref: trackRef,
       }

@@ -11,9 +11,9 @@ import abs = EmotionCommon.abs
 import resetTextarea = EmotionCommon.resetTextarea
 import PartialUndef = TypeU.PartialUndef
 import hoverable = EmotionCommon.hoverable
-import trueOrUndef = TypeU.trueOrUndef
 import Callback1 = TypeU.Callback1
 import combineProps = ReactU.combineProps
+import attrExists = TypeU.attrExists
 
 
 
@@ -79,7 +79,7 @@ const Textarea = React.memo(
             css={textareaStyle}
             className={TextareaStyle.El.textareaClassName}
             {...{
-              [TextareaStyle.Attr.errorName]: trueOrUndef(isError),
+              [TextareaStyle.Attr.errorName]: attrExists(isError),
             }}
             ref={textareaRef}
             

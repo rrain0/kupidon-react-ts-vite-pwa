@@ -9,8 +9,8 @@ import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
-import trueOrUndef = TypeU.trueOrUndef
 import combineProps = ReactU.combineProps
+import attrExists = TypeU.attrExists
 
 
 
@@ -43,7 +43,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
           <button
             data-display-name="Button"
             ref={elemRef}
-            {...{ [CommonStates.error.n]: trueOrUndef(hasError) }}
+            {...{ [CommonStates.error.n]: attrExists(hasError) }}
             className={clsx(className, ButtonS6.W.els.button.n)}
             type="button"
             {...combineProps(clickFix, restProps, rippleProps.target)}

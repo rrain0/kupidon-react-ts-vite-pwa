@@ -23,69 +23,107 @@ const DialogButtonsFrame = styled.div`
 type DialogButtonsProps = Puro<{
   position: 'center' | 'end'
   //variant: 'primarySmall' | 'textSmall'
+  
+  onClose: Callback
+  onBack: Callback
+  
   onCancel: Callback
+  
   onClear: Callback
   onOk: Callback
   onAccept: Callback
+  onYes: Callback
+  onDangerYes: Callback
+  
   acceptVariant: 'text' | 'filledRounded'
   acceptSize: 'normal2' | 'big'
 }>
-const DialogButtons = React.memo(
-  (props: DialogButtonsProps) => {
-    const {
-      position = 'end',
-      onCancel,
-      onClear,
-      onOk,
-      onAccept,
-      acceptVariant = 'text',
-    } = props
-    
-    const actionText = useUiValues(ActionUiText)
-    
-    return (
-      <DialogButtonsFrame
-        style={{
-          ...({
-            center: { justifyContent: 'center' },
-            end: undefined,
-          } satisfies Record<typeof position, React.CSSProperties | undefined>)[position],
-        }}
-      >
-        {onCancel && (
-          <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-            onClick={onCancel}
-          >
-            {actionText.cancel}
-          </Button>
-        )}
-        {onClear && (
-          <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-            onClick={onClear}
-          >
-            {actionText.clear}
-          </Button>
-        )}
-        {onOk && (
-          <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2Uppercase.normal)}
-            onClick={onOk}
-          >
-            {actionText.ok}
-          </Button>
-        )}
-        {onAccept && (
-          <Button 
-            css={({
-              text: ButtonS6.t(ButtonS6.S.text.rounded.md2.normal),
-              filledRounded: ButtonS6.t(ButtonS6.S.filled.rounded.md2.accent),
-            } satisfies Record<typeof acceptVariant, any>)[acceptVariant]}
-            onClick={onAccept}
-          >
-            {actionText.accept}
-          </Button>
-        )}
-      </DialogButtonsFrame>
-    )
-  }
-)
+const DialogButtons = React.memo((props: DialogButtonsProps) => {
+  const {
+    position = 'end',
+    onClose,
+    onBack,
+    onCancel,
+    onClear,
+    onOk,
+    onAccept,
+    onYes,
+    onDangerYes,
+    acceptVariant = 'text',
+  } = props
+  
+  const actionText = useUiValues(ActionUiText)
+  
+  return (
+    <DialogButtonsFrame
+      style={{
+        ...({
+          center: { justifyContent: 'center' },
+          end: undefined,
+        } satisfies Record<typeof position, React.CSSProperties | undefined>)[position],
+      }}
+    >
+      {onClose && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
+          onClick={onClose}
+        >
+          {actionText.close}
+        </Button>
+      )}
+      {onBack && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
+          onClick={onBack}
+        >
+          {actionText.back}
+        </Button>
+      )}
+      {onCancel && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
+          onClick={onCancel}
+        >
+          {actionText.cancel}
+        </Button>
+      )}
+      {onClear && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
+          onClick={onClear}
+        >
+          {actionText.clear}
+        </Button>
+      )}
+      {onOk && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2Uppercase.normal)}
+          onClick={onOk}
+        >
+          {actionText.ok}
+        </Button>
+      )}
+      {onYes && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
+          onClick={onYes}
+        >
+          {actionText.yes}
+        </Button>
+      )}
+      {onDangerYes && (
+        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
+          onClick={onDangerYes}
+        >
+          {actionText.yes}
+        </Button>
+      )}
+      {onAccept && (
+        <Button
+          css={({
+            text: ButtonS6.t(ButtonS6.S.text.rounded.md2.normal),
+            filledRounded: ButtonS6.t(ButtonS6.S.filled.rounded.md2.accent),
+          } satisfies Record<typeof acceptVariant, any>)[acceptVariant]}
+          onClick={onAccept}
+        >
+          {actionText.accept}
+        </Button>
+      )}
+    </DialogButtonsFrame>
+  )
+})
 export default DialogButtons

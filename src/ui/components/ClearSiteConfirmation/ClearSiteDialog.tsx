@@ -8,6 +8,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
+import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { clearSiteData } from '@util/app/clearSiteData.ts'
@@ -66,6 +67,14 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
   return (
     <>
       
+      <ModalDialog
+        isOpen={isOpen}
+        title={actionText.clearAppData + '?'}
+        onBack={close}
+        onDangerYes={clear}
+      />
+      
+      {/*
       <UseBottomSheetState isOpen={isOpen} onClose={close}>
         {props => (
           <ModalPortal>
@@ -107,6 +116,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
           </ModalPortal>
         )}
       </UseBottomSheetState>
+       */}
       
       {needClear && (
         <ModalPortal>

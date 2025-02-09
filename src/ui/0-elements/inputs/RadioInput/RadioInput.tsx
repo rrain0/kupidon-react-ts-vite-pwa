@@ -15,9 +15,8 @@ import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
-import trueOrUndef = TypeU.trueOrUndef
 import Puro = TypeU.Puro
-import RippleMode = RippleS6.RippleMode
+import attrExists = TypeU.attrExists
 
 
 
@@ -56,7 +55,7 @@ const RadioInput = React.memo(React.forwardRef<HTMLInputElement, RadioInputProps
     const inputProps = {
       className: RadioInputStyle.El.inputClassName,
       type: 'radio',
-      [RadioInputStyle.Attr.errorName]: trueOrUndef(hasError),
+      [RadioInputStyle.Attr.errorName]: attrExists(hasError),
       ...restProps,
     }
     const activeWrapProps = {

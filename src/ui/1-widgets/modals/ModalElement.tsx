@@ -1,15 +1,20 @@
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { ModalStyle } from 'src/ui/components/modal/Modal/ModalStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import row = EmotionCommon.row
+import gridC = EmotionCommon.gridC
 
 
 
 
 export namespace ModalElement {
   
-  export const modalStyle = css`
+  export const modalCenteredStyle = css`
+    ${ModalStyle.modalBottom};
+    padding: 20px;
+    ${gridC};
+  `
+  
+  export const modalForInputStyle = css`
     ${ModalStyle.modalBottom};
     padding: 20px;
     padding-bottom: 140px;

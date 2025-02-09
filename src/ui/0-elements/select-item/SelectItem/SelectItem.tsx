@@ -10,7 +10,7 @@ import Puro = TypeU.Puro
 import Callback = TypeU.Callback
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
-import trueOrUndef = TypeU.trueOrUndef
+import attrExists = TypeU.attrExists
 
 
 
@@ -61,7 +61,7 @@ const SelectItem = React.memo(React.forwardRef<HTMLButtonElement, SelectItemProp
         data-display-name="SelectItem - Frame"
         ref={setSelectItemFrame}
         className={clsx(SelectItemS6.W.els.selectItem.n, className)}
-        {...{ [dataSelected]: trueOrUndef(isSelected) }}
+        {...{ [dataSelected]: attrExists(isSelected) }}
         style={style}
       >
         

@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { PersonalityType } from 'src/api/model/PersonalityType.ts'
+import { MbtiType } from 'src/api/model/MbtiType.ts'
 import RecordRo = TypeU.RecordRo
 
 import scientist from '@im/personality-type/scientist.svg'
@@ -52,89 +52,123 @@ import clownWithBg from '@im/personality-type/clown-with-bg.svg'
 
 
 
-export const PersonalityTypeData: RecordRo<PersonalityType, {
+export const MbtiData: RecordRo<MbtiType, {
   icon: string 
   picture: string
   color: string
+  highCompatibility: MbtiType[],
+  mediumCompatibility: MbtiType[],
 }> = {
   ESTJ: { 
     icon: secretary,
     picture: secretaryWithBg,
     color: '#3E94DA',
+    highCompatibility: ['ISTJ', 'ESFJ'],
+    mediumCompatibility: ['INFP', 'ENFP'],
   },
   ESTP: { 
     icon: carpenter,
     picture: carpenterWithBg,
     color: '#EABF4B',
+    highCompatibility: ['ISTP', 'ESFP'],
+    mediumCompatibility: ['INTJ', 'ISTJ'],
   },
   ESFJ: { 
     icon: showman,
     picture: showmanWithBg,
     color: '#3E94DA',
+    highCompatibility: ['ISFJ', 'ESTJ'],
+    mediumCompatibility: ['INTP', 'INTJ'],
   },
   ESFP: { 
     icon: clown,
     picture: clownWithBg,
     color: '#EABF4B',
+    highCompatibility: ['ISFP', 'ESTP'],
+    mediumCompatibility: ['INTJ', 'ISTJ'],
   },
   ENTJ: { 
     icon: manager,
     picture: managerWithBg,
     color: '#9C2B87',
+    highCompatibility: ['INTJ', 'ENTP'],
+    mediumCompatibility: ['ISFP', 'INFP'],
   },
   ENTP: { 
     icon: politician,
     picture: politicianWithBg,
     color: '#9C2B87',
+    highCompatibility: ['INTP', 'INFJ'],
+    mediumCompatibility: ['ISFJ', 'ESTJ'],
   },
   ENFJ: { 
     icon: pensioner,
     picture: pensionerWithBg,
     color: '#3E9C2B',
+    highCompatibility: ['INFP', 'ENFP'],
+    mediumCompatibility: ['ISTP', 'ESTP'],
   },
   ENFP: { 
     icon: athlete,
     picture: athleteWithBg,
     color: '#3E9C2B',
+    highCompatibility: ['INFJ', 'INTJ'],
+    mediumCompatibility: ['ISTJ', 'ESTJ'],
   },
   ISTJ: { 
     icon: support,
     picture: supportWithBg,
     color: '#3E94DA',
+    highCompatibility: ['ESTJ', 'ISFJ'],
+    mediumCompatibility: ['ENFP', 'INFP'],
   },
   ISTP: { 
     icon: mechanic,
     picture: mechanicWithBg,
     color: '#EABF4B',
+    highCompatibility: ['ESTP', 'ISFP'],
+    mediumCompatibility: ['ENFJ', 'INFJ'],
   },
   ISFJ: { 
     icon: nurse,
     picture: nurseWithBg,
     color: '#3E94DA',
+    highCompatibility: ['ESFJ', 'ISTJ'],
+    mediumCompatibility: ['ENTP', 'INTP'],
   },
   ISFP: { 
     icon: singer,
     picture: singerWithBg,
     color: '#EABF4B',
+    highCompatibility: ['ESFP', 'ISTP'],
+    mediumCompatibility: ['ESTJ', 'ENTJ'],
   },
   INTJ: { 
     icon: postman,
     picture: postmanWithBg,
     color: '#9C2B87',
+    highCompatibility: ['ENFP', 'INFJ'],
+    mediumCompatibility: ['ESFJ', 'ESTP'],
   },
   INTP: { 
     icon: scientist,
     picture: scientistWithBg,
     color: '#9C2B87',
+    highCompatibility: ['ENTP', 'INFJ'],
+    mediumCompatibility: ['ESFJ', 'ISFJ'],
   },
   INFJ: { 
     icon: photographer,
     picture: photographerWithBg,
     color: '#3E9C2B',
+    highCompatibility: ['ENFP', 'INTJ'],
+    mediumCompatibility: ['ESTP', 'ISTP'],
   },
   INFP: { 
     icon: magician,
     picture: magicianWithBg,
     color: '#3E9C2B',
+    highCompatibility: ['ENFJ', 'INFJ'],
+    mediumCompatibility: ['ESTP', 'ENTJ'],
   },
 }

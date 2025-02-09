@@ -3,7 +3,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
-import trueOrUndef = TypeU.trueOrUndef
+import attrExists = TypeU.attrExists
 
 
 
@@ -43,7 +43,7 @@ const Input = React.memo(React.forwardRef<InputElement, InputProps>(
     }
     const inputProps = {
       className: InputStyle.W.e.input.e.name,
-      [InputStyle.W.states.error.state.name]: trueOrUndef(hasError),
+      [InputStyle.W.states.error.state.name]: attrExists(hasError),
       ...restProps,
     }
     const borderProps = {

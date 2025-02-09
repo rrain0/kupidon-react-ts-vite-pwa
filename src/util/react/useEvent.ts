@@ -4,7 +4,7 @@ import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
 import { useFirstRender } from 'src/util/react-state/useFirstRender'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import Callback = TypeU.Callback
-import Generator = TypeU.Generator
+import Producer = TypeU.Producer
 
 
 
@@ -17,7 +17,7 @@ import Generator = TypeU.Generator
 // because it is impossible to distinct re-renders without using state
 
 export const useEvent = (
-  onEvent: Callback | Generator<Callback>,
+  onEvent: Callback | Producer<Callback>,
   deps: any[] = [],
   triggerOnMount = false,
 ) => {

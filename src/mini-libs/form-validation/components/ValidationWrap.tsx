@@ -28,7 +28,7 @@ import Mapper = TypeU.Mapper
 
 export type ValidationWrapRenderProps<V> = {
   value: V
-  highlight: true | undefined
+  highlight: boolean
   setValue: SetterOrUpdater<V>
   onBlur: Callback
   getChecked: Mapper<V, boolean>
@@ -173,7 +173,7 @@ const ValidationWrap =
   
   if (children) return children({
     value,
-    highlight: trueOrUndef(highlight),
+    highlight,
     setValue,
     onBlur,
     getChecked,
@@ -183,7 +183,7 @@ const ValidationWrap =
   })
   if (render) return render({
     value,
-    highlight: trueOrUndef(highlight),
+    highlight,
     setValue,
     onBlur,
     getChecked,
@@ -208,8 +208,8 @@ export default React.memo(ValidationWrap) as typeof ValidationWrap
       JSX.ElementType
       /*React.JSXElementConstructor<React.JSX.IntrinsicElements['input']>*/
     >
-    let i1: InputType = <input value={'ldksfjl'}/>
-    let i2: InputType = <Input value={'ldksfjl'}/>
+    let i1: InputType = <input value="ldksfjl" />
+    let i2: InputType = <Input value="ldksfjl" />
     
     i1 = React.cloneElement(i1, { name: 'some-name' })
     i2 = React.cloneElement(i2, { name: 'some-name' })

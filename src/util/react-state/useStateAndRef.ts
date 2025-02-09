@@ -3,10 +3,10 @@ import { TypeU } from 'src/util/common/TypeU'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import isfunction = TypeU.isfunction
 import Setter = TypeU.Setter
-import ValueOrGenerator = TypeU.ValueOrGenerator
+import ValueOrProducer = TypeU.ValueOrProducer
 
 
-export const useStateAndRef = <S>(initialState: ValueOrGenerator<S>) => {
+export const useStateAndRef = <S>(initialState: ValueOrProducer<S>) => {
   const [state, setState] = useState(initialState)
   // useState handles initial value for ref to be set
   const [getRefValue, setRefValue, ref] = useRefGetSet(state)

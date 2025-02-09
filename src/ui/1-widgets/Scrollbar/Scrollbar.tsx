@@ -16,7 +16,7 @@ import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
 import PartialUndef = TypeU.PartialUndef
-import trueOrUndef = TypeU.trueOrUndef
+import attrExists = TypeU.attrExists
 
 
 
@@ -251,7 +251,7 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   const scrollbarTrackProps = {
     className: clsx(className, ScrollbarStyle.El.track.name),
     [ScrollbarStyle.Attr.direction.name]: direction,
-    [ScrollbarStyle.Attr.active.name]: trueOrUndef(dragStart),
+    [ScrollbarStyle.Attr.active.name]: attrExists(dragStart),
   }
   
   return <ScrollbarTrack

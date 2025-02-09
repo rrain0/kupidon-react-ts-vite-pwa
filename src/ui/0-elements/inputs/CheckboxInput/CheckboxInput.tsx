@@ -6,10 +6,10 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import trueOrUndef = TypeU.trueOrUndef
 import Checkmark2Ic = SvgIconsPack.Checkmark2Ic
 import Puro = TypeU.Puro
 import UseRipple from 'ui/0-elements/Ripple/UseRipple.tsx'
+import attrExists = TypeU.attrExists
 
 
 
@@ -50,7 +50,7 @@ const CheckboxInput = React.memo(React.forwardRef<HTMLInputElement, CheckboxInpu
     const inputProps = {
       className: CheckboxInputStyle.W.e.input.e.name,
       type: 'checkbox',
-      [CheckboxInputStyle.W.s.error.s.name]: trueOrUndef(hasError),
+      [CheckboxInputStyle.W.s.error.s.name]: attrExists(hasError),
       ...restProps,
     }
     const iconBoxProps = {

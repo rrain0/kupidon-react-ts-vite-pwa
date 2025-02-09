@@ -10,13 +10,14 @@ export namespace TypeU {
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
   //export type emptyObj = Record<never, never> // need to fix
-  export type HtmlBool = true | undefined
+  export type HtmlAttrExistence = '' | undefined
   export type Sign = -1 | 0 | 1
   
   export const noop = () => { }
   export const emptyArr = []
   
-  export const trueOrUndef = (value: any): HtmlBool => value ? true : undefined
+  export const attrExists = (value: any): HtmlAttrExistence => value ? '' : undefined
+  export const trueOrUndef = (value: any): true | undefined => value ? true : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type Exists<T> = Exclude<T, empty>
@@ -103,7 +104,7 @@ export namespace TypeU {
   export type Setter<T> = Callback1<T>
   export type Consumer<T> = Callback1<T>
   export type Getter<T> = () => T
-  export type Generator<T> = Getter<T>
+  export type Producer<T> = Getter<T>
   export type Mapper<In, Out = In> = (prevValue: In) => Out
   export type Mapper2<In1, In2, Out = In1> = (a: In1, b: In2) => Out
   
@@ -113,11 +114,11 @@ export namespace TypeU {
   
   export type Combiner<T1, T2 = T1> = (a: T1, b: T2) => T1
   export type CombinerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number) => T1
-  export type Merger<T1, T2 = T1> = (a: T1, b: T2)=>[T1, T2]
+  export type Merger<T1, T2 = T1> = (a: T1, b: T2) => [T1, T2]
   export type MergerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number) => [T1, T2]
   
   export type ValueOrMapper<T> = T | Mapper<T>
-  export type ValueOrGenerator<T> = T | Generator<T>
+  export type ValueOrProducer<T> = T | Producer<T>
   export type Updater<T> = (mapper: Mapper<T>) => void
   export type SetterOrUpdater<T> = (valueOrMapper: T | Mapper<T>) => void
   

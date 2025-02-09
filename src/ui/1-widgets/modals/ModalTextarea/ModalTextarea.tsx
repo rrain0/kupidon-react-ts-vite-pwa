@@ -5,7 +5,7 @@ import React from 'react'
 import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
-import ItemLabel from 'src/ui/0-elements/basic-elements/ItemLabel.tsx'
+import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import Card2 from 'src/ui/0-elements/cards/Card2.tsx'
 import Textarea, { TextareaRefElement } from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
@@ -44,10 +44,10 @@ const ModalTextarea = React.memo(React.forwardRef<TextareaRefElement, ModalTexta
     
     if (isOpen) return (
       <ModalPortal>
-        <Modal css={ModalElement.modalStyle} onClick={onClose}>
+        <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
           <Card2 css={ModalElement.card2Style}>
             
-            <ItemLabel>{title}</ItemLabel>
+            <ItemTitleBold>{title}</ItemTitleBold>
             
             <Textarea css={TextareaStyle.small}
               autoFocus

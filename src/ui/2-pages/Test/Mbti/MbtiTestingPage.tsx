@@ -4,13 +4,17 @@ import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEvent } from '@util/react/useEvent.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import React, { useMemo, useState } from 'react'
+import { Navigate, useSearchParams } from 'react-router-dom'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { TestMbtiRecoil } from 'src/recoil/state/TestMbtiRecoil.ts'
+import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
+import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { MbtiUiValues } from 'src/ui-data/translations/MbtiUiValues.ts'
+import { MbtiUiText } from 'src/ui-data/translations/MbtiUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { CardTitleNormal } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
@@ -21,14 +25,16 @@ import rowC = EmotionCommon.rowC
 import col = EmotionCommon.col
 import { Pages } from 'ui/components/Pages/Pages'
 import exists = TypeU.exists
-import notExists = TypeU.notExists
 import flexC = EmotionCommon.flexC
+import RootRoute = AppRoutes.RootRoute
+import use = RouteBuilder.use
+import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
-const MbtiPage = React.memo(() => {
+const MbtiTestingPage = React.memo(() => {
   
-  const mbtiUiText = useUiValues(MbtiUiValues)
+  const mbtiUiText = useUiValues(MbtiUiText)
   
   const uiText = useMemo(() => {
     return {
@@ -137,102 +143,117 @@ const MbtiPage = React.memo(() => {
     }
   }, [mbtiUiText])
   
-  const [mbti, setMbti] = useRecoilState(TestMbtiRecoil)
+  const setMbti = useSetRecoilState(MbtiRecoil)
+  const { firstUnanswered, testState } = useRecoilValue(MbtiRecoilComputed)
   
-  const firstUnansweredQuestion = useMemo(() => {
-    const a = mbti.answers
-    for (let i = 0; i < 20; i++) {
-      if (notExists(a[i])) return i
-    }
-    return undefined
-  }, [mbti.answers])
   
-  const [displayedQuestion, setDisplayedQuestion] = useState(firstUnansweredQuestion)
+  const [displayedQuestion, setDisplayedQuestion] = useState(firstUnanswered)
   
   const [getQuestionTitle, , questionTitleRef] = useElemRefGetSet()
   
   useEvent(() => {
+    let stale = false
+    const ms = 200
+    setTimeout(() => {
+      if (!stale) setDisplayedQuestion(firstUnanswered)
+    }, ms)
     const el = getQuestionTitle()
     if (el) {
       el.style.transition = 'none'
       el.style.transform = 'translateX(0)'
       el.style.opacity = '1'
       requestAnimationFrame(() => {
-        el.style.transition = 'transform 200ms ease-out, opacity 200ms ease-out'
+        if (stale) return
+        el.style.transition = `transform ${ms}ms ease-out, opacity ${ms}ms ease-out`
         el.style.transform = 'translateX(-100px)'
         el.style.opacity = '0'
         el.ontransitionend = () => requestAnimationFrame(() => {
-          setDisplayedQuestion(firstUnansweredQuestion)
+          if (stale) return
           el.ontransitionend = null
+          setDisplayedQuestion(firstUnanswered)
           el.style.transition = 'none'
           el.style.transform = 'translateX(100px)'
           el.style.opacity = '0'
           requestAnimationFrame(() => {
-            el.style.transition = 'transform 200ms ease-in, opacity 200ms ease-in'
+            if (stale) return
+            el.style.transition = `transform ${ms}ms ease-in, opacity ${ms}ms ease-in`
             el.style.transform = 'translateX(0)'
             el.style.opacity = '1'
           })
         })
       })
-    } else {
-      setDisplayedQuestion(firstUnansweredQuestion)
     }
-  }, [firstUnansweredQuestion], false)
+    return () => { stale = true }
+  }, [firstUnanswered], false)
   
+  const authUserId = useRecoilValue(AuthRecoil)!.user.id
+  const [searchParams] = useSearchParams()
   
   return (
     <>
-      <Pages.SafeInsets>
-        <Pages.Content css={css`gap: 30px;`}>
-          {exists(displayedQuestion) && (
-            <div
-              data-display-name="MbtiPage"
-              css={css`${col}`}
-            >
-              
-              <Picture src={spendingTimeGuitar} />
-              
-              <div style={{ height: 6 }} />
-              
-              <QuestionTitleBox>
-                <QuestionTitle ref={questionTitleRef}>
-                  {uiText.questions[displayedQuestion].q}
-                </QuestionTitle>
-              </QuestionTitleBox>
-              
-              <Button
-                css={ButtonS6.t(answerV1)}
-                onClick={() => setMbti(prev => {
-                  const a = [...prev.answers]
-                  a[displayedQuestion] = 0
-                  return { ...prev, answers: a }
-                })}
+      {testState == 'completed' && (
+        <Navigate
+          to={RootRoute.profile.id.userId[use](authUserId)
+            .tests[fullAnySearchParams](searchParams)
+          }
+          replace
+        />
+      )}
+      
+      {testState !== 'completed' && (
+        <Pages.SafeInsets>
+          <Pages.Content css={css`gap: 30px;`}>
+            {exists(displayedQuestion) && (
+              <div
+                data-display-name="MbtiPage"
+                css={css`${col}`}
               >
-                {uiText.questions[displayedQuestion].a}
-              </Button>
+                
+                <Picture src={spendingTimeGuitar} />
+                
+                <div style={{ height: 6 }} />
+                
+                <QuestionTitleBox>
+                  <QuestionTitle ref={questionTitleRef}>
+                    {uiText.questions[displayedQuestion].q}
+                  </QuestionTitle>
+                </QuestionTitleBox>
+                
+                <Button
+                  css={ButtonS6.t(answerV1)}
+                  onClick={() => setMbti(prev => {
+                    const a = [...prev.answers]
+                    a[displayedQuestion] = 0
+                    return { ...prev, answers: a }
+                  })}
+                >
+                  {uiText.questions[displayedQuestion].a}
+                </Button>
+                
+                <div style={{ height: 20 }} />
+                
+                <Button
+                  css={ButtonS6.t(answerV2)}
+                  onClick={() => setMbti(prev => {
+                    const a = [...prev.answers]
+                    a[displayedQuestion] = 1
+                    return { ...prev, answers: a }
+                  })}
+                >
+                  {uiText.questions[displayedQuestion].b}
+                </Button>
               
-              <div style={{ height: 20 }} />
-              
-              <Button
-                css={ButtonS6.t(answerV2)}
-                onClick={() => setMbti(prev => {
-                  const a = [...prev.answers]
-                  a[displayedQuestion] = 1
-                  return { ...prev, answers: a }
-                })}
-              >
-                {uiText.questions[displayedQuestion].b}
-              </Button>
-            
-            </div>
-          )}
-        </Pages.Content>
-      </Pages.SafeInsets>
+              </div>
+            )}
+          </Pages.Content>
+        </Pages.SafeInsets>
+      )}
+      
     </>
   )
 })
-MbtiPage.displayName = 'MbtiPage'
-export default MbtiPage
+MbtiTestingPage.displayName = 'MbtiPage'
+export default MbtiTestingPage
 
 
 

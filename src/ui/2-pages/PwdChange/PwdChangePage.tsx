@@ -10,7 +10,7 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.t
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer.tsx'
-import ItemLabel from 'src/ui/0-elements/basic-elements/ItemLabel.tsx'
+import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import ItemTitleContainer from 'src/ui/0-elements/basic-elements/ItemTitleContainer.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
@@ -151,7 +151,7 @@ const PwdChangePage = React.memo(() => {
             
             <ItemContainer>
               <ItemTitleContainer>
-                <ItemLabel>{titleText.currentPwd}</ItemLabel>
+                <ItemTitleBold>{titleText.currentPwd}</ItemTitleBold>
               </ItemTitleContainer>
               <ValidationWrap {...validationProps}
                 fieldName="currentPwd"
@@ -169,7 +169,7 @@ const PwdChangePage = React.memo(() => {
             
             <ItemContainer>
               <ItemTitleContainer>
-                <ItemLabel>{titleText.newPwd}</ItemLabel>
+                <ItemTitleBold>{titleText.newPwd}</ItemTitleBold>
               </ItemTitleContainer>
               <ValidationWrap {...validationProps}
                 fieldName="pwd"
@@ -187,7 +187,7 @@ const PwdChangePage = React.memo(() => {
             
             <ItemContainer>
               <ItemTitleContainer>
-                <ItemLabel>{titleText.repeatPwd}</ItemLabel>
+                <ItemTitleBold>{titleText.repeatPwd}</ItemTitleBold>
               </ItemTitleContainer>
               <ValidationWrap {...validationProps}
                 fieldName="repeatPwd"

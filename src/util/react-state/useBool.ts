@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import ValueOrGenerator = TypeU.ValueOrGenerator
+import ValueOrProducer = TypeU.ValueOrProducer
 
 
 
-export const useBool = (initialValue: ValueOrGenerator<boolean>) => {
+export const useBool = (initialValue: ValueOrProducer<boolean>) => {
   const [value, setValue] = useState(initialValue)
   const setTrue = useCallback(() => setValue(true), [])
   const setFalse = useCallback(() => setValue(false), [])

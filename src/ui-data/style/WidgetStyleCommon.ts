@@ -20,6 +20,9 @@ export namespace WidgetStyleCommon {
   export const rowWrap: WidgetStyleObj = {
     display: 'flex', flexFlow: 'row wrap',
   }
+  export const rowWrapC: WidgetStyleObj = {
+    display: 'flex', flexFlow: 'row wrap', alignItems: 'center',
+  }
   export const col: WidgetStyleObj = {
     display: 'flex', flexFlow: 'column nowrap',
   }

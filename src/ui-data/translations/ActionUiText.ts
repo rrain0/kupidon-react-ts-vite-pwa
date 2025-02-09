@@ -56,6 +56,14 @@ export const ActionUiText = {
     'en-US': 'Cancel',
     'ru-RU': 'Отменить',
   },
+  close: {
+    'en-US': 'Close',
+    'ru-RU': 'Закрыть',
+  },
+  back: {
+    'en-US': 'Back',
+    'ru-RU': 'Назад',
+  },
   
   
   clearAppData: {

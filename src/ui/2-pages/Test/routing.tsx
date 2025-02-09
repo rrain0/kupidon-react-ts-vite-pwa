@@ -16,7 +16,7 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
 
 const MbtiPage = React.lazy(
-  () => import('src/ui/2-pages/Test/Mbti/MbtiPage.tsx')
+  () => import('src/ui/2-pages/Test/Mbti/MbtiTestingPage.tsx')
 )
 
 

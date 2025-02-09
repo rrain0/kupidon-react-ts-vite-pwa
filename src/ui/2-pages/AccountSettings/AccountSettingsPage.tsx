@@ -11,7 +11,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
-import ItemLabel from 'src/ui/0-elements/basic-elements/ItemLabel'
+import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { AccountSettingsPageValidation } from 'src/ui/2-pages/AccountSettings/validation'
@@ -222,7 +222,7 @@ const AccountSettingsPage = React.memo(() => {
             
             
             <ItemContainer>
-              <ItemLabel>{titleText.id}</ItemLabel>
+              <ItemTitleBold>{titleText.id}</ItemTitleBold>
               <Input
                 css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
                 readOnly
@@ -231,7 +231,7 @@ const AccountSettingsPage = React.memo(() => {
             </ItemContainer>
             
             <ItemContainer>
-              <ItemLabel>{titleText.email}</ItemLabel>
+              <ItemTitleBold>{titleText.email}</ItemTitleBold>
               <Input
                 css={InputStyle.outlinedRectOf({ size: 'small' })}
                 readOnly
@@ -240,7 +240,7 @@ const AccountSettingsPage = React.memo(() => {
             </ItemContainer>
             
             <ItemContainer>
-              <ItemLabel>{titleText.emailVerified}</ItemLabel>
+              <ItemTitleBold>{titleText.emailVerified}</ItemTitleBold>
               <Input
                 css={InputStyle.outlinedRectOf({ size: 'small' })}
                 readOnly
@@ -274,14 +274,14 @@ const AccountSettingsPage = React.memo(() => {
              </ItemContainer> */}
             
             <ItemContainer>
-              <ItemLabel>{titleText.userCreated}</ItemLabel>
+              <ItemTitleBold>{titleText.userCreated}</ItemTitleBold>
               <DataField css={DataFieldStyle.statikSmall}>
                 {new Date(user.created) + ''}
               </DataField>
             </ItemContainer>
             
             <ItemContainer>
-              <ItemLabel>{titleText.userUpdated}</ItemLabel>
+              <ItemTitleBold>{titleText.userUpdated}</ItemTitleBold>
               <DataField css={DataFieldStyle.statikSmall}>
                 {new Date(user.updated) + ''}
               </DataField>

@@ -1,3 +1,4 @@
+import { TypeU } from '@util/common/TypeU.ts'
 import React, { useState } from 'react'
 import ModalTextarea from 'src/ui/1-widgets/modals/ModalTextarea/ModalTextarea.tsx'
 import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -6,6 +7,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import EditableTextCard from 'src/ui/components/EditableTextCard/EditableTextCard.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import attrExists = TypeU.attrExists
 
 
 const overlayName = 'profileAboutMe'
@@ -36,7 +38,7 @@ const ProfileAboutMeOption = React.memo(
           title={titleText.aboutMe}
           text={props.value}
           placeholder={placeholderText.aboutMe}
-          data-error={props.highlight}
+          data-error={attrExists(props.highlight)}
           onClick={onOpen}
         />
         

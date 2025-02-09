@@ -1,14 +1,14 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Link, useSearchParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { PersonalityType } from 'src/api/model/PersonalityType.ts'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { MbtiType } from 'src/api/model/MbtiType.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
-import { TestMbtiRecoil, TestMbtiRecoilTestState } from 'src/recoil/state/TestMbtiRecoil.ts'
-import { PersonalityTypeData } from 'src/ui-data/PersonalityTypeData.ts'
+import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
+import { MbtiData } from 'src/ui-data/MbtiData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { PersonalityTypeUiText } from 'src/ui-data/translations/PersonalityTypeUiText.ts'
@@ -16,8 +16,12 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar.tsx'
+import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
+import {
+  useOverlayUrl
+} from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
@@ -49,6 +53,8 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
+const ResetMbtiTestOverlayName = 'resetMbtiTest'
+
 
 
 export type TestsProps = {
@@ -64,13 +70,14 @@ export type TestsProps = {
 
 const Tests = React.memo((props: TestsProps) => {
   
-  const [answers, setAnswers] = useRecoilState(TestMbtiRecoil)
+  const setMbti = useSetRecoilState(MbtiRecoil)
+  const { testState, mbtiType } = useRecoilValue(MbtiRecoilComputed)
+  const mbtiData = MbtiData[mbtiType ?? 'INTP']
+  
   
   const actionText = useUiValues(ActionUiText)
+  const MbtiUiText = useUiValues(PersonalityTypeUiText[mbtiType ?? 'INTP'])
   
-  const [personalityType, setPersonalityType] = useState<PersonalityType | null>(null)
-  
-  const personalityTypeUiText = useUiValues(PersonalityTypeUiText[personalityType ?? 'ESTJ'])
   
   const uiText = useMemo(() => ({
     yourPersonalityType: 'Ваш тип личности',
@@ -79,19 +86,21 @@ const Tests = React.memo((props: TestsProps) => {
       'Этот тест поможет вам понять ваши личностные качества и предпочтения. Результаты будут использованы для улучшения совместимости с другими пользователями',
     yourPersonalityTypeIsUnknown:
       'Ваш тип личности неизвестен, пройдите тест чтобы определить ваш тип личности',
-    personalityTypeName: personalityTypeUiText.name,
+    personalityTypeName: MbtiUiText.name,
     takeTheTest: 'Пройти тест',
     continue: 'Проджолжить',
     startOver: 'Начать заново',
     startTheTestAgain: 'Начать тест заново',
-  }), [personalityTypeUiText])
+    resetTestAndStartAgain: 'Удалить результаты текущего тестирования и начать заново?',
+  }), [MbtiUiText])
   
-  const testState = useRecoilValue(TestMbtiRecoilTestState)
   
-  const color = PersonalityTypeData[personalityType ?? 'INTP'].color
+  const color = mbtiData.color
   
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   
+  const resetMbtiTestDialog = useOverlayUrl(ResetMbtiTestOverlayName )
   
   return (
     <>
@@ -121,7 +130,7 @@ const Tests = React.memo((props: TestsProps) => {
             <CardTitleNormal>{uiText.yourPersonalityType}</CardTitleNormal>
             
             
-            {!personalityType && (
+            {!mbtiType && (
               <Card3 css={yourPersonalityTypeIsUnknownCardS}>
                 <ManWithHugeHeart
                   src={manWithHugeHeart}
@@ -134,13 +143,13 @@ const Tests = React.memo((props: TestsProps) => {
               </Card3>
             )}
             
-            {personalityType && (
+            {mbtiType && (
               <Card3 css={yourPersonalityTypeCardS}>
                 
                 <PersonalityTypePictureBox>
                   <PersonalityTypePicture
-                    src={PersonalityTypeData[personalityType].picture}
-                    alt={personalityType}
+                    src={mbtiData.picture}
+                    alt={mbtiType}
                   />
                 </PersonalityTypePictureBox>
                 
@@ -148,7 +157,7 @@ const Tests = React.memo((props: TestsProps) => {
                   style={{ color: color }}
                 >
                   <PersonalityTypeCodeName>
-                    {personalityType}
+                    {mbtiType}
                   </PersonalityTypeCodeName>
                   <PersonalityTypeName>
                     {uiText.personalityTypeName}
@@ -179,48 +188,59 @@ const Tests = React.memo((props: TestsProps) => {
                 <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
                   <Button
                     css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                    onClick={() => setAnswers(prev => ({ ...prev, answers: [] }))}
+                    onClick={() => setMbti(prev => ({ ...prev, answers: [] }))}
                   >
                     {uiText.startOver}
                   </Button>
                 </Link>
               </div>
             )}
-            {testState === 'complete' && (
-              <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
-                <Button
-                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
-                  onClick={() => setAnswers(prev => ({ ...prev, answers: [] }))}
-                >
-                  {uiText.startTheTestAgain}
-                </Button>
-              </Link>
-            )}
             
-            {testState === 'complete' && (
+            {testState === 'completed' && (
               <div css={css`${col}; gap: 15px;`}>
                 <PersonalityCompatibility
                   compatibility="high"
-                  compatibles={['INTJ', 'ENTP', 'ISFP']}
+                  compatibles={mbtiData.highCompatibility}
                   percent="100-75%"
                 />
                 <PersonalityCompatibility
                   compatibility="medium"
-                  compatibles={['INTJ', 'ENTP', 'ISFP']}
+                  compatibles={mbtiData.mediumCompatibility}
                   percent="75-55%"
                 />
-                <PersonalityCompatibility
+                {/* <PersonalityCompatibility
                   compatibility="low"
                   compatibles={['INTJ', 'ENTP', 'ISFP']}
                   percent="55-25%"
-                />
+                /> */}
               </div>
+            )}
+            
+            {testState === 'completed' && (
+              <Button
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                onClick={resetMbtiTestDialog.open}
+              >
+                {uiText.startTheTestAgain}
+              </Button>
             )}
           
           </div>
           
         </Pages.Content>
       </Pages.SafeInsets>
+      
+      
+      <ModalDialog
+        isOpen={resetMbtiTestDialog.isOpen}
+        title={uiText.resetTestAndStartAgain}
+        onBack={resetMbtiTestDialog.close}
+        onDangerYes={() => {
+          setMbti(prev => ({ ...prev, answers: [] }))
+          resetMbtiTestDialog.close()
+          navigate(RootRoute.test.mbti[fullAnySearchParams](searchParams))
+        }}
+      />
       
       
       {/* <LeftBottomButtonBar>

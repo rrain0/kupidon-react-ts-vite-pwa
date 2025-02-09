@@ -49,6 +49,12 @@ export namespace EmotionCommon {
     flex-flow: row wrap;
   `
   
+  export const rowWrapC = css`
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  `
+  
   export const col = css`
     display: flex;
     flex-flow: column nowrap;
@@ -402,6 +408,12 @@ export namespace EmotionCommon {
     `
     export const lg16Bold = css`
       font-weight: 500;
+      font-size: 16px;
+      line-height: 129%;
+      letter-spacing: normal;
+    `
+    export const lg16ExtraBold = css`
+      font-weight: 700;
       font-size: 16px;
       line-height: 129%;
       letter-spacing: normal;

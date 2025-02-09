@@ -1,17 +1,26 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import CallbackN = TypeU.CallbackN
-import Generator = TypeU.Generator
+import Producer = TypeU.Producer
 
 
 
 export namespace AsyncU {
   
   
+  export const wait = <Args extends any[]>(
+    delay: number,
+    callback: (...args: Args) => any,
+    ...args: Args
+  ) => {
+    return setTimeout(callback, delay, ...args)
+  }
+  
+  
   export const awaitValue = async <T>(delay: number, value?: T) => new Promise<T>(
     resolve => setTimeout(resolve, delay, value)
   )
   export const awaitCallback = async <T>(
-    delay: number, generator: Generator<T>
+    delay: number, generator: Producer<T>
   ) => new Promise<T>(
     resolve => setTimeout(() => resolve(generator()), delay)
   )

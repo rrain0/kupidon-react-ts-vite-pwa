@@ -21,9 +21,9 @@ import colC = EmotionCommon.colC
 import Heart2Ic = SvgIconsPack.Heart2Ic
 import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
-import trueOrUndef = TypeU.trueOrUndef
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
+import attrExists = TypeU.attrExists
 
 
 
@@ -73,7 +73,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       
       <ShortInfoContainer>
         <ShortInfoBox
-          data-disabled={trueOrUndef(isDragging)}
+          data-disabled={attrExists(isDragging)}
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return

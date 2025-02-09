@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { PersonalityType } from 'src/api/model/PersonalityType.ts'
+import { MbtiType } from 'src/api/model/MbtiType.ts'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import RecordRo = TypeU.RecordRo
 
@@ -87,4 +87,4 @@ export const PersonalityTypeUiText = {
       'ru-RU': 'Посредник',
     },
   },
-} satisfies RecordRo<PersonalityType, UiValues<'name'>>
+} satisfies RecordRo<MbtiType, UiValues<'name'>>
