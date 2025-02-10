@@ -64,96 +64,15 @@ export function transformNew1<Props>(
   
   //console.log(baseTree, baseWords, readyWords, findRestProp, entityLvl)
   
-  {
-    const word = baseWords[0]
-    if (baseTree && word) {
-      baseTree = baseTree[word]
-      const transformer = baseTree?.[nodeValue]
-      let nestedNodes: MappedStyle | undefined
-      const nextWords = baseWords.slice(1)
-      if (transformer || findRestProp) {
-        nestedNodes = transformNew1(
-          style, styleProps,
-          baseContextStack, baseTree, nextWords,
-          findRestProp ? [...readyWords, word] : [],
-          findRestProp, findRestProp && !!transformer,
-          entityLvl,
-        )
-      }
-      if (!transformer && !nestedNodes) return undefined
-      if (transformer && !nestedNodes) return { transformer, entityLvl }
-      if (!transformer && nestedNodes) return nestedNodes
-      if (transformer && nestedNodes) {
-        if (nestedNodes.transformer) {
-          if (nestedNodes.entityLvl > entityLvl) {
-            return { transformer, entityLvl, nodes: [nestedNodes] }
-          }
-          if (nestedNodes.entityLvl === entityLvl) {
-            return nestedNodes
-          }
-        }
-        if (!nestedNodes.transformer) {
-          if (nestedNodes.entityLvl === entityLvl) {
-            return nestedNodes
-          }
-        }
-        nestedNodes.transformer = transformer
-        return nestedNodes
-      }
-    }
+  if (baseTree && baseWords.length) {
+    return transformNew1TreeWords(
+      style, styleProps,
+      baseContextStack, baseTree, baseWords,
+      readyWords,
+      findRestProp,
+      entityLvl,
+    )
   }
-  
-  
-  
-  /*
-  if (baseTree && baseWords[0]) {
-    baseTree = baseTree?.[baseWords[0]]
-    if (baseTree) {
-      const transformer = baseTree[nodeValue]
-      if (transformer) {
-        let nestedNodes = transformNew1(
-          style, styleProps,
-          baseContextStack, baseTree, baseWords.slice(1),
-          findRestProp ? [...readyWords, ...baseWords.slice(0, 1)] : [],
-          findRestProp, entityLvl,
-        )
-        if (nestedNodes) {
-          if (nestedNodes.entityLvl > entityLvl || !nestedNodes.transformer) {
-            return { transformer, entityLvl, nodes: [nestedNodes] }
-          }
-          return nestedNodes
-        }
-        nestedNodes = transformNew1(
-          style, styleProps,
-          baseContextStack, undefined, baseWords.slice(1),
-          findRestProp ? [...readyWords, ...baseWords.slice(0, 1)] : [],
-          findRestProp, entityLvl + 1,
-        )
-        if (nestedNodes) {
-          if (nestedNodes.entityLvl > entityLvl || !nestedNodes.transformer) {
-            return { transformer, entityLvl, nodes: [nestedNodes] }
-          }
-          return nestedNodes
-        }
-        return { transformer, entityLvl }
-      }
-    }
-    else {
-      // Если дерево было и кончилось, то идём рекурсивно дальше с оставшимися словами
-      const nestedNodes = transformNew1(
-        style, styleProps,
-        baseContextStack, undefined, baseWords,
-        findRestProp ? readyWords : [],
-        findRestProp, entityLvl + 1,
-      )
-      return nestedNodes
-    }
-    
-    // Мы прошлись по циклу, слова закончились, а дерево ещё нет
-    readyWords = [...readyWords, ...baseWords]
-    baseWords = []
-  }
-   */
   
   // 1) Если дерева не было, то идём дальше создавать его из контекста
   // 2) Если слова кончились, а дерево - нет, то идём дальше в следующий объект
@@ -181,7 +100,6 @@ export function transformNew1<Props>(
   
   }
   else if (isobject(style)) {
-    //entityLvl++
     const mappedStyle: MappedStyle = { entityLvl }
     for (const [selector, subStyle] of Object.entries(style)) {
       const words = [
@@ -193,7 +111,6 @@ export function transformNew1<Props>(
       // Иначе возвращаемя до ближайшего найденного трансформера,
       // либо в начало запуска дерева, где пробуем следующий контекст
       if (baseTree) {
-        //const transformer = baseTree[nodeValue]
         const nestedNodes = transformNew1(
           subStyle, styleProps,
           baseContextStack, baseTree, words,
@@ -213,6 +130,8 @@ export function transformNew1<Props>(
           }
         }
       }
+      
+      
       else {
         baseContextStack = [...baseContextStack]
         // Конекст создаёт новое дерево и отправляет его  дальше
@@ -251,6 +170,104 @@ export function transformNew1<Props>(
     return mappedStyle
   }
   return undefined
+}
+
+
+
+export function transformNew1TreeWords<Props>(
+  style: WidgetStyleWithProps<Props>,
+  styleProps: NoInfer<Props>,
+  baseContextStack: EntitiesRecordArrayTf0,
+  baseTree: WordsTree<WidgetTransformer>,
+  baseWords: string[],
+  readyWords: string[] = [],
+  findRestProp = false,
+  entityLvl = 0,
+): MappedStyle | undefined {
+  
+  //console.log(baseTree, baseWords, readyWords, findRestProp, entityLvl)
+  
+  if (!baseTree || !baseWords.length) {
+    throw new Error('baseTree && baseWords must not be empty')
+  }
+  
+  const word = baseWords[0]
+  baseTree = baseTree[word]
+  const transformer = baseTree?.[nodeValue]
+  
+  let nestedNodes: MappedStyle | undefined
+  const nextWords = baseWords.slice(1)
+  if (transformer || findRestProp) {
+    nestedNodes = transformNew1(
+      style, styleProps,
+      baseContextStack, baseTree, nextWords,
+      [...readyWords, word],
+      findRestProp, findRestProp && !!transformer,
+      entityLvl,
+    )
+  }
+  
+  if (!transformer) {
+    if (!nestedNodes) return undefined
+    else return nestedNodes
+  }
+  
+  else if (transformer) {
+    if (!nestedNodes) {
+      nestedNodes = transformNew1(
+        style, styleProps,
+        baseContextStack, undefined, nextWords,
+        [],
+        findRestProp, false,
+        entityLvl,
+      )
+    }
+    
+    const merge = (nestedNodes: MappedStyle | undefined) => {
+      if (!nestedNodes) return { transformer, entityLvl }
+      else if (nestedNodes) {
+        if (nestedNodes.transformer) {
+          if (nestedNodes.entityLvl > entityLvl) {
+            return { transformer, entityLvl, nodes: [nestedNodes] }
+          }
+          if (nestedNodes.entityLvl === entityLvl) {
+            return nestedNodes
+          }
+          return undefined // must be unreachable
+        }
+        if (!nestedNodes.transformer) {
+          if (nestedNodes.entityLvl > entityLvl) {
+            return {
+              transformer,
+              entityLvl: nestedNodes.entityLvl,
+              nodes: nestedNodes.nodes,
+            }
+          }
+          if (nestedNodes.entityLvl === entityLvl) {
+            return undefined // must be unreachable
+          }
+          return undefined // must be unreachable
+        }
+        return undefined // must be unreachable
+      }
+    }
+    
+    
+    if (nestedNodes && !nestedNodes.transformer
+      && nestedNodes.entityLvl === entityLvl
+    ) {
+      return {
+        entityLvl,
+        nodes: nestedNodes.nodes!.map(n => merge(n)).filter(it => !!it),
+      }
+    }
+    else {
+      // TODO Нужно не тупо прокидывать текущее свойство вниз,
+      //   а выделять все группы одинаковых верхних свойств
+      return merge(nestedNodes)
+    }
+  }
+  
 }
 
 

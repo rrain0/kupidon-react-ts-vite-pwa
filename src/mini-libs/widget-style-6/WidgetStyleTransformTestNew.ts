@@ -187,21 +187,28 @@ export namespace WidgetStyle6NewTest {
   
   export function testTransformSimple() {
     const style = {
-      wMin: 8,
-      //randomProp: 'random',
-      //gridRandomProp: true,
-      background: {
-        position: 'absolute',
-        color: 'white',
-      },
-      bd: 'orange',
-      bdColor: 'orange',
+      // bd: 'orange',
+      // wMin: 8,
+      // randomProp: 'random',
+      // gridRandomProp: true,
+      // background: {
+      //   position: 'absolute',
+      //   color: 'white',
+      // },
       hover: {
         bdColor: 'orange',
         color: 'orange',
-        /* active: {
-          randomProp: 'green',
-        }, */
+        // active: {
+        //   randomProp: 'green',
+        // },
+      },
+      // Здесь похоже подняло focus-visible наверх и затёрло всё остальное
+      focus: {
+        bdColor: 'orange',
+        visible: {
+          bg: 'orange',
+        },
+        wMin: 10,
       },
     }
     const transformedNew1 = transformNew1(

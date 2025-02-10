@@ -336,6 +336,7 @@ export namespace AdditionalProps {
   export const varColor = WidgetProp.ofName('--color')
   // color: value; --color: value;
   export const colorAndVarColor = WidgetMultiPropTransformer.of({
+    title: 'color & --color',
     transform: value => [[
       WidgetProps.color, WidgetPropValue.of(value),
       AdditionalProps.varColor, WidgetPropValue.of(value),
