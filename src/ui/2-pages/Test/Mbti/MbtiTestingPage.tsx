@@ -1,12 +1,14 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
+import { MathU } from '@util/common/MathU.ts'
+import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useEvent } from '@util/react/useEvent.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useMemo, useState } from 'react'
-import { Navigate, useSearchParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -22,8 +24,6 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { CardTitleNormal } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
-import rowWrap = EmotionCommon.rowWrap
-import rowC = EmotionCommon.rowC
 import col = EmotionCommon.col
 import { Pages } from 'ui/components/Pages/Pages'
 import exists = TypeU.exists
@@ -33,7 +33,13 @@ import use = RouteBuilder.use
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
+import attrExists = TypeU.attrExists
+import notExists = TypeU.notExists
+import round1 = MathU.round1
 
+
+
+const transitionTime = 200
 
 
 const MbtiTestingPage = React.memo(() => {
@@ -42,6 +48,8 @@ const MbtiTestingPage = React.memo(() => {
   
   const uiText = useMemo(() => {
     return {
+      saveAndExit: 'Сохранить и выйти',
+      needAnswerHonestly: 'Важно отвечать на вопросы честно, выбрав тот вариант, который лучше всего описывает вас',
       question: 'Вопрос',
       questions: [
         {
@@ -148,48 +156,114 @@ const MbtiTestingPage = React.memo(() => {
     }
   }, [mbtiUiText])
   
-  const setMbti = useSetRecoilState(MbtiRecoil)
-  const { firstUnanswered, testState } = useRecoilValue(MbtiRecoilComputed)
+  const [{ answers, totalCnt }, setMbti] = useRecoilState(MbtiRecoil)
+  const { testState, cntUnanswered } = useRecoilValue(MbtiRecoilComputed)
+  
+  const progress = round1((1 - cntUnanswered / totalCnt) * 100)
   
   
-  const [displayedQuestion, setDisplayedQuestion] = useState(firstUnanswered)
+  const getFirstUnanswered = (answers: (null | number)[], since: number = 0) => {
+    let first: number | undefined
+    let firstSince: number | undefined
+    for (let i = 0; i < totalCnt; i++) {
+      const ai = answers[i]
+      if (notExists(ai)) {
+        if (notExists(first)) first = i
+        if (notExists(firstSince) && i >= since) firstSince = i
+      }
+    }
+    if (exists(firstSince)) return firstSince
+    if (exists(first)) return first
+    return undefined
+  }
+  
+  const [transition, setTransition] = useState(null as null | 'fwd' | 'back')
+  const [curr, setCurr] = useState(() => getFirstUnanswered(answers) ?? 20)
+  const [displayed, setDisplayed] = useState(curr)
+  
+  const setNext = (next: number) => {
+    if (next > curr) {
+      setCurr(next)
+      setTransition('fwd')
+    }
+    else if (next < curr) {
+      setCurr(next)
+      setTransition('back')
+    }
+    else setTransition(null)
+  }
+  
+  const fwd = () => {
+    const next = RangeU.loop(curr + 1, [0, totalCnt])
+    setNext(next)
+  }
+  
+  const back = () => {
+    const next = RangeU.loop(curr - 1, [0, totalCnt - 1])
+    setNext(next)
+  }
+  
+  const next = (answers: (null | number)[]) => {
+    setMbti(prev => ({ ...prev, answers }))
+    const next = getFirstUnanswered(answers, curr)
+    if (notExists(next)) return
+    setNext(next)
+  }
+  
+  const answerA = () => {
+    const newAnswers = [...answers]
+    newAnswers[curr] = 0
+    next(newAnswers)
+  }
+  const answerB = () => {
+    const newAnswers = [...answers]
+    newAnswers[curr] = 1
+    next(newAnswers)
+  }
+  
   
   const [getQuestionTitle, , questionTitleRef] = useElemRefGetSet()
   
   useEvent(() => {
     let stale = false
-    const ms = 200
     setTimeout(() => {
-      if (!stale) setDisplayedQuestion(firstUnanswered)
-    }, ms)
+      if (!stale) setDisplayed(curr)
+    }, transitionTime)
     const el = getQuestionTitle()
-    if (el) {
+    if (el && transition) {
       el.style.transition = 'none'
       el.style.transform = 'translateX(0)'
       el.style.opacity = '1'
       requestAnimationFrame(() => {
         if (stale) return
-        el.style.transition = `transform ${ms}ms ease-out, opacity ${ms}ms ease-out`
-        el.style.transform = 'translateX(-100px)'
+        el.style.transition =
+          `transform ${transitionTime}ms ease-out, opacity ${transitionTime}ms ease-out`
+        el.style.transform =
+          `translateX(${transition === 'fwd' ? '-' : ''}100px)`
         el.style.opacity = '0'
         el.ontransitionend = () => requestAnimationFrame(() => {
           if (stale) return
           el.ontransitionend = null
-          setDisplayedQuestion(firstUnanswered)
+          setDisplayed(curr)
           el.style.transition = 'none'
-          el.style.transform = 'translateX(100px)'
+          el.style.transform =
+            `translateX(${transition === 'fwd' ? '' : '-'}100px)`
           el.style.opacity = '0'
           requestAnimationFrame(() => {
             if (stale) return
-            el.style.transition = `transform ${ms}ms ease-in, opacity ${ms}ms ease-in`
+            el.style.transition =
+              `transform ${transitionTime}ms ease-in, opacity ${transitionTime}ms ease-in`
             el.style.transform = 'translateX(0)'
             el.style.opacity = '1'
+            setTransition(null)
           })
         })
       })
     }
     return () => { stale = true }
-  }, [firstUnanswered], false)
+  }, [curr], false)
+  
+  
   
   const authUserId = useRecoilValue(AuthRecoil)!.user.id
   const [searchParams] = useSearchParams()
@@ -208,23 +282,54 @@ const MbtiTestingPage = React.memo(() => {
       {testState !== 'completed' && (
         <Pages.SafeInsets>
           <Pages.Content css={css`gap: 30px;`}>
-            {exists(displayedQuestion) && (
+            {exists(displayed) && (
               <div
                 data-display-name="MbtiPage"
                 css={css`${col}`}
               >
                 
+                <Link
+                  to={RootRoute.profile.id.userId[use](authUserId)
+                    .tests[fullAnySearchParams](searchParams)
+                  }
+                >
+                  <Button
+                    css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.normal2)}
+                  >
+                    {uiText.saveAndExit}
+                  </Button>
+                </Link>
+                
+                <div style={{ height: 28 }} />
+                
+                <InfoText>
+                  {uiText.needAnswerHonestly}
+                </InfoText>
+                
+                <div style={{ height: 18 }} />
+                
+                <ProgressBox>
+                  <LineProgressFrame>
+                    <LineProgress style={{ width: `${progress}%` }} />
+                  </LineProgressFrame>
+                  <LinePercent>{progress}%</LinePercent>
+                </ProgressBox>
+                
+                <div style={{ height: 36 }} />
+                
                 <QuestionNumberBox>
                   <Button
-                    css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
+                    css={IconButtonS6.t(backS)}
+                    onClick={back}
                   >
                     <ArrowAngledRoundedIc />
                   </Button>
                   <QuestionNumber>
-                    {displayedQuestion + 1} {uiText.question.toLowerCase()}
+                    {displayed + 1} {uiText.question.toLowerCase()}
                   </QuestionNumber>
                   <Button
                     css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
+                    onClick={fwd}
                   >
                     <ArrowAngledRoundedIc />
                   </Button>
@@ -234,36 +339,32 @@ const MbtiTestingPage = React.memo(() => {
                 
                 <Picture src={spendingTimeGuitar} />
                 
-                <div style={{ height: 6 }} />
-                
                 <QuestionTitleBox>
                   <QuestionTitle ref={questionTitleRef}>
-                    {uiText.questions[displayedQuestion].q}
+                    {uiText.questions[displayed].q}
                   </QuestionTitle>
                 </QuestionTitleBox>
                 
                 <Button
-                  css={ButtonS6.t(answerV1)}
-                  onClick={() => setMbti(prev => {
-                    const a = [...prev.answers]
-                    a[displayedQuestion] = 0
-                    return { ...prev, answers: a }
-                  })}
+                  css={ButtonS6.t(answerAS)}
+                  data-selected={attrExists(answers[displayed] === 0)}
+                  disabled={curr !== displayed}
+                  data-locked={attrExists(curr !== displayed)}
+                  onClick={answerA}
                 >
-                  {uiText.questions[displayedQuestion].a}
+                  {uiText.questions[displayed].a}
                 </Button>
                 
                 <div style={{ height: 20 }} />
                 
                 <Button
-                  css={ButtonS6.t(answerV2)}
-                  onClick={() => setMbti(prev => {
-                    const a = [...prev.answers]
-                    a[displayedQuestion] = 1
-                    return { ...prev, answers: a }
-                  })}
+                  css={ButtonS6.t(answerBS)}
+                  data-selected={attrExists(answers[displayed] === 1)}
+                  disabled={curr !== displayed}
+                  data-locked={attrExists(curr !== displayed)}
+                  onClick={answerB}
                 >
-                  {uiText.questions[displayedQuestion].b}
+                  {uiText.questions[displayed].b}
                 </Button>
               
               </div>
@@ -281,10 +382,54 @@ export default MbtiTestingPage
 
 
 
+const InfoText = styled.div`
+  ${Txt.s17};
+  // TODO Theme
+  color: #858585;
+  text-align: center;
+`
+
+
+
+const ProgressBox = styled.div`
+  grid-area: prog;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+`
+const LineProgressFrame = styled.div`
+  width: 100%;
+  height: 8px;
+  border-radius: 999999px;
+  ${row};
+  // TODO Theme
+  background-color: ${p => p.theme.boxNormal.ct5};
+`
+const LineProgress = styled.div`
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  transition: width ${transitionTime}ms ease-in-out;
+  // TODO Theme
+  background-color: ${p => p.theme.boxAccent.bg3};
+`
+const LinePercent = styled.div`
+  ${Txt.lg24Bold};
+  // TODO Theme
+  color: ${p => p.theme.boxAccent.bg3};
+`
+
+
+
+
 const QuestionNumberBox = styled.div`
   ${gridC};
   grid-template-columns: auto 1fr auto;
 `
+const backS: AppWidgetStyle = [IconButtonS6.S.filled.round.lg.normal2, {
+  iconRotate: '0.5turn',
+}]
 const QuestionNumber = styled.div`
   ${gridC};
   // TODO Theme
@@ -311,53 +456,42 @@ const QuestionTitle = styled(CardTitleNormal)`
   ${Txt.s20bold2};
 `
 
-const answerV1: AppWidgetStyle = [ButtonS6.S.filled.rect.lg.main, {
+const answerAS: AppWidgetStyle = [ButtonS6.S.filled.rect.lg.main, {
+  //buttonBgColor: '#46b9f2',
   buttonBgColor: '#229EDC',
   buttonColor: '#FFFFFF',
+  selected: {
+    buttonOutline: '3px solid #229EDC',
+    buttonOutlineOffset: '3px',
+  },
   inFocus: {
-    buttonBgColor: '#21b4fe',
+    buttonBgColor: '#229EDC',
+    buttonColor: '#FFFFFF',
+  },
+  locked: {
+    buttonBgColor: '#229EDC',
     buttonColor: '#FFFFFF',
   },
 }]
-const answerV2: AppWidgetStyle = [ButtonS6.S.filled.rect.lg.main, {
+const answerBS: AppWidgetStyle = [ButtonS6.S.filled.rect.lg.main, {
+  //buttonBgColor: '#c845e9',
   buttonBgColor: '#AD28CE',
   buttonColor: '#FFFFFF',
+  selected: {
+    buttonOutline: '3px solid #AD28CE',
+    buttonOutlineOffset: '3px',
+  },
   inFocus: {
-    buttonBgColor: '#d137f8',
+    buttonBgColor: '#AD28CE',
+    buttonColor: '#FFFFFF',
+  },
+  locked: {
+    buttonBgColor: '#AD28CE',
     buttonColor: '#FFFFFF',
   },
 }]
 
 
-const Title = styled.div`
-  ${Txt.lg16Bold};
-`
 
-const List = styled.div`
-  ${row};
-  gap: 15px;
-`
 
-const Types = styled.div`
-  ${rowWrap};
-  flex: 1;
-  gap: 15px;
-`
-const TypeBox = styled.div`
-  min-height: 30px;
-  background-color: #ffffff;
-  border-radius: 999999px;
-  padding: 5.5px 18px;
-  ${rowC};
-`
-const TypeContent = styled.div`
-  color: #171717;
-  ${Txt.lg16Bold};
-  
-`
-
-const Percent = styled.div`
-  color: #171717;
-  ${Txt.s15Bold};
-`
 

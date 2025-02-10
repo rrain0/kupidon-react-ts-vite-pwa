@@ -44,8 +44,9 @@ export namespace WidgetPseudos {
 
 export namespace WidgetAttrs {
   export const type = WidgetAttr.of('type', { radio: '', checkbox: '' })
-  export const error = WidgetAttr.of('data-error')
-  export const selected = WidgetAttr.of('data-selected')
+  export const dataError = WidgetAttr.of('data-error')
+  export const dataSelected = WidgetAttr.of('data-selected')
+  export const dataLocked = WidgetAttr.of('data-locked')
 }
 /*
 todo style idea: linear-gradient:
@@ -392,6 +393,7 @@ export namespace AdditionalStates {
     ],
   })
   
-  export const selected = WidgetAttrs.selected
+  export const selected = WidgetAttrs.dataSelected
+  export const locked = WidgetAttrs.dataLocked
 }
 

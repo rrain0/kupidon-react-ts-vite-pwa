@@ -5,7 +5,7 @@ import RecordRo = TypeU.RecordRo
 
 
 
-
+// TODO MBTI remove
 export const PersonalityTypeUiText = {
   ESTJ: {
     name: {

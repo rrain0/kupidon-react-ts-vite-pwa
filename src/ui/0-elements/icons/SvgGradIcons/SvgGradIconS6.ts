@@ -66,7 +66,7 @@ export namespace SvgGradIconS6 {
   export namespace Parts {
     export const base: WidgetStyle = {
       gradIcon: {
-        sz: 'auto',
+        sz: 'full',
       },
     }
     
@@ -80,7 +80,7 @@ export namespace SvgGradIconS6 {
               // type: icon, shape: icon, size: auto
               export const auto: WidgetStyle = [base, {
                 gradIcon: {
-                  sz: 'auto',
+                  sz: 'full',
                 },
               }]
             }

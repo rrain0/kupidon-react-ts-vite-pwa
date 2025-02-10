@@ -1,8 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { MbtiType } from 'src/api/model/MbtiType.ts'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -11,11 +10,7 @@ import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
 import { MbtiData } from 'src/ui-data/MbtiData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { PersonalityTypeUiText } from 'src/ui-data/translations/PersonalityTypeUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar.tsx'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
@@ -30,15 +25,13 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
 import { FormProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
-import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
-import { CardTitleNormal, CardTitleSecondary } from '../parts/CardTitle'
+import { CardTitleNormal } from '../parts/CardTitle'
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import pinkHeartWithExclamation from 'src/res/im/ic/pink-heart-with-exclamation.svg'
@@ -46,9 +39,7 @@ import manWithHugeHeart from 'src/res/im/ic/man-with-huge-heart.svg'
 import colC = EmotionCommon.colC
 import flexC = WidgetStyleCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
-import GearIc = SvgIconsPack.GearIc
 import RootRoute = AppRoutes.RootRoute
-import full = RouteBuilder.full
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
@@ -76,7 +67,7 @@ const Tests = React.memo((props: TestsProps) => {
   
   
   const actionText = useUiValues(ActionUiText)
-  const MbtiUiText = useUiValues(PersonalityTypeUiText[mbtiType ?? 'INTP'])
+  const mbtiTypeUiText = useUiValues(mbtiData.uiText)
   
   
   const uiText = useMemo(() => ({
@@ -86,13 +77,13 @@ const Tests = React.memo((props: TestsProps) => {
       'Этот тест поможет вам понять ваши личностные качества и предпочтения. Результаты будут использованы для улучшения совместимости с другими пользователями',
     yourPersonalityTypeIsUnknown:
       'Ваш тип личности неизвестен, пройдите тест чтобы определить ваш тип личности',
-    personalityTypeName: MbtiUiText.name,
+    personalityTypeName: mbtiTypeUiText.name,
     takeTheTest: 'Пройти тест',
     continue: 'Проджолжить',
     startOver: 'Начать заново',
     startTheTestAgain: 'Начать тест заново',
     resetTestAndStartAgain: 'Удалить результаты текущего тестирования и начать заново?',
-  }), [MbtiUiText])
+  }), [mbtiTypeUiText])
   
   
   const color = mbtiData.color
@@ -100,7 +91,16 @@ const Tests = React.memo((props: TestsProps) => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   
-  const resetMbtiTestDialog = useOverlayUrl(ResetMbtiTestOverlayName )
+  const [goToTest, setGoToTest] = useState(false)
+  const resetMbtiTestDialog = useOverlayUrl(ResetMbtiTestOverlayName)
+  
+  // TODO make another hook
+  useEffect(() => {
+    if (goToTest && !resetMbtiTestDialog.isOpen) {
+      setGoToTest(false)
+      navigate(RootRoute.test.mbti[fullAnySearchParams](searchParams))
+    }
+  }, [goToTest, resetMbtiTestDialog.isOpen])
   
   return (
     <>
@@ -167,7 +167,7 @@ const Tests = React.memo((props: TestsProps) => {
                 
                 </Card3>
                 
-                <ShortDescription>{mbtiData.shortDescription}</ShortDescription>
+                <ShortDescription>{mbtiTypeUiText.shortDescription}</ShortDescription>
               </>
             )}
             
@@ -189,14 +189,12 @@ const Tests = React.memo((props: TestsProps) => {
                     {uiText.continue}
                   </Button>
                 </Link>
-                <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
-                  <Button
-                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                    onClick={() => setMbti(prev => ({ ...prev, answers: [] }))}
-                  >
-                    {uiText.startOver}
-                  </Button>
-                </Link>
+                <Button
+                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                  onClick={resetMbtiTestDialog.open}
+                >
+                  {uiText.startOver}
+                </Button>
               </div>
             )}
             
@@ -242,7 +240,7 @@ const Tests = React.memo((props: TestsProps) => {
         onDangerYes={() => {
           setMbti(prev => ({ ...prev, answers: [] }))
           resetMbtiTestDialog.close()
-          navigate(RootRoute.test.mbti[fullAnySearchParams](searchParams))
+          setGoToTest(true)
         }}
       />
       

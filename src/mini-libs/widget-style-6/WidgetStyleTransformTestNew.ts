@@ -152,6 +152,39 @@ export namespace WidgetStyle6NewTest {
   
   
   
+  // TODO Style - Idea 1 - multivalues
+  const styleIdea1 = [
+    {
+      selected: {
+        buttonOutline: '3px solid #AD28CE',
+        buttonOutlineOffset: '3px',
+      },
+    },
+    {
+      selected: {
+        buttonOutline: ['3px solid #AD28CE', { offset: 3 }],
+      },
+    },
+    {
+      selected: {
+        buttonOutline: [3, 'solid', '#AD28CE', { offset: 3 }],
+      },
+    },
+  ]
+  
+  // TODO Style - Idea 1 - add to array
+  const styleIdea2 = [
+    {
+      buttonTransition: ['background-color 200ms linear'],
+    },
+    {
+      // <prop-name>+ - добавит к свойству значения
+      'buttonTransition+': ['opacity 200ms linear'],
+    },
+  ]
+  
+  
+  
   export function testTransformSimple() {
     const style = {
       wMin: 8,

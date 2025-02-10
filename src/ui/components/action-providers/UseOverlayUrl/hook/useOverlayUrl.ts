@@ -1,9 +1,8 @@
-import { ReactU } from '@util/react/ReactU.ts'
-import { useBool } from '@util/react-state/useBool.ts'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
+import { useCallback, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import effectLog = ReactU.effectLog
 
 
 
@@ -33,18 +32,18 @@ export const useOverlayUrl = (overlayName: string) => {
   }, [isOpen, search, setSearch, overlayName])
   
   
-  
-  
-  const [needToClose, setNeedToCloseTrue, setNeedToCloseFalse] = useBool(false)
-  
-  
-  useEffect(() => {
-    setNeedToCloseFalse()
-    if (isLastOpen && needToClose) {
+  const [getHasGoBack, setHasGoBack] = useRefGetSet(false)
+  setHasGoBack(false)
+  const [getClose] = useAsRefGet(() => {
+    if (isLastOpen && !getHasGoBack()) {
       // todo make GoBackRecoil
       navigate(-1)
+      setHasGoBack(true)
     }
-  }, [needToClose])
+  })
   
-  return { isOpen, open, close: setNeedToCloseTrue }
+  const close = useCallback(() => getClose()(), [])
+  
+  
+  return { isOpen, open, close }
 }

@@ -26,8 +26,6 @@ import {
   imSmallPieProgressS, imSmallPlaceholderIcFullTrans,
   imSmallPlaceholderIcS,
 } from 'src/ui/0-elements/im/im'
-import LineProgress from 'src/ui/0-elements/LineProgress/LineProgress'
-import { LineProgressS } from 'src/ui/0-elements/LineProgress/LineProgressS'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
@@ -57,6 +55,7 @@ import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
 import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
 import PictureIc = SvgIconsPack.PictureIc
+import row = EmotionCommon.row
 
 
 
@@ -279,8 +278,10 @@ const SummaryPage = React.memo(() => {
               </HeaderArrowBox>
               
               <ProgressBox>
-                <LineProgress css={LineProgressS.S.normal} progress={profileProgress} />
-                <Percent>{progress}%</Percent>
+                <LineProgressFrame>
+                  <LineProgress style={{ width: `${profileProgress}%` }} />
+                </LineProgressFrame>
+                <LinePercent>{progress}%</LinePercent>
               </ProgressBox>
               
               <CompleteProfileText>
@@ -423,7 +424,21 @@ const ProgressBox = styled.div`
   gap: 8px;
   align-items: center;
 `
-const Percent = styled.div`
+const LineProgressFrame = styled.div`
+  width: 100%;
+  height: 8px;
+  border-radius: 999999px;
+  ${row};
+  background-color: ${p => p.theme.boxNormal.ct5};
+`
+const LineProgress = styled.div`
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  transition: width 1000ms ease-in-out;
+  background-color: ${p => p.theme.boxAccent.bg3};
+`
+const LinePercent = styled.div`
   ${Txt.lg24Bold};
   color: ${p => p.theme.boxAccent.bg3};
 `

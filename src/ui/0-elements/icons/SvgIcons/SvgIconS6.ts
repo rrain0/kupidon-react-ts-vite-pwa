@@ -65,7 +65,7 @@ export namespace SvgIconS6 {
   export namespace Parts {
     export const base: WidgetStyle = {
       icon: {
-        sz: 'auto',
+        sz: 'full',
       },
     }
     
@@ -79,7 +79,7 @@ export namespace SvgIconS6 {
               // type: icon, shape: icon, size: auto
               export const auto: WidgetStyle = [base, {
                 icon: {
-                  sz: 'auto',
+                  sz: 'full',
                 },
               }]
             }

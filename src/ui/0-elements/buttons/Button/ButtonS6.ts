@@ -1,3 +1,4 @@
+import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import {
   WidgetElem,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
@@ -23,6 +24,10 @@ export namespace ButtonS6 {
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const button = WidgetElem.of({
       className: 'rruiButton', ...up,
+      states: {
+        selected: AdditionalStates.selected,
+        locked: AdditionalStates.locked,
+      },
     })
     const border = WidgetElem.of({
       upElem: button, upSelector: '>', className: 'rruiBorder',
@@ -37,8 +42,10 @@ export namespace ButtonS6 {
   
   export function buildWidgetStates(elems: ReturnType<typeof buildWidgetElems>) {
     return {
+      selected: WidgetState.of([elems.button, elems.button.ss!.selected]),
       inFocus: WidgetState.of([elems.button, CommonStates.inFocus]),
       disabled: WidgetState.of([elems.button, CommonStates.disabled]),
+      locked: WidgetState.of([elems.button, elems.button.ss!.locked]),
       error: WidgetState.of([elems.button, CommonStates.error]),
     } as const
   }
@@ -102,7 +109,7 @@ export namespace ButtonS6 {
               // type: filled, shape: rect, size: lg
               export const lg: WidgetStyle = [base, {
                 button: {
-                  w: 'full', hMin: 50, r: 15, p: [8, 6],
+                  w: 'full', hMin: 50, r: 15, p: [8, 10],
                   ...Txt.lg18Lh150,
                 },
               }]

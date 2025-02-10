@@ -131,6 +131,23 @@ export const CommonProps = (() => {
 })()
 
 
+
+/*
+ STATE ORDER (in CSS):
+ normal
+ checked / selected
+ hover
+ active
+ focus
+ focusVisible
+ readOnly
+ disabled
+ locked - это короткий disabled (используется disabled + locked),
+          например во время layout transition.
+          Здесь кнопку нельзя нажать, но выглядит она как обычно.
+ error
+ */
+
 export const CommonStates = (() => {
   const states = {
     before: AdditionalStates.before,
@@ -152,7 +169,7 @@ export const CommonStates = (() => {
     inFocus: AdditionalStates.inFocus,
     readOnly: WidgetPseudos.readOnly,
     disabled: WidgetPseudos.disabled,
-    error: WidgetAttrs.error,
+    error: WidgetAttrs.dataError,
   }
   const sortedProps = Object.entries(states)
     .sort((([propA], [propB]) => propB.length - propA.length))
