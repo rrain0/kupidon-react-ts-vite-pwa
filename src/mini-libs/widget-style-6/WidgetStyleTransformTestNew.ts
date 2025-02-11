@@ -189,29 +189,33 @@ export namespace WidgetStyle6NewTest {
     const style = {
       // bd: 'orange',
       // wMin: 8,
-      // randomProp: 'random',
+      //randomProp: 'random',
       // gridRandomProp: true,
       // background: {
       //   position: 'absolute',
       //   color: 'white',
       // },
-      // hover: {
-      //   bdColor: 'orange',
-      //   color: 'orange',
-      //   active: {
-      //     randomProp: 'green',
-      //     wMin: 20,
-      //   },
-      // },
-      focus: {
+      hover: {
         bdColor: 'orange',
-        visible: {
-          bg: 'orange',
+        color: 'orange',
+        active: {
+          randomProp: 'green',
           wMin: 20,
         },
-        wMin: 10,
-        bg: 'red',
+        randomState: {
+          prop: 'eee',
+          prop2: 'aaaa',
+        },
       },
+      // focus: {
+      //   bdColor: 'orange',
+      //   visible: {
+      //     bg: 'orange',
+      //     wMin: 20,
+      //   },
+      //   wMin: 10,
+      //   bg: 'red',
+      // },
     }
     const transformedNew1 = transformNew1(
       style, undefined, [

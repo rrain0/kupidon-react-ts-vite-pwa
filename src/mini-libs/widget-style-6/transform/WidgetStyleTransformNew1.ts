@@ -64,7 +64,7 @@ export function transformNew1<Props>(
   entityLvl = 0,
 ): MappedStyle | undefined {
   
-  if (baseTree && baseWords.length) {
+  if ((baseTree || findRestProp) && baseWords.length) {
     return transformNew1TreeWords(
       style, styleProps,
       baseContextStack, baseTree, baseWords,
@@ -75,7 +75,7 @@ export function transformNew1<Props>(
   }
   
   // Если слова кончились, а дерево - нет, то идём дальше в следующий объект
-  if (baseTree && !baseWords.length) {
+  if ((baseTree || findRestProp) && !baseWords.length) {
     return transformNew1Tree(
       style, styleProps,
       baseContextStack, baseTree,
@@ -127,16 +127,12 @@ export function transformNew1<Props>(
   else if (isobject(style)) {
     const mappedStyle: MappedStyle = { entityLvl }
     for (const [selector, subStyle] of Object.entries(style)) {
-      const words = [
-        ...baseWords,
-        ...camelCaseToWords(selector).map(w => w.toLowerCase()),
-      ]
-      baseContextStack = [...baseContextStack]
+      const words = camelCaseToWords(selector).map(w => w.toLowerCase())
       // Если получили стиль, то добавляем его и переходим к следующему свойству объекта
       
       const nestedNodes = transformNew1Words(
         subStyle, styleProps,
-        baseContextStack, words,
+        [...baseContextStack], words,
         [],
         entityLvl + 1,
       )
@@ -183,7 +179,6 @@ export function transformNew1Words<Props>(
   // No tree + have words
   // Создаём дерево из контекста.
   
-  baseContextStack = [...baseContextStack]
   // Контекст создаёт новое дерево и отправляет его дальше.
   // Если в результате undefined, то берём следующий контекст.
   
@@ -223,7 +218,7 @@ export function transformNew1Tree<Props>(
   console.log('Tree:', baseTree, [], readyWords, findRestProp, entityLvl)
   
   
-  if (!baseTree) {
+  if (!(baseTree || findRestProp)) {
     throw new Error('baseTree must not be empty')
   }
   
@@ -255,15 +250,14 @@ export function transformNew1Tree<Props>(
     const mappedStyle: MappedStyle = { entityLvl }
     for (const [selector, subStyle] of Object.entries(style)) {
       const words = camelCaseToWords(selector).map(w => w.toLowerCase())
-      
-      let nestedNodes = transformNew1(
+      let nestedNodes: MappedStyle | undefined
+      nestedNodes = transformNew1(
         subStyle, styleProps,
         baseContextStack, baseTree, words,
         readyWords,
         findRestProp, false,
         entityLvl,
       )
-      // я создал слова, но не дал дерево и нифига не сработало
       if (!nestedNodes) {
         nestedNodes = transformNew1(
           subStyle, styleProps,
@@ -301,7 +295,7 @@ export function transformNew1TreeWords<Props>(
   style: WidgetStyleWithProps<Props>,
   styleProps: NoInfer<Props>,
   baseContextStack: EntitiesRecordArrayTf0,
-  baseTree: WordsTree<WidgetTransformer>,
+  baseTree: WordsTree<WidgetTransformer> | undefined,
   baseWords: string[],
   readyWords: string[] = [],
   findRestProp = false,
@@ -310,12 +304,12 @@ export function transformNew1TreeWords<Props>(
   
   console.log('TreeWords:', baseTree, baseWords, readyWords, findRestProp, entityLvl)
   
-  if (!baseTree || !baseWords.length) {
+  if (!(baseTree || findRestProp) || !baseWords.length) {
     throw new Error('baseTree && baseWords must not be empty')
   }
   
   const word = baseWords[0]
-  baseTree = baseTree[word]
+  baseTree = baseTree?.[word]
   const transformer = baseTree?.[nodeValue]
   
   let nestedNodes: MappedStyle | undefined
@@ -335,13 +329,14 @@ export function transformNew1TreeWords<Props>(
     else return nestedNodes
   }
   
+  // TODO новый контекст будет добавляться здесь при принятии нового transformer
   else if (transformer) {
     if (!nestedNodes) {
       nestedNodes = transformNew1(
         style, styleProps,
         baseContextStack, undefined, nextWords,
         [],
-        findRestProp, false,
+        false, false,
         entityLvl,
       )
     }
@@ -400,8 +395,6 @@ export function transformNew1TreeWords<Props>(
       }
     }
     else {
-      // TODO Нужно не тупо прокидывать текущее свойство вниз,
-      //   а выделять все группы одинаковых верхних свойств
       return merge(nestedNodes)
     }
   }
