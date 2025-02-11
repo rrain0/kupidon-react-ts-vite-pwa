@@ -65,49 +65,49 @@ const DialogButtons = React.memo((props: DialogButtonsProps) => {
     >
       {onClose && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={onClose}
+          onClick={() => onClose()}
         >
           {actionText.close}
         </Button>
       )}
       {onBack && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={onBack}
+          onClick={() => onBack()}
         >
           {actionText.back}
         </Button>
       )}
       {onCancel && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={onCancel}
+          onClick={() => onCancel()}
         >
           {actionText.cancel}
         </Button>
       )}
       {onClear && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={onClear}
+          onClick={() => onClear()}
         >
           {actionText.clear}
         </Button>
       )}
       {onOk && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2Uppercase.normal)}
-          onClick={onOk}
+          onClick={() => onOk()}
         >
           {actionText.ok}
         </Button>
       )}
       {onYes && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={onYes}
+          onClick={() => onYes()}
         >
           {actionText.yes}
         </Button>
       )}
       {onDangerYes && (
         <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={onDangerYes}
+          onClick={() => onDangerYes()}
         >
           {actionText.yes}
         </Button>
@@ -118,7 +118,7 @@ const DialogButtons = React.memo((props: DialogButtonsProps) => {
             text: ButtonS6.t(ButtonS6.S.text.rounded.md2.normal),
             filledRounded: ButtonS6.t(ButtonS6.S.filled.rounded.md2.accent),
           } satisfies Record<typeof acceptVariant, any>)[acceptVariant]}
-          onClick={onAccept}
+          onClick={() => onAccept()}
         >
           {actionText.accept}
         </Button>

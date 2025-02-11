@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
@@ -41,7 +41,7 @@ export const QuickSettingsOverlayName = 'quickSettings'
 
 export type SettingsProps = {
   isOpen: boolean
-  close: Callback
+  close: (action?: Callback) => void
 }
 const QuickSettings = React.memo((props: SettingsProps) => {
   const { isOpen, close } = props
@@ -52,11 +52,19 @@ const QuickSettings = React.memo((props: SettingsProps) => {
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
+  const navigate = useNavigate()
+  const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)
+  
+  const closeSettings = () => {
+    close(closeAction)
+    setCloseAction(undefined)
+  }
+  
   const clearSiteDialog = useOverlayUrl(ClearSiteDialogOverlayName)
   
   return (
     <>
-      <UseBottomSheetState isOpen={isOpen} onClose={close}>
+      <UseBottomSheetState isOpen={isOpen} onClose={closeSettings}>
         {props => (
           <ModalPortal>
             <BottomSheetBasic
@@ -80,37 +88,46 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                 <RoundButtonsContainer>
                   
                   {auth && (
-                    <Link to={RootRoute.settings.account[full]()}>
-                      <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
-                        onClick={props.setClosing}
-                      >
-                        <LockIc
-                          css={[
-                            SettingsOptions.icon,
-                            css`translate: 0 -0.1em;`,
-                          ]}
-                        />
-                        {titleText.accountSettings}
-                      </Button>
-                    </Link>
+                    <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
+                      onClick={() => {
+                        setCloseAction(() => () => {
+                          navigate(RootRoute.settings.account[full]())
+                        })
+                        props.setClosing()
+                      }}
+                    >
+                      <LockIc
+                        css={[
+                          SettingsOptions.icon,
+                          css`translate: 0 -0.1em;`,
+                        ]}
+                      />
+                      {titleText.accountSettings}
+                    </Button>
                   )}
                   
-                  <Link to={RootRoute.settings.app[full]()}>
-                    <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
-                      onClick={props.setClosing}
-                    >
-                      <GearIc css={SettingsOptions.icon} />
-                      {titleText.appSettings}
-                    </Button>
-                  </Link>
+                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
+                    onClick={() => {
+                      setCloseAction(() => () => {
+                        navigate(RootRoute.settings.app[full]())
+                      })
+                      props.setClosing()
+                    }}
+                  >
+                    <GearIc css={SettingsOptions.icon} />
+                    {titleText.appSettings}
+                  </Button>
                   
-                  <Link to={RootRoute.dev[full]()}>
-                    <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
-                      onClick={props.setClosing}
-                    >
-                      {titleText.testPage}
-                    </Button>
-                  </Link>
+                  <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
+                    onClick={() => {
+                      setCloseAction(() => () => {
+                        navigate(RootRoute.dev[full]())
+                      })
+                      props.setClosing()
+                    }}
+                  >
+                    {titleText.testPage}
+                  </Button>
                   
                   {app.canInstall && (
                     <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}

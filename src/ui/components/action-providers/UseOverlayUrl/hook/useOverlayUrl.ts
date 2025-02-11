@@ -1,13 +1,13 @@
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import { useCallback, useMemo } from 'react'
+import { TypeU } from '@util/common/TypeU.ts'
+import { useBool } from '@util/react-state/useBool.ts'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import Callback = TypeU.Callback
 
 
 
 
-// TODO Close overlay if go to another page from overlay
 export const useOverlayUrl = (overlayName: string) => {
   const navigate = useNavigate()
   const [search, setSearch] = useSearchParams()
@@ -32,18 +32,34 @@ export const useOverlayUrl = (overlayName: string) => {
   }, [isOpen, search, setSearch, overlayName])
   
   
-  const [getHasGoBack, setHasGoBack] = useRefGetSet(false)
-  setHasGoBack(false)
-  const [getClose] = useAsRefGet(() => {
-    if (isLastOpen && !getHasGoBack()) {
+  
+  
+  const [needClose, enableClose, disableClose] = useBool(false)
+  
+  useEffect(() => {
+    disableClose()
+    if (isLastOpen && needClose) {
       // todo make GoBackRecoil
       navigate(-1)
-      setHasGoBack(true)
     }
-  })
-  
-  const close = useCallback(() => getClose()(), [])
+  }, [needClose])
   
   
-  return { isOpen, open, close }
+  
+  const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)
+  
+  useEffect(() => {
+    if (!isOpen && closeAction) {
+      closeAction()
+      setCloseAction(undefined)
+    }
+  }, [isOpen])
+  
+  
+  const close = useCallback((action?: Callback) => {
+    enableClose()
+    setCloseAction(() => action)
+  }, [])
+  
+  return { isOpen, open, close } as const
 }

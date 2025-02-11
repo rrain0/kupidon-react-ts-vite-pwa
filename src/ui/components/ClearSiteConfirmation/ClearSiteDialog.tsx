@@ -70,6 +70,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
       <ModalDialog
         isOpen={isOpen}
         title={actionText.clearAppData + '?'}
+        onModal={close}
         onBack={close}
         onDangerYes={clear}
       />

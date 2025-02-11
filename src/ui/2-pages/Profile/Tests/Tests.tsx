@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
 import { MbtiData } from 'src/ui-data/MbtiData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
@@ -91,16 +91,14 @@ const Tests = React.memo((props: TestsProps) => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   
-  const [goToTest, setGoToTest] = useState(false)
   const resetMbtiTestDialog = useOverlayUrl(ResetMbtiTestOverlayName)
-  
-  // TODO make another hook
-  useEffect(() => {
-    if (goToTest && !resetMbtiTestDialog.isOpen) {
-      setGoToTest(false)
+  const resetTestAndStartAgain = useCallback(() => {
+    setMbti(prev => ({ ...prev, answers: [] }))
+    resetMbtiTestDialog.close(() => {
       navigate(RootRoute.test.mbti[fullAnySearchParams](searchParams))
-    }
-  }, [goToTest, resetMbtiTestDialog.isOpen])
+    })
+  }, [])
+  
   
   return (
     <>
@@ -236,12 +234,9 @@ const Tests = React.memo((props: TestsProps) => {
       <ModalDialog
         isOpen={resetMbtiTestDialog.isOpen}
         title={uiText.resetTestAndStartAgain}
+        onModal={resetMbtiTestDialog.close}
         onBack={resetMbtiTestDialog.close}
-        onDangerYes={() => {
-          setMbti(prev => ({ ...prev, answers: [] }))
-          resetMbtiTestDialog.close()
-          setGoToTest(true)
-        }}
+        onDangerYes={resetTestAndStartAgain}
       />
       
       

@@ -26,6 +26,8 @@ type ModalDialogProps = Puro<{
   isOpen: boolean
   title: string
   
+  onModal: Callback
+  
   onClose: Callback
   onBack: Callback
   
@@ -42,6 +44,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   const {
     isOpen,
     title,
+    onModal,
     onClose,
     onBack,
     onCancel,
@@ -56,7 +59,10 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   
   if (isOpen) return (
     <ModalPortal>
-      <Modal css={ModalElement.modalCenteredStyle} onClick={onClose}>
+      <Modal
+        css={ModalElement.modalCenteredStyle}
+        onClick={() => onModal?.()}
+      >
         <Card2
           css={cardS}
           data-danger={attrExists(onDangerYes)}
@@ -66,10 +72,10 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
           </TitleBox>
           
           <DialogButtons
-            //onCancel={onCancel}
             //onClear={onClear}
             onClose={onClose}
             onBack={onBack}
+            onCancel={onCancel}
             onOk={onOk}
             onYes={onYes}
             onDangerYes={onDangerYes}

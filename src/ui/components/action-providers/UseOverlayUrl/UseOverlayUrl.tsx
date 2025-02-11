@@ -10,7 +10,7 @@ import Puro = TypeU.Puro
 export type UseOverlayUrlRenderProps = {
   isOpen: boolean
   open: Callback
-  close: Callback
+  close: (action?: Callback) => void
 }
 
 export type UseOverlayProps = {
@@ -19,13 +19,11 @@ export type UseOverlayProps = {
   children: (props: UseOverlayUrlRenderProps) => React.ReactNode
 }>
 
-const UseOverlayUrl = React.memo(
-  (props: UseOverlayProps) => {
-    const { overlayName } = props
-    
-    const { isOpen, open, close } = useOverlayUrl(overlayName)
-    
-    return props.children?.({ isOpen, open, close })
-  }
-)
+const UseOverlayUrl = React.memo((props: UseOverlayProps) => {
+  const { overlayName } = props
+  
+  const { isOpen, open, close } = useOverlayUrl(overlayName)
+  
+  return props.children?.({ isOpen, open, close })
+})
 export default UseOverlayUrl
