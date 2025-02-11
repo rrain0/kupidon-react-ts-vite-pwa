@@ -79,7 +79,7 @@ const Tests = React.memo((props: TestsProps) => {
       'Ваш тип личности неизвестен, пройдите тест чтобы определить ваш тип личности',
     personalityTypeName: mbtiTypeUiText.name,
     takeTheTest: 'Пройти тест',
-    continue: 'Проджолжить',
+    continue: 'Продолжить',
     startOver: 'Начать заново',
     startTheTestAgain: 'Начать тест заново',
     resetTestAndStartAgain: 'Удалить результаты текущего тестирования и начать заново?',

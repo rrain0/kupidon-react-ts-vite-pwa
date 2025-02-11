@@ -195,13 +195,13 @@ export namespace WidgetStyle6NewTest {
       //   position: 'absolute',
       //   color: 'white',
       // },
-      hover: {
-        bdColor: 'orange',
-        color: 'orange',
-        // active: {
-        //   randomProp: 'green',
-        // },
-      },
+      // hover: {
+      //   bdColor: 'orange',
+      //   color: 'orange',
+      //   // active: {
+      //   //   randomProp: 'green',
+      //   // },
+      // },
       // Здесь похоже подняло focus-visible наверх и затёрло всё остальное
       focus: {
         bdColor: 'orange',
@@ -209,6 +209,7 @@ export namespace WidgetStyle6NewTest {
           bg: 'orange',
         },
         wMin: 10,
+        bg: 'red',
       },
     }
     const transformedNew1 = transformNew1(
