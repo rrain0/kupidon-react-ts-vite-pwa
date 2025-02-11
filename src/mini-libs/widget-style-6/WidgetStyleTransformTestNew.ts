@@ -198,15 +198,16 @@ export namespace WidgetStyle6NewTest {
       // hover: {
       //   bdColor: 'orange',
       //   color: 'orange',
-      //   // active: {
-      //   //   randomProp: 'green',
-      //   // },
+      //   active: {
+      //     randomProp: 'green',
+      //     wMin: 20,
+      //   },
       // },
-      // Здесь похоже подняло focus-visible наверх и затёрло всё остальное
       focus: {
         bdColor: 'orange',
         visible: {
           bg: 'orange',
+          wMin: 20,
         },
         wMin: 10,
         bg: 'red',

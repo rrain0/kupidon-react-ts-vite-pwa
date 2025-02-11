@@ -75,7 +75,7 @@ export function transformNew1<Props>(
   }
   
   // Если слова кончились, а дерево - нет, то идём дальше в следующий объект
-  if (baseTree) {
+  if (baseTree && !baseWords.length) {
     return transformNew1Tree(
       style, styleProps,
       baseContextStack, baseTree,
@@ -86,27 +86,36 @@ export function transformNew1<Props>(
     )
   }
   
+  if (!baseTree && baseWords.length) {
+    return transformNew1Words(
+      style, styleProps,
+      baseContextStack, baseWords,
+      readyWords,
+      entityLvl,
+    )
+  }
+  
+  
+  
   console.log(':', baseTree, baseWords, readyWords, findRestProp, entityLvl)
   
-  // No tree + no words
-  // Если дерева не было, то идём дальше создавать его из контекста
+  // No tree + no words => need check style
+  // Если дерева не было, то идём дальше искать объект и брать из него слова.
   
   if (isStyleValue(style)) {
     if (findRestProp) {
-      if (readyWords.length && !foundExactProp) {
+      const propValue = {
+        transformer: { type: 'propValue' as const, value: style },
+        entityLvl: entityLvl + 1,
+      }
+      if (!foundExactProp) {
         return {
           transformer: WidgetProp.ofName(readyWords.join('-')),
           entityLvl: entityLvl,
-          nodes: [{
-            transformer: { type: 'propValue', value: style },
-            entityLvl: entityLvl + 1,
-          }],
+          nodes: [propValue],
         }
       }
-      return {
-        transformer: { type: 'propValue', value: style },
-        entityLvl: entityLvl + 1,
-      }
+      return propValue
     }
   }
   else if (isArray(style)) {
@@ -122,36 +131,25 @@ export function transformNew1<Props>(
         ...baseWords,
         ...camelCaseToWords(selector).map(w => w.toLowerCase()),
       ]
-      
       baseContextStack = [...baseContextStack]
-      // Конекст создаёт новое дерево и отправляет его  дальше
-      // Если в результате undefined, то берём следующий контекст.
       // Если получили стиль, то добавляем его и переходим к следующему свойству объекта
       
-      for (let ctxI = ctxLastI; ctxI >= 0; ctxI--) {
-        const context = baseContextStack[ctxI]
-        if (context) {
-          const tree = createCamelCaseWordsTree(context)
-          const nestedNodes = transformNew1(
-            subStyle, styleProps,
-            baseContextStack, tree, words,
-            [],
-            ctxI === 0, false,
-            entityLvl + 1,
-          )
-          if (nestedNodes) {
-            const nn = nestedNodes
-            const { transformer: t, nodes: n } = nn
-            if (!t && n) {
-              if (!mappedStyle.nodes) mappedStyle.nodes = n
-              else mappedStyle.nodes.push(...n)
-              break
-            }
-            else if (t) {
-              (mappedStyle.nodes ??= []).push(nn)
-              break
-            }
-          }
+      const nestedNodes = transformNew1Words(
+        subStyle, styleProps,
+        baseContextStack, words,
+        [],
+        entityLvl + 1,
+      )
+      if (nestedNodes) {
+        const nn = nestedNodes
+        const { transformer: t, nodes: n } = nn
+        if (!t && n) {
+          if (!mappedStyle.nodes) mappedStyle.nodes = n
+          else mappedStyle.nodes.push(...n)
+          break
+        }
+        else if (t) {
+          (mappedStyle.nodes ??= []).push(nn)
         }
       }
       
@@ -159,6 +157,51 @@ export function transformNew1<Props>(
     if (!mappedStyle.transformer && !mappedStyle.nodes) return undefined
     return mappedStyle
   }
+  return undefined
+}
+
+
+
+
+
+// CREATE TREE
+export function transformNew1Words<Props>(
+  style: WidgetStyleWithProps<Props>,
+  styleProps: NoInfer<Props>,
+  baseContextStack: EntitiesRecordArrayTf0,
+  baseWords: string[] = [],
+  readyWords: string[] = [],
+  entityLvl = 0,
+): MappedStyle | undefined {
+  
+  if (!baseWords.length) {
+    throw new Error('No base words were found')
+  }
+  
+  console.log('Words:', undefined, baseWords, readyWords, false, entityLvl)
+  
+  // No tree + have words
+  // Создаём дерево из контекста.
+  
+  baseContextStack = [...baseContextStack]
+  // Контекст создаёт новое дерево и отправляет его дальше.
+  // Если в результате undefined, то берём следующий контекст.
+  
+  for (let ctxI = ctxLastI; ctxI >= 0; ctxI--) {
+    const context = baseContextStack[ctxI]
+    if (context) {
+      const tree = createCamelCaseWordsTree(context)
+      const nestedNodes = transformNew1(
+        style, styleProps,
+        baseContextStack, tree, baseWords,
+        [],
+        ctxI === 0, false,
+        entityLvl + 1,
+      )
+      if (nestedNodes) return nestedNodes
+    }
+  }
+  
   return undefined
 }
 
@@ -188,20 +231,18 @@ export function transformNew1Tree<Props>(
   
   if (isStyleValue(style)) {
     if (findRestProp) {
-      if (readyWords.length && !foundExactProp) {
+      const propValue = {
+        transformer: { type: 'propValue' as const, value: style },
+        entityLvl: entityLvl + 1,
+      }
+      if (!foundExactProp) {
         return {
           transformer: WidgetProp.ofName(readyWords.join('-')),
           entityLvl: entityLvl,
-          nodes: [{
-            transformer: { type: 'propValue', value: style },
-            entityLvl: entityLvl + 1,
-          }],
+          nodes: [propValue],
         }
       }
-      return {
-        transformer: { type: 'propValue', value: style },
-        entityLvl: entityLvl + 1,
-      }
+      return propValue
     }
   }
   else if (isArray(style)) {
@@ -225,8 +266,7 @@ export function transformNew1Tree<Props>(
       // я создал слова, но не дал дерево и нифига не сработало
       if (!nestedNodes) {
         nestedNodes = transformNew1(
-          // TODO - это костыль
-          { [selector]: subStyle }, styleProps,
+          subStyle, styleProps,
           baseContextStack, undefined, words,
           readyWords,
           findRestProp, false,
@@ -339,9 +379,24 @@ export function transformNew1TreeWords<Props>(
     if (nestedNodes && !nestedNodes.transformer
       && nestedNodes.entityLvl === entityLvl
     ) {
+      const nodes = nestedNodes.nodes!.map(n => merge(n)).filter(it => !!it)
+      const merged = [] as MappedStyle[]
+      nodes.forEach(n => {
+        const last = merged.at(-1)
+        if (n && last && n.transformer === last.transformer && n.entityLvl === last.entityLvl) {
+          (last.nodes ??= []).push(...n.nodes ?? [])
+        }
+        else if (n) {
+          merged.push({
+            transformer: n.transformer,
+            entityLvl: n.entityLvl,
+            nodes: n.nodes,
+          })
+        }
+      })
       return {
         entityLvl,
-        nodes: nestedNodes.nodes!.map(n => merge(n)).filter(it => !!it),
+        nodes: merged,
       }
     }
     else {
