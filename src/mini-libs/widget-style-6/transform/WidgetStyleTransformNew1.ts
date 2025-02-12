@@ -27,6 +27,7 @@ export type EntitiesRecordArrayTf0 = (EntitiesRecordTf0 | undefined)[]
 export type MappedStyle = {
   transformer?: WidgetTransformer | undefined
   entityLvl: number
+  objectLvl: number
   nodes?: MappedStyle[] | undefined
 }
 
@@ -50,6 +51,12 @@ const ctxLastI = ctxWidgetElementPropsI
 
 
 
+// TODO Style - 1) Context
+// ✅ 2) Object nesting level
+// TODO Style - 3) Put prop value in prop node
+// TODO Style - ??? 4) Unpack complex props
+
+
 
 
 export function transformNew1<Props>(
@@ -62,6 +69,7 @@ export function transformNew1<Props>(
   findRestProp = false,
   foundExactProp = false,
   entityLvl = 0,
+  objectLvl = 0,
 ): MappedStyle | undefined {
   
   if ((baseTree || findRestProp) && baseWords.length) {
@@ -70,7 +78,7 @@ export function transformNew1<Props>(
       baseContextStack, baseTree, baseWords,
       readyWords,
       findRestProp,
-      entityLvl,
+      entityLvl, objectLvl,
     )
   }
   
@@ -82,7 +90,7 @@ export function transformNew1<Props>(
       readyWords,
       findRestProp,
       foundExactProp,
-      entityLvl,
+      entityLvl, objectLvl,
     )
   }
   
@@ -91,7 +99,7 @@ export function transformNew1<Props>(
       style, styleProps,
       baseContextStack, baseWords,
       readyWords,
-      entityLvl,
+      entityLvl, objectLvl,
     )
   }
   
@@ -107,12 +115,14 @@ export function transformNew1<Props>(
       const propValue = {
         transformer: { type: 'propValue' as const, value: style },
         entityLvl: entityLvl + 1,
+        objectLvl,
       }
       if (!foundExactProp) {
         return {
           transformer: WidgetProp.ofName(readyWords.join('-')),
           entityLvl: entityLvl,
           nodes: [propValue],
+          objectLvl,
         }
       }
       return propValue
@@ -125,7 +135,7 @@ export function transformNew1<Props>(
   
   }
   else if (isobject(style)) {
-    const mappedStyle: MappedStyle = { entityLvl }
+    const mappedStyle: MappedStyle = { entityLvl, objectLvl }
     for (const [selector, subStyle] of Object.entries(style)) {
       const words = camelCaseToWords(selector).map(w => w.toLowerCase())
       // Если получили стиль, то добавляем его и переходим к следующему свойству объекта
@@ -134,7 +144,7 @@ export function transformNew1<Props>(
         subStyle, styleProps,
         [...baseContextStack], words,
         [],
-        entityLvl + 1,
+        entityLvl, objectLvl + 1,
       )
       if (nestedNodes) {
         const nn = nestedNodes
@@ -168,6 +178,7 @@ export function transformNew1Words<Props>(
   baseWords: string[] = [],
   readyWords: string[] = [],
   entityLvl = 0,
+  objectLvl = 0,
 ): MappedStyle | undefined {
   
   if (!baseWords.length) {
@@ -191,7 +202,7 @@ export function transformNew1Words<Props>(
         baseContextStack, tree, baseWords,
         [],
         ctxI === 0, false,
-        entityLvl + 1,
+        entityLvl + 1, objectLvl,
       )
       if (nestedNodes) return nestedNodes
     }
@@ -213,6 +224,7 @@ export function transformNew1Tree<Props>(
   findRestProp = false,
   foundExactProp = false,
   entityLvl = 0,
+  objectLvl = 0,
 ): MappedStyle | undefined {
   
   console.log('Tree:', baseTree, [], readyWords, findRestProp, entityLvl)
@@ -229,12 +241,14 @@ export function transformNew1Tree<Props>(
       const propValue = {
         transformer: { type: 'propValue' as const, value: style },
         entityLvl: entityLvl + 1,
+        objectLvl,
       }
       if (!foundExactProp) {
         return {
           transformer: WidgetProp.ofName(readyWords.join('-')),
           entityLvl: entityLvl,
           nodes: [propValue],
+          objectLvl,
         }
       }
       return propValue
@@ -247,7 +261,7 @@ export function transformNew1Tree<Props>(
   
   }
   else if (isobject(style)) {
-    const mappedStyle: MappedStyle = { entityLvl }
+    const mappedStyle: MappedStyle = { entityLvl, objectLvl }
     for (const [selector, subStyle] of Object.entries(style)) {
       const words = camelCaseToWords(selector).map(w => w.toLowerCase())
       let nestedNodes: MappedStyle | undefined
@@ -256,7 +270,7 @@ export function transformNew1Tree<Props>(
         baseContextStack, baseTree, words,
         readyWords,
         findRestProp, false,
-        entityLvl,
+        entityLvl, objectLvl + 1,
       )
       if (!nestedNodes) {
         nestedNodes = transformNew1(
@@ -264,7 +278,7 @@ export function transformNew1Tree<Props>(
           baseContextStack, undefined, words,
           readyWords,
           findRestProp, false,
-          entityLvl,
+          entityLvl, objectLvl + 1,
         )
       }
       if (nestedNodes) {
@@ -300,6 +314,7 @@ export function transformNew1TreeWords<Props>(
   readyWords: string[] = [],
   findRestProp = false,
   entityLvl = 0,
+  objectLvl = 0,
 ): MappedStyle | undefined {
   
   console.log('TreeWords:', baseTree, baseWords, readyWords, findRestProp, entityLvl)
@@ -320,7 +335,7 @@ export function transformNew1TreeWords<Props>(
       baseContextStack, baseTree, nextWords,
       [...readyWords, word],
       findRestProp, findRestProp && !!transformer,
-      entityLvl,
+      entityLvl, objectLvl,
     )
   }
   
@@ -337,16 +352,16 @@ export function transformNew1TreeWords<Props>(
         baseContextStack, undefined, nextWords,
         [],
         false, false,
-        entityLvl,
+        entityLvl, objectLvl,
       )
     }
     
-    const merge = (nestedNodes: MappedStyle | undefined) => {
-      if (!nestedNodes) return { transformer, entityLvl }
+    const merge = (nestedNodes: MappedStyle | undefined): MappedStyle | undefined => {
+      if (!nestedNodes) return { transformer, entityLvl, objectLvl }
       else if (nestedNodes) {
         if (nestedNodes.transformer) {
           if (nestedNodes.entityLvl > entityLvl) {
-            return { transformer, entityLvl, nodes: [nestedNodes] }
+            return { transformer, entityLvl, objectLvl, nodes: [nestedNodes] }
           }
           if (nestedNodes.entityLvl === entityLvl) {
             return nestedNodes
@@ -357,7 +372,7 @@ export function transformNew1TreeWords<Props>(
           if (nestedNodes.entityLvl > entityLvl) {
             return {
               transformer,
-              entityLvl: nestedNodes.entityLvl,
+              entityLvl: nestedNodes.entityLvl, objectLvl,
               nodes: nestedNodes.nodes,
             }
           }
@@ -384,13 +399,13 @@ export function transformNew1TreeWords<Props>(
         else if (n) {
           merged.push({
             transformer: n.transformer,
-            entityLvl: n.entityLvl,
+            entityLvl: n.entityLvl, objectLvl: n.objectLvl,
             nodes: n.nodes,
           })
         }
       })
       return {
-        entityLvl,
+        entityLvl, objectLvl,
         nodes: merged,
       }
     }
