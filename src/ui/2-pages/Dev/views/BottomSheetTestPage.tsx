@@ -78,11 +78,11 @@ const BottomSheetTestPage = React.memo(() => {
   
   return (
     <>
-      <Pages.SimplePage>
+      <Pages.PageSimpleColors>
         
         <div css={css`height: 200px;`} />
         
-        <Pages.ContentFill>
+        <Pages.Content>
           <div>Bottom Sheet Test Page</div>
           
           <div css={css`
@@ -162,13 +162,13 @@ const BottomSheetTestPage = React.memo(() => {
             </div>
           ))}
         
-        </Pages.ContentFill>
+        </Pages.Content>
         
         <div css={css`height: 1000px;`} />
         
         
         
-      </Pages.SimplePage>
+      </Pages.PageSimpleColors>
       
       <BottomSheet
         css={BottomSheetS6.t(BottomSheetS6.S.bottom.sheet.full.normal)}

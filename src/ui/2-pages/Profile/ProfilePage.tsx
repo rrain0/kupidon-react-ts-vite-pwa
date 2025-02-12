@@ -46,7 +46,7 @@ import Tab from 'src/ui/components/Tabs/Tab.tsx'
 import Tabs from 'src/ui/components/Tabs/Tabs.tsx'
 import { TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import UseTabsState from 'src/ui/components/Tabs/UseTabsState.tsx'
-import safePageContentPaddings = Pages.safeInsets
+import safePageContentPaddings = Pages.pageAddSafeInsets
 import fill = EmotionCommon.fill
 import blobToDataUrl = FileU.blobToDataUrl
 import fetchToBlob = FileU.fetchToBlob

@@ -18,8 +18,8 @@ const SliderTestPage = React.memo(
     return (
       <>
         
-        <Pages.SimplePage>
-          <Pages.ContentFill>
+        <Pages.PageSimpleColors>
+          <Pages.Content>
             
             <div>Views: Slider</div>
             
@@ -53,8 +53,8 @@ const SliderTestPage = React.memo(
             
             <div css={{ height: 24 }}/>
           
-          </Pages.ContentFill>
-        </Pages.SimplePage>
+          </Pages.Content>
+        </Pages.PageSimpleColors>
         
         
         <BottomButtonBar settingsBtn/>

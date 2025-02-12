@@ -64,7 +64,7 @@ const ReloadPrompt = React.memo(() => {
     ok: 'OK',
   }
   const uiText = {
-    appReadyToWorkOffline: 'Ресурсы приложения хагружены и оно готово работать оффлайн',
+    appReadyToWorkOffline: 'Ресурсы приложения загружены и оно готово работать оффлайн',
     updateDownloaded: 'Обновление загружено. Чтобы оно вступило в силу, нужно обновить страницу',
     reload: 'Обновить',
     later: 'Позже',
@@ -76,7 +76,7 @@ const ReloadPrompt = React.memo(() => {
       <div className="ReloadPrompt-buildDate">{buildDate}</div>
       {(offlineReady || needRefresh) && (
         <ModalPortal>
-          <Modal css={ModalStyle.modalFrameBottom}>
+          <Modal css={ModalStyle.modalFrameBottom} enableUpNodesScroll>
             <div className="ReloadPrompt-container">
               <div className="ReloadPrompt-toast">
                 

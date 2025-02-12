@@ -12,13 +12,13 @@ const FindPairsPage = React.memo(() => {
   return (
     <>
       <Pages.Page>
-        <Pages.SafeInsets>
-          <Pages.Content>
+        <Pages.AddSafeInsets>
+          <Pages.ContentSmCol>
             
             <div>Здесь будут карточки людей.</div>
           
-          </Pages.Content>
-        </Pages.SafeInsets>
+          </Pages.ContentSmCol>
+        </Pages.AddSafeInsets>
         
         
         <PageScrollbars />

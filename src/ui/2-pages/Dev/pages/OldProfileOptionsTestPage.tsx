@@ -34,8 +34,8 @@ const OldProfileOptionsTestPage = React.memo(
     return (
       <>
         
-        <Pages.SimplePage>
-          <Pages.ContentFill>
+        <Pages.PageSimpleColors>
+          <Pages.Content>
             
             
             
@@ -139,8 +139,8 @@ const OldProfileOptionsTestPage = React.memo(
             
             </Card3>
           
-          </Pages.ContentFill>
-        </Pages.SimplePage>
+          </Pages.Content>
+        </Pages.PageSimpleColors>
         
         
         <BottomButtonBar settingsBtn />

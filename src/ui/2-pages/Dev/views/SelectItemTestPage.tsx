@@ -86,8 +86,8 @@ const SelectItemTestPage = () => {
   
   return (
     <>
-      <Pages.SimplePage>
-        <Pages.ContentFill>
+      <Pages.PageSimpleColors>
+        <Pages.Content>
           
           
           <div>Select Item</div>
@@ -307,8 +307,8 @@ const SelectItemTestPage = () => {
           </ColumnContent>
         
         
-        </Pages.ContentFill>
-      </Pages.SimplePage>
+        </Pages.Content>
+      </Pages.PageSimpleColors>
       
       
       <BottomButtonBar settingsBtn />

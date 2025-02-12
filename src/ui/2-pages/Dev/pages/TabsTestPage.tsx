@@ -25,8 +25,8 @@ const TabsTestPage = ()=>{
     tabFrameRef,
   }
   
-  return <Pages.SimplePage>
-    <Pages.ContentFill>
+  return <Pages.PageSimpleColors>
+    <Pages.Content>
       
       <div>Tabs Test</div>
       
@@ -85,8 +85,8 @@ const TabsTestPage = ()=>{
       </div>
       
     
-    </Pages.ContentFill>
-  </Pages.SimplePage>
+    </Pages.Content>
+  </Pages.PageSimpleColors>
 }
 export default TabsTestPage
 

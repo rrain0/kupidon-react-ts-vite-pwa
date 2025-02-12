@@ -13,8 +13,8 @@ const RippleTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.SimplePage>
-        <Pages.ContentFill>
+      <Pages.PageSimpleColors>
+        <Pages.Content>
           
           
           <div>Ripple</div>
@@ -37,8 +37,8 @@ const RippleTestPage = React.memo(() => {
             )}
           </UseRipple>
         
-        </Pages.ContentFill>
-      </Pages.SimplePage>
+        </Pages.Content>
+      </Pages.PageSimpleColors>
       
       
       <BottomButtonBar settingsBtn />

@@ -106,8 +106,8 @@ const PointerTestPage = React.memo(() => {
   
   
   return (
-    <Pages.SimplePage>
-      <Pages.ContentFill>
+    <Pages.PageSimpleColors>
+      <Pages.Content>
         
         <button
           css={css`
@@ -223,8 +223,8 @@ const PointerTestPage = React.memo(() => {
           ref={textDivRef}
         />
       
-      </Pages.ContentFill>
-    </Pages.SimplePage>
+      </Pages.Content>
+    </Pages.PageSimpleColors>
   )
 })
 export default PointerTestPage

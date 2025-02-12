@@ -14,17 +14,6 @@ export namespace Pages {
   
   
   
-  export const pageColors = (t: AppTheme.Theme) => css`
-    ${SimpleGradientBg(t)};
-    color: ${t.page.ct2};
-  `
-  export const simplePageColors = (t: AppTheme.Theme) => css`
-    background: ${t.page.bg};
-    color: ${t.page.ct2};
-  `
-  
-  
-  
   export const pageCol = css`
     min-width: 220px;
     width: min(100%, 100dvw);
@@ -34,48 +23,55 @@ export namespace Pages {
     position: relative;
     ${col};
   `
-  export const Page = styled.main`
-    ${pageCol};
-    ${p => pageColors(p.theme)};
-  `
-  export const SimplePage = styled.main`
-    ${pageCol};
-    ${p => simplePageColors(p.theme)}
-  `
-  
-  export const fillViewport = css`
+  export const pageFillViewport = css`
     min-width: 220px;
     width: 100dvw;
     min-height: 220px;
     height: 100dvh;
   `
+  // no overlapping by bottom / top bars
+  export const pageAddSafeInsets = css`
+    padding-top: var(--top-bars-inset);
+    padding-bottom: var(--bottom-bars-inset);
+  `
+  
+  
+  
+  export const pageColors = (t: AppTheme.Theme) => css`
+    ${SimpleGradientBg(t)};
+    color: ${t.page.ct2};
+  `
+  export const pageSimpleColors = (t: AppTheme.Theme) => css`
+    background: ${t.page.bg};
+    color: ${t.page.ct2};
+  `
+  
+  
+  export const Page = styled.main`
+    ${pageCol};
+    ${p => pageColors(p.theme)};
+  `
+  export const PageSimpleColors = styled.main`
+    ${pageCol};
+    ${p => pageSimpleColors(p.theme)}
+  `
   export const TabsPage = styled.main`
-    ${fillViewport};
+    ${pageFillViewport};
     ${p => pageColors(p.theme)}
   `
   
   
   
-  
-  
-  export const colFitScreen = css`
+  export const colFit = css`
     width: 100%;
-    min-height: 100dvh;
+    min-height: 100%;
     height: fit-content;
-  `
-  
-  
-  // no overlapping by bottom / top bars
-  export const safeInsets = css`
-    padding-top: var(--top-bars-inset);
-    padding-bottom: var(--bottom-bars-inset);
-  `
-  export const NoInsets = styled.div`
-    ${colFitScreen};
     ${colC};
   `
-  export const SafeInsets = styled(NoInsets)`
-    ${safeInsets};
+  
+  export const AddSafeInsets = styled.div`
+    ${colFit};
+    ${pageAddSafeInsets};
   `
   
   
@@ -83,32 +79,31 @@ export namespace Pages {
   
   
   export const content = css`
-    max-width: 550px;
-    min-width: 0;
     width: 100%;
+    min-width: 0;
     height: fit-content;
-    // 12px
     padding-top: max(30px, var(--top-button-bar-height));
     padding-bottom: max(50px, var(--bottom-button-bar-height));
     padding-left: 16px;
     padding-right: 16px;
     ${col};
-    align-items: stretch;
     gap: 10px;
   `
-  export const Content = styled.div(content)
-  
-  export const contentForm = css`
+  export const contentSmCol = css`
     ${content};
+    max-width: 550px;
+    align-items: stretch;
+  `
+  export const contentSmColForm = css`
+    ${contentSmCol};
     gap: 30px;
   `
-  export const ContentForm = styled.form(contentForm)
   
-  export const ContentFill = styled.div`
-    ${content};
-    max-width: unset;
-    align-items: start;
-  `
+  
+  
+  export const Content = styled.div(content)
+  export const ContentSmCol = styled.div(contentSmCol)
+  export const ContentSmColForm = styled.form(contentSmColForm)
   
   
   

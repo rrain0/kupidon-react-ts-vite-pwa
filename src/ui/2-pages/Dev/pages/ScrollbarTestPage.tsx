@@ -15,8 +15,8 @@ import hideScrollbar = EmotionCommon.noScrollbars
 
 
 const ScrollbarTestPage = ()=>{
-  return <Pages.SimplePage>
-    <Pages.ContentFill>
+  return <Pages.PageSimpleColors>
+    <Pages.Content>
       
       <div>Scrollbar Test Page</div>
       
@@ -24,8 +24,8 @@ const ScrollbarTestPage = ()=>{
       <ScrollbarTest showVertical={true}/>
       <ScrollbarTest showHorizontal={true}/>
       
-    </Pages.ContentFill>
-  </Pages.SimplePage>
+    </Pages.Content>
+  </Pages.PageSimpleColors>
 }
 export default ScrollbarTestPage
 

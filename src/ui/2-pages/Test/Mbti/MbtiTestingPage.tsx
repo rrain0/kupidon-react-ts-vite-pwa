@@ -22,6 +22,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { CardTitleNormal } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
 import col = EmotionCommon.col
@@ -280,99 +281,102 @@ const MbtiTestingPage = React.memo(() => {
       )}
       
       {testState !== 'completed' && (
-        <Pages.SafeInsets>
-          <Pages.Content css={css`gap: 30px;`}>
-            {exists(displayed) && (
-              <div
-                data-display-name="MbtiPage"
-                css={css`${col}`}
-              >
-                
-                <Link
-                  to={RootRoute.profile.id.userId[use](authUserId)
-                    .tests[fullAnySearchParams](searchParams)
-                  }
+        <Pages.Page>
+          <Pages.AddSafeInsets>
+            <Pages.ContentSmCol css={css`gap: 30px;`}>
+              {exists(displayed) && (
+                <div
+                  data-display-name="MbtiPage"
+                  css={css`${col}`}
                 >
-                  <Button
-                    css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.normal2)}
+                  
+                  <Link
+                    to={RootRoute.profile.id.userId[use](authUserId)
+                      .tests[fullAnySearchParams](searchParams)
+                    }
                   >
-                    {uiText.saveAndExit}
-                  </Button>
-                </Link>
-                
-                <div style={{ height: 28 }} />
-                
-                <InfoText>
-                  {uiText.needAnswerHonestly}
-                </InfoText>
-                
-                <div style={{ height: 18 }} />
-                
-                <ProgressBox>
-                  <LineProgressFrame>
-                    <LineProgress style={{ width: `${progress}%` }} />
-                  </LineProgressFrame>
-                  <LinePercent>{progress}%</LinePercent>
-                </ProgressBox>
-                
-                <div style={{ height: 36 }} />
-                
-                <QuestionNumberBox>
+                    <Button
+                      css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.normal2)}
+                    >
+                      {uiText.saveAndExit}
+                    </Button>
+                  </Link>
+                  
+                  <div style={{ height: 28 }} />
+                  
+                  <InfoText>
+                    {uiText.needAnswerHonestly}
+                  </InfoText>
+                  
+                  <div style={{ height: 18 }} />
+                  
+                  <ProgressBox>
+                    <LineProgressFrame>
+                      <LineProgress style={{ width: `${progress}%` }} />
+                    </LineProgressFrame>
+                    <LinePercent>{progress}%</LinePercent>
+                  </ProgressBox>
+                  
+                  <div style={{ height: 36 }} />
+                  
+                  <QuestionNumberBox>
+                    <Button
+                      css={IconButtonS6.t(backS)}
+                      onClick={back}
+                    >
+                      <ArrowAngledRoundedIc />
+                    </Button>
+                    <QuestionNumber>
+                      {displayed + 1} {uiText.question.toLowerCase()}
+                    </QuestionNumber>
+                    <Button
+                      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
+                      onClick={fwd}
+                    >
+                      <ArrowAngledRoundedIc />
+                    </Button>
+                  </QuestionNumberBox>
+                  
+                  <div style={{ height: 26 }} />
+                  
+                  <Picture src={spendingTimeGuitar} />
+                  
+                  <QuestionTitleBox>
+                    <QuestionTitle ref={questionTitleRef}>
+                      {uiText.questions[displayed].q}
+                    </QuestionTitle>
+                  </QuestionTitleBox>
+                  
                   <Button
-                    css={IconButtonS6.t(backS)}
-                    onClick={back}
+                    css={ButtonS6.t(answerAS)}
+                    data-selected={attrExists(answers[displayed] === 0)}
+                    disabled={curr !== displayed}
+                    data-locked={attrExists(curr !== displayed)}
+                    onClick={answerA}
                   >
-                    <ArrowAngledRoundedIc />
+                    {uiText.questions[displayed].a}
                   </Button>
-                  <QuestionNumber>
-                    {displayed + 1} {uiText.question.toLowerCase()}
-                  </QuestionNumber>
+                  
+                  <div style={{ height: 20 }} />
+                  
                   <Button
-                    css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
-                    onClick={fwd}
+                    css={ButtonS6.t(answerBS)}
+                    data-selected={attrExists(answers[displayed] === 1)}
+                    disabled={curr !== displayed}
+                    data-locked={attrExists(curr !== displayed)}
+                    onClick={answerB}
                   >
-                    <ArrowAngledRoundedIc />
+                    {uiText.questions[displayed].b}
                   </Button>
-                </QuestionNumberBox>
                 
-                <div style={{ height: 26 }} />
-                
-                <Picture src={spendingTimeGuitar} />
-                
-                <QuestionTitleBox>
-                  <QuestionTitle ref={questionTitleRef}>
-                    {uiText.questions[displayed].q}
-                  </QuestionTitle>
-                </QuestionTitleBox>
-                
-                <Button
-                  css={ButtonS6.t(answerAS)}
-                  data-selected={attrExists(answers[displayed] === 0)}
-                  disabled={curr !== displayed}
-                  data-locked={attrExists(curr !== displayed)}
-                  onClick={answerA}
-                >
-                  {uiText.questions[displayed].a}
-                </Button>
-                
-                <div style={{ height: 20 }} />
-                
-                <Button
-                  css={ButtonS6.t(answerBS)}
-                  data-selected={attrExists(answers[displayed] === 1)}
-                  disabled={curr !== displayed}
-                  data-locked={attrExists(curr !== displayed)}
-                  onClick={answerB}
-                >
-                  {uiText.questions[displayed].b}
-                </Button>
-              
-              </div>
-            )}
-          </Pages.Content>
-        </Pages.SafeInsets>
+                </div>
+              )}
+            </Pages.ContentSmCol>
+          </Pages.AddSafeInsets>
+        </Pages.Page>
       )}
       
+      <BottomButtonBar settingsBtn />
     </>
   )
 })

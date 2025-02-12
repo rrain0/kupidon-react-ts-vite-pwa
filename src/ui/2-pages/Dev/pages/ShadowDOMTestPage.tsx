@@ -12,8 +12,8 @@ const ShadowDOMTestPage = React.memo(() => {
   
   return (
     <>
-      <Pages.SimplePage>
-        <Pages.ContentFill>
+      <Pages.PageSimpleColors>
+        <Pages.Content>
           
           <div>Shadow DOM Test</div>
           
@@ -88,8 +88,8 @@ const ShadowDOMTestPage = React.memo(() => {
           
           </div>
         
-        </Pages.ContentFill>
-      </Pages.SimplePage>
+        </Pages.Content>
+      </Pages.PageSimpleColors>
       
       <BottomButtonBar settingsBtn />
     </>

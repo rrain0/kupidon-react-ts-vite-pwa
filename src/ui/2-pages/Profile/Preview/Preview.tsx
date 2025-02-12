@@ -343,7 +343,7 @@ const Preview = React.memo((props: PreviewProps) => {
   //console.log('rerender')
   
   return (
-    <Pages.SafeInsets>
+    <Pages.AddSafeInsets>
       <PreviewFrame ref={frameRefFun}>
         
         <PreviewFrame2>
@@ -463,7 +463,7 @@ const Preview = React.memo((props: PreviewProps) => {
         />
         
       </PreviewFrame>
-    </Pages.SafeInsets>
+    </Pages.AddSafeInsets>
   )
 })
 export default Preview

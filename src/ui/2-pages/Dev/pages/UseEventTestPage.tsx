@@ -17,15 +17,15 @@ const UseEventTestPage = () => {
   
   
   return (
-    <Pages.SimplePage>
-      <Pages.ContentFill>
+    <Pages.PageSimpleColors>
+      <Pages.Content>
         
         <UseEventTest1 />
         
         <UseEventTest2 />
       
-      </Pages.ContentFill>
-    </Pages.SimplePage>
+      </Pages.Content>
+    </Pages.PageSimpleColors>
   )
 }
 export default UseEventTestPage

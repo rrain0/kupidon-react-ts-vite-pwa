@@ -14,6 +14,7 @@ import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 export type ModalProps = React.ComponentPropsWithoutRef<'article'> & Puro<{
   disableOnThisClick?: boolean
   disableStopPointerAndMouseEvents?: boolean
+  enableUpNodesScroll?: boolean
 }>
 
 
@@ -23,6 +24,7 @@ const Modal = React.memo(React.forwardRef<HTMLDivElement, ModalProps>(
     const {
       disableOnThisClick,
       disableStopPointerAndMouseEvents,
+      enableUpNodesScroll,
       onClick, ...restProps
     } = props
     
@@ -31,7 +33,7 @@ const Modal = React.memo(React.forwardRef<HTMLDivElement, ModalProps>(
     
     const onThisClick = useOnThisClick()
     
-    useUpNodesScrollLock(true, { elementRef: elemRef })
+    useUpNodesScrollLock(!enableUpNodesScroll, { elementRef: elemRef })
     
     return (
       <div

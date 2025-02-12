@@ -21,8 +21,8 @@ React.memo(
   return <>
     
     <Pages.Page>
-      <Pages.SafeInsets>
-        <Pages.Content>
+      <Pages.AddSafeInsets>
+        <Pages.ContentSmCol>
         
           <FormHeader>{titleText.chat}</FormHeader>
         
@@ -31,8 +31,8 @@ React.memo(
         
         
         
-        </Pages.Content>
-      </Pages.SafeInsets>
+        </Pages.ContentSmCol>
+      </Pages.AddSafeInsets>
       
       <PageScrollbars />
     </Pages.Page>

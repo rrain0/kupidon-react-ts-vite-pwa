@@ -79,8 +79,8 @@ const ApplicationSettingsPage = React.memo(() => {
     <>
     
       <Pages.Page>
-        <Pages.SafeInsets>
-          <Pages.Content>
+        <Pages.AddSafeInsets>
+          <Pages.ContentSmCol>
           
             <FormHeader>{titleText.appSettings}</FormHeader>
             
@@ -196,8 +196,8 @@ const ApplicationSettingsPage = React.memo(() => {
           
           
           
-          </Pages.Content>
-        </Pages.SafeInsets>
+          </Pages.ContentSmCol>
+        </Pages.AddSafeInsets>
         
         
         <PageScrollbars />

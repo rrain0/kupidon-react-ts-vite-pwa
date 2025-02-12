@@ -80,8 +80,8 @@ const DevPage = React.memo(() => {
   return (
     <>
       
-      <Pages.SimplePage>
-        <Pages.ContentFill>
+      <Pages.PageSimpleColors>
+        <Pages.Content>
           
           <div css={cssStyle}>A</div>
           <div className={`css-${cssStyle.name}`}>Test Page</div>
@@ -310,8 +310,8 @@ const DevPage = React.memo(() => {
           </div>
         
         
-        </Pages.ContentFill>
-      </Pages.SimplePage>
+        </Pages.Content>
+      </Pages.PageSimpleColors>
       
       
       <TopButtonBar backBtn />

@@ -23,8 +23,8 @@ const MoveElementToAnotherViewTestPage = ()=>{
   const container2 = useRef<HTMLDivElement>(null)
   
   
-  return <Pages.SimplePage>
-    <Pages.ContentFill>
+  return <Pages.PageSimpleColors>
+    <Pages.Content>
       
       <button
         onClick={()=>setPosition(position === 0 ? 1 : 0)}
@@ -44,8 +44,8 @@ const MoveElementToAnotherViewTestPage = ()=>{
         )}</>
       }
     
-    </Pages.ContentFill>
-  </Pages.SimplePage>
+    </Pages.Content>
+  </Pages.PageSimpleColors>
 }
 export default MoveElementToAnotherViewTestPage
 

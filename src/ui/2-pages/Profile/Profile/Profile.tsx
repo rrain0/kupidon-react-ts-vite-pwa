@@ -83,8 +83,8 @@ const Profile = React.memo((props: ProfileProps) => {
   
   return (
     <>
-      <Pages.SafeInsets>
-        <Pages.ContentForm onSubmit={props.onFormSubmitCallback}>
+      <Pages.AddSafeInsets>
+        <Pages.ContentSmColForm onSubmit={props.onFormSubmitCallback}>
           
           <ProfilePageTabHeader thisTabIdx={props.tabIdx} />
           
@@ -230,8 +230,8 @@ const Profile = React.memo((props: ProfileProps) => {
           
           </div>
         
-        </Pages.ContentForm>
-      </Pages.SafeInsets>
+        </Pages.ContentSmColForm>
+      </Pages.AddSafeInsets>
     
     
     </>

@@ -21,8 +21,8 @@ const BowAndArrowsPage = React.memo(
       <>
       
         <Pages.Page>
-          <Pages.SafeInsets>
-            <Pages.Content>
+          <Pages.AddSafeInsets>
+            <Pages.ContentSmCol>
               
               <PageHeader>{titleText.bowAndArrows}</PageHeader>
               
@@ -34,8 +34,8 @@ const BowAndArrowsPage = React.memo(
                 Все события
               </HeaderArrow>
             
-            </Pages.Content>
-          </Pages.SafeInsets>
+            </Pages.ContentSmCol>
+          </Pages.AddSafeInsets>
           
           <PageScrollbars />
         </Pages.Page>

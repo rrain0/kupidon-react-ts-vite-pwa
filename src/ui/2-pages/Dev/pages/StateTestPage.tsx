@@ -50,16 +50,16 @@ React.memo(
   
   
   
-  return <Pages.SimplePage>
-    <Pages.ContentFill> {/* not renders */}
+  return <Pages.PageSimpleColors>
+    <Pages.Content> {/* not renders */}
       
       <div>State Test</div>
         
       <InputComponent/> {/* renders */}
       <ViewComponent/> {/* renders */}
       
-    </Pages.ContentFill>
-  </Pages.SimplePage>
+    </Pages.Content>
+  </Pages.PageSimpleColors>
 })
 export default StateTestPage
 
