@@ -161,10 +161,12 @@ const MbtiTestingPage = React.memo(() => {
   const [{ answers, totalCnt }, setMbti] = useRecoilState(MbtiRecoil)
   const { testState, cntUnanswered } = useRecoilValue(MbtiRecoilComputed)
   
+  const [goBackAfterCompletion] = useState(testState !== 'completed')
+  
   const progress = round1((1 - cntUnanswered / totalCnt) * 100)
   
   
-  const getFirstUnanswered = (answers: (null | number)[], since: number = 0) => {
+  const getNext = (answers: (null | number)[], since: number = 0) => {
     let first: number | undefined
     let firstSince: number | undefined
     for (let i = 0; i < totalCnt; i++) {
@@ -176,11 +178,13 @@ const MbtiTestingPage = React.memo(() => {
     }
     if (exists(firstSince)) return firstSince
     if (exists(first)) return first
-    return undefined
+    return RangeU.loop(since, [0, totalCnt])
   }
   
   const [transition, setTransition] = useState(null as null | 'fwd' | 'back')
-  const [curr, setCurr] = useState(() => getFirstUnanswered(answers) ?? 20)
+  const [curr, setCurr] = useState(() => getNext(
+    answers, testState === 'completed' ? totalCnt - 1 : 0
+  ))
   const [displayed, setDisplayed] = useState(curr)
   
   const setNext = (next: number) => {
@@ -201,14 +205,13 @@ const MbtiTestingPage = React.memo(() => {
   }
   
   const back = () => {
-    const next = RangeU.loop(curr - 1, [0, totalCnt - 1])
+    const next = RangeU.loop(curr - 1, [0, totalCnt])
     setNext(next)
   }
   
   const next = (answers: (null | number)[]) => {
     setMbti(prev => ({ ...prev, answers }))
-    const next = getFirstUnanswered(answers, curr)
-    if (notExists(next)) return
+    const next = getNext(answers, curr + 1)
     setNext(next)
   }
   
@@ -275,7 +278,7 @@ const MbtiTestingPage = React.memo(() => {
   
   return (
     <>
-      {testState == 'completed' && (
+      {testState == 'completed' && goBackAfterCompletion && (
         <Navigate
           to={RootRoute.profile.id.userId[use](authUserId)
             .tests[fullAnySearchParams](searchParams)
@@ -283,105 +286,103 @@ const MbtiTestingPage = React.memo(() => {
           replace
         />
       )}
-      
-      {testState !== 'completed' && (
-        <Pages.Page>
-          <Pages.AddSafeInsets>
-            <Pages.ContentSmCol css={css`gap: 30px;`}>
-              {exists(displayed) && (
-                <div
-                  data-display-name="MbtiPage"
-                  css={css`${col}`}
+    
+      <Pages.Page>
+        <Pages.AddSafeInsets>
+          <Pages.ContentSmCol css={css`gap: 30px;`}>
+            {exists(displayed) && (
+              <div
+                data-display-name="MbtiPage"
+                css={css`${col}`}
+              >
+                
+                <InfoText>
+                  {uiText.needAnswerHonestly}
+                </InfoText>
+                
+                <div style={{ height: 18 }} />
+                
+                <ProgressBox>
+                  <LineProgressFrame>
+                    <LineProgress style={{ width: `${progress}%` }} />
+                  </LineProgressFrame>
+                  <LinePercent>{progress}%</LinePercent>
+                </ProgressBox>
+                
+                <div style={{ height: 36 }} />
+                
+                <QuestionNumberBox>
+                  <Button
+                    css={IconButtonS6.t(backS)}
+                    onClick={back}
+                  >
+                    <ArrowAngledRoundedIc />
+                  </Button>
+                  <QuestionNumber>
+                    {displayed + 1} {uiText.question.toLowerCase()}
+                  </QuestionNumber>
+                  <Button
+                    css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal4)}
+                    onClick={fwd}
+                  >
+                    <ArrowAngledRoundedIc />
+                  </Button>
+                </QuestionNumberBox>
+                
+                <div style={{ height: 26 }} />
+                
+                <Picture src={spendingTimeGuitar} />
+                
+                <QuestionTitleBox>
+                  <QuestionTitle ref={questionTitleRef}>
+                    {uiText.questions[displayed].q}
+                  </QuestionTitle>
+                </QuestionTitleBox>
+                
+                <Button
+                  css={ButtonS6.t(answerAS)}
+                  data-selected={attrExists(answers[displayed] === 0)}
+                  disabled={curr !== displayed}
+                  data-locked={attrExists(curr !== displayed)}
+                  onClick={answerA}
                 >
-                  
-                  <InfoText>
-                    {uiText.needAnswerHonestly}
-                  </InfoText>
-                  
-                  <div style={{ height: 18 }} />
-                  
-                  <ProgressBox>
-                    <LineProgressFrame>
-                      <LineProgress style={{ width: `${progress}%` }} />
-                    </LineProgressFrame>
-                    <LinePercent>{progress}%</LinePercent>
-                  </ProgressBox>
-                  
-                  <div style={{ height: 36 }} />
-                  
-                  <QuestionNumberBox>
-                    <Button
-                      css={IconButtonS6.t(backS)}
-                      onClick={back}
-                    >
-                      <ArrowAngledRoundedIc />
-                    </Button>
-                    <QuestionNumber>
-                      {displayed + 1} {uiText.question.toLowerCase()}
-                    </QuestionNumber>
-                    <Button
-                      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal4)}
-                      onClick={fwd}
-                    >
-                      <ArrowAngledRoundedIc />
-                    </Button>
-                  </QuestionNumberBox>
-                  
-                  <div style={{ height: 26 }} />
-                  
-                  <Picture src={spendingTimeGuitar} />
-                  
-                  <QuestionTitleBox>
-                    <QuestionTitle ref={questionTitleRef}>
-                      {uiText.questions[displayed].q}
-                    </QuestionTitle>
-                  </QuestionTitleBox>
-                  
-                  <Button
-                    css={ButtonS6.t(answerAS)}
-                    data-selected={attrExists(answers[displayed] === 0)}
-                    disabled={curr !== displayed}
-                    data-locked={attrExists(curr !== displayed)}
-                    onClick={answerA}
-                  >
-                    {uiText.questions[displayed].a}
-                  </Button>
-                  
-                  <div style={{ height: 20 }} />
-                  
-                  <Button
-                    css={ButtonS6.t(answerBS)}
-                    data-selected={attrExists(answers[displayed] === 1)}
-                    disabled={curr !== displayed}
-                    data-locked={attrExists(curr !== displayed)}
-                    onClick={answerB}
-                  >
-                    {uiText.questions[displayed].b}
-                  </Button>
-                  
-                  <div style={{ height: 28 }} />
-                  
-                  <div css={rowE}>
-                    <Link
-                      to={RootRoute.profile.id.userId[use](authUserId)
-                        .tests[fullAnySearchParams](searchParams)
-                      }
-                    >
-                      <Button
-                        css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.danger)}
-                      >
-                        {uiText.saveAndExit}
-                      </Button>
-                    </Link>
-                  </div>
+                  {uiText.questions[displayed].a}
+                </Button>
                 
+                <div style={{ height: 20 }} />
                 
+                <Button
+                  css={ButtonS6.t(answerBS)}
+                  data-selected={attrExists(answers[displayed] === 1)}
+                  disabled={curr !== displayed}
+                  data-locked={attrExists(curr !== displayed)}
+                  onClick={answerB}
+                >
+                  {uiText.questions[displayed].b}
+                </Button>
+                
+                <div style={{ height: 28 }} />
+                
+                <div css={rowE}>
+                  <Link
+                    to={RootRoute.profile.id.userId[use](authUserId)
+                      .tests[fullAnySearchParams](searchParams)
+                    }
+                  >
+                    <Button
+                      css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.danger)}
+                    >
+                      {uiText.saveAndExit}
+                    </Button>
+                  </Link>
                 </div>
-              )}
-            </Pages.ContentSmCol>
-          </Pages.AddSafeInsets>
-        </Pages.Page>
-      )}
+              
+              
+              </div>
+            )}
+          </Pages.ContentSmCol>
+        </Pages.AddSafeInsets>
+      </Pages.Page>
       
       <BottomButtonBar settingsBtnLeft />
     </>

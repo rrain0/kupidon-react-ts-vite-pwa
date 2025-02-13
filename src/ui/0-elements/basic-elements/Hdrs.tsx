@@ -58,5 +58,27 @@ export namespace Hdrs {
     ${p => card3(p.theme)};
   `
   
+  
+  
+  export const itemTitleS = (t: AppTheme.Theme) => css`
+    ${Txt.s16};
+    color: ${t.page.ct2}
+  `
+  export const ItemTitle = styled.h5`
+    ${resetH};
+    color: ${p => itemTitleS(p.theme)}
+  `
+  
+  
+  
+  export const itemTitleBoldS = (t: AppTheme.Theme) => css`
+    ${Txt.s16ExtraBold};
+    color: ${t.page.ct2}
+  `
+  export const ItemTitleBold = styled.h5`
+    ${resetH};
+    color: ${p => itemTitleBoldS(p.theme)}
+  `
+  
 }
 

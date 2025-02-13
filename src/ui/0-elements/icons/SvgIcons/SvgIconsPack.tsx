@@ -73,7 +73,10 @@ import Search2Svg from 'src/res/ic/normal/search-2.svg?react'
 import Spinner8LinesSvg from 'src/res/ic/normal/spinner-8-lines.svg?react'
 import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.svg?react'
 
+import WarnCircleOutlinedSvg from 'src/res/ic/normal/warn-circle-outlined.svg?react'
 import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
+import WarnTriangleOutlinedSvg from 'src/res/ic/normal/warn-triangle-outlined.svg?react'
+
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -277,7 +280,9 @@ export namespace SvgIconsPack {
   )
   
   
+  export const WarnCircleOutlinedIc = generateSimpleSvgIcon(WarnCircleOutlinedSvg)
   export const WarnTriangleToastifyIc = generateSimpleSvgIcon(WarnTriangleToastifySvg)
+  export const WarnTriangleOutlinedIc = generateSimpleSvgIcon(WarnTriangleOutlinedSvg)
   
   
   

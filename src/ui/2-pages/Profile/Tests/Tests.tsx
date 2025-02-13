@@ -86,6 +86,7 @@ const Tests = React.memo((props: TestsProps) => {
     takeTheTest: 'Пройти тест',
     continue: 'Продолжить',
     startOver: 'Начать заново',
+    changeAnswers: 'Изменить ответы',
     startTheTestAgain: 'Начать тест заново',
     resetTestAndStartAgain: 'Удалить результаты текущего тестирования и начать заново?',
   }), [mbtiTypeUiText])
@@ -177,7 +178,7 @@ const Tests = React.memo((props: TestsProps) => {
             {testState === 'idle' && (
               <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
                 <Button
-                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
+                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
                 >
                   {uiText.takeTheTest}
                 </Button>
@@ -187,7 +188,7 @@ const Tests = React.memo((props: TestsProps) => {
               <div css={css`${col}; gap: 15px;`}>
                 <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
                   <Button
-                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent3)}
+                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
                   >
                     {uiText.continue}
                   </Button>
@@ -226,12 +227,21 @@ const Tests = React.memo((props: TestsProps) => {
             </MiniTypesBox>
             
             {testState === 'completed' && (
-              <Button
-                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                onClick={resetMbtiTestDialog.open}
-              >
-                {uiText.startTheTestAgain}
-              </Button>
+              <>
+                <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+                  <Button
+                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                  >
+                    {uiText.changeAnswers}
+                  </Button>
+                </Link>
+                <Button
+                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                  onClick={resetMbtiTestDialog.open}
+                >
+                  {uiText.startTheTestAgain}
+                </Button>
+              </>
             )}
             
           </div>

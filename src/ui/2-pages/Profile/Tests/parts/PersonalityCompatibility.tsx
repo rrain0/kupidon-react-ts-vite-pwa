@@ -76,6 +76,7 @@ const boxTheme = {
   boxDanger: {
     bg:    '#f7b8b8',
     ct:    '#c52525',
+    ct2:   '#ff6b6b',
     ctSec: '#676767',
   },
 }
