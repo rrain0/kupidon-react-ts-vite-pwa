@@ -65,7 +65,7 @@ export const MbtiUiText = {
   },
   
   question7: {
-    'ru-RU': 'Что для вас важнее',
+    'ru-RU': 'Что для вас важнее?',
   },
   question7AnswerA: {
     'ru-RU': 'Практическая польза',
@@ -81,7 +81,7 @@ export const MbtiUiText = {
     'ru-RU': 'Ориентируюсь на логику и факты',
   },
   question8AnswerB: {
-    'ru-RU': 'Ориентируюсь на логику и факты',
+    'ru-RU': 'Руководствуюсь чувствами и эмоциями',
   },
   
   question9: {
@@ -185,7 +185,7 @@ export const MbtiUiText = {
   },
   
   question19: {
-    'ru-RU': 'В спорной ситуации вы',
+    'ru-RU': 'В спорной ситуации вы:',
   },
   question19AnswerA: {
     'ru-RU': 'Предлагаете рациональное решение',

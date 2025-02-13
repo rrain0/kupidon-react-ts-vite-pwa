@@ -457,7 +457,7 @@ const QuestionTitleBox = styled.div`
 `
 const QuestionTitle = styled.h5`
   ${resetH};
-  ${gridC};
+  text-align: center;
   ${Txt.s20Bold600};
 `
 
