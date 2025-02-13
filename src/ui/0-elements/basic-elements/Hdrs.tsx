@@ -62,23 +62,38 @@ export namespace Hdrs {
   
   export const itemTitleS = (t: AppTheme.Theme) => css`
     ${Txt.s16};
-    color: ${t.page.ct2}
+    color: ${t.page.ct2};
   `
   export const ItemTitle = styled.h5`
     ${resetH};
-    color: ${p => itemTitleS(p.theme)}
+    ${p => itemTitleS(p.theme)};
   `
   
   
   
   export const itemTitleBoldS = (t: AppTheme.Theme) => css`
     ${Txt.s16ExtraBold};
-    color: ${t.page.ct2}
+    color: ${t.page.ct2};
   `
   export const ItemTitleBold = styled.h5`
     ${resetH};
-    color: ${p => itemTitleBoldS(p.theme)}
+    ${p => itemTitleBoldS(p.theme)};
   `
+  
+  
+  
+  export const inputTitleBoldS = (t: AppTheme.Theme) => css`
+    ${itemTitleBoldS(t)};
+    padding-left: 12px;
+  `
+  export const InputTitleBold = styled.h5`
+    ${resetH};
+    ${p => inputTitleBoldS(p.theme)};
+  `
+  
+  
+  
+  
   
 }
 

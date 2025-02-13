@@ -11,7 +11,6 @@ import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
-import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { AccountSettingsPageValidation } from 'src/ui/2-pages/AccountSettings/validation'
@@ -86,11 +85,11 @@ const AccountSettingsPage = React.memo(() => {
     values: formValues,
     failedFields,
     prepareAndRequest: useCallback(
-      (values: FormValues,failedFields: (keyof FormValues)[])=>{
+      (values: FormValues, failedFields: (keyof FormValues)[]) => {
         const userToUpdate: UserToUpdate = {}
         ObjectKeys(userDefaultValues)
-          .filter(fName=>!['pwd','repeatPwd'].includes(fName))
-          .forEach(fName=>{
+          .filter(fName => !['pwd', 'repeatPwd'].includes(fName))
+          .forEach(fName => {
             if (!failedFields.includes(fName)) userToUpdate[fName] = values[fName]
           })
         if (!failedFields.includes('pwd') &&
@@ -99,7 +98,7 @@ const AccountSettingsPage = React.memo(() => {
         return UserApi.update(userToUpdate)
       },
       []
-    )
+    ),
   })
   
   const {
@@ -115,7 +114,7 @@ const AccountSettingsPage = React.memo(() => {
         if (!failedFields.includes('pwd') && failedFields.includes('repeatPwd'))
           preparedFields.push('pwd')
         return preparedFields
-          .filter(ff=>Object.hasOwn(userDefaultValues,ff))
+          .filter(ff => Object.hasOwn(userDefaultValues, ff))
           .length < ObjectKeys(userDefaultValues).length
       },
       []
@@ -127,31 +126,28 @@ const AccountSettingsPage = React.memo(() => {
   
   
   
-  const fieldIsInitial = useCallback(
-    (field: keyof FormValues)=>{
-      return failures
-        .some(f=>f.type === 'initial' && f.errorFields.includes(field))
-    },
-    [failures]
-  )
+  const fieldIsInitial = useCallback((field: keyof FormValues) => {
+    return failures
+      .some(f => f.type === 'initial' && f.errorFields.includes(field))
+  }, [failures])
   
-  const updateValues = useEffectEvent((auth: AuthStateType)=>{
-    setFormValues(s=>{
+  const updateValues = useEffectEvent((auth: AuthStateType) => {
+    setFormValues(s => {
       const u = auth!.user
-      const newValues = {...s, initialValues: {...s.initialValues}}
+      const newValues = { ...s, initialValues: { ...s.initialValues } }
       //newValues.initialValues.name = u.name
       
-      ObjectKeys(userDefaultValues).forEach(fName=>{
+      ObjectKeys(userDefaultValues).forEach(fName => {
         if (fieldIsInitial(fName) && fName in u)
           newValues[fName] = u[fName] as any
       })
       return newValues
     })
   })
-  useEffect(()=>updateValues(auth), [auth])
+  useEffect(() => updateValues(auth), [auth])
   
   const resetField = useCallback(
-    (fieldName: keyof FormValues)=>{
+    (fieldName: keyof FormValues) => {
       const vs = formValues, ivs = formValues.initialValues
       setFormValues({
         ...vs,
@@ -163,24 +159,21 @@ const AccountSettingsPage = React.memo(() => {
   
   
   
-  useEffect(
-    ()=>{
-      if (isSuccess && response && 'data' in response){
-        setAuth(s=>({
-          accessToken: s?.accessToken ?? '',
-          user: response.data!.user,
-        }))
-        const used = response.usedValues
-        if ('pwd' in used){
-          if (formValues.pwd === used.pwd)
-            resetField('pwd')
-          if (formValues.repeatPwd === used.pwd)
-            resetField('repeatPwd')
-        }
+  useEffect(() => {
+    if (isSuccess && response && 'data' in response) {
+      setAuth(s => ({
+        accessToken: s?.accessToken ?? '',
+        user: response.data!.user,
+      }))
+      const used = response.usedValues
+      if ('pwd' in used) {
+        if (formValues.pwd === used.pwd)
+          resetField('pwd')
+        if (formValues.repeatPwd === used.pwd)
+          resetField('repeatPwd')
       }
-    },
-    [isSuccess, response, setAuth, formValues, resetField]
-  )
+    }
+  }, [isSuccess, response, setAuth, formValues, resetField])
   
   
   
@@ -222,7 +215,7 @@ const AccountSettingsPage = React.memo(() => {
             
             
             <ItemContainer>
-              <ItemTitleBold>{titleText.id}</ItemTitleBold>
+              <Hdrs.InputTitleBold>{titleText.id}</Hdrs.InputTitleBold>
               <Input
                 css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
                 readOnly
@@ -231,7 +224,7 @@ const AccountSettingsPage = React.memo(() => {
             </ItemContainer>
             
             <ItemContainer>
-              <ItemTitleBold>{titleText.email}</ItemTitleBold>
+              <Hdrs.InputTitleBold>{titleText.email}</Hdrs.InputTitleBold>
               <Input
                 css={InputStyle.outlinedRectOf({ size: 'small' })}
                 readOnly
@@ -240,7 +233,7 @@ const AccountSettingsPage = React.memo(() => {
             </ItemContainer>
             
             <ItemContainer>
-              <ItemTitleBold>{titleText.emailVerified}</ItemTitleBold>
+              <Hdrs.InputTitleBold>{titleText.emailVerified}</Hdrs.InputTitleBold>
               <Input
                 css={InputStyle.outlinedRectOf({ size: 'small' })}
                 readOnly
@@ -274,14 +267,14 @@ const AccountSettingsPage = React.memo(() => {
              </ItemContainer> */}
             
             <ItemContainer>
-              <ItemTitleBold>{titleText.userCreated}</ItemTitleBold>
+              <Hdrs.InputTitleBold>{titleText.userCreated}</Hdrs.InputTitleBold>
               <DataField css={DataFieldStyle.statikSmall}>
                 {new Date(user.created) + ''}
               </DataField>
             </ItemContainer>
             
             <ItemContainer>
-              <ItemTitleBold>{titleText.userUpdated}</ItemTitleBold>
+              <Hdrs.InputTitleBold>{titleText.userUpdated}</Hdrs.InputTitleBold>
               <DataField css={DataFieldStyle.statikSmall}>
                 {new Date(user.updated) + ''}
               </DataField>
@@ -313,11 +306,11 @@ const AccountSettingsPage = React.memo(() => {
         </Pages.AddSafeInsets>
         
         
-        <PageScrollbars/>
+        <PageScrollbars />
       </Pages.Page>
       
       
-      <TopButtonBar backBtn/>
+      <TopButtonBar backBtn />
       
       {/* <BottomButtonBar settingsBtn
         rightChildren={
