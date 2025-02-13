@@ -44,20 +44,19 @@ export const MbtiRecoilComputed = selector({
           cnt++
         }
         else {
-          // TODO MBTI пофиксить номера вопросов
-          if ([1, 2, 4, 6, 10, 14, 19].includes(i + 1)) {
+          if ([1, 4, 6, 14, 19].includes(i + 1)) {
             if (ai === 0) parts.E++
             if (ai === 1) parts.I++
           }
-          if ([3, 5, 7, 9, 11, 12, 17].includes(i + 1)) {
+          if ([3, 7, 12, 17, 20].includes(i + 1)) {
             if (ai === 0) parts.S++
             if (ai === 1) parts.N++
           }
-          if ([8, 10, 15, 19].includes(i + 1)) {
+          if ([8, 10, 15, 18, 19].includes(i + 1)) {
             if (ai === 0) parts.T++
             if (ai === 1) parts.F++
           }
-          if ([2, 5, 11, 13, 16, 18].includes(i + 1)) {
+          if ([2, 5, 11, 13, 16].includes(i + 1)) {
             if (ai === 0) parts.J++
             if (ai === 1) parts.P++
           }

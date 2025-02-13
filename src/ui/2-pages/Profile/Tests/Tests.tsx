@@ -219,6 +219,12 @@ const Tests = React.memo((props: TestsProps) => {
               </div>
             )}
             
+            <MiniTypesBox>
+              {ObjectEntries(MbtiData).map(([type, data]) => (
+                <TypeComponent key={type} type={type} />
+              ))}
+            </MiniTypesBox>
+            
             {testState === 'completed' && (
               <Button
                 css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
@@ -227,12 +233,6 @@ const Tests = React.memo((props: TestsProps) => {
                 {uiText.startTheTestAgain}
               </Button>
             )}
-            
-            <MiniTypesBox>
-              {ObjectEntries(MbtiData).map(([type, data]) => (
-                <TypeComponent key={type} type={type} />
-              ))}
-            </MiniTypesBox>
             
           </div>
           

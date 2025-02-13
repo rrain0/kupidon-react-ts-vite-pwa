@@ -166,7 +166,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  ENFP: { 
+  ENFP: {
     icon: athlete,
     picture: athleteWithBg,
     color: '#3E9C2B',
@@ -181,7 +181,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  ISTJ: { 
+  ISTJ: {
     icon: support,
     picture: supportWithBg,
     color: '#3E94DA',
@@ -196,7 +196,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  ISTP: { 
+  ISTP: {
     icon: mechanic,
     picture: mechanicWithBg,
     color: '#EABF4B',
@@ -211,7 +211,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  ISFJ: { 
+  ISFJ: {
     icon: nurse,
     picture: nurseWithBg,
     color: '#3E94DA',
@@ -241,7 +241,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  INTJ: { 
+  INTJ: {
     icon: postman,
     picture: postmanWithBg,
     color: '#9C2B87',
@@ -249,14 +249,14 @@ export const MbtiData: RecordRo<MbtiType, {
     mediumCompatibility: ['ESFJ', 'ESTP'],
     uiText: {
       name: {
-        'ru-RU': '',
+        'ru-RU': 'Стратег',
       },
       shortDescription: {
         'ru-RU': 'Независимые, стратегически мыслящие, ориентированные на долгосрочные цели',
       },
     },
   },
-  INTP: { 
+  INTP: {
     icon: scientist,
     picture: scientistWithBg,
     color: '#9C2B87',
@@ -271,7 +271,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  INFJ: { 
+  INFJ: {
     icon: photographer,
     picture: photographerWithBg,
     color: '#3E9C2B',
@@ -286,7 +286,7 @@ export const MbtiData: RecordRo<MbtiType, {
       },
     },
   },
-  INFP: { 
+  INFP: {
     icon: magician,
     picture: magicianWithBg,
     color: '#3E9C2B',
