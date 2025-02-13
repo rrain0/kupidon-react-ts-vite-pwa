@@ -8,7 +8,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
-import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import React, {
   useCallback,
@@ -189,85 +189,98 @@ const SignupPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
           
-            <FormHeader>{titleText.registration}</FormHeader>
+            <Hdrs.Page>{titleText.registration}</Hdrs.Page>
             
             
             
             <ValidationWrap {...validationProps}
-              fieldName='email'
-              render={props => <Input
-                css={InputStyle.outlinedRectNormalNormal}
-                placeholder={placeholderText.matchedSystemLangs}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
+              fieldName="email"
+              render={props => (
+                <Input
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.matchedSystemLangs}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
             />
             
             <ValidationWrap {...validationProps}
-              fieldName='pwd'
-              render={props => <PwdInput
-                css={InputStyle.outlinedRectNormalNormal}
-                placeholder={placeholderText.pwd}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
+              fieldName="pwd"
+              render={props => (
+                <PwdInput
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.pwd}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
             />
             
             <ValidationWrap {...validationProps}
-              fieldName='repeatPwd'
-              render={props => <PwdInput
-                css={InputStyle.outlinedRectNormalNormal}
-                placeholder={placeholderText.repeatPwd}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
+              fieldName="repeatPwd"
+              render={props => (
+                <PwdInput
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.repeatPwd}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
             />
             
             <ValidationWrap {...validationProps}
-              fieldName='name'
-              render={props => <Input
-                css={InputStyle.outlinedRectNormalNormal}
-                placeholder={placeholderText.name}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
+              fieldName="name"
+              render={props => (
+                <Input
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.name}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
             />
             
             <ValidationWrap {...validationProps}
-              fieldName='birthDate'
-              render={props => <Input
-                css={InputStyle.outlinedRectNormalNormal}
-                placeholder={placeholderText.birthDate}
-                {...props.inputProps}
-                hasError={props.highlight}
-              />}
+              fieldName="birthDate"
+              render={props => (
+                <Input
+                  css={InputStyle.outlinedRectNormalNormal}
+                  placeholder={placeholderText.birthDate}
+                  {...props.inputProps}
+                  hasError={props.highlight}
+                />
+              )}
             />
             
             
             <ValidationWrap {...validationProps}
-              fieldName='gender'
-              render={props =>
+              fieldName="gender"
+              render={props => (
                 <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
                   hasError={props.highlight}
                 >
-                  { genderOptions.map(opt=>{
-                    return <RadioInput
-                      css={RadioInputStyle.radio}
-                      key={opt.value}
-                      checked={props.value === opt.value}
-                      value={opt.value}
-                      onChange={props.inputProps.onChange}
-                    >
-                      {opt.text}
-                    </RadioInput>
+                  { genderOptions.map(opt => {
+                    return (
+                      <RadioInput
+                        css={RadioInputStyle.radio}
+                        key={opt.value}
+                        checked={props.value === opt.value}
+                        value={opt.value}
+                        onChange={props.inputProps.onChange}
+                      >
+                        {opt.text}
+                      </RadioInput>
+                    )
                   }) }
-                </RadioInputGroup>}
+                </RadioInputGroup>
+              )}
             />
             
             
             <Button
               css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
-              type='submit'
+              type="submit"
             >
               {actionText.signup}
             </Button>

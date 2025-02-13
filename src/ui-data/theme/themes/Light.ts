@@ -11,10 +11,12 @@ export const LightProps: ThemeProps = {
   
   page: {
     bg:          '#f5f5f5',
-    bgGrad:  ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
-    ct1:    '#000000',
-    ct2:    '#000000',
-    ct3:    '#999999',
+    bgGrad:      ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
+    ct1:         '#000000',
+    ct2:         '#000000',
+    ct3:         '#999999',
+    ctSec:       '#858585',
+    ctSec2:      '#7b7b7b',
   },
   statusBar: {
     bg: '#f5f5f5',
@@ -23,9 +25,9 @@ export const LightProps: ThemeProps = {
     bg: '#ffffff',
   },
   navButton: {
-    bgFc:      ['#f0f0f0'],
-    ct:           ['#7b7b7b'],
-    cta:          '#333333',
+    bgFc:        '#f0f0f0',
+    ct:          ['#7b7b7b'],
+    cta:         '#333333',
   },
   
   
@@ -49,11 +51,15 @@ export const LightProps: ThemeProps = {
     ct5:        '#e3e3e3',
     ct6:        '#ececec',
     
-    cta:   '#333333',
-    cta2:  '#cbcad0',
-    cta3:  '#d1d1d1',
+    cta:        '#333333',
+    cta2:       '#cbcad0',
+    cta3:       '#d1d1d1',
     
-    shadow:          ['#00000026'],
+    shadow:     ['#00000026'],
+  },
+  boxSec: {
+    bg:         '#E0E0E0',
+    ct:         '#ABABAB',
   },
   boxAccent: {
     bg:       ['#bbbbbb'],
@@ -68,7 +74,7 @@ export const LightProps: ThemeProps = {
   buttonNormal: {
     bg:            ['#bbbbbb'],
     ct:            ['#000000'],
-    bgFc:          ['#dddddd'],
+    bgFc:          '#dddddd',
     ctFc:          '#000000',
     
     bg2:           '#dddddd',
@@ -82,13 +88,13 @@ export const LightProps: ThemeProps = {
   buttonMain: {
     bg:       ['#7b7b7b'],
     ct:       ['#F8F8F8'],
-    bgFc:     ['#aaaaaa'],
+    bgFc:     '#aaaaaa',
     ctFc:     '#F8F8F8',
   },
   buttonAccent: {
     bg:            ['#bbbbbb'],
     ct:            ['#000000'],
-    bgFc:          ['#999999'],
+    bgFc:          '#999999',
     ctFc:          '#000000',
   },
   buttonAccent2: {
@@ -105,7 +111,7 @@ export const LightProps: ThemeProps = {
   },
   buttonSecondary: {
     bg:            ['transparent'],
-    bgFc:          ['#99999988'],
+    bgFc:          '#99999988',
     ct:            ['#bbbbbb'],
   },
   
@@ -117,16 +123,16 @@ export const LightProps: ThemeProps = {
   
   
   inputRadio: {
-    bgFc:  ['#7b7b7b'],
+    bgFc:      '#7b7b7b',
   },
   buttonTrans: {
-    bgFc:  ['#00000011'],
+    bgFc:      '#00000011',
   },
   
   
   
   gradIcon: {
-    ct:       ['#444444', '#444444'],
+    ctGrad:         ['#444444', '#444444'],
   },
   
   
@@ -147,14 +153,14 @@ export const LightProps: ThemeProps = {
   },
   
   elementDisabled: {
-    bg:      ['#DCDCDC'],
-    ct:      ['#555555'],
+    bg:       ['#DCDCDC'],
+    ct:       ['#555555'],
   },
   elementDanger: {
     bg:       ['#7b7b7b'],
     ct:       ['#ffffff'],
-    bgFc:  ['#999999'],
-    ctFc:  '#ffffff',
+    bgFc:     '#999999',
+    ctFc:     '#ffffff',
   },
   elementError: {
     bg:       ['#ffced2'],
@@ -162,60 +168,60 @@ export const LightProps: ThemeProps = {
   
   
   boxTransparent: {
-    bg:  '#ffffff99',
-    ct:  '#291f1d',
+    bg:           '#ffffff99',
+    ct:           '#291f1d',
   },
   
   boxPink: {
-    bg:  ['#F0849D', '#CD617A'],
-    ct:  '#FFFFFF',
+    bgGrad:       ['#F0849D', '#CD617A'],
+    ct:           '#FFFFFF',
   },
   boxWithPink: {
-    bg:       '#FFFFFF',
-    ct:       '#DD718A',
-    ctRipple: '#66666688',
+    bg:           '#FFFFFF',
+    ct:           '#DD718A',
+    ctRipple:     '#66666688',
     
-    bgFc:  ['#ffa9bd', '#ffffff'],
-    ctFc:  '#DD718A',
+    bgFcGrad:     ['#ffa9bd', '#ffffff'],
+    ctFc:         '#DD718A',
   },
   
   boxWine: {
-    bg:        ['#BB2649', '#F75F82'],
-    ct:        '#FFFFFF',
+    bgGrad:        ['#BB2649', '#F75F82'],
+    ct:            '#FFFFFF',
   },
   boxWithWine: {
-    bg:        '#FFFFFF',
-    ct:        '#BB2649',
-    ctRipple:  '#F75F8288',
+    bg:            '#FFFFFF',
+    ct:            '#BB2649',
+    ctRipple:      '#F75F8288',
     
-    bgFc:   ['#F75F82', '#ffffff'],
-    ctFc:   '#BB2649',
+    bgFcGrad:      ['#F75F82', '#ffffff'],
+    ctFc:          '#BB2649',
   },
   
   boxViolet: {
-    bg:        ['#AB6FE7', '#8B43D3'],
-    ct:        '#FFFFFF',
+    bgGrad:        ['#AB6FE7', '#8B43D3'],
+    ct:            '#FFFFFF',
   },
   boxWithViolet: {
-    bg:        '#FFFFFF',
-    ct:        '#934DD8',
-    ctRipple:  '#d2abf988',
+    bg:           '#FFFFFF',
+    ct:           '#934DD8',
+    ctRipple:     '#d2abf988',
     
-    bgFc:   ['#d2abf9', '#ffffff'],
-    ctFc:   '#934DD8',
+    bgFcGrad:     ['#d2abf9', '#ffffff'],
+    ctFc:         '#934DD8',
   },
   
   boxBlue: {
-    bg:        ['#67A9D9', '#2E85C3'],
-    ct:        '#FFFFFF',
+    bgGrad:        ['#67A9D9', '#2E85C3'],
+    ct:            '#FFFFFF',
   },
   boxWithBlue: {
-    bg:        '#FFFFFF',
-    ct:        '#398CC8',
-    ctRipple:  '#bae2ff88',
+    bg:           '#FFFFFF',
+    ct:           '#398CC8',
+    ctRipple:     '#bae2ff88',
     
-    bgFc:   ['#bae2ff', '#ffffff'],
-    ctFc:   '#398CC8',
+    bgFcGrad:     ['#bae2ff', '#ffffff'],
+    ctFc:         '#398CC8',
   },
   
   

@@ -4,12 +4,12 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
-import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -216,7 +216,7 @@ const AccountSettingsPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmColForm onSubmit={formSubmitPreventDefault}>
             
-            <FormHeader>{titleText.account}</FormHeader>
+            <Hdrs.Page>{titleText.account}</Hdrs.Page>
             
             
             

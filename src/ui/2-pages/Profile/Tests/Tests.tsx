@@ -31,7 +31,6 @@ import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
-import { CardTitleNormal } from '../parts/CardTitle'
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import pinkHeartWithExclamation from 'src/res/im/ic/pink-heart-with-exclamation.svg'
@@ -41,6 +40,7 @@ import flexC = WidgetStyleCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
+import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 
@@ -125,7 +125,7 @@ const Tests = React.memo((props: TestsProps) => {
             </Card3>
             
             
-            <CardTitleNormal>{uiText.yourPersonalityType}</CardTitleNormal>
+            <Hdrs.PageSec>{uiText.yourPersonalityType}</Hdrs.PageSec>
             
             
             {!mbtiType && (

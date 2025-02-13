@@ -54,8 +54,8 @@ export namespace SvgGradIconS6 {
     
     export namespace Normal {
       export const normal: AppWidgetStyle = t => [base, baseColor, {
-        gradIconColor0: t.gradIcon.ct[0],
-        gradIconColor1: t.gradIcon.ct[1],
+        gradIconColor0: t.gradIcon.ctGrad[0],
+        gradIconColor1: t.gradIcon.ctGrad[1],
       }]
     }
     
@@ -96,8 +96,8 @@ export namespace SvgGradIconS6 {
         export namespace Color {
           // type: icon, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-            gradIconColor0: t.gradIcon.ct[0],
-            gradIconColor1: t.gradIcon.ct[1],
+            gradIconColor0: t.gradIcon.ctGrad[0],
+            gradIconColor1: t.gradIcon.ctGrad[1],
           }]
         }
       }

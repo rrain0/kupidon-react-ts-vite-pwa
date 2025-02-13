@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import styled from '@emotion/styled'
-import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
@@ -83,7 +83,7 @@ const Frame = styled(Button, {
 
 
 
-const Title = styled(Hs.Card3)`
+const Title = styled(Hdrs.Card3)`
   grid-area: title;
   place-self: center start;
   text-align: start;

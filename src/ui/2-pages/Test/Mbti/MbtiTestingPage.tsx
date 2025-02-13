@@ -21,7 +21,6 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { CardTitleNormal } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
@@ -37,6 +36,7 @@ import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import attrExists = TypeU.attrExists
 import notExists = TypeU.notExists
 import round1 = MathU.round1
+import resetH = EmotionCommon.resetH
 
 
 
@@ -388,8 +388,7 @@ export default MbtiTestingPage
 
 const InfoText = styled.div`
   ${Txt.s17};
-  // TODO Theme
-  color: #858585;
+  color: ${p => p.theme.page.ctSec};
   text-align: center;
 `
 
@@ -407,21 +406,18 @@ const LineProgressFrame = styled.div`
   height: 8px;
   border-radius: 999999px;
   ${row};
-  // TODO Theme
-  background-color: ${p => p.theme.boxNormal.ct5};
+  background-color: ${p => p.theme.boxSec.bg};
 `
 const LineProgress = styled.div`
   width: 0;
   height: 100%;
   border-radius: inherit;
   transition: width ${transitionTime}ms ease-in-out;
-  // TODO Theme
-  background-color: ${p => p.theme.boxAccent.bg3};
+  background-color: ${p => p.theme.boxSec.ct};
 `
 const LinePercent = styled.div`
   ${Txt.lg24Bold};
-  // TODO Theme
-  color: ${p => p.theme.boxAccent.bg3};
+  color: ${p => p.theme.page.ct2};
 `
 
 
@@ -434,10 +430,9 @@ const QuestionNumberBox = styled.div`
 const backS: AppWidgetStyle = [IconButtonS6.S.filled.round.lg.normal2, {
   iconRotate: '0.5turn',
 }]
-const QuestionNumber = styled.div`
+const QuestionNumber = styled.h5`
+  ${resetH};
   ${gridC};
-  // TODO Theme
-  color: #000000;
   ${Txt.lg20bold};
 `
 
@@ -456,7 +451,9 @@ const QuestionTitleBox = styled.div`
   height: 92px;
   ${flexC};
 `
-const QuestionTitle = styled(CardTitleNormal)`
+const QuestionTitle = styled.h5`
+  ${resetH};
+  ${gridC};
   ${Txt.s20bold2};
 `
 

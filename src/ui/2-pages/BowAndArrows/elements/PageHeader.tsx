@@ -1,14 +1,14 @@
 import React from 'react'
-import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 
 
 
 
-const PageHeader =
-React.memo(
-(props: { children: string }) => {
-  return <Hs.Page style={{ paddingBottom: 40 }}>
-    {props.children}
-  </Hs.Page>
+const PageHeader = React.memo((props: { children: string }) => {
+  return (
+    <Hdrs.Page style={{ paddingBottom: 40 }}>
+      {props.children}
+    </Hdrs.Page>
+  )
 })
 export default PageHeader

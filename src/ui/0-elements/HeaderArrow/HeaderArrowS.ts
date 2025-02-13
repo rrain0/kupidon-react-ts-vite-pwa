@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { Hs } from 'src/ui/0-elements/basic-elements/Hs'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -40,7 +40,7 @@ export namespace HeaderArrowS {
         align-items: center;
       }
       ${W.u({ e: 'header', s: 'normal' }).thisUse} {
-        ${Hs.page(t)};
+        ${Hdrs.page(t)};
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
         ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct1};

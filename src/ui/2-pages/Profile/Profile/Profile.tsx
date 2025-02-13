@@ -11,7 +11,6 @@ import ProfileKidsOption from 'src/ui/2-pages/Profile/options/ProfileKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOption.tsx'
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
-import { CardTitleSecondary } from 'src/ui/2-pages/Profile/parts/CardTitle'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
@@ -49,6 +48,7 @@ import FormValues = ProfilePageValidation.FormValues
 import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
+import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 
@@ -107,7 +107,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             
             
-            <CardTitleSecondary>{text.bio}</CardTitleSecondary>
+            <Hdrs.PageSec2>{text.bio}</Hdrs.PageSec2>
             
             <div css={{ height: 24 }} />
             
@@ -154,7 +154,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             
             
-            <CardTitleSecondary>{text.itImportant}</CardTitleSecondary>
+            <Hdrs.PageSec2>{text.itImportant}</Hdrs.PageSec2>
             
             <div css={{ height: 24 }} />
             
@@ -177,7 +177,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             
             
-            <CardTitleSecondary>{text.interestingToKnow}</CardTitleSecondary>
+            <Hdrs.PageSec2>{text.interestingToKnow}</Hdrs.PageSec2>
             
             <div css={{ height: 24 }} />
             
@@ -207,7 +207,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             
             
-            <CardTitleSecondary>{text.myDate}</CardTitleSecondary>
+            <Hdrs.PageSec2>{text.myDate}</Hdrs.PageSec2>
             
             <div css={{ height: 24 }} />
             

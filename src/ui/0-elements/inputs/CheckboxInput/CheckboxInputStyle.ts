@@ -127,14 +127,14 @@ export namespace CheckboxInputStyle {
         content: '';
         ${abs};
         border: 2px solid;
-        border-color: ${t.inputRadio.bgFc[0]};
+        border-color: ${t.inputRadio.bgFc};
         border-radius: inherit;
       }
     }
     ${W.use.s.normal().e.iconChecked().thisUse} {
       width: 100%;
       height: 100%;
-      ${W.e.iconChecked.e.p.color.set(t.inputRadio.bgFc[0])};
+      ${W.e.iconChecked.e.p.color.set(t.inputRadio.bgFc)};
     }
     // state: active, focus, focus-visible
     ${W.use.s.anyFocus().e.iconBox().thisUse},
@@ -175,12 +175,12 @@ export namespace CheckboxInputStyle {
     // state: hover
     ${hoverable} {
       ${W.use.s.hover().e.frame().thisUse} {
-        background: ${t.buttonTrans.bgFc[0]};
+        background: ${t.buttonTrans.bgFc};
       }
     }
     // state: active, focus, focus-visible
     ${W.use.s.anyFocus().e.frame().thisUse} {
-      background: ${t.buttonTrans.bgFc[0]};
+      background: ${t.buttonTrans.bgFc};
     }
   `
   
@@ -209,12 +209,12 @@ export namespace CheckboxInputStyle {
     // state: hover
     ${hoverable} {
       ${W.use.s.hover().e.frame().thisUse} {
-        background: ${t.buttonTrans.bgFc[0]};
+        background: ${t.buttonTrans.bgFc};
       }
     }
     // state: focus-visible
     ${W.use.s.focusVisible().e.frame().thisUse} {
-      background: ${t.buttonTrans.bgFc[0]};
+      background: ${t.buttonTrans.bgFc};
     }
   `
   

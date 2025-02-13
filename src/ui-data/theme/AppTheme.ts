@@ -23,6 +23,10 @@ export namespace AppTheme {
   bgf / bgFc => backgroundFocus
   ctf / ctFc => contentFocus
   
+  'XXXs' / 'XXXSec' => 'XXXSecondary'
+  bgs / bgSec => backgroundSecondary
+  cts / ctSec => contentSecondary
+  
   'XXXTrans' => 'XXXTransparent'
   'XXXGrad' => 'XXXGradient'
   any gradient must be named 'XXXGrad'
@@ -40,10 +44,12 @@ export namespace AppTheme {
     
     page: {
       bg:          string
-      bgGrad:  string[]
+      bgGrad:      string[]
       ct1:         string
       ct2:         string
       ct3:         string
+      ctSec:       string
+      ctSec2:      string
     }
     statusBar: {
       bg: string
@@ -79,6 +85,10 @@ export namespace AppTheme {
       
       shadow:     string[]
     },
+    boxSec: {
+      bg:         string
+      ct:         string
+    },
     boxAccent: {
       bg:         string[]
       bg3:        string
@@ -93,7 +103,7 @@ export namespace AppTheme {
     buttonNormal: {
       bg:            string[]
       ct:            string[]
-      bgFc:          string[]
+      bgFc:          string
       ctFc:          string
       
       bg2:           string
@@ -108,14 +118,14 @@ export namespace AppTheme {
     buttonMain: {
       bg:            string[]
       ct:            string[]
-      bgFc:          string[]
+      bgFc:          string
       ctFc:          string
     }
     // just a colorful button that drags some attention
     buttonAccent: {
       bg:            string[]
       ct:            string[]
-      bgFc:          string[]
+      bgFc:          string
       ctFc:          string
     }
     buttonAccent2: {
@@ -133,7 +143,7 @@ export namespace AppTheme {
     // button that almost invisible
     buttonSecondary: {
       bg:        string[]
-      bgFc:      string[]
+      bgFc:      string
       ct:        string[]
     }
     
@@ -141,20 +151,20 @@ export namespace AppTheme {
     
     // radio input color
     inputRadio: {
-      bgFc:      string[]
+      bgFc:      string
     }
     // transparent icon button
     buttonTrans: {
-      bgFc:      string[],
+      bgFc:      string,
     }
     navButton: {
-      bgFc:      string[]
+      bgFc:      string
       ct:        string[]
       cta:       string
     }
     
     gradIcon: {
-      ct:   string[]
+      ctGrad:   [string, string]
     }
     
     
@@ -184,7 +194,7 @@ export namespace AppTheme {
     elementDanger: {
       bg:              string[]
       ct:              string[]
-      bgFc:            string[]
+      bgFc:            string
       ctFc:            string
     }
     // element with error
@@ -205,55 +215,55 @@ export namespace AppTheme {
     },
     
     boxPink: {
-      bg: [string, string]
-      ct: string,
+      bgGrad:       [string, string]
+      ct:           string,
     }
     boxWithPink: {
-      bg:       string
-      ct:       string
-      ctRipple: string
+      bg:           string
+      ct:           string
+      ctRipple:     string
       
-      bgFc:     [string, string]
-      ctFc:     string
+      bgFcGrad:     [string, string]
+      ctFc:         string
     },
     
     boxWine: {
-      bg: [string, string]
-      ct: string,
+      bgGrad:       [string, string]
+      ct:           string,
     }
     boxWithWine: {
-      bg:       string
-      ct:       string
-      ctRipple: string
+      bg:           string
+      ct:           string
+      ctRipple:     string
       
-      bgFc:     [string, string]
-      ctFc:     string
+      bgFcGrad:     [string, string]
+      ctFc:         string
     },
     
     boxViolet: {
-      bg:       [string, string]
-      ct:       string
+      bgGrad:       [string, string]
+      ct:           string
     }
     boxWithViolet: {
-      bg:       string
-      ct:       string
-      ctRipple: string
+      bg:           string
+      ct:           string
+      ctRipple:     string
       
-      bgFc:     [string, string]
-      ctFc:     string
+      bgFcGrad:     [string, string]
+      ctFc:         string
     },
     
     boxBlue: {
-      bg:  [string, string]
-      ct:  string
+      bgGrad:       [string, string]
+      ct:           string
     }
     boxWithBlue: {
-      bg:       string
-      ct:       string
-      ctRipple: string
+      bg:           string
+      ct:           string
+      ctRipple:     string
       
-      bgFc:     [string, string]
-      ctFc:     string
+      bgFcGrad:     [string, string]
+      ctFc:         string
     }
     
     

@@ -8,7 +8,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
-import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer.tsx'
 import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
 import ItemTitleContainer from 'src/ui/0-elements/basic-elements/ItemTitleContainer.tsx'
@@ -145,7 +145,7 @@ const PwdChangePage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
             
-            <FormHeader>{titleText.pwdChange}</FormHeader>
+            <Hdrs.Page>{titleText.pwdChange}</Hdrs.Page>
             
             
             

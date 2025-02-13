@@ -149,13 +149,13 @@ const nav = (t: AppTheme.Theme) => css`
     iconColor: t.navButton.cta,
   }))(t)}
   a.active ${IconButtonS6.t(t => ({
-    gradIconColor0: t.gradIcon.ct[0],
-    gradIconColor1: t.gradIcon.ct[1],
+    gradIconColor0: t.gradIcon.ctGrad[0],
+    gradIconColor1: t.gradIcon.ctGrad[1],
   }))(t)}
   
   
   ${IconButtonS6.t(t => ({
-    inFocusButtonBg: t.navButton.bgFc[0],
+    inFocusButtonBg: t.navButton.bgFc,
   }))(t)}
 `
 

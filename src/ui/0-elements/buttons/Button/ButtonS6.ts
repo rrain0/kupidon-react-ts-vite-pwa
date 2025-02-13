@@ -146,7 +146,7 @@ export namespace ButtonS6 {
           buttonColor: t.buttonNormal.ct[0],
           rippleColor: t.ripple.ct,
           inFocus: {
-            buttonBgColor: t.buttonNormal.bgFc[0],
+            buttonBgColor: t.buttonNormal.bgFc,
             buttonColor: t.buttonNormal.ctFc,
           },
           disabled: {
@@ -160,7 +160,7 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonNormal.bg[0],
             buttonColor: t.buttonNormal.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFc[0],
+              buttonBgColor: t.buttonNormal.bgFc,
               buttonColor: t.buttonNormal.ctFc,
             },
           }]
@@ -187,7 +187,7 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonAccent.bg[0],
             buttonColor: t.buttonAccent.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonAccent.bgFc[0],
+              buttonBgColor: t.buttonAccent.bgFc,
               buttonColor: t.buttonAccent.ctFc,
             },
           }]
@@ -214,7 +214,7 @@ export namespace ButtonS6 {
             buttonBgColor: t.buttonMain.bg[0],
             buttonColor: t.buttonMain.ct[0],
             inFocus: {
-              buttonBgColor: t.buttonMain.bgFc[0],
+              buttonBgColor: t.buttonMain.bgFc,
               buttonColor: t.buttonMain.ctFc,
             },
           }]
@@ -223,7 +223,7 @@ export namespace ButtonS6 {
             buttonBgColor: t.elementDanger.bg[0],
             buttonColor: t.elementDanger.ct[0],
             inFocus: {
-              buttonBgColor: t.elementDanger.bgFc[0],
+              buttonBgColor: t.elementDanger.bgFc,
               buttonColor: t.elementDanger.ctFc,
             },
           }]
@@ -271,7 +271,7 @@ export namespace ButtonS6 {
           borderBdColor: t.buttonNormal.bg[0],
           rippleColor: t.ripple.ctOnTrans,
           inFocus: {
-            buttonBgColor: t.buttonNormal.bgFc[0],
+            buttonBgColor: t.buttonNormal.bgFc,
             buttonColor: t.buttonNormal.ctFc,
           },
           disabled: {
@@ -285,7 +285,7 @@ export namespace ButtonS6 {
             buttonColor: t.buttonNormal.bg[0],
             borderBdColor: t.buttonNormal.bg[0],
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFc[0],
+              buttonBgColor: t.buttonNormal.bgFc,
               buttonColor: t.buttonNormal.ctFc,
             },
           }]
@@ -294,9 +294,9 @@ export namespace ButtonS6 {
             buttonColor: t.buttonAccent.bg[0],
             borderBdColor: t.buttonAccent.bg[0],
             inFocus: {
-              buttonBgColor: t.buttonAccent.bgFc[0],
+              buttonBgColor: t.buttonAccent.bgFc,
               buttonColor: t.buttonAccent.ctFc,
-              borderBdColor: t.buttonAccent.bgFc[0],
+              borderBdColor: t.buttonAccent.bgFc,
             },
           }]
         }
@@ -362,7 +362,7 @@ export namespace ButtonS6 {
           buttonColor: t.page.ct2,
           rippleColor: t.ripple.ctOnTrans,
           inFocus: {
-            buttonBgColor: t.buttonTrans.bgFc[0],
+            buttonBgColor: t.buttonTrans.bgFc,
           },
           disabled: {
             buttonBgColor: t.elementDisabled.bg[0],
@@ -375,7 +375,7 @@ export namespace ButtonS6 {
             buttonColor: t.page.ct2,
             rippleColor: t.ripple.ctOnTrans,
             inFocus: {
-              buttonBgColor: t.buttonTrans.bgFc[0],
+              buttonBgColor: t.buttonTrans.bgFc,
             },
           }]
           // type: text, color: normal2
@@ -383,7 +383,7 @@ export namespace ButtonS6 {
             buttonColor: t.buttonNormal.bg[0],
             rippleColor: t.ripple.ctOnTrans,
             inFocus: {
-              buttonBgColor: t.buttonTrans.bgFc[0],
+              buttonBgColor: t.buttonTrans.bgFc,
             },
           }]
         }

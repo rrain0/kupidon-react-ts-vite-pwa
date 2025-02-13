@@ -12,10 +12,12 @@ export const DarkProps: ThemeProps = {
   
   page: {
     bg:          '#18191b', // #424854
-    bgGrad:  ['#282c34', '#282c34', '#282c34'],
+    bgGrad:      ['#282c34', '#282c34', '#282c34'],
     ct1:         '#ffffff',
     ct2:         '#bdbdbd',
     ct3:         '#999999',
+    ctSec:       '#858585',
+    ctSec2:      '#7b7b7b',
   },
   statusBar: {
     bg: '#282c34',
@@ -24,10 +26,12 @@ export const DarkProps: ThemeProps = {
     bg: '#282c34',
   },
   navButton: {
-    bgFc:    ['#2e3440'],
+    bgFc:       '#2e3440',
     ct:         ['#7b7b7b'],
     cta:        '#bdbdbd',
   },
+  
+  
   
   boxNormal: {
     bg:              ['#24272d'],
@@ -48,11 +52,15 @@ export const DarkProps: ThemeProps = {
     ct5:        '#42414c',
     ct6:        '#505050',
     
-    cta:   '#bdbdbd',
-    cta2:  '#2e343f',
-    cta3:  '#2e343f',
+    cta:        '#bdbdbd',
+    cta2:       '#2e343f',
+    cta3:       '#2e343f',
     
     shadow:     ['#00000000'],
+  },
+  boxSec: {
+    bg:         '#39404d',
+    ct:         '#999999',
   },
   boxAccent: {
     bg:         ['#aaaaaa'],
@@ -67,7 +75,7 @@ export const DarkProps: ThemeProps = {
   buttonNormal: {
     bg:             ['#999999'],
     ct:             ['#000000'],
-    bgFc:           ['#7b7b7b'],
+    bgFc:           '#7b7b7b',
     ctFc:           '#000000',
     
     bg2:             '#999999',
@@ -81,13 +89,13 @@ export const DarkProps: ThemeProps = {
   buttonMain: {
     bg:       ['#aaaaaa'],
     ct:       ['#000000'],
-    bgFc:  ['#bbbbbb'],
+    bgFc:     '#bbbbbb',
     ctFc:     '#000000',
   },
   buttonAccent: {
     bg:            ['#999999'],
     ct:            ['#000000'],
-    bgFc:          ['#7b7b7b'],
+    bgFc:          '#7b7b7b',
     ctFc:          '#000000',
   },
   buttonAccent2: {
@@ -104,7 +112,7 @@ export const DarkProps: ThemeProps = {
   },
   buttonSecondary: {
     bg:        ['#00000000'],
-    bgFc:      ['#7b7b7b88'],
+    bgFc:      '#7b7b7b88',
     ct:        ['#999999'],
   },
   
@@ -116,16 +124,16 @@ export const DarkProps: ThemeProps = {
   
   
   inputRadio: {
-    bgFc:   ['#aaaaaa'],
+    bgFc:      '#aaaaaa',
   },
   buttonTrans: {
-    bgFc:   ['#ffffff22'],
+    bgFc:      '#ffffff22',
   },
   
   
   
   gradIcon: {
-    ct:        ['#bdbdbd', '#bdbdbd'],
+    ctGrad:        ['#bdbdbd', '#bdbdbd'],
   },
   
   
@@ -152,8 +160,8 @@ export const DarkProps: ThemeProps = {
   elementDanger: {
     bg:       ['#bbbbbb'],
     ct:       ['#000000'],
-    bgFc:  ['#cccccc'],
-    ctFc:  '#000000',
+    bgFc:     '#cccccc',
+    ctFc:     '#000000',
   },
   elementError: {
     bg:       ['#5e252c'],

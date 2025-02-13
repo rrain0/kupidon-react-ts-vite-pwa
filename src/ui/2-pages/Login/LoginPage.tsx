@@ -10,7 +10,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
-import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
@@ -141,7 +141,7 @@ const LoginPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
             
-            <FormHeader>{titleText.login}</FormHeader>
+            <Hdrs.Page>{titleText.login}</Hdrs.Page>
             
             
             <ValidationWrap {...validationProps}

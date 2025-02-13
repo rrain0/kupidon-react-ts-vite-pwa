@@ -144,7 +144,7 @@ const premiumCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
     buttonBgIm: `linear-gradient(
       to bottom right,
       ${t.boxWithWine.bgFc[1]} 65%,
-      ${t.boxWithWine.bgFc[0]} 100%
+      ${t.boxWithWine.bgFc} 100%
     )`,
     buttonColor: t.boxWithWine.ctFc,
   },
@@ -173,7 +173,7 @@ const inviteFriendsCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
     buttonBgIm: `linear-gradient(
       to bottom right,
       ${t.boxWithViolet.bgFc[1]} 65%,
-      ${t.boxWithViolet.bgFc[0]} 100%
+      ${t.boxWithViolet.bgFc} 100%
     )`,
     buttonColor: t.boxWithViolet.ctFc,
   },
@@ -203,7 +203,7 @@ const socialNetworksCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
     buttonBgIm: `linear-gradient(
       to bottom right,
       ${t.boxWithBlue.bgFc[1]} 65%,
-      ${t.boxWithBlue.bgFc[0]} 100%
+      ${t.boxWithBlue.bgFc} 100%
     )`,
     buttonColor: t.boxWithBlue.ctFc,
   },

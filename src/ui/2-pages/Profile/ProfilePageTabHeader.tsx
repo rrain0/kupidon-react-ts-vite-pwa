@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
 import React, { useContext } from 'react'
-import { Hs } from 'src/ui/0-elements/basic-elements/Hs.tsx'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -179,7 +179,7 @@ const AnimatedHeader = styled(animated.div)`
   overflow: visible;
 `
 const HeaderTextWrap = styled.h3`
-  ${p=>Hs.page(p.theme)};
+  ${p=>Hdrs.page(p.theme)};
   overflow-wrap: anywhere;
   user-select: none;
   cursor: pointer;

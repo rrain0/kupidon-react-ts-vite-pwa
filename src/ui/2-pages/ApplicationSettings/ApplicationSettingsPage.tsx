@@ -13,7 +13,7 @@ import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
-import FormHeader from 'src/ui/0-elements/basic-elements/Hs'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -25,7 +25,6 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui-data/theme/ThemeCollection.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
@@ -82,7 +81,7 @@ const ApplicationSettingsPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol>
           
-            <FormHeader>{titleText.appSettings}</FormHeader>
+            <Hdrs.Page>{titleText.appSettings}</Hdrs.Page>
             
             
             

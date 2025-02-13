@@ -15,7 +15,6 @@ import ProfileSportFrequencyOption
 import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption.tsx'
 import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption.tsx'
 import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption.tsx'
-import { CardTitleSecondary } from 'src/ui/2-pages/Profile/parts/CardTitle.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption.tsx'
@@ -27,127 +26,124 @@ import col = EmotionCommon.col
 
 
 
-const OldProfileOptionsTestPage = React.memo(
-  () => {
-    
-    
-    return (
-      <>
-        
-        <Pages.PageSimpleColors>
-          <Pages.Content>
-            
-            
-            
-            <div css={css`width: 600px; ${col}`}>
-              
-              <CardTitleSecondary>Это потом будет в фильтре поиска</CardTitleSecondary>
-              
-              <div css={{ height: 24 }} />
-              
-              <Card3>
-                
-                <ProfileImLookingForOption />
-                
-                <PartnerHeightOption />
-                
-                <PartnerAgeOption />
-                
-              </Card3>
-              
-            </div>
-            
-            
-            <div css={{ height: 24 }} />
-            
-            
-            <div>Old Profile Options</div>
-            
-            
-            
-            <div css={{ height: 24 }} />
-            
-            <Card3>
-              
-              <DatePurposeOption />
-              
-              <DatePeriodBeforeDateOption />
-            
-            </Card3>
-            
-            
-            
-            <div css={{ height: 24 }} />
-            
-            <Card3>
-              
-              <DatePurposeOption />
-              
-              <DatePeriodBeforeDateOption />
-            
-            </Card3>
-            
-            
-            
-            <div css={{ height: 24 }} />
-            
-            <Card3>
-              
-              <DateMostInterestingVisitedPlaceOption />
-              
-              <DateDesiredPlaceOrEventOption />
-            
-            </Card3>
-            
-            
-            
-            <div css={{ height: 24 }} />
-            
-            <Card3>
-              
-              <ProfileSportFrequencyOption />
-            
-            </Card3>
-            
-            
-            
-            <div css={{ height: 24 }} />
-            
-            <Card3>
-              
-              
-              <ProfileFavoriteMovieGenresOption />
-              
-              
-              <ProfileFavoriteBookGenresOption />
-            
-            </Card3>
-            
-            
-            
-            <div css={{ height: 24 }} />
-            
-            <Card3>
-              
-              <PartnerPetsOption />
-              
-              
-              <PartnerAlcoholOption />
-              
-              
-              <PartnerSmokeOption />
-            
-            </Card3>
-          
-          </Pages.Content>
-        </Pages.PageSimpleColors>
-        
-        
-        <BottomButtonBar settingsBtn />
+const OldProfileOptionsTestPage = React.memo(() => {
+  
+  return (
+    <>
       
-      </>
-    )
-  }
-)
+      <Pages.PageSimpleColors>
+        <Pages.Content>
+          
+          
+          
+          <div css={css`width: 600px; ${col}`}>
+            
+            <div>Это потом будет в фильтре поиска</div>
+            
+            <div css={{ height: 24 }} />
+            
+            <Card3>
+              
+              <ProfileImLookingForOption />
+              
+              <PartnerHeightOption />
+              
+              <PartnerAgeOption />
+              
+            </Card3>
+            
+          </div>
+          
+          
+          <div css={{ height: 24 }} />
+          
+          
+          <div>Old Profile Options</div>
+          
+          
+          
+          <div css={{ height: 24 }} />
+          
+          <Card3>
+            
+            <DatePurposeOption />
+            
+            <DatePeriodBeforeDateOption />
+          
+          </Card3>
+          
+          
+          
+          <div css={{ height: 24 }} />
+          
+          <Card3>
+            
+            <DatePurposeOption />
+            
+            <DatePeriodBeforeDateOption />
+          
+          </Card3>
+          
+          
+          
+          <div css={{ height: 24 }} />
+          
+          <Card3>
+            
+            <DateMostInterestingVisitedPlaceOption />
+            
+            <DateDesiredPlaceOrEventOption />
+          
+          </Card3>
+          
+          
+          
+          <div css={{ height: 24 }} />
+          
+          <Card3>
+            
+            <ProfileSportFrequencyOption />
+          
+          </Card3>
+          
+          
+          
+          <div css={{ height: 24 }} />
+          
+          <Card3>
+            
+            
+            <ProfileFavoriteMovieGenresOption />
+            
+            
+            <ProfileFavoriteBookGenresOption />
+          
+          </Card3>
+          
+          
+          
+          <div css={{ height: 24 }} />
+          
+          <Card3>
+            
+            <PartnerPetsOption />
+            
+            
+            <PartnerAlcoholOption />
+            
+            
+            <PartnerSmokeOption />
+          
+          </Card3>
+        
+        </Pages.Content>
+      </Pages.PageSimpleColors>
+      
+      
+      <BottomButtonBar settingsBtn />
+    
+    </>
+  )
+})
 export default OldProfileOptionsTestPage
 
