@@ -154,8 +154,8 @@ export namespace InputStyle {
       background-image: linear-gradient(
         to right,
         ${t.input.borderHover[0]},
-        ${t.input.border[0]},
-        ${t.input.border[1]}
+        ${t.input.borderGrad[0]},
+        ${t.input.borderGrad[1]}
       );
     }
     

@@ -31,7 +31,7 @@ export const DarkPinkGradientProps: ThemeProps = { ...DarkPinkProps,
   
   inputRadio: {
     ...DarkPinkProps.buttonMain,
-    bgFc:  ['#d16780'],
+    bgFc:  '#d16780',
   },
 }
 

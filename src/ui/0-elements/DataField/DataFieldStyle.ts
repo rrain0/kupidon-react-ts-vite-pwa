@@ -57,8 +57,8 @@ export namespace DataFieldStyle {
       background-image: linear-gradient(
         to right,
         ${t.input.borderHover[0]},
-        ${t.input.border[0]},
-        ${t.input.border[1]}
+        ${t.input.borderGrad[0]},
+        ${t.input.borderGrad[1]}
       );
       background-size: 200% 100%;
       background-position: 100% 0;

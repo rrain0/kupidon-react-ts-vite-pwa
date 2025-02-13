@@ -58,9 +58,20 @@ export const DarkProps: ThemeProps = {
     
     shadow:     ['#00000000'],
   },
+  boxNormal4: {
+    bg:           '#24272d',
+    ct:           '#d0d0d0',
+    shadow:       '#ffffff00',
+    bgf:          '#18181a',
+    ctf:          '#d0d0d0',
+  },
   boxSec: {
     bg:         '#39404d',
     ct:         '#999999',
+  },
+  boxTransparent: {
+    bg:  '#18191b99',
+    ct:  '#dddddd',
   },
   boxAccent: {
     bg:         ['#aaaaaa'],
@@ -68,6 +79,12 @@ export const DarkProps: ThemeProps = {
     ct:         ['#000000'],
     ct2:        ['#000000'],
     ct3:        '#000000',
+  },
+  boxDanger: {
+    bg:           '#24272d',
+    ct:           '#D0214A',
+    bgf:          '#18181a',
+    ctf:          '#D0214A',
   },
   
   
@@ -117,8 +134,9 @@ export const DarkProps: ThemeProps = {
   },
   
   ripple: {
-    ct:                '#00000055',
-    ctOnTrans:   '#aaaaaa33',
+    ct:              '#00000055',
+    ctOnLight:       '#cccccc33',
+    ctOnTrans:       '#aaaaaa33',
   },
   
   
@@ -142,7 +160,7 @@ export const DarkProps: ThemeProps = {
     bg:            ['#282c34'],
     ct:            ['#cdcdcd'],
     placeholder:   ['#7b7b7b'],
-    border:        ['#7b7b7b', '#7b7b7b'],
+    borderGrad:    ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
     bgError:       ['#5e252c'],
   },
@@ -168,23 +186,6 @@ export const DarkProps: ThemeProps = {
   },
   
   
-  
-  boxTransparent: {
-    bg:  '#18191b99',
-    ct:  '#dddddd',
-  },
-  
-  boxPink: { ...Light.boxPink },
-  boxWithPink: { ...Light.boxWithPink },
-  
-  boxWine: { ...Light.boxWine },
-  boxWithWine: { ...Light.boxWithWine },
-  
-  boxViolet: { ...Light.boxViolet },
-  boxWithViolet: { ...Light.boxWithViolet },
-  
-  boxBlue: { ...Light.boxBlue },
-  boxWithBlue: { ...Light.boxWithBlue },
   
   
   

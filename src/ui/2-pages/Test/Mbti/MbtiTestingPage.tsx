@@ -37,6 +37,7 @@ import attrExists = TypeU.attrExists
 import notExists = TypeU.notExists
 import round1 = MathU.round1
 import resetH = EmotionCommon.resetH
+import rowE = EmotionCommon.rowE
 
 
 
@@ -290,20 +291,6 @@ const MbtiTestingPage = React.memo(() => {
                   css={css`${col}`}
                 >
                   
-                  <Link
-                    to={RootRoute.profile.id.userId[use](authUserId)
-                      .tests[fullAnySearchParams](searchParams)
-                    }
-                  >
-                    <Button
-                      css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.normal2)}
-                    >
-                      {uiText.saveAndExit}
-                    </Button>
-                  </Link>
-                  
-                  <div style={{ height: 28 }} />
-                  
                   <InfoText>
                     {uiText.needAnswerHonestly}
                   </InfoText>
@@ -330,7 +317,7 @@ const MbtiTestingPage = React.memo(() => {
                       {displayed + 1} {uiText.question.toLowerCase()}
                     </QuestionNumber>
                     <Button
-                      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal2)}
+                      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal4)}
                       onClick={fwd}
                     >
                       <ArrowAngledRoundedIc />
@@ -368,6 +355,23 @@ const MbtiTestingPage = React.memo(() => {
                   >
                     {uiText.questions[displayed].b}
                   </Button>
+                  
+                  <div style={{ height: 28 }} />
+                  
+                  <div css={rowE}>
+                    <Link
+                      to={RootRoute.profile.id.userId[use](authUserId)
+                        .tests[fullAnySearchParams](searchParams)
+                      }
+                    >
+                      <Button
+                        css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.danger)}
+                      >
+                        {uiText.saveAndExit}
+                      </Button>
+                    </Link>
+                  </div>
+                
                 
                 </div>
               )}
@@ -376,7 +380,7 @@ const MbtiTestingPage = React.memo(() => {
         </Pages.Page>
       )}
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtnLeft />
     </>
   )
 })
@@ -427,7 +431,7 @@ const QuestionNumberBox = styled.div`
   ${gridC};
   grid-template-columns: auto 1fr auto;
 `
-const backS: AppWidgetStyle = [IconButtonS6.S.filled.round.lg.normal2, {
+const backS: AppWidgetStyle = [IconButtonS6.S.filled.round.lg.normal4, {
   iconRotate: '0.5turn',
 }]
 const QuestionNumber = styled.h5`

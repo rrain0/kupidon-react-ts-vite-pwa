@@ -182,6 +182,18 @@ export namespace ButtonS6 {
               buttonColor: t.buttonNormal.ct3Fc,
             },
           }]
+          // type: filled, color: normal4
+          export const normal4: AppWidgetStyle = t => [baseColor, {
+            buttonBgColor: t.boxNormal4.bg,
+            buttonColor:   t.boxNormal4.ct,
+            rippleColor: t.ripple.ctOnLight,
+            buttonBoxShadow: `0px 4px 15px 0px ${t.boxNormal4.shadow}`,
+            inFocus: {
+              buttonBgColor: t.boxNormal4.bgf,
+              buttonColor:   t.boxNormal4.ctf,
+              buttonBoxShadow: 'none',
+            },
+          }]
           // type: filled, color: accent
           export const accent: AppWidgetStyle = t => [baseColor, {
             buttonBgColor: t.buttonAccent.bg[0],
@@ -220,11 +232,11 @@ export namespace ButtonS6 {
           }]
           // type: filled, color: danger
           export const danger: AppWidgetStyle = t => [baseColor, {
-            buttonBgColor: t.elementDanger.bg[0],
-            buttonColor: t.elementDanger.ct[0],
+            buttonBgColor: t.boxDanger.bg,
+            buttonColor: t.boxDanger.ct,
             inFocus: {
-              buttonBgColor: t.elementDanger.bgFc,
-              buttonColor: t.elementDanger.ctFc,
+              buttonBgColor: t.boxDanger.bgf,
+              buttonColor: t.boxDanger.ctf,
             },
           }]
         }

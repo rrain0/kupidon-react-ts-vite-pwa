@@ -19,7 +19,7 @@ export const LightPinkGradientProps: ThemeProps = { ...LightPinkProps,
   },
   
   inputRadio: { ...LightPinkProps.buttonMain,
-    bgFc:  ['#f37190'],
+    bgFc:  '#f37190',
   },
 }
 

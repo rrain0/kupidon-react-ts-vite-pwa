@@ -302,7 +302,7 @@ const AccountSettingsPage = React.memo(() => {
               {actionText.logOutFromAccount}
             </Button>
           
-            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.danger)}
+            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
               onClick={undefined}
               disabled
             >

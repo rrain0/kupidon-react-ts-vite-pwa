@@ -57,9 +57,20 @@ export const LightProps: ThemeProps = {
     
     shadow:     ['#00000026'],
   },
+  boxNormal4: {
+    bg:           '#ffffff',
+    ct:           '#232020',
+    shadow:       '#A4A4A426',
+    bgf:          '#ffffff',
+    ctf:          '#232020',
+  },
   boxSec: {
     bg:         '#E0E0E0',
     ct:         '#ABABAB',
+  },
+  boxTransparent: {
+    bg:           '#ffffff99',
+    ct:           '#291f1d',
   },
   boxAccent: {
     bg:       ['#bbbbbb'],
@@ -67,6 +78,12 @@ export const LightProps: ThemeProps = {
     ct:       ['#000000'],
     ct2:      ['#F8F8F8'],
     ct3:      '#ffffff',
+  },
+  boxDanger: {
+    bg:           '#ffffff',
+    ct:           '#D0214A',
+    bgf:          '#ffe7e7',
+    ctf:          '#D0214A',
   },
   
   
@@ -116,8 +133,9 @@ export const LightProps: ThemeProps = {
   },
   
   ripple: {
-    ct:                '#ffffff55',
-    ctOnTrans:         '#66666633',
+    ct:              '#ffffff55',
+    ctOnLight:       '#282c3422',
+    ctOnTrans:       '#66666633',
   },
   
   
@@ -141,7 +159,7 @@ export const LightProps: ThemeProps = {
     bg:            ['#F8F8F8'],
     ct:            ['#000000'],
     placeholder:   ['#777777'],
-    border:        ['#7b7b7b', '#7b7b7b'],
+    borderGrad:    ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
     bgError:       ['#ffced2'],
   },
@@ -167,62 +185,6 @@ export const LightProps: ThemeProps = {
   },
   
   
-  boxTransparent: {
-    bg:           '#ffffff99',
-    ct:           '#291f1d',
-  },
-  
-  boxPink: {
-    bgGrad:       ['#F0849D', '#CD617A'],
-    ct:           '#FFFFFF',
-  },
-  boxWithPink: {
-    bg:           '#FFFFFF',
-    ct:           '#DD718A',
-    ctRipple:     '#66666688',
-    
-    bgFcGrad:     ['#ffa9bd', '#ffffff'],
-    ctFc:         '#DD718A',
-  },
-  
-  boxWine: {
-    bgGrad:        ['#BB2649', '#F75F82'],
-    ct:            '#FFFFFF',
-  },
-  boxWithWine: {
-    bg:            '#FFFFFF',
-    ct:            '#BB2649',
-    ctRipple:      '#F75F8288',
-    
-    bgFcGrad:      ['#F75F82', '#ffffff'],
-    ctFc:          '#BB2649',
-  },
-  
-  boxViolet: {
-    bgGrad:        ['#AB6FE7', '#8B43D3'],
-    ct:            '#FFFFFF',
-  },
-  boxWithViolet: {
-    bg:           '#FFFFFF',
-    ct:           '#934DD8',
-    ctRipple:     '#d2abf988',
-    
-    bgFcGrad:     ['#d2abf9', '#ffffff'],
-    ctFc:         '#934DD8',
-  },
-  
-  boxBlue: {
-    bgGrad:        ['#67A9D9', '#2E85C3'],
-    ct:            '#FFFFFF',
-  },
-  boxWithBlue: {
-    bg:           '#FFFFFF',
-    ct:           '#398CC8',
-    ctRipple:     '#bae2ff88',
-    
-    bgFcGrad:     ['#bae2ff', '#ffffff'],
-    ctFc:         '#398CC8',
-  },
   
   
   

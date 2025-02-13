@@ -2,12 +2,11 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useEvent } from '@util/react/useEvent.ts'
 import React from 'react'
-import { AppStyle, AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -16,18 +15,12 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import col = EmotionCommon.col
 import fixed = EmotionCommon.fixed
 import flexC = EmotionCommon.flexC
 import row = EmotionCommon.row
 import Spinner8LinesIc = SvgIconsPack.Spinner8LinesIc
 import Theme = AppTheme.Theme
-import ClearTrashIc = SvgIconsPack.ClearTrashIc
-import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
@@ -75,49 +68,6 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
         onDangerYes={clear}
       />
       
-      {/*
-      <UseBottomSheetState isOpen={isOpen} onClose={close}>
-        {props => (
-          <ModalPortal>
-            <BottomSheetBasic
-              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
-              {...props.sheetProps}
-              title={actionText.clearAppData + '?'}
-            >
-              <div
-                css={css`
-                  ${col};
-                  padding-bottom: 20px;
-                `}
-              >
-                <div
-                  css={css`
-                    ${row};
-                    justify-content: center;
-                    gap: 20px;
-                  `}
-                >
-                  
-                  <Button css={[ButtonS6.t(ButtonS6.S.filled.rounded.md.accent), button]}
-                    onClick={props.setClosing}
-                  >
-                    {actionText.no}
-                  </Button>
-                  
-                  <Button css={[ButtonS6.t(ButtonS6.S.filled.rounded.md.danger), button]}
-                    onClick={clear}
-                  >
-                    <ClearTrashIc css={[icon, iconOnDanger]} />
-                    {actionText.yes}
-                  </Button>
-                
-                </div>
-              </div>
-            </BottomSheetBasic>
-          </ModalPortal>
-        )}
-      </UseBottomSheetState>
-       */}
       
       {needClear && (
         <ModalPortal>

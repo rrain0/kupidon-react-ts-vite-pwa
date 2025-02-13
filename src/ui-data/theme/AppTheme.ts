@@ -85,7 +85,18 @@ export namespace AppTheme {
       
       shadow:     string[]
     },
+    boxNormal4: {
+      bg:         string
+      ct:         string
+      shadow:     string
+      bgf:        string
+      ctf:        string
+    },
     boxSec: {
+      bg:         string
+      ct:         string
+    },
+    boxTransparent: {
       bg:         string
       ct:         string
     },
@@ -95,6 +106,12 @@ export namespace AppTheme {
       ct:         string[]
       ct2:        string[]
       ct3:        string
+    },
+    boxDanger: {
+      bg:           string
+      ct:           string
+      bgf:          string
+      ctf:          string
     },
     
     
@@ -172,9 +189,9 @@ export namespace AppTheme {
     // input, dataField, textarea, radioInput, radioGroup
     input: {
       bg:            string[]
-      ct:       string[]
+      ct:            string[]
       placeholder:   string[]
-      border:        string[]
+      borderGrad:    [string, string]
       borderHover:   string[]
       bgError:       string[]
     }
@@ -203,67 +220,9 @@ export namespace AppTheme {
     },
     
     ripple: {
-      ct:                string
-      ctOnTrans:   string
-    }
-    
-    
-    
-    boxTransparent: {
-      bg: string,
-      ct: string,
-    },
-    
-    boxPink: {
-      bgGrad:       [string, string]
-      ct:           string,
-    }
-    boxWithPink: {
-      bg:           string
-      ct:           string
-      ctRipple:     string
-      
-      bgFcGrad:     [string, string]
-      ctFc:         string
-    },
-    
-    boxWine: {
-      bgGrad:       [string, string]
-      ct:           string,
-    }
-    boxWithWine: {
-      bg:           string
-      ct:           string
-      ctRipple:     string
-      
-      bgFcGrad:     [string, string]
-      ctFc:         string
-    },
-    
-    boxViolet: {
-      bgGrad:       [string, string]
-      ct:           string
-    }
-    boxWithViolet: {
-      bg:           string
-      ct:           string
-      ctRipple:     string
-      
-      bgFcGrad:     [string, string]
-      ctFc:         string
-    },
-    
-    boxBlue: {
-      bgGrad:       [string, string]
-      ct:           string
-    }
-    boxWithBlue: {
-      bg:           string
-      ct:           string
-      ctRipple:     string
-      
-      bgFcGrad:     [string, string]
-      ctFc:         string
+      ct:              string
+      ctOnLight:       string
+      ctOnTrans:       string
     }
     
     

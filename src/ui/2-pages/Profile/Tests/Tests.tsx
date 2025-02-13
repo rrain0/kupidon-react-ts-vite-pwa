@@ -201,12 +201,10 @@ const Tests = React.memo((props: TestsProps) => {
                 <PersonalityCompatibility
                   compatibility="high"
                   compatibles={mbtiData.highCompatibility}
-                  percent="100-75%"
                 />
                 <PersonalityCompatibility
                   compatibility="medium"
                   compatibles={mbtiData.mediumCompatibility}
-                  percent="75-55%"
                 />
                 {/* <PersonalityCompatibility
                   compatibility="low"

@@ -11,24 +11,22 @@ import rowWrapC = EmotionCommon.rowWrapC
 
 
 
-export type Compatibility = 'high' | 'medium' | 'low'
+export type Compatibility = 'high' | 'medium'
 
 export type PersonalityCompatibilityProps = Puro<{
   compatibility: Compatibility
   compatibles: string[]
-  percent: string
 }>
 export const PersonalityCompatibility = React.memo((props: PersonalityCompatibilityProps) => {
   const {
     compatibility = 'high',
     compatibles,
-    percent,
   } = props
   
   const title = (() => {
     if (compatibility === 'high') return 'Отлично совместимы'
     if (compatibility === 'medium') return 'Совместитмы'
-    if (compatibility === 'low') return 'Менее совместимы'
+    //if (compatibility === 'low') return 'Менее совместимы'
   })()
   
   return (
@@ -48,7 +46,7 @@ export const PersonalityCompatibility = React.memo((props: PersonalityCompatibil
             </TypeContent>
           </TypeBox>
         ))}
-        <PercentRight>{percent}</PercentRight>
+        {/* <PercentRight>{percent}</PercentRight> */}
       </Types>
       {/* <PercentBottom>{percent}</PercentBottom> */}
     </Card>
@@ -57,6 +55,30 @@ export const PersonalityCompatibility = React.memo((props: PersonalityCompatibil
 PersonalityCompatibility.displayName = 'PersonalityCompatibility'
 export default PersonalityCompatibility
 
+
+
+const boxTheme = {
+  boxNeutral: {
+    bg:    '#cccccc',
+    ct:    '#333333',
+    ctSec: '#676767',
+  },
+  boxSuccess: {
+    bg:    '#d0debd',
+    ct:    '#1B842F',
+    ctSec: '#676767',
+  },
+  boxWarn: {
+    bg:    '#f7d9b8',
+    ct:    '#9E5F14',
+    ctSec: '#676767',
+  },
+  boxDanger: {
+    bg:    '#f7b8b8',
+    ct:    '#c52525',
+    ctSec: '#676767',
+  },
+}
 
 
 
@@ -68,16 +90,12 @@ const Card = styled.div<{ compatibility: Compatibility }>`
   ${p => {
     // TODO Style - extract colors to goodBox, warnBox, dangerBox
     if (p.compatibility === 'high') return {
-      backgroundColor: '#d0debd', color: '#1B842F',
-    }
-    if (false && p.compatibility === 'medium') return {
-      backgroundColor: '#f7d9b8', color: '#9E5F14',
+      backgroundColor: boxTheme.boxSuccess.bg,
+      color: boxTheme.boxSuccess.ct,
     }
     if (p.compatibility === 'medium') return {
-      backgroundColor: '#cccccc', color: '#333333',
-    }
-    if (p.compatibility === 'low') return {
-      backgroundColor: '#f7b8b8', color: '#c52525',
+      backgroundColor: boxTheme.boxNeutral.bg,
+      color: boxTheme.boxNeutral.ct,
     }
   }}
 `
