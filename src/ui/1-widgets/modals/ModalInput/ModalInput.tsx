@@ -1,3 +1,5 @@
+import Card from 'src/ui/0-elements/cards/Card.tsx'
+import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -6,7 +8,6 @@ import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { ItemTitleBold } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
-import Card2 from 'src/ui/0-elements/cards/Card2.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -42,7 +43,7 @@ const ModalInput = React.memo(React.forwardRef<HTMLInputElement, ModalInputProps
     if (isOpen) return (
       <ModalPortal>
         <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
-          <Card2 css={ModalElement.card2Style}>
+          <Card css={[CardS.card2S, ModalElement.card2Style]}>
             <ItemTitleBold>{title}</ItemTitleBold>
             <Input css={InputStyle.outlinedRectSmallNormal}
               {...restProps}
@@ -54,7 +55,7 @@ const ModalInput = React.memo(React.forwardRef<HTMLInputElement, ModalInputProps
               //onClear={onClear}
               onOk={onClose}
             />
-          </Card2>
+          </Card>
         </Modal>
       </ModalPortal>
     )

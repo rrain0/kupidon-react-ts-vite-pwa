@@ -21,6 +21,7 @@ export namespace ModalElement {
     display: grid;
     place-items: end center;
   `
+  
   export const card2Style = css`
     min-width: 220px;
     width: 100%;

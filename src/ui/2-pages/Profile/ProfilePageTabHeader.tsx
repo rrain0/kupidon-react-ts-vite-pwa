@@ -33,9 +33,7 @@ export type ProfilePageTabHeaderProps = {
 
 
 
-const ProfilePageTabHeader =
-React.memo(
-(props: ProfilePageTabHeaderProps) => {
+const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   const {
     thisTabIdx: i,
   } = props
@@ -76,87 +74,96 @@ React.memo(
   })
   
   
-  return <Wrap css={css`
-    min-width: ${w}px;
-    width: ${w}px;
-    max-width: ${w}px;
-  `}>
-    
-    { RangeU.has(i-1, [0, lastIndex(headers)])
-      && <AnimatedHeader css={css`
-        width: ${0.6*w}px;
-        mask-image: linear-gradient(to right,
-          rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
-          rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
-        );
+  return (
+    <Wrap
+      css={css`
+        min-width: ${w}px;
+        width: ${w}px;
+        max-width: ${w}px;
       `}
-        style={{
-          x: forLeft.to(v => RangeU.map(v, [-1, 1], [-w/2 - w, w/2 - w])),
-          scale: forLeft.to(v => 1 - 0.35 * Math.abs(v)),
-          // @ts-expect-error
-          opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
-        }}
-      >
-        <HeaderTextWrap
-          onClick={() => {
-            setTabsState('snapping')
-            setTabIdx(i-1)
-          }}
-        >
-          {headers[i-1]}
-        </HeaderTextWrap>
-      </AnimatedHeader>
-    }
-    
-    { RangeU.has(i+1, [0, lastIndex(headers)])
-      && <AnimatedHeader css={css`
-        width: ${0.6*w}px;
-        mask-image: linear-gradient(to right,
-          rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
-          rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
-        );
-      `}
-        style={{
-          x: forRight.to(v => RangeU.map(v, [-1, 1], [-w/2 + w, w/2 + w])),
-          scale: forRight.to(v => 1 - 0.35 * Math.abs(v)),
-          // @ts-expect-error
-          opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
-        }}
-      >
-        <HeaderTextWrap
-          onClick={() => {
-            setTabsState('snapping')
-            setTabIdx(i+1)
-          }}
-        >
-          {headers[i+1]}
-        </HeaderTextWrap>
-      </AnimatedHeader>
-    }
-    
-    <AnimatedHeader css={css`
-      width: ${0.7*w}px;
-    `}
-      style={{
-        x: forCenter.to(v => RangeU.map(v, [-1, 1], [-(w/2), w/2])),
-        scale: forCenter.to(v => 1 - 0.35 * Math.abs(v)),
-        // @ts-expect-error
-        opacity: forCenter.to(v => 1 - 0.6 * Math.abs(v)),
-      }}
     >
       
-      <HeaderTextWrap
-        onClick={() => {
-          setTabsState('snapping')
-          setTabIdx(i)
+      {RangeU.has(i-1, [0, lastIndex(headers)]) && (
+        <AnimatedHeader
+          css={css`
+          width: ${0.6*w}px;
+          mask-image: linear-gradient(to right,
+            rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
+            rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
+          );
+        `}
+          style={{
+            x: forLeft.to(v => RangeU.map(v, [-1, 1], [-w/2 - w, w/2 - w])),
+            scale: forLeft.to(v => 1 - 0.35 * Math.abs(v)),
+            // @ts-expect-error
+            opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
+          }}
+        >
+          <HeaderTextWrap
+            onClick={() => {
+              setTabsState('snapping')
+              setTabIdx(i-1)
+            }}
+          >
+            {headers[i-1]}
+          </HeaderTextWrap>
+        </AnimatedHeader>
+      )
+      }
+      
+      {RangeU.has(i+1, [0, lastIndex(headers)]) && (
+        <AnimatedHeader
+          css={css`
+            width: ${0.6*w}px;
+            mask-image: linear-gradient(to right,
+              rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
+              rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
+            );
+          `}
+          style={{
+            x: forRight.to(v => RangeU.map(v, [-1, 1], [-w/2 + w, w/2 + w])),
+            scale: forRight.to(v => 1 - 0.35 * Math.abs(v)),
+            // @ts-expect-error
+            opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
+          }}
+        >
+          <HeaderTextWrap
+            onClick={() => {
+              setTabsState('snapping')
+              setTabIdx(i+1)
+            }}
+          >
+            {headers[i+1]}
+          </HeaderTextWrap>
+        </AnimatedHeader>
+      )
+      }
+      
+      <AnimatedHeader
+        css={css`
+          width: ${0.7*w}px;
+        `}
+        style={{
+          x: forCenter.to(v => RangeU.map(v, [-1, 1], [-(w/2), w/2])),
+          scale: forCenter.to(v => 1 - 0.35 * Math.abs(v)),
+          // @ts-expect-error
+          opacity: forCenter.to(v => 1 - 0.6 * Math.abs(v)),
         }}
       >
-        {headers[i]}
-      </HeaderTextWrap>
-    
-    </AnimatedHeader>
-    
-  </Wrap>
+        
+        <HeaderTextWrap
+          onClick={() => {
+            setTabsState('snapping')
+            setTabIdx(i)
+          }}
+        >
+          {headers[i]}
+        </HeaderTextWrap>
+      
+      </AnimatedHeader>
+      
+    </Wrap>
+  )
 })
 export default ProfilePageTabHeader
 
@@ -179,7 +186,8 @@ const AnimatedHeader = styled(animated.div)`
   overflow: visible;
 `
 const HeaderTextWrap = styled.h3`
-  ${p=>Hdrs.page(p.theme)};
+  ${p => Hdrs.page(p.theme)};
+  color: ${p => p.theme.page.ct2a};
   overflow-wrap: anywhere;
   user-select: none;
   cursor: pointer;

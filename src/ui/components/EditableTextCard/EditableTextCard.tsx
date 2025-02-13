@@ -5,7 +5,7 @@ import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { card3Style } from 'src/ui/0-elements/cards/Card3.tsx'
+import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -67,7 +67,7 @@ const Frame = styled(Button, {
   ${p => ButtonS6.t(ButtonS6.S.text.rect.lg.normal)(p.theme)};
   ${ButtonS.W.use.s.normal().e.button().thisUse} {
     // TODO Style - need support for text / emotion styles
-    ${p => card3Style(p.theme)};
+    ${p => CardS.card3S(p.theme)};
   }
   ${p => ButtonS6.W.t(p.theme, {
     button: {
@@ -83,7 +83,7 @@ const Frame = styled(Button, {
 
 
 
-const Title = styled(Hdrs.Card3)`
+const Title = styled(Hdrs.Card)`
   grid-area: title;
   place-self: center start;
   text-align: start;

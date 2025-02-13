@@ -1,21 +1,20 @@
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
 import PartialUndef = TypeU.PartialUndef
-import col = EmotionCommon.col
 
 
-// TODO Remove
 
-export type Card2CustomProps = PartialUndef<{
+
+export type CardCustomProps = PartialUndef<{
   children: React.ReactNode
 }>
 export type ForwardRefProps = React.JSX.IntrinsicElements['article']
 type RefElement = HTMLDivElement
 
-export type Car2Props = Card2CustomProps & ForwardRefProps
-const Card2 = React.memo(React.forwardRef<RefElement, Car2Props>(
+export type CardProps = CardCustomProps & ForwardRefProps
+const Card = React.memo(React.forwardRef<RefElement, CardProps>(
   (props, forwardedRef) => {
     const {
       children,
@@ -36,14 +35,10 @@ const Card2 = React.memo(React.forwardRef<RefElement, Car2Props>(
     )
   }
 ))
-export default Card2
+export default Card
 
 
 
 const Frame = styled.article`
-  ${col};
-  gap: inherit;
-  padding: 16px 12px;
-  border-radius: 16px;
-  background-color: ${p => p.theme.boxNormal.bg[0]};
+  ${p => CardS.card3S(p.theme)};
 `

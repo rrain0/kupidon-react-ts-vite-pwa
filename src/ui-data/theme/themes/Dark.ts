@@ -15,6 +15,7 @@ export const DarkProps: ThemeProps = {
     bgGrad:      ['#282c34', '#282c34', '#282c34'],
     ct1:         '#ffffff',
     ct2:         '#bdbdbd',
+    ct2a:        '#b0b0b0',
     ct3:         '#999999',
     ctSec:       '#858585',
     ctSec2:      '#7b7b7b',
@@ -51,6 +52,8 @@ export const DarkProps: ThemeProps = {
     ct4b:       ['#42414c'],
     ct5:        '#42414c',
     ct6:        '#505050',
+    
+    ctSec:      '#858585',
     
     cta:        '#bdbdbd',
     cta2:       '#2e343f',

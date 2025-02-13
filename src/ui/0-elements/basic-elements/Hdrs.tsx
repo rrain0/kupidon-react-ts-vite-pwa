@@ -53,7 +53,7 @@ export namespace Hdrs {
     ${Txt.lg18};
     color: ${t.boxNormal.ct[0]};
   `
-  export const Card3 = styled.h4`
+  export const Card = styled.h4`
     ${resetH};
     ${p => card3(p.theme)};
   `

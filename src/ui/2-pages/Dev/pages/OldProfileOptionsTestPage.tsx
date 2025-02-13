@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
+import Card from 'src/ui/0-elements/cards/Card.tsx'
 import PartnerAgeOption from 'src/ui/2-pages/Profile/options-filter/PartnerAgeOption.tsx'
 import PartnerHeightOption from 'src/ui/2-pages/Profile/options-filter/PartnerHeightOption.tsx'
 import ProfileImLookingForOption
@@ -42,7 +42,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
             
             <div css={{ height: 24 }} />
             
-            <Card3>
+            <Card>
               
               <ProfileImLookingForOption />
               
@@ -50,7 +50,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
               
               <PartnerAgeOption />
               
-            </Card3>
+            </Card>
             
           </div>
           
@@ -64,53 +64,53 @@ const OldProfileOptionsTestPage = React.memo(() => {
           
           <div css={{ height: 24 }} />
           
-          <Card3>
+          <Card>
             
             <DatePurposeOption />
             
             <DatePeriodBeforeDateOption />
           
-          </Card3>
+          </Card>
           
           
           
           <div css={{ height: 24 }} />
           
-          <Card3>
+          <Card>
             
             <DatePurposeOption />
             
             <DatePeriodBeforeDateOption />
           
-          </Card3>
+          </Card>
           
           
           
           <div css={{ height: 24 }} />
           
-          <Card3>
+          <Card>
             
             <DateMostInterestingVisitedPlaceOption />
             
             <DateDesiredPlaceOrEventOption />
           
-          </Card3>
+          </Card>
           
           
           
           <div css={{ height: 24 }} />
           
-          <Card3>
+          <Card>
             
             <ProfileSportFrequencyOption />
           
-          </Card3>
+          </Card>
           
           
           
           <div css={{ height: 24 }} />
           
-          <Card3>
+          <Card>
             
             
             <ProfileFavoriteMovieGenresOption />
@@ -118,13 +118,13 @@ const OldProfileOptionsTestPage = React.memo(() => {
             
             <ProfileFavoriteBookGenresOption />
           
-          </Card3>
+          </Card>
           
           
           
           <div css={{ height: 24 }} />
           
-          <Card3>
+          <Card>
             
             <PartnerPetsOption />
             
@@ -134,7 +134,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
             
             <PartnerSmokeOption />
           
-          </Card3>
+          </Card>
         
         </Pages.Content>
       </Pages.PageSimpleColors>

@@ -18,7 +18,7 @@ import {
   useOverlayUrl
 } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
+import Card from 'src/ui/0-elements/cards/Card.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -110,7 +110,7 @@ const Tests = React.memo((props: TestsProps) => {
           <div css={col} style={{ gap: 25 }}>
         
         
-            <Card3 css={thisTestHelpsYouRealizeCardS}>
+            <Card css={thisTestHelpsYouRealizeCardS}>
               <PinkHeartWithExclamationBox>
                 <img
                   src={pinkHeartWithExclamation}
@@ -122,14 +122,14 @@ const Tests = React.memo((props: TestsProps) => {
               <InfoCardText>
                 {uiText.thisTestHelpsYouRealizeYourPreferences}
               </InfoCardText>
-            </Card3>
+            </Card>
             
             
             <Hdrs.PageSec>{uiText.yourPersonalityType}</Hdrs.PageSec>
             
             
             {!mbtiType && (
-              <Card3 css={yourPersonalityTypeIsUnknownCardS}>
+              <Card css={cardS}>
                 <ManWithHugeHeart
                   src={manWithHugeHeart}
                   alt="Man with huge heart"
@@ -138,12 +138,12 @@ const Tests = React.memo((props: TestsProps) => {
                 <InfoCardTextCenter>
                   {uiText.yourPersonalityTypeIsUnknown}
                 </InfoCardTextCenter>
-              </Card3>
+              </Card>
             )}
             
             {mbtiType && (
               <>
-                <Card3 css={yourPersonalityTypeCardS}>
+                <Card css={yourPersonalityTypeCardS}>
                   
                   <PersonalityTypePictureBox>
                     <PersonalityTypePicture
@@ -163,7 +163,7 @@ const Tests = React.memo((props: TestsProps) => {
                     </PersonalityTypeName>
                   </PersonalityTypeTextBox>
                 
-                </Card3>
+                </Card>
                 
                 <ShortDescription>{mbtiTypeUiText.shortDescription}</ShortDescription>
               </>
@@ -255,9 +255,16 @@ export default Tests
 
 
 
+
+const cardS = css`
+  padding: 23px 16px;
+  ${colC};
+  gap: 28px;
+`
+
 const InfoCardText = styled.div`
   ${Txt.sm13};
-  color: #858585;
+  color: ${p => p.theme.boxNormal.ctSec};
 `
 const InfoCardTextCenter = styled(InfoCardText)`
   text-align: center;
@@ -275,11 +282,6 @@ const PinkHeartWithExclamationBox = styled.div`
 `
 
 
-const yourPersonalityTypeIsUnknownCardS = css`
-  padding: 23px 16px;
-  ${colC};
-  gap: 28px;
-`
 const ManWithHugeHeart = styled.img`
   width: 86%;
 `

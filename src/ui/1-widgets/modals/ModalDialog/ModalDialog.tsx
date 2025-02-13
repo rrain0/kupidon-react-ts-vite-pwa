@@ -2,6 +2,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import Card from 'src/ui/0-elements/cards/Card.tsx'
+import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -10,12 +12,12 @@ import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { ItemTitle } from 'src/ui/0-elements/basic-elements/ItemTitle.tsx'
-import Card2 from 'src/ui/0-elements/cards/Card2.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
 import Puro = TypeU.Puro
 import attrExists = TypeU.attrExists
 import rowC = EmotionCommon.rowC
+import card2S = CardS.card2S
 
 
 
@@ -63,7 +65,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
         css={ModalElement.modalCenteredStyle}
         onClick={() => onModal?.()}
       >
-        <Card2
+        <Card
           css={cardS}
           data-danger={attrExists(onDangerYes)}
         >
@@ -80,7 +82,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
             onYes={onYes}
             onDangerYes={onDangerYes}
           />
-        </Card2>
+        </Card>
       </Modal>
     </ModalPortal>
   )
@@ -91,6 +93,7 @@ export default ModalDialog
 
 const cardS = (t: AppTheme.Theme) => css`
   ${ModalElement.card2Style};
+  ${card2S(t)};
   &[data-danger] {
     background-image: linear-gradient(
       to bottom right,

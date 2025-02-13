@@ -47,6 +47,7 @@ export namespace AppTheme {
       bgGrad:      string[]
       ct1:         string
       ct2:         string
+      ct2a:        string
       ct3:         string
       ctSec:       string
       ctSec2:      string
@@ -78,6 +79,8 @@ export namespace AppTheme {
       ct4b:       string[]
       ct5:        string
       ct6:        string
+      
+      ctSec:      string
       
       cta:        string
       cta2:       string

@@ -12,7 +12,7 @@ import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOptio
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import Card3 from 'src/ui/0-elements/cards/Card3.tsx'
+import Card from 'src/ui/0-elements/cards/Card.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
 import ProfileAlcoholOption from 'src/ui/2-pages/Profile/options/ProfileAlcoholOption.tsx'
 import ProfileBirthDateOption from 'src/ui/2-pages/Profile/options/ProfileBirthDateOption.tsx'
@@ -111,7 +111,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <div css={{ height: 24 }} />
             
-            <Card3>
+            <Card>
               
               <ValidationWrap
                 {...props.validationProps}
@@ -137,7 +137,7 @@ const Profile = React.memo((props: ProfileProps) => {
                 )}
               />
             
-            </Card3>
+            </Card>
             
             <div css={{ height: 24 }} />
             
@@ -158,7 +158,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <div css={{ height: 24 }} />
             
-            <Card3>
+            <Card>
               
               <ProfileMeetingPurposeOption />
               
@@ -170,7 +170,7 @@ const Profile = React.memo((props: ProfileProps) => {
               
               <ProfileInterestsAndHobbiesOption />
             
-            </Card3>
+            </Card>
             
             <div css={{ height: 24 }} />
             
@@ -181,7 +181,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <div css={{ height: 24 }} />
             
-            <Card3>
+            <Card>
               
               <ProfileJobOption />
               
@@ -200,7 +200,7 @@ const Profile = React.memo((props: ProfileProps) => {
               
               <ProfilePetsOption />
             
-            </Card3>
+            </Card>
             
             <div css={{ height: 24 }} />
             
@@ -211,7 +211,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <div css={{ height: 24 }} />
             
-            <Card3>
+            <Card>
               
               <DateIdealFormatOption />
               
@@ -221,7 +221,7 @@ const Profile = React.memo((props: ProfileProps) => {
               
               <DateWhoPaysOption />
             
-            </Card3>
+            </Card>
             
             <div css={{ height: 24 }} />
             
