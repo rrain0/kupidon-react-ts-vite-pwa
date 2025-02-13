@@ -121,7 +121,7 @@ export const MbtiUiText = {
     'ru-RU': 'Замечаю конкретные детали',
   },
   question12AnswerB: {
-    'ru-RU': 'Замечаю конкретные детали',
+    'ru-RU': 'Обращаю внимание на общую картину',
   },
   
   question13: {

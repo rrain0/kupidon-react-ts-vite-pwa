@@ -262,7 +262,10 @@ const MbtiTestingPage = React.memo(() => {
         })
       })
     }
-    return () => { stale = true }
+    return () => {
+      stale = true
+      setDisplayed(curr)
+    }
   }, [curr], false)
   
   
