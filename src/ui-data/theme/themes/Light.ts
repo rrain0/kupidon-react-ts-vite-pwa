@@ -71,10 +71,6 @@ export const LightProps: ThemeProps = {
     bg:         '#E0E0E0',
     ct:         '#ABABAB',
   },
-  boxTransparent: {
-    bg:           '#ffffff99',
-    ct:           '#291f1d',
-  },
   boxAccent: {
     bg:       ['#bbbbbb'],
     bg3:      '#aaaaaa',
@@ -87,6 +83,15 @@ export const LightProps: ThemeProps = {
     ct:           '#D0214A',
     bgf:          '#ffe7e7',
     ctf:          '#D0214A',
+  },
+  boxTransparent: {
+    bg:           '#ffffff99',
+    ct:           '#291f1d',
+  },
+  boxWhite: {
+    bg:           '#ffffff',
+    ct:           '#000000',
+    ct2:          '#27192F',
   },
   
   

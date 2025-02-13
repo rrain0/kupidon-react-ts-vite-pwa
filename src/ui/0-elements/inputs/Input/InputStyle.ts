@@ -90,7 +90,7 @@ export namespace InputStyle {
     }
     ${W.use.s.normal().e.input().thisUse} {
       padding: 4px 16px;
-      ${Txt.lg18Lh150};
+      ${Txt.s18WideLh150};
     }
     ${W.use.s.normal().e.border().thisUse} {
       border: 2px solid transparent;
@@ -199,7 +199,7 @@ export namespace InputStyle {
     }
     ${W.use.s.normal().e.input().thisUse} {
       padding: 4px 12px;
-      ${Txt.lg16Wide};
+      ${Txt.s16Wide};
     }
     ${W.use.s.normal().e.border().thisUse} {
       border-width: 1px;
@@ -246,8 +246,8 @@ export namespace InputStyle {
     ${W.use.s.normal().e.input().thisUse} {
       ${{
         'normal': undefined,
-        'small': Txt.lg16Wide,
-        'smaller': Txt.md14Thin,
+        'small': Txt.s16Wide,
+        'smaller': Txt.s14Thin,
       }[props?.textSize ?? 'normal']};
     }
   `

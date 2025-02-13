@@ -82,72 +82,71 @@ export namespace WidgetStyleCommon {
   
   
   
+  // line-height: 'normal' is roughly 1.2 and can be different between browsers
   export namespace Txt {
     
-    export const lg18: WidgetStyleObj = {
+    export const s18LhNorm: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '18px',
       lineHeight: 'normal',
       letterSpacing: 'normal',
     }
-    export const lg18Lh150: WidgetStyleObj = {
+    export const s18WideLh150: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '18px',
-      lineHeight: '150%',
+      lineHeight: '1.5',
       letterSpacing: '0.05em',
     }
     
     
-    export const lg16: WidgetStyleObj = {
+    export const s16LhNorm: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '16px',
       lineHeight: 'normal',
       letterSpacing: 'normal',
     }
-    export const lg16Wide: WidgetStyleObj = {
+    export const s16Wide: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '16px',
-      lineHeight: '129%',
+      lineHeight: '1.29',
       letterSpacing: '0.05em',
     }
-    
-    
-    export const md16: WidgetStyleObj = {
+    export const s16Thin: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '16px',
-      lineHeight: '129%',
+      lineHeight: '1.29',
       letterSpacing: 'normal',
     }
     
     
     
-    export const md14: WidgetStyleObj = {
+    export const s14: WidgetStyleObj = {
       fontWeight: '400',
       fontSize: '14px',
-      lineHeight: '129%',
+      lineHeight: '1.29',
       letterSpacing: '0.05em',
     }
-    export const md14Bold: WidgetStyleObj = {
+    export const s14Bold: WidgetStyleObj = {
       fontWeight: '600',
       fontSize: '14px',
-      lineHeight: '129%',
+      lineHeight: '1.29',
       letterSpacing: '0.05em',
     }
     
     
     
-    export const md15Thin: WidgetStyleObj = {
+    export const s15Thin: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '15px',
-      lineHeight: '129%',
+      lineHeight: '1.29',
       letterSpacing: 'normal',
     }
     
     
-    export const sm10: WidgetStyleObj = {
+    export const s10: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '10px',
-      lineHeight: '129%',
+      lineHeight: '1.29',
       letterSpacing: 'normal',
     }
     

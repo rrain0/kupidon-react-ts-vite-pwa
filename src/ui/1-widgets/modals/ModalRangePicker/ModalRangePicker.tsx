@@ -87,6 +87,6 @@ const Content = styled.div`
 `
 const Text = styled.div`
   padding: 16px 0;
-  ${Txt.lg24Bold};
+  ${Txt.s24Bold};
   text-align: center;
 `

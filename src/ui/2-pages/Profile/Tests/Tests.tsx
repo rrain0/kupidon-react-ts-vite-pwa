@@ -1,7 +1,9 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { ObjectU } from '@util/common/ObjectU.ts'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { MbtiType } from 'src/api/model/MbtiType.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -11,6 +13,7 @@ import { MbtiData } from 'src/ui-data/MbtiData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
@@ -41,6 +44,8 @@ import gridStackC = EmotionCommon.gridStackC
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
+import card2S = CardS.card2S
+import ObjectEntries = ObjectU.ObjectEntries
 
 
 
@@ -222,7 +227,13 @@ const Tests = React.memo((props: TestsProps) => {
                 {uiText.startTheTestAgain}
               </Button>
             )}
-          
+            
+            <MiniTypesBox>
+              {ObjectEntries(MbtiData).map(([type, data]) => (
+                <TypeComponent key={type} type={type} />
+              ))}
+            </MiniTypesBox>
+            
           </div>
           
         </Pages.ContentSmCol>
@@ -263,7 +274,7 @@ const cardS = css`
 `
 
 const InfoCardText = styled.div`
-  ${Txt.sm13};
+  ${Txt.s13};
   color: ${p => p.theme.boxNormal.ctSec};
 `
 const InfoCardTextCenter = styled(InfoCardText)`
@@ -292,7 +303,7 @@ const yourPersonalityTypeCardS = (t: AppTheme.Theme) => css`
   ${colC};
   ${gridStackC};
   gap: 5px;
-  background-color: ${t.type === 'light' ? '#ffffff' : '#f0f0f0'};
+  background-color: ${t.boxWhite.bg};
 `
 const PersonalityTypePictureBox = styled.div`
   width: 100%;
@@ -312,15 +323,73 @@ const PersonalityTypeTextBox = styled.div`
   gap: 5px;
 `
 const PersonalityTypeCodeName = styled.div`
-  ${Txt.lg36Bold};
+  ${Txt.s36Bold};
 `
 const PersonalityTypeName = styled.div`
-  ${Txt.lg24Bold};
+  ${Txt.s24Bold};
 `
 
 const ShortDescription = styled.div`
-  color: #000000;
   ${Txt.s17Bold};
 `
 
 
+
+
+const MiniTypesBox = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 22px;
+`
+
+const MiniTypeCard = styled(Card)`
+  ${p => card2S(p.theme)};
+  padding: 8px;
+  background-color: ${p => p.theme.boxWhite.bg};
+  color: ${p => p.theme.boxWhite.ct2};
+  ${colC};
+  gap: 0;
+`
+const MiniTypeCode = styled.div`
+  ${Txt.s22Bold};
+`
+const MiniTypeName = styled.div`
+  ${Txt.s17Bold};
+`
+const MiniTypePicture = styled.img`
+  height: 79px;
+  width: auto;
+`
+const MiniTypeDescription = styled.div`
+  ${Txt.s11Bold};
+  text-align: center;
+  line-height: 1.18;
+`
+
+type TypeComponentProps = { type: MbtiType }
+const TypeComponent = React.memo(({ type }: TypeComponentProps) => {
+  const uiText = useUiValues(MbtiData[type].uiText)
+  
+  return (
+    <MiniTypeCard>
+      
+      <MiniTypeCode style={{ color: MbtiData[type].color }}>
+        {type}
+      </MiniTypeCode>
+      <MiniTypeName style={{ color: MbtiData[type].color }}>
+        {uiText.name}
+      </MiniTypeName>
+      
+      <div style={{ height: 9 }} />
+      
+      <MiniTypePicture src={MbtiData[type].icon} />
+      
+      <div style={{ height: 7 }} />
+      
+      <MiniTypeDescription>
+        {uiText.shortDescription}
+      </MiniTypeDescription>
+      
+    </MiniTypeCard>
+  )
+})

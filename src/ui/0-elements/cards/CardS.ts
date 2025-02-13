@@ -9,10 +9,10 @@ export namespace CardS {
   
   export const card2S = (t: AppTheme.Theme) => css`
     padding: 16px 12px;
-    border-radius: 16px;
+    border-radius: 15px;
     ${col};
     gap: inherit;
-    background-color: ${p => p.theme.boxNormal.bg[0]};
+    background-color: ${t.boxNormal.bg[0]};
   `
   
   export const card3S = (t: AppTheme.Theme) => css`

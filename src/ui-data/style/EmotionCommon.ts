@@ -304,47 +304,47 @@ export namespace EmotionCommon {
   
   export namespace Txt {
     
-    export const lg36Bold = css`
+    export const s36Bold = css`
       font-weight: 500;
       font-size: 36px;
-      line-height: 150%;
+      line-height: 1.5;
       letter-spacing: normal;
     `
     
-    export const lg32Bold = css`
+    export const s32Bold = css`
       font-weight: 500;
       font-size: 32px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     
-    export const lg28 = css`
+    export const s28 = css`
       font-weight: 400;
       font-size: 28px;
-      line-height: 150%;
+      line-height: 1.5;
       letter-spacing: normal;
     `
-    export const lg28Bold = css`
+    export const s28Bold = css`
       font-weight: 500;
       font-size: 28px;
-      line-height: 150%;
+      line-height: 1.5;
       letter-spacing: 0.05em;
     `
     
     
-    export const lg24 = css`
+    export const s24 = css`
       font-weight: 400;
       font-size: 24px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const lg24Lh150 = css`
+    export const s24Lh150 = css`
       font-weight: 400;
       font-size: 24px;
-      line-height: 150%;
+      line-height: 1.5;
       letter-spacing: 0.05em;
     `
-    export const lg24Bold = css`
+    export const s24Bold = css`
       font-weight: 500;
       font-size: 24px;
       line-height: normal;
@@ -352,42 +352,50 @@ export namespace EmotionCommon {
     `
     
     
-    export const lg20 = css`
+    export const s22Bold = css`
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.29;
+      letter-spacing: normal;
+    `
+    
+    
+    export const s20 = css`
       font-weight: 400;
       font-size: 20px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const lg20bold = css`
+    export const s20Bold = css`
       font-weight: 500;
       font-size: 20px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const s20bold2 = css`
+    export const s20Bold600 = css`
       font-weight: 600;
       font-size: 20px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const lg20Wide = css`
+    export const s20Wide = css`
       font-weight: 400;
       font-size: 20px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: 0.05em;
     `
     
     
-    export const lg18 = css`
+    export const s18LhNorm = css`
       font-weight: 400;
       font-size: 18px;
       line-height: normal;
       letter-spacing: normal;
     `
-    export const lg18Lh150 = css`
+    export const s18WideLh150 = css`
       font-weight: 400;
       font-size: 18px;
-      line-height: 150%;
+      line-height: 1.5;
       letter-spacing: 0.05em;
     `
     
@@ -395,13 +403,13 @@ export namespace EmotionCommon {
     export const s17 = css`
       font-weight: 400;
       font-size: 17px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     export const s17Bold = css`
       font-weight: 500;
       font-size: 17px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     export const s17Bold600Wide = css`
@@ -412,90 +420,98 @@ export namespace EmotionCommon {
     `
     
     
-    export const lg16 = css`
+    export const s16 = css`
       font-weight: 400;
       font-size: 16px;
       line-height: normal;
       letter-spacing: normal;
     `
-    export const lg16Bold = css`
+    export const s16Bold = css`
       font-weight: 500;
       font-size: 16px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const lg16ExtraBold = css`
+    export const s16ExtraBold = css`
       font-weight: 700;
       font-size: 16px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const lg16Wide = css`
+    export const s16Wide = css`
       font-weight: 400;
       font-size: 16px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: 0.05em;
     `
-    export const lg16Thin = css`
+    export const s16Thin = css`
       font-weight: 300;
       font-size: 16px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     
     
-    export const md15 = css`
+    export const s15 = css`
       font-weight: 400;
       font-size: 15px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: 0.05em;
     `
     export const s15Bold = css`
       font-weight: 500;
       font-size: 15px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
-    export const md15Thin = css`
+    export const s15Thin = css`
       font-weight: 300;
       font-size: 15px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     
     
-    export const md14 = css`
+    export const s14 = css`
       font-weight: 400;
       font-size: 14px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: 0.05em;
     `
-    export const md14Bold = css`
+    export const s14Bold = css`
       font-weight: 600;
       font-size: 14px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: 0.05em;
     `
-    export const md14Thin = css`
+    export const s14Thin = css`
       font-weight: 300;
       font-size: 14px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     
     
-    export const sm13 = css`
+    export const s13 = css`
       font-weight: 400;
       font-size: 13px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
     
     
-    export const sm10 = css`
+    export const s11Bold = css`
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 1.29;
+      letter-spacing: normal;
+    `
+    
+    
+    export const s10 = css`
       font-weight: 300;
       font-size: 10px;
-      line-height: 129%;
+      line-height: 1.29;
       letter-spacing: normal;
     `
   

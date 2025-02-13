@@ -577,7 +577,7 @@ const imSmallPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
 const NoImagesTitle = styled.div`
   grid-area: t;
   ${gridC};
-  ${Txt.lg24Lh150};
+  ${Txt.s24Lh150};
 `
 
 

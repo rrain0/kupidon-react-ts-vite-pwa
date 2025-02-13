@@ -103,14 +103,14 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   w: 'full', hMin: 34, r: 10, p: [8, 14],
-                  ...Txt.md14,
+                  ...Txt.s14,
                 },
               }]
               // type: filled, shape: rect, size: lg
               export const lg: WidgetStyle = [base, {
                 button: {
                   w: 'full', hMin: 50, r: 15, p: [8, 10],
-                  ...Txt.lg18Lh150,
+                  ...Txt.s18WideLh150,
                 },
               }]
             }
@@ -123,7 +123,7 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-                  ...Txt.md15Thin,
+                  ...Txt.s15Thin,
                 },
               }]
               // type: filled, shape: rounded, size: md2
@@ -134,7 +134,7 @@ export namespace ButtonS6 {
               export const sm: WidgetStyle = [base, {
                 button: {
                   w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-                  ...Txt.md15Thin,
+                  ...Txt.s15Thin,
                 },
               }]
             }
@@ -252,7 +252,7 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-                  ...Txt.md15Thin,
+                  ...Txt.s15Thin,
                 },
                 border: {
                   bd: '1px solid',
@@ -265,7 +265,7 @@ export namespace ButtonS6 {
               export const sm: WidgetStyle = [base, {
                 button: {
                   w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-                  ...Txt.md15Thin,
+                  ...Txt.s15Thin,
                 },
                 border: {
                   bd: '1px solid',
@@ -323,14 +323,14 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   w: 'auto', hMin: 30, r: 10, p: [4, 6], g: 4,
-                  ...Txt.md16,
+                  ...Txt.s16Thin,
                 },
               }]
               // type: text, shape: rect, size: lg
               export const lg: WidgetStyle = [base, {
                 button: {
                   w: 'full', hMin: 50, r: 15, p: [8, 6],
-                  ...Txt.lg18Lh150,
+                  ...Txt.s18WideLh150,
                 },
                 buttonBg: null,
               }]
@@ -343,14 +343,14 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-                  ...Txt.lg18,
+                  ...Txt.s18LhNorm,
                 },
               }]
               // type: text, shape: rounded, size: md2
               export const md2: WidgetStyle = [md, {
                 button: {
                   pH: 16,
-                  ...Txt.lg16,
+                  ...Txt.s16LhNorm,
                 },
               }]
               // type: text, shape: rounded, size: md2Uppercase
@@ -363,7 +363,7 @@ export namespace ButtonS6 {
               export const sm: WidgetStyle = [base, {
                 button: {
                   w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-                  ...Txt.lg16,
+                  ...Txt.s16LhNorm,
                 },
               }]
             }

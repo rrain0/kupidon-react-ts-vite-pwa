@@ -439,7 +439,7 @@ const LineProgress = styled.div`
   background-color: ${p => p.theme.boxAccent.bg3};
 `
 const LinePercent = styled.div`
-  ${Txt.lg24Bold};
+  ${Txt.s24Bold};
   color: ${p => p.theme.boxAccent.bg3};
 `
 
@@ -447,7 +447,7 @@ const LinePercent = styled.div`
 const CompleteProfileText = styled.div`
   grid-area: cpt;
   justify-self: stretch;
-  ${Txt.lg16Wide};
+  ${Txt.s16Wide};
   color: ${p => p.theme.boxNormal.ct1a[0]};
   text-align: center;
 `

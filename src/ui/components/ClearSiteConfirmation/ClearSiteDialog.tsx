@@ -109,7 +109,7 @@ const ModalReloading = styled.div`
   z-index: ${StyleVals.modalFloor2};
   background: ${p => p.theme.page.bg}9a;
   color: ${p => p.theme.page.ct2};
-  ${Txt.lg18Lh150};
+  ${Txt.s18WideLh150};
   ${flexC};
 `
 const ReloadingBox = styled.div`

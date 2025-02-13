@@ -48,7 +48,7 @@ export namespace DataFieldStyle {
       padding: 4px 16px;
 
       overflow-wrap: anywhere;
-      ${Txt.lg18Lh150};
+      ${Txt.s18WideLh150};
       color: ${t.input.ct[0]};
       ${Prop.color}: ${t.input.ct[0]};
     }
@@ -84,7 +84,7 @@ export namespace DataFieldStyle {
       width: 100%;
       min-height: 40px;
       padding: 4px 12px;
-      ${Txt.lg16Wide};
+      ${Txt.s16Wide};
     }
     ${El.border} {
       border-width: 1px;

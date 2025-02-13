@@ -11,12 +11,12 @@ import resetH = EmotionCommon.resetH
 export const ItemTitle = styled.h5`
   ${resetH};
   padding-left: 12px;
-  ${Txt.lg16};
+  ${Txt.s16};
   color: ${p => p.theme.page.ct2}
 `
 
 export const ItemTitleBold = styled(ItemTitle)`
   padding-left: 12px;
-  ${Txt.lg16ExtraBold};
+  ${Txt.s16ExtraBold};
   color: ${p => p.theme.page.ct2}
 `

@@ -420,7 +420,7 @@ const LineProgress = styled.div`
   background-color: ${p => p.theme.boxSec.ct};
 `
 const LinePercent = styled.div`
-  ${Txt.lg24Bold};
+  ${Txt.s24Bold};
   color: ${p => p.theme.page.ct2};
 `
 
@@ -437,7 +437,7 @@ const backS: AppWidgetStyle = [IconButtonS6.S.filled.round.lg.normal4, {
 const QuestionNumber = styled.h5`
   ${resetH};
   ${gridC};
-  ${Txt.lg20bold};
+  ${Txt.s20Bold};
 `
 
 
@@ -458,7 +458,7 @@ const QuestionTitleBox = styled.div`
 const QuestionTitle = styled.h5`
   ${resetH};
   ${gridC};
-  ${Txt.s20bold2};
+  ${Txt.s20Bold600};
 `
 
 const answerAS: AppWidgetStyle = [ButtonS6.S.filled.rect.lg.main, {

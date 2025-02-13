@@ -2,53 +2,53 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { MbtiType } from 'src/api/model/MbtiType.ts'
 import RecordRo = TypeU.RecordRo
 
-import scientist from '@im/personality-type/scientist.svg'
-import scientistWithBg from '@im/personality-type/scientist-with-bg.svg'
+import scientist from '@im/mbti-type/scientist.svg'
+import scientistWithBg from '@im/mbti-type/scientist-with-bg.svg'
 
-import photographer from '@im/personality-type/photographer.svg'
-import photographerWithBg from '@im/personality-type/photographer-with-bg.svg'
+import photographer from '@im/mbti-type/photographer.svg'
+import photographerWithBg from '@im/mbti-type/photographer-with-bg.svg'
 
-import support from '@im/personality-type/support.svg'
-import supportWithBg from '@im/personality-type/support-with-bg.svg'
+import support from '@im/mbti-type/support.svg'
+import supportWithBg from '@im/mbti-type/support-with-bg.svg'
 
-import mechanic from '@im/personality-type/mechanic.svg'
-import mechanicWithBg from '@im/personality-type/mechanic-with-bg.svg'
+import mechanic from '@im/mbti-type/mechanic.svg'
+import mechanicWithBg from '@im/mbti-type/mechanic-with-bg.svg'
 
-import postman from '@im/personality-type/postman.svg'
-import postmanWithBg from '@im/personality-type/postman-with-bg.svg'
+import postman from '@im/mbti-type/postman.svg'
+import postmanWithBg from '@im/mbti-type/postman-with-bg.svg'
 
-import magician from '@im/personality-type/magician.svg'
-import magicianWithBg from '@im/personality-type/magician-with-bg.svg'
+import magician from '@im/mbti-type/magician.svg'
+import magicianWithBg from '@im/mbti-type/magician-with-bg.svg'
 
-import nurse from '@im/personality-type/nurse.svg'
-import nurseWithBg from '@im/personality-type/nurse-with-bg.svg'
+import nurse from '@im/mbti-type/nurse.svg'
+import nurseWithBg from '@im/mbti-type/nurse-with-bg.svg'
 
-import singer from '@im/personality-type/singer.svg'
-import singerWithBg from '@im/personality-type/singer-with-bg.svg'
+import singer from '@im/mbti-type/singer.svg'
+import singerWithBg from '@im/mbti-type/singer-with-bg.svg'
 
-import manager from '@im/personality-type/manager.svg'
-import managerWithBg from '@im/personality-type/manager-with-bg.svg'
+import manager from '@im/mbti-type/manager.svg'
+import managerWithBg from '@im/mbti-type/manager-with-bg.svg'
 
-import pensioner from '@im/personality-type/pensioner.svg'
-import pensionerWithBg from '@im/personality-type/pensioner-with-bg.svg'
+import pensioner from '@im/mbti-type/pensioner.svg'
+import pensionerWithBg from '@im/mbti-type/pensioner-with-bg.svg'
 
-import secretary from '@im/personality-type/secretary.svg'
-import secretaryWithBg from '@im/personality-type/secretary-with-bg.svg'
+import secretary from '@im/mbti-type/secretary.svg'
+import secretaryWithBg from '@im/mbti-type/secretary-with-bg.svg'
 
-import carpenter from '@im/personality-type/carpenter.svg'
-import carpenterWithBg from '@im/personality-type/carpenter-with-bg.svg'
+import carpenter from '@im/mbti-type/carpenter.svg'
+import carpenterWithBg from '@im/mbti-type/carpenter-with-bg.svg'
 
-import politician from '@im/personality-type/politician.svg'
-import politicianWithBg from '@im/personality-type/politician-with-bg.svg'
+import politician from '@im/mbti-type/politician.svg'
+import politicianWithBg from '@im/mbti-type/politician-with-bg.svg'
 
-import athlete from '@im/personality-type/athlete.svg'
-import athleteWithBg from '@im/personality-type/athlete-with-bg.svg'
+import athlete from '@im/mbti-type/athlete.svg'
+import athleteWithBg from '@im/mbti-type/athlete-with-bg.svg'
 
-import showman from '@im/personality-type/showman.svg'
-import showmanWithBg from '@im/personality-type/showman-with-bg.svg'
+import showman from '@im/mbti-type/showman.svg'
+import showmanWithBg from '@im/mbti-type/showman-with-bg.svg'
 
-import clown from '@im/personality-type/clown.svg'
-import clownWithBg from '@im/personality-type/clown-with-bg.svg'
+import clown from '@im/mbti-type/clown.svg'
+import clownWithBg from '@im/mbti-type/clown-with-bg.svg'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 
 

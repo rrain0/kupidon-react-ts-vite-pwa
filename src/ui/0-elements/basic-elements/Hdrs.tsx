@@ -14,7 +14,7 @@ export namespace Hdrs {
     min-height: 1.5em;
     align-self: center;
     text-align: center;
-    ${Txt.lg24Lh150};
+    ${Txt.s24Lh150};
     color: ${t.page.ct1};
   `
   export const Page = styled.h3`
@@ -30,7 +30,7 @@ export namespace Hdrs {
     text-align: center;
     padding-right: 15px;
     padding-left: 15px;
-    ${Txt.lg20Wide};
+    ${Txt.s20Wide};
     color: ${t.page.ct2};
   `
   export const PageSec = styled.h4`
@@ -50,7 +50,7 @@ export namespace Hdrs {
   
   
   export const card3 = (t: AppTheme.Theme) => css`
-    ${Txt.lg18};
+    ${Txt.s18LhNorm};
     color: ${t.boxNormal.ct[0]};
   `
   export const Card = styled.h4`

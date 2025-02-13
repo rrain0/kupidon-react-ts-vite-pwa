@@ -109,7 +109,7 @@ const TitleBox = styled.div`
   gap: 15px;
 `
 const Title = styled.div`
-  ${Txt.lg16Bold};
+  ${Txt.s16Bold};
 `
 
 
@@ -127,7 +127,7 @@ const TypeBox = styled.div`
 `
 const TypeContent = styled.div`
   color: #171717;
-  ${Txt.lg16Bold};
+  ${Txt.s16Bold};
 `
 
 const PercentTopRight = styled.div`

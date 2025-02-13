@@ -99,10 +99,6 @@ export namespace AppTheme {
       bg:         string
       ct:         string
     },
-    boxTransparent: {
-      bg:         string
-      ct:         string
-    },
     boxAccent: {
       bg:         string[]
       bg3:        string
@@ -115,6 +111,15 @@ export namespace AppTheme {
       ct:           string
       bgf:          string
       ctf:          string
+    },
+    boxTransparent: {
+      bg:         string
+      ct:         string
+    },
+    boxWhite: {
+      bg:           string
+      ct:           string
+      ct2:          string
     },
     
     

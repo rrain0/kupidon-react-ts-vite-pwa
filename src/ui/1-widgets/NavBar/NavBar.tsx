@@ -125,7 +125,7 @@ const nav = (t: AppTheme.Theme) => css`
       ...WidgetStyleCommon.colC, g: 3, flex: 1,
       bg: null,
       color: t.navButton.ct[0],
-      ...WidgetStyleCommon.Txt.sm10,
+      ...WidgetStyleCommon.Txt.s10,
     },
     icon: {
       sz: 'full',

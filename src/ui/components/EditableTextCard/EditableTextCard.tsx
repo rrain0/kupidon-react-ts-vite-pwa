@@ -102,7 +102,7 @@ const Text = styled.div<{
   grid-area: text;
   place-self: start stretch;
   
-  ${Txt.lg16Thin};
+  ${Txt.s16Thin};
   
   text-align: start;
   

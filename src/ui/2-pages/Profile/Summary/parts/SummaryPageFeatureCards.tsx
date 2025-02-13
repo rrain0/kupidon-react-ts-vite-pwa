@@ -100,12 +100,12 @@ const FeatureCardName = styled.div`
 const FeatureCardText = styled.div`
   grid-area: text;
   align-self: center;
-  ${Txt.md14};
+  ${Txt.s14};
 `
 const featureCardButtonS: AppWidgetStyle = [ButtonS6.S.filled.rect.md.accent2, {
   button: {
     gridArea: 'btn', w: 160, hMin: 35,
-    ...WidgetStyleCommon.Txt.md14Bold,
+    ...WidgetStyleCommon.Txt.s14Bold,
   },
 }]
 const FeatureCardIcBox = styled.div`

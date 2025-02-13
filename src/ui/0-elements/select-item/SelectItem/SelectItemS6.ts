@@ -117,7 +117,7 @@ export namespace SelectItemS6 {
         
         button: {
           ...abs, p: [20, 26], ...flexC, g: 10, r: 'inherit',
-          ...Txt.lg16,
+          ...Txt.s16LhNorm,
         },
         
         add: {

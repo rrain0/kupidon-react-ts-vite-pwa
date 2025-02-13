@@ -66,6 +66,7 @@ export namespace SvgGradIconS6 {
   export namespace Parts {
     export const base: WidgetStyle = {
       gradIcon: {
+        // '100%' instead of 'auto' because auto doesn't work on iOS
         sz: 'full',
       },
     }

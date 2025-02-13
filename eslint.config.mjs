@@ -384,6 +384,7 @@ export default [
       'jsx-a11y': jsxA11y,
     },*/
     rules: {
+      'jsx-a11y/alt-text': 'off',
       'jsx-a11y/tabindex-no-positive': 'off',
       'jsx-a11y/no-autofocus': 'off',
       // for now, I do not concern about accessibility
