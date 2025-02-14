@@ -19,57 +19,53 @@ import social from '@im/ic/social.svg'
 
 
 
-const SummaryPageFeatureCards = React.memo(
-  () => {
-    const titleText = useUiValues(TitleUiText)
-    const actionText = useUiValues(ActionUiText)
-    
-    const premiumSubscription = 'Премиум подписка'
-    const unlockAllPossibilitiesWithPremium = 'Разблокируй все возможности Купидона с премиум подпиской!'
-    const findOutMore = 'Узнать подробнее'
-    const inviteYourFriends = 'Пригласи своих друзей'
-    const maybeTheyAreLookingForOtherHalf = 'Возможно они так же ищут вторую половинку'
-    const ourSocialNetworks = 'Наши социальные сети'
-    const joinSocialNetworksToStayUpToDate =
-      'Присоединяйся к нашим социальным сетям, чтобы всегда быть в курсе новостей'
-    const invite = 'Пригласить'
-    const goto = 'Перейти'
-    
-    return (
-      <>
-        
-        
-        
-        <PremiumCard>
-          <FeatureCardName>{premiumSubscription}</FeatureCardName>
-          <FeatureCardText>{unlockAllPossibilitiesWithPremium}</FeatureCardText>
-          <Button css={ButtonS6.t(premiumCardButtonS)}>{findOutMore}</Button>
-          <FeatureCardIcBox>
-            <PremiumCardIc />
-          </FeatureCardIcBox>
-        </PremiumCard>
-        
-        <InviteFriendsCard>
-          <FeatureCardName>{inviteYourFriends}</FeatureCardName>
-          <FeatureCardText>{maybeTheyAreLookingForOtherHalf}</FeatureCardText>
-          <Button css={ButtonS6.t(inviteFriendsCardButtonS)}>{invite}</Button>
-          <FeatureCardIcBox>
-            <InviteFriendsCardIc  />
-          </FeatureCardIcBox>
-        </InviteFriendsCard>
-        
-        <SocialNetworksCard>
-          <FeatureCardName>{ourSocialNetworks}</FeatureCardName>
-          <FeatureCardText>{joinSocialNetworksToStayUpToDate}</FeatureCardText>
-          <Button css={ButtonS6.t(socialNetworksCardButtonS)}>{goto}</Button>
-          <FeatureCardIcBox>
-            <SocialNetworksCardIc />
-          </FeatureCardIcBox>
-        </SocialNetworksCard>
-      </>
-    )
-  }
-)
+const SummaryPageFeatureCards = React.memo(() => {
+  const titleText = useUiValues(TitleUiText)
+  const actionText = useUiValues(ActionUiText)
+  
+  const premiumSubscription = 'Премиум подписка'
+  const unlockAllPossibilitiesWithPremium = 'Разблокируй все возможности Купидона с премиум подпиской!'
+  const findOutMore = 'Узнать подробнее'
+  const inviteYourFriends = 'Пригласи своих друзей'
+  const maybeTheyAreLookingForOtherHalf = 'Возможно они так же ищут вторую половинку'
+  const ourSocialNetworks = 'Наши социальные сети'
+  const joinSocialNetworksToStayUpToDate =
+    'Присоединяйся к нашим социальным сетям, чтобы всегда быть в курсе новостей'
+  const invite = 'Пригласить'
+  const goto = 'Перейти'
+  
+  return (
+    <>
+      
+      <PremiumCard>
+        <FeatureCardName>{premiumSubscription}</FeatureCardName>
+        <FeatureCardText>{unlockAllPossibilitiesWithPremium}</FeatureCardText>
+        <Button css={ButtonS6.t(premiumCardButtonS)}>{findOutMore}</Button>
+        <FeatureCardIcBox>
+          <PremiumCardIc />
+        </FeatureCardIcBox>
+      </PremiumCard>
+      
+      <InviteFriendsCard>
+        <FeatureCardName>{inviteYourFriends}</FeatureCardName>
+        <FeatureCardText>{maybeTheyAreLookingForOtherHalf}</FeatureCardText>
+        <Button css={ButtonS6.t(inviteFriendsCardButtonS)}>{invite}</Button>
+        <FeatureCardIcBox>
+          <InviteFriendsCardIc  />
+        </FeatureCardIcBox>
+      </InviteFriendsCard>
+      
+      <SocialNetworksCard>
+        <FeatureCardName>{ourSocialNetworks}</FeatureCardName>
+        <FeatureCardText>{joinSocialNetworksToStayUpToDate}</FeatureCardText>
+        <Button css={ButtonS6.t(socialNetworksCardButtonS)}>{goto}</Button>
+        <FeatureCardIcBox>
+          <SocialNetworksCardIc />
+        </FeatureCardIcBox>
+      </SocialNetworksCard>
+    </>
+  )
+})
 export default SummaryPageFeatureCards
 
 

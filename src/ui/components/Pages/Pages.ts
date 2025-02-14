@@ -12,21 +12,21 @@ import colC = EmotionCommon.colC
 
 export namespace Pages {
   
-  
+  const wMin = 320
   
   export const pageCol = css`
-    min-width: 220px;
+    min-width: ${wMin}px;
     width: min(100%, 100dvw);
-    min-height: max(100dvh, 220px);
+    min-height: max(100dvh, ${wMin}px);
     //height: auto;
     //max-height: fit-content;
     position: relative;
     ${col};
   `
   export const pageFillViewport = css`
-    min-width: 220px;
+    min-width: ${wMin}px;
     width: 100dvw;
-    min-height: 220px;
+    min-height: ${wMin}px;
     height: 100dvh;
   `
   // no overlapping by bottom / top bars

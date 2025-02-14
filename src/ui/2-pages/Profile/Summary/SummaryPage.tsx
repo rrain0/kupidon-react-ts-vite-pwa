@@ -271,11 +271,11 @@ const SummaryPage = React.memo(() => {
               
               <Divider />
               
-              <HeaderArrowBox>
-                <HeaderArrow css={HeaderArrowS.normal}>
+              <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>
+                <HeaderArrow css={headerArrowS}>
                   {completeProfileDescriptionText}
                 </HeaderArrow>
-              </HeaderArrowBox>
+              </Link>
               
               <ProgressBox>
                 <LineProgressFrame>
@@ -413,7 +413,8 @@ const Divider = styled.div`
 `
 
 
-const HeaderArrowBox = styled.div`
+const headerArrowS = (t: AppTheme.Theme) => css`
+  ${HeaderArrowS.normal(t)};
   grid-area: harr;
 `
 

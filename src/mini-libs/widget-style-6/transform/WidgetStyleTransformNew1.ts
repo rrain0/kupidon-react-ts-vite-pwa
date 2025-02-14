@@ -13,7 +13,7 @@ import isobject = TypeU.isobject
 
 
 
-
+// TODO Style - проверить это всё на самом сложном элементе - SelectItem
 
 // TODO COMPLETED Style split 'selP' by capital letters and check using 'in' operator
 // TODO ????????? Style Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }

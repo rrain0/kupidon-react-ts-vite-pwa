@@ -11,7 +11,6 @@ import resetH = EmotionCommon.resetH
 export namespace Hdrs {
   
   export const page = (t: AppTheme.Theme) => css`
-    min-height: 1.5em;
     align-self: center;
     text-align: center;
     ${Txt.s24Lh150};

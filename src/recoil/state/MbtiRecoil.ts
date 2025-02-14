@@ -34,13 +34,11 @@ export const MbtiRecoilComputed = selector({
       J: 0, P: 0,
     }
     
-    const [firstUnanswered, cntUnanswered] = (() => {
-      let first: number | undefined
+    const cntUnanswered = (() => {
       let cnt = 0
       for (let i = 0; i < total; i++) {
         const ai = a[i]
         if (notExists(ai)) {
-          if (notExists(first)) first = i
           cnt++
         }
         else {
@@ -62,7 +60,7 @@ export const MbtiRecoilComputed = selector({
           }
         }
       }
-      return [first, cnt]
+      return cnt
     })()
     
     const testState = (() => {
@@ -83,7 +81,6 @@ export const MbtiRecoilComputed = selector({
     })()
     
     return {
-      firstUnanswered,
       cntUnanswered,
       testState,
       mbtiType,

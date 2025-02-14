@@ -9,6 +9,7 @@ import CssWidget = WidgetStyle.CssWidget
 import Elem = WidgetStyle.Elem
 import CssPseudo = WidgetStyle.CssPseudo
 import row = EmotionCommon.row
+import Txt = EmotionCommon.Txt
 
 
 
@@ -33,9 +34,10 @@ export namespace HeaderArrowS {
       ${ButtonS6.t(ButtonS6.S.text.rect.md.normal)(t)};
       // normal
       ${W.u({ e: 'button', s: 'normal' }).thisUse} {
-        ${row};
-        height: 44px;
+        min-height: 44px;
         width: 100%;
+        ${row};
+        gap: 8px;
         justify-content: space-between;
         align-items: center;
       }
@@ -55,19 +57,19 @@ export namespace HeaderArrowS {
   export const normal = (t: AppTheme.Theme) => css`
     ${Part.base(t)};
     ${W.u({ e: 'header', s: 'normal' }).thisUse} {
-      font-weight: 500;
-      font-size: 18px;
-      line-height: normal;
-      letter-spacing: 0.05em;
-      min-height: 1.5em;
+      height: fit-content;
+      ${Txt.s18BoldWideLhNorm};
       color: ${t.page.ct1};
       align-self: center;
       text-align: center;
       position: relative;
-      top: 0.13em;
+      line-height: normal;
     }
     ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
-      height: 1.5em;
+      min-height: 24px;
+      min-width: 24px;
+      height: 24px;
+      width: 24px;
     }
   `
   

@@ -392,6 +392,12 @@ export namespace EmotionCommon {
       line-height: normal;
       letter-spacing: normal;
     `
+    export const s18BoldWideLhNorm = css`
+      font-weight: 500;
+      font-size: 18px;
+      line-height: normal;
+      letter-spacing: 0.05em;
+    `
     export const s18WideLh150 = css`
       font-weight: 400;
       font-size: 18px;
@@ -479,6 +485,12 @@ export namespace EmotionCommon {
       letter-spacing: 0.05em;
     `
     export const s14Bold = css`
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.29;
+      letter-spacing: normal;
+    `
+    export const s14BoldWide = css`
       font-weight: 600;
       font-size: 14px;
       line-height: 1.29;
