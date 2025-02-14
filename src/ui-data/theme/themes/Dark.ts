@@ -37,7 +37,7 @@ export const DarkProps: ThemeProps = {
   boxNormal: {
     bg:              ['#24272d'],
     bg2:             ['#282c34'],
-    bg3:             ['#525354'],
+    bg3:             '#525354',
     
     ct:         ['#bdbdbd'],
     ct1a:       ['#bdbdbd'],
@@ -85,9 +85,10 @@ export const DarkProps: ThemeProps = {
     bgf:          '#18181a',
     ctf:          '#D0214A',
   },
-  boxTransparent: {
+  boxTrans: {
     bg:         '#18191b99',
     ct:         '#dddddd',
+    ctSec:      '#394351',
   },
   boxWhite: { ...Light.boxWhite },
   

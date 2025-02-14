@@ -21,6 +21,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import ImgSparkingLoader from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoader.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
@@ -331,7 +332,10 @@ const MbtiTestingPage = React.memo(() => {
                 
                 <div style={{ height: 26 }} />
                 
-                <Picture src={spendingTimeGuitar} />
+                <ImgSparkingLoader
+                  css={pictureS}
+                  src={spendingTimeGuitar}
+                />
                 
                 <QuestionTitleBox>
                   <QuestionTitle ref={questionTitleRef}>
@@ -445,7 +449,7 @@ const QuestionNumber = styled.h5`
 `
 
 
-const Picture = styled.img`
+const pictureS = css`
   width: 100%;
   height: auto;
   aspect-ratio: 1.645;

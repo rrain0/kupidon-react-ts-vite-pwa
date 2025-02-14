@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import Card from 'src/ui/0-elements/cards/Card.tsx'
+import Card from 'src/ui/0-elements/Card/Card.tsx'
 import PartnerAgeOption from 'src/ui/2-pages/Profile/options-filter/PartnerAgeOption.tsx'
 import PartnerHeightOption from 'src/ui/2-pages/Profile/options-filter/PartnerHeightOption.tsx'
 import ProfileImLookingForOption

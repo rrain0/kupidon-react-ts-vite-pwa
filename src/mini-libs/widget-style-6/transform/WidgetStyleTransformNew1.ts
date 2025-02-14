@@ -55,8 +55,10 @@ const ctxLastI = ctxWidgetElementPropsI
 // ✅ 2) Object nesting level
 // TODO Style - 3) Put prop value in prop node
 // TODO Style - ??? 4) Unpack complex props
+// TODO Style - 5) Accept emotion css`` as style part
 
 
+const log = false
 
 
 export function transformNew1<Props>(
@@ -105,7 +107,7 @@ export function transformNew1<Props>(
   
   
   
-  console.log(':', baseTree, baseWords, readyWords, findRestProp, entityLvl)
+  if (log) console.log(':', baseTree, baseWords, readyWords, findRestProp, entityLvl)
   
   // No tree + no words => need check style
   // Если дерева не было, то идём дальше искать объект и брать из него слова.
@@ -185,7 +187,7 @@ export function transformNew1Words<Props>(
     throw new Error('No base words were found')
   }
   
-  console.log('Words:', undefined, baseWords, readyWords, false, entityLvl)
+  if (log) console.log('Words:', undefined, baseWords, readyWords, false, entityLvl)
   
   // No tree + have words
   // Создаём дерево из контекста.
@@ -227,7 +229,7 @@ export function transformNew1Tree<Props>(
   objectLvl = 0,
 ): MappedStyle | undefined {
   
-  console.log('Tree:', baseTree, [], readyWords, findRestProp, entityLvl)
+  if (log) console.log('Tree:', baseTree, [], readyWords, findRestProp, entityLvl)
   
   
   if (!(baseTree || findRestProp)) {
@@ -317,7 +319,7 @@ export function transformNew1TreeWords<Props>(
   objectLvl = 0,
 ): MappedStyle | undefined {
   
-  console.log('TreeWords:', baseTree, baseWords, readyWords, findRestProp, entityLvl)
+  if (log) console.log('TreeWords:', baseTree, baseWords, readyWords, findRestProp, entityLvl)
   
   if (!(baseTree || findRestProp) || !baseWords.length) {
     throw new Error('baseTree && baseWords must not be empty')

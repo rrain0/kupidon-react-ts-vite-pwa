@@ -6,7 +6,7 @@ import abs = EmotionCommon.abs
 
 
 
-const kfs = keyframes`
+const slide = keyframes`
   from { --progress: -130% }
   to   { --progress:  130% }
 `
@@ -25,12 +25,12 @@ const SparkingLoadingLine = styled.div`
   background-image: linear-gradient(
     135deg,
     transparent 0% calc(30% + var(--progress)), transparent calc(30% + var(--progress)),
-    #ffffff calc(43% + var(--progress)),
-    #ffffff calc(43% + var(--progress)) calc(57% + var(--progress)),
-    #ffffff calc(57% + var(--progress)),
+    var(--color, #ffffff) calc(43% + var(--progress)),
+    var(--color, #ffffff) calc(43% + var(--progress)) calc(57% + var(--progress)),
+    var(--color, #ffffff) calc(57% + var(--progress)),
     transparent calc(70% + var(--progress)), transparent calc(70% + var(--progress)) 100%
   );
-  animation: ${kfs} 1250ms linear infinite;
+  animation: ${slide} 1250ms linear infinite;
   
   /*background-image: linear-gradient(
     135deg,

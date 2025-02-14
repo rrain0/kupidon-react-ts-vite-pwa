@@ -1,5 +1,5 @@
-import Card from 'src/ui/0-elements/cards/Card.tsx'
-import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
+import Card from 'src/ui/0-elements/Card/Card.tsx'
+import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'

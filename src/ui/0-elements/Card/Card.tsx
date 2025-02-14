@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef } from 'react'
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
-import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
+import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import PartialUndef = TypeU.PartialUndef
 
 

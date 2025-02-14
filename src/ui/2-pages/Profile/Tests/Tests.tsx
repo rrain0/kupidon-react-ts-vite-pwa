@@ -13,15 +13,15 @@ import { MbtiData } from 'src/ui-data/MbtiData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { CardS } from 'src/ui/0-elements/cards/CardS.ts'
+import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
 import {
   useOverlayUrl
-} from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
+} from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import Card from 'src/ui/0-elements/cards/Card.tsx'
+import Card from 'src/ui/0-elements/Card/Card.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { Job } from 'src/api/model/Job.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
-import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import {
   SvgGradIconsPack,
 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'

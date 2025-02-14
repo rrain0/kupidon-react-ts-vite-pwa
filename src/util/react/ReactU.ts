@@ -44,6 +44,7 @@ export namespace ReactU {
       const props = propsList[i]
       if (props) for (const [prop, value] of Object.entries(props)) {
         if (Object.hasOwn(combinedProps, prop)) {
+          
           if (funProps.has(prop)) {
             const prevFun = combinedProps[prop]
             if (!prevFun) combinedProps[prop] = value
@@ -54,6 +55,10 @@ export namespace ReactU {
               }
             }
           }
+          else if (prop === 'style') {
+            combinedProps[prop] = { ...combinedProps[prop], ...value }
+          }
+          
         }
         else combinedProps[prop] = value
       }

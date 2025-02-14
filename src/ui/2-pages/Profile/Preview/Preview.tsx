@@ -16,7 +16,7 @@ import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { imPlaceholderIcS } from 'src/ui/0-elements/im/im'
+import { imPlaceholderIcS } from 'src/ui/0-elements/imageParts.tsx'
 import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInfo.tsx'
 import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -559,7 +559,7 @@ const NoImagesBox = styled.div`
   position: relative;
   z-index: 1;
   border-radius: var(--photo-r);
-  background-color: ${p => p.theme.boxTransparent.bg};
+  background-color: ${p => p.theme.boxTrans.bg};
   ${gridC};
   grid:
     '.' 1fr
@@ -567,11 +567,11 @@ const NoImagesBox = styled.div`
     't' 1fr
     / 100%;
   ;
-  color: ${p => p.theme.boxTransparent.ct};
+  color: ${p => p.theme.boxTrans.ct};
 `
 const imSmallPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
   icon: {
-    area: 'p', sz: '112%', color: t.boxTransparent.ct,
+    area: 'p', sz: '112%', color: t.boxTrans.ct,
   },
 }]
 const NoImagesTitle = styled.div`

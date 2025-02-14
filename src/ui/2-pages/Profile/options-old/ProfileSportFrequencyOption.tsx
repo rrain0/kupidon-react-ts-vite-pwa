@@ -4,7 +4,7 @@ import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
-import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'

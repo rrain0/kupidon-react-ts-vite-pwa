@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput.tsx'
-import { useOverlayUrl } from 'src/ui/components/action-providers/UseOverlayUrl/hook/useOverlayUrl.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'

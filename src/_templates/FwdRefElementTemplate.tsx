@@ -10,19 +10,21 @@ import colC = EmotionCommon.colC
 
 
 
-type ComponentExtraProps = Puro<{
+
+export type MyComponentExtraProps = Children & Puro<{
   // custom props
   isError: boolean
-}> & Children
+}>
 
-type ComponentRefElement = HTMLDivElement
-type ComponentProps = React.ComponentPropsWithoutRef<'div'> & ComponentExtraProps
+export type MyComponentRefElement = HTMLDivElement
+export type MyComponentProps =
+  React.ComponentPropsWithoutRef<'div'> & MyComponentExtraProps
 
 
 
 
-const Component = React.memo(
-  React.forwardRef<ComponentRefElement, ComponentProps>(
+const MyComponent = React.memo(
+  React.forwardRef<MyComponentRefElement, MyComponentProps>(
     (props, forwardedRef) => {
       const {
         children,
@@ -30,13 +32,14 @@ const Component = React.memo(
       } = props
       
       
-      const elemRef = useRef<ComponentRefElement>(null)
+      const elemRef = useRef<MyComponentRefElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
       return (
         <div // Frame
-          css={frameStyle}
+          data-display-name="MyComponent"
+          css={frameS}
           {...restProps}
           ref={elemRef}
         >
@@ -46,11 +49,12 @@ const Component = React.memo(
     }
   )
 )
-//export default Component
+MyComponent.displayName = 'MyComponent'
+//export default MyComponent
 
 
 
-const frameStyle = (t: AppTheme.Theme) => css`
+const frameS = (t: AppTheme.Theme) => css`
   ${colC};
   width: 100%;
 `

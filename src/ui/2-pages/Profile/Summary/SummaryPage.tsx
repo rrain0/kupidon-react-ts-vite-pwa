@@ -25,7 +25,7 @@ import {
   imPlaceholderIcS,
   imSmallPieProgressS, imSmallPlaceholderIcFullTrans,
   imSmallPlaceholderIcS,
-} from 'src/ui/0-elements/im/im'
+} from 'src/ui/0-elements/imageParts.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'

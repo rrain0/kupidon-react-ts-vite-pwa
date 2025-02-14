@@ -30,6 +30,8 @@ export namespace AppTheme {
   'XXXTrans' => 'XXXTransparent'
   'XXXGrad' => 'XXXGradient'
   any gradient must be named 'XXXGrad'
+  
+  TODO Theme - bg#, bg#f / bgf#, bg#a / bga#, bg#Fc, bg#Acc
   */
   export interface ThemeProps {
     
@@ -64,7 +66,7 @@ export namespace AppTheme {
     boxNormal: {
       bg:         string[]
       bg2:        string[]
-      bg3:        string[]
+      bg3:        string
       
       ct:         string[]
       ct1a:       string[]
@@ -112,9 +114,10 @@ export namespace AppTheme {
       bgf:          string
       ctf:          string
     },
-    boxTransparent: {
+    boxTrans: {
       bg:         string
       ct:         string
+      ctSec:      string
     },
     boxWhite: {
       bg:           string

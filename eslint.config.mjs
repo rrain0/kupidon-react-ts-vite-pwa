@@ -61,6 +61,7 @@ export default [
         'no-async-promise-executor': 'off',
         'no-constant-condition': 'off',
         'no-empty': 'off',
+        'no-self-assign': 'off',
         'no-unexpected-multiline': 'off',
         'prefer-const': 'warn',
         '@typescript-eslint/no-unused-expressions': 'off',

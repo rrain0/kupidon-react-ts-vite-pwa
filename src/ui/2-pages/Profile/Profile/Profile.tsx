@@ -12,7 +12,7 @@ import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOptio
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import Card from 'src/ui/0-elements/cards/Card.tsx'
+import Card from 'src/ui/0-elements/Card/Card.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
 import ProfileAlcoholOption from 'src/ui/2-pages/Profile/options/ProfileAlcoholOption.tsx'
 import ProfileBirthDateOption from 'src/ui/2-pages/Profile/options/ProfileBirthDateOption.tsx'

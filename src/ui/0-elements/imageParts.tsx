@@ -1,12 +1,14 @@
 import { css } from '@emotion/react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle'
+import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
 import abs = EmotionCommon.abs
 import flexC = EmotionCommon.flexC
+
+
 
 
 export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
