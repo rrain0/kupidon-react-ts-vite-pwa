@@ -22,6 +22,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSparkingLoader from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoader.tsx'
+import { ImgSparkingLoaderS6 } from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoaderS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
@@ -333,7 +334,7 @@ const MbtiTestingPage = React.memo(() => {
                 <div style={{ height: 26 }} />
                 
                 <ImgSparkingLoader
-                  css={pictureS}
+                  css={ImgSparkingLoaderS6.t(pictureS)}
                   src={spendingTimeGuitar}
                 />
                 
@@ -449,14 +450,9 @@ const QuestionNumber = styled.h5`
 `
 
 
-const pictureS = css`
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1.645;
-  border-radius: 15px;
-  object-position: center;
-  object-fit: cover;
-`
+const pictureS: AppWidgetStyle = t => [ImgSparkingLoaderS6.S.img.img.auto.normal, {
+  imgFrame: { w: 'full', h: 'auto', ratio: 1.645, r: 15 },
+}]
 
 
 const QuestionTitleBox = styled.div`

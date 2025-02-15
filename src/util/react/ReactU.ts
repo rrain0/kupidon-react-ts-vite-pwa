@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Puro = TypeU.Puro
@@ -57,6 +58,9 @@ export namespace ReactU {
           }
           else if (prop === 'style') {
             combinedProps[prop] = { ...combinedProps[prop], ...value }
+          }
+          else if (prop === 'className') {
+            combinedProps[prop] = clsx(combinedProps[prop], value)
           }
           
         }

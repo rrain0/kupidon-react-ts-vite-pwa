@@ -17,6 +17,7 @@ export const CommonProps = (() => {
     maxWidth: WidgetProps.maxWidth,
     maxHeight: WidgetProps.maxHeight,
     size: AdditionalProps.size,
+    aspectRation: WidgetProps.aspectRatio,
     w: WidgetProps.width,
     h: WidgetProps.height,
     wMin: WidgetProps.minWidth,
@@ -24,6 +25,8 @@ export const CommonProps = (() => {
     wMax: WidgetProps.maxWidth,
     hMax: WidgetProps.maxHeight,
     sz: AdditionalProps.size,
+    ratio: WidgetProps.aspectRatio,
+    asr: WidgetProps.aspectRatio,
     
     margin: AdditionalProps.margin,
     marginTop: WidgetProps.marginTop,

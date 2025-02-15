@@ -134,6 +134,7 @@ export namespace WidgetProps {
   export const minHeight = WidgetProp.ofName('min-height', transformLenValue)
   export const maxWidth = WidgetProp.ofName('max-width', transformLenValue)
   export const maxHeight = WidgetProp.ofName('max-height', transformLenValue)
+  export const aspectRatio = WidgetProp.ofName('aspect-ratio')
   
   export const margin = WidgetProp.ofName('margin', transformArrLenValue)
   export const marginTop = WidgetProp.ofName('margin-top', transformLenValue)

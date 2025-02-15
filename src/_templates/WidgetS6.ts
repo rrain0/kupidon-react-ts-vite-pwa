@@ -14,7 +14,7 @@ import {
 /* export */ namespace WidgetS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
-    // widget or widgetFrame
+    // <widget> or <widgetFrame>
     const widget = WidgetElem.of({
       className: 'rruiWidgetFrame', ...up,
       states: {

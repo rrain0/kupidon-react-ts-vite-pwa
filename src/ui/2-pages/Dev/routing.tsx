@@ -14,6 +14,8 @@ const SelectItemTestPage = React.lazy(() => import('src/ui/2-pages/Dev/views/Sel
 const RippleTestPage = React.lazy(() => import('src/ui/2-pages/Dev/views/RippleTestPage.tsx'))
 const ButtonsTestPage = React.lazy(() => import('src/ui/2-pages/Dev/views/ButtonsTestPage.tsx'))
 const SliderTestPage = React.lazy(() => import('src/ui/2-pages/Dev/views/SliderTestPage.tsx'))
+const ImageTestPage = React.lazy(() => import('src/ui/2-pages/Dev/views/ImageTestPage.tsx'))
+
 const ResizeObserverTestPage = React.lazy(() => import('src/ui/2-pages/Dev/pages/ResizeObserverTestPage.tsx'))
 const MoveElementToAnotherViewTestPage = React.lazy(
   () => import('src/ui/2-pages/Dev/pages/MoveElementToAnotherViewTestPage.tsx')
@@ -107,6 +109,22 @@ const sliderRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
+// path: 'dev / image / <check here>'
+const imageRouting: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <ImageTestPage />
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+
+
+
+
 // path: 'dev / resizeObserver / <check here>'
 const testResizeObserverTestPageRouting: RouteObject[] = [
   {
@@ -280,17 +298,24 @@ export const devRouting: RouteObject[] = [
     children: viewsSelectItemRouting,
   },
   {
-    path: RootRoute.dev.rippleTest[path]+'/*',
+    path: RootRoute.dev.ripple[path]+'/*',
     children: rippleRouting,
   },
   {
-    path: RootRoute.dev.buttonsTest[path]+'/*',
+    path: RootRoute.dev.buttons[path]+'/*',
     children: buttonsRouting,
   },
   {
-    path: RootRoute.dev.sliderTest[path]+'/*',
+    path: RootRoute.dev.slider[path]+'/*',
     children: sliderRouting,
   },
+  {
+    path: RootRoute.dev.image[path]+'/*',
+    children: imageRouting,
+  },
+  
+  
+  
   {
     path: RootRoute.dev.resizeObserver[path]+'/*',
     children: testResizeObserverTestPageRouting,

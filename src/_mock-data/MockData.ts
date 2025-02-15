@@ -6,6 +6,7 @@ import ban from 'src/res/im/test/Ban_ava_Nanatsu no Taizai 06.mkv_20220409_21324
 import flatOut2 from 'src/res/im/test/FlatOut 2.jpg'
 import guyFawkesMask from 'src/res/im/test/Guy Fawkes Mask.jpg'
 import kakashiAndSatoru from 'src/res/im/test/Hatake Kakashi & Satoru Goujo Cross-Over.full.3982603.jpg'
+import greekMan from '@im/test/greek man IMG_20230922_094037_882 top.png'
 import blueLockIsagi2 from 'src/res/im/test/Isagi - Blue Lock 250d5ed0b02d009af2f7fa46732b468b.jpg'
 import genshinImpactKutei
   from 'src/res/im/test/Kūtei, AVATAR, Genshin Impact, Character Request Genshin.Impact.full.3998781.jpg'
@@ -24,10 +25,18 @@ import satoru from 'src/res/im/test/Сатору Годзё photo_2023-07-31_22-
 export const MockData = {
   
   images: {
+    allRecord: {
+      beastTamerNekoChan, blueLockIsagi, kenganAshuraOp,
+      animeChan, ban, flatOut2,
+      guyFawkesMask, kakashiAndSatoru, greekMan, blueLockIsagi2,
+      genshinImpactKutei, needMoreAcid, nextUp,
+      ourLastNight, pgrHalloween, retrowave1,
+      retrowave2, hotlineMiami2, satoru,
+    },
     all: [
       beastTamerNekoChan, blueLockIsagi, kenganAshuraOp,
       animeChan, ban, flatOut2,
-      guyFawkesMask, kakashiAndSatoru, blueLockIsagi2,
+      guyFawkesMask, kakashiAndSatoru, greekMan, blueLockIsagi2,
       genshinImpactKutei, needMoreAcid, nextUp,
       ourLastNight, pgrHalloween, retrowave1,
       retrowave2, hotlineMiami2, satoru,

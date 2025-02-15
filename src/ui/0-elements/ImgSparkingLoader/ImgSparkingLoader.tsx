@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
+import clsx from 'clsx'
 import React, { SyntheticEvent, useImperativeHandle, useRef, useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
+import { ImgSparkingLoaderS6 } from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoaderS6.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -43,13 +45,11 @@ const ImgSparkingLoader = React.memo(
       return (
         <div // Frame
           data-display-name="ImgSparkingLoader"
-          css={frameS}
-          className={className}
+          className={clsx(ImgSparkingLoaderS6.W.els.imgFrame.n, className)}
           style={style}
         >
           
           <img
-            css={imgS}
             ref={elemRef}
             {...combineProps({
               onLoad: (ev: SyntheticEvent<HTMLImageElement>) => {
@@ -57,14 +57,19 @@ const ImgSparkingLoader = React.memo(
               },
               onError: (ev: SyntheticEvent<HTMLImageElement>) => {
                 setLoading(false)
+                // You can refresh src to retry on error
+                // ev.currentTarget.src = ev.currentTarget.src
               },
               style: {
                 display: isLoading ? 'none' : 'block',
               },
+              className: ImgSparkingLoaderS6.W.els.img.n,
             }, restProps)}
           />
           
-          {isLoading && <SparkingLoadingLine />}
+          {isLoading && (
+            <SparkingLoadingLine className={ImgSparkingLoaderS6.W.els.spark.n} />
+          )}
           
         </div>
       )
@@ -75,21 +80,3 @@ ImgSparkingLoader.displayName = 'ImgSparkingLoader'
 export default ImgSparkingLoader
 
 
-
-const frameS = (t: AppTheme.Theme) => css`
-  position: relative;
-  ${colC};
-  width: 100%;
-  aspect-ratio: 1;
-  background-color: ${t.boxTrans.bg};
-  --color: ${t.boxTrans.ctSec};
-  overflow: hidden;
-`
-
-
-const imgS = (t: AppTheme.Theme) => css`
-  width: 100%;
-  height: 100%;
-  object-position: center;
-  object-fit: cover;
-`

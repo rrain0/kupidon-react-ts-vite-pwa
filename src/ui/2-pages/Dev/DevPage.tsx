@@ -104,19 +104,24 @@ const DevPage = React.memo(() => {
                 Select Item
               </Button>
             </Link>
-            <Link to={RootRoute.dev.rippleTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.ripple[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Ripple
               </Button>
             </Link>
-            <Link to={RootRoute.dev.buttonsTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.buttons[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Buttons
               </Button>
             </Link>
-            <Link to={RootRoute.dev.sliderTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.dev.slider[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Slider
+              </Button>
+            </Link>
+            <Link to={RootRoute.dev.image[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Image
               </Button>
             </Link>
           </Items>

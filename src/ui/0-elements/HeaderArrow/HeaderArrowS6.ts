@@ -74,16 +74,16 @@ export namespace HeaderArrowS6 {
     
     export namespace Type {
       
-      export namespace typeName {
+      export namespace text {
         export namespace Shape {
-          export namespace shapeName {
+          export namespace rect {
             //export const baseSize: WidgetStyleObj = { ...base }
             export namespace Size {
-              // type: typeName, shape: shapeName, size: md
+              // type: text, shape: rect, size: md
               export const md: WidgetStyle = [base, {
               
               }]
-              // type: typeName, shape: shapeName, size: lg
+              // type: text, shape: rect, size: lg
               export const lg: WidgetStyle = [base, {
               
               }]
@@ -97,11 +97,11 @@ export namespace HeaderArrowS6 {
           },
         })
         export namespace Color {
-          // type: typeName, color: normal
+          // type: text, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
           
           }]
-          // type: typeName, color: accent
+          // type: text, color: accent
           export const accent: AppWidgetStyle = t => [baseColor, {
           
           }]

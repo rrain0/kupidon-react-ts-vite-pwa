@@ -96,9 +96,10 @@ export namespace AppRoutes {
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
     viewsSelectItem: buildPath('views-select-item'),
-    rippleTest: buildPath('ripple'),
-    buttonsTest: buildPath('buttons'),
-    sliderTest: buildPath('slider'),
+    ripple: buildPath('ripple'),
+    buttons: buildPath('buttons'),
+    slider: buildPath('slider'),
+    image: buildPath('image'),
     
     resizeObserver: buildPath('resize-observer'),
     moveElementToAnotherView: buildPath('move-element-to-another-view'),

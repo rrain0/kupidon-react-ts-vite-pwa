@@ -46,6 +46,11 @@ export namespace WidgetStyleCommon {
   }
   
   
+  export const imgCoverCenter: WidgetStyleObj = {
+    objectFit: 'cover', objectPosition: 'center',
+  }
+  
+  
   export const noBorderOutlineBoxShadow: WidgetStyleObj = {
     bd: null,
     outline: null,

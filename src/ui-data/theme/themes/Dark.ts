@@ -86,7 +86,7 @@ export const DarkProps: ThemeProps = {
     ctf:          '#D0214A',
   },
   boxTrans: {
-    bg:         '#18191b99',
+    bg:         '#30333999',
     ct:         '#dddddd',
     ctSec:      '#394351',
   },
