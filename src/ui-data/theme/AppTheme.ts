@@ -13,7 +13,10 @@ export namespace AppTheme {
   /*
   bg => background
   ct => content
-  any 'bgXXX' must be paired with 'ctXXX'
+  any 'bg###' must be paired with 'ct###'
+  bg3 / ct3
+  bgFc3 / ctFc3
+  bgFc3a / ctFc3a
   
   'XXXa' / 'XXXAcc' => 'XXXAccent'
   bga / bgAcc => backgroundAccent
@@ -31,7 +34,6 @@ export namespace AppTheme {
   'XXXGrad' => 'XXXGradient'
   any gradient must be named 'XXXGrad'
   
-  TODO Theme - bg#, bg#f / bgf#, bg#a / bga#, bg#Fc, bg#Acc
   */
   export interface ThemeProps {
     
@@ -94,6 +96,7 @@ export namespace AppTheme {
       bg:         string
       ct:         string
       shadow:     string
+      
       bgf:        string
       ctf:        string
     },
@@ -107,6 +110,15 @@ export namespace AppTheme {
       ct:         string[]
       ct2:        string[]
       ct3:        string
+    },
+    boxAccent4: {
+      bg:         string
+      ct:         string
+      ctGrad:     [string, string],
+      shadow:     string,
+      
+      bgf:        string
+      ctf:        string
     },
     boxDanger: {
       bg:           string
@@ -139,8 +151,8 @@ export namespace AppTheme {
       
       bg3:           string
       ct3:           string
-      bg3Fc:         string,
-      ct3Fc:         string,
+      bgFc3:         string,
+      ctFc3:         string,
     }
     // main button (submit button)
     buttonMain: {

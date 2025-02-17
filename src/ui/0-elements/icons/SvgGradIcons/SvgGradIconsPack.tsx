@@ -18,6 +18,7 @@ import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
 import BookGradSvg from 'src/res/ic/gradient/book-grad.svg?react'
 import BowArrowGradSvg from 'src/res/ic/gradient/bow-arrow-grad.svg?react'
 
+import Calendar2GradSvg from 'src/res/ic/gradient/calendar-2-grad.svg?react'
 import CardsDollarGradSvg from 'src/res/ic/gradient/cards-dollar-grad.svg?react'
 import CardsHeartGradSvg from 'src/res/ic/gradient/cards-heart-grad.svg?react'
 import ClockGradSvg from 'src/res/ic/gradient/clock-grad.svg?react'
@@ -153,6 +154,7 @@ export namespace SvgGradIconsPack {
   export const BookGradIc = generateSimpleSvgIcon(BookGradSvg)
   export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
   
+  export const Calendar2GradIc = generateSimpleSvgIcon(Calendar2GradSvg)
   export const CardsDollarGradIc = generateSimpleSvgIcon(CardsDollarGradSvg)
   export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
   export const ClockGradIc = generateSimpleSvgIcon(ClockGradSvg)

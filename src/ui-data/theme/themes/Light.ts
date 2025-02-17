@@ -61,11 +61,12 @@ export const LightProps: ThemeProps = {
     shadow:     ['#00000026'],
   },
   boxNormal4: {
-    bg:           '#ffffff',
-    ct:           '#232020',
-    shadow:       '#A4A4A426',
-    bgf:          '#ffffff',
-    ctf:          '#232020',
+    bg:         '#ffffff',
+    ct:         '#232020',
+    shadow:     '#A4A4A426',
+    
+    bgf:        '#ffffff',
+    ctf:        '#232020',
   },
   boxSec: {
     bg:         '#E0E0E0',
@@ -78,16 +79,25 @@ export const LightProps: ThemeProps = {
     ct2:      ['#F8F8F8'],
     ct3:      '#ffffff',
   },
+  boxAccent4: {
+    bg:         '#ffffff',
+    ct:         '#1F1F1F',
+    ctGrad:     ['#1F1F1F', '#6D6D6D'],
+    shadow:     '#A4A4A426',
+    
+    bgf:        '#ffffff',
+    ctf:        '#232020',
+  },
   boxDanger: {
     bg:           '#ffffff',
-    ct:           '#D0214A',
+    ct:           '#e74c3c',
     bgf:          '#ffe7e7',
-    ctf:          '#D0214A',
+    ctf:          '#e74c3c',
   },
   boxTrans: {
-    bg:           '#ffffff99',
+    bg:           '#c4cdde99', // '#dce4f299'
     ct:           '#291f1d',
-    ctSec:        '#cccccc',
+    ctSec:        '#ffffff',
   },
   boxWhite: {
     bg:           '#ffffff',
@@ -108,8 +118,8 @@ export const LightProps: ThemeProps = {
     
     bg3:           '#b5b5b5',
     ct3:           '#ffffff',
-    bg3Fc:         '#c5c5c5',
-    ct3Fc:         '#ffffff',
+    bgFc3:         '#c5c5c5',
+    ctFc3:         '#ffffff',
   },
   buttonMain: {
     bg:       ['#7b7b7b'],
@@ -261,12 +271,12 @@ export const LightProps: ThemeProps = {
   
   toast: {
     bg:                   ['#ffffff'],
-    ct:              ['#757575'],
-    ct2:             ['#b2b2b2'],
-    ct3:             '#000000',
+    ct:                   ['#757575'],
+    ct2:                  ['#b2b2b2'],
+    ct3:                  '#000000',
     accentNormal:         ['#bb86fc'],
     accentLoadingBg:      ['#e0e0e0'],
-    accentLoadingCt: ['#616161'],
+    accentLoadingCt:      ['#616161'],
     accentInfo:           ['#3498db'],
     accentOk:             ['#07bc0c'],
     accentWarn:           ['#f1c40f'],

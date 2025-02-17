@@ -22,7 +22,6 @@ import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { formSubmitPreventDefault } from '@util/hooks/formSubmitPreventDefault'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import DataField from 'src/ui/0-elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/0-elements/DataField/DataFieldStyle'
@@ -131,7 +130,7 @@ const AccountSettingsPage = React.memo(() => {
       .some(f => f.type === 'initial' && f.errorFields.includes(field))
   }, [failures])
   
-  const updateValues = useEffectEvent((auth: AuthStateType) => {
+  const updateValues = (auth: AuthStateType) => {
     setFormValues(s => {
       const u = auth!.user
       const newValues = { ...s, initialValues: { ...s.initialValues } }
@@ -143,7 +142,7 @@ const AccountSettingsPage = React.memo(() => {
       })
       return newValues
     })
-  })
+  }
   useEffect(() => updateValues(auth), [auth])
   
   const resetField = useCallback(

@@ -91,7 +91,7 @@ const NavBar = React.memo(() => {
                 <div>{titleText.settings}</div>
               </Button>
               
-              <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
+              <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction} />
             </>
           )}
         </UseOverlayUrl>

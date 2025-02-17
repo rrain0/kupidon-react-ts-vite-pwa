@@ -91,6 +91,31 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
               </Button>
               
               
+              <Button css={ButtonS6.t(ButtonS6.S.text.rect.lg.normal)}
+                onClick={() => {
+                  setImages(images.map(im => {
+                    im.download?.abort()
+                    im.compression?.abort()
+                    return {
+                      ...DefaultProfilePhoto,
+                      type: 'local',
+                      id: uuid.v4(),
+                      isEmpty: true,
+                      remoteIndex: im.remoteIndex,
+                    } satisfies ProfilePhoto
+                  }))
+                  sheet.setClosing()
+                }}
+              >
+                <OptionContainer>
+                  <div css={optionIconBoxStyle}>
+                    <CrossInCircleIc css={SvgIconS6.t(crossS)} />
+                  </div>
+                  <OptionTitle>{actionText.removeAll}</OptionTitle>
+                </OptionContainer>
+              </Button>
+              
+              
               <Dropzone
                 onDrop={(files, rejectedFiles, ev) => onFilesSelected(files)}
                 noDrag

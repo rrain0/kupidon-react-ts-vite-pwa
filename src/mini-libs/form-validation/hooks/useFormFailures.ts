@@ -1,7 +1,6 @@
 import { useLayoutEffect, useState } from 'react'
 import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import { ValidationValidate } from 'src/mini-libs/form-validation/core/ValidationValidate.ts'
-import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import validate = ValidationValidate.validate
 import Validators = ValidationCore.Validators
 import Values = ValidationCore.Values
@@ -11,18 +10,16 @@ import Values = ValidationCore.Values
 
 
 
-export type UseFormFailuresProps
-<Vs extends Values>
-= {
+export type UseFormFailuresProps<Vs extends Values> = {
   defaultValues: Vs
   validators: Validators<Vs>
 }
 
 
 
-export const useFormFailures =
-<Vs extends Values>
-(props: UseFormFailuresProps<Vs>)=>{
+export const useFormFailures = <Vs extends Values>(
+  props: UseFormFailuresProps<Vs>
+) => {
   const {
     defaultValues,
     validators,
@@ -31,40 +28,35 @@ export const useFormFailures =
   
   const [values, setValues] = useState(defaultValues)
   const [prevValues, setPrevValues] = useState(defaultValues)
-  const [failures, setFailures] = useState(()=>validate(
+  const [failures, setFailures] = useState(() => validate(
     { values: defaultValues, validators: validators }
   ))
   
   
   
   
-  const updateFailuresEffectEvent = useEffectEvent(
-    (values: Vs)=>{
-      //console.log('I prevValues',prevValues)
-      //console.log('II values',values)
-      //console.log('III prevFailures',failures)
-      const newFailures = validate({
-        values,
-        prevValues,
-        prevFailures: failures,
-        validators
-      })
-      //console.log('IV newFailures',newFailures)
-      setFailures(newFailures)
-      setPrevValues(values)
-      // todo calculate some error props:
-      //  changed fields
-      //  if any value changed
-      //  method to reset field
-      //  method to resst whole form
-    }
-  )
+  const updateFailuresEffectEvent = (values: Vs) => {
+    //console.log('I prevValues',prevValues)
+    //console.log('II values',values)
+    //console.log('III prevFailures',failures)
+    const newFailures = validate({
+      values,
+      prevValues,
+      prevFailures: failures,
+      validators,
+    })
+    //console.log('IV newFailures',newFailures)
+    setFailures(newFailures)
+    setPrevValues(values)
+    // todo calculate some error props:
+    //  changed fields
+    //  if any value changed
+    //  method to reset field
+    //  method to resst whole form
+  }
   // Layout Effect is necessary because of Chrome's autofill on Android:
   // when browser pastes login/pwd, failure state does not have time to update
-  useLayoutEffect(
-    ()=>updateFailuresEffectEvent(values),
-    [values]
-  )
+  useLayoutEffect(() => updateFailuresEffectEvent(values), [values])
   
   
   
@@ -72,22 +64,19 @@ export const useFormFailures =
   const [failedFields, setFailedFields] = useState([] as (keyof Vs)[])
   // Layout Effect is necessary because of Chrome's autofill on Android:
   // when browser pastes login/pwd, failure state does not have time to update
-  useLayoutEffect(
-    ()=>{
-      const failedFieldsSet = failures
-        .filter(f=>f.type!=='server')
-        .reduce(
-          (accum,f)=>{
-            f.errorFields.forEach(f=>accum.add(f))
-            return accum
-          },
-          new Set<keyof Vs>()
-        )
-      const failedFields = [...failedFieldsSet]
-      setFailedFields(failedFields)
-    },
-    [failures]
-  )
+  useLayoutEffect(() => {
+    const failedFieldsSet = failures
+      .filter(f => f.type!=='server')
+      .reduce(
+        (accum, f) => {
+          f.errorFields.forEach(f => accum.add(f))
+          return accum
+        },
+        new Set<keyof Vs>()
+      )
+    const failedFields = [...failedFieldsSet]
+    setFailedFields(failedFields)
+  }, [failures])
   
   
   

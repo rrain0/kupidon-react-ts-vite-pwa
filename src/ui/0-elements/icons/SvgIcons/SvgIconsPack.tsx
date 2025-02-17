@@ -12,6 +12,7 @@ import ArrowReloadSvg from 'src/res/ic/normal/arrow-reload.svg?react'
 import BowArrowSvg from 'src/res/ic/normal/bow-arrow.svg?react'
 
 import CalendarSvg from 'src/res/ic/normal/calendar.svg?react'
+import Calendar2Svg from 'src/res/ic/normal/calendar-2.svg?react'
 import CardsHeartSvg from 'src/res/ic/normal/cards-heart.svg?react'
 import CautionSvg from 'src/res/ic/normal/caution.svg?react'
 import ChatRoundSvg from 'src/res/ic/normal/chat-round.svg?react'
@@ -178,6 +179,7 @@ export namespace SvgIconsPack {
   
   
   export const CalendarIc = generateSimpleSvgIcon(CalendarSvg)
+  export const Calendar2Ic = generateSimpleSvgIcon(Calendar2Svg)
   export const CardsHeartIc = generateSimpleSvgIcon(CardsHeartSvg)
   export const CautionIc = generateSimpleSvgIcon(CautionSvg)
   export const ChatRoundIc = generateSimpleSvgIcon(ChatRoundSvg)

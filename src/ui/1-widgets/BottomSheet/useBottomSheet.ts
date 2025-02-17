@@ -10,7 +10,6 @@ import React, {
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { CssParserU } from 'src/util/css/CssParserU.ts'
@@ -280,7 +279,7 @@ export const useBottomSheet = (
   
   //console.log('newSheetState', newState)
   
-  const reactOnState = useEffectEvent(() => {
+  const reactOnState = () => {
     if (!isReady) return
     
     const canOpen = exists(realDefaultOpenIdx)
@@ -457,11 +456,10 @@ export const useBottomSheet = (
       setStateAndIndex(null, null)
       return
     }
-  })
-  useEffect(
-    () => reactOnState(),
-    [newState, newSnapIdx, newCloseable, isReady, snapPointsPx]
-  )
+  }
+  useEffect(() => {
+    reactOnState()
+  }, [newState, newSnapIdx, newCloseable, isReady, snapPointsPx])
   
   
   

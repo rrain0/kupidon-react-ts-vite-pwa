@@ -1,3 +1,4 @@
+import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import React, {
@@ -7,7 +8,6 @@ import React, {
   useEffect, useMemo,
   useState,
 } from 'react'
-import { useEffectEvent } from 'src/util/react/useEffectEvent.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { ValidationActions } from 'src/mini-libs/form-validation/core/ValidationActions.ts'
 import Failures = ValidationCore.Failures
@@ -16,7 +16,6 @@ import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import ValueOrUpdater = TypeU.ValueOrMapper
-import trueOrUndef = TypeU.trueOrUndef
 import Callback = TypeU.Callback
 import Callback1 = TypeU.Callback1
 import Mapper = TypeU.Mapper
@@ -56,9 +55,9 @@ export type ValidationWrapProps
 
 
 
-const ValidationWrap =
-<Vs extends Values, F extends keyof Vs>
-(props: ValidationWrapProps<Vs, F>) => {
+const ValidationWrap = <Vs extends Values, F extends keyof Vs>(
+  props: ValidationWrapProps<Vs, F>
+) => {
   const {
     fieldName,
     values,
@@ -98,46 +97,43 @@ const ValidationWrap =
   }, [failures, fieldName, value, values])
   
   
-  const setValueEffectEvent = useEffectEvent(
-    (value: ValueOrUpdater<Vs[F]>) => {
-      setFailures(f => {
-        const update = f.filter(f => (f.notify || f.highlight)
-          && f.errorFields.includes(fieldName)
+  const [getSetValue] = useAsRefGet((value: ValueOrUpdater<Vs[F]>) => {
+    setFailures(f => {
+      const update = f.filter(f => (f.notify || f.highlight)
+        && f.errorFields.includes(fieldName)
+      )
+      if (update.length>0)
+        return updateFailures(
+          failures,
+          { failures: update },
+          { notify: false, highlight: false }
         )
-        if (update.length>0)
-          return updateFailures(
-            failures,
-            { failures: update },
-            { notify: false, highlight: false }
-          )
-        return f
-      })
-      setValues(s => {
-        const newFieldValue = function() {
-          if (value instanceof Function) return value(s[fieldName])
-          return value
-        }()
-        return {
-          ...s,
-          [fieldName]: newFieldValue,
-        }
-      })
-    }
-  )
-  const setValue = useCallback(
-    (value: ValueOrUpdater<Vs[F]>) => setValueEffectEvent(value),
-    []
-  )
+      return f
+    })
+    setValues(s => {
+      const newFieldValue = function() {
+        if (value instanceof Function) return value(s[fieldName])
+        return value
+      }()
+      return {
+        ...s,
+        [fieldName]: newFieldValue,
+      }
+    })
+  })
+  const setValue = useCallback((value: ValueOrUpdater<Vs[F]>) => {
+    getSetValue()(value)
+  }, [])
   
   
   
   const onChange = useCallback(
-    (ev: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+    (ev: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setValue(ev.currentTarget.value as any)
     },
     []
   )
-  const onBlurEffectEvent = useEffectEvent(() => {
+  const [getOnBlur] = useAsRefGet(() => {
     const failsToUpdate = failures.filter(f =>
       f.errorFields.includes(fieldName)
       && f.highlight
@@ -149,19 +145,16 @@ const ValidationWrap =
       { delay: 0 },
     ))
   })
-  const onBlur = useCallback(() => onBlurEffectEvent(), [])
+  const onBlur = useCallback(() => getOnBlur()(), [])
   const getChecked = useCallback((v: Vs[F]) => v === value, [value])
   
   
   
-  const inputProps = useMemo(
-    () => ({
-      value,
-      onChange,
-      onBlur,
-    }),
-    [value]
-  )
+  const inputProps = useMemo(() => ({
+    value,
+    onChange,
+    onBlur,
+  }), [value])
   const radioInputProps = useCallback(
     (value: Vs[F]) => ({
       checked: getChecked(value),

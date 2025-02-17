@@ -101,7 +101,7 @@ const FeatureCardText = styled.div`
 const featureCardButtonS: AppWidgetStyle = [ButtonS6.S.filled.rect.md.accent2, {
   button: {
     gridArea: 'btn', w: 160, hMin: 35,
-    ...WidgetStyleCommon.Txt.s14Bold,
+    ...WidgetStyleCommon.Txt.s14Bold600,
   },
 }]
 const FeatureCardIcBox = styled.div`
@@ -124,7 +124,7 @@ const FeatureCardIc = styled.div`
 
 
 
-const cardTheme = {
+const cardLocalTheme = {
   boxPink: {
     bgGrad:       ['#F0849D', '#CD617A'],
     ct:           '#FFFFFF',
@@ -183,23 +183,23 @@ const cardTheme = {
 const PremiumCard = styled.div`
   ${featureCardS};
   background: linear-gradient(170.72deg,
-    ${cardTheme.boxWine.bgGrad[0]} 7.42%,
-    ${cardTheme.boxWine.bgGrad[1]} 131.56%
+    ${cardLocalTheme.boxWine.bgGrad[0]} 7.42%,
+    ${cardLocalTheme.boxWine.bgGrad[1]} 131.56%
   );
-  color: ${cardTheme.boxWine.ct};
+  color: ${cardLocalTheme.boxWine.ct};
 `
 const premiumCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
-  buttonBgColor: cardTheme.boxWithWine.bg,
-  buttonColor: cardTheme.boxWithWine.ct,
-  rippleColor: cardTheme.boxWithWine.ctRipple,
+  buttonBgColor: cardLocalTheme.boxWithWine.bg,
+  buttonColor: cardLocalTheme.boxWithWine.ct,
+  rippleColor: cardLocalTheme.boxWithWine.ctRipple,
   inFocus: {
-    buttonBgColor: cardTheme.boxWithWine.bg,
+    buttonBgColor: cardLocalTheme.boxWithWine.bg,
     buttonBgIm: `linear-gradient(
       to bottom right,
-      ${cardTheme.boxWithWine.bgFcGrad[1]} 65%,
-      ${cardTheme.boxWithWine.bgFcGrad} 100%
+      ${cardLocalTheme.boxWithWine.bgFcGrad[1]} 65%,
+      ${cardLocalTheme.boxWithWine.bgFcGrad} 100%
     )`,
-    buttonColor: cardTheme.boxWithWine.ctFc,
+    buttonColor: cardLocalTheme.boxWithWine.ctFc,
   },
 }]
 const PremiumCardIc = styled(FeatureCardIc)`
@@ -212,23 +212,23 @@ const PremiumCardIc = styled(FeatureCardIc)`
 const InviteFriendsCard = styled.div`
   ${featureCardS};
   background: linear-gradient(180deg,
-    ${cardTheme.boxViolet.bgGrad[0]} 0%,
-    ${cardTheme.boxViolet.bgGrad[1]} 100%
+    ${cardLocalTheme.boxViolet.bgGrad[0]} 0%,
+    ${cardLocalTheme.boxViolet.bgGrad[1]} 100%
   );
-  color: ${cardTheme.boxViolet.ct};
+  color: ${cardLocalTheme.boxViolet.ct};
 `
 const inviteFriendsCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
-  buttonBgColor: cardTheme.boxWithViolet.bg,
-  buttonColor: cardTheme.boxWithViolet.ct,
-  rippleColor: cardTheme.boxWithViolet.ctRipple,
+  buttonBgColor: cardLocalTheme.boxWithViolet.bg,
+  buttonColor: cardLocalTheme.boxWithViolet.ct,
+  rippleColor: cardLocalTheme.boxWithViolet.ctRipple,
   inFocus: {
-    buttonBgColor: cardTheme.boxWithViolet.bg,
+    buttonBgColor: cardLocalTheme.boxWithViolet.bg,
     buttonBgIm: `linear-gradient(
       to bottom right,
-      ${cardTheme.boxWithViolet.bgFcGrad[1]} 65%,
-      ${cardTheme.boxWithViolet.bgFcGrad} 100%
+      ${cardLocalTheme.boxWithViolet.bgFcGrad[1]} 65%,
+      ${cardLocalTheme.boxWithViolet.bgFcGrad} 100%
     )`,
-    buttonColor: cardTheme.boxWithViolet.ctFc,
+    buttonColor: cardLocalTheme.boxWithViolet.ctFc,
   },
 }]
 const InviteFriendsCardIc = styled(FeatureCardIc)`
@@ -242,23 +242,23 @@ const InviteFriendsCardIc = styled(FeatureCardIc)`
 const SocialNetworksCard = styled.div`
   ${featureCardS};
   background: linear-gradient(180deg,
-    ${cardTheme.boxBlue.bgGrad[0]} 0%,
-    ${cardTheme.boxBlue.bgGrad[1]} 107.78%
+    ${cardLocalTheme.boxBlue.bgGrad[0]} 0%,
+    ${cardLocalTheme.boxBlue.bgGrad[1]} 107.78%
   );
-  color: ${cardTheme.boxBlue.ct};
+  color: ${cardLocalTheme.boxBlue.ct};
 `
 const socialNetworksCardButtonS: AppWidgetStyle = t => [featureCardButtonS, {
-  buttonBgColor: cardTheme.boxWithBlue.bg,
-  buttonColor: cardTheme.boxWithBlue.ct,
-  rippleColor: cardTheme.boxWithBlue.ctRipple,
+  buttonBgColor: cardLocalTheme.boxWithBlue.bg,
+  buttonColor: cardLocalTheme.boxWithBlue.ct,
+  rippleColor: cardLocalTheme.boxWithBlue.ctRipple,
   inFocus: {
-    buttonBgColor: cardTheme.boxWithBlue.bg,
+    buttonBgColor: cardLocalTheme.boxWithBlue.bg,
     buttonBgIm: `linear-gradient(
       to bottom right,
-      ${cardTheme.boxWithBlue.bgFcGrad[1]} 65%,
-      ${cardTheme.boxWithBlue.bgFcGrad} 100%
+      ${cardLocalTheme.boxWithBlue.bgFcGrad[1]} 65%,
+      ${cardLocalTheme.boxWithBlue.bgFcGrad} 100%
     )`,
-    buttonColor: cardTheme.boxWithBlue.ctFc,
+    buttonColor: cardLocalTheme.boxWithBlue.ctFc,
   },
 }]
 const SocialNetworksCardIc = styled(FeatureCardIc)`

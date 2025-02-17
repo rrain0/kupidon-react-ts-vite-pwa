@@ -79,6 +79,15 @@ export const DarkProps: ThemeProps = {
     ct2:        ['#000000'],
     ct3:        '#000000',
   },
+  boxAccent4: {
+    bg:         '#24272d',
+    ct:         '#d0d0d0',
+    ctGrad:     ['#42414c', '#ffffff'],
+    shadow:     '#ffffff00',
+    
+    bgf:        '#18181a',
+    ctf:        '#d0d0d0',
+  },
   boxDanger: {
     bg:           '#24272d',
     ct:           '#D0214A',
@@ -105,8 +114,8 @@ export const DarkProps: ThemeProps = {
     
     bg3:            '#909090',
     ct3:            '#000000',
-    bg3Fc:          '#c5c5c5',
-    ct3Fc:          '#000000',
+    bgFc3:          '#c5c5c5',
+    ctFc3:          '#000000',
   },
   buttonMain: {
     bg:       ['#aaaaaa'],

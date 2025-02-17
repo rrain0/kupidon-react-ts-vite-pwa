@@ -144,6 +144,16 @@ export namespace IconButtonS6 {
               // todo gradIcon
             },
           ]
+          // type: filled, color: accent4
+          export const accent4: AppWidgetStyle = t => [
+            baseColor,
+            ButtonS6.Parts.Type.filled.Color.accent4,
+            {
+              iconColor: t.boxAccent4.ct,
+              gradIconColor0: t.boxAccent4.ctGrad[0],
+              gradIconColor1: t.boxAccent4.ctGrad[1],
+            },
+          ]
         }
       }
       

@@ -57,7 +57,7 @@ export default PersonalityCompatibility
 
 
 
-const boxTheme = {
+const boxLocalTheme = {
   boxNeutral: {
     bg:    '#cccccc',
     ct:    '#333333',
@@ -91,12 +91,12 @@ const Card = styled.div<{ compatibility: Compatibility }>`
   ${p => {
     // TODO Style - extract colors to goodBox, warnBox, dangerBox
     if (p.compatibility === 'high') return {
-      backgroundColor: boxTheme.boxSuccess.bg,
-      color: boxTheme.boxSuccess.ct,
+      backgroundColor: boxLocalTheme.boxSuccess.bg,
+      color: boxLocalTheme.boxSuccess.ct,
     }
     if (p.compatibility === 'medium') return {
-      backgroundColor: boxTheme.boxNeutral.bg,
-      color: boxTheme.boxNeutral.ct,
+      backgroundColor: boxLocalTheme.boxNeutral.bg,
+      color: boxLocalTheme.boxNeutral.ct,
     }
   }}
 `

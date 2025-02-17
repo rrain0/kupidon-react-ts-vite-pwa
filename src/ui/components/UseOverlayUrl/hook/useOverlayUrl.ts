@@ -56,10 +56,14 @@ export const useOverlayUrl = (overlayName: string) => {
   }, [isOpen])
   
   
-  const close = useCallback((action?: Callback) => {
+  const close = useCallback(() => {
+    enableClose()
+  }, [])
+  
+  const closeWithAction = useCallback((action?: Callback) => {
     enableClose()
     setCloseAction(() => action)
   }, [])
   
-  return { isOpen, open, close } as const
+  return { isOpen, open, close, closeWithAction } as const
 }

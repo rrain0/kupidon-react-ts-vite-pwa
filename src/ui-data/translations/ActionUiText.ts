@@ -28,6 +28,10 @@ export const ActionUiText = {
     'en-US': 'Remove',
     'ru-RU': 'Удалить',
   },
+  removeAll: {
+    'en-US': 'Remove all',
+    'ru-RU': 'Удалить все',
+  },
   edit: {
     'en-US': 'Edit',
     'ru-RU': 'Редактировать',

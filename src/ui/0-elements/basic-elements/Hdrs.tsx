@@ -13,7 +13,8 @@ export namespace Hdrs {
   export const page = (t: AppTheme.Theme) => css`
     align-self: center;
     text-align: center;
-    ${Txt.s24Lh150};
+    // В фигме заголовки страниц жирные, но обычнфм шрифтом лучше смотрится
+    ${Txt.s24Wide};
     color: ${t.page.ct1};
   `
   export const Page = styled.h3`

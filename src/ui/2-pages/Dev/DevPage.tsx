@@ -310,27 +310,15 @@ const DevPage = React.memo(() => {
             `}
           >
             <div>onEvent Test</div>
-            <button css={css`width: 100px;
-              height: 50px;`}>Button
+            <button
+              css={css`
+                width: 100px;
+                height: 50px;
+              `}
+            >
+              Button
             </button>
           </div>
-          
-          <img
-            style={{ width: 200, height: 200 }}
-            src="http://localhost:40019/test/img/ban.jpg"
-            onLoad={() => {
-              console.log('IMG: onLoad')
-            }}
-            onError={(ev) => {
-              console.log('IMG: onError')
-              const img = ev.currentTarget
-              setTimeout(() => {
-                console.log('IMG: re-set src')
-                console.log(`IMG: ${img}`)
-                img.src = img.src
-              }, 5000)
-            }}
-          />
         
         
         </Pages.Content>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
 import { TypeU } from '@util/common/TypeU.ts'
 import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
-import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import { ToastBody, ToastType } from 'src/ui/components/Toasts/ToastBody.tsx'
 import falsy = TypeU.falsy
 import PartialUndef = TypeU.PartialUndef
@@ -25,35 +24,33 @@ export const useToasts = (props?: UseToastsProps) => {
   const [prevData, setPrevData] = useState([] as UseToastDataType)
   
   
-  const onData = useEffectEvent(
-    (data: UseToastDataType) => {
-      const show = data.filter(d => !prevData.includes(d))
-      const hide = prevData.filter(d => !data.includes(d))
-      
-      /* console.log(
-        'USE_TOASTS: PREV_DATA',prevData,'\n',
-        'USE_TOASTS: DATA',data,
-      ) */
-      
-      hide.forEach(d => {
-        if (d instanceof ToastMsgData) {
-          d.hide()
-        }
-      })
-      
-      show.forEach(d => {
-        if (d instanceof ToastMsgData) {
-          d.show()
-        }
-      })
-      
-      setPrevData(data)
-    }
-  )
+  const onData = (data: UseToastDataType) => {
+    const show = data.filter(d => !prevData.includes(d))
+    const hide = prevData.filter(d => !data.includes(d))
+    
+    /* console.log(
+      'USE_TOASTS: PREV_DATA',prevData,'\n',
+      'USE_TOASTS: DATA',data,
+    ) */
+    
+    hide.forEach(d => {
+      if (d instanceof ToastMsgData) {
+        d.hide()
+      }
+    })
+    
+    show.forEach(d => {
+      if (d instanceof ToastMsgData) {
+        d.show()
+      }
+    })
+    
+    setPrevData(data)
+  }
   useEffect(() => { onData(data) }, data)
   
   
-  const closeOnUnmount = useEffectEvent(() => {
+  const closeOnUnmount = () => {
     prevData.forEach(d => {
       if (d instanceof ToastMsgData) {
         if (d.closeOnUnmount) {
@@ -62,7 +59,7 @@ export const useToasts = (props?: UseToastsProps) => {
         }
       }
     })
-  })
+  }
   useEffect(() => () => closeOnUnmount(), [])
   
 }

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { LightProps } from 'src/ui-data/theme/themes/Light.ts'
+import { Light, LightProps } from 'src/ui-data/theme/themes/Light.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -45,6 +45,12 @@ export const LightWineProps: ThemeProps = { ...LightProps,
     // cta:    '#ffdde5',
     // cta2:   '#dd2e57',
     // cta3:   '#BB2649',
+  },
+  boxAccent4: { ...Light.boxAccent4,
+    ct:         '#BB2649',
+    ctGrad:     ['#BB2649', '#F75F82'],
+    
+    ctf:        '#BB2649',
   },
   
   

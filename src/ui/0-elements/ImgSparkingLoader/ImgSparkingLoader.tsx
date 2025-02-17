@@ -1,14 +1,10 @@
-import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { SyntheticEvent, useImperativeHandle, useRef, useState } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ImgSparkingLoaderS6 } from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoaderS6.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Puro = TypeU.Puro
-import colC = EmotionCommon.colC
 import ClassStyle = ReactU.ClassStyle
 import combineProps = ReactU.combineProps
 
@@ -26,7 +22,6 @@ export type ImgSparkingLoaderProps =
 
 
 
-// TODO - make style
 const ImgSparkingLoader = React.memo(
   React.forwardRef<ImgSparkingLoaderRefElement, ImgSparkingLoaderProps>(
     (props, forwardedRef) => {

@@ -131,13 +131,13 @@ export namespace WidgetStyleCommon {
       lineHeight: '1.29',
       letterSpacing: '0.05em',
     }
-    export const s14Bold: WidgetStyleObj = {
+    export const s14Bold600: WidgetStyleObj = {
       fontWeight: '600',
       fontSize: '14px',
       lineHeight: '1.29',
       letterSpacing: 'normal',
     }
-    export const s14BoldWide: WidgetStyleObj = {
+    export const s14Bold600Wide: WidgetStyleObj = {
       fontWeight: '600',
       fontSize: '14px',
       lineHeight: '1.29',

@@ -100,7 +100,7 @@ const Tests = React.memo((props: TestsProps) => {
   const resetMbtiTestDialog = useOverlayUrl(ResetMbtiTestOverlayName)
   const resetTestAndStartAgain = useCallback(() => {
     setMbti(prev => ({ ...prev, answers: [] }))
-    resetMbtiTestDialog.close(() => {
+    resetMbtiTestDialog.closeWithAction(() => {
       navigate(RootRoute.test.mbti[fullAnySearchParams](searchParams))
     })
   }, [])

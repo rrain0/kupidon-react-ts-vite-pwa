@@ -23,7 +23,31 @@ const ImageTestPage = React.memo(() => {
           
           <ImgSparkingLoader
             css={ImgSparkingLoaderS6.t(pictureS)}
+            src="/backend/test/image/greek-man.png"
+          />
+          
+          <ImgSparkingLoader
+            css={ImgSparkingLoaderS6.t(pictureS)}
             src={MockData.images.allRecord.greekMan}
+          />
+          
+          <div css={{ height: 600 }} />
+          
+          <img
+            style={{ width: 200, height: 200 }}
+            src="/backend/test/image/ban.jpg"
+            onLoad={() => {
+              console.log('IMG: onLoad')
+            }}
+            onError={(ev) => {
+              console.log('IMG: onError')
+              const img = ev.currentTarget
+              setTimeout(() => {
+                console.log('IMG: re-set src')
+                console.log(`IMG: ${img}`)
+                img.src = img.src
+              }, 5000)
+            }}
           />
         
         </Pages.Content>
@@ -36,7 +60,6 @@ const ImageTestPage = React.memo(() => {
   )
 })
 export default ImageTestPage
-
 
 
 const pictureS: AppWidgetStyle = t => [ImgSparkingLoaderS6.S.img.img.auto.normal, {

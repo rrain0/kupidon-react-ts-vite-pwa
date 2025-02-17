@@ -105,7 +105,7 @@ export namespace ButtonBarComponents {
           <>
             <QuickSettingsButton onClick={overlay.open} />
             
-            <QuickSettings isOpen={overlay.isOpen} close={overlay.close} />
+            <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction} />
           </>
         )}
       </UseOverlayUrl>

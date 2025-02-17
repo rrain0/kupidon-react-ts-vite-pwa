@@ -1,8 +1,8 @@
+import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useCallback, useEffect, useState } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils'
 import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect'
-import { useEffectEvent } from '@util/react/useEffectEvent.ts'
 import Values = ValidationCore.Values
 import ApiResponse = ApiUtils.ApiResponse
 import ResponseError = ApiUtils.ResponseError
@@ -22,16 +22,18 @@ export type ResponseData
   usedValues: Vs
 }
 
-export type UseApiRequestProps
-<Vs extends Values, D, E extends ResponseError
+export type UseApiRequestProps<
+  Vs extends Values, D, E extends ResponseError
 > = {
   values: Vs
   failedFields: (keyof Vs)[]
-  prepareAndRequest: (values: Vs, failedFields: (keyof Vs)[])=>Promise<ApiResponse<D,E>>
+  prepareAndRequest: (values: Vs, failedFields: (keyof Vs)[]) => Promise<ApiResponse<D, E>>
 }
-export const useApiRequest =
-<Vs extends Values, D, E extends ResponseError>
-(props: UseApiRequestProps<Vs,D,E>)=>{
+export const useApiRequest = <
+  Vs extends Values, D, E extends ResponseError
+>(
+  props: UseApiRequestProps<Vs, D, E>
+) => {
   const {
     values,
     failedFields,
@@ -45,19 +47,16 @@ export const useApiRequest =
   const [isSuccess, setIsSuccess] = useState(false)
   const [isError, setIsError] = useState(false)
   const [isImmediate, setIsImmediate] = useState(false)
-  const resetResponse = useCallback(
-    ()=>{
-      setIsSuccess(false)
-      setIsError(false)
-      setResponse(undefined)
-      setIsImmediate(false)
-    },
-    []
-  )
+  const resetResponse = useCallback(() => {
+    setIsSuccess(false)
+    setIsError(false)
+    setResponse(undefined)
+    setIsImmediate(false)
+  }, [])
   
   
   const [response, setResponse] = useState(
-    undefined as undefined | ResponseData<Vs,D,E>
+    undefined as undefined | ResponseData<Vs, D, E>
   )
   
   
@@ -65,65 +64,50 @@ export const useApiRequest =
   
   
   const [doRequest, setDoRequest] = useState(false)
-  const request = useCallback(
-    ()=>setDoRequest(true),
-    []
-  )
+  const request = useCallback(() => setDoRequest(true), [])
   
   
-  const tryRequest = useCallback(
-    async()=>{
-      if (isLoading) return
-      //console.log('tryRequest')
-      setIsLoading(true)
-      resetResponse()
-      try {
-        const response = await prepareAndRequest(values,failedFields)
-        if (response.isSuccess){
-          setResponse({
-            isSuccess: true,
-            data: response.data,
-            usedValues: values
-          })
-          setIsSuccess(true)
-        }
-        else {
-          setResponse({
-            isSuccess: false,
-            error: response.error,
-            usedValues: values
-          })
-          setIsError(true)
-        }
-      } finally {
-        setIsLoading(false)
-        setIsImmediate(true)
+  const tryRequest = useCallback(async() => {
+    if (isLoading) return
+    //console.log('tryRequest')
+    setIsLoading(true)
+    resetResponse()
+    try {
+      const response = await prepareAndRequest(values, failedFields)
+      if (response.isSuccess) {
+        setResponse({
+          isSuccess: true,
+          data: response.data,
+          usedValues: values,
+        })
+        setIsSuccess(true)
       }
-    },
-    [isLoading, resetResponse, prepareAndRequest, values, failedFields]
-  )
-  
-  
-  const tryRequestEffectEvent = useEffectEvent(()=>tryRequest())
-  useAsyncEffect(
-    (lock,unlock)=>{
-      if (doRequest && lock('api-request')){
-        setDoRequest(false)
-        ;(async()=>{
-          tryRequestEffectEvent()
-            .finally(()=>unlock('api-request'))
-        })()
+      else {
+        setResponse({
+          isSuccess: false,
+          error: response.error,
+          usedValues: values,
+        })
+        setIsError(true)
       }
-    },
-    [doRequest]
-  )
+    } finally {
+      setIsLoading(false)
+      setIsImmediate(true)
+    }
+  }, [isLoading, resetResponse, prepareAndRequest, values, failedFields])
+  
+  
+  const [getTryRequest] = useAsRefGet(tryRequest)
+  useAsyncEffect((lock, unlock) => {
+    if (doRequest && lock('api-request')) {
+      setDoRequest(false)
+      getTryRequest()().finally(() => unlock('api-request'))
+    }
+  }, [doRequest])
   
   
   
-  useEffect(
-    ()=>setIsImmediate(false),
-    [isImmediate]
-  )
+  useEffect(() => setIsImmediate(false), [isImmediate])
   
   
   

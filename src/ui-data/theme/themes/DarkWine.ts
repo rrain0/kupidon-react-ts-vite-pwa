@@ -39,6 +39,12 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     // cta2:     '#b7405c',
     // cta3:     '#BB2649',
   },
+  boxAccent4: { ...Dark.boxAccent4,
+    ct:         '#BB2649',
+    ctGrad:     ['#BB2649', '#F75F82'],
+    
+    ctf:        '#BB2649',
+  },
   
   
   
