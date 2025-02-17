@@ -6,7 +6,6 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -25,7 +24,6 @@ const BowAndArrowsPage = React.memo(() => {
   const uiText = useMemo(() => ({
     bowAndArrows: titleText.bowAndArrows,
     poster: 'Афиша',
-    allEvents: 'Все события',
   }), [titleText])
   
   
@@ -48,10 +46,6 @@ const BowAndArrowsPage = React.memo(() => {
             
             <HeaderArrow css={HeaderArrowS.page}>
               {uiText.poster}
-            </HeaderArrow>
-            
-            <HeaderArrow css={HeaderArrowS.page}>
-              {uiText.allEvents}
             </HeaderArrow>
           
           </Pages.ContentSmCol>

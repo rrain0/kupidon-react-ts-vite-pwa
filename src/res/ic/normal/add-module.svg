@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 200 200" stroke="black" fill="black">
+  viewBox="0 0 200 200" stroke="#282828" fill="#282828">
   
   <style>
     :root {

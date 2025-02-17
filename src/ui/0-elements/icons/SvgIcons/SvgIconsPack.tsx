@@ -51,6 +51,7 @@ import HomeSvg from 'src/res/ic/normal/home.svg?react'
 
 import InfoToastifySvg from 'src/res/ic/normal/info-toastify.svg?react'
 
+import LocationSvg from 'src/res/ic/normal/location.svg?react'
 import LockSvg from 'src/res/ic/normal/lock.svg?react'
 
 import MoonSvg from 'src/res/ic/normal/moon.svg?react'
@@ -63,6 +64,7 @@ import PictureSvg from 'src/res/ic/normal/picture.svg?react'
 import PlanetFrameSvg from 'src/res/ic/normal/planet-frame.svg?react'
 import PlusSvg from 'src/res/ic/normal/plus.svg?react'
 import ProfileSvg from 'src/res/ic/normal/profile.svg?react'
+import PriceTagSvg from 'src/res/ic/normal/price-tag.svg?react'
 import ProfileCardSvg from 'src/res/ic/normal/profile-card.svg?react'
 
 import RadioActiveSvg from 'src/res/ic/normal/radio-active.svg?react'
@@ -225,6 +227,7 @@ export namespace SvgIconsPack {
   export const InfoToastifyIc = generateSimpleSvgIcon(InfoToastifySvg)
   
   
+  export const LocationIc = generateSimpleSvgIcon(LocationSvg)
   export const LockIc = generateSimpleSvgIcon(LockSvg)
   
   
@@ -240,6 +243,7 @@ export namespace SvgIconsPack {
   export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
   export const PlusIc = generateSimpleSvgIcon(PlusSvg)
   export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
+  export const PriceTagIc = generateSimpleSvgIcon(PriceTagSvg)
   export const ProfileCardIc = generateSimpleSvgIcon(ProfileCardSvg)
   
   

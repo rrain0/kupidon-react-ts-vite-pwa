@@ -20,6 +20,7 @@ import hotlineMiami2 from 'src/res/im/test/wallpaper-Hotline-Miami-2---Wrong-Num
 import satoru from 'src/res/im/test/Сатору Годзё photo_2023-07-31_22-35-02.jpg'
 
 
+import concert from 'src/_mock-data/poster/concert--nainoa-shizuru-NcdG9mK3PBY-unsplash.png'
 
 
 export const MockData = {
@@ -66,6 +67,20 @@ export const MockData = {
     city: 'Иркутск',
     birthDate: '1998-02-16T03:20:36.458+08:00',
   },
+  
+  
+  
+  poster: [
+    {
+      date: '12 марта',
+      location: 'ВТБ Арена',
+      price: 'от 2599 ₽',
+      description: 'Известные артисты исполнят для вас свои песни. Отличная идея для свидания!',
+      previewImg: concert,
+    },
+  ],
+  
+  
   
 }
 
