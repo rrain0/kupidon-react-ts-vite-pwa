@@ -43,7 +43,7 @@ export interface MediaInArray extends Media {
   remoteI: number
 }
 
-export const DefaultMediaInArray = (): MediaInArray => ({
+export const newDefaultMediaInArray = (): MediaInArray => ({
   ...newDefaultMedia(),
   remoteI: 0,
 })
@@ -56,19 +56,45 @@ export interface MediaOperation {
   abort: (reason?: any) => void
 }
 
-
 export const newDefaultMediaOperation = (): MediaOperation => ({
   id: '',
   progress: 0,
   abort: noop,
 })
 
-type Downloadable = Puro<{
+
+
+export type Downloadable = Puro<{
   needDownload: boolean
   showDownload: boolean
   download: MediaOperation
   downloadError: any
 }>
 
+
+
 // extend this interface to define a particular error type, etc.
 export interface MediaDownloadable extends Media, Downloadable { }
+
+
+
+export type Uploadable = Puro<{
+  needUpload: boolean
+  showUpload: boolean
+  upload: MediaOperation
+  uploadError: any
+}>
+
+
+
+export type Compressible = Puro<{
+  needCompression: boolean
+  showCompression: boolean
+  compression: MediaOperation
+  compressionError: any
+}>
+
+
+
+
+

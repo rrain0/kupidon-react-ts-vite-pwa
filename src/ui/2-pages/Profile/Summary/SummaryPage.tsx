@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useNext } from '@util/react-state/useNext.ts'
-import { useInterval } from '@util/react/useInterval.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -102,6 +101,7 @@ const SummaryPage = React.memo(() => {
     }
     return {
       ...newDefaultMainPhoto(),
+      needDownload: true,
       showDownload: canShowFetchProgress,
       id: remoteMainPhoto.id,
       name: remoteMainPhoto.name,
