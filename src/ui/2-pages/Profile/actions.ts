@@ -177,13 +177,10 @@ export const profileUpdateApiRequest = (
         ),
       }))
     }
-    const delayTimerId = setTimeout(
-      () => {
-        uploads = uploads.map(it => ({ ...it, showProgress: true }))
-        uploads.forEach(upload => setUpload(upload))
-      },
-      2000
-    )
+    const delayTimerId = setTimeout(() => {
+      uploads = uploads.map(it => ({ ...it, showProgress: true }))
+      uploads.forEach(upload => setUpload(upload))
+    }, 2000)
     
     const applyUpdatedUser = () => {
       clearTimeout(delayTimerId)

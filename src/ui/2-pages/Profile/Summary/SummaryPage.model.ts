@@ -1,12 +1,13 @@
-import { DefaultMedia, MediaDownloadable } from 'src/ui-data/models/Media'
+import { MediaDownloadable, newDefaultMedia } from 'src/ui-data/models/Media'
 
 
 export interface MainPhoto extends MediaDownloadable { }
 
-export const DefaultMainPhoto: MainPhoto  = {
-  ...DefaultMedia,
+export const newDefaultMainPhoto = (): MainPhoto => ({
+  ...newDefaultMedia(),
   needDownload: true,
+  showDownload: false,
   download: undefined,
   downloadError: undefined,
-}
+})
 

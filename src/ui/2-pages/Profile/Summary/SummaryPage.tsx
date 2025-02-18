@@ -1,6 +1,8 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useState } from 'react'
+import { useNext } from '@util/react-state/useNext.ts'
+import { useInterval } from '@util/react/useInterval.ts'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
@@ -8,7 +10,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
-import { DefaultMediaOperation } from 'src/ui-data/models/Media'
+import { newDefaultMediaOperation } from 'src/ui-data/models/Media'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
@@ -29,7 +31,10 @@ import {
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
-import { DefaultMainPhoto, MainPhoto } from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
+import {
+  MainPhoto,
+  newDefaultMainPhoto,
+} from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
 import { SummaryPageParts } from 'src/ui/2-pages/Profile/Summary/SummaryPageParts.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -42,7 +47,6 @@ import { MockData } from 'src/_mock-data/MockData'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { FileU } from 'src/util/file/FileU'
 import { Progress } from 'src/util/Progress'
-import { useEvent } from 'src/util/react/useEvent'
 import { useTimeout } from 'src/util/react/useTimeout'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
@@ -61,8 +65,6 @@ import row = EmotionCommon.row
 
 
 // TODO показывать уведомление с кнопкой Retry, если ошибка загрузки данных
-// TODO В фотках профиля баг, что продолжается анимация инциализации, если фото пустое,
-//  и только потом показывается +
 
 const SummaryPage = React.memo(() => {
   const lang = useRecoilValue(LangRecoil).langs[0]
@@ -70,7 +72,7 @@ const SummaryPage = React.memo(() => {
   const actionText = useUiValues(ActionUiText)
   
   const auth = useRecoilValue(AuthRecoil)!
-  const u = auth.user
+  const { id, name, birthDate, photos } = auth.user
   
   const profile = MockData.profile2
   const progress = 45
@@ -81,109 +83,133 @@ const SummaryPage = React.memo(() => {
   
   useEffect(() => setProfileProgress(progress), [])
   
-  const [mainPhoto, setMainPhoto] = useState<MainPhoto>(() => {
-    const mainPhotoRemote = u.photos.find(it => it.index === 0)
-    if (!mainPhotoRemote) return {
-      ...DefaultMainPhoto,
-      isEmpty: true,
-      needDownload: false,
-    }
-    return {
-      ...DefaultMainPhoto,
-      id: mainPhotoRemote.id,
-      name: mainPhotoRemote.name,
-      mimeType: mainPhotoRemote.mimeType,
-      remoteUrl: mainPhotoRemote.url,
-      //needDownload: false,
-      //downloadError: 'error',
-    }
-  })
+  // const [index, setIndex] = useState(0)
+  // useInterval(6000, () => setIndex(i => i === 0 ? 1 : 0))
   
-  useEvent(() => {
-    if (mainPhoto.needDownload) {
-      
-      const abortCtrl = new AbortController()
-      const downloadStart = {
-        isReady: false,
-        needDownload: false,
-        download: { ...DefaultMediaOperation,
-          id: mainPhoto.id,
-          abort: () => {
-            console.log('download was aborted')
-            abortCtrl.abort('download was aborted')
-          },
-        },
-        downloadError: undefined,
-      } satisfies Partial<MainPhoto>
-      
-      setMainPhoto({
-        ...mainPhoto,
-        ...downloadStart,
-      })
-      
-      const updateDownload = (downloadId: string, u: Partial<MainPhoto>) => {
-        setMainPhoto(s => {
-          if (s.download?.id === downloadId) return { ...s, ...u }
-          return s
-        })
-      }
-      const updateDownloadThrottled = withThrottle(
-        RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-        updateDownload,
-      )
-      
-      ;(async () => {
-        try {
-          const progress = new Progress(2, [90, 10])
-          const onProgress = (p: number | null) => {
-            progress.progress = p ?? 0
-            //console.log('progress', photo.id, progress.value)
-            updateDownloadThrottled(
-              downloadStart.download.id,
-              { download: {
-                ...downloadStart.download,
-                progress: progress.value,
-              } }
-            )
-          }
-          
-          console.log('download started')
-          const blob = await fetchToBlob(
-            mainPhoto.remoteUrl,
-            { onProgress, abortCtrl }
-          )
-          abortCtrl.signal.throwIfAborted()
-          
-          progress.stage++
-          progress.progress = 0
-          const dataUrl = await blobToDataUrl(blob, { onProgress, abortCtrl })
-          abortCtrl.signal.throwIfAborted()
-          
-          console.log('download completed')
-          updateDownload(
-            downloadStart.download.id,
-            { isReady: true, download: undefined, dataUrl },
-          )
-        }
-        catch (ex) {
-          // TODO notify about error
-          //console.log('download error', ex)
-          //console.log('photo', photo)
-          updateDownload(
-            downloadStart.download.id,
-            { download: undefined, downloadError: ex },
-          )
-        }
-        finally {
-          //unlock(photo.remoteUrl)
-        }
-        
-      })()
-    }
-  }, [mainPhoto.needDownload], true)
+  const remoteMainPhoto = useMemo(() => {
+    return photos.find(it => it.index === 0)
+  }, [photos])
   
   const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
   useTimeout(3000, () => setCanShowFetchProgress(true), [])
+  
+  const getMainPhoto = () => {
+    if (!remoteMainPhoto) return {
+      ...newDefaultMainPhoto(),
+      isEmpty: true,
+      needDownload: false,
+      showDownload: false,
+    }
+    return {
+      ...newDefaultMainPhoto(),
+      showDownload: canShowFetchProgress,
+      id: remoteMainPhoto.id,
+      name: remoteMainPhoto.name,
+      mimeType: remoteMainPhoto.mimeType,
+      remoteUrl: remoteMainPhoto.url,
+    }
+  }
+  
+  const [mainPhoto, setMainPhoto] = useState<MainPhoto>(getMainPhoto)
+  useEffect(() => setMainPhoto(getMainPhoto()), [remoteMainPhoto])
+  useEffect(() => {
+    setMainPhoto({ ...mainPhoto, showDownload: canShowFetchProgress })
+  }, [canShowFetchProgress])
+  
+  const [downloadNumber, nextDownload] = useNext()
+  const { needDownload } = mainPhoto
+  useEffect(() => { if (needDownload) nextDownload() }, [needDownload])
+  
+  useEffect(() => {
+    const fetchToBlobAbortCtrl = new AbortController()
+    const blobToDataUrlAbortCtrl = new AbortController()
+    const abortCtrl = new AbortController()
+    const downloadStart = {
+      isReady: false,
+      needDownload: false,
+      download: { ...newDefaultMediaOperation(),
+        id: mainPhoto.id,
+        abort: (reason) => {
+          fetchToBlobAbortCtrl.abort(reason)
+          blobToDataUrlAbortCtrl.abort(reason)
+          abortCtrl.abort(reason)
+        },
+      },
+      downloadError: undefined,
+    } satisfies Partial<MainPhoto>
+    
+    setMainPhoto({
+      ...mainPhoto,
+      ...downloadStart,
+    })
+    
+    const updateDownload = (downloadId: string, u: Partial<MainPhoto>) => {
+      setMainPhoto(s => {
+        if (s.download?.id === downloadId) return { ...s, ...u }
+        return s
+      })
+    }
+    const updateDownloadThrottled = withThrottle(
+      RangeU.map(Math.random(), [0, 1], [1450, 2000]),
+      updateDownload,
+    )
+    
+    ;(async () => {
+      try {
+        const progress = new Progress(2, [90, 10])
+        const onProgress = (p: number | null) => {
+          progress.progress = p ?? 0
+          //console.log('progress', photo.id, progress.value)
+          updateDownloadThrottled(
+            downloadStart.download.id,
+            { download: {
+              ...downloadStart.download,
+              progress: progress.value,
+            } }
+          )
+        }
+        
+        console.log('download started')
+        const blob = await fetchToBlob(
+          mainPhoto.remoteUrl,
+          { onProgress, abortCtrl: fetchToBlobAbortCtrl }
+        )
+        abortCtrl.signal.throwIfAborted()
+        
+        progress.stage++
+        progress.progress = 0
+        const dataUrl = await blobToDataUrl(blob,
+          { onProgress, abortCtrl: blobToDataUrlAbortCtrl }
+        )
+        abortCtrl.signal.throwIfAborted()
+        
+        console.log('download completed')
+        updateDownload(
+          downloadStart.download.id,
+          { isReady: true, download: undefined, dataUrl },
+        )
+      }
+      catch (ex) {
+        if (abortCtrl.signal.aborted) {
+          console.log('download aborted:', abortCtrl.signal.reason)
+          return
+        }
+        
+        // TODO notify about error
+        //console.log('download error', ex)
+        //console.log('photo', photo)
+        updateDownload(
+          downloadStart.download.id,
+          { download: undefined, downloadError: ex },
+        )
+      }
+      finally {
+        //unlock(photo.remoteUrl)
+      }
+    })()
+    
+    return () => downloadStart.download.abort('download is stale')
+  }, [downloadNumber])
   
   
   const retry = () => {
@@ -197,7 +223,7 @@ const SummaryPage = React.memo(() => {
   }
   
   
-  const info = [profile.city, DateU.ageYears(u.birthDate, lang)].filter(it => it).join(', ')
+  const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
   
   
   //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
@@ -224,7 +250,7 @@ const SummaryPage = React.memo(() => {
                         </Button>
                       </div>
                     )
-                  if (!canShowFetchProgress
+                  if (!mainPhoto.showDownload
                     && mainPhoto.type === 'remote'
                     && !mainPhoto.isReady
                     && !mainPhoto.isEmpty
@@ -234,7 +260,7 @@ const SummaryPage = React.memo(() => {
                         <SparkingLoadingLine />
                       </div>
                     )
-                  if (canShowFetchProgress && mainPhoto.download)
+                  if (mainPhoto.showDownload && mainPhoto.download)
                     return (
                       <div css={imPlaceholderBoxS}>
                         <PieProgress css={imSmallPieProgressS}
@@ -253,8 +279,8 @@ const SummaryPage = React.memo(() => {
                 })()}
               </AvaBox>
               
-              <Name>{u.name}</Name>
-              <Link to={RootRoute.profile.id.userId[use](u.id).preview[full]()}>
+              <Name>{name}</Name>
+              <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
                 <Eye>
                   <Button css={IconButtonS6.t(eyeIcS)}>
                     <EyeWideIc />
@@ -263,7 +289,7 @@ const SummaryPage = React.memo(() => {
               </Link>
               <Info>{info}</Info>
               
-              <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>
+              <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
                 <Edit>
                   <Button css={editBtnStyle}>{actionText.edit}</Button>
                 </Edit>
@@ -271,7 +297,7 @@ const SummaryPage = React.memo(() => {
               
               <Divider />
               
-              <Link to={RootRoute.profile.id.userId[use](u.id).profile[full]()}>
+              <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
                 <HeaderArrow css={headerArrowS}>
                   {completeProfileDescriptionText}
                 </HeaderArrow>

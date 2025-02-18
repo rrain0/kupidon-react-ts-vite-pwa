@@ -23,7 +23,7 @@ export interface Media {
   isReady: boolean
 }
 
-export const DefaultMedia: Media = {
+export const newDefaultMedia = (): Media => ({
   type: 'remote',
   isEmpty: false,
   
@@ -35,7 +35,7 @@ export const DefaultMedia: Media = {
   dataUrl: '',
   
   isReady: false,
-}
+})
 
 
 
@@ -43,27 +43,29 @@ export interface MediaInArray extends Media {
   remoteI: number
 }
 
-export const DefaultMediaInArray: MediaInArray = {
-  ...DefaultMedia,
+export const DefaultMediaInArray = (): MediaInArray => ({
+  ...newDefaultMedia(),
   remoteI: 0,
-}
+})
 
 
 
 export interface MediaOperation {
   id: string
   progress: number // 0..100
-  abort: Callback
+  abort: (reason?: any) => void
 }
 
-export const DefaultMediaOperation: MediaOperation = {
+
+export const newDefaultMediaOperation = (): MediaOperation => ({
   id: '',
   progress: 0,
   abort: noop,
-}
+})
 
 type Downloadable = Puro<{
   needDownload: boolean
+  showDownload: boolean
   download: MediaOperation
   downloadError: any
 }>

@@ -33,7 +33,7 @@ export namespace FileU {
         reject(ctrl.signal.reason)
         return
       }
-      ctrl.signal.onabort = reader.abort
+      ctrl.signal.onabort = () => reader.abort
     }
     
     //reader.readAsArrayBuffer(file)
