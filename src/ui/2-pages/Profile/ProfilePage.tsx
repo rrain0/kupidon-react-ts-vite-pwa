@@ -26,7 +26,7 @@ import { ProfilePageTabHeaderContext } from 'src/ui/2-pages/Profile/ProfilePageT
 import {
   DefaultOperation,
   ProfilePhoto,
-} from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
+} from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
@@ -156,7 +156,7 @@ const ProfilePage = React.memo(() => {
           if (photo.type === 'remote') {
             //console.log('photo',photo)
             return {
-              ...newValues.initialValues.photos[photo.remoteIndex],
+              ...newValues.initialValues.photos[photo.remoteI],
               isReady: photo.isReady,
               compression: photo.compression,
             } satisfies ProfilePhoto

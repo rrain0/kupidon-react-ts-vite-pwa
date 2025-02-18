@@ -28,7 +28,7 @@ import {
   DefaultOperation,
   DefaultProfilePhoto,
   ProfilePhoto,
-} from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
+} from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
@@ -639,7 +639,7 @@ const onFilesSelectedBuilder = (
               ...DefaultProfilePhoto,
               type: 'local',
               id: uuid.v4(),
-              remoteIndex: photo.remoteIndex,
+              remoteI: photo.remoteI,
               name: trimExtension(imgFile.name),
               mimeType: mimeType,
               dataUrl: imgDataUrl,

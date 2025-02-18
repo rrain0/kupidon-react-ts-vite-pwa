@@ -6,7 +6,7 @@ import {
   DefaultProfilePhoto,
   Operation,
   ProfilePhoto,
-} from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
+} from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { AuthStateType } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
@@ -78,7 +78,7 @@ export const currentUserPhotosToProfilePhotos =
         ...DefaultProfilePhoto,
         type: 'remote',
         id: uuid.v4(),
-        remoteIndex: i,
+        remoteI: i,
         isEmpty: true,
         isReady: true,
       } satisfies ProfilePhoto))
@@ -87,7 +87,7 @@ export const currentUserPhotosToProfilePhotos =
         ...DefaultProfilePhoto,
         type: 'remote',
         id: it.id,
-        remoteIndex: it.index,
+        remoteI: it.index,
         name: it.name,
         mimeType: it.mimeType,
         remoteUrl: it.url,
@@ -139,11 +139,11 @@ export const profileUpdateApiRequest = (
         .map(it => ({ id: it.fromElem.id, index: it.toIdx })),
     }
     addPhotos = values.photos
-      .map((it, i) => ({ remoteIndex: i, photo: it }))
+      .map((it, i) => ({ remoteI: i, photo: it }))
       .filter(it => it.photo.type === 'local' && it.photo.isReady)
       .map(it => ({
         id: it.photo.id,
-        index: it.remoteIndex,
+        index: it.remoteI,
         name: it.photo.name,
         dataUrl: it.photo.dataUrl,
       }))
@@ -211,9 +211,9 @@ export const profileUpdateApiRequest = (
           photos: ArrayU.combine(
             s.photos, values.photos,
             (photo, usedPhoto, photoI, usedPhotoI) => ({
-              ...photo, remoteIndex: usedPhotoI,
+              ...photo, remoteI: usedPhotoI,
             } satisfies ProfilePhoto),
-            (photo, usedPhoto) => photo.remoteIndex === usedPhoto.remoteIndex
+            (photo, usedPhoto) => photo.remoteI === usedPhoto.remoteI
           ),
         }))
         setAuth(s => ({

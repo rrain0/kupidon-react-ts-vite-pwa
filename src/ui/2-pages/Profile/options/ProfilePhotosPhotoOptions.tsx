@@ -15,7 +15,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
-import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePhotoModels.ts'
+import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
@@ -76,7 +76,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                     type: 'local',
                     id: uuid.v4(),
                     isEmpty: true,
-                    remoteIndex: newImages[lastIdx].remoteIndex,
+                    remoteI: newImages[lastIdx].remoteI,
                   } satisfies ProfilePhoto
                   setImages(newImages)
                   sheet.setClosing()
@@ -101,7 +101,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                       type: 'local',
                       id: uuid.v4(),
                       isEmpty: true,
-                      remoteIndex: im.remoteIndex,
+                      remoteI: im.remoteI,
                     } satisfies ProfilePhoto
                   }))
                   sheet.setClosing()
