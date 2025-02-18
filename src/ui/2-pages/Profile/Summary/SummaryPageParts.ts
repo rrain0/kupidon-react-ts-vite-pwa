@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 
 
-export namespace SummaryPageData {
+export namespace SummaryPageParts {
   
   
-  export const cardStyle = css`
+  export const cardS = css`
     padding: 16px;
     border-radius: 20px;
   `

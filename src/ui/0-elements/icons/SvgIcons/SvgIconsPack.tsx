@@ -27,6 +27,7 @@ import CrossInCircleSvg from 'src/res/ic/normal/cross-in-circle.svg?react'
 import DangerRoundToastifySvg from 'src/res/ic/normal/danger-round-toastify.svg?react'
 import DaySvg from 'src/res/ic/normal/day.svg?react'
 import DayNightSvg from 'src/res/ic/normal/day-night.svg?react'
+import DocumentErrorSvg from 'src/res/ic/normal/document-error.svg?react'
 import DoubleCheckmarkSvg from 'src/res/ic/normal/double-checkmark.svg?react'
 import Download1Svg from 'src/res/ic/normal/download-1.svg?react'
 import Download2RoundSvg from 'src/res/ic/normal/download-2-round.svg?react'
@@ -75,6 +76,7 @@ import RulerCornerSvg from 'src/res/ic/normal/ruler-corner.svg?react'
 import Search2Svg from 'src/res/ic/normal/search-2.svg?react'
 import Spinner8LinesSvg from 'src/res/ic/normal/spinner-8-lines.svg?react'
 import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.svg?react'
+import SyncErrorSvg from 'src/res/ic/normal/sync-error.svg?react'
 
 import WarnCircleOutlinedSvg from 'src/res/ic/normal/warn-circle-outlined.svg?react'
 import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
@@ -197,6 +199,7 @@ export namespace SvgIconsPack {
   export const DangerRoundToastifyIc = generateSimpleSvgIcon(DangerRoundToastifySvg)
   export const DayIc = generateSimpleSvgIcon(DaySvg)
   export const DayNightIc = generateSimpleSvgIcon(DayNightSvg)
+  export const DocumentErrorIc = generateSimpleSvgIcon(DocumentErrorSvg)
   export const DoubleCheckmarkIc = generateSimpleSvgIcon(DoubleCheckmarkSvg)
   export const Download1Ic = generateSimpleSvgIcon(Download1Svg)
   export const Download2RoundIc = generateSimpleSvgIcon(Download2RoundSvg)
@@ -285,6 +288,7 @@ export namespace SvgIconsPack {
     )
   )
   
+  export const SyncErrorIc = generateSimpleSvgIcon(SyncErrorSvg)
   
   export const WarnCircleOutlinedIc = generateSimpleSvgIcon(WarnCircleOutlinedSvg)
   export const WarnTriangleToastifyIc = generateSimpleSvgIcon(WarnTriangleToastifySvg)

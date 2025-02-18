@@ -56,7 +56,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   const height = '175'
   const weight = 'Не выбрано'
   const imLookingFor = 'Не выбрано'
-  const age = (birthDate && DateU.age(birthDate)) ?? ''
+  const age = birthDate && DateU.age(birthDate) || ''
   
   const titleText = useUiValues(TitleUiText)
   const optionText = useUiValues(OptionUiText)

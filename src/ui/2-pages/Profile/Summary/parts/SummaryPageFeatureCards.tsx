@@ -11,7 +11,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
+import { SummaryPageParts } from 'src/ui/2-pages/Profile/Summary/SummaryPageParts.ts'
 import Txt = EmotionCommon.Txt
 import heartLocks from '@im/ic/heart-locks.svg'
 import share from '@im/ic/share.svg'
@@ -74,7 +74,7 @@ export default SummaryPageFeatureCards
 
 const cardMinH = 136
 const featureCardS = css`
-  ${SummaryPageData.cardStyle};
+  ${SummaryPageParts.cardS};
   min-height: ${cardMinH}px;
   padding: 0 16px 0 0;
   display: grid;

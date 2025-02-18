@@ -1,4 +1,4 @@
 
 
 // current document time in ms
-export const getTime = () => (document.timeline.currentTime as number | null) ?? 0
+export const getTime = () => (document.timeline.currentTime as number | null) || 0

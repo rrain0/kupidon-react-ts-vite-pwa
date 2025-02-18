@@ -30,7 +30,7 @@ import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
 import { DefaultMainPhoto, MainPhoto } from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
-import { SummaryPageData } from 'src/ui/2-pages/Profile/Summary/SummaryPageData'
+import { SummaryPageParts } from 'src/ui/2-pages/Profile/Summary/SummaryPageParts.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -313,7 +313,7 @@ const pageContentS = css`
 `
 
 const InfoCard = styled.div`
-  ${SummaryPageData.cardStyle};
+  ${SummaryPageParts.cardS};
   background: ${p => p.theme.boxNormal.bg[0]};
   display: grid;
   grid:

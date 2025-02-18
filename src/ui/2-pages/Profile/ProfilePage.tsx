@@ -83,12 +83,12 @@ const ProfilePage = React.memo(() => {
   } = useApiRequest({
     values: formValues,
     failedFields,
-    prepareAndRequest: useCallback(
-      (values: FormValues, failedFields: (keyof FormValues)[]) => {
-        return profileUpdateApiRequest(values, failedFields, setFormValues, setAuth)
-      },
-      []
-    ),
+    prepareAndRequest: useCallback((
+      values: FormValues,
+      failedFields: (keyof FormValues)[]
+    ) => {
+      return profileUpdateApiRequest(values, failedFields, setFormValues, setAuth)
+    }, []),
   })
   
   const {
@@ -170,7 +170,6 @@ const ProfilePage = React.memo(() => {
           newValues.photos,
           (a, b) => a.id === b.id
         )
-          // eslint-disable-next-line no-unexpected-multiline
           [0]
           .forEach(diff => {
             if (diff.isRemoved) {
@@ -183,7 +182,6 @@ const ProfilePage = React.memo(() => {
           newValues.photos,
           (a, b) => a.id === b.id
         )
-          // eslint-disable-next-line no-unexpected-multiline
           [0]
           .forEach(diff => {
             if (diff.isRemoved) {
@@ -222,107 +220,102 @@ const ProfilePage = React.memo(() => {
   
   
   // todo it retries endlessly if can't obtain photos
-  useAsyncEffect(
-    (lock, unlock) => {
-      //return;
-      const serverPhotos = formValues.initialValues.photos
-      const photos = formValues.photos
-      ;[...serverPhotos, ...photos].forEach(photo => {
-        if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
-          && !photo.download && !photo.compression
-          && lock(photo.remoteUrl)
-        ) {
-          
-          const abortCtrl = new AbortController()
-          const downloadStart = {
-            isReady: false,
-            download: { ...DefaultOperation,
-              id: photo.id,
-              abort: () => {
-                console.log('download was aborted')
-                unlock(photo.remoteUrl)
-                abortCtrl.abort('download was aborted')
-              },
+  useAsyncEffect((lock, unlock) => {
+    //return;
+    const serverPhotos = formValues.initialValues.photos
+    const photos = formValues.photos
+    ;[...serverPhotos, ...photos].forEach(photo => {
+      if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
+        && !photo.download && !photo.compression
+        && lock(photo.remoteUrl)
+      ) {
+        
+        const abortCtrl = new AbortController()
+        const downloadStart = {
+          isReady: false,
+          download: { ...DefaultOperation,
+            id: photo.id,
+            abort: () => {
+              console.log('download was aborted')
+              unlock(photo.remoteUrl)
+              abortCtrl.abort('download was aborted')
             },
-          } satisfies Partial<ProfilePhoto>
-          
-          setFormValues(s => ({ ...s,
-            initialValues: { ...s.initialValues,
-              photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                elem => ({ ...elem, ...downloadStart }),
-                elem => elem.id === photo.id
-              ),
-            },
-            photos: mapFirstToIfFoundBy(s.photos,
+          },
+        } satisfies Partial<ProfilePhoto>
+        
+        setFormValues(s => ({ ...s,
+          initialValues: { ...s.initialValues,
+            photos: mapFirstToIfFoundBy(s.initialValues.photos,
               elem => ({ ...elem, ...downloadStart }),
               elem => elem.id === photo.id
             ),
-          }))
-          
-          const updatePhotosNow = (p: Partial<ProfilePhoto>) => {
-            setFormValues(s => ({ ...s,
-              initialValues: { ...s.initialValues,
-                photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                  elem => ({ ...elem, ...p }),
-                  elem => elem.download?.id === downloadStart.download.id
-                ),
-              },
-              photos: mapFirstToIfFoundBy(s.photos,
+          },
+          photos: mapFirstToIfFoundBy(s.photos,
+            elem => ({ ...elem, ...downloadStart }),
+            elem => elem.id === photo.id
+          ),
+        }))
+        
+        const updatePhotosNow = (p: Partial<ProfilePhoto>) => {
+          setFormValues(s => ({ ...s,
+            initialValues: { ...s.initialValues,
+              photos: mapFirstToIfFoundBy(s.initialValues.photos,
                 elem => ({ ...elem, ...p }),
                 elem => elem.download?.id === downloadStart.download.id
               ),
-            }))
-          }
-          const updatePhotos = withThrottle(
-            RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-            updatePhotosNow
-          )
-          
-          ;(async() => {
-            try {
-              const progress = new Progress(2, [90, 10])
-              const onProgress = (p: number | null) => {
-                progress.progress = p ?? 0
-                //console.log('progress', photo.id, progress.value)
-                updatePhotos({ download: {
-                  ...downloadStart.download,
-                  progress: progress.value,
-                } })
-              }
-              
-              //console.log('start download id',photo.id)
-              const blob = await fetchToBlob(
-                photo.remoteUrl,
-                { onProgress, abortCtrl }
-              )
-              abortCtrl.signal.throwIfAborted()
-              
-              progress.stage++
-              progress.progress = 0
-              const dataUrl = await blobToDataUrl(blob,
-                { onProgress, abortCtrl }
-              )
-              abortCtrl.signal.throwIfAborted()
-              
-              //console.log('completed',photo.id)
-              updatePhotosNow({ isReady: true, download: undefined, dataUrl })
-            }
-            catch (ex) {
-              // TODO notify about error
-              //console.log('download error', ex)
-              //console.log('photo', photo)
-              updatePhotosNow({ download: undefined })
-            }
-            finally {
-              unlock(photo.remoteUrl)
-            }
-          })()
-          
+            },
+            photos: mapFirstToIfFoundBy(s.photos,
+              elem => ({ ...elem, ...p }),
+              elem => elem.download?.id === downloadStart.download.id
+            ),
+          }))
         }
-      })
-    },
-    [formValues.initialValues.photos]
-  )
+        const updatePhotos = withThrottle(
+          RangeU.map(Math.random(), [0, 1], [1450, 2000]),
+          updatePhotosNow
+        )
+        
+        ;(async() => {
+          try {
+            const progress = new Progress(2, [90, 10])
+            const onProgress = (p: number | null) => {
+              progress.progress = p ?? 0
+              //console.log('progress', photo.id, progress.value)
+              updatePhotos({ download: {
+                ...downloadStart.download,
+                progress: progress.value,
+              } })
+            }
+            
+            //console.log('start download id',photo.id)
+            const blob = await fetchToBlob(
+              photo.remoteUrl,
+              { onProgress, abortCtrl }
+            )
+            abortCtrl.signal.throwIfAborted()
+            
+            progress.stage++
+            progress.progress = 0
+            const dataUrl = await blobToDataUrl(blob, { onProgress, abortCtrl })
+            abortCtrl.signal.throwIfAborted()
+            
+            //console.log('completed',photo.id)
+            updatePhotosNow({ isReady: true, download: undefined, dataUrl })
+          }
+          catch (ex) {
+            // TODO notify about error
+            //console.log('download error', ex)
+            //console.log('photo', photo)
+            updatePhotosNow({ download: undefined })
+          }
+          finally {
+            unlock(photo.remoteUrl)
+          }
+        })()
+        
+      }
+    })
+  }, [formValues.initialValues.photos])
   
   
   
