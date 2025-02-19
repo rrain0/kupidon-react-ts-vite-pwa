@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useNext } from '@util/react-state/useNext.ts'
+import { useInterval } from '@util/react/useInterval.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -9,7 +10,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { LangRecoil } from 'src/recoil/state/LangRecoil'
-import { newDefaultMediaOperation } from 'src/ui-data/models/Media'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
@@ -97,12 +98,10 @@ const SummaryPage = React.memo(() => {
       ...newDefaultMainPhoto(),
       isEmpty: true,
       needDownload: false,
-      showDownload: false,
     }
     return {
       ...newDefaultMainPhoto(),
       needDownload: true,
-      showDownload: canShowFetchProgress,
       id: remoteMainPhoto.id,
       name: remoteMainPhoto.name,
       mimeType: remoteMainPhoto.mimeType,
@@ -113,7 +112,11 @@ const SummaryPage = React.memo(() => {
   const [mainPhoto, setMainPhoto] = useState<MainPhoto>(getMainPhoto)
   useEffect(() => setMainPhoto(getMainPhoto()), [remoteMainPhoto])
   useEffect(() => {
-    setMainPhoto({ ...mainPhoto, showDownload: canShowFetchProgress })
+    if (mainPhoto.download) setMainPhoto({
+      ...mainPhoto, download: { ...mainPhoto.download,
+        showProgress: canShowFetchProgress,
+      },
+    })
   }, [canShowFetchProgress])
   
   const [downloadNumber, nextDownload] = useNext()
@@ -129,6 +132,7 @@ const SummaryPage = React.memo(() => {
       needDownload: false,
       download: { ...newDefaultMediaOperation(),
         id: mainPhoto.id,
+        showProgress: canShowFetchProgress,
         abort: (reason) => {
           fetchToBlobAbortCtrl.abort(reason)
           blobToDataUrlAbortCtrl.abort(reason)
@@ -143,16 +147,22 @@ const SummaryPage = React.memo(() => {
       ...downloadStart,
     })
     
-    const updateDownload = (downloadId: string, u: Partial<MainPhoto>) => {
+    const updateDownload = (
+      downloadId: string,
+      photoUpdate?: Partial<MainPhoto>,
+      downloadUpdate?: Partial<MainPhoto['download']>
+    ) => {
       setMainPhoto(s => {
-        if (s.download?.id === downloadId) return { ...s, ...u }
-        return s
+        if (s.download?.id !== downloadId) return s
+        return { ...s,
+          ...photoUpdate,
+          ...downloadUpdate && {
+            download: { ...s.download, ...downloadUpdate },
+          },
+        }
       })
     }
-    const updateDownloadThrottled = withThrottle(
-      RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-      updateDownload,
-    )
+    const updateDownloadThrottled = withThrottle(RangeU.random(1450, 2000), updateDownload)
     
     ;(async () => {
       try {
@@ -162,10 +172,8 @@ const SummaryPage = React.memo(() => {
           //console.log('progress', photo.id, progress.value)
           updateDownloadThrottled(
             downloadStart.download.id,
-            { download: {
-              ...downloadStart.download,
-              progress: progress.value,
-            } }
+            undefined,
+            { progress: progress.value },
           )
         }
         
@@ -196,7 +204,7 @@ const SummaryPage = React.memo(() => {
         }
         
         // TODO notify about error
-        //console.log('download error', ex)
+        console.log('download error', ex)
         //console.log('photo', photo)
         updateDownload(
           downloadStart.download.id,
@@ -250,7 +258,7 @@ const SummaryPage = React.memo(() => {
                         </Button>
                       </div>
                     )
-                  if (!mainPhoto.showDownload
+                  if (!mainPhoto.download?.showProgress
                     && mainPhoto.type === 'remote'
                     && !mainPhoto.isReady
                     && !mainPhoto.isEmpty
@@ -260,7 +268,7 @@ const SummaryPage = React.memo(() => {
                         <SparkingLoadingLine />
                       </div>
                     )
-                  if (mainPhoto.showDownload && mainPhoto.download)
+                  if (mainPhoto.download?.showProgress && mainPhoto.download)
                     return (
                       <div css={imPlaceholderBoxS}>
                         <PieProgress css={imSmallPieProgressS}

@@ -1,5 +1,4 @@
 import { TypeU } from 'src/util/common/TypeU'
-import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Puro = TypeU.Puro
 
@@ -53,21 +52,25 @@ export const newDefaultMediaInArray = (): MediaInArray => ({
 export interface MediaOperation {
   id: string
   progress: number // 0..100
+  showProgress: boolean
   abort: (reason?: any) => void
 }
 
 export const newDefaultMediaOperation = (): MediaOperation => ({
   id: '',
   progress: 0,
+  showProgress: false,
   abort: noop,
 })
 
 
 
 export type Downloadable = Puro<{
+  // Нужно начать загружать
   needDownload: boolean
-  showDownload: boolean
+  // Процесс загрузки
   download: MediaOperation
+  // Результат загрузки - ошибка
   downloadError: any
 }>
 

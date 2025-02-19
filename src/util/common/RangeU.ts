@@ -1,13 +1,14 @@
 import { MathU } from 'src/util/common/MathU'
 import { TypeU } from 'src/util/common/TypeU'
 import mapNaN = TypeU.mapNaN
+import mod = MathU.mod
+
 
 
 
 export namespace RangeU {
   
   
-  import mod = MathU.mod
   export type NumRange = [number, number]
   export type NumRangeNullable = [number | null, number | null]
   export type NumRangeEndNullable = [number, number | null]
@@ -73,8 +74,11 @@ export namespace RangeU {
   
   
   
-  export const map = <R extends NumRangesRo>
-  (value: number, fromRanges: R, toRanges: NoInfer<R>): number => {
+  export const map = <R extends NumRangesRo>(
+    value: number,
+    fromRanges: R,
+    toRanges: NoInfer<R>
+  ): number => {
     for (let i = 1; ; i++) {
       if (i === fromRanges.length - 1 || value <= fromRanges[i]) return mapRange(
         value,
@@ -97,8 +101,7 @@ export namespace RangeU {
     fromRange: NumRangeRo,
     toRange: NumRangeRo,
     clampInRange: NumRangeRo = toRange
-  )
-  : number => {
+  ): number => {
     return clamp(map(value, fromRange, toRange), clampInRange)
   }
   
@@ -131,6 +134,13 @@ export namespace RangeU {
     return curr
   }
   
+  
+  
+  
+  
+  export const random = (from: number, to: number) => {
+    return map(Math.random(), [0, 1], [from, to])
+  }
   
 }
 
