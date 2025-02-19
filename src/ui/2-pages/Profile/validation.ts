@@ -5,7 +5,7 @@ import {
   PartnerGenderOptionValues
 } from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import { JobOptionValues } from 'src/ui/2-pages/Profile/options/ProfileJobOption.tsx'
-import { DefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
+import { newDefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { DateTime } from 'src/util/DateTime.ts'
@@ -109,7 +109,7 @@ export namespace ProfilePageValidation {
   export const userDefaultValues: UserValues = {
     name: '',
     photos: ArrayU.arrOfIndices(6).map(i => ({
-      ...DefaultProfilePhoto,
+      ...newDefaultProfilePhoto(),
       type: 'remote',
       id: uuid.v4(),
       isEmpty: true,

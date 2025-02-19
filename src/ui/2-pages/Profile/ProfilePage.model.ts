@@ -5,38 +5,12 @@ import {
   newDefaultMediaInArray,
   Uploadable,
 } from 'src/ui-data/models/Media.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import noop = TypeU.noop
-
-
-
-
-export const DefaultOperation = {
-  id: '',
-  progress: 0, // 0..100
-  showProgress: true,
-  abort: noop,
-}
-export type Operation = typeof DefaultOperation
-
-
 
 
 
 export interface ProfilePhoto
-  extends MediaInArray/* , Compressible, Downloadable, Uploadable */ {
-  
-  compression: Operation | undefined
-  download: Operation | undefined
-  upload: Operation | undefined
-}
+  extends MediaInArray, Compressible, Downloadable, Uploadable { }
 
-
-
-export const DefaultProfilePhoto: ProfilePhoto = {
+export const newDefaultProfilePhoto = (): ProfilePhoto => ({
   ...newDefaultMediaInArray(),
-  
-  compression: undefined,
-  download: undefined,
-  upload: undefined,
-}
+})

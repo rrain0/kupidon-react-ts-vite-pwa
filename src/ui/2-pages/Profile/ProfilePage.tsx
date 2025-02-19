@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import { newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
@@ -24,7 +25,6 @@ import {
 } from 'src/ui/2-pages/Profile/actions.ts'
 import { ProfilePageTabHeaderContext } from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import {
-  DefaultOperation,
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -233,8 +233,9 @@ const ProfilePage = React.memo(() => {
         const abortCtrl = new AbortController()
         const downloadStart = {
           isReady: false,
-          download: { ...DefaultOperation,
+          download: { ...newDefaultMediaOperation(),
             id: photo.id,
+            showProgress: true,
             abort: () => {
               console.log('download was aborted')
               unlock(photo.remoteUrl)

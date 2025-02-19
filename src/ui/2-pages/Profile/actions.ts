@@ -1,10 +1,9 @@
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { CurrentUser } from 'src/api/model/CurrentUser.ts'
 import { Gender } from 'src/api/model/Gender.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import {
-  DefaultOperation,
-  DefaultProfilePhoto,
-  Operation,
+  newDefaultProfilePhoto,
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -75,7 +74,7 @@ export const currentUserPhotosToProfilePhotos =
   (photos: CurrentUser['photos']): ProfilePhoto[] => {
     const profilePhotos: ProfilePhoto[] =
       ArrayU.arrOfIndices(6).map(i => ({
-        ...DefaultProfilePhoto,
+        ...newDefaultProfilePhoto(),
         type: 'remote',
         id: uuid.v4(),
         remoteI: i,
@@ -84,7 +83,7 @@ export const currentUserPhotosToProfilePhotos =
       } satisfies ProfilePhoto))
     photos.forEach(it => {
       profilePhotos[it.index] = {
-        ...DefaultProfilePhoto,
+        ...newDefaultProfilePhoto(),
         type: 'remote',
         id: it.id,
         remoteI: it.index,
@@ -156,9 +155,8 @@ export const profileUpdateApiRequest = (
     let updatedUser = null as null | CurrentUser
     
     let uploads = addPhotos.map(it => ({
-      ...DefaultOperation,
+      ...newDefaultMediaOperation(),
       id: it.id,
-      showProgress: false,
     }))
     setFormValues(s => ({ ...s,
       photos: ArrayU.combine(
@@ -168,7 +166,7 @@ export const profileUpdateApiRequest = (
       ),
     }))
     
-    const setUpload = (upload: Operation) => {
+    const setUpload = (upload: MediaOperation) => {
       setFormValues(s => ({ ...s,
         photos: mapFirstToIfFoundBy(
           s.photos,

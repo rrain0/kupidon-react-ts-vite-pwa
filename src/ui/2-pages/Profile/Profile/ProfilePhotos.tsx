@@ -13,6 +13,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
+import { newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   imPieProgressAccentS,
@@ -25,8 +26,7 @@ import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/ui/2-pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import {
-  DefaultOperation,
-  DefaultProfilePhoto,
+  newDefaultProfilePhoto,
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
@@ -582,8 +582,9 @@ const onFilesSelectedBuilder = (
         const abortCtrl = new AbortController()
         const compressionStart = {
           isReady: false,
-          compression: { ...DefaultOperation,
+          compression: { ...newDefaultMediaOperation(),
             id: uuid.v4(),
+            showProgress: true,
             abort: () => {
               //console.log('compression was aborted')
               abortCtrl.abort('compression was aborted')
@@ -636,7 +637,7 @@ const onFilesSelectedBuilder = (
             //console.log('imgDataUrl',imgDataUrl.substring(0, 1000))
             const mimeType = new DataUrl(imgDataUrl).mimeType
             const newPhoto = {
-              ...DefaultProfilePhoto,
+              ...newDefaultProfilePhoto(),
               type: 'local',
               id: uuid.v4(),
               remoteI: photo.remoteI,
