@@ -105,10 +105,10 @@ export namespace TypeU {
   export type Consumer<T> = Callback1<T>
   export type Getter<T> = () => T
   export type Producer<T> = Getter<T>
-  export type Mapper<In, Out = In> = (prevValue: In) => Out
+  export type Mapper<In, Out = In> = (v: In) => Out
   export type Mapper2<In1, In2, Out = In1> = (a: In1, b: In2) => Out
   
-  export type Predicate<T> = (obj: T) => boolean
+  export type Predicate<T> = (v: T) => boolean
   export const defaultPredicate: Predicate<any> = value => !!value
   export type Filter<T> = Predicate<T>
   

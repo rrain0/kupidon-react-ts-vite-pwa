@@ -491,8 +491,11 @@ export namespace ArrayU {
   
   
   
-  export const replaceFirstToIfFoundBy =
-  <T>(arr: T[], elem: T, filter: Filter<T> = defaultPredicate): T[] => {
+  export const replaceFirstToIfFoundBy = <T>(
+    arr: T[],
+    elem: NoInfer<T>,
+    filter: Filter<NoInfer<T>> = defaultPredicate
+  ): T[] => {
     const findResult = findBy(arr, filter)
     if (findResult.isFound) {
       const newArr = [...arr]
@@ -501,8 +504,12 @@ export namespace ArrayU {
     }
     return arr
   }
-  export const mapFirstToIfFoundBy =
-  <T>(arr: T[], mapper: Mapper<T>, filter: Filter<T> = defaultPredicate): T[] => {
+  
+  export const mapFirstToIfFoundBy = <T>(
+    arr: T[],
+    mapper: Mapper<NoInfer<T>>,
+    filter: Filter<NoInfer<T>> = defaultPredicate
+  ): T[] => {
     const findResult = findBy(arr, filter)
     if (findResult.isFound) {
       const newArr = [...arr]

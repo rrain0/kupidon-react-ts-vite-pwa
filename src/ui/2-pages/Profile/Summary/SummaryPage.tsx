@@ -133,7 +133,7 @@ const SummaryPage = React.memo(() => {
       download: { ...newDefaultMediaOperation(),
         id: mainPhoto.id,
         showProgress: canShowFetchProgress,
-        abort: (reason) => {
+        abort: reason => {
           fetchToBlobAbortCtrl.abort(reason)
           blobToDataUrlAbortCtrl.abort(reason)
           abortCtrl.abort(reason)
@@ -148,21 +148,22 @@ const SummaryPage = React.memo(() => {
     })
     
     const updateDownload = (
-      downloadId: string,
       photoUpdate?: Partial<MainPhoto>,
       downloadUpdate?: Partial<MainPhoto['download']>
     ) => {
-      setMainPhoto(s => {
-        if (s.download?.id !== downloadId) return s
-        return { ...s,
+      setMainPhoto(photo => {
+        if (photo.download?.id !== downloadStart.download.id) return photo
+        return { ...photo,
           ...photoUpdate,
           ...downloadUpdate && {
-            download: { ...s.download, ...downloadUpdate },
+            download: { ...photo.download, ...downloadUpdate },
           },
         }
       })
     }
-    const updateDownloadThrottled = withThrottle(RangeU.random(1450, 2000), updateDownload)
+    const updateDownloadThrottled = withThrottle(
+      RangeU.random(1500, 2300), updateDownload
+    )
     
     ;(async () => {
       try {
@@ -170,11 +171,7 @@ const SummaryPage = React.memo(() => {
         const onProgress = (p: number | null) => {
           progress.progress = p ?? 0
           //console.log('progress', photo.id, progress.value)
-          updateDownloadThrottled(
-            downloadStart.download.id,
-            undefined,
-            { progress: progress.value },
-          )
+          updateDownloadThrottled(undefined, { progress: progress.value })
         }
         
         console.log('download started')
@@ -192,10 +189,7 @@ const SummaryPage = React.memo(() => {
         abortCtrl.signal.throwIfAborted()
         
         console.log('download completed')
-        updateDownload(
-          downloadStart.download.id,
-          { isReady: true, download: undefined, dataUrl },
-        )
+        updateDownload({ isReady: true, download: undefined, dataUrl })
       }
       catch (ex) {
         if (abortCtrl.signal.aborted) {
@@ -206,13 +200,7 @@ const SummaryPage = React.memo(() => {
         // TODO notify about error
         console.log('download error', ex)
         //console.log('photo', photo)
-        updateDownload(
-          downloadStart.download.id,
-          { download: undefined, downloadError: ex },
-        )
-      }
-      finally {
-        //unlock(photo.remoteUrl)
+        updateDownload({ download: undefined, downloadError: ex })
       }
     })()
     

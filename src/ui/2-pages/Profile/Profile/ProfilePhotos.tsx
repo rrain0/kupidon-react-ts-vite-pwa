@@ -13,7 +13,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import { useRecoilValue } from 'recoil'
-import { newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   imPieProgressAccentS,
@@ -51,7 +51,6 @@ import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import abs = EmotionCommon.abs
 import bgBorderMask = EmotionCommon.bgInBorder
-import arrIndices = ArrayU.arrOfIndices
 import PlusIc = SvgIconsPack.PlusIc
 import contents = EmotionCommon.contents
 import * as uuid from 'uuid'
@@ -59,12 +58,13 @@ import blobToDataUrl = FileU.blobToDataUrl
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import trimExtension = FileU.trimExtension
 import Theme = AppTheme.Theme
-import ifFoundByThenReplaceTo = ArrayU.replaceFirstToIfFoundBy
-import findByAndMapTo = ArrayU.mapFirstToIfFoundBy
+import replaceFirstToIfFoundBy = ArrayU.replaceFirstToIfFoundBy
+import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import throttle = AsyncU.withThrottle
 import Callback = TypeU.Callback
 import findBy = ArrayU.findBy
 import NumRange = RangeU.NumRange
+import arr = ArrayU.arr
 
 
 
@@ -159,10 +159,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   // starts selection animation after timeout
   useLayoutEffect(() => {
     if (dragState === 'initialDelay') {
-      const timerId = setTimeout(
-        () => setDragState('progressAnim'),
-        150
-      )
+      const timerId = setTimeout(() => setDragState('progressAnim'), 150)
       return () => clearTimeout(timerId)
     }
   }, [dragState])
@@ -180,7 +177,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   
   
   const photosGrid = useRef<HTMLDivElement>(null)
-  const photoFrameRefs = useRef<Array<Element|null>>(arrIndices(6).map(i => null))
+  const photoFrameRefs = useRef<(Element | null)[]>(arr(6).map(i => null))
   
   
   
@@ -190,53 +187,51 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   const [springs, springApi] = useSprings(images.length, springStyle(), [images])
   const applyDragRef = useRef<Callback>()
   // noinspection JSVoidFunctionReturnValueUsed
-  const drag = useDrag(
-    gesture => {
-      const [i] = gesture.args as [i: number]
-      const {
-        first, active, last,
-        movement: [mx, my],
-        xy: [vpx, vpy], // viewport x, viewport y
-      } = gesture
-      /* console.log(
-        'mx:', mx,
-        'my:', my,
-      ) */
-      /* if (first){
-        setLogData([JSON.stringify({
-          vpx: MathUtils.round(vpx, 3),
-          vpy: MathUtils.round(vpy, 3),
-        })])
-      } */
-      
-      const applyDrag = () => {
-        //console.log('getDragRefValue():', getDragRefValue(), 'active:', active)
-        const isDragging = getDragRefValue() === 'dragging' && active
-        //console.log('i:', i, 'isDragging:', isDragging, 'mx:', mx, 'my:', my)
-        springApi.start(springStyle(i, isDragging, mx, my))
-        if (isDragging) {
-          const hoveredElements = document.elementsFromPoint(vpx, vpy)
-          if (!hoveredElements.includes(photosGrid.current as any)) {
-            setSwap(undefined)
-          }
-          else {
-            const found = findBy(photoFrameRefs.current,
-              elem => hoveredElements.includes(elem as any)
-            )
-            if (!found.isFound) { /* nothing to do, remain previous swap */ }
-            else if (i !== found.index) setSwap([i, found.index])
-            else setSwap(undefined)
-          }
+  const drag = useDrag(gesture => {
+    const {
+      first, active, last,
+      movement: [mx, my],
+      xy: [vpx, vpy], // viewport x, viewport y
+    } = gesture
+    const [i] = gesture.args as [i: number]
+    /* console.log(
+      'mx:', mx,
+      'my:', my,
+    ) */
+    /* if (first){
+      setLogData([JSON.stringify({
+        vpx: MathUtils.round(vpx, 3),
+        vpy: MathUtils.round(vpy, 3),
+      })])
+    } */
+    
+    const applyDrag = () => {
+      //console.log('getDragRefValue():', getDragRefValue(), 'active:', active)
+      const isDragging = getDragRefValue() === 'dragging' && active
+      //console.log('i:', i, 'isDragging:', isDragging, 'mx:', mx, 'my:', my)
+      springApi.start(springStyle(i, isDragging, mx, my))
+      if (isDragging) {
+        const hoveredElements = document.elementsFromPoint(vpx, vpy)
+        if (!hoveredElements.includes(photosGrid.current as any)) {
+          setSwap(undefined)
+        }
+        else {
+          const found = findBy(photoFrameRefs.current,
+            elem => hoveredElements.includes(elem as any)
+          )
+          if (!found.isFound) { /* nothing to do, remain previous swap */ }
+          else if (i !== found.index) setSwap([i, found.index])
+          else setSwap(undefined)
         }
       }
-      applyDrag()
-      applyDragRef.current = applyDrag
-      if (last) {
-        setDragState(undefined)
-        applyDragRef.current = undefined
-      }
     }
-  ) as (...args: any[]) => ReactDOMAttributes
+    applyDrag()
+    applyDragRef.current = applyDrag
+    if (last) {
+      setDragState(undefined)
+      applyDragRef.current = undefined
+    }
+  }) as (...args: any[]) => ReactDOMAttributes
   useEffect(() => {
     if (dragState === 'dragging') applyDragRef.current?.()
   }, [dragState])
@@ -554,7 +549,7 @@ const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
 
 
 
-
+// TODO use state 'files' and effect on files
 const onFilesSelectedBuilder = (
   images: ProfilePhoto[],
   lastIdx: number,
@@ -564,7 +559,7 @@ const onFilesSelectedBuilder = (
   const imgFiles = files.filter(it => it.type.startsWith('image/'))
   if (imgFiles.length) {
     const emptyCnt = images
-      .filter((im, i) => i === lastIdx || (i>=lastIdx && im.isEmpty)).length
+      .filter((im, i) => i === lastIdx || (i >= lastIdx && im.isEmpty)).length
     let filesI = 0
     const newImages = images.map((photo, i) => {
       if (filesI < imgFiles.length
@@ -579,30 +574,41 @@ const onFilesSelectedBuilder = (
         photo.download?.abort()
         photo.compression?.abort()
         
+        const compressAbortCtrl = new AbortController()
+        const blobToDataUrlAbortCtrl = new AbortController()
         const abortCtrl = new AbortController()
         const compressionStart = {
           isReady: false,
           compression: { ...newDefaultMediaOperation(),
             id: uuid.v4(),
             showProgress: true,
-            abort: () => {
-              //console.log('compression was aborted')
-              abortCtrl.abort('compression was aborted')
+            abort: reason => {
+              compressAbortCtrl.abort(reason)
+              blobToDataUrlAbortCtrl.abort(reason)
+              abortCtrl.abort(reason)
             },
           },
         } satisfies Partial<ProfilePhoto>
         
         const processingPhoto = { ...photo, ...compressionStart }
         
-        const updatePhotoNow = (p: Partial<ProfilePhoto>) => {
-          setImages(s => findByAndMapTo(s,
-            elem => ({ ...elem, ...p }),
-            elem => elem.compression?.id === compressionStart.compression.id
+        const updatePhoto = (
+          photoUpdate?: Partial<ProfilePhoto>,
+          compressionUpdate?: Partial<MediaOperation>,
+        ) => {
+          setImages(images => mapFirstToIfFoundBy(images,
+            // @ts-expect-error
+            image => ({ ...image,
+              ...photoUpdate,
+              ...compressionUpdate && {
+                compression: { ...image.compression, ...compressionUpdate },
+              },
+            }),
+            image => image.compression?.id === compressionStart.compression.id
           ))
         }
-        const updatePhoto = throttle(
-          RangeU.map(Math.random(), [0, 1], [1500, 2000]),
-          updatePhotoNow
+        const updatePhotoThrottled = throttle(
+          RangeU.random(1500, 2300), updatePhoto
         )
         
         ;(async() => {
@@ -611,17 +617,14 @@ const onFilesSelectedBuilder = (
             const onProgress = (p: number | null) => {
               progress.progress = p ?? 0
               //console.log('progress',progress.value)
-              updatePhoto({ compression: {
-                ...compressionStart.compression,
-                progress: progress.value,
-              } })
+              updatePhotoThrottled(undefined, { progress: progress.value })
             }
             
             //await wait(10000)
             //throw 'test error'
             
             const compressedFile = await ImageU.compress(imgFile,
-              { onProgress, abortCtrl }
+              { onProgress, abortCtrl: compressAbortCtrl }
             )
             abortCtrl.signal.throwIfAborted()
             
@@ -629,7 +632,7 @@ const onFilesSelectedBuilder = (
             progress.stage++
             progress.progress = 0
             const imgDataUrl = await blobToDataUrl(compressedFile,
-              { onProgress, abortCtrl }
+              { onProgress, abortCtrl: blobToDataUrlAbortCtrl }
             )
             abortCtrl.signal.throwIfAborted()
             
@@ -646,16 +649,20 @@ const onFilesSelectedBuilder = (
               dataUrl: imgDataUrl,
               isReady: true,
             } satisfies ProfilePhoto
-            setImages(s => ifFoundByThenReplaceTo(s,
+            setImages(images => replaceFirstToIfFoundBy(images,
               newPhoto,
               elem => elem.compression?.id === compressionStart.compression.id
             ))
           }
           catch (ex) {
+            if (abortCtrl.signal.aborted) {
+              console.log('compression aborted:', abortCtrl.signal.reason)
+              return
+            }
             // TODO notify about error
-            //console.log('compression error', ex)
+            console.log('compression error', ex)
             //console.log('photo', photo)
-            updatePhoto({ compression: undefined })
+            updatePhoto({ compression: undefined, compressionError: ex })
           }
         })()
         
