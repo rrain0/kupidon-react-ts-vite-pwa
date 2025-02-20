@@ -549,7 +549,7 @@ const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
 
 
 
-// TODO use state 'files' and effect on files
+// TODO ???maybe use state 'files' and effect on files
 const onFilesSelectedBuilder = (
   images: ProfilePhoto[],
   lastIdx: number,
@@ -597,10 +597,9 @@ const onFilesSelectedBuilder = (
           compressionUpdate?: Partial<MediaOperation>,
         ) => {
           setImages(images => mapFirstToIfFoundBy(images,
-            // @ts-expect-error
             image => ({ ...image,
               ...photoUpdate,
-              ...compressionUpdate && {
+              ...compressionUpdate && image.compression && {
                 compression: { ...image.compression, ...compressionUpdate },
               },
             }),

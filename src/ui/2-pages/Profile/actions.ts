@@ -232,33 +232,39 @@ export const profileUpdateApiRequest = (
     }
     
     
-    for await (const photo of addPhotos) {
+    for (const photo of addPhotos) {
       const getUpload = () => findBy(uploads, elem => elem.id === photo.id).elem
       
-      const updatePhotoNow = (p: Partial<ProfilePhoto>) => {
+      const updatePhoto = (
+        photoUpdate?: Partial<ProfilePhoto>,
+        uploadUpdate?: Partial<MediaOperation>,
+      ) => {
         const upload = getUpload()
-        if (upload) setFormValues(s => ({ ...s,
-          photos: mapFirstToIfFoundBy(s.photos,
-            elem => ({ ...elem, ...p }),
+        if (upload) setFormValues(form => ({ ...form,
+          photos: mapFirstToIfFoundBy(form.photos,
+            photo => ({ ...photo,
+              ...photoUpdate,
+              ...uploadUpdate && photo.upload && {
+                upload: { ...photo.upload, ...uploadUpdate },
+              },
+            }),
             elem => elem.upload?.id === upload.id
           ),
         }))
       }
-      const updatePhoto = throttle(
-        RangeU.map(Math.random(), [0, 1], [1500, 2000]),
-        updatePhotoNow
+      const updatePhotoThrottled = throttle(
+        RangeU.random(1500, 2300), updatePhoto
       )
       
       const onProgress = (p:number | null) => {
         //console.log(`progress ${photo.id} ${p}`)
         const upload = getUpload()
-        if (upload) updatePhoto({ upload:
-            { ...upload, progress: p??0 },
-        })
+        if (upload) updatePhotoThrottled(undefined, { progress: p ?? 0 })
       }
-      const updatedUserResponse =
-        await UserApi.addProfilePhoto(photo, { onProgress })
-      updatePhotoNow({ upload: undefined })
+      const updatedUserResponse = await UserApi.addProfilePhoto(
+        photo, { onProgress }
+      )
+      updatePhoto({ upload: undefined })
       if (!updatedUserResponse.isSuccess) {
         applyUpdatedUser()
         reject(updatedUserResponse)

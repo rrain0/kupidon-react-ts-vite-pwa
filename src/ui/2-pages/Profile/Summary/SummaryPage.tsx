@@ -142,10 +142,7 @@ const SummaryPage = React.memo(() => {
       downloadError: undefined,
     } satisfies Partial<MainPhoto>
     
-    setMainPhoto({
-      ...mainPhoto,
-      ...downloadStart,
-    })
+    setMainPhoto({ ...mainPhoto, ...downloadStart })
     
     const updateDownload = (
       photoUpdate?: Partial<MainPhoto>,
@@ -155,7 +152,7 @@ const SummaryPage = React.memo(() => {
         if (photo.download?.id !== downloadStart.download.id) return photo
         return { ...photo,
           ...photoUpdate,
-          ...downloadUpdate && {
+          ...downloadUpdate && photo.download && {
             download: { ...photo.download, ...downloadUpdate },
           },
         }
@@ -175,8 +172,7 @@ const SummaryPage = React.memo(() => {
         }
         
         console.log('download started')
-        const blob = await fetchToBlob(
-          mainPhoto.remoteUrl,
+        const blob = await fetchToBlob(mainPhoto.remoteUrl,
           { onProgress, abortCtrl: fetchToBlobAbortCtrl }
         )
         abortCtrl.signal.throwIfAborted()

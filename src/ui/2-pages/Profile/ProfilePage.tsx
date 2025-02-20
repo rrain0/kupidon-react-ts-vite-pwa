@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
-import { newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
@@ -229,51 +229,64 @@ const ProfilePage = React.memo(() => {
         && !photo.download && !photo.compression
         && lock(photo.remoteUrl)
       ) {
-        
+        const fetchToBlobAbortCtrl = new AbortController()
+        const blobToDataUrlAbortCtrl = new AbortController()
         const abortCtrl = new AbortController()
         const downloadStart = {
           isReady: false,
           download: { ...newDefaultMediaOperation(),
             id: photo.id,
             showProgress: true,
-            abort: () => {
-              console.log('download was aborted')
-              unlock(photo.remoteUrl)
-              abortCtrl.abort('download was aborted')
+            abort: reason => {
+              fetchToBlobAbortCtrl.abort(reason)
+              blobToDataUrlAbortCtrl.abort(reason)
+              abortCtrl.abort(reason)
             },
           },
         } satisfies Partial<ProfilePhoto>
         
-        setFormValues(s => ({ ...s,
-          initialValues: { ...s.initialValues,
-            photos: mapFirstToIfFoundBy(s.initialValues.photos,
+        setFormValues(form => ({ ...form,
+          initialValues: { ...form.initialValues,
+            photos: mapFirstToIfFoundBy(form.initialValues.photos,
               elem => ({ ...elem, ...downloadStart }),
               elem => elem.id === photo.id
             ),
           },
-          photos: mapFirstToIfFoundBy(s.photos,
+          photos: mapFirstToIfFoundBy(form.photos,
             elem => ({ ...elem, ...downloadStart }),
             elem => elem.id === photo.id
           ),
         }))
         
-        const updatePhotosNow = (p: Partial<ProfilePhoto>) => {
-          setFormValues(s => ({ ...s,
-            initialValues: { ...s.initialValues,
-              photos: mapFirstToIfFoundBy(s.initialValues.photos,
-                elem => ({ ...elem, ...p }),
+        const updatePhoto = (
+          photoUpdate?: Partial<ProfilePhoto>,
+          downloadUpdate?: Partial<MediaOperation>,
+        ) => {
+          setFormValues(form => ({ ...form,
+            initialValues: { ...form.initialValues,
+              photos: mapFirstToIfFoundBy(form.initialValues.photos,
+                photo => ({ ...photo,
+                  ...photoUpdate,
+                  ...downloadUpdate && photo.download && {
+                    download: { ...photo.download, ...downloadUpdate },
+                  },
+                }),
                 elem => elem.download?.id === downloadStart.download.id
               ),
             },
-            photos: mapFirstToIfFoundBy(s.photos,
-              elem => ({ ...elem, ...p }),
+            photos: mapFirstToIfFoundBy(form.photos,
+              photo => ({ ...photo,
+                ...photoUpdate,
+                ...downloadUpdate && photo.download && {
+                  download: { ...photo.download, ...downloadUpdate },
+                },
+              }),
               elem => elem.download?.id === downloadStart.download.id
             ),
           }))
         }
-        const updatePhotos = withThrottle(
-          RangeU.map(Math.random(), [0, 1], [1450, 2000]),
-          updatePhotosNow
+        const updatePhotoThrottled = withThrottle(
+          RangeU.random(1500, 2300), updatePhoto
         )
         
         ;(async() => {
@@ -282,32 +295,34 @@ const ProfilePage = React.memo(() => {
             const onProgress = (p: number | null) => {
               progress.progress = p ?? 0
               //console.log('progress', photo.id, progress.value)
-              updatePhotos({ download: {
-                ...downloadStart.download,
-                progress: progress.value,
-              } })
+              updatePhotoThrottled(undefined, { progress: progress.value })
             }
             
             //console.log('start download id',photo.id)
-            const blob = await fetchToBlob(
-              photo.remoteUrl,
-              { onProgress, abortCtrl }
+            const blob = await fetchToBlob(photo.remoteUrl,
+              { onProgress, abortCtrl: fetchToBlobAbortCtrl }
             )
             abortCtrl.signal.throwIfAborted()
             
             progress.stage++
             progress.progress = 0
-            const dataUrl = await blobToDataUrl(blob, { onProgress, abortCtrl })
+            const dataUrl = await blobToDataUrl(blob,
+              { onProgress, abortCtrl: blobToDataUrlAbortCtrl }
+            )
             abortCtrl.signal.throwIfAborted()
             
             //console.log('completed',photo.id)
-            updatePhotosNow({ isReady: true, download: undefined, dataUrl })
+            updatePhoto({ isReady: true, download: undefined, dataUrl })
           }
           catch (ex) {
+            if (abortCtrl.signal.aborted) {
+              console.log('download aborted:', abortCtrl.signal.reason)
+              return
+            }
             // TODO notify about error
-            //console.log('download error', ex)
+            console.log('download error', ex)
             //console.log('photo', photo)
-            updatePhotosNow({ download: undefined })
+            updatePhoto({ download: undefined, downloadError: ex })
           }
           finally {
             unlock(photo.remoteUrl)
@@ -323,30 +338,28 @@ const ProfilePage = React.memo(() => {
   
   const [needToFetchUser, setNeedToFetchUser] = useState(true)
   const [isFetchingUser, setFetchingUser] = useState(false)
-  useAsyncEffect(
-    (lock, unlock) => {
-      if (needToFetchUser && !isFetchingUser
-        && lock(UserApi.current)
-      ) {
-        setNeedToFetchUser(false)
-        setFetchingUser(true)
-        ;(async() => {
-          try {
-            const resp = await UserApi.current()
-            if (resp.isSuccess)
-              setAuth(curr => ({ ...curr!, user: resp.data.user }))
-            else
-              console.warn('failed to fetch user:', resp)
-          }
-          finally {
-            setFetchingUser(false)
-            unlock(UserApi.current)
-          }
-        })()
-      }
-    },
-    [needToFetchUser, isFetchingUser]
-  )
+  // TODO make usual effect
+  useAsyncEffect((lock, unlock) => {
+    if (needToFetchUser && !isFetchingUser
+      && lock(UserApi.current)
+    ) {
+      setNeedToFetchUser(false)
+      setFetchingUser(true)
+      ;(async() => {
+        try {
+          const resp = await UserApi.current()
+          if (resp.isSuccess)
+            setAuth(curr => ({ ...curr!, user: resp.data.user }))
+          else
+            console.warn('failed to fetch user:', resp)
+        }
+        finally {
+          setFetchingUser(false)
+          unlock(UserApi.current)
+        }
+      })()
+    }
+  }, [needToFetchUser, isFetchingUser])
   
   
   
