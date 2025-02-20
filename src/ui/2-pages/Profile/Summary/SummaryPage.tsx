@@ -127,17 +127,17 @@ const SummaryPage = React.memo(() => {
     const fetchToBlobAbortCtrl = new AbortController()
     const blobToDataUrlAbortCtrl = new AbortController()
     const abortCtrl = new AbortController()
+    abortCtrl.signal.onabort = function() {
+      fetchToBlobAbortCtrl.abort(this.reason)
+      blobToDataUrlAbortCtrl.abort(this.reason)
+    }
     const downloadStart = {
       isReady: false,
       needDownload: false,
       download: { ...newDefaultMediaOperation(),
         id: mainPhoto.id,
         showProgress: canShowFetchProgress,
-        abort: reason => {
-          fetchToBlobAbortCtrl.abort(reason)
-          blobToDataUrlAbortCtrl.abort(reason)
-          abortCtrl.abort(reason)
-        },
+        abort: reason => abortCtrl.abort(reason),
       },
       downloadError: undefined,
     } satisfies Partial<MainPhoto>

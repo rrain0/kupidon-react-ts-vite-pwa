@@ -232,16 +232,16 @@ const ProfilePage = React.memo(() => {
         const fetchToBlobAbortCtrl = new AbortController()
         const blobToDataUrlAbortCtrl = new AbortController()
         const abortCtrl = new AbortController()
+        abortCtrl.signal.onabort = function() {
+          fetchToBlobAbortCtrl.abort(this.reason)
+          blobToDataUrlAbortCtrl.abort(this.reason)
+        }
         const downloadStart = {
           isReady: false,
           download: { ...newDefaultMediaOperation(),
             id: photo.id,
             showProgress: true,
-            abort: reason => {
-              fetchToBlobAbortCtrl.abort(reason)
-              blobToDataUrlAbortCtrl.abort(reason)
-              abortCtrl.abort(reason)
-            },
+            abort: reason => abortCtrl.abort(reason),
           },
         } satisfies Partial<ProfilePhoto>
         

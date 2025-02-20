@@ -564,7 +564,7 @@ const onFilesSelectedBuilder = (
     const newImages = images.map((photo, i) => {
       if (filesI < imgFiles.length
         && (i === lastIdx
-          || (i>=lastIdx
+          || (i >= lastIdx
             && (imgFiles.length<=emptyCnt ? photo.isEmpty : true)
           )
         )
@@ -577,16 +577,16 @@ const onFilesSelectedBuilder = (
         const compressAbortCtrl = new AbortController()
         const blobToDataUrlAbortCtrl = new AbortController()
         const abortCtrl = new AbortController()
+        abortCtrl.signal.onabort = function() {
+          compressAbortCtrl.abort(this.reason)
+          blobToDataUrlAbortCtrl.abort(this.reason)
+        }
         const compressionStart = {
           isReady: false,
           compression: { ...newDefaultMediaOperation(),
             id: uuid.v4(),
             showProgress: true,
-            abort: reason => {
-              compressAbortCtrl.abort(reason)
-              blobToDataUrlAbortCtrl.abort(reason)
-              abortCtrl.abort(reason)
-            },
+            abort: reason => abortCtrl.abort(reason),
           },
         } satisfies Partial<ProfilePhoto>
         

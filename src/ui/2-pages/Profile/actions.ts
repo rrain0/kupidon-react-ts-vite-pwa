@@ -232,8 +232,25 @@ export const profileUpdateApiRequest = (
     }
     
     
+    // TODO Photos - think about how to abort upload
     for (const photo of addPhotos) {
       const getUpload = () => findBy(uploads, elem => elem.id === photo.id).elem
+      
+      const abortCtrl = new AbortController()
+      const uploadStart = {
+        upload: {
+          ...getUpload()!,
+          abort: reason => abortCtrl.abort(reason),
+        },
+      } satisfies Partial<ProfilePhoto>
+      
+      setFormValues(form => ({ ...form,
+        photos: mapFirstToIfFoundBy(form.photos,
+          photo => ({ ...photo, ...uploadStart }),
+          photo => photo.upload?.id === uploadStart.upload.id,
+        ),
+      }))
+      
       
       const updatePhoto = (
         photoUpdate?: Partial<ProfilePhoto>,
@@ -248,7 +265,7 @@ export const profileUpdateApiRequest = (
                 upload: { ...photo.upload, ...uploadUpdate },
               },
             }),
-            elem => elem.upload?.id === upload.id
+            photo => photo.upload?.id === upload.id
           ),
         }))
       }
@@ -256,14 +273,18 @@ export const profileUpdateApiRequest = (
         RangeU.random(1500, 2300), updatePhoto
       )
       
+      
       const onProgress = (p:number | null) => {
         //console.log(`progress ${photo.id} ${p}`)
         const upload = getUpload()
         if (upload) updatePhotoThrottled(undefined, { progress: p ?? 0 })
       }
+      
       const updatedUserResponse = await UserApi.addProfilePhoto(
-        photo, { onProgress }
+        photo, { onProgress, abortCtrl: abortCtrl }
       )
+      abortCtrl.signal.throwIfAborted()
+      
       updatePhoto({ upload: undefined })
       if (!updatedUserResponse.isSuccess) {
         applyUpdatedUser()
