@@ -1,8 +1,8 @@
 import React from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import ImgSparkingLoader from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoader.tsx'
-import { ImgSparkingLoaderS6 } from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoaderS6.ts'
+import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
+import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 
@@ -21,13 +21,13 @@ const ImageTestPage = React.memo(() => {
           
           <div css={{ height: 24 }} />
           
-          <ImgSparkingLoader
-            css={ImgSparkingLoaderS6.t(pictureS)}
+          <ImgSpark
+            css={ImgSparkS6.t(pictureS)}
             src="/backend/test/image/greek-man.png"
           />
           
-          <ImgSparkingLoader
-            css={ImgSparkingLoaderS6.t(pictureS)}
+          <ImgSpark
+            css={ImgSparkS6.t(pictureS)}
             src={MockData.images.allRecord.greekMan}
           />
           
@@ -62,7 +62,7 @@ const ImageTestPage = React.memo(() => {
 export default ImageTestPage
 
 
-const pictureS: AppWidgetStyle = t => [ImgSparkingLoaderS6.S.img.img.auto.normal, {
+const pictureS: AppWidgetStyle = t => [ImgSparkS6.S.img.img.auto.normal, {
   imgFrame: { w: 400, h: 'auto', ratio: 0.8, r: 15 },
 }]
 

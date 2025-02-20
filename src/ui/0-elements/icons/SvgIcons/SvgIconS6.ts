@@ -37,35 +37,11 @@ export namespace SvgIconS6 {
   export const t = (style: AppWidgetStyle): AppStyle => t => W.t(t, style)
   
   
-  export namespace S0 {
-    
-    export const base: WidgetStyle = {
-      icon: {
-        sz: 'auto',
-      },
-    }
-    
-    export const baseColor: AppWidgetStyle = t => ({
-      icon: {
-        color: '#6A6A6A',
-        colorAcc: '#006A6A',
-      },
-    })
-    
-    export namespace Normal {
-      export const normal: AppWidgetStyle = t => [base, baseColor, {
-        iconColor: t.boxNormal.ct1b[0],
-        iconColorAcc: t.boxNormal.ct1b[0],
-      }]
-    }
-    
-  }
-  
   
   export namespace Parts {
     export const base: WidgetStyle = {
       icon: {
-        // '100%' instead of 'auto' because auto doesn't work on iOS
+        // '100%' instead of 'auto' because auto has 0 w / h on iOS
         sz: 'full',
       },
     }
@@ -77,8 +53,8 @@ export namespace SvgIconS6 {
           export namespace icon {
             //export const baseSize: WidgetStyleObj = { ...base }
             export namespace Size {
-              // type: icon, shape: icon, size: auto
-              export const auto: WidgetStyle = [base, {
+              // type: icon, shape: icon, size: full
+              export const full: WidgetStyle = [base, {
                 icon: {
                   sz: 'full',
                 },

@@ -2,16 +2,16 @@ import React from 'react'
 
 
 
-const ComponentTemplate = React.memo(() => {
+const MyComponent = React.memo(() => {
     
   return (
     <div
-      data-display-name="ComponentTemplate"
+      data-display-name="MyComponent"
     >
     
     </div>
   )
 })
-ComponentTemplate.displayName = 'ComponentTemplate'
-// export default ComponentTemplate
+MyComponent.displayName = 'MyComponent'
+// export default MyComponente
 

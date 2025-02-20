@@ -126,7 +126,7 @@ const NextIconFrame = styled.div`
   display: grid;
   place-items: center;
 `
-const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.auto.normal, {
+const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   iconSz: 24, iconColor: t.boxNormal.ct3,
 }]
 

@@ -277,7 +277,7 @@ const InfoBubble = styled(MatchBubble)`
   gap: 6px;
   ${Txt.s16Thin};
 `
-const infoIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.auto.normal, {
+const infoIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   iconSz: 17,
   iconColor: t.previewFullInfoBubble.ct2,
 }]

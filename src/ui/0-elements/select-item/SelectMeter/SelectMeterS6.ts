@@ -13,19 +13,22 @@ import row = WidgetStyleCommon.row
 export namespace SelectMeterS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
-    const meter = WidgetElem.of({
+    const meterFrame = WidgetElem.of({
       className: 'rruiMeterFrame', ...up,
     })
+    const meter = WidgetElem.of({
+      upElem: meterFrame, upSelector: '>', className: 'rruiMeter',
+    })
     const meter0 = WidgetElem.of({
-      upElem: meter, upSelector: '>', className: 'rruiMeter0',
+      upElem: meterFrame, upSelector: '>', className: 'rruiMeter0',
     })
     const meter1 = WidgetElem.of({
-      upElem: meter, upSelector: '>', className: 'rruiMeter1',
+      upElem: meterFrame, upSelector: '>', className: 'rruiMeter1',
     })
     const meter2 = WidgetElem.of({
-      upElem: meter, upSelector: '>', className: 'rruiMeter2',
+      upElem: meterFrame, upSelector: '>', className: 'rruiMeter2',
     })
-    return { meter, meter0, meter1, meter2 } as const
+    return { meterFrame, meter, meter0, meter1, meter2 } as const
   }
   
   const WidgetElems = buildWidgetElems()
@@ -33,7 +36,7 @@ export namespace SelectMeterS6 {
   const WidgetProps = { }
   
   export const W = Widget.of({
-    rootElem: WidgetElems.meter,
+    rootElem: WidgetElems.meterFrame,
     elems: WidgetElems,
     states: WidgetStates,
     props: WidgetProps,
@@ -45,21 +48,21 @@ export namespace SelectMeterS6 {
   
   export namespace Parts {
     export const base: WidgetStyle = {
-      meter: {
+      meterFrame: {
         w: 'ct', h: 'auto',
         ...row, g: 6,
         pointer: false,
       },
-      meter0: {
+      meter: {
         sz: 8, r: 'round',
+      },
+      meter0: {
         bgColor: '#dddddd',
       },
       meter1: {
-        sz: 8, r: 'round',
         bgColor: '#999999',
       },
       meter2: {
-        sz: 8, r: 'round',
         bgColor: '#444444',
       },
     }

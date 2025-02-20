@@ -7,11 +7,12 @@ import {
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter
+import abs = WidgetStyleCommon.abs
 
 
 
 
-export namespace ImgSparkingLoaderS6 {
+export namespace ImgSparkS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const imgFrame = WidgetElem.of({
@@ -65,6 +66,10 @@ export namespace ImgSparkingLoaderS6 {
               // type: img, shape: img, size: auto
               export const auto: WidgetStyle = [base, {
               
+              }]
+              // type: img, shape: img, size: full
+              export const full: WidgetStyle = [base, {
+                imgFrame: { ...abs },
               }]
             }
           }

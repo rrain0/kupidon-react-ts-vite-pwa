@@ -26,7 +26,7 @@ const SelectMeter = React.memo((props: SelectItemProps) => {
   return (
     <div
       data-display-name="SelectMeter - Frame"
-      className={clsx(SelectMeterS6.W.els.meter.n, className)}
+      className={clsx(SelectMeterS6.W.els.meterFrame.n, className)}
       style={style}
     >
       {metersValues?.map((it, i) => (
@@ -35,19 +35,28 @@ const SelectMeter = React.memo((props: SelectItemProps) => {
             if (it === 0 || it === false) return (
               <div
                 data-display-name="SelectMeter - Meter0"
-                className={SelectMeterS6.W.els.meter0.n}
+                className={clsx(
+                  SelectMeterS6.W.els.meter.n,
+                  SelectMeterS6.W.els.meter0.n
+                )}
               />
             )
             if (it === 1) return (
               <div
                 data-display-name="SelectMeter - Meter1"
-                className={SelectMeterS6.W.els.meter1.n}
+                className={clsx(
+                  SelectMeterS6.W.els.meter.n,
+                  SelectMeterS6.W.els.meter1.n
+                )}
               />
             )
             if (it === 2 || it === true) return (
               <div
                 data-display-name="SelectMeter - Meter2"
-                className={SelectMeterS6.W.els.meter2.n}
+                className={clsx(
+                  SelectMeterS6.W.els.meter.n,
+                  SelectMeterS6.W.els.meter2.n
+                )}
               />
             )
           })()}

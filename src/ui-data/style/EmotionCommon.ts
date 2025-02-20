@@ -490,6 +490,12 @@ export namespace EmotionCommon {
       line-height: 1.29;
       letter-spacing: 0.05em;
     `
+    export const s14BoldWide = css`
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.29;
+      letter-spacing: 0.05em;
+    `
     export const s14Bold600 = css`
       font-weight: 600;
       font-size: 14px;

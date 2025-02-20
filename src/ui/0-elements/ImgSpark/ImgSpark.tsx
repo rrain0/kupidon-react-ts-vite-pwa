@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React, { SyntheticEvent, useImperativeHandle, useRef, useState } from 'react'
-import { ImgSparkingLoaderS6 } from 'src/ui/0-elements/ImgSparkingLoader/ImgSparkingLoaderS6.ts'
+import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -11,19 +11,19 @@ import combineProps = ReactU.combineProps
 
 
 
-export type ImgSparkingLoaderExtraProps = ClassStyle & Puro<{
+export type ImgSparkExtraProps = ClassStyle & Puro<{
   // custom props
   isError: boolean
 }>
 
-export type ImgSparkingLoaderRefElement = HTMLImageElement
-export type ImgSparkingLoaderProps =
-  React.ComponentPropsWithoutRef<'img'> & ImgSparkingLoaderExtraProps
+export type ImgSparkRefElement = HTMLImageElement
+export type ImgSparkProps =
+  React.ComponentPropsWithoutRef<'img'> & ImgSparkExtraProps
 
 
 
-const ImgSparkingLoader = React.memo(
-  React.forwardRef<ImgSparkingLoaderRefElement, ImgSparkingLoaderProps>(
+const ImgSpark = React.memo(
+  React.forwardRef<ImgSparkRefElement, ImgSparkProps>(
     (props, forwardedRef) => {
       const {
         className, style,
@@ -31,7 +31,7 @@ const ImgSparkingLoader = React.memo(
       } = props
       
       
-      const elemRef = useRef<ImgSparkingLoaderRefElement>(null)
+      const elemRef = useRef<ImgSparkRefElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       const [isLoading, setLoading] = useState(true)
@@ -39,8 +39,8 @@ const ImgSparkingLoader = React.memo(
       
       return (
         <div // Frame
-          data-display-name="ImgSparkingLoader"
-          className={clsx(ImgSparkingLoaderS6.W.els.imgFrame.n, className)}
+          data-display-name="ImgSpark"
+          className={clsx(ImgSparkS6.W.els.imgFrame.n, className)}
           style={style}
         >
           
@@ -58,12 +58,12 @@ const ImgSparkingLoader = React.memo(
               style: {
                 display: isLoading ? 'none' : 'block',
               },
-              className: ImgSparkingLoaderS6.W.els.img.n,
+              className: ImgSparkS6.W.els.img.n,
             }, restProps)}
           />
           
           {isLoading && (
-            <SparkingLoadingLine className={ImgSparkingLoaderS6.W.els.spark.n} />
+            <SparkingLoadingLine className={ImgSparkS6.W.els.spark.n} />
           )}
           
         </div>
@@ -71,7 +71,7 @@ const ImgSparkingLoader = React.memo(
     }
   )
 )
-ImgSparkingLoader.displayName = 'ImgSparkingLoader'
-export default ImgSparkingLoader
+ImgSpark.displayName = 'ImgSpark'
+export default ImgSpark
 
 

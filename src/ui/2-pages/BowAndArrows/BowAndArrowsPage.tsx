@@ -6,6 +6,7 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -32,7 +33,7 @@ const BowAndArrowsPage = React.memo(() => {
     
       <Pages.Page>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol>
+          <Pages.ContentSmCol style={{ gap: 0 }}>
             
             <PageHeaderBox>
               <div />
@@ -47,6 +48,10 @@ const BowAndArrowsPage = React.memo(() => {
             <HeaderArrow css={HeaderArrowS.page}>
               {uiText.poster}
             </HeaderArrow>
+            
+            <div style={{ height: 16 }} />
+          
+            <PosterPreview />
           
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>

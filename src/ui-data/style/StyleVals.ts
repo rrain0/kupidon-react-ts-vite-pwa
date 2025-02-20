@@ -4,6 +4,8 @@
 
 export namespace StyleVals {
   
+  export const cardRadius = 15
+  
   export const itemListGap = 10
   export const itemListGapPx = `${itemListGap}px`
   
@@ -13,6 +15,7 @@ export namespace StyleVals {
   export const maxRatioPort = 3 / 4
   
   //export const shadow = (color: string) => `box-shadow: 0px 4px 15px 0px ${color};`
+  export const shadowSz = '0px 4px 15px 0px'
   
   // z-indices
   export const modalFloor1 = 1000
