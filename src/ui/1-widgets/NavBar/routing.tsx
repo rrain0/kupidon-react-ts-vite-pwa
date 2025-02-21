@@ -9,41 +9,40 @@ import RootRoute = AppRoutes.RootRoute
 
 
 
-const BottomNavBarRouting = React.memo(
-  () => {
-    
-    return (
-      <Routes>
-        {
-          [
-            RootRoute.profile[full](),
-            RootRoute.profile.id[full](),
-            RootRoute.profile.id.userId[full](),
-            
-            RootRoute.profile.id.userId.summary[full](),
-            RootRoute.profile.id.userId.preview[full](),
-            RootRoute.profile.id.userId.profile[full](),
-            RootRoute.profile.id.userId.tests[full](),
-            
-            RootRoute.findPairs[full](),
-            
-            RootRoute.bowAndArrows[full](),
-            
-            RootRoute.chat[full](),
-            
-            //RootRoute.settings[full](),
-          ]
-            //.map(path=>path+'/*')
-            .map(path => (
-              <Route
-                key={path}
-                path={path}
-                element={<NavBar />}
-              />
-            ))
-        }
-      </Routes>
-    )
-  }
-)
+const BottomNavBarRouting = React.memo(() => {
+  
+  return (
+    <Routes>
+      {
+        [
+          RootRoute.profile[full](),
+          RootRoute.profile.id[full](),
+          RootRoute.profile.id.userId[full](),
+          
+          RootRoute.profile.id.userId.summary[full](),
+          RootRoute.profile.id.userId.preview[full](),
+          RootRoute.profile.id.userId.profile[full](),
+          RootRoute.profile.id.userId.tests[full](),
+          
+          RootRoute.findPairs[full](),
+          
+          RootRoute.bowAndArrows[full](),
+          RootRoute.datePlaces[full](),
+          
+          RootRoute.chat[full](),
+          
+          //RootRoute.settings[full](),
+        ]
+          //.map(path=>path+'/*')
+          .map(path => (
+            <Route
+              key={path}
+              path={path}
+              element={<NavBar />}
+            />
+          ))
+      }
+    </Routes>
+  )
+})
 export default BottomNavBarRouting

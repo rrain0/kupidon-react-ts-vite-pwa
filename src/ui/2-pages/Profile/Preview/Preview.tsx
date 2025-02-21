@@ -10,7 +10,7 @@ import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
-import { useUiValue } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
@@ -85,7 +85,10 @@ const Preview = React.memo((props: PreviewProps) => {
   
   //effectLog('photos', photos)
   
-  const textNoPhotos = useUiValue(TitleUiText.noPhotos)
+  const uiValues = useMemo(() => ({
+    noPhotos: TitleUiText.noPhotos,
+  }), [])
+  const uiText = useUiValues(uiValues)
   
   const availablePhotos = useMemo(() => {
     return photos.filter(it => !it.isEmpty)
@@ -422,7 +425,7 @@ const Preview = React.memo((props: PreviewProps) => {
                         <Blur />
                         <NoImagesBox>
                           <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
-                          <NoImagesTitle>{textNoPhotos}</NoImagesTitle>
+                          <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
                         </NoImagesBox>
                       </>
                     )}

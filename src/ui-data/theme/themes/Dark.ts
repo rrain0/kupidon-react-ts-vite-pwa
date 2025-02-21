@@ -152,6 +152,12 @@ export const DarkProps: ThemeProps = {
     ctOnLight:       '#cccccc33',
     ctOnTrans:       '#aaaaaa33',
   },
+  error: {
+    ct:        '#e74c3c',
+  },
+  errorSec: {
+    ct:        '#7a514c',
+  },
   
   
   

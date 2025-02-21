@@ -4,7 +4,7 @@ import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationActions } from 'src/mini-libs/form-validation/core/ValidationActions.ts'
 import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
-import { UiTemplate, UiText, UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { UiText, UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { ToastMsg, ToastMsgData, useToasts } from 'src/ui/components/Toasts/useToasts.tsx'
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values
@@ -16,9 +16,8 @@ import ObjectMap = ObjectU.ObjectMap
 
 
 
-export type UseFormToastsProps
-<Vs extends Values>
-= {
+
+export type UseFormToastsProps<Vs extends Values> = {
   isLoading?: boolean | undefined, 
   loadingText?: UiText | undefined,
   isSuccess?: boolean | undefined, 
@@ -27,9 +26,9 @@ export type UseFormToastsProps
   setFailures: Updater<Failures<Vs>>
   failureCodeToUiText?: UiTextValues | undefined,
 }
-export const useFormToasts =
-<Vs extends Values>
-(props: UseFormToastsProps<Vs>)=>{
+export const useFormToasts = <Vs extends Values>(
+  props: UseFormToastsProps<Vs>
+) => {
   const {
     isLoading = false,
     loadingText,
@@ -41,102 +40,102 @@ export const useFormToasts =
   } = props
   
   
-  const [userFailure, setUserFailure] =
-    useState(undefined as undefined|Failure<Vs>)
-  const [serverFailure, setServerFailure] =
-    useState(undefined as undefined|Failure<Vs>)
+  const [userFailure, setUserFailure] = useState(
+    undefined as undefined | Failure<Vs>
+  )
+  const [serverFailure, setServerFailure] = useState(
+    undefined as undefined | Failure<Vs>
+  )
   
   
-  useEffect(()=>{
+  useEffect(() => {
     setUserFailure(undefined)
     setServerFailure(undefined)
     const stale: [boolean] = [false]
     
     const userFailures = failures
-      .filter(f=>f.type!=='server' && f.notify)
+      .filter(f => f.type!=='server' && f.notify)
     awaitDelay(userFailures, stale, setUserFailure)
     
     const serverFailures = failures
-      .filter(f=>f.type === 'server' && f.notify)
+      .filter(f => f.type === 'server' && f.notify)
     awaitDelay(serverFailures, stale, setServerFailure)
     
-    return ()=>{ stale[0]=true }
-  },[failures])
+    return () => { stale[0] = true }
+  }, [failures])
   
-  const userFailureMsg = useMemo(
-    ()=>{
-      if (userFailure) return new ToastMsgData({
-        type: 'danger',
-        msg: <ToastMsg
+  const userFailureMsg = useMemo(() => {
+    if (userFailure) return new ToastMsgData({
+      type: 'danger',
+      msg: (
+        <ToastMsg
           uiOption={failureCodeToUiText?.[userFailure.code]}
           defaultText={userFailure.msg}
-        />,
-        closeOnUnmount: true,
-        showCloseButton: true,
-        dragToClose: true,
-        onClose: ()=>{
-          if (userFailure.notify) setFailures(s=>updateFailures(
-            s,
-            { failures: [userFailure] },
-            { notify: false }
-          ))
-        }
-      })
-      return undefined
-    },
-    [failureCodeToUiText, userFailure]
-  )
-  const serverFailureMsg = useMemo(
-    ()=>{
-      if (serverFailure) return new ToastMsgData({
-        type: 'danger',
-        msg: <ToastMsg
-          uiOption={function(){
+        />
+      ),
+      closeOnUnmount: true,
+      showCloseButton: true,
+      dragToClose: true,
+      onClose: () => {
+        if (userFailure.notify) setFailures(s => updateFailures(
+          s,
+          { failures: [userFailure] },
+          { notify: false }
+        ))
+      },
+    })
+    return undefined
+  }, [failureCodeToUiText, userFailure])
+  
+  const serverFailureMsg = useMemo(() => {
+    if (serverFailure) return new ToastMsgData({
+      type: 'danger',
+      msg: (
+        <ToastMsg
+          uiOption={function() {
             if (serverFailure.code === 'unknown-error') {
               return ObjectMap<
                 typeof ErrorUiText.unknownErrorTemplate,
                 UiText<keyof typeof ErrorUiText.unknownErrorTemplate>
               >(
                 ErrorUiText.unknownErrorTemplate,
-                ([key, value])=>[key, value(JSON.stringify(serverFailure.extra.error))]
+                ([key, value]) => [
+                  key,
+                  value(JSON.stringify(serverFailure.extra.error)),
+                ]
               )
             }
             return failureCodeToUiText?.[serverFailure.code]
           }()}
           defaultText={serverFailure.msg}
-        />,
-        closeOnUnmount: true,
-        showCloseButton: true,
-        dragToClose: true,
-        onClose: ()=>{
-          if (serverFailure.notify) setFailures(s=>updateFailures(
-            s,
-            { failures: [serverFailure] },
-            { notify: false }
-          ))
-        }
-      })
-      return undefined
-    },
-    [failureCodeToUiText, serverFailure]
-  )
-  const loadingMsg = useMemo(
-    ()=>new ToastMsgData({
-      type: 'loading',
-      msg: <ToastMsg uiOption={loadingText}/>,
+        />
+      ),
       closeOnUnmount: true,
-    }),
-    [loadingText, isLoading]
-  )
-  const loginSuccessMsg = useMemo(
-    ()=>new ToastMsgData({
-      type: 'ok',
-      msg: <ToastMsg uiOption={successText}/>,
-      lifetime: 200,
+      showCloseButton: true,
       dragToClose: true,
-    }),
-    [successText, isSuccess]
-  )
+      onClose: () => {
+        if (serverFailure.notify) setFailures(s => updateFailures(
+          s,
+          { failures: [serverFailure] },
+          { notify: false }
+        ))
+      },
+    })
+    return undefined
+  }, [failureCodeToUiText, serverFailure])
+  
+  const loadingMsg = useMemo(() => new ToastMsgData({
+    type: 'loading',
+    msg: <ToastMsg uiOption={loadingText} />,
+    closeOnUnmount: true,
+  }), [loadingText, isLoading])
+  
+  const loginSuccessMsg = useMemo(() => new ToastMsgData({
+    type: 'ok',
+    msg: <ToastMsg uiOption={successText} />,
+    lifetime: 200,
+    dragToClose: true,
+  }), [successText, isSuccess])
   
   
   useToasts({ toasts: [
@@ -144,7 +143,5 @@ export const useFormToasts =
     isLoading && loadingMsg,
     isSuccess && loginSuccessMsg,
     serverFailureMsg,
-  ]})
-  
-  
+  ] })
 }

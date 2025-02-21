@@ -4,8 +4,8 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install --frozen-lockfile
 COPY . .
-ARG API_BASE_URL
-ENV API_BASE_URL=$API_BASE_URL
+ARG BACKEND_BASE_URL
+ENV BACKEND_BASE_URL=$BACKEND_BASE_URL
 RUN yarn run build
 
 

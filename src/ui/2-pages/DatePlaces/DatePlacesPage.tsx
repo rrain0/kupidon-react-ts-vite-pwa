@@ -1,9 +1,5 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { allDateTypes } from 'src/ui-data/special/DateTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -11,8 +7,8 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
-import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
-import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
+import { allDateTypes } from 'src/ui-data/special/DateTypeData.ts'
+import { DateTypeCard } from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -22,23 +18,18 @@ import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import Calendar2GradIc = SvgGradIconsPack.Calendar2GradIc
 import noScrollbars = EmotionCommon.noScrollbars
 import row = EmotionCommon.row
-import RootRoute = AppRoutes.RootRoute
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
 
 
-const BowAndArrowsPage = React.memo(() => {
+const DatePlacesPage = React.memo(() => {
   const titleText = useUiValues(TitleUiText)
   
   const uiText = useMemo(() => ({
-    bowAndArrows: titleText.bowAndArrows,
-    poster: 'Афиша',
     insightsAndPlacesForDate: 'Идеи и места для свиданий',
   }), [titleText])
   
-  const [searchParams] = useSearchParams()
   
   return (
     <>
@@ -49,39 +40,24 @@ const BowAndArrowsPage = React.memo(() => {
             
             <PageHeaderBox>
               <div />
-              <Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page>
-              <Button css={IconButtonS6.t(calendarButtonS)}>
+              <Hdrs.Page>{uiText.insightsAndPlacesForDate}</Hdrs.Page>
+              <div />
+              {/* <Button css={IconButtonS6.t(calendarButtonS)}>
                 <Calendar2GradIc />
-              </Button>
+              </Button> */}
             </PageHeaderBox>
             
-            <div style={{ height: 27 }} />
+            <div style={{ height: 28 }} />
             
-            <HeaderArrow css={HeaderArrowS.page}>
-              {uiText.poster}
-            </HeaderArrow>
-            
-            <div style={{ height: 16 }} />
-            
-            <PosterPreview />
-            
-            <div style={{ height: 16 }} />
-            
-            <Link
-              to={RootRoute.datePlaces[fullAnySearchParams](searchParams)}
-            >
-              <HeaderArrow css={HeaderArrowS.page}>
-                {uiText.insightsAndPlacesForDate}
-              </HeaderArrow>
-            </Link>
-            
-            <div style={{ height: 16 }} />
-            
-            <DatePlacesOverflow>
-              <DatePlacesList>
-                {allDateTypes.map(dt => <DateTypeCard key={dt} type={dt} />)}
-              </DatePlacesList>
-            </DatePlacesOverflow>
+            <DatePlacesList>
+              {allDateTypes.map(dt => (
+                <DateTypeCard
+                  key={dt}
+                  style={{ width: '100%' }}
+                  type={dt}
+                />
+              ))}
+            </DatePlacesList>
             
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>
@@ -95,7 +71,7 @@ const BowAndArrowsPage = React.memo(() => {
     </>
   )
 })
-export default BowAndArrowsPage
+export default DatePlacesPage
 
 
 
@@ -111,20 +87,10 @@ const calendarButtonS: AppWidgetStyle = t => [IconButtonS6.S.filled.round.lg.acc
 }]
 
 
-const DatePlacesOverflow = styled.div`
-  // Вертикальные маргин и паддинг нужны чтобы отображать тени у карточек
-  // TODO paddings
-  margin: -16px -16px;
-  padding: 16px 16px;
-  width: calc(100% + 16px * 2);
-  height: fit-content;
-  overflow: auto;
-  ${noScrollbars};
-  ${row};
-`
 const DatePlacesList = styled.div`
-  width: fit-content;
+  width: 100%;
   height: fit-content;
-  ${row};
-  gap: 16px;
+  gap: 18px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `

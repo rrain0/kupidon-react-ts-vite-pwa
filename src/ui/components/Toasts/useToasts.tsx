@@ -1,8 +1,8 @@
-import { useUiValue } from 'src/mini-libs/ui-text/useUiText.ts'
-import React, { useEffect, useState } from 'react'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import React, { useEffect, useMemo, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
 import { TypeU } from '@util/common/TypeU.ts'
-import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
+import { asUiText, UiText } from 'src/mini-libs/ui-text/UiText.ts'
 import { ToastBody, ToastType } from 'src/ui/components/Toasts/ToastBody.tsx'
 import falsy = TypeU.falsy
 import PartialUndef = TypeU.PartialUndef
@@ -128,7 +128,7 @@ export class ToastMsgData {
     }
   }
   hide() {
-    if (this.id!==undefined) {
+    if (this.id !== undefined) {
       this.runCloseCallback = false
       // it is not working BEFORE toast.dismiss so need to use runCloseCallback = false
       this.unsubscribeOnChange?.()
@@ -147,8 +147,11 @@ export type ToastMsgProps<UO extends UiText> = PartialUndef<{
 }>
 export const ToastMsg = React.memo(
   <UO extends UiText>(props: ToastMsgProps<UO>) => {
-    const uiOption = useUiValue(props.uiOption)
-    // @ts-ignore
-    return <>{uiOption ?? props.defaultText}</>
+    const { uiOption, defaultText } = props
+    const uiValues = useMemo(() => ({
+      option: uiOption ?? asUiText(defaultText ?? ''),
+    }), [uiOption])
+    const uiText = useUiValues(uiValues)
+    return <>{uiText.option}</>
   }
 )

@@ -13,11 +13,15 @@ export type MyComponentProps = ClassStyle & Children & Puro<{
 }>
 export const MyComponent = React.memo((props: MyComponentProps) => {
   const {
+    className,
+    style,
     prop = 0,
   } = props
   
   return (
     <div
+      className={className}
+      style={style}
       data-display-name="MyComponent"
     >
       <>

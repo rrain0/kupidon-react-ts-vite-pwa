@@ -14,7 +14,7 @@ export const useOverlayUrl = (overlayName: string) => {
   
   // ...?overlay=dialog1&overlay=bottomSheet2&...
   const [isOpen, isLastOpen] = useMemo(() => {
-    const overlays: string[] = search.getAll(AppRoutes.overlayParam)
+    const overlays: string[] = search.getAll(AppRoutes.overlayParamName)
     return [
       overlays.includes(overlayName),
       !!(overlays.length && overlays.at(-1) === overlayName),
@@ -26,7 +26,7 @@ export const useOverlayUrl = (overlayName: string) => {
     if (!isOpen) {
       //console.log('opening... (changing search params to calculate isOpen is true)')
       const newSearch = new URLSearchParams(search)
-      newSearch.append(AppRoutes.overlayParam, overlayName)
+      newSearch.append(AppRoutes.overlayParamName, overlayName)
       setSearch(newSearch)
     }
   }, [isOpen, search, setSearch, overlayName])

@@ -1,6 +1,8 @@
 import { Lang } from 'src/util/lang/Lang.ts'
 
 
+
+// Some translations have implementation only in one language, e.g., language name.
 export type UiText<L extends Lang.Supported = Lang.Supported> = {
   [Lang in L]?: string
 }
@@ -25,5 +27,6 @@ export type UiValues<Keys extends string = any> = Record<Keys, UiValue>
 
 
 
-export type PickedUiValues<V extends UiValues>
-  = { [Prop in keyof V]: V[Prop][keyof V[Prop]] }
+export type PickedUiValues<V extends UiValues> = {
+  [Prop in keyof V]: V[Prop][keyof V[Prop]]
+}

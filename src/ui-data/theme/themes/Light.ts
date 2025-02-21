@@ -156,6 +156,12 @@ export const LightProps: ThemeProps = {
     ctOnLight:       '#282c3422',
     ctOnTrans:       '#66666633',
   },
+  error: {
+    ct:        '#e74c3c',
+  },
+  errorSec: {
+    ct:        '#c17169',
+  },
   
   
   

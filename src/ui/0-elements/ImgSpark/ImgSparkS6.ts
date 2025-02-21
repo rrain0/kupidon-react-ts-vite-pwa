@@ -1,3 +1,4 @@
+import { ObjectU } from '@util/common/ObjectU.ts'
 import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
@@ -6,13 +7,17 @@ import {
   WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter
 import abs = WidgetStyleCommon.abs
+import flexC = WidgetStyleCommon.flexC
 
 
 
 
 export namespace ImgSparkS6 {
+  
+  import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const imgFrame = WidgetElem.of({
@@ -24,10 +29,14 @@ export namespace ImgSparkS6 {
     const spark = WidgetElem.of({
       upElem: imgFrame, upSelector: '>', className: 'rruiSparkingLine',
     })
+    const errIcon = ObjectPrefixCapitalizeKeys('err', SvgIconS6.buildWidgetElems({
+      upElem: imgFrame, upSelector: '>',
+    }))
     return {
       imgFrame,
       img,
       spark,
+      ...errIcon,
     } as const
   }
   
@@ -47,14 +56,21 @@ export namespace ImgSparkS6 {
   
   
   export namespace Parts {
-    export const base: WidgetStyle = {
-      imgFrame: {
-        pos: 'rel', w: 'full', h: 'auto', overflow: 'hidden',
+    export const base: WidgetStyle = [
+      { err: SvgIconS6.Parts.base },
+      {
+        imgFrame: {
+          pos: 'rel', w: 'full', h: 'auto', overflow: 'hidden',
+          ...flexC,
+        },
+        img: {
+          sz: 'full', ...imgCoverCenter,
+        },
+        err: {
+          icon: { sz: '50%' },
+        },
       },
-      img: {
-        sz: 'full', ...imgCoverCenter,
-      },
-    }
+    ]
     
     export namespace Type {
       
@@ -69,6 +85,10 @@ export namespace ImgSparkS6 {
               }]
               // type: img, shape: img, size: full
               export const full: WidgetStyle = [base, {
+                imgFrame: { sz: 'full' },
+              }]
+              // type: img, shape: img, size: absFull
+              export const absFull: WidgetStyle = [base, {
                 imgFrame: { ...abs },
               }]
             }
@@ -79,6 +99,9 @@ export namespace ImgSparkS6 {
           imgFrame: {
             bgColor: t.boxTrans.bg,
             color: t.boxTrans.ctSec,
+          },
+          errIcon: {
+            color: t.errorSec.ct,
           },
         })
         export namespace Color {

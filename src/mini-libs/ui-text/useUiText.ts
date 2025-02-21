@@ -9,44 +9,46 @@ import ObjectEntries = ObjectU.ObjectEntries
 
 
 
-const pickUiValue = <V extends UiValue<any>>
-(uiValue: V, langs: string[]): V[keyof V] => {
-  // Some settings have implementation only in one language, e.g., language name.
-  return ObjectEntries(uiValue)
-    .toSorted(([a], [b]) => {
-      let aIdx = langs.findIndex(it => it === a)
-      let bIdx = langs.findIndex(it => it === b)
-      if (aIdx === -1) aIdx = langs.length
-      if (bIdx === -1) bIdx = langs.length
-      return aIdx - bIdx
+export const pickUiValue = <V extends UiValue<any>>(
+  uiValue: V,
+  langs: string[],
+): V[keyof V] => {
+  const entries = ObjectEntries(uiValue)
+  if (!entries.length) {
+    throw new Error('UiValue record must have at least one pair of lang-value')
+  }
+  const pickedValue = entries
+    .sort(([langA], [langB]) => {
+      let ai = langs.findIndex(it => it === langA)
+      let bi = langs.findIndex(it => it === langB)
+      if (ai === -1) ai = langs.length
+      if (bi === -1) bi = langs.length
+      return ai - bi
     })
-    // eslint-disable-next-line no-unexpected-multiline
     [0][1]
+  return pickedValue
 }
 
 
-// todo refactor toasts & remove
-export const useUiValue = <V extends UiValue<any>>(uiValue: V | undefined): V[keyof V] | undefined => {
-  const langs = useRecoilValue(LangRecoil).langs
-  
-  const pickedUiValue = useMemo(() => {
-    return uiValue ? pickUiValue(uiValue, langs) : undefined
-  }, [langs, uiValue])
-  
-  return pickedUiValue
-}
 
-
-export const useUiValues = <V extends UiValues>(uiValues: V): PickedUiValues<V> => {
-  const langs = useRecoilValue(LangRecoil).langs
-  
-  const pickedUiValues = useMemo(
-    () => ObjectMap<V, PickedUiValues<V>>(
-      uiValues,
-      ([key, values]) => [key, pickUiValue(values, langs)]
-    ),
-    [langs, uiValues]
+export const pickUiValues = <V extends UiValues>(
+  uiValues: V,
+  langs: string[],
+): PickedUiValues<V> => {
+  return ObjectMap<V, PickedUiValues<V>>(
+    uiValues,
+    ([key, values]) => [key, pickUiValue(values, langs)]
   )
-  
+}
+
+
+
+export const useUiValues = <V extends UiValues>(
+  uiValues: V
+): PickedUiValues<V> => {
+  const langs = useRecoilValue(LangRecoil).langs
+  const pickedUiValues = useMemo(() => pickUiValues(uiValues, langs), [uiValues, langs])
   return pickedUiValues
 }
+
+

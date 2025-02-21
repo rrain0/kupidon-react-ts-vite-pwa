@@ -9,7 +9,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
-import { MbtiData } from 'src/ui-data/MbtiData.ts'
+import { MbtiTypeData } from 'src/ui-data/special/MbtiTypeData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
@@ -68,7 +68,7 @@ const Tests = React.memo((props: TestsProps) => {
   
   const setMbti = useSetRecoilState(MbtiRecoil)
   const { testState, mbtiType } = useRecoilValue(MbtiRecoilComputed)
-  const mbtiData = MbtiData[mbtiType ?? 'INTP']
+  const mbtiData = MbtiTypeData[mbtiType ?? 'INTP']
   
   
   const actionText = useUiValues(ActionUiText)
@@ -221,7 +221,7 @@ const Tests = React.memo((props: TestsProps) => {
             )}
             
             <MiniTypesBox>
-              {ObjectEntries(MbtiData).map(([type, data]) => (
+              {ObjectEntries(MbtiTypeData).map(([type, data]) => (
                 <TypeComponent key={type} type={type} />
               ))}
             </MiniTypesBox>
@@ -378,21 +378,21 @@ const MiniTypeDescription = styled.div`
 
 type TypeComponentProps = { type: MbtiType }
 const TypeComponent = React.memo(({ type }: TypeComponentProps) => {
-  const uiText = useUiValues(MbtiData[type].uiText)
+  const uiText = useUiValues(MbtiTypeData[type].uiText)
   
   return (
     <MiniTypeCard>
       
-      <MiniTypeCode style={{ color: MbtiData[type].color }}>
+      <MiniTypeCode style={{ color: MbtiTypeData[type].color }}>
         {type}
       </MiniTypeCode>
-      <MiniTypeName style={{ color: MbtiData[type].color }}>
+      <MiniTypeName style={{ color: MbtiTypeData[type].color }}>
         {uiText.name}
       </MiniTypeName>
       
       <div style={{ height: 9 }} />
       
-      <MiniTypePicture src={MbtiData[type].icon} />
+      <MiniTypePicture src={MbtiTypeData[type].icon} />
       
       <div style={{ height: 7 }} />
       

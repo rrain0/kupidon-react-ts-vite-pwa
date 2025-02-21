@@ -8,6 +8,7 @@ import {
 import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
 import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing'
+import { datePlacesRouting } from 'src/ui/2-pages/DatePlaces/routing.tsx'
 import { findPairsRouting } from 'src/ui/2-pages/FindPairs/routing'
 import { loginRouting } from 'src/ui/2-pages/Login/routing'
 import React from 'react'
@@ -89,6 +90,10 @@ const rootRoutes: RouteObject[] = [
       {
         path: RootRoute.settings[path]+'/*',
         children: settingRouting,
+      },
+      {
+        path: RootRoute.datePlaces[path]+'/*',
+        children: datePlacesRouting,
       },
       
       

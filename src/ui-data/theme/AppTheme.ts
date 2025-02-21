@@ -4,6 +4,9 @@ import { StyledComponent } from '@emotion/styled'
 
 
 
+
+// TODO Style - button => box
+// TODO Style - Выделить элементы типа как ripple, error и им сделать ct, ctOnLight, ctOnDark
 export namespace AppTheme {
   
   export type Type = 'light' | 'dark'
@@ -246,6 +249,12 @@ export namespace AppTheme {
       ct:              string
       ctOnLight:       string
       ctOnTrans:       string
+    }
+    error: {
+      ct:        string
+    }
+    errorSec: {
+      ct:        string
     }
     
     

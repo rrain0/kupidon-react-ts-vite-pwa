@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React from 'react'
+import { MockDataPoster } from 'src/_mock-data/poster/MockDataPoster.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -9,7 +10,6 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
-import { MockData } from 'src/_mock-data/MockData.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import LocationIc = SvgIconsPack.LocationIc
@@ -19,7 +19,7 @@ import PriceTagIc = SvgIconsPack.PriceTagIc
 
 const PosterPreview = React.memo(() => {
   
-  const p = MockData.poster[0]
+  const p = MockDataPoster.posters[0]
   
   return (
     <Frame
@@ -29,7 +29,7 @@ const PosterPreview = React.memo(() => {
       <MiniPosterFrame>
       
         <ImgSpark
-          css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)}
+          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
           src={p.previewImg}
         />
         
@@ -85,10 +85,9 @@ const selectMeterS: AppWidgetStyle = t => [
   SelectMeterS6.S.row.round.md.normal, {
     meterFrame: {
       area: 'meter', placeSelf: 'end center',
-      pb: 8, g: 3,
+      pb: 8,
       pos: 'rel', z: 10,
     },
-    meter: { sz: 3 },
     // TODO Theme
     meter0: { bgColor: '#D9D9D940' },
     // TODO Theme

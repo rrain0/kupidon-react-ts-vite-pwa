@@ -79,6 +79,7 @@ export namespace Pages {
   
   
   export const content = css`
+    position: relative;
     width: 100%;
     min-width: 0;
     height: fit-content;

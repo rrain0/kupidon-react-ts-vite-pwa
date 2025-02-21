@@ -37,13 +37,13 @@ export namespace AxiosConfig {
     /*validateStatus: function (status) {
      return status >= 200 && status < 300; // default
      },*/
-    baseURL: ApiRoutes.api,
+    baseURL: ApiRoutes.apiV1,
     withCredentials: true,
   })
   axiosRetry(ax, commonAxiosRetryConfig)
   
   export const axAccess = Axios.create({
-    baseURL: ApiRoutes.api,
+    baseURL: ApiRoutes.apiV1,
     withCredentials: true,
   })
   axiosRetry(axAccess, commonAxiosRetryConfig)
@@ -129,7 +129,7 @@ export namespace AxiosConfig {
   
   export const rawTestRefreshToken = async () => {
     return Axios.get(ApiRoutes.authRefresh, {
-      baseURL: ApiRoutes.api,
+      baseURL: ApiRoutes.apiV1,
       withCredentials: true,
       headers: {
         Authorization: 'Bearer 1',

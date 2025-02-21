@@ -9,7 +9,7 @@ services:
     build:
       dockerfile: Dockerfile
       args:
-        API_BASE_URL: ${API_BASE_URL}
+        BACKEND_BASE_URL: ${BACKEND_BASE_URL}
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:

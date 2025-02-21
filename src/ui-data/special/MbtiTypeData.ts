@@ -53,7 +53,9 @@ import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 
 
 
-export const MbtiData: RecordRo<MbtiType, {
+
+// MBTI data by type with uiText & LocalTheme
+export const MbtiTypeData: RecordRo<MbtiType, {
   icon: string 
   picture: string
   color: string

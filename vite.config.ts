@@ -68,11 +68,13 @@ export default defineConfig(({ command, mode }) => {
     envFileConfig = dotenvExpand.expand({
       parsed: dotenv.parse(fs.readFileSync(envFileName)),
     }).parsed as Record<string, string>
-    envVarsRuntime[`import.meta.env.API_BASE_URL`] = JSON.stringify(envFileConfig.API_BASE_URL)
+    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`]
+      = JSON.stringify(envFileConfig.BACKEND_BASE_URL)
     //envVarsRuntime[`process.env.TEST`] = JSON.stringify(envFileConfig[TEST])
   }
   if (mode === 'production') {
-    envVarsRuntime[`import.meta.env.API_BASE_URL`] = JSON.stringify(process.env.API_BASE_URL)
+    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`]
+      = JSON.stringify(process.env.BACKEND_BASE_URL)
   }
   
   

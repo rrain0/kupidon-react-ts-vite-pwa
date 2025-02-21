@@ -10,8 +10,7 @@ import params = RouteBuilder.params
 export namespace AppRoutes {
   
   
-  export const overlayParam = 'overlay'
-  
+  export const overlayParamName = 'overlay'
   
   
   
@@ -21,8 +20,6 @@ export namespace AppRoutes {
       returnPath: 'return-path',
     },
   })
-  
-  
   const signup = buildRoute({
     [path]: 'signup',
     [params]: {
@@ -47,24 +44,12 @@ export namespace AppRoutes {
       }),
     }),
   })
-  
-  
-  
-  
   const chat = buildRoute({
     [path]: 'chat',
   })
-  
-  
-  
-  
   const findPairs = buildRoute({
     [path]: 'find-pairs',
   })
-  
-  
-  
-  
   const bowAndArrows = buildRoute({
     [path]: 'bow-and-arrows',
     allEvents: buildPath('all-events'),
@@ -79,6 +64,10 @@ export namespace AppRoutes {
     app: buildPath('app'),
     pwdChange: buildPath('pwd-change'),
   })
+  const datePlaces = buildRoute({
+    [path]: 'date-places',
+  })
+  
   
   
   
@@ -121,6 +110,7 @@ export namespace AppRoutes {
   
   export const RootRoute = buildRoute({
     [path]: '',
+    
     login,
     signup,
     
@@ -128,7 +118,9 @@ export namespace AppRoutes {
     chat,
     findPairs,
     bowAndArrows,
+    
     settings,
+    datePlaces,
     
     test,
     
