@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -26,6 +27,7 @@ import ProfileGradIc = SvgGradIconsPack.ProfileGradIc
 import ChatRoundGradIc = SvgGradIconsPack.ChatRoundGradIc
 import CardsHeartGradIc = SvgGradIconsPack.CardsHeartGradIc
 import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
+import modalFloor500 = StyleVals.modalFloor500
 
 
 
@@ -107,6 +109,7 @@ export default NavBar
 
 const Frame = styled.nav`
   ${fixedBottom};
+  z-index: ${modalFloor500};
   height: var(--bottom-nav-height);
   min-height: var(--bottom-nav-height);
   padding-bottom: var(--bottom-nav-padding-bottom);

@@ -48,8 +48,8 @@ export namespace ImageU {
     
     
     const webpOptions: Options = {
-      maxSizeMB: 0.1,
-      maxWidthOrHeight: 800, // 1600x900 16:9
+      maxSizeMB: 0.4, // 0.4 MB
+      maxWidthOrHeight: 1600, // 1600x900 16:9
       useWebWorker: true,
       fileType: 'image/webp',
       onProgress: p => {

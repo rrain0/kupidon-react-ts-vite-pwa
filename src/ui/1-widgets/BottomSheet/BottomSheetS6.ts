@@ -8,7 +8,7 @@ import {
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import fixed = WidgetStyleCommon.fixed
-import modalFloor1 = StyleVals.modalFloor1
+import modalFloor1 = StyleVals.modalFloor1k
 
 
 

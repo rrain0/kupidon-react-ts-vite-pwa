@@ -45,5 +45,5 @@ const Frame = styled.article`
   overflow-wrap: anywhere;
   padding: 8px;
   ${col};
-  z-index: ${StyleVals.modalFloor10};
+  z-index: ${StyleVals.modalFloor10k};
 `

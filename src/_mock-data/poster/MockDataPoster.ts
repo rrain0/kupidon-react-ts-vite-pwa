@@ -1,4 +1,4 @@
-import concert from 'src/_mock-data/poster/concert--nainoa-shizuru-NcdG9mK3PBY-unsplash.png'
+import concert from 'src/_mock-data/poster/concert-icon-nainoa-shizuru-NcdG9mK3PBY-unsplash.webp'
 
 
 

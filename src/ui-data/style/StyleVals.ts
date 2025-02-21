@@ -18,10 +18,11 @@ export namespace StyleVals {
   export const shadowSz = '0px 4px 15px 0px'
   
   // z-indices
-  export const modalFloor1 = 1000
-  export const modalFloor2 = 2000
+  export const modalFloor500 = 500
+  export const modalFloor1k = 1000
+  export const modalFloor2k = 2000
   
-  export const modalFloor10 = 10000
+  export const modalFloor10k = 10000
   
   
   // Easings

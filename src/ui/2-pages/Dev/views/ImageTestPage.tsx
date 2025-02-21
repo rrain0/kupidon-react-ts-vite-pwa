@@ -23,6 +23,14 @@ const ImageTestPage = React.memo(() => {
           
           
           
+          <div>ImgSpark</div>
+          <ImgSpark
+            css={ImgSparkS6.t(pictureS)}
+            src={`${ApiRoutes.backend}/test/image/ban.jpg`}
+          />
+          
+          <div css={{ height: 24 }} />
+          
           <div>ImgSpark delayed</div>
           <ImgSpark
             css={ImgSparkS6.t(pictureS)}

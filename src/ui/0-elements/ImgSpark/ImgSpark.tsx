@@ -1,9 +1,8 @@
 import clsx from 'clsx'
 import React, {
   SyntheticEvent,
-  useEffect,
   useImperativeHandle,
-  useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -46,10 +45,13 @@ const ImgSpark = React.memo(
       const [isLoading, setLoading] = useState(true)
       const [isError, setError] = useState(false)
       
-      useLayoutEffect(() => {
+      // Если использовать эффект,
+      // то он может сработать уже после img.onLoad и сломать стэйт
+      useMemo(() => {
         setLoading(true)
         setError(false)
       }, [props.src])
+      
       
       return (
         <div // Frame

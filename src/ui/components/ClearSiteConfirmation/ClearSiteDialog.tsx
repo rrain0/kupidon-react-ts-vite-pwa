@@ -106,7 +106,7 @@ const button: AppStyle = t => ButtonS6.W.t(t, {
 
 const ModalReloading = styled.div`
   ${fixed};
-  z-index: ${StyleVals.modalFloor2};
+  z-index: ${StyleVals.modalFloor2k};
   background: ${p => p.theme.page.bg}9a;
   color: ${p => p.theme.page.ct2};
   ${Txt.s18WideLh150};

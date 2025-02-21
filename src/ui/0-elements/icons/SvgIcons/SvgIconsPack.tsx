@@ -74,6 +74,7 @@ import RingingBellSvg from 'src/res/ic/normal/ringing-bell.svg?react'
 import RulerCornerSvg from 'src/res/ic/normal/ruler-corner.svg?react'
 
 import Search2Svg from 'src/res/ic/normal/search-2.svg?react'
+import SoupSvg from 'src/res/ic/normal/soup.svg?react'
 import Spinner8LinesSvg from 'src/res/ic/normal/spinner-8-lines.svg?react'
 import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.svg?react'
 import SyncErrorSvg from 'src/res/ic/normal/sync-error.svg?react'
@@ -257,6 +258,7 @@ export namespace SvgIconsPack {
   
   
   export const Search2Ic = generateSimpleSvgIcon(Search2Svg)
+  export const SoupIc = generateSimpleSvgIcon(SoupSvg)
   
   export const Spinner8LinesIc = React.memo(
     React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(

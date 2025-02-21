@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { MockDataDateArticles } from 'src/_mock-data/date-articles/MockDataDateArticles.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { allDateTypes } from 'src/ui-data/special/DateTypeData.ts'
@@ -12,6 +13,7 @@ import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
+import DateArticlePreviewCard from 'src/ui/2-pages/DateArticles/parts/DateArticlePreviewCard.tsx'
 import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -36,6 +38,8 @@ const BowAndArrowsPage = React.memo(() => {
     bowAndArrows: titleText.bowAndArrows,
     poster: 'Афиша',
     insightsAndPlacesForDate: 'Идеи и места для свиданий',
+    interestingIt: 'Интересное',
+    ourPartners: 'Наши партнёры',
   }), [titleText])
   
   const [searchParams] = useSearchParams()
@@ -83,6 +87,35 @@ const BowAndArrowsPage = React.memo(() => {
               </DatePlacesList>
             </DatePlacesOverflow>
             
+            <div style={{ height: 16 }} />
+            
+            <HeaderArrow css={HeaderArrowS.page}>
+              {uiText.interestingIt}
+            </HeaderArrow>
+            
+            <div style={{ height: 16 }} />
+            
+            <DateArticlesOverflow>
+              <DateArticlesList>
+                {MockDataDateArticles.articles.map(a => (
+                  <DateArticlePreviewCard
+                    key={a.description}
+                    picture={a.previewImg}
+                    date={a.date}
+                    description={a.description}
+                  />
+                ))}
+              </DateArticlesList>
+            </DateArticlesOverflow>
+            
+            <div style={{ height: 16 }} />
+            
+            <HeaderArrow css={HeaderArrowS.page}>
+              {uiText.ourPartners}
+            </HeaderArrow>
+            
+            <div style={{ height: 16 }} />
+          
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>
         
@@ -91,13 +124,11 @@ const BowAndArrowsPage = React.memo(() => {
       
       
       <BottomButtonBar />
-      
+    
     </>
   )
 })
 export default BowAndArrowsPage
-
-
 
 
 const PageHeaderBox = styled.div`
@@ -105,14 +136,17 @@ const PageHeaderBox = styled.div`
   display: grid;
   grid-template-columns: 1fr auto 1fr;
 `
-const calendarButtonS: AppWidgetStyle = t => [IconButtonS6.S.filled.round.lg.accent4, {
-  button: { justifySelf: 'end' },
-  gradIconSz: 24,
-}]
+const calendarButtonS: AppWidgetStyle = t => [
+  IconButtonS6.S.filled.round.lg.accent4, {
+    button: { justifySelf: 'end' },
+    gradIconSz: 24,
+  },
+]
+
 
 
 const DatePlacesOverflow = styled.div`
-  // Вертикальные маргин и паддинг нужны чтобы отображать тени у карточек
+  // Вертикальные маргин и паддинг нужны чтобы отображать тени у карточек - но тач зона расширена
   // TODO paddings
   margin: -16px -16px;
   padding: 16px 16px;
@@ -127,4 +161,23 @@ const DatePlacesList = styled.div`
   height: fit-content;
   ${row};
   gap: 16px;
+`
+
+
+
+const DateArticlesOverflow = styled.div`
+  // TODO paddings
+  margin: 0 -16px;
+  padding: 0 16px;
+  width: calc(100% + 16px * 2);
+  height: fit-content;
+  overflow: auto;
+  ${noScrollbars};
+  ${row};
+`
+const DateArticlesList = styled.div`
+  width: fit-content;
+  height: fit-content;
+  ${row};
+  gap: 10px;
 `
