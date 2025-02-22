@@ -44,15 +44,7 @@ const BowAndArrowsPage = React.memo(() => {
     ourPartners: 'Наши партнёры',
   }), [titleText])
   
-  
-  const navigate = useNavigate()
   const [search] = useSearchParams()
-  
-  const setCategory = (category: DateCategory) => {
-    const newSearch = new URLSearchParams(search)
-    newSearch.set(RootRoute.datePlaces[params].category, category)
-    navigate(RootRoute.datePlaces[full]() + '?' + newSearch.toString())
-  }
   
   return (
     <>
@@ -96,9 +88,7 @@ const BowAndArrowsPage = React.memo(() => {
                 {allDateCategories.map(dc => (
                   <DateCategoryCard
                     key={dc}
-                    style={{ cursor: 'pointer' }}
                     category={dc}
-                    onClick={() => setCategory(dc)}
                   />
                 ))}
               </DatePlacesList>

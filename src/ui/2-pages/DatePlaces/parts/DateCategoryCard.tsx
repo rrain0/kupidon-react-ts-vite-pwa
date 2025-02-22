@@ -1,5 +1,8 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -14,7 +17,9 @@ import Children = ReactU.Children
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
-import OnClick = ReactU.OnClick
+import RootRoute = AppRoutes.RootRoute
+import params = RouteBuilder.params
+import full = RouteBuilder.full
 
 
 
@@ -22,14 +27,12 @@ import OnClick = ReactU.OnClick
 
 export type DateCategoryCardProps = ClassStyle & Children & Puro<{
   category: DateCategory
-  onClick: OnClick
 }>
 export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   const {
     className,
     style,
     category = 'romantic',
-    onClick,
   } = props
   
   const data = DateCategoryData[category]
@@ -39,12 +42,23 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
     dateTypeName: uiValues.name,
   }), [uiValues])
   
+  
+  const navigate = useNavigate()
+  const [search] = useSearchParams()
+  
+  const setCategory = () => {
+    const newSearch = new URLSearchParams(search)
+    newSearch.set(RootRoute.datePlaces[params].category, category)
+    navigate(RootRoute.datePlaces[full]() + '?' + newSearch.toString())
+  }
+  
+  
   return (
     <DateTypeBox
       className={className}
       style={style}
       data-display-name="DateCategoryCard"
-      onClick={onClick}
+      onClick={setCategory}
     >
       <ImgSpark
         css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)}
@@ -70,6 +84,7 @@ const DateTypeBox = styled(Card)`
   grid-template-rows: 1fr 44px;
   place-items: center;
   box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
+  cursor: pointer;
 `
 const Title = styled.div`
   // TODO Theme

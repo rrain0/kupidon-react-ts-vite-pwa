@@ -34,12 +34,18 @@ const DatePlacesPage = React.memo(() => {
   const [search] = useSearchParams()
   
   const categoryParamName = RootRoute.datePlaces[params].category
+  const datePlacesRoute = RootRoute.datePlaces[full]()
   
   const setCategory = (category: DateCategory | null) => {
     const newSearch = new URLSearchParams(search)
-    if (exists(category)) newSearch.set(categoryParamName, category)
-    else newSearch.delete(categoryParamName)
-    navigate(RootRoute.datePlaces[full]() + '?' + newSearch.toString())
+    if (exists(category)) {
+      newSearch.set(categoryParamName, category)
+      navigate(datePlacesRoute + '?' + newSearch.toString())
+    }
+    else {
+      newSearch.delete(categoryParamName)
+      navigate(datePlacesRoute + '?' + newSearch.toString(), { replace: true })
+    }
   }
   
   const searchCategory = search.get(categoryParamName)
@@ -85,9 +91,8 @@ const DatePlacesPage = React.memo(() => {
               {!displayedCategoryName && allDateCategories.map(dc => (
                 <DateCategoryCard
                   key={dc}
-                  style={{ width: '100%', cursor: 'pointer' }}
+                  style={{ width: '100%' }}
                   category={dc}
-                  onClick={() => setCategory(dc)}
                 />
               ))}
               {displayedCategoryName
