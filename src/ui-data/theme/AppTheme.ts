@@ -90,11 +90,22 @@ export namespace AppTheme {
       bga4:         string
       cta4:         string
     },
+    boxNormal2: {
+      bg:           string
+      ct:           string
+      bgf:          string
+      ctf:          string
+    }
+    boxNormal3: {
+      bg:           string
+      ct:           string
+      bgf:          string
+      ctf:          string
+    }
     boxNormal4: {
       bg:           string
       ct:           string
       shadow:       string
-      
       bgf:          string
       ctf:          string
     }
@@ -171,14 +182,12 @@ export namespace AppTheme {
       ct:           string
       bgFc:         string
       ctFc:         string
-      
-      bg2:          string
-      bgFc2:        string
-      
-      bg3:          string
-      ct3:          string
-      bgFc3:        string
-      ctFc3:        string
+    }
+    buttonNormalCt: {
+      bg:           string
+      ct:           string
+      bgf:          string
+      ctf:          string
     }
     // main button (submit button)
     buttonMain: {

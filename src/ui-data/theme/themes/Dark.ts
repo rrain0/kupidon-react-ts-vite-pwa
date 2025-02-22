@@ -56,6 +56,18 @@ export const DarkProps: ThemeProps = {
     bga4:         '#aaaaaa',
     cta4:         '#000000',
   },
+  boxNormal2: {
+    bg:           '#999999',
+    ct:           '#000000',
+    bgf:          '#7b7b7b',
+    ctf:          '#000000',
+  },
+  boxNormal3: {
+    bg:           '#909090',
+    ct:           '#000000',
+    bgf:          '#c5c5c5',
+    ctf:          '#000000',
+  },
   boxNormal4: {
     bg:           '#24272d',
     ct:           '#d0d0d0',
@@ -131,14 +143,12 @@ export const DarkProps: ThemeProps = {
     ct:             '#000000',
     bgFc:           '#7b7b7b',
     ctFc:           '#000000',
-    
-    bg2:             '#999999',
-    bgFc2:          '#7b7b7b',
-    
-    bg3:            '#909090',
-    ct3:            '#000000',
-    bgFc3:          '#c5c5c5',
-    ctFc3:          '#000000',
+  },
+  buttonNormalCt: {
+    bg:           'transparent',
+    ct:           '#999999',
+    bgf:          '#00000008',
+    ctf:          '#999999',
   },
   buttonMain: {
     bg:       '#aaaaaa',

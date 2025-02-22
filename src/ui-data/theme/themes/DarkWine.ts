@@ -59,12 +59,6 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   
   
-  buttonNormal: { ...DarkProps.buttonNormal,
-    bg:           '#999999',
-    ct:           '#000000',
-    bgFc:         '#7b7b7b',
-    ctFc:         '#000000',
-  },
   buttonMain: { ...DarkProps.buttonMain,
     bg:           '#aaaaaa',
     ct:           '#000000',

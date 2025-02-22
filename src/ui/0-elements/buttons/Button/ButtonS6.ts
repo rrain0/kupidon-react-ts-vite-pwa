@@ -166,20 +166,20 @@ export namespace ButtonS6 {
           }]
           // type: filled, color: normal2
           export const normal2: AppWidgetStyle = t => [baseColor, {
-            buttonBgColor: t.buttonNormal.bg2,
-            buttonColor: t.buttonNormal.ct,
+            buttonBgColor: t.boxNormal2.bg,
+            buttonColor: t.boxNormal2.ct,
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFc2,
-              buttonColor: t.buttonNormal.ctFc,
+              buttonBgColor: t.boxNormal2.bgf,
+              buttonColor: t.boxNormal2.ctf,
             },
           }]
           // type: filled, color: normal3
           export const normal3: AppWidgetStyle = t => [baseColor, {
-            buttonBgColor: t.buttonNormal.bg3,
-            buttonColor:   t.buttonNormal.ct3,
+            buttonBgColor: t.boxNormal3.bg,
+            buttonColor:   t.boxNormal3.ct,
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFc3,
-              buttonColor: t.buttonNormal.ctFc3,
+              buttonBgColor: t.boxNormal3.bgf,
+              buttonColor: t.boxNormal3.ctf,
             },
           }]
           // type: filled, color: normal4
@@ -285,12 +285,13 @@ export namespace ButtonS6 {
         }
         
         export const baseColor: AppWidgetStyle = t => ({
-          buttonColor: t.buttonNormal.bg,
-          borderBdColor: t.buttonNormal.bg,
+          buttonBgColor: t.buttonNormalCt.bg,
+          buttonColor: t.buttonNormalCt.ct,
+          borderBdColor: t.buttonNormalCt.ct,
           rippleColor: t.ripple.ctOnTrans,
           inFocus: {
-            buttonBgColor: t.buttonNormal.bgFc,
-            buttonColor: t.buttonNormal.ctFc,
+            buttonBgColor: t.buttonNormalCt.bgf,
+            buttonColor: t.buttonNormalCt.ctf,
           },
           disabled: {
             buttonBgColor: t.boxDisabled.bg,
@@ -300,11 +301,12 @@ export namespace ButtonS6 {
         export namespace Color {
           // type: outlined, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-            buttonColor: t.buttonNormal.bg,
-            borderBdColor: t.buttonNormal.bg,
+            buttonBgColor: t.buttonNormalCt.bg,
+            buttonColor: t.buttonNormalCt.ct,
+            borderBdColor: t.buttonNormalCt.ct,
             inFocus: {
-              buttonBgColor: t.buttonNormal.bgFc,
-              buttonColor: t.buttonNormal.ctFc,
+              buttonBgColor: t.buttonNormalCt.bgf,
+              buttonColor: t.buttonNormalCt.ctf,
             },
           }]
           // type: outlined, color: accent

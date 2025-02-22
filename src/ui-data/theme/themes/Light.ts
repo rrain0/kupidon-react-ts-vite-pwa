@@ -55,6 +55,18 @@ export const LightProps: ThemeProps = {
     bga4:         '#bbbbbb',
     cta4:         '#000000',
   },
+  boxNormal2: {
+    bg:           '#dddddd',
+    ct:           '#000000',
+    bgf:          '#dddddd',
+    ctf:          '#000000',
+  },
+  boxNormal3: {
+    bg:           '#b5b5b5',
+    ct:           '#ffffff',
+    bgf:          '#c5c5c5',
+    ctf:          '#ffffff',
+  },
   boxNormal4: {
     bg:           '#ffffff',
     ct:           '#232020',
@@ -134,14 +146,12 @@ export const LightProps: ThemeProps = {
     ct:            '#000000',
     bgFc:          '#dddddd',
     ctFc:          '#000000',
-    
-    bg2:           '#dddddd',
-    bgFc2:         '#dddddd',
-    
-    bg3:           '#b5b5b5',
-    ct3:           '#ffffff',
-    bgFc3:         '#c5c5c5',
-    ctFc3:         '#ffffff',
+  },
+  buttonNormalCt: {
+    bg:           'transparent',
+    ct:           '#bbbbbb',
+    bgf:          '#00000008',
+    ctf:          '#bbbbbb',
   },
   buttonMain: {
     bg:       '#7b7b7b',

@@ -35,6 +35,12 @@ export const LightWineProps: ThemeProps = { ...Light,
   
   
   
+  boxNormal2: { ...Light.boxNormal2,
+    bg:           '#ffdde5',
+    ct:           '#000000',
+    bgf:          '#ffc4d2',
+    ctf:          '#000000',
+  },
   boxAccent: { ...Light.boxAccent,
     bg:           '#cb3357',
     ct:           '#ffffff',
@@ -66,14 +72,6 @@ export const LightWineProps: ThemeProps = { ...Light,
   
   
   
-  buttonNormal: { ...Light.buttonNormal,
-    bg:            '#bbbbbb',
-    bg2:           '#ffdde5',
-    ct:            '#000000',
-    bgFc:          '#dddddd',
-    bgFc2:         '#ffc4d2',
-    ctFc:          '#000000',
-  },
   buttonMain: { ...Light.buttonMain,
     bg:        '#e8204f',
     ct:        '#ffffff',
