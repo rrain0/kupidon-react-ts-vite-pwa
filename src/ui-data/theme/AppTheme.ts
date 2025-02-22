@@ -79,8 +79,6 @@ export namespace AppTheme {
       ct6:          string
       ct7:          string
       
-      shadow:       string
-      
       ctSec:        string
       ctSec4:       string
       ctSec5:       string
@@ -259,6 +257,10 @@ export namespace AppTheme {
     errorSec: {
       ct:              string
     }
+    shadow: {
+      bg:              string
+      bg2:             string
+    },
     
     
     

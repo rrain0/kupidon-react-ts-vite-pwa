@@ -1,9 +1,15 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
@@ -13,6 +19,8 @@ import Children = ReactU.Children
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
+import OnClick = ReactU.OnClick
+import SoupIc = SvgIconsPack.SoupIc
 
 
 
@@ -20,33 +28,36 @@ import Txt = EmotionCommon.Txt
 
 export type DateTypeCardProps = ClassStyle & Children & Puro<{
   type: DateType
+  onClick: OnClick
 }>
 export const DateTypeCard = React.memo((props: DateTypeCardProps) => {
   const {
     className,
     style,
-    type = 'romantic',
+    type = 'cafe',
+    onClick,
   } = props
   
-  const typeData = DateTypeData[type]
-  const typeUiText = useUiValues(typeData.uiText)
+  const data = DateTypeData[type]
+  const uiValues = useUiValues(data.uiText)
   
   const uiText = useMemo(() => ({
-    dateTypeName: typeUiText.name,
-  }), [typeUiText])
+    dateTypeName: uiValues.name,
+  }), [uiValues])
   
   return (
-    <DateTypeBox
+    <Button
       className={className}
+      css={ButtonS6.t(dateTypeBoxS)}
       style={style}
       data-display-name="DateTypeCard"
+      onClick={onClick}
     >
-      <ImgSpark
-        css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)}
-        src={typeData.picture}
-      />
+      {({
+        cafe: <SoupIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.cafe.color }])} />,
+      } satisfies Record<DateType, React.ReactNode>)[type]}
       <Title>{uiText.dateTypeName}</Title>
-    </DateTypeBox>
+    </Button>
   )
 })
 DateTypeCard.displayName = 'DateTypeCard'
@@ -54,20 +65,23 @@ export default DateTypeCard
 
 
 
-const DateTypeBox = styled(Card)`
-  ${p => CardS.card3S(p.theme)};
-  width: 171px;
-  aspect-ratio: 0.924;
-  height: auto;
-  padding: 0;
-  gap: 0;
-  display: grid;
-  grid-template-rows: 1fr 44px;
-  place-items: center;
-`
+const dateTypeBoxS: AppWidgetStyle = t => [
+  ButtonS6.S.filled.rect.lg.normal4, {
+    button: {
+      hMin: 60, p: [12, 16], g: 16,
+      boxShadow: `${StyleVals.shadowLightSz} ${t.shadow.bg2}`,
+      display: 'grid', cols: 'auto 1fr', placeItems: 'center start',
+    },
+  },
+]
+
+const iconS: AppWidgetStyle = t => [
+  SvgIconS6.S.icon.icon.full.normal, {
+    icon: { sz: 36 },
+  },
+]
+
 const Title = styled.div`
-  // TODO Theme
-  color: black;
-  ${Txt.s17Bold};
+  ${Txt.s17};
 `
 

@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { MockDataDateArticles } from 'src/_mock-data/date-articles/MockDataDateArticles.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { allDateTypes } from 'src/ui-data/special/DateTypeData.ts'
+import { allDateCategories, DateCategory } from 'src/ui-data/special/DateCategoryData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -14,7 +14,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import DateArticlePreviewCard from 'src/ui/2-pages/DateArticles/parts/DateArticlePreviewCard.tsx'
-import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
+import DateCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -26,6 +26,8 @@ import noScrollbars = EmotionCommon.noScrollbars
 import row = EmotionCommon.row
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
+import params = RouteBuilder.params
+import full = RouteBuilder.full
 
 
 
@@ -42,7 +44,15 @@ const BowAndArrowsPage = React.memo(() => {
     ourPartners: 'Наши партнёры',
   }), [titleText])
   
-  const [searchParams] = useSearchParams()
+  
+  const navigate = useNavigate()
+  const [search] = useSearchParams()
+  
+  const setCategory = (category: DateCategory) => {
+    const newSearch = new URLSearchParams(search)
+    newSearch.set(RootRoute.datePlaces[params].category, category)
+    navigate(RootRoute.datePlaces[full]() + '?' + newSearch.toString())
+  }
   
   return (
     <>
@@ -72,7 +82,7 @@ const BowAndArrowsPage = React.memo(() => {
             <div style={{ height: 16 }} />
             
             <Link
-              to={RootRoute.datePlaces[fullAnySearchParams](searchParams)}
+              to={RootRoute.datePlaces[fullAnySearchParams](search)}
             >
               <HeaderArrow css={HeaderArrowS.page}>
                 {uiText.insightsAndPlacesForDate}
@@ -83,7 +93,14 @@ const BowAndArrowsPage = React.memo(() => {
             
             <DatePlacesOverflow>
               <DatePlacesList>
-                {allDateTypes.map(dt => <DateTypeCard key={dt} type={dt} />)}
+                {allDateCategories.map(dc => (
+                  <DateCategoryCard
+                    key={dc}
+                    style={{ cursor: 'pointer' }}
+                    category={dc}
+                    onClick={() => setCategory(dc)}
+                  />
+                ))}
               </DatePlacesList>
             </DatePlacesOverflow>
             

@@ -44,8 +44,6 @@ export const LightProps: ThemeProps = {
     ct6:          '#838383',
     ct7:          '#999999',
     
-    shadow:       '#00000026',
-    
     ctSec:        '#858585',
     ctSec4:       '#d1d1d1',
     ctSec5:       '#dddddd',
@@ -177,6 +175,8 @@ export const LightProps: ThemeProps = {
     ct:            '#bbbbbb',
   },
   
+  
+  
   ripple: {
     ct:              '#ffffff55',
     ctOnLight:       '#282c3422',
@@ -187,6 +187,10 @@ export const LightProps: ThemeProps = {
   },
   errorSec: {
     ct:        '#c17169',
+  },
+  shadow: {
+    bg:        '#00000026',
+    bg2:       '#7B7B7B26',
   },
   
   
@@ -256,7 +260,7 @@ export const LightProps: ThemeProps = {
   previewOverlayInfoMatchIndicator: {
     bg:         '#8D8D8D99',
     ct:         '#ffffff',
-    shadow:     'rgba(0, 0, 0, 0.15)',
+    shadow:     '#00000026',
   },
   
   

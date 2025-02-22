@@ -14,6 +14,7 @@ export namespace ReactU {
     className: string
     style: CSSProperties
   }>
+  export type OnClick<E = Element> = React.MouseEventHandler<E>
   export type First = Puro<{ first: boolean }>
   export type Last = Puro<{ last: boolean }>
   

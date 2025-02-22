@@ -23,7 +23,7 @@ export namespace CardS {
     ${col};
     gap: 10px;
     background: ${t.boxNormal.bg};
-    box-shadow: ${StyleVals.shadowSz} ${t.boxNormal.shadow};
+    box-shadow: ${StyleVals.shadowSz} ${t.shadow.bg};
     overflow: hidden;
   `
 

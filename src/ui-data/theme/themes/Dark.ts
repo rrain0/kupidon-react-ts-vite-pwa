@@ -45,8 +45,6 @@ export const DarkProps: ThemeProps = {
     ct6:          '#838383',
     ct7:          '#777777',
     
-    shadow:       'transparent',
-    
     ctSec:        '#858585',
     ctSec4:       '#666666',
     ctSec5:       '#42414c',
@@ -184,6 +182,10 @@ export const DarkProps: ThemeProps = {
   },
   errorSec: {
     ct:        '#7a514c',
+  },
+  shadow: {
+    bg:        'transparent',
+    bg2:       'transparent',
   },
   
   
