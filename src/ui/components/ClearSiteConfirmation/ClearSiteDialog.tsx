@@ -2,11 +2,9 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useEvent } from '@util/react/useEvent.ts'
 import React from 'react'
-import { AppStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -95,14 +93,7 @@ const icon = (t:Theme) => css`
     ${SvgIconS.El.icon.props.color.set(t.page.ct2)}
   }
 `
-const iconOnDanger = (t:Theme) => css`
-  ${SvgIconS.El.icon.thiz()} {
-    ${SvgIconS.El.icon.props.color.set(t.elementDanger.ct[0])}
-  }
-`
-const button: AppStyle = t => ButtonS6.W.t(t, {
-  button: { wMin: 90, g: '0.3em' },
-})
+
 
 const ModalReloading = styled.div`
   ${fixed};

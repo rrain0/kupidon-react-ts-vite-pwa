@@ -261,7 +261,7 @@ const Tests = React.memo((props: TestsProps) => {
       
       {/* <LeftBottomButtonBar>
         <Button
-          css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.normal2)}
+          css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.secondary)}
           onClick={() => {
           
           }}

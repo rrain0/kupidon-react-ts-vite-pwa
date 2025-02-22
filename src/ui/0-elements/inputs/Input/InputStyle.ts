@@ -141,10 +141,10 @@ export namespace InputStyle {
   const outlinedRectAddColorNormal = (t: AppTheme.Theme) => css`
     // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
-      background: ${t.input.bg[0]};
+      background: ${t.input.bg};
     }
     ${W.use.s.normal().e.input().thisUse} {
-      ${W.props.color.p.set(t.input.ct[0])};
+      ${W.props.color.p.set(t.input.ct)};
 
       ::placeholder {
         color: ${t.input.placeholder[0]};
@@ -162,7 +162,7 @@ export namespace InputStyle {
     // state: read-only
     ${W.use.s.readOnly().e.frame().thisUse} {
       cursor: auto;
-      color: ${t.input.ct[0]};
+      color: ${t.input.ct};
     }
     ${W.use.s.readOnly().e.border().thisUse} {
       border-color: ${t.page.ct2};
@@ -170,10 +170,10 @@ export namespace InputStyle {
 
     // state: disabled
     ${W.use.s.disabled().e.input().thisUse} {
-      ${W.props.color.p.set(t.input.ct[0])};
+      ${W.props.color.p.set(t.input.ct)};
     }
     ${W.use.s.disabled().e.border().thisUse} {
-      border-color: ${t.input.ct[0]};
+      border-color: ${t.input.ct};
     }
 
     // state: error

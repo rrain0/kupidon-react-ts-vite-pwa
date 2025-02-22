@@ -102,13 +102,13 @@ const Body = styled.div`
   ${row};
   gap: 10px;
   align-items: center;
-  background: ${p=>p.theme.toast.bg[0]};
+  background: ${p=>p.theme.toast.bg};
 `
 
 const Content = styled.div`
   ${row};
   flex: 1;
-  color: ${p=>p.theme.toast.ct[0]};
+  color: ${p=>p.theme.toast.ct};
   white-space: break-spaces;
   ${Txt.s14Thin};
 `

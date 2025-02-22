@@ -16,29 +16,29 @@ export const imPlaceholderBoxS = (t: AppTheme.Theme) => css`
   //pointer-events: none;
   border-radius: inherit;
   overflow: hidden;
-  background: ${t.photos.bg[0]};
+  background: ${t.photos.bg};
   ${flexC};
 `
 
 export const imPlaceholderIcS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconSz: '30%',
-  iconColor: t.photos.ct[0],
+  iconColor: t.photos.ct,
 }]
 export const imSmallPlaceholderIcS: AppWidgetStyle = [imPlaceholderIcS, {
   iconSz: '50%',
 }]
 export const imSmallPlaceholderIcFullTrans: AppWidgetStyle = t => [
-  IconButtonS6.S.trans.round.lg2.normal2, {
+  IconButtonS6.S.trans.round.lg2.secondary, {
     buttonSz: 'full',
     iconSz: '50%',
-    iconColor: t.photos.ct[0],
+    iconColor: t.photos.ct,
   },
 ]
 
 export const imPieProgressS = (t: AppTheme.Theme) => css`
   ${PieProgressStyle.El.thiz.pieProgress} {
     ${PieProgressStyle.Prop.prop.progressColor}: transparent;
-    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.ct[0]};
+    ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.ct};
     height: 30%;
     aspect-ratio: 1;
   }
@@ -54,6 +54,6 @@ export const imSmallPieProgressS = (t: AppTheme.Theme) => css`
 export const imPieProgressAccentS = (t: AppTheme.Theme) => css`
   ${imPieProgressS(t)};
   ${PieProgressStyle.El.thiz.pieProgress} {
-    ${PieProgressStyle.Prop.prop.restColor}: ${t.photos.bg[0]};
+    ${PieProgressStyle.Prop.prop.restColor}: ${t.photos.bg};
   }
 `

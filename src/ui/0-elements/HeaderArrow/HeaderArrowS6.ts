@@ -93,7 +93,7 @@ export namespace HeaderArrowS6 {
         
         export const baseColor: AppWidgetStyle = t => ({
           arrowIcon: {
-            color: t.page.ct1,
+            color: t.page.ct,
           },
         })
         export namespace Color {

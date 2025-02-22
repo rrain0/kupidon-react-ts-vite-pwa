@@ -130,10 +130,10 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
           <HeaderTextWrap
             onClick={() => {
               setTabsState('snapping')
-              setTabIdx(i+1)
+              setTabIdx(i + 1)
             }}
           >
-            {headers[i+1]}
+            {headers[i + 1]}
           </HeaderTextWrap>
         </AnimatedHeader>
       )
@@ -187,7 +187,7 @@ const AnimatedHeader = styled(animated.div)`
 `
 const HeaderTextWrap = styled.h3`
   ${p => Hdrs.page(p.theme)};
-  color: ${p => p.theme.page.ct2a};
+  color: ${p => p.theme.page.ct3};
   overflow-wrap: anywhere;
   user-select: none;
   cursor: pointer;

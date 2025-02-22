@@ -72,8 +72,8 @@ export namespace SvgIconS6 {
         export namespace Color {
           // type: icon, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-            iconColor: t.boxNormal.ct1b[0],
-            iconColorAcc: t.boxNormal.ct1b[0],
+            iconColor: t.boxNormal.ct3,
+            iconColorAcc: t.boxNormal.ct3,
           }]
         }
       }

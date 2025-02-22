@@ -81,12 +81,21 @@ export namespace IconButtonS6 {
           SvgGradIconS6.Parts.Type.icon.baseColor,
         ]
         export namespace Color {
-          // type: trans, color: normal2
-          export const normal2: AppWidgetStyle = t => [
+          // type: trans, color: normal
+          export const normal: AppWidgetStyle = t => [
             baseColor,
-            ButtonS6.Parts.Type.text.Color.normal2,
+            ButtonS6.Parts.Type.text.Color.normal,
             {
-              iconColor: t.buttonNormal.bg[0],
+              iconColor: t.boxTransNormal.ct,
+              // todo gradIcon
+            },
+          ]
+          // type: trans, color: secondary
+          export const secondary: AppWidgetStyle = t => [
+            baseColor,
+            ButtonS6.Parts.Type.text.Color.secondary,
+            {
+              iconColor: t.boxTransSec.ct,
               // todo gradIcon
             },
           ]
@@ -123,7 +132,7 @@ export namespace IconButtonS6 {
             baseColor,
             ButtonS6.Parts.Type.filled.Color.normal2,
             {
-              iconColor: t.buttonNormal.ct[0],
+              iconColor: t.buttonNormal.ct,
               // todo gradIcon
             },
           ]
@@ -140,7 +149,7 @@ export namespace IconButtonS6 {
             baseColor,
             ButtonS6.Parts.Type.filled.Color.accent,
             {
-              iconColor: t.buttonAccent.ct[0],
+              iconColor: t.boxAccent.ct,
               // todo gradIcon
             },
           ]
@@ -149,9 +158,9 @@ export namespace IconButtonS6 {
             baseColor,
             ButtonS6.Parts.Type.filled.Color.accent4,
             {
-              iconColor: t.boxAccent4.ct,
-              gradIconColor0: t.boxAccent4.ctGrad[0],
-              gradIconColor1: t.boxAccent4.ctGrad[1],
+              iconColor: t.boxAccentCt4.ct,
+              gradIconColor0: t.boxAccentCt4.ctGrad[0],
+              gradIconColor1: t.boxAccentCt4.ctGrad[1],
             },
           ]
         }

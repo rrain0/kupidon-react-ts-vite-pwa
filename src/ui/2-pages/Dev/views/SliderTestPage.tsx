@@ -9,60 +9,58 @@ import NumRange = RangeU.NumRange
 
 
 
-const SliderTestPage = React.memo(
-  () => {
-    
-    const [value2, setValue2] = useState(3)
-    
-    
-    return (
-      <>
-        
-        <Pages.PageSimpleColors>
-          <Pages.Content>
-            
-            <div>Views: Slider</div>
-            
-            <div css={{ height: 24 }}/>
-            
-            <Slider1/>
-            
-            <div css={{ height: 24 }}/>
-            
-            <Slider2/>
-            
-            <div css={{ height: 24 }}/>
-            
-            <Slider3/>
-            
-            <div css={{ height: 24 }}/>
-            
-            <Slider4/>
-            
-            <div css={{ height: 24 }}/>
-            
-            <SliderChangePosition/>
-            
-            <div css={{ height: 24 }}/>
-            
-            <SliderChangeMinMax/>
-            
-            <div css={{ height: 24 }}/>
-            
-            <SliderChangeWidth/>
-            
-            <div css={{ height: 24 }}/>
-          
-          </Pages.Content>
-        </Pages.PageSimpleColors>
-        
-        
-        <BottomButtonBar settingsBtn/>
+const SliderTestPage = React.memo(() => {
+  
+  const [value2, setValue2] = useState(3)
+  
+  
+  return (
+    <>
       
-      </>
-    )
-  }
-)
+      <Pages.PageSimpleColors>
+        <Pages.Content>
+          
+          <div>Views: Slider</div>
+          
+          <div css={{ height: 24 }} />
+          
+          <Slider1 />
+          
+          <div css={{ height: 24 }} />
+          
+          <Slider2 />
+          
+          <div css={{ height: 24 }} />
+          
+          <Slider3 />
+          
+          <div css={{ height: 24 }} />
+          
+          <Slider4 />
+          
+          <div css={{ height: 24 }} />
+          
+          <SliderChangePosition />
+          
+          <div css={{ height: 24 }} />
+          
+          <SliderChangeMinMax />
+          
+          <div css={{ height: 24 }} />
+          
+          <SliderChangeWidth />
+          
+          <div css={{ height: 24 }} />
+        
+        </Pages.Content>
+      </Pages.PageSimpleColors>
+      
+      
+      <BottomButtonBar settingsBtn />
+    
+    </>
+  )
+})
 export default SliderTestPage
 
 

@@ -32,7 +32,6 @@ import modalFloor500 = StyleVals.modalFloor500
 
 
 
-
 const NavBar = React.memo(() => {
     
   const titleText = useUiValues(TitleUiText)
@@ -127,17 +126,17 @@ const nav = (t: AppTheme.Theme) => css`
       w: 'auto', h: 'full', r: 10, p: [5, 0, 2],
       ...WidgetStyleCommon.colC, g: 3, flex: 1,
       bg: null,
-      color: t.navButton.ct[0],
+      color: t.navButton.ct,
       ...WidgetStyleCommon.Txt.s10,
     },
     icon: {
       sz: 'full',
-      color: t.navButton.ct[0],
+      color: t.navButton.ct,
     },
     gradIcon: {
       sz: 'full',
-      color0: t.navButton.ct[0],
-      color1: t.navButton.ct[0],
+      color0: t.navButton.ct,
+      color1: t.navButton.ct,
     },
   }])(t)}
   
@@ -152,8 +151,8 @@ const nav = (t: AppTheme.Theme) => css`
     iconColor: t.navButton.cta,
   }))(t)}
   a.active ${IconButtonS6.t(t => ({
-    gradIconColor0: t.gradIcon.ctGrad[0],
-    gradIconColor1: t.gradIcon.ctGrad[1],
+    gradIconColor0: t.boxAccentCt4.ctGrad[0],
+    gradIconColor1: t.boxAccentCt4.ctGrad[1],
   }))(t)}
   
   

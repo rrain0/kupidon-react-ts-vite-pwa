@@ -97,8 +97,8 @@ export namespace ImgSparkS6 {
         
         export const baseColor: AppWidgetStyle = t => ({
           imgFrame: {
-            bgColor: t.boxTrans.bg,
-            color: t.boxTrans.ctSec,
+            bgColor: t.boxSemitrans.bg,
+            color: t.boxSemitrans.ctSec,
           },
           errIcon: {
             color: t.errorSec.ct,

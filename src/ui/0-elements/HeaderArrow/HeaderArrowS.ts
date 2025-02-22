@@ -45,7 +45,7 @@ export namespace HeaderArrowS {
         ${Hdrs.page(t)};
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
-        ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct1};
+        ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct};
         height: 26px;
       }
     `
@@ -59,7 +59,7 @@ export namespace HeaderArrowS {
     ${W.u({ e: 'header', s: 'normal' }).thisUse} {
       height: fit-content;
       ${Txt.s18BoldWideLhNorm};
-      color: ${t.page.ct1};
+      color: ${t.page.ct};
       align-self: center;
       text-align: center;
       position: relative;

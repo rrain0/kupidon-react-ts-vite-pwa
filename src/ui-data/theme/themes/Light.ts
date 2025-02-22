@@ -12,10 +12,9 @@ export const LightProps: ThemeProps = {
   page: {
     bg:          '#f5f5f5',
     bgGrad:      ['#f5f5f5', '#f5f5f5', '#f5f5f5'],
-    ct1:         '#000000',
+    ct:          '#000000',
     ct2:         '#000000',
-    ct2a:        '#232020',
-    ct3:         '#999999',
+    ct3:         '#232020',
     ctSec:       '#858585',
     ctSec2:      '#7b7b7b',
   },
@@ -27,66 +26,73 @@ export const LightProps: ThemeProps = {
   },
   navButton: {
     bgFc:        '#f0f0f0',
-    ct:          ['#7b7b7b'],
+    ct:          '#7b7b7b',
     cta:         '#333333',
   },
   
   
   
   boxNormal: {
-    bg:              ['#ffffff'],
-    bg2:             ['#f0f0f0'],
-    bg3:             '#f0f0f0',
+    bg:           '#ffffff',
+    bg2:          '#f0f0f0',
     
-    ct:         ['#000000'],
-    ct1a:       ['#1b1919'],
-    ct1b:       ['#444444'],
-    ct2:        ['#555555'],
-    ct2b:       ['#5b5b5b'],
-    ct2c:       '#666666',
-    ct3:        '#7b7b7b',
-    ct3d:       ['#838383'],
-    ct3e:       ['#999999'],
-    ct4:        ['#d1d1d1'],
-    ct4b:       ['#dddddd'],
-    ct5:        '#e3e3e3',
-    ct6:        '#ececec',
+    ct:           '#000000',
+    ct2:          '#1b1919',
+    ct3:          '#444444',
+    ct4:          '#5b5b5b',
+    ct5:          '#7b7b7b',
+    ct6:          '#838383',
+    ct7:          '#999999',
     
-    ctSec:      '#858585',
+    shadow:       '#00000026',
     
-    cta:        '#333333',
-    cta2:       '#cbcad0',
-    cta3:       '#d1d1d1',
+    ctSec:        '#858585',
+    ctSec4:       '#d1d1d1',
+    ctSec5:       '#dddddd',
+    ctSec6:       '#e3e3e3',
     
-    shadow:     ['#00000026'],
+    cta2:         '#cbcad0',
+    bga4:         '#bbbbbb',
+    cta4:         '#000000',
   },
   boxNormal4: {
-    bg:         '#ffffff',
-    ct:         '#232020',
-    shadow:     '#A4A4A426',
-    
-    bgf:        '#ffffff',
-    ctf:        '#232020',
+    bg:           '#ffffff',
+    ct:           '#232020',
+    shadow:       '#A4A4A426',
+    bgf:          '#ffffff',
+    ctf:          '#232020',
   },
   boxSec: {
-    bg:         '#E0E0E0',
-    ct:         '#ABABAB',
+    bg:           '#E0E0E0',
+    ct:           '#ABABAB',
   },
   boxAccent: {
-    bg:       ['#bbbbbb'],
-    bg3:      '#aaaaaa',
-    ct:       ['#000000'],
-    ct2:      ['#F8F8F8'],
-    ct3:      '#ffffff',
+    bg:           '#333333',
+    ct:           '#ffffff',
+    bgf:          '#000000',
+    ctf:          '#ffffff',
+  },
+  boxAccentCt: {
+    bg:           'transparent',
+    ct:           '#333333',
+    bgf:          '#00000018',
+    ctf:          '#333333',
+    ctRipple:     '#00000022',
   },
   boxAccent4: {
-    bg:         '#ffffff',
-    ct:         '#1F1F1F',
-    ctGrad:     ['#1F1F1F', '#6D6D6D'],
-    shadow:     '#A4A4A426',
-    
-    bgf:        '#ffffff',
-    ctf:        '#232020',
+    bg:           '#bbbbbb',
+    ct:           '#000000',
+  },
+  boxAccentCt4: {
+    bg:           '#ffffff',
+    ct:           '#1F1F1F',
+    ctGrad:       ['#1F1F1F', '#6D6D6D'],
+    shadow:       '#A4A4A426',
+    bgf:          '#ffffff',
+    ctf:          '#1F1F1F',
+  },
+  boxAccent5: {
+    ct:           '#aaaaaa',
   },
   boxDanger: {
     bg:           '#ffffff',
@@ -94,7 +100,23 @@ export const LightProps: ThemeProps = {
     bgf:          '#ffe7e7',
     ctf:          '#e74c3c',
   },
-  boxTrans: {
+  boxDisabled: {
+    bg:           '#DCDCDC88',
+    ct:           '#55555588',
+  },
+  boxTransNormal: {
+    bg:           'transparent',
+    ct:           '#000000',
+    bgf:          '#00000011',
+    ctf:          '#000000',
+  },
+  boxTransSec: {
+    bg:           'transparent',
+    ct:           '#bbbbbb',
+    bgf:          '#00000011',
+    ctf:          '#bbbbbb',
+  },
+  boxSemitrans: {
     bg:           '#c4cdde99', // '#dce4f299'
     ct:           '#291f1d',
     ctSec:        '#ffffff',
@@ -108,8 +130,8 @@ export const LightProps: ThemeProps = {
   
   
   buttonNormal: {
-    bg:            ['#bbbbbb'],
-    ct:            ['#000000'],
+    bg:            '#bbbbbb',
+    ct:            '#000000',
     bgFc:          '#dddddd',
     ctFc:          '#000000',
     
@@ -122,16 +144,10 @@ export const LightProps: ThemeProps = {
     ctFc3:         '#ffffff',
   },
   buttonMain: {
-    bg:       ['#7b7b7b'],
-    ct:       ['#F8F8F8'],
+    bg:       '#7b7b7b',
+    ct:       '#F8F8F8',
     bgFc:     '#aaaaaa',
     ctFc:     '#F8F8F8',
-  },
-  buttonAccent: {
-    bg:            ['#bbbbbb'],
-    ct:            ['#000000'],
-    bgFc:          '#999999',
-    ctFc:          '#000000',
   },
   buttonAccent2: {
     bg:            '#bbbbbb',
@@ -146,9 +162,9 @@ export const LightProps: ThemeProps = {
     ctFc:          '#000000',
   },
   buttonSecondary: {
-    bg:            ['transparent'],
+    bg:            'transparent',
     bgFc:          '#99999988',
-    ct:            ['#bbbbbb'],
+    ct:            '#bbbbbb',
   },
   
   ripple: {
@@ -168,21 +184,12 @@ export const LightProps: ThemeProps = {
   inputRadio: {
     bgFc:      '#7b7b7b',
   },
-  buttonTrans: {
-    bgFc:      '#00000011',
-  },
-  
-  
-  
-  gradIcon: {
-    ctGrad:         ['#444444', '#444444'],
-  },
   
   
   
   input: {
-    bg:            ['#F8F8F8'],
-    ct:            ['#000000'],
+    bg:            '#F8F8F8',
+    ct:            '#000000',
     placeholder:   ['#777777'],
     borderGrad:    ['#7b7b7b', '#7b7b7b'],
     borderHover:   ['#7b7b7b'],
@@ -193,20 +200,6 @@ export const LightProps: ThemeProps = {
     trackBg:      ['#d1d1d1'],
     barBg:        ['#333333'],
     handleBg:     ['#F8F8F8'],
-  },
-  
-  elementDisabled: {
-    bg:       ['#DCDCDC'],
-    ct:       ['#555555'],
-  },
-  elementDanger: {
-    bg:       ['#7b7b7b'],
-    ct:       ['#ffffff'],
-    bgFc:     '#999999',
-    ctFc:     '#ffffff',
-  },
-  elementError: {
-    bg:       ['#ffced2'],
   },
   
   
@@ -259,8 +252,8 @@ export const LightProps: ThemeProps = {
   
   
   photos: {
-    bg:                      ['#ffeeee'],
-    ct:                      ['#291f1d'],
+    bg:                      '#ffeeee',
+    ct:                      '#291f1d',
     borderDrag:              ['#1F8DCD'],
     highlightFrameBg:        ['#8B8B8B'],
     highlightFrameAccentBg:  ['#000000'],
@@ -275,9 +268,10 @@ export const LightProps: ThemeProps = {
     bgFc:      '#000000',
   },
   
+  
   toast: {
-    bg:                   ['#ffffff'],
-    ct:                   ['#757575'],
+    bg:                   '#ffffff',
+    ct:                   '#757575',
     ct2:                  ['#b2b2b2'],
     ct3:                  '#000000',
     accentNormal:         ['#bb86fc'],
@@ -302,7 +296,7 @@ export const Light = {
   type: 'light',
   name: 'Light Grey' as const,
   icon: styled.div(themeIconCss({
-    accentColor: LightProps.buttonAccent.bg[0],
+    accentColor: LightProps.boxAccent.bg,
     bgColor1:    LightProps.page.bg,
     bgColor2:    LightProps.page.bg,
   })),

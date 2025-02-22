@@ -57,7 +57,7 @@ export namespace TextareaStyle {
     // normal
     ${El.frame} {
       border-radius: 15px;
-      background: ${t.input.bg[0]};
+      background: ${t.input.bg};
     }
     ${El.textarea} {
       width: 100%;
@@ -68,8 +68,8 @@ export namespace TextareaStyle {
       overflow: hidden;
       padding: 8px 16px;
       ${Txt.s18WideLh150};
-      color: ${t.input.ct[0]};
-      ${Prop.color}: ${t.input.ct[0]};
+      color: ${t.input.ct};
+      ${Prop.color}: ${t.input.ct};
 
       ::placeholder {
         color: ${t.input.placeholder[0]};
@@ -109,11 +109,11 @@ export namespace TextareaStyle {
     // disabled
     ${El.frameDisabled} {
       cursor: auto;
-      color: ${t.input.ct[0]};
-      ${Prop.color}: ${t.input.ct[0]};
+      color: ${t.input.ct};
+      ${Prop.color}: ${t.input.ct};
     }
     ${El.borderDisabled} {
-      border-color: ${t.input.ct[0]};
+      border-color: ${t.input.ct};
     }
     
     // error

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { LightPinkProps } from 'src/ui-data/theme/themes/LightPink.ts'
+import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -8,41 +8,41 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-export const LightOrangeProps: ThemeProps = { ...LightPinkProps,
+export const LightOrangeProps: ThemeProps = { ...LightPink,
   
-  statusBar: { ...LightPinkProps.statusBar,
+  statusBar: { ...LightPink.statusBar,
     bg: '#ffdb99',
   },
-  nav: { ...LightPinkProps.nav,
+  nav: { ...LightPink.nav,
     bg: '#ffdb99',
   },
-  navButton: { ...LightPinkProps.navButton,
+  navButton: { ...LightPink.navButton,
     bgFc:      '#ffffff',
     cta: '#ff802a',
   },
   
-  boxAccent: { ...LightPinkProps.boxAccent,
-    bg:     ['#fdca6d'],
+  boxAccent: { ...LightPink.boxAccent,
+    bg:       '#fbb027',
+    bgf:  '#ffb833',
+  },
+  boxAccent4: { ...LightPink.boxAccent4,
+    bg:     '#fdca6d',
   },
   
-  buttonMain: { ...LightPinkProps.buttonMain,
-    bg:      ['#ff935e'],
+  buttonMain: { ...LightPink.buttonMain,
+    bg:      '#ff935e',
     bgFc: '#ff802a',
   },
-  buttonAccent: { ...LightPinkProps.buttonAccent,
-    bg:       ['#fbb027'],
-    bgFc:  '#ffb833',
-  },
-  inputRadio: { ...LightPinkProps.inputRadio,
+  inputRadio: { ...LightPink.inputRadio,
     bgFc:  '#ffb833',
   },
   
-  input: { ...LightPinkProps.input,
+  input: { ...LightPink.input,
     borderGrad:      ['#ef7b7d', '#ef7b7d'],
     borderHover: ['#00a8f3'],
   },
   
-  bottomSheetHandle: { ...LightPinkProps.bottomSheetHandle,
+  bottomSheetHandle: { ...LightPink.bottomSheetHandle,
     bg:       '#ff935e',
   },
   
@@ -55,8 +55,8 @@ export const LightOrange = {
   type: 'light',
   name: 'Light Orange' as const,
   icon: styled.div(themeIconCss({
-    accentColor: LightOrangeProps.buttonAccent.bg[0],
-    bgColor1:   LightOrangeProps.buttonAccent.bg[0],
-    bgColor2:   LightOrangeProps.boxNormal.bg[0],
+    accentColor: LightOrangeProps.boxAccent.bg,
+    bgColor1:   LightOrangeProps.boxAccent.bg,
+    bgColor2:   LightOrangeProps.boxNormal.bg,
   })),
 } satisfies Theme

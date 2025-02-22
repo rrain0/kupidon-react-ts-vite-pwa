@@ -100,13 +100,13 @@ export namespace RadioInputStyle {
     // hover
     ${hoverable}{
       ${El.borderHover}{
-        background: ${t.buttonTrans.bgFc};
+        background: ${t.boxTransNormal.bgf};
       }
     }
     
     // focus-visible
     ${El.borderFocusVisible}{
-      background: ${t.buttonTrans.bgFc};
+      background: ${t.boxTransNormal.bgf};
     }
   `
   

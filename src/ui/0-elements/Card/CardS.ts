@@ -13,7 +13,7 @@ export namespace CardS {
     border-radius: 15px;
     ${col};
     gap: inherit;
-    background-color: ${t.boxNormal.bg[0]};
+    background-color: ${t.boxNormal.bg};
     overflow: hidden;
   `
   
@@ -22,8 +22,8 @@ export namespace CardS {
     border-radius: 15px;
     ${col};
     gap: 10px;
-    background: ${t.boxNormal.bg[0]};
-    box-shadow: ${StyleVals.shadowSz} ${t.boxNormal.shadow[0]};
+    background: ${t.boxNormal.bg};
+    box-shadow: ${StyleVals.shadowSz} ${t.boxNormal.shadow};
     overflow: hidden;
   `
 

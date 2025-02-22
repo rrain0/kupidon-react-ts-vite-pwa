@@ -13,7 +13,7 @@ export const useOverlayUrl = (overlayName: string) => {
   const [search, setSearch] = useSearchParams()
   
   // ...?overlay=dialog1&overlay=bottomSheet2&...
-  const [isOpen, isLastOpen] = useMemo(() => {
+  const [isOpen, isOpenLast] = useMemo(() => {
     const overlays: string[] = search.getAll(AppRoutes.overlayParamName)
     return [
       overlays.includes(overlayName),
@@ -38,7 +38,7 @@ export const useOverlayUrl = (overlayName: string) => {
   
   useEffect(() => {
     disableClose()
-    if (isLastOpen && needClose) {
+    if (isOpenLast && needClose) {
       // todo make GoBackRecoil
       navigate(-1)
     }

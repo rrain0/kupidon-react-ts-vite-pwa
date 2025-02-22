@@ -176,17 +176,17 @@ export namespace SelectItemS6 {
             ButtonS6.Parts.Type.filled.Color.normal,
             { add: SvgIconS6.Parts.Type.icon.Color.normal },
             SelectMeterS6.Parts.Type.row.Color.normal,
-            { edit: IconButtonS6.Parts.Type.trans.Color.normal2 },
+            { edit: IconButtonS6.Parts.Type.trans.Color.secondary },
             {
-              buttonColor: t.boxNormal.ct[0],
-              buttonBgColor: t.boxNormal.bg2[0],
-              editIconColor: t.boxNormal.ct1b[0],
+              buttonColor: t.boxNormal.ct,
+              buttonBgColor: t.boxNormal.bg2,
+              editIconColor: t.boxNormal.ct3,
               inFocus: {
-                buttonColor: t.boxNormal.ct[0],
+                buttonColor: t.boxNormal.ct,
                 buttonBgColor: t.boxNormal.cta2,
               },
               selected: {
-                borderBdColor: t.boxNormal.ct1b[0],
+                borderBdColor: t.boxNormal.ct3,
               },
             },
           ]

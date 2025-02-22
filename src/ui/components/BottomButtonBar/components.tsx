@@ -30,6 +30,7 @@ export namespace ButtonBarComponents {
   
   
   
+  import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
   export const TopButtonBarFrame = styled.section`
     pointer-events: none;
     ${fixedTop};
@@ -113,19 +114,23 @@ export namespace ButtonBarComponents {
   })
   
   
-  export const BackBtn = React.memo(() => {
+  // TODO remove & replace by BackBtn0
+  export const BackBtn0 = React.memo(() => {
     const navigate = useNavigate()
     const back = useCallback(() => navigate(-1), [navigate])
     
     return (
       <Button
-        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
+        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.secondary)}
         onClick={back}
       >
         <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
       </Button>
     )
   })
+  
+  
+  
   
   
   
@@ -139,7 +144,7 @@ export namespace ButtonBarComponents {
     
     return (
       <Button
-        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
+        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.secondary)}
         onClick={reload}
       >
         <ArrowReloadIc css={isReloading && css`
@@ -168,7 +173,7 @@ export namespace ButtonBarComponents {
     
     return (
       <Button
-        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.normal2)}
+        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.secondary)}
         onClick={props.refresh}
       >
         <ArrowReloadIc

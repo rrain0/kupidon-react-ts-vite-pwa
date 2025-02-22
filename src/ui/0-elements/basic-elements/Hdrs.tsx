@@ -15,7 +15,7 @@ export namespace Hdrs {
     text-align: center;
     // В фигме заголовки страниц жирные, но обычнфм шрифтом лучше смотрится
     ${Txt.s24Wide};
-    color: ${t.page.ct1};
+    color: ${t.page.ct};
   `
   export const Page = styled.h3`
     ${resetH};
@@ -51,7 +51,7 @@ export namespace Hdrs {
   
   export const card3 = (t: AppTheme.Theme) => css`
     ${Txt.s18LhNorm};
-    color: ${t.boxNormal.ct[0]};
+    color: ${t.boxNormal.ct};
   `
   export const Card = styled.h4`
     ${resetH};

@@ -41,7 +41,7 @@ export namespace DataFieldStyle {
     ${El.frame} {
       cursor: pointer;
       border-radius: 15px;
-      background: ${t.input.bg[0]};
+      background: ${t.input.bg};
       min-width: 0;
       width: 100%;
       min-height: 50px;
@@ -49,8 +49,8 @@ export namespace DataFieldStyle {
 
       overflow-wrap: anywhere;
       ${Txt.s18WideLh150};
-      color: ${t.input.ct[0]};
-      ${Prop.color}: ${t.input.ct[0]};
+      color: ${t.input.ct};
+      ${Prop.color}: ${t.input.ct};
     }
     ${El.border} {
       border: 2px solid transparent;
@@ -101,8 +101,8 @@ export namespace DataFieldStyle {
     ${interactive(t)};
     ${El.frame} {
       cursor: auto;
-      color: ${t.input.ct[0]};
-      ${Prop.color}: ${t.input.ct[0]};
+      color: ${t.input.ct};
+      ${Prop.color}: ${t.input.ct};
     }
     ${El.border} {
       border: 2px solid ${t.page.ct2};

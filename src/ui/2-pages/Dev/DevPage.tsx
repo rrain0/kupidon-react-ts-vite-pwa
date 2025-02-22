@@ -224,7 +224,7 @@ const DevPage = React.memo(() => {
               height: 200px;
               ${flexC};
               border-radius: 16px;
-              background: ${t.boxNormal.bg[0]};
+              background: ${t.boxNormal.bg};
             `}
           >
             <PieProgress
@@ -243,8 +243,8 @@ const DevPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxNormal.bg[0]};
-              color: ${t.boxNormal.ct[0]};
+              background: ${t.boxNormal.bg};
+              color: ${t.boxNormal.ct};
             `}
           >
             Контент.<br />
@@ -257,8 +257,8 @@ const DevPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxNormal.bg2[0]};
-              color: ${t.boxNormal.ct[0]};
+              background: ${t.boxNormal.bg2};
+              color: ${t.boxNormal.ct};
             `}
           >
             Контент.<br />
@@ -271,12 +271,12 @@ const DevPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxAccent.bg[0]};
-              color: ${t.boxAccent.ct[0]};
+              background: ${t.boxAccent4.bg};
+              color: ${t.boxAccent4.ct};
             `}
           >
             Контент.<br />
-            Theme.boxAccent
+            Theme.boxAccent4
           </div>
           
           
@@ -286,8 +286,8 @@ const DevPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxAccent.bg[0]};
-              color: ${t.boxAccent.ct[0]};
+              background: ${t.boxAccent4.bg};
+              color: ${t.boxAccent4.ct};
             `}
           >
             <CheckboxInput
@@ -305,8 +305,8 @@ const DevPage = React.memo(() => {
               position: relative;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxNormal.bg[0]};
-              color: ${t.boxNormal.ct[0]};
+              background: ${t.boxNormal.bg};
+              color: ${t.boxNormal.ct};
             `}
           >
             <div>onEvent Test</div>

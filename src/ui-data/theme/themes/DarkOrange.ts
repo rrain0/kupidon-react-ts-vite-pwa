@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { DarkPinkProps } from 'src/ui-data/theme/themes/DarkPink.ts'
+import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 import ThemeProps = AppTheme.ThemeProps
@@ -8,44 +8,44 @@ import ThemeProps = AppTheme.ThemeProps
 
 
 
-export const DarkOrangeProps: ThemeProps = { ...DarkPinkProps,
+export const DarkOrangeProps: ThemeProps = { ...DarkPink,
   
-  statusBar: { ...DarkPinkProps.statusBar,
+  statusBar: { ...DarkPink.statusBar,
     bg: '#dd8f2f',
   },
-  nav: { ...DarkPinkProps.nav,
+  nav: { ...DarkPink.nav,
     bg: '#282c34',
   },
-  navButton: { ...DarkPinkProps.navButton,
+  navButton: { ...DarkPink.navButton,
     cta: '#dd7b39',
   },
   
-  boxAccent: { ...DarkPinkProps.boxAccent,
-    bg:     ['#dd7b39'],
+  boxAccent: { ...DarkPink.boxAccent,
+    bg:           '#dd8f2f',
+    ct:       '#000000',
+    bgf:      '#f3b238',
+    ctf:  '#000000',
+  },
+  boxAccent4: { ...DarkPink.boxAccent4,
+    bg:     '#dd7b39',
   },
   
-  buttonMain: { ...DarkPinkProps.buttonMain,
-    bg:      ['#ff935e'],
-    ct:      ['#000000'],
+  buttonMain: { ...DarkPink.buttonMain,
+    bg:      '#ff935e',
+    ct:      '#000000',
     bgFc:    '#ff802a',
     ctFc:    '#000000',
   },
-  buttonAccent: { ...DarkPinkProps.buttonAccent,
-    bg:           ['#dd8f2f'],
-    ct:       ['#000000'],
-    bgFc:      '#f3b238',
-    ctFc:  '#000000',
-  },
-  inputRadio: { ...DarkPinkProps.inputRadio,
+  inputRadio: { ...DarkPink.inputRadio,
     bgFc:  '#d9816f',
   },
   
-  input: { ...DarkPinkProps.input,
+  input: { ...DarkPink.input,
     borderGrad:      ['#ef7b7d', '#ef7b7d'],
     borderHover: ['#00a8f3'],
   },
   
-  bottomSheetHandle: { ...DarkPinkProps.bottomSheetHandle,
+  bottomSheetHandle: { ...DarkPink.bottomSheetHandle,
     bg: '#ff935e',
   },
 }
@@ -57,8 +57,8 @@ export const DarkOrange = {
   type: 'dark',
   name: 'Dark Orange' as const,
   icon: styled.div(themeIconCss({
-    accentColor: DarkOrangeProps.buttonAccent.bg[0],
-    bgColor1:   DarkOrangeProps.buttonAccent.bg[0],
-    bgColor2:   DarkOrangeProps.page.bg,
+    accentColor: DarkOrangeProps.boxAccent.bg,
+    bgColor1:    DarkOrangeProps.boxAccent.bg,
+    bgColor2:    DarkOrangeProps.page.bg,
   })),
 } satisfies Theme

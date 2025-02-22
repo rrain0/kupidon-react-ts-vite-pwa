@@ -332,7 +332,7 @@ const pageContentS = css`
 
 const InfoCard = styled.div`
   ${SummaryPageParts.cardS};
-  background: ${p => p.theme.boxNormal.bg[0]};
+  background: ${p => p.theme.boxNormal.bg};
   display: grid;
   grid:
     'ava  .    name .    eye ' auto
@@ -383,13 +383,9 @@ const Eye = styled.div`
   margin-top: -14px;
   margin-right: -6px;
 `
-const eyeIcS0: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
   iconSz: 'full',
-  iconColor: t.boxNormal.ct3d[0],
-}]
-const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal2, {
-  iconSz: 'full',
-  iconColor: t.boxNormal.ct3d[0],
+  iconColor: t.boxNormal.ct6,
 }]
 
 
@@ -399,7 +395,7 @@ const Name = styled.div`
   font-weight: 600;
   font-size: 20px;
   line-height: 119%;
-  color: ${p => p.theme.boxNormal.ct1a[0]};
+  color: ${p => p.theme.boxNormal.ct2};
 `
 const Info = styled.div`
   grid-area: info;
@@ -407,7 +403,7 @@ const Info = styled.div`
   font-weight: 400;
   font-size: 17px;
   line-height: 119%;
-  color: ${p => p.theme.boxNormal.ct3d[0]};
+  color: ${p => p.theme.boxNormal.ct6};
 `
 const Edit = styled.div`
   grid-area: edit;
@@ -427,7 +423,7 @@ const Divider = styled.div`
   grid-area: div;
   width: 100%;
   height: 1px;
-  background-color: ${p => p.theme.boxNormal.ct5};
+  background-color: ${p => p.theme.boxNormal.ctSec6};
 `
 
 
@@ -448,18 +444,18 @@ const LineProgressFrame = styled.div`
   height: 8px;
   border-radius: 999999px;
   ${row};
-  background-color: ${p => p.theme.boxNormal.ct5};
+  background-color: ${p => p.theme.boxNormal.ctSec6};
 `
 const LineProgress = styled.div`
   width: 0;
   height: 100%;
   border-radius: inherit;
   transition: width 1000ms ease-in-out;
-  background-color: ${p => p.theme.boxAccent.bg3};
+  background-color: ${p => p.theme.boxAccent5.ct};
 `
 const LinePercent = styled.div`
   ${Txt.s24Bold};
-  color: ${p => p.theme.boxAccent.bg3};
+  color: ${p => p.theme.boxAccent5.ct};
 `
 
 
@@ -467,6 +463,6 @@ const CompleteProfileText = styled.div`
   grid-area: cpt;
   justify-self: stretch;
   ${Txt.s16Wide};
-  color: ${p => p.theme.boxNormal.ct1a[0]};
+  color: ${p => p.theme.boxNormal.ct2};
   text-align: center;
 `

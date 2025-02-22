@@ -166,7 +166,7 @@ export namespace CheckboxInputStyle {
       border-radius: 999999px;
       padding: 14px;
       ${flexC};
-      ${W.e.frame.e.p.color.set(t.buttonNormal.bg[0])};
+      ${W.e.frame.e.p.color.set(t.buttonNormal.bg)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('center')};
@@ -175,12 +175,12 @@ export namespace CheckboxInputStyle {
     // state: hover
     ${hoverable} {
       ${W.use.s.hover().e.frame().thisUse} {
-        background: ${t.buttonTrans.bgFc};
+        background: ${t.boxTransNormal.bgf};
       }
     }
     // state: active, focus, focus-visible
     ${W.use.s.anyFocus().e.frame().thisUse} {
-      background: ${t.buttonTrans.bgFc};
+      background: ${t.boxTransNormal.bgf};
     }
   `
   
@@ -209,12 +209,12 @@ export namespace CheckboxInputStyle {
     // state: hover
     ${hoverable} {
       ${W.use.s.hover().e.frame().thisUse} {
-        background: ${t.buttonTrans.bgFc};
+        background: ${t.boxTransNormal.bgf};
       }
     }
     // state: focus-visible
     ${W.use.s.focusVisible().e.frame().thisUse} {
-      background: ${t.buttonTrans.bgFc};
+      background: ${t.boxTransNormal.bgf};
     }
   `
   

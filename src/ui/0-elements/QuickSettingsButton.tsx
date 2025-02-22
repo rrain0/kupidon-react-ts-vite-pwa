@@ -18,7 +18,7 @@ type QuickSettingsButtonProps = Puro<{
 const QuickSettingsButton = React.memo((props: QuickSettingsButtonProps) => {
   return (
     <Button
-      css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.normal2)}
+      css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.secondary)}
       {...props}
     >
       <GearIc />

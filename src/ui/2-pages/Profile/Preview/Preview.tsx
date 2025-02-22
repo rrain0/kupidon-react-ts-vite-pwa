@@ -562,7 +562,7 @@ const NoImagesBox = styled.div`
   position: relative;
   z-index: 1;
   border-radius: var(--photo-r);
-  background-color: ${p => p.theme.boxTrans.bg};
+  background-color: ${p => p.theme.boxSemitrans.bg};
   ${gridC};
   grid:
     '.' 1fr
@@ -570,11 +570,11 @@ const NoImagesBox = styled.div`
     't' 1fr
     / 100%;
   ;
-  color: ${p => p.theme.boxTrans.ct};
+  color: ${p => p.theme.boxSemitrans.ct};
 `
 const imSmallPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
   icon: {
-    area: 'p', sz: '112%', color: t.boxTrans.ct,
+    area: 'p', sz: '112%', color: t.boxSemitrans.ct,
   },
 }]
 const NoImagesTitle = styled.div`

@@ -131,10 +131,12 @@ const BowAndArrowsPage = React.memo(() => {
 export default BowAndArrowsPage
 
 
+
 const PageHeaderBox = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
+  align-items: center;
 `
 const calendarButtonS: AppWidgetStyle = t => [
   IconButtonS6.S.filled.round.lg.accent4, {

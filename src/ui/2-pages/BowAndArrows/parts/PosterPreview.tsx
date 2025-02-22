@@ -77,7 +77,7 @@ const Frame = styled.div`
   display: grid;
   grid: 'meter' auto / auto;
   // TODO если начать листать, то тень будет кринжово смотреться
-  box-shadow: ${StyleVals.shadowSz} #00000026;
+  box-shadow: ${StyleVals.shadowSz} ${p => p.theme.boxNormal.shadow};
 `
 
 

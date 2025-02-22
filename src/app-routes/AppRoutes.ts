@@ -10,7 +10,7 @@ import params = RouteBuilder.params
 export namespace AppRoutes {
   
   
-  export const overlayParamName = 'overlay'
+  export const overlayParamName = 'overlay' as const
   
   
   
@@ -66,6 +66,12 @@ export namespace AppRoutes {
   })
   const datePlaces = buildRoute({
     [path]: 'date-places',
+    [params]: {
+      // ...?category=romantic
+      category: 'category',
+      // ...?type=cafe
+      type: 'type',
+    },
   })
   
   

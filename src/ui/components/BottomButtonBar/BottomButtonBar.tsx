@@ -9,7 +9,7 @@ import PartialUndef = TypeU.PartialUndef
 import BottomButtonBarFrame = ButtonBarComponents.BottomButtonBarFrame
 import ButtonsContainer = ButtonBarComponents.ButtonsContainer
 import LeftButtonsContainer = ButtonBarComponents.LeftButtonsContainer
-import BackBtn = ButtonBarComponents.BackBtn
+import BackBtn0 = ButtonBarComponents.BackBtn0
 import CenterButtonsContainer = ButtonBarComponents.CenterButtonsContainer
 import SettingsBtn = ButtonBarComponents.SettingsBtn
 import RightButtonsContainer = ButtonBarComponents.RightButtonsContainer
@@ -59,7 +59,7 @@ const BottomButtonBar = React.memo(
             <ButtonsContainer>
               
               <LeftButtonsContainer>
-                {props.backBtn && <BackBtn />}
+                {props.backBtn && <BackBtn0 />}
                 {props.settingsBtnLeft && <SettingsBtn />}
                 {props.leftChildren}
               </LeftButtonsContainer>

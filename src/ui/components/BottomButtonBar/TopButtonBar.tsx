@@ -11,7 +11,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import ButtonsContainer = ButtonBarComponents.ButtonsContainer
 import LeftButtonsContainer = ButtonBarComponents.LeftButtonsContainer
-import BackBtn = ButtonBarComponents.BackBtn
+import BackBtn0 = ButtonBarComponents.BackBtn0
 import CenterButtonsContainer = ButtonBarComponents.CenterButtonsContainer
 import SettingsBtn = ButtonBarComponents.SettingsBtn
 import RightButtonsContainer = ButtonBarComponents.RightButtonsContainer
@@ -35,56 +35,56 @@ export type ForwardRefProps = React.JSX.IntrinsicElements['section']
 type RefElement = HTMLDivElement
 
 export type TopButtonBarProps = TopButtonBarCustomProps & ForwardRefProps
-const TopButtonBar =
-React.memo(
-React.forwardRef<RefElement, TopButtonBarProps>(
-(props, forwardedRef)=>{
-  
-  const elemRef = useRef<RefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
-  
-  
-  return <>
+const TopButtonBar = React.memo(React.forwardRef<RefElement, TopButtonBarProps>(
+  (props, forwardedRef) => {
     
-    <Global
-      styles={css`
-        :root{
-          --top-button-bar-height: 70px;
-        }
-      `}
-    />
+    const elemRef = useRef<RefElement>(null)
+    useImperativeHandle(forwardedRef, () => elemRef.current!, [])
     
-    <TopButtonBarFrame
-      {...props}
-      ref={elemRef}
-    >
-      <ButtonsContainer>
-        
-        <LeftButtonsContainer>
-          {props.backBtn && <BackBtn/>}
-          {props.leftChildren}
-        </LeftButtonsContainer>
-        
-        
-        <CenterButtonsContainer>
-          
-          {props.children}
-          
-          {props.settingsBtn && <SettingsBtn/>}
-          
-        </CenterButtonsContainer>
-        
-        
-        <RightButtonsContainer>
-          {props.rightChildren}
-          {props.refreshBtn && <RefreshBtn/>}
-        </RightButtonsContainer>
-        
-      </ButtonsContainer>
-    </TopButtonBarFrame>
     
-  </>
-}))
+    return (
+      <>
+        
+        <Global
+          styles={css`
+            :root{
+              --top-button-bar-height: 70px;
+            }
+          `}
+        />
+        
+        <TopButtonBarFrame
+          {...props}
+          ref={elemRef}
+        >
+          <ButtonsContainer>
+            
+            <LeftButtonsContainer>
+              {props.backBtn && <BackBtn0 />}
+              {props.leftChildren}
+            </LeftButtonsContainer>
+            
+            
+            <CenterButtonsContainer>
+              
+              {props.children}
+              
+              {props.settingsBtn && <SettingsBtn />}
+              
+            </CenterButtonsContainer>
+            
+            
+            <RightButtonsContainer>
+              {props.rightChildren}
+              {props.refreshBtn && <RefreshBtn />}
+            </RightButtonsContainer>
+            
+          </ButtonsContainer>
+        </TopButtonBarFrame>
+        
+      </>
+    )
+  }))
 export default TopButtonBar
 
 

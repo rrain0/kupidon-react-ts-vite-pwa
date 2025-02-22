@@ -33,109 +33,108 @@ const tilesHeightValues: NumRangeNullable[] = [
 const overlayName = 'partnerHeight'
 
 
-const PartnerHeightOption = React.memo(
-  () => {
-    const titleText = useUiValues(TitleUiText)
-    const optionText = useUiValues(OptionUiText)
-    
-    const text = {
-      any: optionText.any.toLowerCase(),
-      from: optionText.from.toLowerCase(),
-      to: optionText.to.toLowerCase(),
-      cm: optionText.cm.toLowerCase(),
-    }
-    
-    
-    /* const [heightMinMax, setHeightMinMax] = useState<NumRange>([129, 231])
-    useEffect(() => {
-      let variant = 1 as 1 | 2
-      const id = setInterval(()=>{
-        if (variant === 1) {
-          setHeightMinMax([50, 400])
-          variant = 2
-        }
-        else {
-          setHeightMinMax([129, 231])
-          variant = 1
-        }
-      }, 3000)
-      return ()=>clearInterval(id)
-    }, []) */
-    
-    
-    const [heightRange, setHeightRange] = useState<NumRangeNullable>([null, null])
-    const [widgetRange, setWidgetRange] = useState<NumRange>(
-      () => mapHeightRangeToWidgetRange(heightRange)
-    )
-    
-    useStateMapperSync(
-      heightRange, widgetRange,
-      setHeightRange, setWidgetRange,
-      (w, h) => ArrayU.mergeMappedIf(
-        h, w,
-        mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
-      ),
-      (h, w) => ArrayU.mergeMappedIf(
-        w, h,
-        mapHeightRangeToWidgetRange(h), mapWidgetRangeToHeightRange(w)
-      )
-    )
-    
-    const textValue = (heightRange: NumRangeNullable) => {
-      const [from, to] = heightRange
-      if (from === null && to === null) return text.any
-      if (from === null) return `${text.to} ${to} ${text.cm}`
-      if (to === null) return `${from}+ ${text.cm}`
-      if (from === to) return `${from} ${text.cm}`
-      return `${from} - ${to} ${text.cm}`
-    }
-    
-    
-    
-    
-    const { isOpen, open, close } = useOverlayUrl(overlayName)
-    
-    
-    const activeBtn = ButtonS6.t(ButtonS6.S.filled.rounded.md.accent)
-    const inactiveBtn = ButtonS6.t(ButtonS6.S.outlined.rounded.md.accent)
-    
-    return (
-      <>
-        <OptionItem
-          icon={<RulerVerticalGradIc />}
-          title={titleText.partnerHeight}
-          value={textValue(heightRange)}
-          onClick={open}
-        />
-        
-        
-        <ModalRangePicker
-          isOpen={isOpen}
-          close={close}
-          title={titleText.partnerHeight}
-          text={textValue(heightRange)}
-          
-          range={widgetRange}
-          setRange={setWidgetRange}
-          minMax={heightMinMax}
-        >
-          <div css={tilesGrid}>
-            {tilesHeightValues.map(it => (
-              <Button
-                css={ArrayU.eq(heightRange, it) ? activeBtn : inactiveBtn}
-                key={it.join(' ')}
-                onClick={() => setHeightRange(it)}
-              >
-                {textValue(it)}
-              </Button>
-            ))}
-          </div>
-        </ModalRangePicker>
-        
-      </>
-    )
+
+const PartnerHeightOption = React.memo(() => {
+  const titleText = useUiValues(TitleUiText)
+  const optionText = useUiValues(OptionUiText)
+  
+  const text = {
+    any: optionText.any.toLowerCase(),
+    from: optionText.from.toLowerCase(),
+    to: optionText.to.toLowerCase(),
+    cm: optionText.cm.toLowerCase(),
   }
-)
+  
+  
+  /* const [heightMinMax, setHeightMinMax] = useState<NumRange>([129, 231])
+  useEffect(() => {
+    let variant = 1 as 1 | 2
+    const id = setInterval(()=>{
+      if (variant === 1) {
+        setHeightMinMax([50, 400])
+        variant = 2
+      }
+      else {
+        setHeightMinMax([129, 231])
+        variant = 1
+      }
+    }, 3000)
+    return ()=>clearInterval(id)
+  }, []) */
+  
+  
+  const [heightRange, setHeightRange] = useState<NumRangeNullable>([null, null])
+  const [widgetRange, setWidgetRange] = useState<NumRange>(
+    () => mapHeightRangeToWidgetRange(heightRange)
+  )
+  
+  useStateMapperSync(
+    heightRange, widgetRange,
+    setHeightRange, setWidgetRange,
+    (w, h) => ArrayU.mergeMappedIf(
+      h, w,
+      mapWidgetRangeToHeightRange(w), mapHeightRangeToWidgetRange(h)
+    ),
+    (h, w) => ArrayU.mergeMappedIf(
+      w, h,
+      mapHeightRangeToWidgetRange(h), mapWidgetRangeToHeightRange(w)
+    )
+  )
+  
+  const textValue = (heightRange: NumRangeNullable) => {
+    const [from, to] = heightRange
+    if (from === null && to === null) return text.any
+    if (from === null) return `${text.to} ${to} ${text.cm}`
+    if (to === null) return `${from}+ ${text.cm}`
+    if (from === to) return `${from} ${text.cm}`
+    return `${from} - ${to} ${text.cm}`
+  }
+  
+  
+  
+  
+  const { isOpen, open, close } = useOverlayUrl(overlayName)
+  
+  
+  const activeBtnS = ButtonS6.t(ButtonS6.S.filled.rounded.md.accent)
+  const inactiveBtnS = ButtonS6.t(ButtonS6.S.outlined.rounded.md.accent)
+  
+  return (
+    <>
+      <OptionItem
+        icon={<RulerVerticalGradIc />}
+        title={titleText.partnerHeight}
+        value={textValue(heightRange)}
+        onClick={open}
+      />
+      
+      
+      <ModalRangePicker
+        isOpen={isOpen}
+        close={close}
+        title={titleText.partnerHeight}
+        text={textValue(heightRange)}
+        
+        range={widgetRange}
+        setRange={setWidgetRange}
+        minMax={heightMinMax}
+      >
+        <div css={tilesGrid}>
+          {tilesHeightValues.map(it => (
+            <Button
+              css={ArrayU.eq(heightRange, it) ? activeBtnS : inactiveBtnS}
+              key={it.join(' ')}
+              onClick={() => setHeightRange(it)}
+            >
+              {textValue(it)}
+            </Button>
+          ))}
+        </div>
+      </ModalRangePicker>
+      
+    </>
+  )
+})
 export default PartnerHeightOption
 
 
@@ -171,7 +170,7 @@ function mapHeightRangeToWidgetRange(heightRange: NumRangeNullable): NumRange {
       if (heightRange[0] < heightMinMax[0]) return heightMinMax[0]
       return heightRange[0]
     }(),
-    function(){
+    function() {
       if (heightRange[1] === null) return heightMinMax[1]
       if (heightRange[1] > heightMinMax[1]) return heightMinMax[1]
       return heightRange[1]
