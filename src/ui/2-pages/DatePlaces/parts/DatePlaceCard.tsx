@@ -12,70 +12,72 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { DateCategory, DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DatePlace, DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
+import Children = ReactU.Children
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
+import params = RouteBuilder.params
+import full = RouteBuilder.full
 import fullParams = RouteBuilder.fullParams
 
 
 
 
 
-export type DateCategoryCardProps = ClassStyle & Puro<{
-  category: DateCategory
-}>
-export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
+export type DatePlaceCardProps = ClassStyle & {
+  place: DatePlace
+}
+export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
   const {
     className,
     style,
-    category = 'romantic',
+    place,
   } = props
   
-  const data = DateCategoryData[category]
-  const uiValues = useUiValues(data.uiText)
+  const uiValues = useUiValues(place.uiText)
   
   const uiText = useMemo(() => ({
-    dateTypeName: uiValues.name,
+    name: uiValues.name,
   }), [uiValues])
   
   
   const navigate = useNavigate()
   const [search] = useSearchParams()
   
-  const selectCategory = () => {
-    navigate(RootRoute.datePlaces[fullParams]({
+  const selectPlace = () => {
+    /* navigate(RootRoute.datePlaces[fullParams]({
       anySearchParams: search,
       allowedNameParams: {
-        category: category,
+        place: place,
         type: null,
       },
-    }))
+    })) */
   }
   
   
   return (
-    <DateTypeBox
+    <DatePlaceBox
       className={className}
       style={style}
-      data-display-name="DateCategoryCard"
-      onClick={selectCategory}
+      data-display-name="DatePlaceCard"
+      onClick={selectPlace}
     >
       <ImgSpark
         css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)}
-        src={data.picture}
+        src={place.picture}
       />
-      <Title>{uiText.dateTypeName}</Title>
-    </DateTypeBox>
+      <Title>{uiText.name}</Title>
+    </DatePlaceBox>
   )
 })
-DateCategoryCard.displayName = 'DateTypeCard'
-export default DateCategoryCard
+DatePlaceCard.displayName = 'DatePlaceCard'
+export default DatePlaceCard
 
 
 
-const DateTypeBox = styled(Card)`
+const DatePlaceBox = styled(Card)`
   ${p => CardS.card3S(p.theme)};
   width: 171px;
   aspect-ratio: 0.924;

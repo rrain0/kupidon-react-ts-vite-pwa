@@ -99,61 +99,69 @@ export namespace RouteBuilder {
   
   
   
-  export function getFullParams
-    <R extends RouteSegment>
-    (this:R, applyParams?: {
+  // TODO Route - support string array params
+  export function getFullParams<R extends RouteSegment>(
+    this: R,
+    applyParams?: {
       anySearchParams?: URLSearchParams | empty
       allowedSearchParams?: URLSearchParams | empty
       anyNameParams?: { [pathName: string]: string | empty } | empty
       allowedNameParams?: empty | (
         R[typeof params] extends object
-          ? { [Path in ObjectKeysType<R[typeof params]>]: string | empty }
+          ? { [Path in ObjectKeysType<R[typeof params]>]?: string | empty }
           : never
         )
       anyPathParams?: { [path: string]: string | empty } | empty
       allowedPathParams?: { [path: string]: string | empty } | empty
-    })
-    : string
-  {
+    }
+  ): string {
     let fullPath = this[full]()
     const allowedParamNames = ObjectKeys(this[params])
     const allowedParamPaths = ObjectValues(this[params])
     const newParams = ObjectEntries(applyParams).reduce((newParams, [type, applyParam]) => {
       
-      if (applyParam) switch (type) {
-        case 'allowedSearchParams':
+      if (applyParam) {
+        if (type === 'allowedSearchParams') {
           applyParam.forEach((v, n) => {
-            if (allowedParamPaths.includes(n) && exists(v)) newParams[n]=v
+            newParams[n] = v
           })
-          break
-        case 'allowedNameParams':
+        }
+        else if (type === 'allowedNameParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
-            if (allowedParamNames.includes(n) && exists(v)) newParams[this[params]![n]] = v
+            if (allowedParamNames.includes(n)) {
+              if (v === null) delete newParams[this[params]![n]]
+              if (exists(v)) newParams[this[params]![n]] = v
+            }
           })
-          break
-        case 'allowedPathParams':
+        }
+        else if (type === 'allowedPathParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
-            if (allowedParamPaths.includes(n) && exists(v)) newParams[n] = v
+            if (allowedParamPaths.includes(n)) {
+              if (v === null) delete newParams[n]
+              if (exists(v)) newParams[n] = v
+            }
           })
-          break
-        case 'anySearchParams':
+        }
+        else if (type === 'anySearchParams') {
           applyParam.forEach((v, n) => {
-            if (exists(v)) newParams[n]=v
+            newParams[n] = v
           })
-          break
-        case 'anyNameParams':
+        }
+        else if (type === 'anyNameParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
+            if (v === null) delete newParams[this[params]![n]]
             if (exists(v)) newParams[this[params]![n]] = v
           })
-          break
-        case 'anyPathParams':
+        }
+        else if (type === 'anyPathParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
-            if (exists(v)) newParams[n]=v
+            if (v === null) delete newParams[n]
+            if (exists(v)) newParams[n] = v
           })
-          break
+        }
       }
       return newParams
-    }, {} as { [prop: string]: string })
+    }, { } as { [prop: string]: string })
     const newParamsString = new URLSearchParams(newParams).toString()
     if (newParamsString) fullPath += '?' + newParamsString
     return fullPath
@@ -161,28 +169,23 @@ export namespace RouteBuilder {
   
   
   
-  export function getFullAnySearchParams
-    <R extends RouteSegment>
-    (this:R, applyParams?: URLSearchParams | empty)
-    : string
-  {
+  export function getFullAnySearchParams<R extends RouteSegment>(
+    this: R,
+    applyParams?: URLSearchParams | empty
+  ): string {
     return this[fullParams]({ anySearchParams: applyParams })
   }
   
   
   
-  export function getFullAllowedNameParams
-    <R extends RouteSegment>
-    (
-      this:R,
-      applyParams?: empty | (
-        R[typeof params] extends object
-          ? { [Path in ObjectKeysType<R[typeof params]>]: string | empty }
-          : never
-      )
+  export function getFullAllowedNameParams<R extends RouteSegment>(
+    this: R,
+    applyParams?: empty | (
+      R[typeof params] extends object
+        ? { [Path in ObjectKeysType<R[typeof params]>]?: string | empty }
+        : never
     )
-    : string
-  {
+  ): string {
     return this[fullParams]({ allowedNameParams: applyParams })
   }
   
@@ -203,11 +206,7 @@ export namespace RouteBuilder {
     }
   }
   
-  export function buildRoute
-    <R extends RouteSelf & RoutePaths>
-    (routeSegment: R)
-    : R & RouteProps
-  {
+  export function buildRoute<R extends RouteSelf & RoutePaths>(routeSegment: R): R & RouteProps {
     const route = {
       ...routeSegment,
       [up]: undefined,

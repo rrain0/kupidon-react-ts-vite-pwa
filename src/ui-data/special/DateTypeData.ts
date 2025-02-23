@@ -12,10 +12,10 @@ export type DateType =
   //// | 'coffeeHouse' // Кофейня
   //// | 'walking' // Прогулки на свежем воздухе
   // cultural
-  //// | 'museum'
-  //// | 'gallery'
-  //// | 'theatre'
-  //// | 'cinema'
+  | 'museum'
+  | 'gallery'
+  | 'theatre'
+  | 'cinema'
   // active
   //// | 'sports'
   //// | 'extreme'
@@ -35,11 +35,45 @@ export const DateTypeData: Record<DateType, {
   color: string
   uiText: UiTextValues<'name'>
 }> = {
+  
   cafe: {
     color: '#FFB422',
     uiText: {
       name: {
         'ru-RU': 'Кафе',
+      },
+    },
+  },
+  
+  museum: {
+    color: '#754010',
+    uiText: {
+      name: {
+        'ru-RU': 'Музеи',
+      },
+    },
+  },
+  gallery: {
+    color: '#1888AB',
+    uiText: {
+      name: {
+        'ru-RU': 'Галереи',
+      },
+    },
+  },
+  theatre: {
+    color: '#FFB422',
+    uiText: {
+      name: {
+        'ru-RU': 'Театры',
+      },
+    },
+  },
+  cinema: {
+    color: '#AA0A0A',
+    uiText: {
+      name: {
+        'ru-RU': 'Кинотеатры',
       },
     },
   },

@@ -36,7 +36,7 @@ export const DateCategoryData: Record<DateCategory, {
   },
   cultural: {
     picture: cultural,
-    dateTypes: [],
+    dateTypes: ['museum', 'gallery', 'theatre', 'cinema'],
     uiText: {
       name: {
         'ru-RU': 'Культурный',

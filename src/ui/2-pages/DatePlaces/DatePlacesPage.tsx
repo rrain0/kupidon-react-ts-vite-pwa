@@ -6,7 +6,10 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { allDateCategories, DateCategory, DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
+import { allDateTypes, DateType, DateTypeData } from 'src/ui-data/special/DateTypeData.ts'
 import { DateCategoryCard } from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
+import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
 import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
@@ -18,6 +21,7 @@ import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import full = RouteBuilder.full
 import exists = TypeU.exists
+import fullParams = RouteBuilder.fullParams
 
 
 
@@ -34,41 +38,60 @@ const DatePlacesPage = React.memo(() => {
   const [search] = useSearchParams()
   
   const categoryParamName = RootRoute.datePlaces[params].category
-  const datePlacesRoute = RootRoute.datePlaces[full]()
-  
-  const setCategory = (category: DateCategory | null) => {
-    const newSearch = new URLSearchParams(search)
-    if (exists(category)) {
-      newSearch.set(categoryParamName, category)
-      navigate(datePlacesRoute + '?' + newSearch.toString())
-    }
-    else {
-      newSearch.delete(categoryParamName)
-      navigate(datePlacesRoute + '?' + newSearch.toString(), { replace: true })
-    }
-  }
+  const typeParamName = RootRoute.datePlaces[params].type
   
   const searchCategory = search.get(categoryParamName)
-  const [displayedCategoryName, setDisplayedCategoryName] = useState<DateCategory | undefined>()
+  const searchType = search.get(typeParamName)
+  const [displayedCategory, setDisplayedCategory] = useState<DateCategory | undefined>()
+  const [displayedType, setDisplayedType] = useState<DateType | undefined>()
+  
   useEffect(() => {
-    if (exists(searchCategory)) {
-      if (allDateCategories.includes(searchCategory as any)) {
-        setDisplayedCategoryName(searchCategory as DateCategory)
-      }
-      else {
-        setCategory(null)
-      }
+    if (allDateTypes.includes(searchType as any)) {
+      const type = searchType as DateType
+      navigate(RootRoute.datePlaces[fullParams]({
+        anySearchParams: search,
+        allowedNameParams: {
+          category: null,
+          type: type,
+        },
+      }), { replace: true })
+      setDisplayedCategory(undefined)
+      setDisplayedType(type)
+    }
+    else if (allDateCategories.includes(searchCategory as any)) {
+      const category = searchCategory as DateCategory
+      navigate(RootRoute.datePlaces[fullParams]({
+        anySearchParams: search,
+        allowedNameParams: {
+          category: searchCategory,
+          type: null,
+        },
+      }), { replace: true })
+      setDisplayedCategory(category)
+      setDisplayedType(undefined)
     }
     else {
-      setDisplayedCategoryName(undefined)
+      navigate(RootRoute.datePlaces[fullParams]({
+        anySearchParams: search,
+        allowedNameParams: {
+          category: null,
+          type: null,
+        },
+      }), { replace: true })
+      setDisplayedCategory(undefined)
+      setDisplayedType(undefined)
     }
-  }, [searchCategory])
+  }, [searchCategory, searchType])
   
   const uiValues = useMemo(() => ({
-    pageTitle: displayedCategoryName
-      ? DateCategoryData[displayedCategoryName].uiText.name
-      : uiVals.insightsAndPlacesForDate,
-  }), [displayedCategoryName])
+    pageTitle: (() => {
+      if (displayedCategory)
+        return DateCategoryData[displayedCategory].uiText.name
+      if (displayedType)
+        return DateTypeData[displayedType].uiText.name
+      return uiVals.insightsAndPlacesForDate
+    })(),
+  }), [displayedCategory])
   
   const uiText = useUiValues(uiValues)
   
@@ -88,18 +111,37 @@ const DatePlacesPage = React.memo(() => {
             <div style={{ height: 28 }} />
             
             <DatePlacesList>
-              {!displayedCategoryName && allDateCategories.map(dc => (
+              
+              {!displayedCategory && !displayedType && allDateCategories.map(dc => (
                 <DateCategoryCard
                   key={dc}
                   style={{ width: '100%' }}
                   category={dc}
                 />
               ))}
-              {displayedCategoryName
-                && DateCategoryData[displayedCategoryName].dateTypes.map(dt => (
-                  <DateTypeCard key={dt} type={dt} style={{ gridColumn: '1 / -1' }} />
+              
+              {displayedCategory
+                && DateCategoryData[displayedCategory].dateTypes.map(dt => (
+                  <DateTypeCard
+                    key={dt}
+                    type={dt}
+                    style={{ gridColumn: '1 / -1' }}
+                  />
                 ))
               }
+              
+              {displayedType && (() => {
+                const places = DatePlacesData.filter(place => place.type.includes(displayedType))
+                if (!places.length) return 'Пусто'
+                return places.map(place => (
+                  <DatePlaceCard
+                    key={place.id}
+                    place={place}
+                    style={{ gridColumn: '1 / -1' }}
+                  />
+                ))
+              })()}
+              
             </DatePlacesList>
             
           </Pages.ContentSmCol>

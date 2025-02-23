@@ -1,0 +1,59 @@
+import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
+
+import theatre from './theatre-icon--ca0e77b5b5394ea439ab1d3c5c4be985.webp'
+
+
+export const MockDatePlaces = {
+  places: [
+    /* {
+      id: '',
+      type: [],
+      picture: '',
+      features: [],
+      phone: '',
+      email: '',
+      uiText: {
+        name: {
+          'ru-RU': '',
+        },
+        shortDescription: {
+          'ru-RU': '',
+        },
+        location: {
+          'ru-RU': '',
+        },
+        description: {
+          // eslint-disable-next-line @stylistic/max-len
+          'ru-RU': '',
+        },
+      },
+    }, */
+    {
+      id: '1',
+      type: ['theatre'],
+      picture: theatre,
+      features: [
+        'близкое расположение',
+        'доступные цены на билеты',
+        'рядом расположены кафе и рестораны',
+      ],
+      phone: '',
+      email: '',
+      uiText: {
+        name: {
+          'ru-RU': 'Театр им. Горького Василия',
+        },
+        shortDescription: {
+          'ru-RU': 'Получите незабываемые эмоции в...',
+        },
+        location: {
+          'ru-RU': 'Москва',
+        },
+        description: {
+          // eslint-disable-next-line @stylistic/max-len
+          'ru-RU': 'Театр имени Горького — это не только один из самых известных театров Москвы, но и отличное место для романтического свидания. Его атмосфера изысканности и культурного богатства позволяет насладиться не только высококлассными постановками, но и красивым интерьером. После спектакля можно прогуляться по уютным улочкам рядом и обсудить впечатления за чашечкой кофе. Это отличный выбор для того, чтобы провести вечер в стиле искусства и культуры.',
+        },
+      },
+    },
+  ] satisfies DatePlace[],
+}
