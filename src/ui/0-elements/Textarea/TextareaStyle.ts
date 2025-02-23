@@ -123,7 +123,7 @@ export namespace TextareaStyle {
   `
   
   
-  export const small = (t:Theme)=>css`
+  export const small = (t: AppTheme.Theme) => css`
     ${normal(t)};
     ${El.textarea} {
       width: 100%;

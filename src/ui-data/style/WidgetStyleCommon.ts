@@ -146,6 +146,18 @@ export namespace WidgetStyleCommon {
     
     
     
+    export const s15: WidgetStyleObj = {
+      fontWeight: '400',
+      fontSize: '15px',
+      lineHeight: '1.29',
+      letterSpacing: 'normal',
+    }
+    export const s15Bold: WidgetStyleObj = {
+      fontWeight: '500',
+      fontSize: '15px',
+      lineHeight: '1.29',
+      letterSpacing: 'normal',
+    }
     export const s15Thin: WidgetStyleObj = {
       fontWeight: '300',
       fontSize: '15px',

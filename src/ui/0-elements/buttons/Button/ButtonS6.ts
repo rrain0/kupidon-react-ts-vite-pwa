@@ -123,7 +123,7 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-                  ...Txt.s15Thin,
+                  ...Txt.s15,
                 },
               }]
               // type: filled, shape: rounded, size: md2
@@ -134,7 +134,7 @@ export namespace ButtonS6 {
               export const sm: WidgetStyle = [base, {
                 button: {
                   w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-                  ...Txt.s15Thin,
+                  ...Txt.s15,
                 },
               }]
             }
@@ -254,7 +254,6 @@ export namespace ButtonS6 {
         }
       }
       
-      // TODO Style - on hover change only border and text color, not bg color
       export namespace outlined {
         export namespace Shape {
           export namespace rounded {
@@ -264,20 +263,20 @@ export namespace ButtonS6 {
               export const md: WidgetStyle = [base, {
                 button: {
                   wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
-                  ...Txt.s15Thin,
+                  ...Txt.s15Bold,
                 },
                 border: {
-                  bd: '1px solid',
+                  bd: '2px solid',
                 },
               }]
               // type: outlined, shape: rounded, size: sm
               export const sm: WidgetStyle = [base, {
                 button: {
                   w: 'ct', hMin: 30, r: 'round', p: [4, 16],
-                  ...Txt.s15Thin,
+                  ...Txt.s15Bold,
                 },
                 border: {
-                  bd: '1px solid',
+                  bd: '2px solid',
                 },
               }]
             }
