@@ -24,7 +24,7 @@ import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC
 import round = EmotionCommon.round
 import ProfileCardIc = SvgIconsPack.ProfileCardIc
-import Search2Ic = SvgIconsPack.Search2Ic
+import SearchIc = SvgIconsPack.SearchIc
 import GenderIc = SvgIconsPack.GenderIc
 import CalendarIc = SvgIconsPack.CalendarIc
 import DumbbellIc = SvgIconsPack.DumbbellIc
@@ -102,7 +102,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
       },
       {
         title: uiText.imLookingFor, value: imLookingFor,
-        ic: <Search2Ic css={SvgIconS6.t(infoIcS)} />,
+        ic: <SearchIc css={SvgIconS6.t(infoIcS)} />,
       },
       {
         title: uiText.age, value: age,

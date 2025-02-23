@@ -6,7 +6,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import Checkmark2Ic = SvgIconsPack.Checkmark2Ic
+import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
 import Puro = TypeU.Puro
 import UseRipple from 'ui/0-elements/Ripple/UseRipple.tsx'
 import attrExists = TypeU.attrExists
@@ -84,7 +84,7 @@ const CheckboxInput = React.memo(React.forwardRef<HTMLInputElement, CheckboxInpu
             <div // IconBoxChecked
               {...iconBoxCheckedProps}
             >
-              <Checkmark2Ic />
+              <CheckmarkBoldIc />
             </div>
             
             { childrenPosition === 'end' && children }

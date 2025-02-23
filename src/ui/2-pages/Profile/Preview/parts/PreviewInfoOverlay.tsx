@@ -18,7 +18,7 @@ import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
-import Heart2Ic = SvgIconsPack.Heart2Ic
+import HeartFilledIc = SvgIconsPack.HeartFilledIc
 import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
@@ -114,7 +114,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
             if (getWasDragged?.()) return
           }}
         >
-          <Heart2Ic />
+          <HeartFilledIc />
         </Button>
         <Button
           css={IconButtonS6.t(infoButtonS)}

@@ -3,85 +3,100 @@ import styled from '@emotion/styled'
 import clsx from 'clsx'
 import React from 'react'
 
-import AddModuleSvg from 'src/res/ic/normal/add-module.svg?react'
-import ArrowAngledRoundedSvg from 'src/res/ic/normal/arrow-angled-rounded.svg?react'
-import ArrowLinesSharp1Svg from 'src/res/ic/normal/arrow-lines-sharp-1.svg?react'
-import ArrowRefreshCwSvg from 'src/res/ic/normal/arrow-refresh-cw.svg?react'
-import ArrowReloadSvg from 'src/res/ic/normal/arrow-reload.svg?react'
+// UI icons
+import AddModuleSvg from '@ic/normal/ui/add-module.svg?react'
+import ArrowAngledRoundedSvg from '@ic/normal/ui/arrow-angled-rounded.svg?react'
+import ArrowLinesSharp1Svg from '@ic/normal/ui/arrow-lines-sharp-1.svg?react'
+import ArrowRefreshCwSvg from '@ic/normal/ui/arrow-refresh-cw.svg?react'
+import ArrowReloadSvg from '@ic/normal/ui/arrow-reload.svg?react'
 
-import BowArrowSvg from 'src/res/ic/normal/bow-arrow.svg?react'
+import CalendarSvg from '@ic/normal/ui/calendar.svg?react'
+import Calendar2Svg from '@ic/normal/ui/calendar-2.svg?react'
+import ChatRoundSvg from '@ic/normal/ui/chat-round.svg?react'
+import CheckmarkSvg from '@ic/normal/ui/checkmark.svg?react'
+import CheckmarkBoldSvg from '@ic/normal/ui/checkmark-bold.svg?react'
+import CheckmarkDoubleSvg from '@ic/normal/ui/checkmark-double.svg?react'
+import CheckmarkCircleToastifySvg from '@ic/normal/ui/checkmark-circle-toastify.svg?react'
+import ClearTrashSvg from '@ic/normal/ui/clear-trash.svg?react'
+import ClipSvg from '@ic/normal/ui/clip.svg?react'
+import CrossSvg from '@ic/normal/ui/cross.svg?react'
+import CrossInCircleSvg from '@ic/normal/ui/cross-in-circle.svg?react'
 
-import CalendarSvg from 'src/res/ic/normal/calendar.svg?react'
-import Calendar2Svg from 'src/res/ic/normal/calendar-2.svg?react'
-import CardsHeartSvg from 'src/res/ic/normal/cards-heart.svg?react'
-import CautionSvg from 'src/res/ic/normal/caution.svg?react'
-import ChatRoundSvg from 'src/res/ic/normal/chat-round.svg?react'
-import CheckmarkSvg from 'src/res/ic/normal/checkmark.svg?react'
-import Checkmark2Svg from 'src/res/ic/normal/checkmark-2.svg?react'
-import CheckmarkCircleToastifySvg from 'src/res/ic/normal/checkmark-circle-toastify.svg?react'
-import ClearTrashSvg from 'src/res/ic/normal/clear-trash.svg?react'
-import ClipSvg from 'src/res/ic/normal/clip.svg?react'
-import CrossSvg from 'src/res/ic/normal/cross.svg?react'
-import CrossInCircleSvg from 'src/res/ic/normal/cross-in-circle.svg?react'
+import DangerRoundToastifySvg from '@ic/normal/ui/danger-round-toastify.svg?react'
+import DaySvg from '@ic/normal/ui/day.svg?react'
+import DayNightSvg from '@ic/normal/ui/day-night.svg?react'
+import DocumentErrorSvg from '@ic/normal/ui/document-error.svg?react'
+import DownloadSvg from '@ic/normal/ui/download.svg?react'
 
-import DangerRoundToastifySvg from 'src/res/ic/normal/danger-round-toastify.svg?react'
-import DaySvg from 'src/res/ic/normal/day.svg?react'
-import DayNightSvg from 'src/res/ic/normal/day-night.svg?react'
-import DocumentErrorSvg from 'src/res/ic/normal/document-error.svg?react'
-import DoubleCheckmarkSvg from 'src/res/ic/normal/double-checkmark.svg?react'
-import Download1Svg from 'src/res/ic/normal/download-1.svg?react'
-import Download2RoundSvg from 'src/res/ic/normal/download-2-round.svg?react'
-import DumbbellSvg from 'src/res/ic/normal/dumbbell.svg?react'
+import EyeSvg from '@ic/normal/ui/eye.svg?react'
+import EyeCrossedOutSvg from '@ic/normal/ui/eye-crossed-out.svg?react'
+import EyeWideSvg from '@ic/normal/ui/eye-wide.svg?react'
 
-import EyeSvg from 'src/res/ic/normal/eye.svg?react'
-import EyeCrossedOutSvg from 'src/res/ic/normal/eye-crossed-out.svg?react'
-import EyeWideSvg from 'src/res/ic/normal/eye-wide.svg?react'
+import FloppyDisk1Svg from '@ic/normal/ui/floppy-disk-1.svg?react'
+import FullscreenSvg from '@ic/normal/ui/fullscreen.svg?react'
 
-import FloppyDisk1Svg from 'src/res/ic/normal/floppy-disk-1.svg?react'
-import FullscreenSvg from 'src/res/ic/normal/fullscreen.svg?react'
+import GearSvg from '@ic/normal/ui/gear.svg?react'
+import GearOutlinedSvg from '@ic/normal/ui/gear-outlined.svg?react'
 
-import GearSvg from 'src/res/ic/normal/gear.svg?react'
-import Gear2Svg from 'src/res/ic/normal/gear-2.svg?react'
-import GenderSvg from 'src/res/ic/normal/gender.svg?react'
-import GiftBoxSvg from 'src/res/ic/normal/gift-box.svg?react'
+import InfoToastifySvg from '@ic/normal/ui/info-toastify.svg?react'
 
-import HeartSvg from 'src/res/ic/normal/heart.svg?react'
-import Heart2Svg from 'src/res/ic/normal/heart-2.svg?react'
-import HelpSvg from 'src/res/ic/normal/help.svg?react'
-import HomeSvg from 'src/res/ic/normal/home.svg?react'
+import LocationSvg from '@ic/normal/ui/location.svg?react'
+import LockSvg from '@ic/normal/ui/lock.svg?react'
 
-import InfoToastifySvg from 'src/res/ic/normal/info-toastify.svg?react'
+import MoonSvg from '@ic/normal/ui/moon.svg?react'
 
-import LocationSvg from 'src/res/ic/normal/location.svg?react'
-import LockSvg from 'src/res/ic/normal/lock.svg?react'
+import NightSvg from '@ic/normal/ui/night.svg?react'
 
-import MoonSvg from 'src/res/ic/normal/moon.svg?react'
+import PencilWrite2Svg from '@ic/normal/ui/pencil-write-2.svg?react'
+import PictureSvg from '@ic/normal/ui/picture.svg?react'
+import PlanetFrameSvg from '@ic/normal/ui/planet-frame.svg?react'
+import PlusSvg from '@ic/normal/ui/plus.svg?react'
+import ProfileSvg from '@ic/normal/ui/profile.svg?react'
 
-import NameCardSvg from 'src/res/ic/normal/name-card.svg?react'
-import NightSvg from 'src/res/ic/normal/night.svg?react'
+import RadioActiveSvg from '@ic/normal/ui/radio-active.svg?react'
+import RadioInactiveSvg from '@ic/normal/ui/radio-inactive.svg?react'
+import RingingBellSvg from '@ic/normal/ui/ringing-bell.svg?react'
 
-import PencilWrite2Svg from 'src/res/ic/normal/pencil-write-2.svg?react'
-import PictureSvg from 'src/res/ic/normal/picture.svg?react'
-import PlanetFrameSvg from 'src/res/ic/normal/planet-frame.svg?react'
-import PlusSvg from 'src/res/ic/normal/plus.svg?react'
-import ProfileSvg from 'src/res/ic/normal/profile.svg?react'
-import PriceTagSvg from 'src/res/ic/normal/price-tag.svg?react'
-import ProfileCardSvg from 'src/res/ic/normal/profile-card.svg?react'
+import SearchSvg from '@ic/normal/ui/search.svg?react'
+import Spinner8LinesSvg from '@ic/normal/ui/spinner-8-lines.svg?react'
+import SpinnerCircleQuarterSvg from '@ic/normal/ui/spinner-circle-quarter.svg?react'
+import SyncErrorSvg from '@ic/normal/ui/sync-error.svg?react'
 
-import RadioActiveSvg from 'src/res/ic/normal/radio-active.svg?react'
-import RadioInactiveSvg from 'src/res/ic/normal/radio-inactive.svg?react'
-import RingingBellSvg from 'src/res/ic/normal/ringing-bell.svg?react'
-import RulerCornerSvg from 'src/res/ic/normal/ruler-corner.svg?react'
+import WarnCircleOutlinedSvg from '@ic/normal/ui/warn-circle-outlined.svg?react'
+import WarnTriangleToastifySvg from '@ic/normal/ui/warn-triangle-toastify.svg?react'
+import WarnTriangleOutlinedSvg from '@ic/normal/ui/warn-triangle-outlined.svg?react'
 
-import Search2Svg from 'src/res/ic/normal/search-2.svg?react'
-import SoupSvg from 'src/res/ic/normal/soup.svg?react'
-import Spinner8LinesSvg from 'src/res/ic/normal/spinner-8-lines.svg?react'
-import SpinnerCircleQuarterSvg from 'src/res/ic/normal/spinner-circle-quarter.svg?react'
-import SyncErrorSvg from 'src/res/ic/normal/sync-error.svg?react'
 
-import WarnCircleOutlinedSvg from 'src/res/ic/normal/warn-circle-outlined.svg?react'
-import WarnTriangleToastifySvg from 'src/res/ic/normal/warn-triangle-toastify.svg?react'
-import WarnTriangleOutlinedSvg from 'src/res/ic/normal/warn-triangle-outlined.svg?react'
+// Special icons
+import BowArrowSvg from '@ic/normal/special/bow-arrow.svg?react'
+
+import CardsHeartSvg from '@ic/normal/special/cards-heart.svg?react'
+
+import DumbbellSvg from '@ic/normal/special/dumbbell.svg?react'
+
+import GenderSvg from '@ic/normal/special/gender.svg?react'
+import GiftBoxSvg from '@ic/normal/special/gift-box.svg?react'
+
+import HeartSvg from '@ic/normal/special/heart.svg?react'
+import HeartFilledSvg from '@ic/normal/special/heart-filled.svg?react'
+import HelpSvg from '@ic/normal/special/help.svg?react'
+import HomeSvg from '@ic/normal/special/home.svg?react'
+
+import MasksTheatreSvg from '@ic/normal/special/masks-theatre.svg?react'
+
+import NameCardSvg from '@ic/normal/special/name-card.svg?react'
+
+import PictureArtSvg from '@ic/normal/special/picture-art.svg?react'
+import PriceTagSvg from '@ic/normal/special/price-tag.svg?react'
+import ProfileCardSvg from '@ic/normal/special/profile-card.svg?react'
+
+import RulerCornerSvg from '@ic/normal/special/ruler-corner.svg?react'
+
+import SoupSvg from '@ic/normal/special/soup.svg?react'
+
+import VaseMuseumSvg from '@ic/normal/special/vase-museum.svg?react'
+import Film2Svg from '@ic/normal/special/film-2.svg?react'
+
 
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 
@@ -100,7 +115,7 @@ export namespace SvgIconsPack {
   type BaseSimpleSvgIconCustomProps = PartialUndef<{
     color: string
     accentColor: string
-    size: number|string
+    size: number | string
   }>
   
   type SvgProps = React.SVGProps<SVGSVGElement> & { title?: string }
@@ -171,8 +186,7 @@ export namespace SvgIconsPack {
   
   
   
-  // Icons
-  
+  // UI Icons
   export const AddModuleIc = generateSimpleSvgIcon(AddModuleSvg)
   export const ArrowLinesSharp1Ic = generateSimpleSvgIcon(ArrowLinesSharp1Svg)
   export const ArrowAngledRoundedIc = generateSimpleSvgIcon(ArrowAngledRoundedSvg)
@@ -180,16 +194,11 @@ export namespace SvgIconsPack {
   export const ArrowReloadIc = generateSimpleSvgIcon(ArrowReloadSvg)
   
   
-  export const BowArrowIc = generateSimpleSvgIcon(BowArrowSvg)
-  
-  
   export const CalendarIc = generateSimpleSvgIcon(CalendarSvg)
   export const Calendar2Ic = generateSimpleSvgIcon(Calendar2Svg)
-  export const CardsHeartIc = generateSimpleSvgIcon(CardsHeartSvg)
-  export const CautionIc = generateSimpleSvgIcon(CautionSvg)
   export const ChatRoundIc = generateSimpleSvgIcon(ChatRoundSvg)
   export const CheckmarkIc = generateSimpleSvgIcon(CheckmarkSvg)
-  export const Checkmark2Ic = generateSimpleSvgIcon(Checkmark2Svg)
+  export const CheckmarkBoldIc = generateSimpleSvgIcon(CheckmarkBoldSvg)
   export const CheckmarkCircleToastifyIc = generateSimpleSvgIcon(CheckmarkCircleToastifySvg)
   export const ClearTrashIc = generateSimpleSvgIcon(ClearTrashSvg)
   export const ClipIc = generateSimpleSvgIcon(ClipSvg)
@@ -201,10 +210,8 @@ export namespace SvgIconsPack {
   export const DayIc = generateSimpleSvgIcon(DaySvg)
   export const DayNightIc = generateSimpleSvgIcon(DayNightSvg)
   export const DocumentErrorIc = generateSimpleSvgIcon(DocumentErrorSvg)
-  export const DoubleCheckmarkIc = generateSimpleSvgIcon(DoubleCheckmarkSvg)
-  export const Download1Ic = generateSimpleSvgIcon(Download1Svg)
-  export const Download2RoundIc = generateSimpleSvgIcon(Download2RoundSvg)
-  export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
+  export const CheckmarkDoubleIc = generateSimpleSvgIcon(CheckmarkDoubleSvg)
+  export const DownloadIc = generateSimpleSvgIcon(DownloadSvg)
   
   
   export const EyeIc = generateSimpleSvgIcon(EyeSvg)
@@ -217,15 +224,7 @@ export namespace SvgIconsPack {
   
   
   export const GearIc = generateSimpleSvgIcon(GearSvg)
-  export const Gear2Ic = generateSimpleSvgIcon(Gear2Svg)
-  export const GenderIc = generateSimpleSvgIcon(GenderSvg)
-  export const GiftBoxIc = generateSimpleSvgIcon(GiftBoxSvg)
-  
-  
-  export const HeartIc = generateSimpleSvgIcon(HeartSvg)
-  export const Heart2Ic = generateSimpleSvgIcon(Heart2Svg)
-  export const HelpIc = generateSimpleSvgIcon(HelpSvg)
-  export const HomeIc = generateSimpleSvgIcon(HomeSvg)
+  export const GearOutlinedIc = generateSimpleSvgIcon(GearOutlinedSvg)
   
   
   export const InfoToastifyIc = generateSimpleSvgIcon(InfoToastifySvg)
@@ -238,7 +237,6 @@ export namespace SvgIconsPack {
   export const MoonIc = generateSimpleSvgIcon(MoonSvg)
   
   
-  export const NameCardIc = generateSimpleSvgIcon(NameCardSvg)
   export const NightIc = generateSimpleSvgIcon(NightSvg)
   
   
@@ -247,18 +245,14 @@ export namespace SvgIconsPack {
   export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
   export const PlusIc = generateSimpleSvgIcon(PlusSvg)
   export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
-  export const PriceTagIc = generateSimpleSvgIcon(PriceTagSvg)
-  export const ProfileCardIc = generateSimpleSvgIcon(ProfileCardSvg)
   
   
   export const RadioActiveIc = generateSimpleSvgIcon(RadioActiveSvg)
   export const RadioInactiveIc = generateSimpleSvgIcon(RadioInactiveSvg)
   export const RingingBellIc = generateSimpleSvgIcon(RingingBellSvg)
-  export const RulerCornerIc = generateSimpleSvgIcon(RulerCornerSvg)
   
   
-  export const Search2Ic = generateSimpleSvgIcon(Search2Svg)
-  export const SoupIc = generateSimpleSvgIcon(SoupSvg)
+  export const SearchIc = generateSimpleSvgIcon(SearchSvg)
   
   export const Spinner8LinesIc = React.memo(
     React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
@@ -295,6 +289,39 @@ export namespace SvgIconsPack {
   export const WarnCircleOutlinedIc = generateSimpleSvgIcon(WarnCircleOutlinedSvg)
   export const WarnTriangleToastifyIc = generateSimpleSvgIcon(WarnTriangleToastifySvg)
   export const WarnTriangleOutlinedIc = generateSimpleSvgIcon(WarnTriangleOutlinedSvg)
+  
+  
+  
+  
+  // Special icons
+  export const BowArrowIc = generateSimpleSvgIcon(BowArrowSvg)
+  
+  export const CardsHeartIc = generateSimpleSvgIcon(CardsHeartSvg)
+  
+  export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
+  
+  export const GenderIc = generateSimpleSvgIcon(GenderSvg)
+  export const GiftBoxIc = generateSimpleSvgIcon(GiftBoxSvg)
+  
+  export const HeartIc = generateSimpleSvgIcon(HeartSvg)
+  export const HeartFilledIc = generateSimpleSvgIcon(HeartFilledSvg)
+  export const HelpIc = generateSimpleSvgIcon(HelpSvg)
+  export const HomeIc = generateSimpleSvgIcon(HomeSvg)
+  
+  export const MasksTheatreIc = generateSimpleSvgIcon(MasksTheatreSvg)
+  
+  export const NameCardIc = generateSimpleSvgIcon(NameCardSvg)
+  
+  export const PictureArtIc = generateSimpleSvgIcon(PictureArtSvg)
+  export const PriceTagIc = generateSimpleSvgIcon(PriceTagSvg)
+  export const ProfileCardIc = generateSimpleSvgIcon(ProfileCardSvg)
+  
+  export const RulerCornerIc = generateSimpleSvgIcon(RulerCornerSvg)
+  
+  export const SoupIc = generateSimpleSvgIcon(SoupSvg)
+  
+  export const VaseMuseumIc = generateSimpleSvgIcon(VaseMuseumSvg)
+  export const Film2Ic = generateSimpleSvgIcon(Film2Svg)
   
   
   

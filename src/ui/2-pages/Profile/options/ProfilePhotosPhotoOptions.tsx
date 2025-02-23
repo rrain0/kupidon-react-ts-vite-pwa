@@ -23,7 +23,7 @@ import Callback = TypeU.Callback
 import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
 import contents = EmotionCommon.contents
 import ArrowRefreshCwIc = SvgIconsPack.ArrowRefreshCwIc
-import Download1Ic = SvgIconsPack.Download1Ic
+import DownloadIc = SvgIconsPack.DownloadIc
 import extensionFromMimeType = FileU.extensionFromMimeType
 import col = EmotionCommon.col
 import row = EmotionCommon.row
@@ -170,7 +170,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                       >
                         <OptionContainer>
                           <div css={optionIconBoxStyle}>
-                            <Download1Ic />
+                            <DownloadIc />
                           </div>
                           <OptionTitle>{actionText.download}</OptionTitle>
                         </OptionContainer>

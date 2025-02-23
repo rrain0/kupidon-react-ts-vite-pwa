@@ -8,58 +8,63 @@ import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
 
 
-import ArrowAngledRounded2GradSvg from 'src/res/ic/gradient/arrow-angled-rounded-2-grad.svg?react'
-import ArrowBackGradSvg from 'src/res/ic/gradient/arrow-back-grad.svg?react'
-import ArrowReload2GradSvg from 'src/res/ic/gradient/arrow-reload-2-grad.svg?react'
+// UI Icons
+import ArrowAngledRounded2GradSvg from '@ic/gradient/ui/arrow-angled-rounded-2-grad.svg?react'
+import ArrowBackGradSvg from '@ic/gradient/ui/arrow-back-grad.svg?react'
+import ArrowReload2GradSvg from '@ic/gradient/ui/arrow-reload-2-grad.svg?react'
 
-import BabyGradSvg from 'src/res/ic/gradient/baby-grad.svg?react'
-import BasketballGradSvg from 'src/res/ic/gradient/basketball-grad.svg?react'
-import BengalCatGradSvg from 'src/res/ic/gradient/bengal-cat-grad.svg?react'
-import BookGradSvg from 'src/res/ic/gradient/book-grad.svg?react'
-import BowArrowGradSvg from 'src/res/ic/gradient/bow-arrow-grad.svg?react'
+import Calendar2GradSvg from '@ic/gradient/ui/calendar-2-grad.svg?react'
+import ClockGradSvg from '@ic/gradient/ui/clock-grad.svg?react'
+import ChatRoundGradSvg from '@ic/gradient/ui/chat-round-grad.svg?react'
+import Cross2GradSvg from '@ic/gradient/ui/cross-2-grad.svg?react'
 
-import Calendar2GradSvg from 'src/res/ic/gradient/calendar-2-grad.svg?react'
-import CardsDollarGradSvg from 'src/res/ic/gradient/cards-dollar-grad.svg?react'
-import CardsHeartGradSvg from 'src/res/ic/gradient/cards-heart-grad.svg?react'
-import ClockGradSvg from 'src/res/ic/gradient/clock-grad.svg?react'
-import ChatRoundGradSvg from 'src/res/ic/gradient/chat-round-grad.svg?react'
-import CommunicationTwoPeopleGradSvg from 'src/res/ic/gradient/communication-two-people-grad.svg?react'
-import Couple2GradSvg from 'src/res/ic/gradient/couple-2-grad.svg?react'
-import Cross2GradSvg from 'src/res/ic/gradient/cross-2-grad.svg?react'
+import InfoSquareRoundedGradSvg from '@ic/gradient/ui/info-square-rounded-grad.svg?react'
 
-import EducationGradSvg from 'src/res/ic/gradient/education-grad.svg?react'
+import PlanetFrameGradSvg from '@ic/gradient/ui/planet-frame-grad.svg?react'
+import ProfileGradSvg from '@ic/gradient/ui/profile-grad.svg?react'
 
-import FilmGradSvg from 'src/res/ic/gradient/film-grad.svg?react'
+import SearchGradSvg from '@ic/gradient/ui/search-grad.svg?react'
 
-import GenderGradSvg from 'src/res/ic/gradient/gender-grad.svg?react'
-import GiftBoxGradSvg from 'src/res/ic/gradient/gift-box-grad.svg?react'
-import GoalGradSvg from 'src/res/ic/gradient/goal-grad.svg?react'
 
-import HourglassGradSvg from 'src/res/ic/gradient/hourglass-grad.svg?react'
+// Special Icons
 
-import InfoSquareRoundedGradSvg from 'src/res/ic/gradient/info-square-rounded-grad.svg?react'
+import BabyGradSvg from '@ic/gradient/special/baby-grad.svg?react'
+import BasketballGradSvg from '@ic/gradient/special/basketball-grad.svg?react'
+import BengalCatGradSvg from '@ic/gradient/special/bengal-cat-grad.svg?react'
+import BookGradSvg from '@ic/gradient/special/book-grad.svg?react'
+import BowArrowGradSvg from '@ic/gradient/special/bow-arrow-grad.svg?react'
 
-import MapLocationGradSvg from 'src/res/ic/gradient/map-location-grad.svg?react'
+import CardsDollarGradSvg from '@ic/gradient/special/cards-dollar-grad.svg?react'
+import CardsHeartGradSvg from '@ic/gradient/special/cards-heart-grad.svg?react'
+import CommunicationTwoPeopleGradSvg from '@ic/gradient/special/communication-two-people-grad.svg?react'
+import Couple2GradSvg from '@ic/gradient/special/couple-2-grad.svg?react'
+import CoupleDrinkingAtTableGradSvg from '@ic/gradient/special/couple-drinking-at-table.svg?react'
 
-import NameCardGradSvg from 'src/res/ic/gradient/name-card-grad.svg?react'
+import EducationGradSvg from '@ic/gradient/special/education-grad.svg?react'
 
-import PlanetFrameGradSvg from 'src/res/ic/gradient/planet-frame-grad.svg?react'
-import ProfileGradSvg from 'src/res/ic/gradient/profile-grad.svg?react'
-import PuzzlesGradSvg from 'src/res/ic/gradient/puzzles-grad.svg?react'
+import FilmGradSvg from '@ic/gradient/special/film-grad.svg?react'
 
-import RelationshipMinusesGradSvg from 'src/res/ic/gradient/relationship-minuses-grad.svg?react'
-import RulerVerticalGradSvg from 'src/res/ic/gradient/ruler-vertical-grad.svg?react'
+import GenderGradSvg from '@ic/gradient/special/gender-grad.svg?react'
+import GiftBoxGradSvg from '@ic/gradient/special/gift-box-grad.svg?react'
+import GoalGradSvg from '@ic/gradient/special/goal-grad.svg?react'
 
-import Search2GradSvg from 'src/res/ic/gradient/search-2-grad.svg?react'
+import HourglassGradSvg from '@ic/gradient/special/hourglass-grad.svg?react'
 
-import SmokeCigaretteGradSvg from 'src/res/ic/gradient/smoke-cigarette-grad.svg?react'
+import MapLocationGradSvg from '@ic/gradient/special/map-location-grad.svg?react'
 
-import TelescopeGradSvg from 'src/res/ic/gradient/telescope-grad.svg?react'
+import NameCardGradSvg from '@ic/gradient/special/name-card-grad.svg?react'
 
-import WineBottleAlcoholGradSvg from 'src/res/ic/gradient/wine-bottle-alcohol-grad.svg?react'
+import PuzzlesGradSvg from '@ic/gradient/special/puzzles-grad.svg?react'
 
-import WorkSuitcaseGradSvg from 'src/res/ic/gradient/work-suitcase-grad.svg?react'
+import RelationshipMinusesGradSvg from '@ic/gradient/special/relationship-minuses-grad.svg?react'
+import RulerVerticalGradSvg from '@ic/gradient/special/ruler-vertical-grad.svg?react'
 
+import SmokeCigaretteGradSvg from '@ic/gradient/special/smoke-cigarette-grad.svg?react'
+
+import TelescopeGradSvg from '@ic/gradient/special/telescope-grad.svg?react'
+
+import WineBottleAlcoholGradSvg from '@ic/gradient/special/wine-bottle-alcohol-grad.svg?react'
+import WorkSuitcaseGradSvg from '@ic/gradient/special/work-suitcase-grad.svg?react'
 
 
 
@@ -142,11 +147,27 @@ export namespace SvgGradIconsPack {
   
   
   
-  // Icons
+  // UI Icons
   
   export const ArrowAngledRounded2GradIc = generateSimpleSvgIcon(ArrowAngledRounded2GradSvg)
   export const ArrowBackGradIc = generateSimpleSvgIcon(ArrowBackGradSvg)
   export const ArrowReload2GradIc = generateSimpleSvgIcon(ArrowReload2GradSvg)
+  
+  export const Calendar2GradIc = generateSimpleSvgIcon(Calendar2GradSvg)
+  export const ClockGradIc = generateSimpleSvgIcon(ClockGradSvg)
+  export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
+  export const Cross2GradIc = generateSimpleSvgIcon(Cross2GradSvg)
+  
+  export const InfoSquareRoundedGradIc = generateSimpleSvgIcon(InfoSquareRoundedGradSvg)
+  
+  export const PlanetFrameGradIc = generateSimpleSvgIcon(PlanetFrameGradSvg)
+  export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
+  
+  export const SearchGradIc = generateSimpleSvgIcon(SearchGradSvg)
+  
+  
+  
+  // Special Icons
   
   export const BabyGradIc = generateSimpleSvgIcon(BabyGradSvg)
   export const BasketballGradIc = generateSimpleSvgIcon(BasketballGradSvg)
@@ -154,14 +175,11 @@ export namespace SvgGradIconsPack {
   export const BookGradIc = generateSimpleSvgIcon(BookGradSvg)
   export const BowArrowGradIc = generateSimpleSvgIcon(BowArrowGradSvg)
   
-  export const Calendar2GradIc = generateSimpleSvgIcon(Calendar2GradSvg)
   export const CardsDollarGradIc = generateSimpleSvgIcon(CardsDollarGradSvg)
   export const CardsHeartGradIc = generateSimpleSvgIcon(CardsHeartGradSvg)
-  export const ClockGradIc = generateSimpleSvgIcon(ClockGradSvg)
-  export const ChatRoundGradIc = generateSimpleSvgIcon(ChatRoundGradSvg)
   export const CommunicationTwoPeopleGradIc = generateSimpleSvgIcon(CommunicationTwoPeopleGradSvg)
   export const Couple2GradIc = generateSimpleSvgIcon(Couple2GradSvg)
-  export const Cross2GradIc = generateSimpleSvgIcon(Cross2GradSvg)
+  export const CoupleDrinkingAtTableGradIc = generateSimpleSvgIcon(CoupleDrinkingAtTableGradSvg)
   
   export const EducationGradIc = generateSimpleSvgIcon(EducationGradSvg)
   
@@ -173,20 +191,14 @@ export namespace SvgGradIconsPack {
   
   export const HourglassGradIc = generateSimpleSvgIcon(HourglassGradSvg)
   
-  export const InfoSquareRoundedGradIc = generateSimpleSvgIcon(InfoSquareRoundedGradSvg)
-  
   export const MapLocationGradIc = generateSimpleSvgIcon(MapLocationGradSvg)
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   
-  export const PlanetFrameGradIc = generateSimpleSvgIcon(PlanetFrameGradSvg)
-  export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
   export const PuzzlesGradIc = generateSimpleSvgIcon(PuzzlesGradSvg)
   
   export const RelationshipMinusesGradIc = generateSimpleSvgIcon(RelationshipMinusesGradSvg)
   export const RulerVerticalGradIc = generateSimpleSvgIcon(RulerVerticalGradSvg)
-  
-  export const Search2GradIc = generateSimpleSvgIcon(Search2GradSvg)
   
   export const SmokeCigaretteGradIc = generateSimpleSvgIcon(SmokeCigaretteGradSvg)
   
@@ -194,7 +206,6 @@ export namespace SvgGradIconsPack {
   
   export const WineBottleAlcoholGradIc = generateSimpleSvgIcon(WineBottleAlcoholGradSvg)
   export const WorkSuitcaseGradIc = generateSimpleSvgIcon(WorkSuitcaseGradSvg)
-  
   
   
 }

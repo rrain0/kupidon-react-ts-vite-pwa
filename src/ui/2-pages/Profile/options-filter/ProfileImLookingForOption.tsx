@@ -11,7 +11,7 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import Search2GradIc = SvgGradIconsPack.Search2GradIc
+import SearchGradIc = SvgGradIconsPack.SearchGradIc
 
 
 
@@ -75,7 +75,7 @@ const ProfileImLookingForOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<Search2GradIc />}
+          icon={<SearchGradIc />}
           title={titleText.imLookingFor}
           value={value}
           onClick={open}

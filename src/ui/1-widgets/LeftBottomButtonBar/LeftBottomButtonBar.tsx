@@ -73,7 +73,7 @@ const CancelButton = React.memo(({ onClick }: { onClick: Callback }) => {
 const AcceptButton = React.memo(({ onClick }: { onClick: Callback }) => {
   return (
     <Button
-      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg2.accent)}
+      css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.accent)}
       onClick={onClick}
     >
       <CheckmarkIc />

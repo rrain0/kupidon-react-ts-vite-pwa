@@ -16,7 +16,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import row = EmotionCommon.row
-import Gear2Ic = SvgIconsPack.Gear2Ic
+import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import fixedBottom = EmotionCommon.fixedBottom
@@ -88,7 +88,7 @@ const NavBar = React.memo(() => {
                   overlay.open()
                 }}
               >
-                <Gear2Ic />
+                <GearOutlinedIc />
                 <div>{titleText.settings}</div>
               </Button>
               
