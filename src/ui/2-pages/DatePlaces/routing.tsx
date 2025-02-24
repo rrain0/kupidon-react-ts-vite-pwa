@@ -1,13 +1,17 @@
-import React, { Suspense } from 'react'
-import { RouteObject, useMatch } from 'react-router-dom'
+import React, { Suspense, useEffect, useState } from 'react'
+import { RouteObject, useMatch, useNavigate, useSearchParams } from 'react-router-dom'
 import { MockDatePlaces } from 'src/_mock-data/date-places/MockDatePlaces.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { allDateCategories, DateCategory } from 'src/ui-data/special/DateCategoryData.ts'
+import { allDateTypes, DateType } from 'src/ui-data/special/DateTypeData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use
 import full = RouteBuilder.full
+import params = RouteBuilder.params
+import fullParams = RouteBuilder.fullParams
 
 const DatePlacesPage = React.lazy(
   () => import('src/ui/2-pages/DatePlaces/DatePlacesPage.tsx')
@@ -21,7 +25,7 @@ const DatePlaceNotFoundPage = React.lazy(
 
 
 
-const DatePlacesPlaceId = React.memo(() => {
+const RouteDatePlacesPlaceId = React.memo(() => {
   
   const idParam = 'placeId'
   const placeIdRoute = RootRoute.datePlaces.placeId[use](`:${idParam}`)
@@ -45,28 +49,86 @@ const DatePlacesPlaceId = React.memo(() => {
 
 
 // path: 'date-places / :placeId / <check here>'
-const datePlacesPlaceIdRouting: RouteObject[] = [
+const routingDatePlacesPlaceId: RouteObject[] = [
   {
     path: '',
-    Component: DatePlacesPlaceId,
+    Component: RouteDatePlacesPlaceId,
   },
   clearUnknownPathEnding,
 ]
 
 
 
+
+const RouteDatePlaces = React.memo(() => {
+  
+  const navigate = useNavigate()
+  const [search] = useSearchParams()
+  const categoryParamName = RootRoute.datePlaces[params].category
+  const typeParamName = RootRoute.datePlaces[params].type
+  
+  const searchCategory = search.get(categoryParamName)
+  const searchType = search.get(typeParamName)
+  const [category, setCategory] = useState<DateCategory | undefined>()
+  const [type, setType] = useState<DateType | undefined>()
+  
+  useEffect(() => {
+    if (allDateTypes.includes(searchType as any)) {
+      const type = searchType as DateType
+      navigate(RootRoute.datePlaces[fullParams]({
+        anySearchParams: search,
+        allowedNameParams: {
+          category: null,
+          type: type,
+        },
+      }), { replace: true })
+      setCategory(undefined)
+      setType(type)
+    }
+    else if (allDateCategories.includes(searchCategory as any)) {
+      const category = searchCategory as DateCategory
+      navigate(RootRoute.datePlaces[fullParams]({
+        anySearchParams: search,
+        allowedNameParams: {
+          category: searchCategory,
+          type: null,
+        },
+      }), { replace: true })
+      setCategory(category)
+      setType(undefined)
+    }
+    else {
+      navigate(RootRoute.datePlaces[fullParams]({
+        anySearchParams: search,
+        allowedNameParams: {
+          category: null,
+          type: null,
+        },
+      }), { replace: true })
+      setCategory(undefined)
+      setType(undefined)
+    }
+  }, [searchCategory, searchType])
+  
+  
+  
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DatePlacesPage category={category} type={type} />
+    </Suspense>
+  )
+})
+
+
+
 // path: 'date-places / <check here>'
-export const datePlacesRouting: RouteObject[] = [
+export const routingDatePlaces: RouteObject[] = [
   {
     path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <DatePlacesPage />
-      </Suspense>
-    ),
+    Component: RouteDatePlaces,
   },
   {
-    path: RootRoute.datePlaces.placeId[path]+'/',
-    children: datePlacesPlaceIdRouting,
+    path: RootRoute.datePlaces.placeId[path]+'/*',
+    children: routingDatePlacesPlaceId,
   },
 ]

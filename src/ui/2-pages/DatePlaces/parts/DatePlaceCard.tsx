@@ -3,7 +3,9 @@ import React, { useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
@@ -12,19 +14,24 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { DatePlace, DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
-import Children = ReactU.Children
+import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
-import full = RouteBuilder.full
 import fullParams = RouteBuilder.fullParams
 import use = RouteBuilder.use
+import col = EmotionCommon.col
+import rowWrap = EmotionCommon.rowWrap
+import rowC = EmotionCommon.rowC
 
 
-
+const uiVals = {
+  itNear: {
+    'ru-RU': 'Близко',
+  },
+} satisfies UiValues
 
 
 export type DatePlaceCardProps = ClassStyle & {
@@ -37,11 +44,15 @@ export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
     place,
   } = props
   
-  const uiValues = useUiValues(place.uiText)
   
-  const uiText = useMemo(() => ({
-    name: uiValues.name,
-  }), [uiValues])
+  
+  const uiValues = useMemo(() => ({
+    itNear: uiVals.itNear,
+    name: place.uiText.name,
+    shortDescription: place.uiText.shortDescription,
+  }), [place])
+  
+  const uiText = useUiValues(uiValues)
   
   
   const navigate = useNavigate()
@@ -67,10 +78,16 @@ export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
       onClick={selectPlace}
     >
       <ImgSpark
-        css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)}
+        css={ImgSparkS6.t(imgSparkS)}
         src={place.picture}
       />
-      <Title>{uiText.name}</Title>
+      <InfoBox>
+        <Title>{uiText.name}</Title>
+        <ShortDescription>{uiText.shortDescription}</ShortDescription>
+      </InfoBox>
+      <BubblesBox>
+        {place.isNear && <Bubble>{uiText.itNear}</Bubble>}
+      </BubblesBox>
     </DatePlaceBox>
   )
 })
@@ -81,20 +98,61 @@ export default DatePlaceCard
 
 const DatePlaceBox = styled(Card)`
   ${p => CardS.card3S(p.theme)};
-  width: 171px;
-  aspect-ratio: 0.924;
-  height: auto;
+  position: relative;
+  width: 100%;
+  height: fit-content;
   padding: 0;
   gap: 0;
-  display: grid;
-  grid-template-rows: 1fr 44px;
-  place-items: center;
+  ${col};
   box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
   cursor: pointer;
+`
+
+const BubblesBox = styled.div`
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  ${rowWrap};
+  gap: 4px;
+`
+const Bubble = styled.div`
+  height: 20px;
+  border-radius: 999999px;
+  padding: 0 10px;
+  // TODO Theme
+  background-color: white;
+  ${rowC};
+  // TODO Theme
+  color: #232020;
+  ${Txt.s12Bold};
+`
+
+
+const imgSparkS: AppWidgetStyle = [
+  ImgSparkS6.S.img.img.full.normal, {
+    imgFrame: { ratio: 2.594 },
+  },
+]
+
+const InfoBox = styled.div`
+  width: 100%;
+  height: fit-content;
+  ${col};
+  gap: 5px;
+  padding: 10px 16px 16px;
 `
 const Title = styled.div`
   // TODO Theme
   color: black;
   ${Txt.s17Bold};
+`
+const ShortDescription = styled.div`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  // TODO Theme
+  color: #939393;
+  ${Txt.s14};
 `
 

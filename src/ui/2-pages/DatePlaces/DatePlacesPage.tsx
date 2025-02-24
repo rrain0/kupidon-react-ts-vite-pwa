@@ -1,12 +1,10 @@
 import styled from '@emotion/styled'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { TypeU } from '@util/common/TypeU.ts'
+import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { allDateCategories, DateCategory, DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
 import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
-import { allDateTypes, DateType, DateTypeData } from 'src/ui-data/special/DateTypeData.ts'
+import { DateType, DateTypeData } from 'src/ui-data/special/DateTypeData.ts'
 import { DateCategoryCard } from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
 import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
 import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
@@ -16,9 +14,7 @@ import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
-import RootRoute = AppRoutes.RootRoute
-import params = RouteBuilder.params
-import fullParams = RouteBuilder.fullParams
+import Puro = TypeU.Puro
 
 
 
@@ -30,56 +26,12 @@ const uiVals = {
 } satisfies UiValues
 
 
-const DatePlacesPage = React.memo(() => {
-  
-  const navigate = useNavigate()
-  const [search] = useSearchParams()
-  
-  const categoryParamName = RootRoute.datePlaces[params].category
-  const typeParamName = RootRoute.datePlaces[params].type
-  
-  const searchCategory = search.get(categoryParamName)
-  const searchType = search.get(typeParamName)
-  const [category, setCategory] = useState<DateCategory | undefined>()
-  const [type, setType] = useState<DateType | undefined>()
-  
-  useEffect(() => {
-    if (allDateTypes.includes(searchType as any)) {
-      const type = searchType as DateType
-      navigate(RootRoute.datePlaces[fullParams]({
-        anySearchParams: search,
-        allowedNameParams: {
-          category: null,
-          type: type,
-        },
-      }), { replace: true })
-      setCategory(undefined)
-      setType(type)
-    }
-    else if (allDateCategories.includes(searchCategory as any)) {
-      const category = searchCategory as DateCategory
-      navigate(RootRoute.datePlaces[fullParams]({
-        anySearchParams: search,
-        allowedNameParams: {
-          category: searchCategory,
-          type: null,
-        },
-      }), { replace: true })
-      setCategory(category)
-      setType(undefined)
-    }
-    else {
-      navigate(RootRoute.datePlaces[fullParams]({
-        anySearchParams: search,
-        allowedNameParams: {
-          category: null,
-          type: null,
-        },
-      }), { replace: true })
-      setCategory(undefined)
-      setType(undefined)
-    }
-  }, [searchCategory, searchType])
+export type DatePlacesPageProps = Puro<{
+  category: DateCategory
+  type: DateType
+}>
+const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
+  const { category, type } = props
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
@@ -89,7 +41,7 @@ const DatePlacesPage = React.memo(() => {
         return DateTypeData[type].uiText.name
       return uiVals.insightsAndPlacesForDate
     })(),
-  }), [category])
+  }), [category, type])
   
   const uiText = useUiValues(uiValues)
   

@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
@@ -18,6 +19,8 @@ import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
+import col = EmotionCommon.col
+import colC = EmotionCommon.colC
 
 
 
@@ -56,18 +59,20 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   
   
   return (
-    <DateTypeBox
+    <DateCategoryBox
       className={className}
       style={style}
       data-display-name="DateCategoryCard"
       onClick={selectCategory}
     >
       <ImgSpark
-        css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)}
+        css={ImgSparkS6.t(imgSparkS)}
         src={data.picture}
       />
-      <Title>{uiText.dateTypeName}</Title>
-    </DateTypeBox>
+      <InfoBox>
+        <Title>{uiText.dateTypeName}</Title>
+      </InfoBox>
+    </DateCategoryBox>
   )
 })
 DateCategoryCard.displayName = 'DateTypeCard'
@@ -75,22 +80,36 @@ export default DateCategoryCard
 
 
 
-const DateTypeBox = styled(Card)`
+const DateCategoryBox = styled(Card)`
   ${p => CardS.card3S(p.theme)};
   width: 171px;
-  aspect-ratio: 0.924;
-  height: auto;
+  height: fit-content;
   padding: 0;
   gap: 0;
-  display: grid;
-  grid-template-rows: 1fr 44px;
-  place-items: center;
+  ${col};
   box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
   cursor: pointer;
+`
+
+const imgSparkS: AppWidgetStyle = [
+  ImgSparkS6.S.img.img.full.normal, {
+    imgFrame: { ratio: 1.213 },
+  },
+]
+
+const InfoBox = styled.div`
+  width: 100%;
+  height: fit-content;
+  min-height: 44px;
+  ${colC};
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 2px;
 `
 const Title = styled.div`
   // TODO Theme
   color: black;
   ${Txt.s17Bold};
+  overflow-wrap: anywhere;
 `
 

@@ -9,6 +9,7 @@ export type DatePlace = {
   type: DateType[]
   picture: string
   features: string[]
+  isNear: boolean
   phone: string
   email: string
   uiText: UiTextValues<'name' | 'shortDescription' | 'location' | 'description'>

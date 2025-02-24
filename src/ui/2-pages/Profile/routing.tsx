@@ -22,7 +22,7 @@ const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.
 
 
 
-const ProfileIdUserIdTab = React.memo(() => {
+const RouteProfileIdUserIdTab = React.memo(() => {
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
   const authId = auth?.user.id
@@ -60,7 +60,7 @@ const ProfileIdUserIdTab = React.memo(() => {
 
 
 
-const ProfileIdUserIdAny = React.memo(() => {
+const RouteProfileIdUserIdAny = React.memo(() => {
   const [searchParams] = useSearchParams()
   const userIdRoute = RootRoute.profile.id.userId[use](':userId')
   const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
@@ -76,33 +76,33 @@ const ProfileIdUserIdAny = React.memo(() => {
 
 
 // path: 'profile / id / :userId / <check-here>'
-const profileIdUserIdRouting: RouteObject[] = [
+const routingProfileIdUserId: RouteObject[] = [
   {
     path: RootRoute.profile.id.userId.summary[path]+'/*',
-    Component: ProfileIdUserIdTab,
+    Component: RouteProfileIdUserIdTab,
   },
   {
     path: RootRoute.profile.id.userId.preview[path]+'/*',
-    Component: ProfileIdUserIdTab,
+    Component: RouteProfileIdUserIdTab,
   },
   {
     path: RootRoute.profile.id.userId.profile[path]+'/*',
-    Component: ProfileIdUserIdTab,
+    Component: RouteProfileIdUserIdTab,
   },
   {
     path: RootRoute.profile.id.userId.tests[path]+'/*',
-    Component: ProfileIdUserIdTab,
+    Component: RouteProfileIdUserIdTab,
   },
   {
     path: '*',
-    Component: ProfileIdUserIdAny,
+    Component: RouteProfileIdUserIdAny,
   },
 ]
 
 
 
 
-const ProfileIdEmpty = React.memo(() => {
+const RouteProfileId = React.memo(() => {
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
   const authId = auth?.user.id
@@ -127,14 +127,14 @@ const ProfileIdEmpty = React.memo(() => {
 
 
 // path: 'profile / id / <check here>'
-export const profileIdRouting: RouteObject[] = [
+export const routingProfileId: RouteObject[] = [
   {
     path: '',
-    Component: ProfileIdEmpty,
+    Component: RouteProfileId,
   },
   {
     path: RootRoute.profile.id.userId[path]+'/*',
-    children: profileIdUserIdRouting,
+    children: routingProfileIdUserId,
   },
 ]
 
@@ -142,7 +142,7 @@ export const profileIdRouting: RouteObject[] = [
 
 
 
-const ProfileAny = React.memo(() => {
+const RouteProfileAny = React.memo(() => {
   const [searchParams] = useSearchParams()
   return (
     <Navigate
@@ -155,14 +155,14 @@ const ProfileAny = React.memo(() => {
 
 
 // path: 'profile / <check here>'
-export const profileRouting: RouteObject[] = [
+export const routingProfile: RouteObject[] = [
   {
     path: RootRoute.profile.id[path]+'/*',
-    children: profileIdRouting,
+    children: routingProfileId,
   },
   {
     path: '*',
-    Component: ProfileAny,
+    Component: RouteProfileAny,
   },
 ]
 

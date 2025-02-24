@@ -8,12 +8,12 @@ import {
 import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
 import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing'
-import { datePlacesRouting } from 'src/ui/2-pages/DatePlaces/routing.tsx'
+import { routingDatePlaces } from 'src/ui/2-pages/DatePlaces/routing.tsx'
 import { findPairsRouting } from 'src/ui/2-pages/FindPairs/routing'
 import { loginRouting } from 'src/ui/2-pages/Login/routing'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { profileRouting } from 'src/ui/2-pages/Profile/routing.tsx'
+import { routingProfile } from 'src/ui/2-pages/Profile/routing.tsx'
 import { settingRouting } from 'src/ui/2-pages/Settings/routing'
 import { signupRouting } from 'src/ui/2-pages/Signup/routing'
 import { devRouting } from 'src/ui/2-pages/Dev/routing.tsx'
@@ -70,7 +70,7 @@ const rootRoutes: RouteObject[] = [
       
       {
         path: RootRoute.profile[path]+'/*',
-        children: profileRouting,
+        children: routingProfile,
       },
       {
         path: RootRoute.findPairs[path]+'/*',
@@ -93,7 +93,7 @@ const rootRoutes: RouteObject[] = [
       },
       {
         path: RootRoute.datePlaces[path]+'/*',
-        children: datePlacesRouting,
+        children: routingDatePlaces,
       },
       
       

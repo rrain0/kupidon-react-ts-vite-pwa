@@ -13,5 +13,5 @@ const MyComponent = React.memo(() => {
   )
 })
 MyComponent.displayName = 'MyComponent'
-// export default MyComponente
+// export default MyComponent
 
