@@ -17,7 +17,7 @@ const UseEventTestPage = () => {
   
   
   return (
-    <Pages.PageSimpleColors>
+    <Pages.Page>
       <Pages.Content>
         
         <UseEventTest1 />
@@ -25,7 +25,7 @@ const UseEventTestPage = () => {
         <UseEventTest2 />
       
       </Pages.Content>
-    </Pages.PageSimpleColors>
+    </Pages.Page>
   )
 }
 export default UseEventTestPage

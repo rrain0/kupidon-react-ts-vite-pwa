@@ -18,16 +18,14 @@ export namespace Pages {
   export const pageCol = css`
     min-width: ${wMin}px;
     width: min(100%, 100dvw);
-    --h-min: max(100dvh, ${hMin}px);
-    min-height: var(--h-min);
+    min-height: max( min(100%, 100dvh), ${hMin}px );
     position: relative;
     ${col};
   `
   export const pageFillViewport = css`
     min-width: ${wMin}px;
     width: 100dvw;
-    --h-min: ${hMin}px;
-    min-height: var(--h-min);
+    min-height: ${hMin}px;
     height: 100dvh;
   `
   // no overlapping by bottom / top bars
@@ -38,34 +36,35 @@ export namespace Pages {
   
   
   
-  export const pageColors = (t: AppTheme.Theme) => css`
-    ${SimpleGradientBg(t)};
-    color: ${t.page.ct2};
-  `
-  export const pageSimpleColors = (t: AppTheme.Theme) => css`
+  export const pageColor = (t: AppTheme.Theme) => css`
     background: ${t.page.bg};
     color: ${t.page.ct2};
   `
+  export const pageGradColor = (t: AppTheme.Theme) => css`
+    ${SimpleGradientBg(t)};
+    color: ${t.page.ct2};
+  `
   
+  
+  export const PageGrad = styled.main`
+    ${pageCol};
+    ${p => pageGradColor(p.theme)};
+  `
+  export const TabsPageGrad = styled.main`
+    ${pageFillViewport};
+    ${p => pageGradColor(p.theme)}
+  `
   
   export const Page = styled.main`
     ${pageCol};
-    ${p => pageColors(p.theme)};
-  `
-  export const PageSimpleColors = styled.main`
-    ${pageCol};
-    ${p => pageSimpleColors(p.theme)}
-  `
-  export const TabsPage = styled.main`
-    ${pageFillViewport};
-    ${p => pageColors(p.theme)}
+    ${p => pageColor(p.theme)}
   `
   
   
   
   export const colFit = css`
     width: 100%;
-    min-height: var(--h-min);
+    min-height: 100%;
     height: fit-content;
     ${colC};
   `

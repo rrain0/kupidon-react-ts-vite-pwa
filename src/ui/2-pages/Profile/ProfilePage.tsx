@@ -378,7 +378,7 @@ const ProfilePage = React.memo(() => {
   
   return (
     <>
-      <Pages.TabsPage>
+      <Pages.TabsPageGrad>
         
         <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
           {tabsProps => (
@@ -503,7 +503,7 @@ const ProfilePage = React.memo(() => {
           )}
         </UseTabsState>
         
-      </Pages.TabsPage>
+      </Pages.TabsPageGrad>
     </>
   )
 })

@@ -43,6 +43,7 @@ export namespace HeaderArrowS {
       }
       ${W.u({ e: 'header', s: 'normal' }).thisUse} {
         ${Hdrs.page(t)};
+        text-align: left;
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
         ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct};

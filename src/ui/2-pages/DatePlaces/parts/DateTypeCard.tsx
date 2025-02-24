@@ -24,6 +24,9 @@ import VaseMuseumIc = SvgIconsPack.VaseMuseumIc
 import Film2Ic = SvgIconsPack.Film2Ic
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
+import GlassAndDishIc = SvgIconsPack.GlassAndDishIc
+import PresentationScreenIc = SvgIconsPack.PresentationScreenIc
+import CoffeeCupIc = SvgIconsPack.CoffeeCupIc
 
 
 
@@ -40,11 +43,11 @@ export const DateTypeCard = React.memo((props: DateTypeCardProps) => {
   } = props
   
   const data = DateTypeData[type]
-  const uiValues = useUiValues(data.uiText)
+  const uiValues = useMemo(() => ({
+    name: data.name,
+  }), [data])
   
-  const uiText = useMemo(() => ({
-    dateTypeName: uiValues.name,
-  }), [uiValues])
+  const uiText = useUiValues(uiValues)
   
   
   const navigate = useNavigate()
@@ -69,14 +72,19 @@ export const DateTypeCard = React.memo((props: DateTypeCardProps) => {
       onClick={selectType}
     >
       {({
+        // TODO Places
+        restaurant: <GlassAndDishIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.restaurant.color }])} />,
         cafe: <SoupIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.cafe.color }])} />,
+        coffeeHouse: <CoffeeCupIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.coffeeHouse.color }])} />,
         
         museum: <VaseMuseumIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.museum.color }])} />,
         gallery: <PictureArtIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.gallery.color }])} />,
         theatre: <MasksTheatreIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.theatre.color }])} />,
         cinema: <Film2Ic css={SvgIconS6.t([iconS, { iconColor: DateTypeData.cinema.color }])} />,
+        
+        masterClasses: <PresentationScreenIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.masterClasses.color }])} />,
       } satisfies Record<DateType, React.ReactNode>)[type]}
-      <Title>{uiText.dateTypeName}</Title>
+      <Title>{uiText.name}</Title>
     </Button>
   )
 })

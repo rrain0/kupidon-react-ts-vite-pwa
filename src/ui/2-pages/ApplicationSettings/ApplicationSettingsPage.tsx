@@ -77,7 +77,7 @@ const ApplicationSettingsPage = React.memo(() => {
   return (
     <>
     
-      <Pages.Page>
+      <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol>
           
@@ -200,7 +200,7 @@ const ApplicationSettingsPage = React.memo(() => {
         
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       <TopButtonBar backBtn />

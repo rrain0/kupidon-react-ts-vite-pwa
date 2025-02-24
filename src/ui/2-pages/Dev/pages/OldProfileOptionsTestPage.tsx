@@ -31,7 +31,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.PageSimpleColors>
+      <Pages.Page>
         <Pages.Content>
           
           
@@ -137,7 +137,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
           </Card>
         
         </Pages.Content>
-      </Pages.PageSimpleColors>
+      </Pages.Page>
       
       
       <BottomButtonBar settingsBtn />

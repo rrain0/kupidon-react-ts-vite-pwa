@@ -289,7 +289,7 @@ const MbtiTestingPage = React.memo(() => {
         />
       )}
     
-      <Pages.Page>
+      <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol css={css`gap: 30px;`}>
             {exists(displayed) && (
@@ -387,7 +387,7 @@ const MbtiTestingPage = React.memo(() => {
             )}
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>
-      </Pages.Page>
+      </Pages.PageGrad>
       
       <BottomButtonBar settingsBtnLeft />
     </>

@@ -50,7 +50,7 @@ React.memo(
   
   
   
-  return <Pages.PageSimpleColors>
+  return <Pages.Page>
     <Pages.Content> {/* not renders */}
       
       <div>State Test</div>
@@ -59,7 +59,7 @@ React.memo(
       <ViewComponent/> {/* renders */}
       
     </Pages.Content>
-  </Pages.PageSimpleColors>
+  </Pages.Page>
 })
 export default StateTestPage
 

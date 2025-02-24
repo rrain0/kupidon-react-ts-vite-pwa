@@ -5,7 +5,7 @@ import mountainsBridgeCouple
 
 
 
-export const MockDataDateArticles = {
+export const MockDateArticles = {
   
   articles: [
     {

@@ -60,7 +60,7 @@ const EmulatedScrollTestPage = React.memo(() => {
   
   
   return (
-    <Pages.PageSimpleColors>
+    <Pages.Page>
       
       
       <ScrollFrame ref={setFrame}>
@@ -88,7 +88,7 @@ const EmulatedScrollTestPage = React.memo(() => {
       `}/> */}
       
       
-    </Pages.PageSimpleColors>
+    </Pages.Page>
   )
 })
 export default EmulatedScrollTestPage

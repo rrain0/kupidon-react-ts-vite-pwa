@@ -202,7 +202,7 @@ const AccountSettingsPage = React.memo(() => {
   
   return (
     <>
-      <Pages.Page>
+      <Pages.PageGrad>
         
         
         <Pages.AddSafeInsets>
@@ -306,7 +306,7 @@ const AccountSettingsPage = React.memo(() => {
         
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       <TopButtonBar backBtn />

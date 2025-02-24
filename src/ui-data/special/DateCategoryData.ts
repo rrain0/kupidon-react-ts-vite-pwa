@@ -4,7 +4,7 @@ import entertaining from '@im/date-type/entertaining-icon-ea79c8191f6951dc83ed14
 import natural from '@im/date-type/natural-icon-e14a85caf5b9247a00f61b2ce4060c9c.webp'
 import romantic from '@im/date-type/romantic-icon-4bd31add75ca9eea70679dc07789c007.webp'
 import { ObjectU } from '@util/common/ObjectU.ts'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
 import { DateType } from 'src/ui-data/special/DateTypeData.ts'
 import ObjectKeys = ObjectU.ObjectKeys
 
@@ -23,51 +23,41 @@ export type DateCategory =
 export const DateCategoryData: Record<DateCategory, {
   picture: string,
   dateTypes: DateType[],
-  uiText: UiTextValues<'name'>
+  name: UiText,
 }> = {
   romantic: {
     picture: romantic,
-    dateTypes: ['cafe'],
-    uiText: {
-      name: {
-        'ru-RU': 'Романтический',
-      },
+    dateTypes: ['restaurant', 'cafe', 'coffeeHouse'],
+    name: {
+      'ru-RU': 'Романтический',
     },
   },
   cultural: {
     picture: cultural,
     dateTypes: ['museum', 'gallery', 'theatre', 'cinema'],
-    uiText: {
-      name: {
-        'ru-RU': 'Культурный',
-      },
+    name: {
+      'ru-RU': 'Культурный',
     },
   },
   active: {
     picture: natural,
     dateTypes: [],
-    uiText: {
-      name: {
-        'ru-RU': 'Активный',
-      },
+    name: {
+      'ru-RU': 'Активный',
     },
   },
   entertaining: {
     picture: entertaining,
     dateTypes: [],
-    uiText: {
-      name: {
-        'ru-RU': 'Развлекательный',
-      },
+    name: {
+      'ru-RU': 'Развлекательный',
     },
   },
   nonstandard: {
     picture: creative,
-    dateTypes: [],
-    uiText: {
-      name: {
-        'ru-RU': 'Нестандартный',
-      },
+    dateTypes: ['masterClasses'],
+    name: {
+      'ru-RU': 'Нестандартный',
     },
   },
 }

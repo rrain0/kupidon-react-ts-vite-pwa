@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react'
-import { RouteObject, useMatch, useNavigate, useSearchParams } from 'react-router-dom'
+import { Navigate, RouteObject, useMatch, useNavigate, useSearchParams } from 'react-router-dom'
 import { MockDatePlaces } from 'src/_mock-data/date-places/MockDatePlaces.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -62,60 +62,80 @@ const routingDatePlacesPlaceId: RouteObject[] = [
 
 const RouteDatePlaces = React.memo(() => {
   
-  const navigate = useNavigate()
   const [search] = useSearchParams()
   const categoryParamName = RootRoute.datePlaces[params].category
   const typeParamName = RootRoute.datePlaces[params].type
   
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
-  const [category, setCategory] = useState<DateCategory | undefined>()
-  const [type, setType] = useState<DateType | undefined>()
   
-  useEffect(() => {
-    if (allDateTypes.includes(searchType as any)) {
-      const type = searchType as DateType
-      navigate(RootRoute.datePlaces[fullParams]({
-        anySearchParams: search,
-        allowedNameParams: {
-          category: null,
-          type: type,
-        },
-      }), { replace: true })
-      setCategory(undefined)
-      setType(type)
-    }
-    else if (allDateCategories.includes(searchCategory as any)) {
-      const category = searchCategory as DateCategory
-      navigate(RootRoute.datePlaces[fullParams]({
-        anySearchParams: search,
-        allowedNameParams: {
-          category: searchCategory,
-          type: null,
-        },
-      }), { replace: true })
-      setCategory(category)
-      setType(undefined)
-    }
-    else {
-      navigate(RootRoute.datePlaces[fullParams]({
-        anySearchParams: search,
-        allowedNameParams: {
-          category: null,
-          type: null,
-        },
-      }), { replace: true })
-      setCategory(undefined)
-      setType(undefined)
-    }
-  }, [searchCategory, searchType])
+  const category = allDateCategories.includes(searchCategory as any)
+    ? searchCategory as DateCategory
+    : undefined
+  const type = allDateTypes.includes(searchType as any)
+    ? searchType as DateType
+    : undefined
   
+  
+  if (category) return (
+    <>
+      <Navigate
+        to={
+          RootRoute.datePlaces[fullParams]({
+            anySearchParams: search,
+            allowedNameParams: {
+              category: category,
+              type: null,
+            },
+          })
+        }
+        replace
+      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <DatePlacesPage category={category} />
+      </Suspense>
+    </>
+  )
+  
+  if (type) return (
+    <>
+      <Navigate
+        to={
+          RootRoute.datePlaces[fullParams]({
+            anySearchParams: search,
+            allowedNameParams: {
+              category: null,
+              type: type,
+            },
+          })
+        }
+        replace
+      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <DatePlacesPage type={type} />
+      </Suspense>
+    </>
+  )
   
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DatePlacesPage category={category} type={type} />
-    </Suspense>
+    <>
+      <Navigate
+        to={
+          RootRoute.datePlaces[fullParams]({
+            anySearchParams: search,
+            allowedNameParams: {
+              category: null,
+              type: null,
+            },
+          })
+        }
+        replace
+      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <DatePlacesPage />
+      </Suspense>
+    </>
   )
 })
 

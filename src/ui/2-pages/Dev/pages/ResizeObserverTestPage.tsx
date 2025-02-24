@@ -61,7 +61,7 @@ const ResizeObserverTestPage = () => {
   
   
   return (
-    <Pages.PageSimpleColors>
+    <Pages.Page>
       <Pages.Content>
         
         <div>Resize Observer Test Page</div>
@@ -153,7 +153,7 @@ const ResizeObserverTestPage = () => {
         </div>
         
       </Pages.Content>
-    </Pages.PageSimpleColors>
+    </Pages.Page>
   )
 }
 export default ResizeObserverTestPage

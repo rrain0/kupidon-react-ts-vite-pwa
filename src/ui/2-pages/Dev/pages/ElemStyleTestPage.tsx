@@ -32,7 +32,7 @@ const ElemStyleTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.PageSimpleColors>
+      <Pages.Page>
         <Pages.Content>
           
           <button onClick={testDevWidgetStyle4}>Test</button>
@@ -65,7 +65,7 @@ const ElemStyleTestPage = React.memo(() => {
           <TestBox3>TestBox3</TestBox3>
         
         </Pages.Content>
-      </Pages.PageSimpleColors>
+      </Pages.Page>
       
       
       <BottomButtonBar settingsBtn />

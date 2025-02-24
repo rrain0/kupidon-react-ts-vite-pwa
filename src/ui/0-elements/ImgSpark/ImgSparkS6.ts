@@ -87,6 +87,10 @@ export namespace ImgSparkS6 {
               export const full: WidgetStyle = [base, {
                 imgFrame: { sz: 'full' },
               }]
+              // type: img, shape: img, size: full
+              export const wFull: WidgetStyle = [base, {
+                imgFrame: { w: 'full', h: 'auto' },
+              }]
               // type: img, shape: img, size: absFull
               export const absFull: WidgetStyle = [base, {
                 imgFrame: { ...abs },

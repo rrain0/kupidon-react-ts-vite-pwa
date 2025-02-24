@@ -13,9 +13,7 @@ import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
 import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
-import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
@@ -25,6 +23,8 @@ import use = RouteBuilder.use
 import col = EmotionCommon.col
 import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC
+
+
 
 
 const uiVals = {
@@ -48,8 +48,8 @@ export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
   
   const uiValues = useMemo(() => ({
     itNear: uiVals.itNear,
-    name: place.uiText.name,
-    shortDescription: place.uiText.shortDescription,
+    name: place.name,
+    shortDescription: place.shortDescription,
   }), [place])
   
   const uiText = useUiValues(uiValues)
@@ -129,7 +129,7 @@ const Bubble = styled.div`
 
 
 const imgSparkS: AppWidgetStyle = [
-  ImgSparkS6.S.img.img.full.normal, {
+  ImgSparkS6.S.img.img.wFull.normal, {
     imgFrame: { ratio: 2.594 },
   },
 ]

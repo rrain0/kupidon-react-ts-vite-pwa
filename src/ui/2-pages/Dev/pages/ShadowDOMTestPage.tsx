@@ -12,7 +12,7 @@ const ShadowDOMTestPage = React.memo(() => {
   
   return (
     <>
-      <Pages.PageSimpleColors>
+      <Pages.Page>
         <Pages.Content>
           
           <div>Shadow DOM Test</div>
@@ -89,7 +89,7 @@ const ShadowDOMTestPage = React.memo(() => {
           </div>
         
         </Pages.Content>
-      </Pages.PageSimpleColors>
+      </Pages.Page>
       
       <BottomButtonBar settingsBtn />
     </>

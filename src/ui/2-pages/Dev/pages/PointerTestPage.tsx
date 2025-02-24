@@ -106,7 +106,7 @@ const PointerTestPage = React.memo(() => {
   
   
   return (
-    <Pages.PageSimpleColors>
+    <Pages.Page>
       <Pages.Content>
         
         <button
@@ -224,7 +224,7 @@ const PointerTestPage = React.memo(() => {
         />
       
       </Pages.Content>
-    </Pages.PageSimpleColors>
+    </Pages.Page>
   )
 })
 export default PointerTestPage

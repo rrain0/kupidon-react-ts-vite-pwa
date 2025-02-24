@@ -184,7 +184,7 @@ const SignupPage = React.memo(() => {
   
   return (
     <>
-      <Pages.Page>
+      <Pages.PageGrad>
         
         <Pages.AddSafeInsets>
           <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
@@ -290,7 +290,7 @@ const SignupPage = React.memo(() => {
         
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { MockDataDateArticles } from 'src/_mock-data/date-articles/MockDataDateArticles.ts'
+import { MockDateArticles } from 'src/_mock-data/date-articles/MockDateArticles.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { allDateCategories, DateCategory } from 'src/ui-data/special/DateCategoryData.ts'
@@ -38,7 +38,7 @@ const BowAndArrowsPage = React.memo(() => {
     bowAndArrows: titleText.bowAndArrows,
     poster: 'Афиша',
     insightsAndPlacesForDate: 'Идеи и места для свиданий',
-    interestingIt: 'Интересное',
+    kupidonNotes: 'Заметки Купидона',
     ourPartners: 'Наши партнёры',
   }), [titleText])
   
@@ -47,7 +47,7 @@ const BowAndArrowsPage = React.memo(() => {
   return (
     <>
     
-      <Pages.Page>
+      <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0 }}>
             
@@ -95,14 +95,14 @@ const BowAndArrowsPage = React.memo(() => {
             <div style={{ height: 16 }} />
             
             <HeaderArrow css={HeaderArrowS.page}>
-              {uiText.interestingIt}
+              {uiText.kupidonNotes}
             </HeaderArrow>
             
             <div style={{ height: 16 }} />
             
             <DateArticlesOverflow>
               <DateArticlesList>
-                {MockDataDateArticles.articles.map(a => (
+                {MockDateArticles.articles.map(a => (
                   <DateArticlePreviewCard
                     key={a.description}
                     picture={a.previewImg}
@@ -115,17 +115,17 @@ const BowAndArrowsPage = React.memo(() => {
             
             <div style={{ height: 16 }} />
             
-            <HeaderArrow css={HeaderArrowS.page}>
+            {/* <HeaderArrow css={HeaderArrowS.page}>
               {uiText.ourPartners}
             </HeaderArrow>
             
-            <div style={{ height: 16 }} />
+            <div style={{ height: 16 }} /> */}
           
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       <BottomButtonBar />

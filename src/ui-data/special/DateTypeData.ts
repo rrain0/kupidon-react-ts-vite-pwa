@@ -1,5 +1,5 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
 import ObjectKeys = ObjectU.ObjectKeys
 
 
@@ -7,9 +7,9 @@ import ObjectKeys = ObjectU.ObjectKeys
 
 export type DateType =
   // romantic
-  //// | 'restaurant'
+  | 'restaurant'
   | 'cafe'
-  //// | 'coffeeHouse' // Кофейня
+  | 'coffeeHouse' // Кофейня
   //// | 'walking' // Прогулки на свежем воздухе
   // cultural
   | 'museum'
@@ -25,7 +25,7 @@ export type DateType =
   //// | 'interactive' // Интерактивные развлечения
   //// | 'eveningEntertainment' // Вечерние развлечения
   // nonstandard
-  //// | 'masterClasses' // Мастер-классы
+  | 'masterClasses' // Мастер-классы
   //// | 'streamCocktails' // Центры паровых коктейлей
   //// | 'volunteering' // Волонтёрство
 
@@ -33,48 +33,59 @@ export type DateType =
 
 export const DateTypeData: Record<DateType, {
   color: string
-  uiText: UiTextValues<'name'>
+  name: UiText,
 }> = {
   
+  restaurant: {
+    color: '#AA0A0A',
+    name: {
+      'ru-RU': 'Ресторан',
+    },
+  },
   cafe: {
     color: '#FFB422',
-    uiText: {
-      name: {
-        'ru-RU': 'Кафе',
-      },
+    name: {
+      'ru-RU': 'Кафе',
+    },
+  },
+  coffeeHouse: {
+    color: '#754010',
+    name: {
+      'ru-RU': 'Кофейня',
     },
   },
   
+  
   museum: {
     color: '#754010',
-    uiText: {
-      name: {
-        'ru-RU': 'Музеи',
-      },
+    name: {
+      'ru-RU': 'Музеи',
     },
   },
   gallery: {
     color: '#1888AB',
-    uiText: {
-      name: {
-        'ru-RU': 'Галереи',
-      },
+    name: {
+      'ru-RU': 'Галереи',
     },
   },
   theatre: {
     color: '#FFB422',
-    uiText: {
-      name: {
-        'ru-RU': 'Театры',
-      },
+    name: {
+      'ru-RU': 'Театры',
     },
   },
   cinema: {
     color: '#AA0A0A',
-    uiText: {
-      name: {
-        'ru-RU': 'Кинотеатры',
-      },
+    name: {
+      'ru-RU': 'Кинотеатры',
+    },
+  },
+  
+  
+  masterClasses: {
+    color: '#1888AB',
+    name: {
+      'ru-RU': 'Мастер-классы',
     },
   },
 }

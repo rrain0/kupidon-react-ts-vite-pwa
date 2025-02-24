@@ -18,7 +18,7 @@ const ElemRefTestPage = () => {
   const [cnt, setCnt] = useState(0)
   
   return (
-    <Pages.PageSimpleColors>
+    <Pages.Page>
       <Pages.Content>
         
         <div>Element Ref Test</div>
@@ -31,7 +31,7 @@ const ElemRefTestPage = () => {
         <ChainedResize2 />
       
       </Pages.Content>
-    </Pages.PageSimpleColors>
+    </Pages.Page>
   )
 }
 export default ElemRefTestPage

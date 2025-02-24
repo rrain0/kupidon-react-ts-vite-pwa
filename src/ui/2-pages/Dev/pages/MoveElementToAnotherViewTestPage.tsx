@@ -23,7 +23,7 @@ const MoveElementToAnotherViewTestPage = ()=>{
   const container2 = useRef<HTMLDivElement>(null)
   
   
-  return <Pages.PageSimpleColors>
+  return <Pages.Page>
     <Pages.Content>
       
       <button
@@ -45,7 +45,7 @@ const MoveElementToAnotherViewTestPage = ()=>{
       }
     
     </Pages.Content>
-  </Pages.PageSimpleColors>
+  </Pages.Page>
 }
 export default MoveElementToAnotherViewTestPage
 

@@ -71,11 +71,13 @@ import WarnTriangleOutlinedSvg from '@ic/normal/ui/warn-triangle-outlined.svg?re
 import BowArrowSvg from '@ic/normal/special/bow-arrow.svg?react'
 
 import CardsHeartSvg from '@ic/normal/special/cards-heart.svg?react'
+import CoffeeCupSvg from '@ic/normal/special/coffee-cup.svg?react'
 
 import DumbbellSvg from '@ic/normal/special/dumbbell.svg?react'
 
 import GenderSvg from '@ic/normal/special/gender.svg?react'
 import GiftBoxSvg from '@ic/normal/special/gift-box.svg?react'
+import GlassAndDishSvg from '@ic/normal/special/glass-and-dish.svg?react'
 
 import HeartSvg from '@ic/normal/special/heart.svg?react'
 import HeartFilledSvg from '@ic/normal/special/heart-filled.svg?react'
@@ -87,6 +89,7 @@ import MasksTheatreSvg from '@ic/normal/special/masks-theatre.svg?react'
 import NameCardSvg from '@ic/normal/special/name-card.svg?react'
 
 import PictureArtSvg from '@ic/normal/special/picture-art.svg?react'
+import PresentationScreenSvg from '@ic/normal/special/presentation-screen.svg?react'
 import PriceTagSvg from '@ic/normal/special/price-tag.svg?react'
 import ProfileCardSvg from '@ic/normal/special/profile-card.svg?react'
 
@@ -297,11 +300,13 @@ export namespace SvgIconsPack {
   export const BowArrowIc = generateSimpleSvgIcon(BowArrowSvg)
   
   export const CardsHeartIc = generateSimpleSvgIcon(CardsHeartSvg)
+  export const CoffeeCupIc = generateSimpleSvgIcon(CoffeeCupSvg)
   
   export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
   
   export const GenderIc = generateSimpleSvgIcon(GenderSvg)
   export const GiftBoxIc = generateSimpleSvgIcon(GiftBoxSvg)
+  export const GlassAndDishIc = generateSimpleSvgIcon(GlassAndDishSvg)
   
   export const HeartIc = generateSimpleSvgIcon(HeartSvg)
   export const HeartFilledIc = generateSimpleSvgIcon(HeartFilledSvg)
@@ -313,6 +318,7 @@ export namespace SvgIconsPack {
   export const NameCardIc = generateSimpleSvgIcon(NameCardSvg)
   
   export const PictureArtIc = generateSimpleSvgIcon(PictureArtSvg)
+  export const PresentationScreenIc = generateSimpleSvgIcon(PresentationScreenSvg)
   export const PriceTagIc = generateSimpleSvgIcon(PriceTagSvg)
   export const ProfileCardIc = generateSimpleSvgIcon(ProfileCardSvg)
   

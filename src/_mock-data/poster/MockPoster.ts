@@ -1,8 +1,9 @@
 import concert from 'src/_mock-data/poster/concert-icon-nainoa-shizuru-NcdG9mK3PBY-unsplash.webp'
+import theatre from './theatre-icon--ca0e77b5b5394ea439ab1d3c5c4be985.webp'
 
 
 
-export const MockDataPoster = {
+export const MockPoster = {
   
   posters: [
     {

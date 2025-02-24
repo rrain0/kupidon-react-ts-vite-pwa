@@ -11,7 +11,7 @@ const FindPairsPage = React.memo(() => {
   
   return (
     <>
-      <Pages.Page>
+      <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol>
             
@@ -22,7 +22,7 @@ const FindPairsPage = React.memo(() => {
         
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       <TopButtonBar />

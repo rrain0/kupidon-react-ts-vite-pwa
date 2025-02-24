@@ -36,9 +36,9 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
       if (category)
-        return DateCategoryData[category].uiText.name
+        return DateCategoryData[category].name
       if (type)
-        return DateTypeData[type].uiText.name
+        return DateTypeData[type].name
       return uiVals.insightsAndPlacesForDate
     })(),
   }), [category, type])
@@ -48,7 +48,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   return (
     <>
     
-      <Pages.Page>
+      <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0 }}>
             
@@ -98,7 +98,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
         </Pages.AddSafeInsets>
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       <BottomButtonBar />

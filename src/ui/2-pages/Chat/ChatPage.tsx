@@ -19,7 +19,7 @@ const ChatPage = React.memo(() => {
   return (
     <>
     
-      <Pages.Page>
+      <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol>
           
@@ -34,7 +34,7 @@ const ChatPage = React.memo(() => {
         </Pages.AddSafeInsets>
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       <BottomButtonBar />
       

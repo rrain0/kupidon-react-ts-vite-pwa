@@ -80,7 +80,7 @@ const DevPage = React.memo(() => {
   return (
     <>
       
-      <Pages.PageSimpleColors>
+      <Pages.Page>
         <Pages.Content>
           
           <div css={cssStyle}>A</div>
@@ -322,7 +322,7 @@ const DevPage = React.memo(() => {
         
         
         </Pages.Content>
-      </Pages.PageSimpleColors>
+      </Pages.Page>
       
       
       <TopButtonBar backBtn />

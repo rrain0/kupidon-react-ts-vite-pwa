@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React from 'react'
-import { MockDataPoster } from 'src/_mock-data/poster/MockDataPoster.ts'
+import { MockPoster } from 'src/_mock-data/poster/MockPoster.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -19,7 +19,7 @@ import PriceTagIc = SvgIconsPack.PriceTagIc
 
 const PosterPreview = React.memo(() => {
   
-  const p = MockDataPoster.posters[0]
+  const p = MockPoster.posters[0]
   
   return (
     <Frame
@@ -69,8 +69,7 @@ export default PosterPreview
 const Frame = styled.div`
   position: relative;
   width: 100%;
-  height: auto;
-  aspect-ratio: 2.138;
+  height: 214px;
   --r: ${StyleVals.cardRadius}px;
   border-radius: var(--r);
   overflow: hidden;
@@ -85,9 +84,10 @@ const selectMeterS: AppWidgetStyle = t => [
   SelectMeterS6.S.row.round.md.normal, {
     meterFrame: {
       area: 'meter', placeSelf: 'end center',
-      pb: 8,
+      pb: 8, g: 3,
       pos: 'rel', z: 10,
     },
+    meter: { sz: 3 },
     // TODO Theme
     meter0: { bgColor: '#D9D9D940' },
     // TODO Theme

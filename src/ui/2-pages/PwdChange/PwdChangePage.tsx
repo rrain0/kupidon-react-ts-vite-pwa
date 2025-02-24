@@ -139,7 +139,7 @@ const PwdChangePage = React.memo(() => {
   return (
     <>
     
-      <Pages.Page>
+      <Pages.PageGrad>
         
         <Pages.AddSafeInsets>
           <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
@@ -219,7 +219,7 @@ const PwdChangePage = React.memo(() => {
         </Pages.AddSafeInsets>
         
         <PageScrollbars />
-      </Pages.Page>
+      </Pages.PageGrad>
       
       
       <TopButtonBar backBtn />

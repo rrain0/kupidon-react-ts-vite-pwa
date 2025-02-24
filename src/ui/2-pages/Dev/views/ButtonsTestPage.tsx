@@ -18,7 +18,7 @@ const ButtonsTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.PageSimpleColors>
+      <Pages.Page>
         <Pages.Content>
           
           <div>Common buttons showcase</div>
@@ -64,7 +64,7 @@ const ButtonsTestPage = React.memo(() => {
           </BlocksContainer>
         
         </Pages.Content>
-      </Pages.PageSimpleColors>
+      </Pages.Page>
       
       
       <BottomButtonBar settingsBtn />

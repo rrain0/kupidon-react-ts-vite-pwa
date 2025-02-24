@@ -37,11 +37,11 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   } = props
   
   const data = DateCategoryData[category]
-  const uiValues = useUiValues(data.uiText)
+  const uiValues = useMemo(() => ({
+    name: data.name,
+  }), [data])
   
-  const uiText = useMemo(() => ({
-    dateTypeName: uiValues.name,
-  }), [uiValues])
+  const uiText = useUiValues(uiValues)
   
   
   const navigate = useNavigate()
@@ -70,7 +70,7 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
         src={data.picture}
       />
       <InfoBox>
-        <Title>{uiText.dateTypeName}</Title>
+        <Title>{uiText.name}</Title>
       </InfoBox>
     </DateCategoryBox>
   )
@@ -82,7 +82,7 @@ export default DateCategoryCard
 
 const DateCategoryBox = styled(Card)`
   ${p => CardS.card3S(p.theme)};
-  width: 171px;
+  width: 233px;
   height: fit-content;
   padding: 0;
   gap: 0;
@@ -92,8 +92,8 @@ const DateCategoryBox = styled(Card)`
 `
 
 const imgSparkS: AppWidgetStyle = [
-  ImgSparkS6.S.img.img.full.normal, {
-    imgFrame: { ratio: 1.213 },
+  ImgSparkS6.S.img.img.wFull.normal, {
+    imgFrame: { ratio: 1.371 },
   },
 ]
 
