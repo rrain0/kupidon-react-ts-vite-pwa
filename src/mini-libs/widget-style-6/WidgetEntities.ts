@@ -255,6 +255,22 @@ export namespace AdditionalProps {
       WidgetProps.height, WidgetPropValue.of(value),
     ]],
   })
+  // min-width + min-height
+  export const minSize = WidgetMultiPropTransformer.of({
+    title: 'min-size -> min-width & min-height',
+    transform: (value: StyleValue) => [[
+      WidgetProps.minWidth, WidgetPropValue.of(value),
+      WidgetProps.minHeight, WidgetPropValue.of(value),
+    ]],
+  })
+  // max-width + max-height
+  export const maxSize = WidgetMultiPropTransformer.of({
+    title: 'max-size -> max-width & max-height',
+    transform: (value: StyleValue) => [[
+      WidgetProps.maxWidth, WidgetPropValue.of(value),
+      WidgetProps.maxHeight, WidgetPropValue.of(value),
+    ]],
+  })
   
   export const abs = WidgetMultiPropTransformer.of({
     title: 'abs -> top, right, bottom, left',

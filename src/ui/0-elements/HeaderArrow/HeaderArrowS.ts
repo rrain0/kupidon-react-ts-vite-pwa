@@ -46,7 +46,10 @@ export namespace HeaderArrowS {
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
         ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct};
+        min-height: 26px;
+        min-width: 26px;
         height: 26px;
+        width: 26px;
       }
     `
   }
