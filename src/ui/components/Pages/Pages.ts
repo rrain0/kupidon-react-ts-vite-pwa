@@ -13,20 +13,21 @@ import colC = EmotionCommon.colC
 export namespace Pages {
   
   const wMin = 320
+  const hMin = 480
   
   export const pageCol = css`
     min-width: ${wMin}px;
     width: min(100%, 100dvw);
-    min-height: max(100dvh, ${wMin}px);
-    //height: auto;
-    //max-height: fit-content;
+    --h-min: max(100dvh, ${hMin}px);
+    min-height: var(--h-min);
     position: relative;
     ${col};
   `
   export const pageFillViewport = css`
     min-width: ${wMin}px;
     width: 100dvw;
-    min-height: ${wMin}px;
+    --h-min: ${hMin}px;
+    min-height: var(--h-min);
     height: 100dvh;
   `
   // no overlapping by bottom / top bars
@@ -64,7 +65,7 @@ export namespace Pages {
   
   export const colFit = css`
     width: 100%;
-    min-height: 100%;
+    min-height: var(--h-min);
     height: fit-content;
     ${colC};
   `
@@ -105,6 +106,17 @@ export namespace Pages {
   export const Content = styled.div(content)
   export const ContentSmCol = styled.div(contentSmCol)
   export const ContentSmColForm = styled.form(contentSmColForm)
+  
+  
+  
+  
+  
+  export const PageHeaderBox = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  `
   
   
   

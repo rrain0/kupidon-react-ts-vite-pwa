@@ -21,6 +21,7 @@ import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import full = RouteBuilder.full
 import fullParams = RouteBuilder.fullParams
+import use = RouteBuilder.use
 
 
 
@@ -47,13 +48,14 @@ export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
   const [search] = useSearchParams()
   
   const selectPlace = () => {
-    /* navigate(RootRoute.datePlaces[fullParams]({
+    const placesParams = RootRoute.datePlaces[params]
+    navigate(RootRoute.datePlaces.placeId[use](place.id)[fullParams]({
       anySearchParams: search,
-      allowedNameParams: {
-        place: place,
-        type: null,
+      anyPathParams: {
+        [placesParams.category]: null,
+        [placesParams.type]: null,
       },
-    })) */
+    }))
   }
   
   

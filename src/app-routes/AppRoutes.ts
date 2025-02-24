@@ -72,6 +72,7 @@ export namespace AppRoutes {
       // ...?type=cafe
       type: 'type',
     },
+    placeId: buildPath(':placeId'),
   })
   
   

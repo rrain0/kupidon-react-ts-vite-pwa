@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -19,9 +18,8 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
-import full = RouteBuilder.full
-import exists = TypeU.exists
 import fullParams = RouteBuilder.fullParams
+
 
 
 
@@ -42,8 +40,8 @@ const DatePlacesPage = React.memo(() => {
   
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
-  const [displayedCategory, setDisplayedCategory] = useState<DateCategory | undefined>()
-  const [displayedType, setDisplayedType] = useState<DateType | undefined>()
+  const [category, setCategory] = useState<DateCategory | undefined>()
+  const [type, setType] = useState<DateType | undefined>()
   
   useEffect(() => {
     if (allDateTypes.includes(searchType as any)) {
@@ -55,8 +53,8 @@ const DatePlacesPage = React.memo(() => {
           type: type,
         },
       }), { replace: true })
-      setDisplayedCategory(undefined)
-      setDisplayedType(type)
+      setCategory(undefined)
+      setType(type)
     }
     else if (allDateCategories.includes(searchCategory as any)) {
       const category = searchCategory as DateCategory
@@ -67,8 +65,8 @@ const DatePlacesPage = React.memo(() => {
           type: null,
         },
       }), { replace: true })
-      setDisplayedCategory(category)
-      setDisplayedType(undefined)
+      setCategory(category)
+      setType(undefined)
     }
     else {
       navigate(RootRoute.datePlaces[fullParams]({
@@ -78,20 +76,20 @@ const DatePlacesPage = React.memo(() => {
           type: null,
         },
       }), { replace: true })
-      setDisplayedCategory(undefined)
-      setDisplayedType(undefined)
+      setCategory(undefined)
+      setType(undefined)
     }
   }, [searchCategory, searchType])
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
-      if (displayedCategory)
-        return DateCategoryData[displayedCategory].uiText.name
-      if (displayedType)
-        return DateTypeData[displayedType].uiText.name
+      if (category)
+        return DateCategoryData[category].uiText.name
+      if (type)
+        return DateTypeData[type].uiText.name
       return uiVals.insightsAndPlacesForDate
     })(),
-  }), [displayedCategory])
+  }), [category])
   
   const uiText = useUiValues(uiValues)
   
@@ -102,17 +100,17 @@ const DatePlacesPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0 }}>
             
-            <PageHeaderBox>
+            <Pages.PageHeaderBox>
               <BackBtn />
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
               <div />
-            </PageHeaderBox>
+            </Pages.PageHeaderBox>
             
             <div style={{ height: 28 }} />
             
             <DatePlacesList>
               
-              {!displayedCategory && !displayedType && allDateCategories.map(dc => (
+              {!category && !type && allDateCategories.map(dc => (
                 <DateCategoryCard
                   key={dc}
                   style={{ width: '100%' }}
@@ -120,8 +118,8 @@ const DatePlacesPage = React.memo(() => {
                 />
               ))}
               
-              {displayedCategory
-                && DateCategoryData[displayedCategory].dateTypes.map(dt => (
+              {category
+                && DateCategoryData[category].dateTypes.map(dt => (
                   <DateTypeCard
                     key={dt}
                     type={dt}
@@ -130,8 +128,8 @@ const DatePlacesPage = React.memo(() => {
                 ))
               }
               
-              {displayedType && (() => {
-                const places = DatePlacesData.filter(place => place.type.includes(displayedType))
+              {type && (() => {
+                const places = DatePlacesData.filter(place => place.type.includes(type))
                 if (!places.length) return 'Пусто'
                 return places.map(place => (
                   <DatePlaceCard
@@ -160,13 +158,6 @@ export default DatePlacesPage
 
 
 
-
-const PageHeaderBox = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-`
 
 
 const DatePlacesList = styled.div`

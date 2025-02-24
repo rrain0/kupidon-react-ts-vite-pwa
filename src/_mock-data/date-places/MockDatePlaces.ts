@@ -3,6 +3,7 @@ import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
 import theatre from './theatre-icon--ca0e77b5b5394ea439ab1d3c5c4be985.webp'
 
 
+
 export const MockDatePlaces = {
   places: [
     /* {

@@ -105,7 +105,6 @@ export namespace RouteBuilder {
     applyParams?: {
       anySearchParams?: URLSearchParams | empty
       allowedSearchParams?: URLSearchParams | empty
-      anyNameParams?: { [pathName: string]: string | empty } | empty
       allowedNameParams?: empty | (
         R[typeof params] extends object
           ? { [Path in ObjectKeysType<R[typeof params]>]?: string | empty }
@@ -145,12 +144,6 @@ export namespace RouteBuilder {
         else if (type === 'anySearchParams') {
           applyParam.forEach((v, n) => {
             newParams[n] = v
-          })
-        }
-        else if (type === 'anyNameParams') {
-          ObjectEntries(applyParam).forEach(([n, v]) => {
-            if (v === null) delete newParams[this[params]![n]]
-            if (exists(v)) newParams[this[params]![n]] = v
           })
         }
         else if (type === 'anyPathParams') {
@@ -309,7 +302,6 @@ export namespace RouteBuilder {
     testStringValue = testRoutes.profile2.id[path]
     testStringValue = testRoutes.profile2.id.idName[full]()
     testStringValue = testRoutes.profile2.id2.down.downX2[fullParams]({
-      anyNameParams: { down: 'y', param: 'a' },
       allowedNameParams: { down: 'y', /!*param: 'a'*!/ }, // error for 'param' as expected
       anyPathParams: { downParam: 'y', param: 'a' },
       allowedPathParams: { downParam: 'y', param: 'a' }, // NO error for 'param' as expected

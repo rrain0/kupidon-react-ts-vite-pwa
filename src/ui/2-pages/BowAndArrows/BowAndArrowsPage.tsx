@@ -53,13 +53,13 @@ const BowAndArrowsPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0 }}>
             
-            <PageHeaderBox>
+            <Pages.PageHeaderBox>
               <div />
               <Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page>
               <Button css={IconButtonS6.t(calendarButtonS)}>
                 <Calendar2GradIc />
               </Button>
-            </PageHeaderBox>
+            </Pages.PageHeaderBox>
             
             <div style={{ height: 27 }} />
             
@@ -139,12 +139,6 @@ export default BowAndArrowsPage
 
 
 
-const PageHeaderBox = styled.div`
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-`
 const calendarButtonS: AppWidgetStyle = t => [
   IconButtonS6.S.filled.round.lg.accent4, {
     button: { justifySelf: 'end' },
