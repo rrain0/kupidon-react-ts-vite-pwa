@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'

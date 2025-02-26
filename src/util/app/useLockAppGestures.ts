@@ -1,26 +1,24 @@
 import { useId, useLayoutEffect } from 'react'
-import { useRecoilState } from 'recoil'
-import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
 
 export const useLockAppGestures = (lock = false) => {
-  const [{ gesturesBusyBy }, setAppRecoil] = useRecoilState(AppRecoil)
+  const setApp = useAppZustand.setState
+  const gesturesBusyBy = useAppZustand(s => s.gesturesBusyBy)
+  
   const reactId = useId()
   
   
-  useLayoutEffect(
-    () => {
-      if (lock && gesturesBusyBy === undefined) {
-        setAppRecoil(s => ({ ...s, gesturesBusyBy: reactId }))
-      }
-      if (!lock && gesturesBusyBy === reactId) {
-        setAppRecoil(s => ({ ...s, gesturesBusyBy: undefined }))
-      }
-    },
-    [lock]
-  )
+  useLayoutEffect(() => {
+    if (lock && gesturesBusyBy === undefined) {
+      setApp({ gesturesBusyBy: reactId })
+    }
+    if (!lock && gesturesBusyBy === reactId) {
+      setApp({ gesturesBusyBy: undefined })
+    }
+  }, [lock])
   
   const canThisComponentUseGestures = [undefined, reactId].includes(gesturesBusyBy)
   

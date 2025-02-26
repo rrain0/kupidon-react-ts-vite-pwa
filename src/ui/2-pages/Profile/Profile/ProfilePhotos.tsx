@@ -29,7 +29,6 @@ import {
   newDefaultProfilePhoto,
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
-import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -49,6 +48,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import abs = EmotionCommon.abs
 import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc = SvgIconsPack.PlusIc
@@ -105,7 +105,7 @@ export type ProfilePhotosProps = {
 const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   const { images, setImages } = props
   const { theme } = useRecoilValue(ThemeRecoil)
-  const { isDraggingFiles } = useRecoilValue(AppRecoil)
+  const isDraggingFiles = useAppZustand(s => s.isDraggingFiles)
   
   
   const progressAnim = useMemo(() => radialGradKfs(theme), [theme])

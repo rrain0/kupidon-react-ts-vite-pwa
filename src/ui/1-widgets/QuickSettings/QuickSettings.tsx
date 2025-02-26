@@ -11,7 +11,6 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -32,6 +31,7 @@ import GearIc = SvgIconsPack.GearIc
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import Callback = TypeU.Callback
 
 
@@ -47,7 +47,8 @@ const QuickSettings = React.memo((props: SettingsProps) => {
   const { isOpen, close } = props
   
   const auth = useRecoilValue(AuthRecoil)
-  const [app, setApp] = useRecoilState(AppRecoil)
+  const canInstall = useAppZustand(s => s.canInstall)
+  const setApp = useAppZustand.setState
   
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
@@ -129,7 +130,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     {titleText.testPage}
                   </Button>
                   
-                  {app.canInstall && (
+                  {canInstall && (
                     <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                       onClick={async () => await promptInstall()}
                     >
@@ -146,7 +147,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                   
                   {import.meta.env.DEV && (
                     <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
-                      onClick={() => setApp({ ...app, showDevOverlay: !app.showDevOverlay })}
+                      onClick={() => setApp(s => ({ showDevOverlay: !s.showDevOverlay }))}
                     >
                       Show Dev Overlay
                     </Button>

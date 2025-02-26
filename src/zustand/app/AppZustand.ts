@@ -1,24 +1,21 @@
-import { atom } from 'recoil'
+import { create } from 'zustand'
 
 
 
-
-export type AppRecoilType = {
+export type AppZustand = {
   canInstall: boolean
   isDraggingFiles: boolean
   gesturesBusyBy: undefined | string
-  
   showDevOverlay: boolean
 }
-const Default: AppRecoilType = {
+
+
+
+export const useAppZustand = create<AppZustand>()((set, get, store) => ({
   canInstall: false,
   isDraggingFiles: false,
   gesturesBusyBy: undefined,
   showDevOverlay: false,
-}
-export const AppRecoil = atom<AppRecoilType>({
-  key: 'app',
-  default: Default,
-})
+}))
 
 

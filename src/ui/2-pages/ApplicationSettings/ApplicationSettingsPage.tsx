@@ -19,7 +19,6 @@ import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
-import { AppRecoil } from 'src/recoil/state/AppRecoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -33,13 +32,14 @@ import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputS
 import col = EmotionCommon.col
 import AddModuleIc = SvgIconsPack.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
 
 
 const ApplicationSettingsPage = React.memo(() => {
-  const app = useRecoilValue(AppRecoil)
+  const canInstall = useAppZustand(s => s.canInstall)
   const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
   
   const actionText = useUiValues(ActionUiText)
@@ -166,7 +166,7 @@ const ApplicationSettingsPage = React.memo(() => {
             
             <RoundButtonsContainer>
               
-              {app.canInstall && (
+              {canInstall && (
                 <Button css={normalIconRoundButton}
                   onClick={async () => {
                     const installed = await promptInstall()

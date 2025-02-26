@@ -1,5 +1,6 @@
 import { NavBarPlace } from 'src/ui/1-widgets/NavBar/NavBar.tsx'
 import { create } from 'zustand'
+import { StateCreator } from 'zustand/vanilla'
 
 
 
@@ -8,19 +9,24 @@ export type NavBarStore = {
   place: NavBarPlace | undefined
 }
 
-export type ZustandStore = {
-  navBar?: NavBarStore | undefined
+export type NavBarZustandSlice = {
+  navBar: NavBarStore | undefined
   setNavBar: (navBar?: NavBarStore) => void
-  
-  //count: number
-  //inc: () => void
 }
 
-
-
-export const useZustand = create<ZustandStore>()((set) => ({
+export const createNavBarZustandSlice: StateCreator<NavBarZustandSlice> = set => ({
   navBar: undefined,
   setNavBar: (navBar?: NavBarStore) => set({ navBar }),
+})
+
+
+
+export type ZustandStore = NavBarZustandSlice
+
+
+
+export const useZustand = create<ZustandStore>()((set, get, store) => ({
+  ...createNavBarZustandSlice(set, get, store),
   
   // count: 1,
   // inc: () => set((state) => ({ count: state.count + 1 })),

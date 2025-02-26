@@ -1,19 +1,18 @@
 import { useLayoutEffect } from 'react'
-import { useRecoilState } from 'recoil'
-import { AppRecoil } from 'src/recoil/state/AppRecoil.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
-export const useAppInstallationSetup = ()=>{
+export const useAppInstallationSetup = () => {
   
-  const [app, setApp] = useRecoilState(AppRecoil)
+  const setApp = useAppZustand.setState
   
-  useLayoutEffect(()=>{
-    setApp(s=>({ ...s, canInstall: !!beforeInstallPromptEvent }))
-    onBeforeInstallPromptEvent = ev=>{
-      setApp(s=>({ ...s, canInstall: !!ev }))
+  useLayoutEffect(() => {
+    setApp({ canInstall: !!beforeInstallPromptEvent })
+    onBeforeInstallPromptEvent = ev => {
+      setApp({ canInstall: !!ev })
     }
-    return ()=>onBeforeInstallPromptEvent=undefined
-  },[setApp])
+    return () => { onBeforeInstallPromptEvent = undefined }
+  }, [])
   
 }
