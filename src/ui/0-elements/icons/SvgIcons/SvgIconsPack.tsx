@@ -75,10 +75,14 @@ import CoffeeCupSvg from '@ic/normal/special/coffee-cup.svg?react'
 
 import DumbbellSvg from '@ic/normal/special/dumbbell.svg?react'
 
+import Film2Svg from '@ic/normal/special/film-2.svg?react'
+import FountainSvg from '@ic/normal/special/fountain.svg?react'
+
 import GenderSvg from '@ic/normal/special/gender.svg?react'
 import GiftBoxSvg from '@ic/normal/special/gift-box.svg?react'
 import GlassAndDishSvg from '@ic/normal/special/glass-and-dish.svg?react'
 
+import HandsetSvg from '@ic/normal/special/handset.svg?react'
 import HeartSvg from '@ic/normal/special/heart.svg?react'
 import HeartFilledSvg from '@ic/normal/special/heart-filled.svg?react'
 import HelpSvg from '@ic/normal/special/help.svg?react'
@@ -97,14 +101,17 @@ import RulerCornerSvg from '@ic/normal/special/ruler-corner.svg?react'
 
 import SoupSvg from '@ic/normal/special/soup.svg?react'
 
+import TelegramSvg from '@ic/normal/special/telegram.svg?react'
+
 import VaseMuseumSvg from '@ic/normal/special/vase-museum.svg?react'
-import Film2Svg from '@ic/normal/special/film-2.svg?react'
+
+import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 
 
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 
 import { TypeU } from 'src/util/common/TypeU.ts'
-import PartialUndef = TypeU.PartialUndef
+import Puro = TypeU.Puro
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
 
@@ -115,24 +122,26 @@ export namespace SvgIconsPack {
 
   // Base interface for simple svg icons
   
-  type BaseSimpleSvgIconCustomProps = PartialUndef<{
+  type BaseSimpleSvgIconCustomProps = Puro<{
     color: string
     accentColor: string
     size: number | string
   }>
   
   type SvgProps = React.SVGProps<SVGSVGElement> & { title?: string }
-  type SvgComponentType = React.FunctionComponent<SvgProps>
+  type SvgComponentType = React.FC<SvgProps>
   type BaseSimpleSvgIconSvgComponentProp = {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconForwardRefProps = React.JSX.IntrinsicElements['svg']
+  type BaseSimpleSvgIconForwardRefProps = React.ComponentPropsWithoutRef<'svg'>
   type BaseSimpleSvgIconRefElement = SVGSVGElement
   
   
   export type BaseSimpleSvgIconProps =
-    BaseSimpleSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps & BaseSimpleSvgIconSvgComponentProp
+    & BaseSimpleSvgIconCustomProps
+    & BaseSimpleSvgIconForwardRefProps
+    & BaseSimpleSvgIconSvgComponentProp
   
   export const BaseSimpleSvgIcon = React.memo(
     React.forwardRef<BaseSimpleSvgIconRefElement, BaseSimpleSvgIconProps>(
@@ -177,12 +186,17 @@ export namespace SvgIconsPack {
   
   
   
-  export type SimpleSvgIconProps = BaseSimpleSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps
+  export type SimpleSvgIconProps =
+    & BaseSimpleSvgIconCustomProps
+    & BaseSimpleSvgIconForwardRefProps
+  
+  
   function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
     return React.memo(
       React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-        (props, forwardedRef) =>
+        (props, forwardedRef) => (
           <BaseSimpleSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef} />
+        )
       )
     )
   }
@@ -304,10 +318,14 @@ export namespace SvgIconsPack {
   
   export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
   
+  export const Film2Ic = generateSimpleSvgIcon(Film2Svg)
+  export const FountainIc = generateSimpleSvgIcon(FountainSvg)
+  
   export const GenderIc = generateSimpleSvgIcon(GenderSvg)
   export const GiftBoxIc = generateSimpleSvgIcon(GiftBoxSvg)
   export const GlassAndDishIc = generateSimpleSvgIcon(GlassAndDishSvg)
   
+  export const HandsetIc = generateSimpleSvgIcon(HandsetSvg)
   export const HeartIc = generateSimpleSvgIcon(HeartSvg)
   export const HeartFilledIc = generateSimpleSvgIcon(HeartFilledSvg)
   export const HelpIc = generateSimpleSvgIcon(HelpSvg)
@@ -326,8 +344,11 @@ export namespace SvgIconsPack {
   
   export const SoupIc = generateSimpleSvgIcon(SoupSvg)
   
+  export const TelegramIc = generateSimpleSvgIcon(TelegramSvg)
+  
   export const VaseMuseumIc = generateSimpleSvgIcon(VaseMuseumSvg)
-  export const Film2Ic = generateSimpleSvgIcon(Film2Svg)
+  
+  export const WhatsappIc = generateSimpleSvgIcon(WhatsappSvg)
   
   
   

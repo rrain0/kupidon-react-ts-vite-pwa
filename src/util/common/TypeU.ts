@@ -110,7 +110,8 @@ export namespace TypeU {
   
   export type Predicate<T> = (v: T) => boolean
   export const defaultPredicate: Predicate<any> = value => !!value
-  export type Filter<T> = Predicate<T>
+  export type Filter<T> = (v: T) => any
+  export const defaultFilter: Filter<any> = value => !!value
   
   export type Combiner<T1, T2 = T1> = (a: T1, b: T2) => T1
   export type CombinerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number) => T1

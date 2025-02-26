@@ -5,6 +5,7 @@ import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { allDateCategories, DateCategory, DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
 import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
 import { DateType, DateTypeData } from 'src/ui-data/special/DateTypeData.ts'
+import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import { DateCategoryCard } from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
 import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
 import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
@@ -55,7 +56,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
             <Pages.PageHeaderBox>
               <BackBtn />
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div />
+              <div style={{ width: 24 }} />
             </Pages.PageHeaderBox>
             
             <div style={{ height: 28 }} />

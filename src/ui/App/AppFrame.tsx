@@ -7,17 +7,16 @@ import contents = EmotionCommon.contents
 
 
 
-const AppFrame =
-React.memo(
-() => {
-  
-  return <div css={contents} id='app-frame'>
+const AppFrame = React.memo(() => {
+  return (
+    <div css={contents} id="app-frame">
     
-    <AppRouting/>
-    
-    <AutoLangSettings />
-    
-  </div>
+      <AppRouting />
+      
+      <AutoLangSettings />
+      
+    </div>
+  )
 })
 export default AppFrame
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
@@ -14,7 +14,6 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 
 const ChatPage = React.memo(() => {
   const titleText = useUiValues(TitleUiText)
-  
   
   return (
     <>

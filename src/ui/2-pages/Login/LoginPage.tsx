@@ -129,7 +129,7 @@ const LoginPage = React.memo(() => {
   
   useEffect(() => {
     if (isSuccess) {
-      navigate(returnPath ?? RootRoute.findPairs[full]())
+      navigate(returnPath ?? RootRoute.findCouple[full]())
     }
   }, [isSuccess, navigate, returnPath])
   

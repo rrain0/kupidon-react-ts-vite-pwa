@@ -5,6 +5,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { allDateCategories, DateCategory } from 'src/ui-data/special/DateCategoryData.ts'
 import { allDateTypes, DateType } from 'src/ui-data/special/DateTypeData.ts'
+import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
@@ -26,6 +27,8 @@ const DatePlaceNotFoundPage = React.lazy(
 
 
 const RouteDatePlacesPlaceId = React.memo(() => {
+  
+  useNavBar({ place: 'bowAndArrows' })
   
   const idParam = 'placeId'
   const placeIdRoute = RootRoute.datePlaces.placeId[use](`:${idParam}`)
@@ -61,6 +64,8 @@ const routingDatePlacesPlaceId: RouteObject[] = [
 
 
 const RouteDatePlaces = React.memo(() => {
+  
+  useNavBar({ place: 'bowAndArrows' })
   
   const [search] = useSearchParams()
   const categoryParamName = RootRoute.datePlaces[params].category

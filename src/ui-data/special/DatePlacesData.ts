@@ -4,6 +4,8 @@ import { DateType } from 'src/ui-data/special/DateTypeData.ts'
 
 
 
+export type ContactType = 'phone' | 'telegram' | 'whatsapp' | 'email'
+
 export type DatePlace = {
   id: string
   type: DateType[]
@@ -16,7 +18,7 @@ export type DatePlace = {
   features: UiTextValuesArr
   kupidonBonuses: UiTextValuesArr
   contacts: {
-    type: 'phone' | 'telegram' | 'whatsapp' | 'email',
+    type: ContactType
     value: string
   }[]
 }

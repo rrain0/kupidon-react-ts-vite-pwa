@@ -13,6 +13,7 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import ClassStyle = ReactU.ClassStyle
@@ -43,7 +44,6 @@ const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) =
     date = '',
     description = '',
   } = props
-  
   
   const uiValues = useMemo(() => ({
     toRead: uiVals.toRead,

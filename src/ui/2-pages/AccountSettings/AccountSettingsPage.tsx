@@ -9,6 +9,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -44,7 +45,6 @@ import full = RouteBuilder.full
 
 
 const AccountSettingsPage = React.memo(() => {
-  
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   

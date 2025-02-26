@@ -6,7 +6,6 @@ import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { Lang } from 'src/util/lang/Lang.ts'
 import { useLangDetector } from 'src/util/lang/useLangDetector.ts'
-import arrIsNonEmpty = ArrayU.arrIsNonEmpty
 import destructCopyBy = ObjectU.destructCopyBy
 
 
@@ -36,7 +35,7 @@ export const useLangSetup = () => {
       // language is not initialized yet, skip for next useLayoutEffect call
       if (!matched) return
       // check if array has any language
-      if (arrIsNonEmpty(matched)) setLang(destructCopyBy({
+      if (ArrayU.isNonEmpty(matched)) setLang(destructCopyBy({
         langs: [...matched, Lang.Default],
       }))
       // or else switch to manual mode

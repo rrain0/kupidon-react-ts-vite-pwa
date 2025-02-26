@@ -12,6 +12,7 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import DateArticlePreviewCard from 'src/ui/2-pages/DateArticles/parts/DateArticlePreviewCard.tsx'
 import DateCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
@@ -180,5 +181,5 @@ const DateArticlesList = styled.div`
   width: fit-content;
   height: fit-content;
   ${row};
-  gap: 10px;
+  gap: 16px;
 `

@@ -27,7 +27,7 @@ export const DateCategoryData: Record<DateCategory, {
 }> = {
   romantic: {
     picture: romantic,
-    dateTypes: ['restaurant', 'cafe', 'coffeeHouse'],
+    dateTypes: ['restaurant', 'cafe', 'coffeeHouse', 'walking'],
     name: {
       'ru-RU': 'Романтический',
     },

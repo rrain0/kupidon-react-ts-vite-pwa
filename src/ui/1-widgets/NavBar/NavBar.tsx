@@ -1,5 +1,6 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
+import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -28,12 +29,20 @@ import ChatRoundGradIc = SvgGradIconsPack.ChatRoundGradIc
 import CardsHeartGradIc = SvgGradIconsPack.CardsHeartGradIc
 import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
+import Puro = TypeU.Puro
+import attrExists = TypeU.attrExists
 
 
 
+export type NavBarPlace = 'profile' | 'chat' | 'findCouple' | 'bowAndArrows' | 'settings'
 
-const NavBar = React.memo(() => {
-    
+export type NavBarProps = Puro<{
+  place: NavBarPlace
+}>
+
+const NavBar = React.memo((props: NavBarProps) => {
+  const { place } = props
+  
   const titleText = useUiValues(TitleUiText)
   
   
@@ -52,28 +61,28 @@ const NavBar = React.memo(() => {
       <Frame>
         
         <NavLink to={RootRoute.profile[full]()}>
-          <Button css={nav}>
+          <Button css={nav} data-selected={attrExists(place === 'profile')}>
             <ProfileGradIc />
             <div>{titleText.profile}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.chat[full]()}>
-          <Button css={nav}>
+          <Button css={nav} data-selected={attrExists(place === 'chat')}>
             <ChatRoundGradIc />
             <div>{titleText.chat}</div>
           </Button>
         </NavLink>
         
-        <NavLink to={RootRoute.findPairs[full]()}>
-          <Button css={nav}>
+        <NavLink to={RootRoute.findCouple[full]()}>
+          <Button css={nav} data-selected={attrExists(place === 'findCouple')}>
             <CardsHeartGradIc />
             <div>{titleText.findCouple}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.bowAndArrows[full]()}>
-          <Button css={nav}>
+          <Button css={nav} data-selected={attrExists(place === 'bowAndArrows')}>
             <BowArrowGradIc />
             <div>{titleText.bowAndArrows}</div>
           </Button>
@@ -82,11 +91,10 @@ const NavBar = React.memo(() => {
         <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
           {overlay => (
             <>
-              <Button css={nav}
-                onClick={() => {
-                  console.log('settings')
-                  overlay.open()
-                }}
+              <Button
+                css={nav}
+                data-selected={attrExists(place === 'settings')}
+                onClick={overlay.open}
               >
                 <GearOutlinedIc />
                 <div>{titleText.settings}</div>
@@ -138,12 +146,19 @@ const nav = (t: AppTheme.Theme) => css`
       color0: t.navButton.ct,
       color1: t.navButton.ct,
     },
+    selected: {
+      buttonColor: t.navButton.cta,
+      iconColor: t.navButton.cta,
+      gradIconColor0: t.boxAccentCt4.ctGrad[0],
+      gradIconColor1: t.boxAccentCt4.ctGrad[1],
+    },
   }])(t)}
   
   
   // TODO Style - a.active ...selector - Doesn't work if single style because it expands to multiple classes
   // link active selector
   // a.active &.btnClass > .iconClass
+  /*
   a.active ${IconButtonS6.t(t => ({
     buttonColor: t.navButton.cta,
   }))(t)}
@@ -154,6 +169,7 @@ const nav = (t: AppTheme.Theme) => css`
     gradIconColor0: t.boxAccentCt4.ctGrad[0],
     gradIconColor1: t.boxAccentCt4.ctGrad[1],
   }))(t)}
+  */
   
   
   ${IconButtonS6.t(t => ({

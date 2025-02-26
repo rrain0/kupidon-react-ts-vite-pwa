@@ -10,23 +10,15 @@ import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { DateType, DateTypeData } from 'src/ui-data/special/DateTypeData.ts'
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
-import SoupIc = SvgIconsPack.SoupIc
-import MasksTheatreIc = SvgIconsPack.MasksTheatreIc
-import PictureArtIc = SvgIconsPack.PictureArtIc
-import VaseMuseumIc = SvgIconsPack.VaseMuseumIc
-import Film2Ic = SvgIconsPack.Film2Ic
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
-import GlassAndDishIc = SvgIconsPack.GlassAndDishIc
-import PresentationScreenIc = SvgIconsPack.PresentationScreenIc
-import CoffeeCupIc = SvgIconsPack.CoffeeCupIc
+import rowC = EmotionCommon.rowC
 
 
 
@@ -71,19 +63,12 @@ export const DateTypeCard = React.memo((props: DateTypeCardProps) => {
       data-display-name="DateTypeCard"
       onClick={selectType}
     >
-      {({
-        // TODO Places
-        restaurant: <GlassAndDishIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.restaurant.color }])} />,
-        cafe: <SoupIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.cafe.color }])} />,
-        coffeeHouse: <CoffeeCupIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.coffeeHouse.color }])} />,
-        
-        museum: <VaseMuseumIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.museum.color }])} />,
-        gallery: <PictureArtIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.gallery.color }])} />,
-        theatre: <MasksTheatreIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.theatre.color }])} />,
-        cinema: <Film2Ic css={SvgIconS6.t([iconS, { iconColor: DateTypeData.cinema.color }])} />,
-        
-        masterClasses: <PresentationScreenIc css={SvgIconS6.t([iconS, { iconColor: DateTypeData.masterClasses.color }])} />,
-      } satisfies Record<DateType, React.ReactNode>)[type]}
+      <IconBox>
+        <data.icon
+          css={SvgIconS6.t([SvgIconS6.S.icon.icon.full.normal, { iconColor: data.color }])}
+        />
+      </IconBox>
+      
       <Title>{uiText.name}</Title>
     </Button>
   )
@@ -102,6 +87,12 @@ const dateTypeBoxS: AppWidgetStyle = t => [
     },
   },
 ]
+
+const IconBox = styled.div`
+  width: 36px;
+  height: 36px;
+  ${rowC};
+`
 
 const iconS: AppWidgetStyle = t => [
   SvgIconS6.S.icon.icon.full.normal, {

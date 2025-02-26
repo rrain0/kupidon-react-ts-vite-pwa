@@ -1,32 +1,33 @@
 import React, { Suspense } from 'react'
-import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
+import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
+import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
-const AccountSettingsPage = React.lazy(
-  () => import('src/ui/2-pages/AccountSettings/AccountSettingsPage')
+const FindCouplePage = React.lazy(
+  () => import('src/ui/2-pages/FindCouple/FindCouplePage.tsx')
 )
 
 
 
-const RouteSettingsAccount = React.memo(() => {
+
+const RouteFindCouple = React.memo(() => {
+  
+  useNavBar({ place: 'findCouple' })
+  
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
-  
-  useNavBar({ place: 'settings' })
-  
   
   if (!auth) return (
     <Navigate
       to={RootRoute.login[fullAllowedNameParams]({
-        returnPath: RootRoute.settings.account[fullAnySearchParams](searchParams),
+        returnPath: RootRoute.findCouple[fullAnySearchParams](searchParams),
       })}
       replace={true}
     />
@@ -34,18 +35,18 @@ const RouteSettingsAccount = React.memo(() => {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <AccountSettingsPage />
+      <FindCouplePage />
     </Suspense>
   )
 })
 
 
 
-// path: 'settings / account / <check here>'
-export const settingsAccountRouting: RouteObject[] = [
+// path: 'findCouple / <check here>'
+export const findCoupleRouting: RouteObject[] = [
   {
     path: '',
-    Component: RouteSettingsAccount,
+    Component: RouteFindCouple,
   },
   clearUnknownPathEnding,
 ]

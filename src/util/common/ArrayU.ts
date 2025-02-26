@@ -3,7 +3,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import empty = TypeU.empty
 import ComparatorEq = TypeU.ComparatorEq
 import defaultComparatorEq = TypeU.defaultComparatorEq
-import defaultPredicate = TypeU.defaultPredicate
+import defaultPredicate = TypeU.defaultFilter
 import Mapper = TypeU.Mapper
 import Filter = TypeU.Filter
 import exists = TypeU.exists
@@ -18,6 +18,7 @@ import isArray = TypeU.isArray
 export namespace ArrayU {
   
   
+  import Sign = TypeU.Sign
   export const arrOfUndef = (len = 0): undefined[] => {
     return Array(len).fill(undefined)
   }
@@ -160,7 +161,7 @@ export namespace ArrayU {
   */
   
   
-  export const compare = <T>(arr: T[], other: T[]): 1 | 0 | -1 => {
+  export const compare = <T>(arr: T[], other: T[]): Sign => {
     if (arr === other) return 0
     for (let i = 0; i < Math.max(arr.length, other.length); i++) {
       if (i >= arr.length) return -1
@@ -185,7 +186,7 @@ export namespace ArrayU {
     return []
   }
   
-  export const arrIsNonEmpty = <T>(arr?: T[] | [T, ...T[]] | empty): arr is [T, ...T[]] => {
+  export const isNonEmpty = <T>(arr?: T[] | [T, ...T[]] | empty): arr is [T, ...T[]] => {
     return (arr?.length ?? 0) > 0
   }
   
@@ -230,9 +231,7 @@ export namespace ArrayU {
   
   export const remove = <T>(arr: T[], elem: T): T[] => {
     const i = arr.findIndex(it => it === elem)
-    if (i !== -1) {
-      return arr.splice(i, 1)
-    }
+    if (i !== -1) arr.splice(i, 1)
     return arr
   }
   
@@ -242,19 +241,30 @@ export namespace ArrayU {
     return arr.toSpliced(i, 1)
   }
   
+  export const removeBy = <T>(arr: T[], filter: Filter<T>): T[] => {
+    const i = arr.findIndex(filter)
+    if (i !== -1) arr.splice(i, 1)
+    return arr
+  }
+  
+  export const removeByToIf = <T>(arr: T[], filter: Filter<T>): T[] => {
+    const i = arr.findIndex(filter)
+    if (i === -1) return arr
+    return arr.toSpliced(i, 1)
+  }
+  
   export const clear = <T>(arr: T[]): T[] => {
-    arr.splice(0, arr.length)
+    arr.length = 0
     return arr
   }
   
   
   
   
-  export const diff = <T1, T2 = T1>
-  (arr1: T1[], arr2: T2[],
+  export const diff = <T1, T2 = T1>(
+    arr1: T1[], arr2: T2[],
     comparator: ComparatorEq<T1, T2> = defaultComparatorEq
-  )
-  : [(number | undefined)[], (number | undefined)[]] => {
+  ): [(number | undefined)[], (number | undefined)[]] => {
     const fwd: (number | undefined)[] = Array(arr1.length).fill(undefined)
     const back: (number | undefined)[] = Array(arr2.length).fill(undefined)
     arr1.forEach((one, i1) => {
@@ -293,11 +303,10 @@ export namespace ArrayU {
     isRetained: false
     isRemoved: true
   }
-  export const diff2 = <T1, T2 = T1>
-  (arr1: T1[], arr2: T2[],
+  export const diff2 = <T1, T2 = T1>(
+    arr1: T1[], arr2: T2[],
     comparator: ComparatorEq<T1, T2> = defaultComparatorEq
-  )
-  : [DiffObj<T1, T2>[], DiffObj<T2, T1>[]] => {
+  ): [DiffObj<T1, T2>[], DiffObj<T2, T1>[]] => {
     const [fwd, back] = diff(arr1, arr2, comparator)
     const fwdObjs: DiffObj<T1, T2>[] = fwd.map((to, from) => {
       if (exists(to)) return {
@@ -373,8 +382,8 @@ export namespace ArrayU {
   
   
   
-  export const combine = <T1, T2 = T1>
-  (arr1: T1[], arr2: T2[],
+  export const combine = <T1, T2 = T1>(
+    arr1: T1[], arr2: T2[],
     combiner: CombinerIndexed<T1, T2>,
     comparator: ComparatorEq<T1, T2> = defaultComparatorEq
   ): T1[] => {
@@ -411,10 +420,12 @@ export namespace ArrayU {
     orElse: E
   }
   
-  export const findBy3 =
-  <T, E>
-  ({ arr, filter = defaultPredicate, startIdx = 0, orElse }: FindByElseProps<T, E>)
-  : FindResult<T, E> => {
+  export const findBy3 = <T, E>({
+    arr,
+    filter = defaultPredicate,
+    startIdx = 0,
+    orElse,
+  }: FindByElseProps<T, E>): FindResult<T, E> => {
     startIdx = RangeU.clamp(
       startIdx>=0 ? startIdx : (arr.length+startIdx),
       [0, arr.length]
@@ -436,28 +447,35 @@ export namespace ArrayU {
     } satisfies FindResult<T, E>
   }
   
-  export const findBy2 =
-  <T>
-  ({ arr, filter = defaultPredicate, startIdx = 0 }: FindByProps<T>)
-  : FindResult<T, undefined> =>
-    findBy3({ arr, filter, startIdx, orElse: undefined })
+  export const findBy2 = <T>({
+    arr,
+    filter = defaultPredicate,
+    startIdx = 0,
+  }: FindByProps<T>): FindResult<T, undefined> => {
+    return findBy3({ arr, filter, startIdx, orElse: undefined })
+  }
   
-  export const findBy =
-  <T>
-  (arr: T[], filter: Filter<T> = defaultPredicate, startIdx = 0)
-  : FindResult<T, undefined> =>
-    findBy3({ arr, filter, startIdx, orElse: undefined })
+  
+  export const findBy = <T>(
+    arr: T[],
+    filter: Filter<T> = defaultPredicate,
+    startIdx = 0
+  ): FindResult<T, undefined> => {
+    return findBy3({ arr, filter, startIdx, orElse: undefined })
+  }
   
     
     
   
-  export const findLastBy3 =
-  <T, E>
-  ({ arr, filter = defaultPredicate, startIdx = -1, orElse }: FindByElseProps<T, E>)
-  : FindResult<T, E> => {
+  export const findLastBy3 = <T, E>({
+    arr,
+    filter = defaultPredicate,
+    startIdx = -1,
+    orElse,
+  }: FindByElseProps<T, E>): FindResult<T, E> => {
     startIdx = RangeU.clamp(
-      startIdx>=0 ? startIdx : (arr.length+startIdx),
-      [-1, arr.length-1]
+      startIdx>=0 ? startIdx : (arr.length + startIdx),
+      [-1, arr.length - 1]
     )
     for (let i = startIdx; i > -1; i--) {
       const elem = arr[i]
@@ -476,17 +494,23 @@ export namespace ArrayU {
     } satisfies FindResult<T, E>
   }
   
-  export const findLastBy2 =
-  <T>
-  ({ arr, filter = defaultPredicate, startIdx = -1 }: FindByProps<T>)
-  : FindResult<T, undefined> =>
-    findLastBy3({ arr, filter, startIdx, orElse: undefined })
+  export const findLastBy2 = <T>({
+    arr,
+    filter = defaultPredicate,
+    startIdx = -1,
+  }: FindByProps<T>): FindResult<T, undefined> => {
+    return findLastBy3({ arr, filter, startIdx, orElse: undefined })
+  }
   
-  export const findLastBy =
-  <T>
-  (arr: T[], filter: Filter<T> = defaultPredicate, startIdx = -1)
-  : FindResult<T, undefined> =>
-    findLastBy3({ arr, filter, startIdx, orElse: undefined })
+  
+  export const findLastBy = <T>(
+    arr: T[],
+    filter: Filter<T> = defaultPredicate,
+    startIdx = -1
+  ): FindResult<T, undefined> => {
+    return findLastBy3({ arr, filter, startIdx, orElse: undefined })
+  }
+  
   
   
   

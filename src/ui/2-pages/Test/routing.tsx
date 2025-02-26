@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
@@ -25,6 +26,8 @@ const MbtiPage = React.lazy(
 const TestMbtiEmpty = React.memo(() => {
   const [searchParams] = useSearchParams()
   const authUserId = useRecoilValue(AuthRecoil)?.user.id
+  
+  useNavBar({ hide: true })
   
   if (!authUserId) return (
     <Navigate

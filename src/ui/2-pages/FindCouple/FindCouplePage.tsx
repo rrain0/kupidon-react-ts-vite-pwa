@@ -7,7 +7,7 @@ import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 
 
 
-const FindPairsPage = React.memo(() => {
+const FindCouplePage = React.memo(() => {
   
   return (
     <>
@@ -32,7 +32,7 @@ const FindPairsPage = React.memo(() => {
     </>
   )
 })
-export default FindPairsPage
+export default FindCouplePage
 
 
 

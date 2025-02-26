@@ -84,7 +84,7 @@ export namespace SvgGradIconsPack {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconForwardRefProps = React.JSX.IntrinsicElements['svg']
+  type BaseSimpleSvgIconForwardRefProps = React.ComponentPropsWithoutRef<'svg'>
   type BaseSimpleSvgIconRefElement = SVGSVGElement
   
   

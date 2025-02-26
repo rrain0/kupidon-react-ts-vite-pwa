@@ -47,8 +47,8 @@ export namespace AppRoutes {
   const chat = buildRoute({
     [path]: 'chat',
   })
-  const findPairs = buildRoute({
-    [path]: 'find-pairs',
+  const findCouple = buildRoute({
+    [path]: 'find-couple',
   })
   const bowAndArrows = buildRoute({
     [path]: 'bow-and-arrows',
@@ -123,7 +123,7 @@ export namespace AppRoutes {
     
     profile,
     chat,
-    findPairs,
+    findCouple,
     bowAndArrows,
     
     settings,
