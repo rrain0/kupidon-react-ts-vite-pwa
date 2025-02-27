@@ -3,6 +3,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isstring = TypeU.isstring
 import isobject = TypeU.isobject
+import exists = TypeU.exists
 
 
 
@@ -11,7 +12,7 @@ const mbtiLsName = 'zustandMbti'
 
 
 // To trigger Zustand update from Recoil to Zustand
-if (localStorage.getItem(mbtiLsName) === null) {
+if (exists(localStorage.getItem(mbtiLsName))) {
   localStorage.setItem(mbtiLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -39,12 +40,12 @@ export const useMbtiZustand = create<MbtiZustand>()(persist(
       answers: s.answers,
     } satisfies MbtiZustandPersisted),
     
-    migrate: (persisted: any, version) => {
-      if (version <= 0) {
-        const recoilLsName ='test-mbti'
+    migrate: (persisted: any, persistedVersion) => {
+      if (persistedVersion <= 0) {
+        const recoilLsName = 'test-mbti'
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
-        const old = isstring(oldRaw) ? JSON.parse(oldRaw) : undefined
+        const old = exists(oldRaw) ? JSON.parse(oldRaw) : undefined
         ;(persisted ??= { }).answers = []
         if (isobject(old)) {
           persisted.answers = old.answers

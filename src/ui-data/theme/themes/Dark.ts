@@ -33,7 +33,7 @@ export const DarkProps: ThemeProps = {
   
   
   
-  boxNormal: {
+  boxDefault: {
     bg:           '#24272d',
     bg2:          '#282c34',
     
@@ -73,7 +73,7 @@ export const DarkProps: ThemeProps = {
     bgf:          '#18181a',
     ctf:          '#d0d0d0',
   },
-  boxSec: {
+  boxSecondary: {
     bg:           '#39404d',
     ct:           '#999999',
   },

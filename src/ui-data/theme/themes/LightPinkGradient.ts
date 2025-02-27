@@ -32,6 +32,6 @@ export const LightPinkGradient = {
   icon: styled.div(themegradIconCss({
     accentColor: LightPinkGradientProps.boxAccent.bg,
     bgColor1:    LightPinkGradientProps.boxAccent.bg,
-    bgColor2:    LightPinkGradientProps.boxNormal.bg2,
+    bgColor2:    LightPinkGradientProps.boxDefault.bg2,
   })),
 } satisfies Theme

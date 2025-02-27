@@ -75,6 +75,8 @@ import CoffeeCupSvg from '@ic/normal/special/coffee-cup.svg?react'
 
 import DumbbellSvg from '@ic/normal/special/dumbbell.svg?react'
 
+import EnvelopeSvg from '@ic/normal/special/envelope.svg?react'
+
 import Film2Svg from '@ic/normal/special/film-2.svg?react'
 import FountainSvg from '@ic/normal/special/fountain.svg?react'
 
@@ -317,6 +319,8 @@ export namespace SvgIconsPack {
   export const CoffeeCupIc = generateSimpleSvgIcon(CoffeeCupSvg)
   
   export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
+  
+  export const EnvelopeIc = generateSimpleSvgIcon(EnvelopeSvg)
   
   export const Film2Ic = generateSimpleSvgIcon(Film2Svg)
   export const FountainIc = generateSimpleSvgIcon(FountainSvg)

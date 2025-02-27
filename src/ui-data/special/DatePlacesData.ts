@@ -4,7 +4,11 @@ import { DateType } from 'src/ui-data/special/DateTypeData.ts'
 
 
 
-export type ContactType = 'phone' | 'telegram' | 'whatsapp' | 'email'
+export type ContactType =
+  | 'phone'
+  | 'telegram'
+  | 'whatsapp'
+  | 'email'
 
 export type DatePlace = {
   id: string

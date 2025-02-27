@@ -144,8 +144,8 @@ const Tile = React.memo(
     border-radius: 999999px;
     ${Txt.s16Thin};
     ${p => p.isSelected && `
-      background-color: ${p.theme.boxNormal.bga4};
-      color: ${p.theme.boxNormal.cta4};
+      background-color: ${p.theme.boxDefault.bga4};
+      color: ${p.theme.boxDefault.cta4};
     `}
     cursor: pointer;
   `

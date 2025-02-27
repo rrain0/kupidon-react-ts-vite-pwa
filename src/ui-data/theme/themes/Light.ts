@@ -32,7 +32,7 @@ export const LightProps: ThemeProps = {
   
   
   
-  boxNormal: {
+  boxDefault: {
     bg:           '#ffffff',
     bg2:          '#f0f0f0',
     
@@ -72,7 +72,7 @@ export const LightProps: ThemeProps = {
     bgf:          '#ffffff',
     ctf:          '#232020',
   },
-  boxSec: {
+  boxSecondary: {
     bg:           '#E0E0E0',
     ct:           '#ABABAB',
   },
@@ -146,16 +146,16 @@ export const LightProps: ThemeProps = {
     ctFc:          '#000000',
   },
   buttonNormalCt: {
-    bg:           'transparent',
-    ct:           '#bbbbbb',
-    bgf:          '#00000008',
-    ctf:          '#bbbbbb',
+    bg:            'transparent',
+    ct:            '#bbbbbb',
+    bgf:           '#00000008',
+    ctf:           '#bbbbbb',
   },
   buttonMain: {
-    bg:       '#7b7b7b',
-    ct:       '#F8F8F8',
-    bgFc:     '#aaaaaa',
-    ctFc:     '#F8F8F8',
+    bg:            '#7b7b7b',
+    ct:            '#F8F8F8',
+    bgFc:          '#aaaaaa',
+    ctFc:          '#F8F8F8',
   },
   buttonAccent2: {
     bg:            '#bbbbbb',

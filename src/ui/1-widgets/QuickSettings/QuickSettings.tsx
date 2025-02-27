@@ -122,7 +122,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                   <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
                     onClick={() => {
                       setCloseAction(() => () => {
-                        navigate(RootRoute.dev[full]())
+                        navigate(RootRoute.devTest[full]())
                       })
                       props.setClosing()
                     }}

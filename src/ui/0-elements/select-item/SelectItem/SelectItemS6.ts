@@ -178,15 +178,15 @@ export namespace SelectItemS6 {
             SelectMeterS6.Parts.Type.row.Color.normal,
             { edit: IconButtonS6.Parts.Type.trans.Color.secondary },
             {
-              buttonColor: t.boxNormal.ct,
-              buttonBgColor: t.boxNormal.bg2,
-              editIconColor: t.boxNormal.ct3,
+              buttonColor: t.boxDefault.ct,
+              buttonBgColor: t.boxDefault.bg2,
+              editIconColor: t.boxDefault.ct3,
               inFocus: {
-                buttonColor: t.boxNormal.ct,
-                buttonBgColor: t.boxNormal.cta2,
+                buttonColor: t.boxDefault.ct,
+                buttonBgColor: t.boxDefault.cta2,
               },
               selected: {
-                borderBdColor: t.boxNormal.ct3,
+                borderBdColor: t.boxDefault.ct3,
               },
             },
           ]

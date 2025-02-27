@@ -67,7 +67,7 @@ export namespace AppTheme {
     
     
     
-    boxNormal: {
+    boxDefault: {
       bg:           string
       bg2:          string
       
@@ -107,7 +107,7 @@ export namespace AppTheme {
       bgf:          string
       ctf:          string
     }
-    boxSec: {
+    boxSecondary: {
       bg:           string
       ct:           string
     }

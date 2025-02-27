@@ -419,14 +419,14 @@ const LineProgressFrame = styled.div`
   height: 8px;
   border-radius: 999999px;
   ${row};
-  background-color: ${p => p.theme.boxSec.bg};
+  background-color: ${p => p.theme.boxSecondary.bg};
 `
 const LineProgress = styled.div`
   width: 0;
   height: 100%;
   border-radius: inherit;
   transition: width ${transitionTime}ms ease-in-out;
-  background-color: ${p => p.theme.boxSec.ct};
+  background-color: ${p => p.theme.boxSecondary.ct};
 `
 const LinePercent = styled.div`
   ${Txt.s24Bold};

@@ -88,8 +88,8 @@ export namespace AppRoutes {
   
   
   
-  const dev = buildRoute({
-    [path]: 'dev',
+  const devTest = buildRoute({
+    [path]: 'dev-test',
     
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
@@ -134,7 +134,7 @@ export namespace AppRoutes {
     datePlace,
     
     
-    dev,
+    devTest,
   })
   
 }

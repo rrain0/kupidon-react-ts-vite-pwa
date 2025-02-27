@@ -26,7 +26,7 @@ export const LightPinkProps: ThemeProps = { ...Light,
     cta:       '#BB2649',
   },
   
-  boxNormal: { ...Light.boxNormal,
+  boxDefault: { ...Light.boxDefault,
     bg:       '#ffffff',
     bg2:      '#f0f0f0',
     ct:   '#000000',
@@ -105,7 +105,7 @@ export const LightPink = {
   icon: styled.div(themeIconCss({
     accentColor: LightPinkProps.boxAccent.bg,
     bgColor1:    LightPinkProps.boxAccent.bg,
-    bgColor2:    LightPinkProps.boxNormal.bg2,
+    bgColor2:    LightPinkProps.boxDefault.bg2,
   })),
 } satisfies Theme
 

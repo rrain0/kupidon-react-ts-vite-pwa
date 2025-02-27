@@ -57,6 +57,6 @@ export const LightOrange = {
   icon: styled.div(themeIconCss({
     accentColor: LightOrangeProps.boxAccent.bg,
     bgColor1:   LightOrangeProps.boxAccent.bg,
-    bgColor2:   LightOrangeProps.boxNormal.bg,
+    bgColor2:   LightOrangeProps.boxDefault.bg,
   })),
 } satisfies Theme

@@ -48,7 +48,7 @@ console.log('emcssStyle', emcssStyle)
 
 
 
-const DevPage = React.memo(() => {
+const DevTestPage = React.memo(() => {
   
   /*
    const rf = (v: number) => {
@@ -90,37 +90,37 @@ const DevPage = React.memo(() => {
           <div>Views:</div>
           
           <Items>
-            <Link to={RootRoute.dev.scrollbar[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                Scrollbar test
-              </Button>
-            </Link>
-            <Link to={RootRoute.dev.bottomSheet[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                Bottom Sheet
-              </Button>
-            </Link>
-            <Link to={RootRoute.dev.viewsSelectItem[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                Select Item
-              </Button>
-            </Link>
-            <Link to={RootRoute.dev.ripple[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                Ripple
-              </Button>
-            </Link>
-            <Link to={RootRoute.dev.buttons[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.buttons[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Buttons
               </Button>
             </Link>
-            <Link to={RootRoute.dev.slider[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.ripple[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Ripple
+              </Button>
+            </Link>
+            <Link to={RootRoute.devTest.scrollbar[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Scrollbar test
+              </Button>
+            </Link>
+            <Link to={RootRoute.devTest.bottomSheet[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Bottom Sheet
+              </Button>
+            </Link>
+            <Link to={RootRoute.devTest.viewsSelectItem[fullAnySearchParams](searchParams)}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Select Item
+              </Button>
+            </Link>
+            <Link to={RootRoute.devTest.slider[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Slider
               </Button>
             </Link>
-            <Link to={RootRoute.dev.image[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.image[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Image
               </Button>
@@ -132,57 +132,57 @@ const DevPage = React.memo(() => {
           <div>Other:</div>
           
           <Items>
-            <Link to={RootRoute.dev.resizeObserver[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.resizeObserver[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Resize Observer test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.moveElementToAnotherView[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Move to another view
               </Button>
             </Link>
-            <Link to={RootRoute.dev.pointer[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.pointer[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Pointer test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.tabs[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.tabs[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Tabs test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.state[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.state[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 State test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.pageLifecycle[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.pageLifecycle[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Page Lifecycle test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.useEvent[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.useEvent[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 useEvent test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.elemRef[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.elemRef[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Element Ref test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.elemStyle[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.elemStyle[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Element Style test
               </Button>
             </Link>
-            <Link to={RootRoute.dev.oldProfileOptions[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.oldProfileOptions[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Old Profile Options
               </Button>
             </Link>
-            <Link to={RootRoute.dev.shadowDOMTest[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.shadowDOMTest[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Shadow DOM Test
               </Button>
@@ -193,7 +193,7 @@ const DevPage = React.memo(() => {
           <div style={{ height: 20 }} />
           
           <Items>
-            <Link to={RootRoute.dev.emulatedScroll[fullAnySearchParams](searchParams)}>
+            <Link to={RootRoute.devTest.emulatedScroll[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Emulated Scroll
               </Button>
@@ -225,7 +225,7 @@ const DevPage = React.memo(() => {
               height: 200px;
               ${flexC};
               border-radius: 16px;
-              background: ${t.boxNormal.bg};
+              background: ${t.boxDefault.bg};
             `}
           >
             <PieProgress
@@ -244,12 +244,12 @@ const DevPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxNormal.bg};
-              color: ${t.boxNormal.ct};
+              background: ${t.boxDefault.bg};
+              color: ${t.boxDefault.ct};
             `}
           >
             Контент.<br />
-            Theme.boxNormal
+            Theme.boxDefault
           </div>
           
           <div
@@ -258,8 +258,8 @@ const DevPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxNormal.bg2};
-              color: ${t.boxNormal.ct};
+              background: ${t.boxDefault.bg2};
+              color: ${t.boxDefault.ct};
             `}
           >
             Контент.<br />
@@ -306,8 +306,8 @@ const DevPage = React.memo(() => {
               position: relative;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxNormal.bg};
-              color: ${t.boxNormal.ct};
+              background: ${t.boxDefault.bg};
+              color: ${t.boxDefault.ct};
             `}
           >
             <div>onEvent Test</div>
@@ -334,7 +334,7 @@ const DevPage = React.memo(() => {
     </>
   )
 })
-export default DevPage
+export default DevTestPage
 
 
 const Items = styled.div`

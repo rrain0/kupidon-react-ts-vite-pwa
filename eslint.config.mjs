@@ -260,7 +260,7 @@ export default [
       '@stylistic/jsx-child-element-spacing': 'warn',
       '@stylistic/jsx-closing-bracket-location': ['error', 'line-aligned'],
       '@stylistic/jsx-closing-tag-location': ['error', 'line-aligned'],
-      '@stylistic/jsx-curly-brace-presence': ['error', {
+      '@stylistic/jsx-curly-brace-presence': ['warn', {
         props: 'never',
         children: 'never',
         propElementValues: 'always',

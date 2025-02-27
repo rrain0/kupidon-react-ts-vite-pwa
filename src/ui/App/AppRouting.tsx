@@ -17,7 +17,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { routingProfile } from 'src/ui/2-pages/Profile/routing.tsx'
 import { settingRouting } from 'src/ui/2-pages/Settings/routing'
 import { signupRouting } from 'src/ui/2-pages/Signup/routing'
-import { devRouting } from 'src/ui/2-pages/Dev/routing.tsx'
+import { routingDevTest } from 'src/ui/2-pages/DevTest/routing.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { RoutingTest } from 'src/ui/2-pages/Test/routing.tsx'
 import RootRoute = AppRoutes.RootRoute
@@ -118,8 +118,8 @@ const routingRoot: RouteObject[] = [
       
       
       {
-        path: RootRoute.dev[path]+'/*',
-        children: devRouting,
+        path: RootRoute.devTest[path]+'/*',
+        children: routingDevTest,
       },
       
       

@@ -3,13 +3,14 @@ import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { ContactType, DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
+import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import ContactButton from 'src/ui/2-pages/DatePlace/parts/ContactButton.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -21,9 +22,6 @@ import LocationIc = SvgIconsPack.LocationIc
 import rowC = EmotionCommon.rowC
 import resetH = EmotionCommon.resetH
 import col = EmotionCommon.col
-import HandsetIc = SvgIconsPack.HandsetIc
-import TelegramIc = SvgIconsPack.TelegramIc
-import WhatsappIc = SvgIconsPack.WhatsappIc
 
 
 
@@ -142,14 +140,11 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
                   
                   <ContactsList>
                     {place.contacts.map(it => (
-                      <ContactBox key={[it.type, it.value].join()}>
-                        {({
-                          phone: <HandsetIc css={SvgIconS6.t(contactIconS)} />,
-                          telegram: <TelegramIc css={SvgIconS6.t(contactIconS)} />,
-                          whatsapp: <WhatsappIc css={SvgIconS6.t(contactIconS)} />,
-                        } /* satisfies Record<ContactType, React.ReactNode> */)[it.type]}
-                        <ContactText>{it.value}</ContactText>
-                      </ContactBox>
+                      <ContactButton
+                        key={[it.type, it.value].join()}
+                        type={it.type}
+                        value={it.value}
+                      />
                     ))}
                   </ContactsList>
                 </div>
@@ -229,20 +224,4 @@ const ListItem = styled.li``
 const ContactsList = styled.div`
   ${col};
   gap: 24px;
-`
-const ContactBox = styled.div`
-  ${rowC};
-  gap: 8px;
-`
-const contactIconS: AppWidgetStyle = t => [
-  SvgIconS6.S.icon.icon.full, [
-    {
-      icon: { sz: 26, color: '#cb3357' },
-    },
-  ],
-]
-const ContactText = styled.div`
-  // TODO Theme
-  color: #232020;
-  ${Txt.s17};
 `

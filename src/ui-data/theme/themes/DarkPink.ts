@@ -26,7 +26,7 @@ export const DarkPinkProps: ThemeProps = { ...Dark,
     cta: '#984559',
   },
   
-  boxNormal: { ...Dark.boxNormal,
+  boxDefault: { ...Dark.boxDefault,
     bg:       '#000000',
     bg2:      '#282c34',
     ct:   '#bdbdbd',

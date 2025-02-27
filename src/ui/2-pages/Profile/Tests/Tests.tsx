@@ -285,7 +285,7 @@ const cardS = css`
 
 const InfoCardText = styled.div`
   ${Txt.s13};
-  color: ${p => p.theme.boxNormal.ctSec};
+  color: ${p => p.theme.boxDefault.ctSec};
 `
 const InfoCardTextCenter = styled(InfoCardText)`
   text-align: center;

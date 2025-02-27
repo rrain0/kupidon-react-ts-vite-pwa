@@ -332,7 +332,7 @@ const pageContentS = css`
 
 const InfoCard = styled.div`
   ${SummaryPageParts.cardS};
-  background: ${p => p.theme.boxNormal.bg};
+  background: ${p => p.theme.boxDefault.bg};
   display: grid;
   grid:
     'ava  .    name .    eye ' auto
@@ -385,7 +385,7 @@ const Eye = styled.div`
 `
 const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
   iconSz: 'full',
-  iconColor: t.boxNormal.ct6,
+  iconColor: t.boxDefault.ct6,
 }]
 
 
@@ -395,7 +395,7 @@ const Name = styled.div`
   font-weight: 600;
   font-size: 20px;
   line-height: 119%;
-  color: ${p => p.theme.boxNormal.ct2};
+  color: ${p => p.theme.boxDefault.ct2};
 `
 const Info = styled.div`
   grid-area: info;
@@ -403,7 +403,7 @@ const Info = styled.div`
   font-weight: 400;
   font-size: 17px;
   line-height: 119%;
-  color: ${p => p.theme.boxNormal.ct6};
+  color: ${p => p.theme.boxDefault.ct6};
 `
 const Edit = styled.div`
   grid-area: edit;
@@ -423,7 +423,7 @@ const Divider = styled.div`
   grid-area: div;
   width: 100%;
   height: 1px;
-  background-color: ${p => p.theme.boxNormal.ctSec6};
+  background-color: ${p => p.theme.boxDefault.ctSec6};
 `
 
 
@@ -444,7 +444,7 @@ const LineProgressFrame = styled.div`
   height: 8px;
   border-radius: 999999px;
   ${row};
-  background-color: ${p => p.theme.boxNormal.ctSec6};
+  background-color: ${p => p.theme.boxDefault.ctSec6};
 `
 const LineProgress = styled.div`
   width: 0;
@@ -463,6 +463,6 @@ const CompleteProfileText = styled.div`
   grid-area: cpt;
   justify-self: stretch;
   ${Txt.s16Wide};
-  color: ${p => p.theme.boxNormal.ct2};
+  color: ${p => p.theme.boxDefault.ct2};
   text-align: center;
 `

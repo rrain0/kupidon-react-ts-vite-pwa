@@ -90,7 +90,8 @@ export const MockDatePlaces = {
       contacts: [
         { type: 'telegram', value: 'telegram' },
         { type: 'whatsapp', value: 'whatsapp' },
-        { type: 'phone', value: 'phone' },
+        { type: 'phone', value: '+7 999 888 77 66' },
+        { type: 'email', value: 'email.info@email.email' },
       ],
     },
   ] satisfies DatePlace[],
