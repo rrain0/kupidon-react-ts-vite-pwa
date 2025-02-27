@@ -34,9 +34,10 @@ export const MockDatePlaces = {
         },
       ],
       contacts: [
-        { type: 'telegram', value: 'telegram' },
-        { type: 'whatsapp', value: 'whatsapp' },
-        { type: 'phone', value: 'phone' },
+        { type: 'telegram', value: '+79246029191' },
+        { type: 'whatsapp', value: '79246029191' },
+        { type: 'phone', value: '+7‒924‒602‒91‒91' },
+        { type: 'phone', value: '+7 (3952) 64‒84‒81' },
       ],
     },
     {
@@ -61,9 +62,10 @@ export const MockDatePlaces = {
       features: [],
       kupidonBonuses: [],
       contacts: [
-        { type: 'telegram', value: 'telegram' },
-        { type: 'whatsapp', value: 'whatsapp' },
-        { type: 'phone', value: 'phone' },
+        { type: 'telegram', value: 'ibis_irkutsk' },
+        { type: 'whatsapp', value: '79021706500' },
+        { type: 'phone', value: '+7 (3952) 70‒31‒77' },
+        { type: 'phone', value: '+7‒902‒170‒65‒00' },
       ],
     },
     {
@@ -88,10 +90,13 @@ export const MockDatePlaces = {
       features: [],
       kupidonBonuses: [],
       contacts: [
-        { type: 'telegram', value: 'telegram' },
-        { type: 'whatsapp', value: 'whatsapp' },
-        { type: 'phone', value: '+7 999 888 77 66' },
-        { type: 'email', value: 'email.info@email.email' },
+        // TODO phone format. new Phone(phone: string). static isPhone
+        // TODO +001-(XXX)XXXXXXX => 1XXXXXXXXXX - select if add plus sign
+        // TODO first need to trim all \s \n, isPhone, phoneToRaw, formatRawPhone
+        { type: 'telegram', value: 'etikacakes' }, // phone or nickname
+        { type: 'whatsapp', value: '79149563551' }, // phone
+        { type: 'phone', value: '+7 3952 99 08 00' }, // phone
+        //{ type: 'email', value: 'etika.cakes@gmail.com' }, // email
       ],
     },
   ] satisfies DatePlace[],

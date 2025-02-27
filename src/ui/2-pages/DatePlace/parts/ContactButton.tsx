@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { StringU } from '@util/common/StringU.ts'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -16,6 +17,7 @@ import HandsetIc = SvgIconsPack.HandsetIc
 import TelegramIc = SvgIconsPack.TelegramIc
 import WhatsappIc = SvgIconsPack.WhatsappIc
 import EnvelopeIc = SvgIconsPack.EnvelopeIc
+import phoneToRawPhone = StringU.phoneToRawPhone
 
 
 
@@ -59,37 +61,39 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
   
   const uiText = useUiValues(uiValues)
   
-  const color = ({
-    telegram: '#34aadf',
-    whatsapp: '#67d449',
-    phone: '#ef9a15',
-    email: '#008080',
-  } satisfies Record<ContactType, React.ReactNode>)[type]
+  const { ct, ctSec, ctRipple } = contactButtonLocalTheme[type]
+  const link = getContactLink(type, value)
   
   return (
-    <Button
-      css={ButtonS6.t([btnS, {
-        //borderBdColor: color,
-      }])}
-      className={className}
-      style={style}
-      data-display-name="ContactButton"
-    >
-      {({
-        telegram: <TelegramIc css={SvgIconS6.t([contactIconS, { iconColor: color }])} />,
-        whatsapp: <WhatsappIc css={SvgIconS6.t([contactIconS, { iconColor: color }])} />,
-        phone: <HandsetIc css={SvgIconS6.t([contactIconS, { iconColor: color }])} />,
-        email: <EnvelopeIc css={SvgIconS6.t([contactIconS, { iconColor: color }])} />,
-      } satisfies Record<ContactType, React.ReactNode>)[type]}
-      <ContactText>
+    <a href={link} target="_blank">
+      <Button
+        css={ButtonS6.t([btnS, {
+          inFocus: {
+            buttonBg: ctSec,
+            borderBdColor: ct,
+            rippleColor: ctRipple,
+          },
+        }])}
+        className={className}
+        style={style}
+        data-display-name="ContactButton"
+      >
         {({
-          telegram: uiText.writeToTelegram,
-          whatsapp: uiText.writeToWhatsapp,
-          phone: value,
-          email: value,
-        } satisfies Record<ContactType, string>)[type]}
-      </ContactText>
-    </Button>
+          telegram: <TelegramIc css={SvgIconS6.t([contactIconS, { iconColor: ct }])} />,
+          whatsapp: <WhatsappIc css={SvgIconS6.t([contactIconS, { iconColor: ct }])} />,
+          phone: <HandsetIc css={SvgIconS6.t([contactIconS, { iconColor: ct }])} />,
+          email: <EnvelopeIc css={SvgIconS6.t([contactIconS, { iconColor: ct }])} />,
+        } satisfies Record<ContactType, React.ReactNode>)[type]}
+        <ContactText>
+          {({
+            telegram: uiText.writeToTelegram,
+            whatsapp: uiText.writeToWhatsapp,
+            phone: value,
+            email: value,
+          } satisfies Record<ContactType, string>)[type]}
+        </ContactText>
+      </Button>
+    </a>
   )
 })
 ContactButton.displayName = 'ContactButton'
@@ -98,14 +102,51 @@ export default ContactButton
 
 
 
+function getContactLink(type: ContactType, value: string): string {
+  if (type === 'telegram') return `https://t.me/${value}`
+  if (type === 'whatsapp') return `https://wa.me/${phoneToRawPhone(value)}`
+  if (type === 'phone') return `tel:${phoneToRawPhone(value)}`
+  if (type === 'email') return `mailto:${value}`
+  throw new Error(`Unknown contact type: ${type}`)
+}
+
+
+
+
+// TODO Theme - Dark or bg transparency?
+const contactButtonLocalTheme: Record<ContactType, {
+  ct: string,
+  ctSec: string
+  ctRipple: string
+}> = {
+  telegram: {
+    ct: '#34aadf',
+    ctSec: '#e5f7ff',
+    ctRipple: '#e5f7ff88',
+  },
+  whatsapp: {
+    ct: '#67d449',
+    ctSec: '#f2faf0',
+    ctRipple: '#f2faf088',
+  },
+  phone: {
+    ct: '#ef9a15',
+    ctSec: '#f5f1eb',
+    ctRipple: '#f5f1eb88',
+  },
+  email: {
+    ct: '#008080',
+    ctSec: '#f7fcfc',
+    ctRipple: '#f7fcfc88',
+  },
+}
+
+
+
 const btnS: AppWidgetStyle = t => [
   ButtonS6.S.outlined.rounded.md.accent, {
     buttonPl: 14,
-  
-    // variant 2
-    //borderBdColor: '#232020',
     borderBdColor: '#bbbbbb',
-    
   },
 ]
 

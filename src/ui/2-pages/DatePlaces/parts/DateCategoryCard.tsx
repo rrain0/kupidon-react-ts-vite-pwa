@@ -5,6 +5,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { DateType } from 'src/ui-data/special/DateTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
@@ -28,12 +29,14 @@ import colC = EmotionCommon.colC
 
 export type DateCategoryCardProps = ClassStyle & Puro<{
   category: DateCategory
+  type: DateType
 }>
 export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   const {
     className,
     style,
     category = 'romantic',
+    type,
   } = props
   
   const data = DateCategoryData[category]

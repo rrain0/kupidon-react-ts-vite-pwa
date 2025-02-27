@@ -56,8 +56,12 @@ export namespace StringU {
     }
   
   
-    
   
+  // TODO phone format
+  // +7 (3952) 99-08-00 => +73952990800
+  export function phoneToRawPhone(phone: string) {
+    return phone.replace(/[^+\d]/, '')
+  }
   
   
 }
