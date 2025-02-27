@@ -224,7 +224,7 @@ const PwdChangePage = React.memo(() => {
       
       <TopButtonBar backBtn />
       
-      <BottomButtonBar settingsBtn />
+      {/* <BottomButtonBar settingsBtn /> */}
       
       
     </>

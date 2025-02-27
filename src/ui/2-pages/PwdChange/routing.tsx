@@ -5,18 +5,17 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 
-const PwdChangePage = React.lazy(() => import('src/ui/2-pages/PwdChange/PwdChangePage.tsx'))
+const PwdChangePage = React.lazy(
+  () => import('src/ui/2-pages/PwdChange/PwdChangePage.tsx')
+)
 
 
 
-const SettingsPwdChangeEmpty = React.memo(() => {
-  
-  useNavBar({ place: 'settings' })
+const RouteSettingsPwdChange = React.memo(() => {
   
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
@@ -39,11 +38,11 @@ const SettingsPwdChangeEmpty = React.memo(() => {
 
 
 
-// path: 'settings / pwdChange / <check here>'
-export const settingsPwdChangeRouting: RouteObject[] = [
+// path: 'settings / pwdChange / ...'
+export const routingSettingsPwdChange: RouteObject[] = [
   {
     path: '',
-    Component: SettingsPwdChangeEmpty,
+    Component: RouteSettingsPwdChange,
   },
   clearUnknownPathEnding,
 ]

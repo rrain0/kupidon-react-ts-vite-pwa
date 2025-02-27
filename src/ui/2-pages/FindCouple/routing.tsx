@@ -5,7 +5,6 @@ import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -18,8 +17,6 @@ const FindCouplePage = React.lazy(
 
 
 const RouteFindCouple = React.memo(() => {
-  
-  useNavBar({ place: 'findCouple' })
   
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
@@ -42,7 +39,7 @@ const RouteFindCouple = React.memo(() => {
 
 
 
-// path: 'findCouple / <check here>'
+// path: 'findCouple / ...'
 export const findCoupleRouting: RouteObject[] = [
   {
     path: '',

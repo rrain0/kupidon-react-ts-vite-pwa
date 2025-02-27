@@ -5,10 +5,10 @@ import {
   RouterProvider,
   useSearchParams,
 } from 'react-router-dom'
-import NavBar from 'src/ui/1-widgets/NavBar/NavBar.tsx'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
+import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing.tsx'
 import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
+import { routingDatePlace } from 'src/ui/2-pages/DatePlace/routing.tsx'
 import { routingDatePlaces } from 'src/ui/2-pages/DatePlaces/routing.tsx'
 import { findCoupleRouting } from 'src/ui/2-pages/FindCouple/routing'
 import { loginRouting } from 'src/ui/2-pages/Login/routing'
@@ -19,31 +19,32 @@ import { settingRouting } from 'src/ui/2-pages/Settings/routing'
 import { signupRouting } from 'src/ui/2-pages/Signup/routing'
 import { devRouting } from 'src/ui/2-pages/Dev/routing.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { testRouting } from 'src/ui/2-pages/Test/routing.tsx'
+import { RoutingTest } from 'src/ui/2-pages/Test/routing.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
-import { useZustand } from 'src/zustand/ZustandStore.ts'
 
 
 
 
-const Any = React.memo(() => {
-  useNavBar(undefined)
-  const navBar = useZustand(s => s.navBar)
+const RouteAny = React.memo(() => {
+  //useNavBar(undefined)
+  //const navBar = useZustand(s => s.navBar)
   
   return (
     <>
       {/* Это место, где будут рендериться children */}
       <Outlet />
-      {navBar?.show && <NavBar place={navBar.place} />}
+      
+      {/* {navBar?.show && <NavBar place={navBar.place} />} */}
+      <BottomNavBarRouting />
     </>
   )
 })
 
 
 
-const AnyAny = React.memo(() => {
+const RouteAnyAny = React.memo(() => {
   const [searchParams] = useSearchParams()
   return (
     <Navigate
@@ -55,13 +56,13 @@ const AnyAny = React.memo(() => {
 
 
 
-// path: '/ <check here>'
-const rootRoutes: RouteObject[] = [
+// path: '/ ...'
+const routingRoot: RouteObject[] = [
   {
     path: '*',
     // If you specify 'Component' or 'element',
     // then in it must be <Outlet/> to render children.
-    Component: Any,
+    Component: RouteAny,
     children: [
       {
         path: RootRoute.login[path]+'/*',
@@ -101,12 +102,16 @@ const rootRoutes: RouteObject[] = [
         path: RootRoute.datePlaces[path]+'/*',
         children: routingDatePlaces,
       },
+      {
+        path: RootRoute.datePlace[path]+'/*',
+        children: routingDatePlace,
+      },
       
       
       
       {
         path: RootRoute.test[path]+'/*',
-        children: testRouting,
+        children: RoutingTest,
       },
       
       
@@ -121,12 +126,12 @@ const rootRoutes: RouteObject[] = [
       
       {
         path: '*',
-        Component: AnyAny,
+        Component: RouteAnyAny,
       },
     ],
   },
 ]
-const router = createBrowserRouter(rootRoutes)
+const router = createBrowserRouter(routingRoot)
 
 
 

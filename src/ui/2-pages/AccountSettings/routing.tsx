@@ -5,7 +5,6 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
@@ -19,8 +18,6 @@ const AccountSettingsPage = React.lazy(
 const RouteSettingsAccount = React.memo(() => {
   const [searchParams] = useSearchParams()
   const auth = useRecoilValue(AuthRecoil)
-  
-  useNavBar({ place: 'settings' })
   
   
   if (!auth) return (
@@ -41,7 +38,7 @@ const RouteSettingsAccount = React.memo(() => {
 
 
 
-// path: 'settings / account / <check here>'
+// path: 'settings / account / ...'
 export const settingsAccountRouting: RouteObject[] = [
   {
     path: '',

@@ -5,67 +5,19 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { allDateCategories, DateCategory } from 'src/ui-data/special/DateCategoryData.ts'
 import { allDateTypes, DateType } from 'src/ui-data/special/DateTypeData.ts'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
-import path = RouteBuilder.path
-import use = RouteBuilder.use
-import full = RouteBuilder.full
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
 
 const DatePlacesPage = React.lazy(
   () => import('src/ui/2-pages/DatePlaces/DatePlacesPage.tsx')
 )
-const DatePlacePage = React.lazy(
-  () => import('src/ui/2-pages/DatePlace/DatePlacePage.tsx')
-)
-const DatePlaceNotFoundPage = React.lazy(
-  () => import('src/ui/2-pages/DatePlace/DatePlaceNotFoundPage.tsx')
-)
-
-
-
-const RouteDatePlacesPlaceId = React.memo(() => {
-  
-  useNavBar({ place: 'bowAndArrows' })
-  
-  const idParam = 'placeId'
-  const placeIdRoute = RootRoute.datePlaces.placeId[use](`:${idParam}`)
-  const urlPlaceId = useMatch(placeIdRoute[full]()+'/*')!.params[idParam]!
-  
-  const place = MockDatePlaces.places.find(place => place.id === urlPlaceId)
-  
-  if (!place) return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DatePlaceNotFoundPage />
-    </Suspense>
-  )
-  
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DatePlacePage place={place} />
-    </Suspense>
-  )
-})
-
-
-
-// path: 'date-places / :placeId / <check here>'
-const routingDatePlacesPlaceId: RouteObject[] = [
-  {
-    path: '',
-    Component: RouteDatePlacesPlaceId,
-  },
-  clearUnknownPathEnding,
-]
 
 
 
 
 const RouteDatePlaces = React.memo(() => {
-  
-  useNavBar({ place: 'bowAndArrows' })
   
   const [search] = useSearchParams()
   const categoryParamName = RootRoute.datePlaces[params].category
@@ -146,14 +98,11 @@ const RouteDatePlaces = React.memo(() => {
 
 
 
-// path: 'date-places / <check here>'
+// path: 'date-places / ...'
 export const routingDatePlaces: RouteObject[] = [
   {
     path: '',
     Component: RouteDatePlaces,
   },
-  {
-    path: RootRoute.datePlaces.placeId[path]+'/*',
-    children: routingDatePlacesPlaceId,
-  },
+  clearUnknownPathEnding,
 ]

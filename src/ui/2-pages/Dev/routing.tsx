@@ -37,7 +37,7 @@ const ShadowDOMTestPage = React.lazy(
 
 
 
-// path: 'dev / bottomSheet / <check here>'
+// path: 'dev / bottomSheet / ...'
 const testBottomSheetTestPageRouting: RouteObject[] = [
   {
     path: '',
@@ -49,7 +49,7 @@ const testBottomSheetTestPageRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / scrollbar / <check here>'
+// path: 'dev / scrollbar / ...'
 const testScrollbarTestPageRouting: RouteObject[] = [
   {
     path: '',
@@ -61,7 +61,7 @@ const testScrollbarTestPageRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / views-select-item / <check here>'
+// path: 'dev / views-select-item / ...'
 const viewsSelectItemRouting: RouteObject[] = [
   {
     path: '',
@@ -73,7 +73,7 @@ const viewsSelectItemRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / ripple / <check here>'
+// path: 'dev / ripple / ...'
 const rippleRouting: RouteObject[] = [
   {
     path: '',
@@ -85,7 +85,7 @@ const rippleRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / buttons / <check here>'
+// path: 'dev / buttons / ...'
 const buttonsRouting: RouteObject[] = [
   {
     path: '',
@@ -97,7 +97,7 @@ const buttonsRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / slider / <check here>'
+// path: 'dev / slider / ...'
 const sliderRouting: RouteObject[] = [
   {
     path: '',
@@ -109,7 +109,7 @@ const sliderRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / image / <check here>'
+// path: 'dev / image / ...'
 const imageRouting: RouteObject[] = [
   {
     path: '',
@@ -125,7 +125,7 @@ const imageRouting: RouteObject[] = [
 
 
 
-// path: 'dev / resizeObserver / <check here>'
+// path: 'dev / resizeObserver / ...'
 const testResizeObserverTestPageRouting: RouteObject[] = [
   {
     path: '',
@@ -137,7 +137,7 @@ const testResizeObserverTestPageRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / moveElementToAnotherView / <check here>'
+// path: 'dev / moveElementToAnotherView / ...'
 const testMoveElementToAnotherViewRouting: RouteObject[] = [
   {
     path: '',
@@ -149,7 +149,7 @@ const testMoveElementToAnotherViewRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / pointer / <check here>'
+// path: 'dev / pointer / ...'
 const testPointerRouting: RouteObject[] = [
   {
     path: '',
@@ -161,7 +161,7 @@ const testPointerRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / tabs / <check here>'
+// path: 'dev / tabs / ...'
 const testTabsRouting: RouteObject[] = [
   {
     path: '',
@@ -173,7 +173,7 @@ const testTabsRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / state / <check here>'
+// path: 'dev / state / ...'
 const testStateRouting: RouteObject[] = [
   {
     path: '',
@@ -185,7 +185,7 @@ const testStateRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / page-lifecycle / <check here>'
+// path: 'dev / page-lifecycle / ...'
 const pageLifecycleRouting: RouteObject[] = [
   {
     path: '',
@@ -197,7 +197,7 @@ const pageLifecycleRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / use-event / <check here>'
+// path: 'dev / use-event / ...'
 const useEventRouting: RouteObject[] = [
   {
     path: '',
@@ -209,7 +209,7 @@ const useEventRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / elem-ref / <check here>'
+// path: 'dev / elem-ref / ...'
 const elemRefRouting: RouteObject[] = [
   {
     path: '',
@@ -221,7 +221,7 @@ const elemRefRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / elem-style / <check here>'
+// path: 'dev / elem-style / ...'
 const elemStyleRouting: RouteObject[] = [
   {
     path: '',
@@ -233,7 +233,7 @@ const elemStyleRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / old-profile-options / <check here>'
+// path: 'dev / old-profile-options / ...'
 const oldProfileOptionsRouting: RouteObject[] = [
   {
     path: '',
@@ -245,7 +245,7 @@ const oldProfileOptionsRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / emulated-scroll / <check here>'
+// path: 'dev / emulated-scroll / ...'
 const emulatedScrollRouting: RouteObject[] = [
   {
     path: '',
@@ -257,7 +257,7 @@ const emulatedScrollRouting: RouteObject[] = [
   },
   clearUnknownPathEnding,
 ]
-// path: 'dev / shadow-dom / <check here>'
+// path: 'dev / shadow-dom / ...'
 const shadowDOMRouting: RouteObject[] = [
   {
     path: '',
@@ -273,7 +273,7 @@ const shadowDOMRouting: RouteObject[] = [
 
 
 
-// path: 'dev / <check here>'
+// path: 'dev / ...'
 export const devRouting: RouteObject[] = [
   {
     path: '',

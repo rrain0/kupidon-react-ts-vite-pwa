@@ -10,7 +10,6 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -165,7 +164,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
       </Pages.PageGrad>
       
       
-      <BottomButtonBar />
+      <BottomButtonBar settingsBtn />
       
     </>
   )

@@ -10,7 +10,6 @@ import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
@@ -45,8 +44,6 @@ const RouteProfileIdUserIdTab = React.memo(() => {
       </Link>
     </div>
   )
-  
-  useNavBar({ place: 'profile' })
   
   if (tab === summary) return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -128,7 +125,7 @@ const RouteProfileId = React.memo(() => {
 
 
 
-// path: 'profile / id / <check here>'
+// path: 'profile / id / ...'
 export const routingProfileId: RouteObject[] = [
   {
     path: '',
@@ -156,7 +153,7 @@ const RouteProfileAny = React.memo(() => {
 
 
 
-// path: 'profile / <check here>'
+// path: 'profile / ...'
 export const routingProfile: RouteObject[] = [
   {
     path: RootRoute.profile.id[path]+'/*',

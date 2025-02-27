@@ -52,7 +52,6 @@ export namespace AppRoutes {
   })
   const bowAndArrows = buildRoute({
     [path]: 'bow-and-arrows',
-    allEvents: buildPath('all-events'),
   })
   
   
@@ -72,6 +71,9 @@ export namespace AppRoutes {
       // ...?type=cafe
       type: 'type',
     },
+  })
+  const datePlace = buildRoute({
+    [path]: 'date-place',
     placeId: buildPath(':placeId'),
   })
   
@@ -125,11 +127,12 @@ export namespace AppRoutes {
     chat,
     findCouple,
     bowAndArrows,
-    
     settings,
-    datePlaces,
     
     test,
+    datePlaces,
+    datePlace,
+    
     
     dev,
   })

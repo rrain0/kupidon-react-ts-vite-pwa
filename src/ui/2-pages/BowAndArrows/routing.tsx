@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 
 const BowAndArrowsPage = React.lazy(
@@ -9,8 +8,6 @@ const BowAndArrowsPage = React.lazy(
 
 
 const RouteBowAndArrows = React.memo(() => {
-  
-  useNavBar({ place: 'bowAndArrows' })
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -22,7 +19,7 @@ const RouteBowAndArrows = React.memo(() => {
 
 
 
-// path: 'bow-and-arrows / <check here>'
+// path: 'bow-and-arrows / ...'
 export const bowAndArrowsRouting: RouteObject[] = [
   {
     path: '',

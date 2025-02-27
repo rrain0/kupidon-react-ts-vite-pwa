@@ -6,7 +6,6 @@ import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { useNavBar } from 'src/ui/1-widgets/NavBar/useNavBar.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
