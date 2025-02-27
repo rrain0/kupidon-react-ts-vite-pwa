@@ -107,7 +107,6 @@ const BowAndArrowsPage = React.memo(() => {
                   <DateArticlePreviewCard
                     key={a.description}
                     picture={a.previewImg}
-                    date={a.date}
                     description={a.description}
                   />
                 ))}

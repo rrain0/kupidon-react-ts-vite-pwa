@@ -30,7 +30,6 @@ const uiVals = {
 
 export type DateArticlePreviewCardProps = ClassStyle & Children & Puro<{
   picture: string
-  date: string
   description: string
 }>
 const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) => {
@@ -38,7 +37,6 @@ const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) =
     className,
     style,
     picture = '',
-    date = '',
     description = '',
   } = props
   
@@ -65,11 +63,6 @@ const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) =
       <MiniPosterImageFade />
       
       <DateArticleBox>
-        
-        <DateBox>
-          <Calendar2Ic css={SvgIconS6.t(dateIcS)} />
-          <DateText>{date}</DateText>
-        </DateBox>
         
         <Description>{description}</Description>
         
@@ -120,36 +113,12 @@ const DateArticleBox = styled.div`
   padding: 12px 11px 10px;
   display: grid;
   grid:
-    'date' auto
     'desc' 1fr
     '....' 8px
     'read' auto
     /100%;
 `
 
-
-const DateBox = styled.div`
-  grid-area: date;
-  justify-self: end;
-  ${rowC};
-  gap: 4px;
-`
-const dateIcS: AppWidgetStyle = t => [
-  SvgIconS6.S.icon.icon.full.normal, {
-    icon: {
-      sz: 14,
-      // TODO Theme
-      color: 'white',
-    },
-  },
-]
-const DateText = styled.div`
-  margin-top: 2px;
-  // TODO Theme
-  color: white;
-  ${Txt.s17Wide};
-  line-height: 1;
-`
 
 
 const Description = styled.div`
