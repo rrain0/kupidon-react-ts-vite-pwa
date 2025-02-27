@@ -1,6 +1,6 @@
 import { MockDatePlaces } from 'src/_mock-data/date-places/MockDatePlaces.ts'
 import { UiText, UiTextValuesArr } from 'src/mini-libs/ui-text/UiText.ts'
-import { DateType } from 'src/ui-data/special/DateTypeData.ts'
+import { DatePlaceType } from 'src/ui-data/special/DatePlaceTypeData.ts'
 
 
 
@@ -12,7 +12,7 @@ export type ContactType =
 
 export type DatePlace = {
   id: string
-  type: DateType[]
+  type: DatePlaceType[]
   name: UiText
   picture: string
   location: UiText
@@ -29,5 +29,5 @@ export type DatePlace = {
 
 
 
-export const DatePlacesData: DatePlace[] = MockDatePlaces.places
+export const DatePlacesData: DatePlace[] = MockDatePlaces
 

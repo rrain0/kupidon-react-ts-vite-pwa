@@ -1,10 +1,9 @@
-import React, { Suspense, useEffect, useState } from 'react'
-import { Navigate, RouteObject, useMatch, useNavigate, useSearchParams } from 'react-router-dom'
-import { MockDatePlaces } from 'src/_mock-data/date-places/MockDatePlaces.ts'
+import React, { Suspense } from 'react'
+import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { allDateCategories, DateCategory } from 'src/ui-data/special/DateCategoryData.ts'
-import { allDateTypes, DateType } from 'src/ui-data/special/DateTypeData.ts'
+import { DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
@@ -26,11 +25,11 @@ const RouteDatePlaces = React.memo(() => {
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
   
-  const category = allDateCategories.includes(searchCategory as any)
-    ? searchCategory as DateCategory
+  const category = searchCategory && Object.hasOwn(DateCategoryData, searchCategory)
+    ? searchCategory as DatePlaceType
     : undefined
-  const type = allDateTypes.includes(searchType as any)
-    ? searchType as DateType
+  const type = searchType && Object.hasOwn(DatePlaceTypeData, searchType)
+    ? searchType as DatePlaceType
     : undefined
   
   
@@ -73,7 +72,6 @@ const RouteDatePlaces = React.memo(() => {
       </Suspense>
     </>
   )
-  
   
   return (
     <>

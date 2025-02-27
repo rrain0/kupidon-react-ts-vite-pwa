@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { StringU } from '@util/common/StringU.ts'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -9,15 +8,14 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
-import rowC = EmotionCommon.rowC
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import Txt = EmotionCommon.Txt
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import parsePhoneNumber from 'libphonenumber-js'
 import HandsetIc = SvgIconsPack.HandsetIc
 import TelegramIc = SvgIconsPack.TelegramIc
 import WhatsappIc = SvgIconsPack.WhatsappIc
 import EnvelopeIc = SvgIconsPack.EnvelopeIc
-import phoneToRawPhone = StringU.phoneToRawPhone
 
 
 
@@ -37,9 +35,9 @@ const uiVals = {
 
 
 export type ContactType =
+  | 'phone'
   | 'telegram'
   | 'whatsapp'
-  | 'phone'
   | 'email'
 
 export type ContactButtonProps = ClassStyle & {
@@ -86,9 +84,9 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
         } satisfies Record<ContactType, React.ReactNode>)[type]}
         <ContactText>
           {({
+            phone: parsePhoneNumber(value)!.formatInternational(),
             telegram: uiText.writeToTelegram,
             whatsapp: uiText.writeToWhatsapp,
-            phone: value,
             email: value,
           } satisfies Record<ContactType, string>)[type]}
         </ContactText>
@@ -103,9 +101,9 @@ export default ContactButton
 
 
 function getContactLink(type: ContactType, value: string): string {
+  if (type === 'phone') return `tel:${value}`
   if (type === 'telegram') return `https://t.me/${value}`
-  if (type === 'whatsapp') return `https://wa.me/${phoneToRawPhone(value)}`
-  if (type === 'phone') return `tel:${phoneToRawPhone(value)}`
+  if (type === 'whatsapp') return `https://wa.me/${value}`
   if (type === 'email') return `mailto:${value}`
   throw new Error(`Unknown contact type: ${type}`)
 }

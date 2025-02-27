@@ -8,14 +8,15 @@ export const Colors = {
     red1: '#ef3c34',
   },
   
-  darkRed: {
-    darkRed1: '#cc221f',
-  },
+  darkRed: [
+    '#cc221f',
+    '#AA0A0A',
+  ],
   
   purpleRed: {
     lightCherry1: '#d93b5f',
     norm1: '#BB2649',
-  } as const,
+  },
   
   orangeRed: {
     v1: '#f95c67',
@@ -28,20 +29,26 @@ export const Colors = {
     norm3: '#ff6086',
     norm4: '#ffa4ba',
     norm5: '#e58ea2',
-  } as const,
+  },
+  
+  blue: ['#1888AB'],
+  
+  brown: ['#754010'],
   
   
-  yellow: {
-    yellow1: '#fff200',
-    darkYellow1: '#d0cb5d',
-  } as const,
+  yellow: [
+    '#fff200',
+    '#d0cb5d',
+  ],
+  
+  orange: ['#FFB422'],
   
   
   pack1: {
     fucused: '#2196f3',
     accepted: '#00e676',
     rejected: '#ff1744',
-  } as const,
+  },
   
   
   savedColor: {

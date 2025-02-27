@@ -1,66 +1,29 @@
-import creative from '@im/date-category/creative-icon-d1e770dbf0ee9ba83777c47a5ff23cdd.webp'
-import cultural from '@im/date-category/cultural-icon-643a307e0ecc21f66df171166660090e.webp'
-import entertaining from '@im/date-category/entertaining-icon-ea79c8191f6951dc83ed142725712206.webp'
-import natural from '@im/date-category/natural-icon-e14a85caf5b9247a00f61b2ce4060c9c.webp'
-import romantic from '@im/date-category/romantic-icon-4bd31add75ca9eea70679dc07789c007.webp'
-import { ObjectU } from '@util/common/ObjectU.ts'
-import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
-import { DateType } from 'src/ui-data/special/DateTypeData.ts'
-import ObjectKeys = ObjectU.ObjectKeys
+import { DatePlaceType } from 'src/ui-data/special/DatePlaceTypeData.ts'
 
 
 
 
-export type DateCategory =
-  | 'romantic'
-  | 'cultural'
-  | 'active'
-  | 'entertaining'
-  | 'nonstandard'
-
-
-
-export const DateCategoryData: Record<DateCategory, {
-  picture: string,
-  dateTypes: DateType[],
-  name: UiText,
-}> = {
+export const DateCategoryData = {
+  all: {
+    next: ['romantic', 'cultural', 'active', 'entertaining', 'nonstandard'],
+  },
+  
+  
   romantic: {
-    picture: romantic,
-    dateTypes: ['restaurant', 'cafe', 'coffeeHouse', 'walking'],
-    name: {
-      'ru-RU': 'Романтический',
-    },
+    next: ['tableRomantic', 'walking'],
   },
   cultural: {
-    picture: cultural,
-    dateTypes: ['museum', 'gallery', 'theatre', 'cinema'],
-    name: {
-      'ru-RU': 'Культурный',
-    },
+    next: ['museum', 'gallery', 'theatre', 'cinema'],
   },
   active: {
-    picture: natural,
-    dateTypes: [],
-    name: {
-      'ru-RU': 'Активный',
-    },
+    next: ['sports', 'extreme', 'outdoorActivities'],
   },
   entertaining: {
-    picture: entertaining,
-    dateTypes: [],
-    name: {
-      'ru-RU': 'Развлекательный',
-    },
+    next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
   },
   nonstandard: {
-    picture: creative,
-    dateTypes: ['masterClasses'],
-    name: {
-      'ru-RU': 'Нестандартный',
-    },
+    next: ['masterClasses', 'streamCocktails', 'volunteering'],
   },
-}
-
-
-export const allDateCategories: DateCategory[] = ObjectKeys(DateCategoryData)
+} satisfies Partial<Record<DatePlaceType, {
+  next: DatePlaceType[]
+}>>

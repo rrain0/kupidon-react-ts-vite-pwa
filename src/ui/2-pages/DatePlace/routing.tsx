@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react'
 import { Navigate, RouteObject, useMatch, useSearchParams } from 'react-router-dom'
-import { MockDatePlaces } from 'src/_mock-data/date-places/MockDatePlaces.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
@@ -25,7 +25,7 @@ const RouteDatePlacePlaceId = React.memo(() => {
   const placeIdRoute = RootRoute.datePlace.placeId[use](`:${idParam}`)
   const urlPlaceId = useMatch(placeIdRoute[full]()+'/*')!.params[idParam]!
   
-  const place = MockDatePlaces.places.find(place => place.id === urlPlaceId)
+  const place = DatePlacesData.find(place => place.id === urlPlaceId)
   
   if (!place) return (
     <Suspense fallback={<div>Loading...</div>}>

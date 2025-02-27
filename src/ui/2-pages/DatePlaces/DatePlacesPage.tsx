@@ -2,12 +2,11 @@ import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { allDateCategories, DateCategory, DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
 import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
-import { DateType, DateTypeData } from 'src/ui-data/special/DateTypeData.ts'
+import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
 import { DateCategoryCard } from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
 import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
-import DateTypeCard from 'src/ui/2-pages/DatePlaces/parts/DateTypeCard.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -27,18 +26,16 @@ const uiVals = {
 
 
 export type DatePlacesPageProps = Puro<{
-  category: DateCategory
-  type: DateType
+  category: DatePlaceType
+  type: DatePlaceType
 }>
 const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   const { category, type } = props
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
-      if (category)
-        return DateCategoryData[category].name
-      if (type)
-        return DateTypeData[type].name
+      if (category) return DatePlaceTypeData[category].name
+      if (type) return DatePlaceTypeData[type].name
       return uiVals.insightsAndPlacesForDate
     })(),
   }), [category, type])
@@ -62,27 +59,29 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
             
             <DatePlacesList>
               
-              {!category && !type && allDateCategories.map(dc => (
+              {!category && !type && DateCategoryData.all.next.map(dc => (
                 <DateCategoryCard
                   key={dc}
                   style={{ width: '100%' }}
                   category={dc}
+                  isType={!Object.hasOwn(DateCategoryData, dc)}
                 />
               ))}
               
-              {category
-                && DateCategoryData[category].dateTypes.map(dt => (
-                  <DateTypeCard
-                    key={dt}
-                    type={dt}
-                    style={{ gridColumn: '1 / -1' }}
-                  />
-                ))
-              }
+              {category && DateCategoryData[category].next.map(dc => (
+                <DateCategoryCard
+                  key={dc}
+                  style={{ width: '100%' }}
+                  category={dc}
+                  isType={!Object.hasOwn(DateCategoryData, dc)}
+                />
+              ))}
               
               {type && (() => {
                 const places = DatePlacesData.filter(place => place.type.includes(type))
+                
                 if (!places.length) return 'Пусто'
+                
                 return places.map(place => (
                   <DatePlaceCard
                     key={place.id}

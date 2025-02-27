@@ -21,8 +21,9 @@ export namespace StringU {
   
   
   /** Обрезает у строки хвост {tail} с начала и с конца */
-  export const trimTails = (str: string, tail: string) =>
-    str.replaceAll(RegExp(`^(${tail})|(${tail})$`, 'g'), '')
+  export const trimTails = (str: string, tail: string) => str.replaceAll(
+    RegExp(`^(${tail})|(${tail})$`, 'g'), ''
+  )
   
   /** Обрезает у строки '/' с начала и с конца */
   export const trimSlash = (str: string) => trimTails(str, '/')
@@ -33,35 +34,13 @@ export namespace StringU {
    * @param n Число
    * @returns {string} Число в виде обычной строки
    */
-  export const numberToPlainString = (n: number) => {
+  export const numberToPlainString = (n: number): string => {
     return n.toLocaleString(['fullwide', 'en-Us'], {
       useGrouping: false,
       maximumSignificantDigits: 21,
     })
   }
   
-  
-  
-  
-  /**
-   * Получение процента в виде строки
-   * @param value Значение
-   * @param total Общее значение
-   * @param scale Масштаб
-   * @returns {string}
-   */
-  export const getPercent =
-    (value: number, total: number, scale: number = 1): string => {
-      return numberToPlainString(MathU.round((value * 100) / total, scale))
-    }
-  
-  
-  
-  // TODO phone format
-  // +7 (3952) 99-08-00 => +73952990800
-  export function phoneToRawPhone(phone: string) {
-    return phone.replace(/[^+\d]/, '')
-  }
   
   
 }
