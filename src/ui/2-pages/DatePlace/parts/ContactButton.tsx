@@ -83,12 +83,12 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
           email: <EnvelopeIc css={SvgIconS6.t([contactIconS, { iconColor: ct }])} />,
         } satisfies Record<ContactType, React.ReactNode>)[type]}
         <ContactText>
-          {({
-            phone: parsePhoneNumber(value)!.formatInternational(),
-            telegram: uiText.writeToTelegram,
-            whatsapp: uiText.writeToWhatsapp,
-            email: value,
-          } satisfies Record<ContactType, string>)[type]}
+          {(() => {
+            if (type === 'phone') return parsePhoneNumber(value)!.formatInternational()
+            if (type === 'telegram') return uiText.writeToTelegram
+            if (type === 'whatsapp') return uiText.writeToWhatsapp
+            if (type === 'email') return value
+          })()}
         </ContactText>
       </Button>
     </a>

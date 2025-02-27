@@ -1,8 +1,7 @@
 import clsx from 'clsx'
 import React, {
-  SyntheticEvent,
+  SyntheticEvent, useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -15,6 +14,8 @@ import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import combineProps = ReactU.combineProps
 import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
+import notExists = TypeU.notExists
+import exists = TypeU.exists
 
 
 
@@ -37,20 +38,22 @@ const ImgSpark = React.memo(
         className, style,
         ...restProps
       } = props
+      const { src } = props
       
       
       const elemRef = useRef<ImgSparkRefElement>(null)
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
-      const [isLoading, setLoading] = useState(true)
-      const [isError, setError] = useState(false)
       
-      // Если использовать эффект,
-      // то он может сработать уже после img.onLoad и сломать стэйт
-      useMemo(() => {
-        setLoading(true)
-        setError(false)
-      }, [props.src])
+      const [loaded, setLoaded] = useState<string | undefined>()
+      const [error, setError] = useState<string | undefined>()
+      
+      
+      useEffect(() => {
+        if (loaded !== src) setLoaded(undefined)
+        if (error !== src) setError(undefined)
+      }, [src])
+      
       
       
       return (
@@ -64,26 +67,27 @@ const ImgSpark = React.memo(
             ref={elemRef}
             {...combineProps({
               onLoad: (ev: SyntheticEvent<HTMLImageElement>) => {
-                setLoading(false)
+                setLoaded(src)
+                setError(undefined)
               },
               onError: (ev: SyntheticEvent<HTMLImageElement>) => {
-                setLoading(false)
-                // You can refresh src to retry if error
+                setLoaded(undefined)
+                // You can refresh src to retry if error:
                 // ev.currentTarget.src = ev.currentTarget.src
-                setError(true)
+                setError(src)
               },
               style: {
-                display: (isLoading || isError) ? 'none' : 'block',
+                display: exists(loaded) ? 'block' : 'none',
               },
               className: ImgSparkS6.W.els.img.n,
             }, restProps)}
           />
           
-          {isLoading && (
+          {notExists(loaded) && notExists(error) && (
             <SparkingLoadingLine className={ImgSparkS6.W.els.spark.n} />
           )}
           
-          {isError && (
+          {exists(error) && (
             <DocumentErrorIc />
           )}
           
