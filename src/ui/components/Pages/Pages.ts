@@ -110,11 +110,11 @@ export namespace Pages {
   
   
   
-  export const PageHeaderBox = styled.div`
+  export const PageHeaderWithLeftRight = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
+    grid-template-columns: auto 1fr auto;
+    place-items: center;
   `
   
   

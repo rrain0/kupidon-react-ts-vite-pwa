@@ -70,11 +70,11 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0 }}>
             
-            <Pages.PageHeaderBox>
+            <Pages.PageHeaderWithLeftRight>
               <BackBtn />
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div />
-            </Pages.PageHeaderBox>
+              <div css={{ width: 50, height: 50 }} />
+            </Pages.PageHeaderWithLeftRight>
             
             <div style={{ height: 34 }} />
             

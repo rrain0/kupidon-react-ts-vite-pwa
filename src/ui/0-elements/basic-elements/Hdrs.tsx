@@ -19,6 +19,7 @@ export namespace Hdrs {
   `
   export const Page = styled.h3`
     ${resetH};
+    overflow-wrap: anywhere;
     ${p => page(p.theme)}
   `
   

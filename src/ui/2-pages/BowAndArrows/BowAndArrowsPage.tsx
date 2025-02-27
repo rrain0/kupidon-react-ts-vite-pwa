@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { MockDateArticles } from 'src/_mock-data/date-articles/MockDateArticles.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -51,13 +51,13 @@ const BowAndArrowsPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0 }}>
             
-            <Pages.PageHeaderBox>
-              <div />
+            <Pages.PageHeaderWithLeftRight>
+              <div css={{ width: 50, height: 50 }} />
               <Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page>
               <Button css={IconButtonS6.t(calendarButtonS)}>
                 <Calendar2GradIc />
               </Button>
-            </Pages.PageHeaderBox>
+            </Pages.PageHeaderWithLeftRight>
             
             <div style={{ height: 27 }} />
             

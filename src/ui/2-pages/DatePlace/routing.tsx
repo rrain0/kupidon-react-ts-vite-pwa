@@ -42,7 +42,7 @@ const RouteDatePlacePlaceId = React.memo(() => {
 
 
 
-// path: 'date-places / :placeId / ...'
+// path: 'date-place / :placeId / ...'
 const routingDatePlacePlaceId: RouteObject[] = [
   {
     path: '',
@@ -60,7 +60,7 @@ const RouteDatePlace = React.memo(() => {
   return (
     <Navigate
       to={
-        RootRoute.datePlaces[fullParams]({
+        RootRoute.datePlace[fullParams]({
           anySearchParams: search,
         })
       }
@@ -71,7 +71,7 @@ const RouteDatePlace = React.memo(() => {
 
 
 
-// path: 'date-places / ...'
+// path: 'date-place / ...'
 export const routingDatePlace: RouteObject[] = [
   {
     path: '',

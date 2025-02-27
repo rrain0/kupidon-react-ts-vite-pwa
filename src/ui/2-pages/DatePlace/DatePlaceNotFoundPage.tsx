@@ -48,11 +48,11 @@ export const DatePlaceNotFoundPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentSmCol style={{ gap: 0, minHeight: '100%' }}>
             
-            <Pages.PageHeaderBox>
+            <Pages.PageHeaderWithLeftRight>
               <BackBtn />
               <Hdrs.Page>{uiText.placeNotFound}</Hdrs.Page>
               <div />
-            </Pages.PageHeaderBox>
+            </Pages.PageHeaderWithLeftRight>
             
             <div style={{ height: 28 }} />
             
