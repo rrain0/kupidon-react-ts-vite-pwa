@@ -8,14 +8,17 @@ import etika from './etika-30258560173284876_9170.jpg'
 
 export const MockDatePlaces: DatePlace[] = [
   {
-    id: 'bez-bokala-net-shagala',
+    id: 'Без бокала нет Шагала ул. Октябрьской революции, 11а',
     type: ['masterClasses'],
     name: {
       'ru-RU': 'Без бокала нет Шагала',
     },
     picture: bezBokalaNetShagala,
     location: {
-      'ru-RU': 'ул. Октябрьской революции, 11а',
+      name: {
+        'ru-RU': 'ул. Октябрьской революции, 11а',
+      },
+      coords: '52.290160,104.304376',
     },
     isNear: true,
     shortDescription: {
@@ -40,14 +43,17 @@ export const MockDatePlaces: DatePlace[] = [
     ],
   },
   {
-    id: 'ibis-kitchen',
+    id: 'Ibis Kitchen ул. Осипенко, 5, Отель Ibis',
     type: ['tableRomantic', 'restaurant'],
     name: {
       'ru-RU': 'Ibis Kitchen',
     },
     picture: ibisKitchen,
     location: {
-      'ru-RU': 'ул. Осипенко, 5, Отель Ibis',
+      name: {
+        'ru-RU': 'ул. Осипенко, 5, Отель Ibis',
+      },
+      coords: '52.287561,104.270522',
     },
     isNear: false,
     shortDescription: {
@@ -68,14 +74,17 @@ export const MockDatePlaces: DatePlace[] = [
     ],
   },
   {
-    id: 'etika',
+    id: 'Etika ул. Лызина, 9',
     type: ['tableRomantic', 'cafe', 'coffeeHouse'],
     name: {
       'ru-RU': 'Etika',
     },
     picture: etika,
     location: {
-      'ru-RU': 'ул. Лызина, 9',
+      name: {
+        'ru-RU': 'ул. Лызина, 9',
+      },
+      coords: '52.281736,104.323286',
     },
     isNear: true,
     shortDescription: {

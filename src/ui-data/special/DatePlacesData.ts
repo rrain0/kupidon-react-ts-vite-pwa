@@ -15,7 +15,10 @@ export type DatePlace = {
   type: DatePlaceType[]
   name: UiText
   picture: string
-  location: UiText
+  location: {
+    name: UiText,
+    coords: string,
+  }
   isNear: boolean
   shortDescription: UiText
   description: UiText

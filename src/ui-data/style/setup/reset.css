@@ -31,28 +31,28 @@
 
 
 
-/*
-  https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
-  Indicates that page cannot be changed by
-  autotheme browser engine.
-  And indicates that page can change theme by its own.
-*/
+/* WARNING! Do not apply any display property to html or body - it behaves strange */
 html {
+  /*
+    https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme
+    Indicates that page cannot be changed by autotheme browser engine.
+    And indicates that page can change theme by its own.
+  */
   color-scheme: light dark;
+  /*width: 100%;
+  height: 100%;*/
+}
+body {
+  /*width: 100%;
+  height: 100%;*/
 }
 
 
 
 
 
-/* WARNING! Do not apply any display property to html or body - it behaves strange */
-
 #root {
   display: contents;
-  /*width: 100dvw;
-  height: 100dvh;
-  display: flex;
-  flex-flow: column nowrap;*/
 }
 
 

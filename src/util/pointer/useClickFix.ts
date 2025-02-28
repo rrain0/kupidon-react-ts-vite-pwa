@@ -27,7 +27,7 @@ export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
           if (getWasClicked() === 2) {
             elem.click()
           }
-        }, 50)
+        }, 250)
       }
     },
     onClick: (ev: React.MouseEvent) => {

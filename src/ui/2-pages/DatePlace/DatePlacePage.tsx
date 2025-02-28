@@ -22,6 +22,8 @@ import LocationIc = SvgIconsPack.LocationIc
 import rowC = EmotionCommon.rowC
 import resetH = EmotionCommon.resetH
 import col = EmotionCommon.col
+import hoverable = EmotionCommon.hoverable
+import abs = EmotionCommon.abs
 
 
 
@@ -50,7 +52,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
   
   const uiValues = useMemo(() => ({
     pageTitle: place.name,
-    location: place.location,
+    locationName: place.location.name,
     description: place.description,
     features: uiVals.features,
     bonusesFromKupidon: uiVals.bonusesFromKupidon,
@@ -89,10 +91,12 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
             
             <div style={{ height: 7 }} />
             
-            <LocationBox>
-              <LocationIc css={SvgIconS6.t(locationIcS)} />
-              <LocationText>{uiText.location}</LocationText>
-            </LocationBox>
+            <a href={`geo:${place.location.coords}`} target="_blank">
+              <LocationBox>
+                <LocationIc css={SvgIconS6.t(locationNameIcS)} />
+                <LocationText>{uiText.locationName}</LocationText>
+              </LocationBox>
+            </a>
             
             <div style={{ height: 17 }} />
             
@@ -181,12 +185,22 @@ const Title = styled.div`
 `
 
 
+
 const LocationBox = styled.div`
+  position: relative;
+  width: fit-content;
   grid-area: loc;
   ${rowC};
   gap: 3px;
+  cursor: pointer;
+  ${hoverable} { &:hover { ::after {
+    ${abs};
+    bottom: -2px;
+    content: '';
+    border-bottom: 2px solid #848484;
+  } } }
 `
-const locationIcS: AppWidgetStyle = t => [
+const locationNameIcS: AppWidgetStyle = t => [
   SvgIconS6.S.icon.icon.full.normal, {
     // TODO Theme
     icon: { sz: 20, color: '#848484' },
@@ -204,6 +218,7 @@ const LocationText = styled.div`
 const Description = styled.div`
   // TODO Theme
   color: #000000;
+  text-align: justify;
   ${Txt.s15};
 `
 

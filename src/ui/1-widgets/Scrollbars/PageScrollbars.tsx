@@ -23,16 +23,17 @@ export type PageScrollbarsProps = PartialUndef<{
 
 
 const PageScrollbars = React.memo((props: PageScrollbarsProps) => {
+  const { pageRef } = props
   
   const frameRef = useRef<HTMLDivElement>(null)
   const parentRef = useRef<HTMLElement | null>(null)
   useEffect(() => {
     const frame = frameRef.current
-    if (!props.pageRef && frame) {
+    if (!pageRef && frame) {
       parentRef.current = frame.parentElement
     }
-  }, [props.pageRef, frameRef.current])
-  const ref = props.pageRef ?? parentRef
+  }, [pageRef, frameRef.current])
+  const ref = pageRef ?? parentRef
   
   
   return (

@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/DateCategoriesData.ts'
 import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
 import { DateCategoryCard } from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
@@ -26,7 +26,7 @@ const uiVals = {
 
 
 export type DatePlacesPageProps = Puro<{
-  category: DatePlaceType
+  category: DateCategoryType
   type: DatePlaceType
 }>
 const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
@@ -34,13 +34,15 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
-      if (category) return DatePlaceTypeData[category].name
+      if (category) return DatePlaceTypeData[DateCategoriesData[category].type].name
       if (type) return DatePlaceTypeData[type].name
       return uiVals.insightsAndPlacesForDate
     })(),
   }), [category, type])
   
   const uiText = useUiValues(uiValues)
+  
+  const gap = type ? 16 : 12
   
   return (
     <>
@@ -57,25 +59,40 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
             
             <div style={{ height: 28 }} />
             
-            <DatePlacesList>
+            <DatePlacesList style={{ gap }}>
               
-              {!category && !type && DateCategoryData.all.next.map(dc => (
+              
+              {!category && !type && DateCategoriesData.all1.nextCategories?.map(it => (
                 <DateCategoryCard
-                  key={dc}
+                  key={it}
                   style={{ width: '100%' }}
-                  category={dc}
-                  isType={!Object.hasOwn(DateCategoryData, dc)}
+                  category={it}
+                />
+              ))}
+              {!category && !type && DateCategoriesData.all1.nextTypes?.map(it => (
+                <DateCategoryCard
+                  key={it}
+                  style={{ width: '100%' }}
+                  type={it}
                 />
               ))}
               
-              {category && DateCategoryData[category].next.map(dc => (
+              
+              {category && DateCategoriesData[category].nextCategories?.map(it => (
                 <DateCategoryCard
-                  key={dc}
+                  key={it}
                   style={{ width: '100%' }}
-                  category={dc}
-                  isType={!Object.hasOwn(DateCategoryData, dc)}
+                  category={it}
                 />
               ))}
+              {category && DateCategoriesData[category].nextTypes?.map(it => (
+                <DateCategoryCard
+                  key={it}
+                  style={{ width: '100%' }}
+                  type={it}
+                />
+              ))}
+              
               
               {type && (() => {
                 const places = DatePlacesData.filter(place => place.type.includes(type))
@@ -114,7 +131,7 @@ export default DatePlacesPage
 const DatePlacesList = styled.div`
   width: 100%;
   height: fit-content;
-  gap: 18px 16px;
+  gap: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 `

@@ -4,55 +4,55 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/DateCategoriesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import Card from 'src/ui/0-elements/Card/Card.tsx'
-import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
-import col = EmotionCommon.col
-import colC = EmotionCommon.colC
+import flexC = EmotionCommon.flexC
 
 
 
+export type DateCategoryOrType = {
+  category: DateCategoryType
+  type?: undefined
+} | {
+  category?: undefined
+  type: DatePlaceType
+}
 
 
-export type DateCategoryCardProps = ClassStyle & Puro<{
-  category: DatePlaceType
-  isType: boolean
-}>
+export type DateCategoryCardProps = ClassStyle & DateCategoryOrType
 export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   const {
     className,
     style,
-    category = 'romantic',
-    isType,
+    category,
+    type,
   } = props
   
-  const data = DatePlaceTypeData[category]
+  const typeData = DatePlaceTypeData[type ?? DateCategoriesData[category].type]
+  
   const uiValues = useMemo(() => ({
-    name: data.name,
-  }), [data])
+    name: typeData.name,
+  }), [typeData])
   
   const uiText = useUiValues(uiValues)
   
   const [search] = useSearchParams()
   
-  const link = isType
+  const link = type
     ? RootRoute.datePlaces[fullParams]({
       anySearchParams: search,
       allowedNameParams: {
         category: null,
-        type: category,
+        type: type,
       },
     })
     : RootRoute.datePlaces[fullParams]({
@@ -66,19 +66,24 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   
   return (
     <Link to={link}>
-      <DateCategoryBox
+      <CardBox
         className={className}
         style={style}
         data-display-name="DateCategoryCard"
       >
+        
         <ImgSpark
-          css={ImgSparkS6.t(imgSparkS)}
-          src={data.picture}
+          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
+          src={typeData.picture}
         />
+        
         <InfoBox>
-          <Title>{uiText.name}</Title>
+          <TitleBox>
+            <Title>{uiText.name}</Title>
+          </TitleBox>
         </InfoBox>
-      </DateCategoryBox>
+        
+      </CardBox>
     </Link>
   )
 })
@@ -87,36 +92,40 @@ export default DateCategoryCard
 
 
 
-const DateCategoryBox = styled(Card)`
-  ${p => CardS.card3S(p.theme)};
+const CardBox = styled.article`
+  position: relative;
   width: 233px;
-  height: fit-content;
-  padding: 0;
-  gap: 0;
-  ${col};
-  box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
-  cursor: pointer;
+  aspect-ratio: 1.084;
+  border-radius: ${StyleVals.cardRadius}px;
+  overflow: hidden;
 `
 
-const imgSparkS: AppWidgetStyle = [
-  ImgSparkS6.S.img.img.wFull.normal, {
-    imgFrame: { ratio: 1.371 },
-  },
-]
 
 const InfoBox = styled.div`
+  position: absolute;
+  z-index: 2;
   width: 100%;
-  height: fit-content;
-  min-height: 44px;
-  ${colC};
-  justify-content: center;
-  gap: 5px;
-  padding: 10px 2px;
+  height: 100%;
+  display: grid;
+  grid:
+    '.....' 1fr
+    'title' 40px
+    /100%;
+`
+const TitleBox = styled.div`
+  grid-area: title;
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  ${flexC};
+  background-color: #ffffffbb;
 `
 const Title = styled.div`
   // TODO Theme
   color: black;
-  ${Txt.s17Bold};
+  ${Txt.s16Bold};
+  line-height: 1;
   overflow-wrap: anywhere;
+  text-align: center;
 `
 

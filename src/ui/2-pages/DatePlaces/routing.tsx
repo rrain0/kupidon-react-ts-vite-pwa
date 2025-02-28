@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/DateCategoriesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
@@ -25,8 +25,8 @@ const RouteDatePlaces = React.memo(() => {
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
   
-  const category = searchCategory && Object.hasOwn(DateCategoryData, searchCategory)
-    ? searchCategory as DatePlaceType
+  const category = searchCategory && Object.hasOwn(DateCategoriesData, searchCategory)
+    ? searchCategory as DateCategoryType
     : undefined
   const type = searchType && Object.hasOwn(DatePlaceTypeData, searchType)
     ? searchType as DatePlaceType

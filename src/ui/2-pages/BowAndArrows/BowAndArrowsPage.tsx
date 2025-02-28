@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { MockDateArticles } from 'src/_mock-data/date-articles/MockDateArticles.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { DateCategoryData } from 'src/ui-data/special/DateCategoryData.ts'
+import { DateCategoriesData } from 'src/ui-data/special/DateCategoriesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -83,11 +83,16 @@ const BowAndArrowsPage = React.memo(() => {
             
             <DatePlacesOverflow>
               <DatePlacesList>
-                {DateCategoryData.all.next.map(dc => (
+                {DateCategoriesData.all1.nextCategories?.map(dc => (
                   <DateCategoryCard
                     key={dc}
                     category={dc}
-                    isType={!Object.hasOwn(DateCategoryData, dc)}
+                  />
+                ))}
+                {DateCategoriesData.all1.nextTypes?.map(dc => (
+                  <DateCategoryCard
+                    key={dc}
+                    type={dc}
                   />
                 ))}
               </DatePlacesList>

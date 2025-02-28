@@ -47,7 +47,7 @@ const DateArticleCard = React.memo((props: DateArticleCardProps) => {
   
   
   return (
-    <DateArticleCardBox
+    <CardBox
       className={className}
       style={style}
       data-display-name="DateArticleCard"
@@ -61,7 +61,7 @@ const DateArticleCard = React.memo((props: DateArticleCardProps) => {
       
       <MiniPosterImageFade />
       
-      <DateArticleBox>
+      <ContentBox>
         
         <Description>{description}</Description>
         
@@ -70,9 +70,9 @@ const DateArticleCard = React.memo((props: DateArticleCardProps) => {
           <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)} />
         </ReadItBox>
         
-      </DateArticleBox>
+      </ContentBox>
       
-    </DateArticleCardBox>
+    </CardBox>
   )
 })
 DateArticleCard.displayName = 'DateArticleCard'
@@ -80,7 +80,7 @@ export default DateArticleCard
 
 
 
-const DateArticleCardBox = styled.article`
+const CardBox = styled.article`
   position: relative;
   width: 233px;
   aspect-ratio: 1.084;
@@ -104,7 +104,7 @@ const MiniPosterImageFade = styled.div`
 `
 
 
-const DateArticleBox = styled.div`
+const ContentBox = styled.div`
   position: absolute;
   z-index: 2;
   width: 100%;

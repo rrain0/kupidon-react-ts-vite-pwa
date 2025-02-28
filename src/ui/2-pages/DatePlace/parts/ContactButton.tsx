@@ -66,10 +66,10 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
     <a href={link} target="_blank">
       <Button
         css={ButtonS6.t([btnS, {
+          rippleColor: ctRipple,
           inFocus: {
-            buttonBg: ctSec,
+            buttonBgColor: ctSec,
             borderBdColor: ct,
-            rippleColor: ctRipple,
           },
         }])}
         className={className}
@@ -142,9 +142,17 @@ const contactButtonLocalTheme: Record<ContactType, {
 
 
 const btnS: AppWidgetStyle = t => [
-  ButtonS6.S.outlined.rounded.md.accent, {
+  ButtonS6.Parts.Type.outlined.Shape.rounded.Size.md,
+  ButtonS6.Parts.Type.outlined.baseColor, {
     buttonPl: 14,
+    // TODO Theme
+    buttonColor: '#232020',
+    // TODO Theme
     borderBdColor: '#bbbbbb',
+    inFocus: {
+      // TODO Theme
+      buttonColor: '#232020',
+    },
   },
 ]
 
@@ -158,7 +166,5 @@ const contactIconS: AppWidgetStyle = t => [
   ],
 ]
 const ContactText = styled.div`
-  // TODO Theme
-  color: #232020;
   ${Txt.s17};
 `

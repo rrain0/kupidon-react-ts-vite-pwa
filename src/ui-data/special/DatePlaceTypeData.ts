@@ -207,7 +207,7 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
   outdoorActivities: {
     picture: outdoorActivities,
     name: {
-      'ru-RU': 'Активный отдых на свежем воздухе',
+      'ru-RU': 'Активный отдых на природе',
     },
   },
   
