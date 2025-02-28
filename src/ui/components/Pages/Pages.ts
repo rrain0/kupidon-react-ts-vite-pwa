@@ -18,7 +18,9 @@ export namespace Pages {
   export const pageCol = css`
     min-width: ${wMin}px;
     width: min(100%, 100dvw);
+    //width: 110dvw;
     min-height: max( min(100%, 100dvh), ${hMin}px );
+    //min-height: 100%;
     position: relative;
     ${col};
   `

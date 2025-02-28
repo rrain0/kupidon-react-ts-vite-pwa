@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React, {
-  SyntheticEvent, useEffect,
-  useImperativeHandle,
+  SyntheticEvent,
+  useImperativeHandle, useMemo,
   useRef,
   useState,
 } from 'react'
@@ -48,10 +48,14 @@ const ImgSpark = React.memo(
       const [loaded, setLoaded] = useState<string | undefined>()
       const [error, setError] = useState<string | undefined>()
       
+      const isLoading = notExists(loaded) && notExists(error)
+      const isLoaded = exists(loaded)
+      const isError = exists(error)
       
-      useEffect(() => {
-        if (loaded !== src) setLoaded(undefined)
-        if (error !== src) setError(undefined)
+      
+      useMemo(() => {
+        setLoaded(loaded => loaded !== src ? undefined : loaded)
+        setError(error => error !== src ? undefined : error)
       }, [src])
       
       
@@ -77,17 +81,17 @@ const ImgSpark = React.memo(
                 setError(src)
               },
               style: {
-                display: exists(loaded) ? 'block' : 'none',
+                display: isLoaded ? 'block' : 'none',
               },
               className: ImgSparkS6.W.els.img.n,
             }, restProps)}
           />
           
-          {notExists(loaded) && notExists(error) && (
+          {isLoading && (
             <SparkingLoadingLine className={ImgSparkS6.W.els.spark.n} />
           )}
           
-          {exists(error) && (
+          {isError && (
             <DocumentErrorIc />
           )}
           

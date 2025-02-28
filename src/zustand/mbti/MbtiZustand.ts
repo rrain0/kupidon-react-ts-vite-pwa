@@ -1,7 +1,6 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import isstring = TypeU.isstring
 import isobject = TypeU.isobject
 import exists = TypeU.exists
 

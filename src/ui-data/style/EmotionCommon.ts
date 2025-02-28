@@ -266,7 +266,7 @@ export namespace EmotionCommon {
       display: none;
     }
   `
-  export const hideWindowScrollbar = css`
+  export const noWindowScrollbars = css`
     html { ${noScrollbars} }
   `
   

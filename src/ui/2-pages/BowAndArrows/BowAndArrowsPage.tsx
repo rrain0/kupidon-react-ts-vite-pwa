@@ -13,7 +13,7 @@ import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
-import DateArticlePreviewCard from 'src/ui/2-pages/DateArticles/parts/DateArticlePreviewCard.tsx'
+import DateArticleCard from 'src/ui/2-pages/DateArticles/parts/DateArticleCard.tsx'
 import DateCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -104,7 +104,7 @@ const BowAndArrowsPage = React.memo(() => {
             <DateArticlesOverflow>
               <DateArticlesList>
                 {MockDateArticles.articles.map(a => (
-                  <DateArticlePreviewCard
+                  <DateArticleCard
                     key={a.description}
                     picture={a.previewImg}
                     description={a.description}

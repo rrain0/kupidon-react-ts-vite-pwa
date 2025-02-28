@@ -16,7 +16,6 @@ import rowC = EmotionCommon.rowC
 import ClassStyle = ReactU.ClassStyle
 import Puro = TypeU.Puro
 import Children = ReactU.Children
-import Calendar2Ic = SvgIconsPack.Calendar2Ic
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 
 
@@ -28,11 +27,11 @@ const uiVals = {
 } satisfies UiTextValues
 
 
-export type DateArticlePreviewCardProps = ClassStyle & Children & Puro<{
+export type DateArticleCardProps = ClassStyle & Children & Puro<{
   picture: string
   description: string
 }>
-const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) => {
+const DateArticleCard = React.memo((props: DateArticleCardProps) => {
   const {
     className,
     style,
@@ -48,10 +47,10 @@ const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) =
   
   
   return (
-    <DateArticleCard
+    <DateArticleCardBox
       className={className}
       style={style}
-      data-display-name="DateArticlePreviewCard"
+      data-display-name="DateArticleCard"
     >
       
       
@@ -73,15 +72,15 @@ const DateArticlePreviewCard = React.memo((props: DateArticlePreviewCardProps) =
         
       </DateArticleBox>
       
-    </DateArticleCard>
+    </DateArticleCardBox>
   )
 })
-DateArticlePreviewCard.displayName = 'DateArticlePreviewCard'
-export default DateArticlePreviewCard
+DateArticleCard.displayName = 'DateArticleCard'
+export default DateArticleCard
 
 
 
-const DateArticleCard = styled.article`
+const DateArticleCardBox = styled.article`
   position: relative;
   width: 233px;
   aspect-ratio: 1.084;
