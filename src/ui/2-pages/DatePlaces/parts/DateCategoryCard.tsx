@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -82,7 +82,7 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
     </Link>
   )
 })
-DateCategoryCard.displayName = 'DateTypeCard'
+DateCategoryCard.displayName = 'DateCategoryCard'
 export default DateCategoryCard
 
 
