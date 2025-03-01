@@ -83,18 +83,14 @@ const BowAndArrowsPage = React.memo(() => {
             
             <DatePlacesOverflow>
               <DatePlacesList>
-                {DateCategoriesData.all1.nextCategories?.map(dc => (
-                  <DateCategoryCard
-                    key={dc}
-                    category={dc}
-                  />
-                ))}
-                {DateCategoriesData.all1.nextTypes?.map(dc => (
-                  <DateCategoryCard
-                    key={dc}
-                    type={dc}
-                  />
-                ))}
+                {DateCategoriesData.all1.type === 'category'
+                  && DateCategoriesData.all1.next?.map(it => (
+                    <DateCategoryCard
+                      key={it}
+                      category={it}
+                    />
+                  ))
+                }
               </DatePlacesList>
             </DatePlacesOverflow>
             

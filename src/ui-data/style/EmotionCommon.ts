@@ -119,11 +119,17 @@ export namespace EmotionCommon {
   
   
   
-  
-  export const mobileFullWidth = css`
-    @media (max-width: 480px) {
-      width: 100%;
-    }
+  export const max1Line = css`
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  `
+  export const maxLines = (lines: number) => css`
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: ${lines};
   `
   
   
@@ -131,11 +137,18 @@ export namespace EmotionCommon {
   export const hoverable = '@media (hover: hover) and (pointer: fine)'
   
   export const onHover = (cssStyle: SerializedStyles) => css`
-    ${hoverable}{ :hover {
+    ${hoverable} { :hover {
       ${cssStyle};
     } }
   `
   
+  
+  
+  export const mobileFullWidth = css`
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+  `
   export const mobileWidth = (cssStyle: SerializedStyles) => css`
     @media only screen and (max-width: 480px) {
       ${cssStyle};

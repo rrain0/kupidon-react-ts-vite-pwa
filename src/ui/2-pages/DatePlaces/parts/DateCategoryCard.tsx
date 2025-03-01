@@ -5,7 +5,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/DateCategoriesData.ts'
-import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
+import { DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
@@ -16,28 +16,23 @@ import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
 import flexC = EmotionCommon.flexC
+import maxLines = EmotionCommon.maxLines
 
 
 
-export type DateCategoryOrType = {
+
+export type DateCategoryCardProps = ClassStyle & {
   category: DateCategoryType
-  type?: undefined
-} | {
-  category?: undefined
-  type: DatePlaceType
 }
-
-
-export type DateCategoryCardProps = ClassStyle & DateCategoryOrType
 export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   const {
     className,
     style,
     category,
-    type,
   } = props
   
-  const typeData = DatePlaceTypeData[type ?? DateCategoriesData[category].type]
+  const categoryData = DateCategoriesData[category]
+  const typeData = DatePlaceTypeData[categoryData.placeType]
   
   const uiValues = useMemo(() => ({
     name: typeData.name,
@@ -47,12 +42,12 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   
   const [search] = useSearchParams()
   
-  const link = type
+  const link = categoryData.type === 'type'
     ? RootRoute.datePlaces[fullParams]({
       anySearchParams: search,
       allowedNameParams: {
         category: null,
-        type: type,
+        type: categoryData.placeType,
       },
     })
     : RootRoute.datePlaces[fullParams]({
@@ -116,7 +111,7 @@ const TitleBox = styled.div`
   grid-area: title;
   width: 100%;
   height: 100%;
-  padding: 6px;
+  padding: 2px 6px;
   ${flexC};
   background-color: #ffffffbb;
 `
@@ -127,5 +122,6 @@ const Title = styled.div`
   line-height: 1;
   overflow-wrap: anywhere;
   text-align: center;
+  ${maxLines(2)};
 `
 

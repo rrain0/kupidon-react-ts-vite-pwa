@@ -34,7 +34,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
-      if (category) return DatePlaceTypeData[DateCategoriesData[category].type].name
+      if (category) return DatePlaceTypeData[DateCategoriesData[category].placeType].name
       if (type) return DatePlaceTypeData[type].name
       return uiVals.insightsAndPlacesForDate
     })(),
@@ -62,36 +62,26 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
             <DatePlacesList style={{ gap }}>
               
               
-              {!category && !type && DateCategoriesData.all1.nextCategories?.map(it => (
-                <DateCategoryCard
-                  key={it}
-                  style={{ width: '100%' }}
-                  category={it}
-                />
-              ))}
-              {!category && !type && DateCategoriesData.all1.nextTypes?.map(it => (
-                <DateCategoryCard
-                  key={it}
-                  style={{ width: '100%' }}
-                  type={it}
-                />
-              ))}
+              {!category && !type && DateCategoriesData.all1.type === 'category' &&
+                DateCategoriesData.all1.next?.map(it => (
+                  <DateCategoryCard
+                    key={it}
+                    style={{ width: '100%' }}
+                    category={it}
+                  />
+                ))
+              }
               
               
-              {category && DateCategoriesData[category].nextCategories?.map(it => (
-                <DateCategoryCard
-                  key={it}
-                  style={{ width: '100%' }}
-                  category={it}
-                />
-              ))}
-              {category && DateCategoriesData[category].nextTypes?.map(it => (
-                <DateCategoryCard
-                  key={it}
-                  style={{ width: '100%' }}
-                  type={it}
-                />
-              ))}
+              {category && DateCategoriesData[category].type === 'category'
+                && DateCategoriesData[category].next?.map(it => (
+                  <DateCategoryCard
+                    key={it}
+                    style={{ width: '100%' }}
+                    category={it}
+                  />
+                ))
+              }
               
               
               {type && (() => {
