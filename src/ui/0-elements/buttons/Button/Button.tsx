@@ -59,7 +59,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
             
             <div
               data-display-name="Button Border"
-              className={ButtonS6.W.els.border.n}
+              className={ButtonS6.W.els.bord.n}
             >
               <Ripple
                 {...rippleProps.ripple}

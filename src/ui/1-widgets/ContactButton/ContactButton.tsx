@@ -90,7 +90,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
         rippleColor: ctRipple,
         inFocus: {
           buttonBgColor: ctAccSec,
-          borderBdColor: ctAcc,
+          bordBdColor: ctAcc,
         },
       }])}
       className={className}
@@ -197,7 +197,7 @@ const btnS: AppWidgetStyle = t => [
     // TODO Theme
     buttonColor: '#232020',
     // TODO Theme
-    borderBdColor: '#bbbbbb',
+    bordBdColor: '#bbbbbb',
     inFocus: {
       // TODO Theme
       buttonColor: '#232020',

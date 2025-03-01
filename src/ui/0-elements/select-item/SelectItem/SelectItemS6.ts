@@ -142,7 +142,7 @@ export namespace SelectItemS6 {
         },
         
         selected: {
-          border: {
+          bord: {
             bd: '2px solid #444444',
           },
         },
@@ -186,7 +186,7 @@ export namespace SelectItemS6 {
                 buttonBgColor: t.boxDefault.cta2,
               },
               selected: {
-                borderBdColor: t.boxDefault.ct3,
+                bordBdColor: t.boxDefault.ct3,
               },
             },
           ]

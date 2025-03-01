@@ -24,7 +24,7 @@ export namespace ButtonS {
     }, {
       color: CssProp.color,
     })
-    const border = new Elem(ButtonS6.W.els.border.n, { }, { })
+    const border = new Elem(ButtonS6.W.els.bord.n, { }, { })
     const ripple = Elem.newEmpty()
     
     return { button, border, ripple } as const

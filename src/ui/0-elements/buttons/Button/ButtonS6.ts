@@ -29,13 +29,13 @@ export namespace ButtonS6 {
         locked: AdditionalStates.locked,
       },
     })
-    const border = WidgetElem.of({
+    const bord = WidgetElem.of({
       upElem: button, upSelector: '>', className: 'rruiBorder',
     })
-    const rippleElems = RippleS6.buildWidgetElems({ upElem: border, upSelector: '>' })
+    const rippleElems = RippleS6.buildWidgetElems({ upElem: bord, upSelector: '>' })
     return {
       button,
-      border,
+      bord,
       ...rippleElems,
     } as const
   }
@@ -82,7 +82,7 @@ export namespace ButtonS6 {
             'color linear 300ms,' +
             'border-color linear 300ms',
         }],
-        border: {
+        bord: {
           ...abs,
           pointerEvents: 'none',
           r: 'inherit',
@@ -265,7 +265,7 @@ export namespace ButtonS6 {
                   wMin: 90, w: 'ct', hMin: 40, r: 'round', p: [8, 20], g: '0.6em',
                   ...Txt.s15Bold,
                 },
-                border: {
+                bord: {
                   bd: '2px solid',
                 },
               }]
@@ -275,7 +275,7 @@ export namespace ButtonS6 {
                   w: 'ct', hMin: 30, r: 'round', p: [4, 16],
                   ...Txt.s15Bold,
                 },
-                border: {
+                bord: {
                   bd: '2px solid',
                 },
               }]
@@ -286,7 +286,7 @@ export namespace ButtonS6 {
         export const baseColor: AppWidgetStyle = t => ({
           buttonBgColor: t.buttonNormalCt.bg,
           buttonColor: t.buttonNormalCt.ct,
-          borderBdColor: t.buttonNormalCt.ct,
+          bordBdColor: t.buttonNormalCt.ct,
           rippleColor: t.ripple.ctOnTrans,
           inFocus: {
             buttonBgColor: t.buttonNormalCt.bgf,
@@ -302,7 +302,7 @@ export namespace ButtonS6 {
           export const normal: AppWidgetStyle = t => [baseColor, {
             buttonBgColor: t.buttonNormalCt.bg,
             buttonColor: t.buttonNormalCt.ct,
-            borderBdColor: t.buttonNormalCt.ct,
+            bordBdColor: t.buttonNormalCt.ct,
             inFocus: {
               buttonBgColor: t.buttonNormalCt.bgf,
               buttonColor: t.buttonNormalCt.ctf,
@@ -312,12 +312,12 @@ export namespace ButtonS6 {
           export const accent: AppWidgetStyle = t => [baseColor, {
             buttonBgColor: t.boxAccentCt.bg,
             buttonColor: t.boxAccentCt.ct,
-            borderBdColor: t.boxAccentCt.ct,
+            bordBdColor: t.boxAccentCt.ct,
             rippleColor: t.boxAccentCt.ctRipple,
             inFocus: {
               buttonBgColor: t.boxAccentCt.bgf,
               buttonColor: t.boxAccentCt.ctf,
-              borderBdColor: t.boxAccentCt.ctf,
+              bordBdColor: t.boxAccentCt.ctf,
             },
           }]
         }
@@ -423,7 +423,7 @@ export namespace ButtonS6 {
                   overflow: 'visible',
                 },
                 rippleFrameR: 6,
-                borderAb: -2,
+                bordAb: -2,
               }]
             }
           }
@@ -433,7 +433,7 @@ export namespace ButtonS6 {
           buttonColor: t.boxTransNormal.ct,
           rippleColor: t.ripple.ctOnTrans,
           inFocus: {
-            borderBdb: `2px solid ${t.boxTransNormal.ct}`,
+            bordBdb: `2px solid ${t.boxTransNormal.ct}`,
           },
         })
         export namespace Color {
@@ -442,7 +442,7 @@ export namespace ButtonS6 {
             buttonColor: t.boxTransSec2.ct,
             rippleColor: t.ripple.ctOnTrans,
             inFocus: {
-              borderBdb: `2px solid ${t.boxTransSec2.ct}`,
+              bordBdb: `2px solid ${t.boxTransSec2.ct}`,
             },
           }]
         }
