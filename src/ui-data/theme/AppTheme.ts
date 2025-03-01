@@ -161,6 +161,10 @@ export namespace AppTheme {
       bgf:          string
       ctf:          string
     }
+    boxTransSec2: {
+      bg:           string
+      ct:           string
+    }
     boxSemitrans: {
       bg:           string
       ct:           string

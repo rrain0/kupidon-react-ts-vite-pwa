@@ -4,10 +4,10 @@
  States order to select in CSS:
    normal - no selector
    checked / selected - :checked / :selected
-   hover - :hover
-   active - :active
    focus - :focus
    focusVisible - :focus-visible
+   hover - :hover
+   active - :active - applied to button during press
    readOnly - :read-only
    disabled - :disabled
    error - [error]

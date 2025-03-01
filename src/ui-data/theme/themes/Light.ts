@@ -126,6 +126,10 @@ export const LightProps: ThemeProps = {
     bgf:          '#00000011',
     ctf:          '#bbbbbb',
   },
+  boxTransSec2: {
+    bg:           'transparent',
+    ct:           '#848484',
+  },
   boxSemitrans: {
     bg:           '#c4cdde99', // '#dce4f299'
     ct:           '#291f1d',

@@ -7,10 +7,14 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    /* Editor Support */
+    "disableSizeLimit": true, // allow ts to allocate any amount of memory
+    
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
@@ -27,7 +31,6 @@
     "noImplicitAny": false,
     "noImplicitOverride": true,
     "allowUnreachableCode": true, // allow code after the return statement that never runs
-    "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "useDefineForClassFields": true, // enables some modern patterns for class properties initialization
     

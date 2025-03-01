@@ -409,6 +409,44 @@ export namespace ButtonS6 {
           }]
         }
       }
+      
+      export namespace link {
+        export namespace Shape {
+          export namespace rect {
+            //export const baseSize: WidgetStyleObj = { ...base }
+            export namespace Size {
+              // type: link, shape: rect, size: smFit
+              export const smFit: WidgetStyle = [base, {
+                button: {
+                  sz: 'ct', g: 3,
+                  ...Txt.s15Bold,
+                  overflow: 'visible',
+                },
+                rippleFrameR: 6,
+                borderAb: -2,
+              }]
+            }
+          }
+        }
+        
+        export const baseColor: AppWidgetStyle = t => ({
+          buttonColor: t.boxTransNormal.ct,
+          rippleColor: t.ripple.ctOnTrans,
+          inFocus: {
+            borderBdb: `2px solid ${t.boxTransNormal.ct}`,
+          },
+        })
+        export namespace Color {
+          // type: link, color: secondary2
+          export const secondary2: AppWidgetStyle = t => [baseColor, {
+            buttonColor: t.boxTransSec2.ct,
+            rippleColor: t.ripple.ctOnTrans,
+            inFocus: {
+              borderBdb: `2px solid ${t.boxTransSec2.ct}`,
+            },
+          }]
+        }
+      }
     }
     
   }

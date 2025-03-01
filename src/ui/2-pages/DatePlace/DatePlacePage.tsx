@@ -6,16 +6,24 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import ContactButton from 'src/ui/2-pages/DatePlace/parts/ContactButton.tsx'
+import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
+import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
+import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
+import { Contact } from 'src/ui/1-widgets/ContactButton/Contact.ts'
+import ContactButton from 'src/ui/1-widgets/ContactButton/ContactButton.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues, useUiValuesArr } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
 import LocationIc = SvgIconsPack.LocationIc
@@ -26,6 +34,8 @@ import hoverable = EmotionCommon.hoverable
 import abs = EmotionCommon.abs
 
 
+
+export const LocationOverlayName = 'location'
 
 const uiVals = {
   insightsAndPlacesForDate: {
@@ -41,6 +51,10 @@ const uiVals = {
     'en-US': 'Contact information',
     'ru-RU': 'Контактная информация',
   },
+  copyAddress: {
+    'en-US': 'Copy address',
+    'ru-RU': 'Скопировать адрес',
+  },
 } satisfies UiValues
 
 
@@ -52,16 +66,23 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
   
   const uiValues = useMemo(() => ({
     pageTitle: place.name,
-    locationName: place.location.name,
+    addressText: place.uiAddress,
     description: place.description,
     features: uiVals.features,
     bonusesFromKupidon: uiVals.bonusesFromKupidon,
     contactInformation: uiVals.contactInformation,
+    copyAddress: uiVals.copyAddress,
   }), [place])
-  
   const uiText = useUiValues(uiValues)
   const featuresUiText = useUiValuesArr(place.features)
   const bonusesUiText = useUiValuesArr(place.kupidonBonuses)
+  
+  const locationDialog = useOverlayUrl(LocationOverlayName)
+  const locations: Contact[] = [
+    { type: 'copy', text: uiText.copyAddress, data: place.locationMap.q },
+    ...place.locationPlaces,
+    { type: 'map', ...place.locationMap },
+  ]
   
   return (
     <>
@@ -91,12 +112,13 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
             
             <div style={{ height: 7 }} />
             
-            <a href={`geo:${place.location.coords}`} target="_blank">
-              <LocationBox>
-                <LocationIc css={SvgIconS6.t(locationNameIcS)} />
-                <LocationText>{uiText.locationName}</LocationText>
-              </LocationBox>
-            </a>
+            <Button
+              css={ButtonS6.t(locationButtonS)}
+              onClick={locationDialog.open}
+            >
+              <LocationIc css={SvgIconS6.t(locationNameIcS)} />
+              <LocationText>{uiText.addressText}</LocationText>
+            </Button>
             
             <div style={{ height: 17 }} />
             
@@ -145,9 +167,8 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
                   <ContactsList>
                     {place.contacts.map(it => (
                       <ContactButton
-                        key={[it.type, it.value].join()}
-                        type={it.type}
-                        value={it.value}
+                        key={JSON.stringify(it)}
+                        contact={it}
                       />
                     ))}
                   </ContactsList>
@@ -161,6 +182,28 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
         
         <PageScrollbars />
       </Pages.PageGrad>
+      
+      
+      <UseBottomSheetState isOpen={locationDialog.isOpen} onClose={locationDialog.close}>
+        {props => (
+          <ModalPortal>
+            <BottomSheetBasic
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
+              {...props.sheetProps}
+            >
+              <ContactsList>
+                {locations.map(it => (
+                  <ContactButton
+                    key={JSON.stringify(it)}
+                    contact={it}
+                  />
+                ))}
+              </ContactsList>
+              <div style={{ height: 40 }} />
+            </BottomSheetBasic>
+          </ModalPortal>
+        )}
+      </UseBottomSheetState>
       
       
       <BottomButtonBar settingsBtn />
@@ -185,13 +228,19 @@ const Title = styled.div`
 `
 
 
+const locationButtonS: AppWidgetStyle = t => [
+  ButtonS6.S.link.rect.smFit.secondary2, {
+    area: 'loc',
+  },
+]
+
 
 const LocationBox = styled.div`
   position: relative;
   width: fit-content;
   grid-area: loc;
   ${rowC};
-  gap: 3px;
+  gap: 0.18em;
   cursor: pointer;
   ${hoverable} { &:hover { ::after {
     ${abs};
@@ -201,15 +250,12 @@ const LocationBox = styled.div`
   } } }
 `
 const locationNameIcS: AppWidgetStyle = t => [
-  SvgIconS6.S.icon.icon.full.normal, {
-    // TODO Theme
-    icon: { sz: 20, color: '#848484' },
+  SvgIconS6.S.icon.icon.full.ambient, {
+    icon: { sz: 20 },
   },
 ]
 const LocationText = styled.div`
   margin-top: 2px;
-  // TODO Theme
-  color: #848484;
   ${Txt.s15Bold};
   line-height: 1;
 `

@@ -20,6 +20,8 @@ import Cross2GradSvg from '@ic/gradient/ui/cross-2-grad.svg?react'
 
 import InfoSquareRoundedGradSvg from '@ic/gradient/ui/info-square-rounded-grad.svg?react'
 
+import MapLocationGradSvg from '@ic/gradient/ui/map-location-grad.svg?react'
+
 import PlanetFrameGradSvg from '@ic/gradient/ui/planet-frame-grad.svg?react'
 import ProfileGradSvg from '@ic/gradient/ui/profile-grad.svg?react'
 
@@ -49,8 +51,6 @@ import GiftBoxGradSvg from '@ic/gradient/special/gift-box-grad.svg?react'
 import GoalGradSvg from '@ic/gradient/special/goal-grad.svg?react'
 
 import HourglassGradSvg from '@ic/gradient/special/hourglass-grad.svg?react'
-
-import MapLocationGradSvg from '@ic/gradient/special/map-location-grad.svg?react'
 
 import NameCardGradSvg from '@ic/gradient/special/name-card-grad.svg?react'
 
@@ -160,6 +160,8 @@ export namespace SvgGradIconsPack {
   
   export const InfoSquareRoundedGradIc = generateSimpleSvgIcon(InfoSquareRoundedGradSvg)
   
+  export const MapLocationGradIc = generateSimpleSvgIcon(MapLocationGradSvg)
+  
   export const PlanetFrameGradIc = generateSimpleSvgIcon(PlanetFrameGradSvg)
   export const ProfileGradIc = generateSimpleSvgIcon(ProfileGradSvg)
   
@@ -190,8 +192,6 @@ export namespace SvgGradIconsPack {
   export const GoalGradIc = generateSimpleSvgIcon(GoalGradSvg)
   
   export const HourglassGradIc = generateSimpleSvgIcon(HourglassGradSvg)
-  
-  export const MapLocationGradIc = generateSimpleSvgIcon(MapLocationGradSvg)
   
   export const NameCardGradIc = generateSimpleSvgIcon(NameCardGradSvg)
   

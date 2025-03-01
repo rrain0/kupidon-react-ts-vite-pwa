@@ -47,13 +47,13 @@ export namespace OverflowWrapperStyle {
   
   
   export const bigSizeScrollbars = css`
-    ${El.scrollbarOverlay.thiz()}{
+    ${El.scrollbarOverlay.thiz()} {
       padding: 3px;
     }
-    ${El.scrollbarTrack.thiz(El.scrollbarTrack.s('vertical'))}{
+    ${El.scrollbarTrack.thiz(El.scrollbarTrack.s('vertical'))} {
       width: 10px;
     }
-    ${El.scrollbarTrack.thiz(El.scrollbarTrack.s('horizontal'))}{
+    ${El.scrollbarTrack.thiz(El.scrollbarTrack.s('horizontal'))} {
       height: 10px;
     }
   `
@@ -92,11 +92,12 @@ export namespace OverflowWrapperStyle {
   
   export const defolt = css`
     ${middleSizeScrollbars};
-    ${El.content.thiz()}{
+    ${El.content.thiz()} {
       ${col};
       // overflow must be set to visible to make container fit-content.
       // overflow doesn't work if min-width / min-height are set.
-      width: auto; height: auto;
+      width: auto;
+      height: auto;
       overflow: visible;
     }
   `

@@ -19,6 +19,7 @@ import CheckmarkDoubleSvg from '@ic/normal/ui/checkmark-double.svg?react'
 import CheckmarkCircleToastifySvg from '@ic/normal/ui/checkmark-circle-toastify.svg?react'
 import ClearTrashSvg from '@ic/normal/ui/clear-trash.svg?react'
 import ClipSvg from '@ic/normal/ui/clip.svg?react'
+import CopySvg from '@ic/normal/ui/copy.svg?react'
 import CrossSvg from '@ic/normal/ui/cross.svg?react'
 import CrossInCircleSvg from '@ic/normal/ui/cross-in-circle.svg?react'
 
@@ -43,6 +44,7 @@ import InfoToastifySvg from '@ic/normal/ui/info-toastify.svg?react'
 import LocationSvg from '@ic/normal/ui/location.svg?react'
 import LockSvg from '@ic/normal/ui/lock.svg?react'
 
+import MapLocationSvg from '@ic/normal/ui/map-location.svg?react'
 import MoonSvg from '@ic/normal/ui/moon.svg?react'
 
 import NightSvg from '@ic/normal/ui/night.svg?react'
@@ -221,6 +223,7 @@ export namespace SvgIconsPack {
   export const CheckmarkCircleToastifyIc = generateSimpleSvgIcon(CheckmarkCircleToastifySvg)
   export const ClearTrashIc = generateSimpleSvgIcon(ClearTrashSvg)
   export const ClipIc = generateSimpleSvgIcon(ClipSvg)
+  export const CopyIc = generateSimpleSvgIcon(CopySvg)
   export const CrossIc = generateSimpleSvgIcon(CrossSvg)
   export const CrossInCircleIc = generateSimpleSvgIcon(CrossInCircleSvg)
   
@@ -253,6 +256,7 @@ export namespace SvgIconsPack {
   export const LockIc = generateSimpleSvgIcon(LockSvg)
   
   
+  export const MapLocationIc = generateSimpleSvgIcon(MapLocationSvg)
   export const MoonIc = generateSimpleSvgIcon(MoonSvg)
   
   

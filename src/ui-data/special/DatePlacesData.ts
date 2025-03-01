@@ -1,14 +1,7 @@
 import { MockDatePlaces } from 'src/_mock-data/date-places/MockDatePlaces.ts'
 import { UiText, UiTextValuesArr } from 'src/mini-libs/ui-text/UiText.ts'
 import { DatePlaceType } from 'src/ui-data/special/DatePlaceTypeData.ts'
-
-
-
-export type ContactType =
-  | 'phone'
-  | 'telegram'
-  | 'whatsapp'
-  | 'email'
+import { Contact } from 'src/ui/1-widgets/ContactButton/Contact.ts'
 
 
 
@@ -17,19 +10,15 @@ export type DatePlace = {
   type: readonly DatePlaceType[]
   name: UiText
   picture: string
-  location: {
-    name: UiText,
-    coords: string,
-  }
+  uiAddress: UiText
+  locationMap: { lat: number, lon: number, q: string }
+  locationPlaces: Contact[]
   isNear: boolean
   shortDescription: UiText
   description: UiText
   features: UiTextValuesArr
   kupidonBonuses: UiTextValuesArr
-  contacts: {
-    type: ContactType
-    value: string
-  }[]
+  contacts: Contact[]
 }
 
 

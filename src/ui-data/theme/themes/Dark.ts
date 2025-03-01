@@ -127,6 +127,10 @@ export const DarkProps: ThemeProps = {
     bgf:          '#ffffff22',
     ctf:          '#bdbdbd',
   },
+  boxTransSec2: {
+    bg:           'transparent',
+    ct:           '#848484',
+  },
   boxSemitrans: {
     bg:           '#30333999',
     ct:           '#dddddd',

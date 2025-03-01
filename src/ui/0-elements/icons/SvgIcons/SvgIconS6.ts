@@ -70,6 +70,12 @@ export namespace SvgIconS6 {
           },
         })
         export namespace Color {
+          // type: icon, color: ambient
+          // Get colors from scope
+          export const ambient: AppWidgetStyle = t => [baseColor, {
+            iconColor: undefined,
+            iconColorAcc: undefined,
+          }]
           // type: icon, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
             iconColor: t.boxDefault.ct3,

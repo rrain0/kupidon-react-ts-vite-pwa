@@ -164,6 +164,11 @@ export namespace WidgetProps {
   export const borderColor = WidgetProp.ofName('border-color', transformNullFalseToTransparent)
   export const borderRadius = WidgetProp.ofName('border-radius', transformRadiusAnyValue)
   
+  export const borderBottom = WidgetProp.ofName('border-bottom', transformNullFalseToNone)
+  export const borderBottomWidth = WidgetProp.ofName('border-bottom-width', transformLenValue)
+  export const borderBottomStyle = WidgetProp.ofName('border-bottom-style', transformNullFalseToNone)
+  export const borderBottomColor = WidgetProp.ofName('border-bottom-color', transformNullFalseToTransparent)
+  
   export const outline = WidgetProp.ofName('outline', transformNullFalseToNone)
   export const boxShadow = WidgetProp.ofName('box-shadow', transformNullFalseToNone)
   
@@ -402,12 +407,13 @@ export namespace AdditionalStates {
     transform: () => [[WidgetMedias.hoverable, WidgetPseudos.hover]],
   })
   
-  // hover OR focusVisible
+  // hover OR focusVisible OR active
   export const inFocus = WidgetMultiStateTransformer.of({
-    title: 'inFocus -> hoverableHover | :focus-visible',
+    title: 'inFocus -> hoverableHover | :focus-visible | :active',
     transform: () => [
       ...AdditionalStates.hoverableHover.transform(),
       [WidgetPseudos.focusVisible],
+      [WidgetPseudos.active],
     ],
   })
   

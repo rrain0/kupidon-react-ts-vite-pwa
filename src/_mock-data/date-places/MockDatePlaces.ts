@@ -14,12 +14,18 @@ export const MockDatePlaces: DatePlace[] = [
       'ru-RU': 'Без бокала нет Шагала',
     },
     picture: bezBokalaNetShagala,
-    location: {
-      name: {
-        'ru-RU': 'ул. Октябрьской революции, 11а',
-      },
-      coords: '52.290160,104.304376',
+    uiAddress: {
+      'ru-RU': 'ул. Октябрьской революции, 11а',
     },
+    locationMap: {
+      lat: 52.290160,
+      lon: 104.304376,
+      q: 'Без бокала нет Шагала, Иркутск, ул. Октябрьской революции, 11а',
+    },
+    locationPlaces: [
+      { type: 'doubleGis', link: 'https://2gis.ru/irkutsk/firm/70000001035047870' },
+      { type: 'yandexMaps', link: 'https://yandex.ru/maps/org/bez_bokala_net_shagala/214012371037' },
+    ],
     isNear: true,
     shortDescription: {
       // eslint-disable-next-line @stylistic/max-len
@@ -36,12 +42,14 @@ export const MockDatePlaces: DatePlace[] = [
       },
     ],
     contacts: [
-      { type: 'phone', value: '+79246029191' },
-      { type: 'phone', value: '+73952648481' },
-      { type: 'telegram', value: '+79246029191' },
-      { type: 'whatsapp', value: '79246029191' },
+      { type: 'phone', phone: '+79246029191' },
+      { type: 'phone', phone: '+73952648481' },
+      { type: 'telegram', nick: '+79246029191' },
+      { type: 'whatsapp', phone: '79246029191' },
     ],
   },
+  
+  
   {
     id: 'Ibis Kitchen ул. Осипенко, 5, Отель Ibis',
     type: ['tableRomantic', 'restaurant'],
@@ -49,12 +57,18 @@ export const MockDatePlaces: DatePlace[] = [
       'ru-RU': 'Ibis Kitchen',
     },
     picture: ibisKitchen,
-    location: {
-      name: {
-        'ru-RU': 'ул. Осипенко, 5, Отель Ibis',
-      },
-      coords: '52.287561,104.270522',
+    uiAddress: {
+      'ru-RU': 'ул. Осипенко, 5, Отель Ibis',
     },
+    locationMap: {
+      lat: 52.287561,
+      lon: 104.270522,
+      q: 'Ibis Kitchen, Иркутск, ул. Осипенко, 5, Отель Ibis',
+    },
+    locationPlaces: [
+      { type: 'doubleGis', link: 'https://2gis.ru/irkutsk/firm/70000001067930277' },
+      { type: 'yandexMaps', link: 'https://yandex.ru/maps/org/ibis_kitchen_restaurant/54371029015' },
+    ],
     isNear: false,
     shortDescription: {
       // eslint-disable-next-line @stylistic/max-len
@@ -67,12 +81,14 @@ export const MockDatePlaces: DatePlace[] = [
     features: [],
     kupidonBonuses: [],
     contacts: [
-      { type: 'phone', value: '+73952703177' },
-      { type: 'phone', value: '+79021706500' },
-      { type: 'telegram', value: 'ibis_irkutsk' },
-      { type: 'whatsapp', value: '79021706500' },
+      { type: 'phone', phone: '+73952703177' },
+      { type: 'phone', phone: '+79021706500' },
+      { type: 'telegram', nick: 'ibis_irkutsk' },
+      { type: 'whatsapp', phone: '79021706500' },
     ],
   },
+  
+  
   {
     id: 'Etika ул. Лызина, 9',
     type: ['tableRomantic', 'cafe', 'coffeeHouse'],
@@ -80,12 +96,18 @@ export const MockDatePlaces: DatePlace[] = [
       'ru-RU': 'Etika',
     },
     picture: etika,
-    location: {
-      name: {
-        'ru-RU': 'ул. Лызина, 9',
-      },
-      coords: '52.281736,104.323286',
+    uiAddress: {
+      'ru-RU': 'ул. Лызина, 9',
     },
+    locationMap: {
+      lat: 52.281736,
+      lon: 104.323286,
+      q: 'Etika, Иркутск, ул. Лызина, 9',
+    },
+    locationPlaces: [
+      { type: 'doubleGis', link: 'https://2gis.ru/irkutsk/firm/70000001051571907' },
+      { type: 'yandexMaps', link: 'https://yandex.ru/maps/org/etika/240235466985' },
+    ],
     isNear: true,
     shortDescription: {
       // eslint-disable-next-line @stylistic/max-len
@@ -98,10 +120,13 @@ export const MockDatePlaces: DatePlace[] = [
     features: [],
     kupidonBonuses: [],
     contacts: [
-      { type: 'phone', value: '+73952990800' },
-      { type: 'telegram', value: 'etikacakes' },
-      { type: 'whatsapp', value: '79149563551' },
-      //{ type: 'email', value: 'etika.cakes@gmail.com' },
+      { type: 'phone', phone: '+73952990800' },
+      { type: 'telegram', nick: 'etikacakes' },
+      { type: 'whatsapp', phone: '79149563551' },
+      
+      
+      //{ type: 'email', email: 'etika.cakes@gmail.com' },
+      //{ type: 'coords', lat: 52.281736, lon: 104.323286 },
     ],
   },
 ]

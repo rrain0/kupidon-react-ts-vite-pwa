@@ -109,6 +109,15 @@ export const CommonProps = (() => {
     radius: WidgetProps.borderRadius,
     r: WidgetProps.borderRadius,
     
+    borderBottom: WidgetProps.borderBottom,
+    borderBottomWidth: WidgetProps.borderBottomWidth,
+    borderBottomStyle: WidgetProps.borderBottomStyle,
+    borderBottomColor: WidgetProps.borderBottomColor,
+    bdb: WidgetProps.borderBottom,
+    bdbWidth: WidgetProps.borderBottomWidth,
+    bdbStyle: WidgetProps.borderBottomStyle,
+    bdbColor: WidgetProps.borderBottomColor,
+    
     outline: WidgetProps.outline,
     boxShadow: WidgetProps.boxShadow,
     
@@ -172,7 +181,7 @@ export const CommonStates = (() => {
     active: WidgetPseudos.active,
     focus: WidgetPseudos.focus,
     focusVisible: WidgetPseudos.focusVisible,
-    // hoverable hover OR focusVisible
+    // hoverable hover OR focusVisible OR active
     inFocus: AdditionalStates.inFocus,
     readOnly: WidgetPseudos.readOnly,
     disabled: WidgetPseudos.disabled,
