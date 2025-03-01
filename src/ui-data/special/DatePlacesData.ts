@@ -10,9 +10,11 @@ export type ContactType =
   | 'whatsapp'
   | 'email'
 
+
+
 export type DatePlace = {
   id: string
-  type: DatePlaceType[]
+  type: readonly DatePlaceType[]
   name: UiText
   picture: string
   location: {

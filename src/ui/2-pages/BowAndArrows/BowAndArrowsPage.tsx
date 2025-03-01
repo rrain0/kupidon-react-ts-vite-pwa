@@ -117,10 +117,10 @@ const BowAndArrowsPage = React.memo(() => {
             <div style={{ height: 16 }} />
             
             {/* <HeaderArrow css={HeaderArrowS.page}>
-              {uiText.ourPartners}
-            </HeaderArrow>
-            
-            <div style={{ height: 16 }} /> */}
+             {uiText.ourPartners}
+             </HeaderArrow>
+             
+             <div style={{ height: 16 }} /> */}
           
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>
@@ -137,14 +137,12 @@ const BowAndArrowsPage = React.memo(() => {
 export default BowAndArrowsPage
 
 
-
 const calendarButtonS: AppWidgetStyle = t => [
   IconButtonS6.S.filled.round.lg.accent4, {
     button: { justifySelf: 'end' },
     gradIconSz: 24,
   },
 ]
-
 
 
 const DatePlacesOverflow = styled.div`
