@@ -14,6 +14,7 @@ export type Contact =
   // lat: 52.281736, lon: 104.323286, q: Etika, Иркутск, ул. Лызина, 9
   // lat & lon например используются приложением такси maxim
   | { type: 'map', lat: number, lon: number, q: string }
+  | { type: 'address', text: string }
   | { type: 'copy', text: string, data: string }
 
 export type ContactType = Contact['type']
@@ -32,6 +33,7 @@ export function getContactLink(c: Contact): string {
     if (isIOS) return `http://maps.apple.com/?ll=${c.lat},${c.lon}&q=${c.q}`
     return `geo:${c.lat},${c.lon}?q=${c.q}`
   }
+  if (t === 'address') return ''
   if (t === 'copy') return ''
   throw new Error(`Unsupported contact link type: ${t}`)
 }

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { TypeU } from '@util/common/TypeU.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -22,6 +23,7 @@ import yandexMapsLogo from '@im/ic/yandex-maps-logo.webp'
 import LocationIc = SvgIconsPack.LocationIc
 import CopyIc = SvgIconsPack.CopyIc
 import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
+import Callback = TypeU.Callback
 
 
 
@@ -54,12 +56,14 @@ const uiVals = {
 
 export type ContactButtonProps = ClassStyle & {
   contact: Contact
+  onClick?: Callback | undefined
 }
 export const ContactButton = React.memo((props: ContactButtonProps) => {
   const {
     className,
     style,
     contact: c,
+    onClick,
   } = props
   
   const uiValues = useMemo(() => ({
@@ -92,16 +96,20 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
           buttonBgColor: ctAccSec,
           bordBdColor: ctAcc,
         },
+        ...copied && {
+          buttonBgColor: ctAccSec,
+          bordBdColor: ctAcc,
+        },
       }])}
       className={className}
       style={style}
       onClick={(() => {
-        if (c.type === 'copy') return () => {
+        if (c.type === 'copy') {
           navigator.clipboard.writeText(c.data)
           setCopied(true)
         }
-        return undefined
-      })()}
+        onClick?.()
+      })}
     >
       {({
         phone: <HandsetIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
@@ -111,6 +119,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
         doubleGis: <PictureContactIcon src={_2gisLogo} />,
         yandexMaps: <PictureContactIcon src={yandexMapsLogo} />,
         map: <LocationIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
+        address: <LocationIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
         copy: !copied
           ? <CopyIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />
           : <CheckmarkBoldIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
@@ -124,6 +133,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
           if (c.type === 'doubleGis') return uiText['2gis']
           if (c.type === 'yandexMaps') return uiText.yandexMaps
           if (c.type === 'map') return uiText.location
+          if (c.type === 'address') return c.text
           if (c.type === 'copy') return c.text
         })()}
       </ContactText>
@@ -180,6 +190,11 @@ const contactButtonLocalTheme: Record<ContactType, {
     ctAcc: '#474c9d',
     ctAccSec: '#eff0fa',
     ctRipple: '#eff0fa88',
+  },
+  address: {
+    ctAcc: '#232020',
+    ctAccSec: '#fff9f9',
+    ctRipple: '#fff9f988',
   },
   copy: {
     ctAcc: '#c69477',

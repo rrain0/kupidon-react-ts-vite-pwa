@@ -100,7 +100,7 @@ const BottomSheetBasic = React.memo((props: BottomSheetBasicProps) => {
               */}
               <div
                 data-display-name="Bottom Sheet Basic - Scrollable Content"
-                className={BottomSheetBasicS6.W.els.overflowCont.n}
+                className={BottomSheetBasicS6.W.els.cont.n}
                 ref={bottomSheetContentRef}
               >
                 { children }

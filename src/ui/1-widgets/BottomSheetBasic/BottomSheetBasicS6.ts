@@ -58,11 +58,18 @@ export namespace BottomSheetBasicS6 {
       className: OverflowWrapperStyle.El.content.name,
     })
     
+    const cont = WidgetElem.of({
+      upElem: overflowCont,
+      upSelector: '>',
+      className: 'rruiBottomSheetContent',
+    })
+    
     return {
       ...sheet,
       header, headerHandle, headerTitle,
       body,
       overflowWrapper, overflowScroll, overflowCont,
+      cont,
     } as const
   }
   
@@ -99,7 +106,7 @@ export namespace BottomSheetBasicS6 {
         ...flexC,
         overflow: 'hidden',
       },
-      overflowCont: {
+      cont: {
         w: 'full', h: 'ct', hMin: 'ct', p: [0, 10, 10], ...col,
       },
       dragging: {

@@ -43,7 +43,7 @@ const defaultAutoAnimationDuration = 400
 const dragStartInitialValue = {
   sheetH: 0,
   isDragging: false,
-  lastSpeed: null as number|null,
+  lastSpeed: null as number | null,
 }
 
 
@@ -131,7 +131,7 @@ export const useBottomSheet = (
     headerAndContentH: 0,
   })
   
-  
+  console.log('computedSheetDimens', computedSheetDimens)
   
   
   const updateComputedSheetDimens = useCallback(() => {
@@ -242,38 +242,39 @@ export const useBottomSheet = (
   
   
   
-  const runAnimation = useCallback(
-    (endH: number, lastSpeed: number | null, onFinish: Callback) => {
-      const duration = function() {
-        //console.log('lastSpeed',lastSpeed)
-        if (notExists(lastSpeed)) return animationDuration
-        const startH = sheetSpring.height.get()
-        sheetSpring.height.set(startH)
-        const pathPercent = pathProgressPercent(startH, endH)
-        return pathPercent / lastSpeed * 1.2 * 1000
-      }()
-      ;(async() => {
-        const animation = await sheetSpring.height.start(
-          endH,
-          {
-            /* config: {
-              duration: duration,
-              easing: animationEasing,
-            }, */
-            config: {
-              mass: 1 * duration / 100,
-              tension: 500,
-              friction: 24,
-              clamp: true,
-            },
-          }
-        )
-        //console.log('animation',animation)
-        if (animation.finished) onFinish()
-      })()
-    },
-    [animationDuration]
-  )
+  const runAnimation = useCallback((
+    endH: number,
+    lastSpeed: number | null,
+    onFinish: Callback
+  ) => {
+    const duration = function() {
+      //console.log('lastSpeed',lastSpeed)
+      if (notExists(lastSpeed)) return animationDuration
+      const startH = sheetSpring.height.get()
+      sheetSpring.height.set(startH)
+      const pathPercent = pathProgressPercent(startH, endH)
+      return pathPercent / lastSpeed * 1.2 * 1000
+    }()
+    ;(async() => {
+      const animation = await sheetSpring.height.start(
+        endH,
+        {
+          /* config: {
+            duration: duration,
+            easing: animationEasing,
+          }, */
+          config: {
+            mass: 1 * duration / 100,
+            tension: 500,
+            friction: 24,
+            clamp: true,
+          },
+        }
+      )
+      //console.log('animation',animation)
+      if (animation.finished) onFinish()
+    })()
+  }, [animationDuration])
   
   
   

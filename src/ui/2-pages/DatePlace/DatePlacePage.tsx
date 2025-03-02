@@ -112,13 +112,18 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
             
             <div style={{ height: 7 }} />
             
-            <Button
+            {/* <Button
               css={ButtonS6.t(locationButtonS)}
               onClick={locationDialog.open}
             >
               <LocationIc css={SvgIconS6.t(locationNameIcS)} />
               <LocationText>{uiText.addressText}</LocationText>
-            </Button>
+            </Button> */}
+            
+            <ContactButton
+              contact={{ type: 'address', text: uiText.addressText! }}
+              onClick={locationDialog.open}
+            />
             
             <div style={{ height: 17 }} />
             
@@ -284,5 +289,5 @@ const ListItem = styled.li``
 
 const ContactsList = styled.div`
   ${col};
-  gap: 24px;
+  gap: 16px;
 `
