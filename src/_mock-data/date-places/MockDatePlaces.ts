@@ -3,6 +3,7 @@ import { DatePlace } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import bezBokalaNetShagala from './bez-bokala-net-shagala-2f15ebe1-ed25-445e-866a-45b1c12bc14a.jpg'
 import ibisKitchen from './ibis-kitchen-30258560112733222_ea8f.jpg'
 import etika from './etika-30258560173284876_9170.jpg'
+import etikaVideo from './clip-by-etika.cakes happy valentine\'s day 480p.mp4'
 
 
 
@@ -96,6 +97,7 @@ export const MockDatePlaces: DatePlace[] = [
       'ru-RU': 'Etika',
     },
     picture: etika,
+    video: etikaVideo,
     uiAddress: {
       'ru-RU': 'ул. Лызина, 9',
     },

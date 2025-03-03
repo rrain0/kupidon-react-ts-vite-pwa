@@ -10,6 +10,7 @@ export type DatePlace = {
   types: DatePlaceType[]
   name: UiText
   picture: string
+  video?: string | undefined
   uiAddress: UiText
   locationMap: { lat: number, lon: number, q: string }
   locationPlaces: Contact[]

@@ -24,6 +24,8 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import col = EmotionCommon.col
+import abs = EmotionCommon.abs
+import abswh = EmotionCommon.abswh
 
 
 
@@ -91,10 +93,17 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
             
             <div style={{ height: 34 }} />
             
-            <ImgSpark
-              css={ImgSparkS6.t(imgSparkS)}
-              src={place.picture}
-            />
+            {!place.video && (
+              <ImgSpark
+                css={ImgSparkS6.t(imgSparkS)}
+                src={place.picture}
+              />
+            )}
+            {place.video && (
+              <Video autoPlay loop muted playsInline
+                src={place.video}
+              />
+            )}
             
             <div style={{ height: 19 }} />
             
@@ -209,6 +218,15 @@ const imgSparkS: AppWidgetStyle = [
     imgFrame: { ratio: 1.570, r: StyleVals.cardRadius },
   },
 ]
+
+const Video = styled.video`
+  width: 100%;
+  aspect-ratio: 1;
+  object-position: center;
+  object-fit: cover;
+  border-radius: ${StyleVals.cardRadius}px;
+  overflow: hidden;
+`
 
 const Title = styled.div`
   // TODO Theme

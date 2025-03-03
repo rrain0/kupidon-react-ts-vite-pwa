@@ -11,13 +11,13 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter
 import abs = WidgetStyleCommon.abs
 import flexC = WidgetStyleCommon.flexC
+import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
 
 
 export namespace ImgSparkS6 {
   
-  import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const imgFrame = WidgetElem.of({
