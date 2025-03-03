@@ -2,13 +2,23 @@ import { DatePlaceType } from 'src/ui-data/special/DatePlaceTypeData.ts'
 
 
 
+
 export type DateCategoryType =
-  | 'all1'
-  | 'romantic2'
-  | 'cultural2'
-  | 'active2'
-  | 'entertaining2'
-  | 'nonstandard2'
+  | 'allPreview'
+  | 'allPageOfPreviews'
+  | 'allPage'
+  
+  | 'romanticPreview'
+  | 'culturalPreview'
+  | 'activePreview'
+  | 'entertainingPreview'
+  | 'nonstandardPreview'
+  
+  | 'romanticPage'
+  | 'culturalPage'
+  | 'activePage'
+  | 'entertainingPage'
+  | 'nonstandardPage'
   
   | 'tableRomantic'
   | 'walking'
@@ -30,75 +40,143 @@ export type DateCategoryType =
   | 'streamCocktails'
   | 'volunteering'
 
-
-
-
-
-export type DateCategoryData = {
-  type: 'category'
+export type DateCategoryCommonData = {
   placeType: DatePlaceType
+}
+
+export type DateCategoryUiData = {
+  ui: 'previewRow'
+  headerNext: DateCategoryType
+} | {
+  ui: 'pageOfPreviews'
+} | {
+  ui: 'page'
+}
+
+export type DateCategoryCategoryData = {
+  type: 'category'
   next: DateCategoryType[]
 } | {
   type: 'type'
-  placeType: DatePlaceType
 }
+
+export type DateCategoryData =
+  DateCategoryCommonData & DateCategoryUiData & DateCategoryCategoryData
 
 
 
 
 export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
-  all1: {
+  allPreview: {
     type: 'category',
+    next: ['romanticPage', 'culturalPage', 'activePage', 'entertainingPage', 'nonstandardPage'],
+    ui: 'previewRow',
+    headerNext: 'allPageOfPreviews',
     placeType: 'all',
-    next: ['romantic2', 'cultural2', 'active2', 'entertaining2', 'nonstandard2'],
+  },
+  allPageOfPreviews: {
+    type: 'category',
+    next: [
+      'romanticPreview', 'culturalPreview', 'activePreview',
+      'entertainingPreview', 'nonstandardPreview',
+    ],
+    ui: 'pageOfPreviews',
+    placeType: 'all',
+  },
+  allPage: {
+    type: 'category',
+    next: ['romanticPage', 'culturalPage', 'activePage', 'entertainingPage', 'nonstandardPage'],
+    ui: 'page',
+    placeType: 'all',
   },
   
   
-  romantic2: {
+  romanticPreview: {
     type: 'category',
-    placeType: 'romantic',
     next: ['tableRomantic', 'walking'],
+    ui: 'previewRow',
+    headerNext: 'romanticPage',
+    placeType: 'romantic',
   },
-  cultural2: {
+  culturalPreview: {
     type: 'category',
-    placeType: 'cultural',
     next: ['museum', 'gallery', 'theatre', 'cinema'],
+    ui: 'previewRow',
+    headerNext: 'culturalPage',
+    placeType: 'cultural',
   },
-  active2: {
+  activePreview: {
     type: 'category',
-    placeType: 'active',
     next: ['sports', 'extreme', 'outdoorActivities'],
+    ui: 'previewRow',
+    headerNext: 'activePage',
+    placeType: 'active',
   },
-  entertaining2: {
+  entertainingPreview: {
     type: 'category',
-    placeType: 'entertaining',
     next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
+    ui: 'previewRow',
+    headerNext: 'entertainingPage',
+    placeType: 'entertaining',
   },
-  nonstandard2: {
+  nonstandardPreview: {
     type: 'category',
-    placeType: 'nonstandard',
     next: ['masterClasses', 'streamCocktails', 'volunteering'],
+    ui: 'previewRow',
+    headerNext: 'nonstandardPage',
+    placeType: 'nonstandard',
+  },
+  
+  romanticPage: {
+    type: 'category',
+    next: ['tableRomantic', 'walking'],
+    ui: 'page',
+    placeType: 'romantic',
+  },
+  culturalPage: {
+    type: 'category',
+    next: ['museum', 'gallery', 'theatre', 'cinema'],
+    ui: 'page',
+    placeType: 'cultural',
+  },
+  activePage: {
+    type: 'category',
+    next: ['sports', 'extreme', 'outdoorActivities'],
+    ui: 'page',
+    placeType: 'active',
+  },
+  entertainingPage: {
+    type: 'category',
+    next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
+    ui: 'page',
+    placeType: 'entertaining',
+  },
+  nonstandardPage: {
+    type: 'category',
+    next: ['masterClasses', 'streamCocktails', 'volunteering'],
+    ui: 'page',
+    placeType: 'nonstandard',
   },
   
   
-  tableRomantic: { type: 'type', placeType: 'tableRomantic' },
-  walking: { type: 'type', placeType: 'walking' },
+  tableRomantic: { type: 'type', ui: 'page', placeType: 'tableRomantic' },
+  walking: { type: 'type', ui: 'page', placeType: 'walking' },
   
-  museum: { type: 'type', placeType: 'museum' },
-  gallery: { type: 'type', placeType: 'gallery' },
-  theatre: { type: 'type', placeType: 'theatre' },
-  cinema: { type: 'type', placeType: 'cinema' },
+  museum: { type: 'type', ui: 'page',  placeType: 'museum' },
+  gallery: { type: 'type', ui: 'page',  placeType: 'gallery' },
+  theatre: { type: 'type', ui: 'page',  placeType: 'theatre' },
+  cinema: { type: 'type', ui: 'page',  placeType: 'cinema' },
   
-  sports: { type: 'type', placeType: 'sports' },
-  extreme: { type: 'type', placeType: 'extreme' },
-  outdoorActivities: { type: 'type', placeType: 'outdoorActivities' },
+  sports: { type: 'type', ui: 'page',  placeType: 'sports' },
+  extreme: { type: 'type', ui: 'page',  placeType: 'extreme' },
+  outdoorActivities: { type: 'type', ui: 'page',  placeType: 'outdoorActivities' },
   
-  excitingEntertainment: { type: 'type', placeType: 'excitingEntertainment' },
-  interactive: { type: 'type', placeType: 'interactive' },
-  eveningEntertainment: { type: 'type', placeType: 'eveningEntertainment' },
+  excitingEntertainment: { type: 'type', ui: 'page',  placeType: 'excitingEntertainment' },
+  interactive: { type: 'type', ui: 'page',  placeType: 'interactive' },
+  eveningEntertainment: { type: 'type', ui: 'page',  placeType: 'eveningEntertainment' },
   
-  masterClasses: { type: 'type', placeType: 'masterClasses' },
-  streamCocktails: { type: 'type', placeType: 'streamCocktails' },
-  volunteering: { type: 'type', placeType: 'volunteering' },
+  masterClasses: { type: 'type', ui: 'page',  placeType: 'masterClasses' },
+  streamCocktails: { type: 'type', ui: 'page',  placeType: 'streamCocktails' },
+  volunteering: { type: 'type', ui: 'page',  placeType: 'volunteering' },
 }
 

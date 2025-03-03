@@ -25,33 +25,14 @@ const RouteDatePlaces = React.memo(() => {
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
   
-  const category = searchCategory && Object.hasOwn(DateCategoriesData, searchCategory)
-    ? searchCategory as DateCategoryType
-    : undefined
   const type = searchType && Object.hasOwn(DatePlaceTypeData, searchType)
     ? searchType as DatePlaceType
     : undefined
+  const category = searchCategory && Object.hasOwn(DateCategoriesData, searchCategory)
+    ? searchCategory as DateCategoryType
+    : undefined
+  const defaultCategory: DateCategoryType = 'allPageOfPreviews'
   
-  
-  if (category) return (
-    <>
-      <Navigate
-        to={
-          RootRoute.datePlaces[fullParams]({
-            anySearchParams: search,
-            allowedNameParams: {
-              category: category,
-              type: null,
-            },
-          })
-        }
-        replace
-      />
-      <Suspense fallback={<div>Loading...</div>}>
-        <DatePlacesPage category={category} />
-      </Suspense>
-    </>
-  )
   
   if (type) return (
     <>
@@ -73,14 +54,14 @@ const RouteDatePlaces = React.memo(() => {
     </>
   )
   
-  return (
+  if (category) return (
     <>
       <Navigate
         to={
           RootRoute.datePlaces[fullParams]({
             anySearchParams: search,
             allowedNameParams: {
-              category: null,
+              category: category,
               type: null,
             },
           })
@@ -88,8 +69,25 @@ const RouteDatePlaces = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DatePlacesPage />
+        <DatePlacesPage category={category} />
       </Suspense>
+    </>
+  )
+  
+  return (
+    <>
+      <Navigate
+        to={
+          RootRoute.datePlaces[fullParams]({
+            anySearchParams: search,
+            allowedNameParams: {
+              category: defaultCategory,
+              type: null,
+            },
+          })
+        }
+        replace
+      />
     </>
   )
 })

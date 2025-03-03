@@ -46,6 +46,11 @@ export namespace TypeU {
   }
   
   
+  export type ObjectUnionFix<O1 extends object, O2 extends object> =
+    | O1 & { [OptKeys in keyof Omit<O2, keyof O1>]: undefined }
+    | O2 & { [OptKeys in keyof Omit<O1, keyof O2>]: undefined }
+  
+  
   export type RecordRo<K extends keyof any, T> = {
     +readonly [P in K]: T
   }

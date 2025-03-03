@@ -131,8 +131,6 @@ export const useBottomSheet = (
     headerAndContentH: 0,
   })
   
-  console.log('computedSheetDimens', computedSheetDimens)
-  
   
   const updateComputedSheetDimens = useCallback(() => {
     const frame = getFrame()

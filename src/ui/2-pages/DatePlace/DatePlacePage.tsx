@@ -233,39 +233,6 @@ const Title = styled.div`
 `
 
 
-const locationButtonS: AppWidgetStyle = t => [
-  ButtonS6.S.link.rect.smFit.secondary2, {
-    area: 'loc',
-  },
-]
-
-
-const LocationBox = styled.div`
-  position: relative;
-  width: fit-content;
-  grid-area: loc;
-  ${rowC};
-  gap: 0.18em;
-  cursor: pointer;
-  ${hoverable} { &:hover { ::after {
-    ${abs};
-    bottom: -2px;
-    content: '';
-    border-bottom: 2px solid #848484;
-  } } }
-`
-const locationNameIcS: AppWidgetStyle = t => [
-  SvgIconS6.S.icon.icon.full.ambient, {
-    icon: { sz: 20 },
-  },
-]
-const LocationText = styled.div`
-  margin-top: 2px;
-  ${Txt.s15Bold};
-  line-height: 1;
-`
-
-
 const Description = styled.div`
   // TODO Theme
   color: #000000;

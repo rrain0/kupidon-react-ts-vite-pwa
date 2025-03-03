@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { MockDateArticles } from 'src/_mock-data/date-articles/MockDateArticles.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -14,7 +14,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import DateArticleCard from 'src/ui/2-pages/DateArticles/parts/DateArticleCard.tsx'
-import DateCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
+import ListWithHeader from 'src/ui/2-pages/DatePlaces/parts/ListWithHeader.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -71,28 +71,7 @@ const BowAndArrowsPage = React.memo(() => {
             
             <div style={{ height: 16 }} />
             
-            <Link
-              to={RootRoute.datePlaces[fullAnySearchParams](search)}
-            >
-              <HeaderArrow css={HeaderArrowS.page}>
-                {uiText.insightsAndPlacesForDate}
-              </HeaderArrow>
-            </Link>
-            
-            <div style={{ height: 16 }} />
-            
-            <DatePlacesOverflow>
-              <DatePlacesList>
-                {DateCategoriesData.all1.type === 'category'
-                  && DateCategoriesData.all1.next?.map(it => (
-                    <DateCategoryCard
-                      key={it}
-                      category={it}
-                    />
-                  ))
-                }
-              </DatePlacesList>
-            </DatePlacesOverflow>
+            <ListWithHeader list={DateCategoriesData.allPreview} />
             
             <div style={{ height: 16 }} />
             
