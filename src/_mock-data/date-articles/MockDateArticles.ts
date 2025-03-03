@@ -12,7 +12,7 @@ import mountainsBridgeCouple
 export const MockDateArticles: DateArticle[] = [
   {
     id: 'Как создать привлекательный профиль',
-    types: ['gettingToKnow', 'profileCreationAdvices', 'howToCreateAttractiveProfile'],
+    types: ['gettingToKnow', 'profileCreationAdvices'],
     title: {
       'ru-RU': 'Как создать привлекательный профиль',
     },
@@ -25,7 +25,7 @@ export const MockDateArticles: DateArticle[] = [
   
   /* {
     id: 'Статья про профиль 2',
-    types: ['gettingToKnow', 'profileCreationAdvices', 'howToCreateAttractiveProfile'],
+    types: ['gettingToKnow', 'profileCreationAdvices'],
     title: {
       'ru-RU': 'Статья про профиль 2',
     },

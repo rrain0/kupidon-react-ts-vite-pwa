@@ -8,12 +8,9 @@ export type DateArticleCategoryType =
   | 'allPageOfPreviews'
   
   | 'gettingToKnowPreviewRow'
-  | 'gettingToKnowPageOfPreviews'
+  | 'gettingToKnowPage'
   
-  | 'profileCreationAdvicesPreviewRow'
-  | 'profileCreationAdvicesPageOfPreviews'
-  
-  | 'howToCreateAttractiveProfile'
+  | 'profileCreationAdvices'
 
 export type DateArticleCategoryCommonData = {
   articleType: DateArticleType
@@ -44,7 +41,7 @@ export type DateArticleCategoryData =
 export const DateArticleCategoriesData: Record<DateArticleCategoryType, DateArticleCategoryData> = {
   allPreviewRow: {
     type: 'category',
-    next: ['gettingToKnowPageOfPreviews'],
+    next: ['gettingToKnowPage'],
     ui: 'previewRow',
     headerNext: 'allPageOfPreviews',
     articleType: 'all',
@@ -59,34 +56,21 @@ export const DateArticleCategoriesData: Record<DateArticleCategoryType, DateArti
   
   gettingToKnowPreviewRow: {
     type: 'category',
-    next: ['howToCreateAttractiveProfile'],
+    next: ['profileCreationAdvices'],
     ui: 'previewRow',
-    headerNext: 'profileCreationAdvicesPageOfPreviews',
+    headerNext: 'gettingToKnowPage',
     articleType: 'gettingToKnow',
   },
-  gettingToKnowPageOfPreviews: {
+  gettingToKnowPage: {
     type: 'category',
-    next: ['profileCreationAdvicesPreviewRow'],
-    ui: 'pageOfPreviews',
-    articleType: 'gettingToKnow',
-  },
-  profileCreationAdvicesPreviewRow: {
-    type: 'category',
-    next: ['howToCreateAttractiveProfile'],
-    ui: 'previewRow',
-    headerNext: 'profileCreationAdvicesPageOfPreviews',
-    articleType: 'profileCreationAdvices',
-  },
-  profileCreationAdvicesPageOfPreviews: {
-    type: 'category',
-    next: ['howToCreateAttractiveProfile'],
+    next: ['profileCreationAdvices'],
     ui: 'page',
-    articleType: 'profileCreationAdvices',
+    articleType: 'gettingToKnow',
   },
   
   
-  howToCreateAttractiveProfile: {
-    type: 'type', ui: 'page', articleType: 'howToCreateAttractiveProfile',
+  profileCreationAdvices: {
+    type: 'type', ui: 'page', articleType: 'profileCreationAdvices',
   },
 }
 

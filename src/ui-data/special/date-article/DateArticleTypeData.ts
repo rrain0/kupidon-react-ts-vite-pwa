@@ -15,9 +15,6 @@ export type DateArticleType =
   
   // gettingToKnow
   | 'profileCreationAdvices' // Советы по созданию профиля
-  
-  // profileCreationAdvices
-  | 'howToCreateAttractiveProfile' // Как создать привлекательный профиль
 
 
 
@@ -37,7 +34,7 @@ export const DateArticleTypeData: Record<DateArticleType, {
   gettingToKnow: {
     picture: candlesFlowersTable,
     name: {
-      'ru-RU': 'Знакомство',
+      'ru-RU': 'Знакомства',
     },
   },
   
@@ -46,14 +43,6 @@ export const DateArticleTypeData: Record<DateArticleType, {
     picture: candlesFlowersTable,
     name: {
       'ru-RU': 'Советы по созданию профиля',
-    },
-  },
-  
-  
-  howToCreateAttractiveProfile: {
-    picture: candlesFlowersTable,
-    name: {
-      'ru-RU': 'Как создать привлекательный профиль',
     },
   },
   
