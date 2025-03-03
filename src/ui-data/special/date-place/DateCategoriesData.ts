@@ -1,18 +1,18 @@
-import { DatePlaceType } from 'src/ui-data/special/DatePlaceTypeData.ts'
+import { DatePlaceType } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 
 
 
 
 export type DateCategoryType =
-  | 'allPreview'
+  | 'allPreviewRow'
   | 'allPageOfPreviews'
   | 'allPage'
   
-  | 'romanticPreview'
-  | 'culturalPreview'
-  | 'activePreview'
-  | 'entertainingPreview'
-  | 'nonstandardPreview'
+  | 'romanticPreviewRow'
+  | 'culturalPreviewRow'
+  | 'activePreviewRow'
+  | 'entertainingPreviewRow'
+  | 'nonstandardPreviewRow'
   
   | 'romanticPage'
   | 'culturalPage'
@@ -67,7 +67,7 @@ export type DateCategoryData =
 
 
 export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
-  allPreview: {
+  allPreviewRow: {
     type: 'category',
     next: ['romanticPage', 'culturalPage', 'activePage', 'entertainingPage', 'nonstandardPage'],
     ui: 'previewRow',
@@ -77,8 +77,8 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
   allPageOfPreviews: {
     type: 'category',
     next: [
-      'romanticPreview', 'culturalPreview', 'activePreview',
-      'entertainingPreview', 'nonstandardPreview',
+      'romanticPreviewRow', 'culturalPreviewRow', 'activePreviewRow',
+      'entertainingPreviewRow', 'nonstandardPreviewRow',
     ],
     ui: 'pageOfPreviews',
     placeType: 'all',
@@ -91,35 +91,35 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
   },
   
   
-  romanticPreview: {
+  romanticPreviewRow: {
     type: 'category',
     next: ['tableRomantic', 'walking'],
     ui: 'previewRow',
     headerNext: 'romanticPage',
     placeType: 'romantic',
   },
-  culturalPreview: {
+  culturalPreviewRow: {
     type: 'category',
     next: ['museum', 'gallery', 'theatre', 'cinema'],
     ui: 'previewRow',
     headerNext: 'culturalPage',
     placeType: 'cultural',
   },
-  activePreview: {
+  activePreviewRow: {
     type: 'category',
     next: ['sports', 'extreme', 'outdoorActivities'],
     ui: 'previewRow',
     headerNext: 'activePage',
     placeType: 'active',
   },
-  entertainingPreview: {
+  entertainingPreviewRow: {
     type: 'category',
     next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
     ui: 'previewRow',
     headerNext: 'entertainingPage',
     placeType: 'entertaining',
   },
-  nonstandardPreview: {
+  nonstandardPreviewRow: {
     type: 'category',
     next: ['masterClasses', 'streamCocktails', 'volunteering'],
     ui: 'previewRow',

@@ -4,8 +4,8 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/DateCategoriesData.ts'
-import { DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
+import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
+import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
@@ -37,7 +37,6 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
   const uiValues = useMemo(() => ({
     name: typeData.name,
   }), [typeData])
-  
   const uiText = useUiValues(uiValues)
   
   const [search] = useSearchParams()

@@ -1,11 +1,19 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React, { useMemo } from 'react'
-import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
-import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts'
-import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
-import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
-import DateCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DateCategoriesList.tsx'
+import {
+  DateArticleCategoriesData,
+  DateArticleCategoryType,
+} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
+import {
+  DateArticleType,
+  DateArticleTypeData,
+} from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
+import DateArticleCard from 'src/ui/2-pages/DateArticles/parts/DateArticleCard.tsx'
+import {
+  DateArticleCategoriesList,
+} from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -19,17 +27,17 @@ import ObjectUnionFix = TypeU.ObjectUnionFix
 
 
 
-type DatePlacesPagePropsType = { type: DatePlaceType }
-type DatePlacesPagePropsCategory = { category: DateCategoryType }
-export type DatePlacesPageProps = DatePlacesPagePropsType | DatePlacesPagePropsCategory
+type DateArticlesPagePropsType = { type: DateArticleType }
+type DateArticlesPagePropsCategory = { category: DateArticleCategoryType }
+export type DateArticlesPageProps = DateArticlesPagePropsType | DateArticlesPagePropsCategory
 
-const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
-  const { type, category } = props as ObjectUnionFix<DatePlacesPagePropsType, DatePlacesPagePropsCategory>
+const DateArticlesPage = React.memo((props: DateArticlesPageProps) => {
+  const { type, category } = props as ObjectUnionFix<DateArticlesPagePropsType, DateArticlesPagePropsCategory>
   
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
-      if (type) return DatePlaceTypeData[type].name
-      return DatePlaceTypeData[DateCategoriesData[category].placeType].name
+      if (type) return DateArticleTypeData[type].name
+      return DateArticleTypeData[DateArticleCategoriesData[category].articleType].name
     })(),
   }), [category, type])
   const uiText = useUiValues(uiValues)
@@ -51,24 +59,24 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
                 
                 <div style={{ height: 28 }} />
                 
-                <DatePlacesList style={{ gap: 16 }}>
+                <DateArticlesList style={{ gap: 16 }}>
                   {type && (() => {
-                    const places = DatePlacesData.filter(place => place.types.includes(type))
+                    const articles = DateArticlesData.filter(article => article.types.includes(type))
                     
-                    if (!places.length) return 'Пусто'
+                    if (!articles.length) return 'Пусто'
                     
-                    return places.map(place => (
-                      <DatePlaceCard
-                        key={place.id}
-                        place={place}
+                    return articles.map(article => (
+                      <DateArticleCard
+                        key={article.id}
+                        article={article}
                       />
                     ))
                   })()}
-                </DatePlacesList>
+                </DateArticlesList>
               </>
             )}
             
-            {category && <DateCategoriesList list={DateCategoriesData[category]} />}
+            {category && <DateArticleCategoriesList list={DateArticleCategoriesData[category]} />}
             
           </Pages.ContentSmCol>
         </Pages.AddSafeInsets>
@@ -82,13 +90,13 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
     </>
   )
 })
-export default DatePlacesPage
+export default DateArticlesPage
 
 
 
 
 
-const DatePlacesList = styled.div`
+const DateArticlesList = styled.div`
   width: 100%;
   height: fit-content;
   gap: 10px;

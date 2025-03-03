@@ -1,6 +1,6 @@
-import { ObjectU } from '@util/common/ObjectU.ts'
 import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
-import ObjectKeys = ObjectU.ObjectKeys
+
+import noImage from '@im/ic/no-image.jpg'
 
 import romantic from '@im/date-place-type/romantic-icon-4bd31add75ca9eea70679dc07789c007.webp'
 import cultural
@@ -95,7 +95,7 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
   name: UiText,
 }> = {
   all: {
-    picture: '',
+    picture: noImage,
     name: {
       'ru-RU': 'Идеи и места для свиданий',
     },
@@ -141,19 +141,19 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
     },
   },
   restaurant: {
-    picture: '',
+    picture: noImage,
     name: {
       'ru-RU': 'Рестораны',
     },
   },
   cafe: {
-    picture: '',
+    picture: noImage,
     name: {
       'ru-RU': 'Кафе',
     },
   },
   coffeeHouse: {
-    picture: '',
+    picture: noImage,
     name: {
       'ru-RU': 'Кофейни',
     },
@@ -253,6 +253,3 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
   
 }
 
-
-
-export const allDateDatePlaceTypes: DatePlaceType[] = ObjectKeys(DatePlaceTypeData)

@@ -4,13 +4,16 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { DateCategoriesData, DateCategoryData } from 'src/ui-data/special/DateCategoriesData.ts'
-import { DatePlaceTypeData } from 'src/ui-data/special/DatePlaceTypeData.ts'
+import {
+  DateArticleCategoriesData,
+  DateArticleCategoryData,
+} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateArticleTypeData } from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
-import DateCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
+import DateArticleCategoryCard from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryCard.tsx'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ReactU } from 'src/util/react/ReactU'
@@ -25,17 +28,17 @@ import fullParams = RouteBuilder.fullParams
 
 
 
-export type ListWithHeaderProps = ClassStyle & Children & {
-  list: DateCategoryData
+export type DateArticleCategoriesListProps = ClassStyle & Children & {
+  list: DateArticleCategoryData
 }
-export const ListWithHeader = React.memo((props: ListWithHeaderProps) => {
+export const DateArticleCategoriesList = React.memo((props: DateArticleCategoriesListProps) => {
   const {
     className,
     style,
     list,
   } = props
   
-  const typeData = DatePlaceTypeData[list.placeType]
+  const typeData = DateArticleTypeData[list.articleType]
   const uiValues = useMemo(() => ({
     title: typeData.name,
   }), [list])
@@ -47,7 +50,7 @@ export const ListWithHeader = React.memo((props: ListWithHeaderProps) => {
         css={col}
         className={className}
         style={style}
-        data-display-name="ListWithHeader"
+        data-display-name="DateArticleCategoriesList"
       >
         <Pages.PageHeaderWithLeftRight>
           <BackBtn />
@@ -59,7 +62,7 @@ export const ListWithHeader = React.memo((props: ListWithHeaderProps) => {
         
         <ListCols>
           {list.next.map(it => (
-            <DateCategoryCard
+            <DateArticleCategoryCard
               key={it}
               style={{ width: '100%' }}
               category={it}
@@ -76,7 +79,7 @@ export const ListWithHeader = React.memo((props: ListWithHeaderProps) => {
         css={col}
         className={className}
         style={style}
-        data-display-name="ListWithHeader"
+        data-display-name="DateArticleCategoriesList"
       >
         <Pages.PageHeaderWithLeftRight>
           <BackBtn />
@@ -88,7 +91,7 @@ export const ListWithHeader = React.memo((props: ListWithHeaderProps) => {
         
         <div css={[col, { gap: 16 }]}>
           {list.next.map(it => {
-            const category = DateCategoriesData[it]
+            const category = DateArticleCategoriesData[it]
             if (category.type === 'category' && category.ui === 'previewRow') {
               return (
                 <PreviewRow key={it} list={category} />
@@ -103,8 +106,8 @@ export const ListWithHeader = React.memo((props: ListWithHeaderProps) => {
   
   return undefined
 })
-ListWithHeader.displayName = 'ListWithHeader'
-export default ListWithHeader
+DateArticleCategoriesList.displayName = 'DateArticleCategoriesList'
+export default DateArticleCategoriesList
 
 
 
@@ -121,14 +124,14 @@ const ListCols = styled.div`
 
 
 export type PreviewRowProps = {
-  list: DateCategoryData & { type: 'category', ui: 'previewRow' }
+  list: DateArticleCategoryData & { type: 'category', ui: 'previewRow' }
 }
 const PreviewRow = React.memo((props: PreviewRowProps) => {
   const {
     list,
   } = props
   
-  const typeData = DatePlaceTypeData[list.placeType]
+  const typeData = DateArticleTypeData[list.articleType]
   const uiValues = useMemo(() => ({
     title: typeData.name,
   }), [list])
@@ -139,7 +142,7 @@ const PreviewRow = React.memo((props: PreviewRowProps) => {
   return (
     <div css={[col, { gap: 16 }]}>
       <Link
-        to={RootRoute.datePlaces[fullParams]({
+        to={RootRoute.dateArticles[fullParams]({
           anySearchParams: search,
           allowedNameParams: {
             category: list.headerNext,
@@ -155,7 +158,7 @@ const PreviewRow = React.memo((props: PreviewRowProps) => {
       <Overflow>
         <ListRow>
           {list.next.map(it => (
-            <DateCategoryCard
+            <DateArticleCategoryCard
               key={it}
               category={it}
             />

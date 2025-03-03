@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 import { Navigate, RouteObject, useMatch, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { DatePlacesData } from 'src/ui-data/special/DatePlacesData.ts'
+import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path

@@ -1,78 +1,92 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
-import { ReactU } from '@util/react/ReactU.ts'
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useMemo } from 'react'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import Card from 'src/ui/0-elements/Card/Card.tsx'
+import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import Txt = EmotionCommon.Txt
-import rowC = EmotionCommon.rowC
+import { ReactU } from '@util/react/ReactU.ts'
+import { DateArticle } from 'src/ui-data/special/date-article/DateArticlesData.ts'
 import ClassStyle = ReactU.ClassStyle
-import Puro = TypeU.Puro
-import Children = ReactU.Children
-import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
+import Txt = EmotionCommon.Txt
+import RootRoute = AppRoutes.RootRoute
+import params = RouteBuilder.params
+import fullParams = RouteBuilder.fullParams
+import use = RouteBuilder.use
+import col = EmotionCommon.col
+import rowWrap = EmotionCommon.rowWrap
+import rowC = EmotionCommon.rowC
+
 
 
 
 const uiVals = {
-  toRead: {
-    'ru-RU': 'Читать',
+  itNear: {
+    'ru-RU': 'Близко',
   },
-} satisfies UiTextValues
+} satisfies UiValues
 
 
-export type DateArticleCardProps = ClassStyle & Children & Puro<{
-  picture: string
-  description: string
-}>
-const DateArticleCard = React.memo((props: DateArticleCardProps) => {
+export type DateArticleCardProps = ClassStyle & {
+  article: DateArticle
+}
+export const DateArticleCard = React.memo((props: DateArticleCardProps) => {
   const {
     className,
     style,
-    picture = '',
-    description = '',
+    article,
   } = props
   
+  
+  
   const uiValues = useMemo(() => ({
-    toRead: uiVals.toRead,
-  }), [])
+    itNear: uiVals.itNear,
+    name: article.title,
+    shortDescription: article.shortDescription,
+  }), [article])
+  
   const uiText = useUiValues(uiValues)
   
   
+  const navigate = useNavigate()
+  const [search] = useSearchParams()
+  
+  const selectPlace = () => {
+    const articlesParams = RootRoute.datePlaces[params]
+    navigate(RootRoute.dateArticle.articleId[use](article.id)[fullParams]({
+      anySearchParams: search,
+      anyPathParams: {
+        [articlesParams.category]: null,
+        [articlesParams.type]: null,
+      },
+    }))
+  }
+  
   
   return (
-    <CardBox
+    <DateArticleBox
       className={className}
       style={style}
       data-display-name="DateArticleCard"
+      onClick={selectPlace}
     >
-      
-      
       <ImgSpark
-        css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
-        src={picture}
+        css={ImgSparkS6.t(imgSparkS)}
+        src={article.picture}
       />
-      
-      <MiniPosterImageFade />
-      
-      <ContentBox>
-        
-        <Description>{description}</Description>
-        
-        <ReadItBox>
-          <ReadItText>{uiText.toRead}</ReadItText>
-          <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)} />
-        </ReadItBox>
-        
-      </ContentBox>
-      
-    </CardBox>
+      <InfoBox>
+        <Title>{uiText.name}</Title>
+        <ShortDescription>{uiText.shortDescription}</ShortDescription>
+      </InfoBox>
+      <BubblesBox></BubblesBox>
+    </DateArticleBox>
   )
 })
 DateArticleCard.displayName = 'DateArticleCard'
@@ -80,74 +94,63 @@ export default DateArticleCard
 
 
 
-const CardBox = styled.article`
+const DateArticleBox = styled(Card)`
+  ${p => CardS.card3S(p.theme)};
   position: relative;
-  width: 233px;
-  aspect-ratio: 1.084;
-  border-radius: ${StyleVals.cardRadius}px;
-  overflow: hidden;
-`
-
-
-
-
-const MiniPosterImageFade = styled.div`
-  position: absolute;
-  z-index: 1;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    0.69deg,
-    #010101B0 1.76%,
-    #6B6B6B5E 99.4%
-  );
+  height: fit-content;
+  padding: 0;
+  gap: 0;
+  ${col};
+  box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
+  cursor: pointer;
 `
 
-
-const ContentBox = styled.div`
+const BubblesBox = styled.div`
   position: absolute;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  padding: 12px 11px 10px;
-  display: grid;
-  grid:
-    'desc' 1fr
-    '....' 8px
-    'read' auto
-    /100%;
+  top: 9px;
+  left: 9px;
+  ${rowWrap};
+  gap: 4px;
 `
-
-
-
-const Description = styled.div`
-  grid-area: desc;
-  align-self: end;
+const Bubble = styled.div`
+  height: 20px;
+  border-radius: 999999px;
+  padding: 0 10px;
   // TODO Theme
-  color: white;
-  ${Txt.s17Wide};
-  white-space: pre-line;
-`
-
-
-const ReadItBox = styled.div`
-  grid-area: read;
-  //margin-top: 19px;
+  background-color: white;
   ${rowC};
-  gap: 3px;
+  // TODO Theme
+  color: #232020;
+  ${Txt.s12Bold};
 `
-const arrowIcS: AppWidgetStyle = t => [
-  SvgIconS6.S.icon.icon.full.normal, {
-    icon: {
-      mt: -1,
-      sz: 18,
-      // TODO Theme
-      color: '#FFFFFF8C',
-    },
+
+
+const imgSparkS: AppWidgetStyle = [
+  ImgSparkS6.S.img.img.wFull.normal, {
+    imgFrame: { ratio: 2.594 },
   },
 ]
-const ReadItText = styled.div`
-  // TODO Theme
-  color: #FFFFFF8C;
-  ${Txt.s17Wide};
+
+const InfoBox = styled.div`
+  width: 100%;
+  height: fit-content;
+  ${col};
+  gap: 5px;
+  padding: 10px 16px 16px;
 `
+const Title = styled.div`
+  // TODO Theme
+  color: black;
+  ${Txt.s17Bold};
+`
+const ShortDescription = styled.div`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  // TODO Theme
+  color: #939393;
+  ${Txt.s14};
+`
+

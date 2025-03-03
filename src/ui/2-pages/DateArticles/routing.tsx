@@ -2,43 +2,46 @@ import React, { Suspense } from 'react'
 import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
-import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
+import {
+  DateArticleCategoriesData,
+  DateArticleCategoryType,
+} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateArticleType, DateArticleTypeData } from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
 
-const DatePlacesPage = React.lazy(
-  () => import('src/ui/2-pages/DatePlaces/DatePlacesPage.tsx')
+const DateArticlesPage = React.lazy(
+  () => import('src/ui/2-pages/DateArticles/DateArticlesPage.tsx')
 )
 
 
 
 
-const RouteDatePlaces = React.memo(() => {
+const RouteDateArticles = React.memo(() => {
   
   const [search] = useSearchParams()
-  const categoryParamName = RootRoute.datePlaces[params].category
-  const typeParamName = RootRoute.datePlaces[params].type
+  const categoryParamName = RootRoute.dateArticles[params].category
+  const typeParamName = RootRoute.dateArticles[params].type
   
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
   
-  const type = searchType && Object.hasOwn(DatePlaceTypeData, searchType)
-    ? searchType as DatePlaceType
+  const type = searchType && Object.hasOwn(DateArticleTypeData, searchType)
+    ? searchType as DateArticleType
     : undefined
-  const category = searchCategory && Object.hasOwn(DateCategoriesData, searchCategory)
-    ? searchCategory as DateCategoryType
+  const category = searchCategory && Object.hasOwn(DateArticleCategoriesData, searchCategory)
+    ? searchCategory as DateArticleCategoryType
     : undefined
-  const defaultCategory: DateCategoryType = 'allPageOfPreviews'
+  const defaultCategory: DateArticleCategoryType = 'allPageOfPreviews'
   
   
   if (type) return (
     <>
       <Navigate
         to={
-          RootRoute.datePlaces[fullParams]({
+          RootRoute.dateArticles[fullParams]({
             anySearchParams: search,
             allowedNameParams: {
               category: null,
@@ -49,7 +52,7 @@ const RouteDatePlaces = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DatePlacesPage type={type} />
+        <DateArticlesPage type={type} />
       </Suspense>
     </>
   )
@@ -58,7 +61,7 @@ const RouteDatePlaces = React.memo(() => {
     <>
       <Navigate
         to={
-          RootRoute.datePlaces[fullParams]({
+          RootRoute.dateArticles[fullParams]({
             anySearchParams: search,
             allowedNameParams: {
               category: category,
@@ -69,7 +72,7 @@ const RouteDatePlaces = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DatePlacesPage category={category} />
+        <DateArticlesPage category={category} />
       </Suspense>
     </>
   )
@@ -78,7 +81,7 @@ const RouteDatePlaces = React.memo(() => {
     <>
       <Navigate
         to={
-          RootRoute.datePlaces[fullParams]({
+          RootRoute.dateArticles[fullParams]({
             anySearchParams: search,
             allowedNameParams: {
               category: defaultCategory,
@@ -94,11 +97,11 @@ const RouteDatePlaces = React.memo(() => {
 
 
 
-// path: 'date-places / ...'
-export const routingDatePlaces: RouteObject[] = [
+// path: 'date-articles / ...'
+export const routingDateArticles: RouteObject[] = [
   {
     path: '',
-    Component: RouteDatePlaces,
+    Component: RouteDateArticles,
   },
   clearUnknownPathEnding,
 ]

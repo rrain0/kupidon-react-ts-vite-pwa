@@ -1,3 +1,7 @@
+import { DateArticle } from 'src/ui-data/special/date-article/DateArticlesData.ts'
+
+import noImage from '@im/ic/no-image.jpg'
+
 import candlesFlowersTable
   from 'src/_mock-data/date-articles/candles-flowers-table-icon--lon-christensen-GVGBs3oN6pg-unsplash.webp'
 import mountainsBridgeCouple
@@ -5,21 +9,19 @@ import mountainsBridgeCouple
 
 
 
-export const MockDateArticles = {
-  
-  articles: [
-    {
-      date: '21 марта',
-      description: 'Первое свидание.\nКак оставить хорошее впечатление?',
-      previewImg: candlesFlowersTable,
+export const MockDateArticles: DateArticle[] = [
+  {
+    id: 'Как создать привлекательный профиль',
+    types: ['gettingToKnow', 'profileCreationAdvices', 'howToCreateAttractiveProfile'],
+    title: {
+      'ru-RU': 'Как создать привлекательный профиль',
     },
-    {
-      date: '22 марта',
-      description: 'Хорошие и плохие места для первого свидания',
-      previewImg: mountainsBridgeCouple,
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': 'Подробные шаги как создать привлекательный профиль',
     },
-  ],
-  
-}
+    content: 'Здесь будет контент статьи',
+  },
+]
 
 

@@ -63,6 +63,7 @@ export namespace AppRoutes {
     app: buildPath('app'),
     pwdChange: buildPath('pwd-change'),
   })
+  
   const datePlaces = buildRoute({
     [path]: 'date-places',
     [params]: {
@@ -75,6 +76,20 @@ export namespace AppRoutes {
   const datePlace = buildRoute({
     [path]: 'date-place',
     placeId: buildPath(':placeId'),
+  })
+  
+  const dateArticles = buildRoute({
+    [path]: 'date-articles',
+    [params]: {
+      // ...?category=...
+      category: 'category',
+      // ...?type=...
+      type: 'type',
+    },
+  })
+  const dateArticle = buildRoute({
+    [path]: 'date-article',
+    articleId: buildPath(':articleId'),
   })
   
   
@@ -130,8 +145,12 @@ export namespace AppRoutes {
     settings,
     
     test,
+    
     datePlaces,
     datePlace,
+    
+    dateArticles,
+    dateArticle,
     
     
     devTest,

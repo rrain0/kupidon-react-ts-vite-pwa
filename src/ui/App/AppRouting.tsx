@@ -8,6 +8,8 @@ import {
 import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing.tsx'
 import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
+import { routingDateArticle } from 'src/ui/2-pages/DateArticle/routing.tsx'
+import { routingDateArticles } from 'src/ui/2-pages/DateArticles/routing.tsx'
 import { routingDatePlace } from 'src/ui/2-pages/DatePlace/routing.tsx'
 import { routingDatePlaces } from 'src/ui/2-pages/DatePlaces/routing.tsx'
 import { findCoupleRouting } from 'src/ui/2-pages/FindCouple/routing'
@@ -98,6 +100,7 @@ const routingRoot: RouteObject[] = [
         path: RootRoute.settings[path]+'/*',
         children: settingRouting,
       },
+      
       {
         path: RootRoute.datePlaces[path]+'/*',
         children: routingDatePlaces,
@@ -105,6 +108,15 @@ const routingRoot: RouteObject[] = [
       {
         path: RootRoute.datePlace[path]+'/*',
         children: routingDatePlace,
+      },
+      
+      {
+        path: RootRoute.dateArticles[path]+'/*',
+        children: routingDateArticles,
+      },
+      {
+        path: RootRoute.dateArticle[path]+'/*',
+        children: routingDateArticle,
       },
       
       

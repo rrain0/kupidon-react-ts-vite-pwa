@@ -1,0 +1,115 @@
+import styled from '@emotion/styled'
+import React, { useMemo } from 'react'
+import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { DateArticle } from 'src/ui-data/special/date-article/DateArticlesData.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
+import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
+import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import { Pages } from 'src/ui/components/Pages/Pages'
+import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
+import Txt = EmotionCommon.Txt
+
+
+
+export const LocationOverlayName = 'location'
+
+const uiVals = {
+  insightsAndPlacesForDate: {
+    'ru-RU': 'Идеи и места для свиданий',
+  },
+  features: {
+    'ru-RU': 'Особенности',
+  },
+  bonusesFromKupidon: {
+    'ru-RU': 'Бонусы от «Купидон»',
+  },
+  contactInformation: {
+    'en-US': 'Contact information',
+    'ru-RU': 'Контактная информация',
+  },
+  copyAddress: {
+    'en-US': 'Copy address',
+    'ru-RU': 'Скопировать адрес',
+  },
+} satisfies UiValues
+
+
+export type DateArticlePageProps = {
+  article: DateArticle
+}
+const DateArticlePage = React.memo((props: DateArticlePageProps) => {
+  const { article } = props
+  
+  const uiValues = useMemo(() => ({
+    pageTitle: article.title,
+  }), [article])
+  const uiText = useUiValues(uiValues)
+  
+  return (
+    <>
+    
+      <Pages.PageGrad>
+        <Pages.AddSafeInsets>
+          <Pages.ContentSmCol style={{ gap: 0 }}>
+            
+            <Pages.PageHeaderWithLeftRight>
+              <BackBtn />
+              <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
+              <div css={{ width: 50, height: 50 }} />
+            </Pages.PageHeaderWithLeftRight>
+            
+            <div style={{ height: 34 }} />
+            
+            <ImgSpark
+              css={ImgSparkS6.t(imgSparkS)}
+              src={article.picture}
+            />
+            
+            <div style={{ height: 19 }} />
+            
+            <Title>
+              {uiText.pageTitle}
+            </Title>
+            
+            <div style={{ height: 7 }} />
+            
+            <div style={{ height: 17 }} />
+            
+            {article.content}
+            
+            
+          
+          </Pages.ContentSmCol>
+        </Pages.AddSafeInsets>
+        
+        <PageScrollbars />
+      </Pages.PageGrad>
+      
+      
+      <BottomButtonBar settingsBtn />
+      
+    </>
+  )
+})
+export default DateArticlePage
+
+
+
+const imgSparkS: AppWidgetStyle = [
+  ImgSparkS6.S.img.img.wFull.normal, {
+    imgFrame: { ratio: 1.570, r: StyleVals.cardRadius },
+  },
+]
+
+const Title = styled.div`
+  // TODO Theme
+  color: black;
+  ${Txt.s20Bold};
+`
+

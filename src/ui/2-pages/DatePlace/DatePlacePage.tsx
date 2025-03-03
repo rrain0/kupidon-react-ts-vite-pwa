@@ -3,13 +3,9 @@ import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
+import { DatePlace } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -26,12 +22,8 @@ import { useUiValues, useUiValuesArr } from 'src/mini-libs/ui-text/useUiText.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
-import LocationIc = SvgIconsPack.LocationIc
-import rowC = EmotionCommon.rowC
 import resetH = EmotionCommon.resetH
 import col = EmotionCommon.col
-import hoverable = EmotionCommon.hoverable
-import abs = EmotionCommon.abs
 
 
 
@@ -111,14 +103,6 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
             </Title>
             
             <div style={{ height: 7 }} />
-            
-            {/* <Button
-              css={ButtonS6.t(locationButtonS)}
-              onClick={locationDialog.open}
-            >
-              <LocationIc css={SvgIconS6.t(locationNameIcS)} />
-              <LocationText>{uiText.addressText}</LocationText>
-            </Button> */}
             
             <ContactButton
               contact={{ type: 'address', text: uiText.addressText! }}

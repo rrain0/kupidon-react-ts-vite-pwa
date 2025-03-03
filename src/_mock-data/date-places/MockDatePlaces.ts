@@ -1,4 +1,4 @@
-import { DatePlace } from 'src/ui-data/special/DatePlacesData.ts'
+import { DatePlace } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 
 import bezBokalaNetShagala from './bez-bokala-net-shagala-2f15ebe1-ed25-445e-866a-45b1c12bc14a.jpg'
 import ibisKitchen from './ibis-kitchen-30258560112733222_ea8f.jpg'
@@ -9,7 +9,7 @@ import etika from './etika-30258560173284876_9170.jpg'
 export const MockDatePlaces: DatePlace[] = [
   {
     id: 'Без бокала нет Шагала ул. Октябрьской революции, 11а',
-    type: ['masterClasses'],
+    types: ['masterClasses'],
     name: {
       'ru-RU': 'Без бокала нет Шагала',
     },
@@ -52,7 +52,7 @@ export const MockDatePlaces: DatePlace[] = [
   
   {
     id: 'Ibis Kitchen ул. Осипенко, 5, Отель Ibis',
-    type: ['tableRomantic', 'restaurant'],
+    types: ['tableRomantic', 'restaurant'],
     name: {
       'ru-RU': 'Ibis Kitchen',
     },
@@ -91,7 +91,7 @@ export const MockDatePlaces: DatePlace[] = [
   
   {
     id: 'Etika ул. Лызина, 9',
-    type: ['tableRomantic', 'cafe', 'coffeeHouse'],
+    types: ['tableRomantic', 'cafe', 'coffeeHouse'],
     name: {
       'ru-RU': 'Etika',
     },

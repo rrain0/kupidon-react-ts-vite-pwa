@@ -1,11 +1,9 @@
-import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { MockDateArticles } from 'src/_mock-data/date-articles/MockDateArticles.ts'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { DateCategoriesData } from 'src/ui-data/special/DateCategoriesData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import {
+  DateArticleCategoriesData
+} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateCategoriesData } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
@@ -13,8 +11,9 @@ import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
-import DateArticleCard from 'src/ui/2-pages/DateArticles/parts/DateArticleCard.tsx'
-import ListWithHeader from 'src/ui/2-pages/DatePlaces/parts/ListWithHeader.tsx'
+import DateArticleCategoriesList
+  from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoriesList.tsx'
+import DateCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DateCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -22,10 +21,6 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import Calendar2GradIc = SvgGradIconsPack.Calendar2GradIc
-import noScrollbars = EmotionCommon.noScrollbars
-import row = EmotionCommon.row
-import RootRoute = AppRoutes.RootRoute
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -71,27 +66,11 @@ const BowAndArrowsPage = React.memo(() => {
             
             <div style={{ height: 16 }} />
             
-            <ListWithHeader list={DateCategoriesData.allPreview} />
+            <DateCategoriesList list={DateCategoriesData.allPreviewRow} />
             
             <div style={{ height: 16 }} />
             
-            <HeaderArrow css={HeaderArrowS.page}>
-              {uiText.kupidonNotes}
-            </HeaderArrow>
-            
-            <div style={{ height: 16 }} />
-            
-            <DateArticlesOverflow>
-              <DateArticlesList>
-                {MockDateArticles.articles.map(a => (
-                  <DateArticleCard
-                    key={a.description}
-                    picture={a.previewImg}
-                    description={a.description}
-                  />
-                ))}
-              </DateArticlesList>
-            </DateArticlesOverflow>
+            <DateArticleCategoriesList list={DateArticleCategoriesData.allPreviewRow} />
             
             <div style={{ height: 16 }} />
             
@@ -124,39 +103,4 @@ const calendarButtonS: AppWidgetStyle = t => [
 ]
 
 
-const DatePlacesOverflow = styled.div`
-  // Вертикальные маргин и паддинг нужны чтобы отображать тени у карточек - но тач зона расширена
-  // TODO paddings
-  margin: -16px -16px;
-  padding: 16px 16px;
-  width: calc(100% + 16px * 2);
-  height: fit-content;
-  overflow: auto;
-  ${noScrollbars};
-  ${row};
-`
-const DatePlacesList = styled.div`
-  width: fit-content;
-  height: fit-content;
-  ${row};
-  gap: 16px;
-`
 
-
-
-const DateArticlesOverflow = styled.div`
-  // TODO paddings
-  margin: 0 -16px;
-  padding: 0 16px;
-  width: calc(100% + 16px * 2);
-  height: fit-content;
-  overflow: auto;
-  ${noScrollbars};
-  ${row};
-`
-const DateArticlesList = styled.div`
-  width: fit-content;
-  height: fit-content;
-  ${row};
-  gap: 16px;
-`
