@@ -16,7 +16,7 @@ export const MockDateArticles: DateArticle[] = [
     title: {
       'ru-RU': 'Как создать привлекательный профиль',
     },
-    picture: noImage,
+    picture: candlesFlowersTable,
     shortDescription: {
       'ru-RU': 'Подробные шаги как создать привлекательный профиль',
     },

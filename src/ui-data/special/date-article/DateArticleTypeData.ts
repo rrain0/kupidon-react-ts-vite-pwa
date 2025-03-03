@@ -2,8 +2,8 @@ import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
 
 import noImage from '@im/ic/no-image.jpg'
 
-import romantic
-  from '@im/date-place-type/romantic-icon-4bd31add75ca9eea70679dc07789c007.webp'
+import candlesFlowersTable
+  from 'src/_mock-data/date-articles/candles-flowers-table-icon--lon-christensen-GVGBs3oN6pg-unsplash.webp'
 
 
 
@@ -27,7 +27,7 @@ export const DateArticleTypeData: Record<DateArticleType, {
   name: UiText,
 }> = {
   all: {
-    picture: noImage,
+    picture: candlesFlowersTable,
     name: {
       'ru-RU': 'Заметки Купидона',
     },
@@ -35,7 +35,7 @@ export const DateArticleTypeData: Record<DateArticleType, {
   
   
   gettingToKnow: {
-    picture: noImage,
+    picture: candlesFlowersTable,
     name: {
       'ru-RU': 'Знакомство',
     },
@@ -43,7 +43,7 @@ export const DateArticleTypeData: Record<DateArticleType, {
   
   
   profileCreationAdvices: {
-    picture: noImage,
+    picture: candlesFlowersTable,
     name: {
       'ru-RU': 'Советы по созданию профиля',
     },
@@ -51,7 +51,7 @@ export const DateArticleTypeData: Record<DateArticleType, {
   
   
   howToCreateAttractiveProfile: {
-    picture: noImage,
+    picture: candlesFlowersTable,
     name: {
       'ru-RU': 'Как создать привлекательный профиль',
     },

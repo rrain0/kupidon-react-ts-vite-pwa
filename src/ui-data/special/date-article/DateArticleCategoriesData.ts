@@ -51,7 +51,7 @@ export const DateArticleCategoriesData: Record<DateArticleCategoryType, DateArti
   },
   allPageOfPreviews: {
     type: 'category',
-    next: ['gettingToKnowPageOfPreviews'],
+    next: ['gettingToKnowPreviewRow'],
     ui: 'pageOfPreviews',
     articleType: 'all',
   },
