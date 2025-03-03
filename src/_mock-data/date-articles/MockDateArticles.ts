@@ -22,6 +22,20 @@ export const MockDateArticles: DateArticle[] = [
     },
     content: 'Здесь будет контент статьи',
   },
+  
+  /* {
+    id: 'Статья про профиль 2',
+    types: ['gettingToKnow', 'profileCreationAdvices', 'howToCreateAttractiveProfile'],
+    title: {
+      'ru-RU': 'Статья про профиль 2',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': 'Короткое описание статьи про профиль 2',
+    },
+    content: 'Здесь будет контент статьи',
+  }, */
+  
 ]
 
 

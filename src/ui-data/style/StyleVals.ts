@@ -18,6 +18,7 @@ export namespace StyleVals {
   export const shadowLightSz = '0px 2px 7.3px 0px'
   
   // z-indices
+  export const modalFloor100 = 100
   export const modalFloor500 = 500
   export const modalFloor1k = 1000
   export const modalFloor2k = 2000

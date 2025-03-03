@@ -21,6 +21,9 @@ export type DateCategoryType =
   | 'nonstandardPage'
   
   | 'tableRomantic'
+  | 'restaurant'
+  | 'cafe'
+  | 'coffeeHouse'
   | 'walking'
   
   | 'museum'
@@ -93,9 +96,15 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
   
   romanticPreviewRow: {
     type: 'category',
-    next: ['tableRomantic', 'walking'],
+    next: ['restaurant', 'cafe', 'coffeeHouse', 'walking'],
     ui: 'previewRow',
     headerNext: 'romanticPage',
+    placeType: 'romantic',
+  },
+  romanticPage: {
+    type: 'category',
+    next: ['restaurant', 'cafe', 'coffeeHouse', 'walking'],
+    ui: 'page',
     placeType: 'romantic',
   },
   culturalPreviewRow: {
@@ -105,11 +114,23 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
     headerNext: 'culturalPage',
     placeType: 'cultural',
   },
+  culturalPage: {
+    type: 'category',
+    next: ['museum', 'gallery', 'theatre', 'cinema'],
+    ui: 'page',
+    placeType: 'cultural',
+  },
   activePreviewRow: {
     type: 'category',
     next: ['sports', 'extreme', 'outdoorActivities'],
     ui: 'previewRow',
     headerNext: 'activePage',
+    placeType: 'active',
+  },
+  activePage: {
+    type: 'category',
+    next: ['sports', 'extreme', 'outdoorActivities'],
+    ui: 'page',
     placeType: 'active',
   },
   entertainingPreviewRow: {
@@ -119,37 +140,18 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
     headerNext: 'entertainingPage',
     placeType: 'entertaining',
   },
+  entertainingPage: {
+    type: 'category',
+    next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
+    ui: 'page',
+    placeType: 'entertaining',
+  },
   nonstandardPreviewRow: {
     type: 'category',
     next: ['masterClasses', 'streamCocktails', 'volunteering'],
     ui: 'previewRow',
     headerNext: 'nonstandardPage',
     placeType: 'nonstandard',
-  },
-  
-  romanticPage: {
-    type: 'category',
-    next: ['tableRomantic', 'walking'],
-    ui: 'page',
-    placeType: 'romantic',
-  },
-  culturalPage: {
-    type: 'category',
-    next: ['museum', 'gallery', 'theatre', 'cinema'],
-    ui: 'page',
-    placeType: 'cultural',
-  },
-  activePage: {
-    type: 'category',
-    next: ['sports', 'extreme', 'outdoorActivities'],
-    ui: 'page',
-    placeType: 'active',
-  },
-  entertainingPage: {
-    type: 'category',
-    next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
-    ui: 'page',
-    placeType: 'entertaining',
   },
   nonstandardPage: {
     type: 'category',
@@ -160,6 +162,9 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
   
   
   tableRomantic: { type: 'type', ui: 'page', placeType: 'tableRomantic' },
+  restaurant: { type: 'type', ui: 'page', placeType: 'restaurant' },
+  cafe: { type: 'type', ui: 'page', placeType: 'cafe' },
+  coffeeHouse: { type: 'type', ui: 'page', placeType: 'coffeeHouse' },
   walking: { type: 'type', ui: 'page', placeType: 'walking' },
   
   museum: { type: 'type', ui: 'page',  placeType: 'museum' },

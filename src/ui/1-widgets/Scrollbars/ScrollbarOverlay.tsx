@@ -1,7 +1,7 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import React from 'react'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { ScrollbarOverlayStyle } from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ReactU } from 'src/util/react/ReactU.ts'
@@ -10,53 +10,55 @@ import Scrollbar from 'src/ui/1-widgets/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps, SetScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import abs = EmotionCommon.abs
-import PartialUndef = TypeU.PartialUndef
 import ClassStyleProps = ReactU.ClassStyle
+import Puro = TypeU.Puro
 
 
 
 
 
-export type ScrollbarOverlayProps = {
-  scrollProps: ScrollProps,
+export type ScrollbarOverlayProps = ClassStyleProps & {
+  scrollProps: ScrollProps
   setContainerScroll: SetScrollProps
-} & PartialUndef<{
+} & Puro<{
   canScrollHorizontally: boolean
   canScrollVertically: boolean
   showVertical: boolean
   showHorizontal: boolean
-}> & ClassStyleProps
+}>
 
 
 
-const ScrollbarOverlay =
-React.memo(
-(props: ScrollbarOverlayProps)=>{
+const ScrollbarOverlay = React.memo((props: ScrollbarOverlayProps) => {
   const showVertical = (props.canScrollVertically ?? true) && (props.showVertical ?? true)
   const showHorizontal = (props.canScrollHorizontally ?? true) && (props.showHorizontal ?? true)
   
   
   
-  return <Overlay // Scrollbar Overlay
-    className={clsx(props.className, ScrollbarOverlayStyle.El.overlay.name)}
-    style={props.style}
-  >
+  return (
+    <Overlay // Scrollbar Overlay
+      className={clsx(props.className, ScrollbarOverlayStyle.El.overlay.name)}
+      style={props.style}
+    >
+      
+      {showVertical && (
+        <VerticalScrollbar
+          scrollProps={props.scrollProps}
+          setContainerScroll={props.setContainerScroll}
+          direction="vertical"
+        />
+      )}
+      
+      {showHorizontal && (
+        <HorizontalScrollbar
+          scrollProps={props.scrollProps}
+          setContainerScroll={props.setContainerScroll}
+          direction="horizontal"
+        />
+      )}
     
-    { showVertical &&
-    <VerticalScrollbar
-      scrollProps={props.scrollProps}
-      setContainerScroll={props.setContainerScroll}
-      direction="vertical"
-    /> }
-    
-    { showHorizontal &&
-    <HorizontalScrollbar
-      scrollProps={props.scrollProps}
-      setContainerScroll={props.setContainerScroll}
-      direction='horizontal'
-    /> }
-  
-  </Overlay>
+    </Overlay>
+  )
 })
 export default ScrollbarOverlay
 
@@ -66,13 +68,14 @@ const Overlay = styled.div`
   ${abs};
   display: grid;
   pointer-events: none;
-  grid: '.. vs' 1fr
-          'hs ..' auto
-        / 1fr auto;
+  grid:
+    '..   vs' 1fr
+    'hs   ..' auto
+    / 1fr auto;
 `
 
 const VerticalScrollbar = styled(Scrollbar)`
-  ${p=>ScrollbarStyle.scrollbar(p.theme)};
+  ${p => ScrollbarStyle.scrollbar(p.theme)};
   ${ScrollbarStyle.El.root.thiz('vertical')}{
     grid-area: vs;
     place-self: stretch end;
@@ -83,7 +86,7 @@ const VerticalScrollbar = styled(Scrollbar)`
 `
 
 const HorizontalScrollbar = styled(Scrollbar)`
-  ${p=>ScrollbarStyle.scrollbar(p.theme)};
+  ${p => ScrollbarStyle.scrollbar(p.theme)};
   ${ScrollbarStyle.El.root.thiz('horizontal')}{
     grid-area: hs;
     place-self: end stretch;

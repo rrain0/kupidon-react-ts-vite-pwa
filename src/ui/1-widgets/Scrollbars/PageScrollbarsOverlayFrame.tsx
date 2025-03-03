@@ -1,5 +1,6 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import modalFloor100 = StyleVals.modalFloor100
 
 
 
@@ -7,6 +8,7 @@ export const PageScrollbarsOverlayFrame = styled.div`
   position: fixed;
   right: 0;
   left: 0;
+  z-index: ${modalFloor100};
   bottom: var(--bottom-bars-inset);
   height: calc(100dvh - var(--bottom-bars-inset));
   pointer-events: none;

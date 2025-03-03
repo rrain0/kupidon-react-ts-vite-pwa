@@ -105,31 +105,31 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
   romantic: {
     picture: romantic,
     name: {
-      'ru-RU': 'Романтический',
+      'ru-RU': 'Романтические',
     },
   },
   cultural: {
     picture: cultural,
     name: {
-      'ru-RU': 'Культурный',
+      'ru-RU': 'Культурные',
     },
   },
   active: {
     picture: natural,
     name: {
-      'ru-RU': 'Активный',
+      'ru-RU': 'Активные',
     },
   },
   entertaining: {
     picture: entertaining,
     name: {
-      'ru-RU': 'Развлекательный',
+      'ru-RU': 'Развлекательные',
     },
   },
   nonstandard: {
     picture: creative,
     name: {
-      'ru-RU': 'Нестандартный',
+      'ru-RU': 'Нестандартные',
     },
   },
   
