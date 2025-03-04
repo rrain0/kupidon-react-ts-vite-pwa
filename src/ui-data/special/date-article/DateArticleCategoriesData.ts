@@ -30,10 +30,30 @@ export type DateArticleCategoryCategoryData = {
   next: DateArticleCategoryType[]
 } | {
   type: 'type'
+} | {
+  type: 'item'
+  id: string
 }
 
 export type DateArticleCategoryData =
   DateArticleCategoryCommonData & DateArticleCategoryUiData & DateArticleCategoryCategoryData
+
+type Entity =
+  | { type: 'category', itemCategory: DateArticleCategoryType }
+  | { type: 'type', itemType: DateArticleType }
+  | { type: 'item', itemId: string }
+
+type Type =
+  | { type: 'category', itemType: DateArticleType }
+  | { type: 'type', itemType: DateArticleType }
+  | { type: 'item', itemId: string }
+type Ui =
+  | { ui: 'rowOfPreviews', listOfEntities: Entity[], headerEntity: Entity }
+  | { ui: 'page', listOfEntities: Entity[] }
+  | { ui: 'pageOfRowsOfPreviews', listOfEntities: Entity[] }
+  | { ui: undefined }
+
+export type DateArticleCategoryData2 = Type | Ui
 
 
 
@@ -72,5 +92,10 @@ export const DateArticleCategoriesData: Record<DateArticleCategoryType, DateArti
   profileCreationAdvices: {
     type: 'type', ui: 'page', articleType: 'profileCreationAdvices',
   },
+  
+  
+  /* howToCreateAttractiveProfile: {
+    type: 'item', articleId: 'IDhowToCreateAttractiveProfile',
+  }, */
 }
 

@@ -10,7 +10,7 @@ import etikaVideo from './clip-by-etika.cakes happy valentine\'s day 480p.mp4'
 export const MockDatePlaces: DatePlace[] = [
   {
     id: 'Без бокала нет Шагала ул. Октябрьской революции, 11а',
-    types: ['masterClasses'],
+    types: ['all', 'nonstandard', 'masterClasses'],
     name: {
       'ru-RU': 'Без бокала нет Шагала',
     },
@@ -53,7 +53,7 @@ export const MockDatePlaces: DatePlace[] = [
   
   {
     id: 'Ibis Kitchen ул. Осипенко, 5, Отель Ibis',
-    types: ['tableRomantic', 'restaurant'],
+    types: ['all', 'romantic', 'tableRomantic', 'restaurant'],
     name: {
       'ru-RU': 'Ibis Kitchen',
     },
@@ -92,7 +92,7 @@ export const MockDatePlaces: DatePlace[] = [
   
   {
     id: 'Etika ул. Лызина, 9',
-    types: ['tableRomantic', 'cafe', 'coffeeHouse'],
+    types: ['all', 'romantic', 'tableRomantic', 'cafe', 'coffeeHouse'],
     name: {
       'ru-RU': 'Etika',
     },

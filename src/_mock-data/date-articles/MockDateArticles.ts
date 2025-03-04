@@ -11,8 +11,8 @@ import mountainsBridgeCouple
 
 export const MockDateArticles: DateArticle[] = [
   {
-    id: 'Как создать привлекательный профиль',
-    types: ['gettingToKnow', 'profileCreationAdvices'],
+    id: 'IDhowToCreateAttractiveProfile',
+    types: ['all', 'gettingToKnow', 'profileCreationAdvices'],
     title: {
       'ru-RU': 'Как создать привлекательный профиль',
     },

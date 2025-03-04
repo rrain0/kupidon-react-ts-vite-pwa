@@ -47,7 +47,6 @@ export const DateArticleCard = React.memo((props: DateArticleCardProps) => {
   
   
   const uiValues = useMemo(() => ({
-    itNear: uiVals.itNear,
     name: article.title,
     shortDescription: article.shortDescription,
   }), [article])
