@@ -24,8 +24,6 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import col = EmotionCommon.col
-import abs = EmotionCommon.abs
-import abs = EmotionCommon.abs
 
 
 
