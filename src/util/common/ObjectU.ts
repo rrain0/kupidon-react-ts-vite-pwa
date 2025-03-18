@@ -3,6 +3,8 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import anyval = TypeU.anyval
 import WriteablePartial = TypeU.WriteablePartial
 import isobject = TypeU.isobject
+import capitalize = StringU.capitalize
+
 
 
 
@@ -12,8 +14,6 @@ export namespace ObjectU {
   
   
   // can also copy class instance
-  import capitalize = StringU.capitalize
-  
   export function copy<T extends object>(
     orig: T,
     update?: WriteablePartial<T>,
@@ -22,11 +22,13 @@ export namespace ObjectU {
     Object.assign(newInstance, update)
     return newInstance
   }
-  export const copyBy =
-    <T extends object>(update: NoInfer<WriteablePartial<T>>) => (orig: T) => copy(orig, update)
+  export const copyBy = <T extends object>(update: NoInfer<WriteablePartial<T>>) => {
+    return (orig: T) => copy(orig, update)
+  }
   
-  export const destructCopyBy =
-    <T extends object>(update: NoInfer<WriteablePartial<T>>) => (orig: T) => ({ ...orig, ...update })
+  export const destructCopyBy = <T extends object>(update: NoInfer<WriteablePartial<T>>) => {
+    return (orig: T) => ({ ...orig, ...update })
+  }
   
   
   

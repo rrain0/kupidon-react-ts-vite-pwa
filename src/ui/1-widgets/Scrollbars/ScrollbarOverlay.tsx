@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import React from 'react'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { ScrollbarOverlayStyle } from 'src/ui/1-widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ReactU } from 'src/util/react/ReactU.ts'

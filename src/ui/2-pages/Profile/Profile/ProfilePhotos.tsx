@@ -1,5 +1,5 @@
 import { css, keyframes } from '@emotion/react'
-import { config, useSprings, animated, UseSpringProps, to } from '@react-spring/web'
+import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
@@ -12,7 +12,6 @@ import React, {
   useState,
 } from 'react'
 import Dropzone from 'react-dropzone'
-import { useRecoilValue } from 'recoil'
 import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
@@ -29,7 +28,6 @@ import {
   newDefaultProfilePhoto,
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
-import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
@@ -104,7 +102,7 @@ export type ProfilePhotosProps = {
 }
 const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   const { images, setImages } = props
-  const { theme } = useRecoilValue(ThemeRecoil)
+  const theme = useAppZustand(s => s.theme)
   const isDraggingFiles = useAppZustand(s => s.isDraggingFiles)
   
   

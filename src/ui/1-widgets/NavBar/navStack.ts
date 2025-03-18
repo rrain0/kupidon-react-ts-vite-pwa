@@ -1,4 +1,4 @@
-import { NavBarStore } from 'src/zustand/ZustandStore.ts'
+import { NavBarStore } from 'src/zustand/app/NavBarStore.ts'
 
 
 

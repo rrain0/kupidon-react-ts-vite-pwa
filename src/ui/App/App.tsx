@@ -1,5 +1,4 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
-import { useRecoilValue } from 'recoil'
 import React from 'react'
 import {
   testWordsTreeGenerator
@@ -13,7 +12,6 @@ import AppFrame from 'src/ui/App/AppFrame'
 import ToastifySetup from 'src/ui/components/Toasts/ToastifySetup'
 import DragDetector from 'src/ui/App/DragDetector'
 import LogLayer from 'src/ui/App/LogLayer'
-import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { useAppInstallationSetup } from 'src/util/app/useAppInstallationSetup'
 import { useLangSetup } from 'src/util/lang/useLangSetup.ts'
@@ -21,6 +19,7 @@ import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 import { WidgetStyle6Test } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTest.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
@@ -38,7 +37,7 @@ const App = React.memo(() => {
   useLangSetup()
   const themeIsReady = useThemeSetup()
   
-  const theme = useRecoilValue(ThemeRecoil)
+  const theme = useAppZustand(s => s.theme)
   
   return (
     <CheckBrowserMinimumVersion>
@@ -46,7 +45,7 @@ const App = React.memo(() => {
       <UseViewportContentSize />
       
       {themeIsReady && (
-        <ThemeProvider theme={theme.theme}>
+        <ThemeProvider theme={theme}>
           
           <Global
             styles={t => css`

@@ -1,12 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { ThemeRecoil } from 'src/recoil/state/ThemeRecoil.ts'
+import { useRecoilValue } from 'recoil'
 import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { themeByName } from 'src/ui-data/theme/ThemeCollection.ts'
-import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { useBrowserMinimumVersion } from 'src/util/app/useBrowserMinimumVersion.ts'
 import { useThemeDetector } from 'src/util/theme/useThemeDetector.ts'
-import destructCopyBy = ObjectU.destructCopyBy
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
@@ -22,7 +20,8 @@ export const useThemeSetup = () => {
   })
   
   const themeSettings = useRecoilValue(ThemeSettingsRecoil)
-  const [theme, setTheme] = useRecoilState(ThemeRecoil)
+  const theme = useAppZustand(s => s.theme)
+  const setApp = useAppZustand.setState
   
   const systemTheme = function() {
     const systemTheme = useThemeDetector()
@@ -39,35 +38,25 @@ export const useThemeSetup = () => {
     const setting = themeSettings.setting
     if (setting === 'system') {
       if (systemTheme === 'light') {
-        setTheme(destructCopyBy({
-          theme: themeByName(themeSettings.light),
-        }))
+        setApp({ theme: themeByName(themeSettings.light) })
         setThemeIsReady(true)
       }
       else if (systemTheme === 'dark') {
-        setTheme(destructCopyBy({
-          theme: themeByName(themeSettings.dark),
-        }))
+        setApp({ theme: themeByName(themeSettings.dark) })
         setThemeIsReady(true)
       }
       else {
-        setTheme(destructCopyBy({
-          theme: themeByName(themeSettings.light),
-        }))
+        setApp({ theme: themeByName(themeSettings.light) })
         setThemeIsReady(true)
       }
     }
     else if (setting === 'manual') {
       if (themeSettings.manualSetting === 'light') {
-        setTheme(destructCopyBy({
-          theme: themeByName(themeSettings.light),
-        }))
+        setApp({ theme: themeByName(themeSettings.light) })
         setThemeIsReady(true)
       }
       else if (themeSettings.manualSetting === 'dark') {
-        setTheme(destructCopyBy({
-          theme: themeByName(themeSettings.dark),
-        }))
+        setApp({ theme: themeByName(themeSettings.dark) })
         setThemeIsReady(true)
       }
     }
@@ -76,7 +65,7 @@ export const useThemeSetup = () => {
   
   // apply to html meta tags
   useLayoutEffect(() => {
-    const t = theme.theme
+    const t = theme
     if (t) {
       const metaThemeColorElements = document.querySelectorAll(
         'html head meta[name=theme-color]'
@@ -88,7 +77,7 @@ export const useThemeSetup = () => {
       ) as NodeListOf<HTMLMetaElement>
       metaBackgroundColorElements.forEach(meta => meta.content = t.page.bg)
     }
-  }, [theme.theme])
+  }, [theme])
   
   return themeIsReady
 }
