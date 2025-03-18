@@ -21,7 +21,6 @@ import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 import { WidgetStyle6Test } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTest.ts'
-import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
 
 
 
