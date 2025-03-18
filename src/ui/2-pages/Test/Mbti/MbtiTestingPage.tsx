@@ -291,7 +291,7 @@ const MbtiTestingPage = React.memo(() => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol css={css`gap: 30px;`}>
+          <Pages.ContentColSm css={css`gap: 30px;`}>
             {exists(displayed) && (
               <div
                 data-display-name="MbtiPage"
@@ -385,7 +385,7 @@ const MbtiTestingPage = React.memo(() => {
               
               </div>
             )}
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
       </Pages.PageGrad>
       

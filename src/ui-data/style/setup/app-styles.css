@@ -6,6 +6,12 @@
   
   
   
+  /* viewport content width / height */
+  --vp-ct-w: 0px;
+  --vp-ct-h: 0px;
+  
+  
+  
   --page-vertical-padding: 50px;
   
   --bottom-button-bar-height: 0px;
@@ -44,11 +50,6 @@
 }
 
 
-/*
-html {
-  user-select: none;
-}
-*/
 
 
 @keyframes NoAnimation {

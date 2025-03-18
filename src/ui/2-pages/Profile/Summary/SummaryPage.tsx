@@ -225,7 +225,7 @@ const SummaryPage = React.memo(() => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol css={pageContentS}>
+          <Pages.ContentColSm css={pageContentS}>
             
             <InfoCard>
               
@@ -312,7 +312,7 @@ const SummaryPage = React.memo(() => {
             <SummaryPageFeatureCards />
             
           
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

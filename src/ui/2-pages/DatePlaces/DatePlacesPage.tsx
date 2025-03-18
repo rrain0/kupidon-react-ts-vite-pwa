@@ -39,7 +39,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol style={{ gap: 0 }}>
+          <Pages.ContentColSm style={{ gap: 0 }}>
             
             {type && (
               <>
@@ -70,7 +70,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
             
             {category && <DateCategoriesList list={DateCategoriesData[category]} />}
             
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

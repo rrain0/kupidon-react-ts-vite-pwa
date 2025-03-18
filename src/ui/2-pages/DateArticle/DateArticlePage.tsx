@@ -56,7 +56,7 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol style={{ gap: 0 }}>
+          <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRight>
               <BackBtn />
@@ -85,7 +85,7 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
             
             
           
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

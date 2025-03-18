@@ -142,7 +142,7 @@ const PwdChangePage = React.memo(() => {
       <Pages.PageGrad>
         
         <Pages.AddSafeInsets>
-          <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
+          <Pages.ContentColSmForm onSubmit={onFormSubmitCallback}>
             
             <Hdrs.Page>{titleText.pwdChange}</Hdrs.Page>
             
@@ -215,7 +215,7 @@ const PwdChangePage = React.memo(() => {
               {titleText.pwdRecovery}
             </Button>
           
-          </Pages.ContentSmColForm>
+          </Pages.ContentColSmForm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

@@ -139,7 +139,7 @@ const LoginPage = React.memo(() => {
     <>
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmColForm onSubmit={onFormSubmitCallback}>
+          <Pages.ContentColSmForm onSubmit={onFormSubmitCallback}>
             
             <Hdrs.Page>{titleText.login}</Hdrs.Page>
             
@@ -183,7 +183,7 @@ const LoginPage = React.memo(() => {
               </Button>
             </Link>
           
-          </Pages.ContentSmColForm>
+          </Pages.ContentColSmForm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

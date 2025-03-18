@@ -67,10 +67,6 @@ const DevTestPage = React.memo(() => {
   const [searchParams] = useSearchParams()
   
   
-  const [progress, setProgress] = useState(0)
-  useInterval(3000, () => setProgress(s => s === 0 ? 100 : 0))
-  
-  
   const [isChecked, , , toggleIsChecked] = useBool(false)
   
   const [onEventVal, , , toggleOnEventVal] = useBool(false)
@@ -217,25 +213,7 @@ const DevTestPage = React.memo(() => {
            />*/}
           
           
-          
-          
-          <div
-            css={t => css`
-              width: 200px;
-              height: 200px;
-              ${flexC};
-              border-radius: 16px;
-              background: ${t.boxDefault.bg};
-            `}
-          >
-            <PieProgress
-              css={css`
-                height: 30%;
-                aspect-ratio: 1;
-              `}
-              progress={RangeU.map(progress, [0, 100], [5, 95])}
-            />
-          </div>
+          <PieProgressView />
           
           
           <div
@@ -343,4 +321,33 @@ const Items = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 400px));
   gap: 10px;
 `
+
+
+
+
+const PieProgressView = React.memo(() => {
+  
+  const [progress, setProgress] = useState(0)
+  useInterval(3000, () => setProgress(s => s === 0 ? 100 : 0))
+  
+  return (
+    <div
+      css={t => css`
+        width: 200px;
+        height: 200px;
+        ${flexC};
+        border-radius: 16px;
+        background: ${t.boxDefault.bg};
+      `}
+    >
+      <PieProgress
+        css={css`
+          height: 30%;
+          aspect-ratio: 1;
+        `}
+        progress={RangeU.map(progress, [0, 100], [5, 95])}
+      />
+    </div>
+  )
+})
 

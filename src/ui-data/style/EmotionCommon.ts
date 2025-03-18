@@ -11,25 +11,24 @@ export namespace EmotionCommon {
   
   export const abs = css`
     position: absolute;
-    inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
-  `
-  export const abswh = css`
-    position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
   `
   
   export const fixed = css`
     position: fixed;
-    inset: 0; // top: 0; right: 0; bottom: 0; left: 0;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
   `
   export const fixedTop = css`
     position: fixed;
-    top: 0; right: 0; left: 0;
+    top: 0; left: 0;
+    width: 100%;
   `
   export const fixedBottom = css`
     position: fixed;
-    right: 0; bottom: 0; left: 0;
+    bottom: 0; left: 0;
+    width: 100%;
   `
   
   

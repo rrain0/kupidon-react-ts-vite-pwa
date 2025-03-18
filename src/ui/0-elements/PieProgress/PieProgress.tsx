@@ -5,46 +5,44 @@ import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
-import PartialUndef = TypeU.PartialUndef
 import ClassStyle = ReactU.ClassStyle
+import Puro = TypeU.Puro
 
 
 
 
 
-export type PieProgressProps = ClassStyle & PartialUndef<{
+export type PieProgressProps = ClassStyle & Puro<{
   progress: number
   type: 'percent' | 'oneBased'
 }>
 
 
-const PieProgress = React.memo(
-  (props: PieProgressProps) => {
-    const {
-      progress = 0,
-      type = 'percent',
-      className,
-      ...restProps
-    } = props
-    
-    const rotation = (() => {
-      if (type === 'percent') return `${progress / 100}turn`
-      if (type === 'oneBased') return `${progress}turn`
-    })()
-    
-    return (
-      <div
-        css={[
-          pieProgressStyle,
-          PieProgressStyle.defolt,
-        ]}
-        style={{ '--rotation': rotation }}
-        className={clsx(className, PieProgressStyle.El.clazz.pieProgress)}
-        {...restProps}
-      />
-    )
-  }
-)
+const PieProgress = React.memo((props: PieProgressProps) => {
+  const {
+    progress = 0,
+    type = 'percent',
+    className,
+    ...restProps
+  } = props
+  
+  const rotation = (() => {
+    if (type === 'percent') return `${progress / 100}turn`
+    if (type === 'oneBased') return `${progress}turn`
+  })()
+  
+  return (
+    <div
+      css={[
+        pieProgressStyle,
+        PieProgressStyle.defolt,
+      ]}
+      style={{ '--rotation': rotation }}
+      className={clsx(className, PieProgressStyle.El.clazz.pieProgress)}
+      {...restProps}
+    />
+  )
+})
 export default PieProgress
 
 

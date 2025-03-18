@@ -17,9 +17,9 @@ export namespace Pages {
   
   export const pageCol = css`
     min-width: ${wMin}px;
-    width: min(100%, 100dvw);
+    width: min(var(--vp-ct-w), 100dvw);
     //width: 110dvw;
-    min-height: max( min(100%, 100dvh), ${hMin}px );
+    min-height: max( min(var(--vp-ct-h), 100dvh), ${hMin}px );
     //min-height: 100%;
     position: relative;
     ${col};
@@ -92,21 +92,21 @@ export namespace Pages {
     ${col};
     gap: 10px;
   `
-  export const contentSmCol = css`
+  export const contentColSm = css`
     ${content};
     max-width: 550px;
     align-items: stretch;
   `
-  export const contentSmColForm = css`
-    ${contentSmCol};
+  export const contentColSmForm = css`
+    ${contentColSm};
     gap: 30px;
   `
   
   
   
   export const Content = styled.div(content)
-  export const ContentSmCol = styled.div(contentSmCol)
-  export const ContentSmColForm = styled.form(contentSmColForm)
+  export const ContentColSm = styled.div(contentColSm)
+  export const ContentColSmForm = styled.form(contentColSmForm)
   
   
   

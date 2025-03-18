@@ -37,7 +37,7 @@ const uiVals = {
     'en-US': 'Write to Whatsapp',
     'ru-RU': 'Написать в Whatsapp',
   },
-  '2gis': {
+  doubleGis: {
     'en-US': '2GIS',
     'ru-RU': '2ГИС',
   },
@@ -69,7 +69,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
   const uiValues = useMemo(() => ({
     writeToTelegram: uiVals.writeToTelegram,
     writeToWhatsapp: uiVals.writeToWhatsapp,
-    '2gis': uiVals['2gis'],
+    doubleGis: uiVals.doubleGis,
     yandexMaps: uiVals.yandexMaps,
     location: uiVals.map,
   }), [])
@@ -130,7 +130,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
           if (c.type === 'telegram') return uiText.writeToTelegram
           if (c.type === 'whatsapp') return uiText.writeToWhatsapp
           if (c.type === 'email') return c.email
-          if (c.type === 'doubleGis') return uiText['2gis']
+          if (c.type === 'doubleGis') return uiText.doubleGis
           if (c.type === 'yandexMaps') return uiText.yandexMaps
           if (c.type === 'map') return uiText.location
           if (c.type === 'address') return c.text

@@ -79,7 +79,7 @@ const ApplicationSettingsPage = React.memo(() => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol>
+          <Pages.ContentColSm>
           
             <Hdrs.Page>{titleText.appSettings}</Hdrs.Page>
             
@@ -195,7 +195,7 @@ const ApplicationSettingsPage = React.memo(() => {
           
           
           
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         

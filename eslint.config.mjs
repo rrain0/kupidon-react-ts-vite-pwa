@@ -213,7 +213,7 @@ export default [
       '@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 5 }],
       '@stylistic/no-confusing-arrow': 'off',
       //'@stylistic/no-extra-parens': ['error'],
-      '@stylistic/no-extra-semi': 'error',
+      '@stylistic/no-extra-semi': 'off',
       '@stylistic/no-floating-decimal': 'error',
       //'@stylistic/no-mixed-operators': 'error',
       '@stylistic/no-mixed-spaces-and-tabs': 'error',

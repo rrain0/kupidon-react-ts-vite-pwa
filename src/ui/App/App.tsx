@@ -6,6 +6,7 @@ import {
 } from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
 import { WidgetStyle6NewTest } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTestNew.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
+import UseViewportContentSize from 'src/ui/App/UseViewportContentSize.tsx'
 import CheckBrowserMinimumVersion
   from 'src/ui/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
 import AppFrame from 'src/ui/App/AppFrame'
@@ -42,6 +43,9 @@ const App = React.memo(() => {
   
   return (
     <CheckBrowserMinimumVersion>
+      
+      <UseViewportContentSize />
+      
       {themeIsReady && (
         <ThemeProvider theme={theme.theme}>
           

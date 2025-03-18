@@ -46,7 +46,7 @@ export const DatePlaceNotFoundPage = React.memo(() => {
       
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol style={{ gap: 0, minHeight: '100%' }}>
+          <Pages.ContentColSm style={{ gap: 0, minHeight: '100%' }}>
             
             <Pages.PageHeaderWithLeftRight>
               <BackBtn />
@@ -72,7 +72,7 @@ export const DatePlaceNotFoundPage = React.memo(() => {
               </Link>
             </ButtonBox>
           
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

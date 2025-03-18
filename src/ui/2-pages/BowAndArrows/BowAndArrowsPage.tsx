@@ -44,7 +44,7 @@ const BowAndArrowsPage = React.memo(() => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol style={{ gap: 0 }}>
+          <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRight>
               <div css={{ width: 50, height: 50 }} />
@@ -80,7 +80,7 @@ const BowAndArrowsPage = React.memo(() => {
              
              <div style={{ height: 16 }} /> */}
           
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

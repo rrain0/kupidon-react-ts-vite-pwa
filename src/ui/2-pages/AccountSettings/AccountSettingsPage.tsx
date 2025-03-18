@@ -205,7 +205,7 @@ const AccountSettingsPage = React.memo(() => {
         
         
         <Pages.AddSafeInsets>
-          <Pages.ContentSmColForm onSubmit={formSubmitPreventDefault}>
+          <Pages.ContentColSmForm onSubmit={formSubmitPreventDefault}>
             
             <Hdrs.Page>{titleText.account}</Hdrs.Page>
             
@@ -300,7 +300,7 @@ const AccountSettingsPage = React.memo(() => {
               {actionText.deleteAccount}
             </Button>
           
-          </Pages.ContentSmColForm>
+          </Pages.ContentColSmForm>
         </Pages.AddSafeInsets>
         
         

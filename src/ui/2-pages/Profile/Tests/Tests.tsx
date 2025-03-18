@@ -109,7 +109,7 @@ const Tests = React.memo((props: TestsProps) => {
   return (
     <>
       <Pages.AddSafeInsets>
-        <Pages.ContentSmCol css={css`gap: 30px;`}>
+        <Pages.ContentColSm css={css`gap: 30px;`}>
           
           <ProfilePageTabHeader thisTabIdx={props.tabIdx} />
           
@@ -246,7 +246,7 @@ const Tests = React.memo((props: TestsProps) => {
             
           </div>
           
-        </Pages.ContentSmCol>
+        </Pages.ContentColSm>
       </Pages.AddSafeInsets>
       
       

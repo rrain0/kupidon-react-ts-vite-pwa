@@ -25,7 +25,7 @@ import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import col = EmotionCommon.col
 import abs = EmotionCommon.abs
-import abswh = EmotionCommon.abswh
+import abs = EmotionCommon.abs
 
 
 
@@ -83,7 +83,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
     
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentSmCol style={{ gap: 0 }}>
+          <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRight>
               <BackBtn />
@@ -175,7 +175,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
               
             </div>
           
-          </Pages.ContentSmCol>
+          </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
         <PageScrollbars />

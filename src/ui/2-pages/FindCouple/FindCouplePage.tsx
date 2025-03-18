@@ -12,13 +12,19 @@ const FindCouplePage = React.memo(() => {
   return (
     <>
       <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentSmCol>
+        
+        <div style={{ width: 200, height: 200, backgroundColor: 'green' }} />
+        
+        
+        {/* <Pages.AddSafeInsets>
+          <Pages.ContentColSm>
             
             <div>Здесь будут карточки людей.</div>
           
-          </Pages.ContentSmCol>
-        </Pages.AddSafeInsets>
+          </Pages.ContentColSm>
+        </Pages.AddSafeInsets> */}
+        
+        
         
         
         <PageScrollbars />
