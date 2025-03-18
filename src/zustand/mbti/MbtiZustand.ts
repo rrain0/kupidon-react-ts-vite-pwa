@@ -10,13 +10,13 @@ import Getter = TypeU.Getter
 
 
 
-const mbtiLsName = 'zustandMbti'
+const zustandLsName = 'zustandMbti'
 
 
 
 // To trigger Zustand update from Recoil to Zustand
-if (notExists(localStorage.getItem(mbtiLsName))) {
-  localStorage.setItem(mbtiLsName, JSON.stringify({ version: -1 }))
+if (notExists(localStorage.getItem(zustandLsName))) {
+  localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
 
@@ -110,7 +110,7 @@ export const useMbtiZustand = create<MbtiZustand>()(persist(
     getMbtiType: () => getMbtiComputed(get()).mbtiType,
   }),
   {
-    name: mbtiLsName,
+    name: zustandLsName,
     storage: createJSONStorage(() => localStorage),
     version: 0,
     

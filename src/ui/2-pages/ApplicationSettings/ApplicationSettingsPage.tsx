@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SettingsGroup } from 'src/ui/0-elements/basic-elements/SettingsGroup.tsx'
@@ -18,7 +17,6 @@ import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
-import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui-data/theme/ThemeCollection.ts'
@@ -32,6 +30,7 @@ import col = EmotionCommon.col
 import AddModuleIc = SvgIconsPack.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
 
 
 
@@ -39,7 +38,8 @@ import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 const ApplicationSettingsPage = React.memo(() => {
   const canInstall = useAppZustand(s => s.canInstall)
-  const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
+  const themeSettings = useThemeSettingsZustand()
+  const setThemeSettings = useThemeSettingsZustand.setState
   
   const actionText = useUiValues(ActionUiText)
   const titleText = useUiValues(TitleUiText)
@@ -108,10 +108,7 @@ const ApplicationSettingsPage = React.memo(() => {
                       value={opt.value}
                       key={opt.value}
                       onChange={ev => {
-                        setThemeSettings(s => ({
-                          ...s,
-                          light: opt.value,
-                        }))
+                        setThemeSettings({ light: opt.value })
                       }}
                     >
                       <SettingsOptions.Container>
@@ -138,10 +135,7 @@ const ApplicationSettingsPage = React.memo(() => {
                       value={opt.value}
                       key={opt.value}
                       onChange={ev => {
-                        setThemeSettings(s => ({
-                          ...s,
-                          dark: opt.value,
-                        }))
+                        setThemeSettings({ dark: opt.value })
                       }}
                     >
                       <SettingsOptions.Container>

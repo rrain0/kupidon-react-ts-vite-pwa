@@ -1,10 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
 import { themeByName } from 'src/ui-data/theme/ThemeCollection.ts'
 import { useBrowserMinimumVersion } from 'src/util/app/useBrowserMinimumVersion.ts'
 import { useThemeDetector } from 'src/util/theme/useThemeDetector.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
 
 
 
@@ -19,7 +18,7 @@ export const useThemeSetup = () => {
     feature: 'css color-scheme',
   })
   
-  const themeSettings = useRecoilValue(ThemeSettingsRecoil)
+  const themeSettings = useThemeSettingsZustand()
   const theme = useAppZustand(s => s.theme)
   const setApp = useAppZustand.setState
   

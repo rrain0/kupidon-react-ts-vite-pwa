@@ -1,6 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
-import { useRecoilState } from 'recoil'
-import { ThemeSettingsRecoil } from 'src/recoil/state/ThemeSettingsRecoil.ts'
+import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DayNightIc = SvgIconsPack.DayNightIc
@@ -11,6 +9,7 @@ import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
 import ThemeType = AppTheme.Type
 import { SettingsOptions } from './SettingsOptions'
 
@@ -18,7 +17,8 @@ import { SettingsOptions } from './SettingsOptions'
 
 
 const ThemeOptions = React.memo(() => {
-  const [themeSettings, setThemeSettings] = useRecoilState(ThemeSettingsRecoil)
+  const themeSettings = useThemeSettingsZustand()
+  const setThemeSettings = useThemeSettingsZustand.setState
   
   
   const titleText = useUiValues(TitleUiText)
@@ -44,13 +44,11 @@ const ThemeOptions = React.memo(() => {
     ] satisfies { value: ThemeType|'system', [prop: string]: any }[]
     return opts
   }, [titleText])
-  const themeOptionChecked = useCallback(
-    function (value: ThemeType|'system') {
-      return themeSettings.setting === 'system' && value === 'system'
-        || themeSettings.setting === 'manual' && value === themeSettings.manualSetting
-    },
-    [themeSettings]
-  )
+  
+  const themeOptionChecked = (value: ThemeType | 'system') => {
+    return themeSettings.setting === 'system' && value === 'system'
+      || themeSettings.setting === 'manual' && value === themeSettings.manualSetting
+  }
   
   
   return (
@@ -63,11 +61,10 @@ const ThemeOptions = React.memo(() => {
           value={opt.value}
           key={opt.value}
           onChange={ev => {
-            setThemeSettings(s => ({
-              ...s,
+            setThemeSettings({
               setting: opt.value === 'system' ? 'system' : 'manual',
-              manualSetting: opt.value === 'system' ? s.manualSetting : opt.value,
-            }))
+              ...opt.value !== 'system' && { manualSetting: opt.value },
+            })
           }}
         >
           <SettingsOptions.Container>
