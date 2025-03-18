@@ -8,13 +8,12 @@ import { useEvent } from '@util/react/useEvent.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useMemo, useState } from 'react'
 import { Link, Navigate, useSearchParams } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
-import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { MbtiUiText } from 'src/ui-data/translations/MbtiUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -24,6 +23,7 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
 import col = EmotionCommon.col
@@ -160,8 +160,11 @@ const MbtiTestingPage = React.memo(() => {
     }
   }, [mbtiUiText])
   
-  const [{ answers, totalCnt }, setMbti] = useRecoilState(MbtiRecoil)
-  const { testState, cntUnanswered } = useRecoilValue(MbtiRecoilComputed)
+  const setMbti = useMbtiZustand.setState
+  const answers = useMbtiZustand(s => s.answers)
+  const totalCnt = useMbtiZustand(s => s.totalCnt)
+  const testState = useMbtiZustand(s => s.getTestState())
+  const cntUnanswered = useMbtiZustand(s => s.getCntUnanswered())
   
   const [goBackAfterCompletion] = useState(testState !== 'completed')
   

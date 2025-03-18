@@ -2,13 +2,11 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { MbtiType } from 'src/api/model/MbtiType.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { MbtiRecoil, MbtiRecoilComputed } from 'src/recoil/state/MbtiRecoil.ts'
+import React, { useCallback, useMemo } from 'react'
 import { MbtiTypeData } from 'src/ui-data/special/mbti/MbtiTypeData.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
@@ -38,6 +36,7 @@ import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import pinkHeartWithExclamation from 'src/res/im/ic/pink-heart-with-exclamation.svg'
 import manWithHugeHeart from 'src/res/im/ic/man-with-huge-heart.svg'
+import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
 import colC = EmotionCommon.colC
 import flexC = WidgetStyleCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
@@ -66,8 +65,9 @@ export type TestsProps = {
 
 const Tests = React.memo((props: TestsProps) => {
   
-  const setMbti = useSetRecoilState(MbtiRecoil)
-  const { testState, mbtiType } = useRecoilValue(MbtiRecoilComputed)
+  const setMbti = useMbtiZustand.setState
+  const testState = useMbtiZustand(s => s.getTestState())
+  const mbtiType = useMbtiZustand(s => s.getMbtiType())
   const mbtiData = MbtiTypeData[mbtiType ?? 'INTP']
   
   
@@ -99,7 +99,7 @@ const Tests = React.memo((props: TestsProps) => {
   
   const resetMbtiTestDialog = useOverlayUrl(ResetMbtiTestOverlayName)
   const resetTestAndStartAgain = useCallback(() => {
-    setMbti(prev => ({ ...prev, answers: [] }))
+    setMbti({ answers: [] })
     resetMbtiTestDialog.closeWithAction(() => {
       navigate(RootRoute.test.mbti[fullAnySearchParams](searchParams))
     })

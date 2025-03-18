@@ -15,7 +15,7 @@ const mbtiLsName = 'zustandMbti'
 
 
 // To trigger Zustand update from Recoil to Zustand
-if (exists(localStorage.getItem(mbtiLsName))) {
+if (notExists(localStorage.getItem(mbtiLsName))) {
   localStorage.setItem(mbtiLsName, JSON.stringify({ version: -1 }))
 }
 
