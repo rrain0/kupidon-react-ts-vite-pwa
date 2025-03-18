@@ -13,16 +13,14 @@ const FindCouplePage = React.memo(() => {
     <>
       <Pages.PageGrad>
         
-        <div style={{ width: 200, height: 200, backgroundColor: 'green' }} />
         
-        
-        {/* <Pages.AddSafeInsets>
+        <Pages.AddSafeInsets>
           <Pages.ContentColSm>
             
             <div>Здесь будут карточки людей.</div>
           
           </Pages.ContentColSm>
-        </Pages.AddSafeInsets> */}
+        </Pages.AddSafeInsets>
         
         
         
