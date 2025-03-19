@@ -5,11 +5,11 @@ import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 
 export const PlaceholderUiText = {
   
-  loginEmail: {
+  loginAsEmail: {
     'en-US': 'login (email)',
     'ru-RU': 'логин (email)',
   },
-  matchedSystemLangs: {
+  emailAsLogin: {
     'en-US': 'email (login)',
     'ru-RU': 'email (логин)',
   },

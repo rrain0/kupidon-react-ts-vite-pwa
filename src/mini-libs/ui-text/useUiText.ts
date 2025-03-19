@@ -1,6 +1,4 @@
 import { useMemo } from 'react'
-import { useRecoilValue } from 'recoil'
-import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import {
   PickedUiValues,
@@ -9,6 +7,7 @@ import {
   UiValues,
   UiValuesArr,
 } from 'src/mini-libs/ui-text/UiText.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import ObjectMap = ObjectU.ObjectMap
 import ObjectEntries = ObjectU.ObjectEntries
 
@@ -61,7 +60,7 @@ export const pickUiValuesArr = <V extends UiValuesArr>(
 export const useUiValues = <V extends UiValues>(
   uiValues: V
 ): PickedUiValues<V> => {
-  const langs = useRecoilValue(LangRecoil).langs
+  const langs = useAppZustand(s => s.langs)
   const pickedUiValues = useMemo(() => pickUiValues(uiValues, langs), [uiValues, langs])
   return pickedUiValues
 }
@@ -71,7 +70,7 @@ export const useUiValues = <V extends UiValues>(
 export const useUiValuesArr = <V extends UiValuesArr>(
   uiValues: V
 ): PickedUiValuesArr<V> => {
-  const langs = useRecoilValue(LangRecoil).langs
+  const langs = useAppZustand(s => s.langs)
   const pickedUiValues = useMemo(() => pickUiValuesArr(uiValues, langs), [uiValues, langs])
   return pickedUiValues
 }

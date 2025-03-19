@@ -55,7 +55,7 @@ export namespace UserApi {
     gender: 'MALE' | 'FEMALE',
     birthDate: string, // '2005-11-10T00:00:00.000+08:00'
   }
-  export const create = async(user: UserToCreate, lang: string) =>
+  export const create = async(user: UserToCreate, lang: string[]) =>
     handleResponse<CreateSuccessData, CreateErrorData>(
       ax.post(r.userCreate, user, { params: { lang } })
     )

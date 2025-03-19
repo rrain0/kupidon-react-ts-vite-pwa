@@ -9,8 +9,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
-import { LangRecoil } from 'src/recoil/state/LangRecoil'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media'
+import { newDefaultMediaOperation } from 'src/ui-data/models/Media'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
@@ -48,6 +47,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { FileU } from 'src/util/file/FileU'
 import { Progress } from 'src/util/Progress'
 import { useTimeout } from 'src/util/react/useTimeout'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
@@ -67,7 +67,7 @@ import row = EmotionCommon.row
 // TODO показывать уведомление с кнопкой Retry, если ошибка загрузки данных
 
 const SummaryPage = React.memo(() => {
-  const lang = useRecoilValue(LangRecoil).langs[0]
+  const lang = useAppZustand(s => s.langs[0])
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   

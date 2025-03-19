@@ -6,9 +6,7 @@ import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
 
 
 
-const AutoLangSettings =
-React.memo(
-()=>{
+const AutoLangSettings = React.memo(() => {
   const langSettings = useRecoilValue(LangSettingsRecoil)
   //const lang = useRecoilValue(LangRecoil)
   
@@ -16,26 +14,25 @@ React.memo(
   const [open, setOpen] = useState(false)
   const [closeable, setCloseable] = useState(true)
   
-  useEffect(
-    ()=>{
-      if (langSettings.setting === 'manual' && !langSettings.manualSetting){
-        setCloseable(false)
-      }
-      else setCloseable(true)
-      
-      if (!open && langSettings.setting === 'manual' && !langSettings.manualSetting){
-        setOpen(true)
-      }
-    },
-    [open, langSettings.manualSetting, langSettings.setting]
+  useEffect(() => {
+    if (langSettings.setting === 'manual' && !langSettings.manualSetting) {
+      setCloseable(false)
+    }
+    else setCloseable(true)
+    
+    if (!open && langSettings.setting === 'manual' && !langSettings.manualSetting) {
+      setOpen(true)
+    }
+  }, [open, langSettings.manualSetting, langSettings.setting])
+  
+  
+  return (
+    <LangSettings
+      open={open}
+      setOpen={setOpen}
+      closeable={closeable}
+    />
   )
-  
-  
-  return <LangSettings
-    open={open}
-    setOpen={setOpen}
-    closeable={closeable}
-  />
 })
 export default AutoLangSettings
 

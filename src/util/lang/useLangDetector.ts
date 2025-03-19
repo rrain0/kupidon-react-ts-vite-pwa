@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import NonEmptyArr = ArrayU.NonEmptyArr
 
@@ -12,7 +12,7 @@ export const useLangDetector = (): NonEmptyArr<string> => {
   //const [browserLangs, setBrowserLangs] = useState(["ja-JP"])
   
   
-  useLayoutEffect(() => {
+  useEffect(() => {
     const onLangChange = () => setBrowserLangs(navigator.languages)
     //const onLangChange = () => setBrowserLangs(["ja-JP"])
     window.addEventListener('languagechange', onLangChange)

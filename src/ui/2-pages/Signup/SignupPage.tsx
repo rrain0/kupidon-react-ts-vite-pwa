@@ -15,11 +15,10 @@ import React, {
   useEffect,
   useMemo,
 } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
@@ -40,6 +39,7 @@ import { SignupPageValidation } from 'src/ui/2-pages/Signup/validation.ts'
 import FormValues = SignupPageValidation.FormValues
 import validators = SignupPageValidation.validators
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import full = RouteBuilder.full
@@ -59,7 +59,7 @@ const SignupPage = React.memo(() => {
   const navigate = useNavigate()
   
   const setAuth = useSetRecoilState(AuthRecoil)
-  const lang = useRecoilValue(LangRecoil)
+  const langs = useAppZustand(s => s.langs)
   
   
   const actionText = useUiValues(ActionUiText)
@@ -87,29 +87,25 @@ const SignupPage = React.memo(() => {
   } = useApiRequest({
     values: formValues,
     failedFields,
-    prepareAndRequest: useCallback(
-      (values: FormValues) => {
-        const birthDateTime = DateTime.from_yyyy_MM_dd(values.birthDate)!
-          .set({ timezone: DateTime.fromDate(new Date()).timezone })
-          .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
-        return UserApi.create({
-          email: values.email,
-          pwd: values.pwd,
-          name: values.name,
-          gender: values.gender as Gender,
-          birthDate: birthDateTime,
-        }, lang.langs[0])
-      },
-      [lang.langs]
-    ),
+    prepareAndRequest: useCallback((values: FormValues) => {
+      const birthDateTime = DateTime.from_yyyy_MM_dd(values.birthDate)!
+        .set({ timezone: DateTime.fromDate(new Date()).timezone })
+        .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
+      return UserApi.create({
+        email: values.email,
+        pwd: values.pwd,
+        name: values.name,
+        gender: values.gender as Gender,
+        birthDate: birthDateTime,
+      }, langs)
+    }, [langs]),
   })
   
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
       setAuth(response.data)
     }
-  },
-  [isSuccess, response, setAuth])
+  }, [isSuccess, response, setAuth])
   
   const {
     canSubmit, onFormSubmitCallback, submit,
@@ -198,7 +194,7 @@ const SignupPage = React.memo(() => {
               render={props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.matchedSystemLangs}
+                  placeholder={placeholderText.emailAsLogin}
                   {...props.inputProps}
                   hasError={props.highlight}
                 />

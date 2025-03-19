@@ -8,11 +8,11 @@ import NonEmptyArr = ArrayU.NonEmptyArr
 
 export type LangRecoilType = {
   langs: NonEmptyArr<Lang.Supported>
-  matchedSystemLangs: Lang.Supported[] | undefined
+  canUseSystemLang: boolean
 }
 const Default: LangRecoilType = {
   langs: [Lang.Default],
-  matchedSystemLangs: undefined,
+  canUseSystemLang: false,
 }
 export const LangRecoil = atom<LangRecoilType>({
   key: 'lang',

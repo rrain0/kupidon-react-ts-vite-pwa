@@ -1,6 +1,7 @@
 import Axios, { CreateAxiosDefaults } from 'axios'
 import axiosRetry from 'axios-retry'
 import { AxiosConfig } from 'src/api/AxiosConfig.ts'
+import commonAxiosConfig = AxiosConfig.commonAxiosConfig
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Callback1 = TypeU.Callback1
 import exists = TypeU.exists
@@ -57,7 +58,7 @@ export namespace FileU {
       abortCtrl?: AbortController
     }
   ): Promise<Blob> => {
-    const config: CreateAxiosDefaults = {
+    const config: CreateAxiosDefaults = { ...commonAxiosConfig,
       responseType: 'blob',
       onDownloadProgress: progressEvent => {
         const p = progressEvent.progress

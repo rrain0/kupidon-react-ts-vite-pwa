@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { LangRecoil } from 'src/recoil/state/LangRecoil.ts'
+import { useRecoilState } from 'recoil'
 import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { CountryFlag } from 'src/ui-data/translations/CountryFlag.ts'
@@ -10,51 +9,46 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import BrowserIc = SvgIconsPack.PlanetFrameIc
 import { SettingsOptions } from './SettingsOptions'
 
 
 
+type LangSupportedOrSystem = Lang.Supported | 'system'
+
 const LangOptions = React.memo(() => {
   
-  const lang = useRecoilValue(LangRecoil)
+  const canUseSystemLang = useAppZustand(s => s.canUseSystemLang)
   const [langSettings, setLangSettings] = useRecoilState(LangSettingsRecoil)
   
   
   const titleText = useUiValues(TitleUiText)
   
   
-  const languageOptions = useMemo(
-    () => {
-      let opts = [
-        {
-          value: 'system',
-          text: titleText.systemLanguage,
-          icon: <BrowserIc css={SettingsOptions.icon} />,
-        },
-        {
-          value: 'ru-RU',
-          text: titleText.russian,
-          icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']} />,
-        },
-        {
-          value: 'en-US',
-          text: titleText.english,
-          icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']} />,
-        },
-      ] satisfies { value: Lang.Supported|'system', [prop: string]: any }[]
-      if (!lang.matchedSystemLangs?.length) opts = opts.filter(it => it.value!=='system')
-      return opts
-    },
-    [titleText, lang.matchedSystemLangs]
-  )
-  const isLanguageOptionChecked = useCallback(
-    function (value: Lang.Supported|'system') {
-      return langSettings.setting === 'system' && value === 'system'
-        || langSettings.setting === 'manual' && value === langSettings.manualSetting?.[0]
-    },
-    [langSettings]
-  )
+  const languageOptions = useMemo(() => {
+    return [
+      ...canUseSystemLang ? [{
+        value: 'system',
+        text: titleText.systemLanguage,
+        icon: <BrowserIc css={SettingsOptions.icon} />,
+      }] as const : [],
+      {
+        value: 'ru-RU',
+        text: titleText.russian,
+        icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']} />,
+      },
+      {
+        value: 'en-US',
+        text: titleText.english,
+        icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']} />,
+      },
+    ] satisfies { value: LangSupportedOrSystem, [prop: string]: any }[]
+  }, [titleText, canUseSystemLang])
+  const isLanguageOptionChecked = useCallback((value: LangSupportedOrSystem) => {
+    return langSettings.setting === 'system' && value === 'system'
+      || langSettings.setting === 'manual' && value === langSettings.manualSetting?.[0]
+  }, [langSettings])
   
   
   return (

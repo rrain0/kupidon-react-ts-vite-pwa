@@ -1,13 +1,13 @@
 import Axios, {
   AxiosError, AxiosHeaders,
   AxiosRequestConfig,
-  AxiosResponse,
+  AxiosResponse, CreateAxiosDefaults,
   InternalAxiosRequestConfig,
 } from 'axios'
 import axiosRetry, { IAxiosRetryConfig } from 'axios-retry'
 import { ApiRoutes } from 'src/api/ApiRoutes'
 import * as jose from 'jose'
-import { getRecoil, setRecoil, resetRecoil, getRecoilPromise } from "recoil-nexus"
+import { getRecoil, setRecoil, resetRecoil, getRecoilPromise } from 'recoil-nexus'
 import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
 import { TypeU } from '@util/common/TypeU.ts'
 import ValueOrMapper = TypeU.ValueOrMapper
@@ -18,6 +18,9 @@ import ValueOrMapper = TypeU.ValueOrMapper
 export namespace AxiosConfig {
   
   
+  export const commonAxiosConfig: CreateAxiosDefaults = {
+    paramsSerializer: { indexes: null },
+  }
   export const commonAxiosRetryConfig: IAxiosRetryConfig = {
     retries: 2,
     retryDelay: (retryCount, error) => 500,
@@ -29,7 +32,7 @@ export namespace AxiosConfig {
      }, */
   }
   
-  export const ax = Axios.create({
+  export const ax = Axios.create({ ...commonAxiosConfig,
     /* `validateStatus` defines whether to resolve or reject the promise for a given
      * HTTP response status code. If `validateStatus` returns `true` (or is set to `null`
      * or `undefined`), the promise will be resolved; otherwise, the promise will be rejected.
@@ -42,7 +45,7 @@ export namespace AxiosConfig {
   })
   axiosRetry(ax, commonAxiosRetryConfig)
   
-  export const axAccess = Axios.create({
+  export const axAccess = Axios.create({ ...commonAxiosConfig,
     baseURL: ApiRoutes.apiV1,
     withCredentials: true,
   })
@@ -66,7 +69,7 @@ export namespace AxiosConfig {
   
   
   export interface ErrorResponse {
-    status: 400|401
+    status: 400 | 401
     data: {
       code: string
       msg: string
@@ -77,14 +80,15 @@ export namespace AxiosConfig {
   export interface AccessRespE extends ErrorResponse {
     status: 401,
     data: {
-      code: "NO_AUTHORIZATION_HEADER"
-        |"AUTHORIZATION_HEADER_WRONG_FORMAT"
-        |"EMPTY_TOKEN"
-        |"TOKEN_ALGORITHM_MISMATCH"
-        |"TOKEN_DAMAGED"
-        |"TOKEN_MODIFIED"
-        |"TOKEN_EXPIRED"
-        |"UNKNOWN_VERIFICATION_ERROR"
+      code: 
+        | 'NO_AUTHORIZATION_HEADER'
+        | 'AUTHORIZATION_HEADER_WRONG_FORMAT'
+        | 'EMPTY_TOKEN'
+        | 'TOKEN_ALGORITHM_MISMATCH'
+        | 'TOKEN_DAMAGED'
+        | 'TOKEN_MODIFIED'
+        | 'TOKEN_EXPIRED'
+        | 'UNKNOWN_VERIFICATION_ERROR'
       msg: string
     }
   }

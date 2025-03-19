@@ -17,7 +17,7 @@ const langSettingsLocalStorageName = 'langSettings'
   
   /** @type {(systemLangs: string[]) => Lang.Supported[]} */
   const getMatchedLangs = (systemLangs) => {
-    let matchedLangs = systemLangs
+    let matchedSystemLangs = systemLangs
       .map(it => {
         let mapped = Lang.Map[it]
         if (mapped) return mapped
@@ -26,7 +26,7 @@ const langSettingsLocalStorageName = 'langSettings'
         return it
       })
       .filter(it => Lang.AllSupported.includes(it))
-    return matchedLangs
+    return matchedSystemLangs
   }
   
   ;(() => {
@@ -35,14 +35,13 @@ const langSettingsLocalStorageName = 'langSettings'
         setting: 'system',
         manualSetting: undefined,
       }
-    const lang = {
-      matchedSystemLangs: getMatchedLangs(navigator.languages),
-    }
+    const matchedSystemLangs = getMatchedLangs(navigator.languages)
     
     if (langSettings.setting === 'system') {
-      const matched = lang.matchedSystemLangs
-      // eslint-disable-next-line no-undef
-      if (matched?.length) applyLangToHtml([...matched, Lang.Default])
+      if (matchedSystemLangs?.length) {
+        // eslint-disable-next-line no-undef
+        applyLangToHtml([...matchedSystemLangs, Lang.Default])
+      }
       // eslint-disable-next-line no-undef
       else applyLangToHtml([Lang.Default])
     }

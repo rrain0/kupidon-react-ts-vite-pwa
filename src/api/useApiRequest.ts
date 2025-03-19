@@ -23,14 +23,18 @@ export type ResponseData
 }
 
 export type UseApiRequestProps<
-  Vs extends Values, D, E extends ResponseError
+  Vs extends Values,
+  D,
+  E extends ResponseError,
 > = {
   values: Vs
   failedFields: (keyof Vs)[]
   prepareAndRequest: (values: Vs, failedFields: (keyof Vs)[]) => Promise<ApiResponse<D, E>>
 }
 export const useApiRequest = <
-  Vs extends Values, D, E extends ResponseError
+  Vs extends Values,
+  D,
+  E extends ResponseError,
 >(
   props: UseApiRequestProps<Vs, D, E>
 ) => {

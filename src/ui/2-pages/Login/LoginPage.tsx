@@ -149,7 +149,7 @@ const LoginPage = React.memo(() => {
               render={props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.loginEmail}
+                  placeholder={placeholderText.loginAsEmail}
                   {...props.inputProps}
                   hasError={props.highlight}
                 />

@@ -18,7 +18,7 @@ const applyLangToHtml = (matchedLangs) => {
   
   /**
    * @type {{
-   *  nodeEnv: 'development'|'production',
+   *  nodeEnv: 'development' | 'production',
    *  publicUrl: string,
    *  description: string,
    *  lang: string,
