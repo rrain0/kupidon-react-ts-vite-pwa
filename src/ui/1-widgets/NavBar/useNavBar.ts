@@ -3,7 +3,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/ui/1-widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/ui/1-widgets/NavBar/navStack.ts'
-import { NavBarStore, useZustand } from 'src/zustand/app/NavBarStore.ts'
+import { NavBarStore, useNavBarZustand } from 'src/zustand/app/NavBarZustand.ts'
 import Puro = TypeU.Puro
 
 
@@ -17,7 +17,7 @@ export type UseNavBarProps = Puro<{
 export const useNavBar = (props?: UseNavBarProps) => {
   //const [isPending, startTransition] = useTransition()
   
-  const setNavBar = useZustand(s => s.setNavBar)
+  const setNavBar = useNavBarZustand(s => s.setNavBar)
   
   const navState = useMemo(() => {
     let navState: NavBarStore

@@ -21,11 +21,11 @@ export const createNavBarZustandSlice: StateCreator<NavBarZustandSlice> = set =>
 
 
 
-export type ZustandStore = NavBarZustandSlice
+export type NavBarZustandStore = NavBarZustandSlice
 
 
 
-export const useZustand = create<ZustandStore>()((set, get, store) => ({
+export const useNavBarZustand = create<NavBarZustandStore>()((set, get, store) => ({
   ...createNavBarZustandSlice(set, get, store),
   
   // count: 1,

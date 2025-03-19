@@ -14,7 +14,7 @@ import { resettableLocalStorageEffect } from '../RecoilPersist'
   user: получается вместе начальным получением accessToken (вход, регистрация).
     Если есть accessToken, значит и user тоже не null.
 */
-export type AuthStateType = undefined|{
+export type AuthStateType = undefined | {
   accessToken: string,
   user: CurrentUser,
 }

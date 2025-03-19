@@ -1,12 +1,7 @@
 import { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
-import {
-  BrowserMinimumVersionRecoil,
-} from 'src/recoil/state/BrowserMinimumVersionRecoil.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
-import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { Utils } from 'src/util/common/Utils.ts'
-import destructCopyBy = ObjectU.destructCopyBy
+import { useBrowserMinimumVersionZustand } from 'src/zustand/app/BrowserMinimumVersionZustand.ts'
 import versionToNumArr = Utils.versionToNumArr
 
 
@@ -28,7 +23,7 @@ export type BrowserFeatures = {
 }
 
 
-export const useBrowserMinimumVersion = (minimumVersions: BrowserVersions & { feature: string })=>{
+export const useBrowserMinimumVersion = (minimumVersions: BrowserVersions & { feature: string }) => {
   const {
     chromeDesktopVersion,
     chromeAndroidVersion,
@@ -38,30 +33,31 @@ export const useBrowserMinimumVersion = (minimumVersions: BrowserVersions & { fe
     feature,
   } = minimumVersions
   
-  const [state, set] = useRecoilState(BrowserMinimumVersionRecoil)
+  const state = useBrowserMinimumVersionZustand()
+  const set = useBrowserMinimumVersionZustand.setState
   
-  useEffect(()=>{
+  useEffect(() => {
     if (ArrayU.isGreater(versionToNumArr(chromeDesktopVersion), versionToNumArr(state.chromeDesktopVersion)))
-      set(destructCopyBy({ chromeDesktopVersion, chromeDesktopFeature: feature }))
+      set({ chromeDesktopVersion, chromeDesktopFeature: feature })
   }, [chromeDesktopVersion, feature])
   
-  useEffect(()=>{
+  useEffect(() => {
     if (ArrayU.isGreater(versionToNumArr(chromeAndroidVersion), versionToNumArr(state.chromeAndroidVersion)))
-      set(destructCopyBy({ chromeAndroidVersion, chromeAndroidFeature: feature }))
+      set({ chromeAndroidVersion, chromeAndroidFeature: feature })
   }, [chromeAndroidVersion, feature])
   
-  useEffect(()=>{
+  useEffect(() => {
     if (ArrayU.isGreater(versionToNumArr(safariDesktopVersion), versionToNumArr(state.safariDesktopVersion)))
-      set(destructCopyBy({ safariDesktopVersion, safariDesktopFeature: feature }))
+      set({ safariDesktopVersion, safariDesktopFeature: feature })
   }, [safariDesktopVersion, feature])
   
-  useEffect(()=>{
+  useEffect(() => {
     if (ArrayU.isGreater(versionToNumArr(safariIosVersion), versionToNumArr(state.safariIosVersion)))
-      set(destructCopyBy({ safariIosVersion, safariIosFeature: feature }))
+      set({ safariIosVersion, safariIosFeature: feature })
   }, [safariIosVersion, feature])
   
-  useEffect(()=>{
+  useEffect(() => {
     if (ArrayU.isGreater(versionToNumArr(edgeDesktopVersion), versionToNumArr(state.edgeDesktopVersion)))
-      set(destructCopyBy({ edgeDesktopVersion, edgeDesktopFeature: feature }))
+      set({ edgeDesktopVersion, edgeDesktopFeature: feature })
   }, [edgeDesktopVersion, feature])
 }
