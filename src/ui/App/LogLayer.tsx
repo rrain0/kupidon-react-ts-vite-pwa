@@ -2,19 +2,9 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import { create } from 'zustand'
+import { useLogLayerZustand } from 'src/ui/App/LogLayerZustand.ts'
 import col = EmotionCommon.col
 
-
-
-
-export type LogLayerZustand = string[]
-export const useLogLayerZustand = create<LogLayerZustand>(() => [])
-
-
-// HOW TO USE
-// const setLogData = useSetRecoilState(LogLayerRecoil)
-// setLogData(prev => [...prev, 'DATA TO LOG'])
 
 
 const LogLayer = React.memo(() => {
