@@ -5,10 +5,9 @@ import {
   RouteObject,
   useSearchParams,
 } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
@@ -24,7 +23,7 @@ const MbtiPage = React.lazy(
 
 const RouteTestMbti = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const authUserId = useRecoilValue(AuthRecoil)?.user.id
+  const authUserId = useAuthZustand(s => s?.user.id)
   
   if (!authUserId) return (
     <Navigate
@@ -59,7 +58,7 @@ export const routingTestMbti: RouteObject[] = [
 
 const RouteTest = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const authUserId = useRecoilValue(AuthRecoil)?.user.id
+  const authUserId = useAuthZustand(s => s?.user.id)
   
   if (!authUserId) return (
     <Navigate

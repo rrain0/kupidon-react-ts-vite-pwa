@@ -2,7 +2,6 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
@@ -11,7 +10,6 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -32,6 +30,7 @@ import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import Callback = TypeU.Callback
 
 
@@ -46,7 +45,7 @@ export type SettingsProps = {
 const QuickSettings = React.memo((props: SettingsProps) => {
   const { isOpen, close } = props
   
-  const auth = useRecoilValue(AuthRecoil)
+  const auth = useAuthZustand()
   const canInstall = useAppZustand(s => s.canInstall)
   const setApp = useAppZustand.setState
   

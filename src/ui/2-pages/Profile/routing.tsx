@@ -6,10 +6,9 @@ import {
   useMatch,
   useSearchParams,
 } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
@@ -24,7 +23,7 @@ const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.
 
 const RouteProfileIdUserIdTab = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const auth = useRecoilValue(AuthRecoil)
+  const auth = useAuthZustand()
   const authId = auth?.user.id
   const tabRoute = RootRoute.profile.id.userId[use](':userId').profile[use](':tab')
   const params = useMatch(tabRoute[full]()+'/*')?.params
@@ -103,7 +102,7 @@ const routingProfileIdUserId: RouteObject[] = [
 
 const RouteProfileId = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const auth = useRecoilValue(AuthRecoil)
+  const auth = useAuthZustand()
   const authId = auth?.user.id
   
   if (!authId) return (

@@ -7,13 +7,13 @@ import {
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
-import { AuthStateType } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { DateTime } from 'src/util/DateTime.ts'
 import { RangeU } from 'src/util/common/RangeU'
+import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import * as uuid from 'uuid'
 import throttle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
@@ -105,7 +105,7 @@ export const profileUpdateApiRequest = (
   values: FormValues,
   failedFields: (keyof FormValues)[],
   setFormValues: SetterOrUpdater<FormValues>,
-  setAuth: SetterOrUpdater<AuthStateType>
+  setAuth: SetterOrUpdater<AuthZustand>
 ) => {
   const userToUpdate: UserToUpdate = {}
   let addPhotos = [] as AddProfilePhoto[]

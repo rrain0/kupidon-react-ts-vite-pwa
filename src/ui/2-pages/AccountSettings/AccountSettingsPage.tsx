@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilState, useResetRecoilState } from 'recoil'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
@@ -14,7 +13,6 @@ import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { AccountSettingsPageValidation } from 'src/ui/2-pages/AccountSettings/validation'
-import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
 import { ObjectU } from 'src/util/common/ObjectU'
 import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures'
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit'
@@ -27,6 +25,7 @@ import DataField from 'src/ui/0-elements/DataField/DataField'
 import { DataFieldStyle } from 'src/ui/0-elements/DataField/DataFieldStyle'
 import Input from 'src/ui/0-elements/inputs/Input/Input'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
+import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues
@@ -47,8 +46,8 @@ const AccountSettingsPage = React.memo(() => {
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
-  const [auth, setAuth] = useRecoilState(AuthRecoil)
-  const resetAuth = useResetRecoilState(AuthRecoil)
+  const auth = useAuthZustand()
+  const setAuth = useAuthZustand.setState
   
   
   const fetchUser = async() => {
@@ -129,7 +128,7 @@ const AccountSettingsPage = React.memo(() => {
       .some(f => f.type === 'initial' && f.errorFields.includes(field))
   }, [failures])
   
-  const updateValues = (auth: AuthStateType) => {
+  const updateValues = (auth: AuthZustand) => {
     setFormValues(s => {
       const u = auth!.user
       const newValues = { ...s, initialValues: { ...s.initialValues } }
@@ -288,7 +287,7 @@ const AccountSettingsPage = React.memo(() => {
             </Link>
             
             <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
-              onClick={resetAuth}
+              onClick={() => setAuth(undefined)}
             >
               {actionText.logOutFromAccount}
             </Button>

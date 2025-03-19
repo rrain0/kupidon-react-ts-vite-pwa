@@ -6,9 +6,6 @@ import 'src/ui-data/style/setup/app-styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'animate.css'
 import App from 'src/ui/App/App'
-import { RecoilRoot } from 'recoil'
-// access recoil state outside a React component
-import RecoilNexus from 'recoil-nexus'
 
 
 // TODO костыль // TODO Pointer // todo hack fix
@@ -27,10 +24,7 @@ window.addEventListener('pointerup', function(ev) {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RecoilRoot>
-      <RecoilNexus />
-      <App />
-    </RecoilRoot>
+    <App />
   </React.StrictMode>
 )
 

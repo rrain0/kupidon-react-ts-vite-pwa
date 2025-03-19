@@ -1,10 +1,9 @@
 import React, { Suspense } from 'react'
-import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -19,7 +18,7 @@ const FindCouplePage = React.lazy(
 const RouteFindCouple = React.memo(() => {
   
   const [searchParams] = useSearchParams()
-  const auth = useRecoilValue(AuthRecoil)
+  const auth = useAuthZustand()
   
   if (!auth) return (
     <Navigate

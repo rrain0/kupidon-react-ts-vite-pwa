@@ -1,7 +1,7 @@
-import React, { useEffect, useInsertionEffect } from 'react'
+import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
-import { atom, useRecoilState, useRecoilValue } from 'recoil'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import { create } from 'zustand'
 
 
 
@@ -15,16 +15,15 @@ because of state provided via Recoil.
 
 
 
-type StateTestPageRecoilType = string
-const StateTestPageRecoil = atom<StateTestPageRecoilType>({
-  key: 'StateTestPage',
-  default: '',
-})
+type StateTestPageZustand = string
+const useStateTestPageZustand = create<StateTestPageZustand>(() => '')
+
 
 
 
 const InputComponent = React.memo(() => {
-  const [state, setState] = useRecoilState(StateTestPageRecoil)
+  const state = useStateTestPageZustand()
+  const setState = useStateTestPageZustand.setState
   return (
     <input
       css={css`color: black;`}
@@ -35,7 +34,7 @@ const InputComponent = React.memo(() => {
 })
 
 const ViewComponent = React.memo(() => {
-  const state = useRecoilValue(StateTestPageRecoil)
+  const state = useStateTestPageZustand()
   return <div>{state}</div>
 })
 

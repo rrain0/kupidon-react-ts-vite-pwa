@@ -1,18 +1,15 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { atom, useRecoilValue } from 'recoil'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { create } from 'zustand'
 import col = EmotionCommon.col
 
 
 
 
-export type LogLayerRecoilType = string[]
-export const LogLayerRecoil = atom<LogLayerRecoilType>({
-  key: 'logLayer',
-  default: [],
-})
+export type LogLayerZustand = string[]
+export const useLogLayerZustand = create<LogLayerZustand>(() => [])
 
 
 // HOW TO USE
@@ -21,7 +18,7 @@ export const LogLayerRecoil = atom<LogLayerRecoilType>({
 
 
 const LogLayer = React.memo(() => {
-  const logData = useRecoilValue(LogLayerRecoil)
+  const logData = useLogLayerZustand()
   
   if (logData.length) return (
     <Frame>

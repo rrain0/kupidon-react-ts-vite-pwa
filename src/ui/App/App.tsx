@@ -33,6 +33,7 @@ WidgetStyle6NewTest.testTransformSimple()
 
 
 const App = React.memo(() => {
+  
   useAppInstallationSetup()
   useLangSetup()
   const themeIsReady = useThemeSetup()

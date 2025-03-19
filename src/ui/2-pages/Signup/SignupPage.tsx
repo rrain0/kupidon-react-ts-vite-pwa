@@ -15,8 +15,6 @@ import React, {
   useEffect,
   useMemo,
 } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DateTime } from '@util/DateTime.ts'
@@ -40,6 +38,7 @@ import FormValues = SignupPageValidation.FormValues
 import validators = SignupPageValidation.validators
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import full = RouteBuilder.full
@@ -58,7 +57,7 @@ const SignupPage = React.memo(() => {
   const returnPath = searchParams.get(RootRoute.signup[params].returnPath) ?? undefined
   const navigate = useNavigate()
   
-  const setAuth = useSetRecoilState(AuthRecoil)
+  const setAuth = useAuthZustand.setState
   const langs = useAppZustand(s => s.langs)
   
   

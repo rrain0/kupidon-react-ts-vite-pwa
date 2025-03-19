@@ -16,7 +16,6 @@ import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import Preview from 'src/ui/2-pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/ui/2-pages/Profile/Profile/Profile.tsx'
-import { useRecoilState, useRecoilValue } from 'recoil'
 import { RangeU } from 'src/util/common/RangeU'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import {
@@ -27,7 +26,6 @@ import {
   ProfilePhoto,
 } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -45,6 +43,7 @@ import Tab from 'src/ui/components/Tabs/Tab.tsx'
 import Tabs from 'src/ui/components/Tabs/Tabs.tsx'
 import { TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import UseTabsState from 'src/ui/components/Tabs/UseTabsState.tsx'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import safePageContentPaddings = Pages.pageAddSafeInsets
 import fill = EmotionCommon.fill
 import blobToDataUrl = FileU.blobToDataUrl
@@ -63,7 +62,8 @@ import arr = ArrayU.arrOfIndices
 
 
 const ProfilePage = React.memo(() => {
-  const [auth, setAuth] = useRecoilState(AuthRecoil)
+  const auth = useAuthZustand()
+  const setAuth = useAuthZustand.setState
   
   
   

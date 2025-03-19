@@ -7,9 +7,8 @@ import Axios, {
 import axiosRetry, { IAxiosRetryConfig } from 'axios-retry'
 import { ApiRoutes } from 'src/api/ApiRoutes'
 import * as jose from 'jose'
-import { getRecoil, setRecoil, resetRecoil, getRecoilPromise } from 'recoil-nexus'
-import { AuthRecoil, AuthStateType } from 'src/recoil/state/AuthRecoil'
 import { TypeU } from '@util/common/TypeU.ts'
+import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import ValueOrMapper = TypeU.ValueOrMapper
 
 
@@ -109,18 +108,19 @@ export namespace AxiosConfig {
   export interface RefreshTokenRespE extends ErrorResponse {
     status: 400,
     data: {
-      code: "NO_REFRESH_TOKEN_COOKIE"
-        |"TOKEN_ALGORITHM_MISMATCH"
-        |"TOKEN_DAMAGED"
-        |"TOKEN_MODIFIED"
-        |"TOKEN_EXPIRED"
-        |"UNKNOWN_VERIFICATION_ERROR"
+      code:
+        | 'NO_REFRESH_TOKEN_COOKIE'
+        | 'TOKEN_ALGORITHM_MISMATCH'
+        | 'TOKEN_DAMAGED'
+        | 'TOKEN_MODIFIED'
+        | 'TOKEN_EXPIRED'
+        | 'UNKNOWN_VERIFICATION_ERROR'
       msg: string
     }
   }
-  export const refreshToken =
-  async(originalRequestConfig?: InternalAxiosRequestConfig)
-  : Promise<RefreshTokenRespS> => {
+  export const refreshToken = async(
+    originalRequestConfig?: InternalAxiosRequestConfig
+  ): Promise<RefreshTokenRespS> => {
     const configWithCustomData: AxiosRequestConfig & CustomConfig = {
       customData: {
         state: 'refresh-request',
@@ -137,7 +137,7 @@ export namespace AxiosConfig {
       withCredentials: true,
       headers: {
         Authorization: 'Bearer 1',
-      }
+      },
     })
   }
   
@@ -148,20 +148,20 @@ export namespace AxiosConfig {
   
   
   
-  const removeAuthData = ()=>{
+  const removeAuthData = () => {
     //localStorage.removeItem('token')
     //reduxStore.dispatch(authSlice.actions.logout())
     //reduxStore.dispatch(userActions.setUser(null))
-    resetRecoil(AuthRecoil)
+    useAuthZustand.setState(undefined)
   }
-  const setAuthData = (valOrUpdater: ValueOrMapper<AuthStateType>) => {
+  const setAuthData = (valOrUpdater: ValueOrMapper<AuthZustand>) => {
     //localStorage.setItem('token', authData.accessJwt)
     //reduxStore.dispatch(refreshAccessToken({ access_token: accessToken }))
-    setRecoil(AuthRecoil, valOrUpdater)
+    useAuthZustand.setState(valOrUpdater)
   }
-  const getAuthData = ()=>{
+  const getAuthData = () => {
     // return reduxStore.getState().authReducer.access_token
-    return getRecoil(AuthRecoil)?.accessToken
+    return useAuthZustand.getState()?.accessToken
   }
   
   
@@ -182,10 +182,10 @@ export namespace AxiosConfig {
   const checkAccessToken = (
     accessToken: undefined|string,
     config: InternalAxiosRequestConfig<any>
-  )=>{
+  ) => {
     const conf = config as typeof config & CustomConfig
     let data: undefined | { code: string, msg: string }
-    if (!accessToken){
+    if (!accessToken) {
       data = {
         code: 'NO_TOKEN',
         msg: 'Token is not present',
@@ -199,31 +199,31 @@ export namespace AxiosConfig {
             msg: 'Token is not present',
           }
         }
-      } catch (e){
-        console.log("some error")
+      } catch (e) {
+        console.log('some error')
         data = {
           code: 'TOKEN_DAMAGED',
           msg: 'Token is damaged - failed to decode JSON token data',
         }
       }
     }
-    if (data){
-      const d = {...data}
+    if (data) {
+      const d = { ...data }
       // Адаптер, который генерирует ответ-ошибку без самого фактического запроса к серверу.
       // Он потом убирается в повторном запросе с обновлёнными токенами.
-      config.adapter = function (config){
+      config.adapter = function (config) {
         const headers = new AxiosHeaders({ 'content-type': 'application/json; charset=utf-8' })
         return Promise.reject(new AxiosError(
           d.msg,
-          "ERR_BAD_REQUEST",
+          'ERR_BAD_REQUEST',
           config,
-          {},
+          { },
           {
             status: 401,
             statusText: 'Unauthorized',
             headers,
             config: { headers },
-            data: d
+            data: d,
           }
         ))
       }
@@ -236,10 +236,10 @@ export namespace AxiosConfig {
   axAccess.interceptors.request.use((config) => {
     const accessToken = getAuthData()
     
-    switch ((config as typeof config & CustomConfig).customData?.state){
+    switch ((config as typeof config & CustomConfig).customData?.state) {
       case undefined:
         config.headers.Authorization = `Bearer ${accessToken}`
-        checkAccessToken(accessToken,config)
+        checkAccessToken(accessToken, config)
         break
       case 'refresh-request':
         break
@@ -249,7 +249,7 @@ export namespace AxiosConfig {
         break
     }
     
-    return config;
+    return config
   })
 
 
@@ -260,17 +260,17 @@ export namespace AxiosConfig {
     response => {
       const config = response.config as typeof response.config & CustomConfig
 
-      if (config.customData?.state === 'refresh-request'){
+      if (config.customData?.state === 'refresh-request') {
         const d = response.data as AuthRespData
         
         // Сохранение нового access token, refresh token автоматически сохраняется в куках
-        setAuthData(s=>({ accessToken: d.accessToken, user: s!.user }))
+        setAuthData(s => ({ accessToken: d.accessToken, user: s!.user }))
 
         // Если был сохранённый оригинальный запрос, то повторяем его
         const orig = config.customData?.originalRequestConfig
-        if (orig){
+        if (orig) {
           orig.customData = {
-            state: 'original-request-retry'
+            state: 'original-request-retry',
           }
           // Повторяем оригинальный запрос с обновлёнными токенами.
           // Access-token добавится в другом перехватчике. Refresh-token отправляется автоматически как кука.
@@ -283,8 +283,8 @@ export namespace AxiosConfig {
     
     // Перехватчик ловит ошибку 401 при первом запросе и делает refresh запрос.
     // Так же он разлогинивает пользователя при ошибке refresh запроса.
-    async (error: Error|AxiosError) => {
-      if (Axios.isAxiosError(error) && error.config && error.response){
+    async (error: Error | AxiosError) => {
+      if (Axios.isAxiosError(error) && error.config && error.response) {
         
         // Ошибка соединения с сервером - не пробуем снова делать запрос
         // Просто прокидываем, чтобы показать пользователю, что ошибка соединения.
@@ -304,9 +304,9 @@ export namespace AxiosConfig {
           return await refreshToken(orig)
         }
         // Случай, когда сервер отказался выдавать токены при запросе на их обновление
-        else if (orig.customData?.state === 'refresh-request'){
+        else if (orig.customData?.state === 'refresh-request') {
           // Разлогиниваемся
-          if (error.response.status === 400){
+          if (error.response.status === 400) {
             // если на запрос обновления токена получена ошибка, значит токены для обновления не валидны
             removeAuthData()
           }

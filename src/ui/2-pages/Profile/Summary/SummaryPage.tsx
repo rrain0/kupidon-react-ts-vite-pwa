@@ -4,11 +4,9 @@ import { useNext } from '@util/react-state/useNext.ts'
 import { useInterval } from '@util/react/useInterval.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { newDefaultMediaOperation } from 'src/ui-data/models/Media'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
@@ -48,6 +46,7 @@ import { FileU } from 'src/util/file/FileU'
 import { Progress } from 'src/util/Progress'
 import { useTimeout } from 'src/util/react/useTimeout'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
@@ -71,8 +70,7 @@ const SummaryPage = React.memo(() => {
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
-  const auth = useRecoilValue(AuthRecoil)!
-  const { id, name, birthDate, photos } = auth.user
+  const { id, name, birthDate, photos } = useAuthZustand(s => s!.user)
   
   const profile = MockData.profile2
   const progress = 45

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
 import { AuthApi } from 'src/api/requests/AuthApi'
-import { useSetRecoilState } from 'recoil'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -12,7 +11,6 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
-import { AuthRecoil } from 'src/recoil/state/AuthRecoil'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures'
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit'
@@ -24,6 +22,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import { LoginPageValidation } from './validation'
 import FormValues = LoginPageValidation.FormValues
 import validators = LoginPageValidation.validators
@@ -45,7 +44,7 @@ const LoginPage = React.memo(() => {
   const returnPath = searchParams.get(RootRoute.login[params].returnPath) ?? undefined
   const navigate = useNavigate()
   
-  const setAuth = useSetRecoilState(AuthRecoil)
+  const setAuth = useAuthZustand.setState
   
   const actionText = useUiValues(ActionUiText)
   const titleText = useUiValues(TitleUiText)
