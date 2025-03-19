@@ -70,7 +70,7 @@ const SummaryPage = React.memo(() => {
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
   
-  const { id, name, birthDate, photos } = useAuthZustand(s => s!.user)
+  const { id, name, birthDate, photos } = useAuthZustand(s => s.user!)
   
   const profile = MockData.profile2
   const progress = 45

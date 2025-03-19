@@ -277,7 +277,7 @@ const MbtiTestingPage = React.memo(() => {
   
   
   
-  const authUserId = useAuthZustand(s => s!.user.id)
+  const authUserId = useAuthZustand(s => s.user!.id)
   const [searchParams] = useSearchParams()
   
   return (

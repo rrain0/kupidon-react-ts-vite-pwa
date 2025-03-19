@@ -1,13 +1,12 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { Lang } from '@util/lang/Lang.ts'
 import { CurrentUser } from 'src/api/model/CurrentUser.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject
 import exists = TypeU.exists
 import notExists = TypeU.notExists
-import NonEmptyArr = ArrayU.NonEmptyArr
+import Getter = TypeU.Getter
+import Callback = TypeU.Callback
 
 
 
@@ -23,15 +22,22 @@ if (notExists(localStorage.getItem(zustandLsName)) && exists(recoilLsName)) {
 
 
 export type AuthZustand = {
-  accessToken: string
-  user: CurrentUser
-} | undefined
+  accessToken: string | undefined
+  user: CurrentUser | undefined
+  getIsAuth: Getter<boolean>
+  logout: Callback
+}
 
 
 
 
 export const useAuthZustand = create<AuthZustand>()(persist(
-  (set, get, store) => undefined,
+  (set, get, store) => ({
+    accessToken: undefined,
+    user: undefined,
+    getIsAuth: () => !!get().accessToken,
+    logout: () => set({ accessToken: undefined, user: undefined }),
+  }),
   {
     name: zustandLsName,
     storage: createJSONStorage(() => localStorage),

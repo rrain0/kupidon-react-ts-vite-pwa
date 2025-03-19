@@ -47,18 +47,17 @@ const AccountSettingsPage = React.memo(() => {
   const actionText = useUiValues(ActionUiText)
   
   const auth = useAuthZustand()
+  const user = auth.user!
+  const { logout } = auth
   const setAuth = useAuthZustand.setState
   
   
   const fetchUser = async() => {
     const resp = await UserApi.current()
-    if (resp.isSuccess)
-      setAuth(curr => ({ ...curr!, user: resp.data.user }))
+    if (resp.isSuccess) setAuth({ user: resp.data.user })
     else console.warn('Failed to fetch user:', resp)
   }
   useEffect(() => void fetchUser(), [])
-  
-  const user = auth!.user
   
   
   
@@ -130,7 +129,7 @@ const AccountSettingsPage = React.memo(() => {
   
   const updateValues = (auth: AuthZustand) => {
     setFormValues(s => {
-      const u = auth!.user
+      const u = auth.user!
       const newValues = { ...s, initialValues: { ...s.initialValues } }
       //newValues.initialValues.name = u.name
       
@@ -158,10 +157,7 @@ const AccountSettingsPage = React.memo(() => {
   
   useEffect(() => {
     if (isSuccess && response && 'data' in response) {
-      setAuth(s => ({
-        accessToken: s?.accessToken ?? '',
-        user: response.data!.user,
-      }))
+      setAuth({ user: response.data!.user })
       const used = response.usedValues
       if ('pwd' in used) {
         if (formValues.pwd === used.pwd)
@@ -170,7 +166,7 @@ const AccountSettingsPage = React.memo(() => {
           resetField('repeatPwd')
       }
     }
-  }, [isSuccess, response, setAuth, formValues, resetField])
+  }, [isSuccess, response, formValues, resetField])
   
   
   
@@ -287,7 +283,7 @@ const AccountSettingsPage = React.memo(() => {
             </Link>
             
             <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
-              onClick={() => setAuth(undefined)}
+              onClick={logout}
             >
               {actionText.logOutFromAccount}
             </Button>

@@ -214,10 +214,7 @@ export const profileUpdateApiRequest = (
             (photo, usedPhoto) => photo.remoteI === usedPhoto.remoteI
           ),
         }))
-        setAuth(s => ({
-          accessToken: s?.accessToken ?? '',
-          user: u,
-        }))
+        setAuth(s => ({ ...s, user: u }))
       }
     }
     

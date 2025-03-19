@@ -152,7 +152,7 @@ export namespace AxiosConfig {
     //localStorage.removeItem('token')
     //reduxStore.dispatch(authSlice.actions.logout())
     //reduxStore.dispatch(userActions.setUser(null))
-    useAuthZustand.setState(undefined)
+    useAuthZustand.getState().logout()
   }
   const setAuthData = (valOrUpdater: ValueOrMapper<AuthZustand>) => {
     //localStorage.setItem('token', authData.accessJwt)
@@ -161,7 +161,7 @@ export namespace AxiosConfig {
   }
   const getAuthData = () => {
     // return reduxStore.getState().authReducer.access_token
-    return useAuthZustand.getState()?.accessToken
+    return useAuthZustand.getState().accessToken
   }
   
   
@@ -264,7 +264,7 @@ export namespace AxiosConfig {
         const d = response.data as AuthRespData
         
         // Сохранение нового access token, refresh token автоматически сохраняется в куках
-        setAuthData(s => ({ accessToken: d.accessToken, user: s!.user }))
+        setAuthData(s => ({ ...s, accessToken: d.accessToken }))
 
         // Если был сохранённый оригинальный запрос, то повторяем его
         const orig = config.customData?.originalRequestConfig

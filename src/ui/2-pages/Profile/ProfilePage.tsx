@@ -118,8 +118,8 @@ const ProfilePage = React.memo(() => {
   
   
   
+  const u = auth.user
   useEffect(() => {
-    const u = auth?.user
     if (u) {
       setFormValues(s => {
         const newValues = { ...s, initialValues: { ...s.initialValues } }
@@ -194,7 +194,7 @@ const ProfilePage = React.memo(() => {
         return newValues
       })
     }
-  }, [auth])
+  }, [u])
   
   
   
@@ -349,7 +349,7 @@ const ProfilePage = React.memo(() => {
         try {
           const resp = await UserApi.current()
           if (resp.isSuccess)
-            setAuth(curr => ({ ...curr!, user: resp.data.user }))
+            setAuth({ user: resp.data.user })
           else
             console.warn('failed to fetch user:', resp)
         }

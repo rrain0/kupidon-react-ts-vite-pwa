@@ -45,7 +45,7 @@ export type SettingsProps = {
 const QuickSettings = React.memo((props: SettingsProps) => {
   const { isOpen, close } = props
   
-  const auth = useAuthZustand()
+  const isAuth = useAuthZustand(s => s.getIsAuth())
   const canInstall = useAppZustand(s => s.canInstall)
   const setApp = useAppZustand.setState
   
@@ -87,7 +87,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                 
                 <RoundButtonsContainer>
                   
-                  {auth && (
+                  {isAuth && (
                     <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                       onClick={() => {
                         setCloseAction(() => () => {

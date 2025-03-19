@@ -23,7 +23,7 @@ const MbtiPage = React.lazy(
 
 const RouteTestMbti = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const authUserId = useAuthZustand(s => s?.user.id)
+  const authUserId = useAuthZustand(s => s.user?.id)
   
   if (!authUserId) return (
     <Navigate
@@ -58,7 +58,7 @@ export const routingTestMbti: RouteObject[] = [
 
 const RouteTest = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const authUserId = useAuthZustand(s => s?.user.id)
+  const authUserId = useAuthZustand(s => s.user?.id)
   
   if (!authUserId) return (
     <Navigate

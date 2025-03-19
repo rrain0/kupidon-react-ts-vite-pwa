@@ -23,8 +23,7 @@ const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.
 
 const RouteProfileIdUserIdTab = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const auth = useAuthZustand()
-  const authId = auth?.user.id
+  const authId = useAuthZustand(s => s.user?.id)
   const tabRoute = RootRoute.profile.id.userId[use](':userId').profile[use](':tab')
   const params = useMatch(tabRoute[full]()+'/*')?.params
   const urlUserId = params?.['userId']
@@ -102,8 +101,7 @@ const routingProfileIdUserId: RouteObject[] = [
 
 const RouteProfileId = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const auth = useAuthZustand()
-  const authId = auth?.user.id
+  const authId = useAuthZustand(s => s.user?.id)
   
   if (!authId) return (
     <Navigate

@@ -16,10 +16,10 @@ const AccountSettingsPage = React.lazy(
 
 const RouteSettingsAccount = React.memo(() => {
   const [searchParams] = useSearchParams()
-  const auth = useAuthZustand()
+  const isAuth = useAuthZustand(s => s.getIsAuth())
   
   
-  if (!auth) return (
+  if (!isAuth) return (
     <Navigate
       to={RootRoute.login[fullAllowedNameParams]({
         returnPath: RootRoute.settings.account[fullAnySearchParams](searchParams),
