@@ -14,8 +14,9 @@ const zustandLsName = 'zustandMbti'
 
 
 
+const recoilLsName = 'test-mbti'
 // To trigger Zustand update from Recoil to Zustand
-if (notExists(localStorage.getItem(zustandLsName))) {
+if (notExists(localStorage.getItem(zustandLsName)) && exists(recoilLsName)) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -120,7 +121,6 @@ export const useMbtiZustand = create<MbtiZustand>()(persist(
     
     migrate: (persisted: any, persistedVersion) => {
       if (persistedVersion <= 0) {
-        const recoilLsName = 'test-mbti'
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
         const old = exists(oldRaw) ? JSON.parse(oldRaw) : undefined

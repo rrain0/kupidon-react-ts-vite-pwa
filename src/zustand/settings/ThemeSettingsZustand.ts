@@ -13,8 +13,9 @@ const zustandLsName = 'zustandThemeSettings'
 
 
 
+const recoilLsName = 'themeSettings'
 // To trigger Zustand update from Recoil to Zustand
-if (notExists(localStorage.getItem(zustandLsName))) {
+if (notExists(localStorage.getItem(zustandLsName)) && exists(recoilLsName)) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -44,7 +45,6 @@ export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
     version: 1,
     migrate: (persisted: any, persistedVersion) => {
       if (persistedVersion <= 0) {
-        const recoilLsName = 'themeSettings'
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
         const old = exists(oldRaw) ? JSON.parse(oldRaw) : undefined
