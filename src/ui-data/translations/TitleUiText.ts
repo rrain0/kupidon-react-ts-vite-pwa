@@ -14,9 +14,9 @@ export const TitleUiText = {
     'en-US': 'Chat',
     'ru-RU': 'Чат',
   },
-  findCouple: {
-    'en-US': 'Find couple',
-    'ru-RU': 'Найти пару',
+  hearts: {
+    'en-US': 'Hearts',
+    'ru-RU': 'Сердца',
   },
   advices: {
     'en-US': 'Profile',

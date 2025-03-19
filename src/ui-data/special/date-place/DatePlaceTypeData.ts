@@ -97,7 +97,7 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
   all: {
     picture: noImage,
     name: {
-      'ru-RU': 'Идеи и места для свиданий',
+      'ru-RU': 'Идеи и места',
     },
   },
   

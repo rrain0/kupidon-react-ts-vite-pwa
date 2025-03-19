@@ -32,7 +32,7 @@ const BowAndArrowsPage = React.memo(() => {
   const uiText = useMemo(() => ({
     bowAndArrows: titleText.bowAndArrows,
     poster: 'Афиша',
-    insightsAndPlacesForDate: 'Идеи и места для свиданий',
+    insightsAndPlacesForDate: 'Идеи и места',
     kupidonNotes: 'Заметки Купидона',
     ourPartners: 'Наши партнёры',
   }), [titleText])

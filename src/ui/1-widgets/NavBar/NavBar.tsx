@@ -77,7 +77,7 @@ const NavBar = React.memo((props: NavBarProps) => {
         <NavLink to={RootRoute.findCouple[full]()}>
           <Button css={nav} data-selected={attrExists(place === 'findCouple')}>
             <CardsHeartGradIc />
-            <div>{titleText.findCouple}</div>
+            <div>{titleText.hearts}</div>
           </Button>
         </NavLink>
         

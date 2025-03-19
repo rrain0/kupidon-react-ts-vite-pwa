@@ -8,7 +8,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Setter = TypeU.Callback1
 import col = EmotionCommon.col
-import PartialUndef = TypeU.PartialUndef
+import Puro = TypeU.Puro
 
 
 
@@ -17,37 +17,39 @@ import PartialUndef = TypeU.PartialUndef
 export type LangSettingsProps = {
   open: boolean
   setOpen: Setter<boolean>
-} & PartialUndef<{
+} & Puro<{
   closeable: boolean
 }>
 
 
 
-const LangSettings =
-React.memo(
-(props: LangSettingsProps)=>{
+const LangSettings = React.memo((props: LangSettingsProps) => {
   
   
-  return <>
-    <UseBottomSheetState isOpen={props.open} onClose={()=>props.setOpen(false)}>
-      { ({ sheetProps })=>
-      <BottomSheetBasic
-        css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
-        {...sheetProps}
-        closeable={props.closeable}
-        title={<div css={css`height: 1em;`}/>}
-      >
-        <div css={css`
-          ${col};
-          padding-bottom: 20px;
-        `}
-        >
-          
-          <LangOptions />
-          
-        </div>
-      </BottomSheetBasic>}
-    </UseBottomSheetState>
-  </>
+  return (
+    <>
+      <UseBottomSheetState isOpen={props.open} onClose={() => props.setOpen(false)}>
+        {({ sheetProps }) => (
+          <BottomSheetBasic
+            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
+            {...sheetProps}
+            closeable={props.closeable}
+            title={<div css={css`height: 1em;`} />}
+          >
+            <div
+              css={css`
+                ${col};
+                padding-bottom: 20px;
+              `}
+            >
+              
+              <LangOptions />
+              
+            </div>
+          </BottomSheetBasic>
+        )}
+      </UseBottomSheetState>
+    </>
+  )
 })
 export default LangSettings

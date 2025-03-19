@@ -44,7 +44,6 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
   const [needClear, clear] = useBool(false)
   useEvent(() => {
     if (needClear) {
-      // eslint-disable-next-line @stylistic/no-extra-semi
       ;(async() => {
         await clearSiteData()
         window.history.pushState(undefined, '', '/')

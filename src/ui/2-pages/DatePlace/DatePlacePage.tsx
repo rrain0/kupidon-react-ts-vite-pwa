@@ -31,7 +31,7 @@ export const LocationOverlayName = 'location'
 
 const uiVals = {
   insightsAndPlacesForDate: {
-    'ru-RU': 'Идеи и места для свиданий',
+    'ru-RU': 'Идеи и места',
   },
   features: {
     'ru-RU': 'Особенности',
