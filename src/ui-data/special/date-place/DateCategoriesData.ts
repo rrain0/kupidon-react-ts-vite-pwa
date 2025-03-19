@@ -4,15 +4,15 @@ import { DatePlaceType } from 'src/ui-data/special/date-place/DatePlaceTypeData.
 
 
 export type DateCategoryType =
-  | 'allPreviewRow'
-  | 'allPageOfPreviews'
+  | 'allRowOfPreviews'
+  | 'allPageOfRowsOfPreviews'
   | 'allPage'
   
-  | 'romanticPreviewRow'
-  | 'culturalPreviewRow'
-  | 'activePreviewRow'
-  | 'entertainingPreviewRow'
-  | 'nonstandardPreviewRow'
+  | 'romanticRowOfPreviews'
+  | 'culturalRowOfPreviews'
+  | 'activeRowOfPreviews'
+  | 'entertainingRowOfPreviews'
+  | 'nonstandardRowOfPreviews'
   
   | 'romanticPage'
   | 'culturalPage'
@@ -48,10 +48,10 @@ export type DateCategoryCommonData = {
 }
 
 export type DateCategoryUiData = {
-  ui: 'previewRow'
+  ui: 'rowOfPreviews'
   headerNext: DateCategoryType
 } | {
-  ui: 'pageOfPreviews'
+  ui: 'pageOfRowsOfPreviews'
 } | {
   ui: 'page'
 }
@@ -70,20 +70,20 @@ export type DateCategoryData =
 
 
 export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
-  allPreviewRow: {
+  allRowOfPreviews: {
     type: 'category',
     next: ['romanticPage', 'culturalPage', 'activePage', 'entertainingPage', 'nonstandardPage'],
-    ui: 'previewRow',
-    headerNext: 'allPageOfPreviews',
+    ui: 'rowOfPreviews',
+    headerNext: 'allPageOfRowsOfPreviews',
     placeType: 'all',
   },
-  allPageOfPreviews: {
+  allPageOfRowsOfPreviews: {
     type: 'category',
     next: [
-      'romanticPreviewRow', 'culturalPreviewRow', 'activePreviewRow',
-      'entertainingPreviewRow', 'nonstandardPreviewRow',
+      'romanticRowOfPreviews', 'culturalRowOfPreviews', 'activeRowOfPreviews',
+      'entertainingRowOfPreviews', 'nonstandardRowOfPreviews',
     ],
-    ui: 'pageOfPreviews',
+    ui: 'pageOfRowsOfPreviews',
     placeType: 'all',
   },
   allPage: {
@@ -94,10 +94,10 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
   },
   
   
-  romanticPreviewRow: {
+  romanticRowOfPreviews: {
     type: 'category',
     next: ['restaurant', 'cafe', 'coffeeHouse', 'walking'],
-    ui: 'previewRow',
+    ui: 'rowOfPreviews',
     headerNext: 'romanticPage',
     placeType: 'romantic',
   },
@@ -107,10 +107,10 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
     ui: 'page',
     placeType: 'romantic',
   },
-  culturalPreviewRow: {
+  culturalRowOfPreviews: {
     type: 'category',
     next: ['museum', 'gallery', 'theatre', 'cinema'],
-    ui: 'previewRow',
+    ui: 'rowOfPreviews',
     headerNext: 'culturalPage',
     placeType: 'cultural',
   },
@@ -120,10 +120,10 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
     ui: 'page',
     placeType: 'cultural',
   },
-  activePreviewRow: {
+  activeRowOfPreviews: {
     type: 'category',
     next: ['sports', 'extreme', 'outdoorActivities'],
-    ui: 'previewRow',
+    ui: 'rowOfPreviews',
     headerNext: 'activePage',
     placeType: 'active',
   },
@@ -133,10 +133,10 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
     ui: 'page',
     placeType: 'active',
   },
-  entertainingPreviewRow: {
+  entertainingRowOfPreviews: {
     type: 'category',
     next: ['excitingEntertainment', 'interactive', 'eveningEntertainment'],
-    ui: 'previewRow',
+    ui: 'rowOfPreviews',
     headerNext: 'entertainingPage',
     placeType: 'entertaining',
   },
@@ -146,10 +146,10 @@ export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
     ui: 'page',
     placeType: 'entertaining',
   },
-  nonstandardPreviewRow: {
+  nonstandardRowOfPreviews: {
     type: 'category',
     next: ['masterClasses', 'streamCocktails', 'volunteering'],
-    ui: 'previewRow',
+    ui: 'rowOfPreviews',
     headerNext: 'nonstandardPage',
     placeType: 'nonstandard',
   },

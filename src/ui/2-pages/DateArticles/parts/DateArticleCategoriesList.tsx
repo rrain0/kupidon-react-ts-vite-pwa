@@ -71,10 +71,10 @@ export const DateArticleCategoriesList = React.memo((props: DateArticleCategorie
         </ListCols>
       </div>
     )
-    if (list.ui === 'previewRow') return (
-      <PreviewRow list={list} />
+    if (list.ui === 'rowOfPreviews') return (
+      <RowOfPreviews list={list} />
     )
-    if (list.ui === 'pageOfPreviews') return (
+    if (list.ui === 'pageOfRowsOfPreviews') return (
       <div
         css={col}
         className={className}
@@ -92,9 +92,9 @@ export const DateArticleCategoriesList = React.memo((props: DateArticleCategorie
         <div css={[col, { gap: 16 }]}>
           {list.next.map(it => {
             const category = DateArticleCategoriesData[it]
-            if (category.type === 'category' && category.ui === 'previewRow') {
+            if (category.type === 'category' && category.ui === 'rowOfPreviews') {
               return (
-                <PreviewRow key={it} list={category} />
+                <RowOfPreviews key={it} list={category} />
               )
             }
             return undefined
@@ -123,10 +123,10 @@ const ListCols = styled.div`
 
 
 
-export type PreviewRowProps = {
-  list: DateArticleCategoryData & { type: 'category', ui: 'previewRow' }
+export type RowOfPreviewsProps = {
+  list: DateArticleCategoryData & { type: 'category', ui: 'rowOfPreviews' }
 }
-const PreviewRow = React.memo((props: PreviewRowProps) => {
+const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
   const {
     list,
   } = props

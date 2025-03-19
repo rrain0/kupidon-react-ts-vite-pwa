@@ -31,7 +31,7 @@ const RouteDatePlaces = React.memo(() => {
   const category = searchCategory && Object.hasOwn(DateCategoriesData, searchCategory)
     ? searchCategory as DateCategoryType
     : undefined
-  const defaultCategory: DateCategoryType = 'allPageOfPreviews'
+  const defaultCategory: DateCategoryType = 'allPageOfRowsOfPreviews'
   
   
   if (type) return (

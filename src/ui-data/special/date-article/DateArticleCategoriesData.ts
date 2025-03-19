@@ -3,81 +3,75 @@ import { DateArticleType } from 'src/ui-data/special/date-article/DateArticleTyp
 
 
 
-export type DateArticleCategoryType =
-  | 'allPreviewRow'
-  | 'allPageOfPreviews'
-  
-  | 'gettingToKnowPreviewRow'
-  | 'gettingToKnowPage'
-  
-  | 'profileCreationAdvices'
 
 export type DateArticleCategoryCommonData = {
   articleType: DateArticleType
 }
 
-export type DateArticleCategoryUiData = {
-  ui: 'previewRow'
-  headerNext: DateArticleCategoryType
-} | {
-  ui: 'pageOfPreviews'
-} | {
-  ui: 'page'
-}
+export type DateArticleCategoryUiData =
+  | { ui: 'rowOfPreviews', headerNext: DateArticleCategoryType }
+  | { ui: 'pageOfRowsOfPreviews' }
+  | { ui: 'page' }
 
-export type DateArticleCategoryCategoryData = {
-  type: 'category'
-  next: DateArticleCategoryType[]
-} | {
-  type: 'type'
-} | {
-  type: 'item'
-  id: string
-}
+export type DateArticleCategoryCategoryData =
+  | { type: 'category', next: DateArticleCategoryType[] }
+  | { type: 'type' }
+  | { type: 'item', id: string }
 
 export type DateArticleCategoryData =
   DateArticleCategoryCommonData & DateArticleCategoryUiData & DateArticleCategoryCategoryData
 
-type Entity =
+
+type Item =
   | { type: 'category', itemCategory: DateArticleCategoryType }
   | { type: 'type', itemType: DateArticleType }
   | { type: 'item', itemId: string }
+
 
 type Type =
   | { type: 'category', itemType: DateArticleType }
   | { type: 'type', itemType: DateArticleType }
   | { type: 'item', itemId: string }
 type Ui =
-  | { ui: 'rowOfPreviews', listOfEntities: Entity[], headerEntity: Entity }
-  | { ui: 'page', listOfEntities: Entity[] }
-  | { ui: 'pageOfRowsOfPreviews', listOfEntities: Entity[] }
+  | { ui: 'rowOfPreviews', listOfEntities: Item[], headerEntity: Item }
+  | { ui: 'page', listOfEntities: Item[] }
+  | { ui: 'pageOfRowsOfPreviews', listOfEntities: Item[] }
   | { ui: undefined }
 
-export type DateArticleCategoryData2 = Type | Ui
+export type DateArticleCategoryData2 = Type & Ui
 
 
 
+
+export type DateArticleCategoryType =
+  | 'allRowOfPreviews'
+  | 'allPageOfRowsOfPreviews'
+  
+  | 'gettingToKnowRowOfPreviews'
+  | 'gettingToKnowPage'
+  
+  | 'profileCreationAdvices'
 
 export const DateArticleCategoriesData: Record<DateArticleCategoryType, DateArticleCategoryData> = {
-  allPreviewRow: {
+  allRowOfPreviews: {
     type: 'category',
     next: ['gettingToKnowPage'],
-    ui: 'previewRow',
-    headerNext: 'allPageOfPreviews',
+    ui: 'rowOfPreviews',
+    headerNext: 'allPageOfRowsOfPreviews',
     articleType: 'all',
   },
-  allPageOfPreviews: {
+  allPageOfRowsOfPreviews: {
     type: 'category',
-    next: ['gettingToKnowPreviewRow'],
-    ui: 'pageOfPreviews',
+    next: ['gettingToKnowRowOfPreviews'],
+    ui: 'pageOfRowsOfPreviews',
     articleType: 'all',
   },
   
   
-  gettingToKnowPreviewRow: {
+  gettingToKnowRowOfPreviews: {
     type: 'category',
     next: ['profileCreationAdvices'],
-    ui: 'previewRow',
+    ui: 'rowOfPreviews',
     headerNext: 'gettingToKnowPage',
     articleType: 'gettingToKnow',
   },

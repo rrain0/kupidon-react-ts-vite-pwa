@@ -66,11 +66,11 @@ const BowAndArrowsPage = React.memo(() => {
             
             <div style={{ height: 16 }} />
             
-            <DateCategoriesList list={DateCategoriesData.allPreviewRow} />
+            <DateCategoriesList list={DateCategoriesData.allRowOfPreviews} />
             
             <div style={{ height: 16 }} />
             
-            <DateArticleCategoriesList list={DateArticleCategoriesData.allPreviewRow} />
+            <DateArticleCategoriesList list={DateArticleCategoriesData.allRowOfPreviews} />
             
             <div style={{ height: 16 }} />
             
