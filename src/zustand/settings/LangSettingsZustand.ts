@@ -1,15 +1,16 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { DefaultDarkTheme, DefaultLightTheme } from 'src/ui-data/theme/ThemeCollection.ts'
+import { Lang } from '@util/lang/Lang.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject
 import exists = TypeU.exists
 import notExists = TypeU.notExists
+import NonEmptyArr = ArrayU.NonEmptyArr
 
 
 
-const zustandLsName = 'zustandThemeSettings'
+const zustandLsName = 'zustandLangSettings'
 
 
 
@@ -20,22 +21,18 @@ if (notExists(localStorage.getItem(zustandLsName))) {
 
 
 
-export interface ThemeSettingsZustand {
+export interface LangSettingsZustand {
   type: 'manual' | 'system'
-  manual: AppTheme.Type
-  light: string
-  dark: string
+  manual: NonEmptyArr<Lang.Supported> | undefined
 }
 
 
 
 
-export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
+export const useLangSettingsZustand = create<LangSettingsZustand>()(persist(
   (set, get, store) => ({
     type: 'system',
-    manual: 'light',
-    light: DefaultLightTheme.name,
-    dark: DefaultDarkTheme.name,
+    manual: undefined,
   }),
   {
     name: zustandLsName,
@@ -44,7 +41,7 @@ export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
     version: 1,
     migrate: (persisted: any, persistedVersion) => {
       if (persistedVersion <= 0) {
-        const recoilLsName = 'themeSettings'
+        const recoilLsName = 'langSettings'
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
         const old = exists(oldRaw) ? JSON.parse(oldRaw) : undefined
@@ -56,8 +53,6 @@ export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
         persisted = {
           type: persisted.setting,
           manual: persisted.manualSetting,
-          light: persisted.light,
-          dark: persisted.dark,
         }
       }
       return persisted

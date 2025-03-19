@@ -1,29 +1,27 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
 import LangSettings from 'src/ui/1-widgets/LangSettings/LangSettings.tsx'
-import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
+import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
 
 
 
 const AutoLangSettings = React.memo(() => {
-  const langSettings = useRecoilValue(LangSettingsRecoil)
-  //const lang = useRecoilValue(LangRecoil)
+  const { type, manual } = useLangSettingsZustand()
   
   
   const [open, setOpen] = useState(false)
   const [closeable, setCloseable] = useState(true)
   
   useEffect(() => {
-    if (langSettings.setting === 'manual' && !langSettings.manualSetting) {
+    if (type === 'manual' && !manual) {
       setCloseable(false)
     }
     else setCloseable(true)
     
-    if (!open && langSettings.setting === 'manual' && !langSettings.manualSetting) {
+    if (!open && type === 'manual' && !manual) {
       setOpen(true)
     }
-  }, [open, langSettings.manualSetting, langSettings.setting])
+  }, [open, manual, type])
   
   
   return (

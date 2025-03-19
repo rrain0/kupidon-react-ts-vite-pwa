@@ -1,12 +1,9 @@
 import { useLayoutEffect, useMemo } from 'react'
-import { useRecoilState } from 'recoil'
-import { LangSettingsRecoil } from 'src/recoil/state/LangSettingsRecoil.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
-import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { Lang } from 'src/util/lang/Lang.ts'
 import { useLangDetector } from 'src/util/lang/useLangDetector.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import destructCopyBy = ObjectU.destructCopyBy
+import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
 
 
 
@@ -18,7 +15,8 @@ export const useLangSetup = () => {
     return Lang.getMatchedAppLangs(systemLangs)
   }, [systemLangs])
   
-  const [langSettings, setLangSettings] = useRecoilState(LangSettingsRecoil)
+  const { type, manual } = useLangSettingsZustand()
+  const setLangSettings = useLangSettingsZustand.setState
   const langs = useAppZustand(s => s.langs)
   const setApp = useAppZustand.setState
   
@@ -34,7 +32,7 @@ export const useLangSetup = () => {
   
   
   useLayoutEffect(() => {
-    if (langSettings.setting === 'system') {
+    if (type === 'system') {
       // language is not initialized yet, skip for next useLayoutEffect call
       if (!matchedSystemLangs) return
       // check if array has any language
@@ -42,17 +40,15 @@ export const useLangSetup = () => {
         langs: [...matchedSystemLangs, Lang.Default],
       })
       // or else switch to manual mode
-      else setLangSettings(destructCopyBy({
-        setting: 'manual',
-      }))
+      else setLangSettings({ type: 'manual' })
     }
-    else if (langSettings.setting === 'manual') {
-      if (langSettings.manualSetting) setApp({
-        langs: [...langSettings.manualSetting, Lang.Default],
+    else if (type === 'manual') {
+      if (manual) setApp({
+        langs: [...manual, Lang.Default],
       })
       else setApp({ langs: [Lang.Default] })
     }
-  }, [matchedSystemLangs, langSettings])
+  }, [matchedSystemLangs, type, manual])
   
   
   // apply to html

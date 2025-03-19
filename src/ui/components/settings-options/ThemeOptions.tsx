@@ -17,7 +17,7 @@ import { SettingsOptions } from './SettingsOptions'
 
 
 const ThemeOptions = React.memo(() => {
-  const themeSettings = useThemeSettingsZustand()
+  const { type, manual } = useThemeSettingsZustand()
   const setThemeSettings = useThemeSettingsZustand.setState
   
   
@@ -46,8 +46,8 @@ const ThemeOptions = React.memo(() => {
   }, [titleText])
   
   const themeOptionChecked = (value: ThemeType | 'system') => {
-    return themeSettings.setting === 'system' && value === 'system'
-      || themeSettings.setting === 'manual' && value === themeSettings.manualSetting
+    return type === 'system' && value === 'system'
+      || type === 'manual' && value === manual
   }
   
   
@@ -62,8 +62,8 @@ const ThemeOptions = React.memo(() => {
           key={opt.value}
           onChange={ev => {
             setThemeSettings({
-              setting: opt.value === 'system' ? 'system' : 'manual',
-              ...opt.value !== 'system' && { manualSetting: opt.value },
+              type: opt.value === 'system' ? 'system' : 'manual',
+              ...opt.value !== 'system' && { manual: opt.value },
             })
           }}
         >

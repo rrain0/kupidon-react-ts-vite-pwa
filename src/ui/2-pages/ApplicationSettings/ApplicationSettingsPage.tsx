@@ -38,7 +38,7 @@ import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZusta
 
 const ApplicationSettingsPage = React.memo(() => {
   const canInstall = useAppZustand(s => s.canInstall)
-  const themeSettings = useThemeSettingsZustand()
+  const { light, dark } = useThemeSettingsZustand()
   const setThemeSettings = useThemeSettingsZustand.setState
   
   const actionText = useUiValues(ActionUiText)
@@ -104,12 +104,10 @@ const ApplicationSettingsPage = React.memo(() => {
                     <RadioInput
                       css={RadioInputStyle.radio}
                       childrenPosition="start"
-                      checked={opt.value === themeSettings.light}
+                      checked={opt.value === light}
                       value={opt.value}
                       key={opt.value}
-                      onChange={ev => {
-                        setThemeSettings({ light: opt.value })
-                      }}
+                      onChange={ev => setThemeSettings({ light: opt.value })}
                     >
                       <SettingsOptions.Container>
                         {opt.icon}
@@ -131,12 +129,10 @@ const ApplicationSettingsPage = React.memo(() => {
                     <RadioInput
                       css={RadioInputStyle.radio}
                       childrenPosition="start"
-                      checked={opt.value === themeSettings.dark}
+                      checked={opt.value === dark}
                       value={opt.value}
                       key={opt.value}
-                      onChange={ev => {
-                        setThemeSettings({ dark: opt.value })
-                      }}
+                      onChange={ev => setThemeSettings({ dark: opt.value })}
                     >
                       <SettingsOptions.Container>
                         {opt.icon}

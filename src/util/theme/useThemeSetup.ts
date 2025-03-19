@@ -18,7 +18,7 @@ export const useThemeSetup = () => {
     feature: 'css color-scheme',
   })
   
-  const themeSettings = useThemeSettingsZustand()
+  const { type, manual, light, dark } = useThemeSettingsZustand()
   const theme = useAppZustand(s => s.theme)
   const setApp = useAppZustand.setState
   
@@ -34,32 +34,31 @@ export const useThemeSetup = () => {
   const [themeIsReady, setThemeIsReady] = useState(false)
   
   useLayoutEffect(() => {
-    const setting = themeSettings.setting
-    if (setting === 'system') {
+    if (type === 'system') {
       if (systemTheme === 'light') {
-        setApp({ theme: themeByName(themeSettings.light) })
+        setApp({ theme: themeByName(light) })
         setThemeIsReady(true)
       }
       else if (systemTheme === 'dark') {
-        setApp({ theme: themeByName(themeSettings.dark) })
+        setApp({ theme: themeByName(dark) })
         setThemeIsReady(true)
       }
       else {
-        setApp({ theme: themeByName(themeSettings.light) })
+        setApp({ theme: themeByName(light) })
         setThemeIsReady(true)
       }
     }
-    else if (setting === 'manual') {
-      if (themeSettings.manualSetting === 'light') {
-        setApp({ theme: themeByName(themeSettings.light) })
+    else if (type === 'manual') {
+      if (manual === 'light') {
+        setApp({ theme: themeByName(light) })
         setThemeIsReady(true)
       }
-      else if (themeSettings.manualSetting === 'dark') {
-        setApp({ theme: themeByName(themeSettings.dark) })
+      else if (manual === 'dark') {
+        setApp({ theme: themeByName(dark) })
         setThemeIsReady(true)
       }
     }
-  }, [systemTheme, themeSettings])
+  }, [systemTheme, type, manual, light, dark])
   
   
   // apply to html meta tags
