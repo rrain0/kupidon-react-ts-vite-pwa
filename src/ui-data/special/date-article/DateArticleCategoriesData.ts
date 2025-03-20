@@ -1,95 +1,86 @@
-import { DateArticleType } from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
+import { DateArticleType } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+
+
+
+export type DateArticleCategoryItem = { type: 'category', itemCategory: DateArticleCategoryName }
+export type DateArticleTypeItem = { type: 'type', itemType: DateArticleType }
+export type DateArticleItemItem = { type: 'item', itemId: string }
+export type DateArticleItem =
+  | DateArticleCategoryItem
+  | DateArticleTypeItem
+  | DateArticleItemItem
+
+
+type Type = { itemType: DateArticleType }
+type UiRow = { ui: 'row', headerItem: DateArticleItem, listOfItems: DateArticleItem[] }
+type UiPage = { ui: 'page', listOfItems: DateArticleItem[] }
+type Ui = UiRow | UiPage
+
+export type DateArticleCategoryData = Type & Ui
 
 
 
 
-
-export type DateArticleCategoryCommonData = {
-  articleType: DateArticleType
-}
-
-export type DateArticleCategoryUiData =
-  | { ui: 'rowOfPreviews', headerNext: DateArticleCategoryType }
-  | { ui: 'pageOfRowsOfPreviews' }
-  | { ui: 'page' }
-
-export type DateArticleCategoryCategoryData =
-  | { type: 'category', next: DateArticleCategoryType[] }
-  | { type: 'type' }
-  | { type: 'item', id: string }
-
-export type DateArticleCategoryData =
-  DateArticleCategoryCommonData & DateArticleCategoryUiData & DateArticleCategoryCategoryData
-
-
-type Item =
-  | { type: 'category', itemCategory: DateArticleCategoryType }
-  | { type: 'type', itemType: DateArticleType }
-  | { type: 'item', itemId: string }
-
-
-type Type =
-  | { type: 'category', itemType: DateArticleType }
-  | { type: 'type', itemType: DateArticleType }
-  | { type: 'item', itemId: string }
-type Ui =
-  | { ui: 'rowOfPreviews', listOfEntities: Item[], headerEntity: Item }
-  | { ui: 'page', listOfEntities: Item[] }
-  | { ui: 'pageOfRowsOfPreviews', listOfEntities: Item[] }
-  | { ui: undefined }
-
-export type DateArticleCategoryData2 = Type & Ui
-
-
-
-
-export type DateArticleCategoryType =
-  | 'allRowOfPreviews'
-  | 'allPageOfRowsOfPreviews'
+export type DateArticleCategoryName =
+  | 'allRow'
+  | 'allPage'
   
-  | 'gettingToKnowRowOfPreviews'
+  | 'gettingToKnowRow'
   | 'gettingToKnowPage'
   
-  | 'profileCreationAdvices'
+  | 'profileCreationAdvicesRow'
+  | 'profileCreationAdvicesPage'
 
-export const DateArticleCategoriesData: Record<DateArticleCategoryType, DateArticleCategoryData> = {
-  allRowOfPreviews: {
-    type: 'category',
-    next: ['gettingToKnowPage'],
-    ui: 'rowOfPreviews',
-    headerNext: 'allPageOfRowsOfPreviews',
-    articleType: 'all',
+export const DateArticleCategoriesData: Record<DateArticleCategoryName, DateArticleCategoryData> = {
+  allRow: {
+    itemType: 'all',
+    ui: 'row',
+    headerItem: { type: 'category', itemCategory: 'allPage' },
+    listOfItems: [
+      { type: 'category', itemCategory: 'gettingToKnowPage' },
+      { type: 'item', itemId: 'IDhowToCreateAttractiveProfile' },
+    ],
   },
-  allPageOfRowsOfPreviews: {
-    type: 'category',
-    next: ['gettingToKnowRowOfPreviews'],
-    ui: 'pageOfRowsOfPreviews',
-    articleType: 'all',
+  allPage: {
+    itemType: 'all',
+    ui: 'page',
+    listOfItems: [
+      { type: 'category', itemCategory: 'gettingToKnowRow' },
+    ],
   },
   
   
-  gettingToKnowRowOfPreviews: {
-    type: 'category',
-    next: ['profileCreationAdvices'],
-    ui: 'rowOfPreviews',
-    headerNext: 'gettingToKnowPage',
-    articleType: 'gettingToKnow',
+  gettingToKnowRow: {
+    itemType: 'gettingToKnow',
+    ui: 'row',
+    headerItem: { type: 'category', itemCategory: 'gettingToKnowPage' },
+    listOfItems: [
+      { type: 'category', itemCategory: 'profileCreationAdvicesPage' },
+    ],
   },
   gettingToKnowPage: {
-    type: 'category',
-    next: ['profileCreationAdvices'],
+    itemType: 'gettingToKnow',
     ui: 'page',
-    articleType: 'gettingToKnow',
+    listOfItems: [
+      { type: 'category', itemCategory: 'profileCreationAdvicesRow' },
+    ],
   },
   
   
-  profileCreationAdvices: {
-    type: 'type', ui: 'page', articleType: 'profileCreationAdvices',
+  profileCreationAdvicesRow: {
+    itemType: 'profileCreationAdvices',
+    ui: 'row',
+    headerItem: { type: 'category', itemCategory: 'profileCreationAdvicesPage' },
+    listOfItems: [
+      { type: 'item', itemId: 'IDhowToCreateAttractiveProfile' },
+    ],
   },
-  
-  
-  /* howToCreateAttractiveProfile: {
-    type: 'item', articleId: 'IDhowToCreateAttractiveProfile',
-  }, */
+  profileCreationAdvicesPage: {
+    itemType: 'profileCreationAdvices',
+    ui: 'page',
+    listOfItems: [
+      { type: 'item', itemId: 'IDhowToCreateAttractiveProfile' },
+    ],
+  },
 }
 

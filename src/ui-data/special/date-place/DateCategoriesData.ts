@@ -1,7 +1,7 @@
 import { DatePlaceType } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 
 
-
+// TODO Взять интерфейсы из статей и переделать потом
 
 export type DateCategoryType =
   | 'allRowOfPreviews'

@@ -1,8 +1,4 @@
 import React, { useMemo } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import {
-  DateArticleCategoriesData
-} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
 import { DateCategoriesData } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -11,8 +7,7 @@ import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
-import DateArticleCategoriesList
-  from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoriesList.tsx'
+import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryRow.tsx'
 import DateCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DateCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -36,8 +31,6 @@ const BowAndArrowsPage = React.memo(() => {
     kupidonNotes: 'Заметки Купидона',
     ourPartners: 'Наши партнёры',
   }), [titleText])
-  
-  const [search] = useSearchParams()
   
   return (
     <>
@@ -70,7 +63,7 @@ const BowAndArrowsPage = React.memo(() => {
             
             <div style={{ height: 16 }} />
             
-            <DateArticleCategoriesList list={DateArticleCategoriesData.allRowOfPreviews} />
+            <DateArticleCategoryRow category="allRow" />
             
             <div style={{ height: 16 }} />
             

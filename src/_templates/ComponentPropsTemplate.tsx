@@ -20,9 +20,9 @@ export const MyComponent = React.memo((props: MyComponentProps) => {
   
   return (
     <div
+      data-display-name="MyComponent"
       className={className}
       style={style}
-      data-display-name="MyComponent"
     >
       <>
       

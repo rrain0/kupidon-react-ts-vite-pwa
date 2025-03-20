@@ -1,6 +1,6 @@
 import { MockDateArticles } from 'src/_mock-data/date-articles/MockDateArticles.ts'
 import { UiText } from 'src/mini-libs/ui-text/UiText.ts'
-import { DateArticleType } from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
+import { DateArticleType } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 
 
 

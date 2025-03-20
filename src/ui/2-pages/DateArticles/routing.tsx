@@ -4,16 +4,16 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import {
   DateArticleCategoriesData,
-  DateArticleCategoryType,
+  DateArticleCategoryName,
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
-import { DateArticleType, DateArticleTypeData } from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
+import { DateArticleType, DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
 
 const DateArticlesPage = React.lazy(
-  () => import('src/ui/2-pages/DateArticles/DateArticlesPage.tsx')
+  () => import('src/ui/2-pages/DateArticles/DateArticleItemsPage.tsx')
 )
 
 
@@ -28,13 +28,13 @@ const RouteDateArticles = React.memo(() => {
   const searchCategory = search.get(categoryParamName)
   const searchType = search.get(typeParamName)
   
-  const type = searchType && Object.hasOwn(DateArticleTypeData, searchType)
+  const type = searchType && Object.hasOwn(DateArticleTypesData, searchType)
     ? searchType as DateArticleType
     : undefined
   const category = searchCategory && Object.hasOwn(DateArticleCategoriesData, searchCategory)
-    ? searchCategory as DateArticleCategoryType
+    ? searchCategory as DateArticleCategoryName
     : undefined
-  const defaultCategory: DateArticleCategoryType = 'allPageOfRowsOfPreviews'
+  const defaultCategory: DateArticleCategoryName = 'allPage'
   
   
   if (type) return (
@@ -52,7 +52,7 @@ const RouteDateArticles = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DateArticlesPage type={type} />
+        <DateArticlesPage articleItem={{ type: 'type', itemType: type }} />
       </Suspense>
     </>
   )
@@ -72,7 +72,7 @@ const RouteDateArticles = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DateArticlesPage category={category} />
+        <DateArticlesPage articleItem={{ type: 'category', itemCategory: category }} />
       </Suspense>
     </>
   )

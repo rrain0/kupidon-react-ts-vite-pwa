@@ -1,31 +1,30 @@
 import styled from '@emotion/styled'
+import { TypeU } from '@util/common/TypeU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { emptyUiText, UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import {
+  DateArticleItem,
   DateArticleCategoriesData,
-  DateArticleCategoryType,
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
 import {
-  DateArticleTypeData,
-} from 'src/ui-data/special/date-article/DateArticleTypeData.ts'
+  DateArticleTypesData,
+} from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import ArticleItemLink from 'src/ui/2-pages/DateArticles/parts/ArticleItemLink.tsx'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import ClassStyle = ReactU.ClassStyle
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
-import RootRoute = AppRoutes.RootRoute
-import fullParams = RouteBuilder.fullParams
+import assertNever = TypeU.assertNever
 
 
 
@@ -36,57 +35,66 @@ const uiVals = {
 } satisfies UiTextValues
 
 
-export type DateArticleCategoryCardProps = ClassStyle & {
-  category: DateArticleCategoryType
+export type DateArticleItemCardProps = ClassStyle & {
+  articleItem: DateArticleItem
 }
-const DateArticleCategoryCard = React.memo((props: DateArticleCategoryCardProps) => {
+const DateArticleItemCard = React.memo((props: DateArticleItemCardProps) => {
   const {
     className,
     style,
-    category,
+    articleItem: ait,
   } = props
   
-  const categoryData = DateArticleCategoriesData[category]
-  const typeData = DateArticleTypeData[categoryData.articleType]
+  const data = (() => {
+    if (ait.type === 'category') {
+      const category = DateArticleCategoriesData[ait.itemCategory]
+      const type = DateArticleTypesData[category.itemType]
+      return {
+        title: type.name,
+        picture: type.picture,
+        isArticle: false,
+      }
+    }
+    if (ait.type === 'type') {
+      const type = DateArticleTypesData[ait.itemType]
+      return {
+        title: type.name,
+        picture: type.picture,
+        isArticle: false,
+      }
+    }
+    if (ait.type === 'item') {
+      const item = DateArticlesData.find(a => a.id === ait.itemId)
+      if (!item) return undefined
+      return {
+        title: item.title,
+        picture: item.picture,
+        isArticle: true,
+      }
+    }
+    return assertNever(ait)
+  })()
   
   const uiValues = useMemo(() => ({
-    title: typeData.name,
+    title: data?.title ?? emptyUiText,
     toRead: uiVals.toRead,
   }), [])
   const uiText = useUiValues(uiValues)
   
-  const [search] = useSearchParams()
-  
-  const link = categoryData.type === 'type'
-    ? RootRoute.dateArticles[fullParams]({
-      anySearchParams: search,
-      allowedNameParams: {
-        category: null,
-        type: categoryData.articleType,
-      },
-    })
-    : RootRoute.dateArticles[fullParams]({
-      anySearchParams: search,
-      allowedNameParams: {
-        category: category,
-        type: null,
-      },
-    })
-  
-  
+  if (!data) return undefined
   
   return (
-    <Link to={link}>
+    <ArticleItemLink articleItem={ait}>
       <CardBox
+        data-display-name="DateArticleItemCard"
         className={className}
         style={style}
-        data-display-name="DateArticleCategoryCard"
       >
         
         
         <ImgSpark
           css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
-          src={typeData.picture}
+          src={data.picture}
         />
         
         <MiniPosterImageFade />
@@ -95,19 +103,21 @@ const DateArticleCategoryCard = React.memo((props: DateArticleCategoryCardProps)
           
           <Title>{uiText.title}</Title>
           
-          <ReadItBox>
-            <ReadItText>{uiText.toRead}</ReadItText>
-            <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)} />
-          </ReadItBox>
+          {data.isArticle && (
+            <ReadItBox>
+              <ReadItText>{uiText.toRead}</ReadItText>
+              <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)} />
+            </ReadItBox>
+          )}
           
         </ContentBox>
         
       </CardBox>
-    </Link>
+    </ArticleItemLink>
   )
 })
-DateArticleCategoryCard.displayName = 'DateArticleCategoryCard'
-export default DateArticleCategoryCard
+DateArticleItemCard.displayName = 'DateArticleItemCard'
+export default DateArticleItemCard
 
 
 

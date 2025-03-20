@@ -58,8 +58,10 @@ export namespace TypeU {
     +readonly [P in K]+?: T | undefined
   }
   
-  
-  
+  // TODO костыль - ts костыль для компиляции exhaustive ifs & function return
+  export function assertNever(value: never): never {
+    throw new Error(`Value must be never, but it is: ${value}`)
+  }
   export function exists<T, Ex extends {}>(value: T | Ex): value is Ex {
     return value !== null && value !== undefined
   }

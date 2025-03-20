@@ -17,6 +17,7 @@ export type UiValue<L extends Lang.Supported = Lang.Supported, Args extends any[
 export function asUiText(text: string): UiText<'en-US'> {
   return { 'en-US': text }
 }
+export const emptyUiText = asUiText('')
 
 
 

@@ -19,7 +19,7 @@ export type DateArticleType =
 
 
 
-export const DateArticleTypeData: Record<DateArticleType, {
+export const DateArticleTypesData: Record<DateArticleType, {
   picture: string,
   name: UiText,
 }> = {
