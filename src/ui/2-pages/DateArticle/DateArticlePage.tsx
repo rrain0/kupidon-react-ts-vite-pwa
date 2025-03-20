@@ -14,6 +14,7 @@ import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
+import parse from 'html-react-parser'
 
 
 
@@ -81,10 +82,8 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
             
             <div style={{ height: 17 }} />
             
-            {article.content}
+            {parse(article.content)}
             
-            
-          
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
