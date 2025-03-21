@@ -36,19 +36,19 @@ const dragStartInitialValue = {
   scrollLeft: 0,
   canStart: true,
   isDragging: false,
-  lastSpeed: null as number|null,
+  lastSpeed: null as number | null,
 }
 
 
 export type TabsStableState =
-  |'opened' // showing some tab
+  | 'opened' // showing some tab
 export type TabsIntermediateState =
-  |'snap' // request to snap to instantly (to tab index)
+  | 'snap' // request to snap to instantly (to tab index)
   
-  |'snapping' // request to snap animated / playing snapping animation
+  | 'snapping' // request to snap animated / playing snapping animation
   
-  |'dragging' // user is dragging tabs
-  |'adjusting' // set state & snap according current scrollLeft coordinate
+  | 'dragging' // user is dragging tabs
+  | 'adjusting' // set state & snap according current scrollLeft coordinate
 export type TabsState = TabsStableState | TabsIntermediateState
 
 
@@ -56,7 +56,7 @@ export type TabIdx = number
 
 
 export type ComputedTabsDimens = {
-  frameWidth: number,
+  frameWidth: number
 }
 
 
@@ -166,33 +166,34 @@ export const useTabs = (
   
   
   
-  const runAnimation = useCallback(
-    (endScrollLeft: number, lastSpeed: number|null, onFinish: Callback) => {
-      const duration = function() {
-        //console.log('lastSpeed',lastSpeed)
-        if (notExists(lastSpeed)) return animationDuration
-        const startScrollLeft = tabContainerSpring.scrollLeft.get()
-        const pathPercent = pathProgressPercent(startScrollLeft, endScrollLeft)
-        return pathPercent / lastSpeed * 1.2 * 1000
-      }()
-      ;(async() => {
-        const animation = await tabContainerSpring.scrollLeft.start(
-          endScrollLeft,
-          {
-            config: {
-              mass: 1 * duration / 100,
-              tension: 500,
-              friction: 24,
-              clamp: true,
-            },
-          }
-        )
-        //console.log('animation',animation)
-        if (animation.finished) onFinish()
-      })()
-    },
-    [animationDuration]
-  )
+  const runAnimation = useCallback((
+    endScrollLeft: number,
+    lastSpeed: number | null,
+    onFinish: Callback
+  ) => {
+    const duration = function() {
+      //console.log('lastSpeed',lastSpeed)
+      if (notExists(lastSpeed)) return animationDuration
+      const startScrollLeft = tabContainerSpring.scrollLeft.get()
+      const pathPercent = pathProgressPercent(startScrollLeft, endScrollLeft)
+      return pathPercent / lastSpeed * 1.2 * 1000
+    }()
+    ;(async() => {
+      const animation = await tabContainerSpring.scrollLeft.start(
+        endScrollLeft,
+        {
+          config: {
+            mass: 1 * duration / 100,
+            tension: 500,
+            friction: 24,
+            clamp: true,
+          },
+        }
+      )
+      //console.log('animation',animation)
+      if (animation.finished) onFinish()
+    })()
+  }, [animationDuration])
   
   
   

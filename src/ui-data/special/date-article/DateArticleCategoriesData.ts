@@ -37,7 +37,6 @@ export const DateArticleCategoriesData: Record<DateArticleCategoryName, DateArti
     ui: 'row',
     headerItem: { type: 'category', itemCategory: 'allPage' },
     listOfItems: [
-      { type: 'category', itemCategory: 'gettingToKnowPage' },
       { type: 'item', itemId: 'IDhowToCreateAttractiveProfile' },
     ],
   },
