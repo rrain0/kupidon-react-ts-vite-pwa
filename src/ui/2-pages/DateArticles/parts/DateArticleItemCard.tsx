@@ -37,51 +37,24 @@ const uiVals = {
 
 export type DateArticleItemCardProps = ClassStyle & {
   articleItem: DateArticleItem
+  title: string
+  picture: string
+  showToRead: boolean
 }
 const DateArticleItemCard = React.memo((props: DateArticleItemCardProps) => {
   const {
     className,
     style,
     articleItem: ait,
+    title,
+    picture,
+    showToRead,
   } = props
   
-  const data = (() => {
-    if (ait.type === 'category') {
-      const category = DateArticleCategoriesData[ait.itemCategory]
-      const type = DateArticleTypesData[category.itemType]
-      return {
-        title: type.name,
-        picture: type.picture,
-        isArticle: false,
-      }
-    }
-    if (ait.type === 'type') {
-      const type = DateArticleTypesData[ait.itemType]
-      return {
-        title: type.name,
-        picture: type.picture,
-        isArticle: false,
-      }
-    }
-    if (ait.type === 'item') {
-      const item = DateArticlesData.find(a => a.id === ait.itemId)
-      if (!item) return undefined
-      return {
-        title: item.title,
-        picture: item.picture,
-        isArticle: true,
-      }
-    }
-    return assertNever(ait)
-  })()
-  
   const uiValues = useMemo(() => ({
-    title: data?.title ?? emptyUiText,
     toRead: uiVals.toRead,
   }), [])
   const uiText = useUiValues(uiValues)
-  
-  if (!data) return undefined
   
   return (
     <ArticleItemLink articleItem={ait}>
@@ -94,16 +67,16 @@ const DateArticleItemCard = React.memo((props: DateArticleItemCardProps) => {
         
         <ImgSpark
           css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
-          src={data.picture}
+          src={picture}
         />
         
         <MiniPosterImageFade />
         
         <ContentBox>
           
-          <Title>{uiText.title}</Title>
+          <Title>{title}</Title>
           
-          {data.isArticle && (
+          {showToRead && (
             <ReadItBox>
               <ReadItText>{uiText.toRead}</ReadItText>
               <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)} />

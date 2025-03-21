@@ -14,6 +14,12 @@ import creative
 
 import tableRomantic
   from '@im/date-place-type/1.1. Романтика за столом 44e5c3ec-6c0a-4959-8135-51709f0808a7.webp'
+import restaurant
+  from '@im/date-place-type/restaurant--icon--9c7584b78fb771604c9cd72d405e9a1a.webp'
+import cafe
+  from '@im/date-place-type/cafe--icon--137946289b149049a013a22c675de541.webp'
+import coffeeHouse
+  from '@im/date-place-type/coffee-house--icon--d3c1c61b9a09253ead1bf56acbf03d7a.webp'
 import walking
   from '@im/date-place-type/1.2. Прогулки на свежем воздухе c30b56ad-72d6-45fc-aa64-d41ce77ea4e3.webp'
 
@@ -141,19 +147,19 @@ export const DatePlaceTypeData: Record<DatePlaceType, {
     },
   },
   restaurant: {
-    picture: noImage,
+    picture: restaurant,
     name: {
       'ru-RU': 'Рестораны',
     },
   },
   cafe: {
-    picture: noImage,
+    picture: cafe,
     name: {
       'ru-RU': 'Кафе',
     },
   },
   coffeeHouse: {
-    picture: noImage,
+    picture: coffeeHouse,
     name: {
       'ru-RU': 'Кофейни',
     },

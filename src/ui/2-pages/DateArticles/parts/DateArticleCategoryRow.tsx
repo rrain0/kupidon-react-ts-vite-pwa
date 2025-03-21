@@ -11,6 +11,8 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import ArticleItemLink from 'src/ui/2-pages/DateArticles/parts/ArticleItemLink.tsx'
 import DateArticleItemCard from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCard.tsx'
+import DateArticleItemToCardData
+  from 'src/ui/2-pages/DateArticles/parts/DateArticleItemToCardData.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
@@ -60,10 +62,9 @@ const DateArticleCategoryRow = React.memo((props: DateArticleCategoryRowProps) =
       <Overflow>
         <ListRow>
           {data.listOfItems.map(it => (
-            <DateArticleItemCard
-              key={JSON.stringify(it)}
-              articleItem={it}
-            />
+            <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
+              {props => <DateArticleItemCard {...props} />}
+            </DateArticleItemToCardData>
           ))}
         </ListRow>
       </Overflow>

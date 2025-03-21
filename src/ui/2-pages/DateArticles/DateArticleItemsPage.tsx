@@ -10,6 +10,8 @@ import {
   DateArticleTypesData,
 } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import DateArticleItemCardWide from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCardWide.tsx'
+import DateArticleItemToCardData
+  from 'src/ui/2-pages/DateArticles/parts/DateArticleItemToCardData.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -77,10 +79,9 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
                 if (!data.items.length) return 'Пусто'
                 
                 return data.items.map(it => (
-                  <DateArticleItemCardWide
-                    key={JSON.stringify(it)}
-                    articleItem={it}
-                  />
+                  <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
+                    {props => <DateArticleItemCardWide {...props} />}
+                  </DateArticleItemToCardData>
                 ))
               })()}
             </DateArticlesList>
