@@ -13,12 +13,12 @@ import { ViewProps } from 'src/util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
-import PartialUndef = TypeU.PartialUndef
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback
 import findLastBy = ArrayU.findLastBy
 import notExists = TypeU.notExists
 import last = ArrayU.last
+import Puro = TypeU.Puro
 
 
 
@@ -42,6 +42,7 @@ const dragStartInitialValue = {
 
 export type TabsStableState =
   | 'opened' // showing some tab
+
 export type TabsIntermediateState =
   | 'snap' // request to snap to instantly (to tab index)
   
@@ -49,6 +50,7 @@ export type TabsIntermediateState =
   
   | 'dragging' // user is dragging tabs
   | 'adjusting' // set state & snap according current scrollLeft coordinate
+
 export type TabsState = TabsStableState | TabsIntermediateState
 
 
@@ -65,7 +67,7 @@ export type UseTabsOptions = {
   setTabsState: Setter<TabsState>
   tabIdx: TabIdx
   setTabIdx: Setter<TabIdx>
-} & PartialUndef<{
+} & Puro<{
   animationDuration: number
   defaultOpenIdx: number
 }>

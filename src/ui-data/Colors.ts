@@ -4,6 +4,8 @@
 
 export const Colors = {
   
+  test: ['#00ff0077', '#ff000077', '#0000ff77', '#ffff0077', '#ff00ff77', '#00ffff77'],
+  
   red: {
     red1: '#ef3c34',
   },

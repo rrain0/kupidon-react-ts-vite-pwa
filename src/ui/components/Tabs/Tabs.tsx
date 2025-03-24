@@ -82,14 +82,14 @@ const Tabs = React.memo(React.forwardRef<TabsRefElement, TabsProps>((props, forw
           style={{ left: tabContainerSpring.scrollLeft.to(v => -v) }}
         >
           
-          { children?.({
+          {children?.({
             isReady,
             computedTabsDimens,
             snapPointsPx,
             realDefaultOpenIdx,
             tabContainerSpring,
             tabDrag,
-          }) }
+          })}
         
         </TabsContainer>
       </GesturesConsumer>

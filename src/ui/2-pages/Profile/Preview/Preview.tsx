@@ -108,15 +108,6 @@ const Preview = React.memo((props: PreviewProps) => {
   }, [photosCnt])
   
   
-  // start progress y in (..0..100..) * visiblePhotosCnt
-  const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
-  // start progress for photos in (..0..100..) * availablePhotos.length
-  const [getStartPhotoProgress, setStartPhotoProgress] = useRefGetSet(0)
-  // curr progress y in (..0..100..) from start progress y
-  const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
-  const animatedCurrProgressY = useAnimatedValue(0)
-  
-  
   
   const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
   const [isDragging, getIsDragging, setIsDragging] = useStateAndRef(false)
@@ -135,6 +126,16 @@ const Preview = React.memo((props: PreviewProps) => {
     return { x: 0, y: 0, w: 0, h: 0 }
   }
   
+  
+  
+  
+  // start progress y in (..0..100..) * visiblePhotosCnt
+  const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
+  // start progress for photos in (..0..100..) * availablePhotos.length
+  const [getStartPhotoProgress, setStartPhotoProgress] = useRefGetSet(0)
+  // curr progress y in (..0..100..) from start progress y
+  const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
+  const animatedCurrProgressY = useAnimatedValue(0)
   
   
   
@@ -168,18 +169,10 @@ const Preview = React.memo((props: PreviewProps) => {
         }
       }
       else {
-        if (pICurr <= -50) {
-          return [-100, -vThreshold]
-        }
-        if (pICurr < 0) {
-          return [0, vThreshold]
-        }
-        if (pICurr >= 50) {
-          return [100, vThreshold]
-        }
-        if (pICurr > 0) {
-          return [0, -vThreshold]
-        }
+        if (pICurr <= -50) return [-100, -vThreshold]
+        if (pICurr < 0) return [0, vThreshold]
+        if (pICurr >= 50) return [100, vThreshold]
+        if (pICurr > 0) return [0, -vThreshold]
       }
       return [0, 0]
     })()
@@ -226,12 +219,14 @@ const Preview = React.memo((props: PreviewProps) => {
     getDragCurrProgressY,
   } = useDragProgress({ getTrackProps })
   
+  
   const mergeProgress = () => {
     const p = getStartProgressY() + getCurrProgressY()
-    const viewMaxP = (visiblePhotosCnt < 3 ? 0 : visiblePhotosCnt) * 100
+    const viewMaxP = (visiblePhotosCnt <= 1 ? 0 : visiblePhotosCnt) * 100
     setStartProgressY(MathU.round3(RangeU.loop(p, [0, viewMaxP])))
     const photoP = getStartPhotoProgress() + getCurrProgressY()
-    const photoMaxP = (photosCnt < 2 ? 0 : photosCnt) * 100
+    // Если имеем 0 или 1 фото, то листать не можем, поэтому считаем что 0 прогресс
+    const photoMaxP = (photosCnt <= 1 ? 0 : photosCnt) * 100
     setStartPhotoProgress(MathU.round3(RangeU.loop(photoP, [0, photoMaxP])))
     setCurrProgressY(0)
   }
@@ -239,6 +234,7 @@ const Preview = React.memo((props: PreviewProps) => {
   const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
   const { getWasDragged, setWasDragged } = useAppPointerAction()
+  
   
   const onAnyDrag = (cpy: number, vertical: boolean, drag: boolean) => {
     if (isPhotosDraggable && vertical) {
@@ -284,11 +280,11 @@ const Preview = React.memo((props: PreviewProps) => {
       xy: [vpx, vpy], // viewport x / y coordinates
       movement: [mx, my],
       delta: [dx, dy],
-      velocity: [_velx, _vely], // px/ms (nonnegative)
+      velocity: [velxabs, velyabs], // px/ms (nonnegative)
       direction: [dirx, diry], // -1, 0, 1, positive diry is from top to bottom
       currentTarget,
     } = gesture
-    const [velx, vely] = [dirx * _velx, diry * _vely]
+    const [velx, vely] = [dirx * velxabs, diry * velyabs]
     
     const { vertical, drag } = getDragDirection({ mx, my })
     
@@ -335,11 +331,12 @@ const Preview = React.memo((props: PreviewProps) => {
     const p = getStartProgressY() + cp
     const photoP = getStartPhotoProgress() + cp
     //console.log('p', p, 'photoP', photoP)
-    // displayedIndex from top to bottom
+    // displayedIndex from top of stack to bottom of stack
     const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
+    const photoI = RangeU.loop(Math.floor(photoP / 100) + displayedI, [0, photosCnt])
     // progressCurrent - nonnegative
     const pCurr = mod(p, 100)
-    return { p, photoP, displayedI, pCurr }
+    return { p, photoP, displayedI, photoI, pCurr }
   })
   
   
@@ -408,12 +405,8 @@ const Preview = React.memo((props: PreviewProps) => {
                       <AnimatedPhoto
                         animatedAttrs={{
                           src: animatedProps.map(ap => {
-                            const { p, photoP, displayedI, pCurr } = ap(i)
-                            //console.log('displayedI', displayedI, 'photoP', photoP)
-                            const photoI = RangeU.loop(
-                              Math.floor(photoP / 100) + displayedI,
-                              [0, photosCnt],
-                            )
+                            const { displayedI, photoI } = ap(i)
+                            //console.log('displayedI', displayedI, 'photoI', photoI,)
                             return availablePhotos[photoI]?.dataUrl ?? ''
                           }),
                         }}
@@ -505,7 +498,7 @@ const PhotosContainer2 = styled.div`
   position: relative;
   
   // allow intercept only single finger left / right swipe gestures
-  touch-action: pan-y;
+  touch-action: pan-x;
   pointer-events: none;
   & > * { pointer-events: auto; }
 `

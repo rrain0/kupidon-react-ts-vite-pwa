@@ -1,11 +1,39 @@
+import { ObjectU } from '@util/common/ObjectU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import React, { useState } from 'react'
-import { AnimatedImgAttrs, AnimatedStyle } from 'src/mini-libs/animated/AnimatedProps.ts'
+import React, { useMemo, useState } from 'react'
+import {
+  AnimatedComponentState,
+  AnimatedImgAttrs,
+  AnimatedStyle,
+} from 'src/mini-libs/animated/AnimatedProps.ts'
 import { batchUpdate } from 'src/mini-libs/animated/AnimatedValue.ts'
 import isnumber = TypeU.isnumber
+import Updater = TypeU.Updater
+import ObjectMap = ObjectU.ObjectMap
+import Callback1 = TypeU.Callback1
+import isobject = TypeU.isobject
 
 
+
+const createComponentStateUpdaters = <S extends Record<string, any>>(
+  updateState: Updater<S>,
+  animatedState: AnimatedComponentState<S>,
+) => {
+  return ObjectMap<
+    AnimatedComponentState<S>,
+    { [Prop in keyof S]: Callback1<S[Prop]> }
+  >(
+    animatedState,
+    ([prop]) => [
+      prop,
+      value => updateState(s => {
+        if (isobject(s) && s[prop] === value) return s
+        return { ...s, [prop]: value }
+      }),
+    ]
+  )
+}
 
 const createImgAttrsUpdaters = (imgRef: React.RefObject<HTMLImageElement>) => ({
   src: (value: string) => {
@@ -89,6 +117,7 @@ const createElemStyleUpdaters = (elemRef: React.RefObject<HTMLElement>) => ({
 
 
 
+/*
 
 const createImgAttrsUpdaters2 = (imgRef: React.RefObject<HTMLImageElement>) => ({
   src: (value: string) => {
@@ -192,31 +221,39 @@ const createElemStyleUpdaters2 = (elemRef: React.RefObject<HTMLElement>) => ({
   },
 })
 
+*/
 
 
-
-export const useImgAttrsUpdaters = (
-  imgRef: React.RefObject<HTMLImageElement>,
-) => {
-  return useState(() => createImgAttrsUpdaters(imgRef))[0]
-}
-
-export const useElemStyleUpdaters = (
-  elemRef: React.RefObject<HTMLElement>,
-) => {
-  return useState(() => createElemStyleUpdaters(elemRef))[0]
-}
 
 
 
 // TODO Animated - make default event handler if unknown property
-export const useRefreshElemStyleUpdaters = (
+export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
+  updateState: Updater<S>,
+  animatedState: AnimatedComponentState<S>,
+) => {
+  const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedState)
+  // updateState & animatedState keys must be the same
+  const styleUpdaters = useMemo(() => createComponentStateUpdaters(updateState, animatedState), [])
+  
+  const prevAnimated = getPrevAnimatedStyle()
+  for (const s in prevAnimated) {
+    prevAnimated[s].removeOnChange(styleUpdaters[s])
+  }
+  for (const s in animatedState) {
+    animatedState[s].onChange(styleUpdaters[s])
+  }
+  setPrevAnimatedStyle(animatedState)
+}
+
+export const useUpdateElemStyleUpdaters = (
   elemRef: React.RefObject<HTMLElement>,
   animatedStyle?: AnimatedStyle,
 ) => {
   const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedStyle)
   //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
-  const styleUpdaters = useElemStyleUpdaters(elemRef)
+  // ref must be the same
+  const styleUpdaters = useMemo(() => createElemStyleUpdaters(elemRef), [])
   
   const prevAnimated = getPrevAnimatedStyle()
   //const prevI = getPrevAnimatedStyleI()
@@ -233,13 +270,14 @@ export const useRefreshElemStyleUpdaters = (
   setPrevAnimatedStyle(animatedStyle)
 }
 
-export const useRefreshImgAttrsUpdaters = (
+export const useUpdateImgAttrsUpdaters = (
   imgRef: React.RefObject<HTMLImageElement>,
   animatedAttrs?: AnimatedImgAttrs,
 ) => {
   const [getPrevAnimatedImgAttrs, setPrevAnimatedStyleImgAttrs] = useRefGetSet(animatedAttrs)
   //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
-  const styleUpdaters = useImgAttrsUpdaters(imgRef)
+  // ref must be the same
+  const styleUpdaters = useMemo(() => createImgAttrsUpdaters(imgRef), [])
   
   const prevAnimated = getPrevAnimatedImgAttrs()
   //const prevI = getPrevAnimatedStyleI()

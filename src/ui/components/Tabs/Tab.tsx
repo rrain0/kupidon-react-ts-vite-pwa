@@ -14,9 +14,9 @@ const Tab = styled.div<TabProps>`
   //width: 100cqw;
   //max-width: 100cqw;
   &{
-    min-width: ${p=>p.width}px;
-    width: ${p=>p.width}px;
-    max-width: ${p=>p.width}px;
+    min-width: ${p => p.width}px;
+    width: ${p => p.width}px;
+    max-width: ${p => p.width}px;
     will-change: min-width, width, max-width;
   }
   ${col};

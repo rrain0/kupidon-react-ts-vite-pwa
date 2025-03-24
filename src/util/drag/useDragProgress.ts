@@ -29,7 +29,7 @@ const dPxToDProgress = (dPx: number, trackLen: number) => RangeU.map(
 
 
 
-export type TrackProps = { x: number, w: number, y: number, h: number }
+export type TrackProps = { x: number, y: number, w: number, h: number }
 export type GetTrackProps = Getter<TrackProps>
 
 export type UseDragProgressProps = {

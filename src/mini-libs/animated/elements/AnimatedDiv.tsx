@@ -6,7 +6,7 @@ import { AnimatedStyle } from 'src/mini-libs/animated/AnimatedProps.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  useRefreshElemStyleUpdaters,
+  useUpdateElemStyleUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
 import Puro = TypeU.Puro
 import Children = ReactU.Children
@@ -37,7 +37,7 @@ const AnimatedDiv = React.memo(
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
-      useRefreshElemStyleUpdaters(elemRef, animatedStyle)
+      useUpdateElemStyleUpdaters(elemRef, animatedStyle)
       
       
       return (

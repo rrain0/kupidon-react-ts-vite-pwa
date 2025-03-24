@@ -1,7 +1,14 @@
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { MathU } from '@util/common/MathU.ts'
+import { RangeU } from '@util/common/RangeU.ts'
+import { getViewProps } from '@util/view/ViewProps.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
-import React from 'react'
+import React, { useRef } from 'react'
 import { MockPoster } from 'src/_mock-data/poster/MockPoster.ts'
+import { Colors } from 'src/ui-data/Colors.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -10,48 +17,134 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
+import { useGallery } from 'src/ui/components/UseGallery/useGallery.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import LocationIc = SvgIconsPack.LocationIc
 import PriceTagIc = SvgIconsPack.PriceTagIc
+import mod = MathU.mod
+import arrOfIndices = ArrayU.arrOfIndices
 
 
 
 const PosterPreview = React.memo(() => {
   
-  const p = MockPoster.posters[0]
+  //const posters = MockPoster.posters
+  const itemsCnt = 6
+  const visibleViewsCnt = 3
+  
+  const itemsBoxRef = useRef<HTMLDivElement>(null)
+  const getTrackProps = () => {
+    const pb = itemsBoxRef.current
+    if (pb) {
+      const p = getViewProps(itemsBoxRef.current)
+      return { x: p.x, y: p.y, w: p.w, h: p.h }
+    }
+    return { x: 0, y: 0, w: 0, h: 0 }
+  }
+  
+  
+  const {
+    getWasDragged,
+    onTrackDrag,
+    animatedCurrProgressX,
+    
+    getStartProgressX,
+    getStartItemProgress,
+    getCurrProgressX,
+  } = useGallery({
+    itemsCnt,
+    visibleViewsCnt,
+    getTrackProps,
+    noDrag: false,
+  })
+  
+  const animatedProps = animatedCurrProgressX.map(cp => (i: number) => {
+    const p = getStartProgressX() + cp
+    const itemP = getStartItemProgress() + cp
+    //console.log('p', p, 'photoP', photoP)
+    const displayedI = RangeU.loop(i + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    console.log('i', i, 'displayedI', displayedI, 'p', p, 'itemP', itemP)
+    // TODO понять почему здесь надо минус
+    const itemI = RangeU.loop(displayedI - Math.floor(itemP / 100), [0, itemsCnt])
+    // progressCurrent - nonnegative
+    const pCurr = mod(p, 100)
+    return { p, itemP, displayedI, itemI, pCurr }
+  })
   
   return (
     <Frame
       data-display-name="PosterPreview"
+      ref={itemsBoxRef}
+      {...onTrackDrag()}
     >
       
-      <MiniPosterFrame>
-      
-        <ImgSpark
-          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
-          src={p.previewImg}
-        />
-        
-        <MiniPosterImageFade />
-        
-        <MiniPosterBox>
-          <Date>{p.date}</Date>
+      {arrOfIndices(visibleViewsCnt).map(viewI => {
+        return (
+          <MiniPosterFrame
+            key={viewI}
+            animatedStyle={{
+              transform: animatedProps.map(ap => {
+                const { p, itemP, displayedI, pCurr } = ap(viewI)
+                let x = displayedI * 100 + pCurr
+                // add gap 20%
+                x = RangeU.map(x, [0, 100], [0, 120])
+                return `translateX(${x}%)`
+              }),
+            }}
+          >
+            
+            <AnimatedState
+              animatedState={{
+                itemI: animatedProps.map(ap => {
+                  const { p, itemP, displayedI, itemI, pCurr } = ap(viewI)
+                  if (viewI === 0) console.log('displayedI', displayedI, 'itemI', itemI)
+                  return itemI
+                }),
+              }}
+            >
+              {({ itemI }) => {
+                return (
+                  <div
+                    style={{
+                      backgroundColor: Colors.test[itemI],
+                      width: '100%',
+                      height: '100%',
+                      padding: 10,
+                    }}
+                  >
+                    {itemI}
+                  </div>
+                )
+              }}
+            </AnimatedState>
+            
+            {/* <ImgSpark
+              css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
+              src={p.previewImg}
+            />
+            
+            <MiniPosterImageFade />
+            
+            <MiniPosterBox>
+              <Date>{p.date}</Date>
+              
+              <LocationBox>
+                <LocationIc css={SvgIconS6.t(locationIcS)} />
+                <LocationText>{p.location}</LocationText>
+              </LocationBox>
+              
+              <Description>{p.description}</Description>
+              
+              <PriceBox>
+                <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
+                <PriceText>{p.price}</PriceText>
+              </PriceBox>
+            </MiniPosterBox> */}
           
-          <LocationBox>
-            <LocationIc css={SvgIconS6.t(locationIcS)} />
-            <LocationText>{p.location}</LocationText>
-          </LocationBox>
-          
-          <Description>{p.description}</Description>
-          
-          <PriceBox>
-            <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
-            <PriceText>{p.price}</PriceText>
-          </PriceBox>
-        </MiniPosterBox>
-        
-      </MiniPosterFrame>
+          </MiniPosterFrame>
+        )
+      })}
       
       <SelectMeter
         css={SelectMeterS6.t(selectMeterS)}
@@ -66,6 +159,7 @@ export default PosterPreview
 
 
 
+
 const Frame = styled.div`
   position: relative;
   width: 100%;
@@ -77,6 +171,8 @@ const Frame = styled.div`
   grid: 'meter' auto / auto;
   // TODO если начать листать, то тень будет кринжово смотреться
   box-shadow: ${StyleVals.shadowSz} ${p => p.theme.shadow.bg};
+  // allow intercept only single finger up / down swipe gestures
+  touch-action: pan-y;
 `
 
 
@@ -96,7 +192,7 @@ const selectMeterS: AppWidgetStyle = t => [
 ]
 
 
-const MiniPosterFrame = styled.div`
+const MiniPosterFrame = styled(AnimatedDiv)`
   position: absolute;
   left: 0;
   width: 100%;

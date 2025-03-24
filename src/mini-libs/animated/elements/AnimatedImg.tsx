@@ -8,7 +8,7 @@ import {
 } from 'src/mini-libs/animated/AnimatedProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  useRefreshElemStyleUpdaters, useRefreshImgAttrsUpdaters,
+  useUpdateElemStyleUpdaters, useUpdateImgAttrsUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
 import Puro = TypeU.Puro
 
@@ -40,12 +40,11 @@ const AnimatedImg = React.memo(
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
-      useRefreshElemStyleUpdaters(elemRef, animatedStyle)
-      useRefreshImgAttrsUpdaters(elemRef, animatedAttrs)
+      useUpdateElemStyleUpdaters(elemRef, animatedStyle)
+      useUpdateImgAttrsUpdaters(elemRef, animatedAttrs)
       
       
       return (
-        // eslint-disable-next-line jsx-a11y/alt-text
         <img
           data-display-name="AnimatedImg"
           {...restProps}

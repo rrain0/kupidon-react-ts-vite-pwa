@@ -3,6 +3,7 @@ import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import Puro = TypeU.Puro
 
 
+export type AnimatedAny = AnimatedProperty<any, any>
 export type AnimatedString = AnimatedProperty<any, string>
 export type AnimatedNumber = AnimatedProperty<any, number>
 export type AnimatedStringOrNumber = AnimatedString | AnimatedNumber | AnimatedProperty<any, string | number>
@@ -26,5 +27,10 @@ export type AnimatedStyle = Puro<{
 export type AnimatedImgAttrs = Puro<{
   src: AnimatedString
 }>
+
+
+export type AnimatedComponentState<S extends Record<string, any> = Record<string, any>> = {
+  [Prop in keyof S]: AnimatedProperty<any, S[Prop]>
+}
 
 

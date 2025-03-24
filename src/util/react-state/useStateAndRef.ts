@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { TypeU } from 'src/util/common/TypeU'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
-import isfunction = TypeU.isfunction
 import Setter = TypeU.Setter
 import ValueOrProducer = TypeU.ValueOrProducer
+
 
 
 export const useStateAndRef = <S>(initialState: ValueOrProducer<S>) => {
