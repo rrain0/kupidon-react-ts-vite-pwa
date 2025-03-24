@@ -135,11 +135,11 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   const mergeProgress = () => {
     const p = getStartProgressX() + getCurrProgressX()
     // Если имеем 0 или 1 отображаемых view, то листать не можем, поэтому считаем что 0 прогресс
-    const viewMaxP = (visibleViewsCnt <= 1 ? 0 : visibleViewsCnt) * 100
+    const viewMaxP = visibleViewsCnt * 100
     setStartProgressX(MathU.round3(RangeU.loop(p, [0, viewMaxP])))
     const photoP = getStartItemProgress() + getCurrProgressX()
     // Если имеем 0 или 1 item, то листать не можем, поэтому считаем что 0 прогресс
-    const itemMaxP = (itemsCnt <= 1 ? 0 : itemsCnt) * 100
+    const itemMaxP = itemsCnt * 100
     setStartItemProgress(MathU.round3(RangeU.loop(photoP, [0, itemMaxP])))
     setCurrProgressX(0)
   }

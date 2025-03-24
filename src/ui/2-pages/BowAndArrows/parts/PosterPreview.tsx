@@ -29,7 +29,7 @@ import arrOfIndices = ArrayU.arrOfIndices
 
 const PosterPreview = React.memo(() => {
   
-  const posters = MockPoster.posters
+  //const posters = MockPoster.posters
   const itemsCnt = 6
   const visibleViewsCnt = 3
   
@@ -62,11 +62,10 @@ const PosterPreview = React.memo(() => {
   const animatedProps = animatedCurrProgressX.map(cp => (i: number) => {
     const p = getStartProgressX() + cp
     const itemP = getStartItemProgress() + cp
-    //console.log('p', p, 'photoP', photoP)
-    const displayedI = RangeU.loop(i + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
-    console.log('i', i, 'displayedI', displayedI, 'p', p, 'itemP', itemP)
-    // TODO понять почему здесь надо минус
-    const itemI = RangeU.loop(displayedI - Math.floor(itemP / 100), [0, itemsCnt])
+    const displayedI = RangeU.loop((i - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    //console.log('i', i, 'displayedI', displayedI, 'p', p, 'itemP', itemP)
+    // item progress параллелен прогрессу по оси x, так что его инвертируем
+    const itemI = RangeU.loop(displayedI + (itemsCnt - Math.floor(itemP / 100)), [0, itemsCnt])
     // progressCurrent - nonnegative
     const pCurr = mod(p, 100)
     return { p, itemP, displayedI, itemI, pCurr }
@@ -104,7 +103,20 @@ const PosterPreview = React.memo(() => {
               }}
             >
               {({ itemI }) => {
-                const p = posters[itemI]
+                return (
+                  <div
+                    style={{
+                      backgroundColor: Colors.test[itemI],
+                      width: '100%',
+                      height: '100%',
+                      padding: 10,
+                    }}
+                  >
+                    {itemI}
+                  </div>
+                )
+                
+                /* const p = posters[itemI]
                 return (
                   <>
                     <ImgSpark
@@ -130,20 +142,7 @@ const PosterPreview = React.memo(() => {
                       </PriceBox>
                     </MiniPosterBox>
                   </>
-                )
-                
-                return (
-                  <div
-                    style={{
-                      backgroundColor: Colors.test[itemI],
-                      width: '100%',
-                      height: '100%',
-                      padding: 10,
-                    }}
-                  >
-                    {itemI}
-                  </div>
-                )
+                ) */
               }}
               
             </AnimatedState>
