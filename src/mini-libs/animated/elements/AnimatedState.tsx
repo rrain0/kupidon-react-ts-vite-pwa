@@ -1,3 +1,4 @@
+import { ObjectU } from '@util/common/ObjectU.ts'
 import React, { useState } from 'react'
 import {
   AnimatedComponentState,
@@ -7,12 +8,13 @@ import {
   useUpdateComponentStateUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
 import Puro = TypeU.Puro
+import ObjectMap = ObjectU.ObjectMap
 
 
 
 
 type AnimatedStateProps<S extends Record<string, any>> = {
-  animatedState: S
+  animatedState: AnimatedComponentState<S>,
 } & Puro<{
   children: (state: S) => React.ReactNode
 }>
@@ -25,15 +27,17 @@ const AnimatedState = (<S extends Record<string, any>>() =>
       children,
     } = props
     
-    const [state, setState] = useState<S>(undefined as unknown as S)
+    const [state, setState] = useState<S>(() => {
+      return ObjectMap<AnimatedComponentState<S>, S>(
+        animatedState,
+        ([prop, animated]) => [prop, animated.get()]
+      )
+    })
     
     
+    // TODO trigger set animated values on each new animated
     useUpdateComponentStateUpdaters(setState, animatedState)
     
-    if (!state) return undefined
-    
-    // TODO TS - need to exclude children from generic S
-    // @ts-ignore
     return children?.(state)
   })
 )()
