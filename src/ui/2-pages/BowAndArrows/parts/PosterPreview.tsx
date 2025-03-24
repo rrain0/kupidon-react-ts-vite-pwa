@@ -29,7 +29,7 @@ import arrOfIndices = ArrayU.arrOfIndices
 
 const PosterPreview = React.memo(() => {
   
-  //const posters = MockPoster.posters
+  const posters = MockPoster.posters
   const itemsCnt = 6
   const visibleViewsCnt = 3
   
@@ -104,6 +104,34 @@ const PosterPreview = React.memo(() => {
               }}
             >
               {({ itemI }) => {
+                const p = posters[itemI]
+                return (
+                  <>
+                    <ImgSpark
+                      css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
+                      src={p.previewImg}
+                    />
+                    
+                    <MiniPosterImageFade />
+                    
+                    <MiniPosterBox>
+                      <Date>{p.date}</Date>
+                      
+                      <LocationBox>
+                        <LocationIc css={SvgIconS6.t(locationIcS)} />
+                        <LocationText>{p.location}</LocationText>
+                      </LocationBox>
+                      
+                      <Description>{p.description}</Description>
+                      
+                      <PriceBox>
+                        <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
+                        <PriceText>{p.price}</PriceText>
+                      </PriceBox>
+                    </MiniPosterBox>
+                  </>
+                )
+                
                 return (
                   <div
                     style={{
@@ -117,30 +145,10 @@ const PosterPreview = React.memo(() => {
                   </div>
                 )
               }}
+              
             </AnimatedState>
             
-            {/* <ImgSpark
-              css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
-              src={p.previewImg}
-            />
             
-            <MiniPosterImageFade />
-            
-            <MiniPosterBox>
-              <Date>{p.date}</Date>
-              
-              <LocationBox>
-                <LocationIc css={SvgIconS6.t(locationIcS)} />
-                <LocationText>{p.location}</LocationText>
-              </LocationBox>
-              
-              <Description>{p.description}</Description>
-              
-              <PriceBox>
-                <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
-                <PriceText>{p.price}</PriceText>
-              </PriceBox>
-            </MiniPosterBox> */}
           
           </MiniPosterFrame>
         )

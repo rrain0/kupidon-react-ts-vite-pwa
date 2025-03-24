@@ -41,6 +41,13 @@ export const MockPoster = {
       description: 'Известные артисты исполнят для вас свои песни. Отличная идея для свидания!',
       previewImg: concert,
     },
+    {
+      date: '16 марта',
+      location: 'ВТБ Арена',
+      price: 'от 2599 ₽',
+      description: 'Известные артисты исполнят для вас свои песни. Отличная идея для свидания!',
+      previewImg: concert,
+    },
   ],
   
 }
