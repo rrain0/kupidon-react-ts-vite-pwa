@@ -160,7 +160,7 @@ const AppRouting = React.memo(() => {
   return (
     <RouterProvider router={router}
       future={{
-        // TODO !!! это вызывает флики при переключении табов
+        // TODO Router !!! это вызывает флики при переключении табов
         //v7_startTransition: true,
       }}
     />
