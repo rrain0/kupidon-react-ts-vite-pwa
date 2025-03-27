@@ -1,5 +1,4 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
-import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.ts'
@@ -14,7 +13,6 @@ import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
-import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 
@@ -108,6 +106,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
       this.removeAnimationThrottled()
     }
   }
+  
   
   private readonly removeAnimationThrottled = withThrottle(400, () => {
     if (!this.isRunning) {

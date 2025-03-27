@@ -22,7 +22,7 @@ export namespace ArrayU {
   export const arrOfUndef = (len = 0): undefined[] => {
     return Array(len).fill(undefined)
   }
-  export const arrOfZeros = (len = 0): number[] => {
+  export const arrOfZeros = (len = 0): 0[] => {
     return Array(len).fill(0)
   }
   export const arrOfIndices = (len = 0): number[] => {

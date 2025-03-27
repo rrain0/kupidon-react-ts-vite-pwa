@@ -11,8 +11,11 @@ import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
-import { useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 
+
+
+// Simplicity vs Control balance is hard
 
 
 export type UseGalleryProps = {
@@ -48,6 +51,8 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   const [getCurrProgressX, setCurrProgressX] = useRefGetSet(0)
   
   const animatedCurrProgressX = useAnimatedValue(0)
+  // Assign initial value to views after obtaining their refs
+  useLayoutEffect(() => animatedCurrProgressX.set(0), [])
   
   
   
@@ -60,7 +65,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     
     // px/ms => %width/s
     const velxPercent = velx * 1000 / getTrackProps().w * 100
-    const vThreshold = 70 // %width/s
+    const vThreshold = 150 // %width/s
     
     const sp = getStartProgressX()
     const cp = getCurrProgressX()
@@ -124,7 +129,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   
   
   // works as immediate effect
-  useMemo(() => updateViewsAndFinish(), [deps])
+  useMemo(() => updateViewsAndFinish(), deps)
   
   const {
     updateDragProgress,

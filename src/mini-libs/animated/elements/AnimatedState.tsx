@@ -1,5 +1,5 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   AnimatedComponentState,
 } from 'src/mini-libs/animated/AnimatedProps.ts'
@@ -35,11 +35,13 @@ const AnimatedState = (<S extends Record<string, any>>() =>
       )
     })
     
-    
-    // TODO trigger set animated values on each new animated
     useUpdateComponentStateUpdaters(setState, animatedState)
     
-    return children?.(state)
+    const renderedChildren = useMemo(() => {
+      return children?.(state)
+    }, [children, state])
+    
+    return renderedChildren
   })
 )()
 AnimatedState.displayName = 'AnimatedState'

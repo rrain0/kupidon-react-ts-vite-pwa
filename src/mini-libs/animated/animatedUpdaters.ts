@@ -234,14 +234,16 @@ export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
 ) => {
   const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedState)
   // updateState & animatedState keys must be the same
-  const styleUpdaters = useMemo(() => createComponentStateUpdaters(updateState, animatedState), [])
+  const componentStateUpdaters = useMemo(() => {
+    return createComponentStateUpdaters(updateState, animatedState)
+  }, [])
   
   const prevAnimated = getPrevAnimatedStyle()
   for (const s in prevAnimated) {
-    prevAnimated[s].removeOnChange(styleUpdaters[s])
+    prevAnimated[s].removeOnChange(componentStateUpdaters[s])
   }
   for (const s in animatedState) {
-    animatedState[s].onChange(styleUpdaters[s])
+    animatedState[s].onChange(componentStateUpdaters[s])
   }
   setPrevAnimatedStyle(animatedState)
 }
@@ -253,19 +255,21 @@ export const useUpdateElemStyleUpdaters = (
   const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedStyle)
   //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
   // ref must be the same
-  const styleUpdaters = useMemo(() => createElemStyleUpdaters(elemRef), [])
+  const elemStyleUpdaters = useMemo(() => {
+    return createElemStyleUpdaters(elemRef)
+  }, [])
   
   const prevAnimated = getPrevAnimatedStyle()
   //const prevI = getPrevAnimatedStyleI()
   for (const s in prevAnimated) {
-    prevAnimated[s].removeOnChange(styleUpdaters[s])
+    prevAnimated[s].removeOnChange(elemStyleUpdaters[s])
     
     //prevAnimated[s].removeOnChange2(prevI[s])
   }
   for (const s in animatedStyle) {
-    animatedStyle[s].onChange(styleUpdaters[s])
+    animatedStyle[s].onChange(elemStyleUpdaters[s])
     
-    //prevI[s] = animatedStyle[s].onChange2(styleUpdaters[s])
+    //prevI[s] = animatedStyle[s].onChange2(elemStyleUpdaters[s])
   }
   setPrevAnimatedStyle(animatedStyle)
 }
@@ -277,19 +281,21 @@ export const useUpdateImgAttrsUpdaters = (
   const [getPrevAnimatedImgAttrs, setPrevAnimatedStyleImgAttrs] = useRefGetSet(animatedAttrs)
   //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
   // ref must be the same
-  const styleUpdaters = useMemo(() => createImgAttrsUpdaters(imgRef), [])
+  const imgAttrsUpdaters = useMemo(() => {
+    return createImgAttrsUpdaters(imgRef)
+  }, [])
   
   const prevAnimated = getPrevAnimatedImgAttrs()
   //const prevI = getPrevAnimatedStyleI()
   for (const s in prevAnimated) {
-    prevAnimated[s].removeOnChange(styleUpdaters[s])
+    prevAnimated[s].removeOnChange(imgAttrsUpdaters[s])
     
     //prevAnimated[s].removeOnChange2(prevI[s])
   }
   for (const s in animatedAttrs) {
-    animatedAttrs[s].onChange(styleUpdaters[s])
+    animatedAttrs[s].onChange(imgAttrsUpdaters[s])
     
-    //prevI[s] = animatedAttrs[s].onChange2(styleUpdaters[s])
+    //prevI[s] = animatedAttrs[s].onChange2(imgAttrsUpdaters[s])
   }
   setPrevAnimatedStyleImgAttrs(animatedAttrs)
 }

@@ -9,6 +9,7 @@ import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useRef } from 'react'
 import { MockPoster } from 'src/_mock-data/poster/MockPoster.ts'
 import { Colors } from 'src/ui-data/Colors.ts'
+import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -24,13 +25,15 @@ import LocationIc = SvgIconsPack.LocationIc
 import PriceTagIc = SvgIconsPack.PriceTagIc
 import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
+import arrOfZeros = ArrayU.arrOfZeros
+import round3 = MathU.round3
 
 
 
 const PosterPreview = React.memo(() => {
   
-  //const posters = MockPoster.posters
-  const itemsCnt = 6
+  const posters = PosterData
+  const itemsCnt = posters.length
   const visibleViewsCnt = 3
   
   const itemsBoxRef = useRef<HTMLDivElement>(null)
@@ -56,19 +59,22 @@ const PosterPreview = React.memo(() => {
     itemsCnt,
     visibleViewsCnt,
     getTrackProps,
-    noDrag: false,
+    noDrag: itemsCnt <= 1,
   })
   
-  const animatedProps = animatedCurrProgressX.map(cp => (i: number) => {
+  const animatedProps = animatedCurrProgressX.map(cp => (i = 1) => {
     const p = getStartProgressX() + cp
     const itemP = getStartItemProgress() + cp
-    const displayedI = RangeU.loop((i - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    const pCurr = mod(p, 100)
+    const displayed0I = RangeU.loop(Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    const displayedI = RangeU.loop((i - 1) + displayed0I, [-1, visibleViewsCnt - 1])
     //console.log('i', i, 'displayedI', displayedI, 'p', p, 'itemP', itemP)
     // item progress параллелен прогрессу по оси x, так что его инвертируем
-    const itemI = RangeU.loop(displayedI + (itemsCnt - Math.floor(itemP / 100)), [0, itemsCnt])
+    const item0I = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
+    const itemI = RangeU.loop(displayedI + item0I, [0, itemsCnt])
+    const item0VisibleI = RangeU.loop(itemsCnt - Math.floor((itemP + 50) / 100), [0, itemsCnt])
     // progressCurrent - nonnegative
-    const pCurr = mod(p, 100)
-    return { p, itemP, displayedI, itemI, pCurr }
+    return { p, itemP, pCurr, displayed0I, displayedI, item0I, itemI, item0VisibleI }
   })
   
   return (
@@ -84,7 +90,7 @@ const PosterPreview = React.memo(() => {
             key={viewI}
             animatedStyle={{
               transform: animatedProps.map(ap => {
-                const { p, itemP, displayedI, pCurr } = ap(viewI)
+                const { p, itemP, pCurr, displayedI } = ap(viewI)
                 let x = displayedI * 100 + pCurr
                 // add gap 20%
                 x = RangeU.map(x, [0, 100], [0, 120])
@@ -95,15 +101,12 @@ const PosterPreview = React.memo(() => {
             
             <AnimatedState
               animatedState={{
-                itemI: animatedProps.map(ap => {
-                  const { p, itemP, displayedI, itemI, pCurr } = ap(viewI)
-                  if (viewI === 0) console.log('displayedI', displayedI, 'itemI', itemI)
-                  return itemI
-                }),
+                itemI: animatedProps.map(ap => ap(viewI).itemI),
               }}
             >
               {({ itemI }) => {
-                return (
+                //console.log('itemI', itemI)
+                /* return (
                   <div
                     style={{
                       backgroundColor: Colors.test[itemI],
@@ -112,11 +115,11 @@ const PosterPreview = React.memo(() => {
                       padding: 10,
                     }}
                   >
-                    {itemI}
+                    {itemI + 1}
                   </div>
-                )
+                ) */
                 
-                /* const p = posters[itemI]
+                const p = posters[itemI]
                 return (
                   <>
                     <ImgSpark
@@ -136,13 +139,15 @@ const PosterPreview = React.memo(() => {
                       
                       <Description>{p.description}</Description>
                       
-                      <PriceBox>
-                        <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
-                        <PriceText>{p.price}</PriceText>
-                      </PriceBox>
+                      {p.price && (
+                        <PriceBox>
+                          <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
+                          <PriceText>{p.price}</PriceText>
+                        </PriceBox>
+                      )}
                     </MiniPosterBox>
                   </>
-                ) */
+                )
               }}
               
             </AnimatedState>
@@ -153,10 +158,18 @@ const PosterPreview = React.memo(() => {
         )
       })}
       
-      <SelectMeter
-        css={SelectMeterS6.t(selectMeterS)}
-        metersValues={[2, 0, 0, 0, 0]}
-      />
+      <AnimatedState
+        animatedState={{
+          item0VisibleI: animatedProps.map(ap => ap().item0VisibleI),
+        }}
+      >
+        {({ item0VisibleI }) => (
+          <SelectMeter
+            css={SelectMeterS6.t(selectMeterS)}
+            metersValues={arrOfZeros(itemsCnt).map((it, i) => i === item0VisibleI ? 2 : it)}
+          />
+        )}
+      </AnimatedState>
       
     </Frame>
   )
