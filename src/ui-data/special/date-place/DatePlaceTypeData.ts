@@ -56,39 +56,40 @@ import volunteering
 
 
 export type DatePlaceType =
+  // Level 0
   | 'all'
   
-  // common
+  // Level 1
   | 'romantic'
   | 'cultural'
   | 'active'
   | 'entertaining'
   | 'nonstandard'
   
-  // romantic
+  // Level 2 - romantic
   | 'tableRomantic'
   | 'restaurant'
   | 'cafe'
   | 'coffeeHouse' // Кофейня
   | 'walking' // Прогулки на свежем воздухе
   
-  // cultural
+  // Level 2 - cultural
   | 'museum'
   | 'gallery'
   | 'theatre'
   | 'cinema'
   
-  // active
+  // Level 2 - active
   | 'sports'
   | 'extreme'
   | 'outdoorActivities' // Активный отдых на свежем воздухе
   
-  // entertaining
+  // Level 2 - entertaining
   | 'excitingEntertainment' // Драйвовые развлечения
   | 'interactive' // Интерактивные развлечения: VR-игры, комп игры, квесты
   | 'eveningEntertainment' // Вечерние развлечения
   
-  // nonstandard
+  // Level 2 - nonstandard
   | 'masterClasses' // Мастер-классы
   | 'streamCocktails' // Центры паровых коктейлей
   | 'volunteering' // Волонтёрство

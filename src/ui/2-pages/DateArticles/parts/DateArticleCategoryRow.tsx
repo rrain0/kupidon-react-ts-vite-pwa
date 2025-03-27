@@ -5,6 +5,7 @@ import {
   DateArticleCategoriesData,
   DateArticleCategoryName,
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
 import { DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
@@ -47,6 +48,15 @@ const DateArticleCategoryRow = React.memo((props: DateArticleCategoryRowProps) =
   
   const headerItem = data.headerItem
   
+  const items = data.listOfItems.flatMap(it => {
+    if (it.type === 'itemsOfType') {
+      return DateArticlesData
+        .filter(ait => ait.types.includes(it.itemsType))
+        .map(ait => ({ type: 'item', itemId: ait.id } as const))
+    }
+    return it
+  })
+  
   return (
     <RowView
       data-display-name="DateArticleCategoryRow"
@@ -61,7 +71,7 @@ const DateArticleCategoryRow = React.memo((props: DateArticleCategoryRowProps) =
       
       <Overflow>
         <ListRow>
-          {data.listOfItems.map(it => (
+          {items.map(it => (
             <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
               {props => <DateArticleItemCard {...props} />}
             </DateArticleItemToCardData>
@@ -82,15 +92,18 @@ const RowView = styled.div`
 `
 
 const Overflow = styled.div`
-  // Вертикальные маргин и паддинг нужны чтобы отображать тени у карточек - но тач зона расширена
-  // TODO paddings
-  margin: -16px -16px;
-  padding: 16px 16px;
-  width: calc(100% + 16px * 2);
+  // Вертикальные маргины и паддинги нужны чтобы отображать тени у карточек
+  --offset: 16px;
+  margin: calc(-1 * var(--offset));
+  padding: var(--offset);
+  width: calc(100% + var(--offset) * 2);
   height: fit-content;
   overflow: auto;
   ${noScrollbars};
   ${row};
+  // Убирает расширенную тач-зону
+  pointer-events: none;
+  & > * { pointer-events: auto; }
 `
 const ListRow = styled.div`
   width: fit-content;

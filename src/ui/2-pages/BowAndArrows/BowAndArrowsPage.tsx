@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { DateCategoriesData } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
+import { DatePlaceCategoriesData } from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
@@ -8,7 +8,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryRow.tsx'
-import DateCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DateCategoriesList.tsx'
+import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -59,7 +59,7 @@ const BowAndArrowsPage = React.memo(() => {
             
             <div style={{ height: 16 }} />
             
-            <DateCategoriesList list={DateCategoriesData.allRowOfPreviews} />
+            <DatePlaceCategoriesList list={DatePlaceCategoriesData.allRowOfPreviews} />
             
             <div style={{ height: 16 }} />
             

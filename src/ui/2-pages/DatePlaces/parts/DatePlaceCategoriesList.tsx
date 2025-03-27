@@ -4,13 +4,14 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { DateCategoriesData, DateCategoryData } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
+import { DatePlaceCategoriesData, DatePlaceCategoryData }
+  from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
-import DateCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DateCategoryCard.tsx'
+import DatePlaceCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoryCard.tsx'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ReactU } from 'src/util/react/ReactU'
@@ -25,10 +26,10 @@ import fullParams = RouteBuilder.fullParams
 
 
 
-export type DateCategoriesListProps = ClassStyle & Children & {
-  list: DateCategoryData
+export type DatePlaceCategoriesListProps = ClassStyle & Children & {
+  list: DatePlaceCategoryData
 }
-export const DateCategoriesList = React.memo((props: DateCategoriesListProps) => {
+export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesListProps) => {
   const {
     className,
     style,
@@ -43,11 +44,11 @@ export const DateCategoriesList = React.memo((props: DateCategoriesListProps) =>
   
   if (list.type === 'category') {
     if (list.ui === 'page') return (
-      <div 
+      <div
         css={col}
         className={className}
         style={style}
-        data-display-name="DateCategoriesList"
+        data-display-name="DatePlaceCategoriesList"
       >
         <Pages.PageHeaderWithLeftRight>
           <BackBtn />
@@ -59,7 +60,7 @@ export const DateCategoriesList = React.memo((props: DateCategoriesListProps) =>
         
         <ListCols>
           {list.next.map(it => (
-            <DateCategoryCard
+            <DatePlaceCategoryCard
               key={it}
               style={{ width: '100%' }}
               category={it}
@@ -76,7 +77,7 @@ export const DateCategoriesList = React.memo((props: DateCategoriesListProps) =>
         css={col}
         className={className}
         style={style}
-        data-display-name="DateCategoriesList"
+        data-display-name="DatePlaceCategoriesList"
       >
         <Pages.PageHeaderWithLeftRight>
           <BackBtn />
@@ -88,7 +89,7 @@ export const DateCategoriesList = React.memo((props: DateCategoriesListProps) =>
         
         <div css={[col, { gap: 16 }]}>
           {list.next.map(it => {
-            const category = DateCategoriesData[it]
+            const category = DatePlaceCategoriesData[it]
             if (category.type === 'category' && category.ui === 'rowOfPreviews') {
               return (
                 <RowOfPreviews key={it} list={category} />
@@ -103,8 +104,8 @@ export const DateCategoriesList = React.memo((props: DateCategoriesListProps) =>
   
   return undefined
 })
-DateCategoriesList.displayName = 'DateCategoriesList'
-export default DateCategoriesList
+DatePlaceCategoriesList.displayName = 'DatePlaceCategoriesList'
+export default DatePlaceCategoriesList
 
 
 
@@ -121,7 +122,7 @@ const ListCols = styled.div`
 
 
 export type RowOfPreviewsProps = {
-  list: DateCategoryData & { type: 'category', ui: 'rowOfPreviews' }
+  list: DatePlaceCategoryData & { type: 'category', ui: 'rowOfPreviews' }
 }
 const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
   const {
@@ -155,7 +156,7 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
       <Overflow>
         <ListRow>
           {list.next.map(it => (
-            <DateCategoryCard
+            <DatePlaceCategoryCard
               key={it}
               category={it}
             />
@@ -171,15 +172,18 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
 
 
 const Overflow = styled.div`
-  // Вертикальные маргин и паддинг нужны чтобы отображать тени у карточек - но тач зона расширена
-  // TODO paddings
-  margin: -16px -16px;
-  padding: 16px 16px;
-  width: calc(100% + 16px * 2);
+  // Вертикальные маргины и паддинги нужны чтобы отображать тени у карточек
+  --offset: 16px;
+  margin: calc(-1 * var(--offset));
+  padding: var(--offset);
+  width: calc(100% + var(--offset) * 2);
   height: fit-content;
   overflow: auto;
   ${noScrollbars};
   ${row};
+  // Убирает расширенную тач-зону
+  pointer-events: none;
+  & > * { pointer-events: auto; }
 `
 const ListRow = styled.div`
   width: fit-content;

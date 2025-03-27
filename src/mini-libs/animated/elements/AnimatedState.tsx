@@ -13,6 +13,7 @@ import ObjectMap = ObjectU.ObjectMap
 
 
 
+
 type AnimatedStateProps<S extends Record<string, any>> = {
   animatedState: AnimatedComponentState<S>,
 } & Puro<{

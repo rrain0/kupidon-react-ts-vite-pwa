@@ -1,11 +1,12 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React, { useMemo } from 'react'
-import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
+import { DatePlaceCategoriesData, DatePlaceCategoryType }
+  from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
-import DateCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DateCategoriesList.tsx'
+import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -20,7 +21,7 @@ import ObjectUnionFix = TypeU.ObjectUnionFix
 
 
 type DatePlacesPagePropsType = { type: DatePlaceType }
-type DatePlacesPagePropsCategory = { category: DateCategoryType }
+type DatePlacesPagePropsCategory = { category: DatePlaceCategoryType }
 export type DatePlacesPageProps = DatePlacesPagePropsType | DatePlacesPagePropsCategory
 
 const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
@@ -29,7 +30,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   const uiValues = useMemo(() => ({
     pageTitle: (() => {
       if (type) return DatePlaceTypeData[type].name
-      return DatePlaceTypeData[DateCategoriesData[category].placeType].name
+      return DatePlaceTypeData[DatePlaceCategoriesData[category].placeType].name
     })(),
   }), [category, type])
   const uiText = useUiValues(uiValues)
@@ -68,7 +69,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
               </>
             )}
             
-            {category && <DateCategoriesList list={DateCategoriesData[category]} />}
+            {category && <DatePlaceCategoriesList list={DatePlaceCategoriesData[category]} />}
             
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>

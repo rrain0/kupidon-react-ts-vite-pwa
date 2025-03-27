@@ -25,6 +25,7 @@ import rowC = EmotionCommon.rowC
 import ClassStyle = ReactU.ClassStyle
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import assertNever = TypeU.assertNever
+import col = EmotionCommon.col
 
 
 
@@ -124,19 +125,14 @@ const ContentBox = styled.div`
   width: 100%;
   height: 100%;
   padding: 12px 11px 10px;
-  display: grid;
-  grid:
-    'desc' 1fr
-    '....' 8px
-    'read' auto
-    /100%;
+  ${col};
+  justify-content: end;
+  gap: 8px;
 `
 
 
 
 const Title = styled.div`
-  grid-area: desc;
-  align-self: end;
   // TODO Theme
   color: white;
   ${Txt.s17Wide};
@@ -145,7 +141,6 @@ const Title = styled.div`
 
 
 const ReadItBox = styled.div`
-  grid-area: read;
   //margin-top: 19px;
   ${rowC};
   gap: 3px;

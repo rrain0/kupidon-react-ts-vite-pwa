@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { DateCategoriesData, DateCategoryType } from 'src/ui-data/special/date-place/DateCategoriesData.ts'
+import { DatePlaceCategoriesData, DatePlaceCategoryType } from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -21,17 +21,17 @@ import maxLines = EmotionCommon.maxLines
 
 
 
-export type DateCategoryCardProps = ClassStyle & {
-  category: DateCategoryType
+export type DatePlaceCategoryCardProps = ClassStyle & {
+  category: DatePlaceCategoryType
 }
-export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
+export const DatePlaceCategoryCard = React.memo((props: DatePlaceCategoryCardProps) => {
   const {
     className,
     style,
     category,
   } = props
   
-  const categoryData = DateCategoriesData[category]
+  const categoryData = DatePlaceCategoriesData[category]
   const typeData = DatePlaceTypeData[categoryData.placeType]
   
   const uiValues = useMemo(() => ({
@@ -63,7 +63,7 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
       <CardBox
         className={className}
         style={style}
-        data-display-name="DateCategoryCard"
+        data-display-name="DatePlaceCategoryCard"
       >
         
         <ImgSpark
@@ -81,8 +81,8 @@ export const DateCategoryCard = React.memo((props: DateCategoryCardProps) => {
     </Link>
   )
 })
-DateCategoryCard.displayName = 'DateCategoryCard'
-export default DateCategoryCard
+DatePlaceCategoryCard.displayName = 'DatePlaceCategoryCard'
+export default DatePlaceCategoryCard
 
 
 

@@ -3,7 +3,7 @@ import { DatePlaceType } from 'src/ui-data/special/date-place/DatePlaceTypeData.
 
 // TODO Взять интерфейсы из статей и переделать потом
 
-export type DateCategoryType =
+export type DatePlaceCategoryType =
   | 'allRowOfPreviews'
   | 'allPageOfRowsOfPreviews'
   | 'allPage'
@@ -43,33 +43,33 @@ export type DateCategoryType =
   | 'streamCocktails'
   | 'volunteering'
 
-export type DateCategoryCommonData = {
+export type DatePlaceCategoryCommonData = {
   placeType: DatePlaceType
 }
 
-export type DateCategoryUiData = {
+export type DatePlaceCategoryUiData = {
   ui: 'rowOfPreviews'
-  headerNext: DateCategoryType
+  headerNext: DatePlaceCategoryType
 } | {
   ui: 'pageOfRowsOfPreviews'
 } | {
   ui: 'page'
 }
 
-export type DateCategoryCategoryData = {
+export type DatePlaceCategoryCategoryData = {
   type: 'category'
-  next: DateCategoryType[]
+  next: DatePlaceCategoryType[]
 } | {
   type: 'type'
 }
 
-export type DateCategoryData =
-  DateCategoryCommonData & DateCategoryUiData & DateCategoryCategoryData
+export type DatePlaceCategoryData =
+  DatePlaceCategoryCommonData & DatePlaceCategoryUiData & DatePlaceCategoryCategoryData
 
 
 
 
-export const DateCategoriesData: Record<DateCategoryType, DateCategoryData> = {
+export const DatePlaceCategoriesData: Record<DatePlaceCategoryType, DatePlaceCategoryData> = {
   allRowOfPreviews: {
     type: 'category',
     next: ['romanticPage', 'culturalPage', 'activePage', 'entertainingPage', 'nonstandardPage'],

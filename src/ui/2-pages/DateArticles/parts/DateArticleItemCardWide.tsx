@@ -57,7 +57,7 @@ const DateArticleItemCardWide = React.memo((props: DateArticleItemCardWideProps)
         />
         <InfoBox>
           <Title>{title}</Title>
-          <ShortDescription>{shortDescription}</ShortDescription>
+          {shortDescription && <ShortDescription>{shortDescription}</ShortDescription>}
         </InfoBox>
         <BubblesBox></BubblesBox>
       </DateArticleBox>
@@ -110,9 +110,9 @@ const imgSparkS: AppWidgetStyle = [
 const InfoBox = styled.div`
   width: 100%;
   height: fit-content;
-  ${col};
+  padding: 12px 16px;
   gap: 5px;
-  padding: 10px 16px 16px;
+  ${col};
 `
 const Title = styled.div`
   // TODO Theme

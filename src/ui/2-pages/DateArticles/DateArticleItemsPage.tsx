@@ -9,6 +9,8 @@ import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesD
 import {
   DateArticleTypesData,
 } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryRow.tsx'
 import DateArticleItemCardWide from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCardWide.tsx'
 import DateArticleItemToCardData
   from 'src/ui/2-pages/DateArticles/parts/DateArticleItemToCardData.tsx'
@@ -19,6 +21,7 @@ import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import assertNever = TypeU.assertNever
+import col = EmotionCommon.col
 
 
 
@@ -38,7 +41,7 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
       const type = DateArticleTypesData[category.itemType]
       return {
         title: type.name,
-        items: category.listOfItems,
+        listOfItems: category.listOfItems,
       }
     }
     if (ait.type === 'type') {
@@ -46,7 +49,7 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
       const type = DateArticleTypesData[t]
       return {
         title: type.name,
-        items: DateArticlesData.filter(it => it.types.includes(t)).map(it => ({
+        listOfItems: DateArticlesData.filter(it => it.types.includes(t)).map(it => ({
           type: 'item' as const, itemId: it.id,
         })),
       }
@@ -58,6 +61,15 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
     pageTitle: data.title,
   }), [data.title])
   const uiText = useUiValues(uiValues)
+  
+  const items = data.listOfItems.flatMap(it => {
+    if (it.type === 'itemsOfType') {
+      return DateArticlesData
+        .filter(ait => ait.types.includes(it.itemsType))
+        .map(ait => ({ type: 'item', itemId: ait.id } as const))
+    }
+    return it
+  })
   
   return (
     <>
@@ -76,13 +88,26 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
             
             <DateArticlesList style={{ gap: 16 }}>
               {(() => {
-                if (!data.items.length) return 'Пусто'
+                if (!items.length) return 'Пусто'
                 
-                return data.items.map(it => (
-                  <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
-                    {props => <DateArticleItemCardWide {...props} />}
-                  </DateArticleItemToCardData>
-                ))
+                return items.map(it => {
+                  if (it.type === 'category') {
+                    const categoryName = it.itemCategory
+                    const category = DateArticleCategoriesData[categoryName]
+                    if (category.ui === 'row') return (
+                      <DateArticleCategoryRow
+                        key={JSON.stringify(it)}
+                        category={categoryName}
+                      />
+                    )
+                  }
+                  
+                  return (
+                    <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
+                      {props => <DateArticleItemCardWide {...props} />}
+                    </DateArticleItemToCardData>
+                  )
+                })
               })()}
             </DateArticlesList>
             
@@ -108,6 +133,5 @@ const DateArticlesList = styled.div`
   width: 100%;
   height: fit-content;
   gap: 10px;
-  display: grid;
-  grid-template-columns: 1fr;
+  ${col};
 `

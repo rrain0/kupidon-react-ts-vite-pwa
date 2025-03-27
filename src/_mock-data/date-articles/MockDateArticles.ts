@@ -11,12 +11,12 @@ import mountainsBridgeCouple
 
 export const MockDateArticles: DateArticle[] = [
   {
-    id: 'IDhowToCreateAttractiveProfile',
+    id: 'id_howToCreateAttractiveProfile',
     types: ['all', 'gettingToKnow', 'profileCreationAdvices'],
     title: {
       'ru-RU': 'Как создать привлекательный профиль',
     },
-    picture: candlesFlowersTable,
+    picture: noImage,
     shortDescription: {
       'ru-RU': 'Подробные шаги как создать привлекательный профиль',
     },
@@ -124,19 +124,1004 @@ export const MockDateArticles: DateArticle[] = [
 </div>
     `,
   },
-  
-  /* {
-    id: 'Статья про профиль 2',
-    types: ['gettingToKnow', 'profileCreationAdvices'],
+  {
+    id: 'id_whichPhotosAreBetterToChoose',
+    types: ['all', 'gettingToKnow', 'profileCreationAdvices'],
     title: {
-      'ru-RU': 'Статья про профиль 2',
+      'ru-RU': 'Какие фотографии лучше выбирать',
     },
     picture: noImage,
     shortDescription: {
-      'ru-RU': 'Короткое описание статьи про профиль 2',
+      'ru-RU': '',
     },
-    content: 'Здесь будет контент статьи',
-  }, */
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_successfulDescriptionsExamples',
+    types: ['all', 'gettingToKnow', 'profileCreationAdvices'],
+    title: {
+      'ru-RU': 'Примеры удачных описаний',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_howToStartConversation',
+    types: ['all', 'gettingToKnow', 'firstContact'],
+    title: {
+      'ru-RU': 'Как начать разговор',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_ideasForOriginalMessages',
+    types: ['all', 'gettingToKnow', 'firstContact'],
+    title: {
+      'ru-RU': 'Идеи для оригинальных сообщений',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_mistakesToAvoidDuringFirstContact',
+    types: ['all', 'gettingToKnow', 'firstContact'],
+    title: {
+      'ru-RU': 'Ошибки, которых стоит избегать при первом контакте',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_howToBehaveWhenAConversationStarts',
+    types: ['all', 'gettingToKnow', 'onlineDatingEtiquette'],
+    title: {
+      'ru-RU': 'Как вести себя при завязавшемся разговоре',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_safetyRulesForOnlineCommunication',
+    types: ['all', 'gettingToKnow', 'onlineDatingEtiquette'],
+    title: {
+      'ru-RU': 'Правила безопасности при общении онлайн',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_whenToTakeCommunicationOffline',
+    types: ['all', 'gettingToKnow', 'onlineDatingEtiquette'],
+    title: {
+      'ru-RU': 'Когда переводить общение в офлайн',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_howToChooseAPlaceForADate',
+    types: ['all', 'date', 'preparingForTheFirstDate'],
+    title: {
+      'ru-RU': 'Как выбрать место для свидания',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_tipsForChoosingAnOutfit',
+    types: ['all', 'date', 'preparingForTheFirstDate'],
+    title: {
+      'ru-RU': 'Советы по выбору наряда',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_howToCalmDownBeforeADate',
+    types: ['all', 'date', 'preparingForTheFirstDate'],
+    title: {
+      'ru-RU': 'Как успокоится перед свиданием',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_tipsForSuccessfulCommunication',
+    types: ['all', 'date', 'haveFirstDate'],
+    title: {
+      'ru-RU': 'Советы по успешному общению',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_topicsToTalkAboutOnAFirstDate',
+    types: ['all', 'date', 'haveFirstDate'],
+    title: {
+      'ru-RU': 'Темы для разговоров на первом свидании',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_howToAvoidOrGetOutOfAwkwardMoments',
+    types: ['all', 'date', 'haveFirstDate'],
+    title: {
+      'ru-RU': 'Как избежать/выкрутиться из неловких моментов',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_ideasForRomanticGestures',
+    types: ['all', 'aboutRelationships', 'keepingRomanceAlive'],
+    title: {
+      'ru-RU': 'Идеи для романтических жестов',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_howToKeepTheSparkInARelationship',
+    types: ['all', 'aboutRelationships', 'keepingRomanceAlive'],
+    title: {
+      'ru-RU': 'Как сохранить искру в отношениях',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_romanticSurprisesForYourPartner',
+    types: ['all', 'aboutRelationships', 'keepingRomanceAlive'],
+    title: {
+      'ru-RU': 'Романтические сюрпризы для партнера',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_howToDiscussDifficultTopics',
+    types: ['all', 'aboutRelationships', 'communicationInRelationships'],
+    title: {
+      'ru-RU': 'Как обсуждать сложные темы',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_howToDealWithConflicts',
+    types: ['all', 'aboutRelationships', 'communicationInRelationships'],
+    title: {
+      'ru-RU': 'Как справляться с конфликтами',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_tipsForImprovingCommunication',
+    types: ['all', 'aboutRelationships', 'communicationInRelationships'],
+    title: {
+      'ru-RU': 'Советы по улучшению общения',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_howToFindNewInterestsTogether',
+    types: ['all', 'aboutRelationships', 'sharedHobbies'],
+    title: {
+      'ru-RU': 'Как найти новые интересы вместе',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_theImportanceOfSpendingTimeTogether',
+    types: ['all', 'aboutRelationships', 'sharedHobbies'],
+    title: {
+      'ru-RU': 'Важность совместного времяпрепровождения',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_ideasForCommonHobbies',
+    types: ['all', 'aboutRelationships', 'sharedHobbies'],
+    title: {
+      'ru-RU': 'Идеи для общих увлечений',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_howToOvercomeTheFearOfRejection',
+    types: ['all', 'psychologyOfRelationships', 'psychologicalAspectsOfDating'],
+    title: {
+      'ru-RU': 'Как преодолеть страх отказа',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_psychologicalTypesAndTheirCharacteristics',
+    types: ['all', 'psychologyOfRelationships', 'psychologicalAspectsOfDating'],
+    title: {
+      'ru-RU': 'Психологические типы и их особенности',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_TipsToBoostConfidence',
+    types: ['all', 'psychologyOfRelationships', 'psychologicalAspectsOfDating'],
+    title: {
+      'ru-RU': 'Советы по повышению уверенности',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Как поддерживать партнёра в трудные времена',
+    types: ['all', 'psychologyOfRelationships', 'emotionalSupport'],
+    title: {
+      'ru-RU': 'Как поддерживать партнёра в трудные времена',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Важность эмпатии в отношениях',
+    types: ['all', 'psychologyOfRelationships', 'emotionalSupport'],
+    title: {
+      'ru-RU': 'Важность эмпатии в отношениях',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Советы по эмоциональной близости',
+    types: ['all', 'psychologyOfRelationships', 'emotionalSupport'],
+    title: {
+      'ru-RU': 'Советы по эмоциональной близости',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Как работать над собой в отношениях',
+    types: ['all', 'psychologyOfRelationships', 'personalGrowth'],
+    title: {
+      'ru-RU': 'Как работать над собой в отношениях',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Важность личных границ',
+    types: ['all', 'psychologyOfRelationships', 'personalGrowth'],
+    title: {
+      'ru-RU': 'Важность личных границ',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Как справляться с ревностью и недоверием',
+    types: ['all', 'psychologyOfRelationships', 'personalGrowth'],
+    title: {
+      'ru-RU': 'Как справляться с ревностью и недоверием',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Как обсуждать интимные темы',
+    types: ['all', 'sexualityAndIntimateRelationships', 'gettingToKnowIntimatePreferences'],
+    title: {
+      'ru-RU': 'Как обсуждать интимные темы',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Важность согласия и уважения',
+    types: ['all', 'sexualityAndIntimateRelationships', 'gettingToKnowIntimatePreferences'],
+    title: {
+      'ru-RU': 'Важность согласия и уважения',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Советы по разнообразию в интимной жизни',
+    types: ['all', 'sexualityAndIntimateRelationships', 'gettingToKnowIntimatePreferences'],
+    title: {
+      'ru-RU': 'Советы по разнообразию в интимной жизни',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Как поддерживать здоровую интимную жизнь',
+    types: ['all', 'sexualityAndIntimateRelationships', 'healthyIntimateRelationships'],
+    title: {
+      'ru-RU': 'Как поддерживать здоровую интимную жизнь',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Влияние здоровья на интимные отношения',
+    types: ['all', 'sexualityAndIntimateRelationships', 'healthyIntimateRelationships'],
+    title: {
+      'ru-RU': 'Влияние здоровья на интимные отношения',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Советы по улучшению интимных отношений',
+    types: ['all', 'sexualityAndIntimateRelationships', 'healthyIntimateRelationships'],
+    title: {
+      'ru-RU': 'Советы по улучшению интимных отношений',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Как обсуждать проблемы интимных отношений с партнёром',
+    types: ['all', 'sexualityAndIntimateRelationships', 'solvingIntimateProblems'],
+    title: {
+      'ru-RU': 'Как обсуждать проблемы интимных отношений с партнёром',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Психологические аспекты интимных проблем',
+    types: ['all', 'sexualityAndIntimateRelationships', 'solvingIntimateProblems'],
+    title: {
+      'ru-RU': 'Психологические аспекты интимных проблем',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Советы по преодолению трудностей в интимных отношениях',
+    types: ['all', 'sexualityAndIntimateRelationships', 'solvingIntimateProblems'],
+    title: {
+      'ru-RU': 'Советы по преодолению трудностей в интимных отношениях',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Успешные знакомства через приложение',
+    types: ['all', 'successStories', 'realStories'],
+    title: {
+      'ru-RU': 'Успешные знакомства через приложение',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Как люди нашли свою любовь',
+    types: ['all', 'successStories', 'realStories'],
+    title: {
+      'ru-RU': 'Как люди нашли свою любовь',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Советы от счастливых пар',
+    types: ['all', 'successStories', 'realStories'],
+    title: {
+      'ru-RU': 'Советы от счастливых пар',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Личные истории и уроки',
+    types: ['all', 'successStories', 'userExperience'],
+    title: {
+      'ru-RU': 'Личные истории и уроки',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Что помогло наладить отношения',
+    types: ['all', 'successStories', 'userExperience'],
+    title: {
+      'ru-RU': 'Что помогло наладить отношения',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Рекомендации по использованию приложения',
+    types: ['all', 'successStories', 'userExperience'],
+    title: {
+      'ru-RU': 'Рекомендации по использованию приложения',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  
+  
+  
+  {
+    id: 'id_Истории успеха от профессионалов',
+    types: ['all', 'successStories', 'interviewsWithExperts'],
+    title: {
+      'ru-RU': 'Истории успеха от профессионалов',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Важные аспекты, на которые стоит обратить внимание',
+    types: ['all', 'successStories', 'interviewsWithExperts'],
+    title: {
+      'ru-RU': 'Важные аспекты, на которые стоит обратить внимание',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
+  {
+    id: 'id_Советы от психологов и консультантов по отношениям',
+    types: ['all', 'successStories', 'interviewsWithExperts'],
+    title: {
+      'ru-RU': 'Советы от психологов и консультантов по отношениям',
+    },
+    picture: noImage,
+    shortDescription: {
+      'ru-RU': '',
+    },
+    // language=HTML
+    content: `
+<div>
+  <p>
+    Здесь будет контент статьи
+  </p>
+</div>
+    `,
+  },
   
 ]
 
