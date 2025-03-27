@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -76,7 +77,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
   
   const uiText = useUiValues(uiValues)
   
-  const { ctAcc, ctAccSec, ctRipple } = contactButtonLocalTheme[c.type]
+  const theme = contactButtonLocalTheme[c.type]
   const link = getContactLink(c)
   
   const [copied, setCopied] = useState(false)
@@ -90,16 +91,18 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
   const button = (
     <Button
       data-display-name="ContactButton"
-      css={ButtonS6.t([btnS, {
-        rippleColor: ctRipple,
-        inFocus: {
-          buttonBgColor: ctAccSec,
-          bordBdColor: ctAcc,
-        },
-        ...copied && {
-          buttonBgColor: ctAccSec,
-          bordBdColor: ctAcc,
-        },
+      css={ButtonS6.t([btnS, t => {
+        const { ctAcc, ctAccSec, ctRipple } = theme[t.type]
+        return {
+          rippleColor: ctRipple,
+          inFocus: {
+            buttonBgColor: ctAccSec,
+            bordBdColor: ctAcc,
+          },
+          ...copied && {
+            bordBdColor: ctAcc,
+          },
+        }
       }])}
       className={className}
       style={style}
@@ -111,19 +114,24 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
         onClick?.()
       })}
     >
-      {({
-        phone: <HandsetIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-        telegram: <TelegramIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-        whatsapp: <WhatsappIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-        email: <EnvelopeIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-        doubleGis: <PictureContactIcon src={_2gisLogo} />,
-        yandexMaps: <PictureContactIcon src={yandexMapsLogo} />,
-        map: <LocationIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-        address: <LocationIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-        copy: !copied
-          ? <CopyIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />
-          : <CheckmarkBoldIc css={SvgIconS6.t([contactIconS, { iconColor: ctAcc }])} />,
-      } satisfies Record<ContactType, React.ReactNode>)[c.type]}
+      {(() => {
+        const commonS = (t: AppTheme.Theme) => ({
+          iconColor: theme[t.type].ctAcc,
+        })
+        return ({
+          phone: <HandsetIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          telegram: <TelegramIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          whatsapp: <WhatsappIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          email: <EnvelopeIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          doubleGis: <PictureContactIcon src={_2gisLogo} />,
+          yandexMaps: <PictureContactIcon src={yandexMapsLogo} />,
+          map: <LocationIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          address: <LocationIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          copy: !copied
+            ? <CopyIc css={SvgIconS6.t([contactIconS, commonS])} />
+            : <CheckmarkBoldIc css={SvgIconS6.t([contactIconS, commonS])} />,
+        } satisfies Record<ContactType, React.ReactNode>)[c.type]
+      })()}
       <ContactText>
         {(() => {
           if (c.type === 'phone') return parsePhoneNumber(c.phone)!.formatInternational()
@@ -151,82 +159,149 @@ export default ContactButton
 
 
 // TODO Theme - Dark color or bg transparency?
-const contactButtonLocalTheme: Record<ContactType, {
-  ctAcc: string,
+const contactButtonLocalTheme: Record<ContactType, Record<AppTheme.Type, {
+  ctAcc: string
   ctAccSec: string
   ctRipple: string
-}> = {
+}>> = {
   telegram: {
-    ctAcc: '#34aadf',
-    ctAccSec: '#e5f7ff',
-    ctRipple: '#e5f7ff88',
+    light: {
+      ctAcc: '#34aadf',
+      ctAccSec: '#e5f7ff',
+      ctRipple: '#86c9e788',
+    },
+    dark: {
+      ctAcc: '#34aadf',
+      ctAccSec: '#3f5058',
+      ctRipple: '#3c6e8588',
+    },
   },
   whatsapp: {
-    ctAcc: '#67d449',
-    ctAccSec: '#f2faf0',
-    ctRipple: '#f2faf088',
+    light: {
+      ctAcc: '#67d449',
+      ctAccSec: '#f2faf0',
+      ctRipple: '#83da6d88',
+    },
+    dark: {
+      ctAcc: '#67d449',
+      ctAccSec: '#3e5238',
+      ctRipple: '#528e4288',
+    },
   },
   phone: {
-    ctAcc: '#ef9a15',
-    ctAccSec: '#f5f1eb',
-    ctRipple: '#f5f1eb88',
+    light: {
+      ctAcc: '#ef9a15',
+      ctAccSec: '#f5f1eb',
+      ctRipple: '#eec27d88',
+    },
+    dark: {
+      ctAcc: '#ef9a15',
+      ctAccSec: '#544836',
+      ctRipple: '#876c4288',
+    },
   },
   email: {
-    ctAcc: '#008080',
-    ctAccSec: '#f7fcfc',
-    ctRipple: '#f7fcfc88',
+    light: {
+      ctAcc: '#008080',
+      ctAccSec: '#f7fcfc',
+      ctRipple: '#60c6c688',
+    },
+    dark: {
+      ctAcc: '#008080',
+      ctAccSec: '#294040',
+      ctRipple: '#3a7c7c88',
+    },
   },
   doubleGis: {
-    ctAcc: '#19aa1e',
-    ctAccSec: '#f4f9f4',
-    ctRipple: '#f4f9f488',
+    light: {
+      ctAcc: '#19aa1e',
+      ctAccSec: '#f4f9f4',
+      ctRipple: '#5abb5d88',
+    },
+    dark: {
+      ctAcc: '#19aa1e',
+      ctAccSec: '#2a432b',
+      ctRipple: '#28692a88',
+    },
   },
   yandexMaps: {
-    ctAcc: '#ff4433',
-    ctAccSec: '#fff7f6',
-    ctRipple: '#fff7f688',
+    light: {
+      ctAcc: '#ff4433',
+      ctAccSec: '#fff7f6',
+      ctRipple: '#ec807688',
+    },
+    dark: {
+      ctAcc: '#ff4433',
+      ctAccSec: '#543c3a',
+      ctRipple: '#94504a88',
+    },
   },
   map: {
-    ctAcc: '#474c9d',
-    ctAccSec: '#eff0fa',
-    ctRipple: '#eff0fa88',
+    light: {
+      ctAcc: '#474c9d',
+      ctAccSec: '#eff0fa',
+      ctRipple: '#9da1e388',
+    },
+    dark: {
+      ctAcc: '#474c9d',
+      ctAccSec: '#282938',
+      ctRipple: '#3f427488',
+    },
   },
   address: {
-    ctAcc: '#232020',
-    ctAccSec: '#fff9f9',
-    ctRipple: '#fff9f988',
+    light: {
+      ctAcc: '#c8990e',
+      ctAccSec: '#f5f0e3',
+      ctRipple: '#f4d57988',
+    },
+    dark: {
+      ctAcc: '#caa128',
+      ctAccSec: '#6f6239',
+      ctRipple: '#4d473688',
+    },
   },
   copy: {
-    ctAcc: '#c69477',
-    ctAccSec: '#fcf4f0',
-    ctRipple: '#fcf4f088',
+    light: {
+      ctAcc: '#c69477',
+      ctAccSec: '#fcf4f0',
+      ctRipple: '#f2d0bd88',
+    },
+    dark: {
+      ctAcc: '#c69477',
+      ctAccSec: '#746054',
+      ctRipple: '#423a3588',
+    },
   },
 }
 
 
 
-const btnS: AppWidgetStyle = t => [
+const btnS: AppWidgetStyle = [
   ButtonS6.Parts.Type.outlined.Shape.rounded.Size.md,
-  ButtonS6.Parts.Type.outlined.baseColor, {
-    buttonPl: 14,
-    // TODO Theme
-    buttonColor: '#232020',
-    // TODO Theme
-    bordBdColor: '#bbbbbb',
-    inFocus: {
-      // TODO Theme
+  ButtonS6.Parts.Type.outlined.baseColor,
+  { buttonPl: 14 },
+  t => ({
+    light: {
       buttonColor: '#232020',
+      bordBdColor: '#bbbbbb',
+      inFocus: {
+        buttonColor: '#232020',
+      },
     },
-  },
+    dark: {
+      buttonColor: '#bbbbbb',
+      bordBdColor: '#bbbbbb',
+      inFocus: {
+        buttonColor: '#bdbdbd',
+      },
+    },
+  }[t.type]),
 ]
 
 
 const contactIconS: AppWidgetStyle = t => [
   SvgIconS6.S.icon.icon.full, [
-    {
-      // TODO Theme
-      icon: { sz: 26, color: '#cb3357' },
-    },
+    { icon: { sz: 26 } },
   ],
 ]
 const PictureContactIcon = styled.img`

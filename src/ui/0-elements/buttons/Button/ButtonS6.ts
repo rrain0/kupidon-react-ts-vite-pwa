@@ -79,13 +79,13 @@ export namespace ButtonS6 {
           overflow: 'hidden',
           transition:
             'background linear 300ms,' +
-            'color linear 300ms,' +
-            'border-color linear 300ms',
+            'color linear 300ms',
         }],
         bord: {
           ...abs,
           pointerEvents: 'none',
           r: 'inherit',
+          transition: 'border-color linear 300ms',
         },
       },
       RippleS6.Parts.base,

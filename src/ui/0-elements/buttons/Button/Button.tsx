@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import { useClickFix } from '@util/pointer/useClickFix.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
@@ -43,7 +44,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
           <button
             data-display-name="Button"
             ref={elemRef}
-            {...{ [CommonStates.error.n]: attrExists(hasError) }}
+            data-error={attrExists(hasError)}
             className={clsx(className, ButtonS6.W.els.button.n)}
             type="button"
             {...combineProps(clickFix, restProps, rippleProps.target)}
@@ -53,19 +54,25 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
               if (getWasDragged()) return
               restProps.onClick?.(ev)
             }}
+            css={css`
+              & > * {
+                position: relative;
+              }
+            `}
           >
-            
-            {children}
             
             <div
               data-display-name="Button Border"
               className={ButtonS6.W.els.bord.n}
+              style={{ position: 'absolute' }}
             >
               <Ripple
                 {...rippleProps.ripple}
                 disabled={props.disabled}
               />
             </div>
+            
+            {children}
           
           </button>
         )}
