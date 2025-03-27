@@ -4,11 +4,11 @@ import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
+import { useInterval } from '@util/react/useInterval.ts'
+import { useInterval2 } from '@util/react/useInterval2.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
-import React, { useRef } from 'react'
-import { MockPoster } from 'src/_mock-data/poster/MockPoster.ts'
-import { Colors } from 'src/ui-data/Colors.ts'
+import React, { useEffect, useRef, useState } from 'react'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -26,7 +26,6 @@ import PriceTagIc = SvgIconsPack.PriceTagIc
 import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
 import arrOfZeros = ArrayU.arrOfZeros
-import round3 = MathU.round3
 
 
 
@@ -48,19 +47,33 @@ const PosterPreview = React.memo(() => {
   
   
   const {
+    isDragging,
+    getIsDragging,
     getWasDragged,
     onTrackDrag,
-    animatedCurrProgressX,
     
     getStartProgressX,
     getStartItemProgress,
     getCurrProgressX,
+    animatedCurrProgressX,
+    
+    animateTo,
   } = useGallery({
     itemsCnt,
     visibleViewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
   })
+  
+  const [wasDraggedOnce, setWasDraggedOnce] = useState(false)
+  useEffect(() => {
+    if (isDragging) setWasDraggedOnce(true)
+  }, [isDragging])
+  
+  useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
+    if (isDragging) return
+    animateTo({ next: true })
+  }, [isDragging, wasDraggedOnce])
   
   const animatedProps = animatedCurrProgressX.map(cp => (i = 1) => {
     const p = getStartProgressX() + cp

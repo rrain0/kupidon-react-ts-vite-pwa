@@ -3,6 +3,7 @@ import { useDrag } from '@use-gesture/react'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
 import { GetTrackProps, useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
@@ -11,12 +12,23 @@ import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
-import { useLayoutEffect, useMemo } from 'react'
+import { useCallback, useLayoutEffect, useMemo } from 'react'
+import Puro = TypeU.Puro
+import exists = TypeU.exists
+import notExists = TypeU.notExists
 
 
 
 // Simplicity vs Control balance is hard
 
+
+export type AnimateToParams = Puro<{
+  next: boolean
+  prev: boolean
+  p: number
+  itemI: number
+  vel0: number
+}>
 
 export type UseGalleryProps = {
   itemsCnt: number
@@ -56,6 +68,68 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   
   
   
+  
+  const vThreshold = 150 // %width/s
+  
+  const animateTo = ({
+    next,
+    prev,
+    p: nextP,
+    //itemI: nextItemI, // TODO Gallery
+    vel0,
+  }: AnimateToParams) => {
+    const pStart = getStartProgressX()
+    const pCurr = getCurrProgressX()
+    const p = pStart + pCurr
+    const pICurr = p % 100
+    const pI = p - pICurr
+    
+    const nextPICurr = 0 // ???
+    
+    //const nextP = pI + nextPICurr
+    ;[nextP, vel0] = (() => {
+      if (exists(next)) return [pI - 100, -vThreshold]
+      if (exists(prev)) return [pI + 100, vThreshold]
+      //if (exists(nextItemI)) return [0, 0]
+      if (exists(nextP)) return [nextP, vel0 ?? nextP > p ? vThreshold : -vThreshold]
+      return [undefined, 0]
+    })()
+    if (notExists(nextP)) return
+    
+    //console.log('nextP', nextP)
+    if (p !== nextP) {
+      const nextPCurr = nextP - pStart
+      // Начальная скорость
+      const v0 = vel0 ?? -vThreshold
+      const t1 = 0.2 // s
+      // Начальное ускорение
+      const a0 = 2 * (nextP - p - v0 * t1) / t1**2
+      
+      //console.log('s0', pCurr, 't1', t1, 'a0', a0, 'v0', v0)
+      
+      // TODO
+      //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
+      //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
+      void animatedCurrProgressX.start({
+        startValue: pCurr,
+        animationFunction: (startValue, t) => {
+          // Начальный путь
+          const s0 = startValue
+          t /= 1000 // ms => s
+          
+          const finished = t >= t1
+          if (finished) t = t1
+          let s = a0 * t**2 / 2 + v0 * t + s0
+          s = MathU.round3(s)
+          setCurrProgressX(s)
+          return [s, finished]
+        },
+      })
+    }
+  }
+  
+  
+  
   const updateViews = () => {
     animatedCurrProgressX.set(getCurrProgressX())
   }
@@ -65,12 +139,10 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     
     // px/ms => %width/s
     const velxPercent = velx * 1000 / getTrackProps().w * 100
-    const vThreshold = 150 // %width/s
     
-    const sp = getStartProgressX()
-    const cp = getCurrProgressX()
-    const p = sp + cp
-    
+    const pStart = getStartProgressX()
+    const pCurr = getCurrProgressX()
+    const p = pStart + pCurr
     const pICurr = p % 100
     const pI = p - pICurr
     
@@ -94,37 +166,8 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       return [0, 0]
     })()
     
-    const pNext = pI + nextPICurr
-    //console.log('pNext', pNext)
-    if (p !== pNext) {
-      const nextCp = pNext - sp
-      // Начальная скорость
-      const v0 = vel
-      const t1 = 0.2 // s
-      // Начальное ускорение
-      const a0 = 2 * (pNext - p - v0 * t1) / t1**2
-      
-      //console.log('s0', cp, 't1', t1, 'a0', a0, 'v0', v0)
-      
-      // TODO
-      //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
-      //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
-      void animatedCurrProgressX.start({
-        startValue: cp,
-        animationFunction: (startValue, t) => {
-          // Начальный путь
-          const s0 = startValue
-          t /= 1000 // ms => s
-          
-          const finished = t >= t1
-          if (finished) t = t1
-          let s = a0 * t**2 / 2 + v0 * t + s0
-          s = MathU.round3(s)
-          setCurrProgressX(s)
-          return [s, finished]
-        },
-      })
-    }
+    const nextP = pI + nextPICurr
+    animateTo({ p: nextP, vel0: vel })
   }
   
   
@@ -219,15 +262,24 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   })
   
   
+  const [getAnimateTo] = useAsRefGet(animateTo)
+  const animateToStableCallback = useCallback((params: AnimateToParams) => {
+    return getAnimateTo()(params)
+  }, [])
+  
   
   return {
+    isDragging,
+    getIsDragging,
     getWasDragged,
     onTrackDrag,
-    animatedCurrProgressX,
     
     getStartProgressX,
     getStartItemProgress,
     getCurrProgressX,
+    animatedCurrProgressX,
+    
+    animateTo: animateToStableCallback,
   }
 }
 

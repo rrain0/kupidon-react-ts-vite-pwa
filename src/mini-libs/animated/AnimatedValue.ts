@@ -66,6 +66,9 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     if (props.startTime !== undefined) {
       this.startTime = props.startTime
     }
+    else {
+      this.startTime = getTime()
+    }
     if (props.animationFunction !== undefined) {
       this.animationFunction = props.animationFunction
     }
