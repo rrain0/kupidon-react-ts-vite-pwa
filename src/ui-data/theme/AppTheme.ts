@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { StyledComponent } from '@emotion/styled'
+import React from 'react'
 
 
 
@@ -11,6 +12,16 @@ export namespace AppTheme {
   
   export type Type = 'light' | 'dark'
   
+  
+  
+  export interface Theme extends ThemeMetadata, ThemeParams { }
+  
+  
+  export interface ThemeMetadata {
+    type: Type
+    name: string
+    icon: React.ReactNode
+  }
   
   
   /*
@@ -38,7 +49,7 @@ export namespace AppTheme {
   any gradient must be named 'XXXGrad'
   
   */
-  export interface ThemeProps {
+  export interface ThemeParams {
     
     // окружение
     // ambience?: {}
@@ -87,7 +98,20 @@ export namespace AppTheme {
       cta2:         string
       bga4:         string
       cta4:         string
-    },
+    }
+    // normal button
+    boxNormal: {
+      bg:           string
+      ct:           string
+      bgFc:         string
+      ctFc:         string
+    }
+    boxNormalCt: {
+      bg:           string
+      ct:           string
+      bgf:          string
+      ctf:          string
+    }
     boxNormal2: {
       bg:           string
       ct:           string
@@ -116,14 +140,26 @@ export namespace AppTheme {
       ct:           string
       bgf:          string
       ctf:          string
-    },
+    }
     boxAccentCt: {
       bg:           string
       ct:           string
       bgf:          string
       ctf:          string
       ctRipple:     string
-    },
+    }
+    boxAccent2: {
+      bg:           string
+      ct:           string
+      bgFc:         string
+      ctFc:         string
+    }
+    boxAccent3: {
+      bg:           string
+      ct:           string
+      bgFc:         string
+      ctFc:         string
+    }
     boxAccent4: {
       bg:           string
       ct:           string
@@ -138,6 +174,13 @@ export namespace AppTheme {
     }
     boxAccent5: {
       ct:           string
+    }
+    // main button (submit button)
+    boxMain: {
+      bg:           string
+      ct:           string
+      bgFc:         string
+      ctFc:         string
     }
     boxDanger: {
       bg:           string
@@ -169,53 +212,14 @@ export namespace AppTheme {
       bg:           string
       ct:           string
       ctSec:        string
-    },
+    }
     boxWhite: {
       bg:           string
       ct:           string
       ct2:          string
-    },
-    
-    
-    
-    // normal button
-    buttonNormal: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
-    }
-    buttonNormalCt: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
-    }
-    // main button (submit button)
-    buttonMain: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
-    }
-    buttonAccent2: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
-    }
-    buttonAccent3: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
     }
     // button that almost invisible
-    buttonSecondary: {
-      bg:           string
-      bgFc:         string
-      ct:           string
-    }
+    //buttonSecondary: { }
     
     
     
@@ -356,13 +360,6 @@ export namespace AppTheme {
   }
   
   
-  export interface Theme extends ThemeProps {
-    type: Type
-    name: string
-    icon: StyledComponent<any>
-  }
-  
-  
   
   export type ThemeIconCssProps = {
     accentColor: string,
@@ -370,8 +367,8 @@ export namespace AppTheme {
     bgColor2:    string,
   }
   export const themeIconCss = (props: ThemeIconCssProps) => css`
+    width: 100%;
     height: 100%;
-    aspect-ratio: 1;
     border-radius: 999999px;
     border: 3.5px solid;
     border-color: ${props.accentColor};
@@ -381,7 +378,7 @@ export namespace AppTheme {
       ${props.bgColor2} 50% 100%
     );
   `
-  export const themegradIconCss = (props: ThemeIconCssProps) => css`
+  export const themeGradIconCss = (props: ThemeIconCssProps) => css`
     ${themeIconCss(props)};
     background: linear-gradient(
       to right,

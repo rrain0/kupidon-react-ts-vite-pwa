@@ -127,7 +127,7 @@ export const MockDatePlaces: DatePlace[] = [
       { type: 'whatsapp', phone: '79149563551' },
       
       
-      { type: 'email', email: 'etika.cakes@gmail.com' },
+      //{ type: 'email', email: 'etika.cakes@gmail.com' },
     ],
   },
 ]

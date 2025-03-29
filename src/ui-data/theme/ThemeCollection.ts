@@ -1,15 +1,15 @@
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { DarkOrange } from 'src/ui-data/theme/themes/DarkOrange.ts'
 import Theme = AppTheme.Theme
-import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
-import { DarkPinkGradient } from 'src/ui-data/theme/themes/DarkPinkGradient.ts'
-import { Dark } from 'src/ui-data/theme/themes/Dark.ts'
-import { DarkWine } from 'src/ui-data/theme/themes/DarkWine.ts'
-import { LightOrange } from 'src/ui-data/theme/themes/LightOrange.ts'
-import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
-import { LightPinkGradient } from 'src/ui-data/theme/themes/LightPinkGradient.ts'
-import { Light } from 'src/ui-data/theme/themes/Light.ts'
-import { LightWine } from 'src/ui-data/theme/themes/LightWine.ts'
+import { DarkOrange } from 'src/ui-data/theme/themes/DarkOrange.tsx'
+import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.tsx'
+import { DarkPinkGradient } from 'src/ui-data/theme/themes/DarkPinkGradient.tsx'
+import { Dark } from 'src/ui-data/theme/themes/Dark.tsx'
+import { DarkWine } from 'src/ui-data/theme/themes/DarkWine.tsx'
+import { LightOrange } from 'src/ui-data/theme/themes/LightOrange.tsx'
+import { LightPink } from 'src/ui-data/theme/themes/LightPink.tsx'
+import { LightPinkGradient } from 'src/ui-data/theme/themes/LightPinkGradient.tsx'
+import { Light } from 'src/ui-data/theme/themes/Light.tsx'
+import { LightWine } from 'src/ui-data/theme/themes/LightWine.tsx'
 
 
 

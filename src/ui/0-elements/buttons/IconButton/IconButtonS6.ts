@@ -132,7 +132,7 @@ export namespace IconButtonS6 {
             baseColor,
             ButtonS6.Parts.Type.filled.Color.normal2,
             {
-              iconColor: t.buttonNormal.ct,
+              iconColor: t.boxNormal.ct,
               // todo gradIcon
             },
           ]

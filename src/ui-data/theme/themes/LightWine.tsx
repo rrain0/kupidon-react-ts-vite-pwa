@@ -1,21 +1,25 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Light } from 'src/ui-data/theme/themes/Light.ts'
+import { Light } from 'src/ui-data/theme/themes/Light.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
-/*
-const colors = {
-  accent:        '#BB2649',
-  accentLight10: '#F75F82',
-  accentLight20: '#ffdde5',
-} as const
-*/
 
 
-export const LightWineProps: ThemeProps = { ...Light,
+export const LightWine = { ...Light,
+  type: 'light',
+  name: 'Light Wine' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#cb3357',
+        bgColor1:    '#cb3357',
+        bgColor2:    '#f5f5f5',
+      })}
+    />
+  ),
+  
+  
   
   page: { ...Light.page,
     bg:           '#f5f5f5',
@@ -54,6 +58,18 @@ export const LightWineProps: ThemeProps = { ...Light,
     ctf:          '#cb3357',
     ctRipple:     '#ffd0db88',
   },
+  boxAccent2: { ...Light.boxAccent2,
+    bg:            '#bb2649',
+    ct:            '#ffffff',
+    bgFc:          '#e83f66',
+    ctFc:          '#ffffff',
+  },
+  boxAccent3: { ...Light.boxAccent3,
+    bg:            '#F59CB1',
+    ct:            '#ffffff',
+    bgFc:          '#f6839e',
+    ctFc:          '#ffffff',
+  },
   boxAccent4: { ...Light.boxAccent4,
     bg:          '#BB2649',
     ct:          '#ffffff',
@@ -69,32 +85,17 @@ export const LightWineProps: ThemeProps = { ...Light,
   boxAccent5: { ...Light.boxAccent5,
     ct:           '#e8204f',
   },
-  
-  
-  
-  buttonMain: { ...Light.buttonMain,
+  boxMain: { ...Light.boxMain,
     bg:        '#e8204f',
     ct:        '#ffffff',
     bgFc:      '#f63562',
     ctFc:      '#ffffff',
   },
-  buttonAccent2: {
-    bg:            '#bb2649',
-    ct:            '#ffffff',
-    bgFc:          '#e83f66',
-    ctFc:          '#ffffff',
-  },
-  buttonAccent3: {
-    bg:            '#F59CB1',
-    ct:            '#ffffff',
-    bgFc:          '#f6839e',
-    ctFc:          '#ffffff',
-  },
-  buttonSecondary: { ...Light.buttonSecondary,
-    bg:            'transparent',
-    bgFc:          '#99999988',
-    ct:            '#bbbbbb',
-  },
+  
+  
+  
+  
+  
   
   ripple: { ...Light.ripple },
   
@@ -154,18 +155,7 @@ export const LightWineProps: ThemeProps = { ...Light,
     thumb:       ['#25283644'],
     thumbActive: ['#999999'],
   },
-}
-
-
-
-export const LightWine = {
-  ...LightWineProps,
-  type: 'light',
-  name: 'Light Wine' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: LightWineProps.boxAccent.bg,
-    bgColor1:    LightWineProps.boxAccent.bg,
-    bgColor2:    LightWineProps.page.bg,
-  })),
+  
+  
 } satisfies Theme
 

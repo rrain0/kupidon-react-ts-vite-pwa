@@ -1,14 +1,25 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.ts'
+import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const DarkOrangeProps: ThemeProps = { ...DarkPink,
+export const DarkOrange = { ...DarkPink,
+  type: 'dark',
+  name: 'Dark Orange' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#dd8f2f',
+        bgColor1:    '#dd8f2f',
+        bgColor2:    '#282c34',
+      })}
+    />
+  ),
+  
+  
   
   statusBar: { ...DarkPink.statusBar,
     bg: '#dd8f2f',
@@ -29,8 +40,7 @@ export const DarkOrangeProps: ThemeProps = { ...DarkPink,
   boxAccent4: { ...DarkPink.boxAccent4,
     bg:     '#dd7b39',
   },
-  
-  buttonMain: { ...DarkPink.buttonMain,
+  boxMain: { ...DarkPink.boxMain,
     bg:      '#ff935e',
     ct:      '#000000',
     bgFc:    '#ff802a',
@@ -48,17 +58,5 @@ export const DarkOrangeProps: ThemeProps = { ...DarkPink,
   bottomSheetHandle: { ...DarkPink.bottomSheetHandle,
     bg: '#ff935e',
   },
-}
-
-
-
-export const DarkOrange = {
-  ...DarkOrangeProps,
-  type: 'dark',
-  name: 'Dark Orange' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: DarkOrangeProps.boxAccent.bg,
-    bgColor1:    DarkOrangeProps.boxAccent.bg,
-    bgColor2:    DarkOrangeProps.page.bg,
-  })),
+  
 } satisfies Theme

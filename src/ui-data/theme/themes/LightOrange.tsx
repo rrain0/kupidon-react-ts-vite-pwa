@@ -1,14 +1,25 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { LightPink } from 'src/ui-data/theme/themes/LightPink.ts'
+import { LightPink } from 'src/ui-data/theme/themes/LightPink.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const LightOrangeProps: ThemeProps = { ...LightPink,
+export const LightOrange = { ...LightPink,
+  type: 'light',
+  name: 'Light Orange' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#fbb027',
+        bgColor1:    '#fbb027',
+        bgColor2:    '#ffffff',
+      })}
+    />
+  ),
+  
+  
   
   statusBar: { ...LightPink.statusBar,
     bg: '#ffdb99',
@@ -28,8 +39,7 @@ export const LightOrangeProps: ThemeProps = { ...LightPink,
   boxAccent4: { ...LightPink.boxAccent4,
     bg:     '#fdca6d',
   },
-  
-  buttonMain: { ...LightPink.buttonMain,
+  boxMain: { ...LightPink.boxMain,
     bg:      '#ff935e',
     bgFc: '#ff802a',
   },
@@ -46,17 +56,4 @@ export const LightOrangeProps: ThemeProps = { ...LightPink,
     bg:       '#ff935e',
   },
   
-}
-
-
-
-export const LightOrange = {
-  ...LightOrangeProps,
-  type: 'light',
-  name: 'Light Orange' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: LightOrangeProps.boxAccent.bg,
-    bgColor1:   LightOrangeProps.boxAccent.bg,
-    bgColor2:   LightOrangeProps.boxDefault.bg,
-  })),
 } satisfies Theme

@@ -1,13 +1,24 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const LightProps: ThemeProps = {
+export const Light = {
+  type: 'light',
+  name: 'Light Grey' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#333333',
+        bgColor1:    '#f5f5f5',
+        bgColor2:    '#f5f5f5',
+      })}
+    />
+  ),
+  
+  
   
   page: {
     bg:          '#f5f5f5',
@@ -53,6 +64,18 @@ export const LightProps: ThemeProps = {
     bga4:         '#bbbbbb',
     cta4:         '#000000',
   },
+  boxNormal: {
+    bg:            '#bbbbbb',
+    ct:            '#000000',
+    bgFc:          '#dddddd',
+    ctFc:          '#000000',
+  },
+  boxNormalCt: {
+    bg:            'transparent',
+    ct:            '#bbbbbb',
+    bgf:           '#00000008',
+    ctf:           '#bbbbbb',
+  },
   boxNormal2: {
     bg:           '#dddddd',
     ct:           '#000000',
@@ -89,6 +112,18 @@ export const LightProps: ThemeProps = {
     ctf:          '#333333',
     ctRipple:     '#00000022',
   },
+  boxAccent2: {
+    bg:            '#bbbbbb',
+    ct:            '#000000',
+    bgFc:          '#999999',
+    ctFc:          '#000000',
+  },
+  boxAccent3: {
+    bg:            '#bbbbbb',
+    ct:            '#000000',
+    bgFc:          '#999999',
+    ctFc:          '#000000',
+  },
   boxAccent4: {
     bg:           '#bbbbbb',
     ct:           '#000000',
@@ -103,6 +138,12 @@ export const LightProps: ThemeProps = {
   },
   boxAccent5: {
     ct:           '#aaaaaa',
+  },
+  boxMain: {
+    bg:            '#7b7b7b',
+    ct:            '#F8F8F8',
+    bgFc:          '#aaaaaa',
+    ctFc:          '#F8F8F8',
   },
   boxDanger: {
     bg:           '#ffffff',
@@ -143,41 +184,6 @@ export const LightProps: ThemeProps = {
   
   
   
-  buttonNormal: {
-    bg:            '#bbbbbb',
-    ct:            '#000000',
-    bgFc:          '#dddddd',
-    ctFc:          '#000000',
-  },
-  buttonNormalCt: {
-    bg:            'transparent',
-    ct:            '#bbbbbb',
-    bgf:           '#00000008',
-    ctf:           '#bbbbbb',
-  },
-  buttonMain: {
-    bg:            '#7b7b7b',
-    ct:            '#F8F8F8',
-    bgFc:          '#aaaaaa',
-    ctFc:          '#F8F8F8',
-  },
-  buttonAccent2: {
-    bg:            '#bbbbbb',
-    ct:            '#000000',
-    bgFc:          '#999999',
-    ctFc:          '#000000',
-  },
-  buttonAccent3: {
-    bg:            '#bbbbbb',
-    ct:            '#000000',
-    bgFc:          '#999999',
-    ctFc:          '#000000',
-  },
-  buttonSecondary: {
-    bg:            'transparent',
-    bgFc:          '#99999988',
-    ct:            '#bbbbbb',
-  },
   
   
   
@@ -305,18 +311,6 @@ export const LightProps: ThemeProps = {
     thumb:       ['#25283644'],
     thumbActive: ['#999999'],
   },
-}
-
-
-
-export const Light = {
-  ...LightProps,
-  type: 'light',
-  name: 'Light Grey' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: LightProps.boxAccent.bg,
-    bgColor1:    LightProps.page.bg,
-    bgColor2:    LightProps.page.bg,
-  })),
+  
 } satisfies Theme
 

@@ -1,17 +1,29 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Light } from 'src/ui-data/theme/themes/Light.ts'
+import { Light } from 'src/ui-data/theme/themes/Light.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const DarkProps: ThemeProps = {
+export const Dark = {
+  type: 'dark',
+  name: 'Dark Grey' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#bdbdbd',
+        bgColor1:    '#282c34',
+        bgColor2:    '#282c34',
+      })}
+    />
+  ),
+  
+  
+  
   
   page: {
-    bg:          '#18191b', // #424854
+    bg:          '#282c34', // #18191b #424854
     bgGrad:      ['#282c34', '#282c34', '#282c34'],
     ct:          '#ffffff',
     ct2:         '#bdbdbd',
@@ -54,6 +66,18 @@ export const DarkProps: ThemeProps = {
     bga4:         '#aaaaaa',
     cta4:         '#000000',
   },
+  boxNormal: {
+    bg:             '#999999',
+    ct:             '#000000',
+    bgFc:           '#7b7b7b',
+    ctFc:           '#000000',
+  },
+  boxNormalCt: {
+    bg:           'transparent',
+    ct:           '#999999',
+    bgf:          '#00000008',
+    ctf:          '#999999',
+  },
   boxNormal2: {
     bg:           '#999999',
     ct:           '#000000',
@@ -90,6 +114,18 @@ export const DarkProps: ThemeProps = {
     ctf:          '#bdbdbd',
     ctRipple:     '#42414c88',
   },
+  boxAccent2: {
+    bg:            '#999999',
+    ct:            '#000000',
+    bgFc:          '#7b7b7b',
+    ctFc:          '#000000',
+  },
+  boxAccent3: {
+    bg:            '#999999',
+    ct:            '#000000',
+    bgFc:          '#7b7b7b',
+    ctFc:          '#000000',
+  },
   boxAccent4: {
     bg:           '#aaaaaa',
     ct:           '#000000',
@@ -104,6 +140,12 @@ export const DarkProps: ThemeProps = {
   },
   boxAccent5: {
     ct:           '#bdbdbd',
+  },
+  boxMain: {
+    bg:       '#aaaaaa',
+    ct:       '#000000',
+    bgFc:     '#bbbbbb',
+    ctFc:     '#000000',
   },
   boxDanger: {
     bg:           '#24272d',
@@ -140,41 +182,6 @@ export const DarkProps: ThemeProps = {
   
   
   
-  buttonNormal: {
-    bg:             '#999999',
-    ct:             '#000000',
-    bgFc:           '#7b7b7b',
-    ctFc:           '#000000',
-  },
-  buttonNormalCt: {
-    bg:           'transparent',
-    ct:           '#999999',
-    bgf:          '#00000008',
-    ctf:          '#999999',
-  },
-  buttonMain: {
-    bg:       '#aaaaaa',
-    ct:       '#000000',
-    bgFc:     '#bbbbbb',
-    ctFc:     '#000000',
-  },
-  buttonAccent2: {
-    bg:            '#999999',
-    ct:            '#000000',
-    bgFc:          '#7b7b7b',
-    ctFc:          '#000000',
-  },
-  buttonAccent3: {
-    bg:            '#999999',
-    ct:            '#000000',
-    bgFc:          '#7b7b7b',
-    ctFc:          '#000000',
-  },
-  buttonSecondary: {
-    bg:        'transparent',
-    bgFc:      '#7b7b7b88',
-    ct:        '#999999',
-  },
   
   ripple: {
     ct:              '#00000055',
@@ -268,17 +275,5 @@ export const DarkProps: ThemeProps = {
     thumb:       ['#F8F8F844'],
     thumbActive: ['#999999'],
   },
-}
-
-
-
-export const Dark = {
-  ...DarkProps,
-  type: 'dark',
-  name: 'Dark Grey' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: DarkProps.boxAccent.bg,
-    bgColor1:    DarkProps.page.bg,
-    bgColor2:    DarkProps.page.bg,
-  })),
+  
 } satisfies Theme

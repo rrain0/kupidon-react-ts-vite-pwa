@@ -166,7 +166,7 @@ export namespace CheckboxInputStyle {
       border-radius: 999999px;
       padding: 14px;
       ${flexC};
-      ${W.e.frame.e.p.color.set(t.buttonNormal.bg)};
+      ${W.e.frame.e.p.color.set(t.boxNormal.bg)};
     }
     ${W.use.s.normal().e.ripple().thisUse} {
       ${W.e.ripple.e.p.mode.set('center')};

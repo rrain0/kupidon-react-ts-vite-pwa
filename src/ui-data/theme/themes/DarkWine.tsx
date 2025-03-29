@@ -1,26 +1,37 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Dark, DarkProps } from 'src/ui-data/theme/themes/Dark.ts'
+import { Dark } from 'src/ui-data/theme/themes/Dark.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const DarkWineProps: ThemeProps = { ...DarkProps,
+export const DarkWine = { ...Dark,
+  type: 'dark',
+  name: 'Dark Wine' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#a71538',
+        bgColor1:    '#a71538',
+        bgColor2:    '#282c34',
+      })}
+    />
+  ),
   
-  page: { ...DarkProps.page,
-    bg:           '#18191b',
+  
+  
+  page: { ...Dark.page,
+    bg:           '#282c34', // #18191b
     bgGrad:       ['#282c34', '#282c34', '#282c34'],
   },
-  statusBar: { ...DarkProps.statusBar,
+  statusBar: { ...Dark.statusBar,
     bg:           '#282c34',
   },
-  nav: { ...DarkProps.nav,
+  nav: { ...Dark.nav,
     bg:           '#282c34',
   },
-  navButton: { ...DarkProps.navButton,
+  navButton: { ...Dark.navButton,
     bgFc:         '#2e3440',
     ct:           '#7b7b7b',
     cta:          '#b7405c', // ['#984559']
@@ -41,7 +52,19 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     ctf:          '#a71538',
     ctRipple:     '#ffd0db55',
   },
-  boxAccent4: { ...DarkProps.boxAccent4,
+  boxAccent2: { ...Dark.boxAccent2,
+    bg:            '#c51841',
+    ct:            '#ffffff',
+    bgFc:          '#e83f66',
+    ctFc:          '#ffffff',
+  },
+  boxAccent3: { ...Dark.boxAccent3,
+    bg:            '#f6839e',
+    ct:            '#ffffff',
+    bgFc:          '#F59CB1',
+    ctFc:          '#ffffff',
+  },
+  boxAccent4: { ...Dark.boxAccent4,
     bg:           '#BB2649',
     ct:           '#ffffff',
     // cta:       '#b7405c', // ['#984559'
@@ -56,44 +79,27 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   boxAccent5: { ...Dark.boxAccent5,
     ct:           '#c51841',
   },
-  
-  
-  
-  buttonMain: { ...DarkProps.buttonMain,
+  boxMain: { ...Dark.boxMain,
     bg:           '#aaaaaa',
     ct:           '#000000',
     bgFc:         '#bbbbbb',
     ctFc:         '#000000',
   },
-  buttonAccent2: {
-    bg:            '#c51841',
-    ct:            '#ffffff',
-    bgFc:          '#e83f66',
-    ctFc:          '#ffffff',
-  },
-  buttonAccent3: {
-    bg:            '#f6839e',
-    ct:            '#ffffff',
-    bgFc:          '#F59CB1',
-    ctFc:          '#ffffff',
-  },
-  buttonSecondary: { ...DarkProps.buttonSecondary,
-    bg:            'transparent',
-    bgFc:          '#7b7b7b88',
-    ct:            '#999999',
-  },
-  
-  ripple: { ...DarkProps.ripple },
   
   
   
-  inputRadio: { ...DarkProps.inputRadio,
+  
+  ripple: { ...Dark.ripple },
+  
+  
+  
+  inputRadio: { ...Dark.inputRadio,
     bgFc:  '#aaaaaa',
   },
   
   
   
-  input: { ...DarkProps.input,
+  input: { ...Dark.input,
     bg:            '#282c34',
     ct:            '#cdcdcd',
     placeholder:   ['#7b7b7b'],
@@ -102,7 +108,7 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
     bgError:       ['#5e252c'],
   },
   
-  rangePicker: { ...DarkProps.rangePicker,
+  rangePicker: { ...Dark.rangePicker,
     trackBg:      ['#2e343f'],
     barBg:        ['#bdbdbd'],
     handleBg:     ['#000000'],
@@ -110,19 +116,19 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   
   
   
-  previewButtonNorm: { ...DarkProps.previewButtonNorm },
-  previewButtonMain: { ...DarkProps.previewButtonMain,
+  previewButtonNorm: { ...Dark.previewButtonNorm },
+  previewButtonMain: { ...Dark.previewButtonMain,
     bgGrad: ['#BB2649', '#F75F82'],
   },
-  previewFullInfoBox: { ...DarkProps.previewFullInfoBox },
-  previewFullInfoBubble: { ...DarkProps.previewFullInfoBubble,
+  previewFullInfoBox: { ...Dark.previewFullInfoBox },
+  previewFullInfoBubble: { ...Dark.previewFullInfoBubble,
     bgMainGrad: ['#BB2649', '#F75F82'],
   },
-  previewPhotosProgress: { ...DarkProps.previewPhotosProgress },
+  previewPhotosProgress: { ...Dark.previewPhotosProgress },
   
   
   
-  photos: { ...DarkProps.photos,
+  photos: { ...Dark.photos,
     bg:                     '#ffeeee',
     ct:                     '#291f1d',
     borderDrag:             ['#1F8DCD'],
@@ -134,23 +140,11 @@ export const DarkWineProps: ThemeProps = { ...DarkProps,
   bottomSheetHandle: { ...Dark.bottomSheetHandle },
   
   
-  scrollbar: { ...DarkProps.scrollbar,
+  scrollbar: { ...Dark.scrollbar,
     track:       ['#F8F8F822'],
     thumb:       ['#F8F8F844'],
     thumbActive: ['#999999'],
   },
-}
-
-
-
-export const DarkWine = {
-  ...DarkWineProps,
-  type: 'dark',
-  name: 'Dark Wine' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: DarkWineProps.boxAccent.bg,
-    bgColor1:    DarkWineProps.boxAccent.bg,
-    bgColor2:    DarkWineProps.page.bg,
-  })),
+  
 } satisfies Theme
 

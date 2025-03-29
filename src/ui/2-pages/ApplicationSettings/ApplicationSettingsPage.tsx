@@ -56,7 +56,7 @@ const ApplicationSettingsPage = React.memo(() => {
       .map(t => ({
         value: t.name,
         text: themeNameText[t.name],
-        icon: <t.icon css={divIcon} />,
+        icon: <IconBox>{t.icon}</IconBox>,
       }))
     return opts
   }, [themeNameText])
@@ -66,7 +66,7 @@ const ApplicationSettingsPage = React.memo(() => {
       .map(t => ({
         value: t.name,
         text: themeNameText[t.name],
-        icon: <t.icon css={divIcon} />,
+        icon: <IconBox>{t.icon}</IconBox>,
       }))
     return opts
   }, [themeNameText])
@@ -207,7 +207,8 @@ export default ApplicationSettingsPage
 
 
 
-const divIcon = css`
+const IconBox = styled.div`
+  ${col};
   height: 1.6em;
   width: 1.6em;
 `

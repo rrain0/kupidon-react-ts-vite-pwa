@@ -1,17 +1,28 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Dark } from 'src/ui-data/theme/themes/Dark.ts'
+import { Dark } from 'src/ui-data/theme/themes/Dark.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const DarkPinkProps: ThemeProps = { ...Dark,
+export const DarkPink = { ...Dark,
+  type: 'dark',
+  name: 'Dark Pink' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#d16780',
+        bgColor1:    '#d16780',
+        bgColor2:    '#282c34',
+      })}
+    />
+  ),
+  
+  
   
   page: { ...Dark.page,
-    bg:          '#18191b',
+    bg:          '#282c34',
     bgGrad:  ['#282c34', '#282c34', '#282c34'],
   },
   statusBar: { ...Dark.statusBar,
@@ -43,20 +54,16 @@ export const DarkPinkProps: ThemeProps = { ...Dark,
     bg:     '#992c46',
     ct: '#bdbdbd',
   },
-  
-  buttonMain: { ...Dark.buttonMain,
-    bg:      '#971f3b',
-    ct:      '#bdbdbd',
-    bgFc:    '#c6294e',
-    ctFc:    '#bdbdbd',
-  },
   boxAccentCt4: { ...Dark.boxAccentCt4,
     ct:           '#984559',
     ctGrad:       ['#984559', '#da5474'],
     ctf:          '#984559',
   },
-  buttonSecondary: { ...Dark.buttonSecondary,
-  
+  boxMain: { ...Dark.boxMain,
+    bg:      '#971f3b',
+    ct:      '#bdbdbd',
+    bgFc:    '#c6294e',
+    ctFc:    '#bdbdbd',
   },
   inputRadio: { ...Dark.inputRadio,
     bgFc:  '#d16780',
@@ -94,18 +101,6 @@ export const DarkPinkProps: ThemeProps = { ...Dark,
     track: ['#F8F8F822'],
     thumb: ['#F8F8F844'],
   },
-}
-
-
-
-export const DarkPink = {
-  ...DarkPinkProps,
-  type: 'dark',
-  name: 'Dark Pink' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: DarkPinkProps.boxAccent.bg,
-    bgColor1:    DarkPinkProps.boxAccent.bg,
-    bgColor2:    DarkPinkProps.page.bg,
-  })),
+  
 } satisfies Theme
 

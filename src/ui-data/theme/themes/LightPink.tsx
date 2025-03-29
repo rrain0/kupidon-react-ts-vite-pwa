@@ -1,14 +1,25 @@
-import styled from '@emotion/styled'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Light } from 'src/ui-data/theme/themes/Light.ts'
+import { Light } from 'src/ui-data/theme/themes/Light.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
-import ThemeProps = AppTheme.ThemeProps
 
 
 
 
-export const LightPinkProps: ThemeProps = { ...Light,
+export const LightPink = { ...Light,
+  type: 'light',
+  name: 'Light Pink' as const,
+  icon: (
+    <div
+      css={themeIconCss({
+        accentColor: '#ff8ea9',
+        bgColor1:    '#ff8ea9',
+        bgColor2:    '#f0f0f0',
+      })}
+    />
+  ),
+  
+  
   
   page: { ...Light.page,
     bg:         '#f5f5f5',
@@ -47,15 +58,11 @@ export const LightPinkProps: ThemeProps = { ...Light,
     ctGrad:       ['#f17492', '#d93b5f'],
     ctf:          '#f17492',
   },
-  
-  buttonMain: { ...Light.buttonMain,
+  boxMain: { ...Light.boxMain,
     bg:      '#BB2649',
     ct:      '#F8F8F8',
     bgFc: '#d93b5f',
     ctFc:    '#F8F8F8',
-  },
-  buttonSecondary: { ...Light.buttonSecondary,
-  
   },
   inputRadio: { ...Light.inputRadio,
     bgFc:  '#f37190',
@@ -93,19 +100,6 @@ export const LightPinkProps: ThemeProps = { ...Light,
     track: ['#25283622'],
     thumb: ['#25283644'],
   },
-}
-
-
-
-
-export const LightPink = {
-  ...LightPinkProps,
-  type: 'light',
-  name: 'Light Pink' as const,
-  icon: styled.div(themeIconCss({
-    accentColor: LightPinkProps.boxAccent.bg,
-    bgColor1:    LightPinkProps.boxAccent.bg,
-    bgColor2:    LightPinkProps.boxDefault.bg2,
-  })),
+  
 } satisfies Theme
 
