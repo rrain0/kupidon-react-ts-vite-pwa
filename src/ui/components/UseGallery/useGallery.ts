@@ -9,6 +9,7 @@ import { GetTrackProps, useDragProgress } from '@util/drag/useDragProgress.ts'
 import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
+import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
@@ -197,7 +198,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   const { getWasDragged, setWasDragged } = useAppPointerAction()
   
   
-  const onEachDrag = (cpy: number, horizontal: boolean, drag: boolean) => {
+  const applyOnEachDrag = useAsCallback((cpy: number, horizontal: boolean, drag: boolean) => {
     if (!noDrag && horizontal) {
       lockTouchAction()
       if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
@@ -217,20 +218,17 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       setCurrProgressX(cpy)
       updateViews()
     }
-  }
-  const [getOnEachDrag] = useAsRefGet(onEachDrag)
+  })
   
-  const onDragStart = () => { }
-  const [getOnDragStart] = useAsRefGet(onDragStart)
+  const applyOnDragStart = useAsCallback(() => { })
   
-  const onDragEnd = (velx: number) => {
+  const applyOnDragEnd = useAsCallback((velx: number) => {
     if (isDragging) updateViewsAndFinish(velx)
     setNeedMerge(true)
     setCanStartDrag(true)
     unlockTouchAction()
     setIsDragging(false)
-  }
-  const [getOnDragEnd] = useAsRefGet(onDragEnd)
+  })
   
   
   
@@ -252,20 +250,15 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     updateDragProgress({ first, vpx, vpy, dx, dy })
     
     // onEachDrag
-    getOnEachDrag()(getDragCurrProgressX(), horizontal, drag)
+    applyOnEachDrag(getDragCurrProgressX(), horizontal, drag)
     // onDragStart
-    if (first) { getOnDragStart()() }
+    if (first) { applyOnDragStart() }
     // onDragging
     if (!first && !last) { }
     // onDragEnd
-    if (last) { getOnDragEnd()(velx) }
+    if (last) { applyOnDragEnd(velx) }
   })
   
-  
-  const [getAnimateTo] = useAsRefGet(animateTo)
-  const animateToStableCallback = useCallback((params: AnimateToParams) => {
-    return getAnimateTo()(params)
-  }, [])
   
   
   return {
@@ -279,7 +272,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     getCurrProgressX,
     animatedCurrProgressX,
     
-    animateTo: animateToStableCallback,
+    animateTo: useAsCallback(animateTo),
   }
 }
 
