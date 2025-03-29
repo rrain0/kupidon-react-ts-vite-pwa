@@ -24,7 +24,7 @@ export const MockPoster: PosterItem[] = [
   },
   
   
-  /* {
+  {
     date: '12 марта',
     location: 'ВТБ Арена',
     price: 'от 2599 ₽',
@@ -51,6 +51,6 @@ export const MockPoster: PosterItem[] = [
     price: 'от 2599 ₽',
     description: 'Известные артисты исполнят для вас свои песни. Отличная идея для свидания!',
     previewImg: concert,
-  }, */
+  },
 ]
 

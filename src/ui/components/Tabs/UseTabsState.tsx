@@ -17,9 +17,7 @@ export type UseTabsStateProps = Puro<{
   children: (props: UseTabsStateRenderProps) => React.ReactNode
 }>
 
-const UseTabsState =
-React.memo(
-(props: UseTabsStateProps) => {
+const UseTabsState = React.memo((props: UseTabsStateProps) => {
   const {
     idx: tabIdxExt,
     setIdx: setTabIdxExt,

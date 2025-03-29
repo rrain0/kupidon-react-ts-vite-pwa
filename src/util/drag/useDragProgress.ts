@@ -1,7 +1,6 @@
-import { useCallback } from 'react'
 import { RangeU } from 'src/util/common/RangeU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { useAsRefGet } from 'src/util/react-state/useAsRefGet.ts'
+import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Getter = TypeU.Getter
 
@@ -47,8 +46,6 @@ export type UpdateDragProgressProps = {
 export const useDragProgress = (props: UseDragProgressProps) => {
   const { getTrackProps } = props
   
-  const [getGetTrackPropsRef] = useAsRefGet(getTrackProps)
-  
   const [getDragStartProgressX, setDragStartProgressX] = useRefGetSet(0) // ..0..100..
   const [getDragCurrProgressX, setDragCurrProgressX] = useRefGetSet(0) // ..0..100..
   
@@ -56,7 +53,7 @@ export const useDragProgress = (props: UseDragProgressProps) => {
   const [getDragCurrProgressY, setDragCurrProgressY] = useRefGetSet(0) // ..0..100..
   
   
-  const updateDragProgress = useCallback((props: UpdateDragProgressProps) => {
+  const updateDragProgress = useAsCallback((props: UpdateDragProgressProps) => {
     const { first, vpx, vpy, dx, dy } = props
     
     const {
@@ -64,7 +61,7 @@ export const useDragProgress = (props: UseDragProgressProps) => {
       y: trackStartY,
       w: trackLenX,
       h: trackLenY,
-    } = getGetTrackPropsRef()()
+    } = getTrackProps()
     
     if (first) {
       setDragStartProgressX(0)
@@ -90,7 +87,7 @@ export const useDragProgress = (props: UseDragProgressProps) => {
     const dragDProgressY = getDragCurrProgressY() + dragCurrDProgressY
     setDragCurrProgressY(dragDProgressY)
     
-  }, [])
+  })
   
   return {
     updateDragProgress,

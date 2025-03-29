@@ -10,17 +10,25 @@ import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
-import { useCallback, useLayoutEffect, useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import Puro = TypeU.Puro
 import exists = TypeU.exists
 import notExists = TypeU.notExists
+import Callback1 = TypeU.Callback1
+import noop = TypeU.noop
 
 
 
 // Simplicity vs Control balance is hard
+
+
+export type ProgressEvent = {
+  last: boolean
+  //pos0ViewI: number
+  pos0ItemI: number
+}
 
 
 export type AnimateToParams = Puro<{
@@ -35,7 +43,11 @@ export type UseGalleryProps = {
   itemsCnt: number
   visibleViewsCnt: number
   getTrackProps: GetTrackProps
+  
   noDrag?: boolean | undefined
+  noLoop?: boolean | undefined // так же будет влиять и на направление перемещения по индексу
+  
+  onFinish?: Callback1<ProgressEvent> | undefined
 }
 
 export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
@@ -44,7 +56,11 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     visibleViewsCnt,
     getTrackProps,
     noDrag,
+    noLoop,
+    onFinish: _onFinish,
   } = props
+  
+  const onFinish = useAsCallback(_onFinish ?? noop)
   
   
   
@@ -67,12 +83,14 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   // Assign initial value to views after obtaining their refs
   useLayoutEffect(() => animatedCurrProgressX.set(0), [])
   
+  // Events log
+  const [getEventsLog, setEventsLog] = useRefGetSet(undefined as [] | undefined)
   
   
   
   const vThreshold = 150 // %width/s
   
-  const animateTo = ({
+  const animateTo = async ({
     next,
     prev,
     p: nextP,
@@ -111,7 +129,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       // TODO
       //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
       //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
-      void animatedCurrProgressX.start({
+      await animatedCurrProgressX.start({
         startValue: pCurr,
         animationFunction: (startValue, t) => {
           // Начальный путь
@@ -127,6 +145,10 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
         },
       })
     }
+    
+    const itemP = getStartItemProgress() + animatedCurrProgressX.get()
+    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
+    onFinish({ last: true, pos0ItemI })
   }
   
   
@@ -168,7 +190,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     })()
     
     const nextP = pI + nextPICurr
-    animateTo({ p: nextP, vel0: vel })
+    void animateTo({ p: nextP, vel0: vel })
   }
   
   
@@ -185,11 +207,13 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     const p = getStartProgressX() + getCurrProgressX()
     // Если имеем 0 или 1 отображаемых view, то листать не можем, поэтому считаем что 0 прогресс
     const viewMaxP = visibleViewsCnt * 100
-    setStartProgressX(MathU.round3(RangeU.loop(p, [0, viewMaxP])))
-    const photoP = getStartItemProgress() + getCurrProgressX()
+    const pStart = MathU.round3(RangeU.loop(p, [0, viewMaxP]))
+    setStartProgressX(pStart)
+    const itemP = getStartItemProgress() + getCurrProgressX()
     // Если имеем 0 или 1 item, то листать не можем, поэтому считаем что 0 прогресс
     const itemMaxP = itemsCnt * 100
-    setStartItemProgress(MathU.round3(RangeU.loop(photoP, [0, itemMaxP])))
+    const itemPStart = MathU.round3(RangeU.loop(itemP, [0, itemMaxP]))
+    setStartItemProgress(itemPStart)
     setCurrProgressX(0)
   }
   

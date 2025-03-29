@@ -45,6 +45,9 @@ const PosterPreview = React.memo(() => {
     return { x: 0, y: 0, w: 0, h: 0 }
   }
   
+  /* const onFinish = (ev) => {
+    console.log('onFinish', ev)
+  } */
   
   const {
     isDragging,
@@ -63,6 +66,7 @@ const PosterPreview = React.memo(() => {
     visibleViewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
+    //onFinish,
   })
   
   const [wasDraggedOnce, setWasDraggedOnce] = useState(false)
@@ -72,22 +76,21 @@ const PosterPreview = React.memo(() => {
   
   useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
     if (isDragging) return
-    animateTo({ next: true })
+    void animateTo({ next: true })
   }, [isDragging, wasDraggedOnce])
   
-  const animatedProps = animatedCurrProgressX.map(cp => (i = 1) => {
+  const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
     const p = getStartProgressX() + cp
     const itemP = getStartItemProgress() + cp
-    const pCurr = mod(p, 100)
-    const displayed0I = RangeU.loop(Math.floor(p / 100), [-1, visibleViewsCnt - 1])
-    const displayedI = RangeU.loop((i - 1) + displayed0I, [-1, visibleViewsCnt - 1])
-    //console.log('i', i, 'displayedI', displayedI, 'p', p, 'itemP', itemP)
+    // position index progress current - nonnegative
+    const posIPCurr = mod(p, 100)
+    const posI = RangeU.loop((viewI - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    //console.log('viewI', viewI, 'posI', posI, 'p', p, 'itemP', itemP)
     // item progress параллелен прогрессу по оси x, так что его инвертируем
-    const item0I = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
-    const itemI = RangeU.loop(displayedI + item0I, [0, itemsCnt])
-    const item0VisibleI = RangeU.loop(itemsCnt - Math.floor((itemP + 50) / 100), [0, itemsCnt])
-    // progressCurrent - nonnegative
-    return { p, itemP, pCurr, displayed0I, displayedI, item0I, itemI, item0VisibleI }
+    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
+    const itemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
+    const pos0ItemVisibleI = RangeU.loop(itemsCnt - Math.floor((itemP + 50) / 100), [0, itemsCnt])
+    return { p, itemP, posIPCurr, posI, pos0ItemI, itemI, pos0ItemVisibleI }
   })
   
   return (
@@ -103,8 +106,8 @@ const PosterPreview = React.memo(() => {
             key={viewI}
             animatedStyle={{
               transform: animatedProps.map(ap => {
-                const { p, itemP, pCurr, displayedI } = ap(viewI)
-                let x = displayedI * 100 + pCurr
+                const { p, itemP, posIPCurr, posI } = ap(viewI)
+                let x = posI * 100 + posIPCurr
                 // add gap 20%
                 x = RangeU.map(x, [0, 100], [0, 120])
                 return `translateX(${x}%)`
@@ -173,13 +176,13 @@ const PosterPreview = React.memo(() => {
       
       <AnimatedState
         animatedState={{
-          item0VisibleI: animatedProps.map(ap => ap().item0VisibleI),
+          pos0ItemVisibleI: animatedProps.map(ap => ap().pos0ItemVisibleI),
         }}
       >
-        {({ item0VisibleI }) => (
+        {({ pos0ItemVisibleI }) => (
           <SelectMeter
             css={SelectMeterS6.t(selectMeterS)}
-            metersValues={arrOfZeros(itemsCnt).map((it, i) => i === item0VisibleI ? 2 : it)}
+            metersValues={arrOfZeros(itemsCnt).map((it, i) => i === pos0ItemVisibleI ? 2 : it)}
           />
         )}
       </AnimatedState>
