@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 
 export const useAnimatedValue = <V>(initialValue: V) => {
-  return useState(() => new AnimatedValue({ startValue: initialValue }))[0]
+  return useState(() => new AnimatedValue({ initialValue }))[0]
 }
 
 

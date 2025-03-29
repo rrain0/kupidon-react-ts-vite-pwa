@@ -1,11 +1,10 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
-import { AnimatedProperty, StartAnimationProps } from 'src/mini-libs/animated/AnimatedProperty.ts'
+import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
-  AnimationFunction,
-  passAnimationFunction,
-} from 'src/mini-libs/animated/animationFunciton.ts'
+  Animation, AnimationFun, AnimationFunWithData,
+} from 'src/mini-libs/animated/Animation.ts'
 import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
@@ -13,6 +12,7 @@ import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
+import exists = TypeU.exists
 
 
 
@@ -25,15 +25,16 @@ export const batchUpdate: Map<
 
 
 export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
-  constructor(props: StartAnimationProps<Value>) {
-    void this.start(props)
+  constructor(params: { initialValue: Value }) {
+    void this.set(params.initialValue)
   }
   
   getValue() { return this }
   
   startValue!: Value
   startTime: number = getTime()
-  animationFunction: AnimationFunction<Value> = passAnimationFunction
+  animationData: any
+  animationFun: AnimationFun<Value> | AnimationFunWithData<Value, any> | undefined
   
   // не влияет на анимируемое значение, просто переводит в состояние finished
   finish: Callback = noop
@@ -46,32 +47,39 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   whenCanceled!: Promise<void>
   
   get(time = getTime()): Value {
-    const [v, finished] = this.animationFunction(this.startValue, time - this.startTime)
+    const { value, finished, data } =
+      (this.animationFun as AnimationFunWithData<Value, any> | undefined)?.({
+        startValue: this.startValue,
+        time: time - this.startTime,
+        data: this.animationData,
+      })
+      ?? { value: this.startValue, finished: true }
+    this.animationData = data
     if (!this.finished && finished) this.finish()
-    return v
+    return value
   }
   
   set(value: Value) {
     this.endCurrAnimation()
     this.startTime = getTime()
     this.startValue = value
-    this.animationFunction = passAnimationFunction
+    this.animationData = undefined
+    this.animationFun = undefined
     this.reset()
     addAnimation(this.update)
   }
   
-  async start(props: StartAnimationProps<Value>): Promise<void> {
+  async start<D = undefined>(animation: Animation<Value, D>): Promise<void> {
     this.endCurrAnimation()
-    this.startValue = props.startValue
-    if (props.startTime !== undefined) {
-      this.startTime = props.startTime
+    this.startValue = animation.startValue
+    if (exists(animation.startTime)) {
+      this.startTime = animation.startTime
     }
     else {
       this.startTime = getTime()
     }
-    if (props.animationFunction !== undefined) {
-      this.animationFunction = props.animationFunction
-    }
+    this.animationData = animation.initialData
+    this.animationFun = animation.animationFun
     this.reset()
     addAnimation(this.update)
     return Promise.any([this.whenFinished, this.whenCanceled])

@@ -194,7 +194,7 @@ const Preview = React.memo((props: PreviewProps) => {
       //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
       void animatedCurrProgressY.start({
         startValue: cp,
-        animationFunction: (startValue, t) => {
+        animationFun: ({ startValue, time: t }) => {
           // Начальный путь
           const s0 = startValue
           t /= 1000 // ms => s
@@ -204,7 +204,7 @@ const Preview = React.memo((props: PreviewProps) => {
           let s = a0 * t**2 / 2 + v0 * t + s0
           s = MathU.round3(s)
           setCurrProgressY(s)
-          return [s, finished]
+          return { value: s, finished }
         },
       })
     }

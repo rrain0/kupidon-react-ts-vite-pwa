@@ -131,7 +131,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
       await animatedCurrProgressX.start({
         startValue: pCurr,
-        animationFunction: (startValue, t) => {
+        animationFun: ({ startValue, time: t }) => {
           // Начальный путь
           const s0 = startValue
           t /= 1000 // ms => s
@@ -141,7 +141,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
           let s = a0 * t**2 / 2 + v0 * t + s0
           s = MathU.round3(s)
           setCurrProgressX(s)
-          return [s, finished]
+          return { value: s, finished }
         },
       })
     }

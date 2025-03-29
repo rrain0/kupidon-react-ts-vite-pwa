@@ -1,17 +1,9 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedValue } from 'src/mini-libs/animated/AnimatedValue.ts'
-import { AnimationFunction } from 'src/mini-libs/animated/animationFunciton.ts'
+import { Animation } from 'src/mini-libs/animated/Animation.ts'
 import Mapper = TypeU.Mapper
 import Callback1 = TypeU.Callback1
-
-
-
-export type StartAnimationProps<V> = {
-  startValue: V,
-  startTime?: number | undefined,
-  animationFunction?: AnimationFunction<V> | undefined,
-}
 
 
 
