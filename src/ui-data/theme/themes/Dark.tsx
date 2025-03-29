@@ -97,10 +97,6 @@ export const Dark = {
     bgf:          '#18181a',
     ctf:          '#d0d0d0',
   },
-  boxSecondary: {
-    bg:           '#39404d',
-    ct:           '#999999',
-  },
   boxAccent: {
     bg:           '#bdbdbd',
     ct:           '#000000',
@@ -141,11 +137,22 @@ export const Dark = {
   boxAccent5: {
     ct:           '#bdbdbd',
   },
+  boxAccent6Ct: {
+    bg:           '#000000',
+    ct:           '#ffffff',
+  },
   boxMain: {
     bg:       '#aaaaaa',
     ct:       '#000000',
     bgFc:     '#bbbbbb',
     ctFc:     '#000000',
+  },
+  boxSecondary: {
+    bg:           '#39404d',
+    ct:           '#999999',
+  },
+  boxSecondary2: {
+    ct:           '#939393',
   },
   boxDanger: {
     bg:           '#24272d',
@@ -210,10 +217,10 @@ export const Dark = {
   input: {
     bg:            '#282c34',
     ct:            '#cdcdcd',
-    placeholder:   ['#7b7b7b'],
+    placeholder:   '#7b7b7b',
     borderGrad:    ['#7b7b7b', '#7b7b7b'],
-    borderHover:   ['#7b7b7b'],
-    bgError:       ['#5e252c'],
+    borderHover:   '#7b7b7b',
+    bgError:       '#5e252c',
   },
   
   rangePicker: {

@@ -5,7 +5,7 @@ import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
-import DatePlaceCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCard.tsx'
+import DatePlaceCardWide from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCardWide.tsx'
 import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
@@ -59,7 +59,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
                     if (!places.length) return 'Пусто'
                     
                     return places.map(place => (
-                      <DatePlaceCard
+                      <DatePlaceCardWide
                         key={place.id}
                         place={place}
                       />

@@ -131,10 +131,6 @@ export namespace AppTheme {
       bgf:          string
       ctf:          string
     }
-    boxSecondary: {
-      bg:           string
-      ct:           string
-    }
     boxAccent: {
       bg:           string
       ct:           string
@@ -175,12 +171,23 @@ export namespace AppTheme {
     boxAccent5: {
       ct:           string
     }
+    boxAccent6Ct: {
+      bg:           string
+      ct:           string
+    }
     // main button (submit button)
     boxMain: {
       bg:           string
       ct:           string
       bgFc:         string
       ctFc:         string
+    }
+    boxSecondary: {
+      bg:           string
+      ct:           string
+    }
+    boxSecondary2: {
+      ct:           string
     }
     boxDanger: {
       bg:           string
@@ -242,10 +249,10 @@ export namespace AppTheme {
     input: {
       bg:            string
       ct:            string
-      placeholder:   string[]
+      placeholder:   string
       borderGrad:    [string, string]
-      borderHover:   string[]
-      bgError:       string[]
+      borderHover:   string
+      bgError:       string
     }
     
     rangePicker: {

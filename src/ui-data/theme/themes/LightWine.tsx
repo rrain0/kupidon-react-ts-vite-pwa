@@ -109,10 +109,10 @@ export const LightWine = { ...Light,
   input: { ...Light.input,
     bg:            '#F8F8F8',
     ct:            '#000000',
-    placeholder:   ['#777777'],
+    placeholder:   '#777777',
     borderGrad:    ['#7b7b7b', '#7b7b7b'],
-    borderHover:   ['#7b7b7b'],
-    bgError:       ['#ffced2'], //['#ff8787'],
+    borderHover:   '#7b7b7b',
+    bgError:       '#ffced2', // '#ff8787'
   },
   
   rangePicker: { ...Light.rangePicker,

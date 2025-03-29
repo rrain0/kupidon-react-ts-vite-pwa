@@ -95,10 +95,6 @@ export const Light = {
     bgf:          '#ffffff',
     ctf:          '#232020',
   },
-  boxSecondary: {
-    bg:           '#E0E0E0',
-    ct:           '#ABABAB',
-  },
   boxAccent: {
     bg:           '#333333',
     ct:           '#ffffff',
@@ -139,11 +135,22 @@ export const Light = {
   boxAccent5: {
     ct:           '#aaaaaa',
   },
+  boxAccent6Ct: {
+    bg:           '#ffffff',
+    ct:           '#000000',
+  },
   boxMain: {
     bg:            '#7b7b7b',
     ct:            '#F8F8F8',
     bgFc:          '#aaaaaa',
     ctFc:          '#F8F8F8',
+  },
+  boxSecondary: {
+    bg:           '#E0E0E0',
+    ct:           '#ABABAB',
+  },
+  boxSecondary2: {
+    ct:           '#939393',
   },
   boxDanger: {
     bg:           '#ffffff',
@@ -214,10 +221,10 @@ export const Light = {
   input: {
     bg:            '#F8F8F8',
     ct:            '#000000',
-    placeholder:   ['#777777'],
+    placeholder:   '#777777',
     borderGrad:    ['#7b7b7b', '#7b7b7b'],
-    borderHover:   ['#7b7b7b'],
-    bgError:       ['#ffced2'],
+    borderHover:   '#7b7b7b',
+    bgError:       '#ffced2',
   },
   
   rangePicker: {

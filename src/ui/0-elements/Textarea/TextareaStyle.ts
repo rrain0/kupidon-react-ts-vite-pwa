@@ -72,14 +72,14 @@ export namespace TextareaStyle {
       ${Prop.color}: ${t.input.ct};
 
       ::placeholder {
-        color: ${t.input.placeholder[0]};
+        color: ${t.input.placeholder};
       }
     }
     ${El.border} {
       border: 2px solid transparent;
       background-image: linear-gradient(
               to right,
-              ${t.input.borderHover[0]},
+              ${t.input.borderHover},
               ${t.input.borderGrad[0]},
               ${t.input.borderGrad[1]}
       );
@@ -118,7 +118,7 @@ export namespace TextareaStyle {
     
     // error
     ${El.frameError} {
-      background: ${t.input.bgError[0]};
+      background: ${t.input.bgError};
     }
   `
   

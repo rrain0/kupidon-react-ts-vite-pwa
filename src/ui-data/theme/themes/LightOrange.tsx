@@ -49,7 +49,7 @@ export const LightOrange = { ...LightPink,
   
   input: { ...LightPink.input,
     borderGrad:      ['#ef7b7d', '#ef7b7d'],
-    borderHover: ['#00a8f3'],
+    borderHover: '#00a8f3',
   },
   
   bottomSheetHandle: { ...LightPink.bottomSheetHandle,

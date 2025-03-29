@@ -34,7 +34,7 @@ export const DarkWine = { ...Dark,
   navButton: { ...Dark.navButton,
     bgFc:         '#2e3440',
     ct:           '#7b7b7b',
-    cta:          '#b7405c', // ['#984559']
+    cta:          '#b7405c', // '#984559'
   },
   
   
@@ -67,7 +67,7 @@ export const DarkWine = { ...Dark,
   boxAccent4: { ...Dark.boxAccent4,
     bg:           '#BB2649',
     ct:           '#ffffff',
-    // cta:       '#b7405c', // ['#984559'
+    // cta:       '#b7405c', // '#984559'
     // cta2:      '#b7405c',
     // cta3:      '#BB2649',
   },
@@ -102,10 +102,10 @@ export const DarkWine = { ...Dark,
   input: { ...Dark.input,
     bg:            '#282c34',
     ct:            '#cdcdcd',
-    placeholder:   ['#7b7b7b'],
+    placeholder:   '#7b7b7b',
     borderGrad:    ['#7b7b7b', '#7b7b7b'],
-    borderHover:   ['#7b7b7b'],
-    bgError:       ['#5e252c'],
+    borderHover:   '#7b7b7b',
+    bgError:       '#5e252c',
   },
   
   rangePicker: { ...Dark.rangePicker,

@@ -37,7 +37,7 @@ const uiVals = {
 export type DatePlaceCardProps = ClassStyle & {
   place: DatePlace
 }
-export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
+export const DatePlaceCardWide = React.memo((props: DatePlaceCardProps) => {
   const {
     className,
     style,
@@ -74,7 +74,7 @@ export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
     <DatePlaceBox
       className={className}
       style={style}
-      data-display-name="DatePlaceCard"
+      data-display-name="DatePlaceCardWide"
       onClick={selectPlace}
     >
       <ImgSpark
@@ -91,8 +91,8 @@ export const DatePlaceCard = React.memo((props: DatePlaceCardProps) => {
     </DatePlaceBox>
   )
 })
-DatePlaceCard.displayName = 'DatePlaceCard'
-export default DatePlaceCard
+DatePlaceCardWide.displayName = 'DatePlaceCardWide'
+export default DatePlaceCardWide
 
 
 
@@ -142,8 +142,7 @@ const InfoBox = styled.div`
   padding: 10px 16px 16px;
 `
 const Title = styled.div`
-  // TODO Theme
-  color: black;
+  color: ${p => p.theme.boxAccent6Ct.ct};
   ${Txt.s17Bold};
 `
 const ShortDescription = styled.div`
@@ -151,8 +150,7 @@ const ShortDescription = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   -webkit-line-clamp: 2;
-  // TODO Theme
-  color: #939393;
+  color: ${p => p.theme.boxSecondary2.ct};
   ${Txt.s14};
 `
 

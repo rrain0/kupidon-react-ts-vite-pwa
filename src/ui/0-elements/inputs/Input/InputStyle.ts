@@ -147,13 +147,13 @@ export namespace InputStyle {
       ${W.props.color.p.set(t.input.ct)};
 
       ::placeholder {
-        color: ${t.input.placeholder[0]};
+        color: ${t.input.placeholder};
       }
     }
     ${W.use.s.normal().e.border().thisUse} {
       background-image: linear-gradient(
         to right,
-        ${t.input.borderHover[0]},
+        ${t.input.borderHover},
         ${t.input.borderGrad[0]},
         ${t.input.borderGrad[1]}
       );
@@ -178,7 +178,7 @@ export namespace InputStyle {
 
     // state: error
     ${W.use.s.error().e.frame().thisUse} {
-      background: ${t.input.bgError[0]};
+      background: ${t.input.bgError};
     }
   `
   /*

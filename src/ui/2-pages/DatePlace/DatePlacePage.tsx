@@ -227,15 +227,13 @@ const Video = styled.video`
 `
 
 const Title = styled.div`
-  // TODO Theme
-  color: black;
+  color: ${p => p.theme.boxAccent6Ct.ct};
   ${Txt.s20Bold};
 `
 
 
 const Description = styled.div`
-  // TODO Theme
-  color: #000000;
+  color: ${p => p.theme.boxDefault.ct};
   text-align: justify;
   ${Txt.s15};
 `
@@ -243,8 +241,7 @@ const Description = styled.div`
 
 const ListTitle = styled.h6`
   ${resetH};
-  // TODO Theme
-  color: #232020;
+  color: ${p => p.theme.boxNormal4.ct};
   ${Txt.s17Bold};
 `
 const List = styled.ul`
