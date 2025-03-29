@@ -1,3 +1,4 @@
+import { createSpringAnimation } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
@@ -114,6 +115,25 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       return [undefined, 0]
     })()
     if (notExists(nextP)) return
+    
+    /*
+    if (p !== nextP) {
+      const nextPCurr = nextP - pStart
+      await animatedCurrProgressX.start({
+        startValue: pCurr,
+        initialData: {
+          prevTimestamp: 0,
+          prevValue: pCurr,
+          prevVelocity: vel0 ?? -vThreshold,
+          finished: false,
+        },
+        animationFun: createSpringAnimation({
+          mass: 1, tension: 170, friction: 10, initVelocity: vel0 ?? -vThreshold,
+          from: pCurr, to: nextPCurr,
+        }),
+      })
+    }
+     */
     
     //console.log('nextP', nextP)
     if (p !== nextP) {

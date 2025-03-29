@@ -10,9 +10,6 @@ export type SpringAnimationParams = {
   initVelocity: number
   from: number
   to: number
-  prevTimestamp: number
-  prevVelocity: number
-  prevValue: number
 }
 export type SpringAnimationData = {
   prevTimestamp: number
@@ -20,7 +17,7 @@ export type SpringAnimationData = {
   prevVelocity: number
   finished: boolean
 }
-export const springAnimation = ({
+export const createSpringAnimation = ({
   mass, tension, friction, initVelocity, from, to,
 }: SpringAnimationParams): AnimationFunWithData<number, SpringAnimationData> => ({
   startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished },
