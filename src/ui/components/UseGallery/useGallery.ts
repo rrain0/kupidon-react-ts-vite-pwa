@@ -104,8 +104,6 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     const pICurr = p % 100
     const pI = p - pICurr
     
-    const nextPICurr = 0 // ???
-    
     //const nextP = pI + nextPICurr
     ;[nextP, vel0] = (() => {
       if (exists(next)) return [pI - 100, -vThreshold]
@@ -120,21 +118,16 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       const nextPCurr = nextP - pStart
       await animatedCurrProgressX.start({
         startValue: pCurr,
-        initialData: {
-          prevTimestamp: 0,
-          prevValue: pCurr,
-          prevVelocity: vel0 ?? -vThreshold,
-          finished: false,
-        },
         animationFun: createSpringAnimation({
           mass: 1, tension: 170, friction: 10, initVelocity: vel0 ?? -vThreshold,
           endValue: nextPCurr,
         }),
+        onUpdate: ({ value }) => setCurrProgressX(value),
       })
     }
     
     //console.log('nextP', nextP)
-    if (false && p !== nextP) {
+    /* if (p !== nextP) {
       const nextPCurr = nextP - pStart
       // Начальная скорость
       const v0 = vel0 ?? -vThreshold
@@ -162,7 +155,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
           return { value: s, finished }
         },
       })
-    }
+    } */
     
     const itemP = getStartItemProgress() + animatedCurrProgressX.get()
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])

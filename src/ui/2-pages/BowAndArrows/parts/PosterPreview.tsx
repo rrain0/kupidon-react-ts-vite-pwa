@@ -74,10 +74,10 @@ const PosterPreview = React.memo(() => {
     if (isDragging) setWasDraggedOnce(true)
   }, [isDragging])
   
-  useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
+  /* useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
     if (isDragging) return
     void animateTo({ next: true })
-  }, [isDragging, wasDraggedOnce])
+  }, [isDragging, wasDraggedOnce]) */
   
   const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
     const p = getStartProgressX() + cp

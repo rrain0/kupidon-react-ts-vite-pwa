@@ -3,7 +3,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
-  Animation, AnimationFun, AnimationFunWithData,
+  Animation, AnimationFun, AnimationOnUpdateParams,
 } from 'src/mini-libs/animated/Animation.ts'
 import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
@@ -34,7 +34,8 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   startValue!: Value
   startTime: number = getTime()
   animationData: any
-  animationFun: AnimationFun<Value> | AnimationFunWithData<Value, any> | undefined
+  animationFun: AnimationFun<Value, any> | undefined
+  onUpdate: Callback1<AnimationOnUpdateParams<Value>> | undefined
   
   // не влияет на анимируемое значение, просто переводит в состояние finished
   finish: Callback = noop
@@ -48,13 +49,14 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   
   get(time = getTime()): Value {
     const { value, finished, data } =
-      (this.animationFun as AnimationFunWithData<Value, any> | undefined)?.({
+      (this.animationFun as AnimationFun<Value, any> | undefined)?.({
         startValue: this.startValue,
         time: time - this.startTime,
         data: this.animationData,
       })
       ?? { value: this.startValue, finished: true }
     this.animationData = data
+    this.onUpdate?.({ value, finished })
     if (!this.finished && finished) this.finish()
     return value
   }
@@ -65,6 +67,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     this.startValue = value
     this.animationData = undefined
     this.animationFun = undefined
+    this.onUpdate = undefined
     this.reset()
     addAnimation(this.update)
   }
@@ -80,6 +83,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     }
     this.animationData = animation.initialData
     this.animationFun = animation.animationFun
+    this.onUpdate = animation.onUpdate
     this.reset()
     addAnimation(this.update)
     return Promise.any([this.whenFinished, this.whenCanceled])

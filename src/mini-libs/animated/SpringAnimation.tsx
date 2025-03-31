@@ -1,4 +1,6 @@
-import { AnimationFunWithData } from 'src/mini-libs/animated/Animation.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { AnimationFun } from 'src/mini-libs/animated/Animation.ts'
+import Pu = TypeU.Pu
 
 
 /*
@@ -18,16 +20,17 @@ export type SpringAnimationParams = {
   initVelocity: number
   endValue: number
 }
-export type SpringAnimationData = {
+export type SpringAnimationData = Pu<{
   prevTimestamp: number
   prevValue: number
   prevVelocity: number
   finished: boolean
-}
+}>
 export const createSpringAnimation = ({
   mass, tension, friction, initVelocity, endValue,
-}: SpringAnimationParams): AnimationFunWithData<number, SpringAnimationData> => ({
-  startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished },
+  // @ts-expect-error
+}: SpringAnimationParams): AnimationFun<number, SpringAnimationData | undefined> => ({
+  startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
 }) => {
   
   if (finished) return { value: prevValue, finished, data: {
@@ -35,34 +38,88 @@ export const createSpringAnimation = ({
   } }
   
   const currentTimestamp = time
-  const fractionalDiff = currentTimestamp - (prevTimestamp || currentTimestamp)
+  const fractionalDiff = currentTimestamp - (prevTimestamp ?? currentTimestamp)
   const naturalDiffPart = Math.floor(fractionalDiff)
   const decimalDiffPart = fractionalDiff % 1
   const normalizedDiff = Math.min(naturalDiffPart, 46)
   
-  let safeVelocity = prevVelocity || initVelocity || 0
-  let safeValue = prevValue || startValue
+  let velocity = prevVelocity ?? initVelocity ?? 0
+  let value = prevValue ?? startValue
   
   // Рассчитываем физику для каждого 1-миллисекундного интервала
   for (let i = 0; i < normalizedDiff; i++) {
-    const springRestoringForce = -1 * tension * (safeValue - endValue)
-    const dampingForce = -1 * safeVelocity * friction
+    const springRestoringForce = -1 * tension * (value - endValue)
+    const dampingForce = -1 * velocity * friction
     const acceleration = (springRestoringForce + dampingForce) / mass
     
-    safeVelocity = safeVelocity + acceleration / 1000
-    safeValue  = safeValue + safeVelocity / 1000
+    velocity = velocity + acceleration / 1000
+    value  = value + velocity / 1000
   }
   
   const precision = 0.001
-  finished = Math.abs(safeVelocity) < precision
-    && Math.abs(safeValue - endValue) < precision
+  finished = Math.abs(velocity) < precision
+    && Math.abs(value - endValue) < precision
   
-  // Отнимаем оставшуюся часть миллисекунды от текущего времени,
-  // так как мы ее не проанимировали
-  prevTimestamp = currentTimestamp - decimalDiffPart
-  prevValue = safeValue
-  prevVelocity = safeVelocity
-  return { value: safeValue, finished, data: {
-    prevTimestamp, prevValue, prevVelocity, finished,
+  return { value, finished, data: {
+    // Отнимаем оставшуюся часть миллисекунды от текущего времени, так как мы ее не проанимировали
+    prevTimestamp: currentTimestamp - decimalDiffPart,
+    prevValue: value,
+    prevVelocity: velocity,
+    finished,
   } }
+}
+
+
+
+
+export type SpringParams = {
+  mass: number
+  tension: number
+  friction: number
+  initVelocity: number
+}
+export type CurrSpringParams = {
+  value: number
+  velocity: number
+  time: number
+  finished: boolean
+}
+export type NextSpringParams = {
+  from: number
+  to: number
+  time: number
+  prev?: CurrSpringParams | undefined
+}
+
+export const createSpring = ({
+  mass, tension, friction, initVelocity,
+}: SpringParams) => ({
+  from, to, time, prev,
+}: NextSpringParams): CurrSpringParams => {
+  
+  if (prev?.finished) return prev
+  
+  const fractionalDiff = time - (prev?.time ?? time)
+  const naturalDiffPart = Math.floor(fractionalDiff)
+  const decimalDiffPart = fractionalDiff % 1
+  const normalizedDiff = Math.min(naturalDiffPart, 46)
+  
+  let velocity = prev?.velocity ?? initVelocity ?? 0
+  let value = prev?.value ?? from
+  
+  // Рассчитываем физику для каждого 1-миллисекундного интервала
+  for (let i = 0; i < normalizedDiff; i++) {
+    const springRestoringForce = -1 * tension * (value - to)
+    const dampingForce = -1 * velocity * friction
+    const acceleration = (springRestoringForce + dampingForce) / mass
+    
+    velocity = velocity + acceleration / 1000
+    value  = value + velocity / 1000
+  }
+  
+  const precision = 0.001
+  const finished = Math.abs(velocity) < precision
+    && Math.abs(value - to) < precision
+  
+  return { value, velocity, time: time - decimalDiffPart, finished }
 }

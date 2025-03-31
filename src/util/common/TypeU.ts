@@ -26,6 +26,7 @@ export namespace TypeU {
   export type PartialUndef<O extends object> = {
     [Prop in keyof O]+?: O[Prop] | undefined
   }
+  export type Pu<O extends object> = PartialUndef<O>
   // Remove Partial Undefined
   export type Present<O extends object> = {
     [Prop in keyof O]-?: Exclude<O[Prop], undefined>
