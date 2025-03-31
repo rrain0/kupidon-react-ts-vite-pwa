@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
-import { useInterval } from '@util/react/useInterval.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
@@ -110,6 +109,7 @@ const PosterPreview = React.memo(() => {
                 let x = posI * 100 + posIPCurr
                 // add gap 20%
                 x = RangeU.map(x, [0, 100], [0, 120])
+                //console.log('x', x)
                 return `translateX(${x}%)`
               }),
             }}
@@ -122,19 +122,6 @@ const PosterPreview = React.memo(() => {
             >
               {({ itemI }) => {
                 //console.log('itemI', itemI)
-                /* return (
-                  <div
-                    style={{
-                      backgroundColor: Colors.test[itemI],
-                      width: '100%',
-                      height: '100%',
-                      padding: 10,
-                    }}
-                  >
-                    {itemI + 1}
-                  </div>
-                ) */
-                
                 const p = posters[itemI]
                 return (
                   <>
