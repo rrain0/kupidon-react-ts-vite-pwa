@@ -3,8 +3,8 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
-  Animation, AnimationFun, AnimationOnUpdateParams,
-} from 'src/mini-libs/animated/Animation.ts'
+  AnimationConfig, AnimationFun, AnimationConfigOnUpdateParams,
+} from 'src/mini-libs/animated/AnimationConfig.ts'
 import { addAnimation, removeAnimation } from 'src/mini-libs/animated/runAnimations.ts'
 import { getTime } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
@@ -35,7 +35,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   startTime: number = getTime()
   animationData: any
   animationFun: AnimationFun<Value, any> | undefined
-  onUpdate: Callback1<AnimationOnUpdateParams<Value>> | undefined
+  onUpdate: Callback1<AnimationConfigOnUpdateParams<Value>> | undefined
   
   // не влияет на анимируемое значение, просто переводит в состояние finished
   finish: Callback = noop
@@ -68,11 +68,11 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     this.animationData = undefined
     this.animationFun = undefined
     this.onUpdate = undefined
-    this.reset()
+    this.resetCompletionState()
     addAnimation(this.update)
   }
   
-  async start<D = undefined>(animation: Animation<Value, D>): Promise<void> {
+  async start<D = undefined>(animation: AnimationConfig<Value, D>): Promise<void> {
     this.endCurrAnimation()
     this.startValue = animation.startValue
     if (exists(animation.startTime)) {
@@ -84,7 +84,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     this.animationData = animation.initialData
     this.animationFun = animation.animationFun
     this.onUpdate = animation.onUpdate
-    this.reset()
+    this.resetCompletionState()
     addAnimation(this.update)
     return Promise.any([this.whenFinished, this.whenCanceled])
   }
@@ -142,7 +142,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     if (!this.finished && !this.canceled) this.cancel()
   }
   
-  reset() {
+  resetCompletionState() {
     this.finish = noop
     this.finished = false
     this.whenFinished = new Promise<void>(resolve => {

@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedValue } from 'src/mini-libs/animated/AnimatedValue.ts'
-import { Animation } from 'src/mini-libs/animated/Animation.ts'
+import { AnimationConfig } from 'src/mini-libs/animated/AnimationConfig.ts'
 import Mapper = TypeU.Mapper
 import Callback1 = TypeU.Callback1
 

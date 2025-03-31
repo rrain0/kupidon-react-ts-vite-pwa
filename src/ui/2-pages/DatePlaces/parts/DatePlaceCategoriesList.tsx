@@ -181,9 +181,9 @@ const Overflow = styled.div`
   overflow: auto;
   ${noScrollbars};
   ${row};
-  // Убирает расширенную тач-зону
-  pointer-events: none;
-  & > * { pointer-events: auto; }
+  // Убирает расширенную тач-зону - на айос отрубает скролл
+  //pointer-events: none;
+  /*& > * { pointer-events: auto; }*/
 `
 const ListRow = styled.div`
   width: fit-content;
