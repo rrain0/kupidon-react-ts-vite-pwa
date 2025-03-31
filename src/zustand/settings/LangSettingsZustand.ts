@@ -16,7 +16,7 @@ const zustandLsName = 'zustandLangSettings'
 
 const recoilLsName = 'langSettings'
 // To trigger Zustand update from Recoil to Zustand
-if (notExists(localStorage.getItem(zustandLsName)) && exists(recoilLsName)) {
+if (notExists(localStorage.getItem(zustandLsName)) && exists(localStorage.getItem(recoilLsName))) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 

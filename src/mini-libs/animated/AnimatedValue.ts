@@ -17,19 +17,11 @@ import exists = TypeU.exists
 
 
 
-export const batchUpdate: Map<
-  HTMLElement,
-  Record<'attrs' | 'style', Record<string, string>>
-> = new Map()
 
-
-
-export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
+export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   constructor(params: { initialValue: Value }) {
     void this.set(params.initialValue)
   }
-  
-  getValue() { return this }
   
   startValue!: Value
   startTime: number = getTime()
@@ -93,33 +85,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   readonly update = (time = getTime()) => {
     const v = this.get(time)
     for (const l of this.listeners) l(v)
-    
-    // Так немного медленнее
-    /* for (const [el, props] of batchUpdate.entries()) {
-      for (const [attr, value] of Object.entries(props.attrs)) {
-        el[attr] = value
-      }
-      
-      for (const [style, value] of Object.entries(props.style)) {
-        el.style[style] = value
-      }
-      
-      // el.style.cssText += Object.entries(props.style)
-      //   .map(([style, value]) => `${camelCaseToKebabCase(style)}:${value};`)
-      //   .join('')
-    }
-    batchUpdate.clear() */
-    
-    // Этот вариант ещё медленее
-    /*
-    const anims = this.animations
-    const aLen = anims.length
-    for (let i = 0; i < aLen; i++) anims[i]?.(v)
-     */
-    
-    if (this.finished) {
-      this.removeAnimationThrottled()
-    }
+    if (this.finished) this.removeAnimationThrottled()
   }
   
   
@@ -131,7 +97,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   })
   
   map<Mapped>(mapper: Mapper<Value, Mapped>) {
-    return new AnimatedComputed<Value, Value, Mapped>(this, mapper)
+    return new AnimatedComputed<Value, Mapped>(this, mapper)
   }
   
   get isRunning() {
@@ -171,21 +137,5 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
     this.listeners.delete(listener)
   }
   
-  /*
-  private animations: Callback1<Value>[] = []
-  onChange2(listener: Callback1<Value>): number {
-    const i = this.animations.length
-    this.animations[i] = listener
-    return i
-  }
-  removeOnChange2(index: number) {
-    const anims = this.animations
-    const len = anims.length
-    delete anims[index]
-    //console.log('this.animations.length', anims.length)
-    //console.log('this.animations', anims)
-    //if (len >= 200) this.animations = anims.filter(it => !!it)
-  }
-   */
 }
 

@@ -5,21 +5,20 @@ import Mapper = TypeU.Mapper
 import Callback1 = TypeU.Callback1
 
 
-export class AnimatedComputed<Root, Source, Value> implements AnimatedProperty<Root, Value> {
+
+export class AnimatedComputed<Source, Value> implements AnimatedProperty<Value> {
   constructor(
-    readonly source: AnimatedProperty<Root, Source>,
+    readonly source: AnimatedProperty<Source>,
     readonly mapper: Mapper<Source, Value>,
   ) { }
-  
-  getValue() { return this.source.getValue() }
   
   finish() { this.source.finish() }
   get finished() { return this.source.finished }
   get whenFinished() { return this.source.whenFinished }
   
-  cancel() { this.source.finish() }
-  get canceled() { return this.source.finished }
-  get whenCanceled() { return this.source.whenFinished }
+  cancel() { this.source.cancel() }
+  get canceled() { return this.source.canceled }
+  get whenCanceled() { return this.source.whenCanceled }
   
   get(time = getTime()): Value {
     return this.mapper(this.source.get(time))
@@ -44,15 +43,5 @@ export class AnimatedComputed<Root, Source, Value> implements AnimatedProperty<R
     if (!this.listeners.size) this.source.removeOnChange(this.update)
   }
   
-  /*
-  onChange2(listener: Callback1<Value>): number {
-    const m = this.mapper
-    const f = (sv: Source) => listener(m(sv))
-    return this.source.onChange2(f)
-  }
-  removeOnChange2(index: number) {
-    this.source.removeOnChange2(index)
-  }
-   */
 }
 

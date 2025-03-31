@@ -55,6 +55,9 @@ export namespace TypeU {
   export type RecordRo<K extends keyof any, T> = {
     +readonly [P in K]: T
   }
+  export type RecordPu<K extends keyof any, T> = {
+    [P in K]+?: T | undefined
+  }
   export type RecordPuro<K extends keyof any, T> = {
     +readonly [P in K]+?: T | undefined
   }
@@ -115,6 +118,7 @@ export namespace TypeU {
   export type Producer<T> = Getter<T>
   export type Mapper<In, Out = In> = (v: In) => Out
   export type Mapper2<In1, In2, Out = In1> = (a: In1, b: In2) => Out
+  export type MapperN<Ins extends any[], Out> = (...values: Ins) => Out
   
   export type Predicate<T> = (v: T) => boolean
   export const defaultPredicate: Predicate<any> = value => !!value

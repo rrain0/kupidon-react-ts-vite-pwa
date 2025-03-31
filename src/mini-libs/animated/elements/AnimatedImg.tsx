@@ -4,7 +4,7 @@ import React, {
 } from 'react'
 import {
   AnimatedImgAttrs,
-  AnimatedStyle,
+  AnimatedElemStyle,
 } from 'src/mini-libs/animated/AnimatedProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
@@ -16,7 +16,7 @@ import Puro = TypeU.Puro
 
 
 type AnimatedImgExtraProps = Puro<{
-  animatedStyle: AnimatedStyle
+  animatedStyle: AnimatedElemStyle
   animatedAttrs: AnimatedImgAttrs
 }>
 

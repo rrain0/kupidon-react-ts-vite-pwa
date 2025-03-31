@@ -2,7 +2,7 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
-import { AnimatedStyle } from 'src/mini-libs/animated/AnimatedProps.ts'
+import { AnimatedElemStyle } from 'src/mini-libs/animated/AnimatedProps.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
@@ -14,7 +14,7 @@ import Children = ReactU.Children
 
 
 type AnimatedDivExtraProps = Puro<{
-  animatedStyle: AnimatedStyle
+  animatedStyle: AnimatedElemStyle
 }> & Children
 
 type AnimatedDivRefElement = HTMLDivElement

@@ -1,18 +1,20 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
+import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
   AnimatedComponentState,
   AnimatedImgAttrs,
-  AnimatedStyle,
+  AnimatedElemStyle,
 } from 'src/mini-libs/animated/AnimatedProps.ts'
-import { batchUpdate } from 'src/mini-libs/animated/AnimatedValue.ts'
 import isnumber = TypeU.isnumber
 import Updater = TypeU.Updater
 import ObjectMap = ObjectU.ObjectMap
 import Callback1 = TypeU.Callback1
 import isobject = TypeU.isobject
+import Puro = TypeU.Puro
+import RecordPu = TypeU.RecordPu
 
 
 
@@ -35,268 +37,183 @@ const createComponentStateUpdaters = <S extends Record<string, any>>(
   )
 }
 
-const createImgAttrsUpdaters = (imgRef: React.RefObject<HTMLImageElement>) => ({
-  src: (value: string) => {
-    const el = imgRef.current
-    if (el) {
-      el.src = value
-    }
+
+
+export type ImgAttrsUpdaters = Puro<{
+  src: (value: string) => void
+}>
+const createImgAttrsUpdaters = (
+  imgRef: React.RefObject<HTMLImageElement>,
+  animatedImgAttrs: AnimatedImgAttrs = { },
+): ImgAttrsUpdaters => ({
+  ...'src' in animatedImgAttrs && {
+    src: (value: string) => {
+      const el = imgRef.current
+      if (el) {
+        el.src = value
+      }
+    },
   },
 })
 
-const createElemStyleUpdaters = (elemRef: React.RefObject<HTMLElement>) => ({
-  transform: (value: string) => {
-    const el = elemRef.current
-    if (el) {
-      el.style.transform = value
-    }
+
+export type ElemStyleUpdaters = Puro<{
+  transform: (value: string) => void
+  translate: (value: string) => void
+  rotate: (value: string) => void
+  scale: (value: string) => void
+  opacity: (value: string) => void
+  top: (value: string) => void
+  right: (value: string) => void
+  bottom: (value: string) => void
+  left: (value: string) => void
+  zIndex: (value: string) => void
+}>
+
+const createElemStyleUpdaters = (
+  elemRef: React.RefObject<HTMLElement>,
+  animatedElemStyle: AnimatedElemStyle = { },
+): ElemStyleUpdaters => ({
+  ...'transform' in animatedElemStyle && {
+    transform: (value: string) => {
+      const el = elemRef.current
+      if (el) {
+        el.style.transform = value
+      }
+    },
   },
-  translate: (value: string) => {
-    const el = elemRef.current
-    if (el) {
-      el.style.translate = value
-    }
+  ...'translate' in animatedElemStyle && {
+    translate: (value: string) => {
+      const el = elemRef.current
+      if (el) {
+        el.style.translate = value
+      }
+    },
   },
-  rotate: (value: string) => {
-    const el = elemRef.current
-    if (el) {
-      el.style.rotate = value
-    }
+  ...'rotate' in animatedElemStyle && {
+    rotate: (value: string) => {
+      const el = elemRef.current
+      if (el) {
+        el.style.rotate = value
+      }
+    },
   },
-  scale: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      value = `${value}`
-      el.style.scale = value
-    }
+  ...'scale' in animatedElemStyle && {
+    scale: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        value = `${value}`
+        el.style.scale = value
+      }
+    },
   },
-  opacity: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      value = `${value}`
-      el.style.opacity = value
-    }
+  ...'opacity' in animatedElemStyle && {
+    opacity: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        value = `${value}`
+        el.style.opacity = value
+      }
+    },
   },
   
-  top: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      el.style.top = value
-    }
+  ...'top' in animatedElemStyle && {
+    top: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        if (isnumber(value)) value = `${value}px`
+        el.style.top = value
+      }
+    },
   },
-  right: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      el.style.right = value
-    }
+  ...'right' in animatedElemStyle && {
+    right: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        if (isnumber(value)) value = `${value}px`
+        el.style.right = value
+      }
+    },
   },
-  bottom: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      el.style.bottom = value
-    }
+  ...'bottom' in animatedElemStyle && {
+    bottom: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        if (isnumber(value)) value = `${value}px`
+        el.style.bottom = value
+      }
+    },
   },
-  left: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      el.style.left = value
-    }
+  ...'left' in animatedElemStyle && {
+    left: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        if (isnumber(value)) value = `${value}px`
+        el.style.left = value
+      }
+    },
   },
-  zIndex: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      value = `${value}`
-      el.style.zIndex = value
-    }
-  },
-})
-
-
-
-/*
-
-const createImgAttrsUpdaters2 = (imgRef: React.RefObject<HTMLImageElement>) => ({
-  src: (value: string) => {
-    const el = imgRef.current
-    if (el) {
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { src: value }, style: { } })
-      else props.attrs.src = value
-    }
+  ...'zIndex' in animatedElemStyle && {
+    zIndex: (value: string | number) => {
+      const el = elemRef.current
+      if (el) {
+        value = `${value}`
+        el.style.zIndex = value
+      }
+    },
   },
 })
 
-const createElemStyleUpdaters2 = (elemRef: React.RefObject<HTMLElement>) => ({
-  transform: (value: string) => {
-    const el = elemRef.current
-    if (el) {
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { transform: value } })
-      else props.style.transform = value
-    }
-  },
-  translate: (value: string) => {
-    const el = elemRef.current
-    if (el) {
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { translate: value } })
-      else props.style.translate = value
-    }
-  },
-  rotate: (value: string) => {
-    const el = elemRef.current
-    if (el) {
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { rotate: value } })
-      else props.style.rotate = value
-    }
-  },
-  scale: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      value = `${value}`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { scale: value } })
-      else props.style.scale = value
-    }
-  },
-  opacity: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      value = `${value}`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { opacity: value } })
-      else props.style.opacity = value
-    }
-  },
+
+
+const useUpdateUpdaters = (
+  animated: RecordPu<string, AnimatedProperty<any>> | undefined,
+  updaters: RecordPu<string, (...args: any[]) => void>,
+) => {
+  const [getPrevAnimated, setPrevAnimated] = useRefGetSet(animated)
+  const [getPrevUpdaters, setPrevUpdaters] = useRefGetSet(updaters)
   
-  top: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { top: value } })
-      else props.style.top = value
-    }
-  },
-  right: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { right: value } })
-      else props.style.right = value
-    }
-  },
-  bottom: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { bottom: value } })
-      else props.style.bottom = value
-    }
-  },
-  left: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      if (isnumber(value)) value = `${value}px`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { left: value } })
-      else props.style.left = value
-    }
-  },
-  zIndex: (value: string | number) => {
-    const el = elemRef.current
-    if (el) {
-      value = `${value}`
-      const props = batchUpdate.get(el)
-      if (!props) batchUpdate.set(el, { attrs: { }, style: { zIndex: value } })
-      else props.style.zIndex = value
-    }
-  },
-})
-
-*/
-
-
+  const prevAnimated = getPrevAnimated()
+  const prevUpdaters = getPrevUpdaters()
+  
+  for (const prop in prevAnimated) {
+    const a = prevAnimated[prop] as AnimatedProperty<any> | undefined
+    const u = prevUpdaters[prop]
+    if (a && u) a.removeOnChange(u)
+  }
+  for (const prop in animated) {
+    const a = animated[prop] as AnimatedProperty<any> | undefined
+    const u = updaters[prop]
+    if (a && u) a.onChange(u)
+  }
+  setPrevAnimated(animated)
+  setPrevUpdaters(updaters)
+}
 
 
 
 // TODO Animated - make default event handler if unknown property
 export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
   updateState: Updater<S>,
-  animatedState: AnimatedComponentState<S>,
+  animated: AnimatedComponentState<S>,
 ) => {
-  const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedState)
-  // updateState & animatedState keys must be the same
-  const componentStateUpdaters = useMemo(() => {
-    return createComponentStateUpdaters(updateState, animatedState)
-  }, [])
-  
-  const prevAnimated = getPrevAnimatedStyle()
-  for (const s in prevAnimated) {
-    prevAnimated[s].removeOnChange(componentStateUpdaters[s])
-  }
-  for (const s in animatedState) {
-    animatedState[s].onChange(componentStateUpdaters[s])
-  }
-  setPrevAnimatedStyle(animatedState)
+  const updaters = createComponentStateUpdaters(updateState, animated)
+  useUpdateUpdaters(animated, updaters)
 }
 
 export const useUpdateElemStyleUpdaters = (
   elemRef: React.RefObject<HTMLElement>,
-  animatedStyle?: AnimatedStyle,
+  animated?: AnimatedElemStyle,
 ) => {
-  const [getPrevAnimatedStyle, setPrevAnimatedStyle] = useRefGetSet(animatedStyle)
-  //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
-  // ref must be the same
-  const elemStyleUpdaters = useMemo(() => {
-    return createElemStyleUpdaters(elemRef)
-  }, [])
-  
-  const prevAnimated = getPrevAnimatedStyle()
-  //const prevI = getPrevAnimatedStyleI()
-  for (const s in prevAnimated) {
-    prevAnimated[s].removeOnChange(elemStyleUpdaters[s])
-    
-    //prevAnimated[s].removeOnChange2(prevI[s])
-  }
-  for (const s in animatedStyle) {
-    animatedStyle[s].onChange(elemStyleUpdaters[s])
-    
-    //prevI[s] = animatedStyle[s].onChange2(elemStyleUpdaters[s])
-  }
-  setPrevAnimatedStyle(animatedStyle)
+  const updaters = createElemStyleUpdaters(elemRef, animated)
+  useUpdateUpdaters(animated, updaters)
 }
 
 export const useUpdateImgAttrsUpdaters = (
   imgRef: React.RefObject<HTMLImageElement>,
-  animatedAttrs?: AnimatedImgAttrs,
+  animated?: AnimatedImgAttrs,
 ) => {
-  const [getPrevAnimatedImgAttrs, setPrevAnimatedStyleImgAttrs] = useRefGetSet(animatedAttrs)
-  //const [getPrevAnimatedStyleI] = useRefGetSet({ } as Record<string, number>)
-  // ref must be the same
-  const imgAttrsUpdaters = useMemo(() => {
-    return createImgAttrsUpdaters(imgRef)
-  }, [])
-  
-  const prevAnimated = getPrevAnimatedImgAttrs()
-  //const prevI = getPrevAnimatedStyleI()
-  for (const s in prevAnimated) {
-    prevAnimated[s].removeOnChange(imgAttrsUpdaters[s])
-    
-    //prevAnimated[s].removeOnChange2(prevI[s])
-  }
-  for (const s in animatedAttrs) {
-    animatedAttrs[s].onChange(imgAttrsUpdaters[s])
-    
-    //prevI[s] = animatedAttrs[s].onChange2(imgAttrsUpdaters[s])
-  }
-  setPrevAnimatedStyleImgAttrs(animatedAttrs)
+  const updaters = createImgAttrsUpdaters(imgRef, animated)
+  useUpdateUpdaters(animated, updaters)
 }
 
