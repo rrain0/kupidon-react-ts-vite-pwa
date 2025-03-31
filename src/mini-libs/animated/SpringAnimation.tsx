@@ -1,15 +1,22 @@
 import { AnimationFunWithData } from 'src/mini-libs/animated/Animation.ts'
 
 
+/*
+m - mass - масса груза пружины
+k - tension - кэффициент упругости
+α (альфа) - friction - коэффициент трения среды
 
+ω₀ (омега нулевое) - частота колебаний без учёта силы трения
+T - period - период колебаний пружины без учета трения
+ζ (дзета) - damping ratio - кэффициент затухания
+ */
 
 export type SpringAnimationParams = {
   mass: number
   tension: number
   friction: number
   initVelocity: number
-  from: number
-  to: number
+  endValue: number
 }
 export type SpringAnimationData = {
   prevTimestamp: number
@@ -18,7 +25,7 @@ export type SpringAnimationData = {
   finished: boolean
 }
 export const createSpringAnimation = ({
-  mass, tension, friction, initVelocity, from, to,
+  mass, tension, friction, initVelocity, endValue,
 }: SpringAnimationParams): AnimationFunWithData<number, SpringAnimationData> => ({
   startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished },
 }) => {
@@ -34,11 +41,11 @@ export const createSpringAnimation = ({
   const normalizedDiff = Math.min(naturalDiffPart, 46)
   
   let safeVelocity = prevVelocity || initVelocity || 0
-  let safeValue = prevValue || from
+  let safeValue = prevValue || startValue
   
   // Рассчитываем физику для каждого 1-миллисекундного интервала
   for (let i = 0; i < normalizedDiff; i++) {
-    const springRestoringForce = -1 * tension * (safeValue - to)
+    const springRestoringForce = -1 * tension * (safeValue - endValue)
     const dampingForce = -1 * safeVelocity * friction
     const acceleration = (springRestoringForce + dampingForce) / mass
     
@@ -48,7 +55,7 @@ export const createSpringAnimation = ({
   
   const precision = 0.001
   finished = Math.abs(safeVelocity) < precision
-    && Math.abs(safeValue - to) < precision
+    && Math.abs(safeValue - endValue) < precision
   
   // Отнимаем оставшуюся часть миллисекунды от текущего времени,
   // так как мы ее не проанимировали

@@ -116,7 +116,6 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     })()
     if (notExists(nextP)) return
     
-    /*
     if (p !== nextP) {
       const nextPCurr = nextP - pStart
       await animatedCurrProgressX.start({
@@ -129,14 +128,13 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
         },
         animationFun: createSpringAnimation({
           mass: 1, tension: 170, friction: 10, initVelocity: vel0 ?? -vThreshold,
-          from: pCurr, to: nextPCurr,
+          endValue: nextPCurr,
         }),
       })
     }
-     */
     
     //console.log('nextP', nextP)
-    if (p !== nextP) {
+    if (false && p !== nextP) {
       const nextPCurr = nextP - pStart
       // Начальная скорость
       const v0 = vel0 ?? -vThreshold
