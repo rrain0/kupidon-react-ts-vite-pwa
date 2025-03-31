@@ -33,40 +33,22 @@ export const createSpringAnimation = ({
   startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
 }) => {
   
-  if (finished) return { value: prevValue, finished, data: {
-    prevTimestamp, prevValue, prevVelocity, finished,
-  } }
-  
-  const currentTimestamp = time
-  const fractionalDiff = currentTimestamp - (prevTimestamp ?? currentTimestamp)
-  const naturalDiffPart = Math.floor(fractionalDiff)
-  const decimalDiffPart = fractionalDiff % 1
-  const normalizedDiff = Math.min(naturalDiffPart, 46)
-  
-  let velocity = prevVelocity ?? initVelocity ?? 0
-  let value = prevValue ?? startValue
-  
-  // Рассчитываем физику для каждого 1-миллисекундного интервала
-  for (let i = 0; i < normalizedDiff; i++) {
-    const springRestoringForce = -1 * tension * (value - endValue)
-    const dampingForce = -1 * velocity * friction
-    const acceleration = (springRestoringForce + dampingForce) / mass
-    
-    velocity = velocity + acceleration / 1000
-    value  = value + velocity / 1000
+  const spring = createSpring({ mass, tension, friction, from: startValue, initVelocity })
+  const prev = {
+    time: prevTimestamp, finished, velocity: prevVelocity, value: prevValue,
   }
+  const curr = spring({ to: endValue, time, prev })
   
-  const precision = 0.001
-  finished = Math.abs(velocity) < precision
-    && Math.abs(value - endValue) < precision
-  
-  return { value, finished, data: {
-    // Отнимаем оставшуюся часть миллисекунды от текущего времени, так как мы ее не проанимировали
-    prevTimestamp: currentTimestamp - decimalDiffPart,
-    prevValue: value,
-    prevVelocity: velocity,
-    finished,
-  } }
+  return {
+    value: curr.value,
+    finished: curr.finished,
+    data: {
+      prevTimestamp: curr.time,
+      prevValue: curr.value,
+      prevVelocity: curr.velocity,
+      finished: curr.finished,
+    },
+  }
 }
 
 
@@ -76,50 +58,67 @@ export type SpringParams = {
   mass: number
   tension: number
   friction: number
+  from: number
   initVelocity: number
 }
-export type CurrSpringParams = {
+export type CurrSpringParams = Pu<{
   value: number
   velocity: number
   time: number
   finished: boolean
-}
+}>
 export type NextSpringParams = {
-  from: number
   to: number
   time: number
   prev?: CurrSpringParams | undefined
 }
 
 export const createSpring = ({
-  mass, tension, friction, initVelocity,
+  mass, tension, friction, from, initVelocity,
 }: SpringParams) => ({
-  from, to, time, prev,
+  to, time, prev,
 }: NextSpringParams): CurrSpringParams => {
   
   if (prev?.finished) return prev
   
-  const fractionalDiff = time - (prev?.time ?? time)
-  const naturalDiffPart = Math.floor(fractionalDiff)
-  const decimalDiffPart = fractionalDiff % 1
-  const normalizedDiff = Math.min(naturalDiffPart, 46)
-  
-  let velocity = prev?.velocity ?? initVelocity ?? 0
-  let value = prev?.value ?? from
-  
-  // Рассчитываем физику для каждого 1-миллисекундного интервала
-  for (let i = 0; i < normalizedDiff; i++) {
-    const springRestoringForce = -1 * tension * (value - to)
-    const dampingForce = -1 * velocity * friction
-    const acceleration = (springRestoringForce + dampingForce) / mass
-    
-    velocity = velocity + acceleration / 1000
-    value  = value + velocity / 1000
+  class SpringState {
+    constructor(
+      public value = prev?.value ?? from,
+      public velocity = prev?.velocity ?? initVelocity ?? 0,
+    ) { }
+    get springRestoringForce() { return -1 * tension * (this.value - to) }
+    get dampingForce() { return -1 * this.velocity * friction }
+    get acceleration() { return (this.springRestoringForce + this.dampingForce) / mass }
+    next() {
+      const velocity = this.velocity + this.acceleration / 1000
+      const value = this.value + velocity / 1000
+      return new SpringState(value, velocity)
+    }
   }
+  let finished = false
+  let state = new SpringState()
   
-  const precision = 0.001
-  const finished = Math.abs(velocity) < precision
-    && Math.abs(value - to) < precision
+  // Время Δt между прошлой и новой анимацией
+  const stepTime = 1 // ms
+  let restTime = time - (prev?.time ?? time)
   
-  return { value, velocity, time: time - decimalDiffPart, finished }
+  // Рассчитываем физику для каждого Δt
+  while (restTime >= stepTime && !finished) {
+    const next = state.next()
+    
+    const precision = 0.001
+    // Условие, что у пружины кончилась энергия колебаться
+    //finished = Math.abs(next.velocity) < precision && Math.abs(next.value - to) < precision
+    
+    // Условие, что первый раз дошли до точки
+    finished = Math.sign(next.value - to) !== Math.sign(state.value - to)
+    if (finished) next.value = to
+    
+    state = next
+    restTime -= stepTime
+  }
+  const currTime = time - restTime
+  
+  const { value, velocity } = state
+  return { value, velocity, time: currTime, finished }
 }

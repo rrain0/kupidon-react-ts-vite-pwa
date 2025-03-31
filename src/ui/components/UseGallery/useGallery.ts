@@ -90,6 +90,10 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   
   
   const vThreshold = 150 // %width/s
+  // px/ms => %width/s
+  const getVelPercent = (velPx: number) => velPx * 1000 / getTrackProps().w * 100
+  // %width/s => px/ms
+  const getVelPx = (Progress: number) => Progress / 100 * getTrackProps().w / 1000
   
   const animateTo = async ({
     next,
@@ -104,12 +108,14 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     const pICurr = p % 100
     const pI = p - pICurr
     
-    //const nextP = pI + nextPICurr
     ;[nextP, vel0] = (() => {
       if (exists(next)) return [pI - 100, -vThreshold]
       if (exists(prev)) return [pI + 100, vThreshold]
       //if (exists(nextItemI)) return [0, 0]
-      if (exists(nextP)) return [nextP, vel0 ?? nextP > p ? vThreshold : -vThreshold]
+      if (exists(nextP)) return [
+        nextP,
+        vel0 ?? (nextP > p ? getVelPx(vThreshold) : getVelPx(-vThreshold)),
+      ]
       return [undefined, 0]
     })()
     if (notExists(nextP)) return
@@ -119,7 +125,10 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       await animatedCurrProgressX.start({
         startValue: pCurr,
         animationFun: createSpringAnimation({
-          mass: 1, tension: 170, friction: 10, initVelocity: vel0 ?? -vThreshold,
+          //mass: 1, tension: 170, friction: 10,
+          mass: 1, tension: 120, friction: 7,
+          //mass: 5, tension: 60, friction: 5,
+          initVelocity: vel0,
           endValue: nextPCurr,
         }),
         onUpdate: ({ value }) => setCurrProgressX(value),
@@ -171,8 +180,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   const updateViewsAndFinish = (velx = 0) => {
     updateViews()
     
-    // px/ms => %width/s
-    const velxPercent = velx * 1000 / getTrackProps().w * 100
+    const velxPercent = getVelPercent(velx)
     
     const pStart = getStartProgressX()
     const pCurr = getCurrProgressX()
@@ -180,7 +188,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     const pICurr = p % 100
     const pI = p - pICurr
     
-    const [nextPICurr, vel] = (() => {
+    const [nextPICurr, vel0Percent] = (() => {
       if (Math.abs(velxPercent) >= vThreshold) {
         if (pICurr > 0) {
           if (velxPercent >= 0) return [100, velxPercent]
@@ -200,8 +208,10 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       return [0, 0]
     })()
     
+    
+    const vel0 = getVelPx(vel0Percent)
     const nextP = pI + nextPICurr
-    void animateTo({ p: nextP, vel0: vel })
+    void animateTo({ p: nextP, vel0 })
   }
   
   

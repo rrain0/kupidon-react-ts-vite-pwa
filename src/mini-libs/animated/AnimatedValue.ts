@@ -49,7 +49,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value, Value> {
   
   get(time = getTime()): Value {
     const { value, finished, data } =
-      (this.animationFun as AnimationFun<Value, any> | undefined)?.({
+      this.animationFun?.({
         startValue: this.startValue,
         time: time - this.startTime,
         data: this.animationData,
