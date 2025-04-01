@@ -25,6 +25,7 @@ import PriceTagIc = SvgIconsPack.PriceTagIc
 import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
 import arrOfZeros = ArrayU.arrOfZeros
+import abs = EmotionCommon.abs
 
 
 
@@ -216,10 +217,7 @@ const selectMeterS: AppWidgetStyle = t => [
 
 
 const MiniPosterFrame = styled(AnimatedDiv)`
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  ${abs};
   border-radius: var(--r);
   overflow: hidden;
 `

@@ -1,5 +1,12 @@
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import styled from '@emotion/styled'
+import { useCarousel } from '@util/animated/useCarousel.ts'
+import { MathU } from '@util/common/MathU.ts'
+import { useInterval2 } from '@util/react/useInterval2.ts'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
@@ -39,10 +46,6 @@ import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts
 import { useFormValuesProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
 import { Progress } from 'src/util/Progress.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
-import Tab from 'src/ui/components/Tabs/Tab.tsx'
-import Tabs from 'src/ui/components/Tabs/Tabs.tsx'
-import { TabsState } from 'src/ui/components/Tabs/useTabs.ts'
-import UseTabsState from 'src/ui/components/Tabs/UseTabsState.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import safePageContentPaddings = Pages.pageAddSafeInsets
 import fill = EmotionCommon.fill
@@ -57,6 +60,11 @@ import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
 import arr = ArrayU.arrOfIndices
+import row = EmotionCommon.row
+import col = EmotionCommon.col
+import abs = EmotionCommon.abs
+import mod = MathU.mod
+import arrOfIndices = ArrayU.arrOfIndices
 
 
 
@@ -368,30 +376,100 @@ const ProfilePage = React.memo(() => {
   
   const [tabIdx, setTabIdx] = useProfileTab()
   
+  const onFinish = (ev) => {
+    setTabIdx(ev.pos0ItemI)
+  }
+  
+  
+  
+  const itemsCnt = 3
+  const visibleViewsCnt = 3
+  
+  const itemsBoxRef = useRef<HTMLDivElement>(null)
+  const getTrackProps = () => {
+    const pb = itemsBoxRef.current
+    if (pb) {
+      const p = getViewProps(itemsBoxRef.current)
+      return { x: p.x, y: p.y, w: p.w, h: p.h }
+    }
+    return { x: 0, y: 0, w: 0, h: 0 }
+  }
+  
+  const {
+    isDragging,
+    getIsDragging,
+    getWasDragged,
+    onTrackDrag,
+    
+    getStartProgressX,
+    getStartItemProgress,
+    getCurrProgressX,
+    animatedCurrProgressX,
+    
+    animateTo,
+  } = useCarousel({
+    itemsCnt,
+    visibleViewsCnt,
+    getTrackProps,
+    noDrag: itemsCnt <= 1,
+    onFinish,
+  })
+  
+  useEffect(() => {
+    //animateTo({  })
+  }, [tabIdx])
+  
+  const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
+    const p = getStartProgressX() + cp
+    const itemP = getStartItemProgress() + cp
+    // position index progress current - nonnegative
+    const posIPCurr = mod(p, 100)
+    const posI = RangeU.loop((viewI - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    //console.log('viewI', viewI, 'posI', posI, 'p', p, 'itemP', itemP)
+    // item progress параллелен прогрессу по оси x, так что его инвертируем
+    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
+    const itemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
+    const pos0ItemVisibleI = RangeU.loop(itemsCnt - Math.floor((itemP + 50) / 100), [0, itemsCnt])
+    return { p, itemP, posIPCurr, posI, pos0ItemI, itemI, pos0ItemVisibleI }
+  })
+  
   
   const titleText = useUiValues(TitleUiText)
   const headers = useMemo(() => {
     return [titleText.preview, formValues.name, 'Тесты']
-  }, [titleText, formValues.name])
+  }, [titleText.preview, formValues.name])
   
   
   
   return (
     <>
       <Pages.TabsPageGrad>
-        
-        <UseTabsState idx={tabIdx} setIdx={setTabIdx}>
-          {tabsProps => (
+        <>
+          <TabsBox
+            ref={itemsBoxRef}
+            {...onTrackDrag()}
+          >
             <>
-              <Tabs css={fill} {...tabsProps}>
-                {({ tabContainerSpring, computedTabsDimens }) => (
-                  <>
-                    {arr(3).map(tabIdx => (
-                      <Tab css={fill} key={tabIdx}
-                        width={computedTabsDimens.frameWidth}
-                      >
-                        
-                        {tabIdx === 0 && (
+              {arrOfIndices(3).map(viewI => (
+                <Tab
+                  key={viewI}
+                  animatedStyle={{
+                    transform: animatedProps.map(ap => {
+                      const { p, itemP, posIPCurr, posI } = ap(viewI)
+                      let x = posI * 100 + posIPCurr
+                      //console.log('x', x)
+                      return `translateX(${x}%)`
+                    }),
+                  }}
+                >
+                  <AnimatedState
+                    animatedState={{
+                      tabI: animatedProps.map(ap => ap(viewI).itemI),
+                    }}
+                  >
+                    {({ tabI }) => (
+                      <>
+                        {tabI === 0 && (
                           <Preview
                             key="preview"
                             formValues={formValues}
@@ -399,21 +477,24 @@ const ProfilePage = React.memo(() => {
                         )}
                         
                         
-                        {tabIdx !== 0 && (
+                        {tabI !== 0 && (
                           <OverflowWrapper
                             css={css`
                               ${OverflowWrapperStyle.defolt};
-                              ${OverflowWrapperStyle.El.container.thiz()}{
+                              
+                              ${OverflowWrapperStyle.El.container.thiz()} {
                                 touch-action: pan-y;
                               }
-                              ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()}{
+                              
+                              ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()} {
                                 ${safePageContentPaddings};
                               }
                             `}
-                            showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
+                            //showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
+                            showVertical={true}
                           >
                             
-                            <ProfilePageTabHeaderContext.Provider
+                            {/* <ProfilePageTabHeaderContext.Provider
                               value={{
                                 tabContainerSpring,
                                 tabWidth: computedTabsDimens.frameWidth,
@@ -421,88 +502,86 @@ const ProfilePage = React.memo(() => {
                                 setTabsState: tabsProps.setTabsState,
                                 setTabIdx: tabsProps.setTabIdx,
                               }}
-                            >
-                              {[
-                                undefined,
-                                <Profile
-                                  key="profile"
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
-                                  submit={submit}
-                                  canSubmit={canSubmit}
-                                  formProps={formProps}
-                                  isLoading={isLoading}
-                                  tabIdx={tabIdx}
-                                />,
-                                // <Partner
-                                //   key="partner"
-                                //   validationProps={validationProps}
-                                //   onFormSubmitCallback={onFormSubmitCallback}
-                                //   submit={submit}
-                                //   canSubmit={canSubmit}
-                                //   formProps={formProps}
-                                //   isLoading={isLoading}
-                                //   tabIdx={tabIdx}
-                                // />,
-                                <Tests
-                                  key="tests"
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
-                                  submit={submit}
-                                  canSubmit={canSubmit}
-                                  formProps={formProps}
-                                  isLoading={isLoading}
-                                  tabIdx={tabIdx}
-                                />,
-                              ][tabIdx]}
-                            </ProfilePageTabHeaderContext.Provider>
+                            > */}
+                            {[
+                              undefined,
+                              <Profile
+                                key="profile"
+                                validationProps={validationProps}
+                                onFormSubmitCallback={onFormSubmitCallback}
+                                submit={submit}
+                                canSubmit={canSubmit}
+                                formProps={formProps}
+                                isLoading={isLoading}
+                                tabIdx={tabI}
+                              />,
+                              // <Partner
+                              //   key="partner"
+                              //   validationProps={validationProps}
+                              //   onFormSubmitCallback={onFormSubmitCallback}
+                              //   submit={submit}
+                              //   canSubmit={canSubmit}
+                              //   formProps={formProps}
+                              //   isLoading={isLoading}
+                              //   tabI={tabI}
+                              // />,
+                              <Tests
+                                key="tests"
+                                validationProps={validationProps}
+                                onFormSubmitCallback={onFormSubmitCallback}
+                                submit={submit}
+                                canSubmit={canSubmit}
+                                formProps={formProps}
+                                isLoading={isLoading}
+                                tabIdx={tabI}
+                              />,
+                            ][tabI]}
+                            {/* </ProfilePageTabHeaderContext.Provider> */}
                           
                           </OverflowWrapper>
                         )}
-                      
-                      
-                      </Tab>
-                    ))}
-                  </>
-                )}
-              </Tabs>
-              
-              
-              
-              {tabIdx !== 0 && (canSubmit || formProps.hasChanges) && (
-                <LeftBottomButtonBar
-                  onCancel={formProps.hasChanges && formProps.resetUserFields || undefined}
-                  onAccept={canSubmit && !isLoading && submit || undefined}
-                />
-              )}
-            
-              {/* <UseBottomSheetState
-                //isOpen={canSubmit || formProps.hasChanges}
-                //closeable={!(canSubmit || formProps.hasChanges)}
-              >
-                {props => <ModalPortal><BottomSheetBasic
-                  bgDim={false}
-                  {...props.sheetProps}
-                >
+                      </>
+                    )}
+                  </AnimatedState>
                 
-                </BottomSheetBasic></ModalPortal>}
-              </UseBottomSheetState>
-            
-            
-              { app.showDevOverlay && <BottomButtonBar
-                refreshPageBtn
-                rightChildren={
-                  <SoftRefreshBtn
-                    refresh={()=>setNeedToFetchUser(true)}
-                    isLoading={isFetchingUser}
-                  />
-                }
-              /> } */}
-            
+                </Tab>
+              ))}
             </>
+          </TabsBox>
+          
+          
+          
+          {tabIdx !== 0 && (canSubmit || formProps.hasChanges) && (
+            <LeftBottomButtonBar
+              onCancel={formProps.hasChanges && formProps.resetUserFields || undefined}
+              onAccept={canSubmit && !isLoading && submit || undefined}
+            />
           )}
-        </UseTabsState>
         
+          {/* <UseBottomSheetState
+            //isOpen={canSubmit || formProps.hasChanges}
+            //closeable={!(canSubmit || formProps.hasChanges)}
+          >
+            {props => <ModalPortal><BottomSheetBasic
+              bgDim={false}
+              {...props.sheetProps}
+            >
+            
+            </BottomSheetBasic></ModalPortal>}
+          </UseBottomSheetState>
+        
+        
+          { app.showDevOverlay && <BottomButtonBar
+            refreshPageBtn
+            rightChildren={
+              <SoftRefreshBtn
+                refresh={()=>setNeedToFetchUser(true)}
+                isLoading={isFetchingUser}
+              />
+            }
+          /> } */}
+        
+        </>
       </Pages.TabsPageGrad>
     </>
   )
@@ -511,3 +590,17 @@ export default ProfilePage
 
 
 
+const TabsBox = styled.article`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  ${row};
+  align-items: stretch;
+  overflow: hidden;
+  touch-action: pan-y;
+`
+
+const Tab = styled(AnimatedDiv)`
+  ${abs};
+  ${col};
+`
