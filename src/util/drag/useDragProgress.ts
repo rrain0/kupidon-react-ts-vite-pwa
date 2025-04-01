@@ -14,7 +14,7 @@ import Getter = TypeU.Getter
   что текущая точка под пальцем осталась неизменной, но относительно неё пропорционально изменяются
   начальное положение пальца и количество value/px
   Это происходит автоматически,
-  т.к. хранится начальный прогресс (startProgress) и текущий прогресс (currProgress),
+  т.к. хранится начальный прогресс (startProgress) и текущий прогресс (deltaProgress),
   которые не привязаны к пикселям.
 */
 
@@ -47,10 +47,10 @@ export const useDragProgress = (props: UseDragProgressProps) => {
   const { getTrackProps } = props
   
   const [getDragStartProgressX, setDragStartProgressX] = useRefGetSet(0) // ..0..100..
-  const [getDragCurrProgressX, setDragCurrProgressX] = useRefGetSet(0) // ..0..100..
+  const [getDragDeltaProgressX, setDragDeltaProgressX] = useRefGetSet(0) // ..0..100..
   
   const [getDragStartProgressY, setDragStartProgressY] = useRefGetSet(0) // ..0..100..
-  const [getDragCurrProgressY, setDragCurrProgressY] = useRefGetSet(0) // ..0..100..
+  const [getDragDeltaProgressY, setDragDeltaProgressY] = useRefGetSet(0) // ..0..100..
   
   
   const updateDragProgress = useAsCallback((props: UpdateDragProgressProps) => {
@@ -65,10 +65,10 @@ export const useDragProgress = (props: UseDragProgressProps) => {
     
     if (first) {
       setDragStartProgressX(0)
-      setDragCurrProgressX(0)
+      setDragDeltaProgressX(0)
       
       setDragStartProgressY(0)
-      setDragCurrProgressY(0)
+      setDragDeltaProgressY(0)
       
       const startPxX = vpx - trackStartX
       const dragStartProgressX = dPxToDProgress(startPxX, trackLenX)
@@ -79,22 +79,21 @@ export const useDragProgress = (props: UseDragProgressProps) => {
       setDragStartProgressY(dragStartProgressY)
     }
     
-    const dragCurrDProgressX = dPxToDProgress(dx, trackLenX)
-    const dragDProgressX = getDragCurrProgressX() + dragCurrDProgressX
-    setDragCurrProgressX(dragDProgressX)
+    const dragDProgressX = dPxToDProgress(dx, trackLenX)
+    const dragDeltaProgressX = getDragDeltaProgressX() + dragDProgressX
+    setDragDeltaProgressX(dragDeltaProgressX)
     
-    const dragCurrDProgressY = dPxToDProgress(dy, trackLenY)
-    const dragDProgressY = getDragCurrProgressY() + dragCurrDProgressY
-    setDragCurrProgressY(dragDProgressY)
-    
+    const dragDProgressY = dPxToDProgress(dy, trackLenY)
+    const dragDeltaProgressY = getDragDeltaProgressY() + dragDProgressY
+    setDragDeltaProgressY(dragDeltaProgressY)
   })
   
   return {
     updateDragProgress,
     getDragStartProgressX,
-    getDragCurrProgressX,
+    getDragDeltaProgressX,
     getDragStartProgressY,
-    getDragCurrProgressY,
+    getDragDeltaProgressY,
   } as const
 }
 

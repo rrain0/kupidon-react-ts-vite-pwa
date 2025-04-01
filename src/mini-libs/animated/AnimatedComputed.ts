@@ -19,7 +19,7 @@ export class AnimatedComputed<Source, Value> implements AnimatedProperty<Value> 
   get(): Value { return this.cachedValue }
   
   map<Mapped>(mapper: Mapper<Value, Mapped>) {
-    return new AnimatedComputed(this, mapper)
+    return new AnimatedComputed<Value, Mapped>(this, mapper)
   }
   
   

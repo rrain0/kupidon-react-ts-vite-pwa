@@ -216,7 +216,7 @@ const Preview = React.memo((props: PreviewProps) => {
   
   const {
     updateDragProgress,
-    getDragCurrProgressY,
+    getDragDeltaProgressY,
   } = useDragProgress({ getTrackProps })
   
   
@@ -291,7 +291,7 @@ const Preview = React.memo((props: PreviewProps) => {
     updateDragProgress({ first, vpx, vpy, dx, dy })
     
     // onAnyDrag
-    getOnAnyDrag()(getDragCurrProgressY(), vertical, drag)
+    getOnAnyDrag()(getDragDeltaProgressY(), vertical, drag)
     // onDragStart
     if (first) { getOnDragStart()() }
     // onDragging

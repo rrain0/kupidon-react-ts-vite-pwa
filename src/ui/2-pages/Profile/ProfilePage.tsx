@@ -386,7 +386,7 @@ const ProfilePage = React.memo(() => {
   
   
   const itemsCnt = 3
-  const visibleViewsCnt = 3
+  const viewsCnt = 3
   
   const onElemSetWh = useCssWhRef()
   const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(null, onElemSetWh)
@@ -402,13 +402,13 @@ const ProfilePage = React.memo(() => {
     
     getStartProgressX,
     getStartItemProgress,
-    getCurrProgressX,
-    animatedCurrProgressX,
+    getDeltaProgressX,
+    animatedDeltaProgressX,
     
     animateTo,
   } = useCarousel({
     itemsCnt,
-    visibleViewsCnt,
+    viewsCnt: viewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
     onFinish,
@@ -418,19 +418,24 @@ const ProfilePage = React.memo(() => {
     //animateTo({  })
   }, [tabIdx])
   
-  const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
-    // progress for position 0
-    const p = getStartProgressX() + cp
-    // item progress for position 0
-    const itemP = getStartItemProgress() + cp
-    // position index progress current - nonnegative
-    const posIPCurr = mod(p, 100)
-    const posI = RangeU.loop((viewI - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
-    //console.log('viewI', viewI, 'posI', posI, 'p', p, 'itemP', itemP)
-    // item progress параллелен прогрессу по оси x, так что его инвертируем
-    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
-    const itemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
-    return { p, itemP, posIPCurr, posI, pos0ItemI, itemI }
+  const viewsFromI = -1
+  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
+    const fromI = viewsFromI
+    viewI += fromI
+    // pos0xxxxxx - data for displayed position 0
+    const pos0P = getStartProgressX() + dp
+    const pos0ItemP = getStartItemProgress() + dp
+    // инвертируем, так как противоположен progress
+    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(pos0ItemP / 100), [0, itemsCnt])
+    const pos0ItemHalfI = RangeU.loop(itemsCnt - Math.floor((pos0ItemP + 50) / 100), [0, itemsCnt])
+    
+    // posxxxxxx - data for displayed viewI position
+    const posI = RangeU.loop(viewI + Math.floor(pos0P / 100), [fromI, viewsCnt + fromI])
+    // progress of current index, nonegative
+    const posIP = mod(pos0P, 100)
+    const posP = posI * 100 + posIP
+    const posItemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
+    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, posI, posIP, posP, posItemI }
   })
   
   
@@ -455,16 +460,14 @@ const ProfilePage = React.memo(() => {
                   key={viewI}
                   animatedStyle={{
                     transform: animatedProps.map(ap => {
-                      const { p, itemP, posIPCurr, posI } = ap(viewI)
-                      const x = posI * 100 + posIPCurr
-                      //console.log('x', x)
-                      return `translateX(${x}%)`
+                      const { posP: p } = ap(viewI)
+                      return `translateX(${p}%)`
                     }),
                   }}
                 >
                   <AnimatedState
                     animatedState={{
-                      tabI: animatedProps.map(ap => ap(viewI).itemI),
+                      tabI: animatedProps.map(ap => ap(viewI).posItemI),
                     }}
                   >
                     {({ tabI }) => (
@@ -497,7 +500,7 @@ const ProfilePage = React.memo(() => {
                             <ProfilePageTabHeaderContext.Provider
                               value={{
                                 //tabContainerSpring,
-                                progress: animatedProps.map(ap => (tabI: number) => ap(tabI).itemP),
+                                progress: animatedProps.map(ap => (tabI: number) => ap(tabI).pos0ItemP),
                                 //tabWidth: computedTabsDimens.frameWidth,
                                 //tabWidth: 400,
                                 headers: headers,

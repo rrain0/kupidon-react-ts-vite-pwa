@@ -7,9 +7,8 @@ import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import { getViewProps } from '@util/view/ViewProps.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -34,8 +33,9 @@ import abs = EmotionCommon.abs
 const PosterPreview = React.memo(() => {
   
   const posters = PosterData
+  
   const itemsCnt = posters.length
-  const visibleViewsCnt = 3
+  const viewsCnt = 3
   
   const [, , itemsBoxRef] = useElemRefGetSet()
   const getTrackProps = createTrackPropsGetter(itemsBoxRef)
@@ -48,13 +48,13 @@ const PosterPreview = React.memo(() => {
     
     getStartProgressX,
     getStartItemProgress,
-    getCurrProgressX,
-    animatedCurrProgressX,
+    getDeltaProgressX,
+    animatedDeltaProgressX,
     
     animateTo,
   } = useCarousel({
     itemsCnt,
-    visibleViewsCnt,
+    viewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
   })
@@ -69,24 +69,24 @@ const PosterPreview = React.memo(() => {
     void animateTo({ next: true })
   }, [isDragging, wasDraggedOnce])
   
-  const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
-    // progress for position 0
-    const p = getStartProgressX() + cp
-    // item progress for position 0
-    const itemP = getStartItemProgress() + cp
+  const viewsFromI = -1
+  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
+    const fromI = viewsFromI
+    viewI += fromI
+    // pos0xxxxxx - data for displayed position 0
+    const pos0P = getStartProgressX() + dp
+    const pos0ItemP = getStartItemProgress() + dp
+    // инвертируем, так как противоположен progress
+    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(pos0ItemP / 100), [0, itemsCnt])
+    const pos0ItemHalfI = RangeU.loop(itemsCnt - Math.floor((pos0ItemP + 50) / 100), [0, itemsCnt])
     
-    // TODO posIP = ...
-    // position index progress current - nonnegative
-    const posIPCurr = mod(p, 100)
-    const posI = RangeU.loop((viewI - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
-    
-    
-    //console.log('viewI', viewI, 'posI', posI, 'p', p, 'itemP', itemP)
-    // item progress параллелен прогрессу по оси x, так что его инвертируем
-    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
-    const itemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
-    const pos0ItemVisibleI = RangeU.loop(itemsCnt - Math.floor((itemP + 50) / 100), [0, itemsCnt])
-    return { p, itemP, posIPCurr, posI, pos0ItemI, itemI, pos0ItemVisibleI }
+    // posxxxxxx - data for displayed viewI position
+    const posI = RangeU.loop(viewI + Math.floor(pos0P / 100), [fromI, viewsCnt + fromI])
+    // progress of current index, nonegative
+    const posIP = mod(pos0P, 100)
+    const posP = posI * 100 + posIP
+    const posItemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
+    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, posI, posIP, posP, posItemI }
   })
   
   return (
@@ -96,16 +96,15 @@ const PosterPreview = React.memo(() => {
       {...onTrackDrag()}
     >
       
-      {arrOfIndices(visibleViewsCnt).map(viewI => {
+      {arrOfIndices(viewsCnt).map(viewI => {
         return (
           <MiniPosterFrame
             key={viewI}
             animatedStyle={{
               transform: animatedProps.map(ap => {
-                const { p, itemP, posIPCurr, posI } = ap(viewI)
-                let x = posI * 100 + posIPCurr
+                const { posP: p } = ap(viewI)
                 // add gap 20%
-                x = RangeU.map(x, [0, 100], [0, 120])
+                const x = RangeU.map(p, [0, 100], [0, 120])
                 //console.log('x', x)
                 return `translateX(${x}%)`
               }),
@@ -114,7 +113,7 @@ const PosterPreview = React.memo(() => {
             
             <AnimatedState
               animatedState={{
-                itemI: animatedProps.map(ap => ap(viewI).itemI),
+                itemI: animatedProps.map(ap => ap(viewI).posItemI),
               }}
             >
               {({ itemI }) => {
@@ -160,13 +159,13 @@ const PosterPreview = React.memo(() => {
       
       <AnimatedState
         animatedState={{
-          pos0ItemVisibleI: animatedProps.map(ap => ap().pos0ItemVisibleI),
+          pos0ItemHalfI: animatedProps.map(ap => ap().pos0ItemHalfI),
         }}
       >
-        {({ pos0ItemVisibleI }) => (
+        {({ pos0ItemHalfI }) => (
           <SelectMeter
             css={SelectMeterS6.t(selectMeterS)}
-            metersValues={arrOfZeros(itemsCnt).map((it, i) => i === pos0ItemVisibleI ? 2 : it)}
+            metersValues={arrOfZeros(itemsCnt).map((it, i) => i === pos0ItemHalfI ? 2 : it)}
           />
         )}
       </AnimatedState>

@@ -13,7 +13,7 @@ import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
-import { useLayoutEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import Puro = TypeU.Puro
 import exists = TypeU.exists
 import notExists = TypeU.notExists
@@ -42,7 +42,7 @@ export type AnimateToParams = Puro<{
 
 export type UseGalleryProps = {
   itemsCnt: number
-  visibleViewsCnt: number
+  viewsCnt: number
   getTrackProps: GetTrackProps
   
   noDrag?: boolean | undefined
@@ -54,7 +54,7 @@ export type UseGalleryProps = {
 export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   const {
     itemsCnt,
-    visibleViewsCnt,
+    viewsCnt,
     getTrackProps,
     noDrag,
     noLoop,
@@ -77,10 +77,10 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   const [getStartProgressX, setStartProgressX] = useRefGetSet(0)
   // start progress for items in (..0..100..) * itemsCnt
   const [getStartItemProgress, setStartItemProgress] = useRefGetSet(0)
-  // curr progress x in (..0..100..) from start progress x
-  const [getCurrProgressX, setCurrProgressX] = useRefGetSet(0)
+  // delta progress x in (..0..100..) from start progress x
+  const [getDeltaProgressX, setDeltaProgressX] = useRefGetSet(0)
   
-  const animatedCurrProgressX = useAnimatedValue(0)
+  const animatedDeltaProgressX = useAnimatedValue(0)
   
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet(undefined as [] | undefined)
@@ -101,8 +101,8 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     vel0,
   }: AnimateToParams) => {
     const pStart = getStartProgressX()
-    const pCurr = getCurrProgressX()
-    const p = pStart + pCurr
+    const pDelta = getDeltaProgressX()
+    const p = pStart + pDelta
     const pICurr = p % 100
     const pI = p - pICurr
     
@@ -119,21 +119,21 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     if (notExists(nextP)) return
     
     if (p !== nextP) {
-      const nextPCurr = nextP - pStart
-      await animatedCurrProgressX.animate({
-        startValue: pCurr,
+      const nextPDelta = nextP - pStart
+      await animatedDeltaProgressX.animate({
+        startValue: pDelta,
         animationFun: createSpringAnimation({
           //mass: 1, tension: 170, friction: 10,
           mass: 1, tension: 120, friction: 7,
           //mass: 5, tension: 60, friction: 5,
           initVelocity: vel0,
-          endValue: nextPCurr,
+          endValue: nextPDelta,
         }),
-        onUpdate: ({ value }) => setCurrProgressX(value),
+        onUpdate: ({ value }) => setDeltaProgressX(value),
       })
     }
     
-    const itemP = getStartItemProgress() + getCurrProgressX()
+    const itemP = getStartItemProgress() + getDeltaProgressX()
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
     onFinish({ last: true, pos0ItemI })
   }
@@ -141,7 +141,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   
   
   const updateViews = () => {
-    animatedCurrProgressX.set(getCurrProgressX())
+    animatedDeltaProgressX.set(getDeltaProgressX())
   }
   
   const updateViewsAndFinish = (velx = 0) => {
@@ -150,8 +150,8 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     const velxPercent = getVelPercent(velx)
     
     const pStart = getStartProgressX()
-    const pCurr = getCurrProgressX()
-    const p = pStart + pCurr
+    const pDelta = getDeltaProgressX()
+    const p = pStart + pDelta
     const pICurr = p % 100
     const pI = p - pICurr
     
@@ -187,22 +187,22 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   
   const {
     updateDragProgress,
-    getDragCurrProgressX,
+    getDragDeltaProgressX,
   } = useDragProgress({ getTrackProps })
   
   
   const mergeProgress = () => {
-    const p = getStartProgressX() + getCurrProgressX()
+    const p = getStartProgressX() + getDeltaProgressX()
     // Если имеем 0 или 1 отображаемых view, то листать не можем, поэтому считаем что 0 прогресс
-    const viewMaxP = visibleViewsCnt * 100
+    const viewMaxP = viewsCnt * 100
     const pStart = MathU.round3(RangeU.loop(p, [0, viewMaxP]))
     setStartProgressX(pStart)
-    const itemP = getStartItemProgress() + getCurrProgressX()
+    const itemP = getStartItemProgress() + getDeltaProgressX()
     // Если имеем 0 или 1 item, то листать не можем, поэтому считаем что 0 прогресс
     const itemMaxP = itemsCnt * 100
     const itemPStart = MathU.round3(RangeU.loop(itemP, [0, itemMaxP]))
     setStartItemProgress(itemPStart)
-    setCurrProgressX(0)
+    setDeltaProgressX(0)
   }
   
   const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
@@ -227,7 +227,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
         mergeProgress()
         setNeedMerge(false)
       }
-      setCurrProgressX(cpy)
+      setDeltaProgressX(cpy)
       updateViews()
     }
   })
@@ -262,7 +262,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     updateDragProgress({ first, vpx, vpy, dx, dy })
     
     // onEachDrag
-    applyOnEachDrag(getDragCurrProgressX(), horizontal, drag)
+    applyOnEachDrag(getDragDeltaProgressX(), horizontal, drag)
     // onDragStart
     if (first) { applyOnDragStart() }
     // onDragging
@@ -281,8 +281,8 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     
     getStartProgressX,
     getStartItemProgress,
-    getCurrProgressX,
-    animatedCurrProgressX,
+    getDeltaProgressX,
+    animatedDeltaProgressX,
     
     animateTo: useAsCallback(animateTo),
   }
