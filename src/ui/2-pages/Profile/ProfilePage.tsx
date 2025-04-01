@@ -2,9 +2,12 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useCarousel } from '@util/animated/useCarousel.ts'
+import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
+import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
+import { useCssWhRef } from '@util/view/useCssWhRef.ts'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
@@ -385,15 +388,11 @@ const ProfilePage = React.memo(() => {
   const itemsCnt = 3
   const visibleViewsCnt = 3
   
-  const itemsBoxRef = useRef<HTMLDivElement>(null)
-  const getTrackProps = () => {
-    const pb = itemsBoxRef.current
-    if (pb) {
-      const p = getViewProps(itemsBoxRef.current)
-      return { x: p.x, y: p.y, w: p.w, h: p.h }
-    }
-    return { x: 0, y: 0, w: 0, h: 0 }
-  }
+  const onElemSetWh = useCssWhRef()
+  const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(null, onElemSetWh)
+  const getTrackProps = createTrackPropsGetter(itemsBoxRef)
+  
+  
   
   const {
     isDragging,
@@ -420,7 +419,9 @@ const ProfilePage = React.memo(() => {
   }, [tabIdx])
   
   const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
+    // progress for position 0
     const p = getStartProgressX() + cp
+    // item progress for position 0
     const itemP = getStartItemProgress() + cp
     // position index progress current - nonnegative
     const posIPCurr = mod(p, 100)
@@ -445,7 +446,7 @@ const ProfilePage = React.memo(() => {
       <Pages.TabsPageGrad>
         <>
           <TabsBox
-            ref={itemsBoxRef}
+            ref={setItemsBoxElem}
             {...onTrackDrag()}
           >
             <>
@@ -493,49 +494,51 @@ const ProfilePage = React.memo(() => {
                             showVertical={true}
                           >
                             
-                            {/* <ProfilePageTabHeaderContext.Provider
+                            <ProfilePageTabHeaderContext.Provider
                               value={{
-                                tabContainerSpring,
-                                tabWidth: computedTabsDimens.frameWidth,
+                                //tabContainerSpring,
+                                progress: animatedProps.map(ap => (tabI: number) => ap(tabI).itemP),
+                                //tabWidth: computedTabsDimens.frameWidth,
+                                //tabWidth: 400,
                                 headers: headers,
-                                setTabsState: tabsProps.setTabsState,
-                                setTabIdx: tabsProps.setTabIdx,
+                                //setTabsState: tabsProps.setTabsState,
+                                //setTabIdx: tabsProps.setTabIdx,
                               }}
-                            > */}
-                            {[
-                              undefined,
-                              <Profile
-                                key="profile"
-                                validationProps={validationProps}
-                                onFormSubmitCallback={onFormSubmitCallback}
-                                submit={submit}
-                                canSubmit={canSubmit}
-                                formProps={formProps}
-                                isLoading={isLoading}
-                                tabIdx={tabI}
-                              />,
-                              // <Partner
-                              //   key="partner"
-                              //   validationProps={validationProps}
-                              //   onFormSubmitCallback={onFormSubmitCallback}
-                              //   submit={submit}
-                              //   canSubmit={canSubmit}
-                              //   formProps={formProps}
-                              //   isLoading={isLoading}
-                              //   tabI={tabI}
-                              // />,
-                              <Tests
-                                key="tests"
-                                validationProps={validationProps}
-                                onFormSubmitCallback={onFormSubmitCallback}
-                                submit={submit}
-                                canSubmit={canSubmit}
-                                formProps={formProps}
-                                isLoading={isLoading}
-                                tabIdx={tabI}
-                              />,
-                            ][tabI]}
-                            {/* </ProfilePageTabHeaderContext.Provider> */}
+                            >
+                              {[
+                                undefined,
+                                <Profile
+                                  key="profile"
+                                  validationProps={validationProps}
+                                  onFormSubmitCallback={onFormSubmitCallback}
+                                  submit={submit}
+                                  canSubmit={canSubmit}
+                                  formProps={formProps}
+                                  isLoading={isLoading}
+                                  tabIdx={tabI}
+                                />,
+                                // <Partner
+                                //   key="partner"
+                                //   validationProps={validationProps}
+                                //   onFormSubmitCallback={onFormSubmitCallback}
+                                //   submit={submit}
+                                //   canSubmit={canSubmit}
+                                //   formProps={formProps}
+                                //   isLoading={isLoading}
+                                //   tabI={tabI}
+                                // />,
+                                <Tests
+                                  key="tests"
+                                  validationProps={validationProps}
+                                  onFormSubmitCallback={onFormSubmitCallback}
+                                  submit={submit}
+                                  canSubmit={canSubmit}
+                                  formProps={formProps}
+                                  isLoading={isLoading}
+                                  tabIdx={tabI}
+                                />,
+                              ][tabI]}
+                            </ProfilePageTabHeaderContext.Provider>
                           
                           </OverflowWrapper>
                         )}
@@ -589,7 +592,7 @@ export default ProfilePage
 
 
 
-const TabsBox = styled.article`
+const TabsBox = styled.div`
   position: relative;
   width: 100%;
   height: 100%;

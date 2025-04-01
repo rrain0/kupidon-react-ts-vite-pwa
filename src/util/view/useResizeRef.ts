@@ -9,7 +9,7 @@ import Callback1 = TypeU.Callback1
 export const useResizeRef = <T extends HTMLElement = HTMLElement>(onResize: Callback1<T | null>) => {
   const [getResizeObserver, setResizeObserver] = useRefGetSet(undefined as undefined | ResizeObserver)
   
-  const elementFunctionalRef = useCallback<Callback1<T | null>>(elem => {
+  const elementFunctionalRef = useCallback((elem: T | null) => {
     getResizeObserver()?.disconnect()
     setResizeObserver(undefined)
     
@@ -17,8 +17,8 @@ export const useResizeRef = <T extends HTMLElement = HTMLElement>(onResize: Call
     if (elem) {
       const update = () => onResize(elem)
       const resizeObserver = new ResizeObserver(update)
-      setResizeObserver(resizeObserver)
       resizeObserver.observe(elem)
+      setResizeObserver(resizeObserver)
     }
   }, [onResize])
   

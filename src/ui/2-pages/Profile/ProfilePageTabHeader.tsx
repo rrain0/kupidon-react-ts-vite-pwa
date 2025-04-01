@@ -1,34 +1,33 @@
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { animated } from '@react-spring/web'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { TabsRenderProps } from 'src/ui/components/Tabs/Tabs.tsx'
-import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import lastIndex = ArrayU.lastI
 import gridStackC = EmotionCommon.gridStackC
-import Setter = TypeU.Setter
 import col = EmotionCommon.col
 
 
 
 
 export type ProfilePageTabHeaderContextProps = {
-  tabContainerSpring: TabsRenderProps['tabContainerSpring']
-  tabWidth: number
+  //tabContainerSpring: TabsRenderProps['tabContainerSpring']
+  progress: AnimatedProperty<(tabI: number) => number>
+  //tabWidth: number
   headers: string[]
-  setTabsState: Setter<TabsState>
-  setTabIdx: Setter<TabIdx>
+  //setTabsState: Setter<TabsState>
+  //setTabIdx: Setter<TabIdx>
 }
 export const ProfilePageTabHeaderContext = React.createContext({} as ProfilePageTabHeaderContextProps)
 
 
 export type ProfilePageTabHeaderProps = {
-  thisTabIdx: TabIdx
+  thisTabIdx: number
 }
 
 
@@ -40,11 +39,12 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   
   
   const {
-    tabContainerSpring,
-    tabWidth: w,
+    //tabContainerSpring,
+    progress,
+    //tabWidth: w,
     headers,
-    setTabsState,
-    setTabIdx,
+    //setTabsState,
+    //setTabIdx,
   } = useContext(ProfilePageTabHeaderContext)
   
   
@@ -52,24 +52,27 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   // -1 - заголовок уехал влево
   // 0 - заголовок по центру
   // +1 - заголовок уехал вправо
-  const forCenter = tabContainerSpring.scrollLeft.to(v => {
-    const fromRange = [(i-1)*w, (i+1)*w] as const
+  const forCenter = progress.map(ap => {
+    let v = ap(i)
+    const fromRange = [(i-1)*100, (i+1)*100] as const
     v = RangeU.clamp(v, fromRange)
-    v = RangeU.map(v, fromRange, [-1, 1])
+    v = -RangeU.map(v, fromRange, [-1, 1])
     //console.log('center value',v)
     return v
   })
-  const forLeft = tabContainerSpring.scrollLeft.to(v => {
-    const fromRange = [(i-2)*w, (i+0)*w] as const
+  const forLeft = progress.map(ap => {
+    let v = ap(i)
+    const fromRange = [(i-2)*100 - 100, (i+0)*100 - 100] as const
     v = RangeU.clamp(v, fromRange)
-    v = RangeU.map(v, fromRange, [-1, 1])
+    v = -RangeU.map(v, fromRange, [-1, 1])
     //console.log('left value',v)
     return v
   })
-  const forRight = tabContainerSpring.scrollLeft.to(v => {
-    const fromRange = [(i+0)*w, (i+2)*w] as const
+  const forRight = progress.map(ap => {
+    let v = ap(i)
+    const fromRange = [(i+0)*100 - 100, (i+2)*100 - 100] as const
     v = RangeU.clamp(v, fromRange)
-    v = RangeU.map(v, fromRange, [-1, 1])
+    v = -RangeU.map(v, fromRange, [-1, 1])
     return v
   })
   
@@ -77,32 +80,34 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   return (
     <Wrap
       css={css`
-        min-width: ${w}px;
-        width: ${w}px;
-        max-width: ${w}px;
+        min-width: var(--w);
+        width: var(--w);
+        max-width: var(--w);
       `}
     >
       
       {RangeU.has(i-1, [0, lastIndex(headers)]) && (
         <AnimatedHeader
           css={css`
-          width: ${0.6*w}px;
-          mask-image: linear-gradient(to right,
-            rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
-            rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
-          );
-        `}
-          style={{
-            x: forLeft.to(v => RangeU.map(v, [-1, 1], [-w/2 - w, w/2 - w])),
-            scale: forLeft.to(v => 1 - 0.35 * Math.abs(v)),
-            // @ts-expect-error
-            opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
+            width: calc( 0.6 * var(--w) );
+            mask-image: linear-gradient(to right,
+              rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
+              rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
+            );
+          `}
+          animatedStyle={{
+            transform: forLeft.map(v => {
+              v = RangeU.map(v, [-1, 1], [-1/2 - 1, 1/2 - 1])
+              return `translateX(calc( var(--w) * ${v} ))`
+            }),
+            scale: forLeft.map(v => 1 - 0.35 * Math.abs(v)),
+            opacity: forLeft.map(v => 1 - 0.6 * Math.abs(v)),
           }}
         >
           <HeaderTextWrap
             onClick={() => {
-              setTabsState('snapping')
-              setTabIdx(i-1)
+              //setTabsState('snapping')
+              //setTabIdx(i-1)
             }}
           >
             {headers[i-1]}
@@ -114,23 +119,25 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       {RangeU.has(i+1, [0, lastIndex(headers)]) && (
         <AnimatedHeader
           css={css`
-            width: ${0.6*w}px;
+            width: calc( 0.6 * var(--w) );
             mask-image: linear-gradient(to right,
               rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
               rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
             );
           `}
-          style={{
-            x: forRight.to(v => RangeU.map(v, [-1, 1], [-w/2 + w, w/2 + w])),
-            scale: forRight.to(v => 1 - 0.35 * Math.abs(v)),
-            // @ts-expect-error
-            opacity: forLeft.to(v => 1 - 0.6 * Math.abs(v)),
+          animatedStyle={{
+            transform: forRight.map(v => {
+              v = RangeU.map(v, [-1, 1], [-1/2 + 1, 1/2 + 1])
+              return `translateX(calc( var(--w) * ${v} ))`
+            }),
+            scale: forRight.map(v => 1 - 0.35 * Math.abs(v)),
+            opacity: forRight.map(v => 1 - 0.6 * Math.abs(v)),
           }}
         >
           <HeaderTextWrap
             onClick={() => {
-              setTabsState('snapping')
-              setTabIdx(i + 1)
+              //setTabsState('snapping')
+              //setTabIdx(i + 1)
             }}
           >
             {headers[i + 1]}
@@ -141,20 +148,22 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       
       <AnimatedHeader
         css={css`
-          width: ${0.7*w}px;
+          width: calc( 0.7 * var(--w) );
         `}
-        style={{
-          x: forCenter.to(v => RangeU.map(v, [-1, 1], [-(w/2), w/2])),
-          scale: forCenter.to(v => 1 - 0.35 * Math.abs(v)),
-          // @ts-expect-error
-          opacity: forCenter.to(v => 1 - 0.6 * Math.abs(v)),
+        animatedStyle={{
+          transform: forCenter.map(v => {
+            v = RangeU.map(v, [-1, 1], [-(1/2), 1/2])
+            return `translateX(calc( var(--w) * ${v} ))`
+          }),
+          scale: forCenter.map(v => 1 - 0.35 * Math.abs(v)),
+          opacity: forCenter.map(v => 1 - 0.6 * Math.abs(v)),
         }}
       >
         
         <HeaderTextWrap
           onClick={() => {
-            setTabsState('snapping')
-            setTabIdx(i)
+            //setTabsState('snapping')
+            //setTabIdx(i)
           }}
         >
           {headers[i]}
@@ -171,7 +180,6 @@ export default ProfilePageTabHeader
 
 
 
-
 const Wrap = styled.div`
   align-self: center;
   height: fit-content;
@@ -181,7 +189,7 @@ const Wrap = styled.div`
   place-items: start center;
 `
 
-const AnimatedHeader = styled(animated.div)`
+const AnimatedHeader = styled(AnimatedDiv)`
   ${col};
   overflow: visible;
 `
@@ -189,6 +197,5 @@ const HeaderTextWrap = styled.h3`
   ${p => Hdrs.page(p.theme)};
   color: ${p => p.theme.page.ct3};
   overflow-wrap: anywhere;
-  user-select: none;
   cursor: pointer;
 `

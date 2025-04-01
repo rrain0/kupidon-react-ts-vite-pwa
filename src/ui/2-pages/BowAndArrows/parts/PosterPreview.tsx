@@ -1,10 +1,12 @@
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
+import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useEffect, useRef, useState } from 'react'
@@ -17,7 +19,7 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
-import { useCarousel } from '@util/animated/useCarousel.ts'
+import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import LocationIc = SvgIconsPack.LocationIc
@@ -35,19 +37,8 @@ const PosterPreview = React.memo(() => {
   const itemsCnt = posters.length
   const visibleViewsCnt = 3
   
-  const itemsBoxRef = useRef<HTMLDivElement>(null)
-  const getTrackProps = () => {
-    const pb = itemsBoxRef.current
-    if (pb) {
-      const p = getViewProps(itemsBoxRef.current)
-      return { x: p.x, y: p.y, w: p.w, h: p.h }
-    }
-    return { x: 0, y: 0, w: 0, h: 0 }
-  }
-  
-  /* const onFinish = (ev) => {
-    console.log('onFinish', ev)
-  } */
+  const [, , itemsBoxRef] = useElemRefGetSet()
+  const getTrackProps = createTrackPropsGetter(itemsBoxRef)
   
   const {
     isDragging,
@@ -66,7 +57,6 @@ const PosterPreview = React.memo(() => {
     visibleViewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
-    //onFinish,
   })
   
   const [wasDraggedOnce, setWasDraggedOnce] = useState(false)
@@ -80,11 +70,17 @@ const PosterPreview = React.memo(() => {
   }, [isDragging, wasDraggedOnce])
   
   const animatedProps = animatedCurrProgressX.map(cp => (viewI = 1) => {
+    // progress for position 0
     const p = getStartProgressX() + cp
+    // item progress for position 0
     const itemP = getStartItemProgress() + cp
+    
+    // TODO posIP = ...
     // position index progress current - nonnegative
     const posIPCurr = mod(p, 100)
     const posI = RangeU.loop((viewI - 1) + Math.floor(p / 100), [-1, visibleViewsCnt - 1])
+    
+    
     //console.log('viewI', viewI, 'posI', posI, 'p', p, 'itemP', itemP)
     // item progress параллелен прогрессу по оси x, так что его инвертируем
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
