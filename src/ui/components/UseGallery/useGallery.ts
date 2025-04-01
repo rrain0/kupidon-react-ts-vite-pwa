@@ -81,8 +81,6 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
   const [getCurrProgressX, setCurrProgressX] = useRefGetSet(0)
   
   const animatedCurrProgressX = useAnimatedValue(0)
-  // Assign initial value to views after obtaining their refs
-  useLayoutEffect(() => animatedCurrProgressX.set(0), [])
   
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet(undefined as [] | undefined)
@@ -122,7 +120,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
     
     if (p !== nextP) {
       const nextPCurr = nextP - pStart
-      await animatedCurrProgressX.start({
+      await animatedCurrProgressX.animate({
         startValue: pCurr,
         animationFun: createSpringAnimation({
           //mass: 1, tension: 170, friction: 10,
@@ -135,38 +133,7 @@ export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
       })
     }
     
-    //console.log('nextP', nextP)
-    /* if (p !== nextP) {
-      const nextPCurr = nextP - pStart
-      // Начальная скорость
-      const v0 = vel0 ?? -vThreshold
-      const t1 = 0.2 // s
-      // Начальное ускорение
-      const a0 = 2 * (nextP - p - v0 * t1) / t1**2
-      
-      //console.log('s0', pCurr, 't1', t1, 'a0', a0, 'v0', v0)
-      
-      // TODO
-      //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
-      //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
-      await animatedCurrProgressX.start({
-        startValue: pCurr,
-        animationFun: ({ startValue, time: t }) => {
-          // Начальный путь
-          const s0 = startValue
-          t /= 1000 // ms => s
-          
-          const finished = t >= t1
-          if (finished) t = t1
-          let s = a0 * t**2 / 2 + v0 * t + s0
-          s = MathU.round3(s)
-          setCurrProgressX(s)
-          return { value: s, finished }
-        },
-      })
-    } */
-    
-    const itemP = getStartItemProgress() + animatedCurrProgressX.get()
+    const itemP = getStartItemProgress() + getCurrProgressX()
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
     onFinish({ last: true, pos0ItemI })
   }

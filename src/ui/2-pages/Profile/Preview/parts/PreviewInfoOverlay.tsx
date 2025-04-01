@@ -30,7 +30,7 @@ import attrExists = TypeU.attrExists
 
 export type PreviewInfoOverlayProps = ClassStyle & Puro<{
   isDragging: boolean
-  photoProgress: AnimatedProperty<any, number>
+  photoProgress: AnimatedProperty<number>
   photosCnt: number
   openInfo: Callback
   name: string

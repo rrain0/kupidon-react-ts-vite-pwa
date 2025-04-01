@@ -19,11 +19,13 @@ import exists = TypeU.exists
 
 
 export class AnimatedValue<Value> implements AnimatedProperty<Value> {
+  
   constructor(params: { initialValue: Value }) {
     void this.set(params.initialValue)
   }
   
   startValue!: Value
+  cachedValue!: Value
   startTime: number = getTime()
   animationData: any
   animationFun: AnimationFun<Value, any> | undefined
@@ -39,52 +41,62 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   canceled = false
   whenCanceled!: Promise<void>
   
-  get(time = getTime()): Value {
+  
+  get() { return this.cachedValue }
+  
+  map<Mapped>(mapper: Mapper<Value, Mapped>) {
+    return new AnimatedComputed<Value, Mapped>(this, mapper)
+  }
+  
+  
+  setByTime(time = getTime()) {
     const { value, finished, data } =
-      this.animationFun?.({
-        startValue: this.startValue,
-        time: time - this.startTime,
-        data: this.animationData,
-      })
-      ?? { value: this.startValue, finished: true }
+    this.animationFun?.({
+      startValue: this.startValue,
+      time: time - this.startTime,
+      data: this.animationData,
+    })
+    ?? { value: this.startValue, finished: true }
     this.animationData = data
     this.onUpdate?.({ value, finished })
     if (!this.finished && finished) this.finish()
-    return value
+    this.cachedValue = value
   }
   
   set(value: Value) {
-    this.endCurrAnimation()
+    this.endAnimation()
+    this.resetAnimationCompletionState()
     this.startTime = getTime()
     this.startValue = value
+    this.cachedValue = value
     this.animationData = undefined
     this.animationFun = undefined
     this.onUpdate = undefined
-    this.resetCompletionState()
-    addAnimation(this.update)
+    addAnimation(this.setByTimeAndRefresh)
   }
   
-  async start<D = undefined>(animation: AnimationConfig<Value, D>): Promise<void> {
-    this.endCurrAnimation()
+  async animate<D = undefined>(animation: AnimationConfig<Value, D>): Promise<void> {
+    this.endAnimation()
+    this.resetAnimationCompletionState()
     this.startValue = animation.startValue
+    this.startTime = getTime()
     if (exists(animation.startTime)) {
       this.startTime = animation.startTime
-    }
-    else {
-      this.startTime = getTime()
     }
     this.animationData = animation.initialData
     this.animationFun = animation.animationFun
     this.onUpdate = animation.onUpdate
-    this.resetCompletionState()
-    addAnimation(this.update)
+    addAnimation(this.setByTimeAndRefresh)
     return Promise.any([this.whenFinished, this.whenCanceled])
   }
   
+  refresh() {
+    for (const l of this.listeners) l(this.get())
+  }
   
-  readonly update = (time = getTime()) => {
-    const v = this.get(time)
-    for (const l of this.listeners) l(v)
+  readonly setByTimeAndRefresh = (time = getTime()) => {
+    this.setByTime(time)
+    this.refresh()
     if (this.finished) this.removeAnimationThrottled()
   }
   
@@ -92,23 +104,19 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   private readonly removeAnimationThrottled = withThrottle(400, () => {
     if (!this.isRunning) {
       //console.log('remove')
-      removeAnimation(this.update)
+      removeAnimation(this.setByTimeAndRefresh)
     }
   })
-  
-  map<Mapped>(mapper: Mapper<Value, Mapped>) {
-    return new AnimatedComputed<Value, Mapped>(this, mapper)
-  }
   
   get isRunning() {
     return !this.finished && !this.canceled
   }
   
-  endCurrAnimation() {
+  endAnimation() {
     if (!this.finished && !this.canceled) this.cancel()
   }
   
-  resetCompletionState() {
+  resetAnimationCompletionState() {
     this.finish = noop
     this.finished = false
     this.whenFinished = new Promise<void>(resolve => {
@@ -130,9 +138,11 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
   
   private listeners = new Set<Callback1<Value>>()
+  
   onChange(listener: Callback1<Value>) {
     this.listeners.add(listener)
   }
+  
   removeOnChange(listener: Callback1<Value>) {
     this.listeners.delete(listener)
   }

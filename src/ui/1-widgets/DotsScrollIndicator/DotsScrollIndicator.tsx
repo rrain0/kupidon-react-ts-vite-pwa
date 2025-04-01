@@ -24,7 +24,7 @@ const sz = 7
 
 export type DotsScrollIndicatorProps = ClassStyle & Puro<{
   cnt: number
-  progress: AnimatedProperty<any, number> // ..0..(100 * cnt)..
+  progress: AnimatedProperty<number> // ..0..(100 * cnt)..
 }>
 export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) => {
   const {

@@ -6,24 +6,13 @@ import Callback1 = TypeU.Callback1
 
 
 export interface AnimatedProperty<Value> {
-  finish(): void
-  readonly finished: boolean
-  readonly whenFinished: Promise<void>
-  
-  cancel(): void
-  readonly canceled: boolean
-  readonly whenCanceled: Promise<void>
-  
-  get(time?: number): Value
+  get(): Value
   map<Mapped>(mapper: Mapper<Value, Mapped>): AnimatedComputed<Value, Mapped>
+  
+  refresh(): void
   
   onChange(listener: Callback1<Value>): void
   removeOnChange(listener: Callback1<Value>): void
-  
-  /*
-  onChange2(listener: Callback1<Value>): number
-  removeOnChange2(index: number): void
-   */
 }
 
 

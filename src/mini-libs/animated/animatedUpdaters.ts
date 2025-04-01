@@ -1,7 +1,7 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import React, { useMemo } from 'react'
+import React, { useLayoutEffect, useMemo } from 'react'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
   AnimatedComponentState,
@@ -175,19 +175,24 @@ const useUpdateUpdaters = (
   
   const prevAnimated = getPrevAnimated()
   const prevUpdaters = getPrevUpdaters()
-  
-  for (const prop in prevAnimated) {
-    const a = prevAnimated[prop] as AnimatedProperty<any> | undefined
-    const u = prevUpdaters[prop]
-    if (a && u) a.removeOnChange(u)
-  }
-  for (const prop in animated) {
-    const a = animated[prop] as AnimatedProperty<any> | undefined
-    const u = updaters[prop]
-    if (a && u) a.onChange(u)
-  }
   setPrevAnimated(animated)
   setPrevUpdaters(updaters)
+  
+  useLayoutEffect(() => {
+    for (const prop in prevAnimated) {
+      const a = prevAnimated[prop] as AnimatedProperty<any> | undefined
+      const u = prevUpdaters[prop]
+      if (a && u) a.removeOnChange(u)
+    }
+    for (const prop in animated) {
+      const a = animated[prop] as AnimatedProperty<any> | undefined
+      const u = updaters[prop]
+      if (a && u) {
+        a.onChange(u)
+        u(a.get())
+      }
+    }
+  }, undefined)
 }
 
 

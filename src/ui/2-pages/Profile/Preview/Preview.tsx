@@ -192,7 +192,7 @@ const Preview = React.memo((props: PreviewProps) => {
       // TODO
       //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
       //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
-      void animatedCurrProgressY.start({
+      void animatedCurrProgressY.animate({
         startValue: cp,
         animationFun: ({ startValue, time: t }) => {
           // Начальный путь
