@@ -28,14 +28,16 @@ const AnimatedState = (<S extends Record<string, any>>() =>
       children,
     } = props
     
-    const [state, setState] = useState<S>(() => {
+    const getInitialState = () => {
       return ObjectMap<AnimatedComponentState<S>, S>(
         animatedState,
         ([prop, animated]) => [prop, animated.get()]
       )
-    })
+    }
     
-    useUpdateComponentStateUpdaters(setState, animatedState)
+    const [state, setState] = useState<S>(getInitialState)
+    
+    useUpdateComponentStateUpdaters(setState, animatedState, state)
     
     const renderedChildren = useMemo(() => {
       return children?.(state)

@@ -9,19 +9,22 @@ import {
   AnimatedElemStyle,
 } from 'src/mini-libs/animated/AnimatedProps.ts'
 import isnumber = TypeU.isnumber
-import Updater = TypeU.Updater
 import ObjectMap = ObjectU.ObjectMap
 import Callback1 = TypeU.Callback1
-import isobject = TypeU.isobject
 import Puro = TypeU.Puro
 import RecordPu = TypeU.RecordPu
+import Setter = TypeU.Setter
 
 
 
-const createComponentStateUpdaters = <S extends Record<string, any>>(
-  updateState: Updater<S>,
+const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
+  updateState: Setter<S>,
   animatedState: AnimatedComponentState<S>,
+  state: S,
 ) => {
+  const [getCachedState, setCachedState] = useRefGetSet(state)
+  setCachedState(state)
+  
   return ObjectMap<
     AnimatedComponentState<S>,
     { [Prop in keyof S]: Callback1<S[Prop]> }
@@ -29,10 +32,14 @@ const createComponentStateUpdaters = <S extends Record<string, any>>(
     animatedState,
     ([prop]) => [
       prop,
-      value => updateState(s => {
-        if (isobject(s) && s[prop] === value) return s
-        return { ...s, [prop]: value }
-      }),
+      value => {
+        const cached = getCachedState()
+        if (cached[prop] !== value) {
+          const newState = { ...cached, [prop]: value }
+          setCachedState(newState)
+          updateState(newState)
+        }
+      },
     ]
   )
 }
@@ -199,10 +206,11 @@ const useUpdateUpdaters = (
 
 // TODO Animated - make default event handler if unknown property
 export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
-  updateState: Updater<S>,
+  setState: Setter<S>,
   animated: AnimatedComponentState<S>,
+  state: S,
 ) => {
-  const updaters = createComponentStateUpdaters(updateState, animated)
+  const updaters = useCreateComponentStateUpdaters(setState, animated, state)
   useUpdateUpdaters(animated, updaters)
 }
 
