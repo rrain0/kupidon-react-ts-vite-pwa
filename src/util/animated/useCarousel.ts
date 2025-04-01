@@ -1,18 +1,18 @@
 import { createSpringAnimation } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
-import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
-import { MathU } from '@util/common/MathU.ts'
-import { RangeU } from '@util/common/RangeU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import { getDragDirection } from '@util/drag/getDragDirection.ts'
-import { GetTrackProps, useDragProgress } from '@util/drag/useDragProgress.ts'
-import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
-import { useNoSelect } from '@util/pointer/useNoSelect.ts'
-import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
-import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
+import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
+import { MathU } from 'src/util/common/MathU.ts'
+import { RangeU } from 'src/util/common/RangeU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
+import { GetTrackProps, useDragProgress } from 'src/util/drag/useDragProgress.ts'
+import { useAppPointerAction } from 'src/util/pointer/useAppPointerAction.ts'
+import { useNoSelect } from 'src/util/pointer/useNoSelect.ts'
+import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
+import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
+import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useLayoutEffect, useMemo } from 'react'
 import Puro = TypeU.Puro
 import exists = TypeU.exists
@@ -51,7 +51,7 @@ export type UseGalleryProps = {
   onFinish?: Callback1<ProgressEvent> | undefined
 }
 
-export const useGallery = (props: UseGalleryProps, deps: any[] = []) => {
+export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   const {
     itemsCnt,
     visibleViewsCnt,

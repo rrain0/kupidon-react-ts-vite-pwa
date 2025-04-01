@@ -17,7 +17,7 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
-import { useGallery } from 'src/ui/components/UseGallery/useGallery.ts'
+import { useCarousel } from '@util/animated/useCarousel.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import LocationIc = SvgIconsPack.LocationIc
@@ -60,7 +60,7 @@ const PosterPreview = React.memo(() => {
     animatedCurrProgressX,
     
     animateTo,
-  } = useGallery({
+  } = useCarousel({
     itemsCnt,
     visibleViewsCnt,
     getTrackProps,
