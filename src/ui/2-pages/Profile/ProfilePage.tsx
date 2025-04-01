@@ -429,8 +429,7 @@ const ProfilePage = React.memo(() => {
     // item progress параллелен прогрессу по оси x, так что его инвертируем
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
     const itemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
-    const pos0ItemVisibleI = RangeU.loop(itemsCnt - Math.floor((itemP + 50) / 100), [0, itemsCnt])
-    return { p, itemP, posIPCurr, posI, pos0ItemI, itemI, pos0ItemVisibleI }
+    return { p, itemP, posIPCurr, posI, pos0ItemI, itemI }
   })
   
   
@@ -456,7 +455,7 @@ const ProfilePage = React.memo(() => {
                   animatedStyle={{
                     transform: animatedProps.map(ap => {
                       const { p, itemP, posIPCurr, posI } = ap(viewI)
-                      let x = posI * 100 + posIPCurr
+                      const x = posI * 100 + posIPCurr
                       //console.log('x', x)
                       return `translateX(${x}%)`
                     }),
