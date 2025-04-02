@@ -131,6 +131,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
       })
     }
     
+    // TODO remove itemP from here - it must be calculated at place
     const itemP = getStartItemProgress() + getDeltaProgressX()
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
     onFinish({ last: true, pos0ItemI })

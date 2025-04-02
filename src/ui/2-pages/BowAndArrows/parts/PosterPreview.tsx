@@ -11,6 +11,7 @@ import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useEffect, useState } from 'react'
+import { Colors } from 'src/ui-data/Colors.ts'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -65,13 +66,13 @@ const PosterPreview = React.memo(() => {
     if (isDragging) setWasDraggedOnce(true)
   }, [isDragging])
   
-  useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
+  /* useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
     if (isDragging) return
     void animateTo({ next: true })
-  }, [isDragging, wasDraggedOnce])
+  }, [isDragging, wasDraggedOnce]) */
   
   const viewsFromI = -1
-  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
+  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
     return getLoopedCarouselProps({
       getStartProgressX,
       getStartItemProgress,
@@ -148,9 +149,6 @@ const PosterPreview = React.memo(() => {
               }}
               
             </AnimatedState>
-            
-            
-          
           </MiniPosterFrame>
         )
       })}
