@@ -89,7 +89,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   // px/ms => %width/s
   const getVelPercent = (velPx: number) => velPx * 1000 / getTrackProps().w * 100
   // %width/s => px/ms
-  const getVelPx = (Progress: number) => Progress / 100 * getTrackProps().w / 1000
+  const getVelPx = (progress: number) => progress / 100 * getTrackProps().w / 1000
   
   const animateTo = async ({
     next,
@@ -189,7 +189,6 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   } = useDragProgress({ getTrackProps })
   
   
-  // TODO carousel - maybe extract this with method that calculates positions
   const mergeProgress = () => {
     const p = getStartProgressX() + getDeltaProgressX()
     const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])

@@ -387,13 +387,11 @@ const ProfilePage = React.memo(() => {
   
   
   const itemsCnt = 3
-  const viewsCnt = 3
+  const viewsCnt = itemsCnt
   
   const onElemSetWh = useCssWhRef()
   const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(null, onElemSetWh)
   const getTrackProps = createTrackPropsGetter(itemsBoxRef)
-  
-  
   
   const {
     isDragging,

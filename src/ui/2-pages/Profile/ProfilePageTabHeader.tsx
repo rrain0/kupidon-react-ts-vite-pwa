@@ -27,14 +27,14 @@ export const ProfilePageTabHeaderContext = React.createContext({} as ProfilePage
 
 
 export type ProfilePageTabHeaderProps = {
-  thisTabIdx: number
+  mainTabI: number
 }
 
 
 
 const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   const {
-    thisTabIdx: i,
+    mainTabI,
   } = props
   
   
@@ -53,24 +53,24 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   // 0 - заголовок по центру
   // +1 - заголовок уехал вправо
   const forCenter = progress.map(ap => {
-    let v = ap(i)
-    const fromRange = [(i-1)*100, (i+1)*100] as const
+    let v = ap(mainTabI)
+    const fromRange = [(mainTabI-1)*100, (mainTabI+1)*100] as const
     v = RangeU.clamp(v, fromRange)
     v = -RangeU.map(v, fromRange, [-1, 1])
     //console.log('center value',v)
     return v
   })
   const forLeft = progress.map(ap => {
-    let v = ap(i)
-    const fromRange = [(i-2)*100 - 100, (i+0)*100 - 100] as const
+    let v = ap(mainTabI)
+    const fromRange = [(mainTabI-2)*100 - 100, (mainTabI+0)*100 - 100] as const
     v = RangeU.clamp(v, fromRange)
     v = -RangeU.map(v, fromRange, [-1, 1])
     //console.log('left value',v)
     return v
   })
   const forRight = progress.map(ap => {
-    let v = ap(i)
-    const fromRange = [(i+0)*100 - 100, (i+2)*100 - 100] as const
+    let v = ap(mainTabI)
+    const fromRange = [(mainTabI+0)*100 - 100, (mainTabI+2)*100 - 100] as const
     v = RangeU.clamp(v, fromRange)
     v = -RangeU.map(v, fromRange, [-1, 1])
     return v
@@ -86,10 +86,9 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       `}
     >
       
-      {RangeU.has(i-1, [0, lastIndex(headers)]) && (
+      {RangeU.has(mainTabI-1, [0, lastIndex(headers)]) && (
         <AnimatedHeader
           css={css`
-            width: calc( 0.6 * var(--w) );
             mask-image: linear-gradient(to right,
               rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
               rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
@@ -107,19 +106,18 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
           <HeaderTextWrap
             onClick={() => {
               //setTabsState('snapping')
-              //setTabIdx(i-1)
+              //setTabIdx(mainTabI-1)
             }}
           >
-            {headers[i-1]}
+            {headers[mainTabI-1]}
           </HeaderTextWrap>
         </AnimatedHeader>
       )
       }
       
-      {RangeU.has(i+1, [0, lastIndex(headers)]) && (
+      {RangeU.has(mainTabI+1, [0, lastIndex(headers)]) && (
         <AnimatedHeader
           css={css`
-            width: calc( 0.6 * var(--w) );
             mask-image: linear-gradient(to right,
               rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
               rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
@@ -137,19 +135,16 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
           <HeaderTextWrap
             onClick={() => {
               //setTabsState('snapping')
-              //setTabIdx(i + 1)
+              //setTabIdx(mainTabI + 1)
             }}
           >
-            {headers[i + 1]}
+            {headers[mainTabI + 1]}
           </HeaderTextWrap>
         </AnimatedHeader>
       )
       }
       
       <AnimatedHeader
-        css={css`
-          width: calc( 0.7 * var(--w) );
-        `}
         animatedStyle={{
           transform: forCenter.map(v => {
             v = RangeU.map(v, [-1, 1], [-(1/2), 1/2])
@@ -163,10 +158,10 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
         <HeaderTextWrap
           onClick={() => {
             //setTabsState('snapping')
-            //setTabIdx(i)
+            //setTabIdx(mainTabI)
           }}
         >
-          {headers[i]}
+          {headers[mainTabI]}
         </HeaderTextWrap>
       
       </AnimatedHeader>
@@ -190,9 +185,10 @@ const Wrap = styled.div`
 `
 
 const AnimatedHeader = styled(AnimatedDiv)`
+  width: 100%;
   ${col};
-  overflow: visible;
 `
+
 const HeaderTextWrap = styled.h3`
   ${p => Hdrs.page(p.theme)};
   color: ${p => p.theme.page.ct3};
