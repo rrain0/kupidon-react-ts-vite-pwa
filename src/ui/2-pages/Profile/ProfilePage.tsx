@@ -412,7 +412,6 @@ const ProfilePage = React.memo(() => {
     viewsCnt: viewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
-    //noLoop: true,
     onFinish,
   })
   
@@ -421,29 +420,33 @@ const ProfilePage = React.memo(() => {
   }, [tabIdx])
   
   
-  const viewsFromI = -1
+  const viewsFromI = 0
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
     const fromI = viewsFromI
     viewI += fromI
     const viewIMax = fromI + viewsCnt
     const viewPMax = 100 * viewIMax
-    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
+    const loopPos0P = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
+    const clampPos0P = (v: number) => RangeU.clamp(v, [0, (viewsCnt - 1) * 100])
     const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewIMax])
     const loopViewP = (v: number) => RangeU.loop(v, [100 * fromI, viewPMax])
+    const loopPos0ItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
+    const clampPos0ItemP = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
+    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
     
     // pos0xxxxxx - position0xxxxxx - data of first displayed position
-    const pos0P = -(getStartProgressX() + dp)
+    const pos0P = clampPos0P(loopPos0P(-getStartProgressX()) - dp)
     const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
-    const pos0ItemP = -(getStartItemProgress() + dp)
+    const pos0ItemP = clampPos0ItemP(loopPos0ItemP(-getStartItemProgress()) - dp)
     const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100))
     const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
     
     // xxxxxx - positionViewIxxxxxx - data of position at viewI
-    const i = loopViewI(viewI - pos0ViewI)
+    const i = viewI - pos0ViewI
     // progress of current index, nonegative
     const iP = -mod(pos0P, 100)
     const p = pos0P + 100 * i
-    const viewP = loopViewP(100 * i + iP)
+    const viewP = 100 * i + iP
     const itemI = loopItemI(pos0ItemI + i)
     
     /* if (viewI === -1) {

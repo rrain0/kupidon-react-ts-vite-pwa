@@ -76,9 +76,9 @@ const PosterPreview = React.memo(() => {
     viewI += fromI
     const viewIMax = fromI + viewsCnt
     const viewPMax = 100 * viewIMax
-    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
     const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewIMax])
     const loopViewP = (v: number) => RangeU.loop(v, [100 * fromI, viewPMax])
+    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
     
     // pos0xxxxxx - position0xxxxxx - data of first displayed position
     const pos0P = -(getStartProgressX() + dp)

@@ -46,7 +46,6 @@ export type UseGalleryProps = {
   getTrackProps: GetTrackProps
   
   noDrag?: boolean | undefined
-  noLoop?: boolean | undefined // так же будет влиять и на направление перемещения по индексу
   
   onFinish?: Callback1<ProgressEvent> | undefined
 }
@@ -57,7 +56,6 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     viewsCnt,
     getTrackProps,
     noDrag,
-    noLoop,
     onFinish: _onFinish,
   } = props
   
@@ -194,14 +192,12 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   // TODO carousel - maybe extract this with method that calculates positions
   const mergeProgress = () => {
     const p = getStartProgressX() + getDeltaProgressX()
-    let boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
-    if (noLoop) boundP = (v: number) => RangeU.clamp(v, [0, (viewsCnt - 1) * 100])
+    const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
     const pStart = MathU.round3(boundP(p))
     setStartProgressX(pStart)
     
     const itemP = getStartItemProgress() + getDeltaProgressX()
-    let boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
-    if (noLoop) boundItemP = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
+    const boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
     const itemPStart = MathU.round3(boundItemP(itemP))
     setStartItemProgress(itemPStart)
     
