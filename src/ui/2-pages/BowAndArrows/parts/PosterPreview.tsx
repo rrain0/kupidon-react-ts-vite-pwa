@@ -1,15 +1,16 @@
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
+import {
+  getLoopedCarouselProps,
+} from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useEffect, useState } from 'react'
-import { Colors } from 'src/ui-data/Colors.ts'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -24,7 +25,6 @@ import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import LocationIc = SvgIconsPack.LocationIc
 import PriceTagIc = SvgIconsPack.PriceTagIc
-import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
 import arrOfZeros = ArrayU.arrOfZeros
 import abs = EmotionCommon.abs
@@ -72,35 +72,15 @@ const PosterPreview = React.memo(() => {
   
   const viewsFromI = -1
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
-    const fromI = viewsFromI
-    viewI += fromI
-    const viewIMax = fromI + viewsCnt
-    const viewPMax = 100 * viewIMax
-    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewIMax])
-    const loopViewP = (v: number) => RangeU.loop(v, [100 * fromI, viewPMax])
-    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
-    
-    // pos0xxxxxx - position0xxxxxx - data of first displayed position
-    const pos0P = -(getStartProgressX() + dp)
-    const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
-    const pos0ItemP = -(getStartItemProgress() + dp)
-    const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100))
-    const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
-    
-    // xxxxxx - positionViewIxxxxxx - data of position at viewI
-    const i = loopViewI(viewI - pos0ViewI)
-    // progress of current index, nonegative
-    const iP = -mod(pos0P, 100)
-    const p = pos0P + 100 * i
-    const viewP = loopViewP(100 * i + iP)
-    const itemI = loopItemI(pos0ItemI + i)
-    
-    /* if (viewI === -1) {
-      console.log({ pos0P, pos0ViewI, pos0ItemI })
-      console.log({ viewI, p, i, viewP, itemI })
-    } */
-    
-    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, i, iP, p, viewP, itemI }
+    return getLoopedCarouselProps({
+      getStartProgressX,
+      getStartItemProgress,
+      deltaProgressX: dp,
+      itemsCnt,
+      viewsCnt,
+      viewsFromI,
+      viewI,
+    })
   })
   
   return (

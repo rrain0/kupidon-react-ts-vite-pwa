@@ -1,7 +1,10 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { getClampedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
+import { MathU } from '@util/common/MathU.ts'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -11,11 +14,18 @@ import { RangeU } from 'src/util/common/RangeU'
 import lastIndex = ArrayU.lastI
 import gridStackC = EmotionCommon.gridStackC
 import col = EmotionCommon.col
+import Getter = TypeU.Getter
+import mod = MathU.mod
+import arrOfIndices = ArrayU.arrOfIndices
 
 
 
 
 export type ProfilePageTabHeaderContextProps = {
+  getStartProgressX: Getter<number>
+  getStartItemProgress: Getter<number>
+  animatedDeltaProgressX: AnimatedProperty<number>
+  
   //tabContainerSpring: TabsRenderProps['tabContainerSpring']
   progress: AnimatedProperty<(tabI: number) => number>
   //tabWidth: number
@@ -39,6 +49,10 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   
   
   const {
+    getStartProgressX,
+    getStartItemProgress,
+    animatedDeltaProgressX,
+    
     //tabContainerSpring,
     progress,
     //tabWidth: w,
@@ -46,6 +60,24 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
     //setTabsState,
     //setTabIdx,
   } = useContext(ProfilePageTabHeaderContext)
+  
+  
+  const itemsCnt = headers.length
+  const viewsCnt = itemsCnt
+  
+  
+  const viewsFromI = -1
+  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
+    return getClampedCarouselProps({
+      getStartProgressX,
+      getStartItemProgress,
+      deltaProgressX: dp,
+      itemsCnt,
+      viewsCnt,
+      viewsFromI,
+      viewI,
+    })
+  })
   
   
   
@@ -85,7 +117,39 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
         max-width: var(--w);
       `}
     >
+      {arrOfIndices(itemsCnt).map(viewI => (
+        <AnimatedHeader
+          key={viewI}
+          /* css={{
+            maskImage:
+          }} */
+          animatedStyle={{
+            transform: animatedProps.map(ap => {
+              const { i, viewPI, viewIP, itemI } = ap(viewI)
+              let x = 0
+              if (viewI === 1) x = viewPI - 0.5 * viewIP
+              if (viewI === 0) x = viewPI + 50 + 0.5 * viewIP
+              if (viewI === 2) x = viewPI - 50 + 0.5 * viewIP
+              return `translateX(${x}%)`
+            }),
+          }}
+        >
+          <AnimatedState
+            animatedState={{
+              itemI: animatedProps.map(ap => ap(viewI).itemI),
+            }}
+          >
+            {({ itemI }) => (
+              <Text>
+                {headers[itemI]}
+              </Text>
+            )}
+          </AnimatedState>
+        </AnimatedHeader>
+      ))}
       
+      
+      {/*
       {RangeU.has(mainTabI-1, [0, lastIndex(headers)]) && (
         <AnimatedHeader
           css={css`
@@ -103,14 +167,14 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
             opacity: forLeft.map(v => 1 - 0.6 * Math.abs(v)),
           }}
         >
-          <HeaderTextWrap
+          <Text
             onClick={() => {
               //setTabsState('snapping')
               //setTabIdx(mainTabI-1)
             }}
           >
             {headers[mainTabI-1]}
-          </HeaderTextWrap>
+          </Text>
         </AnimatedHeader>
       )
       }
@@ -132,14 +196,14 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
             opacity: forRight.map(v => 1 - 0.6 * Math.abs(v)),
           }}
         >
-          <HeaderTextWrap
+          <Text
             onClick={() => {
               //setTabsState('snapping')
               //setTabIdx(mainTabI + 1)
             }}
           >
             {headers[mainTabI + 1]}
-          </HeaderTextWrap>
+          </Text>
         </AnimatedHeader>
       )
       }
@@ -155,16 +219,19 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
         }}
       >
         
-        <HeaderTextWrap
+        <Text
           onClick={() => {
             //setTabsState('snapping')
             //setTabIdx(mainTabI)
           }}
         >
           {headers[mainTabI]}
-        </HeaderTextWrap>
+        </Text>
       
       </AnimatedHeader>
+       */}
+      
+      
       
     </Wrap>
   )
@@ -189,7 +256,7 @@ const AnimatedHeader = styled(AnimatedDiv)`
   ${col};
 `
 
-const HeaderTextWrap = styled.h3`
+const Text = styled.h3`
   ${p => Hdrs.page(p.theme)};
   color: ${p => p.theme.page.ct3};
   overflow-wrap: anywhere;

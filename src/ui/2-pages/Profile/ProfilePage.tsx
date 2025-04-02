@@ -2,6 +2,7 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { getClampedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { MathU } from '@util/common/MathU.ts'
@@ -420,39 +421,15 @@ const ProfilePage = React.memo(() => {
   
   const viewsFromI = 0
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
-    const fromI = viewsFromI
-    viewI += fromI
-    const viewIMax = fromI + viewsCnt
-    const viewPMax = 100 * viewIMax
-    const loopPos0P = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
-    const clampPos0P = (v: number) => RangeU.clamp(v, [0, (viewsCnt - 1) * 100])
-    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewIMax])
-    const loopViewP = (v: number) => RangeU.loop(v, [100 * fromI, viewPMax])
-    const loopPos0ItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
-    const clampPos0ItemP = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
-    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
-    
-    // pos0xxxxxx - position0xxxxxx - data of first displayed position
-    const pos0P = clampPos0P(loopPos0P(-getStartProgressX()) - dp)
-    const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
-    const pos0ItemP = clampPos0ItemP(loopPos0ItemP(-getStartItemProgress()) - dp)
-    const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100))
-    const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
-    
-    // xxxxxx - positionViewIxxxxxx - data of position at viewI
-    const i = viewI - pos0ViewI
-    // progress of current index, nonegative
-    const iP = -mod(pos0P, 100)
-    const p = pos0P + 100 * i
-    const viewP = 100 * i + iP
-    const itemI = loopItemI(pos0ItemI + i)
-    
-    /* if (viewI === -1) {
-      console.log({ pos0P, pos0ViewI, pos0ItemI })
-      console.log({ viewI, p, i, viewP, itemI })
-    } */
-    
-    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, i, iP, p, viewP, itemI }
+    return getClampedCarouselProps({
+      getStartProgressX,
+      getStartItemProgress,
+      deltaProgressX: dp,
+      itemsCnt,
+      viewsCnt,
+      viewsFromI,
+      viewI,
+    })
   })
   
   
@@ -519,6 +496,10 @@ const ProfilePage = React.memo(() => {
                             
                             <ProfilePageTabHeaderContext.Provider
                               value={{
+                                getStartProgressX,
+                                getStartItemProgress,
+                                animatedDeltaProgressX,
+                                
                                 //tabContainerSpring,
                                 progress: animatedProps.map(ap => (tabI: number) => ap(tabI).pos0ItemP),
                                 //tabWidth: computedTabsDimens.frameWidth,
