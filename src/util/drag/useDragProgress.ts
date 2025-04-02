@@ -43,8 +43,9 @@ export type UpdateDragProgressProps = {
   dy: number
 }
 
-export const useDragProgress = (props: UseDragProgressProps) => {
-  const { getTrackProps } = props
+export const useDragProgress = ({
+  getTrackProps,
+}: UseDragProgressProps) => {
   
   const [getDragStartProgressX, setDragStartProgressX] = useRefGetSet(0) // ..0..100..
   const [getDragDeltaProgressX, setDragDeltaProgressX] = useRefGetSet(0) // ..0..100..

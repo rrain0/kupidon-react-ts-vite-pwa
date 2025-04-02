@@ -11,6 +11,7 @@ import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { Colors } from 'src/ui-data/Colors.ts'
 import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
@@ -411,6 +412,7 @@ const ProfilePage = React.memo(() => {
     viewsCnt: viewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
+    noLoop: true,
     onFinish,
   })
   
@@ -418,23 +420,29 @@ const ProfilePage = React.memo(() => {
     //animateTo({  })
   }, [tabIdx])
   
-  const viewsFromI = -1
+  const viewsFromI = 0
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
     const fromI = viewsFromI
     viewI += fromI
-    // pos0xxxxxx - data for displayed position 0
-    const pos0P = getStartProgressX() + dp
-    const pos0ItemP = getStartItemProgress() + dp
-    // инвертируем, так как противоположен progress
-    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(pos0ItemP / 100), [0, itemsCnt])
-    const pos0ItemHalfI = RangeU.loop(itemsCnt - Math.floor((pos0ItemP + 50) / 100), [0, itemsCnt])
+    const clampItemP = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
+    const clampViewP = (v: number) => RangeU.clamp(v, [fromI * 100, (viewsCnt - 1 + fromI) * 100])
+    const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
+    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewsCnt + fromI])
     
-    // posxxxxxx - data for displayed viewI position
-    const posI = RangeU.loop(viewI + Math.floor(pos0P / 100), [fromI, viewsCnt + fromI])
+    // pos0xxxxxx - data for displayed position[0]
+    const pos0P = clampViewP(-(getStartProgressX() + dp))
+    const pos0ItemP = getStartItemProgress() + dp
+    // инвертируем, так как item progress противоположен progress
+    const pos0ItemI = loopItemI(itemsCnt - Math.floor(pos0ItemP / 100))
+    const pos0ItemHalfI = loopItemI(itemsCnt - Math.floor((pos0ItemP + 50) / 100))
+    
+    // posxxxxxx - data for displayed position[viewI]
+    const posI = loopViewI(viewI + Math.floor(pos0P / 100))
     // progress of current index, nonegative
     const posIP = mod(pos0P, 100)
     const posP = posI * 100 + posIP
-    const posItemI = RangeU.loop(posI + pos0ItemI, [0, itemsCnt])
+    const posItemI = loopItemI(posI + pos0ItemI)
+    
     return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, posI, posIP, posP, posItemI }
   })
   
@@ -455,9 +463,12 @@ const ProfilePage = React.memo(() => {
             {...onTrackDrag()}
           >
             <>
-              {arrOfIndices(3).map(viewI => (
+              {arrOfIndices(viewsCnt).map(viewI => (
                 <Tab
                   key={viewI}
+                  style={{
+                    backgroundColor: Colors.test[viewI],
+                  }}
                   animatedStyle={{
                     transform: animatedProps.map(ap => {
                       const { posP: p } = ap(viewI)

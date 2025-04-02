@@ -191,17 +191,20 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   } = useDragProgress({ getTrackProps })
   
   
+  // TODO carousel - maybe extract this with method that calculates positions
   const mergeProgress = () => {
     const p = getStartProgressX() + getDeltaProgressX()
-    // Если имеем 0 или 1 отображаемых view, то листать не можем, поэтому считаем что 0 прогресс
-    const viewMaxP = viewsCnt * 100
-    const pStart = MathU.round3(RangeU.loop(p, [0, viewMaxP]))
+    let pBoundFun = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
+    if (noLoop) pBoundFun = (v: number) => RangeU.clamp(v, [0, (viewsCnt - 1) * 100])
+    const pStart = MathU.round3(pBoundFun(p))
     setStartProgressX(pStart)
+    
     const itemP = getStartItemProgress() + getDeltaProgressX()
-    // Если имеем 0 или 1 item, то листать не можем, поэтому считаем что 0 прогресс
-    const itemMaxP = itemsCnt * 100
-    const itemPStart = MathU.round3(RangeU.loop(itemP, [0, itemMaxP]))
+    let itemPBoundFun = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
+    if (noLoop) itemPBoundFun = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
+    const itemPStart = MathU.round3(itemPBoundFun(itemP))
     setStartItemProgress(itemPStart)
+    
     setDeltaProgressX(0)
   }
   
@@ -210,7 +213,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   const { getWasDragged, setWasDragged } = useAppPointerAction()
   
   
-  const applyOnEachDrag = useAsCallback((cpy: number, horizontal: boolean, drag: boolean) => {
+  const applyOnEachDrag = useAsCallback((dpx: number, horizontal: boolean, drag: boolean) => {
     if (!noDrag && horizontal) {
       lockTouchAction()
       if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
@@ -227,7 +230,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
         mergeProgress()
         setNeedMerge(false)
       }
-      setDeltaProgressX(cpy)
+      setDeltaProgressX(dpx)
       updateViews()
     }
   })
