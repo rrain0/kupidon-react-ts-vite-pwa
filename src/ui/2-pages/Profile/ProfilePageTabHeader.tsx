@@ -66,7 +66,7 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   const viewsCnt = itemsCnt
   
   
-  const viewsFromI = -1
+  const viewsFromI = 0
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
     return getClampedCarouselProps({
       getStartProgressX,
@@ -127,9 +127,12 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
             transform: animatedProps.map(ap => {
               const { i, viewPI, viewIP, itemI } = ap(viewI)
               let x = 0
-              if (viewI === 1) x = viewPI - 0.5 * viewIP
-              if (viewI === 0) x = viewPI + 50 + 0.5 * viewIP
-              if (viewI === 2) x = viewPI - 50 + 0.5 * viewIP
+              // if (viewI === 0) x = viewPI + (100 - 0.5 * viewIP)
+              // if (viewI === 1) x = viewPI - 0.5 * viewIP
+              // if (viewI === 2) x = viewPI - 50 + 0.5 * viewIP
+              if (i === -1) x = viewPI + 50
+              if (i === 0) x = viewPI + 0.5 * viewIP
+              if (i === 1) x = viewPI - 50
               return `translateX(${x}%)`
             }),
           }}
