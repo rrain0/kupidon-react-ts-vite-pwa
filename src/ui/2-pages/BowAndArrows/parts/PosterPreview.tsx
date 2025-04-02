@@ -9,6 +9,7 @@ import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import React, { useEffect, useState } from 'react'
+import { Colors } from 'src/ui-data/Colors.ts'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -73,24 +74,33 @@ const PosterPreview = React.memo(() => {
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
     const fromI = viewsFromI
     viewI += fromI
+    const viewIMax = fromI + viewsCnt
+    const viewPMax = 100 * viewIMax
     const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
-    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewsCnt + fromI])
+    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewIMax])
+    const loopViewP = (v: number) => RangeU.loop(v, [100 * fromI, viewPMax])
     
-    // pos0xxxxxx - data for displayed position[0]
-    const pos0P = getStartProgressX() + dp
-    const pos0ItemP = getStartItemProgress() + dp
-    // инвертируем, так как item progress противоположен progress
-    const pos0ItemI = loopItemI(itemsCnt - Math.floor(pos0ItemP / 100))
-    const pos0ItemHalfI = loopItemI(itemsCnt - Math.floor((pos0ItemP + 50) / 100))
+    // pos0xxxxxx - position0xxxxxx - data of first displayed position
+    const pos0P = -(getStartProgressX() + dp)
+    const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
+    const pos0ItemP = -(getStartItemProgress() + dp)
+    const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100))
+    const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
     
-    // posxxxxxx - data for displayed position[viewI]
-    const posI = loopViewI(viewI + Math.floor(pos0P / 100))
+    // xxxxxx - positionViewIxxxxxx - data of position at viewI
+    const i = loopViewI(viewI - pos0ViewI)
     // progress of current index, nonegative
-    const posIP = mod(pos0P, 100)
-    const posP = posI * 100 + posIP
-    const posItemI = loopItemI(posI + pos0ItemI)
+    const iP = -mod(pos0P, 100)
+    const p = pos0P + 100 * i
+    const viewP = loopViewP(100 * i + iP)
+    const itemI = loopItemI(pos0ItemI + i)
     
-    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, posI, posIP, posP, posItemI }
+    /* if (viewI === -1) {
+      console.log({ pos0P, pos0ViewI, pos0ItemI })
+      console.log({ viewI, p, i, viewP, itemI })
+    } */
+    
+    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, i, iP, p, viewP, itemI }
   })
   
   return (
@@ -104,20 +114,24 @@ const PosterPreview = React.memo(() => {
         return (
           <MiniPosterFrame
             key={viewI}
+            /* style={{
+              backgroundColor: Colors.test[viewI],
+              padding: 10,
+            }} */
             animatedStyle={{
               transform: animatedProps.map(ap => {
-                const { posP: p } = ap(viewI)
+                const { viewP } = ap(viewI)
                 // add gap 20%
-                const x = RangeU.map(p, [0, 100], [0, 120])
+                const x = RangeU.map(viewP, [0, 100], [0, 120])
                 //console.log('x', x)
                 return `translateX(${x}%)`
               }),
             }}
           >
-            
+            {/* {viewI - 1} */}
             <AnimatedState
               animatedState={{
-                itemI: animatedProps.map(ap => ap(viewI).posItemI),
+                itemI: animatedProps.map(ap => ap(viewI).itemI),
               }}
             >
               {({ itemI }) => {

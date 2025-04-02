@@ -412,7 +412,7 @@ const ProfilePage = React.memo(() => {
     viewsCnt: viewsCnt,
     getTrackProps,
     noDrag: itemsCnt <= 1,
-    noLoop: true,
+    //noLoop: true,
     onFinish,
   })
   
@@ -420,30 +420,38 @@ const ProfilePage = React.memo(() => {
     //animateTo({  })
   }, [tabIdx])
   
-  const viewsFromI = 0
+  
+  const viewsFromI = -1
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
     const fromI = viewsFromI
     viewI += fromI
-    const clampItemP = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
-    const clampViewP = (v: number) => RangeU.clamp(v, [fromI * 100, (viewsCnt - 1 + fromI) * 100])
+    const viewIMax = fromI + viewsCnt
+    const viewPMax = 100 * viewIMax
     const loopItemI = (v: number) => RangeU.loop(v, [0, itemsCnt])
-    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewsCnt + fromI])
+    const loopViewI = (v: number) => RangeU.loop(v, [fromI, viewIMax])
+    const loopViewP = (v: number) => RangeU.loop(v, [100 * fromI, viewPMax])
     
-    // pos0xxxxxx - data for displayed position[0]
-    const pos0P = clampViewP(-(getStartProgressX() + dp))
-    const pos0ItemP = getStartItemProgress() + dp
-    // инвертируем, так как item progress противоположен progress
-    const pos0ItemI = loopItemI(itemsCnt - Math.floor(pos0ItemP / 100))
-    const pos0ItemHalfI = loopItemI(itemsCnt - Math.floor((pos0ItemP + 50) / 100))
+    // pos0xxxxxx - position0xxxxxx - data of first displayed position
+    const pos0P = -(getStartProgressX() + dp)
+    const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
+    const pos0ItemP = -(getStartItemProgress() + dp)
+    const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100))
+    const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
     
-    // posxxxxxx - data for displayed position[viewI]
-    const posI = loopViewI(viewI + Math.floor(pos0P / 100))
+    // xxxxxx - positionViewIxxxxxx - data of position at viewI
+    const i = loopViewI(viewI - pos0ViewI)
     // progress of current index, nonegative
-    const posIP = mod(pos0P, 100)
-    const posP = posI * 100 + posIP
-    const posItemI = loopItemI(posI + pos0ItemI)
+    const iP = -mod(pos0P, 100)
+    const p = pos0P + 100 * i
+    const viewP = loopViewP(100 * i + iP)
+    const itemI = loopItemI(pos0ItemI + i)
     
-    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, posI, posIP, posP, posItemI }
+    /* if (viewI === -1) {
+      console.log({ pos0P, pos0ViewI, pos0ItemI })
+      console.log({ viewI, p, i, viewP, itemI })
+    } */
+    
+    return { pos0P, pos0ItemP, pos0ItemI, pos0ItemHalfI, i, iP, p, viewP, itemI }
   })
   
   
@@ -466,19 +474,19 @@ const ProfilePage = React.memo(() => {
               {arrOfIndices(viewsCnt).map(viewI => (
                 <Tab
                   key={viewI}
-                  style={{
+                  /* style={{
                     backgroundColor: Colors.test[viewI],
-                  }}
+                  }} */
                   animatedStyle={{
                     transform: animatedProps.map(ap => {
-                      const { posP: p } = ap(viewI)
+                      const { viewP: p } = ap(viewI)
                       return `translateX(${p}%)`
                     }),
                   }}
                 >
                   <AnimatedState
                     animatedState={{
-                      tabI: animatedProps.map(ap => ap(viewI).posItemI),
+                      tabI: animatedProps.map(ap => ap(viewI).itemI),
                     }}
                   >
                     {({ tabI }) => (

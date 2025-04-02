@@ -194,15 +194,15 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   // TODO carousel - maybe extract this with method that calculates positions
   const mergeProgress = () => {
     const p = getStartProgressX() + getDeltaProgressX()
-    let pBoundFun = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
-    if (noLoop) pBoundFun = (v: number) => RangeU.clamp(v, [0, (viewsCnt - 1) * 100])
-    const pStart = MathU.round3(pBoundFun(p))
+    let boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
+    if (noLoop) boundP = (v: number) => RangeU.clamp(v, [0, (viewsCnt - 1) * 100])
+    const pStart = MathU.round3(boundP(p))
     setStartProgressX(pStart)
     
     const itemP = getStartItemProgress() + getDeltaProgressX()
-    let itemPBoundFun = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
-    if (noLoop) itemPBoundFun = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
-    const itemPStart = MathU.round3(itemPBoundFun(itemP))
+    let boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
+    if (noLoop) boundItemP = (v: number) => RangeU.clamp(v, [0, (itemsCnt - 1) * 100])
+    const itemPStart = MathU.round3(boundItemP(itemP))
     setStartItemProgress(itemPStart)
     
     setDeltaProgressX(0)
