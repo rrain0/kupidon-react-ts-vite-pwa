@@ -66,12 +66,11 @@ const PosterPreview = React.memo(() => {
     if (isDragging) setWasDraggedOnce(true)
   }, [isDragging])
   
-  /* useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
+  useInterval2({ offset: !wasDraggedOnce ? 2500 : 5000, interval: 3000 }, () => {
     if (isDragging) return
     void animateTo({ next: true })
-  }, [isDragging, wasDraggedOnce]) */
+  }, [isDragging, wasDraggedOnce])
   
-  const viewsFromI = -1
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
     return getLoopedCarouselProps({
       getStartProgressX,
@@ -79,8 +78,9 @@ const PosterPreview = React.memo(() => {
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
-      viewsFromI,
+      viewsFromI: -1,
       viewI,
+      itemsFromI: 1,
     })
   })
   

@@ -419,15 +419,14 @@ const ProfilePage = React.memo(() => {
   }, [tabIdx])
   
   
-  const viewsFromI = 0
-  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
+  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
     return getClampedCarouselProps({
       getStartProgressX,
       getStartItemProgress,
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
-      viewsFromI,
+      viewsFromI: 0,
       viewI,
     })
   })
@@ -457,8 +456,8 @@ const ProfilePage = React.memo(() => {
                   }} */
                   animatedStyle={{
                     transform: animatedProps.map(ap => {
-                      const { viewP: p } = ap(viewI)
-                      return `translateX(${p}%)`
+                      const { viewP } = ap(viewI)
+                      return `translateX(${viewP}%)`
                     }),
                   }}
                 >

@@ -125,14 +125,14 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
           }} */
           animatedStyle={{
             transform: animatedProps.map(ap => {
-              const { i, viewPI, viewIP, itemI } = ap(viewI)
+              const { posI, viewPBase, viewPCurr, itemI } = ap(viewI)
               let x = 0
               // if (viewI === 0) x = viewPI + (100 - 0.5 * viewIP)
               // if (viewI === 1) x = viewPI - 0.5 * viewIP
               // if (viewI === 2) x = viewPI - 50 + 0.5 * viewIP
-              if (i === -1) x = viewPI + 50
-              if (i === 0) x = viewPI + 0.5 * viewIP
-              if (i === 1) x = viewPI - 50
+              if (posI === -1) x = viewPBase + 50
+              if (posI === 0) x = viewPBase + 0.5 * viewPCurr
+              if (posI === 1) x = viewPBase - 50
               return `translateX(${x}%)`
             }),
           }}
