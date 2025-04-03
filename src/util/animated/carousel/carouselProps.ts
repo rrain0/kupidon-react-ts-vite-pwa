@@ -70,7 +70,7 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
   
-  //console.log({ pos0P, pCurr, viewI, viewPosP, viewItemI })
+  //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosP, viewItemI })
   
   return {
     pos0P, pCurr, pos0PBase,
@@ -150,7 +150,7 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
   
   
-  //console.log({ pos0P, pCurr, viewI, viewPosP, viewItemI })
+  //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosP, viewItemI })
   
   return {
     pos0P, pCurr, pos0PBase,
