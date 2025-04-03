@@ -3,11 +3,10 @@ import { RangeU } from 'src/util/common/RangeU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Getter = TypeU.Getter
 import mod = MathU.mod
+import round3 = MathU.round3
 
 
 
-
-// ⚠️⚠️⚠️ Не применять округление - может быть перескок по индексу
 
 
 export type GetLoopedCarouselProps = {
@@ -52,13 +51,13 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   const loopItemP = (v: number) => RangeU.loop(v, [0, itemEndP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = -(getStartProgressX() + dp)
+  const pos0P = -round3(getStartProgressX() + dp)
   const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = -(getStartItemProgress() + dp)
+  const pos0ItemP = -round3(getStartItemProgress() + dp)
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
@@ -129,13 +128,13 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   const clampItemP = (v: number) => RangeU.clamp(v, [0, itemLastP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = clampViewP(loopViewP(-getStartProgressX()) - dp)
+  const pos0P = clampViewP(loopViewP(-round3(getStartProgressX())) - round3(dp))
   const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = clampItemP(loopItemP(-getStartItemProgress()) - dp)
+  const pos0ItemP = clampItemP(loopItemP(-round3(getStartItemProgress())) - round3(dp))
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
