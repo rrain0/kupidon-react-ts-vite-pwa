@@ -4,20 +4,15 @@ import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { getClampedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
-import { MathU } from '@util/common/MathU.ts'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { RangeU } from 'src/util/common/RangeU'
-import lastIndex = ArrayU.lastI
 import gridStackC = EmotionCommon.gridStackC
-import col = EmotionCommon.col
 import Getter = TypeU.Getter
-import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
-import NumRange = RangeU.NumRange
+import colC = EmotionCommon.colC
 
 
 
@@ -26,13 +21,7 @@ export type ProfilePageTabHeaderContextProps = {
   getStartProgressX: Getter<number>
   getStartItemProgress: Getter<number>
   animatedDeltaProgressX: AnimatedProperty<number>
-  
-  //tabContainerSpring: TabsRenderProps['tabContainerSpring']
-  progress: AnimatedProperty<(tabI: number) => number>
-  //tabWidth: number
   headers: string[]
-  //setTabsState: Setter<TabsState>
-  //setTabIdx: Setter<TabIdx>
 }
 export const ProfilePageTabHeaderContext = React.createContext({} as ProfilePageTabHeaderContextProps)
 
@@ -53,16 +42,10 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
     getStartProgressX,
     getStartItemProgress,
     animatedDeltaProgressX,
-    
-    //tabContainerSpring,
-    progress,
-    //tabWidth: w,
     headers,
-    //setTabsState,
-    //setTabIdx,
   } = useContext(ProfilePageTabHeaderContext)
   
-  
+  /*
   // -1 - заголовок уехал влево
   // 0 - заголовок по центру
   // +1 - заголовок уехал вправо
@@ -89,23 +72,21 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
     v = -RangeU.map(v, fromRange, [-1, 1])
     return v
   })
-  
+   */
   
   
   
   const itemsCnt = headers.length
   const viewsCnt = itemsCnt
   
-  
-  const viewsFromI = 0
-  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = -viewsFromI) => {
+  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
     return getClampedCarouselProps({
       getStartProgressX,
       getStartItemProgress,
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
-      startViewI: viewsFromI,
+      startViewI: 0,
       currViewI: viewI,
     })
   })
@@ -122,32 +103,60 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       {arrOfIndices(itemsCnt).map(viewI => (
         <AnimatedHeader
           key={viewI}
-          /* css={{
-            maskImage:
-          }} */
           animatedStyle={{
             transform: animatedProps.map(ap => {
-              const { posI, viewPBase, viewPCurr, itemI } = ap(viewI)
-              let x = 0
-              // if (viewI === 0) x = viewPI + (100 - 0.5 * viewIP)
-              // if (viewI === 1) x = viewPI - 0.5 * viewIP
-              // if (viewI === 2) x = viewPI - 50 + 0.5 * viewIP
-              if (posI === -1) x = viewPBase + 50
-              if (posI === 0) x = viewPBase + 0.5 * viewPCurr
-              if (posI === 1) x = viewPBase - 50
+              const { viewPosI, viewPBase, viewPCurr, viewItemI } = ap(viewI)
+              const i = viewPosI
+              let x = viewPBase
+              
+              if (viewItemI === 0) {
+                if (i === -1) x = viewPBase + 50
+                if (i === 0)  x = viewPBase - 50 - 0.5 * (100 - viewPCurr)
+                if (i === 1)  x = viewPBase + 100
+              }
+              if (viewItemI === 1) {
+                if (i === -1) x = viewPBase + 150
+                if (i === 0)  x = viewPBase       + 0.5 * viewPCurr
+                if (i === 1)  x = viewPBase - 100 - 0.5 * (100 - viewPCurr)
+              }
+              if (viewItemI === 2) {
+                if (i === 0)  x = viewPBase + 100
+                if (i === 1)  x = viewPBase - 50  + 0.5 * viewPCurr
+                if (i === 2)  x = viewPBase - 150 + 0.5
+              }
+              
+              x -= 100 * (mainTabI - 1)
+              
               return `translateX(${x}%)`
             }),
           }}
         >
           <AnimatedState
             animatedState={{
-              itemI: animatedProps.map(ap => ap(viewI).itemI),
+              itemI: animatedProps.map(ap => ap(viewI).viewItemI),
+              posI: animatedProps.map(ap => ap(viewI).viewPosI),
             }}
           >
-            {({ itemI }) => (
-              <Text>
-                {headers[itemI]}
-              </Text>
+            {({ itemI, posI }) => (
+              <TextBox
+                style={{
+                  width: !posI ? '70%' : '60%',
+                  maskImage: (() => {
+                    if (posI === -1) return `linear-gradient(to right,
+                      rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
+                      rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
+                    )`
+                    if (posI === 1) return `linear-gradient(to right,
+                      rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
+                      rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
+                    )`
+                  })(),
+                }}
+              >
+                <Text>
+                  {headers[itemI]}
+                </Text>
+              </TextBox>
             )}
           </AnimatedState>
         </AnimatedHeader>
@@ -258,7 +267,12 @@ const Wrap = styled.div`
 
 const AnimatedHeader = styled(AnimatedDiv)`
   width: 100%;
-  ${col};
+  ${colC};
+`
+
+const TextBox = styled.div`
+  height: 100%;
+  ${colC};
 `
 
 const Text = styled.h3`

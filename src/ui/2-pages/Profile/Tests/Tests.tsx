@@ -111,7 +111,7 @@ const Tests = React.memo((props: TestsProps) => {
       <Pages.AddSafeInsets>
         <Pages.ContentColSm css={css`gap: 30px;`}>
           
-          {/* <ProfilePageTabHeader mainTabI={props.tabIdx} /> */}
+          <ProfilePageTabHeader mainTabI={props.tabIdx} />
           
           <div css={col} style={{ gap: 25 }}>
         

@@ -190,6 +190,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   } = useDragProgress({ getTrackProps })
   
   
+  // TODO carousel - merge when noLoop (clamp)
   const mergeProgress = () => {
     let p = getStartProgressX() + getDeltaProgressX()
     const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])

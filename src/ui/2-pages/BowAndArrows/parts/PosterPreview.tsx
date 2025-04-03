@@ -111,7 +111,7 @@ const PosterPreview = React.memo(() => {
             {/* {viewI - 1} */}
             <AnimatedState
               animatedState={{
-                itemI: animatedProps.map(ap => ap(viewI).itemI),
+                itemI: animatedProps.map(ap => ap(viewI).viewItemI),
               }}
             >
               {({ itemI }) => {

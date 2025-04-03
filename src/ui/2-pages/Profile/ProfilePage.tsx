@@ -463,7 +463,7 @@ const ProfilePage = React.memo(() => {
                 >
                   <AnimatedState
                     animatedState={{
-                      tabI: animatedProps.map(ap => ap(viewI).itemI),
+                      tabI: animatedProps.map(ap => ap(viewI).viewItemI),
                     }}
                   >
                     {({ tabI }) => (
@@ -489,6 +489,7 @@ const ProfilePage = React.memo(() => {
                                 ${safePageContentPaddings};
                               }
                             `}
+                            // TODO Animation to state
                             //showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
                             showVertical={true}
                           >
@@ -498,14 +499,7 @@ const ProfilePage = React.memo(() => {
                                 getStartProgressX,
                                 getStartItemProgress,
                                 animatedDeltaProgressX,
-                                
-                                //tabContainerSpring,
-                                progress: animatedProps.map(ap => (tabI: number) => ap(tabI).pos0ItemP),
-                                //tabWidth: computedTabsDimens.frameWidth,
-                                //tabWidth: 400,
                                 headers: headers,
-                                //setTabsState: tabsProps.setTabsState,
-                                //setTabIdx: tabsProps.setTabIdx,
                               }}
                             >
                               {[
