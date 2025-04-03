@@ -426,8 +426,8 @@ const ProfilePage = React.memo(() => {
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
-      viewsFromI: 0,
-      viewI,
+      startViewI: 0,
+      currViewI: viewI,
     })
   })
   

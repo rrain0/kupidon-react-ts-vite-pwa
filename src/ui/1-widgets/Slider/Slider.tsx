@@ -15,7 +15,7 @@ import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import zeroBasedRange = RangeU.zeroBased
 import Setter = TypeU.Setter
-import NumRangeRo = RangeU.NumRangeRo
+import NumRange = RangeU.NumRange
 import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro
 import Ro = TypeU.Ro
@@ -72,7 +72,7 @@ const dPxToDProgress = (dPx: number, trackW: number, lOffset: number, rOffset: n
   [0, (trackW - (lOffset + rOffset))],
   [0, 100]
 )
-const dProgressToDValue = (dProgress: number, minMax: NumRangeRo) => RangeU.map(
+const dProgressToDValue = (dProgress: number, minMax: NumRange) => RangeU.map(
   dProgress,
   [0, 100],
   zeroBasedRange(minMax)
@@ -83,11 +83,11 @@ const progressToClampedProgress = (progress: number) => RangeU.clamp(
   progress,
   [0, 100]
 )
-const progressToValue = (progress: number, minMax: NumRangeRo) => RangeU.clamp(
+const progressToValue = (progress: number, minMax: NumRange) => RangeU.clamp(
   minMax[0] + dProgressToDValue(progress, minMax),
   minMax
 )
-const valueToClampedValue = (value: number, minMax: NumRangeRo) => RangeU.clamp(
+const valueToClampedValue = (value: number, minMax: NumRange) => RangeU.clamp(
   value,
   minMax
 )
@@ -101,7 +101,7 @@ const progressToUiPercentRight =
 )
 
 // value -> clampedProgress
-const valueToClampedProgress = (value: number, minMax: NumRangeRo): number => RangeU.mapClamp(
+const valueToClampedProgress = (value: number, minMax: NumRange): number => RangeU.mapClamp(
   value,
   minMax,
   [0, 100]
@@ -114,7 +114,7 @@ const valueToClampedProgress = (value: number, minMax: NumRangeRo): number => Ra
 export type SliderExtraProps = Ro<{
   value: number
   setValue: Setter<number>
-  minMax: NumRangeRo
+  minMax: NumRange
 }> & Puro<{
   onValueDragStart: Callback1<number>
   onValueDragging: Callback1<number>

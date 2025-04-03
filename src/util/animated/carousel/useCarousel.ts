@@ -131,7 +131,7 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
       })
     }
     
-    // TODO remove itemP from here - it must be calculated at place
+    // TODO remove itemP from here - it must be calculated outside
     const itemP = getStartItemProgress() + getDeltaProgressX()
     const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
     onFinish({ last: true, pos0ItemI })
@@ -191,15 +191,15 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   
   
   const mergeProgress = () => {
-    const p = getStartProgressX() + getDeltaProgressX()
+    let p = getStartProgressX() + getDeltaProgressX()
     const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
-    const pStart = MathU.round3(boundP(p))
-    setStartProgressX(pStart)
+    p = boundP(p)
+    setStartProgressX(p)
     
-    const itemP = getStartItemProgress() + getDeltaProgressX()
+    let itemP = getStartItemProgress() + getDeltaProgressX()
     const boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
-    const itemPStart = MathU.round3(boundItemP(itemP))
-    setStartItemProgress(itemPStart)
+    itemP = boundItemP(itemP)
+    setStartItemProgress(itemP)
     
     setDeltaProgressX(0)
   }

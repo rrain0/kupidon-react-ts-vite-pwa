@@ -25,7 +25,8 @@ export namespace RangeU {
   
   
   
-  export const clamp = (curr: number, [min, max]: NumRangeRo): number => {
+  // ✅ Не требует округлений результата
+  export const clamp = (curr: number, [min, max]: NumRange): number => {
     return curr < min ? min : curr > max ? max : curr
   }
   
@@ -37,17 +38,29 @@ export namespace RangeU {
    * @param max Максимальное значение
    * @returns {boolean}
    */
-  export const has = (curr: number, [min, max]: NumRangeRo, minIncl = true, maxIncl = true): boolean => {
+  export const has = (curr: number, [min, max]: NumRange, minIncl = true, maxIncl = true): boolean => {
     return curr > min && curr < max || minIncl && curr === min || maxIncl && curr === max
   }
   
   
-  export const loop = (curr: number, range: NumRangeRo, minIncl = true, maxIncl = false): number => {
+  // ✅ Не требует округлений результата
+  export const move = <R extends NumRanges>(ranges: R, to: number): R => {
+    const shift = to - ranges[0]
+    return ranges.map(n => n + shift) as R
+  }
+  
+  
+  // ✅ Не требует округлений результата
+  export const zeroBased = (range: NumRange): NumRange => move(range, 0)
+  
+  
+  // ✅ Не требует округлений результата
+  export const loop = (curr: number, range: NumRange, minIncl = true, maxIncl = false): number => {
     const zeroBasedRange = zeroBased(range)
-    const zeroBasedCurr = map(curr, range, zeroBasedRange)
+    const zeroBasedCurr = curr - range[0]
     let loopedZeroBasedCurr = mod(zeroBasedCurr, zeroBasedRange[1])
     if (!minIncl && !maxIncl && loopedZeroBasedCurr === 0) {
-      throw new Error('Value on the edge of range and edge values not included')
+      throw new Error('Value is on the edge of range but edge values are not included')
     }
     if (!minIncl && loopedZeroBasedCurr === 0) {
       loopedZeroBasedCurr = zeroBasedRange[1]
@@ -55,10 +68,10 @@ export namespace RangeU {
     if (maxIncl && loopedZeroBasedCurr === 0 && zeroBasedCurr !== 0) {
       loopedZeroBasedCurr = zeroBasedRange[1]
     }
-    // @ts-expect-error
-    const loopedCurr = map(loopedZeroBasedCurr, zeroBasedRange, range)
+    const loopedCurr = range[0] + loopedZeroBasedCurr
     return loopedCurr
   }
+  
   
   
   /**
@@ -67,20 +80,20 @@ export namespace RangeU {
    * @param fromRange minInclusive..maxInclusive
    * @param toRange minInclusive..maxInclusive
    */
-  const mapRange = (value: number, fromRange: NumRangeRo, toRange: NumRangeRo): number => {
+  const mapSingleRange = (value: number, fromRange: NumRange, toRange: NumRange): number => {
     const oneBasedValue = mapNaN((value - fromRange[0]) / (fromRange[1] - fromRange[0]), 0)
     return oneBasedValue * (toRange[1] - toRange[0]) + toRange[0]
   }
   
   
   
-  export const map = <R extends NumRangesRo>(
+  export const map = <R extends NumRanges>(
     value: number,
     fromRanges: R,
     toRanges: NoInfer<R>
   ): number => {
     for (let i = 1; ; i++) {
-      if (i === fromRanges.length - 1 || value <= fromRanges[i]) return mapRange(
+      if (i === fromRanges.length - 1 || value <= fromRanges[i]) return mapSingleRange(
         value,
         [fromRanges[i - 1], fromRanges[i]],
         [toRanges[i-1], toRanges[i]],
@@ -98,20 +111,11 @@ export namespace RangeU {
    */
   export const mapClamp = (
     value: number,
-    fromRange: NumRangeRo,
-    toRange: NumRangeRo,
-    clampInRange: NumRangeRo = toRange
+    fromRange: NumRange,
+    toRange: NumRange,
+    clampInRange: NumRange = toRange
   ): number => {
     return clamp(map(value, fromRange, toRange), clampInRange)
-  }
-  
-  
-  export const zeroBased = (range: NumRangeRo): NumRange => {
-    const toRange: NumRange = [0, range[1] - range[0]]
-    return [
-      map(range[0], range, toRange),
-      map(range[1], range, toRange),
-    ]
   }
   
   

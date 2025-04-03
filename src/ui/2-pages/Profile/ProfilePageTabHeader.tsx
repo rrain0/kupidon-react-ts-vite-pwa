@@ -17,6 +17,7 @@ import col = EmotionCommon.col
 import Getter = TypeU.Getter
 import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
+import NumRange = RangeU.NumRange
 
 
 
@@ -62,6 +63,36 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   } = useContext(ProfilePageTabHeaderContext)
   
   
+  // -1 - заголовок уехал влево
+  // 0 - заголовок по центру
+  // +1 - заголовок уехал вправо
+  const forCenter = progress.map(ap => {
+    let v = ap(mainTabI)
+    const fromRange = [(mainTabI-1)*100, (mainTabI+1)*100] as NumRange
+    v = RangeU.clamp(v, fromRange)
+    v = -RangeU.map(v, fromRange, [-1, 1])
+    //console.log('center value',v)
+    return v
+  })
+  const forLeft = progress.map(ap => {
+    let v = ap(mainTabI)
+    const fromRange = [(mainTabI-2)*100 - 100, (mainTabI+0)*100 - 100] as NumRange
+    v = RangeU.clamp(v, fromRange)
+    v = -RangeU.map(v, fromRange, [-1, 1])
+    //console.log('left value',v)
+    return v
+  })
+  const forRight = progress.map(ap => {
+    let v = ap(mainTabI)
+    const fromRange = [(mainTabI+0)*100 - 100, (mainTabI+2)*100 - 100] as NumRange
+    v = RangeU.clamp(v, fromRange)
+    v = -RangeU.map(v, fromRange, [-1, 1])
+    return v
+  })
+  
+  
+  
+  
   const itemsCnt = headers.length
   const viewsCnt = itemsCnt
   
@@ -74,38 +105,9 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
-      viewsFromI,
-      viewI,
+      startViewI: viewsFromI,
+      currViewI: viewI,
     })
-  })
-  
-  
-  
-  // -1 - заголовок уехал влево
-  // 0 - заголовок по центру
-  // +1 - заголовок уехал вправо
-  const forCenter = progress.map(ap => {
-    let v = ap(mainTabI)
-    const fromRange = [(mainTabI-1)*100, (mainTabI+1)*100] as const
-    v = RangeU.clamp(v, fromRange)
-    v = -RangeU.map(v, fromRange, [-1, 1])
-    //console.log('center value',v)
-    return v
-  })
-  const forLeft = progress.map(ap => {
-    let v = ap(mainTabI)
-    const fromRange = [(mainTabI-2)*100 - 100, (mainTabI+0)*100 - 100] as const
-    v = RangeU.clamp(v, fromRange)
-    v = -RangeU.map(v, fromRange, [-1, 1])
-    //console.log('left value',v)
-    return v
-  })
-  const forRight = progress.map(ap => {
-    let v = ap(mainTabI)
-    const fromRange = [(mainTabI+0)*100 - 100, (mainTabI+2)*100 - 100] as const
-    v = RangeU.clamp(v, fromRange)
-    v = -RangeU.map(v, fromRange, [-1, 1])
-    return v
   })
   
   

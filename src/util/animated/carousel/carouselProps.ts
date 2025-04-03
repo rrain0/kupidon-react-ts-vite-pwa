@@ -3,10 +3,11 @@ import { RangeU } from 'src/util/common/RangeU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Getter = TypeU.Getter
 import mod = MathU.mod
-import round3 = MathU.round3
 
 
 
+
+// ⚠️⚠️⚠️ Не применять округление - может быть перескок по индексу
 
 
 export type GetLoopedCarouselProps = {
@@ -15,9 +16,9 @@ export type GetLoopedCarouselProps = {
   deltaProgressX: number
   itemsCnt: number
   viewsCnt: number
-  viewsFromI: number
-  viewI?: number | undefined
-  itemsFromI?: number | undefined
+  startViewI: number
+  currViewI?: number | undefined
+  startItemI?: number | undefined
 }
 export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   let {
@@ -26,22 +27,22 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
     deltaProgressX: dp,
     itemsCnt,
     viewsCnt,
-    viewsFromI,
-    viewI = 0,
-    itemsFromI = 0,
+    startViewI,
+    currViewI = 0,
+    startItemI = 0,
   } = props
   
-  const viewFirstI = viewsFromI
+  const viewFirstI = startViewI
   const viewEndI = viewFirstI + viewsCnt
   const viewLastI = viewEndI - 1
   const viewFirstP = viewFirstI * 100
   const viewEndP = viewEndI * 100
   const viewLastP = viewLastI * 100
-  viewI += viewFirstI
+  currViewI += viewFirstI
   const loopViewI = (v: number) => RangeU.loop(v, [viewFirstI, viewEndI])
   const loopViewP = (v: number) => RangeU.loop(v, [viewFirstP, viewEndP])
   
-  const itemFirstI = itemsFromI
+  const itemFirstI = startItemI
   const itemEndI = itemsCnt
   const itemLastI = itemEndI - 1
   const itemFirstP = itemFirstI * 100
@@ -52,17 +53,17 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = -(getStartProgressX() + dp)
-  const pCurr = round3(mod(pos0P, 100))
+  const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
   const pos0ItemP = -(getStartItemProgress() + dp)
-  const pos0ItemI = loopItemI(Math.floor(round3(pos0ItemP / 100)) + itemFirstI)
-  const pos0ItemHalfI = loopItemI(Math.floor(round3((pos0ItemP + 50) / 100)))
+  const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
+  const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
-  const posI = loopViewI(viewI - pos0ViewI)
+  const posI = loopViewI(currViewI - pos0ViewI)
   const posP = loopViewP(pos0P + 100 * posI)
   
   const viewP = loopViewP(100 * posI - pCurr)
@@ -91,9 +92,9 @@ export type GetClampedCarouselProps = {
   deltaProgressX: number
   itemsCnt: number
   viewsCnt: number
-  viewsFromI: number
-  viewI?: number | undefined
-  itemsFromI?: number | undefined
+  startViewI: number
+  currViewI?: number | undefined
+  startItemI?: number | undefined
 }
 export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   let {
@@ -102,23 +103,23 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
     deltaProgressX: dp,
     itemsCnt,
     viewsCnt,
-    viewsFromI,
-    viewI = 0,
-    itemsFromI = 0,
+    startViewI,
+    currViewI = 0,
+    startItemI = 0,
   } = props
   
-  const viewFirstI = viewsFromI
+  const viewFirstI = startViewI
   const viewEndI = viewFirstI + viewsCnt
   const viewLastI = viewEndI - 1
   const viewFirstP = viewFirstI * 100
   const viewEndP = viewEndI * 100
   const viewLastP = viewLastI * 100
-  viewI += viewFirstI
+  currViewI += viewFirstI
   const loopViewI = (v: number) => RangeU.loop(v, [viewFirstI, viewEndI])
   const loopViewP = (v: number) => RangeU.loop(v, [viewFirstP, viewEndP])
   const clampViewP = (v: number) => RangeU.clamp(v, [viewFirstP, viewLastP])
   
-  const itemFirstI = itemsFromI
+  const itemFirstI = startItemI
   const itemEndI = itemsCnt
   const itemLastI = itemEndI - 1
   const itemFirstP = itemFirstI * 100
@@ -130,17 +131,17 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = clampViewP(loopViewP(-getStartProgressX()) - dp)
-  const pCurr = round3(mod(pos0P, 100))
+  const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
   const pos0ItemP = clampItemP(loopItemP(-getStartItemProgress()) - dp)
-  const pos0ItemI = loopItemI(Math.floor(round3(pos0ItemP / 100)) + itemFirstI)
-  const pos0ItemHalfI = loopItemI(Math.floor(round3((pos0ItemP + 50) / 100)))
+  const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
+  const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
-  const posI = viewI - pos0ViewI
+  const posI = currViewI - pos0ViewI
   const posP = pos0P + 100 * posI
   
   const viewPBase = 100 * posI

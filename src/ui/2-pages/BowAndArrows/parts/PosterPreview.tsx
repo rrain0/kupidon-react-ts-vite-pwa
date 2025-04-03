@@ -78,9 +78,8 @@ const PosterPreview = React.memo(() => {
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
-      viewsFromI: -1,
-      viewI,
-      itemsFromI: 1,
+      startViewI: -1,
+      currViewI: viewI,
     })
   })
   
