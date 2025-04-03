@@ -141,16 +141,10 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
               <TextBox
                 style={{
                   width: !posI ? '70%' : '60%',
-                  maskImage: (() => {
-                    if (posI === -1) return `linear-gradient(to right,
-                      rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
-                      rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
-                    )`
-                    if (posI === 1) return `linear-gradient(to right,
-                      rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
-                      rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
-                    )`
-                  })(),
+                  maskImage: !posI ? '' : `linear-gradient(to right,
+                    rgba(0,0,0,0) 0%, rgba(0,0,0,1) 50%,
+                    rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%
+                  )`,
                 }}
               >
                 <Text>

@@ -49,7 +49,7 @@ import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFail
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts.tsx'
 import { useFormValuesProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
-import { Progress } from 'src/util/Progress.ts'
+import { StageProgress } from '@util/StageProgress.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import safePageContentPaddings = Pages.pageAddSafeInsets
@@ -304,7 +304,7 @@ const ProfilePage = React.memo(() => {
         
         ;(async() => {
           try {
-            const progress = new Progress(2, [90, 10])
+            const progress = new StageProgress(2, [90, 10])
             const onProgress = (p: number | null) => {
               progress.progress = p ?? 0
               //console.log('progress', photo.id, progress.value)

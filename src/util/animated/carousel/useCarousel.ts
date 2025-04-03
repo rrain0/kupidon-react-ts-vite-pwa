@@ -51,6 +51,7 @@ export type UseGalleryProps = {
   onFinish?: Callback1<ProgressEvent> | undefined
 }
 
+// TODO rename to useCarouselProgress
 export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   const {
     itemsCnt,

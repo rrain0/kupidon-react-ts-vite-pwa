@@ -43,7 +43,7 @@ import { DateU } from 'src/util/date/DateU'
 import { MockData } from 'src/_mock-data/MockData'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
 import { FileU } from 'src/util/file/FileU'
-import { Progress } from 'src/util/Progress'
+import { StageProgress } from '@util/StageProgress.ts'
 import { useTimeout } from 'src/util/react/useTimeout'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
@@ -162,7 +162,7 @@ const SummaryPage = React.memo(() => {
     
     ;(async () => {
       try {
-        const progress = new Progress(2, [90, 10])
+        const progress = new StageProgress(2, [90, 10])
         const onProgress = (p: number | null) => {
           progress.progress = p ?? 0
           //console.log('progress', photo.id, progress.value)

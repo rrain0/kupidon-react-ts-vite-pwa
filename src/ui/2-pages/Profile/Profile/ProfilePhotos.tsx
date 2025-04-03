@@ -36,7 +36,7 @@ import { RangeU } from 'src/util/common/RangeU'
 import { FileU } from 'src/util/file/FileU.ts'
 import { DataUrl } from 'src/util/DataUrl.ts'
 import { ImageU } from 'src/util/file/ImageU.ts'
-import { Progress } from 'src/util/Progress.ts'
+import { StageProgress } from '@util/StageProgress.ts'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useTimeout } from 'src/util/react/useTimeout.ts'
@@ -610,7 +610,7 @@ const onFilesSelectedBuilder = (
         
         ;(async() => {
           try {
-            const progress = new Progress(2, [95, 5])
+            const progress = new StageProgress(2, [95, 5])
             const onProgress = (p: number | null) => {
               progress.progress = p ?? 0
               //console.log('progress',progress.value)

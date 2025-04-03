@@ -5,6 +5,7 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Getter = TypeU.Getter
 
 
+
 /*
   Хук, который занимается преобразованием позиции пальца в прогресс драгания.
   
@@ -17,6 +18,7 @@ import Getter = TypeU.Getter
   т.к. хранится начальный прогресс (startProgress) и текущий прогресс (deltaProgress),
   которые не привязаны к пикселям.
 */
+
 
 
 // dPx -> dProgress -> dValue
@@ -43,6 +45,7 @@ export type UpdateDragProgressProps = {
   dy: number
 }
 
+// TODO extract x,y and rename to useTrackProgress
 export const useDragProgress = ({
   getTrackProps,
 }: UseDragProgressProps) => {

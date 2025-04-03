@@ -3,7 +3,7 @@ import heic2any from 'heic2any'
 import { isSafari, isMobileSafari } from 'react-device-detect'
 import { FileU } from 'src/util/file/FileU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { Progress } from 'src/util/Progress.ts'
+import { StageProgress } from 'src/util/StageProgress.ts'
 import CallbackParam = TypeU.Callback1
 import trimExtension = FileU.trimExtension
 
@@ -24,7 +24,7 @@ export namespace ImageU {
     //console.log('imgFile',imgFile)
     
     const ctrl = options?.abortCtrl
-    const progress = new Progress()
+    const progress = new StageProgress()
     const notifyProgress = () => options?.onProgress?.(progress.value)
     
     

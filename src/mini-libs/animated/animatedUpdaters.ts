@@ -11,7 +11,7 @@ import {
 import isnumber = TypeU.isnumber
 import ObjectMap = ObjectU.ObjectMap
 import Callback1 = TypeU.Callback1
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import RecordPu = TypeU.RecordPu
 import Setter = TypeU.Setter
 
@@ -46,130 +46,113 @@ const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
 
 
 
-export type ImgAttrsUpdaters = Puro<{
+export type ImgAttrsUpdatersExplicit = Pu<{
   src: (value: string) => void
 }>
+export type ImgAttrsUpdaters = ImgAttrsUpdatersExplicit
 const createImgAttrsUpdaters = (
   imgRef: React.RefObject<HTMLImageElement>,
   animatedImgAttrs: AnimatedImgAttrs = { },
-): ImgAttrsUpdaters => ({
-  ...'src' in animatedImgAttrs && {
-    src: (value: string) => {
-      const el = imgRef.current
-      if (el) {
-        el.src = value
+): ImgAttrsUpdaters => {
+  
+  const updaters = { } as ImgAttrsUpdaters
+  
+  for (const attr in animatedImgAttrs) {
+    if (attr === 'src') {
+      updaters[attr] = (value: string) => {
+        const el = imgRef.current
+        if (el) {
+          el.src = value
+        }
       }
-    },
-  },
-})
+    }
+    else {
+      updaters[attr] = (value: string) => {
+        const el = imgRef.current
+        if (el) {
+          el.style[attr] = value
+        }
+      }
+    }
+  }
+  
+  return updaters
+}
 
 
-export type ElemStyleUpdaters = Puro<{
+
+export type ElemStyleUpdatersExplicit = Pu<{
   transform: (value: string) => void
   translate: (value: string) => void
-  rotate: (value: string) => void
-  scale: (value: string) => void
-  opacity: (value: string) => void
-  top: (value: string) => void
-  right: (value: string) => void
-  bottom: (value: string) => void
-  left: (value: string) => void
-  zIndex: (value: string) => void
+  rotate: (value: string | number) => void
+  scale: (value: string | number) => void
+  opacity: (value: string | number) => void
+  top: (value: string | number) => void
+  right: (value: string | number) => void
+  bottom: (value: string | number) => void
+  left: (value: string | number) => void
+  zIndex: (value: string | number) => void
 }>
+export type ElemStyleUpdatersRest = Pu<{
+  [Prop in Exclude<keyof CSSStyleDeclaration, keyof ElemStyleUpdatersExplicit>]: (value: string) => void
+}>
+export type ElemStyleUpdaters = ElemStyleUpdatersExplicit & ElemStyleUpdatersRest
 
 const createElemStyleUpdaters = (
   elemRef: React.RefObject<HTMLElement>,
   animatedElemStyle: AnimatedElemStyle = { },
-): ElemStyleUpdaters => ({
-  ...'transform' in animatedElemStyle && {
-    transform: (value: string) => {
-      const el = elemRef.current
-      if (el) {
-        el.style.transform = value
-      }
-    },
-  },
-  ...'translate' in animatedElemStyle && {
-    translate: (value: string) => {
-      const el = elemRef.current
-      if (el) {
-        el.style.translate = value
-      }
-    },
-  },
-  ...'rotate' in animatedElemStyle && {
-    rotate: (value: string) => {
-      const el = elemRef.current
-      if (el) {
-        el.style.rotate = value
-      }
-    },
-  },
-  ...'scale' in animatedElemStyle && {
-    scale: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        value = `${value}`
-        el.style.scale = value
-      }
-    },
-  },
-  ...'opacity' in animatedElemStyle && {
-    opacity: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        value = `${value}`
-        el.style.opacity = value
-      }
-    },
-  },
+): ElemStyleUpdaters => {
   
-  ...'top' in animatedElemStyle && {
-    top: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        if (isnumber(value)) value = `${value}px`
-        el.style.top = value
+  const updaters = { } as ElemStyleUpdaters
+  
+  for (const prop in animatedElemStyle) {
+    if (prop === 'transform' || prop === 'translate') {
+      updaters[prop] = (value: string) => {
+        const el = elemRef.current
+        if (el) {
+          el.style[prop] = value
+        }
       }
-    },
-  },
-  ...'right' in animatedElemStyle && {
-    right: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        if (isnumber(value)) value = `${value}px`
-        el.style.right = value
+    }
+    else if (prop === 'rotate') {
+      updaters[prop] = (value: string | number) => {
+        const el = elemRef.current
+        if (el) {
+          if (isnumber(value)) value = `${value}turn`
+          el.style[prop] = value
+        }
       }
-    },
-  },
-  ...'bottom' in animatedElemStyle && {
-    bottom: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        if (isnumber(value)) value = `${value}px`
-        el.style.bottom = value
+    }
+    else if (prop === 'scale' || prop === 'opacity' || prop === 'zIndex') {
+      updaters[prop] = (value: string | number) => {
+        const el = elemRef.current
+        if (el) {
+          value = `${value}`
+          el.style[prop] = value
+        }
       }
-    },
-  },
-  ...'left' in animatedElemStyle && {
-    left: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        if (isnumber(value)) value = `${value}px`
-        el.style.left = value
+    }
+    else if (prop === 'top' || prop === 'right' || prop === 'bottom' || prop === 'left') {
+      updaters[prop] = (value: string | number) => {
+        const el = elemRef.current
+        if (el) {
+          if (isnumber(value)) value = `${value}px`
+          el.style[prop] = value
+        }
       }
-    },
-  },
-  ...'zIndex' in animatedElemStyle && {
-    zIndex: (value: string | number) => {
-      const el = elemRef.current
-      if (el) {
-        value = `${value}`
-        el.style.zIndex = value
+    }
+    else {
+      updaters[prop] = (value: string) => {
+        const el = elemRef.current
+        if (el) {
+          el.style[prop] = value
+        }
       }
-    },
-  },
-})
+    }
+  }
+  
+  return updaters
+}
 
 
 
@@ -204,7 +187,6 @@ const useUpdateUpdaters = (
 
 
 
-// TODO Animated - make default event handler if unknown property
 export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
   setState: Setter<S>,
   animated: AnimatedComponentState<S>,
@@ -222,6 +204,7 @@ export const useUpdateElemStyleUpdaters = (
   useUpdateUpdaters(animated, updaters)
 }
 
+// TODO Animated - make any attr type ???
 export const useUpdateImgAttrsUpdaters = (
   imgRef: React.RefObject<HTMLImageElement>,
   animated?: AnimatedImgAttrs,
