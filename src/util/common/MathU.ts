@@ -10,7 +10,7 @@ export namespace MathU {
   /**
    * Функция округления
    * @param n Значение
-   * @param scale Масштаб
+   * @param scale - округлить до {scale} числа после запятой
    * @returns {number}
    */
   export const round = (n: number, scale: number = 0): number => {
