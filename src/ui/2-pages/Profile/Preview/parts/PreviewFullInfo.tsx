@@ -1,7 +1,6 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -12,7 +11,7 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
+import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
@@ -29,7 +28,6 @@ import GenderIc = SvgIconsPack.GenderIc
 import CalendarIc = SvgIconsPack.CalendarIc
 import DumbbellIc = SvgIconsPack.DumbbellIc
 import RulerCornerIc = SvgIconsPack.RulerCornerIc
-import FormValues = ProfilePageValidation.FormValues
 
 
 
@@ -37,20 +35,21 @@ import FormValues = ProfilePageValidation.FormValues
 export type PreviewFullInfoProps = ClassStyle & Children & Puro<{
   isOpen: boolean
   close: Callback
-  profile: FormValues
+  name: string
+  birthDate: string
+  gender: GenderOptionValues
+  aboutMe: string
 }>
 export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   const {
     isOpen = false,
     close,
-    profile,
-  } = props
-  const {
     name,
     birthDate,
     gender,
     aboutMe,
-  } = profile ?? { }
+  } = props
+  
   const match = 'XX'
   const tests = 'XX'
   const height = '175'
@@ -82,7 +81,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     })(),
     
     aboutMe: titleText.aboutMe,
-  }), [profile, titleText, optionText])
+  }), [name, birthDate, gender, aboutMe, titleText, optionText])
   
   const nameAge = [name, age].filter(it => it).join(', ')
   
@@ -113,7 +112,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
         ic: <GenderIc css={SvgIconS6.t(infoIcS)} />,
       },
     ]
-  }, [profile, uiText])
+  }, [name, birthDate, gender, aboutMe, uiText])
   
   
   return (

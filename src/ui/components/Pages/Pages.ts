@@ -52,7 +52,7 @@ export namespace Pages {
     ${pageCol};
     ${p => pageGradColor(p.theme)};
   `
-  export const TabsPageGrad = styled.main`
+  export const FullscreenPageGrad = styled.main`
     ${pageFillViewport};
     ${p => pageGradColor(p.theme)}
   `

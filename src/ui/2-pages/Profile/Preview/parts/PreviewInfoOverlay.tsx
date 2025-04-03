@@ -14,7 +14,7 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
@@ -24,11 +24,12 @@ import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
 import attrExists = TypeU.attrExists
+import abs = EmotionCommon.abs
 
 
 
 
-export type PreviewInfoOverlayProps = ClassStyle & Puro<{
+export type PreviewInfoOverlayProps = ClassStyle & Pu<{
   isDragging: boolean
   photoProgress: AnimatedProperty<number>
   photosCnt: number
@@ -141,8 +142,7 @@ export default PreviewInfoOverlay
 
 
 const PreviewInfoBox = styled.div`
-  position: absolute;
-  inset: 0;
+  ${abs};
   z-index: 10;
   display: grid;
   grid:

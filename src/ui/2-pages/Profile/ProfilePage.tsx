@@ -441,7 +441,7 @@ const ProfilePage = React.memo(() => {
   
   return (
     <>
-      <Pages.TabsPageGrad>
+      <Pages.FullscreenPageGrad>
         <>
           <TabsBox
             ref={setItemsBoxElem}
@@ -581,7 +581,7 @@ const ProfilePage = React.memo(() => {
           /> } */}
         
         </>
-      </Pages.TabsPageGrad>
+      </Pages.FullscreenPageGrad>
     </>
   )
 })

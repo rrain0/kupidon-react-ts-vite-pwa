@@ -19,6 +19,7 @@ import exists = TypeU.exists
 import notExists = TypeU.notExists
 import Callback1 = TypeU.Callback1
 import noop = TypeU.noop
+import round3 = MathU.round3
 
 
 
@@ -195,11 +196,15 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     let p = getStartProgressX() + getDeltaProgressX()
     const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
     p = boundP(p)
+    // здесь округление нужно, потому что вычисление прогресса от движения имеет операцию деления
+    p = round3(p)
     setStartProgressX(p)
     
     let itemP = getStartItemProgress() + getDeltaProgressX()
     const boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
     itemP = boundItemP(itemP)
+    // здесь округление нужно, потому что вычисление прогресса от движения имеет операцию деления
+    itemP = round3(itemP)
     setStartItemProgress(itemP)
     
     setDeltaProgressX(0)

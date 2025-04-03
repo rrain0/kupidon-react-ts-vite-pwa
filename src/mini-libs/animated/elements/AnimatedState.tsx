@@ -7,7 +7,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import {
   useUpdateComponentStateUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import ObjectMap = ObjectU.ObjectMap
 
 
@@ -16,7 +16,7 @@ import ObjectMap = ObjectU.ObjectMap
 
 type AnimatedStateProps<S extends Record<string, any>> = {
   animatedState: AnimatedComponentState<S>,
-} & Puro<{
+} & Pu<{
   children: (state: S) => React.ReactNode
 }>
 

@@ -2,15 +2,16 @@ import React from 'react'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 
 
 
 
-export type MyComponentProps = ClassStyle & Children & Puro<{
+export type MyComponentProps =Pu<{
   prop: number
-}>
+}> & ClassStyle & Children
+
 export const MyComponent = React.memo((props: MyComponentProps) => {
   const {
     className,
