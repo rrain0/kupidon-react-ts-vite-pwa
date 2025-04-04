@@ -152,6 +152,7 @@ const ProfilePage = React.memo(() => {
           newValues.initialValues.photos, [...s.initialValues.photos, ...s.photos],
           (initialPhoto, oldPhoto) => ({
             ...initialPhoto,
+            isInited: true,
             dataUrl: oldPhoto.dataUrl,
             isReady: oldPhoto.isReady,
             download: oldPhoto.download,
@@ -165,6 +166,7 @@ const ProfilePage = React.memo(() => {
             //console.log('photo',photo)
             return {
               ...newValues.initialValues.photos[photo.remoteI],
+              isInited: true,
               isReady: photo.isReady,
               compression: photo.compression,
             } satisfies ProfilePhoto

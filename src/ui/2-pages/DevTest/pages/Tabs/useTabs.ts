@@ -9,9 +9,9 @@ import React, {
   useState,
 } from 'react'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { ViewProps } from 'src/util/view/ViewProps.ts'
+import { ViewProps } from '@util/view/ViewProps.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { RangeU } from 'src/util/common/RangeU'
+import { RangeU } from '@util/common/RangeU.ts'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback

@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 import { useLockAppGestures } from '@util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { TabIdx, TabsState, useTabs } from 'src/ui/components/Tabs/useTabs.ts'
+import { TabIdx, TabsState, useTabs } from 'src/ui/2-pages/DevTest/pages/Tabs/useTabs.ts'
 import Setter = TypeU.Setter
 import row = EmotionCommon.row
 import contents = EmotionCommon.contents
@@ -31,7 +31,7 @@ export type TabsRefElement = HTMLDivElement
 export type TabsProps = TabsRefsProps & TabsCustomProps & TabsForwardRefProps
 
 
-
+// TODO remove - replicate spring animation and remove
 const Tabs = React.memo(React.forwardRef<TabsRefElement, TabsProps>((props, forwardedRef) => {
   const {
     tabsState,

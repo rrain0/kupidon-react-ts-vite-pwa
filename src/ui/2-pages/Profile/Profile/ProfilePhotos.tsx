@@ -251,7 +251,8 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
       [images[index]]
     )
   } */
-  //useEffect(()=>console.log(`images`,images), [images])
+  
+  useEffect(() => console.log(`images`, [...images]), [images])
   
   //console.log('canClick',canClick)
   
@@ -277,7 +278,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                 
                 
                 <div css={contents}
-                  {...function() {
+                  {...(() => {
                     const onPointerDown = (ev: React.PointerEvent) => {
                       if (ev.buttons === 1) {
                         ev.currentTarget.releasePointerCapture(ev.pointerId)
@@ -297,7 +298,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                       onPointerUp: onPointerRemove,
                       onPointerOut: onPointerRemove,
                     }
-                  }()}
+                  })()}
                   onClick={ev => {
                     if (canClick && !im.isEmpty) photoOptions.open()
                   }}
@@ -334,11 +335,14 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                                   </div>
                                 )
                               
-                              if (!canShowFetchProgress
-                                && im.type === 'remote'
-                                && !im.isReady
-                                && !im.isEmpty
-                              )
+                              if (!canShowFetchProgress && (
+                                !im.isInited
+                                || (
+                                  im.type === 'remote'
+                                  && !im.isReady
+                                  && !im.isEmpty
+                                )
+                              ))
                                 return (
                                   <div css={imPlaceholderBoxS}>
                                     <SparkingLoadingLine />

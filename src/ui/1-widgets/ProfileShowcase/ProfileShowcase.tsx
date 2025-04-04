@@ -19,7 +19,6 @@ import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfo
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU'
-import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
@@ -29,7 +28,6 @@ import flexC = EmotionCommon.flexC
 import fill = EmotionCommon.fill
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
-import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
 import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc

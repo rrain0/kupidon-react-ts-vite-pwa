@@ -1,5 +1,5 @@
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { useCallback, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import RootRoute = AppRoutes.RootRoute
@@ -53,16 +53,23 @@ export const useProfileTab = () => {
     return getTabByPathSegment(tab)
   }, [tab])
   
-  const tabIdx = tabData?.i
-  const setTabIdx = useCallback((i: number) => {
-    const tabData = getTabByIndex(i)
+  const tabI = tabData?.i
+  
+  
+  const [newTabI, setNewTabI] = useState(tabI)
+  
+  useEffect(() => setNewTabI(tabI), [tabI])
+  
+  useEffect(() => {
+    if (!newTabI) return
+    const tabData = getTabByIndex(newTabI)
     if (!tabData) return
     navigate(
       tabData.route(userId)[fullAnySearchParams](search),
       { replace: true },
     )
-    // todo implement
-  }, [search, userId])
+  }, [newTabI])
   
-  return [tabIdx, setTabIdx] as const
+  
+  return [tabI, setNewTabI] as const
 }

@@ -3,9 +3,9 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import Tab from 'src/ui/components/Tabs/Tab.tsx'
-import Tabs from 'src/ui/components/Tabs/Tabs.tsx'
-import { TabIdx, TabsState } from 'src/ui/components/Tabs/useTabs.ts'
+import Tab from 'src/ui/2-pages/DevTest/pages/Tabs/Tab.tsx'
+import Tabs from 'src/ui/2-pages/DevTest/pages/Tabs/Tabs.tsx'
+import { TabIdx, TabsState } from 'src/ui/2-pages/DevTest/pages/Tabs/useTabs.ts'
 
 
 

@@ -8,7 +8,8 @@ export interface Media {
   type:
     | 'remote' // media from remote server
     | 'local' // media from a local device (file from device filesystem)
-  isEmpty: boolean // media can be empty, indicating that user haven't uploaded any yet
+  isEmpty: boolean // media can be empty, indicating that user has not photo or other media
+  isInited?: boolean | undefined // metadata from server was fetched
   
   id: string
   remoteUrl: string
