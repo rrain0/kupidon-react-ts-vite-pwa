@@ -27,7 +27,8 @@ import Getter = TypeU.Getter
 
 
 export type CarouselEvent = {
-  last: boolean
+  first?: boolean | undefined
+  last?: boolean | undefined
   startP: number
   startItemP: number
   deltaP: number
@@ -61,6 +62,7 @@ export type UseCarouselProps = {
   initialStartItemProgress?: number | undefined
   initialDeltaProgress?: number | undefined
   
+  onStart?: CarouselEventCallback | undefined
   onFinish?: CarouselEventCallback | undefined
 }
 
@@ -82,11 +84,13 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     noDrag,
     noLoop,
     
+    onStart: _onStart,
     onFinish: _onFinish,
   } = props
   
   const isX = axis === 'x'
   const isY = axis === 'y'
+  const onStart = useAsCallback(_onStart ?? noop)
   const onFinish = useAsCallback(_onFinish ?? noop)
   
   
@@ -109,7 +113,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const animatedDeltaProgress = useAnimatedValue(initialDeltaProgress)
   
   // Events log
-  const [getEventsLog, setEventsLog] = useRefGetSet(undefined as any[] | undefined)
+  const [getEventsLog, setEventsLog] = useRefGetSet([] as CarouselEvent[])
   
   
   
@@ -145,6 +149,16 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     if (notExists(nextP)) return
     
     if (p !== nextP) {
+      if (!getEventsLog().length) {
+        const ev: CarouselEvent = {
+          first: true,
+          startP: getStartProgress(),
+          startItemP: getStartItemProgress(),
+          deltaP: getDeltaProgress(),
+        }
+        onStart?.(ev)
+        setEventsLog([ev])
+      }
       const nextDeltaP = nextP - startP
       if (noAnimation) {
         setDeltaProgress(nextDeltaP)
@@ -163,15 +177,18 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
           onUpdate: ({ value }) => setDeltaProgress(value),
         })
       }
-      
-      onFinish({
+    }
+    
+    if (getEventsLog().length) {
+      const ev: CarouselEvent = {
         last: true,
         startP: getStartProgress(),
         startItemP: getStartItemProgress(),
         deltaP: getDeltaProgress(),
-      })
+      }
+      onFinish?.(ev)
+      setEventsLog([])
     }
-    
   })
   
   
@@ -277,6 +294,14 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         setIsDragging(true)
         setCanStartDrag(false)
         setWasDragged(true)
+        const ev: CarouselEvent = {
+          first: true,
+          startP: getStartProgress(),
+          startItemP: getStartItemProgress(),
+          deltaP: getDeltaProgress(),
+        }
+        onStart?.(ev)
+        setEventsLog([ev])
       }
       if (!getIsDragging() && !getCanStartDrag()) {
         unlockTouchAction()

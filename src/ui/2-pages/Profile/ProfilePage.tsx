@@ -377,7 +377,7 @@ const ProfilePage = React.memo(() => {
   
   
   const [tabIdx, setTabIdx] = useProfileTab()
-  
+  const [isStable, setIsStable] = useState(true)
   
   
   const itemsCnt = 3
@@ -387,6 +387,9 @@ const ProfilePage = React.memo(() => {
   const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(null, onElemSetWh)
   const getTrackProps = createTrackPropsGetter(itemsBoxRef)
   
+  const onStart: CarouselEventCallback = () => {
+    setIsStable(false)
+  }
   const onFinish: CarouselEventCallback = ({ startP, startItemP, deltaP }) => {
     const { pos0ItemI } = getClampedCarouselProps({
       startProgressX: startP,
@@ -397,6 +400,7 @@ const ProfilePage = React.memo(() => {
       startViewI: 0,
     })
     setTabIdx(pos0ItemI)
+    setIsStable(true)
   }
   
   const {
@@ -419,6 +423,7 @@ const ProfilePage = React.memo(() => {
     inverted: true,
     noDrag: itemsCnt <= 1,
     noLoop: true,
+    onStart,
     onFinish,
   })
   
@@ -504,9 +509,7 @@ const ProfilePage = React.memo(() => {
                                 ${safePageContentPaddings};
                               }
                             `}
-                            // TODO Animation to state
-                            //showVertical={!(['dragging', 'snapping'] as TabsState[]).includes(tabsProps.tabsState)}
-                            showVertical={true}
+                            showVertical={isStable}
                           >
                             
                             <ProfilePageTabHeaderContext.Provider
