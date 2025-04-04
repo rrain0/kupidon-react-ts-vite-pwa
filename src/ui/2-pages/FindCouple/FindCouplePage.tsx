@@ -94,7 +94,7 @@ const FindCouplePage = React.memo(() => {
     viewsCnt,
     getTrackProps,
     axis: 'x',
-    inverted: true,
+    inverted: false,
     //noDrag: itemsCnt <= 1,
   })
   
@@ -128,38 +128,57 @@ const FindCouplePage = React.memo(() => {
               key={viewI}
               animatedStyle={{
                 zIndex: animatedProps.map(ap => {
-                  const { viewPosI, pCurr, dir } = ap(viewI)
+                  let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
+                  if (dir === -1) {
+                    viewPosI = loopViewI(viewPosI - 1)
+                    pCurr = -(100 - pCurr)
+                  }
+                  if (viewPosI === 0) {
+                    console.log('viewPosI', viewPosI, 'viewI', viewI - 1, 'pCurr', pCurr, 'dir', dir)
+                  }
                   if (viewPosI === -1) return 0
                   if (viewPosI === 0) return 20
-                  if (viewPosI === 1) return -1
+                  if (viewPosI === 1) return -1 // hide it
+                }),
+                transform: animatedProps.map(ap => {
+                  let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
+                  if (dir === -1) {
+                    viewPosI = loopViewI(viewPosI - 1)
+                    pCurr = -(100 - pCurr)
+                  }
+                  if (viewPosI === 0) {
+                    const a = RangeU.map(pCurr, [0, 100], [0, 0.03])
+                    return `translateY(500%) rotate(${a}turn) translateY(-500%)`
+                  }
+                  return `translateX(0%)`
                 }),
                 scale: animatedProps.map(ap => {
-                  const { viewPosI, pCurr, dir } = ap(viewI)
+                  let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
+                  if (dir === -1) {
+                    viewPosI = loopViewI(viewPosI - 1)
+                    pCurr = (100 - pCurr)
+                  }
                   if (viewPosI === -1) {
-                    return 0.9 + 0.1 * (100 - pCurr) / 100
+                    return 0.9 + 0.1 * pCurr / 100
                   }
                   return 1
                 }),
                 opacity: animatedProps.map(ap => {
-                  const { viewPosI, pCurr, dir } = ap(viewI)
+                  let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
+                  if (dir === -1) {
+                    viewPosI = loopViewI(viewPosI - 1)
+                    pCurr = (100 - pCurr)
+                  }
                   if (viewPosI === -1) {
-                    return (100 - pCurr) / 100
+                    return pCurr / 100
                   }
                   if (viewPosI === 0) {
-                    return 1 - RangeU.mapClamp((100 - pCurr), [0, 100], [0, 1.5], [0, 1])
+                    return 1 - RangeU.mapClamp(pCurr, [0, 100], [0, 1.5], [0, 1])
                   }
                   if (viewPosI === 1) {
                     return 0
                   }
                   return 1
-                }),
-                transform: animatedProps.map(ap => {
-                  const { viewPosI, pCurr, dir } = ap(viewI)
-                  if (viewPosI === 0) {
-                    const a = RangeU.map((100 - pCurr), [0, 100], [0, 0.03])
-                    return `translateY(500%) rotate(${a}turn) translateY(-500%)`
-                  }
-                  return `translateX(0%)`
                 }),
               }}
             >
@@ -206,5 +225,6 @@ const StacksFrame = styled.div`
 const AnimatedStack = styled(AnimatedDiv)`
   ${abs};
 `
+AnimatedStack.displayName = 'AnimatedStack'
 
 

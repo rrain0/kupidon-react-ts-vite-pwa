@@ -1,7 +1,9 @@
 import { MathU } from 'src/util/common/MathU.ts'
 import { RangeU } from 'src/util/common/RangeU.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
 import mod = MathU.mod
 import round3 = MathU.round3
+import Sign = TypeU.Sign
 
 
 
@@ -37,6 +39,10 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
     startItemI = 0,
   } = props
   
+  startP = round3(startP)
+  startItemP = round3(startItemP)
+  dp = round3(dp)
+  
   const viewFirstI = startViewI
   const viewEndI = viewFirstI + viewsCnt
   const viewLastI = viewEndI - 1
@@ -57,14 +63,14 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   const loopItemP = (v: number) => RangeU.loop(v, [0, itemEndP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = round3(startP + dp)
+  const pos0P = startP + dp
   const pCurr = mod(pos0P, 100)
   const dir = Math.sign(dp)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = round3(startItemP + dp)
+  const pos0ItemP = startItemP + dp
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
@@ -80,6 +86,7 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   
   return {
     pos0P, pCurr, dir, pos0PBase,
+    loopViewI,
     pos0ViewI,
     pos0ItemP, pos0ItemI, pos0ItemHalfI,
     viewPosI, viewPosP,
@@ -113,6 +120,10 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
     startItemI = 0,
   } = props
   
+  startP = round3(startP)
+  startItemP = round3(startItemP)
+  dp = round3(dp)
+  
   const viewFirstI = startViewI
   const viewEndI = viewFirstI + viewsCnt
   const viewLastI = viewEndI - 1
@@ -135,14 +146,14 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   const clampItemP = (v: number) => RangeU.clamp(v, [0, itemLastP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = clampViewP(loopViewP(round3(startP)) + round3(dp))
+  const pos0P = clampViewP(loopViewP(startP) + dp)
   const pCurr = mod(pos0P, 100)
-  const dir = Math.sign(dp)
+  const dir = Math.sign(dp) as Sign
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = clampItemP(loopItemP(round3(startItemP)) + round3(dp))
+  const pos0ItemP = clampItemP(loopItemP(startItemP) + dp)
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
@@ -156,11 +167,11 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
   
-  
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosP, viewItemI })
   
   return {
     pos0P, pCurr, dir, pos0PBase,
+    loopViewI,
     pos0ViewI,
     pos0ItemP, pos0ItemI, pos0ItemHalfI,
     viewPosI, viewPosP,
