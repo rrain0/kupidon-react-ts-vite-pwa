@@ -1,16 +1,11 @@
 import styled from '@emotion/styled'
-import { useDrag } from '@use-gesture/react'
+import { getLoopedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
-import { getDragDirection } from '@util/drag/getDragDirection.ts'
-import { useIntervalProgress } from '@util/progress/useIntervalProgress.ts'
-import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
+import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { useBool } from '@util/react-state/useBool.ts'
-import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
-import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
@@ -23,12 +18,9 @@ import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInf
 import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { useLockAppGestures } from 'src/util/app/useLockAppGestures'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { MathU } from 'src/util/common/MathU'
 import { RangeU } from 'src/util/common/RangeU'
-import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
-import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { useResizeRef } from 'src/util/view/useResizeRef'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
@@ -38,7 +30,6 @@ import fill = EmotionCommon.fill
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import mod = MathU.mod
-import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
@@ -48,13 +39,14 @@ import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 
 
 
+
 // Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
 //  Если вьюха отобразилась, то она всегда отображает одну картинку,
 //  покуда картинка источника по данному индексу не изменится,
 //  то есть пока вьюха не переедет из низа колоды наверх или наоборот.
 // Дальше этот range 0..3 мапается в range источника картинок,
 //  чтобы вычислить правильный индекс картинки
-// Key отображаемых элементов всегда одинаковый - индекс в spring array
+// Key отображаемых элементов всегда одинаковый - индекс в array
 
 /*
  TODO
@@ -64,7 +56,8 @@ import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
  */
 
 // Максимальное кол-во отображаемых фоток.
-// Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3, потому что 4ая прозрачная.
+// Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3,
+// потому что 4ая прозрачная.
 const maxVisiblePhotosCnt = 4
 
 
@@ -113,193 +106,34 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   
-  const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
-  const [isDragging, getIsDragging, setIsDragging] = useStateAndRef(false)
-  useNoSelect(isDragging)
-  const canUseGestures = useLockAppGestures(isDragging)
   
-  
+  const itemsCnt = photosCnt
+  const viewsCnt = visiblePhotosCnt
   
   const photosBoxRef = useRef<HTMLDivElement>(null)
   const getTrackProps = createTrackPropsGetter(photosBoxRef)
   
   
-  
-  
-  // start progress y in (..0..100..) * visiblePhotosCnt
-  const [getStartProgressY, setStartProgressY] = useRefGetSet(0)
-  // start progress for photos in (..0..100..) * availablePhotos.length
-  const [getStartPhotoProgress, setStartPhotoProgress] = useRefGetSet(0)
-  // curr progress y in (..0..100..) from start progress y
-  const [getCurrProgressY, setCurrProgressY] = useRefGetSet(0)
-  const animatedCurrProgressY = useAnimatedValue(0)
-  
-  
-  
-  const updateViews = () => {
-    animatedCurrProgressY.set(getCurrProgressY())
-  }
-  
-  const finishUpdateViews = (vely = 0) => {
-    updateViews()
-    
-    // px/ms => %height/s
-    const velyPercent = vely * 1000 / getTrackProps().h * 100
-    const vThreshold = 70 // %height/s
-    
-    const sp = getStartProgressY()
-    const cp = getCurrProgressY()
-    const p = sp + cp
-    
-    const pICurr = p % 100
-    const pI = p - pICurr
-    
-    const [nextPICurr, vel] = (() => {
-      if (Math.abs(velyPercent) >= vThreshold) {
-        if (pICurr > 0) {
-          if (velyPercent >= 0) return [100, velyPercent]
-          return [0, velyPercent]
-        }
-        if (pICurr < 0) {
-          if (velyPercent >= 0) return [0, velyPercent]
-          return [-100, velyPercent]
-        }
-      }
-      else {
-        if (pICurr <= -50) return [-100, -vThreshold]
-        if (pICurr < 0) return [0, vThreshold]
-        if (pICurr >= 50) return [100, vThreshold]
-        if (pICurr > 0) return [0, -vThreshold]
-      }
-      return [0, 0]
-    })()
-    
-    const pNext = pI + nextPICurr
-    //console.log('pNext', pNext)
-    if (p !== pNext) {
-      const nextCp = pNext - sp
-      // Начальная скорость
-      const v0 = vel
-      const t1 = 0.2 // s
-      // Начальное ускорение
-      const a0 = 2 * (pNext - p - v0 * t1) / t1**2
-      
-      //console.log('s0', cp, 't1', t1, 'a0', a0, 'v0', v0)
-      
-      // TODO
-      //  1) Если чуть-чуть отодвинуть фото и отпустить, то оно отпружинивает за порог
-      //  2) Надо чтобы анимация поднятия колоды в конце анимации перелистывания была медленней
-      void animatedCurrProgressY.animate({
-        startValue: cp,
-        animationFun: ({ startValue, time: t }) => {
-          // Начальный путь
-          const s0 = startValue
-          t /= 1000 // ms => s
-          
-          const finished = t >= t1
-          if (finished) t = t1
-          let s = a0 * t**2 / 2 + v0 * t + s0
-          s = MathU.round3(s)
-          setCurrProgressY(s)
-          return { value: s, finished }
-        },
-      })
-    }
-  }
-  
-  
-  // works as immediate effect
-  useMemo(() => finishUpdateViews(), [availablePhotos])
-  
-  const getIntervalProps = () => {
-    const { y, h } = getTrackProps()
-    return { start: y, len: h }
-  }
   const {
-    updateIntervalProgress,
-    getIntervalDeltaProgress,
-  } = useIntervalProgress({ getIntervalProps })
-  
-  
-  const mergeProgress = () => {
-    const p = getStartProgressY() + getCurrProgressY()
-    const viewMaxP = (visiblePhotosCnt <= 1 ? 0 : visiblePhotosCnt) * 100
-    setStartProgressY(MathU.round3(RangeU.loop(p, [0, viewMaxP])))
-    const photoP = getStartPhotoProgress() + getCurrProgressY()
-    // Если имеем 0 или 1 фото, то листать не можем, поэтому считаем что 0 прогресс
-    const photoMaxP = (photosCnt <= 1 ? 0 : photosCnt) * 100
-    setStartPhotoProgress(MathU.round3(RangeU.loop(photoP, [0, photoMaxP])))
-    setCurrProgressY(0)
-  }
-  
-  const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
-  const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const { getWasDragged, setWasDragged } = useAppPointerAction()
-  
-  
-  const onAnyDrag = (cpy: number, vertical: boolean, drag: boolean) => {
-    if (isPhotosDraggable && vertical) {
-      lockTouchAction()
-      if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
-        setIsDragging(true)
-        setCanStartDrag(false)
-        setWasDragged(true)
-      }
-      if (!getIsDragging() && !getCanStartDrag()) {
-        unlockTouchAction()
-      }
-    }
-    if (isDragging) {
-      if (getNeedMerge()) {
-        mergeProgress()
-        setNeedMerge(false)
-      }
-      setCurrProgressY(cpy)
-      updateViews()
-    }
-  }
-  const [getOnAnyDrag] = useAsRefGet(onAnyDrag)
-  
-  const onDragStart = () => { }
-  const [getOnDragStart] = useAsRefGet(onDragStart)
-  
-  const onDragEnd = (vely: number) => {
-    if (isDragging) finishUpdateViews(vely)
-    setNeedMerge(true)
-    setCanStartDrag(true)
-    unlockTouchAction()
-    setIsDragging(false)
-  }
-  const [getOnDragEnd] = useAsRefGet(onDragEnd)
-  
-  
-  
-  // noinspection JSVoidFunctionReturnValueUsed
-  const onTrackDrag = useDrag(gesture => {
-    const {
-      first, active, last,
-      xy: [vpx, vpy], // viewport x / y coordinates
-      movement: [mx, my],
-      delta: [dx, dy],
-      velocity: [velxabs, velyabs], // px/ms (nonnegative)
-      direction: [dirx, diry], // -1, 0, 1, positive diry is from top to bottom
-      currentTarget,
-    } = gesture
-    const [velx, vely] = [dirx * velxabs, diry * velyabs]
+    isDragging,
+    getIsDragging,
+    getWasDragged,
+    onTrackDrag,
     
-    const { vertical, drag } = getDragDirection({ mx, my })
+    getStartProgress,
+    getStartItemProgress,
+    getDeltaProgress,
+    animatedDeltaProgress,
     
-    updateIntervalProgress({ reset: first, value: vpy, dValue: dy })
-    
-    // onAnyDrag
-    getOnAnyDrag()(getIntervalDeltaProgress(), vertical, drag)
-    // onDragStart
-    if (first) { getOnDragStart()() }
-    // onDragging
-    if (!first && !last) { }
-    // onDragEnd
-    if (last) { getOnDragEnd()(vely) }
-  })
+    animateTo,
+  } = useCarousel({
+    itemsCnt,
+    viewsCnt,
+    getTrackProps,
+    axis: 'y',
+    inverted: false,
+    noDrag: !isPhotosDraggable,
+  }, [availablePhotos])
   
   
   const [isInfoOpen, openInfo, closeInfo] = useBool(false)
@@ -325,19 +159,19 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   const animatedPhotoProgress = useMemo(() => {
-    return animatedCurrProgressY.map(cp => getStartPhotoProgress() + cp)
-  }, [animatedCurrProgressY])
+    return animatedDeltaProgress.map(cp => getStartItemProgress() + cp)
+  }, [animatedDeltaProgress])
   
-  const animatedProps = animatedCurrProgressY.map(cp => (i: number) => {
-    const p = getStartProgressY() + cp
-    const photoP = getStartPhotoProgress() + cp
-    //console.log('p', p, 'photoP', photoP)
-    // displayedIndex from top of stack to bottom of stack
-    const displayedI = RangeU.loop(i - Math.floor(p / 100), [0, visiblePhotosCnt])
-    const photoI = RangeU.loop(Math.floor(photoP / 100) + displayedI, [0, photosCnt])
-    // progressCurrent - nonnegative
-    const pCurr = mod(p, 100)
-    return { p, photoP, displayedI, photoI, pCurr }
+  const animatedProps = animatedDeltaProgress.map(dp => (viewI: number) => {
+    return  getLoopedCarouselProps({
+      startProgressX: getStartProgress(),
+      startItemProgress: getStartItemProgress(),
+      deltaProgressX: dp,
+      itemsCnt,
+      viewsCnt,
+      startViewI: 0,
+      currViewI: viewI,
+    })
   })
   
   
@@ -369,35 +203,35 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                   key={i}
                   animatedStyle={{
                     zIndex: animatedProps.map(ap => {
-                      const { p, photoP, displayedI, pCurr } = ap(i)
-                      const z = -displayedI + visiblePhotosCnt - 1
+                      const { viewPosI } = ap(i)
+                      const z = -viewPosI + visiblePhotosCnt - 1
                       return z
                     }),
                     transform: animatedProps.map(ap => {
-                      const { p, photoP, displayedI, pCurr } = ap(i)
+                      const { viewPosI, pCurr } = ap(i)
                       const y = (() => {
-                        if (displayedI === 0) return pCurr
-                        return -(displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                        if (viewPosI === 0) return pCurr
+                        return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
                       })()
                       return `translateY(${y}%)`
                     }),
                     scale: animatedProps.map(ap => {
-                      const { p, photoP, displayedI, pCurr } = ap(i)
+                      const { viewPosI, pCurr } = ap(i)
                       const s = (() => {
-                        if (displayedI === 0) return 100
-                        return 100 - 5 * (displayedI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                        if (viewPosI === 0) return 100
+                        return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
                       })()
                       return s / 100
                     }),
                     opacity: animatedProps.map(ap => {
-                      const { p, photoP, displayedI, pCurr } = ap(i)
+                      const { viewPosI, pCurr } = ap(i)
                       const o = (() => {
-                        if (displayedI === 0) return 100 - RangeU.map(
+                        if (viewPosI === 0) return 100 - RangeU.map(
                           pCurr,
                           [0, 30, 100],
                           [0, 0, 100],
                         )
-                        if (displayedI === visiblePhotosCnt - 1) return RangeU.map(
+                        if (viewPosI === visiblePhotosCnt - 1) return RangeU.map(
                           pCurr,
                           [0, 80, 100],
                           [0, 0, 100],
@@ -412,9 +246,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                     <AnimatedPhoto
                       animatedAttrs={{
                         src: animatedProps.map(ap => {
-                          const { displayedI, photoI } = ap(i)
-                          //console.log('displayedI', displayedI, 'photoI', photoI,)
-                          return availablePhotos[photoI]?.dataUrl ?? ''
+                          const { viewItemI } = ap(i)
+                          return availablePhotos[viewItemI]?.dataUrl ?? ''
                         }),
                       }}
                     />
