@@ -8,8 +8,7 @@ import round3 = MathU.round3
 
 export const getItemIProps = (itemI: number, startItemI = 0) => {
   return {
-    // TODO refactor merge and remove minus
-    pos0P: -(startItemI + itemI) * 100,
+    pos0P: (startItemI + itemI) * 100,
   }
 }
 
@@ -58,13 +57,13 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   const loopItemP = (v: number) => RangeU.loop(v, [0, itemEndP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = -round3(startP + dp)
+  const pos0P = round3(startP + dp)
   const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = -round3(startItemP + dp)
+  const pos0ItemP = round3(startItemP + dp)
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
@@ -135,13 +134,13 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   const clampItemP = (v: number) => RangeU.clamp(v, [0, itemLastP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = clampViewP(loopViewP(-round3(startP)) - round3(dp))
+  const pos0P = clampViewP(loopViewP(round3(startP)) + round3(dp))
   const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = clampItemP(loopItemP(-round3(startItemP)) - round3(dp))
+  const pos0ItemP = clampItemP(loopItemP(round3(startItemP)) + round3(dp))
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   

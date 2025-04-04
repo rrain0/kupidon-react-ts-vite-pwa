@@ -141,7 +141,7 @@ const FindCouplePage = React.memo(() => {
                     return (100 - pCurr) / 100
                   }
                   if (viewPosI === 0) {
-                    return 1 - RangeU.mapClamp((100 - pCurr) / 100, [0, 1], [0, 3], [0, 1])
+                    return 1 - RangeU.mapClamp((100 - pCurr) / 100, [0, 1], [0, 1.5], [0, 1])
                   }
                   if (viewPosI === 1) {
                     return 0

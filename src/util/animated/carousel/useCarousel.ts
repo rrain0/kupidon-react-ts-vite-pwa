@@ -13,7 +13,6 @@ import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
-import { useLayoutEffect, useMemo } from 'react'
 import { useEvent } from 'src/util/react/useEvent.ts'
 import Puro = TypeU.Puro
 import exists = TypeU.exists
@@ -115,8 +114,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     const pBase = p - pCurr
     
     ;[nextP, vel0] = (() => {
-      if (exists(next)) return [pBase - 100, -vThreshold]
-      if (exists(prev)) return [pBase + 100, vThreshold]
+      if (exists(next)) return [pBase + 100, +vThreshold]
+      if (exists(prev)) return [pBase - 100, -vThreshold]
       //if (exists(nextItemI)) return [0, 0]
       if (exists(nextP)) return [
         nextP,
@@ -281,9 +280,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     } = gesture
     const [velx, vely] = [dirx * velxabs, diry * velyabs]
     
-    const vpVal = isX ? vpx : vpy
-    const dVal = isX ? dx : dy
-    const vel = isX ? velx : vely
+    const vpVal = (isX ? vpx : vpy) * (inverted ? -1 : 1)
+    const dVal = (isX ? dx : dy) * (inverted ? -1 : 1)
+    const vel = (isX ? velx : vely) * (inverted ? -1 : 1)
     
     const { horizontal, vertical, drag } = getDragDirection({ mx, my })
     

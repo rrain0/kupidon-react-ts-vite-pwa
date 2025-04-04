@@ -5,15 +5,11 @@ import styled from '@emotion/styled'
 import { getClampedCarouselProps, getItemIProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
-import { MathU } from '@util/common/MathU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import { getViewProps } from '@util/view/ViewProps.ts'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { Colors } from 'src/ui-data/Colors.ts'
 import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
@@ -54,7 +50,6 @@ import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import safePageContentPaddings = Pages.pageAddSafeInsets
-import fill = EmotionCommon.fill
 import blobToDataUrl = FileU.blobToDataUrl
 import fetchToBlob = FileU.fetchToBlob
 import withThrottle = AsyncU.withThrottle
@@ -65,11 +60,9 @@ import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
-import arr = ArrayU.arrOfIndices
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import abs = EmotionCommon.abs
-import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
 import exists = TypeU.exists
 
@@ -426,14 +419,7 @@ const ProfilePage = React.memo(() => {
   }, [tabIdx])
   
   const goToTab = useCallback((tabI: number) => {
-    // TODO починить
-    console.log('tabI', tabI)
-    let p = getItemIProps(tabI).pos0P
-    if (p < 0) p -= 100
-    console.log('tabIP', p)
-    animateTo({
-      p: getItemIProps(tabI).pos0P,
-    })
+    animateTo({ p: getItemIProps(tabI).pos0P })
   }, [])
   
   
