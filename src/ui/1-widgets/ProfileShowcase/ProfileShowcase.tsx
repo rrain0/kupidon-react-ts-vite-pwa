@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import { useDrag } from '@use-gesture/react'
+import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { getDragDirection } from '@util/drag/getDragDirection.ts'
-import { useDragProgress } from '@util/drag/useDragProgress.ts'
+import { useIntervalProgress } from '@util/progress/useIntervalProgress.ts'
 import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useBool } from '@util/react-state/useBool.ts'
@@ -120,14 +121,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   const photosBoxRef = useRef<HTMLDivElement>(null)
-  const getTrackProps = () => {
-    const pb = photosBoxRef.current
-    if (pb) {
-      const p = getViewProps(photosBoxRef.current)
-      return { x: p.x, y: p.y, w: p.w, h: p.h }
-    }
-    return { x: 0, y: 0, w: 0, h: 0 }
-  }
+  const getTrackProps = createTrackPropsGetter(photosBoxRef)
   
   
   
@@ -217,10 +211,14 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   // works as immediate effect
   useMemo(() => finishUpdateViews(), [availablePhotos])
   
+  const getIntervalProps = () => {
+    const { y, h } = getTrackProps()
+    return { start: y, len: h }
+  }
   const {
-    updateDragProgress,
-    getDragDeltaProgressY,
-  } = useDragProgress({ getTrackProps })
+    updateIntervalProgress,
+    getIntervalDeltaProgress,
+  } = useIntervalProgress({ getIntervalProps })
   
   
   const mergeProgress = () => {
@@ -291,10 +289,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     
     const { vertical, drag } = getDragDirection({ mx, my })
     
-    updateDragProgress({ first, vpx, vpy, dx, dy })
+    updateIntervalProgress({ reset: first, value: vpy, dValue: dy })
     
     // onAnyDrag
-    getOnAnyDrag()(getDragDeltaProgressY(), vertical, drag)
+    getOnAnyDrag()(getIntervalDeltaProgress(), vertical, drag)
     // onDragStart
     if (first) { getOnDragStart()() }
     // onDragging

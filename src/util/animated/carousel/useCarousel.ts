@@ -6,7 +6,7 @@ import { MathU } from 'src/util/common/MathU.ts'
 import { RangeU } from 'src/util/common/RangeU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
-import { GetTrackProps, useDragProgress } from 'src/util/drag/useDragProgress.ts'
+import { useIntervalProgress } from 'src/util/progress/useIntervalProgress.ts'
 import { useAppPointerAction } from 'src/util/pointer/useAppPointerAction.ts'
 import { useNoSelect } from 'src/util/pointer/useNoSelect.ts'
 import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
@@ -20,6 +20,7 @@ import notExists = TypeU.notExists
 import Callback1 = TypeU.Callback1
 import noop = TypeU.noop
 import round3 = MathU.round3
+import Getter = TypeU.Getter
 
 
 
@@ -41,10 +42,12 @@ export type AnimateToParams = Puro<{
   vel0: number
 }>
 
-export type UseGalleryProps = {
+export type TrackProps = { x: number, y: number, w: number, h: number }
+
+export type UseCarouselProps = {
   itemsCnt: number
   viewsCnt: number
-  getTrackProps: GetTrackProps
+  getTrackProps: Getter<TrackProps>
   
   noDrag?: boolean | undefined
   
@@ -52,7 +55,7 @@ export type UseGalleryProps = {
 }
 
 // TODO rename to useCarouselProgress
-export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
+export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const {
     itemsCnt,
     viewsCnt,
@@ -186,10 +189,14 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
   // works as immediate effect
   useMemo(() => updateViewsAndFinish(), deps)
   
+  const getIntervalProps = () => {
+    const { x, w } = getTrackProps()
+    return { start: x, len: w }
+  }
   const {
-    updateDragProgress,
-    getDragDeltaProgressX,
-  } = useDragProgress({ getTrackProps })
+    updateIntervalProgress,
+    getIntervalDeltaProgress,
+  } = useIntervalProgress({ getIntervalProps })
   
   
   // TODO carousel - merge when noLoop (clamp)
@@ -265,10 +272,10 @@ export const useCarousel = (props: UseGalleryProps, deps: any[] = []) => {
     
     const { horizontal, drag } = getDragDirection({ mx, my })
     
-    updateDragProgress({ first, vpx, vpy, dx, dy })
+    updateIntervalProgress({ reset: first, value: vpx, dValue: dx })
     
     // onEachDrag
-    applyOnEachDrag(getDragDeltaProgressX(), horizontal, drag)
+    applyOnEachDrag(getIntervalDeltaProgress(), horizontal, drag)
     // onDragStart
     if (first) { applyOnDragStart() }
     // onDragging

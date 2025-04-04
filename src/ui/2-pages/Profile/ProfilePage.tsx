@@ -49,7 +49,7 @@ import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFail
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts.tsx'
 import { useFormValuesProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
-import { StageProgress } from '@util/StageProgress.ts'
+import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import safePageContentPaddings = Pages.pageAddSafeInsets

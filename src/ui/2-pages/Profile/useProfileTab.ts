@@ -36,6 +36,7 @@ const getTabByIndex = (i: number) => tabs.find(it => it.i === i)
 
 export const useProfileTab = () => {
   const navigate = useNavigate()
+  const [search] = useSearchParams()
   
   const userIdTabRoute = RootRoute.profile.id.userId[use](':userId').profile[use](':tab')
   const params = useMatch(userIdTabRoute[full]())!.params!
@@ -46,7 +47,6 @@ export const useProfileTab = () => {
     console.log('tab', tab)
   }, [tab]) */
   
-  const [search] = useSearchParams()
   
   const tabData = useMemo(() => {
     if (!tab) return undefined
