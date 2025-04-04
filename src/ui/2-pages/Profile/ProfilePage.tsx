@@ -2,10 +2,11 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { getClampedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
+import { getClampedCarouselProps, getItemIProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { MathU } from '@util/common/MathU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
@@ -70,6 +71,7 @@ import col = EmotionCommon.col
 import abs = EmotionCommon.abs
 import mod = MathU.mod
 import arrOfIndices = ArrayU.arrOfIndices
+import exists = TypeU.exists
 
 
 
@@ -415,14 +417,24 @@ const ProfilePage = React.memo(() => {
   })
   
   useEffect(() => {
-    //animateTo({  })
+    if (exists(tabIdx)) animateTo({
+      p: getItemIProps(tabIdx).pos0P,
+      noAnimation: true,
+    })
   }, [tabIdx])
+  
+  const goToTab = useCallback((tabI: number) => {
+    console.log('tabI', tabI)
+    animateTo({
+      p: getItemIProps(tabI).pos0P,
+    })
+  }, [])
   
   
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
     return getClampedCarouselProps({
-      getStartProgressX,
-      getStartItemProgress,
+      startProgressX: getStartProgressX(),
+      startItemProgress: getStartItemProgress(),
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
@@ -499,7 +511,8 @@ const ProfilePage = React.memo(() => {
                                 getStartProgressX,
                                 getStartItemProgress,
                                 animatedDeltaProgressX,
-                                headers: headers,
+                                headers,
+                                goToTab,
                               }}
                             >
                               {[

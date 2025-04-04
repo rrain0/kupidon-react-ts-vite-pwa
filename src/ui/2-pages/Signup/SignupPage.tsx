@@ -15,7 +15,7 @@ import React, {
   useEffect,
   useMemo,
 } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DateTime } from '@util/DateTime.ts'
 import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'

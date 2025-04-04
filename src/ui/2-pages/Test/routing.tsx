@@ -4,7 +4,7 @@ import {
   Navigate,
   RouteObject,
   useSearchParams,
-} from 'react-router-dom'
+} from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'

@@ -23,6 +23,7 @@ export type ProfilePageTabHeaderContextProps = {
   getStartItemProgress: Getter<number>
   animatedDeltaProgressX: AnimatedProperty<number>
   headers: string[]
+  goToTab: (tabI: number) => void
 }
 export const ProfilePageTabHeaderContext = React.createContext({} as ProfilePageTabHeaderContextProps)
 
@@ -44,6 +45,7 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
     getStartItemProgress,
     animatedDeltaProgressX,
     headers,
+    goToTab,
   } = useContext(ProfilePageTabHeaderContext)
   
   /*
@@ -79,8 +81,8 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   
   const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
     const props = getClampedCarouselProps({
-      getStartProgressX,
-      getStartItemProgress,
+      startProgressX: getStartProgressX(),
+      startItemProgress: getStartItemProgress(),
       deltaProgressX: dp,
       itemsCnt,
       viewsCnt,
@@ -155,7 +157,7 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
                   )`,
                 }}
               >
-                <Text>
+                <Text onClick={() => goToTab(itemI)}>
                   {headers[itemI]}
                 </Text>
               </TextBox>
@@ -270,6 +272,7 @@ const Wrap = styled.div`
 const AnimatedHeader = styled(AnimatedDiv)`
   width: 100%;
   ${colC};
+  pointer-events: none;
 `
 
 const TextBox = styled.div`
@@ -282,4 +285,5 @@ const Text = styled.h3`
   color: ${p => p.theme.page.ct3};
   overflow-wrap: anywhere;
   cursor: pointer;
+  pointer-events: auto;
 `

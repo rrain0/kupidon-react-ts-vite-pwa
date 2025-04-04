@@ -4,7 +4,7 @@ import {
   RouteObject,
   RouterProvider,
   useSearchParams,
-} from 'react-router-dom'
+} from 'react-router'
 import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing.tsx'
 import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
@@ -143,27 +143,14 @@ const routingRoot: RouteObject[] = [
     ],
   },
 ]
-const router = createBrowserRouter(routingRoot, {
-  future: {
-    v7_relativeSplatPath: true,
-    v7_fetcherPersist: true,
-    v7_normalizeFormMethod: true,
-    v7_partialHydration: true,
-    v7_skipActionErrorRevalidation: true,
-  },
-})
+const router = createBrowserRouter(routingRoot)
 
 
 
 
 const AppRouting = React.memo(() => {
   return (
-    <RouterProvider router={router}
-      future={{
-        // TODO Router !!! это вызывает флики при переключении табов
-        v7_startTransition: true,
-      }}
-    />
+    <RouterProvider router={router} />
   )
 })
 export default AppRouting

@@ -1,6 +1,6 @@
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useCallback, useMemo } from 'react'
-import { useMatch, useNavigate, useSearchParams } from 'react-router-dom'
+import { useMatch, useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full

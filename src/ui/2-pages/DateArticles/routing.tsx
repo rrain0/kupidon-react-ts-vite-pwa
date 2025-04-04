@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
+import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import {

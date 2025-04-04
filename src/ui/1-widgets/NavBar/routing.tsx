@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import NavBar from 'src/ui/1-widgets/NavBar/NavBar.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'

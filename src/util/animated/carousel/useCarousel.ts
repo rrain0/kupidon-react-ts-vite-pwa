@@ -29,8 +29,6 @@ import Getter = TypeU.Getter
 
 export type ProgressEvent = {
   last: boolean
-  //pos0ViewI: number
-  pos0ItemI: number
 }
 
 
@@ -38,8 +36,8 @@ export type AnimateToParams = Puro<{
   next: boolean
   prev: boolean
   p: number
-  itemI: number
   vel0: number
+  noAnimation: boolean
 }>
 
 export type TrackProps = { x: number, y: number, w: number, h: number }
@@ -96,12 +94,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   // %width/s => px/ms
   const getVelPx = (progress: number) => progress / 100 * getTrackProps().w / 1000
   
-  const animateTo = async ({
-    next,
-    prev,
-    p: nextP,
-    //itemI: nextItemI, // TODO Gallery
-    vel0,
+  const animateTo = useAsCallback(async ({
+    next, prev, p: nextP, vel0, noAnimation,
   }: AnimateToParams) => {
     const pStart = getStartProgressX()
     const pDelta = getDeltaProgressX()
@@ -123,24 +117,28 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     if (p !== nextP) {
       const nextPDelta = nextP - pStart
-      await animatedDeltaProgressX.animate({
-        startValue: pDelta,
-        animationFun: createSpringAnimation({
-          //mass: 1, tension: 170, friction: 10,
-          mass: 1, tension: 120, friction: 7,
-          //mass: 5, tension: 60, friction: 5,
-          initVelocity: vel0,
-          endValue: nextPDelta,
-        }),
-        onUpdate: ({ value }) => setDeltaProgressX(value),
-      })
+      if (noAnimation) {
+        setDeltaProgressX(nextPDelta)
+        animatedDeltaProgressX.set(nextPDelta)
+      }
+      else {
+        await animatedDeltaProgressX.animate({
+          startValue: pDelta,
+          animationFun: createSpringAnimation({
+            //mass: 1, tension: 170, friction: 10,
+            mass: 1, tension: 120, friction: 7,
+            //mass: 5, tension: 60, friction: 5,
+            initVelocity: vel0,
+            endValue: nextPDelta,
+          }),
+          onUpdate: ({ value }) => setDeltaProgressX(value),
+        })
+      }
+      
+      onFinish({ last: true })
     }
     
-    // TODO remove itemP from here - it must be calculated outside
-    const itemP = getStartItemProgress() + getDeltaProgressX()
-    const pos0ItemI = RangeU.loop(itemsCnt - Math.floor(itemP / 100), [0, itemsCnt])
-    onFinish({ last: true, pos0ItemI })
-  }
+  })
   
   
   
@@ -297,7 +295,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getDeltaProgressX,
     animatedDeltaProgressX,
     
-    animateTo: useAsCallback(animateTo),
+    animateTo,
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'

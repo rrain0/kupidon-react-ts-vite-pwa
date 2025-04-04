@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { RouteObject } from 'react-router-dom'
+import { RouteObject } from 'react-router'
 import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
 
 const BowAndArrowsPage = React.lazy(

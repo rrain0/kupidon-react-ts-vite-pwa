@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { RouteObject } from 'react-router-dom'
+import { RouteObject } from 'react-router'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 
 const LoginPage = React.lazy(() => import('./LoginPage'))

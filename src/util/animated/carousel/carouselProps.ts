@@ -1,17 +1,24 @@
 import { MathU } from 'src/util/common/MathU.ts'
 import { RangeU } from 'src/util/common/RangeU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import Getter = TypeU.Getter
 import mod = MathU.mod
 import round3 = MathU.round3
 
 
 
 
+export const getItemIProps = (itemI: number, startItemI = 0) => {
+  return {
+    // TODO refactor merge and remove minus
+    pos0P: -(startItemI + itemI) * 100,
+  }
+}
+
+
+
 
 export type GetLoopedCarouselProps = {
-  getStartProgressX: Getter<number>
-  getStartItemProgress: Getter<number>
+  startProgressX: number
+  startItemProgress: number
   deltaProgressX: number
   itemsCnt: number
   viewsCnt: number
@@ -21,8 +28,8 @@ export type GetLoopedCarouselProps = {
 }
 export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   let {
-    getStartProgressX,
-    getStartItemProgress,
+    startProgressX: startP,
+    startItemProgress: startItemP,
     deltaProgressX: dp,
     itemsCnt,
     viewsCnt,
@@ -51,13 +58,13 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   const loopItemP = (v: number) => RangeU.loop(v, [0, itemEndP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = -round3(getStartProgressX() + dp)
+  const pos0P = -round3(startP + dp)
   const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = -round3(getStartItemProgress() + dp)
+  const pos0ItemP = -round3(startItemP + dp)
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   
@@ -85,8 +92,8 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
 
 
 export type GetClampedCarouselProps = {
-  getStartProgressX: Getter<number>
-  getStartItemProgress: Getter<number>
+  startProgressX: number
+  startItemProgress: number
   deltaProgressX: number
   itemsCnt: number
   viewsCnt: number
@@ -96,8 +103,8 @@ export type GetClampedCarouselProps = {
 }
 export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   let {
-    getStartProgressX,
-    getStartItemProgress,
+    startProgressX: startP,
+    startItemProgress: startItemP,
     deltaProgressX: dp,
     itemsCnt,
     viewsCnt,
@@ -128,13 +135,13 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   const clampItemP = (v: number) => RangeU.clamp(v, [0, itemLastP])
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = clampViewP(loopViewP(-round3(getStartProgressX())) - round3(dp))
+  const pos0P = clampViewP(loopViewP(-round3(startP)) - round3(dp))
   const pCurr = mod(pos0P, 100)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
   
-  const pos0ItemP = clampItemP(loopItemP(-round3(getStartItemProgress())) - round3(dp))
+  const pos0ItemP = clampItemP(loopItemP(-round3(startItemP)) - round3(dp))
   const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
   

@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DateArticleItem } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
-import { Navigate, RouteObject, useSearchParams } from 'react-router-dom'
+import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute

@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react-state/useBool.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import Callback = TypeU.Callback
 
