@@ -252,7 +252,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
     )
   } */
   
-  useEffect(() => console.log(`images`, [...images]), [images])
+  //useEffect(() => console.log(`images`, [...images]), [images])
   
   //console.log('canClick',canClick)
   

@@ -127,36 +127,37 @@ const FindCouplePage = React.memo(() => {
             <AnimatedStack
               key={viewI}
               animatedStyle={{
-                zIndex: animatedProps.map(ap => (ap(viewI).viewPosI + 1) * 20),
+                zIndex: animatedProps.map(ap => {
+                  const { viewPosI, pCurr, dir } = ap(viewI)
+                  if (viewPosI === -1) return 0
+                  if (viewPosI === 0) return 20
+                  if (viewPosI === 1) return -1
+                }),
                 scale: animatedProps.map(ap => {
-                  const { viewPosI, pCurr } = ap(viewI)
+                  const { viewPosI, pCurr, dir } = ap(viewI)
                   if (viewPosI === -1) {
                     return 0.9 + 0.1 * (100 - pCurr) / 100
                   }
                   return 1
                 }),
                 opacity: animatedProps.map(ap => {
-                  const { viewPosI, pCurr } = ap(viewI)
+                  const { viewPosI, pCurr, dir } = ap(viewI)
                   if (viewPosI === -1) {
                     return (100 - pCurr) / 100
                   }
                   if (viewPosI === 0) {
-                    return 1 - RangeU.mapClamp((100 - pCurr) / 100, [0, 1], [0, 1.5], [0, 1])
+                    return 1 - RangeU.mapClamp((100 - pCurr), [0, 100], [0, 1.5], [0, 1])
                   }
                   if (viewPosI === 1) {
                     return 0
                   }
                   return 1
                 }),
-                // make transform-origin & transform: rotate
                 transform: animatedProps.map(ap => {
-                  const { viewPosI, pCurr } = ap(viewI)
+                  const { viewPosI, pCurr, dir } = ap(viewI)
                   if (viewPosI === 0) {
-                    // make pointer-events: none;
-                    return `translateX(${100 - pCurr}%)`
-                  }
-                  if (viewPosI === 1) {
-                    return `translateX(200%)`
+                    const a = RangeU.map((100 - pCurr), [0, 100], [0, 0.03])
+                    return `translateY(500%) rotate(${a}turn) translateY(-500%)`
                   }
                   return `translateX(0%)`
                 }),

@@ -8,12 +8,12 @@ import { TypeU } from '@util/common/TypeU.ts'
 import {
   useUpdateElemStyleUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import Children = ReactU.Children
 
 
 
-type AnimatedDivExtraProps = Puro<{
+type AnimatedDivExtraProps = Pu<{
   animatedStyle: AnimatedElemStyle
 }> & Children
 

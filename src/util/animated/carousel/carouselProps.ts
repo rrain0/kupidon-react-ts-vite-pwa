@@ -59,6 +59,7 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = round3(startP + dp)
   const pCurr = mod(pos0P, 100)
+  const dir = Math.sign(dp)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
@@ -78,7 +79,7 @@ export const getLoopedCarouselProps = (props: GetLoopedCarouselProps) => {
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosP, viewItemI })
   
   return {
-    pos0P, pCurr, pos0PBase,
+    pos0P, pCurr, dir, pos0PBase,
     pos0ViewI,
     pos0ItemP, pos0ItemI, pos0ItemHalfI,
     viewPosI, viewPosP,
@@ -136,6 +137,7 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = clampViewP(loopViewP(round3(startP)) + round3(dp))
   const pCurr = mod(pos0P, 100)
+  const dir = Math.sign(dp)
   const pos0PBase = pos0P - pCurr
   
   const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
@@ -158,7 +160,7 @@ export const getClampedCarouselProps = (props: GetClampedCarouselProps) => {
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosP, viewItemI })
   
   return {
-    pos0P, pCurr, pos0PBase,
+    pos0P, pCurr, dir, pos0PBase,
     pos0ViewI,
     pos0ItemP, pos0ItemI, pos0ItemHalfI,
     viewPosI, viewPosP,

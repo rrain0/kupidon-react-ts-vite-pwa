@@ -3,7 +3,6 @@ import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import Pu = TypeU.Pu
 
 
-export type AnimatedAny = AnimatedProperty<any>
 export type AnimatedString = AnimatedProperty<string>
 export type AnimatedNumber = AnimatedProperty<number>
 export type AnimatedStringOrNumber = AnimatedString | AnimatedNumber | AnimatedProperty<string | number>
