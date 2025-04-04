@@ -19,9 +19,9 @@ import colC = EmotionCommon.colC
 
 
 export type ProfilePageTabHeaderContextProps = {
-  getStartProgressX: Getter<number>
+  getStartProgress: Getter<number>
   getStartItemProgress: Getter<number>
-  animatedDeltaProgressX: AnimatedProperty<number>
+  animatedDeltaProgress: AnimatedProperty<number>
   headers: string[]
   goToTab: (tabI: number) => void
 }
@@ -41,9 +41,9 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   
   
   const {
-    getStartProgressX,
+    getStartProgress,
     getStartItemProgress,
-    animatedDeltaProgressX,
+    animatedDeltaProgress,
     headers,
     goToTab,
   } = useContext(ProfilePageTabHeaderContext)
@@ -79,9 +79,9 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   const itemsCnt = headers.length
   const viewsCnt = itemsCnt
   
-  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
+  const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     const props = getClampedCarouselProps({
-      startProgressX: getStartProgressX(),
+      startProgressX: getStartProgress(),
       startItemProgress: getStartItemProgress(),
       deltaProgressX: dp,
       itemsCnt,

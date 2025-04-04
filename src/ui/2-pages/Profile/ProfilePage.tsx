@@ -402,16 +402,18 @@ const ProfilePage = React.memo(() => {
     getWasDragged,
     onTrackDrag,
     
-    getStartProgressX,
+    getStartProgress,
     getStartItemProgress,
-    getDeltaProgressX,
-    animatedDeltaProgressX,
+    getDeltaProgress,
+    animatedDeltaProgress,
     
     animateTo,
   } = useCarousel({
     itemsCnt,
     viewsCnt: viewsCnt,
     getTrackProps,
+    axis: 'x',
+    inverted: true,
     noDrag: itemsCnt <= 1,
     onFinish,
   })
@@ -424,16 +426,20 @@ const ProfilePage = React.memo(() => {
   }, [tabIdx])
   
   const goToTab = useCallback((tabI: number) => {
+    // TODO починить
     console.log('tabI', tabI)
+    let p = getItemIProps(tabI).pos0P
+    if (p < 0) p -= 100
+    console.log('tabIP', p)
     animateTo({
       p: getItemIProps(tabI).pos0P,
     })
   }, [])
   
   
-  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
+  const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getClampedCarouselProps({
-      startProgressX: getStartProgressX(),
+      startProgressX: getStartProgress(),
       startItemProgress: getStartItemProgress(),
       deltaProgressX: dp,
       itemsCnt,
@@ -508,9 +514,9 @@ const ProfilePage = React.memo(() => {
                             
                             <ProfilePageTabHeaderContext.Provider
                               value={{
-                                getStartProgressX,
+                                getStartProgress,
                                 getStartItemProgress,
-                                animatedDeltaProgressX,
+                                animatedDeltaProgress,
                                 headers,
                                 goToTab,
                               }}

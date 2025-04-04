@@ -13,7 +13,8 @@ import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
-import { useMemo } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
+import { useEvent } from 'src/util/react/useEvent.ts'
 import Puro = TypeU.Puro
 import exists = TypeU.exists
 import notExists = TypeU.notExists
@@ -46,6 +47,8 @@ export type UseCarouselProps = {
   itemsCnt: number
   viewsCnt: number
   getTrackProps: Getter<TrackProps>
+  axis: 'x' | 'y'
+  inverted: boolean
   
   noDrag?: boolean | undefined
   
@@ -58,10 +61,14 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     itemsCnt,
     viewsCnt,
     getTrackProps,
+    axis,
+    inverted,
     noDrag,
     onFinish: _onFinish,
   } = props
   
+  const isX = axis === 'x'
+  const isY = axis === 'y'
   const onFinish = useAsCallback(_onFinish ?? noop)
   
   
@@ -74,38 +81,42 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   
-  // start progress x for views in (..0..100..) * visibleViewsCnt
-  const [getStartProgressX, setStartProgressX] = useRefGetSet(0)
+  // start progress for views in (..0..100..) * visibleViewsCnt
+  const [getStartProgress, setStartProgress] = useRefGetSet(0)
   // start progress for items in (..0..100..) * itemsCnt
   const [getStartItemProgress, setStartItemProgress] = useRefGetSet(0)
-  // delta progress x in (..0..100..) from start progress x
-  const [getDeltaProgressX, setDeltaProgressX] = useRefGetSet(0)
+  // delta progress  in (..0..100..) from start progress
+  const [getDeltaProgress, setDeltaProgress] = useRefGetSet(0)
   
-  const animatedDeltaProgressX = useAnimatedValue(0)
+  const animatedDeltaProgress = useAnimatedValue(0)
   
   // Events log
-  const [getEventsLog, setEventsLog] = useRefGetSet(undefined as [] | undefined)
+  const [getEventsLog, setEventsLog] = useRefGetSet(undefined as any[] | undefined)
   
   
   
-  const vThreshold = 150 // %width/s
-  // px/ms => %width/s
-  const getVelPercent = (velPx: number) => velPx * 1000 / getTrackProps().w * 100
-  // %width/s => px/ms
-  const getVelPx = (progress: number) => progress / 100 * getTrackProps().w / 1000
+  const vThreshold = 150 // %size/s
+  // px/ms => %size/s
+  const getVelPercent = (velPx: number) => {
+    return velPx * 1000 / getTrackProps()[isX ? 'w' : 'h'] * 100
+  }
+  // %size/s => px/ms
+  const getVelPx = (progress: number) => {
+    return progress / 100 * getTrackProps()[isX ? 'w' : 'h'] / 1000
+  }
   
   const animateTo = useAsCallback(async ({
     next, prev, p: nextP, vel0, noAnimation,
   }: AnimateToParams) => {
-    const pStart = getStartProgressX()
-    const pDelta = getDeltaProgressX()
-    const p = pStart + pDelta
-    const pICurr = p % 100
-    const pI = p - pICurr
+    const startP = getStartProgress()
+    const deltaP = getDeltaProgress()
+    const p = startP + deltaP
+    const pCurr = p % 100
+    const pBase = p - pCurr
     
     ;[nextP, vel0] = (() => {
-      if (exists(next)) return [pI - 100, -vThreshold]
-      if (exists(prev)) return [pI + 100, vThreshold]
+      if (exists(next)) return [pBase - 100, -vThreshold]
+      if (exists(prev)) return [pBase + 100, vThreshold]
       //if (exists(nextItemI)) return [0, 0]
       if (exists(nextP)) return [
         nextP,
@@ -116,22 +127,22 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     if (notExists(nextP)) return
     
     if (p !== nextP) {
-      const nextPDelta = nextP - pStart
+      const nextDeltaP = nextP - startP
       if (noAnimation) {
-        setDeltaProgressX(nextPDelta)
-        animatedDeltaProgressX.set(nextPDelta)
+        setDeltaProgress(nextDeltaP)
+        animatedDeltaProgress.set(nextDeltaP)
       }
       else {
-        await animatedDeltaProgressX.animate({
-          startValue: pDelta,
+        await animatedDeltaProgress.animate({
+          startValue: deltaP,
           animationFun: createSpringAnimation({
             //mass: 1, tension: 170, friction: 10,
             mass: 1, tension: 120, friction: 7,
             //mass: 5, tension: 60, friction: 5,
             initVelocity: vel0,
-            endValue: nextPDelta,
+            endValue: nextDeltaP,
           }),
-          onUpdate: ({ value }) => setDeltaProgressX(value),
+          onUpdate: ({ value }) => setDeltaProgress(value),
         })
       }
       
@@ -143,53 +154,52 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   const updateViews = () => {
-    animatedDeltaProgressX.set(getDeltaProgressX())
+    animatedDeltaProgress.set(getDeltaProgress())
   }
   
-  const updateViewsAndFinish = (velx = 0) => {
+  const updateViewsAndFinish = (vel = 0) => {
     updateViews()
     
-    const velxPercent = getVelPercent(velx)
+    const velPercent = getVelPercent(vel)
     
-    const pStart = getStartProgressX()
-    const pDelta = getDeltaProgressX()
-    const p = pStart + pDelta
-    const pICurr = p % 100
-    const pI = p - pICurr
+    const startP = getStartProgress()
+    const deltaP = getDeltaProgress()
+    const p = startP + deltaP
+    const pCurr = p % 100
+    const pBase = p - pCurr
     
-    const [nextPICurr, vel0Percent] = (() => {
-      if (Math.abs(velxPercent) >= vThreshold) {
-        if (pICurr > 0) {
-          if (velxPercent >= 0) return [100, velxPercent]
-          return [0, velxPercent]
+    const [nextPCurr, vel0Percent] = (() => {
+      if (Math.abs(velPercent) >= vThreshold) {
+        if (pCurr > 0) {
+          if (velPercent >= 0) return [100, velPercent]
+          return [0, velPercent]
         }
-        if (pICurr < 0) {
-          if (velxPercent >= 0) return [0, velxPercent]
-          return [-100, velxPercent]
+        if (pCurr < 0) {
+          if (velPercent >= 0) return [0, velPercent]
+          return [-100, velPercent]
         }
       }
       else {
-        if (pICurr <= -50) return [-100, -vThreshold]
-        if (pICurr < 0) return [0, vThreshold]
-        if (pICurr >= 50) return [100, vThreshold]
-        if (pICurr > 0) return [0, -vThreshold]
+        if (pCurr <= -50) return [-100, -vThreshold]
+        if (pCurr < 0) return [0, vThreshold]
+        if (pCurr >= 50) return [100, vThreshold]
+        if (pCurr > 0) return [0, -vThreshold]
       }
       return [0, 0]
     })()
     
     
     const vel0 = getVelPx(vel0Percent)
-    const nextP = pI + nextPICurr
+    const nextP = pBase + nextPCurr
     void animateTo({ p: nextP, vel0 })
   }
   
   
-  // works as immediate effect
-  useMemo(() => updateViewsAndFinish(), deps)
+  useEvent(() => updateViewsAndFinish(), deps)
   
   const getIntervalProps = () => {
-    const { x, w } = getTrackProps()
-    return { start: x, len: w }
+    const { x, y, w, h } = getTrackProps()
+    return { start: isX ? x : y, len: isX ? w : h }
   }
   const {
     updateIntervalProgress,
@@ -199,21 +209,21 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   // TODO carousel - merge when noLoop (clamp)
   const mergeProgress = () => {
-    let p = getStartProgressX() + getDeltaProgressX()
+    let p = getStartProgress() + getDeltaProgress()
     const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
     p = boundP(p)
     // здесь округление нужно, потому что вычисление прогресса от движения имеет операцию деления
     p = round3(p)
-    setStartProgressX(p)
+    setStartProgress(p)
     
-    let itemP = getStartItemProgress() + getDeltaProgressX()
+    let itemP = getStartItemProgress() + getDeltaProgress()
     const boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
     itemP = boundItemP(itemP)
     // здесь округление нужно, потому что вычисление прогресса от движения имеет операцию деления
     itemP = round3(itemP)
     setStartItemProgress(itemP)
     
-    setDeltaProgressX(0)
+    setDeltaProgress(0)
   }
   
   const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
@@ -221,8 +231,11 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const { getWasDragged, setWasDragged } = useAppPointerAction()
   
   
-  const applyOnEachDrag = useAsCallback((dpx: number, horizontal: boolean, drag: boolean) => {
-    if (!noDrag && horizontal) {
+  const applyOnEachDrag = useAsCallback((
+    dp: number, horizontal: boolean, vertical: boolean, drag: boolean
+  ) => {
+    const directional = isX && horizontal || isY && vertical
+    if (!noDrag && directional) {
       lockTouchAction()
       if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
         setIsDragging(true)
@@ -238,15 +251,15 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         mergeProgress()
         setNeedMerge(false)
       }
-      setDeltaProgressX(dpx)
+      setDeltaProgress(dp)
       updateViews()
     }
   })
   
   const applyOnDragStart = useAsCallback(() => { })
   
-  const applyOnDragEnd = useAsCallback((velx: number) => {
-    if (isDragging) updateViewsAndFinish(velx)
+  const applyOnDragEnd = useAsCallback((vel: number) => {
+    if (isDragging) updateViewsAndFinish(vel)
     setNeedMerge(true)
     setCanStartDrag(true)
     unlockTouchAction()
@@ -268,18 +281,22 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     } = gesture
     const [velx, vely] = [dirx * velxabs, diry * velyabs]
     
-    const { horizontal, drag } = getDragDirection({ mx, my })
+    const vpVal = isX ? vpx : vpy
+    const dVal = isX ? dx : dy
+    const vel = isX ? velx : vely
     
-    updateIntervalProgress({ reset: first, value: vpx, dValue: dx })
+    const { horizontal, vertical, drag } = getDragDirection({ mx, my })
+    
+    updateIntervalProgress({ reset: first, value: vpVal, dValue: dVal })
     
     // onEachDrag
-    applyOnEachDrag(getIntervalDeltaProgress(), horizontal, drag)
+    applyOnEachDrag(getIntervalDeltaProgress(), horizontal, vertical, drag)
     // onDragStart
     if (first) { applyOnDragStart() }
     // onDragging
     if (!first && !last) { }
     // onDragEnd
-    if (last) { applyOnDragEnd(velx) }
+    if (last) { applyOnDragEnd(vel) }
   })
   
   
@@ -290,10 +307,10 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getWasDragged,
     onTrackDrag,
     
-    getStartProgressX,
+    getStartProgress,
     getStartItemProgress,
-    getDeltaProgressX,
-    animatedDeltaProgressX,
+    getDeltaProgress,
+    animatedDeltaProgress,
     
     animateTo,
   }

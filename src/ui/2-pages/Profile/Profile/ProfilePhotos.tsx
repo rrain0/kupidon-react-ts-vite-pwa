@@ -47,7 +47,6 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import abs = EmotionCommon.abs
 import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc = SvgIconsPack.PlusIc
 import contents = EmotionCommon.contents
@@ -71,28 +70,30 @@ const progressAnimDuration = 400 // ms
 
 
 
-const springStyle =
-  (dragIdx: number | undefined = undefined, active = false, dx = 0, dy = 0) =>
-    (index: number/* , ctrl: Controller */) => {
-      if (dragIdx === index && active) return {
-        x: dx,
-        y: dy,
-        opacity: 0.4,
-        //scale: index === 0 ? 0.5 : 1,
-        zIndex: 1,
-        immediate: p => ['zIndex'].includes(p),
-        config: p => ['x', 'y'].includes(p) ? config.stiff : config.default,
-      } satisfies UseSpringProps
-      
-      return {
-        x: 0,
-        y: 0,
-        opacity: 1,
-        //scale: 1,
-        zIndex: 0,
-        immediate: true,
-      } satisfies UseSpringProps
-    }
+const springStyle = (
+  dragIdx?: number | undefined, active = false, dx = 0, dy = 0
+) => (
+  index: number/* , ctrl: Controller */
+) => {
+  if (dragIdx === index && active) return {
+    x: dx,
+    y: dy,
+    opacity: 0.4,
+    //scale: index === 0 ? 0.5 : 1,
+    zIndex: 1,
+    immediate: p => ['zIndex'].includes(p),
+    config: p => ['x', 'y'].includes(p) ? config.stiff : config.default,
+  } satisfies UseSpringProps
+  
+  return {
+    x: 0,
+    y: 0,
+    opacity: 1,
+    //scale: 1,
+    zIndex: 0,
+    immediate: true,
+  } satisfies UseSpringProps
+}
 
 
 
@@ -514,7 +515,7 @@ const photoDimmed = (t: AppTheme.Theme) => css`
   background: #00000099;
 `
 const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
-  ${abs};
+  position: absolute;
   inset: -4px;
   border-radius: calc(14px + 4px);
   border: 10px dashed;
@@ -523,7 +524,7 @@ const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
 const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   pointer-events: none;
 
-  ${abs};
+  position: absolute;
   inset: -7px;
   border: 3px solid transparent;
   border-radius: 20px;

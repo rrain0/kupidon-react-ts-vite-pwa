@@ -48,16 +48,18 @@ const PosterPreview = React.memo(() => {
     getWasDragged,
     onTrackDrag,
     
-    getStartProgressX,
+    getStartProgress,
     getStartItemProgress,
-    getDeltaProgressX,
-    animatedDeltaProgressX,
+    getDeltaProgress,
+    animatedDeltaProgress,
     
     animateTo,
   } = useCarousel({
     itemsCnt,
     viewsCnt,
     getTrackProps,
+    axis: 'x',
+    inverted: true,
     noDrag: itemsCnt <= 1,
   })
   
@@ -71,9 +73,9 @@ const PosterPreview = React.memo(() => {
     void animateTo({ next: true })
   }, [isDragging, wasDraggedOnce])
   
-  const animatedProps = animatedDeltaProgressX.map(dp => (viewI = 0) => {
+  const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getLoopedCarouselProps({
-      startProgressX: getStartProgressX(),
+      startProgressX: getStartProgress(),
       startItemProgress: getStartItemProgress(),
       deltaProgressX: dp,
       itemsCnt,
