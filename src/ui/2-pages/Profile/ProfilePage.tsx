@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { getClampedCarouselProps, getItemIProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
-import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
+import { CarouselEventCallback, useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
@@ -376,10 +376,6 @@ const ProfilePage = React.memo(() => {
   
   const [tabIdx, setTabIdx] = useProfileTab()
   
-  const onFinish = (ev) => {
-    setTabIdx(ev.pos0ItemI)
-  }
-  
   
   
   const itemsCnt = 3
@@ -388,6 +384,18 @@ const ProfilePage = React.memo(() => {
   const onElemSetWh = useCssWhRef()
   const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(null, onElemSetWh)
   const getTrackProps = createTrackPropsGetter(itemsBoxRef)
+  
+  const onFinish: CarouselEventCallback = ({ startP, startItemP, deltaP }) => {
+    const { pos0ItemI } = getClampedCarouselProps({
+      startProgressX: startP,
+      startItemProgress: startItemP,
+      deltaProgressX: deltaP,
+      itemsCnt,
+      viewsCnt,
+      startViewI: 0,
+    })
+    setTabIdx(pos0ItemI)
+  }
   
   const {
     isDragging,
@@ -408,6 +416,7 @@ const ProfilePage = React.memo(() => {
     axis: 'x',
     inverted: true,
     noDrag: itemsCnt <= 1,
+    noLoop: true,
     onFinish,
   })
   

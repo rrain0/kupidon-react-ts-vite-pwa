@@ -17,7 +17,6 @@ import { useEvent } from 'src/util/react/useEvent.ts'
 import Puro = TypeU.Puro
 import exists = TypeU.exists
 import notExists = TypeU.notExists
-import Callback1 = TypeU.Callback1
 import noop = TypeU.noop
 import round3 = MathU.round3
 import Getter = TypeU.Getter
@@ -27,9 +26,13 @@ import Getter = TypeU.Getter
 // Simplicity vs Control balance is hard
 
 
-export type ProgressEvent = {
+export type CarouselEvent = {
   last: boolean
+  startP: number
+  startItemP: number
+  deltaP: number
 }
+export type CarouselEventCallback = (carouselEvent: CarouselEvent) => void
 
 
 export type AnimateToParams = Puro<{
@@ -45,13 +48,20 @@ export type TrackProps = { x: number, y: number, w: number, h: number }
 export type UseCarouselProps = {
   itemsCnt: number
   viewsCnt: number
+  startItemI?: number | undefined
+  startViewI?: number | undefined
   getTrackProps: Getter<TrackProps>
   axis: 'x' | 'y'
   inverted: boolean
   
   noDrag?: boolean | undefined
+  noLoop?: boolean | undefined
   
-  onFinish?: Callback1<ProgressEvent> | undefined
+  initialStartProgress?: number | undefined
+  initialStartItemProgress?: number | undefined
+  initialDeltaProgress?: number | undefined
+  
+  onFinish?: CarouselEventCallback | undefined
 }
 
 // TODO rename to useCarouselProgress
@@ -59,10 +69,19 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const {
     itemsCnt,
     viewsCnt,
+    startItemI = 0,
+    startViewI = 0,
     getTrackProps,
     axis,
     inverted,
+    
+    initialStartProgress = 0,
+    initialStartItemProgress = 0,
+    initialDeltaProgress = 0,
+  
     noDrag,
+    noLoop,
+    
     onFinish: _onFinish,
   } = props
   
@@ -81,13 +100,13 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   // start progress for views in (..0..100..) * visibleViewsCnt
-  const [getStartProgress, setStartProgress] = useRefGetSet(0)
+  const [getStartProgress, setStartProgress] = useRefGetSet(initialStartProgress)
   // start progress for items in (..0..100..) * itemsCnt
-  const [getStartItemProgress, setStartItemProgress] = useRefGetSet(0)
-  // delta progress  in (..0..100..) from start progress
-  const [getDeltaProgress, setDeltaProgress] = useRefGetSet(0)
-  
-  const animatedDeltaProgress = useAnimatedValue(0)
+  const [getStartItemProgress, setStartItemProgress] = useRefGetSet(initialStartItemProgress)
+  // delta progress in (..0..100..) from start progress
+  const [getDeltaProgress, setDeltaProgress] = useRefGetSet(initialDeltaProgress)
+  // animated delta progress in (..0..100..) from start progress
+  const animatedDeltaProgress = useAnimatedValue(initialDeltaProgress)
   
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet(undefined as any[] | undefined)
@@ -145,7 +164,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         })
       }
       
-      onFinish({ last: true })
+      onFinish({
+        last: true,
+        startP: getStartProgress(),
+        startItemP: getStartItemProgress(),
+        deltaP: getDeltaProgress(),
+      })
     }
     
   })
@@ -206,19 +230,32 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   } = useIntervalProgress({ getIntervalProps })
   
   
-  // TODO carousel - merge when noLoop (clamp)
   const mergeProgress = () => {
+    const viewFirstI = startViewI
+    const viewEndI = viewFirstI + viewsCnt
+    const viewLastI = viewEndI - 1
+    const viewFirstP = viewFirstI * 100
+    const viewEndP = viewEndI * 100
+    const viewLastP = viewLastI * 100
+    const loopViewP = (v: number) => RangeU.loop(v, [viewFirstP, viewEndP])
+    const clampViewP = (v: number) => RangeU.clamp(v, [viewFirstP, viewLastP])
+    
     let p = getStartProgress() + getDeltaProgress()
-    const boundP = (v: number) => RangeU.loop(v, [0, viewsCnt * 100])
-    p = boundP(p)
-    // здесь округление нужно, потому что вычисление прогресса от движения имеет операцию деления
+    p = noLoop ? clampViewP(p) : loopViewP(p)
     p = round3(p)
     setStartProgress(p)
     
+    const itemFirstI = startItemI
+    const itemEndI = itemsCnt
+    const itemLastI = itemEndI - 1
+    const itemFirstP = itemFirstI * 100
+    const itemEndP = itemEndI * 100
+    const itemLastP = itemLastI * 100
+    const loopItemP = (v: number) => RangeU.loop(v, [0, itemEndP])
+    const clampItemP = (v: number) => RangeU.clamp(v, [0, itemLastP])
+    
     let itemP = getStartItemProgress() + getDeltaProgress()
-    const boundItemP = (v: number) => RangeU.loop(v, [0, itemsCnt * 100])
-    itemP = boundItemP(itemP)
-    // здесь округление нужно, потому что вычисление прогресса от движения имеет операцию деления
+    itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
     itemP = round3(itemP)
     setStartItemProgress(itemP)
     
@@ -289,7 +326,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     updateIntervalProgress({ reset: first, value: vpVal, dValue: dVal })
     
     // onEachDrag
-    applyOnEachDrag(getIntervalDeltaProgress(), horizontal, vertical, drag)
+    applyOnEachDrag(round3(getIntervalDeltaProgress()), horizontal, vertical, drag)
     // onDragStart
     if (first) { applyOnDragStart() }
     // onDragging
