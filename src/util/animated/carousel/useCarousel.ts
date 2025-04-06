@@ -97,6 +97,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const isX = axis === 'x'
   const isY = axis === 'y'
   const onStart = useAsCallback(_onStart ?? noop)
+  const onFinish = useAsCallback(_onFinish ?? noop)
   
   
   
@@ -118,9 +119,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const animatedDeltaProgress = useAnimatedValue(initialDeltaProgress)
   
   
-  const onFinish = useAsCallback((props: CarouselEvent) => {
-    _onFinish?.(props)
-  })
   
   
   // Events log
