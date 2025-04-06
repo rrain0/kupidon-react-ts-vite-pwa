@@ -162,9 +162,9 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   const animatedProps = animatedDeltaProgress.map(dp => (viewI: number) => {
     return  getLoopedCarouselProps({
-      startProgressX: getStartProgress(),
-      startItemProgress: getStartItemProgress(),
-      deltaProgressX: dp,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: dp,
       itemsCnt,
       viewsCnt,
       startViewI: 0,

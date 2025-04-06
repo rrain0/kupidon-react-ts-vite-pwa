@@ -74,9 +74,9 @@ const PosterPreview = React.memo(() => {
   
   const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getLoopedCarouselProps({
-      startProgressX: getStartProgress(),
-      startItemProgress: getStartItemProgress(),
-      deltaProgressX: dp,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: dp,
       itemsCnt,
       viewsCnt,
       startViewI: -1,

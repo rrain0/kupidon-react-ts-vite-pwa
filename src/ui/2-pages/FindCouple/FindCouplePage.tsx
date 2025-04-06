@@ -101,9 +101,9 @@ const FindCouplePage = React.memo(() => {
   
   const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getLoopedCarouselProps({
-      startProgressX: getStartProgress(),
-      startItemProgress: getStartItemProgress(),
-      deltaProgressX: dp,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: dp,
       itemsCnt,
       viewsCnt,
       startViewI: -1,
@@ -138,7 +138,7 @@ const FindCouplePage = React.memo(() => {
                   }
                   if (viewPosI === -1) return 0
                   if (viewPosI === 0) return 20
-                  if (viewPosI === 1) return -1 // hide it
+                  if (viewPosI === 1) return -1 // hide view
                 }),
                 transform: animatedProps.map(ap => {
                   let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
@@ -148,7 +148,7 @@ const FindCouplePage = React.memo(() => {
                   }
                   if (viewPosI === 0) {
                     const a = RangeU.map(pCurr, [0, 100], [0, 0.03])
-                    return `translateY(500%) rotate(${a}turn) translateY(-500%)`
+                    return `translateY(300%) rotate(${a}turn) translateY(-300%)`
                   }
                   return `translateX(0%)`
                 }),

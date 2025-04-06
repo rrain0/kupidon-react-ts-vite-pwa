@@ -1,6 +1,7 @@
 import { createSpringAnimation } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
+import { getIndexesProps } from 'src/util/animated/carousel/carouselProps.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { MathU } from 'src/util/common/MathU.ts'
 import { RangeU } from 'src/util/common/RangeU.ts'
@@ -20,6 +21,7 @@ import notExists = TypeU.notExists
 import noop = TypeU.noop
 import round3 = MathU.round3
 import Getter = TypeU.Getter
+import Setter = TypeU.Setter
 
 
 
@@ -62,6 +64,8 @@ export type UseCarouselProps = {
   initialStartItemProgress?: number | undefined
   initialDeltaProgress?: number | undefined
   
+  mergeProgress?: MergeProgressCallback | undefined
+  
   onStart?: CarouselEventCallback | undefined
   onFinish?: CarouselEventCallback | undefined
 }
@@ -76,13 +80,15 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getTrackProps,
     axis,
     inverted,
+  
+    noDrag,
+    noLoop,
     
     initialStartProgress = 0,
     initialStartItemProgress = 0,
     initialDeltaProgress = 0,
-  
-    noDrag,
-    noLoop,
+    
+    mergeProgress,
     
     onStart: _onStart,
     onFinish: _onFinish,
@@ -91,7 +97,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const isX = axis === 'x'
   const isY = axis === 'y'
   const onStart = useAsCallback(_onStart ?? noop)
-  const onFinish = useAsCallback(_onFinish ?? noop)
   
   
   
@@ -111,6 +116,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const [getDeltaProgress, setDeltaProgress] = useRefGetSet(initialDeltaProgress)
   // animated delta progress in (..0..100..) from start progress
   const animatedDeltaProgress = useAnimatedValue(initialDeltaProgress)
+  
+  
+  const onFinish = useAsCallback((props: CarouselEvent) => {
+    _onFinish?.(props)
+  })
+  
   
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet([] as CarouselEvent[])
@@ -246,39 +257,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getIntervalDeltaProgress,
   } = useIntervalProgress({ getIntervalProps })
   
-  
-  const mergeProgress = () => {
-    const viewFirstI = startViewI
-    const viewEndI = viewFirstI + viewsCnt
-    const viewLastI = viewEndI - 1
-    const viewFirstP = viewFirstI * 100
-    const viewEndP = viewEndI * 100
-    const viewLastP = viewLastI * 100
-    const loopViewP = (v: number) => RangeU.loop(v, [viewFirstP, viewEndP])
-    const clampViewP = (v: number) => RangeU.clamp(v, [viewFirstP, viewLastP])
-    
-    let p = getStartProgress() + getDeltaProgress()
-    p = noLoop ? clampViewP(p) : loopViewP(p)
-    p = round3(p)
-    setStartProgress(p)
-    
-    const itemFirstI = startItemI
-    const itemEndI = itemsCnt
-    const itemLastI = itemEndI - 1
-    const itemFirstP = itemFirstI * 100
-    const itemEndP = itemEndI * 100
-    const itemLastP = itemLastI * 100
-    const loopItemP = (v: number) => RangeU.loop(v, [0, itemEndP])
-    const clampItemP = (v: number) => RangeU.clamp(v, [0, itemLastP])
-    
-    let itemP = getStartItemProgress() + getDeltaProgress()
-    itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
-    itemP = round3(itemP)
-    setStartItemProgress(itemP)
-    
-    setDeltaProgress(0)
-  }
-  
   const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
   const { getWasDragged, setWasDragged } = useAppPointerAction()
@@ -309,7 +287,14 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     }
     if (isDragging) {
       if (getNeedMerge()) {
-        mergeProgress()
+        ;(mergeProgress ?? defaultMergeProgress)({
+          startViewI, viewsCnt, startItemI, itemsCnt,
+          startP: getStartProgress(),
+          startItemP: getStartItemProgress(),
+          deltaP: getDeltaProgress(),
+          setStartProgress, setStartItemProgress, setDeltaProgress,
+          noLoop,
+        })
         setNeedMerge(false)
       }
       setDeltaProgress(dp)
@@ -317,9 +302,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     }
   })
   
-  const applyOnDragStart = useAsCallback(() => { })
+  const applyOnFirstDrag = useAsCallback(() => { })
   
-  const applyOnDragEnd = useAsCallback((vel: number) => {
+  const applyOnLastDrag = useAsCallback((vel: number) => {
     if (isDragging) updateViewsAndFinish(vel)
     setNeedMerge(true)
     setCanStartDrag(true)
@@ -353,11 +338,11 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     // onEachDrag
     applyOnEachDrag(round3(getIntervalDeltaProgress()), horizontal, vertical, drag)
     // onDragStart
-    if (first) { applyOnDragStart() }
+    if (first) { applyOnFirstDrag() }
     // onDragging
     if (!first && !last) { }
     // onDragEnd
-    if (last) { applyOnDragEnd(vel) }
+    if (last) { applyOnLastDrag(vel) }
   })
   
   
@@ -378,3 +363,47 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
 }
 
 
+
+
+export type MergeProgressProps = {
+  startViewI: number
+  viewsCnt: number
+  startItemI: number
+  itemsCnt: number
+  startP: number
+  startItemP: number
+  deltaP: number
+  setStartProgress: Setter<number>
+  setStartItemProgress: Setter<number>
+  setDeltaProgress: Setter<number>
+  noLoop?: boolean | undefined
+}
+export type MergeProgressCallback = (props: MergeProgressProps) => void
+
+const defaultMergeProgress: MergeProgressCallback = (props) => {
+  const {
+    startViewI, viewsCnt, startItemI, itemsCnt,
+    startP, startItemP, deltaP,
+    setStartProgress, setStartItemProgress, setDeltaProgress,
+    noLoop,
+  } = props
+  
+  const {
+    viewFirstI, viewEndI, viewLastI, viewFirstP, viewEndP, viewLastP,
+    loopViewI, loopViewP, clampViewP,
+    itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
+    loopItemI, loopItemP, clampItemP,
+  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
+  
+  let p = startP + deltaP
+  p = noLoop ? clampViewP(p) : loopViewP(p)
+  p = round3(p)
+  setStartProgress(p)
+  
+  let itemP = startItemP + deltaP
+  itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
+  itemP = round3(itemP)
+  setStartItemProgress(itemP)
+  
+  setDeltaProgress(0)
+}

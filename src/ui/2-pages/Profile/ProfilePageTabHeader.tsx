@@ -81,9 +81,9 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
   
   const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     const props = getClampedCarouselProps({
-      startProgressX: getStartProgress(),
-      startItemProgress: getStartItemProgress(),
-      deltaProgressX: dp,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: dp,
       itemsCnt,
       viewsCnt,
       startViewI: 0,

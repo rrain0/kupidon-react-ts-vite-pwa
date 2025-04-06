@@ -392,9 +392,9 @@ const ProfilePage = React.memo(() => {
   }
   const onFinish: CarouselEventCallback = ({ startP, startItemP, deltaP }) => {
     const { pos0ItemI } = getClampedCarouselProps({
-      startProgressX: startP,
-      startItemProgress: startItemP,
-      deltaProgressX: deltaP,
+      startP: startP,
+      startItemP: startItemP,
+      deltaP: deltaP,
       itemsCnt,
       viewsCnt,
       startViewI: 0,
@@ -441,9 +441,9 @@ const ProfilePage = React.memo(() => {
   
   const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getClampedCarouselProps({
-      startProgressX: getStartProgress(),
-      startItemProgress: getStartItemProgress(),
-      deltaProgressX: dp,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: dp,
       itemsCnt,
       viewsCnt,
       startViewI: 0,
