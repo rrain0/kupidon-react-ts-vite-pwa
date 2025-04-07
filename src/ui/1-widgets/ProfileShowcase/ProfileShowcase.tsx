@@ -3,12 +3,11 @@ import { getLoopedCarouselProps } from '@util/animated/carousel/carouselProps.ts
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { useBool } from '@util/react-state/useBool.ts'
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
-import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
@@ -20,14 +19,9 @@ import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
-import { useResizeRef } from 'src/util/view/useResizeRef'
-import { getViewProps } from 'src/util/view/ViewProps'
-import { ViewU } from 'src/util/view/ViewU'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC
 import fill = EmotionCommon.fill
-import minRatioPort = StyleVals.minRatioPort
-import maxRatioPort = StyleVals.maxRatioPort
 import arrOfIndices = ArrayU.arrOfIndices
 import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
@@ -137,25 +131,6 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const [isInfoOpen, openInfo, closeInfo] = useBool(false)
   
   
-  const onElemSetWh = useResizeRef<HTMLElement>(useCallback(frame => {
-    if (frame) {
-      const props = getViewProps(frame)
-      const { w, h } = ViewU.clampRatio({
-        minRatio: minRatioPort,
-        maxRatio: maxRatioPort,
-        w: props.w - ph * 2,
-        h: props.h - pv * 2,
-      })
-      props.setCssProps({
-        '--w': `${props.w}px`,
-        '--h': `${props.h}px`,
-        '--photos-w': `${w}px`,
-        '--photos-h': `${h}px`,
-      })
-    }
-  }, []))
-  
-  
   const animatedPhotoProgress = useMemo(() => {
     return animatedDeltaProgress.map(cp => getStartItemProgress() + cp)
   }, [animatedDeltaProgress])
@@ -176,123 +151,117 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   //console.log('rerender')
   
   return (
-    <PreviewFrame 
-      ref={onElemSetWh}
+    <PreviewFrame
       data-display-name="ProfileShowcase"
     >
       
-      <PreviewFrame2>
         
         
-        
-        
-        <PhotosContainer>
-          <PhotosContainer2
-            ref={photosBoxRef}
-            {...onTrackDrag()}
-            onClick={() => {
-              if (getWasDragged?.()) return
-              closeInfo()
-            }}
-          >
-            {arrOfIndices(visiblePhotosCnt).map(i => {
-              return (
-                <AnimatedPhotoBox
-                  key={i}
-                  animatedStyle={{
-                    zIndex: animatedProps.map(ap => {
-                      const { viewPosI } = ap(i)
-                      const z = -viewPosI + visiblePhotosCnt - 1
-                      return z
-                    }),
-                    transform: animatedProps.map(ap => {
-                      const { viewPosI, pCurr } = ap(i)
-                      const y = (() => {
-                        if (viewPosI === 0) return pCurr
-                        return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                      })()
-                      return `translateY(${y}%)`
-                    }),
-                    scale: animatedProps.map(ap => {
-                      const { viewPosI, pCurr } = ap(i)
-                      const s = (() => {
-                        if (viewPosI === 0) return 100
-                        return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                      })()
-                      return s / 100
-                    }),
-                    opacity: animatedProps.map(ap => {
-                      const { viewPosI, pCurr } = ap(i)
-                      const o = (() => {
-                        if (viewPosI === 0) return 100 - RangeU.map(
-                          pCurr,
-                          [0, 30, 100],
-                          [0, 0, 100],
-                        )
-                        if (viewPosI === visiblePhotosCnt - 1) return RangeU.map(
-                          pCurr,
-                          [0, 80, 100],
-                          [0, 0, 100],
-                        )
-                        return 100
-                      })()
-                      return o / 100
-                    }),
-                  }}
-                >
-                  {!!photosCnt && (
-                    <AnimatedPhoto
-                      animatedAttrs={{
-                        src: animatedProps.map(ap => {
-                          const { viewItemI } = ap(i)
-                          return availablePhotos[viewItemI]?.dataUrl ?? ''
-                        }),
-                      }}
-                    />
-                  )}
-                  {!photosCnt && (
-                    <>
-                      <Photo src={placeholderIm} />
-                      <Blur />
-                      <NoImagesBox>
-                        <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
-                        <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
-                      </NoImagesBox>
-                    </>
-                  )}
-                  <PhotoFade />
-                  {/* <div
-                   css={css`
-                   position: absolute;
-                   top: 20px;
-                   left: 20px;
-                   color: aquamarine;
-                   font-size: 40px;
-                   `}
-                   >
-                   {i}
-                   </div> */}
-                </AnimatedPhotoBox>
-              )
-            })}
-            
-            <PreviewInfoOverlay
-              isDragging={isDragging}
-              photosCnt={photosCnt}
-              openInfo={openInfo}
-              photoProgress={animatedPhotoProgress}
-              name={name}
-              birthDate={birthDate}
-              aboutMe={aboutMe}
-            />
+      <PhotosContainer>
+        <PhotosContainer2
+          ref={photosBoxRef}
+          {...onTrackDrag()}
+          onClick={() => {
+            if (getWasDragged?.()) return
+            closeInfo()
+          }}
+        >
+          {arrOfIndices(visiblePhotosCnt).map(i => {
+            return (
+              <AnimatedPhotoBox
+                key={i}
+                animatedStyle={{
+                  zIndex: animatedProps.map(ap => {
+                    const { viewPosI } = ap(i)
+                    const z = -viewPosI + visiblePhotosCnt - 1
+                    return z
+                  }),
+                  transform: animatedProps.map(ap => {
+                    const { viewPosI, pCurr } = ap(i)
+                    const y = (() => {
+                      if (viewPosI === 0) return pCurr
+                      return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                    })()
+                    return `translateY(${y}%)`
+                  }),
+                  scale: animatedProps.map(ap => {
+                    const { viewPosI, pCurr } = ap(i)
+                    const s = (() => {
+                      if (viewPosI === 0) return 100
+                      return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+                    })()
+                    return s / 100
+                  }),
+                  opacity: animatedProps.map(ap => {
+                    const { viewPosI, pCurr } = ap(i)
+                    const o = (() => {
+                      if (viewPosI === 0) return 100 - RangeU.map(
+                        pCurr,
+                        [0, 30, 100],
+                        [0, 0, 100],
+                      )
+                      if (viewPosI === visiblePhotosCnt - 1) return RangeU.map(
+                        pCurr,
+                        [0, 80, 100],
+                        [0, 0, 100],
+                      )
+                      return 100
+                    })()
+                    return o / 100
+                  }),
+                }}
+              >
+                {!!photosCnt && (
+                  <AnimatedPhoto
+                    animatedAttrs={{
+                      src: animatedProps.map(ap => {
+                        const { viewItemI } = ap(i)
+                        return availablePhotos[viewItemI]?.dataUrl ?? ''
+                      }),
+                    }}
+                  />
+                )}
+                {!photosCnt && (
+                  <>
+                    <Photo src={placeholderIm} />
+                    <Blur />
+                    <NoImagesBox>
+                      <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
+                      <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
+                    </NoImagesBox>
+                  </>
+                )}
+                <PhotoFade />
+                {/* <div
+                 css={css`
+                 position: absolute;
+                 top: 20px;
+                 left: 20px;
+                 color: aquamarine;
+                 font-size: 40px;
+                 `}
+                 >
+                 {i}
+                 </div> */}
+              </AnimatedPhotoBox>
+            )
+          })}
           
-          </PhotosContainer2>
-        </PhotosContainer>
+          <PreviewInfoOverlay
+            isDragging={isDragging}
+            photosCnt={photosCnt}
+            openInfo={openInfo}
+            photoProgress={animatedPhotoProgress}
+            name={name}
+            birthDate={birthDate}
+            aboutMe={aboutMe}
+          />
+        
+        </PhotosContainer2>
+      </PhotosContainer>
       
       
       
-      
-      </PreviewFrame2>
       
       <PreviewFullInfo
         isOpen={isInfoOpen}
@@ -312,24 +281,14 @@ export default ProfileShowcase
 
 
 
-
-const pv = 32
-const ph = 16
-
-
 const PreviewFrame = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: ${pv}px ${ph}px;
   --photo-r: 16px;
   --photo-w: var(--photos-w);
   --photo-h: calc( var(--photos-h) * (100 - ${maxVisiblePhotosCnt - 1}) / 100 );
   overflow: hidden;
-`
-const PreviewFrame2 = styled.div`
-  width: 100%;
-  height: 100%;
   ${flexC};
 `
 const PhotosContainer = styled.div`
