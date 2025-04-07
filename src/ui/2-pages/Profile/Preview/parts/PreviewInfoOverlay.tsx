@@ -1,7 +1,7 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
-import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
+import { useWasDragged } from '@util/pointer/useWasDragged.ts'
 import React from 'react'
 import { EmptyS6 } from 'src/mini-libs/widget-style-6/EmptyS6.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -51,7 +51,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
   
   const match = 'XX'
   
-  const { getWasDragged } = useAppPointerAction()
+  const { getWasDragged } = useWasDragged()
   
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   

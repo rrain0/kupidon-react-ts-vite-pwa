@@ -4,21 +4,18 @@ import { useDrag } from '@use-gesture/react'
 import { getIndexesProps } from 'src/util/animated/carousel/carouselProps.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { MathU } from 'src/util/common/MathU.ts'
-import { RangeU } from 'src/util/common/RangeU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
 import { useIntervalProgress } from 'src/util/progress/useIntervalProgress.ts'
-import { useAppPointerAction } from 'src/util/pointer/useAppPointerAction.ts'
+import { useWasDragged } from 'src/util/pointer/useWasDragged.ts'
 import { useNoSelect } from 'src/util/pointer/useNoSelect.ts'
 import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useEvent } from 'src/util/react/useEvent.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import exists = TypeU.exists
-import notExists = TypeU.notExists
-import noop = TypeU.noop
 import round3 = MathU.round3
 import Getter = TypeU.Getter
 import Setter = TypeU.Setter
@@ -38,7 +35,7 @@ export type CarouselEvent = {
 export type CarouselEventCallback = (carouselEvent: CarouselEvent) => void
 
 
-export type AnimateToParams = Puro<{
+export type AnimateToParams = Pu<{
   next: boolean
   prev: boolean
   p: number
@@ -90,14 +87,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     mergeProgress,
     
-    onStart: _onStart,
-    onFinish: _onFinish,
+    onStart,
+    onFinish,
   } = props
   
   const isX = axis === 'x'
   const isY = axis === 'y'
-  const onStart = useAsCallback(_onStart ?? noop)
-  const onFinish = useAsCallback(_onFinish ?? noop)
   
   
   
@@ -119,11 +114,50 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const animatedDeltaProgress = useAnimatedValue(initialDeltaProgress)
   
   
+  const updateViews = () => {
+    animatedDeltaProgress.set(getDeltaProgress())
+  }
   
   
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet([] as CarouselEvent[])
   
+  const tryEmitStartEvent = () => {
+    if (!getEventsLog().length) {
+      const ev: CarouselEvent = {
+        first: true,
+        startP: getStartProgress(),
+        startItemP: getStartItemProgress(),
+        deltaP: getDeltaProgress(),
+      }
+      onStart?.(ev)
+      setEventsLog([ev])
+    }
+  }
+  const emitFinishEvent = () => {
+    const ev: CarouselEvent = {
+      last: true,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: getDeltaProgress(),
+    }
+    onFinish?.(ev)
+    setEventsLog([])
+  }
+  
+  
+  const applyOnFinish = () => {
+    ;(mergeProgress ?? defaultMergeProgress)({
+      startViewI, viewsCnt, startItemI, itemsCnt,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: getDeltaProgress(),
+      setStartProgress, setStartItemProgress, setDeltaProgress,
+      noLoop,
+    })
+    updateViews()
+    emitFinishEvent()
+  }
   
   
   const vThreshold = 150 // %size/s
@@ -144,7 +178,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     const p = startP + deltaP
     const pCurr = p % 100
     const pBase = p - pCurr
-    
+      
     ;[nextP, vel0] = (() => {
       if (exists(next)) return [pBase + 100, +vThreshold]
       if (exists(prev)) return [pBase - 100, -vThreshold]
@@ -155,26 +189,17 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       ]
       return [undefined, 0]
     })()
-    if (notExists(nextP)) return
     
-    if (p !== nextP) {
-      if (!getEventsLog().length) {
-        const ev: CarouselEvent = {
-          first: true,
-          startP: getStartProgress(),
-          startItemP: getStartItemProgress(),
-          deltaP: getDeltaProgress(),
-        }
-        onStart?.(ev)
-        setEventsLog([ev])
-      }
+    
+    if (exists(nextP) && p !== nextP) {
+      tryEmitStartEvent()
       const nextDeltaP = nextP - startP
       if (noAnimation) {
         setDeltaProgress(nextDeltaP)
         animatedDeltaProgress.set(nextDeltaP)
       }
       else {
-        await animatedDeltaProgress.animate({
+        const { finished } = await animatedDeltaProgress.animate({
           startValue: deltaP,
           animationFun: createSpringAnimation({
             //mass: 1, tension: 170, friction: 10,
@@ -185,26 +210,14 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
           }),
           onUpdate: ({ value }) => setDeltaProgress(value),
         })
+        if (!finished) return
       }
     }
     
-    if (getEventsLog().length) {
-      const ev: CarouselEvent = {
-        last: true,
-        startP: getStartProgress(),
-        startItemP: getStartItemProgress(),
-        deltaP: getDeltaProgress(),
-      }
-      onFinish?.(ev)
-      setEventsLog([])
-    }
+    applyOnFinish()
   })
   
   
-  
-  const updateViews = () => {
-    animatedDeltaProgress.set(getDeltaProgress())
-  }
   
   const updateViewsAndFinish = (vel = 0) => {
     updateViews()
@@ -255,9 +268,17 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getIntervalDeltaProgress,
   } = useIntervalProgress({ getIntervalProps })
   
-  const [getNeedMerge, setNeedMerge] = useRefGetSet(true)
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const { getWasDragged, setWasDragged } = useAppPointerAction()
+  const { getWasDragged, setWasDragged } = useWasDragged()
+  
+  
+  
+  const applyOnDragStart = useAsCallback(() => {
+    setIsDragging(true)
+    setCanStartDrag(false)
+    setWasDragged(true)
+    tryEmitStartEvent()
+  })
   
   
   const applyOnEachDrag = useAsCallback((
@@ -267,34 +288,13 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     if (!noDrag && directional) {
       lockTouchAction()
       if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
-        setIsDragging(true)
-        setCanStartDrag(false)
-        setWasDragged(true)
-        const ev: CarouselEvent = {
-          first: true,
-          startP: getStartProgress(),
-          startItemP: getStartItemProgress(),
-          deltaP: getDeltaProgress(),
-        }
-        onStart?.(ev)
-        setEventsLog([ev])
+        applyOnDragStart()
       }
       if (!getIsDragging() && !getCanStartDrag()) {
         unlockTouchAction()
       }
     }
     if (isDragging) {
-      if (getNeedMerge()) {
-        ;(mergeProgress ?? defaultMergeProgress)({
-          startViewI, viewsCnt, startItemI, itemsCnt,
-          startP: getStartProgress(),
-          startItemP: getStartItemProgress(),
-          deltaP: getDeltaProgress(),
-          setStartProgress, setStartItemProgress, setDeltaProgress,
-          noLoop,
-        })
-        setNeedMerge(false)
-      }
       setDeltaProgress(dp)
       updateViews()
     }
@@ -304,7 +304,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   const applyOnLastDrag = useAsCallback((vel: number) => {
     if (isDragging) updateViewsAndFinish(vel)
-    setNeedMerge(true)
     setCanStartDrag(true)
     unlockTouchAction()
     setIsDragging(false)

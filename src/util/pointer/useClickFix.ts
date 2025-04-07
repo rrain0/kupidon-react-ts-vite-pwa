@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppPointerAction } from 'src/util/pointer/useAppPointerAction.ts'
+import { useWasDragged } from 'src/util/pointer/useWasDragged.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 
 
@@ -11,7 +11,7 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 //  то клик не работает, хотя всё ок.
 export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
   const [getWasClicked, setWasClicked] = useRefGetSet(0)
-  const { getWasDragged } = useAppPointerAction()
+  const { getWasDragged } = useWasDragged()
   
   return {
     onPointerDown: (ev: React.PointerEvent) => {

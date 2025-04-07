@@ -24,7 +24,7 @@ export type GetIndexesPropsProps = {
 }
 export const getIndexesProps = ({
   startViewI, viewsCnt, startItemI, itemsCnt,
-}) => {
+}: GetIndexesPropsProps) => {
   const viewFirstI = startViewI
   const viewEndI = viewFirstI + viewsCnt
   const viewLastI = viewEndI - 1

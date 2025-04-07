@@ -13,15 +13,23 @@ import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
 import exists = TypeU.exists
+import Pu = TypeU.Pu
 
 
 
-
+// TODO - on stop save curr value and not animate further and delete curr animation
+// TODO - on cancel - remove it or revert animation to initial value and stop it
+//        use animationValue.set(cachedValue) for it
+export type AnimationEnded = Pu<{
+  finished: boolean
+  stopped: boolean
+  canceled: boolean
+}>
 
 export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
   constructor(params: { initialValue: Value }) {
-    void this.set(params.initialValue)
+    this.set(params.initialValue)
   }
   
   startValue!: Value
@@ -34,12 +42,12 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   // не влияет на анимируемое значение, просто переводит в состояние finished
   finish: Callback = noop
   finished = false
-  whenFinished!: Promise<void>
+  whenFinished!: Promise<{ finished: true }>
   
   // не влияет на анимируемое значение, просто переводит в состояние canceled
   cancel: Callback = noop
   canceled = false
-  whenCanceled!: Promise<void>
+  whenCanceled!: Promise<{ canceled: true }>
   
   
   get() { return this.cachedValue }
@@ -75,7 +83,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
     addAnimation(this.setByTimeAndRefresh)
   }
   
-  async animate<D = undefined>(animation: AnimationConfig<Value, D>): Promise<void> {
+  async animate<D = undefined>(animation: AnimationConfig<Value, D>): Promise<AnimationEnded> {
     this.endAnimation()
     this.resetAnimationCompletionState()
     this.startValue = animation.startValue
@@ -119,19 +127,19 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   resetAnimationCompletionState() {
     this.finish = noop
     this.finished = false
-    this.whenFinished = new Promise<void>(resolve => {
+    this.whenFinished = new Promise(resolve => {
       this.finish = () => {
         this.finished = true
-        resolve()
+        resolve({ finished: true })
       }
     })
     
     this.cancel = noop
     this.canceled = false
-    this.whenCanceled = new Promise<void>(resolve => {
+    this.whenCanceled = new Promise(resolve => {
       this.cancel = () => {
         this.canceled = true
-        resolve()
+        resolve({ canceled: true })
       }
     })
   }

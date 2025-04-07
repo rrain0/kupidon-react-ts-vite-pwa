@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { useClickFix } from '@util/pointer/useClickFix.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import { useAppPointerAction } from '@util/pointer/useAppPointerAction.ts'
+import { useWasDragged } from '@util/pointer/useWasDragged.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
@@ -35,7 +35,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
     useImperativeHandle(forwardedRef, () => elemRef.current!, [])
     
     const clickFix = useClickFix()
-    const { getWasDragged } = useAppPointerAction()
+    const { getWasDragged } = useWasDragged()
     
     
     return (
