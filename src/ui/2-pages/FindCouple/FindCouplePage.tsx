@@ -1,4 +1,3 @@
-import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import {
@@ -23,6 +22,7 @@ import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
+import full = EmotionCommon.full
 
 
 const photos = [
@@ -142,6 +142,52 @@ const FindCouplePage = React.memo(() => {
     })
   })
   
+  const animatedStackProps = animatedProps.map(ap => (viewI = 0) => {
+    const { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
+    
+    const zIndex = (() => {
+      if (viewPosI === 0) {
+        //console.log('viewPosI', viewPosI, 'viewI', viewI - 1, 'pCurr', pCurr, 'dir', dir)
+      }
+      if (viewPosI === -1) return 0
+      if (viewPosI === 0) return 20
+      if (viewPosI === 1) return -1 // hide view
+    })()
+    
+    const transform = (() => {
+      if (viewPosI === 0) {
+        const a = RangeU.map(pCurr, [0, 100], [0, 0.03])
+        return `translateY(300%) rotate(${a}turn) translateY(-300%)`
+      }
+      return `translateX(0%)`
+    })()
+    
+    const scale = (() => {
+      if (viewPosI === -1) {
+        if (viewPosI === -1) {
+          //console.log('view-1 scale', 0.9 + 0.1 * (Math.abs(pCurr) / 100))
+        }
+        return 0.9 + 0.1 * (Math.abs(pCurr) / 100)
+      }
+      return 1
+    })()
+    
+    const opacity = (() => {
+      if (viewPosI === -1) {
+        return Math.abs(pCurr) / 100
+      }
+      if (viewPosI === 0) {
+        return 1 - RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 1.5], [0, 1])
+      }
+      if (viewPosI === 1) {
+        return 0
+      }
+      return 1
+    })()
+    
+    return { zIndex, transform, scale, opacity }
+  })
+  
   
   
   
@@ -150,75 +196,13 @@ const FindCouplePage = React.memo(() => {
     <Pages.FullscreenPageGrad>
       <Pages.AddSafeInsets style={{ height: '100%' }}>
         
-        <Frame
+        <StacksFrame
           ref={frameRef}
           {...onTrackDrag()}
         >
-          <PhotosStacksFrame
-            ref={onStacksFrameSetWh}
-          >
+          <StackFrame>
             {arrOfIndices(viewsCnt).map(viewI => (
-              <AnimatedStack
-                key={viewI}
-                animatedStyle={{
-                  zIndex: animatedProps.map(ap => {
-                    let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
-                    /* if (dir === -1) {
-                     viewPosI = loopViewI(viewPosI - 1)
-                     pCurr = -(100 - pCurr)
-                     } */
-                    if (viewPosI === 0) {
-                      //console.log('viewPosI', viewPosI, 'viewI', viewI - 1, 'pCurr', pCurr, 'dir', dir)
-                    }
-                    if (viewPosI === -1) return 0
-                    if (viewPosI === 0) return 20
-                    if (viewPosI === 1) return -1 // hide view
-                  }),
-                  transform: animatedProps.map(ap => {
-                    let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
-                    /* if (dir === -1) {
-                     viewPosI = loopViewI(viewPosI - 1)
-                     pCurr = -(100 - pCurr)
-                     } */
-                    if (viewPosI === 0) {
-                      const a = RangeU.map(pCurr, [0, 100], [0, 0.03])
-                      return `translateY(300%) rotate(${a}turn) translateY(-300%)`
-                    }
-                    return `translateX(0%)`
-                  }),
-                  scale: animatedProps.map(ap => {
-                    let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
-                    /* if (dir === -1) {
-                     viewPosI = loopViewI(viewPosI - 1)
-                     pCurr = (100 - pCurr)
-                     } */
-                    if (viewPosI === -1) {
-                      if (viewPosI === -1) {
-                        //console.log('view-1 scale', 0.9 + 0.1 * (Math.abs(pCurr) / 100))
-                      }
-                      return 0.9 + 0.1 * (Math.abs(pCurr) / 100)
-                    }
-                    return 1
-                  }),
-                  opacity: animatedProps.map(ap => {
-                    let { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
-                    /* if (dir === -1) {
-                     viewPosI = loopViewI(viewPosI - 1)
-                     pCurr = (100 - pCurr)
-                     } */
-                    if (viewPosI === -1) {
-                      return Math.abs(pCurr) / 100
-                    }
-                    if (viewPosI === 0) {
-                      return 1 - RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 1.5], [0, 1])
-                    }
-                    if (viewPosI === 1) {
-                      return 0
-                    }
-                    return 1
-                  }),
-                }}
-              >
+              <StackFrame2 key={viewI}>
                 <AnimatedState
                   animatedState={{
                     itemI: animatedProps.map(ap => ap(viewI).viewItemI),
@@ -233,15 +217,15 @@ const FindCouplePage = React.memo(() => {
                         birthDate={item.birthDate}
                         gender={item.gender}
                         aboutMe={item.aboutMe}
+                        animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
                       />
                     )
                   }}
                 </AnimatedState>
-              </AnimatedStack>
+              </StackFrame2>
             ))}
-          
-          </PhotosStacksFrame>
-        </Frame>
+          </StackFrame>
+        </StacksFrame>
       
       </Pages.AddSafeInsets>
     </Pages.FullscreenPageGrad>
@@ -251,23 +235,18 @@ export default FindCouplePage
 
 
 
-const Frame = styled.div`
-  width: 100%;
-  height: 100%;
+const StacksFrame = styled.div`
+  ${full};
   padding: 32px 16px;
   overflow: hidden;
   touch-action: pan-y;
 `
-const PhotosStacksFrame = styled.div`
+const StackFrame = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
+  ${full};
 `
-
-
-const AnimatedStack = styled(AnimatedDiv)`
+const StackFrame2 = styled.div`
   ${abs};
 `
-AnimatedStack.displayName = 'AnimatedStack'
 
 

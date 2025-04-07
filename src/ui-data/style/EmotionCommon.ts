@@ -9,6 +9,10 @@ export namespace EmotionCommon {
     display: contents;
   `
   
+  export const full = css`
+    width: 100%; height: 100%;
+  `
+  
   export const abs = css`
     position: absolute;
     top: 0; left: 0;

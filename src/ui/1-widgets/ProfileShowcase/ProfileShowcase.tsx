@@ -1,13 +1,18 @@
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import styled from '@emotion/styled'
 import { getLoopedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { useBool } from '@util/react-state/useBool.ts'
-import React, { useMemo, useRef } from 'react'
+import { useResizeRef } from '@util/view/useResizeRef.ts'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import { ViewU } from '@util/view/ViewU.ts'
+import React, { useCallback, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
@@ -28,6 +33,9 @@ import PictureIc = SvgIconsPack.PictureIc
 import gridC = EmotionCommon.gridC
 import abs = EmotionCommon.abs
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import minRatioPort = StyleVals.minRatioPort
+import maxRatioPort = StyleVals.maxRatioPort
+import full = EmotionCommon.full
 
 
 
@@ -56,12 +64,22 @@ const maxVisiblePhotosCnt = 4
 
 
 
+export type ProfileShowcaseCssProps = {
+  '--photos-w': '<length>'
+  '--photos-h': '<length>'
+}
 export type ProfileShowcaseProps = {
   photos: ProfilePhoto[]
   name: string
   birthDate: string
   gender: GenderOptionValues
   aboutMe: string
+  animatedStackProps?: undefined | AnimatedProperty<{
+    zIndex: number
+    transform: string
+    scale: number
+    opacity: number
+  }>
 }
 export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const {
@@ -70,6 +88,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     birthDate,
     gender,
     aboutMe,
+    animatedStackProps,
   } = props
   
   //effectLog('photos', photos)
@@ -148,22 +167,50 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   })
   
   
+  
+  const onShowcaseFrameSetWh = useResizeRef<HTMLDivElement>(useCallback(frame => {
+    if (frame) {
+      const props = getViewProps(frame)
+      const { w, h } = props
+      const { w: photosW, h: photosH } = ViewU.clampRatio({
+        minRatio: minRatioPort,
+        maxRatio: maxRatioPort,
+        w: w,
+        h: h,
+      })
+      props.setCssProps({
+        '--w': `${w}px`,
+        '--h': `${h}px`,
+        '--photos-w': `${photosW}px`,
+        '--photos-h': `${photosH}px`,
+      })
+    }
+  }, []))
+  
+  
   //console.log('rerender')
   
   return (
-    <PreviewFrame
+    <ShowcaseFrame
       data-display-name="ProfileShowcase"
+      ref={onShowcaseFrameSetWh}
     >
       
         
         
-      <PhotosContainer>
-        <PhotosContainer2
+      <PhotosStackBox>
+        <PhotosStack
           ref={photosBoxRef}
           {...onTrackDrag()}
           onClick={() => {
             if (getWasDragged?.()) return
             closeInfo()
+          }}
+          animatedStyle={{
+            zIndex: animatedStackProps?.map(p => p.zIndex),
+            transform: animatedStackProps?.map(p => p.transform),
+            scale: animatedStackProps?.map(p => p.scale),
+            opacity: animatedStackProps?.map(p => p.opacity),
           }}
         >
           {arrOfIndices(visiblePhotosCnt).map(i => {
@@ -257,8 +304,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             aboutMe={aboutMe}
           />
         
-        </PhotosContainer2>
-      </PhotosContainer>
+        </PhotosStack>
+      </PhotosStackBox>
       
       
       
@@ -272,7 +319,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
         aboutMe={aboutMe}
       />
     
-    </PreviewFrame>
+    </ShowcaseFrame>
   )
 })
 ProfileShowcase.displayName = 'ProfileShowcase'
@@ -281,25 +328,23 @@ export default ProfileShowcase
 
 
 
-const PreviewFrame = styled.div`
+const ShowcaseFrame = styled.div`
   position: relative;
-  width: 100%;
-  height: 100%;
+  ${full};
   --photo-r: 16px;
   --photo-w: var(--photos-w);
   --photo-h: calc( var(--photos-h) * (100 - ${maxVisiblePhotosCnt - 1}) / 100 );
-  overflow: hidden;
+  //overflow: hidden;
   ${flexC};
 `
-const PhotosContainer = styled.div`
+const PhotosStackBox = styled.div`
   width: var(--photos-w);
   height: var(--photos-h);
   display: grid;
   place-items: end center;
 `
-const PhotosContainer2 = styled.div`
+const PhotosStack = styled(AnimatedDiv)`
   width: 100%;
-  //height: ${100 - (maxVisiblePhotosCnt - 1)}%;
   height: var(--photo-h);
   position: relative;
   
