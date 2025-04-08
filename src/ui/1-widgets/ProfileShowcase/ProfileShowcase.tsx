@@ -65,8 +65,8 @@ const maxVisiblePhotosCnt = 4
 
 
 export type ProfileShowcaseCssProps = {
-  '--photos-w': '<length>'
-  '--photos-h': '<length>'
+  '--ph': '<length>'
+  '--pv': '<length>'
 }
 export type ProfileShowcaseProps = {
   photos: ProfilePhoto[]
@@ -168,15 +168,15 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   
-  const onShowcaseFrameSetWh = useResizeRef<HTMLDivElement>(useCallback(frame => {
+  const onPhotosStackBoxSetWh = useResizeRef<HTMLDivElement>(useCallback(frame => {
     if (frame) {
       const props = getViewProps(frame)
       const { w, h } = props
       const { w: photosW, h: photosH } = ViewU.clampRatio({
         minRatio: minRatioPort,
         maxRatio: maxRatioPort,
-        w: w,
-        h: h,
+        w: w - ph * 2,
+        h: h - pv * 2,
       })
       props.setCssProps({
         '--w': `${w}px`,
@@ -193,7 +193,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   return (
     <ShowcaseFrame
       data-display-name="ProfileShowcase"
-      ref={onShowcaseFrameSetWh}
+      ref={onPhotosStackBoxSetWh}
+      animatedStyle={{
+        zIndex: animatedStackProps?.map(p => p.zIndex),
+      }}
     >
       
         
@@ -207,7 +210,6 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             closeInfo()
           }}
           animatedStyle={{
-            zIndex: animatedStackProps?.map(p => p.zIndex),
             transform: animatedStackProps?.map(p => p.transform),
             scale: animatedStackProps?.map(p => p.scale),
             opacity: animatedStackProps?.map(p => p.opacity),
@@ -327,10 +329,15 @@ export default ProfileShowcase
 
 
 
+const pv = 32
+const ph = 16
 
-const ShowcaseFrame = styled.div`
+
+
+const ShowcaseFrame = styled(AnimatedDiv)`
   position: relative;
   ${full};
+  padding: ${pv}px ${ph}px;
   --photo-r: 16px;
   --photo-w: var(--photos-w);
   --photo-h: calc( var(--photos-h) * (100 - ${maxVisiblePhotosCnt - 1}) / 100 );

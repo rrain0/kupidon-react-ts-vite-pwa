@@ -83,25 +83,6 @@ const FindCouplePage = React.memo(() => {
   const itemsCnt = items.length
   
   const [, , frameRef] = useElemRefGetSet()
-  
-  const onStacksFrameSetWh = useResizeRef<HTMLDivElement>(useCallback(frame => {
-    if (frame) {
-      const props = getViewProps(frame)
-      const { w, h } = props
-      const { w: photosW, h: photosH } = ViewU.clampRatio({
-        minRatio: minRatioPort,
-        maxRatio: maxRatioPort,
-        w: w,
-        h: h,
-      })
-      props.setCssProps({
-        '--w': `${w}px`,
-        '--h': `${h}px`,
-        '--photos-w': `${photosW}px`,
-        '--photos-h': `${photosH}px`,
-      })
-    }
-  }, []))
   const getTrackProps = createTrackPropsGetter(frameRef)
   
   const {
@@ -150,7 +131,7 @@ const FindCouplePage = React.memo(() => {
         //console.log('viewPosI', viewPosI, 'viewI', viewI - 1, 'pCurr', pCurr, 'dir', dir)
       }
       if (viewPosI === -1) return 0
-      if (viewPosI === 0) return 20
+      if (viewPosI === 0) return 30
       if (viewPosI === 1) return -1 // hide view
     })()
     
@@ -237,7 +218,6 @@ export default FindCouplePage
 
 const StacksFrame = styled.div`
   ${full};
-  padding: 32px 16px;
   overflow: hidden;
   touch-action: pan-y;
 `
