@@ -1,7 +1,10 @@
 import { animatedMapMulti, AnimatedMultiComputed } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty, AnimatedPropertyToValue } from '@animated/AnimatedProperty.ts'
 import styled from '@emotion/styled'
-import { getLoopedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
+import {
+  defaultCarouselMergeProgress,
+  getLoopedCarouselProps,
+} from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { useBool } from '@util/react-state/useBool.ts'
@@ -145,6 +148,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     getTrackProps,
     axis: 'y',
     inverted: false,
+    mergeProgress: defaultCarouselMergeProgress,
     noDrag: !isPhotosDraggable,
   }, [availablePhotos])
   

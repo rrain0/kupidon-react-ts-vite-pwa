@@ -1,7 +1,10 @@
 import { createSpringAnimation } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
-import { getIndexesProps } from 'src/util/animated/carousel/carouselProps.ts'
+import {
+  getIndexesProps,
+  MergeProgressCallback,
+} from 'src/util/animated/carousel/props/carouselPropsCommon.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { MathU } from 'src/util/common/MathU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -61,7 +64,7 @@ export type UseCarouselProps = {
   initialStartItemProgress?: number | undefined
   initialDeltaProgress?: number | undefined
   
-  mergeProgress?: MergeProgressCallback | undefined
+  mergeProgress: MergeProgressCallback
   
   onStart?: CarouselEventCallback | undefined
   onFinish?: CarouselEventCallback | undefined
@@ -77,6 +80,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getTrackProps,
     axis,
     inverted,
+    
+    mergeProgress,
   
     noDrag,
     noLoop,
@@ -84,8 +89,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     initialStartProgress = 0,
     initialStartItemProgress = 0,
     initialDeltaProgress = 0,
-    
-    mergeProgress,
     
     onStart,
     onFinish,
@@ -147,7 +150,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   const applyOnFinish = () => {
-    ;(mergeProgress ?? defaultMergeProgress)({
+    mergeProgress({
       startViewI, viewsCnt, startItemI, itemsCnt,
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
@@ -194,6 +197,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     if (exists(nextP) && p !== nextP) {
       tryEmitStartEvent()
       const nextDeltaP = nextP - startP
+      
+      //console.log('p & deltaP', p, deltaP, 'nextP & nextDeltaP', nextP, nextDeltaP, 'vel0', vel0)
+      
       if (noAnimation) {
         setDeltaProgress(nextDeltaP)
         animatedDeltaProgress.set(nextDeltaP)
@@ -361,46 +367,3 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
 
 
 
-
-export type MergeProgressProps = {
-  startViewI: number
-  viewsCnt: number
-  startItemI: number
-  itemsCnt: number
-  startP: number
-  startItemP: number
-  deltaP: number
-  setStartProgress: Setter<number>
-  setStartItemProgress: Setter<number>
-  setDeltaProgress: Setter<number>
-  noLoop?: boolean | undefined
-}
-export type MergeProgressCallback = (props: MergeProgressProps) => void
-
-const defaultMergeProgress: MergeProgressCallback = (props) => {
-  const {
-    startViewI, viewsCnt, startItemI, itemsCnt,
-    startP, startItemP, deltaP,
-    setStartProgress, setStartItemProgress, setDeltaProgress,
-    noLoop,
-  } = props
-  
-  const {
-    viewFirstI, viewEndI, viewLastI, viewFirstP, viewEndP, viewLastP,
-    loopViewI, loopViewP, clampViewP,
-    itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
-    loopItemI, loopItemP, clampItemP,
-  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
-  
-  let p = startP + deltaP
-  p = noLoop ? clampViewP(p) : loopViewP(p)
-  p = round3(p)
-  setStartProgress(p)
-  
-  let itemP = startItemP + deltaP
-  itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
-  itemP = round3(itemP)
-  setStartItemProgress(itemP)
-  
-  setDeltaProgress(0)
-}

@@ -1,27 +1,23 @@
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
-import {
-  getFixedClampedCarouselProps,
-} from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
+import { defaultCarouselMergeProgress } from '@util/animated/carousel/props/defaultCarouselProps.ts'
+import {
+  fixedForwardCarouselMergeProgress,
+  getFixedForwardLoopedCarouselProps,
+} from '@util/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import { useResizeRef } from '@util/view/useResizeRef.ts'
-import { getViewProps } from '@util/view/ViewProps.ts'
-import { ViewU } from '@util/view/ViewU.ts'
-import React, { useCallback } from 'react'
+import React from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
-import minRatioPort = StyleVals.minRatioPort
-import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
 
 
@@ -63,13 +59,29 @@ const photos = [
     isReady: true, remoteI: 5,
   },
 ] as ProfilePhoto[]
-const data = {
-  photos,
-  name: 'test',
-  birthDate: '2000-10-10',
-  gender: 'MALE' as const,
-  aboutMe: 'Тестовое описание',
-}
+const data = [
+  {
+    photos,
+    name: 'Test',
+    birthDate: '2000-10-10',
+    gender: 'MALE' as const,
+    aboutMe: 'Тестовое описание 1',
+  },
+  {
+    photos: [photos[1], ...photos.slice(1)],
+    name: 'test',
+    birthDate: '2000-10-10',
+    gender: 'MALE' as const,
+    aboutMe: 'Тестовое описание 2',
+  },
+  {
+    photos: [photos[2], ...photos.slice(1)],
+    name: 'test',
+    birthDate: '2000-10-10',
+    gender: 'MALE' as const,
+    aboutMe: 'Тестовое описание 3',
+  },
+]
 
 
 
@@ -79,7 +91,7 @@ const viewsCnt = 3
 
 const FindCouplePage = React.memo(() => {
   
-  const items = [data]
+  const items = data
   const itemsCnt = items.length
   
   const [, , frameRef] = useElemRefGetSet()
@@ -103,15 +115,12 @@ const FindCouplePage = React.memo(() => {
     getTrackProps,
     axis: 'x',
     inverted: false,
-    
-    mergeProgress: ({ setDeltaProgress }) => {
-      setDeltaProgress(0)
-    },
+    mergeProgress: fixedForwardCarouselMergeProgress,
   })
   
   
   const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
-    return getFixedClampedCarouselProps({
+    return getFixedForwardLoopedCarouselProps({
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: dp,
@@ -132,6 +141,7 @@ const FindCouplePage = React.memo(() => {
       if (viewPosI === -1) return 0
       if (viewPosI === 0) return 30
       if (viewPosI === 1) return -1 // hide view
+      return -1
     })()
     
     const transform = (() => {
@@ -181,6 +191,7 @@ const FindCouplePage = React.memo(() => {
   
   return (
     <Pages.FullscreenPageGrad>
+      {/* Make Page Component with settings */}
       <Pages.AddSafeInsets style={{ height: '100%' }}>
         
         <StacksFrame

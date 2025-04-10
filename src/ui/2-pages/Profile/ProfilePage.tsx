@@ -2,7 +2,11 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { getClampedCarouselProps, getItemIProps } from '@util/animated/carousel/carouselProps.ts'
+import {
+  defaultCarouselMergeProgress,
+  getClampedCarouselProps,
+  getItemIProps,
+} from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { CarouselEventCallback, useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -421,6 +425,7 @@ const ProfilePage = React.memo(() => {
     getTrackProps,
     axis: 'x',
     inverted: true,
+    mergeProgress: defaultCarouselMergeProgress,
     noDrag: itemsCnt <= 1,
     noLoop: true,
     onStart,

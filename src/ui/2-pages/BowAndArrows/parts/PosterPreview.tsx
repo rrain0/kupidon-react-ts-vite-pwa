@@ -2,8 +2,9 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import {
+  defaultCarouselMergeProgress,
   getLoopedCarouselProps,
-} from '@util/animated/carousel/carouselProps.ts'
+} from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
@@ -59,6 +60,7 @@ const PosterPreview = React.memo(() => {
     getTrackProps,
     axis: 'x',
     inverted: true,
+    mergeProgress: defaultCarouselMergeProgress,
     noDrag: itemsCnt <= 1,
   })
   
