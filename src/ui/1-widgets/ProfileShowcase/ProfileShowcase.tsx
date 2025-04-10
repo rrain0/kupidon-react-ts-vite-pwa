@@ -1,4 +1,5 @@
-import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import { animatedMapMulti, AnimatedMultiComputed } from '@animated/AnimatedMultiComputed.ts'
+import { AnimatedProperty, AnimatedPropertyToValue } from '@animated/AnimatedProperty.ts'
 import styled from '@emotion/styled'
 import { getLoopedCarouselProps } from '@util/animated/carousel/carouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
@@ -79,6 +80,7 @@ export type ProfileShowcaseProps = {
     transform: string
     scale: number
     opacity: number
+    restItemsOpacity: number
   }>
 }
 export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
@@ -215,18 +217,18 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             opacity: animatedStackProps?.map(p => p.opacity),
           }}
         >
-          {arrOfIndices(visiblePhotosCnt).map(i => {
+          {arrOfIndices(visiblePhotosCnt).map(viewI => {
             return (
               <AnimatedPhotoBox
-                key={i}
+                key={viewI}
                 animatedStyle={{
                   zIndex: animatedProps.map(ap => {
-                    const { viewPosI } = ap(i)
+                    const { viewPosI } = ap(viewI)
                     const z = -viewPosI + visiblePhotosCnt - 1
                     return z
                   }),
                   transform: animatedProps.map(ap => {
-                    const { viewPosI, pCurr } = ap(i)
+                    const { viewPosI, pCurr } = ap(viewI)
                     const y = (() => {
                       if (viewPosI === 0) return pCurr
                       return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
@@ -234,37 +236,58 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                     return `translateY(${y}%)`
                   }),
                   scale: animatedProps.map(ap => {
-                    const { viewPosI, pCurr } = ap(i)
+                    const { viewPosI, pCurr } = ap(viewI)
                     const s = (() => {
                       if (viewPosI === 0) return 100
                       return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
                     })()
                     return s / 100
                   }),
-                  opacity: animatedProps.map(ap => {
-                    const { viewPosI, pCurr } = ap(i)
-                    const o = (() => {
-                      if (viewPosI === 0) return 100 - RangeU.map(
-                        pCurr,
-                        [0, 30, 100],
-                        [0, 0, 100],
-                      )
-                      if (viewPosI === visiblePhotosCnt - 1) return RangeU.map(
-                        pCurr,
-                        [0, 80, 100],
-                        [0, 0, 100],
-                      )
-                      return 100
-                    })()
-                    return o / 100
-                  }),
+                  opacity: animatedMapMulti<[
+                    AnimatedPropertyToValue<typeof animatedProps>,
+                    number | undefined,
+                  ], number>(
+                    [
+                      animatedProps,
+                      // @ts-expect-error
+                      animatedStackProps?.map(asp => asp.restItemsOpacity),
+                    ],
+                    (ap, restItemsOpacity) => {
+                      const { viewPosI, pCurr } = ap(viewI)
+                      const first = viewPosI === 0
+                      const last = viewPosI === visiblePhotosCnt - 1
+                      
+                      const stackO = (() => {
+                        if (!first) {
+                          return restItemsOpacity ?? 1
+                        }
+                        return 1
+                      })() as number
+                      
+                      const o = (() => {
+                        if (first) return 100 - RangeU.map(
+                          pCurr,
+                          [0, 30, 100],
+                          [0, 0, 100],
+                        )
+                        if (last) return RangeU.map(
+                          pCurr,
+                          [0, 80, 100],
+                          [0, 0, 100],
+                        )
+                        return 100
+                      })() / 100
+                      
+                      return Math.min(o, stackO)
+                    }
+                  ),
                 }}
               >
                 {!!photosCnt && (
                   <AnimatedPhoto
                     animatedAttrs={{
                       src: animatedProps.map(ap => {
-                        const { viewItemI } = ap(i)
+                        const { viewItemI } = ap(viewI)
                         return availablePhotos[viewItemI]?.dataUrl ?? ''
                       }),
                     }}
@@ -290,7 +313,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                  font-size: 40px;
                  `}
                  >
-                 {i}
+                 {viewI}
                  </div> */}
               </AnimatedPhotoBox>
             )

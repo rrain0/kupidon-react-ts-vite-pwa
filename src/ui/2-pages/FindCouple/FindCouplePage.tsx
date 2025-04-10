@@ -103,7 +103,6 @@ const FindCouplePage = React.memo(() => {
     getTrackProps,
     axis: 'x',
     inverted: false,
-    //noDrag: itemsCnt <= 1,
     
     mergeProgress: ({ setDeltaProgress }) => {
       setDeltaProgress(0)
@@ -166,7 +165,14 @@ const FindCouplePage = React.memo(() => {
       return 1
     })()
     
-    return { zIndex, transform, scale, opacity }
+    const restItemsOpacity = (() => {
+      if (viewPosI === 0) {
+        return 1 - RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 9], [0, 1])
+      }
+      return 1
+    })()
+    
+    return { zIndex, transform, scale, opacity, restItemsOpacity }
   })
   
   

@@ -25,10 +25,10 @@ export type AnimationEnded = Pu<{
 
 
 
-export class AnimatedValue<Value> implements AnimatedProperty<Value> {
+export class AnimatedValue<const Value> implements AnimatedProperty<Value> {
   
-  constructor(params: { initialValue: Value }) {
-    this.set(params.initialValue)
+  constructor(initialValue: Value) {
+    this.set(initialValue)
   }
   
   
@@ -60,7 +60,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
   get() { return this.cachedValue }
   
-  map<Mapped>(mapper: Mapper<Value, Mapped>) {
+  map<Mapped>(mapper: Mapper<Value, Mapped>): AnimatedComputed<Value, Mapped> {
     return new AnimatedComputed<Value, Mapped>(this, mapper)
   }
   

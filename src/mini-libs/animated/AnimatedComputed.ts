@@ -5,7 +5,7 @@ import Callback1 = TypeU.Callback1
 
 
 
-export class AnimatedComputed<Source, Value> implements AnimatedProperty<Value> {
+export class AnimatedComputed<const Source, const Value> implements AnimatedProperty<Value> {
   
   private cachedValue!: Value
   
@@ -18,7 +18,7 @@ export class AnimatedComputed<Source, Value> implements AnimatedProperty<Value> 
   
   get(): Value { return this.cachedValue }
   
-  map<Mapped>(mapper: Mapper<Value, Mapped>) {
+  map<Mapped>(mapper: Mapper<Value, Mapped>): AnimatedComputed<Value, Mapped> {
     return new AnimatedComputed<Value, Mapped>(this, mapper)
   }
   

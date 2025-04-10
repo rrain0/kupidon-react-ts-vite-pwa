@@ -1,59 +1,99 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
-import { getTime } from 'src/mini-libs/animated/util.ts'
 import Mapper = TypeU.Mapper
 import Callback1 = TypeU.Callback1
 import MapperN = TypeU.MapperN
 
 
 
-export type AnimatedPropsFromSources<Sources extends any[]> = {
-  [Prop in keyof Sources]: Prop extends number ? AnimatedProperty<Sources[Prop]> : Sources[Prop]
-}
-/*
+export type AnimatedPropsFromSources<
+  Sources extends readonly any[],
+  OutTuple extends readonly any[] = [],
+> = Sources extends readonly [infer Curr, ...infer Rest extends readonly any[]]
+  ? AnimatedPropsFromSources<Rest, [...OutTuple,
+    AnimatedProperty<Curr> | (Curr extends undefined ? undefined : never)
+  ]> 
+  : OutTuple
 
-export class AnimatedMultiComputed<Sources extends any[], Value> implements AnimatedProperty<Value> {
+
+
+
+// TODO Animated - if multiple sources change, then there will be multiple updates.
+//  Need to wait until all values are fresh then get them.
+
+export class AnimatedMultiComputed<const Sources extends any[], const Value> 
+implements AnimatedProperty<Value> {
+  
+  private cachedValue!: Value
+  
   constructor(
     readonly sources: AnimatedPropsFromSources<Sources>,
     readonly mapper: MapperN<Sources, Value>,
-  ) { }
-  
-  finish() { this.sources.forEach(it => it.finish()) }
-  get finished() { return this.sources.every(it => it.finished) }
-  get whenFinished() {
-    return Promise.all(this.sources.map(it => it.whenFinished)).then(() => undefined)
+  ) {
+    this.fetchUpdate()
   }
   
-  cancel() { this.sources.forEach(it => it.cancel()) }
-  get canceled() { return this.sources.every(it => it.canceled) }
-  get whenCanceled() {
-    return Promise.all(this.sources.map(it => it.whenCanceled)).then(() => undefined)
+  get(): Value { return this.cachedValue }
+  
+  map<Mapped>(mapper: Mapper<Value, Mapped>): AnimatedComputed<Value, Mapped> {
+    return new AnimatedComputed<Value, Mapped>(this, mapper)
   }
   
-  get(time = getTime()): Value {
-    return this.mapper(...this.sources.map(it => it.get(time)))
+  
+  fetchUpdate() {
+    this.cachedValue = this.mapper(
+      ...this.sources.map((s: undefined | AnimatedProperty<any>) => s?.get()) as Sources
+    )
   }
   
-  readonly update = (...values: Sources) => {
-    const v = this.mapper(...values)
-    for (const l of this.listeners) l(v)
+  readonly update = (values: Sources) => {
+    this.cachedValue = this.mapper(...values)
   }
   
-  map<Mapped>(mapper: Mapper<Value, Mapped>) {
-    return new AnimatedComputed(this, mapper)
+  refresh() {
+    for (const l of this.listeners) l(this.get())
   }
+  
+  readonly updateAndRefresh = (values: Sources) => {
+    this.update(values)
+    this.refresh()
+  }
+  
+  readonly updateAndRefreshMulti = () => {
+    this.fetchUpdate()
+    this.refresh()
+  }
+  
   
   private listeners = new Set<Callback1<Value>>()
+  
   onChange(listener: Callback1<Value>) {
     this.listeners.add(listener)
-    if (this.listeners.size === 1) this.sources.forEach(it => it.onChange(this.update))
+    if (this.listeners.size === 1) {
+      this.sources.forEach(
+        (s: undefined | AnimatedProperty<any>) => s?.onChange(this.updateAndRefreshMulti)
+      )
+    }
   }
+  
   removeOnChange(listener: Callback1<Value>) {
     this.listeners.delete(listener)
-    if (!this.listeners.size) this.sources.forEach(it => it.removeOnChange(this.update))
+    if (!this.listeners.size) {
+      this.sources.forEach(
+        (s: undefined | AnimatedProperty<any>) => s?.removeOnChange(this.updateAndRefreshMulti)
+      )
+    }
   }
   
 }
-*/
+
+
+
+export const animatedMapMulti = <const Sources extends any[], const Value>(
+  sources: AnimatedPropsFromSources<Sources>,
+  mapper: MapperN<Sources, Value>,
+) => {
+  return new AnimatedMultiComputed<Sources, Value>(sources, mapper)
+}
 
