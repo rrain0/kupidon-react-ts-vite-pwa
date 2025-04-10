@@ -17,14 +17,13 @@ import Pu = TypeU.Pu
 
 
 
-// TODO - on stop save curr value and not animate further and delete curr animation
-// TODO - on cancel - remove it or revert animation to initial value and stop it
-//        use animationValue.set(cachedValue) for it
+
 export type AnimationEnded = Pu<{
   finished: boolean
   stopped: boolean
-  canceled: boolean
 }>
+
+
 
 export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
@@ -32,22 +31,31 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
     this.set(params.initialValue)
   }
   
+  
+  startTime: number = 0
   startValue!: Value
   cachedValue!: Value
-  startTime: number = getTime()
   animationData: any
   animationFun: AnimationFun<Value, any> | undefined
   onUpdate: Callback1<AnimationConfigOnUpdateParams<Value>> | undefined
   
-  // не влияет на анимируемое значение, просто переводит в состояние finished
-  finish: Callback = noop
+  
+  
+  setFinishedState: Callback = noop
   finished = false
   whenFinished!: Promise<{ finished: true }>
   
-  // не влияет на анимируемое значение, просто переводит в состояние canceled
-  cancel: Callback = noop
-  canceled = false
-  whenCanceled!: Promise<{ canceled: true }>
+  setStoppedState: Callback = noop
+  stopped = false
+  whenStopped!: Promise<{ stopped: true }>
+  
+  get ended() {
+    return this.finished || this.stopped
+  }
+  get whenEnded(): Promise<AnimationEnded> {
+    return Promise.any([this.whenFinished, this.whenStopped])
+  }
+  
   
   
   get() { return this.cachedValue }
@@ -56,93 +64,105 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
     return new AnimatedComputed<Value, Mapped>(this, mapper)
   }
   
-  
-  setByTime(time = getTime()) {
-    const { value, finished, data } =
-    this.animationFun?.({
-      startValue: this.startValue,
-      time: time - this.startTime,
-      data: this.animationData,
-    })
-    ?? { value: this.startValue, finished: true }
-    this.animationData = data
-    this.onUpdate?.({ value, finished })
-    if (!this.finished && finished) this.finish()
-    this.cachedValue = value
-  }
-  
   set(value: Value) {
-    this.endAnimation()
-    this.resetAnimationCompletionState()
+    this.resetState()
+    
     this.startTime = getTime()
     this.startValue = value
     this.cachedValue = value
     this.animationData = undefined
     this.animationFun = undefined
     this.onUpdate = undefined
-    addAnimation(this.setByTimeAndRefresh)
+    
+    addAnimation(this.updateByTimeAndRefreshAndCheckStopAnimating)
   }
   
   async animate<D = undefined>(animation: AnimationConfig<Value, D>): Promise<AnimationEnded> {
-    this.endAnimation()
-    this.resetAnimationCompletionState()
-    this.startValue = animation.startValue
+    this.resetState()
+    
     this.startTime = getTime()
     if (exists(animation.startTime)) {
       this.startTime = animation.startTime
     }
+    this.startValue = animation.startValue
+    this.cachedValue = animation.startValue
     this.animationData = animation.initialData
     this.animationFun = animation.animationFun
     this.onUpdate = animation.onUpdate
-    addAnimation(this.setByTimeAndRefresh)
-    return Promise.any([this.whenFinished, this.whenCanceled])
+    
+    addAnimation(this.updateByTimeAndRefreshAndCheckStopAnimating)
+    
+    return this.whenEnded
+  }
+  
+  stop() {
+    this.setStoppedState()
+    
+    this.animationData = undefined
+    this.animationFun = undefined
+    this.onUpdate = undefined
+    
+    this.removeAnimationThrottled()
+  }
+  
+  
+  
+  
+  
+  updateByTime(time = getTime()) {
+    const { value, finished, data } =
+      this.animationFun?.({
+        startValue: this.startValue,
+        time: time - this.startTime,
+        data: this.animationData,
+      })
+      ?? { value: this.startValue, finished: true }
+    this.cachedValue = value
+    this.animationData = data
+    this.onUpdate?.({ value, finished })
+    if (!this.finished && finished) this.setFinishedState()
   }
   
   refresh() {
     for (const l of this.listeners) l(this.get())
   }
   
-  readonly setByTimeAndRefresh = (time = getTime()) => {
-    this.setByTime(time)
+  readonly updateByTimeAndRefreshAndCheckStopAnimating = (time = getTime()) => {
+    this.updateByTime(time)
     this.refresh()
-    if (this.finished) this.removeAnimationThrottled()
+    if (this.ended) this.removeAnimationThrottled()
   }
   
   
   private readonly removeAnimationThrottled = withThrottle(400, () => {
-    if (!this.isRunning) {
+    if (this.ended) {
       //console.log('remove')
-      removeAnimation(this.setByTimeAndRefresh)
+      removeAnimation(this.updateByTimeAndRefreshAndCheckStopAnimating)
     }
   })
   
-  get isRunning() {
-    return !this.finished && !this.canceled
-  }
   
-  endAnimation() {
-    if (!this.finished && !this.canceled) this.cancel()
-  }
   
-  resetAnimationCompletionState() {
-    this.finish = noop
+  
+  
+  resetState() {
     this.finished = false
     this.whenFinished = new Promise(resolve => {
-      this.finish = () => {
+      this.setFinishedState = () => {
         this.finished = true
         resolve({ finished: true })
       }
     })
     
-    this.cancel = noop
-    this.canceled = false
-    this.whenCanceled = new Promise(resolve => {
-      this.cancel = () => {
-        this.canceled = true
-        resolve({ canceled: true })
+    this.stopped = false
+    this.whenStopped = new Promise(resolve => {
+      this.setStoppedState = () => {
+        this.stopped = true
+        resolve({ stopped: true })
       }
     })
   }
+  
   
   
   private listeners = new Set<Callback1<Value>>()
@@ -150,7 +170,6 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   onChange(listener: Callback1<Value>) {
     this.listeners.add(listener)
   }
-  
   removeOnChange(listener: Callback1<Value>) {
     this.listeners.delete(listener)
   }

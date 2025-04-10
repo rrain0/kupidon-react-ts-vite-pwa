@@ -7,9 +7,9 @@ TODO Идеи для оптимизации
  и raf только берёт готовые значения и вставляет их в DOM
  */
 
-type UpdateByTimeFun = (time: number) => void
+type UpdateByTimeCallback = (time: number) => void
 
-const anims = new Set<UpdateByTimeFun>()
+const anims = new Set<UpdateByTimeCallback>()
 
 let isUpdating = false
 
@@ -22,7 +22,7 @@ const updateAnims = (time: number) => {
   //console.log('size', anims.size)
 }
 
-export const addAnimation = (anim: UpdateByTimeFun) => {
+export const addAnimation = (anim: UpdateByTimeCallback) => {
   anims.add(anim)
   if (!isUpdating) {
     isUpdating = true
@@ -30,7 +30,7 @@ export const addAnimation = (anim: UpdateByTimeFun) => {
   }
 }
 
-export const removeAnimation = (anim: UpdateByTimeFun) => {
+export const removeAnimation = (anim: UpdateByTimeCallback) => {
   //console.log('anims.has(anim)', anims.has(anim))
   anims.delete(anim)
 }
