@@ -74,6 +74,8 @@ const data = [
     gender: 'MALE' as const,
     aboutMe: 'Тестовое описание 2',
   },
+  // TODO Закомментить 3 элемент и пофиксить странный баг -
+  //  просто листать вперёд надо и на 3 раз будут какие-то постоянные переключения
   {
     photos: [photos[2], ...photos.slice(1)],
     name: 'test',
@@ -82,7 +84,9 @@ const data = [
     aboutMe: 'Тестовое описание 3',
   },
 ]
+// TODO Блочить кнопки во время свайпов вбок
 
+// TODO Сделать анимированные цветные тени, когда свайпаешь и иконки по середине карточки
 
 
 const viewsCnt = 3
@@ -138,9 +142,9 @@ const FindCouplePage = React.memo(() => {
       if (viewPosI === 0) {
         //console.log('viewPosI', viewPosI, 'viewI', viewI - 1, 'pCurr', pCurr, 'dir', dir)
       }
-      if (viewPosI === -1) return 0
       if (viewPosI === 0) return 30
-      if (viewPosI === 1) return -1 // hide view
+      if (viewPosI === 1) return 0
+      if (viewPosI === -1) return -1 // hide view
       return -1
     })()
     
@@ -153,23 +157,21 @@ const FindCouplePage = React.memo(() => {
     })()
     
     const scale = (() => {
-      if (viewPosI === -1) {
-        if (viewPosI === -1) {
-          //console.log('view-1 scale', 0.9 + 0.1 * (Math.abs(pCurr) / 100))
-        }
+      if (viewPosI === 1) {
+        //console.log('view-1 scale', 0.9 + 0.1 * (Math.abs(pCurr) / 100))
         return 0.9 + 0.1 * (Math.abs(pCurr) / 100)
       }
       return 1
     })()
     
     const opacity = (() => {
-      if (viewPosI === -1) {
-        return Math.abs(pCurr) / 100
-      }
       if (viewPosI === 0) {
         return 1 - RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 1.5], [0, 1])
       }
       if (viewPosI === 1) {
+        return Math.abs(pCurr) / 100
+      }
+      if (viewPosI === -1) {
         return 0
       }
       return 1

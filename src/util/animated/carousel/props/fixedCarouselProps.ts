@@ -65,7 +65,7 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
   
-  console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
+  //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
   
   return {
     pos0P, pCurr, dir, pos0PBase,
