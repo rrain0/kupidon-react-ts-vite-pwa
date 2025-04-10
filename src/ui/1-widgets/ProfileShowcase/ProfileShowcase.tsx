@@ -66,6 +66,17 @@ const maxVisiblePhotosCnt = 4
 
 
 
+export type AnimatedStackProps = AnimatedProperty<{
+  zIndex: number
+  transform: string
+  scale: number
+  opacity: number
+  restItemsOpacity: number
+  action: 'accept' | 'reject' | undefined
+  shadowIntensity: number | undefined
+}>
+
+
 
 
 export type ProfileShowcaseCssProps = {
@@ -78,13 +89,7 @@ export type ProfileShowcaseProps = {
   birthDate: string
   gender: GenderOptionValues
   aboutMe: string
-  animatedStackProps?: undefined | AnimatedProperty<{
-    zIndex: number
-    transform: string
-    scale: number
-    opacity: number
-    restItemsOpacity: number
-  }>
+  animatedStackProps?: undefined | AnimatedStackProps
 }
 export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const {
@@ -283,6 +288,31 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                       })() / 100
                       
                       return Math.min(o, stackO)
+                    }
+                  ),
+                  boxShadow: animatedMapMulti<[
+                    AnimatedPropertyToValue<typeof animatedProps>,
+                    AnimatedPropertyToValue<typeof animatedStackProps>,
+                  ], string/*  TODO | undefined */>(
+                    [animatedProps, animatedStackProps],
+                    (ap, asp) => {
+                      const { viewPosI } = ap(viewI)
+                      const first = viewPosI === 0
+                      const { action, shadowIntensity = 0 } = asp ?? { }
+                      
+                      const color = (() => {
+                        // TODO theme
+                        if (action === 'accept') return '#cb3357'
+                        if (action === 'reject') return 'black'
+                      })()
+                      
+                      if (first && color && shadowIntensity) {
+                        const blurR = RangeU.map(shadowIntensity, [0, 1], [6, 30])
+                        const spreadR = RangeU.map(shadowIntensity, [0, 1], [1, 30])
+                        return `0 0 ${blurR}px ${spreadR}px ${color}`
+                      }
+                      
+                      return ''
                     }
                   ),
                 }}

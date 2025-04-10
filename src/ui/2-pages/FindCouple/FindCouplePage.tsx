@@ -137,6 +137,9 @@ const FindCouplePage = React.memo(() => {
   
   const animatedStackProps = animatedProps.map(ap => (viewI = 0) => {
     const { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
+    // TODO запихать их в getIndexesProps
+    const first = viewPosI === 0
+    const last = viewPosI === -1
     
     const zIndex = (() => {
       if (viewPosI === 0) {
@@ -184,7 +187,19 @@ const FindCouplePage = React.memo(() => {
       return 1
     })()
     
-    return { zIndex, transform, scale, opacity, restItemsOpacity }
+    const action = (() => {
+      if (!first) return undefined
+      if (dir === 1) return 'accept' as const
+      if (dir === -1) return 'reject' as const
+      return undefined
+    })()
+    
+    const shadowIntensity = (() => {
+      if (!first) return undefined
+      return RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 2], [0, 1])
+    })()
+    
+    return { zIndex, transform, scale, opacity, restItemsOpacity, action, shadowIntensity }
   })
   
   
@@ -193,7 +208,7 @@ const FindCouplePage = React.memo(() => {
   
   return (
     <Pages.FullscreenPageGrad>
-      {/* Make Page Component with settings */}
+      {/* TODO Make Page Component with settings */}
       <Pages.AddSafeInsets style={{ height: '100%' }}>
         
         <StacksFrame
