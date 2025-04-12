@@ -43,18 +43,15 @@ export namespace RangeU {
   }
   
   
-  // ✅ Не требует округлений результата
   export const move = <R extends NumRanges>(ranges: R, to: number): R => {
     const shift = to - ranges[0]
     return ranges.map(n => n + shift) as R
   }
   
   
-  // ✅ Не требует округлений результата
   export const zeroBased = (range: NumRange): NumRange => move(range, 0)
   
   
-  // ✅ Не требует округлений результата
   export const loop = (curr: number, range: NumRange, minIncl = true, maxIncl = false): number => {
     const zeroBasedRange = zeroBased(range)
     const zeroBasedCurr = curr - range[0]

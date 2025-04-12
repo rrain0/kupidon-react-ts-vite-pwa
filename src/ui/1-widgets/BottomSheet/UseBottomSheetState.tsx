@@ -7,14 +7,14 @@ import {
   SheetState, UseBottomSheetOptions,
 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet.ts'
 import Callback = TypeU.Callback
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 
 
 
 
 export type UseBottomSheetStateProps = {
   isOpen: boolean
-} & PartialUndef<{
+} & Pu<{
   onClose: Callback
   defaultOpenIdx: number
   snapPoints: SheetSnapPoints

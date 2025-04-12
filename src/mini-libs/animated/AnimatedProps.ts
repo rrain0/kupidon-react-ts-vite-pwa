@@ -3,34 +3,43 @@ import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import Pu = TypeU.Pu
 
 
+
 export type AnimatedString = AnimatedProperty<string>
 export type AnimatedNumber = AnimatedProperty<number>
-export type AnimatedStringOrNumber = AnimatedString | AnimatedNumber | AnimatedProperty<string | number>
+export type AnimatedUndef = AnimatedProperty<undefined>
+
+export type AnimatedStringOrUndef =
+  AnimatedString | AnimatedUndef | AnimatedProperty<string | undefined>
+export type AnimatedNumberOrUndef =
+  AnimatedNumber | AnimatedUndef | AnimatedProperty<number | undefined>
+
+export type AnimatedStringOrNumberOrUndef =
+  AnimatedStringOrUndef | AnimatedNumberOrUndef | AnimatedProperty<string | number | undefined>
 
 
 
 export type AnimatedElemStyleExplicit = Pu<{
-  transform: AnimatedString
-  translate: AnimatedString
-  rotate: AnimatedString
-  scale: AnimatedStringOrNumber
-  opacity: AnimatedStringOrNumber
+  transform: AnimatedStringOrUndef
+  translate: AnimatedStringOrUndef
+  rotate: AnimatedStringOrUndef
+  scale: AnimatedStringOrNumberOrUndef
+  opacity: AnimatedStringOrNumberOrUndef
   
-  top: AnimatedString
-  right: AnimatedString
-  bottom: AnimatedString
-  left: AnimatedString
-  zIndex: AnimatedStringOrNumber
+  top: AnimatedStringOrUndef
+  right: AnimatedStringOrUndef
+  bottom: AnimatedStringOrUndef
+  left: AnimatedStringOrUndef
+  zIndex: AnimatedStringOrNumberOrUndef
 }>
 export type AnimatedElemStyleRest = Pu<{
-  [Prop in Exclude<keyof CSSStyleDeclaration, keyof AnimatedElemStyleExplicit>]: AnimatedString
+  [Prop in Exclude<keyof CSSStyleDeclaration, keyof AnimatedElemStyleExplicit>]: AnimatedStringOrUndef
 }>
 export type AnimatedElemStyle = AnimatedElemStyleExplicit & AnimatedElemStyleRest
 
 
 
 export type AnimatedImgAttrs = Pu<{
-  src: AnimatedString
+  src: AnimatedStringOrUndef
 }>
 
 

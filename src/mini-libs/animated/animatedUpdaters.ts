@@ -47,7 +47,7 @@ const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
 
 
 export type ImgAttrsUpdatersExplicit = Pu<{
-  src: (value: string) => void
+  src?: (value: string) => void
 }>
 export type ImgAttrsUpdaters = ImgAttrsUpdatersExplicit
 const createImgAttrsUpdaters = (
@@ -59,7 +59,8 @@ const createImgAttrsUpdaters = (
   
   for (const attr in animatedImgAttrs) {
     if (attr === 'src') {
-      updaters[attr] = (value: string) => {
+      updaters[attr] = (value?: string) => {
+        if (value === undefined) return
         const el = imgRef.current
         if (el) {
           el.src = value
@@ -67,7 +68,8 @@ const createImgAttrsUpdaters = (
       }
     }
     else {
-      updaters[attr] = (value: string) => {
+      updaters[attr] = (value?: string) => {
+        if (value === undefined) return
         const el = imgRef.current
         if (el) {
           el.style[attr] = value
@@ -82,19 +84,19 @@ const createImgAttrsUpdaters = (
 
 
 export type ElemStyleUpdatersExplicit = Pu<{
-  transform: (value: string) => void
-  translate: (value: string) => void
-  rotate: (value: string | number) => void
-  scale: (value: string | number) => void
-  opacity: (value: string | number) => void
-  top: (value: string | number) => void
-  right: (value: string | number) => void
-  bottom: (value: string | number) => void
-  left: (value: string | number) => void
-  zIndex: (value: string | number) => void
+  transform: (value?: string) => void
+  translate: (value?: string) => void
+  rotate: (value?: string | number) => void
+  scale: (value?: string | number) => void
+  opacity: (value?: string | number) => void
+  top: (value?: string | number) => void
+  right: (value?: string | number) => void
+  bottom: (value?: string | number) => void
+  left: (value?: string | number) => void
+  zIndex: (value?: string | number) => void
 }>
 export type ElemStyleUpdatersRest = Pu<{
-  [Prop in Exclude<keyof CSSStyleDeclaration, keyof ElemStyleUpdatersExplicit>]: (value: string) => void
+  [Prop in Exclude<keyof CSSStyleDeclaration, keyof ElemStyleUpdatersExplicit>]: (value?: string) => void
 }>
 export type ElemStyleUpdaters = ElemStyleUpdatersExplicit & ElemStyleUpdatersRest
 
@@ -107,7 +109,8 @@ const createElemStyleUpdaters = (
   
   for (const prop in animatedElemStyle) {
     if (prop === 'transform' || prop === 'translate') {
-      updaters[prop] = (value: string) => {
+      updaters[prop] = (value?: string) => {
+        if (value === undefined) return
         const el = elemRef.current
         if (el) {
           el.style[prop] = value
@@ -115,7 +118,8 @@ const createElemStyleUpdaters = (
       }
     }
     else if (prop === 'rotate') {
-      updaters[prop] = (value: string | number) => {
+      updaters[prop] = (value?: string | number) => {
+        if (value === undefined) return
         const el = elemRef.current
         if (el) {
           if (isnumber(value)) value = `${value}turn`
@@ -124,7 +128,8 @@ const createElemStyleUpdaters = (
       }
     }
     else if (prop === 'scale' || prop === 'opacity' || prop === 'zIndex') {
-      updaters[prop] = (value: string | number) => {
+      updaters[prop] = (value?: string | number) => {
+        if (value === undefined) return
         const el = elemRef.current
         if (el) {
           value = `${value}`
@@ -133,7 +138,8 @@ const createElemStyleUpdaters = (
       }
     }
     else if (prop === 'top' || prop === 'right' || prop === 'bottom' || prop === 'left') {
-      updaters[prop] = (value: string | number) => {
+      updaters[prop] = (value?: string | number) => {
+        if (value === undefined) return
         const el = elemRef.current
         if (el) {
           if (isnumber(value)) value = `${value}px`
@@ -142,7 +148,8 @@ const createElemStyleUpdaters = (
       }
     }
     else {
-      updaters[prop] = (value: string) => {
+      updaters[prop] = (value?: string) => {
+        if (value === undefined) return
         const el = elemRef.current
         if (el) {
           el.style[prop] = value

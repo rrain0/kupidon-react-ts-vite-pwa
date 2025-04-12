@@ -1,3 +1,5 @@
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
 import React, { useMemo } from 'react'
@@ -15,7 +17,7 @@ import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGender
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import Callback = TypeU.Callback
 import Txt = EmotionCommon.Txt
@@ -32,9 +34,10 @@ import RulerCornerIc = SvgIconsPack.RulerCornerIc
 
 
 
-export type PreviewFullInfoProps = ClassStyle & Children & Puro<{
+export type PreviewFullInfoProps = ClassStyle & Children & Pu<{
   isOpen: boolean
   close: Callback
+  opacity: AnimatedProperty<number>
   name: string
   birthDate: string
   gender: GenderOptionValues
@@ -44,6 +47,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   const {
     isOpen = false,
     close,
+    opacity,
     name,
     birthDate,
     gender,
@@ -123,7 +127,10 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
       defaultOpenIdx={0}
     >
       {props => (
-        <BottomSheetFrame data-display-name="PreviewFullInfo">
+        <BottomSheetFrame
+          data-display-name="PreviewFullInfo"
+          animatedStyle={{ opacity }}
+        >
           <BottomSheetBasic
             css={BottomSheetBasicS6.t(bottomSheetS)}
             bgDim={false}
@@ -196,7 +203,7 @@ export default PreviewFullInfo
 
 
 
-const BottomSheetFrame = styled.div`
+const BottomSheetFrame = styled(AnimatedDiv)`
   position: absolute;
   left: 50%;
   bottom: 0;

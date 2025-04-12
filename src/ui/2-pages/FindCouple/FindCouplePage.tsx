@@ -1,7 +1,6 @@
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
-import { defaultCarouselMergeProgress } from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import {
   fixedForwardCarouselMergeProgress,
   getFixedForwardLoopedCarouselProps,
@@ -10,7 +9,7 @@ import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import React from 'react'
+import React, { useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
@@ -76,17 +75,20 @@ const data = [
   },
   // TODO Закомментить 3 элемент и пофиксить странный баг -
   //  просто листать вперёд надо и на 3 раз будут какие-то постоянные переключения
-  {
+  /* {
     photos: [photos[2], ...photos.slice(1)],
     name: 'test',
     birthDate: '2000-10-10',
     gender: 'MALE' as const,
     aboutMe: 'Тестовое описание 3',
-  },
+  }, */
 ]
-// TODO Блочить кнопки во время свайпов вбок
 
 // TODO Сделать анимированные цветные тени, когда свайпаешь и иконки по середине карточки
+
+// TODO Закрыть шторку при переходе на другую анкету:
+
+
 
 
 const viewsCnt = 3
@@ -100,6 +102,8 @@ const FindCouplePage = React.memo(() => {
   
   const [, , frameRef] = useElemRefGetSet()
   const getTrackProps = createTrackPropsGetter(frameRef)
+  
+  const [isAnimating, setIsAnimating] = useState(false)
   
   const {
     isDragging,
@@ -120,6 +124,9 @@ const FindCouplePage = React.memo(() => {
     axis: 'x',
     inverted: false,
     mergeProgress: fixedForwardCarouselMergeProgress,
+    
+    onStart: () => setIsAnimating(true),
+    onFinish: () => setIsAnimating(false),
   })
   
   
@@ -136,10 +143,7 @@ const FindCouplePage = React.memo(() => {
   })
   
   const animatedStackProps = animatedProps.map(ap => (viewI = 0) => {
-    const { viewPosI, pCurr, dir, loopViewI } = ap(viewI)
-    // TODO запихать их в getIndexesProps
-    const first = viewPosI === 0
-    const last = viewPosI === -1
+    const { first, viewPosI, pCurr, dir } = ap(viewI)
     
     const zIndex = (() => {
       if (viewPosI === 0) {
@@ -169,7 +173,7 @@ const FindCouplePage = React.memo(() => {
     
     const opacity = (() => {
       if (viewPosI === 0) {
-        return 1 - RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 1.5], [0, 1])
+        return RangeU.map(100 - Math.abs(pCurr), [0, 55, 100], [0, 1, 1])
       }
       if (viewPosI === 1) {
         return Math.abs(pCurr) / 100
@@ -180,12 +184,15 @@ const FindCouplePage = React.memo(() => {
       return 1
     })()
     
+    
     const restItemsOpacity = (() => {
       if (viewPosI === 0) {
-        return 1 - RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 9], [0, 1])
+        return 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
       }
       return 1
     })()
+    
+    const fullInfoOpacity = 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
     
     const action = (() => {
       if (!first) return undefined
@@ -196,10 +203,14 @@ const FindCouplePage = React.memo(() => {
     
     const shadowIntensity = (() => {
       if (!first) return undefined
-      return RangeU.mapClamp(Math.abs(pCurr), [0, 100], [0, 2], [0, 1])
+      return RangeU.map(Math.abs(pCurr), [0, 25, 100], [0, 1, 1])
     })()
     
-    return { zIndex, transform, scale, opacity, restItemsOpacity, action, shadowIntensity }
+    
+    return {
+      zIndex, transform, scale, opacity,
+      restItemsOpacity, fullInfoOpacity, action, shadowIntensity,
+    }
   })
   
   
@@ -232,6 +243,7 @@ const FindCouplePage = React.memo(() => {
                         birthDate={item.birthDate}
                         gender={item.gender}
                         aboutMe={item.aboutMe}
+                        hideButtons={isAnimating}
                         animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
                       />
                     )

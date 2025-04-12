@@ -36,7 +36,7 @@ import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import attrExists = TypeU.attrExists
 import notExists = TypeU.notExists
-import round1 = MathU.round1
+import rf1 = MathU.rf1
 import resetH = EmotionCommon.resetH
 import rowE = EmotionCommon.rowE
 
@@ -167,7 +167,7 @@ const MbtiTestingPage = React.memo(() => {
   
   const [goBackAfterCompletion] = useState(testState !== 'completed')
   
-  const progress = round1((1 - cntUnanswered / totalCnt) * 100)
+  const progress = rf1((1 - cntUnanswered / totalCnt) * 100)
   
   
   const getNext = (answers: (null | number)[], since: number = 0) => {

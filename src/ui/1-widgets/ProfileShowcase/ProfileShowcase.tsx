@@ -1,5 +1,5 @@
-import { animatedMapMulti, AnimatedMultiComputed } from '@animated/AnimatedMultiComputed.ts'
-import { AnimatedProperty, AnimatedPropertyToValue } from '@animated/AnimatedProperty.ts'
+import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
@@ -74,14 +74,15 @@ export type AnimatedStackProps = AnimatedProperty<{
   restItemsOpacity: number
   action: 'accept' | 'reject' | undefined
   shadowIntensity: number | undefined
+  fullInfoOpacity: number
 }>
 
 
 
 
 export type ProfileShowcaseCssProps = {
-  '--ph': '<length>'
-  '--pv': '<length>'
+  '--ph': '<length>' // padding horizontal
+  '--pv': '<length>' // padding vertical
 }
 export type ProfileShowcaseProps = {
   photos: ProfilePhoto[]
@@ -89,6 +90,7 @@ export type ProfileShowcaseProps = {
   birthDate: string
   gender: GenderOptionValues
   aboutMe: string
+  hideButtons?: boolean | undefined
   animatedStackProps?: undefined | AnimatedStackProps
 }
 export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
@@ -98,6 +100,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     birthDate,
     gender,
     aboutMe,
+    hideButtons: _hideButtons,
     animatedStackProps,
   } = props
   
@@ -136,7 +139,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   const {
-    isDragging,
+    isDragging: isPhotosDragging,
     getIsDragging,
     getWasDragged,
     onTrackDrag,
@@ -157,6 +160,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     noDrag: !isPhotosDraggable,
   }, [availablePhotos])
   
+  const hideButtons = isPhotosDragging || _hideButtons
+  
   
   const [isInfoOpen, openInfo, closeInfo] = useBool(false)
   
@@ -165,8 +170,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     return animatedDeltaProgress.map(cp => getStartItemProgress() + cp)
   }, [animatedDeltaProgress])
   
-  const animatedProps = animatedDeltaProgress.map(dp => (viewI: number) => {
-    return  getLoopedCarouselProps({
+  const animatedPhoto = animatedDeltaProgress.map(dp => (viewI: number) => {
+    const _props = getLoopedCarouselProps({
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: dp,
@@ -175,7 +180,45 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       startViewI: 0,
       currViewI: viewI,
     })
+    const props = {
+      ..._props,
+      // TODO start view indexes from -1
+      end: _props.viewPosI === visiblePhotosCnt - 1,
+      // TODO maybe add this to props
+      endI: visiblePhotosCnt - 1,
+    }
+    
+    const { first, end, endI, viewPosI, pCurr } = props
+    
+    const z = -viewPosI + endI
+    
+    const y = (() => {
+      if (first) return pCurr
+      return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+    })()
+    
+    const scale = (() => {
+      if (first) return 100
+      return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+    })() / 100
+    
+    const opacity = (() => {
+      if (first) return 100 - RangeU.map(
+        pCurr,
+        [0, 30, 100],
+        [0, 0, 100],
+      )
+      if (end) return RangeU.map(
+        pCurr,
+        [0, 80, 100],
+        [0, 0, 100],
+      )
+      return 100
+    })() / 100
+    
+    return { ...props, z, y, scale, opacity }
   })
+  
   
   
   
@@ -231,78 +274,32 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
               <AnimatedPhotoBox
                 key={viewI}
                 animatedStyle={{
-                  zIndex: animatedProps.map(ap => {
-                    const { viewPosI } = ap(viewI)
-                    const z = -viewPosI + visiblePhotosCnt - 1
-                    return z
-                  }),
-                  transform: animatedProps.map(ap => {
-                    const { viewPosI, pCurr } = ap(viewI)
-                    const y = (() => {
-                      if (viewPosI === 0) return pCurr
-                      return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                    })()
-                    return `translateY(${y}%)`
-                  }),
-                  scale: animatedProps.map(ap => {
-                    const { viewPosI, pCurr } = ap(viewI)
-                    const s = (() => {
-                      if (viewPosI === 0) return 100
-                      return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-                    })()
-                    return s / 100
-                  }),
-                  opacity: animatedMapMulti<[
-                    AnimatedPropertyToValue<typeof animatedProps>,
-                    number | undefined,
-                  ], number>(
-                    [
-                      animatedProps,
-                      // @ts-expect-error
-                      animatedStackProps?.map(asp => asp.restItemsOpacity),
-                    ],
-                    (ap, restItemsOpacity) => {
-                      const { viewPosI, pCurr } = ap(viewI)
-                      const first = viewPosI === 0
-                      const last = viewPosI === visiblePhotosCnt - 1
+                  zIndex: animatedPhoto.map(ap => ap(viewI).z),
+                  transform: animatedPhoto.map(ap => `translateY(${ap(viewI).y}%)`),
+                  scale: animatedPhoto.map(ap => ap(viewI).scale),
+                  opacity: animatedMapMulti(
+                    [animatedPhoto, animatedStackProps],
+                    (ap, as) => {
+                      const { restItemsOpacity } = as ?? { }
+                      const { first, opacity } = ap(viewI)
                       
-                      const stackO = (() => {
-                        if (!first) {
-                          return restItemsOpacity ?? 1
-                        }
+                      const restOpacity = (() => {
+                        if (!first) return restItemsOpacity ?? 1
                         return 1
-                      })() as number
+                      })()
                       
-                      const o = (() => {
-                        if (first) return 100 - RangeU.map(
-                          pCurr,
-                          [0, 30, 100],
-                          [0, 0, 100],
-                        )
-                        if (last) return RangeU.map(
-                          pCurr,
-                          [0, 80, 100],
-                          [0, 0, 100],
-                        )
-                        return 100
-                      })() / 100
-                      
-                      return Math.min(o, stackO)
+                      return Math.min(opacity, restOpacity)
                     }
                   ),
-                  boxShadow: animatedMapMulti<[
-                    AnimatedPropertyToValue<typeof animatedProps>,
-                    AnimatedPropertyToValue<typeof animatedStackProps>,
-                  ], string/*  TODO | undefined */>(
-                    [animatedProps, animatedStackProps],
+                  boxShadow: animatedMapMulti(
+                    [animatedPhoto, animatedStackProps],
                     (ap, asp) => {
-                      const { viewPosI } = ap(viewI)
-                      const first = viewPosI === 0
-                      const { action, shadowIntensity = 0 } = asp ?? { }
+                      const { first } = ap(viewI)
+                      const { action, shadowIntensity } = asp ?? { }
                       
                       const color = (() => {
                         // TODO theme
-                        if (action === 'accept') return '#cb3357'
+                        if (action === 'accept') return '#9e364e'
                         if (action === 'reject') return 'black'
                       })()
                       
@@ -320,7 +317,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                 {!!photosCnt && (
                   <AnimatedPhoto
                     animatedAttrs={{
-                      src: animatedProps.map(ap => {
+                      src: animatedPhoto.map(ap => {
                         const { viewItemI } = ap(viewI)
                         return availablePhotos[viewItemI]?.dataUrl ?? ''
                       }),
@@ -354,7 +351,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
           })}
           
           <PreviewInfoOverlay
-            isDragging={isDragging}
+            actionButtonsDisabled={hideButtons}
             photosCnt={photosCnt}
             openInfo={openInfo}
             photoProgress={animatedPhotoProgress}
@@ -372,6 +369,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       <PreviewFullInfo
         isOpen={isInfoOpen}
         close={closeInfo}
+        opacity={animatedStackProps?.map(p => p.fullInfoOpacity)}
         name={name}
         birthDate={birthDate}
         gender={gender}

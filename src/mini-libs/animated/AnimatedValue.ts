@@ -25,7 +25,7 @@ export type AnimationEnded = Pu<{
 
 
 
-export class AnimatedValue<const Value> implements AnimatedProperty<Value> {
+export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
   constructor(initialValue: Value) {
     this.set(initialValue)

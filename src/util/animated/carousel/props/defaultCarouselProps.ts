@@ -1,7 +1,7 @@
 import { MathU } from 'src/util/common/MathU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import mod = MathU.mod
-import round3 = MathU.round3
+import rf3 = MathU.rf3
 import Sign = TypeU.Sign
 import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon'
 
@@ -42,31 +42,31 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
     loopItemI, loopItemP, clampItemP,
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
-  startP = round3(startP)
-  startItemP = round3(startItemP)
-  deltaP = round3(deltaP)
-  
   viewI += viewFirstI
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = startP + deltaP
+  const pos0P = rf3(startP + deltaP)
   const dir = Math.sign(deltaP)
-  const pCurr = mod(pos0P, 100)
-  const pos0PBase = pos0P - pCurr
+  const pCurr = rf3(mod(pos0P, 100))
+  const pos0PBase = rf3(pos0P - pCurr)
   
-  const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
+  const pos0ViewI = loopViewI(Math.floor(rf3(pos0P / 100)))
   
-  const pos0ItemP = startItemP + deltaP
-  const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
-  const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
+  const pos0ItemP = rf3(startItemP + deltaP)
+  const pos0ItemI = loopItemI(rf3(Math.floor(rf3(pos0ItemP / 100)) + itemFirstI))
+  const pos0ItemHalfI = loopItemI(Math.floor(rf3((pos0ItemP + 50) / 100)))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
   const viewPosI = loopViewI(viewI - pos0ViewI)
-  const viewPosPBase = loopViewP(pos0P + 100 * viewPosI)
+  const viewPosPBase = loopViewP(rf3(pos0P + 100 * viewPosI))
   
-  const viewP = loopViewP(100 * viewPosI - pCurr)
+  const viewP = loopViewP(rf3(100 * viewPosI - pCurr))
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
+  
+  const first = viewPosI === 0
+  const last = viewPosI === viewLastI
+  const end = viewPosI === viewFirstI
   
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
   
@@ -78,6 +78,7 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
     viewPosI, viewPosPBase,
     viewP, viewI,
     viewItemI,
+    first, last, end,
   }
 }
 
@@ -104,33 +105,33 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
     loopItemI, loopItemP, clampItemP,
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
-  startP = round3(startP)
-  startItemP = round3(startItemP)
-  deltaP = round3(deltaP)
-  
   viewI += viewFirstI
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const pos0P = clampViewP(loopViewP(startP) + deltaP)
+  const pos0P = clampViewP(rf3(loopViewP(startP) + deltaP))
   const dir = Math.sign(deltaP) as Sign
-  const pCurr = mod(pos0P, 100)
-  const pos0PBase = pos0P - pCurr
+  const pCurr = rf3(mod(pos0P, 100))
+  const pos0PBase = rf3(pos0P - pCurr)
   
-  const pos0ViewI = loopViewI(Math.floor(pos0P / 100))
+  const pos0ViewI = loopViewI(Math.floor(rf3(pos0P / 100)))
   
   const pos0ItemP = clampItemP(loopItemP(startItemP) + deltaP)
-  const pos0ItemI = loopItemI(Math.floor(pos0ItemP / 100) + itemFirstI)
-  const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemP + 50) / 100))
+  const pos0ItemI = loopItemI(Math.floor(rf3(pos0ItemP / 100)) + itemFirstI)
+  const pos0ItemHalfI = loopItemI(Math.floor(rf3((pos0ItemP + 50) / 100)))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
   const viewPosI = viewI - pos0ViewI
-  const viewPosPBase = pos0P + 100 * viewPosI
+  const viewPosPBase = rf3(pos0P + 100 * viewPosI)
   
   const viewPBase = 100 * viewPosI
   const viewPCurr = pCurr
-  const viewP = viewPBase - viewPCurr
+  const viewP = rf3(viewPBase - viewPCurr)
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
+  
+  const first = viewPosI === 0
+  const last = viewPosI === viewLastI
+  const end = viewPosI === viewFirstI
   
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
   
@@ -142,6 +143,7 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
     viewPosI, viewPosPBase,
     viewPBase, viewPCurr, viewP, viewI,
     viewItemI,
+    first, last, end,
   }
 }
 
@@ -167,14 +169,12 @@ export const defaultCarouselMergeProgress: MergeProgressCallback = (props) => {
     loopItemI, loopItemP, clampItemP,
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
-  let p = startP + deltaP
+  let p = rf3(startP + deltaP)
   p = noLoop ? clampViewP(p) : loopViewP(p)
-  p = round3(p)
   setStartProgress(p)
   
-  let itemP = startItemP + deltaP
+  let itemP = rf3(startItemP + deltaP)
   itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
-  itemP = round3(itemP)
   setStartItemProgress(itemP)
   
   setDeltaProgress(0)

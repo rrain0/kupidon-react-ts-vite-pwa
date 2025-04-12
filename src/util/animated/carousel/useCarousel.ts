@@ -19,7 +19,7 @@ import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useEvent } from 'src/util/react/useEvent.ts'
 import Pu = TypeU.Pu
 import exists = TypeU.exists
-import round3 = MathU.round3
+import rf3 = MathU.rf3
 import Getter = TypeU.Getter
 import Setter = TypeU.Setter
 
@@ -178,13 +178,13 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }: AnimateToParams) => {
     const startP = getStartProgress()
     const deltaP = getDeltaProgress()
-    const p = startP + deltaP
-    const pCurr = p % 100
-    const pBase = p - pCurr
+    const p = rf3(startP + deltaP)
+    const pCurr = rf3(p % 100)
+    const pBase = rf3(p - pCurr)
       
     ;[nextP, vel0] = (() => {
-      if (exists(next)) return [pBase + 100, +vThreshold]
-      if (exists(prev)) return [pBase - 100, -vThreshold]
+      if (exists(next)) return [rf3(pBase + 100), +vThreshold]
+      if (exists(prev)) return [rf3(pBase - 100), -vThreshold]
       //if (exists(nextItemI)) return [0, 0]
       if (exists(nextP)) return [
         nextP,
@@ -196,7 +196,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     if (exists(nextP) && p !== nextP) {
       tryEmitStartEvent()
-      const nextDeltaP = nextP - startP
+      const nextDeltaP = rf3(nextP - startP)
       
       //console.log('p & deltaP', p, deltaP, 'nextP & nextDeltaP', nextP, nextDeltaP, 'vel0', vel0)
       
@@ -214,7 +214,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
             initVelocity: vel0,
             endValue: nextDeltaP,
           }),
-          onUpdate: ({ value }) => setDeltaProgress(value),
+          onUpdate: ({ value }) => setDeltaProgress(rf3(value)),
         })
         if (!finished) return
       }
@@ -232,9 +232,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     const startP = getStartProgress()
     const deltaP = getDeltaProgress()
-    const p = startP + deltaP
-    const pCurr = p % 100
-    const pBase = p - pCurr
+    const p = rf3(startP + deltaP)
+    const pCurr = rf3(p % 100)
+    const pBase = rf3(p - pCurr)
     
     const [nextPCurr, vel0Percent] = (() => {
       if (Math.abs(velPercent) >= vThreshold) {
@@ -258,7 +258,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     
     const vel0 = getVelPx(vel0Percent)
-    const nextP = pBase + nextPCurr
+    const nextP = rf3(pBase + nextPCurr)
     void animateTo({ p: nextP, vel0 })
   }
   
@@ -339,7 +339,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     updateIntervalProgress({ reset: first, value: vpVal, dValue: dVal })
     
     // onEachDrag
-    applyOnEachDrag(round3(getIntervalDeltaProgress()), horizontal, vertical, drag)
+    applyOnEachDrag(rf3(getIntervalDeltaProgress()), horizontal, vertical, drag)
     // onDragStart
     if (first) { applyOnFirstDrag() }
     // onDragging

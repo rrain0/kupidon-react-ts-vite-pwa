@@ -199,8 +199,8 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
     ) */
     /* if (first){
       setLogData([JSON.stringify({
-        vpx: MathUtils.round(vpx, 3),
-        vpy: MathUtils.round(vpy, 3),
+        vpx: MathUtils.rf(vpx, 3),
+        vpy: MathUtils.rf(vpy, 3),
       })])
     } */
     

@@ -30,7 +30,7 @@ import abs = EmotionCommon.abs
 
 
 export type PreviewInfoOverlayProps = ClassStyle & Pu<{
-  isDragging: boolean
+  actionButtonsDisabled: boolean
   photoProgress: AnimatedProperty<number>
   photosCnt: number
   openInfo: Callback
@@ -40,7 +40,7 @@ export type PreviewInfoOverlayProps = ClassStyle & Pu<{
 }>
 export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) => {
   const {
-    isDragging = false,
+    actionButtonsDisabled,
     photoProgress,
     photosCnt = 1,
     openInfo,
@@ -74,7 +74,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       
       <ShortInfoContainer>
         <ShortInfoBox
-          data-disabled={attrExists(isDragging)}
+          data-disabled={attrExists(actionButtonsDisabled)}
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
@@ -89,7 +89,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       <ActionButtonsBox>
         <Button
           css={IconButtonS6.t(backButtonS)}
-          disabled={isDragging}
+          disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
@@ -99,7 +99,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         </Button>
         <Button
           css={IconButtonS6.t(dislikeButtonS)}
-          disabled={isDragging}
+          disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
@@ -109,7 +109,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         </Button>
         <Button
           css={IconButtonS6.t(likeButtonS)}
-          disabled={isDragging}
+          disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
@@ -119,7 +119,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         </Button>
         <Button
           css={IconButtonS6.t(infoButtonS)}
-          disabled={isDragging}
+          disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
             console.log('click openInfo')

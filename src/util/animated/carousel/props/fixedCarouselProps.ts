@@ -5,8 +5,8 @@ import {
 import { MathU } from 'src/util/common/MathU.ts'
 import { RangeU } from 'src/util/common/RangeU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import round3 = MathU.round3
 import Sign = TypeU.Sign
+import rf3 = MathU.rf3
 
 
 
@@ -35,37 +35,39 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
     loopItemI, loopItemP, clampItemP,
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
-  startP = round3(startP)
-  startItemP = round3(startItemP)
-  deltaP = round3(deltaP)
-  
   viewI += viewFirstI
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
-  const _pos0P = startP + deltaP
-  const pos0PBase = Math.floor(startP / 100) * 100
-  const pCurr = RangeU.clamp(_pos0P - pos0PBase, [-100, 100])
-  const pos0P = pos0PBase + pCurr
+  const _pos0P = rf3(startP + deltaP)
+  const pos0PBase = rf3(Math.floor(rf3(startP / 100)) * 100)
+  const pCurr = rf3(RangeU.clamp(_pos0P - pos0PBase, [-100, 100]))
+  const pos0P = rf3(pos0PBase + pCurr)
   const dir = Math.sign(pCurr) as Sign
-  const overflow = _pos0P - pos0P
+  const overflow = rf3(_pos0P - pos0P)
   
-  const pos0ViewI = loopViewI(Math.floor(pos0PBase / 100))
+  const pos0ViewI = loopViewI(Math.floor(rf3(pos0PBase / 100)))
   
-  const _pos0ItemP = startItemP + deltaP
-  const pos0ItemP = _pos0ItemP - overflow
-  const pos0ItemPBase = pos0ItemP - pCurr
-  const pos0ItemI = Math.floor(pos0ItemPBase / 100)
-  const pos0ItemHalfI = loopItemI(Math.floor((pos0ItemPBase + 50) / 100))
+  const _pos0ItemP = rf3(startItemP + deltaP)
+  const pos0ItemP = rf3(_pos0ItemP - overflow)
+  const pos0ItemPBase = rf3(pos0ItemP - pCurr)
+  const pos0ItemI = loopItemI(Math.floor(rf3(pos0ItemPBase / 100)))
+  const pos0ItemHalfI = loopItemI(Math.floor(rf3((pos0ItemPBase + 50) / 100)))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
   const viewPosI = loopViewI(viewI - pos0ViewI)
-  const viewPosPBase = loopViewP(pos0P + 100 * viewPosI)
+  const viewPosPBase = loopViewP(rf3(pos0P + 100 * viewPosI))
   
-  const viewP = loopViewP(100 * viewPosI + pCurr)
+  const viewP = loopViewP(rf3(100 * viewPosI + pCurr))
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
   
-  //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
+  const first = viewPosI === 0
+  const last = viewPosI === viewLastI
+  const end = viewPosI === viewFirstI
+  
+  // if (viewPosI === 0) {
+  //   console.log({ pos0P, pCurr, viewPosI, viewI, viewItemI })
+  // }
   
   return {
     pos0P, pCurr, dir, pos0PBase,
@@ -75,6 +77,7 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
     viewPosI, viewPosPBase,
     viewP, viewI,
     viewItemI,
+    first, last, end,
   }
 }
 
@@ -99,25 +102,23 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
     loopItemI, loopItemP, clampItemP,
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
-  const _pos0P = startP + deltaP
-  const pos0PBase = Math.floor(startP / 100) * 100
-  const pCurr = RangeU.clamp(_pos0P - pos0PBase, [-100, 100])
-  const pos0P = pos0PBase + pCurr
-  const overflow = _pos0P - pos0P
+  const _pos0P = rf3(startP + deltaP)
+  const pos0PBase = rf3(Math.floor(rf3(startP / 100) * 100))
+  const pCurr = rf3(RangeU.clamp(rf3(_pos0P - pos0PBase), [-100, 100]))
+  const pos0P = rf3(pos0PBase + pCurr)
+  const overflow = rf3(_pos0P - pos0P)
   
-  const _pos0ItemP = startItemP + deltaP
-  const pos0ItemP = _pos0ItemP - overflow
-  const pos0ItemPBase = pos0ItemP - pCurr
+  const _pos0ItemP = rf3(startItemP + deltaP)
+  const pos0ItemP = rf3(_pos0ItemP - overflow)
+  const pos0ItemPBase = rf3(pos0ItemP - pCurr)
   
   const isNext = Math.abs(pCurr) >= 100
   
-  let p = isNext ? pos0PBase + 100 : pos0PBase
-  p = round3(p)
+  let p = isNext ? rf3(pos0PBase + 100) : pos0PBase
   p = noLoop ? clampViewP(p) : loopViewP(p)
   setStartProgress(p)
   
-  let itemP = isNext ? pos0ItemPBase + 100 : pos0ItemPBase
-  itemP = round3(itemP)
+  let itemP = isNext ? rf3(pos0ItemPBase + 100) : pos0ItemPBase
   itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
   setStartItemProgress(itemP)
   

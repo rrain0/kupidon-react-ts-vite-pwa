@@ -9,16 +9,28 @@ export namespace MathU {
   
   /**
    * Функция округления
+   * !!! Деление после округления всё равно может всё сломать
    * @param n Значение
    * @param scale - округлить до {scale} числа после запятой
    * @returns {number}
    */
-  export const round = (n: number, scale: number = 0): number => {
-    const mult = (n < 0 ? -1 : 1) * 10 ** scale
-    return Math.round(n * mult) / mult
+  // export const round = (n: number, scale: number = 0): number => {
+  //   const mult = (n < 0 ? -1 : 1) * 10 ** scale
+  //   return Math.round(n * mult) / mult
+  // }
+  // export const round1 = (n: number) => round(n, 1)
+  // export const round3 = (n: number) => round(n, 3)
+  
+  
+  // Round using toFixed
+  // It rounds halfUp to +Inf
+  // Scale must be 0..100
+  export const rf = (n: number, scale: number = 0): number => {
+    return +n.toFixed(scale)
   }
-  export const round1 = (n: number) => round(n, 1)
-  export const round3 = (n: number) => round(n, 3)
+  export const rf1 = (n: number) => rf(n, 1)
+  export const rf3 = (n: number) => rf(n, 3)
+  
   
   /**
    * Возвращение округлённого в сторону нуля числа

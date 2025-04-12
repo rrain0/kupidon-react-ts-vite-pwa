@@ -14,7 +14,7 @@ import round = EmotionCommon.round
 import arr = ArrayU.arr
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
-import round3 = MathU.round3
+import rf3 = MathU.rf3
 import abs = EmotionCommon.abs
 
 
@@ -35,8 +35,8 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
   } = props
   
   const pLooped = progress?.map(p => {
-    const p1 = RangeU.loop(round3(p / cnt / 100), [0, 1])
-    p = RangeU.loop(round3(p), [0, 100 * cnt])
+    const p1 = RangeU.loop(rf3(p / cnt / 100), [0, 1])
+    p = RangeU.loop(rf3(p), [0, 100 * cnt])
     return { p, p1 }
   })
   
@@ -55,7 +55,7 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
                 translate: pLooped?.map(p => {
                   let yp = RangeU.mapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
                   yp = 1 - yp
-                  yp = round3(yp)
+                  yp = rf3(yp)
                   return `0 calc( (var(--indicator-len) - var(--sz)) * ${yp} )`
                 }),
               }}

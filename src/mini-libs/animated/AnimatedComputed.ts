@@ -5,7 +5,7 @@ import Callback1 = TypeU.Callback1
 
 
 
-export class AnimatedComputed<const Source, const Value> implements AnimatedProperty<Value> {
+export class AnimatedComputed<Source, Value> implements AnimatedProperty<Value> {
   
   private cachedValue!: Value
   
