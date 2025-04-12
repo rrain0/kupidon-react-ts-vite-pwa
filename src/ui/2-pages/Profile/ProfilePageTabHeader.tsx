@@ -91,24 +91,24 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       currViewI: viewI,
     })
     
-    const { viewPosI, viewPBase, viewPCurr, viewItemI } = props
+    const { viewPosI, viewPBase, pCurr, viewItemI } = props
     
     const i = viewPosI
     let x = 0
     
     if (viewItemI === 0) {
       if (i === -1) x = viewPBase + 50
-      if (i === 0)  x = viewPBase - 50 - 0.5 * (100 - viewPCurr)
+      if (i === 0)  x = viewPBase - 50 - 0.5 * (100 - pCurr)
       if (i === 1)  x = viewPBase + 100
     }
     if (viewItemI === 1) {
       if (i === -1) x = viewPBase + 150
-      if (i === 0)  x = viewPBase       + 0.5 * viewPCurr
-      if (i === 1)  x = viewPBase - 100 - 0.5 * (100 - viewPCurr)
+      if (i === 0)  x = viewPBase       + 0.5 * pCurr
+      if (i === 1)  x = viewPBase - 100 - 0.5 * (100 - pCurr)
     }
     if (viewItemI === 2) {
       if (i === 0)  x = viewPBase + 100
-      if (i === 1)  x = viewPBase - 50  + 0.5 * viewPCurr
+      if (i === 1)  x = viewPBase - 50  + 0.5 * pCurr
       if (i === 2)  x = viewPBase - 150 + 0.5
     }
     

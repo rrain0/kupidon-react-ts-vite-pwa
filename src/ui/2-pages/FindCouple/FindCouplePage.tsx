@@ -156,7 +156,7 @@ const FindCouplePage = React.memo(() => {
     })()
     
     const transform = (() => {
-      if (viewPosI === 0) {
+      if (first) {
         const a = RangeU.map(pCurr, [0, 100], [0, 0.03])
         return `translateY(300%) rotate(${a}turn) translateY(-300%)`
       }
@@ -172,7 +172,7 @@ const FindCouplePage = React.memo(() => {
     })()
     
     const opacity = (() => {
-      if (viewPosI === 0) {
+      if (first) {
         return RangeU.map(100 - Math.abs(pCurr), [0, 55, 100], [0, 1, 1])
       }
       if (viewPosI === 1) {
@@ -186,7 +186,7 @@ const FindCouplePage = React.memo(() => {
     
     
     const restItemsOpacity = (() => {
-      if (viewPosI === 0) {
+      if (first) {
         return 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
       }
       return 1

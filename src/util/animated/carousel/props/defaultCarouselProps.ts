@@ -4,6 +4,7 @@ import mod = MathU.mod
 import rf3 = MathU.rf3
 import Sign = TypeU.Sign
 import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon'
+import rf5 = MathU.rf5
 
 
 
@@ -44,17 +45,21 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
   
   viewI += viewFirstI
   
+  startP = rf3(startP)
+  startItemP = rf3(startItemP)
+  deltaP = rf3(deltaP)
+  
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = rf3(startP + deltaP)
   const dir = Math.sign(deltaP)
   const pCurr = rf3(mod(pos0P, 100))
   const pos0PBase = rf3(pos0P - pCurr)
   
-  const pos0ViewI = loopViewI(Math.floor(rf3(pos0P / 100)))
+  const pos0ViewI = loopViewI(Math.floor(rf5(pos0P / 100)))
   
   const pos0ItemP = rf3(startItemP + deltaP)
-  const pos0ItemI = loopItemI(rf3(Math.floor(rf3(pos0ItemP / 100)) + itemFirstI))
-  const pos0ItemHalfI = loopItemI(Math.floor(rf3((pos0ItemP + 50) / 100)))
+  const pos0ItemI = loopItemI(rf3(Math.floor(rf5(pos0ItemP / 100)) + itemFirstI))
+  const pos0ItemHalfI = loopItemI(Math.floor(rf5((pos0ItemP + 50) / 100)))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
   const viewPosI = loopViewI(viewI - pos0ViewI)
@@ -66,7 +71,8 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
   
   const first = viewPosI === 0
   const last = viewPosI === viewLastI
-  const end = viewPosI === viewFirstI
+  const minusFirst = viewPosI === -1
+  const minusLast = viewPosI === viewFirstI
   
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
   
@@ -78,12 +84,12 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
     viewPosI, viewPosPBase,
     viewP, viewI,
     viewItemI,
-    first, last, end,
+    first, last, minusFirst, minusLast,
   }
 }
 
 
-
+let lastLog
 
 
 export const getClampedCarouselProps = (props: GetCarouselProps) => {
@@ -107,33 +113,44 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
   
   viewI += viewFirstI
   
+  startP = rf3(startP)
+  startItemP = rf3(startItemP)
+  deltaP = rf3(deltaP)
+  
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = clampViewP(rf3(loopViewP(startP) + deltaP))
   const dir = Math.sign(deltaP) as Sign
   const pCurr = rf3(mod(pos0P, 100))
   const pos0PBase = rf3(pos0P - pCurr)
   
-  const pos0ViewI = loopViewI(Math.floor(rf3(pos0P / 100)))
+  const pos0ViewI = loopViewI(Math.floor(rf5(pos0P / 100)))
   
   const pos0ItemP = clampItemP(loopItemP(startItemP) + deltaP)
-  const pos0ItemI = loopItemI(Math.floor(rf3(pos0ItemP / 100)) + itemFirstI)
-  const pos0ItemHalfI = loopItemI(Math.floor(rf3((pos0ItemP + 50) / 100)))
+  const pos0ItemI = loopItemI(Math.floor(rf5(pos0ItemP / 100)) + itemFirstI)
+  const pos0ItemHalfI = loopItemI(Math.floor(rf5((pos0ItemP + 50) / 100)))
   
   // xxxxxx - positionViewIxxxxxx - data of position at viewI
   const viewPosI = viewI - pos0ViewI
   const viewPosPBase = rf3(pos0P + 100 * viewPosI)
   
   const viewPBase = 100 * viewPosI
-  const viewPCurr = pCurr
-  const viewP = rf3(viewPBase - viewPCurr)
+  const viewP = rf3(viewPBase - pCurr)
   
   const viewItemI = loopItemI(pos0ItemI + viewPosI)
   
   const first = viewPosI === 0
   const last = viewPosI === viewLastI
-  const end = viewPosI === viewFirstI
+  const minusFirst = viewPosI === -1
+  const minusLast = viewPosI === viewFirstI
   
-  //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
+  // if (viewPosI === 0) {
+  //   //console.log({ pos0P, pCurr, viewPosI, viewI, viewItemI })
+  //   const log = `pos0P ${pos0P} pCurr ${pCurr} viewPosI ${viewPosI} viewI ${viewI} viewItemI ${viewItemI}`
+  //   if (log !== lastLog) {
+  //     lastLog = log
+  //     console.log(log)
+  //   }
+  // }
   
   return {
     pos0P, pCurr, dir, pos0PBase,
@@ -141,9 +158,9 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
     pos0ViewI,
     pos0ItemP, pos0ItemI, pos0ItemHalfI,
     viewPosI, viewPosPBase,
-    viewPBase, viewPCurr, viewP, viewI,
+    viewPBase, viewP, viewI,
     viewItemI,
-    first, last, end,
+    first, last, minusFirst, minusLast,
   }
 }
 

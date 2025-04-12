@@ -30,6 +30,7 @@ export namespace MathU {
   }
   export const rf1 = (n: number) => rf(n, 1)
   export const rf3 = (n: number) => rf(n, 3)
+  export const rf5 = (n: number) => rf(n, 5)
   
   
   /**

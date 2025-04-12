@@ -62,7 +62,7 @@ import full = EmotionCommon.full
 // Максимальное кол-во отображаемых фоток.
 // Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3,
 // потому что 4ая прозрачная.
-const maxVisiblePhotosCnt = 4
+const displayedPhotosCnt = 3
 
 
 
@@ -118,8 +118,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const isPhotosDraggable = photosCnt >= 2
   
   // if photosCnt is 0, then display 1 placeholder
-  const visiblePhotosCnt = Math.min(maxVisiblePhotosCnt, photosCnt + 1)
-  //const visiblePhotosCnt = 1
+  const viewsCnt = Math.max(Math.min(displayedPhotosCnt + 1, photosCnt), 1)
+  //const viewsCnt = 1
   
   // TODO изначально фотки не получены, поэтому изображение грузится
   const placeholderIm = useMemo(() => {
@@ -132,7 +132,6 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   const itemsCnt = photosCnt
-  const viewsCnt = visiblePhotosCnt
   
   const photosBoxRef = useRef<HTMLDivElement>(null)
   const getTrackProps = createTrackPropsGetter(photosBoxRef)
@@ -153,6 +152,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   } = useCarousel({
     itemsCnt,
     viewsCnt,
+    startViewI: -1,
     getTrackProps,
     axis: 'y',
     inverted: false,
@@ -171,7 +171,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   }, [animatedDeltaProgress])
   
   const animatedPhoto = animatedDeltaProgress.map(dp => (viewI: number) => {
-    const _props = getLoopedCarouselProps({
+    const props = getLoopedCarouselProps({
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: dp,
@@ -180,17 +180,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       startViewI: 0,
       currViewI: viewI,
     })
-    const props = {
-      ..._props,
-      // TODO start view indexes from -1
-      end: _props.viewPosI === visiblePhotosCnt - 1,
-      // TODO maybe add this to props
-      endI: visiblePhotosCnt - 1,
-    }
     
-    const { first, end, endI, viewPosI, pCurr } = props
+    const { first, last, viewPosI, pCurr } = props
     
-    const z = -viewPosI + endI
+    const z = -viewPosI + viewsCnt
     
     const y = (() => {
       if (first) return pCurr
@@ -208,7 +201,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
         [0, 30, 100],
         [0, 0, 100],
       )
-      if (end) return RangeU.map(
+      if (last) return RangeU.map(
         pCurr,
         [0, 80, 100],
         [0, 0, 100],
@@ -269,7 +262,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             opacity: animatedStackProps?.map(p => p.opacity),
           }}
         >
-          {arrOfIndices(visiblePhotosCnt).map(viewI => {
+          {arrOfIndices(viewsCnt).map(viewI => {
             return (
               <AnimatedPhotoBox
                 key={viewI}
@@ -395,7 +388,7 @@ const ShowcaseFrame = styled(AnimatedDiv)`
   padding: ${pv}px ${ph}px;
   --photo-r: 16px;
   --photo-w: var(--photos-w);
-  --photo-h: calc( var(--photos-h) * (100 - ${maxVisiblePhotosCnt - 1}) / 100 );
+  --photo-h: calc( var(--photos-h) * (100 - ${displayedPhotosCnt}) / 100 );
   //overflow: hidden;
   ${flexC};
 `

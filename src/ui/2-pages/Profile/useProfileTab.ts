@@ -1,3 +1,4 @@
+import { TypeU } from '@util/common/TypeU.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate, useSearchParams } from 'react-router'
@@ -7,6 +8,7 @@ import full = RouteBuilder.full
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
+import notExists = TypeU.notExists
 
 
 
@@ -61,7 +63,7 @@ export const useProfileTab = () => {
   useEffect(() => setNewTabI(tabI), [tabI])
   
   useEffect(() => {
-    if (!newTabI) return
+    if (notExists(newTabI)) return
     const tabData = getTabByIndex(newTabI)
     if (!tabData) return
     navigate(
