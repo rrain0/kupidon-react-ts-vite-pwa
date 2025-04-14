@@ -59,11 +59,11 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm style={{ gap: 0 }}>
             
-            <Pages.PageHeaderWithLeftRight>
+            <Pages.PageHeaderWithLeftRightItems>
               <BackBtn />
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
               <div css={{ width: 50, height: 50 }} />
-            </Pages.PageHeaderWithLeftRight>
+            </Pages.PageHeaderWithLeftRightItems>
             
             <div style={{ height: 34 }} />
             

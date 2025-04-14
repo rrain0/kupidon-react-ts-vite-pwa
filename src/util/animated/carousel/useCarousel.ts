@@ -2,7 +2,6 @@ import { createSpringAnimation } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
 import {
-  getIndexesProps,
   MergeProgressCallback,
 } from 'src/util/animated/carousel/props/carouselPropsCommon.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
@@ -21,11 +20,13 @@ import Pu = TypeU.Pu
 import exists = TypeU.exists
 import rf3 = MathU.rf3
 import Getter = TypeU.Getter
-import Setter = TypeU.Setter
+
 
 
 
 // Simplicity vs Control balance is hard
+
+
 
 
 export type CarouselEvent = {
@@ -42,8 +43,12 @@ export type AnimateToParams = Pu<{
   next: boolean
   prev: boolean
   p: number
-  vel0: number
   noAnimation: boolean
+  
+  vel0: number
+  mass: number
+  tension: number
+  friction: number
 }>
 
 export type TrackProps = { x: number, y: number, w: number, h: number }
@@ -56,6 +61,8 @@ export type UseCarouselProps = {
   getTrackProps: Getter<TrackProps>
   axis: 'x' | 'y'
   inverted: boolean
+  velThreshold?: number | undefined
+  velDefault?: number | undefined
   
   noDrag?: boolean | undefined
   noLoop?: boolean | undefined
@@ -80,6 +87,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getTrackProps,
     axis,
     inverted,
+    velThreshold = 150, // %size/s
+    velDefault = velThreshold,
     
     mergeProgress,
   
@@ -163,7 +172,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }
   
   
-  const vThreshold = 150 // %size/s
   // px/ms => %size/s
   const getVelPercent = (velPx: number) => {
     return velPx * 1000 / getTrackProps()[isX ? 'w' : 'h'] * 100
@@ -174,21 +182,22 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }
   
   const animateTo = useAsCallback(async ({
-    next, prev, p: nextP, vel0, noAnimation,
+    next, prev, p: nextP, noAnimation,
+    vel0, mass, tension, friction,
   }: AnimateToParams) => {
     const startP = getStartProgress()
     const deltaP = getDeltaProgress()
     const p = rf3(startP + deltaP)
     const pCurr = rf3(p % 100)
     const pBase = rf3(p - pCurr)
-      
+    
     ;[nextP, vel0] = (() => {
-      if (exists(next)) return [rf3(pBase + 100), +vThreshold]
-      if (exists(prev)) return [rf3(pBase - 100), -vThreshold]
+      if (exists(next)) return [rf3(pBase + 100), +velDefault]
+      if (exists(prev)) return [rf3(pBase - 100), -velDefault]
       //if (exists(nextItemI)) return [0, 0]
       if (exists(nextP)) return [
         nextP,
-        vel0 ?? (nextP > p ? getVelPx(vThreshold) : getVelPx(-vThreshold)),
+        vel0 ?? (nextP > p ? getVelPx(velDefault) : getVelPx(-velDefault)),
       ]
       return [undefined, 0]
     })()
@@ -211,6 +220,10 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
             //mass: 1, tension: 170, friction: 10,
             mass: 1, tension: 120, friction: 7,
             //mass: 5, tension: 60, friction: 5,
+            ...exists(mass) && { mass },
+            ...exists(tension) && { tension },
+            ...exists(friction) && { friction },
+            
             initVelocity: vel0,
             endValue: nextDeltaP,
           }),
@@ -237,7 +250,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     const pBase = rf3(p - pCurr)
     
     const [nextPCurr, vel0Percent] = (() => {
-      if (Math.abs(velPercent) >= vThreshold) {
+      if (Math.abs(velPercent) >= velThreshold) {
         if (pCurr > 0) {
           if (velPercent >= 0) return [100, velPercent]
           return [0, velPercent]
@@ -248,10 +261,10 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         }
       }
       else {
-        if (pCurr <= -50) return [-100, -vThreshold]
-        if (pCurr < 0) return [0, vThreshold]
-        if (pCurr >= 50) return [100, vThreshold]
-        if (pCurr > 0) return [0, -vThreshold]
+        if (pCurr <= -50) return [-100, -velThreshold]
+        if (pCurr < 0) return [0, velThreshold]
+        if (pCurr >= 50) return [100, velThreshold]
+        if (pCurr > 0) return [0, -velThreshold]
       }
       return [0, 0]
     })()
@@ -360,6 +373,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getStartItemProgress,
     getDeltaProgress,
     animatedDeltaProgress,
+    
+    // TODO remove
+    setStartProgress,
+    setStartItemProgress,
+    setDeltaProgress,
+    applyOnFinish,
     
     animateTo,
   }

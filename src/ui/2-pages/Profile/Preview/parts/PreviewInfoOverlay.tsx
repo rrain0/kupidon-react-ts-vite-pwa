@@ -1,4 +1,6 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
 import { useWasDragged } from '@util/pointer/useWasDragged.ts'
@@ -10,6 +12,7 @@ import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
 import { ReactU } from 'src/util/react/ReactU'
@@ -25,28 +28,44 @@ import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
 import attrExists = TypeU.attrExists
 import abs = EmotionCommon.abs
+import flexC = EmotionCommon.flexC
+import gridStackC = EmotionCommon.gridStackC
+import full = EmotionCommon.full
+import CrossIc = SvgIconsPack.CrossIc
 
 
 
 
 export type PreviewInfoOverlayProps = ClassStyle & Pu<{
   actionButtonsDisabled: boolean
-  photoProgress: AnimatedProperty<number>
+  animatedInfo: AnimatedProperty<{
+    indicatorProgress: number,
+    reactionIconOpacity: number,
+    reaction: 'accept' | 'reject' | undefined
+  }>
   photosCnt: number
   openInfo: Callback
   name: string
   birthDate: string
   aboutMe: string
+  
+  onAccept: Callback
+  onReject: Callback
+  onBack: Callback
 }>
 export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) => {
   const {
     actionButtonsDisabled,
-    photoProgress,
+    animatedInfo,
     photosCnt = 1,
     openInfo,
     name = '',
     birthDate = '',
     aboutMe = '',
+    
+    onAccept,
+    onReject,
+    onBack,
   } = props
   
   const match = 'XX'
@@ -67,7 +86,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         <ScrollIndicatorBox>
           <DotsScrollIndicator
             cnt={photosCnt}
-            progress={photoProgress}
+            progress={animatedInfo?.map(ai => ai.indicatorProgress)}
           />
         </ScrollIndicatorBox>
       )}
@@ -93,6 +112,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
+            onBack?.()
           }}
         >
           <ArrowBackGradIc />
@@ -103,6 +123,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
+            onReject?.()
           }}
         >
           <Cross2GradIc />
@@ -113,6 +134,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           onClick={ev => {
             ev.stopPropagation()
             if (getWasDragged?.()) return
+            onAccept?.()
           }}
         >
           <HeartFilledIc />
@@ -130,6 +152,39 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           <ArrowAngledRounded2GradIc />
         </Button>
       </ActionButtonsBox>
+      
+      <ReactionFrame>
+        <ReactionWidgetBox
+          animatedStyle={{
+            opacity: animatedInfo?.map(ai => ai.reactionIconOpacity),
+          }}
+        >
+          <AnimatedState
+            animatedState={{
+              reaction: animatedInfo?.map(ai => ai.reaction),
+            }}
+          >
+            {({ reaction }) => (
+              <>
+                {reaction ==='accept' && (
+                  <ReactionWidget>
+                    <ReactionIconBox>
+                      <HeartFilledIc css={SvgIconS6.t(reactionHeartS)} />
+                    </ReactionIconBox>
+                  </ReactionWidget>
+                )}
+                {reaction ==='reject' && (
+                  <ReactionWidget>
+                    <ReactionIconBox>
+                      <CrossIc css={SvgIconS6.t(reactionCrossS)} />
+                    </ReactionIconBox>
+                  </ReactionWidget>
+                )}
+              </>
+            )}
+          </AnimatedState>
+        </ReactionWidgetBox>
+      </ReactionFrame>
     
     </PreviewInfoBox>
   )
@@ -341,5 +396,43 @@ const ScrollIndicatorBox = styled.div`
   padding-top: 24px;
   padding-right: 16px;
 `
+
+
+
+const ReactionFrame = styled.div`
+  ${abs};
+  ${flexC};
+  pointer-events: none;
+`
+const ReactionWidgetBox = styled(AnimatedDiv)`
+  width: 30%;
+  aspect-ratio: 1;
+  will-change: opacity;
+`
+const ReactionWidget = styled.div`
+  ${full};
+  border-radius: 999999px;
+  // TODO theme
+  background-color: white;
+  ${flexC};
+`
+const ReactionIconBox = styled.div`
+  width: 50%;
+  height: 50%;
+  ${gridStackC};
+`
+const reactionHeartS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  icon: {
+    mt: 2,
+    // TODO theme
+    color: '#cb3357',
+  },
+}]
+const reactionCrossS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  icon: {
+    // TODO theme
+    color: '#1F1F1F',
+  },
+}]
 
 

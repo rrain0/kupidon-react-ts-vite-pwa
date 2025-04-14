@@ -7,6 +7,7 @@ import {
 } from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react-state/useBool.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
@@ -40,17 +41,10 @@ import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
+import Callback = TypeU.Callback
 
 
 
-
-// Текущий прогресс отражает именно отображаемые вьюхи (range 0..3)
-//  Если вьюха отобразилась, то она всегда отображает одну картинку,
-//  покуда картинка источника по данному индексу не изменится,
-//  то есть пока вьюха не переедет из низа колоды наверх или наоборот.
-// Дальше этот range 0..3 мапается в range источника картинок,
-//  чтобы вычислить правильный индекс картинки
-// Key отображаемых элементов всегда одинаковый - индекс в array
 
 /*
  TODO
@@ -59,9 +53,6 @@ import full = EmotionCommon.full
  
  */
 
-// Максимальное кол-во отображаемых фоток.
-// Во время анимации пролистывания их 4, в дефолтном состоянии их видно 3,
-// потому что 4ая прозрачная.
 const displayedPhotosCnt = 3
 
 
@@ -72,9 +63,10 @@ export type AnimatedStackProps = AnimatedProperty<{
   scale: number
   opacity: number
   restItemsOpacity: number
-  action: 'accept' | 'reject' | undefined
-  shadowIntensity: number | undefined
+  reaction: 'accept' | 'reject' | undefined
+  shadowIntensity: number
   fullInfoOpacity: number
+  reactionIconOpacity: number
 }>
 
 
@@ -92,6 +84,10 @@ export type ProfileShowcaseProps = {
   aboutMe: string
   hideButtons?: boolean | undefined
   animatedStackProps?: undefined | AnimatedStackProps
+  
+  onAccept?: Callback | undefined
+  onReject?: Callback | undefined
+  onBack?: Callback | undefined
 }
 export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const {
@@ -102,6 +98,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     aboutMe,
     hideButtons: _hideButtons,
     animatedStackProps,
+    
+    onAccept,
+    onReject,
+    onBack,
   } = props
   
   //effectLog('photos', photos)
@@ -165,13 +165,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   const [isInfoOpen, openInfo, closeInfo] = useBool(false)
   
-  
-  const animatedPhotoProgress = useMemo(() => {
-    return animatedDeltaProgress.map(cp => getStartItemProgress() + cp)
-  }, [animatedDeltaProgress])
-  
-  const animatedPhoto = animatedDeltaProgress.map(dp => (viewI: number) => {
-    const props = getLoopedCarouselProps({
+  const animatedPhotoProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
+    return getLoopedCarouselProps({
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: dp,
@@ -180,38 +175,80 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       startViewI: 0,
       currViewI: viewI,
     })
-    
-    const { first, last, viewPosI, pCurr } = props
-    
-    const z = -viewPosI + viewsCnt
-    
-    const y = (() => {
-      if (first) return pCurr
-      return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-    })()
-    
-    const scale = (() => {
-      if (first) return 100
-      return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
-    })() / 100
-    
-    const opacity = (() => {
-      if (first) return 100 - RangeU.map(
-        pCurr,
-        [0, 30, 100],
-        [0, 0, 100],
-      )
-      if (last) return RangeU.map(
-        pCurr,
-        [0, 80, 100],
-        [0, 0, 100],
-      )
-      return 100
-    })() / 100
-    
-    return { ...props, z, y, scale, opacity }
-  })
+  }), [itemsCnt])
   
+  const animatedPhoto = useMemo(() => animatedMapMulti(
+    [animatedPhotoProps, animatedStackProps],
+    (ap, as) => (viewI = 0) => {
+      const props = ap(viewI)
+      const { first, last, pCurr, viewPosI, viewItemI } = props
+      const { restItemsOpacity, reaction, shadowIntensity } = as ?? { }
+      
+      const z = -viewPosI + viewsCnt
+      
+      const y = (() => {
+        if (first) return pCurr
+        return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+      })()
+      
+      const scale = (() => {
+        if (first) return 100
+        return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+      })() / 100
+      
+      const photoOpacity = (() => {
+        if (first) return 100 - RangeU.map(
+          pCurr,
+          [0, 30, 100],
+          [0, 0, 100],
+        )
+        if (last) return RangeU.map(
+          pCurr,
+          [0, 80, 100],
+          [0, 0, 100],
+        )
+        return 100
+      })() / 100
+      
+      const restOpacity = (() => {
+        if (!first) return restItemsOpacity ?? 1
+        return 1
+      })()
+      
+      const opacity =  Math.min(photoOpacity, restOpacity)
+      
+      const boxShadow = (() => {
+        const color = (() => {
+          // TODO theme
+          if (reaction === 'accept') return '#9e364e'
+          if (reaction === 'reject') return 'black'
+        })()
+        
+        if (first && color && shadowIntensity) {
+          const blurR = RangeU.map(shadowIntensity, [0, 1], [6, 30])
+          const spreadR = RangeU.map(shadowIntensity, [0, 1], [1, 30])
+          return `0 0 ${blurR}px ${spreadR}px ${color}`
+        }
+        
+        return ''
+      })()
+      
+      const src = availablePhotos[viewItemI]?.dataUrl ?? ''
+      
+      return { ...props, z, y, scale, opacity, boxShadow, src }
+    }
+  ), [animatedPhotoProps, animatedStackProps, availablePhotos])
+  
+  
+  const animatedInfo = useMemo(() => animatedMapMulti(
+    [animatedPhotoProps, animatedStackProps],
+    (ap, as) => {
+      const { pos0ItemP } = ap()
+      const { reactionIconOpacity = 0, reaction } = as ?? { }
+      
+      return { indicatorProgress: pos0ItemP, reactionIconOpacity, reaction }
+    }
+  ), [animatedPhotoProps, animatedStackProps])
   
   
   
@@ -270,50 +307,14 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                   zIndex: animatedPhoto.map(ap => ap(viewI).z),
                   transform: animatedPhoto.map(ap => `translateY(${ap(viewI).y}%)`),
                   scale: animatedPhoto.map(ap => ap(viewI).scale),
-                  opacity: animatedMapMulti(
-                    [animatedPhoto, animatedStackProps],
-                    (ap, as) => {
-                      const { restItemsOpacity } = as ?? { }
-                      const { first, opacity } = ap(viewI)
-                      
-                      const restOpacity = (() => {
-                        if (!first) return restItemsOpacity ?? 1
-                        return 1
-                      })()
-                      
-                      return Math.min(opacity, restOpacity)
-                    }
-                  ),
-                  boxShadow: animatedMapMulti(
-                    [animatedPhoto, animatedStackProps],
-                    (ap, asp) => {
-                      const { first } = ap(viewI)
-                      const { action, shadowIntensity } = asp ?? { }
-                      
-                      const color = (() => {
-                        // TODO theme
-                        if (action === 'accept') return '#9e364e'
-                        if (action === 'reject') return 'black'
-                      })()
-                      
-                      if (first && color && shadowIntensity) {
-                        const blurR = RangeU.map(shadowIntensity, [0, 1], [6, 30])
-                        const spreadR = RangeU.map(shadowIntensity, [0, 1], [1, 30])
-                        return `0 0 ${blurR}px ${spreadR}px ${color}`
-                      }
-                      
-                      return ''
-                    }
-                  ),
+                  opacity: animatedPhoto.map(ap => ap(viewI).opacity),
+                  boxShadow: animatedPhoto.map(ap => ap(viewI).boxShadow),
                 }}
               >
                 {!!photosCnt && (
                   <AnimatedPhoto
                     animatedAttrs={{
-                      src: animatedPhoto.map(ap => {
-                        const { viewItemI } = ap(viewI)
-                        return availablePhotos[viewItemI]?.dataUrl ?? ''
-                      }),
+                      src: animatedPhoto.map(ap => ap(viewI).src),
                     }}
                   />
                 )}
@@ -328,17 +329,6 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                   </>
                 )}
                 <PhotoFade />
-                {/* <div
-                 css={css`
-                 position: absolute;
-                 top: 20px;
-                 left: 20px;
-                 color: aquamarine;
-                 font-size: 40px;
-                 `}
-                 >
-                 {viewI}
-                 </div> */}
               </AnimatedPhotoBox>
             )
           })}
@@ -347,10 +337,13 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             actionButtonsDisabled={hideButtons}
             photosCnt={photosCnt}
             openInfo={openInfo}
-            photoProgress={animatedPhotoProgress}
+            animatedInfo={animatedInfo}
             name={name}
             birthDate={birthDate}
             aboutMe={aboutMe}
+            onAccept={onAccept}
+            onReject={onReject}
+            onBack={onBack}
           />
         
         </PhotosStack>
@@ -406,6 +399,7 @@ const PhotosStack = styled(AnimatedDiv)`
   // allow intercept only single finger left / right swipe gestures
   touch-action: pan-x;
   pointer-events: none;
+  will-change: transform, scale, opacity;
   & > * { pointer-events: auto; }
 `
 
@@ -423,7 +417,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   pointer-events: auto;
   
   transform-origin: 50% 0;
-  will-change: transform, z-index, scale, opacity;
+  will-change: z-index, transform, scale, opacity, box-shadow;
 `
 const Photo = styled.img`
   ${fill};

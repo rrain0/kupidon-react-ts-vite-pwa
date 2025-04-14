@@ -5,7 +5,7 @@ import ThemeType = AppTheme.Type
 
 
 
-export const PinkGrainyGradientBg = (t: AppTheme.Theme) => css`
+export const PinkGrainyGradBgCss = (t: AppTheme.Theme) => css`
   background-color: ${t.page.bg};
   
   background-image: url(${noise}),

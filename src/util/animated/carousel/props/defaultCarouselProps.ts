@@ -1,15 +1,23 @@
 import { MathU } from 'src/util/common/MathU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
+import { ReactU } from 'src/util/react/ReactU.ts'
 import mod = MathU.mod
 import rf3 = MathU.rf3
 import Sign = TypeU.Sign
 import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon'
 import rf5 = MathU.rf5
+import noRepeatLog = ReactU.noRepeatLog
+
 
 
 
 
 // Default - Карусель, где за раз можно пролистнуть хоть сколько элементов
+
+/*
+ Одна вьюха отображает один item, даже когда перемещается в другой position index,
+ пока текущий item должен быть виден.
+ */
 
 
 
@@ -89,8 +97,6 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
 }
 
 
-let lastLog
-
 
 export const getClampedCarouselProps = (props: GetCarouselProps) => {
   let {
@@ -125,7 +131,7 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
   
   const pos0ViewI = loopViewI(Math.floor(rf5(pos0P / 100)))
   
-  const pos0ItemP = clampItemP(loopItemP(startItemP) + deltaP)
+  const pos0ItemP = clampItemP(rf3(loopItemP(startItemP) + deltaP))
   const pos0ItemI = loopItemI(Math.floor(rf5(pos0ItemP / 100)) + itemFirstI)
   const pos0ItemHalfI = loopItemI(Math.floor(rf5((pos0ItemP + 50) / 100)))
   
@@ -143,14 +149,9 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
   const minusFirst = viewPosI === -1
   const minusLast = viewPosI === viewFirstI
   
-  // if (viewPosI === 0) {
-  //   //console.log({ pos0P, pCurr, viewPosI, viewI, viewItemI })
-  //   const log = `pos0P ${pos0P} pCurr ${pCurr} viewPosI ${viewPosI} viewI ${viewI} viewItemI ${viewItemI}`
-  //   if (log !== lastLog) {
-  //     lastLog = log
-  //     console.log(log)
-  //   }
-  // }
+  if (viewPosI === 0) {
+    //noRepeatLog({ pos0P, pCurr, viewPosI, viewI, viewItemI })
+  }
   
   return {
     pos0P, pCurr, dir, pos0PBase,

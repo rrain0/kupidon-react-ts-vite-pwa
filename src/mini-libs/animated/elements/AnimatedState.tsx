@@ -31,7 +31,8 @@ const AnimatedState = (<S extends Record<string, any>>() =>
     const getInitialState = () => {
       return ObjectMap<AnimatedComponentState<S>, S>(
         animatedState,
-        ([prop, animated]) => [prop, animated.get()]
+        // @ts-expect-error
+        ([prop, animated]) => [prop, animated?.get()]
       )
     }
     

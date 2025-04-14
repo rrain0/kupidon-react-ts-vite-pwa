@@ -39,13 +39,13 @@ const BowAndArrowsPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm style={{ gap: 0 }}>
             
-            <Pages.PageHeaderWithLeftRight>
+            <Pages.PageHeaderWithLeftRightItems>
               <div css={{ width: 50, height: 50 }} />
               <Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page>
               <Button css={IconButtonS6.t(calendarButtonS)}>
                 <Calendar2GradIc />
               </Button>
-            </Pages.PageHeaderWithLeftRight>
+            </Pages.PageHeaderWithLeftRightItems>
             
             <div style={{ height: 27 }} />
             

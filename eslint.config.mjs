@@ -168,7 +168,7 @@ export default [
       '@stylistic/generator-star-spacing': 'off',
       '@stylistic/implicit-arrow-linebreak': 'off',
       // https://eslint.style/rules/js/indent
-      '@stylistic/indent': ['error', 2, {
+      '@stylistic/indent': ['warn', 2, {
         // numbers are multipliers for base indent
         SwitchCase: 1,
         VariableDeclarator: 1,

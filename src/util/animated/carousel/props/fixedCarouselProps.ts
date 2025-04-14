@@ -16,6 +16,12 @@ import rf5 = MathU.rf5
 // Forward - Переходить можно только на следующие элементы
 
 
+/*
+ Одна вьюха отображает один item, даже когда перемещается в другой position index,
+ пока текущий item должен быть виден.
+ */
+
+
 
 export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
   let {
@@ -79,7 +85,7 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
     pos0P, pCurr, dir, pos0PBase,
     loopViewI,
     pos0ViewI,
-    pos0ItemP, pos0ItemI, pos0ItemHalfI,
+    pos0ItemP, pos0ItemPBase, pos0ItemI, pos0ItemHalfI,
     viewPosI, viewPosPBase,
     viewP, viewI,
     viewItemI,
@@ -109,7 +115,7 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
   const _pos0P = rf3(startP + deltaP)
-  const pos0PBase = rf3(Math.floor(rf5(startP / 100) * 100))
+  const pos0PBase = rf3(Math.floor(rf5(startP / 100)) * 100)
   const pCurr = rf3(RangeU.clamp(rf3(_pos0P - pos0PBase), [-100, 100]))
   const pos0P = rf3(pos0PBase + pCurr)
   const overflow = rf3(_pos0P - pos0P)

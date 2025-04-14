@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import falsy = TypeU.falsy
 
 
@@ -9,18 +9,26 @@ import falsy = TypeU.falsy
 
 export namespace ReactU {
   
-  export type Children = Puro<{ children: React.ReactNode }>
-  export type ClassStyle = Puro<{
+  export type Children = Pu<{ children: React.ReactNode }>
+  export type ClassStyle = Pu<{
     className: string
     style: CSSProperties
   }>
   export type OnClick<E = Element> = React.MouseEventHandler<E>
-  export type First = Puro<{ first: boolean }>
-  export type Last = Puro<{ last: boolean }>
+  export type First = Pu<{ first: boolean }>
+  export type Last = Pu<{ last: boolean }>
   
   
   
   export const effectLog = (...args: any[]) => useEffect(() => console.log(...args), args)
+  
+  let prevLog
+  export const noRepeatLog = (...args: any[]) => {
+    if (JSON.stringify(prevLog) !== JSON.stringify(args)) {
+      prevLog = args
+      console.log(...args)
+    }
+  }
   
   
   

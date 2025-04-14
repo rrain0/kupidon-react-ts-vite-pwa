@@ -1,5 +1,8 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
+import {
+  AnimatedProperty,
+  AnimatedPropertyUndefinedable,
+} from 'src/mini-libs/animated/AnimatedProperty.ts'
 import Pu = TypeU.Pu
 
 
@@ -37,6 +40,8 @@ export type AnimatedElemStyleRest = Pu<{
 export type AnimatedElemStyle = AnimatedElemStyleExplicit & AnimatedElemStyleRest
 
 
+// TODO Animated - try AnimatedElemStyleBatch
+
 
 export type AnimatedImgAttrs = Pu<{
   src: AnimatedStringOrUndef
@@ -45,7 +50,7 @@ export type AnimatedImgAttrs = Pu<{
 
 
 export type AnimatedComponentState<S extends Record<string, any> = Record<string, any>> = {
-  [Prop in keyof S]: AnimatedProperty<S[Prop]>
+  [Prop in keyof S]: AnimatedPropertyUndefinedable<S[Prop]>
 }
 
 

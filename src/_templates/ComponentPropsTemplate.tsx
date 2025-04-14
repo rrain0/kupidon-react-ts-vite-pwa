@@ -8,7 +8,7 @@ import ClassStyle = ReactU.ClassStyle
 
 
 
-export type MyComponentProps =Pu<{
+export type MyComponentProps = Pu<{
   prop: number
 }> & ClassStyle & Children
 
@@ -16,6 +16,7 @@ export const MyComponent = React.memo((props: MyComponentProps) => {
   const {
     className,
     style,
+    children,
     prop = 0,
   } = props
   

@@ -8,21 +8,18 @@ import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import col = EmotionCommon.col
 import round = EmotionCommon.round
 import arr = ArrayU.arr
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
 import rf3 = MathU.rf3
-import abs = EmotionCommon.abs
 
 
 
-const indicatorLen = 26
-const sz = 7
 
-export type DotsScrollIndicatorProps = ClassStyle & Puro<{
+export type DotsScrollIndicatorProps = ClassStyle & Pu<{
   cnt: number
   progress: AnimatedProperty<number> // ..0..(100 * cnt)..
 }>
@@ -35,8 +32,8 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
   } = props
   
   const pLooped = progress?.map(p => {
-    const p1 = RangeU.loop(rf3(p / cnt / 100), [0, 1])
-    p = RangeU.loop(rf3(p), [0, 100 * cnt])
+    const p1 = rf3(RangeU.loop(rf3(p / cnt / 100), [0, 1]))
+    p = rf3(RangeU.loop(rf3(p), [0, 100 * cnt]))
     return { p, p1 }
   })
   
@@ -50,18 +47,25 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
       <div css={frame2S}>
         <div css={frame3S}>
           {arr(cnt).map((_, i) => (
-            <AnimatedDiv css={dotS} key={i}
+            <AnimatedDiv
+              key={i}
+              css={dotS}
+              style={{
+                willChange: 'transform',
+              }}
               animatedStyle={{
-                translate: pLooped?.map(p => {
+                transform: pLooped?.map(p => {
                   let yp = RangeU.mapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
-                  yp = 1 - yp
-                  yp = rf3(yp)
-                  return `0 calc( (var(--indicator-len) - var(--sz)) * ${yp} )`
+                  yp = rf3(1 - yp)
+                  return `translateY(calc( (  var(--indicator-len) - var(--sz)  ) * ${yp} ))`
                 }),
               }}
             />
           ))}
           <AnimatedDiv css={thumbS}
+            style={{
+              willChange: 'top, transform',
+            }}
             animatedStyle={{
               top: pLooped?.map(p => `${p.p1 * 100}%`),
               transform: pLooped?.map(p => `translateY(calc( ${p.p1} * var(--g) ))`),

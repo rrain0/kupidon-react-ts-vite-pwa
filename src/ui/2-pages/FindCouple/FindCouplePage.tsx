@@ -7,17 +7,20 @@ import {
 } from '@util/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
+import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import React, { useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
+import FullscreenPage from 'src/ui/components/Pages/FullscreenPage.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
 import full = EmotionCommon.full
+import rf3 = MathU.rf3
 
 
 const photos = [
@@ -73,8 +76,6 @@ const data = [
     gender: 'MALE' as const,
     aboutMe: 'Тестовое описание 2',
   },
-  // TODO Закомментить 3 элемент и пофиксить странный баг -
-  //  просто листать вперёд надо и на 3 раз будут какие-то постоянные переключения
   /* {
     photos: [photos[2], ...photos.slice(1)],
     name: 'test',
@@ -84,9 +85,11 @@ const data = [
   }, */
 ]
 
-// TODO Сделать анимированные цветные тени, когда свайпаешь и иконки по середине карточки
+// TODO Иконку сердечка анимировать теневыми копиями большего размера при лайке
 
-// TODO Закрыть шторку при переходе на другую анкету:
+// TODO Закрыть шторку при переходе на другую анкету
+
+// TODO Прикрутить нажатия на кнопки
 
 
 
@@ -116,6 +119,11 @@ const FindCouplePage = React.memo(() => {
     getDeltaProgress,
     animatedDeltaProgress,
     
+    setStartProgress,
+    setStartItemProgress,
+    setDeltaProgress,
+    applyOnFinish,
+    
     animateTo,
   } = useCarousel({
     itemsCnt,
@@ -130,7 +138,49 @@ const FindCouplePage = React.memo(() => {
   })
   
   
-  const animatedProps = animatedDeltaProgress.map(dp => (viewI = 0) => {
+  
+  const onAccept = useCallback(() => {
+    animateTo({ next: true, mass: 2, tension: 70, friction: 10 })
+  }, [animateTo])
+  
+  const onReject = useCallback(() => {
+    animateTo({ prev: true, mass: 2, tension: 70, friction: 10 })
+  }, [animateTo])
+  
+  const onBack = useCallback(() => {
+    {
+      const { pos0PBase, pos0ItemPBase } = getFixedForwardLoopedCarouselProps({
+        startP: getStartProgress(),
+        startItemP: getStartItemProgress(),
+        deltaP: getDeltaProgress(),
+        itemsCnt,
+        viewsCnt,
+        startViewI: -1,
+        currViewI: 0,
+      })
+      setStartProgress(rf3(pos0PBase - 100))
+      setStartItemProgress(rf3(pos0ItemPBase - 100))
+      setDeltaProgress(0)
+      applyOnFinish()
+    }
+    {
+      const { pos0PBase } = getFixedForwardLoopedCarouselProps({
+        startP: getStartProgress(),
+        startItemP: getStartItemProgress(),
+        deltaP: getDeltaProgress(),
+        itemsCnt,
+        viewsCnt,
+        startViewI: -1,
+        currViewI: 0,
+      })
+      setDeltaProgress(-100)
+      animatedDeltaProgress.set(-100)
+      animateTo({ p: pos0PBase, mass: 2, tension: 70, friction: 10 })
+    }
+  }, [])
+  
+  
+  const animatedProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getFixedForwardLoopedCarouselProps({
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
@@ -140,9 +190,9 @@ const FindCouplePage = React.memo(() => {
       startViewI: -1,
       currViewI: viewI,
     })
-  })
+  }), [itemsCnt])
   
-  const animatedStackProps = animatedProps.map(ap => (viewI = 0) => {
+  const animatedStackProps = useMemo(() => animatedProps.map(ap => (viewI = 0) => {
     const { first, viewPosI, pCurr, dir } = ap(viewI)
     
     const zIndex = (() => {
@@ -194,7 +244,7 @@ const FindCouplePage = React.memo(() => {
     
     const fullInfoOpacity = 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
     
-    const action = (() => {
+    const reaction = (() => {
       if (!first) return undefined
       if (dir === 1) return 'accept' as const
       if (dir === -1) return 'reject' as const
@@ -202,60 +252,62 @@ const FindCouplePage = React.memo(() => {
     })()
     
     const shadowIntensity = (() => {
-      if (!first) return undefined
+      if (!first) return 0
       return RangeU.map(Math.abs(pCurr), [0, 25, 100], [0, 1, 1])
+    })()
+    
+    const reactionIconOpacity = (() => {
+      if (!first) return 0
+      return RangeU.map(Math.abs(pCurr), [0, 15, 100], [0, 1, 1])
     })()
     
     
     return {
       zIndex, transform, scale, opacity,
-      restItemsOpacity, fullInfoOpacity, action, shadowIntensity,
+      restItemsOpacity, fullInfoOpacity, reaction, shadowIntensity, reactionIconOpacity,
     }
-  })
+  }), [])
   
   
   
   
   
   return (
-    <Pages.FullscreenPageGrad>
-      {/* TODO Make Page Component with settings */}
-      <Pages.AddSafeInsets style={{ height: '100%' }}>
-        
-        <StacksFrame
-          ref={frameRef}
-          {...onTrackDrag()}
-        >
-          <StackFrame>
-            {arrOfIndices(viewsCnt).map(viewI => (
-              <StackFrame2 key={viewI}>
-                <AnimatedState
-                  animatedState={{
-                    itemI: animatedProps.map(ap => ap(viewI).viewItemI),
-                  }}
-                >
-                  {({ itemI }) => {
-                    const item = items[itemI]
-                    return (
-                      <ProfileShowcase
-                        photos={item.photos}
-                        name={item.name}
-                        birthDate={item.birthDate}
-                        gender={item.gender}
-                        aboutMe={item.aboutMe}
-                        hideButtons={isAnimating}
-                        animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
-                      />
-                    )
-                  }}
-                </AnimatedState>
-              </StackFrame2>
-            ))}
-          </StackFrame>
-        </StacksFrame>
-      
-      </Pages.AddSafeInsets>
-    </Pages.FullscreenPageGrad>
+    <FullscreenPage>
+      <StacksFrame
+        ref={frameRef}
+        {...onTrackDrag()}
+      >
+        <StackFrame>
+          {arrOfIndices(viewsCnt).map(viewI => (
+            <StackFrame2 key={viewI}>
+              <AnimatedState
+                animatedState={{
+                  first: animatedProps.map(ap => ap(viewI).first),
+                  itemI: animatedProps.map(ap => ap(viewI).viewItemI),
+                }}
+              >
+                {({ first, itemI }) => {
+                  const item = items[itemI]
+                  return (
+                    <ProfileShowcase
+                      photos={item.photos}
+                      name={item.name}
+                      birthDate={item.birthDate}
+                      gender={item.gender}
+                      aboutMe={item.aboutMe}
+                      hideButtons={isAnimating}
+                      animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
+                      {...first && { onAccept, onReject, onBack }}
+                    />
+                  )
+                }}
+              </AnimatedState>
+            </StackFrame2>
+          ))}
+        </StackFrame>
+      </StacksFrame>
+    </FullscreenPage>
   )
 })
 export default FindCouplePage

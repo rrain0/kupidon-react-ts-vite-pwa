@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 
 
 
-export const SimpleGradientBg = (t: AppTheme.Theme) => css`
+export const simpleGradBgCss = (t: AppTheme.Theme) => css`
   background: linear-gradient(
     to bottom right,
     ${t.page.bgGrad[0]} 0%,

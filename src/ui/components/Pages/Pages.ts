@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { SimpleGradientBg } from 'src/ui-data/bg/SimpleGradientBg.ts'
+import { simpleGradBgCss } from 'src/ui-data/bg/simpleGradBg.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
@@ -24,12 +24,6 @@ export namespace Pages {
     position: relative;
     ${col};
   `
-  export const pageFillViewport = css`
-    min-width: ${wMin}px;
-    width: 100dvw;
-    min-height: ${hMin}px;
-    height: 100dvh;
-  `
   // no overlapping by bottom / top bars
   export const pageAddSafeInsets = css`
     padding-top: var(--top-bars-inset);
@@ -43,7 +37,7 @@ export namespace Pages {
     color: ${t.page.ct2};
   `
   export const pageGradColor = (t: AppTheme.Theme) => css`
-    ${SimpleGradientBg(t)};
+    ${simpleGradBgCss(t)};
     color: ${t.page.ct2};
   `
   
@@ -51,10 +45,6 @@ export namespace Pages {
   export const PageGrad = styled.main`
     ${pageCol};
     ${p => pageGradColor(p.theme)};
-  `
-  export const FullscreenPageGrad = styled.main`
-    ${pageFillViewport};
-    ${p => pageGradColor(p.theme)}
   `
   
   export const Page = styled.main`
@@ -112,7 +102,7 @@ export namespace Pages {
   
   
   
-  export const PageHeaderWithLeftRight = styled.div`
+  export const PageHeaderWithLeftRightItems = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr auto;

@@ -17,6 +17,10 @@ export interface AnimatedProperty<Value> {
 
 
 
+export type AnimatedPropertyUndefinedable<Value> =
+  | AnimatedProperty<Value>
+  | (Value extends undefined ? undefined : never)
+
 
 
 export type AnimatedPropertyToValue<AP extends AnimatedProperty<any> | undefined> =

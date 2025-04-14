@@ -50,11 +50,11 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         style={style}
         data-display-name="DatePlaceCategoriesList"
       >
-        <Pages.PageHeaderWithLeftRight>
+        <Pages.PageHeaderWithLeftRightItems>
           <BackBtn />
           <Hdrs.Page>{uiText.title}</Hdrs.Page>
           <div css={{ width: 50, height: 50 }} />
-        </Pages.PageHeaderWithLeftRight>
+        </Pages.PageHeaderWithLeftRightItems>
         
         <div style={{ height: 28 }} />
         
@@ -79,11 +79,11 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         style={style}
         data-display-name="DatePlaceCategoriesList"
       >
-        <Pages.PageHeaderWithLeftRight>
+        <Pages.PageHeaderWithLeftRightItems>
           <BackBtn />
           <Hdrs.Page>{uiText.title}</Hdrs.Page>
           <div css={{ width: 50, height: 50 }} />
-        </Pages.PageHeaderWithLeftRight>
+        </Pages.PageHeaderWithLeftRightItems>
         
         <div style={{ height: 28 }} />
         
