@@ -112,7 +112,7 @@ const Tests = React.memo((props: TestsProps) => {
           
         <ProfilePageTabHeader mainTabI={props.tabIdx} />
         
-        <div css={col} style={{ gap: 25 }}>
+        <div css={[col, { gap: 25 }]}>
         
       
           <Card css={thisTestHelpsYouRealizeCardS}>

@@ -91,7 +91,7 @@ const data = [
 
 
 
-type Action = 'accept' | 'reject' | 'back' | undefined
+type ProfileShowcaseAction = 'accept' | 'reject' | 'back' | undefined
 
 
 
@@ -132,6 +132,7 @@ const FindCouplePage = React.memo(() => {
     getTrackProps,
     axis: 'x',
     inverted: false,
+    noDragWhileAnimating: true,
     mergeProgress: fixedForwardCarouselMergeProgress,
     
     onStart: () => setIsAnimating(true),

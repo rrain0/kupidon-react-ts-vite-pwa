@@ -25,7 +25,7 @@ export type ProfilePageTabHeaderContextProps = {
   headers: string[]
   goToTab: (tabI: number) => void
 }
-export const ProfilePageTabHeaderContext = React.createContext({} as ProfilePageTabHeaderContextProps)
+export const ProfilePageTabHeaderContext = React.createContext({ } as ProfilePageTabHeaderContextProps)
 
 
 export type ProfilePageTabHeaderProps = {

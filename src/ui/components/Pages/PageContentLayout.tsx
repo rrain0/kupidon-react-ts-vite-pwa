@@ -95,13 +95,14 @@ const ContentCol = styled.div`
   gap: 10px;
 `
 
-const ColSm = styled(ContentCol)`
+const ColSm = styled.div`
   position: relative;
   width: 100%;
   max-width: 550px;
   min-width: 0;
   height: fit-content;
   align-self: center;
+  ${col};
   align-items: stretch;
 `
 
