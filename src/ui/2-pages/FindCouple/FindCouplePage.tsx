@@ -15,8 +15,7 @@ import { MockData } from 'src/_mock-data/MockData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
-import FullscreenPage from 'src/ui/components/Pages/FullscreenPage.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
 import full = EmotionCommon.full
@@ -85,12 +84,14 @@ const data = [
   }, */
 ]
 
-// TODO Иконку сердечка анимировать теневыми копиями большего размера при лайке
-
 // TODO Закрыть шторку при переходе на другую анкету
 
 // TODO Прикрутить нажатия на кнопки
 
+
+
+
+type Action = 'accept' | 'reject' | 'back' | undefined
 
 
 
@@ -177,7 +178,7 @@ const FindCouplePage = React.memo(() => {
       animatedDeltaProgress.set(-100)
       animateTo({ p: pos0PBase, mass: 2, tension: 70, friction: 10 })
     }
-  }, [])
+  }, [animateTo])
   
   
   const animatedProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
@@ -273,7 +274,7 @@ const FindCouplePage = React.memo(() => {
   
   
   return (
-    <FullscreenPage>
+    <PageLayout vp>
       <StacksFrame
         ref={frameRef}
         {...onTrackDrag()}
@@ -307,7 +308,7 @@ const FindCouplePage = React.memo(() => {
           ))}
         </StackFrame>
       </StacksFrame>
-    </FullscreenPage>
+    </PageLayout>
   )
 })
 export default FindCouplePage

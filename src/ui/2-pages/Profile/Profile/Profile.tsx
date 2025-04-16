@@ -11,7 +11,7 @@ import ProfileKidsOption from 'src/ui/2-pages/Profile/options/ProfileKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOption.tsx'
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
 import ProfileAlcoholOption from 'src/ui/2-pages/Profile/options/ProfileAlcoholOption.tsx'
@@ -83,161 +83,166 @@ const Profile = React.memo((props: ProfileProps) => {
   
   return (
     <>
-      <Pages.AddSafeInsets>
-        <Pages.ContentColSmForm onSubmit={props.onFormSubmitCallback}>
+      <PageContentLayout colSm>
+        <form style={{ display: 'contents' }} onSubmit={props.onFormSubmitCallback}>
           
-          <ProfilePageTabHeader mainTabI={props.tabIdx} />
-          
-          
-          <div css={col}>
+          <div css={[col, { gap: 30 }]}>
             
-            <ValidationWrap
-              {...props.validationProps}
-              fieldName="photos"
-              render={props => (
-                <ProfilePhotos
-                  images={props.value}
-                  setImages={props.setValue}
+            <ProfilePageTabHeader mainTabI={props.tabIdx} />
+            
+            <div css={col}>
+              
+              <ValidationWrap
+                {...props.validationProps}
+                fieldName="photos"
+                render={props => (
+                  <ProfilePhotos
+                    images={props.value}
+                    setImages={props.setValue}
+                  />
+                )}
+              />
+              
+              <div css={{ height: 24 }} />
+              
+              
+              
+              
+              <Hdrs.PageSec2>{text.bio}</Hdrs.PageSec2>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card>
+                
+                <ValidationWrap
+                  {...props.validationProps}
+                  fieldName="name"
+                  render={validProps => (
+                    <ProfileNameOption {...validProps} />
+                  )}
                 />
-              )}
-            />
-            
-            <div css={{ height: 24 }} />
-            
-            
-            
-            
-            <Hdrs.PageSec2>{text.bio}</Hdrs.PageSec2>
-            
-            <div css={{ height: 24 }} />
-            
-            <Card>
+                
+                <ValidationWrap
+                  {...props.validationProps}
+                  fieldName="birthDate"
+                  render={validProps => (
+                    <ProfileBirthDateOption {...validProps} />
+                  )}
+                />
+                
+                <ValidationWrap
+                  {...props.validationProps}
+                  fieldName="gender"
+                  render={validProps => (
+                    <ProfileGenderOption {...validProps} />
+                  )}
+                />
+              
+              </Card>
+              
+              <div css={{ height: 24 }} />
               
               <ValidationWrap
                 {...props.validationProps}
-                fieldName="name"
+                fieldName="aboutMe"
                 render={validProps => (
-                  <ProfileNameOption {...validProps} />
+                  <ProfileAboutMeOption {...validProps} />
                 )}
               />
               
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName="birthDate"
-                render={validProps => (
-                  <ProfileBirthDateOption {...validProps} />
-                )}
-              />
-              
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName="gender"
-                render={validProps => (
-                  <ProfileGenderOption {...validProps} />
-                )}
-              />
-            
-            </Card>
-            
-            <div css={{ height: 24 }} />
-            
-            <ValidationWrap
-              {...props.validationProps}
-              fieldName="aboutMe"
-              render={validProps => (
-                <ProfileAboutMeOption {...validProps} />
-              )}
-            />
-            
-            <div css={{ height: 24 }} />
-            
-            
-            
-            
-            <Hdrs.PageSec2>{text.itImportant}</Hdrs.PageSec2>
-            
-            <div css={{ height: 24 }} />
-            
-            <Card>
-              
-              <ProfileMeetingPurposeOption />
-              
-              <ProfilePlaceOfResidenceOption />
-              
-              <ProfileKidsOption />
-              
-              <ProfileHeightOption />
-              
-              <ProfileInterestsAndHobbiesOption />
-            
-            </Card>
-            
-            <div css={{ height: 24 }} />
-            
-            
-            
-            
-            <Hdrs.PageSec2>{text.interestingToKnow}</Hdrs.PageSec2>
-            
-            <div css={{ height: 24 }} />
-            
-            <Card>
-              
-              <ProfileJobOption />
+              <div css={{ height: 24 }} />
               
               
-              <ProfileEducationOption />
               
               
-              <ProfileLangsOption />
+              <Hdrs.PageSec2>{text.itImportant}</Hdrs.PageSec2>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card>
+                
+                <ProfileMeetingPurposeOption />
+                
+                <ProfilePlaceOfResidenceOption />
+                
+                <ProfileKidsOption />
+                
+                <ProfileHeightOption />
+                
+                <ProfileInterestsAndHobbiesOption />
+              
+              </Card>
+              
+              <div css={{ height: 24 }} />
               
               
-              <ProfileSmokeOption />
               
               
-              <ProfileAlcoholOption />
+              <Hdrs.PageSec2>{text.interestingToKnow}</Hdrs.PageSec2>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card>
+                
+                <ProfileJobOption />
+                
+                
+                <ProfileEducationOption />
+                
+                
+                <ProfileLangsOption />
+                
+                
+                <ProfileSmokeOption />
+                
+                
+                <ProfileAlcoholOption />
+                
+                
+                <ProfilePetsOption />
+              
+              </Card>
+              
+              <div css={{ height: 24 }} />
               
               
-              <ProfilePetsOption />
+              
+              
+              <Hdrs.PageSec2>{text.myDate}</Hdrs.PageSec2>
+              
+              <div css={{ height: 24 }} />
+              
+              <Card>
+                
+                <DateIdealFormatOption />
+                
+                
+                <DateIdealTimeOption />
+                
+                
+                <DateWhoPaysOption />
+              
+              </Card>
+              
+              <div css={{ height: 24 }} />
+              
+              <DateIdealDateOption />
             
-            </Card>
             
-            <div css={{ height: 24 }} />
-            
-            
-            
-            
-            <Hdrs.PageSec2>{text.myDate}</Hdrs.PageSec2>
-            
-            <div css={{ height: 24 }} />
-            
-            <Card>
-              
-              <DateIdealFormatOption />
-              
-              
-              <DateIdealTimeOption />
-              
-              
-              <DateWhoPaysOption />
-            
-            </Card>
-            
-            <div css={{ height: 24 }} />
-            
-            <DateIdealDateOption />
-          
+            </div>
           
           </div>
-        
-        </Pages.ContentColSmForm>
-      </Pages.AddSafeInsets>
-    
+          
+        </form>
+      </PageContentLayout>
+  
     
     </>
   )
 })
 export default Profile
+
+
 
 
 export const TopButtonBarFrame = styled.section`

@@ -29,7 +29,7 @@ import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import Preview from 'src/ui/2-pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/ui/2-pages/Profile/Profile/Profile.tsx'
-import FullscreenPage from 'src/ui/components/Pages/FullscreenPage.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { RangeU } from 'src/util/common/RangeU'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import {
@@ -467,7 +467,7 @@ const ProfilePage = React.memo(() => {
   
   return (
     <>
-      <FullscreenPage noSafeInsets>
+      <PageLayout vp noInsetsForFilledBars>
         <>
           <TabsBox
             ref={setItemsBoxElem}
@@ -481,10 +481,7 @@ const ProfilePage = React.memo(() => {
                     backgroundColor: Colors.test[viewI],
                   }} */
                   animatedStyle={{
-                    transform: animatedProps.map(ap => {
-                      const { viewP } = ap(viewI)
-                      return `translateX(${viewP}%)`
-                    }),
+                    transform: animatedProps.map(ap => `translateX(${ap(viewI).viewP}%)`),
                   }}
                 >
                   <AnimatedState
@@ -606,7 +603,7 @@ const ProfilePage = React.memo(() => {
           /> } */}
         
         </>
-      </FullscreenPage>
+      </PageLayout>
     </>
   )
 })

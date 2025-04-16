@@ -45,8 +45,8 @@ type ModalSingleSelectListProps<T extends string> = Ro<{
   onCancel: Callback
 }>
 
-const ModalSingleSelectList = ReactU.memo(
-  <T extends string>(props: ModalSingleSelectListProps<T>) => {
+const ModalSingleSelectList = (<T extends string>() =>
+  React.memo((props: ModalSingleSelectListProps<T>) => {
     
     const {
       isOpen,
@@ -167,8 +167,8 @@ const ModalSingleSelectList = ReactU.memo(
         )}
       </UseBottomSheetState>
     )
-  }
-)
+  })
+)()
 export default ModalSingleSelectList
 
 

@@ -9,7 +9,7 @@ import colC = EmotionCommon.colC
 
 
 
-
+// TODO remove and replace with PageLayout & PageContentLayout
 export namespace Pages {
   
   const wMin = 320

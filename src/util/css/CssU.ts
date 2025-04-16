@@ -1,7 +1,24 @@
+import { TypeU } from 'src/util/common/TypeU.ts'
+import falsy = TypeU.falsy
 
 
 
 export namespace CssU {
+  
+  
+  export const max = (...values: (string | falsy)[]): string => {
+    const vs = values.filter(v => !!v) as string[]
+    if (vs.length === 0) return ''
+    if (vs.length === 1) return vs[0]
+    return `max(${vs.join(', ')})`
+  }
+  
+  export const plus = (...values: (string | falsy)[]): string => {
+    const vs = values.filter(v => !!v) as string[]
+    if (vs.length === 0) return ''
+    if (vs.length === 1) return vs[0]
+    return `calc(${vs.join(' + ')})`
+  }
   
   
   
@@ -11,7 +28,7 @@ export namespace CssU {
      height: ${abs('var(--w)', 'var(--h)')};
    }
    */
-  export function abs(a: string, b: string): string {
+  export function absDiff(a: string, b: string): string {
     return `max( ${a} - ${b}, ${b} - ${a} )`
   }
   
@@ -23,8 +40,8 @@ export namespace CssU {
      height: ${s('var(--w)', 'var(--h)')};
    }
   */
-  export const s = (w: string, h: string) => {
-    return `calc( min(${w}, ${h}) + ${abs(w, h)} / 3 )`
+  export const sz = (w: string, h: string) => {
+    return `calc( min(${w}, ${h}) + ${absDiff(w, h)} / 3 )`
   }
   
   

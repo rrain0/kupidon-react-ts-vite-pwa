@@ -12,8 +12,8 @@ export namespace ToastAnimations {
   })
   
   export const Bounce = cssTransition({
-    enter: "animate__animated animate__bounceIn",
-    exit: "animate__animated animate__bounceOut",
+    enter: 'animate__animated animate__bounceIn',
+    exit: 'animate__animated animate__bounceOut',
     collapse: false,
   })
   

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
@@ -9,6 +10,7 @@ import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import { simpleGradBgCss } from 'ui-data/bg/simpleGradBg'
 import assertNever = TypeU.assertNever
+import col = EmotionCommon.col
 
 
 
@@ -17,19 +19,32 @@ const hMin = 480
 
 
 
-export type FullscreenPageProps = Pu<{
+export type PageLayoutProps = Pu<{
+  vp: boolean
+  full: boolean
+  col: boolean
   bgType: 'grad' | 'fill'
-  noSafeInsets: boolean
+  
+  noInsetsForFilledBars: boolean
 }> & ClassStyle & Children
 
-export const FullscreenPage = React.memo((props: FullscreenPageProps) => {
+export const PageLayout = React.memo((props: PageLayoutProps) => {
   const {
     className,
     style,
     children,
+    
+    vp, full, col,
     bgType = 'grad',
-    noSafeInsets,
+    
+    noInsetsForFilledBars,
   } = props
+  
+  const Page = (() => {
+    if (col) return PageCol
+    if (vp) return PageFillViewport
+    return PageCol
+  })()
   
   const bgColorType = (() => {
     if (bgType === 'fill') return pageFillColor
@@ -37,23 +52,33 @@ export const FullscreenPage = React.memo((props: FullscreenPageProps) => {
     assertNever(bgType)
   })()
   
-  const safeInsets = (!noSafeInsets || undefined) && pageAddSafeInsets
+  const safeInsetsForFilledBars = !noInsetsForFilledBars && addSafeInsetsForFilledBars
   
   return (
-    <PageFillViewport
-      data-display-name="FullscreenPage"
+    <Page
+      data-display-name="PageLayout"
       className={className}
       style={style}
-      css={[bgColorType, safeInsets]}
+      css={[bgColorType, safeInsetsForFilledBars]}
     >
       {children}
-    </PageFillViewport>
+    </Page>
   )
 })
-FullscreenPage.displayName = 'FullscreenPage'
-export default FullscreenPage
+PageLayout.displayName = 'PageLayout'
+export default PageLayout
 
 
+
+
+
+const PageCol = styled.div`
+  position: relative;
+  min-width: ${wMin}px;
+  width: min(var(--vp-ct-w), 100dvw);
+  min-height: max( min(var(--vp-ct-h), 100dvh), ${hMin}px );
+  ${col};
+`
 
 const PageFillViewport = styled.div`
   min-width: ${wMin}px;
@@ -74,9 +99,8 @@ const pageGradColor = (t: AppTheme.Theme) => css`
 `
 
 
-const pageAddSafeInsets = css`
+const addSafeInsetsForFilledBars = css`
   padding-top: var(--top-bars-inset);
   padding-bottom: var(--bottom-bars-inset);
 `
-
 

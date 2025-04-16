@@ -46,8 +46,8 @@ type ModalTileSelectProps<T extends string> = Ro<{
   onClear: Callback
 }>
 
-const ModalTileSelect = ReactU.memo(
-  <T extends string>(props: ModalTileSelectProps<T>) => {
+const ModalTileSelect = (<T extends string>() =>
+  React.memo((props: ModalTileSelectProps<T>) => {
     const {
       isOpen,
       onClose,
@@ -121,8 +121,8 @@ const ModalTileSelect = ReactU.memo(
         )}
       </UseBottomSheetState>
     )
-  }
-)
+  })
+)()
 export default ModalTileSelect
 
 

@@ -30,58 +30,62 @@ export type ModalRadioProps<V extends string> = PartialUndef<{
 
 
 
-const ModalRadio = ReactU.memo(
-  <V extends string>(props: ModalRadioProps<V>) => {
+const ModalRadio = (<V extends string>() =>
+  React.memo((props: ModalRadioProps<V>) => {
     const { isOpen, close, title, options, value, onSelect } = props
     
-    return <UseBottomSheetState isOpen={!!isOpen} onClose={close}>
-      {sheetProps =>
-        <ModalPortal>
-          <BottomSheetBasic
-            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
-            {...sheetProps.sheetProps}
-            title={title}
-          >
-            <RadioInputGroup css={selectItemsContainer}>
-              {options?.map(opt => <RadioInput
-                css={[
-                  RadioInputStyle.radio,
-                  css`
-                    ${RadioInputStyle.El.frame} {
-                      //padding: 12px 18px;
-                      //background: #f2f2f2;
-                    }
-                    ${RadioInputStyle.El.border} {
-                      //border: 1px solid #999999;
-                    }
-                  `,
-                ]}
-                childrenPosition="end"
-                checked={opt.id === value}
-                onChange={() => onSelect?.(opt.id)}
-                ref={undefined}
-                value={opt.id}
-                key={opt.id}
-                onClick={sheetProps.setClosing}
-              >
-                <div css={selectItemText}>
-                  {opt.text}
-                </div>
-              </RadioInput>)}
+    return (
+      <UseBottomSheetState isOpen={!!isOpen} onClose={close}>
+        {sheetProps => (
+          <ModalPortal>
+            <BottomSheetBasic
+              css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
+              {...sheetProps.sheetProps}
+              title={title}
+            >
+              <RadioInputGroup css={selectItemsContainer}>
+                {options?.map(opt => (
+                  <RadioInput
+                    css={[
+                      RadioInputStyle.radio,
+                      css`
+                      ${RadioInputStyle.El.frame} {
+                        //padding: 12px 18px;
+                        //background: #f2f2f2;
+                      }
+                      ${RadioInputStyle.El.border} {
+                        //border: 1px solid #999999;
+                      }
+                    `,
+                    ]}
+                    childrenPosition="end"
+                    checked={opt.id === value}
+                    onChange={() => onSelect?.(opt.id)}
+                    ref={undefined}
+                    value={opt.id}
+                    key={opt.id}
+                    onClick={sheetProps.setClosing}
+                  >
+                    <div css={selectItemText}>
+                      {opt.text}
+                    </div>
+                  </RadioInput>
+                ))}
                 {/* <div css={css`
-                  height: 1px;
-                  width: 100%;
-                  background: black;
-                `}/> */}
+                 height: 1px;
+                 width: 100%;
+                 background: black;
+                 `}/> */}
               
-            
-            </RadioInputGroup>
-          </BottomSheetBasic>
-        </ModalPortal>
-      }
-    </UseBottomSheetState>
-  }
-)
+              
+              </RadioInputGroup>
+            </BottomSheetBasic>
+          </ModalPortal>
+        )}
+      </UseBottomSheetState>
+    )
+  })
+)()
 export default ModalRadio
 
 

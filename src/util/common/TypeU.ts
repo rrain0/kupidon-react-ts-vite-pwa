@@ -66,6 +66,9 @@ export namespace TypeU {
   export function assertNever(value: never): never {
     throw new Error(`Value must be never, but it is: ${value}`)
   }
+  export function throwNever(): never {
+    throw new Error(`This code must not be reached`)
+  }
   export function exists<T, Ex extends {}>(value: T | Ex): value is Ex {
     return value !== null && value !== undefined
   }

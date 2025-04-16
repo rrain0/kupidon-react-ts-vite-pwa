@@ -52,9 +52,9 @@ export type ModalMultiSelectListProps<T extends string> = Ro<{
   onClear: Callback
 }>
 
-const ModalMultiSelectList = ReactU.memo(
-  <T extends string>(props: ModalMultiSelectListProps<T>) => {
-    
+const ModalMultiSelectList = (<T extends string>() =>
+  React.memo((props: ModalMultiSelectListProps<T>) => {
+  
     const {
       isOpen,
       onClose,
@@ -164,13 +164,13 @@ const ModalMultiSelectList = ReactU.memo(
               onChange={ev => setEditableText(ev.currentTarget.value)}
               title={title}
             />
-            
+          
           </>
         )}
       </UseBottomSheetState>
     )
-  }
-)
+  })
+)()
 export default ModalMultiSelectList
 
 

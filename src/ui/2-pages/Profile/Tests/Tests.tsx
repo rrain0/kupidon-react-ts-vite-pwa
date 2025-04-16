@@ -15,10 +15,10 @@ import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import {
   useOverlayUrl
 } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
@@ -108,146 +108,144 @@ const Tests = React.memo((props: TestsProps) => {
   
   return (
     <>
-      <Pages.AddSafeInsets>
-        <Pages.ContentColSm css={css`gap: 30px;`}>
+      <PageContentLayout colSm innerStyle={{ gap: 30 }}>
           
-          <ProfilePageTabHeader mainTabI={props.tabIdx} />
+        <ProfilePageTabHeader mainTabI={props.tabIdx} />
+        
+        <div css={col} style={{ gap: 25 }}>
+        
+      
+          <Card css={thisTestHelpsYouRealizeCardS}>
+            <PinkHeartWithExclamationBox>
+              <img
+                src={pinkHeartWithExclamation}
+                alt="Pink heart with exclamation mark"
+                style={{ height: 34 }}
+              />
+            </PinkHeartWithExclamationBox>
+            
+            <InfoCardText>
+              {uiText.thisTestHelpsYouRealizeYourPreferences}
+            </InfoCardText>
+          </Card>
           
-          <div css={col} style={{ gap: 25 }}>
-        
-        
-            <Card css={thisTestHelpsYouRealizeCardS}>
-              <PinkHeartWithExclamationBox>
-                <img
-                  src={pinkHeartWithExclamation}
-                  alt="Pink heart with exclamation mark"
-                  style={{ height: 34 }}
-                />
-              </PinkHeartWithExclamationBox>
+          
+          <Hdrs.PageSec>{uiText.yourPersonalityType}</Hdrs.PageSec>
+          
+          
+          {!mbtiType && (
+            <Card css={cardS}>
+              <ManWithHugeHeart
+                src={manWithHugeHeart}
+                alt="Man with huge heart"
+              />
               
-              <InfoCardText>
-                {uiText.thisTestHelpsYouRealizeYourPreferences}
-              </InfoCardText>
+              <InfoCardTextCenter>
+                {uiText.yourPersonalityTypeIsUnknown}
+              </InfoCardTextCenter>
             </Card>
-            
-            
-            <Hdrs.PageSec>{uiText.yourPersonalityType}</Hdrs.PageSec>
-            
-            
-            {!mbtiType && (
-              <Card css={cardS}>
-                <ManWithHugeHeart
-                  src={manWithHugeHeart}
-                  alt="Man with huge heart"
-                />
+          )}
+          
+          {mbtiType && (
+            <>
+              <Card css={yourPersonalityTypeCardS}>
                 
-                <InfoCardTextCenter>
-                  {uiText.yourPersonalityTypeIsUnknown}
-                </InfoCardTextCenter>
+                <PersonalityTypePictureBox>
+                  <PersonalityTypePicture
+                    src={mbtiData.picture}
+                    alt={mbtiType}
+                  />
+                </PersonalityTypePictureBox>
+                
+                <PersonalityTypeTextBox
+                  style={{ color: color }}
+                >
+                  <PersonalityTypeCodeName>
+                    {mbtiType}
+                  </PersonalityTypeCodeName>
+                  <PersonalityTypeName>
+                    {uiText.personalityTypeName}
+                  </PersonalityTypeName>
+                </PersonalityTypeTextBox>
+              
               </Card>
-            )}
-            
-            {mbtiType && (
-              <>
-                <Card css={yourPersonalityTypeCardS}>
-                  
-                  <PersonalityTypePictureBox>
-                    <PersonalityTypePicture
-                      src={mbtiData.picture}
-                      alt={mbtiType}
-                    />
-                  </PersonalityTypePictureBox>
-                  
-                  <PersonalityTypeTextBox
-                    style={{ color: color }}
-                  >
-                    <PersonalityTypeCodeName>
-                      {mbtiType}
-                    </PersonalityTypeCodeName>
-                    <PersonalityTypeName>
-                      {uiText.personalityTypeName}
-                    </PersonalityTypeName>
-                  </PersonalityTypeTextBox>
-                
-                </Card>
-                
-                <ShortDescription>{mbtiTypeUiText.shortDescription}</ShortDescription>
-              </>
-            )}
-            
-            {testState === 'idle' && (
+              
+              <ShortDescription>{mbtiTypeUiText.shortDescription}</ShortDescription>
+            </>
+          )}
+          
+          {testState === 'idle' && (
+            <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+              <Button
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
+              >
+                {uiText.takeTheTest}
+              </Button>
+            </Link>
+          )}
+          {testState === 'paused' && (
+            <div css={css`${col}; gap: 15px;`}>
               <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
                 <Button
                   css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
                 >
-                  {uiText.takeTheTest}
+                  {uiText.continue}
                 </Button>
               </Link>
-            )}
-            {testState === 'paused' && (
-              <div css={css`${col}; gap: 15px;`}>
-                <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
-                  <Button
-                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
-                  >
-                    {uiText.continue}
-                  </Button>
-                </Link>
-                <Button
-                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                  onClick={resetMbtiTestDialog.open}
-                >
-                  {uiText.startOver}
-                </Button>
-              </div>
-            )}
-            
-            {testState === 'completed' && (
-              <div css={css`${col}; gap: 15px;`}>
-                <PersonalityCompatibility
-                  compatibility="high"
-                  compatibles={mbtiData.highCompatibility}
-                />
-                <PersonalityCompatibility
-                  compatibility="medium"
-                  compatibles={mbtiData.mediumCompatibility}
-                />
-                {/* <PersonalityCompatibility
-                  compatibility="low"
-                  compatibles={['INTJ', 'ENTP', 'ISFP']}
-                  percent="55-25%"
-                /> */}
-              </div>
-            )}
-            
-            <MiniTypesBox>
-              {ObjectEntries(MbtiTypeData).map(([type, data]) => (
-                <TypeComponent key={type} type={type} />
-              ))}
-            </MiniTypesBox>
-            
-            {testState === 'completed' && (
-              <>
-                <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
-                  <Button
-                    css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                  >
-                    {uiText.changeAnswers}
-                  </Button>
-                </Link>
-                <Button
-                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
-                  onClick={resetMbtiTestDialog.open}
-                >
-                  {uiText.startTheTestAgain}
-                </Button>
-              </>
-            )}
-            
-          </div>
+              <Button
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                onClick={resetMbtiTestDialog.open}
+              >
+                {uiText.startOver}
+              </Button>
+            </div>
+          )}
           
-        </Pages.ContentColSm>
-      </Pages.AddSafeInsets>
+          {testState === 'completed' && (
+            <div css={css`${col}; gap: 15px;`}>
+              <PersonalityCompatibility
+                compatibility="high"
+                compatibles={mbtiData.highCompatibility}
+              />
+              <PersonalityCompatibility
+                compatibility="medium"
+                compatibles={mbtiData.mediumCompatibility}
+              />
+              {/* <PersonalityCompatibility
+                compatibility="low"
+                compatibles={['INTJ', 'ENTP', 'ISFP']}
+                percent="55-25%"
+              /> */}
+            </div>
+          )}
+          
+          <MiniTypesBox>
+            {ObjectEntries(MbtiTypeData).map(([type, data]) => (
+              <TypeComponent key={type} type={type} />
+            ))}
+          </MiniTypesBox>
+          
+          {testState === 'completed' && (
+            <>
+              <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+                <Button
+                  css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                >
+                  {uiText.changeAnswers}
+                </Button>
+              </Link>
+              <Button
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
+                onClick={resetMbtiTestDialog.open}
+              >
+                {uiText.startTheTestAgain}
+              </Button>
+            </>
+          )}
+          
+        </div>
+        
+      </PageContentLayout>
       
       
       <ModalDialog
