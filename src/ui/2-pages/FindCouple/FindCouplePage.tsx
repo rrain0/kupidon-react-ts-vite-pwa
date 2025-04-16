@@ -120,11 +120,6 @@ const FindCouplePage = React.memo(() => {
     getDeltaProgress,
     animatedDeltaProgress,
     
-    setStartProgress,
-    setStartItemProgress,
-    setDeltaProgress,
-    applyOnFinish,
-    
     animateTo,
   } = useCarousel({
     itemsCnt,
@@ -150,35 +145,19 @@ const FindCouplePage = React.memo(() => {
   }, [animateTo])
   
   const onBack = useCallback(() => {
-    {
-      const { pos0PBase, pos0ItemPBase } = getFixedForwardLoopedCarouselProps({
-        startP: getStartProgress(),
-        startItemP: getStartItemProgress(),
-        deltaP: getDeltaProgress(),
-        itemsCnt,
-        viewsCnt,
-        startViewI: -1,
-        currViewI: 0,
-      })
-      setStartProgress(rf3(pos0PBase - 100))
-      setStartItemProgress(rf3(pos0ItemPBase - 100))
-      setDeltaProgress(0)
-      applyOnFinish()
-    }
-    {
-      const { pos0PBase } = getFixedForwardLoopedCarouselProps({
-        startP: getStartProgress(),
-        startItemP: getStartItemProgress(),
-        deltaP: getDeltaProgress(),
-        itemsCnt,
-        viewsCnt,
-        startViewI: -1,
-        currViewI: 0,
-      })
-      setDeltaProgress(-100)
-      animatedDeltaProgress.set(-100)
-      animateTo({ p: pos0PBase, mass: 2, tension: 70, friction: 10 })
-    }
+    const { pos0PBase } = getFixedForwardLoopedCarouselProps({
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: getDeltaProgress(),
+      itemsCnt,
+      viewsCnt,
+      startViewI: -1,
+      currViewI: 0,
+    })
+    animateTo({
+      fromStartP: rf3(pos0PBase - 100), fromDeltaP: -100, deltaP: 0,
+      mass: 2, tension: 70, friction: 10,
+    })
   }, [animateTo])
   
   

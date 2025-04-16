@@ -53,7 +53,6 @@ export type AnimateToParams = Pu<{
   fromDeltaP: number
   
   p: number
-  startP: number
   deltaP: number
   
   vel0: number
@@ -201,42 +200,71 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const animateTo = useAsCallback(async ({
     next, prev,
     fromP, fromStartP, fromDeltaP,
-    p: nextP, startP: _startP, deltaP: _deltaP,
+    p, deltaP,
     vel0, mass, tension, friction,
     noAnimation,
   }: AnimateToParams) => {
-    const startP = getStartProgress()
-    const deltaP = getDeltaProgress()
-    const p = rf3(startP + deltaP)
-    const pCurr = rf3(p % 100)
-    const pBase = rf3(p - pCurr)
     
-    ;[nextP, vel0] = (() => {
-      if (next) return [rf3(pBase + 100), +velDefault]
-      if (prev) return [rf3(pBase - 100), -velDefault]
-      //if (exists(nextItemI)) return [0, 0]
-      if (exists(nextP)) return [
-        nextP,
-        vel0 ?? getVelPx(nextP > p ? velDefault : -velDefault),
-      ]
-      return [undefined, 0]
+    ;[fromStartP, fromDeltaP, fromP] = (() => {
+      if (exists(fromStartP) && exists(fromDeltaP)) {
+        return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
+      }
+      if (exists(fromP) && exists(fromStartP)) {
+        return [fromStartP, rf3(fromP - fromStartP), fromP]
+      }
+      if (exists(fromP) && exists(fromDeltaP)) {
+        return [rf3(fromP - fromDeltaP), fromDeltaP, fromP]
+      }
+      if (exists(fromDeltaP)) {
+        const fromStartP = getStartProgress()
+        return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
+      }
+      if (exists(fromStartP)) {
+        const fromDeltaP = getDeltaProgress()
+        return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
+      }
+      if (exists(fromP)) {
+        const fromDeltaP = rf3(fromP % 100)
+        const fromStartP = rf3(fromP - fromDeltaP)
+        return [fromStartP, fromDeltaP, fromP]
+      }
+      {
+        const fromStartP = getStartProgress()
+        const fromDeltaP = getDeltaProgress()
+        return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
+      }
+    })()
+    const fromPCurr = rf3(fromP % 100)
+    const fromPBase = rf3(fromP - fromPCurr)
+    
+    setStartItemProgress(rf3(getStartItemProgress() + (fromStartP - getStartProgress())))
+    setStartProgress(fromStartP)
+    setDeltaProgress(fromDeltaP)
+    animatedDeltaProgress.set(fromDeltaP)
+    
+    deltaP = (() => {
+      if (next) return rf3(fromPBase + 100 - fromStartP)
+      if (prev) return rf3(fromPBase - 100 - fromStartP)
+      if (exists(deltaP)) return deltaP
+      if (exists(p)) return rf3(p - fromStartP)
+      return undefined
     })()
     
     
-    if (exists(nextP) && p !== nextP) {
+    if (exists(deltaP) && fromDeltaP !== deltaP) {
       tryEmitStartEvent()
-      const nextDeltaP = rf3(nextP - startP)
+      vel0 ??= getVelPx(deltaP > fromDeltaP ? velDefault : -velDefault)
       
-      //console.log('p & deltaP', p, deltaP, 'nextP & nextDeltaP', nextP, nextDeltaP, 'vel0', vel0)
+      //console.log('fromP & fromDeltaP', fromP, fromDeltaP, 'p & deltaP', p, deltaP, 'vel0', vel0)
       
       if (noAnimation) {
-        setDeltaProgress(nextDeltaP)
-        animatedDeltaProgress.set(nextDeltaP)
+        setDeltaProgress(deltaP)
+        animatedDeltaProgress.set(deltaP)
       }
       else {
         setIsAnimating(true)
         const { finished } = await animatedDeltaProgress.animate({
-          startValue: deltaP,
+          startValue: fromDeltaP,
           animationFun: createSpringAnimation({
             //mass: 1, tension: 170, friction: 10,
             mass: 1, tension: 120, friction: 7,
@@ -246,7 +274,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
             ...exists(friction) && { friction },
             
             initVelocity: vel0,
-            endValue: nextDeltaP,
+            endValue: deltaP,
           }),
           onUpdate: ({ value }) => setDeltaProgress(rf3(value)),
         })
@@ -400,12 +428,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     getStartItemProgress,
     getDeltaProgress,
     animatedDeltaProgress,
-    
-    // TODO remove
-    setStartProgress,
-    setStartItemProgress,
-    setDeltaProgress,
-    applyOnFinish,
     
     animateTo,
   }
