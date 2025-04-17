@@ -9,6 +9,7 @@ import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
@@ -22,69 +23,9 @@ import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
 import full = EmotionCommon.full
 import rf3 = MathU.rf3
+import Pu = TypeU.Pu
 
 
-const photos = [
-  {
-    type: 'local', isEmpty: false, id: '0',
-    remoteUrl: '', name: '0', mimeType: 'image/png',
-    dataUrl: MockData.images.sixImages[0],
-    isReady: true, remoteI: 0,
-  },
-  {
-    type: 'local', isEmpty: false, id: '1',
-    remoteUrl: '', name: '1', mimeType: 'image/png',
-    dataUrl: MockData.images.sixImages[1],
-    isReady: true, remoteI: 1,
-  },
-  {
-    type: 'local', isEmpty: false, id: '2',
-    remoteUrl: '', name: '2', mimeType: 'image/png',
-    dataUrl: MockData.images.sixImages[2],
-    isReady: true, remoteI: 2,
-  },
-  {
-    type: 'local', isEmpty: false, id: '3',
-    remoteUrl: '', name: '3', mimeType: 'image/png',
-    dataUrl: MockData.images.sixImages[3],
-    isReady: true, remoteI: 3,
-  },
-  {
-    type: 'local', isEmpty: false, id: '4',
-    remoteUrl: '', name: '4', mimeType: 'image/png',
-    dataUrl: MockData.images.sixImages[4],
-    isReady: true, remoteI: 4,
-  },
-  {
-    type: 'local', isEmpty: false, id: '5',
-    remoteUrl: '', name: '5', mimeType: 'image/png',
-    dataUrl: MockData.images.sixImages[5],
-    isReady: true, remoteI: 5,
-  },
-] as ProfilePhoto[]
-const data = [
-  {
-    photos,
-    name: 'Test',
-    birthDate: '2000-10-10',
-    gender: 'MALE' as const,
-    aboutMe: 'Тестовое описание 1',
-  },
-  {
-    photos: [photos[1], ...photos.slice(1)],
-    name: 'test',
-    birthDate: '2000-10-10',
-    gender: 'MALE' as const,
-    aboutMe: 'Тестовое описание 2',
-  },
-  /* {
-    photos: [photos[2], ...photos.slice(1)],
-    name: 'test',
-    birthDate: '2000-10-10',
-    gender: 'MALE' as const,
-    aboutMe: 'Тестовое описание 3',
-  }, */
-]
 
 // TODO Закрыть шторку при переходе на другую анкету
 
@@ -99,10 +40,19 @@ const data = [
 const viewsCnt = 3
 
 
+export type FindCouplePageItem = {
+  photos: ProfilePhoto[]
+  name: string
+  birthDate: string
+  gender: 'MALE' | 'FEMALE'
+  aboutMe: string
+}
+export type FindCouplePageProps = Pu<{
+  items: FindCouplePageItem[]
+}>
 
-const FindCouplePage = React.memo(() => {
-  
-  const items = data
+
+const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   const itemsCnt = items.length
   
   const [, , frameRef] = useElemRefGetSet()
