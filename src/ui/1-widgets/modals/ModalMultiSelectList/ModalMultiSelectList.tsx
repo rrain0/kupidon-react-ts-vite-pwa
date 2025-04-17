@@ -52,8 +52,8 @@ export type ModalMultiSelectListProps<T extends string> = Ro<{
   onClear: Callback
 }>
 
-const ModalMultiSelectList = (<T extends string>() =>
-  React.memo((props: ModalMultiSelectListProps<T>) => {
+const ModalMultiSelectList = ReactU.memo(
+  <T extends string>(props: ModalMultiSelectListProps<T>) => {
   
     const {
       isOpen,
@@ -169,8 +169,8 @@ const ModalMultiSelectList = (<T extends string>() =>
         )}
       </UseBottomSheetState>
     )
-  })
-)()
+  }
+)
 export default ModalMultiSelectList
 
 

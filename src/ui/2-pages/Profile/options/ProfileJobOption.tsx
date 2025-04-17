@@ -27,80 +27,75 @@ export type JobOptionValues = Job | ''
 export type JobUiOptions = Option<JobOptionValues>[]
 
 
-const ProfileJobOption = React.memo(
-  () => {
-    const optionText = useUiValues(OptionUiText)
-    const titleText = useUiValues(TitleUiText)
-    
-    const text = useMemo(() => ({
-      iWorkForHire: optionText.iWorkForHire,
-      workForMyself: optionText.workForMyself,
-      temporaryUnemployed: optionText.temporaryUnemployed,
-      notSelected: optionText.notSelected,
-    }), [optionText, titleText])
-    
-    
-    const options = useMemo(
-      () => [
-        {
-          id: 'I_WORK_FOR_HIRE',
-          text: text.iWorkForHire,
-        },
-        {
-          id: 'WORK_FOR_MYSELF',
-          text: text.workForMyself,
-        },
-        {
-          id: 'TEMPORARILY_UNEMPLOYED',
-          text: text.temporaryUnemployed,
-        },
-        {
-          id: '',
-          text: text.notSelected,
-        },
-      ] satisfies JobUiOptions,
-      [text]
-    )
-    
-    
-    const [saved, setSaved] = useState<JobOptionValues>('')
-    const [selected, setSelected] = useState(saved)
-    
-    const onCancel = () => setSelected(saved)
-    
-    const { isOpen, open, close } = useOverlayUrl(overlayName)
-    
-    const onClose = () => {
-      setSaved(selected)
-      close()
-    }
-    
-    const value = options.find(opt => opt.id === selected)?.text ?? ''
-    
-    return (
-      <>
-        <OptionItem
-          icon={<WorkSuitcaseGradIc />}
-          title={titleText.job}
-          value={value}
-          onClick={open}
-        />
-        
-        
-        <ModalSingleSelectList
-          isOpen={isOpen}
-          onClose={onClose}
-          title={titleText.job}
-          options={options}
-          selected={selected}
-          setSelected={setSelected}
-          notSelectedValue=""
-          onCancel={onCancel}
-        />
-      </>
-    )
+const ProfileJobOption = React.memo(() => {
+  const optionText = useUiValues(OptionUiText)
+  const titleText = useUiValues(TitleUiText)
+  
+  const text = useMemo(() => ({
+    iWorkForHire: optionText.iWorkForHire,
+    workForMyself: optionText.workForMyself,
+    temporaryUnemployed: optionText.temporaryUnemployed,
+    notSelected: optionText.notSelected,
+  }), [optionText, titleText])
+  
+  
+  const options = useMemo(() => [
+    {
+      id: 'I_WORK_FOR_HIRE',
+      text: text.iWorkForHire,
+    },
+    {
+      id: 'WORK_FOR_MYSELF',
+      text: text.workForMyself,
+    },
+    {
+      id: 'TEMPORARILY_UNEMPLOYED',
+      text: text.temporaryUnemployed,
+    },
+    {
+      id: '',
+      text: text.notSelected,
+    },
+  ] satisfies JobUiOptions, [text])
+  
+  
+  const [saved, setSaved] = useState<JobOptionValues>('')
+  const [selected, setSelected] = useState(saved)
+  
+  const onCancel = () => setSelected(saved)
+  
+  const { isOpen, open, close } = useOverlayUrl(overlayName)
+  
+  const onClose = () => {
+    setSaved(selected)
+    close()
   }
-)
+  
+  const value = options.find(opt => opt.id === selected)?.text ?? ''
+  
+  return (
+    <>
+      <OptionItem
+        icon={<WorkSuitcaseGradIc />}
+        title={titleText.job}
+        value={value}
+        onClick={open}
+      />
+      
+      
+      <ModalSingleSelectList
+        isOpen={isOpen}
+        onClose={onClose}
+        title={titleText.job}
+        options={options}
+        selected={selected}
+        setSelected={setSelected}
+        notSelectedValue=""
+        onCancel={onCancel}
+      />
+    </>
+  )
+})
 export default ProfileJobOption
 
 

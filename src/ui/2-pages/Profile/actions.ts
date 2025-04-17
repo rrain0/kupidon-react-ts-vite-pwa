@@ -70,31 +70,32 @@ export const dotActive = (t: AppTheme.Theme)=>css`
 
 
 
-export const currentUserPhotosToProfilePhotos =
-  (photos: CurrentUser['photos']): ProfilePhoto[] => {
-    const profilePhotos: ProfilePhoto[] =
-      ArrayU.arrOfIndices(6).map(i => ({
-        ...newDefaultProfilePhoto(),
-        type: 'remote',
-        id: uuid.v4(),
-        remoteI: i,
-        isEmpty: true,
-        isReady: true,
-      } satisfies ProfilePhoto))
-    photos.forEach(it => {
-      profilePhotos[it.index] = {
-        ...newDefaultProfilePhoto(),
-        type: 'remote',
-        id: it.id,
-        remoteI: it.index,
-        name: it.name,
-        mimeType: it.mimeType,
-        remoteUrl: it.url,
-        isReady: false,
-      } satisfies ProfilePhoto
-    })
-    return profilePhotos
-  }
+export const currentUserPhotosToProfilePhotos = (
+  photos: CurrentUser['photos']
+): ProfilePhoto[] => {
+  const profilePhotos: ProfilePhoto[] =
+    ArrayU.arrOfIndices(6).map(i => ({
+      ...newDefaultProfilePhoto(),
+      type: 'remote',
+      id: uuid.v4(),
+      remoteI: i,
+      isEmpty: true,
+      isReady: true,
+    } satisfies ProfilePhoto))
+  photos.forEach(it => {
+    profilePhotos[it.index] = {
+      ...newDefaultProfilePhoto(),
+      type: 'remote',
+      id: it.id,
+      remoteI: it.index,
+      name: it.name,
+      mimeType: it.mimeType,
+      remoteUrl: it.url,
+      isReady: false,
+    } satisfies ProfilePhoto
+  })
+  return profilePhotos
+}
 
 
 

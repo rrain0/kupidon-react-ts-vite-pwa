@@ -12,7 +12,6 @@ import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
-import { MockData } from 'src/_mock-data/MockData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase, {
   ProfileShowcaseAction,
@@ -29,7 +28,7 @@ import Pu = TypeU.Pu
 
 // TODO Закрыть шторку при переходе на другую анкету
 
-// TODO Прикрутить нажатия на кнопки
+// TODO Прикрутить нажатия на кнопки - выделить экшены
 
 
 
@@ -38,6 +37,8 @@ import Pu = TypeU.Pu
 
 
 const viewsCnt = 3
+
+const actionSpring = { mass: 2, tension: 70, friction: 10 }
 
 
 export type FindCouplePageItem = {
@@ -86,6 +87,20 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
       setIsMoving(true)
       //console.log('onStart', ev)
     },
+    onAnimationStart: ev => {
+      console.log('ev', ev)
+      // todo maybe make 'left', 'center', 'right' events?
+      if (ev.fromDrag && ev.autoNearest
+        && rf3((ev.toStartP ?? ev.startP) + (ev.toDeltaP ?? ev.deltaP)) > ev.startP
+      ) {
+        console.log('drag to accept')
+      }
+      if (ev.fromDrag && ev.autoNearest
+        && rf3((ev.toStartP ?? ev.startP) + (ev.toDeltaP ?? ev.deltaP)) < ev.startP
+      ) {
+        console.log('drag to reject')
+      }
+    },
     onFinish: ev => {
       setIsMoving(false)
       setButtonAction(undefined)
@@ -94,46 +109,44 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   })
   
   
+  const getCarouselProps = (
+    viewI = 0, dp = getDeltaProgress(),
+    startP = getStartProgress(), startItemP = getStartItemProgress(),
+  ) => getFixedForwardLoopedCarouselProps({
+    startP: startP,
+    startItemP: startItemP,
+    deltaP: dp,
+    itemsCnt,
+    viewsCnt,
+    startViewI: -1,
+    currViewI: viewI,
+  })
+  
+  
   
   const onAccept = useCallback(() => {
     setButtonAction('accept')
-    animateTo({ next: true, mass: 2, tension: 70, friction: 10 })
+    animateTo({ next: true, ...actionSpring })
   }, [animateTo])
   
   const onReject = useCallback(() => {
     setButtonAction('reject')
-    animateTo({ prev: true, mass: 2, tension: 70, friction: 10 })
+    animateTo({ prev: true, ...actionSpring })
   }, [animateTo])
   
   const onBack = useCallback(() => {
     setButtonAction('back')
-    const { pos0PBase } = getFixedForwardLoopedCarouselProps({
-      startP: getStartProgress(),
-      startItemP: getStartItemProgress(),
-      deltaP: getDeltaProgress(),
-      itemsCnt,
-      viewsCnt,
-      startViewI: -1,
-      currViewI: 0,
-    })
+    const { pos0PBase } = getCarouselProps()
     animateTo({
       fromStartP: rf3(pos0PBase - 100), fromDeltaP: -100, deltaP: 0,
-      mass: 2, tension: 70, friction: 10,
+      ...actionSpring,
     })
   }, [animateTo])
   
   
   
   const animatedProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
-    return getFixedForwardLoopedCarouselProps({
-      startP: getStartProgress(),
-      startItemP: getStartItemProgress(),
-      deltaP: dp,
-      itemsCnt,
-      viewsCnt,
-      startViewI: -1,
-      currViewI: viewI,
-    })
+    return getCarouselProps(viewI, dp)
   }), [itemsCnt])
   
   const animatedStackProps = useMemo(() => animatedProps.map(ap => (viewI = 0) => {

@@ -2,20 +2,27 @@
 
 
 export namespace ApiRoutes {
-  
   export const backend = import.meta.env.BACKEND_BASE_URL
   export const apiV1 = `${backend}/api/v1`
   
-  //console.log('api:', api)
   
   
-  export const authRefresh = `${apiV1}/auth/refresh`
-  export const authLogin = `${apiV1}/auth/login`
+  export const auth = `${apiV1}/auth`
+  export const user = `${apiV1}/user`
   
   
-  export const userCurrent = `${apiV1}/user/current`
-  export const userCreate = `${apiV1}/user/create`
-  export const userUpdate = `${apiV1}/user/update`
-  export const addProfilePhoto = `${apiV1}/user/profile-photo`
   
+  export const authRefresh = `${auth}/refresh`
+  export const authLogin = `${auth}/login`
+  
+  
+  
+  export const userCurrent = `${user}/current`
+  export const userCreate = `${user}/create`
+  export const userUpdate = `${user}/update`
+  export const userPostProfilePhoto = `${user}/profile-photo`
+  
+  
+  
+  export const profileShowcaseListAll = `${apiV1}/profile-showcase/list-all`
 }

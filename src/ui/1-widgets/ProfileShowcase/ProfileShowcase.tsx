@@ -118,7 +118,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const isPhotosDraggable = photosCnt >= 2
   
   // if photosCnt is 0, then display 1 placeholder
-  const viewsCnt = Math.max(Math.min(displayedPhotosCnt + 1, photosCnt), 1)
+  const viewsCnt = Math.max(Math.min(displayedPhotosCnt + 1, photosCnt + 1), 1)
   //const viewsCnt = 1
   
   // TODO изначально фотки не получены, поэтому изображение грузится

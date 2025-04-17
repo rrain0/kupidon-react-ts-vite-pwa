@@ -30,8 +30,8 @@ export type ModalRadioProps<V extends string> = PartialUndef<{
 
 
 
-const ModalRadio = (<V extends string>() =>
-  React.memo((props: ModalRadioProps<V>) => {
+const ModalRadio = ReactU.memo(
+  <V extends string>(props: ModalRadioProps<V>) => {
     const { isOpen, close, title, options, value, onSelect } = props
     
     return (
@@ -84,8 +84,8 @@ const ModalRadio = (<V extends string>() =>
         )}
       </UseBottomSheetState>
     )
-  })
-)()
+  }
+)
 export default ModalRadio
 
 

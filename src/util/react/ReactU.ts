@@ -36,12 +36,9 @@ export namespace ReactU {
   
   
   
-  // use (<T>() => React.memo(  (props: { prop: T }) => <></>  ))() instead of this hack
   // todo hack fix for TS
   // React.memo wrapper if component's generics are not consumed properly by TS
-  /* export const memo = <C>(Component: C): C => {
-    return React.memo(Component as any) as C
-  } */
+  export const memo: <C>(Component: C) => C = React.memo
   
   
   

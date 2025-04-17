@@ -6,7 +6,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { DataUrl } from '@util/DataUrl.ts'
 import { FileU } from 'src/util/file/FileU'
 import { AxiosConfig } from '../AxiosConfig'
-import { ApiRoutes as r } from 'src/api/ApiRoutes'
+import { ApiRoutes } from 'src/api/ApiRoutes'
 import axAccess = AxiosConfig.axAccess
 import ax = AxiosConfig.ax
 import handleResponse = ApiUtils.handleResponse
@@ -29,10 +29,12 @@ export namespace UserApi {
     user: CurrentUser
   }
   export type CurrentUserErrorData = AuthenticationError | NoUserResponseError | TechnicalError
-  export const current = async() =>
-    handleAuthenticatedResponse<CurrentUserSuccessData, CurrentUserErrorData>(
-      axAccess.get(r.userCurrent)
+  export const current = async () => {
+    return handleAuthenticatedResponse<CurrentUserSuccessData, CurrentUserErrorData>(
+      axAccess.get(ApiRoutes.userCurrent)
     )
+  }
+  
     
   
   
@@ -55,10 +57,12 @@ export namespace UserApi {
     gender: 'MALE' | 'FEMALE',
     birthDate: string, // '2005-11-10T00:00:00.000+08:00'
   }
-  export const create = async(user: UserToCreate, lang: string[]) =>
-    handleResponse<CreateSuccessData, CreateErrorData>(
-      ax.post(r.userCreate, user, { params: { lang } })
+  export const create = async (user: UserToCreate, lang: string[]) => {
+    return handleResponse<CreateSuccessData, CreateErrorData>(
+      ax.post(ApiRoutes.userCreate, user, { params: { lang } })
     )
+  }
+  
   
   
   
@@ -82,10 +86,12 @@ export namespace UserApi {
       replace: Array<{ id: string, index: number }>
     }
   }>
-  export const update = async(user: UserToUpdate) =>
-    handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
-      axAccess.put(r.userUpdate, user)
+  export const update = async (user: UserToUpdate) => {
+    return handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
+      axAccess.put(ApiRoutes.userUpdate, user)
     )
+  }
+  
   
   
   
@@ -127,7 +133,7 @@ export namespace UserApi {
     
     // https://axios-http.com/docs/multipart
     return handleAuthenticatedResponse<AddProfilePhotoSuccessData, AddProfilePhotoErrorData>(
-      axAccess.postForm(r.addProfilePhoto, preparedPhoto, config)
+      axAccess.postForm(ApiRoutes.userPostProfilePhoto, preparedPhoto, config)
     )
   }
   

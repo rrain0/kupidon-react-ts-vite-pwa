@@ -1,4 +1,5 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import React, { useMemo, useState } from 'react'
 import {
   AnimatedComponentState,
@@ -21,8 +22,8 @@ type AnimatedStateProps<S extends Record<string, any>> = {
 }>
 
 
-const AnimatedState = (<S extends Record<string, any>>() =>
-  React.memo((props: AnimatedStateProps<S>) => {
+const AnimatedState = ReactU.memo(
+  <S extends Record<string, any>>(props: AnimatedStateProps<S>) => {
     const {
       animatedState,
       children,
@@ -45,8 +46,9 @@ const AnimatedState = (<S extends Record<string, any>>() =>
     }, [children, state])
     
     return renderedChildren
-  })
-)()
+  }
+)
+// @ts-expect-error
 AnimatedState.displayName = 'AnimatedState'
 export default AnimatedState
 

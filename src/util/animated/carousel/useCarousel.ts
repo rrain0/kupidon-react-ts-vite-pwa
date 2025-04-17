@@ -36,12 +36,21 @@ import mod = MathU.mod
 
 
 export type CarouselEvent = Pu<{
-  first?: boolean | undefined
-  last?: boolean | undefined
+  first: boolean
+  last: boolean
   
-  fromDrag?: boolean | undefined
-  drag?: boolean | undefined
-  animation?: boolean | undefined
+  fromDrag: boolean
+  drag: boolean
+  animation: boolean
+  
+  autoNearest: boolean
+  next: boolean
+  prev: boolean
+  curr: boolean
+  
+  toStartP: number
+  toStartItemP: number
+  toDeltaP: number
 }> & {
   startP: number
   startItemP: number
@@ -96,6 +105,7 @@ export type UseCarouselProps = {
   mergeProgress: MergeProgressCallback
   
   onStart?: CarouselEventCallback | undefined
+  onAnimationStart?: CarouselEventCallback | undefined
   onFinish?: CarouselEventCallback | undefined
 }
 
@@ -123,6 +133,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     initialDeltaProgress = 0,
     
     onStart,
+    onAnimationStart,
     onFinish,
   } = props
   
@@ -159,7 +170,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet([] as CarouselEvent[])
   
-  const tryEmitStartEvent = (fromDrag = false) => {
+  const tryEmitStartEvent = ({ fromDrag }: Partial<CarouselEvent>) => {
     if (!getEventsLog().length) {
       const ev: CarouselEvent = {
         first: true,
@@ -168,11 +179,28 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         startItemP: getStartItemProgress(),
         deltaP: getDeltaProgress(),
       }
-      onStart?.(ev)
       setEventsLog([ev])
+      onStart?.(ev)
     }
   }
-  const emitFinishEvent = (fromDrag = false) => {
+  const emitAnimationStartEvent = ({
+    fromDrag,
+    autoNearest, next, prev, curr,
+    toStartP, toStartItemP, toDeltaP,
+  }: Partial<CarouselEvent>) => {
+    const ev: CarouselEvent = {
+      first: true,
+      fromDrag, animation: true,
+      autoNearest, next, prev, curr,
+      startP: getStartProgress(),
+      startItemP: getStartItemProgress(),
+      deltaP: getDeltaProgress(),
+      toStartP, toStartItemP, toDeltaP,
+    }
+    setEventsLog([...getEventsLog(), ev])
+    onAnimationStart?.(ev)
+  }
+  const emitFinishEvent = ({ fromDrag }: Partial<CarouselEvent>) => {
     const ev: CarouselEvent = {
       last: true,
       fromDrag,
@@ -180,8 +208,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       startItemP: getStartItemProgress(),
       deltaP: getDeltaProgress(),
     }
-    onFinish?.(ev)
     setEventsLog([])
+    onFinish?.(ev)
   }
   
   
@@ -195,7 +223,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       noLoop,
     })
     updateViews()
-    emitFinishEvent(fromDrag)
+    emitFinishEvent({ fromDrag })
   }
   
   
@@ -248,7 +276,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     const fromPCurr = rf3(mod(fromP, 100)) // nonneg
     const fromPBase = rf3(fromP - fromPCurr)
     
-    setStartItemProgress(rf3(getStartItemProgress() + (fromStartP - getStartProgress())))
+    const fromItemP = rf3(getStartItemProgress() + (fromStartP - getStartProgress()))
+    setStartItemProgress(fromItemP)
     setStartProgress(fromStartP)
     setDeltaProgress(fromDeltaP)
     animatedDeltaProgress.set(fromDeltaP)
@@ -273,12 +302,21 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       if (curr) return rf3(fromPBase - fromStartP)
       if (exists(deltaP)) return deltaP
       if (exists(p)) return rf3(p - fromStartP)
-      return undefined
+      return fromDeltaP
     })()
+    p = rf3(fromStartP + deltaP)
+    const pCurr = rf3(mod(p, 100)) // nonneg
+    const pBase = rf3(p - pCurr)
+    const itemP = rf3(fromItemP + deltaP)
     
+    tryEmitStartEvent({ fromDrag })
+    emitAnimationStartEvent({
+      fromDrag, autoNearest, next, prev, curr,
+      //startP: fromStartP, startItemP: fromItemP, deltaP: fromDeltaP,
+      toStartP: rf3(p - deltaP), toStartItemP: itemP, toDeltaP: deltaP,
+    })
     
-    if (exists(deltaP) && fromDeltaP !== deltaP) {
-      tryEmitStartEvent(fromDrag)
+    if (fromDeltaP !== deltaP) {
       const velDefaultPx = getVelPx(velDefault)
       vel0 ??= deltaP > fromDeltaP ? velDefaultPx : -velDefaultPx
       
@@ -357,7 +395,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     setIsAnimating(false)
     setCanStartDrag(false)
     setWasDragged(true)
-    tryEmitStartEvent(true)
+    tryEmitStartEvent({ fromDrag: true })
   })
   
   
