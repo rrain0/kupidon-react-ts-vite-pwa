@@ -32,7 +32,6 @@ import abs = EmotionCommon.abs
 
 
 
-// TODO - схватить элемент во время анимации долистывания вперёд и его позиция сбросится на начало индекса
 
 const PosterPreview = React.memo(() => {
   

@@ -260,6 +260,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       if (noAnimation) {
         setDeltaProgress(deltaP)
         animatedDeltaProgress.set(deltaP)
+        applyOnFinish()
       }
       else {
         setIsAnimating(true)
@@ -268,10 +269,11 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
           animationFun: createSpringAnimation({
             //mass: 1, tension: 170, friction: 10,
             mass: 1, tension: 120, friction: 7,
-            //mass: 5, tension: 60, friction: 5,
             ...exists(mass) && { mass },
             ...exists(tension) && { tension },
             ...exists(friction) && { friction },
+            
+            //mass: 5, tension: 60, friction: 5,
             
             initVelocity: vel0,
             endValue: deltaP,
@@ -280,10 +282,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         })
         if (!finished) return
         setIsAnimating(false)
+        applyOnFinish()
       }
     }
-    
-    applyOnFinish()
+    else {
+      applyOnFinish()
+    }
   })
   
   
@@ -404,16 +408,21 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     const { horizontal, vertical, drag } = getDragDirection({ mx, my })
     
-    updateIntervalProgress({ reset: first, value: vpVal, dValue: dVal })
     
-    // onDragStart
-    if (first) { applyOnFirstDrag() }
-    // onEachDrag
-    applyOnEachDrag(rf3(getIntervalDeltaProgress()), horizontal, vertical, drag)
-    // onDragging
-    if (!first && !last) { }
-    // onDragEnd
-    if (last) { applyOnLastDrag(vel) }
+    if (first) {
+      updateIntervalProgress({ value: vpVal, dValue: dVal, dValueProgress: getDeltaProgress() })
+      applyOnFirstDrag()
+    }
+    {
+      updateIntervalProgress({ dValue: dVal })
+      applyOnEachDrag(rf3(getIntervalDeltaProgress()), horizontal, vertical, drag)
+    }
+    if (!first && !last) {
+      /* applyOnDragging(...) */
+    }
+    if (last) {
+      applyOnLastDrag(vel)
+    }
   })
   
   

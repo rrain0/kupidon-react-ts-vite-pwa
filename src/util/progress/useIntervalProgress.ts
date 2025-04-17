@@ -4,6 +4,7 @@ import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Getter = TypeU.Getter
 import Pu = TypeU.Pu
+import exists = TypeU.exists
 
 
 
@@ -35,9 +36,10 @@ export type UseDragProgressProps = {
 }
 
 export type UpdateDragProgressProps = Pu<{
-  reset: boolean
   value: number
   dValue: number
+  valueProgress: number
+  dValueProgress: number
 }>
 
 export const useIntervalProgress = ({
@@ -48,22 +50,23 @@ export const useIntervalProgress = ({
   const [getIntervalDeltaProgress, setIntervalDeltaProgress] = useRefGetSet(0) // ..0..100..
   
   
-  const updateIntervalProgress = useAsCallback((props: UpdateDragProgressProps) => {
-    const { reset = false, value = 0, dValue = 0 } = props
+  const updateIntervalProgress = useAsCallback(({
+    value, dValue, valueProgress, dValueProgress,
+  }: UpdateDragProgressProps) => {
     
     const { start, len } = getIntervalProps()
     
-    if (reset) {
+    if (exists(value) || exists(valueProgress)) {
       setIntervalStartProgress(0)
       setIntervalDeltaProgress(0)
       
-      const startValue = value - start
-      const intervalStartProgress = dValueToDProgress(startValue, len)
+      const startValue = (value ?? 0) - start
+      const intervalStartProgress = dValueToDProgress(startValue, len) + (valueProgress ?? 0)
       setIntervalStartProgress(intervalStartProgress)
     }
     
-    const intervalDProgress = dValueToDProgress(dValue, len)
-    const intervalDeltaProgress = getIntervalDeltaProgress() + intervalDProgress
+    const intervalDProgress = dValueToDProgress((dValue ?? 0), len)
+    const intervalDeltaProgress = getIntervalDeltaProgress() + intervalDProgress + (dValueProgress ?? 0)
     setIntervalDeltaProgress(intervalDeltaProgress)
   })
   
