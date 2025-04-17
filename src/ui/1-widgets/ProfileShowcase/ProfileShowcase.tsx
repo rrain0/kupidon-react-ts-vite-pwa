@@ -46,12 +46,12 @@ import Callback = TypeU.Callback
 
 
 
-/*
- TODO
- Состояния фото: загрузка / обработка... взять из profile summary
- Snap points & инерция
- 
- */
+// TODO Состояния фото: загрузка / обработка... взять из profile summary
+
+
+
+export type ProfileShowcaseAction = 'accept' | 'reject' | 'back' | undefined
+
 
 const displayedPhotosCnt = 3
 
@@ -63,7 +63,7 @@ export type AnimatedStackProps = AnimatedProperty<{
   scale: number
   opacity: number
   restItemsOpacity: number
-  reaction: 'accept' | 'reject' | undefined
+  action: ProfileShowcaseAction
   shadowIntensity: number
   fullInfoOpacity: number
   reactionIconOpacity: number
@@ -182,7 +182,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     (ap, as) => (viewI = 0) => {
       const props = ap(viewI)
       const { first, last, pCurr, viewPosI, viewItemI } = props
-      const { restItemsOpacity, reaction, shadowIntensity } = as ?? { }
+      const { restItemsOpacity, action, shadowIntensity } = as ?? { }
       
       const z = -viewPosI + viewsCnt
       
@@ -220,8 +220,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       const boxShadow = (() => {
         const color = (() => {
           // TODO theme
-          if (reaction === 'accept') return '#9e364e'
-          if (reaction === 'reject') return 'black'
+          if (action === 'accept') return '#9e364e'
+          if (action === 'reject') return 'black'
         })()
         
         if (first && color && shadowIntensity) {
@@ -244,9 +244,9 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     [animatedPhotoProps, animatedStackProps],
     (ap, as) => {
       const { pos0ItemP } = ap()
-      const { reactionIconOpacity = 0, reaction } = as ?? { }
+      const { reactionIconOpacity = 0, action } = as ?? { }
       
-      return { indicatorProgress: pos0ItemP, reactionIconOpacity, reaction }
+      return { indicatorProgress: pos0ItemP, reactionIconOpacity, action }
     }
   ), [animatedPhotoProps, animatedStackProps])
   
@@ -355,7 +355,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       <PreviewFullInfo
         isOpen={isInfoOpen}
         close={closeInfo}
-        opacity={animatedStackProps?.map(p => p.fullInfoOpacity)}
+        animatedOpacity={animatedStackProps?.map(p => p.fullInfoOpacity)}
         name={name}
         birthDate={birthDate}
         gender={gender}

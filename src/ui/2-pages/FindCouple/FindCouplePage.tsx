@@ -13,7 +13,9 @@ import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
+import ProfileShowcase, {
+  ProfileShowcaseAction,
+} from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
@@ -91,7 +93,6 @@ const data = [
 
 
 
-type ProfileShowcaseAction = 'accept' | 'reject' | 'back' | undefined
 
 
 
@@ -107,7 +108,8 @@ const FindCouplePage = React.memo(() => {
   const [, , frameRef] = useElemRefGetSet()
   const getTrackProps = createTrackPropsGetter(frameRef)
   
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [isMoving, setIsMoving] = useState(false)
+  const [buttonAction, setButtonAction] = useState<ProfileShowcaseAction>()
   
   const {
     isDragging,
@@ -130,21 +132,31 @@ const FindCouplePage = React.memo(() => {
     noDragWhileAnimating: true,
     mergeProgress: fixedForwardCarouselMergeProgress,
     
-    onStart: () => setIsAnimating(true),
-    onFinish: () => setIsAnimating(false),
+    onStart: ev => {
+      setIsMoving(true)
+      //console.log('onStart', ev)
+    },
+    onFinish: ev => {
+      setIsMoving(false)
+      setButtonAction(undefined)
+      //console.log('onFinish', ev)
+    },
   })
   
   
   
   const onAccept = useCallback(() => {
+    setButtonAction('accept')
     animateTo({ next: true, mass: 2, tension: 70, friction: 10 })
   }, [animateTo])
   
   const onReject = useCallback(() => {
+    setButtonAction('reject')
     animateTo({ prev: true, mass: 2, tension: 70, friction: 10 })
   }, [animateTo])
   
   const onBack = useCallback(() => {
+    setButtonAction('back')
     const { pos0PBase } = getFixedForwardLoopedCarouselProps({
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
@@ -159,6 +171,7 @@ const FindCouplePage = React.memo(() => {
       mass: 2, tension: 70, friction: 10,
     })
   }, [animateTo])
+  
   
   
   const animatedProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
@@ -225,8 +238,9 @@ const FindCouplePage = React.memo(() => {
     
     const fullInfoOpacity = 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
     
-    const reaction = (() => {
+    const action = (() => {
       if (!first) return undefined
+      if (buttonAction) return buttonAction
       if (dir === 1) return 'accept' as const
       if (dir === -1) return 'reject' as const
       return undefined
@@ -245,9 +259,9 @@ const FindCouplePage = React.memo(() => {
     
     return {
       zIndex, transform, scale, opacity,
-      restItemsOpacity, fullInfoOpacity, reaction, shadowIntensity, reactionIconOpacity,
+      restItemsOpacity, fullInfoOpacity, action, shadowIntensity, reactionIconOpacity,
     }
-  }), [])
+  }), [animatedProps, buttonAction])
   
   
   
@@ -277,7 +291,7 @@ const FindCouplePage = React.memo(() => {
                       birthDate={item.birthDate}
                       gender={item.gender}
                       aboutMe={item.aboutMe}
-                      hideButtons={isAnimating}
+                      hideButtons={isMoving}
                       animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
                       {...first && { onAccept, onReject, onBack }}
                     />

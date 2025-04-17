@@ -6,6 +6,7 @@ import React from 'react'
 // UI icons
 import AddModuleSvg from '@ic/normal/ui/add-module.svg?react'
 import ArrowAngledRoundedSvg from '@ic/normal/ui/arrow-angled-rounded.svg?react'
+import ArrowBackSvg from '@ic/normal/ui/arrow-back.svg?react'
 import ArrowLinesSharp1Svg from '@ic/normal/ui/arrow-lines-sharp-1.svg?react'
 import ArrowRefreshCwSvg from '@ic/normal/ui/arrow-refresh-cw.svg?react'
 import ArrowReloadSvg from '@ic/normal/ui/arrow-reload.svg?react'
@@ -211,6 +212,7 @@ export namespace SvgIconsPack {
   export const AddModuleIc = generateSimpleSvgIcon(AddModuleSvg)
   export const ArrowLinesSharp1Ic = generateSimpleSvgIcon(ArrowLinesSharp1Svg)
   export const ArrowAngledRoundedIc = generateSimpleSvgIcon(ArrowAngledRoundedSvg)
+  export const ArrowBackIc = generateSimpleSvgIcon(ArrowBackSvg)
   export const ArrowRefreshCwIc = generateSimpleSvgIcon(ArrowRefreshCwSvg)
   export const ArrowReloadIc = generateSimpleSvgIcon(ArrowReloadSvg)
   

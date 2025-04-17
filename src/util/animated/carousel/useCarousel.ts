@@ -20,9 +20,13 @@ import Pu = TypeU.Pu
 import exists = TypeU.exists
 import rf3 = MathU.rf3
 import Getter = TypeU.Getter
-import mapNaN = TypeU.mapNaN
 import mod = MathU.mod
 
+
+
+// TODO - add data to events.
+//  pass data to animateTo({ data })
+//  pass data as param and as return of event handlers ({ data }) => { return { data: newData } }
 
 
 
@@ -307,9 +311,10 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
           }),
           onUpdate: ({ value }) => setDeltaProgress(rf3(value)),
         })
-        if (!finished) return
-        setIsAnimating(false)
-        applyOnFinish(fromDrag)
+        if (finished) {
+          setIsAnimating(false)
+          applyOnFinish(fromDrag)
+        }
       }
     }
     else {
@@ -352,7 +357,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     setIsAnimating(false)
     setCanStartDrag(false)
     setWasDragged(true)
-    tryEmitStartEvent()
+    tryEmitStartEvent(true)
   })
   
   

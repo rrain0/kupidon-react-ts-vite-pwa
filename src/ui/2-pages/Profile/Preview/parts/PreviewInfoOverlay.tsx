@@ -15,6 +15,9 @@ import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIc
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
+import {
+  ProfileShowcaseAction,
+} from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Pu = TypeU.Pu
@@ -32,6 +35,7 @@ import flexC = EmotionCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
 import full = EmotionCommon.full
 import CrossIc = SvgIconsPack.CrossIc
+import ArrowBackIc = SvgIconsPack.ArrowBackIc
 
 
 
@@ -41,7 +45,7 @@ export type PreviewInfoOverlayProps = ClassStyle & Pu<{
   animatedInfo: AnimatedProperty<{
     indicatorProgress: number,
     reactionIconOpacity: number,
-    reaction: 'accept' | 'reject' | undefined
+    action: ProfileShowcaseAction
   }>
   photosCnt: number
   openInfo: Callback
@@ -153,38 +157,45 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         </Button>
       </ActionButtonsBox>
       
-      <ReactionFrame>
-        <ReactionWidgetBox
+      <ActionFrame>
+        <ActionWidgetBox
           animatedStyle={{
             opacity: animatedInfo?.map(ai => ai.reactionIconOpacity),
           }}
         >
           <AnimatedState
             animatedState={{
-              reaction: animatedInfo?.map(ai => ai.reaction),
+              action: animatedInfo?.map(ai => ai.action),
             }}
           >
-            {({ reaction }) => (
+            {({ action }) => (
               <>
-                {reaction ==='accept' && (
-                  <ReactionWidget>
-                    <ReactionIconBox>
-                      <HeartFilledIc css={SvgIconS6.t(reactionHeartS)} />
-                    </ReactionIconBox>
-                  </ReactionWidget>
+                {action ==='accept' && (
+                  <ActionWidget>
+                    <ActionIconBox>
+                      <HeartFilledIc css={SvgIconS6.t(actionHeartS)} />
+                    </ActionIconBox>
+                  </ActionWidget>
                 )}
-                {reaction ==='reject' && (
-                  <ReactionWidget>
-                    <ReactionIconBox>
-                      <CrossIc css={SvgIconS6.t(reactionCrossS)} />
-                    </ReactionIconBox>
-                  </ReactionWidget>
+                {action ==='reject' && (
+                  <ActionWidget>
+                    <ActionIconBox>
+                      <CrossIc css={SvgIconS6.t(actionCrossS)} />
+                    </ActionIconBox>
+                  </ActionWidget>
+                )}
+                {action ==='back' && (
+                  <ActionWidget>
+                    <ActionIconBox>
+                      <ArrowBackIc css={SvgIconS6.t(actionArrowBackS)}      />
+                    </ActionIconBox>
+                  </ActionWidget>
                 )}
               </>
             )}
           </AnimatedState>
-        </ReactionWidgetBox>
-      </ReactionFrame>
+        </ActionWidgetBox>
+      </ActionFrame>
     
     </PreviewInfoBox>
   )
@@ -399,39 +410,48 @@ const ScrollIndicatorBox = styled.div`
 
 
 
-const ReactionFrame = styled.div`
+const ActionFrame = styled.div`
   ${abs};
   ${flexC};
   pointer-events: none;
 `
-const ReactionWidgetBox = styled(AnimatedDiv)`
+const ActionWidgetBox = styled(AnimatedDiv)`
   width: 30%;
   aspect-ratio: 1;
   will-change: opacity;
 `
-const ReactionWidget = styled.div`
+const ActionWidget = styled.div`
   ${full};
   border-radius: 999999px;
   // TODO theme
   background-color: white;
   ${flexC};
 `
-const ReactionIconBox = styled.div`
+const ActionIconBox = styled.div`
   width: 50%;
   height: 50%;
   ${gridStackC};
 `
-const reactionHeartS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+const actionHeartS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   icon: {
     mt: 2,
     // TODO theme
     color: '#cb3357',
   },
 }]
-const reactionCrossS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+const actionCrossS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   icon: {
     // TODO theme
     color: '#1F1F1F',
+  },
+}]
+const actionArrowBackS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  icon: {
+    // TODO theme
+    color: '#1F1F1F',
+    size: '108%',
+    rotate: '0.5turn',
+    translate: '-7% -5%',
   },
 }]
 

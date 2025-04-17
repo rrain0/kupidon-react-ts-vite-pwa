@@ -37,7 +37,7 @@ import RulerCornerIc = SvgIconsPack.RulerCornerIc
 export type PreviewFullInfoProps = ClassStyle & Children & Pu<{
   isOpen: boolean
   close: Callback
-  opacity: AnimatedProperty<number>
+  animatedOpacity: AnimatedProperty<number>
   name: string
   birthDate: string
   gender: GenderOptionValues
@@ -47,7 +47,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   const {
     isOpen = false,
     close,
-    opacity,
+    animatedOpacity,
     name,
     birthDate,
     gender,
@@ -129,7 +129,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
       {props => (
         <BottomSheetFrame
           data-display-name="PreviewFullInfo"
-          animatedStyle={{ opacity }}
+          animatedStyle={{ opacity: animatedOpacity }}
         >
           <BottomSheetBasic
             css={BottomSheetBasicS6.t(bottomSheetS)}
