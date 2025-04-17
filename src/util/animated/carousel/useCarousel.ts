@@ -20,6 +20,8 @@ import Pu = TypeU.Pu
 import exists = TypeU.exists
 import rf3 = MathU.rf3
 import Getter = TypeU.Getter
+import mapNaN = TypeU.mapNaN
+import mod = MathU.mod
 
 
 
@@ -29,14 +31,14 @@ import Getter = TypeU.Getter
 
 
 
-export type CarouselEvent = {
+export type CarouselEvent = Pu<{
   first?: boolean | undefined
   last?: boolean | undefined
   
   fromDrag?: boolean | undefined
   drag?: boolean | undefined
   animation?: boolean | undefined
-  
+}> & {
   startP: number
   startItemP: number
   deltaP: number
@@ -47,6 +49,8 @@ export type CarouselEventCallback = (carouselEvent: CarouselEvent) => void
 export type AnimateToParams = Pu<{
   next: boolean
   prev: boolean
+  curr: boolean
+  autoNearest: boolean
   
   fromP: number
   fromStartP: number
@@ -60,6 +64,7 @@ export type AnimateToParams = Pu<{
   tension: number
   friction: number
   
+  fromDrag: boolean
   noAnimation: boolean
 }>
 
@@ -150,10 +155,11 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   // Events log
   const [getEventsLog, setEventsLog] = useRefGetSet([] as CarouselEvent[])
   
-  const tryEmitStartEvent = () => {
+  const tryEmitStartEvent = (fromDrag = false) => {
     if (!getEventsLog().length) {
       const ev: CarouselEvent = {
         first: true,
+        fromDrag,
         startP: getStartProgress(),
         startItemP: getStartItemProgress(),
         deltaP: getDeltaProgress(),
@@ -162,9 +168,10 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       setEventsLog([ev])
     }
   }
-  const emitFinishEvent = () => {
+  const emitFinishEvent = (fromDrag = false) => {
     const ev: CarouselEvent = {
       last: true,
+      fromDrag,
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: getDeltaProgress(),
@@ -174,7 +181,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }
   
   
-  const applyOnFinish = () => {
+  const applyOnFinish = (fromDrag = false) => {
     mergeProgress({
       startViewI, viewsCnt, startItemI, itemsCnt,
       startP: getStartProgress(),
@@ -184,7 +191,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       noLoop,
     })
     updateViews()
-    emitFinishEvent()
+    emitFinishEvent(fromDrag)
   }
   
   
@@ -198,11 +205,11 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }
   
   const animateTo = useAsCallback(async ({
-    next, prev,
+    next, prev, curr, autoNearest,
     fromP, fromStartP, fromDeltaP,
     p, deltaP,
-    vel0, mass, tension, friction,
-    noAnimation,
+    vel0 /* px/ms */, mass, tension, friction,
+    fromDrag, noAnimation,
   }: AnimateToParams) => {
     
     ;[fromStartP, fromDeltaP, fromP] = (() => {
@@ -224,7 +231,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
       }
       if (exists(fromP)) {
-        const fromDeltaP = rf3(fromP % 100)
+        const fromDeltaP = rf3(mod(fromP, 100)) // nonneg
         const fromStartP = rf3(fromP - fromDeltaP)
         return [fromStartP, fromDeltaP, fromP]
       }
@@ -234,7 +241,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
       }
     })()
-    const fromPCurr = rf3(fromP % 100)
+    const fromPCurr = rf3(mod(fromP, 100)) // nonneg
     const fromPBase = rf3(fromP - fromPCurr)
     
     setStartItemProgress(rf3(getStartItemProgress() + (fromStartP - getStartProgress())))
@@ -242,9 +249,24 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     setDeltaProgress(fromDeltaP)
     animatedDeltaProgress.set(fromDeltaP)
     
+    const velThresholdPx = getVelPx(velThreshold)
+    
     deltaP = (() => {
+      if (autoNearest) {
+        if (exists(vel0) && vel0 >= velThresholdPx) next = true
+        else if (exists(vel0) && vel0 <= -velThresholdPx) curr = true
+        else if (fromPCurr >= 50) {
+          next = true
+          vel0 = undefined
+        }
+        else if (fromPCurr < 50) {
+          curr = true
+          vel0 = undefined
+        }
+      }
       if (next) return rf3(fromPBase + 100 - fromStartP)
       if (prev) return rf3(fromPBase - 100 - fromStartP)
+      if (curr) return rf3(fromPBase - fromStartP)
       if (exists(deltaP)) return deltaP
       if (exists(p)) return rf3(p - fromStartP)
       return undefined
@@ -252,15 +274,20 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     
     if (exists(deltaP) && fromDeltaP !== deltaP) {
-      tryEmitStartEvent()
-      vel0 ??= getVelPx(deltaP > fromDeltaP ? velDefault : -velDefault)
+      tryEmitStartEvent(fromDrag)
+      const velDefaultPx = getVelPx(velDefault)
+      vel0 ??= deltaP > fromDeltaP ? velDefaultPx : -velDefaultPx
       
-      //console.log('fromP & fromDeltaP', fromP, fromDeltaP, 'p & deltaP', p, deltaP, 'vel0', vel0)
+      // console.log(
+      //   'fromP & fromDeltaP', fromP, fromDeltaP,
+      //   'p & deltaP', p, deltaP,
+      //   'vel0', vel0,
+      // )
       
       if (noAnimation) {
         setDeltaProgress(deltaP)
         animatedDeltaProgress.set(deltaP)
-        applyOnFinish()
+        applyOnFinish(fromDrag)
       }
       else {
         setIsAnimating(true)
@@ -282,51 +309,19 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         })
         if (!finished) return
         setIsAnimating(false)
-        applyOnFinish()
+        applyOnFinish(fromDrag)
       }
     }
     else {
-      applyOnFinish()
+      applyOnFinish(fromDrag)
     }
   })
   
   
   
-  const updateViewsAndFinish = (vel = 0) => {
+  const updateViewsAndFinish = (vel = 0, fromDrag = false) => {
     updateViews()
-    
-    const velPercent = getVelPercent(vel)
-    
-    const startP = getStartProgress()
-    const deltaP = getDeltaProgress()
-    const p = rf3(startP + deltaP)
-    const pCurr = rf3(p % 100)
-    const pBase = rf3(p - pCurr)
-    
-    const [nextPCurr, vel0Percent] = (() => {
-      if (Math.abs(velPercent) >= velThreshold) {
-        if (pCurr > 0) {
-          if (velPercent >= 0) return [100, velPercent]
-          return [0, velPercent]
-        }
-        if (pCurr < 0) {
-          if (velPercent >= 0) return [0, velPercent]
-          return [-100, velPercent]
-        }
-      }
-      else {
-        if (pCurr <= -50) return [-100, -velThreshold]
-        if (pCurr < 0) return [0, velThreshold]
-        if (pCurr >= 50) return [100, velThreshold]
-        if (pCurr > 0) return [0, -velThreshold]
-      }
-      return [0, 0]
-    })()
-    
-    
-    const vel0 = getVelPx(vel0Percent)
-    const nextP = rf3(pBase + nextPCurr)
-    void animateTo({ p: nextP, vel0 })
+    void animateTo({ autoNearest: true, vel0: vel, fromDrag })
   }
   
   
@@ -381,7 +376,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   })
   
   const applyOnLastDrag = useAsCallback((vel: number) => {
-    if (isDragging) updateViewsAndFinish(vel)
+    if (isDragging) updateViewsAndFinish(vel, true)
     setCanStartDrag(true)
     unlockTouchAction()
     setIsDragging(false)

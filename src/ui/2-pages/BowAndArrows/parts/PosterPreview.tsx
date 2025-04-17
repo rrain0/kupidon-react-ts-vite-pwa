@@ -61,6 +61,7 @@ const PosterPreview = React.memo(() => {
     getTrackProps,
     axis: 'x',
     inverted: true,
+    velThreshold: 120,
     mergeProgress: defaultCarouselMergeProgress,
     noDrag: itemsCnt <= 1,
   })

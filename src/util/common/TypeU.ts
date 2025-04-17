@@ -142,6 +142,7 @@ export namespace TypeU {
   export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a === b
   
   
+  //export const mapExists = (v: any, mapper: Mapper<any>) => exists(v) ? mapper(v) : v
   export const mapNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
   export const mapNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
   export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
