@@ -43,7 +43,7 @@ export type UpdateDragProgressProps = Pu<{
 }>
 
 export const useIntervalProgress = ({
-  getIntervalProps,
+  getIntervalProps, // supports not stable
 }: UseDragProgressProps) => {
   
   const [getIntervalStartProgress, setIntervalStartProgress] = useRefGetSet(0) // ..0..100..
@@ -71,9 +71,9 @@ export const useIntervalProgress = ({
   })
   
   return {
-    updateIntervalProgress,
-    getIntervalStartProgress,
-    getIntervalDeltaProgress,
+    updateIntervalProgress, // stable
+    getIntervalStartProgress, // stable
+    getIntervalDeltaProgress, // stable
   } as const
 }
 

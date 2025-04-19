@@ -1,9 +1,12 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useAutoRetry } from '@util/app/useAutoRetry.ts'
 import { useNext } from '@util/react-state/useNext.ts'
 import { useInterval } from '@util/react/useInterval.ts'
+import { isAxiosError } from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
+import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -59,6 +62,7 @@ import blobToDataUrl = FileU.blobToDataUrl
 import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
 import PictureIc = SvgIconsPack.PictureIc
 import row = EmotionCommon.row
+import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 
 
 
@@ -190,6 +194,10 @@ const SummaryPage = React.memo(() => {
           console.log('download aborted:', abortCtrl.signal.reason)
           return
         }
+        if (ApiUtils.isConnectionError(ex)) {
+          updateDownload({ download: undefined, needRetryDownload: true })
+          return
+        }
         
         // TODO notify about error
         console.log('download error', ex)
@@ -206,11 +214,14 @@ const SummaryPage = React.memo(() => {
     mainPhoto.download?.abort()
     setMainPhoto({
       ...mainPhoto,
+      needRetryDownload: false,
       needDownload: true,
       download: undefined,
       downloadError: undefined,
     })
   }
+  
+  useAutoRetry(retry, mainPhoto.needRetryDownload)
   
   
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
@@ -232,12 +243,7 @@ const SummaryPage = React.memo(() => {
                   if (mainPhoto.downloadError)
                     return (
                       <div css={imPlaceholderBoxS}>
-                        <Button
-                          css={IconButtonS6.t(imSmallPlaceholderIcFullTrans)}
-                          onClick={retry}
-                        >
-                          <ArrowReloadIc css={avaPlaceholderIcS} />
-                        </Button>
+                        <DocumentErrorIc css={SvgIconS6.t(avaPlaceholderIcS)} />
                       </div>
                     )
                   if (!mainPhoto.download?.showProgress
@@ -366,12 +372,9 @@ const AvaIm = styled.img`
   object-position: center;
   object-fit: cover;
 `
-const avaPlaceholderIcS = (t: AppTheme.Theme) => css`
-  ${SvgIconS6.t(imPlaceholderIcS)(t)};
-  ${SvgIconS.El.icon.thiz()}{
-    ${SvgIconS.El.icon.props.size.set('50%')}
-  }
-`
+const avaPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
+  icon: { sz: '50%' },
+}]
 
 
 const Eye = styled.div`

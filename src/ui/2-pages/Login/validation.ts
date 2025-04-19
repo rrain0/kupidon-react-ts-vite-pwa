@@ -20,8 +20,8 @@ export namespace LoginPageValidation {
     | 'login-incorrect'
     | 'pwd-required'
     | 'NO_USER'
-    | 'connection-error'
-    | 'unknown-error'
+    | 'connectionError'
+    | 'unknownError'
   
   
   
@@ -30,8 +30,8 @@ export namespace LoginPageValidation {
     'login-incorrect': ErrorUiText.loginFormatIsIncorrect,
     'pwd-required': ErrorUiText.pwdIsNotEntered,
     'NO_USER': ErrorUiText.noUserWithSuchLoginPwd,
-    'connection-error': ErrorUiText.connectionError,
-    'unknown-error': ErrorUiText.unknownError,
+    'connectionError': ErrorUiText.connectionError,
+    'unknownError': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   
@@ -119,7 +119,7 @@ export namespace LoginPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code === 'connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
@@ -128,7 +128,7 @@ export namespace LoginPageValidation {
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
       if (v) return new PartialFailureData({
-        code: 'unknown-error' satisfies FailureCode,
+        code: 'unknownError' satisfies FailureCode,
         msg: 'Неизвестная ошибка',
         extra: v,
         type: 'server',

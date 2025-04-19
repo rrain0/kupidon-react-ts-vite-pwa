@@ -19,5 +19,9 @@ export const useRefGetSet = <T>(
     setRef.current?.(value)
   }, [])
   
-  return [get, set, ref] as const
+  return [
+    get, // stable
+    set, // stable
+    ref, // stable
+  ] as const
 }

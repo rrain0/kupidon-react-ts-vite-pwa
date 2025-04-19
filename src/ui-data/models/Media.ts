@@ -1,16 +1,16 @@
 import { TypeU } from 'src/util/common/TypeU'
 import noop = TypeU.noop
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
 export interface Media {
-  type:
-    | 'remote' // media from remote server
-    | 'local' // media from a local device (file from device filesystem)
-  isEmpty: boolean // media can be empty, indicating that user has not photo or other media
-  isInited?: boolean | undefined // metadata from server was fetched
+  // 'remote' - media from remote server
+  // 'local' - media from a local device (file from device filesystem)
+  type: 'remote' | 'local'
   
+  // Media can be empty - media slot has no data.
+  isEmpty?: boolean | undefined
   id: string
   remoteUrl: string
   name: string
@@ -18,14 +18,14 @@ export interface Media {
   
   dataUrl: string
   
-  // Shows if media data is ready to be shown immediately.
-  // If empty, it is always not ready.
-  isReady: boolean
+  // Metadata from server was fetched
+  isInited?: boolean | undefined
+  // Shows if media is ready to be shown immediately. Empty cannot be ready.
+  isReady?: boolean | undefined
 }
 
-export const newDefaultMedia = (): Media => ({
+export const newDefaultRemoteMedia = (): Media => ({
   type: 'remote',
-  isEmpty: false,
   
   id: '',
   remoteUrl: '',
@@ -33,8 +33,10 @@ export const newDefaultMedia = (): Media => ({
   mimeType: '',
   
   dataUrl: '',
-  
-  isReady: false,
+})
+export const newDefaultLocalMedia = (): Media => ({
+  ...newDefaultRemoteMedia(),
+  type: 'local',
 })
 
 
@@ -43,8 +45,13 @@ export interface MediaInArray extends Media {
   remoteI: number
 }
 
-export const newDefaultMediaInArray = (): MediaInArray => ({
-  ...newDefaultMedia(),
+export const newDefaultRemoteMediaInArray = (): MediaInArray => ({
+  ...newDefaultRemoteMedia(),
+  remoteI: 0,
+})
+
+export const newDefaultLocalMediaInArray = (): MediaInArray => ({
+  ...newDefaultLocalMedia(),
   remoteI: 0,
 })
 
@@ -66,13 +73,15 @@ export const newDefaultMediaOperation = (): MediaOperation => ({
 
 
 
-export type Downloadable = Puro<{
+export type Downloadable = Pu<{
   // Нужно начать загружать
   needDownload: boolean
   // Процесс загрузки
   download: MediaOperation
   // Результат загрузки - ошибка
   downloadError: any
+  // Нужно пытаться загрузить снова
+  needRetryDownload: boolean
 }>
 
 
@@ -82,7 +91,7 @@ export interface MediaDownloadable extends Media, Downloadable { }
 
 
 
-export type Uploadable = Puro<{
+export type Uploadable = Pu<{
   needUpload: boolean
   showUpload: boolean
   upload: MediaOperation
@@ -91,7 +100,7 @@ export type Uploadable = Puro<{
 
 
 
-export type Compressible = Puro<{
+export type Compressible = Pu<{
   needCompression: boolean
   showCompression: boolean
   compression: MediaOperation

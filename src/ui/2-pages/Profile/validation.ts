@@ -50,8 +50,8 @@ export namespace ProfilePageValidation {
     | 'photos-not-changed'
     
     | 'NO_USER'
-    | 'connection-error'
-    | 'unknown-error'
+    | 'connectionError'
+    | 'unknownError'
   
   
   
@@ -78,8 +78,8 @@ export namespace ProfilePageValidation {
     'photos-not-changed': { 'en-US': 'photos-not-changed' },
     
     'NO_USER': ErrorUiText.noUserWithSuchId,
-    'connection-error': ErrorUiText.connectionError,
-    'unknown-error': ErrorUiText.unknownError,
+    'connectionError': ErrorUiText.connectionError,
+    'unknownError': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   
@@ -295,7 +295,7 @@ export namespace ProfilePageValidation {
     
     [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
-      if (v?.error.code === 'connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
@@ -306,7 +306,7 @@ export namespace ProfilePageValidation {
       if (v) {
         console.log('Unknown error:', JSON.stringify(v.error))
         return new PartialFailureData({
-          code: 'unknown-error' satisfies FailureCode,
+          code: 'unknownError' satisfies FailureCode,
           msg: 'Unknown Error',
           extra: v,
           type: 'server',

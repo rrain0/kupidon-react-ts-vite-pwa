@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse, isAxiosError } from 'axios'
 
 
 
@@ -27,7 +27,7 @@ export namespace ApiUtils {
   
   
   export interface UnknownError extends ResponseError {
-    code: 'unknown-error'
+    code: 'unknownError'
     msg: 'Unknown error'
     extra?: any
   }
@@ -36,7 +36,7 @@ export namespace ApiUtils {
     const unknown: UnknownErrorResponse = {
       isSuccess: false,
       error: {
-        code: 'unknown-error',
+        code: 'unknownError',
         msg: 'Unknown error',
       },
     }
@@ -48,7 +48,7 @@ export namespace ApiUtils {
   
   
   export interface ConnectionError extends ResponseError {
-    code: 'connection-error'
+    code: 'connectionError'
     msg: 'Connection error'
   }
   export interface ConnectionErrorResponse extends ErrorResponse<ConnectionError> { }
@@ -56,7 +56,7 @@ export namespace ApiUtils {
     return {
       isSuccess: false,
       error: {
-        code: 'connection-error',
+        code: 'connectionError',
         msg: 'Connection error',
       },
     }
@@ -69,7 +69,7 @@ export namespace ApiUtils {
   
   
   export interface AuthenticationError extends ResponseError {
-    code: 'authentication-error'
+    code: 'authenticationError'
     msg: 'Authentication error'
     extra?: any
   }
@@ -78,7 +78,7 @@ export namespace ApiUtils {
     const auth: AuthenticationErrorResponse = {
       isSuccess: false,
       error: {
-        code: 'authentication-error',
+        code: 'authenticationError',
         msg: 'Authentication error',
       },
     }
@@ -107,10 +107,10 @@ export namespace ApiUtils {
   
   
   
-  export function handleErrorResponse<E extends ResponseError>(ex: any)
-    : ErrorResponse<E> | undefined
-  {
-    if (ex instanceof AxiosError && ex.response?.status === 400) {
+  export function handle400ErrorResponse<E extends ResponseError>(
+    ex: any
+  ): ErrorResponse<E> | undefined {
+    if (isAxiosError(ex) && ex.response?.status === 400) {
       return {
         isSuccess: false,
         error: ex.response.data as E,
@@ -118,23 +118,31 @@ export namespace ApiUtils {
     }
   }
   
-  export function handleAuthenticationErrorResponse(ex: any)
-    : AuthenticationErrorResponse | undefined
-  {
-    if (ex instanceof AxiosError && ex.response?.status === 401) {
+  export function handle401AuthenticationErrorResponse(
+    ex: any
+  ): AuthenticationErrorResponse | undefined {
+    if (isAxiosError(ex) && ex.response?.status === 401) {
       return getAuthenticationError(ex)
     }
   }
   
+  export function isConnectionError(ex: any): boolean {
+    if (isAxiosError(ex) && ex.code === AxiosError.ERR_NETWORK) return true
+    return false
+  }
   export function handleConnectionError(
     ex: any
   ): ConnectionErrorResponse | undefined {
-    if (ex instanceof AxiosError && ex.code === AxiosError.ERR_NETWORK) {
+    if (isConnectionError(ex)) {
       return getConnectionError()
     }
   }
   
-  export function handleSuccessResponse<D = unknown>(
+  
+  
+  
+  
+  export function handle200SuccessResponse<D = unknown>(
     response: AxiosResponse
   ): SuccessResponse<D> | undefined {
     if (response.status === 200) return {
@@ -143,19 +151,23 @@ export namespace ApiUtils {
     } as SuccessResponse<D>
   }
   
+  
+  
+  
+  
   export async function handleResponse<D, E extends ResponseError>(
     responsePromise: Promise<AxiosResponse>
   ): Promise<ApiResponse<D, E | TechnicalError>> {
     try {
       const serverResponse = await responsePromise
       {
-        const response = handleSuccessResponse<D>(serverResponse)
+        const response = handle200SuccessResponse<D>(serverResponse)
         if (response) return response
       }
       return getUnknownError(serverResponse)
     } catch (ex) {
       {
-        const response = handleErrorResponse<E>(ex)
+        const response = handle400ErrorResponse<E>(ex)
         if (response) return response
       }
       {
@@ -172,17 +184,17 @@ export namespace ApiUtils {
     try {
       const serverResponse = await responsePromise
       {
-        const response = handleSuccessResponse<D>(serverResponse)
+        const response = handle200SuccessResponse<D>(serverResponse)
         if (response) return response
       }
       return getUnknownError(serverResponse)
     } catch (ex) {
       {
-        const response = handleErrorResponse<E>(ex)
+        const response = handle400ErrorResponse<E>(ex)
         if (response) return response
       }
       {
-        const response = handleAuthenticationErrorResponse(ex)
+        const response = handle401AuthenticationErrorResponse(ex)
         if (response) return response
       }
       {

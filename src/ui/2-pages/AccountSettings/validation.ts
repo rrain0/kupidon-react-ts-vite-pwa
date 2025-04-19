@@ -26,8 +26,8 @@ export namespace AccountSettingsPageValidation {
     | 'repeated-pwd-required'
     | 'repeated-pwd-not-match'
     
-    | 'connection-error'
-    | 'unknown-error'
+    | 'connectionError'
+    | 'unknownError'
   
   
   
@@ -39,8 +39,8 @@ export namespace AccountSettingsPageValidation {
     'repeat-pwd-not-changed': { 'en-US': 'repeat-pwd-not-changed' },
     'repeated-pwd-required': ErrorUiText.repeatPwd,
     'repeated-pwd-not-match': ErrorUiText.passwordsDoNotMatch,
-    'connection-error': ErrorUiText.connectionError,
-    'unknown-error': ErrorUiText.unknownError,
+    'connectionError': ErrorUiText.connectionError,
+    'unknownError': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   
@@ -157,7 +157,7 @@ export namespace AccountSettingsPageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code === 'connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
@@ -166,7 +166,7 @@ export namespace AccountSettingsPageValidation {
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
       if (v) return new PartialFailureData({
-        code: 'unknown-error' satisfies FailureCode,
+        code: 'unknownError' satisfies FailureCode,
         msg: 'Неизвестная ошибка',
         extra: v,
         type: 'server',

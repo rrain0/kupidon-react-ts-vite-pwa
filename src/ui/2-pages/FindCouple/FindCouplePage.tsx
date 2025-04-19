@@ -89,7 +89,9 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     animateTo,
   } = useCarousel({
     itemsCnt,
+    startItemI,
     viewsCnt,
+    startViewI,
     getTrackProps,
     axis: 'x',
     inverted: false,

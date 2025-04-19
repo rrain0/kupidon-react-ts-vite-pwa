@@ -29,8 +29,8 @@ export namespace PwdChangePageValidation {
     
     | "INVALID_PWD"
     
-    | 'connection-error'
-    | 'unknown-error'
+    | 'connectionError'
+    | 'unknownError'
   
   
   
@@ -43,8 +43,8 @@ export namespace PwdChangePageValidation {
     'repeated-pwd-required': ErrorUiText.repeatPwd,
     'repeated-pwd-not-match': ErrorUiText.passwordsDoNotMatch,
     "INVALID_PWD": ErrorUiText.wrongPwd,
-    'connection-error': ErrorUiText.connectionError,
-    'unknown-error': ErrorUiText.unknownError,
+    'connectionError': ErrorUiText.connectionError,
+    'unknownError': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
   
   
@@ -176,7 +176,7 @@ export namespace PwdChangePageValidation {
     
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
-      if (v?.error.code === 'connection-error') return new PartialFailureData({
+      if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Server connection error, it may be an internet error',
         type: 'server',
@@ -185,7 +185,7 @@ export namespace PwdChangePageValidation {
     [['fromServer'], (values)=>{
       const [v] = values as [FromServerValue]
       if (v) return new PartialFailureData({
-        code: 'unknown-error' satisfies FailureCode,
+        code: 'unknownError' satisfies FailureCode,
         msg: 'Unknown error',
         extra: v,
         type: 'server',

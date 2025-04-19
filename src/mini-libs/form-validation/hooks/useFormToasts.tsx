@@ -93,7 +93,7 @@ export const useFormToasts = <Vs extends Values>(
       msg: (
         <ToastMsg
           uiOption={function() {
-            if (serverFailure.code === 'unknown-error') {
+            if (serverFailure.code === 'unknownError') {
               return ObjectMap<
                 typeof ErrorUiText.unknownErrorTemplate,
                 UiText<keyof typeof ErrorUiText.unknownErrorTemplate>

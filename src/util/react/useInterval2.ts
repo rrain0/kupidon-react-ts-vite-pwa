@@ -1,35 +1,32 @@
 import { useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
 import exists = TypeU.exists
 
 
 
-export type UseIntervalParams = Puro<{
-  offset: number
-  interval: number
-}>
 export const useInterval2 = (
-  { offset = 0, interval = 0 }: UseIntervalParams,
-  callback: Callback,
-  deps: any[] = []
+  { offset = 0, interval = 0, disabled = false },
+  callback: Callback, // must be stable
+  deps: any[] = [],
 ) => {
   useEffect(() => {
-    let intervalId
-    let timeoutId
-    if (exists(offset)) {
-      timeoutId = setTimeout(() => {
-        callback()
+    if (!disabled) {
+      let intervalId
+      let timeoutId
+      if (exists(offset)) {
+        timeoutId = setTimeout(() => {
+          callback()
+          intervalId = setInterval(callback, interval)
+        }, offset)
+      }
+      else {
         intervalId = setInterval(callback, interval)
-      }, offset)
+      }
+      return () => {
+        clearTimeout(timeoutId)
+        clearInterval(intervalId)
+      }
     }
-    else {
-      intervalId = setInterval(callback, interval)
-    }
-    return () => {
-      clearTimeout(timeoutId)
-      clearInterval(intervalId)
-    }
-  }, deps)
+  }, [interval, disabled, ...deps])
 }

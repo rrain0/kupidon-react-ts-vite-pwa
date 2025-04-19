@@ -116,13 +116,13 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     viewsCnt,
     startItemI = 0,
     startViewI = 0,
-    getTrackProps,
+    getTrackProps, // supports not stable
     axis,
     inverted,
     velThreshold = 150, // %size/s
     velDefault = velThreshold,
     
-    mergeProgress,
+    mergeProgress, // supports not stable
   
     noDrag,
     noLoop,
@@ -132,9 +132,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     initialStartItemProgress = 0,
     initialDeltaProgress = 0,
     
-    onStart,
-    onAnimationStart,
-    onFinish,
+    onStart, // supports not stable
+    onAnimationStart, // supports not stable
+    onFinish, // supports not stable
   } = props
   
   const isX = axis === 'x'
@@ -469,16 +469,16 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   return {
     isDragging,
-    getIsDragging,
-    getWasDragged,
-    onTrackDrag,
+    getIsDragging, // stable
+    getWasDragged, // stable
+    onTrackDrag, // not stable
     
-    getStartProgress,
-    getStartItemProgress,
-    getDeltaProgress,
-    animatedDeltaProgress,
+    getStartProgress, // stable
+    getStartItemProgress, // stable
+    getDeltaProgress, // stable
+    animatedDeltaProgress, // stable
     
-    animateTo,
+    animateTo, // stable
   }
 }
 
