@@ -10,6 +10,7 @@ import { ArrayU } from '@util/common/ArrayU.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -23,6 +24,7 @@ import abs = EmotionCommon.abs
 import full = EmotionCommon.full
 import rf3 = MathU.rf3
 import Pu = TypeU.Pu
+import exists = TypeU.exists
 
 
 
@@ -37,6 +39,7 @@ import Pu = TypeU.Pu
 
 
 const viewsCnt = 3
+const startViewI = -1
 
 const actionSpring = { mass: 2, tension: 70, friction: 10 }
 
@@ -55,12 +58,30 @@ export type FindCouplePageProps = Pu<{
 
 const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   const itemsCnt = items.length
+  const startItemI = 0
   
   const [, , frameRef] = useElemRefGetSet()
   const getTrackProps = createTrackPropsGetter(frameRef)
   
   const [isMoving, setIsMoving] = useState(false)
-  const [buttonAction, setButtonAction] = useState<ProfileShowcaseAction>()
+  const [
+    stackAction, getStackAction, setStackAction,
+  ] = useStateAndRef<ProfileShowcaseAction>(undefined)
+  
+  
+  const getCarouselProps = ({
+    viewI = 0,
+    startP = getStartProgress(), startItemP = getStartItemProgress(), deltaP = getDeltaProgress(),
+  } = { }) => getFixedForwardLoopedCarouselProps({
+    startP,
+    startItemP,
+    deltaP,
+    itemsCnt,
+    viewsCnt,
+    startViewI,
+    currViewI: viewI,
+  })
+  const mergeProgress = fixedForwardCarouselMergeProgress
   
   const {
     isDragging,
@@ -81,7 +102,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     axis: 'x',
     inverted: false,
     noDragWhileAnimating: true,
-    mergeProgress: fixedForwardCarouselMergeProgress,
+    mergeProgress,
     
     onStart: ev => {
       setIsMoving(true)
@@ -89,53 +110,56 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     },
     onAnimationStart: ev => {
       console.log('ev', ev)
-      // todo maybe make 'left', 'center', 'right' events?
-      if (ev.fromDrag && ev.autoNearest
-        && rf3((ev.toStartP ?? ev.startP) + (ev.toDeltaP ?? ev.deltaP)) > ev.startP
-      ) {
-        console.log('drag to accept')
-      }
-      if (ev.fromDrag && ev.autoNearest
-        && rf3((ev.toStartP ?? ev.startP) + (ev.toDeltaP ?? ev.deltaP)) < ev.startP
-      ) {
-        console.log('drag to reject')
+      
+      const {
+        autoNearest, fromDrag,
+        startP, startItemP, deltaP, toStartP, toStartItemP, toDeltaP,
+      } = ev
+      
+      if (exists(toStartP) && exists(toStartItemP) && exists(toDeltaP)) {
+        const { pos0PI } = getCarouselProps({ startP, startItemP, deltaP: 0 })
+        
+        const { pos0PI: toPos0PI } = getCarouselProps({
+          startP: toStartP + toDeltaP, startItemP: toStartItemP + toDeltaP, deltaP: 0,
+        })
+        
+        //console.log('pos0PI', pos0PI, 'toPos0PI', toPos0PI)
+        
+        if (fromDrag && autoNearest) {
+          if (toPos0PI > pos0PI) {
+            // ACCEPT DRAG ACTION
+            console.log('drag to accept')
+            setStackAction('accept')
+          }
+          if (toPos0PI < pos0PI) {
+            // REJECT DRAG ACTION
+            console.log('drag to reject')
+            setStackAction('reject')
+          }
+        }
       }
     },
     onFinish: ev => {
       setIsMoving(false)
-      setButtonAction(undefined)
+      setStackAction(undefined)
       //console.log('onFinish', ev)
     },
   })
   
   
-  const getCarouselProps = (
-    viewI = 0, dp = getDeltaProgress(),
-    startP = getStartProgress(), startItemP = getStartItemProgress(),
-  ) => getFixedForwardLoopedCarouselProps({
-    startP: startP,
-    startItemP: startItemP,
-    deltaP: dp,
-    itemsCnt,
-    viewsCnt,
-    startViewI: -1,
-    currViewI: viewI,
-  })
-  
-  
   
   const onAccept = useCallback(() => {
-    setButtonAction('accept')
+    setStackAction('accept')
     animateTo({ next: true, ...actionSpring })
   }, [animateTo])
   
   const onReject = useCallback(() => {
-    setButtonAction('reject')
+    setStackAction('reject')
     animateTo({ prev: true, ...actionSpring })
   }, [animateTo])
   
   const onBack = useCallback(() => {
-    setButtonAction('back')
+    setStackAction('back')
     const { pos0PBase } = getCarouselProps()
     animateTo({
       fromStartP: rf3(pos0PBase - 100), fromDeltaP: -100, deltaP: 0,
@@ -146,7 +170,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   
   
   const animatedProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
-    return getCarouselProps(viewI, dp)
+    return getCarouselProps({ viewI, deltaP: dp })
   }), [itemsCnt])
   
   const animatedStackProps = useMemo(() => animatedProps.map(ap => (viewI = 0) => {
@@ -203,7 +227,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     
     const action = (() => {
       if (!first) return undefined
-      if (buttonAction) return buttonAction
+      if (getStackAction()) return getStackAction()
       if (dir === 1) return 'accept' as const
       if (dir === -1) return 'reject' as const
       return undefined
@@ -224,7 +248,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
       zIndex, transform, scale, opacity,
       restItemsOpacity, fullInfoOpacity, action, shadowIntensity, reactionIconOpacity,
     }
-  }), [animatedProps, buttonAction])
+  }), [animatedProps, stackAction])
   
   
   

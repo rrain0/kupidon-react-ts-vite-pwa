@@ -2,6 +2,7 @@ import beastTamerNekoChan from 'src/res/im/test/[08] Beast_Tamer.mp4_20221128_15
 import blueLockIsagi from 'src/res/im/test/[DC] Blue Lock - 19_Telegram.mp4_20230220_171742.815.jpg'
 import animeChan from 'src/res/im/test/anime-chan.jpg'
 import ban from 'src/res/im/test/Ban_ava_Nanatsu no Taizai 06.mkv_20220409_213244.290.jpg'
+import cuteChanWithFlowers from 'src/res/im/test/cute chan with flowers 118241319_p1.jpg'
 import flatOut2 from 'src/res/im/test/FlatOut 2.jpg'
 import guyFawkesMask from 'src/res/im/test/Guy Fawkes Mask.jpg'
 import kakashiAndSatoru from 'src/res/im/test/Hatake Kakashi & Satoru Goujo Cross-Over.full.3982603.jpg'
@@ -20,19 +21,23 @@ export const MockData = {
   images: {
     allRecord: {
       beastTamerNekoChan, blueLockIsagi,
-      animeChan, ban, flatOut2,
+      animeChan, ban, cuteChanWithFlowers, flatOut2,
       guyFawkesMask, kakashiAndSatoru, blueLockIsagi2,
       needMoreAcid, nextUp,
       ourLastNight, retrowave2, satoru,
     },
     all: [
       beastTamerNekoChan, blueLockIsagi,
-      animeChan, ban, flatOut2,
+      animeChan, ban, cuteChanWithFlowers, flatOut2,
       guyFawkesMask, kakashiAndSatoru, blueLockIsagi2, needMoreAcid, nextUp,
       ourLastNight, retrowave2, satoru,
     ],
     sixImages: [
       animeChan, flatOut2, blueLockIsagi2,
+      kakashiAndSatoru, needMoreAcid, satoru,
+    ],
+    sixImages1v2: [
+      flatOut2, cuteChanWithFlowers, blueLockIsagi2,
       kakashiAndSatoru, needMoreAcid, satoru,
     ],
     sixImages2: [

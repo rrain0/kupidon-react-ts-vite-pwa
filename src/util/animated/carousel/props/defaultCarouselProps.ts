@@ -59,11 +59,12 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = rf3(startP + deltaP)
+  const pos0PI = Math.floor(rf5(pos0P / 100))
   const dir = Math.sign(deltaP)
   const pCurr = rf3(mod(pos0P, 100))
   const pos0PBase = rf3(pos0P - pCurr)
   
-  const pos0ViewI = loopViewI(Math.floor(rf5(pos0P / 100)))
+  const pos0ViewI = loopViewI(pos0PI)
   
   const pos0ItemP = rf3(startItemP + deltaP)
   const pos0ItemI = loopItemI(rf3(Math.floor(rf5(pos0ItemP / 100)) + itemFirstI))
@@ -85,7 +86,7 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
   //console.log({ pos0P, pCurr, viewPosI, viewI, viewPosPBase, viewItemI })
   
   return {
-    pos0P, pCurr, dir, pos0PBase,
+    pos0P, pCurr, dir, pos0PBase, pos0PI,
     loopViewI,
     pos0ViewI,
     pos0ItemP, pos0ItemI, pos0ItemHalfI,
@@ -125,11 +126,12 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const pos0P = clampViewP(rf3(loopViewP(startP) + deltaP))
+  const pos0PI = Math.floor(rf5(pos0P / 100))
   const dir = Math.sign(deltaP) as Sign
   const pCurr = rf3(mod(pos0P, 100))
   const pos0PBase = rf3(pos0P - pCurr)
   
-  const pos0ViewI = loopViewI(Math.floor(rf5(pos0P / 100)))
+  const pos0ViewI = loopViewI(pos0PI)
   
   const pos0ItemP = clampItemP(rf3(loopItemP(startItemP) + deltaP))
   const pos0ItemI = loopItemI(Math.floor(rf5(pos0ItemP / 100)) + itemFirstI)
@@ -176,7 +178,6 @@ export const defaultCarouselMergeProgress: MergeProgressCallback = (props) => {
   const {
     startViewI, viewsCnt, startItemI, itemsCnt,
     startP, startItemP, deltaP,
-    setStartProgress, setStartItemProgress, setDeltaProgress,
     noLoop,
   } = props
   
@@ -189,13 +190,11 @@ export const defaultCarouselMergeProgress: MergeProgressCallback = (props) => {
   
   let p = rf3(startP + deltaP)
   p = noLoop ? clampViewP(p) : loopViewP(p)
-  setStartProgress(p)
   
   let itemP = rf3(startItemP + deltaP)
   itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
-  setStartItemProgress(itemP)
   
-  setDeltaProgress(0)
+  return { startP: p, startItemP: itemP, deltaP: 0 }
 }
 
 

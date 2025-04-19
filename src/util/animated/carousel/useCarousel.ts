@@ -214,14 +214,16 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   const applyOnFinish = (fromDrag = false) => {
-    mergeProgress({
+    const merged = mergeProgress({
       startViewI, viewsCnt, startItemI, itemsCnt,
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: getDeltaProgress(),
-      setStartProgress, setStartItemProgress, setDeltaProgress,
       noLoop,
     })
+    setStartProgress(merged.startP)
+    setStartItemProgress(merged.startItemP)
+    setDeltaProgress(merged.deltaP)
     updateViews()
     emitFinishEvent({ fromDrag })
   }

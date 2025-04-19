@@ -72,9 +72,11 @@ export type MergeProgressProps = {
   startP: number
   startItemP: number
   deltaP: number
-  setStartProgress: Setter<number>
-  setStartItemProgress: Setter<number>
-  setDeltaProgress: Setter<number>
   noLoop?: boolean | undefined
 }
-export type MergeProgressCallback = (props: MergeProgressProps) => void
+export type MergeProgressResult = {
+  startP: number
+  startItemP: number
+  deltaP: number
+}
+export type MergeProgressCallback = (props: MergeProgressProps) => MergeProgressResult

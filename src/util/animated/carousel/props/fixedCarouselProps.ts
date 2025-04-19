@@ -50,7 +50,8 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
   
   // pos0xxxxxx - position0xxxxxx - data of first displayed position
   const _pos0P = rf3(startP + deltaP)
-  const pos0PBase = rf3(Math.floor(rf5(startP / 100)) * 100)
+  const pos0PI = Math.floor(rf5(startP / 100))
+  const pos0PBase = rf3(Math.floor(pos0PI) * 100)
   const pCurr = rf3(RangeU.clamp(_pos0P - pos0PBase, [-100, 100]))
   const pos0P = rf3(pos0PBase + pCurr)
   const dir = Math.sign(pCurr) as Sign
@@ -82,7 +83,7 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
   // }
   
   return {
-    pos0P, pCurr, dir, pos0PBase,
+    pos0P, pCurr, dir, pos0PBase, pos0PI,
     loopViewI,
     pos0ViewI,
     pos0ItemP, pos0ItemPBase, pos0ItemI, pos0ItemHalfI,
@@ -103,7 +104,6 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
   const {
     startViewI, viewsCnt, startItemI, itemsCnt,
     startP, startItemP, deltaP,
-    setStartProgress, setStartItemProgress, setDeltaProgress,
     noLoop,
   } = props
   
@@ -115,7 +115,8 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
   } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
   
   const _pos0P = rf3(startP + deltaP)
-  const pos0PBase = rf3(Math.floor(rf5(startP / 100)) * 100)
+  const pos0PI =Math.floor(rf5(startP / 100))
+  const pos0PBase = rf3(Math.floor(pos0PI) * 100)
   const pCurr = rf3(RangeU.clamp(rf3(_pos0P - pos0PBase), [-100, 100]))
   const pos0P = rf3(pos0PBase + pCurr)
   const overflow = rf3(_pos0P - pos0P)
@@ -128,11 +129,9 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
   
   let p = isNext ? rf3(pos0PBase + 100) : pos0PBase
   p = noLoop ? clampViewP(p) : loopViewP(p)
-  setStartProgress(p)
   
   let itemP = isNext ? rf3(pos0ItemPBase + 100) : pos0ItemPBase
   itemP = noLoop ? clampItemP(itemP) : loopItemP(itemP)
-  setStartItemProgress(itemP)
   
-  setDeltaProgress(0)
+  return { startP: p, startItemP: itemP, deltaP: 0 }
 }
