@@ -12,7 +12,7 @@ import { useBool } from '@util/react-state/useBool.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { ViewU } from '@util/view/ViewU.ts'
-import React, { useCallback, useMemo, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
@@ -82,7 +82,10 @@ export type ProfileShowcaseProps = {
   birthDate: string
   gender: GenderOptionValues
   aboutMe: string
+  
   hideButtons?: boolean | undefined
+  action?: ProfileShowcaseAction
+  
   animatedStackProps?: undefined | AnimatedStackProps
   
   onAccept?: Callback | undefined
@@ -96,7 +99,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     birthDate,
     gender,
     aboutMe,
+    
     hideButtons: _hideButtons,
+    action,
+    
     animatedStackProps,
     
     onAccept,
@@ -164,6 +170,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   
   const [isInfoOpen, openInfo, closeInfo] = useBool(false)
+  
+  useEffect(() => {
+    if (action) closeInfo()
+  }, [action])
   
   const animatedPhotoProps = useMemo(() => animatedDeltaProgress.map(dp => (viewI = 0) => {
     return getLoopedCarouselProps({

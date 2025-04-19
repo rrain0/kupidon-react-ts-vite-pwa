@@ -28,14 +28,6 @@ import exists = TypeU.exists
 
 
 
-// TODO Закрыть шторку при переходе на другую анкету
-
-// TODO Прикрутить нажатия на кнопки - выделить экшены
-
-
-
-
-
 
 
 const viewsCnt = 3
@@ -109,7 +101,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
       //console.log('onStart', ev)
     },
     onAnimationStart: ev => {
-      console.log('ev', ev)
+      //console.log('ev', ev)
       
       const {
         autoNearest, fromDrag,
@@ -127,12 +119,12 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
         
         if (fromDrag && autoNearest) {
           if (toPos0PI > pos0PI) {
-            // ACCEPT DRAG ACTION
+            // ACCEPT ACTION FROM DRAG
             console.log('drag to accept')
             setStackAction('accept')
           }
           if (toPos0PI < pos0PI) {
-            // REJECT DRAG ACTION
+            // REJECT ACTION FROM DRAG
             console.log('drag to reject')
             setStackAction('reject')
           }
@@ -151,12 +143,12 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   const onAccept = useCallback(() => {
     setStackAction('accept')
     animateTo({ next: true, ...actionSpring })
-  }, [animateTo])
+  }, [])
   
   const onReject = useCallback(() => {
     setStackAction('reject')
     animateTo({ prev: true, ...actionSpring })
-  }, [animateTo])
+  }, [])
   
   const onBack = useCallback(() => {
     setStackAction('back')
@@ -165,7 +157,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
       fromStartP: rf3(pos0PBase - 100), fromDeltaP: -100, deltaP: 0,
       ...actionSpring,
     })
-  }, [animateTo])
+  }, [])
   
   
   
@@ -248,7 +240,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
       zIndex, transform, scale, opacity,
       restItemsOpacity, fullInfoOpacity, action, shadowIntensity, reactionIconOpacity,
     }
-  }), [animatedProps, stackAction])
+  }), [animatedProps])
   
   
   
@@ -279,6 +271,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
                       gender={item.gender}
                       aboutMe={item.aboutMe}
                       hideButtons={isMoving}
+                      action={first ? stackAction : undefined}
                       animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
                       {...first && { onAccept, onReject, onBack }}
                     />
