@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 import { useAutoRetry } from '@util/app/useAutoRetry.ts'
 import { useNext } from '@util/react-state/useNext.ts'
 import { useInterval } from '@util/react/useInterval.ts'
-import { isAxiosError } from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
@@ -17,7 +16,6 @@ import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
-import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
@@ -25,7 +23,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
   imPlaceholderBoxS,
   imPlaceholderIcS,
-  imSmallPieProgressS, imSmallPlaceholderIcFullTrans,
+  imSmallPieProgressS,
   imSmallPlaceholderIcS,
 } from 'src/ui/0-elements/imageParts.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
@@ -235,42 +233,44 @@ const SummaryPage = React.memo(() => {
             
             <InfoCard>
               
-              <AvaBox>
-                {(() => {
-                  if (mainPhoto.downloadError)
-                    return (
+              <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
+                <AvaBox>
+                  {(() => {
+                    if (mainPhoto.downloadError)
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <DocumentErrorIc css={SvgIconS6.t(avaPlaceholderIcS)} />
+                        </div>
+                      )
+                    if (!mainPhoto.download?.showProgress
+                      && mainPhoto.type === 'remote'
+                      && !mainPhoto.isReady
+                      && !mainPhoto.isEmpty
+                    )
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <SparkingLoadingLine />
+                        </div>
+                      )
+                    if (mainPhoto.download?.showProgress && mainPhoto.download)
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <PieProgress css={imSmallPieProgressS}
+                            progress={
+                              RangeU.map(mainPhoto.download.progress, [0, 100], [5, 95])
+                            }
+                          />
+                        </div>
+                      )
+                    if (mainPhoto.isEmpty) return (
                       <div css={imPlaceholderBoxS}>
-                        <DocumentErrorIc css={SvgIconS6.t(avaPlaceholderIcS)} />
+                        <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
                       </div>
                     )
-                  if (!mainPhoto.download?.showProgress
-                    && mainPhoto.type === 'remote'
-                    && !mainPhoto.isReady
-                    && !mainPhoto.isEmpty
-                  )
-                    return (
-                      <div css={imPlaceholderBoxS}>
-                        <SparkingLoadingLine />
-                      </div>
-                    )
-                  if (mainPhoto.download?.showProgress && mainPhoto.download)
-                    return (
-                      <div css={imPlaceholderBoxS}>
-                        <PieProgress css={imSmallPieProgressS}
-                          progress={
-                            RangeU.map(mainPhoto.download.progress, [0, 100], [5, 95])
-                          }
-                        />
-                      </div>
-                    )
-                  if (mainPhoto.isEmpty) return (
-                    <div css={imPlaceholderBoxS}>
-                      <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
-                    </div>
-                  )
-                  if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
-                })()}
-              </AvaBox>
+                    if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
+                  })()}
+                </AvaBox>
+              </Link>
               
               <Name>{name}</Name>
               <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
