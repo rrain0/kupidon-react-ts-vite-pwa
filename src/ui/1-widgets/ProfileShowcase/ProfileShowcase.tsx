@@ -125,9 +125,13 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const photosCnt = availablePhotos.length
   const isPhotosDraggable = photosCnt >= 2
   
-  // if photosCnt is 0, then display 1 placeholder
-  const viewsCnt = Math.max(Math.min(displayedPhotosCnt + 1, photosCnt + 1), 1)
-  //const viewsCnt = 1
+  const viewsCnt = (() => {
+    // return 1
+    if (photosCnt === 0) return 1 // display placeholder
+    if (photosCnt === 1) return 1 // display 1 not draggable photo
+    return Math.min(photosCnt, displayedPhotosCnt) + 2 // display photos + 1 view before & 1 view after
+  })()
+  const startViewI = -1
   
   // TODO изначально фотки не получены, поэтому изображение грузится
   const placeholderIm = useMemo(() => {
@@ -160,7 +164,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   } = useCarousel({
     itemsCnt,
     viewsCnt,
-    startViewI: -1,
+    startViewI,
     getTrackProps,
     axis: 'y',
     inverted: false,
@@ -184,7 +188,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       deltaP: dp,
       itemsCnt,
       viewsCnt,
-      startViewI: 0,
+      startViewI,
       currViewI: viewI,
     })
   }), [itemsCnt])
@@ -193,10 +197,10 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     [animatedPhotoProps, animatedStackProps],
     (ap, as) => (viewI = 0) => {
       const props = ap(viewI)
-      const { first, last, pCurr, viewPosI, viewItemI } = props
+      const { first, last, minusFirst, pCurr, viewPosI, viewItemI } = props
       const { restItemsOpacity, action, shadowIntensity } = as ?? { }
       
-      const z = -viewPosI + viewsCnt
+      const z = (viewsCnt - viewPosI) * (viewPosI >= 0 ? 1 : -1)
       
       const y = (() => {
         if (first) return pCurr
@@ -219,6 +223,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
           [0, 80, 100],
           [0, 0, 100],
         )
+        if (minusFirst) return 0
         return 100
       })() / 100
       
