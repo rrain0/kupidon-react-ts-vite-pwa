@@ -50,12 +50,12 @@ const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
 export type ElemAttrsUpdaters = Record<string, (value?: string) => void>
 const createElemAttrsUpdaters = (
   elemRef: React.RefObject<HTMLElement>,
-  animatedImgAttrs: AnimatedElemAttrs = { },
+  animatedElemAttrs: AnimatedElemAttrs = { },
 ): ElemAttrsUpdaters => {
   
   const updaters = { } as ElemAttrsUpdaters
   
-  for (const attr in animatedImgAttrs) {
+  for (const attr in animatedElemAttrs) {
     updaters[attr] = (value?: string) => {
       if (value === undefined) return
       const el = elemRef.current
