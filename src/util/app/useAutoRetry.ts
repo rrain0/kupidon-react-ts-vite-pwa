@@ -6,9 +6,9 @@ import Callback = TypeU.Callback
 
 
 export const useAutoRetry = (
-  retryCallback: Callback, // supports not stable
   needRetry = false,
   { interval = 4000 } = { },
+  retryCallback: Callback, // supports not stable
 ) => {
   const retryCbStable = useAsCallback(retryCallback)
   useInterval2({ offset: interval, interval, disabled: !needRetry }, retryCbStable)

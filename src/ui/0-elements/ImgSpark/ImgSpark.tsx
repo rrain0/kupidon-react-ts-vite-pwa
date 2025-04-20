@@ -1,3 +1,4 @@
+import { useAutoRetry } from '@util/app/useAutoRetry.ts'
 import clsx from 'clsx'
 import React, {
   SyntheticEvent,
@@ -45,17 +46,29 @@ const ImgSpark = React.memo(
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
-      const [loaded, setLoaded] = useState<string | undefined>()
-      const [error, setError] = useState<string | undefined>()
+      const [loadedSrc, setLoadedSrc] = useState<string | undefined>()
+      const [errorSrc, setErrorSrc] = useState<string | undefined>()
       
-      const isLoading = notExists(loaded) && notExists(error)
-      const isLoaded = exists(loaded)
-      const isError = exists(error)
+      const [needRetryDownload, setNeedRetryDownload] = useState(false)
+      
+      useAutoRetry(needRetryDownload, { }, () => {
+        const im = elemRef.current
+        if (im) {
+          setNeedRetryDownload(false)
+          setErrorSrc(undefined)
+          im.src = src ?? ''
+        }
+      })
+      
+      const isLoading = notExists(loadedSrc) && notExists(errorSrc)
+      const isLoaded = exists(loadedSrc)
+      const isError = exists(errorSrc)
       
       
       useMemo(() => {
-        setLoaded(loaded => loaded !== src ? undefined : loaded)
-        setError(error => error !== src ? undefined : error)
+        setNeedRetryDownload(false)
+        setLoadedSrc(loaded => loaded !== src ? undefined : loaded)
+        setErrorSrc(error => error !== src ? undefined : error)
       }, [src])
       
       
@@ -71,14 +84,16 @@ const ImgSpark = React.memo(
             ref={elemRef}
             {...combineProps({
               onLoad: (ev: SyntheticEvent<HTMLImageElement>) => {
-                setLoaded(src)
-                setError(undefined)
+                setLoadedSrc(src)
+                setErrorSrc(undefined)
+                setNeedRetryDownload(false)
               },
               onError: (ev: SyntheticEvent<HTMLImageElement>) => {
-                setLoaded(undefined)
+                console.log('error', ev)
+                setLoadedSrc(undefined)
                 // You can refresh src to retry if error:
                 // ev.currentTarget.src = ev.currentTarget.src
-                setError(src)
+                setErrorSrc(src)
               },
               style: {
                 display: isLoaded ? 'block' : 'none',

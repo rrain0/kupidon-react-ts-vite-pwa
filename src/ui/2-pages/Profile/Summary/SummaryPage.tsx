@@ -59,7 +59,6 @@ import Txt = EmotionCommon.Txt
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
-import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
 import PictureIc = SvgIconsPack.PictureIc
 import row = EmotionCommon.row
 import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
@@ -67,7 +66,6 @@ import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 
 
 
-// TODO показывать уведомление с кнопкой Retry, если ошибка загрузки данных
 
 const SummaryPage = React.memo(() => {
   const lang = useAppZustand(s => s.langs[0])
@@ -173,7 +171,7 @@ const SummaryPage = React.memo(() => {
           updateDownloadThrottled(undefined, { progress: progress.value })
         }
         
-        console.log('download started')
+        //console.log('download started')
         const blob = await fetchToBlob(mainPhoto.remoteUrl,
           { onProgress, abortCtrl: fetchToBlobAbortCtrl }
         )
@@ -186,12 +184,12 @@ const SummaryPage = React.memo(() => {
         )
         abortCtrl.signal.throwIfAborted()
         
-        console.log('download completed')
+        //console.log('download completed')
         updateDownload({ isReady: true, download: undefined, dataUrl })
       }
       catch (ex) {
         if (abortCtrl.signal.aborted) {
-          console.log('download aborted:', abortCtrl.signal.reason)
+          //console.log('download aborted:', abortCtrl.signal.reason)
           return
         }
         if (ApiUtils.isConnectionError(ex)) {
@@ -199,9 +197,8 @@ const SummaryPage = React.memo(() => {
           return
         }
         
-        // TODO notify about error
-        console.log('download error', ex)
-        //console.log('photo', photo)
+        //console.log('download error', ex)
+        //console.log('download error photo', photo)
         updateDownload({ download: undefined, downloadError: ex })
       }
     })()
@@ -221,7 +218,7 @@ const SummaryPage = React.memo(() => {
     })
   }
   
-  useAutoRetry(retry, mainPhoto.needRetryDownload)
+  useAutoRetry(mainPhoto.needRetryDownload, { }, retry)
   
   
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
@@ -373,7 +370,7 @@ const AvaIm = styled.img`
   object-fit: cover;
 `
 const avaPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
-  icon: { sz: '50%' },
+  icon: { sz: '50%', mr: -2, color: t.errorSec.ct },
 }]
 
 

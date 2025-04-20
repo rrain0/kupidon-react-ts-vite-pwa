@@ -81,7 +81,7 @@ const data = [
     aboutMe: 'Тестовое описание 1',
   },
   {
-    photos: [photos[1], ...photos.slice(1)],
+    photos: photos.map((p, i) => ({ ...p, dataUrl: MockData.images.sixImages2[i] })),
     name: 'test',
     birthDate: '2000-10-10',
     gender: 'MALE' as const,

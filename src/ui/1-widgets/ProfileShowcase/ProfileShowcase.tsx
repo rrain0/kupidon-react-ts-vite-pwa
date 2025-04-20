@@ -1,5 +1,6 @@
 import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
@@ -9,12 +10,12 @@ import { createTrackPropsGetter } from '@util/animated/carousel/createTrackProps
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react-state/useBool.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { ViewU } from '@util/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
-import AnimatedImg from '@animated/elements/AnimatedImg.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -42,6 +43,7 @@ import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
 import Callback = TypeU.Callback
+import noRepeatLog = ReactU.noRepeatLog
 
 
 
@@ -244,6 +246,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       })()
       
       const src = availablePhotos[viewItemI]?.dataUrl ?? ''
+      //if (viewI === 3) noRepeatLog('viewItemI', viewItemI)
+      //if (viewI === 3) noRepeatLog('src', src.slice(0, 200))
       
       return { ...props, z, y, scale, opacity, boxShadow, src }
     }
@@ -322,11 +326,15 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                 }}
               >
                 {!!photosCnt && (
-                  <AnimatedPhoto
-                    animatedAttrs={{
+                  <AnimatedState
+                    animatedState={{
                       src: animatedPhoto.map(ap => ap(viewI).src),
                     }}
-                  />
+                  >
+                    {({ src }) => (
+                      <Photo src={src} />
+                    )}
+                  </AnimatedState>
                 )}
                 {!photosCnt && (
                   <>
@@ -430,13 +438,6 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   will-change: z-index, transform, scale, opacity, box-shadow;
 `
 const Photo = styled.img`
-  ${fill};
-  object-position: center;
-  object-fit: cover;
-  
-  pointer-events: none; // or attr draggable="false"
-`
-const AnimatedPhoto = styled(AnimatedImg)`
   ${fill};
   object-position: center;
   object-fit: cover;

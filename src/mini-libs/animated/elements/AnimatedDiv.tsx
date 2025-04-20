@@ -2,11 +2,11 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
-import { AnimatedElemStyle } from 'src/mini-libs/animated/AnimatedProps.ts'
+import { AnimatedElemStyle, AnimatedElemAttrs } from 'src/mini-libs/animated/AnimatedProps.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
-  useUpdateElemStyleUpdaters,
+  useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
@@ -15,6 +15,7 @@ import Children = ReactU.Children
 
 type AnimatedDivExtraProps = Pu<{
   animatedStyle: AnimatedElemStyle
+  animatedAttrs: AnimatedElemAttrs
 }> & Children
 
 type AnimatedDivRefElement = HTMLDivElement
@@ -28,6 +29,7 @@ const AnimatedDiv = React.memo(
     (props, forwardedRef) => {
       const {
         animatedStyle,
+        animatedAttrs,
         children,
         ...restProps
       } = props
@@ -38,6 +40,7 @@ const AnimatedDiv = React.memo(
       
       
       useUpdateElemStyleUpdaters(elemRef, animatedStyle)
+      useUpdateElemAttrsUpdaters(elemRef, animatedAttrs)
       
       
       return (

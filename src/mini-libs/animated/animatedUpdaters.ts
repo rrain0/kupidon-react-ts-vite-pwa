@@ -5,7 +5,7 @@ import React, { useLayoutEffect, useMemo } from 'react'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
   AnimatedComponentState,
-  AnimatedImgAttrs,
+  AnimatedElemAttrs,
   AnimatedElemStyle,
 } from 'src/mini-libs/animated/AnimatedProps.ts'
 import isnumber = TypeU.isnumber
@@ -46,34 +46,21 @@ const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
 
 
 
-export type ImgAttrsUpdatersExplicit = Pu<{
-  src?: (value: string) => void
-}>
-export type ImgAttrsUpdaters = ImgAttrsUpdatersExplicit
-const createImgAttrsUpdaters = (
-  imgRef: React.RefObject<HTMLImageElement>,
-  animatedImgAttrs: AnimatedImgAttrs = { },
-): ImgAttrsUpdaters => {
+
+export type ElemAttrsUpdaters = Record<string, (value?: string) => void>
+const createElemAttrsUpdaters = (
+  elemRef: React.RefObject<HTMLElement>,
+  animatedImgAttrs: AnimatedElemAttrs = { },
+): ElemAttrsUpdaters => {
   
-  const updaters = { } as ImgAttrsUpdaters
+  const updaters = { } as ElemAttrsUpdaters
   
   for (const attr in animatedImgAttrs) {
-    if (attr === 'src') {
-      updaters[attr] = (value?: string) => {
-        if (value === undefined) return
-        const el = imgRef.current
-        if (el) {
-          el.src = value
-        }
-      }
-    }
-    else {
-      updaters[attr] = (value?: string) => {
-        if (value === undefined) return
-        const el = imgRef.current
-        if (el) {
-          el.style[attr] = value
-        }
+    updaters[attr] = (value?: string) => {
+      if (value === undefined) return
+      const el = elemRef.current
+      if (el) {
+        el[attr] = value
       }
     }
   }
@@ -194,6 +181,7 @@ const useUpdateUpdaters = (
 
 
 
+
 export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
   setState: Setter<S>,
   animated: AnimatedComponentState<S>,
@@ -203,6 +191,7 @@ export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
   useUpdateUpdaters(animated, updaters)
 }
 
+
 export const useUpdateElemStyleUpdaters = (
   elemRef: React.RefObject<HTMLElement>,
   animated?: AnimatedElemStyle,
@@ -211,12 +200,12 @@ export const useUpdateElemStyleUpdaters = (
   useUpdateUpdaters(animated, updaters)
 }
 
-// TODO Animated - make any attr type ???
-export const useUpdateImgAttrsUpdaters = (
-  imgRef: React.RefObject<HTMLImageElement>,
-  animated?: AnimatedImgAttrs,
+
+export const useUpdateElemAttrsUpdaters = (
+  elemRef: React.RefObject<HTMLElement>,
+  animated?: AnimatedElemAttrs,
 ) => {
-  const updaters = createImgAttrsUpdaters(imgRef, animated)
+  const updaters = createElemAttrsUpdaters(elemRef, animated)
   useUpdateUpdaters(animated, updaters)
 }
 

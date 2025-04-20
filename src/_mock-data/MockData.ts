@@ -33,14 +33,14 @@ export const MockData = {
       ourLastNight, retrowave2, satoru,
     ],
     sixImages: [
-      animeChan, flatOut2, blueLockIsagi2,
-      kakashiAndSatoru, needMoreAcid, satoru,
-    ],
-    sixImages1v2: [
-      flatOut2, cuteChanWithFlowers, blueLockIsagi2,
+      cuteChanWithFlowers, flatOut2, blueLockIsagi2,
       kakashiAndSatoru, needMoreAcid, satoru,
     ],
     sixImages2: [
+      flatOut2, animeChan, ban,
+      guyFawkesMask, nextUp, ourLastNight,
+    ],
+    sixImages3: [
       animeChan, ban, guyFawkesMask,
       kakashiAndSatoru, needMoreAcid, beastTamerNekoChan,
     ],

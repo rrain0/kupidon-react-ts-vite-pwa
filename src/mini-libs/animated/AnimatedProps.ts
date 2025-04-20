@@ -43,9 +43,7 @@ export type AnimatedElemStyle = AnimatedElemStyleExplicit & AnimatedElemStyleRes
 // TODO Animated - try AnimatedElemStyleBatch
 
 
-export type AnimatedImgAttrs = Pu<{
-  src: AnimatedStringOrUndef
-}>
+export type AnimatedElemAttrs = Record<string, AnimatedStringOrUndef>
 
 
 
