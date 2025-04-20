@@ -2,7 +2,7 @@ import React from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
@@ -16,7 +16,7 @@ export type UseOverlayUrlRenderProps = {
 
 export type UseOverlayProps = {
   overlayName: string
-} & Puro<{
+} & Pu<{
   children: (props: UseOverlayUrlRenderProps) => React.ReactNode
 }>
 

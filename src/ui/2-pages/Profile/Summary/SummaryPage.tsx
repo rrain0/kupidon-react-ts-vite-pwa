@@ -28,6 +28,9 @@ import {
 } from 'src/ui/0-elements/imageParts.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
+import QuickSettings, {
+  QuickSettingsOverlayName
+} from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
 import {
   MainPhoto,
@@ -38,6 +41,7 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { AsyncU } from 'src/util/common/AsyncU'
 import { RangeU } from 'src/util/common/RangeU'
 import { DateU } from 'src/util/date/DateU'
@@ -60,6 +64,8 @@ import blobToDataUrl = FileU.blobToDataUrl
 import PictureIc = SvgIconsPack.PictureIc
 import row = EmotionCommon.row
 import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
+import GearIc = SvgIconsPack.GearIc
+import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 
 
 
@@ -273,13 +279,17 @@ const SummaryPage = React.memo(() => {
               </Link>
               
               <Name>{name}</Name>
-              <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
-                <Eye>
-                  <Button css={IconButtonS6.t(eyeIcS)}>
-                    <EyeWideIc />
-                  </Button>
-                </Eye>
-              </Link>
+              
+              <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+                {overlay => (
+                  <Gear onClick={overlay.open}>
+                    <Button css={IconButtonS6.t(gearIc)}>
+                      <GearOutlinedIc />
+                    </Button>
+                  </Gear>
+                )}
+              </UseOverlayUrl>
+              
               <Info>{info}</Info>
               
               <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
@@ -336,9 +346,9 @@ const InfoCard = styled.div`
   background: ${p => p.theme.boxDefault.bg};
   display: grid;
   grid:
-    'ava  .    name .    eye ' auto
-    'ava  .    .    .    eye ' 4px
-    'ava  .    info info eye' auto
+    'ava  .    name .    gear' auto
+    'ava  .    .    .    gear' 4px
+    'ava  .    info info gear' auto
     'ava  .    .    .    .   ' 10px
     'ava  .    edit edit edit' auto
     '.    .    .    .    .   ' 14.5px
@@ -374,14 +384,14 @@ const avaPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
 }]
 
 
-const Eye = styled.div`
-  grid-area: eye;
+const Gear = styled.div`
+  grid-area: gear;
   place-self: start end;
   ${flexC};
   margin-top: -14px;
   margin-right: -6px;
 `
-const eyeIcS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
+const gearIc: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
   iconSz: 'full',
   iconColor: t.boxDefault.ct6,
 }]
