@@ -1,6 +1,11 @@
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from '@util/common/TypeU.ts'
+import { getDataUrlProps } from '@util/file/DataUrl.ts'
+import { FileU } from '@util/file/FileU.ts'
 import noop = TypeU.noop
 import Pu = TypeU.Pu
+import getFilenameFromPath = FileU.getFilenameFromPath
+import getMimeTypeFromExtension = FileU.getMimeTypeFromExtension
+import getExtension = FileU.getExtension
 
 
 
@@ -26,18 +31,39 @@ export interface Media {
 
 export const newDefaultRemoteMedia = (): Media => ({
   type: 'remote',
-  
-  id: '',
-  remoteUrl: '',
-  name: '',
-  mimeType: '',
-  
+  id: '', remoteUrl: '', name: '', mimeType: '',
   dataUrl: '',
 })
 export const newDefaultLocalMedia = (): Media => ({
   ...newDefaultRemoteMedia(),
   type: 'local',
 })
+
+export const urlToMedia = (url = '', { needDownload = true } = { }): MediaDownloadable => {
+  if (!url) return {
+    ...newDefaultRemoteMedia(),
+    isEmpty: true,
+    isInited: true,
+  }
+  const dataUrlProps = getDataUrlProps(url)
+  if (dataUrlProps) return {
+    ...newDefaultLocalMedia(),
+    id: url,
+    mimeType: dataUrlProps.mimeType,
+    dataUrl: url,
+    isInited: true,
+    isReady: true,
+  }
+  return {
+    ...newDefaultRemoteMedia(),
+    id: url,
+    remoteUrl: url,
+    name: getFilenameFromPath(url),
+    mimeType: getMimeTypeFromExtension(getExtension(url)),
+    isInited: true,
+    needDownload,
+  }
+}
 
 
 
@@ -89,6 +115,14 @@ export type Downloadable = Pu<{
 // extend this interface to define a particular error type, etc.
 export interface MediaDownloadable extends Media, Downloadable { }
 
+export const getMediaDownloadUiState = (media?: MediaDownloadable) => {
+  const { isInited, isEmpty, isReady, downloadError, needRetryDownload } = media ?? { }
+  return {
+    isLoading: !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError)),
+    isLoaded: isReady,
+    isError: isInited && (isEmpty || (downloadError && !needRetryDownload)),
+  }
+}
 
 
 export type Uploadable = Pu<{

@@ -14,7 +14,7 @@ import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
@@ -307,23 +307,23 @@ const ProfilePage = React.memo(() => {
         ;(async() => {
           try {
             const progress = new StageProgress(2, [90, 10])
-            const onProgress = (p: number | null) => {
-              progress.progress = p ?? 0
+            const onProgress = (p = 0) => {
+              progress.progress = p
               //console.log('progress', photo.id, progress.value)
               updatePhotoThrottled(undefined, { progress: progress.value })
             }
             
             //console.log('start download id',photo.id)
-            const blob = await fetchToBlob(photo.remoteUrl,
-              { onProgress, abortCtrl: fetchToBlobAbortCtrl }
-            )
+            const blob = await fetchToBlob(photo.remoteUrl, {
+              onProgress, abortCtrl: fetchToBlobAbortCtrl,
+            })
             abortCtrl.signal.throwIfAborted()
             
             progress.stage++
             progress.progress = 0
-            const dataUrl = await blobToDataUrl(blob,
-              { onProgress, abortCtrl: blobToDataUrlAbortCtrl }
-            )
+            const dataUrl = await blobToDataUrl(blob, {
+              onProgress, abortCtrl: blobToDataUrlAbortCtrl,
+            })
             abortCtrl.signal.throwIfAborted()
             
             //console.log('completed',photo.id)

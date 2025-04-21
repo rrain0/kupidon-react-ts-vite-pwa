@@ -1,7 +1,7 @@
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { CurrentUser } from 'src/api/model/CurrentUser.ts'
 import { Gender } from 'src/api/model/Gender.ts'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import {
   newDefaultProfilePhoto,
   ProfilePhoto,
@@ -272,10 +272,10 @@ export const profileUpdateApiRequest = (
       )
       
       
-      const onProgress = (p:number | null) => {
+      const onProgress = (p = 0) => {
         //console.log(`progress ${photo.id} ${p}`)
         const upload = getUpload()
-        if (upload) updatePhotoThrottled(undefined, { progress: p ?? 0 })
+        if (upload) updatePhotoThrottled(undefined, { progress: p })
       }
       
       const updatedUserResponse = await UserApi.addProfilePhoto(

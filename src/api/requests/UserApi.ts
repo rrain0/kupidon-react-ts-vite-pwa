@@ -3,7 +3,7 @@ import { ApiUtils } from 'src/api/ApiUtils'
 import { CurrentUser } from 'src/api/model/CurrentUser'
 import { Gender } from 'src/api/model/Gender.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { DataUrl } from '@util/DataUrl.ts'
+import { getDataUrlProps } from '@util/file/DataUrl.ts'
 import { FileU } from 'src/util/file/FileU'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiRoutes } from 'src/api/ApiRoutes'
@@ -109,11 +109,11 @@ export namespace UserApi {
   export const addProfilePhoto = async (
     photo: AddProfilePhoto,
     options?: {
-      onProgress?: Callback1<number|null>
+      onProgress?: Callback1<number | undefined>
       abortCtrl?: AbortController
     }
   ) => {
-    const mimeType = new DataUrl(photo.dataUrl).mimeType
+    const mimeType = getDataUrlProps(photo.dataUrl)!.mimeType
     const preparedPhoto = {
       id: photo.id,
       index: photo.index,
@@ -125,7 +125,7 @@ export namespace UserApi {
     const config: AxiosRequestConfig = {
       onUploadProgress: progressEvent => {
         const p = progressEvent.progress
-        options?.onProgress?.( exists(p) ? p * 100 : null )
+        options?.onProgress?.( exists(p) ? p * 100 : p )
       },
     }
     const ctrl = options?.abortCtrl

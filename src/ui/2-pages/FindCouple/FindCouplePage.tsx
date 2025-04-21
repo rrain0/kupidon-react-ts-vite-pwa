@@ -57,7 +57,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   
   const [isMoving, setIsMoving] = useState(false)
   const [
-    stackAction, getStackAction, setStackAction,
+    getStackAction, setStackAction, stackAction,
   ] = useStateAndRef<ProfileShowcaseAction>(undefined)
   
   

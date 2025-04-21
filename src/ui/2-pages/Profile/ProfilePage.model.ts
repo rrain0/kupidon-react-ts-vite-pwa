@@ -4,7 +4,7 @@ import {
   MediaInArray,
   newDefaultRemoteMediaInArray,
   Uploadable,
-} from 'src/ui-data/models/Media.ts'
+} from 'src/ui-data/models/media/Media.ts'
 
 
 

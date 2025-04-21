@@ -1,7 +1,7 @@
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import React, { useLayoutEffect, useMemo } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
   AnimatedComponentState,
@@ -96,8 +96,7 @@ const createElemStyleUpdaters = (
   
   for (const prop in animatedElemStyle) {
     if (prop === 'transform' || prop === 'translate') {
-      updaters[prop] = (value?: string) => {
-        if (value === undefined) return
+      updaters[prop] = (value: string = '') => {
         const el = elemRef.current
         if (el) {
           el.style[prop] = value
@@ -105,8 +104,7 @@ const createElemStyleUpdaters = (
       }
     }
     else if (prop === 'rotate') {
-      updaters[prop] = (value?: string | number) => {
-        if (value === undefined) return
+      updaters[prop] = (value: string | number = '') => {
         const el = elemRef.current
         if (el) {
           if (isnumber(value)) value = `${value}turn`
@@ -115,8 +113,7 @@ const createElemStyleUpdaters = (
       }
     }
     else if (prop === 'scale' || prop === 'opacity' || prop === 'zIndex') {
-      updaters[prop] = (value?: string | number) => {
-        if (value === undefined) return
+      updaters[prop] = (value: string | number = '') => {
         const el = elemRef.current
         if (el) {
           value = `${value}`
@@ -125,8 +122,7 @@ const createElemStyleUpdaters = (
       }
     }
     else if (prop === 'top' || prop === 'right' || prop === 'bottom' || prop === 'left') {
-      updaters[prop] = (value?: string | number) => {
-        if (value === undefined) return
+      updaters[prop] = (value: string | number = '') => {
         const el = elemRef.current
         if (el) {
           if (isnumber(value)) value = `${value}px`
@@ -135,8 +131,7 @@ const createElemStyleUpdaters = (
       }
     }
     else {
-      updaters[prop] = (value?: string) => {
-        if (value === undefined) return
+      updaters[prop] = (value: string = '') => {
         const el = elemRef.current
         if (el) {
           el.style[prop] = value

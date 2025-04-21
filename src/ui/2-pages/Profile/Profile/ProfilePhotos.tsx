@@ -12,7 +12,7 @@ import React, {
   useState,
 } from 'react'
 import Dropzone from 'react-dropzone'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   imPieProgressAccentS,
@@ -34,7 +34,7 @@ import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { FileU } from 'src/util/file/FileU.ts'
-import { DataUrl } from 'src/util/DataUrl.ts'
+import { getDataUrlProps } from '@util/file/DataUrl.ts'
 import { ImageU } from 'src/util/file/ImageU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
@@ -616,8 +616,8 @@ const onFilesSelectedBuilder = (
         ;(async() => {
           try {
             const progress = new StageProgress(2, [95, 5])
-            const onProgress = (p: number | null) => {
-              progress.progress = p ?? 0
+            const onProgress = (p = 0) => {
+              progress.progress = p
               //console.log('progress',progress.value)
               updatePhotoThrottled(undefined, { progress: progress.value })
             }
@@ -625,22 +625,22 @@ const onFilesSelectedBuilder = (
             //await wait(10000)
             //throw 'test error'
             
-            const compressedFile = await ImageU.compress(imgFile,
-              { onProgress, abortCtrl: compressAbortCtrl }
-            )
+            const compressedFile = await ImageU.compress(imgFile, {
+              onProgress, abortCtrl: compressAbortCtrl,
+            })
             abortCtrl.signal.throwIfAborted()
             
             //console.log('imgFile',imgFile)
             progress.stage++
             progress.progress = 0
-            const imgDataUrl = await blobToDataUrl(compressedFile,
-              { onProgress, abortCtrl: blobToDataUrlAbortCtrl }
-            )
+            const imgDataUrl = await blobToDataUrl(compressedFile, {
+              onProgress, abortCtrl: blobToDataUrlAbortCtrl,
+            })
             abortCtrl.signal.throwIfAborted()
             
             //console.log('imgDataUrl',imgDataUrl.length)
             //console.log('imgDataUrl',imgDataUrl.substring(0, 1000))
-            const mimeType = new DataUrl(imgDataUrl).mimeType
+            const mimeType = getDataUrlProps(imgDataUrl)!.mimeType
             const newPhoto = {
               ...newDefaultProfilePhoto(),
               type: 'local',

@@ -1,15 +1,14 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useAutoRetry } from '@util/app/useAutoRetry.ts'
-import { useNext } from '@util/react-state/useNext.ts'
-import { useInterval } from '@util/react/useInterval.ts'
+import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
-import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { newDefaultMediaOperation } from 'src/ui-data/models/Media'
+import { MediaDownloadable, newDefaultRemoteMedia } from 'src/ui-data/models/media/Media.ts'
+import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
+import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
@@ -28,43 +27,31 @@ import {
 } from 'src/ui/0-elements/imageParts.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
-import QuickSettings, {
+import {
   QuickSettingsOverlayName
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
-import {
-  MainPhoto,
-  newDefaultMainPhoto,
-} from 'src/ui/2-pages/Profile/Summary/SummaryPage.model.ts'
 import { SummaryPageParts } from 'src/ui/2-pages/Profile/Summary/SummaryPageParts.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { AsyncU } from 'src/util/common/AsyncU'
 import { RangeU } from 'src/util/common/RangeU'
 import { DateU } from 'src/util/date/DateU'
 import { MockData } from 'src/_mock-data/MockData'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
-import { FileU } from 'src/util/file/FileU'
-import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useTimeout } from 'src/util/react/useTimeout'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
-import EyeWideIc = SvgIconsPack.EyeWideIc
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
-import withThrottle = AsyncU.withThrottle
-import fetchToBlob = FileU.fetchToBlob
-import blobToDataUrl = FileU.blobToDataUrl
 import PictureIc = SvgIconsPack.PictureIc
 import row = EmotionCommon.row
 import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
-import GearIc = SvgIconsPack.GearIc
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 
 
@@ -87,9 +74,6 @@ const SummaryPage = React.memo(() => {
   
   useEffect(() => setProfileProgress(progress), [])
   
-  // const [index, setIndex] = useState(0)
-  // useInterval(6000, () => setIndex(i => i === 0 ? 1 : 0))
-  
   const remoteMainPhoto = useMemo(() => {
     return photos.find(it => it.index === 0)
   }, [photos])
@@ -97,14 +81,14 @@ const SummaryPage = React.memo(() => {
   const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
   useTimeout(3000, () => setCanShowFetchProgress(true), [])
   
-  const getMainPhoto = () => {
+  const convertRemotePhoto = () => {
     if (!remoteMainPhoto) return {
-      ...newDefaultMainPhoto(),
+      ...newDefaultRemoteMedia(),
       isEmpty: true,
       needDownload: false,
     }
     return {
-      ...newDefaultMainPhoto(),
+      ...newDefaultRemoteMedia(),
       needDownload: true,
       id: remoteMainPhoto.id,
       name: remoteMainPhoto.name,
@@ -113,116 +97,22 @@ const SummaryPage = React.memo(() => {
     }
   }
   
-  const [mainPhoto, setMainPhoto] = useState<MainPhoto>(getMainPhoto)
-  useEffect(() => setMainPhoto(getMainPhoto()), [remoteMainPhoto])
+  const [
+    getMainPhoto, setMainPhoto, mainPhoto,
+  ] = useStateAndRef<MediaDownloadable | undefined>(undefined)
+  
+  useMediaDownload(getMainPhoto, setMainPhoto, { canShowFetchProgress })
+  useMediaDownloadAutoRetry(getMainPhoto, setMainPhoto)
+  
+  useEffect(() => setMainPhoto(convertRemotePhoto()), [remoteMainPhoto])
   useEffect(() => {
-    if (mainPhoto.download) setMainPhoto({
+    if (mainPhoto?.download) setMainPhoto({
       ...mainPhoto, download: { ...mainPhoto.download,
         showProgress: canShowFetchProgress,
       },
     })
   }, [canShowFetchProgress])
   
-  const [downloadNumber, nextDownload] = useNext()
-  const { needDownload } = mainPhoto
-  useEffect(() => { if (needDownload) nextDownload() }, [needDownload])
-  
-  useEffect(() => {
-    const fetchToBlobAbortCtrl = new AbortController()
-    const blobToDataUrlAbortCtrl = new AbortController()
-    const abortCtrl = new AbortController()
-    abortCtrl.signal.onabort = function() {
-      fetchToBlobAbortCtrl.abort(this.reason)
-      blobToDataUrlAbortCtrl.abort(this.reason)
-    }
-    const downloadStart = {
-      isReady: false,
-      needDownload: false,
-      download: { ...newDefaultMediaOperation(),
-        id: mainPhoto.id,
-        showProgress: canShowFetchProgress,
-        abort: reason => abortCtrl.abort(reason),
-      },
-      downloadError: undefined,
-    } satisfies Partial<MainPhoto>
-    
-    setMainPhoto({ ...mainPhoto, ...downloadStart })
-    
-    const updateDownload = (
-      photoUpdate?: Partial<MainPhoto>,
-      downloadUpdate?: Partial<MainPhoto['download']>
-    ) => {
-      setMainPhoto(photo => {
-        if (photo.download?.id !== downloadStart.download.id) return photo
-        return { ...photo,
-          ...photoUpdate,
-          ...downloadUpdate && photo.download && {
-            download: { ...photo.download, ...downloadUpdate },
-          },
-        }
-      })
-    }
-    const updateDownloadThrottled = withThrottle(
-      RangeU.random(1500, 2300), updateDownload
-    )
-    
-    ;(async () => {
-      try {
-        const progress = new StageProgress(2, [90, 10])
-        const onProgress = (p: number | null) => {
-          progress.progress = p ?? 0
-          //console.log('progress', photo.id, progress.value)
-          updateDownloadThrottled(undefined, { progress: progress.value })
-        }
-        
-        //console.log('download started')
-        const blob = await fetchToBlob(mainPhoto.remoteUrl,
-          { onProgress, abortCtrl: fetchToBlobAbortCtrl }
-        )
-        abortCtrl.signal.throwIfAborted()
-        
-        progress.stage++
-        progress.progress = 0
-        const dataUrl = await blobToDataUrl(blob,
-          { onProgress, abortCtrl: blobToDataUrlAbortCtrl }
-        )
-        abortCtrl.signal.throwIfAborted()
-        
-        //console.log('download completed')
-        updateDownload({ isReady: true, download: undefined, dataUrl })
-      }
-      catch (ex) {
-        if (abortCtrl.signal.aborted) {
-          //console.log('download aborted:', abortCtrl.signal.reason)
-          return
-        }
-        if (ApiUtils.isConnectionError(ex)) {
-          updateDownload({ download: undefined, needRetryDownload: true })
-          return
-        }
-        
-        //console.log('download error', ex)
-        //console.log('download error photo', photo)
-        updateDownload({ download: undefined, downloadError: ex })
-      }
-    })()
-    
-    return () => downloadStart.download.abort('download is stale')
-  }, [downloadNumber])
-  
-  
-  const retry = () => {
-    mainPhoto.download?.abort()
-    setMainPhoto({
-      ...mainPhoto,
-      needRetryDownload: false,
-      needDownload: true,
-      download: undefined,
-      downloadError: undefined,
-    })
-  }
-  
-  useAutoRetry(mainPhoto.needRetryDownload, { }, retry)
   
   
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
@@ -242,23 +132,25 @@ const SummaryPage = React.memo(() => {
               <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
                 <AvaBox>
                   {(() => {
-                    if (mainPhoto.downloadError)
+                    if (mainPhoto?.downloadError) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <DocumentErrorIc css={SvgIconS6.t(avaPlaceholderIcS)} />
                         </div>
                       )
-                    if (!mainPhoto.download?.showProgress
-                      && mainPhoto.type === 'remote'
+                    }
+                    if (!mainPhoto?.download?.showProgress
+                      && mainPhoto?.type === 'remote'
                       && !mainPhoto.isReady
                       && !mainPhoto.isEmpty
-                    )
+                    ) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <SparkingLoadingLine />
                         </div>
                       )
-                    if (mainPhoto.download?.showProgress && mainPhoto.download)
+                    }
+                    if (mainPhoto?.download?.showProgress && mainPhoto.download) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <PieProgress css={imSmallPieProgressS}
@@ -268,12 +160,17 @@ const SummaryPage = React.memo(() => {
                           />
                         </div>
                       )
-                    if (mainPhoto.isEmpty) return (
-                      <div css={imPlaceholderBoxS}>
-                        <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
-                      </div>
-                    )
-                    if (mainPhoto.isReady) return <AvaIm src={mainPhoto.dataUrl} />
+                    }
+                    if (mainPhoto?.isEmpty) {
+                      return (
+                        <div css={imPlaceholderBoxS}>
+                          <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
+                        </div>
+                      )
+                    }
+                    if (mainPhoto?.isReady) {
+                      return <AvaIm src={mainPhoto.dataUrl} />
+                    }
                   })()}
                 </AvaBox>
               </Link>

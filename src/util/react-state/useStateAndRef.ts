@@ -7,15 +7,15 @@ import ValueOrProducer = TypeU.ValueOrProducer
 
 
 export const useStateAndRef = <S>(initialState: ValueOrProducer<S>) => {
-  const [state, setState] = useState(initialState)
+  const [stateValue, setStateValue] = useState(initialState)
   // useState handles initial value for ref to be set
-  const [getRefValue, setRefValue, ref] = useRefGetSet(state)
+  const [getRefValue, setRefValue, ref] = useRefGetSet(stateValue)
   
   // Only Setter, if you need Updater, then use Setter + getRefValue()
   const set: Setter<S> = useCallback(value => {
     setRefValue(value)
-    setState(value)
+    setStateValue(value)
   }, [])
   
-  return [state, getRefValue, set, ref] as const
+  return [getRefValue, set, stateValue, ref] as const
 }

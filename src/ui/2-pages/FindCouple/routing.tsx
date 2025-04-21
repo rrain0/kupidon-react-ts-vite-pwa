@@ -13,7 +13,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/Media.ts'
+import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { FindCouplePageItem } from 'src/ui/2-pages/FindCouple/FindCouplePage.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
@@ -196,16 +196,16 @@ const FindCouplePageWithItems = React.memo(() => {
         ;(async () => {
           try {
             const progress = new StageProgress(2, [90, 10])
-            const onProgress = (p: number | null) => {
-              progress.progress = p ?? 0
+            const onProgress = (p = 0) => {
+              progress.progress = p
               //console.log('progress', photo.id, progress.value)
               updatePhotoThrottled(undefined, { progress: progress.value })
             }
             
             //console.log('start download id',photo.id)
-            const blob = await fetchToBlob(photo.remoteUrl,
-              { onProgress, abortCtrl: fetchToBlobAbortCtrl }
-            )
+            const blob = await fetchToBlob(photo.remoteUrl, {
+              onProgress, abortCtrl: fetchToBlobAbortCtrl,
+            })
             abortCtrl.signal.throwIfAborted()
             
             progress.stage++
