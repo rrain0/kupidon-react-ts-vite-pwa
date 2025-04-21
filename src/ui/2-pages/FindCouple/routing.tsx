@@ -39,37 +39,37 @@ const photos = [
     type: 'local', isEmpty: false, id: '0',
     remoteUrl: '', name: '0', mimeType: 'image/png',
     dataUrl: MockData.images.sixImages[0],
-    isReady: true, remoteI: 0,
+    isInited: true, isReady: true, remoteI: 0,
   },
   {
     type: 'local', isEmpty: false, id: '1',
     remoteUrl: '', name: '1', mimeType: 'image/png',
     dataUrl: MockData.images.sixImages[1],
-    isReady: true, remoteI: 1,
+    isInited: true, isReady: true, remoteI: 1,
   },
   {
     type: 'local', isEmpty: false, id: '2',
     remoteUrl: '', name: '2', mimeType: 'image/png',
     dataUrl: MockData.images.sixImages[2],
-    isReady: true, remoteI: 2,
+    isInited: true, isReady: true, remoteI: 2,
   },
   {
     type: 'local', isEmpty: false, id: '3',
     remoteUrl: '', name: '3', mimeType: 'image/png',
     dataUrl: MockData.images.sixImages[3],
-    isReady: true, remoteI: 3,
+    isInited: true, isReady: true, remoteI: 3,
   },
   {
     type: 'local', isEmpty: false, id: '4',
     remoteUrl: '', name: '4', mimeType: 'image/png',
     dataUrl: MockData.images.sixImages[4],
-    isReady: true, remoteI: 4,
+    isInited: true, isReady: true, remoteI: 4,
   },
   {
     type: 'local', isEmpty: false, id: '5',
     remoteUrl: '', name: '5', mimeType: 'image/png',
     dataUrl: MockData.images.sixImages[5],
-    isReady: true, remoteI: 5,
+    isInited: true, isReady: true, remoteI: 5,
   },
 ] as ProfilePhoto[]
 const data = [
@@ -102,7 +102,8 @@ const FindCouplePageWithItems = React.memo(() => {
   
   wait(500, () => setItems(data))
   
-  /* const {
+  /*
+  const {
     request,
     isLoading, isSuccess, isError,
     response, resetResponse,
@@ -131,8 +132,8 @@ const FindCouplePageWithItems = React.memo(() => {
         }
       }))
     }
-  }, [isSuccess]) */
-  
+  }, [isSuccess])
+   */
   
   
   // todo it retries endlessly if can't obtain photos
@@ -152,6 +153,7 @@ const FindCouplePageWithItems = React.memo(() => {
           blobToDataUrlAbortCtrl.abort(this.reason)
         }
         const downloadStart = {
+          isInited: true,
           isReady: false,
           download: { ...newDefaultMediaOperation(),
             id: photo.id,

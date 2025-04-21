@@ -89,6 +89,7 @@ const SummaryPage = React.memo(() => {
   const remoteMainPhoto = useMemo(() => {
     return photos.find(it => it.index === 0)
   }, [photos])
+  // TODO make generic photo update. Need save current dataUrl or download if photo the same
   useEffect(() => {
     const m = getMainPhoto()
     if (!photos) setMainPhoto(undefined)
@@ -225,6 +226,7 @@ const AvaBox = styled.div`
   width: 82px;
   height: 82px;
   border-radius: 999999px;
+  background-color: ${p => p.theme.photos.bg};
   overflow: hidden;
   position: relative;
   ${flexC};

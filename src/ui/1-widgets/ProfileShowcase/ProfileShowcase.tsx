@@ -10,7 +10,6 @@ import { createTrackPropsGetter } from '@util/animated/carousel/createTrackProps
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react-state/useBool.ts'
-import { ReactU } from '@util/react/ReactU.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { ViewU } from '@util/view/ViewU.ts'
@@ -27,7 +26,6 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import {
   ImageParts,
 } from 'src/ui/0-elements/ImageParts.tsx'
-import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInfo.tsx'
@@ -49,13 +47,8 @@ import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
 import Callback = TypeU.Callback
-import noRepeatLog = ReactU.noRepeatLog
-import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 
 
-
-
-// TODO Состояния фото: загрузка / обработка... взять из profile summary
 
 
 
@@ -86,7 +79,7 @@ export type ProfileShowcaseCssProps = {
   '--pv': '<length>' // padding vertical
 }
 export type ProfileShowcaseProps = {
-  photos: ProfilePhoto[]
+  photos?: ProfilePhoto[] | undefined
   name: string
   birthDate: string
   gender: GenderOptionValues
@@ -126,14 +119,19 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   }), [])
   const uiText = useUiValues(uiValues)
   
-  const availablePhotos = useMemo(() => {
-    return photos.filter(it => !it.isEmpty)
+  const [isInited, availablePhotos] = useMemo(() => {
+    // Нужно чтобы были получены метаданные всех фоток, иначе не понятно, сколько их, какие пустые
+    const isInited = photos?.every(p => p.isInited)
+    const availablePhotos = !isInited ? [] : photos?.filter(it => it.isInited && !it.isEmpty) ?? []
+    return [isInited, availablePhotos]
   }, [photos])
   const photosCnt = availablePhotos.length
   const isPhotosDraggable = photosCnt >= 2
   
   const [viewsCnt, startViewI] = (() => {
-    // display placeholder
+    // display loading placeholder
+    if (!isInited) return [1, 0]
+    // display no photos placeholder
     if (photosCnt === 0) return [1, 0]
     // display 1 not draggable photo
     if (photosCnt === 1) return [1, 0]
@@ -141,12 +139,11 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     return [Math.min(photosCnt, displayedPhotosCnt) + 2, -1]
   })()
   
-  // TODO изначально фотки не получены, поэтому изображение грузится
   const placeholderIm = useMemo(() => {
-    if (photosCnt) return undefined
+    if (photosCnt || !isInited) return undefined
     //return Images.forBlur[0]
     return ArrayU.randomElem(Images.forBlur)
-  }, [photosCnt])
+  }, [photosCnt, isInited])
   
   
   
@@ -338,29 +335,34 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                   boxShadow: animatedPhoto.map(ap => ap(viewI).boxShadow),
                 }}
               >
-                {!!photosCnt && (
-                  <AnimatedState
-                    animatedState={{
-                      photo: animatedPhoto.map(ap => ap(viewI).photo),
-                    }}
-                  >
-                    {({ photo }) => {
-                      const { isReady, ...loadingUi } = getMediaEmtiableDownloadUiState(photo)
-                      if (isReady) return <Photo src={photo?.dataUrl ?? ''} />
-                      return <MediaUiState {...loadingUi} />
-                    }}
-                  </AnimatedState>
-                )}
-                {!photosCnt && (
-                  <>
-                    <Photo src={placeholderIm} />
-                    <Blur />
-                    <NoImagesBox>
-                      <PictureIc css={SvgIconS6.t(pictureIcS)} />
-                      <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
-                    </NoImagesBox>
-                  </>
-                )}
+                {(() => {
+                  if (!isInited) return (
+                    <SparkingLoadingLine />
+                  )
+                  if (!photosCnt) return (
+                    <>
+                      <Photo src={placeholderIm} />
+                      <Blur />
+                      <NoImagesBox>
+                        <PictureIc css={SvgIconS6.t(pictureIcS)} />
+                        <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
+                      </NoImagesBox>
+                    </>
+                  )
+                  return (
+                    <AnimatedState
+                      animatedState={{
+                        photo: animatedPhoto.map(ap => ap(viewI).photo),
+                      }}
+                    >
+                      {({ photo }) => {
+                        const { isReady, ...loadingUi } = getMediaEmtiableDownloadUiState(photo)
+                        if (isReady) return <Photo src={photo?.dataUrl ?? ''} />
+                        return <MediaUiState {...loadingUi} />
+                      }}
+                    </AnimatedState>
+                  )
+                })()}
                 <PhotoFade />
               </AnimatedPhotoBox>
             )
@@ -443,8 +445,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   border-radius: var(--photo-r);
   ${gridStackC};
   overflow: hidden;
-  // TODO add some bg gradient while image not loaded already
-  //background-color: indianred;
+  background-color: ${p => p.theme.photos.bg};
   
   user-select: none;
   pointer-events: auto;
@@ -456,7 +457,6 @@ const Photo = styled.img`
   ${fill};
   object-position: center;
   object-fit: cover;
-  background-color: ${p => p.theme.photos.bg};
   
   pointer-events: none; // or attr draggable="false"
 `

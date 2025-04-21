@@ -43,7 +43,7 @@ export const getIndexesProps = ({
   const clampViewP = (v: number) => rf3(RangeU.clamp(v, [viewFirstP, viewLastP]))
   
   const itemFirstI = startItemI
-  const itemEndI = itemsCnt
+  const itemEndI = itemsCnt <= 0 ? 1 : itemsCnt
   const itemLastI = itemEndI - 1
   const itemFirstP = itemFirstI * 100
   const itemEndP = itemEndI * 100
