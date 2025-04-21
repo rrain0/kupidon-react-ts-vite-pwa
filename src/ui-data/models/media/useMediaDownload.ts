@@ -3,6 +3,7 @@ import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { FileU } from '@util/file/FileU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
+import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useEffect } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { MediaDownloadable, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
@@ -112,9 +113,18 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   
   
   useEffect(() => {
+    const m = getMedia()
+    if (m?.download) setMedia({ ...m,
+      download: { ...m.download,
+        showProgress: canShowFetchProgress,
+      },
+    })
+  }, [canShowFetchProgress])
+  
+  
+  useEffect(() => {
     return () => getMedia()?.download?.abort('Download is stale')
   }, [])
-  
 }
 
 

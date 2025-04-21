@@ -6,7 +6,11 @@ import { Link } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { MediaDownloadable, newDefaultRemoteMedia } from 'src/ui-data/models/media/Media.ts'
+import {
+  getMediaEmtiableDownloadUiState,
+  MediaDownloadable, newDefaultEmptyRemoteMedia,
+  newDefaultRemoteMedia,
+} from 'src/ui-data/models/media/Media.ts'
 import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
 import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
@@ -66,57 +70,53 @@ const SummaryPage = React.memo(() => {
   const { id, name, birthDate, photos } = useAuthZustand(s => s.user!)
   
   const profile = MockData.profile2
-  const progress = 45
+  const profileFillProgress = 45
   const completeProfileDescriptionText = 'Завершите описание профиля'
   const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
   
-  const [profileProgress, setProfileProgress] = useState(5)
+  const [uiProfileFillProgress, setUiProfileFillProgress] = useState(5)
+  useEffect(() => setUiProfileFillProgress(profileFillProgress), [profileFillProgress])
   
-  useEffect(() => setProfileProgress(progress), [])
-  
-  const remoteMainPhoto = useMemo(() => {
-    return photos.find(it => it.index === 0)
-  }, [photos])
-  
-  const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
-  useTimeout(3000, () => setCanShowFetchProgress(true), [])
-  
-  const convertRemotePhoto = () => {
-    if (!remoteMainPhoto) return {
-      ...newDefaultRemoteMedia(),
-      isEmpty: true,
-      needDownload: false,
-    }
-    return {
-      ...newDefaultRemoteMedia(),
-      needDownload: true,
-      id: remoteMainPhoto.id,
-      name: remoteMainPhoto.name,
-      mimeType: remoteMainPhoto.mimeType,
-      remoteUrl: remoteMainPhoto.url,
-    }
-  }
   
   const [
     getMainPhoto, setMainPhoto, mainPhoto,
   ] = useStateAndRef<MediaDownloadable | undefined>(undefined)
   
+  const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
+  useTimeout(3000, () => setCanShowFetchProgress(true), [])
+  
   useMediaDownload(getMainPhoto, setMainPhoto, { canShowFetchProgress })
   useMediaDownloadAutoRetry(getMainPhoto, setMainPhoto)
   
-  useEffect(() => setMainPhoto(convertRemotePhoto()), [remoteMainPhoto])
+  const remoteMainPhoto = useMemo(() => {
+    return photos.find(it => it.index === 0)
+  }, [photos])
   useEffect(() => {
-    if (mainPhoto?.download) setMainPhoto({
-      ...mainPhoto, download: { ...mainPhoto.download,
-        showProgress: canShowFetchProgress,
-      },
+    const m = getMainPhoto()
+    if (!photos) setMainPhoto(undefined)
+    else if (!remoteMainPhoto) setMainPhoto(newDefaultEmptyRemoteMedia())
+    else setMainPhoto({
+      ...newDefaultRemoteMedia(),
+      id: remoteMainPhoto.id,
+      name: remoteMainPhoto.name,
+      mimeType: remoteMainPhoto.mimeType,
+      remoteUrl: remoteMainPhoto.url,
+      isInited: true,
+      needDownload: true,
+      download: m?.download,
     })
-  }, [canShowFetchProgress])
+  }, [remoteMainPhoto])
   
   
   
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
   
+  const {
+    isLoadingNoProgress, isLoadingWithProgress, progress, isEmpty, isReady, isError,
+  } = getMediaEmtiableDownloadUiState(mainPhoto)
+  
+  //console.log(mainPhoto)
+  //console.log({ isLoadingNoProgress, isLoadingWithProgress, isReady, isError, isEmpty })
   
   //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
   
@@ -132,44 +132,40 @@ const SummaryPage = React.memo(() => {
               <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
                 <AvaBox>
                   {(() => {
-                    if (mainPhoto?.downloadError) {
+                    if (isError) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <DocumentErrorIc css={SvgIconS6.t(avaPlaceholderIcS)} />
                         </div>
                       )
                     }
-                    if (!mainPhoto?.download?.showProgress
-                      && mainPhoto?.type === 'remote'
-                      && !mainPhoto.isReady
-                      && !mainPhoto.isEmpty
-                    ) {
+                    if (isLoadingNoProgress) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <SparkingLoadingLine />
                         </div>
                       )
                     }
-                    if (mainPhoto?.download?.showProgress && mainPhoto.download) {
+                    if (isLoadingWithProgress) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <PieProgress css={imSmallPieProgressS}
                             progress={
-                              RangeU.map(mainPhoto.download.progress, [0, 100], [5, 95])
+                              RangeU.map(progress, [0, 100], [5, 95])
                             }
                           />
                         </div>
                       )
                     }
-                    if (mainPhoto?.isEmpty) {
+                    if (isEmpty) {
                       return (
                         <div css={imPlaceholderBoxS}>
                           <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
                         </div>
                       )
                     }
-                    if (mainPhoto?.isReady) {
-                      return <AvaIm src={mainPhoto.dataUrl} />
+                    if (isReady) {
+                      return <AvaIm src={mainPhoto!.dataUrl} />
                     }
                   })()}
                 </AvaBox>
@@ -205,7 +201,7 @@ const SummaryPage = React.memo(() => {
               
               <ProgressBox>
                 <LineProgressFrame>
-                  <LineProgress style={{ width: `${profileProgress}%` }} />
+                  <LineProgress style={{ width: `${uiProfileFillProgress}%` }} />
                 </LineProgressFrame>
                 <LinePercent>{progress}%</LinePercent>
               </ProgressBox>

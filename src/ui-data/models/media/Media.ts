@@ -34,6 +34,12 @@ export const newDefaultRemoteMedia = (): Media => ({
   id: '', remoteUrl: '', name: '', mimeType: '',
   dataUrl: '',
 })
+export const newDefaultEmptyRemoteMedia = (): Media => ({
+  type: 'remote', isEmpty: true,
+  id: '', remoteUrl: '', name: '', mimeType: '',
+  dataUrl: '',
+  isInited: true,
+})
 export const newDefaultLocalMedia = (): Media => ({
   ...newDefaultRemoteMedia(),
   type: 'local',
@@ -116,11 +122,28 @@ export type Downloadable = Pu<{
 export interface MediaDownloadable extends Media, Downloadable { }
 
 export const getMediaDownloadUiState = (media?: MediaDownloadable) => {
-  const { isInited, isEmpty, isReady, downloadError, needRetryDownload } = media ?? { }
+  const { isInited, isEmpty, isReady, downloadError, needRetryDownload, download } = media ?? { }
+  const isLoading = !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
   return {
-    isLoading: !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError)),
+    isLoading,
+    isLoadingNoProgress: isLoading && !download?.showProgress,
+    isLoadingWithProgress: isLoading && download?.showProgress,
+    progress: download?.progress,
     isReady,
     isError: isInited && (isEmpty || (downloadError && !needRetryDownload)),
+  }
+}
+export const getMediaEmtiableDownloadUiState = (media?: MediaDownloadable) => {
+  const { isInited, isEmpty, isReady, downloadError, needRetryDownload, download } = media ?? { }
+  const isLoading = !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
+  return {
+    isLoading,
+    isLoadingNoProgress: isLoading && !download?.showProgress,
+    isLoadingWithProgress: isLoading && download?.showProgress,
+    progress: download?.progress ?? 0,
+    isEmpty: isInited && isEmpty,
+    isReady,
+    isError: isInited && (downloadError && !needRetryDownload),
   }
 }
 
