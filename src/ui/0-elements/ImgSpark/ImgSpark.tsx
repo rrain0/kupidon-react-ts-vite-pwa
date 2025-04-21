@@ -33,9 +33,9 @@ const ImgSpark = React.memo(
     (props, forwardedRef) => {
       const {
         className, style,
+        src,
         ...restProps
       } = props
-      const { src } = props
       
       
       const elemRef = useRef<ImgSparkRefElement>(null)
@@ -50,16 +50,15 @@ const ImgSpark = React.memo(
       useMediaDownloadAutoRetry(getMedia, setMedia)
       
       useEffect(() => {
-        console.log('effect media:', media)
-        //media?.download?.abort()
+        //console.log('new media:', urlToMedia(src))
         setMedia(urlToMedia(src))
       }, [src])
       
       
-      const { isLoading, isLoaded, isError } = getMediaDownloadUiState(media)
+      const { isLoading, isReady, isError } = getMediaDownloadUiState(media)
       
-      console.log(media)
-      console.log({ isLoading, isLoaded, isError })
+      //console.log(media)
+      //console.log({ isLoading, isReady, isError })
       
       return (
         <div // Frame
@@ -73,14 +72,14 @@ const ImgSpark = React.memo(
             src={media?.dataUrl}
             {...combineProps({
               onLoad: (ev: SyntheticEvent<HTMLImageElement>) => {
-              
+                // Event, when image fully loaded and queued for rendering, but not rendered yet
               },
               onError: (ev: SyntheticEvent<HTMLImageElement>) => {
                 // You can refresh src to retry if error:
                 // ev.currentTarget.src = ev.currentTarget.src
               },
               style: {
-                display: isLoaded ? 'block' : 'none',
+                display: isReady ? 'block' : 'none',
               },
               className: ImgSparkS6.W.els.img.n,
             }, restProps)}

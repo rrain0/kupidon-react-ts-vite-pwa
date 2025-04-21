@@ -119,7 +119,7 @@ export const getMediaDownloadUiState = (media?: MediaDownloadable) => {
   const { isInited, isEmpty, isReady, downloadError, needRetryDownload } = media ?? { }
   return {
     isLoading: !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError)),
-    isLoaded: isReady,
+    isReady,
     isError: isInited && (isEmpty || (downloadError && !needRetryDownload)),
   }
 }

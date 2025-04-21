@@ -57,7 +57,7 @@ const ImageTestPage = React.memo(() => {
           
           
           
-          {/* <div css={css`${rowWrap}; gap: 6px;`}>
+          <div css={css`${rowWrap}; gap: 6px;`}>
             <div css={css`${col}; gap: 6px;`}>
               <div>{'<ImgSpark />'} delayed</div>
               <ImgSpark
@@ -73,7 +73,7 @@ const ImageTestPage = React.memo(() => {
                 src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : ''}
               />
             </div>
-          </div> */}
+          </div>
           
           
           
@@ -81,7 +81,7 @@ const ImageTestPage = React.memo(() => {
           
           
           
-          {/* <div css={css`${rowWrap}; gap: 6px;`}>
+          <div css={css`${rowWrap}; gap: 6px;`}>
             <div css={css`${col}; gap: 6px;`}>
               <div>{'<ImgSpark />'} delayed 404 error</div>
               <ImgSpark
@@ -97,7 +97,7 @@ const ImageTestPage = React.memo(() => {
                 src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : ''}
               />
             </div>
-          </div> */}
+          </div>
           
           
           
@@ -105,7 +105,7 @@ const ImageTestPage = React.memo(() => {
           
           
           
-          {/* <div css={css`${rowWrap}; gap: 6px;`}>
+          <div css={css`${rowWrap}; gap: 6px;`}>
             <div css={css`${col}; gap: 6px;`}>
               <div>{'<ImgSpark />'} delayed 500 error</div>
               <ImgSpark
@@ -121,7 +121,7 @@ const ImageTestPage = React.memo(() => {
                 src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : ''}
               />
             </div>
-          </div> */}
+          </div>
         
           
           

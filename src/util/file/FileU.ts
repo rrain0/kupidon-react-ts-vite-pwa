@@ -25,20 +25,21 @@ export namespace FileU {
   
   export const fetchToBlob = async (
     url: string,
-    options?: {
-      onProgress?: Callback1<number | undefined>
-      abortCtrl?: AbortController
-    }
+    {
+      onProgress = undefined as Callback1<number | undefined> | undefined,
+      abortCtrl = undefined as AbortController | undefined,
+    } = { },
   ): Promise<Blob> => {
     const config: CreateAxiosDefaults = { ...commonAxiosConfig,
       responseType: 'blob',
       onDownloadProgress: progressEvent => {
         const p = progressEvent.progress
-        options?.onProgress?.( exists(p) ? p * 100 : p )
+        onProgress?.( exists(p) ? p * 100 : p )
       },
     }
-    const ctrl = options?.abortCtrl
-    if (ctrl) config.signal = ctrl.signal
+    
+    // Вроде аксиос должен сам проверить, отменено ли оно уже
+    if (abortCtrl) config.signal = abortCtrl.signal
     
     const ax = Axios.create(config)
     axiosRetry(ax, AxiosConfig.commonAxiosRetryConfig)
@@ -51,29 +52,28 @@ export namespace FileU {
   
   export const blobToDataUrl = async (
     file: Blob,
-    options?: {
-      onProgress?: Callback1<number | undefined>
-      abortCtrl?: AbortController
-    }
+    {
+      onProgress = undefined as Callback1<number | undefined> | undefined,
+      abortCtrl = undefined as AbortController | undefined,
+    } = { },
   ): Promise<string> => new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.onprogress = ev => {
-      options?.onProgress?.(ev.lengthComputable ? ev.loaded / ev.total : undefined)
+      onProgress?.(ev.lengthComputable ? ev.loaded / ev.total : undefined)
     }
     reader.onload = ev => resolve(ev.target?.result as string)
     reader.onerror = ev => reject(ev)
     reader.onabort = ev => reject(ev)
     
-    const ctrl = options?.abortCtrl
-    if (ctrl) {
-      if (ctrl.signal.aborted) {
-        reject(ctrl.signal.reason)
+    if (abortCtrl) {
+      // Перед началом проверяем, не отменено ли оно уже
+      if (abortCtrl.signal.aborted) {
+        reject(abortCtrl.signal.reason)
         return
       }
-      ctrl.signal.onabort = () => reader.abort
+      abortCtrl.signal.onabort = ev => reader.abort()
     }
     
-    //reader.readAsArrayBuffer(file)
     reader.readAsDataURL(file)
   })
   
