@@ -14,9 +14,7 @@ export type MyComponentProps = Pu<{
 
 export const MyComponent = React.memo((props: MyComponentProps) => {
   const {
-    className,
-    style,
-    children,
+    className, style, children,
     prop = 0,
   } = props
   

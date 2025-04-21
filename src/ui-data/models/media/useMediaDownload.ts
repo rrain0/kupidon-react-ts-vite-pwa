@@ -3,7 +3,6 @@ import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { FileU } from '@util/file/FileU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useEffect } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { MediaDownloadable, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
@@ -42,31 +41,29 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
       downloadError: undefined,
     } satisfies Partial<MediaDownloadable>
     
-    // Если уже ес ть такая же загрузка, то пусть продолжается
+    // Если уже есть такая же загрузка, то пусть продолжается
     if (m.download?.id === downloadStart.download.id) return
     
     // Отменяем предыдущую загрузку и устанавливаем новую
     m.download?.abort('Download is stale')
     setMedia({ ...m, ...downloadStart })
     
-    const updateDownload = (
+    const updateMedia = (
       updateForMedia?: Partial<MediaDownloadable>,
       updateForDownload?: Partial<MediaDownloadable['download']>
     ) => {
-      setMedia((() => {
-        const m = getMedia()
-        if (!m) return m
-        if (m.download?.id !== downloadStart.download.id) return m
-        return { ...m,
+      const m = getMedia()
+      if (m && m.download?.id === downloadStart.download.id) {
+        setMedia({ ...m,
           ...updateForMedia,
           ...updateForDownload && m.download && {
             download: { ...m.download, ...updateForDownload },
           },
-        }
-      })())
+        })
+      }
     }
     const updateDownloadThrottled = withThrottle(
-      RangeU.random(1500, 2300), updateDownload
+      RangeU.random(1500, 2300), updateMedia,
     )
     
     ;(async () => {
@@ -92,7 +89,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         abortCtrl.signal.throwIfAborted()
         
         //console.log('download completed')
-        updateDownload({ isReady: true, download: undefined, dataUrl })
+        updateMedia({ isReady: true, download: undefined, dataUrl })
       }
       catch (ex) {
         if (abortCtrl.signal.aborted) {
@@ -100,13 +97,13 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           return
         }
         if (ApiUtils.isConnectionError(ex)) {
-          updateDownload({ download: undefined, downloadError: ex, needRetryDownload: true })
+          updateMedia({ download: undefined, downloadError: ex, needRetryDownload: true })
           return
         }
         
         //console.log('download error', ex)
         //console.log('download error photo', photo)
-        updateDownload({ download: undefined, downloadError: ex })
+        updateMedia({ download: undefined, downloadError: ex })
       }
     })()
   }, [getMedia()])

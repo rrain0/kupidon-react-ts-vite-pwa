@@ -3,9 +3,11 @@ import { AsyncU } from '@util/common/AsyncU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { FileU } from '@util/file/FileU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
+import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useAsyncEffect } from '@util/react/useAsyncEffect.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
+import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { AuthApi } from 'src/api/requests/AuthApi.ts'
 import { ProfileShowcaseApi } from 'src/api/requests/ProfileShowcaseApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
@@ -13,7 +15,11 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
 import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
+import {
+  MediaDownloadable,
+  MediaOperation,
+  newDefaultMediaOperation,
+} from 'src/ui-data/models/media/Media.ts'
 import { FindCouplePageItem } from 'src/ui/2-pages/FindCouple/FindCouplePage.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
@@ -100,9 +106,8 @@ const FindCouplePageWithItems = React.memo(() => {
   const [items, setItems] = useState(undefined as FindCouplePageItem[] | undefined)
   
   
-  wait(500, () => setItems(data))
+  //wait(500, () => setItems(data))
   
-  /*
   const {
     request,
     isLoading, isSuccess, isError,
@@ -133,9 +138,8 @@ const FindCouplePageWithItems = React.memo(() => {
       }))
     }
   }, [isSuccess])
-   */
   
-  
+  /*
   // todo it retries endlessly if can't obtain photos
   useAsyncEffect((lock, unlock) => {
     //return;
@@ -238,6 +242,7 @@ const FindCouplePageWithItems = React.memo(() => {
       }
     })
   }, [items])
+   */
   
   
   

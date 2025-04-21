@@ -20,15 +20,9 @@ import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import {
-  ImageParts,
-} from 'src/ui/0-elements/ImageParts.tsx'
-import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
-import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import {
   QuickSettingsOverlayName
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
@@ -39,7 +33,6 @@ import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { RangeU } from 'src/util/common/RangeU'
 import { DateU } from 'src/util/date/DateU'
 import { MockData } from 'src/_mock-data/MockData'
 import { AppTheme } from 'src/ui-data/theme/AppTheme'
@@ -51,9 +44,7 @@ import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
-import PictureIc = SvgIconsPack.PictureIc
 import row = EmotionCommon.row
-import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 
 

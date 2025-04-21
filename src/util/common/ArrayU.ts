@@ -11,6 +11,7 @@ import MergerIndexed = TypeU.MergerIndexed
 import CombinerIndexed = TypeU.CombinerIndexed
 import Exists = TypeU.Exists
 import isArray = TypeU.isArray
+import Sign = TypeU.Sign
 
 
 
@@ -18,7 +19,6 @@ import isArray = TypeU.isArray
 export namespace ArrayU {
   
   
-  import Sign = TypeU.Sign
   export const arrOfUndef = (len = 0): undefined[] => {
     return Array(len).fill(undefined)
   }
@@ -256,6 +256,22 @@ export namespace ArrayU {
   export const clear = <T>(arr: T[]): T[] => {
     arr.length = 0
     return arr
+  }
+  
+  export const mapToIf = <T, E = T>(arr: T[], mapper: (el: T, i: number, arr: T[]) => E): E[] => {
+    let changed = false
+    let newArr = arr as unknown as E[]
+    arr.forEach((el, i) => {
+      const newEl = mapper(el, i, arr)
+      if (newEl !== el as unknown as E) {
+        if (!changed) {
+          newArr = [...arr] as unknown as E[]
+          changed = true
+        }
+        newArr[i] = newEl
+      }
+    })
+    return newArr
   }
   
   

@@ -13,6 +13,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
+import MediaArrayDownloader from 'src/ui-data/models/media/MediaArrayDownloader.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase, {
   ProfileShowcaseAction,
@@ -265,18 +266,23 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
               >
                 {({ first, itemI }) => {
                   const item = items[itemI]
+                  const photos = item.photos
                   return (
-                    <ProfileShowcase
-                      photos={item.photos}
-                      name={item.name}
-                      birthDate={item.birthDate}
-                      gender={item.gender}
-                      aboutMe={item.aboutMe}
-                      hideButtons={isMoving}
-                      action={first ? stackAction : undefined}
-                      animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
-                      {...first && { onAccept, onReject, onBack }}
-                    />
+                    <MediaArrayDownloader medias={photos}>
+                      {(photos) => (
+                        <ProfileShowcase
+                          photos={photos}
+                          name={item.name}
+                          birthDate={item.birthDate}
+                          gender={item.gender}
+                          aboutMe={item.aboutMe}
+                          hideButtons={isMoving}
+                          action={first ? stackAction : undefined}
+                          animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
+                          {...first && { onAccept, onReject, onBack }}
+                        />
+                      )}
+                    </MediaArrayDownloader>
                   )
                 }}
               </AnimatedState>
