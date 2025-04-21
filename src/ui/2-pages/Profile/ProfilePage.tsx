@@ -149,7 +149,7 @@ const ProfilePage = React.memo(() => {
         newValues.initialValues.photos = currentUserPhotosToProfilePhotos(u.photos)
         newValues.photos = [...s.photos]
         
-        // we needn't take compression, because it is local
+        // we needn't take conversion, because it is local
         // we needn't take upload, because it is local
         
         // get all downloads & downloaded data from same existing photos
@@ -173,7 +173,7 @@ const ProfilePage = React.memo(() => {
               ...newValues.initialValues.photos[photo.remoteI],
               isInited: true,
               isReady: photo.isReady,
-              compression: photo.compression,
+              conversion: photo.conversion,
             } satisfies ProfilePhoto
           }
           return photo
@@ -189,7 +189,7 @@ const ProfilePage = React.memo(() => {
           .forEach(diff => {
             if (diff.isRemoved) {
               diff.fromElem.download?.abort()
-              diff.fromElem.compression?.abort()
+              diff.fromElem.conversion?.abort()
             }
           })
         ArrayU.diff2(
@@ -201,7 +201,7 @@ const ProfilePage = React.memo(() => {
           .forEach(diff => {
             if (diff.isRemoved) {
               diff.fromElem.download?.abort()
-              diff.fromElem.compression?.abort()
+              diff.fromElem.conversion?.abort()
             }
           })
         
@@ -241,7 +241,7 @@ const ProfilePage = React.memo(() => {
     const photos = formValues.photos
     ;[...serverPhotos, ...photos].forEach(photo => {
       if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
-        && !photo.download && !photo.compression
+        && !photo.download && !photo.conversion
         && lock(photo.remoteUrl)
       ) {
         const fetchToBlobAbortCtrl = new AbortController()

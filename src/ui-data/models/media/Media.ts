@@ -16,6 +16,7 @@ export interface Media {
   
   // Media can be empty - media slot has no data.
   isEmpty?: boolean | undefined
+  
   id: string
   remoteUrl: string
   name: string
@@ -29,21 +30,26 @@ export interface Media {
   isReady?: boolean | undefined
 }
 
+
+
 export const newDefaultRemoteMedia = (): Media => ({
-  type: 'remote',
+  type: 'remote', isEmpty: false,
   id: '', remoteUrl: '', name: '', mimeType: '',
   dataUrl: '',
+  isReady: false,
 })
 export const newDefaultEmptyRemoteMedia = (): Media => ({
   type: 'remote', isEmpty: true,
   id: '', remoteUrl: '', name: '', mimeType: '',
   dataUrl: '',
-  isInited: true,
+  isInited: true, isReady: false,
 })
 export const newDefaultLocalMedia = (): Media => ({
   ...newDefaultRemoteMedia(),
   type: 'local',
 })
+
+
 
 export const urlToMedia = (url = '', { needDownload = true } = { }): MediaDownloadable => {
   if (!url) return {
@@ -77,14 +83,14 @@ export interface MediaInArray extends Media {
   remoteI: number
 }
 
-export const newDefaultRemoteMediaInArray = (): MediaInArray => ({
+export const newDefaultRemoteMediaInArray = (remoteI = 0): MediaInArray => ({
   ...newDefaultRemoteMedia(),
-  remoteI: 0,
+  remoteI,
 })
 
-export const newDefaultLocalMediaInArray = (): MediaInArray => ({
+export const newDefaultLocalMediaInArray = (remoteI = 0): MediaInArray => ({
   ...newDefaultLocalMedia(),
-  remoteI: 0,
+  remoteI,
 })
 
 
@@ -123,7 +129,8 @@ export interface MediaDownloadable extends Media, Downloadable { }
 
 export const getMediaDownloadUiState = (media?: MediaDownloadable) => {
   const { isInited, isEmpty, isReady, downloadError, needRetryDownload, download } = media ?? { }
-  const isLoading = !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
+  const isLoading = !isInited || download
+    || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
   return {
     isLoading,
     isLoadingNoProgress: isLoading && !download?.showProgress,
@@ -135,7 +142,8 @@ export const getMediaDownloadUiState = (media?: MediaDownloadable) => {
 }
 export const getMediaEmtiableDownloadUiState = (media?: MediaDownloadable) => {
   const { isInited, isEmpty, isReady, downloadError, needRetryDownload, download } = media ?? { }
-  const isLoading = !isInited || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
+  const isLoading = !isInited || download
+    || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
   return {
     isLoading,
     isLoadingNoProgress: isLoading && !download?.showProgress,
@@ -148,6 +156,7 @@ export const getMediaEmtiableDownloadUiState = (media?: MediaDownloadable) => {
 }
 
 
+
 export type Uploadable = Pu<{
   needUpload: boolean
   showUpload: boolean
@@ -157,11 +166,12 @@ export type Uploadable = Pu<{
 
 
 
-export type Compressible = Pu<{
-  needCompression: boolean
-  showCompression: boolean
-  compression: MediaOperation
-  compressionError: any
+// Convert to another format or compress
+export type Convertible = Pu<{
+  needConversion: boolean
+  showConversion: boolean
+  conversion: MediaOperation
+  conversionError: any
 }>
 
 

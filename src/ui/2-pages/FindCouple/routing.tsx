@@ -141,7 +141,7 @@ const FindCouplePageWithItems = React.memo(() => {
     const photos = items?.flatMap(it => it.photos) ?? []
     ;[...photos].forEach(photo => {
       if (!photo.isEmpty && photo.type === 'remote' && !photo.isReady
-        && !photo.download && !photo.compression
+        && !photo.download && !photo.conversion
         && lock(photo.remoteUrl)
       ) {
         const fetchToBlobAbortCtrl = new AbortController()

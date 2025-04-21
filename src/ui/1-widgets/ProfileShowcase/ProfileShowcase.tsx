@@ -18,11 +18,17 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
+import { getMediaEmtiableDownloadUiState } from 'src/ui-data/models/media/Media.ts'
+import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { imPlaceholderIcS } from 'src/ui/0-elements/imageParts.tsx'
+import {
+  ImageParts,
+} from 'src/ui/0-elements/ImageParts.tsx'
+import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
+import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInfo.tsx'
 import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
@@ -44,6 +50,7 @@ import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
 import Callback = TypeU.Callback
 import noRepeatLog = ReactU.noRepeatLog
+import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 
 
 
@@ -125,13 +132,14 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const photosCnt = availablePhotos.length
   const isPhotosDraggable = photosCnt >= 2
   
-  const viewsCnt = (() => {
-    // return 1
-    if (photosCnt === 0) return 1 // display placeholder
-    if (photosCnt === 1) return 1 // display 1 not draggable photo
-    return Math.min(photosCnt, displayedPhotosCnt) + 2 // display photos + 1 view before & 1 view after
+  const [viewsCnt, startViewI] = (() => {
+    // display placeholder
+    if (photosCnt === 0) return [1, 0]
+    // display 1 not draggable photo
+    if (photosCnt === 1) return [1, 0]
+    // display photos + 1 view before & 1 view after
+    return [Math.min(photosCnt, displayedPhotosCnt) + 2, -1]
   })()
-  const startViewI = -1
   
   // TODO изначально фотки не получены, поэтому изображение грузится
   const placeholderIm = useMemo(() => {
@@ -232,7 +240,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
         return 1
       })()
       
-      const opacity =  Math.min(photoOpacity, restOpacity)
+      const opacity = Math.min(photoOpacity, restOpacity)
       
       const boxShadow = (() => {
         const color = (() => {
@@ -250,11 +258,11 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
         return ''
       })()
       
-      const src = availablePhotos[viewItemI]?.dataUrl ?? ''
+      const photo = availablePhotos[viewItemI]
       //if (viewI === 3) noRepeatLog('viewItemI', viewItemI)
       //if (viewI === 3) noRepeatLog('src', src.slice(0, 200))
       
-      return { ...props, z, y, scale, opacity, boxShadow, src }
+      return { ...props, z, y, scale, opacity, boxShadow, photo }
     }
   ), [animatedPhotoProps, animatedStackProps, availablePhotos])
   
@@ -333,12 +341,14 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                 {!!photosCnt && (
                   <AnimatedState
                     animatedState={{
-                      src: animatedPhoto.map(ap => ap(viewI).src),
+                      photo: animatedPhoto.map(ap => ap(viewI).photo),
                     }}
                   >
-                    {({ src }) => (
-                      <Photo src={src} />
-                    )}
+                    {({ photo }) => {
+                      const { isReady, ...loadingUi } = getMediaEmtiableDownloadUiState(photo)
+                      if (isReady) return <Photo src={photo?.dataUrl ?? ''} />
+                      return <MediaUiState {...loadingUi} />
+                    }}
                   </AnimatedState>
                 )}
                 {!photosCnt && (
@@ -346,7 +356,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                     <Photo src={placeholderIm} />
                     <Blur />
                     <NoImagesBox>
-                      <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
+                      <PictureIc css={SvgIconS6.t(pictureIcS)} />
                       <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
                     </NoImagesBox>
                   </>
@@ -434,7 +444,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   ${gridStackC};
   overflow: hidden;
   // TODO add some bg gradient while image not loaded already
-  background-color: indianred;
+  //background-color: indianred;
   
   user-select: none;
   pointer-events: auto;
@@ -446,6 +456,7 @@ const Photo = styled.img`
   ${fill};
   object-position: center;
   object-fit: cover;
+  background-color: ${p => p.theme.photos.bg};
   
   pointer-events: none; // or attr draggable="false"
 `
@@ -481,7 +492,7 @@ const NoImagesBox = styled.div`
   ;
   color: ${p => p.theme.boxSemitrans.ct};
 `
-const imSmallPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
+const pictureIcS: AppWidgetStyle = t => [ImageParts.placeholderIcS, {
   icon: {
     area: 'p', sz: '112%', color: t.boxSemitrans.ct,
   },

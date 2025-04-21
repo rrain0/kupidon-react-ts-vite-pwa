@@ -11,6 +11,7 @@ import {
   MediaDownloadable, newDefaultEmptyRemoteMedia,
   newDefaultRemoteMedia,
 } from 'src/ui-data/models/media/Media.ts'
+import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
 import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
@@ -24,11 +25,8 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
-  imPlaceholderBoxS,
-  imPlaceholderIcS,
-  imSmallPieProgressS,
-  imSmallPlaceholderIcS,
-} from 'src/ui/0-elements/imageParts.tsx'
+  ImageParts,
+} from 'src/ui/0-elements/ImageParts.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine'
 import {
@@ -96,14 +94,14 @@ const SummaryPage = React.memo(() => {
     if (!photos) setMainPhoto(undefined)
     else if (!remoteMainPhoto) setMainPhoto(newDefaultEmptyRemoteMedia())
     else setMainPhoto({
+      ...m, // inherit current download
       ...newDefaultRemoteMedia(),
       id: remoteMainPhoto.id,
+      remoteUrl: remoteMainPhoto.url,
       name: remoteMainPhoto.name,
       mimeType: remoteMainPhoto.mimeType,
-      remoteUrl: remoteMainPhoto.url,
       isInited: true,
       needDownload: true,
-      download: m?.download,
     })
   }, [remoteMainPhoto])
   
@@ -111,9 +109,6 @@ const SummaryPage = React.memo(() => {
   
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
   
-  const {
-    isLoadingNoProgress, isLoadingWithProgress, progress, isEmpty, isReady, isError,
-  } = getMediaEmtiableDownloadUiState(mainPhoto)
   
   //console.log(mainPhoto)
   //console.log({ isLoadingNoProgress, isLoadingWithProgress, isReady, isError, isEmpty })
@@ -132,41 +127,9 @@ const SummaryPage = React.memo(() => {
               <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
                 <AvaBox>
                   {(() => {
-                    if (isError) {
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <DocumentErrorIc css={SvgIconS6.t(avaPlaceholderIcS)} />
-                        </div>
-                      )
-                    }
-                    if (isLoadingNoProgress) {
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <SparkingLoadingLine />
-                        </div>
-                      )
-                    }
-                    if (isLoadingWithProgress) {
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <PieProgress css={imSmallPieProgressS}
-                            progress={
-                              RangeU.map(progress, [0, 100], [5, 95])
-                            }
-                          />
-                        </div>
-                      )
-                    }
-                    if (isEmpty) {
-                      return (
-                        <div css={imPlaceholderBoxS}>
-                          <PictureIc css={SvgIconS6.t(imSmallPlaceholderIcS)} />
-                        </div>
-                      )
-                    }
-                    if (isReady) {
-                      return <AvaIm src={mainPhoto!.dataUrl} />
-                    }
+                    const { isReady, ...loadingUi } = getMediaEmtiableDownloadUiState(mainPhoto)
+                    if (isReady) return <AvaIm src={mainPhoto!.dataUrl} />
+                    return <MediaUiState {...loadingUi} />
                   })()}
                 </AvaBox>
               </Link>
@@ -203,7 +166,7 @@ const SummaryPage = React.memo(() => {
                 <LineProgressFrame>
                   <LineProgress style={{ width: `${uiProfileFillProgress}%` }} />
                 </LineProgressFrame>
-                <LinePercent>{progress}%</LinePercent>
+                <LinePercent>{uiProfileFillProgress}%</LinePercent>
               </ProgressBox>
               
               <CompleteProfileText>
@@ -272,9 +235,6 @@ const AvaIm = styled.img`
   object-position: center;
   object-fit: cover;
 `
-const avaPlaceholderIcS: AppWidgetStyle = t => [imPlaceholderIcS, {
-  icon: { sz: '50%', mr: -2, color: t.errorSec.ct },
-}]
 
 
 const Gear = styled.div`

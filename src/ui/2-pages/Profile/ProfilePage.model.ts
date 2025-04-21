@@ -1,5 +1,5 @@
 import {
-  Compressible,
+  Convertible,
   Downloadable,
   MediaInArray,
   newDefaultRemoteMediaInArray,
@@ -9,7 +9,7 @@ import {
 
 
 export interface ProfilePhoto
-  extends MediaInArray, Compressible, Downloadable, Uploadable { }
+  extends MediaInArray, Convertible, Downloadable, Uploadable { }
 
 export const newDefaultProfilePhoto = (): ProfilePhoto => ({
   ...newDefaultRemoteMediaInArray(),

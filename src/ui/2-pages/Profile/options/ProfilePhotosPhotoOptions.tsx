@@ -67,7 +67,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                 onClick={() => {
                   const im = images[lastIdx]
                   im.download?.abort()
-                  im.compression?.abort()
+                  im.conversion?.abort()
                   const newImages = [...images]
                   newImages[lastIdx] = {
                     ...newDefaultProfilePhoto(),
@@ -93,7 +93,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                 onClick={() => {
                   setImages(images.map(im => {
                     im.download?.abort()
-                    im.compression?.abort()
+                    im.conversion?.abort()
                     return {
                       ...newDefaultProfilePhoto(),
                       type: 'local',

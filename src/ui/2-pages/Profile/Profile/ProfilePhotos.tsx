@@ -15,11 +15,8 @@ import Dropzone from 'react-dropzone'
 import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
-  imPieProgressAccentS,
-  imPieProgressS,
-  imPlaceholderBoxS,
-  imPlaceholderIcS,
-} from 'src/ui/0-elements/imageParts.tsx'
+  ImageParts,
+} from 'src/ui/0-elements/ImageParts.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
@@ -324,12 +321,12 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                           >
                             
                             {(() => {
-                              if (im.compression?.showProgress)
+                              if (im.conversion?.showProgress)
                                 return (
-                                  <div css={imPlaceholderBoxS}>
-                                    <PieProgress css={imPieProgressS}
+                                  <div css={ImageParts.placeholderBoxS}>
+                                    <PieProgress css={ImageParts.pieProgressS}
                                       progress={
-                                        RangeU.map(im.compression.progress, [0, 100], [5, 95])
+                                        RangeU.map(im.conversion.progress, [0, 100], [5, 95])
                                       }
                                     />
                                   </div>
@@ -344,15 +341,15 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                                 )
                               ))
                                 return (
-                                  <div css={imPlaceholderBoxS}>
+                                  <div css={ImageParts.placeholderBoxS}>
                                     <SparkingLoadingLine />
                                   </div>
                                 )
                               
                               if (im.download?.showProgress)
                                 return (
-                                  <div css={imPlaceholderBoxS}>
-                                    <PieProgress css={imPieProgressS}
+                                  <div css={ImageParts.placeholderBoxS}>
+                                    <PieProgress css={ImageParts.pieProgressS}
                                       progress={
                                         RangeU.map(im.download.progress, [0, 100], [5, 95])
                                       }
@@ -362,8 +359,8 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                               
                               if (im.isEmpty)
                                 return (
-                                  <div css={imPlaceholderBoxS}>
-                                    <PlusIc css={SvgIconS6.t(imPlaceholderIcS)} />
+                                  <div css={ImageParts.placeholderBoxS}>
+                                    <PlusIc css={SvgIconS6.t(ImageParts.placeholderIcS)} />
                                   </div>
                                 )
                               if (im.isReady)
@@ -378,7 +375,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                             
                             {im.type === 'local' && im.upload?.showProgress && (
                               <div css={photoDimmed}>
-                                <PieProgress css={imPieProgressAccentS}
+                                <PieProgress css={ImageParts.pieProgressAccentS}
                                   progress={
                                     RangeU.map(im.upload.progress, [0, 100], [5, 95])
                                   }
@@ -515,7 +512,7 @@ const photoImgStyle = css`
 
 
 const photoDimmed = (t: AppTheme.Theme) => css`
-  ${imPlaceholderBoxS(t)};
+  ${ImageParts.placeholderBoxS(t)};
   background: #00000099;
 `
 const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
@@ -575,7 +572,7 @@ const onFilesSelectedBuilder = (
         const imgFile = imgFiles[filesI++]
         
         photo.download?.abort()
-        photo.compression?.abort()
+        photo.conversion?.abort()
         
         const compressAbortCtrl = new AbortController()
         const blobToDataUrlAbortCtrl = new AbortController()
@@ -586,7 +583,7 @@ const onFilesSelectedBuilder = (
         }
         const compressionStart = {
           isReady: false,
-          compression: { ...newDefaultMediaOperation(),
+          conversion: { ...newDefaultMediaOperation(),
             id: uuid.v4(),
             showProgress: true,
             abort: reason => abortCtrl.abort(reason),
@@ -602,11 +599,11 @@ const onFilesSelectedBuilder = (
           setImages(images => mapFirstToIfFoundBy(images,
             image => ({ ...image,
               ...photoUpdate,
-              ...compressionUpdate && image.compression && {
-                compression: { ...image.compression, ...compressionUpdate },
+              ...compressionUpdate && image.conversion && {
+                conversion: { ...image.conversion, ...compressionUpdate },
               },
             }),
-            image => image.compression?.id === compressionStart.compression.id
+            image => image.conversion?.id === compressionStart.conversion.id
           ))
         }
         const updatePhotoThrottled = throttle(
@@ -653,18 +650,18 @@ const onFilesSelectedBuilder = (
             } satisfies ProfilePhoto
             setImages(images => replaceFirstToIfFoundBy(images,
               newPhoto,
-              elem => elem.compression?.id === compressionStart.compression.id
+              elem => elem.conversion?.id === compressionStart.conversion.id
             ))
           }
           catch (ex) {
             if (abortCtrl.signal.aborted) {
-              console.log('compression aborted:', abortCtrl.signal.reason)
+              console.log('conversion aborted:', abortCtrl.signal.reason)
               return
             }
             // TODO notify about error
-            console.log('compression error', ex)
+            console.log('conversion error', ex)
             //console.log('photo', photo)
-            updatePhoto({ compression: undefined, compressionError: ex })
+            updatePhoto({ conversion: undefined, conversionError: ex })
           }
         })()
         
