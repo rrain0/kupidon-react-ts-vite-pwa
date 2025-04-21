@@ -13,12 +13,12 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
+import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
 import MediaArrayDownloader from 'src/ui-data/models/media/MediaArrayDownloader.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase, {
   ProfileShowcaseAction,
 } from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
-import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
@@ -38,7 +38,7 @@ const actionSpring = { mass: 2, tension: 70, friction: 10 }
 
 
 export type FindCouplePageItem = {
-  photos: ProfilePhoto[]
+  photos: MediaInArrayDUC[]
   name: string
   birthDate: string
   gender: 'MALE' | 'FEMALE'

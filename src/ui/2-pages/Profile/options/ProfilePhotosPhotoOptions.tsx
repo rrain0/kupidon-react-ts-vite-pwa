@@ -1,5 +1,10 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import {
+  MediaInArrayDUC,
+  newDefaultEmptyLocalMediaInArray,
+  newDefaultLocalMediaInArray,
+} from 'src/ui-data/models/media/Media.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
@@ -13,7 +18,6 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { newDefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
@@ -40,8 +44,8 @@ export const ProfilePhotosPhotoOptionsOverlayName = 'photoOptions'
 export type ProfilePhotosPhotoOptionsProps = {
   isOpen: boolean
   close: Callback
-  images: ProfilePhoto[]
-  setImages: SetterOrUpdater<ProfilePhoto[]>
+  images: MediaInArrayDUC[]
+  setImages: SetterOrUpdater<MediaInArrayDUC[]>
   lastIdx: number
   onFilesSelected: Callback1<File[]>
 }
@@ -70,12 +74,9 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                   im.conversion?.abort()
                   const newImages = [...images]
                   newImages[lastIdx] = {
-                    ...newDefaultProfilePhoto(),
-                    type: 'local',
+                    ...newDefaultEmptyLocalMediaInArray(newImages[lastIdx].remoteI),
                     id: uuid.v4(),
-                    isEmpty: true,
-                    remoteI: newImages[lastIdx].remoteI,
-                  } satisfies ProfilePhoto
+                  }
                   setImages(newImages)
                   sheet.setClosing()
                 }}
@@ -95,12 +96,9 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                     im.download?.abort()
                     im.conversion?.abort()
                     return {
-                      ...newDefaultProfilePhoto(),
-                      type: 'local',
+                      ...newDefaultEmptyLocalMediaInArray(im.remoteI),
                       id: uuid.v4(),
-                      isEmpty: true,
-                      remoteI: im.remoteI,
-                    } satisfies ProfilePhoto
+                    } satisfies MediaInArrayDUC
                   }))
                   sheet.setClosing()
                 }}

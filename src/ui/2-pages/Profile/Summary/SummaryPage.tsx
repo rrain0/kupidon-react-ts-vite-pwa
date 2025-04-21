@@ -7,7 +7,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
-  getMediaEmtiableDownloadUiState,
+  getMediaDownloadUiState,
   MediaDownloadable, newDefaultEmptyRemoteMedia,
   newDefaultRemoteMedia,
 } from 'src/ui-data/models/media/Media.ts'
@@ -119,7 +119,7 @@ const SummaryPage = React.memo(() => {
               <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
                 <AvaBox>
                   {(() => {
-                    const { isReady, ...loadingUi } = getMediaEmtiableDownloadUiState(mainPhoto)
+                    const { isReady, ...loadingUi } = getMediaDownloadUiState(mainPhoto)
                     if (isReady) return <AvaIm src={mainPhoto!.dataUrl} />
                     return <MediaUiState {...loadingUi} />
                   })()}

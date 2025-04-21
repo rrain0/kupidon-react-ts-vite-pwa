@@ -14,7 +14,7 @@ import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
+import { MediaInArrayDUC, MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
@@ -36,9 +36,6 @@ import {
   currentUserPhotosToProfilePhotos, profileUpdateApiRequest,
 } from 'src/ui/2-pages/Profile/actions.ts'
 import { ProfilePageTabHeaderContext } from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
-import {
-  ProfilePhoto,
-} from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -161,7 +158,7 @@ const ProfilePage = React.memo(() => {
             dataUrl: oldPhoto.dataUrl,
             isReady: oldPhoto.isReady,
             download: oldPhoto.download,
-          } satisfies ProfilePhoto),
+          } satisfies MediaInArrayDUC),
           (a, b) => a.id === b.id && !a.isEmpty && !b.isEmpty
         )
         
@@ -174,7 +171,7 @@ const ProfilePage = React.memo(() => {
               isInited: true,
               isReady: photo.isReady,
               conversion: photo.conversion,
-            } satisfies ProfilePhoto
+            } satisfies MediaInArrayDUC
           }
           return photo
         })
@@ -258,7 +255,7 @@ const ProfilePage = React.memo(() => {
             showProgress: true,
             abort: reason => abortCtrl.abort(reason),
           },
-        } satisfies Partial<ProfilePhoto>
+        } satisfies Partial<MediaInArrayDUC>
         
         setFormValues(form => ({ ...form,
           initialValues: { ...form.initialValues,
@@ -274,7 +271,7 @@ const ProfilePage = React.memo(() => {
         }))
         
         const updatePhoto = (
-          photoUpdate?: Partial<ProfilePhoto>,
+          photoUpdate?: Partial<MediaInArrayDUC>,
           downloadUpdate?: Partial<MediaOperation>,
         ) => {
           setFormValues(form => ({ ...form,

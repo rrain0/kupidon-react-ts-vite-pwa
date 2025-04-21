@@ -17,7 +17,10 @@ import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
-import { getMediaEmtiableDownloadUiState } from 'src/ui-data/models/media/Media.ts'
+import {
+  getMediaDownloadUiState,
+  MediaInArrayDownloadable,
+} from 'src/ui-data/models/media/Media.ts'
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
@@ -30,7 +33,6 @@ import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingL
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInfo.tsx'
 import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
-import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
@@ -79,7 +81,7 @@ export type ProfileShowcaseCssProps = {
   '--pv': '<length>' // padding vertical
 }
 export type ProfileShowcaseProps = {
-  photos?: ProfilePhoto[] | undefined
+  photos?: MediaInArrayDownloadable[] | undefined
   name: string
   birthDate: string
   gender: GenderOptionValues
@@ -356,7 +358,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                       }}
                     >
                       {({ photo }) => {
-                        const { isReady, ...loadingUi } = getMediaEmtiableDownloadUiState(photo)
+                        const { isReady, ...loadingUi } = getMediaDownloadUiState(photo)
                         if (isReady) return <Photo src={photo?.dataUrl ?? ''} />
                         return <MediaUiState {...loadingUi} />
                       }}

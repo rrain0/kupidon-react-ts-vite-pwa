@@ -6,8 +6,11 @@ import { FileU } from '@util/file/FileU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useEffect } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { MediaDownloadable, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
-import { ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
+import {
+  MediaDownloadable,
+  MediaInArrayDUC,
+  newDefaultMediaOperation,
+} from 'src/ui-data/models/media/Media.ts'
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
@@ -47,7 +50,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           abort: reason => abortCtrl.abort(reason),
         },
         downloadError: undefined,
-      } satisfies Partial<ProfilePhoto>
+      } satisfies Partial<MediaInArrayDUC>
       
       // Если уже есть такая же загрузка, то пусть продолжается
       if (m.download?.id === downloadStart.download.id) return m

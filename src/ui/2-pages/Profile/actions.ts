@@ -1,12 +1,13 @@
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { CurrentUser } from 'src/api/model/CurrentUser.ts'
 import { Gender } from 'src/api/model/Gender.ts'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import {
-  newDefaultProfilePhoto,
-  ProfilePhoto,
-} from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
-import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
+  MediaInArrayDUC,
+  MediaOperation,
+  newDefaultEmptyRemoteMediaInArray,
+  newDefaultMediaOperation, newDefaultRemoteMediaInArray,
+} from 'src/ui-data/models/media/Media.ts'
+import { ProfilePageValidation, profilePhotosCntMax } from 'src/ui/2-pages/Profile/validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
@@ -31,68 +32,24 @@ import findBy = ArrayU.findBy
 
 
 
-/*
-
-
-export const DotsFrame = styled.section`
-  height: 20px;
-  min-width: 20px;
-  border-radius: 999999px;
-  ${row};
-  align-items: center;
-  gap: 9px;
-  padding: 0 12px;
-  
-  gap: 6px;
-  padding: 0 10px;
-  background: #aaaaaa88;
-`
-
-export const Dot = styled.div`
-  //width: 10px;
-  //height: 10px;
-  border-radius: 999999px;
-  //border: 2px solid ${p=>p.theme.navButton.cta};
-
-  width: 6px;
-  height: 6px;
-  background: #eeeeee;
-`
-export const dotActive = (t: AppTheme.Theme)=>css`
-  //width: 12px;
-  //height: 12px;
-  
-  background: ${t.photos.highlightFrameAccentBg[0]};
-`
-*/
-
-
-
-
 
 export const currentUserPhotosToProfilePhotos = (
   photos: CurrentUser['photos']
-): ProfilePhoto[] => {
-  const profilePhotos: ProfilePhoto[] =
-    ArrayU.arrOfIndices(6).map(i => ({
-      ...newDefaultProfilePhoto(),
-      type: 'remote',
-      id: uuid.v4(),
-      remoteI: i,
-      isEmpty: true,
-      isReady: true,
-    } satisfies ProfilePhoto))
+): MediaInArrayDUC[] => {
+  const profilePhotos = ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
+    ...newDefaultEmptyRemoteMediaInArray(i),
+    // TODO id - id collision with ids from backend?
+    id: uuid.v4(),
+  }))
   photos.forEach(it => {
     profilePhotos[it.index] = {
-      ...newDefaultProfilePhoto(),
-      type: 'remote',
+      ...newDefaultRemoteMediaInArray(it.index),
       id: it.id,
-      remoteI: it.index,
       name: it.name,
       mimeType: it.mimeType,
       remoteUrl: it.url,
-      isReady: false,
-    } satisfies ProfilePhoto
+      isInited: true,
+    }
   })
   return profilePhotos
 }
@@ -162,7 +119,7 @@ export const profileUpdateApiRequest = (
     setFormValues(s => ({ ...s,
       photos: ArrayU.combine(
         s.photos, uploads,
-        (photo, upload) => ({ ...photo, upload } satisfies ProfilePhoto),
+        (photo, upload) => ({ ...photo, upload } satisfies MediaInArrayDUC),
         (photo, upload) => photo.id === upload.id
       ),
     }))
@@ -187,7 +144,7 @@ export const profileUpdateApiRequest = (
         photos: ArrayU.combine(
           s.photos, uploads,
           (photo, upload) => (
-            { ...photo, upload: undefined } satisfies ProfilePhoto
+            { ...photo, upload: undefined } satisfies MediaInArrayDUC
           ),
           (photo, upload) => photo.id === upload.id
         ),
@@ -202,7 +159,7 @@ export const profileUpdateApiRequest = (
               ...photo,
               type: 'remote',
               isReady: usedPhoto.isReady,
-            } satisfies ProfilePhoto),
+            } satisfies MediaInArrayDUC),
             (photo, usedPhoto) => photo.id === usedPhoto.id && usedPhoto.type === 'local'
           ),
         }))
@@ -211,7 +168,7 @@ export const profileUpdateApiRequest = (
             s.photos, values.photos,
             (photo, usedPhoto, photoI, usedPhotoI) => ({
               ...photo, remoteI: usedPhotoI,
-            } satisfies ProfilePhoto),
+            } satisfies MediaInArrayDUC),
             (photo, usedPhoto) => photo.remoteI === usedPhoto.remoteI
           ),
         }))
@@ -240,7 +197,7 @@ export const profileUpdateApiRequest = (
           ...getUpload()!,
           abort: reason => abortCtrl.abort(reason),
         },
-      } satisfies Partial<ProfilePhoto>
+      } satisfies Partial<MediaInArrayDUC>
       
       setFormValues(form => ({ ...form,
         photos: mapFirstToIfFoundBy(form.photos,
@@ -251,7 +208,7 @@ export const profileUpdateApiRequest = (
       
       
       const updatePhoto = (
-        photoUpdate?: Partial<ProfilePhoto>,
+        photoUpdate?: Partial<MediaInArrayDUC>,
         uploadUpdate?: Partial<MediaOperation>,
       ) => {
         const upload = getUpload()

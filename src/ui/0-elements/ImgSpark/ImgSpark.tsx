@@ -55,7 +55,7 @@ const ImgSpark = React.memo(
       }, [src])
       
       
-      const { isLoading, isReady, isError } = getMediaDownloadUiState(media)
+      const { isLoading, isReady, isError } = getMediaDownloadUiState(media, { allowEmpty: false })
       
       //console.log(media)
       //console.log({ isLoading, isReady, isError })

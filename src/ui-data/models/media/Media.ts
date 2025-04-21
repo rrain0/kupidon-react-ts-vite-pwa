@@ -39,14 +39,18 @@ export const newDefaultRemoteMedia = (): Media => ({
   isReady: false,
 })
 export const newDefaultEmptyRemoteMedia = (): Media => ({
-  type: 'remote', isEmpty: true,
-  id: '', remoteUrl: '', name: '', mimeType: '',
-  dataUrl: '',
-  isInited: true, isReady: false,
+  ...newDefaultRemoteMedia(),
+  isEmpty: true,
+  isInited: true,
 })
 export const newDefaultLocalMedia = (): Media => ({
   ...newDefaultRemoteMedia(),
   type: 'local',
+})
+export const newDefaultEmptyLocalMedia = (): Media => ({
+  ...newDefaultLocalMedia(),
+  isEmpty: true,
+  isInited: true,
 })
 
 
@@ -83,13 +87,22 @@ export interface MediaInArray extends Media {
   remoteI: number
 }
 
+
+
 export const newDefaultRemoteMediaInArray = (remoteI = 0): MediaInArray => ({
   ...newDefaultRemoteMedia(),
   remoteI,
 })
-
+export const newDefaultEmptyRemoteMediaInArray = (remoteI = 0): MediaInArray => ({
+  ...newDefaultEmptyRemoteMedia(),
+  remoteI,
+})
 export const newDefaultLocalMediaInArray = (remoteI = 0): MediaInArray => ({
   ...newDefaultLocalMedia(),
+  remoteI,
+})
+export const newDefaultEmptyLocalMediaInArray = (remoteI = 0): MediaInArray => ({
+  ...newDefaultEmptyLocalMedia(),
   remoteI,
 })
 
@@ -127,33 +140,31 @@ export type Downloadable = Pu<{
 // extend this interface to define a particular error type, etc.
 export interface MediaDownloadable extends Media, Downloadable { }
 
-export const getMediaDownloadUiState = (media?: MediaDownloadable) => {
-  const { isInited, isEmpty, isReady, downloadError, needRetryDownload, download } = media ?? { }
+export const getMediaDownloadUiState = (
+  media?: MediaDownloadable,
+  { allowEmpty = true } = {},
+) => {
+  const {
+    isInited, type, isEmpty, isReady,
+    needDownload, download, needRetryDownload, downloadError,
+  } = media ?? { }
   const isLoading = !isInited || download
     || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
   return {
+    canNeedDownload: isInited && !isEmpty && type === 'remote'
+      && !isReady && !needDownload && !needRetryDownload && !download,
     isLoading,
     isLoadingNoProgress: isLoading && !download?.showProgress,
     isLoadingWithProgress: isLoading && download?.showProgress,
     progress: download?.progress,
     isReady,
-    isError: isInited && (isEmpty || (downloadError && !needRetryDownload)),
+    isError: isInited && ((!allowEmpty && isEmpty) || (downloadError && !needRetryDownload)),
   }
 }
-export const getMediaEmtiableDownloadUiState = (media?: MediaDownloadable) => {
-  const { isInited, isEmpty, isReady, downloadError, needRetryDownload, download } = media ?? { }
-  const isLoading = !isInited || download
-    || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
-  return {
-    isLoading,
-    isLoadingNoProgress: isLoading && !download?.showProgress,
-    isLoadingWithProgress: isLoading && download?.showProgress,
-    progress: download?.progress ?? 0,
-    isEmpty: isInited && isEmpty,
-    isReady,
-    isError: isInited && (downloadError && !needRetryDownload),
-  }
-}
+
+
+
+export interface MediaInArrayDownloadable extends MediaInArray, Downloadable { }
 
 
 
@@ -176,5 +187,9 @@ export type Convertible = Pu<{
 
 
 
+interface DUC extends Downloadable, Uploadable, Convertible { }
+
+export interface MediaDUC extends Media, DUC { }
+export interface MediaInArrayDUC extends MediaInArray, DUC { }
 
 

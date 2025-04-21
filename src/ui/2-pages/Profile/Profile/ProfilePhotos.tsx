@@ -12,7 +12,11 @@ import React, {
   useState,
 } from 'react'
 import Dropzone from 'react-dropzone'
-import { MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
+import {
+  MediaInArrayDUC,
+  MediaOperation, newDefaultLocalMediaInArray,
+  newDefaultMediaOperation,
+} from 'src/ui-data/models/media/Media.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   ImageParts,
@@ -21,10 +25,6 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/ui/2-pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
-import {
-  newDefaultProfilePhoto,
-  ProfilePhoto,
-} from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
@@ -95,8 +95,8 @@ const springStyle = (
 
 
 export type ProfilePhotosProps = {
-  images: ProfilePhoto[]
-  setImages: SetterOrUpdater<ProfilePhoto[]>
+  images: MediaInArrayDUC[]
+  setImages: SetterOrUpdater<MediaInArrayDUC[]>
 }
 const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   const { images, setImages } = props
@@ -551,9 +551,9 @@ const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
 
 // TODO ???maybe use state 'files' and effect on files
 const onFilesSelectedBuilder = (
-  images: ProfilePhoto[],
+  images: MediaInArrayDUC[],
   lastIdx: number,
-  setImages: SetterOrUpdater<ProfilePhoto[]>,
+  setImages: SetterOrUpdater<MediaInArrayDUC[]>,
   closeMenu: Callback,
 ) => (files: File[]) => {
   const imgFiles = files.filter(it => it.type.startsWith('image/'))
@@ -588,12 +588,12 @@ const onFilesSelectedBuilder = (
             showProgress: true,
             abort: reason => abortCtrl.abort(reason),
           },
-        } satisfies Partial<ProfilePhoto>
+        } satisfies Partial<MediaInArrayDUC>
         
         const processingPhoto = { ...photo, ...compressionStart }
         
         const updatePhoto = (
-          photoUpdate?: Partial<ProfilePhoto>,
+          photoUpdate?: Partial<MediaInArrayDUC>,
           compressionUpdate?: Partial<MediaOperation>,
         ) => {
           setImages(images => mapFirstToIfFoundBy(images,
@@ -639,15 +639,13 @@ const onFilesSelectedBuilder = (
             //console.log('imgDataUrl',imgDataUrl.substring(0, 1000))
             const mimeType = getDataUrlProps(imgDataUrl)!.mimeType
             const newPhoto = {
-              ...newDefaultProfilePhoto(),
-              type: 'local',
+              ...newDefaultLocalMediaInArray(photo.remoteI),
               id: uuid.v4(),
-              remoteI: photo.remoteI,
               name: trimExtension(imgFile.name),
               mimeType: mimeType,
               dataUrl: imgDataUrl,
               isReady: true,
-            } satisfies ProfilePhoto
+            }
             setImages(images => replaceFirstToIfFoundBy(images,
               newPhoto,
               elem => elem.conversion?.id === compressionStart.conversion.id

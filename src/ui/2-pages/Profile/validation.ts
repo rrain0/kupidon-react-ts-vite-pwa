@@ -1,25 +1,27 @@
 import { UserApi } from 'src/api/requests/UserApi.ts'
+import {
+  MediaInArrayDUC,
+  newDefaultEmptyRemoteMediaInArray,
+} from 'src/ui-data/models/media/Media.ts'
 import { EducationOptionValues } from 'src/ui/2-pages/Profile/options/ProfileEducationOption.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import {
   PartnerGenderOptionValues
 } from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import { JobOptionValues } from 'src/ui/2-pages/Profile/options/ProfileJobOption.tsx'
-import { newDefaultProfilePhoto, ProfilePhoto } from 'src/ui/2-pages/Profile/ProfilePage.model.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { DateTime } from 'src/util/DateTime.ts'
 import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { RangeU } from 'src/util/common/RangeU'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
-import NumRangeNullable = RangeU.NumRangeNullable
-import NumRangeEndNullable = RangeU.NumRangeEndNullable
 
 
+
+export const profilePhotosCntMax = 6
 
 
 export namespace ProfilePageValidation {
@@ -86,7 +88,7 @@ export namespace ProfilePageValidation {
   
   export type UserValues = {
     name: string
-    photos: ProfilePhoto[]
+    photos: MediaInArrayDUC[]
     birthDate: string
     gender: GenderOptionValues
     aboutMe: string
@@ -108,14 +110,12 @@ export namespace ProfilePageValidation {
   
   export const userDefaultValues: UserValues = {
     name: '',
-    photos: ArrayU.arrOfIndices(6).map(i => ({
-      ...newDefaultProfilePhoto(),
-      type: 'remote',
+    photos: ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
+      ...newDefaultEmptyRemoteMediaInArray(i),
+      // TODO id - id collision with ids from backend?
       id: uuid.v4(),
-      isEmpty: true,
-      remoteI: i,
-      isReady: false,
-    } satisfies ProfilePhoto)),
+      isInited: false,
+    })),
     birthDate: '',
     gender: '',
     aboutMe: '',
@@ -131,9 +131,9 @@ export namespace ProfilePageValidation {
   
   
   
-  export const photosComparator = (a: ProfilePhoto, b: ProfilePhoto) =>
-    (a.isEmpty && b.isEmpty)
-    || a.id === b.id
+  export const photosComparator = (a: MediaInArrayDUC, b: MediaInArrayDUC) => {
+    return (a.isEmpty && b.isEmpty) || a.id === b.id
+  }
   
   const delay = 4000
   
