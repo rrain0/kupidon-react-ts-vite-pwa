@@ -6,13 +6,13 @@ import Getter = TypeU.Getter
 
 
 
+
 export const useMediaDownloadAutoRetry = <T extends MediaDownloadable | undefined>(
   getMedia: Getter<T>, setMedia: Setter<T>,
 ) => {
   const retry = () => {
     const m = getMedia()
     if (m?.needRetryDownload) {
-      m.download?.abort()
       setMedia({
         ...m,
         needRetryDownload: false,

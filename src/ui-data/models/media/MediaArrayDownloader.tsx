@@ -2,6 +2,9 @@ import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useEffect } from 'react'
 import { getMediaDownloadUiState, MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
 import { useMediaArrayDownload } from 'src/ui-data/models/media/useMediaArrayDownload.ts'
+import {
+  useMediaArrayDownloadAutoRetry
+} from 'src/ui-data/models/media/useMediaArrayDownloadAutoRetry.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Pu = TypeU.Pu
@@ -40,6 +43,7 @@ export const MediaArrayDownloader = ReactU.memo(<
   }, [medias])
   
   useMediaArrayDownload(getMediasDownload, setMediasDownload)
+  useMediaArrayDownloadAutoRetry(getMediasDownload, setMediasDownload)
   
   return children?.(mediasDownload)
 })

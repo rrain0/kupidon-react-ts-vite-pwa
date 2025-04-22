@@ -142,11 +142,11 @@ export interface MediaDownloadable extends Media, Downloadable { }
 
 export const getMediaDownloadUiState = (
   media?: MediaDownloadable,
-  { allowEmpty = true } = {},
+  { allowEmpty = true } = { },
 ) => {
   const {
     isInited, type, isEmpty, isReady,
-    needDownload, download, needRetryDownload, downloadError,
+    needDownload, download, downloadError, needRetryDownload,
   } = media ?? { }
   const isLoading = !isInited || download
     || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
@@ -158,7 +158,9 @@ export const getMediaDownloadUiState = (
     isLoadingWithProgress: isLoading && download?.showProgress,
     progress: download?.progress,
     isReady,
-    isError: isInited && ((!allowEmpty && isEmpty) || (downloadError && !needRetryDownload)),
+    isError: isInited && (
+      (!allowEmpty && isEmpty) || (downloadError && !needDownload && !needRetryDownload)
+    ),
   }
 }
 

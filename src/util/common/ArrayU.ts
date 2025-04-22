@@ -258,7 +258,15 @@ export namespace ArrayU {
     return arr
   }
   
-  export const mapToIf = <T, E = T>(arr: T[], mapper: (el: T, i: number, arr: T[]) => E): E[] => {
+  export function mapToIf<T, E = T>(arr: T[], mapper: (el: T, i: number, arr: T[]) => E): E[]
+  export function mapToIf<T, E = T>(
+    arr: T[] | undefined, mapper: (el: T, i: number, arr: T[]) => E
+  ): E[] | undefined
+  export function mapToIf<T, E = T>(
+    arr: T[] | undefined,
+    mapper: (el: T, i: number, arr: T[]) => E
+  ): E[] | undefined {
+    if (!arr) return undefined
     let changed = false
     let newArr = arr as unknown as E[]
     arr.forEach((el, i) => {
@@ -273,6 +281,7 @@ export namespace ArrayU {
     })
     return newArr
   }
+  
   
   
   
