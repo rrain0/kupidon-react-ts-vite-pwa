@@ -1,17 +1,17 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { LightWine } from 'src/ui-data/theme/themes/LightWine.tsx'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
-import Button from 'src/ui/0-elements/buttons/Button/Button'
+import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SummaryPageParts } from 'src/ui/2-pages/Profile/Summary/SummaryPageParts.ts'
+import { ProfileSummaryPageParts } from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
 import Txt = EmotionCommon.Txt
 import heartLocks from '@im/ic/heart-locks.svg'
 import share from '@im/ic/share.svg'
@@ -74,7 +74,7 @@ export default SummaryPageFeatureCards
 
 const cardMinH = 136
 const featureCardS = css`
-  ${SummaryPageParts.cardS};
+  ${ProfileSummaryPageParts.cardS};
   min-height: ${cardMinH}px;
   padding: 0 16px 0 0;
   display: grid;

@@ -15,7 +15,7 @@ import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
-import HtmlAttrExistence = TypeU.HtmlAttrExistence
+import HtmlAttrExistence = TypeU.HtmlAttrEmpty
 
 
 

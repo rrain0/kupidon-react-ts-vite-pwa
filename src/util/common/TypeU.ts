@@ -6,28 +6,26 @@ export namespace TypeU {
   
   export type empty = null | undefined
   export type anyval = {} | null | undefined
-  export type anyobj = Record<string, any>
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
-  //export type emptyObj = Record<never, never> // need to fix
-  export type HtmlAttrExistence = '' | undefined
+  export type HtmlAttrEmpty = '' | undefined
   export type Sign = -1 | 0 | 1
   
   export const noop = () => { }
   export const emptyArr = []
   
-  export const attrExists = (value: any): HtmlAttrExistence => value ? '' : undefined
+  export const attrEmpty = (value: any): HtmlAttrEmpty => value ? '' : undefined
   export const trueOrUndef = (value: any): true | undefined => value ? true : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type Exists<T> = Exclude<T, empty>
   
-  // Add Partial Undefined
+  // Add Partial & Undefined
   export type PartialUndef<O extends object> = {
     [Prop in keyof O]+?: O[Prop] | undefined
   }
   export type Pu<O extends object> = PartialUndef<O>
-  // Remove Partial Undefined
+  // Remove Partial & Undefined
   export type Present<O extends object> = {
     [Prop in keyof O]-?: Exclude<O[Prop], undefined>
   }
@@ -35,21 +33,13 @@ export namespace TypeU {
   export type Ro<O extends object> = {
     +readonly [Prop in keyof O]: O[Prop]
   }
-  // Add Partial Undefined ReadOnly
+  // Add Partial & Undefined & ReadOnly
   export type Puro<O extends object> = {
     +readonly [Prop in keyof O]+?: O[Prop] | undefined
   }
   export type WriteablePartial<O extends object> = {
     -readonly [Prop in keyof O]+?: O[Prop]
   }
-  export type Never<O extends object> = {
-    [Prop in keyof O]: never
-  }
-  
-  
-  export type ObjectUnionFix<O1 extends object, O2 extends object> =
-    | O1 & { [OptKeys in keyof Omit<O2, keyof O1>]: undefined }
-    | O2 & { [OptKeys in keyof Omit<O1, keyof O2>]: undefined }
   
   
   export type RecordRo<K extends keyof any, T> = {
@@ -62,6 +52,12 @@ export namespace TypeU {
     +readonly [P in K]+?: T | undefined
   }
   
+  
+  // TODO костыль - ts костыль фиксит взятие необязательных свойств объединённых объектов
+  export type ObjectUnionFix<O1 extends object, O2 extends object> =
+    | O1 & { [OptKeys in keyof Omit<O2, keyof O1>]: undefined }
+    | O2 & { [OptKeys in keyof Omit<O1, keyof O2>]: undefined }
+  
   // TODO костыль - ts костыль для компиляции exhaustive ifs & function return
   export function assertNever(value: never): never {
     throw new Error(`Value must be never, but it is: ${value}`)
@@ -69,10 +65,27 @@ export namespace TypeU {
   export function throwNever(): never {
     throw new Error(`This code must not be reached`)
   }
-  export function exists<T, Ex extends {}>(value: T | Ex): value is Ex {
+  
+  
+  
+  // Типы и предикаты для оператора typeof (за исключением того, что null это null, а не объект)
+  export type Isobject<T> = T extends object ? T extends anyfun ? never : T : never
+  export function isundef<T, U extends undefined>(value: T | U): value is U {
+    return value === undefined
+  }
+  export function notundef<T, NU extends {} | null>(value: T | NU): value is NU {
+    return value !== undefined
+  }
+  export function isnull<T, N extends null>(value: T | N): value is N {
+    return value === null
+  }
+  export function notnull<T, NN extends {} | undefined>(value: T | NN): value is NN {
+    return value !== null
+  }
+  export function exists<T, E extends {}>(value: T | E): value is E {
     return value !== null && value !== undefined
   }
-  export function notExists<T, NEx extends empty>(value: T | NEx): value is NEx {
+  export function notExists<T, NE extends empty>(value: T | NE): value is NE {
     return value === null || value === undefined
   }
   export function isstring<T, S extends string>(value: T | S): value is S {
@@ -81,13 +94,26 @@ export namespace TypeU {
   export function isnumber<T, N extends number>(value: T | N): value is N {
     return typeof value === 'number'
   }
-  // Need to exclude any function but i don't know how
-  export function isobject<T, O extends object>(value: T | O): value is O {
+  export function isobject<T>(value: T): value is Isobject<T> {
     return typeof value === 'object' && value !== null
   }
   export function isfunction<T, F extends Function>(value: T | F): value is F {
     return typeof value === 'function'
   }
+  
+  const f = () => ''
+  const o = { a: 1 }
+  const e = {  }
+  const s = ''
+  ;(() => {
+    const val = o
+    if (isobject(val)) {
+      const a = val
+      const b = a.a
+    }
+  })()
+  
+  
   
   
   export function isObject<T, O extends object>(value: T | O): value is O {

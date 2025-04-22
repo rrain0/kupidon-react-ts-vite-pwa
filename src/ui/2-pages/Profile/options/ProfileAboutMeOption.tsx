@@ -7,7 +7,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import EditableTextCard from 'src/ui/components/EditableTextCard/EditableTextCard.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 const overlayName = 'profileAboutMe'

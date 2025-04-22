@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
-import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   getMediaDownloadUiState,
@@ -14,29 +14,29 @@ import {
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
 import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
-import Button from 'src/ui/0-elements/buttons/Button/Button'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
+import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
   QuickSettingsOverlayName
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
-import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/Summary/parts/SummaryPageFeatureCards'
-import { SummaryPageParts } from 'src/ui/2-pages/Profile/Summary/SummaryPageParts.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
+import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/ProfileSummary/parts/SummaryPageFeatureCards.tsx'
+import { ProfileSummaryPageParts } from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
+import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { DateU } from 'src/util/date/DateU'
-import { MockData } from 'src/_mock-data/MockData'
-import { AppTheme } from 'src/ui-data/theme/AppTheme'
-import { useTimeout } from 'src/util/react/useTimeout'
+import { DateU } from '@util/date/DateU.ts'
+import { MockData } from 'src/_mock-data/MockData.ts'
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { useTimeout } from '@util/react/useTimeout.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import full = RouteBuilder.full
@@ -51,7 +51,7 @@ import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 
 
 
-const SummaryPage = React.memo(() => {
+const ProfileSummaryPage = React.memo(() => {
   const lang = useAppZustand(s => s.langs[0])
   const titleText = useUiValues(TitleUiText)
   const actionText = useUiValues(ActionUiText)
@@ -182,7 +182,7 @@ const SummaryPage = React.memo(() => {
     </>
   )
 })
-export default SummaryPage
+export default ProfileSummaryPage
 
 
 const pageContentS = css`
@@ -190,7 +190,7 @@ const pageContentS = css`
 `
 
 const InfoCard = styled.div`
-  ${SummaryPageParts.cardS};
+  ${ProfileSummaryPageParts.cardS};
   background: ${p => p.theme.boxDefault.bg};
   display: grid;
   grid:
@@ -202,10 +202,10 @@ const InfoCard = styled.div`
     '.    .    .    .    .   ' 14.5px
     'div  div  div  div  div ' auto
     '.    .    .    .    .   ' 9px
-    'harr harr harr harr harr' auto
+    'harr harr harr harr harr' auto /* harr - Header Arrow */
     '.    .    .    .    .   ' 9px
     'prog prog prog prog prog' auto
-    '.    .    .    .    .   ' 10px
+    '.    .    .    .    .   ' 9px
     'cpt  cpt  cpt  cpt  cpt ' auto /* cpt - Complete Profile Text */
    / auto 14px 1fr  8px  auto;
   gap: 0;

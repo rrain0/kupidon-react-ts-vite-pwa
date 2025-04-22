@@ -10,7 +10,7 @@ import Puro = TypeU.Puro
 import Callback = TypeU.Callback
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

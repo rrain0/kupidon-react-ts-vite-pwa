@@ -16,7 +16,7 @@ import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
 import PartialUndef = TypeU.PartialUndef
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

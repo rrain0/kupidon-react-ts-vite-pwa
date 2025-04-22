@@ -16,7 +16,7 @@ import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
 import Puro = TypeU.Puro
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

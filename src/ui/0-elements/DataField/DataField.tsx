@@ -7,7 +7,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

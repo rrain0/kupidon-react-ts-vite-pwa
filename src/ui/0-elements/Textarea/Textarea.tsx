@@ -13,7 +13,7 @@ import PartialUndef = TypeU.PartialUndef
 import hoverable = EmotionCommon.hoverable
 import Callback1 = TypeU.Callback1
 import combineProps = ReactU.combineProps
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

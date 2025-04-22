@@ -19,7 +19,7 @@ import reset = EmotionCommon.reset
 import PartialUndef = TypeU.PartialUndef
 import noop = TypeU.noop
 import SetterOrUpdater = TypeU.SetterOrUpdater
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 // TODO Доделать новый скроллбар

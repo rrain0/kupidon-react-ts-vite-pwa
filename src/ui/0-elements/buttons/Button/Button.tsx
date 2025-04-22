@@ -11,7 +11,7 @@ import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import combineProps = ReactU.combineProps
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

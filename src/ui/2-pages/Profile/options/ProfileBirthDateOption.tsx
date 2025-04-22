@@ -11,7 +11,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DateU } from 'src/util/date/DateU'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import GiftBoxGradIc = SvgGradIconsPack.GiftBoxGradIc
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

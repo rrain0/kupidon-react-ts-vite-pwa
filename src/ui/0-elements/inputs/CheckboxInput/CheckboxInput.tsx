@@ -9,7 +9,7 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
 import Puro = TypeU.Puro
 import UseRipple from 'ui/0-elements/Ripple/UseRipple.tsx'
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 
 
-export namespace SummaryPageParts {
+export namespace ProfileSummaryPageParts {
   
   
   export const cardS = css`

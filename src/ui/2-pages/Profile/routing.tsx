@@ -16,7 +16,7 @@ import use = RouteBuilder.use
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import full = RouteBuilder.full
 
-const SummaryPage = React.lazy(() => import('src/ui/2-pages/Profile/Summary/SummaryPage'))
+const ProfileSummaryPage = React.lazy(() => import('src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.tsx'))
 const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.tsx'))
 
 
@@ -45,7 +45,7 @@ const RouteProfileIdUserIdTab = React.memo(() => {
   
   if (tab === summary) return (
     <Suspense fallback={<div>Loading...</div>}>
-      <SummaryPage />
+      <ProfileSummaryPage />
     </Suspense>
   )
   return (

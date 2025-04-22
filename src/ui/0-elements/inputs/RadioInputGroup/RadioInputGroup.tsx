@@ -10,7 +10,7 @@ import {
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

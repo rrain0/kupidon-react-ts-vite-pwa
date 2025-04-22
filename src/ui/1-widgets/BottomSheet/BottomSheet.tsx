@@ -19,7 +19,7 @@ import combineProps = ReactU.combineProps
 import Callback1 = TypeU.Callback1
 import Puro = TypeU.Puro
 import ClassStyle = ReactU.ClassStyle
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

@@ -1,9 +1,16 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import falsy = TypeU.falsy
+import isnumber = TypeU.isnumber
 
 
 
 export namespace CssU {
+  
+  
+  export const toPx = (value?: number | string): string => {
+    if (isnumber(value)) return `${value}px`
+    return value ?? ''
+  }
   
   
   export const max = (...values: (string | falsy)[]): string => {

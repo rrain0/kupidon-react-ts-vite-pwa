@@ -30,7 +30,7 @@ import CardsHeartGradIc = SvgGradIconsPack.CardsHeartGradIc
 import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
 import Puro = TypeU.Puro
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 

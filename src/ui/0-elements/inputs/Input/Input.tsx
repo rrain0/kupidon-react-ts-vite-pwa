@@ -3,7 +3,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
-import attrExists = TypeU.attrExists
+import attrExists = TypeU.attrEmpty
 
 
 
