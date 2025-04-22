@@ -25,7 +25,7 @@ export const MyComponent = React.memo((props: MyComponentProps) => {
       style={style}
     >
       <>
-      
+        {children}
       </>
     </div>
   )

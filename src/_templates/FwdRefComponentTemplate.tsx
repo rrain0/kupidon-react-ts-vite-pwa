@@ -9,51 +9,43 @@ import Pu = TypeU.Pu
 import Children = ReactU.Children
 import colC = EmotionCommon.colC
 import resetButton = EmotionCommon.resetButton
+import ClassStyle = ReactU.ClassStyle
 
 
 
 
-const ExtensibleComponent = styled.button`
+const ToBeExtended = styled.button`
   ${resetButton};
 `
 
 
-type ComponentExtraProps = Pu<{
+type MyComponentExtraProps = Pu<{
   isError: boolean
-}> & Children
+}> & ClassStyle & Children
 
-type ComponentRefElement = HTMLButtonElement
-type ComponentProps = React.ComponentPropsWithoutRef<typeof ExtensibleComponent> & ComponentExtraProps
-
+type MyComponentProps = React.ComponentPropsWithRef<typeof ToBeExtended> & MyComponentExtraProps
 
 
 
-const Component = React.memo(
-  React.forwardRef<ComponentRefElement, ComponentProps>(
-    (props, forwardedRef) => {
-      const {
-        children,
-        ...restProps
-      } = props
-      
-      
-      const elemRef = useRef<ComponentRefElement>(null)
-      useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-      
-      
-      return (
-        <ExtensibleComponent // Frame
-          css={frameStyle}
-          {...restProps}
-          ref={elemRef}
-        >
-        
-        </ExtensibleComponent>
-      )
-    }
+const MyComponent = React.memo((props: MyComponentProps) => {
+  const {
+    children,
+    ...restProps
+  } = props
+  
+  
+  return (
+    <ToBeExtended // Frame
+      data-display-name="MyComponent"
+      css={frameStyle}
+      {...restProps}
+    >
+    
+    </ToBeExtended>
   )
-)
-//export default Component
+})
+MyComponent.displayName = 'MyComponent'
+//export default MyComponent
 
 
 

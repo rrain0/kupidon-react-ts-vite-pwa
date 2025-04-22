@@ -16,6 +16,8 @@ import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
 import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import { Gap } from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -114,39 +116,68 @@ const ProfileSummaryPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm css={pageContentS}>
             
-            <InfoCard>
+            <InfoCard col>
               
-              <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
-                <AvaBox>
-                  {(() => {
-                    const { isReady, ...loadingUi } = getMediaDownloadUiState(mainPhoto)
-                    if (isReady) return <AvaIm src={mainPhoto!.dataUrl} />
-                    return <MediaUiState {...loadingUi} />
-                  })()}
-                </AvaBox>
-              </Link>
               
-              <Name>{name}</Name>
               
-              <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-                {overlay => (
-                  <Gear onClick={overlay.open}>
-                    <Button css={IconButtonS6.t(gearIc)}>
-                      <GearOutlinedIc />
-                    </Button>
-                  </Gear>
-                )}
-              </UseOverlayUrl>
+              <Flex row>
+                
+                <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
+                  <AvaBox>
+                    {(() => {
+                      const { isReady, ...loadingUi } = getMediaDownloadUiState(mainPhoto)
+                      if (isReady) return <AvaIm src={mainPhoto!.dataUrl} />
+                      return <MediaUiState {...loadingUi} />
+                    })()}
+                  </AvaBox>
+                </Link>
+                
+                <Gap w={14} />
+                
+                
+                
+                <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
+                  <NameInfoEditArea col>
+                    
+                    <Name>{name}</Name>
+                    
+                    <Gap h={4} />
+                    
+                    <Info>{info}</Info>
+                    
+                    <Gap h={10} />
+                    
+                    <Edit>
+                      <Button css={editBtnStyle}>{actionText.edit}</Button>
+                    </Edit>
+                    
+                  </NameInfoEditArea>
+                </Link>
+                
+                
+                
+                <Gap w={8} />
+                
+                <Flex grow={1} row justifyCt="end">
+                  <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+                    {overlay => (
+                      <Gear onClick={overlay.open}>
+                        <Button css={IconButtonS6.t(gearIc)}>
+                          <GearOutlinedIc />
+                        </Button>
+                      </Gear>
+                    )}
+                  </UseOverlayUrl>
+                </Flex>
+                
+              </Flex>
               
-              <Info>{info}</Info>
               
-              <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
-                <Edit>
-                  <Button css={editBtnStyle}>{actionText.edit}</Button>
-                </Edit>
-              </Link>
+              <Gap h={14.5} />
               
               <Divider />
+              
+              <Gap h={9} />
               
               <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
                 <HeaderArrow css={headerArrowS}>
@@ -154,12 +185,16 @@ const ProfileSummaryPage = React.memo(() => {
                 </HeaderArrow>
               </Link>
               
+              <Gap h={9} />
+              
               <ProgressBox>
                 <LineProgressFrame>
                   <LineProgress style={{ width: `${uiProfileFillProgress}%` }} />
                 </LineProgressFrame>
                 <LinePercent>{uiProfileFillProgress}%</LinePercent>
               </ProgressBox>
+              
+              <Gap h={9} />
               
               <CompleteProfileText>
                 {completeProfileInCoupleSteps}
@@ -189,30 +224,13 @@ const pageContentS = css`
   gap: 16px;
 `
 
-const InfoCard = styled.div`
+const InfoCard = styled(Flex)`
   ${ProfileSummaryPageParts.cardS};
   background: ${p => p.theme.boxDefault.bg};
-  display: grid;
-  grid:
-    'ava  .    name .    gear' auto
-    'ava  .    .    .    gear' 4px
-    'ava  .    info info gear' auto
-    'ava  .    .    .    .   ' 10px
-    'ava  .    edit edit edit' auto
-    '.    .    .    .    .   ' 14.5px
-    'div  div  div  div  div ' auto
-    '.    .    .    .    .   ' 9px
-    'harr harr harr harr harr' auto /* harr - Header Arrow */
-    '.    .    .    .    .   ' 9px
-    'prog prog prog prog prog' auto
-    '.    .    .    .    .   ' 9px
-    'cpt  cpt  cpt  cpt  cpt ' auto /* cpt - Complete Profile Text */
-   / auto 14px 1fr  8px  auto;
   gap: 0;
 `
 
 const AvaBox = styled.div`
-  grid-area: ava;
   align-self: center;
   width: 82px;
   height: 82px;
@@ -231,7 +249,6 @@ const AvaIm = styled.img`
 
 
 const Gear = styled.div`
-  grid-area: gear;
   place-self: start end;
   ${flexC};
   margin-top: -14px;
@@ -243,24 +260,24 @@ const gearIc: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
 }]
 
 
+
+const NameInfoEditArea = styled(Flex)`
+  cursor: pointer;
+`
+
 const Name = styled.div`
-  grid-area: name;
-  
   font-weight: 600;
   font-size: 20px;
   line-height: 119%;
   color: ${p => p.theme.boxDefault.ct2};
 `
 const Info = styled.div`
-  grid-area: info;
-  
   font-weight: 400;
   font-size: 17px;
   line-height: 119%;
   color: ${p => p.theme.boxDefault.ct6};
 `
 const Edit = styled.div`
-  grid-area: edit;
   min-width: 142px;
   width: fit-content;
 `
@@ -274,7 +291,6 @@ const editBtnStyle = (t: AppTheme.Theme) => css`
 
 
 const Divider = styled.div`
-  grid-area: div;
   width: 100%;
   height: 1px;
   background-color: ${p => p.theme.boxDefault.ctSec6};
@@ -283,11 +299,9 @@ const Divider = styled.div`
 
 const headerArrowS = (t: AppTheme.Theme) => css`
   ${HeaderArrowS.normal(t)};
-  grid-area: harr;
 `
 
 const ProgressBox = styled.div`
-  grid-area: prog;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 8px;
@@ -314,7 +328,6 @@ const LinePercent = styled.div`
 
 
 const CompleteProfileText = styled.div`
-  grid-area: cpt;
   justify-self: stretch;
   ${Txt.s16Wide};
   color: ${p => p.theme.boxDefault.ct2};

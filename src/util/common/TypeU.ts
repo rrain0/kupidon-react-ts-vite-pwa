@@ -94,6 +94,9 @@ export namespace TypeU {
   export function isnumber<T, N extends number>(value: T | N): value is N {
     return typeof value === 'number'
   }
+  export function isnumstr<T, N extends number | string>(value: T | N): value is N {
+    return typeof value === 'number' || typeof value === 'string'
+  }
   export function isobject<T>(value: T): value is Isobject<T> {
     return typeof value === 'object' && value !== null
   }

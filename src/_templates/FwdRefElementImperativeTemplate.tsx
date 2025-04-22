@@ -23,16 +23,23 @@ export type MyComponentProps = React.ComponentPropsWithRef<'div'> & MyComponentE
 
 const MyComponent = React.memo((props: MyComponentProps) => {
   const {
-    children,
+    ref, children,
     isError,
     ...restProps
   } = props
+  
+  const elemRef = useRef<HTMLDivElement>(null)
+  // Хук просто пихает всё что мы вернём из функции в переданный ref,
+  // учитывая, что он может быть функцией или объектом
+  useImperativeHandle(ref, () => elemRef.current!, [])
+  
   
   return (
     <div // Frame
       data-display-name="MyComponent"
       css={frameS}
       {...restProps}
+      ref={elemRef}
     >
       {children}
     </div>
