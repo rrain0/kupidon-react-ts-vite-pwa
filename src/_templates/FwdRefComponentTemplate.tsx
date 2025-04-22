@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useImperativeHandle, useRef } from 'react'
+import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -9,7 +9,6 @@ import Pu = TypeU.Pu
 import Children = ReactU.Children
 import colC = EmotionCommon.colC
 import resetButton = EmotionCommon.resetButton
-import ClassStyle = ReactU.ClassStyle
 
 
 
@@ -21,7 +20,7 @@ const ToBeExtended = styled.button`
 
 type MyComponentExtraProps = Pu<{
   isError: boolean
-}> & ClassStyle & Children
+}> & Children
 
 type MyComponentProps = React.ComponentPropsWithRef<typeof ToBeExtended> & MyComponentExtraProps
 

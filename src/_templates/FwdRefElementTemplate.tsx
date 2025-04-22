@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import React, { useImperativeHandle, useRef } from 'react'
+import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -7,7 +7,6 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
 import colC = EmotionCommon.colC
-import ClassStyle = ReactU.ClassStyle
 
 
 
@@ -15,7 +14,7 @@ import ClassStyle = ReactU.ClassStyle
 export type MyComponentExtraProps = Pu<{
   // custom props
   isError: boolean
-}> & ClassStyle & Children
+}> & Children
 
 export type MyComponentProps = React.ComponentPropsWithRef<'div'> & MyComponentExtraProps
 

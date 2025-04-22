@@ -17,7 +17,7 @@ import PartialUndef = TypeU.PartialUndef
 
 
 export type PageScrollbarsProps = PartialUndef<{
-  pageRef: React.RefObject<HTMLElement>
+  pageRef: React.RefObject<HTMLElement | null>
 }>
 
 

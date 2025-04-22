@@ -209,6 +209,7 @@ const BottomSheetFrame = styled(AnimatedDiv)`
   bottom: 0;
   translate: -50%;
   width: var(--photo-w);
+  width: 100%;
   height: calc(
     var(--h)
     - (var(--h) - var(--photos-h)) / 2

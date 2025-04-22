@@ -109,10 +109,10 @@ export type UseBottomSheetOptions = {
 
 
 export const useBottomSheet = (
-  bottomSheetFrameRef: React.RefObject<HTMLElement>,
-  bottomSheetRef: React.RefObject<HTMLElement>,
-  bottomSheetHeaderRef: React.RefObject<HTMLElement>,
-  bottomSheetContentRef: React.RefObject<HTMLElement>,
+  bottomSheetFrameRef: React.RefObject<HTMLElement | null>,
+  bottomSheetRef: React.RefObject<HTMLElement | null>,
+  bottomSheetHeaderRef: React.RefObject<HTMLElement | null>,
+  bottomSheetContentRef: React.RefObject<HTMLElement | null>,
   options: UseBottomSheetOptions,
 ) => {
   const getFrame = () => bottomSheetFrameRef.current

@@ -42,6 +42,7 @@ const MyImg = styled.img`
 `
 
 // Example with default props
+// @ts-ignore - Property was removed
 MyImg.defaultProps = { src: nextUp }
 
 // Example with component wrapping

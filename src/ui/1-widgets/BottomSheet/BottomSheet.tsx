@@ -29,10 +29,10 @@ export type BottomSheetChildrenProps = {
   sheetDrag: (...args: any[]) => ReactDOMAttributes
 }
 export type BottomSheetRefsProps = {
-  bottomSheetFrameRef: React.RefObject<HTMLDivElement>
-  bottomSheetRef: React.RefObject<HTMLDivElement>
-  bottomSheetHeaderRef: React.RefObject<HTMLDivElement>
-  bottomSheetContentRef: React.RefObject<HTMLDivElement>
+  bottomSheetFrameRef: React.RefObject<HTMLDivElement | null>
+  bottomSheetRef: React.RefObject<HTMLDivElement | null>
+  bottomSheetHeaderRef: React.RefObject<HTMLDivElement | null>
+  bottomSheetContentRef: React.RefObject<HTMLDivElement | null>
 }
 export type BottomSheetOptionsProps = ClassStyle & UseBottomSheetOptions & Puro<{
   onComputedDimens: Callback1<ComputedBottomSheetDimens>

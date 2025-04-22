@@ -27,18 +27,19 @@ export type UseContainerScrollStateProps = (
     containerRef?: never | undefined
   } | {
     containerIsWindow?: false | undefined
-    containerRef: React.RefObject<HTMLElement>
+    containerRef: React.RefObject<HTMLElement | null>
   }
 ) & {
-  contentRef: React.RefObject<HTMLElement>
+  contentRef: React.RefObject<HTMLElement | null>
 }
 
 
 
-export const useContainerScrollState =
-({ containerIsWindow, containerRef, contentRef }: UseContainerScrollStateProps)=>{
-  const getContainer = ()=>containerRef?.current
-  const getContent = ()=>contentRef.current
+export const useContainerScrollState = ({
+  containerIsWindow, containerRef, contentRef,
+}: UseContainerScrollStateProps) => {
+  const getContainer = () => containerRef?.current
+  const getContent = () => contentRef.current
   
   const [scrollProps, setScrollProps] = useState<ScrollProps>({
     clientWidth: 0,

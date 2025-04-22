@@ -10,7 +10,7 @@ export const useUpNodesInstantScroll = (
   lock: boolean = false,
   options: PartialUndef<{
     element: Element,
-    elementRef: React.RefObject<Element>,
+    elementRef: React.RefObject<Element | null>,
   }> = {},
 ) => {
   useLayoutEffect(

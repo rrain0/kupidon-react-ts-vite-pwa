@@ -12,5 +12,5 @@ export const useElemRefGetSet = <T = HTMLDivElement>(
   onSet?: Callback1<T | null>,
 ) => {
   return useRefGetSet(initialValue, onSet) as
-    [Getter<T | null>, Setter<T | null>, React.RefObject<T>]
+    [Getter<T | null>, Setter<T | null>, React.RefObject<T | null>]
 }

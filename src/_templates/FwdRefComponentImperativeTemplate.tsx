@@ -9,7 +9,6 @@ import Pu = TypeU.Pu
 import Children = ReactU.Children
 import colC = EmotionCommon.colC
 import resetButton = EmotionCommon.resetButton
-import ClassStyle = ReactU.ClassStyle
 
 
 
@@ -21,7 +20,7 @@ const ToBeExtended = styled.button`
 
 type MyComponentExtraProps = Pu<{
   isError: boolean
-}> & ClassStyle& Children
+}> & Children
 
 type MyComponentProps = React.ComponentPropsWithRef<typeof ToBeExtended> & MyComponentExtraProps
 

@@ -75,7 +75,7 @@ export type UseTabsOptions = {
 
 
 export const useTabs = (
-  tabsFrameRef: React.RefObject<HTMLElement>,
+  tabsFrameRef: React.RefObject<HTMLElement | null>,
   options: UseTabsOptions,
 ) => {
   const getTabsFrame = () => tabsFrameRef.current

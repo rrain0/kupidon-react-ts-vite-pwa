@@ -18,43 +18,40 @@ type AnimatedDivExtraProps = Pu<{
   animatedAttrs: AnimatedElemAttrs
 }> & Children
 
-type AnimatedDivRefElement = HTMLDivElement
-type AnimatedDivProps = React.ComponentPropsWithoutRef<'div'> & AnimatedDivExtraProps
+type AnimatedDivProps = React.ComponentPropsWithRef<'div'> & AnimatedDivExtraProps
 
 
 
 
-const AnimatedDiv = React.memo(
-  React.forwardRef<AnimatedDivRefElement, AnimatedDivProps>(
-    (props, forwardedRef) => {
-      const {
-        animatedStyle,
-        animatedAttrs,
-        children,
-        ...restProps
-      } = props
-      
-      
-      const elemRef = useRef<AnimatedDivRefElement>(null)
-      useImperativeHandle(forwardedRef, () => elemRef.current!, [])
-      
-      
-      useUpdateElemStyleUpdaters(elemRef, animatedStyle)
-      useUpdateElemAttrsUpdaters(elemRef, animatedAttrs)
-      
-      
-      return (
-        <div
-          data-display-name="AnimatedDiv"
-          {...restProps}
-          ref={elemRef}
-        >
-          {children}
-        </div>
-      )
-    }
+const AnimatedDiv = React.memo((props: AnimatedDivProps) => {
+  const {
+    ref,
+    animatedStyle,
+    animatedAttrs,
+    children,
+    ...restProps
+  } = props
+  
+  
+  const elemRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => elemRef.current!, [])
+  
+  
+  useUpdateElemStyleUpdaters(elemRef, animatedStyle)
+  useUpdateElemAttrsUpdaters(elemRef, animatedAttrs)
+  
+  
+  return (
+    <div
+      data-display-name="AnimatedDiv"
+      {...restProps}
+      ref={elemRef}
+    >
+      {children}
+    </div>
   )
-)
+})
+
 AnimatedDiv.displayName = 'AnimatedDiv'
 export default AnimatedDiv
 

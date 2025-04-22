@@ -16,7 +16,7 @@ import Puro = TypeU.Puro
 
 export type TabsRenderProps = ReturnType<typeof useTabs>
 export type TabsRefsProps = {
-  tabFrameRef: React.RefObject<HTMLDivElement>
+  tabFrameRef: React.RefObject<HTMLDivElement | null>
 }
 export type TabsCustomProps = {
   tabsState: TabsState

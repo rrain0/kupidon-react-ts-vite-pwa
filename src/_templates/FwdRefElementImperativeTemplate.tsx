@@ -7,7 +7,6 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
 import colC = EmotionCommon.colC
-import ClassStyle = ReactU.ClassStyle
 
 
 
@@ -15,7 +14,7 @@ import ClassStyle = ReactU.ClassStyle
 export type MyComponentExtraProps = Pu<{
   // custom props
   isError: boolean
-}> & ClassStyle & Children
+}> & Children
 
 export type MyComponentProps = React.ComponentPropsWithRef<'div'> & MyComponentExtraProps
 

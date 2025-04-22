@@ -60,5 +60,5 @@ export type UseTabsStateRenderProps = {
   setTabsState: SetterOrUpdater<TabsState>
   tabIdx: TabIdx
   setTabIdx: SetterOrUpdater<TabIdx>
-  tabFrameRef: React.RefObject<HTMLDivElement>
+  tabFrameRef: React.RefObject<HTMLDivElement | null>
 }

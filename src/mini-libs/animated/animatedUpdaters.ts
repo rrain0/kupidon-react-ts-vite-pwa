@@ -49,7 +49,7 @@ const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
 
 export type ElemAttrsUpdaters = Record<string, (value?: string) => void>
 const createElemAttrsUpdaters = (
-  elemRef: React.RefObject<HTMLElement>,
+  elemRef: React.RefObject<HTMLElement | null>,
   animatedElemAttrs: AnimatedElemAttrs = { },
 ): ElemAttrsUpdaters => {
   
@@ -88,7 +88,7 @@ export type ElemStyleUpdatersRest = Pu<{
 export type ElemStyleUpdaters = ElemStyleUpdatersExplicit & ElemStyleUpdatersRest
 
 const createElemStyleUpdaters = (
-  elemRef: React.RefObject<HTMLElement>,
+  elemRef: React.RefObject<HTMLElement | null>,
   animatedElemStyle: AnimatedElemStyle = { },
 ): ElemStyleUpdaters => {
   
@@ -188,7 +188,7 @@ export const useUpdateComponentStateUpdaters = <S extends Record<string, any>>(
 
 
 export const useUpdateElemStyleUpdaters = (
-  elemRef: React.RefObject<HTMLElement>,
+  elemRef: React.RefObject<HTMLElement | null>,
   animated?: AnimatedElemStyle,
 ) => {
   const updaters = createElemStyleUpdaters(elemRef, animated)
@@ -197,7 +197,7 @@ export const useUpdateElemStyleUpdaters = (
 
 
 export const useUpdateElemAttrsUpdaters = (
-  elemRef: React.RefObject<HTMLElement>,
+  elemRef: React.RefObject<HTMLElement | null>,
   animated?: AnimatedElemAttrs,
 ) => {
   const updaters = createElemAttrsUpdaters(elemRef, animated)

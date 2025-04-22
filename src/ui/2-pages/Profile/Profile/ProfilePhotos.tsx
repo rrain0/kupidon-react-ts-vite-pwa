@@ -181,7 +181,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   //const setLogData = useSetRecoilState(LogLayerRecoil)
   
   const [springs, springApi] = useSprings(images.length, springStyle(), [images])
-  const applyDragRef = useRef<Callback>()
+  const applyDragRef = useRef<Callback>(undefined)
   // noinspection JSVoidFunctionReturnValueUsed
   const drag = useDrag(gesture => {
     const {
@@ -270,7 +270,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                   position: relative;
                   ${flexC};
                 `}
-                ref={value => photoFrameRefs.current[i] = value}
+                ref={value => { photoFrameRefs.current[i] = value }}
               >
                 
                 
@@ -313,6 +313,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                       return (
                         <div css={contents} {...getRootProps()}>
                           <input {...getInputProps()} />
+                          {/* @ts-expect-error */}
                           <animated.label
                             css={photoDraggableBox}
                             style={springStyle}
