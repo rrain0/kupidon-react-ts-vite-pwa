@@ -1,26 +1,25 @@
 import { useAutoRetry } from '@util/app/useAutoRetry.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
-import Setter = TypeU.Setter
-import Getter = TypeU.Getter
+import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 
 
 export const useMediaDownloadAutoRetry = <T extends MediaDownloadable | undefined>(
-  getMedia: Getter<T>, setMedia: Setter<T>,
+  media: T, setMedia: SetterOrUpdater<T>,
 ) => {
   const retry = () => {
-    const m = getMedia()
-    if (m?.needRetryDownload) {
-      setMedia({
+    setMedia(m => {
+      if (m?.needRetryDownload) return {
         ...m,
         needRetryDownload: false,
         needDownload: true,
-      })
-    }
+      }
+      return m
+    })
   }
   
-  useAutoRetry(getMedia()?.needRetryDownload, { }, retry)
+  useAutoRetry(media?.needRetryDownload, { }, retry)
 }
 

@@ -1,19 +1,17 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
-  getMediaDownloadUiState,
+  getMediaUiState,
   MediaDownloadable, newDefaultEmptyRemoteMedia,
   newDefaultRemoteMedia,
 } from 'src/ui-data/models/media/Media.ts'
+import MediaDownloader from 'src/ui-data/models/media/download/MediaDownloader.tsx'
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
-import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
-import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -38,7 +36,6 @@ import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { DateU } from '@util/date/DateU.ts'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { useTimeout } from '@util/react/useTimeout.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import full = RouteBuilder.full
@@ -69,22 +66,15 @@ const ProfileSummaryPage = React.memo(() => {
   useEffect(() => setUiProfileFillProgress(profileFillProgress), [profileFillProgress])
   
   
-  const [
-    getMainPhoto, setMainPhoto, mainPhoto,
-  ] = useStateAndRef<MediaDownloadable | undefined>(undefined)
-  
-  const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
-  useTimeout(3000, () => setCanShowFetchProgress(true), [])
-  
-  useMediaDownload(getMainPhoto, setMainPhoto, { canShowFetchProgress })
-  useMediaDownloadAutoRetry(getMainPhoto, setMainPhoto)
+  const [mainPhoto, setMainPhoto] = useState<MediaDownloadable | undefined>(undefined)
   
   const remoteMainPhoto = useMemo(() => {
     return photos.find(it => it.index === 0)
   }, [photos])
-  // TODO make generic photo update. Need save current dataUrl or download if photo the same
+  // TODO Download -  make generic photo update.
+  //  Need save current dataUrl or download if photo the same
   useEffect(() => {
-    const m = getMainPhoto()
+    const m = mainPhoto
     if (!photos) setMainPhoto(undefined)
     else if (!remoteMainPhoto) setMainPhoto(newDefaultEmptyRemoteMedia())
     else setMainPhoto({
@@ -124,11 +114,13 @@ const ProfileSummaryPage = React.memo(() => {
                 
                 <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
                   <AvaBox>
-                    {(() => {
-                      const { isReady, ...loadingUi } = getMediaDownloadUiState(mainPhoto)
-                      if (isReady) return <AvaIm src={mainPhoto!.dataUrl} />
-                      return <MediaUiState {...loadingUi} />
-                    })()}
+                    <MediaDownloader media={mainPhoto}>
+                      {(media) => {
+                        const { isReady, dataUrl, ...loading } = getMediaUiState(media)
+                        if (isReady) return <AvaIm src={dataUrl} />
+                        return <MediaUiState {...loading} />
+                      }}
+                    </MediaDownloader>
                   </AvaBox>
                 </Link>
                 

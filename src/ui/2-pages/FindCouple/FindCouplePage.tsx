@@ -14,7 +14,7 @@ import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
-import MediaArrayDownloader from 'src/ui-data/models/media/MediaArrayDownloader.tsx'
+import MediaArrayDownloader from 'src/ui-data/models/media/download/MediaArrayDownloader.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase, {
   ProfileShowcaseAction,
@@ -26,8 +26,6 @@ import full = EmotionCommon.full
 import rf3 = MathU.rf3
 import Pu = TypeU.Pu
 import exists = TypeU.exists
-
-
 
 
 
@@ -57,9 +55,9 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   const getTrackProps = createTrackPropsGetter(frameRef)
   
   const [isMoving, setIsMoving] = useState(false)
-  const [
-    getStackAction, setStackAction, stackAction,
-  ] = useStateAndRef<ProfileShowcaseAction>(undefined)
+  const {
+    get: getStackAction, set: setStackAction, state: stackAction,
+  } = useStateAndRef<ProfileShowcaseAction>(undefined)
   
   
   const getCarouselProps = ({

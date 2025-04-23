@@ -142,7 +142,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   
-  const [getIsDragging, setIsDragging, isDragging] = useStateAndRef(false)
+  const {
+    get: getIsDragging, set: setIsDragging, state: isDragging,
+  } = useStateAndRef(false)
   const [getIsAnimating, setIsAnimating] = useRefGetSet(false)
   
   const [lockTouchAction, unlockTouchAction] = useNoTouchAction()

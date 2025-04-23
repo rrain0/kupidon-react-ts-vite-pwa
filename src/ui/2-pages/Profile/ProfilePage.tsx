@@ -14,6 +14,9 @@ import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import {
+  useMediaArrayDownloader
+} from 'src/ui-data/models/media/download/useMediaArrayDownloader.ts'
 import { MediaInArrayDUC, MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
@@ -67,6 +70,10 @@ import col = EmotionCommon.col
 import abs = EmotionCommon.abs
 import arrOfIndices = ArrayU.arrOfIndices
 import exists = TypeU.exists
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import ValueOrMapper = TypeU.ValueOrMapper
+import isfunction = TypeU.isfunction
+import notundef = TypeU.notundef
 
 
 
@@ -233,7 +240,9 @@ const ProfilePage = React.memo(() => {
   
   // todo it retries endlessly if can't obtain photos
   useAsyncEffect((lock, unlock) => {
-    //return;
+    return
+    
+    
     const serverPhotos = formValues.initialValues.photos
     const photos = formValues.photos
     ;[...serverPhotos, ...photos].forEach(photo => {
@@ -344,6 +353,46 @@ const ProfilePage = React.memo(() => {
       }
     })
   }, [formValues.initialValues.photos])
+  
+  
+  
+  const serverPhotos = formValues.initialValues.photos
+  const setServerPhotos = useCallback((valueOrMapper: ValueOrMapper<MediaInArrayDUC[] | undefined>) => {
+    setFormValues(vs => {
+      const photos = vs.initialValues.photos
+      const newPhotos = (() => {
+        if (isfunction(valueOrMapper)) return valueOrMapper(photos)
+        return valueOrMapper
+      })()
+      if (notundef(newPhotos) && photos !== newPhotos) return {
+        ...vs,
+        initialValues: {
+          ...vs.initialValues,
+          photos: newPhotos,
+        },
+      }
+      return vs
+    })
+  }, [])
+  const clientPhotos = formValues.photos
+  const setClientPhotos = useCallback((valueOrMapper: ValueOrMapper<MediaInArrayDUC[] | undefined>) => {
+    setFormValues(vs => {
+      const photos = vs.photos
+      const newPhotos = (() => {
+        if (isfunction(valueOrMapper)) return valueOrMapper(photos)
+        return valueOrMapper
+      })()
+      if (notundef(newPhotos) && photos !== newPhotos) return {
+        ...vs,
+        photos: newPhotos,
+      }
+      return vs
+    })
+  }, [])
+  
+  useMediaArrayDownloader(serverPhotos, setServerPhotos)
+  useMediaArrayDownloader(clientPhotos, setClientPhotos)
+  
   
   
   

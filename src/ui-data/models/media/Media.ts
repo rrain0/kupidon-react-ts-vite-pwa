@@ -148,17 +148,15 @@ export interface MediaInArrayDownloadable extends MediaInArray, Downloadable { }
 
 export type Uploadable = Pu<{
   needUpload: boolean
-  showUpload: boolean
   upload: MediaOperation
   uploadError: any
 }>
 
 
 
-// Convert to another format or compress
+// Compress media or convert to another format
 export type Convertible = Pu<{
   needConversion: boolean
-  showConversion: boolean
   conversion: MediaOperation
   conversionError: any
 }>
@@ -173,30 +171,54 @@ export interface MediaInArrayDUC extends MediaInArray, DUC { }
 
 
 
-export const getMediaDownloadUiState = (
-  media?: MediaDownloadable,
+export const getMediaUiState = (
+  media?: MediaDUC,
   { allowEmpty = true } = { },
 ) => {
   const {
-    isInited, type, isEmpty, isReady,
+    isInited, type, isEmpty, isReady, dataUrl,
     needDownload, download, downloadError, needRetryDownload,
+    needUpload, upload, uploadError,
+    needConversion, conversion, conversionError,
   } = media ?? { }
-  const isDownloading = false
-  const isConverting = true
-  const isUploading = true
-  const isLoading = !isInited || download
-    || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
+  
+  const canNeedDownload = isInited && !isEmpty && type === 'remote'
+    && !isReady && !needDownload && !needRetryDownload && !download
+  
+  const isConverting = !!conversion || needConversion
+  const isUploading = !!upload || needUpload
+  const isDownloading = !!download || needDownload || needRetryDownload
+  
+  const isLoading = isDownloading || isConverting || isUploading || !isInited || (
+    !isEmpty && !isReady && !downloadError && !uploadError && !conversionError
+  )
+  
+  const conversionProgress = conversion?.progress
+  const downloadProgress = download?.progress
+  const uploadProgress = upload?.progress
+  const progress = conversionProgress ?? downloadProgress ?? uploadProgress
+  
+  const showConversionProgress = conversion?.showProgress
+  const showDownloadProgress = download?.showProgress
+  const showUploadProgress = upload?.showProgress
+  const showProgress = showConversionProgress ?? showDownloadProgress ?? showUploadProgress
+  
+  const isLoadingNoProgress = isLoading && !showProgress
+  const isLoadingWithProgress = isLoading && showProgress
+  
+  const isError = isInited && (
+    !isLoading || (!allowEmpty && isEmpty)
+  )
+  
   return {
-    canNeedDownload: isInited && !isEmpty && type === 'remote'
-      && !isReady && !needDownload && !needRetryDownload && !download,
-    isLoading,
-    isLoadingNoProgress: isLoading && !download?.showProgress,
-    isLoadingWithProgress: isLoading && download?.showProgress,
-    progress: download?.progress,
-    isReady,
-    isError: isInited && (
-      (!allowEmpty && isEmpty) || (downloadError && !needDownload && !needRetryDownload)
-    ),
+    canNeedDownload, isLoading, progress, showProgress,
+    isLoadingNoProgress, isLoadingWithProgress,
+    isReady, dataUrl,
+    isError,
+    
+    isDownloading, isConverting, isUploading,
+    conversionProgress, downloadProgress, uploadProgress,
+    showConversionProgress, showDownloadProgress, showUploadProgress,
   }
 }
 

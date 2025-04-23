@@ -1,4 +1,3 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { AsyncU } from '@util/common/AsyncU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -6,51 +5,41 @@ import { FileU } from '@util/file/FileU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useEffect } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import {
-  MediaDownloadable,
-  MediaInArrayDUC,
-  newDefaultMediaOperation,
-} from 'src/ui-data/models/media/Media.ts'
+import { MediaDownloadable, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
-import Getter = TypeU.Getter
-import Setter = TypeU.Setter
-import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import exists = TypeU.exists
+import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 
 
-export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
-  getMedias: Getter<T[] | undefined>, setMedias: Setter<T[] | undefined>,
+export const useMediaDownload = <T extends MediaDownloadable | undefined>(
+  media: T, setMedia: SetterOrUpdater<T>,
   { canShowFetchProgress = true } = { },
 ) => {
-  
-  // Medias must be 'isInited' & 'needDownload' to start download
-  
-  const medias = getMedias()
   useEffect(() => {
-    if (medias) setMedias(ArrayU.mapToIf(medias, m => {
+    setMedia(m => {
       if (!m?.needDownload) return m
-      
+    
       const fetchToBlobAbortCtrl = new AbortController()
       const blobToDataUrlAbortCtrl = new AbortController()
       const abortCtrl = new AbortController()
-      abortCtrl.signal.onabort = function() {
+      abortCtrl.signal.onabort = function () {
         fetchToBlobAbortCtrl.abort(this.reason)
         blobToDataUrlAbortCtrl.abort(this.reason)
       }
       const downloadStart = {
         isReady: false,
         needDownload: false,
-        download: { ...newDefaultMediaOperation(),
+        download: {
+          ...newDefaultMediaOperation(),
           id: m.id,
           showProgress: canShowFetchProgress,
           abort: reason => abortCtrl.abort(reason),
         },
         downloadError: undefined,
-      } satisfies Partial<MediaInArrayDUC>
+      } satisfies Partial<MediaDownloadable>
       
       // Если уже есть такая же загрузка, то пусть продолжается
       if (m.download?.id === downloadStart.download.id) return m
@@ -63,18 +52,20 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         updateForMedia?: Partial<MediaDownloadable>,
         updateForDownload?: Partial<MediaDownloadable['download']>,
       ) => {
-        const medias = getMedias()
-        if (medias) setMedias(mapFirstToIfFoundBy(medias,
-          m => m && ({ ...m,
-            ...updateForMedia,
-            ...updateForDownload && m?.download && {
-              download: { ...m.download, ...updateForDownload },
-            },
-          }),
-          m => exists(m) && m.download?.id === downloadStart.download.id,
-        ))
+        setMedia(m => {
+          if (m && m.download?.id === downloadStart.download.id) {
+            return {
+              ...m,
+              ...updateForMedia,
+              ...updateForDownload && m.download && {
+                download: { ...m.download, ...updateForDownload },
+              },
+            }
+          }
+          return m
+        })
       }
-      const updatePhotoThrottled = withThrottle(
+      const updateDownloadThrottled = withThrottle(
         RangeU.random(1500, 2300), updateMedia,
       )
       
@@ -83,11 +74,11 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           const progress = new StageProgress(2, [90, 10])
           const onProgress = (p = 0) => {
             progress.progress = p
-            //console.log('progress', m.id, progress.value)
-            updatePhotoThrottled(undefined, { progress: progress.value })
+            //console.log('progress', photo.id, progress.value)
+            updateDownloadThrottled(undefined, { progress: progress.value })
           }
           
-          //console.log('start download id',m.id)
+          //console.log('download started')
           const blob = await fetchToBlob(m.remoteUrl, {
             onProgress, abortCtrl: fetchToBlobAbortCtrl,
           })
@@ -100,7 +91,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           })
           abortCtrl.signal.throwIfAborted()
           
-          //console.log('completed',m.id)
+          //console.log('download completed')
           updateMedia({ isReady: true, download: undefined, dataUrl })
         }
         catch (ex) {
@@ -118,24 +109,29 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           updateMedia({ download: undefined, downloadError: ex })
         }
       })()
+      
       return m
-    }))
-  }, [getMedias()])
+    })
+  }, [media])
   
   
   useEffect(() => {
-    const medias = getMedias()
-    if (medias) setMedias(ArrayU.mapToIf(medias, m => {
+    setMedia(m => {
       if (m?.download) return { ...m,
-        download: { ...m.download, showProgress: canShowFetchProgress },
+        download: { ...m.download,
+          showProgress: canShowFetchProgress,
+        },
       }
       return m
-    }))
+    })
   }, [canShowFetchProgress])
   
   
   useEffect(() => {
-    return () => getMedias()?.forEach(m => m?.download?.abort('Download is stale'))
+    return () => setMedia(m => {
+      m?.download?.abort('Download is stale')
+      return m
+    })
   }, [])
 }
 

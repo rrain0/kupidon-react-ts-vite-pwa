@@ -73,13 +73,13 @@ export namespace TypeU {
   
   // Типы и предикаты для оператора typeof (за исключением того, что null это null, а не объект)
   export type Isobject<T> = T extends object ? T extends anyfun ? never : T : never
-  export function isundef<T, U extends undefined>(value: T | U): value is U {
+  export function isundef<T>(value: T | undefined): value is undefined {
     return value === undefined
   }
   export function notundef<T, NU extends {} | null>(value: T | NU): value is NU {
     return value !== undefined
   }
-  export function isnull<T, N extends null>(value: T | N): value is N {
+  export function isnull<T>(value: T | null): value is null {
     return value === null
   }
   export function notnull<T, NN extends {} | undefined>(value: T | NN): value is NN {

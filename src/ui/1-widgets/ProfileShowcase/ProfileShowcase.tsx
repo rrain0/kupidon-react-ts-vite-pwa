@@ -18,7 +18,7 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Images } from 'src/ui-data/Images'
 import {
-  getMediaDownloadUiState,
+  getMediaUiState,
   MediaInArrayDownloadable,
 } from 'src/ui-data/models/media/Media.ts'
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
@@ -358,9 +358,9 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                       }}
                     >
                       {({ photo }) => {
-                        const { isReady, ...loadingUi } = getMediaDownloadUiState(photo)
-                        if (isReady) return <Photo src={photo?.dataUrl ?? ''} />
-                        return <MediaUiState {...loadingUi} />
+                        const { isReady, dataUrl, ...loading } = getMediaUiState(photo)
+                        if (isReady) return <Photo src={dataUrl} />
+                        return <MediaUiState {...loading} />
                       }}
                     </AnimatedState>
                   )

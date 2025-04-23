@@ -1,17 +1,16 @@
-import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import clsx from 'clsx'
 import React, {
   SyntheticEvent, useEffect,
   useImperativeHandle,
-  useRef,
+  useRef, useState,
 } from 'react'
 import {
-  getMediaDownloadUiState,
+  getMediaUiState,
   MediaDownloadable,
   urlToMedia,
 } from 'src/ui-data/models/media/Media.ts'
-import { useMediaDownload } from 'src/ui-data/models/media/useMediaDownload.ts'
-import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/useMediaDownloadAutoRetry.ts'
+import { useMediaDownload } from 'src/ui-data/models/media/download/parts/useMediaDownload.ts'
+import { useMediaDownloadAutoRetry } from 'src/ui-data/models/media/download/parts/useMediaDownloadAutoRetry.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
@@ -42,12 +41,10 @@ const ImgSpark = React.memo(
       useImperativeHandle(forwardedRef, () => elemRef.current!, [])
       
       
-      const [
-        getMedia, setMedia, media,
-      ] = useStateAndRef<MediaDownloadable | undefined>(undefined)
+      const [media, setMedia] = useState<MediaDownloadable | undefined>(undefined)
       
-      useMediaDownload(getMedia, setMedia)
-      useMediaDownloadAutoRetry(getMedia, setMedia)
+      useMediaDownload(media, setMedia)
+      useMediaDownloadAutoRetry(media, setMedia)
       
       useEffect(() => {
         //console.log('new media:', urlToMedia(src))
@@ -55,10 +52,10 @@ const ImgSpark = React.memo(
       }, [src])
       
       
-      const { isLoading, isReady, isError } = getMediaDownloadUiState(media, { allowEmpty: false })
+      const { isLoading, isReady, isError } = getMediaUiState(media, { allowEmpty: false })
       
-      //console.log(media)
-      //console.log({ isLoading, isReady, isError })
+      console.log(media)
+      console.log({ isLoading, isReady, isError })
       
       return (
         <div // Frame
@@ -69,7 +66,7 @@ const ImgSpark = React.memo(
           
           <img
             ref={elemRef}
-            src={media?.dataUrl}
+            src={media?.dataUrl || undefined}
             {...combineProps({
               onLoad: (ev: SyntheticEvent<HTMLImageElement>) => {
                 // Event, when image fully loaded and queued for rendering, but not rendered yet

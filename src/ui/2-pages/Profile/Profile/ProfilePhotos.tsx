@@ -13,6 +13,7 @@ import React, {
 } from 'react'
 import Dropzone from 'react-dropzone'
 import {
+  getMediaUiState,
   MediaInArrayDUC,
   MediaOperation, newDefaultLocalMediaInArray,
   newDefaultMediaOperation,
@@ -322,16 +323,19 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                           >
                             
                             {(() => {
-                              if (im.conversion?.showProgress)
+                              const { showConversionProgress, conversionProgress = 0 } = getMediaUiState(im)
+                              
+                              if (showConversionProgress) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
                                     <PieProgress css={ImageParts.pieProgressS}
                                       progress={
-                                        RangeU.map(im.conversion.progress, [0, 100], [5, 95])
+                                        RangeU.map(conversionProgress, [0, 100], [5, 95])
                                       }
                                     />
                                   </div>
                                 )
+                              }
                               
                               if (!canShowFetchProgress && (
                                 !im.isInited

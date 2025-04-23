@@ -1,0 +1,33 @@
+import { TypeU } from '@util/common/TypeU.ts'
+import { useTimeout } from '@util/react/useTimeout.ts'
+import { useEffect, useState } from 'react'
+import { useMediaDownload } from 'src/ui-data/models/media/download/parts/useMediaDownload.ts'
+import {
+  useMediaDownloadAutoRetry
+} from 'src/ui-data/models/media/download/parts/useMediaDownloadAutoRetry.ts'
+import { getMediaUiState, MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
+import SetterOrUpdater = TypeU.SetterOrUpdater
+
+
+
+export const useMediaDownloader = <T extends MediaDownloadable | undefined>(
+  media: T, setMedia: SetterOrUpdater<T>,
+  { canShowFetchProgressTimeout = 3000 } = { },
+) => {
+  
+  useEffect(() => {
+    setMedia(m => {
+      if (getMediaUiState(m).canNeedDownload) return {
+        ...m, needDownload: true,
+      }
+      return m
+    })
+  }, [media])
+  
+  const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
+  useTimeout(canShowFetchProgressTimeout, () => setCanShowFetchProgress(true), [])
+  
+  useMediaDownload(media, setMedia, { canShowFetchProgress })
+  useMediaDownloadAutoRetry(media, setMedia)
+  
+}

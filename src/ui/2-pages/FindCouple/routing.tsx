@@ -108,6 +108,8 @@ const FindCouplePageWithItems = React.memo(() => {
   }, [])
   
   
+  // TODO Download -  make generic photo update.
+  //  Need save current dataUrl or download if photo the same
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
       setItems((response.data.items as any[]).map(it => {

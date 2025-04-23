@@ -38,7 +38,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<ImgSpark />'}</div>
               <ImgSpark
                 css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/ban.jpg` : undefined}
               />
             </div>
             
@@ -46,7 +46,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<img />'}</div>
               <img
                 css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/ban.jpg` : undefined}
               />
             </div>
           </div>
@@ -62,7 +62,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<ImgSpark />'} delayed</div>
               <ImgSpark
                 css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : undefined}
               />
             </div>
             
@@ -70,7 +70,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<img />'} delayed</div>
               <img
                 css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : undefined}
               />
             </div>
           </div>
@@ -86,7 +86,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<ImgSpark />'} delayed 404 error</div>
               <ImgSpark
                 css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : undefined}
               />
             </div>
             
@@ -94,7 +94,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<img />'} delayed 404 error</div>
               <img
                 css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : undefined}
               />
             </div>
           </div>
@@ -110,7 +110,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<ImgSpark />'} delayed 500 error</div>
               <ImgSpark
                 css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : undefined}
               />
             </div>
             
@@ -118,7 +118,7 @@ const ImageTestPage = React.memo(() => {
               <div>{'<img />'} delayed 500 error</div>
               <img
                 css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : ''}
+                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : undefined}
               />
             </div>
           </div>

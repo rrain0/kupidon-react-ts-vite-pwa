@@ -2,17 +2,16 @@ import { useAutoRetry } from '@util/app/useAutoRetry.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
-import Setter = TypeU.Setter
-import Getter = TypeU.Getter
 import mapToIf = ArrayU.mapToIf
+import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 
 export const useMediaArrayDownloadAutoRetry = <T extends MediaDownloadable | undefined>(
-  getMedias: Getter<T[] | undefined>, setMedias: Setter<T[] | undefined>,
+  medias: T[] | undefined, setMedias: SetterOrUpdater<T[] | undefined>,
 ) => {
   const retry = () => {
-    setMedias(mapToIf(getMedias(), m => {
+    setMedias(medias => mapToIf(medias, m => {
       if (m?.needRetryDownload) {
         return {
           ...m,
@@ -24,6 +23,6 @@ export const useMediaArrayDownloadAutoRetry = <T extends MediaDownloadable | und
     }))
   }
   
-  useAutoRetry(getMedias()?.some(m => m?.needRetryDownload), { }, retry)
+  useAutoRetry(medias?.some(m => m?.needRetryDownload), { }, retry)
 }
 
