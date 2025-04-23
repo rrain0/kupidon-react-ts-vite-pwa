@@ -140,30 +140,6 @@ export type Downloadable = Pu<{
 // extend this interface to define a particular error type, etc.
 export interface MediaDownloadable extends Media, Downloadable { }
 
-export const getMediaDownloadUiState = (
-  media?: MediaDownloadable,
-  { allowEmpty = true } = { },
-) => {
-  const {
-    isInited, type, isEmpty, isReady,
-    needDownload, download, downloadError, needRetryDownload,
-  } = media ?? { }
-  const isLoading = !isInited || download
-    || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
-  return {
-    canNeedDownload: isInited && !isEmpty && type === 'remote'
-      && !isReady && !needDownload && !needRetryDownload && !download,
-    isLoading,
-    isLoadingNoProgress: isLoading && !download?.showProgress,
-    isLoadingWithProgress: isLoading && download?.showProgress,
-    progress: download?.progress,
-    isReady,
-    isError: isInited && (
-      (!allowEmpty && isEmpty) || (downloadError && !needDownload && !needRetryDownload)
-    ),
-  }
-}
-
 
 
 export interface MediaInArrayDownloadable extends MediaInArray, Downloadable { }
@@ -193,5 +169,35 @@ interface DUC extends Downloadable, Uploadable, Convertible { }
 
 export interface MediaDUC extends Media, DUC { }
 export interface MediaInArrayDUC extends MediaInArray, DUC { }
+
+
+
+
+export const getMediaDownloadUiState = (
+  media?: MediaDownloadable,
+  { allowEmpty = true } = { },
+) => {
+  const {
+    isInited, type, isEmpty, isReady,
+    needDownload, download, downloadError, needRetryDownload,
+  } = media ?? { }
+  const isDownloading = false
+  const isConverting = true
+  const isUploading = true
+  const isLoading = !isInited || download
+    || (!isEmpty && !isReady && (needRetryDownload || !downloadError))
+  return {
+    canNeedDownload: isInited && !isEmpty && type === 'remote'
+      && !isReady && !needDownload && !needRetryDownload && !download,
+    isLoading,
+    isLoadingNoProgress: isLoading && !download?.showProgress,
+    isLoadingWithProgress: isLoading && download?.showProgress,
+    progress: download?.progress,
+    isReady,
+    isError: isInited && (
+      (!allowEmpty && isEmpty) || (downloadError && !needDownload && !needRetryDownload)
+    ),
+  }
+}
 
 

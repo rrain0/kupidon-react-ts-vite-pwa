@@ -15,7 +15,6 @@ export namespace TypeU {
   export const emptyArr = []
   
   export const attrEmpty = (value: any): HtmlAttrEmpty => value ? '' : undefined
-  export const trueOrUndef = (value: any): true | undefined => value ? true : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type Exists<T> = Exclude<T, empty>
@@ -26,7 +25,7 @@ export namespace TypeU {
   }
   export type Pu<O extends object> = PartialUndef<O>
   // Remove Partial & Undefined
-  export type Present<O extends object> = {
+  export type Defined<O extends object> = {
     [Prop in keyof O]-?: Exclude<O[Prop], undefined>
   }
   // Add ReadOnly
@@ -40,6 +39,10 @@ export namespace TypeU {
   export type WriteablePartial<O extends object> = {
     -readonly [Prop in keyof O]+?: O[Prop]
   }
+  // Make props in O optional if they appear in Defaults
+  export type PartialDefaults<O extends object = object, Defaults extends Partial<O> = Partial<O>> =
+    & Omit<O, keyof Defaults>
+    & { [DProp in keyof Defaults & keyof O]?: O[DProp] }
   
   
   export type RecordRo<K extends keyof any, T> = {

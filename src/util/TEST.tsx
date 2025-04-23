@@ -1,60 +1,17 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import nextUp from '@im/test/NEXT UP.jpg'
+import isagi from '@im/test/Isagi - Blue Lock 250d5ed0b02d009af2f7fa46732b468b.jpg'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import lastIndex = ArrayU.lastI
 
-
-
 export { }
 
-
-/* Write here what you wanna test */
-
+/* Write here what you wanna test 🎉🎉🎉 */
 
 
-const withDefaultsNotTyped = (defaultProps, Component) => React.forwardRef(
-  (props, forwardedRef) => {
-    return <Component {...defaultProps} {...props} ref={forwardedRef} />
-  }
-)
-
-/*
-Don't know how to type ref
-const withDefaults =
-  <FC extends React.FC<P>, P extends object>
-  (defaultProps: NoInfer<PropsWithoutRef<P>>, Component: FC): FC =>
-    React.forwardRef<React.ElementRef<FC>, React.ComponentPropsWithoutRef<P>>(
-      (props, forwardedRef) => {
-        return <Component {...defaultProps} {...props} ref={forwardedRef} />
-      }
-    )
-*/
-
-const MyImg = styled.img`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 200px;
-  height: auto;
-`
-
-// Example with default props
-// @ts-ignore - Property was removed
-MyImg.defaultProps = { src: nextUp }
-
-// Example with component wrapping
-const MyImgWithSrc = React.forwardRef<HTMLImageElement, React.ComponentPropsWithoutRef<'img'>>(
-  (props, ref) => <MyImg ref={ref} {...props} src={nextUp} />
-)
-
-const MyImgUsage = () => {
-  return (
-    <MyImgWithSrc src={nextUp} />
-  )
-}
 
 
 

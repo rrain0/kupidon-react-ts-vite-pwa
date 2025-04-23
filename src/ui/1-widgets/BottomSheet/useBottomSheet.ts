@@ -25,7 +25,7 @@ import lastIndex = ArrayU.lastI
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
 import notExists = TypeU.notExists
-import Present = TypeU.Present
+import Defined = TypeU.Defined
 
 
 
@@ -74,7 +74,7 @@ export type SheetSnapPoints = (number | string)[]
 export type SheetSnapIdx = number | null
 
 
-export type SheetSnaps = Present<Pick<UseBottomSheetOptions, 'snapPoints' | 'defaultOpenIdx'>>
+export type SheetSnaps = Defined<Pick<UseBottomSheetOptions, 'snapPoints' | 'defaultOpenIdx'>>
 export const SheetSnapsHalfScreen: SheetSnaps = {
   snapPoints: [0, '15%', 'free', 'fit-content', '50%', 'free', '80%'] as SheetSnapPoints,
   defaultOpenIdx: 3,
