@@ -4,7 +4,7 @@ import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
-import notundef = TypeU.notundef
+import isdef = TypeU.isdef
 import ClassStyle = ReactU.ClassStyle
 
 
@@ -51,10 +51,10 @@ export const Flex = React.memo((props: FlexProps) => {
     ...alignCt && { alignContent: alignCt },
     ...alignSelf && { alignSelf: alignSelf },
     ...justifyCt && { justifyContent: justifyCt },
-    ...notundef(g) && { gap: g },
-    ...notundef(order) && { order: order },
-    ...notundef(grow) && { flexGrow: grow },
-    ...notundef(shrink) && { flexShrink: shrink },
+    ...isdef(g) && { gap: g },
+    ...isdef(order) && { order: order },
+    ...isdef(grow) && { flexGrow: grow },
+    ...isdef(shrink) && { flexShrink: shrink },
   }
   
   return (

@@ -126,11 +126,11 @@ export const profileUpdateApiRequest = (
     
     const setUpload = (upload: MediaOperation) => {
       setFormValues(s => ({ ...s,
-        photos: mapFirstToIfFoundBy(
-          s.photos,
-          elem => ({ ...elem, upload }),
-          elem => elem.upload?.id === upload.id
-        ),
+        photos: mapFirstToIfFoundBy({
+          arr: s.photos,
+          filter: elem => elem.upload?.id === upload.id,
+          mapper: elem => ({ ...elem, upload }),
+        }),
       }))
     }
     const delayTimerId = setTimeout(() => {
@@ -200,10 +200,11 @@ export const profileUpdateApiRequest = (
       } satisfies Partial<MediaInArrayDUC>
       
       setFormValues(form => ({ ...form,
-        photos: mapFirstToIfFoundBy(form.photos,
-          photo => ({ ...photo, ...uploadStart }),
-          photo => photo.upload?.id === uploadStart.upload.id,
-        ),
+        photos: mapFirstToIfFoundBy({
+          arr: form.photos,
+          filter: photo => photo.upload?.id === uploadStart.upload.id,
+          mapper: photo => ({ ...photo, ...uploadStart }),
+        }),
       }))
       
       
@@ -213,15 +214,16 @@ export const profileUpdateApiRequest = (
       ) => {
         const upload = getUpload()
         if (upload) setFormValues(form => ({ ...form,
-          photos: mapFirstToIfFoundBy(form.photos,
-            photo => ({ ...photo,
+          photos: mapFirstToIfFoundBy({
+            arr: form.photos,
+            filter: photo => photo.upload?.id === upload.id,
+            mapper: photo => ({ ...photo,
               ...photoUpdate,
               ...uploadUpdate && photo.upload && {
                 upload: { ...photo.upload, ...uploadUpdate },
               },
             }),
-            photo => photo.upload?.id === upload.id
-          ),
+          }),
         }))
       }
       const updatePhotoThrottled = throttle(

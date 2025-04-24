@@ -74,18 +74,37 @@ const ProfileSummaryPage = React.memo(() => {
   // TODO Download -  make generic photo update.
   //  Need save current dataUrl or download if photo the same
   useEffect(() => {
-    const m = mainPhoto
-    if (!photos) setMainPhoto(undefined)
-    else if (!remoteMainPhoto) setMainPhoto(newDefaultEmptyRemoteMedia())
-    else setMainPhoto({
-      ...m, // inherit current download
-      ...newDefaultRemoteMedia(),
-      id: remoteMainPhoto.id,
-      remoteUrl: remoteMainPhoto.url,
-      name: remoteMainPhoto.name,
-      mimeType: remoteMainPhoto.mimeType,
-      isInited: true,
-      needDownload: true,
+    setMainPhoto(p => {
+      if (!photos) {
+        p?.download?.abort()
+        return undefined
+      }
+      else if (!remoteMainPhoto) {
+        p?.download?.abort()
+        return newDefaultEmptyRemoteMedia()
+      }
+      else {
+        let newP = {
+          ...p, // inherit current operations
+          ...newDefaultRemoteMedia(),
+          id: remoteMainPhoto.id,
+          remoteUrl: remoteMainPhoto.url,
+          name: remoteMainPhoto.name,
+          mimeType: remoteMainPhoto.mimeType,
+          downloadError: undefined,
+          needRetryDownload: false,
+          isInited: true,
+        }
+        if (newP.download && newP.download?.id !== newP.remoteUrl) {
+          newP.download?.abort()
+          newP = {
+            ...newP,
+            download: undefined,
+            needDownload: true,
+          }
+        }
+        return newP
+      }
     })
   }, [remoteMainPhoto])
   

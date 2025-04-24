@@ -3,7 +3,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import empty = TypeU.empty
 import ComparatorEq = TypeU.ComparatorEq
 import defaultComparatorEq = TypeU.defaultComparatorEq
-import defaultPredicate = TypeU.defaultFilter
+import defaultFilter = TypeU.defaultFilter
 import Mapper = TypeU.Mapper
 import Filter = TypeU.Filter
 import exists = TypeU.exists
@@ -447,7 +447,7 @@ export namespace ArrayU {
   
   export const findBy3 = <T, E>({
     arr,
-    filter = defaultPredicate,
+    filter = defaultFilter,
     startIdx = 0,
     orElse,
   }: FindByElseProps<T, E>): FindResult<T, E> => {
@@ -474,7 +474,7 @@ export namespace ArrayU {
   
   export const findBy2 = <T>({
     arr,
-    filter = defaultPredicate,
+    filter = defaultFilter,
     startIdx = 0,
   }: FindByProps<T>): FindResult<T, undefined> => {
     return findBy3({ arr, filter, startIdx, orElse: undefined })
@@ -483,7 +483,7 @@ export namespace ArrayU {
   
   export const findBy = <T>(
     arr: T[],
-    filter: Filter<T> = defaultPredicate,
+    filter: Filter<T> = defaultFilter,
     startIdx = 0
   ): FindResult<T, undefined> => {
     return findBy3({ arr, filter, startIdx, orElse: undefined })
@@ -494,7 +494,7 @@ export namespace ArrayU {
   
   export const findLastBy3 = <T, E>({
     arr,
-    filter = defaultPredicate,
+    filter = defaultFilter,
     startIdx = -1,
     orElse,
   }: FindByElseProps<T, E>): FindResult<T, E> => {
@@ -521,7 +521,7 @@ export namespace ArrayU {
   
   export const findLastBy2 = <T>({
     arr,
-    filter = defaultPredicate,
+    filter = defaultFilter,
     startIdx = -1,
   }: FindByProps<T>): FindResult<T, undefined> => {
     return findLastBy3({ arr, filter, startIdx, orElse: undefined })
@@ -530,7 +530,7 @@ export namespace ArrayU {
   
   export const findLastBy = <T>(
     arr: T[],
-    filter: Filter<T> = defaultPredicate,
+    filter: Filter<T> = defaultFilter,
     startIdx = -1
   ): FindResult<T, undefined> => {
     return findLastBy3({ arr, filter, startIdx, orElse: undefined })
@@ -543,7 +543,7 @@ export namespace ArrayU {
   export const replaceFirstToIfFoundBy = <T>(
     arr: T[],
     elem: NoInfer<T>,
-    filter: Filter<NoInfer<T>> = defaultPredicate
+    filter: Filter<NoInfer<T>> = defaultFilter
   ): T[] => {
     const findResult = findBy(arr, filter)
     if (findResult.isFound) {
@@ -554,11 +554,19 @@ export namespace ArrayU {
     return arr
   }
   
-  export const mapFirstToIfFoundBy = <T>(
-    arr: T[],
-    mapper: Mapper<NoInfer<T>>,
-    filter: Filter<NoInfer<T>> = defaultPredicate
-  ): T[] => {
+  export function mapFirstToIfFoundBy<T>(params: {
+    arr: T[], mapper: Mapper<NoInfer<T>>, filter: Filter<NoInfer<T>>
+  }): T[]
+  export function mapFirstToIfFoundBy<T>(params: {
+    arr: T[] | undefined, mapper: Mapper<NoInfer<T>>, filter: Filter<NoInfer<T>>
+  }): T[] | undefined
+  export function mapFirstToIfFoundBy<T>({
+    arr, mapper, filter,
+  }: {
+    arr: T[] | undefined, mapper: Mapper<NoInfer<T>>, filter: Filter<NoInfer<T>>
+  }): T[] | undefined {
+    if (!arr) return arr
+    filter ??= defaultFilter
     const findResult = findBy(arr, filter)
     if (findResult.isFound) {
       const newArr = [...arr]

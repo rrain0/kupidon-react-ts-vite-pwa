@@ -15,10 +15,12 @@ import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import exists = TypeU.exists
 import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
+
+// Если начнётся несколько загрузок с одинаковым урлом одновременно,
+// то это не проблема, потому что браузер кэширует.
 
 
 export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
@@ -54,6 +56,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
       if (m.download?.id === downloadStart.download.id) return m
       
       // Отменяем предыдущую загрузку и устанавливаем новую
+      // TODO Download - Тут хз, отменять её тут или это должны делать снаружи
       m.download?.abort('Download is stale')
       m = { ...m, ...downloadStart }
       
@@ -62,15 +65,18 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         updateForDownload?: Partial<MediaDownloadable['download']>,
       ) => {
         // TODO Download - Если 2 медиа с одинаковым id, то до второго медиа мы никогда не доберёмся
-        setMedias(medias => medias && mapFirstToIfFoundBy(medias,
-          m => m && ({ ...m,
+        // TODO Если не нашли загрузку при обновлении, то отменить её? Или пусть снаружи отменяют?
+        setMedias(medias => mapFirstToIfFoundBy({
+          arr: medias,
+          filter: m => m && m.download?.id === downloadStart.download.id,
+          mapper: m => m && ({
+            ...m,
             ...updateForMedia,
             ...updateForDownload && m?.download && {
               download: { ...m.download, ...updateForDownload },
             },
           }),
-          m => exists(m) && m.download?.id === downloadStart.download.id,
-        ))
+        }))
       }
       const updatePhotoThrottled = withThrottle(
         RangeU.random(1500, 2300), updateMedia,

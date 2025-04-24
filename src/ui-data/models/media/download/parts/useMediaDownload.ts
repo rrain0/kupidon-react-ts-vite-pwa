@@ -13,7 +13,6 @@ import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
 
-
 export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   media: T, setMedia: SetterOrUpdater<T>,
   { canShowFetchProgress = true } = { },
@@ -78,7 +77,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
             updateDownloadThrottled(undefined, { progress: progress.value })
           }
           
-          //console.log('download started')
+          console.log('download started')
           const blob = await fetchToBlob(m.remoteUrl, {
             onProgress, abortCtrl: fetchToBlobAbortCtrl,
           })
@@ -91,7 +90,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           })
           abortCtrl.signal.throwIfAborted()
           
-          //console.log('download completed')
+          console.log('download completed')
           updateMedia({ isReady: true, download: undefined, dataUrl })
         }
         catch (ex) {

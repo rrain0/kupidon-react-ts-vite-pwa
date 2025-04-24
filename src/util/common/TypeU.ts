@@ -73,10 +73,13 @@ export namespace TypeU {
   
   // Типы и предикаты для оператора typeof (за исключением того, что null это null, а не объект)
   export type Isobject<T> = T extends object ? T extends anyfun ? never : T : never
+  
+  // Value is undefined
   export function isundef<T>(value: T | undefined): value is undefined {
     return value === undefined
   }
-  export function notundef<T, NU extends {} | null>(value: T | NU): value is NU {
+  // Value is defined
+  export function isdef<T, NU extends {} | null>(value: T | NU): value is NU {
     return value !== undefined
   }
   export function isnull<T>(value: T | null): value is null {
@@ -85,9 +88,11 @@ export namespace TypeU {
   export function notnull<T, NN extends {} | undefined>(value: T | NN): value is NN {
     return value !== null
   }
+  // TODO rename it?  nonemptyval   isvaluepresent
   export function exists<T, E extends {}>(value: T | E): value is E {
     return value !== null && value !== undefined
   }
+  // TODO rename it?  emptyval
   export function notExists<T, NE extends empty>(value: T | NE): value is NE {
     return value === null || value === undefined
   }
@@ -97,9 +102,11 @@ export namespace TypeU {
   export function isnumber<T, N extends number>(value: T | N): value is N {
     return typeof value === 'number'
   }
+  // Value is number or string
   export function isnumstr<T, N extends number | string>(value: T | N): value is N {
     return typeof value === 'number' || typeof value === 'string'
   }
+  // Value is object (and not function & not null)
   export function isobject<T>(value: T): value is Isobject<T> {
     return typeof value === 'object' && value !== null
   }
@@ -156,7 +163,7 @@ export namespace TypeU {
   export type MapperN<Ins extends any[], Out> = (...values: Ins) => Out
   
   export type Predicate<T> = (v: T) => boolean
-  export const defaultPredicate: Predicate<any> = value => !!value
+  export const tobool: Predicate<any> = value => !!value
   export type Filter<T> = (v: T) => any
   export const defaultFilter: Filter<any> = value => !!value
   

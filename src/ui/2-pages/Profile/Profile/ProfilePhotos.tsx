@@ -3,6 +3,7 @@ import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
+import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import React, {
   useCallback,
   useEffect,
@@ -37,7 +38,6 @@ import { ImageU } from 'src/util/file/ImageU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
 import { useNoSelect } from '@util/pointer/useNoSelect.ts'
-import { useTimeout } from 'src/util/react/useTimeout.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import flexC = EmotionCommon.flexC
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -107,9 +107,6 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   
   const progressAnim = useMemo(() => radialGradKfs(theme), [theme])
   
-  const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
-  useTimeout(3000, () => setCanShowFetchProgress(true), [])
-  
   const [lastIdx, setLastIdx] = useState(0)
   
   const [dragState, setDragState] = useState(
@@ -139,7 +136,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   
   
   // swap photos
-  const [getSwapPhotosEffectEvent] = useAsRefGet((swap: NumRange) => {
+  const swapPhotos = useAsCallback((swap: NumRange) => {
     const newImages = [...images]
     newImages[swap[0]] = images[swap[1]]
     newImages[swap[1]] = images[swap[0]]
@@ -147,7 +144,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   })
   useLayoutEffect(() => {
     if (!dragState && swap) {
-      getSwapPhotosEffectEvent()(swap)
+      swapPhotos(swap)
       setSwap(undefined)
     }
   }, [dragState, swap])
@@ -267,7 +264,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
             <div css={contents} key={im.id}>
               <div
                 css={css`
-                  grid-area: im${i+1};
+                  grid-area: im${i + 1};
                   position: relative;
                   ${flexC};
                 `}
@@ -311,6 +308,15 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                     {({ getRootProps, getInputProps, isDragAccept }) => {
                       //console.log('getInputProps()',getInputProps())
                       //console.log('isDragAccept',isDragAccept)
+                      
+                      const {
+                        showConversionProgress, conversionProgress = 0,
+                        isLoadingNoProgress,
+                        isDownloading, showDownloadProgress, downloadProgress = 0,
+                        showUploadProgress, uploadProgress = 0,
+                        isEmpty, isReady,
+                      } = getMediaUiState(im)
+                      
                       return (
                         <div css={contents} {...getRootProps()}>
                           <input {...getInputProps()} />
@@ -323,8 +329,6 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                           >
                             
                             {(() => {
-                              const { showConversionProgress, conversionProgress = 0 } = getMediaUiState(im)
-                              
                               if (showConversionProgress) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
@@ -337,52 +341,48 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                                 )
                               }
                               
-                              if (!canShowFetchProgress && (
-                                !im.isInited
-                                || (
-                                  im.type === 'remote'
-                                  && !im.isReady
-                                  && !im.isEmpty
-                                )
-                              ))
+                              if (isDownloading && isLoadingNoProgress) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
                                     <SparkingLoadingLine />
                                   </div>
                                 )
+                              }
                               
-                              if (im.download?.showProgress)
+                              if (showDownloadProgress) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
                                     <PieProgress css={ImageParts.pieProgressS}
                                       progress={
-                                        RangeU.map(im.download.progress, [0, 100], [5, 95])
+                                        RangeU.map(downloadProgress, [0, 100], [5, 95])
                                       }
                                     />
                                   </div>
                                 )
+                              }
                               
-                              if (im.isEmpty)
+                              if (isEmpty) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
                                     <PlusIc css={SvgIconS6.t(ImageParts.placeholderIcS)} />
                                   </div>
                                 )
-                              if (im.isReady)
+                              }
+                              if (isReady) {
                                 return (
                                   <img css={photoImgStyle}
                                     src={im.dataUrl}
                                     alt={im.name}
                                   />
                                 )
-                              
+                              }
                             })()}
                             
-                            {im.type === 'local' && im.upload?.showProgress && (
+                            {showUploadProgress && (
                               <div css={photoDimmed}>
                                 <PieProgress css={ImageParts.pieProgressAccentS}
                                   progress={
-                                    RangeU.map(im.upload.progress, [0, 100], [5, 95])
+                                    RangeU.map(uploadProgress, [0, 100], [5, 95])
                                   }
                                 />
                               </div>
@@ -567,13 +567,13 @@ const onFilesSelectedBuilder = (
       .filter((im, i) => i === lastIdx || (i >= lastIdx && im.isEmpty)).length
     let filesI = 0
     const newImages = images.map((photo, i) => {
-      if (filesI < imgFiles.length
-        && (i === lastIdx
-          || (i >= lastIdx
-            && (imgFiles.length<=emptyCnt ? photo.isEmpty : true)
+      if (filesI < imgFiles.length && (
+        i === lastIdx || (
+          i >= lastIdx && (
+            imgFiles.length <= emptyCnt ? photo.isEmpty : true
           )
         )
-      ) {
+      )) {
         const imgFile = imgFiles[filesI++]
         
         photo.download?.abort()
@@ -587,6 +587,8 @@ const onFilesSelectedBuilder = (
           blobToDataUrlAbortCtrl.abort(this.reason)
         }
         const compressionStart = {
+          isInited: true,
+          isEmpty: false,
           isReady: false,
           conversion: { ...newDefaultMediaOperation(),
             id: uuid.v4(),
@@ -601,15 +603,16 @@ const onFilesSelectedBuilder = (
           photoUpdate?: Partial<MediaInArrayDUC>,
           compressionUpdate?: Partial<MediaOperation>,
         ) => {
-          setImages(images => mapFirstToIfFoundBy(images,
-            image => ({ ...image,
+          setImages(images => mapFirstToIfFoundBy({
+            arr: images,
+            filter: image => image.conversion?.id === compressionStart.conversion.id,
+            mapper: image => ({ ...image,
               ...photoUpdate,
               ...compressionUpdate && image.conversion && {
                 conversion: { ...image.conversion, ...compressionUpdate },
               },
             }),
-            image => image.conversion?.id === compressionStart.conversion.id
-          ))
+          }))
         }
         const updatePhotoThrottled = throttle(
           RangeU.random(1500, 2300), updatePhoto
@@ -645,6 +648,7 @@ const onFilesSelectedBuilder = (
             const mimeType = getDataUrlProps(imgDataUrl)!.mimeType
             const newPhoto = {
               ...newDefaultLocalMediaInArray(photo.remoteI),
+              isInited: true,
               id: uuid.v4(),
               name: trimExtension(imgFile.name),
               mimeType: mimeType,

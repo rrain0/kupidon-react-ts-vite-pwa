@@ -10,6 +10,7 @@ import {
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { CarouselEventCallback, useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -70,10 +71,10 @@ import col = EmotionCommon.col
 import abs = EmotionCommon.abs
 import arrOfIndices = ArrayU.arrOfIndices
 import exists = TypeU.exists
-import SetterOrUpdater = TypeU.SetterOrUpdater
 import ValueOrMapper = TypeU.ValueOrMapper
 import isfunction = TypeU.isfunction
-import notundef = TypeU.notundef
+import isdef = TypeU.isdef
+import effectLog = ReactU.effectLog
 
 
 
@@ -104,6 +105,9 @@ const ProfilePage = React.memo(() => {
       values: FormValues,
       failedFields: (keyof FormValues)[]
     ) => {
+      // TODO Upload - make common upload mechanism
+      // TODO Upload - add retries
+      // TODO Upload - если отрубить инет во время выгрузки, то фото обратно вернуть не предлагает
       return profileUpdateApiRequest(values, failedFields, setFormValues, setAuth)
     }, []),
   })
@@ -268,15 +272,17 @@ const ProfilePage = React.memo(() => {
         
         setFormValues(form => ({ ...form,
           initialValues: { ...form.initialValues,
-            photos: mapFirstToIfFoundBy(form.initialValues.photos,
-              elem => ({ ...elem, ...downloadStart }),
-              elem => elem.id === photo.id
-            ),
+            photos: mapFirstToIfFoundBy({
+              arr: form.initialValues.photos,
+              filter: elem => elem.id === photo.id,
+              mapper: elem => ({ ...elem, ...downloadStart }),
+            }),
           },
-          photos: mapFirstToIfFoundBy(form.photos,
-            elem => ({ ...elem, ...downloadStart }),
-            elem => elem.id === photo.id
-          ),
+          photos: mapFirstToIfFoundBy({
+            arr: form.photos,
+            filter: elem => elem.id === photo.id,
+            mapper: elem => ({ ...elem, ...downloadStart }),
+          }),
         }))
         
         const updatePhoto = (
@@ -285,25 +291,27 @@ const ProfilePage = React.memo(() => {
         ) => {
           setFormValues(form => ({ ...form,
             initialValues: { ...form.initialValues,
-              photos: mapFirstToIfFoundBy(form.initialValues.photos,
-                photo => ({ ...photo,
+              photos: mapFirstToIfFoundBy({
+                arr: form.initialValues.photos,
+                filter: elem => elem.download?.id === downloadStart.download.id,
+                mapper: photo => ({ ...photo,
                   ...photoUpdate,
                   ...downloadUpdate && photo.download && {
                     download: { ...photo.download, ...downloadUpdate },
                   },
                 }),
-                elem => elem.download?.id === downloadStart.download.id
-              ),
+              }),
             },
-            photos: mapFirstToIfFoundBy(form.photos,
-              photo => ({ ...photo,
+            photos: mapFirstToIfFoundBy({
+              arr: form.photos,
+              filter: elem => elem.download?.id === downloadStart.download.id,
+              mapper: photo => ({ ...photo,
                 ...photoUpdate,
                 ...downloadUpdate && photo.download && {
                   download: { ...photo.download, ...downloadUpdate },
                 },
               }),
-              elem => elem.download?.id === downloadStart.download.id
-            ),
+            }),
           }))
         }
         const updatePhotoThrottled = withThrottle(
@@ -364,7 +372,7 @@ const ProfilePage = React.memo(() => {
         if (isfunction(valueOrMapper)) return valueOrMapper(photos)
         return valueOrMapper
       })()
-      if (notundef(newPhotos) && photos !== newPhotos) return {
+      if (isdef(newPhotos) && photos !== newPhotos) return {
         ...vs,
         initialValues: {
           ...vs.initialValues,
@@ -382,7 +390,7 @@ const ProfilePage = React.memo(() => {
         if (isfunction(valueOrMapper)) return valueOrMapper(photos)
         return valueOrMapper
       })()
-      if (notundef(newPhotos) && photos !== newPhotos) return {
+      if (isdef(newPhotos) && photos !== newPhotos) return {
         ...vs,
         photos: newPhotos,
       }
@@ -393,7 +401,8 @@ const ProfilePage = React.memo(() => {
   useMediaArrayDownloader(serverPhotos, setServerPhotos)
   useMediaArrayDownloader(clientPhotos, setClientPhotos)
   
-  
+  //effectLog('photos', formValues.photos)
+  effectLog('photos[2]', formValues.photos[2])
   
   
   

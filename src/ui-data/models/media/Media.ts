@@ -182,15 +182,15 @@ export const getMediaUiState = (
     needConversion, conversion, conversionError,
   } = media ?? { }
   
-  const canNeedDownload = isInited && !isEmpty && type === 'remote'
-    && !isReady && !needDownload && !needRetryDownload && !download
-  
   const isConverting = !!conversion || needConversion
   const isUploading = !!upload || needUpload
   const isDownloading = !!download || needDownload || needRetryDownload
   
+  const canNeedDownload = isInited && !isEmpty && type === 'remote'
+    && !isReady && !isConverting && !isDownloading
+  
   const isLoading = isDownloading || isConverting || isUploading || !isInited || (
-    !isEmpty && !isReady && !downloadError && !uploadError && !conversionError
+    !isEmpty && !isReady && !downloadError && !conversionError
   )
   
   const conversionProgress = conversion?.progress
@@ -213,6 +213,7 @@ export const getMediaUiState = (
   return {
     canNeedDownload, isLoading, progress, showProgress,
     isLoadingNoProgress, isLoadingWithProgress,
+    isEmpty,
     isReady, dataUrl,
     isError,
     
