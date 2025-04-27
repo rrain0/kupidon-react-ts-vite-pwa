@@ -124,22 +124,27 @@ export const profileUpdateApiRequest = (
       ),
     }))
     
-    const setUpload = (upload: MediaOperation) => {
+    const updateMediaUpload = (
+      updateForUpload: MediaOperation,
+      updateForPhoto?: Partial<MediaInArrayDUC>,
+    ) => {
       setFormValues(s => ({ ...s,
         photos: mapFirstToIfFoundBy({
           arr: s.photos,
-          filter: elem => elem.upload?.id === upload.id,
-          mapper: elem => ({ ...elem, upload }),
+          filter: elem => elem.upload?.id === updateForUpload.id,
+          mapper: elem => ({
+            ...elem, ...updateForPhoto,
+            upload: { ...elem.upload, ...updateForUpload },
+          }),
         }),
       }))
     }
-    const delayTimerId = setTimeout(() => {
-      uploads = uploads.map(it => ({ ...it, showProgress: true }))
-      uploads.forEach(upload => setUpload(upload))
+    const delayShowUploadTimerId = setTimeout(() => {
+      uploads.forEach(upload => updateMediaUpload(upload, { showUploadProgress: true }))
     }, 2000)
     
     const applyUpdatedUser = () => {
-      clearTimeout(delayTimerId)
+      clearTimeout(delayShowUploadTimerId)
       setFormValues(s => ({ ...s,
         photos: ArrayU.combine(
           s.photos, uploads,

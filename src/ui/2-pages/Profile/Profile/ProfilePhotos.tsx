@@ -590,9 +590,9 @@ const onFilesSelectedBuilder = (
           isInited: true,
           isEmpty: false,
           isReady: false,
+          showConversionProgress: true,
           conversion: { ...newDefaultMediaOperation(),
             id: uuid.v4(),
-            showProgress: true,
             abort: reason => abortCtrl.abort(reason),
           },
         } satisfies Partial<MediaInArrayDUC>

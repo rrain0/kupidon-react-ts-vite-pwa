@@ -26,11 +26,18 @@ export const useMediaArrayDownloader = <T extends MediaDownloadable | undefined>
     }))
   }, [medias])
   
+  useMediaArrayDownload(medias, setMedias)
+  useMediaArrayDownloadAutoRetry(medias, setMedias)
+  
   const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
   useTimeout(canShowFetchProgressTimeout, () => setCanShowFetchProgress(true), [])
   
-  useMediaArrayDownload(medias, setMedias, { canShowFetchProgress })
-  useMediaArrayDownloadAutoRetry(medias, setMedias)
+  useEffect(() => {
+    setMedias(medias => ArrayU.mapToIf(medias, m => {
+      if (m?.download) return { ...m, showDownloadProgress: canShowFetchProgress }
+      return m
+    }))
+  }, [canShowFetchProgress])
   
 }
 

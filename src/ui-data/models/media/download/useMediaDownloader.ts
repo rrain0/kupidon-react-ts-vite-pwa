@@ -24,10 +24,18 @@ export const useMediaDownloader = <T extends MediaDownloadable | undefined>(
     })
   }, [media])
   
+  useMediaDownload(media, setMedia)
+  useMediaDownloadAutoRetry(media, setMedia)
+  
+  
   const [canShowFetchProgress, setCanShowFetchProgress] = useState(false)
   useTimeout(canShowFetchProgressTimeout, () => setCanShowFetchProgress(true), [])
   
-  useMediaDownload(media, setMedia, { canShowFetchProgress })
-  useMediaDownloadAutoRetry(media, setMedia)
+  useEffect(() => {
+    setMedia(m => {
+      if (m?.download) return { ...m, showDownloadProgress: canShowFetchProgress }
+      return m
+    })
+  }, [canShowFetchProgress])
   
 }

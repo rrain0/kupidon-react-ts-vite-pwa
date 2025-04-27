@@ -63,6 +63,7 @@ export namespace ImageU {
     if (isSafari || isMobileSafari) {
       webpOptions.fileType = 'image/jpeg'
     }
+    // TODO Image - need new library to convert to webp
     imgFile = await imageCompression(imgFile, webpOptions)
     
     

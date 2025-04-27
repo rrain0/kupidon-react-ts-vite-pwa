@@ -108,17 +108,16 @@ export const newDefaultEmptyLocalMediaInArray = (remoteI = 0): MediaInArray => (
 
 
 
+// Operation must be written only by function that makes the operation
 export interface MediaOperation {
   id: string
   progress: number // 0..100
-  showProgress: boolean
   abort: (reason?: any) => void
 }
 
 export const newDefaultMediaOperation = (): MediaOperation => ({
   id: '',
   progress: 0,
-  showProgress: false,
   abort: noop,
 })
 
@@ -129,6 +128,8 @@ export type Downloadable = Pu<{
   needDownload: boolean
   // Процесс загрузки
   download: MediaOperation
+  // Показывать ли загрузку (прогресс загрузки)
+  showDownloadProgress: boolean
   // Результат загрузки - ошибка
   downloadError: any
   // Нужно пытаться загрузить снова
@@ -149,6 +150,7 @@ export interface MediaInArrayDownloadable extends MediaInArray, Downloadable { }
 export type Uploadable = Pu<{
   needUpload: boolean
   upload: MediaOperation
+  showUploadProgress: boolean
   uploadError: any
 }>
 
@@ -158,6 +160,7 @@ export type Uploadable = Pu<{
 export type Convertible = Pu<{
   needConversion: boolean
   conversion: MediaOperation
+  showConversionProgress: boolean
   conversionError: any
 }>
 
@@ -177,9 +180,9 @@ export const getMediaUiState = (
 ) => {
   const {
     isInited, type, isEmpty, isReady, dataUrl,
-    needDownload, download, downloadError, needRetryDownload,
-    needUpload, upload, uploadError,
-    needConversion, conversion, conversionError,
+    needConversion, conversion, showConversionProgress, conversionError,
+    needDownload, download, showDownloadProgress, downloadError, needRetryDownload,
+    needUpload, upload, showUploadProgress, uploadError,
   } = media ?? { }
   
   const isConverting = !!conversion || needConversion
@@ -198,9 +201,6 @@ export const getMediaUiState = (
   const uploadProgress = upload?.progress
   const progress = conversionProgress ?? downloadProgress ?? uploadProgress
   
-  const showConversionProgress = conversion?.showProgress
-  const showDownloadProgress = download?.showProgress
-  const showUploadProgress = upload?.showProgress
   const showProgress = showConversionProgress ?? showDownloadProgress ?? showUploadProgress
   
   const isLoadingNoProgress = isLoading && !showProgress

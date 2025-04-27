@@ -16,6 +16,7 @@ import col = EmotionCommon.col
 const ImageTestPage = React.memo(() => {
   
   const [enableSrc, setEnableSrc] = useState(true)
+  const [enableSpecials, setEnableSpecials] = useState(false)
   
   return (
     <>
@@ -55,74 +56,80 @@ const ImageTestPage = React.memo(() => {
           
           <div css={{ height: 24 }} />
           
-          
-          {/*
-          <div css={css`${rowWrap}; gap: 6px;`}>
-            <div css={css`${col}; gap: 6px;`}>
-              <div>{'<ImgSpark />'} delayed</div>
-              <ImgSpark
-                css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : undefined}
-              />
-            </div>
-            
-            <div css={css`${col}; gap: 6px;`}>
-              <div>{'<img />'} delayed</div>
-              <img
-                css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : undefined}
-              />
-            </div>
-          </div>
-          
-          
+          <button onClick={() => setEnableSpecials(e => !e)}>Toggle specials</button>
           
           <div css={{ height: 24 }} />
           
           
-          
-          <div css={css`${rowWrap}; gap: 6px;`}>
-            <div css={css`${col}; gap: 6px;`}>
-              <div>{'<ImgSpark />'} delayed 404 error</div>
-              <ImgSpark
-                css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : undefined}
-              />
-            </div>
-            
-            <div css={css`${col}; gap: 6px;`}>
-              <div>{'<img />'} delayed 404 error</div>
-              <img
-                css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : undefined}
-              />
-            </div>
-          </div>
-          
-          
-          
-          <div css={{ height: 24 }} />
-          
-          
-          
-          <div css={css`${rowWrap}; gap: 6px;`}>
-            <div css={css`${col}; gap: 6px;`}>
-              <div>{'<ImgSpark />'} delayed 500 error</div>
-              <ImgSpark
-                css={ImgSparkS6.t(pictureS)}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : undefined}
-              />
-            </div>
-            
-            <div css={css`${col}; gap: 6px;`}>
-              <div>{'<img />'} delayed 500 error</div>
-              <img
-                css={imgS}
-                src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : undefined}
-              />
-            </div>
-          </div>
-         */}
+          {enableSpecials && (
+            <>
+              <div css={[rowWrap, { gap: 6 }]}>
+                <div css={[col, { gap: 6 }]}>
+                  <div>{'<ImgSpark />'} delayed</div>
+                  <ImgSpark
+                    css={ImgSparkS6.t(pictureS)}
+                    src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : undefined}
+                  />
+                </div>
+                
+                <div css={[col, { gap: 6 }]}>
+                  <div>{'<img />'} delayed</div>
+                  <img
+                    css={imgS}
+                    src={enableSrc ? `${ApiRoutes.backend}/test/image/delay/ban.jpg` : undefined}
+                  />
+                </div>
+              </div>
+              
+              
+              
+              <div css={{ height: 24 }} />
+              
+              
+              
+              <div css={[rowWrap, { gap: 6 }]}>
+                <div css={[col, { gap: 6 }]}>
+                  <div>{'<ImgSpark />'} delayed 404 error</div>
+                  <ImgSpark
+                    css={ImgSparkS6.t(pictureS)}
+                    src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : undefined}
+                  />
+                </div>
+                
+                <div css={[col, { gap: 6 }]}>
+                  <div>{'<img />'} delayed 404 error</div>
+                  <img
+                    css={imgS}
+                    src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg` : undefined}
+                  />
+                </div>
+              </div>
+              
+              
+              
+              <div css={{ height: 24 }} />
+              
+              
+              
+              <div css={[rowWrap, { gap: 6 }]}>
+                <div css={[col, { gap: 6 }]}>
+                  <div>{'<ImgSpark />'} delayed 500 error</div>
+                  <ImgSpark
+                    css={ImgSparkS6.t(pictureS)}
+                    src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : undefined}
+                  />
+                </div>
+                
+                <div css={[col, { gap: 6 }]}>
+                  <div>{'<img />'} delayed 500 error</div>
+                  <img
+                    css={imgS}
+                    src={enableSrc ? `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg` : undefined}
+                  />
+                </div>
+              </div>
+            </>
+          )}
           
           
         </Pages.Content>

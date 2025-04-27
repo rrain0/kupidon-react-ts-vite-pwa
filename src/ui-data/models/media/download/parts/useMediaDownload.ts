@@ -15,7 +15,6 @@ import SetterOrUpdater = TypeU.SetterOrUpdater
 
 export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   media: T, setMedia: SetterOrUpdater<T>,
-  { canShowFetchProgress = true } = { },
 ) => {
   useEffect(() => {
     setMedia(m => {
@@ -34,7 +33,6 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         download: {
           ...newDefaultMediaOperation(),
           id: m.id,
-          showProgress: canShowFetchProgress,
           abort: reason => abortCtrl.abort(reason),
         },
         downloadError: undefined,
@@ -112,18 +110,6 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
       return m
     })
   }, [media])
-  
-  
-  useEffect(() => {
-    setMedia(m => {
-      if (m?.download) return { ...m,
-        download: { ...m.download,
-          showProgress: canShowFetchProgress,
-        },
-      }
-      return m
-    })
-  }, [canShowFetchProgress])
   
   
   useEffect(() => {

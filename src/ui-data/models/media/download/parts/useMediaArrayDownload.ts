@@ -25,7 +25,6 @@ import SetterOrUpdater = TypeU.SetterOrUpdater
 
 export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
   medias: T[] | undefined, setMedias: SetterOrUpdater<T[] | undefined>,
-  { canShowFetchProgress = true } = { },
 ) => {
   
   // Medias must be 'isInited' & 'needDownload' to start download
@@ -46,7 +45,6 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         needDownload: false,
         download: { ...newDefaultMediaOperation(),
           id: m.id,
-          showProgress: canShowFetchProgress,
           abort: reason => abortCtrl.abort(reason),
         },
         downloadError: undefined,
@@ -125,16 +123,6 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
       return m
     }))
   }, [medias])
-  
-  
-  useEffect(() => {
-    setMedias(medias => ArrayU.mapToIf(medias, m => {
-      if (m?.download) return { ...m,
-        download: { ...m.download, showProgress: canShowFetchProgress },
-      }
-      return m
-    }))
-  }, [canShowFetchProgress])
   
   
   useEffect(() => {
