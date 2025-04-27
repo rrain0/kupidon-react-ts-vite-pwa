@@ -242,6 +242,7 @@ const ProfilePage = React.memo(() => {
    */
   
   
+  // TODO доделать новый механизм загрузки и снести старый
   // todo it retries endlessly if can't obtain photos
   useAsyncEffect((lock, unlock) => {
     return

@@ -87,11 +87,11 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           const progress = new StageProgress(2, [90, 10])
           const onProgress = (p = 0) => {
             progress.progress = p
-            //console.log('progress', m.id, progress.value)
+            //console.log('progress', progress.value)
             updatePhotoThrottled(undefined, { progress: progress.value })
           }
           
-          //console.log('start download id',m.id)
+          console.log('download started')
           const blob = await fetchToBlob(m.remoteUrl, {
             onProgress, abortCtrl: fetchToBlobAbortCtrl,
           })
@@ -104,7 +104,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           })
           abortCtrl.signal.throwIfAborted()
           
-          //console.log('completed',m.id)
+          console.log('download completed')
           updateMedia({ isReady: true, download: undefined, dataUrl })
         }
         catch (ex) {

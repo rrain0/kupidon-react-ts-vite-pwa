@@ -73,7 +73,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           const progress = new StageProgress(2, [90, 10])
           const onProgress = (p = 0) => {
             progress.progress = p
-            //console.log('progress', photo.id, progress.value)
+            //console.log('progress', progress.value)
             updateDownloadThrottled(undefined, { progress: progress.value })
           }
           
