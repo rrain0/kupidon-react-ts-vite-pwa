@@ -52,17 +52,19 @@ export namespace RangeU {
   export const zeroBased = (range: NumRange): NumRange => move(range, 0)
   
   
-  export const loop = (curr: number, range: NumRange, minIncl = true, maxIncl = false): number => {
+  export const loop = (
+    curr: number, range: NumRange, { first = true, last = false } = { },
+  ): number => {
     const zeroBasedRange = zeroBased(range)
     const zeroBasedCurr = curr - range[0]
     let loopedZeroBasedCurr = mod(zeroBasedCurr, zeroBasedRange[1])
-    if (!minIncl && !maxIncl && loopedZeroBasedCurr === 0) {
-      throw new Error('Value is on the edge of range but edge values are not included')
+    if (!first && !last && loopedZeroBasedCurr === 0) {
+      throw new Error('Value is on the edge of the range but edge values are not included')
     }
-    if (!minIncl && loopedZeroBasedCurr === 0) {
+    if (!first && loopedZeroBasedCurr === 0) {
       loopedZeroBasedCurr = zeroBasedRange[1]
     }
-    if (maxIncl && loopedZeroBasedCurr === 0 && zeroBasedCurr !== 0) {
+    if (last && loopedZeroBasedCurr === 0 && zeroBasedCurr !== 0) {
       loopedZeroBasedCurr = zeroBasedRange[1]
     }
     const loopedCurr = range[0] + loopedZeroBasedCurr
@@ -115,16 +117,6 @@ export namespace RangeU {
     return clamp(map(value, fromRange, toRange), clampInRange)
   }
   
-  
-  
-  
-  // current + 1 in range inclusive
-  export const nextLooped = (curr: number, range: NumRange) =>
-    curr <= range[0] ? range[0] + 1 : curr >= range[1] ? range[0] : curr + 1
-  
-  // current - 1 in range inclusive
-  export const prevLooped = (curr: number, range: NumRange) =>
-    curr <= range[0] ? range[1] : curr >= range[1] ? range[1] - 1 : curr - 1
   
   
   

@@ -116,7 +116,6 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           }
           
           //console.log('download error', ex)
-          //console.log('download error photo', photo)
           updateMedia({ download: undefined, downloadError: ex })
         }
       })()
