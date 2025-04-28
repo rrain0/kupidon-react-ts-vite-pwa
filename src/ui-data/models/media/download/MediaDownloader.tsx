@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useMediaDownloader } from 'src/ui-data/models/media/download/useMediaDownloader.ts'
-import { getMediaUiState, MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
+import { MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu

@@ -65,8 +65,8 @@ const ImageTestPage = React.memo(() => {
           <div css={{ height: 24 }} />
           
           {enableImg && (
-            <div css={css`${rowWrap}; gap: 6px;`}>
-              <div css={css`${col}; gap: 6px;`}>
+            <div css={[rowWrap, { gap: 6 }]}>
+              <div css={[col, { gap: 6 }]}>
                 <div>{'<ImgSpark />'}</div>
                 <ImgSpark
                   css={ImgSparkS6.t(pictureS)}
@@ -75,7 +75,7 @@ const ImageTestPage = React.memo(() => {
               </div>
               
               {enableImgTag && (
-                <div css={css`${col}; gap: 6px;`}>
+                <div css={[col, { gap: 6 }]}>
                   <div>{'<img />'}</div>
                   <img
                     css={imgS}

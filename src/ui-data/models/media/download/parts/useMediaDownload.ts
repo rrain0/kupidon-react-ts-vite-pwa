@@ -17,6 +17,8 @@ import blobToDataUrl = FileU.blobToDataUrl
 import SetterOrUpdater = TypeU.SetterOrUpdater
 
 
+// TODO учесть в компонентах, что отмена загрузки теперь тут
+
 
 export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   media: T, setMedia: SetterOrUpdater<T>,
@@ -33,11 +35,16 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         setDownload(undefined)
         return m
       }
-      // Не нужно начинать загрузку
+      const mediaD = m.download
       if (!m.needDownload) {
+        // Отменяем текущую загрузку, если у медиа нет загрузки или она другая
+        if (currD && (!mediaD || mediaD.id !== currD?.id)) {
+          currD?.abort('Download is stale')
+          setDownload(undefined)
+        }
+        // Не нужно начинать загрузку
         return m
       }
-      const mediaD = m.download
       // Если загрузка в медиа соответствует текущей загрузке, то продолжаем
       if (mediaD && currD && mediaD.id === currD.id) {
         return { ...m, needDownload: false }
@@ -51,13 +58,15 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         fetchToBlobAbortCtrl.abort(this.reason)
         blobToDataUrlAbortCtrl.abort(this.reason)
       }
+      const abortOperation = reason => abortCtrl.abort(reason)
+      
       const startMediaD = {
         isReady: false,
         needDownload: false,
         download: {
           ...newDefaultMediaOperation(),
           id: m.id,
-          abort: reason => abortCtrl.abort(reason),
+          abort: reason => abortOperation(reason),
         },
         downloadError: undefined,
       } satisfies Partial<MediaDownloadable>
@@ -68,24 +77,33 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         return { ...m, ...startMediaD }
       }
       
-      // TODO Download - abort mechanism - abort() must setDownload(undefined)
       // Отменяем предыдущую загрузку и устанавливаем новую
       currD?.abort('Download is stale')
       setDownload(startMediaD.download)
       m = { ...m, ...startMediaD }
       
-      const updateMedia = (
-        updateForMedia?: Partial<MediaDownloadable>,
-        updateForDownload?: Partial<MediaDownloadable['download']>,
-      ) => {
+      // Здесь загрузка не должна отменяться, даже если её не нашли
+      const updateMedia = ({
+        updateMedia, updateDownload, removeDownload,
+      }: {
+        updateMedia?: Partial<MediaDownloadable>
+        updateDownload?: Partial<MediaOperation>
+        removeDownload?: boolean
+      }) => {
+        const currD = getDownload()
+        if (currD && currD.id === startMediaD.download.id) {
+          setDownload({ ...currD, ...updateDownload })
+          if (removeDownload) setDownload(undefined)
+        }
         setMedia(m => {
           if (m && m.download?.id === startMediaD.download.id) {
             return {
               ...m,
-              ...updateForMedia,
-              ...updateForDownload && m.download && {
-                download: { ...m.download, ...updateForDownload },
+              ...updateMedia,
+              ...updateDownload && m.download && {
+                download: { ...m.download, ...updateDownload },
               },
+              ...removeDownload && { download: undefined },
             }
           }
           return m
@@ -101,7 +119,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           const onProgress = (p = 0) => {
             progress.progress = p
             //console.log('progress', progress.value)
-            updateDownloadThrottled(undefined, { progress: progress.value })
+            updateDownloadThrottled({ updateDownload: { progress: progress.value } })
           }
           
           console.log('download started')
@@ -118,24 +136,24 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           abortCtrl.signal.throwIfAborted()
           
           console.log('download completed')
-          updateMedia({ isReady: true, download: undefined, dataUrl })
-          setDownload(undefined)
+          updateMedia({ updateMedia: { isReady: true, dataUrl }, removeDownload: true })
         }
         catch (ex) {
           if (abortCtrl.signal.aborted) {
-            // TODO Download - setDownload(undefined)
             console.log('download aborted:', abortCtrl.signal.reason)
+            updateMedia({ removeDownload: true })
             return
           }
           if (ApiUtils.isConnectionError(ex)) {
-            updateMedia({ download: undefined, downloadError: ex, needRetryDownload: true })
-            setDownload(undefined)
+            updateMedia({
+              updateMedia: { downloadError: ex, needRetryDownload: true },
+              removeDownload: true,
+            })
             return
           }
           
           //console.log('download error', ex)
-          updateMedia({ download: undefined, downloadError: ex })
-          setDownload(undefined)
+          updateMedia({ updateMedia: { downloadError: ex }, removeDownload: true })
         }
       })()
       
@@ -146,10 +164,12 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     return () => setMedia(m => {
-      m?.download?.abort('Download is stale')
-      return m
+      m?.download?.abort('Component-downloader was unmounted')
+      setDownload(undefined)
+      return { ...m, download: undefined }
     })
   }, [])
+  
 }
 
 

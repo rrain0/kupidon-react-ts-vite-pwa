@@ -16,16 +16,16 @@ export namespace ImageU {
   
   export const compress = async (
     imgFile: File,
-    options?: {
-      onProgress?: CallbackParam<number>
-      abortCtrl?: AbortController
-    }
+    {
+      onProgress = undefined as CallbackParam<number> | undefined,
+      abortCtrl = undefined as AbortController | undefined,
+    } = { },
   ): Promise<File> => {
     //console.log('imgFile',imgFile)
     
-    const ctrl = options?.abortCtrl
+    const ctrl = abortCtrl
     const progress = new StageProgress()
-    const notifyProgress = () => options?.onProgress?.(progress.value)
+    const notifyProgress = () => onProgress?.(progress.value)
     
     
     if (['image/heic', 'image/heif'].includes(imgFile.type)) {
@@ -38,7 +38,7 @@ export namespace ImageU {
       const pngFromHeicFile = new File(
         [pngFromHeicBlob],
         trimExtension(imgFile.name) + '.png',
-        { type: 'image/png' }
+        { type: 'image/png' },
       )
       progress.stage++
       progress.progress = 0
