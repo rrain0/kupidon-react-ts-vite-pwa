@@ -201,7 +201,9 @@ export const getMediaUiState = (
   const uploadProgress = upload?.progress
   const progress = conversionProgress ?? downloadProgress ?? uploadProgress
   
-  const showProgress = showConversionProgress ?? showDownloadProgress ?? showUploadProgress
+  const showProgress = (conversion && showConversionProgress)
+    ?? (download && showDownloadProgress)
+    ?? (upload && showUploadProgress)
   
   const isLoadingNoProgress = isLoading && !showProgress
   const isLoadingWithProgress = isLoading && showProgress

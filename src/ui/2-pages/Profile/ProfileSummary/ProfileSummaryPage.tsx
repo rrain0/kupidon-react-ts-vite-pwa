@@ -71,6 +71,7 @@ const ProfileSummaryPage = React.memo(() => {
   const remoteMainPhoto = useMemo(() => {
     return photos.find(it => it.index === 0)
   }, [photos])
+  // TODO Download - упростить, потому что загрузка всё равно идёт внутри MediaDownloader
   useEffect(() => {
     setMainPhoto(p => {
       if (!photos) {

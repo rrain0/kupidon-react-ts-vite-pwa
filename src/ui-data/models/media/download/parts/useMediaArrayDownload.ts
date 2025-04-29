@@ -47,21 +47,17 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           if (currD) return { cnt: 0, download: currD }
         })()
         
-        // Если начинать загрузку не нужно, то просто переносим используемую загрузку дальше
-        if (!m.needDownload) {
-          if (mediaD && usedDownload && mediaD.id === usedDownload.download.id) {
-            usedDownload.cnt++
-            usedDownloads.set(mediaD.id, usedDownload)
-          }
+        // Если для загрузки в медиа есть сохранённая загрузка, то используем её.
+        // При необходимости станавливаем, что начинать загрузку не нужно.
+        if (mediaD && usedDownload && mediaD.id === usedDownload.download.id) {
+          usedDownload.cnt++
+          usedDownloads.set(usedDownload.download.id, usedDownload)
+          if (m.needDownload) return { ...m, needDownload: false }
           return m
         }
         
-        // Если для загрузки в медиа есть сохранённая загрузка, то используем её
-        if (mediaD && usedDownload && mediaD.id === usedDownload.download.id) {
-          usedDownload.cnt++
-          usedDownloads.set(mediaD.id, usedDownload)
-          return { ...m, needDownload: false }
-        }
+        // Начинать загрузку не нужно и сохранённых загрузок в медиа нет
+        if (!m.needDownload) return m
         
         
         const fetchToBlobAbortCtrl = new AbortController()
@@ -102,6 +98,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         m = { ...m, ...startMediaD }
         
         // Здесь загрузка не должна отменяться, даже если её не нашли
+        // Сохранённую загрузку удаляем не здесь
         const updateMedia = ({
           updateMedia, updateDownload, removeDownload,
         }: {
@@ -109,6 +106,10 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           updateDownload?: Partial<MediaDownloadable['download']>,
           removeDownload?: boolean,
         }) => {
+          const savedDownload = getDownloads().get(startMediaD.download.id)
+          if (savedDownload) {
+            savedDownload.download = { ...savedDownload.download, ...updateDownload }
+          }
           setMedias(medias => mapFirstToIfFoundBy({
             arr: medias,
             filter: m => m?.download && m.download.id === startMediaD.download.id,

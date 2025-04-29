@@ -4,6 +4,7 @@ import { MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
+import effectLog = ReactU.effectLog
 
 
 
@@ -27,6 +28,8 @@ export const MediaDownloader = ReactU.memo(<T extends MediaDownloadable | undefi
   
   
   const [mediaToDownload, setMediaToDownload] = useState<T | undefined>(undefined)
+  
+  effectLog('mediaToDownload', mediaToDownload)
   
   // TODO Download - merge new with old
   useEffect(() => {
