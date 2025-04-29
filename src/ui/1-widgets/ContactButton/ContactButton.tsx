@@ -90,7 +90,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
   
   const button = (
     <Button
-      data-display-name="ContactButton"
+      data-display-name='ContactButton'
       css={ButtonS6.t([btnS, t => {
         const { ctAcc, ctAccSec, ctRipple } = theme[t.type]
         return {
@@ -119,17 +119,17 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
           iconColor: theme[t.type].ctAcc,
         })
         return ({
-          phone: <HandsetIc css={SvgIconS6.t([contactIconS, commonS])} />,
-          telegram: <TelegramIc css={SvgIconS6.t([contactIconS, commonS])} />,
-          whatsapp: <WhatsappIc css={SvgIconS6.t([contactIconS, commonS])} />,
-          email: <EnvelopeIc css={SvgIconS6.t([contactIconS, commonS])} />,
-          doubleGis: <PictureContactIcon src={_2gisLogo} />,
-          yandexMaps: <PictureContactIcon src={yandexMapsLogo} />,
-          map: <LocationIc css={SvgIconS6.t([contactIconS, commonS])} />,
-          address: <LocationIc css={SvgIconS6.t([contactIconS, commonS])} />,
+          phone: <HandsetIc css={SvgIconS6.t([contactIconS, commonS])}/>,
+          telegram: <TelegramIc css={SvgIconS6.t([contactIconS, commonS])}/>,
+          whatsapp: <WhatsappIc css={SvgIconS6.t([contactIconS, commonS])}/>,
+          email: <EnvelopeIc css={SvgIconS6.t([contactIconS, commonS])}/>,
+          doubleGis: <PictureContactIcon src={_2gisLogo}/>,
+          yandexMaps: <PictureContactIcon src={yandexMapsLogo}/>,
+          map: <LocationIc css={SvgIconS6.t([contactIconS, commonS])}/>,
+          address: <LocationIc css={SvgIconS6.t([contactIconS, commonS])}/>,
           copy: !copied
-            ? <CopyIc css={SvgIconS6.t([contactIconS, commonS])} />
-            : <CheckmarkBoldIc css={SvgIconS6.t([contactIconS, commonS])} />,
+            ? <CopyIc css={SvgIconS6.t([contactIconS, commonS])}/>
+            : <CheckmarkBoldIc css={SvgIconS6.t([contactIconS, commonS])}/>,
         } satisfies Record<ContactType, React.ReactNode>)[c.type]
       })()}
       <ContactText>
@@ -148,7 +148,7 @@ export const ContactButton = React.memo((props: ContactButtonProps) => {
     </Button>
   )
   
-  if (link) return <a href={link} target="_blank">{button}</a>
+  if (link) return <a href={link} target='_blank'>{button}</a>
   return button
 })
 ContactButton.displayName = 'ContactButton'
@@ -159,6 +159,7 @@ export default ContactButton
 
 
 // TODO Theme - Dark color or bg transparency?
+// TODO Theme - extract to themes
 const contactButtonLocalTheme: Record<ContactType, Record<AppTheme.Type, {
   ctAcc: string
   ctAccSec: string

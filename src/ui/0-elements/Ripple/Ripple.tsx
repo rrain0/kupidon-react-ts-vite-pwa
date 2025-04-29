@@ -7,11 +7,11 @@ import { RippleS6 } from './RippleS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { getViewProps } from 'src/util/view/ViewProps'
 import { ViewU } from 'src/util/view/ViewU'
-import ClassStyleProps = ReactU.ClassStyle
+import ClassStyle = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
@@ -19,11 +19,11 @@ import Puro = TypeU.Puro
 export type RippleState = 'show' | 'hide' | 'resume' | 'end' | 'stop'
 export type RippleStateInternal = 'reset' | 'show' | 'hide' | 'resume' | 'end' | 'stop'
 
-export type RippleProps = ClassStyleProps & Puro<{
+export type RippleProps = Pu<{
   state: RippleState
   disabled: boolean
   clientXY: { x: number, y: number }
-}>
+}> & ClassStyle
 
 
 const Ripple = React.memo((props: RippleProps) => {

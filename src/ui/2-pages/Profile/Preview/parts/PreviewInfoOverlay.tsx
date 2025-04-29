@@ -119,7 +119,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
             onBack?.()
           }}
         >
-          <ArrowBackGradIc />
+          <ArrowBackGradIc/>
         </Button>
         <Button
           css={IconButtonS6.t(dislikeButtonS)}
@@ -130,7 +130,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
             onReject?.()
           }}
         >
-          <Cross2GradIc />
+          <Cross2GradIc/>
         </Button>
         <Button
           css={IconButtonS6.t(likeButtonS)}
@@ -141,7 +141,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
             onAccept?.()
           }}
         >
-          <HeartFilledIc />
+          <HeartFilledIc/>
         </Button>
         <Button
           css={IconButtonS6.t(infoButtonS)}
@@ -153,7 +153,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
             openInfo?.()
           }}
         >
-          <ArrowAngledRounded2GradIc />
+          <ArrowAngledRounded2GradIc/>
         </Button>
       </ActionButtonsBox>
       
@@ -173,14 +173,14 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
                 {action ==='accept' && (
                   <ActionWidget>
                     <ActionIconBox>
-                      <HeartFilledIc css={SvgIconS6.t(actionHeartS)} />
+                      <HeartFilledIc css={SvgIconS6.t(actionHeartS)}/>
                     </ActionIconBox>
                   </ActionWidget>
                 )}
                 {action ==='reject' && (
                   <ActionWidget>
                     <ActionIconBox>
-                      <CrossIc css={SvgIconS6.t(actionCrossS)} />
+                      <CrossIc css={SvgIconS6.t(actionCrossS)}/>
                     </ActionIconBox>
                   </ActionWidget>
                 )}

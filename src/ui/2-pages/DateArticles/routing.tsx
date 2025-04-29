@@ -7,7 +7,7 @@ import {
   DateArticleCategoryName,
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
 import { DateArticleType, DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
-import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
@@ -52,7 +52,7 @@ const RouteDateArticles = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DateArticlesPage articleItem={{ type: 'type', itemType: type }} />
+        <DateArticlesPage articleItem={{ type: 'type', itemType: type }}/>
       </Suspense>
     </>
   )
@@ -72,7 +72,7 @@ const RouteDateArticles = React.memo(() => {
         replace
       />
       <Suspense fallback={<div>Loading...</div>}>
-        <DateArticlesPage articleItem={{ type: 'category', itemCategory: category }} />
+        <DateArticlesPage articleItem={{ type: 'category', itemCategory: category }}/>
       </Suspense>
     </>
   )

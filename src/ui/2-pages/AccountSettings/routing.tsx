@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -30,7 +30,7 @@ const RouteSettingsAccount = React.memo(() => {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <AccountSettingsPage />
+      <AccountSettingsPage/>
     </Suspense>
   )
 })

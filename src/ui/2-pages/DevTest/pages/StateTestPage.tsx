@@ -49,11 +49,11 @@ const StateTestPage = React.memo(() => {
         
         <div>State Test</div>
         
-        <InputComponent /> {/* renders */}
-        <ViewComponent /> {/* renders */}
+        <InputComponent/> {/* renders */}
+        <ViewComponent/> {/* renders */}
         
         {/* useEffect order test */}
-        <UseEffectComponent />
+        <UseEffectComponent/>
         
       </Pages.Content>
     </Pages.Page>
@@ -73,7 +73,7 @@ const UseEffectComponent = React.memo(() => {
     // № 4
     return () => console.log('useEffect cleanup of UseEffectComponent')
   }, [])
-  return <UseEffectNestedComponent />
+  return <UseEffectNestedComponent/>
 })
 const UseEffectNestedComponent = React.memo(() => {
   useEffect(() => {

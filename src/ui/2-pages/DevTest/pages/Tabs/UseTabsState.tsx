@@ -5,12 +5,12 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { TabIdx, TabsState } from 'src/ui/2-pages/DevTest/pages/Tabs/useTabs.ts'
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import Setter = TypeU.Setter
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
 
-export type UseTabsStateProps = Puro<{
+export type UseTabsStateProps = Pu<{
   initialIdx: number
   idx: number
   setIdx: Setter<number>

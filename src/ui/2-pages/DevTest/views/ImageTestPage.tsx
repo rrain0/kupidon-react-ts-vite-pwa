@@ -52,22 +52,22 @@ const ImageTestPage = React.memo(() => {
           
           <div>Views: Image</div>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <button onClick={() => setEnableSrc(v => !v)}>Toggle src enabled</button>
-          <button onClick={() => setEnableImgTag(v => !v)}>Toggle {'<img />'}</button>
+          <button onClick={() => setEnableImgTag(v => !v)}>Toggle {'<img/>'}</button>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <button onClick={() => setEnableImg(e => !e)}>Toggle img</button>
           <button onClick={() => nextSrc()}>Next src</button>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           {enableImg && (
             <div css={[rowWrap, { gap: 6 }]}>
               <div css={[col, { gap: 6 }]}>
-                <div>{'<ImgSpark />'}</div>
+                <div>{'<ImgSpark/>'}</div>
                 <ImgSpark
                   css={ImgSparkS6.t(pictureS)}
                   src={src}
@@ -76,7 +76,7 @@ const ImageTestPage = React.memo(() => {
               
               {enableImgTag && (
                 <div css={[col, { gap: 6 }]}>
-                  <div>{'<img />'}</div>
+                  <div>{'<img/>'}</div>
                   <img
                     css={imgS}
                     src={src}
@@ -88,16 +88,16 @@ const ImageTestPage = React.memo(() => {
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <button onClick={() => setEnableImgDelayed(e => !e)}>Toggle img delayed</button>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           {enableImgDelayed && (
             <div css={[rowWrap, { gap: 6 }]}>
               <div css={[col, { gap: 6 }]}>
-                <div>{'<ImgSpark />'} delayed</div>
+                <div>{'<ImgSpark/>'} delayed</div>
                 <ImgSpark
                   css={ImgSparkS6.t(pictureS)}
                   src={srcDelayed}
@@ -106,7 +106,7 @@ const ImageTestPage = React.memo(() => {
               
               {enableImgTag && (
                 <div css={[col, { gap: 6 }]}>
-                  <div>{'<img />'} delayed</div>
+                  <div>{'<img/>'} delayed</div>
                   <img
                     css={imgS}
                     src={srcDelayed}
@@ -118,16 +118,16 @@ const ImageTestPage = React.memo(() => {
               
               
               
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <button onClick={() => setEnableImgErr404Delayed(e => !e)}>Toggle img err 404 delayed</button>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           {enableImgErr404Delayed && (
             <div css={[rowWrap, { gap: 6 }]}>
               <div css={[col, { gap: 6 }]}>
-                <div>{'<ImgSpark />'} delayed 404 error</div>
+                <div>{'<ImgSpark/>'} delayed 404 error</div>
                 <ImgSpark
                   css={ImgSparkS6.t(pictureS)}
                   src={srcErr404Delayed}
@@ -136,7 +136,7 @@ const ImageTestPage = React.memo(() => {
               
               {enableImgTag && (
                 <div css={[col, { gap: 6 }]}>
-                  <div>{'<img />'} delayed 404 error</div>
+                  <div>{'<img/>'} delayed 404 error</div>
                   <img
                     css={imgS}
                     src={srcErr404Delayed}
@@ -148,16 +148,16 @@ const ImageTestPage = React.memo(() => {
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <button onClick={() => setEnableImgErr500Delayed(e => !e)}>Toggle img err 500 delayed</button>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           {enableImgErr500Delayed && (
             <div css={[rowWrap, { gap: 6 }]}>
               <div css={[col, { gap: 6 }]}>
-                <div>{'<ImgSpark />'} delayed 500 error</div>
+                <div>{'<ImgSpark/>'} delayed 500 error</div>
                 <ImgSpark
                   css={ImgSparkS6.t(pictureS)}
                   src={srcErr500Delayed}
@@ -166,7 +166,7 @@ const ImageTestPage = React.memo(() => {
               
               {enableImgTag && (
                 <div css={[col, { gap: 6 }]}>
-                  <div>{'<img />'} delayed 500 error</div>
+                  <div>{'<img/>'} delayed 500 error</div>
                   <img
                     css={imgS}
                     src={srcErr500Delayed}
@@ -181,7 +181,7 @@ const ImageTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     
     </>
   )

@@ -17,7 +17,7 @@ import React, {
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 import combineProps = ReactU.combineProps
 import Callback1 = TypeU.Callback1
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import attrExists = TypeU.attrEmpty
 
@@ -34,12 +34,12 @@ export type BottomSheetRefsProps = {
   bottomSheetHeaderRef: React.RefObject<HTMLDivElement | null>
   bottomSheetContentRef: React.RefObject<HTMLDivElement | null>
 }
-export type BottomSheetOptionsProps = ClassStyle & UseBottomSheetOptions & Puro<{
+export type BottomSheetOptionsProps = ClassStyle & UseBottomSheetOptions & Pu<{
   onComputedDimens: Callback1<ComputedBottomSheetDimens>
   onSnapPointsPx: Callback1<number[]>
   bgDim: boolean
 }>
-export type BottomSheetChildren = Puro<{
+export type BottomSheetChildren = Pu<{
   children: (renderProps: BottomSheetChildrenProps) => React.ReactNode
 }>
 export type BottomSheetProps =

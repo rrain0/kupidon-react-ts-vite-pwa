@@ -89,7 +89,7 @@ const ApplicationSettingsPage = React.memo(() => {
               <SettingsOptions.Header>
                 {titleText.theme}
               </SettingsOptions.Header>
-              <ThemeOptions />
+              <ThemeOptions/>
             </SettingsGroup>
             
             
@@ -149,7 +149,7 @@ const ApplicationSettingsPage = React.memo(() => {
               <SettingsOptions.Header>
                 {titleText.language}
               </SettingsOptions.Header>
-              <LangOptions />
+              <LangOptions/>
             </SettingsGroup>
             
             
@@ -162,7 +162,7 @@ const ApplicationSettingsPage = React.memo(() => {
                     console.log('installed', installed)
                   }}
                 >
-                  <AddModuleIc css={SettingsOptions.icon} />
+                  <AddModuleIc css={SettingsOptions.icon}/>
                   {actionText.installApp}
                 </Button>
               )}
@@ -176,7 +176,7 @@ const ApplicationSettingsPage = React.memo(() => {
                       {actionText.clearAppData}
                     </Button>
                     
-                    <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close} />
+                    <ClearSiteDialog isOpen={overlay.isOpen} close={overlay.close}/>
                   </>
                 )}
               </UseOverlayUrl>
@@ -189,13 +189,13 @@ const ApplicationSettingsPage = React.memo(() => {
         </Pages.AddSafeInsets>
         
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn />
+      <TopButtonBar backBtn/>
       
-      <BottomButtonBar />
+      <BottomButtonBar/>
       
       
     </>

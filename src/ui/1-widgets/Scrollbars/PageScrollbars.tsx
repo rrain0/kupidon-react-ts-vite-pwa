@@ -40,7 +40,7 @@ const PageScrollbars = React.memo((props: PageScrollbarsProps) => {
     <>
       {isBrowser && (
         <>
-          <Global styles={hideWindowScrollbar} />
+          <Global styles={hideWindowScrollbar}/>
           <PageScrollbarsOverlayFrame ref={frameRef}>
             <UseScrollbars
               containerIsWindow={true}

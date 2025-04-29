@@ -5,40 +5,37 @@ import React from 'react'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
 
-export type HeaderArrowProps = React.ComponentPropsWithoutRef<typeof Button> & Puro<{
+export type HeaderArrowProps = React.ComponentPropsWithRef<typeof Button> & Pu<{
   noArrow: boolean
 }>
 
-const HeaderArrow = React.memo(React.forwardRef<HTMLButtonElement, HeaderArrowProps>(
-  (props, forwardedRef) => {
-    const {
-      className,
-      noArrow,
-      children,
-      ...restProps
-    } = props
-    
-    return (
-      <Button
-        {...restProps}
-        ref={forwardedRef}
-        className={clsx(HeaderArrowS.W.e.button.e.name, className)}
-      >
-        <h4 className={HeaderArrowS.W.e.header.e.name}>
-          {children}
-        </h4>
-        {!noArrow && (
-          <ArrowAngledRoundedIc
-            className={HeaderArrowS.W.e.arrow.e.name}
-          />
-        )}
-      </Button>
-    )
-  }
-))
+const HeaderArrow = React.memo((props: HeaderArrowProps) => {
+  const {
+    className,
+    noArrow,
+    children,
+    ...restProps
+  } = props
+  
+  return (
+    <Button
+      {...restProps}
+      className={clsx(HeaderArrowS.W.e.button.e.name, className)}
+    >
+      <h4 className={HeaderArrowS.W.e.header.e.name}>
+        {children}
+      </h4>
+      {!noArrow && (
+        <ArrowAngledRoundedIc
+          className={HeaderArrowS.W.e.arrow.e.name}
+        />
+      )}
+    </Button>
+  )
+})
 export default HeaderArrow

@@ -40,8 +40,8 @@ const PwdInput = React.memo(React.forwardRef<HTMLInputElement, PwdInputProps>(
             onPointerDown={evPreventDefault}
           >
             {pwdHidden
-              ? <EyeCrossedOutIc />
-              : <EyeIc />
+              ? <EyeCrossedOutIc/>
+              : <EyeIc/>
             }
           </Button>
         </EyeFrame>

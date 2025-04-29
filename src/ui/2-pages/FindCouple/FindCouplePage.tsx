@@ -249,10 +249,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   
   return (
     <PageLayout vp>
-      <StacksFrame
-        ref={frameRef}
-        {...onTrackDrag()}
-      >
+      <StacksFrame ref={frameRef} {...onTrackDrag()}>
         <StackFrame>
           {arrOfIndices(viewsCnt).map(viewI => (
             <StackFrame2 key={viewI}>

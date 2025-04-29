@@ -3,7 +3,7 @@ import React from 'react'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 
 
@@ -11,9 +11,9 @@ import ClassStyle = ReactU.ClassStyle
 
 export type IndicatorSelection = 0 | false | 1 | 2 | true
 
-type SelectItemProps = ClassStyle & Puro<{
+type SelectItemProps = Pu<{
   metersValues: IndicatorSelection[]
-}>
+}> & ClassStyle
 
 const SelectMeter = React.memo((props: SelectItemProps) => {
   const {

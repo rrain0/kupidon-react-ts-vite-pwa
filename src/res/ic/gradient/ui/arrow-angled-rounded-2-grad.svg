@@ -15,8 +15,8 @@
       gradientUnits="userSpaceOnUse"
     >
       <stop stop-color="var(--grad-icon-color-0)"/>
-      <stop offset="1" stop-color="var(--grad-icon-color-1)" />
-      <stop offset="1" stop-color="var(--grad-icon-color-1)" />
+      <stop offset="1" stop-color="var(--grad-icon-color-1)"/>
+      <stop offset="1" stop-color="var(--grad-icon-color-1)"/>
     </linearGradient>
   </defs>
   

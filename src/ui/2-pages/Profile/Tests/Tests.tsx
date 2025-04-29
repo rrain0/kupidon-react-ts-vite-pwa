@@ -110,7 +110,7 @@ const Tests = React.memo((props: TestsProps) => {
     <>
       <PageContentLayout colSm innerStyle={{ gap: 30 }}>
           
-        <ProfilePageTabHeader mainTabI={props.tabIdx} />
+        <ProfilePageTabHeader mainTabI={props.tabIdx}/>
         
         <div css={[col, { gap: 25 }]}>
         
@@ -221,7 +221,7 @@ const Tests = React.memo((props: TestsProps) => {
           
           <MiniTypesBox>
             {ObjectEntries(MbtiTypeData).map(([type, data]) => (
-              <TypeComponent key={type} type={type} />
+              <TypeComponent key={type} type={type}/>
             ))}
           </MiniTypesBox>
           
@@ -264,7 +264,7 @@ const Tests = React.memo((props: TestsProps) => {
           
           }}
         >
-          <GearIc />
+          <GearIc/>
         </Button>
       </LeftBottomButtonBar> */}
     </>
@@ -388,11 +388,11 @@ const TypeComponent = React.memo(({ type }: TypeComponentProps) => {
         {uiText.name}
       </MiniTypeName>
       
-      <div style={{ height: 9 }} />
+      <div style={{ height: 9 }}/>
       
-      <MiniTypePicture src={MbtiTypeData[type].icon} />
+      <MiniTypePicture src={MbtiTypeData[type].icon}/>
       
-      <div style={{ height: 7 }} />
+      <div style={{ height: 7 }}/>
       
       <MiniTypeDescription>
         {uiText.shortDescription}

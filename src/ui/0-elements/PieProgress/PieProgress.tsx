@@ -6,16 +6,16 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
 import ClassStyle = ReactU.ClassStyle
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
 
 
-export type PieProgressProps = ClassStyle & Puro<{
+export type PieProgressProps = Pu<{
   progress: number
   type: 'percent' | 'oneBased'
-}>
+}> & ClassStyle
 
 
 const PieProgress = React.memo((props: PieProgressProps) => {

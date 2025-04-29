@@ -6,7 +6,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { TypeU } from 'src/util/common/TypeU'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import Callback = TypeU.Callback
 import rowWrap = EmotionCommon.rowWrap
 
@@ -20,7 +20,7 @@ const DialogButtonsFrame = styled.div`
 `
 
 
-type DialogButtonsProps = Puro<{
+type DialogButtonsProps = Pu<{
   position: 'center' | 'end'
   //variant: 'primarySmall' | 'textSmall'
   

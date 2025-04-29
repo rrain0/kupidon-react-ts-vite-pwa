@@ -36,7 +36,7 @@ const DatePeriodBeforeDateOption = React.memo(
     return (
       <>
         <OptionItem
-          //icon={<GenderGradIc />}
+          //icon={<GenderGradIc/>}
           title={'Сколько вам нужно времени общения, чтобы пойти на свидание/знакомство с другим пользователем?'}
           value={'Не выбрано'}
           //onClick={open}

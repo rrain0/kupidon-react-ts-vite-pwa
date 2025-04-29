@@ -83,7 +83,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
               >
                 <OptionContainer>
                   <div css={optionIconBoxStyle}>
-                    <CrossInCircleIc css={SvgIconS6.t(crossS)} />
+                    <CrossInCircleIc css={SvgIconS6.t(crossS)}/>
                   </div>
                   <OptionTitle>{actionText.remove}</OptionTitle>
                 </OptionContainer>
@@ -105,7 +105,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
               >
                 <OptionContainer>
                   <div css={optionIconBoxStyle}>
-                    <CrossInCircleIc css={SvgIconS6.t(crossS)} />
+                    <CrossInCircleIc css={SvgIconS6.t(crossS)}/>
                   </div>
                   <OptionTitle>{actionText.removeAll}</OptionTitle>
                 </OptionContainer>
@@ -119,12 +119,12 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
               >
                 {({ getRootProps, getInputProps }) => (
                   <div css={contents} {...getRootProps()}>
-                    <input {...getInputProps()} />
+                    <input {...getInputProps()}/>
                     <Button css={ButtonS6.t(ButtonS6.S.text.rect.lg.normal)}>
                       
                       <OptionContainer>
                         <div css={optionIconBoxStyle}>
-                          <ArrowRefreshCwIc />
+                          <ArrowRefreshCwIc/>
                         </div>
                         <OptionTitle>{actionText.replace}</OptionTitle>
                       </OptionContainer>
@@ -166,7 +166,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                       >
                         <OptionContainer>
                           <div css={optionIconBoxStyle}>
-                            <DownloadIc />
+                            <DownloadIc/>
                           </div>
                           <OptionTitle>{actionText.download}</OptionTitle>
                         </OptionContainer>

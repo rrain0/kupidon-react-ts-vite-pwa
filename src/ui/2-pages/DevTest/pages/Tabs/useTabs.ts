@@ -18,7 +18,7 @@ import Callback = TypeU.Callback
 import findLastBy = ArrayU.findLastBy
 import notExists = TypeU.notExists
 import last = ArrayU.last
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
@@ -67,7 +67,7 @@ export type UseTabsOptions = {
   setTabsState: Setter<TabsState>
   tabIdx: TabIdx
   setTabIdx: Setter<TabIdx>
-} & Puro<{
+} & Pu<{
   animationDuration: number
   defaultOpenIdx: number
 }>

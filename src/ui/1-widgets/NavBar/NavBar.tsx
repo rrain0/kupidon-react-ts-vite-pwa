@@ -29,14 +29,14 @@ import ChatRoundGradIc = SvgGradIconsPack.ChatRoundGradIc
 import CardsHeartGradIc = SvgGradIconsPack.CardsHeartGradIc
 import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import attrExists = TypeU.attrEmpty
 
 
 
 export type NavBarPlace = 'profile' | 'chat' | 'findCouple' | 'bowAndArrows' | 'settings'
 
-export type NavBarProps = Puro<{
+export type NavBarProps = Pu<{
   place: NavBarPlace
 }>
 
@@ -62,28 +62,28 @@ const NavBar = React.memo((props: NavBarProps) => {
         
         <NavLink to={RootRoute.profile[full]()}>
           <Button css={nav} data-selected={attrExists(place === 'profile')}>
-            <ProfileGradIc />
+            <ProfileGradIc/>
             <div>{titleText.profile}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.chat[full]()}>
           <Button css={nav} data-selected={attrExists(place === 'chat')}>
-            <ChatRoundGradIc />
+            <ChatRoundGradIc/>
             <div>{titleText.chat}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.findCouple[full]()}>
           <Button css={nav} data-selected={attrExists(place === 'findCouple')}>
-            <CardsHeartGradIc />
+            <CardsHeartGradIc/>
             <div>{titleText.hearts}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.bowAndArrows[full]()}>
           <Button css={nav} data-selected={attrExists(place === 'bowAndArrows')}>
-            <BowArrowGradIc />
+            <BowArrowGradIc/>
             <div>{titleText.bowAndArrows}</div>
           </Button>
         </NavLink>
@@ -96,11 +96,11 @@ const NavBar = React.memo((props: NavBarProps) => {
                 data-selected={attrExists(place === 'settings')}
                 onClick={overlay.open}
               >
-                <GearOutlinedIc />
+                <GearOutlinedIc/>
                 <div>{titleText.settings}</div>
               </Button>
               
-              <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction} />
+              <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction}/>
             </>
           )}
         </UseOverlayUrl>

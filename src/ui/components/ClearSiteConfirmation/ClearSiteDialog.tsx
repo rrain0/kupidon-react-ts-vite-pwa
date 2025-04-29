@@ -70,7 +70,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
         <ModalPortal>
           <ModalReloading>
             <ReloadingBox>
-              <Spinner8LinesIc css={icon} />
+              <Spinner8LinesIc css={icon}/>
               {statusText.reloading}
             </ReloadingBox>
           </ModalReloading>

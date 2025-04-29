@@ -144,7 +144,7 @@ const ProfileLangsOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<PlanetFrameGradIc />}
+          icon={<PlanetFrameGradIc/>}
           title={text.langs}
           value={valueText}
           onClick={open}

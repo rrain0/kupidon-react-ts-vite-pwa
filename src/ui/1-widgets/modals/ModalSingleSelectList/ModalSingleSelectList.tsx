@@ -20,8 +20,7 @@ import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter
 import col = EmotionCommon.col
-import Ro = TypeU.Ro
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import exists = TypeU.exists
 
 
@@ -30,13 +29,13 @@ const overlayEdit = 'edit'
 
 
 
-type ModalSingleSelectListProps<T extends string> = Ro<{
+type ModalSingleSelectListProps<T extends string> = {
   isOpen: boolean
   onClose: Callback
   title: string
   options: Option<T>[]
   selected: T
-}> & Puro<{
+} & Pu<{
   setSelected: Setter<T>
   notSelectedValue: T
   add: T[]
@@ -148,7 +147,7 @@ const ModalSingleSelectList = ReactU.memo(
                   acceptVariant="filledRounded"
                 />
                 
-                <div style={{ height: 24 }} />
+                <div style={{ height: 24 }}/>
               
               </BottomSheetBasic>
             </ModalPortal>

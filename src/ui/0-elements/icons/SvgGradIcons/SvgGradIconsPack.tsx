@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import falsyToUndef = TypeU.falsyToUndef
 import exists = TypeU.exists
 
@@ -70,79 +70,70 @@ import WorkSuitcaseGradSvg from '@ic/gradient/special/work-suitcase-grad.svg?rea
 
 export namespace SvgGradIconsPack {
 
-  // Base interface for simple svg icons
+  // Base interface for gradient svg icons
   
-  type BaseGradSvgIconCustomProps = PartialUndef<{
+  type BaseGradSvgIconCustomProps = Pu<{
     color0: string
     color1: string
     size: number | string
   }>
   
   type SvgProps = React.SVGProps<SVGSVGElement> & { title?: string }
-  type SvgComponentType = React.FunctionComponent<SvgProps>
+  type SvgComponentType = React.FC<SvgProps>
   type BaseSimpleSvgIconSvgComponentProp = {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconForwardRefProps = React.ComponentPropsWithoutRef<'svg'>
-  type BaseSimpleSvgIconRefElement = SVGSVGElement
+  type BaseSimpleSvgIconSvgElemProps = React.ComponentPropsWithRef<'svg'>
   
   
   export type BaseGradSvgIconProps =
-    BaseGradSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps & BaseSimpleSvgIconSvgComponentProp
+    & BaseGradSvgIconCustomProps 
+    & BaseSimpleSvgIconSvgElemProps 
+    & BaseSimpleSvgIconSvgComponentProp
   
-  export const BaseGradSvgIcon = React.memo(
-    React.forwardRef<BaseSimpleSvgIconRefElement, BaseGradSvgIconProps>(
-      (props, forwardedRef) => {
-        const {
-          className,
-          color0, color1,
-          size, width, height,
-          SvgComponent,
-          ...restProps
-        } = props
-        
-        const w = width ?? size
-        const h = height ?? size
-        
-        const sizeProp = SvgGradIconS6.W.els.gradIcon.ps!.sz
-        const color0Prop = SvgGradIconS6.W.els.gradIcon.ps!.color0
-        const color1Prop = SvgGradIconS6.W.els.gradIcon.ps!.color1
-        
-        return (
-          <SvgComponent
-            css={css`
-              width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-              height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-              //max-width: 100%;
-              //max-height: 100%;
-              ${color0Prop.n}: ${color0 || color0Prop.var('black')};
-              ${color1Prop.n}: ${color1 || color1Prop.var('black')};
-            `}
-            width={w}
-            height={h}
-            className={clsx(className, SvgGradIconS6.W.els.gradIcon.n)}
-            {...restProps}
-            ref={forwardedRef}
-          />
-        )
-      }
-    )
-  )
-  
-  
-  
-  
-  export type SimpleSvgIconProps = BaseGradSvgIconCustomProps & BaseSimpleSvgIconForwardRefProps
-  function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
+  export const BaseGradSvgIcon = React.memo((props: BaseGradSvgIconProps) => {
+    const {
+      className,
+      color0, color1,
+      size, width, height,
+      SvgComponent,
+      ...restProps
+    } = props
+    
+    const w = width ?? size
+    const h = height ?? size
+    
+    const sizeProp = SvgGradIconS6.W.els.gradIcon.ps!.sz
+    const color0Prop = SvgGradIconS6.W.els.gradIcon.ps!.color0
+    const color1Prop = SvgGradIconS6.W.els.gradIcon.ps!.color1
+    
     return (
-      React.memo(
-        React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-          (props, forwardedRef) =>
-            <BaseGradSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef} />
-        )
-      )
+      <SvgComponent
+        css={css`
+          width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
+          height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+          //max-width: 100%;
+          //max-height: 100%;
+          ${color0Prop.n}: ${color0 || color0Prop.var('black')};
+          ${color1Prop.n}: ${color1 || color1Prop.var('black')};
+        `}
+        width={w}
+        height={h}
+        className={clsx(className, SvgGradIconS6.W.els.gradIcon.n)}
+        {...restProps}
+      />
     )
+  })
+  
+  
+  
+  
+  export type SimpleSvgIconProps = BaseGradSvgIconCustomProps & BaseSimpleSvgIconSvgElemProps
+  function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
+    return React.memo((props: SimpleSvgIconProps) => (
+      <BaseGradSvgIcon {...props} SvgComponent={SvgComponent}/>
+    ))
   }
   
   

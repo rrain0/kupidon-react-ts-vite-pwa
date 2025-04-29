@@ -2,9 +2,9 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import { ViewU } from 'src/util/view/ViewU'
 import anyval = TypeU.anyval
 import RecordRo = TypeU.RecordRo
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import WH = ViewU.WH
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -119,9 +119,9 @@ export class ViewProps {
   setCssProps(props: RecordRo<string, string>) {
     Object.entries(props).forEach(([prop, value]) => this.setCssProp(prop, value))
   }
-  setWhCssProps({ w, h }: Puro<WH>) {
-    if (exists(w)) this.setCssProp('--w', `${w}px`)
-    if (exists(h)) this.setCssProp('--h', `${h}px`)
+  setWhCssProps({ w, h }: Pu<WH>) {
+    if (isdef(w)) this.setCssProp('--w', `${w}px`)
+    if (isdef(h)) this.setCssProp('--h', `${h}px`)
   }
   
   // get element bounding rect

@@ -65,7 +65,7 @@ const DatePurposeOption = React.memo(
     return (
       <>
         <OptionItem
-          //icon={<GenderGradIc />}
+          //icon={<GenderGradIc/>}
           title={'Цель свидания'}
           value={value}
           onClick={open}

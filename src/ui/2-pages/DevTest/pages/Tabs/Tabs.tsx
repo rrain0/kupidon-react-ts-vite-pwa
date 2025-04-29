@@ -9,7 +9,7 @@ import { TabIdx, TabsState, useTabs } from 'src/ui/2-pages/DevTest/pages/Tabs/us
 import Setter = TypeU.Setter
 import row = EmotionCommon.row
 import contents = EmotionCommon.contents
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
@@ -23,7 +23,7 @@ export type TabsCustomProps = {
   setTabsState: Setter<TabsState>
   tabIdx: TabIdx
   setTabIdx: Setter<TabIdx>
-} & Puro<{
+} & Pu<{
   children: (tabsProps: TabsRenderProps) => React.ReactNode
 }>
 export type TabsForwardRefProps = Omit<React.JSX.IntrinsicElements['div'], 'children'>

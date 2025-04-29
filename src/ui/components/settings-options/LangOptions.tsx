@@ -31,17 +31,17 @@ const LangOptions = React.memo(() => {
       ...canUseSystemLang ? [{
         value: 'system',
         text: titleText.systemLanguage,
-        icon: <BrowserIc css={SettingsOptions.icon} />,
+        icon: <BrowserIc css={SettingsOptions.icon}/>,
       }] as const : [],
       {
         value: 'ru-RU',
         text: titleText.russian,
-        icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']} />,
+        icon: <SettingsOptions.FlagIcon src={CountryFlag['ru-RU']}/>,
       },
       {
         value: 'en-US',
         text: titleText.english,
-        icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']} />,
+        icon: <SettingsOptions.FlagIcon src={CountryFlag['en-US']}/>,
       },
     ] satisfies { value: LangSupportedOrSystem, [prop: string]: any }[]
   }, [titleText, canUseSystemLang])

@@ -29,17 +29,17 @@ const ThemeOptions = React.memo(() => {
       {
         value: 'system',
         text: titleText.systemTheme,
-        icon: <DayNightIc css={SettingsOptions.icon} />,
+        icon: <DayNightIc css={SettingsOptions.icon}/>,
       },
       {
         value: 'light',
         text: titleText.lightTheme,
-        icon: <DayIc css={SettingsOptions.icon} />,
+        icon: <DayIc css={SettingsOptions.icon}/>,
       },
       {
         value: 'dark',
         text: titleText.darkTheme,
-        icon: <MoonIc css={SettingsOptions.iconSmall} />,
+        icon: <MoonIc css={SettingsOptions.iconSmall}/>,
       },
     ] satisfies { value: ThemeType|'system', [prop: string]: any }[]
     return opts

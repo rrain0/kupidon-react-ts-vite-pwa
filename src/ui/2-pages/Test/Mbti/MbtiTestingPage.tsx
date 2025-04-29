@@ -304,23 +304,23 @@ const MbtiTestingPage = React.memo(() => {
                   {uiText.needAnswerHonestly}
                 </InfoText>
                 
-                <div style={{ height: 18 }} />
+                <div style={{ height: 18 }}/>
                 
                 <ProgressBox>
                   <LineProgressFrame>
-                    <LineProgress style={{ width: `${progress}%` }} />
+                    <LineProgress style={{ width: `${progress}%` }}/>
                   </LineProgressFrame>
                   <LinePercent>{progress}%</LinePercent>
                 </ProgressBox>
                 
-                <div style={{ height: 36 }} />
+                <div style={{ height: 36 }}/>
                 
                 <QuestionNumberBox>
                   <Button
                     css={IconButtonS6.t(backS)}
                     onClick={back}
                   >
-                    <ArrowAngledRoundedIc />
+                    <ArrowAngledRoundedIc/>
                   </Button>
                   <QuestionNumber>
                     {displayed + 1} {uiText.question.toLowerCase()}
@@ -329,11 +329,11 @@ const MbtiTestingPage = React.memo(() => {
                     css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.normal4)}
                     onClick={fwd}
                   >
-                    <ArrowAngledRoundedIc />
+                    <ArrowAngledRoundedIc/>
                   </Button>
                 </QuestionNumberBox>
                 
-                <div style={{ height: 26 }} />
+                <div style={{ height: 26 }}/>
                 
                 <ImgSpark
                   css={ImgSparkS6.t(pictureS)}
@@ -356,7 +356,7 @@ const MbtiTestingPage = React.memo(() => {
                   {uiText.questions[displayed].a}
                 </Button>
                 
-                <div style={{ height: 20 }} />
+                <div style={{ height: 20 }}/>
                 
                 <Button
                   css={ButtonS6.t(answerBS)}
@@ -368,7 +368,7 @@ const MbtiTestingPage = React.memo(() => {
                   {uiText.questions[displayed].b}
                 </Button>
                 
-                <div style={{ height: 28 }} />
+                <div style={{ height: 28 }}/>
                 
                 <div css={rowE}>
                   <Link
@@ -391,7 +391,7 @@ const MbtiTestingPage = React.memo(() => {
         </Pages.AddSafeInsets>
       </Pages.PageGrad>
       
-      <BottomButtonBar settingsBtnLeft />
+      <BottomButtonBar settingsBtnLeft/>
     </>
   )
 })

@@ -86,7 +86,7 @@ const Profile = React.memo((props: ProfileProps) => {
       <PageContentLayout colSm innerStyle={{ gap: 30 }}>
         <form style={{ display: 'contents' }} onSubmit={props.onFormSubmitCallback}>
             
-          <ProfilePageTabHeader mainTabI={props.tabIdx} />
+          <ProfilePageTabHeader mainTabI={props.tabIdx}/>
           
           <div css={col}>
             
@@ -101,14 +101,14 @@ const Profile = React.memo((props: ProfileProps) => {
               )}
             />
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             
             
             
             <Hdrs.PageSec2>{text.bio}</Hdrs.PageSec2>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             <Card>
               
@@ -116,7 +116,7 @@ const Profile = React.memo((props: ProfileProps) => {
                 {...props.validationProps}
                 fieldName="name"
                 render={validProps => (
-                  <ProfileNameOption {...validProps} />
+                  <ProfileNameOption {...validProps}/>
                 )}
               />
               
@@ -124,7 +124,7 @@ const Profile = React.memo((props: ProfileProps) => {
                 {...props.validationProps}
                 fieldName="birthDate"
                 render={validProps => (
-                  <ProfileBirthDateOption {...validProps} />
+                  <ProfileBirthDateOption {...validProps}/>
                 )}
               />
               
@@ -132,99 +132,99 @@ const Profile = React.memo((props: ProfileProps) => {
                 {...props.validationProps}
                 fieldName="gender"
                 render={validProps => (
-                  <ProfileGenderOption {...validProps} />
+                  <ProfileGenderOption {...validProps}/>
                 )}
               />
             
             </Card>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             <ValidationWrap
               {...props.validationProps}
               fieldName="aboutMe"
               render={validProps => (
-                <ProfileAboutMeOption {...validProps} />
+                <ProfileAboutMeOption {...validProps}/>
               )}
             />
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             
             
             
             <Hdrs.PageSec2>{text.itImportant}</Hdrs.PageSec2>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             <Card>
               
-              <ProfileMeetingPurposeOption />
+              <ProfileMeetingPurposeOption/>
               
-              <ProfilePlaceOfResidenceOption />
+              <ProfilePlaceOfResidenceOption/>
               
-              <ProfileKidsOption />
+              <ProfileKidsOption/>
               
-              <ProfileHeightOption />
+              <ProfileHeightOption/>
               
-              <ProfileInterestsAndHobbiesOption />
+              <ProfileInterestsAndHobbiesOption/>
             
             </Card>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             
             
             
             <Hdrs.PageSec2>{text.interestingToKnow}</Hdrs.PageSec2>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             <Card>
               
-              <ProfileJobOption />
+              <ProfileJobOption/>
               
               
-              <ProfileEducationOption />
+              <ProfileEducationOption/>
               
               
-              <ProfileLangsOption />
+              <ProfileLangsOption/>
               
               
-              <ProfileSmokeOption />
+              <ProfileSmokeOption/>
               
               
-              <ProfileAlcoholOption />
+              <ProfileAlcoholOption/>
               
               
-              <ProfilePetsOption />
+              <ProfilePetsOption/>
             
             </Card>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             
             
             
             <Hdrs.PageSec2>{text.myDate}</Hdrs.PageSec2>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             <Card>
               
-              <DateIdealFormatOption />
+              <DateIdealFormatOption/>
               
               
-              <DateIdealTimeOption />
+              <DateIdealTimeOption/>
               
               
-              <DateWhoPaysOption />
+              <DateWhoPaysOption/>
             
             </Card>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
-            <DateIdealDateOption />
+            <DateIdealDateOption/>
           
           
           </div>

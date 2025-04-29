@@ -73,7 +73,7 @@ const DateArticleCategoryRow = React.memo((props: DateArticleCategoryRowProps) =
         <ListRow>
           {items.map(it => (
             <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
-              {props => <DateArticleItemCard {...props} />}
+              {props => <DateArticleItemCard {...props}/>}
             </DateArticleItemToCardData>
           ))}
         </ListRow>

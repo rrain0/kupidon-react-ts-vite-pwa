@@ -45,12 +45,12 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
             {type && (
               <>
                 <Pages.PageHeaderWithLeftRightItems>
-                  <BackBtn />
+                  <BackBtn/>
                   <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-                  <div css={{ width: 50, height: 50 }} />
+                  <div css={{ width: 50, height: 50 }}/>
                 </Pages.PageHeaderWithLeftRightItems>
                 
-                <div style={{ height: 28 }} />
+                <div style={{ height: 28 }}/>
                 
                 <DatePlacesList style={{ gap: 16 }}>
                   {type && (() => {
@@ -69,16 +69,16 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
               </>
             )}
             
-            {category && <DatePlaceCategoriesList list={DatePlaceCategoriesData[category]} />}
+            {category && <DatePlaceCategoriesList list={DatePlaceCategoriesData[category]}/>}
             
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <BottomButtonBar />
+      <BottomButtonBar/>
       
     </>
   )

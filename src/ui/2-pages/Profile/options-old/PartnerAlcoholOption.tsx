@@ -70,7 +70,7 @@ React.memo(
   
   return <>
     <OptionItem
-      //icon={<GenderGradIc />}
+      //icon={<GenderGradIc/>}
       title={'Отношение партнера к алкоголю'}
       value={value}
       onClick={open}

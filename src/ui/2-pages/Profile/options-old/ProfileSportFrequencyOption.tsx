@@ -69,7 +69,7 @@ const ProfileSportFrequencyOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<BasketballGradIc />}
+          icon={<BasketballGradIc/>}
           title={'Как часто вы занимаетесь спортом'}
           value={value}
           onClick={open}

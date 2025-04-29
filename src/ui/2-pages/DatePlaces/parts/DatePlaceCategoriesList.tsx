@@ -51,12 +51,12 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         data-display-name="DatePlaceCategoriesList"
       >
         <Pages.PageHeaderWithLeftRightItems>
-          <BackBtn />
+          <BackBtn/>
           <Hdrs.Page>{uiText.title}</Hdrs.Page>
-          <div css={{ width: 50, height: 50 }} />
+          <div css={{ width: 50, height: 50 }}/>
         </Pages.PageHeaderWithLeftRightItems>
         
-        <div style={{ height: 28 }} />
+        <div style={{ height: 28 }}/>
         
         <ListCols>
           {list.next.map(it => (
@@ -70,7 +70,7 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
       </div>
     )
     if (list.ui === 'rowOfPreviews') return (
-      <RowOfPreviews list={list} />
+      <RowOfPreviews list={list}/>
     )
     if (list.ui === 'pageOfRowsOfPreviews') return (
       <div
@@ -80,19 +80,19 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         data-display-name="DatePlaceCategoriesList"
       >
         <Pages.PageHeaderWithLeftRightItems>
-          <BackBtn />
+          <BackBtn/>
           <Hdrs.Page>{uiText.title}</Hdrs.Page>
-          <div css={{ width: 50, height: 50 }} />
+          <div css={{ width: 50, height: 50 }}/>
         </Pages.PageHeaderWithLeftRightItems>
         
-        <div style={{ height: 28 }} />
+        <div style={{ height: 28 }}/>
         
         <div css={[col, { gap: 16 }]}>
           {list.next.map(it => {
             const category = DatePlaceCategoriesData[it]
             if (category.type === 'category' && category.ui === 'rowOfPreviews') {
               return (
-                <RowOfPreviews key={it} list={category} />
+                <RowOfPreviews key={it} list={category}/>
               )
             }
             return undefined

@@ -80,11 +80,11 @@ const ImgSpark = React.memo((props: ImgSparkProps) => {
               />
               
               {isLoading && (
-                <SparkingLoadingLine className={ImgSparkS6.W.els.spark.n} />
+                <SparkingLoadingLine className={ImgSparkS6.W.els.spark.n}/>
               )}
               
               {isError && (
-                <DocumentErrorIc />
+                <DocumentErrorIc/>
               )}
             </>
           )

@@ -22,41 +22,41 @@ const SliderTestPage = React.memo(() => {
           
           <div>Views: Slider</div>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <Slider1 />
+          <Slider1/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <Slider2 />
+          <Slider2/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <Slider3 />
+          <Slider3/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <Slider4 />
+          <Slider4/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <SliderChangePosition />
+          <SliderChangePosition/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <SliderChangeMinMax />
+          <SliderChangeMinMax/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
-          <SliderChangeWidth />
+          <SliderChangeWidth/>
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
         
         </Pages.Content>
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     
     </>
   )

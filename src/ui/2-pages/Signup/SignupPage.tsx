@@ -17,7 +17,7 @@ import React, {
 } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { DateTime } from '@util/DateTime.ts'
+import { DateTime } from '@util/date/DateTime.ts'
 import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
 import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts.tsx'
@@ -284,14 +284,14 @@ const SignupPage = React.memo(() => {
         </Pages.AddSafeInsets>
         
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
       
-      <TopButtonBar backBtn />
+      <TopButtonBar backBtn/>
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
       
     </>

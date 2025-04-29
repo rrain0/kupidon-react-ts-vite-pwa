@@ -43,7 +43,7 @@ const App = React.memo(() => {
   return (
     <CheckBrowserMinimumVersion>
       
-      <UseViewportContentSize />
+      <UseViewportContentSize/>
       
       {themeIsReady && (
         <ThemeProvider theme={theme}>
@@ -62,14 +62,14 @@ const App = React.memo(() => {
           />
           
           <DragDetector>
-            <AppFrame />
+            <AppFrame/>
           </DragDetector>
           
-          <ReloadPrompt />
+          <ReloadPrompt/>
           
-          <ToastifySetup />
+          <ToastifySetup/>
           
-          <LogLayer />
+          <LogLayer/>
         
         </ThemeProvider>
       )}

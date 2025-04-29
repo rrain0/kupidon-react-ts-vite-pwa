@@ -52,7 +52,7 @@ const ButtonsTestPage = React.memo(() => {
                       <ButtonContainer key={colorName}>
                         <div>Color: {colorName}</div>
                         <ButtonBox css={{ width: 200 }}>
-                          <Button css={IconButtonS6.t(style)}><GearIc /></Button>
+                          <Button css={IconButtonS6.t(style)}><GearIc/></Button>
                         </ButtonBox>
                       </ButtonContainer>
                     ))}
@@ -67,7 +67,7 @@ const ButtonsTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     
     </>
   )

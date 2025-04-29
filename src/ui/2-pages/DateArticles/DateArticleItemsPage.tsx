@@ -79,12 +79,12 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
           <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn />
+              <BackBtn/>
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div css={{ width: 50, height: 50 }} />
+              <div css={{ width: 50, height: 50 }}/>
             </Pages.PageHeaderWithLeftRightItems>
             
-            <div style={{ height: 28 }} />
+            <div style={{ height: 28 }}/>
             
             <DateArticlesList style={{ gap: 16 }}>
               {(() => {
@@ -104,7 +104,7 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
                   
                   return (
                     <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
-                      {props => <DateArticleItemCardWide {...props} />}
+                      {props => <DateArticleItemCardWide {...props}/>}
                     </DateArticleItemToCardData>
                   )
                 })
@@ -114,11 +114,11 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <BottomButtonBar />
+      <BottomButtonBar/>
       
     </>
   )

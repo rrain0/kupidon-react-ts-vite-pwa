@@ -8,7 +8,7 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import fixedBottom = EmotionCommon.fixedBottom
 import col = EmotionCommon.col
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
@@ -16,9 +16,9 @@ import CrossIc = SvgIconsPack.CrossIc
 import Children = ReactU.Children
 
 
-export type LeftBottomButtonBarProps = Children & Puro<{
-  onCancel?: Callback
-  onAccept?: Callback
+export type LeftBottomButtonBarProps = Children & Pu<{
+  onCancel: Callback
+  onAccept: Callback
 }>
 const LeftBottomButtonBar = React.memo((props: LeftBottomButtonBarProps) => {
   const { onCancel, onAccept, children } = props
@@ -26,8 +26,8 @@ const LeftBottomButtonBar = React.memo((props: LeftBottomButtonBarProps) => {
   return (
     <LeftBottomButtonBarFrame>
       <ButtonsContainer>
-        {onCancel && <CancelButton onClick={onCancel} />}
-        {onAccept && <AcceptButton onClick={onAccept} />}
+        {onCancel && <CancelButton onClick={onCancel}/>}
+        {onAccept && <AcceptButton onClick={onAccept}/>}
         {children}
       </ButtonsContainer>
     </LeftBottomButtonBarFrame>
@@ -65,7 +65,7 @@ const CancelButton = React.memo(({ onClick }: { onClick: Callback }) => {
       css={IconButtonS6.t(IconButtonS6.S.filled.round.lg2.normal2)}
       onClick={onClick}
     >
-      <CrossIc />
+      <CrossIc/>
     </Button>
   )
 })
@@ -76,7 +76,7 @@ const AcceptButton = React.memo(({ onClick }: { onClick: Callback }) => {
       css={IconButtonS6.t(IconButtonS6.S.filled.round.lg.accent)}
       onClick={onClick}
     >
-      <CheckmarkIc />
+      <CheckmarkIc/>
     </Button>
   )
 })

@@ -80,7 +80,7 @@ const ProfileSmokeOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<SmokeCigaretteGradIc />}
+          icon={<SmokeCigaretteGradIc/>}
           title={text.attitudeTowardsSmoke}
           value={value}
           onClick={open}

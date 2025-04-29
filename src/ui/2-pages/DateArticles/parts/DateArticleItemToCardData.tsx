@@ -11,7 +11,7 @@ import {
   DateArticleTypesData,
 } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import assertNever = TypeU.assertNever
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
@@ -28,9 +28,10 @@ export type DateArticleItemToCardDataRenderProps = {
 
 export type DateArticleItemToCardDataProps = {
   articleItem: DateArticleItem
-} & Puro<{
+} & Pu<{
   children: (props: DateArticleItemToCardDataRenderProps) => React.ReactNode
 }>
+
 const DateArticleItemToCardData = React.memo((props: DateArticleItemToCardDataProps) => {
   const {
     articleItem: ait,

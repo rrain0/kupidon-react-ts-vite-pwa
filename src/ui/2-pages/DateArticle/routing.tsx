@@ -3,7 +3,7 @@ import { Navigate, RouteObject, useMatch, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
-import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use
@@ -29,13 +29,13 @@ const RouteDateArticleArticleId = React.memo(() => {
   
   if (!article) return (
     <Suspense fallback={<div>Loading...</div>}>
-      <DateArticleNotFoundPage />
+      <DateArticleNotFoundPage/>
     </Suspense>
   )
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <DateArticlePage article={article} />
+      <DateArticlePage article={article}/>
     </Suspense>
   )
 })

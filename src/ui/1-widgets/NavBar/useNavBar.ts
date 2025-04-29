@@ -4,11 +4,11 @@ import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/ui/1-widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/ui/1-widgets/NavBar/navStack.ts'
 import { NavBarStore, useNavBarZustand } from 'src/zustand/app/NavBarZustand.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
-export type UseNavBarProps = Puro<{
+export type UseNavBarProps = Pu<{
   hide: boolean
   place: NavBarPlace
 }>

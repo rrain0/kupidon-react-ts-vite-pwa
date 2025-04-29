@@ -11,9 +11,9 @@ const AppFrame = React.memo(() => {
   return (
     <div css={contents} id="app-frame">
     
-      <AppRouting />
+      <AppRouting/>
       
-      <AutoLangSettings />
+      <AutoLangSettings/>
       
     </div>
   )

@@ -16,7 +16,7 @@ import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import rowC = EmotionCommon.rowC
 import card2S = CardS.card2S
 import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
@@ -27,7 +27,7 @@ import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 
 
 
-type ModalDialogProps = Puro<{
+type ModalDialogProps = Pu<{
   isOpen: boolean
   title: string
   
@@ -74,7 +74,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
           
           <DialogContent>
             {onDangerYes && (
-              <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)} />
+              <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
             )}
             <TitleBox>
               <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>

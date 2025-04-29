@@ -126,13 +126,20 @@ export namespace EmotionCommon {
   `
   
   
-  
+  export const max1LineBox = css`
+    display: table;
+    table-layout: fixed;
+    // 'width' is necessary!!!
+    width: fit-content;
+  `
   export const max1Line = css`
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   `
+  // Обрезает между словами!!!
+  // Так что может остаться пустое место между троеточием и концом контейнера
   export const maxLines = (lines: number) => css`
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -379,6 +386,12 @@ export namespace EmotionCommon {
     `
     
     
+    export const s22 = css`
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 1.29;
+      letter-spacing: normal;
+    `
     export const s22Bold = css`
       font-weight: 500;
       font-size: 22px;
@@ -496,6 +509,12 @@ export namespace EmotionCommon {
       font-size: 15px;
       line-height: 1.29;
       letter-spacing: 0.05em;
+    `
+    export const s15Tight = css`
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.29;
+      letter-spacing: normal;
     `
     export const s15Bold = css`
       font-weight: 500;

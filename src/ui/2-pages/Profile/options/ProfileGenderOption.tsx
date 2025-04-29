@@ -71,7 +71,7 @@ const ProfileGenderOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<GenderGradIc />}
+          icon={<GenderGradIc/>}
           title={text.gender}
           value={value}
           onClick={onOpen}

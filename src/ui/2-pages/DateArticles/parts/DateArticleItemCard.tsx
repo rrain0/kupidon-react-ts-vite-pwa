@@ -71,7 +71,7 @@ const DateArticleItemCard = React.memo((props: DateArticleItemCardProps) => {
           src={picture}
         />
         
-        <MiniPosterImageFade />
+        <MiniPosterImageFade/>
         
         <ContentBox>
           
@@ -80,7 +80,7 @@ const DateArticleItemCard = React.memo((props: DateArticleItemCardProps) => {
           {showToRead && (
             <ReadItBox>
               <ReadItText>{uiText.toRead}</ReadItText>
-              <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)} />
+              <ArrowAngledRoundedIc css={SvgIconS6.t(arrowIcS)}/>
             </ReadItBox>
           )}
           

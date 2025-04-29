@@ -46,7 +46,7 @@ const EditableTextCard = React.memo((props: EditableTextCardProps) => {
     >
       
       <Title>{title}</Title>
-      <PencilWrite2Ic css={SvgIconS6.t(pencilIconS)} />
+      <PencilWrite2Ic css={SvgIconS6.t(pencilIconS)}/>
       {showAnyText && (
         <Text isPlaceholder={showPlaceholder}>
           {showPlaceholder ? placeholder : text}

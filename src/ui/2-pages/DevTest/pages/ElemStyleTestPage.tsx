@@ -68,7 +68,7 @@ const ElemStyleTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
     </>
   )

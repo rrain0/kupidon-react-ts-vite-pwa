@@ -80,7 +80,7 @@ const DateIdealFormatOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<Couple2GradIc />}
+          icon={<Couple2GradIc/>}
           title={text.yourIdealDateFormat}
           value={valueText}
           onClick={open}

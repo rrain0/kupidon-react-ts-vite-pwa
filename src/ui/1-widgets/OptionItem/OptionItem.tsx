@@ -42,7 +42,7 @@ const OptionItem = React.memo((props: OptionItemProps) => {
         </Value>
       </ValueFrame>
       <NextIconFrame>
-        <ArrowAngledRoundedIc css={SvgIconS6.t(nextIconS)} />
+        <ArrowAngledRoundedIc css={SvgIconS6.t(nextIconS)}/>
       </NextIconFrame>
       
     </Button>

@@ -190,7 +190,7 @@ const ScrollbarVertical = React.memo(
       return (
         <ScrollbarTrack {...scrollbarTrackProps} {...onTrackDrag()}>
           <ScrollbarThumbBox {...thumbBoxProps}>
-            <ScrollbarThumb {...thumbProps} />
+            <ScrollbarThumb {...thumbProps}/>
           </ScrollbarThumbBox>
         </ScrollbarTrack>
       )

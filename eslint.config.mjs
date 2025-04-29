@@ -146,7 +146,7 @@ export default [
       '@stylistic/block-spacing': ['error', 'always'],
       //'@stylistic/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
       '@stylistic/brace-style': 'off',
-      '@stylistic/comma-dangle': ['error', {
+      '@stylistic/comma-dangle': ['warn', {
         arrays: 'always-multiline',
         tuples: 'only-multiline',
         enums: 'always-multiline',
@@ -207,7 +207,7 @@ export default [
       '@stylistic/linebreak-style': 'off',
       '@stylistic/lines-around-comment': 'off',
       '@stylistic/lines-between-class-members': 'off',
-      '@stylistic/max-len': ['error', { code: 120, tabWidth: 2 }],
+      '@stylistic/max-len': ['warn', { code: 120, tabWidth: 2 }],
       '@stylistic/max-statements-per-line': 'off',
       '@stylistic/multiline-ternary': 'off',
       '@stylistic/new-parens': ['error', 'always'],
@@ -290,10 +290,10 @@ export default [
       '@stylistic/jsx-pascal-case': ['error', { allowNamespace: true }],
       // it disallows empty lines between jsx props
       '@stylistic/jsx-props-no-multi-spaces': 'off',
-      '@stylistic/jsx-quotes': ['error', 'prefer-double'],
+      '@stylistic/jsx-quotes': ['error', 'prefer-single'],
       '@stylistic/jsx-self-closing-comp': 'warn',
       '@stylistic/jsx-sort-props': 'off',
-      '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'always' }],
+      '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'never' }],
       '@stylistic/jsx-wrap-multilines': ['error', {
         declaration: 'parens-new-line',
         assignment: 'parens-new-line',

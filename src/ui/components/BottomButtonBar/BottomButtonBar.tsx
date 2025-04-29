@@ -59,21 +59,21 @@ const BottomButtonBar = React.memo(
             <ButtonsContainer>
               
               <LeftButtonsContainer>
-                {props.backBtn && <BackBtn0 />}
-                {props.settingsBtnLeft && <SettingsBtn />}
+                {props.backBtn && <BackBtn0/>}
+                {props.settingsBtnLeft && <SettingsBtn/>}
                 {props.leftChildren}
               </LeftButtonsContainer>
               
               
               <CenterButtonsContainer>
                 {props.children}
-                {props.settingsBtn && <SettingsBtn />}
+                {props.settingsBtn && <SettingsBtn/>}
               </CenterButtonsContainer>
               
               
               <RightButtonsContainer>
                 {props.rightChildren}
-                {props.refreshPageBtn && <RefreshBtn />}
+                {props.refreshPageBtn && <RefreshBtn/>}
               </RightButtonsContainer>
               
             </ButtonsContainer>

@@ -69,7 +69,7 @@ const ProfileHeightOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<RulerVerticalGradIc />}
+          icon={<RulerVerticalGradIc/>}
           title={text.height}
           value={textValue(height)}
           //value={props.value}

@@ -102,7 +102,7 @@ const PartnerHeightOption = React.memo(() => {
   return (
     <>
       <OptionItem
-        icon={<RulerVerticalGradIc />}
+        icon={<RulerVerticalGradIc/>}
         title={titleText.partnerHeight}
         value={textValue(heightRange)}
         onClick={open}

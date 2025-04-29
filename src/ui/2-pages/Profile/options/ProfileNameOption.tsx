@@ -34,7 +34,7 @@ const ProfileNameOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<NameCardGradIc />}
+          icon={<NameCardGradIc/>}
           title={titleText.name}
           value={props.value}
           data-error={props.highlight}

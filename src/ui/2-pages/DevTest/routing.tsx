@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
@@ -44,7 +44,7 @@ const testBottomSheetTestPageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <BottomSheetTestPage />
+        <BottomSheetTestPage/>
       </Suspense>
     ),
   },
@@ -56,7 +56,7 @@ const testScrollbarTestPageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ScrollbarTestPage />
+        <ScrollbarTestPage/>
       </Suspense>
     ),
   },
@@ -68,7 +68,7 @@ const viewsSelectItemRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <SelectItemTestPage />
+        <SelectItemTestPage/>
       </Suspense>
     ),
   },
@@ -80,7 +80,7 @@ const rippleRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <RippleTestPage />
+        <RippleTestPage/>
       </Suspense>
     ),
   },
@@ -92,7 +92,7 @@ const buttonsRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ButtonsTestPage />
+        <ButtonsTestPage/>
       </Suspense>
     ),
   },
@@ -104,7 +104,7 @@ const sliderRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <SliderTestPage />
+        <SliderTestPage/>
       </Suspense>
     ),
   },
@@ -116,7 +116,7 @@ const imageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ImageTestPage />
+        <ImageTestPage/>
       </Suspense>
     ),
   },
@@ -132,7 +132,7 @@ const testResizeObserverTestPageRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ResizeObserverTestPage />
+        <ResizeObserverTestPage/>
       </Suspense>
     ),
   },
@@ -144,7 +144,7 @@ const testMoveElementToAnotherViewRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <MoveElementToAnotherViewTestPage />
+        <MoveElementToAnotherViewTestPage/>
       </Suspense>
     ),
   },
@@ -156,7 +156,7 @@ const testPointerRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <PointerTestPage />
+        <PointerTestPage/>
       </Suspense>
     ),
   },
@@ -168,7 +168,7 @@ const testTabsRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <TabsTestPage />
+        <TabsTestPage/>
       </Suspense>
     ),
   },
@@ -180,7 +180,7 @@ const testStateRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <StateTestPage />
+        <StateTestPage/>
       </Suspense>
     ),
   },
@@ -192,7 +192,7 @@ const pageLifecycleRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <PageLifecycleTestPage />
+        <PageLifecycleTestPage/>
       </Suspense>
     ),
   },
@@ -204,7 +204,7 @@ const useEventRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <UseEventTestPage />
+        <UseEventTestPage/>
       </Suspense>
     ),
   },
@@ -216,7 +216,7 @@ const elemRefRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ElemRefTestPage />
+        <ElemRefTestPage/>
       </Suspense>
     ),
   },
@@ -228,7 +228,7 @@ const elemStyleRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ElemStyleTestPage />
+        <ElemStyleTestPage/>
       </Suspense>
     ),
   },
@@ -240,7 +240,7 @@ const oldProfileOptionsRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <OldProfileOptionsPage />
+        <OldProfileOptionsPage/>
       </Suspense>
     ),
   },
@@ -252,7 +252,7 @@ const emulatedScrollRouting: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <EmulatedScroll />
+        <EmulatedScroll/>
       </Suspense>
     ),
   },
@@ -264,7 +264,7 @@ const routingShadowDOM: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <ShadowDOMTestPage />
+        <ShadowDOMTestPage/>
       </Suspense>
     ),
   },
@@ -280,7 +280,7 @@ export const routingDevTest: RouteObject[] = [
     path: '',
     element: (
       <Suspense fallback={<div>Loading...</div>}>
-        <TestPage />
+        <TestPage/>
       </Suspense>
     ),
   },

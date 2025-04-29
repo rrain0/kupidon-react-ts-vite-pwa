@@ -76,7 +76,7 @@ const ProfileJobOption = React.memo(() => {
   return (
     <>
       <OptionItem
-        icon={<WorkSuitcaseGradIc />}
+        icon={<WorkSuitcaseGradIc/>}
         title={titleText.job}
         value={value}
         onClick={open}

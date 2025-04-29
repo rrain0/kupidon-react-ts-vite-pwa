@@ -25,6 +25,9 @@ export namespace StringU {
     RegExp(`^(${tail})|(${tail})$`, 'g'), ''
   )
   
+  // 100.0 => 100, 123 => 123, 123.00 => 123, 123.12 => 123.12, 123.1200 => 123.12
+  export const trimDotZerosEnd = (str: string) => str.replaceAll(/[.]?0+$/g, '')
+  
   /** Обрезает у строки '/' с начала и с конца */
   export const trimSlash = (str: string) => trimTails(str, '/')
   

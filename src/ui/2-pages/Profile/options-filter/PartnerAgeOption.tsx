@@ -100,7 +100,7 @@ const PartnerAgeOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<HourglassGradIc />}
+          icon={<HourglassGradIc/>}
           title={titleText.partnerAge}
           value={textValue}
           onClick={open}

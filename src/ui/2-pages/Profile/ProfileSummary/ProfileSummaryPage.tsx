@@ -15,7 +15,7 @@ import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { Gap } from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -123,14 +123,14 @@ const ProfileSummaryPage = React.memo(() => {
                     <MediaDownloader media={mainPhoto}>
                       {(media) => {
                         const { isReady, dataUrl, ...loading } = getMediaUiState(media)
-                        if (isReady) return <AvaIm src={dataUrl} />
-                        return <MediaUiState {...loading} />
+                        if (isReady) return <AvaIm src={dataUrl}/>
+                        return <MediaUiState {...loading}/>
                       }}
                     </MediaDownloader>
                   </AvaBox>
                 </Link>
                 
-                <Gap w={14} />
+                <Gap w={14}/>
                 
                 
                 
@@ -139,11 +139,11 @@ const ProfileSummaryPage = React.memo(() => {
                     
                     <Name>{name}</Name>
                     
-                    <Gap h={4} />
+                    <Gap h={4}/>
                     
                     <Info>{info}</Info>
                     
-                    <Gap h={10} />
+                    <Gap h={10}/>
                     
                     <Edit>
                       <Button css={editBtnStyle}>{actionText.edit}</Button>
@@ -154,14 +154,14 @@ const ProfileSummaryPage = React.memo(() => {
                 
                 
                 
-                <Gap w={8} />
+                <Gap w={8}/>
                 
-                <Flex grow={1} row justifyCt="end">
+                <Flex grow={1} row justifyCt='end'>
                   <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
                     {overlay => (
                       <Gear onClick={overlay.open}>
                         <Button css={IconButtonS6.t(gearIc)}>
-                          <GearOutlinedIc />
+                          <GearOutlinedIc/>
                         </Button>
                       </Gear>
                     )}
@@ -171,11 +171,11 @@ const ProfileSummaryPage = React.memo(() => {
               </Flex>
               
               
-              <Gap h={14.5} />
+              <Gap h={14.5}/>
               
-              <Divider />
+              <Divider/>
               
-              <Gap h={9} />
+              <Gap h={9}/>
               
               <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
                 <HeaderArrow css={headerArrowS}>
@@ -183,16 +183,16 @@ const ProfileSummaryPage = React.memo(() => {
                 </HeaderArrow>
               </Link>
               
-              <Gap h={9} />
+              <Gap h={9}/>
               
               <ProgressBox>
                 <LineProgressFrame>
-                  <LineProgress style={{ width: `${uiProfileFillProgress}%` }} />
+                  <LineProgress style={{ width: `${uiProfileFillProgress}%` }}/>
                 </LineProgressFrame>
                 <LinePercent>{uiProfileFillProgress}%</LinePercent>
               </ProgressBox>
               
-              <Gap h={9} />
+              <Gap h={9}/>
               
               <CompleteProfileText>
                 {completeProfileInCoupleSteps}
@@ -201,16 +201,16 @@ const ProfileSummaryPage = React.memo(() => {
             </InfoCard>
             
             
-            <SummaryPageFeatureCards />
+            <SummaryPageFeatureCards/>
             
           
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
-      <BottomButtonBar />
+      <BottomButtonBar/>
       
     </>
   )

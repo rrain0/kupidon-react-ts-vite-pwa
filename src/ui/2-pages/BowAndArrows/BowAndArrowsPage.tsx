@@ -40,47 +40,47 @@ const BowAndArrowsPage = React.memo(() => {
           <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <div css={{ width: 50, height: 50 }} />
+              <div css={{ width: 50, height: 50 }}/>
               <Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page>
               <Button css={IconButtonS6.t(calendarButtonS)}>
-                <Calendar2GradIc />
+                <Calendar2GradIc/>
               </Button>
             </Pages.PageHeaderWithLeftRightItems>
             
-            <div style={{ height: 27 }} />
+            <div style={{ height: 27 }}/>
             
             <HeaderArrow css={HeaderArrowS.page}>
               {uiText.poster}
             </HeaderArrow>
             
-            <div style={{ height: 16 }} />
+            <div style={{ height: 16 }}/>
             
-            <PosterPreview />
+            <PosterPreview/>
             
-            <div style={{ height: 16 }} />
+            <div style={{ height: 16 }}/>
             
-            <DatePlaceCategoriesList list={DatePlaceCategoriesData.allRowOfPreviews} />
+            <DatePlaceCategoriesList list={DatePlaceCategoriesData.allRowOfPreviews}/>
             
-            <div style={{ height: 16 }} />
+            <div style={{ height: 16 }}/>
             
-            <DateArticleCategoryRow category="allRow" />
+            <DateArticleCategoryRow category="allRow"/>
             
-            <div style={{ height: 16 }} />
+            <div style={{ height: 16 }}/>
             
             {/* <HeaderArrow css={HeaderArrowS.page}>
              {uiText.ourPartners}
              </HeaderArrow>
              
-             <div style={{ height: 16 }} /> */}
+             <div style={{ height: 16 }}/> */}
           
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <BottomButtonBar />
+      <BottomButtonBar/>
     
     </>
   )

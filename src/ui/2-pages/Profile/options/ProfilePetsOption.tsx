@@ -80,7 +80,7 @@ const ProfilePetsOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<BengalCatGradIc />}
+          icon={<BengalCatGradIc/>}
           title={text.attitudeTowardsPets}
           value={value}
           onClick={open}

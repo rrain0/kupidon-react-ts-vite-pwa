@@ -22,6 +22,7 @@ import ClearTrashSvg from '@ic/normal/ui/clear-trash.svg?react'
 import ClipSvg from '@ic/normal/ui/clip.svg?react'
 import CopySvg from '@ic/normal/ui/copy.svg?react'
 import CrossSvg from '@ic/normal/ui/cross.svg?react'
+import CrossBoldSvg from '@ic/normal/ui/cross-bold.svg?react'
 import CrossInCircleSvg from '@ic/normal/ui/cross-in-circle.svg?react'
 
 import DangerRoundToastifySvg from '@ic/normal/ui/danger-round-toastify.svg?react'
@@ -41,6 +42,7 @@ import GearSvg from '@ic/normal/ui/gear.svg?react'
 import GearOutlinedSvg from '@ic/normal/ui/gear-outlined.svg?react'
 
 import InfoToastifySvg from '@ic/normal/ui/info-toastify.svg?react'
+import IsWritingSvg from '@ic/normal/ui/is-writing.svg?react'
 
 import LocationSvg from '@ic/normal/ui/location.svg?react'
 import LockSvg from '@ic/normal/ui/lock.svg?react'
@@ -52,6 +54,7 @@ import NightSvg from '@ic/normal/ui/night.svg?react'
 
 import PencilWrite2Svg from '@ic/normal/ui/pencil-write-2.svg?react'
 import PictureSvg from '@ic/normal/ui/picture.svg?react'
+import PinSvg from '@ic/normal/ui/pin.svg?react'
 import PlanetFrameSvg from '@ic/normal/ui/planet-frame.svg?react'
 import PlusSvg from '@ic/normal/ui/plus.svg?react'
 import ProfileSvg from '@ic/normal/ui/profile.svg?react'
@@ -63,7 +66,11 @@ import RingingBellSvg from '@ic/normal/ui/ringing-bell.svg?react'
 import SearchSvg from '@ic/normal/ui/search.svg?react'
 import Spinner8LinesSvg from '@ic/normal/ui/spinner-8-lines.svg?react'
 import SpinnerCircleQuarterSvg from '@ic/normal/ui/spinner-circle-quarter.svg?react'
+import SpinnerCircleQuarterBoldSvg from '@ic/normal/ui/spinner-circle-quarter-bold.svg?react'
 import SyncErrorSvg from '@ic/normal/ui/sync-error.svg?react'
+
+import VolumeSvg from '@ic/normal/ui/volume.svg?react'
+import VolumeMuteSvg from '@ic/normal/ui/volume-mute.svg?react'
 
 import WarnCircleOutlinedSvg from '@ic/normal/ui/warn-circle-outlined.svg?react'
 import WarnTriangleToastifySvg from '@ic/normal/ui/warn-triangle-toastify.svg?react'
@@ -116,9 +123,9 @@ import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 
 import { TypeU } from 'src/util/common/TypeU.ts'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import falsyToUndef = TypeU.falsyToUndef
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -127,7 +134,7 @@ export namespace SvgIconsPack {
 
   // Base interface for simple svg icons
   
-  type BaseSimpleSvgIconCustomProps = Puro<{
+  type BaseSimpleSvgIconCustomProps = Pu<{
     color: string
     accentColor: string
     size: number | string
@@ -139,71 +146,61 @@ export namespace SvgIconsPack {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconForwardRefProps = React.ComponentPropsWithoutRef<'svg'>
-  type BaseSimpleSvgIconRefElement = SVGSVGElement
+  type BaseSimpleSvgIconSvgElemProps = React.ComponentPropsWithRef<'svg'>
   
   
   export type BaseSimpleSvgIconProps =
     & BaseSimpleSvgIconCustomProps
-    & BaseSimpleSvgIconForwardRefProps
+    & BaseSimpleSvgIconSvgElemProps
     & BaseSimpleSvgIconSvgComponentProp
   
-  export const BaseSimpleSvgIcon = React.memo(
-    React.forwardRef<BaseSimpleSvgIconRefElement, BaseSimpleSvgIconProps>(
-      (props, forwardedRef) => {
-        const {
-          className,
-          color, accentColor,
-          size, width, height,
-          SvgComponent,
-          ...restProps
-        } = props
-        
-        const w = width ?? size
-        const h = height ?? size
-        
-        const sizeProp = SvgIconS6.W.els.icon.ps!.size
-        const colorProp = SvgIconS6.W.els.icon.ps!.color
-        const accentColorProp = SvgIconS6.W.els.icon.ps!.colorAcc
-        
-        return (
-          <SvgComponent
-            css={css`
-              width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-              height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
-              //max-width: 100%;
-              //max-height: 100%;
-              fill: ${color || colorProp.var('black')};
-              stroke: ${color || colorProp.var('black')};
-              ${accentColorProp.n}: ${accentColor ?? accentColorProp.var('gray')};
-            `}
-            width={w}
-            height={h}
-            className={clsx(className, SvgIconS6.W.els.icon.n)}
-            {...restProps}
-            ref={forwardedRef}
-          />
-        )
-      }
+  export const BaseSimpleSvgIcon = React.memo((props: BaseSimpleSvgIconProps) => {
+    const {
+      className,
+      color, accentColor,
+      size, width, height,
+      SvgComponent,
+      ...restProps
+    } = props
+    
+    const w = width ?? size
+    const h = height ?? size
+    
+    const sizeProp = SvgIconS6.W.els.icon.ps!.size
+    const colorProp = SvgIconS6.W.els.icon.ps!.color
+    const accentColorProp = SvgIconS6.W.els.icon.ps!.colorAcc
+    
+    return (
+      <SvgComponent
+        css={css`
+          width:  ${falsyToUndef(!isdef(w)) && sizeProp.var()};
+          height: ${falsyToUndef(!isdef(h)) && sizeProp.var()};
+          //max-width: 100%;
+          //max-height: 100%;
+          fill: ${color || colorProp.var('black')};
+          stroke: ${color || colorProp.var('black')};
+          ${accentColorProp.n}: ${accentColor ?? accentColorProp.var('gray')};
+        `}
+        width={w}
+        height={h}
+        className={clsx(className, SvgIconS6.W.els.icon.n)}
+        {...restProps}
+      />
     )
-  )
+  })
   
   
   
   
   export type SimpleSvgIconProps =
     & BaseSimpleSvgIconCustomProps
-    & BaseSimpleSvgIconForwardRefProps
+    & BaseSimpleSvgIconSvgElemProps
   
   
   function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
-    return React.memo(
-      React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-        (props, forwardedRef) => (
-          <BaseSimpleSvgIcon {...props} SvgComponent={SvgComponent} ref={forwardedRef} />
-        )
-      )
-    )
+    return React.memo((props: SimpleSvgIconProps) => (
+      <BaseSimpleSvgIcon {...props} SvgComponent={SvgComponent}/>
+    ))
   }
   
   
@@ -227,6 +224,7 @@ export namespace SvgIconsPack {
   export const ClipIc = generateSimpleSvgIcon(ClipSvg)
   export const CopyIc = generateSimpleSvgIcon(CopySvg)
   export const CrossIc = generateSimpleSvgIcon(CrossSvg)
+  export const CrossBoldIc = generateSimpleSvgIcon(CrossBoldSvg)
   export const CrossInCircleIc = generateSimpleSvgIcon(CrossInCircleSvg)
   
   
@@ -252,6 +250,7 @@ export namespace SvgIconsPack {
   
   
   export const InfoToastifyIc = generateSimpleSvgIcon(InfoToastifySvg)
+  export const IsWritingIc = generateSimpleSvgIcon(IsWritingSvg)
   
   
   export const LocationIc = generateSimpleSvgIcon(LocationSvg)
@@ -267,6 +266,7 @@ export namespace SvgIconsPack {
   
   export const PencilWrite2Ic = generateSimpleSvgIcon(PencilWrite2Svg)
   export const PictureIc = generateSimpleSvgIcon(PictureSvg)
+  export const PinIc = generateSimpleSvgIcon(PinSvg)
   export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
   export const PlusIc = generateSimpleSvgIcon(PlusSvg)
   export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
@@ -280,36 +280,50 @@ export namespace SvgIconsPack {
   export const SearchIc = generateSimpleSvgIcon(SearchSvg)
   
   export const Spinner8LinesIc = React.memo(
-    React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-      (() => {
-        const rotation = keyframes`
-          100% { rotate: 1turn }
-        `
-        const Spinner8Lines2 = styled(Spinner8LinesSvg)`
-          animation: ${rotation} 3s linear infinite;
-        `
-        return (props, forwardedRef) =>
-          <BaseSimpleSvgIcon {...props} SvgComponent={Spinner8Lines2} ref={forwardedRef} />
-      })()
-    )
+    (() => {
+      const rotation = keyframes`
+        100% { rotate: 1turn }
+      `
+      const Spinner8Lines2 = styled(Spinner8LinesSvg)`
+        animation: ${rotation} 3s linear infinite;
+      `
+      return (props: SimpleSvgIconProps) => (
+        <BaseSimpleSvgIcon {...props} SvgComponent={Spinner8Lines2}/>
+      )
+    })()
   )
   
   export const SpinnerCircleQuarterIc = React.memo(
-    React.forwardRef<BaseSimpleSvgIconRefElement, SimpleSvgIconProps>(
-      (() => {
-        const rotation = keyframes`
-          100% { rotate: 1turn }
-        `
-        const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterSvg)`
-          animation: ${rotation} 650ms linear infinite;
-        `
-        return (props, forwardedRef) =>
-          <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2} ref={forwardedRef} />
-      })()
-    )
+    (() => {
+      const rotation = keyframes`
+        100% { rotate: 1turn }
+      `
+      const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterSvg)`
+        animation: ${rotation} 650ms linear infinite;
+      `
+      return (props: SimpleSvgIconProps) => (
+        <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2}/>
+      )
+    })()
+  )
+  export const SpinnerCircleQuarterBoldIc = React.memo(
+    (() => {
+      const rotation = keyframes`
+        100% { rotate: 1turn }
+      `
+      const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterBoldSvg)`
+        animation: ${rotation} 650ms linear infinite;
+      `
+      return (props: SimpleSvgIconProps) => (
+        <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2}/>
+      )
+    })()
   )
   
   export const SyncErrorIc = generateSimpleSvgIcon(SyncErrorSvg)
+  
+  export const VolumeIc = generateSimpleSvgIcon(VolumeSvg)
+  export const VolumeMuteIc = generateSimpleSvgIcon(VolumeMuteSvg)
   
   export const WarnCircleOutlinedIc = generateSimpleSvgIcon(WarnCircleOutlinedSvg)
   export const WarnTriangleToastifyIc = generateSimpleSvgIcon(WarnTriangleToastifySvg)

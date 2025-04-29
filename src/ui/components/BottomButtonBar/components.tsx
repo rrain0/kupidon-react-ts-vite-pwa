@@ -104,9 +104,9 @@ export namespace ButtonBarComponents {
       <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
         {overlay => (
           <>
-            <QuickSettingsButton onClick={overlay.open} />
+            <QuickSettingsButton onClick={overlay.open}/>
             
-            <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction} />
+            <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction}/>
           </>
         )}
       </UseOverlayUrl>
@@ -124,7 +124,7 @@ export namespace ButtonBarComponents {
         css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.secondary)}
         onClick={back}
       >
-        <Arrow5FwdIc css={css`rotate: 0.5turn;`} />
+        <Arrow5FwdIc css={css`rotate: 0.5turn;`}/>
       </Button>
     )
   })

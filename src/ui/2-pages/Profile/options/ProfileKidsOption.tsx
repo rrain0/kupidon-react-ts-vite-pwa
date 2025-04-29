@@ -70,7 +70,7 @@ const ProfileKidsOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<BabyGradIc />}
+          icon={<BabyGradIc/>}
           title={text.kids}
           value={value}
           onClick={open}

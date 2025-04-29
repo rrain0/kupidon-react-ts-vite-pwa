@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from 'src/util/common/TypeU'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import col = EmotionCommon.col
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
@@ -13,7 +13,7 @@ import rowWrapC = EmotionCommon.rowWrapC
 
 export type Compatibility = 'high' | 'medium'
 
-export type PersonalityCompatibilityProps = Puro<{
+export type PersonalityCompatibilityProps = Pu<{
   compatibility: Compatibility
   compatibles: string[]
 }>

@@ -266,9 +266,9 @@ const ProfilePage = React.memo(() => {
           isReady: false,
           download: { ...newDefaultMediaOperation(),
             id: photo.id,
-            showProgress: true,
             abort: reason => abortCtrl.abort(reason),
           },
+          showDownloadProgress: true,
         } satisfies Partial<MediaInArrayDUC>
         
         setFormValues(form => ({ ...form,
@@ -601,7 +601,7 @@ const ProfilePage = React.memo(() => {
                                 //   formProps={formProps}
                                 //   isLoading={isLoading}
                                 //   tabI={tabI}
-                                // />,
+                                ///>,
                                 <Tests
                                   key="tests"
                                   validationProps={validationProps}

@@ -94,7 +94,7 @@ const ProfileFavoriteMovieGenresOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<FilmGradIc />}
+          icon={<FilmGradIc/>}
           title={'Любимые жанры фильмов'}
           value={valueText}
           onClick={open}

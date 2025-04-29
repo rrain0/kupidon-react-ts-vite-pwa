@@ -38,8 +38,10 @@ export namespace RangeU {
    * @param max Максимальное значение
    * @returns {boolean}
    */
-  export const has = (curr: number, [min, max]: NumRange, minIncl = true, maxIncl = true): boolean => {
-    return curr > min && curr < max || minIncl && curr === min || maxIncl && curr === max
+  export const has = (
+    curr: number, [min, max]: NumRange, { first = true, last = true } = { },
+  ): boolean => {
+    return curr > min && curr < max || first && curr === min || last && curr === max
   }
   
   

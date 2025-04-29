@@ -46,11 +46,11 @@
   </style>
   
   
-  <rect class="rect top-left" />
-  <rect class="rect bottom-left" />
-  <rect class="rect bottom-right" />
+  <rect class="rect top-left"/>
+  <rect class="rect bottom-left"/>
+  <rect class="rect bottom-right"/>
   
-  <rect class="line horizontal" />
-  <rect class="line vertical" />
+  <rect class="line horizontal"/>
+  <rect class="line vertical"/>
     
 </svg>

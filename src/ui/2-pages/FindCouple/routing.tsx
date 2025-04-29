@@ -4,7 +4,7 @@ import { MockData } from 'src/_mock-data/MockData.ts'
 import { ProfileShowcaseApi } from 'src/api/requests/ProfileShowcaseApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
@@ -127,7 +127,7 @@ const FindCouplePageWithItems = React.memo(() => {
   
   if (!items) return <div>Loading...</div>
   
-  return <FindCouplePage items={items} />
+  return <FindCouplePage items={items}/>
 })
 
 
@@ -148,7 +148,7 @@ const RouteFindCouple = React.memo(() => {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <FindCouplePageWithItems />
+      <FindCouplePageWithItems/>
     </Suspense>
   )
 })

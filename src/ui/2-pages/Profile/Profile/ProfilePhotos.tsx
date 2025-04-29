@@ -319,7 +319,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                       
                       return (
                         <div css={contents} {...getRootProps()}>
-                          <input {...getInputProps()} />
+                          <input {...getInputProps()}/>
                           {/* @ts-expect-error */}
                           <animated.label
                             css={photoDraggableBox}
@@ -344,7 +344,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                               if (isDownloading && isLoadingNoProgress) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
-                                    <SparkingLoadingLine />
+                                    <SparkingLoadingLine/>
                                   </div>
                                 )
                               }
@@ -364,7 +364,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                               if (isEmpty) {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
-                                    <PlusIc css={SvgIconS6.t(ImageParts.placeholderIcS)} />
+                                    <PlusIc css={SvgIconS6.t(ImageParts.placeholderIcS)}/>
                                   </div>
                                 )
                               }
@@ -389,8 +389,8 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                             )}
                             {isDraggingFiles && (
                               <>
-                                {isDragAccept && <div css={photoDimmed} />}
-                                <div css={photoOnExternalDraggingBorder} />
+                                {isDragAccept && <div css={photoDimmed}/>}
+                                <div css={photoOnExternalDraggingBorder}/>
                               </>
                             )}
                           

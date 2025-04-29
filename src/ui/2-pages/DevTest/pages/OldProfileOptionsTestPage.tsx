@@ -40,99 +40,99 @@ const OldProfileOptionsTestPage = React.memo(() => {
             
             <div>Это потом будет в фильтре поиска</div>
             
-            <div css={{ height: 24 }} />
+            <div css={{ height: 24 }}/>
             
             <Card>
               
-              <ProfileImLookingForOption />
+              <ProfileImLookingForOption/>
               
-              <PartnerHeightOption />
+              <PartnerHeightOption/>
               
-              <PartnerAgeOption />
+              <PartnerAgeOption/>
               
             </Card>
             
           </div>
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           
           <div>Old Profile Options</div>
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <Card>
             
-            <DatePurposeOption />
+            <DatePurposeOption/>
             
-            <DatePeriodBeforeDateOption />
+            <DatePeriodBeforeDateOption/>
           
           </Card>
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <Card>
             
-            <DatePurposeOption />
+            <DatePurposeOption/>
             
-            <DatePeriodBeforeDateOption />
+            <DatePeriodBeforeDateOption/>
           
           </Card>
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <Card>
             
-            <DateMostInterestingVisitedPlaceOption />
+            <DateMostInterestingVisitedPlaceOption/>
             
-            <DateDesiredPlaceOrEventOption />
+            <DateDesiredPlaceOrEventOption/>
           
           </Card>
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <Card>
             
-            <ProfileSportFrequencyOption />
+            <ProfileSportFrequencyOption/>
           
           </Card>
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <Card>
             
             
-            <ProfileFavoriteMovieGenresOption />
+            <ProfileFavoriteMovieGenresOption/>
             
             
-            <ProfileFavoriteBookGenresOption />
+            <ProfileFavoriteBookGenresOption/>
           
           </Card>
           
           
           
-          <div css={{ height: 24 }} />
+          <div css={{ height: 24 }}/>
           
           <Card>
             
-            <PartnerPetsOption />
+            <PartnerPetsOption/>
             
             
-            <PartnerAlcoholOption />
+            <PartnerAlcoholOption/>
             
             
-            <PartnerSmokeOption />
+            <PartnerSmokeOption/>
           
           </Card>
         
@@ -140,7 +140,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     
     </>
   )

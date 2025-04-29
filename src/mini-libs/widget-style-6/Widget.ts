@@ -108,7 +108,7 @@ export type AttachRootElemParams = {
 
 
 // TODO Style - css class - задуматься как выделять css классы
-// TODO Style - <div w={Widget} wst={WidgetStyle} />
+// TODO Style - <div w={Widget} wst={WidgetStyle}/>
 
 const styleCache: WeakMap<object,
   WeakMap<object,

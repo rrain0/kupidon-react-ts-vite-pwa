@@ -19,12 +19,12 @@ export namespace TypeU {
   
   export type Exists<T> = Exclude<T, empty>
   
-  // Add Partial & Undefined
+  // Add Partial + Undefined
   export type PartialUndef<O extends object> = {
     [Prop in keyof O]+?: O[Prop] | undefined
   }
   export type Pu<O extends object> = PartialUndef<O>
-  // Remove Partial & Undefined
+  // Remove Partial + Undefined
   export type Defined<O extends object> = {
     [Prop in keyof O]-?: Exclude<O[Prop], undefined>
   }
@@ -32,7 +32,7 @@ export namespace TypeU {
   export type Ro<O extends object> = {
     +readonly [Prop in keyof O]: O[Prop]
   }
-  // Add Partial & Undefined & ReadOnly
+  // Add Partial + Undefined + ReadOnly
   export type Puro<O extends object> = {
     +readonly [Prop in keyof O]+?: O[Prop] | undefined
   }
@@ -187,4 +187,19 @@ export namespace TypeU {
   export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
   export const mapNotnumberOrNegative = <T, R>(v: T, r: R) => isnumber(v) && v >= 0 ? v : r
   export const mapNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
+  
+  
+  export function mapBool<V, const TV>(
+    v: V | boolean, trueV: TV
+  ): V | TV | undefined
+  export function mapBool<V, const TV, const FV>(
+    v: V | boolean, trueV: TV, falseV: FV
+  ): V | TV | FV
+  export function mapBool<V, const TV, const FV>(
+    v: V | boolean, trueV: TV, falseV?: FV
+  ): V | TV | FV | undefined {
+    if (v === true) return trueV
+    if (v === false) return falseV
+    return v
+  }
 }

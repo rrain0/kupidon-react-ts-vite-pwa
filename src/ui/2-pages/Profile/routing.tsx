@@ -45,12 +45,12 @@ const RouteProfileIdUserIdTab = React.memo(() => {
   
   if (tab === summary) return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ProfileSummaryPage />
+      <ProfileSummaryPage/>
     </Suspense>
   )
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ProfilePage />
+      <ProfilePage/>
     </Suspense>
   )
 })

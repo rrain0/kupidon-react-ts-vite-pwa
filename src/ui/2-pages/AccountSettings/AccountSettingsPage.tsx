@@ -299,18 +299,18 @@ const AccountSettingsPage = React.memo(() => {
         </Pages.AddSafeInsets>
         
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn />
+      <TopButtonBar backBtn/>
       
       {/* <BottomButtonBar settingsBtn
         rightChildren={
           canSubmit && <Button css={IconButtonStyle.icon}
             onClick={submit}
           >
-            <FloppyDisk1Ic />
+            <FloppyDisk1Ic/>
           </Button>
         }
       /> */}

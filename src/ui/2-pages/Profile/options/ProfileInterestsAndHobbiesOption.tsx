@@ -84,7 +84,7 @@ const ProfileInterestsAndHobbiesOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<TelescopeGradIc />}
+          icon={<TelescopeGradIc/>}
           title={text.interestsAndHobbies}
           value={valueText}
           onClick={open}

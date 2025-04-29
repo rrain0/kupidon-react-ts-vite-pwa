@@ -93,27 +93,27 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     return [
       {
         title: uiText.name, value: name,
-        ic: <ProfileCardIc css={SvgIconS6.t(infoIcS)} />,
+        ic: <ProfileCardIc css={SvgIconS6.t(infoIcS)}/>,
       },
       {
         title: uiText.weight, value: weight,
-        ic: <DumbbellIc css={SvgIconS6.t(infoIcS)} />,
+        ic: <DumbbellIc css={SvgIconS6.t(infoIcS)}/>,
       },
       {
         title: uiText.height, value: height,
-        ic: <RulerCornerIc css={SvgIconS6.t(infoIcS)} />,
+        ic: <RulerCornerIc css={SvgIconS6.t(infoIcS)}/>,
       },
       {
         title: uiText.imLookingFor, value: imLookingFor,
-        ic: <SearchIc css={SvgIconS6.t(infoIcS)} />,
+        ic: <SearchIc css={SvgIconS6.t(infoIcS)}/>,
       },
       {
         title: uiText.age, value: age,
-        ic: <CalendarIc css={SvgIconS6.t(infoIcS)} />,
+        ic: <CalendarIc css={SvgIconS6.t(infoIcS)}/>,
       },
       {
         title: uiText.gender, value: uiText.genderValue,
-        ic: <GenderIc css={SvgIconS6.t(infoIcS)} />,
+        ic: <GenderIc css={SvgIconS6.t(infoIcS)}/>,
       },
     ]
   }, [name, birthDate, gender, aboutMe, uiText])
@@ -141,7 +141,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
               
               <NameAge>{nameAge}</NameAge>
               
-              <div />
+              <div/>
               
               <MatchBox>
                 <MatchBubble main>{uiText.match} - {match}%</MatchBubble>
@@ -150,11 +150,11 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
                 <MatchBubble>{uiText.interests}</MatchBubble>
               </MatchBox>
               
-              <div />
+              <div/>
               
               <SectionTitle>{uiText.information}</SectionTitle>
               
-              <div />
+              <div/>
               
               <InfoBox>
                 {infos.map(info => (
@@ -165,27 +165,27 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
                 ))}
               </InfoBox>
               
-              <div />
+              <div/>
               
-              <Divider />
+              <Divider/>
               
-              <div />
+              <div/>
               
               <SectionTitle>{uiText.aboutMe}</SectionTitle>
               
-              <div />
+              <div/>
               
               <SectionText>{aboutMe}</SectionText>
               
-              <div />
+              <div/>
               
-              <Divider />
+              <Divider/>
               
-              <div />
+              <div/>
               
               <SectionTitle>Интересы</SectionTitle>
               
-              <div />
+              <div/>
               
               <SectionText>
                 Активный отдых в пригороде

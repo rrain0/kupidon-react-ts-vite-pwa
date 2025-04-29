@@ -5,13 +5,13 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import GearIc = SvgIconsPack.GearIc
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
 
 
-type QuickSettingsButtonProps = Puro<{
+type QuickSettingsButtonProps = Pu<{
   onClick: Callback
 }>
 
@@ -21,7 +21,7 @@ const QuickSettingsButton = React.memo((props: QuickSettingsButtonProps) => {
       css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.secondary)}
       {...props}
     >
-      <GearIc />
+      <GearIc/>
     </Button>
   )
 })

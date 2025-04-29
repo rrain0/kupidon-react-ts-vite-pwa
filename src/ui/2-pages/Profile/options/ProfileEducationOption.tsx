@@ -80,7 +80,7 @@ const ProfileEducationOption = React.memo(() => {
   return (
     <>
       <OptionItem
-        icon={<EducationGradIc />}
+        icon={<EducationGradIc/>}
         title={titleText.education}
         value={value}
         onClick={open}

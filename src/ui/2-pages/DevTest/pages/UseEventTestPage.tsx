@@ -20,9 +20,9 @@ const UseEventTestPage = () => {
     <Pages.Page>
       <Pages.Content>
         
-        <UseEventTest1 />
+        <UseEventTest1/>
         
-        <UseEventTest2 />
+        <UseEventTest2/>
       
       </Pages.Content>
     </Pages.Page>

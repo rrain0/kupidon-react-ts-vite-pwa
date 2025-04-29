@@ -13,8 +13,7 @@ import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter
-import Puro = TypeU.Puro
-import Ro = TypeU.Ro
+import Pu = TypeU.Pu
 import emptyArr = TypeU.emptyArr
 import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
@@ -34,12 +33,12 @@ const overlayRemove = 'remove'
 
 
 
-type ModalTileSelectProps<T extends string> = Ro<{
+type ModalTileSelectProps<T extends string> = {
   isOpen: boolean
   onClose: Callback
   title: string
   options: Option<T>[]
-}> & Puro<{
+} & Pu<{
   selected: T[]
   setSelected: Setter<T[]>
   onCancel: Callback
@@ -102,7 +101,7 @@ const ModalTileSelect = ReactU.memo(
                   })}
                 </ItemsBox>
                 
-                <div style={{ height: 24 }} />
+                <div style={{ height: 24 }}/>
                 
                 <DialogButtons
                   position="center"
@@ -112,7 +111,7 @@ const ModalTileSelect = ReactU.memo(
                   acceptVariant="filledRounded"
                 />
                 
-                <div style={{ height: 24 }} />
+                <div style={{ height: 24 }}/>
               
               </BottomSheetBasic>
             </ModalPortal>
@@ -138,15 +137,13 @@ const SearchStub = styled.div`
   padding: ${Sizes.g}px;
 `
 
-const Tile = React.memo(
-  styled.div<Puro<{ isSelected: boolean }>>`
-    padding: 4px ${Sizes.g}px;
-    border-radius: 999999px;
-    ${Txt.s16Thin};
-    ${p => p.isSelected && `
-      background-color: ${p.theme.boxDefault.bga4};
-      color: ${p.theme.boxDefault.cta4};
-    `}
-    cursor: pointer;
-  `
-)
+const Tile = React.memo(styled.div<Pu<{ isSelected: boolean }>>`
+  padding: 4px ${Sizes.g}px;
+  border-radius: 999999px;
+  ${Txt.s16Thin};
+  ${p => p.isSelected && `
+    background-color: ${p.theme.boxDefault.bga4};
+    color: ${p.theme.boxDefault.cta4};
+  `}
+  cursor: pointer;
+`)

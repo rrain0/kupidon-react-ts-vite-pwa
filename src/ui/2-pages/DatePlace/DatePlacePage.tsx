@@ -84,12 +84,12 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
           <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn />
+              <BackBtn/>
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div css={{ width: 50, height: 50 }} />
+              <div css={{ width: 50, height: 50 }}/>
             </Pages.PageHeaderWithLeftRightItems>
             
-            <div style={{ height: 34 }} />
+            <div style={{ height: 34 }}/>
             
             {!place.video && (
               <ImgSpark
@@ -103,26 +103,26 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
               />
             )}
             
-            <div style={{ height: 19 }} />
+            <div style={{ height: 19 }}/>
             
             <Title>
               {uiText.pageTitle}
             </Title>
             
-            <div style={{ height: 7 }} />
+            <div style={{ height: 7 }}/>
             
             <ContactButton
               contact={{ type: 'address', text: uiText.addressText! }}
               onClick={locationDialog.open}
             />
             
-            <div style={{ height: 17 }} />
+            <div style={{ height: 17 }}/>
             
             <Description>{uiText.description}</Description>
             
             
             
-            <div style={{ height: 19 }} />
+            <div style={{ height: 19 }}/>
             
             <div css={css`${col}; gap: 26px;`}>
               
@@ -130,7 +130,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
                 <div css={col}>
                   <ListTitle>{uiText.features}</ListTitle>
                   
-                  <div style={{ height: 12 }} />
+                  <div style={{ height: 12 }}/>
                   
                   <List>
                     {featuresUiText.map(it => (
@@ -144,7 +144,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
                 <div css={col}>
                   <ListTitle>{uiText.bonusesFromKupidon}</ListTitle>
                   
-                  <div style={{ height: 12 }} />
+                  <div style={{ height: 12 }}/>
                   
                   <List>
                     {bonusesUiText.map(it => (
@@ -158,7 +158,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
                 <div css={col}>
                   <ListTitle>{uiText.contactInformation}</ListTitle>
                   
-                  <div style={{ height: 12 }} />
+                  <div style={{ height: 12 }}/>
                   
                   <ContactsList>
                     {place.contacts.map(it => (
@@ -176,7 +176,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
@@ -195,14 +195,14 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
                   />
                 ))}
               </ContactsList>
-              <div style={{ height: 40 }} />
+              <div style={{ height: 40 }}/>
             </BottomSheetBasic>
           </ModalPortal>
         )}
       </UseBottomSheetState>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
     </>
   )

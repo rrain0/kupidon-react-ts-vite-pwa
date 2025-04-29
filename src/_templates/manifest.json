@@ -25,14 +25,14 @@
   "orientation": "portrait",
   
   
-  // Splashscreen colors can't be overriden by html <meta />
-  // When app has loaded, html <meta /> will override manifest values.
+  // Splashscreen colors can't be overriden by html <meta/>
+  // When app has loaded, html <meta/> will override manifest values.
   
   // На нижний бар с полоской навигации андроида эти настройки не влияют
   
   // Splashscreen status bar color.
   // Title bar of window, status bar on mobile.
-  // It will be overriden by <meta name="theme-color" ... />.
+  // It will be overriden by <meta name="theme-color" .../>.
   "theme_color": "#282c34",
   
   // Splashscreen bg color.
@@ -46,8 +46,8 @@
     Favicon - Иконка PWA на Android / PC + used in browser tab
     Define in index.html:
     There is png because iOS does not support svg
-    <link rel="icon" type="image/png" href="%BASE_URL%public/res/icon64.png" />
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%public/res/icon.svg" />
+    <link rel="icon" type="image/png" href="%BASE_URL%public/res/icon64.png"/>
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%public/res/icon.svg"/>
     NO PADDINGS
     
     Также используется для обычного ярлыка сайта Android - там уже НУЖНЫ ПАДДИНГИ, но пофиг
@@ -55,7 +55,7 @@
   /*
     Apple touch icon - Иконка PWA на iOS
     Define in index.html:
-    <link rel="apple-touch-icon" type="image/png" href="%BASE_URL%public/res/icon192-padding.png" />
+    <link rel="apple-touch-icon" type="image/png" href="%BASE_URL%public/res/icon192-padding.png"/>
     WITH PADDINGS
   */
   // paths are relative because manifest.json in root

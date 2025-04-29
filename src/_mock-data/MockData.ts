@@ -1,7 +1,11 @@
+import avaChan1 from '@im/test/ava chan d6535947482554bd0571ba485e4467d0.jpg'
+import avaChan2 from '@im/test/ava top chan 1cc31157191cfe279575176e2db4ff81.jpg'
+import avaChan3 from '@im/test/ava korathink x KXBRIGU - SENTENIAL 3.png'
 import beastTamerNekoChan from 'src/res/im/test/[08] Beast_Tamer.mp4_20221128_150447.115.jpg'
 import blueLockIsagi from 'src/res/im/test/[DC] Blue Lock - 19_Telegram.mp4_20230220_171742.815.jpg'
 import animeChan from 'src/res/im/test/anime-chan.jpg'
-import ban from 'src/res/im/test/Ban_ava_Nanatsu no Taizai 06.mkv_20220409_213244.290.jpg'
+import banSmirks from 'src/res/im/test/Ban smirks  Nanatsu no Taizai.jpg'
+import chanAva from 'src/res/im/test/chan ava 6868ff87e048ba80ad88c2746c4523e3 square.png'
 import cuteChanWithFlowers from 'src/res/im/test/cute chan with flowers 118241319_p1.jpg'
 import flatOut2 from 'src/res/im/test/FlatOut 2.jpg'
 import guyFawkesMask from 'src/res/im/test/Guy Fawkes Mask.jpg'
@@ -20,15 +24,17 @@ export const MockData = {
   
   images: {
     allRecord: {
+      avaChan1, avaChan2, avaChan3,
       beastTamerNekoChan, blueLockIsagi,
-      animeChan, ban, cuteChanWithFlowers, flatOut2,
+      animeChan, banSmirks, chanAva, cuteChanWithFlowers, flatOut2,
       guyFawkesMask, kakashiAndSatoru, blueLockIsagi2,
       needMoreAcid, nextUp,
       ourLastNight, retrowave2, satoru,
     },
     all: [
+      avaChan1,
       beastTamerNekoChan, blueLockIsagi,
-      animeChan, ban, cuteChanWithFlowers, flatOut2,
+      animeChan, banSmirks, chanAva, cuteChanWithFlowers, flatOut2,
       guyFawkesMask, kakashiAndSatoru, blueLockIsagi2, needMoreAcid, nextUp,
       ourLastNight, retrowave2, satoru,
     ],
@@ -37,11 +43,11 @@ export const MockData = {
       kakashiAndSatoru, needMoreAcid, satoru,
     ],
     sixImages2: [
-      flatOut2, animeChan, ban,
+      flatOut2, animeChan, banSmirks,
       guyFawkesMask, nextUp, ourLastNight,
     ],
     sixImages3: [
-      animeChan, ban, guyFawkesMask,
+      animeChan, banSmirks, guyFawkesMask,
       kakashiAndSatoru, needMoreAcid, beastTamerNekoChan,
     ],
   },

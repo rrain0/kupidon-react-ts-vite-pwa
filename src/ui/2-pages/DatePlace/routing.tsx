@@ -3,7 +3,7 @@ import { Navigate, RouteObject, useMatch, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts'
-import { clearUnknownPathEnding } from 'src/util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use
@@ -29,13 +29,13 @@ const RouteDatePlacePlaceId = React.memo(() => {
   
   if (!place) return (
     <Suspense fallback={<div>Loading...</div>}>
-      <DatePlaceNotFoundPage />
+      <DatePlaceNotFoundPage/>
     </Suspense>
   )
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <DatePlacePage place={place} />
+      <DatePlacePage place={place}/>
     </Suspense>
   )
 })

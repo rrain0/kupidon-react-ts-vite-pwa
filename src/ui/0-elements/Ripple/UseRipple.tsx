@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { RippleProps, RippleState } from 'src/ui/0-elements/Ripple/Ripple'
 import { TypeU } from 'src/util/common/TypeU'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
-type UseRippleProps = Puro<{
+type UseRippleProps = Pu<{
   children: (renderProps: UseRippleRenderProps) => React.ReactNode
 }>
 

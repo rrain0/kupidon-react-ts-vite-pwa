@@ -20,7 +20,7 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="profile" />}
+              element={<NavBar place="profile"/>}
             />
           ))
       }
@@ -31,7 +31,7 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="chat" />}
+              element={<NavBar place="chat"/>}
             />
           ))
       }
@@ -42,7 +42,7 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="findCouple" />}
+              element={<NavBar place="findCouple"/>}
             />
           ))
       }
@@ -57,7 +57,7 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="bowAndArrows" />}
+              element={<NavBar place="bowAndArrows"/>}
             />
           ))
       }
@@ -68,7 +68,7 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="settings" />}
+              element={<NavBar place="settings"/>}
             />
           ))
       }

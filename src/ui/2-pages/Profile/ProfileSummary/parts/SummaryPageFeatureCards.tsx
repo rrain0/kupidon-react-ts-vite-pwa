@@ -42,7 +42,7 @@ const SummaryPageFeatureCards = React.memo(() => {
         <FeatureCardText>{unlockAllPossibilitiesWithPremium}</FeatureCardText>
         <Button css={ButtonS6.t(premiumCardButtonS)}>{findOutMore}</Button>
         <FeatureCardIcBox>
-          <PremiumCardIc />
+          <PremiumCardIc/>
         </FeatureCardIcBox>
       </PremiumCard>
       
@@ -60,7 +60,7 @@ const SummaryPageFeatureCards = React.memo(() => {
         <FeatureCardText>{joinSocialNetworksToStayUpToDate}</FeatureCardText>
         <Button css={ButtonS6.t(socialNetworksCardButtonS)}>{goto}</Button>
         <FeatureCardIcBox>
-          <SocialNetworksCardIc />
+          <SocialNetworksCardIc/>
         </FeatureCardIcBox>
       </SocialNetworksCard>
     </>

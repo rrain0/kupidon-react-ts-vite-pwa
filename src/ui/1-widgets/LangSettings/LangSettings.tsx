@@ -8,7 +8,6 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Setter = TypeU.Callback1
 import col = EmotionCommon.col
-import Puro = TypeU.Puro
 
 
 
@@ -17,9 +16,8 @@ import Puro = TypeU.Puro
 export type LangSettingsProps = {
   open: boolean
   setOpen: Setter<boolean>
-} & Puro<{
-  closeable: boolean
-}>
+  closeable?: boolean | undefined
+}
 
 
 
@@ -34,7 +32,7 @@ const LangSettings = React.memo((props: LangSettingsProps) => {
             css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
             {...sheetProps}
             closeable={props.closeable}
-            title={<div css={css`height: 1em;`} />}
+            title={<div css={css`height: 1em;`}/>}
           >
             <div
               css={css`
@@ -43,7 +41,7 @@ const LangSettings = React.memo((props: LangSettingsProps) => {
               `}
             >
               
-              <LangOptions />
+              <LangOptions/>
               
             </div>
           </BottomSheetBasic>

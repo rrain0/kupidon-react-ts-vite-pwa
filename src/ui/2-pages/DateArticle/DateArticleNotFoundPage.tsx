@@ -49,12 +49,12 @@ export const DateArticleNotFoundPage = React.memo(() => {
           <Pages.ContentColSm style={{ gap: 0, minHeight: '100%' }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn />
+              <BackBtn/>
               <Hdrs.Page>{uiText.articleNotFound}</Hdrs.Page>
-              <div />
+              <div/>
             </Pages.PageHeaderWithLeftRightItems>
             
-            <div style={{ height: 28 }} />
+            <div style={{ height: 28 }}/>
             
             <ButtonBox>
               <Link
@@ -75,11 +75,11 @@ export const DateArticleNotFoundPage = React.memo(() => {
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <BottomButtonBar />
+      <BottomButtonBar/>
     
     </>
   )

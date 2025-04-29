@@ -201,8 +201,8 @@ export default React.memo(ValidationWrap) as typeof ValidationWrap
       JSX.ElementType
       /*React.JSXElementConstructor<React.JSX.IntrinsicElements['input']>*/
     >
-    let i1: InputType = <input value="ldksfjl" />
-    let i2: InputType = <Input value="ldksfjl" />
+    let i1: InputType = <input value="ldksfjl"/>
+    let i2: InputType = <Input value="ldksfjl"/>
     
     i1 = React.cloneElement(i1, { name: 'some-name' })
     i2 = React.cloneElement(i2, { name: 'some-name' })

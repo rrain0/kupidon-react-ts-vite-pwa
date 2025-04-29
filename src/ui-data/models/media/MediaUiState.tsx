@@ -47,12 +47,12 @@ export const MediaUiState = React.memo((props: MediaUiStateProps) => {
       {(() => {
         if (isError) {
           return (
-            <DocumentErrorIc css={SvgIconS6.t(ImageParts.documentErrorIcS)} />
+            <DocumentErrorIc css={SvgIconS6.t(ImageParts.documentErrorIcS)}/>
           )
         }
         if (isLoadingNoProgress) {
           return (
-            <SparkingLoadingLine />
+            <SparkingLoadingLine/>
           )
         }
         if (isLoadingWithProgress) {
@@ -66,7 +66,7 @@ export const MediaUiState = React.memo((props: MediaUiStateProps) => {
         }
         if (isEmpty) {
           return (
-            <PictureIc css={SvgIconS6.t(ImageParts.placeholderIcSmS)} />
+            <PictureIc css={SvgIconS6.t(ImageParts.placeholderIcSmS)}/>
           )
         }
       })()}

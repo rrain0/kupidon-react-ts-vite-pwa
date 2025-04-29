@@ -339,14 +339,14 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
               >
                 {(() => {
                   if (!isInited) return (
-                    <SparkingLoadingLine />
+                    <SparkingLoadingLine/>
                   )
                   if (!photosCnt) return (
                     <>
-                      <Photo src={placeholderIm} />
-                      <Blur />
+                      <Photo src={placeholderIm}/>
+                      <Blur/>
                       <NoImagesBox>
-                        <PictureIc css={SvgIconS6.t(pictureIcS)} />
+                        <PictureIc css={SvgIconS6.t(pictureIcS)}/>
                         <NoImagesTitle>{uiText.noPhotos}</NoImagesTitle>
                       </NoImagesBox>
                     </>
@@ -359,13 +359,13 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
                     >
                       {({ photo }) => {
                         const { isReady, dataUrl, ...loading } = getMediaUiState(photo)
-                        if (isReady) return <Photo src={dataUrl} />
-                        return <MediaUiState {...loading} />
+                        if (isReady) return <Photo src={dataUrl}/>
+                        return <MediaUiState {...loading}/>
                       }}
                     </AnimatedState>
                   )
                 })()}
-                <PhotoFade />
+                <PhotoFade/>
               </AnimatedPhotoBox>
             )
           })}

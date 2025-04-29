@@ -38,7 +38,7 @@ React.memo(
   
   return <>
     <OptionItem
-      //icon={<GenderGradIc />}
+      //icon={<GenderGradIc/>}
       title={'Самое интересное место, которое вы посетили?'}
       value={'Не выбрано'}
       //onClick={open}

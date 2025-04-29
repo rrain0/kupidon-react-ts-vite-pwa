@@ -9,22 +9,22 @@ import Scrollbar from 'src/ui/1-widgets/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps, SetScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import abs = EmotionCommon.abs
-import ClassStyleProps = ReactU.ClassStyle
-import Puro = TypeU.Puro
+import ClassStyle = ReactU.ClassStyle
+import Pu = TypeU.Pu
 
 
 
 
 
-export type ScrollbarOverlayProps = ClassStyleProps & {
+export type ScrollbarOverlayProps = {
   scrollProps: ScrollProps
   setContainerScroll: SetScrollProps
-} & Puro<{
+} & Pu<{
   canScrollHorizontally: boolean
   canScrollVertically: boolean
   showVertical: boolean
   showHorizontal: boolean
-}>
+}> & ClassStyle
 
 
 

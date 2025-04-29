@@ -17,11 +17,11 @@ export const withDefaults = <
   // Provided default props become optional
   OutP extends PartialDefaults<P, DefaultP> = PartialDefaults<P, DefaultP>,
 >(
-  Component: React.FC<P>, defaultProps: DefaultP,
+  defaultProps: DefaultP, Component: React.FC<P>,
 ): React.FC<OutP> => {
   // ⚠️ Need 'as any' because builtin Partial<T> allows
   // any prop of any value outside of keyof T (is it TS bug?)
-  return (props: OutP) => <Component {...(defaultProps as any)} {...props} />
+  return (props: OutP) => <Component {...(defaultProps as any)} {...props}/>
 }
 
 
@@ -71,20 +71,20 @@ export const withDefaults = <
 //   return (
 //     <>
 //       {/* ✅ Correct */}
-//       <MyImg />
+//       <MyImg/>
 //       {/* ✅ Correct */}
-//       <MyImgWithSrc src={isagi} alt="Isagi" />
+//       <MyImgWithSrc src={isagi} alt="Isagi"/>
 //
 //       {/* ✅ Correct ⚠️ Error - Property count is missing in type {} but required in type */}
-//       <MyComponentWithDefaults />
+//       <MyComponentWithDefaults/>
 //       {/* ✅ Correct ⚠️ Error - TS2322: Type string is not assignable to type number */}
-//       <MyComponentWithDefaults count="one" hidden />
+//       <MyComponentWithDefaults count="one" hidden/>
 //       {/* ✅ Correct */}
-//       <MyComponentWithDefaults count={1} />
+//       <MyComponentWithDefaults count={1}/>
 //       {/* ✅ Correct */}
-//       <MyComponentWithDefaults count={1} hidden />
+//       <MyComponentWithDefaults count={1} hidden/>
 //       {/* ✅ Correct */}
-//       <MyComponentWithDefaults count={1} text="text" isError={false} />
+//       <MyComponentWithDefaults count={1} text="text" isError={false}/>
 //     </>
 //   )
 // }
@@ -100,12 +100,12 @@ export const withDefaults = <
 // // ✅ Wrap component
 // type Props<T extends React.ElementType> = React.ComponentPropsWithRef<T>
 // const MyImgWithSrc = (props: Props<typeof MyImg>) => (
-//   <MyImg {...props} src={nextUp} alt="Fire on black" />
+//   <MyImg {...props} src={nextUp} alt="Fire on black"/>
 // )
 //
 //
 // const withDefaultsNotTyped = (Component, defaultProps) => (props) => (
-//   <Component {...defaultProps} {...props} />
+//   <Component {...defaultProps} {...props}/>
 // )
 //
 //

@@ -91,7 +91,7 @@ const ShadowDOMTestPage = React.memo(() => {
         </Pages.Content>
       </Pages.Page>
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     </>
   )
 })

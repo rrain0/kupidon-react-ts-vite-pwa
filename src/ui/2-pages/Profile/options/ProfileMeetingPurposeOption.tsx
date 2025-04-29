@@ -71,7 +71,7 @@ const ProfileMeetingPurposeOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<GoalGradIc />}
+          icon={<GoalGradIc/>}
           title={'Цель знакомства'}
           value={value}
           onClick={open}

@@ -17,8 +17,7 @@ import zeroBasedRange = RangeU.zeroBased
 import Setter = TypeU.Setter
 import NumRange = RangeU.NumRange
 import Callback1 = TypeU.Callback1
-import Puro = TypeU.Puro
-import Ro = TypeU.Ro
+import Pu = TypeU.Pu
 
 
 // Slider or Scale Picker
@@ -111,11 +110,11 @@ const valueToClampedProgress = (value: number, minMax: NumRange): number => Rang
 
 
 
-export type SliderExtraProps = Ro<{
+export type SliderExtraProps = {
   value: number
   setValue: Setter<number>
   minMax: NumRange
-}> & Puro<{
+} & Pu<{
   onValueDragStart: Callback1<number>
   onValueDragging: Callback1<number>
   onValueDragEnd: Callback1<number>

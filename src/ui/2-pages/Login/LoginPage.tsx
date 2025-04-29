@@ -185,13 +185,13 @@ const LoginPage = React.memo(() => {
           </Pages.ContentColSmForm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn />
+      <TopButtonBar backBtn/>
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
     </>
   )

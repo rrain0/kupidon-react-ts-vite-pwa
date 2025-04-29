@@ -127,7 +127,7 @@ const DateIdealTimeOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<ClockGradIc />}
+          icon={<ClockGradIc/>}
           title={text.yourIdealTimeForDate}
           value={valueText}
           onClick={open}

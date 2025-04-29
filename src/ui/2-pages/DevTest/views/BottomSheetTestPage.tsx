@@ -80,7 +80,7 @@ const BottomSheetTestPage = React.memo(() => {
     <>
       <Pages.Page>
         
-        <div css={css`height: 200px;`} />
+        <div css={css`height: 200px;`}/>
         
         <Pages.Content>
           <div>Bottom Sheet Test Page</div>
@@ -164,7 +164,7 @@ const BottomSheetTestPage = React.memo(() => {
         
         </Pages.Content>
         
-        <div css={css`height: 1000px;`} />
+        <div css={css`height: 1000px;`}/>
         
         
         
@@ -465,7 +465,7 @@ const BottomSheetControlOverlay = (props:{
       
       </div>
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
     </>
   )

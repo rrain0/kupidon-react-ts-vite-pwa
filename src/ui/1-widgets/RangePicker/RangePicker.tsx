@@ -280,8 +280,8 @@ const RangePicker = React.memo(
             // @ts-expect-error
             style={{ ...barSpring }}
           >
-            <div css={leftHandle} />
-            <div css={rightHandle} />
+            <div css={leftHandle}/>
+            <div css={rightHandle}/>
           </animated.div>
         </div>
       )

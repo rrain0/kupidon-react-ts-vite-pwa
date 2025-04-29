@@ -129,13 +129,13 @@ const PosterPreview = React.memo(() => {
                       src={p.previewImg}
                     />
                     
-                    <MiniPosterImageFade />
+                    <MiniPosterImageFade/>
                     
                     <MiniPosterBox>
                       <Date>{p.date}</Date>
                       
                       <LocationBox>
-                        <LocationIc css={SvgIconS6.t(locationIcS)} />
+                        <LocationIc css={SvgIconS6.t(locationIcS)}/>
                         <LocationText>{p.location}</LocationText>
                       </LocationBox>
                       
@@ -143,7 +143,7 @@ const PosterPreview = React.memo(() => {
                       
                       {p.price && (
                         <PriceBox>
-                          <PriceTagIc css={SvgIconS6.t(priceTagIcS)} />
+                          <PriceTagIc css={SvgIconS6.t(priceTagIcS)}/>
                           <PriceText>{p.price}</PriceText>
                         </PriceBox>
                       )}

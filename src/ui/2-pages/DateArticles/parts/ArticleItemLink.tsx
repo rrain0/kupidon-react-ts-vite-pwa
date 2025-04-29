@@ -11,13 +11,14 @@ import fullParams = RouteBuilder.fullParams
 import params = RouteBuilder.params
 import use = RouteBuilder.use
 import assertNever = TypeU.assertNever
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
-export type ArticleItemLinkProps = Children & Puro<{
+export type ArticleItemLinkProps = Pu<{
   articleItem: DateArticleItem
-}>
+}> & Children
+
 export const ArticleItemLink = React.memo((props: ArticleItemLinkProps) => {
   const {
     children,

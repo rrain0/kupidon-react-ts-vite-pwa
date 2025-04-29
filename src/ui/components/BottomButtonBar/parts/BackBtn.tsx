@@ -18,7 +18,7 @@ const BackBtn = React.memo(() => {
       css={IconButtonS6.t(backButtonS)}
       onClick={back}
     >
-      <ArrowAngledRoundedIc />
+      <ArrowAngledRoundedIc/>
     </Button>
   )
 })

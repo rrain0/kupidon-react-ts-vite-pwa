@@ -126,13 +126,13 @@ export const useFormToasts = <Vs extends Values>(
   
   const loadingMsg = useMemo(() => new ToastMsgData({
     type: 'loading',
-    msg: <ToastMsg uiOption={loadingText} />,
+    msg: <ToastMsg uiOption={loadingText}/>,
     closeOnUnmount: true,
   }), [loadingText, isLoading])
   
   const loginSuccessMsg = useMemo(() => new ToastMsgData({
     type: 'ok',
-    msg: <ToastMsg uiOption={successText} />,
+    msg: <ToastMsg uiOption={successText}/>,
     lifetime: 200,
     dragToClose: true,
   }), [successText, isSuccess])

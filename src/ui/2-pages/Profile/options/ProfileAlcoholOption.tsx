@@ -74,7 +74,7 @@ const ProfileAlcoholOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<WineBottleAlcoholGradIc />}
+          icon={<WineBottleAlcoholGradIc/>}
           title={text.attitudeToAlcohol}
           value={valueText}
           onClick={open}

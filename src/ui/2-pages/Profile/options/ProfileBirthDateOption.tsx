@@ -42,7 +42,7 @@ const ProfileBirthDateOption = React.memo((props: ValidationWrapRenderProps<stri
   return (
     <>
       <OptionItem
-        icon={<GiftBoxGradIc />}
+        icon={<GiftBoxGradIc/>}
         title={titleText.age}
         value={age}
         data-error={attrExists(props.highlight)}

@@ -123,7 +123,7 @@ const DevTestPage = React.memo(() => {
             </Link>
           </Items>
           
-          <div style={{ height: 20 }} />
+          <div style={{ height: 20 }}/>
           
           <div>Other:</div>
           
@@ -186,7 +186,7 @@ const DevTestPage = React.memo(() => {
           
           </Items>
           
-          <div style={{ height: 20 }} />
+          <div style={{ height: 20 }}/>
           
           <Items>
             <Link to={RootRoute.devTest.emulatedScroll[fullAnySearchParams](searchParams)}>
@@ -196,7 +196,7 @@ const DevTestPage = React.memo(() => {
             </Link>
           </Items>
           
-          <div style={{ height: 20 }} />
+          <div style={{ height: 20 }}/>
           
           {/* <button
            onClick={()=>toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
@@ -213,7 +213,7 @@ const DevTestPage = React.memo(() => {
            />*/}
           
           
-          <PieProgressView />
+          <PieProgressView/>
           
           
           <div
@@ -226,7 +226,7 @@ const DevTestPage = React.memo(() => {
               color: ${t.boxDefault.ct};
             `}
           >
-            Контент.<br />
+            Контент.<br/>
             Theme.boxDefault
           </div>
           
@@ -240,7 +240,7 @@ const DevTestPage = React.memo(() => {
               color: ${t.boxDefault.ct};
             `}
           >
-            Контент.<br />
+            Контент.<br/>
             Theme.boxNormal2
           </div>
           
@@ -254,7 +254,7 @@ const DevTestPage = React.memo(() => {
               color: ${t.boxAccent4.ct};
             `}
           >
-            Контент.<br />
+            Контент.<br/>
             Theme.boxAccent4
           </div>
           
@@ -304,9 +304,9 @@ const DevTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <TopButtonBar backBtn />
+      <TopButtonBar backBtn/>
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     
     
     </>

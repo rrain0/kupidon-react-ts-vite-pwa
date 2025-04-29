@@ -67,7 +67,7 @@ React.memo(
   
   return <>
     <OptionItem
-      //icon={<GenderGradIc />}
+      //icon={<GenderGradIc/>}
       title={'Отношение партнера к домашним животным'}
       value={value}
       onClick={open}

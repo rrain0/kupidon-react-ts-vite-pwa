@@ -26,9 +26,9 @@ const ElemRefTestPage = () => {
         <div>count: {cnt}</div>
         <button onClick={() => setCnt(cnt + 1)}>count ++</button>
         
-        <ChainedResize1 />
+        <ChainedResize1/>
         
-        <ChainedResize2 />
+        <ChainedResize2/>
       
       </Pages.Content>
     </Pages.Page>
@@ -72,8 +72,8 @@ const ChainedResize1 = () => {
           style={{ width: '50%', height: '200px', background: 'aquamarine' }}
           ref={setElem}
         >
-          Source div.<br />
-          Resize window to change element's dimensions.<br />
+          Source div.<br/>
+          Resize window to change element's dimensions.<br/>
           And it will trigger resizing of Connected div WITHOUT RERENDER.
         </div>
       )}
@@ -127,8 +127,8 @@ const ChainedResize2 = () => {
           style={{ width: '50%', height: '200px', background: 'aquamarine' }}
           ref={setElem}
         >
-          Source div.<br />
-          Resize window to change element's dimensions.<br />
+          Source div.<br/>
+          Resize window to change element's dimensions.<br/>
           And it will trigger resizing of Connected div WITHOUT RERENDER.
         </div>
       )}

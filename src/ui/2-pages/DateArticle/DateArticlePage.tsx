@@ -60,38 +60,38 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
           <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn />
+              <BackBtn/>
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div css={{ width: 50, height: 50 }} />
+              <div css={{ width: 50, height: 50 }}/>
             </Pages.PageHeaderWithLeftRightItems>
             
-            <div style={{ height: 34 }} />
+            <div style={{ height: 34 }}/>
             
             <ImgSpark
               css={ImgSparkS6.t(imgSparkS)}
               src={article.picture}
             />
             
-            <div style={{ height: 19 }} />
+            <div style={{ height: 19 }}/>
             
             <Title>
               {uiText.pageTitle}
             </Title>
             
-            <div style={{ height: 7 }} />
+            <div style={{ height: 7 }}/>
             
-            <div style={{ height: 17 }} />
+            <div style={{ height: 17 }}/>
             
             {parse(article.content)}
             
           </Pages.ContentColSm>
         </Pages.AddSafeInsets>
         
-        <PageScrollbars />
+        <PageScrollbars/>
       </Pages.PageGrad>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
     </>
   )

@@ -60,7 +60,7 @@ const TopButtonBar = React.memo(React.forwardRef<RefElement, TopButtonBarProps>(
           <ButtonsContainer>
             
             <LeftButtonsContainer>
-              {props.backBtn && <BackBtn0 />}
+              {props.backBtn && <BackBtn0/>}
               {props.leftChildren}
             </LeftButtonsContainer>
             
@@ -69,14 +69,14 @@ const TopButtonBar = React.memo(React.forwardRef<RefElement, TopButtonBarProps>(
               
               {props.children}
               
-              {props.settingsBtn && <SettingsBtn />}
+              {props.settingsBtn && <SettingsBtn/>}
               
             </CenterButtonsContainer>
             
             
             <RightButtonsContainer>
               {props.rightChildren}
-              {props.refreshBtn && <RefreshBtn />}
+              {props.refreshBtn && <RefreshBtn/>}
             </RightButtonsContainer>
             
           </ButtonsContainer>

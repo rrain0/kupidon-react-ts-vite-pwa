@@ -75,7 +75,7 @@ const ProfileImLookingForOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<SearchGradIc />}
+          icon={<SearchGradIc/>}
           title={titleText.imLookingFor}
           value={value}
           onClick={open}

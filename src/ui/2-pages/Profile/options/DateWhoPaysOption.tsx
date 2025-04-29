@@ -76,7 +76,7 @@ const DateWhoPaysOption = React.memo(() => {
   return (
     <>
       <OptionItem
-        icon={<CardsDollarGradIc />}
+        icon={<CardsDollarGradIc/>}
         title={text.yourPreferenceForAPaymentOnADate}
         value={valueText}
         onClick={open}

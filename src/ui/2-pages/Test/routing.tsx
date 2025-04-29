@@ -1,4 +1,4 @@
-import { clearUnknownPathEnding } from '@util/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import React, { Suspense } from 'react'
 import {
   Navigate,
@@ -36,7 +36,7 @@ const RouteTestMbti = React.memo(() => {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <MbtiPage />
+      <MbtiPage/>
     </Suspense>
   )
 })

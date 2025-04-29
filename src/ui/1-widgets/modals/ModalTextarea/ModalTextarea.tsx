@@ -11,15 +11,15 @@ import Textarea, { TextareaRefElement } from 'src/ui/0-elements/Textarea/Textare
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 
 
 export type ModalTextareaProps =
-  React.ComponentPropsWithoutRef<typeof Textarea>
-  & Puro<{
+  React.ComponentPropsWithRef<typeof Textarea>
+  & Pu<{
     title: string
     isOpen: boolean
     onClose: Callback
@@ -29,45 +29,43 @@ export type ModalTextareaProps =
 
 
 
-const ModalTextarea = React.memo(React.forwardRef<TextareaRefElement, ModalTextareaProps>(
-  (props, forwardedRef) => {
-    const {
-      title,
-      isOpen,
-      onClose,
-      onClear,
-      onCancel,
-      ...restProps
-    } = props
-    
-    const actionText = useUiValues(ActionUiText)
-    
-    
-    if (isOpen) return (
-      <ModalPortal>
-        <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
-          <Card css={[CardS.card2S, ModalElement.card2Style]}>
-            
-            <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
-            
-            <Textarea css={TextareaStyle.small}
-              autoFocus
-              {...restProps}
-              ref={forwardedRef}
-            />
-            
-            <DialogButtons
-              //onCancel={onCancel}
-              //onClear={onClear}
-              onOk={onClose}
-            />
-            
-          </Card>
-        </Modal>
-      </ModalPortal>
-    )
-    return undefined
-  }
-))
+const ModalTextarea = React.memo((props: ModalTextareaProps) => {
+  const {
+    title,
+    isOpen,
+    onClose,
+    onClear,
+    onCancel,
+    ...restProps
+  } = props
+  
+  const actionText = useUiValues(ActionUiText)
+  
+  
+  if (isOpen) return (
+    <ModalPortal>
+      <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
+        <Card css={[CardS.card2S, ModalElement.card2Style]}>
+          
+          <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
+          
+          <Textarea css={TextareaStyle.small}
+            autoFocus
+            {...restProps}
+          />
+          
+          <DialogButtons
+            //onCancel={onCancel}
+            //onClear={onClear}
+            onOk={onClose}
+          />
+          
+        </Card>
+      </Modal>
+    </ModalPortal>
+  )
+  return undefined
+})
+ModalTextarea.displayName = 'ModalTextarea'
 export default ModalTextarea
 

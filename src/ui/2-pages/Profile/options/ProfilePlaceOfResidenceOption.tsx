@@ -74,7 +74,7 @@ const ProfilePlaceOfResidenceOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<MapLocationGradIc />}
+          icon={<MapLocationGradIc/>}
           title={'Место проживания'}
           value={value}
           onClick={open}

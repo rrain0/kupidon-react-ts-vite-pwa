@@ -97,7 +97,7 @@ const ProfileFavoriteBookGenresOption = React.memo(
     return (
       <>
         <OptionItem
-          icon={<BookGradIc />}
+          icon={<BookGradIc/>}
           title={text.favoriteBookGenres}
           value={valueText}
           onClick={open}

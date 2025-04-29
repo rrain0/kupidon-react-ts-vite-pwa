@@ -122,7 +122,7 @@ const SelectItemTestPage = () => {
                 
                 <IndicatorFrame>
                   <IndicatorBox>
-                    <Indicator />
+                    <Indicator/>
                   </IndicatorBox>
                 </IndicatorFrame>
                 
@@ -142,7 +142,7 @@ const SelectItemTestPage = () => {
                 
                 <IndicatorFrame>
                   <IndicatorBox>
-                    <IndicatorSelected />
+                    <IndicatorSelected/>
                   </IndicatorBox>
                 </IndicatorFrame>
                 
@@ -150,7 +150,7 @@ const SelectItemTestPage = () => {
                   <Text>{v}</Text>
                 </TextBox>
                 
-                <Border />
+                <Border/>
               
               </Frame>
             ))}
@@ -161,7 +161,7 @@ const SelectItemTestPage = () => {
             
             <Frame>
               
-              <AddIconBox> <PlusIc /> </AddIconBox>
+              <AddIconBox> <PlusIc/> </AddIconBox>
             
             </Frame>
             
@@ -174,7 +174,7 @@ const SelectItemTestPage = () => {
                 
                 <IndicatorFrame>
                   <IndicatorBox>
-                    <Indicator />
+                    <Indicator/>
                   </IndicatorBox>
                 </IndicatorFrame>
                 
@@ -183,7 +183,7 @@ const SelectItemTestPage = () => {
                 </TextBox>
                 
                 <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
-                  <PencilWrite2Ic />
+                  <PencilWrite2Ic/>
                 </PencilIconBox>
               
               </Frame>
@@ -198,7 +198,7 @@ const SelectItemTestPage = () => {
                 
                 <IndicatorFrame>
                   <IndicatorBox>
-                    <IndicatorSelected />
+                    <IndicatorSelected/>
                   </IndicatorBox>
                 </IndicatorFrame>
                 
@@ -207,10 +207,10 @@ const SelectItemTestPage = () => {
                 </TextBox>
                 
                 <PencilIconBox style={{ backgroundColor: i === 0 ? '#ff000011' : undefined }}>
-                  <PencilWrite2Ic />
+                  <PencilWrite2Ic/>
                 </PencilIconBox>
                 
-                <Border />
+                <Border/>
               
               </Frame>
             ))}
@@ -222,7 +222,7 @@ const SelectItemTestPage = () => {
             {options.map((v, i, opts) => (
               <Frame key={v.value}>
                 
-                {v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox>}
+                {v.isAdd && <AddIconBox> <PlusIc/> </AddIconBox>}
                 
                 {!v.isAdd && (
                   <>
@@ -231,8 +231,8 @@ const SelectItemTestPage = () => {
                         {opts.map(v => (
                           <React.Fragment key={`${v.value} ${v.isSelected}`}>
                             {!v.isSelected
-                              ? <Indicator />
-                              : <IndicatorSelected />
+                              ? <Indicator/>
+                              : <IndicatorSelected/>
                             }
                           </React.Fragment>
                         ))}
@@ -245,11 +245,11 @@ const SelectItemTestPage = () => {
                     
                     {v.isEditable && (
                       <PencilIconBox>
-                        <PencilWrite2Ic />
+                        <PencilWrite2Ic/>
                       </PencilIconBox>
                     )}
                     
-                    {v.isSelected && <Border />}
+                    {v.isSelected && <Border/>}
                   
                   </>
                 )}
@@ -268,7 +268,7 @@ const SelectItemTestPage = () => {
                 isSelected={v.isSelected}
               >
                 
-                {v.isAdd && <AddIconBox> <PlusIc /> </AddIconBox>}
+                {v.isAdd && <AddIconBox> <PlusIc/> </AddIconBox>}
                 
                 {!v.isAdd && (
                   <>
@@ -277,8 +277,8 @@ const SelectItemTestPage = () => {
                         {opts.map(v => (
                           <React.Fragment key={`${v.value} ${v.isSelected}`}>
                             {!v.isSelected
-                              ? <Indicator />
-                              : <IndicatorSelected />
+                              ? <Indicator/>
+                              : <IndicatorSelected/>
                             }
                           </React.Fragment>
                         ))}
@@ -291,7 +291,7 @@ const SelectItemTestPage = () => {
                     
                     {v.isEditable && (
                       <PencilIconBox>
-                        <PencilWrite2Ic />
+                        <PencilWrite2Ic/>
                       </PencilIconBox>
                     )}
                   
@@ -311,7 +311,7 @@ const SelectItemTestPage = () => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
     </>
   )
 }

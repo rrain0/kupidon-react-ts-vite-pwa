@@ -24,7 +24,7 @@ const RippleTestPage = React.memo(() => {
               <RippleFrame
                 {...rippleProps.target}
               >
-                <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onFilled.round.full.accent)} />
+                <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onFilled.round.full.accent)}/>
               </RippleFrame>
             )}
           </UseRipple>
@@ -32,7 +32,7 @@ const RippleTestPage = React.memo(() => {
           <UseRipple>
             { rippleProps => (
               <RippleFrame2 {...rippleProps.target}>
-                <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onFilled.round.full.accent)} />
+                <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onFilled.round.full.accent)}/>
               </RippleFrame2>
             )}
           </UseRipple>
@@ -41,7 +41,7 @@ const RippleTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn />
+      <BottomButtonBar settingsBtn/>
       
     </>
   )

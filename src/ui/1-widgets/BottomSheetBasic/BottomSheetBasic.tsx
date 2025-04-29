@@ -6,11 +6,11 @@ import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomShee
 import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 
 
 
-export type BottomSheetBasicProps = BottomSheetOptionsProps & Puro<{
+export type BottomSheetBasicProps = BottomSheetOptionsProps & Pu<{
   headerHandle: React.ReactNode
   headerTitle: React.ReactNode
   title: React.ReactNode

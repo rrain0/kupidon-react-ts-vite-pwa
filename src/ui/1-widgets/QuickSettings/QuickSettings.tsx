@@ -77,13 +77,13 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                 <SettingsOptions.Header>
                   {titleText.theme}
                 </SettingsOptions.Header>
-                <ThemeOptions />
+                <ThemeOptions/>
                 
                 
                 <SettingsOptions.Header>
                   {titleText.language}
                 </SettingsOptions.Header>
-                <LangOptions />
+                <LangOptions/>
                 
                 <RoundButtonsContainer>
                   
@@ -114,7 +114,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                       props.setClosing()
                     }}
                   >
-                    <GearIc css={SettingsOptions.icon} />
+                    <GearIc css={SettingsOptions.icon}/>
                     {titleText.appSettings}
                   </Button>
                   
@@ -133,7 +133,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                       onClick={async () => await promptInstall()}
                     >
-                      <AddModuleIc css={SettingsOptions.icon} />
+                      <AddModuleIc css={SettingsOptions.icon}/>
                       {actionText.installApp}
                     </Button>
                   )}
@@ -163,7 +163,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
       </UseBottomSheetState>
       
       
-      <ClearSiteDialog isOpen={clearSiteDialog.isOpen} close={clearSiteDialog.close} />
+      <ClearSiteDialog isOpen={clearSiteDialog.isOpen} close={clearSiteDialog.close}/>
       
     </>
   )

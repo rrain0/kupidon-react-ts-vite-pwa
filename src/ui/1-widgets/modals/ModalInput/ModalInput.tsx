@@ -11,7 +11,7 @@ import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
-import Puro = TypeU.Puro
+import Pu = TypeU.Pu
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
@@ -19,7 +19,7 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 
-type ModalInputProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
+type ModalInputProps = React.ComponentPropsWithRef<typeof Input> & Pu<{
   isOpen: boolean
   title: string
   onClose: Callback
@@ -29,39 +29,37 @@ type ModalInputProps = React.ComponentPropsWithoutRef<typeof Input> & Puro<{
 
 
 
-const ModalInput = React.memo(React.forwardRef<HTMLInputElement, ModalInputProps>(
-  (props, forwardedRef) => {
-    const {
-      isOpen, title, onClose, onCancel, onClear,
-      ...restProps
-    } = props
-    
-    //console.log('title', title)
-    
-    const actionText = useUiValues(ActionUiText)
-    
-    if (isOpen) return (
-      <ModalPortal>
-        <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
-          <Card css={[CardS.card2S, ModalElement.card2Style]}>
-            <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
-            <Input css={InputStyle.outlinedRectSmallNormal}
-              {...restProps}
-              ref={forwardedRef}
-            />
-            
-            <DialogButtons
-              //onCancel={onCancel}
-              //onClear={onClear}
-              onOk={onClose}
-            />
-          </Card>
-        </Modal>
-      </ModalPortal>
-    )
-    return undefined
-  }
-))
+const ModalInput = React.memo((props: ModalInputProps) => {
+  const {
+    isOpen, title, onClose, onCancel, onClear,
+    ...restProps
+  } = props
+  
+  //console.log('title', title)
+  
+  const actionText = useUiValues(ActionUiText)
+  
+  if (isOpen) return (
+    <ModalPortal>
+      <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
+        <Card css={[CardS.card2S, ModalElement.card2Style]}>
+          <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
+          <Input css={InputStyle.outlinedRectSmallNormal}
+            {...restProps}
+          />
+          
+          <DialogButtons
+            //onCancel={onCancel}
+            //onClear={onClear}
+            onOk={onClose}
+          />
+        </Card>
+      </Modal>
+    </ModalPortal>
+  )
+  return undefined
+})
+ModalInput.displayName = 'ModalInput'
 export default ModalInput
 
 

@@ -36,10 +36,10 @@ const RouteAny = React.memo(() => {
   return (
     <>
       {/* Это место, где будут рендериться children */}
-      <Outlet />
+      <Outlet/>
       
-      {/* {navBar?.show && <NavBar place={navBar.place} />} */}
-      <BottomNavBarRouting />
+      {/* {navBar?.show && <NavBar place={navBar.place}/>} */}
+      <BottomNavBarRouting/>
     </>
   )
 })
@@ -150,7 +150,7 @@ const router = createBrowserRouter(routingRoot)
 
 const AppRouting = React.memo(() => {
   return (
-    <RouterProvider router={router} />
+    <RouterProvider router={router}/>
   )
 })
 export default AppRouting
