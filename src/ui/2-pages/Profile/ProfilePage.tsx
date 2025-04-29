@@ -549,7 +549,7 @@ const ProfilePage = React.memo(() => {
                       <>
                         {tabI === 0 && (
                           <Preview
-                            key="preview"
+                            key='preview'
                             formValues={formValues}
                           />
                         )}
@@ -583,7 +583,7 @@ const ProfilePage = React.memo(() => {
                               {[
                                 undefined,
                                 <Profile
-                                  key="profile"
+                                  key='profile'
                                   validationProps={validationProps}
                                   onFormSubmitCallback={onFormSubmitCallback}
                                   submit={submit}
@@ -603,7 +603,7 @@ const ProfilePage = React.memo(() => {
                                 //   tabI={tabI}
                                 ///>,
                                 <Tests
-                                  key="tests"
+                                  key='tests'
                                   validationProps={validationProps}
                                   onFormSubmitCallback={onFormSubmitCallback}
                                   submit={submit}

@@ -33,22 +33,34 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     setMedias(medias => {
-      // const currDownloads = getDownloads()
-      // const newDownloads: Downloads = new Map()
+      const savedDownloads = getDownloads()
+      const usedDownloads: Downloads = new Map()
       
       const newMedias = ArrayU.mapToIf(medias, m => {
+        // Если нет медиа, то ничего не делаем
         if (!m) return m
+        
+        // Ищем загрузку сначала в используемых, потом в предыдущих
         const mediaD = m.download
-        // const newDownload = newDownloads.get(mediaD?.id as any) ?? (() => {
-        //   const currD = currDownloads.get(mediaD?.id as any)?.download
-        //   if (currD) return { cnt: 0, download: currD }
-        // })()
+        let usedDownload = usedDownloads.get(mediaD?.id as any) ?? (() => {
+          const currD = savedDownloads.get(mediaD?.id as any)?.download
+          if (currD) return { cnt: 0, download: currD }
+        })()
+        
+        // Если начинать загрузку не нужно, то просто переносим используемую загрузку дальше
         if (!m.needDownload) {
-          // if (mediaD && newDownload && mediaD.id === newDownload.download.id) {
-          //   newDownload.cnt++
-          //   newDownloads.set(mediaD.id, newDownload)
-          // }
+          if (mediaD && usedDownload && mediaD.id === usedDownload.download.id) {
+            usedDownload.cnt++
+            usedDownloads.set(mediaD.id, usedDownload)
+          }
           return m
+        }
+        
+        // Если для загрузки в медиа есть сохранённая загрузка, то используем её
+        if (mediaD && usedDownload && mediaD.id === usedDownload.download.id) {
+          usedDownload.cnt++
+          usedDownloads.set(mediaD.id, usedDownload)
+          return { ...m, needDownload: false }
         }
         
         
@@ -61,7 +73,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         }
         const abortOperation = reason => abortCtrl.abort(reason)
         
-        const downloadStart = {
+        const startMediaD = {
           isReady: false,
           needDownload: false,
           download: { ...newDefaultMediaOperation(),
@@ -71,14 +83,25 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           downloadError: undefined,
         } satisfies Partial<MediaDownloadable>
         
-        // Если уже есть такая же загрузка, то пусть продолжается
-        if (m.download?.id === downloadStart.download.id) return m
+        usedDownload = usedDownloads.get(startMediaD.download.id as any) ?? (() => {
+          const currD = savedDownloads.get(startMediaD.download.id as any)?.download
+          if (currD) return { cnt: 0, download: currD }
+        })()
         
-        // Отменяем предыдущую загрузку и устанавливаем новую
-        // TODO Download - Тут хз, отменять её тут или это должны делать снаружи
-        m.download?.abort('Download is stale')
-        m = { ...m, ...downloadStart }
+        // Если уже есть такая же сохранённая загрузка, то используем её
+        if (usedDownload && usedDownload.download.id === startMediaD.download.id) {
+          startMediaD.download = usedDownload.download
+          usedDownload.cnt++
+          usedDownloads.set(usedDownload.download.id, usedDownload)
+          return { ...m, ...startMediaD }
+        }
         
+        // Устанавливаем новую загрузку
+        usedDownload = { cnt: 1, download: startMediaD.download }
+        usedDownloads.set(usedDownload.download.id, usedDownload)
+        m = { ...m, ...startMediaD }
+        
+        // Здесь загрузка не должна отменяться, даже если её не нашли
         const updateMedia = ({
           updateMedia, updateDownload, removeDownload,
         }: {
@@ -86,11 +109,9 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           updateDownload?: Partial<MediaDownloadable['download']>,
           removeDownload?: boolean,
         }) => {
-          // TODO Download - Если 2 медиа с одинаковым id, то до второго медиа мы никогда не доберёмся
-          // TODO Если не нашли загрузку при обновлении, то отменить её? Или пусть снаружи отменяют?
           setMedias(medias => mapFirstToIfFoundBy({
             arr: medias,
-            filter: m => m && m.download?.id === downloadStart.download.id,
+            filter: m => m?.download && m.download.id === startMediaD.download.id,
             mapper: m => m && ({
               ...m,
               ...updateMedia,
@@ -151,6 +172,11 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         return m
       })
       
+      savedDownloads.forEach((d, key) => {
+        if (!usedDownloads.has(key)) d.download.abort('Download is stale')
+      })
+      setDownloads(usedDownloads)
+      
       return newMedias
     })
   }, [medias])
@@ -158,6 +184,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     return () => setMedias(medias => {
+      setDownloads(new Map())
       return medias?.map(m => {
         m?.download?.abort('Component-downloader was unmounted')
         return { ...m, download: undefined }

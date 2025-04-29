@@ -26,25 +26,29 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     setMedia(m => {
-      const currD = getDownload()
+      const savedD = getDownload()
+      
       // Нет медиа
       if (!m) {
-        currD?.abort('Download is stale')
+        savedD?.abort('Download is stale')
         setDownload(undefined)
         return m
       }
+      
       const mediaD = m.download
+      
+      // Начинать загрузку не нужно
+      // + Отменяем сохранённую загрузку, если она не соответствует загрузке в медиа
       if (!m.needDownload) {
-        // Отменяем текущую загрузку, если у медиа нет загрузки или она другая
-        if (currD && (!mediaD || mediaD.id !== currD?.id)) {
-          currD?.abort('Download is stale')
+        if (savedD && (!mediaD || mediaD.id !== savedD?.id)) {
+          savedD?.abort('Download is stale')
           setDownload(undefined)
         }
-        // Не нужно начинать загрузку
         return m
       }
-      // Если загрузка в медиа соответствует текущей загрузке, то продолжаем
-      if (mediaD && currD && mediaD.id === currD.id) {
+      
+      // Если загрузка в медиа соответствует сохранённой загрузке, то используем её
+      if (mediaD && savedD && mediaD.id === savedD.id) {
         return { ...m, needDownload: false }
       }
       
@@ -69,14 +73,14 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         downloadError: undefined,
       } satisfies Partial<MediaDownloadable>
       
-      // Если текущая загрузка такая же, что собираемся начать, то продолжаем её
-      if (currD && currD.id === startMediaD.download.id) {
-        startMediaD.download = currD
+      // Если уже есть такая же сохранённая загрузка, то используем её
+      if (savedD && savedD.id === startMediaD.download.id) {
+        startMediaD.download = savedD
         return { ...m, ...startMediaD }
       }
       
       // Отменяем предыдущую загрузку и устанавливаем новую
-      currD?.abort('Download is stale')
+      savedD?.abort('Download is stale')
       setDownload(startMediaD.download)
       m = { ...m, ...startMediaD }
       
@@ -94,7 +98,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           if (removeDownload) setDownload(undefined)
         }
         setMedia(m => {
-          if (m && m.download?.id === startMediaD.download.id) {
+          if (m?.download && m.download.id === startMediaD.download.id) {
             return {
               ...m,
               ...updateMedia,
@@ -162,8 +166,8 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     return () => setMedia(m => {
-      m?.download?.abort('Component-downloader was unmounted')
       setDownload(undefined)
+      m?.download?.abort('Component-downloader was unmounted')
       return { ...m, download: undefined }
     })
   }, [])
