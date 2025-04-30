@@ -39,12 +39,12 @@ const date8yAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 30 * 12 * 8).toIS
 const chatItems = [
   {
     name: 'Мика',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'sending' as const,
+    lastMsg: 'Буду иметь ввиду :)', isLastMsgMy: true, lastMsgStatus: 'sending' as const,
     lastMsgDate: date0sAgo, mute: true,
   },
   {
     ava: chanAva, name: 'Киана',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
+    lastMsg: 'Интересно', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date1mAgo, mute: false,
   },
   {
@@ -54,7 +54,7 @@ const chatItems = [
   },
   {
     ava: chanAva, online: true, name: 'Лести',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: false, unreadCnt: 2,
+    lastMsg: 'Не очень', isLastMsgMy: false, unreadCnt: 2,
     lastMsgDate: date1sAgo, mute: false, order: 1, isWriting: true,
   },
   {
@@ -76,7 +76,7 @@ const chatItems = [
   },
   {
     ava: avaChan1, online: true, name: 'Кира',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'read' as const,
+    lastMsg: 'Хорошего вечера', isLastMsgMy: true, lastMsgStatus: 'read' as const,
     lastMsgDate: date1dAgo, mute: false, order: 1,
   },
   {
@@ -86,17 +86,17 @@ const chatItems = [
   },
   {
     ava: chanAva, name: 'Това',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: true,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date8yAgo, mute: true,
   },
   {
     ava: chanAva, name: 'Реонна',
-    lastMsg: 'Последнее сообщение', unreadCnt: 99999999,
+    lastMsg: 'Спасибо', unreadCnt: 99999999,
     lastMsgDate: date1wAgo, mute: true,
   },
   {
     name: 'Стелли',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'error' as const,
+    lastMsg: 'Давай', isLastMsgMy: true, lastMsgStatus: 'error' as const,
     lastMsgDate: date2yAgo, mute: true, order: 1,
   },
   {
@@ -106,17 +106,17 @@ const chatItems = [
   },
   {
     name: 'Ксюша',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: false,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date6MAgo, mute: true,
   },
   {
     name: 'Настя',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: false,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'read' as const,
     lastMsgDate: date1hAgo, mute: false,
   },
   {
     ava: chanAva, name: 'Маша',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: false,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'read' as const,
     lastMsgDate: date57mAgo, mute: false,
   },
 ]
