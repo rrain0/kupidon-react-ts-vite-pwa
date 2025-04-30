@@ -184,12 +184,15 @@ export const getMediaUiState = (
   media?: MediaDUC,
   { allowEmpty = true } = { },
 ) => {
-  const {
+  let {
     isInited, type, isEmpty, isReady, dataUrl,
     needConversion, conversion, showConversionProgress, conversionError,
     needDownload, download, showDownloadProgress, downloadError, needRetryDownload,
     needUpload, upload, showUploadProgress, uploadError,
   } = media ?? { }
+  showConversionProgress = conversion && showConversionProgress
+  showDownloadProgress = download && showDownloadProgress
+  showUploadProgress = upload && showUploadProgress
   
   const isConverting = !!conversion || needConversion
   const isUploading = !!upload || needUpload
@@ -207,9 +210,7 @@ export const getMediaUiState = (
   const uploadProgress = upload?.progress
   const progress = conversionProgress ?? downloadProgress ?? uploadProgress
   
-  const showProgress = (conversion && showConversionProgress)
-    ?? (download && showDownloadProgress)
-    ?? (upload && showUploadProgress)
+  const showProgress = showConversionProgress ?? showDownloadProgress ?? showUploadProgress
   
   const isLoadingNoProgress = isLoading && !showProgress
   const isLoadingWithProgress = isLoading && showProgress

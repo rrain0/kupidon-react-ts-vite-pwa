@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
+import { isMobileSafari } from 'react-device-detect'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { ReactU } from 'src/util/react/ReactU'
@@ -56,7 +57,7 @@ export const PageLayout = React.memo((props: PageLayoutProps) => {
   
   return (
     <Page
-      data-display-name="PageLayout"
+      data-display-name='PageLayout'
       className={className}
       style={style}
       css={[bgColorType, safeInsetsForFilledBars]}
@@ -85,6 +86,9 @@ const PageFillViewport = styled.div`
   width: 100dvw;
   min-height: ${hMin}px;
   height: 100dvh;
+  // Запретить жест обновления страницы браузера на айфоне,
+  // потому что на айфоне он неприятно сдвигает страницу
+  ${isMobileSafari && 'touch-action: none;'}
 `
 
 
