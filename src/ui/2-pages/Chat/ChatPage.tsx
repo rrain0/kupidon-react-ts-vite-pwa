@@ -169,7 +169,7 @@ const ChatPage = React.memo(() => {
         </PageContentLayout>
       </PageLayout>
       
-      <BottomButtonBar/>
+      {/* <BottomButtonBar/> */}
       
     </>
   )

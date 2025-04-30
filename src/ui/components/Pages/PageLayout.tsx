@@ -4,6 +4,7 @@ import React from 'react'
 import { isMobileSafari } from 'react-device-detect'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
@@ -22,7 +23,7 @@ const hMin = 480
 
 export type PageLayoutProps = Pu<{
   vp: boolean
-  full: boolean
+  //full: boolean
   col: boolean
   bgType: 'grad' | 'fill'
   
@@ -35,16 +36,23 @@ export const PageLayout = React.memo((props: PageLayoutProps) => {
     style,
     children,
     
-    vp, full, col,
+    vp, /* full,  */col,
     bgType = 'grad',
     
     noInsetsForFilledBars,
   } = props
   
+  const pageType = (() => {
+    if (vp) return 'vp' as const
+    //if (full) return 'full' as const
+    if (col) return 'col' as const
+    return 'col' as const
+  })()
+  
   const Page = (() => {
-    if (col) return PageCol
-    if (vp) return PageFillViewport
-    return PageCol
+    if (pageType === 'vp') return PageFillViewport
+    if (pageType === 'col') return PageCol
+    assertNever(pageType)
   })()
   
   const bgColorType = (() => {
@@ -63,6 +71,7 @@ export const PageLayout = React.memo((props: PageLayoutProps) => {
       css={[bgColorType, safeInsetsForFilledBars]}
     >
       {children}
+      {pageType === 'col' && <PageScrollbars/>}
     </Page>
   )
 })

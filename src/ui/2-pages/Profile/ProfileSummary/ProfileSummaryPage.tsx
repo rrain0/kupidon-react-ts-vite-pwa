@@ -29,8 +29,8 @@ import {
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/ProfileSummary/parts/SummaryPageFeatureCards.tsx'
 import { ProfileSummaryPageParts } from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { DateU } from '@util/date/DateU.ts'
@@ -106,119 +106,111 @@ const ProfileSummaryPage = React.memo(() => {
   return (
     <>
     
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm css={pageContentS}>
+      <PageLayout col>
+        <PageContentLayout colSm styleForInner={{ gap: 16 }}>
+          
+          <InfoCard col>
             
-            <InfoCard col>
+            
+            
+            <Flex row>
               
-              
-              
-              <Flex row>
-                
-                <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
-                  <AvaBox>
-                    <MediaDownloader media={mainPhoto}>
-                      {(media) => {
-                        const { isReady, dataUrl, ...loading } = getMediaUiState(media)
-                        if (isReady) return <AvaIm src={dataUrl}/>
-                        return <MediaUiState {...loading}/>
-                      }}
-                    </MediaDownloader>
-                  </AvaBox>
-                </Link>
-                
-                <Gap w={14}/>
-                
-                
-                
-                <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
-                  <NameInfoEditArea col>
-                    
-                    <Name>{name}</Name>
-                    
-                    <Gap h={4}/>
-                    
-                    <Info>{info}</Info>
-                    
-                    <Gap h={10}/>
-                    
-                    <Edit>
-                      <Button css={editBtnStyle}>{actionText.edit}</Button>
-                    </Edit>
-                    
-                  </NameInfoEditArea>
-                </Link>
-                
-                
-                
-                <Gap w={8}/>
-                
-                <Flex grow row justifyCt='end'>
-                  <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
-                    {overlay => (
-                      <Gear onClick={overlay.open}>
-                        <Button css={IconButtonS6.t(gearIc)}>
-                          <GearOutlinedIc/>
-                        </Button>
-                      </Gear>
-                    )}
-                  </UseOverlayUrl>
-                </Flex>
-                
-              </Flex>
-              
-              
-              <Gap h={14.5}/>
-              
-              <Divider/>
-              
-              <Gap h={9}/>
-              
-              <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
-                <HeaderArrow css={headerArrowS}>
-                  {completeProfileDescriptionText}
-                </HeaderArrow>
+              <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
+                <AvaBox>
+                  <MediaDownloader media={mainPhoto}>
+                    {(media) => {
+                      const { isReady, dataUrl, ...loading } = getMediaUiState(media)
+                      if (isReady) return <AvaIm src={dataUrl}/>
+                      return <MediaUiState {...loading}/>
+                    }}
+                  </MediaDownloader>
+                </AvaBox>
               </Link>
               
-              <Gap h={9}/>
+              <Gap w={14}/>
               
-              <ProgressBox>
-                <LineProgressFrame>
-                  <LineProgress style={{ width: `${uiProfileFillProgress}%` }}/>
-                </LineProgressFrame>
-                <LinePercent>{uiProfileFillProgress}%</LinePercent>
-              </ProgressBox>
               
-              <Gap h={9}/>
               
-              <CompleteProfileText>
-                {completeProfileInCoupleSteps}
-              </CompleteProfileText>
+              <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
+                <NameInfoEditArea col>
+                  
+                  <Name>{name}</Name>
+                  
+                  <Gap h={4}/>
+                  
+                  <Info>{info}</Info>
+                  
+                  <Gap h={10}/>
+                  
+                  <Edit>
+                    <Button css={editBtnStyle}>{actionText.edit}</Button>
+                  </Edit>
+                  
+                </NameInfoEditArea>
+              </Link>
               
-            </InfoCard>
+              
+              
+              <Gap w={8}/>
+              
+              <Flex grow row justifyCt='end'>
+                <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
+                  {overlay => (
+                    <Gear onClick={overlay.open}>
+                      <Button css={IconButtonS6.t(gearIc)}>
+                        <GearOutlinedIc/>
+                      </Button>
+                    </Gear>
+                  )}
+                </UseOverlayUrl>
+              </Flex>
+              
+            </Flex>
             
             
-            <SummaryPageFeatureCards/>
+            <Gap h={14.5}/>
             
+            <Divider/>
+            
+            <Gap h={9}/>
+            
+            <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
+              <HeaderArrow css={headerArrowS}>
+                {completeProfileDescriptionText}
+              </HeaderArrow>
+            </Link>
+            
+            <Gap h={9}/>
+            
+            <ProgressBox>
+              <LineProgressFrame>
+                <LineProgress style={{ width: `${uiProfileFillProgress}%` }}/>
+              </LineProgressFrame>
+              <LinePercent>{uiProfileFillProgress}%</LinePercent>
+            </ProgressBox>
+            
+            <Gap h={9}/>
+            
+            <CompleteProfileText>
+              {completeProfileInCoupleSteps}
+            </CompleteProfileText>
+            
+          </InfoCard>
           
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
+          
+          <SummaryPageFeatureCards/>
+          
         
-        <PageScrollbars/>
-      </Pages.PageGrad>
+        </PageContentLayout>
+      </PageLayout>
       
-      <BottomButtonBar/>
+      {/* <BottomButtonBar/> */}
       
     </>
   )
 })
 export default ProfileSummaryPage
 
-
-const pageContentS = css`
-  gap: 16px;
-`
 
 const InfoCard = styled(Flex)`
   ${ProfileSummaryPageParts.cardS};

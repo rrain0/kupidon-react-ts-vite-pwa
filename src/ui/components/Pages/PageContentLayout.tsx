@@ -11,7 +11,7 @@ import col = EmotionCommon.col
 
 
 
-
+const colSmWMax = 518
 
 
 export type PageContentLayoutProps = Pu<{
@@ -22,25 +22,22 @@ export type PageContentLayoutProps = Pu<{
   noInsetsForTransBars: boolean
   noInsets: boolean
   
-  innerClassName: string
-  innerStyle: CSSProperties
+  classNameForInner: string
+  styleForInner: CSSProperties
 }> & ClassStyle & Children
 
 export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const {
-    className,
-    style,
-    children,
+    className, style, children,
     
-    col,
-    colSm,
+    col, colSm,
     
     noInsetsForFilledBars,
     noInsetsForTransBars,
     noInsets,
     
-    innerClassName,
-    innerStyle,
+    classNameForInner,
+    styleForInner,
   } = props
     
   const pt = CssU.max(!noInsets && '30px', CssU.plus(
@@ -55,7 +52,7 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   
   return (
     <ContentCol
-      data-display-name="PageContentLayout"
+      data-display-name='PageContentLayout'
       className={className}
       style={{
         paddingTop: pt,
@@ -67,8 +64,8 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
         const Col2 = colSm ? ColSm : React.Fragment
         return (
           <Col2
-            className={innerClassName}
-            style={innerStyle}
+            className={classNameForInner}
+            style={styleForInner}
           >
             {children}
           </Col2>
@@ -98,7 +95,7 @@ const ContentCol = styled.div`
 const ColSm = styled.div`
   position: relative;
   width: 100%;
-  max-width: 550px;
+  max-width: ${colSmWMax}px;
   min-width: 0;
   height: fit-content;
   align-self: center;

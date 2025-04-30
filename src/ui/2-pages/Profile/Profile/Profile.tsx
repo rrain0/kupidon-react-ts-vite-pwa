@@ -83,7 +83,7 @@ const Profile = React.memo((props: ProfileProps) => {
   
   return (
     <>
-      <PageContentLayout colSm innerStyle={{ gap: 30 }}>
+      <PageContentLayout colSm styleForInner={{ gap: 30 }}>
         <form style={{ display: 'contents' }} onSubmit={props.onFormSubmitCallback}>
             
           <ProfilePageTabHeader mainTabI={props.tabIdx}/>

@@ -108,7 +108,7 @@ const Tests = React.memo((props: TestsProps) => {
   
   return (
     <>
-      <PageContentLayout colSm innerStyle={{ gap: 30 }}>
+      <PageContentLayout colSm styleForInner={{ gap: 30 }}>
           
         <ProfilePageTabHeader mainTabI={props.tabIdx}/>
         
