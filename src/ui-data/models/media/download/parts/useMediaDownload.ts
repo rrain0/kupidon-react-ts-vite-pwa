@@ -117,30 +117,29 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
           try {
             const progress = new StageProgress(2, [90, 10])
             const onProgress = (p = 0) => {
-              progress.progress = p
+              progress.set(p)
               //console.log('progress', progress.value)
               updateMediaThrottled({ updateDownload: { progress: progress.value } })
             }
             
-            //console.log('download started')
+            console.log('download started')
             const blob = await fetchToBlob(m.remoteUrl, {
               onProgress, abortCtrl: fetchToBlobAbortCtrl,
             })
             abortCtrl.signal.throwIfAborted()
             
-            progress.stage++
-            progress.progress = 0
+            progress.set(0, { next: true })
             const dataUrl = await blobToDataUrl(blob, {
               onProgress, abortCtrl: blobToDataUrlAbortCtrl,
             })
             abortCtrl.signal.throwIfAborted()
             
-            //console.log('download completed')
+            console.log('download completed')
             updateMedia({ updateMedia: { isReady: true, dataUrl }, removeDownload: true })
           }
           catch (ex) {
             if (abortCtrl.signal.aborted) {
-              //console.log('download aborted:', abortCtrl.signal.reason)
+              console.log('download aborted:', abortCtrl.signal.reason)
               updateMedia({ removeDownload: true })
               return
             }

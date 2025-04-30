@@ -28,8 +28,8 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
   medias: T[] | undefined, setMedias: SetterOrUpdater<T[] | undefined>,
 ) => {
   
-  type Downloads = Map<string, { cnt: number, download: MediaOperation }>
-  const [getDownloads, setDownloads] = useRefGetSet<Downloads>(new Map())
+  type Downloads = Map<string, { cnt: number, download: MediaOperation }> | undefined
+  const [getDownloads, setDownloads] = useRefGetSet<Downloads>(undefined)
   
   useEffect(() => {
     setMedias(medias => {
@@ -43,7 +43,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         // Ищем загрузку сначала в используемых, потом в предыдущих
         const mediaD = m.download
         let usedDownload = usedDownloads.get(mediaD?.id as any) ?? (() => {
-          const currD = savedDownloads.get(mediaD?.id as any)?.download
+          const currD = savedDownloads?.get(mediaD?.id as any)?.download
           if (currD) return { cnt: 0, download: currD }
         })()
         
@@ -80,7 +80,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         } satisfies Partial<MediaDownloadable>
         
         usedDownload = usedDownloads.get(startMediaD.download.id as any) ?? (() => {
-          const currD = savedDownloads.get(startMediaD.download.id as any)?.download
+          const currD = savedDownloads?.get(startMediaD.download.id as any)?.download
           if (currD) return { cnt: 0, download: currD }
         })()
         
@@ -106,7 +106,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           updateDownload?: Partial<MediaDownloadable['download']>,
           removeDownload?: boolean,
         }) => {
-          const savedDownload = getDownloads().get(startMediaD.download.id)
+          const savedDownload = getDownloads()?.get(startMediaD.download.id)
           if (savedDownload) {
             savedDownload.download = { ...savedDownload.download, ...updateDownload }
           }
@@ -131,7 +131,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           try {
             const progress = new StageProgress(2, [90, 10])
             const onProgress = (p = 0) => {
-              progress.progress = p
+              progress.set(p)
               //console.log('progress', progress.value)
               updateMediaThrottled({ updateDownload: { progress: progress.value } })
             }
@@ -142,8 +142,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
             })
             abortCtrl.signal.throwIfAborted()
             
-            progress.stage++
-            progress.progress = 0
+            progress.set(0, { next: true })
             const dataUrl = await blobToDataUrl(blob, {
               onProgress, abortCtrl: blobToDataUrlAbortCtrl,
             })
@@ -173,10 +172,10 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
         return m
       })
       
-      savedDownloads.forEach((d, key) => {
+      savedDownloads?.forEach((d, key) => {
         if (!usedDownloads.has(key)) d.download.abort('Download is stale')
       })
-      setDownloads(usedDownloads)
+      setDownloads(usedDownloads.size ? usedDownloads : undefined)
       
       return newMedias
     })
@@ -185,7 +184,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     return () => setMedias(medias => {
-      setDownloads(new Map())
+      setDownloads(undefined)
       return medias?.map(m => {
         m?.download?.abort('Component-downloader was unmounted')
         return { ...m, download: undefined }

@@ -79,6 +79,35 @@ export namespace FileU {
   
   
   
+  export const blobToBuffer = async (
+    file: Blob,
+    {
+      onProgress = undefined as Callback1<number | undefined> | undefined,
+      abortCtrl = undefined as AbortController | undefined,
+    } = { },
+  ): Promise<ArrayBuffer> => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onprogress = ev => {
+      onProgress?.(ev.lengthComputable ? ev.loaded / ev.total : undefined)
+    }
+    reader.onload = ev => resolve(ev.target?.result as ArrayBuffer)
+    reader.onerror = ev => reject(ev)
+    reader.onabort = ev => reject(ev)
+    
+    if (abortCtrl) {
+      // Перед началом проверяем, не отменено ли оно уже
+      if (abortCtrl.signal.aborted) {
+        reject(abortCtrl.signal.reason)
+        return
+      }
+      abortCtrl.signal.onabort = ev => reader.abort()
+    }
+    
+    reader.readAsArrayBuffer(file)
+  })
+  
+  
+  
   export const getFilenameFromPath = (path: string): string => {
     return path.match(/(?<=^|[/])[^/]*$/)?.[0] ?? ''
   }

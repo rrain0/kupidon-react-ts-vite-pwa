@@ -622,7 +622,7 @@ const onFilesSelectedBuilder = (
           try {
             const progress = new StageProgress(2, [95, 5])
             const onProgress = (p = 0) => {
-              progress.progress = p
+              progress.set(p)
               //console.log('progress',progress.value)
               updatePhotoThrottled(undefined, { progress: progress.value })
             }
@@ -636,15 +636,14 @@ const onFilesSelectedBuilder = (
             abortCtrl.signal.throwIfAborted()
             
             //console.log('imgFile',imgFile)
-            progress.stage++
-            progress.progress = 0
+            progress.set(0, { next: true })
             const imgDataUrl = await blobToDataUrl(compressedFile, {
               onProgress, abortCtrl: blobToDataUrlAbortCtrl,
             })
             abortCtrl.signal.throwIfAborted()
             
-            //console.log('imgDataUrl',imgDataUrl.length)
-            //console.log('imgDataUrl',imgDataUrl.substring(0, 1000))
+            //console.log('imgDataUrl', imgDataUrl.length)
+            //console.log('imgDataUrl', imgDataUrl.substring(0, 1000))
             const mimeType = getDataUrlProps(imgDataUrl)!.mimeType
             const newPhoto = {
               ...newDefaultLocalMediaInArray(photo.remoteI),

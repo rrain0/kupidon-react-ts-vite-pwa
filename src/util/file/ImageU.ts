@@ -25,12 +25,11 @@ export namespace ImageU {
     
     const ctrl = abortCtrl
     const progress = new StageProgress()
-    const notifyProgress = () => onProgress?.(progress.value)
+    progress.onProgress = p => onProgress?.(p)
     
     
-    if (['image/heic', 'image/heif'].includes(imgFile.type)) {
-      progress.stages = 2
-      progress.stagesWeights = [50, 50]
+    if (/^image\/(heic|heif)$/.test(imgFile.type)) {
+      progress.set(0, { stages: 2, stagesWeights: [50, 50] })
       const pngFromHeicBlob = await heic2any({
         blob: imgFile,
         toType: 'image/png',
@@ -40,31 +39,33 @@ export namespace ImageU {
         trimExtension(imgFile.name) + '.png',
         { type: 'image/png' },
       )
-      progress.stage++
-      progress.progress = 0
-      notifyProgress()
+      progress.set(0, { next: true })
       imgFile = pngFromHeicFile
     }
     
     
-    const webpOptions: Options = {
+    const maxSzMb = 0.4
+    const maxSzB = maxSzMb * 1024 * 1024
+    
+    if (/^image\/(png|jpe?g|webp)$/.test(imgFile.type) && imgFile.size <= maxSzB) {
+      return imgFile
+    }
+    
+    
+    const convertToWebpOptions: Options = {
+      maxIteration: 20,
+      initialQuality: 0.95,
       maxSizeMB: 0.4, // 0.4 MB
-      maxWidthOrHeight: 1600, // 1600x900 16:9
+      maxWidthOrHeight: 2400, // 2400x1080
       // maxSizeMB: 0.1,
       // maxWidthOrHeight: 800,
       useWebWorker: true,
       fileType: 'image/webp',
-      onProgress: p => {
-        progress.progress = p
-        notifyProgress()
-      },
+      ...(isSafari || isMobileSafari) && { fileType: 'image/jpeg' },
+      ...ctrl?.signal && { signal: ctrl?.signal },
+      onProgress: p => progress.set(p),
     }
-    if (ctrl) webpOptions.signal = ctrl.signal
-    if (isSafari || isMobileSafari) {
-      webpOptions.fileType = 'image/jpeg'
-    }
-    // TODO Image - need new library to convert to webp
-    imgFile = await imageCompression(imgFile, webpOptions)
+    imgFile = await imageCompression(imgFile, convertToWebpOptions)
     
     
     return imgFile

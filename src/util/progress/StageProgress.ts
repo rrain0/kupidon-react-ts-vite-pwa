@@ -1,5 +1,5 @@
-
-
+import { TypeU } from 'src/util/common/TypeU.ts'
+import isdef = TypeU.isdef
 
 
 export class StageProgress {
@@ -19,6 +19,26 @@ export class StageProgress {
       else if (this.stage === s) total += this.progress * sMaxP / 100
     })
     return total
+  }
+  
+  onProgress: ((progress: number) => void) | undefined
+  
+  set(
+    progress: number | undefined,
+    {
+      stage = undefined as number | undefined,
+      next = false,
+      stages = undefined as number | undefined,
+      stagesWeights = undefined as number[] | undefined,
+      notify = false, // make
+    } = { },
+  ) {
+    if (isdef(progress)) this.progress = progress
+    if (isdef(stage)) this.stage = stage
+    else if (next) this.stage++
+    if (isdef(stages)) this.stages = stages
+    if (isdef(stagesWeights)) this.stagesWeights = stagesWeights
+    if (notify) this.onProgress?.(this.value)
   }
   
 }

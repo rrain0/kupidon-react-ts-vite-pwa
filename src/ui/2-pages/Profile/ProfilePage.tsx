@@ -323,7 +323,7 @@ const ProfilePage = React.memo(() => {
           try {
             const progress = new StageProgress(2, [90, 10])
             const onProgress = (p = 0) => {
-              progress.progress = p
+              progress.set(p)
               //console.log('progress', photo.id, progress.value)
               updatePhotoThrottled(undefined, { progress: progress.value })
             }
@@ -334,8 +334,7 @@ const ProfilePage = React.memo(() => {
             })
             abortCtrl.signal.throwIfAborted()
             
-            progress.stage++
-            progress.progress = 0
+            progress.set(0, { next: true })
             const dataUrl = await blobToDataUrl(blob, {
               onProgress, abortCtrl: blobToDataUrlAbortCtrl,
             })
