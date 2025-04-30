@@ -1,23 +1,25 @@
-<svg width="400" height="50" viewBox="0 0 400 50" fill="black" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 400 50" fill="black" xmlns="http://www.w3.org/2000/svg">
 	
 	<style>
-    :root {
-      --accent-color: #BB2649;
-    }
-		@keyframes dot-anim {
-			0%   { transform: translateX(0%); r: 0; }
-			20%  { transform: translateX(20%); r: 25; }
-			80%  { transform: translateX(80%); r: 25; }
-			100% { transform: translateX(100%); r: 0; }
+		:root {
+			--accent-color: #BB2649;
 		}
-		.dot {
-			animation: 2s linear infinite dot-anim;
+		@scope {
+			@keyframes dot-anim {
+				0%   { transform: translateX(0%); r: 0; }
+				20%  { transform: translateX(20%); r: 25; }
+				80%  { transform: translateX(80%); r: 25; }
+				100% { transform: translateX(100%); r: 0; }
+			}
+			.dot {
+				animation: 2s linear infinite dot-anim;
+			}
+			.dot1 { animation-delay: -1.6s; }
+			.dot2 { animation-delay: -1.2s; }
+			.dot3 { animation-delay: -0.8s; }
+			.dot4 { animation-delay: -0.4s; }
+			.dot5 { animation-delay: 0s; }
 		}
-		.dot1 { animation-delay: -1.6s; }
-		.dot2 { animation-delay: -1.2s; }
-		.dot3 { animation-delay: -0.8s; }
-		.dot4 { animation-delay: -0.4s; }
-		.dot5 { animation-delay: 0s; }
 	</style>
 	
 	<g stroke="none">
@@ -27,6 +29,5 @@
 		<circle class="dot dot4" cx="0" cy="25" r="25" />
 		<circle class="dot dot5" cx="0" cy="25" r="25" />
 	</g>
-
 	
 </svg>

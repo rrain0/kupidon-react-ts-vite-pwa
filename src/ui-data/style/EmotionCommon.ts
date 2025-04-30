@@ -126,20 +126,28 @@ export namespace EmotionCommon {
   `
   
   
-  export const max1LineBox = css`
-    display: table;
-    table-layout: fixed;
-    // 'width' is necessary!!!
-    width: fit-content;
-  `
+  
+  // Ставит троеточие после последнего слова, которое влезло!!!
+  // Но в отличие от второго способа, если слово одно и оно не влезло,
+  // то он его обрежет и оно не вылезет
   export const max1Line = css`
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   `
-  // Обрезает между словами!!!
-  // Так что может остаться пустое место между троеточием и концом контейнера
+  export const max1LineBox = css`
+    display: table;
+    table-layout: fixed;
+    // 'width' is necessary!!!
+    // width: fit-content; // fits text but doesn't work in ios
+    width: 100%;
+  `
+  
+  
+  // Ставит троеточие после последнего слова, которое влезло!!!
+  // Если слово одно и оно не влезло то слово вылезет!!!
+  // А после троеточия будет оставаться пустое место до конца контейнера
   export const maxLines = (lines: number) => css`
     display: -webkit-box;
     -webkit-box-orient: vertical;

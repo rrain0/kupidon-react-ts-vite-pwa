@@ -25,6 +25,7 @@ export const MockData = {
   
   account: {
     testUserAccessToken: (() => {
+      // Токены созданы 2025-04-30 и будут жить 2 года (2 * 365 дней)
       // eslint-disable-next-line @stylistic/max-len
       if (Env.isDev) return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4MDkwOTAwMDksInN1YiI6Ijc5NTQxNWRhLWEyY2ItNDM1Yi04MGVlLTk4YWYyOGIzZjBkMCIsInJvbGVzIjpbXX0.-Het9RLLDnoy72gh9BhLwA3eoH1_p_MVQTJKxkKWAjs'
       // eslint-disable-next-line @stylistic/max-len
