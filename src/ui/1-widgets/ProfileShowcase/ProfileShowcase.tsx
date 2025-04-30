@@ -302,7 +302,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   return (
     <ShowcaseFrame
-      data-display-name="ProfileShowcase"
+      data-display-name='ProfileShowcase'
       ref={onPhotosStackBoxSetWh}
       animatedStyle={{
         zIndex: animatedStackProps?.map(p => p.zIndex),

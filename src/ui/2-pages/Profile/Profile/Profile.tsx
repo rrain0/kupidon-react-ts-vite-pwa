@@ -92,7 +92,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <ValidationWrap
               {...props.validationProps}
-              fieldName="photos"
+              fieldName='photos'
               render={props => (
                 <ProfilePhotos
                   images={props.value}
@@ -114,7 +114,7 @@ const Profile = React.memo((props: ProfileProps) => {
               
               <ValidationWrap
                 {...props.validationProps}
-                fieldName="name"
+                fieldName='name'
                 render={validProps => (
                   <ProfileNameOption {...validProps}/>
                 )}
@@ -122,7 +122,7 @@ const Profile = React.memo((props: ProfileProps) => {
               
               <ValidationWrap
                 {...props.validationProps}
-                fieldName="birthDate"
+                fieldName='birthDate'
                 render={validProps => (
                   <ProfileBirthDateOption {...validProps}/>
                 )}
@@ -130,7 +130,7 @@ const Profile = React.memo((props: ProfileProps) => {
               
               <ValidationWrap
                 {...props.validationProps}
-                fieldName="gender"
+                fieldName='gender'
                 render={validProps => (
                   <ProfileGenderOption {...validProps}/>
                 )}
@@ -142,7 +142,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <ValidationWrap
               {...props.validationProps}
-              fieldName="aboutMe"
+              fieldName='aboutMe'
               render={validProps => (
                 <ProfileAboutMeOption {...validProps}/>
               )}
@@ -238,23 +238,5 @@ const Profile = React.memo((props: ProfileProps) => {
 })
 export default Profile
 
-
-
-
-export const TopButtonBarFrame = styled.section`
-  ${fixedTop};
-  z-index: 10;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  background: ${p => p.theme.boxDefault.bg}cc;
-  gap: 10px;
-  pointer-events: none;
-  
-  & > * {
-    pointer-events: auto;
-  }
-`
 
 

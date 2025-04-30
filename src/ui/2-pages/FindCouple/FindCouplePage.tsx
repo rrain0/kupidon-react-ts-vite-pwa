@@ -19,6 +19,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileShowcase, {
   ProfileShowcaseAction,
 } from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
 import abs = EmotionCommon.abs
@@ -249,42 +250,46 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
   
   return (
     <PageLayout vp>
-      <StacksFrame ref={frameRef} {...onTrackDrag()}>
-        <StackFrame>
-          {arrOfIndices(viewsCnt).map(viewI => (
-            <StackFrame2 key={viewI}>
-              <AnimatedState
-                animatedState={{
-                  first: animatedProps.map(ap => ap(viewI).first),
-                  itemI: animatedProps.map(ap => ap(viewI).viewItemI),
-                }}
-              >
-                {({ first, itemI }) => {
-                  const item = items[itemI]
-                  const photos = item.photos
-                  return (
-                    <MediaArrayDownloader medias={photos}>
-                      {(photos) => (
-                        <ProfileShowcase
-                          photos={photos}
-                          name={item.name}
-                          birthDate={item.birthDate}
-                          gender={item.gender}
-                          aboutMe={item.aboutMe}
-                          hideButtons={isMoving}
-                          action={first ? stackAction : undefined}
-                          animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
-                          {...first && { onAccept, onReject, onBack }}
-                        />
-                      )}
-                    </MediaArrayDownloader>
-                  )
-                }}
-              </AnimatedState>
-            </StackFrame2>
-          ))}
-        </StackFrame>
-      </StacksFrame>
+      <PageContentLayout full>
+        
+        <StacksFrame ref={frameRef} {...onTrackDrag()}>
+          <StackFrame>
+            {arrOfIndices(viewsCnt).map(viewI => (
+              <StackFrame2 key={viewI}>
+                <AnimatedState
+                  animatedState={{
+                    first: animatedProps.map(ap => ap(viewI).first),
+                    itemI: animatedProps.map(ap => ap(viewI).viewItemI),
+                  }}
+                >
+                  {({ first, itemI }) => {
+                    const item = items[itemI]
+                    const photos = item.photos
+                    return (
+                      <MediaArrayDownloader medias={photos}>
+                        {(photos) => (
+                          <ProfileShowcase
+                            photos={photos}
+                            name={item.name}
+                            birthDate={item.birthDate}
+                            gender={item.gender}
+                            aboutMe={item.aboutMe}
+                            hideButtons={isMoving}
+                            action={first ? stackAction : undefined}
+                            animatedStackProps={animatedStackProps.map(ap => ap(viewI))}
+                            {...first && { onAccept, onReject, onBack }}
+                          />
+                        )}
+                      </MediaArrayDownloader>
+                    )
+                  }}
+                </AnimatedState>
+              </StackFrame2>
+            ))}
+          </StackFrame>
+        </StacksFrame>
+      
+      </PageContentLayout>
     </PageLayout>
   )
 })

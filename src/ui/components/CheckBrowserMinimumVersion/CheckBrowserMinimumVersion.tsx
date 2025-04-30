@@ -27,7 +27,7 @@ const CheckBrowserMinimumVersion = React.memo(({ children }: CheckBrowserMinimum
     if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.chromeDesktopVersion)))
       return (
         <ErrorMessage
-          browserName="Chrome Desktop"
+          browserName='Chrome Desktop'
           minimumVersion={minimumVersions.chromeDesktopVersion}
           feature={minimumVersions.chromeDesktopFeature}
         />
@@ -37,7 +37,7 @@ const CheckBrowserMinimumVersion = React.memo(({ children }: CheckBrowserMinimum
     if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.chromeAndroidVersion)))
       return (
         <ErrorMessage
-          browserName="Chrome Android"
+          browserName='Chrome Android'
           minimumVersion={minimumVersions.chromeAndroidVersion}
           feature={minimumVersions.chromeAndroidFeature}
         />
@@ -47,7 +47,7 @@ const CheckBrowserMinimumVersion = React.memo(({ children }: CheckBrowserMinimum
     if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.safariDesktopVersion)))
       return (
         <ErrorMessage
-          browserName="Safari Desktop"
+          browserName='Safari Desktop'
           minimumVersion={minimumVersions.safariDesktopVersion}
           feature={minimumVersions.safariDesktopFeature}
         />
@@ -57,7 +57,7 @@ const CheckBrowserMinimumVersion = React.memo(({ children }: CheckBrowserMinimum
     if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.safariIosVersion)))
       return (
         <ErrorMessage
-          browserName="Safari iOS"
+          browserName='Safari iOS'
           minimumVersion={minimumVersions.safariIosVersion}
           feature={minimumVersions.safariIosFeature}
         />
@@ -67,7 +67,7 @@ const CheckBrowserMinimumVersion = React.memo(({ children }: CheckBrowserMinimum
     if (ArrayU.isLower(deviceFullVersion, versionToNumArr(minimumVersions.edgeDesktopVersion)))
       return (
         <ErrorMessage
-          browserName="Edge Desktop"
+          browserName='Edge Desktop'
           minimumVersion={minimumVersions.edgeDesktopVersion}
           feature={minimumVersions.edgeDesktopFeature}
         />

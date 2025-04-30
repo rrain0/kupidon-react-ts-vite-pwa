@@ -522,7 +522,7 @@ const ProfilePage = React.memo(() => {
   
   return (
     <>
-      <PageLayout vp noInsetsForFilledBars>
+      <PageLayout vp>
         <>
           <TabsBox
             ref={setItemsBoxElem}

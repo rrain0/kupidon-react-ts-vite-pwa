@@ -4,8 +4,10 @@ import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { WidgetProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -30,6 +32,7 @@ import GenderIc = SvgIconsPack.GenderIc
 import CalendarIc = SvgIconsPack.CalendarIc
 import DumbbellIc = SvgIconsPack.DumbbellIc
 import RulerCornerIc = SvgIconsPack.RulerCornerIc
+import boxShadow = WidgetProps.boxShadow
 
 
 
@@ -128,7 +131,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     >
       {props => (
         <BottomSheetFrame
-          data-display-name="PreviewFullInfo"
+          data-display-name='PreviewFullInfo'
           animatedStyle={{ opacity: animatedOpacity }}
         >
           <BottomSheetBasic
@@ -208,7 +211,7 @@ const BottomSheetFrame = styled(AnimatedDiv)`
   left: 50%;
   bottom: 0;
   translate: -50%;
-  width: var(--photo-w);
+  //width: var(--photo-w); // old
   width: 100%;
   height: calc(
     var(--h)
@@ -223,6 +226,7 @@ const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.bottom.sheet.ful
   sheet: {
     bgColor: t.previewFullInfoBox.bg,
     color: t.previewFullInfoBox.ct,
+    boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg}`,
   },
   header: {
     pos: 'rel', z: 1,

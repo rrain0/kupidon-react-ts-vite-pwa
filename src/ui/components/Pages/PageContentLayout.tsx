@@ -8,6 +8,7 @@ import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
+import full = EmotionCommon.full
 
 
 
@@ -17,6 +18,7 @@ const colSmWMax = 518
 export type PageContentLayoutProps = Pu<{
   col: boolean
   colSm: boolean
+  full: boolean
   
   noInsetsForFilledBars: boolean
   noInsetsForTransBars: boolean
@@ -30,7 +32,7 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const {
     className, style, children,
     
-    col, colSm,
+    col, colSm, full,
     
     noInsetsForFilledBars,
     noInsetsForTransBars,
@@ -39,19 +41,28 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
     classNameForInner,
     styleForInner,
   } = props
+  
+  /* const type = (() => {
+    if (col) return 'col' as const
+    if (colSm) return 'colSm' as const
+    if (full) return 'full' as const
+    return 'col' as const
+  })() */
     
-  const pt = CssU.max(!noInsets && '30px', CssU.plus(
+  const pt = CssU.max(!noInsets && !full && '30px', CssU.plus(
     !noInsetsForFilledBars && !noInsets && 'var(--top-bars-inset)',
     !noInsetsForTransBars && !noInsets && 'var(--top-button-bar-height)'
   ))
   const pb = CssU.plus(
-    !noInsets && '30px',
+    !noInsets && !full && '30px',
     !noInsetsForFilledBars && !noInsets && 'var(--bottom-bars-inset)',
     !noInsetsForTransBars && !noInsets && 'var(--bottom-button-bar-height)'
   )
   
+  
+  const Col = full ? ContentFull : ContentCol
   return (
-    <ContentCol
+    <Col
       data-display-name='PageContentLayout'
       className={className}
       style={{
@@ -60,18 +71,17 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
         ...style,
       }}
     >
-      {(() => {
-        const Col2 = colSm ? ColSm : React.Fragment
-        return (
-          <Col2
-            className={classNameForInner}
-            style={styleForInner}
-          >
-            {children}
-          </Col2>
-        )
-      })()}
-    </ContentCol>
+      {colSm && (
+        <ColSm
+          data-display-name='ColInner'
+          className={classNameForInner}
+          style={styleForInner}
+        >
+          {children}
+        </ColSm>
+      )}
+      {!colSm && children}
+    </Col>
   )
 })
 PageContentLayout.displayName = 'PageContentLayout'
@@ -101,6 +111,11 @@ const ColSm = styled.div`
   align-self: center;
   ${col};
   align-items: stretch;
+`
+
+const ContentFull = styled.div`
+  position: relative;
+  ${full};
 `
 
 

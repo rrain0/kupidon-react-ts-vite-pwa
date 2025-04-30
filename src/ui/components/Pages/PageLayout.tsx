@@ -23,11 +23,8 @@ const hMin = 480
 
 export type PageLayoutProps = Pu<{
   vp: boolean
-  //full: boolean
   col: boolean
   bgType: 'grad' | 'fill'
-  
-  noInsetsForFilledBars: boolean
 }> & ClassStyle & Children
 
 export const PageLayout = React.memo((props: PageLayoutProps) => {
@@ -36,23 +33,20 @@ export const PageLayout = React.memo((props: PageLayoutProps) => {
     style,
     children,
     
-    vp, /* full,  */col,
+    vp, col,
     bgType = 'grad',
-    
-    noInsetsForFilledBars,
   } = props
   
-  const pageType = (() => {
+  const type = (() => {
     if (vp) return 'vp' as const
-    //if (full) return 'full' as const
     if (col) return 'col' as const
     return 'col' as const
   })()
   
   const Page = (() => {
-    if (pageType === 'vp') return PageFillViewport
-    if (pageType === 'col') return PageCol
-    assertNever(pageType)
+    if (type === 'vp') return PageFillViewport
+    if (type === 'col') return PageCol
+    assertNever(type)
   })()
   
   const bgColorType = (() => {
@@ -61,17 +55,15 @@ export const PageLayout = React.memo((props: PageLayoutProps) => {
     assertNever(bgType)
   })()
   
-  const safeInsetsForFilledBars = !noInsetsForFilledBars && addSafeInsetsForFilledBars
-  
   return (
     <Page
       data-display-name='PageLayout'
       className={className}
       style={style}
-      css={[bgColorType, safeInsetsForFilledBars]}
+      css={bgColorType}
     >
       {children}
-      {pageType === 'col' && <PageScrollbars/>}
+      {type === 'col' && <PageScrollbars/>}
     </Page>
   )
 })
@@ -81,14 +73,6 @@ export default PageLayout
 
 
 
-
-const PageCol = styled.div`
-  position: relative;
-  min-width: ${wMin}px;
-  width: min(var(--vp-ct-w), 100dvw);
-  min-height: max( min(var(--vp-ct-h), 100dvh), ${hMin}px );
-  ${col};
-`
 
 const PageFillViewport = styled.div`
   min-width: ${wMin}px;
@@ -100,6 +84,15 @@ const PageFillViewport = styled.div`
   ${isMobileSafari && 'touch-action: none;'}
 `
 
+const PageCol = styled.div`
+  position: relative;
+  min-width: ${wMin}px;
+  width: min(var(--vp-ct-w), 100dvw);
+  min-height: max( min(var(--vp-ct-h), 100dvh), ${hMin}px );
+  ${col};
+`
+
+
 
 
 const pageFillColor = (t: AppTheme.Theme) => css`
@@ -109,11 +102,5 @@ const pageFillColor = (t: AppTheme.Theme) => css`
 const pageGradColor = (t: AppTheme.Theme) => css`
   ${simpleGradBgCss(t)};
   color: ${t.page.ct2};
-`
-
-
-const addSafeInsetsForFilledBars = css`
-  padding-top: var(--top-bars-inset);
-  padding-bottom: var(--bottom-bars-inset);
 `
 
