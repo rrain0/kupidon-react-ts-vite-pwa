@@ -113,34 +113,40 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
       <Flex col grow>
         <Flex row align grow>
           <Flex><NameBox><Name>{name}</Name></NameBox></Flex>
-          <Gap wMin={8} grow/>
-          {[
-            sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
-            sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
-            read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
-            error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
-            durationText && <Status key='duration'>{durationText}</Status>,
-            mute && <VolumeMute key='mute'/>,
-            !!order && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
-          ]
-            .filter(it => it)
-            .flatMap((it, i, arr) => (
-              i < arr.length - 1 
-                ? [it, <Status key={`•${i}`}>{' • '}</Status>]
-                : it
-            ))
-          }
+          <Flex row align noShrink>
+            <Gap wMin={8} grow/>
+            {[
+              sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
+              sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
+              read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
+              error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
+              durationText && <Status key='duration'>{durationText}</Status>,
+              mute && <VolumeMute key='mute'/>,
+              !!order && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
+            ]
+              .filter(it => it)
+              .flatMap((it, i, arr) => (
+                i < arr.length - 1
+                  ? [it, <Status key={`•${i}`}>{' • '}</Status>]
+                  : it
+              ))
+            }
+          </Flex>
         </Flex>
         <Flex row align grow>
           {isWriting && <IsWritingIc css={SvgIconS6.t(isWritingIcS)}/>}
           {!isWriting && (
-            <Flex>
-              {isLastMsgMy && <MetaPreMsg>{uiText.youRespectful}{' • '}</MetaPreMsg>}
+            <Flex row align>
+              <Flex row align noShrink>
+                {isLastMsgMy && <MetaPreMsg>{uiText.youRespectful}{' • '}</MetaPreMsg>}
+              </Flex>
               <MsgBox><Msg>{lastMsg}</Msg></MsgBox>
             </Flex>
           )}
-          <Gap wMin={8} grow/>
-          {unreadText && <Unread noShrink>{unreadText}</Unread>}
+          <Flex row align noShrink>
+            <Gap wMin={8} grow/>
+            {unreadText && <Unread noShrink>{unreadText}</Unread>}
+          </Flex>
         </Flex>
       </Flex>
       
