@@ -33,7 +33,8 @@ export interface ThemeSettingsZustand {
 
 export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
   (set, get, store) => ({
-    type: 'system',
+    //type: 'system', // 'system' будет потом, когда сделаю тёмную нормально
+    type: 'manual',
     manual: 'light',
     light: DefaultLightTheme.name,
     dark: DefaultDarkTheme.name,

@@ -39,7 +39,7 @@ export const useOverlayUrl = (overlayName: string) => {
   useEffect(() => {
     disableClose()
     if (isOpenLast && needClose) {
-      // todo make GoBackRecoil
+      // TODO Route - predefine previous page for each current and go back there
       navigate(-1)
     }
   }, [needClose])

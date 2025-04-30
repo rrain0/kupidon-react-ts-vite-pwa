@@ -1,5 +1,4 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
-import { FileU } from '@util/file/FileU.ts'
 import React from 'react'
 import {
   testWordsTreeGenerator

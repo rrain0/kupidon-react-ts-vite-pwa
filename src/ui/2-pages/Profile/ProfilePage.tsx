@@ -406,9 +406,9 @@ const ProfilePage = React.memo(() => {
   
   
   
+  // TODO Api request - make hook
   const [needToFetchUser, setNeedToFetchUser] = useState(true)
   const [isFetchingUser, setFetchingUser] = useState(false)
-  // TODO make usual effect
   useAsyncEffect((lock, unlock) => {
     if (needToFetchUser && !isFetchingUser
       && lock(UserApi.current)

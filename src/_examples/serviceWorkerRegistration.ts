@@ -12,6 +12,10 @@
 
 
 
+import { Env } from '@util/app/Env.ts'
+
+
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -33,7 +37,7 @@ export async function register(config?: Config): Promise<void> {
   if (import.meta.env.PROD && 'serviceWorker' in navigator) {
     
     // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL(import.meta.env.BASE_URL + window.location.href)
+    const publicUrl = new URL(Env.baseUrl + window.location.href)
     
     // Our service worker won't work if PUBLIC_URL is on a different origin
     // from what our page is served on. This might happen if a CDN is used to
@@ -42,7 +46,7 @@ export async function register(config?: Config): Promise<void> {
     
     window.addEventListener('load', async() => {
       //console.log('public url',process.env.PUBLIC_URL)
-      const swUrl = `${import.meta.env.BASE_URL}service-worker.js`
+      const swUrl = `${Env.baseUrl}service-worker.js`
       
       let doRegister = true
       

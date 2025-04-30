@@ -25,10 +25,16 @@ import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 declare const self: ServiceWorkerGlobalScope
 
 
-const isProd = import.meta.env.PROD
-const isDev = import.meta.env.DEV
-const baseUrl = import.meta.env.BASE_URL // with '/' at the end
-const noCache = isDev
+const Env = {
+  isDev: import.meta.env.DEV satisfies boolean,
+  isProd: import.meta.env.PROD satisfies boolean,
+  
+  // with '/' at the end
+  baseUrl: import.meta.env.BASE_URL satisfies string,
+  
+  buildDate: import.meta.env.BUILD_DATE satisfies string,
+}
+const noCache = Env.isDev
 
 
 
@@ -79,7 +85,7 @@ const precachedPattern = new RegExp(`^(${precachedList.join('|')})`)
   
   // to allow work offline
   registerRoute(new NavigationRoute(
-    createHandlerBoundToURL(baseUrl + 'index.html'),
+    createHandlerBoundToURL(Env.baseUrl + 'index.html'),
     navigationRouteMatchOptions,
   ))
 }
@@ -128,7 +134,7 @@ const precachedPattern = new RegExp(`^(${precachedList.join('|')})`)
 
 // manifest.json interceptor & generator
 registerRoute(
-  ({ url }) => url.pathname === `${baseUrl}manifest.json`,
+  ({ url }) => url.pathname === `${Env.baseUrl}manifest.json`,
   async ({ event, request, url, params }) => {
     //console.log('request,url', request,url)
     

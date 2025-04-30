@@ -1,3 +1,4 @@
+import { Env } from '@util/app/Env.ts'
 import React from 'react'
 import './ReloadPrompt.css'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
@@ -15,7 +16,7 @@ import { pwaInfo } from 'virtual:pwa-info'
 console.log('pwaInfo', pwaInfo)
 
 const ReloadPrompt = React.memo(() => {
-  const buildDate = import.meta.env.BUILD_DATE
+  const buildDate = Env.buildDate
   const autoCheckUpdates = true
 
   const {
@@ -73,14 +74,14 @@ const ReloadPrompt = React.memo(() => {
   
   return (
     <>
-      <div className="ReloadPrompt-buildDate">{buildDate}</div>
+      <div className='ReloadPrompt-buildDate'>{buildDate}</div>
       {(offlineReady || needRefresh) && (
         <ModalPortal>
           <Modal css={ModalStyle.modalFrameBottom} enableUpNodesScroll>
-            <div className="ReloadPrompt-container">
-              <div className="ReloadPrompt-toast">
+            <div className='ReloadPrompt-container'>
+              <div className='ReloadPrompt-toast'>
                 
-                <div className="ReloadPrompt-message">
+                <div className='ReloadPrompt-message'>
                   {offlineReady
                     ? <span>{uiText.appReadyToWorkOffline}</span>
                     : <span>{uiText.updateDownloaded}</span>
@@ -92,7 +93,7 @@ const ReloadPrompt = React.memo(() => {
                 {needRefresh && (
                   <>
                     <button
-                      className="ReloadPrompt-toast-button"
+                      className='ReloadPrompt-toast-button'
                       // Reloads the current window to allow the service worker take the control.
                       onClick={() => updateServiceWorker(true)}
                     >
@@ -101,7 +102,7 @@ const ReloadPrompt = React.memo(() => {
                     {/* <strong>Cancel</strong> will install the update next time you visit
                      the app. */}
                     <button
-                      className="ReloadPrompt-toast-button"
+                      className='ReloadPrompt-toast-button'
                       onClick={() => close()}
                     >
                       {uiText.later}
@@ -111,7 +112,7 @@ const ReloadPrompt = React.memo(() => {
                 
                 {!needRefresh && (
                   <button
-                    className="ReloadPrompt-toast-button"
+                    className='ReloadPrompt-toast-button'
                     onClick={() => close()}
                   >
                     {uiText.ok}

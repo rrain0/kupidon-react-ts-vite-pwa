@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
@@ -19,7 +19,6 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import row = EmotionCommon.row
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 import RootRoute = AppRoutes.RootRoute
-import full = RouteBuilder.full
 import fixedBottom = EmotionCommon.fixedBottom
 import QuickSettings, {
   QuickSettingsOverlayName,
@@ -31,6 +30,7 @@ import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
 import Pu = TypeU.Pu
 import attrExists = TypeU.attrEmpty
+import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -45,6 +45,7 @@ const NavBar = React.memo((props: NavBarProps) => {
   
   const titleText = useUiValues(TitleUiText)
   
+  const [search] = useSearchParams()
   
   return (
     <>
@@ -60,28 +61,28 @@ const NavBar = React.memo((props: NavBarProps) => {
       
       <Frame>
         
-        <NavLink to={RootRoute.profile[full]()}>
+        <NavLink to={RootRoute.profile[fullAnySearchParams](search)}>
           <Button css={nav} data-selected={attrExists(place === 'profile')}>
             <ProfileGradIc/>
             <div>{titleText.profile}</div>
           </Button>
         </NavLink>
         
-        <NavLink to={RootRoute.chat[full]()}>
+        <NavLink to={RootRoute.chat[fullAnySearchParams](search)}>
           <Button css={nav} data-selected={attrExists(place === 'chat')}>
             <ChatRoundGradIc/>
             <div>{titleText.chat}</div>
           </Button>
         </NavLink>
         
-        <NavLink to={RootRoute.findCouple[full]()}>
+        <NavLink to={RootRoute.findCouple[fullAnySearchParams](search)}>
           <Button css={nav} data-selected={attrExists(place === 'findCouple')}>
             <CardsHeartGradIc/>
             <div>{titleText.hearts}</div>
           </Button>
         </NavLink>
         
-        <NavLink to={RootRoute.bowAndArrows[full]()}>
+        <NavLink to={RootRoute.bowAndArrows[fullAnySearchParams](search)}>
           <Button css={nav} data-selected={attrExists(place === 'bowAndArrows')}>
             <BowArrowGradIc/>
             <div>{titleText.bowAndArrows}</div>

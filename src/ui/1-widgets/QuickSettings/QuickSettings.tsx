@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { Env } from '@util/app/Env.ts'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -144,7 +145,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     {actionText.clearAppData}
                   </Button>
                   
-                  {import.meta.env.DEV && (
+                  {Env.isDev && (
                     <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
                       onClick={() => setApp(s => ({ showDevOverlay: !s.showDevOverlay }))}
                     >

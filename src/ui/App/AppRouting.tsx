@@ -1,3 +1,4 @@
+import { useAuthSetup } from '@util/auth/useAuthSetup.ts'
 import {
   createBrowserRouter,
   Navigate, Outlet,
@@ -32,6 +33,10 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 const RouteAny = React.memo(() => {
   //useNavBar(undefined)
   //const navBar = useZustand(s => s.navBar)
+  
+  const authIsReady = useAuthSetup()
+  
+  if (!authIsReady) return <div>Loading...</div>
   
   return (
     <>

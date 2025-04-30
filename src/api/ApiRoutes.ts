@@ -1,11 +1,10 @@
+import { Env } from '@util/app/Env.ts'
 
 
 
 export namespace ApiRoutes {
-  export const backend = import.meta.env.BACKEND_BASE_URL
+  export const backend = Env.backendBaseUrl
   export const apiV1 = `${backend}/api/v1`
-  
-  
   
   export const auth = `${apiV1}/auth`
   export const user = `${apiV1}/user`

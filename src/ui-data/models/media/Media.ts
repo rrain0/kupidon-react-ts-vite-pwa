@@ -215,8 +215,9 @@ export const getMediaUiState = (
   const isLoadingNoProgress = isLoading && !showProgress
   const isLoadingWithProgress = isLoading && showProgress
   
-  const isError = isInited && !isReady && (
-    !isLoading || (!allowEmpty && isEmpty)
+  const isError = isInited && (
+    !isEmpty && !isReady && !isLoading
+    || isEmpty && !allowEmpty
   )
   
   return {

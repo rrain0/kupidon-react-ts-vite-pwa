@@ -1,14 +1,14 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   getMediaUiState,
   MediaDownloadable, newDefaultEmptyRemoteMedia,
-  newDefaultRemoteMedia, newDefaultRemoteMediaDownloadable,
+  newDefaultRemoteMediaDownloadable,
 } from 'src/ui-data/models/media/Media.ts'
 import MediaDownloader from 'src/ui-data/models/media/download/MediaDownloader.tsx'
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
@@ -38,13 +38,13 @@ import { MockData } from 'src/_mock-data/MockData.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
+import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -94,11 +94,12 @@ const ProfileSummaryPage = React.memo(() => {
   }, [remoteMainPhoto])
   
   
+  const [search] = useSearchParams()
   
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
   
   
-  //console.log(mainPhoto)
+  //console.log('mainPhoto', mainPhoto)
   //console.log({ isLoadingNoProgress, isLoadingWithProgress, isReady, isError, isEmpty })
   
   //useEffect(() => console.log('mainPhoto', mainPhoto), [mainPhoto])
@@ -115,7 +116,7 @@ const ProfileSummaryPage = React.memo(() => {
             
             <Flex row>
               
-              <Link to={RootRoute.profile.id.userId[use](id).preview[full]()}>
+              <Link to={RootRoute.profile.id.userId[use](id).preview[fullAnySearchParams](search)}>
                 <AvaBox>
                   <MediaDownloader media={mainPhoto}>
                     {(media) => {
@@ -131,7 +132,7 @@ const ProfileSummaryPage = React.memo(() => {
               
               
               
-              <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
+              <Link to={RootRoute.profile.id.userId[use](id).profile[fullAnySearchParams](search)}>
                 <NameInfoEditArea col>
                   
                   <Name>{name}</Name>
@@ -174,7 +175,7 @@ const ProfileSummaryPage = React.memo(() => {
             
             <Gap h={9}/>
             
-            <Link to={RootRoute.profile.id.userId[use](id).profile[full]()}>
+            <Link to={RootRoute.profile.id.userId[use](id).profile[fullAnySearchParams](search)}>
               <HeaderArrow css={headerArrowS}>
                 {completeProfileDescriptionText}
               </HeaderArrow>
