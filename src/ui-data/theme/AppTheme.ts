@@ -273,9 +273,10 @@ export namespace AppTheme {
       ct:              string
     }
     shadow: {
-      bg:              string
-      bg2:             string
-    },
+      bg:            string
+      bg2:           string
+      bg3OnLight:    string
+    }
     
     
     

@@ -206,8 +206,9 @@ export const Light = {
     ct:        '#c17169',
   },
   shadow: {
-    bg:        '#00000026',
-    bg2:       '#7B7B7B26',
+    bg:           '#00000026',
+    bg2:          '#7B7B7B26',
+    bg3OnLight:   '#00000044',
   },
   
   

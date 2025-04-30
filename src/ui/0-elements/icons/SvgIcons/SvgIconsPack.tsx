@@ -37,6 +37,7 @@ import EyeWideSvg from '@ic/normal/ui/eye-wide.svg?react'
 
 import FloppyDisk1Svg from '@ic/normal/ui/floppy-disk-1.svg?react'
 import FullscreenSvg from '@ic/normal/ui/fullscreen.svg?react'
+import FunnelFilterListSvg from '@ic/normal/ui/funnel-filter-list.svg?react'
 
 import GearSvg from '@ic/normal/ui/gear.svg?react'
 import GearOutlinedSvg from '@ic/normal/ui/gear-outlined.svg?react'
@@ -243,6 +244,7 @@ export namespace SvgIconsPack {
   
   export const FloppyDisk1Ic = generateSimpleSvgIcon(FloppyDisk1Svg)
   export const FullscreenIc = generateSimpleSvgIcon(FullscreenSvg)
+  export const FunnelFilterListIc = generateSimpleSvgIcon(FunnelFilterListSvg)
   
   
   export const GearIc = generateSimpleSvgIcon(GearSvg)

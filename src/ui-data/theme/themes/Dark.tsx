@@ -202,8 +202,9 @@ export const Dark = {
     ct:        '#7a514c',
   },
   shadow: {
-    bg:        'transparent',
-    bg2:       'transparent',
+    bg:           'transparent',
+    bg2:          'transparent',
+    bg3OnLight:   '#000000aa',
   },
   
   

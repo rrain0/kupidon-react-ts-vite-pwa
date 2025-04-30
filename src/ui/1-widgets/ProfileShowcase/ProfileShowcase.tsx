@@ -24,6 +24,7 @@ import {
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import {
@@ -301,7 +302,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   //console.log('rerender')
   
   return (
-    <ShowcaseFrame
+    <ShowcasePhotoFrame
       data-display-name='ProfileShowcase'
       ref={onPhotosStackBoxSetWh}
       animatedStyle={{
@@ -399,7 +400,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
         aboutMe={aboutMe}
       />
     
-    </ShowcaseFrame>
+    </ShowcasePhotoFrame>
   )
 })
 ProfileShowcase.displayName = 'ProfileShowcase'
@@ -411,8 +412,21 @@ const pv = 32
 const ph = 16
 
 
+/*
+// Если добавлять фильтр сверху, то надо подстраивать высоту шторки
+// Надо попробовать взять top у фотки тогда...
 
-const ShowcaseFrame = styled(AnimatedDiv)`
+const ShowcaseFrame = styled(Flex)`
+  ${full};
+`
+const ActionsBox = styled(Flex)`
+  width: 100%;
+  height: 70px;
+`
+*/
+
+
+const ShowcasePhotoFrame = styled(AnimatedDiv)`
   position: relative;
   ${full};
   padding: ${pv}px ${ph}px;

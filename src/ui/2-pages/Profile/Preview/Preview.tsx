@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -41,10 +42,12 @@ const Preview = React.memo((props: PreviewProps) => {
           />
         </StackFrame2>
       </StackFrame>
+      
     </PageContentLayout>
   )
 })
 export default Preview
+
 
 
 

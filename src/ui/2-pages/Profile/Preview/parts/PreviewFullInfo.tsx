@@ -226,7 +226,7 @@ const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.bottom.sheet.ful
   sheet: {
     bgColor: t.previewFullInfoBox.bg,
     color: t.previewFullInfoBox.ct,
-    boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg}`,
+    boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg3OnLight}`,
   },
   header: {
     pos: 'rel', z: 1,
