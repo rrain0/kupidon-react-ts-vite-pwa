@@ -33,7 +33,9 @@ export const useMediaDownloader = <T extends MediaDownloadable | undefined>(
   
   useEffect(() => {
     setMedia(m => {
-      if (m?.download) return { ...m, showDownloadProgress: canShowFetchProgress }
+      if (m && !!m.showDownloadProgress !== canShowFetchProgress) {
+        return { ...m, showDownloadProgress: canShowFetchProgress }
+      }
       return m
     })
   }, [canShowFetchProgress])

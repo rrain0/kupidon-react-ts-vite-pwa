@@ -13,7 +13,7 @@ import mapBool = TypeU.mapBool
 export type FlexExtraProps = Pu<{
   w: number | string
   h: number | string
-  full: boolean
+  full: boolean // true => { width: '100%', height: '100%' }
   
   row: boolean
   rowRev: boolean
@@ -22,17 +22,18 @@ export type FlexExtraProps = Pu<{
   wrap: boolean
   wrapRev: boolean
   
-  align: string | boolean
-  alignCt: string | boolean
-  alignSelf: string | boolean
-  justifyCt: string | boolean
-  center: boolean
+  align: string | boolean // true => 'center'
+  alignCt: string | boolean // true => 'center'
+  alignSelf: string | boolean // true => 'center'
+  justifyCt: string | boolean // true => 'center'
+  
+  center: boolean // true => { alignItems: 'center', justifyContent: 'center' }
   
   g: number | string
   order: number | string
-  grow: number | string | boolean
-  shrink: number | string
-  noShrink: boolean
+  grow: number | string | boolean // true => 1
+  shrink: number | string | boolean // true => 1
+  noShrink: boolean // true => { flexShrink: 0 }
 }> & ClassStyle & Children
 
 export type FlexProps = React.ComponentPropsWithRef<'div'> & FlexExtraProps

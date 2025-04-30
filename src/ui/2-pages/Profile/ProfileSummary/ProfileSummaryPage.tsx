@@ -8,7 +8,7 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {
   getMediaUiState,
   MediaDownloadable, newDefaultEmptyRemoteMedia,
-  newDefaultRemoteMedia,
+  newDefaultRemoteMedia, newDefaultRemoteMediaDownloadable,
 } from 'src/ui-data/models/media/Media.ts'
 import MediaDownloader from 'src/ui-data/models/media/download/MediaDownloader.tsx'
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
@@ -71,7 +71,6 @@ const ProfileSummaryPage = React.memo(() => {
   const remoteMainPhoto = useMemo(() => {
     return photos.find(it => it.index === 0)
   }, [photos])
-  // TODO Download - упростить, потому что загрузка всё равно идёт внутри MediaDownloader
   useEffect(() => {
     setMainPhoto(p => {
       if (!photos) {
@@ -83,14 +82,12 @@ const ProfileSummaryPage = React.memo(() => {
       else {
         return {
           ...p, // inherit current operations
-          ...newDefaultRemoteMedia(),
+          ...newDefaultRemoteMediaDownloadable(),
+          isInited: true,
           id: remoteMainPhoto.id,
           remoteUrl: remoteMainPhoto.url,
           name: remoteMainPhoto.name,
           mimeType: remoteMainPhoto.mimeType,
-          downloadError: undefined,
-          needRetryDownload: false,
-          isInited: true,
         }
       }
     })
@@ -157,7 +154,7 @@ const ProfileSummaryPage = React.memo(() => {
                 
                 <Gap w={8}/>
                 
-                <Flex grow={1} row justifyCt='end'>
+                <Flex grow row justifyCt='end'>
                   <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
                     {overlay => (
                       <Gear onClick={overlay.open}>

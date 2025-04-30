@@ -142,6 +142,12 @@ export type Downloadable = Pu<{
 export interface MediaDownloadable extends Media, Downloadable { }
 
 
+export const newDefaultRemoteMediaDownloadable = (): MediaDownloadable => ({
+  ...newDefaultRemoteMedia(),
+  needDownload: true, needRetryDownload: false,
+})
+
+
 
 export interface MediaInArrayDownloadable extends MediaInArray, Downloadable { }
 

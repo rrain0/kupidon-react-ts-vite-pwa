@@ -47,7 +47,7 @@ const ImgSpark = React.memo((props: ImgSparkProps) => {
   
   return (
     <div // Frame
-      data-display-name="ImgSpark"
+      data-display-name='ImgSpark'
       className={clsx(ImgSparkS6.W.els.imgFrame.n, className)}
       style={style}
     >
