@@ -189,6 +189,12 @@ export namespace AppTheme {
     boxSecondary2: {
       ct:           string
     }
+    // Оно есть, но вообще не должно цеплять внимание
+    // Пример: Счётчик непрочитанных заглушённого чата
+    boxSecondary3: {
+      bg:           string
+      ct:           string
+    }
     boxDanger: {
       bg:           string
       ct:           string

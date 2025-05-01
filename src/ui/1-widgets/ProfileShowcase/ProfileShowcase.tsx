@@ -39,7 +39,7 @@ import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC
-import fill = EmotionCommon.fill
+import fullMinMax = EmotionCommon.fullMinMax
 import arrOfIndices = ArrayU.arrOfIndices
 import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
@@ -470,7 +470,7 @@ const AnimatedPhotoBox = styled(AnimatedDiv)`
   will-change: z-index, transform, scale, opacity, box-shadow;
 `
 const Photo = styled.img`
-  ${fill};
+  ${fullMinMax};
   object-position: center;
   object-fit: cover;
   
@@ -487,7 +487,7 @@ const PhotoFade = styled.div`
 
 
 const Blur = styled.div`
-  ${fill};
+  ${fullMinMax};
   backdrop-filter: blur(18px);
   //background-color: #00000044;
 `

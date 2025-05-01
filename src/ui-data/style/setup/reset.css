@@ -9,6 +9,7 @@
   background: none;
   /* disable highlight on mobile devices when tapping on screen */
   -webkit-tap-highlight-color: transparent;
+  overflow-wrap: anywhere;
 }
 *::before {
   box-sizing: border-box;
@@ -18,6 +19,7 @@
   background: none;
   /* disable highlight on mobile devices when tapping on screen */
   -webkit-tap-highlight-color: transparent;
+  overflow-wrap: anywhere;
 }
 *::after {
   box-sizing: border-box;
@@ -27,6 +29,7 @@
   background: none;
   /* disable highlight on mobile devices when tapping on screen */
   -webkit-tap-highlight-color: transparent;
+  overflow-wrap: anywhere;
 }
 
 

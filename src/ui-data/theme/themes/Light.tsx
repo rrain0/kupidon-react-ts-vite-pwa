@@ -152,6 +152,10 @@ export const Light = {
   boxSecondary2: {
     ct:           '#939393',
   },
+  boxSecondary3: {
+    bg:           '#E0E0E0',
+    ct:           '#ffffff',
+  },
   boxDanger: {
     bg:           '#ffffff',
     ct:           '#e74c3c',

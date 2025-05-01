@@ -29,7 +29,6 @@ const Frame = styled.article`
   pointer-events: none;
   background: #00000055;
   color: white;
-  overflow-wrap: anywhere;
   padding: 8px;
   ${col};
   z-index: ${StyleVals.modalFloor10k};

@@ -47,7 +47,6 @@ export namespace DataFieldStyle {
       min-height: 50px;
       padding: 4px 16px;
 
-      overflow-wrap: anywhere;
       ${Txt.s18WideLh150};
       color: ${t.input.ct};
       ${Prop.color}: ${t.input.ct};
@@ -79,7 +78,7 @@ export namespace DataFieldStyle {
     }
   `
   
-  const small = (t:Theme)=>css`
+  const small = (t:Theme) => css`
     ${El.frame} {
       width: 100%;
       min-height: 40px;
@@ -91,7 +90,7 @@ export namespace DataFieldStyle {
     }
   `
   
-  export const interactiveSmall = (t:Theme)=>css`
+  export const interactiveSmall = (t:Theme) => css`
     ${interactive(t)};
     ${small(t)};
   `

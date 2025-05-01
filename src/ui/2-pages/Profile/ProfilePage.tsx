@@ -74,7 +74,7 @@ import exists = TypeU.exists
 import ValueOrMapper = TypeU.ValueOrMapper
 import isfunction = TypeU.isfunction
 import isdef = TypeU.isdef
-import effectLog = ReactU.effectLog
+import effectLog = ReactU.useLog
 
 
 

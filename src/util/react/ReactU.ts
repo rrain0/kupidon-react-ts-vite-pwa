@@ -1,8 +1,13 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
+import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { StringU } from 'src/util/common/StringU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import falsy = TypeU.falsy
+import RecordPu = TypeU.RecordPu
+import ObjectMap = ObjectU.ObjectMap
+import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 
@@ -20,7 +25,20 @@ export namespace ReactU {
   
   
   
-  export const effectLog = (...args: any[]) => useEffect(() => console.log(...args), args)
+  // { colorAccent: '#c0ffee' } => { '--color-accent': '#c0ffee' }
+  export const mapToCssCustomProps = (
+    cssProps: RecordPu<string, string | number>
+  ): RecordPu<`--${string}`, string | number> => {
+    return ObjectMap(
+      cssProps,
+      ([prop, value]) => [`--${camelCaseToKebabCase(prop)}`, value] as const
+    )
+  }
+  
+  
+  
+  
+  export const useLog = (...args: any[]) => useEffect(() => console.log(...args), args)
   
   let prevLog
   export const noRepeatLog = (...args: any[]) => {
@@ -38,7 +56,7 @@ export namespace ReactU {
   
   // todo hack fix for TS
   // React.memo wrapper if component's generics are not consumed properly by TS
-  export const memo: <C>(Component: C) => C = React.memo
+  export const memo: (<C>(Component: C) => C) = React.memo
   
   
   

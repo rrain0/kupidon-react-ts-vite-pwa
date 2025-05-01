@@ -96,6 +96,12 @@ export namespace BottomSheetS6 {
   
   export const S = combinePartsToTypeShapeSizeColor(Parts)
   
+  export namespace Addons {
+    export const shadow: AppWidgetStyle = t => ({
+      sheet: { boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg3OnLight}` },
+    })
+  }
+  
 }
 
 

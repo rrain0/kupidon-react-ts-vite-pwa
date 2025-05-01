@@ -1,6 +1,8 @@
 import React from 'react'
 import { useWasDragged } from 'src/util/pointer/useWasDragged.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
+import { ReactU } from 'src/util/react/ReactU.ts'
+import OnClick = ReactU.OnClick
 
 
 
@@ -13,7 +15,7 @@ export const useClickFix = <E extends HTMLElement = HTMLElement>() => {
   const [getWasClicked, setWasClicked] = useRefGetSet(0)
   const { getWasDragged } = useWasDragged()
   
-  return (onClick?: React.MouseEventHandler) => ({
+  return (onClick?: OnClick) => ({
     onPointerDown: (ev: React.PointerEvent) => {
       // Any Touch & Mouse Left Button is 0
       if (ev.button === 0) setWasClicked(1)

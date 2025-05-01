@@ -2,6 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useLiveShortDuration } from '@util/date/useLiveShortDuration.ts'
 import { useShortDurationUiText } from '@util/date/useShortDurationUiText.ts'
 import { withDefaults } from '@util/react/withDefaults.tsx'
@@ -12,15 +13,17 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import IsWritingFiveDots from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
+import IsWritingFiveDots, {
+  IsWritingFiveDotsCssProps,
+} from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
-import maxLines = EmotionCommon.maxLines
 import trimDotZerosEnd = StringU.trimDotZerosEnd
 import max1Line = EmotionCommon.max1Line
 import max1LineBox = EmotionCommon.max1LineBox
@@ -32,14 +35,10 @@ import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
 import randomElem = ArrayU.randomElem
+import Pu = TypeU.Pu
 
 
 
-// TODO Theme
-const pastelRainbow = [
-  '#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff',
-  '#d6e6ff', '#d7f9f8', '#ffffea', '#fff0d4', '#fbe0e0', '#e5d4ef',
-]
 
 
 
@@ -52,6 +51,7 @@ const outerUiValues = {
 
 
 export type ChatListItemProps = {
+  id: string
   ava?: string | undefined
   online?: boolean | undefined
   name: string
@@ -68,7 +68,7 @@ export type ChatListItemProps = {
 export const ChatListItem = React.memo((props: ChatListItemProps) => {
   const {
     className, style,
-    ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt = 0,
+    id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt = 0,
     mute, order = 0, lastMsgStatus, isWriting,
   } = props
   
@@ -94,7 +94,6 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
   const sent = lastMsgStatus === 'sent'
   const read = lastMsgStatus === 'read'
   const error = lastMsgStatus === 'error'
-  const emptyAvaColor = useMemo(() => randomElem(pastelRainbow), [])
   
   return (
     <ChatItemBox row g={8}
@@ -103,13 +102,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
       style={style}
     >
       
-      <AvaContainer alignSelf='stretch' noShrink center>
-        <AvaBox full>
-          {ava && <ImgSpark css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)} src={ava}/>}
-          {!ava && <EmptyAva css={{ backgroundColor: emptyAvaColor }} center>🎲</EmptyAva>}
-        </AvaBox>
-        {online && <OnlineMark/>}
-      </AvaContainer>
+      <Ava id={id} ava={ava} online={online}/>
       
       <Flex col grow>
         
@@ -150,7 +143,9 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
           </Flex>
           <Flex row align noShrink>
             <Gap w={8}/>
-            {unreadText && <Unread noShrink>{unreadText}</Unread>}
+            {unreadText && (
+              <Unread center noShrink secondary={mute}>{unreadText}</Unread>
+            )}
           </Flex>
         </Flex>
         
@@ -170,39 +165,12 @@ const ChatItemBox = styled(Flex)`
 `
 
 
-const AvaContainer = styled(Flex)`
-  position: relative;
-  aspect-ratio: 1;
-`
-const AvaBox = styled(Flex)`
-  border-radius: 999999px;
-  overflow: hidden;
-`
-const EmptyAva = styled(Flex)`
-  width: 100%;
-  height: 100%;
-  ${Txt.s22};
-`
-const OnlineMark = styled.div`
-  position: absolute;
-  bottom: 4%;
-  right: 4%;
-  width: 20%;
-  height: 20%;
-  // TODO Theme
-  border: 2px solid #f5f5f5;
-  border-radius: 999999px;
-  // TODO Theme
-  background-color: #19aa1e;
-`
-
-
 const NameBox = styled.div`
   ${max1LineBox};
 `
 const Name = styled.div`
   ${Txt.s17Bold};
-  ${maxLines(1)};
+  ${max1Line};
   // TODO Theme
   color: black;
 `
@@ -242,15 +210,13 @@ const pinIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   // TODO Theme
   icon: { h: 17, w: 'auto', m: -1, color: '#80558c', rotate: '0.125turn' },
 }]
-const isWritingIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 10, w: 'auto', color: '#000000', colorAcc: '#BB2649' },
-}]
 const isWritingFiveDotsS = css`
   height: 10px;
   width: auto;
-  --color: black;
-  --color-accent: #BB2649;
+  ${IsWritingFiveDotsCssProps({
+    color: 'black',
+    colorAccent: '#BB2649',
+  })}
 `
 
 
@@ -276,7 +242,7 @@ const Msg = styled.div`
   // TODO Theme
   color: black;
 `
-const Unread = withDefaults({ center: true }, styled(Flex)`
+const Unread = styled(Flex)<Pu<{ secondary: boolean }>>`
   min-width: 28px;
   height: 28px;
   border-radius: 14px;
@@ -285,8 +251,12 @@ const Unread = withDefaults({ center: true }, styled(Flex)`
   background-color: #BB2649;
   // Todo Theme
   color: #FFFFFF;
+  ${p => p.secondary && `
+    background-color: ${p.theme.boxSecondary3.bg};
+    color: ${p.theme.boxSecondary3.ct};
+  `}
   ${Txt.s14Bold};
-`)
+`
 
 
 

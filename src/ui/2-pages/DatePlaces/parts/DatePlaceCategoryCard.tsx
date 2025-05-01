@@ -119,7 +119,6 @@ const Title = styled.div`
   color: black;
   ${Txt.s16Bold};
   line-height: 1;
-  overflow-wrap: anywhere;
   text-align: center;
   ${maxLines(2)};
 `

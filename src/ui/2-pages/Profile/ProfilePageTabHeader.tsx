@@ -283,7 +283,6 @@ const TextBox = styled.div`
 const Text = styled.h3`
   ${p => Hdrs.page(p.theme)};
   color: ${p => p.theme.page.ct3};
-  overflow-wrap: anywhere;
   cursor: pointer;
   pointer-events: auto;
 `

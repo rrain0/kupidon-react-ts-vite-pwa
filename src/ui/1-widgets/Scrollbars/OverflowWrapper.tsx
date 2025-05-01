@@ -13,7 +13,7 @@ import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
 import PartialUndef = TypeU.PartialUndef
 import ClassStyleProps = ReactU.ClassStyle
-import fill = EmotionCommon.fill
+import fullMinMax = EmotionCommon.fullMinMax
 
 
 
@@ -94,7 +94,7 @@ export default OverflowWrapper
 
 
 const Wrapper = styled.div`
-  ${fill};
+  ${fullMinMax};
   ${gridStackC};
   position: relative;
 `
@@ -102,7 +102,7 @@ const ScrollContainer = styled.div`
   ${col};
   //place-self: stretch;
 
-  ${fill};
+  ${fullMinMax};
 
   overflow: auto;
   ${isBrowser && hideScrollbar};

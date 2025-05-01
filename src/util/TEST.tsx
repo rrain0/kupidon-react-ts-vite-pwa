@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
-import nextUp from '@im/test/NEXT UP.jpg'
-import isagi from '@im/test/Isagi - Blue Lock 250d5ed0b02d009af2f7fa46732b468b.jpg'
+import nextUp from '@im/mock/NEXT UP.jpg'
+import isagi from '@im/mock/Isagi - Blue Lock 250d5ed0b02d009af2f7fa46732b468b.jpg'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { TypeU } from 'src/util/common/TypeU'
 import Callback = TypeU.Callback

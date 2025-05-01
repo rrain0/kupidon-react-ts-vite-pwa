@@ -1,14 +1,24 @@
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
+import { TypeU } from '@util/common/TypeU.ts'
+import { CssU } from '@util/css/CssU.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
+import Pu = TypeU.Pu
+import CssColor = CssU.CssColor
+import mapToCssCustomProps = ReactU.mapToCssCustomProps
 
 
 
 
-export type IsWritingFiveDotsCssProps = {
-  '--color': '<color>'
-  '--color-accent': '<color>'
-}
+
+// Use typed css prop names
+export const IsWritingFiveDotsCssProps = (cssProps: Pu<{
+  color: CssColor
+  colorAccent: CssColor
+}> = { }) => mapToCssCustomProps(cssProps)
+
+
 
 export type IsWritingFiveDotsProps = Omit<React.ComponentPropsWithRef<'div'>, 'children'>
 

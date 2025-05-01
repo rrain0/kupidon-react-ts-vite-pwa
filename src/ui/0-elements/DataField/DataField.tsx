@@ -6,41 +6,36 @@ import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import attrExists = TypeU.attrEmpty
 
 
 
 
 
-export type DataFieldCustomProps = PartialUndef<{
+export type DataFieldCustomProps = Pu<{
   hasError: boolean
-  children: React.ReactNode
 }>
-export type DataFieldForwardRefProps = React.JSX.IntrinsicElements['div']
-export type DataFieldRefElement = HTMLDivElement
-export type DataFieldProps = DataFieldCustomProps & DataFieldForwardRefProps
+export type DataFieldProps =
+  & React.ComponentPropsWithRef<'div'>
+  & DataFieldCustomProps
 
 
 
-const DataField =
-React.memo(
-React.forwardRef<DataFieldRefElement, DataFieldProps>(
-(props, forwardedRef) => {
+const DataField = React.memo((props: DataFieldProps) => {
   const {
+    ref, children, className,
     hasError,
-    children,
-    className,
     ...restProps
   } = props
   
   
-  const elemRef = useRef<DataFieldRefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
+  const elemRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => elemRef.current!, [])
   
   
   const frameProps = {
-    className: clsx(className,DataFieldStyle.El.frameClassName),
+    className: clsx(className, DataFieldStyle.El.frameClassName),
     [DataFieldStyle.Attr.errorName]: attrExists(hasError),
     ...restProps,
   }
@@ -49,19 +44,24 @@ React.forwardRef<DataFieldRefElement, DataFieldProps>(
   }
   
   
-  return <article /* Frame */ css={frameStyle}
-    {...frameProps}
-    ref={elemRef}
-  >
-    
-    { children }
-    
-    <div /* Border */ css={borderStyle}
-      {...borderProps}
-    />
-    
-  </article>
-}))
+  return (
+    <article /* Frame */
+      data-display-name='DataField'
+      css={frameStyle}
+      {...frameProps}
+      ref={elemRef}
+    >
+      
+      { children }
+      
+      <div /* Border */ css={borderStyle}
+        {...borderProps}
+      />
+      
+    </article>
+  )
+})
+DataField.displayName = 'DataField'
 export default DataField
 
 
@@ -70,7 +70,7 @@ const frameStyle = css`
   ${row};
   align-items: center;
   width: 100%;
-  position: relative;\
+  position: relative;
 `
 
 

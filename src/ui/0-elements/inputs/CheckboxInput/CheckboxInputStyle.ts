@@ -77,7 +77,6 @@ export namespace CheckboxInputStyle {
     ${W.use.s.normal().e.frame().thisUse} {
       ${reset};
       position: relative;
-      overflow-wrap: anywhere;
       cursor: pointer;
       
       transition: background linear 300ms;

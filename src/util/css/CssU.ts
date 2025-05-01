@@ -4,10 +4,18 @@ import isnumber = TypeU.isnumber
 
 
 
+
 export namespace CssU {
   
   
-  export const toPx = (value?: number | string): string => {
+  import isdef = TypeU.isdef
+  export type CssColor = string
+  export type CssLength = number | string
+  
+  
+  
+  
+  export const toPx = (value?: CssLength): string => {
     if (isnumber(value)) return `${value}px`
     return value ?? ''
   }
@@ -57,6 +65,31 @@ export namespace CssU {
     return ``
   } */
   
+  
+  
+  export const virtualOffset = ({
+    t = undefined as CssLength | undefined, r = undefined as CssLength | undefined,
+    b = undefined as CssLength | undefined, l = undefined as CssLength | undefined,
+    h = undefined as CssLength | undefined, v = undefined as CssLength | undefined,
+  }) => {
+    const m = {
+      ...isdef(t) && { marginTop: `calc(-1 * ${t})` },
+      ...isdef(r) && { marginRight: `calc(-1 * ${r})` },
+      ...isdef(b) && { marginBottom: `calc(-1 * ${b})` },
+      ...isdef(l) && { marginLeft: `calc(-1 * ${l})` },
+      ...isdef(h) && { marginLeft: `calc(-1 * ${h})`, marginRight: `calc(-1 * ${h})` },
+      ...isdef(v) && { marginTop: `calc(-1 * ${v})`, marginBottom: `calc(-1 * ${v})` },
+    }
+    const p = {
+      ...isdef(t) && { paddingTop: t },
+      ...isdef(r) && { paddingRight: r },
+      ...isdef(b) && { paddingBottom: b },
+      ...isdef(l) && { paddingLeft: l },
+      ...isdef(h) && { paddingLeft: h, paddingRight: h },
+      ...isdef(v) && { paddingTop: v, paddingBottom: v },
+    }
+    return { ...m, ...p }
+  }
   
   
 }

@@ -154,6 +154,10 @@ export const Dark = {
   boxSecondary2: {
     ct:           '#939393',
   },
+  boxSecondary3: {
+    bg:           '#39404d',
+    ct:           '#5c677a',
+  },
   boxDanger: {
     bg:           '#24272d',
     ct:           '#c90000',

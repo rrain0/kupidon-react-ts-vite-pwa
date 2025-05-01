@@ -12,6 +12,11 @@ export namespace EmotionCommon {
   export const full = css`
     width: 100%; height: 100%;
   `
+  export const fullMinMax = css`
+    min-width: 100%; min-height: 100%;
+    width: 100%; height: 100%;
+    max-width: 100%; max-height: 100%;
+  `
   
   export const abs = css`
     position: absolute;
@@ -113,41 +118,30 @@ export namespace EmotionCommon {
     grid: 'c';
     & > * { grid-area: c; }
   `
-  export const wrapper = css`
-    display: grid;
-    min-width: fit-content; min-height: fit-content;
-    width: fit-content; height: fit-content;
-    max-width: fit-content; max-height: fit-content;
-  `
-  export const fill = css`
-    min-width: 100%; min-height: 100%;
-    width: 100%; height: 100%;
-    max-width: 100%; max-height: 100%;
-  `
   
   
   
-  // Ставит троеточие после последнего слова, которое влезло!!!
-  // Но в отличие от второго способа, если слово одно и оно не влезло,
-  // то он его обрежет и оно не вылезет
   export const max1Line = css`
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   `
+  // Ставит троеточие в конце контейнера, обрезая последнее слово
+  // Ширину надо обязательно задать
+  // С 'width: 100%' после текста будет оставаться пустое место до конца контейнера
   export const max1LineBox = css`
     display: table;
     table-layout: fixed;
-    // 'width' is necessary!!!
-    // width: fit-content; // fits text but doesn't work in ios
+    // на ios это делает ширину 0 и в итоге ничего не показывается
+    // width: fit-content;
     width: 100%;
   `
   
   
   // Ставит троеточие после последнего слова, которое влезло!!!
-  // Если слово одно и оно не влезло то слово вылезет!!!
-  // А после троеточия будет оставаться пустое место до конца контейнера
+  // Если слово одно и оно не влезло то слово вылезет за пределы родителя!!!
+  // После троеточия будет оставаться пустое место до конца контейнера
   export const maxLines = (lines: number) => css`
     display: -webkit-box;
     -webkit-box-orient: vertical;

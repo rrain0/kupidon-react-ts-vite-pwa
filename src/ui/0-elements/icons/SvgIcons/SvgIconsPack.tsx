@@ -97,6 +97,7 @@ import GlassAndDishSvg from '@ic/normal/special/glass-and-dish.svg?react'
 import HandsetSvg from '@ic/normal/special/handset.svg?react'
 import HeartSvg from '@ic/normal/special/heart.svg?react'
 import HeartFilledSvg from '@ic/normal/special/heart-filled.svg?react'
+import HeartsDoubleSvg from '@ic/normal/special/hearts-double.svg?react'
 import HelpSvg from '@ic/normal/special/help.svg?react'
 import HomeSvg from '@ic/normal/special/home.svg?react'
 
@@ -352,6 +353,7 @@ export namespace SvgIconsPack {
   export const HandsetIc = generateSimpleSvgIcon(HandsetSvg)
   export const HeartIc = generateSimpleSvgIcon(HeartSvg)
   export const HeartFilledIc = generateSimpleSvgIcon(HeartFilledSvg)
+  export const HeartsDoubleIc = generateSimpleSvgIcon(HeartsDoubleSvg)
   export const HelpIc = generateSimpleSvgIcon(HelpSvg)
   export const HomeIc = generateSimpleSvgIcon(HomeSvg)
   

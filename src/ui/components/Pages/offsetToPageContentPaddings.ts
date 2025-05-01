@@ -1,7 +1,7 @@
 
 
 
-export const fillPageContentPaddings = ({
+export const offsetToPageContentPaddings = ({
   t = false, r = false, b = false, l = false, h = false, v = false,
 }) => {
   const m = {

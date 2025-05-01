@@ -154,6 +154,13 @@ export namespace BottomSheetBasicS6 {
   export const S = combinePartsToTypeShapeSizeColor(Parts)
   
   
+  /* namespace _Addons {
+    export const a = 1
+  } */
+  export const Addons = {
+    ...BottomSheetS6.Addons,
+    //..._Addons,
+  }
   
 }
 

@@ -417,5 +417,4 @@ const TextBox = styled.div`
 const Text = styled.div`
   align-self: center;
   //background: #ffff0022;
-  overflow-wrap: anywhere;
 `

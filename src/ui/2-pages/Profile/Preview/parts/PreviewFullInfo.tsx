@@ -222,18 +222,21 @@ const BottomSheetFrame = styled(AnimatedDiv)`
   pointer-events: none;
 `
 
-const bottomSheetS: AppWidgetStyle = t => [BottomSheetBasicS6.S.bottom.sheet.full.normal, {
-  sheet: {
-    bgColor: t.previewFullInfoBox.bg,
-    color: t.previewFullInfoBox.ct,
-    boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg3OnLight}`,
+const bottomSheetS: AppWidgetStyle = t => [
+  BottomSheetBasicS6.S.bottom.sheet.full.normal,
+  BottomSheetBasicS6.Addons.shadow,
+  {
+    sheet: {
+      bgColor: t.previewFullInfoBox.bg,
+      color: t.previewFullInfoBox.ct,
+    },
+    header: {
+      pos: 'rel', z: 1,
+      h: 50, mb: -30,
+    },
+    overflowCont: { p: 0 },
   },
-  header: {
-    pos: 'rel', z: 1,
-    h: 50, mb: -30,
-  },
-  overflowCont: { p: 0 },
-}]
+]
 
 const Content = styled.div`
   padding: 0 18px 20px;
