@@ -51,12 +51,12 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
     
   const pt = CssU.max(!noInsets && !full && '30px', CssU.plus(
     !noInsetsForFilledBars && !noInsets && 'var(--top-bars-inset)',
-    !noInsetsForTransBars && !noInsets && 'var(--top-button-bar-height)'
+    !noInsetsForTransBars && !noInsets && !full && 'var(--top-button-bar-height)'
   ))
   const pb = CssU.plus(
     !noInsets && !full && '30px',
     !noInsetsForFilledBars && !noInsets && 'var(--bottom-bars-inset)',
-    !noInsetsForTransBars && !noInsets && 'var(--bottom-button-bar-height)'
+    !noInsetsForTransBars && !noInsets && !full && 'var(--bottom-button-bar-height)'
   )
   
   
@@ -79,8 +79,8 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
       data-display-name='PageContentLayout'
       className={className}
       style={{
-        ...!colSm && pv,
-        ...!full && ph,
+        ...col && { ...ph, ...pv },
+        ...full && pv,
         ...style,
       }}
     >
