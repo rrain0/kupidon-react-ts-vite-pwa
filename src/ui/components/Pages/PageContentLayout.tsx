@@ -61,15 +61,17 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   
   
   const Col = full ? ContentFull : ContentCol
-  const paddings = {
-    '--pt': pt,
-    '--pb': pb,
+  const ph = {
     '--pl': '16px',
     '--pr': '16px',
-    paddingTop: 'var(--pt)',
-    paddingBottom: 'var(--pb)',
     paddingLeft: 'var(--pl)',
     paddingRight: 'var(--pr)',
+  }
+  const pv = {
+    '--pt': pt,
+    '--pb': pb,
+    paddingTop: 'var(--pt)',
+    paddingBottom: 'var(--pb)',
   }
   
   return (
@@ -77,7 +79,8 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
       data-display-name='PageContentLayout'
       className={className}
       style={{
-        ...!colSm && paddings,
+        ...!colSm && pv,
+        ...!full && ph,
         ...style,
       }}
     >
@@ -86,7 +89,7 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
           data-display-name='ColInner'
           className={classNameForInner}
           style={{
-            ...paddings,
+            ...pv, ...ph,
             ...styleForInner,
           }}
         >

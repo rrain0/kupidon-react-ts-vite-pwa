@@ -74,13 +74,11 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
   
   const match = 'XX'
   
-  const { getWasDragged } = useWasDragged()
-  
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
   return (
     <PreviewInfoBox
-      data-display-name="PreviewInfoOverlay"
+      data-display-name='PreviewInfoOverlay'
     >
       
       
@@ -100,7 +98,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           data-disabled={attrExists(actionButtonsDisabled)}
           onClick={ev => {
             ev.stopPropagation()
-            if (getWasDragged?.()) return
             openInfo?.()
           }}
         >
@@ -115,7 +112,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
-            if (getWasDragged?.()) return
             onBack?.()
           }}
         >
@@ -126,7 +122,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
-            if (getWasDragged?.()) return
             onReject?.()
           }}
         >
@@ -137,7 +132,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
-            if (getWasDragged?.()) return
             onAccept?.()
           }}
         >
@@ -149,7 +143,6 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
           onClick={ev => {
             ev.stopPropagation()
             console.log('click openInfo')
-            if (getWasDragged?.()) return
             openInfo?.()
           }}
         >
@@ -187,7 +180,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
                 {action ==='back' && (
                   <ActionWidget>
                     <ActionIconBox>
-                      <ArrowBackIc css={SvgIconS6.t(actionArrowBackS)}      />
+                      <ArrowBackIc css={SvgIconS6.t(actionArrowBackS)}/>
                     </ActionIconBox>
                   </ActionWidget>
                 )}

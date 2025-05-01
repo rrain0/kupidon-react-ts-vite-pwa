@@ -9,7 +9,7 @@ import App from 'src/ui/App/App'
 
 
 // TODO костыль // TODO Pointer // todo hack fix
-//  На ios шторка настроек почему-то не может драгаться сразу, поэтому это здесь
+//  На ios без этого шторка настроек почему-то не может драгаться сразу
 window.addEventListener('pointerdown', () => {})
 
 
