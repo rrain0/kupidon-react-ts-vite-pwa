@@ -20,13 +20,11 @@ export const MyComponent = React.memo((props: MyComponentProps) => {
   
   return (
     <div
-      data-display-name="MyComponent"
+      data-display-name='MyComponent'
       className={className}
       style={style}
     >
-      <>
-        {children}
-      </>
+      {children}
     </div>
   )
 })

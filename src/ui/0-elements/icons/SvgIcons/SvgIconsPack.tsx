@@ -43,7 +43,6 @@ import GearSvg from '@ic/normal/ui/gear.svg?react'
 import GearOutlinedSvg from '@ic/normal/ui/gear-outlined.svg?react'
 
 import InfoToastifySvg from '@ic/normal/ui/info-toastify.svg?react'
-import IsWritingSvg from '@ic/normal/ui/is-writing.svg?react'
 
 import LocationSvg from '@ic/normal/ui/location.svg?react'
 import LockSvg from '@ic/normal/ui/lock.svg?react'
@@ -252,7 +251,6 @@ export namespace SvgIconsPack {
   
   
   export const InfoToastifyIc = generateSimpleSvgIcon(InfoToastifySvg)
-  export const IsWritingIc = generateSimpleSvgIcon(IsWritingSvg)
   
   
   export const LocationIc = generateSimpleSvgIcon(LocationSvg)

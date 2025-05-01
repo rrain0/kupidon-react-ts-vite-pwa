@@ -22,7 +22,9 @@ type MyComponentExtraProps = Pu<{
   isError: boolean
 }> & Children
 
-type MyComponentProps = React.ComponentPropsWithRef<typeof ToBeExtended> & MyComponentExtraProps
+type MyComponentProps = 
+  & React.ComponentPropsWithRef<typeof ToBeExtended> 
+  & MyComponentExtraProps
 
 
 
@@ -35,11 +37,11 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   
   return (
     <ToBeExtended // Frame
-      data-display-name="MyComponent"
+      data-display-name='MyComponent'
       css={frameStyle}
       {...restProps}
     >
-    
+      {children}
     </ToBeExtended>
   )
 })

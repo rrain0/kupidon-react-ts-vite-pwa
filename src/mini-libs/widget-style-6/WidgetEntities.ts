@@ -364,7 +364,7 @@ export namespace AdditionalProps {
       AdditionalProps.varColor, WidgetPropValue.of(value),
     ]],
   })
-  export const varAccentColor = WidgetProp.ofName('--accent-color')
+  export const varAccentColor = WidgetProp.ofName('--color-accent')
   // color: value; --color: value;
 }
 

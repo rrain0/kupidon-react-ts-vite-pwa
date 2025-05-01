@@ -10,7 +10,7 @@ export namespace SvgIconS {
     const icon = new Elem0('rruiIcon', { }, {
       size: new CssProp0('--size'),
       color: new CssProp0('--color'),
-      accentColor: new CssProp0('--accent-color'),
+      accentColor: new CssProp0('--color-accent'),
     })
     return { root: icon, icon } as const
   }()

@@ -23,7 +23,6 @@ export const useAuthSetup = () => {
   const [accessTokenIsReady, setAccessTokenIsReady] = useState(false)
   
   useEffect(() => {
-    console.log('usedAccount', usedAccount, 'accessToken', accessToken)
     if (usedAccount === 'test') {
       const testAccessToken = MockData.account.testUserAccessToken
       if (accessToken !== testAccessToken) {

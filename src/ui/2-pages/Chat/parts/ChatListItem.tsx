@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
@@ -11,6 +12,7 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import IsWritingFiveDots from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
@@ -29,7 +31,6 @@ import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
 import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
-import IsWritingIc = SvgIconsPack.IsWritingIc
 import randomElem = ArrayU.randomElem
 
 
@@ -111,6 +112,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
       </AvaContainer>
       
       <Flex col grow>
+        
         <Flex row align grow>
           <Flex><NameBox><Name>{name}</Name></NameBox></Flex>
           <Flex row align noShrink>
@@ -133,21 +135,25 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
             }
           </Flex>
         </Flex>
+        
         <Flex row align grow>
-          {isWriting && <IsWritingIc css={SvgIconS6.t(isWritingIcS)}/>}
-          {!isWriting && (
-            <Flex row align>
-              <Flex row align noShrink>
-                {isLastMsgMy && <MetaPreMsg>{uiText.youRespectful}{' • '}</MetaPreMsg>}
+          <Flex row align grow>
+            {isWriting && <IsWritingFiveDots css={isWritingFiveDotsS}/>}
+            {!isWriting && (
+              <Flex row align>
+                <Flex row align noShrink>
+                  {isLastMsgMy && <MetaPreMsg>{uiText.youRespectful}{' • '}</MetaPreMsg>}
+                </Flex>
+                <MsgBox><Msg>{lastMsg}</Msg></MsgBox>
               </Flex>
-              <MsgBox><Msg>{lastMsg}</Msg></MsgBox>
-            </Flex>
-          )}
+            )}
+          </Flex>
           <Flex row align noShrink>
-            <Gap wMin={8} grow/>
+            <Gap w={8}/>
             {unreadText && <Unread noShrink>{unreadText}</Unread>}
           </Flex>
         </Flex>
+        
       </Flex>
       
     </ChatItemBox>
@@ -240,6 +246,12 @@ const isWritingIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   // TODO Theme
   icon: { h: 10, w: 'auto', color: '#000000', colorAcc: '#BB2649' },
 }]
+const isWritingFiveDotsS = css`
+  height: 10px;
+  width: auto;
+  --color: black;
+  --color-accent: #BB2649;
+`
 
 
 

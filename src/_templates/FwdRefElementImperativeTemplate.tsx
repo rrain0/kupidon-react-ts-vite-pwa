@@ -16,7 +16,9 @@ export type MyComponentExtraProps = Pu<{
   isError: boolean
 }> & Children
 
-export type MyComponentProps = React.ComponentPropsWithRef<'div'> & MyComponentExtraProps
+export type MyComponentProps = 
+  & React.ComponentPropsWithRef<'div'> 
+  & MyComponentExtraProps
 
 
 
@@ -35,7 +37,7 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   
   return (
     <div // Frame
-      data-display-name="MyComponent"
+      data-display-name='MyComponent'
       css={frameS}
       {...restProps}
       ref={elemRef}

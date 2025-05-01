@@ -2,7 +2,7 @@
   
   <style>
     :root {
-      --accent-color: #aaaaaa;
+      --color-accent: #aaaaaa;
     }
   </style>
   
@@ -33,7 +33,7 @@
     cx="100" cy="100" r="100"
     mask="url(#mask)" clip-path="url(#clipPath)"
     stroke="none"
-    fill="var(--accent-color)"
+    fill="var(--color-accent)"
   />
   
 </svg>

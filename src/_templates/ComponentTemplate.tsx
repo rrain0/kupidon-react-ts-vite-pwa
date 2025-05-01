@@ -6,7 +6,7 @@ const MyComponent = React.memo(() => {
     
   return (
     <div
-      data-display-name="MyComponent"
+      data-display-name='MyComponent'
     >
     
     </div>

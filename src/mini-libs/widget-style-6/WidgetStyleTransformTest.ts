@@ -44,7 +44,7 @@ export namespace WidgetStyle6Test {
   
   const elemFrame = WidgetElem.of({
     className: 'rruiFrame',
-    props: { accentColor: WidgetProp.ofName('--accent-color') },
+    props: { accentColor: WidgetProp.ofName('--color-accent') },
   })
   const elemInput = WidgetElem.of({
     upElem: elemFrame, upSelector: '>', className: 'rruiInput',
