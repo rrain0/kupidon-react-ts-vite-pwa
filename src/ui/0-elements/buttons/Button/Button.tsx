@@ -4,7 +4,6 @@ import { ReactU } from '@util/react/ReactU.ts'
 import { useWasDragged } from '@util/pointer/useWasDragged.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
@@ -42,11 +41,11 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
       <UseRipple>
         { rippleProps => (
           <button
-            data-display-name="Button"
+            data-display-name='Button'
             ref={elemRef}
             data-error={attrExists(hasError)}
             className={clsx(className, ButtonS6.W.els.button.n)}
-            type="button"
+            type='button'
             {...combineProps(clickFix, restProps, rippleProps.target)}
             onClick={(ev) => {
               clickFix.onClick(ev)
@@ -62,7 +61,7 @@ const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
           >
             
             <div
-              data-display-name="Button Border"
+              data-display-name='Button Border'
               className={ButtonS6.W.els.bord.n}
               style={{ position: 'absolute' }}
             >

@@ -61,13 +61,23 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   
   
   const Col = full ? ContentFull : ContentCol
+  const paddings = {
+    '--pt': pt,
+    '--pb': pb,
+    '--pl': '16px',
+    '--pr': '16px',
+    paddingTop: 'var(--pt)',
+    paddingBottom: 'var(--pb)',
+    paddingLeft: 'var(--pl)',
+    paddingRight: 'var(--pr)',
+  }
+  
   return (
     <Col
       data-display-name='PageContentLayout'
       className={className}
       style={{
-        paddingTop: pt,
-        paddingBottom: pb,
+        ...!colSm && paddings,
         ...style,
       }}
     >
@@ -75,7 +85,10 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
         <ColSm
           data-display-name='ColInner'
           className={classNameForInner}
-          style={styleForInner}
+          style={{
+            ...paddings,
+            ...styleForInner,
+          }}
         >
           {children}
         </ColSm>
@@ -96,8 +109,6 @@ const ContentCol = styled.div`
   width: 100%;
   min-width: 0;
   height: fit-content;
-  padding-left: 16px;
-  padding-right: 16px;
   ${col};
   gap: 10px;
 `

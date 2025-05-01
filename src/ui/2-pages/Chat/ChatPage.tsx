@@ -1,11 +1,13 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ChatListItem from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
+import { fillPageContentPaddings } from 'src/ui/components/Pages/fillPageContentPaddings.ts'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -177,6 +179,13 @@ export default ChatPage
 
 
 
+
 const ChatItemsList = styled(Flex)`
+  ${fillPageContentPaddings({ h: true, b: true })}
+  padding-top: 20px;
+  border-radius: 15px 15px 0 0;
+  // TODO Theme
+  background-color: white;
+  box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
 
 `
