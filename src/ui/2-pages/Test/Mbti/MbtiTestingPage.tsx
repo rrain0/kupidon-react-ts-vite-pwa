@@ -33,7 +33,7 @@ import use = RouteBuilder.use
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 import rf1 = MathU.rf1
 import resetH = EmotionCommon.resetH
 import rowE = EmotionCommon.rowE
@@ -349,9 +349,9 @@ const MbtiTestingPage = React.memo(() => {
                 
                 <Button
                   css={ButtonS6.t(answerAS)}
-                  data-selected={attrExists(answers[displayed] === 0)}
+                  data-selected={toEmptyAttr(answers[displayed] === 0)}
                   disabled={curr !== displayed}
-                  data-locked={attrExists(curr !== displayed)}
+                  data-locked={toEmptyAttr(curr !== displayed)}
                   onClick={answerA}
                 >
                   {uiText.questions[displayed].a}
@@ -361,9 +361,9 @@ const MbtiTestingPage = React.memo(() => {
                 
                 <Button
                   css={ButtonS6.t(answerBS)}
-                  data-selected={attrExists(answers[displayed] === 1)}
+                  data-selected={toEmptyAttr(answers[displayed] === 1)}
                   disabled={curr !== displayed}
-                  data-locked={attrExists(curr !== displayed)}
+                  data-locked={toEmptyAttr(curr !== displayed)}
                   onClick={answerB}
                 >
                   {uiText.questions[displayed].b}

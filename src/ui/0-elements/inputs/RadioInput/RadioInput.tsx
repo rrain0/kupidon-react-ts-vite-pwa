@@ -16,7 +16,7 @@ import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
 import row = EmotionCommon.row
 import Pu = TypeU.Pu
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -54,7 +54,7 @@ const RadioInput = React.memo((props: RadioInputProps) => {
   const inputProps = {
     className: RadioInputStyle.El.inputClassName,
     type: 'radio',
-    [RadioInputStyle.Attr.errorName]: attrExists(hasError),
+    [RadioInputStyle.Attr.errorName]: toEmptyAttr(hasError),
     ...restProps,
   }
   const activeWrapProps = {

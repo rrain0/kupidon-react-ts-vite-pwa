@@ -11,7 +11,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DateU } from 'src/util/date/DateU'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import GiftBoxGradIc = SvgGradIconsPack.GiftBoxGradIc
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -45,7 +45,7 @@ const ProfileBirthDateOption = React.memo((props: ValidationWrapRenderProps<stri
         icon={<GiftBoxGradIc/>}
         title={titleText.age}
         value={age}
-        data-error={attrExists(props.highlight)}
+        data-error={toEmptyAttr(props.highlight)}
         onClick={onOpen}
       />
       

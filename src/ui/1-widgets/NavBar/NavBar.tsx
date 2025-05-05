@@ -29,7 +29,7 @@ import CardsHeartGradIc = SvgGradIconsPack.CardsHeartGradIc
 import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
 import Pu = TypeU.Pu
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
@@ -62,28 +62,28 @@ const NavBar = React.memo((props: NavBarProps) => {
       <Frame>
         
         <NavLink to={RootRoute.profile[fullAnySearchParams](search)}>
-          <Button css={nav} data-selected={attrExists(place === 'profile')}>
+          <Button css={nav} data-selected={toEmptyAttr(place === 'profile')}>
             <ProfileGradIc/>
             <div>{titleText.profile}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.chat[fullAnySearchParams](search)}>
-          <Button css={nav} data-selected={attrExists(place === 'chat')}>
+          <Button css={nav} data-selected={toEmptyAttr(place === 'chat')}>
             <ChatRoundGradIc/>
             <div>{titleText.chat}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.findCouple[fullAnySearchParams](search)}>
-          <Button css={nav} data-selected={attrExists(place === 'findCouple')}>
+          <Button css={nav} data-selected={toEmptyAttr(place === 'findCouple')}>
             <CardsHeartGradIc/>
             <div>{titleText.hearts}</div>
           </Button>
         </NavLink>
         
         <NavLink to={RootRoute.bowAndArrows[fullAnySearchParams](search)}>
-          <Button css={nav} data-selected={attrExists(place === 'bowAndArrows')}>
+          <Button css={nav} data-selected={toEmptyAttr(place === 'bowAndArrows')}>
             <BowArrowGradIc/>
             <div>{titleText.bowAndArrows}</div>
           </Button>
@@ -94,7 +94,7 @@ const NavBar = React.memo((props: NavBarProps) => {
             <>
               <Button
                 css={nav}
-                data-selected={attrExists(place === 'settings')}
+                data-selected={toEmptyAttr(place === 'settings')}
                 onClick={overlay.open}
               >
                 <GearOutlinedIc/>

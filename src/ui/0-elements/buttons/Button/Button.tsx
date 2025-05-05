@@ -1,31 +1,38 @@
-import { css } from '@emotion/react'
 import { useClickFix } from '@util/pointer/useClickFix.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
+import {
+  FlexShortProps,
+  processFlexShortProps,
+} from 'src/ui/0-elements/basic-elements/processFlexShortProps.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import combineProps = ReactU.combineProps
-import attrExists = TypeU.attrEmpty
+import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
 
 
 
 
 
 type ButtonProps = React.ComponentPropsWithRef<'button'> & Pu<{
-  hasError: boolean
-}>
+  'data-locked': HtmlEmptyAttr
+  'data-selected': HtmlEmptyAttr
+  'data-error': HtmlEmptyAttr
+}> & FlexShortProps
 
 
 const Button = React.memo((props: ButtonProps) => {
   const {
-    ref, className, children, onClick,
-    hasError,
-    ...restProps
-  } = props
+    flex,
+    rest: {
+      ref, className, children, onClick,
+      ...restProps
+    },
+  } = processFlexShortProps(props)
   
   
   const elemRef = useRef<HTMLButtonElement>(null)
@@ -39,15 +46,15 @@ const Button = React.memo((props: ButtonProps) => {
         <button
           data-display-name='Button'
           ref={elemRef}
-          data-error={attrExists(hasError)}
           className={clsx(className, ButtonS6.W.els.button.n)}
           type='button'
-          {...combineProps(clickFix(onClick), restProps, rippleProps.target)}
-          css={css`
-            & > * {
-              position: relative;
-            }
-          `}
+          {...combineProps(
+            clickFix(onClick), restProps, { style: flex }, rippleProps.target
+          )}
+          css={[
+            // TODO Style
+            { '& > *': { position: 'relative' } },
+          ]}
         >
           
           <div

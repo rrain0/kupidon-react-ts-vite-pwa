@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { CssU } from '@util/css/CssU.ts'
+import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -14,7 +15,6 @@ import Txt = EmotionCommon.Txt
 import max1Line = EmotionCommon.max1Line
 import max1LineBox = EmotionCommon.max1LineBox
 import noScrollbars = EmotionCommon.noScrollbars
-import virtualOffset = CssU.virtualOffset
 
 
 

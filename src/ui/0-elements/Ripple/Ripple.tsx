@@ -133,9 +133,8 @@ const Ripple = React.memo((props: RippleProps) => {
   
   
   return (
-    <div
-      data-display-name="Ripple"
-      //displayName={'RippleFrame'}
+    <div // RippleFrame
+      data-display-name='Ripple'
       ref={frameRef}
       className={clsx(RippleS6.W.els.rippleFrame.n, className)}
       {...restProps}
@@ -217,6 +216,6 @@ function calculateRippleProps(
     },
     rippleDuration: Math.max(400, dur * radius / 200),
     //dissolveDuration: Math.max(500, (dur + 100) * radius / 200),
-    dissolveDuration: 500,
+    dissolveDuration: 800,
   }
 }

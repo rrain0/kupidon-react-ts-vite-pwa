@@ -10,7 +10,7 @@ import {
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -38,7 +38,7 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
   
   const radioGroupProps = {
     className: clsx(className, RadioInputGroupStyle.El.radioGroupClassName),
-    [RadioInputGroupStyle.Attr.errorName]: attrExists(hasError),
+    [RadioInputGroupStyle.Attr.errorName]: toEmptyAttr(hasError),
     // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role
     role: 'radiogroup',
     tabIndex: 0,

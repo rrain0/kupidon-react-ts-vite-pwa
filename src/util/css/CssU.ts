@@ -1,7 +1,6 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import falsy = TypeU.falsy
 import isnumber = TypeU.isnumber
-import isdef = TypeU.isdef
 
 
 
@@ -15,9 +14,9 @@ export namespace CssU {
   
   
   
-  export const toPx = (value?: CssLength): string => {
+  export const toPx = (value?: CssLength): string | undefined => {
     if (isnumber(value)) return `${value}px`
-    return value ?? ''
+    return value
   }
   
   
@@ -66,30 +65,6 @@ export namespace CssU {
   } */
   
   
-  
-  export const virtualOffset = ({
-    t = undefined as CssLength | undefined, r = undefined as CssLength | undefined,
-    b = undefined as CssLength | undefined, l = undefined as CssLength | undefined,
-    h = undefined as CssLength | undefined, v = undefined as CssLength | undefined,
-  }) => {
-    const m = {
-      ...isdef(t) && { marginTop: `calc(-1 * ${t})` },
-      ...isdef(r) && { marginRight: `calc(-1 * ${r})` },
-      ...isdef(b) && { marginBottom: `calc(-1 * ${b})` },
-      ...isdef(l) && { marginLeft: `calc(-1 * ${l})` },
-      ...isdef(h) && { marginLeft: `calc(-1 * ${h})`, marginRight: `calc(-1 * ${h})` },
-      ...isdef(v) && { marginTop: `calc(-1 * ${v})`, marginBottom: `calc(-1 * ${v})` },
-    }
-    const p = {
-      ...isdef(t) && { paddingTop: t },
-      ...isdef(r) && { paddingRight: r },
-      ...isdef(b) && { paddingBottom: b },
-      ...isdef(l) && { paddingLeft: l },
-      ...isdef(h) && { paddingLeft: h, paddingRight: h },
-      ...isdef(v) && { paddingTop: v, paddingBottom: v },
-    }
-    return { ...m, ...p }
-  }
   
   
 }

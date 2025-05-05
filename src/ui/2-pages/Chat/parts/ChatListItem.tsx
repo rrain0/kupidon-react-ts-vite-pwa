@@ -1,11 +1,10 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { virtualOffset } from '@util/css/virtualOffset.ts'
 import { useLiveShortDuration } from '@util/date/useLiveShortDuration.ts'
 import { useShortDurationUiText } from '@util/date/useShortDurationUiText.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
 import React, { useMemo } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -13,13 +12,13 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import IsWritingFiveDots, {
   IsWritingFiveDotsCssProps,
 } from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
-import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
@@ -34,7 +33,6 @@ import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
 import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
-import randomElem = ArrayU.randomElem
 import Pu = TypeU.Pu
 
 
@@ -99,7 +97,8 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
   const error = lastMsgStatus === 'error'
   
   return (
-    <ChatItemBox row g={8}
+    <Button row g={8} alignSelf='stretch'
+      css={ButtonS6.t(chatItemButtonS)}
       data-display-name='ChatListItem'
       className={className}
       style={style}
@@ -154,7 +153,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
         
       </Flex>
       
-    </ChatItemBox>
+    </Button>
   )
 })
 ChatListItem.displayName = 'ChatListItem'
@@ -162,10 +161,14 @@ export default ChatListItem
 
 
 
-const ChatItemBox = styled(Flex)`
-  width: 100%;
-  height: 60px;
-`
+const chatItemButtonS: AppWidgetStyle = t => [
+  ButtonS6.S.text.rect.lg.normal, {
+    button: {
+      w: undefined, h: 76, r: 20, ...virtualOffset({ h: 8, v: 6 }),
+      textAlign: 'start',
+    },
+  },
+]
 
 
 const NameBox = styled.div`

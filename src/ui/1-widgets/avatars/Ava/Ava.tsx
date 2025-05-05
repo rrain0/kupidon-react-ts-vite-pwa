@@ -10,7 +10,6 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import Txt = EmotionCommon.Txt
-import round = EmotionCommon.round
 import HeartsDoubleIc = SvgIconsPack.HeartsDoubleIc
 import Pu = TypeU.Pu
 
@@ -79,7 +78,7 @@ export default Ava
 
 
 
-const AvaContainer = styled(Flex)<Pu<{ shadow: boolean }>>({
+const AvaContainer = styled(Flex)({
   position: 'relative',
   aspectRatio: 1,
 })
@@ -131,3 +130,4 @@ const heartsDoubleIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal,
   // TODO Theme
   icon: { h: '46%', ml: 1, w: 'auto', color: '#ffffff'/* , color: t.boxAccentCt4.ct */ },
 }]
+

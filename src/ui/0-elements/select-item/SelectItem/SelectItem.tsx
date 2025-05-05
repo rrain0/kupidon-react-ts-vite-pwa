@@ -10,7 +10,7 @@ import Pu = TypeU.Pu
 import Callback = TypeU.Callback
 import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -55,17 +55,17 @@ const SelectItem = React.memo((props: SelectItemProps) => {
   
   return (
     <article
-      data-display-name="SelectItem - Frame"
+      data-display-name='SelectItem - Frame'
       ref={setSelectItemFrame}
       className={clsx(SelectItemS6.W.els.selectItem.n, className)}
-      {...{ [dataSelected]: attrExists(isSelected) }}
+      {...{ [dataSelected]: toEmptyAttr(isSelected) }}
       style={style}
     >
       
       <Button {...restProps} ref={ref}>
         {isAdd && (
           <div
-            data-display-name="SelectItem - Add Icon Box"
+            data-display-name='SelectItem - Add Icon Box'
             className={SelectItemS6.W.els.addBox.n}
           >
             <PlusIc/>
@@ -79,7 +79,7 @@ const SelectItem = React.memo((props: SelectItemProps) => {
         <>
           {metersValues && (
             <div
-              data-display-name="SelectItem - Meter Box"
+              data-display-name='SelectItem - Meter Box'
               className={SelectItemS6.W.els.meterBox.n}
             >
               <SelectMeter metersValues={metersValues}/>
@@ -87,7 +87,7 @@ const SelectItem = React.memo((props: SelectItemProps) => {
           )}
           {isEdit && (
             <div
-              data-display-name="SelectItem - Edit Button Box"
+              data-display-name='SelectItem - Edit Button Box'
               className={SelectItemS6.W.els.editBox.n}
             >
               <Button onClick={onClickEdit}>

@@ -204,11 +204,11 @@ const Tests = React.memo((props: TestsProps) => {
           {testState === 'completed' && (
             <div css={css`${col}; gap: 15px;`}>
               <PersonalityCompatibility
-                compatibility="high"
+                compatibility='high'
                 compatibles={mbtiData.highCompatibility}
               />
               <PersonalityCompatibility
-                compatibility="medium"
+                compatibility='medium'
                 compatibles={mbtiData.mediumCompatibility}
               />
               {/* <PersonalityCompatibility

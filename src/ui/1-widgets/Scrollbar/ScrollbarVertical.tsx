@@ -19,7 +19,7 @@ import reset = EmotionCommon.reset
 import PartialUndef = TypeU.PartialUndef
 import noop = TypeU.noop
 import SetterOrUpdater = TypeU.SetterOrUpdater
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 // TODO Доделать новый скроллбар
@@ -169,7 +169,7 @@ const ScrollbarVertical = React.memo(
       
       const scrollbarTrackProps = {
         className: clsx(className, ScrollbarVerticalStyle.El.track.name),
-        [ScrollbarVerticalStyle.Attr.active.name]: attrExists(isDragging),
+        [ScrollbarVerticalStyle.Attr.active.name]: toEmptyAttr(isDragging),
         ...restProps,
         ref: trackRef,
       }

@@ -15,8 +15,8 @@ export namespace TypeU {
   
   
   
-  export type HtmlAttrEmpty = '' | undefined
-  export const attrEmpty = (value: any): HtmlAttrEmpty => value ? '' : undefined
+  export type HtmlEmptyAttr = '' | undefined
+  export const toEmptyAttr = (value: any): HtmlEmptyAttr => value ? '' : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type HtmlDataAttrs = { [Prop in `data-${string}`]?: string | undefined }

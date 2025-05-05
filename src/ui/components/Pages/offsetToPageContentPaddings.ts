@@ -1,20 +1,28 @@
+import { TypeU } from '@util/common/TypeU.ts'
+import Pu = TypeU.Pu
+
 
 
 
 export const offsetToPageContentPaddings = ({
-  t = false, r = false, b = false, l = false, h = false, v = false,
-}) => {
+  t, r, b, l, h, v, a,
+}: Pu<{
+  t: boolean, r: boolean, b: boolean, l: boolean, h: boolean, v: boolean, a: boolean
+}>) => {
+  if (h) { l ??= h; r ??= h }
+  if (v) { t ??= v; b ??= v }
+  if (a) { t ??= a; r ??= a; b ??= a; l ??= a }
   const m = {
-    ...(t || v) && { marginTop: 'calc(-1 * var(--pt))' },
-    ...(r || h) && { marginRight: 'calc(-1 * var(--pr))' },
-    ...(b || v) && { marginBottom: 'calc(-1 * var(--pb))' },
-    ...(l || h) && { marginLeft: 'calc(-1 * var(--pl))' },
+    ...t && { marginTop: 'calc(-1 * var(--pt))' },
+    ...r && { marginRight: 'calc(-1 * var(--pr))' },
+    ...b && { marginBottom: 'calc(-1 * var(--pb))' },
+    ...l && { marginLeft: 'calc(-1 * var(--pl))' },
   }
   const p = {
-    ...(t || v) && { paddingTop: 'var(--pt)' },
-    ...(r || h) && { paddingRight: 'var(--pr)' },
-    ...(b || v) && { paddingBottom: 'var(--pb)' },
-    ...(l || h) && { paddingLeft: 'var(--pl)' },
+    ...t && { paddingTop: 'var(--pt)' },
+    ...r && { paddingRight: 'var(--pr)' },
+    ...b && { paddingBottom: 'var(--pb)' },
+    ...l && { paddingLeft: 'var(--pl)' },
   }
   return { ...m, ...p }
 }

@@ -73,7 +73,7 @@ const ProfileHeightOption = React.memo(
           title={text.height}
           value={textValue(height)}
           //value={props.value}
-          //data-error={attrExists(props.highlight)}
+          //data-error={toEmptyAttr(props.highlight)}
           onClick={open}
         />
         

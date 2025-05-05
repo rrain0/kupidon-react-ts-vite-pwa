@@ -275,7 +275,7 @@ const SignupPage = React.memo(() => {
             
             <Button
               css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
-              type="submit"
+              type='submit'
             >
               {actionText.signup}
             </Button>

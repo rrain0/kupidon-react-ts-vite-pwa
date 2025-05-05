@@ -10,7 +10,7 @@ import {
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
 import PartialUndef = TypeU.PartialUndef
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -38,7 +38,7 @@ React.forwardRef<CheckboxInputGroupRefElement, CheckboxInputGroupProps>(
   
   const radioGroupProps = {
     className: clsx(className, CheckboxInputGroupStyle.El.radioGroupClassName),
-    [CheckboxInputGroupStyle.Attr.errorName]: attrExists(hasError),
+    [CheckboxInputGroupStyle.Attr.errorName]: toEmptyAttr(hasError),
     tabIndex: 0,
     ...restProps,
   }

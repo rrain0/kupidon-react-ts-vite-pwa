@@ -7,7 +7,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import Pu = TypeU.Pu
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -36,7 +36,7 @@ const DataField = React.memo((props: DataFieldProps) => {
   
   const frameProps = {
     className: clsx(className, DataFieldStyle.El.frameClassName),
-    [DataFieldStyle.Attr.errorName]: attrExists(hasError),
+    [DataFieldStyle.Attr.errorName]: toEmptyAttr(hasError),
     ...restProps,
   }
   const borderProps = {

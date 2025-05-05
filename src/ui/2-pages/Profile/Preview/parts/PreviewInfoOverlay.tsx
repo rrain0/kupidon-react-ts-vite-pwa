@@ -29,7 +29,7 @@ import ArrowAngledRounded2GradIc = SvgGradIconsPack.ArrowAngledRounded2GradIc
 import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 import abs = EmotionCommon.abs
 import flexC = EmotionCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
@@ -95,7 +95,7 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
       
       <ShortInfoContainer>
         <ShortInfoBox
-          data-disabled={attrExists(actionButtonsDisabled)}
+          data-disabled={toEmptyAttr(actionButtonsDisabled)}
           onClick={ev => {
             ev.stopPropagation()
             openInfo?.()

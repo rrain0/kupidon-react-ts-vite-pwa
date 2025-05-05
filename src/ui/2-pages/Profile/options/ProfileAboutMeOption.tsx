@@ -7,7 +7,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import EditableTextCard from 'src/ui/components/EditableTextCard/EditableTextCard.tsx'
 import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 const overlayName = 'profileAboutMe'
@@ -38,7 +38,7 @@ const ProfileAboutMeOption = React.memo(
           title={titleText.aboutMe}
           text={props.value}
           placeholder={placeholderText.aboutMe}
-          data-error={attrExists(props.highlight)}
+          data-error={toEmptyAttr(props.highlight)}
           onClick={onOpen}
         />
         

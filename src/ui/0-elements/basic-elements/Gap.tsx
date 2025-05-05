@@ -1,23 +1,9 @@
-import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
-import mapBool = TypeU.mapBool
+import { withDefaults } from '@util/react/withDefaults.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 
 
 
-const Gap = styled.div<Pu<{
-  w: number | string
-  h: number | string
-  wMin: number | string
-  hMin: number | string
-  grow: number | string | boolean
-}>>(p => ({
-  width: p.w,
-  height: p.h,
-  minWidth: p.wMin,
-  minHeight: p.hMin,
-  flexGrow: mapBool(p.grow, 1),
-}))
+
+const Gap = withDefaults({ 'data-display-name': 'Gap' }, Flex)
 Gap.displayName = 'Gap'
 export default Gap

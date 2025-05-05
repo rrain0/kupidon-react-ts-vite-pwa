@@ -15,7 +15,7 @@ import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
-import HtmlAttrExistence = TypeU.HtmlAttrEmpty
+import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
 
 
 
@@ -24,7 +24,7 @@ type EditableTextCardProps = PartialUndef<{
   title: string
   text: string
   placeholder: string
-  'data-error': HtmlAttrExistence
+  'data-error': HtmlEmptyAttr
   onClick: Callback
 }>
 
@@ -39,7 +39,7 @@ const EditableTextCard = React.memo((props: EditableTextCardProps) => {
   
   return (
     <Frame
-      data-react-display-name="EditableTextCard"
+      data-react-display-name='EditableTextCard'
       tabIndex={0}
       {...restProps}
       showAnyText={showAnyText}

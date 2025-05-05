@@ -27,7 +27,7 @@ const PwdInput = React.memo(React.forwardRef<HTMLInputElement, PwdInputProps>(
     return (
       <Input
         {...restProps}
-        data-display-name="PwdInput"
+        data-display-name='PwdInput'
         ref={forwardedRef}
         type={pwdHidden ? 'password' : 'text'}
       >

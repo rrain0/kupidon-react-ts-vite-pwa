@@ -19,7 +19,7 @@ import combineProps = ReactU.combineProps
 import Callback1 = TypeU.Callback1
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -136,7 +136,7 @@ const BottomSheet = React.memo((props: BottomSheetProps) => {
         ...style,
       }}
       ref={bottomSheetFrameRef}
-      {...{ [dataDragging]: attrExists(sheetState === 'dragging') }}
+      {...{ [dataDragging]: toEmptyAttr(sheetState === 'dragging') }}
       
       {...combineProps(
         // TODO Bottom Sheet - need to prevent click if dragged if frame is draggable & sheet is dragging

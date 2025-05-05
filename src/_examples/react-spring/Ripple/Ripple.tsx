@@ -55,137 +55,136 @@ export type RippleProps = ClassStyleProps & {
 }
 
 
-const Ripple = React.memo(
-  (props: RippleProps) => {
+const Ripple = React.memo((props: RippleProps) => {
     
-    const { isShow, cancel, clientXY, className, ...restProps } = props
-    
-    const [getFrame, , frameRef] = useElemRefGetSet()
-    const [getRipple, , rippleRef] = useElemRefGetSet()
-    
-    const rippleProps = useMemo(() => {
-      const frame = getFrame()
-      const ripple = getRipple()
-      if (frame && ripple) {
-        const fProps = getViewProps(frame)
-        const rProps = getViewProps(ripple)
-        return getRippleProps(
-          fProps.xy,
-          fProps.wh,
-          clientXY,
-          rProps.getCssPropValue(RippleS6.W.els.ripple.ps!.mode.n) as RippleMode,
-          500
-        )
+  const { isShow, cancel, clientXY, className, ...restProps } = props
+  
+  const [getFrame, , frameRef] = useElemRefGetSet()
+  const [getRipple, , rippleRef] = useElemRefGetSet()
+  
+  const rippleProps = useMemo(() => {
+    const frame = getFrame()
+    const ripple = getRipple()
+    if (frame && ripple) {
+      const fProps = getViewProps(frame)
+      const rProps = getViewProps(ripple)
+      return getRippleProps(
+        fProps.xy,
+        fProps.wh,
+        clientXY,
+        rProps.getCssPropValue(RippleS6.W.els.ripple.ps!.mode.n) as RippleMode,
+        500
+      )
+    }
+    return {
+      dimens: { left: 0, top: 0, width: 0, height: 0 },
+      rippleDuration: 0,
+      dissolveDuration: 0,
+    }
+  }, [isShow])
+  
+  
+  
+  
+  const [{ opacity }] = useSpring(() => {
+    if (cancel) return {
+      to: { opacity: 0 },
+      reset: true,
+      immediate: true,
+    }
+    if (isShow) return {
+      from: { opacity: 0.3 },
+      to: { opacity: 1 },
+      reset: true,
+      config: {
+        duration: rippleProps.rippleDuration,
+        easing: easings.easeOutCubic,
+      },
+    }
+    if (!isShow) return {
+      to: { opacity: 0 },
+      config: {
+        duration: rippleProps.dissolveDuration,
+        easing: easings.linear,
+      },
+    }
+  }, [isShow, cancel])
+  
+  const [{ scale }] = useSpring(() => {
+    if (isShow) return {
+      from: { scale: 0 },
+      to: { scale: 1 },
+      config: {
+        duration: rippleProps.rippleDuration,
+        easing: easings.easeOutCubic,
+      },
+      reset: true,
+    }
+  }, [isShow])
+  
+  
+  
+  useEffect(() => {
+    const r = rippleRef.current
+    if (r) {
+      if (cancel) {
+        r.style.transition = 'none'
+        r.style.opacity = '0'
+        r.style.scale = '0'
       }
-      return {
-        dimens: { left: 0, top: 0, width: 0, height: 0 },
-        rippleDuration: 0,
-        dissolveDuration: 0,
-      }
-    }, [isShow])
-    
-    
-    
-    
-    const [{ opacity }] = useSpring(() => {
-      if (cancel) return {
-        to: { opacity: 0 },
-        reset: true,
-        immediate: true,
-      }
-      if (isShow) return {
-        from: { opacity: 0.3 },
-        to: { opacity: 1 },
-        reset: true,
-        config: {
-          duration: rippleProps.rippleDuration,
-          easing: easings.easeOutCubic,
-        },
-      }
-      if (!isShow) return {
-        to: { opacity: 0 },
-        config: {
-          duration: rippleProps.dissolveDuration,
-          easing: easings.linear,
-        },
-      }
-    }, [isShow, cancel])
-    
-    const [{ scale }] = useSpring(() => {
-      if (isShow) return {
-        from: { scale: 0 },
-        to: { scale: 1 },
-        config: {
-          duration: rippleProps.rippleDuration,
-          easing: easings.easeOutCubic,
-        },
-        reset: true,
-      }
-    }, [isShow])
-    
-    
-    
-    useEffect(() => {
-      const r = rippleRef.current
-      if (r) {
-        if (cancel) {
-          r.style.transition = 'none'
-          r.style.opacity = '0'
-          r.style.scale = '0'
-        }
-        else if (isShow) {
-          r.style.transition = 'none'
-          r.style.opacity = '0.3'
-          r.style.scale = '0'
-          setTimeout(() => {
-            r.style.transition =
-              `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
-              `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
-            r.style.opacity = '1'
-            r.style.scale = '1'
-          })
-        }
-        else if (!isShow) {
+      else if (isShow) {
+        r.style.transition = 'none'
+        r.style.opacity = '0.3'
+        r.style.scale = '0'
+        setTimeout(() => {
           r.style.transition =
-            `opacity ${rippleProps.dissolveDuration}ms linear` +
-            `,scale ${rippleProps.dissolveDuration}ms linear`
-          r.style.opacity = '0'
-        }
+            `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
+            `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
+          r.style.opacity = '1'
+          r.style.scale = '1'
+        })
       }
-    }, [isShow, cancel])
-    
-    
-    
-    return (
+      else if (!isShow) {
+        r.style.transition =
+          `opacity ${rippleProps.dissolveDuration}ms linear` +
+          `,scale ${rippleProps.dissolveDuration}ms linear`
+        r.style.opacity = '0'
+      }
+    }
+  }, [isShow, cancel])
+  
+  
+  
+  return (
+    <div //displayName={'RippleFrame'}
+      data-display-name='Ripple'
+      ref={frameRef}
+      className={clsx(RippleS6.W.els.frame.n, className)}
+      {...restProps}
+    >
+      <animated.div
+        //displayName={'RippleRipple'}
+        ref={rippleRef}
+        className={RippleS6.W.els.ripple.n}
+        style={{
+          ...rippleProps.dimens,
+          // @ts-expect-error
+          opacity,
+          scale,
+        }}
+      />
+      {/*
       <div
-        //displayName={'RippleFrame'}
-        ref={frameRef}
-        className={clsx(RippleS6.W.els.frame.n, className)}
-        {...restProps}
-      >
-        <animated.div
-          //displayName={'RippleRipple'}
-          ref={rippleRef}
-          className={RippleS6.W.els.ripple.n}
-          style={{
-            ...rippleProps.dimens,
-            // @ts-expect-error
-            opacity,
-            scale,
-          }}
-        />
-        {/*
-        <div
-          //displayName={'RippleRipple'}
-          ref={rippleRef}
-          className={RippleS6.W.els.ripple.n}
-          style={rippleProps.dimens}
-        />
-         */}
-      </div>
-    )
-  }
-)
+        //displayName={'RippleRipple'}
+        ref={rippleRef}
+        className={RippleS6.W.els.ripple.n}
+        style={rippleProps.dimens}
+      />
+       */}
+    </div>
+  )
+})
+Ripple.displayName = 'Ripple'
 export default Ripple
 
 

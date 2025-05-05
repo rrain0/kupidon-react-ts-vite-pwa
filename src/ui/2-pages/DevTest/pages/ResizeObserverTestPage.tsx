@@ -131,13 +131,13 @@ const ResizeObserverTestPage = () => {
               const bgDark =  ['#992c46', '#282c34', '#994500']
               const bg = t.type === 'dark' ? bgDark : bgLight
               return css`
-                  background: linear-gradient(
-                          to bottom right,
-                          ${bg[0]} 0%,
-                          ${bg[1]} 50%,
-                          ${bg[2]} 100%
-                  );
-                `
+                background: linear-gradient(
+                  to bottom right,
+                  ${bg[0]} 0%,
+                  ${bg[1]} 50%,
+                  ${bg[2]} 100%
+                );
+              `
             })()};
           `}
           ref={container2Ref}

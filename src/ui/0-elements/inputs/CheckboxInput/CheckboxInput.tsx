@@ -9,7 +9,7 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
 import Pu = TypeU.Pu
 import UseRipple from 'ui/0-elements/Ripple/UseRipple.tsx'
-import attrExists = TypeU.attrEmpty
+import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
@@ -50,7 +50,7 @@ const CheckboxInput = React.memo((props: CheckboxInputProps) => {
   const inputProps = {
     className: CheckboxInputStyle.W.e.input.e.name,
     type: 'checkbox',
-    [CheckboxInputStyle.W.s.error.s.name]: attrExists(hasError),
+    [CheckboxInputStyle.W.s.error.s.name]: toEmptyAttr(hasError),
     ...restProps,
   }
   const iconBoxProps = {
