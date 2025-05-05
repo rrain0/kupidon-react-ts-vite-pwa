@@ -6,7 +6,7 @@ import beastTamerNekoChan from '@im/mock/[08] Beast_Tamer.mp4_20221128_150447.11
 import blueLockIsagi from '@im/mock/[DC] Blue Lock - 19_Telegram.mp4_20230220_171742.815.jpg'
 import animeChan from '@im/mock/anime-chan.jpg'
 import banSmirks from '@im/mock/Ban smirks  Nanatsu no Taizai.jpg'
-import chanAva from '@im/mock/chan ava 6868ff87e048ba80ad88c2746c4523e3 square.png'
+import chanAva from '@im/mock/Kazusa_Blue_Archive_ava_chan_c977d4e3aa32dcc8bb1f8de8d3e07f5f.jpg'
 import cuteChanWithFlowers from '@im/mock/cute chan with flowers 118241319_p1.jpg'
 import flatOut2 from '@im/mock/FlatOut 2.jpg'
 import guyFawkesMask from '@im/mock/Guy Fawkes Mask.jpg'
@@ -42,9 +42,9 @@ import avaWomanWithCureSmile from
 
 
 
-export const MockData = {
+export namespace MockData {
   
-  account: {
+  export const account = {
     testUserAccessToken: (() => {
       // Токены созданы 2025-04-30 и будут жить 2 года (2 * 365 дней)
       // eslint-disable-next-line @stylistic/max-len
@@ -53,9 +53,9 @@ export const MockData = {
       if (Env.isProd) return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4MDkwOTYwNjYsInN1YiI6Ijc5NTQxNWRhLWEyY2ItNDM1Yi04MGVlLTk4YWYyOGIzZjBkMCIsInJvbGVzIjpbXX0.aEbvHu7P58Es1CfKKrtIZ-ys1tGAYRC5Iul5KfVlTSQ'
       return ''
     })(),
-  },
+  }
   
-  images: {
+  export const images = {
     record: {
       avaChan1, avaChan2, avaChan3,
       beastTamerNekoChan, blueLockIsagi,
@@ -77,36 +77,56 @@ export const MockData = {
       animeChan, banSmirks, guyFawkesMask,
       kakashiAndSatoru, needMoreAcid, beastTamerNekoChan,
     ],
-  },
+  }
   
-  peopleAvas: {
+  export const peopleAvas = {
     record: {
       avaCharmingWoman, avaCheerfulGirl, avaCloseUpSmilingBlonde,
       avaDarkHairedLady, avaAttractivePrettyWoman, avaBeautifulBusinessLady,
       avaWomanPosingHouse, avaStylishBrunetteGirl, avaWomanWalkingStreet,
       avaWomanWithCureSmile,
     },
-  },
+  }
   
-  date: '2000-08-23T14:33:55.609+07:00',
+  export namespace date {
+    export const someDate = '2000-08-23T14:33:55.609+07:00'
+    
+    export const date0sAgo = new Date().toISOString()
+    export const date1sAgo = new Date(+new Date() - 1000).toISOString()
+    export const date1mAgo = new Date(+new Date() - 1000 * 60).toISOString()
+    export const date8mAgo = new Date(+new Date() - 1000 * 60 * 8).toISOString()
+    export const date12mAgo = new Date(+new Date() - 1000 * 60 * 12).toISOString()
+    export const date57mAgo = new Date(+new Date() - 1000 * 60 * 57).toISOString()
+    export const date1hAgo = new Date(+new Date() - 1000 * 60 * 60).toISOString()
+    export const date17hAgo = new Date(+new Date() - 1000 * 60 * 60 * 17).toISOString()
+    export const date1dAgo = new Date(+new Date() - 1000 * 60 * 60 * 24).toISOString()
+    export const date3dAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 3).toISOString()
+    export const date1wAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 7).toISOString()
+    export const date3wAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 7 * 3).toISOString()
+    export const date1MAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 30).toISOString()
+    export const date6MAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 30 * 6).toISOString()
+    export const date2yAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 30 * 12 * 2).toISOString()
+    export const date8yAgo = new Date(+new Date() - 1000 * 60 * 60 * 24 * 30 * 12 * 8).toISOString()
+  }
   
-  profile: {
+  export const profile = {
     ava: kakashiAndSatoru,
     name: 'Сатору',
     city: 'Токио',
     birthDate: '2000-08-23T14:33:55.609+07:00',
-  },
+  }
   
-  profile2: {
+  export const profile2 = {
     ava: nextUp,
     name: 'Дмитрий',
     city: 'Иркутск',
     birthDate: '1998-02-16T03:20:36.458+08:00',
-  },
+  }
   
-  // eslint-disable-next-line @stylistic/max-len
-  dataUrlRainbowCircle: 'data:image/webp;base64,UklGRqQBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSMcAAAABgKRt27Hlzq5FdDTr1yq4gYxRC2jcjDuwbdfItm3bjfxdeQ0RMQH6NdhsCtE/Xf1vRnd1i/M3j3QwSi+BfO8fKUfQccnPIknOnkeogY3m5rEPu9R7MMNN72nlksFJXZaCX6nioMMWV/QETPmZYHLqJVxKbhsFTCagvzVGijDGlsDsNwFc50RF1t1RxXuYsiuPMRbLTzqfGboakOzGeEvjFtTByahbUgE/d/thPVWSvPOB/VogzeuHZK+tGOSt16V/hphMwfoVAFZQOCC2AAAAcAMAnQEqEAAQAAIANCWwAnS3AETVewn5RhMyE/cLRAq84OQAAP7sJjZi2vltQVBtNESasiNNPNYI+PcqyMEU4i1/XVdYjQ4vQp/F40ttvfOzsGPdXqjTNaRZUQHdP3bDduNg0gtbNHTYFYCP/VOdNoX1/+ObtPOcjPnVjeNN/yOPz99Ks7xmS516zD7AO3/4y2OPif/oef1e3R0P4sXmRdv53iiSbRLc7R71eIXE78oaxJruAAA=',
-  // eslint-disable-next-line @stylistic/max-len
-  dataUrlSmallRedDot: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==',
+  export const dataUrlRainbowCircle =
+    'data:image/webp;base64,UklGRqQBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSMcAAAABgKRt27Hlzq5FdDTr1yq4gYxRC2jcjDuwbdfItm3bjfxdeQ0RMQH6NdhsCtE/Xf1vRnd1i/M3j3QwSi+BfO8fKUfQccnPIknOnkeogY3m5rEPu9R7MMNN72nlksFJXZaCX6nioMMWV/QETPmZYHLqJVxKbhsFTCagvzVGijDGlsDsNwFc50RF1t1RxXuYsiuPMRbLTzqfGboakOzGeEvjFtTByahbUgE/d/thPVWSvPOB/VogzeuHZK+tGOSt16V/hphMwfoVAFZQOCC2AAAAcAMAnQEqEAAQAAIANCWwAnS3AETVewn5RhMyE/cLRAq84OQAAP7sJjZi2vltQVBtNESasiNNPNYI+PcqyMEU4i1/XVdYjQ4vQp/F40ttvfOzsGPdXqjTNaRZUQHdP3bDduNg0gtbNHTYFYCP/VOdNoX1/+ObtPOcjPnVjeNN/yOPz99Ks7xmS516zD7AO3/4y2OPif/oef1e3R0P4sXmRdv53iiSbRLc7R71eIXE78oaxJruAAA='
+  export const dataUrlSmallRedDot =
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='
+  
 }
 

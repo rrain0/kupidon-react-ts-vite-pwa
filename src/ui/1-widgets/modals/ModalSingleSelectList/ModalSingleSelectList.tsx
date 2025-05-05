@@ -21,7 +21,7 @@ import Callback = TypeU.Callback
 import Setter = TypeU.Setter
 import col = EmotionCommon.col
 import Pu = TypeU.Pu
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -67,11 +67,11 @@ const ModalSingleSelectList = ReactU.memo(
     const actionText = useUiValues(ActionUiText)
     
     const toggleSelected = (id: T) => {
-      if (selected === id && exists(notSelectedValue)) setSelected?.(notSelectedValue)
+      if (selected === id && isdef(notSelectedValue)) setSelected?.(notSelectedValue)
       else setSelected?.(id)
     }
     
-    const hasOnClear = exists(notSelectedValue)
+    const hasOnClear = isdef(notSelectedValue)
     const onClear = useCallback(() => {
       if (hasOnClear) setSelected?.(notSelectedValue)
     }, [hasOnClear, setSelected])
@@ -91,7 +91,7 @@ const ModalSingleSelectList = ReactU.memo(
       const v = editableValue!
       closeEdit()
       setOptionText?.({ id: v!, text: editableText })
-      // if (exists(customValue)) {
+      // if (isdef(customValue)) {
       //   if (editableText) setSelected?.(customValue)
       //   if (selected === customValue && !editableText) setSelected?.(defaultOption)
       // }

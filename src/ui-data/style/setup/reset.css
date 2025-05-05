@@ -42,24 +42,27 @@ html {
     And indicates that page can change theme by its own.
   */
   color-scheme: light dark;
-  /*min-width: 100%;
-  min-height: 100%;*/
-}
-body {
-  /*min-width: 100%;
-  min-height: 100%;*/
 }
 
-
-
-
+body { }
 
 #root {
   display: contents;
 }
 
 
-/* :where() decreases specifity */
+/* :where() decreases specifity so you can override style further locally */
+:where(#root *) {
+  display: flex;
+}
+:where(#root *)::before {
+  display: flex;
+}
+:where(#root *)::after {
+  display: flex;
+}
+
+
 /*:where(#app-frame) :where(*) {
   background: none;
 }*/

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import exists = TypeU.exists
 import ObjectMap = ObjectU.ObjectMap
 import RecordRo = TypeU.RecordRo
 
@@ -15,6 +14,8 @@ export namespace WidgetStyle {
   Has State List
   Has SINGLE Root element
   */
+  import isdef = TypeU.isdef
+  
   export class CssWidget<
     const Es extends RecordRo<string, CssWidgetElement<any, any>>,
     const S extends string,
@@ -426,7 +427,7 @@ export namespace WidgetStyle {
     // var(--prop, defaultValue);
     protected getAny(defaultValue?: string): string {
       const nameAndDefault = [this.name]
-      if (exists(defaultValue)) nameAndDefault.push(defaultValue)
+      if (isdef(defaultValue)) nameAndDefault.push(defaultValue)
       return `var(${nameAndDefault.join(', ')})`
     }
     

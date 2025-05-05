@@ -1,21 +1,20 @@
 import React from 'react'
+import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import AutoLangSettings from 'src/ui/components/AutoLangSettings/AutoLangSettings'
 import AppRouting from 'src/ui/App/AppRouting'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import contents = EmotionCommon.contents
 
 
 
 
 const AppFrame = React.memo(() => {
   return (
-    <div css={contents} id='app-frame'>
+    <Contents id='app-frame'>
     
       <AppRouting/>
       
       <AutoLangSettings/>
       
-    </div>
+    </Contents>
   )
 })
 export default AppFrame

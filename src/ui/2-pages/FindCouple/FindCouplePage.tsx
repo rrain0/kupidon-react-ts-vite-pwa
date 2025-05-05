@@ -26,7 +26,7 @@ import abs = EmotionCommon.abs
 import full = EmotionCommon.full
 import rf3 = MathU.rf3
 import Pu = TypeU.Pu
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -110,7 +110,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
         startP, startItemP, deltaP, toStartP, toStartItemP, toDeltaP,
       } = ev
       
-      if (exists(toStartP) && exists(toStartItemP) && exists(toDeltaP)) {
+      if (isdef(toStartP) && isdef(toStartItemP) && isdef(toDeltaP)) {
         const { pos0PI } = getCarouselProps({ startP, startItemP, deltaP: 0 })
         
         const { pos0PI: toPos0PI } = getCarouselProps({

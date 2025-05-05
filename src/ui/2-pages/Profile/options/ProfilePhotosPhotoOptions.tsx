@@ -5,6 +5,7 @@ import {
   newDefaultEmptyLocalMediaInArray,
   newDefaultLocalMediaInArray,
 } from 'src/ui-data/models/media/Media.ts'
+import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
@@ -118,7 +119,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                 useFsAccessApi={false}
               >
                 {({ getRootProps, getInputProps }) => (
-                  <div css={contents} {...getRootProps()}>
+                  <Contents {...getRootProps()}>
                     <input {...getInputProps()}/>
                     <Button css={ButtonS6.t(ButtonS6.S.text.rect.lg.normal)}>
                       
@@ -129,7 +130,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                         <OptionTitle>{actionText.replace}</OptionTitle>
                       </OptionContainer>
                     </Button>
-                  </div>
+                  </Contents>
                 )}
               </Dropzone>
               

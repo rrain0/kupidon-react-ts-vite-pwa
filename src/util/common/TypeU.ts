@@ -8,16 +8,22 @@ export namespace TypeU {
   export type anyval = {} | null | undefined
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
-  export type HtmlAttrEmpty = '' | undefined
   export type Sign = -1 | 0 | 1
   
   export const noop = () => { }
   export const emptyArr = []
   
+  
+  
+  export type HtmlAttrEmpty = '' | undefined
   export const attrEmpty = (value: any): HtmlAttrEmpty => value ? '' : undefined
   export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
-  export type Exists<T> = Exclude<T, empty>
+  export type HtmlDataAttrs = { [Prop in `data-${string}`]?: string | undefined }
+  
+  
+  
+  export type NonEmptyVal<T> = Exclude<T, empty>
   
   // Add Partial + Undefined
   export type PartialUndef<O extends object> = {
@@ -85,15 +91,13 @@ export namespace TypeU {
   export function isnull<T>(value: T | null): value is null {
     return value === null
   }
-  export function notnull<T, NN extends {} | undefined>(value: T | NN): value is NN {
+  export function nonnull<T, NN extends {} | undefined>(value: T | NN): value is NN {
     return value !== null
   }
-  // TODO rename it?  nonemptyval   isvaluepresent
-  export function exists<T, E extends {}>(value: T | E): value is E {
+  export function nonemptyval<T, E extends {}>(value: T | E): value is E {
     return value !== null && value !== undefined
   }
-  // TODO rename it?  emptyval
-  export function notExists<T, NE extends empty>(value: T | NE): value is NE {
+  export function emptyval<T, NE extends empty>(value: T | NE): value is NE {
     return value === null || value === undefined
   }
   export function isstring<T, S extends string>(value: T | S): value is S {
@@ -114,6 +118,9 @@ export namespace TypeU {
     return typeof value === 'function'
   }
   
+  
+  
+  /*
   const f = () => ''
   const o = { a: 1 }
   const e = {  }
@@ -125,7 +132,7 @@ export namespace TypeU {
       const b = a.a
     }
   })()
-  
+   */
   
   
   
@@ -181,7 +188,7 @@ export namespace TypeU {
   export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a === b
   
   
-  //export const mapExists = (v: any, mapper: Mapper<any>) => exists(v) ? mapper(v) : v
+  //export const mapDefined = (v: any, mapper: Mapper<any>) => isdef(v) ? mapper(v) : v
   export const mapNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
   export const mapNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
   export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r

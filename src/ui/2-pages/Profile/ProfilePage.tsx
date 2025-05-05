@@ -70,7 +70,6 @@ import row = EmotionCommon.row
 import col = EmotionCommon.col
 import abs = EmotionCommon.abs
 import arrOfIndices = ArrayU.arrOfIndices
-import exists = TypeU.exists
 import ValueOrMapper = TypeU.ValueOrMapper
 import isfunction = TypeU.isfunction
 import isdef = TypeU.isdef
@@ -444,7 +443,7 @@ const ProfilePage = React.memo(() => {
   const viewsCnt = itemsCnt
   
   const onElemSetWh = useCssWhRef()
-  const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(null, onElemSetWh)
+  const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(onElemSetWh)
   const getTrackProps = createTrackPropsGetter(itemsBoxRef)
   
   const onStart: CarouselEventCallback = () => {
@@ -489,7 +488,7 @@ const ProfilePage = React.memo(() => {
   })
   
   useEffect(() => {
-    if (exists(tabIdx)) animateTo({
+    if (isdef(tabIdx)) animateTo({
       p: getItemIProps(tabIdx).pos0P,
       noAnimation: true,
     })

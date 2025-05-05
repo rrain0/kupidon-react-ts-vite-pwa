@@ -17,7 +17,7 @@ import row = WidgetStyleCommon.row
 
 
 // TODO Style - need to extend emotion css``
-export namespace HeaderArrowS6 {
+/* export  */namespace HeaderArrowS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const buttonElems = ButtonS6.buildWidgetElems(up)

@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/ui-data/models/Option'
 import { TypeU } from 'src/util/common/TypeU'
 import Setter = TypeU.Setter
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 export const useSingleSelectOneEditableOption = <T extends string>(
@@ -31,7 +31,7 @@ export const useSingleSelectOneEditableOption = <T extends string>(
   }, [editableOptionId, options1])
   
   const defaultOption = useMemo(() => {
-    if (exists(notSelectedValue)) return notSelectedValue
+    if (isdef(notSelectedValue)) return notSelectedValue
     return options[0]?.id
   }, [options, notSelectedValue])
   

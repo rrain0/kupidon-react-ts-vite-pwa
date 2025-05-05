@@ -19,6 +19,7 @@ import {
   MediaOperation, newDefaultLocalMediaInArray,
   newDefaultMediaOperation,
 } from 'src/ui-data/models/media/Media.ts'
+import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   ImageParts,
@@ -261,7 +262,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
         {springs.map((springStyle, i) => {
           const im = images[i]
           return (
-            <div css={contents} key={im.id}>
+            <Contents key={im.id}>
               <div
                 css={css`
                   grid-area: im${i + 1};
@@ -272,7 +273,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
               >
                 
                 
-                <div css={contents}
+                <Contents
                   {...(() => {
                     const onPointerDown = (ev: React.PointerEvent) => {
                       if (ev.buttons === 1) {
@@ -318,7 +319,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                       } = getMediaUiState(im)
                       
                       return (
-                        <div css={contents} {...getRootProps()}>
+                        <Contents {...getRootProps()}>
                           <input {...getInputProps()}/>
                           {/* @ts-expect-error */}
                           <animated.label
@@ -395,12 +396,12 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                             )}
                           
                           </animated.label>
-                        </div>
+                        </Contents>
                       )
                     }}
                   </Dropzone>
                   
-                </div>
+                </Contents>
                 
                 
                 
@@ -430,7 +431,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                 
                 
               </div>
-            </div>
+            </Contents>
           )
         })}
       </div>

@@ -27,7 +27,6 @@ import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Pages } from 'ui/components/Pages/Pages'
-import exists = TypeU.exists
 import flexC = EmotionCommon.flexC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
@@ -35,10 +34,12 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import attrExists = TypeU.attrEmpty
-import notExists = TypeU.notExists
 import rf1 = MathU.rf1
 import resetH = EmotionCommon.resetH
 import rowE = EmotionCommon.rowE
+import isdef = TypeU.isdef
+import isnull = TypeU.isnull
+import isundef = TypeU.isundef
 
 
 
@@ -175,17 +176,17 @@ const MbtiTestingPage = React.memo(() => {
     let firstSince: number | undefined
     for (let i = 0; i < totalCnt; i++) {
       const ai = answers[i]
-      if (notExists(ai)) {
-        if (notExists(first)) first = i
-        if (notExists(firstSince) && i >= since) firstSince = i
+      if (isnull(ai)) {
+        if (isundef(first)) first = i
+        if (isundef(firstSince) && i >= since) firstSince = i
       }
     }
-    if (exists(firstSince)) return firstSince
-    if (exists(first)) return first
+    if (isdef(firstSince)) return firstSince
+    if (isdef(first)) return first
     return RangeU.loop(since, [0, totalCnt])
   }
   
-  const [transition, setTransition] = useState(null as null | 'fwd' | 'back')
+  const [transition, setTransition] = useState(undefined as undefined | 'fwd' | 'back')
   const [curr, setCurr] = useState(() => getNext(
     answers, testState === 'completed' ? totalCnt - 1 : 0
   ))
@@ -200,7 +201,7 @@ const MbtiTestingPage = React.memo(() => {
       setCurr(next)
       setTransition('back')
     }
-    else setTransition(null)
+    else setTransition(undefined)
   }
   
   const fwd = () => {
@@ -264,7 +265,7 @@ const MbtiTestingPage = React.memo(() => {
               `transform ${transitionTime}ms ease-in, opacity ${transitionTime}ms ease-in`
             el.style.transform = 'translateX(0)'
             el.style.opacity = '1'
-            setTransition(null)
+            setTransition(undefined)
           })
         })
       })
@@ -294,9 +295,9 @@ const MbtiTestingPage = React.memo(() => {
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
           <Pages.ContentColSm css={css`gap: 30px;`}>
-            {exists(displayed) && (
+            {isdef(displayed) && (
               <div
-                data-display-name="MbtiPage"
+                data-display-name='MbtiPage'
                 css={css`${col}`}
               >
                 

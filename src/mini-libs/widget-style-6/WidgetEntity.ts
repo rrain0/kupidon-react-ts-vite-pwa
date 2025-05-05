@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { StyleValue } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import RecordRo = TypeU.RecordRo
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -120,7 +120,7 @@ export class WidgetProp<const out Vs extends string = any> {
   // var(--prop, defaultValue)
   var(defaultValue?: string): string {
     const nameAndDefault = [this.prop]
-    if (exists(defaultValue)) nameAndDefault.push(defaultValue)
+    if (isdef(defaultValue)) nameAndDefault.push(defaultValue)
     return `var(${nameAndDefault.join(', ')})`
   }
 }

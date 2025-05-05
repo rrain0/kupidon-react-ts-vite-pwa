@@ -47,8 +47,7 @@ export namespace HeaderArrowS {
       }
       ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
         ${SvgIconS6.W.els.icon.ps!.color.n}: ${t.page.ct};
-        min-height: 26px;
-        min-width: 26px;
+        flex-shrink: 0;
         height: 26px;
         width: 26px;
       }
@@ -70,10 +69,32 @@ export namespace HeaderArrowS {
       line-height: normal;
     }
     ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
-      min-height: 24px;
-      min-width: 24px;
       height: 24px;
       width: 24px;
+    }
+  `
+  
+  
+  export const secondary = (t: AppTheme.Theme) => css`
+    ${Part.base(t)};
+    ${W.u({ e: 'button', s: 'normal' }).thisUse} {
+      width: fit-content;
+      gap: 2px;
+    }
+    ${W.u({ e: 'header', s: 'normal' }).thisUse} {
+      height: fit-content;
+      ${Txt.s17};
+      // TODO Theme
+      color: #858585;
+      align-self: center;
+      text-align: center;
+      position: relative;
+    }
+    ${W.u({ e: 'arrow', s: 'normal' }).thisUse} {
+      // TODO Theme
+      ${SvgIconS6.W.els.icon.ps!.color.n}: #858585;
+      height: 18px;
+      width: 18px;
     }
   `
   

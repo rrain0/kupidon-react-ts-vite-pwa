@@ -108,7 +108,7 @@ const ProfileSummaryPage = React.memo(() => {
     <>
     
       <PageLayout col>
-        <PageContentLayout colSm styleForInner={{ gap: 16 }}>
+        <PageContentLayout colSm styleInner={{ gap: 16 }}>
           
           <InfoCard col>
             

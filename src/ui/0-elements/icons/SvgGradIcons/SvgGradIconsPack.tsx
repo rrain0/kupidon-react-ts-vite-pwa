@@ -5,7 +5,6 @@ import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import falsyToUndef = TypeU.falsyToUndef
-import exists = TypeU.exists
 
 
 // UI Icons
@@ -72,6 +71,7 @@ export namespace SvgGradIconsPack {
 
   // Base interface for gradient svg icons
   
+  import isundef = TypeU.isundef
   type BaseGradSvgIconCustomProps = Pu<{
     color0: string
     color1: string
@@ -111,8 +111,8 @@ export namespace SvgGradIconsPack {
     return (
       <SvgComponent
         css={css`
-          width:  ${falsyToUndef(!exists(w)) && sizeProp.var()};
-          height: ${falsyToUndef(!exists(h)) && sizeProp.var()};
+          width:  ${falsyToUndef(isundef(w)) && sizeProp.var()};
+          height: ${falsyToUndef(isundef(h)) && sizeProp.var()};
           //max-width: 100%;
           //max-height: 100%;
           ${color0Prop.n}: ${color0 || color0Prop.var('black')};

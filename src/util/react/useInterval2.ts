@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Callback = TypeU.Callback
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -14,7 +14,7 @@ export const useInterval2 = (
     if (!disabled) {
       let intervalId
       let timeoutId
-      if (exists(offset)) {
+      if (isdef(offset)) {
         timeoutId = setTimeout(() => {
           callback()
           intervalId = setInterval(callback, interval)

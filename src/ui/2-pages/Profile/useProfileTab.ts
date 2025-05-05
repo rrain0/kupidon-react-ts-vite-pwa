@@ -8,7 +8,7 @@ import full = RouteBuilder.full
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
-import notExists = TypeU.notExists
+import isundef = TypeU.isundef
 
 
 
@@ -63,7 +63,7 @@ export const useProfileTab = () => {
   useEffect(() => setNewTabI(tabI), [tabI])
   
   useEffect(() => {
-    if (notExists(newTabI)) return
+    if (isundef(newTabI)) return
     const tabData = getTabByIndex(newTabI)
     if (!tabData) return
     navigate(

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { TypeU } from '@util/common/TypeU.ts'
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -20,7 +20,7 @@ export class CssProp {
   // var(--prop, defaultValue)
   useGet(defaultValue?: string): string {
     const nameAndDefault = [this.name]
-    if (exists(defaultValue)) nameAndDefault.push(defaultValue)
+    if (isdef(defaultValue)) nameAndDefault.push(defaultValue)
     return `var(${nameAndDefault.join(', ')})`
   }
   

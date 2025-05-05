@@ -5,7 +5,6 @@ import { AxiosConfig } from 'src/api/AxiosConfig.ts'
 import commonAxiosConfig = AxiosConfig.commonAxiosConfig
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Callback1 = TypeU.Callback1
-import exists = TypeU.exists
 
 
 
@@ -23,6 +22,7 @@ export namespace FileU {
    */
   
   
+  import isdef = TypeU.isdef
   export const fetchToBlob = async (
     url: string,
     {
@@ -34,7 +34,7 @@ export namespace FileU {
       responseType: 'blob',
       onDownloadProgress: progressEvent => {
         const p = progressEvent.progress
-        onProgress?.( exists(p) ? p * 100 : p )
+        onProgress?.( isdef(p) ? p * 100 : p )
       },
     }
     

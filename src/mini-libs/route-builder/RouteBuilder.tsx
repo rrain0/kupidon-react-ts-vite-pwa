@@ -5,7 +5,6 @@ import ObjectValues = ObjectU.ObjectValues
 import ObjectKeysType = ObjectU.ObjectKeysType
 import ObjectEntries = ObjectU.ObjectEntries
 import ObjectKeys = ObjectU.ObjectKeys
-import exists = TypeU.exists
 
 
 
@@ -13,6 +12,7 @@ export namespace RouteBuilder {
   
   
   // null | undefined | '' for the first path means root
+  import isdef = TypeU.isdef
   export const pathConcat = (...paths: Array<string | empty>): string => {
     let result = paths[0] ?? ''
     for (let i = 1; i < paths.length; i++) {
@@ -129,7 +129,7 @@ export namespace RouteBuilder {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamNames.includes(n)) {
               if (v === null) delete newParams[this[params]![n]]
-              if (exists(v)) newParams[this[params]![n]] = v
+              else if (isdef(v)) newParams[this[params]![n]] = v
             }
           })
         }
@@ -137,7 +137,7 @@ export namespace RouteBuilder {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamPaths.includes(n)) {
               if (v === null) delete newParams[n]
-              if (exists(v)) newParams[n] = v
+              else if (isdef(v)) newParams[n] = v
             }
           })
         }
@@ -149,7 +149,7 @@ export namespace RouteBuilder {
         else if (type === 'anyPathParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (v === null) delete newParams[n]
-            if (exists(v)) newParams[n] = v
+            else if (isdef(v)) newParams[n] = v
           })
         }
       }

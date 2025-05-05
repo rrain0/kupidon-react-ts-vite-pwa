@@ -89,7 +89,7 @@ function isWindow<T extends anyval>(view: T): view is T & Window {
 }
 
 
-export const getViewProps = (view: HTMLElement | Window = window) => new ViewProps(view)
+export const getViewProps = (view: HTMLElement | Window) => new ViewProps(view)
 
 
 

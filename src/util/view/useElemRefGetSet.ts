@@ -7,10 +7,11 @@ import Getter = TypeU.Getter
 
 
 
-export const useElemRefGetSet = <T = HTMLDivElement>(
-  initialValue: T | null = null,
+export const useElemRefGetSet = <T extends HTMLElement = HTMLDivElement>(
   onSet?: Callback1<T | null>,
+  initialValue: T | null = null,
 ) => {
-  return useRefGetSet(initialValue, onSet) as
-    [Getter<T | null>, Setter<T | null>, React.RefObject<T | null>]
+  return useRefGetSet(initialValue, onSet) as [
+    Getter<T | null>, Setter<T | null>, React.RefObject<T | null>
+  ]
 }

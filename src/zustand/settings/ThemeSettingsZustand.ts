@@ -4,8 +4,8 @@ import { DefaultDarkTheme, DefaultLightTheme } from 'src/ui-data/theme/ThemeColl
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject
-import exists = TypeU.exists
-import notExists = TypeU.notExists
+import nonemptyval = TypeU.nonemptyval
+import emptyval = TypeU.emptyval
 
 
 
@@ -15,7 +15,7 @@ const zustandLsName = 'zustandThemeSettings'
 
 const recoilLsName = 'themeSettings'
 // To trigger Zustand update from Recoil to Zustand
-if (notExists(localStorage.getItem(zustandLsName)) && exists(localStorage.getItem(recoilLsName))) {
+if (emptyval(localStorage.getItem(zustandLsName)) && nonemptyval(localStorage.getItem(recoilLsName))) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -48,7 +48,7 @@ export const useThemeSettingsZustand = create<ThemeSettingsZustand>()(persist(
       if (persistedVersion <= 0) {
         const oldRaw = localStorage.getItem(recoilLsName)
         localStorage.removeItem(recoilLsName)
-        const old = exists(oldRaw) ? JSON.parse(oldRaw) : undefined
+        const old = nonemptyval(oldRaw) ? JSON.parse(oldRaw) : undefined
         if (isobject(old)) {
           persisted = old
         }

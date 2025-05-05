@@ -18,14 +18,15 @@ import CssValue = CssParserU.CssValue
 import PartialUndef = TypeU.PartialUndef
 import Setter = TypeU.Setter
 import findLastBy3 = ArrayU.findLastBy3
-import exists = TypeU.exists
+import nonemptyval = TypeU.nonemptyval
 import findBy3 = ArrayU.findBy3
 import Callback = TypeU.Callback
 import lastIndex = ArrayU.lastI
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
-import notExists = TypeU.notExists
+import emptyval = TypeU.emptyval
 import Defined = TypeU.Defined
+import isdef = TypeU.isdef
 
 
 
@@ -191,7 +192,7 @@ export const useBottomSheet = (
   }, [computedSheetDimens, ...snapPoints])
   
   // if sheet can be opened, then realFirstOpenIdx!==null
-  const realFirstOpenIdx = useMemo<number|null>(() => {
+  const realFirstOpenIdx = useMemo<number | null>(() => {
     const f = findBy(snapPointsPx, elem => elem > 0)
     if (!f.isFound) return null
     return f.index
@@ -247,7 +248,7 @@ export const useBottomSheet = (
   ) => {
     const duration = function() {
       //console.log('lastSpeed',lastSpeed)
-      if (notExists(lastSpeed)) return animationDuration
+      if (emptyval(lastSpeed)) return animationDuration
       const startH = sheetSpring.height.get()
       sheetSpring.height.set(startH)
       const pathPercent = pathProgressPercent(startH, endH)
@@ -281,7 +282,7 @@ export const useBottomSheet = (
   const reactOnState = () => {
     if (!isReady) return
     
-    const canOpen = exists(realDefaultOpenIdx)
+    const canOpen = nonemptyval(realDefaultOpenIdx)
     const canClose = newCloseable
     
     const currState = prevState
@@ -370,7 +371,7 @@ export const useBottomSheet = (
       return dragStartRef.current.lastSpeed
     }()
     const toFreeHeight = function() {
-      if (notExists(toOpenSnap)) return false
+      if (emptyval(toOpenSnap)) return false
       if (snapPoints[toOpenSnap] !== 'free') return false
       return RangeU.has(
         sheetSpring.height.get(),
@@ -613,13 +614,13 @@ function calculateSnapPointsPx(
       
       const left = findLastBy3({
         arr: snapPointsPx,
-        filter: elem => exists(elem),
+        filter: elem => isdef(elem),
         startIdx: cssValueI - 1,
         orElse: Number.NEGATIVE_INFINITY,
       }).elem as number
       const right = findBy3({
         arr: snapPointsPx,
-        filter: elem => exists(elem),
+        filter: elem => isdef(elem),
         startIdx: cssValueI + 1,
         orElse: Number.POSITIVE_INFINITY,
       }).elem as number

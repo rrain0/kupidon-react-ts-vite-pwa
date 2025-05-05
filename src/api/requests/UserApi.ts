@@ -17,7 +17,6 @@ import NoUserResponseError = ApiUtils.NoUserResponseError
 import PartialUndef = TypeU.PartialUndef
 import fetchToBlob = FileU.fetchToBlob
 import Callback1 = TypeU.Callback1
-import exists = TypeU.exists
 
 
 
@@ -25,6 +24,7 @@ import exists = TypeU.exists
 export namespace UserApi {
   
   
+  import isdef = TypeU.isdef
   export type CurrentUserSuccessData = {
     user: CurrentUser
   }
@@ -125,7 +125,7 @@ export namespace UserApi {
     const config: AxiosRequestConfig = {
       onUploadProgress: progressEvent => {
         const p = progressEvent.progress
-        options?.onProgress?.( exists(p) ? p * 100 : p )
+        options?.onProgress?.( isdef(p) ? p * 100 : p )
       },
     }
     const ctrl = options?.abortCtrl

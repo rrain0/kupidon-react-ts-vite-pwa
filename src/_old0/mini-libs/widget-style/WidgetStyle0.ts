@@ -6,7 +6,6 @@ import PartialUndef = TypeU.PartialUndef
 import isObject = TypeU.isobject
 import isstring = TypeU.isstring
 import ValueOrArr = ArrayU.ValueOrArr
-import exists = TypeU.exists
 import ObjectMap = ObjectU.ObjectMap
 import RecordRo = TypeU.RecordRo
 
@@ -20,6 +19,8 @@ export namespace WidgetStyle0 {
   Has State List
   Has SINGLE Root element
   */
+  import isdef = TypeU.isdef
+  
   export class CssWidget<
     const E extends string,
     const S extends string,
@@ -571,7 +572,7 @@ export namespace WidgetStyle0 {
     }
     varAny(defaultValue?: string): string {
       const nameAndDefault = [this.name]
-      if (exists(defaultValue)) nameAndDefault.push(defaultValue)
+      if (isdef(defaultValue)) nameAndDefault.push(defaultValue)
       return `var(${nameAndDefault.join(', ')})`
     }
     

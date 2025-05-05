@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import PartialUndef = TypeU.PartialUndef
@@ -42,7 +43,7 @@ const DragDetector = React.memo((props: DragDetectorProps) => {
   
   
   return (
-    <div css={contents}
+    <Contents
       {...getRootProps()}
       /* onDragOver={ev=>{
         console.log('onDragOver',ev)
@@ -53,7 +54,7 @@ const DragDetector = React.memo((props: DragDetectorProps) => {
       }} */
     >
       {props.children}
-    </div>
+    </Contents>
   )
 })
 export default DragDetector

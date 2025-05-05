@@ -1,6 +1,7 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import falsy = TypeU.falsy
 import isnumber = TypeU.isnumber
+import isdef = TypeU.isdef
 
 
 
@@ -8,7 +9,6 @@ import isnumber = TypeU.isnumber
 export namespace CssU {
   
   
-  import isdef = TypeU.isdef
   export type CssColor = string
   export type CssLength = number | string
   

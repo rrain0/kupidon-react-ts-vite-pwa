@@ -49,6 +49,9 @@ export namespace WidgetStyleCommon {
   export const imgCoverCenter: WidgetStyleObj = {
     objectFit: 'cover', objectPosition: 'center',
   }
+  export const round: WidgetStyleObj = {
+    borderRadius: 999999,
+  }
   
   
   export const noBorderOutlineBoxShadow: WidgetStyleObj = {

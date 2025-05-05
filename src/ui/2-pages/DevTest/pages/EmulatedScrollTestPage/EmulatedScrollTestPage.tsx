@@ -41,11 +41,11 @@ const EmulatedScrollTestPage = React.memo(() => {
   })
   
   
-  const [getFrame, setFrame, frameRef] = useElemRefGetSet(null, elem => {
+  const [getFrame, setFrame, frameRef] = useElemRefGetSet(elem => {
     frameResizeRef(elem)
     if (elem) setGetFrameH(() => getViewProps(elem).h)
   })
-  const [getContent, setContent, contentRef] = useElemRefGetSet(null, elem => {
+  const [getContent, setContent, contentRef] = useElemRefGetSet(elem => {
     contentResizeRef(elem)
     if (elem) setGetContentH(() => getViewProps(elem).h)
   })

@@ -12,8 +12,8 @@ import Callback = TypeU.Callback
 import noop = TypeU.noop
 import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
-import exists = TypeU.exists
 import Pu = TypeU.Pu
+import isdef = TypeU.isdef
 
 
 
@@ -81,7 +81,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
     this.resetState()
     
     this.startTime = getTime()
-    if (exists(animation.startTime)) {
+    if (isdef(animation.startTime)) {
       this.startTime = animation.startTime
     }
     this.startValue = animation.startValue

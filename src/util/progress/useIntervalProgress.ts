@@ -4,7 +4,7 @@ import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import Getter = TypeU.Getter
 import Pu = TypeU.Pu
-import exists = TypeU.exists
+import isdef = TypeU.isdef
 
 
 
@@ -56,7 +56,7 @@ export const useIntervalProgress = ({
     
     const { start, len } = getIntervalProps()
     
-    if (exists(value) || exists(valueProgress)) {
+    if (isdef(value) || isdef(valueProgress)) {
       setIntervalStartProgress(0)
       setIntervalDeltaProgress(0)
       

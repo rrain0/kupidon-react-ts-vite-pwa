@@ -1,14 +1,16 @@
 import styled from '@emotion/styled'
 import { CssU } from '@util/css/CssU.ts'
+import { withDefaults } from '@util/react/withDefaults.tsx'
 import React, { CSSProperties } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
-import full = EmotionCommon.full
+import Grow = ReactU.Grow
 
 
 
@@ -24,22 +26,21 @@ export type PageContentLayoutProps = Pu<{
   noInsetsForTransBars: boolean
   noInsets: boolean
   
-  classNameForInner: string
-  styleForInner: CSSProperties
-}> & ClassStyle & Children
+  classNameInner: string
+  styleInner: CSSProperties
+}> & Grow & ClassStyle & Children
 
 export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const {
     className, style, children,
+    classNameInner, styleInner,
     
     col, colSm, full,
+    grow,
     
     noInsetsForFilledBars,
     noInsetsForTransBars,
     noInsets,
-    
-    classNameForInner,
-    styleForInner,
   } = props
   
   /* const type = (() => {
@@ -75,7 +76,7 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   }
   
   return (
-    <Col
+    <Col grow={grow}
       data-display-name='PageContentLayout'
       className={className}
       style={{
@@ -85,12 +86,12 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
       }}
     >
       {colSm && (
-        <ColSm
+        <ColSm grow={grow}
           data-display-name='ColInner'
-          className={classNameForInner}
+          className={classNameInner}
           style={{
             ...pv, ...ph,
-            ...styleForInner,
+            ...styleInner,
           }}
         >
           {children}
@@ -107,7 +108,7 @@ export default PageContentLayout
 
 
 
-const ContentCol = styled.div`
+const ContentCol = styled(Flex)`
   position: relative;
   width: 100%;
   min-width: 0;
@@ -116,7 +117,7 @@ const ContentCol = styled.div`
   gap: 10px;
 `
 
-const ColSm = styled.div`
+const ColSm = styled(Flex)`
   position: relative;
   width: 100%;
   max-width: ${colSmWMax}px;
@@ -127,10 +128,11 @@ const ColSm = styled.div`
   align-items: stretch;
 `
 
-const ContentFull = styled.div`
-  position: relative;
-  ${full};
-`
+const ContentFull = withDefaults({
+  full: true,
+}, styled(Flex)({
+  position: 'relative',
+}))
 
 
 

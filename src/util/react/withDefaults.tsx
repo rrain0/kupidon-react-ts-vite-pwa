@@ -1,10 +1,7 @@
-import styled from '@emotion/styled'
-import isagi from '@im/mock/Isagi - Blue Lock 250d5ed0b02d009af2f7fa46732b468b.jpg'
-import nextUp from '@im/mock/NEXT UP.jpg'
 import React from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialDefaults = TypeU.PartialDefaults
-
+import HtmlDataAttrs = TypeU.HtmlDataAttrs
 
 
 
@@ -13,7 +10,7 @@ import PartialDefaults = TypeU.PartialDefaults
 
 export const withDefaults = <
   P extends object = object,
-  DefaultP extends Partial<P> = Partial<P>,
+  DefaultP extends Partial<P> & HtmlDataAttrs = Partial<P> & HtmlDataAttrs,
   // Provided default props become optional
   OutP extends PartialDefaults<P, DefaultP> = PartialDefaults<P, DefaultP>,
 >(

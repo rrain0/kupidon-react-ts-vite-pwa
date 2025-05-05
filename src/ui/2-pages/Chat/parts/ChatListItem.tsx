@@ -50,7 +50,7 @@ const outerUiValues = {
 } satisfies UiValues
 
 
-export type ChatListItemProps = {
+export type ChatListItemData = {
   id: string
   ava?: string | undefined
   online?: boolean | undefined
@@ -63,7 +63,10 @@ export type ChatListItemProps = {
   order?: number | undefined
   lastMsgStatus?: 'sending' | 'sent' | 'read' | 'error' | undefined
   isWriting?: boolean | undefined
-} & ClassStyle
+}
+
+
+export type ChatListItemProps = ChatListItemData & ClassStyle
 
 export const ChatListItem = React.memo((props: ChatListItemProps) => {
   const {

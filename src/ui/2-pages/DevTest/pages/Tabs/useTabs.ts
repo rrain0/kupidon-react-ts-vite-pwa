@@ -16,9 +16,10 @@ import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import Setter = TypeU.Setter
 import Callback = TypeU.Callback
 import findLastBy = ArrayU.findLastBy
-import notExists = TypeU.notExists
+import emptyval = TypeU.emptyval
 import last = ArrayU.last
 import Pu = TypeU.Pu
+import isundef = TypeU.isundef
 
 
 
@@ -140,7 +141,7 @@ export const useTabs = (
   
   // 0..+inf
   const realDefaultOpenIdx = useMemo(() => {
-    if (notExists(options.defaultOpenIdx)) return DefaultTabIdx
+    if (isundef(options.defaultOpenIdx)) return DefaultTabIdx
     return RangeU.clamp(
       options.defaultOpenIdx, [0, lastTabIdx]
     )
@@ -175,7 +176,7 @@ export const useTabs = (
   ) => {
     const duration = function() {
       //console.log('lastSpeed',lastSpeed)
-      if (notExists(lastSpeed)) return animationDuration
+      if (emptyval(lastSpeed)) return animationDuration
       const startScrollLeft = tabContainerSpring.scrollLeft.get()
       const pathPercent = pathProgressPercent(startScrollLeft, endScrollLeft)
       return pathPercent / lastSpeed * 1.2 * 1000

@@ -17,10 +17,10 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import { useEvent } from 'src/util/react/useEvent.ts'
 import Pu = TypeU.Pu
-import exists = TypeU.exists
 import rf3 = MathU.rf3
 import Getter = TypeU.Getter
 import mod = MathU.mod
+import isdef = TypeU.isdef
 
 
 
@@ -249,24 +249,24 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }: AnimateToParams) => {
     
     ;[fromStartP, fromDeltaP, fromP] = (() => {
-      if (exists(fromStartP) && exists(fromDeltaP)) {
+      if (isdef(fromStartP) && isdef(fromDeltaP)) {
         return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
       }
-      if (exists(fromP) && exists(fromStartP)) {
+      if (isdef(fromP) && isdef(fromStartP)) {
         return [fromStartP, rf3(fromP - fromStartP), fromP]
       }
-      if (exists(fromP) && exists(fromDeltaP)) {
+      if (isdef(fromP) && isdef(fromDeltaP)) {
         return [rf3(fromP - fromDeltaP), fromDeltaP, fromP]
       }
-      if (exists(fromDeltaP)) {
+      if (isdef(fromDeltaP)) {
         const fromStartP = getStartProgress()
         return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
       }
-      if (exists(fromStartP)) {
+      if (isdef(fromStartP)) {
         const fromDeltaP = getDeltaProgress()
         return [fromStartP, fromDeltaP, rf3(fromStartP + fromDeltaP)]
       }
-      if (exists(fromP)) {
+      if (isdef(fromP)) {
         const fromDeltaP = rf3(mod(fromP, 100)) // nonneg
         const fromStartP = rf3(fromP - fromDeltaP)
         return [fromStartP, fromDeltaP, fromP]
@@ -290,8 +290,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     
     deltaP = (() => {
       if (autoNearest) {
-        if (exists(vel0) && vel0 >= velThresholdPx) next = true
-        else if (exists(vel0) && vel0 <= -velThresholdPx) curr = true
+        if (isdef(vel0) && vel0 >= velThresholdPx) next = true
+        else if (isdef(vel0) && vel0 <= -velThresholdPx) curr = true
         else if (fromPCurr >= 50) {
           next = true
           vel0 = undefined
@@ -304,8 +304,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       if (next) return rf3(fromPBase + 100 - fromStartP)
       if (prev) return rf3(fromPBase - 100 - fromStartP)
       if (curr) return rf3(fromPBase - fromStartP)
-      if (exists(deltaP)) return deltaP
-      if (exists(p)) return rf3(p - fromStartP)
+      if (isdef(deltaP)) return deltaP
+      if (isdef(p)) return rf3(p - fromStartP)
       return fromDeltaP
     })()
     p = rf3(fromStartP + deltaP)
@@ -342,9 +342,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
           animationFun: createSpringAnimation({
             //mass: 1, tension: 170, friction: 10,
             mass: 1, tension: 120, friction: 7,
-            ...exists(mass) && { mass },
-            ...exists(tension) && { tension },
-            ...exists(friction) && { friction },
+            ...isdef(mass) && { mass },
+            ...isdef(tension) && { tension },
+            ...isdef(friction) && { friction },
             
             //mass: 5, tension: 60, friction: 5,
             

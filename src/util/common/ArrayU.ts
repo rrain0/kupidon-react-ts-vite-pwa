@@ -6,10 +6,9 @@ import defaultComparatorEq = TypeU.defaultComparatorEq
 import defaultFilter = TypeU.defaultFilter
 import Mapper = TypeU.Mapper
 import Filter = TypeU.Filter
-import exists = TypeU.exists
 import MergerIndexed = TypeU.MergerIndexed
 import CombinerIndexed = TypeU.CombinerIndexed
-import Exists = TypeU.Exists
+import NonEmptyVal = TypeU.NonEmptyVal
 import isArray = TypeU.isArray
 import Sign = TypeU.Sign
 
@@ -19,6 +18,7 @@ import Sign = TypeU.Sign
 export namespace ArrayU {
   
   
+  import isdef = TypeU.isdef
   export const arrOfUndef = (len = 0): undefined[] => {
     return Array(len).fill(undefined)
   }
@@ -193,7 +193,7 @@ export namespace ArrayU {
   export type NonEmptyArr<T> = [T, ...T[]]
   
   export type ArrayOfNonEmpty<A extends Array<any>> = A extends Array<infer E>
-    ? Array<Exists<E>>
+    ? Array<NonEmptyVal<E>>
     : never
   
   export type ValueOrArr<T> = T | T[]
@@ -334,7 +334,7 @@ export namespace ArrayU {
   ): [DiffObj<T1, T2>[], DiffObj<T2, T1>[]] => {
     const [fwd, back] = diff(arr1, arr2, comparator)
     const fwdObjs: DiffObj<T1, T2>[] = fwd.map((to, from) => {
-      if (exists(to)) return {
+      if (isdef(to)) return {
         fromIdx: from,
         fromElem: arr1[from],
         toIsFound: true,
@@ -358,7 +358,7 @@ export namespace ArrayU {
       }
     })
     const backObjs: DiffObj<T2, T1>[] = back.map((to, from) => {
-      if (exists(to)) return {
+      if (isdef(to)) return {
         fromIdx: from,
         fromElem: arr2[from],
         toIsFound: true,
@@ -396,7 +396,7 @@ export namespace ArrayU {
     const newArr2 = [...arr2]
     const [fwd] = diff(arr1, arr2, comparator)
     fwd.forEach((to, from) => {
-      if (exists(to)) {
+      if (isdef(to)) {
         const [newElem1, newElem2] = merger(arr1[from], arr2[to], from, to)
         newArr1[from] = newElem1
         newArr2[to] = newElem2
@@ -415,7 +415,7 @@ export namespace ArrayU {
     const newArr1 = [...arr1]
     const [fwd] = diff(arr1, arr2, comparator)
     fwd.forEach((to, from) => {
-      if (exists(to)) {
+      if (isdef(to)) {
         const newElem1 = combiner(arr1[from], arr2[to], from, to)
         newArr1[from] = newElem1
       }
