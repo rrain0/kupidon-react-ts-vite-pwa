@@ -30,6 +30,7 @@ export type FlexShortProps = Pu<{
   
   center: boolean // true => { alignItems: 'center', justifyContent: 'center' }
   
+  basis: number | string
   g: number | string
   order: number | string
   grow: number | string | boolean // true => 1
@@ -46,7 +47,7 @@ export const processFlexShortProps = <P extends object>(
     w, h, wFull, hFull, full, wMin, hMin, wMax, hMax,
     row, rowRev, col, colRev, wrap, wrapRev,
     align, alignCt, alignSelf, justifyCt, center,
-    g, order, grow, shrink, noShrink,
+    basis, g, order, grow, shrink, noShrink,
     ...rest
   } = props
   
@@ -76,6 +77,7 @@ export const processFlexShortProps = <P extends object>(
     justifyContent: mapBool(justifyCt, 'center'),
     ...center && { alignItems: 'center', justifyContent: 'center' },
     
+    flexBasis: basis,
     gap: g,
     order: order,
     flexGrow: mapBool(grow, 1),

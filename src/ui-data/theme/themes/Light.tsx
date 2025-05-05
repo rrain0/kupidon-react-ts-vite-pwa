@@ -199,9 +199,9 @@ export const Light = {
   
   
   ripple: {
-    ct:              '#ffffff55',
-    ctOnLight:       '#282c3422',
-    ctOnTrans:       '#66666633',
+    ct:              '#ffffff44',
+    ctOnLight:       '#282c3419',
+    ctOnTrans:       '#282c3411',
   },
   error: {
     ct:        '#e74c3c',

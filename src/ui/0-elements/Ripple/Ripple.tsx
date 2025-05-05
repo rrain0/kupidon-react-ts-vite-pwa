@@ -108,22 +108,21 @@ const Ripple = React.memo((props: RippleProps) => {
       // 'show' начинает показывать риппл или означает, что он сейчас показывается
       else if (state === 'show') {
         r.style.transition =
-          `opacity ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}` +
-          `,scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
+          `scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
         r.style.opacity = '1'
         r.style.scale = '1'
       }
       // 'hide' прячет текущий риппл, делая прозрачным, показ можно возобновить по 'resume'
       else if (state === 'hide' || state === 'end') {
         r.style.transition =
-          `opacity ${rippleProps.dissolveDuration}ms linear` +
+          `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeInQuart}` +
           `,scale ${rippleProps.dissolveDuration}ms linear`
         r.style.opacity = '0'
       }
       // 'resume' возобновляет показ риппл или означает, что он сейчас показывается
       else if (state === 'resume') {
         r.style.transition =
-          `opacity ${rippleProps.dissolveDuration}ms linear` +
+          `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeOutExpo}` +
           `,scale ${rippleProps.dissolveDuration}ms linear`
         r.style.opacity = '1'
       }

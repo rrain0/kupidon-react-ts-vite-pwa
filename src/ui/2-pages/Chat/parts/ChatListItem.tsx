@@ -106,9 +106,9 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
       
       <Ava id={id} ava={ava} online={online}/>
       
-      <Flex col grow>
+      <Flex col grow alignSelf='stretch'>
         
-        <Flex row align grow>
+        <Flex row align basis='50%'>
           <Flex><NameBox><Name>{name}</Name></NameBox></Flex>
           <Flex row align noShrink>
             <Gap wMin={8} grow/>
@@ -131,7 +131,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
           </Flex>
         </Flex>
         
-        <Flex row align grow>
+        <Flex row align basis='50%'>
           <Flex row align grow>
             {isWriting && <IsWritingFiveDots css={isWritingFiveDotsS}/>}
             {!isWriting && (
@@ -164,7 +164,7 @@ export default ChatListItem
 const chatItemButtonS: AppWidgetStyle = t => [
   ButtonS6.S.text.rect.lg.normal, {
     button: {
-      w: undefined, h: 76, r: 20, ...virtualOffset({ h: 8, v: 6 }),
+      w: undefined, h: 72, r: 20, ...virtualOffset({ h: 8, v: 6 }),
       textAlign: 'start',
     },
   },
@@ -249,6 +249,8 @@ const Msg = styled.div`
   color: black;
 `
 const Unread = styled(Flex)<Pu<{ secondary: boolean }>>`
+  //margin-top: -4px;
+  //margin-bottom: -4px;
   min-width: 28px;
   height: 28px;
   border-radius: 14px;
