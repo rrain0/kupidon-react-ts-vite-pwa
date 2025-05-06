@@ -61,175 +61,175 @@ export namespace AppTheme {
     }
     
     page: {
-      bg:           string
-      bgGrad:       string[]
-      ct:           string
-      ct2:          string
-      ct3:          string
-      ctSec:        string
-      ctSec2:       string
+      bg:            string
+      bgGrad:        string[]
+      ct:            string
+      ct2:           string
+      ct3:           string
+      ctSec:         string
+      ctSec2:        string
     }
     statusBar: {
-      bg:           string
+      bg:            string
     }
     nav: {
-      bg:           string
+      bg:            string
     }
     
     
     
     boxDefault: {
-      bg:           string
-      bg2:          string
+      bg:            string
+      bg2:           string
       
-      ct:           string
-      ct2:          string
-      ct3:          string
-      ct4:          string
-      ct5:          string
-      ct6:          string
-      ct7:          string
+      ct:            string
+      ct2:           string
+      ct3:           string
+      ct4:           string
+      ct5:           string
+      ct6:           string
+      ct7:           string
       
-      ctSec:        string
-      ctSec4:       string
-      ctSec5:       string
-      ctSec6:       string
+      ctSec:         string
+      ctSec4:        string
+      ctSec5:        string
+      ctSec6:        string
       
-      cta2:         string
-      bga4:         string
-      cta4:         string
+      cta2:          string
+      bga4:          string
+      cta4:          string
     }
     // normal button
     boxNormal: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
+      bg:            string
+      ct:            string
+      bgFc:          string
+      ctFc:          string
     }
     boxNormalCt: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxNormal2: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxNormal3: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxNormal4: {
-      bg:           string
-      ct:           string
-      shadow:       string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      shadow:        string
+      bgf:           string
+      ctf:           string
     }
     boxAccent: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxAccentCt: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
-      ctRipple:     string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
+      ctRipple:      string
     }
     boxAccent2: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
+      bg:            string
+      ct:            string
+      bgFc:          string
+      ctFc:          string
     }
     boxAccent3: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
+      bg:            string
+      ct:            string
+      bgFc:          string
+      ctFc:          string
     }
     boxAccent4: {
-      bg:           string
-      ct:           string
+      bg:            string
+      ct:            string
     }
     boxAccentCt4: {
-      bg:           string
-      ct:           string
-      ctGrad:       [string, string]
-      shadow:       string,
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      ctGrad:        [string, string]
+      shadow:        string
+      bgf:           string
+      ctf:           string
     }
     boxAccent5: {
-      ct:           string
+      ct:            string
     }
     boxAccent6Ct: {
-      bg:           string
-      ct:           string
+      bg:            string
+      ct:            string
     }
     // main button (submit button)
     boxMain: {
-      bg:           string
-      ct:           string
-      bgFc:         string
-      ctFc:         string
+      bg:            string
+      ct:            string
+      bgFc:          string
+      ctFc:          string
     }
     boxSecondary: {
-      bg:           string
-      ct:           string
+      bg:            string
+      ct:            string
     }
     boxSecondary2: {
-      ct:           string
+      ct:            string
     }
     // Оно есть, но вообще не должно цеплять внимание
     // Пример: Счётчик непрочитанных заглушённого чата
     boxSecondary3: {
-      bg:           string
-      ct:           string
+      bg:            string
+      ct:            string
     }
     boxDanger: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxDisabled: {
-      bg:           string
-      ct:           string
+      bg:            string
+      ct:            string
     }
     boxTransNormal: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxTransSec: {
-      bg:           string
-      ct:           string
-      bgf:          string
-      ctf:          string
+      bg:            string
+      ct:            string
+      bgf:           string
+      ctf:           string
     }
     boxTransSec2: {
-      bg:           string
-      ct:           string
+      bg:            string
+      ct:            string
     }
     boxSemitrans: {
-      bg:           string
-      ct:           string
-      ctSec:        string
+      bg:            string
+      ct:            string
+      ctSec:         string
     }
     boxWhite: {
-      bg:           string
-      ct:           string
-      ct2:          string
+      bg:            string
+      ct:            string
+      ct2:           string
     }
     // button that almost invisible
     //buttonSecondary: { }
@@ -238,15 +238,15 @@ export namespace AppTheme {
     
     // radio input color
     inputRadio: {
-      bgFc:         string
+      bgFc:          string
     }
     
     
     
     navButton: {
-      bgFc:         string
-      ct:           string
-      cta:          string
+      bgFc:          string
+      ct:            string
+      cta:           string
     }
     
     
@@ -262,21 +262,21 @@ export namespace AppTheme {
     }
     
     rangePicker: {
-      trackBg:         string[]
-      barBg:           string[]
-      handleBg:        string[]
+      trackBg:       string[]
+      barBg:         string[]
+      handleBg:      string[]
     }
     
     ripple: {
-      ct:              string
-      ctOnLight:       string
-      ctOnTrans:       string
+      ct:            string
+      ctOnLight:     string
+      ctOnTrans:     string
     }
     error: {
-      ct:              string
+      ct:            string
     }
     errorSec: {
-      ct:              string
+      ct:            string
     }
     shadow: {
       bg:            string
@@ -288,51 +288,51 @@ export namespace AppTheme {
     
     // Profile preview button normal
     previewButtonNorm: {
-      bg:        string
-      ct:        string
-      ctGrad:    [string, string, string]
-      bgFc:      string
-      ctFc:      string
-      ctRipple:  string
+      bg:            string
+      ct:            string
+      ctGrad:        [string, string, string]
+      bgFc:          string
+      ctFc:          string
+      ctRipple:      string
     }
     // Profile preview button main
     previewButtonMain: {
-      bg:        string
-      bgGrad:    [string, string]
-      ct:        string
-      ctRipple:  string
+      bg:            string
+      bgGrad:        [string, string]
+      ct:            string
+      ctRipple:      string
     }
     // Profile preview container for Name & AboutMe displayed upon photo
     previewOverlayInfoBox: {
-      bg:         string
-      ct:         string
-      bgFadeGrad: [string, string]
-      ctGrad:     [string, string]
+      bg:            string
+      ct:            string
+      bgFadeGrad:    [string, string]
+      ctGrad:        [string, string]
     }
     // Profile preview full info container
     previewFullInfoBox: {
-      bg:         string
-      ct:         string
-      ct2:        string
+      bg:            string
+      ct:            string
+      ct2:           string
     }
     // Profile preview full info bubble
     previewFullInfoBubble: {
-      bg:         string
-      ct:         string
-      ct2:        string
-      bgMainGrad: [string, string]
-      ctMain:     string
+      bg:            string
+      ct:            string
+      ct2:           string
+      bgMainGrad:    [string, string]
+      ctMain:        string
     }
     // Profile preview photos progress indicator
     previewPhotosProgress: {
-      bg:          string
-      ct:          string
-      cta:         string
+      bg:             string
+      ct:             string
+      cta:            string
     }
     previewOverlayInfoMatchIndicator: {
-      bg:         string
-      ct:         string
-      shadow:     string
+      bg:            string
+      ct:            string
+      shadow:        string
     }
     
     
@@ -345,31 +345,31 @@ export namespace AppTheme {
     }
     
     bottomSheet: {
-      bg:        string
-      ct:        string
+      bg:            string
+      ct:            string
     }
     bottomSheetHandle: {
-      bg:        string
-      bgFc:      string
+      bg:            string
+      bgFc:          string
     }
     
     toast: {
-      bg:                   string
-      ct:                   string
-      ct2:                  string[]
-      ct3:                  string
-      accentNormal:         string[]
-      accentLoadingBg:      string[]
-      accentLoadingCt:      string[]
-      accentInfo:           string[]
-      accentOk:             string[]
-      accentWarn:           string[]
-      accentDanger:         string[]
+      bg:                      string
+      ct:                      string
+      ct2:                     string[]
+      ct3:                     string
+      accentNormal:            string[]
+      accentLoadingBg:         string[]
+      accentLoadingCt:         string[]
+      accentInfo:              string[]
+      accentOk:                string[]
+      accentWarn:              string[]
+      accentDanger:            string[]
     }
     scrollbar: {
-      track:       string[]
-      thumb:       string[]
-      thumbActive: string[]
+      track:         string[]
+      thumb:         string[]
+      thumbActive:   string[]
     }
   }
   

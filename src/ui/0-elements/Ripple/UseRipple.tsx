@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import { useWasDragged } from '@util/pointer/useWasDragged.ts'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { RippleProps, RippleState } from 'src/ui/0-elements/Ripple/Ripple'
 import { TypeU } from 'src/util/common/TypeU'
 import Pu = TypeU.Pu
@@ -15,6 +16,9 @@ const UseRipple = React.memo((props: UseRippleProps) => {
   const [state, setState] = useState('stop' as RippleState)
   const [clientXY, setClientXY] = useState({ x: 0, y: 0 })
   
+  const stop = useCallback(() => setState('stop'), [])
+  useWasDragged(stop)
+  
   useEffect(() => {
     const end = () => {
       //console.log('ripple end')
@@ -30,10 +34,13 @@ const UseRipple = React.memo((props: UseRippleProps) => {
   
   
   const target = useMemo<RippleTargetProps>(() => {
+    //let timerId
     return {
       onPointerDown: (ev: React.PointerEvent) => {
         setClientXY({ x: ev.clientX, y: ev.clientY })
         setState('show')
+        // TODO Ripple delay
+        //timerId = setTimeout(() => setState('show'), 50)
       },
       
       onPointerEnter: () => setState('resume'),

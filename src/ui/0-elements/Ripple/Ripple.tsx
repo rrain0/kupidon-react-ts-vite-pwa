@@ -20,6 +20,7 @@ export type RippleState = 'show' | 'hide' | 'resume' | 'end' | 'stop'
 export type RippleStateInternal = 'reset' | 'show' | 'hide' | 'resume' | 'end' | 'stop'
 
 export type RippleProps = Pu<{
+  // TODO Ripple - not state but action or provide callbacks instead of props
   state: RippleState
   disabled: boolean
   clientXY: { x: number, y: number }
@@ -97,13 +98,13 @@ const Ripple = React.memo((props: RippleProps) => {
         r.style.opacity = '0'
         r.style.scale = '0'
       }
-      // 'reset' сбрпсывает риппл
+      // 'reset' сбрасывает риппл
       else if (state === 'reset') {
         r.style.transition = 'none'
         r.style.opacity = '0.5'
         r.style.scale = '0'
         // ensure that style changes were applied
-        requestAnimationFrame(() => setState(prev => prev === 'reset' ? 'show' : prev))
+        requestAnimationFrame(() => setState(prev => prev === 'reset' ? 'show' : 'reset'))
       }
       // 'show' начинает показывать риппл или означает, что он сейчас показывается
       else if (state === 'show') {

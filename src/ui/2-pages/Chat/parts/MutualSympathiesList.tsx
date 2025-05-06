@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { CssU } from '@util/css/CssU.ts'
 import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -64,7 +63,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
             noScrollbars,
           ]}
         >
-          {mutualSympathiesItems.slice(0, 7).map(({ id, ava, name, online }) => (
+          {mutualSympathiesItems.map(({ id, ava, name, online }) => (
             <Flex w={66} key={id} col noShrink align g={7}>
               <Ava id={id} ava={ava} online={online} mutualSympathy shadow/>
               <NameBox><Name>{name}</Name></NameBox>
