@@ -1,35 +1,51 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { ObjectU } from '@util/common/ObjectU.ts'
+import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import { RippleS6 } from './RippleS6.ts'
-import { ReactU } from 'src/util/react/ReactU'
-import { getViewProps } from 'src/util/view/ViewProps'
-import { ViewU } from 'src/util/view/ViewU'
+import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
+import { ReactU } from '@util/react/ReactU.ts'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import { ViewU } from '@util/view/ViewU.ts'
 import ClassStyle = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
 import Pu = TypeU.Pu
+import FirstCanUndef = ArrayU.FirstCanUndef
+import useLog = ReactU.useLog
+import ObjectKeys = ObjectU.ObjectKeys
+import camelCaseToKebabCase = StringU.camelCaseToKebabCase
+import kebabCaseToCamelCase = StringU.kebabCaseToCamelCase
 
 
 
 
-export type RippleState = 'show' | 'hide' | 'resume' | 'end' | 'stop'
-export type RippleStateInternal = 'reset' | 'show' | 'hide' | 'resume' | 'end' | 'stop'
+export type RippleAction = 'reset' | 'resetAndShow' | 'reveal' | 'hide'
+
+export type RippleState =
+  | 'resetted'
+  | 'showing' | 'shown'
+  | 'revealing'
+  | 'hiding' | 'hidden'
+
+
+
 
 export type RippleProps = Pu<{
-  // TODO Ripple - not state but action or provide callbacks instead of props
-  state: RippleState
+  action: RippleAction
   disabled: boolean
-  clientXY: { x: number, y: number }
+  clientXY: XY
 }> & ClassStyle
 
 
 const Ripple = React.memo((props: RippleProps) => {
   const {
-    state: outState = 'stop', 
+    action,
     disabled,
     clientXY, 
     className, 
@@ -62,72 +78,122 @@ const Ripple = React.memo((props: RippleProps) => {
   })()
   
   
-  const [state, setState] = useState('stop' as RippleStateInternal)
+  const [state, setState] = useState<RippleState>('resetted')
+  const [next, setNext] = useState<RippleState[]>([])
+  
+  const toNext = (newNext?: RippleState[]) => {
+    setNext(curr => {
+      // Если кто-то не установил новую цепочку действий, тогда продолжаем
+      if (!newNext && curr === next) newNext = curr
+      if (newNext) {
+        let newStateI = newNext.findIndex(it => it !== state)
+        if (newStateI === -1) newStateI = newNext.length
+        const [newState, ...restNext] = newNext.slice(newStateI) as FirstCanUndef<typeof newNext>
+        if (newState) setState(newState)
+        return restNext
+      }
+      return curr
+    })
+  }
+  
+  //useLog(action, state)
+  
+  
   useEffect(() => {
-    if (disabled) {
-      setState('stop')
+    if (disabled) toNext(['resetted'])
+    else if (action === 'reset') toNext(['resetted'])
+    else if (action === 'resetAndShow') toNext(['resetted', 'showing', 'shown'])
+    else if (action === 'reveal') toNext(['revealing', 'shown'])
+    else if (action === 'hide') toNext(['hiding', 'hidden'])
+  }, [action, disabled])
+  
+  
+  type Style = {
+    transition: {
+      scale?: string
+      opacity?: string
     }
-    else if (outState === 'stop') {
-      setState('stop')
-    }
-    else if (outState === 'show') {
-      setState('reset')
-    }
-    else if (outState === 'hide' && (state === 'show' || state === 'resume')) {
-      setState('hide')
-    }
-    else if (outState === 'end' && (state === 'show' || state === 'resume' || state === 'hide')) {
-      setState('end')
-    }
-    else if (outState === 'resume' && state === 'hide') {
-      setState('resume')
-    }
-  }, [outState, disabled])
-  useEffect(() => {
-    //console.log('state', state)
-    // In case if 'hide' is set when there was 'reset' that become 'show'
-    if (outState === 'hide' && state === 'show') setState('hide')
-  }, [state])
-
-  useEffect(() => {
+    scale: string | number
+    opacity: string | number
+  }
+  const [getStyle, setStyle] = useRefGetSet<Style>({
+    transition: { },
+    scale: 0,
+    opacity: 0,
+  })
+  const applyStyle = async (newStyle: Partial<Style>) => {
     const r = rippleRef.current
     if (r) {
-      // 'stop' немедленно безвозвратно завершает текущий риппл
-      if (state === 'stop') {
-        r.style.transition = 'none'
-        r.style.opacity = '0'
-        r.style.scale = '0'
-      }
-      // 'reset' сбрасывает риппл
-      else if (state === 'reset') {
-        r.style.transition = 'none'
-        r.style.opacity = '0.5'
-        r.style.scale = '0'
-        // ensure that style changes were applied
-        requestAnimationFrame(() => setState(prev => prev === 'reset' ? 'show' : 'reset'))
-      }
-      // 'show' начинает показывать риппл или означает, что он сейчас показывается
-      else if (state === 'show') {
-        r.style.transition =
-          `scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`
-        r.style.opacity = '1'
-        r.style.scale = '1'
-      }
-      // 'hide' прячет текущий риппл, делая прозрачным, показ можно возобновить по 'resume'
-      else if (state === 'hide' || state === 'end') {
-        r.style.transition =
-          `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeInQuart}` +
-          `,scale ${rippleProps.dissolveDuration}ms linear`
-        r.style.opacity = '0'
-      }
-      // 'resume' возобновляет показ риппл или означает, что он сейчас показывается
-      else if (state === 'resume') {
-        r.style.transition =
-          `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeOutExpo}` +
-          `,scale ${rippleProps.dissolveDuration}ms linear`
-        r.style.opacity = '1'
-      }
+      const oldS = getStyle()
+      const s = { ...oldS, ...newStyle, transition: { ...oldS.transition, ...newStyle.transition } }
+      setStyle(s)
+      const tProps = ObjectKeys(s.transition).filter(p => s.transition[p])
+      const newTProps = ObjectKeys(newStyle.transition).filter(p => newStyle.transition?.[p])
+      let newTCnt = newTProps.length
+      
+      r.ontransitionend = null
+      r.style.transition = tProps.map(p => s.transition[p]).join(', ') || 'none'
+      r.style.opacity = `${s.opacity}`
+      r.style.scale = `${s.scale}`
+      
+      if (newTCnt) return new Promise<void>(resolve => {
+        r.ontransitionend = ev => {
+          if (newTProps.includes(kebabCaseToCamelCase(ev.propertyName) as any)) newTCnt--
+          if (!newTCnt) resolve()
+        }
+      })
     }
+  }
+  
+
+  useEffect(() => {
+    (async () => {
+      const s = state
+      if (s === 'resetted') {
+        await applyStyle({
+          transition: { scale: '', opacity: '' },
+          scale: 0, opacity: 0,
+        })
+      }
+      else if (s === 'showing') {
+        await applyStyle({
+          transition: {
+            scale: `scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`,
+            opacity: '',
+          },
+          scale: 1, opacity: 1,
+        })
+      }
+      else if (s === 'shown') {
+        await applyStyle({
+          transition: { scale: '', opacity: '' },
+          scale: 1, opacity: 1,
+        })
+      }
+      else if (s === 'revealing') {
+        await applyStyle({
+          transition: {
+            opacity: `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeOutExpo}`,
+          },
+          opacity: 1,
+        })
+      }
+      else if (s === 'hiding') {
+        await applyStyle({
+          transition: {
+            opacity: `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeInQuart}`,
+          },
+          opacity: 0,
+        })
+      }
+      else if (s === 'hidden') {
+        await applyStyle({
+          transition: { opacity: '' },
+          opacity: 0,
+        })
+      }
+      toNext()
+    })()
   }, [state])
   
   
@@ -139,7 +205,7 @@ const Ripple = React.memo((props: RippleProps) => {
       className={clsx(RippleS6.W.els.rippleFrame.n, className)}
       {...restProps}
     >
-      <div
+      <div // Ripple
         ref={rippleRef}
         className={RippleS6.W.els.ripple.n}
         style={rippleProps.dimens}

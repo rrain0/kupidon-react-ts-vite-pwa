@@ -73,6 +73,7 @@ export namespace ButtonS6 {
         button: [resetButton, {
           pos: 'rel',
           ...row,
+          textAlign: 'center',
           alignItems: 'center',
           justifyContent: 'center',
           overflowWrap: 'anywhere',

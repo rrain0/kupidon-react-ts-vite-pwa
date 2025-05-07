@@ -112,6 +112,7 @@ export class ViewProps {
     return this.computedStyle.getPropertyValue(propName)
   }
   // set css custom property (variable) value
+  // Example: <ViewProps>.setCssProp('--w', `${w}px`)
   setCssProp(propName: string, propValue: string) {
     const v = isWindow(this.view) ? this.html : this.view
     v.style.setProperty(propName, propValue)

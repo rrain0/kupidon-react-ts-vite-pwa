@@ -20,7 +20,7 @@ const RippleTestPage = React.memo(() => {
           <div>Ripple</div>
           
           <UseRipple>
-            { rippleProps => (
+            {rippleProps => (
               <RippleFrame
                 {...rippleProps.target}
               >
@@ -30,7 +30,7 @@ const RippleTestPage = React.memo(() => {
           </UseRipple>
           
           <UseRipple>
-            { rippleProps => (
+            {rippleProps => (
               <RippleFrame2 {...rippleProps.target}>
                 <Ripple {...rippleProps.ripple} css={RippleS6.t(RippleS6.S.onFilled.round.full.accent)}/>
               </RippleFrame2>

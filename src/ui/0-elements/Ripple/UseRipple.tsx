@@ -1,28 +1,66 @@
 import { useWasDragged } from '@util/pointer/useWasDragged.ts'
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { RippleProps, RippleState } from 'src/ui/0-elements/Ripple/Ripple'
+import { RippleAction, RippleProps } from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import { TypeU } from 'src/util/common/TypeU'
 import Pu = TypeU.Pu
 
+
+
+
+export type RippleState = 'reset' | 'show' | 'reveal' | 'conceal' | 'hide'
 
 
 type UseRippleProps = Pu<{
   children: (renderProps: UseRippleRenderProps) => React.ReactNode
 }>
 
-const UseRipple = React.memo((props: UseRippleProps) => {
-  const { children } = props
+const UseRipple = React.memo(({ children }: UseRippleProps) => {
   
-  const [state, setState] = useState('stop' as RippleState)
   const [clientXY, setClientXY] = useState({ x: 0, y: 0 })
   
-  const stop = useCallback(() => setState('stop'), [])
-  useWasDragged(stop)
+  const [action, setAction] = useState<RippleAction>('reset')
+  const [getState, setState] = useRefGetSet<RippleState>('reset')
+  
+  
+  const applyAction = (newState: RippleState) => {
+    const s = getState()
+    if (newState === 'reset') {
+      setState('reset')
+      setAction('reset')
+    }
+    else if (newState === 'show') {
+      setState('show')
+      setAction('resetAndShow')
+    }
+    else if (newState === 'reveal') {
+      if (s === 'conceal') {
+        setState('reveal')
+        setAction('reveal')
+      }
+    }
+    else if (newState === 'conceal') {
+      if (s === 'show' || s === 'reveal') {
+        setState('conceal')
+        setAction('hide')
+      }
+    }
+    else if (newState === 'hide') {
+      if (s === 'show' || s === 'reveal' || s === 'conceal') {
+        setState('hide')
+        setAction('hide')
+      }
+    }
+  }
+  
+  const reset = useCallback(() => {
+    applyAction('reset')
+  }, [])
+  const { getWasDragged } = useWasDragged(reset)
   
   useEffect(() => {
     const end = () => {
-      //console.log('ripple end')
-      setState('end')
+      applyAction('hide')
     }
     window.addEventListener('pointerup', end, { capture: true })
     window.addEventListener('pointercancel', end, { capture: true })
@@ -34,26 +72,31 @@ const UseRipple = React.memo((props: UseRippleProps) => {
   
   
   const target = useMemo<RippleTargetProps>(() => {
-    //let timerId
     return {
       onPointerDown: (ev: React.PointerEvent) => {
         setClientXY({ x: ev.clientX, y: ev.clientY })
-        setState('show')
-        // TODO Ripple delay
-        //timerId = setTimeout(() => setState('show'), 50)
+        setTimeout(() => {
+          if (!getWasDragged()) {
+            applyAction('show')
+          }
+        }, 50)
       },
       
-      onPointerEnter: () => setState('resume'),
-      onPointerLeave: () => setState('hide'),
+      onPointerEnter: () => {
+        applyAction('reveal')
+      },
+      onPointerLeave: () => {
+        applyAction('conceal')
+      },
     }
   }, [])
   
   const useRippleRenderProps = useMemo<UseRippleRenderProps>(() => {
     return {
       target,
-      ripple: { state, clientXY },
+      ripple: { action, clientXY },
     }
-  }, [target, state])
+  }, [target, action])
   
   
   return children?.(useRippleRenderProps)
@@ -68,7 +111,7 @@ export type RippleTargetProps = {
   onPointerLeave: React.PointerEventHandler<any>
 }
 
-export type RippleRippleProps = Pick<RippleProps, 'state' | 'clientXY'>
+export type RippleRippleProps = Pick<RippleProps, 'action' | 'clientXY'>
 
 export type UseRippleRenderProps = {
   target: RippleTargetProps

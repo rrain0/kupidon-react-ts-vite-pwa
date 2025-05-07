@@ -386,7 +386,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   // Второй и тд пальцы не смогут вызвать драг.
   // Если текущий драг был прерван, то он не сможет продолжиться.
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const { getWasDragged, setWasDragged } = useWasDragged()
+  const { getWasDragged, applyWasDragged } = useWasDragged()
   
   
   
@@ -398,7 +398,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     setIsDragging(true)
     setIsAnimating(false)
     setCanStartDrag(false)
-    setWasDragged(true)
+    applyWasDragged()
     tryEmitStartEvent({ fromDrag: true })
   })
   

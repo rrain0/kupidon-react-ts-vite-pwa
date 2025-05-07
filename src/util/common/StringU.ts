@@ -1,32 +1,44 @@
-import { MathU } from 'src/util/common/MathU.ts'
+
 
 
 
 export namespace StringU {
   
   
-  export const capitalize = (str: string) => str.length ? str[0].toUpperCase() + str.slice(1) : str
-  export const uncapitalize = (str: string) => str.length ? str[0].toLowerCase() + str.slice(1) : str
+  export const capitalize = (str: string) => (
+    str.replace(/^./, match => match.toUpperCase())
+  )
+  export const uncapitalize = (str: string) => (
+    str.replace(/^./, match => match.toLowerCase())
+  )
   
-  export const camelCaseToKebabCase = (str: string) => {
-    const pattern = /\p{Lu}|\d+/gu
-    // '$&' - заменяется на найденную подстроку
-    str = str.replace(pattern, '-$&').toLowerCase()
-    return str
-  }
+  export const camelCaseToKebabCase = (str: string) => (
+    // '$&' - заменяется на найденную подстроку (найденный match)
+    str.replace(/\p{Lu}|\d+/gu, '-$&').toLowerCase()
+  )
+  export const kebabCaseToCamelCase = (str: string) => (
+    str.replace(/-./g, match => match[1].toUpperCase())
+  )
   
   // 'placeSubType0123aHTMLanguage'.split(/(?<=\p{Ll}|\p{Lu})(?=\p{Lu}|\d+)/u) =>
   // ['place', 'Sub', 'Type', '0123a', 'H', 'T', 'M', 'Language']
-  export const camelCaseToWords = (str: string) => str.split(/(?<=\p{Ll}|\p{Lu})(?=\p{Lu}|\d+)/u)
+  export const camelCaseToWords = (str: string) => (
+    str.split(/(?<=\p{Ll}|\p{Lu})(?=\p{Lu}|\d+)/u)
+  )
+  
+  
+  
   
   
   /** Обрезает у строки хвост {tail} с начала и с конца */
-  export const trimTails = (str: string, tail: string) => str.replaceAll(
-    RegExp(`^(${tail})|(${tail})$`, 'g'), ''
+  export const trimTails = (str: string, tail: string) => (
+    str.replaceAll(RegExp(`^(${tail})|(${tail})$`, 'g'), '')
   )
   
   // 100.0 => 100, 123 => 123, 123.00 => 123, 123.12 => 123.12, 123.1200 => 123.12
-  export const trimDotZerosEnd = (str: string) => str.replaceAll(/[.]?0+$/g, '')
+  export const trimDotZerosEnd = (str: string) => (
+    str.replaceAll(/[.]?0+$/g, '')
+  )
   
   /** Обрезает у строки '/' с начала и с конца */
   export const trimSlash = (str: string) => trimTails(str, '/')

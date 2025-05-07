@@ -281,7 +281,7 @@ export const useTabs = (
   useEffect(reactOnState, [newState, newTabIdx, isReady, snapPointsPx])
   
   
-  const { setWasDragged } = useWasDragged()
+  const { applyWasDragged } = useWasDragged()
   
   // You MUST use css 'touch-action: none;' before start dragging
   // to prevent browser gesture handling
@@ -327,7 +327,7 @@ export const useTabs = (
           setNewState('dragging')
           dragStartRef.current.canStart = false
           dragStartRef.current.isDragging = true
-          setWasDragged(true)
+          applyWasDragged()
         }
       }
       

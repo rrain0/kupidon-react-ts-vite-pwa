@@ -1,4 +1,4 @@
-import { getViewProps } from 'src/util/view/ViewProps'
+
 
 
 
@@ -11,13 +11,6 @@ export namespace ViewU {
   
   export type WH = W & H
   export type XY = { x: number, y: number }
-  
-  
-  export const wh = (elem: HTMLElement | null | undefined): WH => {
-    if (!elem) return { w: 0, h: 0 }
-    const { w, h } = getViewProps(elem)
-    return { w, h }
-  }
   
   
   
@@ -38,7 +31,7 @@ export namespace ViewU {
   
   
   // Adaptive element size
-  export const s = (w: number, h: number): number => {
+  export const sz = (w: number, h: number): number => {
     return Math.min(w, h) + Math.abs(w - h) / 2
   }
   

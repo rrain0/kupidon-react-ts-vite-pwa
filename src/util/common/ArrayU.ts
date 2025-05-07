@@ -11,6 +11,7 @@ import CombinerIndexed = TypeU.CombinerIndexed
 import NonEmptyVal = TypeU.NonEmptyVal
 import isArray = TypeU.isArray
 import Sign = TypeU.Sign
+import isdef = TypeU.isdef
 
 
 
@@ -18,7 +19,11 @@ import Sign = TypeU.Sign
 export namespace ArrayU {
   
   
-  import isdef = TypeU.isdef
+  export type FirstCanUndef<A extends readonly any[]> =
+    A extends readonly [first?: infer F, ...infer R] ? [first?: F, ...R] : never
+  
+  
+  
   export const arrOfUndef = (len = 0): undefined[] => {
     return Array(len).fill(undefined)
   }
@@ -192,14 +197,13 @@ export namespace ArrayU {
   
   export type NonEmptyArr<T> = [T, ...T[]]
   
-  export type ArrayOfNonEmpty<A extends Array<any>> = A extends Array<infer E>
-    ? Array<NonEmptyVal<E>>
-    : never
+  export type ArrayOfNonEmpty<A extends Array<any>> =
+    A extends Array<infer E> ? Array<NonEmptyVal<E>> : never
   
   export type ValueOrArr<T> = T | T[]
   
   export type Arraify<T> = T extends any[] ? T : T[]
-  export const arraify = <T>(value: T|T[]): Arraify<T|T[]> => {
+  export const arraify = <T>(value: T | T[]): Arraify<T | T[]> => {
     if (isArray(value)) return value
     return [value]
   }
