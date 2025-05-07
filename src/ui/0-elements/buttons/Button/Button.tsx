@@ -38,7 +38,7 @@ const Button = React.memo((props: ButtonProps) => {
   const elemRef = useRef<HTMLButtonElement>(null)
   useImperativeHandle(ref, () => elemRef.current!, [])
   
-  const clickFix = useClickFix()
+  const getOnClickFixed = useClickFix()
   
   return (
     <UseRipple>
@@ -49,7 +49,7 @@ const Button = React.memo((props: ButtonProps) => {
           className={clsx(className, ButtonS6.W.els.button.n)}
           type='button'
           {...combineProps(
-            clickFix(onClick), restProps, { style: flex }, rippleProps.target
+            getOnClickFixed(onClick), restProps, { style: flex }, rippleProps.target
           )}
           css={[
             // TODO Style

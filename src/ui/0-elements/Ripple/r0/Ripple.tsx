@@ -15,6 +15,7 @@ import Pu = TypeU.Pu
 
 
 
+// TODO remove
 
 /* export */ type RippleState = 'show' | 'hide' | 'resume' | 'end' | 'stop'
 /* export */ type RippleStateInternal = 'reset' | 'show' | 'hide' | 'resume' | 'end' | 'stop'
