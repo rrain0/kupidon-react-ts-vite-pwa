@@ -17,7 +17,10 @@ import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
 import Callback = TypeU.Callback
 
 
-
+// TODO - риппл должен быть над бэкграундом кнопки и под любым контентом (в том числе и просто текстом)
+//  Для этого никак не обойтись без оборачивания контента в доп элемент.
+//  Но это ломает поток width / height, так что их придётся более замороченным путйм высталять.
+//  Да и не факт, что в таком случае абсолютно позиционированное не захочет вылезти наверх.
 
 
 type ButtonProps = React.ComponentPropsWithRef<'button'> & Pu<{
@@ -26,6 +29,7 @@ type ButtonProps = React.ComponentPropsWithRef<'button'> & Pu<{
   'data-error': HtmlEmptyAttr
   onLongPress: Callback
 }> & FlexShortProps
+
 
 
 const Button = React.memo((props: ButtonProps) => {
@@ -54,12 +58,21 @@ const Button = React.memo((props: ButtonProps) => {
           className={clsx(className, ButtonS6.W.els.button.n)}
           type='button'
           {...combineProps(
-            getOnClick(onClick), getOnLongPress(onLongPress), restProps, { style: flex }, rippleProps.target
+            getOnClick(onClick), getOnLongPress(onLongPress),
+            restProps, { style: flex }, rippleProps.target,
           )}
-          css={[
+          /* css={[
             // TODO Style
-            { '& > *': { position: 'relative' } },
-          ]}
+            {
+              [`& > .${ButtonS6.W.els.bord.n}`]: {
+                zIndex: 0,
+              },
+              [`& > *:not(.${ButtonS6.W.els.bord.n})`]: {
+                position: 'relative',
+                //zIndex: 10,
+              },
+            },
+          ]} */
         >
           
           <div

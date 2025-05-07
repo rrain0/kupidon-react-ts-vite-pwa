@@ -93,6 +93,7 @@ export namespace ButtonS6 {
           pointerEvents: 'none',
           r: 'inherit',
           transition: 'border-color linear 300ms',
+          opacity: 0.999, // fix to position ripple behind content
         },
       },
       RippleS6.Parts.base,

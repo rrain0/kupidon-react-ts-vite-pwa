@@ -55,11 +55,6 @@ export namespace EmotionCommon {
     flex-flow: row nowrap;
     align-items: center;
   `
-  export const rowE = css`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: end;
-  `
   export const rowWrap = css`
     display: flex;
     flex-flow: row wrap;

@@ -14,6 +14,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { MbtiUiText } from 'src/ui-data/translations/MbtiUiText.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -36,7 +37,6 @@ import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import toEmptyAttr = TypeU.toEmptyAttr
 import rf1 = MathU.rf1
 import resetH = EmotionCommon.resetH
-import rowE = EmotionCommon.rowE
 import isdef = TypeU.isdef
 import isnull = TypeU.isnull
 import isundef = TypeU.isundef
@@ -371,7 +371,7 @@ const MbtiTestingPage = React.memo(() => {
                 
                 <div style={{ height: 28 }}/>
                 
-                <div css={rowE}>
+                <Flex row justifyCt='end'>
                   <Link
                     to={RootRoute.profile.id.userId[use](authUserId)
                       .tests[fullAnySearchParams](searchParams)
@@ -383,7 +383,7 @@ const MbtiTestingPage = React.memo(() => {
                       {uiText.saveAndExit}
                     </Button>
                   </Link>
-                </div>
+                </Flex>
               
               
               </div>

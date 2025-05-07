@@ -401,7 +401,7 @@ const ProfilePage = React.memo(() => {
   useMediaArrayDownloader(clientPhotos, setClientPhotos)
   
   //effectLog('photos', formValues.photos)
-  effectLog('photos[2]', formValues.photos[2])
+  //effectLog('photos[2]', formValues.photos[2])
   
   
   
