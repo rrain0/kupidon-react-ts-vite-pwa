@@ -1,6 +1,6 @@
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
-import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
-import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
@@ -8,7 +8,6 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
 import Pu = TypeU.Pu
-import UseRipple from 'ui/0-elements/Ripple/UseRipple.tsx'
 import toEmptyAttr = TypeU.toEmptyAttr
 
 
@@ -62,42 +61,33 @@ const CheckboxInput = React.memo((props: CheckboxInputProps) => {
   
   
   return (
-    <UseRipple>
-      {rippleProps => (
-        <label // Frame
-          {...frameProps}
-          {...rippleProps.target}
-        >
-          
-          <input // Input
-            {...inputProps}
-            ref={elemRef}
-          />
-          
-          { startViews }
-          { childrenPosition === 'start' && children }
-          
-          <div // IconBox
-            {...iconBoxProps}
-          />
-          
-          <div // IconBoxChecked
-            {...iconBoxCheckedProps}
-          >
-            <CheckmarkBoldIc/>
-          </div>
-          
-          { childrenPosition === 'end' && children }
-          { endViews }
-          
-          <Ripple
-            css={RippleS6.t(RippleS6.S.onTrans.round.icon.normal)}
-            {...rippleProps.ripple}
-          />
-        
-        </label>
-      )}
-    </UseRipple>
+    <Button as='label' // Frame
+      {...frameProps}
+      css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.secondary)}
+    >
+      
+      <input // Input
+        {...inputProps}
+        ref={elemRef}
+      />
+      
+      {startViews}
+      {childrenPosition === 'start' && children}
+      
+      <div // IconBox
+        {...iconBoxProps}
+      />
+      
+      <div // IconBoxChecked
+        {...iconBoxCheckedProps}
+      >
+        <CheckmarkBoldIc/>
+      </div>
+      
+      {childrenPosition === 'end' && children}
+      {endViews}
+    
+    </Button>
   )
 })
 CheckboxInput.displayName = 'CheckboxInput'

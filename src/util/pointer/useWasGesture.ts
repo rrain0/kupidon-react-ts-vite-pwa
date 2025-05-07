@@ -9,6 +9,7 @@ let wasDraggedGlobal = false
 let wasLongPressedGlobal = false
 
 const onDragStartedListeners = new Set<Callback>()
+const onLongPressedListeners = new Set<Callback>()
 
 // Сбросить состояние при каждом новом pointerDown
 window.addEventListener('pointerdown', () => {
@@ -52,15 +53,21 @@ export const useWasGesture = ({
   
   
   const onLongPressedStable = useAsCallback(onLongPressed)
+  useEffect(() => {
+    if (onLongPressed) {
+      onLongPressedListeners.add(onLongPressedStable)
+      return () => { onLongPressedListeners.delete(onLongPressedStable) }
+    }
+  }, [!!onLongPressed])
   
   const getWasLongPressed = useCallback(() => {
     return wasLongPressedGlobal
   }, [])
   const setWasLongPressed = useCallback((wasLongPressed: boolean) => {
     wasLongPressedGlobal = wasLongPressed
-    if (wasLongPressed) onLongPressedStable()
+    if (wasLongPressed) onLongPressedListeners.forEach(it => it())
   }, [])
-  const applyLongPressed = useCallback(() => setWasDragged(true), [])
+  const applyLongPressed = useCallback(() => setWasLongPressed(true), [])
   
   
   

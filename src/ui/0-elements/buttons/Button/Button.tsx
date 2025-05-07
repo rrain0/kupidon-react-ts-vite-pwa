@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { useClick } from '@util/pointer/useClick.ts'
 import { useLongPress } from '@util/pointer/useLongPress.ts'
 import { ReactU } from '@util/react/ReactU.ts'
@@ -17,13 +18,15 @@ import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
 import Callback = TypeU.Callback
 
 
+
 // TODO - риппл должен быть над бэкграундом кнопки и под любым контентом (в том числе и просто текстом)
 //  Для этого никак не обойтись без оборачивания контента в доп элемент.
 //  Но это ломает поток width / height, так что их придётся более замороченным путйм высталять.
 //  Да и не факт, что в таком случае абсолютно позиционированное не захочет вылезти наверх.
 
 
-type ButtonProps = React.ComponentPropsWithRef<'button'> & Pu<{
+
+type ButtonProps = React.ComponentPropsWithRef<typeof ButtonElem> & Pu<{
   'data-locked': HtmlEmptyAttr
   'data-selected': HtmlEmptyAttr
   'data-error': HtmlEmptyAttr
@@ -52,7 +55,7 @@ const Button = React.memo((props: ButtonProps) => {
   return (
     <UseRipple>
       {rippleProps => (
-        <button
+        <ButtonElem
           data-display-name='Button'
           ref={elemRef}
           className={clsx(className, ButtonS6.W.els.button.n)}
@@ -87,7 +90,7 @@ const Button = React.memo((props: ButtonProps) => {
           
           {children}
         
-        </button>
+        </ButtonElem>
       )}
     </UseRipple>
   )
@@ -95,5 +98,8 @@ const Button = React.memo((props: ButtonProps) => {
 Button.displayName = 'Button'
 export default Button
 
+
+
+const ButtonElem = styled.button()
 
 

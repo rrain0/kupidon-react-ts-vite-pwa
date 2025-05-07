@@ -58,7 +58,10 @@ const UseRipple = React.memo(({ children }: UseRippleProps) => {
   
   const { getWasDragged } = useWasGesture({
     onDragStarted: () => applyAction('reset'),
-    onLongPressed: () => applyAction('hide'),
+    onLongPressed: () => {
+      console.log('onLongPressed')
+      applyAction('hide')
+    },
   })
   const [getWasCancelled, setWasCancelled] = useRefGetSet(false)
   
@@ -84,13 +87,13 @@ const UseRipple = React.memo(({ children }: UseRippleProps) => {
         setClientXY({ x: ev.clientX, y: ev.clientY })
         setTimeout(() => {
           if (!getWasDragged()) {
-            applyAction('show')
-            // const cancelled = getWasCancelled()
-            // if (!cancelled) applyAction('show')
-            // else {
-            //   applyAction('show')
-            //   wait(0, () => applyAction('hide'))
-            // }
+            //applyAction('show')
+            const cancelled = getWasCancelled()
+            if (!cancelled) applyAction('show')
+            else {
+              applyAction('show')
+              wait(50, () => applyAction('hide'))
+            }
           }
         }, 50)
       },

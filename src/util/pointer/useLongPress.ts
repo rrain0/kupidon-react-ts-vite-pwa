@@ -14,7 +14,7 @@ const longPressDelay = 350
 
 export const useLongPress = () => {
   const [getTimerId, setTimerId] = useRefGetSet<any>(undefined)
-  const { getWasDragged } = useWasGesture()
+  const { getWasDragged, applyLongPressed } = useWasGesture()
   
   return (onLongPress?: Callback) => ({
     onPointerDown: (ev: React.PointerEvent) => {
@@ -22,7 +22,8 @@ export const useLongPress = () => {
       if (ev.button === 0) {
         const timerId = setTimeout(() => {
           if (!getWasDragged() && onLongPress) {
-            navigator.vibrate(100)
+            applyLongPressed()
+            navigator.vibrate?.(100)
             onLongPress()
           }
         }, longPressDelay)

@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
@@ -7,10 +9,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
-import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import RadioActiveIc = SvgIconsPack.RadioActiveIc
-import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import abs = EmotionCommon.abs
@@ -69,52 +68,37 @@ const RadioInput = React.memo((props: RadioInputProps) => {
   
   
   return (
-    <UseRipple>
-      {rippleProps => (
-        <label /* Frame */
-          css={frameStyle}
-          {...frameProps}
-          {...rippleProps.target}
-        >
-          
-          <input /* Input */
-            css={inputStyle}
-            {...inputProps}
-            ref={elemRef}
-          />
-          
-          {startViews}
-          {childrenPosition === 'start' && children}
-          
-          <div /* ActiveWrap */
-            css={activeIcWrapStyle}
-            {...activeWrapProps}
-          >
-            <RadioActiveIc/>
-          </div>
-          <div /* InactiveWrap */
-            css={inactiveWrapStyle}
-            {...inactiveWrapProps}
-          >
-            <RadioInactiveIc/>
-          </div>
-          
-          {childrenPosition === 'end' && children}
-          {endViews}
-          
-          <div /* Border */
-            css={borderStyle}
-            {...borderProps}
-          >
-            <Ripple
-              css={RippleS6.t(RippleS6.S.onTrans.round.full.normal)}
-              {...rippleProps.ripple}
-            />
-          </div>
-        
-        </label>
-      )}
-    </UseRipple>
+    <Button as='label' // Frame
+      css={[ButtonS6.t(ButtonS6.S.text.rect.md.normal), frameStyle]}
+      {...frameProps}
+    >
+      
+      <input /* Input */
+        css={inputStyle}
+        {...inputProps}
+        ref={elemRef}
+      />
+      
+      {startViews}
+      {childrenPosition === 'start' && children}
+      
+      <div /* ActiveWrap */
+        css={activeIcWrapStyle}
+        {...activeWrapProps}
+      >
+        <RadioActiveIc/>
+      </div>
+      <div /* InactiveWrap */
+        css={inactiveWrapStyle}
+        {...inactiveWrapProps}
+      >
+        <RadioInactiveIc/>
+      </div>
+      
+      {childrenPosition === 'end' && children}
+      {endViews}
+    
+    </Button>
   )
 })
 RadioInput.displayName = 'RadioInput'
