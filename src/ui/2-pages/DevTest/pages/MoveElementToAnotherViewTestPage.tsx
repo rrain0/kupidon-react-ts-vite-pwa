@@ -14,7 +14,7 @@ import flexC = EmotionCommon.flexC
 // React Portal Test
 // But component that is moved is rerendering anyway :(
 // https://react.dev/reference/react-dom/createPortal
-const MoveElementToAnotherViewTestPage = ()=>{
+const MoveElementToAnotherViewTestPage = () => {
   
   
   const [position, setPosition] = useState(0)
@@ -27,7 +27,7 @@ const MoveElementToAnotherViewTestPage = ()=>{
     <Pages.Content>
       
       <button
-        onClick={()=>setPosition(position === 0 ? 1 : 0)}
+        onClick={() => setPosition(position === 0 ? 1 : 0)}
       >
         Move element to another view
       </button>

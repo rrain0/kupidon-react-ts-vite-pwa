@@ -105,7 +105,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
       onLongPress={() => console.log('Long pressed!!!')}
     >
       
-      <Ava id={id} ava={ava} online={online}/>
+      <Ava id={id} ava={ava} online={online} fullH/>
       
       <Flex col grow alignSelf='stretch'>
         
@@ -151,7 +151,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
             )}
           </Flex>
         </Flex>
-        
+      
       </Flex>
       
     </Button>

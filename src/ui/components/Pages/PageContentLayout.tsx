@@ -11,6 +11,7 @@ import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import Grow = ReactU.Grow
+import toPx = CssU.toPx
 
 
 
@@ -25,6 +26,8 @@ export type PageContentLayoutProps = Pu<{
   noInsetsForFilledBars: boolean
   noInsetsForTransBars: boolean
   noInsets: boolean
+  ptDefault: number | string
+  pbDefault: number | string
   
   classNameInner: string
   styleInner: CSSProperties
@@ -41,6 +44,7 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
     noInsetsForFilledBars,
     noInsetsForTransBars,
     noInsets,
+    ptDefault, pbDefault,
   } = props
   
   /* const type = (() => {
@@ -50,12 +54,15 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
     return 'col' as const
   })() */
     
-  const pt = CssU.max(!noInsets && !full && '30px', CssU.plus(
-    !noInsetsForFilledBars && !noInsets && 'var(--top-bars-inset)',
-    !noInsetsForTransBars && !noInsets && !full && 'var(--top-button-bar-height)'
-  ))
+  const pt = CssU.max(
+    !noInsets && !full && (toPx(ptDefault) ?? '30px'),
+    CssU.plus(
+      !noInsetsForFilledBars && !noInsets && 'var(--top-bars-inset)',
+      !noInsetsForTransBars && !noInsets && !full && 'var(--top-button-bar-height)'
+    )
+  )
   const pb = CssU.plus(
-    !noInsets && !full && '30px',
+    !noInsets && !full && (toPx(pbDefault) ?? '30px'),
     !noInsetsForFilledBars && !noInsets && 'var(--bottom-bars-inset)',
     !noInsetsForTransBars && !noInsets && !full && 'var(--bottom-button-bar-height)'
   )

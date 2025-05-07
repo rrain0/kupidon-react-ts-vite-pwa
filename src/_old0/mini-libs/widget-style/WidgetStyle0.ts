@@ -930,7 +930,7 @@ export namespace WidgetStyle0 {
   
   
   export type PropObject<T extends string> = Record<T, string>
-  export type PropGenerator<T extends string> = Record<T, (value:string)=>string>
+  export type PropGenerator<T extends string> = Record<T, (value:string) => string>
   
   
   

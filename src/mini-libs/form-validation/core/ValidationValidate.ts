@@ -27,7 +27,7 @@ export namespace ValidationValidate {
    
    [
      [field names to be used to validate],
-     validator function: ([field values to be used to validate])=>{}
+     validator function: ([field values to be used to validate]) => {}
    ]
    */
   
@@ -61,27 +61,27 @@ export namespace ValidationValidate {
     
     const fields = ObjectKeys<Vs>(values)
     const changedFields: Set<keyof Vs> = new Set(
-      fields.filter(f=>!(f in prevValues) || values[f]!==prevValues[f])
+      fields.filter(f => !(f in prevValues) || values[f]!==prevValues[f])
     )
     const retainedFails: Failures<Vs> = prevFailures
-      .filter(f=>f.usedFields.every(f=>!changedFields.has(f)))
+      .filter(f => f.usedFields.every(f => !changedFields.has(f)))
     const errorFields = new Set(
       retainedFails
-        //.filter(f=>f.type!=='server')
-        .flatMap(f=>f.errorFields)
+        //.filter(f => f.type!=='server')
+        .flatMap(f => f.errorFields)
     )
     const newFails: Failures<Vs> = []
     
     //console.log('VALIDATE IV: CHANGED_FIELDS',changedFields)
     //console.log('VALIDATE V: RETAINED_FAILS',retainedFails)
     
-    validators.forEach(([usedFields,vd])=>{
+    validators.forEach(([usedFields,vd]) => {
       if (
-        usedFields.some(f=>changedFields.has(f))
-        && usedFields.every(f=>!errorFields.has(f))
+        usedFields.some(f => changedFields.has(f))
+        && usedFields.every(f => !errorFields.has(f))
       ){
         
-        const usedValues = usedFields.map(f=>values[f])
+        const usedValues = usedFields.map(f => values[f])
         let result = vd(usedValues)
         if (result instanceof PartialFailureData){
           const newFail = new Failure({
@@ -90,7 +90,7 @@ export namespace ValidationValidate {
             usedValues: result.usedValues ?? usedValues,
           })
           newFails.unshift(newFail) // fresh failures first
-          newFail.errorFields.forEach(f=>errorFields.add(f))
+          newFail.errorFields.forEach(f => errorFields.add(f))
         }
       }
     })

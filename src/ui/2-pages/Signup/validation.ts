@@ -118,7 +118,7 @@ export namespace SignupPageValidation {
   
   export const validators: Validators<FormValues> = [
     
-    [['email'], (values)=>{
+    [['email'], (values) => {
       const [v] = values as [UserValues['email']]
       const d = defaultValues.email
       if (v === d) return new PartialFailureData({
@@ -127,7 +127,7 @@ export namespace SignupPageValidation {
         type: 'default',
       })
     }],
-    [['email'], (values)=>{
+    [['email'], (values) => {
       const [v] = values as [UserValues['email']]
       if (!isValidEmail(v)) return new PartialFailureData({
         code: 'email-incorrect' satisfies FailureCode,
@@ -135,7 +135,7 @@ export namespace SignupPageValidation {
         delay,
       })
     }],
-    [['email'], (values)=>{
+    [['email'], (values) => {
       const [v] = values as [UserValues['email']]
       if (v.length>100) return new PartialFailureData({
         code: 'email-too-long' satisfies FailureCode,
@@ -146,7 +146,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.pwd
       if (v === d) return new PartialFailureData({
@@ -155,7 +155,7 @@ export namespace SignupPageValidation {
         type: 'default',
       })
     }],
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       if (!isValidPwd(v)) return new PartialFailureData({
         code: 'pwd-incorrect' satisfies FailureCode,
@@ -163,7 +163,7 @@ export namespace SignupPageValidation {
         delay,
       })
     }],
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       if (v.length>200) return new PartialFailureData({
         code: 'pwd-too-long' satisfies FailureCode,
@@ -174,7 +174,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['repeatPwd'], (values)=>{
+    [['repeatPwd'], (values) => {
       const [v] = values as [UserValues['repeatPwd']]
       const d = defaultValues.repeatPwd
       if (v === d) return new PartialFailureData({
@@ -183,7 +183,7 @@ export namespace SignupPageValidation {
         type: 'default',
       })
     }],
-    [['pwd','repeatPwd'], (values)=>{
+    [['pwd','repeatPwd'], (values) => {
       const [pwd,repeatPwd] = values as [UserValues['pwd'],UserValues['repeatPwd']]
       if(pwd!==repeatPwd) return new PartialFailureData({
         code: 'repeated-pwd-not-match' satisfies FailureCode,
@@ -195,7 +195,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['name'], (values)=>{
+    [['name'], (values) => {
       const [v] = values as [UserValues['name']]
       const d = defaultValues.name
       if (v === d) return new PartialFailureData({
@@ -204,7 +204,7 @@ export namespace SignupPageValidation {
         type: 'default',
       })
     }],
-    [['name'], (values)=>{
+    [['name'], (values) => {
       const [v] = values as [UserValues['name']]
       if (v.length>100) return new PartialFailureData({
         code: 'name-too-long' satisfies FailureCode,
@@ -215,7 +215,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const d = defaultValues.birthDate
       if (v === d) return new PartialFailureData({
@@ -224,7 +224,7 @@ export namespace SignupPageValidation {
         type: 'default',
       })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const parsed = DateTime.from_yyyy_MM_dd(v)
       if (!parsed) return new PartialFailureData({
@@ -233,7 +233,7 @@ export namespace SignupPageValidation {
         delay,
       })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const parsed = DateTime.from_yyyy_MM_dd(v)
       const normalized = parsed?.copy().normalize()
@@ -244,7 +244,7 @@ export namespace SignupPageValidation {
           delay,
         })
     }],
-    [['birthDate'], (values)=>{
+    [['birthDate'], (values) => {
       const [v] = values as [FormValues['birthDate']]
       const parsed = DateTime.from_yyyy_MM_dd(v)
       if (parsed && parsed.getAge()<18)
@@ -257,7 +257,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['gender'], (values)=>{
+    [['gender'], (values) => {
       const [v] = values as [UserValues['gender']]
       const d = defaultValues.gender
       if (v === d) return new PartialFailureData({
@@ -269,7 +269,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code === 'DUPLICATE_EMAIL') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -281,7 +281,7 @@ export namespace SignupPageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -289,7 +289,7 @@ export namespace SignupPageValidation {
         type: 'server',
       })
     }],
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v) return new PartialFailureData({
         code: 'unknownError' satisfies FailureCode,

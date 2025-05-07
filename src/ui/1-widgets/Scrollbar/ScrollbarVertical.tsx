@@ -67,7 +67,7 @@ const ScrollbarVertical = React.memo(
       
       
       /*
-      useEffect(()=>{
+      useEffect(() => {
         console.log('scrollProps',scrollProps)
       },[scrollProps])
       */
@@ -154,7 +154,7 @@ const ScrollbarVertical = React.memo(
           setIsDragging(false)
           dragStartRef.current.isByThumbBox = false
         }
-      }) as ()=>ReactDOMAttributes
+      }) as () => ReactDOMAttributes
       
       
       

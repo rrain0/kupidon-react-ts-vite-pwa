@@ -241,7 +241,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   /* {
     const index = 1
     useEffect(
-      ()=>{
+      () => {
         console.log(`images[${index}]`,images[index])
       },
       [images[index]]

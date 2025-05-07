@@ -19,11 +19,11 @@ const overlayName = 'dateMostInterestingVisitedPlace'
 
 const DateMostInterestingVisitedPlaceOption =
 React.memo(
-()=>{
+() => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
-  const text = useMemo(()=>({
+  const text = useMemo(() => ({
   
   }), [titleText, optionText])
   

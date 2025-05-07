@@ -38,7 +38,7 @@ const PartnerAgeOption = React.memo(
     
     
     /* const partnerAgeOptions = useMemo(
-      ()=>[
+      () => [
         {
           value: '18_TO_25',
           text: `18-25 ${text.yearsOld}`,

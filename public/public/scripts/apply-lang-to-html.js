@@ -1,7 +1,7 @@
 
 //console.log('apply-lang-to-html - start setup')
 
-/** @type {(matchedLangs: NonEmptyArr<Lang.Supported>)=>void} */
+/** @type {(matchedLangs: NonEmptyArr<Lang.Supported>) => void} */
 const applyLangToHtml = (matchedLangs) => {
   
   const defaultLang = 'en-US'

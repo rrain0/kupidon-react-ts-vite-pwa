@@ -25,11 +25,11 @@ const overlayName = 'partnerSmoke'
 
 const PartnerSmokeOption =
 React.memo(
-()=>{
+() => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
-  const text = useMemo(()=>({
+  const text = useMemo(() => ({
     notSelected: optionText.notSelected,
   }), [titleText, optionText])
   
@@ -38,7 +38,7 @@ React.memo(
   
   
   const genderOptions = useMemo(
-    ()=>[
+    () => [
       {
         id: '1',
         text: 'Абсолютно не курит и негативно относится к курению',

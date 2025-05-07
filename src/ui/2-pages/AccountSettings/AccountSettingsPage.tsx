@@ -185,7 +185,7 @@ const AccountSettingsPage = React.memo(() => {
   
   
   
-  /* useEffect(()=>{
+  /* useEffect(() => {
     console.log('ACCOUNT_SETTINGS_FAILURES',failures)
   },[failures]) */
   

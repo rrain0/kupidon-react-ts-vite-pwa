@@ -73,7 +73,7 @@ export namespace LoginPageValidation {
   const delay = 4000
   
   export const validators: Validators<FormValues> = [
-    [['login'], (values)=>{
+    [['login'], (values) => {
       const [v] = values as [UserValues['login']]
       const d = defaultValues.login
       if (v === d) return new PartialFailureData({
@@ -82,7 +82,7 @@ export namespace LoginPageValidation {
         type: 'default',
       })
     }],
-    [['login'], (values)=>{
+    [['login'], (values) => {
       const [v] = values as [UserValues['login']]
       if (!isValidEmail(v)) return new PartialFailureData({
         code: 'login-incorrect' satisfies FailureCode,
@@ -93,7 +93,7 @@ export namespace LoginPageValidation {
     
     
     
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.login
       if (v === d) return new PartialFailureData({
@@ -105,7 +105,7 @@ export namespace LoginPageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code === 'NO_USER') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -117,7 +117,7 @@ export namespace LoginPageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -125,7 +125,7 @@ export namespace LoginPageValidation {
         type: 'server',
       })
     }],
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v) return new PartialFailureData({
         code: 'unknownError' satisfies FailureCode,

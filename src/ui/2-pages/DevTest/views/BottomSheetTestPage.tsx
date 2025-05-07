@@ -39,7 +39,7 @@ const BottomSheetTestPage = React.memo(() => {
   const [snapIdx, setSnapIdx] = useState<SheetSnapIdx>(2)
   
   /* const setState = useCallback(
-    (s: ValueOrMapper<SheetState>)=>{
+    (s: ValueOrMapper<SheetState>) => {
       if(s === 'closing'){
         console.log('debug closing')
         debugger

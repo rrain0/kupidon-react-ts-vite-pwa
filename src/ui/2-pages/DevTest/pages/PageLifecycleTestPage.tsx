@@ -26,8 +26,8 @@ const PageLifecycleTestPage = () => {
             /* fetch('https://dev.kupidon.rrain.ydns.eu:50040/ktor/hello',{
              method: 'GET', mode: 'cors', cache: 'no-cache', credentials: 'same-origin',
              })
-             .then(resp=>resp.text())
-             .then(text=>console.log('response',text)) */
+             .then(resp => resp.text())
+             .then(text => console.log('response',text)) */
             break
         }
       }

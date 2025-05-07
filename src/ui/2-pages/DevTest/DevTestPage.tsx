@@ -199,7 +199,7 @@ const DevTestPage = React.memo(() => {
           <div style={{ height: 20 }}/>
           
           {/* <button
-           onClick={()=>toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
+           onClick={() => toast(<ToastBody type={'danger'}>TOASttt</ToastBody>)}
            >
            toast
            </button> */}

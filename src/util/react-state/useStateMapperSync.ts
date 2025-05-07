@@ -14,7 +14,7 @@ export const useStateMapperSync =
 ) => {
   
   /*
-  useEffect(()=>{
+  useEffect(() => {
     console.log('main, secondary', main, secondary)
   }, [main, secondary])
   */

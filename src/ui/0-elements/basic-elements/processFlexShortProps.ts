@@ -8,8 +8,8 @@ import mapBool = TypeU.mapBool
 export type FlexShortProps = Pu<{
   w: number | string
   h: number | string
-  wFull: boolean // true => { width: '100%' }
-  hFull: boolean // true => { height: '100%' }
+  fullW: boolean // true => { width: '100%' }
+  fullH: boolean // true => { height: '100%' }
   full: boolean // true => { width: '100%', height: '100%' }
   wMin: number | string
   hMin: number | string
@@ -44,7 +44,7 @@ export const processFlexShortProps = <P extends object>(
   props: P & FlexShortProps
 ) => {
   const {
-    w, h, wFull, hFull, full, wMin, hMin, wMax, hMax,
+    w, h, fullW, fullH, full, wMin, hMin, wMax, hMax,
     row, rowRev, col, colRev, wrap, wrapRev,
     align, alignCt, alignSelf, justifyCt, center,
     basis, g, order, grow, shrink, noShrink,
@@ -56,8 +56,8 @@ export const processFlexShortProps = <P extends object>(
   const flex = {
     width: w,
     height: h,
-    ...wFull && { width: '100%' },
-    ...hFull && { height: '100%' },
+    ...fullW && { width: '100%' },
+    ...fullH && { height: '100%' },
     ...full && { width: '100%', height: '100%' },
     minWidth: wMin,
     minHeight: hMin,

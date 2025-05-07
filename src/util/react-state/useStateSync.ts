@@ -12,7 +12,7 @@ export const useStateSync =
 ) => {
   
   /*
-  useEffect(()=>{
+  useEffect(() => {
     console.log('main, secondary', main, secondary)
   }, [main, secondary])
   */

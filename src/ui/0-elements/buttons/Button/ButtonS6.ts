@@ -29,10 +29,16 @@ export namespace ButtonS6 {
         locked: AdditionalStates.locked,
       },
     })
+    
     const bord = WidgetElem.of({
       upElem: button, upSelector: '>', className: 'rruiBorder',
     })
     const rippleElems = RippleS6.buildWidgetElems({ upElem: bord, upSelector: '>' })
+    
+    const buttonCont = WidgetElem.of({
+      upElem: button, upSelector: '>', className: 'rruiButtonContent',
+    })
+    
     return {
       button,
       bord,

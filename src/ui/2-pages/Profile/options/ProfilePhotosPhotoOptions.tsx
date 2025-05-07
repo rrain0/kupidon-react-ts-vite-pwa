@@ -140,7 +140,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                const im = images[lastIdx]
                if (im.type === 'remote' && im.isDownloaded || im.type === 'local' && im.isCompressed) {
                return <Button css={ButtonS.bigRectTransparent}
-               onClick={()=>{
+               onClick={() => {
                sheet.setClosing()
                }}
                >

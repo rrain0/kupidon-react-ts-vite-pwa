@@ -34,7 +34,7 @@ const DragDetector = React.memo((props: DragDetectorProps) => {
   }, [isDragActive])
   
   /* useEffect(
-    ()=>{
+    () => {
       console.log('acceptedFiles',acceptedFiles)
     },
     [acceptedFiles]
@@ -45,7 +45,7 @@ const DragDetector = React.memo((props: DragDetectorProps) => {
   return (
     <Contents
       {...getRootProps()}
-      /* onDragOver={ev=>{
+      /* onDragOver={ev => {
         console.log('onDragOver',ev)
         console.log('onDragOver',{
           files: ev.dataTransfer.files,

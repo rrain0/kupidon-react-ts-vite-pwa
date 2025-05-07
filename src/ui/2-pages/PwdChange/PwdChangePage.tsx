@@ -127,7 +127,7 @@ const PwdChangePage = React.memo(() => {
   
   
   
-  /* useEffect(()=>{
+  /* useEffect(() => {
     console.log('PWD_CHANGE_FAILURES',failures)
   },[failures]) */
   

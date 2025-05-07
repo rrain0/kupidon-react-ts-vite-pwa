@@ -27,8 +27,8 @@ const isLocalhost = Boolean(
 
 
 type Config = {
-  onSuccess?: (registration: ServiceWorkerRegistration)=>void
-  onUpdate?: (registration: ServiceWorkerRegistration)=>void
+  onSuccess?: (registration: ServiceWorkerRegistration) => void
+  onUpdate?: (registration: ServiceWorkerRegistration) => void
 }
 
 
@@ -174,7 +174,7 @@ export function register0(config?: Config) {
         
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(()=>{
+        navigator.serviceWorker.ready.then(() => {
           console.log(
             'This web app is being served cache-first by a service ' +
             'worker. To learn more, visit https://cra.link/PWA'
@@ -212,7 +212,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
         registerValidSW0(swUrl, config)
       }
     })
-    .catch(()=>{
+    .catch(() => {
       console.log('No internet connection found. App is running in offline mode.')
     })
 }
@@ -222,13 +222,13 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
 function registerValidSW0(swUrl: string, config?: Config) {
   navigator.serviceWorker
     .register(swUrl)
-    .then((registration)=>{
+    .then((registration) => {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing
         if (installingWorker == null) {
           return
         }
-        installingWorker.onstatechange = ()=>{
+        installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
@@ -258,7 +258,7 @@ function registerValidSW0(swUrl: string, config?: Config) {
         }
       }
     })
-    .catch((error)=>{
+    .catch((error) => {
       console.error('Error during service worker registration:', error)
     })
 }

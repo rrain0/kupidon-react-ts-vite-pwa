@@ -14,7 +14,7 @@ export namespace CssU {
   
   
   
-  export const toPx = (value?: CssLength): string | undefined => {
+  export const toPx = <T>(value: T | number): T | string => {
     if (isnumber(value)) return `${value}px`
     return value
   }

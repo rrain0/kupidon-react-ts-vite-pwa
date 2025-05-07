@@ -235,7 +235,7 @@ const ProfilePage = React.memo(() => {
   
   
   /*
-   useEffect(()=>{
+   useEffect(() => {
    console.log('PROFILE_CONTENT_FAILURES',failures)
    },[failures])
    */
@@ -650,7 +650,7 @@ const ProfilePage = React.memo(() => {
             refreshPageBtn
             rightChildren={
               <SoftRefreshBtn
-                refresh={()=>setNeedToFetchUser(true)}
+                refresh={() => setNeedToFetchUser(true)}
                 isLoading={isFetchingUser}
               />
             }

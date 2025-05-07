@@ -139,7 +139,7 @@ const SignupPage = React.memo(() => {
   
   
   
-  /* useEffect(()=>{
+  /* useEffect(() => {
     console.log('SIGNUP_FAILURES',failures)
   },[failures]) */
   

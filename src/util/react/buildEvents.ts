@@ -24,7 +24,7 @@ type AllEvents<El extends Element> = ObjectValuesType<EventNameToType<El>>
 
 export class EventBuilder<E extends AllEventNames<El>, El extends Element> {
   private currEventNames: E[] = []
-  private eventsMap!: Map<AllEventNames<El>, ((ev: AllEvents<El>)=>void)[]>
+  private eventsMap!: Map<AllEventNames<El>, ((ev: AllEvents<El>) => void)[]>
   
   
   events
@@ -35,7 +35,7 @@ export class EventBuilder<E extends AllEventNames<El>, El extends Element> {
     builder.eventsMap = this.eventsMap
     return builder
   }
-  handlers(...handlers: ((ev: EventNameToType<El>[E])=>void)[]) {
+  handlers(...handlers: ((ev: EventNameToType<El>[E]) => void)[]) {
     this.eventsMap ??= new Map()
     this.currEventNames.forEach(name => {
       if (!this.eventsMap.has(name)) this.eventsMap.set(name, [])

@@ -8,11 +8,11 @@ import {
 
 
 export type UseScrollbarsProps = UseContainerScrollStateProps & {
-  render: (props: ReturnType<typeof useContainerScrollState>)=>React.ReactNode
+  render: (props: ReturnType<typeof useContainerScrollState>) => React.ReactNode
 }
 const UseScrollbars =
 React.memo(
-(props: UseScrollbarsProps)=>{
+(props: UseScrollbarsProps) => {
   const { render, ...restProps } = props
   
   const scrollbarProps = useContainerScrollState(restProps)

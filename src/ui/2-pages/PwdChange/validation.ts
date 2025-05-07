@@ -90,7 +90,7 @@ export namespace PwdChangePageValidation {
     
     
     
-    [['currentPwd'], (values)=>{
+    [['currentPwd'], (values) => {
       const [v] = values as [UserValues['currentPwd']]
       const d = defaultValues.currentPwd
       if (v === d) return new PartialFailureData({
@@ -99,7 +99,7 @@ export namespace PwdChangePageValidation {
         type: 'default',
       })
     }],
-    [['currentPwd'], (values)=>{
+    [['currentPwd'], (values) => {
       const [v] = values as [UserValues['currentPwd']]
       if (v.length>200) return new PartialFailureData({
         code: 'current-pwd-too-long' satisfies FailureCode,
@@ -110,7 +110,7 @@ export namespace PwdChangePageValidation {
     
     
     
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       const d = defaultValues.pwd
       if (v === d) return new PartialFailureData({
@@ -119,7 +119,7 @@ export namespace PwdChangePageValidation {
         type: 'default',
       })
     }],
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       if (!isValidPwd(v)) return new PartialFailureData({
         code: 'pwd-incorrect' satisfies FailureCode,
@@ -127,7 +127,7 @@ export namespace PwdChangePageValidation {
         delay,
       })
     }],
-    [['pwd'], (values)=>{
+    [['pwd'], (values) => {
       const [v] = values as [UserValues['pwd']]
       if (v.length>200) return new PartialFailureData({
         code: 'pwd-too-long' satisfies FailureCode,
@@ -139,7 +139,7 @@ export namespace PwdChangePageValidation {
     
     
     
-    [['repeatPwd'], (values)=>{
+    [['repeatPwd'], (values) => {
       const [v] = values as [UserValues['repeatPwd']]
       const d = defaultValues.repeatPwd
       if (v === d) return new PartialFailureData({
@@ -148,7 +148,7 @@ export namespace PwdChangePageValidation {
         type: 'default',
       })
     }],
-    [['pwd','repeatPwd'], (values)=>{
+    [['pwd','repeatPwd'], (values) => {
       const [pwd,repeatPwd] = values as [UserValues['pwd'],UserValues['repeatPwd']]
       if(pwd!==repeatPwd) return new PartialFailureData({
         code: 'repeated-pwd-not-match' satisfies FailureCode,
@@ -161,7 +161,7 @@ export namespace PwdChangePageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code === "INVALID_PWD") return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -174,7 +174,7 @@ export namespace PwdChangePageValidation {
     
     
     
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
@@ -182,7 +182,7 @@ export namespace PwdChangePageValidation {
         type: 'server',
       })
     }],
-    [['fromServer'], (values)=>{
+    [['fromServer'], (values) => {
       const [v] = values as [FromServerValue]
       if (v) return new PartialFailureData({
         code: 'unknownError' satisfies FailureCode,

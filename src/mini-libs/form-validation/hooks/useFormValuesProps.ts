@@ -31,20 +31,20 @@ export const useFormValuesProps =
   setFormValues: SetterOrUpdater<Vs>,
   userDefaultValues: DVs,
   failures: Failures<Vs>
-)=>{
+) => {
   
   
   const valuesProps = useMemo(
-    ()=>{
+    () => {
       const valuesProps = ObjectMap<Vs, Record<keyof Vs, FormValueProps>>(formValues,
-        ([k,v])=>[k,{
+        ([k,v]) => [k,{
           isInitial: false,
           isDefault: false,
           isInitialOrDefault: false,
         }]
       )
-      failures.forEach(f=>{
-        f.errorFields.forEach(field=>{
+      failures.forEach(f => {
+        f.errorFields.forEach(field => {
           if (f.type === 'initial'){
             valuesProps[field].isInitial = true
             valuesProps[field].isInitialOrDefault = true
@@ -62,7 +62,7 @@ export const useFormValuesProps =
   
   
   const resetUserFields = useCallback(
-    ()=>setFormValues(s=>{
+    () => setFormValues(s => {
       if ('initialValues' in s){
         const initial = s.initialValues as typeof userDefaultValues
         return { ...s, ...initial }
@@ -74,12 +74,12 @@ export const useFormValuesProps =
   
   
   const formProps = useMemo(
-    ()=>{
+    () => {
       const formProps: FormProps = {
         hasChanges: false,
         resetUserFields,
       }
-      ObjectKeys(userDefaultValues).forEach(k=>{
+      ObjectKeys(userDefaultValues).forEach(k => {
         if (!valuesProps[k].isInitial) formProps.hasChanges = true
       })
       return formProps

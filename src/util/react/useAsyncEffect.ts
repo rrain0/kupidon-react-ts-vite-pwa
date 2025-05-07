@@ -9,7 +9,7 @@ import Callback = TypeU.Callback
 
 export const useAsyncEffect = 
 (
-  callback: (lock: Predicate<any>, unlock: Consumer<any>)=>(void | Callback),
+  callback: (lock: Predicate<any>, unlock: Consumer<any>) => (void | Callback),
   deps: any[] | undefined
 ) => {
   

@@ -50,39 +50,39 @@ export namespace EmotionCommon {
     display: flex;
     flex-flow: row nowrap;
   `
-  
   export const rowC = css`
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
   `
-  
   export const rowE = css`
     display: flex;
     flex-flow: row nowrap;
     justify-content: end;
   `
-  
   export const rowWrap = css`
     display: flex;
     flex-flow: row wrap;
   `
-  
   export const rowWrapC = css`
     display: flex;
     flex-flow: row wrap;
     align-items: center;
   `
-  
   export const col = css`
     display: flex;
     flex-flow: column nowrap;
   `
-  
   export const colC = css`
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
+  `
+  export const flexC = css`
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
   `
   
   
@@ -90,29 +90,22 @@ export namespace EmotionCommon {
     display: grid;
     place-items: center;
   `
-  export const flexC = css`
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-  `
   export const gridStackC = css`
     display: grid;
     place-items: center;
     grid: 'stack';
     & > * { grid-area: stack; }
   `
-  export const centerV = css`
+  export const gridCV = css`
     display: grid;
     place-items: center start;
   `
-  export const centerStart = centerV
-  export const stretch = css`
+  export const gridStretch = css`
     display: grid;
     place-items: stretch;
     place-content: stretch;
   `
-  export const stretchAll = css`
+  export const gridStretchAll = css`
     display: grid;
     place-items: stretch;
     grid: 'c';

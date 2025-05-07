@@ -48,9 +48,7 @@ const UseRipple = React.memo(({ children }: UseRippleProps) => {
       }
     }
     else if (newState === 'hide') {
-      console.log('check hide', s)
       if (s === 'show' || s === 'reveal' || s === 'conceal') {
-        console.log('do hide')
         setState('hide')
         setAction('hide')
       }
@@ -86,12 +84,13 @@ const UseRipple = React.memo(({ children }: UseRippleProps) => {
         setClientXY({ x: ev.clientX, y: ev.clientY })
         setTimeout(() => {
           if (!getWasDragged()) {
-            const cancelled = getWasCancelled()
-            if (!cancelled) applyAction('show')
-            else {
-              applyAction('show')
-              wait(0, () => applyAction('hide'))
-            }
+            applyAction('show')
+            // const cancelled = getWasCancelled()
+            // if (!cancelled) applyAction('show')
+            // else {
+            //   applyAction('show')
+            //   wait(0, () => applyAction('hide'))
+            // }
           }
         }, 50)
       },

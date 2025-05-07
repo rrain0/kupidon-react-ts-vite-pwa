@@ -36,7 +36,7 @@ export type ValidationWrapRenderProps<V> = {
     onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>
     onBlur: Callback
   }
-  radioInputProps: (value:V)=>({
+  radioInputProps: (value:V) => ({
     checked: boolean,
     onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>,
   })
@@ -49,8 +49,8 @@ export type ValidationWrapProps
   failures: Failures<Vs>
   setFailures: SetterOrUpdater<Failures<Vs>>
   setValues: SetterOrUpdater<Vs>
-  render?: (props: ValidationWrapRenderProps<Vs[F]>)=>React.ReactNode
-  children?: (props: ValidationWrapRenderProps<Vs[F]>)=>React.ReactNode
+  render?: (props: ValidationWrapRenderProps<Vs[F]>) => React.ReactNode
+  children?: (props: ValidationWrapRenderProps<Vs[F]>) => React.ReactNode
 }
 
 

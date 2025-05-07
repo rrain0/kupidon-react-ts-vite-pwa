@@ -29,7 +29,7 @@ export type ScrollDirection = 'horizontal'|'vertical'
 
 export type ScrollbarCustomProps = {
   scrollProps: ScrollProps
-  setContainerScroll: (scroll: ScrollToOptions)=>void
+  setContainerScroll: (scroll: ScrollToOptions) => void
 } & PartialUndef<{
   direction: ScrollDirection
 }>
@@ -58,7 +58,7 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   
   
   /*
-  useEffect(()=>{
+  useEffect(() => {
     console.log('scrollProps',scrollProps)
   },[scrollProps])
   */
@@ -113,13 +113,13 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
   
   
   // Track Resize Observer
-  useEffect(()=>{
+  useEffect(() => {
     updateTrackProps()
     const track = trackRef.current
     if (track){
-      const trackResizeObserver = new ResizeObserver(()=>updateTrackProps())
+      const trackResizeObserver = new ResizeObserver(() => updateTrackProps())
       track && trackResizeObserver.observe(track)
-      return ()=>trackResizeObserver.disconnect()
+      return () => trackResizeObserver.disconnect()
     }
   },[trackRef.current, updateTrackProps])
   

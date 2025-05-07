@@ -49,7 +49,7 @@ const PartnerHeightOption = React.memo(() => {
   /* const [heightMinMax, setHeightMinMax] = useState<NumRange>([129, 231])
   useEffect(() => {
     let variant = 1 as 1 | 2
-    const id = setInterval(()=>{
+    const id = setInterval(() => {
       if (variant === 1) {
         setHeightMinMax([50, 400])
         variant = 2
@@ -59,7 +59,7 @@ const PartnerHeightOption = React.memo(() => {
         variant = 1
       }
     }, 3000)
-    return ()=>clearInterval(id)
+    return () => clearInterval(id)
   }, []) */
   
   

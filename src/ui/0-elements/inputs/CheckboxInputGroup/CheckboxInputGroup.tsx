@@ -28,12 +28,12 @@ export type CheckboxInputGroupProps = CheckboxInputGroupCustomProps & CheckboxIn
 const CheckboxInputGroup =
 React.memo(
 React.forwardRef<CheckboxInputGroupRefElement, CheckboxInputGroupProps>(
-  (props, forwardedRef)=>{
+  (props, forwardedRef) => {
   const { hasError, children, className, ...restProps } = props
   
   
   const elemRef = useRef<CheckboxInputGroupRefElement>(null)
-  useImperativeHandle(forwardedRef, ()=>elemRef.current!,[])
+  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
   
   
   const radioGroupProps = {

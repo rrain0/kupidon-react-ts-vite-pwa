@@ -88,7 +88,7 @@ export const useContainerScrollState = ({
     [containerIsWindow, getContainer()]
   )
   /* useEffect(
-    ()=>console.log('scrollProps', scrollProps),
+    () => console.log('scrollProps', scrollProps),
     [scrollProps]
   ) */
   
@@ -97,7 +97,7 @@ export const useContainerScrollState = ({
   const [canScrollHorizontally, setCanScrollHorizontally] = useState(false)
   const [canScrollVertically, setCanScrollVertically] = useState(false)
   useLayoutEffect(
-    ()=>{
+    () => {
       setCanScrollHorizontally(scrollProps.clientWidth!==scrollProps.scrollWidth)
       setCanScrollVertically(scrollProps.clientHeight!==scrollProps.scrollHeight)
     },
@@ -106,29 +106,29 @@ export const useContainerScrollState = ({
   
   
   useEffect(
-    ()=>{
+    () => {
       const container = getContainer()
       const content = getContent()
       updateScrollProps()
       const clearActions = [] as Callback[]
       if (container && (!containerIsWindow || content)){
-        const resizeObserver = new ResizeObserver((entries, observer)=>{
+        const resizeObserver = new ResizeObserver((entries, observer) => {
           //console.log('entries',entries)
           //console.log('entries[0].target.scrollWidth',entries[0].target.scrollWidth)
           updateScrollProps()
         })
         if (container && !containerIsWindow) resizeObserver.observe(container)
         if (content) resizeObserver.observe(content)
-        clearActions.push(()=>resizeObserver.disconnect())
+        clearActions.push(() => resizeObserver.disconnect())
       }
       if (containerIsWindow){
         const onResize = function(this: Window, ev: UIEvent){
           updateScrollProps()
         }
         window.addEventListener('resize',onResize)
-        clearActions.push(()=>window.removeEventListener('resize',onResize))
+        clearActions.push(() => window.removeEventListener('resize',onResize))
       }
-      return ()=>clearActions.forEach(it=>it())
+      return () => clearActions.forEach(it => it())
     },
     [containerIsWindow, getContainer(), getContent(), updateScrollProps]
   )
@@ -146,12 +146,12 @@ export const useContainerScrollState = ({
   
   // adds onScroll handler to container
   useEffect(
-    ()=>{
+    () => {
       const container = getContainer()
       const view = containerIsWindow ? window : container
       if (view){
         view.addEventListener('scroll', updateScrollProps)
-        return ()=>view.removeEventListener('scroll', updateScrollProps)
+        return () => view.removeEventListener('scroll', updateScrollProps)
       }
     },
     [containerIsWindow, getContainer(), updateScrollProps]

@@ -28,7 +28,7 @@ export type RadioInputGroupProps = RadioInputGroupCustomProps & RadioInputGroupF
 const RadioInputGroup =
 React.memo(
 React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
-  (props, forwardedRef)=>{
+  (props, forwardedRef) => {
   const { hasError, children, className, ...restProps } = props
   
   

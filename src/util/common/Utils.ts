@@ -8,7 +8,7 @@ export namespace Utils {
   export class Lazy<T> {
     private inited = false
     private value!: T
-    constructor( private initializer: ()=>T ) {}
+    constructor( private initializer: () => T ) {}
     get() {
       if (!this.inited) {
         this.inited = true

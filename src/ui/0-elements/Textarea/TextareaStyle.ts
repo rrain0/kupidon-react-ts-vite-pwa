@@ -53,7 +53,7 @@ export namespace TextareaStyle {
   
   
   
-  export const normal = (t:Theme)=>css`
+  export const normal = (t:Theme) => css`
     // normal
     ${El.frame} {
       border-radius: 15px;

@@ -678,7 +678,7 @@ function getSnapIndexToAdjust(
 function getOpenSnapIndexToAdjust
 (height: number, snapPoints: (number|string)[], snapPointsPx: number[]): number|null {
   if (!snapPointsPx.length) return null
-  const snapStart = findLastBy(snapPointsPx, elem=>elem>0 && height>=elem).index
+  const snapStart = findLastBy(snapPointsPx, elem => elem>0 && height>=elem).index
   if (snapStart === -1) return null
   
   // if (snapPoints[snapStart] === 'free') return null

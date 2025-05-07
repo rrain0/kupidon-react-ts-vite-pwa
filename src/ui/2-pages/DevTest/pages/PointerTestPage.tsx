@@ -17,16 +17,16 @@ const PointerTestPage = React.memo(() => {
   
   
   /* useEffect(
-    ()=>{
+    () => {
       const square = square1Ref.current
       if (square){
         
-        const onPointerDown = (ev:PointerEvent)=>{
+        const onPointerDown = (ev:PointerEvent) => {
           setPressed1(true)
           if (textDivRef.current) textDivRef.current.innerHTML += 'ref pointer down<br/>'
         }
         square.addEventListener('pointerdown',onPointerDown)
-        return ()=>{
+        return () => {
           square.removeEventListener('pointerdown',onPointerDown)
         }
       }

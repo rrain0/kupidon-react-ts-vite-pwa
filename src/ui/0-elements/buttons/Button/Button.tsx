@@ -65,7 +65,6 @@ const Button = React.memo((props: ButtonProps) => {
           <div
             data-display-name='Button Border'
             className={ButtonS6.W.els.bord.n}
-            style={{ position: 'absolute' }}
           >
             <Ripple
               {...rippleProps.ripple}

@@ -185,7 +185,7 @@ const ChatPage = React.memo(() => {
     <>
     
       <PageLayout col>
-        <PageContentLayout colSm grow>
+        <PageContentLayout colSm grow ptDefault={10}>
           
           {preparedMutualSympathiesItems?.length && (
             <MutualSympathiesList mutualSympathiesItems={preparedMutualSympathiesItems}/>

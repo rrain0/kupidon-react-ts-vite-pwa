@@ -117,7 +117,7 @@ const LoginPage = React.memo(() => {
   
   
   
-  /* useEffect(()=>{
+  /* useEffect(() => {
    console.log('LOGIN_FAILURES',failures)
   },[failures]) */
   

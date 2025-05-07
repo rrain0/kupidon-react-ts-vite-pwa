@@ -1,3 +1,4 @@
+import { ReactU } from '@util/react/ReactU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
@@ -5,21 +6,21 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { asUiText, UiText } from 'src/mini-libs/ui-text/UiText.ts'
 import { ToastBody, ToastType } from 'src/ui/components/Toasts/ToastBody.tsx'
 import falsy = TypeU.falsy
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import Callback1 = TypeU.Callback1
+import Callback = TypeU.Callback
 
 
 
 
 export type UseToastDataType = (ToastMsgData | falsy)[]
-export type UseToastsProps = PartialUndef<{
+export type UseToastsProps = Pu<{
   toasts: UseToastDataType
 }>
 
 
 
-export const useToasts = (props?: UseToastsProps) => {
-  const data = props?.toasts??[]
+export const useToasts = ({ toasts: data = [] }: UseToastsProps = { }) => {
   
   const [prevData, setPrevData] = useState([] as UseToastDataType)
   
@@ -73,7 +74,7 @@ export class ToastMsgData {
     lifetime?: number | undefined
     dragToClose?: boolean | undefined
     showCloseButton?: boolean | undefined
-    onClose?: (()=>void) | undefined
+    onClose?: (() => void) | undefined
     closeOnUnmount?: boolean | undefined
   }) {
     this.type = data.type
@@ -90,10 +91,10 @@ export class ToastMsgData {
   lifetime: number | undefined
   dragToClose: boolean
   showCloseButton: boolean
-  onClose: (()=>void) | undefined
+  onClose: Callback | undefined
   closeOnUnmount: boolean
   
-  id: string|number|undefined = undefined
+  id: string | number | undefined = undefined
   runCloseCallback = true
   onChange: Callback1<ToastItem> = (toast: ToastItem) => {
     if (toast.status === 'removed' && toast.data === this) {
@@ -105,7 +106,7 @@ export class ToastMsgData {
       }
     }
   }
-  unsubscribeOnChange: (()=>void) | undefined = undefined
+  unsubscribeOnChange: Callback | undefined = undefined
   show() {
     if (this.id === undefined) {
       this.unsubscribeOnChange = toast.onChange(this.onChange)
@@ -141,17 +142,15 @@ export class ToastMsgData {
 
 
 
-export type ToastMsgProps<UO extends UiText> = PartialUndef<{
+export type ToastMsgProps<UO extends UiText> = Pu<{
   uiOption: UO
   defaultText: string
 }>
-export const ToastMsg = React.memo(
-  <UO extends UiText>(props: ToastMsgProps<UO>) => {
-    const { uiOption, defaultText } = props
-    const uiValues = useMemo(() => ({
-      option: uiOption ?? asUiText(defaultText ?? ''),
-    }), [uiOption])
-    const uiText = useUiValues(uiValues)
-    return <>{uiText.option}</>
-  }
-)
+export const ToastMsg = ReactU.memo(<UO extends UiText>(props: ToastMsgProps<UO>) => {
+  const { uiOption, defaultText } = props
+  const uiValues = useMemo(() => ({
+    option: uiOption ?? asUiText(defaultText ?? ''),
+  }), [uiOption])
+  const uiText = useUiValues(uiValues)
+  return <>{uiText.option}</>
+})

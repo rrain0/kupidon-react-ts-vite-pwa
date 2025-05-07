@@ -36,14 +36,14 @@ BeforeInstallEvent отправляется браузером, если он о
 
 /** @type {BeforeInstallPromptEvent | undefined} */
 let beforeInstallPromptEvent
-/** @type {((ev: BeforeInstallPromptEvent|undefined)=>void) | undefined} */
+/** @type {((ev: BeforeInstallPromptEvent|undefined) => void) | undefined} */
 let onBeforeInstallPromptEvent
-/** @type {(ev: BeforeInstallPromptEvent|undefined)=>void} */
+/** @type {(ev: BeforeInstallPromptEvent|undefined) => void} */
 const setBeforeInstallPromptEvent = ev => {
   beforeInstallPromptEvent = ev
   onBeforeInstallPromptEvent?.(beforeInstallPromptEvent)
 }
-/** @type {()=>Promise<InstallationUserChoice|undefined>} */
+/** @type {() => Promise<InstallationUserChoice|undefined>} */
 const promptInstall = () => {
   const ev = beforeInstallPromptEvent
   setBeforeInstallPromptEvent(undefined)

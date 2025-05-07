@@ -10,8 +10,8 @@ export const ErrorUiText = {
     'ru-RU': 'Неизвестная ошибка',
   },
   unknownErrorTemplate: {
-    'en-US': (err: string)=>`Unknown error: ${err}`,
-    'ru-RU': (err: string)=>`Неизвестная ошибка: ${err}`,
+    'en-US': (err: string) => `Unknown error: ${err}`,
+    'ru-RU': (err: string) => `Неизвестная ошибка: ${err}`,
   },
   connectionError: {
     'en-US': 'Error connecting to the server, perhaps something with the Internet',
