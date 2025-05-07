@@ -9,7 +9,7 @@ import { MathU } from 'src/util/common/MathU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
 import { useIntervalProgress } from 'src/util/progress/useIntervalProgress.ts'
-import { useWasDragged } from 'src/util/pointer/useWasDragged.ts'
+import { useWasGesture } from 'src/util/pointer/useWasGesture.ts'
 import { useNoSelect } from 'src/util/pointer/useNoSelect.ts'
 import { useNoTouchAction } from 'src/util/pointer/useNoTouchAction.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
@@ -386,7 +386,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   // Второй и тд пальцы не смогут вызвать драг.
   // Если текущий драг был прерван, то он не сможет продолжиться.
   const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const { getWasDragged, applyWasDragged } = useWasDragged()
+  const { getWasDragged, applyWasDragged } = useWasGesture()
   
   
   

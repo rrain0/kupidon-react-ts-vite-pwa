@@ -5,9 +5,7 @@ import anyfun = TypeU.anyfun
 
 
 
-export function useAsCallback<F extends anyfun>(fun: F, deps?: any[]): F
-export function useAsCallback<F extends anyfun>(fun: F | undefined, deps?: any[]): F | undefined
-export function useAsCallback<F extends anyfun>(fun: F | undefined, deps: any[] = []): F | undefined {
+export function useAsCallback<F extends anyfun>(fun: F | undefined, deps: any[] = []): F {
   const [getFun] = useAsRefGet(fun)
   const stableFun = useCallback(((...args: Parameters<F>) => {
     return getFun()?.(...args)

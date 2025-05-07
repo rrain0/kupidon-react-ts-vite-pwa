@@ -102,6 +102,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
       data-display-name='ChatListItem'
       className={className}
       style={style}
+      onLongPress={() => console.log('Long pressed!!!')}
     >
       
       <Ava id={id} ava={ava} online={online}/>

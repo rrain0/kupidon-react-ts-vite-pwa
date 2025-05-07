@@ -1,0 +1,79 @@
+import { useCallback, useEffect } from 'react'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
+import Callback = TypeU.Callback
+
+
+
+let wasDraggedGlobal = false
+let wasLongPressedGlobal = false
+
+const onDragStartedListeners = new Set<Callback>()
+
+// Сбросить состояние при каждом новом pointerDown
+window.addEventListener('pointerdown', () => {
+  wasDraggedGlobal = false
+  wasLongPressedGlobal = false
+}, { capture: true })
+
+window.addEventListener('scroll', () => {
+  wasDraggedGlobal = true
+  onDragStartedListeners.forEach(it => it())
+})
+
+
+
+// Началом драга считается либо когда внешний код решил,
+// что драг начался, установив его через setWasDragged(true) или applyWasDragged(),
+// либо когда появился эвент скролла от браузера.
+// Сброс состояния происходит onPointerDown.
+export const useWasGesture = ({
+  onDragStarted = undefined as Callback | undefined, // supports unstable
+  onLongPressed = undefined as Callback | undefined, // supports unstable
+} = { }) => {
+  
+  const onDragStartedStable = useAsCallback(onDragStarted)
+  useEffect(() => {
+    if (onDragStarted) {
+      onDragStartedListeners.add(onDragStartedStable)
+      return () => { onDragStartedListeners.delete(onDragStartedStable) }
+    }
+  }, [!!onDragStarted])
+  
+  const getWasDragged = useCallback(() => {
+    return wasDraggedGlobal
+  }, [])
+  const setWasDragged = useCallback((wasDragged: boolean) => {
+    wasDraggedGlobal = wasDragged
+    if (wasDragged) onDragStartedListeners.forEach(it => it())
+  }, [])
+  const applyWasDragged = useCallback(() => setWasDragged(true), [])
+  
+  
+  
+  const onLongPressedStable = useAsCallback(onLongPressed)
+  
+  const getWasLongPressed = useCallback(() => {
+    return wasLongPressedGlobal
+  }, [])
+  const setWasLongPressed = useCallback((wasLongPressed: boolean) => {
+    wasLongPressedGlobal = wasLongPressed
+    if (wasLongPressed) onLongPressedStable()
+  }, [])
+  const applyLongPressed = useCallback(() => setWasDragged(true), [])
+  
+  
+  
+  const getWasGesture = useCallback(() => {
+    return wasDraggedGlobal || wasLongPressedGlobal
+  }, [])
+  
+  
+  return {
+    getWasDragged, setWasDragged, applyWasDragged,
+    getWasLongPressed, setWasLongPressed, applyLongPressed,
+    getWasGesture,
+  }
+}
+
+

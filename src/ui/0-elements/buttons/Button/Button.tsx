@@ -1,4 +1,5 @@
-import { useClickFix } from '@util/pointer/useClickFix.ts'
+import { useClick } from '@util/pointer/useClick.ts'
+import { useLongPress } from '@util/pointer/useLongPress.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
@@ -13,6 +14,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import combineProps = ReactU.combineProps
 import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
+import Callback = TypeU.Callback
 
 
 
@@ -22,6 +24,7 @@ type ButtonProps = React.ComponentPropsWithRef<'button'> & Pu<{
   'data-locked': HtmlEmptyAttr
   'data-selected': HtmlEmptyAttr
   'data-error': HtmlEmptyAttr
+  onLongPress: Callback
 }> & FlexShortProps
 
 
@@ -29,7 +32,8 @@ const Button = React.memo((props: ButtonProps) => {
   const {
     flex,
     rest: {
-      ref, className, children, onClick,
+      ref, className, children,
+      onClick, onLongPress,
       ...restProps
     },
   } = processFlexShortProps(props)
@@ -38,7 +42,8 @@ const Button = React.memo((props: ButtonProps) => {
   const elemRef = useRef<HTMLButtonElement>(null)
   useImperativeHandle(ref, () => elemRef.current!, [])
   
-  const getOnClickFixed = useClickFix()
+  const getOnClick = useClick()
+  const getOnLongPress = useLongPress()
   
   return (
     <UseRipple>
@@ -49,7 +54,7 @@ const Button = React.memo((props: ButtonProps) => {
           className={clsx(className, ButtonS6.W.els.button.n)}
           type='button'
           {...combineProps(
-            getOnClickFixed(onClick), restProps, { style: flex }, rippleProps.target
+            getOnClick(onClick), getOnLongPress(onLongPress), restProps, { style: flex }, rippleProps.target
           )}
           css={[
             // TODO Style

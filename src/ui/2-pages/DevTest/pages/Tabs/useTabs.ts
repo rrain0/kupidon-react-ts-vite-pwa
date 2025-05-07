@@ -1,7 +1,7 @@
 import { useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
-import { useWasDragged } from '@util/pointer/useWasDragged.ts'
+import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import React, {
   useCallback,
   useEffect,
@@ -281,7 +281,7 @@ export const useTabs = (
   useEffect(reactOnState, [newState, newTabIdx, isReady, snapPointsPx])
   
   
-  const { applyWasDragged } = useWasDragged()
+  const { applyWasDragged } = useWasGesture()
   
   // You MUST use css 'touch-action: none;' before start dragging
   // to prevent browser gesture handling
