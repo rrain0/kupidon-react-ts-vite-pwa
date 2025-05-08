@@ -22,6 +22,7 @@ type AnimatedStateProps<S extends Record<string, any>> = {
 }>
 
 
+
 const AnimatedState = ReactU.memo(
   <S extends Record<string, any>>(props: AnimatedStateProps<S>) => {
     const {

@@ -24,7 +24,8 @@ const Modal = React.memo((props: ModalProps) => {
     disableOnThisClick,
     disableStopPointerAndMouseEvents,
     enableUpNodesScroll,
-    onClick, ...restProps
+    onClick,
+    ...restProps
   } = props
   
   const elemRef = useRef<HTMLDivElement>(null)

@@ -49,13 +49,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   const {
     isOpen,
     title,
-    onModal,
-    onClose,
-    onBack,
-    onCancel,
-    onOk,
-    onYes,
-    onDangerYes,
+    onModal, onClose, onBack, onCancel, onOk, onYes, onDangerYes,
   } = props
   
   //console.log('title', title)

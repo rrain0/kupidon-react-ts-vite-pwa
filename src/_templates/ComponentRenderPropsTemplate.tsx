@@ -1,34 +1,25 @@
 import React from 'react'
-import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
-import Children = ReactU.Children
 import Pu = TypeU.Pu
-import ClassStyle = ReactU.ClassStyle
 
 
 
 
+export type MyComponentRenderProps = { }
 export type MyComponentProps = Pu<{
   prop: number
-}> & ClassStyle & Children
+  children: (props: MyComponentRenderProps) => React.ReactNode
+}>
 
 
 
 const MyComponent = React.memo((props: MyComponentProps) => {
   const {
-    className, style, children,
+    children,
     prop = 0,
   } = props
   
-  return (
-    <div
-      data-display-name='MyComponent'
-      className={className}
-      style={style}
-    >
-      {children}
-    </div>
-  )
+  return children?.({ })
 })
 MyComponent.displayName = 'MyComponent'
 //export default MyComponent

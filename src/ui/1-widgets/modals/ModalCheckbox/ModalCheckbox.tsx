@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { ReactU } from '@util/react/ReactU.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
@@ -31,60 +32,64 @@ export type ModalCheckboxProps<V extends string> = {
 
 
 
-const ModalCheckbox =
-<V extends string>(props: ModalCheckboxProps<V>) => {
+const ModalCheckbox = ReactU.memo(<V extends string>(props: ModalCheckboxProps<V>) => {
   const { isOpen, close, title, options, checked, onChange } = props
   
-  return <UseBottomSheetState isOpen={isOpen} onClose={close}>
-    {sheetProps =>
-      <ModalPortal>
-        <BottomSheetBasic
-          css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
-          {...sheetProps.sheetProps}
-          title={title}
-        >
-          
-          
-          {/* <CheckboxInputGroup css={selectItemsContainer}>
+  return (
+    <UseBottomSheetState isOpen={isOpen} onClose={close}>
+      {sheetProps => (
+        <ModalPortal>
+          <BottomSheetBasic
+            css={BottomSheetBasicS6.t(BottomSheetBasicS6.S.bottom.sheet.full.normal)}
+            {...sheetProps.sheetProps}
+            title={title}
+          >
             
-            {options.map(opt => <CheckboxInput
-              css={CheckboxInputStyle.normal}
-              childrenPosition="start"
-              checked={checked.includes(opt.value)}
-              onChange={() => onChange(opt.value)}
-              value={opt.value}
-              key={opt.value}
-            >
-              <div css={selectItemText}>
-                {opt.text}
-              </div>
-            </CheckboxInput>)}
-          
-          </CheckboxInputGroup> */}
-          
-          
-          <CheckboxInputGroup css={selectItemsContainer}>
             
-            {options.map(opt => <CheckboxInput
-              key={opt.id}
-              css={CheckboxInputStyle.rectBigNormal}
-              checked={checked.includes(opt.id)}
-              onChange={() => onChange(opt.id)}
-              value={opt.id}
-            >
-              <div css={selectItemText}>
-                {opt.text}
-              </div>
-            </CheckboxInput>)}
+            {/* <CheckboxInputGroup css={selectItemsContainer}>
+              
+              {options.map(opt => <CheckboxInput
+                css={CheckboxInputStyle.normal}
+                childrenPosition="start"
+                checked={checked.includes(opt.value)}
+                onChange={() => onChange(opt.value)}
+                value={opt.value}
+                key={opt.value}
+              >
+                <div css={selectItemText}>
+                  {opt.text}
+                </div>
+              </CheckboxInput>)}
+            
+            </CheckboxInputGroup> */}
+            
+            
+            <CheckboxInputGroup css={selectItemsContainer}>
+              
+              {options.map(opt => (
+                <CheckboxInput
+                  key={opt.id}
+                  css={CheckboxInputStyle.rectBigNormal}
+                  checked={checked.includes(opt.id)}
+                  onChange={() => onChange(opt.id)}
+                  value={opt.id}
+                >
+                  <div css={selectItemText}>
+                    {opt.text}
+                  </div>
+                </CheckboxInput>
+              ))}
+            
+            </CheckboxInputGroup>
           
-          </CheckboxInputGroup>
-        
-        
-        </BottomSheetBasic>
-      </ModalPortal>
-    }</UseBottomSheetState>
-}
-export default React.memo(ModalCheckbox) as typeof ModalCheckbox
+          
+          </BottomSheetBasic>
+        </ModalPortal>
+      )}
+    </UseBottomSheetState>
+  )
+})
+export default ModalCheckbox
 
 
 
