@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import { css as cssraw } from '@emotion/css'
-import numeral from 'numeral'
 import styled from '@emotion/styled'
 import React, { useId, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
@@ -21,9 +20,6 @@ import { useInterval } from '@util/react/useInterval.ts'
 import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import flexC = EmotionCommon.flexC
-import Txt = EmotionCommon.Txt
-import col = EmotionCommon.col
-import row = EmotionCommon.row
 
 
 
@@ -49,20 +45,6 @@ console.log('emcssStyle', emcssStyle)
 
 
 const DevTestPage = React.memo(() => {
-  
-  /*
-   const rf = (v: number) => {
-   console.log('log from rf', v, typeof v)
-   return +v
-   }
-   console.log('numeral(12.53).format(\'0.0\')', numeral(12.53).format('0.0', rf))
-   console.log('numeral(12.55).format(\'0.0\')', numeral(12.55).format('0.0', rf))
-   console.log('numeral(12.58).format(\'0.0\')', numeral(12.58).format('0.0', rf))
-   
-   console.log('numeral(-12.53).format(\'0.0\')', numeral(-12.53).format('0.0', rf))
-   console.log('numeral(-12.55).format(\'0.0\')', numeral(-12.55).format('0.0', rf))
-   console.log('numeral(-12.58).format(\'0.0\')', numeral(-12.58).format('0.0', rf))
-   */
   
   const [searchParams] = useSearchParams()
   

@@ -2,20 +2,18 @@ import { css } from '@emotion/react'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { RangeU } from 'src/util/common/RangeU'
-import { ReactU } from 'src/util/react/ReactU.ts'
 import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import numeral from 'numeral'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/1-widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import RulerVerticalGradIc = SvgGradIconsPack.RulerVerticalGradIc
 import NumRangeNullable = RangeU.NumRangeNullable
 import NumRange = RangeU.NumRange
@@ -152,12 +150,12 @@ const tilesGrid = (t: AppTheme.Theme) => css`
 function mapWidgetRangeToHeightRange(range: NumRange): NumRangeNullable {
   return [
     function() {
-      const r0 = +numeral(range[0]).format('0')
+      const r0 = Math.round(range[0])
       if (r0 <= heightMinMax[0]) return null
       return r0
     }(),
     function() {
-      const r1 = +numeral(range[1]).format('0')
+      const r1 = Math.round(range[1])
       if (r1 >= heightMinMax[1]) return null
       return r1
     }(),
