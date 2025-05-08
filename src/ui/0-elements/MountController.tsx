@@ -7,14 +7,14 @@ import Callback = TypeU.Callback
 
 
 
-export type MountControllerRenderProps = {
-  isOpen: boolean
-  allowUnmount: Callback
-}
 export type MountControllerProps = Pu<{
   isOpen: boolean
   children: (props: MountControllerRenderProps) => React.ReactNode
 }>
+export type MountControllerRenderProps = {
+  isOpen: boolean
+  allowUnmount: Callback
+}
 
 
 
@@ -24,12 +24,15 @@ const MountController = React.memo((props: MountControllerProps) => {
     isOpen = false,
   } = props
   
-  const [canUnmount, allowUnmount, preventUnmount] = useBool(false)
+  const [canUnmount, allowUnmount, preventUnmount] = useBool(!isOpen)
   useEffect(() => {
     if (isOpen) preventUnmount()
   }, [isOpen])
   
-  if (isOpen || !canUnmount) return children?.({ isOpen, allowUnmount })
+  if (isOpen || !canUnmount) return children?.({
+    isOpen,
+    allowUnmount, // stable
+  })
   return undefined
 })
 MountController.displayName = 'MountController'

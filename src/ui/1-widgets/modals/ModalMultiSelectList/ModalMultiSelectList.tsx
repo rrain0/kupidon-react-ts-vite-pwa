@@ -16,7 +16,7 @@ import {
   getCommonIndicatorsDataDefault,
   GetIndicatorsData,
 } from 'src/ui/1-widgets/modals/ModalMultiSelectList/modalMultiSelectUtils'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
+import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'

@@ -3,7 +3,7 @@ import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomShee
 import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React from 'react'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'

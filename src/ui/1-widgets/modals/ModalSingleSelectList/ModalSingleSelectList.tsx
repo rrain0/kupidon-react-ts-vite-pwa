@@ -9,7 +9,7 @@ import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectIte
 import { SheetSnaps80 } from 'src/ui/1-widgets/BottomSheet/useBottomSheet'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal'
+import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'

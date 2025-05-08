@@ -4,8 +4,8 @@ import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
-import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
+import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
+import Modal from 'src/ui/components/modal/Modal.tsx'
 import Textarea, { TextareaRefElement } from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -42,8 +42,8 @@ const ModalTextarea = React.memo((props: ModalTextareaProps) => {
   
   
   if (isOpen) return (
-    <Modal css={ModalElement.modalInputBoxS} onClick={onClose}>
-      <Card css={[CardS.card2S, ModalElement.cardBoxInModalS]}>
+    <Modal css={ModalElements.modalInputBoxS} onClick={onClose}>
+      <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}>
         
         <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
         

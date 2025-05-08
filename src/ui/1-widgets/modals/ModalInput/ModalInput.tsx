@@ -4,8 +4,8 @@ import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
-import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
+import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
+import Modal from 'src/ui/components/modal/Modal.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -39,8 +39,8 @@ const ModalInput = React.memo((props: ModalInputProps) => {
   const actionText = useUiValues(ActionUiText)
   
   if (isOpen) return (
-    <Modal css={ModalElement.modalInputBoxS} onClick={onClose}>
-      <Card css={[CardS.card2S, ModalElement.cardBoxInModalS]}>
+    <Modal css={ModalElements.modalInputBoxS} onClick={onClose}>
+      <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}>
         <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
         <Input css={InputStyle.outlinedRectSmallNormal}
           {...restProps}

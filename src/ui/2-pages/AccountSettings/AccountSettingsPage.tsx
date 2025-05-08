@@ -1,3 +1,4 @@
+import { noFormSubmit } from '@util/js/noFormSubmit.ts'
 import React, { useCallback, useEffect } from 'react'
 import { Link } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi'
@@ -18,7 +19,6 @@ import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFail
 import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit'
 import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { formSubmitPreventDefault } from '@util/hooks/formSubmitPreventDefault'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import DataField from 'src/ui/0-elements/DataField/DataField'
@@ -192,15 +192,13 @@ const AccountSettingsPage = React.memo(() => {
   
   
   
-  
-  
   return (
     <>
       <Pages.PageGrad>
         
         
         <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm onSubmit={formSubmitPreventDefault}>
+          <Pages.ContentColSmForm {...noFormSubmit}>
             
             <Hdrs.Page>{titleText.account}</Hdrs.Page>
             

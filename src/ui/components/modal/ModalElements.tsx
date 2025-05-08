@@ -5,7 +5,7 @@ import gridC = EmotionCommon.gridC
 
 
 
-export namespace ModalElement {
+export namespace ModalElements {
   
   export const modalCenteredS = css`
     padding: 20px;

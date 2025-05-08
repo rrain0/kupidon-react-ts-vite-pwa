@@ -13,11 +13,11 @@ export const useUpNodesScrollLock = (
   }> = { },
 ) => {
   useLayoutEffect(() => {
-    const el = function() {
+    const el = (() => {
       if (options.element) return options.element
       if (options.elementRef) return options.elementRef.current
       return undefined
-    }()
+    })()
     if (lock) {
       // Setting overflow on body passes directly to WINDOW
       const x: Element[] = [document.body]
@@ -25,17 +25,18 @@ export const useUpNodesScrollLock = (
       if (el) {
         let up = el.parentElement
         while (up) {
-          const getComputedStyle = function() {
-            if (up.computedStyleMap as unknown)
+          const getComputedStyle = (() => {
+            if (up.computedStyleMap as unknown) {
               return (prop: string) => up!.computedStyleMap().get(prop)
+            }
             return (prop: string) => window.getComputedStyle(up!)[prop]
-          }()
-          if (['auto', 'scroll'].includes(
-            getComputedStyle('overflow-x') as any
-          )) x.push(up)
-          if (['auto', 'scroll'].includes(
-            getComputedStyle('overflow-y') as any
-          )) y.push(up)
+          })()
+          if (['auto', 'scroll'].includes(getComputedStyle('overflow-x') as any)) {
+            x.push(up)
+          }
+          if (['auto', 'scroll'].includes(getComputedStyle('overflow-y') as any)) {
+            y.push(up)
+          }
           up = up.parentElement
         }
       }

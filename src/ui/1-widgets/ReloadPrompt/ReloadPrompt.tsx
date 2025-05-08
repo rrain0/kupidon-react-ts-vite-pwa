@@ -1,7 +1,7 @@
 import { Env } from '@util/app/Env.ts'
 import React from 'react'
 import './ReloadPrompt.css'
-import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
+import Modal from 'src/ui/components/modal/Modal.tsx'
 
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { pwaInfo } from 'virtual:pwa-info'

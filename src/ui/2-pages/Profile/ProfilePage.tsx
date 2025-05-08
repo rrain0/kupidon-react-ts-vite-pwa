@@ -22,7 +22,7 @@ import { MediaInArrayDUC, MediaOperation, newDefaultMediaOperation } from 'src/u
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import Tests from 'src/ui/2-pages/Profile/Tests/Tests.tsx'

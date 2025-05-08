@@ -1,7 +1,5 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
@@ -11,13 +9,12 @@ import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
-import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
+import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
+import Modal from 'src/ui/components/modal/Modal.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import rowC = EmotionCommon.rowC
-import card2S = CardS.card2S
 import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 
@@ -56,8 +53,8 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   const actionText = useUiValues(ActionUiText)
   
   if (isOpen) return (
-    <Modal css={ModalElement.modalCenteredS} onClick={() => onModal?.()}>
-      <Card css={[ModalElement.cardBoxInModalS, card2S]}>
+    <Modal css={ModalElements.modalCenteredS} onClick={() => onModal?.()}>
+      <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}>
         
         <DialogContent>
           {onDangerYes && (

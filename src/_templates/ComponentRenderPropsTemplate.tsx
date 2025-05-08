@@ -5,11 +5,13 @@ import Pu = TypeU.Pu
 
 
 
-export type MyComponentRenderProps = { }
 export type MyComponentProps = Pu<{
   prop: number
   children: (props: MyComponentRenderProps) => React.ReactNode
 }>
+export type MyComponentRenderProps = {
+
+}
 
 
 

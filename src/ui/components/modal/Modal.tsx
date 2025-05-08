@@ -7,7 +7,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import { useUpNodesScrollLock } from '@util/pointer/useUpNodesScrollLock.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
+import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import Pu = TypeU.Pu
 import combineProps = ReactU.combineProps
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents

@@ -4,15 +4,18 @@ import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import MountController from 'src/ui/0-elements/MountController.tsx'
-import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
+import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
+import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
 import ChatListItem, { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
-import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
+import Modal from 'src/ui/components/modal/Modal.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 import Callback1 = TypeU.Callback1
+import card3S = CardS.card3S
 
 
 
@@ -84,13 +87,9 @@ const ChatList = React.memo((props: ChatListProps) => {
         )}
       </ChatListView>
       
-      {/* <MountController>
-        {({ isOpen, allowUnmount }) => (
-          <Modal css={ModalElement.modalCenteredS}>
-            Modalochka
-          </Modal>
-        )}
-      </MountController> */}
+      <ModalContextMenu isOpen={anySelected}>
+      
+      </ModalContextMenu>
       
     </>
   )
@@ -142,4 +141,8 @@ const ChatListItemWrap = ({
     />
   )
 }
+
+
+
+
 

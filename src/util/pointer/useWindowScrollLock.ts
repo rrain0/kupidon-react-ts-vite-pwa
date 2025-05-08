@@ -1,10 +1,10 @@
-import { useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import cmcss from 'src/ui-data/style/common.module.scss'
 
 
 
 
-function eventPreventDefault(ev) {
+function eventPreventDefault(ev: Event | React.SyntheticEvent) {
   ev.preventDefault()
 }
 

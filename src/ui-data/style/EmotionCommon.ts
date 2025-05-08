@@ -89,6 +89,10 @@ export namespace EmotionCommon {
     display: grid;
     place-items: center;
   `
+  export const gridEC = css`
+    display: grid;
+    place-items: end center;
+  `
   export const gridStackC = css`
     display: grid;
     place-items: center;
