@@ -15,7 +15,7 @@ import toPx = CssU.toPx
 
 
 
-const colSmWMax = 518
+export const colSmWMax = 518
 
 
 export type PageContentLayoutProps = Pu<{

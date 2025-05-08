@@ -1,7 +1,6 @@
-import { css } from '@emotion/react'
+import { css, Global } from '@emotion/react'
 import { ReactU } from '@util/react/ReactU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import MountController, { MountControllerRenderProps } from 'src/ui/0-elements/MountController.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -11,12 +10,16 @@ import Modal from 'src/ui/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import Children = ReactU.Children
-import gridEC = EmotionCommon.gridEC
+import modalInputBoxS = ModalElements.modalInputBoxS
 
 
 
 
-// TODO add max-width to card
+const t = 150
+const b = 100
+
+
+// TODO make modal content
 
 
 
@@ -35,15 +38,19 @@ const ModalContextMenu = React.memo((props: ModalContextMenuProps) => {
   
   
   return (
-    <MountController isOpen={isOpen}>
-      {mountProps => (
-        <Modal css={modalS} onlyFrame>
-          <ContextMenu {...mountProps}>
-            {children}
-          </ContextMenu>
-        </Modal>
-      )}
-    </MountController>
+    <>
+      <Global styles={{ ':root': { '--bottom-button-bar-height': `${b + 100}px` } }}/>
+      
+      <MountController isOpen={isOpen}>
+        {mountProps => (
+          <Modal css={modalS} onlyFrame>
+            <ContextMenu {...mountProps}>
+              {children}
+            </ContextMenu>
+          </Modal>
+        )}
+      </MountController>
+    </>
   )
 })
 ModalContextMenu.displayName = 'ModalContextMenu'
@@ -51,18 +58,15 @@ export default ModalContextMenu
 
 
 const modalS = css([
-  gridEC, {
-    paddingLeft: 16,
-    paddingRight: 16,
+  modalInputBoxS, {
+    padding: 50,
+    paddingBottom: 0,
   },
 ])
 
 
 
 
-
-const t = 150
-const b = 100
 
 
 type ContextMenuProps = MountControllerRenderProps & Children

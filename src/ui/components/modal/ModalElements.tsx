@@ -1,29 +1,31 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { colSmWMax } from 'src/ui/components/Pages/PageContentLayout.tsx'
 import gridC = EmotionCommon.gridC
+import gridEC = EmotionCommon.gridEC
 
 
 
 
 export namespace ModalElements {
   
-  export const modalCenteredS = css`
-    padding: 20px;
-    ${gridC};
-  `
+  export const modalCenteredS = css([
+    gridC, {
+      padding: 20,
+    },
+  ])
   
-  export const modalInputBoxS = css`
-    padding: 20px;
-    padding-bottom: 140px;
-    display: grid;
-    place-items: end center;
-  `
+  export const modalInputBoxS = css([
+    gridEC, {
+      padding: 20,
+      paddingBottom: 140,
+    },
+  ])
   
-  export const cardBoxInModalS = css`
-    min-width: 220px;
-    width: 100%;
-    max-width: 500px;
-    gap: 10px;
-  `
+  export const cardBoxInModalS = css({
+    width: '100%',
+    maxWidth: colSmWMax,
+    gap: 10,
+  })
   
 }
