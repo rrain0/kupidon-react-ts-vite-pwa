@@ -211,12 +211,16 @@ export namespace ArrayU {
   
   
   
+  export const has = <T>(arr: T[], elem: T): boolean => (
+    arr.includes(elem)
+  )
+  
   export const flatPush = <T>(arr: T[], elem: T | T[]): T[] => {
     isArray(elem) ? arr.push(...elem) : arr.push(elem)
     return arr
   }
   
-  export const pushUniqToIf = <T>(arr: T[], elem: T): T[] => {
+  export const addUniqToIf = <T>(arr: T[], elem: T): T[] => {
     if (arr.includes(elem)) return arr
     return [...arr, elem]
   }
@@ -260,6 +264,11 @@ export namespace ArrayU {
   export const clear = <T>(arr: T[]): T[] => {
     arr.length = 0
     return arr
+  }
+  
+  export const clearToIf = <T>(arr: T[]): T[] => {
+    if (!arr.length) return arr
+    return []
   }
   
   export function mapToIf<T, E = T>(arr: T[], mapper: (el: T, i: number, arr: T[]) => E): E[]

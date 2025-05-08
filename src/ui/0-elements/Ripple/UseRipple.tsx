@@ -59,7 +59,7 @@ const UseRipple = React.memo(({ children }: UseRippleProps) => {
   const { getWasDragged } = useWasGesture({
     onDragStarted: () => applyAction('reset'),
     onLongPressed: () => {
-      console.log('onLongPressed')
+      //console.log('onLongPressed')
       applyAction('hide')
     },
   })

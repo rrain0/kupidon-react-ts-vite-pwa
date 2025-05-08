@@ -95,7 +95,7 @@ const Ripple = React.memo((props: RippleProps) => {
     })
   }
   
-  useLog(action, state)
+  //useLog(action, state)
   
   
   useEffect(() => {

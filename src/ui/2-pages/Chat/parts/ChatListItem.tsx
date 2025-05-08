@@ -34,6 +34,8 @@ import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
 import Pu = TypeU.Pu
+import toEmptyAttr = TypeU.toEmptyAttr
+import Callback = TypeU.Callback
 
 
 
@@ -64,13 +66,16 @@ export type ChatListItemData = {
 }
 
 
-export type ChatListItemProps = ChatListItemData & ClassStyle
+export type ChatListItemProps =
+  & ChatListItemData
+  & React.ComponentPropsWithRef<typeof Button>
 
 export const ChatListItem = React.memo((props: ChatListItemProps) => {
   const {
     className, style,
     id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt = 0,
     mute, order = 0, lastMsgStatus, isWriting,
+    ...restProps
   } = props
   
   
@@ -100,9 +105,7 @@ export const ChatListItem = React.memo((props: ChatListItemProps) => {
     <Button row g={8} alignSelf='stretch'
       css={ButtonS6.t(chatItemButtonS)}
       data-display-name='ChatListItem'
-      className={className}
-      style={style}
-      onLongPress={() => console.log('Long pressed!!!')}
+      {...restProps}
     >
       
       <Ava id={id} ava={ava} online={online} fullH/>
@@ -168,6 +171,8 @@ const chatItemButtonS: AppWidgetStyle = t => [
       w: undefined, h: 72, r: 20, ...virtualOffset({ h: 8, v: 6 }),
       textAlign: 'start',
     },
+    // TODO Theme
+    buttonSelected: { bg: '#e07bff44' },
   },
 ]
 

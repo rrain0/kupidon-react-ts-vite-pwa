@@ -33,7 +33,7 @@ export const useMultiSelectOneEditableOption = <T extends string>(
     const { id, text: t } = opt
     if (id === editableOptionId) {
       setCustomOptionText(t)
-      if (t) setSelected(ArrayU.pushUniqToIf(selected, id))
+      if (t) setSelected(ArrayU.addUniqToIf(selected, id))
       else setSelected(ArrayU.removeToIf(selected, id))
     }
   }, [editableOptionId, selected])

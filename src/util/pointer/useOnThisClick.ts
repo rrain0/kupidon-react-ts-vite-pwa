@@ -3,6 +3,7 @@ import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 
 
 
+// TODO Pointer merge with useOnClick(onClick, { thisElemOnly: true })
 export const useOnThisClick = <T extends Element>() => {
   const [getCanCloseByClickEv, setCanCloseByClickEv] = useRefGetSet(0)
   
