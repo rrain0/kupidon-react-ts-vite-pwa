@@ -3,7 +3,6 @@ import React from 'react'
 import './ReloadPrompt.css'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
 import { ModalStyle } from 'src/ui/components/modal/Modal/ModalStyle.ts'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { pwaInfo } from 'virtual:pwa-info'
@@ -76,53 +75,51 @@ const ReloadPrompt = React.memo(() => {
     <>
       <div className='ReloadPrompt-buildDate'>{buildDate}</div>
       {(offlineReady || needRefresh) && (
-        <ModalPortal>
-          <Modal css={ModalStyle.modalFrameBottom} enableUpNodesScroll>
-            <div className='ReloadPrompt-container'>
-              <div className='ReloadPrompt-toast'>
-                
-                <div className='ReloadPrompt-message'>
-                  {offlineReady
-                    ? <span>{uiText.appReadyToWorkOffline}</span>
-                    : <span>{uiText.updateDownloaded}</span>
-                  }
-                </div>
-                
-                {/* <strong>Reload</strong> will refresh the app. You may lose the
-                 progress, if any. */}
-                {needRefresh && (
-                  <>
-                    <button
-                      className='ReloadPrompt-toast-button'
-                      // Reloads the current window to allow the service worker take the control.
-                      onClick={() => updateServiceWorker(true)}
-                    >
-                      {uiText.reload}
-                    </button>
-                    {/* <strong>Cancel</strong> will install the update next time you visit
-                     the app. */}
-                    <button
-                      className='ReloadPrompt-toast-button'
-                      onClick={() => close()}
-                    >
-                      {uiText.later}
-                    </button>
-                  </>
-                )}
-                
-                {!needRefresh && (
+        <Modal css={ModalStyle.modalFrameBottom} disableUpNodesScroll>
+          <div className='ReloadPrompt-container'>
+            <div className='ReloadPrompt-toast'>
+              
+              <div className='ReloadPrompt-message'>
+                {offlineReady
+                  ? <span>{uiText.appReadyToWorkOffline}</span>
+                  : <span>{uiText.updateDownloaded}</span>
+                }
+              </div>
+              
+              {/* <strong>Reload</strong> will refresh the app. You may lose the
+               progress, if any. */}
+              {needRefresh && (
+                <>
+                  <button
+                    className='ReloadPrompt-toast-button'
+                    // Reloads the current window to allow the service worker take the control.
+                    onClick={() => updateServiceWorker(true)}
+                  >
+                    {uiText.reload}
+                  </button>
+                  {/* <strong>Cancel</strong> will install the update next time you visit
+                   the app. */}
                   <button
                     className='ReloadPrompt-toast-button'
                     onClick={() => close()}
                   >
-                    {uiText.ok}
+                    {uiText.later}
                   </button>
-                )}
+                </>
+              )}
               
-              </div>
+              {!needRefresh && (
+                <button
+                  className='ReloadPrompt-toast-button'
+                  onClick={() => close()}
+                >
+                  {uiText.ok}
+                </button>
+              )}
+            
             </div>
-          </Modal>
-        </ModalPortal>
+          </div>
+        </Modal>
       )}
     </>
   )

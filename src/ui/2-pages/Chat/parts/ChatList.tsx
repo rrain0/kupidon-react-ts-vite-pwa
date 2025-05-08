@@ -5,10 +5,9 @@ import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import MountController from 'src/ui/0-elements/MountController.tsx'
-import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
+import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
 import ChatListItem, { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
@@ -87,11 +86,9 @@ const ChatList = React.memo((props: ChatListProps) => {
       
       <MountController>
         {({ isOpen, allowUnmount }) => (
-          <ModalPortal>
-            <Modal css={ModalElement.modalCenteredStyle}>
-              Modalochka
-            </Modal>
-          </ModalPortal>
+          <Modal css={ModalElement.modalCenteredStyle}>
+            Modalochka
+          </Modal>
         )}
       </MountController>
       

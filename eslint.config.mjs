@@ -279,11 +279,11 @@ export default [
       '@stylistic/jsx-equals-spacing': ['error', 'never'],
       '@stylistic/jsx-first-prop-new-line': 'off', /*['error', 'multiline']*/
       '@stylistic/jsx-function-call-newline': 'off',
-      '@stylistic/jsx-indent': ['error', 2, {
+      '@stylistic/jsx-indent': ['warn', 2, {
         checkAttributes: true,
         indentLogicalExpressions: true,
       }],
-      '@stylistic/jsx-indent-props': ['error', 2],
+      '@stylistic/jsx-indent-props': ['warn', 2],
       '@stylistic/jsx-max-props-per-line': 'off',
       '@stylistic/jsx-newline': 'off',
       '@stylistic/jsx-one-expression-per-line': 'off',

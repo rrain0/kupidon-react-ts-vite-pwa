@@ -11,9 +11,8 @@ import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
+import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
@@ -57,47 +56,34 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   const actionText = useUiValues(ActionUiText)
   
   if (isOpen) return (
-    <ModalPortal>
-      <Modal
-        css={ModalElement.modalCenteredStyle}
-        onClick={() => onModal?.()}
-      >
-        <Card
-          css={cardS}
-        >
-          
-          <DialogContent>
-            {onDangerYes && (
-              <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
-            )}
-            <TitleBox>
-              <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
-            </TitleBox>
-          </DialogContent>
-          
-          <DialogButtons
-            //onClear={onClear}
-            onClose={onClose}
-            onBack={onBack}
-            onCancel={onCancel}
-            onOk={onOk}
-            onYes={onYes}
-            onDangerYes={onDangerYes}
-          />
-          
-        </Card>
-      </Modal>
-    </ModalPortal>
+    <Modal css={ModalElement.modalCenteredStyle} onClick={() => onModal?.()}>
+      <Card css={[ModalElement.card2Style, card2S]}>
+        
+        <DialogContent>
+          {onDangerYes && (
+            <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
+          )}
+          <TitleBox>
+            <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
+          </TitleBox>
+        </DialogContent>
+        
+        <DialogButtons
+          //onClear={onClear}
+          onClose={onClose}
+          onBack={onBack}
+          onCancel={onCancel}
+          onOk={onOk}
+          onYes={onYes}
+          onDangerYes={onDangerYes}
+        />
+        
+      </Card>
+    </Modal>
   )
   return undefined
 })
 export default ModalDialog
-
-
-const cardS = (t: AppTheme.Theme) => css`
-  ${ModalElement.card2Style};
-  ${card2S(t)};
-`
 
 
 const warnIcS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {

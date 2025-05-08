@@ -1,16 +1,15 @@
-import React, { PropsWithChildren, useMemo } from 'react'
+import { ReactU } from '@util/react/ReactU.ts'
+import React, { useMemo } from 'react'
 import { createPortal } from 'react-dom'
+import Children = ReactU.Children
 
 
 
-const ModalPortal = React.memo((props: PropsWithChildren) => {
+const ModalPortal = React.memo(({ children }: Children) => {
   const modalView = useMemo(() => document.getElementById('modal-outlet'), [])
   
-  return (
-    <>
-      {/* or maybe simply place it to the 'document.body' ... */}
-      {modalView && createPortal(props.children, modalView)}
-    </>
-  )
+  /* or maybe simply place it to the 'document.body' ... */
+  return modalView && createPortal(children, modalView)
 })
+ModalPortal.displayName = 'ModalPortal'
 export default ModalPortal

@@ -4,6 +4,7 @@ import { useOnThisClick } from '@util/pointer/useOnThisClick.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import { useUpNodesScrollLock } from '@util/pointer/useUpNodesScrollLock.ts'
+import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import Pu = TypeU.Pu
 import combineProps = ReactU.combineProps
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
@@ -14,7 +15,8 @@ import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 export type ModalProps = React.ComponentPropsWithRef<'article'> & Pu<{
   disableOnThisClick: boolean
   disableStopPointerAndMouseEvents: boolean
-  enableUpNodesScroll: boolean
+  disableUpNodesScroll: boolean
+  noPortal: boolean
 }>
 
 
@@ -23,7 +25,8 @@ const Modal = React.memo((props: ModalProps) => {
     ref,
     disableOnThisClick,
     disableStopPointerAndMouseEvents,
-    enableUpNodesScroll,
+    disableUpNodesScroll,
+    noPortal,
     onClick,
     ...restProps
   } = props
@@ -33,18 +36,23 @@ const Modal = React.memo((props: ModalProps) => {
   
   const onThisClick = useOnThisClick()
   
-  useUpNodesScrollLock(!enableUpNodesScroll, { elementRef: elemRef })
+  useUpNodesScrollLock(!disableUpNodesScroll, { elementRef: elemRef })
   
+  const Portal = noPortal ? React.Fragment : ModalPortal
   return (
-    <div
-      ref={elemRef}
-      {...combineProps(
-        restProps,
-        !disableOnThisClick ? onThisClick(onClick) : onClick,
-        !disableStopPointerAndMouseEvents && stopPointerAndMouseEvents(),
-      )}
-    />
+    <Portal>
+      <div
+        ref={elemRef}
+        data-display-name='Modal'
+        {...combineProps(
+          restProps,
+          !disableOnThisClick ? onThisClick(onClick) : onClick,
+          !disableStopPointerAndMouseEvents && stopPointerAndMouseEvents(),
+        )}
+      />
+    </Portal>
   )
 })
+Modal.displayName = 'Modal'
 export default Modal
 

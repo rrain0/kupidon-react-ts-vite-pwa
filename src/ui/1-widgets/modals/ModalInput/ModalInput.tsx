@@ -4,9 +4,8 @@ import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import { ModalElement } from 'src/ui/1-widgets/modals/ModalElement.tsx'
+import { ModalElement } from 'src/ui/components/modal/ModalElement.tsx'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
-import ModalPortal from 'src/ui/components/modal/ModalPortal/ModalPortal.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -40,22 +39,20 @@ const ModalInput = React.memo((props: ModalInputProps) => {
   const actionText = useUiValues(ActionUiText)
   
   if (isOpen) return (
-    <ModalPortal>
-      <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
-        <Card css={[CardS.card2S, ModalElement.card2Style]}>
-          <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
-          <Input css={InputStyle.outlinedRectSmallNormal}
-            {...restProps}
-          />
-          
-          <DialogButtons
-            //onCancel={onCancel}
-            //onClear={onClear}
-            onOk={onClose}
-          />
-        </Card>
-      </Modal>
-    </ModalPortal>
+    <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
+      <Card css={[CardS.card2S, ModalElement.card2Style]}>
+        <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
+        <Input css={InputStyle.outlinedRectSmallNormal}
+          {...restProps}
+        />
+        
+        <DialogButtons
+          //onCancel={onCancel}
+          //onClear={onClear}
+          onOk={onClose}
+        />
+      </Card>
+    </Modal>
   )
   return undefined
 })

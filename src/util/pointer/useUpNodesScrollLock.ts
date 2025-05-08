@@ -1,16 +1,16 @@
 import React, { useLayoutEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import commonCss from 'src/ui-data/style/common.module.scss'
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 
 
 
 export const useUpNodesScrollLock = (
   lock: boolean = false,
-  options: PartialUndef<{
+  options: Pu<{
     element: Element,
     elementRef: React.RefObject<Element | null>,
-  }> = {},
+  }> = { },
 ) => {
   useLayoutEffect(() => {
     const el = function() {
