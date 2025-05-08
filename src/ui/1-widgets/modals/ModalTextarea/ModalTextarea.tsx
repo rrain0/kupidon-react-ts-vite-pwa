@@ -42,8 +42,8 @@ const ModalTextarea = React.memo((props: ModalTextareaProps) => {
   
   
   if (isOpen) return (
-    <Modal css={ModalElement.modalForInputStyle} onClick={onClose}>
-      <Card css={[CardS.card2S, ModalElement.card2Style]}>
+    <Modal css={ModalElement.modalInputBoxS} onClick={onClose}>
+      <Card css={[CardS.card2S, ModalElement.cardBoxInModalS]}>
         
         <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
         

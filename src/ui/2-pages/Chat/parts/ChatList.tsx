@@ -84,13 +84,13 @@ const ChatList = React.memo((props: ChatListProps) => {
         )}
       </ChatListView>
       
-      <MountController>
+      {/* <MountController>
         {({ isOpen, allowUnmount }) => (
-          <Modal css={ModalElement.modalCenteredStyle}>
+          <Modal css={ModalElement.modalCenteredS}>
             Modalochka
           </Modal>
         )}
-      </MountController>
+      </MountController> */}
       
     </>
   )

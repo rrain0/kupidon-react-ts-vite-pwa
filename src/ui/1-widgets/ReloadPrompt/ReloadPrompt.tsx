@@ -2,7 +2,6 @@ import { Env } from '@util/app/Env.ts'
 import React from 'react'
 import './ReloadPrompt.css'
 import Modal from 'src/ui/components/modal/Modal/Modal.tsx'
-import { ModalStyle } from 'src/ui/components/modal/Modal/ModalStyle.ts'
 
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { pwaInfo } from 'virtual:pwa-info'
@@ -75,7 +74,7 @@ const ReloadPrompt = React.memo(() => {
     <>
       <div className='ReloadPrompt-buildDate'>{buildDate}</div>
       {(offlineReady || needRefresh) && (
-        <Modal css={ModalStyle.modalFrameBottom} disableUpNodesScroll>
+        <Modal onlyFrame>
           <div className='ReloadPrompt-container'>
             <div className='ReloadPrompt-toast'>
               

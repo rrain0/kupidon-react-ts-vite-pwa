@@ -44,6 +44,10 @@ export namespace EmotionCommon {
   export const round = css`
     border-radius: 999999px;
   `
+  export const noThisPointer = css`
+    pointer-events: none;
+    & > * { pointer-events: auto; }
+  `
   
   
   export const row = css`

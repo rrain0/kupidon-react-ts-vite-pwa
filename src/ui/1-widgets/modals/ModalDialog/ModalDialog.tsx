@@ -56,8 +56,8 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   const actionText = useUiValues(ActionUiText)
   
   if (isOpen) return (
-    <Modal css={ModalElement.modalCenteredStyle} onClick={() => onModal?.()}>
-      <Card css={[ModalElement.card2Style, card2S]}>
+    <Modal css={ModalElement.modalCenteredS} onClick={() => onModal?.()}>
+      <Card css={[ModalElement.cardBoxInModalS, card2S]}>
         
         <DialogContent>
           {onDangerYes && (

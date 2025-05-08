@@ -8,7 +8,7 @@ import {
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import fixed = WidgetStyleCommon.fixed
-import modalFloor1 = StyleVals.modalFloor1k
+import modalFloor1k = StyleVals.modalFloor1k
 
 
 
@@ -50,7 +50,7 @@ export namespace BottomSheetS6 {
     export const base: WidgetStyle = {
       sheetFrame: {
         ...fixed,
-        z: modalFloor1,
+        z: modalFloor1k,
         display: 'grid',
         placeItems: 'end center',
         pointer: false,

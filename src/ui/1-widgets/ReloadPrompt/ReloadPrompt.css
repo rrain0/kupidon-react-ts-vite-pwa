@@ -4,7 +4,6 @@
     width: 0;
     height: 0;
     color: black;
-    pointer-events: auto;
 }
 .ReloadPrompt-buildDate {
     position: absolute;
