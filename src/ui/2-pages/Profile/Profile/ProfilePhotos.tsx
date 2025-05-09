@@ -181,7 +181,6 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   
   const [springs, springApi] = useSprings(images.length, springStyle(), [images])
   const applyDragRef = useRef<Callback>(undefined)
-  // noinspection JSVoidFunctionReturnValueUsed
   const drag = useDrag(gesture => {
     const {
       first, active, last,
@@ -226,7 +225,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
       setDragState(undefined)
       applyDragRef.current = undefined
     }
-  }) as (...args: any[]) => ReactDOMAttributes
+  }, { })
   useEffect(() => {
     if (dragState === 'dragging') applyDragRef.current?.()
   }, [dragState])

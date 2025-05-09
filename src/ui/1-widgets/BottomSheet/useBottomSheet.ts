@@ -464,51 +464,47 @@ export const useBottomSheet = (
   
   
   
-  // noinspection JSVoidFunctionReturnValueUsed
-  const sheetDrag = useDrag(
-    gesture => {
-      const {
-        event: ev,
-        first, active, last,
-        movement: [mx, my],
-        velocity: [spdx, spdy], // px/ms (nonnegative)
-        direction: [dirx, diry], // positive for y is from top to bottom
-        xy: [vpx, vpy], // viewport x, viewport y
-      } = gesture
-      
-      /* console.log(
-        'velocityY:', spdy,
-        'directionY:', diry,
-      ) */
-      
-      if (first) {
-        setNewState('dragging')
-        dragStartRef.current = { ...dragStartInitialValue }
-        dragStartRef.current.isDragging = true
-        dragStartRef.current.sheetH = sheetSpring.height.get()
-      }
-      const newSheetH = dragStartRef.current.sheetH - my
-      if (active && dragStartRef.current.isDragging) {
-        sheetSpring.height.set(newSheetH)
-      }
-      if (last && dragStartRef.current.isDragging) {
-        dragStartRef.current.isDragging = false
-        const speed = pxPerMsToPercentVpHPerS(spdy) // % высоты viewport в секунду
-        if (speed > speedThreshold) {
-          dragStartRef.current.lastSpeed = speed
-          if (diry < 0) {
-            setNewState('snapping')
-            setNewSnapIdx(lastIndex(snapPoints))
-          } else {
-            setNewState('closing')
-          }
+  const sheetDrag = useDrag(gesture => {
+    const {
+      event: ev,
+      first, active, last,
+      movement: [mx, my],
+      velocity: [spdx, spdy], // px/ms (nonnegative)
+      direction: [dirx, diry], // positive for y is from top to bottom
+      xy: [vpx, vpy], // viewport x, viewport y
+    } = gesture
+    
+    /* console.log(
+      'velocityY:', spdy,
+      'directionY:', diry,
+    ) */
+    
+    if (first) {
+      setNewState('dragging')
+      dragStartRef.current = { ...dragStartInitialValue }
+      dragStartRef.current.isDragging = true
+      dragStartRef.current.sheetH = sheetSpring.height.get()
+    }
+    const newSheetH = dragStartRef.current.sheetH - my
+    if (active && dragStartRef.current.isDragging) {
+      sheetSpring.height.set(newSheetH)
+    }
+    if (last && dragStartRef.current.isDragging) {
+      dragStartRef.current.isDragging = false
+      const speed = pxPerMsToPercentVpHPerS(spdy) // % высоты viewport в секунду
+      if (speed > speedThreshold) {
+        dragStartRef.current.lastSpeed = speed
+        if (diry < 0) {
+          setNewState('snapping')
+          setNewSnapIdx(lastIndex(snapPoints))
         } else {
-          setNewState('adjusting')
+          setNewState('closing')
         }
+      } else {
+        setNewState('adjusting')
       }
-      
-    },
-  ) as (...args: any[]) => ReactDOMAttributes
+    }
+  }, { })
   
   
   

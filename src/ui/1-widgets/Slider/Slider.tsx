@@ -198,54 +198,51 @@ const Slider = React.memo(React.forwardRef<SliderRefElement, SliderProps>(
     }, [isDragging, outerValue, ...outerMinMax])
     
     
-    // noinspection JSVoidFunctionReturnValueUsed
-    const onTrackDrag = useDrag(
-      gesture => {
-        const {
-          first, active, last,
-          xy: [vpx, vpy],
-          movement: [mx, my],
-          delta: [dx, dy],
-        } = gesture
+    const onTrackDrag = useDrag(gesture => {
+      const {
+        first, active, last,
+        xy: [vpx, vpy],
+        movement: [mx, my],
+        delta: [dx, dy],
+      } = gesture
+      
+      const minMax = getMinMax()
+      const { vpx: trackX, w: trackW } = getTrackDimens()
+      
+      if (first) {
+        setDragStartProgress(0)
+        setDragProgress(0)
+        setIsDragging(true)
         
-        const minMax = getMinMax()
-        const { vpx: trackX, w: trackW } = getTrackDimens()
-        
-        if (first) {
-          setDragStartProgress(0)
-          setDragProgress(0)
-          setIsDragging(true)
-          
-          const startPx = vpx - (trackX + barLeftOffset + barRightOffset / 2)
-          const dragStartProgressRight = dPxToDProgress(
-            startPx, trackW, barLeftOffset, barRightOffset
-          )
-          setDragStartProgress(dragStartProgressRight)
-        }
-        
-        const dProgress = dPxToDProgress(dx, trackW, barLeftOffset, barRightOffset)
-        const dragProgress = getDragProgress() + dProgress
-        setDragProgress(dragProgress)
-        
-        const valueProgressRight = getDragStartProgress() + getDragProgress()
-        const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
-        setValueProgress(valueProgressRightClamped)
-        
-        const valueRight = progressToValue(valueProgressRightClamped, minMax)
-        const valueRightClamped = valueToClampedValue(valueRight, minMax)
-        
-        setOuterValue(valueRightClamped)
-        if (first) getOnValueDragStart()?.(valueRightClamped)
-        if (!first && !last) getOnValueDragging()?.(valueRightClamped)
-        
-        getUpdateBars()()
-        
-        if (last) {
-          setIsDragging(false)
-          getOnValueDragEnd()?.(valueRightClamped)
-        }
+        const startPx = vpx - (trackX + barLeftOffset + barRightOffset / 2)
+        const dragStartProgressRight = dPxToDProgress(
+          startPx, trackW, barLeftOffset, barRightOffset
+        )
+        setDragStartProgress(dragStartProgressRight)
       }
-    ) as () => ReactDOMAttributes
+      
+      const dProgress = dPxToDProgress(dx, trackW, barLeftOffset, barRightOffset)
+      const dragProgress = getDragProgress() + dProgress
+      setDragProgress(dragProgress)
+      
+      const valueProgressRight = getDragStartProgress() + getDragProgress()
+      const valueProgressRightClamped = progressToClampedProgress(valueProgressRight)
+      setValueProgress(valueProgressRightClamped)
+      
+      const valueRight = progressToValue(valueProgressRightClamped, minMax)
+      const valueRightClamped = valueToClampedValue(valueRight, minMax)
+      
+      setOuterValue(valueRightClamped)
+      if (first) getOnValueDragStart()?.(valueRightClamped)
+      if (!first && !last) getOnValueDragging()?.(valueRightClamped)
+      
+      getUpdateBars()()
+      
+      if (last) {
+        setIsDragging(false)
+        getOnValueDragEnd()?.(valueRightClamped)
+      }
+    }, { })
     
     
     

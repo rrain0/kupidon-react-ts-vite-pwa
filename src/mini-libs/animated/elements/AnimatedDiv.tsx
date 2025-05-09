@@ -3,22 +3,21 @@ import React, {
   useRef,
 } from 'react'
 import { AnimatedElemStyle, AnimatedElemAttrs } from 'src/mini-libs/animated/AnimatedProps.ts'
-import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import {
   useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Pu = TypeU.Pu
-import Children = ReactU.Children
 
 
 
 type AnimatedDivExtraProps = Pu<{
   animatedStyle: AnimatedElemStyle
   animatedAttrs: AnimatedElemAttrs
-}> & Children
+}>
 
-type AnimatedDivProps = React.ComponentPropsWithRef<'div'> & AnimatedDivExtraProps
+type AnimatedDivProps = React.ComponentPropsWithRef<typeof Flex> & AnimatedDivExtraProps
 
 
 
@@ -42,13 +41,13 @@ const AnimatedDiv = React.memo((props: AnimatedDivProps) => {
   
   
   return (
-    <div
-      data-display-name="AnimatedDiv"
+    <Flex
+      data-display-name='AnimatedDiv'
       {...restProps}
       ref={elemRef}
     >
       {children}
-    </div>
+    </Flex>
   )
 })
 

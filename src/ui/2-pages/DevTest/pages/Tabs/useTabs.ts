@@ -285,81 +285,78 @@ export const useTabs = (
   
   // You MUST use css 'touch-action: none;' before start dragging
   // to prevent browser gesture handling
-  // noinspection JSVoidFunctionReturnValueUsed
-  const tabDrag = useDrag(
-    gesture => {
-      const {
-        event: ev, currentTarget,
-        first, active, last,
-        movement: [mx, my],
-        velocity: [spdx, spdy], // px/ms (nonnegative)
-        direction: [dirx, diry], // positive for y is from top to bottom
-        xy: [vpx, vpy], // viewport scrollLeft, viewport y
-      } = gesture
-      
-      /* console.log(
-        'mx:', mx,
-        'my:', my,
-      ) */
-      
-      if (first) {
-        dragStartRef.current = { ...dragStartInitialValue }
-        dragStartRef.current.scrollLeft = tabContainerSpring.scrollLeft.get()
+  const tabDrag = useDrag(gesture => {
+    const {
+      event: ev, currentTarget,
+      first, active, last,
+      movement: [mx, my],
+      velocity: [spdx, spdy], // px/ms (nonnegative)
+      direction: [dirx, diry], // positive for y is from top to bottom
+      xy: [vpx, vpy], // viewport scrollLeft, viewport y
+    } = gesture
+    
+    /* console.log(
+      'mx:', mx,
+      'my:', my,
+    ) */
+    
+    if (first) {
+      dragStartRef.current = { ...dragStartInitialValue }
+      dragStartRef.current.scrollLeft = tabContainerSpring.scrollLeft.get()
+    }
+    
+    // drag threshold, px
+    const isMoreRadius = Math.hypot(mx, my) >= 5
+    const isToSideways = Math.abs(mx) > Math.abs(my)
+    
+    const isCanDrag = isMoreRadius && isToSideways
+    const isCannotStart = isMoreRadius && !isToSideways
+    
+    /* console.log({
+      isMoreRadius, isToSideways,
+      isCanDrag, isCannotStart
+    }) */
+    
+    if (!dragStartRef.current.isDragging) {
+      if (isCannotStart) dragStartRef.current.canStart = false
+    }
+    if (dragStartRef.current.canStart) {
+      if (isCanDrag) {
+        setNewState('dragging')
+        dragStartRef.current.canStart = false
+        dragStartRef.current.isDragging = true
+        applyWasDragged()
       }
-      
-      // drag threshold, px
-      const isMoreRadius = Math.hypot(mx, my) >= 5
-      const isToSideways = Math.abs(mx) > Math.abs(my)
-      
-      const isCanDrag = isMoreRadius && isToSideways
-      const isCannotStart = isMoreRadius && !isToSideways
-      
-      /* console.log({
-        isMoreRadius, isToSideways,
-        isCanDrag, isCannotStart
-      }) */
-      
-      if (!dragStartRef.current.isDragging) {
-        if (isCannotStart) dragStartRef.current.canStart = false
-      }
-      if (dragStartRef.current.canStart) {
-        if (isCanDrag) {
-          setNewState('dragging')
-          dragStartRef.current.canStart = false
-          dragStartRef.current.isDragging = true
-          applyWasDragged()
-        }
-      }
-      
-      const newScrollLeft = RangeU.clamp(
-        dragStartRef.current.scrollLeft - mx,
-        [0, maxScrollLeft]
-      )
-      
-      if (active && dragStartRef.current.isDragging) {
-        tabContainerSpring.scrollLeft.set(newScrollLeft)
-      }
-      if (last && dragStartRef.current.isDragging) {
-        // % ширины viewport в секунду
-        const speed = pxPerMsToPercentVpHPerS(spdx)
-        if (speed > speedThreshold) {
-          dragStartRef.current.lastSpeed = speed
-          if (dirx < 0) {
-            setNewState('snapping')
-            setNewTabIdx(Math.min(prevTabIdx + 1, lastTabIdx))
-          }
-          else {
-            setNewState('snapping')
-            setNewTabIdx(Math.max(prevTabIdx - 1, 0))
-          }
+    }
+    
+    const newScrollLeft = RangeU.clamp(
+      dragStartRef.current.scrollLeft - mx,
+      [0, maxScrollLeft]
+    )
+    
+    if (active && dragStartRef.current.isDragging) {
+      tabContainerSpring.scrollLeft.set(newScrollLeft)
+    }
+    if (last && dragStartRef.current.isDragging) {
+      // % ширины viewport в секунду
+      const speed = pxPerMsToPercentVpHPerS(spdx)
+      if (speed > speedThreshold) {
+        dragStartRef.current.lastSpeed = speed
+        if (dirx < 0) {
+          setNewState('snapping')
+          setNewTabIdx(Math.min(prevTabIdx + 1, lastTabIdx))
         }
         else {
-          setNewState('adjusting')
+          setNewState('snapping')
+          setNewTabIdx(Math.max(prevTabIdx - 1, 0))
         }
       }
-      
-    },
-  ) as () => ReactDOMAttributes
+      else {
+        setNewState('adjusting')
+      }
+    }
+    
+  }, { })
   
   
   

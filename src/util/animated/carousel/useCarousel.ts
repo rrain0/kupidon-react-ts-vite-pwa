@@ -371,8 +371,9 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     void animateTo({ autoNearest: true, vel0: vel, fromDrag })
   }
   
-  
   useEvent(() => updateViewsAndFinish(), deps)
+  
+  
   
   const getIntervalProps = () => {
     const { x, y, w, h } = getTrackProps()
@@ -382,6 +383,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     updateIntervalProgress,
     getIntervalDeltaProgress,
   } = useIntervalProgress({ getIntervalProps })
+  
+  
   
   // Второй и тд пальцы не смогут вызвать драг.
   // Если текущий драг был прерван, то он не сможет продолжиться.
@@ -403,9 +406,11 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   })
   
   
-  const applyOnEachDrag = useAsCallback((
-    dp: number, horizontal: boolean, vertical: boolean, drag: boolean
-  ) => {
+  const applyOnEachDrag = useAsCallback(({
+    dp, horizontal, vertical, drag,
+  }: {
+    dp: number, horizontal: boolean, vertical: boolean, drag: boolean,
+  }) => {
     const directional = isX && horizontal || isY && vertical
     if (directional) {
       lockTouchAction()
@@ -431,7 +436,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   
-  // noinspection JSVoidFunctionReturnValueUsed
+  
   const onTrackDrag = useDrag(gesture => {
     const {
       first, active, last,
@@ -439,7 +444,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       movement: [mx, my],
       delta: [dx, dy],
       velocity: [velxabs, velyabs], // px/ms (nonnegative)
-      direction: [dirx, diry], // -1, 0, 1, positive diry is from top to bottom
+      direction: [dirx, diry], // -1 | 0 | 1, positive diry is from top to bottom
       currentTarget,
     } = gesture
     const [velx, vely] = [dirx * velxabs, diry * velyabs]
@@ -451,21 +456,25 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     const { horizontal, vertical, drag } = getDragDirection({ mx, my })
     
     
+    // onFirstDrag
     if (first) {
       updateIntervalProgress({ value: vpVal, dValue: dVal, dValueProgress: getDeltaProgress() })
       applyOnFirstDrag()
     }
+    // onEachDrag
     {
       updateIntervalProgress({ dValue: dVal })
-      applyOnEachDrag(rf3(getIntervalDeltaProgress()), horizontal, vertical, drag)
+      applyOnEachDrag({ dp: rf3(getIntervalDeltaProgress()), horizontal, vertical, drag })
     }
+    // onDragging
     if (!first && !last) {
       /* applyOnDragging(...) */
     }
+    // onLastDrag
     if (last) {
       applyOnLastDrag(vel)
     }
-  })
+  }, { })
   
   
   

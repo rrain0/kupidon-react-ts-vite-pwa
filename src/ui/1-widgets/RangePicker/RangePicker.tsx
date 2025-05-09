@@ -149,105 +149,102 @@ const RangePicker = React.memo(
       }, [outerRange, outerMinMax])
       
       
-      // noinspection JSVoidFunctionReturnValueUsed
-      const onTrackDrag = useDrag(
-        gesture => {
-          const {
-            first, active, last,
-            xy: [vpx, vpy],
-            movement: [mx, my],
-            delta: [dx, dy],
-          } = gesture
+      const onTrackDrag = useDrag(gesture => {
+        const {
+          first, active, last,
+          xy: [vpx, vpy],
+          movement: [mx, my],
+          delta: [dx, dy],
+        } = gesture
+        
+        const minMax = getMinMax()
+        const { vpx: trackX, width: trackW } = getTrackDimens()
+        
+        const dPxToDProgress = (dPx: number) => RangeU.map(
+          dPx,
+          [0, (trackW - 2*tipWidth)],
+          [0, 100]
+        )
+        const dProgressToDValue = (dProgress: number) => RangeU.map(
+          dProgress,
+          [0, 100],
+          zeroBasedRange(minMax)
+        )
+        const progressToValue = (progress: number) => RangeU.clamp(
+          minMax[0] + dProgressToDValue(progress),
+          minMax
+        )
+        
+        if (first) {
+          setActiveTip(null)
+          setStartProgress(0)
+          setCurrProgress(0)
+          setIsDragging(true)
           
-          const minMax = getMinMax()
-          const { vpx: trackX, width: trackW } = getTrackDimens()
+          const startProgressLeft = dPxToDProgress(vpx - (trackX + 1/2*tipWidth))
+          const startProgressRight = dPxToDProgress(vpx - (trackX + 3/2*tipWidth))
+          const [progressLeft, progressRight] = getProgressRange()
           
-          const dPxToDProgress = (dPx: number) => RangeU.map(
-            dPx,
-            [0, (trackW - 2*tipWidth)],
-            [0, 100]
-          )
-          const dProgressToDValue = (dProgress: number) => RangeU.map(
-            dProgress,
-            [0, 100],
-            zeroBasedRange(minMax)
-          )
-          const progressToValue = (progress: number) => RangeU.clamp(
-            minMax[0] + dProgressToDValue(progress),
-            minMax
+          
+          setActiveTip(
+            (startProgressLeft - progressLeft) <= (progressRight - startProgressRight)
+              ? 'left' : 'right'
           )
           
-          if (first) {
-            setActiveTip(null)
-            setStartProgress(0)
-            setCurrProgress(0)
-            setIsDragging(true)
-            
-            const startProgressLeft = dPxToDProgress(vpx - (trackX + 1/2*tipWidth))
-            const startProgressRight = dPxToDProgress(vpx - (trackX + 3/2*tipWidth))
-            const [progressLeft, progressRight] = getProgressRange()
-            
-            
-            setActiveTip(
-              (startProgressLeft - progressLeft) <= (progressRight - startProgressRight)
-                ? 'left' : 'right'
-            )
-            
-            if (getActiveTip() === 'left') {
-              setStartProgress(startProgressLeft)
-            }
-            if (getActiveTip() === 'right') {
-              setStartProgress(startProgressRight)
-            }
+          if (getActiveTip() === 'left') {
+            setStartProgress(startProgressLeft)
           }
-          if (active) {
-            
-            const dProgress = dPxToDProgress(dx)
-            setCurrProgress(getCurrProgress() + dProgress)
-            
-            if (getActiveTip() === 'left') {
-              const [, progressRight] = getProgressRange()
-              const progressLeft = RangeU.clamp(
-                getStartProgress() + getCurrProgress(),
-                [0, progressRight]
-              )
-              setProgressRange([progressLeft, progressRight])
-              
-              const [, rangeR] = getRange()
-              const rangeL = RangeU.clamp(
-                progressToValue(progressLeft),
-                [minMax[0], rangeR]
-              )
-              setAllRanges([rangeL, rangeR])
-            }
-            if (getActiveTip() === 'right') {
-              const [progressLeft] = getProgressRange()
-              const progressRight = RangeU.clamp(
-                getStartProgress() + getCurrProgress(),
-                [progressLeft, 100]
-              )
-              setProgressRange([progressLeft, progressRight])
-              
-              const [rangeL] = getRange()
-              const rangeR = RangeU.clamp(
-                progressToValue(progressRight),
-                [rangeL, minMax[1]]
-              )
-              setAllRanges([rangeL, rangeR])
-            }
-            
-            const uiPercent = progressToUiPercent(getProgressRange(), trackW)
-            barSpringApi.set({
-              left: `${uiPercent[0]}%`,
-              right: `${uiPercent[1]}%`,
-            })
-            
-          }
-          if (last) {
-            setIsDragging(false)
+          if (getActiveTip() === 'right') {
+            setStartProgress(startProgressRight)
           }
         }
-      ) as () => ReactDOMAttributes
+        if (active) {
+          
+          const dProgress = dPxToDProgress(dx)
+          setCurrProgress(getCurrProgress() + dProgress)
+          
+          if (getActiveTip() === 'left') {
+            const [, progressRight] = getProgressRange()
+            const progressLeft = RangeU.clamp(
+              getStartProgress() + getCurrProgress(),
+              [0, progressRight]
+            )
+            setProgressRange([progressLeft, progressRight])
+            
+            const [, rangeR] = getRange()
+            const rangeL = RangeU.clamp(
+              progressToValue(progressLeft),
+              [minMax[0], rangeR]
+            )
+            setAllRanges([rangeL, rangeR])
+          }
+          if (getActiveTip() === 'right') {
+            const [progressLeft] = getProgressRange()
+            const progressRight = RangeU.clamp(
+              getStartProgress() + getCurrProgress(),
+              [progressLeft, 100]
+            )
+            setProgressRange([progressLeft, progressRight])
+            
+            const [rangeL] = getRange()
+            const rangeR = RangeU.clamp(
+              progressToValue(progressRight),
+              [rangeL, minMax[1]]
+            )
+            setAllRanges([rangeL, rangeR])
+          }
+          
+          const uiPercent = progressToUiPercent(getProgressRange(), trackW)
+          barSpringApi.set({
+            left: `${uiPercent[0]}%`,
+            right: `${uiPercent[1]}%`,
+          })
+          
+        }
+        if (last) {
+          setIsDragging(false)
+        }
+      }, { })
       
       
       

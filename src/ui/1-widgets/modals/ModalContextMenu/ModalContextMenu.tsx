@@ -11,7 +11,6 @@ import Modal from 'src/ui/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import Children = ReactU.Children
-import modalInputBoxS = ModalElements.modalInputBoxS
 import modalBottomCardBoxS = ModalElements.modalBottomCardBoxS
 
 

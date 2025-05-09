@@ -28,7 +28,6 @@ export type SpringAnimationData = Pu<{
 }>
 export const createSpringAnimation = ({
   mass, tension, friction, initVelocity, endValue,
-  // @ts-expect-error
 }: SpringAnimationParams): AnimationFun<number, SpringAnimationData | undefined> => ({
   startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
 }) => {
@@ -59,14 +58,15 @@ export type SpringParams = {
   tension: number
   friction: number
   from: number
-  initVelocity: number
+  initVelocity?: number | undefined
 }
-export type CurrSpringParams = Pu<{
+export type OutSpringParams = {
   value: number
   velocity: number
   time: number
   finished: boolean
-}>
+}
+export type CurrSpringParams = Pu<OutSpringParams>
 export type NextSpringParams = {
   to: number
   time: number
@@ -74,17 +74,24 @@ export type NextSpringParams = {
 }
 
 export const createSpring = ({
-  mass, tension, friction, from, initVelocity,
+  mass, tension, friction, from, initVelocity = 0,
 }: SpringParams) => ({
-  to, time, prev,
-}: NextSpringParams): CurrSpringParams => {
+  to, time, prev: _prev,
+}: NextSpringParams): OutSpringParams => {
   
-  if (prev?.finished) return prev
+  const prev = {
+    value: _prev?.value ?? from,
+    velocity: _prev?.velocity ?? initVelocity,
+    time: _prev?.time ?? time,
+    finished: _prev?.finished ?? false,
+  }
+  
+  if (prev.finished) return prev
   
   class SpringState {
     constructor(
-      public value = prev?.value ?? from,
-      public velocity = prev?.velocity ?? initVelocity ?? 0,
+      public value = prev.value,
+      public velocity = prev.velocity,
     ) { }
     get springRestoringForce() { return -1 * tension * (this.value - to) }
     get dampingForce() { return -1 * this.velocity * friction }
@@ -100,7 +107,7 @@ export const createSpring = ({
   
   // Время Δt между прошлой и новой анимацией
   const stepTime = 1 // ms
-  let restTime = time - (prev?.time ?? time)
+  let restTime = time - prev.time
   
   // Рассчитываем физику для каждого Δt
   while (restTime >= stepTime && !finished) {

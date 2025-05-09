@@ -111,7 +111,6 @@ const ScrollbarVertical = React.memo(
         dragStartRef.current.isByThumbBox = true
       }
       
-      // noinspection JSVoidFunctionReturnValueUsed
       const onTrackDrag = useDrag(gesture => {
         const {
           first, active, last,
@@ -154,7 +153,7 @@ const ScrollbarVertical = React.memo(
           setIsDragging(false)
           dragStartRef.current.isByThumbBox = false
         }
-      }) as () => ReactDOMAttributes
+      }, { })
       
       
       

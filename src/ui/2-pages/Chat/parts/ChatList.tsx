@@ -1,21 +1,21 @@
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
+import { useItemDrag } from '@util/animated/item-drag/useItemDrag.ts'
 import { useArray } from '@util/react-state/useArray.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
-import MountController from 'src/ui/0-elements/MountController.tsx'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
-import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
 import ChatListItem, { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
-import Modal from 'src/ui/components/modal/Modal.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 import Callback1 = TypeU.Callback1
-import card3S = CardS.card3S
+import combineProps = ReactU.combineProps
 
 
 
@@ -45,17 +45,29 @@ const ChatList = React.memo((props: ChatListProps) => {
   } = useArray<string>()
   
   
+  const {
+    isDragging,
+    getIsDragging, // stable
+    getWasDragged, // stable
+    onTrackDrag, // not stable
+    
+    getMxMy, // stable
+    animatedMxMy, // stable
+  } = useItemDrag({ noDrag: false })
+  
+  
+  
   return (
     <>
       
       <ChatListView g={20} col grow
         data-display-name='ChatList'
-        {...restProps}
+        {...combineProps(onTrackDrag(), restProps)}
       >
         {showItems && chatItems.map(({
           id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt,
           mute, order, lastMsgStatus, isWriting,
-        }) => {
+        }, i) => {
           
           return (
             <ChatListItemWrap
@@ -76,6 +88,7 @@ const ChatList = React.memo((props: ChatListProps) => {
               selected={selected(id)}
               anySelected={anySelected}
               toggleSelection={toggleSelection}
+              animatedMxMy={i === 0 ? animatedMxMy : undefined}
             />
           )
         })}
@@ -100,18 +113,17 @@ export default ChatList
 
 
 
-const ChatListView = styled(Flex)`
-  ${offsetToPageContentPaddings({ h: true, b: true })}
-  padding-top: 20px;
-  border-radius: 15px 15px 0 0;
-  // TODO Theme
-  background-color: white;
-  box-shadow: ${StyleVals.shadowLightSz} ${p => p.theme.shadow.bg2};
-`
+const ChatListView = styled(Flex)(({ theme: t }) => [
+  offsetToPageContentPaddings({ h: true, b: true }), {
+    paddingTop: 20,
+    borderRadius: '15px 15px 0 0',
+    // TODO Theme
+    backgroundColor: 'white',
+    boxShadow: `${StyleVals.shadowLightSz} ${t.shadow.bg2}`,
+  },
+])
 
-const NoItems = styled(Flex)`
-  
-`
+const NoItems = styled(Flex)()
 
 
 
@@ -119,9 +131,10 @@ type ChatListItemWrapProps = ChatListItemData & Pu<{
   selected: boolean
   anySelected: boolean
   toggleSelection: Callback1<string>
+  animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
 }>
 const ChatListItemWrap = ({
-  selected, anySelected, toggleSelection, ...restProps
+  selected, anySelected, toggleSelection, animatedMxMy, ...restProps
 }: ChatListItemWrapProps) => {
   const { id } = restProps
   
@@ -132,13 +145,28 @@ const ChatListItemWrap = ({
     toggleSelection?.(id)
   })
   
+  const a = animatedMxMy?.map(({ mx, my }) => {
+    return (mx || my) ? 1 : 'auto'
+  })
+  
   return (
-    <ChatListItem
-      {...restProps}
-      data-selected={toEmptyAttr(selected)}
-      onClick={onClick}
-      onLongPress={onLongPress}
-    />
+    <AnimatedDiv pos='rel' col alignSelf='stretch'
+      animatedStyle={{
+        transform: animatedMxMy?.map(({ mx, my }) => {
+          return `translate3d(${mx}px, ${my}px, 0)`
+        }),
+        zIndex: animatedMxMy?.map(({ mx, my }) => {
+          return ((mx || my) ? 1 : 'auto') as number | string
+        }),
+      }}
+    >
+      <ChatListItem
+        {...restProps}
+        data-selected={toEmptyAttr(selected)}
+        onClick={onClick}
+        onLongPress={onLongPress}
+      />
+    </AnimatedDiv>
   )
 }
 

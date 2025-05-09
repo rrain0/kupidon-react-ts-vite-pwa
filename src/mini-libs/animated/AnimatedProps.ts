@@ -17,7 +17,10 @@ export type AnimatedNumberOrUndef =
   AnimatedNumber | AnimatedUndef | AnimatedProperty<number | undefined>
 
 export type AnimatedStringOrNumberOrUndef =
-  AnimatedStringOrUndef | AnimatedNumberOrUndef | AnimatedProperty<string | number | undefined>
+  | AnimatedStringOrUndef
+  | AnimatedNumberOrUndef
+  | AnimatedProperty<string | number>
+  | AnimatedProperty<string | number | undefined>
 
 
 
