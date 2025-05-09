@@ -18,6 +18,16 @@ import isobject = TypeU.isobject
 // TODO COMPLETED Style split 'selP' by capital letters and check using 'in' operator
 // TODO ????????? Style Парсить свойство по чатсям (разделение по словам): bg: { image: '', size: '' }
 
+// TODO maybe prefix
+const allowedNamePrefixes = {
+  $button: 'a',
+  _button: 'a',
+  
+  $$button: 'a',
+  $_button: 'a',
+}
+
+
 
 
 export type EntitiesRecordTf0 = Record<string, WidgetTransformer>

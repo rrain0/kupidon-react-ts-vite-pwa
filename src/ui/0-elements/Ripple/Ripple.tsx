@@ -136,10 +136,10 @@ const Ripple = React.memo((props: RippleProps) => {
       r.style.scale = `${s.scale}`
       
       if (newTCnt) return new Promise<void>(resolve => {
-        r.ontransitionend = ev => {
+        r.ontransitionend = ev => requestAnimationFrame(() => {
           if (newTProps.includes(kebabCaseToCamelCase(ev.propertyName) as any)) newTCnt--
           if (!newTCnt) resolve()
-        }
+        })
       })
     }
   }

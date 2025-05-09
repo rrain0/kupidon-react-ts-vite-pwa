@@ -17,7 +17,6 @@ export namespace TypeU {
   
   export type HtmlEmptyAttr = '' | undefined
   export const toEmptyAttr = (value: any): HtmlEmptyAttr => value ? '' : undefined
-  export const falsyToUndef = <T>(value: T) => value ? value : undefined
   
   export type HtmlDataAttrs = { [Prop in `data-${string}`]?: string | undefined }
   
@@ -134,8 +133,6 @@ export namespace TypeU {
   })()
    */
   
-  
-  
   export function isObject<T, O extends object>(value: T | O): value is O {
     return value instanceof Object
   }
@@ -148,7 +145,7 @@ export namespace TypeU {
   
   
   export function isFinitenumber<T, N extends number>(v: T | N): v is N {
-    return typeof v === 'number' && isFinite(v)
+    return typeof v === 'number' && Number.isFinite(v)
   }
   export function isInt<T, N extends number>(v: T | N): v is N {
     return typeof v === 'number' && Number.isInteger(v)
@@ -172,7 +169,7 @@ export namespace TypeU {
   export type Predicate<T> = (v: T) => boolean
   export const tobool: Predicate<any> = value => !!value
   export type Filter<T> = (v: T) => any
-  export const defaultFilter: Filter<any> = value => !!value
+  export const defaultFilter: Filter<any> = tobool
   
   export type Combiner<T1, T2 = T1> = (a: T1, b: T2) => T1
   export type CombinerIndexed<T1, T2 = T1> = (a: T1, b: T2, aI: number, bI: number) => T1
@@ -209,4 +206,5 @@ export namespace TypeU {
     if (v === false) return falseV
     return v
   }
+  
 }

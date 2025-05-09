@@ -1,7 +1,10 @@
-import { css, keyframes } from '@emotion/react'
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import clsx from 'clsx'
 import React from 'react'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import Pu = TypeU.Pu
 
 // UI icons
 import AddModuleSvg from '@ic/normal/ui/add-module.svg?react'
@@ -121,14 +124,6 @@ import VaseMuseumSvg from '@ic/normal/special/vase-museum.svg?react'
 import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 
 
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-
-import { TypeU } from 'src/util/common/TypeU.ts'
-import Pu = TypeU.Pu
-import falsyToUndef = TypeU.falsyToUndef
-import isdef = TypeU.isdef
-
-
 
 
 export namespace SvgIconsPack {
@@ -159,13 +154,12 @@ export namespace SvgIconsPack {
     const {
       className,
       color, accentColor,
-      size, width, height,
+      size,
+      width: w = size,
+      height: h = size,
       SvgComponent,
       ...restProps
     } = props
-    
-    const w = width ?? size
-    const h = height ?? size
     
     const sizeProp = SvgIconS6.W.els.icon.ps!.size
     const colorProp = SvgIconS6.W.els.icon.ps!.color
@@ -173,17 +167,13 @@ export namespace SvgIconsPack {
     
     return (
       <SvgComponent
-        css={css`
-          width:  ${falsyToUndef(!isdef(w)) && sizeProp.var()};
-          height: ${falsyToUndef(!isdef(h)) && sizeProp.var()};
-          //max-width: 100%;
-          //max-height: 100%;
-          fill: ${color || colorProp.var('black')};
-          stroke: ${color || colorProp.var('black')};
-          ${accentColorProp.n}: ${accentColor ?? accentColorProp.var('gray')};
-        `}
-        width={w}
-        height={h}
+        css={{
+          width: w ?? sizeProp.var(),
+          height: h ?? sizeProp.var(),
+          fill: color ?? colorProp.var('black'),
+          stroke: color ?? colorProp.var('black'),
+          [accentColorProp.n]: accentColor ?? accentColorProp.var('gray'),
+        }}
         className={clsx(className, SvgIconS6.W.els.icon.n)}
         {...restProps}
       />

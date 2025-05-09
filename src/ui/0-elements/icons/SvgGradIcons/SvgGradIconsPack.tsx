@@ -1,10 +1,8 @@
-import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React from 'react'
 import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
-import falsyToUndef = TypeU.falsyToUndef
 
 
 // UI Icons
@@ -71,7 +69,7 @@ export namespace SvgGradIconsPack {
 
   // Base interface for gradient svg icons
   
-  import isundef = TypeU.isundef
+  import isdef = TypeU.isdef
   type BaseGradSvgIconCustomProps = Pu<{
     color0: string
     color1: string
@@ -96,13 +94,13 @@ export namespace SvgGradIconsPack {
     const {
       className,
       color0, color1,
-      size, width, height,
+      size,
+      width: w = size,
+      height: h = size,
       SvgComponent,
       ...restProps
     } = props
     
-    const w = width ?? size
-    const h = height ?? size
     
     const sizeProp = SvgGradIconS6.W.els.gradIcon.ps!.sz
     const color0Prop = SvgGradIconS6.W.els.gradIcon.ps!.color0
@@ -110,16 +108,12 @@ export namespace SvgGradIconsPack {
     
     return (
       <SvgComponent
-        css={css`
-          width:  ${falsyToUndef(isundef(w)) && sizeProp.var()};
-          height: ${falsyToUndef(isundef(h)) && sizeProp.var()};
-          //max-width: 100%;
-          //max-height: 100%;
-          ${color0Prop.n}: ${color0 || color0Prop.var('black')};
-          ${color1Prop.n}: ${color1 || color1Prop.var('black')};
-        `}
-        width={w}
-        height={h}
+        css={{
+          width: w ?? sizeProp.var(),
+          height: h ?? sizeProp.var(),
+          [color0Prop.n]: color0 ?? color0Prop.var('black'),
+          [color1Prop.n]: color1 ?? color1Prop.var('black'),
+        }}
         className={clsx(className, SvgGradIconS6.W.els.gradIcon.n)}
         {...restProps}
       />
