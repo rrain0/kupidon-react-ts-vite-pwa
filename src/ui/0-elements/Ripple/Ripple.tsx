@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { ObjectU } from '@util/common/ObjectU.ts'
-import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
@@ -20,7 +19,6 @@ import Pu = TypeU.Pu
 import FirstCanUndef = ArrayU.FirstCanUndef
 import useLog = ReactU.useLog
 import ObjectKeys = ObjectU.ObjectKeys
-import kebabCaseToCamelCase = StringU.kebabCaseToCamelCase
 
 
 

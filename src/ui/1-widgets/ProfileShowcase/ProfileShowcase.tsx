@@ -451,7 +451,6 @@ const PhotosStack = styled(AnimatedDiv)`
   touch-action: pan-x;
   pointer-events: none;
   will-change: transform, scale, opacity;
-  & > * { pointer-events: auto; }
 `
 
 const AnimatedPhotoBox = styled(AnimatedDiv)`

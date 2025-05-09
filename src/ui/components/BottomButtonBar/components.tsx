@@ -57,9 +57,6 @@ export namespace ButtonBarComponents {
     align-items: center;
     padding: 10px;
     gap: 10px;
-    &>*{
-      pointer-events: auto;
-    }
   `
   
   export const LeftButtonsContainer = styled.div`
@@ -69,9 +66,6 @@ export namespace ButtonBarComponents {
     align-items: center;
     justify-content: start;
     gap: 10px;
-    &>*{
-      pointer-events: auto;
-    }
   `
   export const CenterButtonsContainer = styled.div`
     pointer-events: none;
@@ -79,9 +73,6 @@ export namespace ButtonBarComponents {
     ${row};
     align-items: center;
     gap: 10px;
-    &>*{
-      pointer-events: auto;
-    }
   `
   export const RightButtonsContainer = styled.div`
     pointer-events: none;
@@ -90,9 +81,6 @@ export namespace ButtonBarComponents {
     align-items: center;
     justify-content: end;
     gap: 10px;
-    &>*{
-      pointer-events: auto;
-    }
   `
   
   

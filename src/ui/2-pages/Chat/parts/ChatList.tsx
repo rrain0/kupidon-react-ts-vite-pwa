@@ -88,7 +88,7 @@ const ChatList = React.memo((props: ChatListProps) => {
       </ChatListView>
       
       <ModalContextMenu isOpen={anySelected}>
-      
+        Здесь будут опции контекстного меню
       </ModalContextMenu>
       
     </>

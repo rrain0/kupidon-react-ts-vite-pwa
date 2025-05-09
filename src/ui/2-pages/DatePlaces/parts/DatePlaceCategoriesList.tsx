@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -174,8 +175,7 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
 const Overflow = styled.div`
   // Вертикальные маргины и паддинги нужны чтобы отображать тени у карточек
   --offset: 16px;
-  margin: calc(-1 * var(--offset));
-  padding: var(--offset);
+  ${virtualOffset({ a: 'var(--offset)' })}
   width: calc(100% + var(--offset) * 2);
   height: fit-content;
   overflow: auto;
@@ -183,7 +183,6 @@ const Overflow = styled.div`
   ${row};
   // Убирает расширенную тач-зону - на айос отрубает скролл
   //pointer-events: none;
-  /*& > * { pointer-events: auto; }*/
 `
 const ListRow = styled.div`
   width: fit-content;

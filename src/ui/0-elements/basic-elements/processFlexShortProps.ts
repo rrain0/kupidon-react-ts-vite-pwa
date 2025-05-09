@@ -6,15 +6,17 @@ import mapBool = TypeU.mapBool
 
 
 export type FlexShortProps = Pu<{
-  w: number | string
-  h: number | string
+  pos: string | 'rel' | 'abs' // 'rel' => 'relative', 'abs' => 'absolute
+  
+  w: number | string | 'full' | 'ct' // 'full' => '100%', 'ct' => 'fit-content'
+  h: number | string | 'full' | 'ct' // 'full' => '100%', 'ct' => 'fit-content'
   fullW: boolean // true => { width: '100%' }
   fullH: boolean // true => { height: '100%' }
   full: boolean // true => { width: '100%', height: '100%' }
-  wMin: number | string
-  hMin: number | string
-  wMax: number | string
-  hMax: number | string
+  wMin: number | string | 'full' // 'full' => '100%'
+  hMin: number | string | 'full' // 'full' => '100%'
+  wMax: number | string | 'full' // 'full' => '100%'
+  hMax: number | string | 'full' // 'full' => '100%'
   
   row: boolean
   rowRev: boolean
@@ -44,6 +46,7 @@ export const processFlexShortProps = <P extends object>(
   props: P & FlexShortProps
 ) => {
   const {
+    pos,
     w, h, fullW, fullH, full, wMin, hMin, wMax, hMax,
     row, rowRev, col, colRev, wrap, wrapRev,
     align, alignCt, alignSelf, justifyCt, center,
@@ -54,15 +57,41 @@ export const processFlexShortProps = <P extends object>(
   
   
   const flex = {
-    width: w,
-    height: h,
+    position: (() => {
+      if (pos === 'rel') return 'relative'
+      if (pos === 'abs') return 'absolute'
+      return pos
+    })(),
+    
+    width: (() => {
+      if (w === 'full') return '100%'
+      if (w === 'ct') return 'fit-content'
+      return w
+    })(),
+    height: (() => {
+      if (h === 'full') return '100%'
+      if (h === 'ct') return 'fit-content'
+      return h
+    })(),
     ...fullW && { width: '100%' },
     ...fullH && { height: '100%' },
     ...full && { width: '100%', height: '100%' },
-    minWidth: wMin,
-    minHeight: hMin,
-    maxWidth: wMax,
-    maxHeight: hMax,
+    minWidth: (() => {
+      if (wMin === 'full') return '100%'
+      return wMin
+    })(),
+    minHeight: (() => {
+      if (hMin === 'full') return '100%'
+      return hMin
+    })(),
+    maxWidth: (() => {
+      if (wMax === 'full') return '100%'
+      return wMax
+    })(),
+    maxHeight: (() => {
+      if (hMax === 'full') return '100%'
+      return hMax
+    })(),
     
     ...row && { flexDirection: 'row' as const },
     ...rowRev && { flexDirection: 'row-reverse' as const },

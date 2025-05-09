@@ -41,13 +41,17 @@ export namespace EmotionCommon {
   `
   
   
-  export const round = css`
-    border-radius: 999999px;
-  `
-  export const noThisPointer = css`
-    pointer-events: none;
-    & > * { pointer-events: auto; }
-  `
+  export const round = css({
+    borderRadius: 999999,
+  })
+  export const noPointer = css({
+    pointerEvents: 'none',
+  })
+  // This is not needed because i've set pointer-events: auto to all by default
+  /* export const noThisPointer = css({
+    pointerEvents: 'none',
+    '& > *': { pointerEvents: 'auto' },
+  }) */
   
   
   export const row = css`

@@ -13,7 +13,6 @@ import combineProps = ReactU.combineProps
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 import fixedBottom = EmotionCommon.fixedBottom
 import modalFloor1k = StyleVals.modalFloor1k
-import noThisPointer = EmotionCommon.noThisPointer
 
 
 
@@ -58,7 +57,7 @@ const Modal = React.memo((props: ModalProps) => {
         data-display-name='Modal'
         css={[
           noDim && { backgroundColor: 'transparent' },
-          noPointer && noThisPointer,
+          noPointer && EmotionCommon.noPointer,
         ]}
         {...combineProps(
           restProps,

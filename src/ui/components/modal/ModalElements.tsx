@@ -15,11 +15,11 @@ export namespace ModalElements {
     },
   ])
   
+  export const modalBottomCardBoxS = css([
+    gridEC, { paddingLeft: 20, paddingRight: 20 },
+  ])
   export const modalInputBoxS = css([
-    gridEC, {
-      padding: 20,
-      paddingBottom: 140,
-    },
+    modalBottomCardBoxS, { paddingBottom: 140 },
   ])
   
   export const cardBoxInModalS = css({

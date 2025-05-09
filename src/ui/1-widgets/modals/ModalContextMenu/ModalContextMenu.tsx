@@ -3,6 +3,7 @@ import { ReactU } from '@util/react/ReactU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import MountController, { MountControllerRenderProps } from 'src/ui/0-elements/MountController.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import React, { useEffect, useState } from 'react'
 import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
@@ -11,15 +12,13 @@ import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import Children = ReactU.Children
 import modalInputBoxS = ModalElements.modalInputBoxS
+import modalBottomCardBoxS = ModalElements.modalBottomCardBoxS
 
 
 
 
 const t = 150
 const b = 100
-
-
-// TODO make modal content
 
 
 
@@ -43,10 +42,12 @@ const ModalContextMenu = React.memo((props: ModalContextMenuProps) => {
       
       <MountController isOpen={isOpen}>
         {mountProps => (
-          <Modal css={modalS} onlyFrame>
-            <ContextMenu {...mountProps}>
-              {children}
-            </ContextMenu>
+          <Modal onlyFrame>
+            <PageContentLayout modalSm cssInner={modalBottomCardBoxS}>
+              <ContextMenu {...mountProps}>
+                {children}
+              </ContextMenu>
+            </PageContentLayout>
           </Modal>
         )}
       </MountController>
@@ -55,14 +56,6 @@ const ModalContextMenu = React.memo((props: ModalContextMenuProps) => {
 })
 ModalContextMenu.displayName = 'ModalContextMenu'
 export default ModalContextMenu
-
-
-const modalS = css([
-  modalInputBoxS, {
-    padding: 50,
-    paddingBottom: 0,
-  },
-])
 
 
 
@@ -139,6 +132,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
   )
 })
 ContextMenu.displayName = 'ContextMenu'
+
 
 
 const cardS = css({

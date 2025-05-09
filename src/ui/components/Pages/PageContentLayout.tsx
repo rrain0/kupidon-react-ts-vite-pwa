@@ -1,3 +1,5 @@
+import { Theme } from '@emotion/react'
+import { Interpolation } from '@emotion/serialize'
 import styled from '@emotion/styled'
 import { CssU } from '@util/css/CssU.ts'
 import { withDefaults } from '@util/react/withDefaults.tsx'
@@ -9,9 +11,10 @@ import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
-import col = EmotionCommon.col
 import Grow = ReactU.Grow
 import toPx = CssU.toPx
+import gridC = EmotionCommon.gridC
+import noPointer = EmotionCommon.noPointer
 
 
 
@@ -22,28 +25,34 @@ export type PageContentLayoutProps = Pu<{
   col: boolean
   colSm: boolean
   full: boolean
+  fullSm: boolean
+  modalSm:boolean
   
+  noInsets: boolean
   noInsetsForFilledBars: boolean
   noInsetsForTransBars: boolean
-  noInsets: boolean
+  
   ptDefault: number | string
   pbDefault: number | string
   
   classNameInner: string
   styleInner: CSSProperties
+  cssInner: Interpolation<Theme>
 }> & Grow & ClassStyle & Children
 
 export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const {
     className, style, children,
-    classNameInner, styleInner,
+    classNameInner, styleInner, cssInner,
     
-    col, colSm, full,
+    col, colSm, full, fullSm, modalSm,
+    
     grow,
     
-    noInsetsForFilledBars,
-    noInsetsForTransBars,
-    noInsets,
+    noInsets = modalSm,
+    noInsetsForFilledBars = noInsets,
+    noInsetsForTransBars = noInsets,
+    
     ptDefault, pbDefault,
   } = props
   
@@ -55,20 +64,26 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   })() */
     
   const pt = CssU.max(
-    !noInsets && !full && (toPx(ptDefault) ?? '30px'),
+    !noInsets && !full && !fullSm && (toPx(ptDefault) ?? '30px'),
     CssU.plus(
-      !noInsetsForFilledBars && !noInsets && 'var(--top-bars-inset)',
-      !noInsetsForTransBars && !noInsets && !full && 'var(--top-button-bar-height)'
+      !noInsetsForFilledBars && 'var(--top-bars-inset)',
+      !noInsetsForTransBars && !full && !fullSm && 'var(--top-button-bar-height)'
     )
   )
   const pb = CssU.plus(
-    !noInsets && !full && (toPx(pbDefault) ?? '30px'),
-    !noInsetsForFilledBars && !noInsets && 'var(--bottom-bars-inset)',
-    !noInsetsForTransBars && !noInsets && !full && 'var(--bottom-button-bar-height)'
+    !noInsets && !full && !fullSm && (toPx(pbDefault) ?? '30px'),
+    !noInsetsForFilledBars && 'var(--bottom-bars-inset)',
+    !noInsetsForTransBars && !full && !fullSm && 'var(--bottom-button-bar-height)'
   )
   
   
-  const Col = full ? ContentFull : ContentCol
+  const Frame = (() => {
+    if (full || fullSm || modalSm) return ContentFull
+    if (col || colSm) return ContentCol
+    return ContentCol
+  })()
+  const hasInner = fullSm || colSm || modalSm
+  
   const ph = {
     '--pl': '16px',
     '--pr': '16px',
@@ -83,29 +98,44 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   }
   
   return (
-    <Col grow={grow}
+    <Frame grow={grow}
       data-display-name='PageContentLayout'
+      css={[
+        col && { ...ph, ...pv },
+        full && pv,
+        (fullSm || modalSm) && gridC,
+        modalSm && noPointer,
+      ]}
       className={className}
-      style={{
-        ...col && { ...ph, ...pv },
-        ...full && pv,
-        ...style,
-      }}
+      style={style}
     >
-      {colSm && (
-        <ColSm grow={grow}
-          data-display-name='ColInner'
-          className={classNameInner}
-          style={{
-            ...pv, ...ph,
-            ...styleInner,
-          }}
-        >
-          {children}
-        </ColSm>
-      )}
-      {!colSm && children}
-    </Col>
+      
+      {hasInner && (() => {
+        const Inner = (() => {
+          if (fullSm || modalSm) return InnerFullSm
+          if (colSm) return InnerColSm
+          return InnerColSm
+        })()
+        return (
+          <Inner grow={grow}
+            data-display-name='PageContentInner'
+            css={[
+              colSm && { ...pv, ...ph },
+              fullSm && pv,
+              modalSm && noPointer,
+              cssInner,
+            ]}
+            className={classNameInner}
+            style={styleInner}
+          >
+            {children}
+          </Inner>
+        )
+      })()}
+      
+      {!hasInner && children}
+      
+    </Frame>
   )
 })
 PageContentLayout.displayName = 'PageContentLayout'
@@ -115,31 +145,30 @@ export default PageContentLayout
 
 
 
-const ContentCol = styled(Flex)`
-  position: relative;
-  width: 100%;
-  min-width: 0;
-  height: fit-content;
-  ${col};
-  gap: 10px;
-`
-
-const ColSm = styled(Flex)`
-  position: relative;
-  width: 100%;
-  max-width: ${colSmWMax}px;
-  min-width: 0;
-  height: fit-content;
-  align-self: center;
-  ${col};
-  align-items: stretch;
-`
+const ContentCol = withDefaults({
+  pos: 'rel',
+  fullW: true, wMin: 0, h: 'ct',
+  col: true, g: 10,
+}, styled(Flex)())
 
 const ContentFull = withDefaults({
+  pos: 'rel',
   full: true,
-}, styled(Flex)({
-  position: 'relative',
-}))
+}, styled(Flex)())
+
+
+
+const InnerColSm = withDefaults({
+  pos: 'rel',
+  fullW: true, wMax: colSmWMax, wMin: 0, h: 'fit-content',
+  col: true, alignSelf: true, align: 'stretch',
+}, styled(Flex)())
+
+const InnerFullSm = withDefaults({
+  pos: 'rel',
+  fullW: true, wMax: colSmWMax, wMin: 0, fullH: true,
+}, styled(Flex)())
+
 
 
 
