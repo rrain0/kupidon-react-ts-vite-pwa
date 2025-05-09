@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { ObjectU } from '@util/common/ObjectU.ts'
 import { StringU } from '@util/common/StringU.ts'
@@ -51,8 +52,8 @@ const Ripple = React.memo((props: RippleProps) => {
     ...restProps 
   } = props
   
-  const [getFrame, , frameRef] = useElemRefGetSet()
-  const [getRipple, , rippleRef] = useElemRefGetSet()
+  const [getFrame, setFrame] = useElemRefGetSet()
+  const [getRipple, setRipple] = useElemRefGetSet()
   
   
   const rippleProps = (() => {
@@ -120,102 +121,127 @@ const Ripple = React.memo((props: RippleProps) => {
     scale: 0,
     opacity: 0,
   })
-  const applyStyle = async (newStyle: Partial<Style>) => {
-    const r = rippleRef.current
-    if (r) {
-      const oldS = getStyle()
-      const s = { ...oldS, ...newStyle, transition: { ...oldS.transition, ...newStyle.transition } }
+  const applyStyle = (newStyle: Partial<Style>) => {
+    const el = getRipple()
+    if (el) {
+      const prevS = getStyle()
+      const s = { ...prevS, ...newStyle, transition: { ...prevS.transition, ...newStyle.transition } }
       setStyle(s)
       const tProps = ObjectKeys(s.transition).filter(p => s.transition[p])
-      const newTProps = ObjectKeys(newStyle.transition).filter(p => newStyle.transition?.[p])
-      let newTCnt = newTProps.length
       
-      r.ontransitionend = null
-      r.style.transition = tProps.map(p => s.transition[p]).join(', ') || 'none'
-      r.style.opacity = `${s.opacity}`
-      r.style.scale = `${s.scale}`
-      
-      if (newTCnt) return new Promise<void>(resolve => {
-        r.ontransitionend = ev => requestAnimationFrame(() => {
-          if (newTProps.includes(kebabCaseToCamelCase(ev.propertyName) as any)) newTCnt--
-          if (!newTCnt) resolve()
-        })
-      })
+      el.ontransitionend = null
+      el.style.transition = tProps.map(p => s.transition[p]).join(', ') || 'none'
+      el.style.opacity = `${s.opacity}`
+      el.style.scale = `${s.scale}`
     }
   }
   
 
   useEffect(() => {
-    (async () => {
-      const s = state
+    const el = getRipple()
+    let stale = false
+    
+    const s = state
+    if (el) {
       if (s === 'resetted') {
-        await applyStyle({
+        applyStyle({
           transition: { scale: '', opacity: '' },
           scale: 0, opacity: 0,
         })
+        toNext()
       }
       else if (s === 'showing') {
-        await applyStyle({
+        applyStyle({
           transition: {
             scale: `scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`,
             opacity: '',
           },
           scale: 1, opacity: 1,
         })
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          //console.log('ontransitionend', ev)
+          if (ev.propertyName !== 'scale') return
+          toNext()
+        })
       }
       else if (s === 'shown') {
-        await applyStyle({
+        applyStyle({
           transition: { scale: '', opacity: '' },
           scale: 1, opacity: 1,
         })
+        toNext()
       }
       else if (s === 'revealing') {
-        await applyStyle({
+        applyStyle({
           transition: {
             opacity: `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeOutExpo}`,
           },
           opacity: 1,
         })
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          //console.log('ontransitionend', ev)
+          if (ev.propertyName !== 'opacity') return
+          toNext()
+        })
       }
       else if (s === 'hiding') {
-        await applyStyle({
+        applyStyle({
           transition: {
             opacity: `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeInQuart}`,
           },
           opacity: 0,
         })
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          //console.log('ontransitionend', ev)
+          if (ev.propertyName !== 'opacity') return
+          toNext()
+        })
       }
       else if (s === 'hidden') {
-        await applyStyle({
+        applyStyle({
           transition: { opacity: '' },
           opacity: 0,
         })
+        toNext()
       }
-      toNext()
-    })()
+      else {
+        toNext()
+      }
+    }
+    return () => { stale = true }
   }, [state])
   
   
   
   return (
-    <div // RippleFrame
+    <RippleFrame
       data-display-name='Ripple'
-      ref={frameRef}
+      ref={setFrame}
       className={clsx(RippleS6.W.els.rippleFrame.n, className)}
       {...restProps}
     >
-      <div // Ripple
-        ref={rippleRef}
+      <RippleElem
+        ref={setRipple}
         className={RippleS6.W.els.ripple.n}
         style={rippleProps.dimens}
       />
-    </div>
+    </RippleFrame>
   )
 })
 Ripple.displayName = 'Ripple'
 export default Ripple
 
 
+
+const RippleFrame = styled.div()
+const RippleElem = styled.div({
+  transition: 'none',
+  scale: 0,
+  opacity: 0,
+})
 
 
 function calculateRippleProps(

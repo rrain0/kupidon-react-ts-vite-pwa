@@ -95,7 +95,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
         el.style.transition = `transform ${t}ms linear, bottom ${t}ms linear`
         el.style.bottom = `${b}px`
         el.style.transform = 'translateY(0%)'
-        el.ontransitionend = () => requestAnimationFrame(() => {
+        el.ontransitionend = ev => requestAnimationFrame(() => {
           el.ontransitionend = null
           if (stale) return
           setState('appeared')
@@ -111,7 +111,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
         el.style.transition = `transform ${t}ms linear, bottom ${t}ms linear`
         el.style.bottom = '0px'
         el.style.transform = 'translateY(110%)'
-        el.ontransitionend = () => requestAnimationFrame(() => {
+        el.ontransitionend = ev => requestAnimationFrame(() => {
           el.ontransitionend = null
           if (stale) return
           setState('disappeared')

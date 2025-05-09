@@ -235,11 +235,15 @@ const MbtiTestingPage = React.memo(() => {
   const [getQuestionTitle, , questionTitleRef] = useElemRefGetSet()
   
   useEvent(() => {
-    let stale = false
-    setTimeout(() => {
-      if (!stale) setDisplayed(curr)
-    }, transitionTime)
     const el = getQuestionTitle()
+    let stale = false
+    
+    // Фикс состояния на случай если вдруг анимации отломаются
+    setTimeout(() => {
+      if (stale) return
+      setDisplayed(curr)
+    }, transitionTime)
+    
     if (el && transition) {
       el.style.transition = 'none'
       el.style.transform = 'translateX(0)'
@@ -251,7 +255,7 @@ const MbtiTestingPage = React.memo(() => {
         el.style.transform =
           `translateX(${transition === 'fwd' ? '-' : ''}100px)`
         el.style.opacity = '0'
-        el.ontransitionend = () => requestAnimationFrame(() => {
+        el.ontransitionend = ev => requestAnimationFrame(() => {
           if (stale) return
           el.ontransitionend = null
           setDisplayed(curr)
