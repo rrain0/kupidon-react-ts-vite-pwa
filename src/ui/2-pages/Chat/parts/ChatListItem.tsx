@@ -2,7 +2,6 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
 import { useLiveShortDuration } from '@util/date/useLiveShortDuration.ts'
 import { useShortDurationUiText } from '@util/date/useShortDurationUiText.ts'
 import React, { useMemo } from 'react'
@@ -20,8 +19,6 @@ import IsWritingFiveDots, {
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
-import { ReactU } from 'src/util/react/ReactU'
-import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import trimDotZerosEnd = StringU.trimDotZerosEnd
 import max1Line = EmotionCommon.max1Line
@@ -34,8 +31,6 @@ import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
 import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
-import Callback = TypeU.Callback
 
 
 
@@ -72,7 +67,6 @@ export type ChatListItemProps =
 
 export const ChatListItem = React.memo((props: ChatListItemProps) => {
   const {
-    className, style,
     id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt = 0,
     mute, order = 0, lastMsgStatus, isWriting,
     ...restProps
@@ -168,7 +162,7 @@ export default ChatListItem
 const chatItemButtonS: AppWidgetStyle = t => [
   ButtonS6.S.text.rect.lg.normal, {
     button: {
-      w: undefined, h: 72, r: 20, ...virtualOffset({ h: 8, v: 6 }),
+      w: undefined, h: 72, r: 20, ph: 8, pv: 6,
       textAlign: 'start',
     },
     // TODO Theme

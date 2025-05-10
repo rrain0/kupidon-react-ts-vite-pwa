@@ -1,17 +1,27 @@
+import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { AnimationFun } from '@animated/AnimationConfig.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
-import { createSpring } from '@animated/SpringAnimation.tsx'
+import { createSpring, createSpringAnimation } from '@animated/SpringAnimation.tsx'
+import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import styled from '@emotion/styled'
 import { Spring2DAnimationData, useItemDrag } from '@util/animated/item-drag/useItemDrag.ts'
+import { RangeU } from '@util/common/RangeU.ts'
+import { virtualOffset } from '@util/css/virtualOffset.ts'
+import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useArray } from '@util/react-state/useArray.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import React, { useEffect, useState } from 'react'
+import { withDefaults } from '@util/react/withDefaults.tsx'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
 import ChatListItem, { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
@@ -20,6 +30,7 @@ import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 import Callback1 = TypeU.Callback1
 import combineProps = ReactU.combineProps
+import gridStackC = EmotionCommon.gridStackC
 
 
 
@@ -48,16 +59,19 @@ const ChatList = React.memo((props: ChatListProps) => {
     has: isSelected, toggle: toggleSelection,
   } = useArray<string>()
   
+  useNoTouchAction(isAnySelected)
   
   const [getLastPointerDownItemId, setLastPointerDownItemId] = useRefGetSet('')
   const {
     isDragging,
-    getIsDragging, // stable
-    getWasDragged, // stable
-    onTrackDrag, // not stable
+    getIsDragging,
+    getWasDragged,
+    onTrackDrag,
     
-    getMxMy, // stable
-    animatedMxMy, // stable
+    getMxMy,
+    animatedMxMy,
+    
+    eventListeners,
   } = useItemDrag({
     noDragging: !isSelected(getLastPointerDownItemId()),
   })
@@ -69,47 +83,57 @@ const ChatList = React.memo((props: ChatListProps) => {
     { mx: number, my: number }, Spring2DAnimationData | undefined
   > = ({
     startValue, time,
-    data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
+    data: { x, y } = { },
   }) => {
     
-    const springMx = createSpring({
+    const springX = createSpring({
       mass: 1, tension: 120, friction: 7, from: startValue.mx, initVelocity: 0,
     })
-    const prevMx = {
-      time: prevTimestamp, finished: finished?.mx,
-      velocity: prevVelocity?.mx, value: prevValue?.mx,
-    }
-    const currMx = springMx({ to: 0, time, prev: prevMx })
+    const currX = springX({ to: 0, time, prev: x })
     
-    
-    const springMy = createSpring({
+    const springY = createSpring({
       mass: 1, tension: 120, friction: 7, from: startValue.my, initVelocity: 0,
     })
-    const prevMy = {
-      time: prevTimestamp, finished: finished?.my,
-      velocity: prevVelocity?.my, value: prevValue?.my,
-    }
-    const currMy = springMy({ to: 0, time, prev: prevMy })
-    
+    const currY = springY({ to: 0, time, prev: y })
     
     return {
-      value: { mx: currMx.value, my: currMy.value },
-      finished: currMx.finished && currMy.finished,
-      data: {
-        prevTimestamp: currMx.time,
-        prevValue: { mx: currMx.value, my: currMy.value },
-        prevVelocity: { mx: currMx.velocity, my: currMy.velocity },
-        finished: { mx: currMx.finished, my: currMy.finished },
-      },
+      value: { mx: currX.value, my: currY.value },
+      finished: currX.finished && currY.finished,
+      data: { x: currX, y: currY },
     }
   }
   
+  const [getScrollStart, setScrollStart] = useRefGetSet(0)
+  const animatedScrollOffset = useAnimatedValue(0)
   
-  useEffect(() => {
-    if (!isDragging) {
-      animatedMxMy.animate({ animationFun: mxMyAnimationFun })
+  useLayoutEffect(() => {
+    const onScroll = ev => {
+      if (!getIsDragging()) {
+        if (!animatedScrollOffset.get()) animatedScrollOffset.set(0)
+      }
+      else {
+        animatedScrollOffset.set(getViewProps(window).scrollTop - getScrollStart())
+      }
     }
-  }, [isDragging])
+    window.addEventListener('scroll', onScroll)
+    return () => { window.removeEventListener('scroll', onScroll) }
+  }, [])
+  
+  
+  eventListeners.onDragStart = () => {
+    setScrollStart(getViewProps(window).scrollTop)
+  }
+  eventListeners.onDragEnd = () => {
+    animatedScrollOffset.animate({
+      animationFun: createSpringAnimation({
+        mass: 1, tension: 120, friction: 7, endValue: 0,
+      }),
+    })
+    animatedMxMy.animate({ animationFun: mxMyAnimationFun })
+  }
+  
+  
+  
   
   
   
@@ -146,6 +170,7 @@ const ChatList = React.memo((props: ChatListProps) => {
                 isAnySelected={isAnySelected}
                 toggleSelection={toggleSelection}
                 animatedMxMy={animatedMxMy}
+                animatedOffset={animatedScrollOffset}
                 
                 onPointerDown={() => setLastPointerDownItemId(id)}
               />
@@ -192,10 +217,11 @@ type ChatListItemWrapProps = ChatListItemData & Pu<{
   isAnySelected: boolean
   toggleSelection: Callback1<string>
   animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
+  animatedOffset: AnimatedProperty<number>
   onPointerDown: React.PointerEventHandler
 }>
 const ChatListItemWrap = ({
-  isSelected, isAnySelected, toggleSelection, animatedMxMy, ...restProps
+  isSelected, isAnySelected, toggleSelection, animatedMxMy, animatedOffset, ...restProps
 }: ChatListItemWrapProps) => {
   let { id, onPointerDown } = restProps
   
@@ -208,28 +234,51 @@ const ChatListItemWrap = ({
   onPointerDown = useAsCallback(onPointerDown)
   
   return (
-    <AnimatedDiv pos='rel' col alignSelf='stretch'
-      animatedStyle={{
-        transform: animatedMxMy?.map(({ mx, my }) => {
-          if (isSelected) return `translate3d(${mx}px, ${my}px, 0)`
-          return 'none'
-        }),
-        zIndex: animatedMxMy?.map(({ mx, my }): number | string => {
-          if (isSelected && (mx || my)) return 1
-          return 'auto'
-        }),
-      }}
-    >
-      <ChatListItem
-        data-selected={toEmptyAttr(isSelected)}
-        {...restProps}
-        onPointerDown={onPointerDown}
-        onClick={onClick}
-        onLongPress={onLongPress}
-      />
-    </AnimatedDiv>
+    <ChatListItemBox>
+      
+      {isSelected && <ChatListItemPlaceholder/>}
+      
+      <AnimatedDiv pos='rel' full col alignSelf='stretch'
+        animatedStyle={{
+          transform: animatedMapMulti([animatedMxMy, animatedOffset], (m, offset) => {
+            if (!m) return 'none'
+            offset ??= 0
+            const { mx, my } = m
+            if (isSelected) return `translate3d(${mx}px, ${my + offset}px, 0)`
+            return 'none'
+          }),
+          zIndex: animatedMxMy?.map(({ mx, my }): number | string => {
+            if (isSelected && (mx || my)) return 1
+            return 'auto'
+          }),
+        }}
+      >
+        <ChatListItem
+          data-selected={toEmptyAttr(isSelected)}
+          {...restProps}
+          onPointerDown={onPointerDown}
+          onClick={onClick}
+          onLongPress={onLongPress}
+        />
+      </AnimatedDiv>
+      
+    </ChatListItemBox>
   )
 }
+
+
+const ChatListItemBox = withDefaults({
+  alignSelf: 'stretch', h: 72, mv: -6, mh: -8,
+}, styled(Flex)(gridStackC))
+
+
+const ChatListItemPlaceholder = withDefaults({
+  full: true, r: 20,
+}, styled(Flex)(({ theme: t }) => [
+  {
+    backgroundColor: t.boxNormalCt.bgf,
+  },
+]))
 
 
 

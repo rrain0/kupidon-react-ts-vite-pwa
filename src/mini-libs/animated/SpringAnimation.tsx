@@ -17,11 +17,11 @@ export type SpringAnimationParams = {
   mass: number
   tension: number
   friction: number
-  initVelocity: number
+  initVelocity?: number | undefined
   endValue: number
 }
 export type SpringAnimationData = Pu<{
-  prevTimestamp: number
+  prevTime: number
   prevValue: number
   prevVelocity: number
   finished: boolean
@@ -29,12 +29,12 @@ export type SpringAnimationData = Pu<{
 export const createSpringAnimation = ({
   mass, tension, friction, initVelocity, endValue,
 }: SpringAnimationParams): AnimationFun<number, SpringAnimationData | undefined> => ({
-  startValue, time, data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
+  startValue, time, data: { prevTime, prevValue, prevVelocity, finished } = { },
 }) => {
   
   const spring = createSpring({ mass, tension, friction, from: startValue, initVelocity })
   const prev = {
-    time: prevTimestamp, finished, velocity: prevVelocity, value: prevValue,
+    time: prevTime, finished, velocity: prevVelocity, value: prevValue,
   }
   const curr = spring({ to: endValue, time, prev })
   
@@ -42,7 +42,7 @@ export const createSpringAnimation = ({
     value: curr.value,
     finished: curr.finished,
     data: {
-      prevTimestamp: curr.time,
+      prevTime: curr.time,
       prevValue: curr.value,
       prevVelocity: curr.velocity,
       finished: curr.finished,
@@ -108,6 +108,8 @@ export const createSpring = ({
   // Время Δt между прошлой и новой анимацией
   const stepTime = 1 // ms
   let restTime = time - prev.time
+  
+  //console.log('spring', restTime)
   
   // Рассчитываем физику для каждого Δt
   while (restTime >= stepTime && !finished) {

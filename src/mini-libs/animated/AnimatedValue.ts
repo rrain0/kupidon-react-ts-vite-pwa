@@ -1,5 +1,6 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {
@@ -14,6 +15,8 @@ import Callback1 = TypeU.Callback1
 import withThrottle = AsyncU.withThrottle
 import Pu = TypeU.Pu
 import isdef = TypeU.isdef
+import noRepeatLog = ReactU.noRepeatLog
+import noRepeatLog2 = ReactU.noRepeatLog2
 
 
 

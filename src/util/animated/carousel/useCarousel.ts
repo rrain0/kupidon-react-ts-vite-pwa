@@ -146,7 +146,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   } = useStateAndRef(false)
   const [getIsAnimating, setIsAnimating] = useRefGetSet(false)
   
-  const { lockTouchAction, unlockTouchAction } = useNoTouchAction()
+  const { allowTouchAction, forbidTouchAction } = useNoTouchAction()
   useNoSelect(isDragging)
   
   // Второй и тд пальцы не смогут вызвать драг.
@@ -411,12 +411,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }) => {
     const directional = isX && horizontal || isY && vertical
     if (directional) {
-      lockTouchAction()
+      allowTouchAction()
       if (!getIsDragging() && getCanStartDrag() && !getWasDragged() && drag) {
         applyOnDragStart()
       }
       if (!getIsDragging() && !getCanStartDrag()) {
-        unlockTouchAction()
+        forbidTouchAction()
       }
     }
     if (isDragging) {
@@ -428,7 +428,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const applyOnLastDrag = useAsCallback((vel: number) => {
     if (isDragging) updateViewsAndFinish(vel, true)
     setCanStartDrag(true)
-    unlockTouchAction()
+    forbidTouchAction()
     setIsDragging(false)
   })
   

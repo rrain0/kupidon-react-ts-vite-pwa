@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
+import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { StringU } from 'src/util/common/StringU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -47,6 +48,14 @@ export namespace ReactU {
   export const noRepeatLog = (...args: any[]) => {
     if (JSON.stringify(prevLog) !== JSON.stringify(args)) {
       prevLog = args
+      console.log(...args)
+    }
+  }
+  
+  let prevLog2
+  export const noRepeatLog2 = (...args: any[]) => {
+    if (!ArrayU.eq(args, prevLog2)) {
+      prevLog2 = args
       console.log(...args)
     }
   }

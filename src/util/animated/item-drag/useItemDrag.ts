@@ -1,5 +1,5 @@
 import { AnimationFun } from '@animated/AnimationConfig.ts'
-import { createSpring } from '@animated/SpringAnimation.tsx'
+import { createSpring, SpringAnimationData } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -11,18 +11,21 @@ import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/util/react-state/useStateAndRef.ts'
 import Pu = TypeU.Pu
+import Callback = TypeU.Callback
 
 
 
 
 export type Spring2DAnimationData = Pu<{
-  prevTimestamp: number
-  prevValue: { mx: number, my: number }
-  prevVelocity: { mx: number, my: number }
-  finished: { mx: boolean, my: boolean }
+  x: SpringAnimationData
+  y: SpringAnimationData
 }>
 
 
+export type UseItemDragEventListeners = Pu<{
+  onDragStart: Callback
+  onDragEnd: Callback
+}>
 
 export type UseItemDragProps = {
   noDragStart?: boolean | undefined
@@ -30,8 +33,7 @@ export type UseItemDragProps = {
 }
 
 export const useItemDrag = ({
-  noDragStart,
-  noDragging,
+  noDragStart, noDragging,
 }: UseItemDragProps = { }) => {
   
   const isX = true
@@ -44,8 +46,8 @@ export const useItemDrag = ({
   
   const [getDragWasStarted, setDragWasStarted] = useRefGetSet(false)
   
-  const { setLockTouchAction } = useNoTouchAction()
-  useNoSelect(isDragging && !noDragging)
+  const { setNoTouchAction } = useNoTouchAction()
+  const { setNoSelect } = useNoSelect()
   
   // Второй и тд пальцы не смогут вызвать драг.
   // Если текущий драг был прерван, то он не сможет продолжиться.
@@ -56,54 +58,60 @@ export const useItemDrag = ({
   const [getMxMy, setMxMy] = useRefGetSet({ mx: 0, my: 0 })
   const animatedMxMy = useAnimatedValue({ mx: 0, my: 0 })
   
+  const [getEventListeners] = useRefGetSet<UseItemDragEventListeners>({ })
+  
   const updateViews = () => {
+    //console.log('updateViews')
+    
     animatedMxMy.set(getMxMy())
-    return
     
     
-    const { mx: toMx, my: toMy } = getMxMy()
-    const { mx: vel0Mx, my: vel0My } =
-      (animatedMxMy.animationData as Spring2DAnimationData | undefined)?.prevVelocity ?? { }
-    const mxMyAnimationFun: AnimationFun<
-      { mx: number, my: number }, Spring2DAnimationData | undefined
-    > = ({
-      startValue, time,
-      data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
-    }) => {
-      
-      const springMx = createSpring({
-        mass: 1, tension: 120, friction: 7, from: startValue.mx, initVelocity: vel0Mx,
-      })
-      const prevMx = {
-        time: prevTimestamp, finished: finished?.mx,
-        velocity: prevVelocity?.mx, value: prevValue?.mx,
-      }
-      const currMx = springMx({ to: toMx, time, prev: prevMx })
-      
-      
-      const springMy = createSpring({
-        mass: 1, tension: 120, friction: 7, from: startValue.my, initVelocity: vel0My,
-      })
-      const prevMy = {
-        time: prevTimestamp, finished: finished?.my,
-        velocity: prevVelocity?.my, value: prevValue?.my,
-      }
-      const currMy = springMy({ to: toMy, time, prev: prevMy })
-      
-      
-      return {
-        value: { mx: currMx.value, my: currMy.value },
-        finished: currMx.finished && currMy.finished,
-        data: {
-          prevTimestamp: currMx.time,
-          prevValue: { mx: currMx.value, my: currMy.value },
-          prevVelocity: { mx: currMx.velocity, my: currMy.velocity },
-          finished: { mx: currMx.finished, my: currMy.finished },
-        },
-      }
-    }
     
-    animatedMxMy.animate({ animationFun: mxMyAnimationFun })
+    // TODO Animation - Springy drag
+    // Doesn't work
+    
+    // const { mx: toMx, my: toMy } = getMxMy()
+    // const {
+    //   x: { prevVelocity: vel0X, prevTime: time0X } = {},
+    //   y: { prevVelocity: vel0Y, prevTime: time0Y } = {},
+    // } = animatedMxMy.animationData as Spring2DAnimationData | undefined ?? { }
+    //
+    // console.log('animatedMxMy.animationData', animatedMxMy.animationData)
+    // console.log('time0X', time0X)
+    //
+    // const mxMyAnimationFun: AnimationFun<
+    //   { mx: number, my: number }, Spring2DAnimationData | undefined
+    // > = ({
+    //   startValue, time,
+    //   data: { x, y } = {},
+    // }) => {
+    //
+    //   const springX = createSpring({
+    //     mass: 1, tension: 120, friction: 7, from: startValue.mx, initVelocity: vel0X,
+    //   })
+    //   const currX = springX({ to: toMx, time, prev: x })
+    //   console.log('currX', currX)
+    //
+    //   const springY = createSpring({
+    //     mass: 1, tension: 120, friction: 7, from: startValue.my, initVelocity: vel0Y,
+    //   })
+    //   const currY = springY({ to: toMy, time, prev: y })
+    //
+    //   return {
+    //     value: { mx: currX.value, my: currY.value },
+    //     finished: currX.finished && currY.finished,
+    //     data: { x: currX, y: currY },
+    //   }
+    // }
+    //
+    // animatedMxMy.animate({
+    //   animationFun: mxMyAnimationFun,
+    //   /* initialData: {
+    //    x: { prevTime: time0X },
+    //    y: { prevTime: time0Y },
+    //    }, */
+    // })
+    //
   }
   
   
@@ -116,9 +124,11 @@ export const useItemDrag = ({
   })
   
   const applyOnDragStart = useAsCallback(() => {
+    if (!noDragging) setNoSelect(true)
     setIsDragging(true)
     setCanStartDrag(false)
     applyWasDragged()
+    getEventListeners().onDragStart?.()
     //tryEmitStartEvent({ fromDrag: true })
   })
   
@@ -127,15 +137,30 @@ export const useItemDrag = ({
       //setDeltaProgress(dp)
       setMxMy(m)
       if (!noDragging) {
-        setLockTouchAction(true)
+        setNoTouchAction(true)
         applyWasDragged()
         updateViews()
       }
       else {
-        setLockTouchAction(false)
+        setNoTouchAction(false)
       }
     }
   }
+  
+  const applyOnDragEnd = () => {
+    if (isDragging && !noDragging) {
+      //updateViewsAndFinish(vel, true) // TODO
+      updateViews()
+      getEventListeners().onDragEnd?.()
+    }
+    else {
+      setMxMy({ mx: 0, my: 0 })
+    }
+  }
+  
+  
+  
+  
   
   const applyOnEachDrag = useAsCallback(({
     m, horizontal, vertical, drag,
@@ -145,23 +170,23 @@ export const useItemDrag = ({
     if (noDragStart) setCanStartDrag(false)
     const directional = isX && horizontal || isY && vertical
     if (directional) {
-      let lockTouchAction = true
+      let noTouchAction = false
       if (!getIsDragging() && getCanStartDrag() && !getWasDragged() && drag) {
         applyOnDragStart()
       }
       if (!getIsDragging() && !getCanStartDrag()) {
-        lockTouchAction = false
+        noTouchAction = true
       }
-      setLockTouchAction(lockTouchAction)
+      setNoTouchAction(noTouchAction)
     }
     applyOnDragging({ m })
   })
   
   const applyOnLastDrag = useAsCallback(() => {
-    //if (isDragging) updateViewsAndFinish(vel, true) // TODO
-    if (isDragging) updateViews()
+    applyOnDragEnd()
     setCanStartDrag(true)
-    setLockTouchAction(false)
+    setNoTouchAction(false)
+    setNoSelect(false)
     setIsDragging(false)
   })
   
@@ -211,6 +236,8 @@ export const useItemDrag = ({
     
     getMxMy, // stable
     animatedMxMy, // stable
+    
+    eventListeners: getEventListeners(), // stable
   }
 }
 

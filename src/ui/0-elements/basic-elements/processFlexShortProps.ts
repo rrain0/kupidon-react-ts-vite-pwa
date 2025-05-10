@@ -18,6 +18,23 @@ export type FlexShortProps = Pu<{
   wMax: number | string | 'full' // 'full' => '100%'
   hMax: number | string | 'full' // 'full' => '100%'
   
+  r: number | string
+  
+  m: number | string
+  mv: number | string
+  mh: number | string
+  mt: number | string
+  mr: number | string
+  mb: number | string
+  ml: number | string
+  p: number | string
+  pv: number | string
+  ph: number | string
+  pt: number | string
+  pr: number | string
+  pb: number | string
+  pl: number | string
+  
   row: boolean
   rowRev: boolean
   col: boolean
@@ -48,6 +65,9 @@ export const processFlexShortProps = <P extends object>(
   const {
     pos,
     w, h, fullW, fullH, full, wMin, hMin, wMax, hMax,
+    r,
+    m, mv, mh, mt, mr, mb, ml,
+    p, pv, ph, pt, pr, pb, pl,
     row, rowRev, col, colRev, wrap, wrapRev,
     align, alignCt, alignSelf, justifyCt, center,
     basis, g, order, grow, shrink, noShrink,
@@ -92,6 +112,19 @@ export const processFlexShortProps = <P extends object>(
       if (hMax === 'full') return '100%'
       return hMax
     })(),
+    
+    borderRadius: r,
+    
+    margin: m,
+    marginTop: mt ?? mv,
+    marginRight: mr ?? mh,
+    marginBottom: mb ?? mv,
+    marginLeft: ml ?? mh,
+    padding: p,
+    paddingTop: pt ?? pv,
+    paddingRight: pr ?? ph,
+    paddingBottop: pb ?? pv,
+    paddingLeft: pl ?? ph,
     
     ...row && { flexDirection: 'row' as const },
     ...rowRev && { flexDirection: 'row-reverse' as const },
