@@ -4,7 +4,6 @@ import { useDrag } from '@use-gesture/react'
 import {
   MergeProgressCallback,
 } from 'src/util/animated/carousel/props/carouselPropsCommon.ts'
-import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { MathU } from 'src/util/common/MathU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
@@ -147,9 +146,13 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   } = useStateAndRef(false)
   const [getIsAnimating, setIsAnimating] = useRefGetSet(false)
   
-  const [lockTouchAction, unlockTouchAction] = useNoTouchAction()
+  const { lockTouchAction, unlockTouchAction } = useNoTouchAction()
   useNoSelect(isDragging)
-  const canUseGestures = useLockAppGestures(isDragging)
+  
+  // Второй и тд пальцы не смогут вызвать драг.
+  // Если текущий драг был прерван, то он не сможет продолжиться.
+  const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
+  const { getWasDragged, applyWasDragged } = useWasGesture()
   
   
   
@@ -386,11 +389,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   
   
-  // Второй и тд пальцы не смогут вызвать драг.
-  // Если текущий драг был прерван, то он не сможет продолжиться.
-  const [getCanStartDrag, setCanStartDrag] = useRefGetSet(true)
-  const { getWasDragged, applyWasDragged } = useWasGesture()
-  
   
   
   const applyOnFirstDrag = useAsCallback(() => {
@@ -414,7 +412,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     const directional = isX && horizontal || isY && vertical
     if (directional) {
       lockTouchAction()
-      if (!getIsDragging() && getCanStartDrag() && canUseGestures && drag) {
+      if (!getIsDragging() && getCanStartDrag() && !getWasDragged() && drag) {
         applyOnDragStart()
       }
       if (!getIsDragging() && !getCanStartDrag()) {
@@ -465,10 +463,6 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     {
       updateIntervalProgress({ dValue: dVal })
       applyOnEachDrag({ dp: rf3(getIntervalDeltaProgress()), horizontal, vertical, drag })
-    }
-    // onDragging
-    if (!first && !last) {
-      /* applyOnDragging(...) */
     }
     // onLastDrag
     if (last) {

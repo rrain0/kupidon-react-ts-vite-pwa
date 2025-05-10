@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import { animated, to, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import { TypeU } from '@util/common/TypeU'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { getViewProps } from 'src/util/view/ViewProps.ts'

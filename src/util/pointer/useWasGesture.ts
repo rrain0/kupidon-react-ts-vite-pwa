@@ -45,8 +45,10 @@ export const useWasGesture = ({
     return wasDraggedGlobal
   }, [])
   const setWasDragged = useCallback((wasDragged: boolean) => {
-    wasDraggedGlobal = wasDragged
-    if (wasDragged) onDragStartedListeners.forEach(it => it())
+    if (wasDraggedGlobal !== wasDragged) {
+      wasDraggedGlobal = wasDragged
+      if (wasDragged) onDragStartedListeners.forEach(it => it())
+    }
   }, [])
   const applyWasDragged = useCallback(() => setWasDragged(true), [])
   
@@ -64,8 +66,10 @@ export const useWasGesture = ({
     return wasLongPressedGlobal
   }, [])
   const setWasLongPressed = useCallback((wasLongPressed: boolean) => {
-    wasLongPressedGlobal = wasLongPressed
-    if (wasLongPressed) onLongPressedListeners.forEach(it => it())
+    if (wasLongPressedGlobal !== wasLongPressed) {
+      wasLongPressedGlobal = wasLongPressed
+      if (wasLongPressed) onLongPressedListeners.forEach(it => it())
+    }
   }, [])
   const applyLongPressed = useCallback(() => setWasLongPressed(true), [])
   

@@ -21,7 +21,6 @@ const MoveElementToAnotherViewTestPage = React.lazy(
   () => import('src/ui/2-pages/DevTest/pages/MoveElementToAnotherViewTestPage.tsx')
 )
 const PointerTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/pages/PointerTestPage.tsx'))
-const TabsTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/pages/TabsTestPage.tsx'))
 const StateTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/pages/StateTestPage.tsx'))
 const PageLifecycleTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/pages/PageLifecycleTestPage.tsx'))
 const UseEventTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/pages/UseEventTestPage.tsx'))
@@ -157,18 +156,6 @@ const testPointerRouting: RouteObject[] = [
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <PointerTestPage/>
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
-// path: 'dev-test / tabs / ...'
-const testTabsRouting: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<div>Loading...</div>}>
-        <TabsTestPage/>
       </Suspense>
     ),
   },
@@ -328,10 +315,6 @@ export const routingDevTest: RouteObject[] = [
   {
     path: RootRoute.devTest.pointer[path]+'/*',
     children: testPointerRouting,
-  },
-  {
-    path: RootRoute.devTest.tabs[path]+'/*',
-    children: testTabsRouting,
   },
   {
     path: RootRoute.devTest.state[path]+'/*',

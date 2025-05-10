@@ -2,6 +2,7 @@ import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef } from 
 import commonCss from 'src/ui-data/style/common.module.scss'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
+import isdef = TypeU.isdef
 
 
 const locks: Set<string> = new Set()
@@ -23,11 +24,8 @@ window.addEventListener('touchcancel', onTouch, { passive: false })
 * Может отменить перехват жестов браузером уже ПОСЛЕ появления события.
 * Листенеры не должны переприсваиваться и должны быть первее.
 * */
-export const useNoTouchAction = (isLock = false) => {
+export const useNoTouchAction = (isLock?: boolean) => {
   const reactId = useId()
-  useEffect(() => {
-    return () => void locks.delete(reactId)
-  }, [])
   
   const lock = useCallback(() => {
     locks.add(reactId)
@@ -40,9 +38,16 @@ export const useNoTouchAction = (isLock = false) => {
     else unlock()
   }, [])
   
+  // Instant effect
   useMemo(() => {
-    setLock(isLock)
+    if (isdef(lock)) setLock(isLock)
   }, [isLock])
   
-  return [lock, unlock, setLock]
+  useEffect(unlock, [])
+  
+  return {
+    lockTouchAction: lock,
+    unlockTouchAction: unlock,
+    setLockTouchAction: setLock,
+  }
 }

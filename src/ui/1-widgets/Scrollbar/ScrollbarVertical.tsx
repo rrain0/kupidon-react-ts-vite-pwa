@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 import { useDrag } from '@use-gesture/react'
-import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 import React, {
   useEffect,
   useImperativeHandle,

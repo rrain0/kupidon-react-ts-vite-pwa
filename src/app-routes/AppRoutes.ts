@@ -117,7 +117,6 @@ export namespace AppRoutes {
     resizeObserver: buildPath('resize-observer'),
     moveElementToAnotherView: buildPath('move-element-to-another-view'),
     pointer: buildPath('pointer'),
-    tabs: buildPath('tabs'),
     state: buildPath('state'),
     pageLifecycle: buildPath('page-lifecycle'),
     useEvent: buildPath('use-event'),

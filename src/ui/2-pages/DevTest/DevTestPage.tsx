@@ -126,11 +126,6 @@ const DevTestPage = React.memo(() => {
                 Pointer test
               </Button>
             </Link>
-            <Link to={RootRoute.devTest.tabs[fullAnySearchParams](searchParams)}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                Tabs test
-              </Button>
-            </Link>
             <Link to={RootRoute.devTest.state[fullAnySearchParams](searchParams)}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 State test

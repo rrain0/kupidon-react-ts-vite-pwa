@@ -1,8 +1,8 @@
 import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { ReactDOMAttributes } from '@use-gesture/react/dist/declarations/src/types'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
+import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import React, {
   useCallback,
@@ -28,7 +28,6 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/ui/2-pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
-import { useLockAppGestures } from 'src/util/app/useLockAppGestures.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
@@ -127,13 +126,17 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   // forbid gesture interception by browser
   const isLockGestures = dragState === 'dragging' || progressAnimLockGestures
   useNoTouchAction(isLockGestures)
-  const canUseGestures = useLockAppGestures(isLockGestures)
+  const { getWasDragged, applyWasDragged } = useWasGesture({
+    onDragStarted: () => {
+      if (!isLockGestures) {
+        setDragState(undefined)
+        setCanClick(false)
+      }
+    },
+  })
   useLayoutEffect(() => {
-    if (!canUseGestures) {
-      setDragState(undefined)
-      setCanClick(false)
-    }
-  }, [canUseGestures, dragState, canClick])
+    if (!getWasDragged()) applyWasDragged()
+  }, [isLockGestures])
   
   
   // swap photos
@@ -278,8 +281,10 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                       if (ev.buttons === 1) {
                         ev.currentTarget.releasePointerCapture(ev.pointerId)
                         setLastIdx(i)
-                        setDragState('initialDelay')
-                        setCanClick(true)
+                        if (!getWasDragged()) {
+                          setDragState('initialDelay')
+                          setCanClick(true)
+                        }
                       }
                     }
                     const onPointerRemove = () => {

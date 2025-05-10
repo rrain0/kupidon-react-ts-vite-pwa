@@ -1,12 +1,16 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import { AnimationFun } from '@animated/AnimationConfig.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import { createSpring } from '@animated/SpringAnimation.tsx'
 import styled from '@emotion/styled'
-import { useItemDrag } from '@util/animated/item-drag/useItemDrag.ts'
+import { Spring2DAnimationData, useItemDrag } from '@util/animated/item-drag/useItemDrag.ts'
 import { useArray } from '@util/react-state/useArray.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
 import ChatListItem, { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
@@ -40,11 +44,12 @@ const ChatList = React.memo((props: ChatListProps) => {
   const showItems = !!chatItems?.length
   
   const {
-    arr: selections, isNotEmpty: anySelected,
-    has: selected, toggle: toggleSelection,
+    arr: selected, isNotEmpty: isAnySelected,
+    has: isSelected, toggle: toggleSelection,
   } = useArray<string>()
   
   
+  const [getLastPointerDownItemId, setLastPointerDownItemId] = useRefGetSet('')
   const {
     isDragging,
     getIsDragging, // stable
@@ -53,7 +58,58 @@ const ChatList = React.memo((props: ChatListProps) => {
     
     getMxMy, // stable
     animatedMxMy, // stable
-  } = useItemDrag({ noDrag: false })
+  } = useItemDrag({
+    noDragging: !isSelected(getLastPointerDownItemId()),
+  })
+  
+  
+  
+  
+  const mxMyAnimationFun: AnimationFun<
+    { mx: number, my: number }, Spring2DAnimationData | undefined
+  > = ({
+    startValue, time,
+    data: { prevTimestamp, prevValue, prevVelocity, finished } = { },
+  }) => {
+    
+    const springMx = createSpring({
+      mass: 1, tension: 120, friction: 7, from: startValue.mx, initVelocity: 0,
+    })
+    const prevMx = {
+      time: prevTimestamp, finished: finished?.mx,
+      velocity: prevVelocity?.mx, value: prevValue?.mx,
+    }
+    const currMx = springMx({ to: 0, time, prev: prevMx })
+    
+    
+    const springMy = createSpring({
+      mass: 1, tension: 120, friction: 7, from: startValue.my, initVelocity: 0,
+    })
+    const prevMy = {
+      time: prevTimestamp, finished: finished?.my,
+      velocity: prevVelocity?.my, value: prevValue?.my,
+    }
+    const currMy = springMy({ to: 0, time, prev: prevMy })
+    
+    
+    return {
+      value: { mx: currMx.value, my: currMy.value },
+      finished: currMx.finished && currMy.finished,
+      data: {
+        prevTimestamp: currMx.time,
+        prevValue: { mx: currMx.value, my: currMy.value },
+        prevVelocity: { mx: currMx.velocity, my: currMy.velocity },
+        finished: { mx: currMx.finished, my: currMy.finished },
+      },
+    }
+  }
+  
+  
+  useEffect(() => {
+    if (!isDragging) {
+      animatedMxMy.animate({ animationFun: mxMyAnimationFun })
+    }
+  }, [isDragging])
   
   
   
@@ -62,45 +118,49 @@ const ChatList = React.memo((props: ChatListProps) => {
       
       <ChatListView g={20} col grow
         data-display-name='ChatList'
-        {...combineProps(onTrackDrag(), restProps)}
+        {...restProps}
       >
-        {showItems && chatItems.map(({
-          id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt,
-          mute, order, lastMsgStatus, isWriting,
-        }, i) => {
-          
-          return (
-            <ChatListItemWrap
-              id={id}
-              key={id}
-              ava={ava}
-              online={online}
-              name={name}
-              lastMsg={lastMsg}
-              lastMsgDate={lastMsgDate}
-              isLastMsgMy={isLastMsgMy}
-              unreadCnt={unreadCnt}
-              mute={mute}
-              order={order}
-              lastMsgStatus={lastMsgStatus}
-              isWriting={isWriting}
-              
-              selected={selected(id)}
-              anySelected={anySelected}
-              toggleSelection={toggleSelection}
-              animatedMxMy={i === 0 ? animatedMxMy : undefined}
-            />
-          )
-        })}
-        {!showItems && (
-          <Flex alignSelf='stretch' grow center>
-            {/* TODO Translation */}
-            <NoItems>Нет чатов</NoItems>
-          </Flex>
-        )}
+        <Contents {...onTrackDrag()}>
+          {showItems && chatItems.map(({
+            id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt,
+            mute, order, lastMsgStatus, isWriting,
+          }, i) => {
+            const isSel = isSelected(id)
+            return (
+              <ChatListItemWrap
+                id={id}
+                key={id}
+                ava={ava}
+                online={online}
+                name={name}
+                lastMsg={lastMsg}
+                lastMsgDate={lastMsgDate}
+                isLastMsgMy={isLastMsgMy}
+                unreadCnt={unreadCnt}
+                mute={mute}
+                order={order}
+                lastMsgStatus={lastMsgStatus}
+                isWriting={isWriting}
+                
+                isSelected={isSel}
+                isAnySelected={isAnySelected}
+                toggleSelection={toggleSelection}
+                animatedMxMy={animatedMxMy}
+                
+                onPointerDown={() => setLastPointerDownItemId(id)}
+              />
+            )
+          })}
+          {!showItems && (
+            <Flex alignSelf='stretch' grow center>
+              {/* TODO Translation */}
+              <NoItems>Нет чатов</NoItems>
+            </Flex>
+          )}
+        </Contents>
       </ChatListView>
       
-      <ModalContextMenu isOpen={anySelected}>
+      <ModalContextMenu isOpen={isAnySelected}>
         Здесь будут опции контекстного меню
       </ModalContextMenu>
       
@@ -128,41 +188,42 @@ const NoItems = styled(Flex)()
 
 
 type ChatListItemWrapProps = ChatListItemData & Pu<{
-  selected: boolean
-  anySelected: boolean
+  isSelected: boolean
+  isAnySelected: boolean
   toggleSelection: Callback1<string>
   animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
+  onPointerDown: React.PointerEventHandler
 }>
 const ChatListItemWrap = ({
-  selected, anySelected, toggleSelection, animatedMxMy, ...restProps
+  isSelected, isAnySelected, toggleSelection, animatedMxMy, ...restProps
 }: ChatListItemWrapProps) => {
-  const { id } = restProps
+  let { id, onPointerDown } = restProps
   
   const onClick = useAsCallback(() => {
-    if (anySelected) toggleSelection?.(id)
+    if (isAnySelected) toggleSelection?.(id)
   })
   const onLongPress = useAsCallback(() => {
     toggleSelection?.(id)
   })
-  
-  const a = animatedMxMy?.map(({ mx, my }) => {
-    return (mx || my) ? 1 : 'auto'
-  })
+  onPointerDown = useAsCallback(onPointerDown)
   
   return (
     <AnimatedDiv pos='rel' col alignSelf='stretch'
       animatedStyle={{
         transform: animatedMxMy?.map(({ mx, my }) => {
-          return `translate3d(${mx}px, ${my}px, 0)`
+          if (isSelected) return `translate3d(${mx}px, ${my}px, 0)`
+          return 'none'
         }),
-        zIndex: animatedMxMy?.map(({ mx, my }) => {
-          return ((mx || my) ? 1 : 'auto') as number | string
+        zIndex: animatedMxMy?.map(({ mx, my }): number | string => {
+          if (isSelected && (mx || my)) return 1
+          return 'auto'
         }),
       }}
     >
       <ChatListItem
+        data-selected={toEmptyAttr(isSelected)}
         {...restProps}
-        data-selected={toEmptyAttr(selected)}
+        onPointerDown={onPointerDown}
         onClick={onClick}
         onLongPress={onLongPress}
       />

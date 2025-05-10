@@ -9,7 +9,7 @@ export type GetDragDirectionProps = {
 export const getDragDirection = (props: GetDragDirectionProps) => {
   const { mx, my, dragThreshold = 5 } = props
   
-  const isPathEnough = Math.hypot(mx, my) >= dragThreshold
+  const isRadiusEnough = Math.hypot(mx, my) >= dragThreshold
   
   const horizontal = !!(mx || my) && Math.abs(mx) > Math.abs(my)
   const vertical = !!(mx || my) && Math.abs(mx) <= Math.abs(my)
@@ -17,7 +17,7 @@ export const getDragDirection = (props: GetDragDirectionProps) => {
   return {
     horizontal,
     vertical,
-    drag: isPathEnough,
+    drag: isRadiusEnough,
   } as const
 }
 

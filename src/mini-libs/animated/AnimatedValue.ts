@@ -34,7 +34,7 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
   startTime: number = 0
   startValue!: Value
-  cachedValue!: Value
+  cachedValue!: Value // last rendered value
   animationData: any
   animationFun: AnimationFun<Value, any> | undefined
   onUpdate: Callback1<AnimationConfigOnUpdateParams<Value>> | undefined
@@ -80,12 +80,9 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   async animate<D = undefined>(animation: AnimationConfig<Value, D>): Promise<AnimationEnded> {
     this.resetState()
     
-    this.startTime = getTime()
-    if (isdef(animation.startTime)) {
-      this.startTime = animation.startTime
-    }
-    this.startValue = animation.startValue
-    this.cachedValue = animation.startValue
+    this.startTime = animation.startTime ?? getTime()
+    this.startValue = animation.startValue ?? this.cachedValue
+    this.cachedValue = animation.startValue ?? this.cachedValue
     this.animationData = animation.initialData
     this.animationFun = animation.animationFun
     this.onUpdate = animation.onUpdate
