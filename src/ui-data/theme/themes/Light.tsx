@@ -43,27 +43,18 @@ export const Light = {
   
   
   
-  boxDefault: {
-    bg:            '#ffffff',
-    bg2:           '#f0f0f0',
-    
-    ct:            '#000000',
-    ct2:           '#1b1919',
-    ct3:           '#444444',
-    ct4:           '#5b5b5b',
-    ct5:           '#7b7b7b',
-    ct6:           '#838383',
-    ct7:           '#999999',
-    
-    ctSec:         '#858585',
-    ctSec4:        '#d1d1d1',
-    ctSec5:        '#dddddd',
-    ctSec6:        '#e3e3e3',
-    
-    cta2:          '#cbcad0',
-    bga4:          '#bbbbbb',
-    cta4:          '#000000',
-  },
+  boxDefault: { bg: '#ffffff', ct: '#1b1919' },
+  boxDefault2: { bg: '#ffffff', ct: '#000000', cta: '#cbcad0' },
+  boxDefault3: { bg: '#f0f0f0', ct: '#000000' },
+  boxDefault4: { ct: '#444444' },
+  boxDefault5: { ct: '#5b5b5b', ctSec: '#d1d1d1' },
+  boxDefault6: { ct: '#7b7b7b' },
+  boxDefault7: { ct: '#838383' },
+  boxDefault8: { ct: '#999999' },
+  boxDefault9: { bg: '#bbbbbb', ct: '#000000' },
+  boxDefault10: { ctSec: '#dddddd' },
+  boxDefault11: { ctSec: '#e3e3e3' },
+  
   boxNormal: {
     bg:            '#bbbbbb',
     ct:            '#000000',
@@ -95,6 +86,7 @@ export const Light = {
     bgf:           '#ffffff',
     ctf:           '#232020',
   },
+  
   boxAccent: {
     bg:            '#333333',
     ct:            '#ffffff',
@@ -139,12 +131,14 @@ export const Light = {
     bg:            '#ffffff',
     ct:            '#000000',
   },
+  
   boxMain: {
     bg:            '#7b7b7b',
     ct:            '#F8F8F8',
     bgFc:          '#aaaaaa',
     ctFc:          '#F8F8F8',
   },
+  
   boxSecondary: {
     bg:            '#E0E0E0',
     ct:            '#ABABAB',
@@ -156,6 +150,10 @@ export const Light = {
     bg:            '#E0E0E0',
     ct:            '#ffffff',
   },
+  boxSecondary4: {
+    ct:            '#858585',
+  },
+  
   boxDanger: {
     bg:            '#ffffff',
     ct:            '#e74c3c',
@@ -233,9 +231,9 @@ export const Light = {
   },
   
   rangePicker: {
-    trackBg:       ['#d1d1d1'],
-    barBg:         ['#333333'],
-    handleBg:      ['#F8F8F8'],
+    trackBg:       '#d1d1d1',
+    barBg:         '#333333',
+    handleBg:      '#F8F8F8',
   },
   
   
@@ -290,9 +288,9 @@ export const Light = {
   photos: {
     bg:                        '#ffeeee',
     ct:                        '#291f1d',
-    borderDrag:                ['#1F8DCD'],
-    highlightFrameBg:          ['#8B8B8B'],
-    highlightFrameAccentBg:    ['#000000'],
+    borderDrag:                '#1F8DCD',
+    highlightFrameBg:          '#8B8B8B',
+    highlightFrameAccentBg:    '#000000',
   },
   
   bottomSheet: {
@@ -308,20 +306,20 @@ export const Light = {
   toast: {
     bg:                        '#ffffff',
     ct:                        '#757575',
-    ct2:                       ['#b2b2b2'],
+    ct2:                       '#b2b2b2',
     ct3:                       '#000000',
-    accentNormal:              ['#bb86fc'],
-    accentLoadingBg:           ['#e0e0e0'],
-    accentLoadingCt:           ['#616161'],
-    accentInfo:                ['#3498db'],
-    accentOk:                  ['#07bc0c'],
-    accentWarn:                ['#f1c40f'],
-    accentDanger:              ['#e74c3c'],
+    accentNormal:              '#bb86fc',
+    accentLoadingBg:           '#e0e0e0',
+    accentLoadingCt:           '#616161',
+    accentInfo:                '#3498db',
+    accentOk:                  '#07bc0c',
+    accentWarn:                '#f1c40f',
+    accentDanger:              '#e74c3c',
   },
   scrollbar: {
-    track:         ['#25283622'],
-    thumb:         ['#25283644'],
-    thumbActive:   ['#999999'],
+    track:         '#25283622',
+    thumb:         '#25283644',
+    thumbActive:   '#999999',
   },
   
 } satisfies Theme

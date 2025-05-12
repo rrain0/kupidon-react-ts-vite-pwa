@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import React from 'react'
@@ -13,6 +14,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import Callback = TypeU.Callback
+import maxLines = EmotionCommon.maxLines
 
 
 
@@ -30,6 +32,7 @@ const OptionItem = React.memo((props: OptionItemProps) => {
   
   return (
     <Button
+      data-display-name='OptionItem'
       css={buttonStyle}
       onClick={onClick}
     >
@@ -48,6 +51,7 @@ const OptionItem = React.memo((props: OptionItemProps) => {
     </Button>
   )
 })
+OptionItem.displayName = 'OptionItem'
 export default OptionItem
 
 
@@ -90,7 +94,7 @@ const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.a
 }]
 const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconH: '50%',
-  iconColor: t.boxDefault.ct5,
+  iconColor: t.boxDefault6.ct,
 }]
 const TitleFrame = styled.div`
   grid-area: title;
@@ -98,7 +102,7 @@ const TitleFrame = styled.div`
   display: grid;
   place-items: center start;
   
-  color: ${p => p.theme.boxDefault.ct};
+  color: ${p => p.theme.boxDefault2.ct};
 `
 const ValueFrame = styled.div`
   grid-area: value;
@@ -106,18 +110,14 @@ const ValueFrame = styled.div`
   display: grid;
   place-items: center start;
 `
-const Value = styled.div`
-  display: -webkit-box;
-  
-  color: ${p => p.theme.boxDefault.ct5};
-  
-  max-height: 40px;
-  overflow: hidden;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  box-orient: vertical;
-  -webkit-box-orient: vertical;
-`
+const Value = styled.div(({ theme: t }) => ([
+  {
+    maxHeight: 40,
+    overflow: 'hidden',
+    color: t.boxDefault6.ct,
+  },
+  maxLines(2),
+]))
 const NextIconFrame = styled.div`
   grid-area: next;
   place-self: start stretch;
@@ -127,6 +127,6 @@ const NextIconFrame = styled.div`
   place-items: center;
 `
 const nextIconS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  iconSz: 24, iconColor: t.boxDefault.ct5,
+  iconSz: 24, iconColor: t.boxDefault6.ct,
 }]
 

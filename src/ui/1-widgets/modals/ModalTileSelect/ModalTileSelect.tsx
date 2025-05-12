@@ -104,11 +104,11 @@ const ModalTileSelect = ReactU.memo(
                 <div style={{ height: 24 }}/>
                 
                 <DialogButtons
-                  position="center"
+                  position='center'
                   //onCancel={onCancel}
                   //onClear={onClear}
                   onAccept={onClose}
-                  acceptVariant="filledRounded"
+                  acceptVariant='filledRounded'
                 />
                 
                 <div style={{ height: 24 }}/>
@@ -142,8 +142,8 @@ const Tile = React.memo(styled.div<Pu<{ isSelected: boolean }>>`
   border-radius: 999999px;
   ${Txt.s16Thin};
   ${p => p.isSelected && `
-    background-color: ${p.theme.boxDefault.bga4};
-    color: ${p.theme.boxDefault.cta4};
+    background-color: ${p.theme.boxDefault9.bg};
+    color: ${p.theme.boxDefault9.ct};
   `}
   cursor: pointer;
 `)

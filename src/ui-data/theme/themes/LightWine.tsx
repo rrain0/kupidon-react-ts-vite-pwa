@@ -116,9 +116,9 @@ export const LightWine = { ...Light,
   },
   
   rangePicker: { ...Light.rangePicker,
-    trackBg:        ['#ffdde5'],
-    barBg:          ['#bb2649'],
-    handleBg:       ['#F8F8F8'],
+    trackBg:        '#ffdde5',
+    barBg:          '#bb2649',
+    handleBg:       '#F8F8F8',
   },
   
   
@@ -141,20 +141,13 @@ export const LightWine = { ...Light,
   photos: { ...Light.photos,
     bg:                        '#ffeeee',
     ct:                        '#291f1d',
-    borderDrag:                ['#1F8DCD'],
-    highlightFrameBg:          ['#8B8B8B'],
-    highlightFrameAccentBg:    ['#ffbaba'],
+    borderDrag:                '#1F8DCD',
+    highlightFrameBg:          '#8B8B8B',
+    highlightFrameAccentBg:    '#ffbaba',
   },
   
   bottomSheet: { ...Light.bottomSheet },
   bottomSheetHandle: { ...Light.bottomSheetHandle },
-  
-  
-  scrollbar: { ...Light.scrollbar,
-    track:          ['#25283622'],
-    thumb:          ['#25283644'],
-    thumbActive:    ['#999999'],
-  },
   
   
 } satisfies Theme

@@ -109,9 +109,9 @@ export const DarkWine = { ...Dark,
   },
   
   rangePicker: { ...Dark.rangePicker,
-    trackBg:       ['#2e343f'],
-    barBg:         ['#bdbdbd'],
-    handleBg:      ['#000000'],
+    trackBg:       '#2e343f',
+    barBg:         '#bdbdbd',
+    handleBg:      '#000000',
   },
   
   
@@ -131,20 +131,13 @@ export const DarkWine = { ...Dark,
   photos: { ...Dark.photos,
     bg:                       '#ffeeee',
     ct:                       '#291f1d',
-    borderDrag:               ['#1F8DCD'],
-    highlightFrameBg:         ['#8B8B8B'],
-    highlightFrameAccentBg:   ['#ffe1e1'],
+    borderDrag:               '#1F8DCD',
+    highlightFrameBg:         '#8B8B8B',
+    highlightFrameAccentBg:   '#ffe1e1',
   },
   
   bottomSheet: { ...Dark.bottomSheet },
   bottomSheetHandle: { ...Dark.bottomSheetHandle },
-  
-  
-  scrollbar: { ...Dark.scrollbar,
-    track:         ['#F8F8F822'],
-    thumb:         ['#F8F8F844'],
-    thumbActive:   ['#999999'],
-  },
   
 } satisfies Theme
 

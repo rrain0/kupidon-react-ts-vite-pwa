@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { StyledComponent } from '@emotion/styled'
 import React from 'react'
 
 
@@ -62,7 +61,7 @@ export namespace AppTheme {
     
     page: {
       bg:            string
-      bgGrad:        string[]
+      bgGrad:        [string, string, string]
       ct:            string
       ct2:           string
       ct3:           string
@@ -78,27 +77,18 @@ export namespace AppTheme {
     
     
     
-    boxDefault: {
-      bg:            string
-      bg2:           string
-      
-      ct:            string
-      ct2:           string
-      ct3:           string
-      ct4:           string
-      ct5:           string
-      ct6:           string
-      ct7:           string
-      
-      ctSec:         string
-      ctSec4:        string
-      ctSec5:        string
-      ctSec6:        string
-      
-      cta2:          string
-      bga4:          string
-      cta4:          string
-    }
+    boxDefault: { bg: string, ct: string }
+    boxDefault2: { bg: string, ct: string, cta: string }
+    boxDefault3: { bg: string, ct: string }
+    boxDefault4: { ct: string }
+    boxDefault5: { ct: string, ctSec: string }
+    boxDefault6: { ct: string }
+    boxDefault7: { ct: string }
+    boxDefault8: { ct: string }
+    boxDefault9: { bg: string, ct: string }
+    boxDefault10: { ctSec: string }
+    boxDefault11: { ctSec: string }
+    
     // normal button
     boxNormal: {
       bg:            string
@@ -131,6 +121,7 @@ export namespace AppTheme {
       bgf:           string
       ctf:           string
     }
+    
     boxAccent: {
       bg:            string
       ct:            string
@@ -175,6 +166,7 @@ export namespace AppTheme {
       bg:            string
       ct:            string
     }
+    
     // main button (submit button)
     boxMain: {
       bg:            string
@@ -182,6 +174,7 @@ export namespace AppTheme {
       bgFc:          string
       ctFc:          string
     }
+    
     boxSecondary: {
       bg:            string
       ct:            string
@@ -195,6 +188,11 @@ export namespace AppTheme {
       bg:            string
       ct:            string
     }
+    // Мелкий жирный текст второго плана для необязательной поясняющей доп инфы
+    boxSecondary4: {
+      ct:            string
+    }
+    
     boxDanger: {
       bg:            string
       ct:            string
@@ -262,9 +260,9 @@ export namespace AppTheme {
     }
     
     rangePicker: {
-      trackBg:       string[]
-      barBg:         string[]
-      handleBg:      string[]
+      trackBg:       string
+      barBg:         string
+      handleBg:      string
     }
     
     ripple: {
@@ -339,9 +337,9 @@ export namespace AppTheme {
     photos: {
       bg:                      string
       ct:                      string
-      borderDrag:              string[]
-      highlightFrameBg:        string[]
-      highlightFrameAccentBg:  string[]
+      borderDrag:              string
+      highlightFrameBg:        string
+      highlightFrameAccentBg:  string
     }
     
     bottomSheet: {
@@ -356,20 +354,20 @@ export namespace AppTheme {
     toast: {
       bg:                      string
       ct:                      string
-      ct2:                     string[]
+      ct2:                     string
       ct3:                     string
-      accentNormal:            string[]
-      accentLoadingBg:         string[]
-      accentLoadingCt:         string[]
-      accentInfo:              string[]
-      accentOk:                string[]
-      accentWarn:              string[]
-      accentDanger:            string[]
+      accentNormal:            string
+      accentLoadingBg:         string
+      accentLoadingCt:         string
+      accentInfo:              string
+      accentOk:                string
+      accentWarn:              string
+      accentDanger:            string
     }
     scrollbar: {
-      track:         string[]
-      thumb:         string[]
-      thumbActive:   string[]
+      track:         string
+      thumb:         string
+      thumbActive:   string
     }
   }
   

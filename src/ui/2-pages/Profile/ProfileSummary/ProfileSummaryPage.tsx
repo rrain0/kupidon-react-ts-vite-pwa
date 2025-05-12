@@ -245,7 +245,7 @@ const Gear = styled.div`
 `
 const gearIc: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
   iconSz: 'full',
-  iconColor: t.boxDefault.ct6,
+  iconColor: t.boxDefault7.ct,
 }]
 
 
@@ -258,13 +258,13 @@ const Name = styled.div`
   font-weight: 600;
   font-size: 20px;
   line-height: 119%;
-  color: ${p => p.theme.boxDefault.ct2};
+  color: ${p => p.theme.boxDefault.ct};
 `
 const Info = styled.div`
   font-weight: 400;
   font-size: 17px;
   line-height: 119%;
-  color: ${p => p.theme.boxDefault.ct6};
+  color: ${p => p.theme.boxDefault7.ct};
 `
 const Edit = styled.div`
   min-width: 142px;
@@ -282,7 +282,7 @@ const editBtnStyle = (t: AppTheme.Theme) => css`
 const Divider = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${p => p.theme.boxDefault.ctSec6};
+  background-color: ${p => p.theme.boxDefault11.ctSec};
 `
 
 
@@ -301,7 +301,7 @@ const LineProgressFrame = styled.div`
   height: 8px;
   border-radius: 999999px;
   ${row};
-  background-color: ${p => p.theme.boxDefault.ctSec6};
+  background-color: ${p => p.theme.boxDefault11.ctSec};
 `
 const LineProgress = styled.div`
   width: 0;
@@ -319,6 +319,6 @@ const LinePercent = styled.div`
 const CompleteProfileText = styled.div`
   justify-self: stretch;
   ${Txt.s16Wide};
-  color: ${p => p.theme.boxDefault.ct2};
+  color: ${p => p.theme.boxDefault.ct};
   text-align: center;
 `

@@ -83,8 +83,8 @@ export const LightPink = { ...Light,
   },
   
   photos: { ...Light.photos,
-    highlightFrameBg:       ['#8B8B8B'],
-    highlightFrameAccentBg: ['#ffbaba'],
+    highlightFrameBg:       '#8B8B8B',
+    highlightFrameAccentBg: '#ffbaba',
   },
   
   bottomSheet: { ...Light.bottomSheet,
@@ -97,8 +97,8 @@ export const LightPink = { ...Light,
   
   
   scrollbar: { ...Light.scrollbar,
-    track: ['#25283622'],
-    thumb: ['#25283644'],
+    track: '#25283622',
+    thumb: '#25283644',
   },
   
 } satisfies Theme

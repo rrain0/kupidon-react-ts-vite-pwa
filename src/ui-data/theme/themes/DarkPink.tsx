@@ -84,8 +84,8 @@ export const DarkPink = { ...Dark,
   },
   
   photos: { ...Dark.photos,
-    highlightFrameBg:       ['#8B8B8B'],
-    highlightFrameAccentBg: ['#ffe1e1'],
+    highlightFrameBg:       '#8B8B8B',
+    highlightFrameAccentBg: '#ffe1e1',
   },
   
   bottomSheet: { ...Dark.bottomSheet,
@@ -98,8 +98,8 @@ export const DarkPink = { ...Dark,
   
   
   scrollbar: { ...Dark.scrollbar,
-    track: ['#F8F8F822'],
-    thumb: ['#F8F8F844'],
+    track: '#F8F8F822',
+    thumb: '#F8F8F844',
   },
   
 } satisfies Theme

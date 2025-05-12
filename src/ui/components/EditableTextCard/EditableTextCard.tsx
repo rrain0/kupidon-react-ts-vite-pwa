@@ -93,7 +93,7 @@ const pencilIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
     area: 'icon',
     alignSelf: 'center',
     sz: 20,
-    color: t.boxDefault.ctSec4,
+    color: t.boxDefault5.ctSec,
   },
 }]
 const Text = styled.div<{
@@ -106,6 +106,6 @@ const Text = styled.div<{
   
   text-align: start;
   
-  color: ${p => p.theme.boxDefault.ct4};
-  ${p => p.isPlaceholder && css`color: ${p.theme.boxDefault.ctSec4};`}
+  color: ${p => p.theme.boxDefault5.ct};
+  ${p => p.isPlaceholder && css`color: ${p.theme.boxDefault5.ctSec};`}
 `

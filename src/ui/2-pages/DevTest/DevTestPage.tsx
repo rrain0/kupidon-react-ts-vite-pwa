@@ -214,7 +214,7 @@ const DevTestPage = React.memo(() => {
               height: 150px;
               padding: 10px;
               border-radius: 16px;
-              background: ${t.boxDefault.bg2};
+              background: ${t.boxDefault3.bg};
               color: ${t.boxDefault.ct};
             `}
           >

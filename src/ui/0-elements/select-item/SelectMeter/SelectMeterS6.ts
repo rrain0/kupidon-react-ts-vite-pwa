@@ -84,9 +84,9 @@ export namespace SelectMeterS6 {
         export namespace Color {
           // type: row, color: normal
           export const normal: AppWidgetStyle = t => [baseColor, {
-            meter0BgColor: t.boxDefault.ctSec5,
-            meter1BgColor: t.boxDefault.ct7,
-            meter2BgColor: t.boxDefault.ct3,
+            meter0BgColor: t.boxDefault10.ctSec,
+            meter1BgColor: t.boxDefault8.ct,
+            meter2BgColor: t.boxDefault4.ct,
           }]
         }
       }

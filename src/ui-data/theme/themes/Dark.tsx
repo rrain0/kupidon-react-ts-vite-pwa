@@ -45,27 +45,19 @@ export const Dark = {
   
   
   
-  boxDefault: {
-    bg:            '#24272d',
-    bg2:           '#282c34',
-    
-    ct:            '#bdbdbd',
-    ct2:           '#bdbdbd',
-    ct3:           '#dddddd',
-    ct4:           '#909090',
-    ct5:           '#7b7b7b',
-    ct6:           '#838383',
-    ct7:           '#777777',
-    
-    ctSec:         '#858585',
-    ctSec4:        '#666666',
-    ctSec5:        '#42414c',
-    ctSec6:        '#42414c',
-    
-    cta2:          '#2e343f',
-    bga4:          '#aaaaaa',
-    cta4:          '#000000',
-  },
+  boxDefault: { bg: '#24272d', ct: '#bdbdbd' },
+  boxDefault2: { bg: '#24272d', ct: '#bdbdbd', cta: '#2e343f' },
+  boxDefault3: { bg: '#282c34', ct: '#bdbdbd' },
+  boxDefault4: { ct: '#dddddd' },
+  boxDefault5: { ct: '#909090', ctSec: '#666666' },
+  boxDefault6: { ct: '#7b7b7b' },
+  boxDefault7: { ct: '#838383' },
+  boxDefault8: { ct: '#777777' },
+  boxDefault9: { bg: '#aaaaaa', ct: '#000000' },
+  boxDefault10: { ctSec: '#42414c' },
+  boxDefault11: { ctSec: '#42414c' },
+  
+  
   boxNormal: {
     bg:            '#999999',
     ct:            '#000000',
@@ -97,6 +89,7 @@ export const Dark = {
     bgf:           '#18181a',
     ctf:           '#d0d0d0',
   },
+  
   boxAccent: {
     bg:            '#bdbdbd',
     ct:            '#000000',
@@ -141,12 +134,14 @@ export const Dark = {
     bg:            '#000000',
     ct:            '#ffffff',
   },
+  
   boxMain: {
     bg:            '#aaaaaa',
     ct:            '#000000',
     bgFc:          '#bbbbbb',
     ctFc:          '#000000',
   },
+  
   boxSecondary: {
     bg:            '#39404d',
     ct:            '#999999',
@@ -158,6 +153,10 @@ export const Dark = {
     bg:            '#39404d',
     ct:            '#5c677a',
   },
+  boxSecondary4: {
+    ct:            '#858585',
+  },
+  
   boxDanger: {
     bg:            '#24272d',
     ct:            '#c90000',
@@ -229,9 +228,9 @@ export const Dark = {
   },
   
   rangePicker: {
-    trackBg:       ['#2e343f'],
-    barBg:         ['#bdbdbd'],
-    handleBg:      ['#000000'],
+    trackBg:       '#2e343f',
+    barBg:         '#bdbdbd',
+    handleBg:      '#000000',
   },
   
   
@@ -261,9 +260,9 @@ export const Dark = {
   photos: {
     bg:                      '#ffeeee',
     ct:                      '#291f1d',
-    borderDrag:              ['#1F8DCD'],
-    highlightFrameBg:        ['#8B8B8B'],
-    highlightFrameAccentBg:  ['#ffffff'],
+    borderDrag:              '#1F8DCD',
+    highlightFrameBg:        '#8B8B8B',
+    highlightFrameAccentBg:  '#ffffff',
   },
   
   bottomSheet: {
@@ -279,13 +278,13 @@ export const Dark = {
   toast: { ...Light.toast,
     bg:            '#121212',
     ct:            '#ffffff',
-    ct2:           ['#b8b8b8'],
+    ct2:           '#b8b8b8',
     ct3:           '#ffffff',
   },
   scrollbar: {
-    track:         ['#F8F8F822'],
-    thumb:         ['#F8F8F844'],
-    thumbActive:   ['#999999'],
+    track:         '#F8F8F822',
+    thumb:         '#F8F8F844',
+    thumbActive:   '#999999',
   },
   
 } satisfies Theme

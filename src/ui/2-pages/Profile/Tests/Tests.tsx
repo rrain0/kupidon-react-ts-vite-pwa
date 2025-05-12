@@ -119,7 +119,7 @@ const Tests = React.memo((props: TestsProps) => {
             <PinkHeartWithExclamationBox>
               <img
                 src={pinkHeartWithExclamation}
-                alt="Pink heart with exclamation mark"
+                alt='Pink heart with exclamation mark'
                 style={{ height: 34 }}
               />
             </PinkHeartWithExclamationBox>
@@ -137,7 +137,7 @@ const Tests = React.memo((props: TestsProps) => {
             <Card css={cardS}>
               <ManWithHugeHeart
                 src={manWithHugeHeart}
-                alt="Man with huge heart"
+                alt='Man with huge heart'
               />
               
               <InfoCardTextCenter>
@@ -283,7 +283,7 @@ const cardS = css`
 
 const InfoCardText = styled.div`
   ${Txt.s13};
-  color: ${p => p.theme.boxDefault.ctSec};
+  color: ${p => p.theme.boxSecondary4.ct};
 `
 const InfoCardTextCenter = styled(InfoCardText)`
   text-align: center;

@@ -51,7 +51,7 @@ export namespace Hdrs {
   
   export const card3 = (t: AppTheme.Theme) => css`
     ${Txt.s18LhNorm};
-    color: ${t.boxDefault.ct};
+    color: ${t.boxDefault2.ct};
   `
   export const Card = styled.h4`
     ${resetH};

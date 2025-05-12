@@ -233,7 +233,7 @@ const Title = styled.div`
 
 
 const Description = styled.div`
-  color: ${p => p.theme.boxDefault.ct};
+  color: ${p => p.theme.boxDefault2.ct};
   text-align: justify;
   ${Txt.s15};
 `
