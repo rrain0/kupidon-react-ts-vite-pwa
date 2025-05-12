@@ -5,7 +5,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject
 import nonemptyval = TypeU.nonemptyval
-import emptyval = TypeU.emptyval
+import isemptyval = TypeU.isemptyval
 import Getter = TypeU.Getter
 
 
@@ -16,7 +16,7 @@ const zustandLsName = 'zustandMbti'
 
 const recoilLsName = 'test-mbti'
 // To trigger Zustand update from Recoil to Zustand
-if (emptyval(localStorage.getItem(zustandLsName)) && nonemptyval(recoilLsName)) {
+if (isemptyval(localStorage.getItem(zustandLsName)) && nonemptyval(recoilLsName)) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 
@@ -51,7 +51,7 @@ const getMbtiComputed = createSelector(
       let cnt = 0
       for (let i = 0; i < total; i++) {
         const ai = a[i]
-        if (emptyval(ai)) {
+        if (isemptyval(ai)) {
           cnt++
         }
         else {

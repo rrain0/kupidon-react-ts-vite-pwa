@@ -1,6 +1,6 @@
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import empty = TypeU.empty
+import emptyval = TypeU.emptyval
 import ObjectValues = ObjectU.ObjectValues
 import ObjectKeysType = ObjectU.ObjectKeysType
 import ObjectEntries = ObjectU.ObjectEntries
@@ -13,7 +13,7 @@ export namespace RouteBuilder {
   
   // null | undefined | '' for the first path means root
   import isdef = TypeU.isdef
-  export const pathConcat = (...paths: Array<string | empty>): string => {
+  export const pathConcat = (...paths: Array<string | emptyval>): string => {
     let result = paths[0] ?? ''
     for (let i = 1; i < paths.length; i++) {
       let path = paths[i] ?? ''
@@ -60,7 +60,7 @@ export namespace RouteBuilder {
     [fullAllowedNameParams]: typeof getFullAllowedNameParams
   }
   export type RoutePaths = {
-    [params]?: empty | { [prop: string]: string }
+    [params]?: emptyval | { [prop: string]: string }
     [prop: string]: RouteSegment
   }
   export type RouteSegment = RouteSelf & RouteProps & RoutePaths
@@ -103,15 +103,15 @@ export namespace RouteBuilder {
   export function getFullParams<R extends RouteSegment>(
     this: R,
     applyParams?: {
-      anySearchParams?: URLSearchParams | empty
-      allowedSearchParams?: URLSearchParams | empty
-      allowedNameParams?: empty | (
+      anySearchParams?: URLSearchParams | emptyval
+      allowedSearchParams?: URLSearchParams | emptyval
+      allowedNameParams?: emptyval | (
         R[typeof params] extends object
-          ? { [Path in ObjectKeysType<R[typeof params]>]?: string | empty }
+          ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
           : never
         )
-      anyPathParams?: { [path: string]: string | empty } | empty
-      allowedPathParams?: { [path: string]: string | empty } | empty
+      anyPathParams?: { [path: string]: string | emptyval } | emptyval
+      allowedPathParams?: { [path: string]: string | emptyval } | emptyval
     }
   ): string {
     let fullPath = this[full]()
@@ -164,7 +164,7 @@ export namespace RouteBuilder {
   
   export function getFullAnySearchParams<R extends RouteSegment>(
     this: R,
-    applyParams?: URLSearchParams | empty
+    applyParams?: URLSearchParams | emptyval
   ): string {
     return this[fullParams]({ anySearchParams: applyParams })
   }
@@ -173,9 +173,9 @@ export namespace RouteBuilder {
   
   export function getFullAllowedNameParams<R extends RouteSegment>(
     this: R,
-    applyParams?: empty | (
+    applyParams?: emptyval | (
       R[typeof params] extends object
-        ? { [Path in ObjectKeysType<R[typeof params]>]?: string | empty }
+        ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
         : never
     )
   ): string {

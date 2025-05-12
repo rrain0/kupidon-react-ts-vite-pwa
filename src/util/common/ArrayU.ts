@@ -1,6 +1,6 @@
 import { RangeU } from 'src/util/common/RangeU'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import empty = TypeU.empty
+import emptyval = TypeU.emptyval
 import ComparatorEq = TypeU.ComparatorEq
 import defaultComparatorEq = TypeU.defaultComparatorEq
 import defaultFilter = TypeU.defaultFilter
@@ -8,7 +8,7 @@ import Mapper = TypeU.Mapper
 import Filter = TypeU.Filter
 import MergerIndexed = TypeU.MergerIndexed
 import CombinerIndexed = TypeU.CombinerIndexed
-import NonEmptyVal = TypeU.NonEmptyVal
+import Nonemptyval = TypeU.Nonemptyval
 import isArray = TypeU.isArray
 import Sign = TypeU.Sign
 import isdef = TypeU.isdef
@@ -19,6 +19,7 @@ import isdef = TypeU.isdef
 export namespace ArrayU {
   
   
+  import ArrFilter = TypeU.ArrFilter
   export type FirstCanUndef<A extends readonly any[]> =
     A extends readonly [first?: infer F, ...infer R] ? [first?: F, ...R] : never
   
@@ -75,8 +76,8 @@ export namespace ArrayU {
   
   
   export const eq = <A, B>(
-    arr1: readonly A[] | empty,
-    arr2: readonly B[] | empty,
+    arr1: readonly A[] | emptyval,
+    arr2: readonly B[] | emptyval,
     valueComparator: ComparatorEq<A, B> = defaultComparatorEq
   ): boolean => {
     if (arr1 === arr2) return true
@@ -89,7 +90,7 @@ export namespace ArrayU {
   }
   
   
-  export const eqAsSet = (arr1: any[] | empty, arr2: any[] | empty): boolean => {
+  export const eqAsSet = (arr1: any[] | emptyval, arr2: any[] | emptyval): boolean => {
     if (arr1 === arr2) return true
     if (!arr1 || !arr2) return false
     if (arr1.length !== arr2.length) return false
@@ -186,19 +187,20 @@ export namespace ArrayU {
   export type ArrayElement<ArrayType extends readonly unknown[]> =
     ArrayType extends readonly (infer ElementType)[] ? ElementType : never
   
-  export const ofFirstOrEmpty = <T>(arr?: readonly [T?, ...unknown[]] | empty): [T] | [] => {
+  export const ofFirstOrEmpty = <T>(arr?: readonly [T?, ...unknown[]] | emptyval): [T] | [] => {
     if (arr?.length) return [arr[0] as T]
     return []
   }
   
-  export const isNonEmpty = <T>(arr?: T[] | [T, ...T[]] | empty): arr is [T, ...T[]] => {
+  export const isNonEmpty = <T>(arr?: T[] | [T, ...T[]] | emptyval): arr is [T, ...T[]] => {
     return (arr?.length ?? 0) > 0
   }
   
   export type NonEmptyArr<T> = [T, ...T[]]
   
-  export type ArrayOfNonEmpty<A extends Array<any>> =
-    A extends Array<infer E> ? Array<NonEmptyVal<E>> : never
+  export type ArrayOfNonEmpty<A extends Array<any>> = (
+    A extends Array<infer E> ? Array<Nonemptyval<E>> : never
+  )
   
   export type ValueOrArr<T> = T | T[]
   
@@ -220,6 +222,33 @@ export namespace ArrayU {
     return arr
   }
   
+  export const add = <T>(arr: T[], elem: T, i?: number): T[] => {
+    let len = arr.length
+    i ??= len
+    if (i >= len) arr[i] = elem
+    else {
+      len++
+      arr.length = len
+      arr.copyWithin(i + 1, i, len)
+      arr[i] = elem
+    }
+    return arr
+  }
+  
+  export const addTo = <T>(arr: T[], elem: T, i?: number): T[] => {
+    const len = arr.length
+    i ??= len
+    if (i === len) return [...arr, elem]
+    if (i > len) {
+      arr = [...arr]
+      arr[i] = elem
+      return arr
+    }
+    else {
+      return [...arr.slice(0, i), elem, ...arr.slice(i + 1, len)]
+    }
+  }
+  
   export const addUniqToIf = <T>(arr: T[], elem: T): T[] => {
     if (arr.includes(elem)) return arr
     return [...arr, elem]
@@ -235,6 +264,15 @@ export namespace ArrayU {
     const uniq = new Set(arr)
     if (uniq.size === arr.length) return arr
     return [...uniq]
+  }
+  
+  export const removeI = <T>(arr: T[], i?: number): T[] => {
+    arr.splice(i ?? arr.length - 1, 1)
+    return arr
+  }
+  
+  export const removeITo = <T>(arr: T[], i?: number): T[] => {
+    return arr.toSpliced(i ?? arr.length - 1, 1)
   }
   
   export const remove = <T>(arr: T[], elem: T): T[] => {
@@ -295,28 +333,51 @@ export namespace ArrayU {
     return newArr
   }
   
+  export function mapFirstToIf<T, E = T>({
+    arr, filter = defaultFilter, mapper,
+  }: {
+    arr: T[],
+    filter?: ArrFilter<T> | undefined
+    mapper: (el: T, i: number, arr: T[]) => E
+  }): (T | E)[] {
+    const i = arr.findIndex(filter)
+    if (i === -1) return arr
+    const elem = arr[i]
+    const mapped = mapper(elem, i, arr)
+    if (mapped as T | E === elem) return arr
+    return (arr as (T | E)[]).toSpliced(i, 1, mapped)
+  }
   
   
   
-  
+  // element removed: fwd[i1] => undefined
+  // element added: back[i2] => undefined
+  // element replaced: fwd[i1] => i2 or back[i2] => i1
   export const diff = <T1, T2 = T1>(
-    arr1: T1[], arr2: T2[],
-    comparator: ComparatorEq<T1, T2> = defaultComparatorEq
-  ): [(number | undefined)[], (number | undefined)[]] => {
-    const fwd: (number | undefined)[] = Array(arr1.length).fill(undefined)
-    const back: (number | undefined)[] = Array(arr2.length).fill(undefined)
-    arr1.forEach((one, i1) => {
-      for (let i2 = 0; i2 < arr2.length; i2++) {
-        const two = arr2[i2]
-        if ((!fwd.includes(i2)) && comparator(one, two)) {
+    arrOfUniqs1: T1[], arrOfUniqs2: T2[],
+    comparator: ComparatorEq<T1, T2> = defaultComparatorEq,
+  ): [fwd: (number | undefined)[], back: (number | undefined)[]] => {
+    const a1 = arrOfUniqs1
+    const a2 = arrOfUniqs2
+    const len1 = a1.length
+    const len2 = a2.length
+    const fwd: (number | undefined)[] = arrOfUndef(len1)
+    const back: (number | undefined)[] = arrOfUndef(len2)
+    for (let i1 = 0; i1 < len1; i1++) {
+      for (let i2 = 0; i2 < len2; i2++) {
+        if (fwd.includes(i2)) continue
+        const el1 = a1[i1]
+        const el2 = a2[i2]
+        if (comparator(el1, el2)) {
           fwd[i1] = i2
           back[i2] = i1
           break
         }
       }
-    })
+    }
     return [fwd, back] as const
   }
+  
   
   
   

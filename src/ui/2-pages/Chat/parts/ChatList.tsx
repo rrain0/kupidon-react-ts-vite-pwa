@@ -1,43 +1,52 @@
-import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
-import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import { AnimationFun } from '@animated/AnimationConfig.ts'
-import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { createSpring, createSpringAnimation } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import styled from '@emotion/styled'
 import { Spring2DAnimationData, useItemDrag } from '@util/animated/item-drag/useItemDrag.ts'
-import { RangeU } from '@util/common/RangeU.ts'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useArray } from '@util/react-state/useArray.ts'
-import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import { ReactU } from '@util/react/ReactU.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
-import ChatListItem, { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
+import ChatListItem from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
+import { ChatListItemWidgetData } from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
-import Callback1 = TypeU.Callback1
-import combineProps = ReactU.combineProps
-import gridStackC = EmotionCommon.gridStackC
+import emptyArr = TypeU.emptyArr
+import isundef = TypeU.isundef
+
+
+
+
+type Adding = { state: 'adding', toI: number }
+type Showing = { state: 'showing', toI: number }
+type Replacing = { state: 'replacing', fromI: number, toI: number }
+type Removing = { state: 'removing', fromI: number }
+
+
+export type UiItemData = {
+  item: ChatListItemWidgetData
+} & (Adding | Showing | Removing | Replacing)
+
+const stateToPriority: Record<UiItemData['state'], number> = {
+  'adding': 2,
+  'showing': 1,
+  'replacing': 0,
+  'removing': 3,
+}
 
 
 
 
 
 export type ChatListExtraProps = Pu<{
-  chatItems: ChatListItemData[]
+  chatItems: ChatListItemWidgetData[]
 }>
 
 export type ChatListProps =
@@ -48,11 +57,112 @@ export type ChatListProps =
 
 const ChatList = React.memo((props: ChatListProps) => {
   const {
-    chatItems,
+    chatItems: newItems = emptyArr,
     ...restProps
   } = props
   
-  const showItems = !!chatItems?.length
+  
+  
+  const [items, setItems] = useState<ChatListItemWidgetData[]>(newItems)
+  
+  const [uiItems, setUiItems] = useState<UiItemData[]>([])
+  useEffect(() => {
+    const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
+    
+    const uiItems: UiItemData[] = [
+      ...back.map((fromI, toI): UiItemData => {
+        if (isundef(fromI)) {
+          return {
+            state: 'adding',
+            toI: toI,
+            item: newItems[toI],
+          }
+        }
+        if (fromI !== toI) {
+          return {
+            //state: 'replacing',
+            //fromI,
+            state: 'showing',
+            toI: toI,
+            item: newItems[toI],
+          }
+        }
+        return {
+          state: 'showing',
+          toI,
+          item: newItems[toI],
+        }
+      }),
+      ...((() => {
+        let cnt = 0
+        return fwd
+          .map((toI, fromI): UiItemData | undefined => {
+            if (isundef(toI)) {
+              return {
+                state: 'removing',
+                fromI: fromI - cnt++,
+                item: items[fromI],
+              }
+            }
+          })
+          .filter(it => !!it)
+      })()),
+    ]
+    
+    uiItems.sort((a, b) => {
+      const ai = a.state !== 'removing' ? a.toI : a.fromI
+      const bi = b.state !== 'removing' ? b.toI : b.fromI
+      return ai - bi
+        || -(stateToPriority[a.state] - stateToPriority[b.state])
+        || 0
+    })
+    
+    /* const fLen = fwd.length
+    const bLen = back.length
+    const uiItems: UiItemData[] = Array(bLen)
+    for (let toI = 0; toI < bLen; toI++) {
+      uiItems[toI] = (() => {
+        const fromI = back[toI]
+        if (isundef(fromI)) {
+          return {
+            state: 'adding',
+            toI: toI,
+            item: newItems[toI],
+          }
+        }
+        if (fromI !== toI) {
+          return {
+            //state: 'replacing',
+            //fromI,
+            state: 'showing',
+            toI: toI,
+            item: newItems[toI],
+          }
+        }
+        return {
+          state: 'showing',
+          toI,
+          item: newItems[toI],
+        }
+      })()
+    }
+    for (let fromI = fLen - 1; fromI >= 0; fromI--) {
+      const toI = fwd[fromI]
+      if (isundef(toI)) {
+        ArrayU.add(uiItems, {
+          state: 'removing',
+          fromI,
+          item: items[fromI],
+        }, fromI)
+      }
+    } */
+    
+    setItems(newItems)
+    setUiItems(uiItems)
+  }, [newItems])
+  
+  const showItems = !!uiItems.length
+  
   
   const {
     arr: selected, isNotEmpty: isAnySelected,
@@ -140,39 +250,28 @@ const ChatList = React.memo((props: ChatListProps) => {
   return (
     <>
       
-      <ChatListView g={20} col grow
+      <ChatListContainer col grow
         data-display-name='ChatList'
         {...restProps}
       >
         <Contents {...onTrackDrag()}>
-          {showItems && chatItems.map(({
-            id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt,
-            mute, order, lastMsgStatus, isWriting,
-          }, i) => {
+          {showItems && uiItems.map((uiItem, i) => {
+            const id = uiItem.item.id
             const isSel = isSelected(id)
             return (
-              <ChatListItemWrap
-                id={id}
+              <ChatListItem
                 key={id}
-                ava={ava}
-                online={online}
-                name={name}
-                lastMsg={lastMsg}
-                lastMsgDate={lastMsgDate}
-                isLastMsgMy={isLastMsgMy}
-                unreadCnt={unreadCnt}
-                mute={mute}
-                order={order}
-                lastMsgStatus={lastMsgStatus}
-                isWriting={isWriting}
+                {...uiItem}
                 
+                first={i === 0}
                 isSelected={isSel}
                 isAnySelected={isAnySelected}
                 toggleSelection={toggleSelection}
+                setLastPointerDownItemId={setLastPointerDownItemId}
+                
+                setUiItems={setUiItems}
                 animatedMxMy={animatedMxMy}
                 animatedOffset={animatedScrollOffset}
-                
-                onPointerDown={() => setLastPointerDownItemId(id)}
               />
             )
           })}
@@ -183,7 +282,7 @@ const ChatList = React.memo((props: ChatListProps) => {
             </Flex>
           )}
         </Contents>
-      </ChatListView>
+      </ChatListContainer>
       
       <ModalContextMenu isOpen={isAnySelected}>
         Здесь будут опции контекстного меню
@@ -198,7 +297,7 @@ export default ChatList
 
 
 
-const ChatListView = styled(Flex)(({ theme: t }) => [
+const ChatListContainer = styled(Flex)(({ theme: t }) => [
   offsetToPageContentPaddings({ h: true, b: true }), {
     paddingTop: 20,
     borderRadius: '15px 15px 0 0',
@@ -211,74 +310,6 @@ const ChatListView = styled(Flex)(({ theme: t }) => [
 const NoItems = styled(Flex)()
 
 
-
-type ChatListItemWrapProps = ChatListItemData & Pu<{
-  isSelected: boolean
-  isAnySelected: boolean
-  toggleSelection: Callback1<string>
-  animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
-  animatedOffset: AnimatedProperty<number>
-  onPointerDown: React.PointerEventHandler
-}>
-const ChatListItemWrap = ({
-  isSelected, isAnySelected, toggleSelection, animatedMxMy, animatedOffset, ...restProps
-}: ChatListItemWrapProps) => {
-  let { id, onPointerDown } = restProps
-  
-  const onClick = useAsCallback(() => {
-    if (isAnySelected) toggleSelection?.(id)
-  })
-  const onLongPress = useAsCallback(() => {
-    toggleSelection?.(id)
-  })
-  onPointerDown = useAsCallback(onPointerDown)
-  
-  return (
-    <ChatListItemBox>
-      
-      {isSelected && <ChatListItemPlaceholder/>}
-      
-      <AnimatedDiv pos='rel' full col alignSelf='stretch'
-        animatedStyle={{
-          transform: animatedMapMulti([animatedMxMy, animatedOffset], (m, offset) => {
-            if (!m) return 'none'
-            offset ??= 0
-            const { mx, my } = m
-            if (isSelected) return `translate3d(${mx}px, ${my + offset}px, 0)`
-            return 'none'
-          }),
-          zIndex: animatedMxMy?.map(({ mx, my }): number | string => {
-            if (isSelected && (mx || my)) return 1
-            return 'auto'
-          }),
-        }}
-      >
-        <ChatListItem
-          data-selected={toEmptyAttr(isSelected)}
-          {...restProps}
-          onPointerDown={onPointerDown}
-          onClick={onClick}
-          onLongPress={onLongPress}
-        />
-      </AnimatedDiv>
-      
-    </ChatListItemBox>
-  )
-}
-
-
-const ChatListItemBox = withDefaults({
-  alignSelf: 'stretch', h: 72, mv: -6, mh: -8,
-}, styled(Flex)(gridStackC))
-
-
-const ChatListItemPlaceholder = withDefaults({
-  full: true, r: 20,
-}, styled(Flex)(({ theme: t }) => [
-  {
-    backgroundColor: t.boxNormalCt.bgf,
-  },
-]))
 
 
 

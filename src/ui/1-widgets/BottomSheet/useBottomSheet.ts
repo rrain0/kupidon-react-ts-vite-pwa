@@ -23,7 +23,7 @@ import Callback = TypeU.Callback
 import lastIndex = ArrayU.lastI
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
-import emptyval = TypeU.emptyval
+import isemptyval = TypeU.isemptyval
 import Defined = TypeU.Defined
 import isdef = TypeU.isdef
 
@@ -247,7 +247,7 @@ export const useBottomSheet = (
   ) => {
     const duration = function() {
       //console.log('lastSpeed',lastSpeed)
-      if (emptyval(lastSpeed)) return animationDuration
+      if (isemptyval(lastSpeed)) return animationDuration
       const startH = sheetSpring.height.get()
       sheetSpring.height.set(startH)
       const pathPercent = pathProgressPercent(startH, endH)
@@ -370,7 +370,7 @@ export const useBottomSheet = (
       return dragStartRef.current.lastSpeed
     }()
     const toFreeHeight = function() {
-      if (emptyval(toOpenSnap)) return false
+      if (isemptyval(toOpenSnap)) return false
       if (snapPoints[toOpenSnap] !== 'free') return false
       return RangeU.has(
         sheetSpring.height.get(),

@@ -5,7 +5,7 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject
 import nonemptyval = TypeU.nonemptyval
-import emptyval = TypeU.emptyval
+import isemptyval = TypeU.isemptyval
 
 
 
@@ -15,7 +15,7 @@ const zustandLsName = 'zustandThemeSettings'
 
 const recoilLsName = 'themeSettings'
 // To trigger Zustand update from Recoil to Zustand
-if (emptyval(localStorage.getItem(zustandLsName)) && nonemptyval(localStorage.getItem(recoilLsName))) {
+if (isemptyval(localStorage.getItem(zustandLsName)) && nonemptyval(localStorage.getItem(recoilLsName))) {
   localStorage.setItem(zustandLsName, JSON.stringify({ version: -1 }))
 }
 

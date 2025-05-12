@@ -5,7 +5,7 @@ import { CssProp } from 'src/mini-libs/widget-style-4/css/CssProp.ts'
 import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
 import { CssSelectable } from 'src/mini-libs/widget-style-4/css/CssSelectable.ts'
 import { CssState, useThis } from 'src/mini-libs/widget-style-4/css/CssState.ts'
-import emptyval = TypeU.emptyval
+import isemptyval = TypeU.isemptyval
 import RecordRo = TypeU.RecordRo
 
 
@@ -54,7 +54,7 @@ export class CssElem<
   useOnlyState(state: StateToValue<Ss> = { }) {
     let used = ''
     Object.entries(state).forEach(([name, state]) => {
-      if (emptyval(state)) return
+      if (isemptyval(state)) return
       const s = this.states[name]
       if (s instanceof CssAttrEnum) {
         if (state === true) state = ''

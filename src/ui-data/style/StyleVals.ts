@@ -30,6 +30,8 @@ export namespace StyleVals {
   // От меньшего наклона к большему: sine, quad, circ, cubic, quart, quint, expo, back
   export const easeOutSine = 'cubic-bezier(0.39, 0.575, 0.565, 1)'
   
+  export const easeInQuad = 'cubic-bezier(0.11, 0, 0.5, 0)'
+  
   export const easeInOutCirc = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)'
   
   export const easeOutCubic = 'cubic-bezier(0.215, 0.61, 0.355, 1)'

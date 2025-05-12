@@ -4,7 +4,7 @@
 
 export namespace TypeU {
   
-  export type empty = null | undefined
+  export type emptyval = null | undefined
   export type anyval = {} | null | undefined
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
@@ -22,7 +22,7 @@ export namespace TypeU {
   
   
   
-  export type NonEmptyVal<T> = Exclude<T, empty>
+  export type Nonemptyval<T> = T & {}
   
   // Add Partial + Undefined
   export type PartialUndef<O extends object> = {
@@ -96,7 +96,7 @@ export namespace TypeU {
   export function nonemptyval<T, E extends {}>(value: T | E): value is E {
     return value !== null && value !== undefined
   }
-  export function emptyval<T, NE extends empty>(value: T | NE): value is NE {
+  export function isemptyval<T, NE extends emptyval>(value: T | NE): value is NE {
     return value === null || value === undefined
   }
   export function isstring<T, S extends string>(value: T | S): value is S {
@@ -169,6 +169,7 @@ export namespace TypeU {
   export type Predicate<T> = (v: T) => boolean
   export const tobool: Predicate<any> = value => !!value
   export type Filter<T> = (v: T) => any
+  export type ArrFilter<T> = (v: T, i: number, arr: T[]) => any
   export const defaultFilter: Filter<any> = tobool
   
   export type Combiner<T1, T2 = T1> = (a: T1, b: T2) => T1

@@ -1,270 +1,186 @@
-import { css } from '@emotion/react'
+import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
+import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
+import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
-import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useLiveShortDuration } from '@util/date/useLiveShortDuration.ts'
-import { useShortDurationUiText } from '@util/date/useShortDurationUiText.ts'
-import React, { useMemo } from 'react'
-import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { useAsCallback } from '@util/react-state/useAsCallback.ts'
+import { withDefaults } from '@util/react/withDefaults.tsx'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
+import React, { useEffect } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import IsWritingFiveDots, {
-  IsWritingFiveDotsCssProps,
-} from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
-import Txt = EmotionCommon.Txt
-import trimDotZerosEnd = StringU.trimDotZerosEnd
-import max1Line = EmotionCommon.max1Line
-import max1LineBox = EmotionCommon.max1LineBox
-import VolumeIc = SvgIconsPack.VolumeIc
-import CrossBoldIc = SvgIconsPack.CrossBoldIc
-import PinIc = SvgIconsPack.PinIc
-import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
-import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
-import CheckmarkIc = SvgIconsPack.CheckmarkIc
-import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
+import { UiItemData } from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
+import ChatListItemWidget from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
 import Pu = TypeU.Pu
+import SetterOrUpdater = TypeU.SetterOrUpdater
+import Callback1 = TypeU.Callback1
+import toEmptyAttr = TypeU.toEmptyAttr
+import gridStackC = EmotionCommon.gridStackC
+
+
+const g = 14
+const r = 20
+const mv = -6
+const mh = -8
+const h = 72
+const hItem = h + mv
+
+
+const addTime = 300 //ms
+const removeTime = 300 //ms
+const replaceTime = 300 //ms
 
 
 
 
-
-
-const outerUiValues = {
-  youRespectful: {
-    'ru-RU': 'Вы',
-    'en-US': 'You',
-  },
-} satisfies UiValues
-
-
-export type ChatListItemData = {
-  id: string
-  ava?: string | undefined
-  online?: boolean | undefined
-  name: string
-  lastMsg: string
-  lastMsgDate: string
-  isLastMsgMy?: boolean | undefined
-  unreadCnt?: number | undefined
-  mute?: boolean | undefined
-  order?: number | undefined
-  lastMsgStatus?: 'sending' | 'sent' | 'read' | 'error' | undefined
-  isWriting?: boolean | undefined
-}
-
-
-export type ChatListItemProps =
-  & ChatListItemData
-  & React.ComponentPropsWithRef<typeof Button>
-
-export const ChatListItem = React.memo((props: ChatListItemProps) => {
-  const {
-    id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt = 0,
-    mute, order = 0, lastMsgStatus, isWriting,
-    ...restProps
-  } = props
+export type ChatListItemProps = UiItemData & Pu<{
+  first: boolean
+  isSelected: boolean
+  isAnySelected: boolean
+  toggleSelection: Callback1<string>
+  setLastPointerDownItemId: (id: string) => void
+  
+  setUiItems: SetterOrUpdater<UiItemData[]>
+  animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
+  animatedOffset: AnimatedProperty<number>
+}>
+const ChatListItem = React.memo(({
+  first, isSelected, isAnySelected, toggleSelection, setLastPointerDownItemId,
+  setUiItems, animatedMxMy, animatedOffset,
+  ...uiItem
+}: ChatListItemProps) => {
+  const { item, state: s } = uiItem
+  const { id } = item
+  
+  const onClick = useAsCallback(() => {
+    if (isAnySelected) toggleSelection?.(id)
+  })
+  const onLongPress = useAsCallback(() => toggleSelection?.(id))
+  const onPointerDown = useAsCallback(() => setLastPointerDownItemId?.(id))
+  
+  const [getGapSlot, setGapSlot] = useElemRefGetSet()
+  
+  useEffect(() => {
+    const el = getGapSlot()
+    let stale = false
+    if (el) {
+      if (s === 'adding') {
+        const t = addTime
+        el.style.transition =
+          `height ${t}ms linear` +
+          `, margin-top ${t}ms linear` +
+          `, opacity ${t * 0.75}ms ${t * 0.25}ms ${StyleVals.easeInQuad}`
+        el.style.height = `${hItem}px`
+        el.style.marginTop = `${g}px`
+        el.style.opacity = '1'
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale || ev.propertyName !== 'height') return
+          el.ontransitionend = null
+          setUiItems?.(items => items.map(it => {
+            if (it.item.id === id && it.state === 'adding') return { ...it, state: 'showing' }
+            return it
+          }))
+        })
+      }
+      else if (s === 'removing') {
+        const t = removeTime
+        el.style.transition =
+          `height ${t}ms linear` +
+          `, margin-top ${t}ms linear` +
+          `, opacity ${t / 2}ms ${StyleVals.easeInQuad}`
+        el.style.height = '0'
+        el.style.marginTop = '0'
+        el.style.opacity = '0'
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale || ev.propertyName !== 'height') return
+          el.ontransitionend = null
+          setUiItems?.(items => items.filter(it => {
+            if (it.item.id === id && it.state === 'removing') return false
+            return true
+          }))
+        })
+      }
+    }
+    return () => { stale = true }
+  }, [s])
   
   
-  const duration = useLiveShortDuration(lastMsgDate)
-  const durationText = useShortDurationUiText(duration)
-  
-  const unreadText = (() => {
-    if (unreadCnt >= 1e8) return '∞'
-    if (unreadCnt >= 1e6) return trimDotZerosEnd((unreadCnt / 1e6).toFixed(1)) + 'M'
-    if (unreadCnt >= 1e3) return trimDotZerosEnd((unreadCnt / 1e3).toFixed(1)) + 'k'
-    return unreadCnt ? `${unreadCnt}` : ''
-  })()
-  
-  
-  const uiValues = useMemo(() => ({
-    youRespectful: outerUiValues.youRespectful,
-  }), [])
-  
-  const uiText = useUiValues(uiValues)
-  
-  const sending = lastMsgStatus === 'sending'
-  const sent = lastMsgStatus === 'sent'
-  const read = lastMsgStatus === 'read'
-  const error = lastMsgStatus === 'error'
   
   return (
-    <Button row g={8} alignSelf='stretch'
-      css={ButtonS6.t(chatItemButtonS)}
-      data-display-name='ChatListItem'
-      {...restProps}
+    <ChatListItemGapSlot alignSelf='stretch' h={hItem} mt={g}
+      ref={setGapSlot}
+      style={{
+        ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
+        ...first && { marginTop: 0 },
+      }}
     >
-      
-      <Ava id={id} ava={ava} online={online} fullH/>
-      
-      <Flex col grow alignSelf='stretch'>
+      <ChatListItemSlot alignSelf='stretch' h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
         
-        <Flex row align basis='50%'>
-          <Flex><NameBox><Name>{name}</Name></NameBox></Flex>
-          <Flex row align noShrink>
-            <Gap wMin={8} grow/>
-            {[
-              sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
-              sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
-              read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
-              error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
-              durationText && <Status key='duration'>{durationText}</Status>,
-              mute && <VolumeMute key='mute'/>,
-              !!order && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
-            ]
-              .filter(it => it)
-              .flatMap((it, i, arr) => (
-                i < arr.length - 1
-                  ? [it, <Status key={`•${i}`}>{' • '}</Status>]
-                  : it
-              ))
-            }
-          </Flex>
-        </Flex>
+        {isSelected && <ChatListItemPlaceholder full/>}
         
-        <Flex row align basis='50%'>
-          <Flex row align grow>
-            {isWriting && <IsWritingFiveDots css={isWritingFiveDotsS}/>}
-            {!isWriting && (
-              <Flex row align>
-                <Flex row align noShrink>
-                  {isLastMsgMy && <MetaPreMsg>{uiText.youRespectful}{' • '}</MetaPreMsg>}
-                </Flex>
-                <MsgBox><Msg>{lastMsg}</Msg></MsgBox>
-              </Flex>
-            )}
-          </Flex>
-          <Flex row align noShrink>
-            <Gap w={8}/>
-            {unreadText && (
-              <Unread center noShrink secondary={mute}>{unreadText}</Unread>
-            )}
-          </Flex>
-        </Flex>
+        <ChatListItemAnimated pos='rel' full col alignSelf='stretch'
+          animatedStyle={{
+            transform: animatedMapMulti([animatedMxMy, animatedOffset], (m, offset) => {
+              if (!m) return 'none'
+              offset ??= 0
+              const { mx, my } = m
+              if (isSelected) return `translate3d(${mx}px, ${my + offset}px, 0)`
+              return 'none'
+            }),
+            zIndex: animatedMxMy?.map(({ mx, my }): number | string => {
+              if (isSelected && (mx || my)) return 1
+              return 'auto'
+            }),
+          }}
+        >
+          <ChatListItemBox alignSelf='stretch' h={h}>
+            <ChatListItemWidget
+              data-selected={toEmptyAttr(isSelected)}
+              item={item}
+              onPointerDown={onPointerDown}
+              onClick={onClick}
+              onLongPress={onLongPress}
+            />
+          </ChatListItemBox>
+        </ChatListItemAnimated>
       
-      </Flex>
-      
-    </Button>
+      </ChatListItemSlot>
+    </ChatListItemGapSlot>
   )
 })
-ChatListItem.displayName = 'ChatListItem'
 export default ChatListItem
 
 
 
-const chatItemButtonS: AppWidgetStyle = t => [
-  ButtonS6.S.text.rect.lg.normal, {
-    button: {
-      w: undefined, h: 72, r: 20, ph: 8, pv: 6,
-      textAlign: 'start',
-    },
-    // TODO Theme
-    buttonSelected: { bg: '#e07bff44' },
-  },
-]
+
+const ChatListItemGapSlot = withDefaults({
+
+}, styled(Flex)())
+const ChatListItemSlot = withDefaults({
+  r,
+}, styled(Flex)([gridStackC]))
+
+const ChatListItemAnimated = withDefaults({
+  r,
+}, styled(AnimatedDiv)({
+  overflow: 'hidden',
+}))
+const ChatListItemBox = withDefaults({
+  r,
+}, styled(Flex)([gridStackC, {
+  // TODO Theme
+  backgroundColor: 'white',
+}]))
 
 
-const NameBox = styled.div`
-  ${max1LineBox};
-`
-const Name = styled.div`
-  ${Txt.s17Bold};
-  ${max1Line};
-  // TODO Theme
-  color: black;
-`
+const ChatListItemPlaceholder = withDefaults({
+  r,
+}, styled(Flex)(({ theme: t }) => ({
+  backgroundColor: t.boxNormalCt.bgf,
+})))
 
 
-const spinnerIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 15, w: 'auto', color: '#aaaaaa', colorAcc: 'black' },
-}]
-const checkmarkIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 19, m: -2, w: 'auto', color: '#8B8B8B' },
-}]
-const checkmarkDoubleIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 19, m: -2, w: 'auto', color: '#008080' },
-}]
-const warnIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 19, m: -3, w: 'auto', color: '#ff4433' },
-}]
-const volumeMuteIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 13, w: 'auto', ml: -1, color: '#c69477' },
-}]
-const volumeMuteCrossIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 7, w: 'auto', ml: -1, color: '#c69477' },
-}]
-const VolumeMute = () => (
-  <>
-    <VolumeIc css={SvgIconS6.t(volumeMuteIcS)}/>
-    <CrossBoldIc css={SvgIconS6.t(volumeMuteCrossIcS)}/>
-  </>
-)
-const pinIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 17, w: 'auto', m: -1, color: '#80558c', rotate: '0.125turn' },
-}]
-const isWritingFiveDotsS = css`
-  height: 10px;
-  width: auto;
-  ${IsWritingFiveDotsCssProps({
-    color: 'black',
-    colorAccent: '#BB2649',
-  })}
-`
-
-
-
-const MetaPreMsg = styled(Flex)`
-  ${Txt.s15Tight};
-  white-space: pre;
-  // TODO Theme
-  color: #8B8B8B;
-`
-const Status = styled(Flex)`
-  ${Txt.s13};
-  white-space: pre;
-  // TODO Theme
-  color: #8B8B8B;
-`
-const MsgBox = styled.div`
-  ${max1LineBox};
-`
-const Msg = styled.div`
-  ${Txt.s15Tight};
-  ${max1Line};
-  // TODO Theme
-  color: black;
-`
-const Unread = styled(Flex)<Pu<{ secondary: boolean }>>`
-  //margin-top: -4px;
-  //margin-bottom: -4px;
-  min-width: 28px;
-  height: 28px;
-  border-radius: 14px;
-  padding: 6px;
-  // TODO Theme
-  background-color: #BB2649;
-  // Todo Theme
-  color: #FFFFFF;
-  ${p => p.secondary && `
-    background-color: ${p.theme.boxSecondary3.bg};
-    color: ${p.theme.boxSecondary3.ct};
-  `}
-  ${Txt.s14Bold};
-`
 
 
 

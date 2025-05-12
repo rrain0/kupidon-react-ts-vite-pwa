@@ -1,14 +1,18 @@
 import { Env } from '@util/app/Env.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
+import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
+import { useInterval2 } from '@util/react/useInterval2.ts'
 import { useTimeout } from '@util/react/useTimeout.ts'
 import React, { useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import ChatList from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
-import { ChatListItemData } from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
+import { ChatListItemWidgetData } from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
 import MutualSympathiesList from 'src/ui/2-pages/Chat/parts/MutualSympathiesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import arrOfIndices = ArrayU.arrOfIndices
 
 
 
@@ -32,7 +36,7 @@ const {
 
 
 // Name -> firstName & lastName
-const chatItems: (ChatListItemData & {
+const chatItems: (ChatListItemWidgetData & {
   isMutualSympathy?: boolean | undefined
   mutualSympathyAppearanceDate?: string | undefined
 })[] = [
@@ -159,11 +163,39 @@ const chatItems: (ChatListItemData & {
 ]
 
 
+const manyChatItems = arrOfIndices(Math.floor(200 / chatItems.length)).flatMap(i => (
+  chatItems.map(it => ({ ...it, id: `${it.id}-${i}` }))
+))
+
 
 const ChatPage = React.memo(() => {
   
+  const [items, setItems] = useState(chatItems)
+  
+  const [getIsRemoved, setIsRemoved] = useRefGetSet(false)
+  useInterval2({ offset: 4000, interval: 4000 }, () => {
+    if (!getIsRemoved()) {
+      setIsRemoved(true)
+      setItems(items => items.filter(it => (
+        it.id !== '4fb12fb0-1f88-45a0-af4e-28b5614d1960'
+        && it.id !== 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c'
+        && it.id !== 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0'
+        && it.id !== '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d'
+      )))
+    }
+    else {
+      setIsRemoved(false)
+      setItems(items => [...items, ...chatItems.filter(it => (
+        it.id === '4fb12fb0-1f88-45a0-af4e-28b5614d1960'
+        || it.id === 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c'
+        || it.id === 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0'
+        || it.id === '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d'
+      ))])
+    }
+  })
+  
   const preparedChatItems = useMemo(() => {
-    return chatItems
+    return items
       .filter(it => it)
       .sort((a, b) => {
         return (b.order ?? 0) - (a.order ?? 0)
@@ -171,16 +203,16 @@ const ChatPage = React.memo(() => {
           || +new Date(b.lastMsgDate) - +new Date(a.lastMsgDate)
           || 0
       })
-  }, [chatItems])
+  }, [items])
   
   const preparedMutualSympathiesItems = useMemo(() => {
-    return chatItems
+    return items
       .filter(it => it.isMutualSympathy)
       .sort((a, b) => {
         return +new Date(b.mutualSympathyAppearanceDate!) - +new Date(a.mutualSympathyAppearanceDate!)
           || 0
       })
-  }, [chatItems])
+  }, [items])
   
   return (
     <>
