@@ -4,6 +4,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet.ts'
 import ValueOrProducer = TypeU.ValueOrProducer
+import ArrFilter = TypeU.ArrFilter
 
 
 
@@ -26,10 +27,13 @@ export const useArray = <T>(initialValue?: ValueOrProducer<T[]>) => {
   const toggle = useCallback((elem: T) => {
     setArr(arr => ArrayU.toggleTo(arr, elem))
   }, [])
+  const filter = useCallback((filter: ArrFilter<T>) => {
+    setArr(arr => ArrayU.filterToIf(arr, filter))
+  }, [])
   
   return {
     arr, setArr,
     isEmpty, isNotEmpty,  getIsEmpty, getIsNotEmpty,
-    has, add, remove, toggle,
+    has, add, remove, toggle, filter,
   }
 }

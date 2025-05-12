@@ -299,6 +299,12 @@ export namespace ArrayU {
     return arr.toSpliced(i, 1)
   }
   
+  export const filterToIf = <T>(arr: T[], filter: ArrFilter<T>): T[] => {
+    const newArr = arr.filter(filter)
+    if (newArr.length < arr.length) return newArr
+    return arr
+  }
+  
   export const clear = <T>(arr: T[]): T[] => {
     arr.length = 0
     return arr

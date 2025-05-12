@@ -63,11 +63,35 @@ const ChatList = React.memo((props: ChatListProps) => {
   
   
   
-  const [items, setItems] = useState<ChatListItemWidgetData[]>(newItems)
   
+  const {
+    arr: selected, isNotEmpty: isAnySelected,
+    has: isSelected,
+    toggle: toggleSelection, filter: filterSelected,
+  } = useArray<string>()
+  
+  
+  
+  const [items, setItems] = useState<ChatListItemWidgetData[]>(newItems)
   const [uiItems, setUiItems] = useState<UiItemData[]>([])
+  
   useEffect(() => {
     const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
+    
+    const removed = (() => {
+      let cnt = 0
+      return fwd
+        .map((toI, fromI): UiItemData | undefined => {
+          if (isundef(toI)) {
+            return {
+              state: 'removing',
+              fromI: fromI - cnt++,
+              item: items[fromI],
+            }
+          }
+        })
+        .filter(it => !!it)
+    })()
     
     const uiItems: UiItemData[] = [
       ...back.map((fromI, toI): UiItemData => {
@@ -93,20 +117,7 @@ const ChatList = React.memo((props: ChatListProps) => {
           item: newItems[toI],
         }
       }),
-      ...((() => {
-        let cnt = 0
-        return fwd
-          .map((toI, fromI): UiItemData | undefined => {
-            if (isundef(toI)) {
-              return {
-                state: 'removing',
-                fromI: fromI - cnt++,
-                item: items[fromI],
-              }
-            }
-          })
-          .filter(it => !!it)
-      })()),
+      ...removed,
     ]
     
     uiItems.sort((a, b) => {
@@ -116,6 +127,8 @@ const ChatList = React.memo((props: ChatListProps) => {
         || -(stateToPriority[a.state] - stateToPriority[b.state])
         || 0
     })
+    
+    const removedIds = removed.map(it => it.item.id)
     
     /* const fLen = fwd.length
     const bLen = back.length
@@ -157,17 +170,14 @@ const ChatList = React.memo((props: ChatListProps) => {
       }
     } */
     
+    
+    
+    filterSelected(it => !removedIds.includes(it))
     setItems(newItems)
     setUiItems(uiItems)
   }, [newItems])
   
   const showItems = !!uiItems.length
-  
-  
-  const {
-    arr: selected, isNotEmpty: isAnySelected,
-    has: isSelected, toggle: toggleSelection,
-  } = useArray<string>()
   
   useNoTouchAction(isAnySelected)
   
