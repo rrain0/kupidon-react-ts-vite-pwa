@@ -34,13 +34,6 @@ export type UiItemData = {
   item: ChatListItemWidgetData
 } & (Adding | Showing | Removing | Replacing)
 
-const stateToPriority: Record<UiItemData['state'], number> = {
-  'adding': 2,
-  'showing': 1,
-  'replacing': 0,
-  'removing': 3,
-}
-
 
 
 
@@ -78,99 +71,58 @@ const ChatList = React.memo((props: ChatListProps) => {
   useEffect(() => {
     const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
     
-    const removed = (() => {
-      let cnt = 0
-      return fwd
-        .map((toI, fromI): UiItemData | undefined => {
-          if (isundef(toI)) {
-            return {
-              state: 'removing',
-              fromI: fromI - cnt++,
-              item: items[fromI],
-            }
-          }
-        })
-        .filter(it => !!it)
-    })()
-    
-    const uiItems: UiItemData[] = [
-      ...back.map((fromI, toI): UiItemData => {
-        if (isundef(fromI)) {
-          return {
-            state: 'adding',
-            toI: toI,
-            item: newItems[toI],
-          }
-        }
-        if (fromI !== toI) {
-          return {
-            //state: 'replacing',
-            //fromI,
-            state: 'showing',
-            toI: toI,
-            item: newItems[toI],
-          }
-        }
-        return {
-          state: 'showing',
-          toI,
-          item: newItems[toI],
-        }
-      }),
-      ...removed,
-    ]
-    
-    uiItems.sort((a, b) => {
-      const ai = a.state !== 'removing' ? a.toI : a.fromI
-      const bi = b.state !== 'removing' ? b.toI : b.fromI
-      return ai - bi
-        || -(stateToPriority[a.state] - stateToPriority[b.state])
-        || 0
-    })
-    
-    const removedIds = removed.map(it => it.item.id)
-    
-    /* const fLen = fwd.length
+    const fLen = fwd.length
     const bLen = back.length
-    const uiItems: UiItemData[] = Array(bLen)
-    for (let toI = 0; toI < bLen; toI++) {
-      uiItems[toI] = (() => {
+    const removedIds: string[] = []
+    const uiItems: UiItemData[] = []
+    
+    for (let prevFi = -1, prevBi = -1, bi = 0, ri = 0; ri < fLen || bi < bLen; ) {
+      if (ri < fLen && ri > prevFi) {
+        const fromI = ri
+        const toI = fwd[fromI]
+        if (isundef(toI)) {
+          const item = items[fromI]
+          removedIds.push(item.id)
+          uiItems.push({ state: 'removing', fromI, item })
+          bi--
+        }
+        prevFi = ri
+      }
+      if (bi < bLen && bi > prevBi) {
+        const toI = bi
         const fromI = back[toI]
         if (isundef(fromI)) {
-          return {
+          uiItems.push({
             state: 'adding',
             toI: toI,
             item: newItems[toI],
-          }
+          })
         }
-        if (fromI !== toI) {
-          return {
+        else if (fromI !== toI) {
+          uiItems.push({
             //state: 'replacing',
             //fromI,
             state: 'showing',
             toI: toI,
             item: newItems[toI],
-          }
+          })
+          ri++
         }
-        return {
-          state: 'showing',
-          toI,
-          item: newItems[toI],
+        else {
+          uiItems.push({
+            state: 'showing',
+            toI,
+            item: newItems[toI],
+          })
+          ri++
         }
-      })()
-    }
-    for (let fromI = fLen - 1; fromI >= 0; fromI--) {
-      const toI = fwd[fromI]
-      if (isundef(toI)) {
-        ArrayU.add(uiItems, {
-          state: 'removing',
-          fromI,
-          item: items[fromI],
-        }, fromI)
+        prevBi = bi
       }
-    } */
-    
-    
+      else {
+        ri++
+      }
+      bi++
+    }
     
     filterSelected(it => !removedIds.includes(it))
     setItems(newItems)

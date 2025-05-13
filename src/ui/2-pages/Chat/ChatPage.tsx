@@ -36,7 +36,7 @@ const {
 
 
 // Name -> firstName & lastName
-const chatItems: (ChatListItemWidgetData & {
+const mockChatItems: (ChatListItemWidgetData & {
   isMutualSympathy?: boolean | undefined
   mutualSympathyAppearanceDate?: string | undefined
 })[] = [
@@ -144,7 +144,7 @@ const chatItems: (ChatListItemWidgetData & {
   },
   {
     id: 'b8851399-7522-40d3-98c9-00b3f5d6d2cb',
-    name: 'Ксюша',
+    name: 'Ксения',
     lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date6MAgo, mute: true,
   },
@@ -163,39 +163,64 @@ const chatItems: (ChatListItemWidgetData & {
 ]
 
 
-const manyChatItems = arrOfIndices(Math.floor(200 / chatItems.length)).flatMap(i => (
-  chatItems.map(it => ({ ...it, id: `${it.id}-${i}` }))
+const manyChatItems = arrOfIndices(Math.floor(200 / mockChatItems.length)).flatMap(i => (
+  mockChatItems.map(it => ({ ...it, id: `${it.id}-${i}` }))
 ))
 
 
 const ChatPage = React.memo(() => {
   
-  const [items, setItems] = useState(chatItems)
+  const [chatItems, setchatItems] = useState(() => {
+    return mockChatItems.filter(it => (
+      true
+      && it.id !== 'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf'
+      && it.id !== '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d' // Киана
+    ))
+  })
   
   const [getIsRemoved, setIsRemoved] = useRefGetSet(false)
   useInterval2({ offset: 4000, interval: 4000 }, () => {
     if (!getIsRemoved()) {
       setIsRemoved(true)
-      setItems(items => items.filter(it => (
-        it.id !== '4fb12fb0-1f88-45a0-af4e-28b5614d1960'
-        && it.id !== 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c'
-        && it.id !== 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0'
-        && it.id !== '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d'
-      )))
+      setchatItems(items => [
+        ...items.filter(it => (
+          true
+          && it.id !== '4fb12fb0-1f88-45a0-af4e-28b5614d1960'
+          && it.id !== 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c'
+          && it.id !== '12c40cc6-5cdc-4b22-be2e-020643cab84a' // Unknown
+          && it.id !== 'b8851399-7522-40d3-98c9-00b3f5d6d2cb' // Ксения
+          //&& it.id !== 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0' // Лена
+        )),
+        ...mockChatItems.filter(it => (
+          false
+          || it.id === 'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf'
+          || it.id === '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d' // Киана
+        )),
+      ])
     }
     else {
       setIsRemoved(false)
-      setItems(items => [...items, ...chatItems.filter(it => (
-        it.id === '4fb12fb0-1f88-45a0-af4e-28b5614d1960'
-        || it.id === 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c'
-        || it.id === 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0'
-        || it.id === '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d'
-      ))])
+      setchatItems(items => [
+        ...items.filter(it => (
+          true
+          && it.id !== 'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf'
+          && it.id !== '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d' // Киана
+        )),
+        ...mockChatItems.filter(it => (
+          it.id === '4fb12fb0-1f88-45a0-af4e-28b5614d1960'
+          || it.id === 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c'
+          || it.id === '12c40cc6-5cdc-4b22-be2e-020643cab84a' // Unknown
+          || it.id === 'b8851399-7522-40d3-98c9-00b3f5d6d2cb' // Ксения
+          //|| it.id === 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0' // Лена
+        )),
+      ])
     }
   })
   
+  const [mutualSympathiesItems, setMutualSympathiesItems] = useState(mockChatItems)
+  
   const preparedChatItems = useMemo(() => {
-    return items
+    return chatItems
       .filter(it => it)
       .sort((a, b) => {
         return (b.order ?? 0) - (a.order ?? 0)
@@ -203,16 +228,16 @@ const ChatPage = React.memo(() => {
           || +new Date(b.lastMsgDate) - +new Date(a.lastMsgDate)
           || 0
       })
-  }, [items])
+  }, [chatItems])
   
   const preparedMutualSympathiesItems = useMemo(() => {
-    return items
+    return mutualSympathiesItems
       .filter(it => it.isMutualSympathy)
       .sort((a, b) => {
         return +new Date(b.mutualSympathyAppearanceDate!) - +new Date(a.mutualSympathyAppearanceDate!)
           || 0
       })
-  }, [items])
+  }, [mutualSympathiesItems])
   
   return (
     <>

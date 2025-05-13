@@ -11,8 +11,6 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import IsWritingFiveDots, {
   IsWritingFiveDotsCssProps,
 } from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
@@ -61,9 +59,8 @@ export type ChatListItemWidgetData = {
 }
 
 
-export type ChatListItemWidgetProps =
-  & { item: ChatListItemWidgetData }
-  & React.ComponentPropsWithRef<typeof Button>
+export type ChatListItemWidgetProps = { item: ChatListItemWidgetData }
+  & React.ComponentPropsWithRef<typeof Flex>
 
 export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) => {
   const {
@@ -98,8 +95,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
   const error = lastMsgStatus === 'error'
   
   return (
-    <Button row g={8} alignSelf='stretch'
-      css={ButtonS6.t(chatItemButtonS)}
+    <Flex h={60} r={20} row g={8} alignSelf='stretch'
       data-display-name='ChatListItemWidget'
       {...restProps}
     >
@@ -153,7 +149,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
       
       </Flex>
       
-    </Button>
+    </Flex>
   )
 })
 ChatListItemWidget.displayName = 'ChatListItemWidget'
@@ -161,16 +157,6 @@ export default ChatListItemWidget
 
 
 
-const chatItemButtonS: AppWidgetStyle = t => [
-  ButtonS6.S.text.rect.lg.normal, {
-    button: {
-      w: undefined, h: 72, r: 20, ph: 8, pv: 6,
-      textAlign: 'start',
-    },
-    // TODO Theme
-    buttonSelected: { bg: '#e07bff44' },
-  },
-]
 
 
 const NameBox = styled.div`
@@ -267,6 +253,9 @@ const Unread = styled(Flex)<Pu<{ secondary: boolean }>>`
   `}
   ${Txt.s14Bold};
 `
+
+
+
 
 
 

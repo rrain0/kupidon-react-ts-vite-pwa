@@ -59,6 +59,7 @@ export default [
       rules: {
         'eslint no-unused-expressions': 'off',
         'no-async-promise-executor': 'off',
+        'no-constant-binary-expression': 'warn',
         'no-constant-condition': 'off',
         'no-empty': 'off',
         'no-empty-pattern': 'off',

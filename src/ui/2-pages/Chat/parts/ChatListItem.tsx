@@ -12,6 +12,7 @@ import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { UiItemData } from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
 import ChatListItemWidget from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
+import ChatListItemButton from 'src/ui/2-pages/Chat/parts/ChatListItemButton.tsx'
 import Pu = TypeU.Pu
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import Callback1 = TypeU.Callback1
@@ -27,9 +28,12 @@ const h = 72
 const hItem = h + mv
 
 
-const addTime = 300 //ms
-const removeTime = 300 //ms
-const replaceTime = 300 //ms
+// const addTime = 300 //ms
+// const removeTime = 300 //ms
+// const replaceTime = 300 //ms
+const addTime = 2000 //ms
+const removeTime = 2000 //ms
+const replaceTime = 2000 //ms
 
 
 
@@ -53,10 +57,14 @@ const ChatListItem = React.memo(({
   const { item, state: s } = uiItem
   const { id } = item
   
+  const canSelect = s !== 'removing'
+  
   const onClick = useAsCallback(() => {
-    if (isAnySelected) toggleSelection?.(id)
+    if (isAnySelected && canSelect) toggleSelection?.(id)
   })
-  const onLongPress = useAsCallback(() => toggleSelection?.(id))
+  const onLongPress = useAsCallback(() => {
+    if (canSelect) toggleSelection?.(id)
+  })
   const onPointerDown = useAsCallback(() => setLastPointerDownItemId?.(id))
   
   const [getGapSlot, setGapSlot] = useElemRefGetSet()
@@ -135,7 +143,8 @@ const ChatListItem = React.memo(({
           }}
         >
           <ChatListItemBox alignSelf='stretch' h={h}>
-            <ChatListItemWidget
+            <ChatListItemButton
+              disabled={!canSelect}
               data-selected={toEmptyAttr(isSelected)}
               item={item}
               onPointerDown={onPointerDown}
