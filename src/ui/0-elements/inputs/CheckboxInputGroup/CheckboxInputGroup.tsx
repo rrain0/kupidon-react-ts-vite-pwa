@@ -9,31 +9,32 @@ import {
 } from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
 
-export type CheckboxInputGroupCustomProps = PartialUndef<{
+export type CheckboxInputGroupExtraProps = Pu<{
   hasError: boolean
   children: React.ReactNode
 }>
-export type CheckboxInputGroupForwardRefProps = React.JSX.IntrinsicElements['div']
-export type CheckboxInputGroupRefElement = HTMLDivElement
-export type CheckboxInputGroupProps = CheckboxInputGroupCustomProps & CheckboxInputGroupForwardRefProps
+export type CheckboxInputGroupProps =
+  & React.ComponentProps<'div'>
+  & CheckboxInputGroupExtraProps
 
 
 
-const CheckboxInputGroup =
-React.memo(
-React.forwardRef<CheckboxInputGroupRefElement, CheckboxInputGroupProps>(
-  (props, forwardedRef) => {
-  const { hasError, children, className, ...restProps } = props
+const CheckboxInputGroup = React.memo((props: CheckboxInputGroupProps) => {
+  const {
+    ref, children, className,
+    hasError,
+    ...restProps
+  } = props
   
   
-  const elemRef = useRef<CheckboxInputGroupRefElement>(null)
-  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
+  const elemRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => elemRef.current!, [])
   
   
   const radioGroupProps = {
@@ -47,21 +48,23 @@ React.forwardRef<CheckboxInputGroupRefElement, CheckboxInputGroupProps>(
   }
   
   
-  return <article /* RadioGroup */
-    css={radioGroupStyle}
-    {...radioGroupProps}
-    ref={elemRef}
-  >
-    
-    { children }
-    
-    <div /* Border */
-      css={borderStyle}
-      {...borderProps}
-    />
-    
-  </article>
-}))
+  return (
+    <article /* RadioGroup */
+      css={radioGroupStyle}
+      {...radioGroupProps}
+      ref={elemRef}
+    >
+      
+      { children }
+      
+      <div /* Border */
+        css={borderStyle}
+        {...borderProps}
+      />
+      
+    </article>
+  )
+})
 export default CheckboxInputGroup
 
 

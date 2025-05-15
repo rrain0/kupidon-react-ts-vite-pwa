@@ -43,7 +43,7 @@ export type ChatListExtraProps = Pu<{
 }>
 
 export type ChatListProps =
-  & Omit<React.ComponentPropsWithRef<'div'>, 'children'>
+  & Omit<React.ComponentProps<'div'>, 'children'>
   & ChatListExtraProps
 
 
@@ -157,7 +157,6 @@ const ChatList = React.memo((props: ChatListProps) => {
     startValue, time,
     data: { x, y } = { },
   }) => {
-    
     const springX = createSpring({
       mass: 1, tension: 120, friction: 7, from: startValue.mx, initVelocity: 0,
     })

@@ -14,7 +14,7 @@ import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
-type CheckboxInputProps = React.ComponentPropsWithRef<typeof Input> & Pu<{
+type CheckboxInputProps = React.ComponentProps<typeof Input> & Pu<{
   hasError: boolean
   
   startViews: React.ReactNode

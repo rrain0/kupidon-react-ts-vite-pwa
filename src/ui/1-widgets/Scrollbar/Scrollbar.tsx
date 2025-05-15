@@ -15,7 +15,7 @@ import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 
 
@@ -25,43 +25,40 @@ import toEmptyAttr = TypeU.toEmptyAttr
 
 // maybe it is worth doing min scrollbar width
 
-export type ScrollDirection = 'horizontal'|'vertical'
+export type ScrollDirection = 'horizontal' | 'vertical'
 
-export type ScrollbarCustomProps = {
+export type ScrollbarExtraProps = {
   scrollProps: ScrollProps
   setContainerScroll: (scroll: ScrollToOptions) => void
-} & PartialUndef<{
+} & Pu<{
   direction: ScrollDirection
 }>
-export type ScrollbarForwardRefProps = React.JSX.IntrinsicElements['div']
-export type ScrollbarRefElement = HTMLDivElement
 
-export type ScrollbarProps = ScrollbarCustomProps & ScrollbarForwardRefProps
+export type ScrollbarProps =
+  & React.ComponentProps<'div'>
+  & ScrollbarExtraProps
 
 
-const Scrollbar =
-React.memo(
-React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
-(props, forwardedRef) => {
+const Scrollbar = React.memo((props: ScrollbarProps) => {
   const {
+    ref, className,
     direction = 'vertical',
     scrollProps,
     setContainerScroll,
-    className,
     ...restProps
   } = props
   
   
-  const trackRef = useRef<ScrollbarRefElement>(null)
-  useImperativeHandle(forwardedRef, () => trackRef.current!, [])
+  const trackRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => trackRef.current!, [])
   const thumbBoxRef = useRef<HTMLDivElement>(null)
   
   
   /*
-  useEffect(() => {
-    console.log('scrollProps',scrollProps)
-  },[scrollProps])
-  */
+   useEffect(() => {
+   console.log('scrollProps',scrollProps)
+   },[scrollProps])
+   */
   
   
   const [trackProps, setTrackProps] = useState({ width: 0, height: 0 })
@@ -109,19 +106,19 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
         width: toTrackScale(scrollProps.clientWidth),
       }
     }
-  },[direction, scrollProps, toTrackScale])
+  }, [direction, scrollProps, toTrackScale])
   
   
   // Track Resize Observer
   useEffect(() => {
     updateTrackProps()
     const track = trackRef.current
-    if (track){
+    if (track) {
       const trackResizeObserver = new ResizeObserver(() => updateTrackProps())
       track && trackResizeObserver.observe(track)
       return () => trackResizeObserver.disconnect()
     }
-  },[trackRef.current, updateTrackProps])
+  }, [trackRef.current, updateTrackProps])
   
   
   const [dragStart, setDragStart] = useState(
@@ -131,14 +128,14 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
     }
   )
   const onPointerDown = useCallback(
-    function (this: HTMLElement, ev: PointerEvent){
+    function (this: HTMLElement, ev: PointerEvent) {
       const track = trackRef.current
       const thumbBox = thumbBoxRef.current
-      if (track && thumbBox && ev.buttons === 1){
+      if (track && thumbBox && ev.buttons === 1) {
         const trackD = getViewProps(track)
         const thumbBoxD = getViewProps(thumbBox)
-        const drag = function(){
-          const p = function(){
+        const drag = function() {
+          const p = function() {
             switch (direction) {
               case 'vertical': return {
                 start: thumbBoxD.clientYFloat,
@@ -254,22 +251,24 @@ React.forwardRef<ScrollbarRefElement, ScrollbarProps>(
     [ScrollbarStyle.Attr.active.name]: toEmptyAttr(dragStart),
   }
   
-  return <ScrollbarTrack
-    {...scrollbarTrackProps}
-    {...restProps}
-    ref={trackRef}
-  >
-    <ScrollbarThumbBox
-      className={ScrollbarStyle.El.thumbBox.name}
-      ref={thumbBoxRef}
-      style={thumbBoxProps}
+  return (
+    <ScrollbarTrack
+      {...scrollbarTrackProps}
+      {...restProps}
+      ref={trackRef}
     >
-      <ScrollbarThumb
-        className={ScrollbarStyle.El.thumb.name}
-      />
-    </ScrollbarThumbBox>
-  </ScrollbarTrack>
-}))
+      <ScrollbarThumbBox
+        className={ScrollbarStyle.El.thumbBox.name}
+        ref={thumbBoxRef}
+        style={thumbBoxProps}
+      >
+        <ScrollbarThumb
+          className={ScrollbarStyle.El.thumb.name}
+        />
+      </ScrollbarThumbBox>
+    </ScrollbarTrack>
+  )
+})
 export default Scrollbar
 
 

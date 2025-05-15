@@ -15,7 +15,7 @@ import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import noop = TypeU.noop
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import toEmptyAttr = TypeU.toEmptyAttr
@@ -29,10 +29,10 @@ import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
-export type ScrollbarVerticalCustomProps = {
+export type ScrollbarVerticalExtraProps = {
   // size of visible content part 0..100
   visiblePartPercent: number
-} & PartialUndef<{
+} & Pu<{
   // incoming scroll progress 0..100
   scroll: number
   // set scroll progress 0..100
@@ -40,161 +40,157 @@ export type ScrollbarVerticalCustomProps = {
   // min scrollbar length in px
   //minLength: number
 }>
-export type ScrollbarVerticalForwardRefProps = React.JSX.IntrinsicElements['div']
-export type ScrollbarVerticalRefElement = HTMLDivElement
 
-export type ScrollbarVerticalProps = ScrollbarVerticalCustomProps & ScrollbarVerticalForwardRefProps
+export type ScrollbarVerticalProps =
+  & React.ComponentProps<'div'>
+  & ScrollbarVerticalExtraProps
 
 
 
-const ScrollbarVertical = React.memo(
-  React.forwardRef<ScrollbarVerticalRefElement, ScrollbarVerticalProps>(
-    (props, forwardedRef) => {
-      const {
-        visiblePartPercent,
-        scroll = 0,
-        setScroll = noop,
-        //minLength = 0,
-        className,
-        ...restProps
-      } = props
-      
-      
-      const trackRef = useRef<ScrollbarVerticalRefElement>(null)
-      useImperativeHandle(forwardedRef, () => trackRef.current!, [])
-      const thumbBoxRef = useRef<HTMLDivElement>(null)
-      
-      
-      /*
-      useEffect(() => {
-        console.log('scrollProps',scrollProps)
-      },[scrollProps])
-      */
-      
-      
-      const [trackProps, setTrackProps] = useState({ height: 0 })
-      const updateTrackProps = () => {
-        const track = trackRef.current
-        if (track) {
-          const d = getViewProps(track)
-          setTrackProps({
-            height: d.contentHeight,
-          })
-        }
-      }
-      
-      
-      // Track Resize Observer
-      useEffect(() => {
-        updateTrackProps()
-        const track = trackRef.current
-        if (track) {
-          const trackResizeObserver = new ResizeObserver(updateTrackProps)
-          trackResizeObserver.observe(track)
-          return () => trackResizeObserver.disconnect()
-        }
-      }, [trackRef.current])
-      
-      
-      
-      /* const [dragStart, setDragStart] = useStateAndRef(undefined as undefined | {
-        vpy: number,
-      }) */
-      const [isDragging, setIsDragging] = useState(false)
-      
-      const [getVisiblePartPercent] = useAsRefGet(visiblePartPercent)
-      
-      const dragStartRef = useRef({ isByThumbBox: false })
-      
-      const onThumbBoxPointerDown = () => {
-        dragStartRef.current.isByThumbBox = true
-      }
-      
-      const onTrackDrag = useDrag(gesture => {
-        const {
-          first, active, last,
-          xy: [ , vpy],
-          movement: [ , my],
-          delta: [ , dy],
-        } = gesture
-        
-        const trackProps = {
-          vpy: 0,
-          height: 0,
-        }
-        {
-          const track = trackRef.current
-          if (track) {
-            const d = getViewProps(track)
-            trackProps.vpy = d.vpYFloat
-            trackProps.height = d.heightFloat
-          }
-        }
-        
-        
-        const toPercent = (px: number) =>
-          px / (trackProps.height * (100 - getVisiblePartPercent()) / 100) * 100
-        const dyPercent = toPercent(dy)
-        const yPercent = toPercent(vpy-trackProps.vpy)
-        
-        if (first) {
-          setIsDragging(true)
-          if (!dragStartRef.current.isByThumbBox) {
-            setScroll(RangeU.clamp(yPercent, [0, 100]))
-          }
-        }
-        if (active) {
-          if (yPercent < 0) setScroll(0)
-          else if (yPercent>100) setScroll(100)
-          else setScroll(s => RangeU.clamp(s+dyPercent, [0, 100]))
-        }
-        if (last) {
-          setIsDragging(false)
-          dragStartRef.current.isByThumbBox = false
-        }
-      }, { })
-      
-      
-      
-      
-      // forbid content selection for all elements while dragging scrollbar
-      useNoSelect(isDragging)
-      
-      
-      
-      
-      
-      
-      const scrollbarTrackProps = {
-        className: clsx(className, ScrollbarVerticalStyle.El.track.name),
-        [ScrollbarVerticalStyle.Attr.active.name]: toEmptyAttr(isDragging),
-        ...restProps,
-        ref: trackRef,
-      }
-      const thumbBoxProps = {
-        className: ScrollbarVerticalStyle.El.thumbBox.name,
-        style: {
-          height: visiblePartPercent+'%',
-          top: RangeU.map(scroll, [0, 100], [0, 100-visiblePartPercent])+'%',
-        },
-        onPointerDown: onThumbBoxPointerDown,
-        ref: thumbBoxRef,
-      }
-      const thumbProps = {
-        className: ScrollbarVerticalStyle.El.thumb.name,
-      }
-      
-      
-      return (
-        <ScrollbarTrack {...scrollbarTrackProps} {...onTrackDrag()}>
-          <ScrollbarThumbBox {...thumbBoxProps}>
-            <ScrollbarThumb {...thumbProps}/>
-          </ScrollbarThumbBox>
-        </ScrollbarTrack>
-      )
+const ScrollbarVertical = React.memo((props: ScrollbarVerticalProps) => {
+  const {
+    ref, className,
+    visiblePartPercent,
+    scroll = 0,
+    setScroll = noop,
+    //minLength = 0,
+    ...restProps
+  } = props
+  
+  
+  const trackRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => trackRef.current!, [])
+  const thumbBoxRef = useRef<HTMLDivElement>(null)
+  
+  
+  /*
+   useEffect(() => {
+   console.log('scrollProps',scrollProps)
+   },[scrollProps])
+   */
+  
+  
+  const [trackProps, setTrackProps] = useState({ height: 0 })
+  const updateTrackProps = () => {
+    const track = trackRef.current
+    if (track) {
+      const d = getViewProps(track)
+      setTrackProps({
+        height: d.contentHeight,
+      })
     }
+  }
+  
+  
+  // Track Resize Observer
+  useEffect(() => {
+    updateTrackProps()
+    const track = trackRef.current
+    if (track) {
+      const trackResizeObserver = new ResizeObserver(updateTrackProps)
+      trackResizeObserver.observe(track)
+      return () => trackResizeObserver.disconnect()
+    }
+  }, [trackRef.current])
+  
+  
+  
+  /* const [dragStart, setDragStart] = useStateAndRef(undefined as undefined | {
+   vpy: number,
+   }) */
+  const [isDragging, setIsDragging] = useState(false)
+  
+  const [getVisiblePartPercent] = useAsRefGet(visiblePartPercent)
+  
+  const dragStartRef = useRef({ isByThumbBox: false })
+  
+  const onThumbBoxPointerDown = () => {
+    dragStartRef.current.isByThumbBox = true
+  }
+  
+  const onTrackDrag = useDrag(gesture => {
+    const {
+      first, active, last,
+      xy: [ , vpy],
+      movement: [ , my],
+      delta: [ , dy],
+    } = gesture
+    
+    const trackProps = {
+      vpy: 0,
+      height: 0,
+    }
+    {
+      const track = trackRef.current
+      if (track) {
+        const d = getViewProps(track)
+        trackProps.vpy = d.vpYFloat
+        trackProps.height = d.heightFloat
+      }
+    }
+    
+    
+    const toPercent = (px: number) =>
+      px / (trackProps.height * (100 - getVisiblePartPercent()) / 100) * 100
+    const dyPercent = toPercent(dy)
+    const yPercent = toPercent(vpy-trackProps.vpy)
+    
+    if (first) {
+      setIsDragging(true)
+      if (!dragStartRef.current.isByThumbBox) {
+        setScroll(RangeU.clamp(yPercent, [0, 100]))
+      }
+    }
+    if (active) {
+      if (yPercent < 0) setScroll(0)
+      else if (yPercent>100) setScroll(100)
+      else setScroll(s => RangeU.clamp(s+dyPercent, [0, 100]))
+    }
+    if (last) {
+      setIsDragging(false)
+      dragStartRef.current.isByThumbBox = false
+    }
+  }, { })
+  
+  
+  
+  
+  // forbid content selection for all elements while dragging scrollbar
+  useNoSelect(isDragging)
+  
+  
+  
+  
+  
+  
+  const scrollbarTrackProps = {
+    className: clsx(className, ScrollbarVerticalStyle.El.track.name),
+    [ScrollbarVerticalStyle.Attr.active.name]: toEmptyAttr(isDragging),
+    ...restProps,
+    ref: trackRef,
+  }
+  const thumbBoxProps = {
+    className: ScrollbarVerticalStyle.El.thumbBox.name,
+    style: {
+      height: visiblePartPercent+'%',
+      top: RangeU.map(scroll, [0, 100], [0, 100-visiblePartPercent])+'%',
+    },
+    onPointerDown: onThumbBoxPointerDown,
+    ref: thumbBoxRef,
+  }
+  const thumbProps = {
+    className: ScrollbarVerticalStyle.El.thumb.name,
+  }
+  
+  
+  return (
+    <ScrollbarTrack {...scrollbarTrackProps} {...onTrackDrag()}>
+      <ScrollbarThumbBox {...thumbBoxProps}>
+        <ScrollbarThumb {...thumbProps}/>
+      </ScrollbarThumbBox>
+    </ScrollbarTrack>
   )
-)
+})
 export default ScrollbarVertical
 
 

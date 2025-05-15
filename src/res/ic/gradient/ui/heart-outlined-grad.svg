@@ -1,0 +1,24 @@
+<svg viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <style>
+    :root {
+      --grad-icon-color-0: #1F1F1F;
+      --grad-icon-color-1: #6D6D6D;
+    }
+  </style>
+  
+  <path
+    d="M12.0001 4.16693C9.84515 1.6039 6.24416 0.811816 3.54411 3.15878C0.84405 5.50574 0.463919 9.4297 2.58429 12.2055C4.34724 14.5133 9.68252 19.3808 11.4311 20.9562C11.6267 21.1325 11.7246 21.2206 11.8387 21.2552C11.9382 21.2854 12.0472 21.2854 12.1468 21.2552C12.2608 21.2207 12.3584 21.1328 12.5535 20.9571L12.5544 20.9562C14.303 19.3808 19.6382 14.5133 21.4012 12.2055C23.5216 9.4297 23.1878 5.48105 20.4413 3.15878C17.6949 0.836505 14.1551 1.6039 12.0001 4.16693Z"
+    stroke="url(#paint0_linear_774_11595475746iujhhwg)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+  />
+  
+  <defs>
+    <linearGradient
+      id="paint0_linear_774_11595475746iujhhwg" x1="12.0001" y1="1.76074" x2="12.0001" y2="21.2778" gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="var(--grad-icon-color-1)"/>
+      <stop offset="1" stop-color="var(--grad-icon-color-0)"/>
+    </linearGradient>
+  </defs>
+  
+</svg>

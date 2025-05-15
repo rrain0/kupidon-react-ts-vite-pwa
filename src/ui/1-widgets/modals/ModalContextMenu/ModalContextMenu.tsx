@@ -16,8 +16,8 @@ import modalBottomCardBoxS = ModalElements.modalBottomCardBoxS
 
 
 
-const t = 150
-const b = 100
+const time = 150
+const b = 60
 
 
 
@@ -84,7 +84,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
     let stale = false
     if (el) {
       if (state === 'appearing') {
-        el.style.transition = `transform ${t}ms linear, bottom ${t}ms linear`
+        el.style.transition = `transform ${time}ms linear, bottom ${time}ms linear`
         el.style.bottom = `${b}px`
         el.style.transform = 'translateY(0%)'
         el.ontransitionend = ev => requestAnimationFrame(() => {
@@ -100,7 +100,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
         el.ontransitionend = null
       }
       else if (state === 'disappearing') {
-        el.style.transition = `transform ${t}ms linear, bottom ${t}ms linear`
+        el.style.transition = `transform ${time}ms linear, bottom ${time}ms linear`
         el.style.bottom = '0px'
         el.style.transform = 'translateY(110%)'
         el.ontransitionend = ev => requestAnimationFrame(() => {

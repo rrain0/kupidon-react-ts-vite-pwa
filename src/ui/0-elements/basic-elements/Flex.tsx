@@ -12,7 +12,7 @@ import ClassStyle = ReactU.ClassStyle
 
 export type FlexExtraProps = FlexShortProps & ClassStyle & Children
 
-export type FlexProps = React.ComponentPropsWithRef<'div'> & FlexExtraProps
+export type FlexProps = React.ComponentProps<'div'> & FlexExtraProps
 
 
 

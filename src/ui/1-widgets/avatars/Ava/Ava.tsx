@@ -41,7 +41,7 @@ export type AvaExtraProps = {
 }
 
 export type AvaProps =
-  & Omit<React.ComponentPropsWithRef<typeof Flex>, 'children'>
+  & Omit<React.ComponentProps<typeof Flex>, 'children'>
   & AvaExtraProps
 
 

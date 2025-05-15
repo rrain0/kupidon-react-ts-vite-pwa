@@ -22,7 +22,7 @@ import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
-export type RadioInputProps = React.ComponentPropsWithRef<'input'> & Pu<{
+export type RadioInputProps = React.ComponentProps<'input'> & Pu<{
   hasError: boolean
   startViews: React.ReactNode
   endViews: React.ReactNode

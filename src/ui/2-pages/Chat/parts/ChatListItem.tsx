@@ -11,13 +11,13 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { UiItemData } from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
-import ChatListItemWidget from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
 import ChatListItemButton from 'src/ui/2-pages/Chat/parts/ChatListItemButton.tsx'
 import Pu = TypeU.Pu
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import Callback1 = TypeU.Callback1
 import toEmptyAttr = TypeU.toEmptyAttr
 import gridStackC = EmotionCommon.gridStackC
+
 
 
 const g = 14
@@ -116,18 +116,18 @@ const ChatListItem = React.memo(({
   
   
   return (
-    <ChatListItemGapSlot alignSelf='stretch' h={hItem} mt={g}
+    <ListSlot alignSelf='stretch' h={hItem} mt={g}
       ref={setGapSlot}
       style={{
         ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
         ...first && { marginTop: 0 },
       }}
     >
-      <ChatListItemSlot alignSelf='stretch' h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
+      <ItemSlot alignSelf='stretch' h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
         
-        {isSelected && <ChatListItemPlaceholder full/>}
+        {isSelected && <ItemPlaceholder full/>}
         
-        <ChatListItemAnimated pos='rel' full col alignSelf='stretch'
+        <ItemAnimated pos='rel' full col alignSelf='stretch'
           animatedStyle={{
             transform: animatedMapMulti([animatedMxMy, animatedOffset], (m, offset) => {
               if (!m) return 'none'
@@ -142,7 +142,7 @@ const ChatListItem = React.memo(({
             }),
           }}
         >
-          <ChatListItemBox alignSelf='stretch' h={h}>
+          <ItemBox alignSelf='stretch' h={h}>
             <ChatListItemButton
               disabled={!canSelect}
               data-selected={toEmptyAttr(isSelected)}
@@ -151,11 +151,11 @@ const ChatListItem = React.memo(({
               onClick={onClick}
               onLongPress={onLongPress}
             />
-          </ChatListItemBox>
-        </ChatListItemAnimated>
+          </ItemBox>
+        </ItemAnimated>
       
-      </ChatListItemSlot>
-    </ChatListItemGapSlot>
+      </ItemSlot>
+    </ListSlot>
   )
 })
 export default ChatListItem
@@ -163,19 +163,19 @@ export default ChatListItem
 
 
 
-const ChatListItemGapSlot = withDefaults({
+const ListSlot = withDefaults({
 
 }, styled(Flex)())
-const ChatListItemSlot = withDefaults({
-  r,
+const ItemSlot = withDefaults({
+
 }, styled(Flex)([gridStackC]))
 
-const ChatListItemAnimated = withDefaults({
+const ItemAnimated = withDefaults({
   r,
 }, styled(AnimatedDiv)({
   overflow: 'hidden',
 }))
-const ChatListItemBox = withDefaults({
+const ItemBox = withDefaults({
   r,
 }, styled(Flex)([gridStackC, {
   // TODO Theme
@@ -183,7 +183,7 @@ const ChatListItemBox = withDefaults({
 }]))
 
 
-const ChatListItemPlaceholder = withDefaults({
+const ItemPlaceholder = withDefaults({
   r,
 }, styled(Flex)(({ theme: t }) => ({
   backgroundColor: t.boxNormalCt.bgf,

@@ -1,9 +1,11 @@
 import styled from '@emotion/styled'
 import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React from 'react'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
@@ -49,7 +51,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
         {/* TODO Translations */}
         <MutualSympathiesText>Взаимные симпатии</MutualSympathiesText>
         <Gap grow/>
-        <HeaderArrow css={HeaderArrowS.secondary}>Все</HeaderArrow>
+        <HeaderArrow css={[HeaderArrowS.secondary, ButtonS6.t(allButtonS)]}>Все</HeaderArrow>
       </Flex>
     
       <Gap h={14}/>
@@ -82,6 +84,14 @@ export default MutualSympathiesList
 const MutualSympathiesText = styled.div`
   ${Txt.s20Bold};
 `
+
+
+const allButtonS: AppWidgetStyle = {
+  button: {
+    minHeight: 0,
+    ...virtualOffset({ v: 8 }),
+  },
+}
 
 
 

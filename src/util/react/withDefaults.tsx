@@ -95,7 +95,7 @@ export const withDefaults = <
 // MyImg.defaultProps = { src: nextUp }
 //
 // // ✅ Wrap component
-// type Props<T extends React.ElementType> = React.ComponentPropsWithRef<T>
+// type Props<T extends React.ElementType> = React.ComponentProps<T>
 // const MyImgWithSrc = (props: Props<typeof MyImg>) => (
 //   <MyImg {...props} src={nextUp} alt="Fire on black"/>
 // )

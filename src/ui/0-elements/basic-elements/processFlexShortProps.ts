@@ -123,7 +123,7 @@ export const processFlexShortProps = <P extends object>(
     padding: p,
     paddingTop: pt ?? pv,
     paddingRight: pr ?? ph,
-    paddingBottop: pb ?? pv,
+    paddingBottom: pb ?? pv,
     paddingLeft: pl ?? ph,
     
     ...row && { flexDirection: 'row' as const },

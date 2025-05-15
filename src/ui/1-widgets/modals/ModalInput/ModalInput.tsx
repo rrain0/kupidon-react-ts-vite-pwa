@@ -18,7 +18,7 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 
-type ModalInputProps = React.ComponentPropsWithRef<typeof Input> & Pu<{
+type ModalInputProps = React.ComponentProps<typeof Input> & Pu<{
   isOpen: boolean
   title: string
   onClose: Callback

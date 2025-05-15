@@ -51,6 +51,7 @@ export namespace RippleS6 {
       },
       ripple: {
         pos: 'abs',
+        pointerEvents: 'none',
         translate: '-50% -50%',
         r: 'round',
         /*background-image: radial-gradient(

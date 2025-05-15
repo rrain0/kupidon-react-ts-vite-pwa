@@ -1,16 +1,16 @@
 import React from 'react'
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 
 
 
 
 export type MyComponentProps = Pu<{
-  prop: number
+  myProp: number
   children: (props: MyComponentRenderProps) => React.ReactNode
 }>
 export type MyComponentRenderProps = {
-
+  myRenderProp: boolean
 }
 
 
@@ -18,10 +18,10 @@ export type MyComponentRenderProps = {
 const MyComponent = React.memo((props: MyComponentProps) => {
   const {
     children,
-    prop = 0,
+    myProp = 0,
   } = props
   
-  return children?.({ })
+  return children?.({ myRenderProp: true })
 })
 MyComponent.displayName = 'MyComponent'
 //export default MyComponent

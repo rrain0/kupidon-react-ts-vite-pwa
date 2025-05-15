@@ -20,7 +20,7 @@ export const IsWritingFiveDotsCssProps = (cssProps: Pu<{
 
 
 
-export type IsWritingFiveDotsProps = Omit<React.ComponentPropsWithRef<'div'>, 'children'>
+export type IsWritingFiveDotsProps = Omit<React.ComponentProps<'div'>, 'children'>
 
 
 

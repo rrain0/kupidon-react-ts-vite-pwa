@@ -10,7 +10,7 @@ import Pu = TypeU.Pu
 
 
 
-export type HeaderArrowProps = React.ComponentPropsWithRef<typeof Button> & Pu<{
+export type HeaderArrowProps = React.ComponentProps<typeof Button> & Pu<{
   noArrow: boolean
 }>
 

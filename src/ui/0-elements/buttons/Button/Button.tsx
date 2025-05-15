@@ -26,7 +26,7 @@ import Callback = TypeU.Callback
 
 
 
-type ButtonProps = React.ComponentPropsWithRef<typeof ButtonElem> & Pu<{
+type ButtonProps = React.ComponentProps<typeof ButtonElem> & Pu<{
   'data-locked': HtmlEmptyAttr
   'data-selected': HtmlEmptyAttr
   'data-error': HtmlEmptyAttr

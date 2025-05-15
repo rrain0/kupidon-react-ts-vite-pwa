@@ -13,7 +13,7 @@ import ChatListItemWidget, {
 
 export type ChatListItemButtonProps =
   & { item: ChatListItemWidgetData }
-  & React.ComponentPropsWithRef<typeof Button>
+  & React.ComponentProps<typeof Button>
 
 export const ChatListItemButton = React.memo((props: ChatListItemButtonProps) => {
   const { item, ...restProps } = props

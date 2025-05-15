@@ -17,7 +17,7 @@ export type DataFieldCustomProps = Pu<{
   hasError: boolean
 }>
 export type DataFieldProps =
-  & React.ComponentPropsWithRef<'div'>
+  & React.ComponentProps<'div'>
   & DataFieldCustomProps
 
 

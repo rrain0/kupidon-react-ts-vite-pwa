@@ -19,7 +19,7 @@ type IsSelected = Pu<{ isSelected: boolean }>
 export type IndicatorSelection = 0 | false | 1 | 2 | true
 
 type SelectItemProps =
-  React.ComponentPropsWithRef<'button'>
+  React.ComponentProps<'button'>
   & IsSelected
   & Pu<{
     isAdd: boolean

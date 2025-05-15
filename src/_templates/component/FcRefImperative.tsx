@@ -1,13 +1,10 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { ReactU } from 'src/util/react/ReactU'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { ReactU } from '@util/react/ReactU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
-import colC = EmotionCommon.colC
 import resetButton = EmotionCommon.resetButton
 
 
@@ -19,11 +16,11 @@ const ToBeExtended = styled.button`
 
 
 type MyComponentExtraProps = Pu<{
-  isError: boolean
+  myProp: boolean
 }> & Children
 
 type MyComponentProps = 
-  & React.ComponentPropsWithRef<typeof ToBeExtended> 
+  & React.ComponentProps<typeof ToBeExtended> 
   & MyComponentExtraProps
 
 
@@ -42,7 +39,6 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   return (
     <ToBeExtended // Frame
       data-display-name='MyComponent'
-      css={frameStyle}
       {...restProps}
       ref={elemRef}
     >
@@ -53,9 +49,3 @@ const MyComponent = React.memo((props: MyComponentProps) => {
 MyComponent.displayName = 'MyComponent'
 //export default MyComponent
 
-
-
-const frameStyle = (t: AppTheme.Theme) => css`
-  ${colC};
-  width: 100%;
-`

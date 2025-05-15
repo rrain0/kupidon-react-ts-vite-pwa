@@ -1,11 +1,11 @@
-import { css, Global } from '@emotion/react'
+import { Global } from '@emotion/react'
 import React, {
   useImperativeHandle,
   useRef,
 } from 'react'
 import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import BottomButtonBarFrame = ButtonBarComponents.BottomButtonBarFrame
 import ButtonsContainer = ButtonBarComponents.ButtonsContainer
 import LeftButtonsContainer = ButtonBarComponents.LeftButtonsContainer
@@ -20,8 +20,9 @@ import RefreshBtn = ButtonBarComponents.RefreshPageBtn
 
 
 
-export type BottomButtonBarProps = React.JSX.IntrinsicElements['section']
-  & PartialUndef<{
+export type BottomButtonBarProps =
+  & React.JSX.IntrinsicElements['section']
+  & Pu<{
     children: React.ReactNode
     leftChildren: React.ReactNode
     rightChildren: React.ReactNode
@@ -33,57 +34,60 @@ export type BottomButtonBarProps = React.JSX.IntrinsicElements['section']
 
 
 
-const BottomButtonBar = React.memo(
-  React.forwardRef<HTMLTableSectionElement, BottomButtonBarProps>(
-    (props, forwardedRef) => {
+const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
+  const {
+    ref,
+    backBtn, settingsBtnLeft, leftChildren,
+    children, settingsBtn,
+    rightChildren, refreshPageBtn,
+    ...restProps
+  } = props
+  
+  const thisRef = useRef<HTMLTableSectionElement>(null)
+  useImperativeHandle(ref, () => thisRef.current!, [])
+  
+  
+  return (
+    <>
       
-      const thisRef = useRef<HTMLTableSectionElement>(null)
-      useImperativeHandle(forwardedRef, () => thisRef.current!, [])
+      <Global
+        styles={{
+          ':root': {
+            '--bottom-button-bar-height': '70px',
+          },
+        }}
+      />
       
-      
-      return (
-        <>
+      <BottomButtonBarFrame
+        {...restProps}
+        ref={thisRef}
+      >
+        <ButtonsContainer>
+          
+          <LeftButtonsContainer>
+            {backBtn && <BackBtn0/>}
+            {settingsBtnLeft && <SettingsBtn/>}
+            {leftChildren}
+          </LeftButtonsContainer>
+          
+          
+          <CenterButtonsContainer>
+            {children}
+            {settingsBtn && <SettingsBtn/>}
+          </CenterButtonsContainer>
+          
+          
+          <RightButtonsContainer>
+            {rightChildren}
+            {refreshPageBtn && <RefreshBtn/>}
+          </RightButtonsContainer>
         
-          <Global
-            styles={css`
-              :root{
-                --bottom-button-bar-height: 70px;
-              }
-            `}
-          />
-          
-          <BottomButtonBarFrame
-            {...props}
-            ref={thisRef}
-          >
-            <ButtonsContainer>
-              
-              <LeftButtonsContainer>
-                {props.backBtn && <BackBtn0/>}
-                {props.settingsBtnLeft && <SettingsBtn/>}
-                {props.leftChildren}
-              </LeftButtonsContainer>
-              
-              
-              <CenterButtonsContainer>
-                {props.children}
-                {props.settingsBtn && <SettingsBtn/>}
-              </CenterButtonsContainer>
-              
-              
-              <RightButtonsContainer>
-                {props.rightChildren}
-                {props.refreshPageBtn && <RefreshBtn/>}
-              </RightButtonsContainer>
-              
-            </ButtonsContainer>
-          </BottomButtonBarFrame>
-          
-        </>
-      )
-    }
+        </ButtonsContainer>
+      </BottomButtonBarFrame>
+    
+    </>
   )
-)
+})
 export default BottomButtonBar
 
 

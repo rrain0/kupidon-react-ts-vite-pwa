@@ -17,7 +17,7 @@ type AnimatedDivExtraProps = Pu<{
   animatedAttrs: AnimatedElemAttrs
 }>
 
-type AnimatedDivProps = React.ComponentPropsWithRef<typeof Flex> & AnimatedDivExtraProps
+type AnimatedDivProps = React.ComponentProps<typeof Flex> & AnimatedDivExtraProps
 
 
 

@@ -30,7 +30,6 @@ export namespace ButtonBarComponents {
   
   
   
-  import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
   export const TopButtonBarFrame = styled.section`
     pointer-events: none;
     ${fixedTop};

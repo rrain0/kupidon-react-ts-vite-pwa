@@ -17,7 +17,7 @@ import modalFloor1k = StyleVals.modalFloor1k
 
 
 
-export type ModalProps = React.ComponentPropsWithRef<'article'> & Pu<{
+export type ModalProps = React.ComponentProps<'article'> & Pu<{
   noPortal: boolean
   disableOnThisClick: boolean
   disableStopPointerAndMouseEvents: boolean

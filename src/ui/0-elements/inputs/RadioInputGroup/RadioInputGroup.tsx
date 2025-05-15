@@ -9,31 +9,32 @@ import {
 } from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import abs = EmotionCommon.abs
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
 
-export type RadioInputGroupCustomProps = PartialUndef<{
+export type RadioInputGroupExtraProps = Pu<{
   hasError: boolean
   children: React.ReactNode
 }>
-export type RadioInputGroupForwardRefProps = React.JSX.IntrinsicElements['div']
-export type RadioInputGroupRefElement = HTMLDivElement
-export type RadioInputGroupProps = RadioInputGroupCustomProps & RadioInputGroupForwardRefProps
+export type RadioInputGroupProps =
+  & React.ComponentProps<'div'>
+  & RadioInputGroupExtraProps
 
 
 
-const RadioInputGroup =
-React.memo(
-React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
-  (props, forwardedRef) => {
-  const { hasError, children, className, ...restProps } = props
+const RadioInputGroup = React.memo((props: RadioInputGroupProps) => {
+  const {
+    ref, className, children,
+    hasError, 
+    ...restProps
+  } = props
   
   
-  const elemRef = useRef<RadioInputGroupRefElement>(null)
-  useImperativeHandle(forwardedRef, () => elemRef.current!,[])
+  const elemRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => elemRef.current!, [])
   
   
   const radioGroupProps = {
@@ -49,21 +50,23 @@ React.forwardRef<RadioInputGroupRefElement, RadioInputGroupProps>(
   }
   
   
-  return <article // Radio Group
-    css={radioGroupStyle}
-    {...radioGroupProps}
-    ref={elemRef}
-  >
-    
-    { children }
-    
-    <div // Border
-      css={borderStyle}
-      {...borderProps}
-    />
-    
-  </article>
-}))
+  return (
+    <article // Radio Group
+      css={radioGroupStyle}
+      {...radioGroupProps}
+      ref={elemRef}
+    >
+      
+      { children }
+      
+      <div // Border
+        css={borderStyle}
+        {...borderProps}
+      />
+      
+    </article>
+  )
+})
 export default RadioInputGroup
 
 

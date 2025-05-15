@@ -9,7 +9,7 @@ import { ReactU } from 'src/util/react/ReactU'
 import row = EmotionCommon.row
 import abs = EmotionCommon.abs
 import resetTextarea = EmotionCommon.resetTextarea
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import hoverable = EmotionCommon.hoverable
 import Callback1 = TypeU.Callback1
 import combineProps = ReactU.combineProps
@@ -19,94 +19,91 @@ import toEmptyAttr = TypeU.toEmptyAttr
 
 
 
-export type TextareaCustomProps = PartialUndef<{
+export type TextareaExtraProps = Pu<{
   isError: boolean
   onValue: Callback1<string>
   startViews: React.ReactNode
   endViews: React.ReactNode
   children: React.ReactNode
-  childrenPosition: 'start'|'end'
+  childrenPosition: 'start' | 'end'
 }>
-export type TextareaForwardRefProps = React.JSX.IntrinsicElements['textarea']
-export type TextareaRefElement = HTMLTextAreaElement
-export type TextareaProps = TextareaCustomProps & TextareaForwardRefProps
+export type TextareaProps =
+  & React.ComponentProps<'textarea'>
+  & TextareaExtraProps
 
 
 
-const Textarea = React.memo(
-  React.forwardRef<TextareaRefElement, TextareaProps>(
-    (props, forwardedRef) => {
-      const {
-        isError,
-        onValue,
-        startViews, endViews, children, childrenPosition = 'end',
-        className, style, ...restProps
-      } = props
-      
-      
-      const textareaRef = useRef<TextareaRefElement>(null)
-      useImperativeHandle(forwardedRef, () => textareaRef.current!, [])
-      
-      
-      useLayoutEffect(() => {
-        const textarea = textareaRef.current
-        if (textarea) {
-          textarea.setSelectionRange(textarea.textLength, textarea.textLength)
-        }
-      }, [])
-      
-      
-      const frameProps = {
-        className: clsx(className, TextareaStyle.El.frameClassName),
-        style: style,
-      }
-      const borderProps = {
-        className: TextareaStyle.El.borderClassName,
-      }
-      
-      
-      return (
-        /* Frame */
-        <label css={frameStyle}
-          {...frameProps}
-        >
-          
-          { startViews }
-          { childrenPosition === 'start' && children }
-          
-          {/* Textarea */}
-          <textarea
-            css={textareaStyle}
-            className={TextareaStyle.El.textareaClassName}
-            {...{
-              [TextareaStyle.Attr.errorName]: toEmptyAttr(isError),
-            }}
-            ref={textareaRef}
-            
-            {...combineProps(restProps, {
-              onChange: (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
-                onValue?.(ev.currentTarget.value)
-              },
-              onScroll: (ev: React.UIEvent<HTMLTextAreaElement>) => {
-                textareaFitText(ev.currentTarget)
-                restProps.onScroll?.(ev)
-              },
-            })}
-          />
-          
-          { childrenPosition === 'end' && children }
-          { endViews }
-          
-          {/* Border */}
-          <div css={borderStyle}
-            {...borderProps}
-          />
-          
-        </label>
-      )
+const Textarea = React.memo((props: TextareaProps) => {
+  const {
+    ref, className, style,
+    isError,
+    onValue,
+    startViews, endViews, children, childrenPosition = 'end',
+    ...restProps
+  } = props
+  
+  
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  useImperativeHandle(ref, () => textareaRef.current!, [])
+  
+  
+  useLayoutEffect(() => {
+    const textarea = textareaRef.current
+    if (textarea) {
+      textarea.setSelectionRange(textarea.textLength, textarea.textLength)
     }
+  }, [])
+  
+  
+  const frameProps = {
+    className: clsx(className, TextareaStyle.El.frameClassName),
+    style: style,
+  }
+  const borderProps = {
+    className: TextareaStyle.El.borderClassName,
+  }
+  
+  
+  return (
+    /* Frame */
+    <label css={frameStyle}
+      {...frameProps}
+    >
+      
+      { startViews }
+      { childrenPosition === 'start' && children }
+      
+      {/* Textarea */}
+      <textarea
+        css={textareaStyle}
+        className={TextareaStyle.El.textareaClassName}
+        {...{
+          [TextareaStyle.Attr.errorName]: toEmptyAttr(isError),
+        }}
+        ref={textareaRef}
+        
+        {...combineProps(restProps, {
+          onChange: (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
+            onValue?.(ev.currentTarget.value)
+          },
+          onScroll: (ev: React.UIEvent<HTMLTextAreaElement>) => {
+            textareaFitText(ev.currentTarget)
+            restProps.onScroll?.(ev)
+          },
+        })}
+      />
+      
+      { childrenPosition === 'end' && children }
+      { endViews }
+      
+      {/* Border */}
+      <div css={borderStyle}
+        {...borderProps}
+      />
+    
+    </label>
   )
-)
+})
 export default Textarea
 
 

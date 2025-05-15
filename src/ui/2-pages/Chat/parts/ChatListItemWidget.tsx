@@ -17,6 +17,7 @@ import IsWritingFiveDots, {
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
+import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import Txt = EmotionCommon.Txt
 import trimDotZerosEnd = StringU.trimDotZerosEnd
 import max1Line = EmotionCommon.max1Line
@@ -59,8 +60,9 @@ export type ChatListItemWidgetData = {
 }
 
 
-export type ChatListItemWidgetProps = { item: ChatListItemWidgetData }
-  & React.ComponentPropsWithRef<typeof Flex>
+export type ChatListItemWidgetProps =
+  & { item: ChatListItemWidgetData }
+  & React.ComponentProps<typeof Flex>
 
 export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) => {
   const {
@@ -141,8 +143,10 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
           </Flex>
           <Flex row align noShrink>
             <Gap w={8}/>
-            {unreadText && (
-              <Unread center noShrink secondary={mute}>{unreadText}</Unread>
+            {!!unreadCnt && (
+              <Unread center noShrink secondary={mute}>
+                <CountFormatShort>{unreadCnt}</CountFormatShort>
+              </Unread>
             )}
           </Flex>
         </Flex>

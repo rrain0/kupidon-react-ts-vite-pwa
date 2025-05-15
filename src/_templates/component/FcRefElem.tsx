@@ -1,54 +1,45 @@
-import { css } from '@emotion/react'
 import { CssU } from '@util/css/CssU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
-import colC = EmotionCommon.colC
 import mapToCssCustomProps = ReactU.mapToCssCustomProps
 import CssLength = CssU.CssLength
 
 
 
-// Old - it just declares
-export type MyComponentCssPropsOLD = {
-  '--ph': '<length>' // padding horizontal
-  '--pv': '<length>' // padding vertical
-}
-
 
 // Use typed css prop names
-export const IsWritingFiveDotsCssProps = (cssProps: Pu<{
+export const MyComponentCssProps = (cssProps: Pu<{
   ph: CssLength
   pv: CssLength
 }> = { }) => mapToCssCustomProps(cssProps)
 
-
 export type MyComponentExtraProps = Pu<{
   // custom props
-  isError: boolean
+  myProp: boolean
 }>
 
 export type MyComponentProps =
-  & Omit<React.ComponentPropsWithRef<'div'>, 'children'>
+  & React.ComponentProps<'div'>
   & MyComponentExtraProps
 
 
 
 const MyComponent = React.memo((props: MyComponentProps) => {
   const {
-    isError,
+    children,
+    myProp,
     ...restProps
   } = props
   
   return (
-    <div // Frame
+    <div
       data-display-name='MyComponent'
-      css={frameS}
       {...restProps}
-    />
+    >
+      {children}
+    </div>
   )
 })
 MyComponent.displayName = 'MyComponent'
@@ -56,7 +47,3 @@ MyComponent.displayName = 'MyComponent'
 
 
 
-const frameS = (t: AppTheme.Theme) => css`
-  ${colC};
-  width: 100%;
-`

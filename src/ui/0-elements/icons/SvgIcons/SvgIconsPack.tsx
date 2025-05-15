@@ -142,7 +142,7 @@ export namespace SvgIconsPack {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconSvgElemProps = React.ComponentPropsWithRef<'svg'>
+  type BaseSimpleSvgIconSvgElemProps = React.ComponentProps<'svg'>
   
   
   export type BaseSimpleSvgIconProps =

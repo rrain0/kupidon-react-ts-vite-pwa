@@ -15,40 +15,38 @@ import evPreventDefault = PointerU.evPreventDefault
 
 
 
-export type PwdInputProps = Omit<React.ComponentPropsWithoutRef<typeof Input>, 'type' | 'children'>
+export type PwdInputProps = Omit<React.ComponentProps<typeof Input>, 'type' | 'children'>
 
-const PwdInput = React.memo(React.forwardRef<HTMLInputElement, PwdInputProps>(
-  (props, forwardedRef) => {
-    const { ...restProps } = props
-    
-    const [pwdHidden, setPwdHidden] = useState(true)
-    
-    
-    return (
-      <Input
-        {...restProps}
-        data-display-name='PwdInput'
-        ref={forwardedRef}
-        type={pwdHidden ? 'password' : 'text'}
-      >
-        <EyeFrame>
-          <Button
-            css={IconButtonS6.t(eyeButtonS)}
-            onClick={() => setTimeout(() => setPwdHidden(!pwdHidden), 50)}
-            // Prevent input focus.
-            // todo hack fix костыль - But focus preventing works only if setTimeout in click
-            onPointerDown={evPreventDefault}
-          >
-            {pwdHidden
-              ? <EyeCrossedOutIc/>
-              : <EyeIc/>
-            }
-          </Button>
-        </EyeFrame>
-      </Input>
-    )
-  })
-)
+const PwdInput = React.memo((props: PwdInputProps) => {
+  const { ref, ...restProps } = props
+  
+  const [pwdHidden, setPwdHidden] = useState(true)
+  
+  
+  return (
+    <Input
+      {...restProps}
+      data-display-name='PwdInput'
+      ref={ref}
+      type={pwdHidden ? 'password' : 'text'}
+    >
+      <EyeFrame>
+        <Button
+          css={IconButtonS6.t(eyeButtonS)}
+          onClick={() => setTimeout(() => setPwdHidden(!pwdHidden), 50)}
+          // Prevent input focus.
+          // todo hack fix костыль - But focus preventing works only if setTimeout in click
+          onPointerDown={evPreventDefault}
+        >
+          {pwdHidden
+            ? <EyeCrossedOutIc/>
+            : <EyeIc/>
+          }
+        </Button>
+      </EyeFrame>
+    </Input>
+  )
+})
 PwdInput.displayName = 'PwdInput'
 export default PwdInput
 

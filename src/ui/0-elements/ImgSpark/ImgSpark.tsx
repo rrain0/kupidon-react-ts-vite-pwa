@@ -20,7 +20,7 @@ import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 
 
 
-export type ImgSparkProps = React.ComponentPropsWithRef<'img'>
+export type ImgSparkProps = React.ComponentProps<'img'>
 
 
 

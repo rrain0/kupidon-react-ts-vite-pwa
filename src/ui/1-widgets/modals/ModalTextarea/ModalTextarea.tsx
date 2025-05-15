@@ -17,7 +17,7 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 export type ModalTextareaProps =
-  React.ComponentPropsWithRef<typeof Textarea>
+  React.ComponentProps<typeof Textarea>
   & Pu<{
     title: string
     isOpen: boolean

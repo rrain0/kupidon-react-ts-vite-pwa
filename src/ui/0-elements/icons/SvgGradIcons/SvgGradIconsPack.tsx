@@ -17,6 +17,8 @@ import Cross2GradSvg from '@ic/gradient/ui/cross-2-grad.svg?react'
 
 import InfoSquareRoundedGradSvg from '@ic/gradient/ui/info-square-rounded-grad.svg?react'
 
+import HeartOutlinedGradSvg from '@ic/gradient/ui/heart-outlined-grad.svg?react'
+
 import MapLocationGradSvg from '@ic/gradient/ui/map-location-grad.svg?react'
 
 import PlanetFrameGradSvg from '@ic/gradient/ui/planet-frame-grad.svg?react'
@@ -67,9 +69,8 @@ import WorkSuitcaseGradSvg from '@ic/gradient/special/work-suitcase-grad.svg?rea
 
 export namespace SvgGradIconsPack {
 
-  // Base interface for gradient svg icons
   
-  import isdef = TypeU.isdef
+  // Base interface for gradient svg icons
   type BaseGradSvgIconCustomProps = Pu<{
     color0: string
     color1: string
@@ -82,7 +83,7 @@ export namespace SvgGradIconsPack {
     SvgComponent: SvgComponentType
   }
   
-  type BaseSimpleSvgIconSvgElemProps = React.ComponentPropsWithRef<'svg'>
+  type BaseSimpleSvgIconSvgElemProps = React.ComponentProps<'svg'>
   
   
   export type BaseGradSvgIconProps =
@@ -144,6 +145,8 @@ export namespace SvgGradIconsPack {
   export const Cross2GradIc = generateSimpleSvgIcon(Cross2GradSvg)
   
   export const InfoSquareRoundedGradIc = generateSimpleSvgIcon(InfoSquareRoundedGradSvg)
+  
+  export const HeartOutlinedGradIc = generateSimpleSvgIcon(HeartOutlinedGradSvg)
   
   export const MapLocationGradIc = generateSimpleSvgIcon(MapLocationGradSvg)
   
