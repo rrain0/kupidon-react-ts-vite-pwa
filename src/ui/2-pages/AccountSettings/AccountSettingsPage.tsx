@@ -9,6 +9,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import AppLink from 'src/ui/components/AppLink/AppLink.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -274,11 +275,11 @@ const AccountSettingsPage = React.memo(() => {
             
             
             
-            <Link to={RootRoute.settings.pwdChange[full]()}>
+            <AppLink toFull={RootRoute.settings.pwdChange}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 {titleText.pwdChange}
               </Button>
-            </Link>
+            </AppLink>
             
             <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
               onClick={logout}

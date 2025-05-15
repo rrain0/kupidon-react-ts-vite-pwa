@@ -49,7 +49,7 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         css={col}
         className={className}
         style={style}
-        data-display-name="DatePlaceCategoriesList"
+        data-display-name='DatePlaceCategoriesList'
       >
         <Pages.PageHeaderWithLeftRightItems>
           <BackBtn/>
@@ -78,7 +78,7 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         css={col}
         className={className}
         style={style}
-        data-display-name="DatePlaceCategoriesList"
+        data-display-name='DatePlaceCategoriesList'
       >
         <Pages.PageHeaderWithLeftRightItems>
           <BackBtn/>

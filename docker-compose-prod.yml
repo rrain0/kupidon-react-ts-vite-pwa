@@ -9,7 +9,7 @@ services:
     # You must build image with BACKEND_BASE_URL before push
     # docker build -t rrain0/kupidon-react-react:1.6.25 --build-arg BACKEND_BASE_URL=https://kupidon.rrain.fvds.ru:40010 .
     # docker push rrain0/kupidon-react-react:1.6.25
-    image: rrain0/kupidon-react-react:1.7.5
+    image: rrain0/kupidon-react-react:1.7.6
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:

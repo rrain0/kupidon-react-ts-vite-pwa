@@ -6,7 +6,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
 import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
 import Modal from 'src/ui/components/modal/Modal.tsx'
-import Textarea, { TextareaRefElement } from 'src/ui/0-elements/Textarea/Textarea.tsx'
+import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Callback = TypeU.Callback

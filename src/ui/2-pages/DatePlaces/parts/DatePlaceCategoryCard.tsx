@@ -63,7 +63,7 @@ export const DatePlaceCategoryCard = React.memo((props: DatePlaceCategoryCardPro
       <CardBox
         className={className}
         style={style}
-        data-display-name="DatePlaceCategoryCard"
+        data-display-name='DatePlaceCategoryCard'
       >
         
         <ImgSpark

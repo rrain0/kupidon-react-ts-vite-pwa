@@ -39,6 +39,8 @@ export const useItemDrag = ({
   const isX = true
   const isY = true
   
+  const [getEventListeners] = useRefGetSet<UseItemDragEventListeners>({ })
+  
   
   const {
     get: getIsDragging, set: setIsDragging, state: isDragging,
@@ -58,7 +60,6 @@ export const useItemDrag = ({
   const [getMxMy, setMxMy] = useRefGetSet({ mx: 0, my: 0 })
   const animatedMxMy = useAnimatedValue({ mx: 0, my: 0 })
   
-  const [getEventListeners] = useRefGetSet<UseItemDragEventListeners>({ })
   
   const updateViews = () => {
     //console.log('updateViews')
@@ -132,6 +133,8 @@ export const useItemDrag = ({
     //tryEmitStartEvent({ fromDrag: true })
   })
   
+  
+  
   const applyOnDragging = ({ m }: { m: { mx: number, my: number } }) => {
     if (isDragging) {
       //setDeltaProgress(dp)
@@ -146,21 +149,6 @@ export const useItemDrag = ({
       }
     }
   }
-  
-  const applyOnDragEnd = () => {
-    if (isDragging && !noDragging) {
-      //updateViewsAndFinish(vel, true) // TODO
-      updateViews()
-      getEventListeners().onDragEnd?.()
-    }
-    else {
-      setMxMy({ mx: 0, my: 0 })
-    }
-  }
-  
-  
-  
-  
   
   const applyOnEachDrag = useAsCallback(({
     m, horizontal, vertical, drag,
@@ -181,6 +169,19 @@ export const useItemDrag = ({
     }
     applyOnDragging({ m })
   })
+  
+  
+  
+  const applyOnDragEnd = () => {
+    if (isDragging && !noDragging) {
+      //updateViewsAndFinish(vel, true) // TODO
+      updateViews()
+      getEventListeners().onDragEnd?.()
+    }
+    else {
+      setMxMy({ mx: 0, my: 0 })
+    }
+  }
   
   const applyOnLastDrag = useAsCallback(() => {
     applyOnDragEnd()
@@ -237,7 +238,7 @@ export const useItemDrag = ({
     getMxMy, // stable
     animatedMxMy, // stable
     
-    eventListeners: getEventListeners(), // stable
+    eventListeners: getEventListeners(), // stable, supports not stable listeners
   }
 }
 

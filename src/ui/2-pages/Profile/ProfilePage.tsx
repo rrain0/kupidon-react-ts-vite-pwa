@@ -446,22 +446,6 @@ const ProfilePage = React.memo(() => {
   const [, setItemsBoxElem, itemsBoxRef] = useElemRefGetSet<HTMLDivElement>(onElemSetWh)
   const getTrackProps = createTrackPropsGetter(itemsBoxRef)
   
-  const onStart: CarouselEventCallback = () => {
-    setIsStable(false)
-  }
-  const onFinish: CarouselEventCallback = ({ startP, startItemP, deltaP }) => {
-    const { pos0ItemI } = getClampedCarouselProps({
-      startP: startP,
-      startItemP: startItemP,
-      deltaP: deltaP,
-      itemsCnt,
-      viewsCnt,
-      startViewI: 0,
-    })
-    setTabIdx(pos0ItemI)
-    setIsStable(true)
-  }
-  
   const {
     isDragging,
     getIsDragging,
@@ -474,6 +458,8 @@ const ProfilePage = React.memo(() => {
     animatedDeltaProgress,
     
     animateTo,
+    
+    eventListeners,
   } = useCarousel({
     itemsCnt,
     viewsCnt: viewsCnt,
@@ -483,9 +469,24 @@ const ProfilePage = React.memo(() => {
     mergeProgress: defaultCarouselMergeProgress,
     noDrag: itemsCnt <= 1,
     noLoop: true,
-    onStart,
-    onFinish,
   })
+  
+  eventListeners.onStart = () => {
+    setIsStable(false)
+  }
+  eventListeners.onFinish = ({ startP, startItemP, deltaP }) => {
+    const { pos0ItemI } = getClampedCarouselProps({
+      startP: startP,
+      startItemP: startItemP,
+      deltaP: deltaP,
+      itemsCnt,
+      viewsCnt,
+      startViewI: 0,
+    })
+    console.log('pos0ItemI', pos0ItemI)
+    setTabIdx(pos0ItemI)
+    setIsStable(true)
+  }
   
   useEffect(() => {
     if (isdef(tabIdx)) animateTo({

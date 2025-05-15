@@ -14,6 +14,7 @@ import { routingDateArticles } from 'src/ui/2-pages/DateArticles/routing.tsx'
 import { routingDatePlace } from 'src/ui/2-pages/DatePlace/routing.tsx'
 import { routingDatePlaces } from 'src/ui/2-pages/DatePlaces/routing.tsx'
 import { findCoupleRouting } from 'src/ui/2-pages/FindCouple/routing'
+import { routingLikedMe } from 'src/ui/2-pages/LikedMe/routing.tsx'
 import { loginRouting } from 'src/ui/2-pages/Login/routing'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
@@ -22,7 +23,7 @@ import { settingRouting } from 'src/ui/2-pages/Settings/routing'
 import { signupRouting } from 'src/ui/2-pages/Signup/routing'
 import { routingDevTest } from 'src/ui/2-pages/DevTest/routing.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
-import { RoutingTest } from 'src/ui/2-pages/Test/routing.tsx'
+import { routingTest } from 'src/ui/2-pages/Test/routing.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -128,7 +129,14 @@ const routingRoot: RouteObject[] = [
       
       {
         path: RootRoute.test[path]+'/*',
-        children: RoutingTest,
+        children: routingTest,
+      },
+      
+      
+      
+      {
+        path: RootRoute.likedMe[path]+'/*',
+        children: routingLikedMe,
       },
       
       

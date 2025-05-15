@@ -33,7 +33,6 @@ import isdef = TypeU.isdef
 
 
 
-
 export type CarouselEvent = Pu<{
   first: boolean
   last: boolean
@@ -56,6 +55,13 @@ export type CarouselEvent = Pu<{
   deltaP: number
 }
 export type CarouselEventCallback = (carouselEvent: CarouselEvent) => void
+
+
+export type UseCarouselEventListeners = Pu<{
+  onStart: CarouselEventCallback
+  onAnimationStart: CarouselEventCallback
+  onFinish:  CarouselEventCallback
+}>
 
 
 export type AnimateToParams = Pu<{
@@ -102,10 +108,6 @@ export type UseCarouselProps = {
   initialDeltaProgress?: number | undefined
   
   mergeProgress: MergeProgressCallback
-  
-  onStart?: CarouselEventCallback | undefined
-  onAnimationStart?: CarouselEventCallback | undefined
-  onFinish?: CarouselEventCallback | undefined
 }
 
 // TODO - extract parts and rename to useCarouselProgress
@@ -130,14 +132,12 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     initialStartProgress = 0,
     initialStartItemProgress = 0,
     initialDeltaProgress = 0,
-    
-    onStart, // supports not stable
-    onAnimationStart, // supports not stable
-    onFinish, // supports not stable
   } = props
   
   const isX = axis === 'x'
   const isY = axis === 'y'
+  
+  const [getEventListeners] = useRefGetSet<UseCarouselEventListeners>({ })
   
   
   
@@ -146,8 +146,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   } = useStateAndRef(false)
   const [getIsAnimating, setIsAnimating] = useRefGetSet(false)
   
-  const { allowTouchAction, forbidTouchAction } = useNoTouchAction()
-  useNoSelect(isDragging)
+  const { setNoTouchAction } = useNoTouchAction()
+  const { setNoSelect } = useNoSelect()
   
   // Второй и тд пальцы не смогут вызвать драг.
   // Если текущий драг был прерван, то он не сможет продолжиться.
@@ -185,7 +185,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
         deltaP: getDeltaProgress(),
       }
       setEventsLog([ev])
-      onStart?.(ev)
+      getEventListeners().onStart?.(ev)
     }
   }
   const emitAnimationStartEvent = ({
@@ -203,7 +203,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       toStartP, toStartItemP, toDeltaP,
     }
     setEventsLog([...getEventsLog(), ev])
-    onAnimationStart?.(ev)
+    getEventListeners().onAnimationStart?.(ev)
   }
   const emitFinishEvent = ({ fromDrag }: Partial<CarouselEvent>) => {
     const ev: CarouselEvent = {
@@ -214,7 +214,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
       deltaP: getDeltaProgress(),
     }
     setEventsLog([])
-    onFinish?.(ev)
+    getEventListeners().onFinish?.(ev)
   }
   
   
@@ -404,6 +404,14 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   })
   
   
+  
+  const applyOnDragging = ({ dp }: { dp: number }) => {
+    if (isDragging) {
+      setDeltaProgress(dp)
+      updateViews()
+    }
+  }
+  
   const applyOnEachDrag = useAsCallback(({
     dp, horizontal, vertical, drag,
   }: {
@@ -411,24 +419,31 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   }) => {
     const directional = isX && horizontal || isY && vertical
     if (directional) {
-      allowTouchAction()
+      let noTouchAction = false
       if (!getIsDragging() && getCanStartDrag() && !getWasDragged() && drag) {
         applyOnDragStart()
       }
       if (!getIsDragging() && !getCanStartDrag()) {
-        forbidTouchAction()
+        noTouchAction = true
       }
+      setNoTouchAction(noTouchAction)
     }
-    if (isDragging) {
-      setDeltaProgress(dp)
-      updateViews()
-    }
+    applyOnDragging({ dp })
   })
   
+  
+  
+  const applyOnDragEnd = ({ vel }: { vel: number }) => {
+    if (isDragging) {
+      updateViewsAndFinish(vel, true)
+    }
+  }
+  
   const applyOnLastDrag = useAsCallback((vel: number) => {
-    if (isDragging) updateViewsAndFinish(vel, true)
+    applyOnDragEnd({ vel })
     setCanStartDrag(true)
-    forbidTouchAction()
+    setNoTouchAction(false)
+    setNoSelect(false)
     setIsDragging(false)
   })
   
@@ -484,6 +499,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
     animatedDeltaProgress, // stable
     
     animateTo, // stable
+    
+    eventListeners: getEventListeners(), // stable, supports not stable listeners
   }
 }
 

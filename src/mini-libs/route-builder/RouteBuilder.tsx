@@ -99,17 +99,20 @@ export namespace RouteBuilder {
   
   
   
+  
+  export type AllowedNameParams<R extends RouteSegment> = (
+    R[typeof params] extends object
+      ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
+      : never
+  )
+  
   // TODO Route - support string array params
   export function getFullParams<R extends RouteSegment>(
     this: R,
     applyParams?: {
       anySearchParams?: URLSearchParams | emptyval
       allowedSearchParams?: URLSearchParams | emptyval
-      allowedNameParams?: emptyval | (
-        R[typeof params] extends object
-          ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
-          : never
-        )
+      allowedNameParams?: emptyval | AllowedNameParams<R>
       anyPathParams?: { [path: string]: string | emptyval } | emptyval
       allowedPathParams?: { [path: string]: string | emptyval } | emptyval
     }
@@ -173,11 +176,7 @@ export namespace RouteBuilder {
   
   export function getFullAllowedNameParams<R extends RouteSegment>(
     this: R,
-    applyParams?: emptyval | (
-      R[typeof params] extends object
-        ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
-        : never
-    )
+    applyParams?: emptyval | AllowedNameParams<R>
   ): string {
     return this[fullParams]({ allowedNameParams: applyParams })
   }

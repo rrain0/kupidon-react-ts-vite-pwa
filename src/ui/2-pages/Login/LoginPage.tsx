@@ -7,6 +7,7 @@ import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import AppLink from 'src/ui/components/AppLink/AppLink.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
@@ -34,6 +35,7 @@ import params = RouteBuilder.params
 import mapFailureCodeToUiOption = LoginPageValidation.mapFailureCodeToUiText
 import defaultValues = LoginPageValidation.defaultValues
 import userDefaultValues = LoginPageValidation.userDefaultValues
+import fullParams = RouteBuilder.fullParams
 
 
 
@@ -144,7 +146,7 @@ const LoginPage = React.memo(() => {
             
             
             <ValidationWrap {...validationProps}
-              fieldName="login"
+              fieldName='login'
               render={props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
@@ -156,7 +158,7 @@ const LoginPage = React.memo(() => {
             />
             
             <ValidationWrap {...validationProps}
-              fieldName="pwd"
+              fieldName='pwd'
               render={props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
@@ -176,11 +178,11 @@ const LoginPage = React.memo(() => {
             </Button>
             
             
-            <Link to={RootRoute.signup[fullAllowedNameParams]({ returnPath: returnPath })}>
+            <AppLink toFull={RootRoute.signup} allowedNameParams={{ returnPath }}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 {actionText.signup}
               </Button>
-            </Link>
+            </AppLink>
           
           </Pages.ContentColSmForm>
         </Pages.AddSafeInsets>

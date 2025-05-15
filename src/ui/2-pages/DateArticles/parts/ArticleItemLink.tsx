@@ -63,7 +63,7 @@ export const ArticleItemLink = React.memo((props: ArticleItemLinkProps) => {
   
   return (
     <Link
-      data-display-name="ArticleItemLink"
+      data-display-name='ArticleItemLink'
       to={link}
     >
       {children}

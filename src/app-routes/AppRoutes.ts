@@ -94,6 +94,11 @@ export namespace AppRoutes {
   
   
   
+  const likedMe = buildRoute({
+    [path]: 'liked-me',
+  })
+  
+  
   
   const test = buildRoute({
     [path]: 'test',
@@ -143,13 +148,15 @@ export namespace AppRoutes {
     bowAndArrows,
     settings,
     
-    test,
-    
     datePlaces,
     datePlace,
     
     dateArticles,
     dateArticle,
+    
+    likedMe,
+    
+    test,
     
     
     devTest,

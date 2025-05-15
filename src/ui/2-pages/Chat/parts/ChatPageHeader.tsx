@@ -3,6 +3,9 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { virtualOffset } from '@util/css/virtualOffset.ts'
 import { withDefaults } from '@util/react/withDefaults.tsx'
 import React from 'react'
+import { Link, useSearchParams } from 'react-router'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -13,10 +16,13 @@ import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
+import AppLink from 'src/ui/components/AppLink/AppLink.tsx'
 import SearchIc = SvgIconsPack.SearchIc
 import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
 import Pu = TypeU.Pu
+import RootRoute = AppRoutes.RootRoute
+import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -39,25 +45,30 @@ const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
     ...restProps
   } = props
   
-  
   return (
     <HeaderBox alignSelf='stretch'
       data-display-name='ChatPageHeader'
       {...restProps}
     >
+      
       <Button css={IconButtonS6.t(searchButtonS)}>
         <SearchIc/>
       </Button>
+      
       {/* TODO Translations */}
       <ChatHeader>Чаты</ChatHeader>
-      <Button css={ButtonS6.t(likesButtonS)} row>
-        <HeartOutlinedGradIc css={SvgGradIconS6.t(heartS)}/>
-        <LikesCounterBox>
-          <LikesCounter>
-            <CountFormatShort addPlus>{likesCnt}</CountFormatShort>
-          </LikesCounter>
-        </LikesCounterBox>
-      </Button>
+      
+      <AppLink toFull={RootRoute.likedMe}>
+        <Button css={ButtonS6.t(likesButtonS)} row>
+          <HeartOutlinedGradIc css={SvgGradIconS6.t(heartS)}/>
+          <LikesCounterBox>
+            <LikesCounter>
+              <CountFormatShort addPlus>{likesCnt}</CountFormatShort>
+            </LikesCounter>
+          </LikesCounterBox>
+        </Button>
+      </AppLink>
+      
     </HeaderBox>
   )
 })

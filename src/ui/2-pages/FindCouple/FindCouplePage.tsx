@@ -87,6 +87,8 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     animatedDeltaProgress,
     
     animateTo,
+    
+    eventListeners,
   } = useCarousel({
     itemsCnt,
     startItemI,
@@ -97,48 +99,49 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     inverted: false,
     noDragWhileAnimating: true,
     mergeProgress,
+  })
+  
+  
+  eventListeners.onStart = ev => {
+    setIsMoving(true)
+    //console.log('onStart', ev)
+  }
+  eventListeners.onAnimationStart = ev => {
+    //console.log('ev', ev)
     
-    onStart: ev => {
-      setIsMoving(true)
-      //console.log('onStart', ev)
-    },
-    onAnimationStart: ev => {
-      //console.log('ev', ev)
+    const {
+      autoNearest, fromDrag,
+      startP, startItemP, deltaP, toStartP, toStartItemP, toDeltaP,
+    } = ev
+    
+    if (isdef(toStartP) && isdef(toStartItemP) && isdef(toDeltaP)) {
+      const { pos0PI } = getCarouselProps({ startP, startItemP, deltaP: 0 })
       
-      const {
-        autoNearest, fromDrag,
-        startP, startItemP, deltaP, toStartP, toStartItemP, toDeltaP,
-      } = ev
+      const { pos0PI: toPos0PI } = getCarouselProps({
+        startP: toStartP + toDeltaP, startItemP: toStartItemP + toDeltaP, deltaP: 0,
+      })
       
-      if (isdef(toStartP) && isdef(toStartItemP) && isdef(toDeltaP)) {
-        const { pos0PI } = getCarouselProps({ startP, startItemP, deltaP: 0 })
-        
-        const { pos0PI: toPos0PI } = getCarouselProps({
-          startP: toStartP + toDeltaP, startItemP: toStartItemP + toDeltaP, deltaP: 0,
-        })
-        
-        //console.log('pos0PI', pos0PI, 'toPos0PI', toPos0PI)
-        
-        if (fromDrag && autoNearest) {
-          if (toPos0PI > pos0PI) {
-            // ACCEPT ACTION FROM DRAG
-            console.log('drag to accept')
-            setStackAction('accept')
-          }
-          if (toPos0PI < pos0PI) {
-            // REJECT ACTION FROM DRAG
-            console.log('drag to reject')
-            setStackAction('reject')
-          }
+      //console.log('pos0PI', pos0PI, 'toPos0PI', toPos0PI)
+      
+      if (fromDrag && autoNearest) {
+        if (toPos0PI > pos0PI) {
+          // ACCEPT ACTION FROM DRAG
+          console.log('drag to accept')
+          setStackAction('accept')
+        }
+        if (toPos0PI < pos0PI) {
+          // REJECT ACTION FROM DRAG
+          console.log('drag to reject')
+          setStackAction('reject')
         }
       }
-    },
-    onFinish: ev => {
-      setIsMoving(false)
-      setStackAction(undefined)
-      //console.log('onFinish', ev)
-    },
-  })
+    }
+  }
+  eventListeners.onFinish = ev => {
+    setIsMoving(false)
+    setStackAction(undefined)
+    //console.log('onFinish', ev)
+  }
   
   
   

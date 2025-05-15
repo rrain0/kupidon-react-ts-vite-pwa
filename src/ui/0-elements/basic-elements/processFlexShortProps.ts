@@ -18,7 +18,8 @@ export type FlexShortProps = Pu<{
   wMax: number | string | 'full' // 'full' => '100%'
   hMax: number | string | 'full' // 'full' => '100%'
   
-  r: number | string
+  ratio: number | string
+  r: number | string // TODO rename to avoid conflict with t, r, b, l
   
   m: number | string
   mv: number | string
@@ -44,8 +45,10 @@ export type FlexShortProps = Pu<{
   
   align: string | boolean // true => 'center'
   alignCt: string | boolean // true => 'center'
-  alignSelf: string | boolean // true => 'center'
+  alignSelf: string | boolean // true => 'center' // TODO remove
+  aligned: string | boolean // same as 'alignSelf', true => 'center'
   justifyCt: string | boolean // true => 'center'
+  
   
   center: boolean // true => { alignItems: 'center', justifyContent: 'center' }
   
@@ -65,11 +68,11 @@ export const processFlexShortProps = <P extends object>(
   const {
     pos,
     w, h, fullW, fullH, full, wMin, hMin, wMax, hMax,
-    r,
+    ratio, r,
     m, mv, mh, mt, mr, mb, ml,
     p, pv, ph, pt, pr, pb, pl,
     row, rowRev, col, colRev, wrap, wrapRev,
-    align, alignCt, alignSelf, justifyCt, center,
+    align, alignCt, alignSelf, aligned, justifyCt, center,
     basis, g, order, grow, shrink, noShrink,
     ...rest
   } = props
@@ -113,6 +116,7 @@ export const processFlexShortProps = <P extends object>(
       return hMax
     })(),
     
+    aspectRatio: ratio,
     borderRadius: r,
     
     margin: m,
@@ -135,7 +139,7 @@ export const processFlexShortProps = <P extends object>(
     
     alignItems: mapBool(align, 'center'),
     alignContent: mapBool(alignCt, 'center'),
-    alignSelf: mapBool(alignSelf, 'center'),
+    alignSelf: mapBool(aligned ?? alignSelf, 'center'),
     justifyContent: mapBool(justifyCt, 'center'),
     ...center && { alignItems: 'center', justifyContent: 'center' },
     

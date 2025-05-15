@@ -9,6 +9,8 @@ import DatePlaceCardWide from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCardWide
 import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -38,44 +40,42 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
   return (
     <>
     
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm style={{ gap: 0 }}>
-            
-            {type && (
-              <>
-                <Pages.PageHeaderWithLeftRightItems>
-                  <BackBtn/>
-                  <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-                  <div css={{ width: 50, height: 50 }}/>
-                </Pages.PageHeaderWithLeftRightItems>
-                
-                <div style={{ height: 28 }}/>
-                
-                <DatePlacesList style={{ gap: 16 }}>
-                  {type && (() => {
-                    const places = DatePlacesData.filter(place => place.types.includes(type))
-                    
-                    if (!places.length) return 'Пусто'
-                    
-                    return places.map(place => (
-                      <DatePlaceCardWide
-                        key={place.id}
-                        place={place}
-                      />
-                    ))
-                  })()}
-                </DatePlacesList>
-              </>
-            )}
-            
-            {category && <DatePlaceCategoriesList list={DatePlaceCategoriesData[category]}/>}
-            
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
+      <PageLayout col>
+        <PageContentLayout colSm>
+          
+          {type && (
+            <>
+              <Pages.PageHeaderWithLeftRightItems>
+                <BackBtn/>
+                <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
+                <div css={{ width: 50, height: 50 }}/>
+              </Pages.PageHeaderWithLeftRightItems>
+              
+              <div style={{ height: 28 }}/>
+              
+              <DatePlacesList style={{ gap: 16 }}>
+                {type && (() => {
+                  const places = DatePlacesData.filter(place => place.types.includes(type))
+                  
+                  if (!places.length) return 'Пусто'
+                  
+                  return places.map(place => (
+                    <DatePlaceCardWide
+                      key={place.id}
+                      place={place}
+                    />
+                  ))
+                })()}
+              </DatePlacesList>
+            </>
+          )}
+          
+          {category && <DatePlaceCategoriesList list={DatePlaceCategoriesData[category]}/>}
+          
+        </PageContentLayout>
         
         <PageScrollbars/>
-      </Pages.PageGrad>
+      </PageLayout>
       
       
       <BottomButtonBar/>

@@ -82,7 +82,7 @@ const RouteTest = React.memo(() => {
 
 
 // path: 'test / ...'
-export const RoutingTest: RouteObject[] = [
+export const routingTest: RouteObject[] = [
   {
     path: '',
     Component: RouteTest,
