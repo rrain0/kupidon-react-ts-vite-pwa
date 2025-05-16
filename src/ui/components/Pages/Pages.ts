@@ -101,7 +101,18 @@ export namespace Pages {
   
   
   
-  
+  /*
+  // TODO remove & replace by something like this:
+   <Grid cols='54px 1fr 54px' stretch>
+     <Gap w={50}/>
+     <Flex center><Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page></Flex>
+     <Flex centerEnd>
+       <Button css={IconButtonS6.t(calendarButtonS)}>
+         <Calendar2GradIc/>
+       </Button>
+     </Flex>
+   </Grid>
+   */
   export const PageHeaderWithLeftRightItems = styled.div`
     width: 100%;
     display: grid;

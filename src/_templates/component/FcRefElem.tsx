@@ -43,7 +43,7 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   )
 })
 MyComponent.displayName = 'MyComponent'
-//export default MyComponent
+export default MyComponent
 
 
 

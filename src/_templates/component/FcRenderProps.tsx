@@ -24,5 +24,5 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   return children?.({ myRenderProp: true })
 })
 MyComponent.displayName = 'MyComponent'
-//export default MyComponent
+export default MyComponent
 

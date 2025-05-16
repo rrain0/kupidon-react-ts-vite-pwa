@@ -138,6 +138,11 @@ export const Light = {
     bgFc:          '#aaaaaa',
     ctFc:          '#F8F8F8',
   },
+  boxMain2: {
+    bgGrad:        ['#6D6D6D', '#6D6D6D', '#1F1F1F'],
+    ct:            '#FFFFFF',
+    ctFc:          '#FFFFFF',
+  },
   
   boxSecondary: {
     bg:            '#E0E0E0',

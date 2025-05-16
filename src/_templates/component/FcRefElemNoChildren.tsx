@@ -34,14 +34,14 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   } = props
   
   return (
-    <div // Frame
+    <div
       data-display-name='MyComponent'
       {...restProps}
     />
   )
 })
 MyComponent.displayName = 'MyComponent'
-//export default MyComponent
+export default MyComponent
 
 
 

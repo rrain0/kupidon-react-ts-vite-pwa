@@ -1,36 +1,17 @@
-import styled from '@emotion/styled'
 import { Env } from '@util/app/Env.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
-import { useTimeout } from '@util/react/useTimeout.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
 import React, { useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
-import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import ChatList from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
 import ChatPageHeader from 'src/ui/2-pages/Chat/parts/ChatPageHeader.tsx'
 import MutualSympathiesList from 'src/ui/2-pages/Chat/parts/MutualSympathiesList.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
-import SearchIc = SvgIconsPack.SearchIc
-import Txt = EmotionCommon.Txt
-import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
 
 
 
@@ -168,7 +149,7 @@ const mockChatItems: (ChatListItemWidgetData & {
   },
   {
     id: 'ab3bee90-b38e-4bbd-a2c7-823f8fa3bde4',
-    name: 'Настя',
+    name: 'Таня',
     lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'read' as const,
     lastMsgDate: date1hAgo, mute: false,
   },

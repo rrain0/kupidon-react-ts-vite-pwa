@@ -78,8 +78,8 @@ export namespace SvgGradIconS6 {
           export namespace icon {
             //export const baseSize: WidgetStyleObj = { ...base }
             export namespace Size {
-              // type: icon, shape: icon, size: auto
-              export const auto: WidgetStyle = [base, {
+              // type: icon, shape: icon, size: full
+              export const full: WidgetStyle = [base, {
                 gradIcon: {
                   sz: 'full',
                 },
@@ -95,8 +95,8 @@ export namespace SvgGradIconS6 {
           },
         })
         export namespace Color {
-          // type: icon, color: normal
-          export const normal: AppWidgetStyle = t => [baseColor, {
+          // type: icon, color: accent
+          export const accent: AppWidgetStyle = t => [baseColor, {
             gradIconColor0: t.boxAccentCt4.ctGrad[0],
             gradIconColor1: t.boxAccentCt4.ctGrad[1],
           }]

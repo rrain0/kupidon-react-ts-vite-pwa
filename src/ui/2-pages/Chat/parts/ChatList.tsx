@@ -237,7 +237,7 @@ const ChatList = React.memo((props: ChatListProps) => {
             )
           })}
           {!showItems && (
-            <Flex alignSelf='stretch' grow center>
+            <Flex alignedStretch grow center>
               {/* TODO Translation */}
               <NoItems>Нет чатов</NoItems>
             </Flex>

@@ -89,7 +89,7 @@ const IconFrame = styled.div`
   }
 `
 
-const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.auto.normal, {
+const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.full.accent, {
   gradIconW: '60%',
 }]
 const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {

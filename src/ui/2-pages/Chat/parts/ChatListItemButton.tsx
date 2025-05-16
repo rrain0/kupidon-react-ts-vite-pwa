@@ -20,7 +20,7 @@ export const ChatListItemButton = React.memo((props: ChatListItemButtonProps) =>
   
   
   return (
-    <Button row g={8} alignSelf='stretch'
+    <Button alignedStretch row g={8}
       css={ButtonS6.t(chatItemButtonS)}
       data-display-name='ChatListItemButton'
       {...restProps}

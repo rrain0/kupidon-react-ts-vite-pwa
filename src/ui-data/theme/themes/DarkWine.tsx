@@ -79,11 +79,17 @@ export const DarkWine = { ...Dark,
   boxAccent5: { ...Dark.boxAccent5,
     ct:            '#c51841',
   },
+  
   boxMain: { ...Dark.boxMain,
     bg:            '#aaaaaa',
     ct:            '#000000',
     bgFc:          '#bbbbbb',
     ctFc:          '#000000',
+  },
+  boxMain2: { ...Dark.boxMain2,
+    bgGrad:        ['#ff1e52', '#ff1e52', '#BB2649'],
+    ct:            '#FFFFFF',
+    ctFc:          '#FFFFFF',
   },
   
   

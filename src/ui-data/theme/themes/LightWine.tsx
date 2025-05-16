@@ -85,11 +85,17 @@ export const LightWine = { ...Light,
   boxAccent5: { ...Light.boxAccent5,
     ct:             '#e8204f',
   },
+  
   boxMain: { ...Light.boxMain,
     bg:             '#e8204f',
     ct:             '#ffffff',
     bgFc:           '#f63562',
     ctFc:           '#ffffff',
+  },
+  boxMain2: { ...Light.boxMain2,
+    bgGrad:        ['#ff1e52', '#ff1e52', '#BB2649'],
+    ct:            '#FFFFFF',
+    ctFc:          '#FFFFFF',
   },
   
   

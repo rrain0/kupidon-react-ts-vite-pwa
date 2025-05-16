@@ -97,14 +97,14 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
   const error = lastMsgStatus === 'error'
   
   return (
-    <Flex h={60} r={20} row g={8} alignSelf='stretch'
+    <Flex alignedStretch h={60} rad={20} row g={8}
       data-display-name='ChatListItemWidget'
       {...restProps}
     >
       
       <Ava id={id} ava={ava} online={online} fullH/>
       
-      <Flex col grow alignSelf='stretch'>
+      <Flex alignedStretch col grow>
         
         <Flex row align basis='50%'>
           <Flex><NameBox><Name>{name}</Name></NameBox></Flex>

@@ -21,7 +21,7 @@ import gridStackC = EmotionCommon.gridStackC
 
 
 const g = 14
-const r = 20
+const rad = 20
 const mv = -6
 const mh = -8
 const h = 72
@@ -116,18 +116,18 @@ const ChatListItem = React.memo(({
   
   
   return (
-    <ListSlot alignSelf='stretch' h={hItem} mt={g}
+    <ListSlot alignedStretch h={hItem} mt={g}
       ref={setGapSlot}
       style={{
         ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
         ...first && { marginTop: 0 },
       }}
     >
-      <ItemSlot alignSelf='stretch' h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
+      <ItemSlot alignedStretch h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
         
         {isSelected && <ItemPlaceholder full/>}
         
-        <ItemAnimated pos='rel' full col alignSelf='stretch'
+        <ItemAnimated alignedStretch pos='rel' full col
           animatedStyle={{
             transform: animatedMapMulti([animatedMxMy, animatedOffset], (m, offset) => {
               if (!m) return 'none'
@@ -142,7 +142,7 @@ const ChatListItem = React.memo(({
             }),
           }}
         >
-          <ItemBox alignSelf='stretch' h={h}>
+          <ItemBox alignedStretch h={h}>
             <ChatListItemButton
               disabled={!canSelect}
               data-selected={toEmptyAttr(isSelected)}
@@ -171,12 +171,12 @@ const ItemSlot = withDefaults({
 }, styled(Flex)([gridStackC]))
 
 const ItemAnimated = withDefaults({
-  r,
+  rad,
 }, styled(AnimatedDiv)({
   overflow: 'hidden',
 }))
 const ItemBox = withDefaults({
-  r,
+  rad,
 }, styled(Flex)([gridStackC, {
   // TODO Theme
   backgroundColor: 'white',
@@ -184,7 +184,7 @@ const ItemBox = withDefaults({
 
 
 const ItemPlaceholder = withDefaults({
-  r,
+  rad,
 }, styled(Flex)(({ theme: t }) => ({
   backgroundColor: t.boxNormalCt.bgf,
 })))

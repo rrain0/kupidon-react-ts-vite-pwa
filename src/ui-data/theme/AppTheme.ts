@@ -174,6 +174,12 @@ export namespace AppTheme {
       bgFc:          string
       ctFc:          string
     }
+    // main button (important / premium function button)
+    boxMain2: {
+      bgGrad:        [string, string, string]
+      ct:            string
+      ctFc:          string
+    }
     
     boxSecondary: {
       bg:            string

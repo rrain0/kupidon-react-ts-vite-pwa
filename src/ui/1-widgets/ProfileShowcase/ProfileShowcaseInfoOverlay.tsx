@@ -3,7 +3,6 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
-import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import React from 'react'
 import { EmptyS6 } from 'src/mini-libs/widget-style-6/EmptyS6.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -15,11 +14,13 @@ import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIc
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
+import DislikeButton from 'src/ui/1-widgets/ProfileShowcase/DislikeButton.tsx'
+import LikeButton from 'src/ui/1-widgets/ProfileShowcase/LikeButton.tsx'
 import {
   ProfileShowcaseAction,
 } from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
-import { ReactU } from 'src/util/react/ReactU'
-import { TypeU } from 'src/util/common/TypeU'
+import { ReactU } from '@util/react/ReactU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
@@ -40,7 +41,7 @@ import ArrowBackIc = SvgIconsPack.ArrowBackIc
 
 
 
-export type PreviewInfoOverlayProps = ClassStyle & Pu<{
+export type ProfileShowcaseInfoOverlayProps = ClassStyle & Pu<{
   actionButtonsDisabled: boolean
   animatedInfo: AnimatedProperty<{
     indicatorProgress: number,
@@ -57,7 +58,7 @@ export type PreviewInfoOverlayProps = ClassStyle & Pu<{
   onReject: Callback
   onBack: Callback
 }>
-export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) => {
+export const ProfileShowcaseInfoOverlay = React.memo((props: ProfileShowcaseInfoOverlayProps) => {
   const {
     actionButtonsDisabled,
     animatedInfo,
@@ -77,8 +78,8 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
   return (
-    <PreviewInfoBox
-      data-display-name='PreviewInfoOverlay'
+    <ProfileShowcaseInfoBox
+      data-display-name='ProfileShowcaseInfoOverlay'
     >
       
       
@@ -117,26 +118,20 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         >
           <ArrowBackGradIc/>
         </Button>
-        <Button
-          css={IconButtonS6.t(dislikeButtonS)}
+        <DislikeButton
           disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
             onReject?.()
           }}
-        >
-          <Cross2GradIc/>
-        </Button>
-        <Button
-          css={IconButtonS6.t(likeButtonS)}
+        />
+        <LikeButton
           disabled={actionButtonsDisabled}
           onClick={ev => {
             ev.stopPropagation()
             onAccept?.()
           }}
-        >
-          <HeartFilledIc/>
-        </Button>
+        />
         <Button
           css={IconButtonS6.t(infoButtonS)}
           disabled={actionButtonsDisabled}
@@ -190,17 +185,17 @@ export const PreviewInfoOverlay = React.memo((props: PreviewInfoOverlayProps) =>
         </ActionWidgetBox>
       </ActionFrame>
     
-    </PreviewInfoBox>
+    </ProfileShowcaseInfoBox>
   )
 })
-PreviewInfoOverlay.displayName = 'PreviewInfoOverlay'
-export default PreviewInfoOverlay
+ProfileShowcaseInfoOverlay.displayName = 'ProfileShowcaseInfoOverlay'
+export default ProfileShowcaseInfoOverlay
 
 
 
 
 
-const PreviewInfoBox = styled.div`
+const ProfileShowcaseInfoBox = styled.div`
   ${abs};
   z-index: 10;
   display: grid;
@@ -235,7 +230,7 @@ const ActionButtonsBox = styled.div`
 
 
 
-const icPreviewNormal: AppWidgetStyle = t => [
+const icProfileShowcaseNormal: AppWidgetStyle = t => [
   IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
   IconButtonS6.Parts.Type.filled.baseColor,
   {
@@ -274,73 +269,19 @@ const icPreviewNormal: AppWidgetStyle = t => [
     },
   },
 ]
-const icPreviewMain: AppWidgetStyle = t => [
-  IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
-  IconButtonS6.Parts.Type.filled.baseColor,
-  {
-    buttonBg: {
-      color: t.previewButtonMain.bg,
-      im: `linear-gradient(
-        to bottom,
-        ${t.previewButtonMain.bgGrad[0]} 25%,
-        ${t.previewButtonMain.bgGrad[1]} 50% 100%
-      )`,
-      pos: '0 0',
-      sz: '100% 200%',
-    },
-    buttonColor: t.previewButtonMain.ct,
-    rippleColor: t.previewButtonMain.ctRipple,
-    iconColor: t.previewButtonMain.ct,
-    inFocus: {
-      buttonTransition: 'background-position 0.3s',
-      buttonBgPos: '0 30%',
-    },
-  },
-  {
-    button: {
-      sz: 60, p: 0,
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-    },
-    disabled: {
-      buttonTransition: 'opacity 0.2s',
-      buttonOpacity: 0.3,
-    },
-    
-    // TODO Style - remove and apply :where to resetButton
-    buttonHover: {
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-    },
-    buttonActive: {
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-    },
-    buttonFocus: {
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-    },
-    buttonFocusVisible: {
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
-    },
-  },
-]
 
 
 
 
 
-const backButtonS: AppWidgetStyle = t => [icPreviewNormal, {
+const backButtonS: AppWidgetStyle = t => [icProfileShowcaseNormal, {
   gradIcon: {
     sz: '54%',
     rotate: '0.5turn',
     translate: '-7% -5%',
   },
 }]
-const dislikeButtonS: AppWidgetStyle = t => [icPreviewNormal, {
-  buttonSz: 58,
-  gradIconSz: '35.5%',
-}]
-const likeButtonS: AppWidgetStyle = t => [icPreviewMain, {
-  iconSz: '51.05%',
-}]
-const infoButtonS: AppWidgetStyle = t => [icPreviewNormal, {
+const infoButtonS: AppWidgetStyle = t => [icProfileShowcaseNormal, {
   gradIcon: {
     sz: '50%',
     translate: '0 10%',

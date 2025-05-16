@@ -241,6 +241,7 @@ export namespace ButtonS6 {
               buttonBoxShadow: 'none',
             },
           }]
+          
           // type: filled, color: main
           export const main: AppWidgetStyle = t => [baseColor, {
             buttonBgColor: t.boxMain.bg,
@@ -250,6 +251,21 @@ export namespace ButtonS6 {
               buttonColor: t.boxMain.ctFc,
             },
           }]
+          // type: filled, color: main2
+          export const main2: AppWidgetStyle = t => [baseColor, {
+            buttonBg: `linear-gradient(to bottom,
+              ${t.boxMain2.bgGrad[0]}, ${t.boxMain2.bgGrad[1]}, ${t.boxMain2.bgGrad[2]}
+            )`,
+            buttonBackgroundSize: '100% 200%',
+            buttonBackgroundPosition: '0 100%',
+            buttonColor: t.boxMain2.ct,
+            buttonTransition: 'background-position 200ms ease-in-out',
+            inFocus: {
+              buttonBackgroundPosition: '0 0',
+              buttonColor: t.boxMain2.ctFc,
+            },
+          }]
+          
           // type: filled, color: danger
           export const danger: AppWidgetStyle = t => [baseColor, {
             buttonBgColor: t.boxDanger.bg,

@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import React from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
@@ -6,14 +5,14 @@ import Pu = TypeU.Pu
 
 
 
-const ToBeExtended = styled.div()
+const ToBeExtended = (props: React.ComponentProps<'div'>) => <div/>
 
 
-type MyComponentExtraProps = Pu<{
+export type MyComponentExtraProps = Pu<{
   myProp: boolean
 }>
 
-type MyComponentProps = 
+export type MyComponentProps =
   & Omit<React.ComponentProps<typeof ToBeExtended>, 'children'>
   & MyComponentExtraProps
 
@@ -27,13 +26,13 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   
   
   return (
-    <ToBeExtended // Frame
+    <ToBeExtended
       data-display-name='MyComponent'
       {...restProps}
     />
   )
 })
 MyComponent.displayName = 'MyComponent'
-//export default MyComponent
+export default MyComponent
 
 

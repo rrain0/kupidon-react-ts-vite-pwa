@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import React from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialDefaults = TypeU.PartialDefaults
@@ -40,10 +41,10 @@ export const withDefaults = <
 // }) => <></>
 //
 // // ✅ Correct
-// const MyComponentWithDefaults = withDefaults(MyComponent, { text: 'text', isError: true })
+// const MyComponentWithDefaults = withDefaults({ text: 'text', isError: true }, MyComponent)
 //
 // // ❌ Must be error but it is correct
-// const _MyComponentWithDefaults = withDefaults(MyComponent, { text: 'text', isError: true, a: 1 })
+// const _MyComponentWithDefaults = withDefaults({ text: 'text', isError: true, a: 1 }, MyComponent)
 // // ⚠️ builtin Partial<T> allows any prop of any value outside of keyof T (is it TS bug?)
 // /*
 //  Not works:
@@ -58,7 +59,7 @@ export const withDefaults = <
 //  */
 //
 // // ✅ Correct ⚠️ Error - TS2322: Type number is not assignable to type string
-// const __MyComponentWithDefaults = withDefaults(MyComponent, { text: 1, isError: true })
+// const __MyComponentWithDefaults = withDefaults({ text: 1, isError: true }, MyComponent)
 
 
 

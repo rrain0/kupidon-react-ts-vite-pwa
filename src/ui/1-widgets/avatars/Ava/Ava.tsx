@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
+import { withDefaults } from '@util/react/withDefaults.tsx'
 import React, { useMemo } from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
@@ -55,7 +56,7 @@ const Ava = React.memo((props: AvaProps) => {
   const emptyAvaColor = useMemo(() => idToColor(id), [id])
   
   return (
-    <AvaContainer alignSelf='stretch' noShrink center
+    <AvaContainer alignedStretch noShrink center
       data-display-name='Ava'
       {...restProps}
     >
@@ -91,11 +92,7 @@ const AvaBox = styled(Flex)<Pu<{ shadow: boolean }>>(({
   overflow: 'hidden',
   ...shadow && { boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg}` },
 }))
-const EmptyAva = styled(Flex)`
-  width: 100%;
-  height: 100%;
-  ${Txt.s22};
-`
+const EmptyAva = withDefaults({ full: true }, styled(Flex)(Txt.s22))
 
 
 const OnlineMark = styled.div`

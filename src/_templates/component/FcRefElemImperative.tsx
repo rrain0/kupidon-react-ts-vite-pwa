@@ -32,7 +32,7 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   
   
   return (
-    <div // Frame
+    <div
       data-display-name='MyComponent'
       {...restProps}
       ref={elemRef}
@@ -42,7 +42,7 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   )
 })
 MyComponent.displayName = 'MyComponent'
-//export default MyComponent
+export default MyComponent
 
 
 

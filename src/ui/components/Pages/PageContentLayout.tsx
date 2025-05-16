@@ -161,7 +161,7 @@ const ContentFull = withDefaults({
 const InnerColSm = withDefaults({
   pos: 'rel',
   fullW: true, wMax: colSmWMax, wMin: 0, h: 'fit-content',
-  col: true, alignSelf: true, align: 'stretch',
+  col: true, aligned: true, align: 'stretch',
 }, styled(Flex)())
 
 const InnerFullSm = withDefaults({

@@ -32,8 +32,8 @@ import {
 } from 'src/ui/0-elements/ImageParts.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
-import PreviewFullInfo from 'src/ui/2-pages/Profile/Preview/parts/PreviewFullInfo.tsx'
-import PreviewInfoOverlay from 'src/ui/2-pages/Profile/Preview/parts/PreviewInfoOverlay.tsx'
+import ProfileShowcaseFullInfo from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcaseFullInfo.tsx'
+import ProfileShowcaseInfoOverlay from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcaseInfoOverlay.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
@@ -371,7 +371,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             )
           })}
           
-          <PreviewInfoOverlay
+          <ProfileShowcaseInfoOverlay
             actionButtonsDisabled={hideButtons}
             photosCnt={photosCnt}
             openInfo={openInfo}
@@ -390,7 +390,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       
       
       
-      <PreviewFullInfo
+      <ProfileShowcaseFullInfo
         isOpen={isInfoOpen}
         close={closeInfo}
         animatedOpacity={animatedStackProps?.map(p => p.fullInfoOpacity)}

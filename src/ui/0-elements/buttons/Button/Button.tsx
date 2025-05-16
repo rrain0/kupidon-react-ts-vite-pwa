@@ -2,12 +2,12 @@ import styled from '@emotion/styled'
 import { useClick } from '@util/pointer/useClick.ts'
 import { useLongPress } from '@util/pointer/useLongPress.ts'
 import { ReactU } from '@util/react/ReactU.ts'
+import {
+  FlexViewShortProps,
+  processFlexViewShortProps,
+} from '@util/react/short-props/processFlexViewShortProps.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import {
-  FlexShortProps,
-  processFlexShortProps,
-} from 'src/ui/0-elements/basic-elements/processFlexShortProps.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
@@ -23,27 +23,26 @@ import Callback = TypeU.Callback
 //  Для этого никак не обойтись без оборачивания контента в доп элемент.
 //  Но это ломает поток width / height, так что их придётся более замороченным путйм высталять.
 //  Да и не факт, что в таком случае абсолютно позиционированное не захочет вылезти наверх.
+// TODO дождаться, когда сделают Paint API и запихать риппл в бэкграунд
 
 
 
-type ButtonProps = React.ComponentProps<typeof ButtonElem> & Pu<{
+type ButtonProps = React.ComponentProps<typeof ButtonElem> & FlexViewShortProps & Pu<{
   'data-locked': HtmlEmptyAttr
   'data-selected': HtmlEmptyAttr
   'data-error': HtmlEmptyAttr
   onLongPress: Callback
-}> & FlexShortProps
+}>
 
 
 
 const Button = React.memo((props: ButtonProps) => {
+  const { css, flexViewRest } = processFlexViewShortProps(props)
   const {
-    flex,
-    rest: {
-      ref, className, children,
-      onClick, onLongPress,
-      ...restProps
-    },
-  } = processFlexShortProps(props)
+    ref, className, children,
+    onClick, onLongPress,
+    ...restProps
+  } = flexViewRest
   
   
   const elemRef = useRef<HTMLButtonElement>(null)
@@ -52,30 +51,23 @@ const Button = React.memo((props: ButtonProps) => {
   const getOnClick = useClick()
   const getOnLongPress = useLongPress()
   
+  const buttonFlexViewClassName = ButtonS6.W.els.button.n + 'FlexView'
+  
   return (
     <UseRipple>
       {rippleProps => (
         <ButtonElem
           data-display-name='Button'
           ref={elemRef}
-          className={clsx(className, ButtonS6.W.els.button.n)}
+          className={clsx(className, ButtonS6.W.els.button.n, buttonFlexViewClassName)}
           type='button'
           {...combineProps(
             getOnClick(onClick), getOnLongPress(onLongPress),
-            restProps, { style: flex }, rippleProps.target,
+            restProps, rippleProps.target,
           )}
-          /* css={[
-            // TODO Style
-            {
-              [`& > .${ButtonS6.W.els.bord.n}`]: {
-                zIndex: 0,
-              },
-              [`& > *:not(.${ButtonS6.W.els.bord.n})`]: {
-                position: 'relative',
-                //zIndex: 10,
-              },
-            },
-          ]} */
+          css={{
+            [`&.${ButtonS6.W.els.button.n}.${buttonFlexViewClassName}`]: css,
+          }}
         >
           
           <div

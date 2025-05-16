@@ -141,6 +141,11 @@ export const Dark = {
     bgFc:          '#bbbbbb',
     ctFc:          '#000000',
   },
+  boxMain2: {
+    bgGrad:        ['#ffffff', '#ffffff', '#42414c'],
+    ct:            '#FFFFFF',
+    ctFc:          '#FFFFFF',
+  },
   
   boxSecondary: {
     bg:            '#39404d',

@@ -1,21 +1,34 @@
+import { TypeU } from '@util/common/TypeU.ts'
+import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React, { useCallback } from 'react'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
+import Pu = TypeU.Pu
 
 
 
 
-const BackBtn = React.memo(() => {
+export type BackBtnProps = Pu<{
+  withVirtualOffset: boolean
+}>
+const BackBtn = React.memo(({ withVirtualOffset }: BackBtnProps) => {
   const navigate = useNavigate()
   const back = useCallback(() => navigate(-1), [navigate])
   
   return (
     <Button
-      css={IconButtonS6.t(backButtonS)}
+      css={IconButtonS6.t([backButtonS, {
+        button: {
+          ...withVirtualOffset && {
+            sz: 'ct',
+            ...virtualOffset({ a: 13 }),
+          },
+        },
+      }])}
       onClick={back}
     >
       <ArrowAngledRoundedIc/>

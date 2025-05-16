@@ -173,10 +173,10 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
 
 
 const Overflow = styled.div`
+  box-sizing: content-box;
   // Вертикальные маргины и паддинги нужны чтобы отображать тени у карточек
-  --offset: 16px;
-  ${virtualOffset({ a: 'var(--offset)' })}
-  width: calc(100% + var(--offset) * 2);
+  ${virtualOffset({ a: 16 })};
+  width: 100%;
   height: fit-content;
   overflow: auto;
   ${noScrollbars};

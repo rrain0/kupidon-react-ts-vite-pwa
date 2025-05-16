@@ -1,25 +1,20 @@
-import styled from '@emotion/styled'
 import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
-import resetButton = EmotionCommon.resetButton
 
 
 
 
-const ToBeExtended = styled.button`
-  ${resetButton};
-`
+const ToBeExtended = (props: React.ComponentProps<'div'>) => <div/>
 
 
-type MyComponentExtraProps = Pu<{
+export type MyComponentExtraProps = Pu<{
   myProp: boolean
 }> & Children
 
-type MyComponentProps = 
+export type MyComponentProps =
   & React.ComponentProps<typeof ToBeExtended> 
   & MyComponentExtraProps
 
@@ -32,12 +27,12 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   } = props
   
   
-  const elemRef = useRef<HTMLButtonElement>(null)
+  const elemRef = useRef<HTMLDivElement>(null)
   useImperativeHandle(ref, () => elemRef.current!, [])
   
   
   return (
-    <ToBeExtended // Frame
+    <ToBeExtended
       data-display-name='MyComponent'
       {...restProps}
       ref={elemRef}
@@ -47,5 +42,5 @@ const MyComponent = React.memo((props: MyComponentProps) => {
   )
 })
 MyComponent.displayName = 'MyComponent'
-//export default MyComponent
+export default MyComponent
 

@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import { DatePlaceCategoriesData } from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
@@ -40,13 +42,15 @@ const BowAndArrowsPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm style={{ gap: 0 }}>
             
-            <Pages.PageHeaderWithLeftRightItems>
-              <Gap w={50} h={50}/>
-              <Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page>
-              <Button css={IconButtonS6.t(calendarButtonS)}>
-                <Calendar2GradIc/>
-              </Button>
-            </Pages.PageHeaderWithLeftRightItems>
+            <Grid cols='54px 1fr 54px' stretch>
+              <Gap w={50}/>
+              <Flex center><Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page></Flex>
+              <Flex centerEnd>
+                <Button css={IconButtonS6.t(calendarButtonS)}>
+                  <Calendar2GradIc/>
+                </Button>
+              </Flex>
+            </Grid>
             
             <Gap h={27}/>
             

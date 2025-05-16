@@ -2,6 +2,7 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
 import { DateU } from '@util/date/DateU.ts'
+import { getAge, nameCommaAge } from '@util/ui/nameCommaAge.ts'
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { WidgetProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
@@ -15,8 +16,8 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
-import { ReactU } from 'src/util/react/ReactU'
-import { TypeU } from 'src/util/common/TypeU'
+import { ReactU } from '@util/react/ReactU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
@@ -36,7 +37,7 @@ import boxShadow = WidgetProps.boxShadow
 
 
 
-export type PreviewFullInfoProps = ClassStyle & Children & Pu<{
+export type ProfileShowcaseFullInfoProps = ClassStyle & Children & Pu<{
   isOpen: boolean
   close: Callback
   animatedOpacity: AnimatedProperty<number>
@@ -45,7 +46,7 @@ export type PreviewFullInfoProps = ClassStyle & Children & Pu<{
   gender: GenderOptionValues
   aboutMe: string
 }>
-export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
+export const ProfileShowcaseFullInfo = React.memo((props: ProfileShowcaseFullInfoProps) => {
   const {
     isOpen = false,
     close,
@@ -61,7 +62,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
   const height = '175'
   const weight = 'Не выбрано'
   const imLookingFor = 'Не выбрано'
-  const age = birthDate && DateU.age(birthDate) || ''
+  const age = getAge(birthDate)
   
   const titleText = useUiValues(TitleUiText)
   const optionText = useUiValues(OptionUiText)
@@ -89,7 +90,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     aboutMe: titleText.aboutMe,
   }), [name, birthDate, gender, aboutMe, titleText, optionText])
   
-  const nameAge = [name, age].filter(it => it).join(', ')
+  const nameAge = nameCommaAge(name, birthDate)
   
   const infos = useMemo(() => {
     return [
@@ -130,7 +131,7 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     >
       {props => (
         <BottomSheetFrame
-          data-display-name='PreviewFullInfo'
+          data-display-name='ProfileShowcaseFullInfo'
           animatedStyle={{ opacity: animatedOpacity }}
         >
           <BottomSheetBasic
@@ -200,8 +201,8 @@ export const PreviewFullInfo = React.memo((props: PreviewFullInfoProps) => {
     </UseBottomSheetState>
   )
 })
-PreviewFullInfo.displayName = 'PreviewFullInfo'
-export default PreviewFullInfo
+ProfileShowcaseFullInfo.displayName = 'ProfileShowcaseFullInfo'
+export default ProfileShowcaseFullInfo
 
 
 

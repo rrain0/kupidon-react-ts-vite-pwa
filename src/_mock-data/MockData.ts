@@ -19,25 +19,38 @@ import retrowave2 from '@im/mock/Retrowave_(2).jpg'
 import satoru from '@im/mock/Сатору Годзё photo_2023-07-31_22-35-02.jpg'
 
 import avaCharmingWoman from
-    '@im/mock/people-avas/charming-woman-with-curly-hairstyle-make-up-studio  small ava.png'
+    '@im/mock/people/1/avas/charming-woman-with-curly-hairstyle-make-up-studio  small ava.png'
 import avaCheerfulGirl from
-    '@im/mock/people-avas/cheerful-girl-cashmere-sweater-laughs-against-backdrop-blossoming-sakura-portrait-woman-yellow-hoodie-city-spring  small ava.png'
+    '@im/mock/people/1/avas/cheerful-girl-cashmere-sweater-laughs-against-backdrop-blossoming-sakura-portrait-woman-yellow-hoodie-city-spring  small ava.png'
 import avaCloseUpSmilingBlonde from
-    '@im/mock/people-avas/close-up-smiling-blonde-young-woman-florist-shop  small ava.png'
+    '@im/mock/people/1/avas/close-up-smiling-blonde-young-woman-florist-shop  small ava.png'
 import avaDarkHairedLady from
-    '@im/mock/people-avas/dark-haired-lady-with-plump-lips-green-eyed-girl-with-long-eyelashes-crown-flowers-posing-blue-wall  small ava.png'
+    '@im/mock/people/1/avas/dark-haired-lady-with-plump-lips-green-eyed-girl-with-long-eyelashes-crown-flowers-posing-blue-wall  small ava.png'
 import avaAttractivePrettyWoman from
-    '@im/mock/people-avas/indoor-studio-shot-attractive-pretty-woman-with-light-brown-hair-wearing-black-jacket-with-red-lips  small ava.png'
+    '@im/mock/people/1/avas/indoor-studio-shot-attractive-pretty-woman-with-light-brown-hair-wearing-black-jacket-with-red-lips  small ava.png'
 import avaBeautifulBusinessLady from
-    '@im/mock/people-avas/portrait-young-beautiful-business-lady-smiling-touching-face  small ava.png'
+    '@im/mock/people/1/avas/portrait-young-beautiful-business-lady-smiling-touching-face  small ava.png'
 import avaWomanPosingHouse from
-    '@im/mock/people-avas/portrait-young-woman-posing-house  small ava.png'
+    '@im/mock/people/1/avas/portrait-young-woman-posing-house  small ava.png'
 import avaStylishBrunetteGirl from
-    '@im/mock/people-avas/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  small ava.png'
+    '@im/mock/people/1/avas/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  small ava.png'
 import avaWomanWalkingStreet from
-    '@im/mock/people-avas/woman-portrait-walking-street  small ava.png'
+    '@im/mock/people/1/avas/woman-portrait-walking-street  small ava.png'
 import avaWomanWithCureSmile from
-    '@im/mock/people-avas/young-pretty-woman-with-cute-smile-pink-sweater-sunglasses-isolated-pink-studio-background-spring-fashion-trend  small ava.png'
+    '@im/mock/people/1/avas/young-pretty-woman-with-cute-smile-pink-sweater-sunglasses-isolated-pink-studio-background-spring-fashion-trend  small ava.png'
+
+import portraitCharmingWoman from
+    '@im/mock/people/1/portraits/charming-woman-with-curly-hairstyle-make-up-studio  small portrait.png'
+import portraitCheerfulGirl from
+    '@im/mock/people/1/portraits/cheerful-girl-cashmere-sweater-laughs-against-backdrop-blossoming-sakura-portrait-woman-yellow-hoodie-city-spring  small portrait.png'
+import portraitDarkHairedLady from
+    '@im/mock/people/1/portraits/dark-haired-lady-with-plump-lips-green-eyed-girl-with-long-eyelashes-crown-flowers-posing-blue-wall  small portrait.png'
+import portraitAttractivePrettyWoman from
+    '@im/mock/people/1/portraits/indoor-studio-shot-attractive-pretty-woman-with-light-brown-hair-wearing-black-jacket-with-red-lips  small portrait.png'
+import portraitWomanPosingHouse from
+    '@im/mock/people/1/portraits/portrait-young-woman-posing-house  small portrait.png'
+import portraitStylishBrunetteGirl from
+    '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  small portrait.png'
 
 
 
@@ -85,6 +98,13 @@ export namespace MockData {
       avaDarkHairedLady, avaAttractivePrettyWoman, avaBeautifulBusinessLady,
       avaWomanPosingHouse, avaStylishBrunetteGirl, avaWomanWalkingStreet,
       avaWomanWithCureSmile,
+    },
+  }
+  export const peoplePortraits = {
+    record: {
+      portraitCharmingWoman, portraitCheerfulGirl,
+      portraitDarkHairedLady, portraitAttractivePrettyWoman, portraitWomanPosingHouse,
+      portraitStylishBrunetteGirl,
     },
   }
   

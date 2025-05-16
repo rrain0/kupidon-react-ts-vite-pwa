@@ -9,6 +9,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -22,7 +23,6 @@ import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
 import Pu = TypeU.Pu
 import RootRoute = AppRoutes.RootRoute
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -34,7 +34,7 @@ type ChatPageHeaderExtraProps = Pu<{
 }>
 
 type ChatPageHeaderProps =
-  & Omit<React.ComponentProps<typeof Flex>, 'children'>
+  & Omit<React.ComponentProps<typeof Grid>, 'children'>
   & ChatPageHeaderExtraProps
 
 
@@ -46,30 +46,34 @@ const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
   } = props
   
   return (
-    <HeaderBox alignSelf='stretch'
+    <Grid alignedStretch cols='46px 1fr 46px' stretch
       data-display-name='ChatPageHeader'
       {...restProps}
     >
       
-      <Button css={IconButtonS6.t(searchButtonS)}>
-        <SearchIc/>
-      </Button>
+      <Flex centerStart>
+        <Button css={IconButtonS6.t(searchButtonS)}>
+          <SearchIc/>
+        </Button>
+      </Flex>
       
       {/* TODO Translations */}
-      <ChatHeader>Чаты</ChatHeader>
+      <Flex center><ChatHeader>Чаты</ChatHeader></Flex>
       
-      <AppLink toFull={RootRoute.likedMe}>
-        <Button css={ButtonS6.t(likesButtonS)} row>
-          <HeartOutlinedGradIc css={SvgGradIconS6.t(heartS)}/>
-          <LikesCounterBox>
-            <LikesCounter>
-              <CountFormatShort addPlus>{likesCnt}</CountFormatShort>
-            </LikesCounter>
-          </LikesCounterBox>
-        </Button>
-      </AppLink>
+      <Flex centerEnd>
+        <AppLink toFull={RootRoute.likedMe}>
+          <Button css={ButtonS6.t(likesButtonS)} row>
+            <HeartOutlinedGradIc css={SvgGradIconS6.t(heartS)}/>
+            <LikesCounterBox>
+              <LikesCounter>
+                <CountFormatShort addPlus>{likesCnt}</CountFormatShort>
+              </LikesCounter>
+            </LikesCounterBox>
+          </Button>
+        </AppLink>
+      </Flex>
       
-    </HeaderBox>
+    </Grid>
   )
 })
 ChatPageHeader.displayName = 'ChatPageHeader'
@@ -78,12 +82,6 @@ export default ChatPageHeader
 
 
 
-
-const HeaderBox = styled(Flex)({
-  display: 'grid',
-  gridTemplateColumns: '46px 1fr 46px',
-  alignItems: 'center',
-})
 
 const searchButtonS: AppWidgetStyle = t => [
   IconButtonS6.S.trans.round.lg.normal, {
@@ -107,12 +105,12 @@ const likesButtonS: AppWidgetStyle = t => [
     },
   },
 ]
-const heartS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.auto.normal, {
+const heartS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.full.accent, {
   gradIcon: { sz: 23 },
 }]
 
 const LikesCounterBox = withDefaults({
-  mt: -1, ml: -6, r: 3, pv: 1, ph: 3,
+  mt: -1, ml: -6, rad: 3, pv: 1, ph: 3,
 }, styled(Flex)(({ theme: t }) => ({
   // TODO Theme
   backgroundColor: t.boxAccentCt4.bg,
