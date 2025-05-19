@@ -12,7 +12,7 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import RadioActiveIc = SvgIconsPack.RadioActiveIc
 import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import row = EmotionCommon.row
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
@@ -119,7 +119,7 @@ const frameStyle = css`
 
 const inputStyle = css`
   ${resetInput};
-  ${abs};
+  ${absTlwh};
   opacity: 0;
   cursor: pointer;
 `
@@ -154,7 +154,7 @@ const inactiveWrapStyle = css`
 
 
 const borderStyle = css`
-  ${abs};
+  ${absTlwh};
   pointer-events: none;
   border-radius: inherit;
 `

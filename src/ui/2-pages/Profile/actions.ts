@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { CurrentUser } from 'src/api/model/CurrentUser.ts'
+import { CurrentUser } from 'src/api/model/User.ts'
 import { Gender } from 'src/api/model/Gender.ts'
 import {
   MediaInArrayDUC,

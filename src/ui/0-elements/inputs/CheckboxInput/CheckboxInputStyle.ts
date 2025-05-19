@@ -13,7 +13,7 @@ import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import hoverable = EmotionCommon.hoverable
 import flexC = EmotionCommon.flexC
 import resetInput = EmotionCommon.resetInput
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import reset = EmotionCommon.reset
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
@@ -83,7 +83,7 @@ export namespace CheckboxInputStyle {
     }
     ${W.use.s.normal().e.input().thisUse} {
       ${resetInput};
-      ${abs};
+      ${absTlwh};
       opacity: 0;
       cursor: pointer;
     }
@@ -124,7 +124,7 @@ export namespace CheckboxInputStyle {
       
       ::after {
         content: '';
-        ${abs};
+        ${absTlwh};
         border: 2px solid;
         border-color: ${t.inputRadio.bgFc};
         border-radius: inherit;

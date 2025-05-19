@@ -7,7 +7,7 @@ import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import AppLink from 'src/ui/components/AppLink/AppLink.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'

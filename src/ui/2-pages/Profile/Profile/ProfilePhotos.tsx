@@ -527,7 +527,7 @@ const photoDimmed = (t: AppTheme.Theme) => css`
 `
 const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
   position: absolute;
-  inset: -4px;
+  top: -4px; right: -4px; bottom: -4px; left: -4px;
   border-radius: calc(14px + 4px);
   border: 10px dashed;
   border-color: ${t.photos.borderDrag[0]};
@@ -536,7 +536,7 @@ const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   pointer-events: none;
 
   position: absolute;
-  inset: -7px;
+  top: -7px; right: -7px; bottom: -7px; left: -7px;
   border: 3px solid transparent;
   border-radius: 20px;
   @property --rotation {

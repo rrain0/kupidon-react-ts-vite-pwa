@@ -40,17 +40,18 @@ import avaWomanWithCureSmile from
     '@im/mock/people/1/avas/young-pretty-woman-with-cute-smile-pink-sweater-sunglasses-isolated-pink-studio-background-spring-fashion-trend  small ava.png'
 
 import portraitCharmingWoman from
-    '@im/mock/people/1/portraits/charming-woman-with-curly-hairstyle-make-up-studio  small portrait.png'
+    '@im/mock/people/1/portraits/charming-woman-with-curly-hairstyle-make-up-studio  portrait.webp'
 import portraitCheerfulGirl from
-    '@im/mock/people/1/portraits/cheerful-girl-cashmere-sweater-laughs-against-backdrop-blossoming-sakura-portrait-woman-yellow-hoodie-city-spring  small portrait.png'
+    '@im/mock/people/1/portraits/cheerful-girl-cashmere-sweater-laughs-against-backdrop-blossoming-sakura-portrait-woman-yellow-hoodie-city-spring  portrait.webp'
 import portraitDarkHairedLady from
-    '@im/mock/people/1/portraits/dark-haired-lady-with-plump-lips-green-eyed-girl-with-long-eyelashes-crown-flowers-posing-blue-wall  small portrait.png'
+    '@im/mock/people/1/portraits/dark-haired-lady-with-plump-lips-green-eyed-girl-with-long-eyelashes-crown-flowers-posing-blue-wall  portrait.webp'
 import portraitAttractivePrettyWoman from
-    '@im/mock/people/1/portraits/indoor-studio-shot-attractive-pretty-woman-with-light-brown-hair-wearing-black-jacket-with-red-lips  small portrait.png'
+    '@im/mock/people/1/portraits/indoor-studio-shot-attractive-pretty-woman-with-light-brown-hair-wearing-black-jacket-with-red-lips  portrait.webp'
 import portraitWomanPosingHouse from
-    '@im/mock/people/1/portraits/portrait-young-woman-posing-house  small portrait.png'
+    '@im/mock/people/1/portraits/portrait-young-woman-posing-house  portrait.webp'
 import portraitStylishBrunetteGirl from
-    '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  small portrait.png'
+    '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  portrait.webp'
+import { User } from 'src/api/model/User.ts'
 
 
 
@@ -142,6 +143,79 @@ export namespace MockData {
     city: 'Иркутск',
     birthDate: '1998-02-16T03:20:36.458+08:00',
   }
+  
+  
+  
+  export const users: User[] = [
+    {
+      id: '175dc7be-3f56-4b9d-9403-e994b72624dc',
+      name: 'Алиса', birthDate: '2001-05-15', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [{
+        id: '93723057-eee2-4a75-9095-e5b3219f0885', index: 0, name: '', mimeType: 'image/png',
+        url: portraitAttractivePrettyWoman,
+      }],
+    },
+    {
+      id: '97bd2cee-decf-4774-8768-b576118af713',
+      name: 'Мария', birthDate: '2000-05-15', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [{
+        id: 'd5b6d377-2f7c-4fd8-8166-7ec9ca691023', index: 0, name: '', mimeType: 'image/png',
+        url: portraitStylishBrunetteGirl,
+      }],
+    },
+    {
+      id: '5ac18ba3-fc4a-4983-a662-7b8134885ed6',
+      name: 'Ксюша', birthDate: '2001-05-15', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [{
+        id: '69184b79-2fa5-4270-a407-8405b1972dc9', index: 0, name: '', mimeType: 'image/png',
+        url: portraitWomanPosingHouse,
+      }],
+    },
+    {
+      id: 'ee8d201d-789b-4c89-a28b-e78b282bca70',
+      name: 'Влада', birthDate: '2003-05-15', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [{
+        id: 'ee389d55-d1aa-411e-bd47-d9b86c7ed102', index: 0, name: '', mimeType: 'image/png',
+        url: portraitCheerfulGirl,
+      }],
+    },
+    {
+      id: '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d',
+      name: 'Лера', birthDate: '2004-05-15', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [{
+        id: '714e70ba-f328-4df4-9468-48ec874e8500', index: 0, name: '', mimeType: 'image/png',
+        url: portraitCharmingWoman,
+      }],
+    },
+    {
+      id: 'a503343a-4759-441d-aae0-3f61e2335337',
+      name: 'Настя', birthDate: '2002-05-15', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [{
+        id: 'f967f0e7-05e1-44bd-83af-0bef3ee9f63d', index: 0, name: '', mimeType: 'image/png',
+        url: portraitDarkHairedLady,
+      }],
+    },
+    {
+      id: 'c866cb44-bb50-4701-87e2-36b8967a3201',
+      name: 'Саша', birthDate: '2000-02-12', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [],
+    },
+    {
+      id: '84b5d4ab-2bce-4988-9674-8a7b878f3266',
+      name: 'аня', birthDate: '2001-05-09', gender: 'FEMALE',
+      aboutMe: '',
+      photos: [],
+    },
+  ]
+  
+  
   
   export const dataUrlRainbowCircle =
     'data:image/webp;base64,UklGRqQBAABXRUJQVlA4WAoAAAAQAAAADwAADwAAQUxQSMcAAAABgKRt27Hlzq5FdDTr1yq4gYxRC2jcjDuwbdfItm3bjfxdeQ0RMQH6NdhsCtE/Xf1vRnd1i/M3j3QwSi+BfO8fKUfQccnPIknOnkeogY3m5rEPu9R7MMNN72nlksFJXZaCX6nioMMWV/QETPmZYHLqJVxKbhsFTCagvzVGijDGlsDsNwFc50RF1t1RxXuYsiuPMRbLTzqfGboakOzGeEvjFtTByahbUgE/d/thPVWSvPOB/VogzeuHZK+tGOSt16V/hphMwfoVAFZQOCC2AAAAcAMAnQEqEAAQAAIANCWwAnS3AETVewn5RhMyE/cLRAq84OQAAP7sJjZi2vltQVBtNESasiNNPNYI+PcqyMEU4i1/XVdYjQ4vQp/F40ttvfOzsGPdXqjTNaRZUQHdP3bDduNg0gtbNHTYFYCP/VOdNoX1/+ObtPOcjPnVjeNN/yOPz99Ks7xmS516zD7AO3/4y2OPif/oef1e3R0P4sXmRdv53iiSbRLc7R71eIXE78oaxJruAAA='

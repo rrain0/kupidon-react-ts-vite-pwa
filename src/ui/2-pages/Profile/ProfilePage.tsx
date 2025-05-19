@@ -8,7 +8,7 @@ import {
   getItemIProps,
 } from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
-import { CarouselEventCallback, useCarousel } from '@util/animated/carousel/useCarousel.ts'
+import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
@@ -68,7 +68,7 @@ import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
 import row = EmotionCommon.row
 import col = EmotionCommon.col
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import arrOfIndices = ArrayU.arrOfIndices
 import ValueOrMapper = TypeU.ValueOrMapper
 import isfunction = TypeU.isfunction
@@ -481,7 +481,7 @@ const ProfilePage = React.memo(() => {
       deltaP: deltaP,
       itemsCnt,
       viewsCnt,
-      startViewI: 0,
+      viewFirstI: 0,
     })
     console.log('pos0ItemI', pos0ItemI)
     setTabIdx(pos0ItemI)
@@ -507,7 +507,7 @@ const ProfilePage = React.memo(() => {
       deltaP: dp,
       itemsCnt,
       viewsCnt,
-      startViewI: 0,
+      viewFirstI: 0,
       currViewI: viewI,
     })
   })
@@ -677,6 +677,6 @@ const TabsBox = styled.div`
 `
 
 const Tab = styled(AnimatedDiv)`
-  ${abs};
+  ${absTlwh};
   ${col};
 `

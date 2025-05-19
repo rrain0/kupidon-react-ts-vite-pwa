@@ -5,15 +5,15 @@ import { ProfileShowcaseApi } from 'src/api/requests/ProfileShowcaseApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
-import { Navigate, RouteObject, useSearchParams } from 'react-router'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
+import { RouteObject } from 'react-router'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
-import { FindPairPageItem } from 'src/ui/2-pages/FindPair/FindPairPage.tsx'
+import {
+  ProfileCardsStackListItem,
+} from 'src/ui/1-widgets/ProfileShowcase/ProfileCardsStackList.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
-import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import wait = AsyncU.wait
 
 const FindPairPage = React.lazy(
@@ -84,9 +84,14 @@ const data = [
    aboutMe: 'Тестовое описание 3',
    }, */
 ]
+
+
+
+
+
 const FindPairPageWithItems = React.memo(() => {
   
-  const [items, setItems] = useState(undefined as FindPairPageItem[] | undefined)
+  const [items, setItems] = useState(undefined as ProfileCardsStackListItem[] | undefined)
   
   
   //wait(500, () => setItems(data))
@@ -108,12 +113,11 @@ const FindPairPageWithItems = React.memo(() => {
   }, [])
   
   
-  // TODO Download -  make generic photo update.
-  //  Need save current dataUrl or download if photo the same
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
-      setItems((response.data.items as any[]).map(it => {
+      setItems(response.data.items.map(it => {
         return {
+          id: it.id,
           photos: currentUserPhotosToProfilePhotos(it.photos),
           name: it.name,
           birthDate: it.birthDate,
@@ -134,14 +138,12 @@ const FindPairPageWithItems = React.memo(() => {
 
 const RouteFindPair = React.memo(() => {
   
-  const [searchParams] = useSearchParams()
   const isAuth = useAuthZustand(s => s.getIsAuth())
   
   if (!isAuth) return (
-    <Navigate
-      to={RootRoute.login[fullAllowedNameParams]({
-        returnPath: RootRoute.findPair[fullAnySearchParams](searchParams),
-      })}
+    <AppNavigate
+      toFull={RootRoute.login}
+      allowedNameParams={{ returnPath: RootRoute.findPair }}
       replace={true}
     />
   )
@@ -155,7 +157,7 @@ const RouteFindPair = React.memo(() => {
 
 
 
-// path: 'findPair / ...'
+// path: 'find-pair / ...'
 export const findPairRouting: RouteObject[] = [
   {
     path: '',

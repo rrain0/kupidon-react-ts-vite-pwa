@@ -5,7 +5,8 @@ import { WidgetStyle, WidgetStyleObj } from 'src/mini-libs/widget-style-6/Widget
 export namespace WidgetStyleCommon {
   
   export const contents: WidgetStyleObj = { display: 'contents' }
-  export const abs: WidgetStyleObj = { pos: 'abs', a: 0 }
+  export const absTrbl: WidgetStyleObj = { pos: 'abs', a: 0 }
+  export const absTlwh: WidgetStyleObj = { pos: 'abs', at: 0, al: 0, w: 0, h: 0 }
   export const fixed: WidgetStyleObj = { pos: 'fixed', a: 0 }
   export const fixedTop: WidgetStyleObj = { pos: 'fixed', at: 0, ah: 0 }
   export const fixedBottom: WidgetStyleObj = { pos: 'fixed', ab: 0, ah: 0 }

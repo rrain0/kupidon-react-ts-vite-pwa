@@ -8,7 +8,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import Scrollbar from 'src/ui/1-widgets/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps, SetScrollProps } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import ClassStyle = ReactU.ClassStyle
 import Pu = TypeU.Pu
 
@@ -64,7 +64,7 @@ export default ScrollbarOverlay
 
 
 const Overlay = styled.div`
-  ${abs};
+  ${absTlwh};
   display: grid;
   pointer-events: none;
   grid:

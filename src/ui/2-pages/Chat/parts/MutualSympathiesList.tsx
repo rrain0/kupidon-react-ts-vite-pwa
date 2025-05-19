@@ -48,7 +48,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
         className={className}
         style={style}
       >
-        {/* TODO Translations */}
+        {/* TODO Translation */}
         <MutualSympathiesText>Взаимные симпатии</MutualSympathiesText>
         <Gap grow/>
         <HeaderArrow css={[HeaderArrowS.secondary, ButtonS6.t(allButtonS)]}>Все</HeaderArrow>

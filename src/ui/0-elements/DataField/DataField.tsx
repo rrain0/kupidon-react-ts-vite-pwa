@@ -5,7 +5,7 @@ import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import row = EmotionCommon.row
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 
@@ -76,7 +76,7 @@ const frameStyle = css`
 
 
 const borderStyle = css`
-  ${abs};
+  ${absTlwh};
   pointer-events: none;
   border-radius: inherit;
 `

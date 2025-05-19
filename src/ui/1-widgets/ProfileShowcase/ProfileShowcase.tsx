@@ -44,7 +44,7 @@ import arrOfIndices = ArrayU.arrOfIndices
 import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
 import gridC = EmotionCommon.gridC
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
@@ -131,7 +131,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   const photosCnt = availablePhotos.length
   const isPhotosDraggable = photosCnt >= 2
   
-  const [viewsCnt, startViewI] = (() => {
+  const [viewsCnt, viewFirstI] = (() => {
     // display loading placeholder
     if (!isInited) return [1, 0]
     // display no photos placeholder
@@ -172,7 +172,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   } = useCarousel({
     itemsCnt,
     viewsCnt,
-    startViewI,
+    viewFirstI,
     getTrackProps,
     axis: 'y',
     inverted: false,
@@ -196,7 +196,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       deltaP: dp,
       itemsCnt,
       viewsCnt,
-      startViewI,
+      viewFirstI,
       currViewI: viewI,
     })
   }), [itemsCnt])
@@ -476,7 +476,7 @@ const Photo = styled.img`
   pointer-events: none; // or attr draggable="false"
 `
 const PhotoFade = styled.div`
-  ${abs};
+  ${absTlwh};
   background-image: linear-gradient(
     to bottom,
     ${p => p.theme.previewOverlayInfoBox.bgFadeGrad[0]} 0% 60%,

@@ -9,7 +9,7 @@ import {
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter
-import abs = WidgetStyleCommon.abs
+import absTrbl = WidgetStyleCommon.absTrbl
 import flexC = WidgetStyleCommon.flexC
 import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
@@ -93,7 +93,7 @@ export namespace ImgSparkS6 {
               }]
               // type: img, shape: img, size: absFull
               export const absFull: WidgetStyle = [base, {
-                imgFrame: { ...abs },
+                imgFrame: { ...absTrbl },
               }]
             }
           }

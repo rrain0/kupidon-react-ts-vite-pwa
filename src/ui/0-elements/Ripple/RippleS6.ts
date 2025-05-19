@@ -9,7 +9,7 @@ import {
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
-import abs = WidgetStyleCommon.abs
+import absTrbl = WidgetStyleCommon.absTrbl
 
 
 
@@ -44,7 +44,7 @@ export namespace RippleS6 {
   export namespace Parts {
     export const base: WidgetStyle = {
       rippleFrame: {
-        ...abs,
+        ...absTrbl,
         pointerEvents: 'none',
         r: 'inherit',
         overflow: 'hidden',

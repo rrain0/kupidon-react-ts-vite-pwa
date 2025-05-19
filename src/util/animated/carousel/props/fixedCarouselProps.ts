@@ -28,11 +28,8 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
     startP,
     startItemP,
     deltaP,
-    itemsCnt,
-    viewsCnt,
-    startViewI,
     currViewI: viewI = 0,
-    startItemI = 0,
+    ...indexProps
   } = props
   
   const {
@@ -40,7 +37,7 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
     loopViewI, loopViewP, clampViewP,
     itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
     loopItemI, loopItemP, clampItemP,
-  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
+  } = getIndexesProps(indexProps)
   
   viewI += viewFirstI
   
@@ -102,9 +99,9 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
 
 export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) => {
   const {
-    startViewI, viewsCnt, startItemI, itemsCnt,
     startP, startItemP, deltaP,
     noLoop,
+    ...indexProps
   } = props
   
   const {
@@ -112,7 +109,7 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
     loopViewI, loopViewP, clampViewP,
     itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
     loopItemI, loopItemP, clampItemP,
-  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
+  } = getIndexesProps(indexProps)
   
   const _pos0P = rf3(startP + deltaP)
   const pos0PI =Math.floor(rf5(startP / 100))

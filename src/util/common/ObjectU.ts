@@ -1,6 +1,5 @@
 import { StringU } from 'src/util/common/StringU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import anyval = TypeU.anyval
 import WriteablePartial = TypeU.WriteablePartial
 import isobject = TypeU.isobject
 import capitalize = StringU.capitalize
@@ -46,7 +45,7 @@ export namespace ObjectU {
   /**
    * Встроенная функция {@linkcode Object.keys} с улучшенной типизацией
    */
-  export function ObjectKeys<O extends anyval>(object: O): ObjectKeysArrType<O & object> {
+  export function ObjectKeys<O>(object: O): ObjectKeysArrType<O & object> {
     if (!isobject(object)) return []
     // The Object.keys() static method returns an array of a given object's own enumerable string-keyed property names.
     return Object.keys(object) as ObjectKeysArrType<O & object>
@@ -69,7 +68,7 @@ export namespace ObjectU {
   /**
    * Встроенная функция {@linkcode Object.values} с улучшенной типизацией
    */
-  export function ObjectValues<O extends anyval>(object: O): ObjectValuesArrType<O & object> {
+  export function ObjectValues<O>(object: O): ObjectValuesArrType<O & object> {
     if (!isobject(object)) return []
     return Object.values(object) as ObjectValuesArrType<O & object>
   }
@@ -93,7 +92,7 @@ export namespace ObjectU {
   /**
    * Встроенная функция {@linkcode Object.entries} с улучшенной типизацией
    */
-  export function ObjectEntries<O extends anyval>(object: O): ObjectEntriesArrType<O & object> {
+  export function ObjectEntries<O>(object: O): ObjectEntriesArrType<O & object> {
     if (!isobject(object)) return []
     return Object.entries(object) as ObjectEntriesArrType<O & object>
   }

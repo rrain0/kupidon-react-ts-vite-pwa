@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import row = EmotionCommon.row
 import resetInput = EmotionCommon.resetInput
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import { TypeU } from '@util/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
@@ -71,7 +71,7 @@ export namespace InputStyle {
       border-radius: inherit;
     }
     ${W.use.s.normal().e.border().thisUse} {
-      ${abs};
+      ${absTlwh};
       pointer-events: none;
       border-radius: inherit;
     }

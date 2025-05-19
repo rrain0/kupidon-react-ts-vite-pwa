@@ -13,7 +13,7 @@ import PlusIc = SvgIconsPack.PlusIc
 import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import flexC = EmotionCommon.flexC
 import col = EmotionCommon.col
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import colC = EmotionCommon.colC
 
 
@@ -344,7 +344,7 @@ const Frame = styled.article<{ isSelected?: boolean }>`
   gap: 10px;
 `
 const Border = styled.div`
-  ${abs};
+  ${absTlwh};
   border-radius: inherit;
   border-width: 2px;
   border-style: solid;
@@ -368,7 +368,7 @@ const AddIconBox = styled.div`
 
 const IndicatorFrame = styled.div`
   pointer-events: none;
-  ${abs};
+  ${absTlwh};
   ${colC};
   padding: 6px;
 `

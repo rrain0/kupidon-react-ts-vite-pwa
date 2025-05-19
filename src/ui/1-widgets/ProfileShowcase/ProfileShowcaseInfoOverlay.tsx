@@ -31,7 +31,7 @@ import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
 import ArrowBackGradIc = SvgGradIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
 import toEmptyAttr = TypeU.toEmptyAttr
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import flexC = EmotionCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
 import full = EmotionCommon.full
@@ -196,7 +196,7 @@ export default ProfileShowcaseInfoOverlay
 
 
 const ProfileShowcaseInfoBox = styled.div`
-  ${abs};
+  ${absTlwh};
   z-index: 10;
   display: grid;
   grid:
@@ -345,7 +345,7 @@ const ScrollIndicatorBox = styled.div`
 
 
 const ActionFrame = styled.div`
-  ${abs};
+  ${absTlwh};
   ${flexC};
   pointer-events: none;
 `

@@ -86,8 +86,7 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
       deltaP: dp,
       itemsCnt,
       viewsCnt,
-      startViewI: 0,
-      startItemI: 0,
+      viewFirstI: 0,
       currViewI: viewI,
     })
     

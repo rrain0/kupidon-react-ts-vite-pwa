@@ -28,7 +28,7 @@ import LocationIc = SvgIconsPack.LocationIc
 import PriceTagIc = SvgIconsPack.PriceTagIc
 import arrOfIndices = ArrayU.arrOfIndices
 import arrOfZeros = ArrayU.arrOfZeros
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 
 
 
@@ -83,7 +83,7 @@ const PosterPreview = React.memo(() => {
       deltaP: dp,
       itemsCnt,
       viewsCnt,
-      startViewI: -1,
+      viewFirstI: -1,
       currViewI: viewI,
     })
   })
@@ -212,7 +212,7 @@ const selectMeterS: AppWidgetStyle = t => [
 
 
 const MiniPosterFrame = styled(AnimatedDiv)`
-  ${abs};
+  ${absTlwh};
   border-radius: var(--r);
   overflow: hidden;
 `

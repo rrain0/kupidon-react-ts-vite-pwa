@@ -17,7 +17,7 @@ import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
-import AppLink from 'src/ui/components/AppLink/AppLink.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import SearchIc = SvgIconsPack.SearchIc
 import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
@@ -57,7 +57,7 @@ const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
         </Button>
       </Flex>
       
-      {/* TODO Translations */}
+      {/* TODO Translation */}
       <Flex center><ChatHeader>Чаты</ChatHeader></Flex>
       
       <Flex centerEnd>

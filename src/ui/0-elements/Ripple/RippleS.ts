@@ -7,7 +7,7 @@ import Elem = WidgetStyle.Elem
 import CssProp = WidgetStyle.CssProp
 import CssWidget = WidgetStyle.CssWidget
 import CssPseudo = WidgetStyle.CssPseudo
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import CssPropEnum = WidgetStyle.CssPropEnum
 
 
@@ -47,7 +47,7 @@ export namespace RippleS {
     // normal
     ${W.use.s.normal().e.frame().thisUse} {
       pointer-events: none;
-      ${abs};
+      ${absTlwh};
       overflow: hidden;
     }
     ${W.use.s.normal().e.ripple().thisUse} {

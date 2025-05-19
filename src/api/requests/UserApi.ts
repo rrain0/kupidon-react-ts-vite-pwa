@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
 import { ApiUtils } from 'src/api/ApiUtils'
-import { CurrentUser } from 'src/api/model/CurrentUser'
+import { CurrentUser } from 'src/api/model/User.ts'
 import { Gender } from 'src/api/model/Gender.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { getDataUrlProps } from '@util/file/DataUrl.ts'
@@ -17,6 +17,7 @@ import NoUserResponseError = ApiUtils.NoUserResponseError
 import PartialUndef = TypeU.PartialUndef
 import fetchToBlob = FileU.fetchToBlob
 import Callback1 = TypeU.Callback1
+import isdef = TypeU.isdef
 
 
 
@@ -24,7 +25,6 @@ import Callback1 = TypeU.Callback1
 export namespace UserApi {
   
   
-  import isdef = TypeU.isdef
   export type CurrentUserSuccessData = {
     user: CurrentUser
   }

@@ -13,7 +13,7 @@ import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import resetButton = WidgetStyleCommon.resetButton
 import row = WidgetStyleCommon.row
-import abs = WidgetStyleCommon.abs
+import absTrbl = WidgetStyleCommon.absTrbl
 import Txt = WidgetStyleCommon.Txt
 
 
@@ -89,7 +89,7 @@ export namespace ButtonS6 {
             'color linear 300ms',
         }],
         bord: {
-          ...abs,
+          ...absTrbl,
           pointerEvents: 'none',
           r: 'inherit',
           transition: 'border-color linear 300ms',

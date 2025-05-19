@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
-import { DateU } from '@util/date/DateU.ts'
 import { nameCommaAge } from '@util/ui/nameCommaAge.ts'
 import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -13,13 +12,13 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import EmptyAva from 'src/ui/1-widgets/avatars/Ava/EmptyAva.tsx'
 import DislikeButton from 'src/ui/1-widgets/ProfileShowcase/DislikeButton.tsx'
 import LikeButton from 'src/ui/1-widgets/ProfileShowcase/LikeButton.tsx'
 import Pu = TypeU.Pu
-import abs = EmotionCommon.abs
-import gridC = EmotionCommon.gridC
 import HeartLockIc = SvgIconsPack.HeartLockIc
 import Txt = EmotionCommon.Txt
+import Callback = TypeU.Callback
 
 
 
@@ -35,11 +34,13 @@ export type LikedMeCardProps = {
   item: LikedMeCardItem
 } & Pu<{
   locked: boolean
+  onSelect: Callback
 }>
 const LikedMeCard = React.memo((props: LikedMeCardProps) => {
   const {
-    item: { picture, name, birthDate },
+    item: { id, picture, name, birthDate },
     locked,
+    onSelect,
   } = props
   
   const nameAge = nameCommaAge(name, birthDate)
@@ -47,7 +48,8 @@ const LikedMeCard = React.memo((props: LikedMeCardProps) => {
   return (
     <Flex pos='rel' ratio={171 / 217} rad={15} noOverflow>
       
-      <ImgSpark src={picture} css={ImgSparkS6.S.img.img.absFull}/>
+      {picture && <ImgSpark src={picture} css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}/>}
+      {!picture && <EmptyAva id={id}/>}
       
       {locked && (
         <Grid absTlwh center css={{ backdropFilter: 'blur(20px)' }}>
@@ -56,14 +58,24 @@ const LikedMeCard = React.memo((props: LikedMeCardProps) => {
       )}
       
       {!locked && (
-        <Flex absTlwh ph={8} pv={10} col centerEnd css={fade}>
-          <NameAge>{nameAge}</NameAge>
-          <Gap h={7}/>
-          <Flex row g={16}>
-            <LikeButton sz={40}/>
-            <DislikeButton sz={40}/>
+        <>
+          
+          {/* Считывает нажатия на саму карточку */}
+          <Flex absTlwh onClick={() => onSelect?.()} css={{ cursor: 'pointer' }}/>
+          
+          <Flex absTlwh ph={8} pv={10} col centerEnd
+            // Только кнопкам действий разрешено перехватывать нажатия
+            css={[fade, { '&, & > *': { pointerEvents: 'none' } }]}
+          >
+            <NameAge>{nameAge}</NameAge>
+            <Gap h={7}/>
+            <Flex row g={16}>
+              <LikeButton sz={40}/>
+              <DislikeButton sz={40}/>
+            </Flex>
           </Flex>
-        </Flex>
+          
+        </>
       )}
       
     </Flex>

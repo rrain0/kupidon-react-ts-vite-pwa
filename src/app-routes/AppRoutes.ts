@@ -48,7 +48,7 @@ export namespace AppRoutes {
     [path]: 'chat',
   })
   const findPair = buildRoute({
-    [path]: 'find-couple',
+    [path]: 'find-pair',
   })
   const bowAndArrows = buildRoute({
     [path]: 'bow-and-arrows',

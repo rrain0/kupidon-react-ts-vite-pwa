@@ -14,9 +14,9 @@ export type GetCarouselProps = {
   deltaP: number
   itemsCnt: number
   viewsCnt: number
-  startViewI: number
+  viewFirstI: number
   currViewI?: number | undefined
-  startItemI?: number | undefined
+  //itemFirstI?: number | undefined
 }
 
 
@@ -24,15 +24,14 @@ export type GetCarouselProps = {
 
 
 export type GetIndexesPropsProps = {
-  startViewI: number
+  viewFirstI: number
   viewsCnt: number
-  startItemI: number
+  //itemFirstI: number
   itemsCnt: number
 }
 export const getIndexesProps = ({
-  startViewI, viewsCnt, startItemI, itemsCnt,
+  viewFirstI, viewsCnt, /* itemFirstI, */ itemsCnt,
 }: GetIndexesPropsProps) => {
-  const viewFirstI = startViewI
   const viewEndI = viewFirstI + viewsCnt
   const viewLastI = viewEndI - 1
   const viewFirstP = viewFirstI * 100
@@ -42,7 +41,7 @@ export const getIndexesProps = ({
   const loopViewP = (v: number) => rf3(RangeU.loop(v, [viewFirstP, viewEndP]))
   const clampViewP = (v: number) => rf3(RangeU.clamp(v, [viewFirstP, viewLastP]))
   
-  const itemFirstI = startItemI
+  const itemFirstI = 0
   const itemEndI = itemsCnt <= 0 ? 1 : itemsCnt
   const itemLastI = itemEndI - 1
   const itemFirstP = itemFirstI * 100
@@ -65,9 +64,9 @@ export const getIndexesProps = ({
 
 
 export type MergeProgressProps = {
-  startViewI: number
+  viewFirstI: number
   viewsCnt: number
-  startItemI: number
+  //itemFirstI: number
   itemsCnt: number
   startP: number
   startItemP: number

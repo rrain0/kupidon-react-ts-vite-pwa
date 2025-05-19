@@ -1,35 +1,19 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import Txt = EmotionCommon.Txt
+import EmptyAva from 'src/ui/1-widgets/avatars/Ava/EmptyAva.tsx'
 import HeartsDoubleIc = SvgIconsPack.HeartsDoubleIc
 import Pu = TypeU.Pu
 
 
 
-
-// TODO Theme
-const pastelRainbow = [
-  '#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff',
-  '#d6e6ff', '#d7f9f8', '#ffffea', '#fff0d4', '#fbe0e0', '#e5d4ef',
-]
-
-
-
-const idToColor = (id: string) => {
-  const hash = [...id].reduce((acc, cur) => acc + cur.charCodeAt(0), 0)
-  const len = pastelRainbow.length
-  return pastelRainbow[hash % len]
-}
 
 
 
@@ -53,8 +37,6 @@ const Ava = React.memo((props: AvaProps) => {
     ...restProps
   } = props
   
-  const emptyAvaColor = useMemo(() => idToColor(id), [id])
-  
   return (
     <AvaContainer alignedStretch noShrink center
       data-display-name='Ava'
@@ -62,7 +44,7 @@ const Ava = React.memo((props: AvaProps) => {
     >
       <AvaBox full shadow={shadow}>
         {ava && <ImgSpark css={ImgSparkS6.t(ImgSparkS6.S.img.img.full.normal)} src={ava}/>}
-        {!ava && <EmptyAva css={{ backgroundColor: emptyAvaColor }} center>🎲</EmptyAva>}
+        {!ava && <EmptyAva id={id}/>}
       </AvaBox>
       {mutualSympathy && (
         <MutualSympathyMarkBox center shadow={shadow}>
@@ -92,7 +74,6 @@ const AvaBox = styled(Flex)<Pu<{ shadow: boolean }>>(({
   overflow: 'hidden',
   ...shadow && { boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg}` },
 }))
-const EmptyAva = withDefaults({ full: true }, styled(Flex)(Txt.s22))
 
 
 const OnlineMark = styled.div`

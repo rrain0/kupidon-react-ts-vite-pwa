@@ -7,7 +7,7 @@ import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import row = EmotionCommon.row
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import resetTextarea = EmotionCommon.resetTextarea
 import Pu = TypeU.Pu
 import hoverable = EmotionCommon.hoverable
@@ -132,7 +132,7 @@ const textareaStyle = css`
 
 
 const borderStyle = css`
-  ${abs};
+  ${absTlwh};
   pointer-events: none;
   border-radius: inherit;
 `

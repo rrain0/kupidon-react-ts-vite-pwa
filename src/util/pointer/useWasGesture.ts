@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
+import { getViewProps } from 'src/util/view/ViewProps.ts'
 import Callback = TypeU.Callback
 
 
@@ -12,9 +13,19 @@ const onDragStartedListeners = new Set<Callback>()
 const onLongPressedListeners = new Set<Callback>()
 
 // Сбросить состояние при каждом новом pointerDown
-window.addEventListener('pointerdown', () => {
-  wasDraggedGlobal = false
-  wasLongPressedGlobal = false
+window.addEventListener('pointerdown', (ev) => {
+  const { w, h } = getViewProps(window)
+  const { clientX: x, clientY: y } = ev
+  // 5% экрана с каждой стороны сделал недоступными для начала драга
+  // По крайней мере на айос это фиксит жест назад в браузере
+  if (x > 0.05 * w && w - x > 0.05 * w && y > 0.05 * h && h - y > 0.05 * h) {
+    wasDraggedGlobal = false
+    wasLongPressedGlobal = false
+  }
+  else {
+    wasDraggedGlobal = true
+    onDragStartedListeners.forEach(it => it())
+  }
 }, { capture: true })
 
 window.addEventListener('scroll', () => {

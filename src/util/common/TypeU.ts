@@ -5,7 +5,7 @@
 export namespace TypeU {
   
   export type emptyval = null | undefined
-  export type anyval = {} | null | undefined
+  //export type anyval = {} | null | undefined // use 'any' type
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
   export type Sign = -1 | 0 | 1

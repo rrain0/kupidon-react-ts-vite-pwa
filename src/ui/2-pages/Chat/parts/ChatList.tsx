@@ -20,6 +20,7 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import emptyArr = TypeU.emptyArr
 import isundef = TypeU.isundef
+import isdef = TypeU.isdef
 
 
 
@@ -205,46 +206,53 @@ const ChatList = React.memo((props: ChatListProps) => {
   
   
   
-  const loading = isundef(uiItems)
-  const showItems = !!uiItems?.length
+  const loading = !uiItems
+  const noItems = !uiItems?.length
   
   
   return (
     <>
-      
       <ChatListContainer col grow
         data-display-name='ChatList'
         {...restProps}
       >
-        {showItems && uiItems.map((uiItem, i) => {
-          const id = uiItem.item.id
-          const isSel = isSelected(id)
-          return (
-            <Contents key={id} {...onTrackDrag()}>
-              <ChatListItem
-                {...uiItem}
-                
-                first={i === 0}
-                isSelected={isSel}
-                isAnySelected={isAnySelected}
-                toggleSelection={toggleSelection}
-                setLastPointerDownItemId={setLastPointerDownItemId}
-                
-                setUiItems={setUiItems}
-                animatedMxMy={animatedMxMy}
-                animatedOffset={animatedScrollOffset}
-              />
-            </Contents>
+        {(() => {
+          if (loading) return (
+            <Flex alignedStretch grow center>
+              {/* TODO Translation */}
+              <div>Загрузка...</div>
+            </Flex>
           )
-        })}
-        {!showItems && (
-          <Flex alignedStretch grow center>
-            {/* TODO Translation */}
-            {!loading && <NoItems>Нет чатов</NoItems>}
-            {/* TODO Translation */}
-            {loading && <NoItems>Загрузка...</NoItems>}
-          </Flex>
-        )}
+          if (noItems) return (
+            <Flex alignedStretch grow center>
+              {/* TODO Translation */}
+              <div>Нет чатов</div>
+            </Flex>
+          )
+          return (
+            uiItems.map((uiItem, i) => {
+              const id = uiItem.item.id
+              const isSel = isSelected(id)
+              return (
+                <Contents key={id} {...onTrackDrag()}>
+                  <ChatListItem
+                    {...uiItem}
+                    
+                    first={i === 0}
+                    isSelected={isSel}
+                    isAnySelected={isAnySelected}
+                    toggleSelection={toggleSelection}
+                    setLastPointerDownItemId={setLastPointerDownItemId}
+                    
+                    setUiItems={setUiItems}
+                    animatedMxMy={animatedMxMy}
+                    animatedOffset={animatedScrollOffset}
+                  />
+                </Contents>
+              )
+            })
+          )
+        })()}
       </ChatListContainer>
       
       <ModalContextMenu isOpen={isAnySelected}>
@@ -269,8 +277,6 @@ const ChatListContainer = styled(Flex)(({ theme: t }) => [
     boxShadow: `${StyleVals.shadowLightSz} ${t.shadow.bg2}`,
   },
 ])
-
-const NoItems = styled(Flex)()
 
 
 

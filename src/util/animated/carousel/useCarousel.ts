@@ -91,8 +91,8 @@ export type TrackProps = { x: number, y: number, w: number, h: number }
 export type UseCarouselProps = {
   itemsCnt: number
   viewsCnt: number
-  startItemI?: number | undefined
-  startViewI?: number | undefined
+  //itemFirstI?: number | undefined
+  viewFirstI?: number | undefined
   getTrackProps: Getter<TrackProps>
   axis: 'x' | 'y'
   inverted: boolean
@@ -115,8 +115,8 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   const {
     itemsCnt,
     viewsCnt,
-    startItemI = 0,
-    startViewI = 0,
+    //itemFirstI = 0,
+    viewFirstI = 0,
     getTrackProps, // supports not stable
     axis,
     inverted,
@@ -220,7 +220,7 @@ export const useCarousel = (props: UseCarouselProps, deps: any[] = []) => {
   
   const applyOnFinish = (fromDrag = false) => {
     const merged = mergeProgress({
-      startViewI, viewsCnt, startItemI, itemsCnt,
+      viewFirstI, viewsCnt, itemsCnt,
       startP: getStartProgress(),
       startItemP: getStartItemProgress(),
       deltaP: getDeltaProgress(),

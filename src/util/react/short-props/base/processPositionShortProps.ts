@@ -14,6 +14,7 @@ export type PositionShortProps = Pu<{
   l: number | string
   absTrbl: boolean // true => { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }
   absTlwh: boolean // true => { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }
+  relative: boolean // true => { position: 'relative' }
 }>
 
 
@@ -23,7 +24,7 @@ export const processPositionShortProps = <P extends object>(
 ) => {
   const {
     pos, t, r, b, l,
-    absTrbl, absTlwh,
+    absTrbl, absTlwh, relative,
     ...positionRest
   } = props
   
@@ -32,6 +33,7 @@ export const processPositionShortProps = <P extends object>(
   const position = {
     ...absTrbl && { position: 'absolute', top: 0, right: 0, bottom: 0,  left: 0 },
     ...absTlwh && { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' },
+    ...relative && { position: 'relative' },
     
     ...isdef(pos) && {
       position: (() => {

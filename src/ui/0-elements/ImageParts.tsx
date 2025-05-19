@@ -5,7 +5,7 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import flexC = EmotionCommon.flexC
 
 
@@ -13,7 +13,7 @@ import flexC = EmotionCommon.flexC
 export namespace ImageParts {
   
   export const placeholderBoxS = (t: AppTheme.Theme) => css`
-    ${abs};
+    ${absTlwh};
     //pointer-events: none;
     border-radius: inherit;
     overflow: hidden;

@@ -8,15 +8,17 @@ import isdef = TypeU.isdef
 export type SizeShortProps = Pu<{
   w: number | string | 'full' | 'ct' // 'full' => '100%', 'ct' => 'fit-content'
   h: number | string | 'full' | 'ct' // 'full' => '100%', 'ct' => 'fit-content'
-  // w & h
-  sz: number | string | 'full' | 'ct'
+  sz: number | string | 'full' | 'ct' // w & h
+  wMin: number | string | 'full' // 'full' => '100%'
+  hMin: number | string | 'full' // 'full' => '100%'
+  szMin: number | string | 'full' // 'full' => '100%'
+  wMax: number | string | 'full' // 'full' => '100%'
+  hMax: number | string | 'full' // 'full' => '100%'
+  szMax: number | string | 'full' // 'full' => '100%'
+  
   fullW: boolean // true => { width: '100%' }
   fullH: boolean // true => { height: '100%' }
   full: boolean // true => { width: '100%', height: '100%' }
-  wMin: number | string | 'full' // 'full' => '100%'
-  hMin: number | string | 'full' // 'full' => '100%'
-  wMax: number | string | 'full' // 'full' => '100%'
-  hMax: number | string | 'full' // 'full' => '100%'
   
   ratio: number | string
   rad: number | string
@@ -43,7 +45,7 @@ export const processSizeShortProps = <P extends object>(
   props: P & SizeShortProps
 ) => {
   const {
-    w, h, sz, fullW, fullH, full, wMin, hMin, wMax, hMax,
+    w, h, sz, wMin, hMin, szMin, wMax, hMax, szMax, fullW, fullH, full,
     ratio, rad,
     m, mv, mh, mt, mr, mb, ml,
     p, pv, ph, pt, pr, pb, pl,
@@ -56,7 +58,10 @@ export const processSizeShortProps = <P extends object>(
   
   const size = {
     ...full && { width: '100%', height: '100%' },
-    ...sz && { width: processAnySz(sz), height: processAnySz(sz) },
+    ...isdef(sz) && { width: processAnySz(sz), height: processAnySz(sz) },
+    ...isdef(szMin) && { minWidth: processAnySz(szMin), minHeight: processAnySz(szMin) },
+    ...isdef(szMax) && { maxWidth: processAnySz(szMax), maxHeight: processAnySz(szMax) },
+    
     ...fullW && { width: '100%' },
     ...fullH && { height: '100%' },
     

@@ -5,20 +5,16 @@ import { css, keyframes, SerializedStyles } from '@emotion/react'
 
 export namespace EmotionCommon {
   
-  export const contents = css`
-    display: contents;
-  `
+  export const contents = css({ display: 'contents' })
   
-  export const full = css`
-    width: 100%; height: 100%;
-  `
+  export const full = css({ width: '100%', height: '100%' })
   export const fullMinMax = css`
     min-width: 100%; min-height: 100%;
     width: 100%; height: 100%;
     max-width: 100%; max-height: 100%;
   `
   
-  export const abs = css`
+  export const absTlwh = css`
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;

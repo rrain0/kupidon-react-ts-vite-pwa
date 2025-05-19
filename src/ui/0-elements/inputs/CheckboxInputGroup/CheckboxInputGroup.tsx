@@ -8,7 +8,7 @@ import {
   CheckboxInputGroupStyle,
 } from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroupStyle.ts'
 import reset = EmotionCommon.reset
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 
@@ -79,7 +79,7 @@ const radioGroupStyle = css`
 
 
 const borderStyle = css`
-  ${abs};
+  ${absTlwh};
   pointer-events: none;
   border-radius: inherit;
 `

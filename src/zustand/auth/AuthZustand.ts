@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { CurrentUser } from 'src/api/model/CurrentUser.ts'
+import { CurrentUser } from 'src/api/model/User.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject

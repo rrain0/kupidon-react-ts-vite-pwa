@@ -13,6 +13,7 @@ export namespace RouteBuilder {
   
   // null | undefined | '' for the first path means root
   import isdef = TypeU.isdef
+  import isstring = TypeU.isstring
   export const pathConcat = (...paths: Array<string | emptyval>): string => {
     let result = paths[0] ?? ''
     for (let i = 1; i < paths.length; i++) {
@@ -105,6 +106,11 @@ export namespace RouteBuilder {
       ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
       : never
   )
+  export type AllowedNameParamsRoutes<R extends RouteSegment> = (
+    R[typeof params] extends object
+      ? { [Path in ObjectKeysType<R[typeof params]>]?: RouteSegment | string | emptyval }
+      : never
+  )
   
   // TODO Route - support string array params
   export function getFullParams<R extends RouteSegment>(
@@ -132,7 +138,7 @@ export namespace RouteBuilder {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamNames.includes(n)) {
               if (v === null) delete newParams[this[params]![n]]
-              else if (isdef(v)) newParams[this[params]![n]] = v
+              else if (isstring(v)) newParams[this[params]![n]] = v
             }
           })
         }
@@ -140,7 +146,7 @@ export namespace RouteBuilder {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamPaths.includes(n)) {
               if (v === null) delete newParams[n]
-              else if (isdef(v)) newParams[n] = v
+              else if (isstring(v)) newParams[n] = v
             }
           })
         }
@@ -152,7 +158,7 @@ export namespace RouteBuilder {
         else if (type === 'anyPathParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (v === null) delete newParams[n]
-            else if (isdef(v)) newParams[n] = v
+            else if (isstring(v)) newParams[n] = v
           })
         }
       }

@@ -22,9 +22,9 @@ import noRepeatLog = ReactU.noRepeatLog
 
 
 
-export const getItemIProps = (itemI: number, startItemI = 0) => {
+export const getItemIProps = (itemI: number/* , itemFirstI = 0 */) => {
   return {
-    pos0P: (startItemI + itemI) * 100,
+    pos0P: (/* itemFirstI + */ itemI) * 100,
   }
 }
 
@@ -37,11 +37,8 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
     startP,
     startItemP,
     deltaP,
-    itemsCnt,
-    viewsCnt,
-    startViewI,
     currViewI: viewI = 0,
-    startItemI = 0,
+    ...indexProps
   } = props
   
   const {
@@ -49,7 +46,7 @@ export const getLoopedCarouselProps = (props: GetCarouselProps) => {
     loopViewI, loopViewP, clampViewP,
     itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
     loopItemI, loopItemP, clampItemP,
-  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
+  } = getIndexesProps(indexProps)
   
   viewI += viewFirstI
   
@@ -104,11 +101,8 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
     startP,
     startItemP,
     deltaP,
-    itemsCnt,
-    viewsCnt,
-    startViewI,
     currViewI: viewI = 0,
-    startItemI = 0,
+    ...indexProps
   } = props
   
   const {
@@ -116,7 +110,7 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
     loopViewI, loopViewP, clampViewP,
     itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
     loopItemI, loopItemP, clampItemP,
-  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
+  } = getIndexesProps(indexProps)
   
   viewI += viewFirstI
   
@@ -176,9 +170,9 @@ export const getClampedCarouselProps = (props: GetCarouselProps) => {
 
 export const defaultCarouselMergeProgress: MergeProgressCallback = (props) => {
   const {
-    startViewI, viewsCnt, startItemI, itemsCnt,
     startP, startItemP, deltaP,
     noLoop,
+    ...indexProps
   } = props
   
   const {
@@ -186,7 +180,7 @@ export const defaultCarouselMergeProgress: MergeProgressCallback = (props) => {
     loopViewI, loopViewP, clampViewP,
     itemFirstI, itemEndI, itemLastI, itemFirstP, itemEndP, itemLastP,
     loopItemI, loopItemP, clampItemP,
-  } = getIndexesProps({ startViewI, viewsCnt, startItemI, itemsCnt })
+  } = getIndexesProps(indexProps)
   
   let p = rf3(startP + deltaP)
   p = noLoop ? clampViewP(p) : loopViewP(p)

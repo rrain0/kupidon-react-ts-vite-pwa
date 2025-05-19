@@ -13,7 +13,7 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import flexC = WidgetStyleCommon.flexC
-import abs = WidgetStyleCommon.abs
+import absTrbl = WidgetStyleCommon.absTrbl
 import col = WidgetStyleCommon.col
 import Txt = WidgetStyleCommon.Txt
 import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
@@ -115,7 +115,7 @@ export namespace SelectItemS6 {
         
         
         button: {
-          ...abs, p: [20, 26], ...flexC, g: 10, r: 'inherit',
+          ...absTrbl, p: [20, 26], ...flexC, g: 10, r: 'inherit',
           ...Txt.s16LhNorm,
         },
         
@@ -127,7 +127,7 @@ export namespace SelectItemS6 {
         },
         
         meterBox: {
-          ...abs, ...col, p: [6, 16], pointer: false,
+          ...absTrbl, ...col, p: [6, 16], pointer: false,
         },
         
         edit: {
@@ -136,7 +136,7 @@ export namespace SelectItemS6 {
             overflow: 'hidden',
           },
           button: {
-            ...abs, p: 11, ...flexC,
+            ...absTrbl, p: 11, ...flexC,
             overflow: 'hidden',
           },
         },

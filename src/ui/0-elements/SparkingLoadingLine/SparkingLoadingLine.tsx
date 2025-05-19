@@ -1,7 +1,7 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import abs = EmotionCommon.abs
+import absTlwh = EmotionCommon.absTlwh
 
 
 
@@ -14,7 +14,7 @@ const slide = keyframes`
 
 
 const SparkingLoadingLine = styled.div`
-  ${abs};
+  ${absTlwh};
   
   @property --progress {
     syntax: '<length-percentage>';

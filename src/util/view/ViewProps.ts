@@ -1,6 +1,5 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { ViewU } from 'src/util/view/ViewU'
-import anyval = TypeU.anyval
 import RecordRo = TypeU.RecordRo
 import Pu = TypeU.Pu
 import WH = ViewU.WH
@@ -84,7 +83,7 @@ import isdef = TypeU.isdef
 
 
 
-function isWindow<T extends anyval>(view: T): view is T & Window {
+function isWindow<T>(view: T): view is T & Window {
   return view instanceof Window
 }
 
