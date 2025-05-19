@@ -170,7 +170,7 @@ const SignupPage = React.memo(() => {
   
   useEffect(() => {
     if (isSuccess) {
-      navigate(returnPath ?? RootRoute.findCouple[full]())
+      navigate(returnPath ?? RootRoute.findPair[full]())
     }
   }, [isSuccess, navigate, returnPath])
   

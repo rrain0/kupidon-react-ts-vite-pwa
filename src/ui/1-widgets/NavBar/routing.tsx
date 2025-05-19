@@ -36,13 +36,13 @@ const BottomNavBarRouting = React.memo(() => {
           ))
       }
       {
-        [RootRoute.findCouple[full]()]
+        [RootRoute.findPair[full]()]
           .map(path => path+'/*')
           .map(path => (
             <Route
               key={path}
               path={path}
-              element={<NavBar place="findCouple"/>}
+              element={<NavBar place="findPair"/>}
             />
           ))
       }

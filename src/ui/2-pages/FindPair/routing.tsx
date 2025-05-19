@@ -8,7 +8,7 @@ import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { Navigate, RouteObject, useSearchParams } from 'react-router'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
-import { FindCouplePageItem } from 'src/ui/2-pages/FindCouple/FindCouplePage.tsx'
+import { FindPairPageItem } from 'src/ui/2-pages/FindPair/FindPairPage.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
@@ -16,8 +16,8 @@ import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import wait = AsyncU.wait
 
-const FindCouplePage = React.lazy(
-  () => import('src/ui/2-pages/FindCouple/FindCouplePage.tsx')
+const FindPairPage = React.lazy(
+  () => import('src/ui/2-pages/FindPair/FindPairPage.tsx')
 )
 
 
@@ -84,9 +84,9 @@ const data = [
    aboutMe: 'Тестовое описание 3',
    }, */
 ]
-const FindCouplePageWithItems = React.memo(() => {
+const FindPairPageWithItems = React.memo(() => {
   
-  const [items, setItems] = useState(undefined as FindCouplePageItem[] | undefined)
+  const [items, setItems] = useState(undefined as FindPairPageItem[] | undefined)
   
   
   //wait(500, () => setItems(data))
@@ -127,12 +127,12 @@ const FindCouplePageWithItems = React.memo(() => {
   
   if (!items) return <div>Loading...</div>
   
-  return <FindCouplePage items={items}/>
+  return <FindPairPage items={items}/>
 })
 
 
 
-const RouteFindCouple = React.memo(() => {
+const RouteFindPair = React.memo(() => {
   
   const [searchParams] = useSearchParams()
   const isAuth = useAuthZustand(s => s.getIsAuth())
@@ -140,7 +140,7 @@ const RouteFindCouple = React.memo(() => {
   if (!isAuth) return (
     <Navigate
       to={RootRoute.login[fullAllowedNameParams]({
-        returnPath: RootRoute.findCouple[fullAnySearchParams](searchParams),
+        returnPath: RootRoute.findPair[fullAnySearchParams](searchParams),
       })}
       replace={true}
     />
@@ -148,18 +148,18 @@ const RouteFindCouple = React.memo(() => {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <FindCouplePageWithItems/>
+      <FindPairPageWithItems/>
     </Suspense>
   )
 })
 
 
 
-// path: 'findCouple / ...'
-export const findCoupleRouting: RouteObject[] = [
+// path: 'findPair / ...'
+export const findPairRouting: RouteObject[] = [
   {
     path: '',
-    Component: RouteFindCouple,
+    Component: RouteFindPair,
   },
   clearUnknownPathEnding,
 ]

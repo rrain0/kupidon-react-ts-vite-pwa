@@ -13,7 +13,7 @@ import { routingDateArticle } from 'src/ui/2-pages/DateArticle/routing.tsx'
 import { routingDateArticles } from 'src/ui/2-pages/DateArticles/routing.tsx'
 import { routingDatePlace } from 'src/ui/2-pages/DatePlace/routing.tsx'
 import { routingDatePlaces } from 'src/ui/2-pages/DatePlaces/routing.tsx'
-import { findCoupleRouting } from 'src/ui/2-pages/FindCouple/routing'
+import { findPairRouting } from 'src/ui/2-pages/FindPair/routing'
 import { routingLikedMe } from 'src/ui/2-pages/LikedMe/routing.tsx'
 import { loginRouting } from 'src/ui/2-pages/Login/routing'
 import React from 'react'
@@ -56,7 +56,7 @@ const RouteAnyAny = React.memo(() => {
   const [searchParams] = useSearchParams()
   return (
     <Navigate
-      to={RootRoute.findCouple[fullAnySearchParams](searchParams)}
+      to={RootRoute.findPair[fullAnySearchParams](searchParams)}
       replace={true}
     />
   )
@@ -88,8 +88,8 @@ const routingRoot: RouteObject[] = [
         children: routingProfile,
       },
       {
-        path: RootRoute.findCouple[path]+'/*',
-        children: findCoupleRouting,
+        path: RootRoute.findPair[path]+'/*',
+        children: findPairRouting,
       },
       {
         path: RootRoute.bowAndArrows[path]+'/*',

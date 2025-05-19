@@ -66,7 +66,7 @@ const ChatList = React.memo((props: ChatListProps) => {
   
   
   const [items, setItems] = useState<ChatListItemWidgetData[]>(newItems)
-  const [uiItems, setUiItems] = useState<UiItemData[]>([])
+  const [uiItems, setUiItems] = useState<UiItemData[] | undefined>(undefined)
   
   useEffect(() => {
     const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
@@ -128,8 +128,6 @@ const ChatList = React.memo((props: ChatListProps) => {
     setItems(newItems)
     setUiItems(uiItems)
   }, [newItems])
-  
-  const showItems = !!uiItems.length
   
   useNoTouchAction(isAnySelected)
   
@@ -207,6 +205,9 @@ const ChatList = React.memo((props: ChatListProps) => {
   
   
   
+  const loading = isundef(uiItems)
+  const showItems = !!uiItems?.length
+  
   
   return (
     <>
@@ -215,13 +216,12 @@ const ChatList = React.memo((props: ChatListProps) => {
         data-display-name='ChatList'
         {...restProps}
       >
-        <Contents {...onTrackDrag()}>
-          {showItems && uiItems.map((uiItem, i) => {
-            const id = uiItem.item.id
-            const isSel = isSelected(id)
-            return (
+        {showItems && uiItems.map((uiItem, i) => {
+          const id = uiItem.item.id
+          const isSel = isSelected(id)
+          return (
+            <Contents key={id} {...onTrackDrag()}>
               <ChatListItem
-                key={id}
                 {...uiItem}
                 
                 first={i === 0}
@@ -234,15 +234,17 @@ const ChatList = React.memo((props: ChatListProps) => {
                 animatedMxMy={animatedMxMy}
                 animatedOffset={animatedScrollOffset}
               />
-            )
-          })}
-          {!showItems && (
-            <Flex alignedStretch grow center>
-              {/* TODO Translation */}
-              <NoItems>Нет чатов</NoItems>
-            </Flex>
-          )}
-        </Contents>
+            </Contents>
+          )
+        })}
+        {!showItems && (
+          <Flex alignedStretch grow center>
+            {/* TODO Translation */}
+            {!loading && <NoItems>Нет чатов</NoItems>}
+            {/* TODO Translation */}
+            {loading && <NoItems>Загрузка...</NoItems>}
+          </Flex>
+        )}
       </ChatListContainer>
       
       <ModalContextMenu isOpen={isAnySelected}>

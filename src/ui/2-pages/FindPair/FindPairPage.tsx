@@ -36,19 +36,19 @@ const startViewI = -1
 const actionSpring = { mass: 2, tension: 70, friction: 10 }
 
 
-export type FindCouplePageItem = {
+export type FindPairPageItem = {
   photos: MediaInArrayDUC[]
   name: string
   birthDate: string
   gender: 'MALE' | 'FEMALE'
   aboutMe: string
 }
-export type FindCouplePageProps = Pu<{
-  items: FindCouplePageItem[]
+export type FindPairPageProps = Pu<{
+  items: FindPairPageItem[]
 }>
 
 
-const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
+const FindPairPage = React.memo(({ items = [] }: FindPairPageProps) => {
   const itemsCnt = items.length
   const startItemI = 0
   
@@ -296,7 +296,7 @@ const FindCouplePage = React.memo(({ items = [] }: FindCouplePageProps) => {
     </PageLayout>
   )
 })
-export default FindCouplePage
+export default FindPairPage
 
 
 

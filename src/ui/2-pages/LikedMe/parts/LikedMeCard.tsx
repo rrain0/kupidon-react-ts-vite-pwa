@@ -89,9 +89,9 @@ const NameAge = styled(Flex)(({ theme: t }) => [Txt.s17Bold, {
 const fade = css({
   // TODO Theme
   background: `linear-gradient(to bottom,
-    rgba(32, 30, 30, 0) 50.23%,
-    rgba(32, 30, 30, 0.4) 68.24%,
-    rgba(32, 30, 30, 0.4) 85.15%,
-    rgba(32, 30, 30, 0.8) 99.82%
+    rgba(32, 30, 30, 0) 50%,
+    rgba(32, 30, 30, 0.4) 68%,
+    rgba(32, 30, 30, 0.4) 85%,
+    rgba(32, 30, 30, 0.8) 100%
   )`,
 })

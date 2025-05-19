@@ -15,20 +15,20 @@ export const Grid = React.memo((props: GridProps) => {
   const { children, ...restProps } = gridViewRest
   
   return (
-    <GridDiv
+    <GridBox
       data-display-name='Grid'
       css={css}
       {...restProps}
     >
       {children}
-    </GridDiv>
+    </GridBox>
   )
 })
 Grid.displayName = 'Grid'
 export default Grid
 
 
-const GridDiv = styled.div({ display: 'grid' })
+const GridBox = styled.div({ display: 'grid' })
 
 
 

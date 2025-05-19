@@ -15,20 +15,20 @@ export const Flex = React.memo((props: FlexProps) => {
   const { children, ...restProps } = flexViewRest
   
   return (
-    <FlexDiv
+    <FlexBox
       data-display-name='Flex'
       css={css}
       {...restProps}
     >
       {children}
-    </FlexDiv>
+    </FlexBox>
   )
 })
 Flex.displayName = 'Flex'
 export default Flex
 
 
-const FlexDiv = styled.div({ display: 'flex' })
+const FlexBox = styled.div({ display: 'flex' })
 
 
 

@@ -2,6 +2,7 @@ import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { withDefaults } from '@util/react/withDefaults.tsx'
@@ -45,7 +46,7 @@ export type ChatListItemProps = UiItemData & Pu<{
   toggleSelection: Callback1<string>
   setLastPointerDownItemId: (id: string) => void
   
-  setUiItems: SetterOrUpdater<UiItemData[]>
+  setUiItems: SetterOrUpdater<UiItemData[] | undefined>
   animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
   animatedOffset: AnimatedProperty<number>
 }>
@@ -67,10 +68,10 @@ const ChatListItem = React.memo(({
   })
   const onPointerDown = useAsCallback(() => setLastPointerDownItemId?.(id))
   
-  const [getGapSlot, setGapSlot] = useElemRefGetSet()
+  const [getGapSlotElem, setGapSlotElem] = useElemRefGetSet()
   
   useEffect(() => {
-    const el = getGapSlot()
+    const el = getGapSlotElem()
     let stale = false
     if (el) {
       if (s === 'adding') {
@@ -85,7 +86,7 @@ const ChatListItem = React.memo(({
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (stale || ev.propertyName !== 'height') return
           el.ontransitionend = null
-          setUiItems?.(items => items.map(it => {
+          setUiItems?.(items => items?.map(it => {
             if (it.item.id === id && it.state === 'adding') return { ...it, state: 'showing' }
             return it
           }))
@@ -103,7 +104,7 @@ const ChatListItem = React.memo(({
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (stale || ev.propertyName !== 'height') return
           el.ontransitionend = null
-          setUiItems?.(items => items.filter(it => {
+          setUiItems?.(items => items?.filter(it => {
             if (it.item.id === id && it.state === 'removing') return false
             return true
           }))
@@ -117,7 +118,7 @@ const ChatListItem = React.memo(({
   
   return (
     <ListSlot alignedStretch h={hItem} mt={g}
-      ref={setGapSlot}
+      ref={setGapSlotElem}
       style={{
         ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
         ...first && { marginTop: 0 },

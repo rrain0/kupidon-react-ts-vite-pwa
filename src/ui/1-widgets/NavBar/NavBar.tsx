@@ -34,7 +34,7 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
-export type NavBarPlace = 'profile' | 'chat' | 'findCouple' | 'bowAndArrows' | 'settings'
+export type NavBarPlace = 'profile' | 'chat' | 'findPair' | 'bowAndArrows' | 'settings'
 
 export type NavBarProps = Pu<{
   place: NavBarPlace
@@ -75,8 +75,8 @@ const NavBar = React.memo((props: NavBarProps) => {
           </Button>
         </NavLink>
         
-        <NavLink to={RootRoute.findCouple[fullAnySearchParams](search)}>
-          <Button css={nav} data-selected={toEmptyAttr(place === 'findCouple')}>
+        <NavLink to={RootRoute.findPair[fullAnySearchParams](search)}>
+          <Button css={nav} data-selected={toEmptyAttr(place === 'findPair')}>
             <CardsHeartGradIc/>
             <div>{titleText.hearts}</div>
           </Button>
