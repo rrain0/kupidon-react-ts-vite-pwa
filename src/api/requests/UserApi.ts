@@ -14,7 +14,7 @@ import TechnicalError = ApiUtils.TechnicalError
 import handleAuthenticatedResponse = ApiUtils.handleAuthenticatedResponse
 import AuthenticationError = ApiUtils.AuthenticationError
 import NoUserResponseError = ApiUtils.NoUserResponseError
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import fetchToBlob = FileU.fetchToBlob
 import Callback1 = TypeU.Callback1
 import isdef = TypeU.isdef
@@ -74,7 +74,7 @@ export namespace UserApi {
       code: 'INVALID_PWD'
       msg: string
     }
-  export type UserToUpdate = PartialUndef<{
+  export type UserToUpdate = Pu<{
     name: string
     birthDate: string // '2005-11-10T00:00:00.000+08:00'
     gender: Gender
@@ -86,11 +86,11 @@ export namespace UserApi {
       replace: Array<{ id: string, index: number }>
     }
   }>
-  export const update = async (user: UserToUpdate) => {
-    return handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
+  export const update = async (user: UserToUpdate) => (
+    handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
       axAccess.put(ApiRoutes.userUpdate, user)
     )
-  }
+  )
   
   
   

@@ -12,7 +12,7 @@ export const DarkOrange = { ...DarkPink,
   icon: (
     <div
       css={themeIconCss({
-        accentColor: '#dd8f2f',
+        colorAccent: '#dd8f2f',
         bgColor1:    '#dd8f2f',
         bgColor2:    '#282c34',
       })}

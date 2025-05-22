@@ -47,7 +47,7 @@ export namespace WidgetStyle6NewTest {
   import camelCaseToWords = StringU.camelCaseToWords
   const elemFrame = WidgetElem.of({
     className: 'rruiFrame',
-    props: { accentColor: WidgetProp.ofName('--color-accent') },
+    props: { colorAccent: WidgetProp.ofName('--color-accent') },
   })
   const elemInput = WidgetElem.of({
     upElem: elemFrame, upSelector: '>', className: 'rruiInput',

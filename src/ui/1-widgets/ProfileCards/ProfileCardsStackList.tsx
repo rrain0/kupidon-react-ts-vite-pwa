@@ -15,9 +15,9 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
 import MediaArrayDownloader from 'src/ui-data/models/media/download/MediaArrayDownloader.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import ProfileShowcase, {
-  ProfileShowcaseAction,
-} from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
+import ProfileCards, {
+  ProfileCardsAction,
+} from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
 import rf3 = MathU.rf3
 import Pu = TypeU.Pu
@@ -56,7 +56,7 @@ const ProfileCardsStackList = React.memo(({
   const [isMoving, setIsMoving] = useState(false)
   const {
     get: getStackAction, set: setStackAction, state: stackAction,
-  } = useStateAndRef<ProfileShowcaseAction>(undefined)
+  } = useStateAndRef<ProfileCardsAction>(undefined)
   
   
   
@@ -282,7 +282,7 @@ const ProfileCardsStackList = React.memo(({
                     return (
                       <MediaArrayDownloader medias={photos}>
                         {(photos) => (
-                          <ProfileShowcase
+                          <ProfileCards
                             photos={photos}
                             name={item.name}
                             birthDate={item.birthDate}

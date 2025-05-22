@@ -12,7 +12,7 @@ export const DarkWine = { ...Dark,
   icon: (
     <div
       css={themeIconCss({
-        accentColor: '#a71538',
+        colorAccent: '#a71538',
         bgColor1:    '#a71538',
         bgColor2:    '#282c34',
       })}

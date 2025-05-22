@@ -11,7 +11,7 @@ import Modal from 'src/ui/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import Children = ReactU.Children
-import modalBottomCardBoxS = ModalElements.modalBottomCardBoxS
+import modalContextMenuCardBoxS = ModalElements.modalContextMenuCardBoxS
 
 
 
@@ -42,7 +42,7 @@ const ModalContextMenu = React.memo((props: ModalContextMenuProps) => {
       <MountController isOpen={isOpen}>
         {mountProps => (
           <Modal onlyFrame>
-            <PageContentLayout modalSm cssInner={modalBottomCardBoxS}>
+            <PageContentLayout modalSm cssInner={modalContextMenuCardBoxS}>
               <ContextMenu {...mountProps}>
                 {children}
               </ContextMenu>
@@ -121,7 +121,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
   }, [state])
   
   return (
-    <Card
+    <Card ph={8}
       css={[ModalElements.cardBoxInModalS, cardS]}
       data-display-name='ContextMenu'
       ref={setElem}

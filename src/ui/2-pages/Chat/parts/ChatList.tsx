@@ -9,9 +9,14 @@ import { useArray } from '@util/react-state/useArray.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
+import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
 import ChatListItem from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
@@ -20,7 +25,14 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import emptyArr = TypeU.emptyArr
 import isundef = TypeU.isundef
-import isdef = TypeU.isdef
+import PinIc = SvgIconsPack.PinIc
+import Pin2Ic = SvgIconsPack.Pin2Ic
+import Unpin2Ic = SvgIconsPack.Unpin2Ic
+import SoundOnIc = SvgIconsPack.SoundOnIc
+import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
+import RestrictIc = SvgIconsPack.RestrictIc
+import ArchiveBoxOutlinedIc = SvgIconsPack.ArchiveBoxOutlinedIc
+import BlacklistIc = SvgIconsPack.BlacklistIc
 
 
 
@@ -256,7 +268,59 @@ const ChatList = React.memo((props: ChatListProps) => {
       </ChatListContainer>
       
       <ModalContextMenu isOpen={isAnySelected}>
-        Здесь будут опции контекстного меню
+        <Grid cols='1fr auto 1fr' align g={16} css={{ textAlign: 'center' }}>
+          
+          <Flex row center g={4}>
+            <Flex center noShrink>
+              <Pin2Ic css={SvgIconS6.t(pinIcS)}/>
+            </Flex>
+            <div>Закрепить</div>
+          </Flex>
+          <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
+          <Flex row center g={4}>
+            <Flex center noShrink>
+              <Unpin2Ic css={SvgIconS6.t(pinIcS)}/>
+            </Flex>
+            <div>Открепить</div>
+          </Flex>
+          
+          <Flex row center g={4} css={{ gridColumn: '1 / 4' }}>
+            <Flex center noShrink>
+              <SoundOnIc css={SvgIconS6.t(soundOnIcS)}/>
+            </Flex>
+            <div>Вкл. звук</div>
+          </Flex>
+          
+          <Flex row center g={4}>
+            <Flex center noShrink>
+              <ArchiveBoxOutlinedIc css={SvgIconS6.t(archiveIcS)}/>
+            </Flex>
+            <div>В архив</div>
+          </Flex>
+          <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
+          <Flex row center g={4}>
+            <Flex center noShrink>
+              <BlacklistIc css={SvgIconS6.t(blacklistIcS)}/>
+            </Flex>
+            <div>В чёрный список</div>
+          </Flex>
+          
+          <Flex row center g={4}>
+            <Flex center noShrink>
+              <CrossInCircleIc css={SvgIconS6.t(removeIcS)}/>
+            </Flex>
+            <div>Удалить</div>
+          </Flex>
+          <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
+          <Flex row center g={4}>
+            <Flex center noShrink>
+              <RestrictIc css={SvgIconS6.t(deleteIcS)}/>
+            </Flex>
+            <div>Очистить</div>
+          </Flex>
+          
+          
+        </Grid>
       </ModalContextMenu>
       
     </>
@@ -281,6 +345,33 @@ const ChatListContainer = styled(Flex)(({ theme: t }) => [
 
 
 
+const pinIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { sz: 26, color: '#80558c' },
+}]
+
+const soundOnIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { sz: 26, color: '#c69477' },
+}]
+
+const archiveIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { sz: 26, color: '#263238' },
+}]
+const blacklistIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { sz: 26, color: '#263238', colorAcc: '#e53935' },
+}]
+
+const removeIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { sz: 30, color: '#e74c3c' },
+}]
+const deleteIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { sz: 26, color: '#e74c3c' },
+}]
 
 
 

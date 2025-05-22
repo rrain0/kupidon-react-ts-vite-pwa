@@ -1,0 +1,21 @@
+<svg viewBox="3 1 18 22" fill="#263238" stroke="#263238" xmlns="http://www.w3.org/2000/svg">
+
+  <style>
+    :root {
+      --color-accent: #e53935;
+    }
+  </style>
+  
+<path
+  d="M20,4c0-1.104-0.896-2-2-2H6C4.896,2,4,2.896,4,4v16c0,1.104,0.896,2,2,2h12  c1.104,0,2-0.896,2-2V4z"
+  fill="none" stroke-width="1.5"
+/>
+<path
+  d="M8,6H6V4h2V6z M18,4h-8v2h8V4z M8,8H6v2h2V8z M18,8h-8v2h8V8z"
+  stroke="none"
+/>
+<polygon
+  points="13.42,16 15.71,18.29 14.29,19.71 12,17.42 9.71,19.71 8.29,18.29 10.58,16 8.29,13.71 9.71,12.29   12,14.58 14.29,12.29 15.71,13.71 "
+  fill="var(--color-accent)" stroke="none"
+/>
+</svg>

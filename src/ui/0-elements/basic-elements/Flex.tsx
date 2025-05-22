@@ -7,7 +7,7 @@ import React from 'react'
 
 
 
-export type FlexProps = React.ComponentProps<'div'> & FlexViewShortProps
+export type FlexProps = React.ComponentProps<typeof FlexBox> & FlexViewShortProps
 
 export const Flex = React.memo((props: FlexProps) => {
   
@@ -17,7 +17,7 @@ export const Flex = React.memo((props: FlexProps) => {
   return (
     <FlexBox
       data-display-name='Flex'
-      css={css}
+      css={{ '&&': css }}
       {...restProps}
     >
       {children}

@@ -2,49 +2,61 @@ import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
-import Cross2GradIc = SvgGradIconsPack.Cross2GradIc
+import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import HeartFilledIc = SvgIconsPack.HeartFilledIc
 
 
 
 
 
-export type DislikeButtonProps = Omit<React.ComponentProps<typeof Button>, 'children'>
 
-const DislikeButton = React.memo((props: DislikeButtonProps) => {
+
+export type LikeButtonProps = Omit<React.ComponentProps<typeof Button>, 'children'>
+
+const LikeButton = React.memo((props: LikeButtonProps) => {
+  
   
   return (
-    <Button
-      data-display-name='DislikeButton'
-      css={IconButtonS6.t(dislikeButtonS)}
+    <Button // Frame
+      data-display-name='LikeButton'
+      css={IconButtonS6.t(likeButtonS)}
       {...props}
     >
-      <Cross2GradIc/>
+      <HeartFilledIc/>
     </Button>
   )
 })
-DislikeButton.displayName = 'DislikeButton'
-export default DislikeButton
+LikeButton.displayName = 'LikeButton'
+export default LikeButton
 
 
 
-const icProfileShowcaseNormal: AppWidgetStyle = t => [
+
+const icProfileCardsMain: AppWidgetStyle = t => [
   IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
   IconButtonS6.Parts.Type.filled.baseColor,
   {
-    buttonBgColor: t.previewButtonNorm.bg,
-    buttonColor: t.previewButtonNorm.ct,
-    rippleColor: t.previewButtonNorm.ctRipple,
-    gradIconColor0: t.previewButtonNorm.ctGrad[0],
-    gradIconColor1: t.previewButtonNorm.ctGrad[2],
+    buttonBg: {
+      color: t.previewButtonMain.bg,
+      im: `linear-gradient(
+        to bottom,
+        ${t.previewButtonMain.bgGrad[0]} 25%,
+        ${t.previewButtonMain.bgGrad[1]} 50% 100%
+      )`,
+      pos: '0 0',
+      sz: '100% 200%',
+    },
+    buttonColor: t.previewButtonMain.ct,
+    rippleColor: t.previewButtonMain.ctRipple,
+    iconColor: t.previewButtonMain.ct,
     inFocus: {
-      buttonBgColor: t.previewButtonNorm.bgFc,
-      buttonColor: t.previewButtonNorm.ctFc,
+      buttonTransition: 'background-position 0.3s',
+      buttonBgPos: '0 30%',
     },
   },
   {
     button: {
-      p: 0,
+      sz: 60, p: 0,
       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 15px rgba(0, 0, 0, 0.15)',
     },
     disabled: {
@@ -69,7 +81,7 @@ const icProfileShowcaseNormal: AppWidgetStyle = t => [
 ]
 
 
-const dislikeButtonS: AppWidgetStyle = t => [icProfileShowcaseNormal, {
-  buttonSz: 58,
-  gradIconSz: '35.5%',
+
+const likeButtonS: AppWidgetStyle = t => [icProfileCardsMain, {
+  iconSz: '51.05%',
 }]

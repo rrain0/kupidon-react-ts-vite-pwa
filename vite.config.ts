@@ -27,11 +27,8 @@ const pwaOptions: Partial<VitePWAOptions> = {
   registerType: 'prompt',
   
   devOptions: {
-    // enable PWA in dev mode
-    enabled: true,
-    // The Service Worker type - 'module' - ES module-based service worker (for modern browsers)
-    type: 'module',
-    navigateFallback: 'index.html',
+    enabled: true, // enable PWA in dev mode
+    type: 'module', // Service Worker is module
   },
 
   // Do not inject manifest, only service worker,
@@ -43,6 +40,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
   base: '/',
   
   includeAssets: ['public/**'],
+  pwaAssets: { disabled: true },
 }
 
 
@@ -68,13 +66,15 @@ export default defineConfig(({ command, mode }) => {
     envFileConfig = dotenvExpand.expand({
       parsed: dotenv.parse(fs.readFileSync(envFileName)),
     }).parsed as Record<string, string>
-    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`]
-      = JSON.stringify(envFileConfig.BACKEND_BASE_URL)
+    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`] = (
+      JSON.stringify(envFileConfig.BACKEND_BASE_URL)
+    )
     //envVarsRuntime[`process.env.TEST`] = JSON.stringify(envFileConfig[TEST])
   }
   if (mode === 'production') {
-    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`]
-      = JSON.stringify(process.env.BACKEND_BASE_URL)
+    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`] = (
+      JSON.stringify(process.env.BACKEND_BASE_URL)
+    )
   }
   
   
@@ -87,9 +87,9 @@ export default defineConfig(({ command, mode }) => {
       allowedHosts: true, // allow any host
     },
     
-    // make paths in build relative to index.html (starts with './', not with '/')
+    // make paths relative to index.html (starts with './', not with '/')
     //base: './',
-    // make paths in index.html absolute relative root
+    // make paths absolute, relative root
     base: '/',
     
     esbuild: {

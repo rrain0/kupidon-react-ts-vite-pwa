@@ -194,8 +194,12 @@ export namespace TypeU {
   export const mapNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
   
   
+  // By default false is mapped to undefined
   export function mapBool<V, const TV>(
-    v: V | boolean, trueV: TV
+    v: V | true, trueV: TV
+  ): V | TV
+  export function mapBool<V, const TV>(
+    v: V | true | false, trueV: TV
   ): V | TV | undefined
   export function mapBool<V, const TV, const FV>(
     v: V | boolean, trueV: TV, falseV: FV

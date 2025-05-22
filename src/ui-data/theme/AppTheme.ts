@@ -380,7 +380,7 @@ export namespace AppTheme {
   
   
   export type ThemeIconCssProps = {
-    accentColor: string,
+    colorAccent: string,
     bgColor1:    string,
     bgColor2:    string,
   }
@@ -389,7 +389,7 @@ export namespace AppTheme {
     height: 100%;
     border-radius: 999999px;
     border: 3.5px solid;
-    border-color: ${props.accentColor};
+    border-color: ${props.colorAccent};
     background: linear-gradient(
       to right,
       ${props.bgColor1} 0% 50%,

@@ -6,6 +6,12 @@ import isnumber = TypeU.isnumber
 export namespace MathU {
   
   
+  export const tg80deg = Math.tan(80 / 180 * Math.PI)
+  export const tg60deg = Math.sqrt(3)
+  export const tg45deg = 1
+  export const tg30deg = Math.sqrt(3) / 3
+  
+  
   
   /**
    * Функция округления

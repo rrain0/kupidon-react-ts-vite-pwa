@@ -13,8 +13,8 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/ui/1-widgets/avatars/Ava/EmptyAva.tsx'
-import DislikeButton from 'src/ui/1-widgets/ProfileShowcase/DislikeButton.tsx'
-import LikeButton from 'src/ui/1-widgets/ProfileShowcase/LikeButton.tsx'
+import DislikeButton from 'src/ui/1-widgets/ProfileCards/DislikeButton.tsx'
+import LikeButton from 'src/ui/1-widgets/ProfileCards/LikeButton.tsx'
 import Pu = TypeU.Pu
 import HeartLockIc = SvgIconsPack.HeartLockIc
 import Txt = EmotionCommon.Txt

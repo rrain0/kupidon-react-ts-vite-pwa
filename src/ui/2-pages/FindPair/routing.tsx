@@ -1,7 +1,7 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { ProfileShowcaseApi } from 'src/api/requests/ProfileShowcaseApi.ts'
+import { UsersListApi } from 'src/api/requests/UsersListApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
@@ -9,7 +9,7 @@ import { RouteObject } from 'react-router'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
 import {
   ProfileCardsStackListItem,
-} from 'src/ui/1-widgets/ProfileShowcase/ProfileCardsStackList.tsx'
+} from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
@@ -104,7 +104,7 @@ const FindPairPageWithItems = React.memo(() => {
     values: { },
     failedFields: [],
     prepareAndRequest: useCallback(() => {
-      return ProfileShowcaseApi.listAll()
+      return UsersListApi.all()
     }, []),
   })
   

@@ -34,17 +34,20 @@ export const Colors = {
     norm5: '#e58ea2',
   },
   
-  blue: ['#1888AB'],
-  
-  brown: ['#754010'],
-  
+  orange: ['#FFB422'],
   
   yellow: [
     '#fff200',
     '#d0cb5d',
   ],
   
-  orange: ['#FFB422'],
+  green: ['#3fcc98'],
+  
+  blue: ['#1888AB'],
+  
+  brown: ['#754010'],
+  
+  
   
   
   pack1: {
@@ -57,6 +60,8 @@ export const Colors = {
   savedColor: {
     lightBlue: '#5F9BEB',
   },
+  
+  grayBlue: ['#7d8488', '#263238'],
   
   
 } as const

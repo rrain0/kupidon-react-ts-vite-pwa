@@ -32,8 +32,8 @@ import {
 } from 'src/ui/0-elements/ImageParts.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
-import ProfileShowcaseFullInfo from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcaseFullInfo.tsx'
-import ProfileShowcaseInfoOverlay from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcaseInfoOverlay.tsx'
+import ProfileCardsFullInfo from 'src/ui/1-widgets/ProfileCards/ProfileCardsFullInfo.tsx'
+import ProfileCardsInfoOverlay from 'src/ui/1-widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ArrayU } from 'src/util/common/ArrayU'
 import { RangeU } from 'src/util/common/RangeU'
@@ -55,7 +55,7 @@ import Callback = TypeU.Callback
 
 
 
-export type ProfileShowcaseAction = 'accept' | 'reject' | 'back' | undefined
+export type ProfileCardsAction = 'accept' | 'reject' | 'back' | undefined
 
 
 const displayedPhotosCnt = 3
@@ -68,7 +68,7 @@ export type AnimatedStackProps = AnimatedProperty<{
   scale: number
   opacity: number
   restItemsOpacity: number
-  action: ProfileShowcaseAction
+  action: ProfileCardsAction
   shadowIntensity: number
   fullInfoOpacity: number
   reactionIconOpacity: number
@@ -77,11 +77,11 @@ export type AnimatedStackProps = AnimatedProperty<{
 
 
 
-export type ProfileShowcaseCssProps = {
+export type ProfileCardsCssProps = {
   '--ph': '<length>' // padding horizontal
   '--pv': '<length>' // padding vertical
 }
-export type ProfileShowcaseProps = {
+export type ProfileCardsProps = {
   photos?: MediaInArrayDownloadable[] | undefined
   name: string
   birthDate: string
@@ -89,7 +89,7 @@ export type ProfileShowcaseProps = {
   aboutMe: string
   
   hideButtons?: boolean | undefined
-  action?: ProfileShowcaseAction
+  action?: ProfileCardsAction
   
   animatedStackProps?: undefined | AnimatedStackProps
   
@@ -97,7 +97,7 @@ export type ProfileShowcaseProps = {
   onReject?: Callback | undefined
   onBack?: Callback | undefined
 }
-export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
+export const ProfileCards = React.memo((props: ProfileCardsProps) => {
   const {
     photos,
     name,
@@ -303,7 +303,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
   
   return (
     <ShowcasePhotoFrame
-      data-display-name='ProfileShowcase'
+      data-display-name='ProfileCards'
       ref={onPhotosStackBoxSetWh}
       animatedStyle={{
         zIndex: animatedStackProps?.map(p => p.zIndex),
@@ -371,7 +371,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
             )
           })}
           
-          <ProfileShowcaseInfoOverlay
+          <ProfileCardsInfoOverlay
             actionButtonsDisabled={hideButtons}
             photosCnt={photosCnt}
             openInfo={openInfo}
@@ -390,7 +390,7 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
       
       
       
-      <ProfileShowcaseFullInfo
+      <ProfileCardsFullInfo
         isOpen={isInfoOpen}
         close={closeInfo}
         animatedOpacity={animatedStackProps?.map(p => p.fullInfoOpacity)}
@@ -403,8 +403,8 @@ export const ProfileShowcase = React.memo((props: ProfileShowcaseProps) => {
     </ShowcasePhotoFrame>
   )
 })
-ProfileShowcase.displayName = 'ProfileShowcase'
-export default ProfileShowcase
+ProfileCards.displayName = 'ProfileCards'
+export default ProfileCards
 
 
 

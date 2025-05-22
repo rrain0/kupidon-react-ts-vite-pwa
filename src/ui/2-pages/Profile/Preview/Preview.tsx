@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import ProfileShowcase from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
+import ProfileCards from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import FormValues = ProfilePageValidation.FormValues
@@ -31,7 +31,7 @@ const Preview = React.memo((props: PreviewProps) => {
     <PageContentLayout full>
       <StackFrame>
         <StackFrame2>
-          <ProfileShowcase
+          <ProfileCards
             photos={photos}
             name={name}
             birthDate={birthDate}

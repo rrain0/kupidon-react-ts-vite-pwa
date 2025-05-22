@@ -435,8 +435,13 @@ const ProfilePage = React.memo(() => {
   //console.log(canSubmit , formProps.hasChanges)
   
   
-  const [tabIdx, setTabIdx] = useProfileTab()
+  const [_tabIdx, setTabIdx] = useProfileTab()
   const [isStable, setIsStable] = useState(true)
+  
+  // TODO crutch - реакт роутер слишком медленно обновляет данные, в итоге новый стейт приходит поздно
+  //  и может прийти старый и переключить на предыдущую табу + не обновится ссылка на самую новую
+  //  Это происходит если быстро пролистать 2 таба, а не один.
+  const [tabIdx] = useState(_tabIdx)
   
   
   const itemsCnt = 3

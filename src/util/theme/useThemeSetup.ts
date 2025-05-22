@@ -22,14 +22,14 @@ export const useThemeSetup = () => {
   const theme = useAppZustand(s => s.theme)
   const setApp = useAppZustand.setState
   
-  const systemTheme = function() {
+  const systemTheme = (() => {
     const systemTheme = useThemeDetector()
     const [systemThemeMemo, setSystemThemeMemo] = useState(systemTheme)
     useEffect(() => {
       if (systemTheme) setSystemThemeMemo(systemTheme)
     }, [systemTheme])
     return systemThemeMemo
-  }()
+  })()
   
   const [themeIsReady, setThemeIsReady] = useState(false)
   
@@ -65,15 +65,20 @@ export const useThemeSetup = () => {
   useLayoutEffect(() => {
     const t = theme
     if (t) {
-      const metaThemeColorElements = document.querySelectorAll(
-        'html head meta[name=theme-color]'
-      ) as NodeListOf<HTMLMetaElement>
-      metaThemeColorElements.forEach(meta => meta.content = t.statusBar.bg)
+      const setMetaThemeColor = (color: string) => {
+        (document
+          .querySelectorAll('html head meta[name=theme-color]') as NodeListOf<HTMLMetaElement>)
+          .forEach(meta => meta.content = color)
+      }
+      const setMetaBackgroundColor = (color: string) => {
+        (document
+          .querySelectorAll('html head meta[name=background-color]') as NodeListOf<HTMLMetaElement>)
+          .forEach(meta => meta.content = color)
+      }
       
-      const metaBackgroundColorElements = document.querySelectorAll(
-        'html head meta[name=background-color]'
-      ) as NodeListOf<HTMLMetaElement>
-      metaBackgroundColorElements.forEach(meta => meta.content = t.page.bg)
+      setMetaThemeColor(t.statusBar.bg)
+      setMetaBackgroundColor(t.page.bg)
+      
     }
   }, [theme])
   

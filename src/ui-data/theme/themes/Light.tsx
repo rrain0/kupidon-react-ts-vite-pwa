@@ -11,7 +11,7 @@ export const Light = {
   icon: (
     <div
       css={themeIconCss({
-        accentColor: '#333333',
+        colorAccent: '#333333',
         bgColor1:    '#f5f5f5',
         bgColor2:    '#f5f5f5',
       })}

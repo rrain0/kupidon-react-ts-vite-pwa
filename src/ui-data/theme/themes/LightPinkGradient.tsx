@@ -12,7 +12,7 @@ export const LightPinkGradient = { ...LightPink,
   icon: (
     <div
       css={themeGradIconCss({
-        accentColor: '#ff8ea9',
+        colorAccent: '#ff8ea9',
         bgColor1:    '#ff8ea9',
         bgColor2:    '#f0f0f0',
       })}

@@ -23,5 +23,5 @@ export namespace ApiRoutes {
   
   
   
-  export const profileShowcaseListAll = `${apiV1}/profile-showcase/list-all`
+  export const usersListAll = `${apiV1}/users-list/all`
 }

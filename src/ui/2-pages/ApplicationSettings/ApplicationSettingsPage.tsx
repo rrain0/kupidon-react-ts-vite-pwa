@@ -103,7 +103,7 @@ const ApplicationSettingsPage = React.memo(() => {
                   lightThemeOptions.map(opt => (
                     <RadioInput
                       css={RadioInputStyle.radio}
-                      childrenPosition="start"
+                      childrenPosition='start'
                       checked={opt.value === light}
                       value={opt.value}
                       key={opt.value}

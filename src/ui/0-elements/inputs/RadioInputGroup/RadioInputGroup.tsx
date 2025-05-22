@@ -1,14 +1,11 @@
-import { css } from '@emotion/react'
 import clsx from 'clsx'
-import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import React from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import {
   RadioInputGroupStyle,
 } from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
-import reset = EmotionCommon.reset
-import absTlwh = EmotionCommon.absTlwh
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 
@@ -27,61 +24,34 @@ export type RadioInputGroupProps =
 
 const RadioInputGroup = React.memo((props: RadioInputGroupProps) => {
   const {
-    ref, className, children,
+    className, children,
     hasError, 
     ...restProps
   } = props
   
   
-  const elemRef = useRef<HTMLDivElement>(null)
-  useImperativeHandle(ref, () => elemRef.current!, [])
-  
-  
-  const radioGroupProps = {
-    className: clsx(className, RadioInputGroupStyle.El.radioGroupClassName),
-    [RadioInputGroupStyle.Attr.errorName]: toEmptyAttr(hasError),
-    // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role
-    role: 'radiogroup',
-    tabIndex: 0,
-    ...restProps,
-  }
-  const borderProps = {
-    className: RadioInputGroupStyle.El.borderClassName,
-  }
-  
-  
   return (
-    <article // Radio Group
-      css={radioGroupStyle}
-      {...radioGroupProps}
-      ref={elemRef}
+    /* RadioInputGroup */
+    <Flex as='article' relative col g={StyleVals.itemListGapPx}
+      data-display-name='RadioInputGroup'
+      data-error={toEmptyAttr(hasError)}
+      // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role
+      role='radiogroup'
+      tabIndex={0}
+      {...restProps}
+      className={clsx(className, RadioInputGroupStyle.El.radioGroupClassName)}
     >
       
       { children }
       
-      <div // Border
-        css={borderStyle}
-        {...borderProps}
+      {/* Border */}
+      <Flex absTlwh noPointer
+        css={{ borderRadius: 'inherit' }}
+        className={RadioInputGroupStyle.El.borderClassName}
       />
-      
-    </article>
+    </Flex>
   )
 })
+RadioInputGroup.displayName = 'RadioInputGroup'
 export default RadioInputGroup
 
-
-
-
-const radioGroupStyle = css`
-  ${reset};
-  position: relative;
-  gap: ${StyleVals.itemListGapPx};
-`
-
-
-
-const borderStyle = css`
-  ${absTlwh};
-  pointer-events: none;
-  border-radius: inherit;
-`

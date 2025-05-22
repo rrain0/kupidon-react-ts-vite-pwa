@@ -2,7 +2,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import ProfileCardsStackList, {
   ProfileCardsStackListItem,
-} from 'src/ui/1-widgets/ProfileShowcase/ProfileCardsStackList.tsx'
+} from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import Pu = TypeU.Pu

@@ -51,7 +51,7 @@ import portraitWomanPosingHouse from
     '@im/mock/people/1/portraits/portrait-young-woman-posing-house  portrait.webp'
 import portraitStylishBrunetteGirl from
     '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  portrait.webp'
-import { User } from 'src/api/model/User.ts'
+import { OtherUser } from 'src/api/model/User.ts'
 
 
 
@@ -146,7 +146,7 @@ export namespace MockData {
   
   
   
-  export const users: User[] = [
+  export const users: OtherUser[] = [
     {
       id: '175dc7be-3f56-4b9d-9403-e994b72624dc',
       name: 'Алиса', birthDate: '2001-05-15', gender: 'FEMALE',

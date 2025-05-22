@@ -7,7 +7,7 @@ import React from 'react'
 
 
 
-export type GridProps = React.ComponentProps<'div'> & GridViewShortProps
+export type GridProps = React.ComponentProps<typeof GridBox> & GridViewShortProps
 
 export const Grid = React.memo((props: GridProps) => {
   
@@ -17,7 +17,7 @@ export const Grid = React.memo((props: GridProps) => {
   return (
     <GridBox
       data-display-name='Grid'
-      css={css}
+      css={{ '&&': css }}
       {...restProps}
     >
       {children}

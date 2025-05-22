@@ -10,10 +10,11 @@ export interface UserPhoto {
   url: string
 }
 
-export interface User {
+export interface OtherUser {
   id: string
   name: string
   birthDate: string // TODO replace by age
+  age?: number // TODO remove ?
   gender: Gender
   aboutMe: string
   photos: UserPhoto[]
@@ -28,6 +29,7 @@ export interface CurrentUser {
   updated: string
   name: string
   birthDate: string
+  age?: number // TODO remove ?
   gender: Gender
   aboutMe: string
   photos: UserPhoto[]

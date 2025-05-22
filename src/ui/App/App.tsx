@@ -47,16 +47,13 @@ const App = React.memo(() => {
           <ThemeProvider theme={theme}>
             
             <Global
-              styles={t => css`
-              body {
-                // will be WINDOW background
-                background: ${t.page.bg};
-              }
-              
-              * {
-                ${isMobile && noScrollbars};
-              }
-            `}
+              styles={t => css({
+                body: {
+                  backgroundColor: t.page.bg, // will be WINDOW background
+                  color: t.page.ct,
+                },
+                ...isMobile && { '*': noScrollbars },
+              })}
             />
             
             <DragDetector>

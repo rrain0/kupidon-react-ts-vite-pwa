@@ -27,9 +27,9 @@ const applyLangToHtml = (matchedLangs) => {
    */
   const htmlProps = {
     // eslint-disable-next-line no-undef
-    nodeEnv: MODE === 'production' ? 'production' : 'development',
+    nodeEnv: ENV_MODE === 'production' ? 'production' : 'development',
     // eslint-disable-next-line no-undef
-    publicUrl: BASE_URL,
+    publicUrl: ENV_BASE_URL,
     lang: defaultLang,
     title: AppTitles[defaultLang],
     description: AppDescriptions[defaultLang],

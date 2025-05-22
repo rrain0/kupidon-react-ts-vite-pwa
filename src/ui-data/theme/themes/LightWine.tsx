@@ -12,7 +12,7 @@ export const LightWine = { ...Light,
   icon: (
     <div
       css={themeIconCss({
-        accentColor: '#cb3357',
+        colorAccent: '#cb3357',
         bgColor1:    '#cb3357',
         bgColor2:    '#f5f5f5',
       })}

@@ -37,7 +37,7 @@ import boxShadow = WidgetProps.boxShadow
 
 
 
-export type ProfileShowcaseFullInfoProps = ClassStyle & Children & Pu<{
+export type ProfileCardsFullInfoProps = ClassStyle & Children & Pu<{
   isOpen: boolean
   close: Callback
   animatedOpacity: AnimatedProperty<number>
@@ -46,7 +46,7 @@ export type ProfileShowcaseFullInfoProps = ClassStyle & Children & Pu<{
   gender: GenderOptionValues
   aboutMe: string
 }>
-export const ProfileShowcaseFullInfo = React.memo((props: ProfileShowcaseFullInfoProps) => {
+export const ProfileCardsFullInfo = React.memo((props: ProfileCardsFullInfoProps) => {
   const {
     isOpen = false,
     close,
@@ -131,7 +131,7 @@ export const ProfileShowcaseFullInfo = React.memo((props: ProfileShowcaseFullInf
     >
       {props => (
         <BottomSheetFrame
-          data-display-name='ProfileShowcaseFullInfo'
+          data-display-name='ProfileCardsFullInfo'
           animatedStyle={{ opacity: animatedOpacity }}
         >
           <BottomSheetBasic
@@ -201,8 +201,8 @@ export const ProfileShowcaseFullInfo = React.memo((props: ProfileShowcaseFullInf
     </UseBottomSheetState>
   )
 })
-ProfileShowcaseFullInfo.displayName = 'ProfileShowcaseFullInfo'
-export default ProfileShowcaseFullInfo
+ProfileCardsFullInfo.displayName = 'ProfileCardsFullInfo'
+export default ProfileCardsFullInfo
 
 
 

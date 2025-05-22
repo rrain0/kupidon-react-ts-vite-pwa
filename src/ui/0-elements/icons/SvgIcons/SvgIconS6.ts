@@ -19,7 +19,7 @@ export namespace SvgIconS6 {
         size: AdditionalProps.varSize,
         sz: AdditionalProps.varSize,
         color: AdditionalProps.varColor,
-        colorAcc: AdditionalProps.varAccentColor,
+        colorAcc: AdditionalProps.varColorAccent,
       },
     })
     return { icon } as const

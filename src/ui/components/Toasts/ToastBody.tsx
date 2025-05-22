@@ -51,7 +51,7 @@ export const ToastBody = React.memo(({
             width: 20px;
             height: 20px;
             ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentLoadingBg[0]};
-            ${SvgIconS.El.icon.props.accentColor.name}: ${t.toast.accentLoadingCt[0]};
+            ${SvgIconS.El.icon.props.colorAccent.name}: ${t.toast.accentLoadingCt[0]};
           `}
         />
       )}

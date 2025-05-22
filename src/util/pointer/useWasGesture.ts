@@ -1,5 +1,8 @@
 import { useCallback, useEffect } from 'react'
+import { isIOS } from 'react-device-detect'
 import { TypeU } from 'src/util/common/TypeU.ts'
+import { getDragDirection } from 'src/util/drag/getDragDirection.ts'
+import { onPointer, OnPointerEvent } from 'src/util/pointer/onPointer.ts'
 import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { getViewProps } from 'src/util/view/ViewProps.ts'
 import Callback = TypeU.Callback
@@ -12,21 +15,41 @@ let wasLongPressedGlobal = false
 const onDragStartedListeners = new Set<Callback>()
 const onLongPressedListeners = new Set<Callback>()
 
-// Сбросить состояние при каждом новом pointerDown
-window.addEventListener('pointerdown', (ev) => {
-  const { w, h } = getViewProps(window)
-  const { clientX: x, clientY: y } = ev
-  // 5% экрана с каждой стороны сделал недоступными для начала драга
-  // По крайней мере на айос это фиксит жест назад в браузере
-  if (x > 0.05 * w && w - x > 0.05 * w && y > 0.05 * h && h - y > 0.05 * h) {
-    wasDraggedGlobal = false
-    wasLongPressedGlobal = false
-  }
-  else {
+
+
+const checkIosBackGesture = (ev: OnPointerEvent) => {
+  const { firstMove, vpx0, velx, vely, mx, my } = ev
+  const { toRight80deg } = getDragDirection({ mx, my })
+  const { w } = getViewProps(window)
+  if (isIOS && firstMove && vpx0 < 0.05 * w && Math.hypot(velx, vely) > 0.06 && toRight80deg) {
     wasDraggedGlobal = true
     onDragStartedListeners.forEach(it => it())
   }
+}
+
+
+
+const { onPointerDown, onPointerMove } = onPointer(ev => {
+  const { first } = ev
+  
+  if (first) {
+    // reset state
+    wasDraggedGlobal = false
+    wasLongPressedGlobal = false
+  }
+  
+  checkIosBackGesture(ev)
+})
+
+
+
+window.addEventListener('pointerdown', (ev) => {
+  onPointerDown(ev)
 }, { capture: true })
+window.addEventListener('pointermove', (ev) => {
+  onPointerMove(ev)
+}, { capture: true })
+
 
 window.addEventListener('scroll', () => {
   wasDraggedGlobal = true

@@ -14,11 +14,11 @@ import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIc
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
-import DislikeButton from 'src/ui/1-widgets/ProfileShowcase/DislikeButton.tsx'
-import LikeButton from 'src/ui/1-widgets/ProfileShowcase/LikeButton.tsx'
+import DislikeButton from 'src/ui/1-widgets/ProfileCards/DislikeButton.tsx'
+import LikeButton from 'src/ui/1-widgets/ProfileCards/LikeButton.tsx'
 import {
-  ProfileShowcaseAction,
-} from 'src/ui/1-widgets/ProfileShowcase/ProfileShowcase.tsx'
+  ProfileCardsAction,
+} from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
 import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
@@ -41,12 +41,12 @@ import ArrowBackIc = SvgIconsPack.ArrowBackIc
 
 
 
-export type ProfileShowcaseInfoOverlayProps = ClassStyle & Pu<{
+export type ProfileCardsInfoOverlayProps = ClassStyle & Pu<{
   actionButtonsDisabled: boolean
   animatedInfo: AnimatedProperty<{
     indicatorProgress: number,
     reactionIconOpacity: number,
-    action: ProfileShowcaseAction
+    action: ProfileCardsAction
   }>
   photosCnt: number
   openInfo: Callback
@@ -58,7 +58,7 @@ export type ProfileShowcaseInfoOverlayProps = ClassStyle & Pu<{
   onReject: Callback
   onBack: Callback
 }>
-export const ProfileShowcaseInfoOverlay = React.memo((props: ProfileShowcaseInfoOverlayProps) => {
+export const ProfileCardsInfoOverlay = React.memo((props: ProfileCardsInfoOverlayProps) => {
   const {
     actionButtonsDisabled,
     animatedInfo,
@@ -78,8 +78,8 @@ export const ProfileShowcaseInfoOverlay = React.memo((props: ProfileShowcaseInfo
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
   return (
-    <ProfileShowcaseInfoBox
-      data-display-name='ProfileShowcaseInfoOverlay'
+    <ProfileCardsInfoBox
+      data-display-name='ProfileCardsInfoOverlay'
     >
       
       
@@ -185,17 +185,17 @@ export const ProfileShowcaseInfoOverlay = React.memo((props: ProfileShowcaseInfo
         </ActionWidgetBox>
       </ActionFrame>
     
-    </ProfileShowcaseInfoBox>
+    </ProfileCardsInfoBox>
   )
 })
-ProfileShowcaseInfoOverlay.displayName = 'ProfileShowcaseInfoOverlay'
-export default ProfileShowcaseInfoOverlay
+ProfileCardsInfoOverlay.displayName = 'ProfileCardsInfoOverlay'
+export default ProfileCardsInfoOverlay
 
 
 
 
 
-const ProfileShowcaseInfoBox = styled.div`
+const ProfileCardsInfoBox = styled.div`
   ${absTlwh};
   z-index: 10;
   display: grid;
@@ -230,7 +230,7 @@ const ActionButtonsBox = styled.div`
 
 
 
-const icProfileShowcaseNormal: AppWidgetStyle = t => [
+const icProfileCardsNormal: AppWidgetStyle = t => [
   IconButtonS6.Parts.Type.filled.Shape.round.Size.lg2,
   IconButtonS6.Parts.Type.filled.baseColor,
   {
@@ -274,14 +274,14 @@ const icProfileShowcaseNormal: AppWidgetStyle = t => [
 
 
 
-const backButtonS: AppWidgetStyle = t => [icProfileShowcaseNormal, {
+const backButtonS: AppWidgetStyle = t => [icProfileCardsNormal, {
   gradIcon: {
     sz: '54%',
     rotate: '0.5turn',
     translate: '-7% -5%',
   },
 }]
-const infoButtonS: AppWidgetStyle = t => [icProfileShowcaseNormal, {
+const infoButtonS: AppWidgetStyle = t => [icProfileCardsNormal, {
   gradIcon: {
     sz: '50%',
     translate: '0 10%',
