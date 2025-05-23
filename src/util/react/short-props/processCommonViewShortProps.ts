@@ -14,6 +14,10 @@ import {
   processSizeShortProps,
   SizeShortProps,
 } from 'src/util/react/short-props/base/processSizeShortProps.ts'
+import {
+  processTextShortProps,
+  TextShortProps,
+} from 'src/util/react/short-props/base/processTextShortProps.ts'
 
 
 
@@ -22,6 +26,7 @@ export type CommonViewShortProps =
   & SizeShortProps
   & PlacedShortProps
   & ContentShortProps
+  & TextShortProps
 
 export const processCommonViewShortProps = <P extends object>(
   props: P & CommonViewShortProps
@@ -30,8 +35,12 @@ export const processCommonViewShortProps = <P extends object>(
   const { size, sizeRest } = processSizeShortProps(positionRest)
   const { placed, placedRest } = processPlacedShortProps(sizeRest)
   const { content, contentRest } = processContentShortProps(placedRest)
+  const { text, textRest } = processTextShortProps(contentRest)
   
-  return { css: [position, size, placed, content], commonViewRest: contentRest }
+  return {
+    css: [position, size, placed, content, text],
+    commonViewRest: textRest,
+  }
 }
 
 

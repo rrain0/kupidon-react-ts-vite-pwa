@@ -118,6 +118,15 @@ export const useItemDrag = ({
   
   
   
+  // onFirstDrag - start pointer event (pointer down)
+  // onEachDrag - each pointer event (down, move, up, cancel, ...)
+  // onLastDrag - end pointer event (up, cancel)
+  
+  // onDragStart - fires when was decided that actual drag gesture was recognized and started
+  // onDragging - fires onPointerMove when drag was started and wasn't ended
+  // onDragEnd - fires when was decided that actual drag gesture was ended
+  
+  
   
   
   const applyOnFirstDrag = useAsCallback(() => {

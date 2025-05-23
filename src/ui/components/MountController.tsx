@@ -1,6 +1,6 @@
 import { useBool } from '@util/react-state/useBool.ts'
 import React, { useEffect } from 'react'
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback
 

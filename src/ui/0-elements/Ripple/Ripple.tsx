@@ -101,7 +101,7 @@ const Ripple = React.memo((props: RippleProps) => {
     if (disabled) toNext(['resetted'])
     else if (action === 'reset') toNext(['resetted'])
     else if (action === 'resetAndShow') toNext(['resetted', 'showing', 'shown'])
-    else if (action === 'reveal') toNext(['revealing', 'shown'])
+    else if (action === 'reveal') toNext(['revealing', 'showing', 'shown'])
     else if (action === 'hide') toNext(['hiding', 'hidden'])
   }, [action, disabled])
   
@@ -123,7 +123,10 @@ const Ripple = React.memo((props: RippleProps) => {
     const el = getRipple()
     if (el) {
       const prevS = getStyle()
-      const s = { ...prevS, ...newStyle, transition: { ...prevS.transition, ...newStyle.transition } }
+      const s = {
+        ...prevS, ...newStyle,
+        transition: { ...prevS.transition, ...newStyle.transition },
+      }
       setStyle(s)
       const tProps = ObjectKeys(s.transition).filter(p => s.transition[p])
       
@@ -139,8 +142,8 @@ const Ripple = React.memo((props: RippleProps) => {
     const el = getRipple()
     let stale = false
     
-    const s = state
     if (el) {
+      const s = state
       if (s === 'resetted') {
         applyStyle({
           transition: { scale: '', opacity: '' },
@@ -157,9 +160,8 @@ const Ripple = React.memo((props: RippleProps) => {
           scale: 1, opacity: 1,
         })
         el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
+          if (stale && ev.propertyName !== 'scale') return
           //console.log('ontransitionend', ev)
-          if (ev.propertyName !== 'scale') return
           toNext()
         })
       }
@@ -178,9 +180,8 @@ const Ripple = React.memo((props: RippleProps) => {
           opacity: 1,
         })
         el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
+          if (!stale && ev.propertyName !== 'opacity') return
           //console.log('ontransitionend', ev)
-          if (ev.propertyName !== 'opacity') return
           toNext()
         })
       }
@@ -192,9 +193,8 @@ const Ripple = React.memo((props: RippleProps) => {
           opacity: 0,
         })
         el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
+          if (!stale && ev.propertyName !== 'opacity') return
           //console.log('ontransitionend', ev)
-          if (ev.propertyName !== 'opacity') return
           toNext()
         })
       }

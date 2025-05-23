@@ -16,9 +16,11 @@ import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 export namespace ReactU {
   
   export type Children = Pu<{ children: React.ReactNode }>
+  export type ClassNameProp = string
+  export type StyleProp = CSSProperties
   export type ClassStyle = Pu<{
-    className: string
-    style: CSSProperties
+    className: ClassNameProp
+    style: StyleProp
   }>
   export type OnClick<E = Element> = React.MouseEventHandler<E>
   export type First = Pu<{ first: boolean }>

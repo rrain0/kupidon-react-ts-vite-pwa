@@ -15,6 +15,7 @@ import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
+import TextAlignCenter from 'src/ui/0-elements/basic-elements/TextAlignCenter.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
@@ -274,49 +275,49 @@ const ChatList = React.memo((props: ChatListProps) => {
             <Flex center noShrink>
               <Pin2Ic css={SvgIconS6.t(pinIcS)}/>
             </Flex>
-            <div>Закрепить</div>
+            <TextAlignCenter>Закрепить</TextAlignCenter>
           </Flex>
           <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
           <Flex row center g={4}>
             <Flex center noShrink>
               <Unpin2Ic css={SvgIconS6.t(pinIcS)}/>
             </Flex>
-            <div>Открепить</div>
+            <TextAlignCenter>Открепить</TextAlignCenter>
           </Flex>
           
           <Flex row center g={4} css={{ gridColumn: '1 / 4' }}>
             <Flex center noShrink>
               <SoundOnIc css={SvgIconS6.t(soundOnIcS)}/>
             </Flex>
-            <div>Вкл. звук</div>
+            <TextAlignCenter>Вкл. звук</TextAlignCenter>
           </Flex>
           
           <Flex row center g={4}>
             <Flex center noShrink>
               <ArchiveBoxOutlinedIc css={SvgIconS6.t(archiveIcS)}/>
             </Flex>
-            <div>В архив</div>
+            <TextAlignCenter>В архив</TextAlignCenter>
           </Flex>
           <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
           <Flex row center g={4}>
             <Flex center noShrink>
               <BlacklistIc css={SvgIconS6.t(blacklistIcS)}/>
             </Flex>
-            <div>В чёрный список</div>
+            <TextAlignCenter>В чёрный список</TextAlignCenter>
           </Flex>
           
           <Flex row center g={4}>
             <Flex center noShrink>
               <CrossInCircleIc css={SvgIconS6.t(removeIcS)}/>
             </Flex>
-            <div>Удалить</div>
+            <TextAlignCenter>Удалить</TextAlignCenter>
           </Flex>
           <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
           <Flex row center g={4}>
             <Flex center noShrink>
               <RestrictIc css={SvgIconS6.t(deleteIcS)}/>
             </Flex>
-            <div>Очистить</div>
+            <TextAlignCenter>Очистить</TextAlignCenter>
           </Flex>
           
           

@@ -4,6 +4,10 @@ import styled from '@emotion/styled'
 import React, { useId, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
+import TextAlignCenter from 'src/ui/0-elements/basic-elements/TextAlignCenter.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
 import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
@@ -65,6 +69,35 @@ const DevTestPage = React.memo(() => {
           <div css={cssStyle}>A</div>
           <div className={`css-${cssStyle.name}`}>Test Page</div>
           
+          <Flex w={150} center css={{ textAlign: 'center' }}>
+            <Flex sz={20} noShrink css={{ background: '#00ff0077' }}/>
+            <TextAlignCenter left grow>В чёрный список</TextAlignCenter>
+            <Flex sz={20} noShrink css={{ background: '#00ff0077' }}/>
+          </Flex>
+          
+          <Grid cols='1fr 1fr' center css={{ textAlign: 'center' }} wMax={330}>
+            <Flex row center>
+              <Flex sz={40} noShrink css={{ background: '#00ff0077' }}/>
+              <Flex>This is some text</Flex>
+              <Flex sz={40} noShrink css={{ background: '#00ff0077' }}/>
+            </Flex>
+            <Flex row center>
+              <Flex sz={40} noShrink css={{ background: '#0000ff77' }}/>
+              <Flex>This is some text</Flex>
+              <Flex sz={40} noShrink css={{ background: '#0000ff77' }}/>
+            </Flex>
+          </Grid>
+          
+          <Flex>
+            <Flex row center wMax={110} w='fit-content' css={{ textAlign: 'center' }}>
+              <Flex sz={40} css={{ background: '#00ff0077' }}/>
+              <Flex>This is some text</Flex>
+              <Flex sz={40} css={{ background: '#00ff0077' }}/>
+            </Flex>
+          </Flex>
+          
+          
+          <Gap h={30}/>
           
           <div>Views:</div>
           

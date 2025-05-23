@@ -240,8 +240,7 @@ const MbtiTestingPage = React.memo(() => {
     
     // Фикс состояния на случай если вдруг анимации отломаются
     setTimeout(() => {
-      if (stale) return
-      setDisplayed(curr)
+      if (!stale) setDisplayed(curr)
     }, transitionTime)
     
     if (el && transition) {
