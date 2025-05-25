@@ -209,7 +209,7 @@ export namespace MockData {
     },
     {
       id: '84b5d4ab-2bce-4988-9674-8a7b878f3266',
-      name: 'аня', birthDate: '2001-05-09', gender: 'FEMALE',
+      name: 'Аня', birthDate: '2001-05-09', gender: 'FEMALE',
       aboutMe: '',
       photos: [],
     },

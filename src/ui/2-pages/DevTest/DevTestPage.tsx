@@ -32,16 +32,16 @@ import flexC = EmotionCommon.flexC
 `css-${cssStyle.name}`
 Но чтобы стиль был отправлен браузеру, его надо дать элементу.
  */
-const cssStyle = css`width: 100%`
+const cssStyle = css({ width: '100%' })
 //console.log('cssStyle', cssStyle)
 console.log('cssStyle.name', cssStyle.name)
 console.log('cssStyle.next', cssStyle.next)
 
-const cssStyle2 = css`height: 100%; ${cssStyle}`
+const cssStyle2 = css([cssStyle, { height: '100%' }])
 console.log('cssStyle2.name', cssStyle2.name)
 console.log('cssStyle2.next', cssStyle2.next)
 
-const emcssStyle = cssraw`height: 100%;`
+const emcssStyle = cssraw({ height: '100%' })
 console.log('emcssStyle', emcssStyle)
 //console.log('emcssStyle.name', emcssStyle.name)
 //console.log('emcssStyle.next', emcssStyle.next)
@@ -66,35 +66,11 @@ const DevTestPage = React.memo(() => {
       <Pages.Page>
         <Pages.Content>
           
+          
+          
           <div css={cssStyle}>A</div>
           <div className={`css-${cssStyle.name}`}>Test Page</div>
           
-          <Flex w={150} center css={{ textAlign: 'center' }}>
-            <Flex sz={20} noShrink css={{ background: '#00ff0077' }}/>
-            <TextAlignCenter left grow>В чёрный список</TextAlignCenter>
-            <Flex sz={20} noShrink css={{ background: '#00ff0077' }}/>
-          </Flex>
-          
-          <Grid cols='1fr 1fr' center css={{ textAlign: 'center' }} wMax={330}>
-            <Flex row center>
-              <Flex sz={40} noShrink css={{ background: '#00ff0077' }}/>
-              <Flex>This is some text</Flex>
-              <Flex sz={40} noShrink css={{ background: '#00ff0077' }}/>
-            </Flex>
-            <Flex row center>
-              <Flex sz={40} noShrink css={{ background: '#0000ff77' }}/>
-              <Flex>This is some text</Flex>
-              <Flex sz={40} noShrink css={{ background: '#0000ff77' }}/>
-            </Flex>
-          </Grid>
-          
-          <Flex>
-            <Flex row center wMax={110} w='fit-content' css={{ textAlign: 'center' }}>
-              <Flex sz={40} css={{ background: '#00ff0077' }}/>
-              <Flex>This is some text</Flex>
-              <Flex sz={40} css={{ background: '#00ff0077' }}/>
-            </Flex>
-          </Flex>
           
           
           <Gap h={30}/>

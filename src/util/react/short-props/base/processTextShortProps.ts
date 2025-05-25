@@ -11,6 +11,10 @@ export type TextShortProps = Pu<{
   textAlignLeft: boolean // true => { textAlign: 'left' }
   textAlignRight: boolean // true => { textAlign: 'right' }
   textAlignJustify: boolean // true => { textAlign: 'justify' }
+  
+  fontSz: number | string // fontSize
+  fontWt: number | string // fontWeight
+  lineH: number | string // lineHeight
 }>
 
 
@@ -20,6 +24,7 @@ export const processTextShortProps = <P extends object>(
 ) => {
   const {
     textAlign, textAlignLeft, textAlignRight,  textAlignJustify,
+    fontSz, fontWt, lineH,
     ...textRest
   } = props
   
@@ -30,6 +35,10 @@ export const processTextShortProps = <P extends object>(
     ...textAlignRight && { textAlign: 'right' },
     ...textAlignJustify && { textAlign: 'justify' },
     ...isdef(textAlign) && { textAlign: mapBool(textAlign, 'center') },
+    
+    ...isdef(fontSz) && { fontSize: fontSz },
+    ...isdef(fontWt) && { fontWeight: fontWt },
+    ...isdef(lineH) && { lineHeight: lineH },
   }
   
   return { text, textRest }

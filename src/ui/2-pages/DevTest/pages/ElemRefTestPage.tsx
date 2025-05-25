@@ -1,4 +1,5 @@
 import { animated, useSpring } from '@react-spring/web'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useState } from 'react'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
@@ -55,7 +56,7 @@ const ChainedResize1 = () => {
       springApi.set(getViewProps(elem).wh)
     }
   })
-  const [getElem, setElem, refElem] = useRefGetSet<HTMLElement | null>(null, elem => {
+  const [getElem, setElem, refElem] = useElemRefGetSet(elem => {
     console.log('onSetElem', elem)
     updateElem(elem)
   })

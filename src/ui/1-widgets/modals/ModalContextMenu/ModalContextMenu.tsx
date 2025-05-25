@@ -16,14 +16,14 @@ import modalContextMenuCardBoxS = ModalElements.modalContextMenuCardBoxS
 
 
 
-const time = 150
+const appearTime = 150
+const disappearTime = 150
 const b = 60
-
+const translateYHidden = `calc(${b}px + 110%)`
 
 
 type ModalContextMenuProps = Pu<{
   isOpen: boolean
-  onClose: Callback
 }> & Children
 
 
@@ -31,7 +31,7 @@ type ModalContextMenuProps = Pu<{
 const ModalContextMenu = React.memo((props: ModalContextMenuProps) => {
   const {
     children,
-    isOpen, onClose,
+    isOpen,
   } = props
   
   
@@ -61,7 +61,9 @@ export default ModalContextMenu
 
 
 
-type ContextMenuProps = MountControllerRenderProps & Children
+type ContextMenuProps = Pu<{
+  onClose: Callback
+}> & MountControllerRenderProps & Children
 const ContextMenu = React.memo((props: ContextMenuProps) => {
   const {
     children,
@@ -69,50 +71,49 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
   } = props
   
   type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
-  const [state, setState] = useState<State>(undefined)
+  const [state, setState] = useState<{ v: State }>({ v: undefined })
   
   const [getElem, setElem] = useElemRefGetSet()
   
   // useEffect сработает уже после монтирования элемента и получения рефа
   useEffect(() => {
-    if (isOpen) setState('appearing')
-    else setState('disappearing')
+    if (isOpen) setState({ v: 'appearing' })
+    else setState({ v: 'disappearing' })
+    console.log('isOpen', isOpen)
   }, [isOpen])
   
   useEffect(() => {
-    const el = getElem()
     let stale = false
+    const el = getElem()
     if (el) {
-      if (state === 'appearing') {
-        el.style.transition = `transform ${time}ms linear, bottom ${time}ms linear`
-        el.style.bottom = `${b}px`
-        el.style.transform = 'translateY(0%)'
+      if (state.v === 'appearing') {
+        const time = appearTime
+        el.style.transition = `transform ${time}ms linear`
+        el.style.transform = 'translateY(0)'
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (stale) return
           el.ontransitionend = null
-          setState('appeared')
+          setState(curr => curr === state ? { v: 'appeared' } : curr)
         })
       }
-      else if (state === 'appeared') {
+      else if (state.v === 'appeared') {
         el.style.transition = 'none'
-        el.style.bottom = `${b}px`
-        el.style.transform = 'translateY(0%)'
+        el.style.transform = 'translateY(0)'
         el.ontransitionend = null
       }
-      else if (state === 'disappearing') {
-        el.style.transition = `transform ${time}ms linear, bottom ${time}ms linear`
-        el.style.bottom = '0px'
-        el.style.transform = 'translateY(110%)'
+      else if (state.v === 'disappearing') {
+        const time = disappearTime
+        el.style.transition = `transform ${time}ms linear`
+        el.style.transform = `translateY(${translateYHidden})`
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (stale) return
           el.ontransitionend = null
-          setState('disappeared')
+          setState(curr => curr === state ? { v: 'disappeared' } : curr)
         })
       }
-      else if (state === 'disappeared') {
+      else if (state.v === 'disappeared') {
         el.style.transition = 'none'
-        el.style.bottom = '0px'
-        el.style.transform = 'translateY(110%)'
+        el.style.transform = `translateY(${translateYHidden})`
         el.ontransitionend = null
         allowUnmount()
       }
@@ -136,6 +137,6 @@ ContextMenu.displayName = 'ContextMenu'
 
 const cardS = css({
   position: 'relative',
-  transform: 'translateY(110%)',
-  bottom: 0,
+  transform: `translateY(${translateYHidden})`,
+  bottom: `${b}px`,
 })

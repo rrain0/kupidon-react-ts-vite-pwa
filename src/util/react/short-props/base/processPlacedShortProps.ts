@@ -27,6 +27,10 @@ export type PlacedShortProps = Pu<{
   grow: number | string | boolean // true => 1
   shrink: number | string | boolean // true => 1
   noShrink: boolean // true => { flexShrink: 0 }
+  
+  gridRow: number | string // gridRow
+  gridCol: number | string // gridCol
+  gridArea: number | string // gridArea
 }>
 
 
@@ -39,6 +43,7 @@ export const processPlacedShortProps = <P extends object>(
     justified, justifiedStart, justifiedEnd, justifiedStretch,
     placed, started, ended, stretched,
     basis, order, grow, shrink, noShrink,
+    gridRow, gridCol, gridArea,
     ...placedRest
   } = props
   
@@ -65,6 +70,10 @@ export const processPlacedShortProps = <P extends object>(
     ...isdef(order) && { order: order },
     ...isdef(grow) && { flexGrow: mapBool(grow, 1) },
     ...isdef(shrink) && { flexShrink: mapBool(shrink, 1) },
+    
+    ...isdef(gridRow) && { gridRow: gridRow },
+    ...isdef(gridCol) && { gridColumn: gridCol },
+    ...isdef(gridArea) && { gridArea: gridArea },
   }
   
   return { placed: placedStyle, placedRest }

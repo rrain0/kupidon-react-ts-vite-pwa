@@ -32,8 +32,8 @@ const hItem = h + mv
 // const addTime = 300 //ms
 // const removeTime = 300 //ms
 // const replaceTime = 300 //ms
-const addTime = 2000 //ms
-const removeTime = 2000 //ms
+const addTime = 250 //ms
+const removeTime = 250 //ms
 const replaceTime = 2000 //ms
 
 

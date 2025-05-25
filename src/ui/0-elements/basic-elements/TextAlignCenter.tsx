@@ -1,7 +1,7 @@
 import { ReactU } from '@util/react/ReactU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
-import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
+import React, { useImperativeHandle, useLayoutEffect } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Pu = TypeU.Pu
@@ -20,7 +20,7 @@ export type TextCenterAlignExtraProps = Pu<{
   right: boolean
   classNameText: ClassNameProp
   styleText: StyleProp
-  children: string
+  children: string | number
 }>
 
 export type TextCenterAlignProps =

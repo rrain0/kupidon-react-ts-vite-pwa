@@ -6,19 +6,16 @@ import { Spring2DAnimationData, useItemDrag } from '@util/animated/item-drag/use
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useArray } from '@util/react-state/useArray.ts'
+import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
-import TextAlignCenter from 'src/ui/0-elements/basic-elements/TextAlignCenter.tsx'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
+import ChatListContextMenu, {
+  ChatListContextMenuProps,
+} from 'src/ui/2-pages/Chat/parts/ChatListContextMenu.tsx'
 import ChatListItem from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
@@ -26,14 +23,6 @@ import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import emptyArr = TypeU.emptyArr
 import isundef = TypeU.isundef
-import PinIc = SvgIconsPack.PinIc
-import Pin2Ic = SvgIconsPack.Pin2Ic
-import Unpin2Ic = SvgIconsPack.Unpin2Ic
-import SoundOnIc = SvgIconsPack.SoundOnIc
-import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
-import RestrictIc = SvgIconsPack.RestrictIc
-import ArchiveBoxOutlinedIc = SvgIconsPack.ArchiveBoxOutlinedIc
-import BlacklistIc = SvgIconsPack.BlacklistIc
 
 
 
@@ -54,6 +43,12 @@ export type UiItemData = {
 
 export type ChatListExtraProps = Pu<{
   chatItems: ChatListItemWidgetData[]
+  
+  pin: (ids: string[]) => void
+  unpin: (ids: string[]) => void
+  mute: (ids: string[]) => void
+  unmute: (ids: string[]) => void
+  remove: (ids: string[], params?: Pu<{ removeForAll: boolean }>) => void
 }>
 
 export type ChatListProps =
@@ -65,6 +60,7 @@ export type ChatListProps =
 const ChatList = React.memo((props: ChatListProps) => {
   const {
     chatItems: newItems = emptyArr,
+    pin: _pin, unpin: _unpin, mute: _mute, unmute: _unmute, remove: _remove,
     ...restProps
   } = props
   
@@ -75,7 +71,14 @@ const ChatList = React.memo((props: ChatListProps) => {
     arr: selected, isNotEmpty: isAnySelected,
     has: isSelected,
     toggle: toggleSelection, filter: filterSelected,
+    clear: unselectAll,
   } = useArray<string>()
+  
+  const pin = useAsCallback(() => _pin?.(selected))
+  const unpin = useAsCallback(() => _unpin?.(selected))
+  const mute = useAsCallback(() => _mute?.(selected))
+  const unmute = useAsCallback(() => _unmute?.(selected))
+  const remove = useAsCallback(() => _remove?.(selected))
   
   
   
@@ -106,11 +109,7 @@ const ChatList = React.memo((props: ChatListProps) => {
         const toI = bi
         const fromI = back[toI]
         if (isundef(fromI)) {
-          uiItems.push({
-            state: 'adding',
-            toI: toI,
-            item: newItems[toI],
-          })
+          uiItems.push({ state: 'adding', toI: toI, item: newItems[toI] })
         }
         else if (fromI !== toI) {
           uiItems.push({
@@ -123,11 +122,7 @@ const ChatList = React.memo((props: ChatListProps) => {
           ri++
         }
         else {
-          uiItems.push({
-            state: 'showing',
-            toI,
-            item: newItems[toI],
-          })
+          uiItems.push({ state: 'showing', toI, item: newItems[toI] })
           ri++
         }
         prevBi = bi
@@ -223,6 +218,34 @@ const ChatList = React.memo((props: ChatListProps) => {
   const noItems = !uiItems?.length
   
   
+  const contextMenuProps = useMemo(() => {
+    return selected
+      .map(id => (uiItems ?? []).find(it => it.item.id === id)!.item)
+      .reduce((acc, curr) => {
+        acc.selected++
+        acc.hasUnpinned ||= !curr.order
+        acc.hasPinned ||= curr.order === 1
+        acc.hasMuted ||= !!curr.mute
+        acc.hasUnmuted ||= !curr.mute
+        acc.hasUnarchived ||= true
+        acc.hasUnblacklisted ||= true
+        acc.hasRemovable ||= true
+        acc.hasClearable ||= true
+        return acc
+      }, {
+        selected: 0,
+        hasUnpinned: false as boolean,
+        hasPinned: false as boolean,
+        hasMuted: false as boolean,
+        hasUnmuted: false as boolean,
+        hasUnarchived: false as boolean,
+        hasUnblacklisted: false as boolean,
+        hasRemovable: false as boolean,
+        hasClearable: false as boolean,
+      } satisfies Partial<ChatListContextMenuProps>)
+  }, [selected, uiItems])
+  
+  
   return (
     <>
       <ChatListContainer col grow
@@ -268,67 +291,23 @@ const ChatList = React.memo((props: ChatListProps) => {
         })()}
       </ChatListContainer>
       
-      <ModalContextMenu isOpen={isAnySelected}>
-        <Grid cols='1fr auto 1fr' align g={16} css={{ textAlign: 'center' }}>
-          
-          <Flex row center g={4}>
-            <Flex center noShrink>
-              <Pin2Ic css={SvgIconS6.t(pinIcS)}/>
-            </Flex>
-            <TextAlignCenter>Закрепить</TextAlignCenter>
-          </Flex>
-          <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
-          <Flex row center g={4}>
-            <Flex center noShrink>
-              <Unpin2Ic css={SvgIconS6.t(pinIcS)}/>
-            </Flex>
-            <TextAlignCenter>Открепить</TextAlignCenter>
-          </Flex>
-          
-          <Flex row center g={4} css={{ gridColumn: '1 / 4' }}>
-            <Flex center noShrink>
-              <SoundOnIc css={SvgIconS6.t(soundOnIcS)}/>
-            </Flex>
-            <TextAlignCenter>Вкл. звук</TextAlignCenter>
-          </Flex>
-          
-          <Flex row center g={4}>
-            <Flex center noShrink>
-              <ArchiveBoxOutlinedIc css={SvgIconS6.t(archiveIcS)}/>
-            </Flex>
-            <TextAlignCenter>В архив</TextAlignCenter>
-          </Flex>
-          <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
-          <Flex row center g={4}>
-            <Flex center noShrink>
-              <BlacklistIc css={SvgIconS6.t(blacklistIcS)}/>
-            </Flex>
-            <TextAlignCenter>В чёрный список</TextAlignCenter>
-          </Flex>
-          
-          <Flex row center g={4}>
-            <Flex center noShrink>
-              <CrossInCircleIc css={SvgIconS6.t(removeIcS)}/>
-            </Flex>
-            <TextAlignCenter>Удалить</TextAlignCenter>
-          </Flex>
-          <Gap w={1} h={26} mh={8} css={{ background: '#aaaaaa' }}/>
-          <Flex row center g={4}>
-            <Flex center noShrink>
-              <RestrictIc css={SvgIconS6.t(deleteIcS)}/>
-            </Flex>
-            <TextAlignCenter>Очистить</TextAlignCenter>
-          </Flex>
-          
-          
-        </Grid>
-      </ModalContextMenu>
+      <ChatListContextMenu
+        {...contextMenuProps}
+        onUnselect={unselectAll}
+        onPin={pin}
+        onUnpin={unpin}
+        onMute={mute}
+        onUnmute={unmute}
+        onRemove={remove}
+      />
       
     </>
   )
 })
 ChatList.displayName = 'ChatList'
 export default ChatList
+
+
 
 
 
@@ -342,37 +321,3 @@ const ChatListContainer = styled(Flex)(({ theme: t }) => [
     boxShadow: `${StyleVals.shadowLightSz} ${t.shadow.bg2}`,
   },
 ])
-
-
-
-
-const pinIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { sz: 26, color: '#80558c' },
-}]
-
-const soundOnIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { sz: 26, color: '#c69477' },
-}]
-
-const archiveIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { sz: 26, color: '#263238' },
-}]
-const blacklistIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { sz: 26, color: '#263238', colorAcc: '#e53935' },
-}]
-
-const removeIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { sz: 30, color: '#e74c3c' },
-}]
-const deleteIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { sz: 26, color: '#e74c3c' },
-}]
-
-
-

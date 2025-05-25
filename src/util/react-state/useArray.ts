@@ -30,10 +30,13 @@ export const useArray = <T>(initialValue?: ValueOrProducer<T[]>) => {
   const filter = useCallback((filter: ArrFilter<T>) => {
     setArr(arr => ArrayU.filterToIf(arr, filter))
   }, [])
+  const clear = useCallback(() => {
+    setArr([])
+  }, [])
   
   return {
     arr, setArr,
     isEmpty, isNotEmpty,  getIsEmpty, getIsNotEmpty,
-    has, add, remove, toggle, filter,
+    has, add, remove, toggle, filter, clear,
   }
 }

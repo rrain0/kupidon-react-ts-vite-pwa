@@ -77,12 +77,12 @@ const Ripple = React.memo((props: RippleProps) => {
   
   
   const [state, setState] = useState<RippleState>('resetted')
-  const [next, setNext] = useState<RippleState[]>([])
+  const [nextStates, setNextStates] = useState<RippleState[]>([])
   
-  const toNext = (newNext?: RippleState[]) => {
-    setNext(curr => {
-      // Если кто-то не установил новую цепочку действий, тогда продолжаем
-      if (!newNext && curr === next) newNext = curr
+  const showNext = (newNext?: RippleState[]) => {
+    setNextStates(curr => {
+      // Продолжаем текущую цепочку, если никто не установил новую
+      if (curr === nextStates && !newNext) newNext = curr
       if (newNext) {
         let newStateI = newNext.findIndex(it => it !== state)
         if (newStateI === -1) newStateI = newNext.length
@@ -98,11 +98,11 @@ const Ripple = React.memo((props: RippleProps) => {
   
   
   useEffect(() => {
-    if (disabled) toNext(['resetted'])
-    else if (action === 'reset') toNext(['resetted'])
-    else if (action === 'resetAndShow') toNext(['resetted', 'showing', 'shown'])
-    else if (action === 'reveal') toNext(['revealing', 'showing', 'shown'])
-    else if (action === 'hide') toNext(['hiding', 'hidden'])
+    if (disabled) showNext(['resetted'])
+    else if (action === 'reset') showNext(['resetted'])
+    else if (action === 'resetAndShow') showNext(['resetted', 'showing', 'shown'])
+    else if (action === 'reveal') showNext(['revealing', 'showing', 'shown'])
+    else if (action === 'hide') showNext(['hiding', 'hidden'])
   }, [action, disabled])
   
   
@@ -143,15 +143,14 @@ const Ripple = React.memo((props: RippleProps) => {
     let stale = false
     
     if (el) {
-      const s = state
-      if (s === 'resetted') {
+      if (state === 'resetted') {
         applyStyle({
           transition: { scale: '', opacity: '' },
           scale: 0, opacity: 0,
         })
-        toNext()
+        showNext()
       }
-      else if (s === 'showing') {
+      else if (state === 'showing') {
         applyStyle({
           transition: {
             scale: `scale ${rippleProps.rippleDuration}ms ${StyleVals.easeOutCubic}`,
@@ -162,17 +161,17 @@ const Ripple = React.memo((props: RippleProps) => {
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (stale && ev.propertyName !== 'scale') return
           //console.log('ontransitionend', ev)
-          toNext()
+          showNext()
         })
       }
-      else if (s === 'shown') {
+      else if (state === 'shown') {
         applyStyle({
           transition: { scale: '', opacity: '' },
           scale: 1, opacity: 1,
         })
-        toNext()
+        showNext()
       }
-      else if (s === 'revealing') {
+      else if (state === 'revealing') {
         applyStyle({
           transition: {
             opacity: `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeOutExpo}`,
@@ -182,10 +181,10 @@ const Ripple = React.memo((props: RippleProps) => {
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (!stale && ev.propertyName !== 'opacity') return
           //console.log('ontransitionend', ev)
-          toNext()
+          showNext()
         })
       }
-      else if (s === 'hiding') {
+      else if (state === 'hiding') {
         applyStyle({
           transition: {
             opacity: `opacity ${rippleProps.dissolveDuration}ms ${StyleVals.easeInQuart}`,
@@ -195,18 +194,18 @@ const Ripple = React.memo((props: RippleProps) => {
         el.ontransitionend = ev => requestAnimationFrame(() => {
           if (!stale && ev.propertyName !== 'opacity') return
           //console.log('ontransitionend', ev)
-          toNext()
+          showNext()
         })
       }
-      else if (s === 'hidden') {
+      else if (state === 'hidden') {
         applyStyle({
           transition: { opacity: '' },
           opacity: 0,
         })
-        toNext()
+        showNext()
       }
       else {
-        toNext()
+        showNext()
       }
     }
     return () => { stale = true }

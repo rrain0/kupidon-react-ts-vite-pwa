@@ -1,5 +1,5 @@
 import { useBool } from '@util/react-state/useBool.ts'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback
@@ -25,9 +25,7 @@ const MountController = React.memo((props: MountControllerProps) => {
   } = props
   
   const [canUnmount, allowUnmount, preventUnmount] = useBool(!isOpen)
-  useEffect(() => {
-    if (isOpen) preventUnmount()
-  }, [isOpen])
+  useEffect(() => { if (isOpen) preventUnmount() }, [isOpen])
   
   if (isOpen || !canUnmount) return children?.({
     isOpen,

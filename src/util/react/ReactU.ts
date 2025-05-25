@@ -23,11 +23,6 @@ export namespace ReactU {
     style: StyleProp
   }>
   export type OnClick<E = Element> = React.MouseEventHandler<E>
-  export type First = Pu<{ first: boolean }>
-  export type Last = Pu<{ last: boolean }>
-  
-  export type Full = Pu<{ full: boolean }> // true => { width: '100%', height: '100%' }
-  export type Grow = Pu<{ grow: number | string | boolean }> // true => 1
   
   
   

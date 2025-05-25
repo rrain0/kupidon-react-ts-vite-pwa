@@ -11,7 +11,6 @@ import { TypeU } from 'src/util/common/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
-import Grow = ReactU.Grow
 import toPx = CssU.toPx
 import gridC = EmotionCommon.gridC
 import noPointer = EmotionCommon.noPointer
@@ -26,7 +25,9 @@ export type PageContentLayoutProps = Pu<{
   colSm: boolean
   full: boolean
   fullSm: boolean
-  modalSm:boolean
+  modalSm: boolean
+  
+  grow: number | string | boolean // true => flexGrow: 1
   
   noInsets: boolean
   noInsetsForFilledBars: boolean
@@ -38,7 +39,7 @@ export type PageContentLayoutProps = Pu<{
   classNameInner: string
   styleInner: CSSProperties
   cssInner: Interpolation<Theme>
-}> & Grow & ClassStyle & Children
+}> & ClassStyle & Children
 
 export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const {
