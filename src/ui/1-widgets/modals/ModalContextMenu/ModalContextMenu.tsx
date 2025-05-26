@@ -73,18 +73,17 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
   type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
   const [state, setState] = useState<{ v: State }>({ v: undefined })
   
-  const [getElem, setElem] = useElemRefGetSet()
+  const [getCardEl, setCardEl] = useElemRefGetSet()
   
   // useEffect сработает уже после монтирования элемента и получения рефа
   useEffect(() => {
     if (isOpen) setState({ v: 'appearing' })
     else setState({ v: 'disappearing' })
-    console.log('isOpen', isOpen)
   }, [isOpen])
   
   useEffect(() => {
     let stale = false
-    const el = getElem()
+    const el = getCardEl()
     if (el) {
       if (state.v === 'appearing') {
         const time = appearTime
@@ -125,7 +124,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
     <Card ph={8}
       css={[ModalElements.cardBoxInModalS, cardS]}
       data-display-name='ContextMenu'
-      ref={setElem}
+      ref={setCardEl}
     >
       {children}
     </Card>

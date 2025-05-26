@@ -7,6 +7,7 @@ import isValidEmail = ValidationValidators.isValidEmail
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData
 import LoginErrorData = AuthApi.LoginErrorData
+import createValidator = ValidationCore.createValidator
 
 
 
@@ -16,7 +17,8 @@ export namespace LoginPageValidation {
   type SeverErrorCode = LoginErrorData['code']
   
   
-  type FailureCode = 'login-required'
+  type FailureCode =
+    | 'login-required'
     | 'login-incorrect'
     | 'pwd-required'
     | 'NO_USER'
@@ -73,67 +75,61 @@ export namespace LoginPageValidation {
   const delay = 4000
   
   export const validators: Validators<FormValues> = [
-    [['login'], (values) => {
-      const [v] = values as [UserValues['login']]
+    createValidator(['login'], ([v]) => {
       const d = defaultValues.login
       if (v === d) return new PartialFailureData({
         code: 'login-required' satisfies FailureCode,
         msg: 'Email не введён',
         type: 'default',
       })
-    }],
-    [['login'], (values) => {
-      const [v] = values as [UserValues['login']]
+    }),
+    createValidator(['login'], ([v]) => {
       if (!isValidEmail(v)) return new PartialFailureData({
         code: 'login-incorrect' satisfies FailureCode,
         msg: 'Некорректный формат email',
         delay,
       })
-    }],
+    }),
     
     
     
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    createValidator(['pwd'], ([v]) => {
       const d = defaultValues.login
       if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Пароль не введён',
         type: 'default',
       })
-    }],
+    }),
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    createValidator(['fromServer'], ([v]) => {
       if (v?.error.code === 'NO_USER') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Не найдено пользователя с таким логином-паролем',
-        errorFields: ['fromServer','login','pwd'],
+        errorFields: ['fromServer', 'login', 'pwd'],
         type: 'server',
       })
-    }],
+    }),
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    createValidator(['fromServer'], ([v]) => {
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
       })
-    }],
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    }),
+    createValidator(['fromServer'], ([v]) => {
       if (v) return new PartialFailureData({
         code: 'unknownError' satisfies FailureCode,
         msg: 'Неизвестная ошибка',
         extra: v,
         type: 'server',
       })
-    }],
+    }),
     
   ]
   

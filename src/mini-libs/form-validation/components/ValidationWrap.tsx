@@ -1,4 +1,5 @@
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
 import React, {
@@ -22,7 +23,6 @@ import Mapper = TypeU.Mapper
 
 
 
-// todo remove 'render' prop
 
 
 export type ValidationWrapRenderProps<V> = {
@@ -42,20 +42,20 @@ export type ValidationWrapRenderProps<V> = {
   })
 }
   
-export type ValidationWrapProps
-<Vs extends Values, F extends keyof Vs> = {
+export type ValidationWrapProps<
+  Vs extends Values, F extends keyof Vs
+> = {
   values: Vs
   fieldName: F
   failures: Failures<Vs>
   setFailures: SetterOrUpdater<Failures<Vs>>
   setValues: SetterOrUpdater<Vs>
-  render?: (props: ValidationWrapRenderProps<Vs[F]>) => React.ReactNode
   children?: (props: ValidationWrapRenderProps<Vs[F]>) => React.ReactNode
 }
 
 
 
-const ValidationWrap = <Vs extends Values, F extends keyof Vs>(
+const ValidationWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
   props: ValidationWrapProps<Vs, F>
 ) => {
   const {
@@ -64,7 +64,6 @@ const ValidationWrap = <Vs extends Values, F extends keyof Vs>(
     failures,
     setFailures,
     setValues,
-    render,
     children,
   } = props
   
@@ -164,7 +163,7 @@ const ValidationWrap = <Vs extends Values, F extends keyof Vs>(
   )
   
   
-  if (children) return children({
+  return children?.({
     value,
     highlight,
     setValue,
@@ -174,19 +173,8 @@ const ValidationWrap = <Vs extends Values, F extends keyof Vs>(
     inputProps,
     radioInputProps,
   })
-  if (render) return render({
-    value,
-    highlight,
-    setValue,
-    onBlur,
-    getChecked,
-    
-    inputProps,
-    radioInputProps,
-  })
-  return undefined
-}
-export default React.memo(ValidationWrap) as typeof ValidationWrap
+})
+export default ValidationWrap
 
 
 

@@ -52,7 +52,7 @@ export namespace ButtonBarComponents {
     pointer-events: none;
     height: var(--bottom-button-bar-height);
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     padding: 10px;
     gap: 10px;

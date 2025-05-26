@@ -23,6 +23,8 @@ export type SizeShortProps = Pu<{
   ratio: number | string
   rad: number | string
   
+  round: boolean // true => { borderRadius: 999999 }
+  
   m: number | string
   mv: number | string
   mh: number | string
@@ -46,7 +48,7 @@ export const processSizeShortProps = <P extends object>(
 ) => {
   const {
     w, h, sz, wMin, hMin, szMin, wMax, hMax, szMax, fullW, fullH, full,
-    ratio, rad,
+    ratio, rad, round,
     m, mv, mh, mt, mr, mb, ml,
     p, pv, ph, pt, pr, pb, pl,
     ...sizeRest
@@ -72,10 +74,10 @@ export const processSizeShortProps = <P extends object>(
     ...isdef(wMax) && { maxWidth: processAnySz(wMax) },
     ...isdef(hMax) && { maxHeight: processAnySz(hMax) },
     
+    ...round && { borderRadius: 999999 },
     
     ...isdef(ratio) && { aspectRatio: ratio },
     ...isdef(rad) && { borderRadius: rad },
-    
     
     ...isdef(m) && { margin: m },
     ...isdef(mv) && { marginTop: mv, marginBottom: mv },

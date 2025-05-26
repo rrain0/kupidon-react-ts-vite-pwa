@@ -1,6 +1,3 @@
-import { ArrayU } from 'src/util/common/ArrayU.ts'
-
-
 
 
 
@@ -8,57 +5,63 @@ import { ArrayU } from 'src/util/common/ArrayU.ts'
 export namespace ValidationCore {
   
   export type Values = { [field: string]: unknown }
-  export type ValuesWithFromServer<Vs extends Values> =
+  export type ValuesWithFromServer<Vs extends Values> = (
     Vs extends { fromServer?: undefined | { values: Vs } } ? Vs : never
+  )
   
+  
+  type Validator<
+    Vs extends Values,
+    Props extends readonly (keyof Vs)[],
+  > = (
+    [Props, ValidatorFun<Vs, Props>]
+  )
   
   /**
    * @returns {'ok' | undefined | void} - валидатор не обнаружил ошибок
    * @returns {PartialFailureData} - валидатор обнаружил ошибку и вернул этот объект с ошибкой,
    * последующие валидаторы для этого поля не будут запущены.
    */
-  export type Validator
-  <Vs extends Values> = [
-    (keyof Vs)[],
-    (values: any[]) => ('ok' | undefined | void) | PartialFailureData<Vs>
-  ]
+  export type ValidatorFun<
+    Vs extends Values,
+    Props extends readonly (keyof Vs)[],
+  > = (
+    (values: ValidatorFunValues<Vs, Props>) => (
+      ('ok' | undefined | void) | PartialFailureData<Vs>
+    )
+  )
   
+  export type ValidatorFunValues<
+    Vs extends Values,
+    Props extends readonly (keyof Vs)[],
+    PropValues extends readonly any[] = [],
+  > = (
+    Props extends readonly [infer Curr, ...infer Rest extends readonly any[]]
+      ? ValidatorFunValues<Vs, Rest, [...PropValues, (
+        Curr extends keyof Vs ? Vs[Curr] : never
+      )]>
+      : PropValues
+  )
   
-  /*
-  type ExtractReturnTypes<T extends readonly ((...args: any[]) => any)[]> = [
-    ...{
-      [K in keyof T]: T[K] extends (...args: any[]) => infer R ? R : never;
-    },
-  ]
-  type FieldsArrToValuesArr<Fs extends readonly (keyof Vs)[], Vs extends Values> = [
-    ...{
-      [F in keyof Fs]: Fs[F] extends string ? Vs[F] : never
-    }
-  ]
-  
-  export type Validator1
-  <Vs extends Values, Fs extends (keyof Vs)[] = (keyof Vs)[]> = [
-    Fs,
-    (...args: FieldsArrToValuesArr<NoInfer<Fs>, Vs>) => ('ok' | undefined | void) | PartialFailureData<Vs>
-  ]
-  type MyValues = { a: string, b: number, c: boolean }
-  
-  const myValidators = [
-    [
-      ['a'],
-      (aVal) => {
-        const aa = aVal.substring(0, 2)
-      },
-    ],
-  ] satisfies Validator1<MyValues>[]
-  
-  
-  todo validator<values>([s => s.day, s => s.month, s => s.year], (day, month, year) => Error)
-   */
+  export function createValidator<
+    Vs extends Values,
+    const Props extends readonly (keyof Vs)[],
+  >(
+    props: Props,
+    validatorFun: NoInfer<ValidatorFun<Vs, Props>>,
+  ): Validator<Vs, Props> {
+    return [props, validatorFun]
+  }
   
   
   
-  export type Validators<Vs extends Values> = Validator<Vs>[]
+  
+  // TODO Form - validator<values>([s => s.day, s => s.month, s => s.year], (day, month, year) => Error)
+  
+  
+  
+  
+  export type Validators<Vs extends Values> = Validator<Vs, (keyof Vs)[]>[]
   
   export type Failures<Vs extends Values> = Failure<Vs>[]
   
@@ -105,7 +108,7 @@ export namespace ValidationCore {
     
     
     readonly code: string
-    readonly msg: string|undefined
+    readonly msg: string | undefined
     readonly extra: any
     readonly usedFields: (keyof Vs)[]
     readonly usedValues: any[]

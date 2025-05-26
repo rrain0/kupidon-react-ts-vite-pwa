@@ -90,16 +90,14 @@ const Profile = React.memo((props: ProfileProps) => {
           
           <div css={col}>
             
-            <ValidationWrap
-              {...props.validationProps}
-              fieldName='photos'
-              render={props => (
+            <ValidationWrap{...props.validationProps} fieldName='photos'>
+              {props => (
                 <ProfilePhotos
                   images={props.value}
                   setImages={props.setValue}
                 />
               )}
-            />
+            </ValidationWrap>
             
             <div css={{ height: 24 }}/>
             
@@ -112,41 +110,33 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <Card>
               
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName='name'
-                render={validProps => (
+              <ValidationWrap{...props.validationProps} fieldName='name'>
+                {validProps => (
                   <ProfileNameOption {...validProps}/>
                 )}
-              />
+              </ValidationWrap>
               
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName='birthDate'
-                render={validProps => (
+              <ValidationWrap{...props.validationProps} fieldName='birthDate'>
+                {validProps => (
                   <ProfileBirthDateOption {...validProps}/>
                 )}
-              />
+              </ValidationWrap>
               
-              <ValidationWrap
-                {...props.validationProps}
-                fieldName='gender'
-                render={validProps => (
+              <ValidationWrap{...props.validationProps} fieldName='gender'>
+                {validProps => (
                   <ProfileGenderOption {...validProps}/>
                 )}
-              />
+              </ValidationWrap>
             
             </Card>
             
             <div css={{ height: 24 }}/>
             
-            <ValidationWrap
-              {...props.validationProps}
-              fieldName='aboutMe'
-              render={validProps => (
+            <ValidationWrap{...props.validationProps} fieldName='aboutMe'>
+              {validProps => (
                 <ProfileAboutMeOption {...validProps}/>
               )}
-            />
+            </ValidationWrap>
             
             <div css={{ height: 24 }}/>
             

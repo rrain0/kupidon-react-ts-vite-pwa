@@ -70,8 +70,8 @@ export namespace WidgetStyleCommon {
     }
     return {
       ...reset,
-      before: { content: 'unset', ...reset },
-      after: { content: 'unset', ...reset },
+      before: reset,
+      after: reset,
     }
   })()
   
@@ -84,6 +84,23 @@ export namespace WidgetStyleCommon {
     focusVisible: noBorderOutlineBoxShadow,
     disabled: { cursor: 'not-allowed' },
   }
+  
+  export const resetInput: WidgetStyle = [
+    reset,
+    {
+      hover: noBorderOutlineBoxShadow,
+      active: noBorderOutlineBoxShadow,
+      focus: noBorderOutlineBoxShadow,
+      focusVisible: noBorderOutlineBoxShadow,
+      disabled: { cursor: 'not-allowed' },
+    },
+    {
+      hover: { cursor: 'text' },
+      typeRadioHover: { cursor: 'pointer' },
+      typeCheckboxHover: { cursor: 'pointer' },
+      placeholder: { opacity: 1 },
+    },
+  ]
   
   
   

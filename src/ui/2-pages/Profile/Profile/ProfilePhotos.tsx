@@ -47,7 +47,6 @@ import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingL
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc = SvgIconsPack.PlusIc
-import contents = EmotionCommon.contents
 import * as uuid from 'uuid'
 import blobToDataUrl = FileU.blobToDataUrl
 import SetterOrUpdater = TypeU.SetterOrUpdater

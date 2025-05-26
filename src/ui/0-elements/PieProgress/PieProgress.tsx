@@ -1,55 +1,49 @@
-import { css } from '@emotion/react'
+import styled from '@emotion/styled'
+import { CssU } from '@util/css/CssU.ts'
+import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
-import clsx from 'clsx'
-import { ReactU } from 'src/util/react/ReactU'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
-import ClassStyle = ReactU.ClassStyle
 import Pu = TypeU.Pu
+import CssColor = CssU.CssColor
+import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 
 
 
 
 
-export type PieProgressProps = Pu<{
-  progress: number
-  type: 'percent' | 'oneBased'
-}> & ClassStyle
+export const PieProgressCssProps = createCssCustomPropsMapper<Pu<{
+  colorAccent: CssColor
+  color: CssColor
+}>>()
+
+
+export type PieProgressProps = React.ComponentProps<typeof PieProgressView> & Pu<{
+  progress: number // 0..100
+}>
 
 
 const PieProgress = React.memo((props: PieProgressProps) => {
   const {
     progress = 0,
-    type = 'percent',
-    className,
+    style,
     ...restProps
   } = props
   
-  const rotation = (() => {
-    if (type === 'percent') return `${progress / 100}turn`
-    if (type === 'oneBased') return `${progress}turn`
-  })()
-  
   return (
-    <div
-      css={[
-        pieProgressStyle,
-        PieProgressStyle.defolt,
-      ]}
-      style={{ '--rotation': rotation }}
-      className={clsx(className, PieProgressStyle.El.clazz.pieProgress)}
+    <PieProgressView
+      data-display-name='PieProgress'
+      style={{ '--rotation': `${progress / 100}turn`, ...style }}
       {...restProps}
     />
   )
 })
+PieProgress.displayName = 'PieProgress'
 export default PieProgress
 
 
 
-
-
-const pieProgressStyle = (t: AppTheme.Theme) => css`
+const PieProgressView = styled(Flex)`
   @property --rotation {
     syntax: '<angle>';
     initial-value: 0turn;
@@ -57,11 +51,18 @@ const pieProgressStyle = (t: AppTheme.Theme) => css`
   }
   
   border-radius: 999999px;
-  transition: --rotation 1000ms;
+  transition: --rotation 1000ms ease;
   background-image: conic-gradient(
-    ${PieProgressStyle.Prop.varr.progressColor} 0turn var(--rotation),
-    ${PieProgressStyle.Prop.varr.restColor} var(--rotation) 1turn
+    var(${PieProgressCssProps.get('colorAccent')}) 0turn var(--rotation),
+    var(${PieProgressCssProps.get('color')}) var(--rotation) 1turn
   );
+  
+  ${PieProgressCssProps.map({
+    colorAccent: 'transparent',
+    color: 'white',
+  })}
 `
+
+
 
 

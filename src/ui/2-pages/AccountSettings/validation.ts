@@ -13,6 +13,7 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 export namespace AccountSettingsPageValidation {
   
   
+  import createValidator = ValidationCore.createValidator
   type SeverErrorCode = UpdateUserErrorData['code']
   
   
@@ -86,8 +87,7 @@ export namespace AccountSettingsPageValidation {
     
     
     
-    [['pwd','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['pwd'],FormValues['initialValues']]
+    createValidator(['pwd', 'initialValues'], ([v, ivs]) => {
       //console.log('v:',v,'ivs:',ivs)
       if (v === ivs.pwd) return new PartialFailureData({
         code: 'pwd-not-changed' satisfies FailureCode,
@@ -95,37 +95,33 @@ export namespace AccountSettingsPageValidation {
         type: 'initial',
         errorFields: ['pwd'],
       })
-    }],
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    }),
+    createValidator(['pwd'], ([v]) => {
       const d = defaultValues.pwd
       if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Пароль не введён',
         type: 'default',
       })
-    }],
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    }),
+    createValidator(['pwd'], ([v]) => {
       if (!isValidPwd(v)) return new PartialFailureData({
         code: 'pwd-incorrect' satisfies FailureCode,
         msg: 'Пароль должен быть не короче 6 символов',
         delay,
       })
-    }],
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    }),
+    createValidator(['pwd'], ([v]) => {
       if (v.length>200) return new PartialFailureData({
         code: 'pwd-too-long' satisfies FailureCode,
         msg: 'Password max length is 200',
         delay,
       })
-    }],
+    }),
     
     
     
-    [['repeatPwd','initialValues'], (values) => {
-      const [v,ivs] = values as [FormValues['repeatPwd'],FormValues['initialValues']]
+    createValidator(['repeatPwd', 'initialValues'], ([v, ivs]) => {
       //console.log('v:',v,'ivs:',ivs)
       if (v === ivs.repeatPwd) return new PartialFailureData({
         code: 'repeat-pwd-not-changed' satisfies FailureCode,
@@ -133,45 +129,41 @@ export namespace AccountSettingsPageValidation {
         type: 'initial',
         errorFields: ['repeatPwd'],
       })
-    }],
-    [['repeatPwd'], (values) => {
-      const [v] = values as [UserValues['repeatPwd']]
+    }),
+    createValidator(['repeatPwd'], ([v]) => {
       const d = defaultValues.repeatPwd
       if (v === d) return new PartialFailureData({
         code: 'repeated-pwd-required' satisfies FailureCode,
         msg: 'Повторите пароль',
         type: 'default',
       })
-    }],
-    [['pwd','repeatPwd'], (values) => {
-      const [pwd,repeatPwd] = values as [UserValues['pwd'],UserValues['repeatPwd']]
-      if(pwd!==repeatPwd) return new PartialFailureData({
+    }),
+    createValidator(['pwd', 'repeatPwd'], ([pwd, repeatPwd]) => {
+      if (pwd !== repeatPwd) return new PartialFailureData({
         code: 'repeated-pwd-not-match' satisfies FailureCode,
         msg: 'Пароли не совпадают',
         delay,
         errorFields: ['repeatPwd'],
       })
-    }],
+    }),
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    createValidator(['fromServer'], ([v]) => {
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
       })
-    }],
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    }),
+    createValidator(['fromServer'], ([v]) => {
       if (v) return new PartialFailureData({
         code: 'unknownError' satisfies FailureCode,
         msg: 'Неизвестная ошибка',
         extra: v,
         type: 'server',
       })
-    }],
+    }),
     
   ]
   

@@ -34,8 +34,8 @@ export namespace ValidationValidate {
   export const validate = <Vs extends Values>(
     data:{
       values: Vs,
-      prevValues?: Partial<Vs>|undefined,
-      prevFailures?: Failures<Vs>|undefined,
+      prevValues?: Partial<Vs> | undefined,
+      prevFailures?: Failures<Vs> | undefined,
       validators: Validators<Vs>,
     },
     config?: {
@@ -75,15 +75,15 @@ export namespace ValidationValidate {
     //console.log('VALIDATE IV: CHANGED_FIELDS',changedFields)
     //console.log('VALIDATE V: RETAINED_FAILS',retainedFails)
     
-    validators.forEach(([usedFields,vd]) => {
+    validators.forEach(([usedFields, vd]) => {
       if (
         usedFields.some(f => changedFields.has(f))
         && usedFields.every(f => !errorFields.has(f))
-      ){
+      ) {
         
         const usedValues = usedFields.map(f => values[f])
-        let result = vd(usedValues)
-        if (result instanceof PartialFailureData){
+        const result = vd(usedValues as [])
+        if (result instanceof PartialFailureData) {
           const newFail = new Failure({
             ...result,
             usedFields: result.usedFields ?? usedFields,
@@ -95,7 +95,7 @@ export namespace ValidationValidate {
       }
     })
     
-    const totalFails = [...newFails,...retainedFails]
+    const totalFails = [...newFails, ...retainedFails]
     //console.log('VALIDATE VI: TOTAL_FAILS',totalFails)
     
     return totalFails

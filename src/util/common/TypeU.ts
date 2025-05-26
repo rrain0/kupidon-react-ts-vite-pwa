@@ -186,12 +186,6 @@ export namespace TypeU {
   export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a === b
   
   
-  //export const mapDefined = (v: any, mapper: Mapper<any>) => isdef(v) ? mapper(v) : v
-  export const mapNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
-  export const mapNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
-  export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
-  export const mapNotnumberOrNegative = <T, R>(v: T, r: R) => isnumber(v) && v >= 0 ? v : r
-  export const mapNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
   
   
   // By default false is mapped to undefined
@@ -211,6 +205,23 @@ export namespace TypeU {
     if (v === false) return falseV
     return v
   }
+  
+  
+  export function mapVal<V, const VM, const MV>(
+    value: V | VM, valueToMap: VM, mappedValue: MV
+  ): V | MV {
+    if (value === valueToMap) return mappedValue
+    return value as V
+  }
+  
+  
+  
+  //export const mapDefined = (v: any, mapper: Mapper<any>) => isdef(v) ? mapper(v) : v
+  export const mapNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
+  export const mapNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
+  export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
+  export const mapNotnumberOrNegative = <T, R>(v: T, r: R) => isnumber(v) && v >= 0 ? v : r
+  export const mapNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
   
   
 }

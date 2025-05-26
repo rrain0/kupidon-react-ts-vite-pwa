@@ -26,15 +26,32 @@ export namespace ReactU {
   
   
   
+  
+  // 'colorAccent' => '--color-accent'
+  export const mapToCssCustomProp = (propName: string): `--${string}` => (
+    `--${camelCaseToKebabCase(propName)}`
+  )
+  
   // { colorAccent: '#c0ffee' } => { '--color-accent': '#c0ffee' }
   export const mapToCssCustomProps = (
     cssProps: RecordPu<string, string | number>
   ): RecordPu<`--${string}`, string | number> => {
     return ObjectMap(
       cssProps,
-      ([prop, value]) => [`--${camelCaseToKebabCase(prop)}`, value] as const
+      ([propName, value]) => [mapToCssCustomProp(propName), value] as const
     )
   }
+  
+  
+  export const createCssCustomPropsMapper = <
+    P extends RecordPu<string, string | number>
+  >(): {
+    map: (cssProps: P) => ReturnType<typeof mapToCssCustomProps>,
+    get: (propName: keyof P & string) => ReturnType<typeof mapToCssCustomProp>,
+  } => {
+    return { map: mapToCssCustomProps, get: mapToCssCustomProp }
+  }
+  
   
   
   

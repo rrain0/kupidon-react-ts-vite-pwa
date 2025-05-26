@@ -3,17 +3,17 @@ import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
-import mapToCssCustomProps = ReactU.mapToCssCustomProps
 import CssLength = CssU.CssLength
+import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 
 
 
 
 // Use typed css prop names
-export const MyComponentCssProps = (cssProps: Pu<{
+export const MyComponentCssProps = createCssCustomPropsMapper<Pu<{
   ph: CssLength
   pv: CssLength
-}> = { }) => mapToCssCustomProps(cssProps)
+}>>()
 
 export type MyComponentExtraProps = Pu<{
   // custom props

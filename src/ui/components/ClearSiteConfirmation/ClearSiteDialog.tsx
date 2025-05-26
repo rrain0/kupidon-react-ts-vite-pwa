@@ -80,6 +80,7 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
     </>
   )
 })
+ClearSiteDialog.displayName = 'ClearSiteDialog'
 export default ClearSiteDialog
 
 

@@ -4,7 +4,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { PieProgressStyle } from 'src/ui/0-elements/PieProgress/PieProgressStyle.ts'
+import { PieProgressCssProps } from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import absTlwh = EmotionCommon.absTlwh
 import flexC = EmotionCommon.flexC
 
@@ -45,26 +45,24 @@ export namespace ImageParts {
   
   
   
-  export const pieProgressS = (t: AppTheme.Theme) => css`
-    ${PieProgressStyle.El.thiz.pieProgress} {
-      ${PieProgressStyle.Prop.prop.progressColor}: transparent;
-      ${PieProgressStyle.Prop.prop.restColor}:     ${t.photos.ct};
-      height: 30%;
-      aspect-ratio: 1;
-    }
-  `
-  export const pieProgressSmS = (t: AppTheme.Theme) => css`
-    ${ImageParts.pieProgressS(t)};
-    ${PieProgressStyle.El.thiz.pieProgress} {
-      height: min(50%, 160px);
-    }
-  `
-  export const pieProgressAccentS = (t: AppTheme.Theme) => css`
-    ${ImageParts.pieProgressS(t)};
-    ${PieProgressStyle.El.thiz.pieProgress} {
-      ${PieProgressStyle.Prop.prop.restColor}: ${t.photos.bg};
-    }
-  `
+  export const pieProgressS = (t: AppTheme.Theme) => css({
+    height: '30%',
+    aspectRatio: 1,
+    ...PieProgressCssProps.map({
+      colorAccent: t.photos.ct,
+      color: 'transparent',
+    }),
+  })
+  export const pieProgressSmS = (t: AppTheme.Theme) => [
+    ImageParts.pieProgressS(t), css({
+      height: 'min(50%, 160px)',
+    }),
+  ]
+  export const pieProgressAccentS = (t: AppTheme.Theme) => [
+    ImageParts.pieProgressS(t), css({
+      ...PieProgressCssProps.map({ color: t.photos.bg }),
+    }),
+  ]
   
 }
 

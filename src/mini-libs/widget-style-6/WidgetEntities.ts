@@ -178,7 +178,7 @@ export namespace WidgetProps {
   export const gridAutoRows = WidgetProp.ofName('grid-auto-rows')
   export const gridAutoColumns = WidgetProp.ofName('grid-auto-columns')
   export const gridAutoFlow = WidgetProp.ofName('grid-auto-flow', v => {
-    if (v === 'column') return 'col'
+    if (v === 'col') return 'column'
     return v
   })
   export const gridArea = WidgetProp.ofName('grid-area')

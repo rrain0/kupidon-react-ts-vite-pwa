@@ -77,13 +77,6 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
   const duration = useLiveShortDuration(lastMsgDate)
   const durationText = useShortDurationUiText(duration)
   
-  const unreadText = (() => {
-    if (unreadCnt >= 1e8) return '∞'
-    if (unreadCnt >= 1e6) return trimDotZerosEnd((unreadCnt / 1e6).toFixed(1)) + 'M'
-    if (unreadCnt >= 1e3) return trimDotZerosEnd((unreadCnt / 1e3).toFixed(1)) + 'k'
-    return unreadCnt ? `${unreadCnt}` : ''
-  })()
-  
   
   const uiValues = useMemo(() => ({
     youRespectful: outerUiValues.youRespectful,
@@ -117,7 +110,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
               error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
               durationText && <Status key='duration'>{durationText}</Status>,
               mute && <VolumeMute key='mute'/>,
-              !!order && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
+              order === 1 && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
             ]
               .filter(it => it)
               .flatMap((it, i, arr) => (
@@ -211,7 +204,7 @@ const pinIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
 const isWritingFiveDotsS = css`
   height: 10px;
   width: auto;
-  ${IsWritingFiveDotsCssProps({
+  ${IsWritingFiveDotsCssProps.map({
     color: 'black',
     colorAccent: '#BB2649',
   })}

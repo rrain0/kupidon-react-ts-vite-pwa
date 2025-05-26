@@ -23,6 +23,7 @@ import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
 import Pu = TypeU.Pu
 import RootRoute = AppRoutes.RootRoute
+import FourDotsIc = SvgIconsPack.FourDotsIc
 
 
 
@@ -53,7 +54,7 @@ const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
       
       <Flex centerStart>
         <Button css={IconButtonS6.t(searchButtonS)}>
-          <SearchIc/>
+          <FourDotsIc/>
         </Button>
       </Flex>
       

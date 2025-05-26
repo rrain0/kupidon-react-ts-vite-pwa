@@ -1,8 +1,5 @@
 import { Global } from '@emotion/react'
-import React, {
-  useImperativeHandle,
-  useRef,
-} from 'react'
+import React from 'react'
 import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
@@ -20,31 +17,25 @@ import RefreshBtn = ButtonBarComponents.RefreshPageBtn
 
 
 
-export type BottomButtonBarProps =
-  & React.JSX.IntrinsicElements['section']
-  & Pu<{
-    children: React.ReactNode
-    leftChildren: React.ReactNode
-    rightChildren: React.ReactNode
-    backBtn: boolean
-    settingsBtn: boolean
-    settingsBtnLeft: boolean
-    refreshPageBtn: boolean
-  }>
+export type BottomButtonBarProps = React.ComponentProps<'section'> & Pu<{
+  children: React.ReactNode
+  leftChildren: React.ReactNode
+  rightChildren: React.ReactNode
+  backBtn: boolean
+  settingsBtn: boolean
+  settingsBtnLeft: boolean
+  refreshPageBtn: boolean
+}>
 
 
 
 const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
   const {
-    ref,
     backBtn, settingsBtnLeft, leftChildren,
     children, settingsBtn,
     rightChildren, refreshPageBtn,
     ...restProps
   } = props
-  
-  const thisRef = useRef<HTMLTableSectionElement>(null)
-  useImperativeHandle(ref, () => thisRef.current!, [])
   
   
   return (
@@ -52,19 +43,17 @@ const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
       
       <Global
         styles={{
-          ':root': {
-            '--bottom-button-bar-height': '70px',
-          },
+          ':root': { '--bottom-button-bar-height': '70px' },
         }}
       />
       
       <BottomButtonBarFrame
+        data-display-name='BottomButtonButtonBar'
         {...restProps}
-        ref={thisRef}
       >
         <ButtonsContainer>
           
-          <LeftButtonsContainer>
+          {/* <LeftButtonsContainer>
             {backBtn && <BackBtn0/>}
             {settingsBtnLeft && <SettingsBtn/>}
             {leftChildren}
@@ -80,7 +69,8 @@ const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
           <RightButtonsContainer>
             {rightChildren}
             {refreshPageBtn && <RefreshBtn/>}
-          </RightButtonsContainer>
+          </RightButtonsContainer> */}
+          {rightChildren}
         
         </ButtonsContainer>
       </BottomButtonBarFrame>
@@ -88,6 +78,7 @@ const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
     </>
   )
 })
+BottomButtonBar.displayName = 'BottomButtonButtonBar'
 export default BottomButtonBar
 
 

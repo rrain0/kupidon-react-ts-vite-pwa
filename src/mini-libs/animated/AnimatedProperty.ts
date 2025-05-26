@@ -32,13 +32,14 @@ export type AnimatedPropertyToValue<AP extends AnimatedProperty<any> | undefined
 export type AnimatedPropsToValues<
   AnimProps extends readonly (AnimatedProperty<any> | undefined)[],
   OutTuple extends readonly any[] = [],
-> = AnimProps extends readonly [infer Curr, ...infer Rest extends readonly any[]]
-  ? AnimatedPropsToValues<Rest, [...OutTuple,
-    | (Curr extends undefined ? undefined : never)
-    | (Curr extends AnimatedProperty<infer Value> ? Value : never)
-  ]>
-  : OutTuple
-
+> = (
+  AnimProps extends readonly [infer Curr, ...infer Rest extends readonly any[]]
+    ? AnimatedPropsToValues<Rest, [...OutTuple, (
+      | (Curr extends undefined ? undefined : never)
+      | (Curr extends AnimatedProperty<infer Value> ? Value : never)
+    )]>
+    : OutTuple
+)
 
 
 
@@ -46,7 +47,7 @@ export type AnimatedPropsFromValues<
   Sources extends readonly any[],
   OutTuple extends readonly (AnimatedProperty<any> | undefined)[] = [],
 > = Sources extends readonly [infer Curr, ...infer Rest extends readonly any[]]
-  ? AnimatedPropsFromValues<Rest, [...OutTuple,
+  ? AnimatedPropsFromValues<Rest, [...OutTuple, (
       AnimatedProperty<Curr> | (Curr extends undefined ? undefined : never)
-  ]>
+  )]>
   : OutTuple

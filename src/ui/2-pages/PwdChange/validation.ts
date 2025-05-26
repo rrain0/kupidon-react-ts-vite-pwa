@@ -13,6 +13,7 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 export namespace PwdChangePageValidation {
   
   
+  import createValidator = ValidationCore.createValidator
   type SeverErrorCode = UpdateUserErrorData['code']
   
   
@@ -27,7 +28,7 @@ export namespace PwdChangePageValidation {
     | 'repeated-pwd-required'
     | 'repeated-pwd-not-match'
     
-    | "INVALID_PWD"
+    | 'INVALID_PWD'
     
     | 'connectionError'
     | 'unknownError'
@@ -42,7 +43,7 @@ export namespace PwdChangePageValidation {
     'pwd-too-long': ErrorUiText.pwdMaxLenIs200,
     'repeated-pwd-required': ErrorUiText.repeatPwd,
     'repeated-pwd-not-match': ErrorUiText.passwordsDoNotMatch,
-    "INVALID_PWD": ErrorUiText.wrongPwd,
+    'INVALID_PWD': ErrorUiText.wrongPwd,
     'connectionError': ErrorUiText.connectionError,
     'unknownError': ErrorUiText.unknownError,
   } satisfies UiTextValues<FailureCode>
@@ -90,107 +91,97 @@ export namespace PwdChangePageValidation {
     
     
     
-    [['currentPwd'], (values) => {
-      const [v] = values as [UserValues['currentPwd']]
+    createValidator(['currentPwd'], ([v]) => {
       const d = defaultValues.currentPwd
       if (v === d) return new PartialFailureData({
         code: 'current-pwd-required' satisfies FailureCode,
         msg: 'Current password is not entered',
         type: 'default',
       })
-    }],
-    [['currentPwd'], (values) => {
-      const [v] = values as [UserValues['currentPwd']]
+    }),
+    createValidator(['currentPwd'], ([v]) => {
       if (v.length>200) return new PartialFailureData({
         code: 'current-pwd-too-long' satisfies FailureCode,
         msg: 'Current password max length is 200',
         delay,
       })
-    }],
+    }),
     
     
     
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    createValidator(['pwd'], ([v]) => {
       const d = defaultValues.pwd
       if (v === d) return new PartialFailureData({
         code: 'pwd-required' satisfies FailureCode,
         msg: 'Password is not entered',
         type: 'default',
       })
-    }],
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    }),
+    createValidator(['pwd'], ([v]) => {
       if (!isValidPwd(v)) return new PartialFailureData({
         code: 'pwd-incorrect' satisfies FailureCode,
         msg: 'Password minimum length is 6 chars',
         delay,
       })
-    }],
-    [['pwd'], (values) => {
-      const [v] = values as [UserValues['pwd']]
+    }),
+    createValidator(['pwd'], ([v]) => {
       if (v.length>200) return new PartialFailureData({
         code: 'pwd-too-long' satisfies FailureCode,
         msg: 'Password max length is 200',
         delay,
       })
-    }],
+    }),
     
     
     
     
-    [['repeatPwd'], (values) => {
-      const [v] = values as [UserValues['repeatPwd']]
+    createValidator(['repeatPwd'], ([v]) => {
       const d = defaultValues.repeatPwd
       if (v === d) return new PartialFailureData({
         code: 'repeated-pwd-required' satisfies FailureCode,
         msg: 'Repeat password',
         type: 'default',
       })
-    }],
-    [['pwd','repeatPwd'], (values) => {
-      const [pwd,repeatPwd] = values as [UserValues['pwd'],UserValues['repeatPwd']]
-      if(pwd!==repeatPwd) return new PartialFailureData({
+    }),
+    createValidator(['pwd', 'repeatPwd'], ([pwd, repeatPwd]) => {
+      if (pwd !== repeatPwd) return new PartialFailureData({
         code: 'repeated-pwd-not-match' satisfies FailureCode,
         msg: 'Passwords do not match',
         delay,
         errorFields: ['repeatPwd'],
       })
-    }],
+    }),
     
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
-      if (v?.error.code === "INVALID_PWD") return new PartialFailureData({
+    createValidator(['fromServer'], ([v]) => {
+      if (v?.error.code === 'INVALID_PWD') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Wrong password',
-        errorFields: ['fromServer','currentPwd'],
+        errorFields: ['fromServer', 'currentPwd'],
         type: 'server',
       })
-    }],
+    }),
     
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    createValidator(['fromServer'], ([v]) => {
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Server connection error, it may be an internet error',
         type: 'server',
       })
-    }],
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    }),
+    createValidator(['fromServer'], ([v]) => {
       if (v) return new PartialFailureData({
         code: 'unknownError' satisfies FailureCode,
         msg: 'Unknown error',
         extra: v,
         type: 'server',
       })
-    }],
+    }),
     
   ]
   

@@ -50,8 +50,8 @@ export const ToastBody = React.memo(({
           css={t => css`
             width: 20px;
             height: 20px;
-            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentLoadingBg[0]};
-            ${SvgIconS.El.icon.props.colorAccent.name}: ${t.toast.accentLoadingCt[0]};
+            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentLoadingBg};
+            ${SvgIconS.El.icon.props.colorAccent.name}: ${t.toast.accentLoadingCt};
           `}
         />
       )}
@@ -61,7 +61,7 @@ export const ToastBody = React.memo(({
           css={t => css`
             width: 20px;
             height: 20px;
-            --color: ${t.toast.accentInfo[0]};
+            --color: ${t.toast.accentInfo};
           `}
         />
       )}
@@ -71,7 +71,7 @@ export const ToastBody = React.memo(({
           css={t => css`
             width: 20px;
             height: 20px;
-            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentOk[0]};
+            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentOk};
           `}
         />
       )}
@@ -81,7 +81,7 @@ export const ToastBody = React.memo(({
           css={t => css`
             width: 20px;
             height: 20px;
-            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentWarn[0]};
+            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentWarn};
           `}
         />
       )}
@@ -91,7 +91,7 @@ export const ToastBody = React.memo(({
           css={t => css`
             width: 20px;
             height: 20px;
-            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentDanger[0]};
+            ${SvgIconS.El.icon.props.color.name}: ${t.toast.accentDanger};
           `}
         />
       )}
@@ -144,7 +144,7 @@ const CloseButton = styled.button`
   &>${SvgIconS.El.icon.sel()} {
     width: 100%;
     height: 100%;
-    ${SvgIconS.El.icon.props.color.name}: ${p => p.theme.toast.ct2[0]};
+    ${SvgIconS.El.icon.props.color.name}: ${p => p.theme.toast.ct2};
   }
   
   ${hoverable}{

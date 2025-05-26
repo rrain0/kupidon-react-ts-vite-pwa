@@ -5,8 +5,7 @@ import Setter = TypeU.Setter
 
 
 
-export const useStateSync =
-<T>(
+export const useStateSync = <T>(
   main: T, secondary: T,
   setMain: Setter<T>, setSecondary: Setter<T>
 ) => {

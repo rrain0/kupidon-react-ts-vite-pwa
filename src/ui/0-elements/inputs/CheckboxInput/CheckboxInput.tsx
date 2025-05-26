@@ -41,33 +41,21 @@ const CheckboxInput = React.memo((props: CheckboxInputProps) => {
   useImperativeHandle(ref, () => elemRef.current!, [])
   
   
-  const frameProps = {
-    className: clsx(className, CheckboxInputStyle.W.e.frame.e.name),
-    tabIndex: 0,
-    style: style,
-  }
-  const inputProps = {
-    className: CheckboxInputStyle.W.e.input.e.name,
-    type: 'checkbox',
-    [CheckboxInputStyle.W.s.error.s.name]: toEmptyAttr(hasError),
-    ...restProps,
-  }
-  const iconBoxProps = {
-    className: CheckboxInputStyle.W.e.iconBox.e.name,
-  }
-  const iconBoxCheckedProps = {
-    className: CheckboxInputStyle.W.e.iconBoxChecked.e.name,
-  }
   
   
   return (
     <Button as='label' // Frame
-      {...frameProps}
+      className={clsx(className, CheckboxInputStyle.W.e.frame.e.name)}
+      tabIndex={0}
+      style={style}
       css={IconButtonS6.t(IconButtonS6.S.trans.round.lg.secondary)}
     >
       
       <input // Input
-        {...inputProps}
+        className={CheckboxInputStyle.W.e.input.e.name}
+        type='checkbox'
+        {...{ [CheckboxInputStyle.W.s.error.s.name]: toEmptyAttr(hasError) }}
+        {...restProps}
         ref={elemRef}
       />
       
@@ -75,11 +63,11 @@ const CheckboxInput = React.memo((props: CheckboxInputProps) => {
       {childrenPosition === 'start' && children}
       
       <div // IconBox
-        {...iconBoxProps}
+        className={CheckboxInputStyle.W.e.iconBox.e.name}
       />
       
       <div // IconBoxChecked
-        {...iconBoxCheckedProps}
+        className={CheckboxInputStyle.W.e.iconBoxChecked.e.name}
       >
         <CheckmarkBoldIc/>
       </div>

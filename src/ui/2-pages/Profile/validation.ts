@@ -27,6 +27,7 @@ export const profilePhotosCntMax = 6
 export namespace ProfilePageValidation {
   
   
+  import createValidator = ValidationCore.createValidator
   type SeverErrorCode = UpdateUserErrorData['code']
   
   
@@ -143,7 +144,7 @@ export namespace ProfilePageValidation {
     
     
     
-    [['name', 'initialValues'], (values) => {
+    createValidator(['name', 'initialValues'], (values) => {
       const [v, ivs] = values as [FormValues['name'], FormValues['initialValues']]
       //console.log('v:',v,'ivs:',ivs)
       if (v === ivs.name) return new PartialFailureData({
@@ -152,59 +153,51 @@ export namespace ProfilePageValidation {
         type: 'initial',
         errorFields: ['name'],
       })
-    }],
-    [['name'], (values) => {
-      const [v] = values as [FormValues['name']]
+    }),
+    createValidator(['name'], ([v]) => {
       const d = defaultValues.name
       if (v === d) return new PartialFailureData({
         code: 'name-required' satisfies FailureCode,
         msg: 'Имя не введено',
         type: 'default',
       })
-    }],
-    [['name'], (values) => {
-      const [v] = values as [UserValues['name']]
+    }),
+    createValidator(['name'], ([v]) => {
       if (v.length>100) return new PartialFailureData({
         code: 'name-too-long' satisfies FailureCode,
         msg: 'Name max length is 100',
         delay,
       })
-    }],
+    }),
     
     
     
-    [['birthDate', 'initialValues'], (values) => {
-      const [v, ivs] = values as [FormValues['birthDate'], FormValues['initialValues']]
-      if (v === ivs.birthDate
-        || DateTime.eqFrom_yyyy_MM_dd(v, ivs.birthDate)
-      )
+    createValidator(['birthDate', 'initialValues'], ([v, ivs]) => {
+      if (v === ivs.birthDate || DateTime.eqFrom_yyyy_MM_dd(v, ivs.birthDate))
         return new PartialFailureData({
           code: 'birth-date-not-changed' satisfies FailureCode,
           msg: 'Birth date is not changed',
           type: 'initial',
           errorFields: ['birthDate'],
         })
-    }],
-    [['birthDate'], (values) => {
-      const [v] = values as [FormValues['birthDate']]
+    }),
+    createValidator(['birthDate'], ([v]) => {
       const d = defaultValues.birthDate
       if (v === d) return new PartialFailureData({
         code: 'birth-date-required' satisfies FailureCode,
         msg: 'Birth date is not entered',
         type: 'default',
       })
-    }],
-    [['birthDate'], (values) => {
-      const [v] = values as [FormValues['birthDate']]
+    }),
+    createValidator(['birthDate'], ([v]) => {
       const parsed = DateTime.from_yyyy_MM_dd(v)
       if (!parsed) return new PartialFailureData({
         code: 'birth-date-incorrect-format' satisfies FailureCode,
         msg: 'Birth date has incorrect format',
         delay,
       })
-    }],
-    [['birthDate'], (values) => {
-      const [v] = values as [FormValues['birthDate']]
+    }),
+    createValidator(['birthDate'], ([v]) => {
       const parsed = DateTime.from_yyyy_MM_dd(v)
       const normalized = parsed?.copy().normalize()
       if (parsed && !parsed.eq(normalized))
@@ -213,9 +206,8 @@ export namespace ProfilePageValidation {
           msg: 'This date does not exists',
           delay,
         })
-    }],
-    [['birthDate'], (values) => {
-      const [v] = values as [FormValues['birthDate']]
+    }),
+    createValidator(['birthDate'], ([v]) => {
       const parsed = DateTime.from_yyyy_MM_dd(v)
       if (parsed && parsed.getAge()<18)
         return new PartialFailureData({
@@ -223,33 +215,30 @@ export namespace ProfilePageValidation {
           msg: 'You must be at least 18 years old',
           delay,
         })
-    }],
+    }),
     
     
     
-    [['gender', 'initialValues'], (values) => {
-      const [v, ivs] = values as [FormValues['gender'], FormValues['initialValues']]
+    createValidator(['gender', 'initialValues'], ([v, ivs]) => {
       if (v === ivs.gender) return new PartialFailureData({
         code: 'gender-not-changed' satisfies FailureCode,
         msg: 'Gender is not changed',
         type: 'initial',
         errorFields: ['gender'],
       })
-    }],
-    [['gender'], (values) => {
-      const [v] = values as [UserValues['gender']]
+    }),
+    createValidator(['gender'], ([v]) => {
       const d = defaultValues.gender
       if (v === d) return new PartialFailureData({
         code: 'gender-required' satisfies FailureCode,
         msg: 'Пол не выбран',
         type: 'default',
       })
-    }],
+    }),
     
     
     
-    [['aboutMe', 'initialValues'], (values) => {
-      const [v, ivs] = values as [FormValues['aboutMe'], FormValues['initialValues']]
+    createValidator(['aboutMe', 'initialValues'], ([v, ivs]) => {
       //console.log('v:',v,'ivs:',ivs)
       if (v === ivs.aboutMe) return new PartialFailureData({
         code: 'about-me-not-changed' satisfies FailureCode,
@@ -257,20 +246,18 @@ export namespace ProfilePageValidation {
         type: 'initial',
         errorFields: ['aboutMe'],
       })
-    }],
-    [['aboutMe'], (values) => {
-      const [v] = values as [FormValues['aboutMe']]
-      if (v.length>2000) return new PartialFailureData({
+    }),
+    createValidator(['aboutMe'], ([v]) => {
+      if (v.length > 2000) return new PartialFailureData({
         code: 'about-me-is-too-long' satisfies FailureCode,
         msg: 'About me is longer than 2000 chars',
         delay,
       })
-    }],
+    }),
     
     
     
-    [['photos', 'initialValues'], (values) => {
-      const [v, ivs] = values as [FormValues['photos'], FormValues['initialValues']]
+    createValidator(['photos', 'initialValues'], ([v, ivs]) => {
       if (v.every((it, i) => photosComparator(it, ivs.photos[i])))
         return new PartialFailureData({
           code: 'photos-not-changed' satisfies FailureCode,
@@ -278,31 +265,28 @@ export namespace ProfilePageValidation {
           type: 'initial',
           errorFields: ['photos'],
         })
-    }],
+    }),
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    createValidator(['fromServer'], ([v]) => {
       if (v?.error.code === 'NO_USER') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Не найдено пользователя с таким id',
         type: 'server',
       })
-    }],
+    }),
     
     
     
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    createValidator(['fromServer'], ([v]) => {
       if (v?.error.code === 'connectionError') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
       })
-    }],
-    [['fromServer'], (values) => {
-      const [v] = values as [FromServerValue]
+    }),
+    createValidator(['fromServer'], ([v]) => {
       if (v) {
         console.log('Unknown error:', JSON.stringify(v.error))
         return new PartialFailureData({
@@ -312,7 +296,7 @@ export namespace ProfilePageValidation {
           type: 'server',
         })
       }
-    }],
+    }),
     
   ]
   

@@ -145,9 +145,8 @@ const LoginPage = React.memo(() => {
             <Hdrs.Page>{titleText.login}</Hdrs.Page>
             
             
-            <ValidationWrap {...validationProps}
-              fieldName='login'
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='login'>
+              {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.loginAsEmail}
@@ -155,11 +154,10 @@ const LoginPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
-            <ValidationWrap {...validationProps}
-              fieldName='pwd'
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='pwd'>
+              {props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.pwd}
@@ -167,7 +165,7 @@ const LoginPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
             
             <Button

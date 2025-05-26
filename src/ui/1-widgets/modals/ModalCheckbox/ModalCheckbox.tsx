@@ -8,8 +8,6 @@ import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
-//import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput0.tsx'
-//import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import CheckboxInputGroup from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -44,24 +42,6 @@ const ModalCheckbox = ReactU.memo(<V extends string>(props: ModalCheckboxProps<V
             {...sheetProps.sheetProps}
             title={title}
           >
-            
-            
-            {/* <CheckboxInputGroup css={selectItemsContainer}>
-              
-              {options.map(opt => <CheckboxInput
-                css={CheckboxInputStyle.normal}
-                childrenPosition="start"
-                checked={checked.includes(opt.value)}
-                onChange={() => onChange(opt.value)}
-                value={opt.value}
-                key={opt.value}
-              >
-                <div css={selectItemText}>
-                  {opt.text}
-                </div>
-              </CheckboxInput>)}
-            
-            </CheckboxInputGroup> */}
             
             
             <CheckboxInputGroup css={selectItemsContainer}>

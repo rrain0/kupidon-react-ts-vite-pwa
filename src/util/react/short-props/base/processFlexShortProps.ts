@@ -23,12 +23,17 @@ export type FlexShortProps = Pu<{
   alignEnd: boolean // true => { alignItems: 'end' }
   alignStretch: boolean // true => { alignItems: 'stretch' }
   
+  // justify-content: stretch; does not exist for flex
   justifyCtStart: boolean // true => { justifyContent: 'start' }
   justifyCtEnd: boolean // true => { justifyContent: 'end' }
+  justifyCtSpaceBetween: boolean // true => { justifyContent: 'space-between' }
+  justifyCtSpaceAround: boolean // true => { justifyContent: 'space-around' }
   
   centerStart: boolean // true => { alignItems: 'center', justifyContent: 'start' }
   center: boolean // true => { alignItems: 'center', justifyContent: 'center' }
   centerEnd: boolean // true => { alignItems: 'center', justifyContent: 'end' }
+  
+  stretchEnd: boolean // true => { alignItems: 'stretch', justifyContent: 'end' }
   
   g: number | string
 }>
@@ -42,8 +47,9 @@ export const processFlexShortProps = <P extends object>(
     row, rowRev, col, colRev, wrap, wrapRev,
     align, alignCt, justifyCt,
     alignStart, alignEnd, alignStretch,
-    justifyCtStart, justifyCtEnd,
+    justifyCtStart, justifyCtEnd, justifyCtSpaceBetween, justifyCtSpaceAround,
     centerStart, center, centerEnd,
+    stretchEnd,
     g,
     ...flexRest
   } = props
@@ -62,12 +68,16 @@ export const processFlexShortProps = <P extends object>(
     ...center && { alignItems: 'center', justifyContent: 'center' },
     ...centerEnd && { alignItems: 'center', justifyContent: 'end' },
     
+    ...stretchEnd && { alignItems: 'stretch', justifyContent: 'end' },
+    
     ...alignStart && { alignItems: 'start' },
     ...alignEnd && { alignItems: 'end' },
     ...alignStretch && { alignItems: 'stretch' },
     
     ...justifyCtStart && { justifyContent: 'start' },
     ...justifyCtEnd && { justifyContent: 'end' },
+    ...justifyCtSpaceBetween && { justifyContent: 'space-between' },
+    ...justifyCtSpaceAround && { justifyContent: 'space-around' },
     
     ...isdef(align) && { alignItems: mapBool(align, 'center') },
     ...isdef(alignCt) && { alignContent: mapBool(alignCt, 'center') },

@@ -40,6 +40,7 @@ import EyeCrossedOutSvg from '@ic/normal/ui/eye-crossed-out.svg?react'
 import EyeWideSvg from '@ic/normal/ui/eye-wide.svg?react'
 
 import FloppyDisk1Svg from '@ic/normal/ui/floppy-disk-1.svg?react'
+import FourDotsSvg from '@ic/normal/ui/four-dots.svg?react'
 import FullscreenSvg from '@ic/normal/ui/fullscreen.svg?react'
 import FunnelFilterListSvg from '@ic/normal/ui/funnel-filter-list.svg?react'
 
@@ -243,6 +244,7 @@ export namespace SvgIconsPack {
   
   
   export const FloppyDisk1Ic = generateSimpleSvgIcon(FloppyDisk1Svg)
+  export const FourDotsIc = generateSimpleSvgIcon(FourDotsSvg)
   export const FullscreenIc = generateSimpleSvgIcon(FullscreenSvg)
   export const FunnelFilterListIc = generateSimpleSvgIcon(FunnelFilterListSvg)
   

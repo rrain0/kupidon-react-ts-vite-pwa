@@ -76,10 +76,6 @@ export namespace CheckboxInputStyle {
     // state: normal
     ${W.use.s.normal().e.frame().thisUse} {
       ${reset};
-      position: relative;
-      cursor: pointer;
-      
-      transition: background linear 300ms;
     }
     ${W.use.s.normal().e.input().thisUse} {
       ${resetInput};
@@ -88,12 +84,10 @@ export namespace CheckboxInputStyle {
       cursor: pointer;
     }
     ${W.use.s.normal().e.iconBox().thisUse} {
-      grid-area: 1;
       pointer-events: none;
       ${flexC};
     }
     ${W.use.s.normal().e.iconBoxChecked().thisUse} {
-      grid-area: 1;
       pointer-events: none;
       display: none;
     }

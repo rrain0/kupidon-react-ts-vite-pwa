@@ -6,17 +6,18 @@ import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
 import Pu = TypeU.Pu
 import CssColor = CssU.CssColor
-import mapToCssCustomProps = ReactU.mapToCssCustomProps
+import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 
 
 
 
 
-// Use typed css prop names
-export const IsWritingFiveDotsCssProps = (cssProps: Pu<{
-  color: CssColor
+
+
+export const IsWritingFiveDotsCssProps = createCssCustomPropsMapper<Pu<{
   colorAccent: CssColor
-}> = { }) => mapToCssCustomProps(cssProps)
+  color: CssColor
+}>>()
 
 
 

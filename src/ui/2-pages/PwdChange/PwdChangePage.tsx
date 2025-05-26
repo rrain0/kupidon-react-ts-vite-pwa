@@ -152,9 +152,8 @@ const PwdChangePage = React.memo(() => {
               <ItemTitleContainer>
                 <Hdrs.InputTitleBold>{titleText.currentPwd}</Hdrs.InputTitleBold>
               </ItemTitleContainer>
-              <ValidationWrap {...validationProps}
-                fieldName="currentPwd"
-                render={props => (
+              <ValidationWrap {...validationProps} fieldName='currentPwd'>
+                {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectSmallNormal}
                     placeholder={placeholderText.currentPwd}
@@ -162,7 +161,7 @@ const PwdChangePage = React.memo(() => {
                     hasError={props.highlight}
                   />
                 )}
-              />
+              </ValidationWrap>
             </ItemContainer>
             
             
@@ -170,9 +169,8 @@ const PwdChangePage = React.memo(() => {
               <ItemTitleContainer>
                 <Hdrs.InputTitleBold>{titleText.newPwd}</Hdrs.InputTitleBold>
               </ItemTitleContainer>
-              <ValidationWrap {...validationProps}
-                fieldName="pwd"
-                render={props => (
+              <ValidationWrap {...validationProps} fieldName='pwd'>
+                {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectSmallNormal}
                     placeholder={placeholderText.newPwd}
@@ -180,7 +178,7 @@ const PwdChangePage = React.memo(() => {
                     hasError={props.highlight}
                   />
                 )}
-              />
+              </ValidationWrap>
             </ItemContainer>
             
             
@@ -188,9 +186,8 @@ const PwdChangePage = React.memo(() => {
               <ItemTitleContainer>
                 <Hdrs.InputTitleBold>{titleText.repeatPwd}</Hdrs.InputTitleBold>
               </ItemTitleContainer>
-              <ValidationWrap {...validationProps}
-                fieldName="repeatPwd"
-                render={props => (
+              <ValidationWrap {...validationProps} fieldName='repeatPwd'>
+                {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectSmallNormal}
                     placeholder={placeholderText.repeatPwd}
@@ -198,7 +195,7 @@ const PwdChangePage = React.memo(() => {
                     hasError={props.highlight}
                   />
                 )}
-              />
+              </ValidationWrap>
             </ItemContainer>
           
           

@@ -5,7 +5,7 @@ import {
 import {
   CommonViewShortProps,
   processCommonViewShortProps,
-} from 'src/util/react/short-props/processCommonViewShortProps.ts'
+} from 'src/util/react/short-props/props/processCommonViewShortProps.ts'
 
 
 

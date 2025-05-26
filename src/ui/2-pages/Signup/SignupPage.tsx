@@ -188,9 +188,8 @@ const SignupPage = React.memo(() => {
             
             
             
-            <ValidationWrap {...validationProps}
-              fieldName="email"
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='email'>
+              {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.emailAsLogin}
@@ -198,11 +197,10 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
-            <ValidationWrap {...validationProps}
-              fieldName="pwd"
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='pwd'>
+              {props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.pwd}
@@ -210,11 +208,10 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
-            <ValidationWrap {...validationProps}
-              fieldName="repeatPwd"
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='repeatPwd'>
+              {props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.repeatPwd}
@@ -222,11 +219,10 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
-            <ValidationWrap {...validationProps}
-              fieldName="name"
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='name'>
+              {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.name}
@@ -234,11 +230,10 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
-            <ValidationWrap {...validationProps}
-              fieldName="birthDate"
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='birthDate'>
+              {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
                   placeholder={placeholderText.birthDate}
@@ -246,12 +241,11 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            />
+            </ValidationWrap>
             
             
-            <ValidationWrap {...validationProps}
-              fieldName="gender"
-              render={props => (
+            <ValidationWrap {...validationProps} fieldName='gender'>
+              {props => (
                 <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
                   hasError={props.highlight}
                 >
@@ -270,7 +264,7 @@ const SignupPage = React.memo(() => {
                   }) }
                 </RadioInputGroup>
               )}
-            />
+            </ValidationWrap>
             
             
             <Button

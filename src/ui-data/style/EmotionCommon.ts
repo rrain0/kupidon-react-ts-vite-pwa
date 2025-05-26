@@ -169,8 +169,7 @@ export namespace EmotionCommon {
   `
   
   
-  
-  
+  // noinspection CssInvalidPropertyValue,CssInvalidFunction
   export const bgInBorder = css`
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -239,7 +238,7 @@ export namespace EmotionCommon {
       border: none;
     }
     :disabled {
-      cursor: auto;
+      cursor: not-allowed;
     }
   `
   

@@ -78,7 +78,7 @@ const ChatList = React.memo((props: ChatListProps) => {
   const unpin = useAsCallback(() => _unpin?.(selected))
   const mute = useAsCallback(() => _mute?.(selected))
   const unmute = useAsCallback(() => _unmute?.(selected))
-  const remove = useAsCallback(() => _remove?.(selected))
+  const remove = useAsCallback(({ removeForAll = false }) => _remove?.(selected, { removeForAll }))
   
   
   
