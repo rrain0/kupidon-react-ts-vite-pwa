@@ -14,6 +14,7 @@ export namespace RouteBuilder {
   // null | undefined | '' for the first path means root
   import isdef = TypeU.isdef
   import isstring = TypeU.isstring
+  import Pu = TypeU.Pu
   export const pathConcat = (...paths: Array<string | emptyval>): string => {
     let result = paths[0] ?? ''
     for (let i = 1; i < paths.length; i++) {
@@ -111,17 +112,18 @@ export namespace RouteBuilder {
       ? { [Path in ObjectKeysType<R[typeof params]>]?: RouteSegment | string | emptyval }
       : never
   )
+  export type AnyParams = Pu<{ [param: string]: string | null }>
   
   // TODO Route - support string array params
   export function getFullParams<R extends RouteSegment>(
     this: R,
-    applyParams?: {
-      anySearchParams?: URLSearchParams | emptyval
-      allowedSearchParams?: URLSearchParams | emptyval
-      allowedNameParams?: emptyval | AllowedNameParams<R>
-      anyPathParams?: { [path: string]: string | emptyval } | emptyval
-      allowedPathParams?: { [path: string]: string | emptyval } | emptyval
-    }
+    applyParams?: Pu<{
+      allowedSearchParams: URLSearchParams | null
+      allowedNamedParams: AllowedNameParams<R> | null
+      allowedParams: AnyParams | null
+      anySearchParams: URLSearchParams | null
+      anyParams: AnyParams | null
+    }>
   ): string {
     let fullPath = this[full]()
     const allowedParamNames = ObjectKeys(this[params])
@@ -134,7 +136,7 @@ export namespace RouteBuilder {
             newParams[n] = v
           })
         }
-        else if (type === 'allowedNameParams') {
+        else if (type === 'allowedNamedParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamNames.includes(n)) {
               if (v === null) delete newParams[this[params]![n]]
@@ -142,7 +144,7 @@ export namespace RouteBuilder {
             }
           })
         }
-        else if (type === 'allowedPathParams') {
+        else if (type === 'allowedParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamPaths.includes(n)) {
               if (v === null) delete newParams[n]
@@ -155,7 +157,7 @@ export namespace RouteBuilder {
             newParams[n] = v
           })
         }
-        else if (type === 'anyPathParams') {
+        else if (type === 'anyParams') {
           ObjectEntries(applyParam).forEach(([n, v]) => {
             if (v === null) delete newParams[n]
             else if (isstring(v)) newParams[n] = v
@@ -184,7 +186,7 @@ export namespace RouteBuilder {
     this: R,
     applyParams?: emptyval | AllowedNameParams<R>
   ): string {
-    return this[fullParams]({ allowedNameParams: applyParams })
+    return this[fullParams]({ allowedNamedParams: applyParams })
   }
   
   
@@ -307,9 +309,9 @@ export namespace RouteBuilder {
     testStringValue = testRoutes.profile2.id[path]
     testStringValue = testRoutes.profile2.id.idName[full]()
     testStringValue = testRoutes.profile2.id2.down.downX2[fullParams]({
-      allowedNameParams: { down: 'y', /!*param: 'a'*!/ }, // error for 'param' as expected
-      anyPathParams: { downParam: 'y', param: 'a' },
-      allowedPathParams: { downParam: 'y', param: 'a' }, // NO error for 'param' as expected
+      allowedNamedParams: { down: 'y', /!*param: 'a'*!/ }, // error for 'param' as expected
+      anyParams: { downParam: 'y', param: 'a' },
+      allowedParams: { downParam: 'y', param: 'a' }, // NO error for 'param' as expected
     })
     
   } */

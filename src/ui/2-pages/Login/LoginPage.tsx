@@ -178,7 +178,7 @@ const LoginPage = React.memo(() => {
             </Button>
             
             
-            <AppLink toFull={RootRoute.signup} allowedNameParams={{ returnPath }}>
+            <AppLink toFull={RootRoute.signup} allowedNamedParams={{ returnPath }}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 {actionText.signup}
               </Button>

@@ -12,6 +12,8 @@ import AllowedNameParamsRoutes = RouteBuilder.AllowedNameParamsRoutes
 import ObjectMap = ObjectU.ObjectMap
 import isobject = TypeU.isobject
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
+import AnyParams = RouteBuilder.AnyParams
+import Getter = TypeU.Getter
 
 
 
@@ -20,7 +22,8 @@ export type AppLinkProps<R extends RouteSegment> =
   & Omit<React.ComponentProps<typeof Link>, 'to'>
   & Pu<{
     toFull: R
-    allowedNameParams: NoInfer<AllowedNameParamsRoutes<R>>
+    allowedNamedParams: NoInfer<AllowedNameParamsRoutes<R>>
+    anyParams: AnyParams
   }>
 
 
@@ -29,22 +32,24 @@ const AppLink = ReactU.memo(<R extends RouteSegment>(props: AppLinkProps<R>) => 
   const {
     children,
     toFull,
-    allowedNameParams,
+    allowedNamedParams,
+    anyParams,
+    ...restProps
   } = props
   
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearch] = useSearchParams()
   
-  const allowedNameParamsString = useMemo(() => {
-    if (!allowedNameParams) return allowedNameParams
+  const allowedNamedParamsString = useMemo(() => {
+    if (!allowedNamedParams) return allowedNamedParams
     return ObjectMap<AllowedNameParamsRoutes<R>, AllowedNameParams<R>>(
-      allowedNameParams,
+      allowedNamedParams,
       // @ts-expect-error
       ([k, v]) => {
         if (isobject(v)) return [k, v[fullAnySearchParams](searchParams)]
         return [k, v]
       }
     )
-  }, [allowedNameParams])
+  }, [allowedNamedParams])
   
   if (!toFull) return children
   
@@ -53,8 +58,10 @@ const AppLink = ReactU.memo(<R extends RouteSegment>(props: AppLinkProps<R>) => 
       data-display-name='AppLink'
       to={toFull[fullParams]({
         anySearchParams: searchParams,
-        allowedNameParams: allowedNameParamsString,
+        allowedNamedParams: allowedNamedParamsString,
+        anyParams: anyParams,
       })}
+      {...restProps}
     >
       {children}
     </Link>

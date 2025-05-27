@@ -74,7 +74,7 @@ const RouteLikedMe = React.memo(() => {
   if (!isAuth) return (
     <AppNavigate
       toFull={RootRoute.login}
-      allowedNameParams={{ returnPath: RootRoute.likedMe }}
+      allowedNamedParams={{ returnPath: RootRoute.likedMe }}
       replace={true}
     />
   )

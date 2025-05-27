@@ -62,7 +62,7 @@ export const DatePlaceCardWide = React.memo((props: DatePlaceCardProps) => {
     const placesParams = RootRoute.datePlaces[params]
     navigate(RootRoute.datePlace.placeId[use](place.id)[fullParams]({
       anySearchParams: search,
-      anyPathParams: {
+      anyParams: {
         [placesParams.category]: null,
         [placesParams.type]: null,
       },

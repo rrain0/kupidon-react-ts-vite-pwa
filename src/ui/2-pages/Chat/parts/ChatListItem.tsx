@@ -4,20 +4,24 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { withDefaults } from '@util/react/withDefaults.tsx'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect } from 'react'
+import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { UiItemData } from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
 import ChatListItemButton from 'src/ui/2-pages/Chat/parts/ChatListItemButton.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import Pu = TypeU.Pu
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import Callback1 = TypeU.Callback1
 import toEmptyAttr = TypeU.toEmptyAttr
 import gridStackC = EmotionCommon.gridStackC
+import RootRoute = AppRoutes.RootRoute
 
 
 
@@ -57,6 +61,8 @@ const ChatListItem = React.memo(({
 }: ChatListItemProps) => {
   const { item, state: s } = uiItem
   const { id } = item
+  
+  const { getWasGesture } = useWasGesture()
   
   const canSelect = s !== 'removing'
   
@@ -123,6 +129,7 @@ const ChatListItem = React.memo(({
         ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
         ...first && { marginTop: 0 },
       }}
+      data-display-name='ChatListItem'
     >
       <ItemSlot alignedStretch h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
         
@@ -144,14 +151,21 @@ const ChatListItem = React.memo(({
           }}
         >
           <ItemBox alignedStretch h={h}>
-            <ChatListItemButton
-              disabled={!canSelect}
-              data-selected={toEmptyAttr(isSelected)}
-              item={item}
-              onPointerDown={onPointerDown}
-              onClick={onClick}
-              onLongPress={onLongPress}
-            />
+            <AppLink toFull={RootRoute.chat}
+              //anyParams={{ any: 'f' }}
+              onClick={ev => {
+                if (getWasGesture() || isAnySelected) ev.preventDefault(); ev.stopPropagation()
+              }}
+            >
+              <ChatListItemButton
+                disabled={!canSelect}
+                data-selected={toEmptyAttr(isSelected)}
+                item={item}
+                onPointerDown={onPointerDown}
+                onClick={onClick}
+                onLongPress={onLongPress}
+              />
+            </AppLink>
           </ItemBox>
         </ItemAnimated>
       
@@ -159,6 +173,7 @@ const ChatListItem = React.memo(({
     </ListSlot>
   )
 })
+ChatListItem.displayName = 'ChatListItem'
 export default ChatListItem
 
 

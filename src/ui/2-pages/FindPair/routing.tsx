@@ -142,7 +142,7 @@ const RouteFindPair = React.memo(() => {
   if (!isAuth) return (
     <AppNavigate
       toFull={RootRoute.login}
-      allowedNameParams={{ returnPath: RootRoute.findPair }}
+      allowedNamedParams={{ returnPath: RootRoute.findPair }}
       replace={true}
     />
   )

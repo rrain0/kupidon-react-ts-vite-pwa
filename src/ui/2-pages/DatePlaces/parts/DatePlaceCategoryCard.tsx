@@ -44,14 +44,14 @@ export const DatePlaceCategoryCard = React.memo((props: DatePlaceCategoryCardPro
   const link = categoryData.type === 'type'
     ? RootRoute.datePlaces[fullParams]({
       anySearchParams: search,
-      allowedNameParams: {
+      allowedNamedParams: {
         category: null,
         type: categoryData.placeType,
       },
     })
     : RootRoute.datePlaces[fullParams]({
       anySearchParams: search,
-      allowedNameParams: {
+      allowedNamedParams: {
         category: category,
         type: null,
       },

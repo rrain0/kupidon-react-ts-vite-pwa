@@ -60,7 +60,7 @@ export const DatePlaceNotFoundPage = React.memo(() => {
               <Link
                 to={RootRoute.datePlaces[fullParams]({
                   anySearchParams: search,
-                  allowedNameParams: {
+                  allowedNamedParams: {
                     category: null,
                     type: null,
                   },

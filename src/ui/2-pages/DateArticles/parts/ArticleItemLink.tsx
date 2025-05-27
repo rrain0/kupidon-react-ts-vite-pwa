@@ -33,7 +33,7 @@ export const ArticleItemLink = React.memo((props: ArticleItemLinkProps) => {
     if (it.type === 'category') {
       return RootRoute.dateArticles[fullParams]({
         anySearchParams: search,
-        allowedNameParams: {
+        allowedNamedParams: {
           category: it.itemCategory,
           type: null,
         },
@@ -42,7 +42,7 @@ export const ArticleItemLink = React.memo((props: ArticleItemLinkProps) => {
     if (it.type === 'type') {
       return RootRoute.dateArticles[fullParams]({
         anySearchParams: search,
-        allowedNameParams: {
+        allowedNamedParams: {
           category: null,
           type: it.itemType,
         },
@@ -52,7 +52,7 @@ export const ArticleItemLink = React.memo((props: ArticleItemLinkProps) => {
       const articlesParams = RootRoute.datePlaces[params]
       return RootRoute.dateArticle.articleId[use](it.itemId)[fullParams]({
         anySearchParams: search,
-        anyPathParams: {
+        anyParams: {
           [articlesParams.category]: null,
           [articlesParams.type]: null,
         },

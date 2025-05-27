@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { StringU } from '@util/common/StringU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useLiveShortDuration } from '@util/date/useLiveShortDuration.ts'
 import { useShortDurationUiText } from '@util/date/useShortDurationUiText.ts'
@@ -19,7 +18,6 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import Txt = EmotionCommon.Txt
-import trimDotZerosEnd = StringU.trimDotZerosEnd
 import max1Line = EmotionCommon.max1Line
 import max1LineBox = EmotionCommon.max1LineBox
 import VolumeIc = SvgIconsPack.VolumeIc
@@ -74,6 +72,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
   } = props
   
   
+  
   const duration = useLiveShortDuration(lastMsgDate)
   const durationText = useShortDurationUiText(duration)
   
@@ -104,7 +103,8 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
           <Flex row align noShrink>
             <Gap wMin={8} grow/>
             {[
-              sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
+              sending &&
+              <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
               sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
               read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
               error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
@@ -145,7 +145,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
         </Flex>
       
       </Flex>
-      
+    
     </Flex>
   )
 })

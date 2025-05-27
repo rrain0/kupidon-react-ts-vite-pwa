@@ -143,7 +143,7 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
       <Link
         to={RootRoute.datePlaces[fullParams]({
           anySearchParams: search,
-          allowedNameParams: {
+          allowedNamedParams: {
             category: list.headerNext,
             type: null,
           },

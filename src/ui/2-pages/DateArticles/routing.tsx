@@ -43,7 +43,7 @@ const RouteDateArticles = React.memo(() => {
         to={
           RootRoute.dateArticles[fullParams]({
             anySearchParams: search,
-            allowedNameParams: {
+            allowedNamedParams: {
               category: null,
               type: type,
             },
@@ -63,7 +63,7 @@ const RouteDateArticles = React.memo(() => {
         to={
           RootRoute.dateArticles[fullParams]({
             anySearchParams: search,
-            allowedNameParams: {
+            allowedNamedParams: {
               category: category,
               type: null,
             },
@@ -83,7 +83,7 @@ const RouteDateArticles = React.memo(() => {
         to={
           RootRoute.dateArticles[fullParams]({
             anySearchParams: search,
-            allowedNameParams: {
+            allowedNamedParams: {
               category: defaultCategory,
               type: null,
             },
