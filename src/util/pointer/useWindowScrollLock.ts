@@ -34,7 +34,7 @@ try {
   (window.addEventListener as any)(
     'test',
     null,
-    // @ts-ignore
+    // @ts-expect-error
     { get passive() { supportsPassive = true } },
   )
 }

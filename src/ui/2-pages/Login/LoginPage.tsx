@@ -13,10 +13,10 @@ import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { Link, useNavigate, useSearchParams } from 'react-router'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures'
-import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit'
-import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts'
-import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit'
+import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts'
+import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -53,10 +53,13 @@ const LoginPage = React.memo(() => {
   const placeholderText = useUiValues(PlaceholderUiText)
   
   const {
-    formValues, setFormValues,
-    failures, setFailures,
-    failedFields, validationProps,
-  } = useFormFailures({
+    values: formValues,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    formFieldWrapProps,
+  } = useFormData({
     defaultValues, validators,
   })
   
@@ -66,7 +69,7 @@ const LoginPage = React.memo(() => {
     response, resetResponse,
   } = useApiRequest({
     values: formValues,
-    failedFields,
+    errorFields: formErrorFields,
     prepareAndRequest: useCallback((values: FormValues) => {
       return AuthApi.login({
         login: values.login,
@@ -76,23 +79,32 @@ const LoginPage = React.memo(() => {
   })
   
   const {
-    canSubmit, onFormSubmitCallback, submit,
+    canSubmit, onSubmit, submit,
   } = useFormSubmit({
-    failures,
-    setFailures,
-    failedFields,
-    setFormValues,
-    getCanSubmit: useCallback(
-      (failedFields: (keyof FormValues)[]) => {
-        return failedFields
-          .filter(ff => ff in userDefaultValues)
-          .length === 0
-      },
-      []
-    ),
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
+      return failedFields
+        .filter(ff => ff in userDefaultValues)
+        .length === 0
+    }, []),
     request,
-    isLoading, isError,
-    response, resetResponse,
+    isLoading,
+    isError,
+    response,
+    resetResponse,
+  })
+  
+  useFormToasts({
+    isLoading,
+    loadingText: StatusUiText.loggingIn,
+    isSuccess,
+    successText: StatusUiText.loginCompleted,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorCodeToUiText: mapFailureCodeToUiOption,
   })
   
   
@@ -104,16 +116,6 @@ const LoginPage = React.memo(() => {
   }, [isSuccess, response, setAuth])
   
   
-  
-  useFormToasts({
-    isLoading,
-    loadingText: StatusUiText.loggingIn,
-    isSuccess,
-    successText: StatusUiText.loginCompleted,
-    failures: failures,
-    setFailures: setFailures,
-    failureCodeToUiText: mapFailureCodeToUiOption,
-  })
   
   
   
@@ -140,12 +142,12 @@ const LoginPage = React.memo(() => {
     <>
       <Pages.PageGrad>
         <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm onSubmit={onFormSubmitCallback}>
+          <Pages.ContentColSmForm onSubmit={onSubmit}>
             
             <Hdrs.Page>{titleText.login}</Hdrs.Page>
             
             
-            <ValidationWrap {...validationProps} fieldName='login'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='login'>
               {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
@@ -154,9 +156,9 @@ const LoginPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
-            <ValidationWrap {...validationProps} fieldName='pwd'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
               {props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
@@ -165,7 +167,7 @@ const LoginPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
             
             <Button

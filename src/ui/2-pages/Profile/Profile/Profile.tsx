@@ -38,9 +38,9 @@ import ProfilePhotos from 'src/ui/2-pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
-import { FormProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
-import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { FormProps } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'
+import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
@@ -57,7 +57,7 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 export type ProfileProps = {
-  validationProps: ReturnType<typeof useFormFailures<FormValues>>['validationProps']
+  formFieldWrapProps: ReturnType<typeof useFormData<FormValues>>['formFieldWrapProps']
   onFormSubmitCallback: Callback1<React.FormEvent>
   submit: Callback
   canSubmit: boolean
@@ -90,14 +90,14 @@ const Profile = React.memo((props: ProfileProps) => {
           
           <div css={col}>
             
-            <ValidationWrap{...props.validationProps} fieldName='photos'>
+            <FormFieldWrap{...props.formFieldWrapProps} fieldName='photos'>
               {props => (
                 <ProfilePhotos
                   images={props.value}
                   setImages={props.setValue}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
             <div css={{ height: 24 }}/>
             
@@ -110,33 +110,33 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <Card>
               
-              <ValidationWrap{...props.validationProps} fieldName='name'>
+              <FormFieldWrap{...props.formFieldWrapProps} fieldName='name'>
                 {validProps => (
                   <ProfileNameOption {...validProps}/>
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
               
-              <ValidationWrap{...props.validationProps} fieldName='birthDate'>
+              <FormFieldWrap{...props.formFieldWrapProps} fieldName='birthDate'>
                 {validProps => (
                   <ProfileBirthDateOption {...validProps}/>
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
               
-              <ValidationWrap{...props.validationProps} fieldName='gender'>
+              <FormFieldWrap{...props.formFieldWrapProps} fieldName='gender'>
                 {validProps => (
                   <ProfileGenderOption {...validProps}/>
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
             
             </Card>
             
             <div css={{ height: 24 }}/>
             
-            <ValidationWrap{...props.validationProps} fieldName='aboutMe'>
+            <FormFieldWrap{...props.formFieldWrapProps} fieldName='aboutMe'>
               {validProps => (
                 <ProfileAboutMeOption {...validProps}/>
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
             <div css={{ height: 24 }}/>
             

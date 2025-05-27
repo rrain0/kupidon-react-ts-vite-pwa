@@ -2,7 +2,7 @@
 
 
 
-export namespace ValidationValidators {
+export namespace ValidationU {
   
   
   const emailPattern = /^[^\s@]+@[^\s@]+$/

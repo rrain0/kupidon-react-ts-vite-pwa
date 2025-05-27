@@ -1,7 +1,7 @@
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { useCallback, useEffect, useState } from 'react'
 import { ApiUtils } from 'src/api/ApiUtils'
-import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect'
 import Values = ValidationCore.Values
 import ApiResponse = ApiUtils.ApiResponse
@@ -11,8 +11,9 @@ import ResponseError = ApiUtils.ResponseError
 
 
 
-export type ResponseData
-<Vs extends Values, D, E extends ResponseError> = {
+export type ResponseData<
+  Vs extends Values, D, E extends ResponseError,
+> = {
   isSuccess: true
   data: D
   usedValues: Vs
@@ -28,8 +29,8 @@ export type UseApiRequestProps<
   E extends ResponseError,
 > = {
   values: Vs
-  failedFields: (keyof Vs)[]
-  prepareAndRequest: (values: Vs, failedFields: (keyof Vs)[]) => Promise<ApiResponse<D, E>>
+  errorFields?: (keyof Vs)[] | undefined
+  prepareAndRequest: (values: Vs, errorFields: (keyof Vs)[]) => Promise<ApiResponse<D, E>>
 }
 export const useApiRequest = <
   Vs extends Values,
@@ -40,7 +41,7 @@ export const useApiRequest = <
 ) => {
   const {
     values,
-    failedFields,
+    errorFields,
     prepareAndRequest,
   } = props
   
@@ -59,9 +60,7 @@ export const useApiRequest = <
   }, [])
   
   
-  const [response, setResponse] = useState(
-    undefined as undefined | ResponseData<Vs, D, E>
-  )
+  const [response, setResponse] = useState<ResponseData<Vs, D, E> | undefined>(undefined)
   
   
   
@@ -77,7 +76,7 @@ export const useApiRequest = <
     setIsLoading(true)
     resetResponse()
     try {
-      const response = await prepareAndRequest(values, failedFields)
+      const response = await prepareAndRequest(values, errorFields ?? [])
       if (response.isSuccess) {
         setResponse({
           isSuccess: true,
@@ -98,7 +97,7 @@ export const useApiRequest = <
       setIsLoading(false)
       setIsImmediate(true)
     }
-  }, [isLoading, resetResponse, prepareAndRequest, values, failedFields])
+  }, [isLoading, resetResponse, prepareAndRequest, values, errorFields])
   
   
   const [getTryRequest] = useAsRefGet(tryRequest)

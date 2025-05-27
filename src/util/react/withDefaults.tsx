@@ -92,7 +92,7 @@ export const withDefaults = <
 
 //
 // // ❌ - Deprecated - <Component>.default props
-// // @ts-ignore
+// // @ts-expect-error
 // MyImg.defaultProps = { src: nextUp }
 //
 // // ✅ Wrap component

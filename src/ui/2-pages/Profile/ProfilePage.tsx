@@ -48,10 +48,10 @@ import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { FileU } from 'src/util/file/FileU.ts'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
-import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
-import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts.tsx'
-import { useFormValuesProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit.ts'
+import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts.tsx'
+import { useFormDerivedData } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
@@ -85,10 +85,13 @@ const ProfilePage = React.memo(() => {
   
   
   const {
-    formValues, setFormValues,
-    failures, setFailures,
-    failedFields, validationProps,
-  } = useFormFailures({
+    values: formValues,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    formFieldWrapProps,
+  } = useFormData({
     defaultValues,
     validators,
   })
@@ -99,7 +102,7 @@ const ProfilePage = React.memo(() => {
     response, resetResponse,
   } = useApiRequest({
     values: formValues,
-    failedFields,
+    errorFields: formErrorFields,
     prepareAndRequest: useCallback((
       values: FormValues,
       failedFields: (keyof FormValues)[]
@@ -112,12 +115,12 @@ const ProfilePage = React.memo(() => {
   })
   
   const {
-    canSubmit, onFormSubmitCallback, submit,
+    canSubmit, onSubmit, submit,
   } = useFormSubmit({
-    failures,
-    setFailures,
-    failedFields,
-    setFormValues,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
     getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
       return failedFields
         .filter(ff => ff in userDefaultValues)
@@ -130,10 +133,20 @@ const ProfilePage = React.memo(() => {
     resetResponse,
   })
   
+  useFormToasts({
+    isLoading,
+    loadingText: StatusUiText.saving,
+    isSuccess,
+    successText: StatusUiText.saved,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorCodeToUiText: mapFailureCodeToUiText,
+  })
   
   
-  const { formProps, valuesProps } = useFormValuesProps(
-    formValues, setFormValues, userDefaultValues, failures
+  
+  const { formProps, valuesProps } = useFormDerivedData(
+    formValues, setFormValues, userDefaultValues, formErrors
   )
   
   
@@ -220,16 +233,6 @@ const ProfilePage = React.memo(() => {
   
   
   
-  
-  useFormToasts({
-    isLoading,
-    loadingText: StatusUiText.saving,
-    isSuccess,
-    successText: StatusUiText.saved,
-    failures: failures,
-    setFailures: setFailures,
-    failureCodeToUiText: mapFailureCodeToUiText,
-  })
   
   
   
@@ -588,8 +591,8 @@ const ProfilePage = React.memo(() => {
                                 undefined,
                                 <Profile
                                   key='profile'
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
+                                  formFieldWrapProps={formFieldWrapProps}
+                                  onFormSubmitCallback={onSubmit}
                                   submit={submit}
                                   canSubmit={canSubmit}
                                   formProps={formProps}
@@ -598,7 +601,7 @@ const ProfilePage = React.memo(() => {
                                 />,
                                 // <Partner
                                 //   key="partner"
-                                //   validationProps={validationProps}
+                                //   formFieldWrapProps={formFieldWrapProps}
                                 //   onFormSubmitCallback={onFormSubmitCallback}
                                 //   submit={submit}
                                 //   canSubmit={canSubmit}
@@ -608,8 +611,8 @@ const ProfilePage = React.memo(() => {
                                 ///>,
                                 <Tests
                                   key='tests'
-                                  validationProps={validationProps}
-                                  onFormSubmitCallback={onFormSubmitCallback}
+                                  formFieldWrapProps={formFieldWrapProps}
+                                  onFormSubmitCallback={onSubmit}
                                   submit={submit}
                                   canSubmit={canSubmit}
                                   formProps={formProps}

@@ -12,7 +12,7 @@ import { JobOptionValues } from 'src/ui/2-pages/Profile/options/ProfileJobOption
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { DateTime } from '@util/date/DateTime.ts'
-import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators

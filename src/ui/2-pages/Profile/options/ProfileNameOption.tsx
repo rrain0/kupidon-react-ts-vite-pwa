@@ -4,7 +4,7 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import NameCardGradIc = SvgGradIconsPack.NameCardGradIc
 
@@ -15,7 +15,7 @@ const overlayName = 'profileName'
 
 
 const ProfileNameOption = React.memo(
-  (props: ValidationWrapRenderProps<string>) => {
+  (props: FormFieldWrapRenderProps<string>) => {
     const titleText = useUiValues(TitleUiText)
     
     const [saved, setSaved] = useState(props.value)

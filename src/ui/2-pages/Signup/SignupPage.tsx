@@ -18,10 +18,10 @@ import React, {
 import { useNavigate, useSearchParams } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DateTime } from '@util/date/DateTime.ts'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
-import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
-import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts.tsx'
-import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit.ts'
+import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts.tsx'
+import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
@@ -68,13 +68,13 @@ const SignupPage = React.memo(() => {
   
   
   const {
-    formValues,
-    setFormValues,
-    failures,
-    setFailures,
-    failedFields,
-    validationProps,
-  } = useFormFailures({
+    values: formValues,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    formFieldWrapProps,
+  } = useFormData({
     defaultValues,
     validators,
   })
@@ -85,7 +85,7 @@ const SignupPage = React.memo(() => {
     response, resetResponse,
   } = useApiRequest({
     values: formValues,
-    failedFields,
+    errorFields: formErrorFields,
     prepareAndRequest: useCallback((values: FormValues) => {
       const birthDateTime = DateTime.from_yyyy_MM_dd(values.birthDate)!
         .set({ timezone: DateTime.fromDate(new Date()).timezone })
@@ -107,32 +107,32 @@ const SignupPage = React.memo(() => {
   }, [isSuccess, response, setAuth])
   
   const {
-    canSubmit, onFormSubmitCallback, submit,
+    canSubmit, onSubmit, submit,
   } = useFormSubmit({
-    failures, setFailures,
-    failedFields, setFormValues,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
     getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
       return failedFields
         .filter(ff => Object.hasOwn(userDefaultValues, ff))
         .length === 0
     }, []),
     request,
-    isLoading, isError,
-    response, resetResponse,
+    isLoading,
+    isError,
+    response,
+    resetResponse,
   })
-  
-  
-  
-  
   
   useFormToasts({
     isLoading,
     loadingText: StatusUiText.registration,
     isSuccess,
     successText: StatusUiText.registrationCompleted,
-    failures: failures,
-    setFailures: setFailures,
-    failureCodeToUiText: mapFailureCodeToUiOption,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorCodeToUiText: mapFailureCodeToUiOption,
   })
   
   
@@ -182,13 +182,13 @@ const SignupPage = React.memo(() => {
       <Pages.PageGrad>
         
         <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm onSubmit={onFormSubmitCallback}>
+          <Pages.ContentColSmForm onSubmit={onSubmit}>
           
             <Hdrs.Page>{titleText.registration}</Hdrs.Page>
             
             
             
-            <ValidationWrap {...validationProps} fieldName='email'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='email'>
               {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
@@ -197,9 +197,9 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
-            <ValidationWrap {...validationProps} fieldName='pwd'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
               {props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
@@ -208,9 +208,9 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
-            <ValidationWrap {...validationProps} fieldName='repeatPwd'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
               {props => (
                 <PwdInput
                   css={InputStyle.outlinedRectNormalNormal}
@@ -219,9 +219,9 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
-            <ValidationWrap {...validationProps} fieldName='name'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='name'>
               {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
@@ -230,9 +230,9 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
-            <ValidationWrap {...validationProps} fieldName='birthDate'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='birthDate'>
               {props => (
                 <Input
                   css={InputStyle.outlinedRectNormalNormal}
@@ -241,10 +241,10 @@ const SignupPage = React.memo(() => {
                   hasError={props.highlight}
                 />
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
             
-            <ValidationWrap {...validationProps} fieldName='gender'>
+            <FormFieldWrap {...formFieldWrapProps} fieldName='gender'>
               {props => (
                 <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
                   hasError={props.highlight}
@@ -264,7 +264,7 @@ const SignupPage = React.memo(() => {
                   }) }
                 </RadioInputGroup>
               )}
-            </ValidationWrap>
+            </FormFieldWrap>
             
             
             <Button

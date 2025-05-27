@@ -37,7 +37,7 @@ const AppNavigate = ReactU.memo(<R extends RouteSegment>(props: AppNavigateProps
     if (!allowedNameParams) return allowedNameParams
     return ObjectMap<AllowedNameParamsRoutes<R>, AllowedNameParams<R>>(
       allowedNameParams,
-      // @ts-ignore
+      // @ts-expect-error
       ([k, v]) => {
         if (isobject(v)) return [k, v[fullAnySearchParams](searchParams)]
         return [k, v]
@@ -57,7 +57,7 @@ const AppNavigate = ReactU.memo(<R extends RouteSegment>(props: AppNavigateProps
     />
   )
 })
-// @ts-ignore
+// @ts-expect-error
 AppNavigate.displayName = 'AppNavigate'
 export default AppNavigate
 

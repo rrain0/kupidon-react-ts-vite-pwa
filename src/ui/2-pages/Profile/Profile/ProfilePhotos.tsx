@@ -259,6 +259,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
       
       <div css={photosGridStyle}
         ref={photosGrid}
+        data-display-name='ProfilePhotos'
       >
         {springs.map((springStyle, i) => {
           const im = images[i]
@@ -417,11 +418,11 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                     `}
                     ${lastIdx === i && !swap && dragState === 'dragging' && css`
                       background-image: none;
-                      background-color: ${t.photos.highlightFrameAccentBg[0]};
+                      background-color: ${t.photos.highlightFrameAccentBg};
                     `}
                     ${swap?.[1] === i && css`
                       background-image: none;
-                      background-color: ${t.photos.highlightFrameAccentBg[0]};
+                      background-color: ${t.photos.highlightFrameAccentBg};
                     `}
                   `}
                   onAnimationEnd={ev => {
@@ -455,6 +456,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
     </>
   )
 })
+ProfilePhotos.displayName = 'ProfilePhotos'
 export default ProfilePhotos
 
 
@@ -463,11 +465,11 @@ export default ProfilePhotos
 const radialGradKfs = (t:Theme) => keyframes`
   0% {
     --rotation: 0turn;
-    --grad-color: ${t.photos.highlightFrameBg[0]};
+    --grad-color: ${t.photos.highlightFrameBg};
   }
   100% {
     --rotation: 1.001turn;
-    --grad-color: ${t.photos.highlightFrameBg[0]};
+    --grad-color: ${t.photos.highlightFrameBg};
   }
 `
 
@@ -529,7 +531,7 @@ const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
   top: -4px; right: -4px; bottom: -4px; left: -4px;
   border-radius: calc(14px + 4px);
   border: 10px dashed;
-  border-color: ${t.photos.borderDrag[0]};
+  border-color: ${t.photos.borderDrag};
 `
 const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   pointer-events: none;
@@ -545,7 +547,7 @@ const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   }
   @property --grad-color {
     syntax: '<color>';
-    initial-value: ${t.photos.highlightFrameBg[0]};
+    initial-value: ${t.photos.highlightFrameBg};
     inherits: false;
   }
 

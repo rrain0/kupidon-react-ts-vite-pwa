@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
+import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
@@ -75,10 +75,9 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   }, [])
   
   const {
-    formValues: checks, setFormValues,
-    failures, setFailures,
-    failedFields, validationProps,
-  } = useFormFailures({
+    values: checks,
+    formFieldWrapProps,
+  } = useFormData({
     defaultValues: defaultChecks, validators: [],
   })
   
@@ -104,7 +103,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
         {!!checkboxes.length && (
           <Flex col>
             {checkboxes.map(({ title, fieldName }) => (
-              <ValidationWrap {...validationProps} fieldName={fieldName} key={fieldName}>
+              <FormFieldWrap {...formFieldWrapProps} fieldName={fieldName} key={fieldName}>
                 {props => (
                   <Flex as='label' w='ct' row align g={8}>
                     <Flex mv={-14}>
@@ -116,7 +115,7 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
                     <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
                   </Flex>
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
             ))}
           </Flex>
         )}

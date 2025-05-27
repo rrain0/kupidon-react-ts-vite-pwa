@@ -53,7 +53,7 @@ const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
       >
         <ButtonsContainer>
           
-          {/* <LeftButtonsContainer>
+          <LeftButtonsContainer>
             {backBtn && <BackBtn0/>}
             {settingsBtnLeft && <SettingsBtn/>}
             {leftChildren}
@@ -69,8 +69,7 @@ const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
           <RightButtonsContainer>
             {rightChildren}
             {refreshPageBtn && <RefreshBtn/>}
-          </RightButtonsContainer> */}
-          {rightChildren}
+          </RightButtonsContainer>
         
         </ButtonsContainer>
       </BottomButtonBarFrame>

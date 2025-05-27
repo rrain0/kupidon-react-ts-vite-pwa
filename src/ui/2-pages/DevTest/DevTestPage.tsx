@@ -64,13 +64,6 @@ const DevTestPage = React.memo(() => {
           <div css={cssStyle}>A</div>
           <div className={`css-${cssStyle.name}`}>Test Page</div>
           
-          <Flex w={200} css={{ background: '#00ff0077' }}>
-            <Grid cols='1fr auto' w='auto' css={{ background: '#ff000077' }}>
-              <Flex justifiedStretch h={50} w={8}></Flex>
-              <Flex sz={50} css={{ background: '#0000ff77' }}></Flex>
-            </Grid>
-          </Flex>
-          
           
           
           <Gap h={30}/>

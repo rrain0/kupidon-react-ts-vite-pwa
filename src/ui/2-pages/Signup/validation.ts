@@ -1,13 +1,13 @@
 import { Gender } from 'src/api/model/Gender.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DateTime } from '@util/date/DateTime.ts'
-import { ValidationValidators } from 'src/mini-libs/form-validation/core/ValidationValidators.ts'
-import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
+import { ValidationU } from 'src/mini-libs/form-data/core/ValidationU.ts'
+import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
-import isValidEmail = ValidationValidators.isValidEmail
+import isValidEmail = ValidationU.isValidEmail
 import Validators = ValidationCore.Validators
-import isValidPwd = ValidationValidators.isValidPwd
+import isValidPwd = ValidationU.isValidPwd
 import PartialFailureData = ValidationCore.PartialFailureData
 import CreateErrorData = UserApi.CreateErrorData
 

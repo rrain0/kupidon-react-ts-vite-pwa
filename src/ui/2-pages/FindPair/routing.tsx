@@ -102,7 +102,6 @@ const FindPairPageWithItems = React.memo(() => {
     response, resetResponse,
   } = useApiRequest({
     values: { },
-    failedFields: [],
     prepareAndRequest: useCallback(() => {
       return UsersListApi.all()
     }, []),

@@ -5,7 +5,7 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import EditableTextCard from 'src/ui/components/EditableTextCard/EditableTextCard.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import toEmptyAttr = TypeU.toEmptyAttr
 
@@ -14,7 +14,7 @@ const overlayName = 'profileAboutMe'
 
 
 const ProfileAboutMeOption = React.memo(
-  (props: ValidationWrapRenderProps<string>) => {
+  (props: FormFieldWrapRenderProps<string>) => {
     const titleText = useUiValues(TitleUiText)
     const placeholderText = useUiValues(PlaceholderUiText)
     

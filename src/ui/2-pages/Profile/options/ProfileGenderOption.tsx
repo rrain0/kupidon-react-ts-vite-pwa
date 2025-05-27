@@ -9,7 +9,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
-import { ValidationWrapRenderProps } from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import GenderGradIc = SvgGradIconsPack.GenderGradIc
 
@@ -26,7 +26,7 @@ export type GenderUiOptions = Option<Gender>[]
 
 
 const ProfileGenderOption = React.memo(
-  (props: ValidationWrapRenderProps<GenderOptionValues>) => {
+  (props: FormFieldWrapRenderProps<GenderOptionValues>) => {
     const optionText = useUiValues(OptionUiText)
     const titleText = useUiValues(TitleUiText)
     

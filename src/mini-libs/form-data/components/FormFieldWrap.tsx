@@ -1,7 +1,7 @@
 import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import { ValidationCore } from 'src/mini-libs/form-validation/core/ValidationCore.ts'
+import { TypeU } from '@util/common/TypeU.ts'
+import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import React, {
   JSX,
   ReactElement,
@@ -10,9 +10,9 @@ import React, {
   useState,
 } from 'react'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
-import { ValidationActions } from 'src/mini-libs/form-validation/core/ValidationActions.ts'
+import { ValidationActions } from 'src/mini-libs/form-data/core/ValidationActions.ts'
 import Failures = ValidationCore.Failures
-import updateFailures = ValidationActions.updateFailures
+import updateFailures = ValidationActions.updateErrors
 import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
 import SetterOrUpdater = TypeU.SetterOrUpdater
@@ -25,7 +25,7 @@ import Mapper = TypeU.Mapper
 
 
 
-export type ValidationWrapRenderProps<V> = {
+export type FormFieldWrapRenderProps<V> = {
   value: V
   highlight: boolean
   setValue: SetterOrUpdater<V>
@@ -36,33 +36,33 @@ export type ValidationWrapRenderProps<V> = {
     onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>
     onBlur: Callback
   }
-  radioInputProps: (value:V) => ({
+  radioInputProps: (value: V) => ({
     checked: boolean,
     onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>,
   })
 }
   
-export type ValidationWrapProps<
+export type FormFieldWrapProps<
   Vs extends Values, F extends keyof Vs
 > = {
   values: Vs
   fieldName: F
-  failures: Failures<Vs>
-  setFailures: SetterOrUpdater<Failures<Vs>>
+  errors: Failures<Vs>
+  setErrors: SetterOrUpdater<Failures<Vs>>
   setValues: SetterOrUpdater<Vs>
-  children?: (props: ValidationWrapRenderProps<Vs[F]>) => React.ReactNode
+  children?: (props: FormFieldWrapRenderProps<Vs[F]>) => React.ReactNode
 }
 
 
 
-const ValidationWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
-  props: ValidationWrapProps<Vs, F>
+const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
+  props: FormFieldWrapProps<Vs, F>
 ) => {
   const {
     fieldName,
     values,
-    failures,
-    setFailures,
+    errors,
+    setErrors,
     setValues,
     children,
   } = props
@@ -74,9 +74,9 @@ const ValidationWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
   const [highlight, setHighlight] = useState(false)
   useEffect(() => {
     setHighlight(false)
-    const stale = [false] as [boolean]
+    const stale = { v: false }
     
-    const fs = failures
+    const fs = errors
       .filter(f => f.highlight && f.errorFields.includes(fieldName))
       .filter(f => {
         const usedIdx = f.usedFields.findIndex(f => f === fieldName)
@@ -92,19 +92,19 @@ const ValidationWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
       })
     awaitDelay(fs, stale, () => setHighlight(true))
     
-    return () => { stale[0] = true }
-  }, [failures, fieldName, value, values])
+    return () => { stale.v = true }
+  }, [errors, fieldName, value, values])
   
   
   const [getSetValue] = useAsRefGet((value: ValueOrUpdater<Vs[F]>) => {
-    setFailures(f => {
+    setErrors(f => {
       const update = f.filter(f => (f.notify || f.highlight)
         && f.errorFields.includes(fieldName)
       )
       if (update.length>0)
         return updateFailures(
-          failures,
-          { failures: update },
+          errors,
+          { errors: update },
           { notify: false, highlight: false }
         )
       return f
@@ -133,14 +133,14 @@ const ValidationWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
     []
   )
   const [getOnBlur] = useAsRefGet(() => {
-    const failsToUpdate = failures.filter(f =>
+    const failsToUpdate = errors.filter(f =>
       f.errorFields.includes(fieldName)
       && f.highlight
       && f.isDelayed
     )
-    if (failsToUpdate.length) setFailures(updateFailures(
-      failures,
-      { failures: failsToUpdate },
+    if (failsToUpdate.length) setErrors(updateFailures(
+      errors,
+      { errors: failsToUpdate },
       { delay: 0 },
     ))
   })
@@ -174,28 +174,9 @@ const ValidationWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
     radioInputProps,
   })
 })
-export default ValidationWrap
+// @ts-expect-error
+FormFieldWrap.displayName = 'FormFieldWrap'
+export default FormFieldWrap
 
 
 
-
-
-
-
-{
-  const inputTypeTest = () => {
-    type InputType = ReactElement<
-      React.InputHTMLAttributes<Element>,
-      JSX.ElementType
-      /*React.JSXElementConstructor<React.JSX.IntrinsicElements['input']>*/
-    >
-    let i1: InputType = <input value='ldksfjl'/>
-    let i2: InputType = <Input value='ldksfjl'/>
-    
-    i1 = React.cloneElement(i1, { name: 'some-name' })
-    i2 = React.cloneElement(i2, { name: 'some-name' })
-    
-    i1 = React.cloneElement(i2, { name: 'some-name' })
-    i2 = React.cloneElement(i1, { name: 'some-name' })
-  }
-}

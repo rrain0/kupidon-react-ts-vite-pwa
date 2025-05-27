@@ -18,7 +18,7 @@ if (import.meta.env.DEV) allowlist = [/^\/$/]
 // to allow work offline
 registerRoute(new NavigationRoute(
   createHandlerBoundToURL('index.html'),
-  // @ts-ignore
+  // @ts-expect-error
   { allowlist }
 ))
 

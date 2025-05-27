@@ -14,10 +14,10 @@ import ItemTitleContainer from 'src/ui/0-elements/basic-elements/ItemTitleContai
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import { PwdChangePageValidation } from 'src/ui/2-pages/PwdChange/validation.ts'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
-import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit.ts'
-import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts.tsx'
-import ValidationWrap from 'src/mini-libs/form-validation/components/ValidationWrap.tsx'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit.ts'
+import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts.tsx'
+import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle.ts'
@@ -46,10 +46,13 @@ const PwdChangePage = React.memo(() => {
   
   
   const {
-    formValues, setFormValues,
-    failures, setFailures,
-    failedFields, validationProps,
-  } = useFormFailures({
+    values: formValues,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    formFieldWrapProps,
+  } = useFormData({
     defaultValues, validators,
   })
   
@@ -59,7 +62,7 @@ const PwdChangePage = React.memo(() => {
     response, resetResponse,
   } = useApiRequest({
     values: formValues,
-    failedFields,
+    errorFields: formErrorFields,
     prepareAndRequest: useCallback(
       (values: FormValues, failedFields: (keyof FormValues)[]) => {
         return UserApi.update({
@@ -72,21 +75,32 @@ const PwdChangePage = React.memo(() => {
   })
   
   const {
-    canSubmit, onFormSubmitCallback, submit,
+    canSubmit, onSubmit, submit,
   } = useFormSubmit({
-    failures, setFailures,
-    failedFields, setFormValues,
-    getCanSubmit: useCallback(
-      (failedFields: (keyof FormValues)[]) => {
-        return failedFields
-          .filter(ff => ff in userDefaultValues)
-          .length === 0
-      },
-      []
-    ),
-    request, isLoading,
-    isError, response,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
+      return failedFields
+        .filter(ff => ff in userDefaultValues)
+        .length === 0
+    }, []),
+    request,
+    isLoading,
+    isError,
+    response,
     resetResponse,
+  })
+  
+  useFormToasts({
+    isLoading,
+    loadingText: StatusUiText.updating,
+    isSuccess,
+    successText: StatusUiText.updated,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorCodeToUiText: mapFailureCodeToUiText,
   })
   
   
@@ -115,15 +129,6 @@ const PwdChangePage = React.memo(() => {
   
   
   
-  useFormToasts({
-    isLoading,
-    loadingText: StatusUiText.updating,
-    isSuccess,
-    successText: StatusUiText.updated,
-    failures: failures,
-    setFailures: setFailures,
-    failureCodeToUiText: mapFailureCodeToUiText,
-  })
   
   
   
@@ -142,7 +147,7 @@ const PwdChangePage = React.memo(() => {
       <Pages.PageGrad>
         
         <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm onSubmit={onFormSubmitCallback}>
+          <Pages.ContentColSmForm onSubmit={onSubmit}>
             
             <Hdrs.Page>{titleText.pwdChange}</Hdrs.Page>
             
@@ -152,7 +157,7 @@ const PwdChangePage = React.memo(() => {
               <ItemTitleContainer>
                 <Hdrs.InputTitleBold>{titleText.currentPwd}</Hdrs.InputTitleBold>
               </ItemTitleContainer>
-              <ValidationWrap {...validationProps} fieldName='currentPwd'>
+              <FormFieldWrap {...formFieldWrapProps} fieldName='currentPwd'>
                 {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectSmallNormal}
@@ -161,7 +166,7 @@ const PwdChangePage = React.memo(() => {
                     hasError={props.highlight}
                   />
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
             </ItemContainer>
             
             
@@ -169,7 +174,7 @@ const PwdChangePage = React.memo(() => {
               <ItemTitleContainer>
                 <Hdrs.InputTitleBold>{titleText.newPwd}</Hdrs.InputTitleBold>
               </ItemTitleContainer>
-              <ValidationWrap {...validationProps} fieldName='pwd'>
+              <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
                 {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectSmallNormal}
@@ -178,7 +183,7 @@ const PwdChangePage = React.memo(() => {
                     hasError={props.highlight}
                   />
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
             </ItemContainer>
             
             
@@ -186,7 +191,7 @@ const PwdChangePage = React.memo(() => {
               <ItemTitleContainer>
                 <Hdrs.InputTitleBold>{titleText.repeatPwd}</Hdrs.InputTitleBold>
               </ItemTitleContainer>
-              <ValidationWrap {...validationProps} fieldName='repeatPwd'>
+              <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
                 {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectSmallNormal}
@@ -195,7 +200,7 @@ const PwdChangePage = React.memo(() => {
                     hasError={props.highlight}
                   />
                 )}
-              </ValidationWrap>
+              </FormFieldWrap>
             </ItemContainer>
           
           

@@ -24,8 +24,8 @@ import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.ts
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures.ts'
-import { FormProps } from 'src/mini-libs/form-validation/hooks/useFormValuesProps.ts'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { FormProps } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
@@ -53,7 +53,7 @@ const ResetMbtiTestOverlayName = 'resetMbtiTest'
 
 
 export type TestsProps = {
-  validationProps: ReturnType<typeof useFormFailures<FormValues>>['validationProps']
+  formFieldWrapProps: ReturnType<typeof useFormData<FormValues>>['formFieldWrapProps']
   onFormSubmitCallback: Callback1<React.FormEvent>
   submit: Callback
   canSubmit: boolean

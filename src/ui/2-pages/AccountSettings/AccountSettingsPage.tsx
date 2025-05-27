@@ -1,6 +1,5 @@
 import { noFormSubmit } from '@util/js/noFormSubmit.ts'
 import React, { useCallback, useEffect } from 'react'
-import { Link } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
@@ -16,9 +15,9 @@ import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { AccountSettingsPageValidation } from 'src/ui/2-pages/AccountSettings/validation'
 import { ObjectU } from 'src/util/common/ObjectU'
-import { useFormFailures } from 'src/mini-libs/form-validation/hooks/useFormFailures'
-import { useFormSubmit } from 'src/mini-libs/form-validation/hooks/useFormSubmit'
-import { useFormToasts } from 'src/mini-libs/form-validation/hooks/useFormToasts'
+import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit'
+import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -35,7 +34,6 @@ import validators = AccountSettingsPageValidation.validators
 import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText
 import RootRoute = AppRoutes.RootRoute
-import full = RouteBuilder.full
 
 
 
@@ -63,14 +61,14 @@ const AccountSettingsPage = React.memo(() => {
   
   
   
-  
-  
-  
   const {
-    formValues, setFormValues,
-    failures, setFailures,
-    failedFields, validationProps,
-  } = useFormFailures({
+    values: formValues, 
+    setValues: setFormValues,
+    errors: formErrors, 
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    formFieldWrapProps,
+  } = useFormData({
     defaultValues, validators,
   })
   
@@ -80,53 +78,65 @@ const AccountSettingsPage = React.memo(() => {
     response, resetResponse,
   } = useApiRequest({
     values: formValues,
-    failedFields,
-    prepareAndRequest: useCallback(
-      (values: FormValues, failedFields: (keyof FormValues)[]) => {
-        const userToUpdate: UserToUpdate = {}
-        ObjectKeys(userDefaultValues)
-          .filter(fName => !['pwd', 'repeatPwd'].includes(fName))
-          .forEach(fName => {
-            if (!failedFields.includes(fName)) userToUpdate[fName] = values[fName]
-          })
-        if (!failedFields.includes('pwd') &&
-          !failedFields.includes('repeatPwd')
-        ) userToUpdate.pwd = values.pwd
-        return UserApi.update(userToUpdate)
-      },
-      []
-    ),
+    errorFields: formErrorFields,
+    prepareAndRequest: useCallback((
+      values: FormValues, failedFields: (keyof FormValues)[]
+    ) => {
+      const userToUpdate: UserToUpdate = { }
+      ObjectKeys(userDefaultValues)
+        .filter(fName => !['pwd', 'repeatPwd'].includes(fName))
+        .forEach(fName => {
+          if (!failedFields.includes(fName)) userToUpdate[fName] = values[fName]
+        })
+      if (!failedFields.includes('pwd') &&
+        !failedFields.includes('repeatPwd')
+      ) userToUpdate.pwd = values.pwd
+      return UserApi.update(userToUpdate)
+    }, []),
   })
   
   const {
-    canSubmit, onFormSubmitCallback, submit,
+    canSubmit, onSubmit, submit,
   } = useFormSubmit({
-    failures, setFailures,
-    failedFields, setFormValues,
-    getCanSubmit: useCallback(
-      (failedFields: (keyof FormValues)[]) => {
-        let preparedFields = [...failedFields]
-        if (failedFields.includes('pwd') && !failedFields.includes('repeatPwd'))
-          preparedFields.push('repeatPwd')
-        if (!failedFields.includes('pwd') && failedFields.includes('repeatPwd'))
-          preparedFields.push('pwd')
-        return preparedFields
-          .filter(ff => Object.hasOwn(userDefaultValues, ff))
-          .length < ObjectKeys(userDefaultValues).length
-      },
-      []
-    ),
-    request, isLoading,
-    isError, response,
+    setValues: setFormValues,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorFields: formErrorFields,
+    getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
+      const preparedFields = [...failedFields]
+      if (failedFields.includes('pwd') && !failedFields.includes('repeatPwd')) {
+        preparedFields.push('repeatPwd')
+      }
+      if (!failedFields.includes('pwd') && failedFields.includes('repeatPwd')) {
+        preparedFields.push('pwd')
+      }
+      return preparedFields
+        .filter(ff => Object.hasOwn(userDefaultValues, ff))
+        .length < ObjectKeys(userDefaultValues).length
+    }, []),
+    request,
+    isLoading,
+    isError,
+    response,
     resetResponse,
+  })
+  
+  useFormToasts({
+    isLoading,
+    loadingText: StatusUiText.updating,
+    isSuccess,
+    successText: StatusUiText.updated,
+    errors: formErrors,
+    setErrors: setFormErrors,
+    errorCodeToUiText: mapFailureCodeToUiText,
   })
   
   
   
+  // TODO move to useFormDerivedData
   const fieldIsInitial = useCallback((field: keyof FormValues) => {
-    return failures
-      .some(f => f.type === 'initial' && f.errorFields.includes(field))
-  }, [failures])
+    return formErrors.some(f => f.type === 'initial' && f.errorFields.includes(field))
+  }, [formErrors])
   
   const updateValues = (auth: AuthZustand) => {
     setFormValues(s => {
@@ -143,16 +153,14 @@ const AccountSettingsPage = React.memo(() => {
   }
   useEffect(() => updateValues(auth), [auth])
   
-  const resetField = useCallback(
-    (fieldName: keyof FormValues) => {
-      const vs = formValues, ivs = formValues.initialValues
-      setFormValues({
-        ...vs,
-        [fieldName]: ivs[fieldName],
-      })
-    },
-    [formValues, setFormValues]
-  )
+  const resetField = useCallback((fieldName: keyof FormValues) => {
+    const vs = formValues, ivs = formValues.initialValues
+    setFormValues({
+      ...vs,
+      [fieldName]: ivs[fieldName],
+    })
+  },
+  [formValues, setFormValues])
   
   
   
@@ -173,16 +181,6 @@ const AccountSettingsPage = React.memo(() => {
   
   
   
-  
-  useFormToasts({
-    isLoading,
-    loadingText: StatusUiText.updating,
-    isSuccess,
-    successText: StatusUiText.updated,
-    failures: failures,
-    setFailures: setFailures,
-    failureCodeToUiText: mapFailureCodeToUiText,
-  })
   
   
   

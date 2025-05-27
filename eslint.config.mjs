@@ -365,8 +365,9 @@ export default [
       'promise': promise,
     },*/
     rules: {
-      'promise/catch-or-return': 'off',
       'promise/always-return': 'off',
+      'promise/catch-or-return': 'off',
+      'promise/no-callback-in-promise': 'off',
     },
   },
   
