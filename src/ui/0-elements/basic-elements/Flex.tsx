@@ -20,11 +20,11 @@ export const Flex = React.memo((props: FlexProps) => {
   return (
     <FlexBox
       data-display-name='Flex'
+      {...restProps}
       css={{
         [`&.${flexViewClassName}`]: css,
       }}
       className={clsx(className, flexViewClassName)}
-      {...restProps}
     >
       {children}
     </FlexBox>

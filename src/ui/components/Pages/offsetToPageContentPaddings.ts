@@ -5,12 +5,12 @@ import Pu = TypeU.Pu
 
 
 export const offsetToPageContentPaddings = ({
-  t, r, b, l, h, v, a,
+  t, r, b, l, v, h, a,
 }: Pu<{
   t: boolean, r: boolean, b: boolean, l: boolean, h: boolean, v: boolean, a: boolean
 }>) => {
-  if (h) { l ??= h; r ??= h }
   if (v) { t ??= v; b ??= v }
+  if (h) { l ??= h; r ??= h }
   if (a) { t ??= a; r ??= a; b ??= a; l ??= a }
   const m = {
     ...t && { marginTop: 'calc(-1 * var(--pt))' },

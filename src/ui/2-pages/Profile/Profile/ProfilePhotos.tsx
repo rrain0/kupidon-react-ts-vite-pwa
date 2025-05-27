@@ -4,6 +4,7 @@ import { useDrag } from '@use-gesture/react'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React, {
   useCallback,
   useEffect,
@@ -20,6 +21,7 @@ import {
   newDefaultMediaOperation,
 } from 'src/ui-data/models/media/Media.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
+import DashedBorder from 'src/ui/0-elements/basic-elements/DashedBorder.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   ImageParts,
@@ -59,6 +61,7 @@ import Callback = TypeU.Callback
 import findBy = ArrayU.findBy
 import NumRange = RangeU.NumRange
 import arr = ArrayU.arr
+import absTlwh = EmotionCommon.absTlwh
 
 
 
@@ -395,7 +398,11 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                             {isDraggingFiles && (
                               <>
                                 {isDragAccept && <div css={photoDimmed}/>}
-                                <div css={photoOnExternalDraggingBorder}/>
+                                <DashedBorder
+                                  props={t => ({
+                                    rad: 14, w: 6, wAdd: 4, color: t.photos.borderDrag,
+                                  })}
+                                />
                               </>
                             )}
                           
@@ -526,13 +533,7 @@ const photoDimmed = (t: AppTheme.Theme) => css`
   ${ImageParts.placeholderBoxS(t)};
   background: #00000099;
 `
-const photoOnExternalDraggingBorder = (t: AppTheme.Theme) => css`
-  position: absolute;
-  top: -4px; right: -4px; bottom: -4px; left: -4px;
-  border-radius: calc(14px + 4px);
-  border: 10px dashed;
-  border-color: ${t.photos.borderDrag};
-`
+
 const photoProgressFrameStyle = (t: AppTheme.Theme) => css`
   pointer-events: none;
 

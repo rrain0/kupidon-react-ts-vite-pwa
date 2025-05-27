@@ -20,11 +20,11 @@ export const Grid = React.memo((props: GridProps) => {
   return (
     <GridBox
       data-display-name='Grid'
+      {...restProps}
       css={{
         [`&.${gridViewClassName}`]: css,
       }}
       className={clsx(className, gridViewClassName)}
-      {...restProps}
     >
       {children}
     </GridBox>

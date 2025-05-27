@@ -185,6 +185,18 @@ export namespace TypeU {
   export type ComparatorEq<A, B = A> = (a: A, b: B) => boolean
   export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a === b
   
+  export type FunOrObj<F extends anyfun> = (
+    F extends (...args: infer A) => infer R ? ((...args: A) => R) | R : never
+  )
+  /*
+  export type InvokeOrGet<T extends object> = (
+    T extends (...args: any[]) => infer R ? R : T
+  )
+  // TODO type
+  export const invokeOrGet = <T extends object>(funOrObj: T): InvokeOrGet<T> => {
+    if (isfunction(funOrObj)) return funOrObj()
+  }
+   */
   
   
   

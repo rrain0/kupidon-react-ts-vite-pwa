@@ -9,12 +9,12 @@ import toPx = CssU.toPx
 
 
 export const virtualOffset = ({
-  t, r, b, l, h, v, a,
+  t, r, b, l, v, h, a,
 }: Pu<{
   t: CssLength, r: CssLength, b: CssLength, l: CssLength, h: CssLength, v: CssLength, a: CssLength
 }>) => {
-  if (h) { r ??= h; l ??= h }
   if (v) { t ??= v; b ??= v }
+  if (h) { r ??= h; l ??= h }
   if (a) { t ??= a; r ??= a; b ??= a; l ??= a }
   t = toPx(t); r = toPx(r); b = toPx(b); l = toPx(l)
   const m = {
