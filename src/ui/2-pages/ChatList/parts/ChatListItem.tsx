@@ -2,19 +2,18 @@ import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
-import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect } from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { UiItemData } from 'src/ui/2-pages/Chat/parts/ChatList.tsx'
-import ChatListItemButton from 'src/ui/2-pages/Chat/parts/ChatListItemButton.tsx'
+import { UiItemData } from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
+import ChatListItemButton from 'src/ui/2-pages/ChatList/parts/ChatListItemButton.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import Pu = TypeU.Pu
 import SetterOrUpdater = TypeU.SetterOrUpdater
@@ -152,7 +151,6 @@ const ChatListItem = React.memo(({
         >
           <ItemBox alignedStretch h={h}>
             <AppLink toFull={RootRoute.chat}
-              //anyParams={{ any: 'f' }}
               onClick={ev => {
                 if (getWasGesture() || isAnySelected) ev.preventDefault(); ev.stopPropagation()
               }}
@@ -179,31 +177,20 @@ export default ChatListItem
 
 
 
-const ListSlot = withDefaults({
+const ListSlot = styled(Flex)()
+const ItemSlot = styled(Flex)(gridStackC)
 
-}, styled(Flex)())
-const ItemSlot = withDefaults({
-
-}, styled(Flex)([gridStackC]))
-
-const ItemAnimated = withDefaults({
-  rad,
-}, styled(AnimatedDiv)({
-  overflow: 'hidden',
+const ItemAnimated = styled(AnimatedDiv)(flexStyle({
+  rad, noOverflow: true,
 }))
-const ItemBox = withDefaults({
-  rad,
-}, styled(Flex)([gridStackC, {
+const ItemBox = styled(Flex)([gridStackC, flexStyle({
   // TODO Theme
-  backgroundColor: 'white',
-}]))
+  rad, bgColor: 'white',
+})])
 
-
-const ItemPlaceholder = withDefaults({
-  rad,
-}, styled(Flex)(({ theme: t }) => ({
-  backgroundColor: t.boxNormalCt.bgf,
-})))
+const ItemPlaceholder = styled(Flex)(({ theme: t }) => ({
+  rad, bgColor: t.boxNormalCt.bgf,
+}))
 
 
 

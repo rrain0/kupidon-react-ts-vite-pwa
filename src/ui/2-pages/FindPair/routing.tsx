@@ -7,6 +7,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import {
   ProfileCardsStackListItem,
 } from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
@@ -128,7 +129,7 @@ const FindPairPageWithItems = React.memo(() => {
   }, [isSuccess])
   
   
-  if (!items) return <div>Loading...</div>
+  if (!items) return <Flex fullW h='100dvh' center>Загрузка...</Flex>
   
   return <FindPairPage items={items}/>
 })
@@ -148,7 +149,7 @@ const RouteFindPair = React.memo(() => {
   )
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <FindPairPageWithItems/>
     </Suspense>
   )
@@ -157,7 +158,7 @@ const RouteFindPair = React.memo(() => {
 
 
 // path: 'find-pair / ...'
-export const findPairRouting: RouteObject[] = [
+export const routingFindPair: RouteObject[] = [
   {
     path: '',
     Component: RouteFindPair,

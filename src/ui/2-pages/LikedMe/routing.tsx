@@ -3,6 +3,7 @@ import React, { Suspense, useState } from 'react'
 import { RouteObject, useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import FindPairPage from 'src/ui/2-pages/FindPair/FindPairPage.tsx'
 import { LikedMeCardItem } from 'src/ui/2-pages/LikedMe/parts/LikedMeCard.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
@@ -80,7 +81,7 @@ const RouteLikedMe = React.memo(() => {
   )
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <LikedMePageWithItems/>
     </Suspense>
   )

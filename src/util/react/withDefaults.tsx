@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import React from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import PartialDefaults = TypeU.PartialDefaults
@@ -15,7 +14,7 @@ export const withDefaults = <
   // Provided default props become optional
   OutP extends PartialDefaults<P, DefaultP> = PartialDefaults<P, DefaultP>,
 >(
-  defaultProps: DefaultP, Component: React.FC<P>,
+  Component: React.FC<P>, defaultProps: DefaultP,
 ): React.FC<OutP> => {
   // ⚠️ Need 'as any' because builtin Partial<T> allows
   // any prop of any value outside of keyof T (is it TS bug?)

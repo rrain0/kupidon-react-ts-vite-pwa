@@ -4,6 +4,8 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 
 
 
-const Gap = withDefaults({ 'data-display-name': 'Gap' }, Flex)
+const Gap = withDefaults(Flex, {
+  'data-display-name': 'Gap',
+})
 Gap.displayName = 'Gap'
 export default Gap

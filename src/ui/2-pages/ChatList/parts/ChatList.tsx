@@ -15,11 +15,11 @@ import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ChatListContextMenu, {
   ChatListContextMenuProps,
-} from 'src/ui/2-pages/Chat/parts/ChatListContextMenu.tsx'
-import ChatListItem from 'src/ui/2-pages/Chat/parts/ChatListItem.tsx'
-import { ChatListItemWidgetData } from 'src/ui/2-pages/Chat/parts/ChatListItemWidget.tsx'
+} from 'src/ui/2-pages/ChatList/parts/ChatListContextMenu.tsx'
+import ChatListItem from 'src/ui/2-pages/ChatList/parts/ChatListItem.tsx'
+import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import emptyArr = TypeU.emptyArr
 import isundef = TypeU.isundef

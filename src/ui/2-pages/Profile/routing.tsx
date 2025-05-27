@@ -8,6 +8,7 @@ import {
 } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
@@ -44,12 +45,12 @@ const RouteProfileIdUserIdTab = React.memo(() => {
   )
   
   if (tab === summary) return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <ProfileSummaryPage/>
     </Suspense>
   )
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <ProfilePage/>
     </Suspense>
   )

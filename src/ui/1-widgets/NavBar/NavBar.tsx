@@ -2,17 +2,16 @@ import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
-import { NavLink, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import AppNavLink from 'src/ui/components/app-router/NavLink.tsx'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -30,7 +29,6 @@ import BowArrowGradIc = SvgGradIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -44,8 +42,6 @@ const NavBar = React.memo((props: NavBarProps) => {
   const { place } = props
   
   const titleText = useUiValues(TitleUiText)
-  
-  const [search] = useSearchParams()
   
   return (
     <>
@@ -61,33 +57,33 @@ const NavBar = React.memo((props: NavBarProps) => {
       
       <Frame>
         
-        <NavLink to={RootRoute.profile[fullAnySearchParams](search)}>
+        <AppNavLink toFull={RootRoute.profile}>
           <Button css={nav} data-selected={toEmptyAttr(place === 'profile')}>
             <ProfileGradIc/>
             <div>{titleText.profile}</div>
           </Button>
-        </NavLink>
+        </AppNavLink>
         
-        <NavLink to={RootRoute.chat[fullAnySearchParams](search)}>
+        <AppNavLink toFull={RootRoute.chatList}>
           <Button css={nav} data-selected={toEmptyAttr(place === 'chat')}>
             <ChatRoundGradIc/>
             <div>{titleText.chat}</div>
           </Button>
-        </NavLink>
+        </AppNavLink>
         
-        <NavLink to={RootRoute.findPair[fullAnySearchParams](search)}>
+        <AppNavLink toFull={RootRoute.findPair}>
           <Button css={nav} data-selected={toEmptyAttr(place === 'findPair')}>
             <CardsHeartGradIc/>
             <div>{titleText.hearts}</div>
           </Button>
-        </NavLink>
+        </AppNavLink>
         
-        <NavLink to={RootRoute.bowAndArrows[fullAnySearchParams](search)}>
+        <AppNavLink toFull={RootRoute.bowAndArrows}>
           <Button css={nav} data-selected={toEmptyAttr(place === 'bowAndArrows')}>
             <BowArrowGradIc/>
             <div>{titleText.bowAndArrows}</div>
           </Button>
-        </NavLink>
+        </AppNavLink>
         
         <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
           {overlay => (
@@ -111,6 +107,7 @@ const NavBar = React.memo((props: NavBarProps) => {
     </>
   )
 })
+NavBar.displayName = 'NavBar'
 export default NavBar
 
 

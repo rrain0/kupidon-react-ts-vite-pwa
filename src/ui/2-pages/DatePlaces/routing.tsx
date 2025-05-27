@@ -6,6 +6,7 @@ import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
@@ -49,7 +50,7 @@ const RouteDatePlaces = React.memo(() => {
         }
         replace
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <DatePlacesPage type={type}/>
       </Suspense>
     </>
@@ -69,7 +70,7 @@ const RouteDatePlaces = React.memo(() => {
         }
         replace
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <DatePlacesPage category={category}/>
       </Suspense>
     </>

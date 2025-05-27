@@ -1,11 +1,9 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import { virtualOffset } from '@util/css/virtualOffset.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -18,7 +16,6 @@ import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIc
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import SearchIc = SvgIconsPack.SearchIc
 import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
 import Pu = TypeU.Pu
@@ -30,17 +27,17 @@ import FourDotsIc = SvgIconsPack.FourDotsIc
 
 
 
-type ChatPageHeaderExtraProps = Pu<{
+type ChatListPageHeaderExtraProps = Pu<{
   likesCnt: number
 }>
 
-type ChatPageHeaderProps =
+type ChatListPageHeaderProps =
   & Omit<React.ComponentProps<typeof Grid>, 'children'>
-  & ChatPageHeaderExtraProps
+  & ChatListPageHeaderExtraProps
 
 
 
-const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
+const ChatListPageHeader = React.memo((props: ChatListPageHeaderProps) => {
   const {
     likesCnt = 0,
     ...restProps
@@ -48,7 +45,7 @@ const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
   
   return (
     <Grid alignedStretch cols='46px 1fr 46px' stretch
-      data-display-name='ChatPageHeader'
+      data-display-name='ChatListPageHeader'
       {...restProps}
     >
       
@@ -77,8 +74,8 @@ const ChatPageHeader = React.memo((props: ChatPageHeaderProps) => {
     </Grid>
   )
 })
-ChatPageHeader.displayName = 'ChatPageHeader'
-export default ChatPageHeader
+ChatListPageHeader.displayName = 'ChatListPageHeader'
+export default ChatListPageHeader
 
 
 
@@ -110,13 +107,12 @@ const heartS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.full.accent, {
   gradIcon: { sz: 23 },
 }]
 
-const LikesCounterBox = withDefaults({
+
+const LikesCounterBox = styled(Flex)(({ theme: t }) => flexStyle({
   mt: -1, ml: -6, rad: 3, pv: 1, ph: 3,
-}, styled(Flex)(({ theme: t }) => ({
-  // TODO Theme
-  backgroundColor: t.boxAccentCt4.bg,
+  bgColor:  t.boxAccentCt4.bg,
   color: 'transparent',
-})))
+}))
 const LikesCounter =  styled(Flex)(({ theme: t }) => [
   Txt.s10BoldLh100, {
     color: 'transparent',

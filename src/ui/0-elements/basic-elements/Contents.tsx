@@ -5,6 +5,8 @@ import contents = EmotionCommon.contents
 
 
 
-const Contents = withDefaults({ 'data-display-name': 'Contents' }, styled.div(contents))
+const Contents = withDefaults(styled.div(contents), {
+  'data-display-name': 'Contents',
+})
 Contents.displayName = 'Contents'
 export default Contents

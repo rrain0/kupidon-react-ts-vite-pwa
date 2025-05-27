@@ -13,7 +13,7 @@ import path = RouteBuilder.path
 
 
 // path: 'settings / ...'
-export const settingRouting: RouteObject[] = [
+export const routingSettings: RouteObject[] = [
   {
     path: '',
     children: settingsApplicationRouting,

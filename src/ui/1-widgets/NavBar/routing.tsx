@@ -20,18 +20,18 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="profile"/>}
+              element={<NavBar place='profile'/>}
             />
           ))
       }
       {
-        [RootRoute.chat[full]()]
+        [RootRoute.chatList[full]()]
           .map(path => path+'/*')
           .map(path => (
             <Route
               key={path}
               path={path}
-              element={<NavBar place="chat"/>}
+              element={<NavBar place='chat'/>}
             />
           ))
       }
@@ -42,14 +42,13 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="findPair"/>}
+              element={<NavBar place='findPair'/>}
             />
           ))
       }
       {
         [
           RootRoute.bowAndArrows[full](),
-          // TODO Route - стоит ли показывать навбар на странице конкретнорго места?
           RootRoute.datePlaces[full](),
         ]
           .map(path => path+'/*')
@@ -57,7 +56,7 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="bowAndArrows"/>}
+              element={<NavBar place='bowAndArrows'/>}
             />
           ))
       }
@@ -68,11 +67,12 @@ const BottomNavBarRouting = React.memo(() => {
             <Route
               key={path}
               path={path}
-              element={<NavBar place="settings"/>}
+              element={<NavBar place='settings'/>}
             />
           ))
       }
     </Routes>
   )
 })
+BottomNavBarRouting.displayName = 'BottomNavBarRouting'
 export default BottomNavBarRouting

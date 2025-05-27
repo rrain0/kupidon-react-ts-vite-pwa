@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 
@@ -42,7 +43,7 @@ const testBottomSheetTestPageRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <BottomSheetTestPage/>
       </Suspense>
     ),
@@ -54,7 +55,7 @@ const testScrollbarTestPageRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ScrollbarTestPage/>
       </Suspense>
     ),
@@ -66,7 +67,7 @@ const viewsSelectItemRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <SelectItemTestPage/>
       </Suspense>
     ),
@@ -78,7 +79,7 @@ const rippleRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <RippleTestPage/>
       </Suspense>
     ),
@@ -90,7 +91,7 @@ const buttonsRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ButtonsTestPage/>
       </Suspense>
     ),
@@ -102,7 +103,7 @@ const sliderRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <SliderTestPage/>
       </Suspense>
     ),
@@ -114,7 +115,7 @@ const imageRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ImageTestPage/>
       </Suspense>
     ),
@@ -130,7 +131,7 @@ const testResizeObserverTestPageRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ResizeObserverTestPage/>
       </Suspense>
     ),
@@ -142,7 +143,7 @@ const testMoveElementToAnotherViewRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <MoveElementToAnotherViewTestPage/>
       </Suspense>
     ),
@@ -154,7 +155,7 @@ const testPointerRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <PointerTestPage/>
       </Suspense>
     ),
@@ -166,7 +167,7 @@ const testStateRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <StateTestPage/>
       </Suspense>
     ),
@@ -178,7 +179,7 @@ const pageLifecycleRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <PageLifecycleTestPage/>
       </Suspense>
     ),
@@ -190,7 +191,7 @@ const useEventRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <UseEventTestPage/>
       </Suspense>
     ),
@@ -202,7 +203,7 @@ const elemRefRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ElemRefTestPage/>
       </Suspense>
     ),
@@ -214,7 +215,7 @@ const elemStyleRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ElemStyleTestPage/>
       </Suspense>
     ),
@@ -226,7 +227,7 @@ const oldProfileOptionsRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <OldProfileOptionsPage/>
       </Suspense>
     ),
@@ -238,7 +239,7 @@ const emulatedScrollRouting: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <EmulatedScroll/>
       </Suspense>
     ),
@@ -250,7 +251,7 @@ const routingShadowDOM: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ShadowDOMTestPage/>
       </Suspense>
     ),
@@ -266,7 +267,7 @@ export const routingDevTest: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <TestPage/>
       </Suspense>
     ),

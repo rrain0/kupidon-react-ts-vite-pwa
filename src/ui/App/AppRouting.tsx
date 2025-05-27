@@ -6,21 +6,23 @@ import {
   RouterProvider,
   useSearchParams,
 } from 'react-router'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing.tsx'
-import { bowAndArrowsRouting } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
-import { chatRouting } from 'src/ui/2-pages/Chat/routing.tsx'
+import { routingBowAndArrows } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
+import { routingChat } from 'src/ui/2-pages/Chat/routing.tsx'
+import { routingChatList } from 'src/ui/2-pages/ChatList/routing.tsx'
 import { routingDateArticle } from 'src/ui/2-pages/DateArticle/routing.tsx'
 import { routingDateArticles } from 'src/ui/2-pages/DateArticles/routing.tsx'
 import { routingDatePlace } from 'src/ui/2-pages/DatePlace/routing.tsx'
 import { routingDatePlaces } from 'src/ui/2-pages/DatePlaces/routing.tsx'
-import { findPairRouting } from 'src/ui/2-pages/FindPair/routing'
+import { routingFindPair } from 'src/ui/2-pages/FindPair/routing'
 import { routingLikedMe } from 'src/ui/2-pages/LikedMe/routing.tsx'
-import { loginRouting } from 'src/ui/2-pages/Login/routing'
+import { routingLogin } from 'src/ui/2-pages/Login/routing'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { routingProfile } from 'src/ui/2-pages/Profile/routing.tsx'
-import { settingRouting } from 'src/ui/2-pages/Settings/routing'
-import { signupRouting } from 'src/ui/2-pages/Signup/routing'
+import { routingSettings } from 'src/ui/2-pages/Settings/routing'
+import { routingSignup } from 'src/ui/2-pages/Signup/routing'
 import { routingDevTest } from 'src/ui/2-pages/DevTest/routing.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { routingTest } from 'src/ui/2-pages/Test/routing.tsx'
@@ -37,7 +39,7 @@ const RouteAny = React.memo(() => {
   
   const authIsReady = useAuthSetup()
   
-  if (!authIsReady) return <div>Loading...</div>
+  if (!authIsReady) return <Flex fullW h='100dvh' center>Загрузка...</Flex>
   
   return (
     <>
@@ -74,11 +76,11 @@ const routingRoot: RouteObject[] = [
     children: [
       {
         path: RootRoute.login[path]+'/*',
-        children: loginRouting,
+        children: routingLogin,
       },
       {
         path: RootRoute.signup[path]+'/*',
-        children: signupRouting,
+        children: routingSignup,
       },
       
       
@@ -89,22 +91,22 @@ const routingRoot: RouteObject[] = [
       },
       {
         path: RootRoute.findPair[path]+'/*',
-        children: findPairRouting,
+        children: routingFindPair,
       },
       {
         path: RootRoute.bowAndArrows[path]+'/*',
-        children: bowAndArrowsRouting,
+        children: routingBowAndArrows,
       },
       {
-        path: RootRoute.chat[path]+'/*',
-        children: chatRouting,
+        path: RootRoute.chatList[path]+'/*',
+        children: routingChatList,
       },
       
       
       
       {
         path: RootRoute.settings[path]+'/*',
-        children: settingRouting,
+        children: routingSettings,
       },
       
       {
@@ -127,6 +129,10 @@ const routingRoot: RouteObject[] = [
       
       
       
+      {
+        path: RootRoute.chat[path]+'/*',
+        children: routingChat,
+      },
       {
         path: RootRoute.test[path]+'/*',
         children: routingTest,
@@ -166,6 +172,7 @@ const AppRouting = React.memo(() => {
     <RouterProvider router={router}/>
   )
 })
+AppRouting.displayName = 'AppRouting'
 export default AppRouting
 
 

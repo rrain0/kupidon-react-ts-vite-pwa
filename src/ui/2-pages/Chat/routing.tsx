@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 
 const ChatPage = React.lazy(
   () => import('src/ui/2-pages/Chat/ChatPage.tsx')
@@ -12,7 +13,7 @@ const ChatPage = React.lazy(
 const RouteChat = React.memo(() => {
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <ChatPage/>
     </Suspense>
   )
@@ -20,7 +21,7 @@ const RouteChat = React.memo(() => {
 
 
 // path: 'chat / ...'
-export const chatRouting: RouteObject[] = [
+export const routingChat: RouteObject[] = [
   {
     path: '',
     Component: RouteChat,

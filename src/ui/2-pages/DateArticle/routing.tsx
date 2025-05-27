@@ -4,6 +4,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use
@@ -28,13 +29,13 @@ const RouteDateArticleArticleId = React.memo(() => {
   const article = DateArticlesData.find(place => place.id === urlArticleId)
   
   if (!article) return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <DateArticleNotFoundPage/>
     </Suspense>
   )
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <DateArticlePage article={article}/>
     </Suspense>
   )

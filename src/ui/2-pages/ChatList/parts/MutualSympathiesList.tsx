@@ -10,7 +10,7 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
-import { ReactU } from 'src/util/react/ReactU'
+import { ReactU } from '@util/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import max1Line = EmotionCommon.max1Line

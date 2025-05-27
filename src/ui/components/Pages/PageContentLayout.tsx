@@ -2,7 +2,7 @@ import { Theme } from '@emotion/react'
 import { Interpolation } from '@emotion/serialize'
 import styled from '@emotion/styled'
 import { CssU } from '@util/css/CssU.ts'
-import { withDefaults } from '@util/react/withDefaults.tsx'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React, { CSSProperties } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -146,29 +146,28 @@ export default PageContentLayout
 
 
 
-const ContentCol = withDefaults({
-  pos: 'rel',
+const ContentCol = styled(Flex)(flexStyle({
+  relative: true,
   fullW: true, wMin: 0, h: 'ct',
   col: true, g: 10,
-}, styled(Flex)())
+}))
 
-const ContentFull = withDefaults({
-  pos: 'rel',
-  full: true,
-}, styled(Flex)())
-
+const ContentFull = styled(Flex)(flexStyle({
+  relative: true, full: true,
+}))
 
 
-const InnerColSm = withDefaults({
-  pos: 'rel',
+
+const InnerColSm = styled(Flex)(flexStyle({
+  relative: true,
   fullW: true, wMax: colSmWMax, wMin: 0, h: 'fit-content',
   col: true, aligned: true, align: 'stretch',
-}, styled(Flex)())
+}))
 
-const InnerFullSm = withDefaults({
-  pos: 'rel',
+const InnerFullSm = styled(Flex)(flexStyle({
+  relative: true,
   fullW: true, wMax: colSmWMax, wMin: 0, fullH: true,
-}, styled(Flex)())
+}))
 
 
 

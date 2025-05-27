@@ -8,6 +8,7 @@ import {
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
 import { DateArticleType, DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
@@ -51,7 +52,7 @@ const RouteDateArticles = React.memo(() => {
         }
         replace
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <DateArticlesPage articleItem={{ type: 'type', itemType: type }}/>
       </Suspense>
     </>
@@ -71,7 +72,7 @@ const RouteDateArticles = React.memo(() => {
         }
         replace
       />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <DateArticlesPage articleItem={{ type: 'category', itemCategory: category }}/>
       </Suspense>
     </>
