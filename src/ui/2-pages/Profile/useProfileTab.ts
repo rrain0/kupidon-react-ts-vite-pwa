@@ -40,7 +40,9 @@ export const useProfileTab = () => {
   const navigate = useNavigate()
   const [search] = useSearchParams()
   
-  const userIdTabRoute = RootRoute.profile.id.userId[use](':userId').profile[use](':tab')
+  const userIdTabRoute = RootRoute.profile.id
+    .userId[use](':userId')
+    .profile[use](':tab')
   const params = useMatch(userIdTabRoute[full]())!.params!
   const userId = params['userId']!
   const tab = params['tab']!
@@ -48,7 +50,6 @@ export const useProfileTab = () => {
   /* useEffect(() => {
     console.log('tab', tab)
   }, [tab]) */
-  
   
   const tabData = useMemo(() => {
     if (!tab) return undefined

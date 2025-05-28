@@ -111,7 +111,7 @@ const ChatListActionBar = React.memo(() => {
   
   
   return (
-    <Flex row h={50} p={4} stretchEnd
+    <Flex row h={50} m={10} p={4} stretchEnd
       data-display-name='ChatListActionBar'
     >
       <Flex row round contentBox m={-4} p={4} ref={setActionBarEl}

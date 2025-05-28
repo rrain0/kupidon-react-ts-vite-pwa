@@ -75,10 +75,12 @@ export namespace ObjectU {
   
   
   
-  export type Entries<O extends object> =
+  export type Entries<O extends object> = (
     { [Prop in keyof O]: [Prop, O[Prop]] }[keyof O]
-  export type ObjectEntriesType<O extends object> =
+  )
+  export type ObjectEntriesType<O extends object> = (
     { [Prop in string & keyof O]: [Prop, O[Prop]] }[string & keyof O]
+  )
   /**
    * Тип для получения поэлементно типизированного массива записей объекта
    * (для собственных перечисляемых свойств),
@@ -118,12 +120,12 @@ export namespace ObjectU {
   
   
   export function ObjectPrefixCapitalizeKeys<
-    const Pref extends string,
-    const Es extends object
+    const Pref extends string, const Es extends object
   >(
-    prefix: Pref,
-    elems: Es
-  ): { [Prop in keyof Es as `${Pref}${Capitalize<string & Prop>}`]: Es[Prop] } {
+    prefix: Pref, elems: Es
+  ): (
+    { [Prop in keyof Es as `${Pref}${Capitalize<string & Prop>}`]: Es[Prop] }
+  ) {
     return ObjectMap(elems, ([prop, value]) => [`${prefix}${capitalize(prop)}`, value] as any)
   }
   
@@ -140,10 +142,12 @@ export namespace ObjectU {
   }
   
   
+  export const stringifyEq = (obj1: any, obj2: any) => JSON.stringify(obj1) === JSON.stringify(obj2)
+  
+  
   
   
   // Doesn't work but idea is good
-  // eslint-disable-next-line @stylistic/brace-style
   {
     type FieldsToValues
       <Vs extends object, Fs extends readonly (keyof Vs)[] = readonly (keyof Vs)[]> =
@@ -172,7 +176,6 @@ export namespace ObjectU {
   }
   
   // Doesn't work but idea is good
-  // eslint-disable-next-line @stylistic/brace-style
   {
     type FieldsToValues
       <

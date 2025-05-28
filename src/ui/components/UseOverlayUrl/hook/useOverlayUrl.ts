@@ -1,5 +1,6 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { useBool } from '@util/react-state/useBool.ts'
+import { useSearchParamValue } from '@util/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -9,6 +10,41 @@ import Callback = TypeU.Callback
 
 
 export const useOverlayUrl = (overlayName: string) => {
+  const [paramData, setParam] = useSearchParamValue(overlayName)
+  
+  const isOpen = !paramData.noParam
+  
+  if (overlayName === 'chatItemsContextMenu') {
+    console.log('paramData', paramData)
+    console.log('isOpen', isOpen)
+  }
+  
+  const open = useCallback(() => {
+    setParam({ noValue: true })
+  }, [])
+  const close = useCallback(() => {
+    setParam({ noParam: true })
+  }, [])
+  
+  const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)
+  const closeWithAction = useCallback((action?: Callback) => {
+    close()
+    setCloseAction(() => action)
+  }, [])
+  useEffect(() => {
+    if (!isOpen && closeAction) {
+      closeAction()
+      setCloseAction(undefined)
+    }
+  }, [isOpen])
+  
+  return { isOpen, open, close, closeWithAction } as const
+}
+
+
+
+// TODO maybe remove
+export const _useOverlayUrl = (overlayName: string) => {
   const navigate = useNavigate()
   const [search, setSearch] = useSearchParams()
   

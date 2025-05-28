@@ -37,7 +37,10 @@ const {
 
 
 
-// Name -> firstName & lastName
+const showFullProps = false as boolean
+
+
+// TODO Name -> firstName & lastName
 const mockChatItems: (ChatListItemWidgetData & {
   isMutualSympathy?: boolean | undefined
   mutualSympathyAppearanceDate?: string | undefined
@@ -45,10 +48,11 @@ const mockChatItems: (ChatListItemWidgetData & {
   {
     id: 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0',
     name: 'Лена',
-    lastMsg: 'Буду иметь ввиду :)', isLastMsgMy: true, lastMsgStatus: 'sending' as const,
+    lastMsg: 'Буду иметь ввиду :)', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date0sAgo, mute: true,
     isMutualSympathy: true,
     mutualSympathyAppearanceDate: date12mAgo,
+    ...showFullProps && { lastMsgStatus: 'sending' as const },
   },
   {
     id: '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d',
@@ -69,16 +73,17 @@ const mockChatItems: (ChatListItemWidgetData & {
     ava: avaCloseUpSmilingBlonde, name: 'Майя',
     ...Env.isDev && { ava: chanAva, online: true, name: 'Лести' },
     lastMsg: 'Не очень', isLastMsgMy: false, unreadCnt: 2,
-    lastMsgDate: date1sAgo, mute: false, order: 1, isWriting: true,
+    lastMsgDate: date1sAgo, mute: false, pinned: 1, isWriting: true,
   },
   {
     id: 'a503343a-4759-441d-aae0-3f61e2335337',
     ava: avaDarkHairedLady, name: 'Настя',
     ...Env.isDev && { ava: banSmirks, name: 'Бан' },
-    lastMsg: 'Последнее сообщение', isLastMsgMy: false, unreadCnt: 99,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: false, unreadCnt: 1,
     lastMsgDate: date3dAgo, online: true,
     isMutualSympathy: true,
     mutualSympathyAppearanceDate: date1wAgo,
+    ...showFullProps && { unreadCnt: 99 },
   },
   ...Env.isDev && [{
     id: '12c40cc6-5cdc-4b22-be2e-020643cab84a',
@@ -93,7 +98,7 @@ const mockChatItems: (ChatListItemWidgetData & {
     id: '175dc7be-3f56-4b9d-9403-e994b72624dc',
     ava: avaAttractivePrettyWoman, name: 'Алиса',
     ...Env.isDev && { ava: avaChan3, name: 'Эмбер' },
-    lastMsg: 'Последнее сообщение', unreadCnt: 1256,
+    lastMsg: 'Последнее сообщение',
     lastMsgDate: date1MAgo, online: true, mute: false,
     isMutualSympathy: true,
     mutualSympathyAppearanceDate: date1MAgo,
@@ -103,7 +108,7 @@ const mockChatItems: (ChatListItemWidgetData & {
     ava: avaBeautifulBusinessLady, name: 'Дарья',
     ...Env.isDev && { ava: avaChan1, name: 'Кира' },
     lastMsg: 'Хорошего вечера', isLastMsgMy: true, lastMsgStatus: 'read' as const,
-    lastMsgDate: date1dAgo, online: true, mute: false, order: 1,
+    lastMsgDate: date1dAgo, online: true, mute: false, pinned: 2,
     isMutualSympathy: true,
     mutualSympathyAppearanceDate: date3dAgo,
   },
@@ -111,8 +116,9 @@ const mockChatItems: (ChatListItemWidgetData & {
     id: '5ac18ba3-fc4a-4983-a662-7b8134885ed6',
     ava: avaWomanPosingHouse, name: 'Ксюша',
     ...Env.isDev && { ava: chanAva, name: 'Арису' },
-    lastMsg: 'Последнее сообщение', unreadCnt: 1234567890123456,
-    lastMsgDate: date12mAgo, mute: false, isWriting: true,
+    lastMsg: 'Последнее сообщение',
+    lastMsgDate: date12mAgo, mute: false,
+    ...showFullProps && { isWriting: true, unreadCnt: 1234567890123456 },
   },
   {
     id: '97bd2cee-decf-4774-8768-b576118af713',
@@ -125,30 +131,33 @@ const mockChatItems: (ChatListItemWidgetData & {
     id: 'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c',
     ava: avaWomanWalkingStreet, name: 'Саша',
     ...Env.isDev && { ava: chanAva, name: 'Реонна' },
-    lastMsg: 'Спасибо', unreadCnt: 99999999,
-    lastMsgDate: date1wAgo, mute: true,
+    lastMsg: 'Спасибо',
+    lastMsgDate: date1wAgo,
+    ...showFullProps && { unreadCnt: 99999999, mute: true },
   },
   {
     id: '4fb12fb0-1f88-45a0-af4e-28b5614d1960',
     name: 'Анита',
     ...Env.isDev && { name: 'Стелли' },
     lastMsg: 'Давай', isLastMsgMy: true, lastMsgStatus: 'error' as const,
-    lastMsgDate: date2yAgo, mute: true, order: 1,
+    lastMsgDate: date2yAgo, mute: true,
   },
   {
     id: 'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
     ava: avaWomanWithCureSmile, name: 'Лаура',
     ...Env.isDev && { ava: avaChan2, name: 'Виола' },
-    lastMsg: 'Последнее сообщение', isLastMsgMy: false, unreadCnt: 1555666,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: false,
     lastMsgDate: date17hAgo, mute: false,
     isMutualSympathy: true,
     mutualSympathyAppearanceDate: date57mAgo,
+    ...showFullProps && { unreadCnt: 1555666 },
   },
   {
     id: 'b8851399-7522-40d3-98c9-00b3f5d6d2cb',
     name: 'Ксения',
-    lastMsg: 'Последнее сообщение', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
+    lastMsg: 'Последнее сообщение', isLastMsgMy: false, lastMsgStatus: 'sent' as const,
     lastMsgDate: date6MAgo, mute: true,
+    unreadCnt: 1256,
   },
   {
     id: 'ab3bee90-b38e-4bbd-a2c7-823f8fa3bde4',
@@ -182,7 +191,7 @@ const ChatListPage = React.memo(() => {
   ]
   
   const { get: getInitialChatItems, setOrUpdate: setInitialChatItems } = useStateAndRef(() => (
-    mockChatItems.filter(it => !chatItemsInitiallyRemoved.includes(it.id))
+    mockChatItems.filter(it => showFullProps ? !chatItemsInitiallyRemoved.includes(it.id) : true)
   ))
   
   
@@ -221,13 +230,13 @@ const ChatListPage = React.memo(() => {
   
   const pinChats = useCallback((ids: string[]) => {
     setChatItems(items => ArrayU.mapToIf(items, it => {
-      if (ids.includes(it.id) && !it.order) return { ...it, order: 1 }
+      if (ids.includes(it.id) && !it.pinned) return { ...it, pinned: 1 }
       return it
     }))
   }, [])
   const unpinChats = useCallback((ids: string[]) => {
     setChatItems(items => ArrayU.mapToIf(items, it => {
-      if (ids.includes(it.id) && it.order === 1) return { ...it, order: 0 }
+      if (ids.includes(it.id) && it.pinned === 1) return { ...it, pinned: 0 }
       return it
     }))
   }, [])
@@ -256,6 +265,7 @@ const ChatListPage = React.memo(() => {
   
   
   useInterval2({ offset: 1500, interval: 1500 }, () => {
+    if (!showFullProps) return
     if (getStage() === 1) {
       setStage(2)
       setChatItems(items => [
@@ -280,8 +290,12 @@ const ChatListPage = React.memo(() => {
     return chatItems
       .filter(it => it)
       .sort((a, b) => {
-        return (b.order ?? 0) - (a.order ?? 0)
-          || Math.sign(b.unreadCnt ?? 0) - Math.sign(a.unreadCnt ?? 0)
+        return (b.pinned ?? 0) - (a.pinned ?? 0)
+          || (() => {
+            const bUnread = !b.mute ? Math.sign(b.unreadCnt ?? 0) : 0
+            const aUnread = !a.mute ? Math.sign(a.unreadCnt ?? 0) : 0
+            return bUnread - aUnread
+          })()
           || +new Date(b.lastMsgDate) - +new Date(a.lastMsgDate)
           || 0
       })
@@ -324,9 +338,9 @@ const ChatListPage = React.memo(() => {
         </PageContentLayout>
       </PageLayout>
       
-      <BottomButtonBar
-        rightChildren={<ChatListActionBar/>}
-      />
+      <BottomButtonBar>
+        <ChatListActionBar/>
+      </BottomButtonBar>
       
     </>
   )

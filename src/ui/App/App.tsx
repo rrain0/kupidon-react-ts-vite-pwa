@@ -1,4 +1,5 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
+import { useSearchParamsUrlListener } from '@util/url/useSearchParamsUrlListener.ts'
 import React from 'react'
 import {
   testWordsTreeGenerator
@@ -32,6 +33,8 @@ WidgetStyle6NewTest.testTransformSimple()
 
 
 const App = React.memo(() => {
+  
+  useSearchParamsUrlListener()
   
   useAppInstallationSetup()
   useLangSetup()

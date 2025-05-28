@@ -223,8 +223,8 @@ const ChatList = React.memo((props: ChatListProps) => {
       .map(id => (uiItems ?? []).find(it => it.item.id === id)!.item)
       .reduce((acc, curr) => {
         acc.selected++
-        acc.hasUnpinned ||= !curr.order
-        acc.hasPinned ||= curr.order === 1
+        acc.hasUnpinned ||= !curr.pinned
+        acc.hasPinned ||= curr.pinned === 1
         acc.hasMuted ||= !!curr.mute
         acc.hasUnmuted ||= !curr.mute
         acc.hasUnarchived ||= true

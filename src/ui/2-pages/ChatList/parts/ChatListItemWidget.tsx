@@ -28,6 +28,7 @@ import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
 import Pu = TypeU.Pu
+import isdef = TypeU.isdef
 
 
 
@@ -52,7 +53,7 @@ export type ChatListItemWidgetData = {
   isLastMsgMy?: boolean | undefined
   unreadCnt?: number | undefined
   mute?: boolean | undefined
-  order?: number | undefined
+  pinned?: number | undefined // int 1+
   lastMsgStatus?: 'sending' | 'sent' | 'read' | 'error' | undefined
   isWriting?: boolean | undefined
 }
@@ -66,7 +67,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
   const {
     item: {
       id, ava, online, name, lastMsg, lastMsgDate, isLastMsgMy, unreadCnt = 0,
-      mute, order = 0, lastMsgStatus, isWriting,
+      mute, pinned, lastMsgStatus, isWriting,
     },
     ...restProps
   } = props
@@ -110,7 +111,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
               error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
               durationText && <Status key='duration'>{durationText}</Status>,
               mute && <VolumeMute key='mute'/>,
-              order === 1 && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
+              isdef(pinned) && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
             ]
               .filter(it => it)
               .flatMap((it, i, arr) => (

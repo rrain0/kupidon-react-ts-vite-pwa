@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import React, { useCallback, useEffect, useLayoutEffect } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useEffect, useLayoutEffect } from 'react'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import QuickSettings, {
@@ -10,17 +9,16 @@ import QuickSettings, {
 import QuickSettingsButton from 'src/ui/0-elements/buttons/QuickSettingsButton.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useBool } from 'src/util/react-state/useBool.ts'
+import { useBool } from '@util/react-state/useBool.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import fixedBottom = EmotionCommon.fixedBottom
 import row = EmotionCommon.row
-import Arrow5FwdIc = SvgIconsPack.ArrowLinesSharp1Ic
 import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
 import rotateAnim = EmotionCommon.rotateAnim
 import fixedTop = EmotionCommon.fixedTop
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 import Callback = TypeU.Callback
 
 
@@ -101,22 +99,6 @@ export namespace ButtonBarComponents {
   })
   
   
-  // TODO remove & replace by BackBtn0
-  export const BackBtn0 = React.memo(() => {
-    const navigate = useNavigate()
-    const back = useCallback(() => navigate(-1), [navigate])
-    
-    return (
-      <Button
-        css={IconButtonS6.t(IconButtonS6.S.trans.round.lg2.secondary)}
-        onClick={back}
-      >
-        <Arrow5FwdIc css={css`rotate: 0.5turn;`}/>
-      </Button>
-    )
-  })
-  
-  
   
   
   
@@ -146,7 +128,7 @@ export namespace ButtonBarComponents {
   
   
   
-  export type SoftRefreshBtnProps = PartialUndef<{
+  export type SoftRefreshBtnProps = Pu<{
     isLoading: boolean
     refresh: Callback
   }>

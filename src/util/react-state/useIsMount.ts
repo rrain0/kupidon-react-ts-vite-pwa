@@ -1,0 +1,14 @@
+import { useEffect } from 'react'
+import { useBool } from 'src/util/react-state/useBool'
+
+
+
+export const useIsMount = () => {
+  
+  const [isMount, , setIsNotMount] = useBool(true)
+  
+  useEffect(setIsNotMount, [])
+  
+  return isMount
+}
+

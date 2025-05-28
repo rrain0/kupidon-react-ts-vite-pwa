@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { TypeU } from 'src/util/common/TypeU'
 import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
-import { useFirstRender } from 'src/util/react-state/useFirstRender'
+import { useIsMount } from 'src/util/react-state/useIsMount.ts'
 import { useRefGetSet } from 'src/util/react-state/useRefGetSet'
 import Callback = TypeU.Callback
 import Producer = TypeU.Producer
@@ -24,7 +24,7 @@ export const useEvent = (
   
   
   
-  const isMount = useFirstRender()
+  const isMount = useIsMount()
   
   const [effectMarker, setEffectMarker] = useState(false)
   const [getEffectRefMarker, setEffectRefMarker] = useRefGetSet(false)

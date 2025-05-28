@@ -28,7 +28,7 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import Tests from 'src/ui/2-pages/Profile/Tests/Tests.tsx'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
+import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/parts/ButtonBarParts.tsx'
 import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import Preview from 'src/ui/2-pages/Profile/Preview/Preview.tsx'

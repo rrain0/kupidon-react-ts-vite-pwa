@@ -1,17 +1,15 @@
-import { css, Global } from '@emotion/react'
-import styled from '@emotion/styled'
+import { Global } from '@emotion/react'
 import React, {
   ReactNode,
   useImperativeHandle,
   useRef,
 } from 'react'
-import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/components.tsx'
-import { ReactU } from 'src/util/react/ReactU.ts'
+import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/parts/ButtonBarParts.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
+import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
 import Pu = TypeU.Pu
 import ButtonsContainer = ButtonBarComponents.ButtonsContainer
 import LeftButtonsContainer = ButtonBarComponents.LeftButtonsContainer
-import BackBtn0 = ButtonBarComponents.BackBtn0
 import CenterButtonsContainer = ButtonBarComponents.CenterButtonsContainer
 import SettingsBtn = ButtonBarComponents.SettingsBtn
 import RightButtonsContainer = ButtonBarComponents.RightButtonsContainer
@@ -67,7 +65,7 @@ const TopButtonBar = React.memo((props: TopButtonBarProps) => {
         <ButtonsContainer>
           
           <LeftButtonsContainer>
-            {backBtn && <BackBtn0/>}
+            {backBtn && <BackBtn/>}
             {leftChildren}
           </LeftButtonsContainer>
           
@@ -92,6 +90,7 @@ const TopButtonBar = React.memo((props: TopButtonBarProps) => {
     </>
   )
 })
+TopButtonBar.displayName = 'TopButtonBar'
 export default TopButtonBar
 
 
