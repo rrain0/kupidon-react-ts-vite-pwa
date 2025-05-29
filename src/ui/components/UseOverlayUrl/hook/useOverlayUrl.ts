@@ -14,10 +14,10 @@ export const useOverlayUrl = (overlayName: string) => {
   
   const isOpen = !paramData.noParam
   
-  if (overlayName === 'chatItemsContextMenu') {
+  /* if (overlayName === 'chatItemsContextMenu') {
     console.log('paramData', paramData)
     console.log('isOpen', isOpen)
-  }
+  } */
   
   const open = useCallback(() => {
     setParam({ noValue: true })

@@ -38,7 +38,7 @@ const Ava = React.memo((props: AvaProps) => {
   } = props
   
   return (
-    <AvaContainer alignedStretch noShrink center
+    <AvaContainer center
       data-display-name='Ava'
       {...restProps}
     >

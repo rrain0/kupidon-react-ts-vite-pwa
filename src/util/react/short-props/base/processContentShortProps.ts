@@ -15,6 +15,7 @@ export type ContentShortProps = Pu<{
   color: string // color
   
   noOverflow: boolean // true => { overflow: 'hidden' }
+  overflowAuto: boolean // true => { overflow: 'auto' }
   noPointer: boolean // true => { pointerEvents: 'none' }
 }>
 

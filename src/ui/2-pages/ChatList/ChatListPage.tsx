@@ -1,5 +1,7 @@
 import { Env } from '@util/app/Env.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
+import { MathU } from '@util/common/MathU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
@@ -15,6 +17,9 @@ import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.t
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
+import posInf = MathU.posInf
+import isundef = TypeU.isundef
+import isdef = TypeU.isdef
 
 
 
@@ -41,7 +46,7 @@ const showFullProps = false as boolean
 
 
 // TODO Name -> firstName & lastName
-const mockChatItems: (ChatListItemWidgetData & {
+export const mockChatItems: (ChatListItemWidgetData & {
   isMutualSympathy?: boolean | undefined
   mutualSympathyAppearanceDate?: string | undefined
 })[] = [
@@ -108,7 +113,7 @@ const mockChatItems: (ChatListItemWidgetData & {
     ava: avaBeautifulBusinessLady, name: 'Дарья',
     ...Env.isDev && { ava: avaChan1, name: 'Кира' },
     lastMsg: 'Хорошего вечера', isLastMsgMy: true, lastMsgStatus: 'read' as const,
-    lastMsgDate: date1dAgo, online: true, mute: false, pinned: 2,
+    lastMsgDate: date1dAgo, online: true, mute: false, pinned: 0,
     isMutualSympathy: true,
     mutualSympathyAppearanceDate: date3dAgo,
   },
@@ -230,13 +235,15 @@ const ChatListPage = React.memo(() => {
   
   const pinChats = useCallback((ids: string[]) => {
     setChatItems(items => ArrayU.mapToIf(items, it => {
-      if (ids.includes(it.id) && !it.pinned) return { ...it, pinned: 1 }
+      // TODO add pinned as lowermost and adjust all indexes
+      if (ids.includes(it.id) && isundef(it.pinned)) return { ...it, pinned: 1 }
       return it
     }))
   }, [])
   const unpinChats = useCallback((ids: string[]) => {
     setChatItems(items => ArrayU.mapToIf(items, it => {
-      if (ids.includes(it.id) && it.pinned === 1) return { ...it, pinned: 0 }
+      // TODO add pinned as lowermost and adjust all indexes
+      if (ids.includes(it.id) && isdef(it.pinned)) return { ...it, pinned: undefined }
       return it
     }))
   }, [])
@@ -290,7 +297,7 @@ const ChatListPage = React.memo(() => {
     return chatItems
       .filter(it => it)
       .sort((a, b) => {
-        return (b.pinned ?? 0) - (a.pinned ?? 0)
+        return (a.pinned ?? posInf) - (b.pinned ?? posInf)
           || (() => {
             const bUnread = !b.mute ? Math.sign(b.unreadCnt ?? 0) : 0
             const aUnread = !a.mute ? Math.sign(a.unreadCnt ?? 0) : 0

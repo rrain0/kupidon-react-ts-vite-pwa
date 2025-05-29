@@ -5,6 +5,8 @@ import isnumber = TypeU.isnumber
 
 export namespace MathU {
   
+  export const posInf = Number.POSITIVE_INFINITY
+  export const negInf = Number.NEGATIVE_INFINITY
   
   export const tg80deg = Math.tan(80 / 180 * Math.PI)
   export const tg60deg = Math.sqrt(3)

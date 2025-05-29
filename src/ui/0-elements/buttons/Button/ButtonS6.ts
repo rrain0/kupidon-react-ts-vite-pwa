@@ -19,6 +19,38 @@ import Txt = WidgetStyleCommon.Txt
 
 
 
+// TODO Style - new widget config
+const ButtonS7Config = {
+  $button: {
+    className: 'rruiButton',
+    nodes: {
+      '>': {
+        $border: {
+          className: 'rruiBorder',
+          nodes: {
+            '>': {
+              $ripple: {
+                className: 'rruiRippleFrame',
+              },
+            },
+          },
+        },
+      },
+      ' ': { },
+    },
+    
+    states: {
+      hover: '',
+      selected: '',
+      locked: '',
+      // ...
+    },
+    
+  },
+} as const
+
+
+
 export namespace ButtonS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
@@ -34,10 +66,6 @@ export namespace ButtonS6 {
       upElem: button, upSelector: '>', className: 'rruiBorder',
     })
     const rippleElems = RippleS6.buildWidgetElems({ upElem: bord, upSelector: '>' })
-    
-    const buttonCont = WidgetElem.of({
-      upElem: button, upSelector: '>', className: 'rruiButtonContent',
-    })
     
     return {
       button,

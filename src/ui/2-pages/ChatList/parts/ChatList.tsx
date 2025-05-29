@@ -23,6 +23,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
 import emptyArr = TypeU.emptyArr
 import isundef = TypeU.isundef
+import isdef = TypeU.isdef
 
 
 
@@ -223,8 +224,8 @@ const ChatList = React.memo((props: ChatListProps) => {
       .map(id => (uiItems ?? []).find(it => it.item.id === id)!.item)
       .reduce((acc, curr) => {
         acc.selected++
-        acc.hasUnpinned ||= !curr.pinned
-        acc.hasPinned ||= curr.pinned === 1
+        acc.hasUnpinned ||= isundef(curr.pinned)
+        acc.hasPinned ||= isdef(curr.pinned)
         acc.hasMuted ||= !!curr.mute
         acc.hasUnmuted ||= !curr.mute
         acc.hasUnarchived ||= true

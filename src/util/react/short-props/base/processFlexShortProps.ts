@@ -24,10 +24,10 @@ export type FlexShortProps = Pu<{
   alignStretch: boolean // true => { alignItems: 'stretch' }
   
   // justify-content: stretch; does not exist for flex
-  justifyCtStart: boolean // true => { justifyContent: 'start' }
-  justifyCtEnd: boolean // true => { justifyContent: 'end' }
-  justifyCtSpaceBetween: boolean // true => { justifyContent: 'space-between' }
-  justifyCtSpaceAround: boolean // true => { justifyContent: 'space-around' }
+  justifyStart: boolean // true => { justifyContent: 'start' }
+  justifyEnd: boolean // true => { justifyContent: 'end' }
+  justifySpaceBetween: boolean // true => { justifyContent: 'space-between' }
+  justifySpaceAround: boolean // true => { justifyContent: 'space-around' }
   
   centerStart: boolean // true => { alignItems: 'center', justifyContent: 'start' }
   center: boolean // true => { alignItems: 'center', justifyContent: 'center' }
@@ -35,6 +35,7 @@ export type FlexShortProps = Pu<{
   
   stretchEnd: boolean // true => { alignItems: 'stretch', justifyContent: 'end' }
   
+  gap: number | string
   g: number | string
 }>
 
@@ -47,10 +48,10 @@ export const processFlexShortProps = <P extends object>(
     row, rowRev, col, colRev, wrap, wrapRev,
     align, alignCt, justifyCt,
     alignStart, alignEnd, alignStretch,
-    justifyCtStart, justifyCtEnd, justifyCtSpaceBetween, justifyCtSpaceAround,
+    justifyStart, justifyEnd, justifySpaceBetween, justifySpaceAround,
     centerStart, center, centerEnd,
     stretchEnd,
-    g,
+    gap, g,
     ...flexRest
   } = props
   
@@ -74,15 +75,16 @@ export const processFlexShortProps = <P extends object>(
     ...alignEnd && { alignItems: 'end' },
     ...alignStretch && { alignItems: 'stretch' },
     
-    ...justifyCtStart && { justifyContent: 'start' },
-    ...justifyCtEnd && { justifyContent: 'end' },
-    ...justifyCtSpaceBetween && { justifyContent: 'space-between' },
-    ...justifyCtSpaceAround && { justifyContent: 'space-around' },
+    ...justifyStart && { justifyContent: 'start' },
+    ...justifyEnd && { justifyContent: 'end' },
+    ...justifySpaceBetween && { justifyContent: 'space-between' },
+    ...justifySpaceAround && { justifyContent: 'space-around' },
     
     ...isdef(align) && { alignItems: mapBool(align, 'center') },
     ...isdef(alignCt) && { alignContent: mapBool(alignCt, 'center') },
     ...isdef(justifyCt) && { justifyContent: mapBool(justifyCt, 'center') },
     
+    ...isdef(gap) && { gap: gap },
     ...isdef(g) && { gap: g },
   }
   

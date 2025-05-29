@@ -53,7 +53,7 @@ export type ChatListItemWidgetData = {
   isLastMsgMy?: boolean | undefined
   unreadCnt?: number | undefined
   mute?: boolean | undefined
-  pinned?: number | undefined // int 1+
+  pinned?: number | undefined // int 0+, 0 is topmost, undefined - not pinned
   lastMsgStatus?: 'sending' | 'sent' | 'read' | 'error' | undefined
   isWriting?: boolean | undefined
 }
@@ -95,7 +95,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
       {...restProps}
     >
       
-      <Ava id={id} ava={ava} online={online} fullH/>
+      <Ava fullH alignedStretch noShrink id={id} ava={ava} online={online}/>
       
       <Flex alignedStretch col grow>
         

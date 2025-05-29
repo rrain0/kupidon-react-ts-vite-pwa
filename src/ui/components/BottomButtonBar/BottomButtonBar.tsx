@@ -1,4 +1,5 @@
 import { Global } from '@emotion/react'
+import { CssU } from '@util/css/CssU.ts'
 import React from 'react'
 import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/parts/ButtonBarParts.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -12,6 +13,7 @@ import RightButtonsContainer = ButtonBarComponents.RightButtonsContainer
 import RefreshBtn = ButtonBarComponents.RefreshPageBtn
 import isdef = TypeU.isdef
 import isundef = TypeU.isundef
+import toPx = CssU.toPx
 
 
 
@@ -19,10 +21,14 @@ import isundef = TypeU.isundef
 
 
 export type BottomButtonBarProps = React.ComponentProps<'section'> & Pu<{
+  h: number | string
+  
   children: React.ReactNode
+  
   leftChildren: React.ReactNode
   centerChildren: React.ReactNode
   rightChildren: React.ReactNode
+  
   backBtn: boolean
   settingsBtn: boolean
   settingsBtnLeft: boolean
@@ -33,8 +39,9 @@ export type BottomButtonBarProps = React.ComponentProps<'section'> & Pu<{
 
 const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
   const {
-    backBtn, settingsBtnLeft, leftChildren,
-    children, settingsBtn,
+    h = 70,
+    backBtn, settingsBtnLeft, leftChildren, settingsBtn,
+    children,
     rightChildren, centerChildren, refreshPageBtn,
     ...restProps
   } = props
@@ -45,7 +52,7 @@ const BottomButtonBar = React.memo((props: BottomButtonBarProps) => {
       
       <Global
         styles={{
-          ':root': { '--bottom-button-bar-height': '70px' },
+          ':root': { '--bottom-button-bar-height': toPx(h) },
         }}
       />
       

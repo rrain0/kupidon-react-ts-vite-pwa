@@ -67,7 +67,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
         >
           {mutualSympathiesItems.map(({ id, ava, name, online }) => (
             <Flex w={66} key={id} col noShrink align g={7}>
-              <Ava id={id} ava={ava} online={online} mutualSympathy shadow/>
+              <Ava alignedStretch noShrink shadow id={id} ava={ava} online={online} mutualSympathy/>
               <NameBox><Name>{name}</Name></NameBox>
             </Flex>
           ))}
