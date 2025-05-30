@@ -6,8 +6,8 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatListPage.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 
@@ -31,7 +31,7 @@ const ChatPage = React.memo(() => {
           
           <Flex row align contentBox h={61}>
             
-            <BackBtn/>
+            <BackButton/>
             
             <Ava id={chatItem.id} ava={chatItem.ava} stretched/>
             
@@ -118,7 +118,7 @@ const ChatPage = React.memo(() => {
       
       
       
-      <BottomButtonBar h={136}>
+      <BottomFloatingBar h={136}>
         <Flex col stretched p={16} g={12}>
           
           <Flex row g={12}>
@@ -169,7 +169,7 @@ const ChatPage = React.memo(() => {
           </Flex>
         
         </Flex>
-      </BottomButtonBar>
+      </BottomFloatingBar>
       
       
     </>

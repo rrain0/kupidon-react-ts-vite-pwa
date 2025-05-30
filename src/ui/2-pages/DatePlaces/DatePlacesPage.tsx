@@ -7,8 +7,8 @@ import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import DatePlaceCardWide from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCardWide.tsx'
 import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
@@ -46,7 +46,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
           {type && (
             <>
               <Pages.PageHeaderWithLeftRightItems>
-                <BackBtn/>
+                <BackButton/>
                 <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
                 <div css={{ width: 50, height: 50 }}/>
               </Pages.PageHeaderWithLeftRightItems>
@@ -78,7 +78,7 @@ const DatePlacesPage = React.memo((props: DatePlacesPageProps) => {
       </PageLayout>
       
       
-      <BottomButtonBar/>
+      <BottomFloatingBar/>
       
     </>
   )

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -41,7 +41,7 @@ const RippleTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
       
     </>
   )

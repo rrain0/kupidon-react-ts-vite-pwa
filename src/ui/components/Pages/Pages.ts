@@ -75,8 +75,8 @@ export namespace Pages {
     width: 100%;
     min-width: 0;
     height: fit-content;
-    padding-top: max(30px, var(--top-button-bar-height));
-    padding-bottom: max(50px, var(--bottom-button-bar-height));
+    padding-top: max(30px, var(--top-floating-bar-h));
+    padding-bottom: max(50px, var(--bottom-floating-bar-h));
     padding-left: 16px;
     padding-right: 16px;
     ${col};

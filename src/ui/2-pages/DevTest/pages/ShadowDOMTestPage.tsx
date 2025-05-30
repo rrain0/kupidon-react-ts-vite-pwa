@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 
 
@@ -91,7 +91,7 @@ const ShadowDOMTestPage = React.memo(() => {
         </Pages.Content>
       </Pages.Page>
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     </>
   )
 })

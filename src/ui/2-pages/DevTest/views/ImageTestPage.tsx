@@ -6,7 +6,7 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import rowWrap = EmotionCommon.rowWrap
 import col = EmotionCommon.col
@@ -181,7 +181,7 @@ const ImageTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     
     </>
   )

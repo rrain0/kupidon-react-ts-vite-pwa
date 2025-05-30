@@ -7,8 +7,8 @@ import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
@@ -241,9 +241,9 @@ const DevTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <TopButtonBar backBtn/>
+      <TopFloatingBar backButton/>
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     
     
     </>

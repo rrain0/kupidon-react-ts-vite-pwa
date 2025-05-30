@@ -13,8 +13,8 @@ import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { Contact } from 'src/ui/1-widgets/ContactButton/Contact.ts'
 import ContactButton from 'src/ui/1-widgets/ContactButton/ContactButton.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -84,7 +84,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
           <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn/>
+              <BackButton/>
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
               <div css={{ width: 50, height: 50 }}/>
             </Pages.PageHeaderWithLeftRightItems>
@@ -202,7 +202,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
       </UseBottomSheetState>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
       
     </>
   )

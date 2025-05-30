@@ -13,7 +13,7 @@ import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import DatePlaceCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoryCard.tsx'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import Children = ReactU.Children
@@ -52,7 +52,7 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         data-display-name='DatePlaceCategoriesList'
       >
         <Pages.PageHeaderWithLeftRightItems>
-          <BackBtn/>
+          <BackButton/>
           <Hdrs.Page>{uiText.title}</Hdrs.Page>
           <div css={{ width: 50, height: 50 }}/>
         </Pages.PageHeaderWithLeftRightItems>
@@ -81,7 +81,7 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         data-display-name='DatePlaceCategoriesList'
       >
         <Pages.PageHeaderWithLeftRightItems>
-          <BackBtn/>
+          <BackButton/>
           <Hdrs.Page>{uiText.title}</Hdrs.Page>
           <div css={{ width: 50, height: 50 }}/>
         </Pages.PageHeaderWithLeftRightItems>

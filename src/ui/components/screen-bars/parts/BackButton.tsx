@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React, { useCallback } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
@@ -12,10 +12,10 @@ import Pu = TypeU.Pu
 
 
 
-export type BackBtnProps = Pu<{
+export type BackButtonProps = Pu<{
   withVirtualOffset: boolean
 }>
-const BackBtn = React.memo(({ withVirtualOffset }: BackBtnProps) => {
+const BackButton = React.memo(({ withVirtualOffset }: BackButtonProps) => {
   const navigate = useNavigate()
   const back = useCallback(() => navigate(-1), [navigate])
   
@@ -35,8 +35,8 @@ const BackBtn = React.memo(({ withVirtualOffset }: BackBtnProps) => {
     </Button>
   )
 })
-BackBtn.displayName = 'BackBtn'
-export default BackBtn
+BackButton.displayName = 'BackButton'
+export default BackButton
 
 
 

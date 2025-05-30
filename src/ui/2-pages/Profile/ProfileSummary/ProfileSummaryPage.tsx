@@ -28,7 +28,7 @@ import {
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/ProfileSummary/parts/SummaryPageFeatureCards.tsx'
 import { ProfileSummaryPageParts } from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -205,7 +205,7 @@ const ProfileSummaryPage = React.memo(() => {
         </PageContentLayout>
       </PageLayout>
       
-      {/* <BottomButtonBar/> */}
+      {/* <BottomFloatingBar/> */}
       
     </>
   )

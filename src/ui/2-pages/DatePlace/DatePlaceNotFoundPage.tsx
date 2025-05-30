@@ -10,8 +10,8 @@ import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Pages } from 'ui/components/Pages/Pages'
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
@@ -49,7 +49,7 @@ export const DatePlaceNotFoundPage = React.memo(() => {
           <Pages.ContentColSm style={{ gap: 0, minHeight: '100%' }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn/>
+              <BackButton/>
               <Hdrs.Page>{uiText.placeNotFound}</Hdrs.Page>
               <div/>
             </Pages.PageHeaderWithLeftRightItems>
@@ -79,7 +79,7 @@ export const DatePlaceNotFoundPage = React.memo(() => {
       </Pages.PageGrad>
       
       
-      <BottomButtonBar/>
+      <BottomFloatingBar/>
     
     </>
   )

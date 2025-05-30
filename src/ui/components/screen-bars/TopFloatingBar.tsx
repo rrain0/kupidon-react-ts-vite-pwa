@@ -1,0 +1,89 @@
+import { Global } from '@emotion/react'
+import { CssU } from '@util/css/CssU.ts'
+import React, { ReactNode } from 'react'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
+import { TypeU } from '@util/common/TypeU.ts'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
+import Pu = TypeU.Pu
+import isdef = TypeU.isdef
+import isundef = TypeU.isundef
+import toPx = CssU.toPx
+
+
+
+export type TopFloatingBarProps = Pu<{
+  h: number | string
+  noBarPadding: boolean
+  
+  children: ReactNode
+  
+  leftChildren: ReactNode
+  centerChildren: React.ReactNode
+  rightChildren: ReactNode
+  
+  backButton: boolean
+}>
+
+
+
+const TopFloatingBar = React.memo((props: TopFloatingBarProps) => {
+  const {
+    children,
+    leftChildren, centerChildren, rightChildren,
+    backButton,
+    
+    h = 70,
+    noBarPadding,
+  } = props
+  
+  
+  return (
+    <>
+      
+      <Global
+        styles={{
+          ':root': { '--top-floating-bar-h': toPx(h) },
+        }}
+      />
+      
+      <Grid alignStart fixedTop noPointer
+        data-display-name='TopFloatingBar'
+      >
+        
+        {isdef(children) && children}
+        
+        {isundef(children) && (
+          <Grid justifiedStretch alignStart noPointer
+            h='var(--top-floating-bar-h)'
+            cols='1fr auto 1fr' p={!noBarPadding ? 10 : undefined} g={10}
+          >
+          
+            <Flex row startStart g={10}>
+              {backButton && <BackButton/>}
+              {leftChildren}
+            </Flex>
+            
+            
+            <Flex row startCenter g={10}>
+              {centerChildren}
+            </Flex>
+            
+            
+            <Flex row startEnd g={10}>
+              {rightChildren}
+            </Flex>
+            
+          </Grid>
+        )}
+        
+      </Grid>
+    
+    </>
+  )
+})
+TopFloatingBar.displayName = 'TopFloatingBar'
+export default TopFloatingBar
+
+
+

@@ -8,8 +8,8 @@ import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useNavigate, useSearchParams } from 'react-router'
@@ -189,9 +189,9 @@ const LoginPage = React.memo(() => {
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn/>
+      <TopFloatingBar backButton/>
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
       
     </>
   )

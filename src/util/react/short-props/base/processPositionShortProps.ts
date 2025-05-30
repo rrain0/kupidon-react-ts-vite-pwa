@@ -1,6 +1,5 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import Pu = TypeU.Pu
-import mapBool = TypeU.mapBool
 import isdef = TypeU.isdef
 
 
@@ -8,6 +7,10 @@ import isdef = TypeU.isdef
 
 export type PositionShortProps = Pu<{
   pos: string | 'rel' | 'abs' // 'rel' => 'relative', 'abs' => 'absolute
+  fixed: boolean // true => { position: 'fixed' }
+  absolute: boolean // true => { position: 'absolute' }
+  relative: boolean // true => { position: 'relative' }
+  
   t: number | string
   r: number | string
   b: number | string
@@ -15,10 +18,12 @@ export type PositionShortProps = Pu<{
   av: number | string // top & bottom
   ah: number | string // left & right
   a: number | string // top & right & bottom & left
+  
+  fixedTop: boolean // true => { position: 'fixed', top: 0, left: 0, right: 0 }
+  fixedBottom: boolean // true => { position: 'fixed', bottom: 0, left: 0, right: 0 }
+  
   absTrbl: boolean // true => { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 }
   absTlwh: boolean // true => { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }
-  absolute: boolean // true => { position: 'relative' }
-  relative: boolean // true => { position: 'relative' }
 }>
 
 
@@ -27,19 +32,26 @@ export const processPositionShortProps = <P extends object>(
   props: P & PositionShortProps
 ) => {
   const {
-    pos, t, r, b, l, av, ah, a,
-    absTrbl, absTlwh, absolute, relative,
+    pos, fixed, absolute, relative,
+    t, r, b, l, av, ah, a,
+    fixedTop, fixedBottom,
+    absTrbl, absTlwh,
     ...positionRest
   } = props
   
   
   
   const position = {
+    ...fixedTop && { position: 'fixed', top: 0, left: 0, right: 0 },
+    ...fixedBottom && { position: 'fixed', bottom: 0, left: 0, right: 0 },
+    
     ...absTrbl && { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
     ...absTlwh && { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' },
     
+    ...fixed && { position: 'fixed' },
     ...absolute && { position: 'absolute' },
     ...relative && { position: 'relative' },
+    
     ...isdef(pos) && {
       position: (() => {
         if (pos === 'rel') return 'relative'

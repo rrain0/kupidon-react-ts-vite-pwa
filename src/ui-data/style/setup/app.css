@@ -3,52 +3,51 @@
 
 :root {
   user-select: none;
-  
-  
-  
+}
+:root {
   /* viewport content width / height */
   --vp-ct-w: 0px;
   --vp-ct-h: 0px;
+}
+:root {
+  --page-pv: 50px;
   
+  --top-action-bar-h: 0px;
+  --top-floating-bar-h: 0px;
   
-  
-  --page-vertical-padding: 50px;
-  
-  --bottom-button-bar-height: 0px;
-  
-  --bottom-nav-height: 0px;
-  --bottom-second-bar-height: 0px;
-  
-  --top-button-bar-height: 0px;
-  --top-nav-height: 0px;
+  --bottom-floating-bar-h: 0px;
+  --bottom-action-bar-h: 0px;
+  --bottom-nav-bar-h: 0px;
   
   
   
   --bottom-bars-inset: calc(
-    var(--bottom-nav-height) +
-    var(--bottom-second-bar-height)
+    var(--bottom-action-bar-h) +
+    var(--bottom-nav-bar-h)
   );
+  
   --bottom-page-inset: calc(
-    var(--bottom-nav-height) +
-    var(--bottom-second-bar-height) +
+    var(--bottom-nav-bar-h) +
+    var(--bottom-action-bar-h) +
     max(
-      var(--bottom-button-bar-height),
-      var(--page-vertical-padding)
+      var(--bottom-floating-bar-h),
+      var(--page-pv)
     )
   );
   
+  
   --top-bars-inset: calc(
-    var(--top-nav-height)
+    var(--top-action-bar-h)
   );
+  
   --top-page-inset: calc(
-    var(--top-nav-height) +
+    var(--top-action-bar-h) +
     max(
-      var(--top-button-bar-height),
-      var(--page-vertical-padding)
+      var(--top-floating-bar-h),
+      var(--page-pv)
     )
   );
 }
-
 
 
 /* Pointer fixes */

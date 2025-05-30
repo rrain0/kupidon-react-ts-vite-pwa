@@ -12,12 +12,11 @@ import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import Children = ReactU.Children
 import modalContextMenuCardBoxS = ModalElements.modalContextMenuCardBoxS
+import StyleProp = ReactU.StyleProp
 
 
 
 
-const appearTime = 150
-const disappearTime = 150
 const b = 60
 const translateYHidden = `calc(${b}px + 110%)`
 
@@ -37,7 +36,7 @@ const ModalContextMenu = React.memo((props: ModalContextMenuProps) => {
   
   return (
     <>
-      <Global styles={{ ':root': { '--bottom-button-bar-height': `${b + 100}px` } }}/>
+      <Global styles={{ ':root': { '--bottom-floating-bar-h': `${b + 100}px` } }}/>
       
       <MountController isOpen={isOpen}>
         {mountProps => (
@@ -70,18 +69,25 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
     isOpen, allowUnmount,
   } = props
   
-  type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
-  const [state, setState] = useState<{ v: State }>({ v: undefined })
   
   const [getCardEl, setCardEl] = useElemRefGetSet()
   
+  type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
+  const [state, setState] = useState<{ v: State }>({ v: undefined })
   // useEffect сработает уже после монтирования элемента и получения рефа
   useEffect(() => {
     if (isOpen) setState({ v: 'appearing' })
     else setState({ v: 'disappearing' })
   }, [isOpen])
   
+  
+  const initialStyle: StyleProp = {
+    transform: `translateY(${translateYHidden})`,
+  }
   useEffect(() => {
+    const appearTime = 150
+    const disappearTime = 150
+    
     let stale = false
     const el = getCardEl()
     if (el) {
@@ -121,8 +127,9 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
   }, [state])
   
   return (
-    <Card ph={8}
-      css={[ModalElements.cardBoxInModalS, cardS]}
+    <Card relative b={b} ph={8}
+      style={initialStyle}
+      css={ModalElements.cardBoxInModalS}
       data-display-name='ContextMenu'
       ref={setCardEl}
     >
@@ -132,10 +139,3 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
 })
 ContextMenu.displayName = 'ContextMenu'
 
-
-
-const cardS = css({
-  position: 'relative',
-  transform: `translateY(${translateYHidden})`,
-  bottom: `${b}px`,
-})

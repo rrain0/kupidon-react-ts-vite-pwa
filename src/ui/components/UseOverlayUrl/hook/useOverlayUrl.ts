@@ -23,7 +23,7 @@ export const useOverlayUrl = (overlayName: string) => {
     setParam({ noValue: true })
   }, [])
   const close = useCallback(() => {
-    setParam({ noParam: true })
+    setParam({ noParam: true, back: true })
   }, [])
   
   const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)

@@ -1,8 +1,8 @@
-import { css, keyframes } from '@emotion/react'
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useState } from 'react'
 import Slider from 'src/ui/1-widgets/Slider/Slider.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import NumRange = RangeU.NumRange
@@ -56,7 +56,7 @@ const SliderTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     
     </>
   )

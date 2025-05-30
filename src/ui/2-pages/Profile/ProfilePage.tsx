@@ -10,7 +10,6 @@ import {
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { ReactU } from '@util/react/ReactU.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -20,15 +19,10 @@ import {
 } from 'src/ui-data/models/media/download/useMediaArrayDownloader.ts'
 import { MediaInArrayDUC, MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
-import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
-import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
-import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
-import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import Tests from 'src/ui/2-pages/Profile/Tests/Tests.tsx'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import { ButtonBarComponents } from 'src/ui/components/BottomButtonBar/parts/ButtonBarParts.tsx'
 import OverflowWrapper from 'src/ui/1-widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import Preview from 'src/ui/2-pages/Profile/Preview/Preview.tsx'
@@ -73,7 +67,6 @@ import arrOfIndices = ArrayU.arrOfIndices
 import ValueOrMapper = TypeU.ValueOrMapper
 import isfunction = TypeU.isfunction
 import isdef = TypeU.isdef
-import effectLog = ReactU.useLog
 
 
 
@@ -635,41 +628,20 @@ const ProfilePage = React.memo(() => {
           
           
           
-          {tabIdx !== 0 && (canSubmit || formProps.hasChanges) && (
-            <LeftBottomButtonBar
+          {tabIdx !== 0 && (
+            <BottomFloatingBar
               onCancel={formProps.hasChanges && formProps.resetUserFields || undefined}
               onAccept={canSubmit && !isLoading && submit || undefined}
             />
           )}
         
-          {/* <UseBottomSheetState
-            //isOpen={canSubmit || formProps.hasChanges}
-            //closeable={!(canSubmit || formProps.hasChanges)}
-          >
-            {props => <ModalPortal><BottomSheetBasic
-              bgDim={false}
-              {...props.sheetProps}
-            >
-            
-            </BottomSheetBasic></ModalPortal>}
-          </UseBottomSheetState>
-        
-        
-          { app.showDevOverlay && <BottomButtonBar
-            refreshPageBtn
-            rightChildren={
-              <SoftRefreshBtn
-                refresh={() => setNeedToFetchUser(true)}
-                isLoading={isFetchingUser}
-              />
-            }
-          /> } */}
         
         </>
       </PageLayout>
     </>
   )
 })
+ProfilePage.displayName = 'ProfilePage'
 export default ProfilePage
 
 

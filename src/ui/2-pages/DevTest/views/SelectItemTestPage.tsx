@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
@@ -311,7 +311,7 @@ const SelectItemTestPage = () => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     </>
   )
 }

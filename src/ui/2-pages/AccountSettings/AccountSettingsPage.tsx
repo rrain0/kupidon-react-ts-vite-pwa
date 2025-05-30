@@ -9,7 +9,7 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
+import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -299,9 +299,9 @@ const AccountSettingsPage = React.memo(() => {
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn/>
+      <TopFloatingBar backButton/>
       
-      {/* <BottomButtonBar settingsBtn
+      {/* <BottomFloatingBar settingsButton
         rightChildren={
           canSubmit && <Button css={IconButtonStyle.icon}
             onClick={submit}

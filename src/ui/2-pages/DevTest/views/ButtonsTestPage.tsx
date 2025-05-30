@@ -5,7 +5,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import col = EmotionCommon.col
 import rowWrap = EmotionCommon.rowWrap
@@ -67,7 +67,7 @@ const ButtonsTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     
     </>
   )

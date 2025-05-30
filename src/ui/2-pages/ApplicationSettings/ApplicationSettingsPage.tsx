@@ -7,8 +7,8 @@ import { SettingsGroup } from 'src/ui/0-elements/basic-elements/SettingsGroup.ts
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { ThemeShortNameUiText } from 'src/ui-data/translations/ThemeShortNameUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
@@ -193,9 +193,9 @@ const ApplicationSettingsPage = React.memo(() => {
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn/>
+      <TopFloatingBar backButton/>
       
-      <BottomButtonBar/>
+      <BottomFloatingBar/>
       
       
     </>

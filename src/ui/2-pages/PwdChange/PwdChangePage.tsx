@@ -6,8 +6,8 @@ import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
-import TopButtonBar from 'src/ui/components/BottomButtonBar/TopButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer.tsx'
 import ItemTitleContainer from 'src/ui/0-elements/basic-elements/ItemTitleContainer.tsx'
@@ -224,9 +224,9 @@ const PwdChangePage = React.memo(() => {
       </Pages.PageGrad>
       
       
-      <TopButtonBar backBtn/>
+      <TopFloatingBar backButton/>
       
-      {/* <BottomButtonBar settingsBtn/> */}
+      {/* <BottomFloatingBar settingsButton/> */}
       
       
     </>

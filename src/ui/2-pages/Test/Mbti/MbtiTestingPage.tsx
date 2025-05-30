@@ -4,7 +4,6 @@ import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
 import { MathU } from '@util/common/MathU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import { useEvent } from '@util/react/useEvent.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useSearchParams } from 'react-router'
@@ -21,7 +20,7 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
 import Txt = EmotionCommon.Txt
@@ -388,7 +387,7 @@ const MbtiTestingPage = React.memo(() => {
         </Pages.AddSafeInsets>
       </Pages.PageGrad>
       
-      <BottomButtonBar settingsBtnLeft/>
+      <BottomFloatingBar settingsButtonLeft/>
     </>
   )
 })

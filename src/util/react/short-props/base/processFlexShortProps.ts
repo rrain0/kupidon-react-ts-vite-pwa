@@ -29,9 +29,19 @@ export type FlexShortProps = Pu<{
   justifySpaceBetween: boolean // true => { justifyContent: 'space-between' }
   justifySpaceAround: boolean // true => { justifyContent: 'space-around' }
   
+  start: boolean // true => { alignItems: 'start', justifyContent: 'start' }
+  startStart: boolean // true => { alignItems: 'start', justifyContent: 'start' }
+  startCenter: boolean // true => { alignItems: 'start', justifyContent: 'center' }
+  startEnd: boolean // true => { alignItems: 'start', justifyContent: 'end' }
+  
   centerStart: boolean // true => { alignItems: 'center', justifyContent: 'start' }
   center: boolean // true => { alignItems: 'center', justifyContent: 'center' }
   centerEnd: boolean // true => { alignItems: 'center', justifyContent: 'end' }
+  
+  end: boolean // true => { alignItems: 'end', justifyContent: 'end' }
+  endStart: boolean // true => { alignItems: 'end', justifyContent: 'start' }
+  endCenter: boolean // true => { alignItems: 'end', justifyContent: 'center' }
+  endEnd: boolean // true => { alignItems: 'end', justifyContent: 'end' }
   
   stretchEnd: boolean // true => { alignItems: 'stretch', justifyContent: 'end' }
   
@@ -49,7 +59,9 @@ export const processFlexShortProps = <P extends object>(
     align, alignCt, justifyCt,
     alignStart, alignEnd, alignStretch,
     justifyStart, justifyEnd, justifySpaceBetween, justifySpaceAround,
+    start, startStart, startCenter, startEnd,
     centerStart, center, centerEnd,
+    end, endStart, endCenter, endEnd,
     stretchEnd,
     gap, g,
     ...flexRest
@@ -68,6 +80,11 @@ export const processFlexShortProps = <P extends object>(
     ...centerStart && { alignItems: 'center', justifyContent: 'start' },
     ...center && { alignItems: 'center', justifyContent: 'center' },
     ...centerEnd && { alignItems: 'center', justifyContent: 'end' },
+    
+    ...end && { alignItems: 'end', justifyContent: 'end' },
+    ...endStart && { alignItems: 'end', justifyContent: 'start' },
+    ...endCenter && { alignItems: 'end', justifyContent: 'center' },
+    ...endEnd && { alignItems: 'end', justifyContent: 'end' },
     
     ...stretchEnd && { alignItems: 'stretch', justifyContent: 'end' },
     

@@ -1,7 +1,7 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
 import React, { useMemo, useRef, useState } from 'react'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import {
   SheetSnapIdx,
@@ -465,7 +465,7 @@ const BottomSheetControlOverlay = (props:{
       
       </div>
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
       
     </>
   )

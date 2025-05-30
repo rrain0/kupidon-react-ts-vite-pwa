@@ -12,7 +12,7 @@ import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIc
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryRow.tsx'
 import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -87,7 +87,7 @@ const BowAndArrowsPage = React.memo(() => {
       </Pages.PageGrad>
       
       
-      <BottomButtonBar/>
+      <BottomFloatingBar/>
     
     </>
   )

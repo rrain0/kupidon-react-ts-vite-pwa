@@ -10,8 +10,8 @@ import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import LikedMeCard, { LikedMeCardItem } from 'src/ui/2-pages/LikedMe/parts/LikedMeCard.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -56,7 +56,7 @@ const LikedMePage = React.memo(({
           
           
           <Grid cols='38px 1fr 38px' stretch>
-            <Flex centerStart><BackBtn withVirtualOffset/></Flex>
+            <Flex centerStart><BackButton withVirtualOffset/></Flex>
             {/* TODO Translation */}
             <Flex center><Hdrs.Page>{'Лайки'}</Hdrs.Page></Flex>
             <Gap w={24}/>
@@ -115,7 +115,7 @@ const LikedMePage = React.memo(({
       </PageLayout>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     
     </>
   )

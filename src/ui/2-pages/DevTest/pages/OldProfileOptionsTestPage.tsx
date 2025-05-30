@@ -15,7 +15,7 @@ import ProfileSportFrequencyOption
 import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption.tsx'
 import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption.tsx'
 import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption.tsx'
 import DateMostInterestingVisitedPlaceOption
@@ -140,7 +140,7 @@ const OldProfileOptionsTestPage = React.memo(() => {
       </Pages.Page>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
     
     </>
   )

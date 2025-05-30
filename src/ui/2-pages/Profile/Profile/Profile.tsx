@@ -1,7 +1,5 @@
-import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
-import LeftBottomButtonBar from 'src/ui/1-widgets/LeftBottomButtonBar/LeftBottomButtonBar'
 import DateIdealDateOption from 'src/ui/2-pages/Profile/options/DateIdealDateOption'
 import DateIdealFormatOption from 'src/ui/2-pages/Profile/options/DateIdealFormatOption'
 import DateIdealTimeOption from 'src/ui/2-pages/Profile/options/DateIdealTimeOption'
@@ -42,10 +40,8 @@ import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { FormProps } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'
 import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import fixedTop = EmotionCommon.fixedTop
 import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'

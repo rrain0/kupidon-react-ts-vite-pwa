@@ -13,7 +13,7 @@ import ChatListActionBar from 'src/ui/2-pages/ChatList/parts/ChatListActionBar.t
 import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
 import ChatListPageHeader from 'src/ui/2-pages/ChatList/parts/ChatListPageHeader.tsx'
 import MutualSympathiesList from 'src/ui/2-pages/ChatList/parts/MutualSympathiesList.tsx'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
@@ -345,9 +345,9 @@ const ChatListPage = React.memo(() => {
         </PageContentLayout>
       </PageLayout>
       
-      <BottomButtonBar>
+      <BottomFloatingBar>
         <ChatListActionBar/>
-      </BottomButtonBar>
+      </BottomFloatingBar>
       
     </>
   )

@@ -7,8 +7,8 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import BottomButtonBar from 'src/ui/components/BottomButtonBar/BottomButtonBar'
-import BackBtn from 'src/ui/components/BottomButtonBar/parts/BackBtn.tsx'
+import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -60,7 +60,7 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
           <Pages.ContentColSm style={{ gap: 0 }}>
             
             <Pages.PageHeaderWithLeftRightItems>
-              <BackBtn/>
+              <BackButton/>
               <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
               <div css={{ width: 50, height: 50 }}/>
             </Pages.PageHeaderWithLeftRightItems>
@@ -91,7 +91,7 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
       </Pages.PageGrad>
       
       
-      <BottomButtonBar settingsBtn/>
+      <BottomFloatingBar settingsButton/>
       
     </>
   )
