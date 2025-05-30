@@ -9,12 +9,14 @@ import { DatePlaceCategoriesData, DatePlaceCategoryData }
   from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import DatePlaceCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoryCard.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { ReactU } from 'src/util/react/ReactU'
 import Children = ReactU.Children
 import ClassStyle = ReactU.ClassStyle
@@ -51,11 +53,12 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         style={style}
         data-display-name='DatePlaceCategoriesList'
       >
-        <Pages.PageHeaderWithLeftRightItems>
-          <BackButton/>
-          <Hdrs.Page>{uiText.title}</Hdrs.Page>
-          <div css={{ width: 50, height: 50 }}/>
-        </Pages.PageHeaderWithLeftRightItems>
+        
+        <Grid cols='38px 1fr 38px' stretch>
+          <Flex centerStart m={-13}><BackButton/></Flex>
+          <Flex center><Hdrs.Page>{uiText.title}</Hdrs.Page></Flex>
+          <Gap w={38}/>
+        </Grid>
         
         <div style={{ height: 28 }}/>
         
@@ -80,11 +83,12 @@ export const DatePlaceCategoriesList = React.memo((props: DatePlaceCategoriesLis
         style={style}
         data-display-name='DatePlaceCategoriesList'
       >
-        <Pages.PageHeaderWithLeftRightItems>
-          <BackButton/>
-          <Hdrs.Page>{uiText.title}</Hdrs.Page>
-          <div css={{ width: 50, height: 50 }}/>
-        </Pages.PageHeaderWithLeftRightItems>
+        
+        <Grid cols='38px 1fr 38px' stretch>
+          <Flex centerStart m={-13}><BackButton/></Flex>
+          <Flex center><Hdrs.Page>{uiText.title}</Hdrs.Page></Flex>
+          <Gap w={38}/>
+        </Grid>
         
         <div style={{ height: 28 }}/>
         

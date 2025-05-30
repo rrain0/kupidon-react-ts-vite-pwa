@@ -5,9 +5,11 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer.tsx'
 import ItemTitleContainer from 'src/ui/0-elements/basic-elements/ItemTitleContainer.tsx'
@@ -63,15 +65,14 @@ const PwdChangePage = React.memo(() => {
   } = useApiRequest({
     values: formValues,
     errorFields: formErrorFields,
-    prepareAndRequest: useCallback(
-      (values: FormValues, failedFields: (keyof FormValues)[]) => {
-        return UserApi.update({
-          currentPwd: values.currentPwd,
-          pwd: values.pwd,
-        })
-      },
-      []
-    ),
+    prepareAndRequest: useCallback((
+      values: FormValues, failedFields: (keyof FormValues)[]
+    ) => {
+      return UserApi.update({
+        currentPwd: values.currentPwd,
+        pwd: values.pwd,
+      })
+    }, []),
   })
   
   const {
@@ -144,12 +145,17 @@ const PwdChangePage = React.memo(() => {
   return (
     <>
     
-      <Pages.PageGrad>
+      <Pages.PageGrad data-display-name='PwdChangePage'>
         
         <Pages.AddSafeInsets>
           <Pages.ContentColSmForm onSubmit={onSubmit}>
             
-            <Hdrs.Page>{titleText.pwdChange}</Hdrs.Page>
+            
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{titleText.pwdChange}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             
             
@@ -223,15 +229,13 @@ const PwdChangePage = React.memo(() => {
         <PageScrollbars/>
       </Pages.PageGrad>
       
-      
-      <TopFloatingBar backButton/>
-      
       {/* <BottomFloatingBar settingsButton/> */}
       
       
     </>
   )
 })
+PwdChangePage.displayName = 'PwdChangePage'
 export default PwdChangePage
 
 

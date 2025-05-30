@@ -15,6 +15,7 @@ export type PositionShortProps = Pu<{
   r: number | string
   b: number | string
   l: number | string
+  z: number | string
   av: number | string // top & bottom
   ah: number | string // left & right
   a: number | string // top & right & bottom & left
@@ -33,7 +34,7 @@ export const processPositionShortProps = <P extends object>(
 ) => {
   const {
     pos, fixed, absolute, relative,
-    t, r, b, l, av, ah, a,
+    t, r, b, l, z, av, ah, a,
     fixedTop, fixedBottom,
     absTrbl, absTlwh,
     ...positionRest
@@ -68,6 +69,7 @@ export const processPositionShortProps = <P extends object>(
     ...isdef(r) && { right: r },
     ...isdef(b) && { bottom: b },
     ...isdef(l) && { left: l },
+    ...isdef(z) && { zIndex: z },
   }
   
   return { position, positionRest }

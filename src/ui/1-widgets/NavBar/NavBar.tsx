@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -14,11 +15,8 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import row = EmotionCommon.row
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 import RootRoute = AppRoutes.RootRoute
-import fixedBottom = EmotionCommon.fixedBottom
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
@@ -47,39 +45,50 @@ const NavBar = React.memo((props: NavBarProps) => {
     <>
       
       <Global
-        styles={css`
-          :root {
-            --bottom-nav-padding-bottom: max(calc(env(safe-area-inset-bottom, 0px) - 10px), 0px);
-            --bottom-nav-bar-h: calc(50px + var(--bottom-nav-padding-bottom));
-          }
-        `}
+        styles={css({
+          ':root': {
+            '--bottom-nav-bar-h': '50px',
+          },
+        })}
       />
       
-      <Frame>
+      <NavBox data-display-name='NavBar'>
         
         <AppNavLink toFull={RootRoute.profile}>
-          <Button css={nav} data-selected={toEmptyAttr(place === 'profile')}>
+          <Button
+            data-selected={toEmptyAttr(place === 'profile')}
+            css={nav}
+          >
             <ProfileGradIc/>
             <div>{titleText.profile}</div>
           </Button>
         </AppNavLink>
         
         <AppNavLink toFull={RootRoute.chatList}>
-          <Button css={nav} data-selected={toEmptyAttr(place === 'chat')}>
+          <Button
+            data-selected={toEmptyAttr(place === 'chat')}
+            css={nav}
+          >
             <ChatRoundGradIc/>
             <div>{titleText.chat}</div>
           </Button>
         </AppNavLink>
         
         <AppNavLink toFull={RootRoute.findPair}>
-          <Button css={nav} data-selected={toEmptyAttr(place === 'findPair')}>
+          <Button
+            data-selected={toEmptyAttr(place === 'findPair')}
+            css={nav}
+          >
             <CardsHeartGradIc/>
             <div>{titleText.hearts}</div>
           </Button>
         </AppNavLink>
         
         <AppNavLink toFull={RootRoute.bowAndArrows}>
-          <Button css={nav} data-selected={toEmptyAttr(place === 'bowAndArrows')}>
+          <Button
+            data-selected={toEmptyAttr(place === 'bowAndArrows')}
+            css={nav}
+          >
             <BowArrowGradIc/>
             <div>{titleText.bowAndArrows}</div>
           </Button>
@@ -89,8 +98,8 @@ const NavBar = React.memo((props: NavBarProps) => {
           {overlay => (
             <>
               <Button
-                css={nav}
                 data-selected={toEmptyAttr(place === 'settings')}
+                css={nav}
                 onClick={overlay.open}
               >
                 <GearOutlinedIc/>
@@ -102,7 +111,7 @@ const NavBar = React.memo((props: NavBarProps) => {
           )}
         </UseOverlayUrl>
         
-      </Frame>
+      </NavBox>
       
     </>
   )
@@ -112,16 +121,15 @@ export default NavBar
 
 
 
-const Frame = styled.nav`
-  ${fixedBottom};
-  z-index: ${modalFloor500};
-  height: var(--bottom-nav-bar-h);
-  min-height: var(--bottom-nav-bar-h);
-  padding-bottom: var(--bottom-nav-padding-bottom);
-  ${row};
-  justify-content: space-between;
-  background: ${p => p.theme.nav.bg};
-`
+
+const NavBox = styled.nav(({ theme: t }) => flexStyle({
+  fixedBottom: true, z: modalFloor500,
+  pb: 'var(--screen-safe-inset-bottom)',
+  contentBox: true, h: 'var(--bottom-nav-bar-h)',
+  row: true, justifySpaceBetween: true,
+  bgColor: t.nav.bg,
+  //bgColor: '#ff000077',
+}))
 
 
 
@@ -129,18 +137,20 @@ const Frame = styled.nav`
 const nav = (t: AppTheme.Theme) => css`
   ${IconButtonS6.t([IconButtonS6.S.trans.round.lg.normal, {
     button: {
-      w: 'auto', h: 'full', r: 10, p: [5, 0, 2],
-      ...WidgetStyleCommon.colC, g: 3, flex: 1,
+      w: 'auto', h: '50px', flex: 1, r: 10, p: [5, 0, 2],
+      display: 'grid', rows: '1fr 13px', placeItems: 'center', g: 2,
       bg: null,
       color: t.navButton.ct,
       ...WidgetStyleCommon.Txt.s10,
     },
     icon: {
-      sz: 'full',
+      //sz: 27,
+      h: '100%',
       color: t.navButton.ct,
     },
     gradIcon: {
-      sz: 'full',
+      //sz: 27,
+      h: '100%',
       color0: t.navButton.ct,
       color1: t.navButton.ct,
     },

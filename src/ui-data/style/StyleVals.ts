@@ -6,8 +6,10 @@ export namespace StyleVals {
   
   export const cardRadius = 15
   
-  export const itemListGap = 10
-  export const itemListGapPx = `${itemListGap}px`
+  export const listG = 10
+  export const listGPx = `${listG}px`
+  
+  export const floatingBarP = 10
   
   export const minRatioLand = 16 / 9
   export const maxRatioLand = 4 / 3

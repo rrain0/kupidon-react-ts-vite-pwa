@@ -6,6 +6,9 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { DatePlace } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -83,11 +86,11 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm style={{ gap: 0 }}>
             
-            <Pages.PageHeaderWithLeftRightItems>
-              <BackButton/>
-              <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div css={{ width: 50, height: 50 }}/>
-            </Pages.PageHeaderWithLeftRightItems>
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             <div style={{ height: 34 }}/>
             

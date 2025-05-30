@@ -5,10 +5,11 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
+import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
@@ -57,6 +58,14 @@ const DevTestPage = React.memo(() => {
       
       <Pages.Page>
         <Pages.Content>
+          
+          
+          <Grid cols='38px 1fr 38px' stretch>
+            <Flex centerStart m={-13}><BackButton/></Flex>
+            {/* TODO Translation */}
+            <Flex center><Hdrs.Page>{'Тестовая страница'}</Hdrs.Page></Flex>
+            <Gap w={38}/>
+          </Grid>
           
           
           
@@ -239,9 +248,6 @@ const DevTestPage = React.memo(() => {
         
         </Pages.Content>
       </Pages.Page>
-      
-      
-      <TopFloatingBar backButton/>
       
       <BottomFloatingBar settingsButton/>
     

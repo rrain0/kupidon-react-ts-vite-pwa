@@ -11,18 +11,18 @@ import gridStackC = EmotionCommon.gridStackC
 import { TypeU } from '@util/common/TypeU.ts'
 import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
-import PartialUndef = TypeU.PartialUndef
-import ClassStyleProps = ReactU.ClassStyle
+import Pu = TypeU.Pu
+import ClassStyle = ReactU.ClassStyle
 import fullMinMax = EmotionCommon.fullMinMax
 
 
 
 
-export type OverflowWrapperProps = PartialUndef<{
+export type OverflowWrapperProps = Pu<{
   showVertical: boolean
   showHorizontal: boolean
   children: React.ReactNode
-}> & ClassStyleProps
+}> & ClassStyle
 
 
 
@@ -50,7 +50,7 @@ const OverflowWrapper = React.memo((props: OverflowWrapperProps) => {
        */}
       <ScrollContainer
         ref={scrollContainerRef}
-        className="rrainuiScrollContainer"
+        className='rrainuiScrollContainer'
       >
         
         {/*
@@ -60,17 +60,17 @@ const OverflowWrapper = React.memo((props: OverflowWrapperProps) => {
          */}
         <ScrollContent
           ref={scrollContentRef}
-          className="rrainuiScrollContentWrap"
+          className='rrainuiScrollContentWrap'
         >
           
-          { props.children }
+          {props.children}
         
         </ScrollContent>
         
       </ScrollContainer>
       
       
-      { isBrowser && (
+      {isBrowser && (
         <UseScrollbars
           containerRef={scrollContainerRef}
           contentRef={scrollContentRef}
@@ -88,6 +88,7 @@ const OverflowWrapper = React.memo((props: OverflowWrapperProps) => {
     </Wrapper>
   )
 })
+OverflowWrapper.displayName = 'OverflowWrapper'
 export default OverflowWrapper
 
 

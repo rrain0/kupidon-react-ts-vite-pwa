@@ -1,6 +1,7 @@
 import { Global } from '@emotion/react'
 import { CssU } from '@util/css/CssU.ts'
 import React, { ReactNode } from 'react'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -9,6 +10,7 @@ import Pu = TypeU.Pu
 import isdef = TypeU.isdef
 import isundef = TypeU.isundef
 import toPx = CssU.toPx
+import modalFloor100 = StyleVals.modalFloor100
 
 
 
@@ -47,16 +49,30 @@ const TopFloatingBar = React.memo((props: TopFloatingBarProps) => {
         }}
       />
       
-      <Grid alignStart fixedTop noPointer
+      <Grid alignStart fixedTop z={modalFloor100} noPointer
+        pt='var(--top-floating-bar-offest-top)'
         data-display-name='TopFloatingBar'
       >
         
-        {isdef(children) && children}
+        {isdef(children) && (
+          <Grid justifiedStretch alignStart noPointer
+            h='var(--top-floating-bar-h)'
+            {...{
+              ...!noBarPadding && { p: StyleVals.floatingBarP },
+            }}
+          >
+            {children}
+          </Grid>
+        )}
         
         {isundef(children) && (
           <Grid justifiedStretch alignStart noPointer
             h='var(--top-floating-bar-h)'
-            cols='1fr auto 1fr' p={!noBarPadding ? 10 : undefined} g={10}
+            cols='1fr auto 1fr'
+            {...{
+              ...!noBarPadding && { p: StyleVals.floatingBarP },
+              g: 10,
+            }}
           >
           
             <Flex row startStart g={10}>

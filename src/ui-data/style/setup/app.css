@@ -10,42 +10,41 @@
   --vp-ct-h: 0px;
 }
 :root {
-  --page-pv: 50px;
+  /*--screen-safe-inset-bottom: max(
+    calc( env(safe-area-inset-bottom, 0px) - 10px ),
+    0px
+  );*/
   
+  --page-ct-pb-min: 50px;
+  
+  
+  
+  --top-action-bar-offest-top: 0px;
   --top-action-bar-h: 0px;
+  
+  --top-floating-bar-offest-top: calc( var(--top-action-bar-offest-top) + var(--top-action-bar-h) );
   --top-floating-bar-h: 0px;
   
+  
   --bottom-floating-bar-h: 0px;
+  --bottom-floating-bar-offest-bottom: calc( var(--bottom-action-bar-h) + var(--bottom-action-offest-bottom) );
+  
   --bottom-action-bar-h: 0px;
+  --bottom-action-offest-bottom: calc( var(--bottom-nav-bar-h) + var(--bottom-nav-offest-bottom) );
+  
   --bottom-nav-bar-h: 0px;
+  --bottom-nav-offest-bottom: 0px;
   
   
   
-  --bottom-bars-inset: calc(
-    var(--bottom-action-bar-h) +
-    var(--bottom-nav-bar-h)
-  );
+  --top-action-bars-h: var(--top-floating-bar-offest-top);
+  --top-page-inset: calc( var(--top-action-bars-h) + var(--top-floating-bar-h) );
   
+  
+  --bottom-action-bars-h: var(--bottom-floating-bar-offest-bottom);
   --bottom-page-inset: calc(
-    var(--bottom-nav-bar-h) +
-    var(--bottom-action-bar-h) +
-    max(
-      var(--bottom-floating-bar-h),
-      var(--page-pv)
-    )
-  );
-  
-  
-  --top-bars-inset: calc(
-    var(--top-action-bar-h)
-  );
-  
-  --top-page-inset: calc(
-    var(--top-action-bar-h) +
-    max(
-      var(--top-floating-bar-h),
-      var(--page-pv)
-    )
+    var(--bottom-action-bars-h)
+    + max( var(--bottom-floating-bar-h), var(--page-ct-pb-min) )
   );
 }
 
@@ -59,12 +58,9 @@
 
 
 
-@keyframes NoAnimation {
-  /*from { transform: scale(1) }
-  to { transform: scale(1) }*/
-}
+@keyframes emptyAnimation { }
 .no-animation {
-  animation-name: NoAnimation;
+  animation-name: emptyAnimation;
   animation-duration: 1ms;
 }
 

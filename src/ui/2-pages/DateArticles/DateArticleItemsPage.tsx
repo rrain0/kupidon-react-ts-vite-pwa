@@ -10,6 +10,9 @@ import {
   DateArticleTypesData,
 } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryRow.tsx'
 import DateArticleItemCardWide from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCardWide.tsx'
 import DateArticleItemToCardData
@@ -78,11 +81,11 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm style={{ gap: 0 }}>
             
-            <Pages.PageHeaderWithLeftRightItems>
-              <BackButton/>
-              <Hdrs.Page>{uiText.pageTitle}</Hdrs.Page>
-              <div css={{ width: 50, height: 50 }}/>
-            </Pages.PageHeaderWithLeftRightItems>
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             <div style={{ height: 28 }}/>
             

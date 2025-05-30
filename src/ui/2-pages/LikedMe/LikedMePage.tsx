@@ -56,10 +56,10 @@ const LikedMePage = React.memo(({
           
           
           <Grid cols='38px 1fr 38px' stretch>
-            <Flex centerStart><BackButton withVirtualOffset/></Flex>
+            <Flex centerStart m={-13}><BackButton/></Flex>
             {/* TODO Translation */}
             <Flex center><Hdrs.Page>{'Лайки'}</Hdrs.Page></Flex>
-            <Gap w={24}/>
+            <Gap w={38}/>
           </Grid>
           
           <Gap h={24}/>

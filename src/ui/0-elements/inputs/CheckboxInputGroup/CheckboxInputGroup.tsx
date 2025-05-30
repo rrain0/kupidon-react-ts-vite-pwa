@@ -73,7 +73,7 @@ export default CheckboxInputGroup
 const radioGroupStyle = css`
   ${reset};
   position: relative;
-  gap: ${StyleVals.itemListGapPx};
+  gap: ${StyleVals.listGPx};
 `
 
 

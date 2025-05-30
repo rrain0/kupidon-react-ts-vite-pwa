@@ -32,7 +32,7 @@ const RadioInputGroup = React.memo((props: RadioInputGroupProps) => {
   
   return (
     /* RadioInputGroup */
-    <Flex as='article' relative col g={StyleVals.itemListGapPx}
+    <Flex as='article' relative col g={StyleVals.listGPx}
       data-display-name='RadioInputGroup'
       data-error={toEmptyAttr(hasError)}
       // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/radiogroup_role

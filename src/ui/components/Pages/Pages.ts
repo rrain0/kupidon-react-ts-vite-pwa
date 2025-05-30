@@ -15,7 +15,7 @@ export namespace Pages {
   const wMin = 320
   const hMin = 480
   
-  export const pageCol = css`
+  const pageCol = css`
     min-width: ${wMin}px;
     width: min(var(--vp-ct-w), 100dvw);
     //width: 110dvw;
@@ -26,17 +26,17 @@ export namespace Pages {
   `
   // no overlapping by bottom / top bars
   export const pageAddSafeInsets = css`
-    padding-top: var(--top-bars-inset);
-    padding-bottom: var(--bottom-bars-inset);
+    padding-top: var(--top-action-bars-h);
+    padding-bottom: var(--bottom-action-bars-h);
   `
   
   
   
-  export const pageColor = (t: AppTheme.Theme) => css`
+  const pageColor = (t: AppTheme.Theme) => css`
     background: ${t.page.bg};
     color: ${t.page.ct2};
   `
-  export const pageGradColor = (t: AppTheme.Theme) => css`
+  const pageGradColor = (t: AppTheme.Theme) => css`
     ${simpleGradBgCss(t)};
     color: ${t.page.ct2};
   `
@@ -54,7 +54,7 @@ export namespace Pages {
   
   
   
-  export const colFit = css`
+  const colFit = css`
     width: 100%;
     min-height: 100%;
     height: fit-content;
@@ -70,7 +70,7 @@ export namespace Pages {
   
   
   
-  export const content = css`
+  const content = css`
     position: relative;
     width: 100%;
     min-width: 0;
@@ -82,12 +82,12 @@ export namespace Pages {
     ${col};
     gap: 10px;
   `
-  export const contentColSm = css`
+  const contentColSm = css`
     ${content};
     max-width: 550px;
     align-items: stretch;
   `
-  export const contentColSmForm = css`
+  const contentColSmForm = css`
     ${contentColSm};
     gap: 30px;
   `
@@ -97,29 +97,6 @@ export namespace Pages {
   export const Content = styled.div(content)
   export const ContentColSm = styled.div(contentColSm)
   export const ContentColSmForm = styled.form(contentColSmForm)
-  
-  
-  
-  
-  /*
-  // TODO remove & replace by something like this:
-   <Grid cols='54px 1fr 54px' stretch>
-     <Gap w={50}/>
-     <Flex center><Hdrs.Page>{uiText.bowAndArrows}</Hdrs.Page></Flex>
-     <Flex centerEnd>
-       <Button css={IconButtonS6.t(calendarButtonS)}>
-         <Calendar2GradIc/>
-       </Button>
-     </Flex>
-   </Grid>
-   */
-  export const PageHeaderWithLeftRightItems = styled.div`
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    place-items: center;
-  `
-  
   
   
 }

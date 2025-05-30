@@ -6,10 +6,13 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useNavigate, useSearchParams } from 'react-router'
@@ -138,11 +141,16 @@ const LoginPage = React.memo(() => {
   
   return (
     <>
-      <Pages.PageGrad>
+      <Pages.PageGrad data-display-name='LoginPage'>
         <Pages.AddSafeInsets>
           <Pages.ContentColSmForm onSubmit={onSubmit}>
             
-            <Hdrs.Page>{titleText.login}</Hdrs.Page>
+            
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{titleText.login}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             
             <FormFieldWrap {...formFieldWrapProps} fieldName='login'>
@@ -188,13 +196,11 @@ const LoginPage = React.memo(() => {
         <PageScrollbars/>
       </Pages.PageGrad>
       
-      
-      <TopFloatingBar backButton/>
-      
       <BottomFloatingBar settingsButton/>
       
     </>
   )
 })
+LoginPage.displayName = 'LoginPage'
 export default LoginPage
 

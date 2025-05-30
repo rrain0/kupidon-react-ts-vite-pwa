@@ -3,17 +3,19 @@ import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatListPage.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import TopActionBar from 'src/ui/components/screen-bars/TopActionBar.tsx'
+
 
 
 
 const chatItem = mockChatItems.find(it => it.id === '175dc7be-3f56-4b9d-9403-e994b72624dc')!
+
 
 
 
@@ -24,29 +26,27 @@ const ChatPage = React.memo(() => {
   return (
     <>
       
+      <TopActionBar h={72}>
+        <Flex row align h={72} p={6} bgColor='#FFFFFF'>
+          
+          <BackButton/>
+          
+          <Ava id={chatItem.id} ava={chatItem.ava} stretched/>
+          
+          <Flex col ph={12} stretched grow justifySpaceAround>
+            <Flex>
+              {chatItem.name}
+            </Flex>
+            <Flex>
+              {'был(а) в 20:51'}
+            </Flex>
+          </Flex>
+        </Flex>
+      </TopActionBar>
       
     
       <PageLayout col>
         <PageContentLayout colSm grow ptDefault={12}>
-          
-          <Flex row align contentBox h={61}>
-            
-            <BackButton/>
-            
-            <Ava id={chatItem.id} ava={chatItem.ava} stretched/>
-            
-            <Flex col ph={12} stretched grow justifySpaceAround>
-              <Flex>
-                {chatItem.name}
-              </Flex>
-              <Flex>
-                {'был(а) в 20:51'}
-              </Flex>
-            </Flex>
-            
-          </Flex>
-          
-          
           
           
           <Flex col grow justifyEnd overflowAuto g={16}>

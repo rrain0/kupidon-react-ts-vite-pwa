@@ -6,6 +6,9 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
@@ -48,11 +51,11 @@ export const DatePlaceNotFoundPage = React.memo(() => {
         <Pages.AddSafeInsets>
           <Pages.ContentColSm style={{ gap: 0, minHeight: '100%' }}>
             
-            <Pages.PageHeaderWithLeftRightItems>
-              <BackButton/>
-              <Hdrs.Page>{uiText.placeNotFound}</Hdrs.Page>
-              <div/>
-            </Pages.PageHeaderWithLeftRightItems>
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{uiText.placeNotFound}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             <div style={{ height: 28 }}/>
             

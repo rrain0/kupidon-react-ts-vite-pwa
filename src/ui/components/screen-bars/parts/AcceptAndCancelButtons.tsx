@@ -100,7 +100,7 @@ const Content = React.memo(({
   
   
   return (
-    <Flex col g={StyleVals.itemListGapPx} noPointer
+    <Flex col g={StyleVals.listGPx} noPointer
       style={initialStyle}
       ref={setEl}
       data-display-name='AcceptAndCancelButtons'

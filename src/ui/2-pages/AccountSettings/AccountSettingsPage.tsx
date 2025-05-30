@@ -3,13 +3,16 @@ import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import { Pages } from 'src/ui/components/Pages/Pages'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
@@ -192,13 +195,18 @@ const AccountSettingsPage = React.memo(() => {
   
   return (
     <>
-      <Pages.PageGrad>
+      <Pages.PageGrad data-display-name='AccountSettingsPage'>
         
         
         <Pages.AddSafeInsets>
           <Pages.ContentColSmForm {...noFormSubmit}>
             
-            <Hdrs.Page>{titleText.account}</Hdrs.Page>
+            
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{titleText.account}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             
             
@@ -298,9 +306,6 @@ const AccountSettingsPage = React.memo(() => {
         <PageScrollbars/>
       </Pages.PageGrad>
       
-      
-      <TopFloatingBar backButton/>
-      
       {/* <BottomFloatingBar settingsButton
         rightChildren={
           canSubmit && <Button css={IconButtonStyle.icon}
@@ -314,6 +319,7 @@ const AccountSettingsPage = React.memo(() => {
     </>
   )
 })
+AccountSettingsPage.displayName = 'AccountSettingsPage'
 export default AccountSettingsPage
 
 

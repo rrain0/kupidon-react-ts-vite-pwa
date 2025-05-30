@@ -67,13 +67,13 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const pt = CssU.max(
     !noInsets && !full && !fullSm && (toPx(ptDefault) ?? '30px'),
     CssU.plus(
-      !noInsetsForFilledBars && 'var(--top-bars-inset)',
+      !noInsetsForFilledBars && 'var(--top-action-bars-h)',
       !noInsetsForTransBars && !full && !fullSm && 'var(--top-floating-bar-h)'
     )
   )
   const pb = CssU.plus(
     !noInsets && !full && !fullSm && (toPx(pbDefault) ?? '30px'),
-    !noInsetsForFilledBars && 'var(--bottom-bars-inset)',
+    !noInsetsForFilledBars && 'var(--bottom-action-bars-h)',
     !noInsetsForTransBars && !full && !fullSm && 'var(--bottom-floating-bar-h)'
   )
   

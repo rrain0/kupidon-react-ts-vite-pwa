@@ -5,9 +5,12 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import TopFloatingBar from 'src/ui/components/screen-bars/TopFloatingBar.tsx'
+import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import React, {
@@ -179,12 +182,17 @@ const SignupPage = React.memo(() => {
   
   return (
     <>
-      <Pages.PageGrad>
+      <Pages.PageGrad data-display-name='SignupPage'>
         
         <Pages.AddSafeInsets>
           <Pages.ContentColSmForm onSubmit={onSubmit}>
-          
-            <Hdrs.Page>{titleText.registration}</Hdrs.Page>
+            
+            
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{titleText.registration}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
             
             
             
@@ -281,16 +289,13 @@ const SignupPage = React.memo(() => {
         <PageScrollbars/>
       </Pages.PageGrad>
       
-      
-      
-      <TopFloatingBar backButton/>
-      
       <BottomFloatingBar settingsButton/>
       
       
     </>
   )
 })
+SignupPage.displayName = 'SignupPage'
 export default SignupPage
 
 
