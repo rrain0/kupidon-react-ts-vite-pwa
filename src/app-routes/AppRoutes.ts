@@ -114,11 +114,12 @@ export namespace AppRoutes {
   const devTest = buildRoute({
     [path]: 'dev-test',
     
+    buttons: buildPath('buttons'),
+    theme: buildPath('theme'),
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
     viewsSelectItem: buildPath('views-select-item'),
     ripple: buildPath('ripple'),
-    buttons: buildPath('buttons'),
     slider: buildPath('slider'),
     image: buildPath('image'),
     
@@ -132,6 +133,7 @@ export namespace AppRoutes {
     elemStyle: buildPath('elem-style'),
     oldProfileOptions: buildPath('old-profile-options'),
     shadowDOMTest: buildPath('shadow-dom'),
+    cssTest: buildPath('css'),
     
     emulatedScroll: buildPath('emulated-scroll'),
   })

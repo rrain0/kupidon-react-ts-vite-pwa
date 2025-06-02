@@ -1,6 +1,8 @@
 import styled from '@emotion/styled'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
-import React from 'react'
+import { getViewProps } from '@util/view/ViewProps.ts'
+import React, { useLayoutEffect } from 'react'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
@@ -10,6 +12,7 @@ import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import TopActionBar from 'src/ui/components/screen-bars/TopActionBar.tsx'
+import Txt = EmotionCommon.Txt
 
 
 
@@ -21,23 +24,32 @@ const chatItem = mockChatItems.find(it => it.id === '175dc7be-3f56-4b9d-9403-e99
 
 const ChatPage = React.memo(() => {
   
-  
+  useLayoutEffect(() => {
+    const p = getViewProps(window)
+    const sh = p.scrollHeight
+    window.scrollTo({ top: sh, behavior: 'instant' })
+  })
   
   return (
     <>
       
       <TopActionBar h={72}>
-        <Flex row align h={72} p={6} bgColor='#FFFFFF'>
+        <Flex row align h={72} p={6} bgColor='#FFFFFF'
+          css={t => ({
+            borderTopLeftRadius: 15, borderTopRightRadius: 15,
+            boxShadow: `${StyleVals.shadowLightSz} ${t.shadow.bg2}`,
+          })}
+        >
           
           <BackButton/>
           
-          <Ava id={chatItem.id} ava={chatItem.ava} stretched/>
+          <Ava id={chatItem.id} ava={chatItem.ava} alignedStretch h='full'/>
           
           <Flex col ph={12} stretched grow justifySpaceAround>
-            <Flex>
+            <Flex css={[Txt.s20Bold, { color: 'black' /* TODO Theme */ }]}>
               {chatItem.name}
             </Flex>
-            <Flex>
+            <Flex css={[Txt.s17, { color: '#858585' /* TODO Theme */ }]}>
               {'был(а) в 20:51'}
             </Flex>
           </Flex>
@@ -49,7 +61,7 @@ const ChatPage = React.memo(() => {
         <PageContentLayout colSm grow ptDefault={12}>
           
           
-          <Flex col grow justifyEnd overflowAuto g={16}>
+          <Flex col grow justifyEnd overflowAuto>
             
             <ChatDate>{'Вчера'}</ChatDate>
             
@@ -183,7 +195,7 @@ export default ChatPage
 
 
 const ChatDate = styled(Flex)(flexStyle({
-  aligned: true,
+  aligned: true, mt: 16,
   // TODO Theme
   color: '#858585',
 }))
@@ -192,9 +204,10 @@ const ChatDate = styled(Flex)(flexStyle({
 
 const ChatOwnMessage = styled(Flex)(flexStyle({
   relative: true,
-  alignedEnd: true, ml: 64, rad: 15, pv: 6, ph: 15,
+  alignedEnd: true, mt: 16, ml: 64, rad: 15, pv: 6, ph: 15,
   // TODO Theme
   bgColor: '#FFD7E0', color: '#0D0D0D',
+  borderTopRightRadius: 0,
 }))
 const ChatOwnMessageCircle1 = styled(Flex)(flexStyle({
   absolute: true, t: '50%', r: 0,
@@ -211,9 +224,10 @@ const ChatOwnMessageCircle2 = styled(Flex)(flexStyle({
 
 const ChatOtherUserMessage = styled(Flex)(flexStyle({
   relative: true,
-  alignedStart: true, mr: 64, rad: 15, pv: 6, ph: 15,
+  alignedStart: true, mt: 16, mr: 64, rad: 15, pv: 6, ph: 15,
   // TODO Theme
   bgColor: '#EEEEEE', color: '#232020',
+  borderTopLeftRadius: 0,
 }))
 const ChatOtherUserMessageCircle1 = styled(Flex)(flexStyle({
   absolute: true, t: '50%', l: 0,

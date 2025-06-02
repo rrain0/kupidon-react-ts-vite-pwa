@@ -291,7 +291,7 @@ export default [
       '@stylistic/jsx-pascal-case': ['error', { allowNamespace: true }],
       // it disallows empty lines between jsx props
       '@stylistic/jsx-props-no-multi-spaces': 'off',
-      '@stylistic/jsx-quotes': ['error', 'prefer-single'],
+      '@stylistic/jsx-quotes': ['warn', 'prefer-single'],
       '@stylistic/jsx-self-closing-comp': 'warn',
       '@stylistic/jsx-sort-props': 'off',
       '@stylistic/jsx-tag-spacing': ['error', { beforeSelfClosing: 'never' }],

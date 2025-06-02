@@ -1,5 +1,4 @@
 import { css } from '@emotion/react'
-import { css as cssraw } from '@emotion/css'
 import React, { useState } from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -8,9 +7,10 @@ import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
@@ -19,27 +19,10 @@ import { RangeU } from '@util/common/RangeU.ts'
 import { useBool } from '@util/react-state/useBool.ts'
 import { useInterval } from '@util/react/useInterval.ts'
 import RootRoute = AppRoutes.RootRoute
+import checkmarkBold from '@ic/normal/ui/checkmark-bold.svg'
 
 
 
-/*
-При создании стиля через css, имя его класса можно взять через:
-`css-${cssStyle.name}`
-Но чтобы стиль был отправлен браузеру, его надо дать элементу.
- */
-const cssStyle = css({ width: '100%' })
-//console.log('cssStyle', cssStyle)
-console.log('cssStyle.name', cssStyle.name)
-console.log('cssStyle.next', cssStyle.next)
-
-const cssStyle2 = css([cssStyle, { height: '100%' }])
-console.log('cssStyle2.name', cssStyle2.name)
-console.log('cssStyle2.next', cssStyle2.next)
-
-const emcssStyle = cssraw({ height: '100%' })
-console.log('emcssStyle', emcssStyle)
-//console.log('emcssStyle.name', emcssStyle.name)
-//console.log('emcssStyle.next', emcssStyle.next)
 
 
 
@@ -56,8 +39,8 @@ const DevTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col>
+        <PageContentLayout col>
           
           
           <Grid cols='38px 1fr 38px' stretch>
@@ -67,13 +50,6 @@ const DevTestPage = React.memo(() => {
             <Gap w={38}/>
           </Grid>
           
-          
-          
-          <div css={cssStyle}>A</div>
-          <div className={`css-${cssStyle.name}`}>Test Page</div>
-          
-          
-          
           <Gap h={30}/>
           
           <div>Views:</div>
@@ -82,6 +58,11 @@ const DevTestPage = React.memo(() => {
             <AppLink toFull={RootRoute.devTest.buttons}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Buttons
+              </Button>
+            </AppLink>
+            <AppLink toFull={RootRoute.devTest.theme}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Theme
               </Button>
             </AppLink>
             <AppLink toFull={RootRoute.devTest.ripple}>
@@ -171,6 +152,11 @@ const DevTestPage = React.memo(() => {
                 Shadow DOM Test
               </Button>
             </AppLink>
+            <AppLink toFull={RootRoute.devTest.cssTest}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Css Test
+              </Button>
+            </AppLink>
           
           </Grid>
           
@@ -198,36 +184,38 @@ const DevTestPage = React.memo(() => {
           <PieProgressView/>
           
           
-          <Flex w={300} h={150} p={10} rad={16}
-            css={t => ({ background: t.boxDefault.bg, color: t.boxDefault.ct })}
+          <Flex row wrap w={300} h={150} p={10} g={10} rad={16}
+            css={t => ({ background: t.boxDefault2.bg, color: t.boxDefault2.ct })}
           >
-            Контент.<br/>
-            Theme.boxDefault
-          </Flex>
-          
-          <Flex w={300} h={150} p={10} rad={16}
-            css={t => ({ background: t.boxDefault3.bg, color: t.boxDefault3.ct })}
-          >
-            Контент.<br/>
-            Theme.boxNormal2
-          </Flex>
-          
-          <Flex w={300} h={150} p={10} rad={16}
-            css={t => ({ background: t.boxAccent4.bg, color: t.boxAccent4.ct })}
-          >
-            Контент.<br/>
-            Theme.boxAccent4
-          </Flex>
-          
-          
-          <Flex w={300} h={150} p={10} rad={16}
-            css={t => ({ background: t.boxAccent4.bg, color: t.boxAccent4.ct })}
-          >
+            
             <CheckboxInput
               css={CheckboxInputStyle.roundNormalNormal}
               checked={isChecked}
               onChange={toggleIsChecked}
             />
+            
+            <Flex sz={50} center>
+              <Flex sz={22} rad={4}
+                css={{
+                  border: '2px solid black',
+                }}
+              />
+            </Flex>
+            
+            <Flex sz={50} center>
+              <Flex sz={22} rad={4}
+                css={{
+                  //border: '2px solid black',
+                  backgroundColor: 'black',
+                  maskImage: `linear-gradient(to left, black, black), url("${checkmarkBold}")`,
+                  //maskOrigin: 'content-box',
+                  maskPosition: 'center',
+                  maskSize: 'contain',
+                  maskComposite: 'exclude',
+                }}
+              />
+            </Flex>
+            
           </Flex>
           
           
@@ -246,8 +234,8 @@ const DevTestPage = React.memo(() => {
           </Flex>
         
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       <BottomFloatingBar settingsButton/>
     

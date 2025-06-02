@@ -6,6 +6,10 @@ import isdef = TypeU.isdef
 
 
 export type SizeShortProps = Pu<{
+  boxSizing: string
+  contentBox: boolean // true => { boxSizing: 'content-box' }
+  borderBox: boolean // true => { boxSizing: 'border-box' }
+  
   w: number | string | 'full' | 'ct' // 'full' => '100%', 'ct' => 'fit-content'
   h: number | string | 'full' | 'ct' // 'full' => '100%', 'ct' => 'fit-content'
   sz: number | string | 'full' | 'ct' // w & h
@@ -47,6 +51,7 @@ export const processSizeShortProps = <P extends object>(
   props: P & SizeShortProps
 ) => {
   const {
+    boxSizing, contentBox, borderBox,
     w, h, sz, wMin, hMin, szMin, wMax, hMax, szMax, fullW, fullH, full,
     ratio, rad, round,
     m, mv, mh, mt, mr, mb, ml,
@@ -59,6 +64,10 @@ export const processSizeShortProps = <P extends object>(
   
   
   const size = {
+    ...contentBox && { boxSizing: 'content-box' },
+    ...borderBox && { boxSizing: 'border-box' },
+    ...isdef(boxSizing) && { boxSizing: boxSizing },
+    
     ...full && { width: '100%', height: '100%' },
     ...isdef(sz) && { width: processAnySz(sz), height: processAnySz(sz) },
     ...isdef(szMin) && { minWidth: processAnySz(szMin), minHeight: processAnySz(szMin) },

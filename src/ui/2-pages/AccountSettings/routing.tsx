@@ -9,9 +9,9 @@ import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import RootRoute = AppRoutes.RootRoute
 import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 
-const AccountSettingsPage = React.lazy(
-  () => import('src/ui/2-pages/AccountSettings/AccountSettingsPage')
-)
+const AccountSettingsPage = React.lazy(() => import(
+  'src/ui/2-pages/AccountSettings/AccountSettingsPage'
+))
 
 
 
@@ -39,7 +39,7 @@ const RouteSettingsAccount = React.memo(() => {
 
 
 // path: 'settings / account / ...'
-export const settingsAccountRouting: RouteObject[] = [
+export const routingSettingsAccount: RouteObject[] = [
   {
     path: '',
     Component: RouteSettingsAccount,

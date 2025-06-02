@@ -9,7 +9,7 @@ import RootRoute = AppRoutes.RootRoute
 
 
 
-const BottomNavBarRouting = React.memo(() => {
+const RouteBottomNavBar = React.memo(() => {
   
   return (
     <Routes>
@@ -74,5 +74,5 @@ const BottomNavBarRouting = React.memo(() => {
     </Routes>
   )
 })
-BottomNavBarRouting.displayName = 'BottomNavBarRouting'
-export default BottomNavBarRouting
+RouteBottomNavBar.displayName = 'RouteBottomNavBar'
+export default RouteBottomNavBar

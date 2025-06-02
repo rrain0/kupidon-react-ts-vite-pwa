@@ -3,8 +3,9 @@ import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
 import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 
 
 
@@ -32,8 +33,8 @@ const ElemStyleTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           <button onClick={testDevWidgetStyle4}>Test</button>
           
@@ -64,8 +65,8 @@ const ElemStyleTestPage = React.memo(() => {
           <TestBox2>TestBox2</TestBox2>
           <TestBox3>TestBox3</TestBox3>
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
@@ -73,6 +74,7 @@ const ElemStyleTestPage = React.memo(() => {
     </>
   )
 })
+ElemStyleTestPage.displayName = 'ElemStyleTestPage'
 export default ElemStyleTestPage
 
 

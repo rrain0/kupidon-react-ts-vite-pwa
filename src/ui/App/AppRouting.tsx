@@ -7,7 +7,7 @@ import {
   useSearchParams,
 } from 'react-router'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import BottomNavBarRouting from 'src/ui/1-widgets/NavBar/routing.tsx'
+import RouteBottomNavBar from 'src/ui/1-widgets/NavBar/routing.tsx'
 import { routingBowAndArrows } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { routingChat } from 'src/ui/2-pages/Chat/routing.tsx'
 import { routingChatList } from 'src/ui/2-pages/ChatList/routing.tsx'
@@ -47,7 +47,7 @@ const RouteAny = React.memo(() => {
       <Outlet/>
       
       {/* {navBar?.show && <NavBar place={navBar.place}/>} */}
-      <BottomNavBarRouting/>
+      <RouteBottomNavBar/>
     </>
   )
 })

@@ -3,9 +3,9 @@ import { RouteObject } from 'react-router'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 
-const ApplicationSettingsPage = React.lazy(
-  () => import('src/ui/2-pages/ApplicationSettings/ApplicationSettingsPage')
-)
+const ApplicationSettingsPage = React.lazy(() => import(
+  'src/ui/2-pages/ApplicationSettings/ApplicationSettingsPage'
+))
 
 
 
@@ -21,7 +21,7 @@ const RouteSettingsApp = React.memo(() => {
 
 
 // path: 'settings / app / ...'
-export const settingsApplicationRouting: RouteObject[] = [
+export const routingSettingsApplication: RouteObject[] = [
   {
     path: '',
     Component: RouteSettingsApp,

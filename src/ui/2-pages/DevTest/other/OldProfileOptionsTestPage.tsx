@@ -15,8 +15,9 @@ import ProfileSportFrequencyOption
 import PartnerAlcoholOption from 'src/ui/2-pages/Profile/options-old/PartnerAlcoholOption.tsx'
 import PartnerPetsOption from 'src/ui/2-pages/Profile/options-old/PartnerPetsOption.tsx'
 import PartnerSmokeOption from 'src/ui/2-pages/Profile/options-old/PartnerSmokeOption.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import DateDesiredPlaceOrEventOption from 'src/ui/2-pages/Profile/options-old/DateDesiredPlaceOrEventOption.tsx'
 import DateMostInterestingVisitedPlaceOption
   from 'src/ui/2-pages/Profile/options-old/DateMostInterestingVisitedPlaceOption.tsx'
@@ -31,8 +32,8 @@ const OldProfileOptionsTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           
           
@@ -136,8 +137,8 @@ const OldProfileOptionsTestPage = React.memo(() => {
           
           </Card>
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
@@ -145,5 +146,6 @@ const OldProfileOptionsTestPage = React.memo(() => {
     </>
   )
 })
+OldProfileOptionsTestPage.displayName = 'OldProfileOptionsTestPage'
 export default OldProfileOptionsTestPage
 

@@ -8,7 +8,7 @@ import AppRouting from 'src/ui/App/AppRouting'
 
 const AppFrame = React.memo(() => {
   return (
-    <Contents id='app-frame'>
+    <Contents id='app-frame' data-display-name='AppFrame'>
     
       <AppRouting/>
       
@@ -17,6 +17,7 @@ const AppFrame = React.memo(() => {
     </Contents>
   )
 })
+AppFrame.displayName = 'AppFrame'
 export default AppFrame
 
 

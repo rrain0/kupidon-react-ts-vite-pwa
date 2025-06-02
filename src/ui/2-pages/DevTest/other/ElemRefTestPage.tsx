@@ -1,12 +1,12 @@
 import { animated, useSpring } from '@react-spring/web'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useState } from 'react'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { useResizeToSpring } from '@util/view/useResizeToSpring.ts'
 import { useBool } from '@util/react-state/useBool.ts'
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 
 
 /*
@@ -19,8 +19,8 @@ const ElemRefTestPage = () => {
   const [cnt, setCnt] = useState(0)
   
   return (
-    <Pages.Page>
-      <Pages.Content>
+    <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+      <PageContentLayout col>
         
         <div>Element Ref Test</div>
         
@@ -31,8 +31,8 @@ const ElemRefTestPage = () => {
         
         <ChainedResize2/>
       
-      </Pages.Content>
-    </Pages.Page>
+      </PageContentLayout>
+    </PageLayout>
   )
 }
 export default ElemRefTestPage

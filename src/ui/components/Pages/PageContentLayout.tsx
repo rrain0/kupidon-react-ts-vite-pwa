@@ -86,8 +86,8 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
   const hasInner = fullSm || colSm || modalSm
   
   const ph = {
-    '--pl': '16px',
-    '--pr': '16px',
+    '--pl': !noInsets ? '16px' : '',
+    '--pr': !noInsets ? '16px' : '',
     paddingLeft: 'var(--pl)',
     paddingRight: 'var(--pr)',
   }

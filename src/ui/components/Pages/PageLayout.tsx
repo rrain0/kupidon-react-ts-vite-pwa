@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { isMobileSafari } from 'react-device-detect'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -74,33 +76,30 @@ export default PageLayout
 
 
 
-const PageFillViewport = styled.div`
-  min-width: ${wMin}px;
-  width: 100dvw;
-  min-height: ${hMin}px;
-  height: 100dvh;
-  // Запретить жест обновления страницы браузера на айфоне,
-  // потому что на айфоне он неприятно сдвигает страницу
-  ${isMobileSafari && 'touch-action: none;'}
-`
+const PageFillViewport = styled.div(commonStyle({
+  wMin, hMin, w: '100dvw', h: '100dvh',
+  ...isMobileSafari && { noTouchAction: true },
+}))
 
-const PageCol = styled.div`
-  position: relative;
-  min-width: ${wMin}px;
-  width: min(var(--vp-ct-w), 100dvw);
-  min-height: max( min(var(--vp-ct-h), 100dvh), ${hMin}px );
-  ${col};
-`
+const PageCol = styled.div(flexStyle({
+  col: true,
+  relative: true,
+  wMin,
+  hMin: 'max( min(var(--vp-ct-h), 100dvh), ${hMin}px )',
+  w: 'min(var(--vp-ct-w), 100dvw)',
+}))
 
 
 
 
-const pageFillColor = (t: AppTheme.Theme) => css`
-  background: ${t.page.bg};
-  color: ${t.page.ct2};
-`
-const pageGradColor = (t: AppTheme.Theme) => css`
-  ${simpleGradBgCss(t)};
-  color: ${t.page.ct2};
-`
+
+const pageFillColor = (t: AppTheme.Theme) => css(commonStyle({
+  bgColor: t.page.bg,
+  color: t.page.ct2,
+}))
+const pageGradColor = (t: AppTheme.Theme) => css([
+  simpleGradBgCss(t), commonStyle({
+    color: t.page.ct2,
+  }),
+])
 

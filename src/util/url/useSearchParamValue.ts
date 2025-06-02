@@ -50,7 +50,6 @@ const updateUrlSearchParam = (
 
 
 
-// TODO for single param i can make simple values: undefined, null, '', 'value'
 export const useSearchParamValue = (
   param: string,
   initialData: SearchParamUrlAndValueData = { }
@@ -88,4 +87,12 @@ export const useSearchParamValue = (
   return [paramValueData, setParamState] as const
 }
 
+
+
+
+// For single param i can make simple values:
+// ''            => undefined
+// 'param'       => null
+// 'param='      => ''
+// 'param=value' => 'value'
 

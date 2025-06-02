@@ -5,6 +5,7 @@ import {
   testWordsTreeGenerator
 } from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
 import { WidgetStyle6NewTest } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTestNew.ts'
+import { _wst7TestTransform } from 'src/mini-libs/widget-style-7/WidgetTransform.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
 import UseViewportContentSize from 'src/ui/App/UseViewportContentSize.tsx'
 import CheckBrowserMinimumVersion
@@ -28,7 +29,8 @@ import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 //WidgetStyle6Test.testTransform()
 //WidgetStyle6Test.testWidget()
 //testWordsTreeGenerator()
-WidgetStyle6NewTest.testTransformSimple()
+//WidgetStyle6NewTest.testTransformSimple()
+_wst7TestTransform()
 
 
 
@@ -76,6 +78,7 @@ const App = React.memo(() => {
     </CheckBrowserMinimumVersion>
   )
 })
+App.displayName = 'App'
 export default App
 
 

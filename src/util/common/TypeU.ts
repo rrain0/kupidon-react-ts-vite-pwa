@@ -99,6 +99,9 @@ export namespace TypeU {
   export function isemptyval<T, NE extends emptyval>(value: T | NE): value is NE {
     return value === null || value === undefined
   }
+  export function isbool<T, S extends boolean>(value: T | S): value is S {
+    return typeof value === 'boolean'
+  }
   export function isstring<T, S extends string>(value: T | S): value is S {
     return typeof value === 'string'
   }

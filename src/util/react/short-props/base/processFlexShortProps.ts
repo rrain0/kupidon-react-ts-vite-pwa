@@ -8,8 +8,8 @@ import isdef = TypeU.isdef
 
 export type FlexShortProps = Pu<{
   row: boolean
-  rowRev: boolean
   col: boolean
+  rowRev: boolean
   colRev: boolean
   wrap: boolean
   wrapRev: boolean
@@ -55,7 +55,7 @@ export const processFlexShortProps = <P extends object>(
   props: P & FlexShortProps
 ) => {
   const {
-    row, rowRev, col, colRev, wrap, wrapRev,
+    row, col, rowRev, colRev, wrap, wrapRev,
     align, alignCt, justifyCt,
     alignStart, alignEnd, alignStretch,
     justifyStart, justifyEnd, justifySpaceBetween, justifySpaceAround,

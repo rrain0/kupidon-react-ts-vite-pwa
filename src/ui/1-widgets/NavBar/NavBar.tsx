@@ -60,7 +60,7 @@ const NavBar = React.memo((props: NavBarProps) => {
             css={nav}
           >
             <ProfileGradIc/>
-            <div>{titleText.profile}</div>
+            {/* <div>{titleText.profile}</div> */}
           </Button>
         </AppNavLink>
         
@@ -70,7 +70,7 @@ const NavBar = React.memo((props: NavBarProps) => {
             css={nav}
           >
             <ChatRoundGradIc/>
-            <div>{titleText.chat}</div>
+            {/* <div>{titleText.chat}</div> */}
           </Button>
         </AppNavLink>
         
@@ -80,7 +80,7 @@ const NavBar = React.memo((props: NavBarProps) => {
             css={nav}
           >
             <CardsHeartGradIc/>
-            <div>{titleText.hearts}</div>
+            {/* <div>{titleText.hearts}</div> */}
           </Button>
         </AppNavLink>
         
@@ -90,7 +90,7 @@ const NavBar = React.memo((props: NavBarProps) => {
             css={nav}
           >
             <BowArrowGradIc/>
-            <div>{titleText.bowAndArrows}</div>
+            {/* <div>{titleText.bowAndArrows}</div> */}
           </Button>
         </AppNavLink>
         
@@ -103,7 +103,7 @@ const NavBar = React.memo((props: NavBarProps) => {
                 onClick={overlay.open}
               >
                 <GearOutlinedIc/>
-                <div>{titleText.settings}</div>
+                {/* <div>{titleText.settings}</div> */}
               </Button>
               
               <QuickSettings isOpen={overlay.isOpen} close={overlay.closeWithAction}/>
@@ -124,7 +124,7 @@ export default NavBar
 
 const NavBox = styled.nav(({ theme: t }) => flexStyle({
   fixedBottom: true, z: modalFloor500,
-  pb: 'var(--screen-safe-inset-bottom)',
+  pb: 'var(--bottom-nav-offest-bottom)',
   contentBox: true, h: 'var(--bottom-nav-bar-h)',
   row: true, justifySpaceBetween: true,
   bgColor: t.nav.bg,
@@ -137,8 +137,8 @@ const NavBox = styled.nav(({ theme: t }) => flexStyle({
 const nav = (t: AppTheme.Theme) => css`
   ${IconButtonS6.t([IconButtonS6.S.trans.round.lg.normal, {
     button: {
-      w: 'auto', h: '50px', flex: 1, r: 10, p: [5, 0, 2],
-      display: 'grid', rows: '1fr 13px', placeItems: 'center', g: 2,
+      w: 'auto', h: '50px', flex: 1, r: 10, /* p: [5, 0, 2], */ p: [11, 0, 11],
+      display: 'grid', /* rows: '1fr 13px', */ rows: '1fr', placeItems: 'center', g: 2,
       bg: null,
       color: t.navButton.ct,
       ...WidgetStyleCommon.Txt.s10,

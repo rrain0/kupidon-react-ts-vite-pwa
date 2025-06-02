@@ -19,35 +19,6 @@ import Txt = WidgetStyleCommon.Txt
 
 
 
-// TODO Style - new widget config
-const ButtonS7Config = {
-  $button: {
-    className: 'rruiButton',
-    nodes: {
-      '>': {
-        $border: {
-          className: 'rruiBorder',
-          nodes: {
-            '>': {
-              $ripple: {
-                className: 'rruiRippleFrame',
-              },
-            },
-          },
-        },
-      },
-      ' ': { },
-    },
-    
-    states: {
-      hover: '',
-      selected: '',
-      locked: '',
-      // ...
-    },
-    
-  },
-} as const
 
 
 

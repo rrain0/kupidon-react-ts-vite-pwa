@@ -7,6 +7,10 @@ import {
   processPlacedShortProps,
 } from 'src/util/react/short-props/base/processPlacedShortProps.ts'
 import {
+  PointerShortProps,
+  processPointerShortProps,
+} from 'src/util/react/short-props/base/processPointerShortProps.ts'
+import {
   PositionShortProps,
   processPositionShortProps,
 } from 'src/util/react/short-props/base/processPositionShortProps.ts'
@@ -23,6 +27,7 @@ import {
 
 
 export type CommonViewShortProps =
+  & PointerShortProps
   & PositionShortProps
   & SizeShortProps
   & PlacedShortProps
@@ -32,14 +37,15 @@ export type CommonViewShortProps =
 export const processCommonViewShortProps = <P extends object>(
   props: P & CommonViewShortProps
 ) => {
-  const { position, positionRest } = processPositionShortProps(props)
+  const { pointer, pointerRest } = processPointerShortProps(props)
+  const { position, positionRest } = processPositionShortProps(pointerRest)
   const { size, sizeRest } = processSizeShortProps(positionRest)
   const { placed, placedRest } = processPlacedShortProps(sizeRest)
   const { content, contentRest } = processContentShortProps(placedRest)
   const { text, textRest } = processTextShortProps(contentRest)
   
   return {
-    css: [position, size, placed, content, text],
+    css: [pointer, position, size, placed, content, text],
     commonViewRest: textRest,
   }
 }

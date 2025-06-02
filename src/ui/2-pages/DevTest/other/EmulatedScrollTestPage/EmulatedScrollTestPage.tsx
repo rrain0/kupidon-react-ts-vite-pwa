@@ -5,7 +5,7 @@ import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React from 'react'
-import { useEmulatedScroll } from 'src/ui/2-pages/DevTest/pages/EmulatedScrollTestPage/useEmulatedScroll.ts'
+import { useEmulatedScroll } from 'src/ui/2-pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import { Pages } from 'src/ui/components/Pages/Pages.ts'
@@ -91,6 +91,7 @@ const EmulatedScrollTestPage = React.memo(() => {
     </Pages.Page>
   )
 })
+EmulatedScrollTestPage.displayName = 'EmulatedScrollTestPage'
 export default EmulatedScrollTestPage
 
 

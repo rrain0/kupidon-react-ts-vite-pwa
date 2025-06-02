@@ -1,19 +1,29 @@
 
 
 
-:root {
+* {
   user-select: none;
 }
+/* Pointer fixes */
+*:where(:not(input, textarea)) {
+  -webkit-user-select: none; /* disable selection/Copy of UIWebView */
+  -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+}
+
+
 :root {
   /* viewport content width / height */
   --vp-ct-w: 0px;
   --vp-ct-h: 0px;
 }
+
+
 :root {
-  /*--screen-safe-inset-bottom: max(
-    calc( env(safe-area-inset-bottom, 0px) - 10px ),
+  --screen-safe-inset-bottom: max(
+    /* На iOS нужно чтобы отступить от полоски снизу экрана */
+    calc( env(safe-area-inset-bottom, 0px) - 14px ),
     0px
-  );*/
+  );
   
   --page-ct-pb-min: 50px;
   
@@ -33,7 +43,7 @@
   --bottom-action-offest-bottom: calc( var(--bottom-nav-bar-h) + var(--bottom-nav-offest-bottom) );
   
   --bottom-nav-bar-h: 0px;
-  --bottom-nav-offest-bottom: 0px;
+  --bottom-nav-offest-bottom: var(--screen-safe-inset-bottom);
   
   
   
@@ -49,11 +59,6 @@
 }
 
 
-/* Pointer fixes */
-*:not(input, textarea) {
-  -webkit-user-select: none; /* disable selection/Copy of UIWebView */
-  -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
-}
 
 
 

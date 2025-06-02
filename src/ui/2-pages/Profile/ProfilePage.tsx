@@ -10,6 +10,7 @@ import {
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -646,17 +647,14 @@ export default ProfilePage
 
 
 
-const TabsBox = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  ${row};
-  align-items: stretch;
-  overflow: hidden;
-  touch-action: pan-y;
-`
 
-const Tab = styled(AnimatedDiv)`
-  ${absTlwh};
-  ${col};
-`
+const TabsBox = styled.div(flexStyle({
+  relative: true, sz: 'full',
+  row: true, alignStretch: true,
+  noOverflow: true, touchAction: 'pan-y',
+}))
+
+
+const Tab = styled(AnimatedDiv)(flexStyle({
+  absTlwh: true, col: true,
+}))
