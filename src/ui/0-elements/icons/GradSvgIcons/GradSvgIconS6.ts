@@ -10,7 +10,7 @@ import {
 
 
 
-export namespace SvgGradIconS6 {
+export namespace GradSvgIconS6 {
   
   export function buildWidgetElems(up?: AttachRootElemParams) {
     const gradIcon = WidgetElem.of({

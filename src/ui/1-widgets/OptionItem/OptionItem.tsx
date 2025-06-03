@@ -7,7 +7,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
+import { GradSvgIconS6 } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -82,14 +82,14 @@ const IconFrame = styled.div`
   display: grid;
   place-items: center;
   > {
-    ${p => SvgGradIconS6.t(optionAndValueItemGradIconS)(p.theme)}
+    ${p => GradSvgIconS6.t(optionAndValueItemGradIconS)(p.theme)}
   }
   > {
     ${p => SvgIconS6.t(optionAndValueItemIconS)(p.theme)}
   }
 `
 
-const optionAndValueItemGradIconS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.full.accent, {
+const optionAndValueItemGradIconS: AppWidgetStyle = [GradSvgIconS6.S.icon.icon.full.accent, {
   gradIconW: '60%',
 }]
 const optionAndValueItemIconS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {

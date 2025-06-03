@@ -80,7 +80,7 @@ export namespace AppTheme {
     boxDefault: { bg: string, ct: string }
     boxDefault2: { bg: string, ct: string, cta: string }
     boxDefault3: { bg: string, ct: string }
-    boxDefault4: { ct: string }
+    boxDefault4: { ct: string, cta: string }
     boxDefault5: { ct: string, ctSec: string }
     boxDefault6: { ct: string }
     boxDefault7: { ct: string }

@@ -6,7 +6,7 @@ import {
 } from 'mini-libs/widget-style-6/WidgetStyle'
 import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
+import { GradSvgIconS6 } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 
 
@@ -19,7 +19,7 @@ export namespace IconButtonS6 {
     const iconElems = SvgIconS6.buildWidgetElems({
       upElem: buttonElems.button, upSelector: '>',
     })
-    const gradIconElems = SvgGradIconS6.buildWidgetElems({
+    const gradIconElems = GradSvgIconS6.buildWidgetElems({
       upElem: buttonElems.button, upSelector: '>',
     })
     
@@ -50,7 +50,7 @@ export namespace IconButtonS6 {
     export const base: WidgetStyle = [
       ButtonS6.Parts.base,
       SvgIconS6.Parts.base,
-      SvgGradIconS6.Parts.base,
+      GradSvgIconS6.Parts.base,
     ]
     
     export namespace Type {
@@ -78,7 +78,7 @@ export namespace IconButtonS6 {
         export const baseColor: AppWidgetStyle = t => [
           ButtonS6.Parts.Type.text.baseColor,
           SvgIconS6.Parts.Type.icon.baseColor,
-          SvgGradIconS6.Parts.Type.icon.baseColor,
+          GradSvgIconS6.Parts.Type.icon.baseColor,
         ]
         export namespace Color {
           // type: trans, color: normal
@@ -124,7 +124,7 @@ export namespace IconButtonS6 {
         export const baseColor: AppWidgetStyle = t => [
           ButtonS6.Parts.Type.text.baseColor,
           SvgIconS6.Parts.Type.icon.baseColor,
-          SvgGradIconS6.Parts.Type.icon.baseColor,
+          GradSvgIconS6.Parts.Type.icon.baseColor,
         ]
         export namespace Color {
           // type: filled, color: normal2

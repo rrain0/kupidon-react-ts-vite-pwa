@@ -1,10 +1,10 @@
 import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import { useAppTheme } from '@util/app/useAppTheme.ts'
 import { useNoTouchAction } from '@util/pointer/useNoTouchAction.ts'
 import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React, {
   useCallback,
   useEffect,
@@ -61,7 +61,6 @@ import Callback = TypeU.Callback
 import findBy = ArrayU.findBy
 import NumRange = RangeU.NumRange
 import arr = ArrayU.arr
-import absTlwh = EmotionCommon.absTlwh
 
 
 
@@ -103,11 +102,11 @@ export type ProfilePhotosProps = {
 }
 const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   const { images, setImages } = props
-  const theme = useAppZustand(s => s.theme)
+  const tm = useAppTheme()
   const isDraggingFiles = useAppZustand(s => s.isDraggingFiles)
   
   
-  const progressAnim = useMemo(() => radialGradKfs(theme), [theme])
+  const progressAnim = useMemo(() => radialGradKfs(tm), [tm])
   
   const [lastIdx, setLastIdx] = useState(0)
   

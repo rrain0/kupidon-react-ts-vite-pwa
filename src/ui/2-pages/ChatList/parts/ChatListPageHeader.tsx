@@ -11,12 +11,12 @@ import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgGradIconS6 } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconS6.ts'
-import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+import { GradSvgIconS6 } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconS6.ts'
+import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import HeartOutlinedGradIc = SvgGradIconsPack.HeartOutlinedGradIc
+import HeartOutlinedGradIc = GradSvgIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
 import Pu = TypeU.Pu
 import RootRoute = AppRoutes.RootRoute
@@ -61,7 +61,7 @@ const ChatListPageHeader = React.memo((props: ChatListPageHeaderProps) => {
       <Flex centerEnd>
         <AppLink toFull={RootRoute.likedMe}>
           <Button css={ButtonS6.t(likesButtonS)} row>
-            <HeartOutlinedGradIc css={SvgGradIconS6.t(heartS)}/>
+            <HeartOutlinedGradIc css={GradSvgIconS6.t(heartS)}/>
             <LikesCounterBox>
               <LikesCounter>
                 <CountFormatShort addPlus>{likesCnt}</CountFormatShort>
@@ -103,7 +103,7 @@ const likesButtonS: AppWidgetStyle = t => [
     },
   },
 ]
-const heartS: AppWidgetStyle = [SvgGradIconS6.S.icon.icon.full.accent, {
+const heartS: AppWidgetStyle = [GradSvgIconS6.S.icon.icon.full.accent, {
   gradIcon: { sz: 23 },
 }]
 

@@ -19,6 +19,7 @@ export namespace CardS {
   
   export const card3S = (t: AppTheme.Theme) => css([card2S(t), {
     padding: 16,
+    // TODO Theme full shadow as one entity
     boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg}`,
   }])
 

@@ -46,7 +46,7 @@ export const Light = {
   boxDefault: { bg: '#ffffff', ct: '#1b1919' },
   boxDefault2: { bg: '#ffffff', ct: '#000000', cta: '#cbcad0' },
   boxDefault3: { bg: '#f0f0f0', ct: '#000000' },
-  boxDefault4: { ct: '#444444' },
+  boxDefault4: { ct: '#444444', cta: '#738cbe' },
   boxDefault5: { ct: '#5b5b5b', ctSec: '#d1d1d1' },
   boxDefault6: { ct: '#7b7b7b' },
   boxDefault7: { ct: '#838383' },

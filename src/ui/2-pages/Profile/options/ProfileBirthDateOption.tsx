@@ -2,7 +2,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import React, { useState } from 'react'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
@@ -10,7 +10,7 @@ import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/For
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DateU } from 'src/util/date/DateU'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import GiftBoxGradIc = SvgGradIconsPack.GiftBoxGradIc
+import GiftBoxGradIc = GradSvgIconsPack.GiftBoxGradIc
 import toEmptyAttr = TypeU.toEmptyAttr
 
 

@@ -1,4 +1,5 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
+import { useAppTheme } from '@util/app/useAppTheme.ts'
 import { useSearchParamsUrlListener } from '@util/url/useSearchParamsUrlListener.ts'
 import React from 'react'
 import {
@@ -21,7 +22,6 @@ import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 import { WidgetStyle6Test } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTest.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
@@ -42,7 +42,7 @@ const App = React.memo(() => {
   useLangSetup()
   const themeIsReady = useThemeSetup()
   
-  const theme = useAppZustand(s => s.theme)
+  const theme = useAppTheme()
   
   return (
     <CheckBrowserMinimumVersion>

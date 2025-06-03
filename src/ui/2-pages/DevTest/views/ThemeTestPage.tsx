@@ -1,3 +1,4 @@
+import { useAppTheme } from '@util/app/useAppTheme.ts'
 import React from 'react'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
@@ -7,7 +8,6 @@ import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
@@ -16,12 +16,12 @@ import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 const ThemeTestPage = React.memo(() => {
   
-  const t = useAppZustand(s => s.theme)
+  const tm = useAppTheme()
   
   return (
     <>
       
-      <PageLayout col>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
         <PageContentLayout col>
           
           
@@ -36,7 +36,7 @@ const ThemeTestPage = React.memo(() => {
           
           {(() => {
             const name = 'boxDefault' as const
-            const { bg, ct } = t[name]
+            const { bg, ct } = tm[name]
             return (
               <Flex col w={300} h={150} rad={16} p={10} g={10}
                 bg={bg} color={ct}
@@ -51,7 +51,7 @@ const ThemeTestPage = React.memo(() => {
           
           {(() => {
             const name = 'boxDefault3' as const
-            const { bg, ct } = t[name]
+            const { bg, ct } = tm[name]
             return (
               <Flex col w={300} h={150} rad={16} p={10} g={10}
                 bg={bg} color={ct}
@@ -66,7 +66,7 @@ const ThemeTestPage = React.memo(() => {
           
           {(() => {
             const name = 'boxNormal2' as const
-            const { bg, ct } = t[name]
+            const { bg, ct } = tm[name]
             return (
               <Flex col w={300} h={150} rad={16} p={10} g={10}
                 bg={bg} color={ct}
@@ -81,7 +81,7 @@ const ThemeTestPage = React.memo(() => {
           
           {(() => {
             const name = 'boxAccent4' as const
-            const { bg, ct } = t[name]
+            const { bg, ct } = tm[name]
             return (
               <Flex col w={300} h={150} rad={16} p={10} g={10}
                 bg={bg} color={ct}

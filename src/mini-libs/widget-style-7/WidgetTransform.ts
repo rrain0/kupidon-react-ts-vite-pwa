@@ -24,8 +24,6 @@ export type PrimitiveStyleValue =
   // Just number
   // opacity: 1, width: 100
   | number
-  // 'unset'
-  | ''
   // Just string
   | string
 

@@ -48,7 +48,7 @@ export const Dark = {
   boxDefault: { bg: '#24272d', ct: '#bdbdbd' },
   boxDefault2: { bg: '#24272d', ct: '#bdbdbd', cta: '#2e343f' },
   boxDefault3: { bg: '#282c34', ct: '#bdbdbd' },
-  boxDefault4: { ct: '#dddddd' },
+  boxDefault4: { ct: '#dddddd', cta: '#738cbe' },
   boxDefault5: { ct: '#909090', ctSec: '#666666' },
   boxDefault6: { ct: '#7b7b7b' },
   boxDefault7: { ct: '#838383' },

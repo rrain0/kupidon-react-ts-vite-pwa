@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { SvgGradIconsPack } from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
@@ -9,7 +9,7 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import SmokeCigaretteGradIc = SvgGradIconsPack.SmokeCigaretteGradIc
+import SmokeCigaretteGradIc = GradSvgIconsPack.SmokeCigaretteGradIc
 
 
 

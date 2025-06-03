@@ -55,14 +55,19 @@ const DevTestPage = React.memo(() => {
           <div>Views:</div>
           
           <Grid w='full' cols='repeat(auto-fit, minmax(200px, 400px))' g={10}>
-            <AppLink toFull={RootRoute.devTest.buttons}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                Buttons
-              </Button>
-            </AppLink>
             <AppLink toFull={RootRoute.devTest.theme}>
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
                 Theme
+              </Button>
+            </AppLink>
+            <AppLink toFull={RootRoute.devTest.icons}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Icons
+              </Button>
+            </AppLink>
+            <AppLink toFull={RootRoute.devTest.buttons}>
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                Buttons
               </Button>
             </AppLink>
             <AppLink toFull={RootRoute.devTest.ripple}>

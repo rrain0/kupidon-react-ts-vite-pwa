@@ -1,8 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { themeByName } from 'src/ui-data/theme/ThemeCollection.ts'
+import { useAppTheme } from 'src/util/app/useAppTheme.ts'
 import { useBrowserMinimumVersion } from 'src/util/app/useBrowserMinimumVersion.ts'
+import { useSetAppTheme } from 'src/util/app/useSetAppTheme.ts'
 import { useThemeDetector } from 'src/util/theme/useThemeDetector.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
 
 
@@ -19,8 +20,8 @@ export const useThemeSetup = () => {
   })
   
   const { type, manual, light, dark } = useThemeSettingsZustand()
-  const theme = useAppZustand(s => s.theme)
-  const setApp = useAppZustand.setState
+  const theme = useAppTheme()
+  const setTheme = useSetAppTheme()
   
   const systemTheme = (() => {
     const systemTheme = useThemeDetector()
@@ -36,25 +37,25 @@ export const useThemeSetup = () => {
   useLayoutEffect(() => {
     if (type === 'system') {
       if (systemTheme === 'light') {
-        setApp({ theme: themeByName(light) })
+        setTheme(themeByName(light))
         setThemeIsReady(true)
       }
       else if (systemTheme === 'dark') {
-        setApp({ theme: themeByName(dark) })
+        setTheme(themeByName(dark))
         setThemeIsReady(true)
       }
       else {
-        setApp({ theme: themeByName(light) })
+        setTheme(themeByName(light))
         setThemeIsReady(true)
       }
     }
     else if (type === 'manual') {
       if (manual === 'light') {
-        setApp({ theme: themeByName(light) })
+        setTheme(themeByName(light))
         setThemeIsReady(true)
       }
       else if (manual === 'dark') {
-        setApp({ theme: themeByName(dark) })
+        setTheme(themeByName(dark))
         setThemeIsReady(true)
       }
     }

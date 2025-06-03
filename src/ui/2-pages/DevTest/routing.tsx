@@ -9,8 +9,9 @@ import path = RouteBuilder.path
 
 const TestPage = React.lazy(() => import('src/ui/2-pages/DevTest/DevTestPage.tsx'))
 
-const ButtonsTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/ButtonsTestPage.tsx'))
 const ThemeTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/ThemeTestPage.tsx'))
+const IconsTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/IconsTestPage.tsx'))
+const ButtonsTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/ButtonsTestPage.tsx'))
 const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/other/ScrollbarTestPage.tsx'))
 const BottomSheetTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/BottomSheetTestPage.tsx'))
 const SelectItemTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/SelectItemTestPage.tsx'))
@@ -38,18 +39,6 @@ const CssTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/other/CssTes
 
 
 
-// path: 'dev-test / buttons / ...'
-const routingButtons: RouteObject[] = [
-  {
-    path: '',
-    element: (
-      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-        <ButtonsTestPage/>
-      </Suspense>
-    ),
-  },
-  clearUnknownPathEnding,
-]
 // path: 'dev-test / theme / ...'
 const routingTheme: RouteObject[] = [
   {
@@ -57,6 +46,30 @@ const routingTheme: RouteObject[] = [
     element: (
       <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
         <ThemeTestPage/>
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+// path: 'dev-test / icons / ...'
+const routingIcons: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+        <IconsTestPage/>
+      </Suspense>
+    ),
+  },
+  clearUnknownPathEnding,
+]
+// path: 'dev-test / buttons / ...'
+const routingButtons: RouteObject[] = [
+  {
+    path: '',
+    element: (
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+        <ButtonsTestPage/>
       </Suspense>
     ),
   },
@@ -299,12 +312,16 @@ export const routingDevTest: RouteObject[] = [
   
   
   {
-    path: RootRoute.devTest.buttons[path]+'/*',
-    children: routingButtons,
-  },
-  {
     path: RootRoute.devTest.theme[path]+'/*',
     children: routingTheme,
+  },
+  {
+    path: RootRoute.devTest.icons[path]+'/*',
+    children: routingIcons,
+  },
+  {
+    path: RootRoute.devTest.buttons[path]+'/*',
+    children: routingButtons,
   },
   {
     path: RootRoute.devTest.bottomSheet[path]+'/*',

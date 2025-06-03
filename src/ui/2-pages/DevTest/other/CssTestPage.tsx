@@ -223,7 +223,7 @@ const CssTestPage = React.memo(() => {
                 },
               ]}
             >
-              {'.clss { :hover { ... }}'}
+              {'.clss { :hover { ... } }'}
             </Flex>
             
             
@@ -243,7 +243,7 @@ const CssTestPage = React.memo(() => {
                 },
               ]}
             >
-              {'#id { :hover { ... }}'}
+              {'#id { :hover { ... } }'}
             </Flex>
             
             
@@ -262,7 +262,7 @@ const CssTestPage = React.memo(() => {
                 },
               ]}
             >
-              {'div { :hover { ... }}'}
+              {'div { :hover { ... } }'}
             </Flex>
             
             
@@ -271,7 +271,7 @@ const CssTestPage = React.memo(() => {
               data-selected
               className='clss clss2'
               css={[
-                { backgroundColor: '#ff000077' },
+                { backgroundColor: '#ff000077', whiteSpace: 'pre' },
                 
                 // variant by object
                 {
@@ -287,7 +287,13 @@ const CssTestPage = React.memo(() => {
                 },
               ]}
             >
-              {'&.clss { @media hoverable { :hover { &.clss2 { { ... } } }'}
+              {'&.clss { \n' +
+              '  @media hoverable { \n' +
+              '    :hover { \n' +
+              '      &.clss2 { ... } \n' +
+              '    }\n' +
+              '  }\n' +
+              '}'}
             </Flex>
           </Flex>
           

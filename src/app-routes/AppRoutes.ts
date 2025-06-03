@@ -114,8 +114,9 @@ export namespace AppRoutes {
   const devTest = buildRoute({
     [path]: 'dev-test',
     
-    buttons: buildPath('buttons'),
     theme: buildPath('theme'),
+    icons: buildPath('icons'),
+    buttons: buildPath('buttons'),
     scrollbar: buildPath('scrollbar'),
     bottomSheet: buildPath('bottom-sheet'),
     viewsSelectItem: buildPath('views-select-item'),

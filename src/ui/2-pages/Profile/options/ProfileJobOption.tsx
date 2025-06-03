@@ -3,15 +3,15 @@ import { Job } from 'src/api/model/Job.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import {
-  SvgGradIconsPack,
-} from 'src/ui/0-elements/icons/SvgGradIcons/SvgGradIconsPack.tsx'
+  GradSvgIconsPack,
+} from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import WorkSuitcaseGradIc = SvgGradIconsPack.WorkSuitcaseGradIc
+import WorkSuitcaseGradIc = GradSvgIconsPack.WorkSuitcaseGradIc
 
 
 

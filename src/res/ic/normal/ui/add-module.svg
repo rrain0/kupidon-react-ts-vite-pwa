@@ -1,15 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 200 200" stroke="#282828" fill="#282828">
+<svg viewBox="0 0 200 200" stroke="#282828" fill="#282828" xmlns="http://www.w3.org/2000/svg">
   
   <style>
     :root {
-      --size: 78px;
+      --square-size: 78px;
       --stroke-width: 16px;
       --line-offset: 10px;
     }
     .rect {
       rx: 14px; ry: 14px;
-      width: var(--size); height: var(--size);
+      width: var(--square-size); height: var(--square-size);
       stroke-width: var(--stroke-width);
       fill: none;
     }
@@ -20,28 +19,28 @@
     }
     .rect.bottom-left {
       x: 0;
-      y: calc(200px - var(--size));
+      y: calc(200px - var(--square-size));
       translate: calc(var(--stroke-width) / 2) calc(-1 * var(--stroke-width) / 2);
     }
     .rect.bottom-right {
-      x: calc(200px - var(--size));
-      y: calc(200px - var(--size));
+      x: calc(200px - var(--square-size));
+      y: calc(200px - var(--square-size));
       translate: calc(-1 * var(--stroke-width) / 2) calc(-1 * var(--stroke-width) / 2);
     }
     .line {
       stroke: none;
     }
     .line.horizontal {
-      x: calc(200px - var(--size) - var(--stroke-width) / 2);
-      width: calc(var(--size));
-      y: calc((var(--size)) / 2);
+      x: calc(200px - var(--square-size) - var(--stroke-width) / 2);
+      width: calc(var(--square-size));
+      y: calc((var(--square-size)) / 2);
       height: var(--stroke-width);
     }
     .line.vertical {
-      x: calc(200px - var(--size) / 2 - var(--stroke-width));
+      x: calc(200px - var(--square-size) / 2 - var(--stroke-width));
       width: var(--stroke-width);
       y: calc(var(--stroke-width) / 2);
-      height: var(--size);
+      height: var(--square-size);
     }
   </style>
   

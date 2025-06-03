@@ -138,13 +138,13 @@ export const TitleUiText = {
     'en-US': 'Dark theme',
     'ru-RU': 'Тёмная тема',
   },
-  lightThemeColor: {
-    'en-US': 'Light theme color',
-    'ru-RU': 'Цвет светлой темы',
+  lightThemeVariant: {
+    'en-US': 'Light theme variant',
+    'ru-RU': 'Вариант светлой темы',
   },
-  darkThemeColor: {
-    'en-US': 'Dark theme color',
-    'ru-RU': 'Цвет тёмной темы',
+  darkThemeVariant: {
+    'en-US': 'Dark theme variant',
+    'ru-RU': 'Вариант тёмной темы',
   },
   
   

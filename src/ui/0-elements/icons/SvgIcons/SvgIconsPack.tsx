@@ -1,10 +1,8 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import clsx from 'clsx'
 import React from 'react'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import Pu = TypeU.Pu
+import { BaseSvgIcon, generateSvgIcon, SvgIconProps } from './SvgIcon'
+
 
 // UI icons
 import AddModuleSvg from '@ic/normal/ui/add-module.svg?react'
@@ -20,8 +18,8 @@ import Calendar2Svg from '@ic/normal/ui/calendar-2.svg?react'
 import ChatRoundSvg from '@ic/normal/ui/chat-round.svg?react'
 import CheckmarkSvg from '@ic/normal/ui/checkmark.svg?react'
 import CheckmarkBoldSvg from '@ic/normal/ui/checkmark-bold.svg?react'
-import CheckmarkDoubleSvg from '@ic/normal/ui/checkmark-double.svg?react'
 import CheckmarkCircleToastifySvg from '@ic/normal/ui/checkmark-circle-toastify.svg?react'
+import CheckmarkDoubleSvg from '@ic/normal/ui/checkmark-double.svg?react'
 import ClearTrashSvg from '@ic/normal/ui/clear-trash.svg?react'
 import ClipSvg from '@ic/normal/ui/clip.svg?react'
 import CopySvg from '@ic/normal/ui/copy.svg?react'
@@ -36,6 +34,7 @@ import DocumentErrorSvg from '@ic/normal/ui/document-error.svg?react'
 import DownloadSvg from '@ic/normal/ui/download.svg?react'
 
 import EyeSvg from '@ic/normal/ui/eye.svg?react'
+import EmojiLaughSvg from '@ic/normal/ui/emoji-laugh.svg?react'
 import EyeCrossedOutSvg from '@ic/normal/ui/eye-crossed-out.svg?react'
 import EyeWideSvg from '@ic/normal/ui/eye-wide.svg?react'
 
@@ -134,257 +133,179 @@ import VaseMuseumSvg from '@ic/normal/special/vase-museum.svg?react'
 import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 
 
-
-
 export namespace SvgIconsPack {
-
-  // Base interface for simple svg icons
-  
-  type BaseSimpleSvgIconCustomProps = Pu<{
-    color: string
-    colorAccent: string
-    size: number | string
-  }>
-  
-  type SvgProps = React.SVGProps<SVGSVGElement> & { title?: string }
-  type SvgComponentType = React.FC<SvgProps>
-  type BaseSimpleSvgIconSvgComponentProp = {
-    SvgComponent: SvgComponentType
-  }
-  
-  type BaseSimpleSvgIconSvgElemProps = React.ComponentProps<'svg'>
-  
-  
-  export type BaseSimpleSvgIconProps =
-    & BaseSimpleSvgIconCustomProps
-    & BaseSimpleSvgIconSvgElemProps
-    & BaseSimpleSvgIconSvgComponentProp
-  
-  export const BaseSimpleSvgIcon = React.memo((props: BaseSimpleSvgIconProps) => {
-    const {
-      className,
-      color, colorAccent,
-      size,
-      width: w = size,
-      height: h = size,
-      SvgComponent,
-      ...restProps
-    } = props
-    
-    const sizeProp = SvgIconS6.W.els.icon.ps!.size
-    const colorProp = SvgIconS6.W.els.icon.ps!.color
-    const colorAccentProp = SvgIconS6.W.els.icon.ps!.colorAcc
-    
-    return (
-      <SvgComponent
-        css={{
-          width: w ?? sizeProp.var(),
-          height: h ?? sizeProp.var(),
-          fill: color ?? colorProp.var('black'),
-          stroke: color ?? colorProp.var('black'),
-          [colorAccentProp.n]: colorAccent ?? colorAccentProp.var('gray'),
-        }}
-        className={clsx(className, SvgIconS6.W.els.icon.n)}
-        {...restProps}
-      />
-    )
-  })
-  
-  
-  
-  
-  export type SimpleSvgIconProps =
-    & BaseSimpleSvgIconCustomProps
-    & BaseSimpleSvgIconSvgElemProps
-  
-  
-  function generateSimpleSvgIcon(SvgComponent: SvgComponentType) {
-    return React.memo((props: SimpleSvgIconProps) => (
-      <BaseSimpleSvgIcon {...props} SvgComponent={SvgComponent}/>
-    ))
-  }
-  
-  
   
   // UI Icons
-  export const AddModuleIc = generateSimpleSvgIcon(AddModuleSvg)
-  export const ArchiveBoxOutlinedIc = generateSimpleSvgIcon(ArchiveBoxOutlinedSvg)
-  export const ArrowLinesSharp1Ic = generateSimpleSvgIcon(ArrowLinesSharp1Svg)
-  export const ArrowAngledRoundedIc = generateSimpleSvgIcon(ArrowAngledRoundedSvg)
-  export const ArrowBackIc = generateSimpleSvgIcon(ArrowBackSvg)
-  export const ArrowRefreshCwIc = generateSimpleSvgIcon(ArrowRefreshCwSvg)
-  export const ArrowReloadIc = generateSimpleSvgIcon(ArrowReloadSvg)
+  export const AddModuleIc = generateSvgIcon(AddModuleSvg)
+  export const ArchiveBoxOutlinedIc = generateSvgIcon(ArchiveBoxOutlinedSvg)
+  export const ArrowLinesSharp1Ic = generateSvgIcon(ArrowLinesSharp1Svg)
+  export const ArrowAngledRoundedIc = generateSvgIcon(ArrowAngledRoundedSvg)
+  export const ArrowBackIc = generateSvgIcon(ArrowBackSvg)
+  export const ArrowRefreshCwIc = generateSvgIcon(ArrowRefreshCwSvg)
+  export const ArrowReloadIc = generateSvgIcon(ArrowReloadSvg)
   
   
-  export const CalendarIc = generateSimpleSvgIcon(CalendarSvg)
-  export const Calendar2Ic = generateSimpleSvgIcon(Calendar2Svg)
-  export const ChatRoundIc = generateSimpleSvgIcon(ChatRoundSvg)
-  export const CheckmarkIc = generateSimpleSvgIcon(CheckmarkSvg)
-  export const CheckmarkBoldIc = generateSimpleSvgIcon(CheckmarkBoldSvg)
-  export const CheckmarkCircleToastifyIc = generateSimpleSvgIcon(CheckmarkCircleToastifySvg)
-  export const ClearTrashIc = generateSimpleSvgIcon(ClearTrashSvg)
-  export const ClipIc = generateSimpleSvgIcon(ClipSvg)
-  export const CopyIc = generateSimpleSvgIcon(CopySvg)
-  export const CrossIc = generateSimpleSvgIcon(CrossSvg)
-  export const CrossBoldIc = generateSimpleSvgIcon(CrossBoldSvg)
-  export const CrossInCircleIc = generateSimpleSvgIcon(CrossInCircleSvg)
+  export const CalendarIc = generateSvgIcon(CalendarSvg)
+  export const Calendar2Ic = generateSvgIcon(Calendar2Svg)
+  export const ChatRoundIc = generateSvgIcon(ChatRoundSvg)
+  export const CheckmarkIc = generateSvgIcon(CheckmarkSvg)
+  export const CheckmarkBoldIc = generateSvgIcon(CheckmarkBoldSvg)
+  export const CheckmarkCircleToastifyIc = generateSvgIcon(CheckmarkCircleToastifySvg)
+  export const CheckmarkDoubleIc = generateSvgIcon(CheckmarkDoubleSvg)
+  export const ClearTrashIc = generateSvgIcon(ClearTrashSvg)
+  export const ClipIc = generateSvgIcon(ClipSvg)
+  export const CopyIc = generateSvgIcon(CopySvg)
+  export const CrossIc = generateSvgIcon(CrossSvg)
+  export const CrossBoldIc = generateSvgIcon(CrossBoldSvg)
+  export const CrossInCircleIc = generateSvgIcon(CrossInCircleSvg)
   
   
-  export const DangerRoundToastifyIc = generateSimpleSvgIcon(DangerRoundToastifySvg)
-  export const DayIc = generateSimpleSvgIcon(DaySvg)
-  export const DayNightIc = generateSimpleSvgIcon(DayNightSvg)
-  export const DocumentErrorIc = generateSimpleSvgIcon(DocumentErrorSvg)
-  export const CheckmarkDoubleIc = generateSimpleSvgIcon(CheckmarkDoubleSvg)
-  export const DownloadIc = generateSimpleSvgIcon(DownloadSvg)
+  export const DangerRoundToastifyIc = generateSvgIcon(DangerRoundToastifySvg)
+  export const DayIc = generateSvgIcon(DaySvg)
+  export const DayNightIc = generateSvgIcon(DayNightSvg)
+  export const DocumentErrorIc = generateSvgIcon(DocumentErrorSvg)
+  export const DownloadIc = generateSvgIcon(DownloadSvg)
   
   
-  export const EyeIc = generateSimpleSvgIcon(EyeSvg)
-  export const EyeCrossedOutIc = generateSimpleSvgIcon(EyeCrossedOutSvg)
-  export const EyeWideIc = generateSimpleSvgIcon(EyeWideSvg)
+  export const EyeIc = generateSvgIcon(EyeSvg)
+  export const EmojiLaughIc = generateSvgIcon(EmojiLaughSvg)
+  export const EyeCrossedOutIc = generateSvgIcon(EyeCrossedOutSvg)
+  export const EyeWideIc = generateSvgIcon(EyeWideSvg)
   
   
-  export const FloppyDisk1Ic = generateSimpleSvgIcon(FloppyDisk1Svg)
-  export const FourDotsIc = generateSimpleSvgIcon(FourDotsSvg)
-  export const FullscreenIc = generateSimpleSvgIcon(FullscreenSvg)
-  export const FunnelFilterListIc = generateSimpleSvgIcon(FunnelFilterListSvg)
+  export const FloppyDisk1Ic = generateSvgIcon(FloppyDisk1Svg)
+  export const FourDotsIc = generateSvgIcon(FourDotsSvg)
+  export const FullscreenIc = generateSvgIcon(FullscreenSvg)
+  export const FunnelFilterListIc = generateSvgIcon(FunnelFilterListSvg)
   
   
-  export const GearIc = generateSimpleSvgIcon(GearSvg)
-  export const GearOutlinedIc = generateSimpleSvgIcon(GearOutlinedSvg)
+  export const GearIc = generateSvgIcon(GearSvg)
+  export const GearOutlinedIc = generateSvgIcon(GearOutlinedSvg)
   
   
-  export const InfoToastifyIc = generateSimpleSvgIcon(InfoToastifySvg)
+  export const InfoToastifyIc = generateSvgIcon(InfoToastifySvg)
   
   
-  export const LocationIc = generateSimpleSvgIcon(LocationSvg)
-  export const LockIc = generateSimpleSvgIcon(LockSvg)
+  export const LocationIc = generateSvgIcon(LocationSvg)
+  export const LockIc = generateSvgIcon(LockSvg)
   
   
-  export const MapLocationIc = generateSimpleSvgIcon(MapLocationSvg)
-  export const MoonIc = generateSimpleSvgIcon(MoonSvg)
+  export const MapLocationIc = generateSvgIcon(MapLocationSvg)
+  export const MoonIc = generateSvgIcon(MoonSvg)
   
   
-  export const NightIc = generateSimpleSvgIcon(NightSvg)
+  export const NightIc = generateSvgIcon(NightSvg)
   
   
-  export const PencilWrite2Ic = generateSimpleSvgIcon(PencilWrite2Svg)
-  export const PictureIc = generateSimpleSvgIcon(PictureSvg)
-  export const PinIc = generateSimpleSvgIcon(PinSvg)
-  export const Pin2Ic = generateSimpleSvgIcon(Pin2Svg)
-  export const PlanetFrameIc = generateSimpleSvgIcon(PlanetFrameSvg)
-  export const PlusIc = generateSimpleSvgIcon(PlusSvg)
-  export const ProfileIc = generateSimpleSvgIcon(ProfileSvg)
+  export const PencilWrite2Ic = generateSvgIcon(PencilWrite2Svg)
+  export const PictureIc = generateSvgIcon(PictureSvg)
+  export const PinIc = generateSvgIcon(PinSvg)
+  export const Pin2Ic = generateSvgIcon(Pin2Svg)
+  export const PlanetFrameIc = generateSvgIcon(PlanetFrameSvg)
+  export const PlusIc = generateSvgIcon(PlusSvg)
+  export const ProfileIc = generateSvgIcon(ProfileSvg)
   
   
-  export const RadioActiveIc = generateSimpleSvgIcon(RadioActiveSvg)
-  export const RadioInactiveIc = generateSimpleSvgIcon(RadioInactiveSvg)
-  export const RestrictIc = generateSimpleSvgIcon(RestrictSvg)
-  export const RingingBellIc = generateSimpleSvgIcon(RingingBellSvg)
+  export const RadioActiveIc = generateSvgIcon(RadioActiveSvg)
+  export const RadioInactiveIc = generateSvgIcon(RadioInactiveSvg)
+  export const RestrictIc = generateSvgIcon(RestrictSvg)
+  export const RingingBellIc = generateSvgIcon(RingingBellSvg)
   
   
-  export const SearchIc = generateSimpleSvgIcon(SearchSvg)
-  export const SoundOffIc = generateSimpleSvgIcon(SoundOffSvg)
-  export const SoundOnIc = generateSimpleSvgIcon(SoundOnSvg)
-  
+  export const SearchIc = generateSvgIcon(SearchSvg)
+  export const SoundOffIc = generateSvgIcon(SoundOffSvg)
+  export const SoundOnIc = generateSvgIcon(SoundOnSvg)
   export const Spinner8LinesIc = React.memo(
     (() => {
-      const rotation = keyframes`
-        100% { rotate: 1turn }
-      `
-      const Spinner8Lines2 = styled(Spinner8LinesSvg)`
-        animation: ${rotation} 3s linear infinite;
-      `
-      return (props: SimpleSvgIconProps) => (
-        <BaseSimpleSvgIcon {...props} SvgComponent={Spinner8Lines2}/>
+      const rotation = keyframes({ to: { rotate: '1turn' } })
+      const Spinner8Lines2 = styled(Spinner8LinesSvg)({
+        animation: `${rotation} 1600ms linear infinite`,
+      })
+      return (props: SvgIconProps) => (
+        <BaseSvgIcon {...props} SvgComponent={Spinner8Lines2}/>
       )
     })()
   )
-  
   export const SpinnerCircleQuarterIc = React.memo(
     (() => {
-      const rotation = keyframes`
-        100% { rotate: 1turn }
-      `
-      const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterSvg)`
-        animation: ${rotation} 650ms linear infinite;
-      `
-      return (props: SimpleSvgIconProps) => (
-        <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2}/>
+      const rotation = keyframes({ to: { rotate: '1turn' } })
+      const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterSvg)({
+        animation: `${rotation} 650ms linear infinite`,
+      })
+      return (props: SvgIconProps) => (
+        <BaseSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2}/>
       )
     })()
   )
   export const SpinnerCircleQuarterBoldIc = React.memo(
     (() => {
-      const rotation = keyframes`
-        100% { rotate: 1turn }
-      `
-      const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterBoldSvg)`
-        animation: ${rotation} 650ms linear infinite;
-      `
-      return (props: SimpleSvgIconProps) => (
-        <BaseSimpleSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2}/>
+      const rotation = keyframes({ to: { rotate: '1turn' } })
+      const SpinnerCircleQuarter2 = styled(SpinnerCircleQuarterBoldSvg)({
+        animation: `${rotation} 650ms linear infinite`,
+      })
+      return (props: SvgIconProps) => (
+        <BaseSvgIcon {...props} SvgComponent={SpinnerCircleQuarter2}/>
       )
     })()
   )
+  export const SyncErrorIc = generateSvgIcon(SyncErrorSvg)
   
-  export const SyncErrorIc = generateSimpleSvgIcon(SyncErrorSvg)
+  export const Unpin2Ic = generateSvgIcon(Unpin2Svg)
   
-  export const Unpin2Ic = generateSimpleSvgIcon(Unpin2Svg)
+  export const VolumeIc = generateSvgIcon(VolumeSvg)
+  export const VolumeMuteIc = generateSvgIcon(VolumeMuteSvg)
   
-  export const VolumeIc = generateSimpleSvgIcon(VolumeSvg)
-  export const VolumeMuteIc = generateSimpleSvgIcon(VolumeMuteSvg)
-  
-  export const WarnCircleOutlinedIc = generateSimpleSvgIcon(WarnCircleOutlinedSvg)
-  export const WarnTriangleToastifyIc = generateSimpleSvgIcon(WarnTriangleToastifySvg)
-  export const WarnTriangleOutlinedIc = generateSimpleSvgIcon(WarnTriangleOutlinedSvg)
+  export const WarnCircleOutlinedIc = generateSvgIcon(WarnCircleOutlinedSvg)
+  export const WarnTriangleToastifyIc = generateSvgIcon(WarnTriangleToastifySvg)
+  export const WarnTriangleOutlinedIc = generateSvgIcon(WarnTriangleOutlinedSvg)
   
   
   
   
   // Special icons
-  export const BlacklistIc = generateSimpleSvgIcon(BlacklistSvg)
-  export const BowArrowIc = generateSimpleSvgIcon(BowArrowSvg)
+  export const BlacklistIc = generateSvgIcon(BlacklistSvg)
+  export const BowArrowIc = generateSvgIcon(BowArrowSvg)
   
-  export const CardsHeartIc = generateSimpleSvgIcon(CardsHeartSvg)
-  export const CoffeeCupIc = generateSimpleSvgIcon(CoffeeCupSvg)
+  export const CardsHeartIc = generateSvgIcon(CardsHeartSvg)
+  export const CoffeeCupIc = generateSvgIcon(CoffeeCupSvg)
   
-  export const DumbbellIc = generateSimpleSvgIcon(DumbbellSvg)
+  export const DumbbellIc = generateSvgIcon(DumbbellSvg)
   
-  export const EnvelopeIc = generateSimpleSvgIcon(EnvelopeSvg)
+  export const EnvelopeIc = generateSvgIcon(EnvelopeSvg)
   
-  export const Film2Ic = generateSimpleSvgIcon(Film2Svg)
-  export const FountainIc = generateSimpleSvgIcon(FountainSvg)
+  export const Film2Ic = generateSvgIcon(Film2Svg)
+  export const FountainIc = generateSvgIcon(FountainSvg)
   
-  export const GenderIc = generateSimpleSvgIcon(GenderSvg)
-  export const GiftBoxIc = generateSimpleSvgIcon(GiftBoxSvg)
-  export const GlassAndDishIc = generateSimpleSvgIcon(GlassAndDishSvg)
+  export const GenderIc = generateSvgIcon(GenderSvg)
+  export const GiftBoxIc = generateSvgIcon(GiftBoxSvg)
+  export const GlassAndDishIc = generateSvgIcon(GlassAndDishSvg)
   
-  export const HandsetIc = generateSimpleSvgIcon(HandsetSvg)
-  export const HeartIc = generateSimpleSvgIcon(HeartSvg)
-  export const HeartFilledIc = generateSimpleSvgIcon(HeartFilledSvg)
-  export const HeartLockIc = generateSimpleSvgIcon(HeartLockSvg)
-  export const HeartsDoubleIc = generateSimpleSvgIcon(HeartsDoubleSvg)
-  export const HelpIc = generateSimpleSvgIcon(HelpSvg)
-  export const HomeIc = generateSimpleSvgIcon(HomeSvg)
+  export const HandsetIc = generateSvgIcon(HandsetSvg)
+  export const HeartIc = generateSvgIcon(HeartSvg)
+  export const HeartFilledIc = generateSvgIcon(HeartFilledSvg)
+  export const HeartLockIc = generateSvgIcon(HeartLockSvg)
+  export const HeartsDoubleIc = generateSvgIcon(HeartsDoubleSvg)
+  export const HelpIc = generateSvgIcon(HelpSvg)
+  export const HomeIc = generateSvgIcon(HomeSvg)
   
-  export const MasksTheatreIc = generateSimpleSvgIcon(MasksTheatreSvg)
+  export const MasksTheatreIc = generateSvgIcon(MasksTheatreSvg)
   
-  export const NameCardIc = generateSimpleSvgIcon(NameCardSvg)
+  export const NameCardIc = generateSvgIcon(NameCardSvg)
   
-  export const PictureArtIc = generateSimpleSvgIcon(PictureArtSvg)
-  export const PresentationScreenIc = generateSimpleSvgIcon(PresentationScreenSvg)
-  export const PriceTagIc = generateSimpleSvgIcon(PriceTagSvg)
-  export const ProfileCardIc = generateSimpleSvgIcon(ProfileCardSvg)
+  export const PictureArtIc = generateSvgIcon(PictureArtSvg)
+  export const PresentationScreenIc = generateSvgIcon(PresentationScreenSvg)
+  export const PriceTagIc = generateSvgIcon(PriceTagSvg)
+  export const ProfileCardIc = generateSvgIcon(ProfileCardSvg)
   
-  export const RulerCornerIc = generateSimpleSvgIcon(RulerCornerSvg)
+  export const RulerCornerIc = generateSvgIcon(RulerCornerSvg)
   
-  export const SoupIc = generateSimpleSvgIcon(SoupSvg)
+  export const SoupIc = generateSvgIcon(SoupSvg)
   
-  export const TelegramIc = generateSimpleSvgIcon(TelegramSvg)
+  export const TelegramIc = generateSvgIcon(TelegramSvg)
   
-  export const VaseMuseumIc = generateSimpleSvgIcon(VaseMuseumSvg)
+  export const VaseMuseumIc = generateSvgIcon(VaseMuseumSvg)
   
-  export const WhatsappIc = generateSimpleSvgIcon(WhatsappSvg)
+  export const WhatsappIc = generateSvgIcon(WhatsappSvg)
   
   
   
