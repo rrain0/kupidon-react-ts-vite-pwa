@@ -1,6 +1,6 @@
 
 
-:where(*,::before,::after) {
+*,::before,::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -32,8 +32,8 @@ body { }
 }
 
 
-/* :where() decreases specifity so you can override style further locally */
-:where(#root *):where(*,::before,::after) {
+/* :where() nullify specifity so you can override style further locally */
+:where(#root) *,::before,::after {
   display: flex;
 }
 

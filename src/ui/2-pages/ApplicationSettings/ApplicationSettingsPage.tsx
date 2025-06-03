@@ -18,8 +18,6 @@ import ClearSiteDialog, {
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import ThemeOptions from 'src/ui/components/settings-options/ThemeOptions.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
