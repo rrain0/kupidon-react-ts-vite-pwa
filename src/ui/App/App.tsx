@@ -2,11 +2,7 @@ import { css, Global, ThemeProvider } from '@emotion/react'
 import { useAppTheme } from '@util/app/useAppTheme.ts'
 import { useSearchParamsUrlListener } from '@util/url/useSearchParamsUrlListener.ts'
 import React from 'react'
-import {
-  testWordsTreeGenerator
-} from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
-import { WidgetStyle6NewTest } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTestNew.ts'
-import { _wst7TestTransform } from 'src/mini-libs/widget-style-7/WidgetTransform.ts'
+import { widget7Test } from 'src/mini-libs/widget-style-7/WidgetTest.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
 import UseViewportContentSize from 'src/ui/App/UseViewportContentSize.tsx'
 import CheckBrowserMinimumVersion
@@ -21,6 +17,10 @@ import { useLangSetup } from 'src/util/lang/useLangSetup.ts'
 import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
+import {
+  testWordsTreeGenerator
+} from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
+import { WidgetStyle6NewTest } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTestNew.ts'
 import { WidgetStyle6Test } from 'src/mini-libs/widget-style-6/WidgetStyleTransformTest.ts'
 
 
@@ -30,7 +30,7 @@ import { WidgetStyle6Test } from 'src/mini-libs/widget-style-6/WidgetStyleTransf
 //WidgetStyle6Test.testWidget()
 //testWordsTreeGenerator()
 //WidgetStyle6NewTest.testTransformSimple()
-_wst7TestTransform()
+widget7Test()
 
 
 

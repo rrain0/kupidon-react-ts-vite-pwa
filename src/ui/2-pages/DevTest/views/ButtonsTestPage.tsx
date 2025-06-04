@@ -73,6 +73,7 @@ const ButtonsTestPage = React.memo(() => {
     </>
   )
 })
+ButtonsTestPage.displayName = 'ButtonsTestPage'
 export default ButtonsTestPage
 
 

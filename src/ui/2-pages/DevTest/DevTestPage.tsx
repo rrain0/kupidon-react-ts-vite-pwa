@@ -39,7 +39,7 @@ const DevTestPage = React.memo(() => {
   return (
     <>
       
-      <PageLayout col>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
         <PageContentLayout col>
           
           

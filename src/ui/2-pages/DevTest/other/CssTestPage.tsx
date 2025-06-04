@@ -65,6 +65,19 @@ const CssTestPage = React.memo(() => {
             }}
           />
           
+          <button
+            css={{
+              width: 100, height: 100,
+              '&': [
+                { ':hover': { backgroundColor: 'black' } },
+                [
+                  { ':active': { backgroundColor: 'black' } },
+                  { ':focus-visible': { backgroundColor: 'black' } },
+                ],
+              ],
+            }}
+          />
+          
           
           
           <Gap h={30}/>

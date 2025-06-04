@@ -1,4 +1,11 @@
 import { TypeU } from '@util/common/TypeU.ts'
+import {
+  WidgetElemPropReplacer,
+  WidgetElemPropReplacers,
+  WidgetSelectorToElemPropReplacers,
+  WidgetSelectorToElemReplacers,
+  WidgetSelectorToElemStateReplacers, WidgetStyleReplacer,
+} from 'src/mini-libs/widget-style-7/WidgetConfig.ts'
 import isfunction = TypeU.isfunction
 import isArray = TypeU.isArray
 import isobject = TypeU.isobject
@@ -6,6 +13,7 @@ import isundef = TypeU.isundef
 import isnull = TypeU.isnull
 import isbool = TypeU.isbool
 import isnumstr = TypeU.isnumstr
+import { BuiltWidget, WidgetBuiltElemsRecord, WidgetElem } from './WidgetBuildedConfig'
 
 
 
@@ -95,37 +103,41 @@ export const _wst7TestMatch = () => {
 
 
 
-const customElemReplacers = {
-  button: <Props>(style: GetOrWidgetStyle<Props>): GetOrWidgetStyle<Props> => ({
-    '&.rruiButton': style,
-  }),
-  border: <Props>(style: GetOrWidgetStyle<Props>): GetOrWidgetStyle<Props> => ({
-    '&.rruiButton > .rruiBorder': style,
-  }),
-}
-const elemCustomStateReplacers = {
-  hoverableHover: <Props>(style: GetOrWidgetStyle<Props>): GetOrWidgetStyle<Props> => ({
-    '@media (hover: hover) and (pointer: fine)': {
-      ':hover': style,
-    },
-  }),
-}
-const customPropReplacers = {
-  sz: (style: PrimitiveStyleValue): WidgetStyle => ({
-    width: style,
-    height: style,
-  }),
+const addThisToSelector = (selector: string): string => {
+  if (selector[0] === '.' || selector[0] === '#') return '&' + selector
+  return selector
 }
 
-const customElemSelectorToReplacer = {
-  '$button': customElemReplacers.button,
-  '$border': customElemReplacers.border,
+
+
+
+// Element selector: '.elemClass'
+const getElemSelector = (elemClass: string): string => elemClass && `.${elemClass}`
+
+const getWidgetElemSelector = (elem: WidgetElem): string => {
+  let sel = getElemSelector(elem.className)
+  if (elem.upElem) {
+    sel = getWidgetElemSelector(elem.upElem) + (elem.upSelector ?? '') + sel
+  }
+  return sel
 }
-const customElemStateSelectorToReplacer = {
-  ':$hover': elemCustomStateReplacers.hoverableHover,
+const getWidgetElemSelectorUnderRoot = (elem: WidgetElem): string => {
+  let sel = getElemSelector(elem.className)
+  if (elem.upElem) {
+    sel = getWidgetElemSelectorUnderRoot(elem.upElem) + (elem.upSelector ?? '') + sel
+  }
+  return sel
 }
-const customPropToReplacer = {
-  sz: customPropReplacers.sz,
+const getRootAndElemSelector = (elem: WidgetElem): [root: string, elemSel: string] => {
+  const thisSel = getElemSelector(elem.className)
+  let root = ''
+  let sel = ''
+  if (elem.upElem) {
+    [root, sel] = getRootAndElemSelector(elem.upElem)
+    sel += (elem.upSelector ?? '') + thisSel
+  }
+  else root = thisSel
+  return [root, sel]
 }
 
 
@@ -134,15 +146,19 @@ const customPropToReplacer = {
 export function transform<Props>(
   style: GetOrWidgetStyle<Props>,
   props: NoInfer<Props>,
+  builtWidget: BuiltWidget,
 ): WidgetStyle {
-  if (isfunction(style)) {
-    return transform(style(props), props)
+  if (isundef(style)) return style
+  else if (isfunction(style)) {
+    return transform(style(props), props, builtWidget)
   }
   else if (isArray(style)) {
-    return style.map(s => transform(s, props))
+    return style.map(s => transform(s, props, builtWidget))
   }
   else if (isobject(style)) {
-    const outStyle: WidgetStyle = { }
+    let currOutObj: WidgetStyle & object = { }
+    const outArray: WidgetStyle[] = [currOutObj]
+    
     for (const [prop, subStyle] of Object.entries(style)) {
       
       let propStart = prop
@@ -156,15 +172,38 @@ export function transform<Props>(
           const propMatch = m[0]
           const g = m.groups as CustomSelectorPatternGroups
           let propRest = prop.substring(i + propMatch.length)
-          let t = transform
+          let tf = transform
           const replacer = (() => {
             if (g.wState) return undefined
-            else if (g.wElem) return customElemSelectorToReplacer[propMatch]
-            else if (g.wElemState) return customElemStateSelectorToReplacer[propMatch]
+            else if (g.wElem) {
+              const builtElem = builtWidget.elems[propMatch]
+              if (builtElem) {
+                let elemSel = getWidgetElemSelector(builtElem)
+                if (elemSel) {
+                  elemSel = addThisToSelector(elemSel)
+                  return subStyle => ({ [elemSel]: subStyle })
+                }
+              }
+            }
+            else if (g.wElemState) {
+              const builtElem = builtWidget.elems['$button']
+              if (builtElem) {
+                const elemStateReplacer = (
+                  builtElem.states[propMatch] as WidgetStyleReplacer<Props> | undefined
+                )
+                return elemStateReplacer
+              }
+            }
             else if (g.prop) {
               if (isPrimitiveStyleValue(subStyle)) {
-                t = (v => v) as typeof transform
-                return customPropToReplacer[propMatch]
+                tf = (v => v) as typeof transform
+                const builtElem = builtWidget.elems['$button']
+                if (builtElem) {
+                  const elemPropReplacer = (
+                    builtElem.props[propMatch] as WidgetElemPropReplacer | undefined
+                  )
+                  return elemPropReplacer as WidgetStyleReplacer<Props> | undefined
+                }
               }
             }
           })()
@@ -172,22 +211,22 @@ export function transform<Props>(
           
           if (replacer) {
             if (propRest) {
-              if (propRest[0] === '.' || propRest[0] === '#') propRest = '&' + propRest
-              return t(replacer({ [propRest]: subStyle }), props)
+              propRest = addThisToSelector(propRest)
+              return tf(replacer({ [propRest]: subStyle }), props, builtWidget)
             }
-            return t(replacer(subStyle), props)
+            return tf(replacer(subStyle), props, builtWidget)
           }
           else {
             propStart += propMatch
             if (propRest) {
-              if (propRest[0] === '.' || propRest[0] === '#') propRest = '&' + propRest
-              return t({ [propRest]: subStyle }, props)
+              propRest = addThisToSelector(propRest)
+              return tf({ [propRest]: subStyle }, props, builtWidget)
             }
-            return t(subStyle, props)
+            return tf(subStyle, props, builtWidget)
           }
         }
         else {
-          return transform(subStyle, props)
+          return transform(subStyle, props, builtWidget)
         }
       })()
       
@@ -197,34 +236,26 @@ export function transform<Props>(
       //console.log('replacer', replacer)
       
       if (propStart) {
-        outStyle[propStart] = styleReplacer
+        currOutObj[propStart] = styleReplacer
       }
       else {
-        Object.assign(outStyle, styleReplacer)
+        outArray.push(styleReplacer)
+        currOutObj = { }
+        outArray.push(currOutObj)
       }
     }
-    return outStyle
+    
+    if (outArray.length === 1) return outArray[0]
+    return outArray
   }
   else {
-    throw new Error(`Style container must be function or array or object, but is: ${style}`)
+    throw new Error(
+      `Style container must be function or array or object or undefined, but is: ${style}`
+    )
   }
 }
 
 
-
-
-export const _wst7TestTransform = () => {
-  const testTransform = transform(
-    {
-      '.c$button:hover:$hover.cc>.cc $border+:!hover{backgroundColor': {
-        sz: 143,
-        aa: 'bb',
-      },
-    },
-    undefined
-  )
-  console.log('_wst7TestTransform', testTransform)
-}
 
 
 

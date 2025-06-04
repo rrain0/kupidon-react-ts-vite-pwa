@@ -27,28 +27,24 @@ html {
 
 body { }
 
-#root {
-  display: contents;
-}
-
-
-/* :where() nullify specifity so you can override style further locally */
-:where(#root) *,::before,::after {
-  display: flex;
-}
-
-
-/*:where(#app-frame) :where(*) {
-  background: none;
-}*/
-
-
-
 a {
   display: contents;
   text-decoration: none;
   color: unset;
 }
+
+#root {
+  display: contents;
+}
+
+
+/* :where() nullifies specifity so you can override style further locally */
+/* :where(*,::before,::after) doesn't work */
+:where(#root) *,::before,::after {
+  display: flex;
+}
+
+
 
 
 
