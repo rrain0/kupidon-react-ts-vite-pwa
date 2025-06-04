@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import { css } from '@emotion/react'
@@ -61,8 +62,8 @@ const ResizeObserverTestPage = () => {
   
   
   return (
-    <Pages.Page>
-      <Pages.Content>
+    <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+      <PageContentLayout col>
         
         <div>Resize Observer Test Page</div>
         
@@ -152,10 +153,11 @@ const ResizeObserverTestPage = () => {
           ))}
         </div>
         
-      </Pages.Content>
-    </Pages.Page>
+      </PageContentLayout>
+    </PageLayout>
   )
 }
+ResizeObserverTestPage.displayName = 'ResizeObserverTestPage'
 export default ResizeObserverTestPage
 
 

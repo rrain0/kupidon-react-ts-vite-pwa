@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { create } from 'zustand'
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'ui/components/Pages/PageLayout'
 
 
 
@@ -44,8 +45,9 @@ const ViewComponent = React.memo(() => {
 const StateTestPage = React.memo(() => {
   
   return (
-    <Pages.Page>
-      <Pages.Content> {/* not renders */}
+    <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+      <PageContentLayout col>
+        {/* not renders */}
         
         <div>State Test</div>
         
@@ -55,10 +57,11 @@ const StateTestPage = React.memo(() => {
         {/* useEffect order test */}
         <UseEffectComponent/>
         
-      </Pages.Content>
-    </Pages.Page>
+      </PageContentLayout>
+    </PageLayout>
   )
 })
+StateTestPage.displayName = 'StateTestPage'
 export default StateTestPage
 
 

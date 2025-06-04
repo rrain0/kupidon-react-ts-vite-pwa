@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { css } from '@emotion/react'
 import { useState } from 'react'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 
 
 
@@ -106,8 +107,8 @@ const PointerTestPage = React.memo(() => {
   
   
   return (
-    <Pages.Page>
-      <Pages.Content>
+    <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+      <PageContentLayout col>
         
         <button
           css={css`
@@ -223,9 +224,10 @@ const PointerTestPage = React.memo(() => {
           ref={textDivRef}
         />
       
-      </Pages.Content>
-    </Pages.Page>
+      </PageContentLayout>
+    </PageLayout>
   )
 })
+PointerTestPage.displayName = 'PointerTestPage'
 export default PointerTestPage
 

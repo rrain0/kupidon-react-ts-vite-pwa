@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'ui/components/Pages/PageLayout'
 
 
 
@@ -12,8 +13,8 @@ const ShadowDOMTestPage = React.memo(() => {
   
   return (
     <>
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           <div>Shadow DOM Test</div>
           
@@ -88,13 +89,14 @@ const ShadowDOMTestPage = React.memo(() => {
           
           </div>
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       <BottomFloatingBar settingsButton/>
     </>
   )
 })
+ShadowDOMTestPage.displayName = 'ShadowDOMTestPage'
 export default ShadowDOMTestPage
 
 

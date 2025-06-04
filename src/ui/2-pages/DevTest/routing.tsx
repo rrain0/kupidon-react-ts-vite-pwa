@@ -12,7 +12,7 @@ const TestPage = React.lazy(() => import('src/ui/2-pages/DevTest/DevTestPage.tsx
 const ThemeTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/ThemeTestPage.tsx'))
 const IconsTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/IconsTestPage.tsx'))
 const ButtonsTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/ButtonsTestPage.tsx'))
-const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/other/ScrollbarTestPage.tsx'))
+const ScrollbarTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/ScrollbarTestPage.tsx'))
 const BottomSheetTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/BottomSheetTestPage.tsx'))
 const SelectItemTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/SelectItemTestPage.tsx'))
 const RippleTestPage = React.lazy(() => import('src/ui/2-pages/DevTest/views/RippleTestPage.tsx'))

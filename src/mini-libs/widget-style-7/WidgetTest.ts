@@ -19,6 +19,10 @@ export function widget7Test() {
 }
 
 
+function cssTokenMatchTest() {
+
+}
+
 
 function buttonTest() {
   
@@ -106,6 +110,10 @@ function buttonTest() {
       ':!locked': { elem: '$button', state: ':$locked' },
       ':!error': { elem: '$button', state: ':$selected' },
     },
+    /* anyElemProps: {
+      sz: customPropReplacers.sz,
+      color: customPropReplacers.colorAndVarColor,
+    }, */
   } satisfies WidgetConfig
   
   
@@ -116,10 +124,17 @@ function buttonTest() {
   
   
   const style = {
-    '.c$button:hover:$hover.cc>.cc $border+:!hover{backgroundColor': {
-      sz: 143,
-      aa: 'bb',
-    },
+    '.c4 .c5:!hover.c$button:hover:$hover.cc': [
+      {
+        '>.cc $border:$hover+.ccc{backgroundColor': {
+          sz: 143,
+          aa: 'bb',
+        },
+      },
+      {
+        sz: 166,
+      },
+    ],
   }
   const testTransform = transform(
     style,

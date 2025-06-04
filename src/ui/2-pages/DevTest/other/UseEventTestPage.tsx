@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react'
-import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-import { useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { useState } from 'react'
 import { useEvent } from '@util/react/useEvent.ts'
-import flexC = EmotionCommon.flexC
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'ui/components/Pages/PageLayout'
 
 
 
@@ -17,17 +13,18 @@ const UseEventTestPage = () => {
   
   
   return (
-    <Pages.Page>
-      <Pages.Content>
+    <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+      <PageContentLayout col>
         
         <UseEventTest1/>
         
         <UseEventTest2/>
       
-      </Pages.Content>
-    </Pages.Page>
+      </PageContentLayout>
+    </PageLayout>
   )
 }
+UseEventTestPage.displayName = 'UseEventTestPage'
 export default UseEventTestPage
 
 

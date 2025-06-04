@@ -48,7 +48,7 @@ export type WidgetElemPropReplacers = Record<string, WidgetElemPropReplacer>
 
 export type WidgetSelectorToElemReplacers = (
   Record<WidgetElemName, WidgetStyleReplacer<any>>
-  )
+)
 export type WidgetSelectorToElemStateReplacers = (
   Record<WidgetElemStateName, WidgetStyleReplacer<any>>
 )
@@ -93,5 +93,7 @@ export type WidgetElements = {
 export type WidgetConfig = {
   elems: WidgetElements,
   widgetStates?: undefined | WidgetConfigWidgetStates
+  anyElemStates?: undefined | WidgetSelectorToElemStateReplacers
+  anyElemProps?: undefined | WidgetSelectorToElemPropReplacers
 }
 

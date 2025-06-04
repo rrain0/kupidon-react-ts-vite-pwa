@@ -3,6 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useApiRequest } from 'src/api/useApiRequest'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
@@ -12,10 +13,10 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { AccountSettingsPageValidation } from 'src/ui/2-pages/AccountSettings/validation'
 import { ObjectU } from 'src/util/common/ObjectU'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
@@ -36,6 +37,7 @@ import validators = AccountSettingsPageValidation.validators
 import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText
 import RootRoute = AppRoutes.RootRoute
+import contents = EmotionCommon.contents
 
 
 
@@ -195,116 +197,112 @@ const AccountSettingsPage = React.memo(() => {
   
   return (
     <>
-      <Pages.PageGrad data-display-name='AccountSettingsPage'>
-        
-        
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm {...noFormSubmit}>
-            
-            
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{titleText.account}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
-            
-            
-            
-            
-            <ItemContainer>
-              <Hdrs.InputTitleBold>{titleText.id}</Hdrs.InputTitleBold>
-              <Input
-                css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
-                readOnly
-                value={user.id}
-              />
-            </ItemContainer>
-            
-            <ItemContainer>
-              <Hdrs.InputTitleBold>{titleText.email}</Hdrs.InputTitleBold>
-              <Input
-                css={InputStyle.outlinedRectOf({ size: 'small' })}
-                readOnly
-                value={user.email}
-              />
-            </ItemContainer>
-            
-            <ItemContainer>
-              <Hdrs.InputTitleBold>{titleText.emailVerified}</Hdrs.InputTitleBold>
-              <Input
-                css={InputStyle.outlinedRectOf({ size: 'small' })}
-                readOnly
-                value={user.emailVerified
-                  ? actionText.yes.toLowerCase()
-                  : actionText.no.toLowerCase()
-                }
-              />
-            </ItemContainer>
-            
-            {/* <ItemContainer>
-             <ItemLabel>{titleText.userCreated}</ItemLabel>
-             <Input
-             css={InputStyle.input(
-             { size: 'small', static: true }
-             )}
-             readOnly
-             value={new Date(user.created) + ''}
-             />
-             </ItemContainer>
-             
-             <ItemContainer>
-             <ItemLabel>{titleText.userUpdated}</ItemLabel>
-             <Input
-             css={InputStyle.input(
-             { size: 'small', static: true }
-             )}
-             readOnly
-             value={new Date(user.updated) + ''}
-             />
-             </ItemContainer> */}
-            
-            <ItemContainer>
-              <Hdrs.InputTitleBold>{titleText.userCreated}</Hdrs.InputTitleBold>
-              <DataField css={DataFieldStyle.statikSmall}>
-                {new Date(user.created) + ''}
-              </DataField>
-            </ItemContainer>
-            
-            <ItemContainer>
-              <Hdrs.InputTitleBold>{titleText.userUpdated}</Hdrs.InputTitleBold>
-              <DataField css={DataFieldStyle.statikSmall}>
-                {new Date(user.updated) + ''}
-              </DataField>
-            </ItemContainer>
-            
-            
-            
-            
-            <AppLink toFull={RootRoute.settings.pwdChange}>
-              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                {titleText.pwdChange}
+      <PageLayout col data-display-name='AccountSettingsPage'>
+        <PageContentLayout colSm>
+          <form css={contents} {...noFormSubmit}>
+            <Flex col g={30}>
+              
+              <Grid cols='38px 1fr 38px' stretch>
+                <Flex centerStart m={-13}><BackButton/></Flex>
+                <Flex center><Hdrs.Page>{titleText.account}</Hdrs.Page></Flex>
+                <Gap w={38}/>
+              </Grid>
+              
+              
+              
+              
+              <ItemContainer>
+                <Hdrs.InputTitleBold>{titleText.id}</Hdrs.InputTitleBold>
+                <Input
+                  css={InputStyle.outlinedRectOf({ size: 'small', textSize: 'smaller' })}
+                  readOnly
+                  value={user.id}
+                />
+              </ItemContainer>
+              
+              <ItemContainer>
+                <Hdrs.InputTitleBold>{titleText.email}</Hdrs.InputTitleBold>
+                <Input
+                  css={InputStyle.outlinedRectOf({ size: 'small' })}
+                  readOnly
+                  value={user.email}
+                />
+              </ItemContainer>
+              
+              <ItemContainer>
+                <Hdrs.InputTitleBold>{titleText.emailVerified}</Hdrs.InputTitleBold>
+                <Input
+                  css={InputStyle.outlinedRectOf({ size: 'small' })}
+                  readOnly
+                  value={user.emailVerified
+                    ? actionText.yes.toLowerCase()
+                    : actionText.no.toLowerCase()
+                  }
+                />
+              </ItemContainer>
+              
+              {/* <ItemContainer>
+               <ItemLabel>{titleText.userCreated}</ItemLabel>
+               <Input
+               css={InputStyle.input(
+               { size: 'small', static: true }
+               )}
+               readOnly
+               value={new Date(user.created) + ''}
+               />
+               </ItemContainer>
+               
+               <ItemContainer>
+               <ItemLabel>{titleText.userUpdated}</ItemLabel>
+               <Input
+               css={InputStyle.input(
+               { size: 'small', static: true }
+               )}
+               readOnly
+               value={new Date(user.updated) + ''}
+               />
+               </ItemContainer> */}
+              
+              <ItemContainer>
+                <Hdrs.InputTitleBold>{titleText.userCreated}</Hdrs.InputTitleBold>
+                <DataField css={DataFieldStyle.statikSmall}>
+                  {new Date(user.created) + ''}
+                </DataField>
+              </ItemContainer>
+              
+              <ItemContainer>
+                <Hdrs.InputTitleBold>{titleText.userUpdated}</Hdrs.InputTitleBold>
+                <DataField css={DataFieldStyle.statikSmall}>
+                  {new Date(user.updated) + ''}
+                </DataField>
+              </ItemContainer>
+              
+              
+              
+              
+              <AppLink toFull={RootRoute.settings.pwdChange}>
+                <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                  {titleText.pwdChange}
+                </Button>
+              </AppLink>
+              
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
+                onClick={logout}
+              >
+                {actionText.logOutFromAccount}
               </Button>
-            </AppLink>
-            
-            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
-              onClick={logout}
-            >
-              {actionText.logOutFromAccount}
-            </Button>
-          
-            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
-              onClick={undefined}
-              disabled
-            >
-              {actionText.deleteAccount}
-            </Button>
-          
-          </Pages.ContentColSmForm>
-        </Pages.AddSafeInsets>
-        
-        
-        <PageScrollbars/>
-      </Pages.PageGrad>
+              
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
+                onClick={undefined}
+                disabled
+              >
+                {actionText.deleteAccount}
+              </Button>
+              
+            </Flex>
+          </form>
+        </PageContentLayout>
+      </PageLayout>
       
       {/* <BottomFloatingBar settingsButton
         rightChildren={

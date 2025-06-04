@@ -47,7 +47,9 @@ export class WidgetElem<
 export type WidgetBuiltElemsRecord = Record<WidgetElemName, WidgetElem>
 export type BuiltWidget = {
   elems: WidgetBuiltElemsRecord
-  states: WidgetConfigWidgetStates
+  widgetStates: WidgetConfigWidgetStates
+  anyElemStates: WidgetSelectorToElemStateReplacers
+  anyElemProps: WidgetSelectorToElemPropReplacers
 }
 
 
@@ -63,7 +65,12 @@ export function buildWidget(widgetConfig: WidgetConfig): BuiltWidget {
     builtElems[name] = builtElem
     buildWidgetElemsFromNodes(conf.nodes, builtElem, builtElems)
   })
-  return { elems: builtElems, states: widgetConfig.widgetStates ?? { } }
+  return {
+    elems: builtElems,
+    widgetStates: widgetConfig.widgetStates ?? { },
+    anyElemStates: widgetConfig.anyElemStates ?? { },
+    anyElemProps: widgetConfig.anyElemProps ?? { },
+  }
 }
 export function buildWidgetElemsFromNodes(
   nodesConfig: WidgetElemConfigNodes,

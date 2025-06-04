@@ -3,9 +3,10 @@ import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useState } from 'react'
 import Slider from 'src/ui/1-widgets/Slider/Slider.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { RangeU } from '@util/common/RangeU.ts'
 import NumRange = RangeU.NumRange
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'ui/components/Pages/PageLayout'
 
 
 
@@ -17,8 +18,8 @@ const SliderTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           <div>Views: Slider</div>
           
@@ -52,8 +53,8 @@ const SliderTestPage = React.memo(() => {
           
           <div css={{ height: 24 }}/>
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
@@ -61,6 +62,7 @@ const SliderTestPage = React.memo(() => {
     </>
   )
 })
+SliderTestPage.displayName = 'SliderTestPage'
 export default SliderTestPage
 
 

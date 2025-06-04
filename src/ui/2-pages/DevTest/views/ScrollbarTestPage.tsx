@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { useContainerScrollState } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import { css } from '@emotion/react'
 import Scrollbar from 'src/ui/1-widgets/Scrollbar/Scrollbar.tsx'
@@ -16,8 +17,8 @@ import Pu = TypeU.Pu
 
 const ScrollbarTestPage = () => {
   return (
-    <Pages.Page>
-      <Pages.Content>
+    <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+      <PageContentLayout col>
         
         <div>Scrollbar Test Page</div>
         
@@ -25,10 +26,11 @@ const ScrollbarTestPage = () => {
         <ScrollbarTest showVertical={true}/>
         <ScrollbarTest showHorizontal={true}/>
         
-      </Pages.Content>
-    </Pages.Page>
+      </PageContentLayout>
+    </PageLayout>
   )
 }
+ScrollbarTestPage.displayName = 'ScrollbarTestPage'
 export default ScrollbarTestPage
 
 

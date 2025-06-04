@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem.tsx'
@@ -15,6 +14,9 @@ import flexC = EmotionCommon.flexC
 import col = EmotionCommon.col
 import absTlwh = EmotionCommon.absTlwh
 import colC = EmotionCommon.colC
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'ui/components/Pages/PageLayout'
+
 
 
 
@@ -86,8 +88,8 @@ const SelectItemTestPage = () => {
   
   return (
     <>
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           
           <div>Select Item</div>
@@ -307,15 +309,17 @@ const SelectItemTestPage = () => {
           </ColumnContent>
         
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
     </>
   )
 }
+SelectItemTestPage.displayName = 'SelectItemTestPage'
 export default SelectItemTestPage
+
 
 
 

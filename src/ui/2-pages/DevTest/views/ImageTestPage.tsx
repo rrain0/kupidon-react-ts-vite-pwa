@@ -7,9 +7,10 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import rowWrap = EmotionCommon.rowWrap
 import col = EmotionCommon.col
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'ui/components/Pages/PageLayout'
 
 
 
@@ -47,8 +48,8 @@ const ImageTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           <div>Views: Image</div>
           
@@ -177,8 +178,8 @@ const ImageTestPage = React.memo(() => {
           )}
           
           
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
@@ -186,7 +187,9 @@ const ImageTestPage = React.memo(() => {
     </>
   )
 })
+ImageTestPage.displayName = 'ImageTestPage'
 export default ImageTestPage
+
 
 
 const pictureS: AppWidgetStyle = t => [ImgSparkS6.S.img.img.auto.normal, {

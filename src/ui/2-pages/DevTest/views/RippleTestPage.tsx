@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import Ripple from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import UseRipple from 'src/ui/0-elements/Ripple/UseRipple.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 
 
 
@@ -13,8 +14,8 @@ const RippleTestPage = React.memo(() => {
   return (
     <>
       
-      <Pages.Page>
-        <Pages.Content>
+      <PageLayout col css={{ '*': { userSelect: 'text' } }}>
+        <PageContentLayout col>
           
           
           <div>Ripple</div>
@@ -37,8 +38,8 @@ const RippleTestPage = React.memo(() => {
             )}
           </UseRipple>
         
-        </Pages.Content>
-      </Pages.Page>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
@@ -46,6 +47,7 @@ const RippleTestPage = React.memo(() => {
     </>
   )
 })
+RippleTestPage.displayName = 'RippleTestPage'
 export default RippleTestPage
 
 
