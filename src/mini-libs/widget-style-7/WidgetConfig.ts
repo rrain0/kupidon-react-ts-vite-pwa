@@ -61,14 +61,12 @@ export type WidgetConfigWidgetStates = Record<WidgetStateName, WidgetState>
 
 
 // TODO S7 - сделать рекурсивный тип, который достанет все имена элементов, их состояний и пропов
-/*
-export type GetWidgetConfigElems<
+/* export type GetWidgetConfigElems<
   ConfElemsTree extends WidgetElemConfig['nodes'],
-  Elems extends { } = { },
+  Elems extends { [elem: string]: { states: string[], props: string[] } } = { },
 > = (
   ConfElemsTree extends
-)
-*/
+) */
 
 
 export type WidgetElemConfig = {

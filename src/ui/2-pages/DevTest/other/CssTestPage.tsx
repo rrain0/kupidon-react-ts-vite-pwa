@@ -218,6 +218,24 @@ const CssTestPage = React.memo(() => {
               css={[
                 { backgroundColor: '#ff000077' },
                 {
+                  ':where(': {
+                    ':hover)': {
+                      backgroundColor: '#0000ff77',
+                    },
+                  },
+                },
+              ]}
+            >
+              {'\':where(\': { \':hover)\'  { ... }'}
+            </Flex>
+            
+            
+            <Flex sz={200}
+              data-selected
+              className='clss clss2'
+              css={[
+                { backgroundColor: '#ff000077' },
+                {
                   position: 'relative',
                   ':hover': {
                     '::after': {

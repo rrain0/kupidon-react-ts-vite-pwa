@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import {
   WidgetElemName,
-  WidgetElemPropReplacer,
+  WidgetElemPropReplacer, WidgetState,
   WidgetStyleReplacer,
 } from 'src/mini-libs/widget-style-7/WidgetConfig.ts'
 import isfunction = TypeU.isfunction
@@ -142,11 +142,16 @@ const getRootAndElemSelector = (elem: WidgetElem): [root: string, elemSel: strin
 
 
 
+// TODO убирать контекст, если пошёл следующий элемент через селекторы > + ~...
+// TODO :where($button,.clss) \???
+// TODO :where(:$hover) ???
+// TODO widgetElem заменять на строку, а не объект
 export function transform<Props>(
   style: GetOrWidgetStyle<Props>,
   props: NoInfer<Props>,
   widget: BuiltWidget,
   context: Pu<{
+    widgetState: WidgetState
     elem: string
   }> = { },
 ): WidgetStyle {
@@ -172,37 +177,36 @@ export function transform<Props>(
         if (m) {
           const i = m.index!
           propStart = prop.substring(0, i)
-          const matchedSel = m[0]
-          const gs = m.groups as CustomSelectorPatternGroups
-          const propRest = prop.substring(i + matchedSel.length)
+          const propMatch = m[0]
+          const groups = m.groups as CustomSelectorPatternGroups
+          const propRest = prop.substring(i + propMatch.length)
           let nextTransform = transform as typeof transform | undefined
           const replacer = (() => {
-            if (gs.wState) {
+            if (groups.wState) {
+              const wState = widget.widgetStates[propMatch] as WidgetState | undefined
+              context = { ...context, widgetState: wState }
               return undefined
             }
-            else if (gs.wElem) {
-              const elem = widget.elems[matchedSel]
-              if (elem) {
-                let elemSel = getWidgetElemSelector(elem)
-                if (elemSel) {
-                  elemSel = addThisToSelector(elemSel)
-                  context.elem = matchedSel
-                  return subStyle => ({ [elemSel]: subStyle })
-                }
+            else if (groups.wElem) {
+              const elem = widget.elems[propMatch] as WidgetElem | undefined
+              const elemSel = elem ? getWidgetElemSelector(elem) : undefined
+              if (elemSel) {
+                context.elem = propMatch
+                return subStyle => ({ [addThisToSelector(elemSel)]: subStyle })
               }
             }
-            else if (gs.wElemState) {
+            else if (groups.wElemState) {
               const contextElemName = context.elem
               const contextElem = (
                 contextElemName ? widget.elems[contextElemName] : undefined
               ) as WidgetElem | undefined
               const stateReplacer = (
-                contextElem?.states[matchedSel]
-                ?? widget.anyElemStates[matchedSel]
+                contextElem?.states[propMatch]
+                ?? widget.anyElemStates[propMatch]
               ) as WidgetStyleReplacer<Props> | undefined
               return stateReplacer
             }
-            else if (gs.prop) {
+            else if (groups.prop) {
               if (isPrimitiveStyleValue(subStyle)) {
                 nextTransform = undefined
                 const contextElemName = context.elem
@@ -210,8 +214,8 @@ export function transform<Props>(
                   contextElemName ? widget.elems[contextElemName] : undefined
                 ) as WidgetElem | undefined
                 const propReplacer = (
-                  contextElem?.props[matchedSel]
-                  ?? widget.anyElemProps[matchedSel]
+                  contextElem?.props[propMatch]
+                  ?? widget.anyElemProps[propMatch]
                 ) as WidgetElemPropReplacer | undefined
                 return propReplacer as WidgetStyleReplacer<Props> | undefined
               }
@@ -220,7 +224,7 @@ export function transform<Props>(
           
           if (propRest) subStyle = { [addThisToSelector(propRest)]: subStyle }
           if (replacer) subStyle = replacer(subStyle)
-          else propStart += matchedSel
+          else propStart += propMatch
           if (nextTransform) return nextTransform(subStyle, props, widget, { ...context })
           return subStyle as PrimitiveStyleValue
         }
