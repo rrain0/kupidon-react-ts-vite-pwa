@@ -67,7 +67,7 @@ const BottomFloatingBar = React.memo((props: BottomFloatingBarProps) => {
       >
         
         {isdef(children) && (
-          <Grid justifiedStretch alignEnd noPointer
+          <Grid relative justifiedStretch alignEnd noPointer
             h='var(--bottom-floating-bar-h)'
             {...{
               ...!noBarPadding && { p: StyleVals.floatingBarP },

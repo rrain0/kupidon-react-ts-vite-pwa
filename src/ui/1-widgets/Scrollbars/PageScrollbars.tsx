@@ -10,13 +10,13 @@ import UseScrollbars from 'src/ui/1-widgets/Scrollbars/UseScrollbars.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import hideWindowScrollbar = EmotionCommon.noWindowScrollbars
-import PartialUndef = TypeU.PartialUndef
+import Pu = TypeU.Pu
 
 
 
 
 
-export type PageScrollbarsProps = PartialUndef<{
+export type PageScrollbarsProps = Pu<{
   pageRef: React.RefObject<HTMLElement | null>
 }>
 
@@ -41,7 +41,10 @@ const PageScrollbars = React.memo((props: PageScrollbarsProps) => {
       {isBrowser && (
         <>
           <Global styles={hideWindowScrollbar}/>
-          <PageScrollbarsOverlayFrame ref={frameRef}>
+          <PageScrollbarsOverlayFrame
+            ref={frameRef}
+            data-display-name='PageScrollbars'
+          >
             <UseScrollbars
               containerIsWindow={true}
               contentRef={ref}
@@ -57,4 +60,5 @@ const PageScrollbars = React.memo((props: PageScrollbarsProps) => {
     </>
   )
 })
+PageScrollbars.displayName = 'PageScrollbars'
 export default PageScrollbars

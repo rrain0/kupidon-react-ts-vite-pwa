@@ -62,8 +62,7 @@ export namespace TextareaStyle {
     ${El.textarea} {
       width: 100%;
       min-height: 150px;
-      //height: fit-content;
-      //resize: vertical;
+      max-height: 300px;
       resize: none;
       overflow: hidden;
       padding: 8px 16px;
@@ -132,6 +131,24 @@ export namespace TextareaStyle {
     }
     ${El.border} {
       border-width: 1px;
+    }
+  `
+  
+  export const inputTrans = (t: AppTheme.Theme) => css`
+    ${normal(t)};
+    ${El.frame} {
+      border-radius: 0;
+      background: none;
+      height: fit-content;
+    }
+    ${El.textarea} {
+      width: 100%;
+      padding: 0;
+      min-height: 1em;
+      ${Txt.s18LhNorm};
+    }
+    ${El.border} {
+      border-width: 0;
     }
   `
   

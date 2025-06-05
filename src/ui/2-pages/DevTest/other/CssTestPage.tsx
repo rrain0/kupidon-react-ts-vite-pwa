@@ -218,15 +218,17 @@ const CssTestPage = React.memo(() => {
               css={[
                 { backgroundColor: '#ff000077' },
                 {
-                  ':where(': {
-                    ':hover)': {
-                      backgroundColor: '#0000ff77',
-                    },
+                  ':where(:hover)': {
+                    backgroundColor: '#0000ff77',
                   },
+                  // doesn't work
+                  /* ':where(': { ':hover)': {
+                    backgroundColor: '#00ff0077',
+                  } }, */
                 },
               ]}
             >
-              {'\':where(\': { \':hover)\'  { ... }'}
+              {':where ... :hover { ... } }'}
             </Flex>
             
             

@@ -47,6 +47,8 @@ export type FlexShortProps = Pu<{
   
   gap: number | string
   g: number | string
+  gRow: number | string
+  gCol: number | string
 }>
 
 
@@ -63,7 +65,7 @@ export const processFlexShortProps = <P extends object>(
     centerStart, center, centerEnd,
     end, endStart, endCenter, endEnd,
     stretchEnd,
-    gap, g,
+    gap, g, gRow, gCol,
     ...flexRest
   } = props
   
@@ -103,6 +105,8 @@ export const processFlexShortProps = <P extends object>(
     
     ...isdef(gap) && { gap: gap },
     ...isdef(g) && { gap: g },
+    ...isdef(gRow) && { rowGap: gRow },
+    ...isdef(gCol) && { columnGap: gCol },
   }
   
   return { flex, flexRest }

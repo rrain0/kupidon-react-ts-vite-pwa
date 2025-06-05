@@ -16,15 +16,13 @@ import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 
 
 
-export type ModalTextareaProps =
-  React.ComponentProps<typeof Textarea>
-  & Pu<{
-    title: string
-    isOpen: boolean
-    onClose: Callback
-    onClear: Callback
-    onCancel: Callback
-  }>
+export type ModalTextareaProps = React.ComponentProps<typeof Textarea> & Pu<{
+  title: string
+  isOpen: boolean
+  onClose: Callback
+  onClear: Callback
+  onCancel: Callback
+}>
 
 
 
@@ -47,7 +45,7 @@ const ModalTextarea = React.memo((props: ModalTextareaProps) => {
         
         <Hdrs.InputTitleBold>{title}</Hdrs.InputTitleBold>
         
-        <Textarea css={TextareaStyle.small}
+        <Textarea hFitText css={TextareaStyle.small}
           autoFocus
           {...restProps}
         />

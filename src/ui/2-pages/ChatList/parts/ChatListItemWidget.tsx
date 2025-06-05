@@ -104,19 +104,18 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
           <Flex row align noShrink>
             <Gap wMin={8} grow/>
             {[
-              sending &&
-              <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
+              sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
               sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
               read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
               error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
-              durationText && <Status key='duration'>{durationText}</Status>,
+              durationText && <StatusDivider key='duration'>{durationText}</StatusDivider>,
               mute && <VolumeMute key='mute'/>,
               isdef(pinned) && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,
             ]
               .filter(it => it)
               .flatMap((it, i, arr) => (
                 i < arr.length - 1
-                  ? [it, <Status key={`•${i}`}>{' • '}</Status>]
+                  ? [it, <StatusDivider key={`•${i}`}>{' • '}</StatusDivider>]
                   : it
               ))
             }
@@ -219,7 +218,7 @@ const MetaPreMsg = styled(Flex)`
   // TODO Theme
   color: #8B8B8B;
 `
-const Status = styled(Flex)`
+const StatusDivider = styled(Flex)`
   ${Txt.s13};
   white-space: pre;
   // TODO Theme

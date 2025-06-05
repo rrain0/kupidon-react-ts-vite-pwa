@@ -102,7 +102,7 @@ export const _wst7TestMatch = () => {
 
 
 
-const addThisToSelector = (selector: string): string => {
+const prependWithNestingSel = (selector: string): string => {
   if (selector[0] === '.' || selector[0] === '#') return '&' + selector
   return selector
 }
@@ -140,6 +140,19 @@ const getRootAndElemSelector = (elem: WidgetElem): [root: string, elemSel: strin
 }
 
 
+const getWidgetElemSelParts = (elem: WidgetElem): string[] => {
+  const selParts = [] as string[]
+  const elemSel = getElemSelector(elem.className)
+  selParts.unshift(elemSel)
+  if (elem.upElem) {
+    const upSelector = elem.upSelector ?? ''
+    const upElemSelParts = getWidgetElemSelParts(elem.upElem)
+    selParts.unshift(...upElemSelParts, upSelector)
+  }
+  return selParts
+}
+
+
 
 
 // TODO убирать контекст, если пошёл следующий элемент через селекторы > + ~...
@@ -168,18 +181,45 @@ export function transform<Props>(
     let currOutObj: WidgetStyle & object | undefined = undefined
     const outArray: WidgetStyle[] = []
     
-    for (let [prop, subStyle] of Object.entries(style)) {
+    // TODO Iterate over string until replacer gives
+    //  2+ object props, not primitive nesting, 2+ array items
+    /* for (let [prop, subStyle] of Object.entries(style)) {
       
+      
+      let processedProp = ''
+      let si = 0
+      while (true) {
+        const currProp = prop.substring(si)
+        const m = currProp.match(cssTokenPattern)
+        
+        if (!m) {
+          processedProp += currProp
+          break
+        }
+        
+        const mi = m.index!
+        const groups = m.groups as CustomSelectorPatternGroups
+        const beforeMatch = currProp.substring(0, mi)
+        const match = m[0]
+        const rest = currProp.substring(mi + match.length)
+        
+        
+      }
+      
+      
+    } */
+    
+    for (let [prop, subStyle] of Object.entries(style)) {
       let propStart = prop
       
       const transformedStyle = (() => {
         const m = prop.match(cssTokenPattern)
         if (m) {
-          const i = m.index!
-          propStart = prop.substring(0, i)
+          const mi = m.index!
+          propStart = prop.substring(0, mi)
           const propMatch = m[0]
           const groups = m.groups as CustomSelectorPatternGroups
-          const propRest = prop.substring(i + propMatch.length)
+          const propRest = prop.substring(mi + propMatch.length)
           let nextTransform = transform as typeof transform | undefined
           const replacer = (() => {
             if (groups.wState) {
@@ -189,10 +229,10 @@ export function transform<Props>(
             }
             else if (groups.wElem) {
               const elem = widget.elems[propMatch] as WidgetElem | undefined
-              const elemSel = elem ? getWidgetElemSelector(elem) : undefined
-              if (elemSel) {
+              const elemSelParts = elem ? getWidgetElemSelParts(elem).join('') : undefined
+              if (elemSelParts) {
                 context.elem = propMatch
-                return subStyle => ({ [addThisToSelector(elemSel)]: subStyle })
+                return subStyle => ({ [prependWithNestingSel(elemSelParts)]: subStyle })
               }
             }
             else if (groups.wElemState) {
@@ -222,7 +262,7 @@ export function transform<Props>(
             }
           })()
           
-          if (propRest) subStyle = { [addThisToSelector(propRest)]: subStyle }
+          if (propRest) subStyle = { [prependWithNestingSel(propRest)]: subStyle }
           if (replacer) subStyle = replacer(subStyle)
           else propStart += propMatch
           if (nextTransform) return nextTransform(subStyle, props, widget, { ...context })

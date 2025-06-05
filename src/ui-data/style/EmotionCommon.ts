@@ -435,6 +435,12 @@ export namespace EmotionCommon {
       line-height: normal;
       letter-spacing: 0.05em;
     `
+    export const s18BoldTight = css({
+      fontWeight: 500,
+      fontSize: 18,
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+    })
     export const s18WideLh150 = css`
       font-weight: 400;
       font-size: 18px;

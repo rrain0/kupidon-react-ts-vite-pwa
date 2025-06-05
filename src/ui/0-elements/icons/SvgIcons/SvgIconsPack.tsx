@@ -52,6 +52,7 @@ import LocationSvg from '@ic/normal/ui/location.svg?react'
 import LockSvg from '@ic/normal/ui/lock.svg?react'
 
 import MapLocationSvg from '@ic/normal/ui/map-location.svg?react'
+import MicrophoneSvg from '@ic/normal/ui/microphone.svg?react'
 import MoonSvg from '@ic/normal/ui/moon.svg?react'
 
 import NightSvg from '@ic/normal/ui/night.svg?react'
@@ -79,6 +80,7 @@ import SyncErrorSvg from '@ic/normal/ui/sync-error.svg?react'
 
 import Unpin2Svg from '@ic/normal/ui/unpin-2.svg?react'
 
+import VideoCameraSvg from '@ic/normal/ui/video-camera.svg?react'
 import VolumeSvg from '@ic/normal/ui/volume.svg?react'
 import VolumeMuteSvg from '@ic/normal/ui/volume-mute.svg?react'
 
@@ -118,9 +120,11 @@ import MasksTheatreSvg from '@ic/normal/special/masks-theatre.svg?react'
 import NameCardSvg from '@ic/normal/special/name-card.svg?react'
 
 import PictureArtSvg from '@ic/normal/special/picture-art.svg?react'
+import PlaneSendSvg from '@ic/normal/special/plane-send.svg?react'
 import PresentationScreenSvg from '@ic/normal/special/presentation-screen.svg?react'
 import PriceTagSvg from '@ic/normal/special/price-tag.svg?react'
 import ProfileCardSvg from '@ic/normal/special/profile-card.svg?react'
+import PuzzleSvg from '@ic/normal/special/puzzle.svg?react'
 
 import RulerCornerSvg from '@ic/normal/special/ruler-corner.svg?react'
 
@@ -191,6 +195,7 @@ export namespace SvgIconsPack {
   
   
   export const MapLocationIc = generateSvgIcon(MapLocationSvg)
+  export const MicrophoneIc = generateSvgIcon(MicrophoneSvg)
   export const MoonIc = generateSvgIcon(MoonSvg)
   
   
@@ -252,6 +257,7 @@ export namespace SvgIconsPack {
   
   export const Unpin2Ic = generateSvgIcon(Unpin2Svg)
   
+  export const VideoCameraIc = generateSvgIcon(VideoCameraSvg)
   export const VolumeIc = generateSvgIcon(VolumeSvg)
   export const VolumeMuteIc = generateSvgIcon(VolumeMuteSvg)
   
@@ -293,9 +299,11 @@ export namespace SvgIconsPack {
   export const NameCardIc = generateSvgIcon(NameCardSvg)
   
   export const PictureArtIc = generateSvgIcon(PictureArtSvg)
+  export const PlaneSendIc = generateSvgIcon(PlaneSendSvg)
   export const PresentationScreenIc = generateSvgIcon(PresentationScreenSvg)
   export const PriceTagIc = generateSvgIcon(PriceTagSvg)
   export const ProfileCardIc = generateSvgIcon(ProfileCardSvg)
+  export const PuzzleIc = generateSvgIcon(PuzzleSvg)
   
   export const RulerCornerIc = generateSvgIcon(RulerCornerSvg)
   

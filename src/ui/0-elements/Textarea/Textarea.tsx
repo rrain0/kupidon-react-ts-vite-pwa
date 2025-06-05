@@ -1,18 +1,15 @@
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { getViewProps } from 'src/util/view/ViewProps.ts'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { ReactU } from 'src/util/react/ReactU'
 import row = EmotionCommon.row
 import absTlwh = EmotionCommon.absTlwh
 import resetTextarea = EmotionCommon.resetTextarea
 import Pu = TypeU.Pu
 import hoverable = EmotionCommon.hoverable
 import Callback1 = TypeU.Callback1
-import combineProps = ReactU.combineProps
 import toEmptyAttr = TypeU.toEmptyAttr
 
 
@@ -22,6 +19,7 @@ import toEmptyAttr = TypeU.toEmptyAttr
 export type TextareaExtraProps = Pu<{
   isError: boolean
   onValue: Callback1<string>
+  hFitText: boolean
   startViews: React.ReactNode
   endViews: React.ReactNode
   children: React.ReactNode
@@ -38,6 +36,7 @@ const Textarea = React.memo((props: TextareaProps) => {
     ref, className, style,
     isError,
     onValue,
+    hFitText,
     startViews, endViews, children, childrenPosition = 'end',
     ...restProps
   } = props
@@ -47,6 +46,7 @@ const Textarea = React.memo((props: TextareaProps) => {
   useImperativeHandle(ref, () => textareaRef.current!, [])
   
   
+  // Поставить курсор в конец текста после начального рендера
   useLayoutEffect(() => {
     const textarea = textareaRef.current
     if (textarea) {
@@ -81,16 +81,13 @@ const Textarea = React.memo((props: TextareaProps) => {
           [TextareaStyle.Attr.errorName]: toEmptyAttr(isError),
         }}
         ref={textareaRef}
-        
-        {...combineProps(restProps, {
-          onChange: (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
-            onValue?.(ev.currentTarget.value)
-          },
-          onScroll: (ev: React.UIEvent<HTMLTextAreaElement>) => {
-            textareaFitText(ev.currentTarget)
-            restProps.onScroll?.(ev)
-          },
-        })}
+        rows={1}
+        {...restProps}
+        onChange={ev => {
+          if (hFitText) textareaHeightFitContent(ev.currentTarget)
+          restProps.onChange?.(ev)
+          onValue?.(ev.currentTarget.value)
+        }}
       />
       
       { childrenPosition === 'end' && children }
@@ -104,6 +101,7 @@ const Textarea = React.memo((props: TextareaProps) => {
     </label>
   )
 })
+Textarea.displayName = 'Textarea'
 export default Textarea
 
 
@@ -139,8 +137,7 @@ const borderStyle = css`
 
 
 
-const textareaFitText = (textarea: HTMLTextAreaElement) => {
-  const d = getViewProps(textarea)
-  if (d.scrollHeight > d.contentHeight)
-    textarea.style.height = `calc(${d.height-d.contentHeight + d.scrollHeight + 'px'} + 1em)`
+const textareaHeightFitContent = (textarea: HTMLTextAreaElement) => {
+  textarea.style.height = 'auto'
+  textarea.style.height = textarea.scrollHeight + 'px'
 }
