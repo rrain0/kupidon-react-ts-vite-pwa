@@ -4,7 +4,6 @@ import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { isMobileSafari } from 'react-device-detect'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import { ReactU } from 'src/util/react/ReactU'
@@ -14,7 +13,6 @@ import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import { simpleGradBgCss } from 'ui-data/bg/simpleGradBg'
 import assertNever = TypeU.assertNever
-import col = EmotionCommon.col
 
 
 
@@ -85,7 +83,7 @@ const PageCol = styled.div(flexStyle({
   col: true,
   relative: true,
   wMin,
-  hMin: 'max( min(var(--vp-ct-h), 100dvh), ${hMin}px )',
+  hMin: `max( min(var(--vp-ct-h), 100dvh), ${hMin}px )`,
   w: 'min(var(--vp-ct-w), 100dvw)',
 }))
 

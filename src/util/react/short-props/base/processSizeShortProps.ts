@@ -20,9 +20,13 @@ export type SizeShortProps = Pu<{
   hMax: number | string | 'full' // 'full' => '100%'
   szMax: number | string | 'full' // 'full' => '100%'
   
+  fullWMin: boolean // true => { min-width: '100%' }
+  fullHMin: boolean // true => { min-height: '100%' }
   fullW: boolean // true => { width: '100%' }
   fullH: boolean // true => { height: '100%' }
   full: boolean // true => { width: '100%', height: '100%' }
+  fullWMax: boolean // true => { max-width: '100%' }
+  fullHMax: boolean // true => { max-height: '100%' }
   
   ratio: number | string
   rad: number | string
@@ -52,7 +56,8 @@ export const processSizeShortProps = <P extends object>(
 ) => {
   const {
     boxSizing, contentBox, borderBox,
-    w, h, sz, wMin, hMin, szMin, wMax, hMax, szMax, fullW, fullH, full,
+    w, h, sz, wMin, hMin, szMin, wMax, hMax, szMax,
+    fullWMin, fullHMin, fullW, fullH, full, fullWMax, fullHMax,
     ratio, rad, round,
     m, mv, mh, mt, mr, mb, ml,
     p, pv, ph, pt, pr, pb, pl,
@@ -75,6 +80,10 @@ export const processSizeShortProps = <P extends object>(
     
     ...fullW && { width: '100%' },
     ...fullH && { height: '100%' },
+    ...fullWMin && { minWidth: '100%' },
+    ...fullHMin && { minHeight: '100%' },
+    ...fullWMax && { maxWidth: '100%' },
+    ...fullHMax && { maxHeight: '100%' },
     
     ...isdef(w) && { width: processAnySz(w) },
     ...isdef(h) && { height: processAnySz(h) },

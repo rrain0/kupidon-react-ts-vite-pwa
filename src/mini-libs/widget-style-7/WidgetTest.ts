@@ -7,7 +7,7 @@ import {
 import {
   _wst7TestMatch,
   GetOrWidgetStyle,
-  PrimitiveStyleValue, transform, WidgetStyle,
+  PrimitiveStyleValue, transform, transform_v2, WidgetStyle,
 } from 'src/mini-libs/widget-style-7/WidgetTransform.ts'
 
 
@@ -27,6 +27,7 @@ function cssTokenMatchTest() {
 function buttonTest() {
   
   
+  // TODO add props as param
   const customElemReplacers = {
     button: subStyle => ({ '&.rruiButton': subStyle }),
     border: subStyle => ({ '&.rruiButton > .rruiBorder': subStyle }),
@@ -110,10 +111,10 @@ function buttonTest() {
       ':!locked': { elem: '$button', state: ':$locked' },
       ':!error': { elem: '$button', state: ':$selected' },
     },
-    /* anyElemProps: {
+    anyElemProps: {
       sz: customPropReplacers.sz,
       color: customPropReplacers.colorAndVarColor,
-    }, */
+    },
   } satisfies WidgetConfig
   
   
@@ -145,4 +146,21 @@ function buttonTest() {
   console.log('testTransform', testTransform)
   
   
+  {
+    let style: any
+    style = {
+      '.c4 .c5:!hover.c:has(:where(:focus,:active)) input.c444': {
+        h: 99,
+        sz: 112,
+      },
+    }
+    //style = '.c4 .c5:!hover.c:has(:where(:focus,:active) input.c444'
+    //style = '.c4 .c5:!hover.c:focus:where() input.c444'
+    //style = '.c4 .c5:!hover.c:focus:active input.c444'
+    const v2 = transform_v2(style, undefined, builtWidget)
+    console.log('testTransform v2', v2)
+  }
+  
 }
+
+

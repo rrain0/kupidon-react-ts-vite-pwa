@@ -1,5 +1,6 @@
 import { Gender } from 'src/api/model/Gender.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
@@ -9,10 +10,11 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import React, {
   useCallback,
   useEffect,
@@ -39,7 +41,6 @@ import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputS
 import { SignupPageValidation } from 'src/ui/2-pages/Signup/validation.ts'
 import FormValues = SignupPageValidation.FormValues
 import validators = SignupPageValidation.validators
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
@@ -48,6 +49,7 @@ import full = RouteBuilder.full
 import mapFailureCodeToUiOption = SignupPageValidation.mapFailureCodeToUiText
 import defaultValues = SignupPageValidation.defaultValues
 import userDefaultValues = SignupPageValidation.userDefaultValues
+import contents = EmotionCommon.contents
 
 
 
@@ -182,112 +184,110 @@ const SignupPage = React.memo(() => {
   
   return (
     <>
-      <Pages.PageGrad data-display-name='SignupPage'>
-        
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm onSubmit={onSubmit}>
+      <PageLayout col data-display-name='SignupPage'>
+        <PageContentLayout colSm grow>
+          <Flex col grow justify g={30}>
+            <form css={contents} onSubmit={onSubmit}>
             
             
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{titleText.registration}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
+              <Grid cols='38px 1fr 38px' stretch>
+                <Flex centerStart m={-13}><BackButton/></Flex>
+                <Flex center><Hdrs.Page>{titleText.registration}</Hdrs.Page></Flex>
+                <Gap w={38}/>
+              </Grid>
+              
+              
+              
+              <FormFieldWrap {...formFieldWrapProps} fieldName='email'>
+                {props => (
+                  <Input
+                    css={InputStyle.outlinedRectNormalNormal}
+                    placeholder={placeholderText.emailAsLogin}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              </FormFieldWrap>
+              
+              <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
+                {props => (
+                  <PwdInput
+                    css={InputStyle.outlinedRectNormalNormal}
+                    placeholder={placeholderText.pwd}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              </FormFieldWrap>
+              
+              <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
+                {props => (
+                  <PwdInput
+                    css={InputStyle.outlinedRectNormalNormal}
+                    placeholder={placeholderText.repeatPwd}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              </FormFieldWrap>
+              
+              <FormFieldWrap {...formFieldWrapProps} fieldName='name'>
+                {props => (
+                  <Input
+                    css={InputStyle.outlinedRectNormalNormal}
+                    placeholder={placeholderText.name}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              </FormFieldWrap>
+              
+              <FormFieldWrap {...formFieldWrapProps} fieldName='birthDate'>
+                {props => (
+                  <Input
+                    css={InputStyle.outlinedRectNormalNormal}
+                    placeholder={placeholderText.birthDate}
+                    {...props.inputProps}
+                    hasError={props.highlight}
+                  />
+                )}
+              </FormFieldWrap>
+              
+              
+              <FormFieldWrap {...formFieldWrapProps} fieldName='gender'>
+                {props => (
+                  <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
+                    hasError={props.highlight}
+                  >
+                    { genderOptions.map(opt => {
+                      return (
+                        <RadioInput
+                          css={RadioInputStyle.radio}
+                          key={opt.value}
+                          checked={props.value === opt.value}
+                          value={opt.value}
+                          onChange={props.inputProps.onChange}
+                        >
+                          {opt.text}
+                        </RadioInput>
+                      )
+                    }) }
+                  </RadioInputGroup>
+                )}
+              </FormFieldWrap>
+              
+              
+              <Button
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
+                type='submit'
+              >
+                {actionText.signup}
+              </Button>
             
-            
-            
-            <FormFieldWrap {...formFieldWrapProps} fieldName='email'>
-              {props => (
-                <Input
-                  css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.emailAsLogin}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />
-              )}
-            </FormFieldWrap>
-            
-            <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
-              {props => (
-                <PwdInput
-                  css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.pwd}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />
-              )}
-            </FormFieldWrap>
-            
-            <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
-              {props => (
-                <PwdInput
-                  css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.repeatPwd}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />
-              )}
-            </FormFieldWrap>
-            
-            <FormFieldWrap {...formFieldWrapProps} fieldName='name'>
-              {props => (
-                <Input
-                  css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.name}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />
-              )}
-            </FormFieldWrap>
-            
-            <FormFieldWrap {...formFieldWrapProps} fieldName='birthDate'>
-              {props => (
-                <Input
-                  css={InputStyle.outlinedRectNormalNormal}
-                  placeholder={placeholderText.birthDate}
-                  {...props.inputProps}
-                  hasError={props.highlight}
-                />
-              )}
-            </FormFieldWrap>
-            
-            
-            <FormFieldWrap {...formFieldWrapProps} fieldName='gender'>
-              {props => (
-                <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
-                  hasError={props.highlight}
-                >
-                  { genderOptions.map(opt => {
-                    return (
-                      <RadioInput
-                        css={RadioInputStyle.radio}
-                        key={opt.value}
-                        checked={props.value === opt.value}
-                        value={opt.value}
-                        onChange={props.inputProps.onChange}
-                      >
-                        {opt.text}
-                      </RadioInput>
-                    )
-                  }) }
-                </RadioInputGroup>
-              )}
-            </FormFieldWrap>
-            
-            
-            <Button
-              css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
-              type='submit'
-            >
-              {actionText.signup}
-            </Button>
-            
-          </Pages.ContentColSmForm>
-        </Pages.AddSafeInsets>
-        
-        
-        <PageScrollbars/>
-      </Pages.PageGrad>
+            </form>
+          </Flex>
+        </PageContentLayout>
+      </PageLayout>
       
       <BottomFloatingBar settingsButton/>
       

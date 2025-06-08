@@ -1,4 +1,3 @@
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
 import { MathU } from '@util/common/MathU.ts'
@@ -6,7 +5,6 @@ import { RangeU } from '@util/common/RangeU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Link, Navigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -20,17 +18,18 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
-import col = EmotionCommon.col
-import { Pages } from 'ui/components/Pages/Pages'
 import flexC = EmotionCommon.flexC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
 import toEmptyAttr = TypeU.toEmptyAttr
@@ -274,27 +273,21 @@ const MbtiTestingPage = React.memo(() => {
   
   
   const authUserId = useAuthZustand(s => s.user!.id)
-  const [searchParams] = useSearchParams()
   
   return (
     <>
       {testState == 'completed' && goBackAfterCompletion && (
-        <Navigate
-          to={RootRoute.profile.id.userId[use](authUserId)
-            .tests[fullAnySearchParams](searchParams)
-          }
+        <AppNavigate
+          toFull={RootRoute.profile.id.userId[use](authUserId).tests}
           replace
         />
       )}
-    
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm css={css`gap: 30px;`}>
+      
+      <PageLayout col data-display-name='MbtiPage'>
+        <PageContentLayout colSm grow>
+          <Flex col g={30}>
             {isdef(displayed) && (
-              <div
-                data-display-name='MbtiPage'
-                css={css`${col}`}
-              >
+              <Flex col>
                 
                 <InfoText>
                   {uiText.needAnswerHonestly}
@@ -367,25 +360,23 @@ const MbtiTestingPage = React.memo(() => {
                 <div style={{ height: 28 }}/>
                 
                 <Flex row justifyCt='end'>
-                  <Link
-                    to={RootRoute.profile.id.userId[use](authUserId)
-                      .tests[fullAnySearchParams](searchParams)
-                    }
+                  <AppLink
+                    toFull={RootRoute.profile.id.userId[use](authUserId).tests}
                   >
                     <Button
                       css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.danger)}
                     >
                       {uiText.saveAndExit}
                     </Button>
-                  </Link>
+                  </AppLink>
                 </Flex>
               
               
-              </div>
+              </Flex>
             )}
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
-      </Pages.PageGrad>
+          </Flex>
+        </PageContentLayout>
+      </PageLayout>
       
       <BottomFloatingBar settingsButtonLeft/>
     </>

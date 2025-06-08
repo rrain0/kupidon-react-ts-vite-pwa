@@ -1,6 +1,7 @@
+import { ObjectU } from '@util/common/ObjectU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
+import { Pair } from '@util/js/Pair.ts'
 import {
-  WidgetElemName,
   WidgetElemPropReplacer, WidgetState,
   WidgetStyleReplacer,
 } from 'src/mini-libs/widget-style-7/WidgetConfig.ts'
@@ -13,11 +14,18 @@ import isbool = TypeU.isbool
 import isnumstr = TypeU.isnumstr
 import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig'
 import Pu = TypeU.Pu
+import isRecord = TypeU.isRecord
+import isEmptyObj = ObjectU.isEmptyObj
+import getPairOfSingleKeyObj = ObjectU.getPairOfSingleKeyObj
+import isstring = TypeU.isstring
+import isRecordAndEmpty = ObjectU.isRecordAndEmpty
 
 
 
 export type PrimitiveStyleValue =
   // Skipped
+  // ['value', undefined] => ['value']
+  // { key: 'value', key2: undefined } => { key: 'value' }
   | undefined
   // Absent / Empty / Default
   // background: 'none', color: 'transparent', width: 'auto'
@@ -55,9 +63,9 @@ export type GetWidgetStyle<Props> = (props: Props) => GetOrWidgetStyle<Props>
 export type GetOrWidgetStyle<Props> =
   | undefined
   | PrimitiveStyleValue
-  | WidgetStyle
-  | { [selectorProp: string]: GetOrWidgetStyle<Props> }
   | GetWidgetStyle<Props>
+  | Pair<string, GetOrWidgetStyle<Props>>
+  | { [selectorProp: string]: GetOrWidgetStyle<Props> }
   | GetOrWidgetStyle<Props>[]
 
 
@@ -65,7 +73,7 @@ export type GetOrWidgetStyle<Props> =
   // CSS identifier pattern
   const cssIdfPattern = /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/
   // CSS identifier delimiters
-  const delim = '([#.&>+~:@{]|\\s|$)'
+  const delim = '([#.&,>+~:@{]|\\s|$)'
 }
 
 
@@ -75,12 +83,18 @@ export type GetOrWidgetStyle<Props> =
 const cssIdf = '-?[_a-zA-Z]+[_a-zA-Z0-9-]*'
 
 type CustomSelectorPatternGroups = {
+  openParen: string | undefined
+  closeParen: string | undefined
   wState: string | undefined
   wElemState: string | undefined
   wElem: string | undefined
   prop: string | undefined
 }
 export const cssTokenPattern = new RegExp([
+  // '(' - open paren
+  `(?<openParen>[(])`,
+  // ')' - close paren
+  `(?<closeParen>[)])`,
   // ':!name' - custom widget state
   `(:!(?<wState>${cssIdf}))`,
   // ':$name' - custom elem state
@@ -155,15 +169,12 @@ const getWidgetElemSelParts = (elem: WidgetElem): string[] => {
 
 
 
-// TODO убирать контекст, если пошёл следующий элемент через селекторы > + ~...
-// TODO :where($button,.clss) \???
-// TODO :where(:$hover) ???
-// TODO widgetElem заменять на строку, а не объект
 export function transform<Props>(
   style: GetOrWidgetStyle<Props>,
   props: NoInfer<Props>,
   widget: BuiltWidget,
   context: Pu<{
+    '(': number
     widgetState: WidgetState
     elem: string
   }> = { },
@@ -180,34 +191,6 @@ export function transform<Props>(
   else if (isobject(style)) {
     let currOutObj: WidgetStyle & object | undefined = undefined
     const outArray: WidgetStyle[] = []
-    
-    // TODO Iterate over string until replacer gives
-    //  2+ object props, not primitive nesting, 2+ array items
-    /* for (let [prop, subStyle] of Object.entries(style)) {
-      
-      
-      let processedProp = ''
-      let si = 0
-      while (true) {
-        const currProp = prop.substring(si)
-        const m = currProp.match(cssTokenPattern)
-        
-        if (!m) {
-          processedProp += currProp
-          break
-        }
-        
-        const mi = m.index!
-        const groups = m.groups as CustomSelectorPatternGroups
-        const beforeMatch = currProp.substring(0, mi)
-        const match = m[0]
-        const rest = currProp.substring(mi + match.length)
-        
-        
-      }
-      
-      
-    } */
     
     for (let [prop, subStyle] of Object.entries(style)) {
       let propStart = prop
@@ -298,6 +281,195 @@ export function transform<Props>(
     throw new Error(
       `Style container must be function or array or object or undefined, but is: ${style}`
     )
+  }
+}
+
+
+
+function simplifyWidgetStyle(
+  style: WidgetStyle | Pair<string, WidgetStyle>
+): WidgetStyle | Pair<string, WidgetStyle> {
+  if (isArray(style)) {
+    if (style.length === 0) return { }
+    else if (style.length === 1) style = style[0]
+    else return style
+  }
+  if (isRecord(style) && style !instanceof Pair) {
+    if (isEmptyObj(style)) return { }
+    else {
+      const pair = getPairOfSingleKeyObj(style)
+      if (pair) style = pair
+      else return style
+    }
+  }
+  if (style instanceof Pair) {
+    if (isundef(style.v)) return undefined
+    else if (isRecordAndEmpty(style.v)) return style.k
+    else return style
+  }
+  return style
+}
+
+
+
+function getNestedStyle(
+  key: string, style: WidgetStyle
+): WidgetStyle {
+  if (key) return { [key]: style }
+  return style
+}
+
+
+
+
+// TODO убирать контекст, если пошёл следующий элемент через селекторы > + ~...
+// TODO :where($button,.clss) \???
+// TODO :where(:$hover) ???
+// TODO widgetElem заменять на строку, а не объект
+export function transform_v2<Props>(
+  style: GetOrWidgetStyle<Props>,
+  props: NoInfer<Props>,
+  widget: BuiltWidget,
+  context: {
+    '(': number
+    widgetState?: WidgetState | undefined
+    elem?: string | undefined
+  } = { '(': 0 },
+): Pu<{
+  '@': GetWidgetStyle<Props>
+  len: number
+  style: WidgetStyle
+}> {
+  if (isstring(style)) {
+    return transform_v2(Pair.of(style, { }), props, widget, { ...context })
+  }
+  else if (style instanceof Pair) {
+    // To detect css property, we need to know that value is primitive
+    const value = style.v
+    const sel = style.k
+    let processedSel = ''
+    let si = 0
+    let hasOpenParen = false
+    
+    while (si < sel.length) {
+      const currSel = sel.substring(si)
+      const m = currSel.match(cssTokenPattern)
+      
+      // Если нет матча, то вся строка закончилась
+      if (!m) {
+        processedSel += currSel
+        break
+      }
+      
+      const mi = m.index!
+      const groups = m.groups as CustomSelectorPatternGroups
+      const beforeMatch = currSel.substring(0, mi)
+      const match = m[0]
+      const ni = mi + match.length
+      const rest = currSel.substring(ni)
+      
+      //console.log('match', match, 'ni', ni, 'rest', rest)
+      
+      si += ni
+      processedSel += beforeMatch
+      
+      if (groups.openParen) {
+        hasOpenParen = true
+        processedSel += '('
+        const nestedData = transform_v2(rest, props, widget, {
+          ...context, '(': context['('] + 1,
+        })
+        //console.log('nestedData.len', nestedData.len)
+        si += nestedData.len ?? 0
+        // TODO process @
+        const nested = simplifyWidgetStyle(nestedData.style)
+        if (isstring(nested)) { processedSel += nested }
+      }
+      else if (groups.closeParen) {
+        if (hasOpenParen) {
+          hasOpenParen = false
+          processedSel += ')'
+        }
+        else return { len: si - 1, style: processedSel }
+      }
+      else if (groups.wState) {
+        processedSel += match
+      }
+      else if (groups.wElemState) {
+        processedSel += match
+      }
+      else if (groups.wElem) {
+        processedSel += match
+      }
+      else if (groups.prop && isPrimitiveStyleValue(value)) {
+        const replacer = widget.anyElemProps[match]
+        // TODO drop prop if inside (...)
+        if (replacer) {
+          const replaced = getNestedStyle(
+            processedSel,
+            transform_v2(replacer(value),  props, widget, { ...context }).style
+          )
+          return { len: sel.length, style: replaced }
+        }
+        else {
+          processedSel += match
+        }
+      }
+      else {
+        processedSel += match
+      }
+    }
+    
+    return {
+      len: sel.length,
+      style: getNestedStyle(
+        processedSel,
+        transform_v2(value, props, widget, { ...context }).style
+      ),
+    }
+  }
+  else if (isfunction(style)) {
+    return transform_v2(style(props), props, widget, { ...context })
+  }
+  else if (isArray(style)) {
+    return { style: style.map(s => transform_v2(s, props, widget, { ...context }).style) }
+  }
+  else if (isobject(style)) {
+    if (isEmptyObj(style)) return { }
+    
+    let currOutObj: WidgetStyle & object | undefined = undefined
+    const outArray: WidgetStyle[] = []
+    
+    // TODO Iterate over string until replacer gives
+    //  2+ object props, not primitive nesting, 2+ array items
+    for (const [prop, subStyle] of Object.entries(style)) {
+      const nested = simplifyWidgetStyle(
+        transform_v2(Pair.of(prop, subStyle), props, widget, { ...context }).style
+      )
+      
+      console.log('nested', nested)
+      
+      if (isArray(nested)) {
+        if (currOutObj) outArray.push(currOutObj)
+        currOutObj = undefined
+        outArray.push(...nested)
+      }
+      else if (nested instanceof Pair) {
+        (currOutObj ??= { })[nested.k] = nested.v
+      }
+      else if (isobject(nested)) {
+        Object.assign((currOutObj ??= { }), nested)
+      }
+    }
+    
+    if (currOutObj) outArray.push(currOutObj)
+    
+    if (outArray.length === 0) return { style: undefined }
+    if (outArray.length === 1) return { style: outArray[0] }
+    return { style: outArray }
+  }
+  else {
+    return { style }
   }
 }
 

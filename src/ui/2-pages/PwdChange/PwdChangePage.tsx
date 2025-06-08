@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
@@ -13,8 +14,6 @@ import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer.tsx'
 import ItemTitleContainer from 'src/ui/0-elements/basic-elements/ItemTitleContainer.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
 import { PwdChangePageValidation } from 'src/ui/2-pages/PwdChange/validation.ts'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit.ts'
@@ -29,6 +28,9 @@ import validators = PwdChangePageValidation.validators
 import FormValues = PwdChangePageValidation.FormValues
 import userDefaultValues = PwdChangePageValidation.userDefaultValues
 import mapFailureCodeToUiText = PwdChangePageValidation.mapFailureCodeToUiText
+import PageLayout from 'ui/components/Pages/PageLayout'
+import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import contents = EmotionCommon.contents
 
 
 
@@ -144,90 +146,88 @@ const PwdChangePage = React.memo(() => {
   
   return (
     <>
-    
-      <Pages.PageGrad data-display-name='PwdChangePage'>
-        
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSmForm onSubmit={onSubmit}>
+      
+      <PageLayout col data-display-name='PwdChangePage'>
+        <PageContentLayout colSm grow>
+          <Flex col grow justify g={30}>
+            <form css={contents} onSubmit={onSubmit}>
+              
+              <Grid cols='38px 1fr 38px' stretch>
+                <Flex centerStart m={-13}><BackButton/></Flex>
+                <Flex center><Hdrs.Page>{titleText.pwdChange}</Hdrs.Page></Flex>
+                <Gap w={38}/>
+              </Grid>
+              
+              
+              
+              <ItemContainer>
+                <ItemTitleContainer>
+                  <Hdrs.InputTitleBold>{titleText.currentPwd}</Hdrs.InputTitleBold>
+                </ItemTitleContainer>
+                <FormFieldWrap {...formFieldWrapProps} fieldName='currentPwd'>
+                  {props => (
+                    <PwdInput
+                      css={InputStyle.outlinedRectSmallNormal}
+                      placeholder={placeholderText.currentPwd}
+                      {...props.inputProps}
+                      hasError={props.highlight}
+                    />
+                  )}
+                </FormFieldWrap>
+              </ItemContainer>
+              
+              
+              <ItemContainer>
+                <ItemTitleContainer>
+                  <Hdrs.InputTitleBold>{titleText.newPwd}</Hdrs.InputTitleBold>
+                </ItemTitleContainer>
+                <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
+                  {props => (
+                    <PwdInput
+                      css={InputStyle.outlinedRectSmallNormal}
+                      placeholder={placeholderText.newPwd}
+                      {...props.inputProps}
+                      hasError={props.highlight}
+                    />
+                  )}
+                </FormFieldWrap>
+              </ItemContainer>
+              
+              
+              <ItemContainer>
+                <ItemTitleContainer>
+                  <Hdrs.InputTitleBold>{titleText.repeatPwd}</Hdrs.InputTitleBold>
+                </ItemTitleContainer>
+                <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
+                  {props => (
+                    <PwdInput
+                      css={InputStyle.outlinedRectSmallNormal}
+                      placeholder={placeholderText.repeatPwd}
+                      {...props.inputProps}
+                      hasError={props.highlight}
+                    />
+                  )}
+                </FormFieldWrap>
+              </ItemContainer>
             
             
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{titleText.pwdChange}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
             
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
+                type='submit'
+              >
+                {actionText.changePwd}
+              </Button>
             
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
+                disabled
+              >
+                {titleText.pwdRecovery}
+              </Button>
             
-            <ItemContainer>
-              <ItemTitleContainer>
-                <Hdrs.InputTitleBold>{titleText.currentPwd}</Hdrs.InputTitleBold>
-              </ItemTitleContainer>
-              <FormFieldWrap {...formFieldWrapProps} fieldName='currentPwd'>
-                {props => (
-                  <PwdInput
-                    css={InputStyle.outlinedRectSmallNormal}
-                    placeholder={placeholderText.currentPwd}
-                    {...props.inputProps}
-                    hasError={props.highlight}
-                  />
-                )}
-              </FormFieldWrap>
-            </ItemContainer>
-            
-            
-            <ItemContainer>
-              <ItemTitleContainer>
-                <Hdrs.InputTitleBold>{titleText.newPwd}</Hdrs.InputTitleBold>
-              </ItemTitleContainer>
-              <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
-                {props => (
-                  <PwdInput
-                    css={InputStyle.outlinedRectSmallNormal}
-                    placeholder={placeholderText.newPwd}
-                    {...props.inputProps}
-                    hasError={props.highlight}
-                  />
-                )}
-              </FormFieldWrap>
-            </ItemContainer>
-            
-            
-            <ItemContainer>
-              <ItemTitleContainer>
-                <Hdrs.InputTitleBold>{titleText.repeatPwd}</Hdrs.InputTitleBold>
-              </ItemTitleContainer>
-              <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
-                {props => (
-                  <PwdInput
-                    css={InputStyle.outlinedRectSmallNormal}
-                    placeholder={placeholderText.repeatPwd}
-                    {...props.inputProps}
-                    hasError={props.highlight}
-                  />
-                )}
-              </FormFieldWrap>
-            </ItemContainer>
-          
-          
-          
-            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
-              type='submit'
-            >
-              {actionText.changePwd}
-            </Button>
-          
-            <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
-              disabled
-            >
-              {titleText.pwdRecovery}
-            </Button>
-          
-          </Pages.ContentColSmForm>
-        </Pages.AddSafeInsets>
-        
-        <PageScrollbars/>
-      </Pages.PageGrad>
+            </form>
+          </Flex>
+        </PageContentLayout>
+      </PageLayout>
       
       {/* <BottomFloatingBar settingsButton/> */}
       

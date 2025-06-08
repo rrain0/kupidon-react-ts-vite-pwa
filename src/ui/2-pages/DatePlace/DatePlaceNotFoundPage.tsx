@@ -12,10 +12,9 @@ import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
-import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { Pages } from 'ui/components/Pages/Pages'
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams
 import rowC = EmotionCommon.rowC
@@ -46,43 +45,39 @@ export const DatePlaceNotFoundPage = React.memo(() => {
   return (
     
     <>
-      
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm style={{ gap: 0, minHeight: '100%' }}>
-            
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{uiText.placeNotFound}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
-            
-            <div style={{ height: 28 }}/>
-            
-            <ButtonBox>
-              <Link
-                to={RootRoute.datePlaces[fullParams]({
-                  anySearchParams: search,
-                  allowedNamedParams: {
-                    category: null,
-                    type: null,
-                  },
-                })}
-              >
-                <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}>
-                  {uiText.pickAnotherPlace}
-                </Button>
-              </Link>
-            </ButtonBox>
+    
+      <PageLayout col data-display-name='DateArticleNotFoundPage'>
+        <PageContentLayout colSm grow>
           
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
-        
-        <PageScrollbars/>
-      </Pages.PageGrad>
+          <Grid cols='38px 1fr 38px' stretch>
+            <Flex centerStart m={-13}><BackButton/></Flex>
+            <Flex center><Hdrs.Page>{uiText.placeNotFound}</Hdrs.Page></Flex>
+            <Gap w={38}/>
+          </Grid>
+          
+          <div style={{ height: 28 }}/>
+          
+          <ButtonBox>
+            <Link
+              to={RootRoute.datePlaces[fullParams]({
+                anySearchParams: search,
+                allowedNamedParams: {
+                  category: null,
+                  type: null,
+                },
+              })}
+            >
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}>
+                {uiText.pickAnotherPlace}
+              </Button>
+            </Link>
+          </ButtonBox>
+      
+        </PageContentLayout>
+      </PageLayout>
       
       
-      <BottomFloatingBar/>
+      {/* <BottomFloatingBar/> */}
     
     </>
   )

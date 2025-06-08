@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
+import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { useResizeRef } from '@util/view/useResizeRef.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
@@ -8,7 +9,7 @@ import React from 'react'
 import { useEmulatedScroll } from 'src/ui/2-pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import NumRange = RangeU.NumRange
 import arrOfNumbers = ArrayU.arrOfNumbers
@@ -60,7 +61,7 @@ const EmulatedScrollTestPage = React.memo(() => {
   
   
   return (
-    <Pages.Page>
+    <PageLayout col>
       
       
       <ScrollFrame ref={setFrame}>
@@ -75,7 +76,9 @@ const EmulatedScrollTestPage = React.memo(() => {
           }}
         >
           
-          { arrOfNumbers(500).map(it => <div key={it}>Simulated Scroll {it}</div>) }
+          {arrOfNumbers(500).map(it => (
+            <div key={it}>Simulated Scroll {it}</div>
+          ))}
           
         </animated.div>
         
@@ -88,7 +91,7 @@ const EmulatedScrollTestPage = React.memo(() => {
       `}/> */}
       
       
-    </Pages.Page>
+    </PageLayout>
   )
 })
 EmulatedScrollTestPage.displayName = 'EmulatedScrollTestPage'
@@ -96,13 +99,11 @@ export default EmulatedScrollTestPage
 
 
 
-const ScrollFrame = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 700px;
-  height: 100dvh;
-  overflow: hidden;
-`
+const ScrollFrame = styled.div(flexStyle({
+  relative: true,
+  fullW: true, wMax: 700, h: '100dvh',
+  noOverflow: true,
+}))
 
 
 const scrollContentCss = css`
@@ -112,6 +113,8 @@ const scrollContentCss = css`
   min-height: 100%;
   height: fit-content;
   top: 0;
+  display: flex;
+  flex-direction: column;
   background-image: linear-gradient(
     #ff000066, #ffff0066, #00ff0066, #00ffff66, #0000ff66
   );

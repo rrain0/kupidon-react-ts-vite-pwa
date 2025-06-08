@@ -18,6 +18,7 @@ export type FlexShortProps = Pu<{
   align: string | boolean // alignItems // true => 'center'
   alignCt: string | boolean // alignContent // true => 'center'
   justifyCt: string | boolean // justifyContent // true => 'center'
+  justify: string | boolean // justifyContent // true => 'center'
   
   alignStart: boolean // true => { alignItems: 'start' }
   alignEnd: boolean // true => { alignItems: 'end' }
@@ -58,7 +59,7 @@ export const processFlexShortProps = <P extends object>(
 ) => {
   const {
     row, col, rowRev, colRev, wrap, wrapRev,
-    align, alignCt, justifyCt,
+    align, alignCt, justifyCt, justify,
     alignStart, alignEnd, alignStretch,
     justifyStart, justifyEnd, justifySpaceBetween, justifySpaceAround,
     start, startStart, startCenter, startEnd,
@@ -98,6 +99,8 @@ export const processFlexShortProps = <P extends object>(
     ...justifyEnd && { justifyContent: 'end' },
     ...justifySpaceBetween && { justifyContent: 'space-between' },
     ...justifySpaceAround && { justifyContent: 'space-around' },
+    
+    ...isdef(justify) && { justifyContent: mapBool(justify, 'center') },
     
     ...isdef(align) && { alignItems: mapBool(align, 'center') },
     ...isdef(alignCt) && { alignContent: mapBool(alignCt, 'center') },

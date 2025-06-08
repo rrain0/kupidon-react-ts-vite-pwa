@@ -17,10 +17,10 @@ import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticl
 import DateArticleItemCardWide from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCardWide.tsx'
 import DateArticleItemToCardData
   from 'src/ui/2-pages/DateArticles/parts/DateArticleItemToCardData.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import assertNever = TypeU.assertNever
@@ -77,48 +77,44 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
   return (
     <>
       
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm style={{ gap: 0 }}>
-            
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
-            
-            <div style={{ height: 28 }}/>
-            
-            <DateArticlesList style={{ gap: 16 }}>
-              {(() => {
-                if (!items.length) return 'Пусто'
-                
-                return items.map(it => {
-                  if (it.type === 'category') {
-                    const categoryName = it.itemCategory
-                    const category = DateArticleCategoriesData[categoryName]
-                    if (category.ui === 'row') return (
-                      <DateArticleCategoryRow
-                        key={JSON.stringify(it)}
-                        category={categoryName}
-                      />
-                    )
-                  }
-                  
-                  return (
-                    <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
-                      {props => <DateArticleItemCardWide {...props}/>}
-                    </DateArticleItemToCardData>
+      <PageLayout col data-display-name='DateArticleItemsPage'>
+        <PageContentLayout colSm>
+          
+          <Grid cols='38px 1fr 38px' stretch>
+            <Flex centerStart m={-13}><BackButton/></Flex>
+            <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
+            <Gap w={38}/>
+          </Grid>
+          
+          <div style={{ height: 28 }}/>
+          
+          <DateArticlesList style={{ gap: 16 }}>
+            {(() => {
+              if (!items.length) return 'Пусто'
+              
+              return items.map(it => {
+                if (it.type === 'category') {
+                  const categoryName = it.itemCategory
+                  const category = DateArticleCategoriesData[categoryName]
+                  if (category.ui === 'row') return (
+                    <DateArticleCategoryRow
+                      key={JSON.stringify(it)}
+                      category={categoryName}
+                    />
                   )
-                })
-              })()}
-            </DateArticlesList>
-            
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
-        
-        <PageScrollbars/>
-      </Pages.PageGrad>
+                }
+                
+                return (
+                  <DateArticleItemToCardData key={JSON.stringify(it)} articleItem={it}>
+                    {props => <DateArticleItemCardWide {...props}/>}
+                  </DateArticleItemToCardData>
+                )
+              })
+            })()}
+          </DateArticlesList>
+          
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar/>
@@ -126,6 +122,7 @@ const DateArticleItemsPage = React.memo((props: DateArticleItemsPageProps) => {
     </>
   )
 })
+DateArticleItemsPage.displayName = 'DateArticleItemsPage'
 export default DateArticleItemsPage
 
 

@@ -12,6 +12,7 @@ import Nonemptyval = TypeU.Nonemptyval
 import isArray = TypeU.isArray
 import Sign = TypeU.Sign
 import isdef = TypeU.isdef
+import ArrFilter = TypeU.ArrFilter
 
 
 
@@ -19,9 +20,9 @@ import isdef = TypeU.isdef
 export namespace ArrayU {
   
   
-  import ArrFilter = TypeU.ArrFilter
-  export type FirstCanUndef<A extends readonly any[]> =
+  export type FirstCanUndef<A extends readonly any[]> = (
     A extends readonly [first?: infer F, ...infer R] ? [first?: F, ...R] : never
+  )
   
   
   

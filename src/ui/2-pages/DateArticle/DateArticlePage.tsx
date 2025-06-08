@@ -10,10 +10,10 @@ import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
@@ -58,40 +58,36 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
   return (
     <>
     
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm style={{ gap: 0 }}>
-            
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
-            
-            <div style={{ height: 34 }}/>
-            
-            <ImgSpark
-              css={ImgSparkS6.t(imgSparkS)}
-              src={article.picture}
-            />
-            
-            <div style={{ height: 19 }}/>
-            
-            <Title>
-              {uiText.pageTitle}
-            </Title>
-            
-            <div style={{ height: 7 }}/>
-            
-            <div style={{ height: 17 }}/>
-            
-            {parse(article.content)}
-            
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
-        
-        <PageScrollbars/>
-      </Pages.PageGrad>
+      <PageLayout col data-display-name='DateArticlePage'>
+        <PageContentLayout colSm>
+          
+          <Grid cols='38px 1fr 38px' stretch>
+            <Flex centerStart m={-13}><BackButton/></Flex>
+            <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
+            <Gap w={38}/>
+          </Grid>
+          
+          <Gap h={34}/>
+          
+          <ImgSpark
+            css={ImgSparkS6.t(imgSparkS)}
+            src={article.picture}
+          />
+          
+          <Gap h={19}/>
+          
+          <Title>
+            {uiText.pageTitle}
+          </Title>
+          
+          <Gap h={7}/>
+          
+          <Gap h={17}/>
+          
+          {parse(article.content)}
+          
+        </PageContentLayout>
+      </PageLayout>
       
       
       <BottomFloatingBar settingsButton/>
@@ -99,6 +95,7 @@ const DateArticlePage = React.memo((props: DateArticlePageProps) => {
     </>
   )
 })
+DateArticlePage.displayName = 'DateArticlePage'
 export default DateArticlePage
 
 

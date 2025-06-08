@@ -84,39 +84,39 @@ export namespace TypeU {
     return value === undefined
   }
   // Value is defined
-  export function isdef<T, NU extends {} | null>(value: T | NU): value is NU {
+  export function isdef<NU extends {} | null, T>(value: T | NU): value is NU {
     return value !== undefined
   }
   export function isnull<T>(value: T | null): value is null {
     return value === null
   }
-  export function nonnull<T, NN extends {} | undefined>(value: T | NN): value is NN {
+  export function nonnull<NN extends {} | undefined, T>(value: T | NN): value is NN {
     return value !== null
   }
-  export function nonemptyval<T, E extends {}>(value: T | E): value is E {
+  export function nonemptyval<E extends {}, T>(value: T | E): value is E {
     return value !== null && value !== undefined
   }
-  export function isemptyval<T, NE extends emptyval>(value: T | NE): value is NE {
+  export function isemptyval<NE extends emptyval, T>(value: T | NE): value is NE {
     return value === null || value === undefined
   }
-  export function isbool<T, S extends boolean>(value: T | S): value is S {
+  export function isbool<S extends boolean, T>(value: T | S): value is S {
     return typeof value === 'boolean'
   }
-  export function isstring<T, S extends string>(value: T | S): value is S {
+  export function isstring<S extends string, T>(value: T | S): value is S {
     return typeof value === 'string'
   }
-  export function isnumber<T, N extends number>(value: T | N): value is N {
+  export function isnumber<N extends number, T>(value: T | N): value is N {
     return typeof value === 'number'
   }
   // Value is number or string
-  export function isnumstr<T, N extends number | string>(value: T | N): value is N {
+  export function isnumstr<N extends number | string, T>(value: T | N): value is N {
     return typeof value === 'number' || typeof value === 'string'
   }
   // Value is object (and not function & not null)
   export function isobject<T>(value: T): value is Isobject<T> {
     return typeof value === 'object' && value !== null
   }
-  export function isfunction<T, F extends Function>(value: T | F): value is F {
+  export function isfunction<F extends Function, T>(value: T | F): value is F {
     return typeof value === 'function'
   }
   
@@ -136,21 +136,24 @@ export namespace TypeU {
   })()
    */
   
-  export function isObject<T, O extends object>(value: T | O): value is O {
+  export function isObject<O extends object, T>(value: T | O): value is O {
     return value instanceof Object
   }
-  export function isArray<T, A extends unknown[]>(value: T | A): value is A {
+  export function isArray<A extends unknown[], T>(value: T | A): value is A {
     return value instanceof Array
   }
-  export function isFunction<T, F extends Function>(value: T | F): value is F {
+  export function isFunction<F extends Function, T>(value: T | F): value is F {
     return value instanceof Function
   }
+  export function isRecord<R extends object, T>(value: R | any[] | anyfun | T): value is R {
+    return isObject(value) && !isArray(value) && !isFunction(value)
+  }
   
   
-  export function isFinitenumber<T, N extends number>(v: T | N): v is N {
+  export function isFinitenumber<N extends number, T>(v: T | N): v is N {
     return typeof v === 'number' && Number.isFinite(v)
   }
-  export function isInt<T, N extends number>(v: T | N): v is N {
+  export function isInt<N extends number, T>(v: T | N): v is N {
     return typeof v === 'number' && Number.isInteger(v)
   }
   

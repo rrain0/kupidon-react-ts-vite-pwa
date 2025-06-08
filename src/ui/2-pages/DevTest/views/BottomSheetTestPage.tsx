@@ -1,8 +1,11 @@
 import { ArrayU } from '@util/common/ArrayU.ts'
 import React, { useMemo, useRef, useState } from 'react'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
 import {
   SheetSnapIdx,
   SheetSnapPoints,
@@ -78,11 +81,11 @@ const BottomSheetTestPage = React.memo(() => {
   
   return (
     <>
-      <Pages.Page>
+      <PageLayout col data-display-name='BottomSheetTestPage'>
         
-        <div css={css`height: 200px;`}/>
+        <Gap h={200}/>
         
-        <Pages.Content>
+        <PageContentLayout col>
           <div>Bottom Sheet Test Page</div>
           
           <div css={css`
@@ -99,32 +102,20 @@ const BottomSheetTestPage = React.memo(() => {
             />
           </div>
           
-          <div css={css`
-            ${row};
-            gap: 10px;
-          `}
-          >
+          <Flex row g={10}>
             <div>Snap points:</div>
             <div>{JSON.stringify(snapPoints)}</div>
-          </div>
+          </Flex>
           
-          <div css={css`
-            ${row};
-            gap: 10px;
-          `}
-          >
+          <Flex row g={10}>
             <div>Snap points px:</div>
             <div>{JSON.stringify(snapPointsPx)}</div>
-          </div>
+          </Flex>
           
-          <div css={css`
-            ${row};
-            gap: 10px;
-          `}
-          >
+          <Flex row g={10}>
             <div>Closeable:</div>
             <div>{JSON.stringify(closeable)}</div>
-          </div>
+          </Flex>
           
           
           <div 
@@ -149,9 +140,7 @@ const BottomSheetTestPage = React.memo(() => {
           
           {arrOfIndices(itemsCnt).map(i => (
             <div
-              css={css`
-                cursor: pointer;
-              `}
+              css={css({ cursor: 'pointer' })}
               key={i}
               onClick={() => {
                 setSelectedItem(`Item ${i + 1}`)
@@ -162,13 +151,13 @@ const BottomSheetTestPage = React.memo(() => {
             </div>
           ))}
         
-        </Pages.Content>
+        </PageContentLayout>
         
-        <div css={css`height: 1000px;`}/>
+        <Gap h={1000}/>
         
         
         
-      </Pages.Page>
+      </PageLayout>
       
       <BottomSheet
         css={BottomSheetS6.t(BottomSheetS6.S.bottom.sheet.full.normal)}
@@ -290,6 +279,7 @@ const BottomSheetTestPage = React.memo(() => {
     </>
   )
 })
+BottomSheetTestPage.displayName = 'BottomSheetTestPage'
 export default BottomSheetTestPage
 
 

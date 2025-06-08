@@ -1,14 +1,33 @@
 import { StringU } from 'src/util/common/StringU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
+import { Pair } from 'src/util/js/Pair.ts'
 import WriteablePartial = TypeU.WriteablePartial
 import isobject = TypeU.isobject
 import capitalize = StringU.capitalize
-
+import isundef = TypeU.isundef
+import isnull = TypeU.isnull
+import isRecord = TypeU.isRecord
 
 
 
 export namespace ObjectU {
   
+  
+  export const isRecordAndEmpty = (obj?: any) => (
+    isRecord(obj) && isEmptyObj(obj)
+  )
+  
+  
+  export const isEmptyObj = (obj: object) => {
+    return Object.keys(obj).length === 0
+  }
+  
+  export const getPairOfSingleKeyObj = <O extends object>(obj: O) => {
+    if (isundef(obj) || isnull(obj)) return undefined
+    const keys = Object.keys(obj)
+    if (keys.length !== 1) return undefined
+    return Pair.of(keys[0], obj[keys[0]]) as Pair<ObjectKeysType<O>, ObjectValuesType<O>>
+  }
   
   
   
@@ -53,10 +72,12 @@ export namespace ObjectU {
   
   
   
-  export type Values<O extends object> =
+  export type Values<O extends object> = (
     { [Prop in keyof O]: O[Prop] }[keyof O]
-  export type ObjectValuesType<O extends object> =
+  )
+  export type ObjectValuesType<O extends object> = (
     { [Prop in string & keyof O]: O[Prop] }[string & keyof O]
+  )
   /**
    * Тип для получения массива значений объекта (для собственных перечисляемых свойств).
    * Беруться только строковые (и числовые) ключи, но не символьные.

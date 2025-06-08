@@ -9,6 +9,7 @@ import {
 } from '@util/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
+import { ArrayU } from '@util/common/ArrayU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
@@ -20,6 +21,7 @@ import {
 } from 'src/ui-data/models/media/download/useMediaArrayDownloader.ts'
 import { MediaInArrayDUC, MediaOperation, newDefaultMediaOperation } from 'src/ui-data/models/media/Media.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import { pageLayoutAddSafeActionBarsPaddings } from 'src/ui/components/Pages/PageLayoutU.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { useProfileTab } from 'src/ui/2-pages/Profile/useProfileTab'
 import Tests from 'src/ui/2-pages/Profile/Tests/Tests.tsx'
@@ -37,9 +39,6 @@ import {
 import { ProfilePageTabHeaderContext } from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { Pages } from 'src/ui/components/Pages/Pages.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { ObjectU } from 'src/util/common/ObjectU.ts'
 import { FileU } from 'src/util/file/FileU.ts'
@@ -50,7 +49,6 @@ import { useFormDerivedData } from 'src/mini-libs/form-data/hooks/useFormDerived
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import safePageContentPaddings = Pages.pageAddSafeInsets
 import blobToDataUrl = FileU.blobToDataUrl
 import fetchToBlob = FileU.fetchToBlob
 import withThrottle = AsyncU.withThrottle
@@ -61,9 +59,6 @@ import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
-import row = EmotionCommon.row
-import col = EmotionCommon.col
-import absTlwh = EmotionCommon.absTlwh
 import arrOfIndices = ArrayU.arrOfIndices
 import ValueOrMapper = TypeU.ValueOrMapper
 import isfunction = TypeU.isfunction
@@ -566,7 +561,7 @@ const ProfilePage = React.memo(() => {
                               }
                               
                               ${OverflowWrapperStyle.El.scrollbarOverlay.thiz()} {
-                                ${safePageContentPaddings};
+                                ${pageLayoutAddSafeActionBarsPaddings};
                               }
                             `}
                             showVertical={isStable}

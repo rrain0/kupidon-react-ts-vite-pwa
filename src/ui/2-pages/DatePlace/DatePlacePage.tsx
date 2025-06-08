@@ -16,11 +16,11 @@ import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { Contact } from 'src/ui/1-widgets/ContactButton/Contact.ts'
 import ContactButton from 'src/ui/1-widgets/ContactButton/ContactButton.tsx'
+import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
-import { Pages } from 'src/ui/components/Pages/Pages'
-import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars'
 import { useUiValues, useUiValuesArr } from 'src/mini-libs/ui-text/useUiText.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
@@ -82,105 +82,101 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
   return (
     <>
     
-      <Pages.PageGrad>
-        <Pages.AddSafeInsets>
-          <Pages.ContentColSm style={{ gap: 0 }}>
-            
-            <Grid cols='38px 1fr 38px' stretch>
-              <Flex centerStart m={-13}><BackButton/></Flex>
-              <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
-              <Gap w={38}/>
-            </Grid>
-            
-            <div style={{ height: 34 }}/>
-            
-            {!place.video && (
-              <ImgSpark
-                css={ImgSparkS6.t(imgSparkS)}
-                src={place.picture}
-              />
-            )}
-            {place.video && (
-              <Video autoPlay loop muted playsInline
-                src={place.video}
-              />
-            )}
-            
-            <div style={{ height: 19 }}/>
-            
-            <Title>
-              {uiText.pageTitle}
-            </Title>
-            
-            <div style={{ height: 7 }}/>
-            
-            <ContactButton
-              contact={{ type: 'address', text: uiText.addressText! }}
-              onClick={locationDialog.open}
-            />
-            
-            <div style={{ height: 17 }}/>
-            
-            <Description>{uiText.description}</Description>
-            
-            
-            
-            <div style={{ height: 19 }}/>
-            
-            <div css={css`${col}; gap: 26px;`}>
-              
-              {!!featuresUiText.length && (
-                <div css={col}>
-                  <ListTitle>{uiText.features}</ListTitle>
-                  
-                  <div style={{ height: 12 }}/>
-                  
-                  <List>
-                    {featuresUiText.map(it => (
-                      <ListItem key={it}>{it}</ListItem>
-                    ))}
-                  </List>
-                </div>
-              )}
-              
-              {!!bonusesUiText.length && (
-                <div css={col}>
-                  <ListTitle>{uiText.bonusesFromKupidon}</ListTitle>
-                  
-                  <div style={{ height: 12 }}/>
-                  
-                  <List>
-                    {bonusesUiText.map(it => (
-                      <ListItem key={it}>{it}</ListItem>
-                    ))}
-                  </List>
-                </div>
-              )}
-              
-              {!!place.contacts.length && (
-                <div css={col}>
-                  <ListTitle>{uiText.contactInformation}</ListTitle>
-                  
-                  <div style={{ height: 12 }}/>
-                  
-                  <ContactsList>
-                    {place.contacts.map(it => (
-                      <ContactButton
-                        key={JSON.stringify(it)}
-                        contact={it}
-                      />
-                    ))}
-                  </ContactsList>
-                </div>
-              )}
-              
-            </div>
+      <PageLayout col data-display-name='DatePlacePage'>
+        <PageContentLayout colSm>
           
-          </Pages.ContentColSm>
-        </Pages.AddSafeInsets>
+          <Grid cols='38px 1fr 38px' stretch>
+            <Flex centerStart m={-13}><BackButton/></Flex>
+            <Flex center><Hdrs.Page>{uiText.pageTitle}</Hdrs.Page></Flex>
+            <Gap w={38}/>
+          </Grid>
+          
+          <div style={{ height: 34 }}/>
+          
+          {!place.video && (
+            <ImgSpark
+              css={ImgSparkS6.t(imgSparkS)}
+              src={place.picture}
+            />
+          )}
+          {place.video && (
+            <Video autoPlay loop muted playsInline
+              src={place.video}
+            />
+          )}
+          
+          <div style={{ height: 19 }}/>
+          
+          <Title>
+            {uiText.pageTitle}
+          </Title>
+          
+          <div style={{ height: 7 }}/>
+          
+          <ContactButton
+            contact={{ type: 'address', text: uiText.addressText! }}
+            onClick={locationDialog.open}
+          />
+          
+          <div style={{ height: 17 }}/>
+          
+          <Description>{uiText.description}</Description>
+          
+          
+          
+          <div style={{ height: 19 }}/>
+          
+          <div css={css`${col}; gap: 26px;`}>
+            
+            {!!featuresUiText.length && (
+              <div css={col}>
+                <ListTitle>{uiText.features}</ListTitle>
+                
+                <div style={{ height: 12 }}/>
+                
+                <List>
+                  {featuresUiText.map(it => (
+                    <ListItem key={it}>{it}</ListItem>
+                  ))}
+                </List>
+              </div>
+            )}
+            
+            {!!bonusesUiText.length && (
+              <div css={col}>
+                <ListTitle>{uiText.bonusesFromKupidon}</ListTitle>
+                
+                <div style={{ height: 12 }}/>
+                
+                <List>
+                  {bonusesUiText.map(it => (
+                    <ListItem key={it}>{it}</ListItem>
+                  ))}
+                </List>
+              </div>
+            )}
+            
+            {!!place.contacts.length && (
+              <div css={col}>
+                <ListTitle>{uiText.contactInformation}</ListTitle>
+                
+                <div style={{ height: 12 }}/>
+                
+                <ContactsList>
+                  {place.contacts.map(it => (
+                    <ContactButton
+                      key={JSON.stringify(it)}
+                      contact={it}
+                    />
+                  ))}
+                </ContactsList>
+              </div>
+            )}
+            
+          </div>
         
-        <PageScrollbars/>
-      </Pages.PageGrad>
+        </PageContentLayout>
+      </PageLayout>
       
       
       <UseBottomSheetState isOpen={locationDialog.isOpen} onClose={locationDialog.close}>
@@ -210,6 +206,7 @@ const DatePlacePage = React.memo((props: DatePlacePageProps) => {
     </>
   )
 })
+DatePlacePage.displayName = 'DatePlacePage'
 export default DatePlacePage
 
 
