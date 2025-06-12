@@ -70,8 +70,8 @@ const Textarea = React.memo((props: TextareaProps) => {
       {...frameProps}
     >
       
-      { startViews }
-      { childrenPosition === 'start' && children }
+      {startViews}
+      {childrenPosition === 'start' && children}
       
       {/* Textarea */}
       <textarea
@@ -90,8 +90,8 @@ const Textarea = React.memo((props: TextareaProps) => {
         }}
       />
       
-      { childrenPosition === 'end' && children }
-      { endViews }
+      {childrenPosition === 'end' && children}
+      {endViews}
       
       {/* Border */}
       <div css={borderStyle}

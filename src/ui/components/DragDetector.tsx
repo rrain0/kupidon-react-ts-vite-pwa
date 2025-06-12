@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from '@util/common/TypeU.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import PartialUndef = TypeU.PartialUndef
 import contents = EmotionCommon.contents

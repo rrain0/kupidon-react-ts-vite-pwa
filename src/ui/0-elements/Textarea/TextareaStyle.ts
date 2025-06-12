@@ -58,6 +58,7 @@ export namespace TextareaStyle {
     ${El.frame} {
       border-radius: 15px;
       background: ${t.input.bg};
+      cursor: text;
     }
     ${El.textarea} {
       width: 100%;

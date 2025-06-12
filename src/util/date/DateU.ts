@@ -29,7 +29,7 @@ export namespace DateU {
   
   
   /**
-   * @param birthDate {string} date in format like '2000-08-23T14:33:55.609+07:00'
+   * @param birthDate {string} date in format like '2000-08-23'
    * @returns {string} e.g. '23'
    * */
   export const age = (birthDate: string) => {
@@ -40,7 +40,7 @@ export namespace DateU {
   }
   
   /**
-   * @param birthDate date in format like '2000-08-23T14:33:55.609+07:00'
+   * @param birthDate date in format like '2000-08-23'
    * @returns '23 years', '23 года'
    * */
   export const ageYears = (birthDate: string, appLang: Lang.Supported) => {
@@ -58,7 +58,7 @@ export namespace DateU {
   
   
   /**
-   * @param birthDate date in format like '2000-08-23T14:33:55.609+07:00'
+   * @param birthDate date in format like '2000-08-23'
    * @returns '23 years 11 months 30 days', '23 года 11 месяцев 30 дней'
    * */
   export const yearsMonthsDaysFromBirthDate = (birthDate: string, appLang: Lang.Supported) => {

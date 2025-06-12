@@ -5,11 +5,11 @@ name: kupidon-prod-react
 
 services:
 
-  react:
+  nginx-react:
     # You must build image with BACKEND_BASE_URL before push
     # docker build -t rrain0/kupidon-react-react:1.6.25 --build-arg BACKEND_BASE_URL=https://kupidon.rrain.fvds.ru:40010 .
     # docker push rrain0/kupidon-react-react:1.6.25
-    image: rrain0/kupidon-react-react:1.7.14
+    image: rrain0/kupidon-react-react:1.7.16
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:
@@ -21,21 +21,21 @@ services:
     restart: unless-stopped
 
 
-  nginx:
+  nginx-proxy:
     image: nginx:1.25.5-alpine
-    network_mode: 'service:react'
+    network_mode: 'service:nginx-react'
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/templates/nginx.conf.template:ro
-      - ${CERT_FILE}:/etc/ssl/cert/cert.crt:ro
-      - ${CERT_KEY}:/etc/ssl/cert/cert.key:ro
+      - ./nginx-proxy/nginx.conf:/etc/nginx/templates/nginx.conf.template:ro
+      - ${PROXY_CERT_CRT}:/etc/ssl/cert/cert.crt:ro
+      - ${PROXY_CERT_KEY}:/etc/ssl/cert/cert.key:ro
     environment:
       # where to find 'templates/nginx.conf.template'
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
       - REACT_PORT
       - PROXY_HOST
       - PROXY_PORT
-      - CERT_FILE
-      - CERT_KEY
+      - PROXY_CERT_CRT
+      - PROXY_CERT_KEY
       - KTOR_PORT
       - KTOR_HOST
     restart: unless-stopped

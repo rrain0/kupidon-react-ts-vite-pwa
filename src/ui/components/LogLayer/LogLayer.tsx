@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import { useLogLayerZustand } from 'src/ui/App/LogLayerZustand.ts'
+import { useLogLayerZustand } from 'src/ui/components/LogLayer/LogLayerZustand.ts'
 import col = EmotionCommon.col
 
 

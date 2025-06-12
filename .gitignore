@@ -15,9 +15,7 @@ dev-dist
 
 ### Private config ###
 react.prod.env
-#react.local.env
-#react.dev.env
-#react.template.env
+/nginx-proxy/certs-prod/
 
 # Editor directories and files
 .vscode/*

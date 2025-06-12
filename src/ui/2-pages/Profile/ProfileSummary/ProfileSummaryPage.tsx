@@ -1,7 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -28,7 +27,7 @@ import {
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
 import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/ProfileSummary/parts/SummaryPageFeatureCards.tsx'
 import { ProfileSummaryPageParts } from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
-import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -44,7 +43,6 @@ import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 
 
 
@@ -93,9 +91,6 @@ const ProfileSummaryPage = React.memo(() => {
     })
   }, [remoteMainPhoto])
   
-  
-  const [search] = useSearchParams()
-  
   const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
   
   
@@ -107,7 +102,7 @@ const ProfileSummaryPage = React.memo(() => {
   return (
     <>
     
-      <PageLayout col>
+      <PageLayout col data-display-name='ProfileSummaryPage'>
         <PageContentLayout colSm styleInner={{ gap: 16 }}>
           
           <InfoCard col>
@@ -116,7 +111,7 @@ const ProfileSummaryPage = React.memo(() => {
             
             <Flex row>
               
-              <Link to={RootRoute.profile.id.userId[use](id).preview[fullAnySearchParams](search)}>
+              <AppLink toFull={RootRoute.profile.id.userId[use](id).preview}>
                 <AvaBox>
                   <MediaDownloader media={mainPhoto}>
                     {(media) => {
@@ -126,13 +121,13 @@ const ProfileSummaryPage = React.memo(() => {
                     }}
                   </MediaDownloader>
                 </AvaBox>
-              </Link>
+              </AppLink>
               
               <Gap w={14}/>
               
               
               
-              <Link to={RootRoute.profile.id.userId[use](id).profile[fullAnySearchParams](search)}>
+              <AppLink toFull={RootRoute.profile.id.userId[use](id).profile}>
                 <NameInfoEditArea col>
                   
                   <Name>{name}</Name>
@@ -148,7 +143,7 @@ const ProfileSummaryPage = React.memo(() => {
                   </Edit>
                   
                 </NameInfoEditArea>
-              </Link>
+              </AppLink>
               
               
               
@@ -175,11 +170,11 @@ const ProfileSummaryPage = React.memo(() => {
             
             <Gap h={9}/>
             
-            <Link to={RootRoute.profile.id.userId[use](id).profile[fullAnySearchParams](search)}>
+            <AppLink toFull={RootRoute.profile.id.userId[use](id).profile}>
               <HeaderArrow css={headerArrowS}>
                 {completeProfileDescriptionText}
               </HeaderArrow>
-            </Link>
+            </AppLink>
             
             <Gap h={9}/>
             
@@ -210,6 +205,7 @@ const ProfileSummaryPage = React.memo(() => {
     </>
   )
 })
+ProfileSummaryPage.displayName = 'ProfileSummaryPage'
 export default ProfileSummaryPage
 
 

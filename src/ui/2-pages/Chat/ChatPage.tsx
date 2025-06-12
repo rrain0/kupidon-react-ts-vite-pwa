@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useLayoutEffect } from 'react'
@@ -6,6 +7,8 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
@@ -202,7 +205,7 @@ const ChatPage = React.memo(() => {
             
             <Textarea autoFocus hFitText
               placeholder='Напишите сообщение...'
-              css={[TextareaStyle.inputTrans]}
+              css={[TextareaStyle.inputTrans, { [TextareaStyle.El.frame]: commonStyle({ pv: 6 }) }]}
             />
             
             <Flex row center g={10} justifySpaceBetween>
@@ -211,7 +214,9 @@ const ChatPage = React.memo(() => {
               <VideoCameraIc css={SvgIconS6.t(pictureIcS)}/>
               <EmojiLaughIc css={SvgIconS6.t(pictureIcS)}/>
               <PuzzleIc css={SvgIconS6.t(pictureIcS)}/>
-              <PlaneSendIc css={SvgIconS6.t(planeSendIcS)}/>
+              <Button css={IconButtonS6.t(sendButtonS)}>
+                <PlaneSendIc/>
+              </Button>
             </Flex>
           
           </Flex>
@@ -242,6 +247,12 @@ const pictureIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
   icon: { h: 23, w: 'auto', color: '#8B8B8B' },
 }]
 const planeSendIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
+  // TODO Theme
+  icon: { h: 30, w: 'auto', color: '#F45378' },
+}]
+
+const sendButtonS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal, {
+  button: { m: -11, sz: 'auto' },
   // TODO Theme
   icon: { h: 30, w: 'auto', color: '#F45378' },
 }]
