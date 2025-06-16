@@ -248,7 +248,7 @@ const AccountSettingsPage = React.memo(() => {
                { size: 'small', static: true }
                )}
                readOnly
-               value={new Date(user.created) + ''}
+               value={new Date(user.createdAt) + ''}
                />
                </ItemContainer>
                
@@ -259,21 +259,21 @@ const AccountSettingsPage = React.memo(() => {
                { size: 'small', static: true }
                )}
                readOnly
-               value={new Date(user.updated) + ''}
+               value={new Date(user.updatedAt) + ''}
                />
                </ItemContainer> */}
               
               <ItemContainer>
                 <Hdrs.InputTitleBold>{titleText.userCreated}</Hdrs.InputTitleBold>
                 <DataField css={DataFieldStyle.statikSmall}>
-                  {new Date(user.created) + ''}
+                  {new Date(user.createdAt) + ''}
                 </DataField>
               </ItemContainer>
               
               <ItemContainer>
                 <Hdrs.InputTitleBold>{titleText.userUpdated}</Hdrs.InputTitleBold>
                 <DataField css={DataFieldStyle.statikSmall}>
-                  {new Date(user.updated) + ''}
+                  {new Date(user.updatedAt) + ''}
                 </DataField>
               </ItemContainer>
               

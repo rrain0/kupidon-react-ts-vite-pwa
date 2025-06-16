@@ -75,9 +75,9 @@ export namespace ValidationCore {
   
   export class Failure<Vs extends Values> {
     
-    static getAwaitDelay(created: Date, delay: number): Promise<void> {
+    static getAwaitDelay(createdAt: Date, delay: number): Promise<void> {
       return new Promise(
-        resolve => setTimeout(resolve, +created + delay - +new Date())
+        resolve => setTimeout(resolve, +createdAt + delay - +new Date())
       )
     }
     
@@ -101,9 +101,9 @@ export namespace ValidationCore {
         if (this.type === 'server') return true
         return false
       })()
-      this.created = data.created ?? new Date()
+      this.createdAt = data.createdAt ?? new Date()
       this.delay = data.delay ?? 0
-      this.awaitDelay = Failure.getAwaitDelay(this.created, this.delay)
+      this.awaitDelay = Failure.getAwaitDelay(this.createdAt, this.delay)
     }
     
     
@@ -117,7 +117,7 @@ export namespace ValidationCore {
     readonly highlight: boolean
     readonly notify: boolean
     readonly canSubmit: boolean
-    readonly created: Date
+    readonly createdAt: Date
     readonly delay: number
     readonly awaitDelay: Promise<void>
     
@@ -128,7 +128,7 @@ export namespace ValidationCore {
       return this.delayedFor > 0
     }
     get delayedFor() {
-      const showTime = +this.created + this.delay
+      const showTime = +this.createdAt + this.delay
       const now = +new Date()
       const delay = showTime - now
       return Math.max(delay, 0)
@@ -147,7 +147,7 @@ export namespace ValidationCore {
         highlight: u && 'highlight' in u ? u.highlight : this.highlight,
         notify: u && 'notify' in u ? u.notify : this.notify,
         canSubmit: u && 'canSubmit' in u ? u.canSubmit : this.canSubmit,
-        created: u && 'created' in u ? u.created : this.created,
+        createdAt: u && 'createdAt' in u ? u.createdAt : this.createdAt,
         delay: u && 'delay' in u ? u.delay : this.delay,
       })
     }
@@ -170,7 +170,7 @@ export namespace ValidationCore {
    * @param highlight - highlight field with this error
    * @param notify - show error notification
    * @param canSubmit - can you submit if this error exists?
-   * @param created - failure creation timestamp (Date object)
+   * @param createdAt - failure creation timestamp (Date object)
    * @param delay - delay to show (ms)
    */
   export type FailureData<Vs extends Values> = {
@@ -190,7 +190,7 @@ export namespace ValidationCore {
     highlight?: boolean | undefined
     notify?: boolean | undefined
     canSubmit?: boolean | undefined
-    created?: Date | undefined
+    createdAt?: Date | undefined
     delay?: number | undefined
   }
   
@@ -216,7 +216,7 @@ export namespace ValidationCore {
       highlight?: boolean | undefined,
       notify?: boolean | undefined,
       canSubmit?: boolean | undefined,
-      created?: Date | undefined,
+      createdAt?: Date | undefined,
       delay?: number | undefined,
     }) {
       this.code = data.code
@@ -229,7 +229,7 @@ export namespace ValidationCore {
       this.highlight = data.highlight
       this.notify = data.notify
       this.canSubmit = data.canSubmit
-      this.created = data.created
+      this.createdAt = data.createdAt
       this.delay = data.delay
     }
     
@@ -247,7 +247,7 @@ export namespace ValidationCore {
     highlight?: boolean | undefined
     notify?: boolean | undefined
     canSubmit?: boolean | undefined
-    created?: Date | undefined
+    createdAt?: Date | undefined
     delay?: number | undefined
   }
   

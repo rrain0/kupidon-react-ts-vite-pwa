@@ -25,8 +25,8 @@ export interface CurrentUser {
   email: string
   emailVerified: boolean
   roles: string[]
-  created: string
-  updated: string
+  createdAt: string
+  updatedAt: string
   name: string
   birthDate: string
   age?: number // TODO remove ?

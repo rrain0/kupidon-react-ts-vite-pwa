@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
 import { ApiUtils } from 'src/api/ApiUtils'
-import { CurrentUser } from 'src/api/model/User.ts'
+import { CurrentUser, OtherUser } from 'src/api/model/User.ts'
 import { Gender } from 'src/api/model/Gender.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { getDataUrlProps } from '@util/file/DataUrl.ts'
@@ -35,6 +35,20 @@ export namespace UserApi {
     )
   }
   
+  
+  
+  
+  
+  export type UserByIdSuccessData = {
+    user: OtherUser
+  }
+  export type UserByIdErrorData = NoUserResponseError | TechnicalError
+  export const userById = async (id: string) => {
+    return handleResponse<UserByIdSuccessData, UserByIdErrorData>(
+      ax.get(`${ApiRoutes.userId}/${id}`)
+    )
+  }
+  
     
   
   
@@ -57,11 +71,11 @@ export namespace UserApi {
     gender: 'MALE' | 'FEMALE',
     birthDate: string, // '2005-11-10T00:00:00.000+08:00'
   }
-  export const create = async (user: UserToCreate, lang: string[]) => {
-    return handleResponse<CreateSuccessData, CreateErrorData>(
-      ax.post(ApiRoutes.userCreate, user, { params: { lang } })
+  export const create = async (user: UserToCreate, lang: string[]) => (
+    handleResponse<CreateSuccessData, CreateErrorData>(
+      ax.post(ApiRoutes.user, user, { params: { lang } })
     )
-  }
+  )
   
   
   
@@ -88,7 +102,7 @@ export namespace UserApi {
   }>
   export const update = async (user: UserToUpdate) => (
     handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
-      axAccess.put(ApiRoutes.userUpdate, user)
+      axAccess.put(ApiRoutes.user, user)
     )
   )
   

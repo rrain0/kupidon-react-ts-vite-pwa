@@ -12,6 +12,7 @@ import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
@@ -131,18 +132,13 @@ const LoginPage = React.memo(() => {
   
   
   
-  
-  
-  useEffect(() => {
-    if (isSuccess) {
-      navigate(returnPath ?? RootRoute.findPair[full]())
-    }
-  }, [isSuccess, navigate, returnPath])
-  
-  
-  
   return (
     <>
+      
+      {isSuccess && returnPath && (
+        <AppNavigate toFull={RootRoute.findPair} noSearchFromUrl/>
+      )}
+      
       <PageLayout col data-display-name='LoginPage'>
         <PageContentLayout colSm grow>
           <Flex col grow justify g={30}>

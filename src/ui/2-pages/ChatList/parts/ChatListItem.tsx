@@ -9,6 +9,7 @@ import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect } from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -21,6 +22,7 @@ import Callback1 = TypeU.Callback1
 import toEmptyAttr = TypeU.toEmptyAttr
 import gridStackC = EmotionCommon.gridStackC
 import RootRoute = AppRoutes.RootRoute
+import use = RouteBuilder.use
 
 
 
@@ -123,12 +125,12 @@ const ChatListItem = React.memo(({
   
   return (
     <ListSlot alignedStretch h={hItem} mt={g}
+      data-display-name='ChatListItem'
       ref={setGapSlotElem}
       style={{
         ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
         ...first && { marginTop: 0 },
       }}
-      data-display-name='ChatListItem'
     >
       <ItemSlot alignedStretch h={h} hMin={h} hMax={h} mv={mv} mh={mh}>
         
@@ -150,7 +152,7 @@ const ChatListItem = React.memo(({
           }}
         >
           <ItemBox alignedStretch h={h}>
-            <AppLink toFull={RootRoute.chat}
+            <AppLink toFull={RootRoute.chat.user.id[use](id)}
               onClick={ev => {
                 if (getWasGesture() || isAnySelected) ev.preventDefault(); ev.stopPropagation()
               }}

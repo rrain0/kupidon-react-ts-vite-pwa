@@ -21,6 +21,7 @@ export type AppNavigateProps<R extends RouteSegment> =
   & Pu<{
     toFull: R
     allowedNamedParams: NoInfer<AllowedNameParamsRoutes<R>>
+    noSearchFromUrl: boolean
   }>
 
 
@@ -29,6 +30,7 @@ const AppNavigate = ReactU.memo(<R extends RouteSegment>(props: AppNavigateProps
   const {
     toFull,
     allowedNamedParams,
+    noSearchFromUrl,
   } = props
   
   const [searchParams] = useSearchParams()
@@ -51,7 +53,7 @@ const AppNavigate = ReactU.memo(<R extends RouteSegment>(props: AppNavigateProps
     <Navigate
       data-display-name='AppNavigate'
       to={toFull[fullParams]({
-        anySearchParams: searchParams,
+        ...!noSearchFromUrl && { anySearchParams: searchParams },
         allowedNamedParams: allowedNamedParamsString,
       })}
     />

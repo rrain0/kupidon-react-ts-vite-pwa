@@ -8,6 +8,7 @@ export namespace ApiRoutes {
   
   export const auth = `${apiV1}/auth`
   export const user = `${apiV1}/user`
+  export const usersListAll = `${apiV1}/users-list/all`
   export const userToUserLike = `${apiV1}/user-to-user-like`
   
   
@@ -18,13 +19,10 @@ export namespace ApiRoutes {
   
   
   export const userCurrent = `${user}/current`
-  export const userCreate = `${user}/create`
-  export const userUpdate = `${user}/update`
+  export const userId = `${user}/id`
+  
+  
   export const userPostProfilePhoto = `${user}/profile-photo`
-  
-  
-  
-  export const usersListAll = `${apiV1}/users-list/all`
   
   
   

@@ -15,7 +15,6 @@ import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import ChatMessage from 'src/ui/2-pages/Chat/parts/ChatMessage.tsx'
-import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatListPage.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
@@ -32,12 +31,35 @@ import VideoCameraIc = SvgIconsPack.VideoCameraIc
 
 
 
-const chatItem = mockChatItems.find(it => it.id === '175dc7be-3f56-4b9d-9403-e994b72624dc')!
 
 
 
 
-const ChatPage = React.memo(() => {
+
+
+export type ChatCompanionData = {
+  id: string
+  ava?: string | undefined
+  online?: boolean | undefined
+  name: string
+  mute?: boolean | undefined
+  pinned?: number | undefined // int 0+, 0 is topmost, undefined - not pinned
+  isWriting?: boolean | undefined
+}
+
+export type ChatMessage = {
+  id: string
+}
+
+
+export type ChatPageProps = {
+  companion: ChatCompanionData
+  messages: ChatMessage[]
+}
+
+
+const ChatPage = React.memo((props: ChatPageProps) => {
+  const { companion, messages } = props
   
   useLayoutEffect(() => {
     const p = getViewProps(window)
@@ -58,11 +80,11 @@ const ChatPage = React.memo(() => {
           
           <BackButton/>
           
-          <Ava id={chatItem.id} ava={chatItem.ava} alignedStretch h='full'/>
+          <Ava id={companion.id} ava={companion.ava} alignedStretch h='full'/>
           
           <Flex col ph={12} stretched grow justifySpaceAround>
             <Flex css={[Txt.s18BoldTight, { color: 'black' /* TODO Theme */ }]}>
-              {chatItem.name}
+              {companion.name}
             </Flex>
             <Flex css={[Txt.s15Tight, { color: '#858585' /* TODO Theme */ }]}>
               {'был(а) в 20:51'}

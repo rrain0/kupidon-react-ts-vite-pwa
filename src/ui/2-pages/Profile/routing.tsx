@@ -9,6 +9,7 @@ import {
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
@@ -59,14 +60,13 @@ const RouteProfileIdUserIdTab = React.memo(() => {
 
 
 const RouteProfileIdUserIdAny = React.memo(() => {
-  const [searchParams] = useSearchParams()
   const userIdRoute = RootRoute.profile.id.userId[use](':userId')
   const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
   
   return (
-    <Navigate
-      to={RootRoute.profile.id.userId[use](urlUserId).summary[fullAnySearchParams](searchParams)}
-      replace={true}
+    <AppNavigate
+      toFull={RootRoute.profile.id.userId[use](urlUserId).summary}
+      replace
     />
   )
 })
@@ -105,18 +105,19 @@ const RouteProfileId = React.memo(() => {
   const authId = useAuthZustand(s => s.user?.id)
   
   if (!authId) return (
-    <Navigate
-      to={RootRoute.login[fullAllowedNameParams]({
+    <AppNavigate
+      toFull={RootRoute.login}
+      allowedNamedParams={{
         returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
-      })}
-      replace={true}
+      }}
+      replace
     />
   )
   
   return (
-    <Navigate
-      to={RootRoute.profile.id.userId[use](authId)[fullAnySearchParams](searchParams)}
-      replace={true}
+    <AppNavigate
+      toFull={RootRoute.profile.id.userId[use](authId)}
+      replace
     />
   )
 })
@@ -138,19 +139,6 @@ export const routingProfileId: RouteObject[] = [
 
 
 
-
-const RouteProfileAny = React.memo(() => {
-  const [searchParams] = useSearchParams()
-  return (
-    <Navigate
-      to={RootRoute.profile.id[fullAnySearchParams](searchParams)}
-      replace={true}
-    />
-  )
-})
-
-
-
 // path: 'profile / ...'
 export const routingProfile: RouteObject[] = [
   {
@@ -159,7 +147,7 @@ export const routingProfile: RouteObject[] = [
   },
   {
     path: '*',
-    Component: RouteProfileAny,
+    element: <AppNavigate toFull={RootRoute.profile.id} replace/>,
   },
 ]
 
