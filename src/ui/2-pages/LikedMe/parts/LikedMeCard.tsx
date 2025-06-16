@@ -48,7 +48,7 @@ const LikedMeCard = React.memo((props: LikedMeCardProps) => {
   return (
     <Flex pos='rel' ratio={171 / 217} rad={15} noOverflow>
       
-      {picture && <ImgSpark src={picture} css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}/>}
+      {picture && <ImgSpark src={picture} css={ImgSparkS6.t(ImgSparkS6.S.img.img.absTrbl.normal)}/>}
       {!picture && <EmptyAva id={id}/>}
       
       {locked && (

@@ -9,6 +9,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
+import AvaButton from 'src/ui/1-widgets/avatars/Ava/AvaButton.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
@@ -51,6 +52,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
         {/* TODO Translation */}
         <MutualSympathiesText>Взаимные симпатии</MutualSympathiesText>
         <Gap grow/>
+        {/* TODO Translation */}
         <HeaderArrow css={[HeaderArrowS.secondary, ButtonS6.t(allButtonS)]}>Все</HeaderArrow>
       </Flex>
     
@@ -60,14 +62,14 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
         <Flex row g={23}
           css={[
             offsetToPageContentPaddings({ h: true }),
-            virtualOffset({ t: 4 }),
+            virtualOffset({ t: 8 }),
             { overflow: 'auto' },
             noScrollbars,
           ]}
         >
           {mutualSympathiesItems.map(({ id, ava, name, online }) => (
             <Flex w={66} key={id} col noShrink align g={7}>
-              <Ava alignedStretch noShrink shadow id={id} ava={ava} online={online} mutualSympathy/>
+              <AvaButton alignedStretch noShrink shadow id={id} ava={ava} online={online} mutualSympathy/>
               <NameBox><Name>{name}</Name></NameBox>
             </Flex>
           ))}

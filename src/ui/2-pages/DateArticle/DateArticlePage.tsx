@@ -101,7 +101,7 @@ export default DateArticlePage
 
 
 const imgSparkS: AppWidgetStyle = [
-  ImgSparkS6.S.img.img.wFull.normal, {
+  ImgSparkS6.S.img.img.fullW.normal, {
     imgFrame: { ratio: 1.570, r: StyleVals.cardRadius },
   },
 ]

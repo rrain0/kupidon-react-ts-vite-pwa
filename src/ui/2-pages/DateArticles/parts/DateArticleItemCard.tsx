@@ -67,7 +67,7 @@ const DateArticleItemCard = React.memo((props: DateArticleItemCardProps) => {
         
         
         <ImgSpark
-          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
+          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absTrbl.normal)}
           src={picture}
         />
         

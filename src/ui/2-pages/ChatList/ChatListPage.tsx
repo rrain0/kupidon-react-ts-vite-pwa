@@ -5,14 +5,23 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
+import { OtherUser } from 'src/api/model/User.ts'
+import { UsersListApi } from 'src/api/requests/UsersListApi.ts'
+import { UserToUserLikeApi } from 'src/api/requests/UserToUserLikeApi.ts'
+import { useApiRequest } from 'src/api/useApiRequest.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
+import { ProfileCardsStackListItem } from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
 import ChatList from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
 import ChatListActionBar from 'src/ui/2-pages/ChatList/parts/ChatListActionBar.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
 import ChatListPageHeader from 'src/ui/2-pages/ChatList/parts/ChatListPageHeader.tsx'
-import MutualSympathiesList from 'src/ui/2-pages/ChatList/parts/MutualSympathiesList.tsx'
+import MutualSympathiesList, {
+  MutualSympathiesItem,
+} from 'src/ui/2-pages/ChatList/parts/MutualSympathiesList.tsx'
+import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
@@ -327,9 +336,7 @@ const ChatListPage = React.memo(() => {
           
           <Gap h={24}/>
           
-          {preparedMutualSympathiesItems?.length && (
-            <MutualSympathiesList mutualSympathiesItems={preparedMutualSympathiesItems}/>
-          )}
+          <MutualSympathiesListWithItems/>
           
           <Gap h={14}/>
           
@@ -356,3 +363,60 @@ ChatListPage.displayName = 'ChatListPage'
 export default ChatListPage
 
 
+
+
+// TODO extract
+const MutualSympathiesListWithItems = React.memo(() => {
+  
+  const [items, setItems] = useState(undefined as OtherUser[] | undefined)
+  
+  
+  const [preparedMutualSympathiesItems, setPreparedMutualSympathiesItems] = useState([] as (
+    (MutualSympathiesItem & {
+      mutualSympathyAppearanceDate?: string | undefined
+    })[]
+  ))
+  
+  useEffect(() => {
+    if (isdef(items)) {
+      setPreparedMutualSympathiesItems(items.map(it => {
+        
+        return {
+          id: it.id,
+          ava: it.photos.find(p => p.index === 0)?.url,
+          name: it.name,
+          online: false,
+        }
+      }))
+    }
+  }, [items])
+  
+  
+  //wait(500, () => setItems(data))
+  
+  const {
+    request,
+    isLoading, isSuccess, isError,
+    response, resetResponse,
+  } = useApiRequest({
+    values: { },
+    prepareAndRequest: useCallback(() => {
+      return UserToUserLikeApi.listAll()
+    }, []),
+  })
+  
+  useEffect(() => {
+    request()
+  }, [])
+  
+  
+  useEffect(() => {
+    if (isSuccess && response?.isSuccess) {
+      setItems(response.data.likedUsers)
+    }
+  }, [isSuccess])
+  
+  return !!preparedMutualSympathiesItems?.length && (
+    <MutualSympathiesList mutualSympathiesItems={preparedMutualSympathiesItems}/>
+  )
+})

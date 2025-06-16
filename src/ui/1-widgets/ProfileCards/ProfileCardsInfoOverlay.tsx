@@ -78,9 +78,7 @@ export const ProfileCardsInfoOverlay = React.memo((props: ProfileCardsInfoOverla
   const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
   
   return (
-    <ProfileCardsInfoBox
-      data-display-name='ProfileCardsInfoOverlay'
-    >
+    <ProfileCardsInfoBox data-display-name='ProfileCardsInfoOverlay'>
       
       
       <Match>Совпадение - {match}%</Match>

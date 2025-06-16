@@ -4,7 +4,7 @@ import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-  WidgetStyle,
+  WidgetStyle, WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -88,12 +88,35 @@ export namespace ImgSparkS6 {
                 imgFrame: { sz: 'full' },
               }]
               // type: img, shape: img, size: full
-              export const wFull: WidgetStyle = [base, {
+              export const fullW: WidgetStyle = [base, {
                 imgFrame: { w: 'full', h: 'auto' },
               }]
-              // type: img, shape: img, size: absFull
-              export const absFull: WidgetStyle = [base, {
-                imgFrame: { ...absTrbl },
+              // type: img, shape: img, size: absTrbl
+              export const absTrbl: WidgetStyle = [base, {
+                imgFrame: { ...WidgetStyleCommon.absTrbl },
+              }]
+            }
+          }
+          export namespace square {
+            export const baseSize: WidgetStyle = [base, {
+              img: { ratio: 1 },
+            }]
+            export namespace Size {
+              // type: img, shape: img, size: auto
+              export const auto: WidgetStyle = [baseSize, {
+              
+              }]
+              // type: img, shape: img, size: full
+              export const full: WidgetStyle = [baseSize, {
+                imgFrame: { sz: 'full' },
+              }]
+              // type: img, shape: img, size: full
+              export const fullW: WidgetStyle = [baseSize, {
+                imgFrame: { w: 'full', h: 'auto' },
+              }]
+              // type: img, shape: img, size: absTrbl
+              export const absTrbl: WidgetStyle = [baseSize, {
+                imgFrame: { ...WidgetStyleCommon.absTrbl },
               }]
             }
           }

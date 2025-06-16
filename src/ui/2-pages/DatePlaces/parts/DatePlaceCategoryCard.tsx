@@ -67,7 +67,7 @@ export const DatePlaceCategoryCard = React.memo((props: DatePlaceCategoryCardPro
       >
         
         <ImgSpark
-          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absFull.normal)}
+          css={ImgSparkS6.t(ImgSparkS6.S.img.img.absTrbl.normal)}
           src={typeData.picture}
         />
         
