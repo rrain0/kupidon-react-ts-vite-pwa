@@ -2,8 +2,7 @@ import { ApiUtils } from 'src/api/ApiUtils'
 import { OtherUser } from 'src/api/model/User.ts'
 import { UserToUserLike } from 'src/api/model/UserToUserLike.ts'
 import { AxiosConfig } from '../AxiosConfig'
-import { ApiRoutes } from 'src/api/ApiRoutes'
-import ax = AxiosConfig.ax
+import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import TechnicalError = ApiUtils.TechnicalError
 import handleAuthenticatedResponse = ApiUtils.handleAuthenticatedResponse
 import axAccess = AxiosConfig.axAccess
@@ -11,7 +10,7 @@ import axAccess = AxiosConfig.axAccess
 
 
 
-export namespace UserToUserLikeApi {
+export namespace UserToUserApi {
   
   
   
@@ -23,21 +22,9 @@ export namespace UserToUserLikeApi {
   export type UserToUserLikeToCreate = {
     toUserId: string
   }
-  export const create = async (user: UserToUserLikeToCreate) => (
+  export const like = async (user: UserToUserLikeToCreate) => (
     handleAuthenticatedResponse<UserToUserLikeCreateSuccessData, UserToUserLikeCreateErrorData>(
-      axAccess.post(ApiRoutes.userToUserLike, user)
-    )
-  )
-  
-  
-  
-  export interface UserToUserLikeListAllSuccessData {
-    likedUsers: OtherUser[]
-  }
-  export type UserToUserLikeListAllErrorData = TechnicalError
-  export const listAll = async () => (
-    handleAuthenticatedResponse<UserToUserLikeListAllSuccessData, UserToUserLikeListAllErrorData>(
-      axAccess.get(ApiRoutes.userToUserLikeListAll)
+      axAccess.post(ApiV1Routes.userToUserLike, user)
     )
   )
   

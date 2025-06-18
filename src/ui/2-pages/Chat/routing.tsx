@@ -1,7 +1,6 @@
+import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { RouteObject, useMatch } from 'react-router'
-import { OtherUser } from 'src/api/model/User.ts'
-import { AuthApi } from 'src/api/requests/AuthApi.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -24,8 +23,8 @@ const chatItem = mockChatItems.find(it => it.id === '175dc7be-3f56-4b9d-9403-e99
 const messages = []
 
 
-const RouteChatUserId = React.memo(() => {
-  const chatUserIdRoute = RootRoute.chat.user.id[use](':id')
+const RouteChatUserIdId = React.memo(() => {
+  const chatUserIdRoute = RootRoute.chat.user.id.id[use](':id')
   const urlChatUserId = useMatch(chatUserIdRoute[full]()+'/*')!.params['id']!
   
   // TODO request for messages
@@ -78,20 +77,22 @@ const RouteChatUserId = React.memo(() => {
 
 
 
-const RouteChatUser = React.memo(() => {
-  
-  return (
-    <div></div>
-  )
-})
+// path: 'chat / user / id / :id / ...'
+const routingChatUserIdId: RouteObject[] = [
+  {
+    path: '',
+    Component: RouteChatUserIdId,
+  },
+  clearUnknownPathEnding,
+]
 
 
 
 // path: 'chat / user / id / ...'
-export const routingChatUserId: RouteObject[] = [
+const routingChatUserId: RouteObject[] = [
   {
-    path: '',
-    Component: RouteChatUserId,
+    path: RootRoute.chat.user.id.id[path] + '/*',
+    children: routingChatUserIdId,
   },
   {
     path: '*',
@@ -102,7 +103,7 @@ export const routingChatUserId: RouteObject[] = [
 
 
 // path: 'chat / user / ...'
-export const routingChatUser: RouteObject[] = [
+const routingChatUser: RouteObject[] = [
   {
     path: '',
     element: <AppNavigate toFull={RootRoute.chatList} replace/>,

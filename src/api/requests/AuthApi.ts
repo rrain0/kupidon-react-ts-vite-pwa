@@ -1,7 +1,7 @@
 import { ApiUtils } from 'src/api/ApiUtils'
 import { CurrentUser } from 'src/api/model/User.ts'
 import { AxiosConfig } from '../AxiosConfig'
-import { ApiRoutes } from 'src/api/ApiRoutes'
+import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import ax = AxiosConfig.ax
 import handleResponse = ApiUtils.handleResponse
 import NoUserResponseError = ApiUtils.NoUserResponseError
@@ -24,7 +24,7 @@ export namespace AuthApi {
   }
   export const login = async(loginPwd: LoginPwd) => {
     return handleResponse<LoginSuccessData, LoginErrorData>(
-      ax.post(ApiRoutes.authLogin, loginPwd)
+      ax.post(ApiV1Routes.authLogin, loginPwd)
     )
   }
   

@@ -1,7 +1,7 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { UsersListApi } from 'src/api/requests/UsersListApi.ts'
+import { UsersApi } from 'src/api/requests/UsersApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
@@ -104,7 +104,7 @@ const FindPairPageWithItems = React.memo(() => {
   } = useApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
-      return UsersListApi.all()
+      return UsersApi.get()
     }, []),
   })
   
@@ -115,7 +115,7 @@ const FindPairPageWithItems = React.memo(() => {
   
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
-      setItems(response.data.items.map(it => {
+      setItems(response.data.users.map(it => {
         return {
           id: it.id,
           photos: currentUserPhotosToProfilePhotos(it.photos),

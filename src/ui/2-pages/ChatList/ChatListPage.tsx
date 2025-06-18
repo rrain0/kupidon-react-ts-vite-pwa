@@ -8,8 +8,8 @@ import { useInterval2 } from '@util/react/useInterval2.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { OtherUser } from 'src/api/model/User.ts'
-import { UsersListApi } from 'src/api/requests/UsersListApi.ts'
-import { UserToUserLikeApi } from 'src/api/requests/UserToUserLikeApi.ts'
+import { UsersApi } from 'src/api/requests/UsersApi.ts'
+import { UserToUserApi } from 'src/api/requests/UserToUserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
@@ -401,7 +401,7 @@ const MutualSympathiesListWithItems = React.memo(() => {
   } = useApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
-      return UserToUserLikeApi.listAll()
+      return UsersApi.mutualLiked()
     }, []),
   })
   

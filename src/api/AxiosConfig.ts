@@ -5,7 +5,7 @@ import Axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 import axiosRetry, { IAxiosRetryConfig } from 'axios-retry'
-import { ApiRoutes } from 'src/api/ApiRoutes'
+import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import * as jose from 'jose'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
@@ -39,13 +39,13 @@ export namespace AxiosConfig {
     /*validateStatus: function (status) {
      return status >= 200 && status < 300; // default
      },*/
-    baseURL: ApiRoutes.apiV1,
+    baseURL: ApiV1Routes.apiV1,
     withCredentials: true,
   })
   axiosRetry(ax, commonAxiosRetryConfig)
   
   export const axAccess = Axios.create({ ...commonAxiosConfig,
-    baseURL: ApiRoutes.apiV1,
+    baseURL: ApiV1Routes.apiV1,
     withCredentials: true,
   })
   axiosRetry(axAccess, commonAxiosRetryConfig)
@@ -127,13 +127,13 @@ export namespace AxiosConfig {
         originalRequestConfig: originalRequestConfig,
       },
     }
-    return axAccess.get(ApiRoutes.authRefresh, configWithCustomData)
+    return axAccess.get(ApiV1Routes.authRefreshTokens, configWithCustomData)
   }
   
   
   export const rawTestRefreshToken = async () => {
-    return Axios.get(ApiRoutes.authRefresh, {
-      baseURL: ApiRoutes.apiV1,
+    return Axios.get(ApiV1Routes.authRefreshTokens, {
+      baseURL: ApiV1Routes.apiV1,
       withCredentials: true,
       headers: {
         Authorization: 'Bearer 1',

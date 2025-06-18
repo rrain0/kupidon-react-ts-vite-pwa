@@ -12,7 +12,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
-import { UserToUserLikeApi } from 'src/api/requests/UserToUserLikeApi.ts'
+import { UserToUserApi } from 'src/api/requests/UserToUserApi.ts'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
 import MediaArrayDownloader from 'src/ui-data/models/media/download/MediaArrayDownloader.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -163,7 +163,7 @@ const ProfileCardsStackList = React.memo(({
   // TODO LIST - сделать отдельную компоненту для создания фукнций колбэков со входящими данными
   const onLike = useCallback((userId: string) => {
     // TODO API
-    UserToUserLikeApi.create({ toUserId: userId })
+    UserToUserApi.like({ toUserId: userId })
     onAccept()
   }, [])
   

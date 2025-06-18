@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { RangeU } from '@util/common/RangeU.ts'
 import React, { useCallback, useState } from 'react'
-import { ApiRoutes } from 'src/api/ApiRoutes.ts'
+import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
@@ -14,12 +14,12 @@ import PageLayout from 'ui/components/Pages/PageLayout'
 
 
 
-const banUrl = `${ApiRoutes.backend}/test/image/ban.jpg`
-const zerotwoUrl = `${ApiRoutes.backend}/test/image/zerotwo.jpg`
+const banUrl = `${ApiV1Routes.backend}/test/image/ban.jpg`
+const zerotwoUrl = `${ApiV1Routes.backend}/test/image/zerotwo.jpg`
 
-const banDelayedUrl = `${ApiRoutes.backend}/test/image/delay/ban.jpg`
-const banErr404DelayedUrl = `${ApiRoutes.backend}/test/image/delay-error-404/ban.jpg`
-const banErr500DelayedUrl = `${ApiRoutes.backend}/test/image/delay-error-500/ban.jpg`
+const banDelayedUrl = `${ApiV1Routes.backend}/test/image/delay/ban.jpg`
+const banErr404DelayedUrl = `${ApiV1Routes.backend}/test/image/delay-error-404/ban.jpg`
+const banErr500DelayedUrl = `${ApiV1Routes.backend}/test/image/delay-error-500/ban.jpg`
 
 
 

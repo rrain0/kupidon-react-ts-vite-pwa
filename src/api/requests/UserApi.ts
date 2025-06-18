@@ -6,7 +6,7 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { getDataUrlProps } from '@util/file/DataUrl.ts'
 import { FileU } from 'src/util/file/FileU'
 import { AxiosConfig } from '../AxiosConfig'
-import { ApiRoutes } from 'src/api/ApiRoutes'
+import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
 import ax = AxiosConfig.ax
 import handleResponse = ApiUtils.handleResponse
@@ -31,7 +31,7 @@ export namespace UserApi {
   export type CurrentUserErrorData = AuthenticationError | NoUserResponseError | TechnicalError
   export const current = async () => {
     return handleAuthenticatedResponse<CurrentUserSuccessData, CurrentUserErrorData>(
-      axAccess.get(ApiRoutes.userCurrent)
+      axAccess.get(ApiV1Routes.userCurrent)
     )
   }
   
@@ -45,7 +45,7 @@ export namespace UserApi {
   export type UserByIdErrorData = NoUserResponseError | TechnicalError
   export const userById = async (id: string) => {
     return handleResponse<UserByIdSuccessData, UserByIdErrorData>(
-      ax.get(`${ApiRoutes.userId}/${id}`)
+      ax.get(ApiV1Routes.userIdId(id))
     )
   }
   
@@ -73,7 +73,7 @@ export namespace UserApi {
   }
   export const create = async (user: UserToCreate, lang: string[]) => (
     handleResponse<CreateSuccessData, CreateErrorData>(
-      ax.post(ApiRoutes.user, user, { params: { lang } })
+      ax.post(ApiV1Routes.user, user, { params: { lang } })
     )
   )
   
@@ -102,7 +102,7 @@ export namespace UserApi {
   }>
   export const update = async (user: UserToUpdate) => (
     handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
-      axAccess.put(ApiRoutes.user, user)
+      axAccess.put(ApiV1Routes.user, user)
     )
   )
   
@@ -147,7 +147,7 @@ export namespace UserApi {
     
     // https://axios-http.com/docs/multipart
     return handleAuthenticatedResponse<AddProfilePhotoSuccessData, AddProfilePhotoErrorData>(
-      axAccess.postForm(ApiRoutes.userPostProfilePhoto, preparedPhoto, config)
+      axAccess.postForm(ApiV1Routes.userProfilePhoto, preparedPhoto, config)
     )
   }
   

@@ -98,7 +98,10 @@ export namespace AppRoutes {
     [path]: 'chat',
     user: buildRoute({
       [path]: 'user',
-      id: buildPath(':id'),
+      id: buildRoute({
+        [path]: 'id',
+        id: buildPath(':id'),
+      }),
     }),
   })
   const likedMe = buildRoute({

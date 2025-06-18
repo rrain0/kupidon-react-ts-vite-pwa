@@ -2,7 +2,11 @@ import styled from '@emotion/styled'
 import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
-import React, { useLayoutEffect } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import { ChatMessagesApi } from 'src/api/requests/ChatMessagesApi.ts'
+import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
+import { UserApi } from 'src/api/requests/UserApi.ts'
+import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -49,6 +53,11 @@ export type ChatCompanionData = {
 
 export type ChatMessage = {
   id: string
+  createdAt: string
+  updatedAt: string
+  chatId: string
+  fromUserId: string
+  textContent: string // TODO
 }
 
 
@@ -66,6 +75,36 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     const sh = p.scrollHeight
     window.scrollTo({ top: sh, behavior: 'instant' })
   })
+  
+  const [text, setText] = useState('')
+  
+  const sendMsg = () => {
+    ChatMessageApi.createMessage({ toUserId: companion.id, content: { text } })
+  }
+  
+  const [msgs, setMsgs] = useState<undefined | { id: string, content: { text: string } }[]>(undefined)
+  
+  
+  const {
+    request,
+    isLoading, isSuccess, isError,
+    response, resetResponse,
+  } = useApiRequest({
+    values: { },
+    prepareAndRequest: useCallback(() => {
+      return ChatMessagesApi.messages({ toUserId: companion.id })
+    }, [companion.id]),
+  })
+  
+  useEffect(() => {
+    request()
+  }, [])
+  
+  useEffect(() => {
+    if (response?.isSuccess) {
+      setMsgs(response.data.messages)
+    }
+  }, [isSuccess])
   
   return (
     <>
@@ -100,6 +139,17 @@ const ChatPage = React.memo((props: ChatPageProps) => {
           
           <Flex col grow justifyEnd overflowAuto>
             
+            {msgs?.map((msg) => (
+              <ChatMessage
+                key={msg.id}
+                type={'my'}
+                message={{ text: msg.content.text }}
+                time={'15:48'}
+                status={'read'}
+              />
+            ))}
+            
+            {/*
             <ChatDate>{'Вчера'}</ChatDate>
             
             <ChatMessage
@@ -205,7 +255,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
               time={'15:48'}
               status={'sent'}
             />
-            
+             */}
           </Flex>
           
           
@@ -228,6 +278,8 @@ const ChatPage = React.memo((props: ChatPageProps) => {
             <Textarea autoFocus hFitText
               placeholder='Напишите сообщение...'
               css={[TextareaStyle.inputTrans, { [TextareaStyle.El.frame]: commonStyle({ pv: 6 }) }]}
+              value={text}
+              onChange={ev => setText(ev.target.value)}
             />
             
             <Flex row center g={10} justifySpaceBetween>
@@ -236,7 +288,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
               <VideoCameraIc css={SvgIconS6.t(pictureIcS)}/>
               <EmojiLaughIc css={SvgIconS6.t(pictureIcS)}/>
               <PuzzleIc css={SvgIconS6.t(pictureIcS)}/>
-              <Button css={IconButtonS6.t(sendButtonS)}>
+              <Button css={IconButtonS6.t(sendButtonS)} onClick={sendMsg}>
                 <PlaneSendIc/>
               </Button>
             </Flex>

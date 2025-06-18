@@ -130,14 +130,15 @@ const LoginPage = React.memo(() => {
   },[failures]) */
   
   
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(returnPath ?? RootRoute.findPair[full]())
+    }
+  }, [isSuccess, navigate, returnPath])
   
   
   return (
     <>
-      
-      {isSuccess && returnPath && (
-        <AppNavigate toFull={RootRoute.findPair} noSearchFromUrl/>
-      )}
       
       <PageLayout col data-display-name='LoginPage'>
         <PageContentLayout colSm grow>
