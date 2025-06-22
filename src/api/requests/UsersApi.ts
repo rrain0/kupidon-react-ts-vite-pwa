@@ -28,13 +28,13 @@ export namespace UsersApi {
   
   
   
-  export interface UserToUserLikeListAllSuccessData {
-    likedUsers: OtherUser[]
+  export interface UsersMutuallyLikedSuccessData {
+    mutuallyLikedUsers: OtherUser[]
   }
-  export type UserToUserLikeListAllErrorData = TechnicalError
-  export const mutualLiked = async () => (
-    handleAuthenticatedResponse<UserToUserLikeListAllSuccessData, UserToUserLikeListAllErrorData>(
-      axAccess.get(ApiV1Routes.usersMutualLiked)
+  export type UsersMutuallyLikedErrorData = TechnicalError
+  export const mutuallyLiked = async () => (
+    handleAuthenticatedResponse<UsersMutuallyLikedSuccessData, UsersMutuallyLikedErrorData>(
+      axAccess.get(ApiV1Routes.usersMutuallyLiked)
     )
   )
   

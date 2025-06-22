@@ -17,7 +17,7 @@ import { ProfileCardsStackListItem } from 'src/ui/1-widgets/ProfileCards/Profile
 import ChatList from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
 import ChatListActionBar from 'src/ui/2-pages/ChatList/parts/ChatListActionBar.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
-import ChatListPageHeader from 'src/ui/2-pages/ChatList/parts/ChatListPageHeader.tsx'
+import ChatsPageHeader from 'src/ui/2-pages/ChatList/parts/ChatsPageHeader.tsx'
 import MutualSympathiesList, {
   MutualSympathiesItem,
 } from 'src/ui/2-pages/ChatList/parts/MutualSympathiesList.tsx'
@@ -195,7 +195,7 @@ const manyChatItems = arrOfIndices(Math.floor(200 / mockChatItems.length)).flatM
 
 
 
-const ChatListPage = React.memo(() => {
+const ChatsPage = React.memo(() => {
   
   
   
@@ -332,7 +332,7 @@ const ChatListPage = React.memo(() => {
       <PageLayout col>
         <PageContentLayout colSm grow ptDefault={12}>
           
-          <ChatListPageHeader likesCnt={12}/>
+          <ChatsPageHeader likesCnt={12}/>
           
           <Gap h={24}/>
           
@@ -359,8 +359,8 @@ const ChatListPage = React.memo(() => {
     </>
   )
 })
-ChatListPage.displayName = 'ChatListPage'
-export default ChatListPage
+ChatsPage.displayName = 'ChatsPage'
+export default ChatsPage
 
 
 
@@ -401,7 +401,7 @@ const MutualSympathiesListWithItems = React.memo(() => {
   } = useApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
-      return UsersApi.mutualLiked()
+      return UsersApi.mutuallyLiked()
     }, []),
   })
   
@@ -412,7 +412,7 @@ const MutualSympathiesListWithItems = React.memo(() => {
   
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
-      setItems(response.data.likedUsers)
+      setItems(response.data.mutuallyLikedUsers)
     }
   }, [isSuccess])
   

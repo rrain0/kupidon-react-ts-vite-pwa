@@ -7,7 +7,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { ChatCompanionData } from 'src/ui/2-pages/Chat/ChatPage.tsx'
-import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatListPage.tsx'
+import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatsPage.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
@@ -96,7 +96,7 @@ const routingChatUserId: RouteObject[] = [
   },
   {
     path: '*',
-    element: <AppNavigate toFull={RootRoute.chatList} replace/>,
+    element: <AppNavigate toFull={RootRoute.chats} replace/>,
   },
 ]
 
@@ -106,7 +106,7 @@ const routingChatUserId: RouteObject[] = [
 const routingChatUser: RouteObject[] = [
   {
     path: '',
-    element: <AppNavigate toFull={RootRoute.chatList} replace/>,
+    element: <AppNavigate toFull={RootRoute.chats} replace/>,
   },
   {
     path: RootRoute.chat.user.id[path] + '/*',
@@ -125,6 +125,6 @@ export const routingChat: RouteObject[] = [
   },
   {
     path: '*',
-    element: <AppNavigate toFull={RootRoute.chatList} replace/>,
+    element: <AppNavigate toFull={RootRoute.chats} replace/>,
   },
 ]

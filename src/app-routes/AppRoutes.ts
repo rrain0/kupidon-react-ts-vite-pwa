@@ -44,8 +44,8 @@ export namespace AppRoutes {
       }),
     }),
   })
-  const chatList = buildRoute({
-    [path]: 'chat-list',
+  const chats = buildRoute({
+    [path]: 'chats',
   })
   const findPair = buildRoute({
     [path]: 'find-pair',
@@ -156,7 +156,7 @@ export namespace AppRoutes {
     signup,
     
     profile,
-    chatList,
+    chats,
     findPair,
     bowAndArrows,
     settings,

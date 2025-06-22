@@ -16,12 +16,13 @@ export namespace ApiV1Routes {
   export const userProfilePhoto = `${user}/profile-photo`
   
   export const users = `${apiV1}/users`
-  export const usersMutualLiked = `${users}/mutual-liked`
+  export const usersMutuallyLiked = `${users}/mutually-liked`
   
   export const userToUser = `${apiV1}/user-to-user`
   export const userToUserLike = `${userToUser}/like`
   
   export const chatMessage = `${apiV1}/chat-message`
+  export const chatMessageToUserIdId = (toUserId: string) => `${chatMessage}/to-user-id/${toUserId}`
   
   export const chatMessages = `${apiV1}/chat-messages`
 }

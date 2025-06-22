@@ -136,23 +136,23 @@ export namespace MathU {
   /**
    * Возвращение целого случайного числа в диапазоне [{@linkcode from},{@linkcode to}]
    * @param [from=0] - начало диапазона включительно
-   * @param [to=1] - конец диапазона включительно,
+   * @param [until=1] - конец диапазона включительно,
    *                 {@linkcode to} должно быть больше-равно чем {@linkcode from}
    * @returns {number} - случайное число из диапазона [{@linkcode from},{@linkcode to}]
    */
-  export function randomInt(from: number, to: number): number
-  export function randomInt(to?: number): number
+  export function randomInt(from: number, until: number): number
+  export function randomInt(until?: number): number
   export function randomInt(a?: number, b?: number): number {
-    let from = 0, to = 1
+    let from = 0, until = 1
     if (isnumber(a) && isnumber(b)) {
       from = a
-      to = b
+      until = b
     }
     else if (isnumber(a)) {
-      to = a
+      until = a
     }
-    if (from > to) throw new Error(`'to'=${to} must be gte than 'from'=${from}`)
-    return floorTo0(random(from, to + 1))
+    if (from > until) throw new Error(`'to'=${until} must be gte than 'from'=${from}`)
+    return floorTo0(random(from, until + 1))
   }
   
   export function randomNonNegInt() {

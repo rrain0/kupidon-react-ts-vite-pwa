@@ -10,7 +10,7 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RouteBottomNavBar from 'src/ui/1-widgets/NavBar/routing.tsx'
 import { routingBowAndArrows } from 'src/ui/2-pages/BowAndArrows/routing.tsx'
 import { routingChat } from 'src/ui/2-pages/Chat/routing.tsx'
-import { routingChatList } from 'src/ui/2-pages/ChatList/routing.tsx'
+import { routingChats } from 'src/ui/2-pages/ChatList/routing.tsx'
 import { routingDateArticle } from 'src/ui/2-pages/DateArticle/routing.tsx'
 import { routingDateArticles } from 'src/ui/2-pages/DateArticles/routing.tsx'
 import { routingDatePlace } from 'src/ui/2-pages/DatePlace/routing.tsx'
@@ -98,8 +98,8 @@ const routingRoot: RouteObject[] = [
         children: routingBowAndArrows,
       },
       {
-        path: RootRoute.chatList[path]+'/*',
-        children: routingChatList,
+        path: RootRoute.chats[path]+'/*',
+        children: routingChats,
       },
       
       

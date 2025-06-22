@@ -1,3 +1,4 @@
+import { TypeU } from '@util/common/TypeU.ts'
 import React, { useCallback, useEffect } from 'react'
 import { AuthApi } from 'src/api/requests/AuthApi'
 import { useApiRequest } from 'src/api/useApiRequest'
@@ -18,7 +19,7 @@ import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
-import { useNavigate, useSearchParams } from 'react-router'
+import { Navigate, useNavigate, useSearchParams } from 'react-router'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit'
 import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts'
@@ -40,6 +41,7 @@ import mapFailureCodeToUiOption = LoginPageValidation.mapFailureCodeToUiText
 import defaultValues = LoginPageValidation.defaultValues
 import userDefaultValues = LoginPageValidation.userDefaultValues
 import contents = EmotionCommon.contents
+import isdef = TypeU.isdef
 
 
 
@@ -139,6 +141,14 @@ const LoginPage = React.memo(() => {
   
   return (
     <>
+      
+      {/* Баг, дважды добавляет роут в историю */}
+      {/*
+      {isSuccess && (() => {
+        if (isdef(returnPath)) return <Navigate to={returnPath}/>
+        return <AppNavigate toFull={RootRoute.findPair} noSearchFromUrl/>
+      })()}
+       */}
       
       <PageLayout col data-display-name='LoginPage'>
         <PageContentLayout colSm grow>

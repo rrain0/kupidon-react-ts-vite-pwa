@@ -64,7 +64,7 @@ const NavBar = React.memo((props: NavBarProps) => {
           </Button>
         </AppNavLink>
         
-        <AppNavLink toFull={RootRoute.chatList}>
+        <AppNavLink toFull={RootRoute.chats}>
           <Button
             data-selected={toEmptyAttr(place === 'chat')}
             css={nav}

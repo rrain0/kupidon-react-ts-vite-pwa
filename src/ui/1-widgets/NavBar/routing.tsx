@@ -25,7 +25,7 @@ const RouteBottomNavBar = React.memo(() => {
           ))
       }
       {
-        [RootRoute.chatList[full]()]
+        [RootRoute.chats[full]()]
           .map(path => path+'/*')
           .map(path => (
             <Route

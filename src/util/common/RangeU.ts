@@ -97,7 +97,7 @@ export namespace RangeU {
       if (i === fromRanges.length - 1 || value <= fromRanges[i]) return mapSingleRange(
         value,
         [fromRanges[i - 1], fromRanges[i]],
-        [toRanges[i-1], toRanges[i]],
+        [toRanges[i - 1], toRanges[i]],
       )
     }
   }

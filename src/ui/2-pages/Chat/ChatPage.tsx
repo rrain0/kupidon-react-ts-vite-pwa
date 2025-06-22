@@ -3,9 +3,10 @@ import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import * as datefns from 'date-fns'
+import { ChatMessageT } from 'src/api/model/ChatMessageT.ts'
 import { ChatMessagesApi } from 'src/api/requests/ChatMessagesApi.ts'
 import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
-import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -24,6 +25,7 @@ import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
 import TopActionBar from 'src/ui/components/screen-bars/TopActionBar.tsx'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import Txt = EmotionCommon.Txt
 import PictureIc = SvgIconsPack.PictureIc
 import MicrophoneIc = SvgIconsPack.MicrophoneIc
@@ -51,24 +53,16 @@ export type ChatCompanionData = {
   isWriting?: boolean | undefined
 }
 
-export type ChatMessage = {
-  id: string
-  createdAt: string
-  updatedAt: string
-  chatId: string
-  fromUserId: string
-  textContent: string // TODO
-}
-
 
 export type ChatPageProps = {
   companion: ChatCompanionData
-  messages: ChatMessage[]
+  messages: ChatMessageT[]
 }
 
 
 const ChatPage = React.memo((props: ChatPageProps) => {
   const { companion, messages } = props
+  const userId = useAuthZustand(s => s.user?.id)
   
   useLayoutEffect(() => {
     const p = getViewProps(window)
@@ -79,10 +73,10 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   const [text, setText] = useState('')
   
   const sendMsg = () => {
-    ChatMessageApi.createMessage({ toUserId: companion.id, content: { text } })
+    ChatMessageApi.createMessageToUser(companion.id, { content: { text } })
   }
   
-  const [msgs, setMsgs] = useState<undefined | { id: string, content: { text: string } }[]>(undefined)
+  const [msgs, setMsgs] = useState<undefined | ChatMessageT[]>(undefined)
   
   
   const {
@@ -142,10 +136,10 @@ const ChatPage = React.memo((props: ChatPageProps) => {
             {msgs?.map((msg) => (
               <ChatMessage
                 key={msg.id}
-                type={'my'}
+                type={msg.fromUserId === userId ? 'my' : 'others'}
                 message={{ text: msg.content.text }}
-                time={'15:48'}
-                status={'read'}
+                time={datefns.format(msg.createdAt, 'HH:mm')}
+                //status={'read'}
               />
             ))}
             

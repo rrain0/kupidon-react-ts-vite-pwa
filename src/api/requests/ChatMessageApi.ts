@@ -1,4 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
+import { ChatMessageT } from 'src/api/model/ChatMessageT.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
@@ -13,19 +14,12 @@ export namespace ChatMessageApi {
   
   
   export type CreateMessageSuccessData = {
-    messages: {
-      id: string
-      chatId: string
-      fromUserId: string
-      createdAt: string
-      updatedAt: string
-      content: { text: string }
-    }
+    message: ChatMessageT
   }
   export type CreateMessageErrorData = AuthenticationError | TechnicalError
-  export const createMessage = async (data: { toUserId: string, content: { text: string } }) => {
+  export const createMessageToUser = async (toUserId: string, data: { content: { text: string } }) => {
     return handleAuthenticatedResponse<CreateMessageSuccessData, CreateMessageErrorData>(
-      axAccess.post(ApiV1Routes.chatMessage, data)
+      axAccess.post(ApiV1Routes.chatMessageToUserIdId(toUserId), data)
     )
   }
   

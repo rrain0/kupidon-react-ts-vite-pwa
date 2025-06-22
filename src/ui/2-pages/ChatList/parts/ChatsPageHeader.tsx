@@ -27,17 +27,17 @@ import FourDotsIc = SvgIconsPack.FourDotsIc
 
 
 
-type ChatListPageHeaderExtraProps = Pu<{
+type ChatsPageHeaderExtraProps = Pu<{
   likesCnt: number
 }>
 
-type ChatListPageHeaderProps =
+type ChatsPageHeaderProps =
   & Omit<React.ComponentProps<typeof Grid>, 'children'>
-  & ChatListPageHeaderExtraProps
+  & ChatsPageHeaderExtraProps
 
 
 
-const ChatListPageHeader = React.memo((props: ChatListPageHeaderProps) => {
+const ChatsPageHeader = React.memo((props: ChatsPageHeaderProps) => {
   const {
     likesCnt = 0,
     ...restProps
@@ -45,7 +45,7 @@ const ChatListPageHeader = React.memo((props: ChatListPageHeaderProps) => {
   
   return (
     <Grid alignedStretch cols='46px 1fr 46px' stretch
-      data-display-name='ChatListPageHeader'
+      data-display-name='ChatsPageHeader'
       {...restProps}
     >
       
@@ -74,8 +74,8 @@ const ChatListPageHeader = React.memo((props: ChatListPageHeaderProps) => {
     </Grid>
   )
 })
-ChatListPageHeader.displayName = 'ChatListPageHeader'
-export default ChatListPageHeader
+ChatsPageHeader.displayName = 'ChatsPageHeader'
+export default ChatsPageHeader
 
 
 
