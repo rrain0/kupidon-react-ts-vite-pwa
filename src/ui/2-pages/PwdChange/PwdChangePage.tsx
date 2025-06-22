@@ -1,3 +1,4 @@
+import { DateU } from '@util/date/DateU.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
@@ -31,6 +32,7 @@ import mapFailureCodeToUiText = PwdChangePageValidation.mapFailureCodeToUiText
 import PageLayout from 'ui/components/Pages/PageLayout'
 import PageContentLayout from 'ui/components/Pages/PageContentLayout'
 import contents = EmotionCommon.contents
+import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 
@@ -73,7 +75,7 @@ const PwdChangePage = React.memo(() => {
       return UserApi.update({
         currentPwd: values.currentPwd,
         pwd: values.pwd,
-      })
+      }, getCurrentTimeZoneName())
     }, []),
   })
   

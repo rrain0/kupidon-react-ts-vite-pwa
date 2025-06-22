@@ -113,13 +113,13 @@ export class DateTime {
   // to 2020-08-26T06:53:27.609+00:00
   to_yyyy_MM_dd_HH_mm_ss_SSS_XXX() {
     return `${(this.year + '').padStart(4, '0')}`
-      +`-${(this.month + '').padStart(2, '0')}`
-      +`-${(this.day + '').padStart(2, '0')}`
-      +`T${(this.hour + '').padStart(2, '0')}`
-      +`:${(this.minute + '').padStart(2, '0')}`
-      +`:${(this.second + '').padStart(2, '0')}`
-      +`.${(this.millisecond + '').padStart(3, '0')}`
-      +this.timezoneToString()
+      + `-${(this.month + '').padStart(2, '0')}`
+      + `-${(this.day + '').padStart(2, '0')}`
+      + `T${(this.hour + '').padStart(2, '0')}`
+      + `:${(this.minute + '').padStart(2, '0')}`
+      + `:${(this.second + '').padStart(2, '0')}`
+      + `.${(this.millisecond + '').padStart(3, '0')}`
+      + this.timezoneToString()
   }
   
   to_yyyy_MM_dd_HH_mm() {
@@ -140,8 +140,8 @@ export class DateTime {
   // to 01-01-2023
   to_dd_MM_yyyy(divider = '-') {
     return `${(this.day + '').padStart(2, '0')}`
-      +`${divider}${(this.month + '').padStart(2, '0')}`
-      +`${divider}${(this.year + '').padStart(4, '0')}`
+      + `${divider}${(this.month + '').padStart(2, '0')}`
+      + `${divider}${(this.year + '').padStart(4, '0')}`
   }
   
   // to 01-01-23

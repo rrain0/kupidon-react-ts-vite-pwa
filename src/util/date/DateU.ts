@@ -28,6 +28,9 @@ export namespace DateU {
   }
   
   
+  export const getCurrentTimeZoneName = () => Intl.DateTimeFormat().resolvedOptions().timeZone
+  
+  
   /**
    * @param birthDate {string} date in format like '2000-08-23'
    * @returns {string} e.g. '23'

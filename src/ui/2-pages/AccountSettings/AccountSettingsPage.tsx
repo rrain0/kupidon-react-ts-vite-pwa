@@ -1,3 +1,4 @@
+import { DateU } from '@util/date/DateU.ts'
 import { noFormSubmit } from '@util/js/noFormSubmit.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi'
@@ -38,6 +39,7 @@ import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText
 import RootRoute = AppRoutes.RootRoute
 import contents = EmotionCommon.contents
+import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 
@@ -95,7 +97,7 @@ const AccountSettingsPage = React.memo(() => {
       if (!failedFields.includes('pwd') &&
         !failedFields.includes('repeatPwd')
       ) userToUpdate.pwd = values.pwd
-      return UserApi.update(userToUpdate)
+      return UserApi.update(userToUpdate, getCurrentTimeZoneName())
     }, []),
   })
   

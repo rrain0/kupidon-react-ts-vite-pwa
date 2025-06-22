@@ -69,11 +69,11 @@ export namespace UserApi {
     pwd: string,
     name: string,
     gender: 'MALE' | 'FEMALE',
-    birthDate: string, // '2005-11-10T00:00:00.000+08:00'
+    birthDate: string, // '2005-01-01'
   }
-  export const create = async (user: UserToCreate, lang: string[]) => (
+  export const create = async (user: UserToCreate, lang: string[], timeZone: string) => (
     handleResponse<CreateSuccessData, CreateErrorData>(
-      ax.post(ApiV1Routes.user, user, { params: { lang } })
+      ax.post(ApiV1Routes.user, user, { params: { lang, timeZone } })
     )
   )
   
@@ -90,7 +90,7 @@ export namespace UserApi {
     }
   export type UserToUpdate = Pu<{
     name: string
-    birthDate: string // '2005-11-10T00:00:00.000+08:00'
+    birthDate: string // '2005-01-01'
     gender: Gender
     aboutMe: string
     currentPwd: string
@@ -100,9 +100,9 @@ export namespace UserApi {
       replace: Array<{ id: string, index: number }>
     }
   }>
-  export const update = async (user: UserToUpdate) => (
+  export const update = async (user: UserToUpdate, timeZone: string) => (
     handleAuthenticatedResponse<UpdateUserSuccessData, UpdateUserErrorData>(
-      axAccess.put(ApiV1Routes.user, user)
+      axAccess.put(ApiV1Routes.user, user, { params: { timeZone } })
     )
   )
   

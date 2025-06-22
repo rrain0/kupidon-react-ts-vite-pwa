@@ -61,7 +61,7 @@ const ChatMessage = React.memo((props: ChatMessageProps) => {
       {...restProps}
     >
       
-      <Flex row wrap alignEnd justifyEnd pv={6} ph={15} gCol={2}
+      <Flex row wrap alignEnd justifyEnd pv={6} ph={15} gCol={4}
         // TODO Theme
         bg={my ? '#FFD7E0' : '#EEEEEE'}
         // TODO Theme

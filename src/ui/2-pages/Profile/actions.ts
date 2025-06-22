@@ -1,3 +1,4 @@
+import { DateU } from '@util/date/DateU.ts'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
 import { CurrentUser } from 'src/api/model/User.ts'
 import { Gender } from 'src/api/model/Gender.ts'
@@ -28,6 +29,7 @@ import SetterOrUpdater = TypeU.SetterOrUpdater
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.AddProfilePhoto
 import findBy = ArrayU.findBy
+import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 
@@ -72,10 +74,7 @@ export const profileUpdateApiRequest = (
     userToUpdate.name = values.name
   }
   if (!failedFields.includes('birthDate')) {
-    userToUpdate.birthDate =
-      DateTime.from_yyyy_MM_dd(values.birthDate)!
-        .set({ timezone: DateTime.fromDate(new Date()).timezone })
-        .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
+    userToUpdate.birthDate = values.birthDate // yyyy-MM-dd
   }
   if (!failedFields.includes('gender')) {
     userToUpdate.gender = values.gender as Gender
@@ -183,7 +182,7 @@ export const profileUpdateApiRequest = (
     
     
     {
-      const userUpdateResponse = await UserApi.update(userToUpdate)
+      const userUpdateResponse = await UserApi.update(userToUpdate, getCurrentTimeZoneName())
       if (!userUpdateResponse.isSuccess) {
         reject(userUpdateResponse)
         return undefined

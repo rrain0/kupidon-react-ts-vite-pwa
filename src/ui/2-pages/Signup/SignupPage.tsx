@@ -1,3 +1,4 @@
+import { DateU } from '@util/date/DateU.ts'
 import { Gender } from 'src/api/model/Gender.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -50,6 +51,7 @@ import mapFailureCodeToUiOption = SignupPageValidation.mapFailureCodeToUiText
 import defaultValues = SignupPageValidation.defaultValues
 import userDefaultValues = SignupPageValidation.userDefaultValues
 import contents = EmotionCommon.contents
+import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 
@@ -92,16 +94,13 @@ const SignupPage = React.memo(() => {
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((values: FormValues) => {
-      const birthDateTime = DateTime.from_yyyy_MM_dd(values.birthDate)!
-        .set({ timezone: DateTime.fromDate(new Date()).timezone })
-        .to_yyyy_MM_dd_HH_mm_ss_SSS_XXX()
       return UserApi.create({
         email: values.email,
         pwd: values.pwd,
         name: values.name,
         gender: values.gender as Gender,
-        birthDate: birthDateTime,
-      }, langs)
+        birthDate: values.birthDate, // yyyy-MM-dd
+      }, langs, getCurrentTimeZoneName())
     }, [langs]),
   })
   
