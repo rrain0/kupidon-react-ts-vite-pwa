@@ -148,8 +148,12 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   const [text, setText] = useState('')
   
   const sendMsg = () => {
-    if (companion) {
-      ChatMessageApi.createMessageToUser(companion.id, { content: { text } })
+    const msg = { content: { text } }
+    if (toChatId) {
+      ChatMessageApi.createMessageToChat(toChatId, msg)
+    }
+    else if (toUserId) {
+      ChatMessageApi.createMessageToUser(toUserId, msg)
     }
   }
   

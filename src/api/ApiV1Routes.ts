@@ -25,6 +25,7 @@ export namespace ApiV1Routes {
   
   export const chatMessage = `${apiV1}/chat-message`
   export const chatMessageToUserIdId = (toUserId: string) => `${chatMessage}/to-user-id/${toUserId}`
+  export const chatMessageToChatIdId = (toChatId: string) => `${chatMessage}/to-chat-id/${toChatId}`
   
   export const chatMessages = `${apiV1}/chat-messages`
 }

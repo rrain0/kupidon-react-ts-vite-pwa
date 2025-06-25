@@ -13,13 +13,25 @@ import AuthenticationError = ApiUtils.AuthenticationError
 export namespace ChatMessageApi {
   
   
-  export type CreateMessageSuccessData = {
+  export type CreateMessageToUserSuccessData = {
+    //chat: // TODO
     message: ChatMessageFromApi
   }
-  export type CreateMessageErrorData = AuthenticationError | TechnicalError
+  export type CreateMessageToUserErrorData = AuthenticationError | TechnicalError
   export const createMessageToUser = async (toUserId: string, data: { content: { text: string } }) => {
-    return handleAuthenticatedResponse<CreateMessageSuccessData, CreateMessageErrorData>(
+    return handleAuthenticatedResponse<CreateMessageToUserSuccessData, CreateMessageToUserErrorData>(
       axAccess.post(ApiV1Routes.chatMessageToUserIdId(toUserId), data)
+    )
+  }
+  
+  
+  export type CreateMessageToChatSuccessData = {
+    message: ChatMessageFromApi
+  }
+  export type CreateMessageToChatErrorData = AuthenticationError | TechnicalError
+  export const createMessageToChat = async (toChatId: string, data: { content: { text: string } }) => {
+    return handleAuthenticatedResponse<CreateMessageToChatSuccessData, CreateMessageToChatErrorData>(
+      axAccess.post(ApiV1Routes.chatMessageToChatIdId(toChatId), data)
     )
   }
   
