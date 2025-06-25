@@ -167,13 +167,13 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   } = useApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
-      return ChatMessagesApi.messages({ toUserId: companion?.id, toChatId })
-    }, [companion?.id]),
+      return ChatMessagesApi.messages({ toUserId, toChatId })
+    }, [toUserId, toChatId]),
   })
   
   useEffect(() => {
     request()
-  }, [])
+  }, [toUserId, toChatId])
   
   useEffect(() => {
     if (response?.isSuccess) {
