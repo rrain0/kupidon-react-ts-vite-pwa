@@ -45,11 +45,11 @@ const outerUiValues = {
 
 export type ChatListItemWidgetData = {
   id: string
+  name: string
   ava?: string | undefined
   online?: boolean | undefined
-  name: string
-  lastMsg: string
-  lastMsgDate: string
+  lastMsg?: string | undefined
+  lastMsgDate?: string | undefined
   isLastMsgMy?: boolean | undefined
   unreadCnt?: number | undefined
   mute?: boolean | undefined

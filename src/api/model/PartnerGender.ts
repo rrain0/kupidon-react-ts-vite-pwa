@@ -1,4 +1,7 @@
 
 
 
-export type PartnerGender = 'MALE' | 'FEMALE' | 'MALE_FEMALE'
+export type PartnerGender =
+  | 'MALE'
+  | 'FEMALE'
+  | 'MALE_FEMALE'

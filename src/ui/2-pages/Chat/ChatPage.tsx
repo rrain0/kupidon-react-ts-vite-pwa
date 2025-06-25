@@ -1,12 +1,15 @@
 import styled from '@emotion/styled'
+import { TypeU } from '@util/common/TypeU.ts'
 import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import * as datefns from 'date-fns'
-import { ChatMessageT } from 'src/api/model/ChatMessageT.ts'
+import { ChatMessageFromApi } from 'src/api/model/ChatMessageFromApi.ts'
+import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
 import { ChatMessagesApi } from 'src/api/requests/ChatMessagesApi.ts'
 import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
+import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -33,11 +36,7 @@ import EmojiLaughIc = SvgIconsPack.EmojiLaughIc
 import PuzzleIc = SvgIconsPack.PuzzleIc
 import PlaneSendIc = SvgIconsPack.PlaneSendIc
 import VideoCameraIc = SvgIconsPack.VideoCameraIc
-
-
-
-
-
+import Pu = TypeU.Pu
 
 
 
@@ -54,15 +53,91 @@ export type ChatCompanionData = {
 }
 
 
-export type ChatPageProps = {
-  companion: ChatCompanionData
-  messages: ChatMessageT[]
-}
+export type ChatPageProps = Pu<{
+  toUserId: string
+  toChatId: string
+}>
 
 
 const ChatPage = React.memo((props: ChatPageProps) => {
-  const { companion, messages } = props
+  const { toUserId, toChatId } = props
   const userId = useAuthZustand(s => s.user?.id)
+  
+  
+  const [companion, setCompanion] = useState<ChatCompanionData | undefined>(undefined)
+  {
+    const {
+      request,
+      isLoading, isSuccess, isError,
+      response, resetResponse,
+    } = useApiRequest({
+      values: { },
+      prepareAndRequest: useCallback(() => {
+        return UserApi.userById(toUserId ?? '')
+      }, [toUserId]),
+    })
+    
+    useEffect(() => {
+      setCompanion(undefined)
+      if (userId && !toChatId) {
+        request()
+      }
+    }, [toUserId, toChatId])
+    
+    useEffect(() => {
+      if (response?.isSuccess) {
+        const u = response.data.user
+        setCompanion({
+          id: u.id,
+          ava: u.photos.find(p => p.index === 0)?.url,
+          online: false,
+          name: u.name,
+          mute: false,
+          pinned: undefined,
+          isWriting: false,
+        })
+      }
+    }, [isSuccess])
+  }
+  
+  {
+    const {
+      request,
+      isLoading, isSuccess, isError,
+      response, resetResponse,
+    } = useApiRequest({
+      values: { },
+      prepareAndRequest: useCallback(() => {
+        return ChatItemsApi.chatItems()
+      }, []),
+    })
+    
+    useEffect(() => {
+      if (toChatId) {
+        request()
+      }
+    }, [toChatId])
+    
+    useEffect(() => {
+      if (response?.isSuccess) {
+        const it = response.data.chatItems
+        const chat = it.find(it => it.id === toChatId)
+        if (chat) {
+          setCompanion({
+            id: chat.id,
+            name: chat.profile.name,
+            ava: chat.profile.ava,
+            // online: false,
+            // mute: false,
+            // pinned: undefined,
+            // isWriting: false,
+          })
+        }
+      }
+    }, [isSuccess])
+    
+  }
+  
   
   useLayoutEffect(() => {
     const p = getViewProps(window)
@@ -73,10 +148,12 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   const [text, setText] = useState('')
   
   const sendMsg = () => {
-    ChatMessageApi.createMessageToUser(companion.id, { content: { text } })
+    if (companion) {
+      ChatMessageApi.createMessageToUser(companion.id, { content: { text } })
+    }
   }
   
-  const [msgs, setMsgs] = useState<undefined | ChatMessageT[]>(undefined)
+  const [msgs, setMsgs] = useState<undefined | ChatMessageFromApi[]>(undefined)
   
   
   const {
@@ -86,8 +163,8 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   } = useApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
-      return ChatMessagesApi.messages({ toUserId: companion.id })
-    }, [companion.id]),
+      return ChatMessagesApi.messages({ toUserId: companion?.id, toChatId })
+    }, [companion?.id]),
   })
   
   useEffect(() => {
@@ -113,16 +190,22 @@ const ChatPage = React.memo((props: ChatPageProps) => {
           
           <BackButton/>
           
-          <Ava id={companion.id} ava={companion.ava} alignedStretch h='full'/>
+          {!companion && <Flex aligned>Загрузка...</Flex>}
+          {companion && (
+            <>
+              <Ava id={companion.id} ava={companion.ava} alignedStretch h='full'/>
+              
+              <Flex col ph={12} stretched grow justifySpaceAround>
+                <Flex css={[Txt.s18BoldTight, { color: 'black' /* TODO Theme */ }]}>
+                  {companion.name}
+                </Flex>
+                <Flex css={[Txt.s15Tight, { color: '#858585' /* TODO Theme */ }]}>
+                  {'был(а) в 20:51'}
+                </Flex>
+              </Flex>
+            </>
+          )}
           
-          <Flex col ph={12} stretched grow justifySpaceAround>
-            <Flex css={[Txt.s18BoldTight, { color: 'black' /* TODO Theme */ }]}>
-              {companion.name}
-            </Flex>
-            <Flex css={[Txt.s15Tight, { color: '#858585' /* TODO Theme */ }]}>
-              {'был(а) в 20:51'}
-            </Flex>
-          </Flex>
         </Flex>
       </TopActionBar>
       
@@ -133,6 +216,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
           
           <Flex col grow justifyEnd overflowAuto>
             
+            {!msgs && <Flex aligned>Загрузка...</Flex>}
             {msgs?.map((msg) => (
               <ChatMessage
                 key={msg.id}

@@ -16,16 +16,18 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ChatListContextMenu, {
   ChatListContextMenuProps,
 } from 'src/ui/2-pages/ChatList/parts/ChatListContextMenu.tsx'
-import ChatListItem from 'src/ui/2-pages/ChatList/parts/ChatListItem.tsx'
+import ChatListToItem from 'src/ui/2-pages/ChatList/parts/ChatListToItem.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Pu = TypeU.Pu
-import emptyArr = TypeU.emptyArr
 import isundef = TypeU.isundef
 import isdef = TypeU.isdef
 
 
+
+
+// TODO make separate states for components: loading, error
 
 
 type Adding = { state: 'adding', toI: number }
@@ -36,7 +38,9 @@ type Removing = { state: 'removing', fromI: number }
 
 export type UiItemData = {
   item: ChatListItemWidgetData
-} & (Adding | Showing | Removing | Replacing)
+} & (
+  Adding | Showing | Removing | Replacing
+)
 
 
 
@@ -60,7 +64,7 @@ export type ChatListProps =
 
 const ChatList = React.memo((props: ChatListProps) => {
   const {
-    chatItems: newItems = emptyArr,
+    chatItems: newItems,
     pin: _pin, unpin: _unpin, mute: _mute, unmute: _unmute, remove: _remove,
     ...restProps
   } = props
@@ -83,60 +87,73 @@ const ChatList = React.memo((props: ChatListProps) => {
   
   
   
-  const [items, setItems] = useState<ChatListItemWidgetData[]>(newItems)
+  const [items, setItems] = useState<ChatListItemWidgetData[] | undefined>(newItems)
   const [uiItems, setUiItems] = useState<UiItemData[] | undefined>(undefined)
   
   useEffect(() => {
-    const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
-    
-    const fLen = fwd.length
-    const bLen = back.length
-    const removedIds: string[] = []
-    const uiItems: UiItemData[] = []
-    
-    for (let prevFi = -1, prevBi = -1, bi = 0, ri = 0; ri < fLen || bi < bLen; ) {
-      if (ri < fLen && ri > prevFi) {
-        const fromI = ri
-        const toI = fwd[fromI]
-        if (isundef(toI)) {
-          const item = items[fromI]
-          removedIds.push(item.id)
-          uiItems.push({ state: 'removing', fromI, item })
-          bi--
+    // Мгновенно ереходим в состояние ожидание элементов
+    if (!newItems) {
+      setItems(undefined)
+      setUiItems(undefined)
+    }
+    // Мгновенно показываем все элементы после состояния ожидания
+    else if (!items) {
+      setItems(newItems)
+      setUiItems(newItems.map((it, i) => ({ state: 'showing', toI: i, item: it })))
+    }
+    // Анимируем изменения элементов
+    else {
+      const [fwd, back] = ArrayU.diff(items, newItems, (a, b) => a.id === b.id)
+      
+      const fLen = fwd.length
+      const bLen = back.length
+      const removedIds: string[] = []
+      const uiItems: UiItemData[] = []
+      
+      for (let prevFi = -1, prevBi = -1, bi = 0, ri = 0; ri < fLen || bi < bLen;) {
+        if (ri < fLen && ri > prevFi) {
+          const fromI = ri
+          const toI = fwd[fromI]
+          if (isundef(toI)) {
+            const item = items[fromI]
+            removedIds.push(item.id)
+            uiItems.push({ state: 'removing', fromI, item })
+            bi--
+          }
+          prevFi = ri
         }
-        prevFi = ri
-      }
-      if (bi < bLen && bi > prevBi) {
-        const toI = bi
-        const fromI = back[toI]
-        if (isundef(fromI)) {
-          uiItems.push({ state: 'adding', toI: toI, item: newItems[toI] })
-        }
-        else if (fromI !== toI) {
-          uiItems.push({
-            //state: 'replacing',
-            //fromI,
-            state: 'showing',
-            toI: toI,
-            item: newItems[toI],
-          })
-          ri++
+        if (bi < bLen && bi > prevBi) {
+          const toI = bi
+          const fromI = back[toI]
+          if (isundef(fromI)) {
+            uiItems.push({ state: 'adding', toI: toI, item: newItems[toI] })
+          }
+          else if (fromI !== toI) {
+            uiItems.push({
+              //state: 'replacing',
+              //fromI,
+              state: 'showing',
+              toI: toI,
+              item: newItems[toI],
+            })
+            ri++
+          }
+          else {
+            uiItems.push({ state: 'showing', toI, item: newItems[toI] })
+            ri++
+          }
+          prevBi = bi
         }
         else {
-          uiItems.push({ state: 'showing', toI, item: newItems[toI] })
           ri++
         }
-        prevBi = bi
+        bi++
       }
-      else {
-        ri++
-      }
-      bi++
+      
+      filterSelected(it => !removedIds.includes(it))
+      setItems(newItems)
+      setUiItems(uiItems)
     }
-    
-    filterSelected(it => !removedIds.includes(it))
-    setItems(newItems)
-    setUiItems(uiItems)
   }, [newItems])
   
   useNoTouchAction(isAnySelected)
@@ -216,7 +233,7 @@ const ChatList = React.memo((props: ChatListProps) => {
   
   
   const loading = !uiItems
-  const noItems = !uiItems?.length
+  const noItems = uiItems?.length === 0
   
   
   const contextMenuProps = useMemo(() => {
@@ -272,7 +289,7 @@ const ChatList = React.memo((props: ChatListProps) => {
               const isSel = isSelected(id)
               return (
                 <Contents key={id} {...onTrackDrag()}>
-                  <ChatListItem
+                  <ChatListToItem
                     {...uiItem}
                     
                     first={i === 0}

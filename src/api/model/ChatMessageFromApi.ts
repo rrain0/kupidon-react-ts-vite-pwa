@@ -1,6 +1,6 @@
 
 
-export interface ChatMessageT {
+export interface ChatMessageFromApi {
   id: string
   chatId: string
   fromUserId: string

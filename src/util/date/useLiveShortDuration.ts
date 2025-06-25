@@ -26,30 +26,34 @@ export type Duration = Pu<{
   years: number
 }>
 
-export const useLiveShortDuration = (date: string): Duration => {
+export const useLiveShortDuration = (date: string | undefined): Duration | undefined => {
   
-  const [duration, setDuration] = useState(() => getShortDurationUntilNow(date))
+  const [duration, setDuration] = (
+    useState(() => date ? getShortDurationUntilNow(date) : undefined)
+  )
   
   useEffect(() => {
-    setDuration(getShortDurationUntilNow(date))
+    setDuration(date ? getShortDurationUntilNow(date) : undefined)
   }, [date])
   
   useEffect(() => {
-    const timeout = (() => {
-      const dateMs = +new Date(date)
-      const nowMs = Date.now()
-      const { years, months, weeks, days, hours, minutes, seconds } = duration
-      if (years) return Math.min(+addYears(dateMs, years + 1) - nowMs, maxTimeout)
-      if (months) return Math.min(+addMonths(dateMs, months + 1) - nowMs, maxTimeout)
-      if (weeks) return dateMs + (weeks + 1) * 1000 * 60 * 60 * 24 * 7 - nowMs
-      if (days) return dateMs + (days + 1) * 1000 * 60 * 60 * 24 - nowMs
-      if (hours) return dateMs + (hours + 1) * 1000 * 60 * 60 - nowMs
-      if (minutes) return dateMs + (minutes + 1) * 1000 * 60 - nowMs
-      return dateMs + ((seconds ?? 0) + 1) * 1000 - nowMs
-    })()
-    if (isdef(timeout)) {
-      const timerId = setTimeout(() => setDuration(getShortDurationUntilNow(date)), timeout)
-      return () => clearTimeout(timerId)
+    if (isdef(date) && duration) {
+      const timeout = (() => {
+        const dateMs = +new Date(date)
+        const nowMs = Date.now()
+        const { years, months, weeks, days, hours, minutes, seconds } = duration
+        if (years) return Math.min(+addYears(dateMs, years + 1) - nowMs, maxTimeout)
+        if (months) return Math.min(+addMonths(dateMs, months + 1) - nowMs, maxTimeout)
+        if (weeks) return dateMs + (weeks + 1) * 1000 * 60 * 60 * 24 * 7 - nowMs
+        if (days) return dateMs + (days + 1) * 1000 * 60 * 60 * 24 - nowMs
+        if (hours) return dateMs + (hours + 1) * 1000 * 60 * 60 - nowMs
+        if (minutes) return dateMs + (minutes + 1) * 1000 * 60 - nowMs
+        return dateMs + ((seconds ?? 0) + 1) * 1000 - nowMs
+      })()
+      if (isdef(timeout)) {
+        const timerId = setTimeout(() => setDuration(getShortDurationUntilNow(date)), timeout)
+        return () => clearTimeout(timerId)
+      }
     }
   }, [duration])
   

@@ -1,12 +1,9 @@
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
-import React, { Suspense, useCallback, useEffect, useState } from 'react'
+import React, { Suspense } from 'react'
 import { RouteObject, useMatch } from 'react-router'
-import { UserApi } from 'src/api/requests/UserApi.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { ChatCompanionData } from 'src/ui/2-pages/Chat/ChatPage.tsx'
 import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatsPage.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
@@ -23,94 +20,53 @@ const chatItem = mockChatItems.find(it => it.id === '175dc7be-3f56-4b9d-9403-e99
 const messages = []
 
 
-const RouteChatUserIdId = React.memo(() => {
-  const chatUserIdRoute = RootRoute.chat.user.id.id[use](':id')
-  const urlChatUserId = useMatch(chatUserIdRoute[full]()+'/*')!.params['id']!
+const RouteChatUserIdOrIdId = React.memo(() => {
+  const chatUserIdRoute = RootRoute.chat.userId.id[use](':id')
+  const urlChatUserId = useMatch(chatUserIdRoute[full]()+'/*')?.params['id']
   
-  // TODO request for messages
-  //  Backend checks if i can chat with user if user exists
-  
-  const [companion, setCompanion] = useState<ChatCompanionData | undefined>(undefined)
-  
-  const {
-    request,
-    isLoading, isSuccess, isError,
-    response, resetResponse,
-  } = useApiRequest({
-    values: { },
-    prepareAndRequest: useCallback(() => {
-      return UserApi.userById(urlChatUserId)
-    }, [urlChatUserId]),
-  })
-  
-  useEffect(() => {
-    setCompanion(undefined)
-    request()
-  }, [urlChatUserId])
-  
-  
-  useEffect(() => {
-    if (response?.isSuccess) {
-      const u = response.data.user
-      setCompanion({
-        id: u.id,
-        ava: u.photos.find(p => p.index === 0)?.url,
-        online: false,
-        name: u.name,
-        mute: false,
-        pinned: undefined,
-        isWriting: false,
-      })
-    }
-  }, [isSuccess])
-  
-  if (isError) return <Flex fullW h='100dvh' center>Ошибка</Flex>
-  
-  if (!companion) return <Flex fullW h='100dvh' center>Загрузка...</Flex>
+  const chatIdRoute = RootRoute.chat.id.id[use](':id')
+  const urlChatId = useMatch(chatIdRoute[full]()+'/*')?.params['id']
   
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-      <ChatPage companion={companion} messages={messages}/>
+      <ChatPage toUserId={urlChatUserId} toChatId={urlChatId}/>
     </Suspense>
   )
 })
 
 
 
-// path: 'chat / user / id / :id / ...'
-const routingChatUserIdId: RouteObject[] = [
+// path: 'chat / user-id or id / :id / ...'
+const routingChatUserIdOrIdId: RouteObject[] = [
   {
     path: '',
-    Component: RouteChatUserIdId,
+    Component: RouteChatUserIdOrIdId,
   },
   clearUnknownPathEnding,
 ]
 
 
 
-// path: 'chat / user / id / ...'
+// path: 'chat / user-id / ...'
 const routingChatUserId: RouteObject[] = [
-  {
-    path: RootRoute.chat.user.id.id[path] + '/*',
-    children: routingChatUserIdId,
-  },
-  {
-    path: '*',
-    element: <AppNavigate toFull={RootRoute.chats} replace/>,
-  },
-]
-
-
-
-// path: 'chat / user / ...'
-const routingChatUser: RouteObject[] = [
   {
     path: '',
     element: <AppNavigate toFull={RootRoute.chats} replace/>,
   },
   {
-    path: RootRoute.chat.user.id[path] + '/*',
-    children: routingChatUserId,
+    path: RootRoute.chat.userId.id[path] + '/*',
+    children: routingChatUserIdOrIdId,
+  },
+]
+// path: 'chat / id / ...'
+const routingChatId: RouteObject[] = [
+  {
+    path: '',
+    element: <AppNavigate toFull={RootRoute.chats} replace/>,
+  },
+  {
+    path: RootRoute.chat.id.id[path] + '/*',
+    children: routingChatUserIdOrIdId,
   },
 ]
 
@@ -120,8 +76,12 @@ const routingChatUser: RouteObject[] = [
 // path: 'chat / ...'
 export const routingChat: RouteObject[] = [
   {
-    path: RootRoute.chat.user[path] + '/*',
-    children: routingChatUser,
+    path: RootRoute.chat.userId[path] + '/*',
+    children: routingChatUserId,
+  },
+  {
+    path: RootRoute.chat.id[path] + '/*',
+    children: routingChatId,
   },
   {
     path: '*',

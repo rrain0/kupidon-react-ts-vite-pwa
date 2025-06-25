@@ -44,7 +44,7 @@ const replaceTime = 2000 //ms
 
 
 
-export type ChatListItemProps = UiItemData & Pu<{
+export type ChatListToItemProps = UiItemData & Pu<{
   first: boolean
   isSelected: boolean
   isAnySelected: boolean
@@ -55,11 +55,11 @@ export type ChatListItemProps = UiItemData & Pu<{
   animatedMxMy: AnimatedProperty<{ mx: number, my: number }>
   animatedOffset: AnimatedProperty<number>
 }>
-const ChatListItem = React.memo(({
+const ChatListToItem = React.memo(({
   first, isSelected, isAnySelected, toggleSelection, setLastPointerDownItemId,
   setUiItems, animatedMxMy, animatedOffset,
   ...uiItem
-}: ChatListItemProps) => {
+}: ChatListToItemProps) => {
   const { item, state: s } = uiItem
   const { id } = item
   
@@ -125,7 +125,7 @@ const ChatListItem = React.memo(({
   
   return (
     <ListSlot alignedStretch h={hItem} mt={g}
-      data-display-name='ChatListItem'
+      data-display-name='ChatListToItem'
       ref={setGapSlotElem}
       style={{
         ...s === 'adding' && { height: 0, opacity: 0, marginTop: 0 },
@@ -152,7 +152,7 @@ const ChatListItem = React.memo(({
           }}
         >
           <ItemBox alignedStretch h={h}>
-            <AppLink toFull={RootRoute.chat.user.id[use](id)}
+            <AppLink toFull={RootRoute.chat.id.id[use](id)}
               onClick={ev => {
                 if (getWasGesture() || isAnySelected) ev.preventDefault(); ev.stopPropagation()
               }}
@@ -173,8 +173,8 @@ const ChatListItem = React.memo(({
     </ListSlot>
   )
 })
-ChatListItem.displayName = 'ChatListItem'
-export default ChatListItem
+ChatListToItem.displayName = 'ChatListToItem'
+export default ChatListToItem
 
 
 

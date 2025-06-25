@@ -8,12 +8,11 @@ import { useInterval2 } from '@util/react/useInterval2.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { OtherUser } from 'src/api/model/User.ts'
+import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
+import { UserApi } from 'src/api/requests/UserApi.ts'
 import { UsersApi } from 'src/api/requests/UsersApi.ts'
-import { UserToUserApi } from 'src/api/requests/UserToUserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import { ProfileCardsStackListItem } from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
 import ChatList from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
 import ChatListActionBar from 'src/ui/2-pages/ChatList/parts/ChatListActionBar.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
@@ -21,14 +20,15 @@ import ChatsPageHeader from 'src/ui/2-pages/ChatList/parts/ChatsPageHeader.tsx'
 import MutualSympathiesList, {
   MutualSympathiesItem,
 } from 'src/ui/2-pages/ChatList/parts/MutualSympathiesList.tsx'
-import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import posInf = MathU.posInf
 import isundef = TypeU.isundef
 import isdef = TypeU.isdef
+import ChatItemFromApi = ChatItemsApi.ChatItemFromApi
 
 
 
@@ -197,134 +197,174 @@ const manyChatItems = arrOfIndices(Math.floor(200 / mockChatItems.length)).flatM
 
 const ChatsPage = React.memo(() => {
   
+  const authUserId = useAuthZustand(s => s.user!.id)
+  
+  //
+  //
+  // const chatItemsInitiallyRemoved = [
+  //   'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
+  //   '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d', // Киана
+  // ]
+  //
+  // const { get: getInitialChatItems, setOrUpdate: setInitialChatItems } = useStateAndRef(() => (
+  //   mockChatItems.filter(it => showFullProps ? !chatItemsInitiallyRemoved.includes(it.id) : true)
+  // ))
+  //
+  //
+  //
+  // const [getStage, setStage] = useRefGetSet(1)
+  //
+  // const chatItems1Removed = [
+  //   '4fb12fb0-1f88-45a0-af4e-28b5614d1960',
+  //   'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c',
+  //   '12c40cc6-5cdc-4b22-be2e-020643cab84a', // Unknown
+  //   'b8851399-7522-40d3-98c9-00b3f5d6d2cb', // Ксения
+  //   'c929d161-f608-4ef8-9ac8-f0cfe73c60c0', // Лена
+  // ]
+  // const chatItems1Added = [
+  //   'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
+  //   '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d', // Киана
+  // ]
+  //
+  // const chatItems2Removed = [
+  //   'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
+  //   '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d', // Киана
+  // ]
+  // const chatItems2Added = [
+  //   '4fb12fb0-1f88-45a0-af4e-28b5614d1960',
+  //   'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c',
+  //   '12c40cc6-5cdc-4b22-be2e-020643cab84a', // Unknown
+  //   'b8851399-7522-40d3-98c9-00b3f5d6d2cb', // Ксения
+  //   //'c929d161-f608-4ef8-9ac8-f0cfe73c60c0', // Лена
+  // ]
+  //
+  //
+  //
+  // const [chatItems, setChatItems] = useState(getInitialChatItems())
+  //
+  //
+  //
+  // const pinChats = useCallback((ids: string[]) => {
+  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //     // TODO add pinned as lowermost and adjust all indexes
+  //     if (ids.includes(it.id) && isundef(it.pinned)) return { ...it, pinned: 1 }
+  //     return it
+  //   }))
+  // }, [])
+  // const unpinChats = useCallback((ids: string[]) => {
+  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //     // TODO add pinned as lowermost and adjust all indexes
+  //     if (ids.includes(it.id) && isdef(it.pinned)) return { ...it, pinned: undefined }
+  //     return it
+  //   }))
+  // }, [])
+  //
+  // const muteChats = useCallback((ids: string[], { forever = false, period = 0 /*ms*/ } = { }) => {
+  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //     if (ids.includes(it.id) && !it.mute) return { ...it, mute: true }
+  //     return it
+  //   }))
+  // }, [])
+  // const unmuteChats = useCallback((ids: string[]) => {
+  //   setChatItems(items => ArrayU.mapToIf(items, it => {
+  //     if (ids.includes(it.id) && it.mute) return { ...it, mute: false }
+  //     return it
+  //   }))
+  // }, [])
+  // const removeChats = useCallback((ids: string[], { removeForAll = false } = { }) => {
+  //   console.log('removeForAll', removeForAll)
+  //   setInitialChatItems(items => ArrayU.filterToIf(items, it => (
+  //     !ids.includes(it.id)
+  //   )))
+  //   setChatItems(items => ArrayU.filterToIf(items, it => (
+  //     !ids.includes(it.id)
+  //   )))
+  // }, [])
+  //
+  //
+  // useInterval2({ offset: 1500, interval: 1500 }, () => {
+  //   if (!showFullProps) return
+  //   if (getStage() === 1) {
+  //     setStage(2)
+  //     setChatItems(items => [
+  //       ...items.filter(it => !chatItems1Removed.includes(it.id)),
+  //       ...getInitialChatItems().filter(it => chatItems1Added.includes(it.id)),
+  //     ])
+  //   }
+  //   else if (getStage() === 2) {
+  //     setStage(1)
+  //     setChatItems(items => [
+  //       ...items.filter(it => !chatItems2Removed.includes(it.id)),
+  //       ...getInitialChatItems().filter(it => chatItems2Added.includes(it.id)),
+  //     ])
+  //   }
+  // })
+  //
+  
+  // const preparedChatItems = useMemo(() => {
+  //   return chatItems
+  //     .filter(it => it)
+  //     .sort((a, b) => {
+  //       return (a.pinned ?? posInf) - (b.pinned ?? posInf)
+  //         || (() => {
+  //           const bUnread = !b.mute ? Math.sign(b.unreadCnt ?? 0) : 0
+  //           const aUnread = !a.mute ? Math.sign(a.unreadCnt ?? 0) : 0
+  //           return bUnread - aUnread
+  //         })()
+  //         || +new Date(b.lastMsgDate) - +new Date(a.lastMsgDate)
+  //         || 0
+  //     })
+  // }, [chatItems])
+  
+  // const [mutualSympathiesItems, setMutualSympathiesItems] = useState(chatItems)
+  //
+  // const preparedMutualSympathiesItems = useMemo(() => {
+  //   return mutualSympathiesItems
+  //     .filter(it => it.isMutualSympathy)
+  //     .sort((a, b) => {
+  //       return +new Date(b.mutualSympathyAppearanceDate!) - +new Date(a.mutualSympathyAppearanceDate!)
+  //         || 0
+  //     })
+  // }, [mutualSympathiesItems])
+  
+  const [preparedChatItems, setPreparedChatItems] = (
+    useState<ChatListItemWidgetData[] | undefined>(undefined)
+  )
   
   
-  const chatItemsInitiallyRemoved = [
-    'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
-    '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d', // Киана
-  ]
-  
-  const { get: getInitialChatItems, setOrUpdate: setInitialChatItems } = useStateAndRef(() => (
-    mockChatItems.filter(it => showFullProps ? !chatItemsInitiallyRemoved.includes(it.id) : true)
-  ))
-  
-  
-  
-  const [getStage, setStage] = useRefGetSet(1)
-  
-  const chatItems1Removed = [
-    '4fb12fb0-1f88-45a0-af4e-28b5614d1960',
-    'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c',
-    '12c40cc6-5cdc-4b22-be2e-020643cab84a', // Unknown
-    'b8851399-7522-40d3-98c9-00b3f5d6d2cb', // Ксения
-    'c929d161-f608-4ef8-9ac8-f0cfe73c60c0', // Лена
-  ]
-  const chatItems1Added = [
-    'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
-    '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d', // Киана
-  ]
-  
-  const chatItems2Removed = [
-    'ce2dcdb0-54ae-4f58-a7d9-3826abfeaebf',
-    '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d', // Киана
-  ]
-  const chatItems2Added = [
-    '4fb12fb0-1f88-45a0-af4e-28b5614d1960',
-    'd7a11ffd-c5b3-4f31-9fec-289a9f86a85c',
-    '12c40cc6-5cdc-4b22-be2e-020643cab84a', // Unknown
-    'b8851399-7522-40d3-98c9-00b3f5d6d2cb', // Ксения
-    //'c929d161-f608-4ef8-9ac8-f0cfe73c60c0', // Лена
-  ]
-  
-  
-  
-  const [chatItems, setChatItems] = useState(getInitialChatItems())
-  
-  
-  
-  const pinChats = useCallback((ids: string[]) => {
-    setChatItems(items => ArrayU.mapToIf(items, it => {
-      // TODO add pinned as lowermost and adjust all indexes
-      if (ids.includes(it.id) && isundef(it.pinned)) return { ...it, pinned: 1 }
-      return it
-    }))
-  }, [])
-  const unpinChats = useCallback((ids: string[]) => {
-    setChatItems(items => ArrayU.mapToIf(items, it => {
-      // TODO add pinned as lowermost and adjust all indexes
-      if (ids.includes(it.id) && isdef(it.pinned)) return { ...it, pinned: undefined }
-      return it
-    }))
-  }, [])
-  
-  const muteChats = useCallback((ids: string[], { forever = false, period = 0 /*ms*/ } = { }) => {
-    setChatItems(items => ArrayU.mapToIf(items, it => {
-      if (ids.includes(it.id) && !it.mute) return { ...it, mute: true }
-      return it
-    }))
-  }, [])
-  const unmuteChats = useCallback((ids: string[]) => {
-    setChatItems(items => ArrayU.mapToIf(items, it => {
-      if (ids.includes(it.id) && it.mute) return { ...it, mute: false }
-      return it
-    }))
-  }, [])
-  const removeChats = useCallback((ids: string[], { removeForAll = false } = { }) => {
-    console.log('removeForAll', removeForAll)
-    setInitialChatItems(items => ArrayU.filterToIf(items, it => (
-      !ids.includes(it.id)
-    )))
-    setChatItems(items => ArrayU.filterToIf(items, it => (
-      !ids.includes(it.id)
-    )))
-  }, [])
-  
-  
-  useInterval2({ offset: 1500, interval: 1500 }, () => {
-    if (!showFullProps) return
-    if (getStage() === 1) {
-      setStage(2)
-      setChatItems(items => [
-        ...items.filter(it => !chatItems1Removed.includes(it.id)),
-        ...getInitialChatItems().filter(it => chatItems1Added.includes(it.id)),
-      ])
-    }
-    else if (getStage() === 2) {
-      setStage(1)
-      setChatItems(items => [
-        ...items.filter(it => !chatItems2Removed.includes(it.id)),
-        ...getInitialChatItems().filter(it => chatItems2Added.includes(it.id)),
-      ])
-    }
+  const {
+    request,
+    isLoading, isSuccess, isError,
+    response, resetResponse,
+  } = useApiRequest({
+    values: { },
+    prepareAndRequest: useCallback(() => {
+      return ChatItemsApi.chatItems()
+    }, []),
   })
   
+  useEffect(() => {
+    request()
+  }, [])
   
+  useEffect(() => {
+    if (response?.isSuccess) {
+      const it = response.data.chatItems
+      setPreparedChatItems(it.map(it => ({
+        id: it.id,
+        name: it.profile.name,
+        ava: it.profile.ava,
+        lastMsg: it.lastMessage?.content.text ?? undefined,
+        lastMsgDate: it.lastMessage?.createdAt,
+        isLastMsgMy: authUserId === it.lastMessage?.fromUserId,
+        // online: false,
+        // mute: false,
+        // pinned: undefined,
+        // isWriting: false,
+      })))
+    }
+  }, [isSuccess])
   
-  const [mutualSympathiesItems, setMutualSympathiesItems] = useState(chatItems)
-  
-  const preparedChatItems = useMemo(() => {
-    return chatItems
-      .filter(it => it)
-      .sort((a, b) => {
-        return (a.pinned ?? posInf) - (b.pinned ?? posInf)
-          || (() => {
-            const bUnread = !b.mute ? Math.sign(b.unreadCnt ?? 0) : 0
-            const aUnread = !a.mute ? Math.sign(a.unreadCnt ?? 0) : 0
-            return bUnread - aUnread
-          })()
-          || +new Date(b.lastMsgDate) - +new Date(a.lastMsgDate)
-          || 0
-      })
-  }, [chatItems])
-  
-  const preparedMutualSympathiesItems = useMemo(() => {
-    return mutualSympathiesItems
-      .filter(it => it.isMutualSympathy)
-      .sort((a, b) => {
-        return +new Date(b.mutualSympathyAppearanceDate!) - +new Date(a.mutualSympathyAppearanceDate!)
-          || 0
-      })
-  }, [mutualSympathiesItems])
   
   return (
     <>
@@ -342,11 +382,11 @@ const ChatsPage = React.memo(() => {
           
           <ChatList
             chatItems={preparedChatItems}
-            pin={pinChats}
-            unpin={unpinChats}
-            mute={muteChats}
-            unmute={unmuteChats}
-            remove={removeChats}
+            // pin={pinChats}
+            // unpin={unpinChats}
+            // mute={muteChats}
+            // unmute={unmuteChats}
+            // remove={removeChats}
           />
           
         </PageContentLayout>

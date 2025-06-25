@@ -74,7 +74,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
         >
           {mutualSympathiesItems.map(({ id, ava, name, online }) => (
             <Flex w={66} key={id} col noShrink align g={7}>
-              <AppLink toFull={RootRoute.chat.user.id.id[use](id)}>
+              <AppLink toFull={RootRoute.chat.userId.id[use](id)}>
                 <AvaButton alignedStretch noShrink shadow
                   id={id} ava={ava} online={online} mutualSympathy
                 />
