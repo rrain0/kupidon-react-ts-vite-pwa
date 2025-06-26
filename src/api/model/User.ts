@@ -2,6 +2,13 @@ import { Gender } from 'src/api/model/Gender.ts'
 
 
 
+export interface OtherUserShortFromApi {
+  id: string
+  name: string
+  ava: string,
+}
+
+
 export interface UserPhoto {
   id: string
   index: number

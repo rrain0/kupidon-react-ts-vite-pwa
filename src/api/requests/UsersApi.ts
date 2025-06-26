@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { OtherUser } from 'src/api/model/User.ts'
+import { OtherUser, OtherUserShortFromApi } from 'src/api/model/User.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import TechnicalError = ApiUtils.TechnicalError
@@ -28,13 +28,20 @@ export namespace UsersApi {
   
   
   
-  export interface UsersMutuallyLikedSuccessData {
-    mutuallyLikedUsers: OtherUser[]
+  export interface UserPairFromApi {
+    fromUserId: string
+    toUserId: string
+    createdAt: string
+    toUser: OtherUserShortFromApi,
   }
-  export type UsersMutuallyLikedErrorData = TechnicalError
-  export const mutuallyLiked = async () => (
-    handleAuthenticatedResponse<UsersMutuallyLikedSuccessData, UsersMutuallyLikedErrorData>(
-      axAccess.get(ApiV1Routes.usersMutuallyLiked)
+  
+  export interface UsersNewPairsSuccessData {
+    newPairs: UserPairFromApi[]
+  }
+  export type UsersNewPairsErrorData = TechnicalError
+  export const newPairs = async () => (
+    handleAuthenticatedResponse<UsersNewPairsSuccessData, UsersNewPairsErrorData>(
+      axAccess.get(ApiV1Routes.usersNewPairs)
     )
   )
   

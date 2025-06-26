@@ -29,6 +29,7 @@ import posInf = MathU.posInf
 import isundef = TypeU.isundef
 import isdef = TypeU.isdef
 import ChatItemFromApi = ChatItemsApi.ChatItemFromApi
+import UserPairFromApi = UsersApi.UserPairFromApi
 
 
 
@@ -408,7 +409,7 @@ export default ChatsPage
 // TODO extract
 const MutualSympathiesListWithItems = React.memo(() => {
   
-  const [items, setItems] = useState(undefined as OtherUser[] | undefined)
+  const [items, setItems] = useState(undefined as UserPairFromApi[] | undefined)
   
   
   const [preparedMutualSympathiesItems, setPreparedMutualSympathiesItems] = useState([] as (
@@ -422,9 +423,9 @@ const MutualSympathiesListWithItems = React.memo(() => {
       setPreparedMutualSympathiesItems(items.map(it => {
         
         return {
-          id: it.id,
-          ava: it.photos.find(p => p.index === 0)?.url,
-          name: it.name,
+          id: it.toUser.id,
+          ava: it.toUser.ava,
+          name: it.toUser.name,
           online: false,
         }
       }))
@@ -441,7 +442,7 @@ const MutualSympathiesListWithItems = React.memo(() => {
   } = useApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
-      return UsersApi.mutuallyLiked()
+      return UsersApi.newPairs()
     }, []),
   })
   
@@ -452,7 +453,7 @@ const MutualSympathiesListWithItems = React.memo(() => {
   
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
-      setItems(response.data.mutuallyLikedUsers)
+      setItems(response.data.newPairs)
     }
   }, [isSuccess])
   
