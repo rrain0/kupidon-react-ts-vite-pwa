@@ -108,7 +108,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     } = useApiRequest({
       values: { },
       prepareAndRequest: useCallback(() => {
-        return ChatItemsApi.chatItems()
+        return ChatItemsApi.chatItem(toChatId ?? '')
       }, []),
     })
     
@@ -120,19 +120,16 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     
     useEffect(() => {
       if (response?.isSuccess) {
-        const it = response.data.chatItems
-        const chat = it.find(it => it.id === toChatId)
-        if (chat) {
-          setCompanion({
-            id: chat.id,
-            name: chat.profile.name,
-            ava: chat.profile.ava,
-            // online: false,
-            // mute: false,
-            // pinned: undefined,
-            // isWriting: false,
-          })
-        }
+        const it = response.data.chatItem
+        setCompanion({
+          id: it.id,
+          name: it.profile.name,
+          ava: it.profile.ava,
+          // online: false,
+          // mute: false,
+          // pinned: undefined,
+          // isWriting: false,
+        })
       }
     }, [isSuccess])
     

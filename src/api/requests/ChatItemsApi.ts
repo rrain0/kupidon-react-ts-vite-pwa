@@ -29,6 +29,7 @@ export namespace ChatItemsApi {
     lastMessage: ChatMessageFromApi | null
   }
   
+  
   export type ChatItemsSuccessData = {
     chatItems: ChatItemFromApi[]
   }
@@ -39,6 +40,17 @@ export namespace ChatItemsApi {
     )
   )
   
+  
+  
+  export type ChatItemSuccessData = {
+    chatItem: ChatItemFromApi
+  }
+  export type ChatItemErrorData = AuthenticationError | TechnicalError
+  export const chatItem = async (id: string) => (
+    handleAuthenticatedResponse<ChatItemSuccessData, ChatItemErrorData>(
+      axAccess.get(ApiV1Routes.chatItem(id)),
+    )
+  )
   
   
   
