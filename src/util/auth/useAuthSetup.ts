@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { useAsyncEffect } from 'src/util/react/useAsyncEffect.ts'
+import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import * as jose from 'jose'
 
@@ -37,33 +37,24 @@ export const useAuthSetup = () => {
   }, [usedAccount, accessToken])
   
   
-  const [userIsReady, setUserIsReady] = useState(false)
-  
-  
-  // TODO Api request - make hook
   const [needToFetchUser, setNeedToFetchUser] = useState(false)
-  const [isFetchingUser, setFetchingUser] = useState(false)
-  useAsyncEffect((lock, unlock) => {
-    if (needToFetchUser && !isFetchingUser
-      && lock(UserApi.current)
-    ) {
-      setNeedToFetchUser(false)
-      setFetchingUser(true)
-      ;(async() => {
-        try {
-          const resp = await UserApi.current()
-          if (resp.isSuccess)
-            setAuth({ user: resp.data.user })
-          else
-            console.warn('failed to fetch user:', resp)
-        }
-        finally {
-          setFetchingUser(false)
-          unlock(UserApi.current)
-        }
-      })()
-    }
-  }, [needToFetchUser, isFetchingUser])
+  const [userIsReady, setUserIsReady] = useState(false)
+  {
+    const {
+      startRequest,
+      isLoading, isFinished, isSuccess, isError,
+      data, error,
+    } = useApiRequest(UserApi.current)
+    
+    useEffect(() => {
+      if (needToFetchUser) startRequest()
+    }, [needToFetchUser])
+    
+    useEffect(() => {
+      if (isSuccess) setAuth({ user: data.user })
+      if (isError) console.warn('failed to fetch user:', error)
+    }, [isFinished])
+  }
   
   
   useEffect(() => {

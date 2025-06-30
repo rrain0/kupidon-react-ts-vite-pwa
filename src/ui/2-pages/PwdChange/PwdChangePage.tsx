@@ -1,7 +1,7 @@
 import { DateU } from '@util/date/DateU.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
@@ -66,7 +66,7 @@ const PwdChangePage = React.memo(() => {
     request, isLoading,
     isSuccess, isError, isImmediate,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((

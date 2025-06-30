@@ -16,6 +16,7 @@ import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import {
   useMediaArrayDownloader
 } from 'src/ui-data/models/media/download/useMediaArrayDownloader.ts'
@@ -89,7 +90,7 @@ const ProfilePage = React.memo(() => {
     request,
     isLoading, isSuccess, isError, isImmediate,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((
@@ -397,30 +398,24 @@ const ProfilePage = React.memo(() => {
   
   
   
-  // TODO Api request - make hook
-  const [needToFetchUser, setNeedToFetchUser] = useState(true)
-  const [isFetchingUser, setFetchingUser] = useState(false)
-  useAsyncEffect((lock, unlock) => {
-    if (needToFetchUser && !isFetchingUser
-      && lock(UserApi.current)
-    ) {
-      setNeedToFetchUser(false)
-      setFetchingUser(true)
-      ;(async() => {
-        try {
-          const resp = await UserApi.current()
-          if (resp.isSuccess)
-            setAuth({ user: resp.data.user })
-          else
-            console.warn('failed to fetch user:', resp)
-        }
-        finally {
-          setFetchingUser(false)
-          unlock(UserApi.current)
-        }
-      })()
-    }
-  }, [needToFetchUser, isFetchingUser])
+  // Нужно чтобы при заходе в профиль текущий юзер обновлялся
+  // Этот код также находится в useAuthSetup
+  {
+    const {
+      startRequest,
+      isLoading, isFinished, isSuccess, isError,
+      data, error,
+    } = useApiRequest(UserApi.current)
+    
+    useEffect(() => {
+      startRequest()
+    }, [])
+    
+    useEffect(() => {
+      if (isSuccess) setAuth({ user: data.user })
+      if (isError) console.warn('failed to fetch user:', error)
+    }, [isFinished])
+  }
   
   
   

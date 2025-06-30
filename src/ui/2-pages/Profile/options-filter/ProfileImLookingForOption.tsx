@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { PartnerGender } from 'src/api/model/PartnerGender.ts'
+import { PartnerGender } from 'src/model/PartnerGender.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'

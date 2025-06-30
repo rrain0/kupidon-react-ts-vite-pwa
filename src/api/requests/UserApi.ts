@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios'
 import { ApiUtils } from 'src/api/ApiUtils'
-import { CurrentUser, OtherUser } from 'src/api/model/User.ts'
-import { Gender } from 'src/api/model/Gender.ts'
+import { CurrentUserA, OtherUserA } from 'src/model/api/UserA.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { getDataUrlProps } from '@util/file/DataUrl.ts'
 import { FileU } from 'src/util/file/FileU'
@@ -26,7 +26,7 @@ export namespace UserApi {
   
   
   export type CurrentUserSuccessData = {
-    user: CurrentUser
+    user: CurrentUserA
   }
   export type CurrentUserErrorData = AuthenticationError | NoUserResponseError | TechnicalError
   export const current = async () => {
@@ -40,7 +40,7 @@ export namespace UserApi {
   
   
   export type UserByIdSuccessData = {
-    user: OtherUser
+    user: OtherUserA
   }
   export type UserByIdErrorData = NoUserResponseError | TechnicalError
   export const userById = async (id: string) => {
@@ -58,18 +58,18 @@ export namespace UserApi {
   
   export interface CreateSuccessData {
     accessToken: string
-    user: CurrentUser
+    user: CurrentUserA
   }
   export type CreateErrorData = TechnicalError | {
     code: 'DUPLICATE_EMAIL'
     msg: string
   }
   export type UserToCreate = {
-    email: string,
-    pwd: string,
-    name: string,
-    gender: 'MALE' | 'FEMALE',
-    birthDate: string, // '2005-01-01'
+    email: string
+    pwd: string
+    name: string
+    gender: GenderA
+    birthDate: string // '2005-01-01'
   }
   export const create = async (user: UserToCreate, lang: string[], timeZone: string) => (
     handleResponse<CreateSuccessData, CreateErrorData>(
@@ -91,13 +91,13 @@ export namespace UserApi {
   export type UserToUpdate = Pu<{
     name: string
     birthDate: string // '2005-01-01'
-    gender: Gender
+    gender: GenderA
     aboutMe: string
     currentPwd: string
     pwd: string
     photos: {
       remove: string[]
-      replace: Array<{ id: string, index: number }>
+      replace: { id: string, index: number }[]
     }
   }>
   export const update = async (user: UserToUpdate, timeZone: string) => (
@@ -113,15 +113,17 @@ export namespace UserApi {
   
   export type AddProfilePhotoSuccessData = CurrentUserSuccessData
   export type AddProfilePhotoErrorData =
-    AuthenticationError | NoUserResponseError | TechnicalError
-  export type AddProfilePhoto = {
+    | AuthenticationError
+    | NoUserResponseError
+    | TechnicalError
+  export type profilePhotoToAdd = {
     id: string,
     index: number,
     name: string,
     dataUrl: string
   }
   export const addProfilePhoto = async (
-    photo: AddProfilePhoto,
+    photo: profilePhotoToAdd,
     options?: {
       onProgress?: Callback1<number | undefined>
       abortCtrl?: AbortController

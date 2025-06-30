@@ -35,7 +35,7 @@ export namespace DateU {
    * @param birthDate {string} date in format like '2000-08-23'
    * @returns {string} e.g. '23'
    * */
-  export const age = (birthDate: string) => {
+  export const age = (birthDate: string): number | undefined => {
     return intervalToDuration({
       start: new Date(birthDate),
       end: new Date(),

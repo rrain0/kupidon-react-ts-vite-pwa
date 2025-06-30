@@ -1,5 +1,6 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { ChatMessageFromApi } from 'src/api/model/ChatMessageFromApi.ts'
+import { ChatA } from 'src/model/api/ChatA.ts'
+import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
@@ -14,8 +15,8 @@ export namespace ChatMessageApi {
   
   
   export type CreateMessageToUserSuccessData = {
-    //chat: // TODO
-    message: ChatMessageFromApi
+    chat: ChatA
+    message: ChatMessageA
   }
   export type CreateMessageToUserErrorData = AuthenticationError | TechnicalError
   export const createMessageToUser = async (toUserId: string, data: { content: { text: string } }) => {
@@ -26,7 +27,7 @@ export namespace ChatMessageApi {
   
   
   export type CreateMessageToChatSuccessData = {
-    message: ChatMessageFromApi
+    message: ChatMessageA
   }
   export type CreateMessageToChatErrorData = AuthenticationError | TechnicalError
   export const createMessageToChat = async (toChatId: string, data: { content: { text: string } }) => {

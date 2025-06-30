@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { MbtiType } from 'src/api/model/MbtiType.ts'
+import { MbtiType } from 'src/model/MbtiType.ts'
 import RecordRo = TypeU.RecordRo
 
 import scientist from '@im/mbti-type/scientist.svg'

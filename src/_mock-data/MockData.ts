@@ -51,7 +51,9 @@ import portraitWomanPosingHouse from
     '@im/mock/people/1/portraits/portrait-young-woman-posing-house  portrait.webp'
 import portraitStylishBrunetteGirl from
     '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  portrait.webp'
-import { OtherUser } from 'src/api/model/User.ts'
+import { DateU } from '@util/date/DateU.ts'
+import { getAge } from '@util/ui/nameCommaAge.ts'
+import { OtherUserA } from 'src/model/api/UserA.ts'
 
 
 
@@ -146,10 +148,12 @@ export namespace MockData {
   
   
   
-  export const users: OtherUser[] = [
+  export const users: OtherUserA[] = [
     {
       id: '175dc7be-3f56-4b9d-9403-e994b72624dc',
-      name: 'Алиса', birthDate: '2001-05-15', gender: 'FEMALE',
+      name: 'Алиса',
+      birthDate: '2001-05-15', age: DateU.age('2001-05-15'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [{
         id: '93723057-eee2-4a75-9095-e5b3219f0885', index: 0, name: '', mimeType: 'image/png',
@@ -158,7 +162,9 @@ export namespace MockData {
     },
     {
       id: '97bd2cee-decf-4774-8768-b576118af713',
-      name: 'Мария', birthDate: '2000-05-15', gender: 'FEMALE',
+      name: 'Мария',
+      birthDate: '2000-05-15', age: DateU.age('2000-05-15'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [{
         id: 'd5b6d377-2f7c-4fd8-8166-7ec9ca691023', index: 0, name: '', mimeType: 'image/png',
@@ -167,7 +173,9 @@ export namespace MockData {
     },
     {
       id: '5ac18ba3-fc4a-4983-a662-7b8134885ed6',
-      name: 'Ксюша', birthDate: '2001-05-15', gender: 'FEMALE',
+      name: 'Ксюша',
+      birthDate: '2001-05-15', age: DateU.age('2001-05-15'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [{
         id: '69184b79-2fa5-4270-a407-8405b1972dc9', index: 0, name: '', mimeType: 'image/png',
@@ -176,7 +184,9 @@ export namespace MockData {
     },
     {
       id: 'ee8d201d-789b-4c89-a28b-e78b282bca70',
-      name: 'Влада', birthDate: '2003-05-15', gender: 'FEMALE',
+      name: 'Влада',
+      birthDate: '2003-05-15', age: DateU.age('2003-05-15'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [{
         id: 'ee389d55-d1aa-411e-bd47-d9b86c7ed102', index: 0, name: '', mimeType: 'image/png',
@@ -185,7 +195,9 @@ export namespace MockData {
     },
     {
       id: '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d',
-      name: 'Лера', birthDate: '2004-05-15', gender: 'FEMALE',
+      name: 'Лера',
+      birthDate: '2004-05-15', age: DateU.age('2004-05-15'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [{
         id: '714e70ba-f328-4df4-9468-48ec874e8500', index: 0, name: '', mimeType: 'image/png',
@@ -194,7 +206,9 @@ export namespace MockData {
     },
     {
       id: 'a503343a-4759-441d-aae0-3f61e2335337',
-      name: 'Настя', birthDate: '2002-05-15', gender: 'FEMALE',
+      name: 'Настя',
+      birthDate: '2002-05-15', age: DateU.age('2002-05-15'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [{
         id: 'f967f0e7-05e1-44bd-83af-0bef3ee9f63d', index: 0, name: '', mimeType: 'image/png',
@@ -203,13 +217,17 @@ export namespace MockData {
     },
     {
       id: 'c866cb44-bb50-4701-87e2-36b8967a3201',
-      name: 'Саша', birthDate: '2000-02-12', gender: 'FEMALE',
+      name: 'Саша',
+      birthDate: '2000-02-12', age: DateU.age('2000-02-12'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [],
     },
     {
       id: '84b5d4ab-2bce-4988-9674-8a7b878f3266',
-      name: 'Аня', birthDate: '2001-05-09', gender: 'FEMALE',
+      name: 'Аня',
+      birthDate: '2001-05-09', age: DateU.age('2001-05-09'),
+      gender: 'FEMALE',
       aboutMe: '',
       photos: [],
     },

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Gender } from 'src/api/model/Gender.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -21,8 +21,8 @@ const overlayName = 'gender'
 
 
 
-export type GenderOptionValues = Gender | ''
-export type GenderUiOptions = Option<Gender>[]
+export type GenderOptionValues = GenderA | ''
+export type GenderUiOptions = Option<GenderA>[]
 
 
 const ProfileGenderOption = React.memo(

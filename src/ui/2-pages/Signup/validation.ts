@@ -1,4 +1,4 @@
-import { Gender } from 'src/api/model/Gender.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { DateTime } from '@util/date/DateTime.ts'
 import { ValidationU } from 'src/mini-libs/form-data/core/ValidationU.ts'
@@ -77,7 +77,7 @@ export namespace SignupPageValidation {
     pwd: string
     repeatPwd: string
     name: string
-    gender: Gender | ''
+    gender: GenderA | ''
     birthDate: string // 2002-01-01 1999-12-31
     //notRobot: boolean
     //form: LoginRespE['data']['code'] | 'connectionError'|'unknown'|undefined

@@ -6,7 +6,7 @@ import Callback = TypeU.Callback
 
 
 
-
+// TODO remove
 export const useAsyncEffect = 
 (
   callback: (lock: Predicate<any>, unlock: Consumer<any>) => (void | Callback),

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Education } from 'src/api/model/Education.ts'
+import { Education } from 'src/model/Education.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'

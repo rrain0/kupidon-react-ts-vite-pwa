@@ -2,7 +2,7 @@ import { AsyncU } from '@util/common/AsyncU.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UsersApi } from 'src/api/requests/UsersApi.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
@@ -101,7 +101,7 @@ const FindPairPageWithItems = React.memo(() => {
     request,
     isLoading, isSuccess, isError,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
       return UsersApi.get()

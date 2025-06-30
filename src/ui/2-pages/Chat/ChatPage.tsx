@@ -3,14 +3,14 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
-import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import * as datefns from 'date-fns'
-import { ChatMessageFromApi } from 'src/api/model/ChatMessageFromApi.ts'
+import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
 import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
 import { ChatMessagesApi } from 'src/api/requests/ChatMessagesApi.ts'
 import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -67,26 +67,19 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   const [companion, setCompanion] = useState<ChatCompanionData | undefined>(undefined)
   {
     const {
-      request,
-      isLoading, isSuccess, isError,
-      response, resetResponse,
-    } = useApiRequest({
-      values: { },
-      prepareAndRequest: useCallback(() => {
-        return UserApi.userById(toUserId ?? '')
-      }, [toUserId]),
-    })
+      startRequest,
+      isLoading, isFinished, isSuccess, isError,
+      data, error,
+    } = useApiRequest(() => UserApi.userById(toUserId ?? ''))
     
     useEffect(() => {
       setCompanion(undefined)
-      if (userId && !toChatId) {
-        request()
-      }
+      if (userId && !toChatId) startRequest()
     }, [toUserId, toChatId])
     
     useEffect(() => {
-      if (response?.isSuccess) {
-        const u = response.data.user
+      if (isSuccess) {
+        const u = data.user
         setCompanion({
           id: u.id,
           ava: u.photos.find(p => p.index === 0)?.url,
@@ -102,25 +95,18 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   
   {
     const {
-      request,
-      isLoading, isSuccess, isError,
-      response, resetResponse,
-    } = useApiRequest({
-      values: { },
-      prepareAndRequest: useCallback(() => {
-        return ChatItemsApi.chatItem(toChatId ?? '')
-      }, []),
-    })
+      startRequest,
+      isLoading, isFinished, isSuccess, isError,
+      data, error,
+    } = useApiRequest(() => ChatItemsApi.chatItem(toChatId ?? ''))
     
     useEffect(() => {
-      if (toChatId) {
-        request()
-      }
+      if (toChatId) startRequest()
     }, [toChatId])
     
     useEffect(() => {
-      if (response?.isSuccess) {
-        const it = response.data.chatItem
+      if (isSuccess) {
+        const it = data.chatItem
         setCompanion({
           id: it.id,
           name: it.profile.name,
@@ -132,7 +118,6 @@ const ChatPage = React.memo((props: ChatPageProps) => {
         })
       }
     }, [isSuccess])
-    
   }
   
   
@@ -154,29 +139,27 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     }
   }
   
-  const [msgs, setMsgs] = useState<undefined | ChatMessageFromApi[]>(undefined)
+  const [msgs, setMsgs] = useState<undefined | ChatMessageA[]>(undefined)
   
   
-  const {
-    request,
-    isLoading, isSuccess, isError,
-    response, resetResponse,
-  } = useApiRequest({
-    values: { },
-    prepareAndRequest: useCallback(() => {
-      return ChatMessagesApi.messages({ toUserId, toChatId })
-    }, [toUserId, toChatId]),
-  })
+  {
+    const {
+      startRequest,
+      isLoading, isFinished, isSuccess, isError,
+      data, error,
+    } = useApiRequest(() => ChatMessagesApi.messages({ toUserId, toChatId }))
+    
+    useEffect(() => {
+      startRequest()
+    }, [toUserId, toChatId])
+    
+    useEffect(() => {
+      if (isSuccess) {
+        setMsgs(data.messages)
+      }
+    }, [isSuccess])
+  }
   
-  useEffect(() => {
-    request()
-  }, [toUserId, toChatId])
-  
-  useEffect(() => {
-    if (response?.isSuccess) {
-      setMsgs(response.data.messages)
-    }
-  }, [isSuccess])
   
   return (
     <>

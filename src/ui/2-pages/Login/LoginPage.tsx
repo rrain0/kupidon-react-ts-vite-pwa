@@ -1,7 +1,7 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import React, { useCallback, useEffect } from 'react'
 import { AuthApi } from 'src/api/requests/AuthApi'
-import { useApiRequest } from 'src/api/useApiRequest'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -73,7 +73,7 @@ const LoginPage = React.memo(() => {
     request,
     isLoading, isSuccess, isError,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((values: FormValues) => {

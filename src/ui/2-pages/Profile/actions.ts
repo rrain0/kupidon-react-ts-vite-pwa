@@ -1,7 +1,7 @@
 import { DateU } from '@util/date/DateU.ts'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { CurrentUser } from 'src/api/model/User.ts'
-import { Gender } from 'src/api/model/Gender.ts'
+import { CurrentUserA } from 'src/model/api/UserA.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
 import {
   MediaInArrayDUC,
   MediaOperation,
@@ -27,7 +27,7 @@ import ApiResponse = ApiUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import UserToUpdate = UserApi.UserToUpdate
-import AddProfilePhoto = UserApi.AddProfilePhoto
+import AddProfilePhoto = UserApi.profilePhotoToAdd
 import findBy = ArrayU.findBy
 import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
@@ -36,7 +36,7 @@ import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 export const currentUserPhotosToProfilePhotos = (
-  photos: CurrentUser['photos']
+  photos: CurrentUserA['photos']
 ): MediaInArrayDUC[] => {
   const profilePhotos = ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
     ...newDefaultEmptyRemoteMediaInArray(i),
@@ -77,7 +77,7 @@ export const profileUpdateApiRequest = (
     userToUpdate.birthDate = values.birthDate // yyyy-MM-dd
   }
   if (!failedFields.includes('gender')) {
-    userToUpdate.gender = values.gender as Gender
+    userToUpdate.gender = values.gender as GenderA
   }
   if (!failedFields.includes('aboutMe')) {
     userToUpdate.aboutMe = values.aboutMe
@@ -109,7 +109,7 @@ export const profileUpdateApiRequest = (
     CurrentUserSuccessData,
     UpdateUserErrorData | AddProfilePhotoErrorData
   >>(async (resolve, reject) => {
-    let updatedUser = null as null | CurrentUser
+    let updatedUser = null as null | CurrentUserA
     
     let uploads = addPhotos.map(it => ({
       ...newDefaultMediaOperation(),

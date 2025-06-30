@@ -1,6 +1,6 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { OtherUser } from 'src/api/model/User.ts'
-import { UserToUserLike } from 'src/api/model/UserToUserLike.ts'
+import { OtherUserA } from 'src/model/api/UserA.ts'
+import { UserToUserLikeA } from 'src/model/api/UserToUserLikeA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import TechnicalError = ApiUtils.TechnicalError
@@ -16,7 +16,7 @@ export namespace UserToUserApi {
   
   
   export interface UserToUserLikeCreateSuccessData {
-    userToUserLike: UserToUserLike
+    userToUserLike: UserToUserLikeA
   }
   export type UserToUserLikeCreateErrorData = TechnicalError
   export type UserToUserLikeToCreate = {

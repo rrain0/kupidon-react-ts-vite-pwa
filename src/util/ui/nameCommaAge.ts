@@ -2,7 +2,11 @@ import { DateU } from 'src/util/date/DateU.ts'
 
 
 
-export const getAge = (birthDate?: string) => birthDate && DateU.age(birthDate) || ''
+export const getAge = (birthDate?: string): string => {
+  if (!birthDate) return ''
+  const age = DateU.age(birthDate)
+  return `${age ?? ''}`
+}
 
 export const nameCommaAge = (name?: string, birthDate?: string) => {
   const age = getAge(birthDate)

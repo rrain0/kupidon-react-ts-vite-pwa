@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { ChatMessageFromApi } from 'src/api/model/ChatMessageFromApi.ts'
+import { ChatItemA } from 'src/model/api/ChatItemA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
@@ -13,25 +13,9 @@ import AuthenticationError = ApiUtils.AuthenticationError
 export namespace ChatItemsApi {
   
   
-  export type ChatTypeFromApi = 'PERSONAL'
-  export interface ChatItemProfileFromApi {
-    id: string
-    name: string
-    ava: string
-  }
-  export interface ChatItemFromApi {
-    id: string
-    type: ChatTypeFromApi
-    memberIds: string[]
-    createdAt: string
-    updatedAt: string
-    profile: ChatItemProfileFromApi
-    lastMessage: ChatMessageFromApi | null
-  }
-  
   
   export type ChatItemsSuccessData = {
-    chatItems: ChatItemFromApi[]
+    chatItems: ChatItemA[]
   }
   export type ChatItemsErrorData = AuthenticationError | TechnicalError
   export const chatItems = async () => (
@@ -43,7 +27,7 @@ export namespace ChatItemsApi {
   
   
   export type ChatItemSuccessData = {
-    chatItem: ChatItemFromApi
+    chatItem: ChatItemA
   }
   export type ChatItemErrorData = AuthenticationError | TechnicalError
   export const chatItem = async (id: string) => (

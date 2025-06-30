@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { Job } from 'src/api/model/Job.ts'
+import { Job } from 'src/model/Job.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import {

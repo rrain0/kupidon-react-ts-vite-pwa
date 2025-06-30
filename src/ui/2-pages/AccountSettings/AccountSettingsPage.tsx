@@ -2,7 +2,7 @@ import { DateU } from '@util/date/DateU.ts'
 import { noFormSubmit } from '@util/js/noFormSubmit.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi'
-import { useApiRequest } from 'src/api/useApiRequest'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -82,7 +82,7 @@ const AccountSettingsPage = React.memo(() => {
     request, isLoading,
     isSuccess, isError,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((

@@ -1,15 +1,15 @@
-import { Gender } from 'src/api/model/Gender.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
 
 
 
-export interface OtherUserShortFromApi {
+export interface OtherUserShortA {
   id: string
   name: string
   ava: string,
 }
 
 
-export interface UserPhoto {
+export interface UserPhotoA {
   id: string
   index: number
   name: string
@@ -17,17 +17,17 @@ export interface UserPhoto {
   url: string
 }
 
-export interface OtherUser {
+export interface OtherUserA {
   id: string
   name: string
   birthDate: string // TODO replace by age
-  age?: number // TODO remove ?
-  gender: Gender
+  age: number
+  gender: GenderA
   aboutMe: string
-  photos: UserPhoto[]
+  photos: UserPhotoA[]
 }
 
-export interface CurrentUser {
+export interface CurrentUserA {
   id: string
   email: string
   emailVerified: boolean
@@ -36,10 +36,10 @@ export interface CurrentUser {
   updatedAt: string
   name: string
   birthDate: string
-  age?: number // TODO remove ?
-  gender: Gender
+  age: number
+  gender: GenderA
   aboutMe: string
-  photos: UserPhoto[]
+  photos: UserPhotoA[]
 }
 
 

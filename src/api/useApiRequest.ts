@@ -1,122 +1,131 @@
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
-import { useCallback, useEffect, useState } from 'react'
-import { ApiUtils } from 'src/api/ApiUtils'
-import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
-import { useAsyncEffect } from 'src/util/react/useAsyncEffect'
-import Values = ValidationCore.Values
-import ApiResponse = ApiUtils.ApiResponse
+import { TypeU } from '@util/common/TypeU.ts'
+import { useAsCallback } from '@util/react-state/useAsCallback.ts'
+import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
+import { useState } from 'react'
+import { ApiUtils } from 'src/api/ApiUtils.ts'
 import ResponseError = ApiUtils.ResponseError
+import ApiResponse = ApiUtils.ApiResponse
+import Callback = TypeU.Callback
 
 
 
+// Если нужно сохранить последний удачный респонс, пока делается новый,
+// то надо использовать отделную логику,
+// что-то типа useLastSuccessfulData / useLast / useLastValid
+// useLast(data, isValid)
 
-
-export type ResponseData<
-  Vs extends Values, D, E extends ResponseError,
-> = {
-  isSuccess: true
-  data: D
-  usedValues: Vs
-} | {
-  isSuccess: false
-  error: E
-  usedValues: Vs
-}
-
-export type UseApiRequestProps<
-  Vs extends Values,
-  D,
-  E extends ResponseError,
-> = {
-  values: Vs
-  errorFields?: (keyof Vs)[] | undefined
-  prepareAndRequest: (values: Vs, errorFields: (keyof Vs)[]) => Promise<ApiResponse<D, E>>
-}
-export const useApiRequest = <
-  Vs extends Values,
-  D,
-  E extends ResponseError,
->(
-  props: UseApiRequestProps<Vs, D, E>
+export const useApiRequest = <D, E extends ResponseError>(
+  // здесь не будет параметров, если изменится сама функция во время запроса,
+  // то надо отменить текущий запрос и сделать новый
+  request: () => Promise<ApiResponse<D, E>>
 ) => {
-  const {
-    values,
-    errorFields,
-    prepareAndRequest,
-  } = props
+  const { get: getIsLoading, set: setIsLoading, state: isLoading } = (
+    useStateAndRef(false)
+  )
+  
+  const [result, setResult] = (
+    useState<{ data: D } | { error: E } | undefined>(undefined)
+  )
   
   
-  
-  
-  const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [isError, setIsError] = useState(false)
-  const [isImmediate, setIsImmediate] = useState(false)
-  const resetResponse = useCallback(() => {
-    setIsSuccess(false)
-    setIsError(false)
-    setResponse(undefined)
-    setIsImmediate(false)
-  }, [])
-  
-  
-  const [response, setResponse] = useState<ResponseData<Vs, D, E> | undefined>(undefined)
-  
-  
-  
-  
-  
-  const [doRequest, setDoRequest] = useState(false)
-  const request = useCallback(() => setDoRequest(true), [])
-  
-  
-  const tryRequest = useCallback(async() => {
-    if (isLoading) return
-    //console.log('tryRequest')
+  const startRequest = useAsCallback(async () => {
+    if (getIsLoading()) return
+    setResult(undefined)
     setIsLoading(true)
-    resetResponse()
     try {
-      const response = await prepareAndRequest(values, errorFields ?? [])
-      if (response.isSuccess) {
-        setResponse({
-          isSuccess: true,
-          data: response.data,
-          usedValues: values,
-        })
-        setIsSuccess(true)
+      const apiResponse = await request()
+      if (apiResponse.isSuccess) {
+        setResult({ data: apiResponse.data })
       }
       else {
-        setResponse({
-          isSuccess: false,
-          error: response.error,
-          usedValues: values,
-        })
-        setIsError(true)
+        setResult({ error: apiResponse.error })
       }
-    } finally {
+    }
+    finally {
       setIsLoading(false)
-      setIsImmediate(true)
     }
-  }, [isLoading, resetResponse, prepareAndRequest, values, errorFields])
-  
-  
-  const [getTryRequest] = useAsRefGet(tryRequest)
-  useAsyncEffect((lock, unlock) => {
-    if (doRequest && lock('api-request')) {
-      setDoRequest(false)
-      getTryRequest()().finally(() => unlock('api-request'))
-    }
-  }, [doRequest])
-  
-  
-  
-  useEffect(() => setIsImmediate(false), [isImmediate])
-  
-  
+  })
   
   return {
-    request,
-    isLoading, isSuccess, isError, isImmediate,
-    response, resetResponse,
-  } as const
+    startRequest,
+    isLoading,
+    isFinished: false,
+    isSuccess: false,
+    isError: false,
+    data: undefined,
+    error: undefined,
+    ...(() => {
+      if (!result) return {
+        isFinished: !isLoading,
+        isSuccess: false,
+        isError: false,
+        data: undefined,
+        error: undefined,
+      }
+      if ('data' in result) return {
+        isLoading: false,
+        isFinished: true,
+        isSuccess: true,
+        isError: false,
+        data: result.data,
+        error: undefined,
+      }
+      if ('error' in result) return {
+        isLoading: false,
+        isFinished: true,
+        isSuccess: false,
+        isError: true,
+        data: undefined,
+        error: result.error,
+      }
+    })(),
+  } as UseApiRequestResult<D, E>
 }
+
+
+
+export type UseApiRequestInitial = {
+  startRequest: Callback
+  isLoading: false
+  isFinished: false
+  isSuccess: false
+  isError: false
+  data: undefined
+  error: undefined
+}
+
+export type UseApiRequestLoading = {
+  startRequest: Callback
+  isLoading: true
+  isFinished: false
+  isSuccess: false
+  isError: false
+  data: undefined
+  error: undefined
+}
+
+export type UseApiRequestSuccess<D> = {
+  startRequest: Callback
+  isLoading: false
+  isFinished: true
+  isSuccess: true
+  isError: false
+  data: D
+  error: undefined
+}
+
+export type UseApiRequestError<E extends ResponseError> = {
+  startRequest: Callback
+  isLoading: false
+  isFinished: true
+  isSuccess: false
+  isError: true
+  data: undefined
+  error: E
+}
+
+export type UseApiRequestResult<D, E extends ResponseError> =
+  | UseApiRequestInitial
+  | UseApiRequestLoading
+  | UseApiRequestSuccess<D>
+  | UseApiRequestError<E>

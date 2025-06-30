@@ -1,6 +1,6 @@
 import { DateU } from '@util/date/DateU.ts'
-import { Gender } from 'src/api/model/Gender.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
@@ -90,7 +90,7 @@ const SignupPage = React.memo(() => {
     request,
     isLoading, isSuccess, isError, isImmediate,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((values: FormValues) => {
@@ -98,7 +98,7 @@ const SignupPage = React.memo(() => {
         email: values.email,
         pwd: values.pwd,
         name: values.name,
-        gender: values.gender as Gender,
+        gender: values.gender as GenderA,
         birthDate: values.birthDate, // yyyy-MM-dd
       }, langs, getCurrentTimeZoneName())
     }, [langs]),
@@ -166,7 +166,7 @@ const SignupPage = React.memo(() => {
       value: 'FEMALE',
       text: optionText.iAmGirl,
     },
-  ] satisfies { value: Gender, text: string }[], [optionText])
+  ] satisfies { value: GenderA, text: string }[], [optionText])
   
   
   

@@ -7,11 +7,12 @@ import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { OtherUser } from 'src/api/model/User.ts'
+import { OtherUserA } from 'src/model/api/UserA.ts'
 import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { UsersApi } from 'src/api/requests/UsersApi.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
+import { UserPairA } from 'src/model/api/UserPairA.ts'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import ChatList from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
 import ChatListActionBar from 'src/ui/2-pages/ChatList/parts/ChatListActionBar.tsx'
@@ -28,8 +29,6 @@ import arrOfIndices = ArrayU.arrOfIndices
 import posInf = MathU.posInf
 import isundef = TypeU.isundef
 import isdef = TypeU.isdef
-import ChatItemFromApi = ChatItemsApi.ChatItemFromApi
-import UserPairFromApi = UsersApi.UserPairFromApi
 
 
 
@@ -337,7 +336,7 @@ const ChatsPage = React.memo(() => {
     request,
     isLoading, isSuccess, isError,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
       return ChatItemsApi.chatItems()
@@ -409,7 +408,7 @@ export default ChatsPage
 // TODO extract
 const MutualSympathiesListWithItems = React.memo(() => {
   
-  const [items, setItems] = useState(undefined as UserPairFromApi[] | undefined)
+  const [items, setItems] = useState(undefined as UserPairA[] | undefined)
   
   
   const [preparedMutualSympathiesItems, setPreparedMutualSympathiesItems] = useState([] as (
@@ -439,7 +438,7 @@ const MutualSympathiesListWithItems = React.memo(() => {
     request,
     isLoading, isSuccess, isError,
     response, resetResponse,
-  } = useApiRequest({
+  } = useFormApiRequest({
     values: { },
     prepareAndRequest: useCallback(() => {
       return UsersApi.newPairs()
