@@ -30,6 +30,7 @@ const Env = {
   
   // with '/' at the end
   baseUrl: import.meta.env.BASE_URL satisfies string,
+  backendBaseUrl: import.meta.env.BACKEND_BASE_URL satisfies string,
   
   buildDate: import.meta.env.BUILD_DATE satisfies string,
 }
@@ -194,6 +195,29 @@ registerRoute(
 
 
 
+const wsUrl = `${Env.backendBaseUrl.replace(/^https:\/\//, 'wss://')}/ws`
+const ws = new WebSocket(wsUrl)
+
+ws.onopen = () => {
+  console.log('WebSocket connection established.')
+  // Send data to the server
+  ws.send('Hello from client!')
+}
+
+ws.onmessage = (event) => {
+  console.log('Message from server:', event.data)
+}
+
+ws.onclose = () => {
+  console.log('WebSocket connection closed.')
+}
+
+ws.onerror = (error) => {
+  console.error('WebSocket error:', error)
+}
+
+
+
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({ type: 'SKIP_WAITING' })
@@ -216,6 +240,14 @@ self.addEventListener('message', async ev => {
   else if (t === 'CONSOLE_LOG') {
     console.log('service worker console.log', ev)
   }
+  else if (t === 'BECAME_ONLINE') {
+    const userId = ev.data.userId as string
+    ws.send(JSON.stringify({ type: 'BECAME_ONLINE', userId }))
+  }
+  else if (t === 'BECAME_OFFLINE') {
+    const userId = ev.data.userId as string
+    ws.send(JSON.stringify({ type: 'BECAME_OFFLINE', userId }))
+  }
 })
 
 
@@ -225,6 +257,11 @@ async function clearCache(): Promise<void> {
   const entryKeys = await caches.keys()
   await Promise.allSettled(entryKeys.map(key => caches.delete(key)))
 }
+
+
+
+
+
 
 
 // Controlled clients - pages that already being controlled by SW.

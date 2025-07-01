@@ -152,7 +152,7 @@ export namespace MockData {
     {
       id: '175dc7be-3f56-4b9d-9403-e994b72624dc',
       name: 'Алиса',
-      birthDate: '2001-05-15', age: DateU.age('2001-05-15'),
+      birthDate: '2001-05-15', age: DateU.age('2001-05-15') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
@@ -163,7 +163,7 @@ export namespace MockData {
     {
       id: '97bd2cee-decf-4774-8768-b576118af713',
       name: 'Мария',
-      birthDate: '2000-05-15', age: DateU.age('2000-05-15'),
+      birthDate: '2000-05-15', age: DateU.age('2000-05-15') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
@@ -174,7 +174,7 @@ export namespace MockData {
     {
       id: '5ac18ba3-fc4a-4983-a662-7b8134885ed6',
       name: 'Ксюша',
-      birthDate: '2001-05-15', age: DateU.age('2001-05-15'),
+      birthDate: '2001-05-15', age: DateU.age('2001-05-15') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
@@ -185,7 +185,7 @@ export namespace MockData {
     {
       id: 'ee8d201d-789b-4c89-a28b-e78b282bca70',
       name: 'Влада',
-      birthDate: '2003-05-15', age: DateU.age('2003-05-15'),
+      birthDate: '2003-05-15', age: DateU.age('2003-05-15') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
@@ -196,7 +196,7 @@ export namespace MockData {
     {
       id: '3ceb9e6e-0e23-4cee-8a52-21d8d03f040d',
       name: 'Лера',
-      birthDate: '2004-05-15', age: DateU.age('2004-05-15'),
+      birthDate: '2004-05-15', age: DateU.age('2004-05-15') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
@@ -207,7 +207,7 @@ export namespace MockData {
     {
       id: 'a503343a-4759-441d-aae0-3f61e2335337',
       name: 'Настя',
-      birthDate: '2002-05-15', age: DateU.age('2002-05-15'),
+      birthDate: '2002-05-15', age: DateU.age('2002-05-15') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
@@ -218,7 +218,7 @@ export namespace MockData {
     {
       id: 'c866cb44-bb50-4701-87e2-36b8967a3201',
       name: 'Саша',
-      birthDate: '2000-02-12', age: DateU.age('2000-02-12'),
+      birthDate: '2000-02-12', age: DateU.age('2000-02-12') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [],
@@ -226,7 +226,7 @@ export namespace MockData {
     {
       id: '84b5d4ab-2bce-4988-9674-8a7b878f3266',
       name: 'Аня',
-      birthDate: '2001-05-09', age: DateU.age('2001-05-09'),
+      birthDate: '2001-05-09', age: DateU.age('2001-05-09') ?? 0,
       gender: 'FEMALE',
       aboutMe: '',
       photos: [],

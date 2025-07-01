@@ -72,7 +72,7 @@ const ChatMessage = React.memo((props: ChatMessageProps) => {
         }}
       >
         
-        <Flex grow>
+        <Flex grow hMin='1.32em'>
           {text}
         </Flex>
         

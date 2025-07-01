@@ -17,18 +17,16 @@ const PageLifecycleTestPage = () => {
       console.log('page was resumed', ev)
     }
     const onVisibility = (ev: Event) => {
-      switch (document.visibilityState) {
-        case 'visible':
-          console.log('page is visible', ev)
-          break
-        case 'hidden':
-          console.log('page was hidden', ev)
-          /* fetch('https://dev.kupidon.rrain.ydns.eu:50040/ktor/hello',{
-           method: 'GET', mode: 'cors', cache: 'no-cache', credentials: 'same-origin',
-           })
-           .then(resp => resp.text())
-           .then(text => console.log('response',text)) */
-          break
+      if (document.visibilityState === 'visible') {
+        console.log('page is visible', ev)
+      }
+      else if (document.visibilityState === 'hidden') {
+        console.log('page was hidden', ev)
+        /* fetch('https://dev.kupidon.rrain.ydns.eu:50040/ktor/hello',{
+         method: 'GET', mode: 'cors', cache: 'no-cache', credentials: 'same-origin',
+         })
+         .then(resp => resp.text())
+         .then(text => console.log('response',text)) */
       }
     }
     

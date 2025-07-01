@@ -77,7 +77,7 @@ export async function clearCache(): Promise<void> {
   await Promise.allSettled(entryKeys.map(key => window.caches.delete(key)))
   
   // Another way to clear cache
-  //awaits ServiceWorkerUtils.sendMsgAndWaitAnswer({ type: 'CLEAR_CACHE' }).catch(() => undefined)
+  //await ServiceWorkerUtils.sendMsgAndWaitAnswer({ type: 'CLEAR_CACHE' }).catch(() => undefined)
 }
 
 
