@@ -7,6 +7,7 @@
 
 
 declare interface ImportMetaEnv {
-  BACKEND_BASE_URL: string
+  BACKEND_HOST: string
+  BACKEND_PORT: string
   BUILD_DATE: string
 }

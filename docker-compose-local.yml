@@ -9,7 +9,8 @@ services:
     build:
       dockerfile: Dockerfile
       args:
-        BACKEND_BASE_URL: ${BACKEND_BASE_URL}
+        BACKEND_HOST: ${BACKEND_HOST}
+        BACKEND_PORT: ${BACKEND_PORT}
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:
@@ -36,8 +37,8 @@ services:
       - PROXY_PORT
       - PROXY_CERT_CRT
       - PROXY_CERT_KEY
-      - KTOR_HOST
-      - KTOR_PORT
+      - BACKEND_HOST
+      - BACKEND_PORT
     restart: unless-stopped
 
 

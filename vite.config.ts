@@ -48,42 +48,46 @@ const pwaOptions: Partial<VitePWAOptions> = {
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   
-  let envFileConfig: Record<string, string> = { }
-  const envVarsRuntime: Record<string, string> = {
-    // support for node and legacy libs
+  let reactDevServerPort = 40009
+  const now = new Date().toISOString()
+  
+  let envVarsRuntime: Record<string, string> = {
+    // support for legacy libs and node
     'process.env.NODE_ENV': JSON.stringify(mode),
-    'import.meta.env.BUILD_DATE': JSON.stringify(new Date().toISOString()),
+    'import.meta.env.BUILD_DATE': JSON.stringify(now),
   }
   
-  // LOAD ENVS BY VITE (with respect to vite env filename rules)
+  // LOAD ENVS BY VITE (with respect to vite env filename rules!!!)
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env vars regardless of the `VITE_` prefix.
   //const env = loadEnv(mode, process.cwd(), '')
   
-  // LOAD CUSTOM ENV FILES (any env filename)
+  // LOAD CUSTOM ENV FILES (any env filename & any env var name)
   if (mode === 'development') {
     const envFileName = 'react.dev.env'
-    envFileConfig = dotenvExpand.expand({
-      parsed: dotenv.parse(fs.readFileSync(envFileName)),
-    }).parsed as Record<string, string>
-    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`] = (
-      JSON.stringify(envFileConfig.BACKEND_BASE_URL)
-    )
-    //envVarsRuntime[`process.env.TEST`] = JSON.stringify(envFileConfig[TEST])
+    const envFileConfig: Record<string, string> = dotenvExpand
+      .expand({ parsed: dotenv.parse(fs.readFileSync(envFileName)) })
+      .parsed as Record<string, string>
+    reactDevServerPort = +envFileConfig.REACT_PORT
+    envVarsRuntime = { ...envVarsRuntime,
+      'import.meta.env.BACKEND_HOST': JSON.stringify(envFileConfig.BACKEND_HOST),
+      'import.meta.env.BACKEND_PORT': JSON.stringify(envFileConfig.BACKEND_PORT),
+      //'process.env.TEST': JSON.stringify(envFileConfig[TEST]),
+    }
   }
   if (mode === 'production') {
-    envVarsRuntime[`import.meta.env.BACKEND_BASE_URL`] = (
-      JSON.stringify(process.env.BACKEND_BASE_URL)
-    )
+    envVarsRuntime = { ...envVarsRuntime,
+      'import.meta.env.BACKEND_HOST': JSON.stringify(process.env.BACKEND_HOST),
+      'import.meta.env.BACKEND_PORT': JSON.stringify(process.env.BACKEND_PORT),
+    }
   }
   
   
   return {
-    
     // configure vite DEVELOPMENT server (yarn run dev)
     server: {
       host: true, // expose app via IP address from local network
-      port: +(envFileConfig.REACT_PORT ?? process.env.REACT_PORT ?? 40009),
+      port: reactDevServerPort,
       allowedHosts: true, // allow any host
     },
     
@@ -114,8 +118,7 @@ export default defineConfig(({ command, mode }) => {
       }),
     ],
     
-    // pass desired env variables
+    // Pass to runtime desired env variables
     define: envVarsRuntime,
-    
   }
 })

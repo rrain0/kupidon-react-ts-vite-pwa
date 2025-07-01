@@ -3,7 +3,7 @@ import { Env } from '@util/app/Env.ts'
 
 
 export namespace ApiV1Routes {
-  export const backend = Env.backendBaseUrl
+  export const backend = Env.backendHttpsHostPort
   export const apiV1 = `${backend}/api/v1`
   
   export const auth = `${apiV1}/auth`

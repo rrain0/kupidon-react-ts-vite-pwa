@@ -39,8 +39,10 @@ $envs.keys | foreach {
 }
 write-host "Image version: $imageVersion"
 read-host "Press any key to build & push docker image..."
-#write-host "BACKEND_BASE_URL: $($envs.BACKEND_BASE_URL)"
-$backendBaseUrl = $envs.BACKEND_BASE_URL
-docker build -t rrain0/kupidon-react-react:$imageVersion --build-arg BACKEND_BASE_URL=$backendBaseUrl .
+#write-host "BACKEND_HOST: $($envs.BACKEND_HOST)"
+#write-host "BACKEND_PORT: $($envs.BACKEND_PORT)"
+$backendHost = $envs.BACKEND_HOST
+$backendPort = $envs.BACKEND_PORT
+docker build -t rrain0/kupidon-react-react:$imageVersion --build-arg BACKEND_HOST=$backendHost --build-arg BACKEND_PORT=$backendPort .
 docker push rrain0/kupidon-react-react:$imageVersion
 read-host "All operations FINISHED!"
