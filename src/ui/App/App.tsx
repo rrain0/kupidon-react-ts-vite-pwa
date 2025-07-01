@@ -4,6 +4,7 @@ import { useSearchParamsUrlListener } from '@util/url/useSearchParamsUrlListener
 import React from 'react'
 import { widget7Test } from 'src/mini-libs/widget-style-7/WidgetTest.ts'
 import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
+import SendUserOnlineStatus from 'src/ui/components/SendUserOnlineStatus.tsx'
 import UsePageLifecycle from 'src/ui/components/UsePageLifecycle.tsx'
 import UseViewportContentSize from 'src/ui/components/UseViewportContentSize.tsx'
 import CheckBrowserMinimumVersion
@@ -49,6 +50,8 @@ const App = React.memo(() => {
     <CheckBrowserMinimumVersion>
       
       <UsePageLifecycle/>
+      
+      <SendUserOnlineStatus/>
       
       <UseViewportContentSize>
         

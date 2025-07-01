@@ -2,6 +2,7 @@ import { ArrayU } from '@util/common/ArrayU.ts'
 import { Lang } from '@util/lang/Lang.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DefaultTheme } from 'src/ui-data/theme/ThemeCollection.ts'
+import { PageState } from 'src/ui/components/UsePageLifecycle.tsx'
 import { create } from 'zustand'
 import NonEmptyArr = ArrayU.NonEmptyArr
 
@@ -15,6 +16,7 @@ export type AppZustand = {
   canInstall: boolean
   isDraggingFiles: boolean
   showDevOverlay: boolean
+  pageState: PageState
 }
 
 
@@ -27,6 +29,7 @@ export const useAppZustand = create<AppZustand>()((set, get, store) => ({
   canInstall: false,
   isDraggingFiles: false,
   showDevOverlay: false,
+  pageState: null,
 }))
 
 

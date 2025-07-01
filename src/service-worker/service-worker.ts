@@ -6,6 +6,7 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
+import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { clientsClaim, WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {
@@ -17,6 +18,8 @@ import {
 } from 'workbox-precaching'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
+import delay = AsyncU.delay
+import newPromise = AsyncU.newPromise
 
 
 
@@ -199,34 +202,69 @@ registerRoute(
 
 
 
-
-const wsUrl = `${Env.backendWssHostPort}/ws`
-const ws = new WebSocket(wsUrl)
-
-ws.onopen = () => {
-  console.log('WebSocket connection established.')
-  // Send data to the server
-  ws.send('Hello from client!')
+class WebSocketEx {
+  
+  constructor(url: string | URL, protocols?: string | string[]) {
+    this.reconnect(url, protocols)
+  }
+  
+  private d: {
+    ws?: WebSocket | undefined
+    isReady: boolean
+  } = {
+    isReady: false,
+  }
+  
+  private async reconnect(url: string | URL, protocols?: string | string[]) {
+    while (true) {
+      this.d.ws = new WebSocket(url, protocols)
+      const [whenClosed, setClosed] = newPromise()
+      this.d.ws.onopen = () => {
+        this.updateIsReady()
+      }
+      this.d.ws.onerror = () => {
+        // Sending message error
+      }
+      this.d.ws.onclose = ev => {
+        //ev.wasClean
+        this.updateIsReady()
+        setClosed()
+      }
+      await whenClosed
+      await delay(2000)
+    }
+  }
+  
+  private updateIsReady() {
+    this.d.isReady = this.d.ws?.readyState === WebSocket.OPEN
+  }
+  
+  
+  get isReady() { return this.d.isReady }
+  
+  send(data: (string | ArrayBufferLike | Blob | ArrayBufferView)) {
+    this.updateIsReady()
+    if (this.d.ws && this.d.isReady) {
+      this.d.ws.send(data)
+    }
+    else {
+      throw new Error('WebSocket is not ready')
+    }
+  }
+  
 }
 
-ws.onmessage = (event) => {
-  console.log('Message from server:', event.data)
-}
-
-ws.onclose = () => {
-  console.log('WebSocket connection closed.')
-}
-
-ws.onerror = (error) => {
-  console.error('WebSocket error:', error)
-}
 
 
+const ws = new WebSocketEx(`${Env.backendWssHostPort}/ws`)
 
 
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({ type: 'SKIP_WAITING' })
-self.addEventListener('message', async ev => {
+// ev.waitUntil((async () => { ... })()) - tells browser the work is going
+//   and that it shouldn't terminate SW until promise is settled.
+// ev.ports[0]?.postMessage(<msg>) - send message back if sender has provided the port.
+self.onmessage = async ev => {
   const t = ev.data?.type
   // Used by VitePWA to update SW by reload button click
   if (t === 'SKIP_WAITING') {
@@ -234,26 +272,20 @@ self.addEventListener('message', async ev => {
   }
   else if (t === 'CLEAR_CACHE') {
     // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
-    ev.waitUntil(
-      (async() => {
-        await clearCache()
-        ev.ports[0]?.postMessage({ type: 'CACHE_CLEARED' })
-      })()
-    )
+    ev.waitUntil((async() => {
+      await clearCache()
+      ev.ports[0]?.postMessage({ type: 'CACHE_CLEARED' })
+    })())
     //self.registration.unregister()
   }
   else if (t === 'CONSOLE_LOG') {
     console.log('service worker console.log', ev)
+    //ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
   }
-  else if (t === 'BECAME_ONLINE') {
-    const userId = ev.data.userId as string
-    ws.send(JSON.stringify({ type: 'BECAME_ONLINE', userId }))
+  else if (t === 'TO_WS') {
+    ws.send(JSON.stringify(ev.data?.data))
   }
-  else if (t === 'BECAME_OFFLINE') {
-    const userId = ev.data.userId as string
-    ws.send(JSON.stringify({ type: 'BECAME_OFFLINE', userId }))
-  }
-})
+}
 
 
 

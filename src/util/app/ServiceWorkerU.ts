@@ -11,12 +11,16 @@ export namespace ServiceWorkerU {
     type: string
     data?: any
   }): void {
-    navigator.serviceWorker.controller?.postMessage(message)
+    const swCtrl = navigator.serviceWorker.controller
+    if (!swCtrl) {
+      throw new Error('There is no activating or active Service Worker')
+    }
+    swCtrl.postMessage(message)
   }
   
   
   
-  export async function sendMsgAndAwaitAnswer(message: {
+  export async function sendMsgAwaitAnswer(message: {
     type: string
     data?: any
   }): Promise<MessageEvent> {
@@ -31,7 +35,7 @@ export namespace ServiceWorkerU {
      */
     return new Promise<MessageEvent>(function(resolve, reject) {
       const messageChannel = new MessageChannel()
-      messageChannel.port1.onmessage = function(event) { resolve(event) }
+      messageChannel.port1.onmessage = ev => resolve(ev)
       
       /*
         This sends the message data as well as transferring
@@ -42,12 +46,12 @@ export namespace ServiceWorkerU {
         See
         https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage
        */
-      const controller = navigator.serviceWorker.controller
-      if (!controller) {
+      const swCtrl = navigator.serviceWorker.controller
+      if (!swCtrl) {
         reject(new Error('There is no activating or active Service Worker'))
         return
       }
-      controller.postMessage(message, [messageChannel.port2])
+      swCtrl.postMessage(message, [messageChannel.port2])
     })
   }
 

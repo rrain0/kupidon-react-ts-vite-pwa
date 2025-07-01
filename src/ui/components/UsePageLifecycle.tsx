@@ -1,11 +1,31 @@
-import { ServiceWorkerU } from '@util/app/ServiceWorkerU.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
-type PageState =
+
+const UsePageLifecycle = React.memo(() => {
+  
+  useEffect(() => {
+    const onPageState = (pageState: PageState) => {
+      //console.log('onPageState', pageState)
+      useAppZustand.setState({ pageState })
+    }
+    addPageStateListener(onPageState)
+    return () => removePageStateListener(onPageState)
+  }, [])
+  
+  return undefined
+})
+UsePageLifecycle.displayName = 'UsePageLifecycle'
+export default UsePageLifecycle
+
+
+
+
+
+export type PageState =
   | null
   | 'Active' // page visible + has viewport focus
   | 'Passive' // page visible
@@ -53,7 +73,7 @@ const getActiveOrPassiveOrHidden = (): PageState => {
 
 
 const updatePageState = (newPageEvent: PageEvent) => {
-  console.log('newPageEvent', newPageEvent)
+  //console.log('newPageEvent', newPageEvent)
   const newPageState: PageState = (() => {
     if (newPageEvent === 'load') {
       if (document['wasDiscarded']) return 'Discarded'
@@ -80,10 +100,10 @@ const updatePageState = (newPageEvent: PageEvent) => {
   pageState = newPageState
   pageEvent = newPageEvent
   if (isNewPageEvent) {
-    console.log('pageEvent', pageEvent)
+    //console.log('pageEvent', pageEvent)
   }
   if (isNewPageState) {
-    console.log('pageState', pageState)
+    //console.log('pageState', pageState)
     pageStateListeners.forEach(listener => listener(pageState))
   }
 }
@@ -102,36 +122,4 @@ document.addEventListener('visibilitychange', () => updatePageState('visibilityc
 document.addEventListener('freeze', () => updatePageState('freeze'))
 document.addEventListener('resume', () => updatePageState('resume'))
 
-
-
-
-const UsePageLifecycle = React.memo(() => {
-  
-  const [getIsOnline, setIsOnline] = useRefGetSet(false)
-  
-  useLayoutEffect(() => {
-    const onPageState = (pageState: PageState) => {
-      console.log('onPageState', pageState)
-      const onlineStates: PageState[] = ['Active', 'Passive']
-      const isOnline = onlineStates.includes(pageState)
-      const isOnlineChanged = getIsOnline() !== isOnline
-      setIsOnline(isOnline)
-      if (isOnlineChanged) {
-        if (isOnline) {
-          ServiceWorkerU.sendMsgAndAwaitAnswer({ type: 'BECAME_ONLINE' }).catch(() => undefined)
-        }
-        else {
-          ServiceWorkerU.sendMsgAndAwaitAnswer({ type: 'BECAME_OFFLINE' }).catch(() => undefined)
-        }
-      }
-    }
-    onPageState(pageState)
-    addPageStateListener(onPageState)
-    return () => removePageStateListener(onPageState)
-  }, [])
-  
-  return undefined
-})
-UsePageLifecycle.displayName = 'UsePageLifecycle'
-export default UsePageLifecycle
 

@@ -1,11 +1,11 @@
 import { AsyncU } from '@util/common/AsyncU.ts'
 import { useWasGesture } from '@util/pointer/useWasGesture.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { RippleAction, RippleProps } from 'src/ui/0-elements/Ripple/Ripple.tsx'
 import { TypeU } from 'src/util/common/TypeU'
 import Pu = TypeU.Pu
-import wait = AsyncU.wait
+import delayAction = AsyncU.delayAction
 
 
 
@@ -89,7 +89,7 @@ const UseRipple = React.memo(({ children }: UseRippleProps) => {
             if (!cancelled) applyAction('show')
             else {
               applyAction('show')
-              wait(50, () => applyAction('hide'))
+              delayAction(50, () => applyAction('hide'))
             }
           }
         }, 50)

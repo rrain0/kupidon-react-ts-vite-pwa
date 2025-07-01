@@ -1,28 +1,40 @@
 import { TypeU } from 'src/util/common/TypeU.ts'
 import CallbackN = TypeU.CallbackN
-import Producer = TypeU.Producer
+import Callback = TypeU.Callback
 
 
 
 export namespace AsyncU {
   
-  
-  export const wait = <Args extends any[]>(
-    delay: number,
-    callback: (...args: Args) => any,
-    ...args: Args
-  ) => {
-    return setTimeout(callback, delay, ...args)
+  export const newPromise = <T = void>() => {
+    let res: (value: T | PromiseLike<T>) => void
+    let rej: (reason?: any) => void
+    const p = new Promise<T>((resolve, reject) => { res = resolve; rej = reject })
+    return [p, res!, rej!] as const
   }
+  
+  
+  
+  export const timeout = (delay: number, callback: () => void) => (
+    setTimeout(callback, delay)
+  )
+  
+  
+  export const delay = async (delay: number) => new Promise<void>(
+    resolve => setTimeout(resolve, delay)
+  )
+  export const delayAction = async (delay: number, action: Callback) => new Promise<void>(
+    resolve => setTimeout(() => { action(); resolve() }, delay)
+  )
   
   
   export const awaitValue = async <T>(delay: number, value?: T) => new Promise<T>(
     resolve => setTimeout(resolve, delay, value)
   )
-  export const awaitCallback = async <T>(
-    delay: number, generator: Producer<T>
+  export const awaitAction = async <T>(
+    delay: number, action: () => T
   ) => new Promise<T>(
-    resolve => setTimeout(() => resolve(generator()), delay)
+    resolve => setTimeout(() => resolve(action()), delay)
   )
   
   

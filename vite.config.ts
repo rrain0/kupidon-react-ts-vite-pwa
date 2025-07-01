@@ -84,6 +84,13 @@ export default defineConfig(({ command, mode }) => {
   
   
   return {
+    resolve: {
+      // tsconfig aliases does not apply to service worker, so I've added at least 'src'
+      alias: {
+        'src': path.resolve(__dirname, './src'),
+      },
+    },
+    
     // configure vite DEVELOPMENT server (yarn run dev)
     server: {
       host: true, // expose app via IP address from local network

@@ -15,7 +15,6 @@ import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
-import wait = AsyncU.wait
 
 const FindPairPage = React.lazy(
   () => import('src/ui/2-pages/FindPair/FindPairPage.tsx')

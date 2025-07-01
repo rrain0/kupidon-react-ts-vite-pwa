@@ -1,8 +1,8 @@
-import { useLayoutEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 
 
 
-const PageLifecycleTestPage = () => {
+const PageLifecycleTestPage = React.memo(() => {
   
   useLayoutEffect(() => {
     const onLoad = (ev: Event) => {
@@ -50,7 +50,7 @@ const PageLifecycleTestPage = () => {
       <div>Go to console to see callbacks</div>
     </div>
   )
-}
+})
 PageLifecycleTestPage.displayName = 'PageLifecycleTestPage'
 export default PageLifecycleTestPage
 

@@ -62,8 +62,9 @@ export const useAuthSetup = () => {
       if (!accessToken && user) setAuth({ user: undefined })
       if (!accessToken && !user) setUserIsReady(true)
       if (accessToken && user) {
-        const decodedAccess = jose.decodeJwt(accessToken)
-        if (decodedAccess.sub !== user.id) setAuth({ user: undefined })
+        const decodedAccessToken = jose.decodeJwt(accessToken)
+        const { sub: tokenUserId } = decodedAccessToken
+        if (tokenUserId !== user.id) setAuth({ user: undefined })
         else setUserIsReady(true)
       }
       if (accessToken && !user) {

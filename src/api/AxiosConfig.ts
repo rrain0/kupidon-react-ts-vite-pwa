@@ -192,11 +192,12 @@ export namespace AxiosConfig {
       }
     } else {
       try {
-        const decodedAccess = jose.decodeJwt(accessToken)
-        if (!decodedAccess.exp || Date.now() >= decodedAccess.exp*1000) {
+        const decodedAccessToken = jose.decodeJwt(accessToken)
+        const { exp: expiresAt } = decodedAccessToken
+        if (!expiresAt || Date.now() >= expiresAt * 1000) {
           data = {
             code: 'EXPIRED_TOKEN',
-            msg: 'Token is not present',
+            msg: 'Token has expired',
           }
         }
       } catch (e) {
