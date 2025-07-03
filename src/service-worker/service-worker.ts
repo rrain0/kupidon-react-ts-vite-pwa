@@ -274,8 +274,7 @@ const ws = new WebSocketEx(`${Env.backendWssHostPort}/ws`)
 ws.onmessage = ev => {
   //console.log('WebSocket received:', ev.data)
   if (isstring(ev.data)) {
-    const evObj = JSON.parse(ev.data)
-    const { type: t, data } = evObj
+    const { type: t, data } = JSON.parse(ev.data) ?? { }
     if (t === 'TO_CLIENT') {
       wsToClientsChannel.postMessage(data)
     }
@@ -290,7 +289,7 @@ ws.onmessage = ev => {
 //   and that it shouldn't terminate SW until promise is settled.
 // ev.ports[0]?.postMessage(<msg>) - send message back if sender has provided the port.
 self.onmessage = async ev => {
-  const t = ev.data?.type
+  const { type: t, data } = ev.data
   // Used by VitePWA to update SW by reload button click
   if (t === 'SKIP_WAITING') {
     self.skipWaiting()
@@ -311,7 +310,7 @@ self.onmessage = async ev => {
     wsToClientsChannel.postMessage({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
   }
   else if (t === 'TO_WS') {
-    ws.sendEv(ev.data?.data)
+    ws.sendEv(data)
   }
 }
 

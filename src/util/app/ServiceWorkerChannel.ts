@@ -9,6 +9,7 @@ export namespace ServiceWorkerChannel {
   export function sendMsg(message: SwMsg): void {
     const swCtrl = navigator.serviceWorker.controller
     if (!swCtrl) {
+      return
       throw new Error('There is no activating or active Service Worker')
     }
     swCtrl.postMessage(message)

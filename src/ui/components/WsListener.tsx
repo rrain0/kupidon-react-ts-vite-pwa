@@ -14,10 +14,11 @@ const WsListener = React.memo(() => {
       console.log('WS ev:', ev)
       const { type: t, data } = ev ?? { }
       
-      if (t === 'WS_READY') {
+      // TODO установка готовности вебсокета ложит сайт на айфоне
+      /* if (t === 'WS_READY') {
         useAppZustand.setState({ wsReady: true })
       }
-      else if (t === 'WS_NOT_READY') {
+      else */ if (t === 'WS_NOT_READY') {
         useAppZustand.setState({ wsReady: false })
       }
       else if (t === 'USERS_STATUS_UPDATE') {
@@ -38,15 +39,11 @@ const WsListener = React.memo(() => {
       }
     }
     WebSocketChannel.addOnEvListener(onEv)
-    // Если ошибка отправки потому что SW не готов,
-    // то тогда WS в SW сам скажет, что он готов, когда запустится
-    try {
+    
+    if (['activating', 'activated'].includes(navigator.serviceWorker.controller?.state as any)) {
       ServiceWorkerChannel.sendMsg({ type: 'WS_CHECK_READY' })
     }
-    catch (ex) {
-      console.error('WS_NOT_READY', ex)
-      useAppZustand.setState({ wsReady: false })
-    }
+    
     return () => WebSocketChannel.removeOnEvListener(onEv)
   }, [])
   

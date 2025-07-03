@@ -53,7 +53,7 @@ const App = React.memo(() => {
       
       <UsePageLifecycle/>
       
-      {/* <WsListener/> */}
+      <WsListener/>
       
       <RequestItemsLiveUpdate/>
       <SendOnlineStatus/>
