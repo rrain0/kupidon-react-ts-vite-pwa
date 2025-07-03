@@ -29,28 +29,29 @@ import use = RouteBuilder.use
 
 
 
-export type MutualSympathiesItem = {
+export type NewPairItem = {
   id: string
   ava?: string | undefined
   name: string
   online?: boolean | undefined
+  createdAt: string
 }
 
 
-export type MutualSympathiesListProps = {
-  mutualSympathiesItems: MutualSympathiesItem[]
+export type NewPairsListProps = {
+  newPairItems: NewPairItem[]
 } & ClassStyle
 
-export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps) => {
+export const NewPairsList = React.memo((props: NewPairsListProps) => {
   const {
     className, style,
-    mutualSympathiesItems,
+    newPairItems,
   } = props
   
   return (
     <Flex col>
       <Flex row align
-        data-display-name='MutualSympathiesList'
+        data-display-name='NewPairsList'
         className={className}
         style={style}
       >
@@ -72,7 +73,7 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
             noScrollbars,
           ]}
         >
-          {mutualSympathiesItems.map(({ id, ava, name, online }) => (
+          {newPairItems.map(({ id, ava, name, online }) => (
             <Flex w={66} key={id} col noShrink align g={7}>
               <AppLink toFull={RootRoute.chat.userId.id[use](id)}>
                 <AvaButton alignedStretch noShrink shadow
@@ -87,8 +88,8 @@ export const MutualSympathiesList = React.memo((props: MutualSympathiesListProps
     </Flex>
   )
 })
-MutualSympathiesList.displayName = 'MutualSympathiesList'
-export default MutualSympathiesList
+NewPairsList.displayName = 'NewPairsList'
+export default NewPairsList
 
 
 

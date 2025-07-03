@@ -6,6 +6,7 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
+import { WsEv } from 'src/util/app/WebSocketU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { Env } from 'src/util/app/Env'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
@@ -187,6 +188,11 @@ registerRoute(
 
 
 
+const wsToClientsChannel = new BroadcastChannel('from-ws')
+//wsToClientsChannel.postMessage('SW channel is ready')
+
+
+
 class WebSocketEx {
   
   constructor(url: string | URL, protocols?: string | string[]) {
@@ -231,18 +237,23 @@ class WebSocketEx {
   }
   
   private updateIsReady() {
-    this.d.isReady = this.d.ws?.readyState === WebSocket.OPEN
+    const prevR = this.d.isReady
+    const r = this.d.isReady = this.d.ws?.readyState === WebSocket.OPEN
+    if (r !== prevR) {
+      wsToClientsChannel.postMessage({ type: r ? 'WS_READY' : 'WS_NOT_READY' })
+    }
   }
   
   
   get isReady() { return this.d.isReady }
   
-  send(data: (string | ArrayBufferLike | Blob | ArrayBufferView)) {
+  sendEv(data: WsEv) {
     this.updateIsReady()
     if (this.d.ws && this.d.isReady) {
-      this.d.ws.send(data)
+      this.d.ws.send(JSON.stringify(data))
     }
     else {
+      wsToClientsChannel.postMessage({ type: 'WS_NOT_READY' })
       throw new Error('WebSocket is not ready')
     }
   }
@@ -257,8 +268,6 @@ const ws = new WebSocketEx(`${Env.backendWssHostPort}/ws`)
 
 
 
-const swWsChannel = new BroadcastChannel('ws')
-//swWsChannel.postMessage('SW channel is ready')
 
 
 
@@ -268,7 +277,7 @@ ws.onmessage = ev => {
     const evObj = JSON.parse(ev.data)
     const { type: t, data } = evObj
     if (t === 'TO_CLIENT') {
-      swWsChannel.postMessage(data)
+      wsToClientsChannel.postMessage(data)
     }
   }
 }
@@ -298,8 +307,11 @@ self.onmessage = async ev => {
     console.log('service worker console.log', ev)
     //ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
   }
+  else if (t === 'WS_CHECK_READY') {
+    wsToClientsChannel.postMessage({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
+  }
   else if (t === 'TO_WS') {
-    ws.send(JSON.stringify(ev.data?.data))
+    ws.sendEv(ev.data?.data)
   }
 }
 

@@ -6,5 +6,5 @@ export interface UserPairA {
   fromUserId: string
   toUserId: string
   createdAt: string
-  toUser: OtherUserShortA,
+  toUser: OtherUserShortA
 }

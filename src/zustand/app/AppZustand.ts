@@ -17,6 +17,7 @@ export type AppZustand = {
   showDevOverlay: boolean
   pageState: PageState
   getIsOnline: () => boolean
+  wsReady: boolean
 }
 
 
@@ -30,6 +31,7 @@ export const useAppZustand = create<AppZustand>()((set, get, store) => ({
   showDevOverlay: false,
   pageState: null,
   getIsOnline: () => onlinePageStates.includes(get().pageState),
+  wsReady: false,
 }))
 
 

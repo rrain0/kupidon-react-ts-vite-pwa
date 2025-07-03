@@ -5,7 +5,8 @@ import { GenderA } from 'src/model/api/GenderA.ts'
 export interface OtherUserShortA {
   id: string
   name: string
-  ava: string,
+  ava: string
+  online?: boolean
 }
 
 

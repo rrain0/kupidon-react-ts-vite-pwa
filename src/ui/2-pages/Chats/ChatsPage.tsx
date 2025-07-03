@@ -1,4 +1,5 @@
 import { Env } from '@util/app/Env.ts'
+import { useLiveUsersStatus } from '@util/app/useLiveUsersStatus.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { MathU } from '@util/common/MathU.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -17,9 +18,10 @@ import ChatList from 'src/ui/2-pages/Chats/parts/ChatList.tsx'
 import ChatListActionBar from 'src/ui/2-pages/Chats/parts/ChatListActionBar.tsx'
 import { ChatListItemWidgetData } from 'src/ui/2-pages/Chats/parts/ChatListItemWidget.tsx'
 import ChatsPageHeader from 'src/ui/2-pages/Chats/parts/ChatsPageHeader.tsx'
-import MutualSympathiesList, {
-  MutualSympathiesItem,
-} from 'src/ui/2-pages/Chats/parts/MutualSympathiesList.tsx'
+import NewPairsList, {
+  NewPairItem,
+} from 'src/ui/2-pages/Chats/parts/NewPairsList.tsx'
+import NewPairsListWithItems from 'src/ui/2-pages/Chats/parts/NewPairsListWithItems.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
@@ -57,7 +59,7 @@ const showFullProps = false as boolean
 // TODO Name -> firstName & lastName
 export const mockChatItems: (ChatListItemWidgetData & {
   isMutualSympathy?: boolean | undefined
-  mutualSympathyAppearanceDate?: string | undefined
+  newPairCreatedAt?: string | undefined
 })[] = [
   {
     id: 'c929d161-f608-4ef8-9ac8-f0cfe73c60c0',
@@ -65,7 +67,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     lastMsg: 'Буду иметь ввиду :)', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date0sAgo, mute: true,
     isMutualSympathy: true,
-    mutualSympathyAppearanceDate: date12mAgo,
+    newPairCreatedAt: date12mAgo,
     ...showFullProps && { lastMsgStatus: 'sending' as const },
   },
   {
@@ -96,7 +98,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     lastMsg: 'Последнее сообщение', isLastMsgMy: false, unreadCnt: 1,
     lastMsgDate: date3dAgo, online: true,
     isMutualSympathy: true,
-    mutualSympathyAppearanceDate: date1wAgo,
+    newPairCreatedAt: date1wAgo,
     ...showFullProps && { unreadCnt: 99 },
   },
   ...Env.isDev && [{
@@ -106,7 +108,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     isLastMsgMy: false,
     lastMsgDate: date3wAgo, mute: true,
     isMutualSympathy: true,
-    mutualSympathyAppearanceDate: date12mAgo,
+    newPairCreatedAt: date12mAgo,
   }] || [],
   {
     id: '175dc7be-3f56-4b9d-9403-e994b72624dc',
@@ -115,7 +117,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     lastMsg: 'Последнее сообщение',
     lastMsgDate: date1MAgo, online: true, mute: false,
     isMutualSympathy: true,
-    mutualSympathyAppearanceDate: date1MAgo,
+    newPairCreatedAt: date1MAgo,
   },
   {
     id: '365e7251-9d0e-42ba-b239-a1ad9ddf6527',
@@ -124,7 +126,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     lastMsg: 'Хорошего вечера', isLastMsgMy: true, lastMsgStatus: 'read' as const,
     lastMsgDate: date1dAgo, online: true, mute: false, pinned: 0,
     isMutualSympathy: true,
-    mutualSympathyAppearanceDate: date3dAgo,
+    newPairCreatedAt: date3dAgo,
   },
   {
     id: '5ac18ba3-fc4a-4983-a662-7b8134885ed6',
@@ -163,7 +165,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     lastMsg: 'Последнее сообщение', isLastMsgMy: false,
     lastMsgDate: date17hAgo, mute: false,
     isMutualSympathy: true,
-    mutualSympathyAppearanceDate: date57mAgo,
+    newPairCreatedAt: date57mAgo,
     ...showFullProps && { unreadCnt: 1555666 },
   },
   {
@@ -301,7 +303,7 @@ const ChatsPage = React.memo(() => {
   // })
   //
   
-  // const preparedChatItems = useMemo(() => {
+  // const uiChatItems = useMemo(() => {
   //   return chatItems
   //     .filter(it => it)
   //     .sort((a, b) => {
@@ -316,24 +318,23 @@ const ChatsPage = React.memo(() => {
   //     })
   // }, [chatItems])
   
-  // const [mutualSympathiesItems, setMutualSympathiesItems] = useState(chatItems)
+  // const [newPairItems, setMutualSympathiesItems] = useState(chatItems)
   //
   // const preparedMutualSympathiesItems = useMemo(() => {
-  //   return mutualSympathiesItems
+  //   return newPairItems
   //     .filter(it => it.isMutualSympathy)
   //     .sort((a, b) => {
-  //       return +new Date(b.mutualSympathyAppearanceDate!) - +new Date(a.mutualSympathyAppearanceDate!)
+  //       return +new Date(b.newPairCreatedAt!) - +new Date(a.newPairCreatedAt!)
   //         || 0
   //     })
-  // }, [mutualSympathiesItems])
+  // }, [newPairItems])
   
-  const [preparedChatItems, setPreparedChatItems] = (
+  const [uiChatItems, setUiChatItems] = (
     useState<ChatListItemWidgetData[] | undefined>(undefined)
   )
   
   const [chatItems, setChatItems] = useState<ChatItemA[] | undefined>(undefined)
   
-  const usersStatus = useUsersStatusZustand(s => s.chatsPageChatItems)
   
   const {
     request,
@@ -358,7 +359,7 @@ const ChatsPage = React.memo(() => {
   
   useEffect(() => {
     if (chatItems) {
-      setPreparedChatItems(chatItems.map(it => ({
+      setUiChatItems(chatItems.map(it => ({
         id: it.id,
         name: it.profile.name,
         ava: it.profile.ava,
@@ -374,33 +375,17 @@ const ChatsPage = React.memo(() => {
     }
   }, [chatItems])
   
-  const usedUserIdsHash = JSON.stringify(
-    chatItems?.filter(it => it.type === 'PERSONAL').map(it => it.profile.id)
+  const usersStatus = useLiveUsersStatus(
+    'chatsPageChatItems',
+    chatItems
+      ?.filter(it => it.type === 'PERSONAL')
+      .map(it => ({ id: it.profile.id, online: it.online }))
   )
-  useEffect(() => {
-    if (chatItems) {
-      useUsersStatusZustand.setState({
-        chatsPageChatItems: {
-          map: new Map(
-            chatItems
-              .filter(it => it.type === 'PERSONAL')
-              .map(it => [it.profile.id, { id: it.profile.id, online: it.online }])
-          ),
-        },
-      })
-      return () => {
-        useUsersStatusZustand.setState(s => {
-          const { chatsPageChatItems, ...newS } = s
-          return newS
-        })
-      }
-    }
-  }, [usedUserIdsHash])
   
   useEffect(() => {
     if (usersStatus) {
       const m = usersStatus.map
-      console.log('m', m.values())
+      //console.log('m', m.values())
       setChatItems(s => s?.map(it => {
         if (it.type === 'PERSONAL' && it.profile) {
           const { profile: { id }, online } = it
@@ -426,12 +411,12 @@ const ChatsPage = React.memo(() => {
           
           <Gap h={24}/>
           
-          <MutualSympathiesListWithItems/>
+          <NewPairsListWithItems/>
           
           <Gap h={14}/>
           
           <ChatList
-            chatItems={preparedChatItems}
+            chatItems={uiChatItems}
             // pin={pinChats}
             // unpin={unpinChats}
             // mute={muteChats}
@@ -454,59 +439,3 @@ export default ChatsPage
 
 
 
-
-// TODO extract
-const MutualSympathiesListWithItems = React.memo(() => {
-  
-  const [items, setItems] = useState(undefined as UserPairA[] | undefined)
-  
-  
-  const [preparedMutualSympathiesItems, setPreparedMutualSympathiesItems] = useState([] as (
-    (MutualSympathiesItem & {
-      mutualSympathyAppearanceDate?: string | undefined
-    })[]
-  ))
-  
-  useEffect(() => {
-    if (isdef(items)) {
-      setPreparedMutualSympathiesItems(items.map(it => {
-        
-        return {
-          id: it.toUser.id,
-          ava: it.toUser.ava,
-          name: it.toUser.name,
-          online: false,
-        }
-      }))
-    }
-  }, [items])
-  
-  
-  //wait(500, () => setItems(data))
-  
-  const {
-    request,
-    isLoading, isSuccess, isError,
-    response, resetResponse,
-  } = useFormApiRequest({
-    values: { },
-    prepareAndRequest: useCallback(() => {
-      return UsersApi.newPairs()
-    }, []),
-  })
-  
-  useEffect(() => {
-    request()
-  }, [])
-  
-  
-  useEffect(() => {
-    if (isSuccess && response?.isSuccess) {
-      setItems(response.data.newPairs)
-    }
-  }, [isSuccess])
-  
-  return !!preparedMutualSympathiesItems?.length && (
-    <MutualSympathiesList mutualSympathiesItems={preparedMutualSympathiesItems}/>
-  )
-})
