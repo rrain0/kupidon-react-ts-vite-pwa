@@ -6,7 +6,7 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-import { WsEv } from 'src/util/app/WebSocketU.ts'
+import { WsMsg } from 'src/util/app/WebSocketU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { Env } from 'src/util/app/Env'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
@@ -247,7 +247,7 @@ class WebSocketEx {
   
   get isReady() { return this.d.isReady }
   
-  sendEv(data: WsEv) {
+  sendEv(data: WsMsg) {
     this.updateIsReady()
     if (this.d.ws && this.d.isReady) {
       this.d.ws.send(JSON.stringify(data))
@@ -304,7 +304,7 @@ self.onmessage = async ev => {
   }
   else if (t === 'CONSOLE_LOG') {
     console.log('service worker console.log', ev)
-    //ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
+    ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
   }
   else if (t === 'WS_CHECK_READY') {
     wsToClientsChannel.postMessage({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })

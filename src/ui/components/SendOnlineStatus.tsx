@@ -14,7 +14,7 @@ const SendOnlineStatus = React.memo(() => {
   
   useEffect(() => {
     if (accessToken && wsReady) {
-      WebSocketChannel.sendMsg({
+      WebSocketChannel.send({
         type: online ? 'BECAME_ONLINE' : 'BECAME_OFFLINE',
         data: { accessToken },
       })

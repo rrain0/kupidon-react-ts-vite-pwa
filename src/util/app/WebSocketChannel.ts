@@ -1,12 +1,12 @@
 import { ServiceWorkerChannel } from 'src/util/app/ServiceWorkerChannel.ts'
-import { WsEv, WsEvListener } from 'src/util/app/WebSocketU.ts'
+import { WsMsg, WsMsgListener } from 'src/util/app/WebSocketU.ts'
 
 
 
 export namespace WebSocketChannel {
   
-  export function sendMsg(message: WsEv): void {
-    ServiceWorkerChannel.sendMsgAwaitAnswer({ type: 'TO_WS', data: message })
+  export function send(message: WsMsg): void {
+    ServiceWorkerChannel.sendAwaitAnswer({ type: 'TO_WS', data: message })
       .catch((ex) => console.error('sendMsgAwaitAnswer error', ex))
   }
   
@@ -17,19 +17,19 @@ export namespace WebSocketChannel {
   
   type ChannelMsgListener = (ev: MessageEvent<any>) => void
   
-  const listeners = new Map<WsEvListener, ChannelMsgListener>()
+  const listeners = new Map<WsMsgListener, ChannelMsgListener>()
   
-  export const addOnEvListener = (onEv: WsEvListener) => {
-    if (listeners.has(onEv)) return
-    const onMsg: ChannelMsgListener = ev => onEv(ev.data)
-    listeners.set(onEv, onMsg)
-    wsToClientsChannel.addEventListener('message', onMsg)
+  export const addOnMsgListener = (onMsg: WsMsgListener) => {
+    if (listeners.has(onMsg)) return
+    const onFullMsg: ChannelMsgListener = ev => onMsg(ev.data)
+    listeners.set(onMsg, onFullMsg)
+    wsToClientsChannel.addEventListener('message', onFullMsg)
   }
-  export const removeOnEvListener = (onEv: WsEvListener) => {
-    const onMsg = listeners.get(onEv)
-    if (onMsg) {
-      listeners.delete(onEv)
-      wsToClientsChannel.removeEventListener('message', onMsg)
+  export const removeOnMsgListener = (onMsg: WsMsgListener) => {
+    const onFullMsg = listeners.get(onMsg)
+    if (onFullMsg) {
+      listeners.delete(onMsg)
+      wsToClientsChannel.removeEventListener('message', onFullMsg)
     }
   }
   

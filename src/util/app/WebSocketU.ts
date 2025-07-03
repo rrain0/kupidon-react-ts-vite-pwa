@@ -1,9 +1,9 @@
 
 
 
-export type WsEvListener = (ev?: WsEv) => void
+export type WsMsgListener = (ev?: WsMsg) => void
 
-export type WsEv = {
+export type WsMsg = {
   type: string
   data?: Record<string, any> | undefined
 }

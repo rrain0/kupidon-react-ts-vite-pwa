@@ -6,7 +6,7 @@ export namespace ServiceWorkerChannel {
 
   
   
-  export function sendMsg(message: SwMsg): void {
+  export function send(message: SwMsg): void {
     const swCtrl = navigator.serviceWorker.controller
     if (!swCtrl) {
       return
@@ -17,7 +17,7 @@ export namespace ServiceWorkerChannel {
   
   
   
-  export async function sendMsgAwaitAnswer(message: SwMsg): Promise<MessageEvent> {
+  export async function sendAwaitAnswer(message: SwMsg): Promise<MessageEvent> {
     
     /*
       This wraps the message posting/response in a promise, which will

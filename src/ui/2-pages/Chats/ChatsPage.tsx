@@ -390,8 +390,7 @@ const ChatsPage = React.memo(() => {
         if (it.type === 'PERSONAL' && it.profile) {
           const { profile: { id }, online } = it
           const us = m.get(id)
-          if (us && id === us.id && online !== us.online
-          ) {
+          if (us && id === us.id && online !== us.online) {
             return { ...it, online: us.online }
           }
         }

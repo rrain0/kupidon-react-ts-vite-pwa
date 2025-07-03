@@ -24,7 +24,7 @@ const RequestItemsLiveUpdate = React.memo(() => {
   
   useEffect(() => {
     if (accessToken && wsReady) {
-      WebSocketChannel.sendMsg({
+      WebSocketChannel.send({
         type: 'SUBSCRIBE_ON_USER_STATUS',
         data: {
           accessToken,
@@ -33,7 +33,7 @@ const RequestItemsLiveUpdate = React.memo(() => {
             const e = Object.entries(usersStatusZustand)
             const s = new Set<string>()
             e.forEach(([k, { map }]) => {
-              map.keys().forEach(it => s.add(it))
+              [...map.keys()].forEach(it => s.add(it))
             })
             return [...s]
           })(),

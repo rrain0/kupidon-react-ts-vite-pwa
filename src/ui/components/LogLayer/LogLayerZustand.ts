@@ -8,7 +8,6 @@ export const useLogLayerZustand = create<LogLayerZustand>(() => [])
 
 
 // HOW TO USE
-// const setLogData = useLogLayerZustand.setState
-// setLogData(prev => [...prev, 'DATA TO LOG'])
+// useLogLayerZustand.setState(prev => [...prev, 'DATA TO LOG'])
 
 

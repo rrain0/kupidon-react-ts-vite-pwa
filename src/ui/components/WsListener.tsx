@@ -1,6 +1,6 @@
 import { ServiceWorkerChannel } from '@util/app/ServiceWorkerChannel.ts'
 import { WebSocketChannel } from '@util/app/WebSocketChannel.ts'
-import { WsEv } from '@util/app/WebSocketU.ts'
+import { WsMsg } from '@util/app/WebSocketU.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { UserStatus, useUsersStatusZustand } from 'src/zustand/status/UsersStatusZustand.ts'
@@ -10,15 +10,15 @@ import { UserStatus, useUsersStatusZustand } from 'src/zustand/status/UsersStatu
 const WsListener = React.memo(() => {
   
   useEffect(() => {
-    const onEv = (ev?: WsEv) => {
+    const onEv = (ev?: WsMsg) => {
       console.log('WS ev:', ev)
       const { type: t, data } = ev ?? { }
       
       // TODO установка готовности вебсокета ложит сайт на айфоне
-      /* if (t === 'WS_READY') {
+      if (t === 'WS_READY') {
         useAppZustand.setState({ wsReady: true })
       }
-      else */ if (t === 'WS_NOT_READY') {
+      else if (t === 'WS_NOT_READY') {
         useAppZustand.setState({ wsReady: false })
       }
       else if (t === 'USERS_STATUS_UPDATE') {
@@ -35,16 +35,16 @@ const WsListener = React.memo(() => {
             newS[subscriber] = { map }
           }
           return newS
-        })
+        }, true)
       }
     }
-    WebSocketChannel.addOnEvListener(onEv)
+    WebSocketChannel.addOnMsgListener(onEv)
     
     if (['activating', 'activated'].includes(navigator.serviceWorker.controller?.state as any)) {
-      ServiceWorkerChannel.sendMsg({ type: 'WS_CHECK_READY' })
+      ServiceWorkerChannel.send({ type: 'WS_CHECK_READY' })
     }
     
-    return () => WebSocketChannel.removeOnEvListener(onEv)
+    return () => WebSocketChannel.removeOnMsgListener(onEv)
   }, [])
   
   return undefined
