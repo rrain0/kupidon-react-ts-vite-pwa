@@ -125,7 +125,7 @@ export default defineConfig(({ command, mode }) => {
       }),
     ],
     
-    // Pass to runtime desired env variables
+    // Pass desired env variables to runtime
     define: envVarsRuntime,
   }
 })

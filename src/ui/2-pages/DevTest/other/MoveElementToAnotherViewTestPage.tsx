@@ -2,8 +2,8 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import flexC = EmotionCommon.flexC
 

@@ -3,9 +3,9 @@ import {
   addYears,
   differenceInCalendarMonths,
   differenceInCalendarYears,
-  differenceInDays, differenceInHours, differenceInMinutes,
+  differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths,
   differenceInSeconds,
-  differenceInWeeks,
+  differenceInWeeks, differenceInYears,
 } from 'date-fns'
 import { useEffect, useState } from 'react'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -63,9 +63,9 @@ export const useLiveShortDuration = (date: string | undefined): Duration | undef
 
 const getShortDurationUntilNow = (date: string): Duration => {
   const now = new Date()
-  const years = differenceInCalendarYears(now, date)
+  const years = differenceInYears(now, date)
   if (years) return { years }
-  const months = differenceInCalendarMonths(now, date)
+  const months = differenceInMonths(now, date)
   if (months) return { months }
   const weeks = differenceInWeeks(now, date)
   if (weeks) return { weeks }

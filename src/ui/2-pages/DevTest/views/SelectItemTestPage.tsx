@@ -14,8 +14,8 @@ import flexC = EmotionCommon.flexC
 import col = EmotionCommon.col
 import absTlwh = EmotionCommon.absTlwh
 import colC = EmotionCommon.colC
-import PageContentLayout from 'ui/components/Pages/PageContentLayout'
-import PageLayout from 'ui/components/Pages/PageLayout'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout'
+import PageLayout from 'src/ui/components/page/PageLayout'
 
 
 

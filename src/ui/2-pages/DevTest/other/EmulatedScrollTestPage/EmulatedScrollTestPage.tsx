@@ -9,7 +9,7 @@ import React from 'react'
 import { useEmulatedScroll } from 'src/ui/2-pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
 import { ArrayU } from '@util/common/ArrayU.ts'
 import { RangeU } from '@util/common/RangeU.ts'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import NumRange = RangeU.NumRange
 import arrOfNumbers = ArrayU.arrOfNumbers

@@ -13,7 +13,7 @@ import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import AvaButton from 'src/ui/1-widgets/avatars/Ava/AvaButton.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
-import { offsetToPageContentPaddings } from 'src/ui/components/Pages/offsetToPageContentPaddings.ts'
+import { offsetToPageContentPaddings } from 'src/ui/components/page/offsetToPageContentPaddings.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt

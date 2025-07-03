@@ -7,24 +7,24 @@ import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useInterval2 } from '@util/react/useInterval2.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { OtherUserA } from 'src/model/api/UserA.ts'
+import { ChatItemA } from 'src/model/api/ChatItemA.ts'
 import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
-import { UserApi } from 'src/api/requests/UserApi.ts'
 import { UsersApi } from 'src/api/requests/UsersApi.ts'
 import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { UserPairA } from 'src/model/api/UserPairA.ts'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
-import ChatList from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
-import ChatListActionBar from 'src/ui/2-pages/ChatList/parts/ChatListActionBar.tsx'
-import { ChatListItemWidgetData } from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
-import ChatsPageHeader from 'src/ui/2-pages/ChatList/parts/ChatsPageHeader.tsx'
+import ChatList from 'src/ui/2-pages/Chats/parts/ChatList.tsx'
+import ChatListActionBar from 'src/ui/2-pages/Chats/parts/ChatListActionBar.tsx'
+import { ChatListItemWidgetData } from 'src/ui/2-pages/Chats/parts/ChatListItemWidget.tsx'
+import ChatsPageHeader from 'src/ui/2-pages/Chats/parts/ChatsPageHeader.tsx'
 import MutualSympathiesList, {
   MutualSympathiesItem,
-} from 'src/ui/2-pages/ChatList/parts/MutualSympathiesList.tsx'
+} from 'src/ui/2-pages/Chats/parts/MutualSympathiesList.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useUsersStatusZustand } from 'src/zustand/status/UsersStatusZustand.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import posInf = MathU.posInf
 import isundef = TypeU.isundef
@@ -331,6 +331,9 @@ const ChatsPage = React.memo(() => {
     useState<ChatListItemWidgetData[] | undefined>(undefined)
   )
   
+  const [chatItems, setChatItems] = useState<ChatItemA[] | undefined>(undefined)
+  
+  const usersStatus = useUsersStatusZustand(s => s.chatsPageChatItems)
   
   const {
     request,
@@ -349,21 +352,68 @@ const ChatsPage = React.memo(() => {
   
   useEffect(() => {
     if (response?.isSuccess) {
-      const it = response.data.chatItems
-      setPreparedChatItems(it.map(it => ({
+      setChatItems(response.data.chatItems)
+    }
+  }, [isSuccess])
+  
+  useEffect(() => {
+    if (chatItems) {
+      setPreparedChatItems(chatItems.map(it => ({
         id: it.id,
         name: it.profile.name,
         ava: it.profile.ava,
         lastMsg: it.lastMessage?.content.text ?? undefined,
         lastMsgDate: it.lastMessage?.createdAt,
         isLastMsgMy: authUserId === it.lastMessage?.fromUserId,
-        // online: false,
+        
+        online: it.online,
         // mute: false,
         // pinned: undefined,
         // isWriting: false,
       })))
     }
-  }, [isSuccess])
+  }, [chatItems])
+  
+  const usedUserIdsHash = JSON.stringify(
+    chatItems?.filter(it => it.type === 'PERSONAL').map(it => it.profile.id)
+  )
+  useEffect(() => {
+    if (chatItems) {
+      useUsersStatusZustand.setState({
+        chatsPageChatItems: {
+          map: new Map(
+            chatItems
+              .filter(it => it.type === 'PERSONAL')
+              .map(it => [it.profile.id, { id: it.profile.id, online: it.online }])
+          ),
+        },
+      })
+      return () => {
+        useUsersStatusZustand.setState(s => {
+          const { chatsPageChatItems, ...newS } = s
+          return newS
+        })
+      }
+    }
+  }, [usedUserIdsHash])
+  
+  useEffect(() => {
+    if (usersStatus) {
+      const m = usersStatus.map
+      console.log('m', m.values())
+      setChatItems(s => s?.map(it => {
+        if (it.type === 'PERSONAL' && it.profile) {
+          const { profile: { id }, online } = it
+          const us = m.get(id)
+          if (us && id === us.id && online !== us.online
+          ) {
+            return { ...it, online: us.online }
+          }
+        }
+        return it
+      }))
+    }
+  }, [usersStatus])
   
   
   return (

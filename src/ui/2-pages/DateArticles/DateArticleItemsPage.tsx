@@ -17,8 +17,8 @@ import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticl
 import DateArticleItemCardWide from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCardWide.tsx'
 import DateArticleItemToCardData
   from 'src/ui/2-pages/DateArticles/parts/DateArticleItemToCardData.tsx'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'

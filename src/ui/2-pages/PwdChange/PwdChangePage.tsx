@@ -29,8 +29,8 @@ import validators = PwdChangePageValidation.validators
 import FormValues = PwdChangePageValidation.FormValues
 import userDefaultValues = PwdChangePageValidation.userDefaultValues
 import mapFailureCodeToUiText = PwdChangePageValidation.mapFailureCodeToUiText
-import PageLayout from 'ui/components/Pages/PageLayout'
-import PageContentLayout from 'ui/components/Pages/PageContentLayout'
+import PageLayout from 'src/ui/components/page/PageLayout'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout'
 import contents = EmotionCommon.contents
 import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 

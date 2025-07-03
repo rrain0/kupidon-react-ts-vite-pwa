@@ -3,8 +3,9 @@ import { useAppTheme } from '@util/app/useAppTheme.ts'
 import { useSearchParamsUrlListener } from '@util/url/useSearchParamsUrlListener.ts'
 import React from 'react'
 import { widget7Test } from 'src/mini-libs/widget-style-7/WidgetTest.ts'
-import ReloadPrompt from 'src/ui/1-widgets/ReloadPrompt/ReloadPrompt.tsx'
-import SendUserOnlineStatus from 'src/ui/components/SendUserOnlineStatus.tsx'
+import UseSwUpdate from 'src/ui/1-widgets/UseSwUpdate/UseSwUpdate.tsx'
+import RequestItemsLiveUpdate from 'src/ui/components/RequestItemsLiveUpdate.tsx'
+import SendOnlineStatus from 'src/ui/components/SendOnlineStatus.tsx'
 import UsePageLifecycle from 'src/ui/components/UsePageLifecycle.tsx'
 import UseViewportContentSize from 'src/ui/components/UseViewportContentSize.tsx'
 import CheckBrowserMinimumVersion
@@ -14,6 +15,7 @@ import ToastifySetup from 'src/ui/components/Toasts/ToastifySetup'
 import DragDetector from 'src/ui/components/DragDetector.tsx'
 import LogLayer from 'src/ui/components/LogLayer/LogLayer.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import WsListener from 'src/ui/components/WsListener.tsx'
 import { useAppInstallationSetup } from 'src/util/app/useAppInstallationSetup'
 import { useLangSetup } from 'src/util/lang/useLangSetup.ts'
 import { useThemeSetup } from 'src/util/theme/useThemeSetup.ts'
@@ -51,7 +53,10 @@ const App = React.memo(() => {
       
       <UsePageLifecycle/>
       
-      <SendUserOnlineStatus/>
+      <WsListener/>
+      
+      <RequestItemsLiveUpdate/>
+      <SendOnlineStatus/>
       
       <UseViewportContentSize>
         
@@ -72,7 +77,7 @@ const App = React.memo(() => {
               <AppFrame/>
             </DragDetector>
             
-            <ReloadPrompt/>
+            <UseSwUpdate/>
             
             <ToastifySetup/>
             

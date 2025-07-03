@@ -6,6 +6,8 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
+import { TypeU } from 'src/util/common/TypeU.ts'
+import { Env } from 'src/util/app/Env'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { clientsClaim, WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
@@ -20,28 +22,11 @@ import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 import delay = AsyncU.delay
 import newPromise = AsyncU.newPromise
+import isstring = TypeU.isstring
 
 
 
 declare const self: ServiceWorkerGlobalScope
-
-
-
-export namespace Env {
-  export const isDev: boolean = import.meta.env.DEV
-  export const isProd: boolean = import.meta.env.PROD
-  
-  // Will be with '/' at the end
-  export const baseUrl: string = import.meta.env.BASE_URL
-  
-  export const backendHost: string = import.meta.env.BACKEND_HOST
-  export const backendPort: string = import.meta.env.BACKEND_PORT
-  
-  export const backendHttpsHostPort = `https://${backendHost}:${backendPort}`
-  export const backendWssHostPort = `wss://${backendHost}:${backendPort}`
-  
-  export const buildDate: string = import.meta.env.BUILD_DATE
-}
 
 
 
@@ -216,12 +201,15 @@ class WebSocketEx {
   }
   
   private async reconnect(url: string | URL, protocols?: string | string[]) {
+    let attempt = 0
     while (true) {
       this.d.ws = new WebSocket(url, protocols)
       const [whenClosed, setClosed] = newPromise()
       this.d.ws.onopen = () => {
+        attempt = 0
         this.updateIsReady()
       }
+      this.d.ws.onmessage = ev => this.onmessage?.(ev)
       this.d.ws.onerror = () => {
         // Sending message error
       }
@@ -231,7 +219,14 @@ class WebSocketEx {
         setClosed()
       }
       await whenClosed
-      await delay(2000)
+      if (attempt <= 40) attempt++
+      await delay((() => {
+        return 2000 // пока просто 2с оставлю
+        
+        if (attempt <= 20) return 2000 // 2s
+        if (attempt <= 40) return 1 * 60 * 1000 // 1m
+        return 10 * 60 * 1000 // 10m
+      })())
     }
   }
   
@@ -252,11 +247,32 @@ class WebSocketEx {
     }
   }
   
+  onmessage: ((ev: MessageEvent) => void) | undefined
+  
 }
 
 
 
 const ws = new WebSocketEx(`${Env.backendWssHostPort}/ws`)
+
+
+
+const swWsChannel = new BroadcastChannel('ws')
+//swWsChannel.postMessage('SW channel is ready')
+
+
+
+ws.onmessage = ev => {
+  //console.log('WebSocket received:', ev.data)
+  if (isstring(ev.data)) {
+    const evObj = JSON.parse(ev.data)
+    const { type: t, data } = evObj
+    if (t === 'TO_CLIENT') {
+      swWsChannel.postMessage(data)
+    }
+  }
+}
+
 
 
 // This allows the web app to trigger skipWaiting via
@@ -286,7 +302,6 @@ self.onmessage = async ev => {
     ws.send(JSON.stringify(ev.data?.data))
   }
 }
-
 
 
 

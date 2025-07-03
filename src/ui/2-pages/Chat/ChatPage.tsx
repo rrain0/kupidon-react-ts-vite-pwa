@@ -25,8 +25,8 @@ import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import ChatMessage from 'src/ui/2-pages/Chat/parts/ChatMessage.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import TopActionBar from 'src/ui/components/screen-bars/TopActionBar.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import Txt = EmotionCommon.Txt
@@ -61,7 +61,7 @@ export type ChatPageProps = Pu<{
 
 const ChatPage = React.memo((props: ChatPageProps) => {
   const { toUserId, toChatId } = props
-  const userId = useAuthZustand(s => s.user?.id)
+  const userId = useAuthZustand(s => s.user!.id)
   
   
   const [companion, setCompanion] = useState<ChatCompanionData | undefined>(undefined)

@@ -6,8 +6,8 @@ import Axios, {
 } from 'axios'
 import axiosRetry, { IAxiosRetryConfig } from 'axios-retry'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
-import * as jose from 'jose'
 import { TypeU } from '@util/common/TypeU.ts'
+import { getAccessTokenData } from 'src/model/api/AccessTokenA.ts'
 import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import ValueOrMapper = TypeU.ValueOrMapper
 
@@ -192,15 +192,14 @@ export namespace AxiosConfig {
       }
     } else {
       try {
-        const decodedAccessToken = jose.decodeJwt(accessToken)
-        const { exp: expiresAt } = decodedAccessToken
-        if (!expiresAt || Date.now() >= expiresAt * 1000) {
+        if (getAccessTokenData(accessToken).isExpired) {
           data = {
             code: 'EXPIRED_TOKEN',
             msg: 'Token has expired',
           }
         }
-      } catch (e) {
+      }
+      catch (e) {
         console.log('some error')
         data = {
           code: 'TOKEN_DAMAGED',
@@ -237,17 +236,15 @@ export namespace AxiosConfig {
   axAccess.interceptors.request.use((config) => {
     const accessToken = getAuthData()
     
-    switch ((config as typeof config & CustomConfig).customData?.state) {
-      case undefined:
-        config.headers.Authorization = `Bearer ${accessToken}`
-        checkAccessToken(accessToken, config)
-        break
-      case 'refresh-request':
-        break
-      case 'original-request-retry':
-        delete config.adapter
-        config.headers.Authorization = `Bearer ${accessToken}`
-        break
+    const state = (config as typeof config & CustomConfig).customData?.state
+    if (state === undefined) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+      checkAccessToken(accessToken, config)
+    }
+    else if (state === 'refresh-request') { }
+    else if (state === 'original-request-retry') {
+      delete config.adapter
+      config.headers.Authorization = `Bearer ${accessToken}`
     }
     
     return config
@@ -260,15 +257,16 @@ export namespace AxiosConfig {
     // Перехватчик вытаскивает обновлённый access token и делает повторный запрос
     response => {
       const config = response.config as typeof response.config & CustomConfig
+      const { state, originalRequestConfig } = config.customData ?? { }
 
-      if (config.customData?.state === 'refresh-request') {
+      if (state === 'refresh-request') {
         const d = response.data as AuthRespData
         
         // Сохранение нового access token, refresh token автоматически сохраняется в куках
         setAuthData(s => ({ ...s, accessToken: d.accessToken }))
 
         // Если был сохранённый оригинальный запрос, то повторяем его
-        const orig = config.customData?.originalRequestConfig
+        const orig = originalRequestConfig
         if (orig) {
           orig.customData = {
             state: 'original-request-retry',
@@ -292,20 +290,21 @@ export namespace AxiosConfig {
         if (error.code === 'ERR_NETWORK') throw error
         
         // Берём конфиги оригинального запроса, чтобы после обновления токена повторить его
-        const orig = error.config as typeof error.config & CustomConfig
+        const origConf = error.config as typeof error.config & CustomConfig
+        const { state } = origConf.customData ?? { }
 
         // Запускаем обновление токенов
-        if (!orig.customData?.state && error.response.status === 401) {
+        if (!state && error.response.status === 401) {
           // Попытка обновить токены
           // При ошибке на этот запрос, мы попадём в интерцептор ошибки, где она обработается
           
           // при успешном обновлении токена здесь будет возвращён
           // ответ повтороного оригинального запроса после обновлённого токена
           // Или будет проброшена ошибка обновления токена или ошибка повторного оригинального запроса
-          return await refreshToken(orig)
+          return await refreshToken(origConf)
         }
         // Случай, когда сервер отказался выдавать токены при запросе на их обновление
-        else if (orig.customData?.state === 'refresh-request') {
+        else if (state === 'refresh-request') {
           // Разлогиниваемся
           if (error.response.status === 400) {
             // если на запрос обновления токена получена ошибка, значит токены для обновления не валидны

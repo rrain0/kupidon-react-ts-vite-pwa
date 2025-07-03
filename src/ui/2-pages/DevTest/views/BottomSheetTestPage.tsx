@@ -3,8 +3,8 @@ import React, { useMemo, useRef, useState } from 'react'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import {
   SheetSnapIdx,

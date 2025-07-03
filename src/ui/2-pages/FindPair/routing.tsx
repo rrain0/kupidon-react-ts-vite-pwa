@@ -13,6 +13,7 @@ import {
 } from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
+import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 
@@ -137,15 +138,8 @@ const FindPairPageWithItems = React.memo(() => {
 
 const RouteFindPair = React.memo(() => {
   
-  const isAuth = useAuthZustand(s => s.getIsAuth())
-  
-  if (!isAuth) return (
-    <AppNavigate
-      toFull={RootRoute.login}
-      allowedNamedParams={{ returnPath: RootRoute.findPair }}
-      replace={true}
-    />
-  )
+  const redirectToLogin = useCheckAuth(RootRoute.chats)
+  if (redirectToLogin) return redirectToLogin
   
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>

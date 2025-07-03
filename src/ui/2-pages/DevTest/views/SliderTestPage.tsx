@@ -5,8 +5,8 @@ import Slider from 'src/ui/1-widgets/Slider/Slider.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import { RangeU } from '@util/common/RangeU.ts'
 import NumRange = RangeU.NumRange
-import PageContentLayout from 'ui/components/Pages/PageContentLayout'
-import PageLayout from 'ui/components/Pages/PageLayout'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout'
+import PageLayout from 'src/ui/components/page/PageLayout'
 
 
 

@@ -65,8 +65,10 @@ export namespace RouteBuilder {
     [params]?: emptyval | { [prop: string]: string }
     [prop: string]: RouteSegment
   }
-  export type RouteSegment = RouteSelf & RouteProps & RoutePaths
-  
+  export type RouteSegment<R extends RouteSelf & RoutePaths = RouteSelf & RoutePaths> = (
+    R & RouteProps
+  )
+  export type RouteSegmentPath = RouteSelf & RouteProps
   
   
   
@@ -193,7 +195,7 @@ export namespace RouteBuilder {
   
   
   
-  export function buildPath(pathSegment: string): RouteSelf & RouteProps {
+  export function buildPath(pathSegment: string): RouteSegmentPath {
     return {
       [path]: pathSegment,
       [up]: undefined,
@@ -206,7 +208,7 @@ export namespace RouteBuilder {
     }
   }
   
-  export function buildRoute<R extends RouteSelf & RoutePaths>(routeSegment: R): R & RouteProps {
+  export function buildRoute<R extends RouteSelf & RoutePaths>(routeSegment: R): RouteSegment<R> {
     const route = {
       ...routeSegment,
       [up]: undefined,

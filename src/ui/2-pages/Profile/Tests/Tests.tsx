@@ -15,7 +15,7 @@ import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import {
   useOverlayUrl
 } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'

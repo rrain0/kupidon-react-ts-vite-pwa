@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import ProfileCards from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import FormValues = ProfilePageValidation.FormValues
 import absTlwh = EmotionCommon.absTlwh

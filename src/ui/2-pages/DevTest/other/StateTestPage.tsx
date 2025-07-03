@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { css } from '@emotion/react'
 import { create } from 'zustand'
-import PageContentLayout from 'ui/components/Pages/PageContentLayout'
-import PageLayout from 'ui/components/Pages/PageLayout'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout'
+import PageLayout from 'src/ui/components/page/PageLayout'
 
 
 

@@ -8,6 +8,7 @@ import FindPairPage from 'src/ui/2-pages/FindPair/FindPairPage.tsx'
 import { LikedMeCardItem } from 'src/ui/2-pages/LikedMe/parts/LikedMeCard.tsx'
 import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
+import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 
@@ -70,15 +71,9 @@ const LikedMePageWithItems = React.memo(() => {
 
 
 const RouteLikedMe = React.memo(() => {
-  const isAuth = useAuthZustand(s => s.getIsAuth())
   
-  if (!isAuth) return (
-    <AppNavigate
-      toFull={RootRoute.login}
-      allowedNamedParams={{ returnPath: RootRoute.likedMe }}
-      replace={true}
-    />
-  )
+  const redirectToLogin = useCheckAuth(RootRoute.likedMe)
+  if (redirectToLogin) return redirectToLogin
   
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>

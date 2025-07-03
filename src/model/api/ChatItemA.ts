@@ -17,4 +17,6 @@ export interface ChatItemA {
   updatedAt: string
   profile: ChatItemProfileA
   lastMessage: ChatMessageA | null
+  
+  online: boolean
 }

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { useContainerScrollState } from 'src/ui/1-widgets/Scrollbar/useContainerScrollState.ts'
 import { css } from '@emotion/react'
 import Scrollbar from 'src/ui/1-widgets/Scrollbar/Scrollbar.tsx'

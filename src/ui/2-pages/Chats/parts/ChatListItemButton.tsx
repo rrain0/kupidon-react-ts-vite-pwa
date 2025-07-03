@@ -4,7 +4,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ChatListItemWidget, {
   ChatListItemWidgetData,
-} from 'src/ui/2-pages/ChatList/parts/ChatListItemWidget.tsx'
+} from 'src/ui/2-pages/Chats/parts/ChatListItemWidget.tsx'
 
 
 

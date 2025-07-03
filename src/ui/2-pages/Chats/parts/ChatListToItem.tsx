@@ -13,8 +13,8 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { UiItemData } from 'src/ui/2-pages/ChatList/parts/ChatList.tsx'
-import ChatListItemButton from 'src/ui/2-pages/ChatList/parts/ChatListItemButton.tsx'
+import { UiItemData } from 'src/ui/2-pages/Chats/parts/ChatList.tsx'
+import ChatListItemButton from 'src/ui/2-pages/Chats/parts/ChatListItemButton.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import Pu = TypeU.Pu
 import SetterOrUpdater = TypeU.SetterOrUpdater

@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import { css } from '@emotion/react'

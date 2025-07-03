@@ -10,8 +10,8 @@ import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import RootRoute = AppRoutes.RootRoute
 import fullParams = RouteBuilder.fullParams

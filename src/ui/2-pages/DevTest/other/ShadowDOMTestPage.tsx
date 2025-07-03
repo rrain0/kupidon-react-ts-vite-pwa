@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import PageContentLayout from 'ui/components/Pages/PageContentLayout'
-import PageLayout from 'ui/components/Pages/PageLayout'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout'
+import PageLayout from 'src/ui/components/page/PageLayout'
 
 
 

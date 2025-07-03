@@ -4,6 +4,7 @@ import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import RootRoute = AppRoutes.RootRoute
@@ -17,17 +18,8 @@ const PwdChangePage = React.lazy(
 
 const RouteSettingsPwdChange = React.memo(() => {
   
-  const [searchParams] = useSearchParams()
-  const isAuth = useAuthZustand(s => s.getIsAuth())
-  
-  if (!isAuth) return (
-    <Navigate
-      to={RootRoute.login[fullAllowedNameParams]({
-        returnPath: RootRoute.settings.pwdChange[fullAnySearchParams](searchParams),
-      })}
-      replace={true}
-    />
-  )
+  const redirectToLogin = useCheckAuth(RootRoute.settings.pwdChange)
+  if (redirectToLogin) return redirectToLogin
   
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>

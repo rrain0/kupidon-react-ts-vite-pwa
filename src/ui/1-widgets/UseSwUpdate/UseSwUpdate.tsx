@@ -6,14 +6,20 @@ import Modal from 'src/ui/components/modal/Modal.tsx'
 import { useRegisterSW } from 'virtual:pwa-register/react'
 import { pwaInfo } from 'virtual:pwa-info'
 
+
+
 // Vite PWA React:
 // https://vite-pwa-org.netlify.app/examples/react
 // Vite PWA React example:
 // https://github.com/vite-pwa/vite-plugin-pwa/blob/main/examples/react-router/src/ReloadPrompt.tsx
 
+
+// SW can be updated only from client!!!
+
+
 console.log('pwaInfo', pwaInfo)
 
-const ReloadPrompt = React.memo(() => {
+const UseSwUpdate = React.memo(() => {
   const buildDate = Env.buildDate
   const autoCheckUpdates = true
 
@@ -75,7 +81,7 @@ const ReloadPrompt = React.memo(() => {
       <div className='ReloadPrompt-buildDate'>{buildDate}</div>
       {(offlineReady || needRefresh) && (
         <Modal onlyFrame>
-          <div className='ReloadPrompt-container'>
+          <div className='ReloadPrompt-container' data-display-name='UseSwUpdate'>
             <div className='ReloadPrompt-toast'>
               
               <div className='ReloadPrompt-message'>
@@ -123,5 +129,5 @@ const ReloadPrompt = React.memo(() => {
     </>
   )
 })
-
-export default ReloadPrompt
+UseSwUpdate.displayName = 'UseSwUpdate'
+export default UseSwUpdate

@@ -12,6 +12,7 @@ const UsePageLifecycle = React.memo(() => {
       //console.log('onPageState', pageState)
       useAppZustand.setState({ pageState })
     }
+    onPageState(pageState)
     addPageStateListener(onPageState)
     return () => removePageStateListener(onPageState)
   }, [])

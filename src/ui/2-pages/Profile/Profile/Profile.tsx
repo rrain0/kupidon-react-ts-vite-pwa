@@ -9,7 +9,7 @@ import ProfileKidsOption from 'src/ui/2-pages/Profile/options/ProfileKidsOption'
 import ProfileLangsOption from 'src/ui/2-pages/Profile/options/ProfileLangsOption.tsx'
 import ProfileMeetingPurposeOption
   from 'src/ui/2-pages/Profile/options/ProfileMeetingPurposeOption'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import ProfileAboutMeOption from 'src/ui/2-pages/Profile/options/ProfileAboutMeOption.tsx'
 import ProfileAlcoholOption from 'src/ui/2-pages/Profile/options/ProfileAlcoholOption.tsx'

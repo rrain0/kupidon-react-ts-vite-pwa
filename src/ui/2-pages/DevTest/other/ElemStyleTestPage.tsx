@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 import React, { useMemo, useState } from 'react'
 import { testDevWidgetStyle4 } from 'src/mini-libs/widget-style-4/style/WidgetStyle.ts'
 import { ElemStyle } from 'src/mini-libs/widget-style/ElemStyle.ts'
-import PageContentLayout from 'src/ui/components/Pages/PageContentLayout.tsx'
-import PageLayout from 'src/ui/components/Pages/PageLayout.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 
 

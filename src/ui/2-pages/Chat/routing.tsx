@@ -4,8 +4,9 @@ import { RouteObject, useMatch } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { mockChatItems } from 'src/ui/2-pages/ChatList/ChatsPage.tsx'
+import { mockChatItems } from 'src/ui/2-pages/Chats/ChatsPage.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
+import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import full = RouteBuilder.full
@@ -21,11 +22,20 @@ const messages = []
 
 
 const RouteChatUserIdOrIdId = React.memo(() => {
+  
+  // Здесь должен быть 1 из 2 роутов
+  
   const chatUserIdRoute = RootRoute.chat.userId.id[use](':id')
   const urlChatUserId = useMatch(chatUserIdRoute[full]()+'/*')?.params['id']
   
   const chatIdRoute = RootRoute.chat.id.id[use](':id')
   const urlChatId = useMatch(chatIdRoute[full]()+'/*')?.params['id']
+  
+  const redirectToLogin = useCheckAuth((() => {
+    if (urlChatId) return  RootRoute.chat.id.id[use](urlChatId)
+    return RootRoute.chat.userId.id[use](urlChatUserId!)
+  })())
+  if (redirectToLogin) return redirectToLogin
   
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>

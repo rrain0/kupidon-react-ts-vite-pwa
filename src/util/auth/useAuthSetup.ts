@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { getAccessTokenData } from 'src/model/api/AccessTokenA.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import * as jose from 'jose'
 
 
 
@@ -62,8 +62,7 @@ export const useAuthSetup = () => {
       if (!accessToken && user) setAuth({ user: undefined })
       if (!accessToken && !user) setUserIsReady(true)
       if (accessToken && user) {
-        const decodedAccessToken = jose.decodeJwt(accessToken)
-        const { sub: tokenUserId } = decodedAccessToken
+        const tokenUserId = getAccessTokenData(accessToken).userId
         if (tokenUserId !== user.id) setAuth({ user: undefined })
         else setUserIsReady(true)
       }
@@ -76,3 +75,6 @@ export const useAuthSetup = () => {
   
   return accessTokenIsReady && userIsReady
 }
+
+
+
