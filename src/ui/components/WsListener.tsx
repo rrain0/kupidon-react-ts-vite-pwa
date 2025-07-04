@@ -1,7 +1,7 @@
-import { ServiceWorkerChannel } from '@util/app/ServiceWorkerChannel.ts'
-import { getIsSwReady } from '@util/app/ServiceWorkerU.ts'
-import { WebSocketChannel } from '@util/app/WebSocketChannel.ts'
-import { WsMsg } from '@util/app/WebSocketU.ts'
+import { SwChannel } from '@util/service-worker/SwChannel.ts'
+import { getIsSwReady } from '@util/service-worker/SwU.ts'
+import { WsChannel } from '@util/web-socket/WsChannel.ts'
+import { WsMsg } from '@util/web-socket/WsU.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { UserStatus, useUsersStatusZustand } from 'src/zustand/status/UsersStatusZustand.ts'
@@ -42,13 +42,13 @@ const WsListener = React.memo(() => {
       }
     }
     
-    WebSocketChannel.addOnMsgListener(onMsg)
-    return () => WebSocketChannel.removeOnMsgListener(onMsg)
+    WsChannel.addOnMsgListener(onMsg)
+    return () => WsChannel.removeOnMsgListener(onMsg)
   }, [])
   
   useEffect(() => {
     if (swReady || getIsSwReady()) {
-      ServiceWorkerChannel.send({ type: 'WS_CHECK_READY' })
+      SwChannel.send({ type: 'WS_CHECK_READY' })
     }
   }, [swReady])
   

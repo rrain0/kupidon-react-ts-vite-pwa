@@ -1,6 +1,6 @@
-import { ServiceWorkerChannel } from '@util/app/ServiceWorkerChannel.ts'
-import { getIsSwReady } from '@util/app/ServiceWorkerU.ts'
-import { WsMsg } from '@util/app/WebSocketU.ts'
+import { SwChannel } from '@util/service-worker/SwChannel.ts'
+import { getIsSwReady } from '@util/service-worker/SwU.ts'
+import { WsMsg } from '@util/web-socket/WsU.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
@@ -21,8 +21,8 @@ const SwListener = React.memo(() => {
       }
     }
     
-    ServiceWorkerChannel.addOnMsgListener(onMsg)
-    return () => ServiceWorkerChannel.removeOnMsgListener(onMsg)
+    SwChannel.addOnMsgListener(onMsg)
+    return () => SwChannel.removeOnMsgListener(onMsg)
   }, [])
   
   useEffect(() => {

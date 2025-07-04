@@ -1,9 +1,9 @@
-import { SwMsg, SwMsgListener } from 'src/util/app/ServiceWorkerU.ts'
-import { WsMsgListener } from 'src/util/app/WebSocketU.ts'
+import { SwMsg, SwMsgListener } from 'src/util/service-worker/SwU.ts'
+import { WsMsgListener } from 'src/util/web-socket/WsU.ts'
 
 
 
-export namespace ServiceWorkerChannel {
+export namespace SwChannel {
 
   
   
@@ -11,10 +11,10 @@ export namespace ServiceWorkerChannel {
     const swCtrl = navigator.serviceWorker.controller
     if (!swCtrl) {
       throw new Error(
-        'ServiceWorkerChannel.send error: There is no activating or active Service Worker'
+        'SwChannel.send error: There is no activating or active Service Worker'
       )
     }
-    console.log('ServiceWorkerChannel send:', msg)
+    console.log('SwChannel send:', msg)
     swCtrl.postMessage(msg)
   }
   
@@ -46,32 +46,34 @@ export namespace ServiceWorkerChannel {
       const swCtrl = navigator.serviceWorker.controller
       if (!swCtrl) {
         reject(new Error(
-          'ServiceWorkerChannel.send error: There is no activating or active Service Worker'
+          'SwChannel.send error: There is no activating or active Service Worker'
         ))
         return
       }
-      console.log('ServiceWorkerChannel send & await:', msg)
+      console.log('SwChannel send & await:', msg)
       swCtrl.postMessage(msg, [messageChannel.port2])
     })
   }
   
   
   
-  const swOutChannel = new BroadcastChannel('from-sw')
   
   const listeners = new Set<SwMsgListener>()
   const wsListeners = new Set<WsMsgListener>()
   
-  swOutChannel.onmessage = ev => {
-    //console.log('SW ServiceWorkerChannel received:', ev.data)
-    const { type: t, data } = ev.data ?? { }
-    if (t === 'FROM_WS') {
-      for (const l of wsListeners) l(data)
+  navigator.serviceWorker.addEventListener('message', (ev) => {
+    console.log('SwChannel received:', ev.data)
+    let { type, data } = ev.data ?? { }
+    if (type === 'FROM_SW') {
+      ({ type, data } = data ?? { })
+      if (type === 'FROM_WS') {
+        for (const l of wsListeners) l(data)
+      }
+      else {
+        for (const l of listeners) l({ type, data })
+      }
     }
-    else {
-      for (const l of listeners) l({ type: t, data })
-    }
-  }
+  })
   
   export const addOnMsgListener = (onMsg: SwMsgListener) => { listeners.add(onMsg) }
   export const removeOnMsgListener = (onMsg: SwMsgListener) => { listeners.delete(onMsg) }

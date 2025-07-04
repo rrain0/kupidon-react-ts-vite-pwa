@@ -1,3 +1,4 @@
+import { SwChannel } from '@util/service-worker/SwChannel.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
@@ -143,6 +144,18 @@ const ChatListActionBar = React.memo(() => {
         <Flex row contentBox w={sz} pl={g} noShrink ref={setPlusBoxEl}>
           <Button
             css={IconButtonS6.t(actionButtonS)}
+            onClick={() => {
+              const mc = new MessageChannel()
+              mc.port1.onmessage = ev => console.log(ev.data)
+              //SwChannel.send({ type: 'NEW_APP_CLIENT' })
+              //SwChannel.send({ type: 'RESEND_TO_CLIENTS', data: 123 })
+              navigator.serviceWorker.controller?.postMessage(
+                { type: 'NEW_APP_CLIENT' }, [mc.port2]
+              )
+              navigator.serviceWorker.controller?.postMessage(
+                { type: 'RESEND_TO_CLIENTS', data: 123 }
+              )
+            }}
           >
             <PlusIc/>
           </Button>

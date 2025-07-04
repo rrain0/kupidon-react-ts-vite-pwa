@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ObjectU } from '@util/common/ObjectU.ts'
-import { Link, useNavigate, useSearchParams } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import { MbtiType } from 'src/model/MbtiType.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -15,6 +15,7 @@ import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import PersonalityCompatibility
   from 'src/ui/2-pages/Profile/Tests/parts/PersonalityCompatibility.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import {
   useOverlayUrl
@@ -175,23 +176,23 @@ const Tests = React.memo((props: TestsProps) => {
           )}
           
           {testState === 'idle' && (
-            <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+            <AppLink toFull={RootRoute.test.mbti}>
               <Button
                 css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
               >
                 {uiText.takeTheTest}
               </Button>
-            </Link>
+            </AppLink>
           )}
           {testState === 'paused' && (
             <div css={css`${col}; gap: 15px;`}>
-              <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+              <AppLink toFull={RootRoute.test.mbti}>
                 <Button
                   css={ButtonS6.t(ButtonS6.S.filled.rect.lg.accent)}
                 >
                   {uiText.continue}
                 </Button>
-              </Link>
+              </AppLink>
               <Button
                 css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
                 onClick={resetMbtiTestDialog.open}
@@ -227,13 +228,13 @@ const Tests = React.memo((props: TestsProps) => {
           
           {testState === 'completed' && (
             <>
-              <Link to={RootRoute.test.mbti[fullAnySearchParams](searchParams)}>
+              <AppLink toFull={RootRoute.test.mbti}>
                 <Button
                   css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
                 >
                   {uiText.changeAnswers}
                 </Button>
-              </Link>
+              </AppLink>
               <Button
                 css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal3)}
                 onClick={resetMbtiTestDialog.open}

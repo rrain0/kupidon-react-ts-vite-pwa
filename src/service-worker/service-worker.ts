@@ -6,11 +6,12 @@
 // You can also remove this file if you'd prefer not to use a
 // service worker, and the Workbox build step will be skipped.
 
-import { WsMsg } from 'src/util/app/WebSocketU.ts'
+import { asMsgFromSw, SwMsg } from 'src/util/service-worker/SwU.ts'
+import { asMsgFromWs, asMsgToClient, WsMsg } from 'src/util/web-socket/WsU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { Env } from 'src/util/app/Env'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
-import { clientsClaim, WorkboxPlugin } from 'workbox-core'
+import { WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {
   precacheAndRoute,
@@ -191,8 +192,20 @@ registerRoute(
 
 
 
-const swOutChannel = new BroadcastChannel('from-sw')
-//swOutChannel.postMessage('SW channel is ready')
+
+const sendMsgFromSw = async (msg: SwMsg) => {
+  const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+  for (const client of clients) client.postMessage(asMsgFromSw(msg))
+}
+const sendMsgFromWs = (msg: WsMsg) => sendMsgFromSw(asMsgFromWs(msg))
+
+
+
+// Скрипт сервис воркера на андроиде иногда сам по себе перезапускается,
+// вебсокет тихо убивается,
+// так что надо установить, что вебсокет не готов,
+// затем вебсокет сам скажет, что он готов.
+sendMsgFromWs({ type: 'WS_NOT_READY' })
 
 
 
@@ -218,11 +231,16 @@ class WebSocketEx {
         attempt = 0
         this.updateIsReady()
       }
-      this.d.ws.onmessage = ev => this.onmessage?.(ev)
-      this.d.ws.onerror = () => {
+      this.d.ws.onmessage = ev => {
+        //console.log('WebSocket received:', ev.data)
+        this.onmessage?.(JSON.parse(ev.data) ?? { })
+      }
+      this.d.ws.onerror = ev => {
+        console.log('ws error', ev)
         // Sending message error
       }
       this.d.ws.onclose = ev => {
+        console.log('ws close', ev)
         //ev.wasClean
         this.updateIsReady()
         setClosed()
@@ -243,46 +261,35 @@ class WebSocketEx {
     const prevR = this.d.isReady
     const r = this.d.isReady = this.d.ws?.readyState === WebSocket.OPEN
     if (r !== prevR) {
-      swOutChannel.postMessage(
-        { type: 'FROM_WS', data: { type: r ? 'WS_READY' : 'WS_NOT_READY' } }
-      )
+      this.onmessage?.(asMsgToClient({ type: r ? 'WS_READY' : 'WS_NOT_READY' }))
     }
   }
   
   
   get isReady() { return this.d.isReady }
   
-  sendEv(data: WsMsg) {
+  send(data: WsMsg) {
     this.updateIsReady()
     if (this.d.ws && this.d.isReady) {
       this.d.ws.send(JSON.stringify(data))
     }
     else {
-      swOutChannel.postMessage({ type: 'FROM_WS', data: { type: 'WS_NOT_READY' } })
+      this.onmessage?.(asMsgToClient({ type: 'WS_NOT_READY' }))
       throw new Error('WebSocket is not ready')
     }
   }
   
-  onmessage: ((ev: MessageEvent) => void) | undefined
-  
+  onmessage: ((msg: WsMsg) => void) | undefined
 }
 
 
 
 const ws = new WebSocketEx(`${Env.backendWssHostPort}/ws`)
-
-
-
-
-
-
 ws.onmessage = ev => {
-  //console.log('WebSocket received:', ev.data)
-  if (isstring(ev.data)) {
-    const { type: t, data } = JSON.parse(ev.data) ?? { }
-    if (t === 'TO_CLIENT') {
-      swOutChannel.postMessage({ type: 'FROM_WS', data })
-    }
+  console.log('WS received:', ev)
+  const { type, data } = ev
+  if (type === 'TO_CLIENT') {
+    sendMsgFromWs(data as WsMsg)
   }
 }
 
@@ -295,12 +302,12 @@ ws.onmessage = ev => {
 // ev.ports[0]?.postMessage(<msg>) - send message back if sender has provided the port.
 self.onmessage = async ev => {
   console.log('SW received:', ev.data)
-  const { type: t, data } = ev.data
+  const { type, data } = ev.data
   // Used by VitePWA to update SW by reload button click
-  if (t === 'SKIP_WAITING') {
+  if (type === 'SKIP_WAITING') {
     self.skipWaiting()
   }
-  else if (t === 'CLEAR_CACHE') {
+  else if (type === 'CLEAR_CACHE') {
     // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
     ev.waitUntil((async() => {
       await clearCache()
@@ -308,27 +315,20 @@ self.onmessage = async ev => {
     })())
     //self.registration.unregister()
   }
-  else if (t === 'CONSOLE_LOG') {
+  else if (type === 'CONSOLE_LOG') {
     console.log('service worker console.log', ev)
     ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
   }
-  else if (t === 'WS_CHECK_READY') {
-    swOutChannel.postMessage(
-      { type: 'FROM_WS', data: { type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' } }
-    )
+  else if (type === 'WS_CHECK_READY') {
+    sendMsgFromWs({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
   }
-  else if (t === 'TO_WS') {
-    ws.sendEv(data)
+  else if (type === 'TO_WS') {
+    ws.send(data)
   }
 }
 
 
 
-
-self.onactivate = () => {
-  //console.log('sw ready')
-  //swOutChannel.postMessage({ type: 'SW_READY' })
-}
 
 
 
@@ -341,21 +341,19 @@ async function clearCache(): Promise<void> {
 
 
 
+self.addEventListener('install', ev => {
+  // This forces 'waiting' SW to become 'active'
+  // The promise that 'skipWaiting()' returns can be safely ignored.
+  // This does not trigger page reload.
+  self.skipWaiting()
+})
+self.addEventListener('activate', ev => {
+  ev.waitUntil((async () => {
+    // Set this SW (if active) as controller to all clients within its scope.
+    // This triggers a 'controllerchange' event on 'navigator.serviceWorker'.
+    // This does not trigger page reload.
+    await self.clients.claim()
+    sendMsgFromWs({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
+  })())
+})
 
-
-// Controlled clients - pages that already being controlled by SW.
-// Uncontrolled clients - pages that have no SW worker installed for them.
-
-// If new SW was installed, it can't take control over clients until client page reload,
-//   because there is old active SW.
-// If page already has SW - self.skipWaiting() reloads pages and applies new SW.
-// If page has no SW installed - clientsClaim() reloads such pages and applies SW,
-//   but normally page should install SW itself.
-
-// It will FORCE RELOAD all controlled clients after SW script was updated.
-if (Env.isDev) self.skipWaiting()
-
-// clients.claim() will FORCE RELOAD all uncontrolled clients and make them controlled.
-// !!! Normally page must install SW itself and then self.skipWaiting() is enough
-// Another variant: self.clients.claim()
-if (Env.isDev) clientsClaim()

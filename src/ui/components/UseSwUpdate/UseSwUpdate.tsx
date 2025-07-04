@@ -1,6 +1,6 @@
 import { Env } from '@util/app/Env.ts'
 import React from 'react'
-import './ReloadPrompt.css'
+import 'src/ui/components/UseSwUpdate/ReloadPrompt.css'
 import Modal from 'src/ui/components/modal/Modal.tsx'
 
 import { useRegisterSW } from 'virtual:pwa-register/react'
@@ -14,7 +14,7 @@ import { pwaInfo } from 'virtual:pwa-info'
 // https://github.com/vite-pwa/vite-plugin-pwa/blob/main/examples/react-router/src/ReloadPrompt.tsx
 
 
-// SW can be updated only from client!!!
+// New sw script can be applied only from client!!!
 
 
 console.log('pwaInfo', pwaInfo)
