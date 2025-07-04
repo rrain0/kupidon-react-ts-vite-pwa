@@ -5,7 +5,8 @@ import React from 'react'
 import { widget7Test } from 'src/mini-libs/widget-style-7/WidgetTest.ts'
 import UseSwUpdate from 'src/ui/1-widgets/UseSwUpdate/UseSwUpdate.tsx'
 import RequestItemsLiveUpdate from 'src/ui/components/RequestItemsLiveUpdate.tsx'
-import SendOnlineStatus from 'src/ui/components/SendOnlineStatus.tsx'
+import SendLiveOnlineStatus from 'src/ui/components/SendLiveOnlineStatus.tsx'
+import SwListener from 'src/ui/components/SwListener.tsx'
 import UsePageLifecycle from 'src/ui/components/UsePageLifecycle.tsx'
 import UseViewportContentSize from 'src/ui/components/UseViewportContentSize.tsx'
 import CheckBrowserMinimumVersion
@@ -53,10 +54,11 @@ const App = React.memo(() => {
       
       <UsePageLifecycle/>
       
+      <SwListener/>
       <WsListener/>
       
       <RequestItemsLiveUpdate/>
-      <SendOnlineStatus/>
+      <SendLiveOnlineStatus/>
       
       <UseViewportContentSize>
         

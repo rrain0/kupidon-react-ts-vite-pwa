@@ -6,24 +6,26 @@ import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 
 
 
-const SendOnlineStatus = React.memo(() => {
+const SendLiveOnlineStatus = React.memo(() => {
   
-  const wsReady = useAppZustand(s => s.wsReady)
+  const wsChannelReady = useAppZustand(s => s.getWsChannelReady())
   const online = useAppZustand(s => s.getIsOnline())
   const accessToken = useAuthZustand(s => s.accessToken)
   
+  //console.log('wsChannelReady', wsChannelReady)
+  
   useEffect(() => {
-    if (accessToken && wsReady) {
+    if (accessToken && wsChannelReady) {
       WebSocketChannel.send({
         type: online ? 'BECAME_ONLINE' : 'BECAME_OFFLINE',
         data: { accessToken },
       })
     }
-  }, [wsReady, accessToken, online])
+  }, [wsChannelReady, accessToken, online])
   
   return undefined
 })
-SendOnlineStatus.displayName = 'SendOnlineStatus'
-export default SendOnlineStatus
+SendLiveOnlineStatus.displayName = 'SendLiveOnlineStatus'
+export default SendLiveOnlineStatus
 
 

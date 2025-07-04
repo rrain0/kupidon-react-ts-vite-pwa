@@ -9,7 +9,7 @@ import { useUsersStatusZustand } from 'src/zustand/status/UsersStatusZustand.ts'
 
 const RequestItemsLiveUpdate = React.memo(() => {
   
-  const wsReady = useAppZustand(s => s.wsReady)
+  const wsChannelReady = useAppZustand(s => s.getWsChannelReady())
   const online = useAppZustand(s => s.getIsOnline())
   const accessToken = useAuthZustand(s => s.accessToken)
   const usersStatusZustand = useUsersStatusZustand()
@@ -17,15 +17,15 @@ const RequestItemsLiveUpdate = React.memo(() => {
   const userIdsHash = useMemo(() => {
     let hash = ''
     for (const consumer in usersStatusZustand) {
-      hash += JSON.stringify(usersStatusZustand[consumer].map.keys())
+      hash += JSON.stringify([...usersStatusZustand[consumer].map.keys()])
     }
     return hash
   }, [usersStatusZustand])
   
   useEffect(() => {
-    if (accessToken && wsReady) {
+    if (accessToken && wsChannelReady) {
       WebSocketChannel.send({
-        type: 'SUBSCRIBE_ON_USER_STATUS',
+        type: 'SUBSCRIBE_ON_USERS_STATUS',
         data: {
           accessToken,
           userIds: (() => {
@@ -40,7 +40,7 @@ const RequestItemsLiveUpdate = React.memo(() => {
         },
       })
     }
-  }, [wsReady, accessToken, online, userIdsHash])
+  }, [wsChannelReady, accessToken, online, userIdsHash])
   
   return undefined
 })

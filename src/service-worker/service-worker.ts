@@ -188,8 +188,11 @@ registerRoute(
 
 
 
-const wsToClientsChannel = new BroadcastChannel('from-ws')
-//wsToClientsChannel.postMessage('SW channel is ready')
+
+
+
+const swOutChannel = new BroadcastChannel('from-sw')
+//swOutChannel.postMessage('SW channel is ready')
 
 
 
@@ -240,7 +243,9 @@ class WebSocketEx {
     const prevR = this.d.isReady
     const r = this.d.isReady = this.d.ws?.readyState === WebSocket.OPEN
     if (r !== prevR) {
-      wsToClientsChannel.postMessage({ type: r ? 'WS_READY' : 'WS_NOT_READY' })
+      swOutChannel.postMessage(
+        { type: 'FROM_WS', data: { type: r ? 'WS_READY' : 'WS_NOT_READY' } }
+      )
     }
   }
   
@@ -253,7 +258,7 @@ class WebSocketEx {
       this.d.ws.send(JSON.stringify(data))
     }
     else {
-      wsToClientsChannel.postMessage({ type: 'WS_NOT_READY' })
+      swOutChannel.postMessage({ type: 'FROM_WS', data: { type: 'WS_NOT_READY' } })
       throw new Error('WebSocket is not ready')
     }
   }
@@ -276,7 +281,7 @@ ws.onmessage = ev => {
   if (isstring(ev.data)) {
     const { type: t, data } = JSON.parse(ev.data) ?? { }
     if (t === 'TO_CLIENT') {
-      wsToClientsChannel.postMessage(data)
+      swOutChannel.postMessage({ type: 'FROM_WS', data })
     }
   }
 }
@@ -289,6 +294,7 @@ ws.onmessage = ev => {
 //   and that it shouldn't terminate SW until promise is settled.
 // ev.ports[0]?.postMessage(<msg>) - send message back if sender has provided the port.
 self.onmessage = async ev => {
+  console.log('SW received:', ev.data)
   const { type: t, data } = ev.data
   // Used by VitePWA to update SW by reload button click
   if (t === 'SKIP_WAITING') {
@@ -307,11 +313,21 @@ self.onmessage = async ev => {
     ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
   }
   else if (t === 'WS_CHECK_READY') {
-    wsToClientsChannel.postMessage({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
+    swOutChannel.postMessage(
+      { type: 'FROM_WS', data: { type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' } }
+    )
   }
   else if (t === 'TO_WS') {
     ws.sendEv(data)
   }
+}
+
+
+
+
+self.onactivate = () => {
+  //console.log('sw ready')
+  //swOutChannel.postMessage({ type: 'SW_READY' })
 }
 
 
