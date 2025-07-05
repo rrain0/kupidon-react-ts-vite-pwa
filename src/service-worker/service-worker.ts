@@ -191,21 +191,12 @@ registerRoute(
 
 
 
-
-
 const sendMsgFromSw = async (msg: SwMsg) => {
   const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
   for (const client of clients) client.postMessage(asMsgFromSw(msg))
 }
 const sendMsgFromWs = (msg: WsMsg) => sendMsgFromSw(asMsgFromWs(msg))
 
-
-
-// Скрипт сервис воркера на андроиде иногда сам по себе перезапускается,
-// вебсокет тихо убивается,
-// так что надо установить, что вебсокет не готов,
-// затем вебсокет сам скажет, что он готов.
-sendMsgFromWs({ type: 'WS_NOT_READY' })
 
 
 
@@ -233,7 +224,10 @@ class WebSocketEx {
       }
       this.d.ws.onmessage = ev => {
         //console.log('WebSocket received:', ev.data)
-        this.onmessage?.(JSON.parse(ev.data) ?? { })
+        const { data } = ev
+        if (isstring(data)) {
+          this.onmessage?.(JSON.parse(data) ?? { })
+        }
       }
       this.d.ws.onerror = ev => {
         console.log('ws error', ev)
@@ -302,7 +296,7 @@ ws.onmessage = ev => {
 // ev.ports[0]?.postMessage(<msg>) - send message back if sender has provided the port.
 self.onmessage = async ev => {
   console.log('SW received:', ev.data)
-  const { type, data } = ev.data
+  const { type, data } = ev.data ?? { }
   // Used by VitePWA to force to activate SW after click on reload button
   if (type === 'SKIP_WAITING') {
     self.skipWaiting()

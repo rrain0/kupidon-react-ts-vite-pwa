@@ -10,6 +10,15 @@ export namespace SwChannel {
   export function send(msg: SwMsg): void {
     const swCtrl = navigator.serviceWorker.controller
     if (!swCtrl) {
+      return
+    }
+    console.log('SwChannel send:', msg)
+    swCtrl.postMessage(msg)
+  }
+  
+  export function sendOrError(msg: SwMsg): void {
+    const swCtrl = navigator.serviceWorker.controller
+    if (!swCtrl) {
       throw new Error(
         'SwChannel.send error: There is no activating or active Service Worker'
       )
@@ -80,5 +89,13 @@ export namespace SwChannel {
   
   export const addOnWsMsgListener = (onMsg: WsMsgListener) => { wsListeners.add(onMsg) }
   export const removeOnWsMsgListener = (onMsg: WsMsgListener) => { wsListeners.delete(onMsg) }
-
+  
+  
+  // Chrome on Android stops SW after 30s inactivity,
+  // so it refreshes lifetime while page is opened.
+  setInterval(() => {
+    if (navigator.serviceWorker.controller) {
+      send({ type: 'KEEP_SW_ALIVE' })
+    }
+  }, 10000)
 }
