@@ -303,7 +303,7 @@ ws.onmessage = ev => {
 self.onmessage = async ev => {
   console.log('SW received:', ev.data)
   const { type, data } = ev.data
-  // Used by VitePWA to update SW by reload button click
+  // Used by VitePWA to force to activate SW after click on reload button
   if (type === 'SKIP_WAITING') {
     self.skipWaiting()
   }
@@ -339,19 +339,35 @@ async function clearCache(): Promise<void> {
 
 
 
-
+/*
+ Worker lifecycle:
+ 1) Installing.
+    This is the first phase after registration.
+    When the 'oninstall' handler completes, the service worker is considered 'installed'.
+ 2) Waiting.
+    The service worker is waiting for clients still using other service workers to be closed.
+ 3) Activating.
+    Now there are no clients controlled by other service workers (??? какая-то смутная формулировка).
+    When the 'onactive' handler completes, the service worker is considered 'activated'.
+ 4) Activated
+    The service worker now controls the page.
+ 
+ Uncontrolled client - client that does not have any service worker.
+ Controlled client - client that already has any service worker.
+ 
+ self.clients.claim() - Start control only uncontrolled clients.
+ This does not trigger page reload.
+ 
+ self.skipWaiting() - skips the 'waiting' phase and moves directly to activating.
+ Forces controlled pages to update their service worker to this service worker.
+ This reloads page.
+ */
 
 self.addEventListener('install', ev => {
-  // This forces 'waiting' SW to become 'active'
-  // The promise that 'skipWaiting()' returns can be safely ignored.
-  // This does not trigger page reload.
-  self.skipWaiting()
+  if (Env.isDev) self.skipWaiting()
 })
 self.addEventListener('activate', ev => {
   ev.waitUntil((async () => {
-    // Set this SW (if active) as controller to all clients within its scope.
-    // This triggers a 'controllerchange' event on 'navigator.serviceWorker'.
-    // This does not trigger page reload.
     await self.clients.claim()
     sendMsgFromWs({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
   })())

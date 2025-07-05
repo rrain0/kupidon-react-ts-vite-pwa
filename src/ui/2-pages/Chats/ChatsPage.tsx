@@ -399,7 +399,6 @@ const ChatsPage = React.memo(() => {
     }
   }, [usersStatus])
   
-  
   return (
     <>
     
