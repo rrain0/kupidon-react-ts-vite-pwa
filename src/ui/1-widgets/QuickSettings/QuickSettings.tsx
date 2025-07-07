@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Env } from '@util/app/Env.ts'
+import { SwChannel } from '@util/service-worker/SwChannel.ts'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
@@ -119,17 +120,6 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     {titleText.appSettings}
                   </Button>
                   
-                  <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
-                    onClick={() => {
-                      setCloseAction(() => () => {
-                        navigate(RootRoute.devTest[full]())
-                      })
-                      props.setClosing()
-                    }}
-                  >
-                    {titleText.testPage}
-                  </Button>
-                  
                   {canInstall && (
                     <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
                       onClick={async () => await promptInstall()}
@@ -143,6 +133,58 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     onClick={clearSiteDialog.open}
                   >
                     {actionText.clearAppData}
+                  </Button>
+                  
+                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
+                    onClick={async () => {
+                      const permission = await Notification.requestPermission()
+                      if (permission === 'granted') {
+                        SwChannel.send({ type: 'TEST_NOTIFICATION' })
+                      }
+                    }}
+                  >
+                    {'Отправить уведомление сейчас'}
+                  </Button>
+                  
+                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
+                    onClick={async () => {
+                      const permission = await Notification.requestPermission()
+                      if (permission === 'granted') {
+                        SwChannel.send({ type: 'TEST_NOTIFICATION_IN_5S' })
+                      }
+                    }}
+                  >
+                    {'Отправить уведомление через 5 сек'}
+                  </Button>
+                  
+                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
+                    onClick={async () => {
+                      const permission = await Notification.requestPermission()
+                      if (permission === 'granted') {
+                        SwChannel.send({ type: 'TEST_NOTIFICATION_IN_1M' })
+                      }
+                    }}
+                  >
+                    {'Отправить уведомление через 1 мин'}
+                  </Button>
+                  
+                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
+                    onClick={async () => {
+                      const permission = await Notification.requestPermission()
+                    }}
+                  >
+                    {'Разрешить уведомления'}
+                  </Button>
+                  
+                  <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
+                    onClick={() => {
+                      setCloseAction(() => () => {
+                        navigate(RootRoute.devTest[full]())
+                      })
+                      props.setClosing()
+                    }}
+                  >
+                    {titleText.testPage}
                   </Button>
                   
                   {Env.isDev && (
