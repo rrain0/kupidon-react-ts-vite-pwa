@@ -12,7 +12,7 @@ export namespace SwChannel {
     if (!swCtrl) {
       return
     }
-    console.log('SwChannel send:', msg)
+    //console.log('SwChannel send:', msg)
     swCtrl.postMessage(msg)
   }
   
@@ -23,7 +23,7 @@ export namespace SwChannel {
         'SwChannel.send error: There is no activating or active Service Worker'
       )
     }
-    console.log('SwChannel send:', msg)
+    //console.log('SwChannel sendOrError:', msg)
     swCtrl.postMessage(msg)
   }
   
@@ -59,7 +59,7 @@ export namespace SwChannel {
         ))
         return
       }
-      console.log('SwChannel send & await:', msg)
+      //console.log('SwChannel sendAwait:', msg)
       swCtrl.postMessage(msg, [messageChannel.port2])
     })
   }
@@ -71,7 +71,7 @@ export namespace SwChannel {
   const wsListeners = new Set<WsMsgListener>()
   
   navigator.serviceWorker.addEventListener('message', (ev) => {
-    console.log('SwChannel received:', ev.data)
+    //console.log('SwChannel received:', ev.data)
     let { type, data } = ev.data ?? { }
     if (type === 'FROM_SW') {
       ({ type, data } = data ?? { })
@@ -92,7 +92,7 @@ export namespace SwChannel {
   
   
   // Chrome on Android stops SW after 30s inactivity,
-  // so it refreshes lifetime while page is opened.
+  // so it hods sw in 'running' state.
   setInterval(() => {
     if (navigator.serviceWorker.controller) {
       send({ type: 'KEEP_SW_ALIVE' })

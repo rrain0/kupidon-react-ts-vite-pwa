@@ -265,6 +265,7 @@ class WebSocketEx {
   send(data: WsMsg) {
     this.updateIsReady()
     if (this.d.ws && this.d.isReady) {
+      console.log('WS send:', data)
       this.d.ws.send(JSON.stringify(data))
     }
     else {
@@ -280,7 +281,7 @@ class WebSocketEx {
 
 const ws = new WebSocketEx(`${Env.backendWssHostPort}/ws`)
 ws.onmessage = ev => {
-  console.log('WS received:', ev)
+  //console.log('WS received:', ev)
   const { type, data } = ev
   if (type === 'TO_CLIENT') {
     sendMsgFromWs(data as WsMsg)
@@ -295,29 +296,37 @@ ws.onmessage = ev => {
 //   and that it shouldn't terminate SW until promise is settled.
 // ev.ports[0]?.postMessage(<msg>) - send message back if sender has provided the port.
 self.onmessage = async ev => {
-  console.log('SW received:', ev.data)
+  //console.log('SW received:', ev.data)
   const { type, data } = ev.data ?? { }
-  // Used by VitePWA to force to activate SW after click on reload button
-  if (type === 'SKIP_WAITING') {
-    self.skipWaiting()
-  }
-  else if (type === 'CLEAR_CACHE') {
-    // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
-    ev.waitUntil((async() => {
-      await clearCache()
-      ev.ports[0]?.postMessage({ type: 'CACHE_CLEARED' })
-    })())
-    //self.registration.unregister()
-  }
-  else if (type === 'CONSOLE_LOG') {
-    console.log('service worker console.log', ev)
-    ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
-  }
-  else if (type === 'WS_CHECK_READY') {
-    sendMsgFromWs({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
-  }
-  else if (type === 'TO_WS') {
+  
+  if (type === 'TO_WS') {
     ws.send(data)
+  }
+  else {
+    if (type === 'KEEP_SW_ALIVE') { }
+    else {
+      console.log('SW received:', ev.data)
+      
+      // Used by VitePWA to force to activate SW after click on reload button
+      if (type === 'SKIP_WAITING') {
+        self.skipWaiting()
+      }
+      else if (type === 'CLEAR_CACHE') {
+        // Service Worker won't be stopped until the Promise passed to 'waitUtil' is settled.
+        ev.waitUntil((async() => {
+          await clearCache()
+          ev.ports[0]?.postMessage({ type: 'CACHE_CLEARED' })
+        })())
+        //self.registration.unregister()
+      }
+      else if (type === 'CONSOLE_LOG') {
+        console.log('service worker console.log', ev)
+        ev.ports[0]?.postMessage({ type: 'OK', data: 'logged successfully' })
+      }
+      else if (type === 'WS_CHECK_READY') {
+        sendMsgFromWs({ type: ws.isReady ? 'WS_READY' : 'WS_NOT_READY' })
+      }
+    }
   }
 }
 
@@ -358,7 +367,7 @@ async function clearCache(): Promise<void> {
  */
 
 self.addEventListener('install', ev => {
-  if (Env.isDev) self.skipWaiting()
+  if (Env.isDev) ev.waitUntil(self.skipWaiting())
 })
 self.addEventListener('activate', ev => {
   ev.waitUntil((async () => {

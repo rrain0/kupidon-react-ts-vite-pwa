@@ -6,6 +6,15 @@ import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 
 
 
+// TODO Push Notifications through SW
+async function f() {
+  const registration = await navigator.serviceWorker.ready
+  const subscription = await registration.pushManager.getSubscription()
+  subscription?.unsubscribe()
+}
+
+
+
 const SwListener = React.memo(() => {
   
   useEffect(() => {
@@ -13,12 +22,14 @@ const SwListener = React.memo(() => {
       console.log('SwListener received:', msg)
       const { type: t, data } = msg ?? { }
       
+      /*
       if (t === 'SW_READY') {
         useAppZustand.setState({ swReady: getIsSwReady() })
       }
       else if (t === 'SW_NOT_READY') {
         useAppZustand.setState({ swReady: false })
       }
+      */
     }
     
     SwChannel.addOnMsgListener(onMsg)
