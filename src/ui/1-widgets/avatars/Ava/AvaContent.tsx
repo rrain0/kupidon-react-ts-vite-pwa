@@ -41,9 +41,9 @@ const AvaContent = React.memo((props: AvaContentProps) => {
         {!ava && <EmptyAva id={id}/>}
       </AvaBox>
       {mutualSympathy && (
-        <MutualSympathyMarkBox center shadow={shadow}>
+        <NewPairMarkBox center shadow={shadow}>
           <HeartsDoubleIc css={SvgIconS6.t(heartsDoubleIcS)}/>
-        </MutualSympathyMarkBox>
+        </NewPairMarkBox>
       )}
       {online && <OnlineMark/>}
     </>
@@ -68,11 +68,12 @@ const OnlineMark = styled(Flex)(flexStyle({
   absolute: true, b: '4%', r: '4%', sz: '20%', round: true,
   // TODO Theme
   border: '2px solid #f5f5f5',
+  // TODO Theme
   bgColor: '#19aa1e',
 }))
 
 
-const MutualSympathyMarkBox = styled(Flex)<Pu<{ shadow: boolean }>>(({
+const NewPairMarkBox = styled(Flex)<Pu<{ shadow: boolean }>>(({
   theme: t, shadow,
 }) => (flexStyle({
   absolute: true, t: '-2%', l: '-4%', w: '36%', ratio: 1, round: true,

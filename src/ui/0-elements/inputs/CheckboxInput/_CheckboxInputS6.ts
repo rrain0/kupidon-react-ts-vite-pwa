@@ -3,7 +3,7 @@ import {
   AppWidgetStyle,
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'mini-libs/widget-style-6/WidgetStyle'
+} from 'src/mini-libs/widget-style-6/WidgetStyle'
 import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
 import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'

@@ -20,7 +20,7 @@ import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import rowC = EmotionCommon.rowC
 import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 
 
 

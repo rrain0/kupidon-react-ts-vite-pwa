@@ -45,7 +45,7 @@ import gridStackC = EmotionCommon.gridStackC
 import PictureIc = SvgIconsPack.PictureIc
 import gridC = EmotionCommon.gridC
 import absTlwh = EmotionCommon.absTlwh
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full

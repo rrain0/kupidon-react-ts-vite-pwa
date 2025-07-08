@@ -168,14 +168,6 @@ const QuickSettings = React.memo((props: SettingsProps) => {
                     {'Отправить уведомление через 1 мин'}
                   </Button>
                   
-                  <Button css={ButtonS6.t(ButtonS6.S.filled.rounded.md.normal)}
-                    onClick={async () => {
-                      const permission = await Notification.requestPermission()
-                    }}
-                  >
-                    {'Разрешить уведомления'}
-                  </Button>
-                  
                   <Button css={ButtonS6.t(ButtonS6.S.outlined.rounded.md.normal)}
                     onClick={() => {
                       setCloseAction(() => () => {

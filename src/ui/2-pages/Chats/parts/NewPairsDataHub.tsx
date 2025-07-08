@@ -9,13 +9,13 @@ import isdef = TypeU.isdef
 
 
 
-const NewPairsListWithItems = React.memo(() => {
+const NewPairsDataHub = React.memo(() => {
   
   const [items, setItems] = useState(undefined as UserPairA[] | undefined)
   
   
   const usersStatus = useLiveUsersStatus(
-    'chatsPageNewPairs',
+    'chatsPageNewPairsDataHub',
     items?.map(it => ({ id: it.toUser.id, online: it.toUser.online ?? false }))
   )
   
@@ -83,5 +83,5 @@ const NewPairsListWithItems = React.memo(() => {
     <NewPairsList newPairItems={uiItems}/>
   )
 })
-NewPairsListWithItems.displayName = 'NewPairsListWithItems'
-export default NewPairsListWithItems
+NewPairsDataHub.displayName = 'NewPairsDataHub'
+export default NewPairsDataHub

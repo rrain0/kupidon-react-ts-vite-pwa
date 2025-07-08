@@ -1,9 +1,9 @@
 /// <reference lib="webworker"/>
 
-import { asMsgFromSw, SwMsg } from 'src/util/service-worker/SwU.ts'
-import { asMsgFromWs, WsMsg } from 'src/util/web-socket/WsU.ts'
-import { Env } from 'src/util/app/Env'
-import { AsyncU } from 'src/util/common/AsyncU.ts'
+import { asMsgFromSw, SwMsg } from '@util/service-worker/SwU.ts'
+import { asMsgFromWs, WsMsg } from '@util/web-socket/WsU.ts'
+import { Env } from '@util/app/Env'
+import { AsyncU } from '@util/common/AsyncU.ts'
 import { WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {
@@ -16,10 +16,10 @@ import {
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 import delay = AsyncU.delay
-import { WebSocketEx } from 'util/web-socket/WebSocketEx'
+import { WebSocketEx } from '@util/web-socket/WebSocketEx'
 
 import { MockData } from 'src/_mock-data/MockData.ts'
-import cross from 'src/res/ic/normal/ui/cross.svg'
+import cross from '@ic/normal/ui/cross.svg'
 
 
 
@@ -241,62 +241,61 @@ const showTestNotification = async (data?: NotificationData) => {
   
   
   return self.registration.showNotification(
-    // Chrome android: The title of notification shown above body content.
+    // Chrome Android: The title of notification shown above body content.
     // Safari iOS: The title of notification shown in the top of notification.
     'Купидон - тестовое уведомление',
     {
-      // ✅ Chrome android: Clone of the data can be read later in event handlers.
+      // ✅ Chrome Android: Clone of the data can be read later in event handlers.
       // ✅ Safari iOS: Clone of the data can be read later in event handlers.
       data: { type: type, data: dataData },
-      // ✅ Chrome android: Shows new or updates existing notification with the same tag.
+      // ✅ Chrome Android: Shows new or updates existing notification with the same tag.
       // ❌ Safari iOS: No support. Always shows new notification.
       tag: type,
-      // ✅ Chrome android: Timestamp associated with the notification. Can be past or future.
+      // ✅ Chrome Android: Timestamp associated with the notification. Can be past or future.
       //     Displayed in top-left corner of notification.
       // ❌ Safari iOS: No support.
       // @ts-ignore
       timestamp: +new Date() + 2 * 60 * 1000,
-      // ℹ️??? Chrome android: Notification can't be closed automatically.
+      // ℹ️??? Chrome Android: Notification can't be closed automatically.
       // ❌??? Safari iOS: No support.
       requireInteraction: true,
-      // ✅??? Chrome android: true => no sound, no vibration
+      // ✅ Chrome Android: true => no sound, no vibration
       // ✅??? Safari iOS: true => no vibration. sound???
       silent: false,
-      // ℹ️??? Chrome android: I see standard vibration.
+      // ℹ️??? Chrome Android: I see standard vibration instead of provided pattern.
       // ❌ Safari iOS: No support.
-      //vibrate: [300, 300, 300, 300, 300],
-      // ✅ Chrome android: true => renotify on notification update by same tag.
+      vibrate: [300, 300, 300, 300, 300],
+      // ✅ Chrome Android: true => renotify on notification update by same tag.
       // ❌ Safari iOS: No support.
       // @ts-ignore
       renotify: false,
-      // ✅ Chrome android: Specify lang, used in notification
+      // ✅ Chrome Android: Specify lang, used in notification. But for what?
       // ℹ️??? Safari iOS: ???
       lang: 'ru-RU',
-      // ✅ Chrome android: Shows icon in the status bar / top-left corner of notification.
+      // ✅ Chrome Android: Shows icon in the status bar / top-left corner of notification.
       //     Svg supported.
       // ❌??? Safari iOS: No support.
       badge: icon,
-      // ✅ Chrome android: Shows icon in the right of the notification.
-      //     Svg supported.
+      // ✅ Chrome Android: Shows icon in the right of the notification. Svg supported.
       // ❌ Safari iOS: No support. It just displays app icon on the left of notification.
       icon: icon,
-      // ✅ Chrome android: Notification body text.
+      // ✅ Chrome Android: Notification body text.
       // ✅ Safari iOS: Notification body text.
       body: `#${dataData} ` + (() => {
         if (focused) return `Приложение открыто`
         if (clients.length) return `Приложение свёрнуто, нажмите чтобы открыть приложение`
         return `Приложение закрыто, нажмите чтобы открыть приложение`
       })(),
-      // ✅ Chrome android: Shows image under body.
-      //     Svg supported.
+      // ✅ Chrome Android: Shows image under body text. Svg supported.
       // ❌ Safari iOS: No support.
       image: MockData.images.record.blueLockIsagi,
-      // ✅ Chrome android: Experimental: List of action buttons in the bottom of notification.
+      // ✅ Chrome Android: Experimental: List of action buttons in the bottom of notification.
       // ❌ Safari iOS: No support.
       // @ts-ignore
       actions: [
-        // С иконками пока не понятно - пока что я их в реале не увидел, возможно оболочки такие.
-        // Так что лучше их не юзать пока что, просто текст оставить.
+        // icon: ℹ️ Chrome Android: Пока не увидел иконок в своих оболочках.
+        // icon: ❌ Safari iOS: No support.
+        // icon: ✅ Chrome Windows: Supported + Svg supported.
         { action: 'delay-for-5s', title: 'Отложить на 5с' },
         { action: 'close', title: 'Закрыть', icon: cross },
       ],

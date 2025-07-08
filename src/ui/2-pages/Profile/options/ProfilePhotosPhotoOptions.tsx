@@ -35,7 +35,7 @@ import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import Callback1 = TypeU.Callback1
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 
 
 

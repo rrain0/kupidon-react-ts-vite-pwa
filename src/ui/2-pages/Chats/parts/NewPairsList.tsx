@@ -10,7 +10,6 @@ import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
-import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import AvaButton from 'src/ui/1-widgets/avatars/Ava/AvaButton.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/page/offsetToPageContentPaddings.ts'
@@ -55,11 +54,15 @@ export const NewPairsList = React.memo((props: NewPairsListProps) => {
         className={className}
         style={style}
       >
-        {/* TODO Translation */}
-        <MutualSympathiesText>Взаимные симпатии</MutualSympathiesText>
+        <NewPairsText>
+          {/* TODO Translation */}
+          {'Новые пары'}
+        </NewPairsText>
         <Gap grow/>
-        {/* TODO Translation */}
-        <HeaderArrow css={[HeaderArrowS.secondary, ButtonS6.t(allButtonS)]}>Все</HeaderArrow>
+        <HeaderArrow css={[HeaderArrowS.secondary, ButtonS6.t(allButtonS)]}>
+          {/* TODO Translation */}
+          {'Все'}
+        </HeaderArrow>
       </Flex>
     
       <Gap h={14}/>
@@ -93,7 +96,7 @@ export default NewPairsList
 
 
 
-const MutualSympathiesText = styled.div`
+const NewPairsText = styled.div`
   ${Txt.s20Bold};
 `
 

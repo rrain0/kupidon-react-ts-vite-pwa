@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { ReactU } from '@util/react/ReactU.ts'
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import React from 'react'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import {

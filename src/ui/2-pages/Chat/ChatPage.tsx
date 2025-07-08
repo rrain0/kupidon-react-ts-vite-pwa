@@ -1,28 +1,17 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
-import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import * as datefns from 'date-fns'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
 import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
-import { ChatMessagesApi } from 'src/api/requests/ChatMessagesApi.ts'
-import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
-import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
-import ChatMessage from 'src/ui/2-pages/Chat/parts/ChatMessage.tsx'
+import ChatInputDataHub from 'src/ui/2-pages/Chat/parts/ChatInputDataHub.tsx'
+import ChatMessagesDataHub from 'src/ui/2-pages/Chat/parts/ChatMessagesDataHub.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
@@ -30,12 +19,6 @@ import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import TopActionBar from 'src/ui/components/screen-bars/TopActionBar.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import Txt = EmotionCommon.Txt
-import PictureIc = SvgIconsPack.PictureIc
-import MicrophoneIc = SvgIconsPack.MicrophoneIc
-import EmojiLaughIc = SvgIconsPack.EmojiLaughIc
-import PuzzleIc = SvgIconsPack.PuzzleIc
-import PlaneSendIc = SvgIconsPack.PlaneSendIc
-import VideoCameraIc = SvgIconsPack.VideoCameraIc
 import Pu = TypeU.Pu
 
 
@@ -127,38 +110,6 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     window.scrollTo({ top: sh, behavior: 'instant' })
   })
   
-  const [text, setText] = useState('')
-  
-  const sendMsg = () => {
-    const msg = { content: { text } }
-    if (toChatId) {
-      ChatMessageApi.createMessageToChat(toChatId, msg)
-    }
-    else if (toUserId) {
-      ChatMessageApi.createMessageToUser(toUserId, msg)
-    }
-  }
-  
-  const [msgs, setMsgs] = useState<undefined | ChatMessageA[]>(undefined)
-  
-  
-  {
-    const {
-      startRequest,
-      isLoading, isFinished, isSuccess, isError,
-      data, error,
-    } = useApiRequest(() => ChatMessagesApi.messages({ toUserId, toChatId }))
-    
-    useEffect(() => {
-      startRequest()
-    }, [toUserId, toChatId])
-    
-    useEffect(() => {
-      if (isSuccess) {
-        setMsgs(data.messages)
-      }
-    }, [isSuccess])
-  }
   
   
   return (
@@ -197,131 +148,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
       <PageLayout col>
         <PageContentLayout colSm grow ptDefault={12}>
           
-          
-          <Flex col grow justifyEnd overflowAuto>
-            
-            {!msgs && <Flex aligned>Загрузка...</Flex>}
-            {msgs?.map((msg) => (
-              <ChatMessage
-                key={msg.id}
-                type={msg.fromUserId === userId ? 'my' : 'others'}
-                message={{ text: msg.content.text }}
-                time={datefns.format(msg.createdAt, 'HH:mm')}
-                //status={'read'}
-              />
-            ))}
-            
-            {/*
-            <ChatDate>{'Вчера'}</ChatDate>
-            
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Привет' }}
-              time={'15:48'}
-              status={'read'}
-            />
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Не против познакомиться?' }}
-              time={'15:48'}
-              status={'read'}
-            />
-            
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Привет)' }}
-              time={'15:48'}
-            />
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Совсем не против' }}
-              time={'15:48'}
-            />
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Может, расскажешь о себе?' }}
-              time={'15:48'}
-            />
-            
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Привет' }}
-              time={'15:48'}
-              status={'read'}
-            />
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Это будет довольно долгий разговор' }}
-              time={'15:48'}
-              status={'error'}
-            />
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Это будет довольно долгий разговор' }}
-              time={'15:48'}
-              status={'read'}
-            />
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Ведь рассказать много чего хочется)' }}
-              time={'15:48'}
-              status={'sending'}
-            />
-            
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Буду иметь ввиду:)' }}
-              time={'15:48'}
-            />
-            
-            <ChatDate>{'Сегодня'}</ChatDate>
-            
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Привет' }}
-              time={'15:48'}
-              status={'read'}
-            />
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Не против познакомиться?' }}
-              time={'15:48'}
-              status={'read'}
-            />
-            
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Привет)' }}
-              time={'15:48'}
-            />
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Совсем не против' }}
-              time={'15:48'}
-            />
-            <ChatMessage
-              type={'others'}
-              message={{ text: 'Может, расскажешь о себе?' }}
-              time={'15:48'}
-            />
-            
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Это будет довольно долгий разговор' }}
-              time={'15:48'}
-              status={'sent'}
-            />
-            <ChatMessage
-              type={'my'}
-              message={{ text: 'Ведь рассказать много чего хочется)' }}
-              time={'15:48'}
-              status={'sent'}
-            />
-             */}
-          </Flex>
-          
-          
-          
+          <ChatMessagesDataHub toUserId={toUserId} toChatId={toChatId}/>
           
         </PageContentLayout>
       </PageLayout>
@@ -330,33 +157,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
       
       
       <BottomFloatingBar h={116}>
-        <Flex col relative w='full'>
-          <Flex col stretched p={16} g={16} bg='white' rad={15}
-            absolute l={0} r={0} b={0}
-            css={t => ({ boxShadow: `${StyleVals.shadowSz} ${t.shadow.bg}` })}
-          >
-            
-            
-            <Textarea autoFocus hFitText
-              placeholder='Напишите сообщение...'
-              css={[TextareaStyle.inputTrans, { [TextareaStyle.El.frame]: commonStyle({ pv: 6 }) }]}
-              value={text}
-              onChange={ev => setText(ev.target.value)}
-            />
-            
-            <Flex row center g={10} justifySpaceBetween>
-              <PictureIc css={SvgIconS6.t(pictureIcS)}/>
-              <MicrophoneIc css={SvgIconS6.t(pictureIcS)}/>
-              <VideoCameraIc css={SvgIconS6.t(pictureIcS)}/>
-              <EmojiLaughIc css={SvgIconS6.t(pictureIcS)}/>
-              <PuzzleIc css={SvgIconS6.t(pictureIcS)}/>
-              <Button css={IconButtonS6.t(sendButtonS)} onClick={sendMsg}>
-                <PlaneSendIc/>
-              </Button>
-            </Flex>
-          
-          </Flex>
-        </Flex>
+        <ChatInputDataHub/>
       </BottomFloatingBar>
       
       
@@ -376,19 +177,3 @@ const ChatDate = styled(Flex)(flexStyle({
   color: '#858585',
 }))
 
-
-
-const pictureIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 23, w: 'auto', color: '#8B8B8B' },
-}]
-const planeSendIcS: AppWidgetStyle = t => [SvgIconS6.S.icon.icon.full.normal, {
-  // TODO Theme
-  icon: { h: 30, w: 'auto', color: '#F45378' },
-}]
-
-const sendButtonS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal, {
-  button: { m: -11, sz: 'auto' },
-  // TODO Theme
-  icon: { h: 30, w: 'auto', color: '#F45378' },
-}]

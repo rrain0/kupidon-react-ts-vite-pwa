@@ -16,7 +16,7 @@ import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import Calendar2GradIc = GradSvgIconsPack.Calendar2GradIc
 
 

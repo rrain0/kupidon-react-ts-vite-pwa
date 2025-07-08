@@ -21,7 +21,7 @@ import ChatsPageHeader from 'src/ui/2-pages/Chats/parts/ChatsPageHeader.tsx'
 import NewPairsList, {
   NewPairItem,
 } from 'src/ui/2-pages/Chats/parts/NewPairsList.tsx'
-import NewPairsListWithItems from 'src/ui/2-pages/Chats/parts/NewPairsListWithItems.tsx'
+import NewPairsDataHub from 'src/ui/2-pages/Chats/parts/NewPairsDataHub.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
@@ -58,7 +58,7 @@ const showFullProps = false as boolean
 
 // TODO Name -> firstName & lastName
 export const mockChatItems: (ChatListItemWidgetData & {
-  isMutualSympathy?: boolean | undefined
+  isNewPair?: boolean | undefined
   newPairCreatedAt?: string | undefined
 })[] = [
   {
@@ -66,7 +66,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     name: 'Лена',
     lastMsg: 'Буду иметь ввиду :)', isLastMsgMy: true, lastMsgStatus: 'sent' as const,
     lastMsgDate: date0sAgo, mute: true,
-    isMutualSympathy: true,
+    isNewPair: true,
     newPairCreatedAt: date12mAgo,
     ...showFullProps && { lastMsgStatus: 'sending' as const },
   },
@@ -97,7 +97,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     ...Env.isDev && { ava: banSmirks, name: 'Бан' },
     lastMsg: 'Последнее сообщение', isLastMsgMy: false, unreadCnt: 1,
     lastMsgDate: date3dAgo, online: true,
-    isMutualSympathy: true,
+    isNewPair: true,
     newPairCreatedAt: date1wAgo,
     ...showFullProps && { unreadCnt: 99 },
   },
@@ -107,7 +107,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     lastMsg: 'Последнее сообщение????????????????????????????????????????????????????',
     isLastMsgMy: false,
     lastMsgDate: date3wAgo, mute: true,
-    isMutualSympathy: true,
+    isNewPair: true,
     newPairCreatedAt: date12mAgo,
   }] || [],
   {
@@ -116,7 +116,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     ...Env.isDev && { ava: avaChan3, name: 'Эмбер' },
     lastMsg: 'Последнее сообщение',
     lastMsgDate: date1MAgo, online: true, mute: false,
-    isMutualSympathy: true,
+    isNewPair: true,
     newPairCreatedAt: date1MAgo,
   },
   {
@@ -125,7 +125,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     ...Env.isDev && { ava: avaChan1, name: 'Кира' },
     lastMsg: 'Хорошего вечера', isLastMsgMy: true, lastMsgStatus: 'read' as const,
     lastMsgDate: date1dAgo, online: true, mute: false, pinned: 0,
-    isMutualSympathy: true,
+    isNewPair: true,
     newPairCreatedAt: date3dAgo,
   },
   {
@@ -164,7 +164,7 @@ export const mockChatItems: (ChatListItemWidgetData & {
     ...Env.isDev && { ava: avaChan2, name: 'Виола' },
     lastMsg: 'Последнее сообщение', isLastMsgMy: false,
     lastMsgDate: date17hAgo, mute: false,
-    isMutualSympathy: true,
+    isNewPair: true,
     newPairCreatedAt: date57mAgo,
     ...showFullProps && { unreadCnt: 1555666 },
   },
@@ -318,11 +318,11 @@ const ChatsPage = React.memo(() => {
   //     })
   // }, [chatItems])
   
-  // const [newPairItems, setMutualSympathiesItems] = useState(chatItems)
+  // const [newPairItems, setNewPairItems] = useState(chatItems)
   //
-  // const preparedMutualSympathiesItems = useMemo(() => {
+  // const preparedNewPairItems = useMemo(() => {
   //   return newPairItems
-  //     .filter(it => it.isMutualSympathy)
+  //     .filter(it => it.isNewPair)
   //     .sort((a, b) => {
   //       return +new Date(b.newPairCreatedAt!) - +new Date(a.newPairCreatedAt!)
   //         || 0
@@ -409,7 +409,7 @@ const ChatsPage = React.memo(() => {
           
           <Gap h={24}/>
           
-          <NewPairsListWithItems/>
+          <NewPairsDataHub/>
           
           <Gap h={14}/>
           

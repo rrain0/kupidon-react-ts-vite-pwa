@@ -1,14 +1,13 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import { TypeU } from '@util/common/TypeU.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { IsWritingFiveDotsCssProps } from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import Pu = TypeU.Pu
 import VolumeIc = SvgIconsPack.VolumeIc
 import CrossBoldIc = SvgIconsPack.CrossBoldIc
 import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
@@ -20,14 +19,18 @@ import Txt = EmotionCommon.Txt
 
 
 
-
-
-export type ChatMessageExtraProps = Pu<{
+export type ChatMessageUi = {
+  id: string
   type: 'my' | 'others'
-  message: { text: string }
+  content: ChatMessageContentA
   time: string
   status?: 'sending' | 'sent' | 'read' | 'error' | undefined
-}>
+}
+
+
+export type ChatMessageExtraProps = {
+  msg: ChatMessageUi
+}
 
 export type ChatMessageProps =
   & Omit<React.ComponentProps<typeof Flex>, 'children'>
@@ -37,10 +40,12 @@ export type ChatMessageProps =
 
 const ChatMessage = React.memo((props: ChatMessageProps) => {
   const {
-    type = 'my',
-    message: { text } = { },
-    time,
-    status,
+    msg: {
+      type = 'my',
+      content: { text } = { },
+      time,
+      status,
+    },
     ...restProps
   } = props
   

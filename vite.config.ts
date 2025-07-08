@@ -85,9 +85,19 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     resolve: {
-      // tsconfig aliases does not apply to service worker, so I've added at least 'src'
+      // tsconfig aliases do not apply to service worker, so I've duplicated them here.
       alias: {
         'src': path.resolve(__dirname, './src'),
+        
+        '@util': path.resolve(__dirname, './src/util'),
+        '@mini-libs': path.resolve(__dirname, './src/mini-libs'),
+        
+        '@res': path.resolve(__dirname, './src/res'),
+        '@im': path.resolve(__dirname, './src/res/im'),
+        '@ic': path.resolve(__dirname, './src/res/ic'),
+        '@vid': path.resolve(__dirname, './src/res/vid'),
+        
+        '@animated': path.resolve(__dirname, './src/mini-libs/animated'),
       },
     },
     
