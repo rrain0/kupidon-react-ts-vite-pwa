@@ -21,11 +21,11 @@ import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import col = EmotionCommon.col
-import AddModuleIc = SvgIconsPack.AddModuleIc
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName,
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
+import AddModuleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/AddModuleIc.tsx'
 import LockIc = SvgIconsPack.LockIc
 import GearIc = SvgIconsPack.GearIc
 import RootRoute = AppRoutes.RootRoute

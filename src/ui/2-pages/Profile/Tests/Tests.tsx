@@ -251,10 +251,11 @@ const Tests = React.memo((props: TestsProps) => {
       
       <ModalDialog
         isOpen={resetMbtiTestDialog.isOpen}
+        type='danger'
         title={uiText.resetTestAndStartAgain}
         onModal={resetMbtiTestDialog.close}
         onBack={resetMbtiTestDialog.close}
-        onDangerYes={resetTestAndStartAgain}
+        onYes={resetTestAndStartAgain}
       />
       
       

@@ -15,7 +15,6 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
@@ -31,7 +30,7 @@ import flexC = EmotionCommon.flexC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import gridC = EmotionCommon.gridC
-import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
+import ArrowAngledRoundedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
 import toEmptyAttr = TypeU.toEmptyAttr
 import rf1 = MathU.rf1
 import resetH = EmotionCommon.resetH

@@ -59,10 +59,11 @@ const ClearSiteDialog = React.memo((props: ClearSiteDialogProps) => {
       
       <ModalDialog
         isOpen={isOpen}
+        type='danger'
         title={actionText.clearAppData + '?'}
         onModal={close}
         onBack={close}
-        onDangerYes={clear}
+        onYes={clear}
       />
       
       

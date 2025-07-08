@@ -33,7 +33,6 @@ type DialogButtonsProps = Pu<{
   onOk: Callback
   onAccept: Callback
   onYes: Callback
-  onDangerYes: Callback
   
   acceptVariant: 'text' | 'filledRounded'
   acceptSize: 'normal2' | 'big'
@@ -48,7 +47,6 @@ const DialogButtons = React.memo((props: DialogButtonsProps) => {
     onOk,
     onAccept,
     onYes,
-    onDangerYes,
     acceptVariant = 'text',
   } = props
   
@@ -56,6 +54,7 @@ const DialogButtons = React.memo((props: DialogButtonsProps) => {
   
   return (
     <DialogButtonsFrame
+      data-display-name='DialogButtons'
       style={{
         ...({
           center: { justifyContent: 'center' },
@@ -105,13 +104,6 @@ const DialogButtons = React.memo((props: DialogButtonsProps) => {
           {actionText.yes}
         </Button>
       )}
-      {onDangerYes && (
-        <Button css={ButtonS6.t(ButtonS6.S.text.rounded.md2.normal)}
-          onClick={() => onDangerYes()}
-        >
-          {actionText.yes}
-        </Button>
-      )}
       {onAccept && (
         <Button
           css={({
@@ -126,4 +118,5 @@ const DialogButtons = React.memo((props: DialogButtonsProps) => {
     </DialogButtonsFrame>
   )
 })
+DialogButtons.displayName = 'DialogButtons'
 export default DialogButtons

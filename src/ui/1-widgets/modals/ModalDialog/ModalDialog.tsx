@@ -21,6 +21,7 @@ import Pu = TypeU.Pu
 import rowC = EmotionCommon.rowC
 import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
 
 
 
@@ -40,6 +41,7 @@ export type DialogOnAccept = (
 
 export type ModalDialogProps = Pu<{
   isOpen: boolean
+  type: 'info' | 'danger'
   title: string | number
   checkboxes: DialogCheckProps[]
   
@@ -60,11 +62,15 @@ export type ModalDialogProps = Pu<{
 const ModalDialog = React.memo((props: ModalDialogProps) => {
   const {
     isOpen,
-    title, checkboxes = [],
+    type,
+    title,
+    checkboxes = [],
     onModal,
-    onClose, onBack,
+    onClose,
+    onBack,
     onCancel,
-    onOk: _onOk, onYes: _onYes, onDangerYes: _onDangerYes,
+    onOk: onAcceptOk,
+    onYes: onAcceptYes,
   } = props
   
   const defaultChecks = useMemo(() => {
@@ -81,18 +87,22 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
     defaultValues: defaultChecks, validators: [],
   })
   
-  const onOk = useAsCallback(() => _onOk?.({ checks }))
-  const onYes = useAsCallback(() => _onYes?.({ checks }))
-  const onDangerYes = useAsCallback(() => _onDangerYes?.({ checks }))
+  const onOk = useAsCallback(() => onAcceptOk?.({ checks }))
+  const onYes = useAsCallback(() => onAcceptYes?.({ checks }))
   
   if (isOpen) return (
     <Modal css={ModalElements.modalCenteredS} onClick={() => onModal?.()}>
-      <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}>
+      <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]} data-display-name='ModalDialog'>
         
         <DialogContent>
-          {_onDangerYes && (
+          {type === 'danger' && (
             <Flex center sz={50} noShrink>
               <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
+            </Flex>
+          )}
+          {type === 'info' && (
+            <Flex center sz={50} noShrink>
+              <InfoCircleOutlinedIc css={SvgIconS6.t(infoIcS)}/>
             </Flex>
           )}
           <TitleBox>
@@ -125,9 +135,8 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
           onClose={onClose}
           onBack={onBack}
           onCancel={onCancel}
-          onOk={_onOk && onOk}
-          onYes={_onYes && onYes}
-          onDangerYes={_onDangerYes && onDangerYes}
+          onOk={onAcceptOk && onOk}
+          onYes={onAcceptYes && onYes}
         />
         
       </Card>
@@ -135,12 +144,17 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
   )
   return undefined
 })
+ModalDialog.displayName = 'ModalDialog'
 export default ModalDialog
 
 
 const warnIcS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
   iconSz: 50,
   iconColor: t.toast.accentDanger,
+}]
+const infoIcS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
+  iconSz: 50,
+  iconColor: t.toast.accentInfo,
 }]
 
 const DialogContent = styled.div`

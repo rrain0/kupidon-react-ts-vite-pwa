@@ -157,7 +157,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
       
       
       <BottomFloatingBar h={116}>
-        <ChatInputDataHub/>
+        <ChatInputDataHub toUserId={toUserId} toChatId={toChatId}/>
       </BottomFloatingBar>
       
       

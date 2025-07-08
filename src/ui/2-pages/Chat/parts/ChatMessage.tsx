@@ -13,7 +13,7 @@ import CrossBoldIc = SvgIconsPack.CrossBoldIc
 import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
-import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
+import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
 import Txt = EmotionCommon.Txt
 
 
@@ -87,7 +87,7 @@ const ChatMessage = React.memo((props: ChatMessageProps) => {
             sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
             sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
             read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
-            error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
+            error && <InfoCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
             //durationText && <Status key='duration'>{durationText}</Status>,
             //mute && <VolumeMute key='mute'/>,
             //isdef(pinned) && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,

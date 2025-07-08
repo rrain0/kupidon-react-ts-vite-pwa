@@ -5,8 +5,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import ArrowReloadIc = SvgIconsPack.ArrowReloadIc
+import ArrowReloadIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowReloadIc.tsx'
 import rotateAnim = EmotionCommon.rotateAnim
 
 

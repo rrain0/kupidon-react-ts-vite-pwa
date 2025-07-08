@@ -3,8 +3,7 @@ import clsx from 'clsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import React from 'react'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import ArrowAngledRoundedIc = SvgIconsPack.ArrowAngledRoundedIc
+import ArrowAngledRoundedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
 import Pu = TypeU.Pu
 
 

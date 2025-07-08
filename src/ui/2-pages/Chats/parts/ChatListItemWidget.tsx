@@ -24,7 +24,7 @@ import VolumeIc = SvgIconsPack.VolumeIc
 import CrossBoldIc = SvgIconsPack.CrossBoldIc
 import PinIc = SvgIconsPack.PinIc
 import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
-import WarnCircleOutlinedIc = SvgIconsPack.WarnCircleOutlinedIc
+import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
 import CheckmarkIc = SvgIconsPack.CheckmarkIc
 import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
 import Pu = TypeU.Pu
@@ -107,7 +107,7 @@ export const ChatListItemWidget = React.memo((props: ChatListItemWidgetProps) =>
               sending && <SpinnerCircleQuarterBoldIc key='spinner' css={SvgIconS6.t(spinnerIcS)}/>,
               sent && <CheckmarkIc key='sent' css={SvgIconS6.t(checkmarkIcS)}/>,
               read && <CheckmarkDoubleIc key='read' css={SvgIconS6.t(checkmarkDoubleIcS)}/>,
-              error && <WarnCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
+              error && <InfoCircleOutlinedIc key='sending error' css={SvgIconS6.t(warnIcS)}/>,
               durationText && <StatusDivider key='duration'>{durationText}</StatusDivider>,
               mute && <VolumeMute key='mute'/>,
               isdef(pinned) && <PinIc key='pin' css={SvgIconS6.t(pinIcS)}/>,

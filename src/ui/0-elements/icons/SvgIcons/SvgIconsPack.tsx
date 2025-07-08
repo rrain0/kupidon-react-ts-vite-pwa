@@ -5,14 +5,6 @@ import { BaseSvgIcon, generateSvgIcon, SvgIconProps } from './SvgIcon'
 
 
 // UI icons
-import AddModuleSvg from '@ic/normal/ui/add-module.svg?react'
-import ArchiveBoxOutlinedSvg from '@ic/normal/ui/archive-box-outlined.svg?react'
-import ArrowAngledRoundedSvg from '@ic/normal/ui/arrow-angled-rounded.svg?react'
-import ArrowBackSvg from '@ic/normal/ui/arrow-back.svg?react'
-import ArrowLinesSharp1Svg from '@ic/normal/ui/arrow-lines-sharp-1.svg?react'
-import ArrowRefreshCwSvg from '@ic/normal/ui/arrow-refresh-cw.svg?react'
-import ArrowReloadSvg from '@ic/normal/ui/arrow-reload.svg?react'
-
 import CalendarSvg from '@ic/normal/ui/calendar.svg?react'
 import Calendar2Svg from '@ic/normal/ui/calendar-2.svg?react'
 import ChatRoundSvg from '@ic/normal/ui/chat-round.svg?react'
@@ -84,15 +76,12 @@ import VideoCameraSvg from '@ic/normal/ui/video-camera.svg?react'
 import VolumeSvg from '@ic/normal/ui/volume.svg?react'
 import VolumeMuteSvg from '@ic/normal/ui/volume-mute.svg?react'
 
-import WarnCircleOutlinedSvg from '@ic/normal/ui/warn-circle-outlined.svg?react'
+import WarnCircleOutlinedSvg from '@ic/normal/ui/info-circle-outlined.svg?react'
 import WarnTriangleToastifySvg from '@ic/normal/ui/warn-triangle-toastify.svg?react'
 import WarnTriangleOutlinedSvg from '@ic/normal/ui/warn-triangle-outlined.svg?react'
 
 
 // Special icons
-import BlacklistSvg from '@ic/normal/special/blacklist.svg?react'
-import BowArrowSvg from '@ic/normal/special/bow-arrow.svg?react'
-
 import CardsHeartSvg from '@ic/normal/special/cards-heart.svg?react'
 import CoffeeCupSvg from '@ic/normal/special/coffee-cup.svg?react'
 
@@ -140,15 +129,6 @@ import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 export namespace SvgIconsPack {
   
   // UI Icons
-  export const AddModuleIc = generateSvgIcon(AddModuleSvg)
-  export const ArchiveBoxOutlinedIc = generateSvgIcon(ArchiveBoxOutlinedSvg)
-  export const ArrowLinesSharp1Ic = generateSvgIcon(ArrowLinesSharp1Svg)
-  export const ArrowAngledRoundedIc = generateSvgIcon(ArrowAngledRoundedSvg)
-  export const ArrowBackIc = generateSvgIcon(ArrowBackSvg)
-  export const ArrowRefreshCwIc = generateSvgIcon(ArrowRefreshCwSvg)
-  export const ArrowReloadIc = generateSvgIcon(ArrowReloadSvg)
-  
-  
   export const CalendarIc = generateSvgIcon(CalendarSvg)
   export const Calendar2Ic = generateSvgIcon(Calendar2Svg)
   export const ChatRoundIc = generateSvgIcon(ChatRoundSvg)
@@ -261,7 +241,7 @@ export namespace SvgIconsPack {
   export const VolumeIc = generateSvgIcon(VolumeSvg)
   export const VolumeMuteIc = generateSvgIcon(VolumeMuteSvg)
   
-  export const WarnCircleOutlinedIc = generateSvgIcon(WarnCircleOutlinedSvg)
+  export const InfoCircleOutlinedIc = generateSvgIcon(WarnCircleOutlinedSvg)
   export const WarnTriangleToastifyIc = generateSvgIcon(WarnTriangleToastifySvg)
   export const WarnTriangleOutlinedIc = generateSvgIcon(WarnTriangleOutlinedSvg)
   
@@ -269,9 +249,6 @@ export namespace SvgIconsPack {
   
   
   // Special icons
-  export const BlacklistIc = generateSvgIcon(BlacklistSvg)
-  export const BowArrowIc = generateSvgIcon(BowArrowSvg)
-  
   export const CardsHeartIc = generateSvgIcon(CardsHeartSvg)
   export const CoffeeCupIc = generateSvgIcon(CoffeeCupSvg)
   

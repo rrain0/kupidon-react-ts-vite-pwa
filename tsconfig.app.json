@@ -46,9 +46,9 @@
       "src/*": ["src/*"],
       
       "@util/*": ["src/util/*"],
+      "@res/*": ["src/res/*"],
       "@mini-libs/*": ["src/mini-libs/*"],
       
-      "@res/*": ["src/res/*"],
       "@im/*": ["src/res/im/*"],
       "@ic/*": ["src/res/ic/*"],
       "@vid/*": ["src/res/vid/*"],

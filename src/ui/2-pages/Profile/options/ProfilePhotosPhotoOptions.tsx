@@ -3,10 +3,10 @@ import styled from '@emotion/styled'
 import {
   MediaInArrayDUC,
   newDefaultEmptyLocalMediaInArray,
-  newDefaultLocalMediaInArray,
 } from 'src/ui-data/models/media/Media.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import ArrowRefreshCwIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowRefreshCwIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -24,8 +24,6 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
 import Callback = TypeU.Callback
 import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
-import contents = EmotionCommon.contents
-import ArrowRefreshCwIc = SvgIconsPack.ArrowRefreshCwIc
 import DownloadIc = SvgIconsPack.DownloadIc
 import extensionFromMimeType = FileU.getExtensionFromMimeType
 import col = EmotionCommon.col

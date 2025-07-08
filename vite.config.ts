@@ -90,9 +90,9 @@ export default defineConfig(({ command, mode }) => {
         'src': path.resolve(__dirname, './src'),
         
         '@util': path.resolve(__dirname, './src/util'),
+        '@res': path.resolve(__dirname, './src/res'),
         '@mini-libs': path.resolve(__dirname, './src/mini-libs'),
         
-        '@res': path.resolve(__dirname, './src/res'),
         '@im': path.resolve(__dirname, './src/res/im'),
         '@ic': path.resolve(__dirname, './src/res/ic'),
         '@vid': path.resolve(__dirname, './src/res/vid'),

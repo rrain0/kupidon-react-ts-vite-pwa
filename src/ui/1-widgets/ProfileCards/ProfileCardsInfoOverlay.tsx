@@ -11,6 +11,10 @@ import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
+import ArrowAngledRounded2GradIc
+  from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ArrowAngledRounded2GradIc.tsx'
+import ArrowBackGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ArrowBackGradIc.tsx'
+import ArrowBackIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowBackIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
@@ -26,9 +30,6 @@ import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
 import HeartFilledIc = SvgIconsPack.HeartFilledIc
-import ArrowAngledRounded2GradIc = GradSvgIconsPack.ArrowAngledRounded2GradIc
-import Cross2GradIc = GradSvgIconsPack.Cross2GradIc
-import ArrowBackGradIc = GradSvgIconsPack.ArrowBackGradIc
 import Callback = TypeU.Callback
 import toEmptyAttr = TypeU.toEmptyAttr
 import absTlwh = EmotionCommon.absTlwh
@@ -36,7 +37,6 @@ import flexC = EmotionCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
 import full = EmotionCommon.full
 import CrossIc = SvgIconsPack.CrossIc
-import ArrowBackIc = SvgIconsPack.ArrowBackIc
 
 
 

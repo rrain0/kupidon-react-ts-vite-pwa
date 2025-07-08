@@ -8,6 +8,7 @@ import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import BowArrowGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/BowArrowGradIc.tsx'
 import AppNavLink from 'src/ui/components/app-router/NavLink.tsx'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
@@ -23,7 +24,6 @@ import QuickSettings, {
 import ProfileGradIc = GradSvgIconsPack.ProfileGradIc
 import ChatRoundGradIc = GradSvgIconsPack.ChatRoundGradIc
 import CardsHeartGradIc = GradSvgIconsPack.CardsHeartGradIc
-import BowArrowGradIc = GradSvgIconsPack.BowArrowGradIc
 import modalFloor500 = StyleVals.modalFloor500
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr

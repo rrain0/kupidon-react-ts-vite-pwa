@@ -3,10 +3,6 @@ import { generateGradSvgIcon } from './GradSvgIcon'
 
 
 // UI Icons
-import ArrowAngledRounded2GradSvg from '@ic/gradient/ui/arrow-angled-rounded-2-grad.svg?react'
-import ArrowBackGradSvg from '@ic/gradient/ui/arrow-back-grad.svg?react'
-import ArrowReload2GradSvg from '@ic/gradient/ui/arrow-reload-2-grad.svg?react'
-
 import Calendar2GradSvg from '@ic/gradient/ui/calendar-2-grad.svg?react'
 import ClockGradSvg from '@ic/gradient/ui/clock-grad.svg?react'
 import ChatRoundGradSvg from '@ic/gradient/ui/chat-round-grad.svg?react'
@@ -25,13 +21,6 @@ import SearchGradSvg from '@ic/gradient/ui/search-grad.svg?react'
 
 
 // Special Icons
-
-import BabyGradSvg from '@ic/gradient/special/baby-grad.svg?react'
-import BasketballGradSvg from '@ic/gradient/special/basketball-grad.svg?react'
-import BengalCatGradSvg from '@ic/gradient/special/bengal-cat-grad.svg?react'
-import BookGradSvg from '@ic/gradient/special/book-grad.svg?react'
-import BowArrowGradSvg from '@ic/gradient/special/bow-arrow-grad.svg?react'
-
 import CardsDollarGradSvg from '@ic/gradient/special/cards-dollar-grad.svg?react'
 import CardsHeartGradSvg from '@ic/gradient/special/cards-heart-grad.svg?react'
 import CommunicationTwoPeopleGradSvg from '@ic/gradient/special/communication-two-people-grad.svg?react'
@@ -70,11 +59,6 @@ export namespace GradSvgIconsPack {
   
   
   // UI Icons
-  
-  export const ArrowAngledRounded2GradIc = generateGradSvgIcon(ArrowAngledRounded2GradSvg)
-  export const ArrowBackGradIc = generateGradSvgIcon(ArrowBackGradSvg)
-  export const ArrowReload2GradIc = generateGradSvgIcon(ArrowReload2GradSvg)
-  
   export const Calendar2GradIc = generateGradSvgIcon(Calendar2GradSvg)
   export const ClockGradIc = generateGradSvgIcon(ClockGradSvg)
   export const ChatRoundGradIc = generateGradSvgIcon(ChatRoundGradSvg)
@@ -94,13 +78,6 @@ export namespace GradSvgIconsPack {
   
   
   // Special Icons
-  
-  export const BabyGradIc = generateGradSvgIcon(BabyGradSvg)
-  export const BasketballGradIc = generateGradSvgIcon(BasketballGradSvg)
-  export const BengalCatGradIc = generateGradSvgIcon(BengalCatGradSvg)
-  export const BookGradIc = generateGradSvgIcon(BookGradSvg)
-  export const BowArrowGradIc = generateGradSvgIcon(BowArrowGradSvg)
-  
   export const CardsDollarGradIc = generateGradSvgIcon(CardsDollarGradSvg)
   export const CardsHeartGradIc = generateGradSvgIcon(CardsHeartGradSvg)
   export const CommunicationTwoPeopleGradIc = generateGradSvgIcon(CommunicationTwoPeopleGradSvg)

@@ -256,8 +256,9 @@ const showTestNotification = async (data?: NotificationData) => {
       // ❌ Safari iOS: No support.
       // @ts-ignore
       timestamp: +new Date() + 2 * 60 * 1000,
-      // ℹ️??? Chrome Android: Notification can't be closed automatically.
-      // ❌??? Safari iOS: No support.
+      // Function: Notification can't be closed automatically.
+      // ❌??? Chrome Android: Notification was closed after night.
+      // ❌??? Safari iOS: Unknown.
       requireInteraction: true,
       // ✅ Chrome Android: true => no sound, no vibration
       // ✅??? Safari iOS: true => no vibration. sound???

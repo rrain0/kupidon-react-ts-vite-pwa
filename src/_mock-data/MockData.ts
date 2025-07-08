@@ -52,7 +52,6 @@ import portraitWomanPosingHouse from
 import portraitStylishBrunetteGirl from
     '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  portrait.webp'
 import { DateU } from '@util/date/DateU.ts'
-import { getAge } from '@util/ui/nameCommaAge.ts'
 import { OtherUserA } from 'src/model/api/UserA.ts'
 
 

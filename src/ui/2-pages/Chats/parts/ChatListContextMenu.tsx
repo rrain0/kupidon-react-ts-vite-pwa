@@ -8,6 +8,8 @@ import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import TextAlignCenter from 'src/ui/0-elements/basic-elements/TextAlignCenter.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import BlacklistIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/BlacklistIc.tsx'
+import ArchiveBoxOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArchiveBoxOutlinedIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
 import Pin2Ic = SvgIconsPack.Pin2Ic
@@ -15,8 +17,6 @@ import Unpin2Ic = SvgIconsPack.Unpin2Ic
 import SoundOnIc = SvgIconsPack.SoundOnIc
 import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
 import RestrictIc = SvgIconsPack.RestrictIc
-import ArchiveBoxOutlinedIc = SvgIconsPack.ArchiveBoxOutlinedIc
-import BlacklistIc = SvgIconsPack.BlacklistIc
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSelect.tsx'
@@ -285,13 +285,14 @@ const ChatListContextMenu = React.memo(({
         {/* TODO Translate */}
         <ModalDialog
           isOpen={isConfirmRemoveOpen}
+          type='danger'
           title={'Удалить выбранные чаты?'}
           checkboxes={[{
             fieldName: 'removeForAll', title: 'Удалить для всех', initialChecked: false,
           }]}
           onModal={closeConfirmRemove}
           onBack={closeConfirmRemove}
-          onDangerYes={({ checks: { removeForAll } }) => {
+          onYes={({ checks: { removeForAll } }) => {
             closeConfirmRemove()
             onRemove?.({ removeForAll })
           }}

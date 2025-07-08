@@ -24,12 +24,11 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AllThemes } from 'src/ui-data/theme/ThemeCollection.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import AddModuleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/AddModuleIc.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
-import AddModuleIc = SvgIconsPack.AddModuleIc
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
