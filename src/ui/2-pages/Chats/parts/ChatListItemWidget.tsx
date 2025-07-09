@@ -21,12 +21,12 @@ import Txt = EmotionCommon.Txt
 import max1Line = EmotionCommon.max1Line
 import max1LineBox = EmotionCommon.max1LineBox
 import VolumeIc = SvgIconsPack.VolumeIc
-import CrossBoldIc = SvgIconsPack.CrossBoldIc
+import CrossBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossBoldIc.tsx'
 import PinIc = SvgIconsPack.PinIc
 import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
 import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
-import CheckmarkIc = SvgIconsPack.CheckmarkIc
-import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
+import CheckmarkIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'
+import CheckmarkDoubleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkDoubleIc.tsx'
 import Pu = TypeU.Pu
 import isdef = TypeU.isdef
 

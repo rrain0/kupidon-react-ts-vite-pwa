@@ -9,6 +9,7 @@ export namespace TypeU {
   export type anyfun = (...args: any[]) => any
   export type falsy = false | undefined | null | '' | 0 | 0n
   export type Sign = -1 | 0 | 1
+  export type objectkey = string | number | symbol
   
   export const noop = () => { }
   export const emptyArr = []

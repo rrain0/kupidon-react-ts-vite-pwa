@@ -4,21 +4,9 @@ import React from 'react'
 import { BaseSvgIcon, generateSvgIcon, SvgIconProps } from './SvgIcon'
 
 
-// UI icons
-import CalendarSvg from '@ic/normal/ui/calendar.svg?react'
-import Calendar2Svg from '@ic/normal/ui/calendar-2.svg?react'
-import ChatRoundSvg from '@ic/normal/ui/chat-round.svg?react'
-import CheckmarkSvg from '@ic/normal/ui/checkmark.svg?react'
-import CheckmarkBoldSvg from '@ic/normal/ui/checkmark-bold.svg?react'
-import CheckmarkCircleToastifySvg from '@ic/normal/ui/checkmark-circle-toastify.svg?react'
-import CheckmarkDoubleSvg from '@ic/normal/ui/checkmark-double.svg?react'
-import ClearTrashSvg from '@ic/normal/ui/clear-trash.svg?react'
-import ClipSvg from '@ic/normal/ui/clip.svg?react'
-import CopySvg from '@ic/normal/ui/copy.svg?react'
-import CrossSvg from '@ic/normal/ui/cross.svg?react'
-import CrossBoldSvg from '@ic/normal/ui/cross-bold.svg?react'
-import CrossInCircleSvg from '@ic/normal/ui/cross-in-circle.svg?react'
+// TODO refactor - extract to folder as separate components
 
+// UI icons
 import DangerRoundToastifySvg from '@ic/normal/ui/danger-round-toastify.svg?react'
 import DaySvg from '@ic/normal/ui/day.svg?react'
 import DayNightSvg from '@ic/normal/ui/day-night.svg?react'
@@ -129,21 +117,6 @@ import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 export namespace SvgIconsPack {
   
   // UI Icons
-  export const CalendarIc = generateSvgIcon(CalendarSvg)
-  export const Calendar2Ic = generateSvgIcon(Calendar2Svg)
-  export const ChatRoundIc = generateSvgIcon(ChatRoundSvg)
-  export const CheckmarkIc = generateSvgIcon(CheckmarkSvg)
-  export const CheckmarkBoldIc = generateSvgIcon(CheckmarkBoldSvg)
-  export const CheckmarkCircleToastifyIc = generateSvgIcon(CheckmarkCircleToastifySvg)
-  export const CheckmarkDoubleIc = generateSvgIcon(CheckmarkDoubleSvg)
-  export const ClearTrashIc = generateSvgIcon(ClearTrashSvg)
-  export const ClipIc = generateSvgIcon(ClipSvg)
-  export const CopyIc = generateSvgIcon(CopySvg)
-  export const CrossIc = generateSvgIcon(CrossSvg)
-  export const CrossBoldIc = generateSvgIcon(CrossBoldSvg)
-  export const CrossInCircleIc = generateSvgIcon(CrossInCircleSvg)
-  
-  
   export const DangerRoundToastifyIc = generateSvgIcon(DangerRoundToastifySvg)
   export const DayIc = generateSvgIcon(DaySvg)
   export const DayNightIc = generateSvgIcon(DayNightSvg)

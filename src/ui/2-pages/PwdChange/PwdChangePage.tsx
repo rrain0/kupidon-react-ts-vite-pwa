@@ -166,7 +166,7 @@ const PwdChangePage = React.memo(() => {
                 <ItemTitleContainer>
                   <Hdrs.InputTitleBold>{titleText.currentPwd}</Hdrs.InputTitleBold>
                 </ItemTitleContainer>
-                <FormFieldWrap {...formFieldWrapProps} fieldName='currentPwd'>
+                <FormFieldWrap {...formFieldWrapProps} name='currentPwd'>
                   {props => (
                     <PwdInput
                       css={InputStyle.outlinedRectSmallNormal}
@@ -183,7 +183,7 @@ const PwdChangePage = React.memo(() => {
                 <ItemTitleContainer>
                   <Hdrs.InputTitleBold>{titleText.newPwd}</Hdrs.InputTitleBold>
                 </ItemTitleContainer>
-                <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
+                <FormFieldWrap {...formFieldWrapProps} name='pwd'>
                   {props => (
                     <PwdInput
                       css={InputStyle.outlinedRectSmallNormal}
@@ -200,7 +200,7 @@ const PwdChangePage = React.memo(() => {
                 <ItemTitleContainer>
                   <Hdrs.InputTitleBold>{titleText.repeatPwd}</Hdrs.InputTitleBold>
                 </ItemTitleContainer>
-                <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
+                <FormFieldWrap {...formFieldWrapProps} name='repeatPwd'>
                   {props => (
                     <PwdInput
                       css={InputStyle.outlinedRectSmallNormal}

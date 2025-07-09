@@ -6,13 +6,13 @@ import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { IsWritingFiveDotsCssProps } from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
+import CheckmarkDoubleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkDoubleIc.tsx'
+import CheckmarkIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'
+import CrossBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossBoldIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import VolumeIc = SvgIconsPack.VolumeIc
-import CrossBoldIc = SvgIconsPack.CrossBoldIc
 import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
-import CheckmarkIc = SvgIconsPack.CheckmarkIc
-import CheckmarkDoubleIc = SvgIconsPack.CheckmarkDoubleIc
 import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
 import Txt = EmotionCommon.Txt
 

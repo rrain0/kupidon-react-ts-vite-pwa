@@ -1,4 +1,3 @@
-import { SwChannel } from '@util/service-worker/SwChannel.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
@@ -12,104 +11,15 @@ import PlusIc = SvgIconsPack.PlusIc
 
 
 
-const expandingTime = 300
-const collapsingTime = 300
 const sz = 42
 const g = 8
 
 const ChatListActionBar = React.memo(() => {
   
-  type State = 'collapsed' | 'collapsing' | 'expanded' | 'expanding'
-  const [state, setState] = useState<{ v: State }>({ v: 'collapsed' })
-  
-  const [getActionBarEl, setActionBarEl] = useElemRefGetSet()
-  const [getPlusBoxEl, setPlusBoxEl] = useElemRefGetSet()
-  const [getInputBoxEl, setInputBoxEl] = useElemRefGetSet()
-  
-  useEffect(() => {
-    let stale = false
-    const actionBar = getActionBarEl()
-    const inputBox = getInputBoxEl()
-    const plusBox = getPlusBoxEl()
-    if (actionBar && inputBox && plusBox) {
-      if (state.v === 'expanding') {
-        const time = expandingTime
-        //inputBox.style.display = 'flex'
-        requestAnimationFrame(() => {
-          actionBar.style.transition = `width ${time}ms linear`
-          actionBar.style.width = '100%'
-          // inputBox.style.display = 'flex'
-          // inputBox.style.transition = `width ${time}ms linear, padding-right ${time}ms linear`
-          // inputBox.style.width = '150px'
-          // inputBox.style.paddingRight = `${g}px`
-          plusBox.style.transition = `width ${time}ms linear, padding-left ${time}ms linear`
-          plusBox.style.display = 'flex'
-          plusBox.style.width = '0'
-          plusBox.style.paddingLeft = '0'
-        })
-        plusBox.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
-          plusBox.ontransitionend = null
-          setState(curr => curr === state ? { v: 'expanded' } : curr)
-        })
-      }
-      else if (state.v === 'expanded') {
-        actionBar.style.transition = 'none'
-        actionBar.style.width = '100%'
-        // inputBox.style.display = 'flex'
-        // inputBox.style.transition = 'none'
-        // inputBox.style.width = '150px'
-        // inputBox.style.paddingRight = `${g}px`
-        plusBox.style.display = 'none'
-        plusBox.style.transition = 'none'
-        plusBox.style.width = '0'
-        plusBox.style.paddingLeft = '0'
-        plusBox.ontransitionend = null
-      }
-      else if (state.v === 'collapsing') {
-        const time = collapsingTime
-        plusBox.style.display = 'flex'
-        requestAnimationFrame(() => {
-          if (stale) return
-          actionBar.style.transition = `width ${time}ms linear`
-          actionBar.style.width = `${sz + g + sz}px`
-          // inputBox.style.display = 'flex'
-          // inputBox.style.transition = `width ${time}ms linear, padding-right ${time}ms linear`
-          // inputBox.style.width = '0'
-          // inputBox.style.paddingRight = '0'
-          plusBox.style.display = 'flex'
-          plusBox.style.transition = `width ${time}ms linear, padding-left ${time}ms linear`
-          plusBox.style.width = `${sz}px`
-          plusBox.style.paddingLeft = `${g}px`
-          plusBox.ontransitionend = ev => requestAnimationFrame(() => {
-            if (stale) return
-            plusBox.ontransitionend = null
-            setState(curr => curr === state ? { v: 'collapsed' } : curr)
-          })
-        })
-      }
-      else if (state.v === 'collapsed') {
-        actionBar.style.transition = 'none'
-        actionBar.style.width = `${sz + g + sz}px`
-        // inputBox.style.display = 'none'
-        // inputBox.style.transition = 'none'
-        // inputBox.style.width = '0'
-        // inputBox.style.paddingRight = '0'
-        plusBox.style.display = 'flex'
-        plusBox.style.transition = 'none'
-        plusBox.style.width = `${sz}px`
-        plusBox.style.paddingLeft = `${g}px`
-        plusBox.ontransitionend = null
-      }
-    }
-    return () => { stale = true }
-  }, [state])
-  
-  const onSearchClick = () => {
-    if (state.v === 'expanded' || state.v === 'expanding') setState({ v: 'collapsing' })
-    if (state.v === 'collapsed' || state.v === 'collapsing') setState({ v: 'expanding' })
-  }
-  
+  const {
+    onClick: onSearchClick,
+    setActionBarEl, setPlusBoxEl, setInputBoxEl,
+  } = useExpandCollapseAnimation()
   
   return (
     <Flex row h={50} p={4} stretchEnd
@@ -176,3 +86,102 @@ const actionButtonS: AppWidgetStyle = t => [
     icon: { color: t.boxAccentCt4.ct },
   },
 ]
+
+
+const useExpandCollapseAnimation = () => {
+  const [getActionBarEl, setActionBarEl] = useElemRefGetSet()
+  const [getPlusBoxEl, setPlusBoxEl] = useElemRefGetSet()
+  const [getInputBoxEl, setInputBoxEl] = useElemRefGetSet()
+  
+  type State = 'collapsed' | 'collapsing' | 'expanded' | 'expanding'
+  const [state, setState] = useState<{ v: State }>({ v: 'collapsed' })
+  
+  const expandTime = 300
+  const collapseTime = 300
+  
+  useEffect(() => {
+    let stale = false
+    const actionBar = getActionBarEl()
+    const inputBox = getInputBoxEl()
+    const plusBox = getPlusBoxEl()
+    if (actionBar && inputBox && plusBox) {
+      if (state.v === 'expanding') {
+        const time = expandTime
+        //inputBox.style.display = 'flex'
+        requestAnimationFrame(() => {
+          actionBar.style.transition = `width ${time}ms linear`
+          actionBar.style.width = '100%'
+          // inputBox.style.display = 'flex'
+          // inputBox.style.transition = `width ${time}ms linear, padding-right ${time}ms linear`
+          // inputBox.style.width = '150px'
+          // inputBox.style.paddingRight = `${g}px`
+          plusBox.style.transition = `width ${time}ms linear, padding-left ${time}ms linear`
+          plusBox.style.display = 'flex'
+          plusBox.style.width = '0'
+          plusBox.style.paddingLeft = '0'
+        })
+        plusBox.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          plusBox.ontransitionend = null
+          setState(curr => curr === state ? { v: 'expanded' } : curr)
+        })
+      }
+      else if (state.v === 'expanded') {
+        actionBar.style.transition = 'none'
+        actionBar.style.width = '100%'
+        // inputBox.style.display = 'flex'
+        // inputBox.style.transition = 'none'
+        // inputBox.style.width = '150px'
+        // inputBox.style.paddingRight = `${g}px`
+        plusBox.style.display = 'none'
+        plusBox.style.transition = 'none'
+        plusBox.style.width = '0'
+        plusBox.style.paddingLeft = '0'
+        plusBox.ontransitionend = null
+      }
+      else if (state.v === 'collapsing') {
+        const time = collapseTime
+        plusBox.style.display = 'flex'
+        requestAnimationFrame(() => {
+          if (stale) return
+          actionBar.style.transition = `width ${time}ms linear`
+          actionBar.style.width = `${sz + g + sz}px`
+          // inputBox.style.display = 'flex'
+          // inputBox.style.transition = `width ${time}ms linear, padding-right ${time}ms linear`
+          // inputBox.style.width = '0'
+          // inputBox.style.paddingRight = '0'
+          plusBox.style.display = 'flex'
+          plusBox.style.transition = `width ${time}ms linear, padding-left ${time}ms linear`
+          plusBox.style.width = `${sz}px`
+          plusBox.style.paddingLeft = `${g}px`
+          plusBox.ontransitionend = ev => requestAnimationFrame(() => {
+            if (stale) return
+            plusBox.ontransitionend = null
+            setState(curr => curr === state ? { v: 'collapsed' } : curr)
+          })
+        })
+      }
+      else if (state.v === 'collapsed') {
+        actionBar.style.transition = 'none'
+        actionBar.style.width = `${sz + g + sz}px`
+        // inputBox.style.display = 'none'
+        // inputBox.style.transition = 'none'
+        // inputBox.style.width = '0'
+        // inputBox.style.paddingRight = '0'
+        plusBox.style.display = 'flex'
+        plusBox.style.transition = 'none'
+        plusBox.style.width = `${sz}px`
+        plusBox.style.paddingLeft = `${g}px`
+        plusBox.ontransitionend = null
+      }
+    }
+    return () => { stale = true }
+  }, [state])
+  
+  const onClick = () => {
+    if (state.v === 'expanded' || state.v === 'expanding') setState({ v: 'collapsing' })
+    if (state.v === 'collapsed' || state.v === 'collapsing') setState({ v: 'expanding' })
+  }
+  
+  return { onClick, setActionBarEl, setPlusBoxEl, setInputBoxEl }
+}

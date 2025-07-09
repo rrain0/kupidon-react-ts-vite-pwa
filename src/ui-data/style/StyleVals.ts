@@ -28,6 +28,10 @@ export namespace StyleVals {
   export const modalFloor10k = 10000
   
   
+  export const fadeInTime = 150
+  export const fadeOutTime = 150
+  
+  
   // Easings https://easings.net/
   // От меньшего наклона к большему: sine, quad, circ, cubic, quart, quint, expo, back
   export const easeOutSine = 'cubic-bezier(0.39, 0.575, 0.565, 1)'

@@ -46,7 +46,7 @@ export type FormFieldWrapProps<
   Vs extends Values, F extends keyof Vs
 > = {
   values: Vs
-  fieldName: F
+  name: F
   errors: Failures<Vs>
   setErrors: SetterOrUpdater<Failures<Vs>>
   setValues: SetterOrUpdater<Vs>
@@ -59,7 +59,7 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
   props: FormFieldWrapProps<Vs, F>
 ) => {
   const {
-    fieldName,
+    name,
     values,
     errors,
     setErrors,
@@ -68,7 +68,7 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
   } = props
   
   
-  const value = values[fieldName]
+  const value = values[name]
   
   
   const [highlight, setHighlight] = useState(false)
@@ -77,9 +77,9 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
     const stale = { v: false }
     
     const fs = errors
-      .filter(f => f.highlight && f.errorFields.includes(fieldName))
+      .filter(f => f.highlight && f.errorFields.includes(name))
       .filter(f => {
-        const usedIdx = f.usedFields.findIndex(f => f === fieldName)
+        const usedIdx = f.usedFields.findIndex(f => f === name)
         if (usedIdx>=0) return f.usedValues[usedIdx] === value
         const fromServerIdx = f.usedFields.findIndex(f => f === 'fromServer')
         if (fromServerIdx>=0) {
@@ -93,13 +93,13 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
     awaitDelay(fs, stale, () => setHighlight(true))
     
     return () => { stale.v = true }
-  }, [errors, fieldName, value, values])
+  }, [errors, name, value, values])
   
   
   const [getSetValue] = useAsRefGet((value: ValueOrUpdater<Vs[F]>) => {
     setErrors(f => {
       const update = f.filter(f => (f.notify || f.highlight)
-        && f.errorFields.includes(fieldName)
+        && f.errorFields.includes(name)
       )
       if (update.length>0)
         return updateFailures(
@@ -111,12 +111,12 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
     })
     setValues(s => {
       const newFieldValue = function() {
-        if (value instanceof Function) return value(s[fieldName])
+        if (value instanceof Function) return value(s[name])
         return value
       }()
       return {
         ...s,
-        [fieldName]: newFieldValue,
+        [name]: newFieldValue,
       }
     })
   })
@@ -134,7 +134,7 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
   )
   const [getOnBlur] = useAsRefGet(() => {
     const failsToUpdate = errors.filter(f =>
-      f.errorFields.includes(fieldName)
+      f.errorFields.includes(name)
       && f.highlight
       && f.isDelayed
     )

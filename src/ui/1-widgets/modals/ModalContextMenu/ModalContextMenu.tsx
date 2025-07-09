@@ -1,4 +1,4 @@
-import { css, Global } from '@emotion/react'
+import { Global } from '@emotion/react'
 import { ReactU } from '@util/react/ReactU.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
@@ -69,11 +69,30 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
     isOpen, allowUnmount,
   } = props
   
+  const { initialStyle, setEl } = useEnterExitAnimation(isOpen, allowUnmount)
   
-  const [getCardEl, setCardEl] = useElemRefGetSet()
+  return (
+    <Card relative b={b} ph={8}
+      style={initialStyle}
+      css={ModalElements.cardBoxInModalS}
+      data-display-name='ContextMenu'
+      ref={setEl}
+    >
+      {children}
+    </Card>
+  )
+})
+ContextMenu.displayName = 'ContextMenu'
+
+
+
+
+const useEnterExitAnimation = (isOpen: boolean, allowUnmount: Callback) => {
+  const [getEl, setEl] = useElemRefGetSet()
   
   type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
   const [state, setState] = useState<{ v: State }>({ v: undefined })
+  
   // useEffect сработает уже после монтирования элемента и получения рефа
   useEffect(() => {
     if (isOpen) setState({ v: 'appearing' })
@@ -89,7 +108,7 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
     const disappearTime = 150
     
     let stale = false
-    const el = getCardEl()
+    const el = getEl()
     if (el) {
       if (state.v === 'appearing') {
         const time = appearTime
@@ -126,16 +145,5 @@ const ContextMenu = React.memo((props: ContextMenuProps) => {
     return () => { stale = true }
   }, [state])
   
-  return (
-    <Card relative b={b} ph={8}
-      style={initialStyle}
-      css={ModalElements.cardBoxInModalS}
-      data-display-name='ContextMenu'
-      ref={setCardEl}
-    >
-      {children}
-    </Card>
-  )
-})
-ContextMenu.displayName = 'ContextMenu'
-
+  return { initialStyle, setEl }
+}

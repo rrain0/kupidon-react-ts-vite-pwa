@@ -1,12 +1,11 @@
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import CheckmarkBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkBoldIc.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 

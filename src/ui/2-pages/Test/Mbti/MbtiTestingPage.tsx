@@ -37,6 +37,7 @@ import resetH = EmotionCommon.resetH
 import isdef = TypeU.isdef
 import isnull = TypeU.isnull
 import isundef = TypeU.isundef
+import Setter = TypeU.Setter
 
 
 
@@ -183,12 +184,12 @@ const MbtiTestingPage = React.memo(() => {
     return RangeU.loop(since, [0, totalCnt])
   }
   
-  type Transition = undefined | 'fwd' | 'back'
-  const [transition, setTransition] = useState<{ v: Transition }>({ v: undefined })
   const [curr, setCurr] = useState(() => getNext(
     answers, testState === 'completed' ? totalCnt - 1 : 0
   ))
   const [displayed, setDisplayed] = useState(curr)
+  
+  const { setTransition, setElem: setQuestionTitle } = useShiftAnimation(curr, setDisplayed)
   
   const setNext = (next: number) => {
     if (next > curr) {
@@ -228,46 +229,6 @@ const MbtiTestingPage = React.memo(() => {
     newAnswers[curr] = 1
     next(newAnswers)
   }
-  
-  
-  const [getQuestionTitle, , questionTitleRef] = useElemRefGetSet()
-  
-  useEffect(() => {
-    const el = getQuestionTitle()
-    let stale = false
-    if (el && transition.v) {
-      const isFwd = transition.v === 'fwd'
-      const time = transitionTime
-      el.style.transition = 'none'
-      el.style.transform = 'translateX(0)'
-      el.style.opacity = '1'
-      requestAnimationFrame(() => {
-        if (stale) return
-        el.style.transition = `transform ${time}ms ease-out, opacity ${time}ms ease-out`
-        el.style.transform = `translateX(${isFwd ? '-' : ''}100px)`
-        el.style.opacity = '0'
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
-          el.ontransitionend = null
-          setDisplayed(curr)
-          el.style.transition = 'none'
-          el.style.transform = `translateX(${isFwd ? '' : '-'}100px)`
-          el.style.opacity = '0'
-          requestAnimationFrame(() => {
-            if (stale) return
-            el.style.transition = `transform ${time}ms ease-in, opacity ${time}ms ease-in`
-            el.style.transform = 'translateX(0)'
-            el.style.opacity = '1'
-            setTransition(curr => curr === transition ? { v: undefined } : curr)
-          })
-        })
-      })
-    }
-    return () => {
-      stale = true
-      setDisplayed(curr)
-    }
-  }, [transition])
   
   
   
@@ -329,7 +290,7 @@ const MbtiTestingPage = React.memo(() => {
                 />
                 
                 <QuestionTitleBox>
-                  <QuestionTitle ref={questionTitleRef}>
+                  <QuestionTitle ref={setQuestionTitle}>
                     {uiText.questions[displayed].q}
                   </QuestionTitle>
                 </QuestionTitleBox>
@@ -489,6 +450,55 @@ const answerBS: AppWidgetStyle = [ButtonS6.S.filled.rect.lg.main, {
 }]
 
 
+
+
+
+const useShiftAnimation = (curr: number, setDisplayed: Setter<number>) => {
+  const [getElem, setElem] = useElemRefGetSet()
+  
+  type Transition = undefined | 'fwd' | 'back'
+  const [transition, setTransition] = useState<{ v: Transition }>({ v: undefined })
+  
+  
+  useEffect(() => {
+    const el = getElem()
+    let stale = false
+    if (el && transition.v) {
+      const isFwd = transition.v === 'fwd'
+      const time = transitionTime
+      el.style.transition = 'none'
+      el.style.transform = 'translateX(0)'
+      el.style.opacity = '1'
+      requestAnimationFrame(() => {
+        if (stale) return
+        el.style.transition = `transform ${time}ms ease-out, opacity ${time}ms ease-out`
+        el.style.transform = `translateX(${isFwd ? '-' : ''}100px)`
+        el.style.opacity = '0'
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          el.ontransitionend = null
+          setDisplayed(curr)
+          el.style.transition = 'none'
+          el.style.transform = `translateX(${isFwd ? '' : '-'}100px)`
+          el.style.opacity = '0'
+          requestAnimationFrame(() => {
+            if (stale) return
+            el.style.transition = `transform ${time}ms ease-in, opacity ${time}ms ease-in`
+            el.style.transform = 'translateX(0)'
+            el.style.opacity = '1'
+            setTransition(curr => curr === transition ? { v: undefined } : curr)
+          })
+        })
+      })
+    }
+    return () => {
+      stale = true
+      setDisplayed(curr)
+    }
+  }, [transition])
+  
+  return { setTransition, setElem }
+}
 
 
 

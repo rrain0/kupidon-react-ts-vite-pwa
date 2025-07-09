@@ -197,7 +197,7 @@ const SignupPage = React.memo(() => {
               
               
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='email'>
+              <FormFieldWrap {...formFieldWrapProps} name='email'>
                 {props => (
                   <Input
                     css={InputStyle.outlinedRectNormalNormal}
@@ -208,7 +208,7 @@ const SignupPage = React.memo(() => {
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
+              <FormFieldWrap {...formFieldWrapProps} name='pwd'>
                 {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectNormalNormal}
@@ -219,7 +219,7 @@ const SignupPage = React.memo(() => {
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='repeatPwd'>
+              <FormFieldWrap {...formFieldWrapProps} name='repeatPwd'>
                 {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectNormalNormal}
@@ -230,7 +230,7 @@ const SignupPage = React.memo(() => {
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='name'>
+              <FormFieldWrap {...formFieldWrapProps} name='name'>
                 {props => (
                   <Input
                     css={InputStyle.outlinedRectNormalNormal}
@@ -241,7 +241,7 @@ const SignupPage = React.memo(() => {
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='birthDate'>
+              <FormFieldWrap {...formFieldWrapProps} name='birthDate'>
                 {props => (
                   <Input
                     css={InputStyle.outlinedRectNormalNormal}
@@ -253,7 +253,7 @@ const SignupPage = React.memo(() => {
               </FormFieldWrap>
               
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='gender'>
+              <FormFieldWrap {...formFieldWrapProps} name='gender'>
                 {props => (
                   <RadioInputGroup css={RadioInputGroupStyle.rowGroup}
                     hasError={props.highlight}

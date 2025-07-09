@@ -3,14 +3,15 @@ import styled from '@emotion/styled'
 import { TypeU } from '@util/common/TypeU.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import CheckmarkCircleToastifyIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkCircleToastifyIc.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SpinnerCircleQuarterIc = SvgIconsPack.SpinnerCircleQuarterIc
 import InfoToastifyIc = SvgIconsPack.InfoToastifyIc
-import CheckmarkCircleToastifyIc = SvgIconsPack.CheckmarkCircleToastifyIc
 import WarnTriangleToastifyIc = SvgIconsPack.WarnTriangleToastifyIc
 import DangerRoundToastifyIc = SvgIconsPack.DangerRoundToastifyIc
-import CrossIc = SvgIconsPack.CrossIc
+import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import row = EmotionCommon.row
 import resetButton = EmotionCommon.resetButton
 import flexC = EmotionCommon.flexC

@@ -23,7 +23,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
 import Callback = TypeU.Callback
-import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
+import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import DownloadIc = SvgIconsPack.DownloadIc
 import extensionFromMimeType = FileU.getExtensionFromMimeType
 import col = EmotionCommon.col

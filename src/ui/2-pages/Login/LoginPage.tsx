@@ -163,7 +163,7 @@ const LoginPage = React.memo(() => {
               </Grid>
               
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='login'>
+              <FormFieldWrap {...formFieldWrapProps} name='login'>
                 {props => (
                   <Input
                     css={InputStyle.outlinedRectNormalNormal}
@@ -174,7 +174,7 @@ const LoginPage = React.memo(() => {
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap {...formFieldWrapProps} fieldName='pwd'>
+              <FormFieldWrap {...formFieldWrapProps} name='pwd'>
                 {props => (
                   <PwdInput
                     css={InputStyle.outlinedRectNormalNormal}

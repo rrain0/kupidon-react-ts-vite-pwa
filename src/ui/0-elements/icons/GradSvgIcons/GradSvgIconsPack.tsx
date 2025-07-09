@@ -1,6 +1,7 @@
 import { generateGradSvgIcon } from './GradSvgIcon'
 
 
+// TODO refactor - extract to folder as separate components
 
 // UI Icons
 import Calendar2GradSvg from '@ic/gradient/ui/calendar-2-grad.svg?react'

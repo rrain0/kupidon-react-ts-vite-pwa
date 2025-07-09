@@ -10,12 +10,12 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BlacklistIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/BlacklistIc.tsx'
 import ArchiveBoxOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArchiveBoxOutlinedIc.tsx'
+import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
 import Pin2Ic = SvgIconsPack.Pin2Ic
 import Unpin2Ic = SvgIconsPack.Unpin2Ic
 import SoundOnIc = SvgIconsPack.SoundOnIc
-import CrossInCircleIc = SvgIconsPack.CrossInCircleIc
 import RestrictIc = SvgIconsPack.RestrictIc
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
@@ -23,7 +23,7 @@ import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSe
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback
-import CrossIc = SvgIconsPack.CrossIc
+import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import SoundOffIc = SvgIconsPack.SoundOffIc
 
 
@@ -288,7 +288,7 @@ const ChatListContextMenu = React.memo(({
           type='danger'
           title={'Удалить выбранные чаты?'}
           checkboxes={[{
-            fieldName: 'removeForAll', title: 'Удалить для всех', initialChecked: false,
+            name: 'removeForAll', title: 'Удалить для всех', initialChecked: false,
           }]}
           onModal={closeConfirmRemove}
           onBack={closeConfirmRemove}

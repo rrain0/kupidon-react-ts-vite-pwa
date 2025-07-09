@@ -1,8 +1,11 @@
 import styled from '@emotion/styled'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
+import { ReactU } from '@util/react/ReactU.ts'
+import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
@@ -11,9 +14,11 @@ import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
+import DimmedBg from 'src/ui/1-widgets/DimmedBg.tsx'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
+import MountController, { MountControllerRenderProps } from 'src/ui/components/MountController.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
 import Modal from 'src/ui/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
@@ -22,50 +27,77 @@ import rowC = EmotionCommon.rowC
 import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
+import StyleProp = ReactU.StyleProp
 
 
 
-export type DialogCheckProps = {
-  fieldName: string
+
+export type ModalDialogProps<T extends string> = Pu<{
+  isOpen: boolean
+  onModal: Callback
+}> & DialogViewProps<T>
+
+const ModalDialog = ReactU.memo(<T extends string>(props: ModalDialogProps<T>) => {
+  const {
+    isOpen,
+    onModal,
+  } = props
+  
+  return (
+    <MountController isOpen={isOpen}>
+      {mountProps => (
+        <Modal noDim onClick={() => onModal?.()}>
+          <DimmedBg css={ModalElements.modalCenteredS} {...mountProps}>
+            <Dialog {...props} {...mountProps}/>
+          </DimmedBg>
+        </Modal>
+      )}
+    </MountController>
+  )
+})
+// @ts-expect-error
+ModalDialog.displayName = 'ModalDialog'
+export default ModalDialog
+
+
+
+
+
+
+
+export type DialogCheckProps<T extends string> = {
+  name: T
   title?: string | number | undefined
   initialChecked?: boolean | undefined
 }
 
-
-
-export type DialogOnAccept = (
-  (params: { checks: Record<string, boolean> }) => void
+export type DialogOnAccept<T extends string> = (
+  (params: { checks: Record<T, boolean> }) => void
 )
 
-
-
-export type ModalDialogProps = Pu<{
-  isOpen: boolean
+export type DialogViewProps<T extends string> = Pu<{
   type: 'info' | 'danger'
   title: string | number
-  checkboxes: DialogCheckProps[]
-  
-  onModal: Callback
+  checkboxes: DialogCheckProps<T>[]
   
   onClose: Callback
   onBack: Callback
   
   onCancel: Callback
   
-  onOk: DialogOnAccept
-  onYes: DialogOnAccept
-  onDangerYes: DialogOnAccept
+  onOk: DialogOnAccept<T>
+  onYes: DialogOnAccept<T>
+  onDangerYes: DialogOnAccept<T>
 }>
 
+export type DialogProps<T extends string> = DialogViewProps<T> & MountControllerRenderProps
 
-
-const ModalDialog = React.memo((props: ModalDialogProps) => {
+const Dialog = ReactU.memo(<T extends string>(props: DialogProps<T>) => {
   const {
-    isOpen,
+    isOpen, allowUnmount,
     type,
     title,
     checkboxes = [],
-    onModal,
     onClose,
     onBack,
     onCancel,
@@ -73,11 +105,15 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
     onYes: onAcceptYes,
   } = props
   
+  const onOk = useAsCallback(() => onAcceptOk?.({ checks }))
+  const onYes = useAsCallback(() => onAcceptYes?.({ checks }))
+  
+  
   const defaultChecks = useMemo(() => {
     return checkboxes.reduce((acc, curr) => {
-      acc[curr.fieldName] = !!curr.initialChecked
+      acc[curr.name] = !!curr.initialChecked
       return acc
-    }, { } as Record<string, boolean>)
+    }, { } as Record<T, boolean>)
   }, [])
   
   const {
@@ -87,65 +123,68 @@ const ModalDialog = React.memo((props: ModalDialogProps) => {
     defaultValues: defaultChecks, validators: [],
   })
   
-  const onOk = useAsCallback(() => onAcceptOk?.({ checks }))
-  const onYes = useAsCallback(() => onAcceptYes?.({ checks }))
   
-  if (isOpen) return (
-    <Modal css={ModalElements.modalCenteredS} onClick={() => onModal?.()}>
-      <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]} data-display-name='ModalDialog'>
-        
-        <DialogContent>
-          {type === 'danger' && (
-            <Flex center sz={50} noShrink>
-              <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
-            </Flex>
-          )}
-          {type === 'info' && (
-            <Flex center sz={50} noShrink>
-              <InfoCircleOutlinedIc css={SvgIconS6.t(infoIcS)}/>
-            </Flex>
-          )}
-          <TitleBox>
-            <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
-          </TitleBox>
-        </DialogContent>
-        
-        {!!checkboxes.length && (
-          <Flex col>
-            {checkboxes.map(({ title, fieldName }) => (
-              <FormFieldWrap {...formFieldWrapProps} fieldName={fieldName} key={fieldName}>
-                {props => (
-                  <Flex as='label' w='ct' row align g={8}>
-                    <Flex mv={-14}>
-                      <CheckboxInput
-                        css={CheckboxInputStyle.roundNormalNormal}
-                        {...props.radioInputProps}
-                      />
-                    </Flex>
-                    <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
-                  </Flex>
-                )}
-              </FormFieldWrap>
-            ))}
+  const { initialStyle, setEl } = useEnterExitAnimation(isOpen, allowUnmount)
+  
+  
+  return (
+    <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}
+      data-display-name='Dialog'
+      style={initialStyle}
+      ref={setEl}
+    >
+      
+      <DialogContent>
+        {type === 'danger' && (
+          <Flex center sz={50} noShrink>
+            <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
           </Flex>
         )}
-        
-        <DialogButtons
-          //onClear={onClear}
-          onClose={onClose}
-          onBack={onBack}
-          onCancel={onCancel}
-          onOk={onAcceptOk && onOk}
-          onYes={onAcceptYes && onYes}
-        />
-        
-      </Card>
-    </Modal>
+        {type === 'info' && (
+          <Flex center sz={50} noShrink>
+            <InfoCircleOutlinedIc css={SvgIconS6.t(infoIcS)}/>
+          </Flex>
+        )}
+        <TitleBox>
+          <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
+        </TitleBox>
+      </DialogContent>
+      
+      {!!checkboxes.length && (
+        <Flex col>
+          {checkboxes.map(({ title, name }) => (
+            <FormFieldWrap {...formFieldWrapProps} name={name} key={name}>
+              {props => (
+                <Flex as='label' w='ct' row align g={8}>
+                  <Flex mv={-14}>
+                    <CheckboxInput
+                      css={CheckboxInputStyle.roundNormalNormal}
+                      {...props.radioInputProps}
+                    />
+                  </Flex>
+                  <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
+                </Flex>
+              )}
+            </FormFieldWrap>
+          ))}
+        </Flex>
+      )}
+      
+      <DialogButtons
+        //onClear={onClear}
+        onClose={onClose}
+        onBack={onBack}
+        onCancel={onCancel}
+        onOk={onAcceptOk && onOk}
+        onYes={onAcceptYes && onYes}
+      />
+    
+    </Card>
   )
-  return undefined
 })
-ModalDialog.displayName = 'ModalDialog'
-export default ModalDialog
+// @ts-expect-error
+Dialog.displayName = 'Dialog'
+
 
 
 const warnIcS: AppWidgetStyle = t => [SvgIconS6.Parts.base, {
@@ -168,4 +207,67 @@ const TitleBox = styled.div`
   ${rowC};
 `
 
+
+
+
+const useEnterExitAnimation = (isOpen: boolean, allowUnmount: Callback) => {
+  const [getEl, setEl] = useElemRefGetSet()
+  
+  type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
+  const [state, setState] = useState<{ v: State }>({ v: undefined })
+  
+  // useEffect сработает уже после монтирования элемента и получения рефа
+  useEffect(() => {
+    if (isOpen) setState({ v: 'appearing' })
+    else setState({ v: 'disappearing' })
+  }, [isOpen])
+  
+  
+  const appearTime = StyleVals.fadeInTime
+  const disappearTime = StyleVals.fadeOutTime
+  
+  const initialStyle: StyleProp = {
+    opacity: `0`,
+  }
+  useEffect(() => {
+    let stale = false
+    const el = getEl()
+    if (el) {
+      if (state.v === 'appearing') {
+        const time = appearTime
+        el.style.transition = `opacity ${time}ms linear`
+        el.style.opacity = '1'
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          el.ontransitionend = null
+          setState(curr => curr === state ? { v: 'appeared' } : curr)
+        })
+      }
+      else if (state.v === 'appeared') {
+        el.style.transition = 'none'
+        el.style.opacity = '1'
+        el.ontransitionend = null
+      }
+      else if (state.v === 'disappearing') {
+        const time = disappearTime
+        el.style.transition = `opacity ${time}ms linear`
+        el.style.opacity = `0`
+        el.ontransitionend = ev => requestAnimationFrame(() => {
+          if (stale) return
+          el.ontransitionend = null
+          setState(curr => curr === state ? { v: 'disappeared' } : curr)
+        })
+      }
+      else if (state.v === 'disappeared') {
+        el.style.transition = 'none'
+        el.style.opacity = `0`
+        el.ontransitionend = null
+        allowUnmount()
+      }
+    }
+    return () => { stale = true }
+  }, [state])
+  
+  return { initialStyle, setEl }
+}
 

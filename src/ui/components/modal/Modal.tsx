@@ -39,6 +39,7 @@ const Modal = React.memo((props: ModalProps) => {
     noDim = onlyFrame,
     noPointer = onlyFrame,
     onClick,
+    children,
     ...restProps
   } = props
   
@@ -64,7 +65,9 @@ const Modal = React.memo((props: ModalProps) => {
           getOnClick(onClick),
           !disableStopPointerAndMouseEvents && stopPointerAndMouseEvents(),
         )}
-      />
+      >
+        {children}
+      </ModalElem>
     </Portal>
   )
 })

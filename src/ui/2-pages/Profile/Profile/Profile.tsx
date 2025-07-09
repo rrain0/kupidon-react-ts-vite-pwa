@@ -86,7 +86,7 @@ const Profile = React.memo((props: ProfileProps) => {
           
           <div css={col}>
             
-            <FormFieldWrap{...props.formFieldWrapProps} fieldName='photos'>
+            <FormFieldWrap{...props.formFieldWrapProps} name='photos'>
               {props => (
                 <ProfilePhotos
                   images={props.value}
@@ -106,19 +106,19 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <Card>
               
-              <FormFieldWrap{...props.formFieldWrapProps} fieldName='name'>
+              <FormFieldWrap{...props.formFieldWrapProps} name='name'>
                 {validProps => (
                   <ProfileNameOption {...validProps}/>
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap{...props.formFieldWrapProps} fieldName='birthDate'>
+              <FormFieldWrap{...props.formFieldWrapProps} name='birthDate'>
                 {validProps => (
                   <ProfileBirthDateOption {...validProps}/>
                 )}
               </FormFieldWrap>
               
-              <FormFieldWrap{...props.formFieldWrapProps} fieldName='gender'>
+              <FormFieldWrap{...props.formFieldWrapProps} name='gender'>
                 {validProps => (
                   <ProfileGenderOption {...validProps}/>
                 )}
@@ -128,7 +128,7 @@ const Profile = React.memo((props: ProfileProps) => {
             
             <div css={{ height: 24 }}/>
             
-            <FormFieldWrap{...props.formFieldWrapProps} fieldName='aboutMe'>
+            <FormFieldWrap{...props.formFieldWrapProps} name='aboutMe'>
               {validProps => (
                 <ProfileAboutMeOption {...validProps}/>
               )}

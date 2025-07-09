@@ -7,6 +7,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import CopyIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CopyIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
@@ -22,8 +23,7 @@ import EnvelopeIc = SvgIconsPack.EnvelopeIc
 import _2gisLogo from '@im/ic/2gis-logo.webp'
 import yandexMapsLogo from '@im/ic/yandex-maps-logo.webp'
 import LocationIc = SvgIconsPack.LocationIc
-import CopyIc = SvgIconsPack.CopyIc
-import CheckmarkBoldIc = SvgIconsPack.CheckmarkBoldIc
+import CheckmarkBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkBoldIc.tsx'
 import Callback = TypeU.Callback
 
 
