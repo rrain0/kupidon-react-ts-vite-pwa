@@ -94,7 +94,9 @@ export type DialogProps<T extends string> = DialogViewProps<T> & MountController
 
 const Dialog = ReactU.memo(<T extends string>(props: DialogProps<T>) => {
   const {
-    isOpen, allowUnmount,
+    isOpen,
+    allowUnmount,
+    
     type,
     title,
     checkboxes = [],
@@ -124,62 +126,62 @@ const Dialog = ReactU.memo(<T extends string>(props: DialogProps<T>) => {
   })
   
   
-  const { initialStyle, setEl } = useEnterExitAnimation(isOpen, allowUnmount)
-  
-  
   return (
-    <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}
-      data-display-name='Dialog'
-      style={initialStyle}
-      ref={setEl}
-    >
-      
-      <DialogContent>
-        {type === 'danger' && (
-          <Flex center sz={50} noShrink>
-            <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
-          </Flex>
-        )}
-        {type === 'info' && (
-          <Flex center sz={50} noShrink>
-            <InfoCircleOutlinedIc css={SvgIconS6.t(infoIcS)}/>
-          </Flex>
-        )}
-        <TitleBox>
-          <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
-        </TitleBox>
-      </DialogContent>
-      
-      {!!checkboxes.length && (
-        <Flex col>
-          {checkboxes.map(({ title, name }) => (
-            <FormFieldWrap {...formFieldWrapProps} name={name} key={name}>
-              {props => (
-                <Flex as='label' w='ct' row align g={8}>
-                  <Flex mv={-14}>
-                    <CheckboxInput
-                      css={CheckboxInputStyle.roundNormalNormal}
-                      {...props.radioInputProps}
-                    />
-                  </Flex>
-                  <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
-                </Flex>
-              )}
-            </FormFieldWrap>
-          ))}
-        </Flex>
+    <UseEnterExitAnimation isOpen={isOpen} allowUnmount={allowUnmount}>
+      {renderProps => (
+        <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}
+          data-display-name='Dialog'
+          {...renderProps}
+        >
+          
+          <DialogContent>
+            {type === 'danger' && (
+              <Flex center sz={50} noShrink>
+                <WarnTriangleOutlinedIc css={SvgIconS6.t(warnIcS)}/>
+              </Flex>
+            )}
+            {type === 'info' && (
+              <Flex center sz={50} noShrink>
+                <InfoCircleOutlinedIc css={SvgIconS6.t(infoIcS)}/>
+              </Flex>
+            )}
+            <TitleBox>
+              <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
+            </TitleBox>
+          </DialogContent>
+          
+          {!!checkboxes.length && (
+            <Flex col>
+              {checkboxes.map(({ title, name }) => (
+                <FormFieldWrap {...formFieldWrapProps} name={name} key={name}>
+                  {props => (
+                    <Flex as='label' w='ct' row align g={8}>
+                      <Flex mv={-14}>
+                        <CheckboxInput
+                          css={CheckboxInputStyle.roundNormalNormal}
+                          {...props.radioInputProps}
+                        />
+                      </Flex>
+                      <Hdrs.ItemTitle>{title}</Hdrs.ItemTitle>
+                    </Flex>
+                  )}
+                </FormFieldWrap>
+              ))}
+            </Flex>
+          )}
+          
+          <DialogButtons
+            //onClear={onClear}
+            onClose={onClose}
+            onBack={onBack}
+            onCancel={onCancel}
+            onOk={onAcceptOk && onOk}
+            onYes={onAcceptYes && onYes}
+          />
+        
+        </Card>
       )}
-      
-      <DialogButtons
-        //onClear={onClear}
-        onClose={onClose}
-        onBack={onBack}
-        onCancel={onCancel}
-        onOk={onAcceptOk && onOk}
-        onYes={onAcceptYes && onYes}
-      />
-    
-    </Card>
+    </UseEnterExitAnimation>
   )
 })
 // @ts-expect-error
@@ -208,66 +210,81 @@ const TitleBox = styled.div`
 `
 
 
-
-
-const useEnterExitAnimation = (isOpen: boolean, allowUnmount: Callback) => {
-  const [getEl, setEl] = useElemRefGetSet()
-  
-  type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
-  const [state, setState] = useState<{ v: State }>({ v: undefined })
-  
-  // useEffect сработает уже после монтирования элемента и получения рефа
-  useEffect(() => {
-    if (isOpen) setState({ v: 'appearing' })
-    else setState({ v: 'disappearing' })
-  }, [isOpen])
-  
-  
-  const appearTime = StyleVals.fadeInTime
-  const disappearTime = StyleVals.fadeOutTime
-  
-  const initialStyle: StyleProp = {
-    opacity: `0`,
-  }
-  useEffect(() => {
-    let stale = false
-    const el = getEl()
-    if (el) {
-      if (state.v === 'appearing') {
-        const time = appearTime
-        el.style.transition = `opacity ${time}ms linear`
-        el.style.opacity = '1'
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
-          el.ontransitionend = null
-          setState(curr => curr === state ? { v: 'appeared' } : curr)
-        })
-      }
-      else if (state.v === 'appeared') {
-        el.style.transition = 'none'
-        el.style.opacity = '1'
-        el.ontransitionend = null
-      }
-      else if (state.v === 'disappearing') {
-        const time = disappearTime
-        el.style.transition = `opacity ${time}ms linear`
-        el.style.opacity = `0`
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
-          el.ontransitionend = null
-          setState(curr => curr === state ? { v: 'disappeared' } : curr)
-        })
-      }
-      else if (state.v === 'disappeared') {
-        el.style.transition = 'none'
-        el.style.opacity = `0`
-        el.ontransitionend = null
-        allowUnmount()
-      }
+export type UseEnterExitAnimationProps<T extends HTMLElement> = Pu<{
+  isOpen: boolean
+  allowUnmount: Callback
+  enterTime: number
+  exitTime: number
+  children: (renderProps: { style: StyleProp, ref: React.Ref<T> }) => React.ReactNode
+}>
+const UseEnterExitAnimation = ReactU.memo(
+  <T extends HTMLElement = HTMLDivElement>(props: UseEnterExitAnimationProps<T>) => {
+    let {
+      isOpen = false,
+      allowUnmount,
+      enterTime = StyleVals.fadeInTime,
+      exitTime = StyleVals.fadeOutTime,
+      children,
+    } = props
+    
+    allowUnmount = useAsCallback(allowUnmount)
+    
+    const [getEl, setEl] = useElemRefGetSet<T>()
+    
+    type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
+    const [state, setState] = useState<{ v: State }>({ v: undefined })
+    
+    // useEffect сработает уже после монтирования элемента и получения рефа
+    useEffect(() => {
+      if (isOpen) setState({ v: 'appearing' })
+      else setState({ v: 'disappearing' })
+    }, [isOpen])
+    
+    
+    
+    const initialStyle: StyleProp = {
+      opacity: `0`,
     }
-    return () => { stale = true }
-  }, [state])
-  
-  return { initialStyle, setEl }
-}
+    useEffect(() => {
+      let onTransitionEnd: ((ev: any) => void) | undefined
+      const el = getEl()
+      if (el) {
+        if (state.v === 'appearing') {
+          const time = enterTime
+          el.style.transition = `opacity ${time}ms linear`
+          el.style.opacity = '1'
+          onTransitionEnd = ev => requestAnimationFrame(() => {
+            el.removeEventListener('transitionend', onTransitionEnd!)
+            setState(curr => curr === state ? { v: 'appeared' } : curr)
+          })
+          el.addEventListener('transitionend', onTransitionEnd)
+        }
+        else if (state.v === 'appeared') {
+          el.style.transition = 'none'
+          el.style.opacity = '1'
+          el.ontransitionend = null
+        }
+        else if (state.v === 'disappearing') {
+          const time = exitTime
+          el.style.transition = `opacity ${time}ms linear`
+          el.style.opacity = `0`
+          onTransitionEnd = ev => requestAnimationFrame(() => {
+            el.removeEventListener('transitionend', onTransitionEnd!)
+            setState(curr => curr === state ? { v: 'disappeared' } : curr)
+          })
+          el.addEventListener('transitionend', onTransitionEnd)
+        }
+        else if (state.v === 'disappeared') {
+          el.style.transition = 'none'
+          el.style.opacity = `0`
+          el.ontransitionend = null
+          allowUnmount()
+        }
+        return () => { el.removeEventListener('transitionend', onTransitionEnd!) }
+      }
+    }, [state])
+    
+    return children?.({ style: initialStyle, ref: setEl })
+  }
+)
 

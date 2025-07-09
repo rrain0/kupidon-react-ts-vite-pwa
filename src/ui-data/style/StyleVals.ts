@@ -29,7 +29,7 @@ export namespace StyleVals {
   
   
   export const fadeInTime = 150
-  export const fadeOutTime = 150
+  export const fadeOutTime = 2000
   
   
   // Easings https://easings.net/

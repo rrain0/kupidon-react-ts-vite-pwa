@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
@@ -42,7 +43,7 @@ export default DimmedBg
 
 
 const DimmedBgView = styled.div(flexStyle({
-  full: true,
+  full: true, noPointer: true,
 }))
 
 
@@ -59,7 +60,6 @@ const useEnterExitAnimation = (isOpen: boolean, allowUnmount: Callback) => {
     if (isOpen) setState({ v: 'appearing' })
     else setState({ v: 'disappearing' })
   }, [isOpen])
-  
   
   const appearTime = StyleVals.fadeInTime
   const disappearTime = StyleVals.fadeOutTime
