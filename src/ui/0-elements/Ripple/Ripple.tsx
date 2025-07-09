@@ -140,9 +140,8 @@ const Ripple = React.memo((props: RippleProps) => {
 
   useEffect(() => {
     const el = getRipple()
-    let stale = false
-    
     if (el) {
+      let stale = false
       if (state === 'resetted') {
         applyStyle({
           transition: { scale: '', opacity: '' },
@@ -158,11 +157,13 @@ const Ripple = React.memo((props: RippleProps) => {
           },
           scale: 1, opacity: 1,
         })
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale && ev.propertyName !== 'scale') return
-          //console.log('ontransitionend', ev)
-          showNext()
-        })
+        el.ontransitionend = ev => {
+          if (ev.target === el && ev.propertyName === 'scale') requestAnimationFrame(() => {
+            if (stale) return
+            //console.log('ontransitionend', ev)
+            showNext()
+          })
+        }
       }
       else if (state === 'shown') {
         applyStyle({
@@ -178,11 +179,13 @@ const Ripple = React.memo((props: RippleProps) => {
           },
           opacity: 1,
         })
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (!stale && ev.propertyName !== 'opacity') return
-          //console.log('ontransitionend', ev)
-          showNext()
-        })
+        el.ontransitionend = ev => {
+          if (ev.target === el && ev.propertyName === 'opacity') requestAnimationFrame(() => {
+            if (stale) return
+            //console.log('ontransitionend', ev)
+            showNext()
+          })
+        }
       }
       else if (state === 'hiding') {
         applyStyle({
@@ -191,11 +194,13 @@ const Ripple = React.memo((props: RippleProps) => {
           },
           opacity: 0,
         })
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (!stale && ev.propertyName !== 'opacity') return
-          //console.log('ontransitionend', ev)
-          showNext()
-        })
+        el.ontransitionend = ev => {
+          if (ev.target === el && ev.propertyName === 'opacity') requestAnimationFrame(() => {
+            if (stale) return
+            //console.log('ontransitionend', ev)
+            showNext()
+          })
+        }
       }
       else if (state === 'hidden') {
         applyStyle({
@@ -207,8 +212,8 @@ const Ripple = React.memo((props: RippleProps) => {
       else {
         showNext()
       }
+      return () => { stale = true }
     }
-    return () => { stale = true }
   }, [state])
   
   

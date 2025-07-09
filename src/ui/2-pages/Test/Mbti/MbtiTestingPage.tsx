@@ -462,8 +462,8 @@ const useShiftAnimation = (curr: number, setDisplayed: Setter<number>) => {
   
   useEffect(() => {
     const el = getElem()
-    let stale = false
     if (el && transition.v) {
+      let stale = false
       const isFwd = transition.v === 'fwd'
       const time = transitionTime
       el.style.transition = 'none'
@@ -474,26 +474,28 @@ const useShiftAnimation = (curr: number, setDisplayed: Setter<number>) => {
         el.style.transition = `transform ${time}ms ease-out, opacity ${time}ms ease-out`
         el.style.transform = `translateX(${isFwd ? '-' : ''}100px)`
         el.style.opacity = '0'
-        el.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
-          el.ontransitionend = null
-          setDisplayed(curr)
-          el.style.transition = 'none'
-          el.style.transform = `translateX(${isFwd ? '' : '-'}100px)`
-          el.style.opacity = '0'
-          requestAnimationFrame(() => {
+        el.ontransitionend = ev => {
+          if (ev.target === el) requestAnimationFrame(() => {
             if (stale) return
-            el.style.transition = `transform ${time}ms ease-in, opacity ${time}ms ease-in`
-            el.style.transform = 'translateX(0)'
-            el.style.opacity = '1'
-            setTransition(curr => curr === transition ? { v: undefined } : curr)
+            el.ontransitionend = null
+            setDisplayed(curr)
+            el.style.transition = 'none'
+            el.style.transform = `translateX(${isFwd ? '' : '-'}100px)`
+            el.style.opacity = '0'
+            requestAnimationFrame(() => {
+              if (stale) return
+              el.style.transition = `transform ${time}ms ease-in, opacity ${time}ms ease-in`
+              el.style.transform = 'translateX(0)'
+              el.style.opacity = '1'
+              setTransition(curr => curr === transition ? { v: undefined } : curr)
+            })
           })
-        })
+        }
       })
-    }
-    return () => {
-      stale = true
-      setDisplayed(curr)
+      return () => {
+        stale = true
+        setDisplayed(curr)
+      }
     }
   }, [transition])
   

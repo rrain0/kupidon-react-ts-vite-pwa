@@ -109,6 +109,7 @@ const useExpandCollapseAnimation = () => {
         const time = expandTime
         //inputBox.style.display = 'flex'
         requestAnimationFrame(() => {
+          if (stale) return
           actionBar.style.transition = `width ${time}ms linear`
           actionBar.style.width = '100%'
           // inputBox.style.display = 'flex'
@@ -119,11 +120,13 @@ const useExpandCollapseAnimation = () => {
           plusBox.style.display = 'flex'
           plusBox.style.width = '0'
           plusBox.style.paddingLeft = '0'
-        })
-        plusBox.ontransitionend = ev => requestAnimationFrame(() => {
-          if (stale) return
-          plusBox.ontransitionend = null
-          setState(curr => curr === state ? { v: 'expanded' } : curr)
+          plusBox.ontransitionend = ev => {
+            if (ev.target === plusBox) requestAnimationFrame(() => {
+              if (stale) return
+              plusBox.ontransitionend = null
+              setState(curr => curr === state ? { v: 'expanded' } : curr)
+            })
+          }
         })
       }
       else if (state.v === 'expanded') {
@@ -154,11 +157,13 @@ const useExpandCollapseAnimation = () => {
           plusBox.style.transition = `width ${time}ms linear, padding-left ${time}ms linear`
           plusBox.style.width = `${sz}px`
           plusBox.style.paddingLeft = `${g}px`
-          plusBox.ontransitionend = ev => requestAnimationFrame(() => {
-            if (stale) return
-            plusBox.ontransitionend = null
-            setState(curr => curr === state ? { v: 'collapsed' } : curr)
-          })
+          plusBox.ontransitionend = ev => {
+            if (ev.target === plusBox) requestAnimationFrame(() => {
+              if (stale) return
+              plusBox.ontransitionend = null
+              setState(curr => curr === state ? { v: 'collapsed' } : curr)
+            })
+          }
         })
       }
       else if (state.v === 'collapsed') {

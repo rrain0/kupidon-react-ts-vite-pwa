@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import MountController, { MountControllerRenderProps } from 'src/ui/components/MountController.tsx'
+import MountController, { MountControllerRenderProps } from 'src/ui/components/animations/MountController.tsx'
 import AcceptButton from 'src/ui/components/screen-bars/parts/AcceptButton.tsx'
 import CancelButton from 'src/ui/components/screen-bars/parts/CancelButton.tsx'
 import Callback = TypeU.Callback

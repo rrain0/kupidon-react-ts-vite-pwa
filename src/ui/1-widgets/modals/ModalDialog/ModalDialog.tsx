@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { ReactU } from '@util/react/ReactU.ts'
-import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -16,9 +15,9 @@ import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import DimmedBg from 'src/ui/1-widgets/DimmedBg.tsx'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
-import MountController, { MountControllerRenderProps } from 'src/ui/components/MountController.tsx'
+import MountController, { MountControllerRenderProps } from 'src/ui/components/animations/MountController.tsx'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
 import Modal from 'src/ui/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
@@ -27,7 +26,7 @@ import rowC = EmotionCommon.rowC
 import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
-import StyleProp = ReactU.StyleProp
+import UseEnterExitTransition from 'src/ui/components/animations/UseEnterExitTransition.tsx'
 
 
 
@@ -127,11 +126,21 @@ const Dialog = ReactU.memo(<T extends string>(props: DialogProps<T>) => {
   
   
   return (
-    <UseEnterExitAnimation isOpen={isOpen} allowUnmount={allowUnmount}>
-      {renderProps => (
+    <UseEnterExitTransition isOpen={isOpen} allowUnmount={allowUnmount}
+      initialStyle={{ opacity: '0' }}
+      enterStyle={{
+        transition: `opacity ${StyleVals.fadeInTime}ms linear`,
+        opacity: '1',
+      }}
+      exitStyle={{
+        transition: `opacity ${StyleVals.fadeOutTime}ms linear`,
+        opacity: '0',
+      }}
+    >
+      {transitionProps => (
         <Card css={[ModalElements.cardBoxInModalS, CardS.card2S]}
           data-display-name='Dialog'
-          {...renderProps}
+          {...transitionProps}
         >
           
           <DialogContent>
@@ -181,7 +190,7 @@ const Dialog = ReactU.memo(<T extends string>(props: DialogProps<T>) => {
         
         </Card>
       )}
-    </UseEnterExitAnimation>
+    </UseEnterExitTransition>
   )
 })
 // @ts-expect-error
@@ -208,83 +217,4 @@ const TitleBox = styled.div`
   min-height: 46px;
   ${rowC};
 `
-
-
-export type UseEnterExitAnimationProps<T extends HTMLElement> = Pu<{
-  isOpen: boolean
-  allowUnmount: Callback
-  enterTime: number
-  exitTime: number
-  children: (renderProps: { style: StyleProp, ref: React.Ref<T> }) => React.ReactNode
-}>
-const UseEnterExitAnimation = ReactU.memo(
-  <T extends HTMLElement = HTMLDivElement>(props: UseEnterExitAnimationProps<T>) => {
-    let {
-      isOpen = false,
-      allowUnmount,
-      enterTime = StyleVals.fadeInTime,
-      exitTime = StyleVals.fadeOutTime,
-      children,
-    } = props
-    
-    allowUnmount = useAsCallback(allowUnmount)
-    
-    const [getEl, setEl] = useElemRefGetSet<T>()
-    
-    type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'
-    const [state, setState] = useState<{ v: State }>({ v: undefined })
-    
-    // useEffect сработает уже после монтирования элемента и получения рефа
-    useEffect(() => {
-      if (isOpen) setState({ v: 'appearing' })
-      else setState({ v: 'disappearing' })
-    }, [isOpen])
-    
-    
-    
-    const initialStyle: StyleProp = {
-      opacity: `0`,
-    }
-    useEffect(() => {
-      let onTransitionEnd: ((ev: any) => void) | undefined
-      const el = getEl()
-      if (el) {
-        if (state.v === 'appearing') {
-          const time = enterTime
-          el.style.transition = `opacity ${time}ms linear`
-          el.style.opacity = '1'
-          onTransitionEnd = ev => requestAnimationFrame(() => {
-            el.removeEventListener('transitionend', onTransitionEnd!)
-            setState(curr => curr === state ? { v: 'appeared' } : curr)
-          })
-          el.addEventListener('transitionend', onTransitionEnd)
-        }
-        else if (state.v === 'appeared') {
-          el.style.transition = 'none'
-          el.style.opacity = '1'
-          el.ontransitionend = null
-        }
-        else if (state.v === 'disappearing') {
-          const time = exitTime
-          el.style.transition = `opacity ${time}ms linear`
-          el.style.opacity = `0`
-          onTransitionEnd = ev => requestAnimationFrame(() => {
-            el.removeEventListener('transitionend', onTransitionEnd!)
-            setState(curr => curr === state ? { v: 'disappeared' } : curr)
-          })
-          el.addEventListener('transitionend', onTransitionEnd)
-        }
-        else if (state.v === 'disappeared') {
-          el.style.transition = 'none'
-          el.style.opacity = `0`
-          el.ontransitionend = null
-          allowUnmount()
-        }
-        return () => { el.removeEventListener('transitionend', onTransitionEnd!) }
-      }
-    }, [state])
-    
-    return children?.({ style: initialStyle, ref: setEl })
-  }
-)
 
