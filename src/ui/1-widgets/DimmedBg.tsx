@@ -1,24 +1,18 @@
 import styled from '@emotion/styled'
-import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { ReactU } from '@util/react/ReactU.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
-import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { MountControllerRenderProps } from 'src/ui/components/animations/MountController.tsx'
 import UseEnterExitTransition from 'src/ui/components/animations/UseEnterExitTransition.tsx'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import React, { useEffect, useState } from 'react'
-import Callback = TypeU.Callback
-import StyleProp = ReactU.StyleProp
-import ClassStyle = ReactU.ClassStyle
-import Children = ReactU.Children
-import combineProps = ReactU.combineProps
+import React from 'react'
 
 
 
 
 
-export type DimmedBgProps = MountControllerRenderProps & ClassStyle & Children
+export type DimmedBgProps =
+  & MountControllerRenderProps
+  & React.ComponentProps<typeof Flex>
 
 const DimmedBg = React.memo((props: DimmedBgProps) => {
   const {
@@ -56,7 +50,7 @@ export default DimmedBg
 
 
 
-const DimmedBgView = styled.div(flexStyle({
+const DimmedBgView = styled(Flex)(flexStyle({
   full: true, noPointer: true,
 }))
 

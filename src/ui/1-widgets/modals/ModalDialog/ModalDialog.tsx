@@ -45,8 +45,8 @@ const ModalDialog = ReactU.memo(<T extends string>(props: ModalDialogProps<T>) =
   return (
     <MountController isOpen={isOpen}>
       {mountProps => (
-        <Modal noDim onClick={() => onModal?.()}>
-          <DimmedBg css={ModalElements.modalCenteredS} {...mountProps}>
+        <Modal noDim noPointer={!isOpen} onClick={() => onModal?.()}>
+          <DimmedBg css={ModalElements.modalCenteredS} noPointer={!isOpen} {...mountProps}>
             <Dialog {...props} {...mountProps}/>
           </DimmedBg>
         </Modal>
