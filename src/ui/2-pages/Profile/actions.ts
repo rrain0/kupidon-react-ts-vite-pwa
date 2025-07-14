@@ -1,6 +1,6 @@
 import { DateU } from '@util/date/DateU.ts'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { CurrentUserA } from 'src/model/api/UserA.ts'
+import { UserCurrentA } from 'src/model/api/UserA.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import {
   MediaInArrayDUC,
@@ -36,7 +36,7 @@ import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 export const currentUserPhotosToProfilePhotos = (
-  photos: CurrentUserA['photos']
+  photos: UserCurrentA['photos']
 ): MediaInArrayDUC[] => {
   const profilePhotos = ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
     ...newDefaultEmptyRemoteMediaInArray(i),
@@ -109,7 +109,7 @@ export const profileUpdateApiRequest = (
     CurrentUserSuccessData,
     UpdateUserErrorData | AddProfilePhotoErrorData
   >>(async (resolve, reject) => {
-    let updatedUser = null as null | CurrentUserA
+    let updatedUser = null as null | UserCurrentA
     
     let uploads = addPhotos.map(it => ({
       ...newDefaultMediaOperation(),

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useLiveUsersStatus } from '@util/app/useLiveUsersStatus.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
@@ -46,8 +47,11 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   const { toUserId, toChatId } = props
   const userId = useAuthZustand(s => s.user!.id)
   
+  const isUserProfile = userId && !toChatId
+  const isChatProfile = toChatId
   
-  const [companion, setCompanion] = useState<ChatCompanionData | undefined>(undefined)
+  
+  const [profile, setProfile] = useState<ChatCompanionData | undefined>(undefined)
   {
     const {
       startRequest,
@@ -56,14 +60,14 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     } = useApiRequest(() => UserApi.userById(toUserId ?? ''))
     
     useEffect(() => {
-      setCompanion(undefined)
-      if (userId && !toChatId) startRequest()
-    }, [toUserId, toChatId])
+      setProfile(undefined)
+      if (isUserProfile) startRequest()
+    }, [isUserProfile, toUserId])
     
     useEffect(() => {
       if (isSuccess) {
         const u = data.user
-        setCompanion({
+        setProfile({
           id: u.id,
           ava: u.photos.find(p => p.index === 0)?.url,
           online: false,
@@ -77,6 +81,16 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   }
   
   {
+    const usersStatus = useLiveUsersStatus(
+      'chatPage',
+      profile ? [{ id: profile.id, online: false }] : [],
+    )
+    useEffect(() => {
+      setProfile(curr => curr ? ({ ...curr, online: usersStatus?.map.get(curr.id)?.online ?? false }) : curr)
+    }, [usersStatus])
+  }
+  
+  {
     const {
       startRequest,
       isLoading, isFinished, isSuccess, isError,
@@ -84,17 +98,17 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     } = useApiRequest(() => ChatItemsApi.chatItem(toChatId ?? ''))
     
     useEffect(() => {
-      if (toChatId) startRequest()
-    }, [toChatId])
+      if (isChatProfile) startRequest()
+    }, [isChatProfile, toChatId])
     
     useEffect(() => {
       if (isSuccess) {
         const it = data.chatItem
-        setCompanion({
+        setProfile({
           id: it.id,
-          name: it.profile.name,
-          ava: it.profile.ava,
-          // online: false,
+          name: it.profile?.name ?? '',
+          ava: it.profile?.ava ?? '',
+          online: it.profile?.online ?? false,
           // mute: false,
           // pinned: undefined,
           // isWriting: false,
@@ -125,14 +139,19 @@ const ChatPage = React.memo((props: ChatPageProps) => {
           
           <BackButton/>
           
-          {!companion && <Flex aligned>Загрузка...</Flex>}
-          {companion && (
+          {!profile && <Flex aligned>Загрузка...</Flex>}
+          {profile && (
             <>
-              <Ava id={companion.id} ava={companion.ava} alignedStretch h='full'/>
+              <Ava
+                id={profile.id}
+                ava={profile.ava}
+                online={profile.online}
+                alignedStretch h='full'
+              />
               
               <Flex col ph={12} stretched grow justifySpaceAround>
                 <Flex css={[Txt.s18BoldTight, { color: 'black' /* TODO Theme */ }]}>
-                  {companion.name}
+                  {profile.name}
                 </Flex>
                 <Flex css={[Txt.s15Tight, { color: '#858585' /* TODO Theme */ }]}>
                   {'был(а) в 20:51'}

@@ -2,13 +2,6 @@ import { GenderA } from 'src/model/api/GenderA.ts'
 
 
 
-export interface OtherUserShortA {
-  id: string
-  name: string
-  ava: string
-  online?: boolean
-}
-
 
 export interface UserPhotoA {
   id: string
@@ -18,9 +11,17 @@ export interface UserPhotoA {
   url: string
 }
 
-export interface OtherUserA {
+export interface UserStrangerShortA {
   id: string
   name: string
+  ava: string
+  online?: boolean
+}
+
+export interface UserStrangerA {
+  id: string
+  name: string
+  ava: string
   birthDate: string // TODO replace by age
   age: number
   gender: GenderA
@@ -28,11 +29,18 @@ export interface OtherUserA {
   photos: UserPhotoA[]
 }
 
-export interface CurrentUserA {
+export interface UserAcquaintanceShortA {
   id: string
+  name: string
+  ava: string
+  online: boolean
+}
+
+export interface UserCurrentA {
+  id: string
+  roles: string[]
   email: string
   emailVerified: boolean
-  roles: string[]
   createdAt: string
   updatedAt: string
   name: string
@@ -41,6 +49,7 @@ export interface CurrentUserA {
   gender: GenderA
   aboutMe: string
   photos: UserPhotoA[]
+  online: boolean
 }
 
 

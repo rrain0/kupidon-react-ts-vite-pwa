@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { CurrentUserA } from 'src/model/api/UserA.ts'
+import { UserCurrentA } from 'src/model/api/UserA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import ax = AxiosConfig.ax
@@ -15,7 +15,7 @@ export namespace AuthApi {
   
   export type LoginSuccessData = {
     accessToken: string
-    user: CurrentUserA
+    user: UserCurrentA
   }
   export type LoginErrorData = NoUserResponseError | TechnicalError
   export type LoginPwd = {

@@ -65,7 +65,8 @@ const AvaBox = styled(Flex)<Pu<{ shadow: boolean }>>(({
 
 
 const OnlineMark = styled(Flex)(flexStyle({
-  absolute: true, b: '4%', r: '4%', sz: '20%', round: true,
+  absolute: true, b: '10%', r: '10%', sz: 13, round: true,
+  transform: 'translate3d(4.5px, 4.5px, 0)',
   // TODO Theme
   border: '2px solid #f5f5f5',
   // TODO Theme

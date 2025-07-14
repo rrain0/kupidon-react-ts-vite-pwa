@@ -3,10 +3,16 @@ import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
 
 
 
+
+export type ChatProfileTypeA = 'USER'
+
 export interface ChatItemProfileA {
   id: string
+  type: ChatProfileTypeA
   name: string
   ava: string
+  
+  online: boolean
 }
 
 export interface ChatItemA {
@@ -15,8 +21,6 @@ export interface ChatItemA {
   memberIds: string[]
   createdAt: string
   updatedAt: string
-  profile: ChatItemProfileA
+  profile: ChatItemProfileA | null
   lastMessage: ChatMessageA | null
-  
-  online: boolean
 }

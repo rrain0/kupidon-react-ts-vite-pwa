@@ -1,5 +1,5 @@
 import { TypeU } from '@util/common/TypeU.ts'
-import { CurrentUserA } from 'src/model/api/UserA.ts'
+import { UserCurrentA } from 'src/model/api/UserA.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject
@@ -23,7 +23,7 @@ if (isemptyval(localStorage.getItem(zustandLsName)) && nonemptyval(localStorage.
 
 export type AuthZustand = {
   accessToken: string | undefined
-  user: CurrentUserA | undefined
+  user: UserCurrentA | undefined
   getIsAuth: Getter<boolean>
   logout: Callback
 }

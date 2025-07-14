@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { OtherUserA } from 'src/model/api/UserA.ts'
+import { UserStrangerA } from 'src/model/api/UserA.ts'
 import { UserToUserLikeA } from 'src/model/api/UserToUserLikeA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'

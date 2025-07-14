@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios'
 import { ApiUtils } from 'src/api/ApiUtils'
-import { CurrentUserA, OtherUserA } from 'src/model/api/UserA.ts'
+import { UserCurrentA, UserStrangerA } from 'src/model/api/UserA.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { getDataUrlProps } from '@util/file/DataUrl.ts'
@@ -26,7 +26,7 @@ export namespace UserApi {
   
   
   export type CurrentUserSuccessData = {
-    user: CurrentUserA
+    user: UserCurrentA
   }
   export type CurrentUserErrorData = AuthenticationError | NoUserResponseError | TechnicalError
   export const current = async () => {
@@ -40,7 +40,7 @@ export namespace UserApi {
   
   
   export type UserByIdSuccessData = {
-    user: OtherUserA
+    user: UserStrangerA
   }
   export type UserByIdErrorData = NoUserResponseError | TechnicalError
   export const userById = async (id: string) => {
@@ -58,7 +58,7 @@ export namespace UserApi {
   
   export interface CreateSuccessData {
     accessToken: string
-    user: CurrentUserA
+    user: UserCurrentA
   }
   export type CreateErrorData = TechnicalError | {
     code: 'DUPLICATE_EMAIL'

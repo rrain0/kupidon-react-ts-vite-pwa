@@ -1,4 +1,4 @@
-import { OtherUserShortA } from 'src/model/api/UserA.ts'
+import { UserAcquaintanceShortA } from 'src/model/api/UserA.ts'
 
 
 
@@ -6,5 +6,5 @@ export interface UserPairA {
   fromUserId: string
   toUserId: string
   createdAt: string
-  toUser: OtherUserShortA
+  toUser: UserAcquaintanceShortA
 }

@@ -361,13 +361,13 @@ const ChatsPage = React.memo(() => {
     if (chatItems) {
       setUiChatItems(chatItems.map(it => ({
         id: it.id,
-        name: it.profile.name,
-        ava: it.profile.ava,
+        name: it.profile?.name ?? '',
+        ava: it.profile?.ava ?? '',
         lastMsg: it.lastMessage?.content.text ?? undefined,
         lastMsgDate: it.lastMessage?.createdAt,
         isLastMsgMy: authUserId === it.lastMessage?.fromUserId,
         
-        online: it.online,
+        online: it.profile?.online ?? false,
         // mute: false,
         // pinned: undefined,
         // isWriting: false,
@@ -378,8 +378,8 @@ const ChatsPage = React.memo(() => {
   const usersStatus = useLiveUsersStatus(
     'chatsPageChatItems',
     chatItems
-      ?.filter(it => it.type === 'PERSONAL')
-      .map(it => ({ id: it.profile.id, online: it.online }))
+      ?.filter(it => it.profile?.type === 'USER')
+      .map(it => ({ id: it.profile!.id, online: it.profile!.online }))
   )
   
   useEffect(() => {
@@ -387,8 +387,8 @@ const ChatsPage = React.memo(() => {
       const m = usersStatus.map
       //console.log('m', m.values())
       setChatItems(s => s?.map(it => {
-        if (it.type === 'PERSONAL' && it.profile) {
-          const { profile: { id }, online } = it
+        if (it.profile?.type === 'USER') {
+          const { profile: { id, online } } = it
           const us = m.get(id)
           if (us && id === us.id && online !== us.online) {
             return { ...it, online: us.online }

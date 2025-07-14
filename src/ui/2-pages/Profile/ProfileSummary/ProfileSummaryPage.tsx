@@ -1,5 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { UiValues } from '@mini-libs/ui-text/UiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -47,6 +48,19 @@ import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 
 
 
+const staticUiValues = {
+  completeYourProfile: {
+    'ru-RU': 'Завершите описание профиля',
+    'en-US': 'Complete your profile description',
+  },
+  completeProfileInFewSteps: {
+    'ru-RU': 'Дополните профиль всего за пару шагов',
+    'en-US': 'Complete your profile in just a few steps',
+  },
+} satisfies UiValues
+
+
+
 
 const ProfileSummaryPage = React.memo(() => {
   const lang = useAppZustand(s => s.langs[0])
@@ -57,8 +71,12 @@ const ProfileSummaryPage = React.memo(() => {
   
   const profile = MockData.profile2
   const profileFillProgress = 45
-  const completeProfileDescriptionText = 'Завершите описание профиля'
-  const completeProfileInCoupleSteps = 'Дополните профиль всего за пару шагов'
+  
+  const uiValues = useMemo(() => ({
+    completeYourProfile: staticUiValues.completeYourProfile,
+    completeProfileInFewSteps: staticUiValues.completeProfileInFewSteps,
+  }), [])
+  const uiText = useUiValues(uiValues)
   
   const [uiProfileFillProgress, setUiProfileFillProgress] = useState(5)
   useEffect(() => setUiProfileFillProgress(profileFillProgress), [profileFillProgress])
@@ -172,7 +190,7 @@ const ProfileSummaryPage = React.memo(() => {
             
             <AppLink toFull={RootRoute.profile.id.userId[use](id).profile}>
               <HeaderArrow css={headerArrowS}>
-                {completeProfileDescriptionText}
+                {uiText.completeYourProfile}
               </HeaderArrow>
             </AppLink>
             
@@ -188,7 +206,7 @@ const ProfileSummaryPage = React.memo(() => {
             <Gap h={9}/>
             
             <CompleteProfileText>
-              {completeProfileInCoupleSteps}
+              {uiText.completeProfileInFewSteps}
             </CompleteProfileText>
             
           </InfoCard>

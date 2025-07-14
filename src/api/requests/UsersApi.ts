@@ -1,5 +1,5 @@
 import { ApiUtils } from 'src/api/ApiUtils'
-import { OtherUserA } from 'src/model/api/UserA.ts'
+import { UserStrangerA } from 'src/model/api/UserA.ts'
 import { UserPairA } from 'src/model/api/UserPairA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
@@ -18,7 +18,7 @@ export namespace UsersApi {
   
   
   export type UsersListAllSuccessData = {
-    users: OtherUserA[]
+    users: UserStrangerA[]
   }
   export type UsersListAllErrorData = AuthenticationError | TechnicalError
   export const get = async () => {

@@ -3,9 +3,10 @@ import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 
 
-const outerUiValues = {
+const staticUiValues = {
   green: {
     'ru-RU': 'Зелёный',
+    'en-US': 'Green',
   },
 } satisfies UiValues
 
@@ -19,15 +20,14 @@ const MyComponent = React.memo(() => {
   } satisfies UiValues
   
   const uiValues = useMemo(() => ({
-    green: outerUiValues.green,
+    green: staticUiValues.green,
     title: dynamicUiVals.title,
   }), [dynamicUiVals])
-  
   const uiText = useUiValues(uiValues)
     
   return (
     <div
-      data-display-name="MyComponent"
+      data-display-name='MyComponent'
     >
     
     </div>
