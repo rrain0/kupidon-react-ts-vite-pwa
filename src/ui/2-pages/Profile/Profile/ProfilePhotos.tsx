@@ -650,13 +650,13 @@ const onFilesSelectedBuilder = (
             
             //console.log('imgDataUrl', imgDataUrl.length)
             //console.log('imgDataUrl', imgDataUrl.substring(0, 1000))
-            const mimeType = getDataUrlProps(imgDataUrl)!.mimeType
+            const ext = getDataUrlProps(imgDataUrl)!.preferredExt
             const newPhoto = {
               ...newDefaultLocalMediaInArray(photo.remoteI),
               isInited: true,
               id: uuid.v4(),
               name: trimExtension(imgFile.name),
-              mimeType: mimeType,
+              ext,
               dataUrl: imgDataUrl,
               isReady: true,
             }

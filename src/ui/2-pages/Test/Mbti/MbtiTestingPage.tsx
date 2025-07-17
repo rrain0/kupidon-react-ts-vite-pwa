@@ -238,7 +238,7 @@ const MbtiTestingPage = React.memo(() => {
     <>
       {testState == 'completed' && goBackAfterCompletion && (
         <AppNavigate
-          toFull={RootRoute.profile.id.userId[use](authUserId).tests}
+          toFull={RootRoute.profile.id.userId[use](authUserId).tab.tests}
           replace
         />
       )}
@@ -321,7 +321,7 @@ const MbtiTestingPage = React.memo(() => {
                 
                 <Flex row justifyCt='end'>
                   <AppLink
-                    toFull={RootRoute.profile.id.userId[use](authUserId).tests}
+                    toFull={RootRoute.profile.id.userId[use](authUserId).tab.tests}
                   >
                     <Button
                       css={ButtonS6.t(ButtonS6.S.filled.rounded.sm.danger)}

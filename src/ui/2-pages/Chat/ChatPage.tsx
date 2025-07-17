@@ -5,8 +5,9 @@ import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@util/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { ChatItemsApi } from 'src/api/requests/ChatItemsApi.ts'
+import { ChatItemApi } from 'src/api/requests/ChatItemApi.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
+import { ChatItemA } from 'src/model/api/ChatItemA.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -24,6 +25,7 @@ import Pu = TypeU.Pu
 
 
 
+/*
 
 
 export type ChatCompanionData = {
@@ -35,6 +37,7 @@ export type ChatCompanionData = {
   pinned?: number | undefined // int 0+, 0 is topmost, undefined - not pinned
   isWriting?: boolean | undefined
 }
+*/
 
 
 export type ChatPageProps = Pu<{
@@ -51,43 +54,25 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   const isChatProfile = toChatId
   
   
-  const [profile, setProfile] = useState<ChatCompanionData | undefined>(undefined)
+  const [chatItem, setChatItem] = useState<ChatItemA | undefined>(undefined)
   {
     const {
       startRequest,
       isLoading, isFinished, isSuccess, isError,
       data, error,
-    } = useApiRequest(() => UserApi.userById(toUserId ?? ''))
+    } = useApiRequest(() => ChatItemApi.toUserId(toUserId ?? ''))
     
     useEffect(() => {
-      setProfile(undefined)
+      setChatItem(undefined)
       if (isUserProfile) startRequest()
     }, [isUserProfile, toUserId])
     
     useEffect(() => {
       if (isSuccess) {
-        const u = data.user
-        setProfile({
-          id: u.id,
-          ava: u.photos.find(p => p.index === 0)?.url,
-          online: false,
-          name: u.name,
-          mute: false,
-          pinned: undefined,
-          isWriting: false,
-        })
+        const chatItem = data.chatItem
+        setChatItem(chatItem)
       }
     }, [isSuccess])
-  }
-  
-  {
-    const usersStatus = useLiveUsersStatus(
-      'chatPage',
-      profile ? [{ id: profile.id, online: false }] : [],
-    )
-    useEffect(() => {
-      setProfile(curr => curr ? ({ ...curr, online: usersStatus?.map.get(curr.id)?.online ?? false }) : curr)
-    }, [usersStatus])
   }
   
   {
@@ -95,7 +80,7 @@ const ChatPage = React.memo((props: ChatPageProps) => {
       startRequest,
       isLoading, isFinished, isSuccess, isError,
       data, error,
-    } = useApiRequest(() => ChatItemsApi.chatItem(toChatId ?? ''))
+    } = useApiRequest(() => ChatItemApi.id(toChatId ?? ''))
     
     useEffect(() => {
       if (isChatProfile) startRequest()
@@ -103,19 +88,34 @@ const ChatPage = React.memo((props: ChatPageProps) => {
     
     useEffect(() => {
       if (isSuccess) {
-        const it = data.chatItem
-        setProfile({
-          id: it.id,
-          name: it.profile?.name ?? '',
-          ava: it.profile?.ava ?? '',
-          online: it.profile?.online ?? false,
-          // mute: false,
-          // pinned: undefined,
-          // isWriting: false,
-        })
+        const chatItem = data.chatItem
+        setChatItem(chatItem)
       }
     }, [isSuccess])
   }
+  
+  
+  
+  {
+    const p = chatItem?.profile
+    const usersStatus = useLiveUsersStatus(
+      'chatPage',
+      p ? [{ id: p.id, online: p.online }] : [],
+    )
+    useEffect(() => {
+      setChatItem(curr => {
+        if (!curr) return undefined
+        return {
+          ...curr,
+          profile: {
+            ...curr.profile,
+            online: usersStatus?.map.get(curr.profile.id)?.online ?? false,
+          },
+        }
+      })
+    }, [usersStatus])
+  }
+  
   
   
   useLayoutEffect(() => {
@@ -125,6 +125,8 @@ const ChatPage = React.memo((props: ChatPageProps) => {
   })
   
   
+  
+  const profile = chatItem?.profile
   
   return (
     <>

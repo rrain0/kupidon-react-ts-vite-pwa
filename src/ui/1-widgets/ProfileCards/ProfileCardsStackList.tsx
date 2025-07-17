@@ -160,7 +160,7 @@ const ProfileCardsStackList = React.memo(({
   }, [])
   
   
-  // TODO LIST - сделать отдельную компоненту для создания фукнций колбэков со входящими данными
+  // TODO API List - сделать отдельную компоненту для создания фукнций колбэков со входящими данными
   const onLike = useCallback((userId: string) => {
     // TODO API
     UserToUserApi.like({ toUserId: userId })

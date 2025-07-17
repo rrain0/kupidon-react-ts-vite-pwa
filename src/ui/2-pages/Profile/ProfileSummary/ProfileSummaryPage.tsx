@@ -44,6 +44,7 @@ import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
 import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
+import qrScan from '@ic/normal/special/qr-scan.svg'
 
 
 
@@ -103,7 +104,7 @@ const ProfileSummaryPage = React.memo(() => {
           id: remoteMainPhoto.id,
           remoteUrl: remoteMainPhoto.url,
           name: remoteMainPhoto.name,
-          mimeType: remoteMainPhoto.mimeType,
+          ext: remoteMainPhoto.ext,
         }
       }
     })
@@ -129,7 +130,7 @@ const ProfileSummaryPage = React.memo(() => {
             
             <Flex row>
               
-              <AppLink toFull={RootRoute.profile.id.userId[use](id).preview}>
+              <AppLink toFull={RootRoute.profile.id.userId[use](id).tab.preview}>
                 <AvaBox>
                   <MediaDownloader media={mainPhoto}>
                     {(media) => {
@@ -145,7 +146,7 @@ const ProfileSummaryPage = React.memo(() => {
               
               
               
-              <AppLink toFull={RootRoute.profile.id.userId[use](id).profile}>
+              <AppLink toFull={RootRoute.profile.id.userId[use](id).tab.edit}>
                 <NameInfoEditArea col>
                   
                   <Name>{name}</Name>
@@ -171,7 +172,7 @@ const ProfileSummaryPage = React.memo(() => {
                 <UseOverlayUrl overlayName={QuickSettingsOverlayName}>
                   {overlay => (
                     <Gear onClick={overlay.open}>
-                      <Button css={IconButtonS6.t(gearIc)}>
+                      <Button css={IconButtonS6.t(gearS)}>
                         <GearOutlinedIc/>
                       </Button>
                     </Gear>
@@ -188,7 +189,7 @@ const ProfileSummaryPage = React.memo(() => {
             
             <Gap h={9}/>
             
-            <AppLink toFull={RootRoute.profile.id.userId[use](id).profile}>
+            <AppLink toFull={RootRoute.profile.id.userId[use](id).tab.edit}>
               <HeaderArrow css={headerArrowS}>
                 {uiText.completeYourProfile}
               </HeaderArrow>
@@ -209,6 +210,12 @@ const ProfileSummaryPage = React.memo(() => {
               {uiText.completeProfileInFewSteps}
             </CompleteProfileText>
             
+          </InfoCard>
+          
+          <InfoCard szCt p={8}>
+            <AppLink toFull={RootRoute.profile.id.userId[use](id).share}>
+              <Button css={ButtonS6.t(qrScanS)}/>
+            </AppLink>
           </InfoCard>
           
           
@@ -257,9 +264,39 @@ const Gear = styled.div`
   margin-top: -14px;
   margin-right: -6px;
 `
-const gearIc: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
+const gearS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.secondary, {
   iconSz: 'full',
   iconColor: t.boxDefault7.ct,
+}]
+
+// TODO Theme
+const color1 = '#161941'
+const color2 = '#cea1d4'
+const color3 = '#242767'
+const color4 = '#ffb818'
+
+const qrScanS: AppWidgetStyle = t => [ButtonS6.S.text.rect.lg.normal, {
+  button: {
+    sz: 76, p: 0,
+  },
+  buttonAfter: {
+    content: `''`,
+    sz: 'full',
+    backgroundImage: `
+      radial-gradient(circle at bottom right, ${color2}, transparent 80%),
+      radial-gradient(circle at top right, ${color4}, transparent 80%),
+      radial-gradient(circle at top left, ${color1}, transparent 100%),
+      radial-gradient(circle at bottom left, ${color3}, transparent 100%)
+    `,
+    backgroundSize: '80% 80%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    maskImage: `url("${qrScan}")`,
+    maskMode: 'alpha',
+    maskSize: '80% 80%',
+    maskPosition: 'center',
+    maskRepeat: 'no-repeat',
+  },
 }]
 
 

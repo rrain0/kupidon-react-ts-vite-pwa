@@ -1,18 +1,19 @@
-import styled from '@emotion/styled'
 import React from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { GenderA } from 'src/model/api/GenderA.ts'
+import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ProfileCards from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
-import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
-import FormValues = ProfilePageValidation.FormValues
-import absTlwh = EmotionCommon.absTlwh
-import full = EmotionCommon.full
 
 
 
 
 export type PreviewProps = {
-  formValues: FormValues
+  photos: MediaInArrayDUC[]
+  name: string
+  birthDate: string
+  gender: GenderA | ''
+  aboutMe: string
 }
 
 
@@ -24,13 +25,15 @@ const Preview = React.memo((props: PreviewProps) => {
     birthDate,
     gender,
     aboutMe,
-  } = props.formValues
+  } = props
   
   
   return (
-    <PageContentLayout full>
-      <StackFrame>
-        <StackFrame2>
+    <PageContentLayout full data-display-name='Preview'>
+      {/* StackFrame */}
+      <Flex full relative noOverflow>
+        {/* StackFrame2 */}
+        <Flex absTlwh>
           <ProfileCards
             photos={photos}
             name={name}
@@ -38,22 +41,10 @@ const Preview = React.memo((props: PreviewProps) => {
             gender={gender}
             aboutMe={aboutMe}
           />
-        </StackFrame2>
-      </StackFrame>
-      
+        </Flex>
+      </Flex>
     </PageContentLayout>
   )
 })
+Preview.displayName = 'Preview'
 export default Preview
-
-
-
-
-
-const StackFrame = styled.div`
-  position: relative;
-  ${full};
-`
-const StackFrame2 = styled.div`
-  ${absTlwh};
-`

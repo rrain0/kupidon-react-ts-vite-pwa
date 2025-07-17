@@ -21,6 +21,6 @@ export interface ChatItemA {
   memberIds: string[]
   createdAt: string
   updatedAt: string
-  profile: ChatItemProfileA | null
+  profile: ChatItemProfileA
   lastMessage: ChatMessageA | null
 }

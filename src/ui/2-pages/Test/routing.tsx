@@ -1,17 +1,16 @@
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import React, { Suspense } from 'react'
 import {
-  Navigate,
   RouteObject,
   useSearchParams,
 } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
-import fullAllowedNameParams = RouteBuilder.fullAllowedNameParams
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
 
@@ -27,10 +26,9 @@ const RouteTestMbti = React.memo(() => {
   const authUserId = useAuthZustand(s => s.user?.id)
   
   if (!authUserId) return (
-    <Navigate
-      to={RootRoute.login[fullAllowedNameParams]({
-        returnPath: RootRoute.test.mbti[fullAnySearchParams](searchParams),
-      })}
+    <AppNavigate
+      toFull={RootRoute.login}
+      allowedNamedParams={{ returnPath: RootRoute.test[fullAnySearchParams](searchParams) }}
       replace={true}
     />
   )
@@ -62,19 +60,16 @@ const RouteTest = React.memo(() => {
   const authUserId = useAuthZustand(s => s.user?.id)
   
   if (!authUserId) return (
-    <Navigate
-      to={RootRoute.login[fullAllowedNameParams]({
-        returnPath: RootRoute.test[fullAnySearchParams](searchParams),
-      })}
+    <AppNavigate
+      toFull={RootRoute.login}
+      allowedNamedParams={{ returnPath: RootRoute.test[fullAnySearchParams](searchParams) }}
       replace={true}
     />
   )
   
   return (
-    <Navigate
-      to={RootRoute.profile.id.userId[use](authUserId)
-        .tests[fullAnySearchParams](searchParams)
-      }
+    <AppNavigate
+      toFull={RootRoute.profile.id.userId[use](authUserId).tab.tests}
       replace={true}
     />
   )

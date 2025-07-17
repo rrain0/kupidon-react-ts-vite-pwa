@@ -7,9 +7,11 @@ export interface UserPhotoA {
   id: string
   index: number
   name: string
-  mimeType: string
+  ext: string
   url: string
 }
+
+
 
 export interface UserStrangerShortA {
   id: string
@@ -44,6 +46,7 @@ export interface UserCurrentA {
   createdAt: string
   updatedAt: string
   name: string
+  ava: string
   birthDate: string
   age: number
   gender: GenderA

@@ -1,6 +1,6 @@
 import { DateU } from '@util/date/DateU.ts'
 import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { UserCurrentA } from 'src/model/api/UserA.ts'
+import { UserCurrentA, UserPhotoA } from 'src/model/api/UserA.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import {
   MediaInArrayDUC,
@@ -13,7 +13,6 @@ import { UserApi } from 'src/api/requests/UserApi.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { DateTime } from '@util/date/DateTime.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import * as uuid from 'uuid'
@@ -30,33 +29,6 @@ import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
 import findBy = ArrayU.findBy
 import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
-
-
-
-
-
-export const currentUserPhotosToProfilePhotos = (
-  photos: UserCurrentA['photos']
-): MediaInArrayDUC[] => {
-  const profilePhotos = ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
-    ...newDefaultEmptyRemoteMediaInArray(i),
-    // TODO id - id collision with ids from backend?
-    id: uuid.v4(),
-  }))
-  photos.forEach(it => {
-    profilePhotos[it.index] = {
-      ...newDefaultRemoteMediaInArray(it.index),
-      id: it.id,
-      name: it.name,
-      mimeType: it.mimeType,
-      remoteUrl: it.url,
-      isInited: true,
-    }
-  })
-  return profilePhotos
-}
-
-
 
 
 

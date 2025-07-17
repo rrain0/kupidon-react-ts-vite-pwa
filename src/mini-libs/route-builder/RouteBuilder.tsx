@@ -5,16 +5,55 @@ import ObjectValues = ObjectU.ObjectValues
 import ObjectKeysType = ObjectU.ObjectKeysType
 import ObjectEntries = ObjectU.ObjectEntries
 import ObjectKeys = ObjectU.ObjectKeys
+import isstring = TypeU.isstring
+import Pu = TypeU.Pu
+
 
 
 
 export namespace RouteBuilder {
   
+
+  function todoRefactorVariants() {
+    // Пока что выглядит это всё не очень
+    
+    const route = Symbol('route')
+    const routes = {
+      [route]: {
+        path: 'chat',
+        params: { returnPath: 'returnPath' },
+      },
+      userId: {
+        [route]: { path: 'user-id' },
+        id: ':id',
+      },
+      id: {
+        [route]: { path: 'id' },
+        id: ':id',
+      },
+    }
+    
+    const routes2 = {
+      $path: 'chat',
+      $params: { returnPath: 'returnPath' },
+      userId: {
+        $path: 'user-id',
+        id: ':id',
+      },
+      id: {
+        $path: 'id',
+        id: ':id',
+      },
+      test: {
+      
+      },
+    }
+  }
+  
+  
+  
   
   // null | undefined | '' for the first path means root
-  import isdef = TypeU.isdef
-  import isstring = TypeU.isstring
-  import Pu = TypeU.Pu
   export const pathConcat = (...paths: Array<string | emptyval>): string => {
     let result = paths[0] ?? ''
     for (let i = 1; i < paths.length; i++) {

@@ -3,13 +3,11 @@ import React, { Suspense, useState } from 'react'
 import { RouteObject, useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import FindPairPage from 'src/ui/2-pages/FindPair/FindPairPage.tsx'
 import { LikedMeCardItem } from 'src/ui/2-pages/LikedMe/parts/LikedMeCard.tsx'
-import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
-import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 
 const LikedMePage = React.lazy(
@@ -32,7 +30,7 @@ const likedMeItems: LikedMeCardItem[] = users.map(it => ({
 
 const profileCardsItems = users.map(it => ({
   id: it.id,
-  photos: currentUserPhotosToProfilePhotos(it.photos),
+  photos: userPhotosAToMedias(it.photos),
   name: it.name,
   birthDate: it.birthDate,
   gender: it.gender,

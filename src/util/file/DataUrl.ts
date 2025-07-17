@@ -1,10 +1,12 @@
-
+import { FileU } from 'src/util/file/FileU.ts'
+import getExtensionFromMimeType = FileU.mimeToExt
 
 
 export type DataUrl = {
   props: string[]
   data: string
   mimeType: string
+  preferredExt: string
   isBase64: boolean
 }
 
@@ -31,7 +33,7 @@ export const getDataUrlProps = (url = ''): DataUrl | undefined => {
   }
   
   const props: DataUrl = {
-    props: [], data: '', mimeType: '', isBase64: false,
+    props: [], data: '', mimeType: '', preferredExt: '', isBase64: false,
   }
   
   props.data = path.substring(dataSeparatorIdx + 1)
@@ -40,6 +42,7 @@ export const getDataUrlProps = (url = ''): DataUrl | undefined => {
   props.props = propsStr.split(';')
   
   props.mimeType = props.props[0] ?? ''
+  props.preferredExt = getExtensionFromMimeType(props.mimeType)
   props.isBase64 = props.props.slice(-1)[0] === 'base64'
   
   return props

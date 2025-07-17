@@ -32,7 +32,7 @@ export namespace ChatItemsApi {
   export type ChatItemErrorData = AuthenticationError | TechnicalError
   export const chatItem = async (id: string) => (
     handleAuthenticatedResponse<ChatItemSuccessData, ChatItemErrorData>(
-      axAccess.get(ApiV1Routes.chatItem(id)),
+      axAccess.get(ApiV1Routes.chatItemId(id)),
     )
   )
   

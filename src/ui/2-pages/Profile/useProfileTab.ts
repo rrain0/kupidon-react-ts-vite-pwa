@@ -14,21 +14,21 @@ import isundef = TypeU.isundef
 
 
 const previewTab = {
-  pathSegment: RootRoute.profile.id.userId.preview[path],
-  route: (userId: string) => RootRoute.profile.id.userId[use](userId).preview,
+  pathSegment: RootRoute.profile.id.userId.tab.preview[path],
+  route: (userId: string) => RootRoute.profile.id.userId[use](userId).tab.preview,
   i: 0,
 }
-const profileTab = {
-  pathSegment: RootRoute.profile.id.userId.profile[path],
-  route: (userId: string) => RootRoute.profile.id.userId[use](userId).profile,
+const editTab = {
+  pathSegment: RootRoute.profile.id.userId.tab.edit[path],
+  route: (userId: string) => RootRoute.profile.id.userId[use](userId).tab.edit,
   i: 1,
 }
-const dateTab = {
-  pathSegment: RootRoute.profile.id.userId.tests[path],
-  route: (userId: string) => RootRoute.profile.id.userId[use](userId).tests,
+const testsTab = {
+  pathSegment: RootRoute.profile.id.userId.tab.tests[path],
+  route: (userId: string) => RootRoute.profile.id.userId[use](userId).tab.tests,
   i: 2,
 }
-const tabs = [previewTab, profileTab, dateTab]
+const tabs = [previewTab, editTab, testsTab]
 
 const getTabByPathSegment = (pathSegment: string) => tabs.find(it => it.pathSegment === pathSegment)
 const getTabByIndex = (i: number) => tabs.find(it => it.i === i)
@@ -42,7 +42,7 @@ export const useProfileTab = () => {
   
   const userIdTabRoute = RootRoute.profile.id
     .userId[use](':userId')
-    .profile[use](':tab')
+    .tab.edit[use](':tab')
   const params = useMatch(userIdTabRoute[full]())!.params!
   const userId = params['userId']!
   const tab = params['tab']!

@@ -123,12 +123,10 @@ export namespace FileU {
   
   
   
-  export const getExtensionFromMimeType = (mimeType: string): string => {
+  export const mimeToExt = (mimeType: string): string => {
     return mime.getExtension(mimeType) ?? ''
   }
-  
-  
-  export const getMimeTypeFromExtension = (extension: string): string => {
+  export const extToMime = (extension: string): string => {
     return mime.getType(extension) ?? ''
   }
   

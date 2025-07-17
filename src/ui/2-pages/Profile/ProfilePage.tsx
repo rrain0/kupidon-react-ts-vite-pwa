@@ -17,6 +17,7 @@ import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from 'src/api/useApiRequest.ts'
 import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
+import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
 import {
   useMediaArrayDownloader
 } from 'src/ui-data/models/media/download/useMediaArrayDownloader.ts'
@@ -34,9 +35,7 @@ import Profile from 'src/ui/2-pages/Profile/Profile/Profile.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { RangeU } from 'src/util/common/RangeU'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
-import {
-  currentUserPhotosToProfilePhotos, profileUpdateApiRequest,
-} from 'src/ui/2-pages/Profile/actions.ts'
+import { profileUpdateApiRequest } from 'src/ui/2-pages/Profile/actions.ts'
 import { ProfilePageTabHeaderContext } from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
@@ -156,7 +155,7 @@ const ProfilePage = React.memo(() => {
         if (valuesProps.gender.isInitial) newValues.gender = u.gender
         if (valuesProps.aboutMe.isInitial) newValues.aboutMe = u.aboutMe
         
-        newValues.initialValues.photos = currentUserPhotosToProfilePhotos(u.photos)
+        newValues.initialValues.photos = userPhotosAToMedias(u.photos)
         newValues.photos = [...s.photos]
         
         // we needn't take conversion, because it is local
@@ -541,7 +540,11 @@ const ProfilePage = React.memo(() => {
                         {tabI === 0 && (
                           <Preview
                             key='preview'
-                            formValues={formValues}
+                            photos={formValues.photos}
+                            name={formValues.name}
+                            birthDate={formValues.birthDate}
+                            gender={formValues.gender}
+                            aboutMe={formValues.aboutMe}
                           />
                         )}
                         

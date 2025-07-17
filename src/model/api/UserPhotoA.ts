@@ -1,0 +1,39 @@
+import { ArrayU } from '@util/common/ArrayU.ts'
+import {
+  MediaInArrayDUC,
+  newDefaultEmptyRemoteMediaInArray, newDefaultRemoteMediaInArray,
+} from 'src/ui-data/models/media/Media.ts'
+import { profilePhotosCntMax } from 'src/ui/2-pages/Profile/validation.ts'
+import * as uuid from 'uuid'
+
+
+
+export interface UserPhotoA {
+  id: string
+  index: number
+  name: string
+  ext: string
+  url: string
+}
+
+
+
+export function userPhotosAToMedias(photos: UserPhotoA[]): MediaInArrayDUC[] {
+  const profilePhotos = ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
+    ...newDefaultEmptyRemoteMediaInArray(i),
+    // TODO id - id collision with ids from backend?
+    id: uuid.v4(),
+  }))
+  photos.forEach(it => {
+    profilePhotos[it.index] = {
+      ...newDefaultRemoteMediaInArray(it.index),
+      id: it.id,
+      name: it.name,
+      ext: it.ext,
+      remoteUrl: it.url,
+      isInited: true,
+    }
+  })
+  return profilePhotos
+}
+

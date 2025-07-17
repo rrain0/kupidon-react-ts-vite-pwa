@@ -16,6 +16,7 @@ const ClearUnknownPathEnding = React.memo(() => {
   const newUrlString = location.pathname
     .slice(0, -pathEnding.length)
     + location.search
+    + location.hash
   
   return <Navigate to={newUrlString} replace={true}/>
 })

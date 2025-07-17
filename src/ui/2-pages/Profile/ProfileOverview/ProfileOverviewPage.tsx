@@ -1,0 +1,95 @@
+import React, { useCallback, useEffect, useState } from 'react'
+import { TypeU } from '@util/common/TypeU.ts'
+import { UserApi } from 'src/api/requests/UserApi.ts'
+import { UserToUserApi } from 'src/api/requests/UserToUserApi.ts'
+import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { UserStrangerA } from 'src/model/api/UserA.ts'
+import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
+import MediaArrayDownloader from 'src/ui-data/models/media/download/MediaArrayDownloader.tsx'
+import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import ProfileCards from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
+import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
+import PageLayout from 'src/ui/components/page/PageLayout.tsx'
+import Pu = TypeU.Pu
+
+
+
+
+export type ProfileOverviewPageProps = Pu<{
+  userId: string
+}>
+
+
+
+const ProfileOverviewPage = React.memo((props: ProfileOverviewPageProps) => {
+  const {
+    userId,
+  } = props
+  
+  
+  const [user, setUser] = useState<UserStrangerA | undefined>(undefined)
+  const {
+    startRequest,
+    isLoading, isFinished, isSuccess, isError,
+    data, error,
+  } = useApiRequest(() => UserApi.userById(userId ?? ''))
+  
+  useEffect(() => {
+    setUser(undefined)
+    if (userId) startRequest()
+  }, [userId])
+  
+  useEffect(() => {
+    if (isSuccess) {
+      const u = data.user
+      setUser(u)
+    }
+  }, [isSuccess])
+  
+  
+  
+  
+  // TODO API List - сделать отдельную компоненту для создания фукнций колбэков со входящими данными
+  const onLike = useCallback((userId: string) => {
+    // TODO API
+    UserToUserApi.like({ toUserId: userId })
+  }, [])
+  
+  
+  
+  return (
+    <PageLayout vp
+      data-display-name='ProfileOverviewPage'
+    >
+      <PageContentLayout full>
+        <Flex full relative noOverflow>
+          {isLoading && (
+            <Flex full center>Загрузка...</Flex>
+          )}
+          {isError && (
+            <Flex full center>Ошибка</Flex>
+          )}
+          {user && (
+            <Flex absTlwh>
+              <MediaArrayDownloader medias={userPhotosAToMedias(user.photos)}>
+                {photos => (
+                  <ProfileCards
+                    photos={photos}
+                    name={user.name}
+                    birthDate={user.birthDate}
+                    gender={user.gender}
+                    aboutMe={user.aboutMe}
+                    onAccept={() => onLike(user.id)}
+                  />
+                )}
+              </MediaArrayDownloader>
+            </Flex>
+          )}
+        </Flex>
+      </PageContentLayout>
+    </PageLayout>
+  )
+})
+ProfileOverviewPage.displayName = 'ProfileOverviewPage'
+export default ProfileOverviewPage
+

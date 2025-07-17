@@ -28,6 +28,7 @@ const FindPairPage = React.memo(({ items, startI }: FindPairPageProps) => {
     </PageLayout>
   )
 })
+FindPairPage.displayName = 'FindPairPage'
 export default FindPairPage
 
 

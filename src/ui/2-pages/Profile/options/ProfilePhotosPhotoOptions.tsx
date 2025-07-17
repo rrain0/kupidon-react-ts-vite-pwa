@@ -25,7 +25,6 @@ import * as uuid from 'uuid'
 import Callback = TypeU.Callback
 import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import DownloadIc = SvgIconsPack.DownloadIc
-import extensionFromMimeType = FileU.getExtensionFromMimeType
 import col = EmotionCommon.col
 import row = EmotionCommon.row
 import SetterOrUpdater = TypeU.SetterOrUpdater
@@ -158,7 +157,7 @@ const ProfilePhotosPhotoOptions = React.memo((props: ProfilePhotosPhotoOptionsPr
                 if (im.isReady) {
                   return (
                     <a href={im.dataUrl}
-                      download={`${im.name} ${im.id}.${extensionFromMimeType(im.mimeType)}`}
+                      download={`${im.name} ${im.id}.${im.ext}`}
                     >
                       <Button css={ButtonS6.t(ButtonS6.S.text.rect.lg.normal)}
                         onClick={sheet.setClosing}

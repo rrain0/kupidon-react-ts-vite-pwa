@@ -17,13 +17,13 @@ export namespace AppRoutes {
   const login = buildRoute({
     [path]: 'login',
     [params]: {
-      returnPath: 'return-path',
+      returnPath: 'returnPath',
     },
   })
   const signup = buildRoute({
     [path]: 'signup',
     [params]: {
-      returnPath: 'return-path',
+      returnPath: 'returnPath',
     },
   })
   
@@ -38,9 +38,14 @@ export namespace AppRoutes {
       userId: buildRoute({
         [path]: ':userId',
         summary: buildPath('summary'),
-        preview: buildPath('preview'),
-        profile: buildPath('profile'),
-        tests: buildPath('tests'),
+        tab: buildRoute({
+          [path]: 'tab',
+          preview: buildPath('preview'),
+          edit: buildPath('edit'),
+          tests: buildPath('tests'),
+        }),
+        share: buildPath('share'),
+        overview: buildPath('overview'),
       }),
     }),
   })

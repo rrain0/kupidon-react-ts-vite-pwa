@@ -24,9 +24,14 @@ export type SizeShortProps = Pu<{
   fullHMin: boolean // true => { min-height: '100%' }
   fullW: boolean // true => { width: '100%' }
   fullH: boolean // true => { height: '100%' }
+  wFull: boolean // true => { width: '100%' }
+  hFull: boolean // true => { height: '100%' }
   full: boolean // true => { width: '100%', height: '100%' }
   fullWMax: boolean // true => { max-width: '100%' }
   fullHMax: boolean // true => { max-height: '100%' }
+  wCt: boolean // true => { width: 'fit-content' }
+  hCt: boolean // true => { height: 'fit-content' }
+  szCt: boolean // true => { width: 'fit-content', height: 'fit-content' }
   
   ratio: number | string
   rad: number | string
@@ -56,8 +61,15 @@ export const processSizeShortProps = <P extends object>(
 ) => {
   const {
     boxSizing, contentBox, borderBox,
+    
     w, h, sz, wMin, hMin, szMin, wMax, hMax, szMax,
-    fullWMin, fullHMin, fullW, fullH, full, fullWMax, fullHMax,
+    
+    fullWMin, fullHMin,
+    fullW, fullH, wFull, hFull, full,
+    fullWMax, fullHMax,
+    
+    wCt, hCt, szCt,
+    
     ratio, rad, round,
     m, mv, mh, mt, mr, mb, ml,
     p, pv, ph, pt, pr, pb, pl,
@@ -74,12 +86,17 @@ export const processSizeShortProps = <P extends object>(
     ...isdef(boxSizing) && { boxSizing: boxSizing },
     
     ...full && { width: '100%', height: '100%' },
+    ...szCt && { width: 'fit-content', height: 'fit-content' },
     ...isdef(sz) && { width: processAnySz(sz), height: processAnySz(sz) },
     ...isdef(szMin) && { minWidth: processAnySz(szMin), minHeight: processAnySz(szMin) },
     ...isdef(szMax) && { maxWidth: processAnySz(szMax), maxHeight: processAnySz(szMax) },
     
     ...fullW && { width: '100%' },
     ...fullH && { height: '100%' },
+    ...wFull && { width: '100%' },
+    ...hFull && { height: '100%' },
+    ...wCt && { width: 'fit-content' },
+    ...hCt && { height: 'fit-content' },
     ...fullWMin && { minWidth: '100%' },
     ...fullHMin && { minHeight: '100%' },
     ...fullWMax && { maxWidth: '100%' },

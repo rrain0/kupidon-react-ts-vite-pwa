@@ -25,6 +25,7 @@ import isdef = TypeU.isdef
 export namespace UserApi {
   
   
+  
   export type CurrentUserSuccessData = {
     user: UserCurrentA
   }
@@ -129,12 +130,12 @@ export namespace UserApi {
       abortCtrl?: AbortController
     }
   ) => {
-    const mimeType = getDataUrlProps(photo.dataUrl)!.mimeType
+    const ext = getDataUrlProps(photo.dataUrl)!.preferredExt
     const preparedPhoto = {
       id: photo.id,
       index: photo.index,
       name: photo.name,
-      mimeType,
+      ext,
       binData: await fetchToBlob(photo.dataUrl),
     }
     

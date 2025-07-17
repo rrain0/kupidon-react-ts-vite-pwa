@@ -6,15 +6,13 @@ import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
+import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
 import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import {
   ProfileCardsStackListItem,
 } from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
-import { currentUserPhotosToProfilePhotos } from 'src/ui/2-pages/Profile/actions.ts'
-import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 
 const FindPairPage = React.lazy(
@@ -27,37 +25,37 @@ const FindPairPage = React.lazy(
 const photos = [
   {
     type: 'local', isEmpty: false, id: '0',
-    remoteUrl: '', name: '0', mimeType: 'image/png',
+    remoteUrl: '', name: '0', ext: 'png',
     dataUrl: MockData.images.sixImages[0],
     isInited: true, isReady: true, remoteI: 0,
   },
   {
     type: 'local', isEmpty: false, id: '1',
-    remoteUrl: '', name: '1', mimeType: 'image/png',
+    remoteUrl: '', name: '1', ext: 'png',
     dataUrl: MockData.images.sixImages[1],
     isInited: true, isReady: true, remoteI: 1,
   },
   {
     type: 'local', isEmpty: false, id: '2',
-    remoteUrl: '', name: '2', mimeType: 'image/png',
+    remoteUrl: '', name: '2', ext: 'png',
     dataUrl: MockData.images.sixImages[2],
     isInited: true, isReady: true, remoteI: 2,
   },
   {
     type: 'local', isEmpty: false, id: '3',
-    remoteUrl: '', name: '3', mimeType: 'image/png',
+    remoteUrl: '', name: '3', ext: 'png',
     dataUrl: MockData.images.sixImages[3],
     isInited: true, isReady: true, remoteI: 3,
   },
   {
     type: 'local', isEmpty: false, id: '4',
-    remoteUrl: '', name: '4', mimeType: 'image/png',
+    remoteUrl: '', name: '4', ext: 'png',
     dataUrl: MockData.images.sixImages[4],
     isInited: true, isReady: true, remoteI: 4,
   },
   {
     type: 'local', isEmpty: false, id: '5',
-    remoteUrl: '', name: '5', mimeType: 'image/png',
+    remoteUrl: '', name: '5', ext: 'png',
     dataUrl: MockData.images.sixImages[5],
     isInited: true, isReady: true, remoteI: 5,
   },
@@ -118,7 +116,7 @@ const FindPairPageWithItems = React.memo(() => {
       setItems(response.data.users.map(it => {
         return {
           id: it.id,
-          photos: currentUserPhotosToProfilePhotos(it.photos),
+          photos: userPhotosAToMedias(it.photos),
           name: it.name,
           birthDate: it.birthDate,
           gender: it.gender,

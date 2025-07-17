@@ -4,7 +4,6 @@ import { FileU } from '@util/file/FileU.ts'
 import noop = TypeU.noop
 import Pu = TypeU.Pu
 import getFilenameFromPath = FileU.getFilenameFromPath
-import getMimeTypeFromExtension = FileU.getMimeTypeFromExtension
 import getExtension = FileU.getExtension
 
 
@@ -20,7 +19,7 @@ export interface Media {
   id: string
   remoteUrl: string
   name: string
-  mimeType: string
+  ext: string
   
   dataUrl: string
   
@@ -34,7 +33,7 @@ export interface Media {
 
 export const newDefaultRemoteMedia = (): Media => ({
   type: 'remote', isEmpty: false,
-  id: '', remoteUrl: '', name: '', mimeType: '',
+  id: '', remoteUrl: '', name: '', ext: '',
   dataUrl: '',
   isReady: false,
 })
@@ -65,7 +64,7 @@ export const urlToMedia = (url = '', { needDownload = true } = { }): MediaDownlo
   if (dataUrlProps) return {
     ...newDefaultLocalMedia(),
     id: url,
-    mimeType: dataUrlProps.mimeType,
+    ext: dataUrlProps.preferredExt,
     dataUrl: url,
     isInited: true,
     isReady: true,
@@ -75,7 +74,7 @@ export const urlToMedia = (url = '', { needDownload = true } = { }): MediaDownlo
     id: url,
     remoteUrl: url,
     name: getFilenameFromPath(url),
-    mimeType: getMimeTypeFromExtension(getExtension(url)),
+    ext: getExtension(url),
     isInited: true,
     needDownload,
   }

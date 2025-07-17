@@ -10,6 +10,9 @@ export type PositionShortProps = Pu<{
   fixed: boolean // true => { position: 'fixed' }
   absolute: boolean // true => { position: 'absolute' }
   relative: boolean // true => { position: 'relative' }
+  abs: boolean // true => { position: 'absolute' }
+  // Сокращение 'rel' уже занято html атрибутом
+  rela: boolean // true => { position: 'relative' }
   
   t: number | string
   r: number | string
@@ -33,7 +36,7 @@ export const processPositionShortProps = <P extends object>(
   props: P & PositionShortProps
 ) => {
   const {
-    pos, fixed, absolute, relative,
+    pos, fixed, absolute, relative, abs, rela,
     t, r, b, l, z, av, ah, a,
     fixedTop, fixedBottom,
     absTrbl, absTlwh,
@@ -49,6 +52,8 @@ export const processPositionShortProps = <P extends object>(
     ...absTrbl && { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
     ...absTlwh && { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' },
     
+    ...abs && { position: 'absolute' },
+    ...rela && { position: 'relative' },
     ...fixed && { position: 'fixed' },
     ...absolute && { position: 'absolute' },
     ...relative && { position: 'relative' },

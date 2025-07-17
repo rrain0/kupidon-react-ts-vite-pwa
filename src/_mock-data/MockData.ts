@@ -156,7 +156,7 @@ export namespace MockData {
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
-        id: '93723057-eee2-4a75-9095-e5b3219f0885', index: 0, name: '', mimeType: 'image/png',
+        id: '93723057-eee2-4a75-9095-e5b3219f0885', index: 0, name: '', ext: 'png',
         url: portraitAttractivePrettyWoman,
       }],
     },
@@ -168,7 +168,7 @@ export namespace MockData {
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
-        id: 'd5b6d377-2f7c-4fd8-8166-7ec9ca691023', index: 0, name: '', mimeType: 'image/png',
+        id: 'd5b6d377-2f7c-4fd8-8166-7ec9ca691023', index: 0, name: '', ext: 'png',
         url: portraitStylishBrunetteGirl,
       }],
     },
@@ -180,7 +180,7 @@ export namespace MockData {
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
-        id: '69184b79-2fa5-4270-a407-8405b1972dc9', index: 0, name: '', mimeType: 'image/png',
+        id: '69184b79-2fa5-4270-a407-8405b1972dc9', index: 0, name: '', ext: 'png',
         url: portraitWomanPosingHouse,
       }],
     },
@@ -192,7 +192,7 @@ export namespace MockData {
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
-        id: 'ee389d55-d1aa-411e-bd47-d9b86c7ed102', index: 0, name: '', mimeType: 'image/png',
+        id: 'ee389d55-d1aa-411e-bd47-d9b86c7ed102', index: 0, name: '', ext: 'png',
         url: portraitCheerfulGirl,
       }],
     },
@@ -204,7 +204,7 @@ export namespace MockData {
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
-        id: '714e70ba-f328-4df4-9468-48ec874e8500', index: 0, name: '', mimeType: 'image/png',
+        id: '714e70ba-f328-4df4-9468-48ec874e8500', index: 0, name: '', ext: 'png',
         url: portraitCharmingWoman,
       }],
     },
@@ -216,7 +216,7 @@ export namespace MockData {
       gender: 'FEMALE',
       aboutMe: '',
       photos: [{
-        id: 'f967f0e7-05e1-44bd-83af-0bef3ee9f63d', index: 0, name: '', mimeType: 'image/png',
+        id: 'f967f0e7-05e1-44bd-83af-0bef3ee9f63d', index: 0, name: '', ext: 'png',
         url: portraitDarkHairedLady,
       }],
     },
