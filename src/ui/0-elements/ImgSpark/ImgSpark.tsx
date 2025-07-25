@@ -10,12 +10,11 @@ import {
   MediaDownloadable,
   urlToMedia,
 } from 'src/ui-data/models/media/Media.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import DocumentErrorIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DocumentErrorIc.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from 'src/util/react/ReactU'
 import combineProps = ReactU.combineProps
-import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 
 
 

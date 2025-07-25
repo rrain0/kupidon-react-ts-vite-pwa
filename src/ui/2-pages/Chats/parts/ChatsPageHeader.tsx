@@ -13,14 +13,13 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { GradSvgIconS6 } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconS6.ts'
 import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import FourDotsIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/FourDotsIc.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import HeartOutlinedGradIc = GradSvgIconsPack.HeartOutlinedGradIc
 import Txt = EmotionCommon.Txt
 import Pu = TypeU.Pu
 import RootRoute = AppRoutes.RootRoute
-import FourDotsIc = SvgIconsPack.FourDotsIc
 
 
 

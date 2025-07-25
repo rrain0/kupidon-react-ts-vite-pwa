@@ -15,6 +15,7 @@ import React, { useEffect, useState } from 'react'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import LocationIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/LocationIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
@@ -24,7 +25,6 @@ import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectM
 import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
-import LocationIc = SvgIconsPack.LocationIc
 import PriceTagIc = SvgIconsPack.PriceTagIc
 import arrOfIndices = ArrayU.arrOfIndices
 import arrOfZeros = ArrayU.arrOfZeros

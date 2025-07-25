@@ -1,5 +1,6 @@
 import { RangeU } from '@util/common/RangeU.ts'
 import React from 'react'
+import DocumentErrorIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DocumentErrorIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { ImageParts } from 'src/ui/0-elements/ImageParts.tsx'
@@ -9,7 +10,6 @@ import { ReactU } from 'src/util/react/ReactU'
 import { TypeU } from 'src/util/common/TypeU'
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
-import DocumentErrorIc = SvgIconsPack.DocumentErrorIc
 import PictureIc = SvgIconsPack.PictureIc
 
 

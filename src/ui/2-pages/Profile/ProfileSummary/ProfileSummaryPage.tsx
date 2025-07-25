@@ -20,7 +20,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import GearOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearOutlinedIc.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
@@ -43,7 +43,6 @@ import use = RouteBuilder.use
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import row = EmotionCommon.row
-import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
 import qrScan from '@ic/normal/special/qr-scan.svg'
 
 

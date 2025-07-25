@@ -7,30 +7,6 @@ import { BaseSvgIcon, generateSvgIcon, SvgIconProps } from './SvgIcon'
 // TODO refactor - extract to folder as separate components
 
 // UI icons
-import DangerRoundToastifySvg from '@ic/normal/ui/danger-round-toastify.svg?react'
-import DaySvg from '@ic/normal/ui/day.svg?react'
-import DayNightSvg from '@ic/normal/ui/day-night.svg?react'
-import DocumentErrorSvg from '@ic/normal/ui/document-error.svg?react'
-import DownloadSvg from '@ic/normal/ui/download.svg?react'
-
-import EyeSvg from '@ic/normal/ui/eye.svg?react'
-import EmojiLaughSvg from '@ic/normal/ui/emoji-laugh.svg?react'
-import EyeCrossedOutSvg from '@ic/normal/ui/eye-crossed-out.svg?react'
-import EyeWideSvg from '@ic/normal/ui/eye-wide.svg?react'
-
-import FloppyDisk1Svg from '@ic/normal/ui/floppy-disk-1.svg?react'
-import FourDotsSvg from '@ic/normal/ui/four-dots.svg?react'
-import FullscreenSvg from '@ic/normal/ui/fullscreen.svg?react'
-import FunnelFilterListSvg from '@ic/normal/ui/funnel-filter-list.svg?react'
-
-import GearSvg from '@ic/normal/ui/gear.svg?react'
-import GearOutlinedSvg from '@ic/normal/ui/gear-outlined.svg?react'
-
-import InfoToastifySvg from '@ic/normal/ui/info-toastify.svg?react'
-
-import LocationSvg from '@ic/normal/ui/location.svg?react'
-import LockSvg from '@ic/normal/ui/lock.svg?react'
-
 import MapLocationSvg from '@ic/normal/ui/map-location.svg?react'
 import MicrophoneSvg from '@ic/normal/ui/microphone.svg?react'
 import MoonSvg from '@ic/normal/ui/moon.svg?react'
@@ -117,36 +93,6 @@ import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 export namespace SvgIconsPack {
   
   // UI Icons
-  export const DangerRoundToastifyIc = generateSvgIcon(DangerRoundToastifySvg)
-  export const DayIc = generateSvgIcon(DaySvg)
-  export const DayNightIc = generateSvgIcon(DayNightSvg)
-  export const DocumentErrorIc = generateSvgIcon(DocumentErrorSvg)
-  export const DownloadIc = generateSvgIcon(DownloadSvg)
-  
-  
-  export const EyeIc = generateSvgIcon(EyeSvg)
-  export const EmojiLaughIc = generateSvgIcon(EmojiLaughSvg)
-  export const EyeCrossedOutIc = generateSvgIcon(EyeCrossedOutSvg)
-  export const EyeWideIc = generateSvgIcon(EyeWideSvg)
-  
-  
-  export const FloppyDisk1Ic = generateSvgIcon(FloppyDisk1Svg)
-  export const FourDotsIc = generateSvgIcon(FourDotsSvg)
-  export const FullscreenIc = generateSvgIcon(FullscreenSvg)
-  export const FunnelFilterListIc = generateSvgIcon(FunnelFilterListSvg)
-  
-  
-  export const GearIc = generateSvgIcon(GearSvg)
-  export const GearOutlinedIc = generateSvgIcon(GearOutlinedSvg)
-  
-  
-  export const InfoToastifyIc = generateSvgIcon(InfoToastifySvg)
-  
-  
-  export const LocationIc = generateSvgIcon(LocationSvg)
-  export const LockIc = generateSvgIcon(LockSvg)
-  
-  
   export const MapLocationIc = generateSvgIcon(MapLocationSvg)
   export const MicrophoneIc = generateSvgIcon(MicrophoneSvg)
   export const MoonIc = generateSvgIcon(MoonSvg)

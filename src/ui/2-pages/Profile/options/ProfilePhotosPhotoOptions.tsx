@@ -7,6 +7,7 @@ import {
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ArrowRefreshCwIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowRefreshCwIc.tsx'
+import DownloadIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DownloadIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
@@ -18,13 +19,11 @@ import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
 import Callback = TypeU.Callback
 import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
-import DownloadIc = SvgIconsPack.DownloadIc
 import col = EmotionCommon.col
 import row = EmotionCommon.row
 import SetterOrUpdater = TypeU.SetterOrUpdater

@@ -4,13 +4,12 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import GearIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearIc.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
 import col = EmotionCommon.col
 import rowWrap = EmotionCommon.rowWrap
-import GearIc = SvgIconsPack.GearIc
 
 
 

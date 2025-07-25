@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import LockIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/LockIc.tsx'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
@@ -26,8 +27,7 @@ import ClearSiteDialog, {
   ClearSiteDialogOverlayName,
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'
 import AddModuleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/AddModuleIc.tsx'
-import LockIc = SvgIconsPack.LockIc
-import GearIc = SvgIconsPack.GearIc
+import GearIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearIc.tsx'
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import { SettingsOptions } from 'src/ui/components/settings-options/SettingsOptions'

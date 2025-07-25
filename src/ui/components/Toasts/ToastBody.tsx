@@ -5,12 +5,13 @@ import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import CheckmarkCircleToastifyIc
   from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkCircleToastifyIc.tsx'
+import DangerRoundToastifyIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DangerRoundToastifyIc.tsx'
+import InfoToastifyIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/InfoToastifyIc.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SpinnerCircleQuarterIc = SvgIconsPack.SpinnerCircleQuarterIc
-import InfoToastifyIc = SvgIconsPack.InfoToastifyIc
 import WarnTriangleToastifyIc = SvgIconsPack.WarnTriangleToastifyIc
-import DangerRoundToastifyIc = SvgIconsPack.DangerRoundToastifyIc
 import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import row = EmotionCommon.row
 import resetButton = EmotionCommon.resetButton

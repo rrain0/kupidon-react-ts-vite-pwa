@@ -15,8 +15,7 @@ import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIc
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import GearOutlinedIc = SvgIconsPack.GearOutlinedIc
+import GearOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearOutlinedIc.tsx'
 import RootRoute = AppRoutes.RootRoute
 import QuickSettings, {
   QuickSettingsOverlayName,

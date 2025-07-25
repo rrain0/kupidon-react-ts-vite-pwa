@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import DayIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DayIc.tsx'
+import DayNightIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DayNightIc.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import DayNightIc = SvgIconsPack.DayNightIc
-import DayIc = SvgIconsPack.DayIc
 import MoonIc = SvgIconsPack.MoonIc
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'

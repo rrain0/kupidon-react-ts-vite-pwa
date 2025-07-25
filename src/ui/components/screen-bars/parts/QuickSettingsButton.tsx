@@ -1,10 +1,9 @@
 import React from 'react'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import GearIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearIc.tsx'
 import QuickSettings, { QuickSettingsOverlayName } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import GearIc = SvgIconsPack.GearIc
 
 
 

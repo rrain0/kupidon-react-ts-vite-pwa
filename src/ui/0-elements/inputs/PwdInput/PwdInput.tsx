@@ -1,12 +1,11 @@
 import { PointerU } from '@util/pointer/PointerU.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import EyeCrossedOutIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/EyeCrossedOutIc.tsx'
+import EyeIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/EyeIc.tsx'
 import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { useState } from 'react'
 import React from 'react'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import EyeCrossedOutIc = SvgIconsPack.EyeCrossedOutIc
-import EyeIc = SvgIconsPack.EyeIc
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import flexC = EmotionCommon.flexC

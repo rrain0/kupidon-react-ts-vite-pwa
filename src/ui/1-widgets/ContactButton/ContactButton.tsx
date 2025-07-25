@@ -22,7 +22,7 @@ import WhatsappIc = SvgIconsPack.WhatsappIc
 import EnvelopeIc = SvgIconsPack.EnvelopeIc
 import _2gisLogo from '@im/ic/2gis-logo.webp'
 import yandexMapsLogo from '@im/ic/yandex-maps-logo.webp'
-import LocationIc = SvgIconsPack.LocationIc
+import LocationIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/LocationIc.tsx'
 import CheckmarkBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkBoldIc.tsx'
 import Callback = TypeU.Callback
 
