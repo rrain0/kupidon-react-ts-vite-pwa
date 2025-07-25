@@ -8,7 +8,7 @@ import Callback = TypeU.Callback
 export const useInterval = (
   interval: number,
   callback: Callback,
-  deps: any[] = []
+  deps: any[] = [],
 ) => {
   useEffect(() => {
     const id = setInterval(callback, interval)

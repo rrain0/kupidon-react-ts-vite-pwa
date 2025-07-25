@@ -1,20 +1,38 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { TypeU } from 'src/util/common/TypeU.ts'
+import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
+import { useRefGetSet } from 'src/util/react-state/useRefGetSet.ts'
+import Callback = TypeU.Callback
 
 
-export const useDebounce = (
-  callback: Function,
-  delay: number,
-  deps: any[] | undefined = []
-) => {
+
+
+export const useDebounce = ({
+  callback, // supports unstable
+  delay,
+  cancelOnUnmount = false,
+  deps = [],
+}: {
+  callback: Callback
+  delay: number
+  cancelOnUnmount?: boolean | undefined
+  deps?: any[] | undefined
+}) => {
+  const cb = useAsCallback(callback)
+  const [getTimerId, setTimerId] = useRefGetSet<any>(undefined)
   
-  const [start, setStart] = useState(() => +new Date())
-  useEffect(() => setStart(+new Date()), deps)
+  const debounce = () => {
+    clearTimeout(getTimerId())
+    const id = setTimeout(cb, delay)
+    setTimerId(id)
+  }
+  useEffect(debounce, deps)
+  const debouncedCallback = useAsCallback(debounce)
   
-  const cb = useCallback(callback, deps)
+  const tryCancelOnUnmount = useAsCallback(() => {
+    if (cancelOnUnmount) clearTimeout(getTimerId())
+  })
+  useEffect(() => tryCancelOnUnmount, [])
   
-  useEffect(() => {
-    const timerId = setTimeout(cb, delay - (+new Date() - start))
-    return () => clearTimeout(timerId)
-  }, [cb, start, delay])
-  
+  return debouncedCallback // stable
 }

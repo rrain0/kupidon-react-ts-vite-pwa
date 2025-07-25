@@ -1,4 +1,5 @@
 import { usePrevState } from '@util/react-state/usePrevState.ts'
+import { useInterval } from '@util/react/useInterval.ts'
 import { WsChannel } from '@util/web-socket/WsChannel.ts'
 import React, { useEffect, useMemo } from 'react'
 import { getAccessTokenData } from 'src/model/api/AccessTokenA.ts'
@@ -24,7 +25,7 @@ const SendLiveOnlineStatus = React.memo(() => {
   
   //console.log('wsChannelReady', wsChannelReady)
   
-  useEffect(() => {
+  useInterval(15000, () => {
     // Сделать оффлайн предыдущего юзера (например при разлогине)
     if (prevAccessToken && prevUserId !== userId) {
       WsChannel.send({
