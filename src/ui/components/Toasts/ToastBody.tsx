@@ -12,7 +12,6 @@ import SpinnerCircleQuarterIc
   from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SpinnerCircleQuarterIc.tsx'
 import WarnTriangleToastifyIc
   from 'src/ui/0-elements/icons/SvgIcons/pack/ui/WarnTriangleToastifyIc.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import row = EmotionCommon.row

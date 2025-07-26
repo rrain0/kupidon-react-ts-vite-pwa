@@ -3,9 +3,10 @@ import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { GradSvgIconS6 } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconS6.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
+import ArrowAngledRounded2GradIc
+  from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ArrowAngledRounded2GradIc.tsx'
+import AddModuleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/AddModuleIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
@@ -68,3 +69,19 @@ const IconBox = styled(Flex)(flexStyle({
   border: '2px solid #5f6b82',
 }))
 
+
+
+
+// TODO add all icons
+const SvgIconsPack = {
+  // UI icons
+  AddModuleIc,
+  
+  // Special icons
+}
+const GradSvgIconsPack = {
+  // UI icons
+  ArrowAngledRounded2GradIc,
+  
+  // Special icons
+}

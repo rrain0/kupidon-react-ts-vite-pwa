@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
@@ -18,9 +17,7 @@ const overlayName = 'dateDesiredPlaceOrEvent'
 
 
 
-const DateDesiredPlaceOrEventOption =
-React.memo(
-() => {
+const DateDesiredPlaceOrEventOption = React.memo(() => {
   const optionText = useUiValues(OptionUiText)
   const titleText = useUiValues(TitleUiText)
   
@@ -37,16 +34,16 @@ React.memo(
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   
   
-  return <>
-    <OptionItem
-      //icon={<GenderGradIc/>}
-      title={'Какое событие или место вы бы хотели посетить вместе с партнером?'}
-      value={'Не выбрано'}
-      //onClick={open}
-    />
-    
-    
-  </>
+  return (
+    <>
+      <OptionItem
+        //icon={<GenderGradIc/>}
+        title={'Какое событие или место вы бы хотели посетить вместе с партнером?'}
+        value={'Не выбрано'}
+        //onClick={open}
+      />
+    </>
+  )
 })
 export default DateDesiredPlaceOrEventOption
 

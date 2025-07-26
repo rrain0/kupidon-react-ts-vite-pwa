@@ -17,7 +17,6 @@ import { ReactU } from '@util/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Txt = EmotionCommon.Txt
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Contact, ContactType, getContactLink } from 'src/ui/1-widgets/ContactButton/Contact.ts'
 import _2gisLogo from '@im/ic/2gis-logo.webp'

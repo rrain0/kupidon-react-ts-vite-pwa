@@ -17,7 +17,6 @@ import HeartFilledIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/HeartFi
 import ArrowBackIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowBackIc.tsx'
 import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import DotsScrollIndicator from 'src/ui/1-widgets/DotsScrollIndicator/DotsScrollIndicator.tsx'
 import DislikeButton from 'src/ui/1-widgets/ProfileCards/DislikeButton.tsx'
 import LikeButton from 'src/ui/1-widgets/ProfileCards/LikeButton.tsx'

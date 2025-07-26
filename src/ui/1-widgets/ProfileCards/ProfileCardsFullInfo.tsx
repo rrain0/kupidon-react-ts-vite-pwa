@@ -15,7 +15,6 @@ import RulerCornerIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/RulerCo
 import CalendarIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CalendarIc.tsx'
 import SearchIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SearchIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'

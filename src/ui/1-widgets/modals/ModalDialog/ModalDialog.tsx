@@ -13,7 +13,6 @@ import InfoCircleOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/InfoC
 import WarnTriangleOutlinedIc
   from 'src/ui/0-elements/icons/SvgIcons/pack/ui/WarnTriangleOutlinedIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import DimmedBg from 'src/ui/1-widgets/DimmedBg.tsx'
