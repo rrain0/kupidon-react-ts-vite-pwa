@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { GradSvgIconS6 } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconS6.ts'
 import Pu = TypeU.Pu
+import isdef = TypeU.isdef
 
 
 
@@ -37,21 +38,34 @@ export const BaseGradSvgIcon = React.memo((props: BaseGradSvgIconProps) => {
     SvgComponent,
     ...restProps
   } = props
-  
-  
-  const sizeProp = GradSvgIconS6.W.els.gradIcon.ps!.sz
-  const color0Prop = GradSvgIconS6.W.els.gradIcon.ps!.color0
-  const color1Prop = GradSvgIconS6.W.els.gradIcon.ps!.color1
-  
+
+  const {
+    sz: sizeProp,
+    color0: color0Prop,
+    color1: color1Prop,
+  } = GradSvgIconS6.W.els.gradIcon.ps!
+
+  const gradSvgIconStyleClassName = 'gradSvgIconStyle'
+
   return (
     <SvgComponent
-      css={{
-        width: w ?? sizeProp.var(),
-        height: h ?? sizeProp.var(),
-        [color0Prop.n]: color0 ?? color0Prop.var('black'),
-        [color1Prop.n]: color1 ?? color1Prop.var('black'),
-      }}
-      className={clsx(className, GradSvgIconS6.W.els.gradIcon.n)}
+      css={[
+        {
+          width: sizeProp.var(),
+          height: sizeProp.var(),
+          [color0Prop.n]: color0Prop.var('black'),
+          [color1Prop.n]: color1Prop.var('black'),
+        },
+        {
+          [`&.${gradSvgIconStyleClassName}`]: {
+            ...isdef(w) && { width: w },
+            ...isdef(h) && { height: h },
+            ...isdef(color0) && { [color0Prop.n]: color0 },
+            ...isdef(color1) && { [color1Prop.n]: color1 },
+          },
+        },
+      ]}
+      className={clsx(className, GradSvgIconS6.W.els.gradIcon.n, gradSvgIconStyleClassName)}
       {...restProps}
     />
   )
