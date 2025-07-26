@@ -1,15 +1,14 @@
 import clsx from 'clsx'
 import React from 'react'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
+import PencilWrite2Ic from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PencilWrite2Ic.tsx'
+import PlusIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { TypeU } from 'src/util/common/TypeU'
 import { useCssWhRef } from 'src/util/view/useCssWhRef'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback
-import PlusIc = SvgIconsPack.PlusIc
-import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
 import toEmptyAttr = TypeU.toEmptyAttr
 
 

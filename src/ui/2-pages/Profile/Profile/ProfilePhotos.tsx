@@ -43,12 +43,11 @@ import { useNoSelect } from '@util/pointer/useNoSelect.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import flexC = EmotionCommon.flexC
 import { TypeU } from 'src/util/common/TypeU.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import bgBorderMask = EmotionCommon.bgInBorder
-import PlusIc = SvgIconsPack.PlusIc
+import PlusIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
 import blobToDataUrl = FileU.blobToDataUrl
 import SetterOrUpdater = TypeU.SetterOrUpdater

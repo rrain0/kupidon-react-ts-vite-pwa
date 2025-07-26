@@ -4,12 +4,11 @@ import React, { useState } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import BottomFloatingBar from 'src/ui/components/screen-bars/BottomFloatingBar.tsx'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem.tsx'
 import row = EmotionCommon.row
-import PlusIc = SvgIconsPack.PlusIc
-import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
+import PlusIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlusIc.tsx'
+import PencilWrite2Ic from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PencilWrite2Ic.tsx'
 import flexC = EmotionCommon.flexC
 import col = EmotionCommon.col
 import absTlwh = EmotionCommon.absTlwh

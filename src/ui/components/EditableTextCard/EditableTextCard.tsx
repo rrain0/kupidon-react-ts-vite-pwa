@@ -7,11 +7,10 @@ import { ButtonS } from 'src/ui/0-elements/buttons/Button/ButtonS.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TypeU } from '@util/common/TypeU.ts'
-import PartialUndef = TypeU.PartialUndef
-import PencilWrite2Ic = SvgIconsPack.PencilWrite2Ic
+import Pu = TypeU.Pu
+import PencilWrite2Ic from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PencilWrite2Ic.tsx'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
@@ -20,7 +19,7 @@ import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
 
 
 
-type EditableTextCardProps = PartialUndef<{
+type EditableTextCardProps = Pu<{
   title: string
   text: string
   placeholder: string

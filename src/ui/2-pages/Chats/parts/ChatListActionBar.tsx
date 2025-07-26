@@ -7,7 +7,7 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import SearchIc = SvgIconsPack.SearchIc
-import PlusIc = SvgIconsPack.PlusIc
+import PlusIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlusIc.tsx'
 
 
 

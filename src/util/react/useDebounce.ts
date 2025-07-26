@@ -10,7 +10,7 @@ import Callback = TypeU.Callback
 export const useDebounce = ({
   callback, // supports unstable
   delay,
-  cancelOnUnmount = false,
+  cancelOnUnmount = true,
   deps = [],
 }: {
   callback: Callback

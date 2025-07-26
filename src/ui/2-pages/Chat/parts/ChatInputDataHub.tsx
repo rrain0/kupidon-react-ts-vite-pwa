@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
 import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
@@ -31,8 +31,20 @@ const ChatInputDataHub = React.memo((props: ChatInputDataHubProps) => {
     }
   }
   
+  
+  
+  const [isWriting, setIsWriting] = useState(false)
+  useEffect(() => {
+    console.log(`isWriting: ${isWriting}`)
+  }, [isWriting])
+  useEffect(() => () => {
+    console.log(`isWriting: false (unmouont)`)
+  }, [])
+  
+  
+  
   return (
-    <ChatInput sendMsg={sendMsg}/>
+    <ChatInput sendMsg={sendMsg} setIsWriting={setIsWriting}/>
   )
 })
 ChatInputDataHub.displayName = 'ChatInputDataHub'

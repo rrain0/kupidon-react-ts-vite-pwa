@@ -11,9 +11,9 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import BlacklistIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/BlacklistIc.tsx'
 import ArchiveBoxOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArchiveBoxOutlinedIc.tsx'
 import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
+import Pin2Ic from 'src/ui/0-elements/icons/SvgIcons/pack/ui/Pin2Ic.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
-import Pin2Ic = SvgIconsPack.Pin2Ic
 import Unpin2Ic = SvgIconsPack.Unpin2Ic
 import SoundOnIc = SvgIconsPack.SoundOnIc
 import RestrictIc = SvgIconsPack.RestrictIc

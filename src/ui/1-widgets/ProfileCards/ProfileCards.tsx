@@ -24,9 +24,7 @@ import {
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
-import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import {
   ImageParts,
 } from 'src/ui/0-elements/ImageParts.tsx'
@@ -42,7 +40,7 @@ import flexC = EmotionCommon.flexC
 import fullMinMax = EmotionCommon.fullMinMax
 import arrOfIndices = ArrayU.arrOfIndices
 import gridStackC = EmotionCommon.gridStackC
-import PictureIc = SvgIconsPack.PictureIc
+import PictureIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PictureIc.tsx'
 import gridC = EmotionCommon.gridC
 import absTlwh = EmotionCommon.absTlwh
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'

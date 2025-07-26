@@ -7,20 +7,6 @@ import { BaseSvgIcon, generateSvgIcon, SvgIconProps } from './SvgIcon'
 // TODO refactor - extract to folder as separate components
 
 // UI icons
-import MapLocationSvg from '@ic/normal/ui/map-location.svg?react'
-import MicrophoneSvg from '@ic/normal/ui/microphone.svg?react'
-import MoonSvg from '@ic/normal/ui/moon.svg?react'
-
-import NightSvg from '@ic/normal/ui/night.svg?react'
-
-import PencilWrite2Svg from '@ic/normal/ui/pencil-write-2.svg?react'
-import PictureSvg from '@ic/normal/ui/picture.svg?react'
-import PinSvg from '@ic/normal/ui/pin.svg?react'
-import Pin2Svg from '@ic/normal/ui/pin-2.svg?react'
-import PlanetFrameSvg from '@ic/normal/ui/planet-frame.svg?react'
-import PlusSvg from '@ic/normal/ui/plus.svg?react'
-import ProfileSvg from '@ic/normal/ui/profile.svg?react'
-
 import RadioActiveSvg from '@ic/normal/ui/radio-active.svg?react'
 import RadioInactiveSvg from '@ic/normal/ui/radio-inactive.svg?react'
 import RestrictSvg from '@ic/normal/ui/restrict.svg?react'
@@ -93,23 +79,6 @@ import WhatsappSvg from '@ic/normal/special/whatsapp.svg?react'
 export namespace SvgIconsPack {
   
   // UI Icons
-  export const MapLocationIc = generateSvgIcon(MapLocationSvg)
-  export const MicrophoneIc = generateSvgIcon(MicrophoneSvg)
-  export const MoonIc = generateSvgIcon(MoonSvg)
-  
-  
-  export const NightIc = generateSvgIcon(NightSvg)
-  
-  
-  export const PencilWrite2Ic = generateSvgIcon(PencilWrite2Svg)
-  export const PictureIc = generateSvgIcon(PictureSvg)
-  export const PinIc = generateSvgIcon(PinSvg)
-  export const Pin2Ic = generateSvgIcon(Pin2Svg)
-  export const PlanetFrameIc = generateSvgIcon(PlanetFrameSvg)
-  export const PlusIc = generateSvgIcon(PlusSvg)
-  export const ProfileIc = generateSvgIcon(ProfileSvg)
-  
-  
   export const RadioActiveIc = generateSvgIcon(RadioActiveSvg)
   export const RadioInactiveIc = generateSvgIcon(RadioInactiveSvg)
   export const RestrictIc = generateSvgIcon(RestrictSvg)

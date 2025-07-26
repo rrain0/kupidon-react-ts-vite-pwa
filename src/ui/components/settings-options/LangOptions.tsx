@@ -3,13 +3,12 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { CountryFlag } from 'src/ui-data/translations/CountryFlag.ts'
 import { Lang } from '@util/lang/Lang.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
+import PlanetFrameIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlanetFrameIc.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
-import BrowserIc = SvgIconsPack.PlanetFrameIc
 import { SettingsOptions } from './SettingsOptions'
 
 
@@ -31,7 +30,7 @@ const LangOptions = React.memo(() => {
       ...canUseSystemLang ? [{
         value: 'system',
         text: titleText.systemLanguage,
-        icon: <BrowserIc css={SettingsOptions.icon}/>,
+        icon: <PlanetFrameIc css={SettingsOptions.icon}/>,
       }] as const : [],
       {
         value: 'ru-RU',

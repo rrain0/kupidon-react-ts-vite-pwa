@@ -13,6 +13,7 @@ import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import IsWritingFiveDots, {
   IsWritingFiveDotsCssProps,
 } from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
+import PinIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PinIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
@@ -22,7 +23,6 @@ import max1Line = EmotionCommon.max1Line
 import max1LineBox = EmotionCommon.max1LineBox
 import VolumeIc = SvgIconsPack.VolumeIc
 import CrossBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossBoldIc.tsx'
-import PinIc = SvgIconsPack.PinIc
 import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
 import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
 import CheckmarkIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'

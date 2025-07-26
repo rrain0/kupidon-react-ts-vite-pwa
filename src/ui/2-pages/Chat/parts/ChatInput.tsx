@@ -1,4 +1,5 @@
-import { useBool } from '@util/react-state/useBool.ts'
+import { useIsMount } from '@util/react-state/useIsMount.ts'
+import { useDebounce } from '@util/react/useDebounce.ts'
 import React, { useEffect, useState } from 'react'
 import { TypeU } from '@util/common/TypeU.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -6,6 +7,7 @@ import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import EmojiLaughIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/EmojiLaughIc.tsx'
+import MicrophoneIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/MicrophoneIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
@@ -15,9 +17,8 @@ import Pu = TypeU.Pu
 import Flex from 'ui/0-elements/basic-elements/Flex'
 import { StyleVals } from 'ui-data/style/StyleVals'
 import { commonStyle } from 'util/react/short-props/style/commonStyle'
-import PictureIc = SvgIconsPack.PictureIc
+import PictureIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PictureIc.tsx'
 import VideoCameraIc = SvgIconsPack.VideoCameraIc
-import MicrophoneIc = SvgIconsPack.MicrophoneIc
 import PuzzleIc = SvgIconsPack.PuzzleIc
 import PlaneSendIc = SvgIconsPack.PlaneSendIc
 
@@ -26,6 +27,7 @@ import PlaneSendIc = SvgIconsPack.PlaneSendIc
 
 export type ChatInputProps = Pu<{
   sendMsg: (message: ChatMessageContentA) => void
+  setIsWriting: (isWriting: boolean) => void
 }>
 
 
@@ -33,6 +35,7 @@ export type ChatInputProps = Pu<{
 const ChatInput = React.memo((props: ChatInputProps) => {
   const {
     sendMsg,
+    setIsWriting,
   } = props
   
   const [text, setText] = useState('')
@@ -60,6 +63,15 @@ const ChatInput = React.memo((props: ChatInputProps) => {
       reset()
     }
   }, [doSend])
+  
+  const isMount = useIsMount()
+  useEffect(() => setIsWriting?.(!isMount), [text])
+  useDebounce({
+    callback: () => setIsWriting?.(false),
+    delay: 4000,
+    deps: [text],
+  })
+  
   
   return (
     <>
@@ -124,3 +136,4 @@ const sendButtonS: AppWidgetStyle = t => [IconButtonS6.S.trans.round.lg.normal, 
   // TODO Theme
   icon: { h: 30, w: 'auto', color: '#F45378' },
 }]
+
