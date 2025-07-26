@@ -15,16 +15,16 @@ export const Grid = React.memo((props: GridProps) => {
   const { css, gridViewRest } = processGridViewShortProps(props)
   const { children, className, ...restProps } = gridViewRest
   
-  const gridViewClassName = 'gridBox'
+  const gridStyleClassName = 'gridStyle'
   
   return (
     <GridBox
       data-display-name='Grid'
       {...restProps}
       css={{
-        [`&.${gridViewClassName}`]: css,
+        [`&.${gridStyleClassName}`]: css,
       }}
-      className={clsx(className, gridViewClassName)}
+      className={clsx(className, gridStyleClassName)}
     >
       {children}
     </GridBox>

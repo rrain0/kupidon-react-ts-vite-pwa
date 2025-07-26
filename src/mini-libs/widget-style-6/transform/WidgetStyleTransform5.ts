@@ -79,7 +79,7 @@ export function transform5(dataList: Transformed4[]): SelectPropValueTf5[] {
         if (s.type === 'pseudo') {
           return getPseudoSelector(s.pseudo.pseudo)
         }
-        else if (s.type === 'attr') {
+        if (s.type === 'attr') {
           return getAttrSelector(s.attr.attr, s?.value?.value)
         }
         throw new Error(`Unknown element state: ${s}`)

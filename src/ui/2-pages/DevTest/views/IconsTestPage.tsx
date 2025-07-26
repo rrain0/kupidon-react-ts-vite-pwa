@@ -24,24 +24,11 @@ const IconsTestPage = React.memo(() => {
           <Flex>Icons showcase</Flex>
           
           <Flex row wrap g={10}>
-            {Object.entries(SvgIconsPack).map(([name, Icon]) => (
+            {Icons.map(({ name, Icon, style }) => (
               <IconItemBox key={name}>
                 <Flex grow>{name}</Flex>
                 <IconBox>
-                  <Icon css={SvgIconS6.t([SvgIconS6.S.icon.icon.full.normal])}/>
-                </IconBox>
-              </IconItemBox>
-            ))}
-          </Flex>
-          
-          <Flex>Grad Icons showcase</Flex>
-          
-          <Flex row wrap g={10}>
-            {Object.entries(GradSvgIconsPack).map(([name, Icon]) => (
-              <IconItemBox key={name}>
-                <Flex grow>{name}</Flex>
-                <IconBox>
-                  <Icon css={GradSvgIconS6.t(GradSvgIconS6.S.icon.icon.full.accent)}/>
+                  <Icon css={style}/>
                 </IconBox>
               </IconItemBox>
             ))}
@@ -72,16 +59,22 @@ const IconBox = styled(Flex)(flexStyle({
 
 
 
+
+const iconS = SvgIconS6.t(SvgIconS6.S.icon.icon.full.normal)
+const gradIconS = GradSvgIconS6.t(GradSvgIconS6.S.icon.icon.full.accent)
+
 // TODO add all icons
-const SvgIconsPack = {
+const Icons = [
   // UI icons
-  AddModuleIc,
+  { name: 'AddModuleIc', Icon: AddModuleIc, style: iconS },
   
   // Special icons
-}
-const GradSvgIconsPack = {
-  // UI icons
-  ArrowAngledRounded2GradIc,
   
-  // Special icons
-}
+  
+  // Gradient UI ArrowAngledRounded2GradIc
+  { name: 'ArrowAngledRounded2GradIc', Icon: ArrowAngledRounded2GradIc, style: gradIconS },
+  
+  // Gradient Special icons
+  
+]
+

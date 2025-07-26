@@ -15,16 +15,16 @@ export const Flex = React.memo((props: FlexProps) => {
   const { css, flexViewRest } = processFlexViewShortProps(props)
   const { children, className, ...restProps } = flexViewRest
   
-  const flexViewClassName = 'flexBox'
+  const flexStyleClassName = 'flexStyle'
   
   return (
     <FlexBox
       data-display-name='Flex'
       {...restProps}
       css={{
-        [`&.${flexViewClassName}`]: css,
+        [`&.${flexStyleClassName}`]: css,
       }}
-      className={clsx(className, flexViewClassName)}
+      className={clsx(className, flexStyleClassName)}
     >
       {children}
     </FlexBox>

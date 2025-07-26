@@ -3,8 +3,7 @@ import clsx from 'clsx'
 import React from 'react'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import Pu = TypeU.Pu
-
-
+import isdef = TypeU.isdef
 
 
 
@@ -39,20 +38,36 @@ export const BaseSvgIcon = React.memo((props: BaseSvgIconProps) => {
     ...restProps
   } = props
   
-  const sizeProp = SvgIconS6.W.els.icon.ps!.size
-  const colorProp = SvgIconS6.W.els.icon.ps!.color
-  const colorAccentProp = SvgIconS6.W.els.icon.ps!.colorAcc
+  const {
+    size: sizeProp,
+    color: colorProp,
+    colorAcc: colorAccentProp,
+  } = SvgIconS6.W.els.icon.ps!
+  
+  
+  const svgIconStyleClassName = 'svgIconStyle'
+  
   
   return (
     <SvgComponent
-      css={{
-        width: w ?? sizeProp.var(),
-        height: h ?? sizeProp.var(),
-        fill: color ?? colorProp.var('black'),
-        stroke: color ?? colorProp.var('black'),
-        [colorAccentProp.n]: colorAccent ?? colorAccentProp.var('gray'),
-      }}
-      className={clsx(className, SvgIconS6.W.els.icon.n)}
+      css={[
+        {
+          width: sizeProp.var(),
+          height: sizeProp.var(),
+          fill: colorProp.var('black'),
+          stroke: colorProp.var('black'),
+          [colorAccentProp.n]: colorAccentProp.var('gray'),
+        },
+        {
+          [`&.${svgIconStyleClassName}`]: {
+            ...isdef(w) && { width: w },
+            ...isdef(h) && { height: h },
+            ...isdef(color) && { fill: color, stroke: color },
+            ...isdef(colorAccent) && { [colorAccentProp.n]: colorAccent },
+          },
+        },
+      ]}
+      className={clsx(className, SvgIconS6.W.els.icon.n, svgIconStyleClassName)}
       {...restProps}
     />
   )
