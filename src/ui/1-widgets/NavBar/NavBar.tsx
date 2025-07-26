@@ -9,11 +9,12 @@ import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import BowArrowGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/BowArrowGradIc.tsx'
+import CardsHeartGradIc
+  from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/CardsHeartGradIc.tsx'
 import ChatRoundGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ChatRoundGradIc.tsx'
 import ProfileGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ProfileGradIc.tsx'
 import AppNavLink from 'src/ui/components/app-router/NavLink.tsx'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -22,7 +23,6 @@ import RootRoute = AppRoutes.RootRoute
 import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
-import CardsHeartGradIc = GradSvgIconsPack.CardsHeartGradIc
 import modalFloor500 = StyleVals.modalFloor500
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr

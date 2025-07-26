@@ -1,16 +1,15 @@
 import React, { useMemo, useState } from 'react'
+import FilmGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/FilmGradIc.tsx'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
 import {
   useMultiSelectOneEditableOption
 } from 'src/ui/1-widgets/modals/ModalMultiSelectList/useMultiSelectOneEditableOption'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { ArrayU } from 'src/util/common/ArrayU'
-import FilmGradIc = GradSvgIconsPack.FilmGradIc
 
 
 

@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import RulerVerticalGradIc
+  from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { useStateMapperSync } from 'src/util/react-state/useStateMapperSync.ts'
@@ -7,14 +9,12 @@ import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/1-widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import RulerVerticalGradIc = GradSvgIconsPack.RulerVerticalGradIc
 import NumRangeNullable = RangeU.NumRangeNullable
 import NumRange = RangeU.NumRange
 import rowWrap = EmotionCommon.rowWrap

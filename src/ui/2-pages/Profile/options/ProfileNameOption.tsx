@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
+import NameCardGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/NameCardGradIc.tsx'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import NameCardGradIc = GradSvgIconsPack.NameCardGradIc
 
 
 

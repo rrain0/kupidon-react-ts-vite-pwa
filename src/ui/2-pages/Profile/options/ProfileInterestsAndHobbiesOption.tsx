@@ -1,13 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import { Option } from 'src/ui-data/models/Option'
+import TelescopeGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/TelescopeGradIc.tsx'
 import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSelect'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import TelescopeGradIc = GradSvgIconsPack.TelescopeGradIc
 
 
 

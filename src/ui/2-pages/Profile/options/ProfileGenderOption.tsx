@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import { Option } from 'src/ui-data/models/Option.ts'
-import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
+import GenderGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/GenderGradIc.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import ModalSingleSelectList
@@ -11,7 +10,6 @@ import ModalSingleSelectList
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import GenderGradIc = GradSvgIconsPack.GenderGradIc
 
 
 
