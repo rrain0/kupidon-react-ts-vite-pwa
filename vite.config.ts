@@ -127,7 +127,35 @@ export default defineConfig(({ command, mode }) => {
         },
       }),
       tsconfigPaths(),
-      svgr(),
+      svgr({
+        svgrOptions: {
+          // These plugins must be manually installed as dev deps
+          plugins: ['@svgr/plugin-svgo', '@svgr/plugin-jsx'],
+          svgo: true,
+          ref: true,
+          memo: true,
+          titleProp: true, // title prop => title tag
+          descProp: true, // desc prop => desc tag
+          svgoConfig: {
+            plugins: [
+              //'removeTitle',
+              //'removeDesc',
+              {
+                name: 'prefixIds',
+                params: {
+                  prefixIds: true,
+                  prefixClassNames: false,
+                  delim: '',
+                  prefix: (() => {
+                    let id = 0
+                    return () => `--${(id++).toString(16).padStart(8, '0')}--`
+                  })(),
+                },
+              },
+            ],
+          },
+        },
+      }),
       VitePWA(pwaOptions),
       checker({
         // use TypeScript check
