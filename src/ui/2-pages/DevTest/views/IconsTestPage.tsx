@@ -202,6 +202,10 @@ const IconBox = styled(Flex)(flexStyle({
 
 
 const iconS = SvgIconS6.t(SvgIconS6.S.icon.icon.full.normal)
+const iconWithAccentS = SvgIconS6.t(t => [SvgIconS6.S.icon.icon.full.normal, {
+  iconColor: t.boxAccentCt4.bgf,
+  iconColorAcc: t.boxAccentCt4.ctf,
+}])
 const gradIconS = GradSvgIconS6.t(GradSvgIconS6.S.icon.icon.full.accent)
 
 const Icons = [
@@ -264,8 +268,8 @@ const Icons = [
   { name: 'SoundOffIc', Icon: SoundOffIc, style: iconS },
   { name: 'SoundOnIc', Icon: SoundOnIc, style: iconS },
   { name: 'Spinner8LinesIc', Icon: Spinner8LinesIc, style: iconS },
-  { name: 'SpinnerCircleQuarterBoldIc', Icon: SpinnerCircleQuarterBoldIc, style: iconS },
-  { name: 'SpinnerCircleQuarterIc', Icon: SpinnerCircleQuarterIc, style: iconS },
+  { name: 'SpinnerCircleQuarterBoldIc', Icon: SpinnerCircleQuarterBoldIc, style: iconWithAccentS },
+  { name: 'SpinnerCircleQuarterIc', Icon: SpinnerCircleQuarterIc, style: iconWithAccentS },
   { name: 'SyncErrorIc', Icon: SyncErrorIc, style: iconS },
   { name: 'Unpin2Ic', Icon: Unpin2Ic, style: iconS },
   { name: 'VideoCameraIc', Icon: VideoCameraIc, style: iconS },
