@@ -3,23 +3,6 @@ import { generateGradSvgIcon } from './GradSvgIcon'
 
 // TODO refactor - extract to folder as separate components
 
-// UI Icons
-import Calendar2GradSvg from '@ic/gradient/ui/calendar-2-grad.svg?react'
-import ClockGradSvg from '@ic/gradient/ui/clock-grad.svg?react'
-import ChatRoundGradSvg from '@ic/gradient/ui/chat-round-grad.svg?react'
-import Cross2GradSvg from '@ic/gradient/ui/cross-2-grad.svg?react'
-
-import InfoSquareRoundedGradSvg from '@ic/gradient/ui/info-square-rounded-grad.svg?react'
-
-import HeartOutlinedGradSvg from '@ic/gradient/ui/heart-outlined-grad.svg?react'
-
-import MapLocationGradSvg from '@ic/gradient/ui/map-location-grad.svg?react'
-
-import PlanetFrameGradSvg from '@ic/gradient/ui/planet-frame-grad.svg?react'
-import ProfileGradSvg from '@ic/gradient/ui/profile-grad.svg?react'
-
-import SearchGradSvg from '@ic/gradient/ui/search-grad.svg?react'
-
 
 // Special Icons
 import CardsDollarGradSvg from '@ic/gradient/special/cards-dollar-grad.svg?react'
@@ -56,26 +39,6 @@ import WorkSuitcaseGradSvg from '@ic/gradient/special/work-suitcase-grad.svg?rea
 
 
 export namespace GradSvgIconsPack {
-  
-  
-  
-  // UI Icons
-  export const Calendar2GradIc = generateGradSvgIcon(Calendar2GradSvg)
-  export const ClockGradIc = generateGradSvgIcon(ClockGradSvg)
-  export const ChatRoundGradIc = generateGradSvgIcon(ChatRoundGradSvg)
-  export const Cross2GradIc = generateGradSvgIcon(Cross2GradSvg)
-  
-  export const InfoSquareRoundedGradIc = generateGradSvgIcon(InfoSquareRoundedGradSvg)
-  
-  export const HeartOutlinedGradIc = generateGradSvgIcon(HeartOutlinedGradSvg)
-  
-  export const MapLocationGradIc = generateGradSvgIcon(MapLocationGradSvg)
-  
-  export const PlanetFrameGradIc = generateGradSvgIcon(PlanetFrameGradSvg)
-  export const ProfileGradIc = generateGradSvgIcon(ProfileGradSvg)
-  
-  export const SearchGradIc = generateGradSvgIcon(SearchGradSvg)
-  
   
   
   // Special Icons

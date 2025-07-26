@@ -8,7 +8,7 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
-import { GradSvgIconsPack } from 'src/ui/0-elements/icons/GradSvgIcons/GradSvgIconsPack.tsx'
+import Calendar2GradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/Calendar2GradIc.tsx'
 import PosterPreview from 'src/ui/2-pages/BowAndArrows/parts/PosterPreview.tsx'
 import DateArticleCategoryRow from 'src/ui/2-pages/DateArticles/parts/DateArticleCategoryRow.tsx'
 import DatePlaceCategoriesList from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
@@ -17,7 +17,6 @@ import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
-import Calendar2GradIc = GradSvgIconsPack.Calendar2GradIc
 
 
 
