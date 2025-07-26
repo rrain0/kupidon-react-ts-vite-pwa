@@ -1,16 +1,19 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
-import { DateU } from '@util/date/DateU.ts'
 import { getAge, nameCommaAge } from '@util/ui/nameCommaAge.ts'
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { WidgetProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import DumbbellIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/DumbbellIc.tsx'
+import GenderIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/GenderIc.tsx'
+import ProfileCardIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/ProfileCardIc.tsx'
+import RulerCornerIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/RulerCornerIc.tsx'
 import CalendarIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CalendarIc.tsx'
+import SearchIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SearchIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -27,11 +30,6 @@ import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC
 import round = EmotionCommon.round
-import ProfileCardIc = SvgIconsPack.ProfileCardIc
-import SearchIc = SvgIconsPack.SearchIc
-import GenderIc = SvgIconsPack.GenderIc
-import DumbbellIc = SvgIconsPack.DumbbellIc
-import RulerCornerIc = SvgIconsPack.RulerCornerIc
 
 
 

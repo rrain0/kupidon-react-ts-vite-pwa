@@ -13,6 +13,7 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import ArrowAngledRounded2GradIc
   from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ArrowAngledRounded2GradIc.tsx'
 import ArrowBackGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ArrowBackGradIc.tsx'
+import HeartFilledIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/HeartFilledIc.tsx'
 import ArrowBackIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowBackIc.tsx'
 import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
@@ -29,7 +30,6 @@ import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
-import HeartFilledIc = SvgIconsPack.HeartFilledIc
 import Callback = TypeU.Callback
 import toEmptyAttr = TypeU.toEmptyAttr
 import absTlwh = EmotionCommon.absTlwh

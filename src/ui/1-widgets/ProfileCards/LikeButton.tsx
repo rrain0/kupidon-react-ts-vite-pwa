@@ -2,8 +2,7 @@ import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import HeartFilledIc = SvgIconsPack.HeartFilledIc
+import HeartFilledIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/HeartFilledIc.tsx'
 
 
 

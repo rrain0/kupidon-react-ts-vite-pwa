@@ -9,11 +9,11 @@ import { IsWritingFiveDotsCssProps } from 'src/ui/0-elements/icons/IsWritingFive
 import CheckmarkDoubleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkDoubleIc.tsx'
 import CheckmarkIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'
 import CrossBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossBoldIc.tsx'
+import SpinnerCircleQuarterBoldIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SpinnerCircleQuarterBoldIc.tsx'
+import VolumeIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/VolumeIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import VolumeIc = SvgIconsPack.VolumeIc
-import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
-import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
+import InfoCircleOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/InfoCircleOutlinedIc.tsx'
 import Txt = EmotionCommon.Txt
 
 

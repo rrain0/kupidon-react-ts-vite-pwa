@@ -5,6 +5,7 @@ import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
+import Spinner8LinesIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/Spinner8LinesIc.tsx'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -13,11 +14,9 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { useBool } from 'src/util/react-state/useBool.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import fixed = EmotionCommon.fixed
 import flexC = EmotionCommon.flexC
 import row = EmotionCommon.row
-import Spinner8LinesIc = SvgIconsPack.Spinner8LinesIc
 import Theme = AppTheme.Theme
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt

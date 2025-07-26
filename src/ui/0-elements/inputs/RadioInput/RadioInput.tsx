@@ -2,15 +2,14 @@ import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import RadioActiveIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/RadioActiveIc.tsx'
+import RadioInactiveIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/RadioInactiveIc.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { TypeU } from '@util/common/TypeU.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import RadioActiveIc = SvgIconsPack.RadioActiveIc
-import RadioInactiveIc = SvgIconsPack.RadioInactiveIc
 import resetInput = EmotionCommon.resetInput
 import absTlwh = EmotionCommon.absTlwh
 import row = EmotionCommon.row

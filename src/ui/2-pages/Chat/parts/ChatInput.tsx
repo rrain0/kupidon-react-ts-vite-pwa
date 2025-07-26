@@ -6,10 +6,12 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
+import PlaneSendIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/PlaneSendIc.tsx'
+import PuzzleIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/PuzzleIc.tsx'
 import EmojiLaughIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/EmojiLaughIc.tsx'
 import MicrophoneIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/MicrophoneIc.tsx'
+import VideoCameraIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/VideoCameraIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
@@ -18,9 +20,6 @@ import Flex from 'ui/0-elements/basic-elements/Flex'
 import { StyleVals } from 'ui-data/style/StyleVals'
 import { commonStyle } from 'util/react/short-props/style/commonStyle'
 import PictureIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PictureIc.tsx'
-import VideoCameraIc = SvgIconsPack.VideoCameraIc
-import PuzzleIc = SvgIconsPack.PuzzleIc
-import PlaneSendIc = SvgIconsPack.PlaneSendIc
 
 
 

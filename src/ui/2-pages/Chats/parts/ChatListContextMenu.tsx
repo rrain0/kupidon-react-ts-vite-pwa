@@ -12,19 +12,18 @@ import BlacklistIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/Blacklist
 import ArchiveBoxOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArchiveBoxOutlinedIc.tsx'
 import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import Pin2Ic from 'src/ui/0-elements/icons/SvgIcons/pack/ui/Pin2Ic.tsx'
+import RestrictIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/RestrictIc.tsx'
+import SoundOffIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SoundOffIc.tsx'
+import SoundOnIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SoundOnIc.tsx'
+import Unpin2Ic from 'src/ui/0-elements/icons/SvgIcons/pack/ui/Unpin2Ic.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import ModalContextMenu from 'src/ui/1-widgets/modals/ModalContextMenu/ModalContextMenu.tsx'
-import Unpin2Ic = SvgIconsPack.Unpin2Ic
-import SoundOnIc = SvgIconsPack.SoundOnIc
-import RestrictIc = SvgIconsPack.RestrictIc
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalTileSelect from 'src/ui/1-widgets/modals/ModalTileSelect/ModalTileSelect.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback
 import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
-import SoundOffIc = SvgIconsPack.SoundOffIc
 
 
 

@@ -5,8 +5,7 @@ import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
-import SearchIc = SvgIconsPack.SearchIc
+import SearchIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SearchIc.tsx'
 import PlusIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlusIc.tsx'
 
 

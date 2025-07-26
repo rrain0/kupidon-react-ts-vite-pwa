@@ -8,10 +8,12 @@ import CheckmarkCircleToastifyIc
 import DangerRoundToastifyIc
   from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DangerRoundToastifyIc.tsx'
 import InfoToastifyIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/InfoToastifyIc.tsx'
+import SpinnerCircleQuarterIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SpinnerCircleQuarterIc.tsx'
+import WarnTriangleToastifyIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/WarnTriangleToastifyIc.tsx'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
-import SpinnerCircleQuarterIc = SvgIconsPack.SpinnerCircleQuarterIc
-import WarnTriangleToastifyIc = SvgIconsPack.WarnTriangleToastifyIc
 import CrossIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossIc.tsx'
 import row = EmotionCommon.row
 import resetButton = EmotionCommon.resetButton

@@ -5,12 +5,11 @@ import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import HeartsDoubleIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/HeartsDoubleIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/ui/1-widgets/avatars/Ava/EmptyAva.tsx'
-import HeartsDoubleIc = SvgIconsPack.HeartsDoubleIc
 import Pu = TypeU.Pu
 
 

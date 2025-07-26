@@ -8,15 +8,14 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
+import HeartLockIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/HeartLockIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/ui/1-widgets/avatars/Ava/EmptyAva.tsx'
 import DislikeButton from 'src/ui/1-widgets/ProfileCards/DislikeButton.tsx'
 import LikeButton from 'src/ui/1-widgets/ProfileCards/LikeButton.tsx'
 import Pu = TypeU.Pu
-import HeartLockIc = SvgIconsPack.HeartLockIc
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
 

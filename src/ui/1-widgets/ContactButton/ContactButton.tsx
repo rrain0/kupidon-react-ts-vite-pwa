@@ -7,6 +7,10 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
+import EnvelopeIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/EnvelopeIc.tsx'
+import HandsetIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/HandsetIc.tsx'
+import TelegramIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/TelegramIc.tsx'
+import WhatsappIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/Whatsapp.tsx'
 import CopyIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CopyIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { ReactU } from '@util/react/ReactU.ts'
@@ -16,10 +20,6 @@ import Txt = EmotionCommon.Txt
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import parsePhoneNumber from 'libphonenumber-js'
 import { Contact, ContactType, getContactLink } from 'src/ui/1-widgets/ContactButton/Contact.ts'
-import HandsetIc = SvgIconsPack.HandsetIc
-import TelegramIc = SvgIconsPack.TelegramIc
-import WhatsappIc = SvgIconsPack.WhatsappIc
-import EnvelopeIc = SvgIconsPack.EnvelopeIc
 import _2gisLogo from '@im/ic/2gis-logo.webp'
 import yandexMapsLogo from '@im/ic/yandex-maps-logo.webp'
 import LocationIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/LocationIc.tsx'

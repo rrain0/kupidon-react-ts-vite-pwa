@@ -9,6 +9,9 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
+import InfoCircleOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/InfoCircleOutlinedIc.tsx'
+import WarnTriangleOutlinedIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/WarnTriangleOutlinedIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
@@ -23,9 +26,7 @@ import Modal from 'src/ui/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import rowC = EmotionCommon.rowC
-import WarnTriangleOutlinedIc = SvgIconsPack.WarnTriangleOutlinedIc
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
-import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
 import UseEnterExitTransition from 'src/ui/components/animations/UseEnterExitTransition.tsx'
 
 

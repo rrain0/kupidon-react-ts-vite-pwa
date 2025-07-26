@@ -14,17 +14,17 @@ import IsWritingFiveDots, {
   IsWritingFiveDotsCssProps,
 } from 'src/ui/0-elements/icons/IsWritingFiveDots.tsx'
 import PinIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PinIc.tsx'
+import SpinnerCircleQuarterBoldIc
+  from 'src/ui/0-elements/icons/SvgIcons/pack/ui/SpinnerCircleQuarterBoldIc.tsx'
+import VolumeIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/VolumeIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { SvgIconsPack } from 'src/ui/0-elements/icons/SvgIcons/SvgIconsPack.tsx'
 import Ava from 'src/ui/1-widgets/avatars/Ava/Ava.tsx'
 import CountFormatShort from 'src/ui/1-widgets/CountFormatShort.tsx'
 import Txt = EmotionCommon.Txt
 import max1Line = EmotionCommon.max1Line
 import max1LineBox = EmotionCommon.max1LineBox
-import VolumeIc = SvgIconsPack.VolumeIc
 import CrossBoldIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossBoldIc.tsx'
-import SpinnerCircleQuarterBoldIc = SvgIconsPack.SpinnerCircleQuarterBoldIc
-import InfoCircleOutlinedIc = SvgIconsPack.InfoCircleOutlinedIc
+import InfoCircleOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/InfoCircleOutlinedIc.tsx'
 import CheckmarkIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'
 import CheckmarkDoubleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkDoubleIc.tsx'
 import Pu = TypeU.Pu
