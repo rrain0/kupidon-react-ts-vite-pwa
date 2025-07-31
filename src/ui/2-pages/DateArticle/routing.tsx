@@ -1,15 +1,15 @@
 import React, { Suspense } from 'react'
-import { Navigate, RouteObject, useMatch, useSearchParams } from 'react-router'
+import { RouteObject, useMatch } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use
 import full = RouteBuilder.full
-import fullParams = RouteBuilder.fullParams
 
 const DateArticlePage = React.lazy(
   () => import('src/ui/2-pages/DateArticle/DateArticlePage.tsx')
@@ -56,17 +56,8 @@ const routingDateArticleArticleId: RouteObject[] = [
 
 
 const RouteDateArticle = React.memo(() => {
-  const [search] = useSearchParams()
-  
   return (
-    <Navigate
-      to={
-        RootRoute.dateArticle[fullParams]({
-          anySearchParams: search,
-        })
-      }
-      replace
-    />
+    <AppNavigate toFull={RootRoute.dateArticle} replace/>
   )
 })
 

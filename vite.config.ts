@@ -12,7 +12,7 @@ import dotenvExpand from 'dotenv-expand'
 
 
 
-const projectRoot: string = process.cwd() // current working directory
+const projectRoot: string = process.cwd() // Current Working Directory
 
 
 
