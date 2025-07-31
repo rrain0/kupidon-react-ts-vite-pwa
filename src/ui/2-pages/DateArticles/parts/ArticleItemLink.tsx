@@ -1,13 +1,12 @@
 import { TypeU } from '@util/common/TypeU.ts'
 import { ReactU } from '@util/react/ReactU.ts'
 import React from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DateArticleItem } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import Children = ReactU.Children
 import RootRoute = AppRoutes.RootRoute
-import fullParams = RouteBuilder.fullParams
 import params = RouteBuilder.params
 import use = RouteBuilder.use
 import assertNever = TypeU.assertNever
@@ -25,50 +24,52 @@ export const ArticleItemLink = React.memo((props: ArticleItemLinkProps) => {
     articleItem: it,
   } = props
   
-  const [search] = useSearchParams()
-  
   if (!it) return children
   
-  const link = ((): string => {
-    if (it.type === 'category') {
-      return RootRoute.dateArticles[fullParams]({
-        anySearchParams: search,
-        allowedNamedParams: {
+  if (it.type === 'category') {
+    return (
+      <AppLink
+        toFull={RootRoute.dateArticles}
+        allowedNamedParams={{
           category: it.itemCategory,
           type: null,
-        },
-      })
-    }
-    if (it.type === 'type') {
-      return RootRoute.dateArticles[fullParams]({
-        anySearchParams: search,
-        allowedNamedParams: {
+        }}
+      >
+        {children}
+      </AppLink>
+    )
+  }
+  
+  if (it.type === 'type') {
+    return (
+      <AppLink
+        toFull={RootRoute.dateArticles}
+        allowedNamedParams={{
           category: null,
           type: it.itemType,
-        },
-      })
-    }
-    if (it.type === 'item') {
-      const articlesParams = RootRoute.datePlaces[params]
-      return RootRoute.dateArticle.articleId[use](it.itemId)[fullParams]({
-        anySearchParams: search,
-        anyParams: {
+        }}
+      >
+        {children}
+      </AppLink>
+    )
+  }
+  
+  if (it.type === 'item') {
+    const articlesParams = RootRoute.datePlaces[params]
+    return (
+      <AppLink
+        toFull={RootRoute.dateArticle.articleId[use](it.itemId)}
+        anyParams={{
           [articlesParams.category]: null,
           [articlesParams.type]: null,
-        },
-      })
-    }
-    return assertNever(it)
-  })()
+        }}
+      >
+        {children}
+      </AppLink>
+    )
+  }
   
-  return (
-    <Link
-      data-display-name='ArticleItemLink'
-      to={link}
-    >
-      {children}
-    </Link>
-  )
+  return assertNever(it)
 })
 ArticleItemLink.displayName = 'ArticleItemLink'
 export default ArticleItemLink

@@ -1,8 +1,6 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
@@ -15,8 +13,8 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import RootRoute = AppRoutes.RootRoute
-import fullParams = RouteBuilder.fullParams
 import rowC = EmotionCommon.rowC
 
 
@@ -33,8 +31,6 @@ const uiVals = {
 
 
 export const DatePlaceNotFoundPage = React.memo(() => {
-  
-  const [search] = useSearchParams()
   
   const uiValues = useMemo(() => ({
     placeNotFound: uiVals.placeNotFound,
@@ -58,19 +54,17 @@ export const DatePlaceNotFoundPage = React.memo(() => {
           <div style={{ height: 28 }}/>
           
           <ButtonBox>
-            <Link
-              to={RootRoute.datePlaces[fullParams]({
-                anySearchParams: search,
-                allowedNamedParams: {
-                  category: null,
-                  type: null,
-                },
-              })}
+            <AppLink
+              toFull={RootRoute.datePlaces}
+              allowedNamedParams={{
+                category: null,
+                type: null,
+              }}
             >
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}>
                 {uiText.pickAnotherPlace}
               </Button>
-            </Link>
+            </AppLink>
           </ButtonBox>
       
         </PageContentLayout>

@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -13,8 +11,8 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import RootRoute = AppRoutes.RootRoute
-import fullParams = RouteBuilder.fullParams
 
 
 
@@ -30,8 +28,6 @@ const uiVals = {
 
 
 export const DateArticleNotFoundPage = React.memo(() => {
-  
-  const [search] = useSearchParams()
   
   const uiValues = useMemo(() => ({
     articleNotFound: uiVals.articleNotFound,
@@ -55,19 +51,17 @@ export const DateArticleNotFoundPage = React.memo(() => {
           <Gap h={28}/>
           
           <Flex row grow center>
-            <Link
-              to={RootRoute.dateArticles[fullParams]({
-                anySearchParams: search,
-                allowedNamedParams: {
-                  category: null,
-                  type: null,
-                },
-              })}
+            <AppLink
+              toFull={RootRoute.dateArticles}
+              allowedNamedParams={{
+                category: null,
+                type: null,
+              }}
             >
               <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}>
                 {uiText.pickAnotherArticle}
               </Button>
-            </Link>
+            </AppLink>
           </Flex>
         
         </PageContentLayout>

@@ -1,9 +1,7 @@
 import styled from '@emotion/styled'
 import { virtualOffset } from '@util/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DatePlaceCategoriesData, DatePlaceCategoryData }
   from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
@@ -24,7 +22,7 @@ import col = EmotionCommon.col
 import noScrollbars = EmotionCommon.noScrollbars
 import row = EmotionCommon.row
 import RootRoute = AppRoutes.RootRoute
-import fullParams = RouteBuilder.fullParams
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 
 
 
@@ -140,23 +138,19 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
   }), [list])
   const uiText = useUiValues(uiValues)
   
-  const [search] = useSearchParams()
-  
   return (
     <div css={[col, { gap: 16 }]}>
-      <Link
-        to={RootRoute.datePlaces[fullParams]({
-          anySearchParams: search,
-          allowedNamedParams: {
-            category: list.headerNext,
-            type: null,
-          },
-        })}
+      <AppLink
+        toFull={RootRoute.datePlaces}
+        allowedNamedParams={{
+          category: list.headerNext,
+          type: null,
+        }}
       >
         <HeaderArrow css={HeaderArrowS.page}>
           {uiText.title}
         </HeaderArrow>
-      </Link>
+      </AppLink>
       
       <Overflow>
         <ListRow>

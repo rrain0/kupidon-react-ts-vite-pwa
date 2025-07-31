@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { DatePlaceCategoriesData, DatePlaceCategoryType } from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
+import {
+  DatePlaceCategoriesData,
+  DatePlaceCategoryType
+} from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
@@ -14,9 +15,9 @@ import { ReactU } from '@util/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import RootRoute = AppRoutes.RootRoute
-import fullParams = RouteBuilder.fullParams
 import flexC = EmotionCommon.flexC
 import maxLines = EmotionCommon.maxLines
+import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 
 
 
@@ -39,27 +40,15 @@ export const DatePlaceCategoryCard = React.memo((props: DatePlaceCategoryCardPro
   }), [typeData])
   const uiText = useUiValues(uiValues)
   
-  const [search] = useSearchParams()
-  
-  const link = categoryData.type === 'type'
-    ? RootRoute.datePlaces[fullParams]({
-      anySearchParams: search,
-      allowedNamedParams: {
-        category: null,
-        type: categoryData.placeType,
-      },
-    })
-    : RootRoute.datePlaces[fullParams]({
-      anySearchParams: search,
-      allowedNamedParams: {
-        category: category,
-        type: null,
-      },
-    })
-  
-  
   return (
-    <Link to={link}>
+    <AppLink 
+      toFull={RootRoute.datePlaces}
+      allowedNamedParams={
+        categoryData.type === 'type'
+          ? { category: null, type: categoryData.placeType }
+          : { category: category, type: null }
+      }
+    >
       <CardBox
         className={className}
         style={style}
@@ -78,7 +67,7 @@ export const DatePlaceCategoryCard = React.memo((props: DatePlaceCategoryCardPro
         </InfoBox>
         
       </CardBox>
-    </Link>
+    </AppLink>
   )
 })
 DatePlaceCategoryCard.displayName = 'DatePlaceCategoryCard'
