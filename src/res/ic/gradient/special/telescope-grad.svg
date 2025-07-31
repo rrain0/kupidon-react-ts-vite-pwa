@@ -9,7 +9,7 @@
 
 <defs>
   <linearGradient
-    id="paint0_linear_43w908tudsfngvuyqfvg"
+    id="paint0_linear"
     x1="50%" y1="13%" x2="50%" y2="90%"
     gradientUnits="userSpaceOnUse"
   >
@@ -20,7 +20,7 @@
 </defs>
 
 <path
-  stroke="none" fill-rule="evenodd" fill="url(#paint0_linear_43w908tudsfngvuyqfvg)"
+  stroke="none" fill-rule="evenodd" fill="url(#paint0_linear)"
   transform="translate(42.666667, 42.666667)"
   d="M337.988693,63.9552 L302.978347,87.29856 L340.096,180.032 L382.404693,167.613867 L337.988693,63.9552 Z
     M266.709333,111.445333 L55.0020267,252.605867 L59.9300267,262.461867 L298.965333,192.128 L266.709333,111.445333 Z

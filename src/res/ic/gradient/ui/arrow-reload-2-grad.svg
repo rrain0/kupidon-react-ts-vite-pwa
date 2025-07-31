@@ -10,7 +10,7 @@
   <defs>
     <!-- !!! ID must be unique across entire app so please type something random -->
     <linearGradient
-      id="paint0_linear_43457667lkghrfh43"
+      id="paint0_linear"
       x1="50%" y1="50%" x2="50%" y2="90%"
       gradientUnits="userSpaceOnUse"
     >
@@ -20,7 +20,7 @@
     </linearGradient>
   </defs>
   <!--<defs>
-    <linearGradient id="paint0_linear_816_2798" x1="8.5" y1="5.5" x2="18.5" y2="32" gradientUnits="userSpaceOnUse">
+    <linearGradient id="paint0_linear" x1="8.5" y1="5.5" x2="18.5" y2="32" gradientUnits="userSpaceOnUse">
       <stop stop-color="#1F1F1F"/>
       <stop offset="0.495" stop-color="#3C3C3C"/>
       <stop offset="1" stop-color="#6D6D6D"/>
@@ -29,7 +29,7 @@
   
   
   <path
-    stroke="none" fill="url(#paint0_linear_43457667lkghrfh43)"
+    stroke="none" fill="url(#paint0_linear)"
     d="M11.5 0V3.85714C5.16386 3.85714 0 9.05307 0 15.4286C0 21.8041 5.16386 27 11.5
       27C17.8361 27 23 21.8041 23 15.4286C23 12.8956 22.1762 10.5546 20.7963 8.64593L18.9745
       10.4791C19.9019 11.8978 20.4444 13.5964 20.4444 15.4286C20.4444 20.4144 16.455 24.4286

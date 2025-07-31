@@ -1,5 +1,5 @@
 <svg width="358" height="269" viewBox="0 0 358 269" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_1421_982)">
+<g clip-path="url(#clip0)">
 <path opacity="0.2" d="M180.001 237.125C180.001 249.666 169.834 259.833 157.292 259.833C144.751 259.833 134.584 249.666 134.584 237.125C134.584 224.584 144.751 214.417 157.292 214.417C169.834 214.417 180.001 224.584 180.001 237.125Z" fill="#EABF4B" stroke="#EABF4B" stroke-width="13"/>
 <path opacity="0.2" d="M270.834 218.958C270.834 231.5 260.667 241.667 248.126 241.667C235.584 241.667 225.417 231.5 225.417 218.958C225.417 206.417 235.584 196.25 248.126 196.25C260.667 196.25 270.834 206.417 270.834 218.958Z" fill="#EABF4B" stroke="#EABF4B" stroke-width="13"/>
 <g opacity="0.2">
@@ -16,11 +16,11 @@
 <path d="M161.834 105.417C150.547 105.417 134.584 96.9789 134.584 78.1667Z" fill="#EABF4B"/>
 <path d="M161.834 105.417C150.547 105.417 134.584 96.9789 134.584 78.1667" stroke="#EABF4B" stroke-width="13" stroke-linecap="round"/>
 </g>
-<circle opacity="0.23" cx="272.496" cy="49.4964" r="36.2338" transform="rotate(30 272.496 49.4964)" fill="url(#paint0_linear_1421_982)"/>
-<circle opacity="0.23" cx="65.4964" cy="218.496" r="36.2338" transform="rotate(30 65.4964 218.496)" fill="url(#paint1_linear_1421_982)"/>
-<circle opacity="0.23" cx="52.9319" cy="89.9315" r="12.7079" transform="rotate(-41.1664 52.9319 89.9315)" fill="url(#paint2_linear_1421_982)"/>
-<circle opacity="0.23" cx="309.37" cy="158.369" r="41.7865" transform="rotate(99.9348 309.37 158.369)" fill="url(#paint3_linear_1421_982)"/>
-<g clip-path="url(#clip1_1421_982)">
+<circle opacity="0.23" cx="272.496" cy="49.4964" r="36.2338" transform="rotate(30 272.496 49.4964)" fill="url(#paint0_linear)"/>
+<circle opacity="0.23" cx="65.4964" cy="218.496" r="36.2338" transform="rotate(30 65.4964 218.496)" fill="url(#paint1_linear)"/>
+<circle opacity="0.23" cx="52.9319" cy="89.9315" r="12.7079" transform="rotate(-41.1664 52.9319 89.9315)" fill="url(#paint2_linear)"/>
+<circle opacity="0.23" cx="309.37" cy="158.369" r="41.7865" transform="rotate(99.9348 309.37 158.369)" fill="url(#paint3_linear)"/>
+<g clip-path="url(#clip1)">
 <path d="M97.5357 236.012H97.49C95.5632 236.012 94.0005 237.574 94.0005 239.502C94.0005 241.429 95.5632 242.991 97.49 242.991H97.5357C99.4625 242.991 101.025 241.429 101.025 239.502C101.025 237.574 99.4625 236.012 97.5357 236.012Z" fill="#372E14"/>
 <path d="M261.493 236.012H261.448C259.521 236.012 257.958 237.574 257.958 239.502C257.958 241.429 259.521 242.991 261.448 242.991H261.493C263.42 242.991 264.983 241.429 264.983 239.502C264.983 237.574 263.42 236.012 261.493 236.012Z" fill="#372E14"/>
 <path d="M192.218 142.844C190.067 142.844 188.317 144.594 188.317 146.745C188.317 148.895 190.067 150.645 192.218 150.645C194.368 150.645 196.118 148.895 196.118 146.745C196.118 144.593 194.368 142.844 192.218 142.844Z" fill="#372E14"/>
@@ -37,26 +37,26 @@
 </g>
 </g>
 <defs>
-<linearGradient id="paint0_linear_1421_982" x1="272.496" y1="13.2625" x2="272.496" y2="85.7302" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint0_linear" x1="272.496" y1="13.2625" x2="272.496" y2="85.7302" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EABF4B"/>
 <stop offset="1" stop-color="white"/>
 </linearGradient>
-<linearGradient id="paint1_linear_1421_982" x1="65.4964" y1="182.263" x2="65.4964" y2="254.73" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint1_linear" x1="65.4964" y1="182.263" x2="65.4964" y2="254.73" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EABF4B"/>
 <stop offset="1" stop-color="white"/>
 </linearGradient>
-<linearGradient id="paint2_linear_1421_982" x1="52.9319" y1="77.2237" x2="52.9319" y2="102.639" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint2_linear" x1="52.9319" y1="77.2237" x2="52.9319" y2="102.639" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EABF4B"/>
 <stop offset="1" stop-color="white"/>
 </linearGradient>
-<linearGradient id="paint3_linear_1421_982" x1="309.369" y1="116.583" x2="309.369" y2="200.156" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint3_linear" x1="309.369" y1="116.583" x2="309.369" y2="200.156" gradientUnits="userSpaceOnUse">
 <stop stop-color="#EABF4B"/>
 <stop offset="1" stop-color="white"/>
 </linearGradient>
-<clipPath id="clip0_1421_982">
+<clipPath id="clip0">
 <rect width="358" height="269" fill="white"/>
 </clipPath>
-<clipPath id="clip1_1421_982">
+<clipPath id="clip1">
 <rect width="171" height="171" fill="white" transform="translate(94.0005 72)"/>
 </clipPath>
 </defs>

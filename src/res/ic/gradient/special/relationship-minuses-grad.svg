@@ -8,9 +8,8 @@
 </style>
 
 <defs>
-  <!-- !!! ID MUST BE UNIQUE ACROSS ENTIRE APPLICATION so type something random -->
   <linearGradient
-    id="paint0_linear_relationship_minuses_287364gvjb"
+    id="paint0_linear"
     x1="50%" y1="13%" x2="50%" y2="90%"
     gradientUnits="userSpaceOnUse"
   >
@@ -20,7 +19,7 @@
   </linearGradient>
 </defs>
 
-<path fill="url(#paint0_linear_relationship_minuses_287364gvjb)"
+<path fill="url(#paint0_linear)"
   d="M138.94 22.99c-.566-.014-1.087-.01-1.56.006-.902.028-1.486.074-2.04.1
   -.56-.027-1.14-.072-2.043-.1-1.172-.037-2.63-.02-4.37.203h-.013l-.012.003c-33.88 4.402-58.95 36.95-58.95
   78.18 0 17.88 4.53 35.75 12.616 50.138-11 4.404-20.23 11.382-27.5 20.107-9.996 11.997-16.58
