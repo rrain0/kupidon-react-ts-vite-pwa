@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { Navigate, RouteObject, useSearchParams } from 'react-router'
+import { RouteObject, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DatePlaceCategoriesData, DatePlaceCategoryType }
@@ -7,6 +7,7 @@ import { DatePlaceCategoriesData, DatePlaceCategoryType }
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import fullParams = RouteBuilder.fullParams
@@ -38,16 +39,9 @@ const RouteDatePlaces = React.memo(() => {
   
   if (type) return (
     <>
-      <Navigate
-        to={
-          RootRoute.datePlaces[fullParams]({
-            anySearchParams: search,
-            allowedNamedParams: {
-              category: null,
-              type: type,
-            },
-          })
-        }
+      <AppNavigate 
+        toFull={RootRoute.datePlaces} 
+        allowedNamedParams={{ category: null, type: type }} 
         replace
       />
       <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
@@ -58,16 +52,9 @@ const RouteDatePlaces = React.memo(() => {
   
   if (category) return (
     <>
-      <Navigate
-        to={
-          RootRoute.datePlaces[fullParams]({
-            anySearchParams: search,
-            allowedNamedParams: {
-              category: category,
-              type: null,
-            },
-          })
-        }
+      <AppNavigate 
+        toFull={RootRoute.datePlaces} 
+        allowedNamedParams={{ category: category, type: null }} 
         replace
       />
       <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
@@ -78,16 +65,9 @@ const RouteDatePlaces = React.memo(() => {
   
   return (
     <>
-      <Navigate
-        to={
-          RootRoute.datePlaces[fullParams]({
-            anySearchParams: search,
-            allowedNamedParams: {
-              category: defaultCategory,
-              type: null,
-            },
-          })
-        }
+      <AppNavigate 
+        toFull={RootRoute.datePlaces} 
+        allowedNamedParams={{ category: defaultCategory, type: null }} 
         replace
       />
     </>

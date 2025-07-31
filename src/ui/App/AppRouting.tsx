@@ -1,10 +1,9 @@
 import { useAuthSetup } from '@util/auth/useAuthSetup.ts'
 import {
   createBrowserRouter,
-  Navigate, Outlet,
+  Outlet,
   RouteObject,
   RouterProvider,
-  useSearchParams,
 } from 'react-router'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RouteBottomNavBar from 'src/ui/1-widgets/NavBar/routing.tsx'
@@ -26,6 +25,7 @@ import { routingSignup } from 'src/ui/2-pages/Signup/routing'
 import { routingDevTest } from 'src/ui/2-pages/DevTest/routing.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { routingTest } from 'src/ui/2-pages/Test/routing.tsx'
+import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
@@ -55,13 +55,7 @@ const RouteAny = React.memo(() => {
 
 
 const RouteAnyAny = React.memo(() => {
-  const [searchParams] = useSearchParams()
-  return (
-    <Navigate
-      to={RootRoute.findPair[fullAnySearchParams](searchParams)}
-      replace={true}
-    />
-  )
+  return <AppNavigate toFull={RootRoute.findPair} replace/>
 })
 
 

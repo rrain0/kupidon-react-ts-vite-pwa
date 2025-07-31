@@ -201,14 +201,17 @@ export default [
         ignoreComments: false,
         tabLength: 2,
       }],
-      //'@stylistic/key-spacing': ['error', { beforeColon: false, afterColon: true/*, align: 'value'*/ }],
+      // '@stylistic/key-spacing': ['error', {
+      //   beforeColon: false, afterColon: true/*, align: 'value'*/
+      // }],
       '@stylistic/key-spacing': 'off',
       '@stylistic/keyword-spacing': ['error', { before: true, after: true }],
-      //'@stylistic/linebreak-style': ['error', 'unix'], // doesn't matter what linebreak style - git fixes it
+      // doesn't matter what linebreak style - git fixes it
+      //'@stylistic/linebreak-style': ['error', 'unix'],
       '@stylistic/linebreak-style': 'off',
       '@stylistic/lines-around-comment': 'off',
       '@stylistic/lines-between-class-members': 'off',
-      '@stylistic/max-len': ['warn', { code: 120, tabWidth: 2 }],
+      '@stylistic/max-len': ['warn', { code: 100, tabWidth: 2 }],
       '@stylistic/max-statements-per-line': 'off',
       '@stylistic/multiline-ternary': 'off',
       '@stylistic/new-parens': ['error', 'always'],
@@ -219,7 +222,9 @@ export default [
       '@stylistic/no-floating-decimal': 'error',
       //'@stylistic/no-mixed-operators': 'error',
       '@stylistic/no-mixed-spaces-and-tabs': 'error',
-      //'@stylistic/no-multi-spaces': ['error', { ignoreEOLComments: true, exceptions: { Property: true } }],
+      // '@stylistic/no-multi-spaces': ['error', {
+      //   ignoreEOLComments: true, exceptions: { Property: true },
+      // }],
       '@stylistic/no-multi-spaces': 'off',
       //'@stylistic/no-multiple-empty-lines': ['error', { max: 8, maxBOF: 8, maxEOF: 8 }],
       '@stylistic/no-multiple-empty-lines': 'off',
