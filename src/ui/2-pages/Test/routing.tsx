@@ -2,16 +2,15 @@ import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import React, { Suspense } from 'react'
 import {
   RouteObject,
-  useSearchParams,
 } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
+import CheckAuth from 'src/ui/components/app-router/CheckAuth.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
 
 const MbtiPage = React.lazy(
@@ -22,21 +21,12 @@ const MbtiPage = React.lazy(
 
 
 const RouteTestMbti = React.memo(() => {
-  const [searchParams] = useSearchParams()
-  const authUserId = useAuthZustand(s => s.user?.id)
-  
-  if (!authUserId) return (
-    <AppNavigate
-      toFull={RootRoute.login}
-      allowedNamedParams={{ returnPath: RootRoute.test[fullAnySearchParams](searchParams) }}
-      replace={true}
-    />
-  )
-  
   return (
-    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-      <MbtiPage/>
-    </Suspense>
+    <CheckAuth>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+        <MbtiPage/>
+      </Suspense>
+    </CheckAuth>
   )
 })
 
@@ -56,22 +46,15 @@ export const routingTestMbti: RouteObject[] = [
 
 
 const RouteTest = React.memo(() => {
-  const [searchParams] = useSearchParams()
   const authUserId = useAuthZustand(s => s.user?.id)
   
-  if (!authUserId) return (
-    <AppNavigate
-      toFull={RootRoute.login}
-      allowedNamedParams={{ returnPath: RootRoute.test[fullAnySearchParams](searchParams) }}
-      replace={true}
-    />
-  )
-  
   return (
-    <AppNavigate
-      toFull={RootRoute.profile.id.userId[use](authUserId).tab.tests}
-      replace={true}
-    />
+    <CheckAuth>
+      <AppNavigate
+        toFull={RootRoute.profile.id.userId[use](authUserId!).tab.tests}
+        replace={true}
+      />
+    </CheckAuth>
   )
 })
 

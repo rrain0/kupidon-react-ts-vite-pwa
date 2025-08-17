@@ -1,20 +1,19 @@
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import React, { Suspense } from 'react'
 import {
+  Outlet,
   RouteObject,
   useMatch,
-  useSearchParams,
 } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
+import CheckAuth from 'src/ui/components/app-router/CheckAuth.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use
-import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import full = RouteBuilder.full
 
 const ProfileSummaryPage = React.lazy(() => import(
@@ -32,29 +31,6 @@ const ProfilePage = React.lazy(() => import('src/ui/2-pages/Profile/ProfilePage.
 
 
 const RouteProfileIdUserIdTab = React.memo(() => {
-  const [searchParams] = useSearchParams()
-  const authId = useAuthZustand(s => s.user?.id)
-  const tabRoute = RootRoute.profile
-    .id.userId[use](':userId')
-    .tab.edit[use](':tab')
-  const params = useMatch(tabRoute[full]() + '/*')?.params
-  const urlUserId = params?.['userId']
-  //const tab = params?.['tab']
-  
-  
-  
-  if (urlUserId !== authId) return (
-    <div>
-      <div>Просмотр чужого профиля пока что не реализован.</div>
-      <AppLink
-        toFull={RootRoute.login}
-        allowedNamedParams={{ returnPath: RootRoute.profile[fullAnySearchParams](searchParams) }}
-      >
-        <button>Войти</button>
-      </AppLink>
-    </div>
-  )
-  
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
       <ProfilePage/>
@@ -66,7 +42,7 @@ const RouteProfileIdUserIdTab = React.memo(() => {
 
 const RouteProfileIdUserIdTabAny = React.memo(() => {
   const userIdRoute = RootRoute.profile.id.userId[use](':userId')
-  const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
+  const urlUserId = useMatch(`${userIdRoute[full]()}/*`)!.params['userId']!
   
   return (
     <AppNavigate
@@ -80,7 +56,7 @@ const RouteProfileIdUserIdTabAny = React.memo(() => {
 
 const RouteProfileIdUserIdOverview = React.memo(() => {
   const userIdRoute = RootRoute.profile.id.userId[use](':userId')
-  const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
+  const urlUserId = useMatch(`${userIdRoute[full]()}/*`)!.params['userId']!
   
   return (
     <ProfileOverviewPage userId={urlUserId}/>
@@ -91,7 +67,7 @@ const RouteProfileIdUserIdOverview = React.memo(() => {
 
 const RouteProfileIdUserIdAny = React.memo(() => {
   const userIdRoute = RootRoute.profile.id.userId[use](':userId')
-  const urlUserId = useMatch(userIdRoute[full]()+'/*')!.params['userId']!
+  const urlUserId = useMatch(`${userIdRoute[full]()}/*`)!.params['userId']!
   
   return (
     <AppNavigate
@@ -121,9 +97,11 @@ const routingProfileIdUserIdSummary: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-        <ProfileSummaryPage/>
-      </Suspense>
+      <CheckAuth>
+        <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+          <ProfileSummaryPage/>
+        </Suspense>
+      </CheckAuth>
     ),
   },
   clearUnknownPathEnding,
@@ -134,9 +112,11 @@ const routingProfileIdUserIdShare: RouteObject[] = [
   {
     path: '',
     element: (
-      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-        <ProfileSharePage/>
-      </Suspense>
+      <CheckAuth>
+        <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+          <ProfileSharePage/>
+        </Suspense>
+      </CheckAuth>
     ),
   },
   clearUnknownPathEnding,
@@ -158,15 +138,15 @@ const routingProfileIdUserIdOverview: RouteObject[] = [
 // path: 'profile / id / :userId / tab / ...'
 const routingProfileIdUserIdTab: RouteObject[] = [
   {
-    path: RootRoute.profile.id.userId.tab.preview[path]+'/*',
+    path: `${RootRoute.profile.id.userId.tab.preview[path]}/*`,
     children: routingProfileIdUserIdTabTab,
   },
   {
-    path: RootRoute.profile.id.userId.tab.edit[path]+'/*',
+    path: `${RootRoute.profile.id.userId.tab.edit[path]}/*`,
     children: routingProfileIdUserIdTabTab,
   },
   {
-    path: RootRoute.profile.id.userId.tab.tests[path]+'/*',
+    path: `${RootRoute.profile.id.userId.tab.tests[path]}/*`,
     children: routingProfileIdUserIdTabTab,
   },
   {
@@ -178,22 +158,43 @@ const routingProfileIdUserIdTab: RouteObject[] = [
 
 
 
+
+
+const RouteProfileIdUserId = React.memo(() => {
+  const authId = useAuthZustand(s => s.user?.id)
+  
+  const userIdRoute = RootRoute.profile.id.userId[use](':userId')
+  const userIdMatch = useMatch(`${userIdRoute[full]()}/*`)
+  const urlUserId = userIdMatch?.params?.['userId']
+  
+  const overviewRoute = userIdRoute.overview
+  const overviewMatch = useMatch(`${overviewRoute[full]()}/*`)
+  
+  if (!overviewMatch && urlUserId !== authId) return (
+    <AppNavigate
+      toFull={RootRoute.profile.id.userId[use](urlUserId!).overview}
+      replace
+    />
+  )
+  
+  return <Outlet/>
+})
 // path: 'profile / id / :userId / ...'
 const routingProfileIdUserId: RouteObject[] = [
   {
-    path: RootRoute.profile.id.userId.summary[path]+'/*',
+    path: `${RootRoute.profile.id.userId.summary[path]}/*`,
     children: routingProfileIdUserIdSummary,
   },
   {
-    path: RootRoute.profile.id.userId.tab[path]+'/*',
+    path: `${RootRoute.profile.id.userId.tab[path]}/*`,
     children: routingProfileIdUserIdTab,
   },
   {
-    path: RootRoute.profile.id.userId.share[path]+'/*',
+    path: `${RootRoute.profile.id.userId.share[path]}/*`,
     children: routingProfileIdUserIdShare,
   },
   {
-    path: RootRoute.profile.id.userId.overview[path]+'/*',
+    path: `${RootRoute.profile.id.userId.overview[path]}/*`,
     children: routingProfileIdUserIdOverview,
   },
   {
@@ -206,24 +207,15 @@ const routingProfileIdUserId: RouteObject[] = [
 
 
 const RouteProfileId = React.memo(() => {
-  const [searchParams] = useSearchParams()
   const authId = useAuthZustand(s => s.user?.id)
   
-  if (!authId) return (
-    <AppNavigate
-      toFull={RootRoute.login}
-      allowedNamedParams={{
-        returnPath: RootRoute.profile[fullAnySearchParams](searchParams),
-      }}
-      replace
-    />
-  )
-  
   return (
-    <AppNavigate
-      toFull={RootRoute.profile.id.userId[use](authId)}
-      replace
-    />
+    <CheckAuth>
+      <AppNavigate
+        toFull={RootRoute.profile.id.userId[use](authId!)}
+        replace
+      />
+    </CheckAuth>
   )
 })
 
@@ -236,7 +228,8 @@ export const routingProfileId: RouteObject[] = [
     Component: RouteProfileId,
   },
   {
-    path: RootRoute.profile.id.userId[path]+'/*',
+    path: `${RootRoute.profile.id.userId[path]}/*`,
+    Component: RouteProfileIdUserId,
     children: routingProfileIdUserId,
   },
 ]
@@ -247,7 +240,7 @@ export const routingProfileId: RouteObject[] = [
 // path: 'profile / ...'
 export const routingProfile: RouteObject[] = [
   {
-    path: RootRoute.profile.id[path]+'/*',
+    path: `${RootRoute.profile.id[path]}/*`,
     children: routingProfileId,
   },
   {

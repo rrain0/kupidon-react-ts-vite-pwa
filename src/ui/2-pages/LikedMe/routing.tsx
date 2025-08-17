@@ -2,13 +2,11 @@ import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import React, { Suspense, useState } from 'react'
 import { RouteObject, useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import FindPairPage from 'src/ui/2-pages/FindPair/FindPairPage.tsx'
 import { LikedMeCardItem } from 'src/ui/2-pages/LikedMe/parts/LikedMeCard.tsx'
-import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
-import RootRoute = AppRoutes.RootRoute
+import CheckAuth from 'src/ui/components/app-router/CheckAuth.tsx'
 
 const LikedMePage = React.lazy(
   () => import('src/ui/2-pages/LikedMe/LikedMePage.tsx')
@@ -69,14 +67,12 @@ const LikedMePageWithItems = React.memo(() => {
 
 
 const RouteLikedMe = React.memo(() => {
-  
-  const redirectToLogin = useCheckAuth(RootRoute.likedMe)
-  if (redirectToLogin) return redirectToLogin
-  
   return (
-    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-      <LikedMePageWithItems/>
-    </Suspense>
+    <CheckAuth>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+        <LikedMePageWithItems/>
+      </Suspense>
+    </CheckAuth>
   )
 })
 

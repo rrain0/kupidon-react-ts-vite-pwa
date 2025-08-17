@@ -13,7 +13,7 @@ import CardsHeartGradIc
   from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/CardsHeartGradIc.tsx'
 import ChatRoundGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ChatRoundGradIc.tsx'
 import ProfileGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ProfileGradIc.tsx'
-import AppNavLink from 'src/ui/components/app-router/NavLink.tsx'
+import AppNavLink from 'src/ui/components/app-router/AppNavLink.tsx'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'

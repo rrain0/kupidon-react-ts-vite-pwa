@@ -40,8 +40,6 @@ import mapFailureCodeToUiOption = LoginPageValidation.mapFailureCodeToUiText
 import defaultValues = LoginPageValidation.defaultValues
 import userDefaultValues = LoginPageValidation.userDefaultValues
 import contents = EmotionCommon.contents
-import isdef = TypeU.isdef
-
 
 
 

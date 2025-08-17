@@ -12,6 +12,7 @@ import ObjectMap = ObjectU.ObjectMap
 import AllowedNameParams = RouteBuilder.AllowedNameParams
 import isobject = TypeU.isobject
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
+import AnyParams = RouteBuilder.AnyParams
 
 
 
@@ -22,6 +23,7 @@ export type AppNavigateProps<R extends RouteSegment> =
     toFull: R
     allowedNamedParams: NoInfer<AllowedNameParamsRoutes<R>>
     noSearchFromUrl: boolean
+    anyParams: AnyParams
   }>
 
 
@@ -31,6 +33,7 @@ const AppNavigate = ReactU.memo(<R extends RouteSegment>(props: AppNavigateProps
     toFull,
     allowedNamedParams,
     noSearchFromUrl,
+    anyParams,
   } = props
   
   const [searchParams] = useSearchParams()
@@ -49,13 +52,16 @@ const AppNavigate = ReactU.memo(<R extends RouteSegment>(props: AppNavigateProps
   
   if (!toFull) return undefined
   
+  const to = toFull[fullParams]({
+    ...!noSearchFromUrl && { anySearchParams: searchParams },
+    allowedNamedParams: allowedNamedParamsString,
+    anyParams: anyParams,
+  })
+  
   return (
     <Navigate
       data-display-name='AppNavigate'
-      to={toFull[fullParams]({
-        ...!noSearchFromUrl && { anySearchParams: searchParams },
-        allowedNamedParams: allowedNamedParamsString,
-      })}
+      to={to}
     />
   )
 })

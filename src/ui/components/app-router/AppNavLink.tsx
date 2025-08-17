@@ -23,6 +23,7 @@ export type AppNavLinkProps<R extends RouteSegment> =
   & Pu<{
     toFull: R
     allowedNamedParams: NoInfer<AllowedNameParamsRoutes<R>>
+    noSearchFromUrl: boolean
     anyParams: AnyParams
   }>
 
@@ -33,11 +34,12 @@ const AppNavLink = ReactU.memo(<R extends RouteSegment>(props: AppNavLinkProps<R
     children,
     toFull,
     allowedNamedParams,
+    noSearchFromUrl,
     anyParams,
     ...restProps
   } = props
   
-  const [searchParams, setSearch] = useSearchParams()
+  const [searchParams] = useSearchParams()
   
   const allowedNamedParamsString = useMemo(() => {
     if (!allowedNamedParams) return allowedNamedParams
@@ -58,14 +60,16 @@ const AppNavLink = ReactU.memo(<R extends RouteSegment>(props: AppNavLinkProps<R
     return children
   }
   
+  const to = toFull[fullParams]({
+    ...!noSearchFromUrl && { anySearchParams: searchParams },
+    allowedNamedParams: allowedNamedParamsString,
+    anyParams: anyParams,
+  })
+  
   return (
     <NavLink
       data-display-name='AppNavLink'
-      to={toFull[fullParams]({
-        anySearchParams: searchParams,
-        allowedNamedParams: allowedNamedParamsString,
-        anyParams: anyParams,
-      })}
+      to={to}
       {...restProps}
     >
       {children}

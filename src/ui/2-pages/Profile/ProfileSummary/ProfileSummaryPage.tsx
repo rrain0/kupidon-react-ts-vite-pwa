@@ -26,8 +26,10 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import {
   QuickSettingsOverlayName
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'
-import SummaryPageFeatureCards from 'src/ui/2-pages/Profile/ProfileSummary/parts/SummaryPageFeatureCards.tsx'
-import { ProfileSummaryPageParts } from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
+import SummaryPageFeatureCards
+  from 'src/ui/2-pages/Profile/ProfileSummary/parts/SummaryPageFeatureCards.tsx'
+import { ProfileSummaryPageParts }
+  from 'src/ui/2-pages/Profile/ProfileSummary/ProfileSummaryPage.parts.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'

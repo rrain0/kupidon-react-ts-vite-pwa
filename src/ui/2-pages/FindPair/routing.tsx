@@ -3,7 +3,6 @@ import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UsersApi } from 'src/api/requests/UsersApi.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
-import { AppRoutes } from 'src/app-routes/AppRoutes'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
 import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
@@ -12,8 +11,7 @@ import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import {
   ProfileCardsStackListItem,
 } from 'src/ui/1-widgets/ProfileCards/ProfileCardsStackList.tsx'
-import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
-import RootRoute = AppRoutes.RootRoute
+import CheckAuth from 'src/ui/components/app-router/CheckAuth.tsx'
 
 const FindPairPage = React.lazy(
   () => import('src/ui/2-pages/FindPair/FindPairPage.tsx')
@@ -135,14 +133,12 @@ const FindPairPageWithItems = React.memo(() => {
 
 
 const RouteFindPair = React.memo(() => {
-  
-  const redirectToLogin = useCheckAuth(RootRoute.chats)
-  if (redirectToLogin) return redirectToLogin
-  
   return (
-    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-      <FindPairPageWithItems/>
-    </Suspense>
+    <CheckAuth>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+        <FindPairPageWithItems/>
+      </Suspense>
+    </CheckAuth>
   )
 })
 

@@ -3,9 +3,9 @@ import { useAsCallback } from 'src/util/react-state/useAsCallback.ts'
 import { useIsMount } from 'src/util/react-state/useIsMount.ts'
 import { useMemo, useState } from 'react'
 import {
-  getParamValueData,
+  getSearchParamValueData,
   parseSearchParams,
-  SearchParamValueData, setParamValue, stringifySearchParams,
+  SearchParamValueData, setSearchParam, stringifySearchParams,
 } from 'src/util/url/SearchParamsU.ts'
 import { useSearchParamsZustand } from 'src/zustand/url/SearchParamsZustand.ts'
 import Pu = TypeU.Pu
@@ -28,9 +28,9 @@ const updateUrlSearchParam = (
   const url = new URL(window.location.href)
   
   const params = parseSearchParams(url.search)
-  const newParams = setParamValue(params, param, searchParamValueData)
+  const newParams = setSearchParam(params, param, searchParamValueData)
   
-  let paramValueData = getParamValueData(newParams[param])
+  let paramValueData = getSearchParamValueData(newParams[param])
   
   if (params !== newParams) {
     url.search = stringifySearchParams(newParams)
@@ -58,14 +58,14 @@ export const useSearchParamValue = (
   const [initialParamData] = useState(() => updateUrlSearchParam(param, initialData))
   
   
-  const stateParamValueData = getParamValueData(useSearchParamsZustand(s => s[param]))
+  const stateParamValueData = getSearchParamValueData(useSearchParamsZustand(s => s[param]))
   
   // null в урле становится отсутствием свойства в объекте.
   // Обновляет состояние, только если значение новое.
   const setParamState = useAsCallback((valueData: SearchParamUrlAndValueData) => {
     valueData = updateUrlSearchParam(param, valueData)
     useSearchParamsZustand.setState(curr => (
-      setParamValue(curr, param, valueData)
+      setSearchParam(curr, param, valueData)
     ), true)
   })
   
@@ -76,7 +76,7 @@ export const useSearchParamValue = (
   const paramValueData = useMemo(() => {
     if (isMount) {
       useSearchParamsZustand.setState(curr => (
-        setParamValue(curr, param, initialParamData)
+        setSearchParam(curr, param, initialParamData)
       ), true)
       return initialParamData
     }

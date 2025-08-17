@@ -29,7 +29,7 @@ export const parseSearchParams = (search = '') => (
       ;(acc[param] ??= []).push(v)
       return acc
     }, { } as SearchParamsData)
-  ?? { }
+    ?? { }
 )
 
 
@@ -50,8 +50,10 @@ export type SearchParamValueData = Pu<{
   value: string
 }>
 
-export const setParamValue = (
-  params: SearchParamsData, param, { noParam, noValue, value }: SearchParamValueData
+export const setSearchParam = (
+  params: SearchParamsData,
+  param: string,
+  { noParam, noValue, value }: SearchParamValueData
 ) => {
   const newParams = { ...params }
   
@@ -64,7 +66,7 @@ export const setParamValue = (
 }
 
 
-export const getParamValueData = (paramValues?: SearchParamValues): SearchParamValueData => {
+export const getSearchParamValueData = (paramValues?: SearchParamValues): SearchParamValueData => {
   if (!paramValues?.length) return { noParam: true }
   if (isundef(paramValues[0])) return { noValue: true }
   return { value: paramValues[0] }

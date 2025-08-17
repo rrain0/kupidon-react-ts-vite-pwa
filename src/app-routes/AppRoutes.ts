@@ -17,6 +17,7 @@ export namespace AppRoutes {
   const login = buildRoute({
     [path]: 'login',
     [params]: {
+      useAccount: 'useAccount',
       returnPath: 'returnPath',
     },
   })

@@ -59,17 +59,6 @@ import { UserStrangerA } from 'src/model/api/UserA.ts'
 
 export namespace MockData {
   
-  export const account = {
-    testUserAccessToken: (() => {
-      // Токены созданы 2025-04-30 и будут жить 2 года (2 * 365 дней)
-      // eslint-disable-next-line @stylistic/max-len
-      if (Env.isDev) return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4MDkwOTAwMDksInN1YiI6Ijc5NTQxNWRhLWEyY2ItNDM1Yi04MGVlLTk4YWYyOGIzZjBkMCIsInJvbGVzIjpbXX0.-Het9RLLDnoy72gh9BhLwA3eoH1_p_MVQTJKxkKWAjs'
-      // eslint-disable-next-line @stylistic/max-len
-      if (Env.isProd) return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE4MDkwOTYwNjYsInN1YiI6Ijc5NTQxNWRhLWEyY2ItNDM1Yi04MGVlLTk4YWYyOGIzZjBkMCIsInJvbGVzIjpbXX0.aEbvHu7P58Es1CfKKrtIZ-ys1tGAYRC5Iul5KfVlTSQ'
-      return ''
-    })(),
-  }
-  
   export const images = {
     record: {
       avaChan1, avaChan2, avaChan3,

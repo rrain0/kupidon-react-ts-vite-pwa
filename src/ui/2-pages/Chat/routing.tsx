@@ -6,7 +6,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { mockChatItems } from 'src/ui/2-pages/Chats/ChatsPage.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
-import { useCheckAuth } from 'src/ui/components/app-router/useCheckAuth.tsx'
+import CheckAuth from 'src/ui/components/app-router/CheckAuth.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import full = RouteBuilder.full
@@ -31,16 +31,12 @@ const RouteChatUserIdOrIdId = React.memo(() => {
   const chatIdRoute = RootRoute.chat.id.id[use](':id')
   const urlChatId = useMatch(chatIdRoute[full]()+'/*')?.params['id']
   
-  const redirectToLogin = useCheckAuth((() => {
-    if (urlChatId) return  RootRoute.chat.id.id[use](urlChatId)
-    return RootRoute.chat.userId.id[use](urlChatUserId!)
-  })())
-  if (redirectToLogin) return redirectToLogin
-  
   return (
-    <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-      <ChatPage toUserId={urlChatUserId} toChatId={urlChatId}/>
-    </Suspense>
+    <CheckAuth>
+      <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
+        <ChatPage toUserId={urlChatUserId} toChatId={urlChatId}/>
+      </Suspense>
+    </CheckAuth>
   )
 })
 
