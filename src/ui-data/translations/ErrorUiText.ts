@@ -5,7 +5,7 @@ import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 
 export const ErrorUiText = {
   
-  unknownError: {
+  UNKNOWN_ERROR: {
     'en-US': 'Unknown error',
     'ru-RU': 'Неизвестная ошибка',
   },
@@ -13,7 +13,7 @@ export const ErrorUiText = {
     'en-US': (err: string) => `Unknown error: ${err}`,
     'ru-RU': (err: string) => `Неизвестная ошибка: ${err}`,
   },
-  connectionError: {
+  CONNECTION_ERROR: {
     'en-US': 'Error connecting to the server, perhaps something with the Internet',
     'ru-RU': 'Ошибка соединения с сервером, возможно что-то с интернетом',
   },

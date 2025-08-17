@@ -15,8 +15,8 @@ import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
 import { useCssWhRef } from '@util/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
-import { useFormApiRequest } from 'src/api/useFormApiRequest.ts'
+import { useApiRequest } from '@mini-libs/api/useApiRequest.ts'
+import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
 import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
 import {
   useMediaArrayDownloader

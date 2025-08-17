@@ -1,12 +1,12 @@
-import { ApiUtils } from 'src/api/ApiUtils'
+import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import { ChatA } from 'src/model/api/ChatA.ts'
 import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
-import TechnicalError = ApiUtils.TechnicalError
-import handleAuthenticatedResponse = ApiUtils.handleAuthenticatedResponse
-import AuthenticationError = ApiUtils.AuthenticationError
+import TechnicalError = ApiResponseUtils.TechnicalError
+import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
+import AuthenticationError = ApiResponseUtils.AuthenticationError
 
 
 

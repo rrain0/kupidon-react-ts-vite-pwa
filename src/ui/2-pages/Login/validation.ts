@@ -22,8 +22,8 @@ export namespace LoginPageValidation {
     | 'login-incorrect'
     | 'pwd-required'
     | 'NO_USER'
-    | 'connectionError'
-    | 'unknownError'
+    | 'CONNECTION_ERROR'
+    | 'UNKNOWN_ERROR'
   
   
   
@@ -32,8 +32,8 @@ export namespace LoginPageValidation {
     'login-incorrect': ErrorUiText.loginFormatIsIncorrect,
     'pwd-required': ErrorUiText.pwdIsNotEntered,
     'NO_USER': ErrorUiText.noUserWithSuchLoginPwd,
-    'connectionError': ErrorUiText.connectionError,
-    'unknownError': ErrorUiText.unknownError,
+    'CONNECTION_ERROR': ErrorUiText.CONNECTION_ERROR,
+    'UNKNOWN_ERROR': ErrorUiText.UNKNOWN_ERROR,
   } satisfies UiTextValues<FailureCode>
   
   
@@ -116,7 +116,7 @@ export namespace LoginPageValidation {
     
     
     createValidator(['fromServer'], ([v]) => {
-      if (v?.error.code === 'connectionError') return new PartialFailureData({
+      if (v?.error.code === 'CONNECTION_ERROR') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
@@ -124,7 +124,7 @@ export namespace LoginPageValidation {
     }),
     createValidator(['fromServer'], ([v]) => {
       if (v) return new PartialFailureData({
-        code: 'unknownError' satisfies FailureCode,
+        code: 'UNKNOWN_ERROR' satisfies FailureCode,
         msg: 'Неизвестная ошибка',
         extra: v,
         type: 'server',

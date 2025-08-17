@@ -2,9 +2,9 @@ import { TypeU } from '@util/common/TypeU.ts'
 import { useAsCallback } from '@util/react-state/useAsCallback.ts'
 import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
 import { useState } from 'react'
-import { ApiUtils } from 'src/api/ApiUtils.ts'
-import ResponseError = ApiUtils.ResponseError
-import ApiResponse = ApiUtils.ApiResponse
+import { ApiResponseUtils } from 'src/mini-libs/api/ApiResponseUtils.ts'
+import ResponseError = ApiResponseUtils.ResponseError
+import ApiResponse = ApiResponseUtils.ApiResponse
 import Callback = TypeU.Callback
 
 

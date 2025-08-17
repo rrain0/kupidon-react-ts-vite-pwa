@@ -1,11 +1,11 @@
-import { ApiUtils } from 'src/api/ApiUtils'
+import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import { UserCurrentA } from 'src/model/api/UserA.ts'
 import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import ax = AxiosConfig.ax
-import handleResponse = ApiUtils.handleResponse
-import NoUserResponseError = ApiUtils.NoUserResponseError
-import TechnicalError = ApiUtils.TechnicalError
+import handleResponse = ApiResponseUtils.handleResponse
+import NoUserResponseError = ApiResponseUtils.NoUserResponseError
+import TechnicalError = ApiResponseUtils.TechnicalError
 
 
 

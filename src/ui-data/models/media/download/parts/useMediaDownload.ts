@@ -5,7 +5,7 @@ import { FileU } from '@util/file/FileU.ts'
 import { StageProgress } from '@util/progress/StageProgress.ts'
 import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
 import { useEffect } from 'react'
-import { ApiUtils } from 'src/api/ApiUtils.ts'
+import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import {
   MediaDownloadable,
   MediaOperation,
@@ -143,7 +143,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
               updateMedia({ removeDownload: true })
               return
             }
-            if (ApiUtils.isConnectionError(ex)) {
+            if (ApiResponseUtils.isConnectionError(ex)) {
               updateMedia({
                 updateMedia: { downloadError: ex, needRetryDownload: true },
                 removeDownload: true,

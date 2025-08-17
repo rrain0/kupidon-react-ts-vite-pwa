@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { useApiRequest } from 'src/api/useApiRequest.ts'
+import { useApiRequest } from '@mini-libs/api/useApiRequest.ts'
 import { getAccessTokenData } from 'src/model/api/AccessTokenA.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 

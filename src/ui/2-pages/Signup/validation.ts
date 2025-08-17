@@ -44,8 +44,8 @@ export namespace SignupPageValidation {
     
     | 'DUPLICATE_EMAIL'
     
-    | 'connectionError'
-    | 'unknownError'
+    | 'CONNECTION_ERROR'
+    | 'UNKNOWN_ERROR'
   
   
   
@@ -66,8 +66,8 @@ export namespace SignupPageValidation {
     'birth-date-not-exists': ErrorUiText.dateNotExists,
     'birth-date-younger-18': ErrorUiText.youMustBeAtLeast18YearsOld,
     'DUPLICATE_EMAIL': ErrorUiText.userWithSuchEmailAlreadyRegistered,
-    'connectionError': ErrorUiText.connectionError,
-    'unknownError': ErrorUiText.unknownError,
+    'CONNECTION_ERROR': ErrorUiText.CONNECTION_ERROR,
+    'UNKNOWN_ERROR': ErrorUiText.UNKNOWN_ERROR,
   } satisfies UiTextValues<FailureCode>
   
   
@@ -80,7 +80,7 @@ export namespace SignupPageValidation {
     gender: GenderA | ''
     birthDate: string // 2002-01-01 1999-12-31
     //notRobot: boolean
-    //form: LoginRespE['data']['code'] | 'connectionError'|'unknown'|undefined
+    //form: LoginRespE['data']['code'] | 'CONNECTION_ERROR'|'unknown'|undefined
   }
   export type FromServerValue = {
     values: UserValues // значения, отправленные на сервердля проверки
@@ -267,7 +267,7 @@ export namespace SignupPageValidation {
     
     
     createValidator(['fromServer'], ([v]) => {
-      if (v?.error.code === 'connectionError') return new PartialFailureData({
+      if (v?.error.code === 'CONNECTION_ERROR') return new PartialFailureData({
         code: v.error.code satisfies FailureCode,
         msg: 'Ошибка соединения с сервером, возможно что-то с интернетом',
         type: 'server',
@@ -275,7 +275,7 @@ export namespace SignupPageValidation {
     }),
     createValidator(['fromServer'], ([v]) => {
       if (v) return new PartialFailureData({
-        code: 'unknownError' satisfies FailureCode,
+        code: 'UNKNOWN_ERROR' satisfies FailureCode,
         msg: 'Неизвестная ошибка',
         extra: v,
         type: 'server',

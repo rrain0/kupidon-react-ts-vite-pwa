@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import { ApiUtils } from 'src/api/ApiUtils'
+import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import { UserCurrentA, UserStrangerA } from 'src/model/api/UserA.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import { TypeU } from '@util/common/TypeU.ts'
@@ -9,11 +9,11 @@ import { AxiosConfig } from '../AxiosConfig'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
 import ax = AxiosConfig.ax
-import handleResponse = ApiUtils.handleResponse
-import TechnicalError = ApiUtils.TechnicalError
-import handleAuthenticatedResponse = ApiUtils.handleAuthenticatedResponse
-import AuthenticationError = ApiUtils.AuthenticationError
-import NoUserResponseError = ApiUtils.NoUserResponseError
+import handleResponse = ApiResponseUtils.handleResponse
+import TechnicalError = ApiResponseUtils.TechnicalError
+import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
+import AuthenticationError = ApiResponseUtils.AuthenticationError
+import NoUserResponseError = ApiResponseUtils.NoUserResponseError
 import Pu = TypeU.Pu
 import fetchToBlob = FileU.fetchToBlob
 import Callback1 = TypeU.Callback1

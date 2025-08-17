@@ -1,28 +1,26 @@
 import { DateU } from '@util/date/DateU.ts'
-import { ApiUtils } from 'src/api/ApiUtils.ts'
-import { UserCurrentA, UserPhotoA } from 'src/model/api/UserA.ts'
+import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
+import { UserCurrentA } from 'src/model/api/UserA.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import {
   MediaInArrayDUC,
   MediaOperation,
-  newDefaultEmptyRemoteMediaInArray,
-  newDefaultMediaOperation, newDefaultRemoteMediaInArray,
+  newDefaultMediaOperation,
 } from 'src/ui-data/models/media/Media.ts'
-import { ProfilePageValidation, profilePhotosCntMax } from 'src/ui/2-pages/Profile/validation.ts'
+import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'
 import { TypeU } from 'src/util/common/TypeU.ts'
 import { RangeU } from 'src/util/common/RangeU'
 import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import * as uuid from 'uuid'
 import throttle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
 import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
-import ApiResponse = ApiUtils.ApiResponse
+import ApiResponse = ApiResponseUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
 import SetterOrUpdater = TypeU.SetterOrUpdater
 import UserToUpdate = UserApi.UserToUpdate
