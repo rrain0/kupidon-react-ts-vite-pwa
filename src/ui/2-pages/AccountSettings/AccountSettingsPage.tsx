@@ -18,7 +18,9 @@ import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
-import { AccountSettingsPageValidation } from 'src/ui/2-pages/AccountSettings/validation'
+import {
+  AccountSettingsPageValidation,
+} from 'src/ui/2-pages/AccountSettings/AccountSettingsPage.validation.ts'
 import { ObjectU } from 'src/util/common/ObjectU'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit'

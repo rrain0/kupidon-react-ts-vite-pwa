@@ -3,7 +3,7 @@ import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray, newDefaultRemoteMediaInArray,
 } from 'src/ui-data/models/media/Media.ts'
-import { profilePhotosCntMax } from 'src/ui/2-pages/Profile/validation.ts'
+import { profilePhotosCntMax } from 'src/ui/2-pages/Profile/ProfilePage.validation.ts'
 import * as uuid from 'uuid'
 
 

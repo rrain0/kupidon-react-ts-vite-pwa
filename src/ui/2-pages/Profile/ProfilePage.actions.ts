@@ -7,7 +7,7 @@ import {
   MediaOperation,
   newDefaultMediaOperation,
 } from 'src/ui-data/models/media/Media.ts'
-import { ProfilePageValidation } from 'src/ui/2-pages/Profile/validation.ts'
+import { ProfilePageValidation } from 'src/ui/2-pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { ArrayU } from 'src/util/common/ArrayU.ts'
 import { AsyncU } from 'src/util/common/AsyncU.ts'

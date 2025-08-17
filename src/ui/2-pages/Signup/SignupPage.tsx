@@ -23,7 +23,6 @@ import React, {
 } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { DateTime } from '@util/date/DateTime.ts'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit.ts'
 import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts.tsx'
@@ -37,9 +36,11 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
-import { RadioInputGroupStyle } from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
+import {
+  RadioInputGroupStyle,
+} from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
-import { SignupPageValidation } from 'src/ui/2-pages/Signup/validation.ts'
+import { SignupPageValidation } from 'src/ui/2-pages/Signup/SignupPage.validation.ts'
 import FormValues = SignupPageValidation.FormValues
 import validators = SignupPageValidation.validators
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
