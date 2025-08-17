@@ -77,7 +77,8 @@ const AccountSettingsPage = React.memo(() => {
     errorFields: formErrorFields,
     formFieldWrapProps,
   } = useFormData({
-    defaultValues, validators,
+    initialValues: defaultValues,
+    validators,
   })
   
   const {

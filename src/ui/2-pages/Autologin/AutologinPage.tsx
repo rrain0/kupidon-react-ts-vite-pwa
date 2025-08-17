@@ -2,9 +2,7 @@ import React, { useCallback, useEffect } from 'react'
 import { AuthApi } from 'src/api/requests/AuthApi'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
 import { AppRoutes } from 'src/app-routes/AppRoutes'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
-import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'
 import { StatusUiText } from 'src/ui-data/translations/StatusUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
@@ -21,38 +19,33 @@ import { useNavigate, useSearchParams } from 'react-router'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit'
 import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts'
-import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
-import Input from 'src/ui/0-elements/inputs/Input/Input'
-import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput'
-import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import { LoginPageValidation } from 'src/ui/2-pages/Login/LoginPage.validation.ts'
-import FormValues = LoginPageValidation.FormValues
-import validators = LoginPageValidation.validators
+import { AutologinPageValidation } from 'src/ui/2-pages/Autologin/AutologinPage.validation.ts'
+import FormValues = AutologinPageValidation.FormValues
+import validators = AutologinPageValidation.validators
 import full = RouteBuilder.full
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
-import mapFailureCodeToUiOption = LoginPageValidation.mapFailureCodeToUiText
-import defaultValues = LoginPageValidation.defaultValues
-import userDefaultValues = LoginPageValidation.userDefaultValues
-import contents = EmotionCommon.contents
+import mapFailureCodeToUiOption = AutologinPageValidation.mapFailureCodeToUiText
+import defaultValues = AutologinPageValidation.defaultValues
+import userDefaultValues = AutologinPageValidation.userDefaultValues
 
 
 
-const LoginPage = React.memo(() => {
+const AutologinPage = React.memo(() => {
   
   const [searchParams] = useSearchParams()
-  const returnPath = searchParams.get(RootRoute.login[params].returnPath) ?? undefined
+  const returnPath = searchParams.get(RootRoute.autologin[params].returnPath) ?? undefined
+  const accountName = searchParams.get(RootRoute.autologin[params].useAccount) ?? ''
   const navigate = useNavigate()
   
   const setAuth = useAuthZustand.setState
   
   const actionText = useUiValues(ActionUiText)
   const titleText = useUiValues(TitleUiText)
-  const placeholderText = useUiValues(PlaceholderUiText)
   
   const {
     values: formValues,
@@ -62,7 +55,7 @@ const LoginPage = React.memo(() => {
     errorFields: formErrorFields,
     formFieldWrapProps,
   } = useFormData({
-    initialValues: defaultValues,
+    initialValues: { ...defaultValues, accountName },
     validators,
   })
   
@@ -74,10 +67,9 @@ const LoginPage = React.memo(() => {
     values: formValues,
     errorFields: formErrorFields,
     prepareAndRequest: useCallback((values: FormValues) => {
-      return AuthApi.login({
-        login: values.login,
-        pwd: values.pwd,
-      })
+      const account = values.accountName
+      if (account === 'test') return AuthApi.loginTestUser()
+      throw new Error(`Unsupported accountName: '${account}'`)
     }, []),
   })
   
@@ -109,6 +101,13 @@ const LoginPage = React.memo(() => {
   })
   
   
+  useEffect(() => {
+    setFormValues(curr => ({ ...curr, accountName }))
+  }, [accountName])
+  
+  useEffect(() => {
+    submit()
+  }, [formValues])
   
   useEffect(() => {
     if (isSuccess && response?.isSuccess) {
@@ -145,57 +144,47 @@ const LoginPage = React.memo(() => {
       })()}
        */}
       
-      <PageLayout col data-display-name='LoginPage'>
+      <PageLayout col data-display-name='AutologinPage'>
         <PageContentLayout colSm grow>
           <Flex col grow justify g={30}>
-            <form css={contents} onSubmit={onSubmit}>
-              
-              
-              <Grid cols='38px 1fr 38px' stretch>
-                <Flex centerStart m={-13}><BackButton/></Flex>
-                <Flex center><Hdrs.Page>{titleText.login}</Hdrs.Page></Flex>
-                <Gap w={38}/>
-              </Grid>
-              
-              
-              <FormFieldWrap {...formFieldWrapProps} name='login'>
-                {props => (
-                  <Input
-                    css={InputStyle.outlinedRectNormalNormal}
-                    placeholder={placeholderText.loginAsEmail}
-                    {...props.inputProps}
-                    hasError={props.highlight}
-                  />
-                )}
-              </FormFieldWrap>
-              
-              <FormFieldWrap {...formFieldWrapProps} name='pwd'>
-                {props => (
-                  <PwdInput
-                    css={InputStyle.outlinedRectNormalNormal}
-                    placeholder={placeholderText.pwd}
-                    {...props.inputProps}
-                    hasError={props.highlight}
-                  />
-                )}
-              </FormFieldWrap>
-              
-              
+            
+            <Grid cols='38px 1fr 38px' stretch>
+              <Flex centerStart m={-13}><BackButton/></Flex>
+              <Flex center><Hdrs.Page>{titleText.autologin}</Hdrs.Page></Flex>
+              <Gap w={38}/>
+            </Grid>
+            
+            <div>Account: "{accountName}"</div>
+            
+            <Button
+              css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
+              onClick={submit}
+            >
+              {actionText.autologin}
+            </Button>
+            
+            <AppLink
+              toFull={RootRoute.login}
+              allowedNamedParams={{ returnPath }}
+              noSearchFromUrl
+            >
               <Button
-                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.main)}
-                type='submit'
+                css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}
               >
                 {actionText.login}
               </Button>
-              
-              
-              <AppLink toFull={RootRoute.signup} allowedNamedParams={{ returnPath }}>
-                <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
-                  {actionText.signup}
-                </Button>
-              </AppLink>
+            </AppLink>
             
-            </form>
+            <AppLink
+              toFull={RootRoute.signup}
+              allowedNamedParams={{ returnPath }}
+              noSearchFromUrl
+            >
+              <Button css={ButtonS6.t(ButtonS6.S.filled.rect.lg.normal)}>
+                {actionText.signup}
+              </Button>
+            </AppLink>
+            
           </Flex>
         </PageContentLayout>
       </PageLayout>
@@ -205,6 +194,6 @@ const LoginPage = React.memo(() => {
     </>
   )
 })
-LoginPage.displayName = 'LoginPage'
-export default LoginPage
+AutologinPage.displayName = 'AutologinPage'
+export default AutologinPage
 

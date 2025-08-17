@@ -67,7 +67,7 @@ export const routingTest: RouteObject[] = [
     Component: RouteTest,
   },
   {
-    path: RootRoute.test.mbti[path]+'/*',
+    path: `${RootRoute.test.mbti[path]}/*`,
     children: routingTestMbti,
   },
   clearUnknownPathEnding,

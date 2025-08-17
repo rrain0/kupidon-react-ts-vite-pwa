@@ -26,10 +26,10 @@ const RouteChatUserIdOrIdId = React.memo(() => {
   // Здесь должен быть 1 из 2 роутов
   
   const chatUserIdRoute = RootRoute.chat.userId.id[use](':id')
-  const urlChatUserId = useMatch(chatUserIdRoute[full]()+'/*')?.params['id']
+  const urlChatUserId = useMatch(`${chatUserIdRoute[full]()}/*`)?.params['id']
   
   const chatIdRoute = RootRoute.chat.id.id[use](':id')
-  const urlChatId = useMatch(chatIdRoute[full]()+'/*')?.params['id']
+  const urlChatId = useMatch(`${chatIdRoute[full]()}/*`)?.params['id']
   
   return (
     <CheckAuth>
@@ -60,7 +60,7 @@ const routingChatUserId: RouteObject[] = [
     element: <AppNavigate toFull={RootRoute.chats} replace/>,
   },
   {
-    path: RootRoute.chat.userId.id[path] + '/*',
+    path: `${RootRoute.chat.userId.id[path]}/*`,
     children: routingChatUserIdOrIdId,
   },
 ]
@@ -71,7 +71,7 @@ const routingChatId: RouteObject[] = [
     element: <AppNavigate toFull={RootRoute.chats} replace/>,
   },
   {
-    path: RootRoute.chat.id.id[path] + '/*',
+    path: `${RootRoute.chat.id.id[path]}/*`,
     children: routingChatUserIdOrIdId,
   },
 ]
@@ -82,11 +82,11 @@ const routingChatId: RouteObject[] = [
 // path: 'chat / ...'
 export const routingChat: RouteObject[] = [
   {
-    path: RootRoute.chat.userId[path] + '/*',
+    path: `${RootRoute.chat.userId[path]}/*`,
     children: routingChatUserId,
   },
   {
-    path: RootRoute.chat.id[path] + '/*',
+    path: `${RootRoute.chat.id[path]}/*`,
     children: routingChatId,
   },
   {

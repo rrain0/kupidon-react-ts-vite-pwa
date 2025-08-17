@@ -17,6 +17,12 @@ export namespace AppRoutes {
   const login = buildRoute({
     [path]: 'login',
     [params]: {
+      returnPath: 'returnPath',
+    },
+  })
+  const autologin = buildRoute({
+    [path]: 'autologin',
+    [params]: {
       useAccount: 'useAccount',
       returnPath: 'returnPath',
     },
@@ -160,6 +166,7 @@ export namespace AppRoutes {
     [path]: '',
     
     login,
+    autologin,
     signup,
     
     profile,

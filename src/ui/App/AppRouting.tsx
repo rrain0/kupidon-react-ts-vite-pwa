@@ -1,12 +1,19 @@
 import { useAuthSetup } from '@util/auth/useAuthSetup.ts'
+import { SearchParams } from '@util/url/SearchParams.ts'
+import {
+  parseSearchParams,
+  setSearchParam,
+  stringifySearchParams,
+} from '@util/url/SearchParamsU.ts'
 import {
   createBrowserRouter,
   Outlet,
   RouteObject,
-  RouterProvider,
+  RouterProvider, useLocation, useMatch,
 } from 'react-router'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RouteBottomNavBar from 'src/ui/1-widgets/NavBar/NavBar.routing.tsx'
+import { routingAutologin } from 'src/ui/2-pages/Autologin/AutologinPage.routing.tsx'
 import { routingBowAndArrows } from 'src/ui/2-pages/BowAndArrows/BowAndArrowsPage.routing.tsx'
 import { routingChat } from 'src/ui/2-pages/Chat/ChatPage.routing.tsx'
 import { routingChats } from 'src/ui/2-pages/Chats/ChatsPage.routing.tsx'
@@ -28,6 +35,8 @@ import { routingTest } from 'src/ui/2-pages/Test/TestPage.routing.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
+import params = RouteBuilder.params
+import full = RouteBuilder.full
 
 
 
@@ -36,7 +45,25 @@ const RouteAny = React.memo(() => {
   //useNavBar(undefined)
   //const navBar = useZustand(s => s.navBar)
   
+  const { pathname: path, search, hash } = useLocation()
+  
+  const useAccountParam = RootRoute.autologin[params].useAccount
+  const searchParams = new SearchParams(search)
+  const accountName = searchParams.get(useAccountParam) ?? ''
+  const returnPathSearch = searchParams.with(useAccountParam, { noParam: true }).toString()
+  const returnPath = `${path}${returnPathSearch}${hash}`
+  const isAutologin = !!useMatch(`${RootRoute.autologin[full]()}/*`)
+  
   const authIsReady = useAuthSetup()
+  
+  if (accountName && !isAutologin) return (
+    <AppNavigate
+      toFull={RootRoute.autologin}
+      allowedNamedParams={{ useAccount: accountName, returnPath }}
+      noSearchFromUrl
+      replace
+    />
+  )
   
   if (!authIsReady) return <Flex fullW h='100dvh' center>Загрузка...</Flex>
   
@@ -70,6 +97,10 @@ const routingRoot: RouteObject[] = [
       {
         path: RootRoute.login[path]+'/*',
         children: routingLogin,
+      },
+      {
+        path: RootRoute.autologin[path]+'/*',
+        children: routingAutologin,
       },
       {
         path: RootRoute.signup[path]+'/*',

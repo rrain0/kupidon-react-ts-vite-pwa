@@ -24,7 +24,7 @@ const RouteDatePlacePlaceId = React.memo(() => {
   
   const idParam = 'placeId'
   const placeIdRoute = RootRoute.datePlace.placeId[use](`:${idParam}`)
-  const urlPlaceId = useMatch(placeIdRoute[full]()+'/*')!.params[idParam]!
+  const urlPlaceId = useMatch(`${placeIdRoute[full]()}/*`)!.params[idParam]!
   
   const place = DatePlacesData.find(place => place.id === urlPlaceId)
   
@@ -73,7 +73,7 @@ export const routingDatePlace: RouteObject[] = [
     Component: RouteDatePlace,
   },
   {
-    path: RootRoute.datePlace.placeId[path]+'/*',
+    path: `${RootRoute.datePlace.placeId[path]}/*`,
     children: routingDatePlacePlaceId,
   },
 ]

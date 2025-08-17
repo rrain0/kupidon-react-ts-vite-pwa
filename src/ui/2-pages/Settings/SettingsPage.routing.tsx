@@ -19,15 +19,15 @@ export const routingSettings: RouteObject[] = [
     children: routingSettingsApplication,
   },
   {
-    path: RootRoute.settings.account[path]+'/*',
+    path: `${RootRoute.settings.account[path]}/*`,
     children: routingSettingsAccount,
   },
   {
-    path: RootRoute.settings.app[path]+'/*',
+    path: `${RootRoute.settings.app[path]}/*`,
     children: routingSettingsApplication,
   },
   {
-    path: RootRoute.settings.pwdChange[path]+'/*',
+    path: `${RootRoute.settings.pwdChange[path]}/*`,
     children: routingSettingsPwdChange,
   },
   clearUnknownPathEnding,

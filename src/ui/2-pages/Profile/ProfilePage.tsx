@@ -81,7 +81,7 @@ const ProfilePage = React.memo(() => {
     errorFields: formErrorFields,
     formFieldWrapProps,
   } = useFormData({
-    defaultValues,
+    initialValues: defaultValues,
     validators,
   })
   

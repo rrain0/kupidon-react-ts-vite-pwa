@@ -121,7 +121,8 @@ const Dialog = ReactU.memo(<T extends string>(props: DialogProps<T>) => {
     values: checks,
     formFieldWrapProps,
   } = useFormData({
-    defaultValues: defaultChecks, validators: [],
+    initialValues: defaultChecks,
+    validators: [],
   })
   
   

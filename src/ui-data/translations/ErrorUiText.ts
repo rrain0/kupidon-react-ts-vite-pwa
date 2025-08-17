@@ -133,4 +133,14 @@ export const ErrorUiText = {
   },
   
   
+  accountNameIsAbsent: {
+    'en-US': 'Account name is absent',
+    'ru-RU': 'Имя аккаунта отсутсвует',
+  },
+  accountIsUnsupported: {
+    'en-US': 'Account is unsupported',
+    'ru-RU': 'Аккаунт не поддерживается',
+  },
+  
+  
 } satisfies UiValues

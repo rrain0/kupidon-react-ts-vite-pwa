@@ -3,14 +3,14 @@ import { RouteObject } from 'react-router'
 import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 
-const LoginPage = React.lazy(() => import('./LoginPage'))
+const AutologinPage = React.lazy(() => import('./AutologinPage.tsx'))
 
 
 
-const RouteLogin = React.memo(() => {
+const RouteAutologin = React.memo(() => {
   return (
     <Suspense fallback={<Flex fullW h='100dvh' center>Загрузка...</Flex>}>
-      <LoginPage/>
+      <AutologinPage/>
     </Suspense>
   )
 })
@@ -18,11 +18,11 @@ const RouteLogin = React.memo(() => {
 
 
 
-// path: 'login / ...'
-export const routingLogin: RouteObject[] = [
+// path: 'autologin / ...'
+export const routingAutologin: RouteObject[] = [
   {
     path: '',
-    Component: RouteLogin,
+    Component: RouteAutologin,
   },
   clearUnknownPathEnding,
 ]

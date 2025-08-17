@@ -9,7 +9,7 @@ services:
     # You must build image with BACKEND_HOST & BACKEND_PORT before push to embed them into built scripts
     # docker build -t rrain0/kupidon-react-react:1.6.25 --build-arg BACKEND_HOST=$backendHost --build-arg BACKEND_PORT=$backendPort .
     # docker push rrain0/kupidon-react-react:1.6.25
-    image: rrain0/kupidon-react-react:1.7.19
+    image: rrain0/kupidon-react-react:1.7.20
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     volumes:

@@ -20,7 +20,7 @@ export type SearchParamsData = Record<string, SearchParamValues>
 
 
 
-export const parseSearchParams = (search = '') => (
+export const parseSearchParams = (search = ''): SearchParamsData => (
   search
     .split('?')[1]
     ?.split('&')
@@ -66,7 +66,9 @@ export const setSearchParam = (
 }
 
 
-export const getSearchParamValueData = (paramValues?: SearchParamValues): SearchParamValueData => {
+export const getSearchParamValueData = (
+  paramValues?: SearchParamValues
+): SearchParamValueData => {
   if (!paramValues?.length) return { noParam: true }
   if (isundef(paramValues[0])) return { noValue: true }
   return { value: paramValues[0] }

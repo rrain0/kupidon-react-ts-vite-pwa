@@ -46,6 +46,10 @@ export const TitleUiText = {
     'en-US': 'Login',
     'ru-RU': 'Вход',
   },
+  autologin: {
+    'en-US': 'Autologin',
+    'ru-RU': 'Автовход',
+  },
   appSettings: {
     'en-US': 'Application settings',
     'ru-RU': 'Настройки приложения',

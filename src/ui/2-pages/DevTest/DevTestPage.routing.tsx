@@ -312,90 +312,90 @@ export const routingDevTest: RouteObject[] = [
   
   
   {
-    path: RootRoute.devTest.theme[path]+'/*',
+    path: `${RootRoute.devTest.theme[path]}/*`,
     children: routingTheme,
   },
   {
-    path: RootRoute.devTest.icons[path]+'/*',
+    path: `${RootRoute.devTest.icons[path]}/*`,
     children: routingIcons,
   },
   {
-    path: RootRoute.devTest.buttons[path]+'/*',
+    path: `${RootRoute.devTest.buttons[path]}/*`,
     children: routingButtons,
   },
   {
-    path: RootRoute.devTest.bottomSheet[path]+'/*',
+    path: `${RootRoute.devTest.bottomSheet[path]}/*`,
     children: routingTestBottomSheetTestPage,
   },
   {
-    path: RootRoute.devTest.scrollbar[path]+'/*',
+    path: `${RootRoute.devTest.scrollbar[path]}/*`,
     children: routingTestScrollbarTestPage,
   },
   {
-    path: RootRoute.devTest.viewsSelectItem[path]+'/*',
+    path: `${RootRoute.devTest.viewsSelectItem[path]}/*`,
     children: routingViewsSelectItem,
   },
   {
-    path: RootRoute.devTest.ripple[path]+'/*',
+    path: `${RootRoute.devTest.ripple[path]}/*`,
     children: routingRipple,
   },
   {
-    path: RootRoute.devTest.slider[path]+'/*',
+    path: `${RootRoute.devTest.slider[path]}/*`,
     children: routingSlider,
   },
   {
-    path: RootRoute.devTest.image[path]+'/*',
+    path: `${RootRoute.devTest.image[path]}/*`,
     children: routingImage,
   },
   
   
   
   {
-    path: RootRoute.devTest.resizeObserver[path]+'/*',
+    path: `${RootRoute.devTest.resizeObserver[path]}/*`,
     children: routingTestResizeObserverTestPage,
   },
   {
-    path: RootRoute.devTest.moveElementToAnotherView[path]+'/*',
+    path: `${RootRoute.devTest.moveElementToAnotherView[path]}/*`,
     children: routingTestMoveElementToAnotherView,
   },
   {
-    path: RootRoute.devTest.pointer[path]+'/*',
+    path: `${RootRoute.devTest.pointer[path]}/*`,
     children: routingTestPointer,
   },
   {
-    path: RootRoute.devTest.state[path]+'/*',
+    path: `${RootRoute.devTest.state[path]}/*`,
     children: routingTestState,
   },
   {
-    path: RootRoute.devTest.pageLifecycle[path]+'/*',
+    path: `${RootRoute.devTest.pageLifecycle[path]}/*`,
     children: routingPageLifecycle,
   },
   {
-    path: RootRoute.devTest.useEvent[path]+'/*',
+    path: `${RootRoute.devTest.useEvent[path]}/*`,
     children: routingUseEvent,
   },
   {
-    path: RootRoute.devTest.elemRef[path]+'/*',
+    path: `${RootRoute.devTest.elemRef[path]}/*`,
     children: routingElemRef,
   },
   {
-    path: RootRoute.devTest.elemStyle[path]+'/*',
+    path: `${RootRoute.devTest.elemStyle[path]}/*`,
     children: routingElemStyle,
   },
   {
-    path: RootRoute.devTest.oldProfileOptions[path]+'/*',
+    path: `${RootRoute.devTest.oldProfileOptions[path]}/*`,
     children: routingOldProfileOptions,
   },
   {
-    path: RootRoute.devTest.emulatedScroll[path]+'/*',
+    path: `${RootRoute.devTest.emulatedScroll[path]}/*`,
     children: routingEmulatedScroll,
   },
   {
-    path: RootRoute.devTest.shadowDOMTest[path]+'/*',
+    path: `${RootRoute.devTest.shadowDOMTest[path]}/*`,
     children: routingShadowDOM,
   },
   {
-    path: RootRoute.devTest.cssTest[path]+'/*',
+    path: `${RootRoute.devTest.cssTest[path]}/*`,
     children: routingCss,
   },
   clearUnknownPathEnding,

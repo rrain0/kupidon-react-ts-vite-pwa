@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useMemo, useState } from 'react'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { ValidationValidate } from 'src/mini-libs/form-data/core/ValidationValidate.ts'
 import validate = ValidationValidate.validate
@@ -8,70 +8,61 @@ import Values = ValidationCore.Values
 
 
 
-
-
 export type UseFormDataProps<Vs extends Values> = {
-  defaultValues: Vs
+  initialValues: Vs
   validators: Validators<Vs>
 }
 
 
 
 export const useFormData = <Vs extends Values>({
-  defaultValues,
+  initialValues,
   validators,
 }: UseFormDataProps<Vs>) => {
-  const [values, setValues] = useState(defaultValues)
-  const [prevValues, setPrevValues] = useState(defaultValues)
-  const [errors, setErrors] = useState(() => validate(
-    { values: defaultValues, validators: validators }
-  ))
+  const [values, setValues] = useState(initialValues)
+  const [prevValues, setPrevValues] = useState(initialValues)
+  const [errors, setErrors] = useState(() => validate({
+    values: initialValues,
+    validators: validators,
+  }))
   
   
-  
-  
-  const updateFailuresEffectEvent = (values: Vs) => {
-    //console.log('I prevValues',prevValues)
-    //console.log('II values',values)
-    //console.log('III prevFailures',errors)
+  const updateFailures = (values: Vs) => {
     const newFailures = validate({
       values,
       prevValues,
       prevFailures: errors,
       validators,
     })
-    //console.log('IV newFailures',newFailures)
     setErrors(newFailures)
     setPrevValues(values)
     // todo calculate some error props:
-    //  changed fields
-    //  if any value changed
-    //  method to reset field
-    //  method to resst whole form
+    //  1) changed fields
+    //  2) if any value changed
+    //  3) method to reset field
+    //  4) method to reset whole form
   }
+  
   // Layout Effect is necessary because of Chrome's autofill on Android:
   // when browser pastes login/pwd, failure state does not have time to update
-  useLayoutEffect(() => updateFailuresEffectEvent(values), [values])
+  useLayoutEffect(() => updateFailures(values), [values])
   
   
-  
-  
-  const [errorFields, setErrorFields] = useState([] as (keyof Vs)[])
-  // Layout Effect is necessary because of Chrome's autofill on Android:
-  // when browser pastes login/pwd, failure state does not have time to update
-  useLayoutEffect(() => {
+  const getErrorFields = () => {
     const errorFieldsSet = errors
       .filter(f => f.type !== 'server')
       .reduce(
-        (accum, f) => {
-          f.errorFields.forEach(f => accum.add(f))
-          return accum
+        (acc, f) => {
+          f.errorFields.forEach(f => acc.add(f))
+          return acc
         },
         new Set<keyof Vs>()
       )
     const errorFields = [...errorFieldsSet]
-    setErrorFields(errorFields)
-  }, [errors])
+    return errorFields
+  }
+  
+  const errorFields = useMemo<(keyof Vs)[]>(getErrorFields, [errors])
   
   
   return {

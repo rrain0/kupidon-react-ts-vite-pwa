@@ -59,7 +59,8 @@ const PwdChangePage = React.memo(() => {
     errorFields: formErrorFields,
     formFieldWrapProps,
   } = useFormData({
-    defaultValues, validators,
+    initialValues: defaultValues,
+    validators,
   })
   
   const {

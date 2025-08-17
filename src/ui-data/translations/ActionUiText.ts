@@ -84,6 +84,10 @@ export const ActionUiText = {
     'en-US': 'Login',
     'ru-RU': 'Войти',
   },
+  autologin: {
+    'en-US': 'Autologin',
+    'ru-RU': 'Войти автоматически',
+  },
   signup: {
     'en-US': 'Sign up',
     'ru-RU': 'Зарегистрироваться',
