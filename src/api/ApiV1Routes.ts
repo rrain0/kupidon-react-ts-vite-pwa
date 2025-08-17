@@ -9,6 +9,7 @@ export namespace ApiV1Routes {
   export const auth = `${apiV1}/auth`
   export const authRefreshTokens = `${auth}/refresh-tokens`
   export const authLogin = `${auth}/login`
+  export const authLoginTestUser = `${auth}/login/test-user`
   
   export const user = `${apiV1}/user`
   export const userCurrent = `${user}/current`

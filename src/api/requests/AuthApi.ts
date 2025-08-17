@@ -30,4 +30,12 @@ export namespace AuthApi {
   
   
   
+  export const loginTestUser = async() => {
+    return handleResponse<LoginSuccessData, LoginErrorData>(
+      ax.post(ApiV1Routes.authLoginTestUser)
+    )
+  }
+  
+  
+  
 }

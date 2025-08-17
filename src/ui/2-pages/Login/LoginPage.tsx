@@ -30,7 +30,7 @@ import Input from 'src/ui/0-elements/inputs/Input/Input'
 import PwdInput from 'src/ui/0-elements/inputs/PwdInput/PwdInput'
 import { InputStyle } from 'src/ui/0-elements/inputs/Input/InputStyle'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import { LoginPageValidation } from './validation'
+import { LoginPageValidation } from 'src/ui/2-pages/Login/LoginPage.validation.ts'
 import FormValues = LoginPageValidation.FormValues
 import validators = LoginPageValidation.validators
 import full = RouteBuilder.full
