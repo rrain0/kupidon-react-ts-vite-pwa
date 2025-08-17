@@ -5,7 +5,7 @@ import { GenderA } from 'src/model/api/GenderA.ts'
 import { TypeU } from '@util/common/TypeU.ts'
 import { getDataUrlProps } from '@util/file/DataUrl.ts'
 import { FileU } from 'src/util/file/FileU'
-import { AxiosConfig } from '../AxiosConfig'
+import { AxiosConfig } from '../AxiosConfig.ts'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
 import ax = AxiosConfig.ax

@@ -12,7 +12,7 @@ import isundef = TypeU.isundef
 import isnull = TypeU.isnull
 import isbool = TypeU.isbool
 import isnumstr = TypeU.isnumstr
-import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig'
+import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig.ts'
 import Pu = TypeU.Pu
 import isRecord = TypeU.isRecord
 import isEmptyObj = ObjectU.isEmptyObj

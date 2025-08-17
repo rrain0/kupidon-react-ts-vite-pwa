@@ -9,7 +9,7 @@ import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInput
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
-import { SettingsOptions } from './SettingsOptions'
+import { SettingsOptions } from './SettingsOptions.tsx'
 
 
 

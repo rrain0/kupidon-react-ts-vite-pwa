@@ -5,9 +5,9 @@ import { CssAttrEnum } from 'src/mini-libs/widget-style-4/css/CssAttrEnum.ts'
 import { CssPseudos } from 'src/mini-libs/widget-style-4/css/CssPseudo.ts'
 import { CssState } from 'src/mini-libs/widget-style-4/css/CssState.ts'
 import RecordRo = TypeU.RecordRo
-import { CssWidgetElem } from './CssWidgetElem'
-import { CssProp } from '../css/CssProp'
-import { CssElem } from '../css/CssElem'
+import { CssWidgetElem } from './CssWidgetElem.ts'
+import { CssProp } from '../css/CssProp.ts'
+import { CssElem } from '../css/CssElem.ts'
 import ObjectValuesType = ObjectU.ObjectValuesType
 import ObjectKeysType = ObjectU.ObjectKeysType
 

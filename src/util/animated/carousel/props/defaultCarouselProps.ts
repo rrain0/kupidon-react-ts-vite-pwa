@@ -4,7 +4,7 @@ import { ReactU } from 'src/util/react/ReactU.ts'
 import mod = MathU.mod
 import rf3 = MathU.rf3
 import Sign = TypeU.Sign
-import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon'
+import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon.ts'
 import rf5 = MathU.rf5
 import noRepeatLog = ReactU.noRepeatLog
 

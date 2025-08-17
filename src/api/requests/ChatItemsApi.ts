@@ -1,6 +1,6 @@
 import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import { ChatItemA } from 'src/model/api/ChatItemA.ts'
-import { AxiosConfig } from '../AxiosConfig'
+import { AxiosConfig } from '../AxiosConfig.ts'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
 import TechnicalError = ApiResponseUtils.TechnicalError

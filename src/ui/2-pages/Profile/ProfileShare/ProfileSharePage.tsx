@@ -128,7 +128,7 @@ const avaS: AppWidgetStyle = t => [
       position: 'absolute',
       top: '50%', left: '50%',
       transform: 'translate(-50%, -50%)',
-      sz: '25%',
+      sz: '35%',
       bgColor: '#161941',
       borderRadius: 999999,
       border: '5px solid #161941',
