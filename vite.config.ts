@@ -85,7 +85,7 @@ export default defineConfig(({ command, mode }) => {
   
   return {
     resolve: {
-      // tsconfig aliases do not apply to service worker, so I've duplicated them here.
+      // Aliases for Vite PWA to build Service Worker.
       alias: {
         'src': path.resolve(__dirname, './src'),
         
@@ -110,12 +110,13 @@ export default defineConfig(({ command, mode }) => {
     
     // make paths relative to index.html (starts with './', not with '/')
     //base: './',
-    // make paths absolute, relative root
+    // make paths absolute, relative to root
     base: '/',
     
     esbuild: {
       supported: {
-        'top-level-await': true, // browsers can handle top-level-await features
+        // Browsers can handle top-level-await features
+        'top-level-await': true,
       },
     },
     
