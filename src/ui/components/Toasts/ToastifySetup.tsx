@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 import { ToastAnimations } from 'src/ui/components/Toasts/ToastAnimations.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import mobileWidth = EmotionCommon.mobileWidth
 import flexC = EmotionCommon.flexC
 import gridStretch = EmotionCommon.gridStretch

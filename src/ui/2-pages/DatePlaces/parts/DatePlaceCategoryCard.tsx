@@ -7,8 +7,8 @@ import {
   DatePlaceCategoryType
 } from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import { ReactU } from '@utils/react/ReactU.ts'

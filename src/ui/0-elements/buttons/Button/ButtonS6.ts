@@ -9,7 +9,7 @@ import {
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import resetButton = WidgetStyleCommon.resetButton
 import row = WidgetStyleCommon.row

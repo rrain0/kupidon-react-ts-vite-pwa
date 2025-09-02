@@ -30,7 +30,7 @@ import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUr
 import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/ui/2-pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from 'src/utils/common/ArrayU.ts'
 import { AsyncU } from 'src/utils/common/AsyncU.ts'
 import { RangeU } from 'src/utils/common/RangeU'
@@ -40,7 +40,7 @@ import { ImageU } from 'src/utils/file/ImageU.ts'
 import { StageProgress } from '@utils/progress/StageProgress.ts'
 import { useAsRefGet } from 'src/utils/react-state/useAsRefGet'
 import { useNoSelect } from '@utils/pointer/useNoSelect.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import flexC = EmotionCommon.flexC
 import { TypeU } from 'src/utils/common/TypeU.ts'
 import PieProgress from 'src/ui/0-elements/PieProgress/PieProgress.tsx'

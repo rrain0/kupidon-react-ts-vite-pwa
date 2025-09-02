@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react'
 import clsx from 'clsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { RangeU } from 'src/utils/common/RangeU'
 import { useAsRefGet } from 'src/utils/react-state/useAsRefGet'

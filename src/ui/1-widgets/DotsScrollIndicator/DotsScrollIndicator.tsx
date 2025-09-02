@@ -6,8 +6,8 @@ import { MathU } from '@utils/common/MathU.ts'
 import { RangeU } from '@utils/common/RangeU.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import React from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Pu = TypeU.Pu
 import col = EmotionCommon.col
 import round = EmotionCommon.round

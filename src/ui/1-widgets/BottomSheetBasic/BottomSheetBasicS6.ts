@@ -6,7 +6,7 @@ import {
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { BottomSheetS6 } from 'src/ui/1-widgets/BottomSheet/BottomSheetS6.ts'
 import { OverflowWrapperStyle } from 'src/ui/1-widgets/Scrollbars/OverflowWrapperStyle.ts'
 import col = WidgetStyleCommon.col

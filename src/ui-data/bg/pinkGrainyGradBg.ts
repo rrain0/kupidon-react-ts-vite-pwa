@@ -1,4 +1,4 @@
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { css } from '@emotion/react'
 import noise from 'src/assets/im/effect/noise.svg'
 import ThemeType = AppTheme.Type

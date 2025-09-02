@@ -17,7 +17,7 @@ import {
   CommonProps, CommonStates,
 } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { Light } from 'src/ui-data/theme/themes/Light.tsx'
+import { Light } from 'src/styles/themes/themes/Light.tsx'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 
 

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import clsx from 'clsx'

@@ -11,7 +11,7 @@ import { useNoSelect } from '@utils/pointer/useNoSelect.ts'
 import { useRefGetSet } from 'src/utils/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import zeroBasedRange = RangeU.zeroBased
 import Setter = TypeU.Setter
 import NumRange = RangeU.NumRange

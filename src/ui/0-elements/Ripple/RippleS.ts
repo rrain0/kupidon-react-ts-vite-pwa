@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
-import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { RippleS6 } from 'src/ui/0-elements/Ripple/RippleS6.ts'
 import Elem = WidgetStyle.Elem
 import CssProp = WidgetStyle.CssProp

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useMemo } from 'react'
-import commonCss from 'src/ui-data/style/common.module.scss'
+import commonCss from 'src/styles/common/common.module.scss'
 import { TypeU } from 'src/utils/common/TypeU.ts'
 import isdef = TypeU.isdef
 

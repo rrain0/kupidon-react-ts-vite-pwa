@@ -1,7 +1,7 @@
 import { ReactU } from '@utils/react/ReactU.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import MountController, { MountControllerRenderProps } from 'src/ui/components/animations/MountController.tsx'

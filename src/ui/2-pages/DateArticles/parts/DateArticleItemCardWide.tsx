@@ -6,8 +6,8 @@ import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import {
   DateArticleItem,
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'

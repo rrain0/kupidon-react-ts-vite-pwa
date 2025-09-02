@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 

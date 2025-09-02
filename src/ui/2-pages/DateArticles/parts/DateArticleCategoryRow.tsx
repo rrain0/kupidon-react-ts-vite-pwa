@@ -8,7 +8,7 @@ import {
 } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
 import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
 import { DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import ArticleItemLink from 'src/ui/2-pages/DateArticles/parts/ArticleItemLink.tsx'

@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { themeByName } from 'src/ui-data/theme/ThemeCollection.ts'
+import { themeByName } from 'src/styles/themes/ThemesCollection.ts'
 import { useAppTheme } from 'src/utils/app/useAppTheme.ts'
 import { useBrowserMinimumVersion } from 'src/utils/app/useBrowserMinimumVersion.ts'
 import { useSetAppTheme } from 'src/utils/app/useSetAppTheme.ts'

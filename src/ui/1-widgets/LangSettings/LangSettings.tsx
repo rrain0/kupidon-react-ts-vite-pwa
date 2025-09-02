@@ -4,7 +4,7 @@ import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomShee
 import LangOptions from 'src/ui/components/settings-options/LangOptions.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import Setter = TypeU.Callback1
 import col = EmotionCommon.col

@@ -6,7 +6,7 @@ import {
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle, WidgetStyleObj,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter
 import absTrbl = WidgetStyleCommon.absTrbl

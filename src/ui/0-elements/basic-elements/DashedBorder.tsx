@@ -3,7 +3,7 @@ import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import clsx from 'clsx'
 import React from 'react'
 import { TypeU } from '@utils/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Pu = TypeU.Pu
 import FunOrObj = TypeU.FunOrObj

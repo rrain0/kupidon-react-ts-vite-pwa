@@ -7,7 +7,7 @@ import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
 import { useState } from 'react'
 import React from 'react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import flexC = EmotionCommon.flexC
 import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
 import evPreventDefault = PointerU.evPreventDefault

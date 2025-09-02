@@ -5,7 +5,7 @@ import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useState } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import fixed = EmotionCommon.fixed
 import Children = ReactU.Children

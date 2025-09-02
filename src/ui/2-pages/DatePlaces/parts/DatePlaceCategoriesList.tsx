@@ -6,7 +6,7 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DatePlaceCategoriesData, DatePlaceCategoryData }
   from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'

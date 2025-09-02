@@ -13,8 +13,8 @@ import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesD
 import {
   DateArticleTypesData,
 } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'

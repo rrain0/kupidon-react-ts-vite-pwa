@@ -1,5 +1,5 @@
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { AllThemeNamesType } from 'src/ui-data/theme/ThemeCollection.ts'
+import { AllThemeNamesType } from 'src/styles/themes/ThemesCollection.ts'
 
 
 

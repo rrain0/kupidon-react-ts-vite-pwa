@@ -1,7 +1,7 @@
 import { TypeU } from '@utils/common/TypeU.ts'
 import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import Callback = TypeU.Callback

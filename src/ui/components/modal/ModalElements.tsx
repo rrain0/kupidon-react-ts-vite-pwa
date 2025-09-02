@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { colSmWMax } from 'src/ui/components/page/PageContentLayout.tsx'
 import gridC = EmotionCommon.gridC
 import gridEC = EmotionCommon.gridEC

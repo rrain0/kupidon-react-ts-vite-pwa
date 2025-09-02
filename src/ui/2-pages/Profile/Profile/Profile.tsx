@@ -34,7 +34,7 @@ import ProfileSmokeOption from 'src/ui/2-pages/Profile/options/ProfileSmokeOptio
 import ProfilePageTabHeader from 'src/ui/2-pages/Profile/ProfilePageTabHeader.tsx'
 import ProfilePhotos from 'src/ui/2-pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/ProfilePage.validation.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { FormProps } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'

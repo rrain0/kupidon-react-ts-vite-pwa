@@ -8,7 +8,7 @@ import {
   WidgetElem, WidgetProp, WidgetPropValueType,
 } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
 import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import absTrbl = WidgetStyleCommon.absTrbl
 
 

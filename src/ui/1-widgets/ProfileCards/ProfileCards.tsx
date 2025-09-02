@@ -22,7 +22,7 @@ import {
   MediaInArrayDownloadable,
 } from 'src/ui-data/models/media/Media.ts'
 import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
@@ -32,7 +32,7 @@ import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingL
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import ProfileCardsFullInfo from 'src/ui/1-widgets/ProfileCards/ProfileCardsFullInfo.tsx'
 import ProfileCardsInfoOverlay from 'src/ui/1-widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from 'src/utils/common/ArrayU'
 import { RangeU } from 'src/utils/common/RangeU'
 import Txt = EmotionCommon.Txt

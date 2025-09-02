@@ -7,7 +7,7 @@ import { getClampedCarouselProps } from '@utils/animated/carousel/props/defaultC
 import { RangeU } from '@utils/common/RangeU.ts'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from 'src/utils/common/ArrayU.ts'
 import { TypeU } from 'src/utils/common/TypeU.ts'
 import gridStackC = EmotionCommon.gridStackC

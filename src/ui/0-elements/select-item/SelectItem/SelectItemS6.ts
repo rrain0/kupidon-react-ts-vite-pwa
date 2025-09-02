@@ -11,7 +11,7 @@ import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import flexC = WidgetStyleCommon.flexC
 import absTrbl = WidgetStyleCommon.absTrbl
 import col = WidgetStyleCommon.col

@@ -1,4 +1,4 @@
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 

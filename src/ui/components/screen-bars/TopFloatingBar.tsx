@@ -1,7 +1,7 @@
 import { Global } from '@emotion/react'
 import { CssU } from '@utils/css/CssU.ts'
 import React, { ReactNode } from 'react'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
 import { TypeU } from '@utils/common/TypeU.ts'

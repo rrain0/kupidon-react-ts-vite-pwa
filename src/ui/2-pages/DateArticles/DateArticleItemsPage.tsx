@@ -9,7 +9,7 @@ import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesD
 import {
   DateArticleTypesData,
 } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'

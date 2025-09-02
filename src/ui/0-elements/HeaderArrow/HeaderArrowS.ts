@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import CssWidget = WidgetStyle.CssWidget
 import Elem = WidgetStyle.Elem

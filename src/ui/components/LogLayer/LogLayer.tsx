@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import { useLogLayerZustand } from 'src/ui/components/LogLayer/LogLayerZustand.ts'
 import col = EmotionCommon.col
 

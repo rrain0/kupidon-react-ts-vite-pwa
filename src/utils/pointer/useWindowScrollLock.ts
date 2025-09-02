@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react'
-import cmcss from 'src/ui-data/style/common.module.scss'
+import cmcss from 'src/styles/common/common.module.scss'
 
 
 

@@ -1,5 +1,5 @@
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Light } from 'src/ui-data/theme/themes/Light.tsx'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
+import { Light } from 'src/styles/themes/themes/Light.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 

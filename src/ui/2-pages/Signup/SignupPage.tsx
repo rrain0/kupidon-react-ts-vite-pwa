@@ -1,7 +1,7 @@
 import { DateU } from '@utils/date/DateU.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
 import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { PlaceholderUiText } from 'src/ui-data/translations/PlaceholderUiText.ts'

@@ -63,12 +63,4 @@
 
 
 
-@keyframes emptyAnimation { }
-.no-animation {
-  animation-name: emptyAnimation;
-  animation-duration: 1ms;
-}
-
-
-
 

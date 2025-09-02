@@ -1,5 +1,5 @@
 import { useBrowserMinimumVersion } from 'src/utils/app/useBrowserMinimumVersion.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { useMedia } from 'src/utils/css/media/useMedia.ts'
 import ThemeType = AppTheme.Type
 

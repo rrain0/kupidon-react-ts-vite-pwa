@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import col = EmotionCommon.col
 
 

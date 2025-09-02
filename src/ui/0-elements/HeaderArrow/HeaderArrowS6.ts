@@ -7,7 +7,7 @@ import {
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys

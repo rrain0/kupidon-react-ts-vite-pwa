@@ -1,5 +1,14 @@
 
 
+
+@keyframes emptyAnimation { }
+.noAnimation {
+  animation-name: emptyAnimation;
+  animation-duration: 1ms;
+}
+
+
+
 .reset {
   box-sizing: border-box;
   margin: 0;

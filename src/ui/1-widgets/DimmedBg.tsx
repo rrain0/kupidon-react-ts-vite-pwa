@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import { MountControllerRenderProps } from 'src/ui/components/animations/MountController.tsx'
 import UseEnterExitTransition from 'src/ui/components/animations/UseEnterExitTransition.tsx'

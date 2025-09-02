@@ -1,9 +1,9 @@
 import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import {
   CheckboxInputGroupStyle,
 } from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroupStyle.ts'

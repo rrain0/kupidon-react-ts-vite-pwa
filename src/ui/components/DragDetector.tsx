@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'

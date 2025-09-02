@@ -5,7 +5,7 @@ import {
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import row = WidgetStyleCommon.row
 
 

@@ -1,5 +1,5 @@
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { Dark } from 'src/ui-data/theme/themes/Dark.tsx'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
+import { Dark } from 'src/styles/themes/themes/Dark.tsx'
 import Theme = AppTheme.Theme
 import themeIconCss = AppTheme.themeIconCss
 

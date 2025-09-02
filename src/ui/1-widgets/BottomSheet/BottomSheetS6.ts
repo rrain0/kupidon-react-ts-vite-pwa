@@ -5,8 +5,8 @@ import {
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
 } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
-import { WidgetStyleCommon } from 'src/ui-data/style/WidgetStyleCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
+import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import fixed = WidgetStyleCommon.fixed
 import modalFloor1k = StyleVals.modalFloor1k
 

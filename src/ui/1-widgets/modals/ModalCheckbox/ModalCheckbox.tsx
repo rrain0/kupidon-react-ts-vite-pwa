@@ -10,7 +10,7 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import CheckboxInputGroup from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
 import { Option } from 'src/ui-data/models/Option.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Callback = TypeU.Callback
 import col = EmotionCommon.col
 import Callback1 = TypeU.Callback1

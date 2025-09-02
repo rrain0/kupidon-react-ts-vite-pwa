@@ -5,8 +5,8 @@ import { useClick } from '@utils/pointer/useClick.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import { useUpNodesScrollLock } from '@utils/pointer/useUpNodesScrollLock.ts'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import Pu = TypeU.Pu
 import combineProps = ReactU.combineProps

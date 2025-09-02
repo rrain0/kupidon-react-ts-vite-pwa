@@ -10,7 +10,7 @@ import { useAsCallback } from '@utils/react-state/useAsCallback.ts'
 import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ChatListContextMenu, {

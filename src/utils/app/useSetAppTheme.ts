@@ -1,4 +1,4 @@
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { useAsCallback } from 'src/utils/react-state/useAsCallback.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 

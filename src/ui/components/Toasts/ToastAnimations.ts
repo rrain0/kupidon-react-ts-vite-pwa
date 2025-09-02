@@ -23,8 +23,8 @@ export namespace ToastAnimations {
   })
   
   export const noAnimation: ToastTransition = cssTransition({
-    enter: 'no-animation',
-    exit: 'no-animation',
+    enter: 'noAnimation',
+    exit: 'noAnimation',
     collapse: false,
   })
   
@@ -35,7 +35,7 @@ export namespace ToastAnimations {
   })
   
   export const noAnimationThenFadeOut: ToastTransition = cssTransition({
-    enter: 'no-animation',
+    enter: 'noAnimation',
     exit: 'animate__animated animate__faster animate__fadeOut',
     collapse: false,
   })

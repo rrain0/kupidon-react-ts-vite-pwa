@@ -1,5 +1,5 @@
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { DarkPink } from 'src/ui-data/theme/themes/DarkPink.tsx'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
+import { DarkPink } from 'src/styles/themes/themes/DarkPink.tsx'
 import Theme = AppTheme.Theme
 import themeGradIconCss = AppTheme.themeGradIconCss
 

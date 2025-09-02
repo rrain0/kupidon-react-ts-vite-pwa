@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { TypeU } from '@utils/common/TypeU.ts'
 import React from 'react'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import CheckmarkCircleToastifyIc
   from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CheckmarkCircleToastifyIc.tsx'
 import DangerRoundToastifyIc

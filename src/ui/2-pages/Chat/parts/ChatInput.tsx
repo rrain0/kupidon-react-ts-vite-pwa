@@ -17,7 +17,7 @@ import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import Pu = TypeU.Pu
 import Flex from 'ui/0-elements/basic-elements/Flex'
-import { StyleVals } from 'ui-data/style/StyleVals'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import { commonStyle } from 'utils/react/short-props/style/commonStyle'
 import PictureIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PictureIc.tsx'
 

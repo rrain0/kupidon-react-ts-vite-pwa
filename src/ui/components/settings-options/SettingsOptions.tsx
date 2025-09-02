@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import { SvgIconS } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS.ts'
 import row = EmotionCommon.row

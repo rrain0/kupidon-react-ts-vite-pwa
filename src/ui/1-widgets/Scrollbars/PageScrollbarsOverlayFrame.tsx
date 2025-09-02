@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import modalFloor100 = StyleVals.modalFloor100
 
 

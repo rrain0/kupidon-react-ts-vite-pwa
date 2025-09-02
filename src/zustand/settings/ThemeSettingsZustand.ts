@@ -1,6 +1,6 @@
 import { TypeU } from '@utils/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
-import { DefaultDarkTheme, DefaultLightTheme } from 'src/ui-data/theme/ThemeCollection.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
+import { DefaultDarkTheme, DefaultLightTheme } from 'src/styles/themes/ThemesCollection.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject

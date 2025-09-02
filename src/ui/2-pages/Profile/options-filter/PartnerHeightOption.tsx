@@ -5,7 +5,7 @@ import RulerVerticalGradIc
 import { ArrayU } from 'src/utils/common/ArrayU.ts'
 import { RangeU } from 'src/utils/common/RangeU'
 import { useStateMapperSync } from 'src/utils/react-state/useStateMapperSync.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -14,7 +14,7 @@ import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/ui/1-widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
-import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
+import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import NumRangeNullable = RangeU.NumRangeNullable
 import NumRange = RangeU.NumRange
 import rowWrap = EmotionCommon.rowWrap

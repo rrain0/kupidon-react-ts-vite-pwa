@@ -4,7 +4,7 @@ import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
-import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
+import { StyleVals } from 'src/styles/StyleVals.ts'
 import Callback = TypeU.Callback
 import StyleProp = ReactU.StyleProp
 import Pu = TypeU.Pu

@@ -10,7 +10,7 @@ import { useRefGetSet } from 'src/utils/react-state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { TypeU } from '@utils/common/TypeU.ts'
-import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Pu = TypeU.Pu
 import Mapper = TypeU.Mapper
 import SetterOrUpdater = TypeU.SetterOrUpdater
