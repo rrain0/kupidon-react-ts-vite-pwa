@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import RangePicker from 'src/ui/1-widgets/RangePicker/RangePicker.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { RangeU } from 'src/util/common/RangeU'
+import { RangeU } from 'src/utils/common/RangeU'
 import Callback = TypeU.Callback
 import col = EmotionCommon.col
 import SetterOrUpdater = TypeU.SetterOrUpdater

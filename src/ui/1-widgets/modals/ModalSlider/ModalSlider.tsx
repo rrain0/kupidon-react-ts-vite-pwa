@@ -4,13 +4,13 @@ import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import Slider from 'src/ui/1-widgets/Slider/Slider'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { RangeU } from 'src/util/common/RangeU'
+import { RangeU } from 'src/utils/common/RangeU'
 import Callback = TypeU.Callback
 import col = EmotionCommon.col
 import Setter = TypeU.Setter

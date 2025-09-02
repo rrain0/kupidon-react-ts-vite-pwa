@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ObjectU } from 'src/util/common/ObjectU.ts'
+import { ObjectU } from 'src/utils/common/ObjectU.ts'
 import {
   PickedUiValues,
   PickedUiValuesArr,

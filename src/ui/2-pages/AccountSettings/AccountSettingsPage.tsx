@@ -1,5 +1,5 @@
-import { DateU } from '@util/date/DateU.ts'
-import { noFormSubmit } from '@util/js/noFormSubmit.ts'
+import { DateU } from '@utils/date/DateU.ts'
+import { noFormSubmit } from '@utils/js/noFormSubmit.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
@@ -21,7 +21,7 @@ import ItemContainer from 'src/ui/0-elements/basic-elements/ItemContainer'
 import {
   AccountSettingsPageValidation,
 } from 'src/ui/2-pages/AccountSettings/AccountSettingsPage.validation.ts'
-import { ObjectU } from 'src/util/common/ObjectU'
+import { ObjectU } from 'src/utils/common/ObjectU'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from 'src/mini-libs/form-data/hooks/useFormSubmit'
 import { useFormToasts } from 'src/mini-libs/form-data/hooks/useFormToasts'

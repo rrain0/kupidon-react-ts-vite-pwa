@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { DataFieldStyle } from 'src/ui/0-elements/DataField/DataFieldStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import row = EmotionCommon.row
 import absTlwh = EmotionCommon.absTlwh
 import Pu = TypeU.Pu

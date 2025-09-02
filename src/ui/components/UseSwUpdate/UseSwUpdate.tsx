@@ -1,4 +1,4 @@
-import { Env } from '@util/app/Env.ts'
+import { Env } from '@utils/app/Env.ts'
 import React from 'react'
 import 'src/ui/components/UseSwUpdate/ReloadPrompt.css'
 import Modal from 'src/ui/components/modal/Modal.tsx'

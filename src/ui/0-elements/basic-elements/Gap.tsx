@@ -1,4 +1,4 @@
-import { withDefaults } from '@util/react/withDefaults.tsx'
+import { withDefaults } from '@utils/react/withDefaults.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 
 

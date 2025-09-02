@@ -1,4 +1,4 @@
-import { StringU } from '@util/common/StringU.ts'
+import { StringU } from '@utils/common/StringU.ts'
 import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transformNew1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransformNew1.ts'
 import {

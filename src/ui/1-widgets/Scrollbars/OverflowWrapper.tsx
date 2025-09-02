@@ -6,9 +6,9 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import col = EmotionCommon.col
 import hideScrollbar = EmotionCommon.noScrollbars
 import React, { useRef } from 'react'
-import { ReactU } from 'src/util/react/ReactU.ts'
+import { ReactU } from 'src/utils/react/ReactU.ts'
 import gridStackC = EmotionCommon.gridStackC
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
 import Pu = TypeU.Pu

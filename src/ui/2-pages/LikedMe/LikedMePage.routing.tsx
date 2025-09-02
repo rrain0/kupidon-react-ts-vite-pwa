@@ -1,4 +1,4 @@
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import React, { Suspense, useState } from 'react'
 import { RouteObject, useSearchParams } from 'react-router'
 import { MockData } from 'src/_mock-data/MockData.ts'

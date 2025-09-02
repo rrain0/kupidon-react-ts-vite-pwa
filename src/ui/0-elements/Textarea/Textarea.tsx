@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
 import React, { useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import row = EmotionCommon.row
 import absTlwh = EmotionCommon.absTlwh
 import resetTextarea = EmotionCommon.resetTextarea

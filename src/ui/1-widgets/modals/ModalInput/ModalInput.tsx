@@ -1,7 +1,7 @@
 import Card from 'src/ui/0-elements/Card/Card.tsx'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import React from 'react'
 import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'

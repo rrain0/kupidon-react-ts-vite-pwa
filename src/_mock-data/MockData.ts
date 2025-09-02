@@ -1,4 +1,4 @@
-import { Env } from '@util/app/Env.ts'
+import { Env } from '@utils/app/Env.ts'
 import avaChan1 from '@im/mock/ava chan d6535947482554bd0571ba485e4467d0.jpg'
 import avaChan2 from '@im/mock/ava top chan 1cc31157191cfe279575176e2db4ff81.jpg'
 import avaChan3 from '@im/mock/ava korathink x KXBRIGU - SENTENIAL 3.png'
@@ -51,7 +51,7 @@ import portraitWomanPosingHouse from
     '@im/mock/people/1/portraits/portrait-young-woman-posing-house  portrait.webp'
 import portraitStylishBrunetteGirl from
     '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  portrait.webp'
-import { DateU } from '@util/date/DateU.ts'
+import { DateU } from '@utils/date/DateU.ts'
 import { UserStrangerA } from 'src/model/api/UserA.ts'
 
 

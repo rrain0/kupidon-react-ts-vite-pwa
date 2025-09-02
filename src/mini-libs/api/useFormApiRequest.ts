@@ -1,8 +1,8 @@
-import { useAsRefGet } from '@util/react-state/useAsRefGet.ts'
+import { useAsRefGet } from '@utils/react-state/useAsRefGet.ts'
 import { useCallback, useEffect, useState } from 'react'
 import { ApiResponseUtils } from 'src/mini-libs/api/ApiResponseUtils.ts'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
-import { useAsyncEffect } from '@util/react/useAsyncEffect.ts'
+import { useAsyncEffect } from '@utils/react/useAsyncEffect.ts'
 import Values = ValidationCore.Values
 import ApiResponse = ApiResponseUtils.ApiResponse
 import ResponseError = ApiResponseUtils.ResponseError

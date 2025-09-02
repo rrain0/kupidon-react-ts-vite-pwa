@@ -6,12 +6,12 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { ViewProps } from 'src/util/view/ViewProps.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import { RangeU } from 'src/util/common/RangeU'
-import { useNoSelect } from '@util/pointer/useNoSelect.ts'
-import { CssParserU } from 'src/util/css/CssParserU.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
+import { ViewProps } from 'src/utils/view/ViewProps.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { RangeU } from 'src/utils/common/RangeU'
+import { useNoSelect } from '@utils/pointer/useNoSelect.ts'
+import { CssParserU } from 'src/utils/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
 import PartialUndef = TypeU.PartialUndef

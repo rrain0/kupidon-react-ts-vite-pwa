@@ -5,7 +5,7 @@ import { EmotionCommon } from 'src/ui-data/style/EmotionCommon'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import Button from 'src/ui/0-elements/buttons/Button/Button'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback
 import rowWrap = EmotionCommon.rowWrap

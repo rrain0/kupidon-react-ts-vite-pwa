@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { CssAttr } from 'src/mini-libs/widget-style-4/css/CssAttr.ts'
 import { CssAttrEnum } from 'src/mini-libs/widget-style-4/css/CssAttrEnum.ts'
 import { CssProp } from 'src/mini-libs/widget-style-4/css/CssProp.ts'

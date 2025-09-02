@@ -1,9 +1,9 @@
 import { Global } from '@emotion/react'
-import { CssU } from '@util/css/CssU.ts'
+import { CssU } from '@utils/css/CssU.ts'
 import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import Pu = TypeU.Pu
 import toPx = CssU.toPx
 import modalFloor100 = StyleVals.modalFloor100

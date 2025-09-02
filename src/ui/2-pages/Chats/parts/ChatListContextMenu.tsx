@@ -1,5 +1,5 @@
-import { TypeU } from '@util/common/TypeU.ts'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useEffect } from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'

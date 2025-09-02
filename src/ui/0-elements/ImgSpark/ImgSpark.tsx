@@ -13,7 +13,7 @@ import {
 import DocumentErrorIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/DocumentErrorIc.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SparkingLoadingLine from 'src/ui/0-elements/SparkingLoadingLine/SparkingLoadingLine.tsx'
-import { ReactU } from 'src/util/react/ReactU'
+import { ReactU } from 'src/utils/react/ReactU'
 import combineProps = ReactU.combineProps
 
 

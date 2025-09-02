@@ -3,7 +3,7 @@ import { RouteObject, useMatch } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DatePlacesData } from 'src/ui-data/special/date-place/DatePlacesData.ts'
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute

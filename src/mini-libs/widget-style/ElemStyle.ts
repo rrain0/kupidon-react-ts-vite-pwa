@@ -1,4 +1,4 @@
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from 'src/utils/common/TypeU'
 import RecordRo = TypeU.RecordRo
 import RecordPuro = TypeU.RecordPuro
 

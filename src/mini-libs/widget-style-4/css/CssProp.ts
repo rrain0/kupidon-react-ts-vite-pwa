@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import isdef = TypeU.isdef
 
 

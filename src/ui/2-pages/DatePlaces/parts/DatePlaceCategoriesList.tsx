@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
+import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -15,7 +15,7 @@ import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import DatePlaceCategoryCard from 'src/ui/2-pages/DatePlaces/parts/DatePlaceCategoryCard.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
-import { ReactU } from 'src/util/react/ReactU'
+import { ReactU } from 'src/utils/react/ReactU'
 import Children = ReactU.Children
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col

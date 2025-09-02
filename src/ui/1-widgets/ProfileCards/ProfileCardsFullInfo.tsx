@@ -1,7 +1,7 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
-import { getAge, nameCommaAge } from '@util/ui/nameCommaAge.ts'
+import { getAge, nameCommaAge } from '@utils/ui/nameCommaAge.ts'
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -19,8 +19,8 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
-import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle

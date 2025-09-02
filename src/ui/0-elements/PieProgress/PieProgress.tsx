@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
-import { CssU } from '@util/css/CssU.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { CssU } from '@utils/css/CssU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import Pu = TypeU.Pu
 import CssColor = CssU.CssColor
 import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper

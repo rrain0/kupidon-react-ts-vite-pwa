@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import BottomSheet, {
   BottomSheetOptionsProps,
 } from 'src/ui/1-widgets/BottomSheet/BottomSheet.tsx'

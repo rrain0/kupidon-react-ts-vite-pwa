@@ -1,4 +1,4 @@
-import { useAppTheme } from '@util/app/useAppTheme.ts'
+import { useAppTheme } from '@utils/app/useAppTheme.ts'
 import React from 'react'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'

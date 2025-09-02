@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'

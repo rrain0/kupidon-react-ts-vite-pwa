@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import { ResponseData } from 'src/mini-libs/api/useFormApiRequest.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { ValidationActions } from 'src/mini-libs/form-data/core/ValidationActions.ts'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import updateFailures = ValidationActions.updateErrors

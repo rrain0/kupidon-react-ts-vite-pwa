@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
 import isundef = TypeU.isundef
 import isdef = TypeU.isdef

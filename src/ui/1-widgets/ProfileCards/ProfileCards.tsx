@@ -5,14 +5,14 @@ import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
   getLoopedCarouselProps,
-} from '@util/animated/carousel/props/defaultCarouselProps.ts'
-import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
-import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import { useBool } from '@util/react-state/useBool.ts'
-import { useResizeRef } from '@util/view/useResizeRef.ts'
-import { getViewProps } from '@util/view/ViewProps.ts'
-import { ViewU } from '@util/view/ViewU.ts'
+} from '@utils/animated/carousel/props/defaultCarouselProps.ts'
+import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
+import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { useBool } from '@utils/react-state/useBool.ts'
+import { useResizeRef } from '@utils/view/useResizeRef.ts'
+import { getViewProps } from '@utils/view/ViewProps.ts'
+import { ViewU } from '@utils/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
@@ -33,8 +33,8 @@ import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGender
 import ProfileCardsFullInfo from 'src/ui/1-widgets/ProfileCards/ProfileCardsFullInfo.tsx'
 import ProfileCardsInfoOverlay from 'src/ui/1-widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { ArrayU } from 'src/util/common/ArrayU'
-import { RangeU } from 'src/util/common/RangeU'
+import { ArrayU } from 'src/utils/common/ArrayU'
+import { RangeU } from 'src/utils/common/RangeU'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC
 import fullMinMax = EmotionCommon.fullMinMax

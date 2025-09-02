@@ -1,4 +1,4 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray, newDefaultRemoteMediaInArray,

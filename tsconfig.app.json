@@ -67,7 +67,7 @@
       
       "src/*": ["src/*"],
       
-      "@util/*": ["src/util/*"],
+      "@utils/*": ["src/utils/*"],
       "@res/*": ["src/res/*"],
       "@mini-libs/*": ["src/mini-libs/*"],
       

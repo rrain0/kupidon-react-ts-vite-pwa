@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { MbtiType } from 'src/model/MbtiType.ts'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import RecordRo = TypeU.RecordRo

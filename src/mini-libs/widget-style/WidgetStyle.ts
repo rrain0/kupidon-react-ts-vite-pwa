@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
-import { ObjectU } from 'src/util/common/ObjectU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { ObjectU } from 'src/utils/common/ObjectU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import ObjectMap = ObjectU.ObjectMap
 import RecordRo = TypeU.RecordRo
 

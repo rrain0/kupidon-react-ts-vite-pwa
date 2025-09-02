@@ -1,4 +1,4 @@
-import { DateU } from '@util/date/DateU.ts'
+import { DateU } from '@utils/date/DateU.ts'
 import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import { UserCurrentA } from 'src/model/api/UserA.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
@@ -9,10 +9,10 @@ import {
 } from 'src/ui-data/models/media/Media.ts'
 import { ProfilePageValidation } from 'src/ui/2-pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { ArrayU } from 'src/util/common/ArrayU.ts'
-import { AsyncU } from 'src/util/common/AsyncU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
-import { RangeU } from 'src/util/common/RangeU'
+import { ArrayU } from 'src/utils/common/ArrayU.ts'
+import { AsyncU } from 'src/utils/common/AsyncU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
+import { RangeU } from 'src/utils/common/RangeU'
 import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import throttle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy

@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { AxiosError, AxiosResponse, isAxiosError } from 'axios'
 import isdef = TypeU.isdef
 

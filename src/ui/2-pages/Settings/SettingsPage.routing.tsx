@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { routingSettingsAccount } from 'src/ui/2-pages/AccountSettings/AccountSettingsPage.routing.tsx'
 import { routingSettingsApplication } from 'src/ui/2-pages/ApplicationSettings/ApplicationSettingsPage.routing.tsx'
 import { routingSettingsPwdChange } from 'src/ui/2-pages/PwdChange/PwdChangePage.routing.tsx'

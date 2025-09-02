@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/ui-data/models/Option'
-import { ArrayU } from 'src/util/common/ArrayU'
-import { TypeU } from 'src/util/common/TypeU'
+import { ArrayU } from 'src/utils/common/ArrayU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Setter = TypeU.Setter
 
 

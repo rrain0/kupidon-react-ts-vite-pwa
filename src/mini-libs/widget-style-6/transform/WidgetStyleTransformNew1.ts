@@ -1,5 +1,5 @@
-import { StringU } from '@util/common/StringU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { StringU } from '@utils/common/StringU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import {
   createCamelCaseWordsTree, nodeValue, WordsTree,
 } from 'src/mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'

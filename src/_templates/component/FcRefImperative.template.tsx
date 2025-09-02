@@ -1,6 +1,6 @@
 import React, { useImperativeHandle, useRef } from 'react'
-import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import Pu = TypeU.Pu
 import Children = ReactU.Children
 

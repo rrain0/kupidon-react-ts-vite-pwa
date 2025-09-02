@@ -1,4 +1,4 @@
-import { DateU } from '@util/date/DateU.ts'
+import { DateU } from '@utils/date/DateU.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/api/requests/UserApi.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import { CountryFlag } from 'src/ui-data/translations/CountryFlag.ts'
-import { Lang } from '@util/lang/Lang.ts'
+import { Lang } from '@utils/lang/Lang.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import PlanetFrameIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PlanetFrameIc.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'

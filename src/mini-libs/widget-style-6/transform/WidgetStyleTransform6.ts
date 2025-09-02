@@ -1,4 +1,4 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
 import { SelectPropValueTf5 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 
 

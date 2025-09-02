@@ -3,13 +3,13 @@ import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { getClampedCarouselProps } from '@util/animated/carousel/props/defaultCarouselProps.ts'
-import { RangeU } from '@util/common/RangeU.ts'
+import { getClampedCarouselProps } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
+import { RangeU } from '@utils/common/RangeU.ts'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/ui/0-elements/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { ArrayU } from 'src/util/common/ArrayU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { ArrayU } from 'src/utils/common/ArrayU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import gridStackC = EmotionCommon.gridStackC
 import Getter = TypeU.Getter
 import arrOfIndices = ArrayU.arrOfIndices

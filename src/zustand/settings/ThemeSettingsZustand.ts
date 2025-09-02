@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DefaultDarkTheme, DefaultLightTheme } from 'src/ui-data/theme/ThemeCollection.ts'
 import { create } from 'zustand'

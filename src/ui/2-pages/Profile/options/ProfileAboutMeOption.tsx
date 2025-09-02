@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import React, { useState } from 'react'
 import ModalTextarea from 'src/ui/1-widgets/modals/ModalTextarea/ModalTextarea.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'

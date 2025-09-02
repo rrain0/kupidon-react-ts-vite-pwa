@@ -1,7 +1,7 @@
-import { useIsMount } from '@util/react-state/useIsMount.ts'
-import { useDebounce } from '@util/react/useDebounce.ts'
+import { useIsMount } from '@utils/react-state/useIsMount.ts'
+import { useDebounce } from '@utils/react/useDebounce.ts'
 import React, { useEffect, useState } from 'react'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -18,7 +18,7 @@ import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import Pu = TypeU.Pu
 import Flex from 'ui/0-elements/basic-elements/Flex'
 import { StyleVals } from 'ui-data/style/StyleVals'
-import { commonStyle } from 'util/react/short-props/style/commonStyle'
+import { commonStyle } from 'utils/react/short-props/style/commonStyle'
 import PictureIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/PictureIc.tsx'
 
 

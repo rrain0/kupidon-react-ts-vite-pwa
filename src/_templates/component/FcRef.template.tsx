@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import Pu = TypeU.Pu
 
 

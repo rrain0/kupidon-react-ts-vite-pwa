@@ -1,10 +1,10 @@
 import { Global } from '@emotion/react'
-import { CssU } from '@util/css/CssU.ts'
+import { CssU } from '@utils/css/CssU.ts'
 import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import Pu = TypeU.Pu
 import isdef = TypeU.isdef

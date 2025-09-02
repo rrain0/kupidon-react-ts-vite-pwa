@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
+import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
@@ -13,7 +13,7 @@ import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import AvaButton from 'src/ui/1-widgets/avatars/Ava/AvaButton.tsx'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import { offsetToPageContentPaddings } from 'src/ui/components/page/offsetToPageContentPaddings.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt
 import max1Line = EmotionCommon.max1Line

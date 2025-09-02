@@ -15,9 +15,9 @@ import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import CheckboxInput from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress, { PieProgressCssProps } from 'src/ui/0-elements/PieProgress/PieProgress.tsx'
-import { RangeU } from '@util/common/RangeU.ts'
-import { useBool } from '@util/react-state/useBool.ts'
-import { useInterval } from '@util/react/useInterval.ts'
+import { RangeU } from '@utils/common/RangeU.ts'
+import { useBool } from '@utils/react-state/useBool.ts'
+import { useInterval } from '@utils/react/useInterval.ts'
 import RootRoute = AppRoutes.RootRoute
 import checkmarkBold from '@ic/normal/ui/checkmark-bold.svg'
 

@@ -1,6 +1,6 @@
 import { GenderA } from 'src/model/api/GenderA.ts'
 import { UserApi } from 'src/api/requests/UserApi.ts'
-import { DateTime } from '@util/date/DateTime.ts'
+import { DateTime } from '@utils/date/DateTime.ts'
 import { ValidationU } from 'src/mini-libs/form-data/core/ValidationU.ts'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'

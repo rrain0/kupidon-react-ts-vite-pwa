@@ -1,5 +1,5 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { Lang } from '@util/lang/Lang.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
+import { Lang } from '@utils/lang/Lang.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import { DefaultTheme } from 'src/ui-data/theme/ThemeCollection.ts'
 import { PageState } from 'src/ui/components/UsePageLifecycle.tsx'

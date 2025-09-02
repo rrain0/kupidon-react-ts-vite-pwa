@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { virtualOffset } from '@util/css/virtualOffset.ts'
+import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import {
@@ -15,7 +15,7 @@ import ArticleItemLink from 'src/ui/2-pages/DateArticles/parts/ArticleItemLink.t
 import DateArticleItemCard from 'src/ui/2-pages/DateArticles/parts/DateArticleItemCard.tsx'
 import DateArticleItemToCardData
   from 'src/ui/2-pages/DateArticles/parts/DateArticleItemToCardData.tsx'
-import { ReactU } from 'src/util/react/ReactU'
+import { ReactU } from 'src/utils/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import noScrollbars = EmotionCommon.noScrollbars

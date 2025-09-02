@@ -1,6 +1,6 @@
-import { SwChannel } from '@util/service-worker/SwChannel.ts'
-import { getIsSwReady } from '@util/service-worker/SwU.ts'
-import { WsMsg } from '@util/web-socket/WsU.ts'
+import { SwChannel } from '@utils/service-worker/SwChannel.ts'
+import { getIsSwReady } from '@utils/service-worker/SwU.ts'
+import { WsMsg } from '@utils/web-socket/WsU.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 

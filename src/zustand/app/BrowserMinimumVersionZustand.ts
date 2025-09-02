@@ -1,4 +1,4 @@
-import { BrowserFeatures, BrowserVersions } from 'src/util/app/useBrowserMinimumVersion.ts'
+import { BrowserFeatures, BrowserVersions } from 'src/utils/app/useBrowserMinimumVersion.ts'
 import { create } from 'zustand'
 
 

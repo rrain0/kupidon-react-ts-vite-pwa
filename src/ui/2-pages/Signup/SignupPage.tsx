@@ -1,4 +1,4 @@
-import { DateU } from '@util/date/DateU.ts'
+import { DateU } from '@utils/date/DateU.ts'
 import { GenderA } from 'src/model/api/GenderA.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'

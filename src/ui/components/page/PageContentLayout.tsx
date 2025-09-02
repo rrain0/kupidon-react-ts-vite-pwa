@@ -1,13 +1,13 @@
 import { Theme } from '@emotion/react'
 import { Interpolation } from '@emotion/serialize'
 import styled from '@emotion/styled'
-import { CssU } from '@util/css/CssU.ts'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
+import { CssU } from '@utils/css/CssU.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React, { CSSProperties } from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
-import { ReactU } from 'src/util/react/ReactU'
-import { TypeU } from 'src/util/common/TypeU'
+import { ReactU } from 'src/utils/react/ReactU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle

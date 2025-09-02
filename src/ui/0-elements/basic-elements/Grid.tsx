@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import {
   GridViewShortProps,
   processGridViewShortProps,
-} from '@util/react/short-props/props/processGridViewShortProps.ts'
+} from '@utils/react/short-props/props/processGridViewShortProps.ts'
 import clsx from 'clsx'
 import React from 'react'
 

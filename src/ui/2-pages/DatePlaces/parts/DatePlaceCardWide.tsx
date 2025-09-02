@@ -12,7 +12,7 @@ import Card from 'src/ui/0-elements/Card/Card.tsx'
 import { CardS } from 'src/ui/0-elements/Card/CardS.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import { DatePlace } from 'src/ui-data/special/date-place/DatePlacesData.ts'
 import ClassStyle = ReactU.ClassStyle
 import Txt = EmotionCommon.Txt

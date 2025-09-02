@@ -4,12 +4,12 @@ import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
   getLoopedCarouselProps,
-} from '@util/animated/carousel/props/defaultCarouselProps.ts'
-import { createTrackPropsGetter } from '@util/animated/carousel/createTrackPropsGetter.ts'
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { RangeU } from '@util/common/RangeU.ts'
-import { useInterval2 } from '@util/react/useInterval2.ts'
-import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
+} from '@utils/animated/carousel/props/defaultCarouselProps.ts'
+import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
+import { RangeU } from '@utils/common/RangeU.ts'
+import { useInterval2 } from '@utils/react/useInterval2.ts'
+import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import React, { useEffect, useState } from 'react'
 import { PosterData } from 'src/ui-data/special/poster/PosterData.ts'
@@ -22,7 +22,7 @@ import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/ui/0-elements/ImgSpark/ImgSparkS6.ts'
 import SelectMeter from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'
 import { SelectMeterS6 } from 'src/ui/0-elements/select-item/SelectMeter/SelectMeterS6.ts'
-import { useCarousel } from '@util/animated/carousel/useCarousel.ts'
+import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import arrOfIndices = ArrayU.arrOfIndices

@@ -1,7 +1,7 @@
-import { ObjectU } from '@util/common/ObjectU.ts'
+import { ObjectU } from '@utils/common/ObjectU.ts'
 import React, { useMemo } from 'react'
-import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { Link, useSearchParams } from 'react-router'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Pu = TypeU.Pu

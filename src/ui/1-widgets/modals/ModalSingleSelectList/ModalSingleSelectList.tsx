@@ -15,8 +15,8 @@ import SelectItem from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ModalInput from 'src/ui/1-widgets/modals/ModalInput/ModalInput'
-import { ReactU } from 'src/util/react/ReactU'
-import { TypeU } from 'src/util/common/TypeU'
+import { ReactU } from 'src/utils/react/ReactU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter
 import col = EmotionCommon.col

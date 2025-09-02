@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
 import { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate, useSearchParams } from 'react-router'

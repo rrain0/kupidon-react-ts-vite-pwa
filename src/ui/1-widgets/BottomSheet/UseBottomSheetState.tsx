@@ -1,6 +1,6 @@
-import { useStateSync } from 'src/util/react-state/useStateSync.ts'
+import { useStateSync } from 'src/utils/react-state/useStateSync.ts'
 import React, { useCallback, useMemo, useState } from 'react'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import {
   SheetSnapIdx,
   SheetSnapPoints, SheetSnapsHalfScreen,

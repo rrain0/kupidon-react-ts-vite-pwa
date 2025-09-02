@@ -8,11 +8,11 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import { RangeU } from 'src/util/common/RangeU'
-import { useAsRefGet } from 'src/util/react-state/useAsRefGet'
-import { useNoSelect } from '@util/pointer/useNoSelect.ts'
-import { getViewProps } from 'src/util/view/ViewProps.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { RangeU } from 'src/utils/common/RangeU'
+import { useAsRefGet } from 'src/utils/react-state/useAsRefGet'
+import { useNoSelect } from '@utils/pointer/useNoSelect.ts'
+import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/ui/1-widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
 import Pu = TypeU.Pu

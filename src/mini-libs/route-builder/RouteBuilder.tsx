@@ -1,5 +1,5 @@
-import { ObjectU } from 'src/util/common/ObjectU.ts'
-import { TypeU } from 'src/util/common/TypeU.ts'
+import { ObjectU } from 'src/utils/common/ObjectU.ts'
+import { TypeU } from 'src/utils/common/TypeU.ts'
 import emptyval = TypeU.emptyval
 import ObjectValues = ObjectU.ObjectValues
 import ObjectKeysType = ObjectU.ObjectKeysType

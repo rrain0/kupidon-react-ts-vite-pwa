@@ -1,6 +1,6 @@
-import { StringU } from '@util/common/StringU.ts'
+import { StringU } from '@utils/common/StringU.ts'
 import React from 'react'
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Pu = TypeU.Pu
 import trimDotZerosEnd = StringU.trimDotZerosEnd
 

@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
 import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
 import { AxiosConfig } from '../AxiosConfig.ts'

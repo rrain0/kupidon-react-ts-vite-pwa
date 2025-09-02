@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { useEvent } from '@util/react/useEvent.ts'
+import { useEvent } from '@utils/react/useEvent.ts'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout'
 import PageLayout from 'src/ui/components/page/PageLayout'
 

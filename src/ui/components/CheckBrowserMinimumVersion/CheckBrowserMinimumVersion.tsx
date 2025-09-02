@@ -1,5 +1,5 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { Utils } from '@util/common/Utils.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
+import { Utils } from '@utils/common/Utils.ts'
 import React, { useMemo } from 'react'
 import * as device from 'react-device-detect'
 import { useBrowserMinimumVersionZustand } from 'src/zustand/app/BrowserMinimumVersionZustand.ts'

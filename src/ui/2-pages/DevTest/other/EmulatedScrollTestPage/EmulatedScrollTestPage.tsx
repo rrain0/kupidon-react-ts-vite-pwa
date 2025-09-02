@@ -1,16 +1,16 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
-import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
-import { useResizeRef } from '@util/view/useResizeRef.ts'
-import { getViewProps } from '@util/view/ViewProps.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
+import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useResizeRef } from '@utils/view/useResizeRef.ts'
+import { getViewProps } from '@utils/view/ViewProps.ts'
 import React from 'react'
 import { useEmulatedScroll } from 'src/ui/2-pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { RangeU } from '@util/common/RangeU.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
+import { RangeU } from '@utils/common/RangeU.ts'
 import PageLayout from 'src/ui/components/page/PageLayout.tsx'
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
+import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
 import NumRange = RangeU.NumRange
 import arrOfNumbers = ArrayU.arrOfNumbers
 

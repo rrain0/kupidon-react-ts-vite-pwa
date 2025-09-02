@@ -5,7 +5,7 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute

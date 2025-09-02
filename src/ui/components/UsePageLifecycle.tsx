@@ -1,4 +1,4 @@
-import { ArrayU } from '@util/common/ArrayU.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
 import React, { useEffect } from 'react'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 

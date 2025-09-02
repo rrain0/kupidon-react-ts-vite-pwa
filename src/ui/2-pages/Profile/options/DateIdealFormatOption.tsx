@@ -7,7 +7,7 @@ import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import ModalMultiSelectList from 'src/ui/1-widgets/modals/ModalMultiSelectList/ModalMultiSelectList'
-import { ArrayU } from 'src/util/common/ArrayU'
+import { ArrayU } from 'src/utils/common/ArrayU'
 
 
 

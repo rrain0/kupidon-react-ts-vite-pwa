@@ -1,10 +1,10 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { css } from '@emotion/react'
-import { ArrayU } from '@util/common/ArrayU.ts'
-import { MathU } from '@util/common/MathU.ts'
-import { RangeU } from '@util/common/RangeU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { ArrayU } from '@utils/common/ArrayU.ts'
+import { MathU } from '@utils/common/MathU.ts'
+import { RangeU } from '@utils/common/RangeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
@@ -12,7 +12,7 @@ import Pu = TypeU.Pu
 import col = EmotionCommon.col
 import round = EmotionCommon.round
 import arr = ArrayU.arr
-import { ReactU } from 'src/util/react/ReactU'
+import { ReactU } from 'src/utils/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
 import rf3 = MathU.rf3
 

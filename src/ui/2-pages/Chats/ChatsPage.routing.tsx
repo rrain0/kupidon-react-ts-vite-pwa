@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router'
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import CheckAuth from 'src/ui/components/app-router/CheckAuth.tsx'
 

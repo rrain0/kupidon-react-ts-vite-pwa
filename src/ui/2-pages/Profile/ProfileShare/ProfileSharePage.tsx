@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { RouteBuilder } from '@mini-libs/route-builder/RouteBuilder.tsx'
 import { UiValues } from '@mini-libs/ui-text/UiText.ts'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React, { useMemo } from 'react'
 import { QrcodeSVG } from 'react-qrcode-pretty'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
@@ -13,7 +13,7 @@ import TelegramIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/TelegramIc
 import WhatsappIc from 'src/ui/0-elements/icons/SvgIcons/pack/special/Whatsapp.tsx'
 import CopyIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CopyIc.tsx'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import ClassStyle = ReactU.ClassStyle
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import Txt = EmotionCommon.Txt

@@ -4,8 +4,8 @@ import {
 } from 'src/ui-data/models/media/download/parts/mergeMediaDownloadData.ts'
 import { useMediaDownloader } from 'src/ui-data/models/media/download/useMediaDownloader.ts'
 import { MediaDownloadable } from 'src/ui-data/models/media/Media.ts'
-import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import Pu = TypeU.Pu
 
 

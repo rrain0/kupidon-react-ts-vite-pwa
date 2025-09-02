@@ -1,4 +1,4 @@
-import { WsChannel } from '@util/web-socket/WsChannel.ts'
+import { WsChannel } from '@utils/web-socket/WsChannel.ts'
 import React, { useEffect, useMemo } from 'react'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'

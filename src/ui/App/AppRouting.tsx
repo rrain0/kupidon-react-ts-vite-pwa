@@ -1,10 +1,10 @@
-import { useAuthSetup } from '@util/auth/useAuthSetup.ts'
-import { SearchParams } from '@util/url/SearchParams.ts'
+import { useAuthSetup } from '@utils/auth/useAuthSetup.ts'
+import { SearchParams } from '@utils/url/SearchParams.ts'
 import {
   parseSearchParams,
   setSearchParam,
   stringifySearchParams,
-} from '@util/url/SearchParamsU.ts'
+} from '@utils/url/SearchParamsU.ts'
 import {
   createBrowserRouter,
   Outlet,

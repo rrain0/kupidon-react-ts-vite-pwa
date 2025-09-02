@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
 import React, { useMemo } from 'react'
 import { emptyUiText, UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'

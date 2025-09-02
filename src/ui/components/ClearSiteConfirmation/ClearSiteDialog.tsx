@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useEvent } from '@util/react/useEvent.ts'
+import { useEvent } from '@utils/react/useEvent.ts'
 import React from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
@@ -9,10 +9,10 @@ import Spinner8LinesIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/Spinner8Li
 import ModalDialog from 'src/ui/1-widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalPortal from 'src/ui/components/modal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
-import { clearSiteData } from '@util/js/clearSiteData.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { clearSiteData } from '@utils/js/clearSiteData.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
-import { useBool } from 'src/util/react-state/useBool.ts'
+import { useBool } from 'src/utils/react-state/useBool.ts'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import fixed = EmotionCommon.fixed
 import flexC = EmotionCommon.flexC

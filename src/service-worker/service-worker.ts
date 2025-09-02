@@ -1,9 +1,9 @@
 /// <reference lib="webworker"/>
 
-import { asMsgFromSw, SwMsg } from '@util/service-worker/SwU.ts'
-import { asMsgFromWs, WsMsg } from '@util/web-socket/WsU.ts'
-import { Env } from '@util/app/Env'
-import { AsyncU } from '@util/common/AsyncU.ts'
+import { asMsgFromSw, SwMsg } from '@utils/service-worker/SwU.ts'
+import { asMsgFromWs, WsMsg } from '@utils/web-socket/WsU.ts'
+import { Env } from '@utils/app/Env'
+import { AsyncU } from '@utils/common/AsyncU.ts'
 import { WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {
@@ -16,7 +16,7 @@ import {
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
 import delay = AsyncU.delay
-import { WebSocketEx } from '@util/web-socket/WebSocketEx'
+import { WebSocketEx } from '@utils/web-socket/WebSocketEx'
 
 import { MockData } from 'src/_mock-data/MockData.ts'
 import cross from '@ic/normal/ui/cross.svg'

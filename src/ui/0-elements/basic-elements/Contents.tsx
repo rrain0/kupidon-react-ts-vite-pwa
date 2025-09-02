@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { withDefaults } from '@util/react/withDefaults.tsx'
+import { withDefaults } from '@utils/react/withDefaults.tsx'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import contents = EmotionCommon.contents
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import AvaContent, { AvaContentProps } from 'src/ui/1-widgets/avatars/Ava/AvaContent.tsx'

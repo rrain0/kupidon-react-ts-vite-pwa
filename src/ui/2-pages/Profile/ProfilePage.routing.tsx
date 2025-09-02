@@ -1,4 +1,4 @@
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import React, { Suspense } from 'react'
 import {
   Outlet,

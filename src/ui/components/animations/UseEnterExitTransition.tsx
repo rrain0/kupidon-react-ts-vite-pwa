@@ -1,8 +1,8 @@
-import { TypeU } from '@util/common/TypeU.ts'
-import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { useRefGetSet } from '@util/react-state/useRefGetSet.ts'
-import { ReactU } from '@util/react/ReactU.ts'
-import { useElemRefGetSet } from '@util/view/useElemRefGetSet.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { useAsCallback } from '@utils/react-state/useAsCallback.ts'
+import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
+import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'
 import Callback = TypeU.Callback

@@ -1,6 +1,6 @@
-import { AsyncU } from '@util/common/AsyncU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { AsyncU } from '@utils/common/AsyncU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import { AnimatedComputed } from 'src/mini-libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from 'src/mini-libs/animated/AnimatedProperty.ts'
 import {

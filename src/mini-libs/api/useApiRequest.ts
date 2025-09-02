@@ -1,6 +1,6 @@
-import { TypeU } from '@util/common/TypeU.ts'
-import { useAsCallback } from '@util/react-state/useAsCallback.ts'
-import { useStateAndRef } from '@util/react-state/useStateAndRef.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { useAsCallback } from '@utils/react-state/useAsCallback.ts'
+import { useStateAndRef } from '@utils/react-state/useStateAndRef.ts'
 import { useState } from 'react'
 import { ApiResponseUtils } from 'src/mini-libs/api/ApiResponseUtils.ts'
 import ResponseError = ApiResponseUtils.ResponseError

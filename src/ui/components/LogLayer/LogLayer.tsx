@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/ui-data/style/EmotionCommon.ts'
 import { StyleVals } from 'src/ui-data/style/StyleVals.ts'

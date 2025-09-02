@@ -2,7 +2,7 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elements/AnimatedState.tsx'
 import styled from '@emotion/styled'
-import { DateU } from '@util/date/DateU.ts'
+import { DateU } from '@utils/date/DateU.ts'
 import React from 'react'
 import { EmptyS6 } from 'src/mini-libs/widget-style-6/EmptyS6.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
@@ -23,8 +23,8 @@ import LikeButton from 'src/ui/1-widgets/ProfileCards/LikeButton.tsx'
 import {
   ProfileCardsAction,
 } from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
-import { ReactU } from '@util/react/ReactU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col

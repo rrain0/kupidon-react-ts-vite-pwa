@@ -1,4 +1,4 @@
-import { SearchParamsData } from '@util/url/SearchParamsU.ts'
+import { SearchParamsData } from '@utils/url/SearchParamsU.ts'
 import { create } from 'zustand'
 
 

@@ -1,0 +1,11 @@
+import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
+import { useAsCallback } from 'src/utils/react-state/useAsCallback.ts'
+import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+
+
+
+export const useSetAppTheme = () => (
+  useAsCallback((theme: AppTheme.Theme) => useAppZustand.setState({ theme }))
+)
+
+

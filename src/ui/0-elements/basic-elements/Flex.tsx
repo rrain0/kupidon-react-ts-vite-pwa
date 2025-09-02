@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import {
   FlexViewShortProps,
   processFlexViewShortProps,
-} from '@util/react/short-props/props/processFlexViewShortProps.ts'
+} from '@utils/react/short-props/props/processFlexViewShortProps.ts'
 import clsx from 'clsx'
 import React from 'react'
 

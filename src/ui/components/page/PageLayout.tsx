@@ -1,13 +1,13 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { commonStyle } from '@util/react/short-props/style/commonStyle.ts'
-import { flexStyle } from '@util/react/short-props/style/flexStyle.ts'
+import { commonStyle } from '@utils/react/short-props/style/commonStyle.ts'
+import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { isMobileSafari } from 'react-device-detect'
 import { AppTheme } from 'src/ui-data/theme/AppTheme.ts'
 import PageScrollbars from 'src/ui/1-widgets/Scrollbars/PageScrollbars.tsx'
-import { ReactU } from 'src/util/react/ReactU'
-import { TypeU } from 'src/util/common/TypeU'
+import { ReactU } from 'src/utils/react/ReactU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle

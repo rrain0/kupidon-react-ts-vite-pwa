@@ -1,6 +1,6 @@
-import { TypeU } from '@util/common/TypeU.ts'
-import { getDataUrlProps } from '@util/file/DataUrl.ts'
-import { FileU } from '@util/file/FileU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { getDataUrlProps } from '@utils/file/DataUrl.ts'
+import { FileU } from '@utils/file/FileU.ts'
 import noop = TypeU.noop
 import Pu = TypeU.Pu
 import getFilenameFromPath = FileU.getFilenameFromPath

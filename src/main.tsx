@@ -1,4 +1,4 @@
-import { applyPointerFixes } from '@util/pointer/applyPointerFixes.ts'
+import { applyPointerFixes } from '@utils/pointer/applyPointerFixes.ts'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import 'src/ui-data/style/setup/reset.css'

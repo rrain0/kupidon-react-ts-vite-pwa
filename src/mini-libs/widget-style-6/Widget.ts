@@ -1,4 +1,4 @@
-import { TypeU } from '@util/common/TypeU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
 import { transform1 } from 'src/mini-libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
   WidgetElem,

@@ -1,4 +1,4 @@
-import { ReactU } from '@util/react/ReactU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import { useLocation } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'

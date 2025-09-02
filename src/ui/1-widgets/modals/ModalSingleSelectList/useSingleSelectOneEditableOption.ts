@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/ui-data/models/Option'
-import { TypeU } from 'src/util/common/TypeU'
+import { TypeU } from 'src/utils/common/TypeU'
 import Setter = TypeU.Setter
 import isdef = TypeU.isdef
 

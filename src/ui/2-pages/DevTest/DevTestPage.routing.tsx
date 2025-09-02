@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
-import { clearUnknownPathEnding } from '@util/react/ReactRouterUtils.tsx'
+import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import RootRoute = AppRoutes.RootRoute

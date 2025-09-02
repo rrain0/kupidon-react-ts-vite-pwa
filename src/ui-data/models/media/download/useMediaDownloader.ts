@@ -1,5 +1,5 @@
-import { TypeU } from '@util/common/TypeU.ts'
-import { useTimeout } from '@util/react/useTimeout.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { useTimeout } from '@utils/react/useTimeout.ts'
 import { useEffect, useState } from 'react'
 import { useMediaDownload } from 'src/ui-data/models/media/download/parts/useMediaDownload.ts'
 import {

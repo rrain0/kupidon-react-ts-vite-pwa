@@ -1,8 +1,8 @@
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@util/common/TypeU.ts'
-import { CssU } from '@util/css/CssU.ts'
-import { ReactU } from '@util/react/ReactU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { CssU } from '@utils/css/CssU.ts'
+import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import Pu = TypeU.Pu
 import CssColor = CssU.CssColor

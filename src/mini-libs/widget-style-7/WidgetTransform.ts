@@ -1,6 +1,6 @@
-import { ObjectU } from '@util/common/ObjectU.ts'
-import { TypeU } from '@util/common/TypeU.ts'
-import { Pair } from '@util/js/Pair.ts'
+import { ObjectU } from '@utils/common/ObjectU.ts'
+import { TypeU } from '@utils/common/TypeU.ts'
+import { Pair } from '@utils/js/Pair.ts'
 import {
   WidgetElemPropReplacer, WidgetState,
   WidgetStyleReplacer,
