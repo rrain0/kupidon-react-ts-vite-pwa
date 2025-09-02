@@ -113,12 +113,12 @@ let manifest = (() => {
     "background_color": "#282c34",
     "icons": [
       {
-        "src": `public/res/icon192.png`,
+        "src": `public/assets/icon192.png`,
         "type": "image/png",
         "sizes": "192x192"
       },
       {
-        "src": `public/res/icon512.png`,
+        "src": `public/assets/icon512.png`,
         "type": "image/png",
         "sizes": "512x512"
       },

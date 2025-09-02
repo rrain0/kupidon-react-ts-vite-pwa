@@ -68,12 +68,12 @@
       "src/*": ["src/*"],
       
       "@utils/*": ["src/utils/*"],
-      "@res/*": ["src/res/*"],
+      "@assets/*": ["src/assets/*"],
       "@mini-libs/*": ["src/mini-libs/*"],
       
-      "@im/*": ["src/res/im/*"],
-      "@ic/*": ["src/res/ic/*"],
-      "@vid/*": ["src/res/vid/*"],
+      "@im/*": ["src/assets/im/*"],
+      "@ic/*": ["src/assets/ic/*"],
+      "@vid/*": ["src/assets/vid/*"],
       
       "@animated/*": ["src/mini-libs/animated/*"]
     }

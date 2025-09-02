@@ -35,8 +35,8 @@ import Callback1 = TypeU.Callback1
 import Callback = TypeU.Callback
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
-import pinkHeartWithExclamation from 'src/res/im/ic/pink-heart-with-exclamation.svg'
-import manWithHugeHeart from 'src/res/im/ic/man-with-huge-heart.svg'
+import pinkHeartWithExclamation from 'src/assets/im/ic/pink-heart-with-exclamation.svg'
+import manWithHugeHeart from 'src/assets/im/ic/man-with-huge-heart.svg'
 import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
 import colC = EmotionCommon.colC
 import flexC = WidgetStyleCommon.flexC

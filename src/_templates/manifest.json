@@ -46,8 +46,8 @@
     Favicon - Иконка PWA на Android / PC + used in browser tab
     Define in index.html:
     There is png because iOS does not support svg
-    <link rel="icon" type="image/png" href="%BASE_URL%public/res/icon64.png"/>
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%public/res/icon.svg"/>
+    <link rel="icon" type="image/png" href="%BASE_URL%public/assets/icon64.png"/>
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%public/assets/icon.svg"/>
     NO PADDINGS
     
     Также используется для обычного ярлыка сайта Android - там уже НУЖНЫ ПАДДИНГИ, но пофиг
@@ -55,28 +55,28 @@
   /*
     Apple touch icon - Иконка PWA на iOS
     Define in index.html:
-    <link rel="apple-touch-icon" type="image/png" href="%BASE_URL%public/res/icon192-padding.png"/>
+    <link rel="apple-touch-icon" type="image/png" href="%BASE_URL%public/assets/icon192-padding.png"/>
     WITH PADDINGS
   */
   // paths are relative because manifest.json in root
   "icons": [
     // REQUIRED size, NO PADDINGS
     {
-      "src": "public/res/icon192.png",
+      "src": "public/assets/icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     // REQUIRED size, NO PADDINGS
     // Android splashscreen icon
     {
-      "src": "public/res/icon512.png",
+      "src": "public/assets/icon512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     // MASKABLE WITH PADDINGS
     // Android PWA shortcut icon
     /*{
-      "src": "public/res/icon512-padding.png",
+      "src": "public/assets/icon512-padding.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
