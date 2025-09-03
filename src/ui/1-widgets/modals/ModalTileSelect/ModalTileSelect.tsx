@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { Option } from 'src/ui-data/models/Option'
+import { Option } from 'src/models/ui/Option.ts'
 import { sizes } from 'src/styles/sizes.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'

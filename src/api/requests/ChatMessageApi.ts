@@ -1,6 +1,6 @@
 import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
-import { ChatA } from 'src/model/api/ChatA.ts'
-import { ChatMessageA } from 'src/model/api/ChatMessageA.ts'
+import { ChatA } from 'src/models/api/ChatA.ts'
+import { ChatMessageA } from 'src/models/api/ChatMessageA.ts'
 import { AxiosConfig } from '../AxiosConfig.ts'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess

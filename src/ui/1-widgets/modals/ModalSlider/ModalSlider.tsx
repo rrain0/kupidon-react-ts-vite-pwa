@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import { ActionUiText } from 'src/locales/translations/ActionUiText'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
 import Slider from 'src/ui/1-widgets/Slider/Slider'

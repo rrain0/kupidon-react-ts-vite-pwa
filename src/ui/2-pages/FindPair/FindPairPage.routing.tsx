@@ -5,8 +5,8 @@ import { UsersApi } from 'src/api/requests/UsersApi.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
-import { userPhotosAToMedias } from 'src/model/api/UserPhotoA.ts'
-import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
+import { userPhotosAToMedias } from 'src/models/api/UserPhotoA.ts'
+import { MediaInArrayDUC } from '@mini-libs/media/Media.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import {
   ProfileCardsStackListItem,

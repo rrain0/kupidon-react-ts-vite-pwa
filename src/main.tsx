@@ -7,7 +7,7 @@ import 'src/styles/app/app.css'
 import 'src/styles/common/common.scss'
 import 'react-toastify/dist/ReactToastify.css'
 import 'animate.css'
-import App from 'src/ui/App/App'
+import App from 'src/components/app/App.tsx'
 
 
 applyPointerFixes()

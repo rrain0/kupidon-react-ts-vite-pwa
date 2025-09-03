@@ -13,8 +13,8 @@ import { useStateAndRef } from '@utils/react-state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { UserToUserApi } from 'src/api/requests/UserToUserApi.ts'
-import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
-import MediaArrayDownloader from 'src/ui-data/models/media/download/MediaArrayDownloader.tsx'
+import { MediaInArrayDUC } from '@mini-libs/media/Media.ts'
+import MediaArrayDownloader from '@mini-libs/media/download/MediaArrayDownloader.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ProfileCards, {
   ProfileCardsAction,

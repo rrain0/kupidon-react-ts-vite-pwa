@@ -39,7 +39,7 @@ import { TypeU } from '@utils/common/TypeU.ts'
 import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
 import { FormProps } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'
 import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
 import Callback1 = TypeU.Callback1

@@ -1,4 +1,4 @@
-import { Option } from 'src/ui-data/models/Option'
+import { Option } from 'src/models/ui/Option.ts'
 import { IndicatorSelection } from 'src/ui/0-elements/select-item/SelectItem/SelectItem'
 
 

@@ -1,5 +1,5 @@
 import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
-import { UserToUserLikeA } from 'src/model/api/UserToUserLikeA.ts'
+import { UserToUserLikeA } from 'src/models/api/UserToUserLikeA.ts'
 import { AxiosConfig } from '../AxiosConfig.ts'
 import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
 import TechnicalError = ApiResponseUtils.TechnicalError

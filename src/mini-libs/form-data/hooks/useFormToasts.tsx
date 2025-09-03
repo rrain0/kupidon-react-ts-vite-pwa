@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
+import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
 import { ObjectU } from '@utils/common/ObjectU.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { ValidationActions } from 'src/mini-libs/form-data/core/ValidationActions.ts'

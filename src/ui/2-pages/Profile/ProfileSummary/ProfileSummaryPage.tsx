@@ -9,11 +9,11 @@ import {
   getMediaUiState,
   MediaDownloadable, newDefaultEmptyRemoteMedia,
   newDefaultRemoteMediaDownloadable,
-} from 'src/ui-data/models/media/Media.ts'
-import MediaDownloader from 'src/ui-data/models/media/download/MediaDownloader.tsx'
-import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
+} from '@mini-libs/media/Media.ts'
+import MediaDownloader from '@mini-libs/media/download/MediaDownloader.tsx'
+import MediaUiState from '@mini-libs/media/MediaUiState.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
@@ -22,7 +22,7 @@ import { IconButtonS6 } from 'src/ui/0-elements/buttons/IconButton/IconButtonS6.
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'
 import GearOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearOutlinedIc.tsx'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import {
   QuickSettingsOverlayName
 } from 'src/ui/1-widgets/QuickSettings/QuickSettings.tsx'

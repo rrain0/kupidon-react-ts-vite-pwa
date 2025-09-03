@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { ChatMessageApi } from 'src/api/requests/ChatMessageApi.ts'
-import { ChatMessageContentA } from 'src/model/api/ChatMessageA.ts'
+import { ChatMessageContentA } from 'src/models/api/ChatMessageA.ts'
 import ChatInput from 'src/ui/2-pages/Chat/parts/ChatInput.tsx'
 import Pu = TypeU.Pu
 

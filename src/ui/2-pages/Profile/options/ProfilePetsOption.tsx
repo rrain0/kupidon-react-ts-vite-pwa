@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react'
-import { Option } from 'src/ui-data/models/Option.ts'
+import { Option } from 'src/models/ui/Option.ts'
 import BengalCatGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/BengalCatGradIc.tsx'
 import ModalRadio from 'src/ui/1-widgets/modals/ModalRadio/ModalRadio.tsx'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 

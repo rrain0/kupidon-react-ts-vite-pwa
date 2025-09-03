@@ -2,8 +2,8 @@ import React, { useMemo, useState } from 'react'
 import WineBottleAlcoholGradIc
   from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/WineBottleAlcoholGradIc.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'

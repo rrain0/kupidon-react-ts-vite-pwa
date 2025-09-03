@@ -20,10 +20,10 @@ import { imagesForBlur } from 'src/styles/images/imagesForBlur.ts'
 import {
   getMediaUiState,
   MediaInArrayDownloadable,
-} from 'src/ui-data/models/media/Media.ts'
-import MediaUiState from 'src/ui-data/models/media/MediaUiState.tsx'
+} from '@mini-libs/media/Media.ts'
+import MediaUiState from '@mini-libs/media/MediaUiState.tsx'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText'
+import { TitleUiText } from 'src/locales/translations/TitleUiText'
 import { SvgIconS6 } from 'src/ui/0-elements/icons/SvgIcons/SvgIconS6.ts'
 import {
   ImageParts,

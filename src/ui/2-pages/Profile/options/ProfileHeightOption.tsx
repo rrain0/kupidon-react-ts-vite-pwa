@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
+import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import RulerVerticalGradIc
   from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
 import ModalSlider from 'src/ui/1-widgets/modals/ModalSlider/ModalSlider'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { RangeU } from 'src/utils/common/RangeU'

@@ -9,7 +9,7 @@ import { CheckboxInputStyle } from 'src/ui/0-elements/inputs/CheckboxInput/Check
 import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import CheckboxInputGroup from 'src/ui/0-elements/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
-import { Option } from 'src/ui-data/models/Option.ts'
+import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Callback = TypeU.Callback
 import col = EmotionCommon.col

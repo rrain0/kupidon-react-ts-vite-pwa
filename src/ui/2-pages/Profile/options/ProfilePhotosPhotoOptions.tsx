@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import {
   MediaInArrayDUC,
   newDefaultEmptyLocalMediaInArray,
-} from 'src/ui-data/models/media/Media.ts'
+} from '@mini-libs/media/Media.ts'
 import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
 import { ButtonS6 } from 'src/ui/0-elements/buttons/Button/ButtonS6.ts'
 import ArrowRefreshCwIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/ArrowRefreshCwIc.tsx'
@@ -20,7 +20,7 @@ import UseBottomSheetState from 'src/ui/1-widgets/BottomSheet/UseBottomSheetStat
 import BottomSheetBasic from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
 import Callback = TypeU.Callback
 import CrossInCircleIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'

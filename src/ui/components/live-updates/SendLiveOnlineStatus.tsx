@@ -2,7 +2,7 @@ import { usePrevState } from '@utils/react-state/usePrevState.ts'
 import { useInterval } from '@utils/react/useInterval.ts'
 import { WsChannel } from '@utils/web-socket/WsChannel.ts'
 import React, { useEffect, useMemo } from 'react'
-import { getAccessTokenData } from 'src/model/api/AccessTokenA.ts'
+import { getAccessTokenData } from 'src/models/api/AccessTokenA.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 

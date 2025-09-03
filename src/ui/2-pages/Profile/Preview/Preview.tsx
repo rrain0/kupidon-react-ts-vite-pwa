@@ -1,6 +1,6 @@
 import React from 'react'
-import { GenderA } from 'src/model/api/GenderA.ts'
-import { MediaInArrayDUC } from 'src/ui-data/models/media/Media.ts'
+import { GenderA } from 'src/models/api/GenderA.ts'
+import { MediaInArrayDUC } from '@mini-libs/media/Media.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import ProfileCards from 'src/ui/1-widgets/ProfileCards/ProfileCards.tsx'
 import PageContentLayout from 'src/ui/components/page/PageContentLayout.tsx'

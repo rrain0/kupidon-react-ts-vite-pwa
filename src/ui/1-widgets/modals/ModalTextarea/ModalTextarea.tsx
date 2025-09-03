@@ -8,7 +8,7 @@ import { ModalElements } from 'src/ui/components/modal/ModalElements.tsx'
 import Modal from 'src/ui/components/modal/Modal.tsx'
 import Textarea from 'src/ui/0-elements/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/ui/0-elements/Textarea/TextareaStyle.ts'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
+import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import { Hdrs } from 'ui/0-elements/basic-elements/Hdrs'

@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react'
-import { Job } from 'src/model/Job.ts'
-import { Option } from 'src/ui-data/models/Option.ts'
+import { Job } from 'src/models/Job.ts'
+import { Option } from 'src/models/ui/Option.ts'
 import WorkSuitcaseGradIc
   from 'src/ui/0-elements/icons/GradSvgIcons/pack/special/WorkSuitcaseGradIc.tsx'
 import { useOverlayUrl } from 'src/ui/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { OptionUiText } from 'src/ui-data/translations/OptionUiText.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/ui/1-widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/ui/1-widgets/OptionItem/OptionItem.tsx'

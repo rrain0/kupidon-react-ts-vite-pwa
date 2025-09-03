@@ -52,7 +52,7 @@ import portraitWomanPosingHouse from
 import portraitStylishBrunetteGirl from
     '@im/mock/people/1/portraits/pretty-stylish-brunette-girl-wistfully-looking-camera-while-resting-city-street  portrait.webp'
 import { DateU } from '@utils/date/DateU.ts'
-import { UserStrangerA } from 'src/model/api/UserA.ts'
+import { UserStrangerA } from 'src/models/api/UserA.ts'
 
 
 

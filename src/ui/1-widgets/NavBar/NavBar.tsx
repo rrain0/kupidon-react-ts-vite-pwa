@@ -15,7 +15,7 @@ import ChatRoundGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ChatRo
 import ProfileGradIc from 'src/ui/0-elements/icons/GradSvgIcons/pack/ui/ProfileGradIc.tsx'
 import AppNavLink from 'src/ui/components/app-router/AppNavLink.tsx'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Button from 'src/ui/0-elements/buttons/Button/Button.tsx'
 import GearOutlinedIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/GearOutlinedIc.tsx'

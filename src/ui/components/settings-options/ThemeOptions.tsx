@@ -7,7 +7,7 @@ import MoonIc from 'src/ui/0-elements/icons/SvgIcons/pack/ui/MoonIc.tsx'
 import RadioInput from 'src/ui/0-elements/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/ui/0-elements/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/ui/0-elements/inputs/RadioInput/RadioInputStyle.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
 import ThemeType = AppTheme.Type
 import { SettingsOptions } from './SettingsOptions.tsx'

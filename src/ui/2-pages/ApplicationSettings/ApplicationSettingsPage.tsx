@@ -10,9 +10,9 @@ import PageLayout from 'src/ui/components/page/PageLayout.tsx'
 import BackButton from 'src/ui/components/screen-bars/parts/BackButton.tsx'
 import UseOverlayUrl from 'src/ui/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { SettingsGroup } from 'src/ui/0-elements/basic-elements/SettingsGroup.tsx'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText.ts'
-import { ThemeShortNameUiText } from 'src/ui-data/translations/ThemeShortNameUiText.ts'
-import { TitleUiText } from 'src/ui-data/translations/TitleUiText.ts'
+import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
+import { ThemeShortNameUiText } from 'src/locales/translations/ThemeShortNameUiText.ts'
+import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import ClearSiteDialog, {
   ClearSiteDialogOverlayName
 } from 'src/ui/components/ClearSiteConfirmation/ClearSiteDialog.tsx'

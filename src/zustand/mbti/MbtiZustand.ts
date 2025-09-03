@@ -1,6 +1,6 @@
 import { TypeU } from '@utils/common/TypeU.ts'
 import { createSelector } from 'reselect'
-import { MbtiType } from 'src/model/MbtiType.ts'
+import { MbtiType } from 'src/models/MbtiType.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject

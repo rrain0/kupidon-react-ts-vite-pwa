@@ -1,10 +1,10 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
-import { Option } from 'src/ui-data/models/Option'
+import { Option } from 'src/models/ui/Option.ts'
 import { sizes } from 'src/styles/sizes.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
+import { ActionUiText } from 'src/locales/translations/ActionUiText'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter
   from 'src/ui/0-elements/select-item/SelectMeter/SelectMeter.tsx'

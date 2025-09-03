@@ -2,14 +2,14 @@ import { UserApi } from 'src/api/requests/UserApi.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray,
-} from 'src/ui-data/models/media/Media.ts'
+} from '@mini-libs/media/Media.ts'
 import { EducationOptionValues } from 'src/ui/2-pages/Profile/options/ProfileEducationOption.tsx'
 import { GenderOptionValues } from 'src/ui/2-pages/Profile/options/ProfileGenderOption.tsx'
 import {
   PartnerGenderOptionValues
 } from 'src/ui/2-pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import { JobOptionValues } from 'src/ui/2-pages/Profile/options/ProfileJobOption.tsx'
-import { ErrorUiText } from 'src/ui-data/translations/ErrorUiText.ts'
+import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
 import { ArrayU } from 'src/utils/common/ArrayU.ts'
 import { DateTime } from '@utils/date/DateTime.ts'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
