@@ -6,7 +6,7 @@ import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { RangeU } from '@utils/base/RangeU'
 import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
-import { useAwaitMounting } from '@utils/react/useAwaitMounting.ts'
+import { useSkipRepaintAfterMount } from '@utils/react/useSkipRepaintAfterMount.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import clsx from 'clsx'
@@ -244,7 +244,7 @@ const Slider = React.memo((props: SliderProps) => {
   
   
   // forbid draw to screen before data from element ref are available
-  useAwaitMounting()
+  useSkipRepaintAfterMount()
   
   // forbid content selection for all elements while dragging
   useNoSelect(isDragging)

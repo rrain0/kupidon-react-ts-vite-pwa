@@ -5,7 +5,7 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import {
   FlexViewShortProps,
   processFlexViewShortProps,
-} from '@utils/react/short-props/props/processFlexViewShortProps.ts'
+} from '@libs/short-propsed/props/processFlexViewShortProps.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'

@@ -1,4 +1,4 @@
-import AnimatedState from '@animated/elements/AnimatedState.tsx'
+import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import {
   fixedForwardCarouselMergeProgress,
@@ -15,7 +15,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import { UserToUserApi } from 'src/services/api/requests/UserToUserApi.ts'
 import { MediaInArrayDUC } from '@libs/media/Media.ts'
 import MediaArrayDownloader from '@libs/media/download/MediaArrayDownloader.tsx'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import ProfileCards, {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'

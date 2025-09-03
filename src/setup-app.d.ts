@@ -1,4 +1,4 @@
-import { Lang } from '@utils/lang/Lang.ts'
+import { Lang } from '@utils/app/lang/Lang.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import NonEmptyArr = ArrayU.NonEmptyArr
 

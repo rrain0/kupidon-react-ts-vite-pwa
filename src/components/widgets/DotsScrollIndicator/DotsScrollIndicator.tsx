@@ -1,5 +1,5 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
-import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { css } from '@emotion/react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { MathU } from '@utils/base/MathU.ts'

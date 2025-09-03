@@ -1,11 +1,11 @@
 import {
   GridShortProps,
   processGridShortProps,
-} from 'src/utils/react/short-props/base/processGridShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processGridShortProps.ts'
 import {
   CommonViewShortProps,
   processCommonViewShortProps,
-} from 'src/utils/react/short-props/props/processCommonViewShortProps.ts'
+} from 'src/utils/libs/short-propsed/props/processCommonViewShortProps.ts'
 
 
 

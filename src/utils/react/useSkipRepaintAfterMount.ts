@@ -3,8 +3,8 @@ import { useBool } from 'src/utils/react/state/useBool.ts'
 
 
 
-// forbid draw to screen before data from element ref are available
-export const useAwaitMounting = () => {
+// forbid draw to screen before data from element's ref are available
+export const useSkipRepaintAfterMount = () => {
   const [ , setMountIsCompleted] = useBool(false)
   useLayoutEffect(setMountIsCompleted, [])
 }

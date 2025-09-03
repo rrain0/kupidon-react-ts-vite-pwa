@@ -1,6 +1,6 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
-import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
-import AnimatedState from '@animated/elements/AnimatedState.tsx'
+import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
+import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { getClampedCarouselProps } from '@utils/animated/carousel/props/defaultCarouselProps.ts'

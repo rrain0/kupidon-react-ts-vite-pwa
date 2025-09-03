@@ -1,27 +1,27 @@
 import {
   ContentShortProps,
   processContentShortProps,
-} from 'src/utils/react/short-props/base/processContentShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processContentShortProps.ts'
 import {
   PlacedShortProps,
   processPlacedShortProps,
-} from 'src/utils/react/short-props/base/processPlacedShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processPlacedShortProps.ts'
 import {
   PointerShortProps,
   processPointerShortProps,
-} from 'src/utils/react/short-props/base/processPointerShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processPointerShortProps.ts'
 import {
   PositionShortProps,
   processPositionShortProps,
-} from 'src/utils/react/short-props/base/processPositionShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processPositionShortProps.ts'
 import {
   processSizeShortProps,
   SizeShortProps,
-} from 'src/utils/react/short-props/base/processSizeShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processSizeShortProps.ts'
 import {
   processTextShortProps,
   TextShortProps,
-} from 'src/utils/react/short-props/base/processTextShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processTextShortProps.ts'
 
 
 

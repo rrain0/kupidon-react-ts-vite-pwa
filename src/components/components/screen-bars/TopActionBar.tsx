@@ -2,7 +2,7 @@ import { Global } from '@emotion/react'
 import { CssU } from '@utils/css/CssU.ts'
 import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import Grid from 'src/components/elems/basic-elements/Grid.tsx'
+import Grid from '@libs/short-propsed/components/Grid.tsx'
 import { TypeU } from '@utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import toPx = CssU.toPx

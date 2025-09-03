@@ -1,7 +1,7 @@
 import {
   GridViewShortProps,
   processGridViewShortProps,
-} from 'src/utils/react/short-props/props/processGridViewShortProps.ts'
+} from 'src/utils/libs/short-propsed/props/processGridViewShortProps.ts'
 
 
 export const gridStyle = <P extends object>(

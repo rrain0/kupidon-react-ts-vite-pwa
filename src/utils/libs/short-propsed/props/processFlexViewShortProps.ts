@@ -1,11 +1,11 @@
 import {
   FlexShortProps,
   processFlexShortProps,
-} from 'src/utils/react/short-props/base/processFlexShortProps.ts'
+} from 'src/utils/libs/short-propsed/base/processFlexShortProps.ts'
 import {
   CommonViewShortProps,
   processCommonViewShortProps,
-} from 'src/utils/react/short-props/props/processCommonViewShortProps.ts'
+} from 'src/utils/libs/short-propsed/props/processCommonViewShortProps.ts'
 
 
 

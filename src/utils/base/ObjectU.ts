@@ -157,13 +157,15 @@ export namespace ObjectU {
     if (!isobject(obj2)) return false
     const entries1 = ObjectEntries(obj1) as unknown as [any, any]
     const entries2 = ObjectEntries(obj2) as unknown as [any, any]
-    if (entries1.some(([k, v]) => obj2[k]!==v)) return false
-    if (entries2.some(([k, v]) => obj1[k]!==v)) return false
+    if (entries1.some(([k, v]) => obj2[k] !== v)) return false
+    if (entries2.some(([k, v]) => obj1[k] !== v)) return false
     return true
   }
   
   
-  export const stringifyEq = (obj1: any, obj2: any) => JSON.stringify(obj1) === JSON.stringify(obj2)
+  export const stringifyEq = (obj1: any, obj2: any) => (
+    JSON.stringify(obj1) === JSON.stringify(obj2)
+  )
   
   
   

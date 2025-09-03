@@ -1,7 +1,7 @@
 import {
   FlexViewShortProps,
   processFlexViewShortProps,
-} from 'src/utils/react/short-props/props/processFlexViewShortProps.ts'
+} from 'src/utils/libs/short-propsed/props/processFlexViewShortProps.ts'
 
 
 

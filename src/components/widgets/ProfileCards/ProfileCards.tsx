@@ -1,6 +1,6 @@
 import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
-import AnimatedState from '@animated/elements/AnimatedState.tsx'
+import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import styled from '@emotion/styled'
 import {
   defaultCarouselMergeProgress,
@@ -14,7 +14,7 @@ import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import { ViewU } from '@utils/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
-import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText'
 import { imagesForBlur } from 'src/styles/images/imagesForBlur.ts'
 import {

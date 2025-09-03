@@ -1,5 +1,5 @@
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
-import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
+import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
 import { getAge, nameCommaAge } from '@utils/ui/nameCommaAge.ts'
 import React, { useMemo } from 'react'

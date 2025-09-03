@@ -9,24 +9,17 @@ import isdef = TypeU.isdef
 
 
 /*
-  Хук, который занимается преобразованием абсолбтного значения в прогресс.
+  Хук, который занимается преобразованием абсолютного значения в прогресс.
   
   При изменении начального положения интервала / ширины интервала прогресс остаётся неизменным.
   Но при новом dValue значения будут считаться так,
-  что текущее абсолютное значение осталось неизменным, но относительно него пропорционально изменяются
+  что текущее абсолютное значение осталось неизменным,
+  но относительно него пропорционально изменяются
   начальное значение и количество progress/value
   Это происходит автоматически,
   т.к. хранится начальный прогресс (startProgress) и текущий прогресс (deltaProgress),
   которые не привязаны к value.
 */
-
-
-
-// dValue -> dProgress
-const dValueToDProgress = (dValue: number, len: number) => RangeU.map(
-  dValue, [0, len], [0, 100]
-)
-
 
 
 export type IntervalProps = { start: number, len: number }
@@ -35,19 +28,14 @@ export type UseDragProgressProps = {
   getIntervalProps: Getter<IntervalProps>
 }
 
-export type UpdateDragProgressProps = Pu<{
-  value: number
-  dValue: number
-  valueProgress: number
-  dValueProgress: number
-}>
-
 export const useIntervalProgress = ({
   getIntervalProps, // supports not stable
 }: UseDragProgressProps) => {
   
-  const [getIntervalStartProgress, setIntervalStartProgress] = useRefGetSet(0) // ..0..100..
-  const [getIntervalDeltaProgress, setIntervalDeltaProgress] = useRefGetSet(0) // ..0..100..
+  const [getIntervalStartProgress, setIntervalStartProgress] =
+    useRefGetSet(0) // ..0..100..
+  const [getIntervalDeltaProgress, setIntervalDeltaProgress] =
+    useRefGetSet(0) // ..0..100..
   
   
   const updateIntervalProgress = useAsCallback(({
@@ -66,7 +54,8 @@ export const useIntervalProgress = ({
     }
     
     const intervalDProgress = dValueToDProgress((dValue ?? 0), len)
-    const intervalDeltaProgress = getIntervalDeltaProgress() + intervalDProgress + (dValueProgress ?? 0)
+    const intervalDeltaProgress =
+      getIntervalDeltaProgress() + intervalDProgress + (dValueProgress ?? 0)
     setIntervalDeltaProgress(intervalDeltaProgress)
   })
   
@@ -77,4 +66,21 @@ export const useIntervalProgress = ({
   } as const
 }
 
+
+
+
+
+// dValue -> dProgress
+const dValueToDProgress = (dValue: number, len: number) => RangeU.map(
+  dValue, [0, len], [0, 100]
+)
+
+
+
+export type UpdateDragProgressProps = Pu<{
+  value: number
+  dValue: number
+  valueProgress: number
+  dValueProgress: number
+}>
 

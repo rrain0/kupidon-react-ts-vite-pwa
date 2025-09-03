@@ -8,7 +8,7 @@ import {
 } from 'src/configs/date-article/DateArticleCategoriesData.ts'
 import { DateArticleType, DateArticleTypesData } from 'src/configs/date-article/DateArticleTypesData.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params

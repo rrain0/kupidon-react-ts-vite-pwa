@@ -1,6 +1,6 @@
 import { formatDuration, intervalToDuration, Locale } from 'date-fns'
 import { enUS, ru } from 'date-fns/locale'
-import { Lang } from 'src/utils/lang/Lang'
+import { Lang } from 'src/utils/app/lang/Lang'
 
 /*
 parse: https://date-fns.org/v2.0.0-alpha.6/docs/parse

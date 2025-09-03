@@ -1,6 +1,6 @@
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { TypeU } from '@utils/base/TypeU.ts'
-import { Lang } from '@utils/lang/Lang.ts'
+import { Lang } from '@utils/app/lang/Lang.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import isobject = TypeU.isobject

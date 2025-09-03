@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import {
   GridViewShortProps,
   processGridViewShortProps,
-} from '@utils/react/short-props/props/processGridViewShortProps.ts'
+} from 'src/utils/libs/short-propsed/props/processGridViewShortProps.ts'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -32,6 +32,7 @@ export const Grid = React.memo((props: GridProps) => {
 })
 Grid.displayName = 'Grid'
 export default Grid
+
 
 
 const GridBox = styled.div({ display: 'grid' })

@@ -5,6 +5,7 @@ import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
 import commonAxiosConfig = AxiosConfig.commonAxiosConfig
 import { TypeU } from 'src/utils/base/TypeU.ts'
 import Callback1 = TypeU.Callback1
+import isdef = TypeU.isdef
 
 
 
@@ -22,7 +23,6 @@ export namespace FileU {
    */
   
   
-  import isdef = TypeU.isdef
   export const fetchToBlob = async (
     url: string,
     {

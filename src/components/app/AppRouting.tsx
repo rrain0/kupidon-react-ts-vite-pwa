@@ -11,7 +11,7 @@ import {
   RouteObject,
   RouterProvider, useLocation, useMatch,
 } from 'react-router'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import RouteBottomNavBar from 'src/components/widgets/NavBar/NavBar.routing.tsx'
 import { routingAutologin } from 'src/components/pages/Autologin/AutologinPage.routing.tsx'
 import { routingBowAndArrows } from 'src/components/pages/BowAndArrows/BowAndArrowsPage.routing.tsx'

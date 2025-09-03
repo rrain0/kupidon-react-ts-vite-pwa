@@ -2,6 +2,7 @@ import { FileU } from 'src/utils/file/FileU.ts'
 import getExtensionFromMimeType = FileU.mimeToExt
 
 
+
 export type DataUrl = {
   props: string[]
   data: string

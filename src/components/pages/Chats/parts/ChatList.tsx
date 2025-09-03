@@ -11,8 +11,8 @@ import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import Contents from 'src/components/elems/basic-elements/Contents.tsx'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Contents from '@libs/short-propsed/components/Contents.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import ChatListContextMenu, {
   ChatListContextMenuProps,
 } from 'src/components/pages/Chats/parts/ChatListContextMenu.tsx'

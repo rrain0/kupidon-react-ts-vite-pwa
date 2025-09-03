@@ -20,7 +20,7 @@ import {
   MediaOperation, newDefaultLocalMediaInArray,
   newDefaultMediaOperation,
 } from '@libs/media/Media.ts'
-import Contents from 'src/components/elems/basic-elements/Contents.tsx'
+import Contents from '@libs/short-propsed/components/Contents.tsx'
 import DashedBorder from 'src/components/elems/basic-elements/DashedBorder.tsx'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import {
@@ -37,7 +37,7 @@ import { RangeU } from '@utils/base/RangeU'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
 import { ImageU } from 'src/utils/file/ImageU.ts'
-import { StagedProgress } from '@utils/progress/StagedProgress.ts'
+import { StagedProgress } from '@utils/ui/StagedProgress.ts'
 import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'

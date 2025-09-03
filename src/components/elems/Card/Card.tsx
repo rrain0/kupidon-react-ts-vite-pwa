@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { CardS } from 'src/components/elems/Card/CardS.ts'
 import card3S = CardS.card3S
 

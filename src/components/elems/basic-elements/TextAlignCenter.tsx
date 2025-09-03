@@ -3,7 +3,7 @@ import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import React, { useImperativeHandle, useLayoutEffect } from 'react'
 import { TypeU } from '@utils/base/TypeU.ts'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Pu = TypeU.Pu
 import ClassNameProp = ReactU.ClassNameProp
 import StyleProp = ReactU.StyleProp

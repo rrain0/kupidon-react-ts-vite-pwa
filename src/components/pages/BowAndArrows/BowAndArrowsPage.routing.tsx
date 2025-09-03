@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { RouteObject } from 'react-router'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 
 const BowAndArrowsPage = React.lazy(
   () => import('src/components/pages/BowAndArrows/BowAndArrowsPage.tsx')

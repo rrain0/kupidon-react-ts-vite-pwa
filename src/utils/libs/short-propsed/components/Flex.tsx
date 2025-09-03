@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import {
   FlexViewShortProps,
   processFlexViewShortProps,
-} from '@utils/react/short-props/props/processFlexViewShortProps.ts'
+} from 'src/utils/libs/short-propsed/props/processFlexViewShortProps.ts'
 import clsx from 'clsx'
 import React from 'react'
 
@@ -32,6 +32,7 @@ export const Flex = React.memo((props: FlexProps) => {
 })
 Flex.displayName = 'Flex'
 export default Flex
+
 
 
 const FlexBox = styled.div({ display: 'flex' })

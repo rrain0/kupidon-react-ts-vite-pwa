@@ -1,7 +1,7 @@
 import { useLayoutEffect, useMemo } from 'react'
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import { Lang } from 'src/utils/lang/Lang.ts'
-import { useLangDetector } from 'src/utils/lang/useLangDetector.ts'
+import { Lang } from 'src/utils/app/lang/Lang.ts'
+import { useSystemLang } from 'src/utils/react/system/useSystemLang.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
 
@@ -10,7 +10,7 @@ import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand
 
 
 export const useLangSetup = () => {
-  const systemLangs = useLangDetector()
+  const systemLangs = useSystemLang()
   const matchedSystemLangs = useMemo(() => {
     return Lang.getMatchedAppLangs(systemLangs)
   }, [systemLangs])

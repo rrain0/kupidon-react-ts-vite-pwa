@@ -7,7 +7,7 @@ import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
 import { userPhotosAToMedias } from 'src/models/api/UserPhotoA.ts'
 import { MediaInArrayDUC } from '@libs/media/Media.ts'
-import Flex from 'src/components/elems/basic-elements/Flex.tsx'
+import Flex from '@libs/short-propsed/components/Flex.tsx'
 import {
   ProfileCardsStackListItem,
 } from 'src/components/widgets/ProfileCards/ProfileCardsStackList.tsx'

@@ -6,7 +6,7 @@ import NonEmptyArr = ArrayU.NonEmptyArr
 
 
 // returns an array of at least 1 language
-export const useLangDetector = (): NonEmptyArr<string> => {
+export const useSystemLang = (): NonEmptyArr<string> => {
   
   const [browserLangs, setBrowserLangs] = useState(navigator.languages)
   //const [browserLangs, setBrowserLangs] = useState(["ja-JP"])

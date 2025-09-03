@@ -6,7 +6,7 @@ import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useState } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import Contents from 'src/components/elems/basic-elements/Contents.tsx'
+import Contents from '@libs/short-propsed/components/Contents.tsx'
 import fixed = EmotionCommon.fixed
 import Children = ReactU.Children
 

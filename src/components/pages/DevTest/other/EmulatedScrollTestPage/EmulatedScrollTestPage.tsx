@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
-import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
+import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'

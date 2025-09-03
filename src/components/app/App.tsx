@@ -18,7 +18,7 @@ import LogLayer from 'src/components/components/LogLayer/LogLayer.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import WsListener from 'src/components/components/WsListener.tsx'
 import { useAppInstallationSetup } from '@utils/app/useAppInstallationSetup.ts'
-import { useLangSetup } from '@utils/lang/useLangSetup.ts'
+import { useLangSetup } from '@utils/app/lang/useLangSetup.ts'
 import { useThemeSetup } from '@utils/app/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars

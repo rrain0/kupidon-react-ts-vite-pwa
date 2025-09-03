@@ -1,4 +1,4 @@
-import { Lang } from 'src/utils/lang/Lang.ts'
+import { Lang } from 'src/utils/app/lang/Lang.ts'
 
 
 

@@ -3,7 +3,7 @@ import heic2any from 'heic2any'
 import { isSafari, isMobileSafari } from 'react-device-detect'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { TypeU } from 'src/utils/base/TypeU.ts'
-import { StagedProgress } from 'src/utils/progress/StagedProgress.ts'
+import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
 import CallbackParam = TypeU.Callback1
 import trimExtension = FileU.trimExtension
 
