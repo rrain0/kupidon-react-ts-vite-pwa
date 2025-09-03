@@ -11,21 +11,17 @@ import im13 from '@im/for-blur/photo_2024-12-14_12-58-43.webp'
 import im14 from '@im/for-blur/photo_2024-12-14_13-00-29.webp'
 
 
-export namespace Images {
-  
-  export const forBlur = [
-    im2,
-    im3,
-    im4,
-    im5,
-    im6,
-    im8,
-    im9,
-    im10,
-    im11,
-    im13,
-    im14,
-  ]
-  
-}
+export const imagesForBlur = [
+  im2,
+  im3,
+  im4,
+  im5,
+  im6,
+  im8,
+  im9,
+  im10,
+  im11,
+  im13,
+  im14,
+]
 

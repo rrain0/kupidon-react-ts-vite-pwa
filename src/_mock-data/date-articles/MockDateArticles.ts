@@ -1,4 +1,4 @@
-import { DateArticle } from 'src/ui-data/special/date-article/DateArticlesData.ts'
+import { DateArticle } from 'src/configs/date-article/DateArticlesData.ts'
 
 import noImage from '@im/ic/no-image.jpg'
 

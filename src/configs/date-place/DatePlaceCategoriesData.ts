@@ -1,4 +1,4 @@
-import { DatePlaceType } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
+import { DatePlaceType } from 'src/configs/date-place/DatePlaceTypeData.ts'
 
 
 // TODO Взять интерфейсы из статей и переделать потом

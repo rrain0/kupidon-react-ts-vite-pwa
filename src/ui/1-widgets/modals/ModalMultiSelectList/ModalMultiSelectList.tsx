@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React, { useState } from 'react'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
 import { Option } from 'src/ui-data/models/Option'
-import { Sizes } from 'src/ui-data/Sizes'
+import { sizes } from 'src/styles/sizes.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/ui-data/translations/ActionUiText'
 import { SelectItemS6 } from 'src/ui/0-elements/select-item/SelectItem/SelectItemS6.ts'
@@ -176,6 +176,6 @@ export default ModalMultiSelectList
 
 const selectItemsContainer = css`
   ${col};
-  padding-bottom: ${Sizes.pb}px;
-  gap: ${Sizes.g}px;
+  padding-bottom: ${sizes.pb}px;
+  gap: ${sizes.g}px;
 `

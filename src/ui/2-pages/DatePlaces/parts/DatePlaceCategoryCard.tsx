@@ -5,8 +5,8 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import {
   DatePlaceCategoriesData,
   DatePlaceCategoryType
-} from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
-import { DatePlaceTypeData } from 'src/ui-data/special/date-place/DatePlaceTypeData.ts'
+} from 'src/configs/date-place/DatePlaceCategoriesData.ts'
+import { DatePlaceTypeData } from 'src/configs/date-place/DatePlaceTypeData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import ImgSpark from 'src/ui/0-elements/ImgSpark/ImgSpark.tsx'

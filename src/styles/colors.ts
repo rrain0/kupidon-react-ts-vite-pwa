@@ -2,7 +2,7 @@
 
 
 
-export const Colors = {
+export const colors = {
   
   // зелёный, красный, синий, жёлтый, фиолетовый, бирюзовый
   test: ['#00ff0077', '#ff000077', '#0000ff77', '#ffff0077', '#ff00ff77', '#00ffff77'],

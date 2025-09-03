@@ -1,4 +1,4 @@
-import { DatePlace } from 'src/ui-data/special/date-place/DatePlacesData.ts'
+import { DatePlace } from 'src/configs/date-place/DatePlacesData.ts'
 
 import bezBokalaNetShagala from './bez-bokala-net-shagala-2f15ebe1-ed25-445e-866a-45b1c12bc14a.jpg'
 import ibisKitchen from './ibis-kitchen-30258560112733222_ea8f.jpg'

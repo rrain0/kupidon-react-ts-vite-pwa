@@ -5,8 +5,8 @@ import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import {
   DateArticleCategoriesData,
   DateArticleCategoryName,
-} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
-import { DateArticleType, DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+} from 'src/configs/date-article/DateArticleCategoriesData.ts'
+import { DateArticleType, DateArticleTypesData } from 'src/configs/date-article/DateArticleTypesData.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import AppNavigate from 'src/ui/components/app-router/AppNavigate.tsx'

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { DatePlaceCategoriesData } from 'src/ui-data/special/date-place/DatePlaceCategoriesData.ts'
+import { DatePlaceCategoriesData } from 'src/configs/date-place/DatePlaceCategoriesData.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'
 import Grid from 'src/ui/0-elements/basic-elements/Grid.tsx'

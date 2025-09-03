@@ -3,7 +3,7 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { DateArticleItem } from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+import { DateArticleItem } from 'src/configs/date-article/DateArticleCategoriesData.ts'
 import AppLink from 'src/ui/components/app-router/AppLink.tsx'
 import Children = ReactU.Children
 import RootRoute = AppRoutes.RootRoute

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { Option } from 'src/ui-data/models/Option'
-import { Sizes } from 'src/ui-data/Sizes'
+import { sizes } from 'src/styles/sizes.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { BottomSheetBasicS6 } from 'src/ui/1-widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/ui/1-widgets/modals/DialogButtons'
@@ -129,16 +129,16 @@ export default ModalTileSelect
 const ItemsBox = styled.div`
   ${rowWrap};
   justify-content: space-around;
-  gap: ${Sizes.g}px;
+  gap: ${sizes.g}px;
 `
 
 const SearchStub = styled.div`
   align-self: center;
-  padding: ${Sizes.g}px;
+  padding: ${sizes.g}px;
 `
 
 const Tile = React.memo(styled.div<Pu<{ isSelected: boolean }>>`
-  padding: 4px ${Sizes.g}px;
+  padding: 4px ${sizes.g}px;
   border-radius: 999999px;
   ${Txt.s16Thin};
   ${p => p.isSelected && `

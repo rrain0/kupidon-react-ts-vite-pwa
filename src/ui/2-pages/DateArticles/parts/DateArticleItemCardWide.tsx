@@ -5,7 +5,7 @@ import React from 'react'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import {
   DateArticleItem,
-} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
+} from 'src/configs/date-article/DateArticleCategoriesData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Card from 'src/ui/0-elements/Card/Card.tsx'

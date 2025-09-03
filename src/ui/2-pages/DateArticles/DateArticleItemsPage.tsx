@@ -4,11 +4,11 @@ import React, { useMemo } from 'react'
 import {
   DateArticleCategoryItem, DateArticleTypeItem,
   DateArticleCategoriesData,
-} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
-import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
+} from 'src/configs/date-article/DateArticleCategoriesData.ts'
+import { DateArticlesData } from 'src/configs/date-article/DateArticlesData.ts'
 import {
   DateArticleTypesData,
-} from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+} from 'src/configs/date-article/DateArticleTypesData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
 import Gap from 'src/ui/0-elements/basic-elements/Gap.tsx'

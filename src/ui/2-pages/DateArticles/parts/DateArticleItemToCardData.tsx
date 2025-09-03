@@ -5,11 +5,11 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import {
   DateArticleItem,
   DateArticleCategoriesData,
-} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
-import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
+} from 'src/configs/date-article/DateArticleCategoriesData.ts'
+import { DateArticlesData } from 'src/configs/date-article/DateArticlesData.ts'
 import {
   DateArticleTypesData,
-} from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+} from 'src/configs/date-article/DateArticleTypesData.ts'
 import assertNever = TypeU.assertNever
 import Pu = TypeU.Pu
 

@@ -11,7 +11,7 @@ import { TypeU } from 'src/utils/common/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
-import { simpleGradBgCss } from 'src/ui-data/bg/simpleGradBg'
+import { simpleGradBgCss } from 'src/styles/bg/simpleGradBg'
 import assertNever = TypeU.assertNever
 
 

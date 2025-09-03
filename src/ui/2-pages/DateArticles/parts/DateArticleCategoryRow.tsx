@@ -5,9 +5,9 @@ import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import {
   DateArticleCategoriesData,
   DateArticleCategoryName,
-} from 'src/ui-data/special/date-article/DateArticleCategoriesData.ts'
-import { DateArticlesData } from 'src/ui-data/special/date-article/DateArticlesData.ts'
-import { DateArticleTypesData } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+} from 'src/configs/date-article/DateArticleCategoriesData.ts'
+import { DateArticlesData } from 'src/configs/date-article/DateArticlesData.ts'
+import { DateArticleTypesData } from 'src/configs/date-article/DateArticleTypesData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import HeaderArrow from 'src/ui/0-elements/HeaderArrow/HeaderArrow.tsx'
 import { HeaderArrowS } from 'src/ui/0-elements/HeaderArrow/HeaderArrowS.ts'

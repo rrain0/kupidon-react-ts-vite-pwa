@@ -16,7 +16,7 @@ import { ViewU } from '@utils/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
-import { Images } from 'src/ui-data/Images'
+import { imagesForBlur } from 'src/styles/images/imagesForBlur.ts'
 import {
   getMediaUiState,
   MediaInArrayDownloadable,
@@ -142,8 +142,8 @@ export const ProfileCards = React.memo((props: ProfileCardsProps) => {
   
   const placeholderIm = useMemo(() => {
     if (photosCnt || !isInited) return undefined
-    //return Images.forBlur[0]
-    return ArrayU.randomElem(Images.forBlur)
+    //return imagesForBlur[0]
+    return ArrayU.randomElem(imagesForBlur)
   }, [photosCnt, isInited])
   
   

@@ -1,4 +1,4 @@
-import { DateArticleType } from 'src/ui-data/special/date-article/DateArticleTypesData.ts'
+import { DateArticleType } from 'src/configs/date-article/DateArticleTypesData.ts'
 
 
 
