@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { UiValues } from '@libs/ui-text/UiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 
 
 const staticUiValues = {

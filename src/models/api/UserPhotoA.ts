@@ -2,7 +2,7 @@ import { ArrayU } from '@utils/common/ArrayU.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray, newDefaultRemoteMediaInArray,
-} from '@mini-libs/media/Media.ts'
+} from '@libs/media/Media.ts'
 import { profilePhotosCntMax } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import * as uuid from 'uuid'
 

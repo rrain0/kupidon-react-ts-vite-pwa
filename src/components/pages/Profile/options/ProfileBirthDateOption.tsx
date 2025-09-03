@@ -6,8 +6,8 @@ import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useO
 import { PlaceholderUiText } from 'src/locales/translations/PlaceholderUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
-import { FormFieldWrapRenderProps } from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { FormFieldWrapRenderProps } from '@libs/form-data/components/FormFieldWrap.tsx'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { DateU } from 'src/utils/date/DateU'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import toEmptyAttr = TypeU.toEmptyAttr

@@ -1,12 +1,12 @@
 import { ObjectU } from '@utils/common/ObjectU.ts'
-import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
+import { AdditionalStates } from '@libs/widget-style-6/WidgetEntities.ts'
+import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'

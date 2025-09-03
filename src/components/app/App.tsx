@@ -2,7 +2,7 @@ import { css, Global, ThemeProvider } from '@emotion/react'
 import { useAppTheme } from '@utils/app/useAppTheme.ts'
 import { useSearchParamsUrlListener } from '@utils/url/useSearchParamsUrlListener.ts'
 import React from 'react'
-import { widget7Test } from '@mini-libs/widget-style-7/WidgetTest.ts'
+import { widget7Test } from '@libs/widget-style-7/WidgetTest.ts'
 import UseSwUpdate from 'src/components/components/UseSwUpdate/UseSwUpdate.tsx'
 import RequestItemsLiveUpdate from 'src/components/components/live-updates/RequestItemsLiveUpdate.tsx'
 import SendLiveOnlineStatus from 'src/components/components/live-updates/SendLiveOnlineStatus.tsx'
@@ -24,9 +24,9 @@ import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 import {
   testWordsTreeGenerator
-} from '@mini-libs/widget-style-6/transform/CamelCaseWordsTree.ts'
-import { WidgetStyle6NewTest } from '@mini-libs/widget-style-6/WidgetStyleTransformTestNew.ts'
-import { WidgetStyle6Test } from '@mini-libs/widget-style-6/WidgetStyleTransformTest.ts'
+} from '@libs/widget-style-6/transform/CamelCaseWordsTree.ts'
+import { WidgetStyle6NewTest } from '@libs/widget-style-6/WidgetStyleTransformTestNew.ts'
+import { WidgetStyle6Test } from '@libs/widget-style-6/WidgetStyleTransformTest.ts'
 
 
 

@@ -1,4 +1,4 @@
-import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
+import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { ChatA } from 'src/models/api/ChatA.ts'
 import { ChatMessageA } from 'src/models/api/ChatMessageA.ts'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'

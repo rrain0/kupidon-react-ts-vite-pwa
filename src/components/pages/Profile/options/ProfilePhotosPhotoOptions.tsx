@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import {
   MediaInArrayDUC,
   newDefaultEmptyLocalMediaInArray,
-} from '@mini-libs/media/Media.ts'
+} from '@libs/media/Media.ts'
 import Contents from 'src/components/elems/basic-elements/Contents.tsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import ArrowRefreshCwIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowRefreshCwIc.tsx'
@@ -12,7 +12,7 @@ import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { TypeU } from 'src/utils/common/TypeU.ts'
 import { FileU } from 'src/utils/file/FileU.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React from 'react'
 import Dropzone from 'react-dropzone'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
@@ -31,7 +31,7 @@ import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
 import Callback1 = TypeU.Callback1
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 
 
 

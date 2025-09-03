@@ -30,7 +30,7 @@ import { routingProfile } from 'src/components/pages/Profile/ProfilePage.routing
 import { routingSettings } from 'src/components/pages/Settings/SettingsPage.routing.tsx'
 import { routingSignup } from 'src/components/pages/Signup/SignupPage.routing.tsx'
 import { routingDevTest } from 'src/components/pages/DevTest/DevTestPage.routing.tsx'
-import { RouteBuilder } from '@mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import { routingTest } from 'src/components/pages/Test/TestPage.routing.tsx'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import RootRoute = AppRoutes.RootRoute

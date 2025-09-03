@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios'
-import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
+import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA, UserStrangerA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
 import { TypeU } from '@utils/common/TypeU.ts'

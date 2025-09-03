@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import DayIc from 'src/components/elems/icons/SvgIcons/pack/ui/DayIc.tsx'
 import DayNightIc from 'src/components/elems/icons/SvgIcons/pack/ui/DayNightIc.tsx'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'

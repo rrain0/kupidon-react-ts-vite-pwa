@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import React, { useMemo } from 'react'
-import { emptyUiText, UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { emptyUiText, UiTextValues } from '@libs/ui-text/UiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import {
   DateArticleItem,
   DateArticleCategoriesData,

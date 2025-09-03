@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { useAsCallback } from '@utils/react-state/useAsCallback.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
-import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
+import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'
+import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
@@ -25,7 +25,7 @@ import Modal from 'src/components/components/modal/Modal.tsx'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 import rowC = EmotionCommon.rowC
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import UseEnterExitTransition from 'src/components/components/animations/UseEnterExitTransition.tsx'
 
 

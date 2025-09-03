@@ -1,7 +1,7 @@
 import { TypeU } from '@utils/common/TypeU.ts'
 import React, { useMemo } from 'react'
-import { emptyUiText } from 'src/mini-libs/ui-text/UiText.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { emptyUiText } from '@libs/ui-text/UiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import {
   DateArticleItem,
   DateArticleCategoriesData,

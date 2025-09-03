@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import React from 'react'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { UiTextValues } from '@libs/ui-text/UiText.ts'
 import {
   DateArticleItem,
 } from 'src/configs/date-article/DateArticleCategoriesData.ts'

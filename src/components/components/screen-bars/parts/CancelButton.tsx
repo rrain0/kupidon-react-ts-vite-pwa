@@ -1,6 +1,6 @@
 import { TypeU } from '@utils/common/TypeU.ts'
 import React from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'

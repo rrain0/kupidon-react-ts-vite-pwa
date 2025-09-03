@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import AvaContent, { AvaContentProps } from 'src/components/widgets/avatars/Ava/AvaContent.tsx'

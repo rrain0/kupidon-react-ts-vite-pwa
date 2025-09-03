@@ -1,4 +1,4 @@
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
+import { WidgetStyle } from '@libs/widget-style/WidgetStyle'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import Elem = WidgetStyle.Elem
 import CssPseudo = WidgetStyle.CssPseudo

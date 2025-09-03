@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import {
   DateArticleCategoriesData,
   DateArticleCategoryName,

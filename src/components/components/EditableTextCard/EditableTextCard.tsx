@@ -13,7 +13,7 @@ import Pu = TypeU.Pu
 import PencilWrite2Ic from 'src/components/elems/icons/SvgIcons/pack/ui/PencilWrite2Ic.tsx'
 import Txt = EmotionCommon.Txt
 import Callback = TypeU.Callback
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
 
 

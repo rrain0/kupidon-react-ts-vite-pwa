@@ -14,9 +14,9 @@ import DateArticleCategoryRow from 'src/components/pages/DateArticles/parts/Date
 import DatePlaceCategoriesList from 'src/components/pages/DatePlaces/parts/DatePlaceCategoriesList.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 
 
 

@@ -1,4 +1,4 @@
-import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
+import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserStrangerA } from 'src/models/api/UserA.ts'
 import { UserPairA } from 'src/models/api/UserPairA.ts'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'

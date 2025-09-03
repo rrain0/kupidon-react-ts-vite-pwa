@@ -19,7 +19,7 @@ import {
   MediaInArrayDUC,
   MediaOperation, newDefaultLocalMediaInArray,
   newDefaultMediaOperation,
-} from '@mini-libs/media/Media.ts'
+} from '@libs/media/Media.ts'
 import Contents from 'src/components/elems/basic-elements/Contents.tsx'
 import DashedBorder from 'src/components/elems/basic-elements/DashedBorder.tsx'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'

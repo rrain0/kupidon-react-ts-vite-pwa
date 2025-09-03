@@ -4,7 +4,7 @@ import {
   RouteObject,
 } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import CheckAuth from 'src/components/components/app-router/CheckAuth.tsx'

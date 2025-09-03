@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import {
   DatePlaceCategoriesData,
   DatePlaceCategoryType

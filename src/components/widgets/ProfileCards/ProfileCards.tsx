@@ -15,13 +15,13 @@ import { getViewProps } from '@utils/view/ViewProps.ts'
 import { ViewU } from '@utils/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elements/AnimatedDiv.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from '@libs/ui-text/useUiText'
 import { imagesForBlur } from 'src/styles/images/imagesForBlur.ts'
 import {
   getMediaUiState,
   MediaInArrayDownloadable,
-} from '@mini-libs/media/Media.ts'
-import MediaUiState from '@mini-libs/media/MediaUiState.tsx'
+} from '@libs/media/Media.ts'
+import MediaUiState from '@libs/media/MediaUiState.tsx'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
@@ -43,7 +43,7 @@ import gridStackC = EmotionCommon.gridStackC
 import PictureIc from 'src/components/elems/icons/SvgIcons/pack/ui/PictureIc.tsx'
 import gridC = EmotionCommon.gridC
 import absTlwh = EmotionCommon.absTlwh
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full

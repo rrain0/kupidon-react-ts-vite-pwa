@@ -3,7 +3,7 @@ import ModalTextarea from 'src/components/widgets/modals/ModalTextarea/ModalText
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import EditableTextCard from 'src/components/components/EditableTextCard/EditableTextCard'
 
 

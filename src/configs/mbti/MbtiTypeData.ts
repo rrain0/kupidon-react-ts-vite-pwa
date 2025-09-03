@@ -49,7 +49,7 @@ import showmanWithBg from '@im/mbti-type/showman-with-bg.svg'
 
 import clown from '@im/mbti-type/clown.svg'
 import clownWithBg from '@im/mbti-type/clown-with-bg.svg'
-import { UiTextValues } from '@mini-libs/ui-text/UiText.ts'
+import { UiTextValues } from '@libs/ui-text/UiText.ts'
 
 
 

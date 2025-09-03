@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from '@libs/ui-text/useUiText'
 import { Option } from 'src/models/ui/Option.ts'
 import ClockGradIc from 'src/components/elems/icons/GradSvgIcons/pack/ui/ClockGradIc.tsx'
 import {

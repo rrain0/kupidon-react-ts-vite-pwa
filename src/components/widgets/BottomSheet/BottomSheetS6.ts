@@ -1,10 +1,10 @@
-import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { WidgetAttr, WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
+import { WidgetAttr, WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import fixed = WidgetStyleCommon.fixed

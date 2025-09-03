@@ -4,7 +4,7 @@ import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { routingSettingsAccount } from 'src/components/pages/AccountSettings/AccountSettingsPage.routing.tsx'
 import { routingSettingsApplication } from 'src/components/pages/ApplicationSettings/ApplicationSettingsPage.routing.tsx'
 import { routingSettingsPwdChange } from 'src/components/pages/PwdChange/PwdChangePage.routing.tsx'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 

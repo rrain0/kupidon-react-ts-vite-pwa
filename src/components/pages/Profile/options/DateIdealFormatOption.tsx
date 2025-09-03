@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from '@libs/ui-text/useUiText'
 import { Option } from 'src/models/ui/Option.ts'
 import Couple2GradIc from 'src/components/elems/icons/GradSvgIcons/pack/special/Couple2GradIc.tsx'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'

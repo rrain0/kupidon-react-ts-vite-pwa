@@ -1,14 +1,14 @@
-import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import { AdditionalStates } from '@libs/widget-style-6/WidgetEntities.ts'
 import {
   WidgetElem,
-} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
+} from '@libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
+import { CommonStates } from '@libs/widget-style-6/WidgetCommonEntities.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
-import { WidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { RippleS6 } from 'src/components/elems/Ripple/RippleS6.ts'
 import resetButton = WidgetStyleCommon.resetButton

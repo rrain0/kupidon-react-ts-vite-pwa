@@ -15,7 +15,7 @@ import BackButton from 'src/components/components/screen-bars/parts/BackButton.t
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import ObjectUnionFix = TypeU.ObjectUnionFix
 

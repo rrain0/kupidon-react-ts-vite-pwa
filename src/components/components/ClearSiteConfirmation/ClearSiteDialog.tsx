@@ -11,7 +11,7 @@ import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { clearSiteData } from '@utils/js/clearSiteData.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { useBool } from 'src/utils/react-state/useBool.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import fixed = EmotionCommon.fixed

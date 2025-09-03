@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { RouteObject, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
+import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/configs/date-place/DatePlaceCategoriesData.ts'
 import { DatePlaceType, DatePlaceTypeData } from 'src/configs/date-place/DatePlaceTypeData.ts'

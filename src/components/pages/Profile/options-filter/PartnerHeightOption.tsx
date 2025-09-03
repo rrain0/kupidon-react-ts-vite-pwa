@@ -12,7 +12,7 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/components/widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import NumRangeNullable = RangeU.NumRangeNullable

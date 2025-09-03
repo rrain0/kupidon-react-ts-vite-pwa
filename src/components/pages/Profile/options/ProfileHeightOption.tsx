@@ -6,7 +6,7 @@ import ModalSlider from 'src/components/widgets/modals/ModalSlider/ModalSlider'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { RangeU } from 'src/utils/common/RangeU'
 import NumRange = RangeU.NumRange
 

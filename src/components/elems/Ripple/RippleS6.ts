@@ -1,13 +1,13 @@
-import { AdditionalProps } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
+import { AdditionalProps } from '@libs/widget-style-6/WidgetEntities.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
 import {
   WidgetElem, WidgetProp, WidgetPropValueType,
-} from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
-import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
+} from '@libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget } from '@libs/widget-style-6/Widget.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import absTrbl = WidgetStyleCommon.absTrbl
 

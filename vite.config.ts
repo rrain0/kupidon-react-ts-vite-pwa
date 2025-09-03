@@ -91,13 +91,13 @@ export default defineConfig(({ command, mode }) => {
         
         '@utils': path.resolve(__dirname, './src/utils'),
         '@res': path.resolve(__dirname, './src/res'),
-        '@mini-libs': path.resolve(__dirname, './src/mini-libs'),
+        '@libs': path.resolve(__dirname, './src/utils/libs'),
         
         '@im': path.resolve(__dirname, './src/assets/im'),
         '@ic': path.resolve(__dirname, './src/assets/ic'),
         '@vid': path.resolve(__dirname, './src/assets/vid'),
         
-        '@animated': path.resolve(__dirname, './src/mini-libs/animated'),
+        '@animated': path.resolve(__dirname, './src/utils/libs/animated'),
       },
     },
     

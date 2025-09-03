@@ -69,13 +69,13 @@
       
       "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
-      "@mini-libs/*": ["src/mini-libs/*"],
+      "@libs/*": ["src/utils/libs/*"],
       
       "@im/*": ["src/assets/im/*"],
       "@ic/*": ["src/assets/ic/*"],
       "@vid/*": ["src/assets/vid/*"],
       
-      "@animated/*": ["src/mini-libs/animated/*"]
+      "@animated/*": ["src/utils/libs/animated/*"]
     }
   }
 }

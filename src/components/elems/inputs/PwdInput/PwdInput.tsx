@@ -9,7 +9,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import flexC = EmotionCommon.flexC
-import { AppWidgetStyle } from 'mini-libs/widget-style-6/WidgetStyle'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import evPreventDefault = PointerU.evPreventDefault
 
 

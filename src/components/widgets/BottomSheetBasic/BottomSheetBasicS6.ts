@@ -1,11 +1,11 @@
-import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget } from '@libs/widget-style-6/Widget.ts'
+import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle,
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { BottomSheetS6 } from 'src/components/widgets/BottomSheet/BottomSheetS6.ts'
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'

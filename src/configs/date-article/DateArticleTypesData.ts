@@ -1,4 +1,4 @@
-import { UiText } from '@mini-libs/ui-text/UiText.ts'
+import { UiText } from '@libs/ui-text/UiText.ts'
 
 import noImage from '@im/ic/no-image.jpg'
 

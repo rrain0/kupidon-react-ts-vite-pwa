@@ -1,4 +1,4 @@
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React from 'react'
 import DateIdealDateOption from 'src/components/pages/Profile/options/DateIdealDateOption'
 import DateIdealFormatOption from 'src/components/pages/Profile/options/DateIdealFormatOption'
@@ -36,9 +36,9 @@ import ProfilePhotos from 'src/components/pages/Profile/Profile/ProfilePhotos.ts
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
-import { useFormData } from 'src/mini-libs/form-data/hooks/useFormData.ts'
-import { FormProps } from 'src/mini-libs/form-data/hooks/useFormDerivedData.ts'
-import FormFieldWrap from 'src/mini-libs/form-data/components/FormFieldWrap.tsx'
+import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
+import { FormProps } from '@libs/form-data/hooks/useFormDerivedData.ts'
+import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues

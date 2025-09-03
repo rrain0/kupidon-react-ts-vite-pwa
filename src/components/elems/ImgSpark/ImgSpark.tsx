@@ -4,12 +4,12 @@ import React, {
   useImperativeHandle,
   useRef, useState,
 } from 'react'
-import MediaDownloader from '@mini-libs/media/download/MediaDownloader.tsx'
+import MediaDownloader from '@libs/media/download/MediaDownloader.tsx'
 import {
   getMediaUiState,
   MediaDownloadable,
   urlToMedia,
-} from '@mini-libs/media/Media.ts'
+} from '@libs/media/Media.ts'
 import DocumentErrorIc from 'src/components/elems/icons/SvgIcons/pack/ui/DocumentErrorIc.tsx'
 import { ImgSparkS6 } from 'src/components/elems/ImgSpark/ImgSparkS6.ts'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'

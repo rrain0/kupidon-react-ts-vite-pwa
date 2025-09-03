@@ -1,9 +1,9 @@
 import { GenderA } from 'src/models/api/GenderA.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { DateTime } from '@utils/date/DateTime.ts'
-import { ValidationU } from 'src/mini-libs/form-data/core/ValidationU.ts'
-import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { ValidationU } from '@libs/form-data/core/ValidationU.ts'
+import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
+import { UiTextValues } from '@libs/ui-text/UiText.ts'
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
 import isValidEmail = ValidationU.isValidEmail
 import Validators = ValidationCore.Validators

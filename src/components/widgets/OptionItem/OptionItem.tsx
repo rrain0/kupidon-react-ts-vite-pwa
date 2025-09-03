@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'

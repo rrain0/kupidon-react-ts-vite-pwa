@@ -8,7 +8,7 @@ import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import ModalSingleSelectList
   from 'src/components/widgets/modals/ModalSingleSelectList/ModalSingleSelectList'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 
 
 

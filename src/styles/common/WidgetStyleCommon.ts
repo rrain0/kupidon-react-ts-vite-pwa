@@ -1,4 +1,4 @@
-import { WidgetStyle, WidgetStyleObj } from '@mini-libs/widget-style-6/WidgetStyle.ts'
+import { WidgetStyle, WidgetStyleObj } from '@libs/widget-style-6/WidgetStyle.ts'
 
 
 

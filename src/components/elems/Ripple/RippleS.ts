@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
+import { WidgetStyle } from '@libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { RippleS6 } from 'src/components/elems/Ripple/RippleS6.ts'

@@ -1,7 +1,7 @@
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'

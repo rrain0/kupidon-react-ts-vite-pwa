@@ -1,4 +1,4 @@
-import { UiValues } from '@mini-libs/ui-text/UiText.ts'
+import { UiValues } from '@libs/ui-text/UiText.ts'
 import { AllThemeNamesType } from 'src/styles/themes/ThemesCollection.ts'
 
 

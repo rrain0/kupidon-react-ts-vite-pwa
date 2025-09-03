@@ -1,11 +1,11 @@
 import { ObjectU } from '@utils/common/ObjectU.ts'
-import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget } from '@libs/widget-style-6/Widget.ts'
+import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle, WidgetStyleObj,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter

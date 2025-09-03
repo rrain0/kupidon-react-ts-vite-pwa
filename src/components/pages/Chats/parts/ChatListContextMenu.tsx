@@ -1,7 +1,7 @@
 import { TypeU } from '@utils/common/TypeU.ts'
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useEffect } from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import Gap from 'src/components/elems/basic-elements/Gap.tsx'
 import Grid from 'src/components/elems/basic-elements/Grid.tsx'

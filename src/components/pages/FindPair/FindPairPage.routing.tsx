@@ -2,11 +2,11 @@ import { AsyncU } from '@utils/common/AsyncU.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UsersApi } from 'src/services/api/requests/UsersApi.ts'
-import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
+import { useFormApiRequest } from '@libs/api/useFormApiRequest.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'
 import { userPhotosAToMedias } from 'src/models/api/UserPhotoA.ts'
-import { MediaInArrayDUC } from '@mini-libs/media/Media.ts'
+import { MediaInArrayDUC } from '@libs/media/Media.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import {
   ProfileCardsStackListItem,

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { WidgetStyle } from 'src/mini-libs/widget-style/WidgetStyle'
+import { WidgetStyle } from '@libs/widget-style/WidgetStyle'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { Hdrs } from 'src/components/elems/basic-elements/Hdrs'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'

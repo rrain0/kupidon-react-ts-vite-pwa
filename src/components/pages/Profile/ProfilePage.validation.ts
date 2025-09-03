@@ -2,7 +2,7 @@ import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray,
-} from '@mini-libs/media/Media.ts'
+} from '@libs/media/Media.ts'
 import { EducationOptionValues } from 'src/components/pages/Profile/options/ProfileEducationOption.tsx'
 import { GenderOptionValues } from 'src/components/pages/Profile/options/ProfileGenderOption.tsx'
 import {
@@ -12,8 +12,8 @@ import { JobOptionValues } from 'src/components/pages/Profile/options/ProfileJob
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
 import { ArrayU } from 'src/utils/common/ArrayU.ts'
 import { DateTime } from '@utils/date/DateTime.ts'
-import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
-import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
+import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
+import { UiTextValues } from '@libs/ui-text/UiText.ts'
 import * as uuid from 'uuid'
 import Validators = ValidationCore.Validators
 import PartialFailureData = ValidationCore.PartialFailureData

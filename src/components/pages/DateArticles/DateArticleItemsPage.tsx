@@ -21,7 +21,7 @@ import PageContentLayout from 'src/components/components/page/PageContentLayout.
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/components/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import assertNever = TypeU.assertNever
 import col = EmotionCommon.col

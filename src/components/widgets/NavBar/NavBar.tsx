@@ -16,7 +16,7 @@ import ProfileGradIc from 'src/components/elems/icons/GradSvgIcons/pack/ui/Profi
 import AppNavLink from 'src/components/components/app-router/AppNavLink.tsx'
 import UseOverlayUrl from 'src/components/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import GearOutlinedIc from 'src/components/elems/icons/SvgIcons/pack/ui/GearOutlinedIc.tsx'
 import RootRoute = AppRoutes.RootRoute

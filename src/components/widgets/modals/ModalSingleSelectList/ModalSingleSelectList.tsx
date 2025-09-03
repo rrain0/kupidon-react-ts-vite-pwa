@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useCallback, useState } from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from '@libs/ui-text/useUiText'
 import { Option } from 'src/models/ui/Option.ts'
 import { sizes } from 'src/styles/sizes.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'

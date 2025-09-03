@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText'
+import { useUiValues } from '@libs/ui-text/useUiText'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText'
 import Button from 'src/components/elems/buttons/Button/Button'

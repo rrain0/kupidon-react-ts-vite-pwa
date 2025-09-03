@@ -3,9 +3,9 @@ import {
   AppWidgetStyle,
   combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'src/mini-libs/widget-style-6/WidgetStyle'
-import { AttachRootElemParams, Widget } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+} from '@libs/widget-style-6/WidgetStyle'
+import { AttachRootElemParams, Widget } from '@libs/widget-style-6/Widget.ts'
+import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import { GradSvgIconS6 } from 'src/components/elems/icons/GradSvgIcons/GradSvgIconS6.ts'

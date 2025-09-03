@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import React from 'react'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { ChatMessageContentA } from 'src/models/api/ChatMessageA.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'

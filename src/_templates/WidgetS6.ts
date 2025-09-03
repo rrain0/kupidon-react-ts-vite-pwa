@@ -1,12 +1,12 @@
-import { AttachRootElemParams, Widget, WidgetState } from 'src/mini-libs/widget-style-6/Widget.ts'
-import { CommonStates } from 'src/mini-libs/widget-style-6/WidgetCommonEntities.ts'
-import { AdditionalStates } from 'src/mini-libs/widget-style-6/WidgetEntities.ts'
-import { WidgetElem } from 'src/mini-libs/widget-style-6/WidgetEntity.ts'
+import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
+import { CommonStates } from '@libs/widget-style-6/WidgetCommonEntities.ts'
+import { AdditionalStates } from '@libs/widget-style-6/WidgetEntities.ts'
+import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
   WidgetStyle,
-} from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+} from '@libs/widget-style-6/WidgetStyle.ts'
 
 
 

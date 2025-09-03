@@ -1,12 +1,12 @@
 import { DateU } from '@utils/date/DateU.ts'
-import { ApiResponseUtils } from '@mini-libs/api/ApiResponseUtils.ts'
+import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
 import {
   MediaInArrayDUC,
   MediaOperation,
   newDefaultMediaOperation,
-} from '@mini-libs/media/Media.ts'
+} from '@libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { ArrayU } from 'src/utils/common/ArrayU.ts'

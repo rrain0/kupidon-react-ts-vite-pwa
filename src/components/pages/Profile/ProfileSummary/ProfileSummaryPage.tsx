@@ -1,17 +1,17 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { UiValues } from '@mini-libs/ui-text/UiText.ts'
+import { UiValues } from '@libs/ui-text/UiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import {
   getMediaUiState,
   MediaDownloadable, newDefaultEmptyRemoteMedia,
   newDefaultRemoteMediaDownloadable,
-} from '@mini-libs/media/Media.ts'
-import MediaDownloader from '@mini-libs/media/download/MediaDownloader.tsx'
-import MediaUiState from '@mini-libs/media/MediaUiState.tsx'
+} from '@libs/media/Media.ts'
+import MediaDownloader from '@libs/media/download/MediaDownloader.tsx'
+import MediaUiState from '@libs/media/MediaUiState.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
@@ -33,7 +33,7 @@ import { ProfileSummaryPageParts }
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import UseOverlayUrl from 'src/components/components/UseOverlayUrl/UseOverlayUrl.tsx'
 import { DateU } from '@utils/date/DateU.ts'
 import { MockData } from 'src/_mock-data/MockData.ts'

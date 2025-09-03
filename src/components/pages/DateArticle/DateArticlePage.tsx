@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
+import { UiValues } from '@libs/ui-text/UiText.ts'
+import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { DateArticle } from 'src/configs/date-article/DateArticlesData.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
@@ -14,7 +14,7 @@ import PageContentLayout from 'src/components/components/page/PageContentLayout.
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import BottomFloatingBar from 'src/components/components/screen-bars/BottomFloatingBar.tsx'
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
-import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
+import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
 import parse from 'html-react-parser'
