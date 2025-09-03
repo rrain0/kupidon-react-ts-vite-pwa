@@ -1,4 +1,4 @@
-import { NavBarPlace } from 'src/ui/1-widgets/NavBar/NavBar.tsx'
+import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { create } from 'zustand'
 import { StateCreator } from 'zustand/vanilla'
 

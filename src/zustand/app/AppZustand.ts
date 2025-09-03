@@ -2,7 +2,7 @@ import { ArrayU } from '@utils/common/ArrayU.ts'
 import { Lang } from '@utils/lang/Lang.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { DefaultTheme } from 'src/styles/themes/ThemesCollection.ts'
-import { PageState } from 'src/ui/components/UsePageLifecycle.tsx'
+import { PageState } from 'src/components/components/UsePageLifecycle.tsx'
 import { create } from 'zustand'
 import NonEmptyArr = ArrayU.NonEmptyArr
 

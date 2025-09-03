@@ -9,7 +9,7 @@ import React, {
   useEffect, useMemo,
   useState,
 } from 'react'
-import Input from 'src/ui/0-elements/inputs/Input/Input.tsx'
+import Input from 'src/components/elems/inputs/Input/Input.tsx'
 import { ValidationActions } from 'src/mini-libs/form-data/core/ValidationActions.ts'
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors

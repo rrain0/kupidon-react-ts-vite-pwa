@@ -7,7 +7,7 @@ import { TypeU } from '@utils/common/TypeU.ts'
 import {
   useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from 'src/mini-libs/animated/animatedUpdaters.ts'
-import Flex from 'src/ui/0-elements/basic-elements/Flex.tsx'
+import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import Pu = TypeU.Pu
 
 

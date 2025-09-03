@@ -1,6 +1,6 @@
 import React from 'react'
-import Contents from 'src/ui/0-elements/basic-elements/Contents.tsx'
-import AutoLangSettings from 'src/ui/components/AutoLangSettings/AutoLangSettings.tsx'
+import Contents from 'src/components/elems/basic-elements/Contents.tsx'
+import AutoLangSettings from 'src/components/components/AutoLangSettings/AutoLangSettings.tsx'
 import AppRouting from 'src/components/app/AppRouting.tsx'
 
 

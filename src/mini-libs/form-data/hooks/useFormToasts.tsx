@@ -5,7 +5,7 @@ import { TypeU } from '@utils/common/TypeU.ts'
 import { ValidationActions } from 'src/mini-libs/form-data/core/ValidationActions.ts'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { UiText, UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
-import { ToastMsg, ToastMsgData, useToasts } from 'src/ui/components/Toasts/useToasts.tsx'
+import { ToastMsg, ToastMsgData, useToasts } from 'src/components/components/Toasts/useToasts.tsx'
 import Failure = ValidationCore.Failure
 import Values = ValidationCore.Values
 import awaitDelay = ValidationActions.awaitDelay
