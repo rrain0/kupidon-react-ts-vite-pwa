@@ -1,4 +1,4 @@
-import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder'
+import { RouteBuilder } from '@mini-libs/route-builder/RouteBuilder.tsx'
 import buildRoute = RouteBuilder.buildRoute
 import buildPath = RouteBuilder.buildPath
 import path = RouteBuilder.path

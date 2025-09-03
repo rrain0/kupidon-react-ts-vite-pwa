@@ -4,9 +4,9 @@ import { UserCurrentA, UserStrangerA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
 import { TypeU } from '@utils/common/TypeU.ts'
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
-import { FileU } from 'src/utils/file/FileU'
-import { AxiosConfig } from '../AxiosConfig.ts'
-import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
+import { FileU } from '@utils/file/FileU.ts'
+import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
+import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
 import ax = AxiosConfig.ax
 import handleResponse = ApiResponseUtils.handleResponse

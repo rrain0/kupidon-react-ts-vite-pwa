@@ -1,7 +1,7 @@
 import { AsyncU } from '@utils/common/AsyncU.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
-import { UsersApi } from 'src/api/requests/UsersApi.ts'
+import { UsersApi } from 'src/services/api/requests/UsersApi.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { RouteObject } from 'react-router'

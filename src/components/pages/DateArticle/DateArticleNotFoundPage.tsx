@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { UiValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'

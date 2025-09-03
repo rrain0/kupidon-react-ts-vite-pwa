@@ -8,7 +8,7 @@ import {
   newDefaultMediaOperation,
 } from '@mini-libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
-import { UserApi } from 'src/api/requests/UserApi.ts'
+import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { ArrayU } from 'src/utils/common/ArrayU.ts'
 import { AsyncU } from 'src/utils/common/AsyncU.ts'
 import { TypeU } from 'src/utils/common/TypeU.ts'

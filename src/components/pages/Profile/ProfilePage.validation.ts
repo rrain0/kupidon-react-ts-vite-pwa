@@ -1,4 +1,4 @@
-import { UserApi } from 'src/api/requests/UserApi.ts'
+import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray,

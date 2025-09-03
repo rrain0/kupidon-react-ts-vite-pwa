@@ -1,7 +1,7 @@
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import { useLocation } from 'react-router'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import RootRoute = AppRoutes.RootRoute

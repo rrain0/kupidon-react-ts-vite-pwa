@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { UiValues } from '@mini-libs/ui-text/UiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import {

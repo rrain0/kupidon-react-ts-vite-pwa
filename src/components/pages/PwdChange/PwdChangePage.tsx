@@ -1,6 +1,6 @@
 import { DateU } from '@utils/date/DateU.ts'
 import React, { useCallback, useEffect } from 'react'
-import { UserApi } from 'src/api/requests/UserApi.ts'
+import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { useFormApiRequest } from '@mini-libs/api/useFormApiRequest.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'

@@ -1,7 +1,7 @@
 import { TypeU } from '@utils/common/TypeU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DateArticleItem } from 'src/configs/date-article/DateArticleCategoriesData.ts'
 import AppLink from 'src/components/components/app-router/AppLink.tsx'

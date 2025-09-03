@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { useUiValues } from 'src/mini-libs/ui-text/useUiText.ts'
 import { DatePlaceCategoriesData, DatePlaceCategoryData }
   from 'src/configs/date-place/DatePlaceCategoriesData.ts'

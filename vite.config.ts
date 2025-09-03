@@ -89,7 +89,7 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         'src': path.resolve(__dirname, './src'),
         
-        '@util': path.resolve(__dirname, './src/util'),
+        '@utils': path.resolve(__dirname, './src/utils'),
         '@res': path.resolve(__dirname, './src/res'),
         '@mini-libs': path.resolve(__dirname, './src/mini-libs'),
         

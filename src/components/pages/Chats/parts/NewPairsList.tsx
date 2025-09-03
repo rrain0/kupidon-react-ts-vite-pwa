@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'

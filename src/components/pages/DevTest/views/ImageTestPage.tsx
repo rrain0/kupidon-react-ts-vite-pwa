@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { RangeU } from '@utils/common/RangeU.ts'
 import React, { useCallback, useState } from 'react'
-import { ApiV1Routes } from 'src/api/ApiV1Routes.ts'
+import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
 import { AppWidgetStyle } from 'src/mini-libs/widget-style-6/WidgetStyle.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import ImgSpark from 'src/components/elems/ImgSpark/ImgSpark.tsx'

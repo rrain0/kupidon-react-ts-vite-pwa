@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { RouteObject, useSearchParams } from 'react-router'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import {
   DateArticleCategoriesData,

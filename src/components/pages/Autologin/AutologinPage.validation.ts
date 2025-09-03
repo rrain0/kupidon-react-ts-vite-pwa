@@ -1,4 +1,4 @@
-import { AuthApi } from 'src/api/requests/AuthApi'
+import { AuthApi } from 'src/services/api/requests/AuthApi'
 import { ValidationCore } from 'src/mini-libs/form-data/core/ValidationCore.ts'
 import { UiTextValues } from 'src/mini-libs/ui-text/UiText.ts'
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'

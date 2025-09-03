@@ -1,5 +1,5 @@
 import { RouteObject } from 'react-router'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'
 import { routingSettingsAccount } from 'src/components/pages/AccountSettings/AccountSettingsPage.routing.tsx'
 import { routingSettingsApplication } from 'src/components/pages/ApplicationSettings/ApplicationSettingsPage.routing.tsx'

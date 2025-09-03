@@ -25,7 +25,7 @@ import { routingFindPair } from 'src/components/pages/FindPair/FindPairPage.rout
 import { routingLikedMe } from 'src/components/pages/LikedMe/LikedMePage.routing.tsx'
 import { routingLogin } from 'src/components/pages/Login/LoginPage.routing.tsx'
 import React from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { routingProfile } from 'src/components/pages/Profile/ProfilePage.routing.tsx'
 import { routingSettings } from 'src/components/pages/Settings/SettingsPage.routing.tsx'
 import { routingSignup } from 'src/components/pages/Signup/SignupPage.routing.tsx'

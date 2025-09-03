@@ -1,6 +1,6 @@
 import * as datefns from 'date-fns'
 import React, { useEffect, useState } from 'react'
-import { ChatMessagesApi } from 'src/api/requests/ChatMessagesApi.ts'
+import { ChatMessagesApi } from 'src/services/api/requests/ChatMessagesApi.ts'
 import { useApiRequest } from '@mini-libs/api/useApiRequest.ts'
 import { ChatMessageA } from 'src/models/api/ChatMessageA.ts'
 import { ChatMessageUi } from 'src/components/pages/Chat/parts/ChatMessage.tsx'

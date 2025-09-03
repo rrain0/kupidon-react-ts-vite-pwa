@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { RouteObject, useMatch } from 'react-router'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from 'src/mini-libs/route-builder/RouteBuilder.tsx'
 import { DatePlacesData } from 'src/configs/date-place/DatePlacesData.ts'
 import { clearUnknownPathEnding } from '@utils/react/ReactRouterUtils.tsx'

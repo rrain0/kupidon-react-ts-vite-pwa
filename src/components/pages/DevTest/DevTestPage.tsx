@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import React, { useState } from 'react'
-import { AppRoutes } from 'src/app-routes/AppRoutes.ts'
+import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import Gap from 'src/components/elems/basic-elements/Gap.tsx'
 import Grid from 'src/components/elems/basic-elements/Grid.tsx'
