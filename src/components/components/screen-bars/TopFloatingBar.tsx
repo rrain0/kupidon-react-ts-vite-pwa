@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import Grid from 'src/components/elems/basic-elements/Grid.tsx'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
 import Pu = TypeU.Pu
 import isdef = TypeU.isdef

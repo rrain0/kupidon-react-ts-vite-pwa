@@ -1,6 +1,6 @@
 import React from 'react'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Callback = TypeU.Callback
 import Pu = TypeU.Pu
 

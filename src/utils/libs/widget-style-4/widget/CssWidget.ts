@@ -1,5 +1,5 @@
-import { ObjectU } from '@utils/common/ObjectU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { CssAttr } from '@libs/widget-style-4/css/CssAttr.ts'
 import { CssAttrEnum } from '@libs/widget-style-4/css/CssAttrEnum.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'

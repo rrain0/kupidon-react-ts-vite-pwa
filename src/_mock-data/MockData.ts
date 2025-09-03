@@ -1,4 +1,4 @@
-import { Env } from '@utils/app/Env.ts'
+import { Env } from 'src/configs/Env.ts'
 import avaChan1 from '@im/mock/ava chan d6535947482554bd0571ba485e4467d0.jpg'
 import avaChan2 from '@im/mock/ava top chan 1cc31157191cfe279575176e2db4ff81.jpg'
 import avaChan3 from '@im/mock/ava korathink x KXBRIGU - SENTENIAL 3.png'

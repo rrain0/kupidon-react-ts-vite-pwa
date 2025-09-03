@@ -1,9 +1,9 @@
-import { AsyncU } from '@utils/common/AsyncU.ts'
-import { useWasGesture } from '@utils/pointer/useWasGesture.ts'
-import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { AsyncU } from '@utils/base/AsyncU.ts'
+import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
+import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { RippleAction, RippleProps } from 'src/components/elems/Ripple/Ripple.tsx'
-import { TypeU } from 'src/utils/common/TypeU'
+import { TypeU } from '@utils/base/TypeU'
 import Pu = TypeU.Pu
 import delayAction = AsyncU.delayAction
 

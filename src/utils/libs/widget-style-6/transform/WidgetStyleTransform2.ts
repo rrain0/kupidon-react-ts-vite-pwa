@@ -1,4 +1,4 @@
-import { StringU } from '@utils/common/StringU.ts'
+import { StringU } from 'src/utils/base/StringU.ts'
 import { FlatStyleTf1 } from '@libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { WidgetProp, WidgetTransformer } from '@libs/widget-style-6/WidgetEntity.ts'
 import uncapitalize = StringU.uncapitalize

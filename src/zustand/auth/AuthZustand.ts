@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { UserCurrentA } from 'src/models/api/UserA.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import React from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'

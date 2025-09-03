@@ -1,5 +1,5 @@
 import { css, Global, ThemeProvider } from '@emotion/react'
-import { useAppTheme } from '@utils/app/useAppTheme.ts'
+import { useAppTheme } from '@utils/app/theme/useAppTheme.ts'
 import { useSearchParamsUrlListener } from '@utils/url/useSearchParamsUrlListener.ts'
 import React from 'react'
 import { widget7Test } from '@libs/widget-style-7/WidgetTest.ts'
@@ -19,7 +19,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import WsListener from 'src/components/components/WsListener.tsx'
 import { useAppInstallationSetup } from '@utils/app/useAppInstallationSetup.ts'
 import { useLangSetup } from '@utils/lang/useLangSetup.ts'
-import { useThemeSetup } from '@utils/theme/useThemeSetup.ts'
+import { useThemeSetup } from '@utils/app/theme/useThemeSetup.ts'
 import { isMobile } from 'react-device-detect'
 import noScrollbars = EmotionCommon.noScrollbars
 import {

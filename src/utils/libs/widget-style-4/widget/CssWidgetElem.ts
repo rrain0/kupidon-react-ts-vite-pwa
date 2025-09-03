@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { CssElem, StateToValue } from '@libs/widget-style-4/css/CssElem.ts'
 import { CssProp } from '@libs/widget-style-4/css/CssProp.ts'
 import { CssState } from '@libs/widget-style-4/css/CssState.ts'

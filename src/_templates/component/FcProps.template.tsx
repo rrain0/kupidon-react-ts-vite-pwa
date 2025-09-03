@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle

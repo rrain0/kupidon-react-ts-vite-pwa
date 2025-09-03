@@ -3,11 +3,11 @@ import { createSpring, createSpringAnimation } from '@animated/SpringAnimation.t
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import styled from '@emotion/styled'
 import { Spring2DAnimationData, useItemDrag } from '@utils/animated/item-drag/useItemDrag.ts'
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { useNoTouchAction } from '@utils/pointer/useNoTouchAction.ts'
-import { useArray } from '@utils/react-state/useArray.ts'
-import { useAsCallback } from '@utils/react-state/useAsCallback.ts'
-import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { useNoTouchAction } from '@utils/gestures/pointer/useNoTouchAction.ts'
+import { useArray } from '@utils/react/state/useArray.ts'
+import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
+import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
@@ -19,7 +19,7 @@ import ChatListContextMenu, {
 import ChatListToItem from 'src/components/pages/Chats/parts/ChatListToItem.tsx'
 import { ChatListItemWidgetData } from 'src/components/pages/Chats/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/components/components/page/offsetToPageContentPaddings.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import isundef = TypeU.isundef
 import isdef = TypeU.isdef

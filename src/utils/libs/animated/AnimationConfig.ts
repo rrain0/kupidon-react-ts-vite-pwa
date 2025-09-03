@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Callback1 = TypeU.Callback1
 import Pu = TypeU.Pu
 

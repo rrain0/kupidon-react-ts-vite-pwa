@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
 import { FileU } from '@utils/file/FileU.ts'
 import noop = TypeU.noop

@@ -1,4 +1,4 @@
-import { RangeU } from '@utils/common/RangeU.ts'
+import { RangeU } from 'src/utils/base/RangeU.ts'
 import React from 'react'
 import DocumentErrorIc from 'src/components/elems/icons/SvgIcons/pack/ui/DocumentErrorIc.tsx'
 import PictureIc from 'src/components/elems/icons/SvgIcons/pack/ui/PictureIc.tsx'
@@ -7,7 +7,7 @@ import { ImageParts } from 'src/components/elems/ImageParts.tsx'
 import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle
 

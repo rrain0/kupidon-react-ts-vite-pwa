@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
 import Mapper = TypeU.Mapper
 import Callback1 = TypeU.Callback1

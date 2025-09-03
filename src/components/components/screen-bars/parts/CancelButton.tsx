@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'

@@ -6,7 +6,7 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { useResizeToSpring } from '@utils/view/useResizeToSpring.ts'
-import { useBool } from '@utils/react-state/useBool.ts'
+import { useBool } from '@utils/react/state/useBool.ts'
 
 
 /*

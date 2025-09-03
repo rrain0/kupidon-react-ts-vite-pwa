@@ -1,4 +1,4 @@
-import { ArrayU } from '@utils/common/ArrayU.ts'
+import { ArrayU } from 'src/utils/base/ArrayU.ts'
 import React, { useEffect, useState } from 'react'
 import {
   mergeMediaDownloadData
@@ -8,7 +8,7 @@ import {
 } from '@libs/media/download/useMediaArrayDownloader.ts'
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 
 

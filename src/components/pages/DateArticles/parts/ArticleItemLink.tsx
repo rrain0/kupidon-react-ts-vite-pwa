@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'

@@ -1,5 +1,5 @@
-import { MathU } from 'src/utils/common/MathU.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { MathU } from 'src/utils/base/MathU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { ReactU } from 'src/utils/react/ReactU.ts'
 import mod = MathU.mod
 import rf3 = MathU.rf3

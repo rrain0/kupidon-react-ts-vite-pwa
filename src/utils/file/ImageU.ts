@@ -2,8 +2,8 @@ import imageCompression, { Options } from 'browser-image-compression'
 import heic2any from 'heic2any'
 import { isSafari, isMobileSafari } from 'react-device-detect'
 import { FileU } from 'src/utils/file/FileU.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
-import { StageProgress } from 'src/utils/progress/StageProgress.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
+import { StagedProgress } from 'src/utils/progress/StagedProgress.ts'
 import CallbackParam = TypeU.Callback1
 import trimExtension = FileU.trimExtension
 
@@ -24,7 +24,7 @@ export namespace ImageU {
     //console.log('imgFile',imgFile)
     
     const ctrl = abortCtrl
-    const progress = new StageProgress()
+    const progress = new StagedProgress()
     progress.onProgress = p => onProgress?.(p)
     
     

@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React, { useMemo } from 'react'
 import { emptyUiText } from '@libs/ui-text/UiText.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'

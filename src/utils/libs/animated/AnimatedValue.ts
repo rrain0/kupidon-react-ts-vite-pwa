@@ -1,5 +1,5 @@
-import { AsyncU } from '@utils/common/AsyncU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { AsyncU } from 'src/utils/base/AsyncU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { useLiveShortDuration } from '@utils/date/useLiveShortDuration.ts'
 import { useShortDurationUiText } from '@utils/date/useShortDurationUiText.ts'
 import React, { useMemo } from 'react'

@@ -5,7 +5,7 @@ import { useContainerScrollState } from 'src/components/widgets/Scrollbar/useCon
 import { css } from '@emotion/react'
 import Scrollbar from 'src/components/widgets/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import col = EmotionCommon.col
 import gridStackC = EmotionCommon.gridStackC

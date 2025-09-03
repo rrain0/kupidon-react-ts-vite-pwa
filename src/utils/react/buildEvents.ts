@@ -1,4 +1,4 @@
-import { ObjectU } from 'src/utils/common/ObjectU'
+import { ObjectU } from 'src/utils/base/ObjectU'
 import ObjectValuesType = ObjectU.ObjectValuesType
 import ObjectKeysType = ObjectU.ObjectKeysType
 

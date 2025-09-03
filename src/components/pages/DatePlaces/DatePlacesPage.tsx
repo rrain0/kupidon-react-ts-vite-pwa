@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React, { useMemo } from 'react'
 import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/configs/date-place/DatePlaceCategoriesData.ts'

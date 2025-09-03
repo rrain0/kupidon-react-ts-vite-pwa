@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { ArrayU } from 'src/utils/common/ArrayU.ts'
-import { Utils } from 'src/utils/common/Utils.ts'
+import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { Utils } from 'src/utils/base/Utils.ts'
 import { useBrowserMinimumVersionZustand } from 'src/zustand/app/BrowserMinimumVersionZustand.ts'
 import versionToNumArr = Utils.versionToNumArr
 

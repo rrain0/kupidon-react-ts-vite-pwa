@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { useClick } from '@utils/pointer/useClick.ts'
-import { useLongPress } from '@utils/pointer/useLongPress.ts'
+import { useClick } from '@utils/gestures/pointer/useClick.ts'
+import { useLongPress } from '@utils/gestures/pointer/useLongPress.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import {
   FlexViewShortProps,
@@ -11,7 +11,7 @@ import clsx from 'clsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/components/elems/Ripple/Ripple.tsx'
 import UseRipple from 'src/components/elems/Ripple/UseRipple.tsx'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import combineProps = ReactU.combineProps
 import HtmlEmptyAttr = TypeU.HtmlEmptyAttr

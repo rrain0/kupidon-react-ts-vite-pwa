@@ -1,10 +1,10 @@
 import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { useAppTheme } from '@utils/app/useAppTheme.ts'
-import { useNoTouchAction } from '@utils/pointer/useNoTouchAction.ts'
-import { useWasGesture } from '@utils/pointer/useWasGesture.ts'
-import { useAsCallback } from '@utils/react-state/useAsCallback.ts'
+import { useAppTheme } from '@utils/app/theme/useAppTheme.ts'
+import { useNoTouchAction } from '@utils/gestures/pointer/useNoTouchAction.ts'
+import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
+import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
 import React, {
   useCallback,
   useEffect,
@@ -31,18 +31,18 @@ import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/components/pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ArrayU } from 'src/utils/common/ArrayU.ts'
-import { AsyncU } from 'src/utils/common/AsyncU.ts'
-import { RangeU } from 'src/utils/common/RangeU'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { AsyncU } from '@utils/base/AsyncU.ts'
+import { RangeU } from '@utils/base/RangeU'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
 import { ImageU } from 'src/utils/file/ImageU.ts'
-import { StageProgress } from '@utils/progress/StageProgress.ts'
-import { useAsRefGet } from 'src/utils/react-state/useAsRefGet'
-import { useNoSelect } from '@utils/pointer/useNoSelect.ts'
+import { StagedProgress } from '@utils/progress/StagedProgress.ts'
+import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
+import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import flexC = EmotionCommon.flexC
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
@@ -625,7 +625,7 @@ const onFilesSelectedBuilder = (
         
         ;(async() => {
           try {
-            const progress = new StageProgress(2, [95, 5])
+            const progress = new StagedProgress(2, [95, 5])
             const onProgress = (p = 0) => {
               progress.set(p)
               //console.log('progress',progress.value)

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { RangeU } from '@utils/common/RangeU.ts'
+import { RangeU } from '@utils/base/RangeU.ts'
 import React, { useCallback, useState } from 'react'
 import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'

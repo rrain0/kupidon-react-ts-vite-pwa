@@ -1,5 +1,5 @@
-import { StringU } from '@utils/common/StringU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { StringU } from 'src/utils/base/StringU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { isStyleValue, StyleValue, WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
 import isobject = TypeU.isobject
 import isArray = TypeU.isArray

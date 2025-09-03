@@ -1,6 +1,6 @@
 import React from 'react'
-import { TypeU } from 'src/utils/common/TypeU.ts'
-import { useRefGetSet } from 'src/utils/react-state/useRefGetSet.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
+import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import Callback1 = TypeU.Callback1
 import Setter = TypeU.Setter
 import Getter = TypeU.Getter

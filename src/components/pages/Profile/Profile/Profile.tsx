@@ -35,7 +35,7 @@ import ProfilePageTabHeader from 'src/components/pages/Profile/ProfilePageTabHea
 import ProfilePhotos from 'src/components/pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { FormProps } from '@libs/form-data/hooks/useFormDerivedData.ts'
 import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'

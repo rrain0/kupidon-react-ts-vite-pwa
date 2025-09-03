@@ -6,8 +6,8 @@ import {
   getLoopedCarouselProps,
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { RangeU } from '@utils/common/RangeU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { RangeU } from '@utils/base/RangeU.ts'
 import { useInterval2 } from '@utils/react/useInterval2.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'

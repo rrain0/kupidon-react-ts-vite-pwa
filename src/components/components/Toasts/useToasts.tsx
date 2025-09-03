@@ -2,7 +2,7 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { asUiText, UiText } from '@libs/ui-text/UiText.ts'
 import { ToastBody, ToastType } from 'src/components/components/Toasts/ToastBody.tsx'
 import falsy = TypeU.falsy

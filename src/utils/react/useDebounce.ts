@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { TypeU } from 'src/utils/common/TypeU.ts'
-import { useAsCallback } from 'src/utils/react-state/useAsCallback.ts'
-import { useRefGetSet } from 'src/utils/react-state/useRefGetSet.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
+import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
+import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import Callback = TypeU.Callback
 
 

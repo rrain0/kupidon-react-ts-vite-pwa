@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { UserToUserApi } from 'src/services/api/requests/UserToUserApi.ts'
 import { useApiRequest } from '@libs/api/useApiRequest.ts'

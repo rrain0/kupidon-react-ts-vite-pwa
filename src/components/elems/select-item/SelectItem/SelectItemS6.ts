@@ -1,4 +1,4 @@
-import { ObjectU } from '@utils/common/ObjectU.ts'
+import { ObjectU } from '@utils/base/ObjectU.ts'
 import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
 import { AdditionalStates } from '@libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'

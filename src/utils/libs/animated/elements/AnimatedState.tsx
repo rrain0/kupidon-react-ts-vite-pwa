@@ -1,10 +1,10 @@
-import { ObjectU } from '@utils/common/ObjectU.ts'
+import { ObjectU } from 'src/utils/base/ObjectU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React, { useMemo, useState } from 'react'
 import {
   AnimatedComponentState,
 } from '@libs/animated/AnimatedProps.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import {
   useUpdateComponentStateUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'

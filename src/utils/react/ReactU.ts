@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
-import { ArrayU } from 'src/utils/common/ArrayU.ts'
-import { ObjectU } from 'src/utils/common/ObjectU.ts'
-import { StringU } from 'src/utils/common/StringU.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { StringU } from 'src/utils/base/StringU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import falsy = TypeU.falsy
 import RecordPu = TypeU.RecordPu

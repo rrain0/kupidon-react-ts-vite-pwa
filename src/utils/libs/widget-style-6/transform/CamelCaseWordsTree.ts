@@ -1,5 +1,5 @@
-import { StringU } from '@utils/common/StringU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { StringU } from 'src/utils/base/StringU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { CommonProps } from '@libs/widget-style-6/WidgetCommonEntities.ts'
 import RecordRo = TypeU.RecordRo
 import camelCaseToWords = StringU.camelCaseToWords

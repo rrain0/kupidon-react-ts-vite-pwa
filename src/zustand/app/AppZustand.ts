@@ -1,4 +1,4 @@
-import { ArrayU } from '@utils/common/ArrayU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
 import { Lang } from '@utils/lang/Lang.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { DefaultTheme } from 'src/styles/themes/ThemesCollection.ts'

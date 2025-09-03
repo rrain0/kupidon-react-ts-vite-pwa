@@ -1,5 +1,5 @@
 import { Lang } from '@utils/lang/Lang.ts'
-import { ArrayU } from '@utils/common/ArrayU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
 import NonEmptyArr = ArrayU.NonEmptyArr
 
 

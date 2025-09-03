@@ -12,7 +12,7 @@
 
 
 
-import { Env } from '@utils/app/Env.ts'
+import { Env } from 'src/configs/Env.ts'
 
 
 

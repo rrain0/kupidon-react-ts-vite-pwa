@@ -3,7 +3,7 @@ import { CssU } from '@utils/css/CssU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import CssColor = CssU.CssColor
 import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'

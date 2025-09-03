@@ -3,7 +3,7 @@ import React, {
   useRef,
 } from 'react'
 import { AnimatedElemStyle, AnimatedElemAttrs } from '@libs/animated/AnimatedProps.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import {
   useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'

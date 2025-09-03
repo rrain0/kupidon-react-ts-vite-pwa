@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Env } from '@utils/app/Env.ts'
+import { Env } from 'src/configs/Env.ts'
 import { SwChannel } from '@utils/service-worker/SwChannel.ts'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
@@ -19,7 +19,7 @@ import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import col = EmotionCommon.col
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ClearSiteDialog, {

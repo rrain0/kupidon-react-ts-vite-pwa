@@ -1,6 +1,6 @@
-import { MathU } from 'src/utils/common/MathU.ts'
-import { RangeU } from 'src/utils/common/RangeU.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { MathU } from 'src/utils/base/MathU.ts'
+import { RangeU } from 'src/utils/base/RangeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Setter = TypeU.Setter
 import rf3 = MathU.rf3
 

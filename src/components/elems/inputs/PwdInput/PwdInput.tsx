@@ -1,4 +1,4 @@
-import { PointerU } from '@utils/pointer/PointerU.ts'
+import { PointerU } from '@utils/gestures/pointer/PointerU.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'
 import EyeCrossedOutIc from 'src/components/elems/icons/SvgIcons/pack/ui/EyeCrossedOutIc.tsx'

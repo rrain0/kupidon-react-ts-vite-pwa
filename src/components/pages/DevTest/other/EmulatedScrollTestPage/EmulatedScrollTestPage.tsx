@@ -7,10 +7,10 @@ import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React from 'react'
 import { useEmulatedScroll } from 'src/components/pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { RangeU } from '@utils/common/RangeU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { RangeU } from '@utils/base/RangeU.ts'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import NumRange = RangeU.NumRange
 import arrOfNumbers = ArrayU.arrOfNumbers
 

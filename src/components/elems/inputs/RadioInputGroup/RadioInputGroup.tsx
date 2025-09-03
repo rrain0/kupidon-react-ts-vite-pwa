@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import {

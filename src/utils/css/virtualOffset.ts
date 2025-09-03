@@ -1,4 +1,4 @@
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { CssU } from 'src/utils/css/CssU.ts'
 import CssLength = CssU.CssLength
 import Pu = TypeU.Pu

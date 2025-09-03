@@ -6,7 +6,7 @@ import Axios, {
 } from 'axios'
 import axiosRetry, { IAxiosRetryConfig } from 'axios-retry'
 import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { getAccessTokenData } from 'src/models/api/AccessTokenA.ts'
 import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import ValueOrMapper = TypeU.ValueOrMapper

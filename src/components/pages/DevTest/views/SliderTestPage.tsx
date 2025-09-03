@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React, { useCallback, useEffect, useState } from 'react'
 import Slider from 'src/components/widgets/Slider/Slider.tsx'
 import BottomFloatingBar from 'src/components/components/screen-bars/BottomFloatingBar.tsx'
-import { RangeU } from '@utils/common/RangeU.ts'
+import { RangeU } from '@utils/base/RangeU.ts'
 import NumRange = RangeU.NumRange
 import PageContentLayout from 'src/components/components/page/PageContentLayout'
 import PageLayout from 'src/components/components/page/PageLayout'

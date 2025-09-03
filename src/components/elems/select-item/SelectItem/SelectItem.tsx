@@ -5,7 +5,7 @@ import PencilWrite2Ic from 'src/components/elems/icons/SvgIcons/pack/ui/PencilWr
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import { SelectItemS6 } from 'src/components/elems/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter from 'src/components/elems/select-item/SelectMeter/SelectMeter'
-import { TypeU } from 'src/utils/common/TypeU'
+import { TypeU } from '@utils/base/TypeU'
 import { useCssWhRef } from 'src/utils/view/useCssWhRef'
 import Pu = TypeU.Pu
 import Callback = TypeU.Callback

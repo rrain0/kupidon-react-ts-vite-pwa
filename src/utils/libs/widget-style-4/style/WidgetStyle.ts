@@ -1,6 +1,6 @@
 
-import { StringU } from '@utils/common/StringU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { StringU } from 'src/utils/base/StringU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { CssElem } from '@libs/widget-style-4/css/CssElem.ts'
 import isnumber = TypeU.isnumber
 import isobject = TypeU.isobject

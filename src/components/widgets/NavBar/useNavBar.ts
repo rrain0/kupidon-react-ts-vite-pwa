@@ -1,5 +1,5 @@
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/components/widgets/NavBar/navStack.ts'

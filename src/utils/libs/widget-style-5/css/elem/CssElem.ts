@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { CssEnumAttr } from '@libs/widget-style-5/css/attr/CssEnumAttr.ts'
 import { CssVarProp } from '@libs/widget-style-5/css/prop/CssVarProp.ts'
 import { CssState, ElemStateValue } from '@libs/widget-style-5/css/CssState.ts'

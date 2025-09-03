@@ -8,7 +8,7 @@ import {
   differenceInWeeks, differenceInYears,
 } from 'date-fns'
 import { useEffect, useState } from 'react'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { JsU } from 'src/utils/js/JsU.ts'
 import Pu = TypeU.Pu
 import isdef = TypeU.isdef

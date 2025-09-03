@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React, { useState } from 'react'
 import GiftBoxGradIc from 'src/components/elems/icons/GradSvgIcons/pack/special/GiftBoxGradIc.tsx'
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput.tsx'

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import React, { useMemo } from 'react'

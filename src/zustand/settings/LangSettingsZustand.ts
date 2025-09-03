@@ -1,5 +1,5 @@
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { Lang } from '@utils/lang/Lang.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'

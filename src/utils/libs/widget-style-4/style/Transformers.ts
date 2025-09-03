@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { Transformers } from '@libs/widget-style-4/style/WidgetStyle.ts'
 import isnumber = TypeU.isnumber
 

@@ -3,7 +3,7 @@ import axiosRetry from 'axios-retry'
 import mime from 'mime'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
 import commonAxiosConfig = AxiosConfig.commonAxiosConfig
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Callback1 = TypeU.Callback1
 
 

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { UiValues } from '@libs/ui-text/UiText.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { RangeU } from 'src/utils/common/RangeU.ts'
+import { RangeU } from 'src/utils/base/RangeU.ts'
 import { Duration } from 'src/utils/date/useLiveShortDuration.ts'
 
 

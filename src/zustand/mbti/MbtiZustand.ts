@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { createSelector } from 'reselect'
 import { MbtiType } from 'src/models/MbtiType.ts'
 import { create } from 'zustand'

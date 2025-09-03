@@ -10,7 +10,7 @@ import ArrowRefreshCwIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowR
 import DownloadIc from 'src/components/elems/icons/SvgIcons/pack/ui/DownloadIc.tsx'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React from 'react'

@@ -8,8 +8,8 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
-import { useBool } from '@utils/react-state/useBool.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
+import { useBool } from '@utils/react/state/useBool.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import { ViewU } from '@utils/view/ViewU.ts'
@@ -33,8 +33,8 @@ import { GenderOptionValues } from 'src/components/pages/Profile/options/Profile
 import ProfileCardsFullInfo from 'src/components/widgets/ProfileCards/ProfileCardsFullInfo.tsx'
 import ProfileCardsInfoOverlay from 'src/components/widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ArrayU } from 'src/utils/common/ArrayU'
-import { RangeU } from 'src/utils/common/RangeU'
+import { ArrayU } from '@utils/base/ArrayU'
+import { RangeU } from '@utils/base/RangeU'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC
 import fullMinMax = EmotionCommon.fullMinMax

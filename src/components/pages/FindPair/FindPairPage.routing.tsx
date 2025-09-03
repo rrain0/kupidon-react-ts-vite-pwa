@@ -1,4 +1,4 @@
-import { AsyncU } from '@utils/common/AsyncU.ts'
+import { AsyncU } from '@utils/base/AsyncU.ts'
 import React, { Suspense, useCallback, useEffect, useState } from 'react'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { UsersApi } from 'src/services/api/requests/UsersApi.ts'

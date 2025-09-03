@@ -1,5 +1,5 @@
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { useTimeout } from '@utils/react/useTimeout.ts'
 import { useEffect, useState } from 'react'
 import { getMediaUiState, MediaDownloadable } from '@libs/media/Media.ts'

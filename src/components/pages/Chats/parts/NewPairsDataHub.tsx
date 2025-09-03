@@ -1,5 +1,5 @@
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React, { useCallback, useEffect, useState } from 'react'
 import { UsersApi } from 'src/services/api/requests/UsersApi.ts'
 import { useFormApiRequest } from '@libs/api/useFormApiRequest.ts'

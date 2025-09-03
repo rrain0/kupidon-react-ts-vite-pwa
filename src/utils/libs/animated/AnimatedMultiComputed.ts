@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import {
   AnimatedProperty, AnimatedPropsFromValues, AnimatedPropsToValues,

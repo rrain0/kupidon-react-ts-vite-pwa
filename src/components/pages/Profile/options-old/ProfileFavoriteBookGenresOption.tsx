@@ -9,7 +9,7 @@ import { OptionUiText } from 'src/locales/translations/OptionUiText.ts'
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { ArrayU } from 'src/utils/common/ArrayU'
+import { ArrayU } from '@utils/base/ArrayU'
 
 
 

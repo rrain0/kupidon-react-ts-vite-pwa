@@ -1,5 +1,5 @@
 import React from 'react'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import PartialDefaults = TypeU.PartialDefaults
 import HtmlDataAttrs = TypeU.HtmlDataAttrs
 

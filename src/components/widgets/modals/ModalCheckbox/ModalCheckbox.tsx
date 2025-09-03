@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { ReactU } from '@utils/react/ReactU.ts'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import React from 'react'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import CheckboxInput from 'src/components/elems/inputs/CheckboxInput/CheckboxInput.tsx'

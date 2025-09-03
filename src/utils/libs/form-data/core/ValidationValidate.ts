@@ -1,4 +1,4 @@
-import { ObjectU } from '@utils/common/ObjectU.ts'
+import { ObjectU } from 'src/utils/base/ObjectU.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import Validators = ValidationCore.Validators
 import Failure = ValidationCore.Failure

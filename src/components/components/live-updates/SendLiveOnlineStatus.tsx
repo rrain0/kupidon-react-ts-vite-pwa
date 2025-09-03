@@ -1,4 +1,4 @@
-import { usePrevState } from '@utils/react-state/usePrevState.ts'
+import { usePrevState } from '@utils/react/state/usePrevState.ts'
 import { useInterval } from '@utils/react/useInterval.ts'
 import { WsChannel } from '@utils/web-socket/WsChannel.ts'
 import React, { useEffect, useMemo } from 'react'

@@ -7,7 +7,7 @@ import React, { CSSProperties } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from 'src/utils/common/TypeU'
+import { TypeU } from '@utils/base/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle

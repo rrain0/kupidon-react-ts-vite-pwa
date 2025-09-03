@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { StyleValue } from '@libs/widget-style-6/WidgetStyle.ts'
 import RecordRo = TypeU.RecordRo
 import isdef = TypeU.isdef

@@ -3,7 +3,7 @@ import { CssU } from '@utils/css/CssU.ts'
 import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Grid from 'src/components/elems/basic-elements/Grid.tsx'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import toPx = CssU.toPx
 import modalFloor100 = StyleVals.modalFloor100

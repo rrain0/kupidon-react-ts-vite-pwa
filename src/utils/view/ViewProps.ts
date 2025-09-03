@@ -1,4 +1,4 @@
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { ViewU } from 'src/utils/view/ViewU'
 import RecordRo = TypeU.RecordRo
 import Pu = TypeU.Pu

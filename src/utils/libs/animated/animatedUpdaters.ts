@@ -1,6 +1,6 @@
-import { ObjectU } from '@utils/common/ObjectU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
-import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
+import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import React, { useLayoutEffect } from 'react'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
 import {

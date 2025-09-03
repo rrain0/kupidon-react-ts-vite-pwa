@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import isArray = TypeU.isArray
 import isnumber = TypeU.isnumber

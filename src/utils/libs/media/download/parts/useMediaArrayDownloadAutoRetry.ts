@@ -1,6 +1,6 @@
-import { useAutoRetry } from '@utils/app/useAutoRetry.ts'
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { useAutoRetry } from 'src/utils/react/useAutoRetry.ts'
+import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import mapToIf = ArrayU.mapToIf
 import SetterOrUpdater = TypeU.SetterOrUpdater

@@ -1,5 +1,5 @@
-import { TypeU } from '@utils/common/TypeU.ts'
-import { useBool } from '@utils/react-state/useBool.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
+import { useBool } from '@utils/react/state/useBool.ts'
 import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'

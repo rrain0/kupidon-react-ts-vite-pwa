@@ -8,7 +8,7 @@ import ScrollbarOverlay from 'src/components/widgets/Scrollbars/ScrollbarOverlay
 import { ScrollbarOverlayStyle } from 'src/components/widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import UseScrollbars from 'src/components/widgets/Scrollbars/UseScrollbars.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import hideWindowScrollbar = EmotionCommon.noWindowScrollbars
 import Pu = TypeU.Pu
 

@@ -1,9 +1,9 @@
-import { AsyncU } from '@utils/common/AsyncU.ts'
-import { RangeU } from '@utils/common/RangeU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { AsyncU } from 'src/utils/base/AsyncU.ts'
+import { RangeU } from 'src/utils/base/RangeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { FileU } from '@utils/file/FileU.ts'
-import { StageProgress } from '@utils/progress/StageProgress.ts'
-import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { StagedProgress } from 'src/utils/progress/StagedProgress.ts'
+import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import { useEffect } from 'react'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import {
@@ -115,7 +115,7 @@ export const useMediaDownload = <T extends MediaDownloadable | undefined>(
         
         ;(async () => {
           try {
-            const progress = new StageProgress(2, [90, 10])
+            const progress = new StagedProgress(2, [90, 10])
             const onProgress = (p = 0) => {
               progress.set(p)
               //console.log('progress', progress.value)

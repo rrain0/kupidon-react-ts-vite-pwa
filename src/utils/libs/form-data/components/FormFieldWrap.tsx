@@ -1,6 +1,6 @@
-import { useAsRefGet } from '@utils/react-state/useAsRefGet.ts'
+import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import React, {
   JSX,

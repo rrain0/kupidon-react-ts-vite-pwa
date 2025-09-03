@@ -5,7 +5,7 @@ import {
 import { useMediaDownloader } from '@libs/media/download/useMediaDownloader.ts'
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 
 

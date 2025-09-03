@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { AnimationFun } from '@libs/animated/AnimationConfig.ts'
 import Pu = TypeU.Pu
 

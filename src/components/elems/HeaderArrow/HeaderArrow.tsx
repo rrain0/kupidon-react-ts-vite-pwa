@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import clsx from 'clsx'
 import { HeaderArrowS } from 'src/components/elems/HeaderArrow/HeaderArrowS'
 import React from 'react'

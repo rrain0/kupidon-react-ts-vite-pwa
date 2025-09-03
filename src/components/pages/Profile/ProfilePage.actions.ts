@@ -9,10 +9,10 @@ import {
 } from '@libs/media/Media.ts'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { ArrayU } from 'src/utils/common/ArrayU.ts'
-import { AsyncU } from 'src/utils/common/AsyncU.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
-import { RangeU } from 'src/utils/common/RangeU'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { AsyncU } from '@utils/base/AsyncU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
+import { RangeU } from '@utils/base/RangeU'
 import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import throttle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy

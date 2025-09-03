@@ -2,8 +2,8 @@
 
 import { asMsgFromSw, SwMsg } from '@utils/service-worker/SwU.ts'
 import { asMsgFromWs, WsMsg } from '@utils/web-socket/WsU.ts'
-import { Env } from '@utils/app/Env'
-import { AsyncU } from '@utils/common/AsyncU.ts'
+import { Env } from 'src/configs/Env.ts'
+import { AsyncU } from '@utils/base/AsyncU.ts'
 import { WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {

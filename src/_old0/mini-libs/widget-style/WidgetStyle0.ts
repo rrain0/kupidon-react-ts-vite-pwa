@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
-import { ArrayU } from 'src/utils/common/ArrayU.ts'
-import { ObjectU } from 'src/utils/common/ObjectU.ts'
-import { TypeU } from 'src/utils/common/TypeU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ObjectU } from '@utils/base/ObjectU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import PartialUndef = TypeU.PartialUndef
 import isObject = TypeU.isobject
 import isstring = TypeU.isstring

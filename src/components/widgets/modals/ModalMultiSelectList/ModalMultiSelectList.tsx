@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 import React, { useState } from 'react'
 import { useUiValues } from '@libs/ui-text/useUiText'
 import { Option } from 'src/models/ui/Option.ts'
-import { sizes } from 'src/styles/sizes.ts'
+import { Sizes } from 'src/styles/Sizes.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText'
 import { SelectItemS6 } from 'src/components/elems/select-item/SelectItem/SelectItemS6.ts'
@@ -23,7 +23,7 @@ import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomShe
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from 'src/utils/common/TypeU'
+import { TypeU } from '@utils/base/TypeU'
 import Callback = TypeU.Callback
 import Setter = TypeU.Setter
 import col = EmotionCommon.col
@@ -176,6 +176,6 @@ export default ModalMultiSelectList
 
 const selectItemsContainer = css`
   ${col};
-  padding-bottom: ${sizes.pb}px;
-  gap: ${sizes.g}px;
+  padding-bottom: ${Sizes.pb}px;
+  gap: ${Sizes.g}px;
 `

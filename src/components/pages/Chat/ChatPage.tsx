@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useState } from 'react'

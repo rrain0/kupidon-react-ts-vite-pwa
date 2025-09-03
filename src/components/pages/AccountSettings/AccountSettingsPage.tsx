@@ -21,7 +21,7 @@ import ItemContainer from 'src/components/elems/basic-elements/ItemContainer'
 import {
   AccountSettingsPageValidation,
 } from 'src/components/pages/AccountSettings/AccountSettingsPage.validation.ts'
-import { ObjectU } from 'src/utils/common/ObjectU'
+import { ObjectU } from '@utils/base/ObjectU'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from '@libs/form-data/hooks/useFormSubmit'
 import { useFormToasts } from '@libs/form-data/hooks/useFormToasts'

@@ -9,8 +9,8 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import { useCssWhRef } from '@utils/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
@@ -33,20 +33,20 @@ import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/Overflow
 import Preview from 'src/components/pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/components/pages/Profile/Profile/Profile.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { RangeU } from 'src/utils/common/RangeU'
+import { RangeU } from '@utils/base/RangeU'
 import { useUiValues } from '@libs/ui-text/useUiText'
 import { profileUpdateApiRequest } from 'src/components/pages/Profile/ProfilePage.actions.ts'
 import { ProfilePageTabHeaderContext } from 'src/components/pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { AsyncU } from 'src/utils/common/AsyncU.ts'
-import { ObjectU } from 'src/utils/common/ObjectU.ts'
+import { AsyncU } from '@utils/base/AsyncU.ts'
+import { ObjectU } from '@utils/base/ObjectU.ts'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from '@libs/form-data/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@libs/form-data/hooks/useFormToasts.tsx'
 import { useFormDerivedData } from '@libs/form-data/hooks/useFormDerivedData.ts'
-import { StageProgress } from '@utils/progress/StageProgress.ts'
+import { StagedProgress } from '@utils/progress/StagedProgress.ts'
 import { useAsyncEffect } from 'src/utils/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import blobToDataUrl = FileU.blobToDataUrl
@@ -312,7 +312,7 @@ const ProfilePage = React.memo(() => {
         
         ;(async() => {
           try {
-            const progress = new StageProgress(2, [90, 10])
+            const progress = new StagedProgress(2, [90, 10])
             const onProgress = (p = 0) => {
               progress.set(p)
               //console.log('progress', photo.id, progress.value)

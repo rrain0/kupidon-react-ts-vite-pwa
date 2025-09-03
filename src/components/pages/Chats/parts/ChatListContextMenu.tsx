@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useEffect } from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'

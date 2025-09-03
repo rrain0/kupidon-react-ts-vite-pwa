@@ -1,11 +1,11 @@
 import { useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import React from 'react'
-import { ArrayU } from '@utils/common/ArrayU.ts'
-import { RangeU } from '@utils/common/RangeU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
-import { useRefAsGetSet } from '@utils/react-state/useRefAsGetSet.ts'
-import { useRefGetSet } from '@utils/react-state/useRefGetSet.ts'
+import { ArrayU } from '@utils/base/ArrayU.ts'
+import { RangeU } from '@utils/base/RangeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
+import { useRefAsGetSet } from '@utils/react/state/useRefAsGetSet.ts'
+import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import Getter = TypeU.Getter
 import NumRange = RangeU.NumRange
 

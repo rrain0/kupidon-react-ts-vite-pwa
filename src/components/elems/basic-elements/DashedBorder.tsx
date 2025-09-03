@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { flexStyle } from '@utils/react/short-props/style/flexStyle.ts'
 import clsx from 'clsx'
 import React from 'react'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import Pu = TypeU.Pu

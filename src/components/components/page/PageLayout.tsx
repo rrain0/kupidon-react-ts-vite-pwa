@@ -7,7 +7,7 @@ import { isMobileSafari } from 'react-device-detect'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars.tsx'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from 'src/utils/common/TypeU'
+import { TypeU } from '@utils/base/TypeU'
 import Children = ReactU.Children
 import Pu = TypeU.Pu
 import ClassStyle = ReactU.ClassStyle

@@ -5,7 +5,7 @@ import Input from 'src/components/elems/inputs/Input/Input.tsx'
 import { CheckboxInputStyle } from './CheckboxInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Pu = TypeU.Pu
 import toEmptyAttr = TypeU.toEmptyAttr
 

@@ -1,5 +1,5 @@
-import { ObjectU } from '@utils/common/ObjectU.ts'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { TypeU } from 'src/utils/base/TypeU.ts'
 import { Pair } from '@utils/js/Pair.ts'
 import {
   WidgetElemPropReplacer, WidgetState,

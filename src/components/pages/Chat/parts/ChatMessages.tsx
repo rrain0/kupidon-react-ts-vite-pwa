@@ -1,5 +1,5 @@
 import React from 'react'
-import { TypeU } from '@utils/common/TypeU.ts'
+import { TypeU } from '@utils/base/TypeU.ts'
 import Flex from 'src/components/elems/basic-elements/Flex.tsx'
 import ChatMessage, { ChatMessageUi } from 'src/components/pages/Chat/parts/ChatMessage.tsx'
 import Pu = TypeU.Pu

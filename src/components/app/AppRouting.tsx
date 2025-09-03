@@ -1,4 +1,4 @@
-import { useAuthSetup } from '@utils/auth/useAuthSetup.ts'
+import { useAuthSetup } from '@utils/app/auth/useAuthSetup.ts'
 import { SearchParams } from '@utils/url/SearchParams.ts'
 import {
   parseSearchParams,
