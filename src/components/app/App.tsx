@@ -9,8 +9,6 @@ import SendLiveOnlineStatus from 'src/components/components/live-updates/SendLiv
 import SwListener from 'src/components/components/SwListener.tsx'
 import UsePageLifecycle from 'src/components/components/UsePageLifecycle.tsx'
 import UseViewportContentSize from 'src/components/components/UseViewportContentSize.tsx'
-import CheckBrowserMinimumVersion
-  from 'src/components/components/CheckBrowserMinimumVersion/CheckBrowserMinimumVersion.tsx'
 import AppFrame from 'src/components/app/AppFrame.tsx'
 import ToastifySetup from 'src/components/components/Toasts/ToastifySetup.tsx'
 import DragDetector from 'src/components/components/DragDetector.tsx'
@@ -50,7 +48,7 @@ const App = React.memo(() => {
   const theme = useAppTheme()
   
   return (
-    <CheckBrowserMinimumVersion>
+    <>
       
       <UsePageLifecycle/>
       
@@ -90,7 +88,7 @@ const App = React.memo(() => {
         
       </UseViewportContentSize>
       
-    </CheckBrowserMinimumVersion>
+    </>
   )
 })
 App.displayName = 'App'

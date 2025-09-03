@@ -16,14 +16,12 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 
 import row = EmotionCommon.row
 import col = EmotionCommon.col
-import { Utils } from '@utils/base/Utils.ts'
 import styled from '@emotion/styled'
 import BottomSheet from 'src/components/widgets/BottomSheet/BottomSheet.tsx'
-import intOrDefault = Utils.nonNegIntOrDefault
 import OverflowWrapper from 'src/components/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
-import { Setter } from '@utils/base/TypeUtils.ts'
+import { ifNotNonNegInt, Setter } from '@utils/base/TypeUtils.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 
 
@@ -97,7 +95,7 @@ const BottomSheetTestPage = React.memo(() => {
             <OverlayInput
               value={itemsCnt}
               onChange={ev => {
-                setItemsCnt(intOrDefault(ev.target.value, 12))
+                setItemsCnt(ifNotNonNegInt(ev.target.value, 12))
               }}
             />
           </div>
@@ -403,7 +401,7 @@ const BottomSheetControlOverlay = (props:{
               value={props.animationDuration}
               onChange={ev => {
                 props.setAnimationDuration(
-                  intOrDefault(ev.target.value, 400),
+                  ifNotNonNegInt(ev.target.value, 400),
                 )
               }}
             />
@@ -420,7 +418,7 @@ const BottomSheetControlOverlay = (props:{
               value={props.itemsCnt}
               onChange={ev => {
                 props.setItemsCnt(
-                  intOrDefault(ev.target.value, 12),
+                  ifNotNonNegInt(ev.target.value, 12),
                 )
               }}
             />

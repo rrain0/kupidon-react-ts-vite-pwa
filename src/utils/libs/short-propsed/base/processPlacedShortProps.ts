@@ -1,6 +1,6 @@
 
 import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { mapBool } from 'src/utils/base/TypeUtils.ts'
+import { ifBool } from 'src/utils/base/TypeUtils.ts'
 import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
@@ -50,12 +50,12 @@ export const processPlacedShortProps = <P extends object>(
   
   
   const placedStyle = {
-    ...isdef(aligned) && { alignSelf: mapBool(aligned, 'center') },
+    ...isdef(aligned) && { alignSelf: ifBool(aligned, 'center') },
     ...alignedStart && { alignSelf: 'start' },
     ...alignedEnd && { alignSelf: 'end' },
     ...alignedStretch && { alignSelf: 'stretch' },
     
-    ...isdef(justified) && { justifySelf: mapBool(justified, 'center') },
+    ...isdef(justified) && { justifySelf: ifBool(justified, 'center') },
     ...justifiedStart && { justifySelf: 'start' },
     ...justifiedEnd && { justifySelf: 'end' },
     ...justifiedStretch && { justifySelf: 'stretch' },
@@ -63,13 +63,13 @@ export const processPlacedShortProps = <P extends object>(
     ...started && { placeSelf: 'start' },
     ...ended && { placeSelf: 'end' },
     ...stretched && { placeSelf: 'stretch' },
-    ...isdef(placed) && { placeSelf: mapBool(placed, 'center') },
+    ...isdef(placed) && { placeSelf: ifBool(placed, 'center') },
     
     ...noShrink && { flexShrink: 0 },
     ...isdef(basis) && { flexBasis: basis },
     ...isdef(order) && { order: order },
-    ...isdef(grow) && { flexGrow: mapBool(grow, 1) },
-    ...isdef(shrink) && { flexShrink: mapBool(shrink, 1) },
+    ...isdef(grow) && { flexGrow: ifBool(grow, 1) },
+    ...isdef(shrink) && { flexShrink: ifBool(shrink, 1) },
     
     ...isdef(gridRow) && { gridRow: gridRow },
     ...isdef(gridCol) && { gridColumn: gridCol },

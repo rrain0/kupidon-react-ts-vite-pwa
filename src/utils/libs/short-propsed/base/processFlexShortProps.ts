@@ -1,6 +1,6 @@
 
 import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { mapBool } from 'src/utils/base/TypeUtils.ts'
+import { ifBool } from 'src/utils/base/TypeUtils.ts'
 import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
@@ -100,11 +100,11 @@ export const processFlexShortProps = <P extends object>(
     ...justifySpaceBetween && { justifyContent: 'space-between' },
     ...justifySpaceAround && { justifyContent: 'space-around' },
     
-    ...isdef(justify) && { justifyContent: mapBool(justify, 'center') },
+    ...isdef(justify) && { justifyContent: ifBool(justify, 'center') },
     
-    ...isdef(align) && { alignItems: mapBool(align, 'center') },
-    ...isdef(alignCt) && { alignContent: mapBool(alignCt, 'center') },
-    ...isdef(justifyCt) && { justifyContent: mapBool(justifyCt, 'center') },
+    ...isdef(align) && { alignItems: ifBool(align, 'center') },
+    ...isdef(alignCt) && { alignContent: ifBool(alignCt, 'center') },
+    ...isdef(justifyCt) && { justifyContent: ifBool(justifyCt, 'center') },
     
     ...isdef(gap) && { gap: gap },
     ...isdef(g) && { gap: g },

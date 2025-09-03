@@ -1,6 +1,6 @@
 
 import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { mapBool } from 'src/utils/base/TypeUtils.ts'
+import { ifBool } from 'src/utils/base/TypeUtils.ts'
 import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
@@ -66,13 +66,13 @@ export const processGridShortProps = <P extends object>(
     ...stretch && { placeItems: 'stretch' },
     ...endStretch && { placeItems: 'endStretch' },
     
-    ...isdef(place) && { placeItems: mapBool(place, 'center') },
-    ...isdef(align) && { alignItems: mapBool(align, 'center') },
-    ...isdef(justify) && { justifyItems: mapBool(align, 'center') },
+    ...isdef(place) && { placeItems: ifBool(place, 'center') },
+    ...isdef(align) && { alignItems: ifBool(align, 'center') },
+    ...isdef(justify) && { justifyItems: ifBool(align, 'center') },
     
-    ...isdef(placeCt) && { placeContent: mapBool(placeCt, 'center') },
-    ...isdef(alignCt) && { alignContent: mapBool(alignCt, 'center') },
-    ...isdef(justifyCt) && { justifyContent: mapBool(justifyCt, 'center') },
+    ...isdef(placeCt) && { placeContent: ifBool(placeCt, 'center') },
+    ...isdef(alignCt) && { alignContent: ifBool(alignCt, 'center') },
+    ...isdef(justifyCt) && { justifyContent: ifBool(justifyCt, 'center') },
     
     
     ...isdef(gap) && { gap: gap },

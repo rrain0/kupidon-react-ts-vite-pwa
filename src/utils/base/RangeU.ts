@@ -1,5 +1,5 @@
 import { MathU } from 'src/utils/base/MathU'
-import { mapNaN } from 'src/utils/base/TypeUtils.ts'
+import { ifNaN } from 'src/utils/base/TypeUtils.ts'
 import mod = MathU.mod
 
 
@@ -81,7 +81,7 @@ export namespace RangeU {
    * @param toRange minInclusive..maxInclusive
    */
   const mapSingleRange = (value: number, fromRange: NumRange, toRange: NumRange): number => {
-    const oneBasedValue = mapNaN((value - fromRange[0]) / (fromRange[1] - fromRange[0]), 0)
+    const oneBasedValue = ifNaN((value - fromRange[0]) / (fromRange[1] - fromRange[0]), 0)
     return oneBasedValue * (toRange[1] - toRange[0]) + toRange[0]
   }
   

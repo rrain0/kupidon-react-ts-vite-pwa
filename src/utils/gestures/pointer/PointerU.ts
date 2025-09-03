@@ -60,3 +60,7 @@ export namespace PointerU {
 
 
 
+export type PointerEventListener<E extends HTMLElement = HTMLElement> = (
+  (this: E, ev: PointerEvent) => any
+)
+

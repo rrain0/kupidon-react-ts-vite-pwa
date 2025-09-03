@@ -83,13 +83,15 @@ export function isundef<T>(value: T | undefined): value is undefined {
   return value === undefined
 }
 // Value is defined
-export function isdef<NU extends {} | null, T>(value: T | NU): value is NU {
+export function isdef<T>(value: T | undefined): value is T {
   return value !== undefined
 }
+// Value is null
 export function isnull<T>(value: T | null): value is null {
   return value === null
 }
-export function nonnull<NN extends {} | undefined, T>(value: T | NN): value is NN {
+// Value is not null
+export function nonnull<T>(value: T | null): value is T {
   return value !== null
 }
 export function nonemptyval<E extends {}, T>(value: T | E): value is E {
@@ -121,19 +123,6 @@ export function isfunction<F extends Function, T>(value: T | F): value is F {
 
 
 
-/*
- const f = () => ''
- const o = { a: 1 }
- const e = {  }
- const s = ''
- ;(() => {
- const val = o
- if (isobject(val)) {
- const a = val
- const b = a.a
- }
- })()
- */
 
 export function isObject<O extends object, T>(value: T | O): value is O {
   return value instanceof Object
@@ -192,30 +181,21 @@ export const defaultComparatorEq: ComparatorEq<any> = (a, b) => a === b
 
 export type FunOrObj<F extends anyfun> = (
   F extends (...args: infer A) => infer R ? ((...args: A) => R) | R : never
-  )
-/*
- export type InvokeOrGet<T extends object> = (
- T extends (...args: any[]) => infer R ? R : T
- )
- // TODO type
- export const invokeOrGet = <T extends object>(funOrObj: T): InvokeOrGet<T> => {
- if (isfunction(funOrObj)) return funOrObj()
- }
- */
+)
 
 
 
 // By default false is mapped to undefined
-export function mapBool<V, const TV>(
+export function ifBool<V, const TV>(
   v: V | true, trueV: TV
 ): V | TV
-export function mapBool<V, const TV>(
+export function ifBool<V, const TV>(
   v: V | true | false, trueV: TV
 ): V | TV | undefined
-export function mapBool<V, const TV, const FV>(
+export function ifBool<V, const TV, const FV>(
   v: V | boolean, trueV: TV, falseV: FV
 ): V | TV | FV
-export function mapBool<V, const TV, const FV>(
+export function ifBool<V, const TV, const FV>(
   v: V | boolean, trueV: TV, falseV?: FV
 ): V | TV | FV | undefined {
   if (v === true) return trueV
@@ -224,20 +204,51 @@ export function mapBool<V, const TV, const FV>(
 }
 
 
-export function mapVal<V, const VM, const MV>(
-  value: V | VM, valueToMap: VM, mappedValue: MV
-): V | MV {
-  if (value === valueToMap) return mappedValue
+export function ifVal<V, const IFV, const THENV>(
+  value: V | IFV, ifValue: IFV, thenValue: THENV
+): V | THENV {
+  if (value === ifValue) return thenValue
   return value as V
 }
 
 
 
-//export const mapDefined = (v: any, mapper: Mapper<any>) => isdef(v) ? mapper(v) : v
-export const mapNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
-export const mapNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
-export const mapNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
-export const mapNotnumberOrNegative = <T, R>(v: T, r: R) => isnumber(v) && v >= 0 ? v : r
-export const mapNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
+export const ifdef = <V, R>(v: V | undefined, mapper: Mapper<V, R>) => isdef(v) ? mapper(v) : v
+export const ifNaN = <R = number>(n: number, r: R) => isNaN(n) ? r : n
+export const ifNotnumber = <T, R>(v: T, r: R) => isnumber(v) ? v : r
+export const ifNotnumberOrNaN = <T, R>(v: T, r: R) => isnumber(v) && !isNaN(v)? v : r
+export const ifNotnumberOrNegative = <T, R>(v: T, r: R) => isnumber(v) && v >= 0 ? v : r
+export const ifNotnumberOrNotNull = <T, R>(v: T, r: R) => isnumber(v) && v === null ? v : r
+export const ifNotNonNegInt = (v: any, r: number): number => {
+  v = +v
+  if (isNaN(v) || v < 0 || !Number.isInteger(v)) v = r
+  return v
+}
 
+
+
+
+
+namespace TypeUtilsTest {
+  
+  
+  // Получить тип, в котором ко всем именам свойств переданного объекта добавляется суффикс
+  export type Suffix<O extends object, Suff extends string> = (
+    { [Prop in keyof O as Prop extends string ? `${Prop}${Suff}` : never]: O[Prop] }
+  )
+  
+  
+  // First, define a type that, when passed a union of keys, creates an object which
+  // cannot have those properties. I couldn't find a way to use this type directly,
+  // but it can be used with the below type.
+  export type Impossible<K extends keyof any> = { [P in K]: never }
+  
+  
+  // The secret sauce! Provide it the type that contains only the properties you want,
+  // and then a type that extends that type, based on what the caller provided
+  // using generics.
+  export type NoExtraProperties<T, U extends T = T> = U & Impossible<Exclude<keyof U, keyof T>>
+  
+  
+}
 

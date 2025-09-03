@@ -1,7 +1,7 @@
 
 import { Pu } from 'src/utils/base/TypeUtils.ts'
 import { isdef } from 'src/utils/base/TypeUtils.ts'
-import { mapBool } from 'src/utils/base/TypeUtils.ts'
+import { ifBool } from 'src/utils/base/TypeUtils.ts'
 
 
 
@@ -34,7 +34,7 @@ export const processTextShortProps = <P extends object>(
     ...textAlignLeft && { textAlign: 'left' },
     ...textAlignRight && { textAlign: 'right' },
     ...textAlignJustify && { textAlign: 'justify' },
-    ...isdef(textAlign) && { textAlign: mapBool(textAlign, 'center') },
+    ...isdef(textAlign) && { textAlign: ifBool(textAlign, 'center') },
     
     ...isdef(fontSz) && { fontSize: fontSz },
     ...isdef(fontWt) && { fontWeight: fontWt },

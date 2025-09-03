@@ -1,7 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { themeByName } from 'src/styles/themes/ThemesCollection.ts'
 import { useAppTheme } from 'src/utils/app/theme/useAppTheme.ts'
-import { useBrowserMinimumVersion } from 'src/utils/app/useBrowserMinimumVersion.ts'
 import { useSetAppTheme } from 'src/utils/app/theme/useSetAppTheme.ts'
 import { useSystemTheme } from 'src/utils/react/system/useSystemTheme.ts'
 import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
@@ -10,15 +9,6 @@ import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZusta
 
 
 export const useThemeSetup = () => {
-  useBrowserMinimumVersion({
-    chromeDesktopVersion: '81',
-    chromeAndroidVersion: '81',
-    safariDesktopVersion: '13',
-    safariIosVersion: '13',
-    edgeDesktopVersion: '81',
-    feature: 'css color-scheme',
-  })
-  
   const { type, manual, light, dark } = useThemeSettingsZustand()
   const theme = useAppTheme()
   const setTheme = useSetAppTheme()

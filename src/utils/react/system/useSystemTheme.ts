@@ -1,4 +1,3 @@
-import { useBrowserMinimumVersion } from 'src/utils/app/useBrowserMinimumVersion.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { useMedia } from 'src/utils/css/media/useMedia.ts'
 import ThemeType = AppTheme.Type
@@ -16,15 +15,6 @@ import ThemeType = AppTheme.Type
 
 
 export const useSystemTheme = (): ThemeType | undefined => {
-  useBrowserMinimumVersion({
-    chromeDesktopVersion: '76',
-    chromeAndroidVersion: '76',
-    safariDesktopVersion: '12.1',
-    safariIosVersion: '13',
-    edgeDesktopVersion: '79',
-    feature: 'css prefers-color-scheme media feature',
-  })
-  
   const isLight = useMedia('(prefers-color-scheme: light)')
   const isDark = useMedia('(prefers-color-scheme: dark)')
   if (isLight) return 'light'
