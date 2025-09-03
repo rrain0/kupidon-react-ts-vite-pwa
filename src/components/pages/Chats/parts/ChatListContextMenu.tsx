@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useEffect } from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
@@ -21,8 +21,8 @@ import ModalContextMenu from 'src/components/widgets/modals/ModalContextMenu/Mod
 import ModalDialog from 'src/components/widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalTileSelect from 'src/components/widgets/modals/ModalTileSelect/ModalTileSelect.tsx'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import Pu = TypeU.Pu
-import Callback = TypeU.Callback
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 import CrossIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossIc.tsx'
 
 

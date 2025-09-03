@@ -1,6 +1,6 @@
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useClick } from '@utils/gestures/pointer/useClick.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import clsx from 'clsx'
@@ -14,10 +14,10 @@ import React, {
   useLayoutEffect,
 } from 'react'
 import combineProps = ReactU.combineProps
-import Callback1 = TypeU.Callback1
-import Pu = TypeU.Pu
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
-import toEmptyAttr = TypeU.toEmptyAttr
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

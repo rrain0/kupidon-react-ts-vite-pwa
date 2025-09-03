@@ -1,4 +1,4 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useTimeout } from '@utils/react/useTimeout.ts'
 import { useEffect, useState } from 'react'
 import { useMediaDownload } from '@libs/media/download/parts/useMediaDownload.ts'
@@ -6,7 +6,7 @@ import {
   useMediaDownloadAutoRetry
 } from '@libs/media/download/parts/useMediaDownloadAutoRetry.ts'
 import { getMediaUiState, MediaDownloadable } from '@libs/media/Media.ts'
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
 
 
 

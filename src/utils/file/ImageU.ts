@@ -2,9 +2,9 @@ import imageCompression, { Options } from 'browser-image-compression'
 import heic2any from 'heic2any'
 import { isSafari, isMobileSafari } from 'react-device-detect'
 import { FileU } from 'src/utils/file/FileU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
-import CallbackParam = TypeU.Callback1
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
 import trimExtension = FileU.trimExtension
 
 
@@ -17,7 +17,7 @@ export namespace ImageU {
   export const compress = async (
     imgFile: File,
     {
-      onProgress = undefined as CallbackParam<number> | undefined,
+      onProgress = undefined as Callback1<number> | undefined,
       abortCtrl = undefined as AbortController | undefined,
     } = { },
   ): Promise<File> => {

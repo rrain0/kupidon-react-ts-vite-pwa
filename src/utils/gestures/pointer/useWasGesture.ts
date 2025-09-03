@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react'
 import { isIOS } from 'react-device-detect'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { getDragDirection } from 'src/utils/gestures/drag/getDragDirection.ts'
 import { onPointer, OnPointerEvent } from 'src/utils/gestures/pointer/onPointer.ts'
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
-import Callback = TypeU.Callback
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

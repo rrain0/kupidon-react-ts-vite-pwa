@@ -1,7 +1,7 @@
 import { useIsMount } from '@utils/react/state/useIsMount.ts'
 import { useDebounce } from '@utils/react/useDebounce.ts'
 import React, { useEffect, useState } from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { ChatMessageContentA } from 'src/models/api/ChatMessageA.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
@@ -15,7 +15,7 @@ import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import Textarea from 'src/components/elems/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/components/elems/Textarea/TextareaStyle.ts'
 import ModalDialog from 'src/components/widgets/modals/ModalDialog/ModalDialog.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import { commonStyle } from '@libs/short-propsed/style/commonStyle'

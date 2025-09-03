@@ -1,8 +1,7 @@
 import { useSpring } from '@react-spring/web'
 import { useCallback } from 'react'
-import { TypeU } from 'src/utils/base/TypeU'
 import { useResizeRef } from 'src/utils/view/useResizeRef'
-import Mapper = TypeU.Mapper
+import { Mapper } from 'src/utils/base/TypeUtils.ts'
 
 
 

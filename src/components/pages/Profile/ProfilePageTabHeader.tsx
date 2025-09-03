@@ -9,9 +9,9 @@ import React, { useContext } from 'react'
 import { Hdrs } from 'src/components/elems/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import gridStackC = EmotionCommon.gridStackC
-import Getter = TypeU.Getter
+import { Getter } from '@utils/base/TypeUtils.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import colC = EmotionCommon.colC
 

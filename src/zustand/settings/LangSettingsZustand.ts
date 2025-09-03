@@ -1,11 +1,11 @@
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { Lang } from '@utils/app/lang/Lang.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import isobject = TypeU.isobject
-import nonemptyval = TypeU.nonemptyval
-import isemptyval = TypeU.isemptyval
+import { isobject } from '@utils/base/TypeUtils.ts'
+import { nonemptyval } from '@utils/base/TypeUtils.ts'
+import { isemptyval } from '@utils/base/TypeUtils.ts'
 import NonEmptyArr = ArrayU.NonEmptyArr
 
 

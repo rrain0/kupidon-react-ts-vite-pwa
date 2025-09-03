@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React from 'react'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -11,15 +11,15 @@ import RadioInputGroup from 'src/components/elems/inputs/RadioInputGroup/RadioIn
 import { RadioInputStyle } from 'src/components/elems/inputs/RadioInput/RadioInputStyle.ts'
 import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
-import Callback1 = TypeU.Callback1
-import PartialUndef = TypeU.PartialUndef
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 
 
-export type ModalRadioProps<V extends string> = PartialUndef<{
+export type ModalRadioProps<V extends string> = Pu<{
   isOpen: boolean
   close: Callback
   title: string

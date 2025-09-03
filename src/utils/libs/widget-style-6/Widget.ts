@@ -1,4 +1,4 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { transform1 } from '@libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import {
   WidgetElem,
@@ -17,8 +17,8 @@ import { transform6 } from '@libs/widget-style-6/transform/WidgetStyleTransform6
 import { transform7 } from '@libs/widget-style-6/transform/WidgetStyleTransform7.ts'
 import { CommonProps, CommonStates } from '@libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import RecordRo = TypeU.RecordRo
-import isObject = TypeU.isObject
+import { RecordRo } from 'src/utils/base/TypeUtils.ts'
+import { isObject } from 'src/utils/base/TypeUtils.ts'
 
 
 /*

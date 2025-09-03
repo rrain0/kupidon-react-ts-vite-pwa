@@ -1,5 +1,5 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import isstring = TypeU.isstring
+
+import { isstring } from 'src/utils/base/TypeUtils.ts'
 
 /*
   Use this article to determine what to clear

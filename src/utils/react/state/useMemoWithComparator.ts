@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import ComparatorEq = TypeU.ComparatorEq
+import { ComparatorEq } from 'src/utils/base/TypeUtils.ts'
 import stringifyEq = ObjectU.stringifyEq
 
 

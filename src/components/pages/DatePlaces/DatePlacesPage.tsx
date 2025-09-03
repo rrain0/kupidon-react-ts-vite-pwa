@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useMemo } from 'react'
 import { DatePlaceCategoriesData, DatePlaceCategoryType }
   from 'src/configs/date-place/DatePlaceCategoriesData.ts'
@@ -17,7 +17,7 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
-import ObjectUnionFix = TypeU.ObjectUnionFix
+import { ObjectUnionFix } from '@utils/base/TypeUtils.ts'
 
 
 

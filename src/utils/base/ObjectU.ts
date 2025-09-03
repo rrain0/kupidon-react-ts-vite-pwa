@@ -1,12 +1,12 @@
 import { StringU } from 'src/utils/base/StringU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { Pair } from 'src/utils/js/Pair.ts'
-import WriteablePartial = TypeU.WriteablePartial
-import isobject = TypeU.isobject
+import { WriteablePartial } from 'src/utils/base/TypeUtils.ts'
+import { isobject } from 'src/utils/base/TypeUtils.ts'
 import capitalize = StringU.capitalize
-import isundef = TypeU.isundef
-import isnull = TypeU.isnull
-import isRecord = TypeU.isRecord
+import { isundef } from 'src/utils/base/TypeUtils.ts'
+import { isnull } from 'src/utils/base/TypeUtils.ts'
+import { isRecord } from 'src/utils/base/TypeUtils.ts'
 
 
 

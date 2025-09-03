@@ -2,12 +2,12 @@ import styled from '@emotion/styled'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import clsx from 'clsx'
 import React from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
-import Pu = TypeU.Pu
-import FunOrObj = TypeU.FunOrObj
-import isfunction = TypeU.isfunction
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { FunOrObj } from '@utils/base/TypeUtils.ts'
+import { isfunction } from '@utils/base/TypeUtils.ts'
 
 
 

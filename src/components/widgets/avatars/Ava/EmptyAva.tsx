@@ -1,9 +1,9 @@
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import Txt = EmotionCommon.Txt
 
 

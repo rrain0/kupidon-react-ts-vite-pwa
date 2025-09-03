@@ -1,13 +1,13 @@
 import { useStateSync } from '@utils/react/state/useStateSync.ts'
 import React, { useCallback, useMemo, useState } from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import {
   SheetSnapIdx,
   SheetSnapPoints, SheetSnapsHalfScreen,
   SheetState, UseBottomSheetOptions,
 } from 'src/components/widgets/BottomSheet/useBottomSheet.ts'
-import Callback = TypeU.Callback
-import Pu = TypeU.Pu
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

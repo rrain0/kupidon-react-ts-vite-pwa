@@ -19,10 +19,10 @@ import ChatListContextMenu, {
 import ChatListToItem from 'src/components/pages/Chats/parts/ChatListToItem.tsx'
 import { ChatListItemWidgetData } from 'src/components/pages/Chats/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/components/components/page/offsetToPageContentPaddings.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
-import isundef = TypeU.isundef
-import isdef = TypeU.isdef
+
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isundef } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

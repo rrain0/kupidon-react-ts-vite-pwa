@@ -2,15 +2,15 @@ import { css } from '@emotion/react'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useRef } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import {
   CheckboxInputGroupStyle,
 } from 'src/components/elems/inputs/CheckboxInputGroup/CheckboxInputGroupStyle.ts'
 import reset = EmotionCommon.reset
 import absTlwh = EmotionCommon.absTlwh
-import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

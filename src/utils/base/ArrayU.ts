@@ -1,18 +1,18 @@
 import { RangeU } from 'src/utils/base/RangeU'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import emptyval = TypeU.emptyval
-import ComparatorEq = TypeU.ComparatorEq
-import defaultComparatorEq = TypeU.defaultComparatorEq
-import defaultFilter = TypeU.defaultFilter
-import Mapper = TypeU.Mapper
-import Filter = TypeU.Filter
-import MergerIndexed = TypeU.MergerIndexed
-import CombinerIndexed = TypeU.CombinerIndexed
-import Nonemptyval = TypeU.Nonemptyval
-import isArray = TypeU.isArray
-import Sign = TypeU.Sign
-import isdef = TypeU.isdef
-import ArrFilter = TypeU.ArrFilter
+
+import { emptyval } from 'src/utils/base/TypeUtils.ts'
+import { ComparatorEq } from 'src/utils/base/TypeUtils.ts'
+import { defaultComparatorEq } from 'src/utils/base/TypeUtils.ts'
+import { defaultFilter } from 'src/utils/base/TypeUtils.ts'
+import { Mapper } from 'src/utils/base/TypeUtils.ts'
+import { Filter } from 'src/utils/base/TypeUtils.ts'
+import { MergerIndexed } from 'src/utils/base/TypeUtils.ts'
+import { CombinerIndexed } from 'src/utils/base/TypeUtils.ts'
+import { Nonemptyval } from 'src/utils/base/TypeUtils.ts'
+import { isArray } from 'src/utils/base/TypeUtils.ts'
+import { Sign } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { ArrFilter } from 'src/utils/base/TypeUtils.ts'
 
 
 

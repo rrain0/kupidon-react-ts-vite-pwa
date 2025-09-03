@@ -7,9 +7,9 @@ import React, { CSSProperties } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from '@utils/base/TypeU'
+
 import Children = ReactU.Children
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import toPx = CssU.toPx
 import gridC = EmotionCommon.gridC

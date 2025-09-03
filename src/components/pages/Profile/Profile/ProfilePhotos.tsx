@@ -42,7 +42,7 @@ import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import flexC = EmotionCommon.flexC
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
@@ -50,13 +50,13 @@ import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
 import blobToDataUrl = FileU.blobToDataUrl
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
 import trimExtension = FileU.trimExtension
 import Theme = AppTheme.Theme
 import replaceFirstToIfFoundBy = ArrayU.replaceFirstToIfFoundBy
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import throttle = AsyncU.withThrottle
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import findBy = ArrayU.findBy
 import NumRange = RangeU.NumRange
 import arr = ArrayU.arr

@@ -9,11 +9,11 @@ import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import Pu = TypeU.Pu
-import Mapper = TypeU.Mapper
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Mapper } from '@utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
 import NumRange = RangeU.NumRange
 import zeroBasedRange = RangeU.zeroBased
 

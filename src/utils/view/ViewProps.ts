@@ -1,9 +1,9 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { ViewU } from 'src/utils/view/ViewU'
-import RecordRo = TypeU.RecordRo
-import Pu = TypeU.Pu
+import { RecordRo } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 import WH = ViewU.WH
-import isdef = TypeU.isdef
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 

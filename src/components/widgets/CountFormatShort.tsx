@@ -1,7 +1,7 @@
 import { StringU } from '@utils/base/StringU.ts'
 import React from 'react'
-import { TypeU } from '@utils/base/TypeU'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import trimDotZerosEnd = StringU.trimDotZerosEnd
 
 

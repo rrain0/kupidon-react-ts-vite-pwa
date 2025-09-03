@@ -1,6 +1,6 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import falsy = TypeU.falsy
-import isnumber = TypeU.isnumber
+
+import { falsy } from 'src/utils/base/TypeUtils.ts'
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
 
 
 

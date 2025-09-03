@@ -1,11 +1,11 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React from 'react'
 import ProfileCardsStackList, {
   ProfileCardsStackListItem,
 } from 'src/components/widgets/ProfileCards/ProfileCardsStackList.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

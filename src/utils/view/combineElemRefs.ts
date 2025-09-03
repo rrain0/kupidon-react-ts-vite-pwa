@@ -1,7 +1,7 @@
 import React from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import isfunction = TypeU.isfunction
-import isobject = TypeU.isobject
+
+import { isfunction } from 'src/utils/base/TypeUtils.ts'
+import { isobject } from 'src/utils/base/TypeUtils.ts'
 
 
 

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useEffect, useMemo, useState } from 'react'
 import { UiValues } from '@libs/ui-text/UiText.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
@@ -23,7 +23,7 @@ import _2gisLogo from '@im/ic/2gis-logo.webp'
 import yandexMapsLogo from '@im/ic/yandex-maps-logo.webp'
 import LocationIc from 'src/components/elems/icons/SvgIcons/pack/ui/LocationIc.tsx'
 import CheckmarkBoldIc from 'src/components/elems/icons/SvgIcons/pack/ui/CheckmarkBoldIc.tsx'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

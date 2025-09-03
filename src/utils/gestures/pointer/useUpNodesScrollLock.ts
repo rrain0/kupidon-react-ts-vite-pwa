@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import commonCss from 'src/styles/common/common.module.scss'
-import Pu = TypeU.Pu
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 
 
 

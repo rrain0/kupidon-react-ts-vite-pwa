@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { ChatMessageA } from 'src/models/api/ChatMessageA.ts'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
@@ -7,7 +7,7 @@ import axAccess = AxiosConfig.axAccess
 import TechnicalError = ApiResponseUtils.TechnicalError
 import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
 import AuthenticationError = ApiResponseUtils.AuthenticationError
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

@@ -1,8 +1,8 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import isArray = TypeU.isArray
-import isnumber = TypeU.isnumber
-import isstring = TypeU.isstring
+import { isArray } from 'src/utils/base/TypeUtils.ts'
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
+import { isstring } from 'src/utils/base/TypeUtils.ts'
 
 
 // TODO Allow insert raw string css

@@ -1,10 +1,10 @@
 import { StringU } from 'src/utils/base/StringU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { isStyleValue, StyleValue, WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import isobject = TypeU.isobject
-import isArray = TypeU.isArray
+import { isobject } from 'src/utils/base/TypeUtils.ts'
+import { isArray } from 'src/utils/base/TypeUtils.ts'
 import capitalize = StringU.capitalize
-import isfunction = TypeU.isfunction
+import { isfunction } from 'src/utils/base/TypeUtils.ts'
 
 
 

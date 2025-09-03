@@ -1,7 +1,7 @@
 import Card from 'src/components/elems/Card/Card.tsx'
 import { CardS } from 'src/components/elems/Card/CardS.ts'
 import DialogButtons from 'src/components/widgets/modals/DialogButtons'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
@@ -9,8 +9,8 @@ import Modal from 'src/components/components/modal/Modal.tsx'
 import Textarea from 'src/components/elems/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/components/elems/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
-import Callback = TypeU.Callback
-import Pu = TypeU.Pu
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
 

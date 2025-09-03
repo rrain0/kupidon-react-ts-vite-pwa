@@ -1,9 +1,9 @@
 import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
 import { useBool } from '@utils/react/state/useBool.ts'
 import React, { useEffect } from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
-import Callback = TypeU.Callback
+
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

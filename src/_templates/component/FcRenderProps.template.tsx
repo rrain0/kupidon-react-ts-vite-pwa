@@ -1,6 +1,6 @@
 import React from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

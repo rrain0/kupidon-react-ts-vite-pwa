@@ -1,5 +1,5 @@
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useTimeout } from '@utils/react/useTimeout.ts'
 import { useEffect, useState } from 'react'
 import { getMediaUiState, MediaDownloadable } from '@libs/media/Media.ts'
@@ -7,7 +7,7 @@ import { useMediaArrayDownload } from '@libs/media/download/parts/useMediaArrayD
 import {
   useMediaArrayDownloadAutoRetry
 } from '@libs/media/download/parts/useMediaArrayDownloadAutoRetry.ts'
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
 import mapToIf = ArrayU.mapToIf
 
 

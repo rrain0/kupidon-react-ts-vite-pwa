@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import CheckmarkCircleToastifyIc
@@ -19,8 +19,8 @@ import resetButton = EmotionCommon.resetButton
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import Callback = TypeU.Callback
-import Pu = TypeU.Pu
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

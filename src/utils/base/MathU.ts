@@ -1,5 +1,5 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import isnumber = TypeU.isnumber
+
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
 
 
 

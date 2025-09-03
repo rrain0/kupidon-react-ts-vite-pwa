@@ -1,9 +1,9 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import clsx from 'clsx'
 import React from 'react'
 import { GradSvgIconS6 } from 'src/components/elems/icons/GradSvgIcons/GradSvgIconS6.ts'
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

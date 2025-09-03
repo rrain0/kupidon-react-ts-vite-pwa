@@ -1,5 +1,5 @@
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import React, { useLayoutEffect } from 'react'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
@@ -8,12 +8,12 @@ import {
   AnimatedElemAttrs,
   AnimatedElemStyle,
 } from '@libs/animated/AnimatedProps.ts'
-import isnumber = TypeU.isnumber
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
-import Callback1 = TypeU.Callback1
-import Pu = TypeU.Pu
-import RecordPu = TypeU.RecordPu
-import Setter = TypeU.Setter
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { RecordPu } from 'src/utils/base/TypeUtils.ts'
+import { Setter } from 'src/utils/base/TypeUtils.ts'
 
 
 

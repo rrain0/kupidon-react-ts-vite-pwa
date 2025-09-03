@@ -2,8 +2,8 @@ import clsx from 'clsx'
 import React from 'react'
 import { SelectMeterS6 } from 'src/components/elems/select-item/SelectMeter/SelectMeterS6.ts'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from '@utils/base/TypeU'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 
 

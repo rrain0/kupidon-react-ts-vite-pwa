@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Callback = TypeU.Callback
+
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

@@ -1,8 +1,8 @@
 import { CssU } from '@utils/css/CssU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import CssLength = CssU.CssLength
 import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 

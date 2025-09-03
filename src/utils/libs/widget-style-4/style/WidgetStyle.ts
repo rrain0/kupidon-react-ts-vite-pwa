@@ -1,9 +1,9 @@
 
 import { StringU } from 'src/utils/base/StringU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { CssElem } from '@libs/widget-style-4/css/CssElem.ts'
-import isnumber = TypeU.isnumber
-import isobject = TypeU.isobject
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
+import { isobject } from 'src/utils/base/TypeUtils.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'
 import { CssAttr } from '@libs/widget-style-4/css/CssAttr.ts'
 import { useThis } from '@libs/widget-style-4/css/CssState.ts'

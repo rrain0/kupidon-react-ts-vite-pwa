@@ -8,10 +8,10 @@ import hideScrollbar = EmotionCommon.noScrollbars
 import React, { useRef } from 'react'
 import { ReactU } from 'src/utils/react/ReactU.ts'
 import gridStackC = EmotionCommon.gridStackC
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import fullMinMax = EmotionCommon.fullMinMax
 

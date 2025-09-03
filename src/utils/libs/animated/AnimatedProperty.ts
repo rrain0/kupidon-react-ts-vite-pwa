@@ -1,7 +1,7 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
-import Mapper = TypeU.Mapper
-import Callback1 = TypeU.Callback1
+import { Mapper } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
 
 
 

@@ -8,7 +8,7 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useBool } from '@utils/react/state/useBool.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
@@ -47,7 +47,7 @@ import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

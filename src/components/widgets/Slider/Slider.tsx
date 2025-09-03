@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { animated, to, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { TypeU } from '@utils/base/TypeU'
+
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { RangeU } from '@utils/base/RangeU'
@@ -13,10 +13,10 @@ import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import zeroBasedRange = RangeU.zeroBased
-import Setter = TypeU.Setter
+import { Setter } from '@utils/base/TypeUtils.ts'
 import NumRange = RangeU.NumRange
-import Callback1 = TypeU.Callback1
-import Pu = TypeU.Pu
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 // Slider or Scale Picker

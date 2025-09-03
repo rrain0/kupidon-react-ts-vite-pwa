@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useMemo } from 'react'
 import {
   DateArticleCategoryItem, DateArticleTypeItem,
@@ -23,7 +23,7 @@ import BottomFloatingBar from 'src/components/components/screen-bars/BottomFloat
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
-import assertNever = TypeU.assertNever
+import { assertNever } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
 
 

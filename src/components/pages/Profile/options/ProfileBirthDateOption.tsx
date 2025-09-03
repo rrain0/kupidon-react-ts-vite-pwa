@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useState } from 'react'
 import GiftBoxGradIc from 'src/components/elems/icons/GradSvgIcons/pack/special/GiftBoxGradIc.tsx'
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput.tsx'
@@ -10,7 +10,7 @@ import { FormFieldWrapRenderProps } from '@libs/form-data/components/FormFieldWr
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { DateU } from 'src/utils/date/DateU'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import toEmptyAttr = TypeU.toEmptyAttr
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

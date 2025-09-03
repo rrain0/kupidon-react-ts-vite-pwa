@@ -1,6 +1,6 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { AxiosError, AxiosResponse, isAxiosError } from 'axios'
-import isdef = TypeU.isdef
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 

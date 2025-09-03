@@ -24,13 +24,13 @@ import {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
-import Callback = TypeU.Callback
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 import absTlwh = EmotionCommon.absTlwh
 import flexC = EmotionCommon.flexC
 import gridStackC = EmotionCommon.gridStackC

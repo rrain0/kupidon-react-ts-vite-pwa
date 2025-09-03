@@ -7,12 +7,12 @@ import { isMobileSafari } from 'react-device-detect'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars.tsx'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from '@utils/base/TypeU'
+
 import Children = ReactU.Children
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import { simpleGradBgCss } from 'src/styles/bg/simpleGradBg'
-import assertNever = TypeU.assertNever
+import { assertNever } from '@utils/base/TypeUtils.ts'
 
 
 

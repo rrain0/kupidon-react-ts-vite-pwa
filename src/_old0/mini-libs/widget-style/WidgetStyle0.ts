@@ -1,13 +1,14 @@
 import { css } from '@emotion/react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { ObjectU } from '@utils/base/ObjectU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
-import PartialUndef = TypeU.PartialUndef
-import isObject = TypeU.isobject
-import isstring = TypeU.isstring
+
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isObject } from '@utils/base/TypeUtils.ts'
+import { isstring } from '@utils/base/TypeUtils.ts'
 import ValueOrArr = ArrayU.ValueOrArr
 import ObjectMap = ObjectU.ObjectMap
-import RecordRo = TypeU.RecordRo
+import { RecordRo } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 
@@ -19,7 +20,6 @@ export namespace WidgetStyle0 {
   Has State List
   Has SINGLE Root element
   */
-  import isdef = TypeU.isdef
   
   export class CssWidget<
     const E extends string,
@@ -915,9 +915,9 @@ export namespace WidgetStyle0 {
     export const selThis = generateAttrThisSelector(select)
     
     export type errorJsxProp =
-      PartialUndef<{ [attr.error]: boolean }>
+      Pu<{ [attr.error]: boolean }>
     export type errorHtmlProp =
-      PartialUndef<{ [attr.error]: true|undefined }>
+      Pu<{ [attr.error]: true|undefined }>
   }
   export namespace Prop0 {
     export const prop = {

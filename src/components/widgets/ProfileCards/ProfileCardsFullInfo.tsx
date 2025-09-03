@@ -20,11 +20,11 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import { GenderOptionValues } from 'src/components/pages/Profile/options/ProfileGenderOption.tsx'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import Children = ReactU.Children
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC

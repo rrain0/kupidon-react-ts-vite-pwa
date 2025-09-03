@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import React from 'react'
@@ -18,7 +18,7 @@ import FourDotsIc from 'src/components/elems/icons/SvgIcons/pack/ui/FourDotsIc.t
 import CountFormatShort from 'src/components/widgets/CountFormatShort.tsx'
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
 import Txt = EmotionCommon.Txt
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import RootRoute = AppRoutes.RootRoute
 
 

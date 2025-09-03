@@ -1,9 +1,9 @@
 import { InputStyle } from 'src/components/elems/inputs/Input/InputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
+
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

@@ -1,7 +1,7 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { PrimitiveStyleValue, StyleValue } from '@libs/widget-style-6/WidgetStyle.ts'
-import isnumber = TypeU.isnumber
-import isArray = TypeU.isArray
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
+import { isArray } from 'src/utils/base/TypeUtils.ts'
 import {
   WidgetAnyPropTransformer,
   WidgetAttr,

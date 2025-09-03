@@ -8,7 +8,7 @@ import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { MathU } from '@utils/base/MathU.ts'
 import { RangeU } from '@utils/base/RangeU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useStateAndRef } from '@utils/react/state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
@@ -21,8 +21,8 @@ import ProfileCards, {
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
 import rf3 = MathU.rf3
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

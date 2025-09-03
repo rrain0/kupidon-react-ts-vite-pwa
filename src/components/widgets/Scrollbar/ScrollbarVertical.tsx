@@ -8,17 +8,17 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { RangeU } from '@utils/base/RangeU'
 import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/components/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
-import Pu = TypeU.Pu
-import noop = TypeU.noop
-import SetterOrUpdater = TypeU.SetterOrUpdater
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { noop } from '@utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 // TODO Доделать новый скроллбар

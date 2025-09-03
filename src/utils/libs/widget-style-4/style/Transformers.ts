@@ -1,6 +1,6 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { Transformers } from '@libs/widget-style-4/style/WidgetStyle.ts'
-import isnumber = TypeU.isnumber
+import { isnumber } from 'src/utils/base/TypeUtils.ts'
 
 
 const hoverableMedia = '(hover: hover) and (pointer: fine)'

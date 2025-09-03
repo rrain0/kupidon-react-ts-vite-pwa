@@ -1,7 +1,7 @@
 import React from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import PartialDefaults = TypeU.PartialDefaults
-import HtmlDataAttrs = TypeU.HtmlDataAttrs
+
+import { PartialDefaults } from 'src/utils/base/TypeUtils.ts'
+import { HtmlDataAttrs } from 'src/utils/base/TypeUtils.ts'
 
 
 

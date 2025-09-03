@@ -1,6 +1,5 @@
-import { TypeU } from 'src/utils/base/TypeU'
-import RecordRo = TypeU.RecordRo
-import RecordPuro = TypeU.RecordPuro
+import { RecordRo } from 'src/utils/base/TypeUtils.ts'
+import { RecordPuro } from 'src/utils/base/TypeUtils.ts'
 
 
 

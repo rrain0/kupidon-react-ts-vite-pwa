@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { ObjectU } from '@utils/base/ObjectU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
@@ -15,7 +15,7 @@ import ClassStyle = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import FirstCanUndef = ArrayU.FirstCanUndef
 import useLog = ReactU.useLog
 import ObjectKeys = ObjectU.ObjectKeys

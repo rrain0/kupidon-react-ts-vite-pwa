@@ -10,7 +10,7 @@ import ModalDialog from 'src/components/widgets/modals/ModalDialog/ModalDialog.t
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { clearSiteData } from '@utils/js/clearSiteData.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { useBool } from '@utils/react/state/useBool.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
@@ -20,7 +20,7 @@ import row = EmotionCommon.row
 import Theme = AppTheme.Theme
 import { SvgIconS } from 'src/components/elems/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

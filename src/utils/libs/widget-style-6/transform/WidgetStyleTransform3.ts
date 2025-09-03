@@ -1,4 +1,4 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import {
   WidgetAtomicTransformer,
   WidgetAttr,
@@ -7,7 +7,7 @@ import {
   WidgetMultiStateTransformer, WidgetProp, WidgetStateValue,
   WidgetTransformerList,
 } from '@libs/widget-style-6/WidgetEntity.ts'
-import isArray = TypeU.isArray
+import { isArray } from 'src/utils/base/TypeUtils.ts'
 
 
 

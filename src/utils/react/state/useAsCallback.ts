@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
-import anyfun = TypeU.anyfun
+import { anyfun } from 'src/utils/base/TypeUtils.ts'
 
 
 

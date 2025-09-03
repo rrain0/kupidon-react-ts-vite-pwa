@@ -1,6 +1,6 @@
 import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import React, {
   JSX,
@@ -15,11 +15,11 @@ import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors
 import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
-import SetterOrUpdater = TypeU.SetterOrUpdater
-import ValueOrUpdater = TypeU.ValueOrMapper
-import Callback = TypeU.Callback
-import Callback1 = TypeU.Callback1
-import Mapper = TypeU.Mapper
+import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
+import { ValueOrMapper } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { Mapper } from 'src/utils/base/TypeUtils.ts'
 
 
 
@@ -96,7 +96,7 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
   }, [errors, name, value, values])
   
   
-  const [getSetValue] = useAsRefGet((value: ValueOrUpdater<Vs[F]>) => {
+  const [getSetValue] = useAsRefGet((value: ValueOrMapper<Vs[F]>) => {
     setErrors(f => {
       const update = f.filter(f => (f.notify || f.highlight)
         && f.errorFields.includes(name)
@@ -120,7 +120,7 @@ const FormFieldWrap = ReactU.memo(<Vs extends Values, F extends keyof Vs>(
       }
     })
   })
-  const setValue = useCallback((value: ValueOrUpdater<Vs[F]>) => {
+  const setValue = useCallback((value: ValueOrMapper<Vs[F]>) => {
     getSetValue()(value)
   }, [])
   

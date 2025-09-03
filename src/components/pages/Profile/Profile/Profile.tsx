@@ -35,15 +35,15 @@ import ProfilePageTabHeader from 'src/components/pages/Profile/ProfilePageTabHea
 import ProfilePhotos from 'src/components/pages/Profile/Profile/ProfilePhotos.tsx'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { FormProps } from '@libs/form-data/hooks/useFormDerivedData.ts'
 import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import Callback1 = TypeU.Callback1
-import Callback = TypeU.Callback
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
 

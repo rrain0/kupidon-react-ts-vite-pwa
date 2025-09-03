@@ -1,11 +1,11 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import {
   AnimatedProperty, AnimatedPropsFromValues, AnimatedPropsToValues,
 } from '@libs/animated/AnimatedProperty.ts'
-import Mapper = TypeU.Mapper
-import Callback1 = TypeU.Callback1
-import MapperN = TypeU.MapperN
+import { Mapper } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { MapperN } from 'src/utils/base/TypeUtils.ts'
 
 
 

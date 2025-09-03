@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useMemo } from 'react'
 import { emptyUiText } from '@libs/ui-text/UiText.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
@@ -10,8 +10,8 @@ import { DateArticlesData } from 'src/configs/date-article/DateArticlesData.ts'
 import {
   DateArticleTypesData,
 } from 'src/configs/date-article/DateArticleTypesData.ts'
-import assertNever = TypeU.assertNever
-import Pu = TypeU.Pu
+import { assertNever } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

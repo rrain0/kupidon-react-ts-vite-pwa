@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { PointerU } from '@utils/gestures/pointer/PointerU.ts'
 import { useClick } from '@utils/gestures/pointer/useClick.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
@@ -8,7 +8,7 @@ import { useUpNodesScrollLock } from '@utils/gestures/pointer/useUpNodesScrollLo
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import combineProps = ReactU.combineProps
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 import fixedBottom = EmotionCommon.fixedBottom

@@ -1,19 +1,19 @@
 import { ObjectU } from '@utils/base/ObjectU.ts'
 import React, { useMemo } from 'react'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { NavLink, useSearchParams } from 'react-router'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import RouteSegment = RouteBuilder.RouteSegment
 import fullParams = RouteBuilder.fullParams
 import AllowedNameParams = RouteBuilder.AllowedNameParams
 import AllowedNameParamsRoutes = RouteBuilder.AllowedNameParamsRoutes
 import ObjectMap = ObjectU.ObjectMap
-import isobject = TypeU.isobject
+import { isobject } from '@utils/base/TypeUtils.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import AnyParams = RouteBuilder.AnyParams
-import isfunction = TypeU.isfunction
+import { isfunction } from '@utils/base/TypeUtils.ts'
 
 
 

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt

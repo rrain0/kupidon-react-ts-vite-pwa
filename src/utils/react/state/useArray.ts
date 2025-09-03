@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react'
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
-import ValueOrProducer = TypeU.ValueOrProducer
-import ArrFilter = TypeU.ArrFilter
+import { ValueOrProducer } from 'src/utils/base/TypeUtils.ts'
+import { ArrFilter } from 'src/utils/base/TypeUtils.ts'
 
 
 

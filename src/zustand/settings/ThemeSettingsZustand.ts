@@ -1,11 +1,11 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { DefaultDarkTheme, DefaultLightTheme } from 'src/styles/themes/ThemesCollection.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import isobject = TypeU.isobject
-import nonemptyval = TypeU.nonemptyval
-import isemptyval = TypeU.isemptyval
+import { isobject } from '@utils/base/TypeUtils.ts'
+import { nonemptyval } from '@utils/base/TypeUtils.ts'
+import { isemptyval } from '@utils/base/TypeUtils.ts'
 
 
 

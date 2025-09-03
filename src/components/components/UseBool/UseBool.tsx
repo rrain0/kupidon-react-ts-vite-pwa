@@ -1,10 +1,10 @@
 import React from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useBool } from '@utils/react/state/useBool.ts'
-import SetterOrUpdater = TypeU.SetterOrUpdater
-import PartialUndef = TypeU.PartialUndef
-import ValueOrProducer = TypeU.ValueOrProducer
-import Callback = TypeU.Callback
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { ValueOrProducer } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 
@@ -17,7 +17,7 @@ export type UseBoolRenderProps = {
   setFalse: Callback
   toggleValue: Callback
 }
-export type UseBoolProps = PartialUndef<{
+export type UseBoolProps = Pu<{
   initial: ValueOrProducer<boolean>
   children: ((props: UseBoolRenderProps) => React.ReactNode)
 }>

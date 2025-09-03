@@ -2,7 +2,7 @@ import { AnimationFun } from '@animated/AnimationConfig.ts'
 import { createSpring, SpringAnimationData } from '@animated/SpringAnimation.tsx'
 import { useAnimatedValue } from '@animated/useAnimatedValue.ts'
 import { useDrag } from '@use-gesture/react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { getDragDirection } from 'src/utils/gestures/drag/getDragDirection.ts'
 import { useNoSelect } from 'src/utils/gestures/pointer/useNoSelect.ts'
 import { useNoTouchAction } from 'src/utils/gestures/pointer/useNoTouchAction.ts'
@@ -10,8 +10,8 @@ import { useWasGesture } from 'src/utils/gestures/pointer/useWasGesture.ts'
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/utils/react/state/useStateAndRef.ts'
-import Pu = TypeU.Pu
-import Callback = TypeU.Callback
+import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

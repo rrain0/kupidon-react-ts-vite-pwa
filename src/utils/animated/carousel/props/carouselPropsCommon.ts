@@ -1,7 +1,7 @@
 import { MathU } from 'src/utils/base/MathU.ts'
 import { RangeU } from 'src/utils/base/RangeU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Setter = TypeU.Setter
+
+import { Setter } from 'src/utils/base/TypeUtils.ts'
 import rf3 = MathU.rf3
 
 

@@ -1,7 +1,7 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { MediaDownloadable } from '@libs/media/Media.ts'
-import isundef = TypeU.isundef
-import isdef = TypeU.isdef
+import { isundef } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 

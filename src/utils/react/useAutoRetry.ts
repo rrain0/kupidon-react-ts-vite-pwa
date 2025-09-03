@@ -1,7 +1,7 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useInterval2 } from 'src/utils/react/useInterval2.ts'
-import Callback = TypeU.Callback
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

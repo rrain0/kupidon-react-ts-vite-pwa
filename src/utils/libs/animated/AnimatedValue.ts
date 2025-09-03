@@ -1,5 +1,5 @@
 import { AsyncU } from 'src/utils/base/AsyncU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { ReactU } from '@utils/react/ReactU.ts'
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
@@ -8,13 +8,13 @@ import {
 } from '@libs/animated/AnimationConfig.ts'
 import { addAnimation, removeAnimation } from '@libs/animated/runAnimations.ts'
 import { getTime } from '@libs/animated/util.ts'
-import Mapper = TypeU.Mapper
-import Callback = TypeU.Callback
-import noop = TypeU.noop
-import Callback1 = TypeU.Callback1
+import { Mapper } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/TypeUtils.ts'
+import { noop } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
 import withThrottle = AsyncU.withThrottle
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
+import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 import noRepeatLog = ReactU.noRepeatLog
 import noRepeatLog2 = ReactU.noRepeatLog2
 

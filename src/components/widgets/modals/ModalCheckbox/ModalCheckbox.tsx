@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { ReactU } from '@utils/react/ReactU.ts'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React from 'react'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import CheckboxInput from 'src/components/elems/inputs/CheckboxInput/CheckboxInput.tsx'
@@ -11,9 +11,9 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import CheckboxInputGroup from 'src/components/elems/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
 import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
-import Callback1 = TypeU.Callback1
+import { Callback1 } from '@utils/base/TypeUtils.ts'
 import row = EmotionCommon.row
 
 

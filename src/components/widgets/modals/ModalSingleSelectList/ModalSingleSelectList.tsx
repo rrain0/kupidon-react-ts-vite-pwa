@@ -16,12 +16,12 @@ import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomShe
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput'
 import { ReactU } from 'src/utils/react/ReactU'
-import { TypeU } from '@utils/base/TypeU'
-import Callback = TypeU.Callback
-import Setter = TypeU.Setter
+
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Setter } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

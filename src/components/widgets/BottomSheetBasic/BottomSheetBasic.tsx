@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import BottomSheet, {
   BottomSheetOptionsProps,
 } from 'src/components/widgets/BottomSheet/BottomSheet.tsx'
@@ -6,7 +6,7 @@ import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/Bott
 import OverflowWrapper from 'src/components/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

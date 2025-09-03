@@ -1,12 +1,12 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { UserCurrentA } from 'src/models/api/UserA.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import isobject = TypeU.isobject
-import nonemptyval = TypeU.nonemptyval
-import isemptyval = TypeU.isemptyval
-import Getter = TypeU.Getter
-import Callback = TypeU.Callback
+import { isobject } from '@utils/base/TypeUtils.ts'
+import { nonemptyval } from '@utils/base/TypeUtils.ts'
+import { isemptyval } from '@utils/base/TypeUtils.ts'
+import { Getter } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

@@ -10,7 +10,7 @@ import {
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { useCssWhRef } from '@utils/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
@@ -60,9 +60,9 @@ import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
 import arrOfIndices = ArrayU.arrOfIndices
-import ValueOrMapper = TypeU.ValueOrMapper
-import isfunction = TypeU.isfunction
-import isdef = TypeU.isdef
+import { ValueOrMapper } from '@utils/base/TypeUtils.ts'
+import { isfunction } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

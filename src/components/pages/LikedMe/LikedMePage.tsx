@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
 import React, { useCallback } from 'react'
 import { useSearchParams } from 'react-router'
@@ -17,8 +17,8 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
-import Pu = TypeU.Pu
-import Callback = TypeU.Callback
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

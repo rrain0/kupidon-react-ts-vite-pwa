@@ -3,10 +3,10 @@ import React, { CSSProperties, useEffect } from 'react'
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
 import { StringU } from 'src/utils/base/StringU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Pu = TypeU.Pu
-import falsy = TypeU.falsy
-import RecordPu = TypeU.RecordPu
+
+import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { falsy } from 'src/utils/base/TypeUtils.ts'
+import { RecordPu } from 'src/utils/base/TypeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
 import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 

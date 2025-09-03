@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import {ViewProps} from "src/utils/view/ViewProps.ts"
-import { TypeU } from '@utils/base/TypeU.ts'
-import Setter = TypeU.Callback1
-import Callback = TypeU.Callback
+
+import { Setter } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

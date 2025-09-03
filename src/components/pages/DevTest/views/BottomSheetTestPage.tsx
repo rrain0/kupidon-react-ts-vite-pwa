@@ -13,7 +13,7 @@ import {
 } from 'src/components/widgets/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import { Utils } from '@utils/base/Utils.ts'
@@ -23,7 +23,7 @@ import intOrDefault = Utils.nonNegIntOrDefault
 import OverflowWrapper from 'src/components/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
-import Setter = TypeU.Callback1
+import { Setter } from '@utils/base/TypeUtils.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 
 

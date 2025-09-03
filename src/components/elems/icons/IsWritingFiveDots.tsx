@@ -1,10 +1,10 @@
 import { css, keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { CssU } from '@utils/css/CssU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import CssColor = CssU.CssColor
 import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 

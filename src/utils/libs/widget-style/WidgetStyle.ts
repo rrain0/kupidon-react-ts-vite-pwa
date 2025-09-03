@@ -1,8 +1,9 @@
 import { css } from '@emotion/react'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import ObjectMap = ObjectU.ObjectMap
-import RecordRo = TypeU.RecordRo
+import { RecordRo } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 
@@ -14,7 +15,6 @@ export namespace WidgetStyle {
   Has State List
   Has SINGLE Root element
   */
-  import isdef = TypeU.isdef
   
   export class CssWidget<
     const Es extends RecordRo<string, CssWidgetElement<any, any>>,

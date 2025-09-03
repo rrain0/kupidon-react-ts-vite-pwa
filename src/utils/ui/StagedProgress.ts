@@ -1,5 +1,5 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import isdef = TypeU.isdef
+
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 export class StagedProgress {

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Consumer = TypeU.Consumer
-import Predicate = TypeU.Predicate
-import Callback = TypeU.Callback
+
+import { Consumer } from 'src/utils/base/TypeUtils.ts'
+import { Predicate } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

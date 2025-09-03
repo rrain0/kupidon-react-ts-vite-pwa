@@ -4,11 +4,11 @@ import { css } from '@emotion/react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { MathU } from '@utils/base/MathU.ts'
 import { RangeU } from '@utils/base/RangeU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
 import round = EmotionCommon.round
 import arr = ArrayU.arr

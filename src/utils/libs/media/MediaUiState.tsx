@@ -7,8 +7,8 @@ import { ImageParts } from 'src/components/elems/ImageParts.tsx'
 import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 
 

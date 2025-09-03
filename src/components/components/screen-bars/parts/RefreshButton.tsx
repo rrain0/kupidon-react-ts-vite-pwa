@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useBool } from '@utils/react/state/useBool.ts'
 import React, { useLayoutEffect } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
@@ -7,8 +7,8 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'
 import ArrowReloadIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowReloadIc.tsx'
 import { SvgIconS } from 'src/components/elems/icons/SvgIcons/SvgIconS.ts'
-import Pu = TypeU.Pu
-import Callback = TypeU.Callback
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 import rotateAnim = EmotionCommon.rotateAnim
 
 

@@ -1,10 +1,10 @@
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { CssAttr } from '@libs/widget-style-4/css/CssAttr.ts'
 import { CssAttrEnum } from '@libs/widget-style-4/css/CssAttrEnum.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'
 import { CssState } from '@libs/widget-style-4/css/CssState.ts'
-import RecordRo = TypeU.RecordRo
+import { RecordRo } from 'src/utils/base/TypeUtils.ts'
 import { CssWidgetElem } from './CssWidgetElem.ts'
 import { CssProp } from '../css/CssProp.ts'
 import { CssElem } from '../css/CssElem.ts'

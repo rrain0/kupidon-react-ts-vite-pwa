@@ -3,9 +3,9 @@ import axiosRetry from 'axios-retry'
 import mime from 'mime'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
 import commonAxiosConfig = AxiosConfig.commonAxiosConfig
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Callback1 = TypeU.Callback1
-import isdef = TypeU.isdef
+
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 

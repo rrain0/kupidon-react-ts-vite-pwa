@@ -1,9 +1,9 @@
 import React from 'react'
 import { isIOS } from 'react-device-detect'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useWasGesture } from 'src/utils/gestures/pointer/useWasGesture.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import Callback = TypeU.Callback
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

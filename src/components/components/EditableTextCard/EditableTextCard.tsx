@@ -8,13 +8,13 @@ import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import { CardS } from 'src/components/elems/Card/CardS.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import PencilWrite2Ic from 'src/components/elems/icons/SvgIcons/pack/ui/PencilWrite2Ic.tsx'
 import Txt = EmotionCommon.Txt
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
-import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
+import { HtmlEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

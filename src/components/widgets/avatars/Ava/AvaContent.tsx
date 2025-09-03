@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import React from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
@@ -10,7 +10,7 @@ import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import ImgSpark from 'src/components/elems/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/components/elems/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/components/widgets/avatars/Ava/EmptyAva.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

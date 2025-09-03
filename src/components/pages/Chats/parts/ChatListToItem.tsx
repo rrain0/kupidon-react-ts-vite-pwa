@@ -2,7 +2,7 @@ import { animatedMapMulti } from '@animated/AnimatedMultiComputed.ts'
 import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
 import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
@@ -16,10 +16,10 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { UiItemData } from 'src/components/pages/Chats/parts/ChatList.tsx'
 import ChatListItemButton from 'src/components/pages/Chats/parts/ChatListItemButton.tsx'
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
-import Pu = TypeU.Pu
-import SetterOrUpdater = TypeU.SetterOrUpdater
-import Callback1 = TypeU.Callback1
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 import gridStackC = EmotionCommon.gridStackC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use

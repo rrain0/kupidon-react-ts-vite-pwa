@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useState } from 'react'
 import ModalTextarea from 'src/components/widgets/modals/ModalTextarea/ModalTextarea.tsx'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -7,7 +7,7 @@ import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import EditableTextCard from 'src/components/components/EditableTextCard/EditableTextCard.tsx'
 import { FormFieldWrapRenderProps } from '@libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import toEmptyAttr = TypeU.toEmptyAttr
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 const overlayName = 'profileAboutMe'

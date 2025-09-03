@@ -1,6 +1,6 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { MbtiType } from 'src/models/MbtiType.ts'
-import RecordRo = TypeU.RecordRo
+import { RecordRo } from '@utils/base/TypeUtils.ts'
 
 import scientist from '@im/mbti-type/scientist.svg'
 import scientistWithBg from '@im/mbti-type/scientist-with-bg.svg'

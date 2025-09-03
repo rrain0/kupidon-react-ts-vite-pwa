@@ -1,4 +1,4 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useIsMount } from 'src/utils/react/state/useIsMount.ts'
 import { useMemo, useState } from 'react'
@@ -8,7 +8,7 @@ import {
   SearchParamValueData, setSearchParam, stringifySearchParams,
 } from 'src/utils/url/SearchParamsU.ts'
 import { useSearchParamsZustand } from 'src/zustand/url/SearchParamsZustand.ts'
-import Pu = TypeU.Pu
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 
 
 

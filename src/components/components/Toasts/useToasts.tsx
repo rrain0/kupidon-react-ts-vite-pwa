@@ -2,13 +2,13 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { toast, ToastItem } from 'react-toastify'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { asUiText, UiText } from '@libs/ui-text/UiText.ts'
 import { ToastBody, ToastType } from 'src/components/components/Toasts/ToastBody.tsx'
-import falsy = TypeU.falsy
-import Pu = TypeU.Pu
-import Callback1 = TypeU.Callback1
-import Callback = TypeU.Callback
+import { falsy } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

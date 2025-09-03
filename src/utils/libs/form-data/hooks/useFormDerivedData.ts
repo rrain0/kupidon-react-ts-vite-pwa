@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from 'react'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import Values = ValidationCore.Values
 import ObjectMap = ObjectU.ObjectMap
 import Failures = ValidationCore.Failures
 import ObjectKeys = ObjectU.ObjectKeys
-import Callback = TypeU.Callback
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { Callback } from 'src/utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
 
 
 

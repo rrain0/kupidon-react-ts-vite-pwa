@@ -19,7 +19,7 @@ import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import col = EmotionCommon.col
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import ClearSiteDialog, {
@@ -32,7 +32,7 @@ import full = RouteBuilder.full
 import { SettingsOptions } from 'src/components/components/settings-options/SettingsOptions'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

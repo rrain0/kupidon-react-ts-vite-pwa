@@ -1,9 +1,9 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import {
   AnimatedProperty,
   AnimatedPropertyUndefinedable,
 } from '@libs/animated/AnimatedProperty.ts'
-import Pu = TypeU.Pu
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 
 
 

@@ -2,13 +2,13 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
 import AcceptButton from 'src/components/components/screen-bars/parts/AcceptButton.tsx'
 import CancelButton from 'src/components/components/screen-bars/parts/CancelButton.tsx'
-import Callback = TypeU.Callback
-import Pu = TypeU.Pu
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 import StyleProp = ReactU.StyleProp
 
 

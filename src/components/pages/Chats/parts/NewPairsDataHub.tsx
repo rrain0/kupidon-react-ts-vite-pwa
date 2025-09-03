@@ -1,11 +1,11 @@
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useCallback, useEffect, useState } from 'react'
 import { UsersApi } from 'src/services/api/requests/UsersApi.ts'
 import { useFormApiRequest } from '@libs/api/useFormApiRequest.ts'
 import { UserPairA } from 'src/models/api/UserPairA.ts'
 import NewPairsList, { NewPairItem } from 'src/components/pages/Chats/parts/NewPairsList.tsx'
-import isdef = TypeU.isdef
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

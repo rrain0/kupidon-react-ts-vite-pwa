@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useLiveShortDuration } from '@utils/date/useLiveShortDuration.ts'
 import { useShortDurationUiText } from '@utils/date/useShortDurationUiText.ts'
 import React, { useMemo } from 'react'
@@ -27,8 +27,8 @@ import CrossBoldIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossBoldIc
 import InfoCircleOutlinedIc from 'src/components/elems/icons/SvgIcons/pack/ui/InfoCircleOutlinedIc.tsx'
 import CheckmarkIc from 'src/components/elems/icons/SvgIcons/pack/ui/CheckmarkIc.tsx'
 import CheckmarkDoubleIc from 'src/components/elems/icons/SvgIcons/pack/ui/CheckmarkDoubleIc.tsx'
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

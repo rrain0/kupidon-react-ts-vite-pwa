@@ -1,6 +1,5 @@
 import { MathU } from 'src/utils/base/MathU'
-import { TypeU } from 'src/utils/base/TypeU'
-import mapNaN = TypeU.mapNaN
+import { mapNaN } from 'src/utils/base/TypeUtils.ts'
 import mod = MathU.mod
 
 

@@ -1,9 +1,9 @@
 import { MathU } from 'src/utils/base/MathU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { ReactU } from 'src/utils/react/ReactU.ts'
 import mod = MathU.mod
 import rf3 = MathU.rf3
-import Sign = TypeU.Sign
+import { Sign } from 'src/utils/base/TypeUtils.ts'
 import { GetCarouselProps, getIndexesProps, MergeProgressCallback } from './carouselPropsCommon.ts'
 import rf5 = MathU.rf5
 import noRepeatLog = ReactU.noRepeatLog

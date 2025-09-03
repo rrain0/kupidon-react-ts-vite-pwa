@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { ReactU } from '@utils/react/ReactU.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import React, { useMemo } from 'react'
@@ -23,7 +23,7 @@ import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import ClassStyle = ReactU.ClassStyle
 import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import assertNever = TypeU.assertNever
+import { assertNever } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
 
 

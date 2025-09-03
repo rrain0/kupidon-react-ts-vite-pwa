@@ -1,23 +1,23 @@
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { Pair } from '@utils/js/Pair.ts'
 import {
   WidgetElemPropReplacer, WidgetState,
   WidgetStyleReplacer,
 } from '@libs/widget-style-7/WidgetConfig.ts'
-import isfunction = TypeU.isfunction
-import isArray = TypeU.isArray
-import isobject = TypeU.isobject
-import isundef = TypeU.isundef
-import isnull = TypeU.isnull
-import isbool = TypeU.isbool
-import isnumstr = TypeU.isnumstr
+import { isfunction } from 'src/utils/base/TypeUtils.ts'
+import { isArray } from 'src/utils/base/TypeUtils.ts'
+import { isobject } from 'src/utils/base/TypeUtils.ts'
+import { isundef } from 'src/utils/base/TypeUtils.ts'
+import { isnull } from 'src/utils/base/TypeUtils.ts'
+import { isbool } from 'src/utils/base/TypeUtils.ts'
+import { isnumstr } from 'src/utils/base/TypeUtils.ts'
 import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig.ts'
-import Pu = TypeU.Pu
-import isRecord = TypeU.isRecord
+import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { isRecord } from 'src/utils/base/TypeUtils.ts'
 import isEmptyObj = ObjectU.isEmptyObj
 import getPairOfSingleKeyObj = ObjectU.getPairOfSingleKeyObj
-import isstring = TypeU.isstring
+import { isstring } from 'src/utils/base/TypeUtils.ts'
 import isRecordAndEmpty = ObjectU.isRecordAndEmpty
 
 

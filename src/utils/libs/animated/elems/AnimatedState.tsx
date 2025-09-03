@@ -4,11 +4,11 @@ import React, { useMemo, useState } from 'react'
 import {
   AnimatedComponentState,
 } from '@libs/animated/AnimatedProps.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import {
   useUpdateComponentStateUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
-import Pu = TypeU.Pu
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
 
 

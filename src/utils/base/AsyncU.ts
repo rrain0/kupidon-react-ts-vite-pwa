@@ -1,6 +1,6 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import CallbackN = TypeU.CallbackN
-import Callback = TypeU.Callback
+
+import { CallbackN } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/TypeUtils.ts'
 
 
 

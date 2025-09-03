@@ -11,11 +11,11 @@ import clsx from 'clsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/components/elems/Ripple/Ripple.tsx'
 import UseRipple from 'src/components/elems/Ripple/UseRipple.tsx'
-import { TypeU } from '@utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import combineProps = ReactU.combineProps
-import HtmlEmptyAttr = TypeU.HtmlEmptyAttr
-import Callback = TypeU.Callback
+import { HtmlEmptyAttr } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

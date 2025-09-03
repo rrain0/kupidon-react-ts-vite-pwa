@@ -5,11 +5,11 @@ import PencilWrite2Ic from 'src/components/elems/icons/SvgIcons/pack/ui/PencilWr
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import { SelectItemS6 } from 'src/components/elems/select-item/SelectItem/SelectItemS6.ts'
 import SelectMeter from 'src/components/elems/select-item/SelectMeter/SelectMeter'
-import { TypeU } from '@utils/base/TypeU'
+
 import { useCssWhRef } from 'src/utils/view/useCssWhRef'
-import Pu = TypeU.Pu
-import Callback = TypeU.Callback
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

@@ -2,7 +2,7 @@ import { Env } from 'src/configs/Env.ts'
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { MathU } from '@utils/base/MathU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import { useStateAndRef } from '@utils/react/state/useStateAndRef.ts'
 import { useInterval2 } from '@utils/react/useInterval2.ts'
@@ -29,8 +29,8 @@ import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import { useUsersStatusZustand } from 'src/zustand/status/UsersStatusZustand.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import posInf = MathU.posInf
-import isundef = TypeU.isundef
-import isdef = TypeU.isdef
+import { isundef } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

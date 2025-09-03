@@ -1,10 +1,10 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import {
   parseSearchParams,
   SearchParamsData, SearchParamValueData, setSearchParam,
   stringifySearchParams,
 } from 'src/utils/url/SearchParamsU.ts'
-import isstring = TypeU.isstring
+import { isstring } from 'src/utils/base/TypeUtils.ts'
 
 
 export class SearchParams {

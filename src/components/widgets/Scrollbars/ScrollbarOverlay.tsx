@@ -4,13 +4,13 @@ import React from 'react'
 import { ScrollbarOverlayStyle } from 'src/components/widgets/Scrollbars/ScrollbarOverlayStyle.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ReactU } from 'src/utils/react/ReactU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import Scrollbar from 'src/components/widgets/Scrollbar/Scrollbar.tsx'
 import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps, SetScrollProps } from 'src/components/widgets/Scrollbar/useContainerScrollState.ts'
 import absTlwh = EmotionCommon.absTlwh
 import ClassStyle = ReactU.ClassStyle
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

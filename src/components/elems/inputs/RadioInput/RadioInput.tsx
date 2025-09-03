@@ -9,12 +9,12 @@ import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import { RadioInputStyle } from 'src/components/elems/inputs/RadioInput/RadioInputStyle.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import clsx from 'clsx'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import resetInput = EmotionCommon.resetInput
 import absTlwh = EmotionCommon.absTlwh
 import row = EmotionCommon.row
-import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

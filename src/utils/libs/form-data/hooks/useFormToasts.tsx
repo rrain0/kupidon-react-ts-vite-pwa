@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { ValidationActions } from '@libs/form-data/core/ValidationActions.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import { UiText, UiTextValues } from '@libs/ui-text/UiText.ts'
@@ -11,7 +11,7 @@ import Values = ValidationCore.Values
 import awaitDelay = ValidationActions.awaitDelay
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors
-import Updater = TypeU.Updater
+import { Updater } from 'src/utils/base/TypeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
 
 

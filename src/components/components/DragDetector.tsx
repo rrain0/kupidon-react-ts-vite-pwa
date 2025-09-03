@@ -2,15 +2,15 @@ import React, { useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Contents from '@libs/short-propsed/components/Contents.tsx'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import PartialUndef = TypeU.PartialUndef
+import { Pu } from '@utils/base/TypeUtils.ts'
 import contents = EmotionCommon.contents
 
 
 
 
-export type DragDetectorProps = PartialUndef<{
+export type DragDetectorProps = Pu<{
   children: React.ReactNode
 }>
 

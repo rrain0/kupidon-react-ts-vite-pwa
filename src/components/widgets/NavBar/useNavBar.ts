@@ -1,10 +1,10 @@
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/components/widgets/NavBar/navStack.ts'
 import { NavBarStore, useNavBarZustand } from 'src/zustand/app/NavBarZustand.ts'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

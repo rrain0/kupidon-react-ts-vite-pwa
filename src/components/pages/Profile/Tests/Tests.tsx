@@ -24,15 +24,15 @@ import Card from 'src/components/elems/Card/Card.tsx'
 import ProfilePageTabHeader from 'src/components/pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { FormProps } from '@libs/form-data/hooks/useFormDerivedData.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import Callback1 = TypeU.Callback1
-import Callback = TypeU.Callback
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/TypeUtils.ts'
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import pinkHeartWithExclamation from 'src/assets/im/ic/pink-heart-with-exclamation.svg'

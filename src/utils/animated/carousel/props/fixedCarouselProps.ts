@@ -4,8 +4,8 @@ import {
 } from 'src/utils/animated/carousel/props/carouselPropsCommon.ts'
 import { MathU } from 'src/utils/base/MathU.ts'
 import { RangeU } from 'src/utils/base/RangeU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Sign = TypeU.Sign
+
+import { Sign } from 'src/utils/base/TypeUtils.ts'
 import rf3 = MathU.rf3
 import rf5 = MathU.rf5
 

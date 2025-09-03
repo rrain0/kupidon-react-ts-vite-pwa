@@ -8,24 +8,24 @@ import React, {
 } from 'react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { RangeU } from '@utils/base/RangeU'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { CssParserU } from 'src/utils/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
-import PartialUndef = TypeU.PartialUndef
-import Setter = TypeU.Setter
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { Setter } from '@utils/base/TypeUtils.ts'
 import findLastBy3 = ArrayU.findLastBy3
-import nonemptyval = TypeU.nonemptyval
+import { nonemptyval } from '@utils/base/TypeUtils.ts'
 import findBy3 = ArrayU.findBy3
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import lastIndex = ArrayU.lastI
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
-import isemptyval = TypeU.isemptyval
-import Defined = TypeU.Defined
-import isdef = TypeU.isdef
+import { isemptyval } from '@utils/base/TypeUtils.ts'
+import { Defined } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 
@@ -99,7 +99,7 @@ export type UseBottomSheetOptions = {
   setSheetState: Setter<SheetState>
   snapIdx: SheetSnapIdx
   setSnapIdx: Setter<SheetSnapIdx>
-} & PartialUndef<{
+} & Pu<{
   snapPoints: SheetSnapPoints
   defaultOpenIdx: number
   animationDuration: number

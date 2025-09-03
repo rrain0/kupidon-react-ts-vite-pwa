@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
 import { MathU } from '@utils/base/MathU.ts'
 import { RangeU } from '@utils/base/RangeU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
@@ -31,13 +31,13 @@ import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import toEmptyAttr = TypeU.toEmptyAttr
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 import rf1 = MathU.rf1
 import resetH = EmotionCommon.resetH
-import isdef = TypeU.isdef
-import isnull = TypeU.isnull
-import isundef = TypeU.isundef
-import Setter = TypeU.Setter
+import { isdef } from '@utils/base/TypeUtils.ts'
+import { isnull } from '@utils/base/TypeUtils.ts'
+import { isundef } from '@utils/base/TypeUtils.ts'
+import { Setter } from '@utils/base/TypeUtils.ts'
 
 
 

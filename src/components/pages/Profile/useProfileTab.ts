@@ -1,4 +1,4 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder'
 import { useEffect, useMemo, useState } from 'react'
 import { useMatch, useNavigate, useSearchParams } from 'react-router'
@@ -8,7 +8,7 @@ import full = RouteBuilder.full
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
-import isundef = TypeU.isundef
+import { isundef } from '@utils/base/TypeUtils.ts'
 
 
 

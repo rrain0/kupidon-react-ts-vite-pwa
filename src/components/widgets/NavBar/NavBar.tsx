@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import React from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
@@ -24,8 +24,8 @@ import QuickSettings, {
   QuickSettingsOverlayName,
 } from 'src/components/widgets/QuickSettings/QuickSettings.tsx'
 import modalFloor500 = StyleVals.modalFloor500
-import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

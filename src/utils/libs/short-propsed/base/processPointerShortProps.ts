@@ -1,5 +1,5 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 
 
 

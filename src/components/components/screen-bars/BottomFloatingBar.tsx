@@ -4,15 +4,15 @@ import React from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Grid from '@libs/short-propsed/components/Grid.tsx'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import AcceptAndCancelButtons from 'src/components/components/screen-bars/parts/AcceptAndCancelButtons.tsx'
 import QuickSettingsButton from 'src/components/components/screen-bars/parts/QuickSettingsButton.tsx'
 import RefreshButton from 'src/components/components/screen-bars/parts/RefreshButton.tsx'
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
-import isundef = TypeU.isundef
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
+import { isundef } from '@utils/base/TypeUtils.ts'
 import toPx = CssU.toPx
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import modalFloor100 = StyleVals.modalFloor100
 
 

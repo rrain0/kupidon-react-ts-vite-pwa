@@ -1,10 +1,10 @@
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { useBool } from '@utils/react/state/useBool.ts'
 import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

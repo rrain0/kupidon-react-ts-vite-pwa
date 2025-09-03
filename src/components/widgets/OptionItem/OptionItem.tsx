@@ -9,16 +9,16 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import { GradSvgIconS6 } from 'src/components/elems/icons/GradSvgIcons/GradSvgIconS6.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
-import PartialUndef = TypeU.PartialUndef
+
+import { Pu } from '@utils/base/TypeUtils.ts'
 import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import maxLines = EmotionCommon.maxLines
 
 
 
 
-export type OptionItemProps = PartialUndef<{
+export type OptionItemProps = Pu<{
   icon: React.ReactNode
   title: React.ReactNode
   value: React.ReactNode

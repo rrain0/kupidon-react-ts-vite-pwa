@@ -3,12 +3,12 @@ import React, {
   useRef,
 } from 'react'
 import { AnimatedElemStyle, AnimatedElemAttrs } from '@libs/animated/AnimatedProps.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import {
   useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
 import Flex from 'src/utils/libs/short-propsed/components/Flex.tsx'
-import Pu = TypeU.Pu
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 
 
 

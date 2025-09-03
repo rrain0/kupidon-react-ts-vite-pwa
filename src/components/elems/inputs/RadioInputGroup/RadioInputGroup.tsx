@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 import React from 'react'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import {
   RadioInputGroupStyle,
 } from 'src/components/elems/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
-import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

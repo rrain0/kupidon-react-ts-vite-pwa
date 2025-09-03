@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA, UserStrangerA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
 import { FileU } from '@utils/file/FileU.ts'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
@@ -14,10 +14,10 @@ import TechnicalError = ApiResponseUtils.TechnicalError
 import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
 import AuthenticationError = ApiResponseUtils.AuthenticationError
 import NoUserResponseError = ApiResponseUtils.NoUserResponseError
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import fetchToBlob = FileU.fetchToBlob
-import Callback1 = TypeU.Callback1
-import isdef = TypeU.isdef
+import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/TypeUtils.ts'
 
 
 

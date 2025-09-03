@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import Setter = TypeU.Setter
-import ValueOrProducer = TypeU.ValueOrProducer
-import Updater = TypeU.Updater
-import SetterOrUpdater = TypeU.SetterOrUpdater
-import isfunction = TypeU.isfunction
+import { Setter } from 'src/utils/base/TypeUtils.ts'
+import { ValueOrProducer } from 'src/utils/base/TypeUtils.ts'
+import { Updater } from 'src/utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
+import { isfunction } from 'src/utils/base/TypeUtils.ts'
 
 
 

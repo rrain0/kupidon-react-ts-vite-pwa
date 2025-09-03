@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React from 'react'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
@@ -8,12 +8,12 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import RangePicker from 'src/components/widgets/RangePicker/RangePicker.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { RangeU } from '@utils/base/RangeU'
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 import col = EmotionCommon.col
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
 import NumRange = RangeU.NumRange
 import Txt = EmotionCommon.Txt
-import PartialUndef = TypeU.PartialUndef
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 
@@ -27,7 +27,7 @@ export type ModalRangePickerProps = {
   range: NumRange
   setRange: SetterOrUpdater<NumRange>
   minMax: NumRange
-} & PartialUndef<{
+} & Pu<{
   children: React.ReactNode
 }>
 

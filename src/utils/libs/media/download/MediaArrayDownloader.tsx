@@ -8,8 +8,8 @@ import {
 } from '@libs/media/download/useMediaArrayDownloader.ts'
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Pu = TypeU.Pu
+
+import { Pu } from 'src/utils/base/TypeUtils.ts'
 
 
 

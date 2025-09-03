@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { nameCommaAge } from '@utils/ui/nameCommaAge.ts'
 import React from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
@@ -15,9 +15,9 @@ import { ImgSparkS6 } from 'src/components/elems/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/components/widgets/avatars/Ava/EmptyAva.tsx'
 import DislikeButton from 'src/components/widgets/ProfileCards/DislikeButton.tsx'
 import LikeButton from 'src/components/widgets/ProfileCards/LikeButton.tsx'
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 import Txt = EmotionCommon.Txt
-import Callback = TypeU.Callback
+import { Callback } from '@utils/base/TypeUtils.ts'
 
 
 

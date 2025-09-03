@@ -4,12 +4,12 @@ import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import Card from 'src/components/elems/Card/Card.tsx'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useEffect, useState } from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
 import Modal from 'src/components/components/modal/Modal.tsx'
-import Callback = TypeU.Callback
-import Pu = TypeU.Pu
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 import Children = ReactU.Children
 import modalContextMenuCardBoxS = ModalElements.modalContextMenuCardBoxS
 import StyleProp = ReactU.StyleProp

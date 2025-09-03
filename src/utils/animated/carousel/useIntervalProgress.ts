@@ -1,10 +1,10 @@
 import { RangeU } from 'src/utils/base/RangeU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import Getter = TypeU.Getter
-import Pu = TypeU.Pu
-import isdef = TypeU.isdef
+import { Getter } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/TypeUtils.ts'
 
 
 

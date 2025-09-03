@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { useLiveUsersStatus } from '@utils/app/useLiveUsersStatus.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React, { useEffect, useLayoutEffect, useState } from 'react'
@@ -21,7 +21,7 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import TopActionBar from 'src/components/components/screen-bars/TopActionBar.tsx'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import Txt = EmotionCommon.Txt
-import Pu = TypeU.Pu
+import { Pu } from '@utils/base/TypeUtils.ts'
 
 
 

@@ -8,15 +8,15 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { RangeU } from '@utils/base/RangeU'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/components/widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
-import Pu = TypeU.Pu
-import toEmptyAttr = TypeU.toEmptyAttr
+import { Pu } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
 
 
 

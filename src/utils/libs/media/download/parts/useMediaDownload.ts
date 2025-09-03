@@ -1,6 +1,6 @@
 import { AsyncU } from 'src/utils/base/AsyncU.ts'
 import { RangeU } from 'src/utils/base/RangeU.ts'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { FileU } from '@utils/file/FileU.ts'
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
@@ -14,7 +14,7 @@ import {
 import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
 
 
 

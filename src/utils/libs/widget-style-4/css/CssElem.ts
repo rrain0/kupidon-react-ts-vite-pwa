@@ -1,12 +1,12 @@
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { CssAttr } from '@libs/widget-style-4/css/CssAttr.ts'
 import { CssAttrEnum } from '@libs/widget-style-4/css/CssAttrEnum.ts'
 import { CssProp } from '@libs/widget-style-4/css/CssProp.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'
 import { CssSelectable } from '@libs/widget-style-4/css/CssSelectable.ts'
 import { CssState, useThis } from '@libs/widget-style-4/css/CssState.ts'
-import isemptyval = TypeU.isemptyval
-import RecordRo = TypeU.RecordRo
+import { isemptyval } from 'src/utils/base/TypeUtils.ts'
+import { RecordRo } from 'src/utils/base/TypeUtils.ts'
 
 
 

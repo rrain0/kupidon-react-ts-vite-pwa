@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
+
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import Setter = TypeU.Setter
+import { Setter } from 'src/utils/base/TypeUtils.ts'
 
 
 

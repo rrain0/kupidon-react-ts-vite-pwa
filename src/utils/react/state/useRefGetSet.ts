@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
-import { TypeU } from 'src/utils/base/TypeU.ts'
-import Callback1 = TypeU.Callback1
+
+import { Callback1 } from 'src/utils/base/TypeUtils.ts'
 
 
 

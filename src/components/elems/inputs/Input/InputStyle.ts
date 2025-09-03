@@ -3,7 +3,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import row = EmotionCommon.row
 import resetInput = EmotionCommon.resetInput
 import absTlwh = EmotionCommon.absTlwh
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { WidgetStyle0 } from 'src/_old0/mini-libs/widget-style/WidgetStyle0.ts'
 import Elem = WidgetStyle0.Elem
@@ -11,7 +11,7 @@ import CssPseudo = WidgetStyle0.CssPseudo
 import CssWidget = WidgetStyle0.CssWidget
 import CssAttr = WidgetStyle0.CssAttr
 import bgInBorder = EmotionCommon.bgInBorder
-import PartialUndef = TypeU.PartialUndef
+import { Pu } from '@utils/base/TypeUtils.ts'
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
 import CssProp = WidgetStyle0.CssProp
@@ -225,7 +225,7 @@ export namespace InputStyle {
   
   
   
-  type InputOutlinedRectStyleProps = PartialUndef<{
+  type InputOutlinedRectStyleProps = Pu<{
     size:     'normal' | 'small'
     color:    'normal'
     textSize: 'normal' | 'small' | 'smaller'

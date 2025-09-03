@@ -11,7 +11,7 @@ import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { AsyncU } from '@utils/base/AsyncU.ts'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import { RangeU } from '@utils/base/RangeU'
 import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import throttle = AsyncU.withThrottle
@@ -22,7 +22,7 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
 import ApiResponse = ApiResponseUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
-import SetterOrUpdater = TypeU.SetterOrUpdater
+import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
 import findBy = ArrayU.findBy

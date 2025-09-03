@@ -18,12 +18,12 @@ import { CheckboxInputStyle } from 'src/components/elems/inputs/CheckboxInput/Ch
 import DimmedBg from 'src/components/widgets/DimmedBg.tsx'
 import DialogButtons from 'src/components/widgets/modals/DialogButtons'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
-import { TypeU } from '@utils/base/TypeU.ts'
+
 import React, { useMemo } from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
 import Modal from 'src/components/components/modal/Modal.tsx'
-import Callback = TypeU.Callback
-import Pu = TypeU.Pu
+import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/TypeUtils.ts'
 import rowC = EmotionCommon.rowC
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import UseEnterExitTransition from 'src/components/components/animations/UseEnterExitTransition.tsx'
