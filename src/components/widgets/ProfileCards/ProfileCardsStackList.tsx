@@ -6,9 +6,8 @@ import {
 } from '@utils/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { MathU } from '@utils/base/MathU.ts'
-import { RangeU } from '@utils/base/RangeU.ts'
-
+import { rf3 } from '@utils/base/math/mathUtils.ts'
+import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useStateAndRef } from '@utils/react/state/useStateAndRef.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
@@ -20,9 +19,8 @@ import ProfileCards, {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
-import rf3 = MathU.rf3
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 
@@ -188,7 +186,7 @@ const ProfileCardsStackList = React.memo(({
     
     const transform = (() => {
       if (first) {
-        const a = RangeU.map(pCurr, [0, 100], [0, 0.03])
+        const a = rangeMap(pCurr, [0, 100], [0, 0.03])
         return `translateY(300%) rotate(${a}turn) translateY(-300%)`
       }
       return `translateX(0%)`
@@ -204,7 +202,7 @@ const ProfileCardsStackList = React.memo(({
     
     const opacity = (() => {
       if (first) {
-        return RangeU.map(100 - Math.abs(pCurr), [0, 55, 100], [0, 1, 1])
+        return rangeMap(100 - Math.abs(pCurr), [0, 55, 100], [0, 1, 1])
       }
       if (viewPosI === 1) {
         return Math.abs(pCurr) / 100
@@ -218,12 +216,12 @@ const ProfileCardsStackList = React.memo(({
     
     const restItemsOpacity = (() => {
       if (first) {
-        return 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
+        return 1 - rangeMap(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
       }
       return 1
     })()
     
-    const fullInfoOpacity = 1 - RangeU.map(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
+    const fullInfoOpacity = 1 - rangeMap(Math.abs(pCurr), [0, 10, 100], [0, 1, 1])
     
     const action = (() => {
       if (!first) return undefined
@@ -235,12 +233,12 @@ const ProfileCardsStackList = React.memo(({
     
     const shadowIntensity = (() => {
       if (!first) return 0
-      return RangeU.map(Math.abs(pCurr), [0, 25, 100], [0, 1, 1])
+      return rangeMap(Math.abs(pCurr), [0, 25, 100], [0, 1, 1])
     })()
     
     const reactionIconOpacity = (() => {
       if (!first) return 0
-      return RangeU.map(Math.abs(pCurr), [0, 15, 100], [0, 1, 1])
+      return rangeMap(Math.abs(pCurr), [0, 15, 100], [0, 1, 1])
     })()
     
     

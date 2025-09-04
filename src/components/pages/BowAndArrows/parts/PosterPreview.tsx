@@ -7,7 +7,7 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { RangeU } from '@utils/base/RangeU.ts'
+import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useInterval2 } from '@utils/react/useInterval2.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
@@ -106,7 +106,7 @@ const PosterPreview = React.memo(() => {
               transform: animatedProps.map(ap => {
                 const { viewP } = ap(viewI)
                 // add gap 20%
-                const x = RangeU.map(viewP, [0, 100], [0, 120])
+                const x = rangeMap(viewP, [0, 100], [0, 120])
                 //console.log('x', x)
                 return `translateX(${x}%)`
               }),

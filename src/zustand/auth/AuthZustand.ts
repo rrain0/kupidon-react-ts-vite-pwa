@@ -2,11 +2,11 @@
 import { UserCurrentA } from 'src/models/api/UserA.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { isobject } from '@utils/base/TypeUtils.ts'
-import { nonemptyval } from '@utils/base/TypeUtils.ts'
-import { isemptyval } from '@utils/base/TypeUtils.ts'
-import { Getter } from '@utils/base/TypeUtils.ts'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { isobject } from '@utils/base/math/typeUtils.ts'
+import { nonemptyval } from '@utils/base/math/typeUtils.ts'
+import { isemptyval } from '@utils/base/math/typeUtils.ts'
+import { Getter } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 
 
 

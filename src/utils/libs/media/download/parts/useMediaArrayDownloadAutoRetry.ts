@@ -3,7 +3,7 @@ import { ArrayU } from 'src/utils/base/ArrayU.ts'
 
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import mapToIf = ArrayU.mapToIf
-import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
 
 
 

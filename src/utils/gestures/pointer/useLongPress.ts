@@ -3,7 +3,7 @@ import { isIOS } from 'react-device-detect'
 
 import { useWasGesture } from 'src/utils/gestures/pointer/useWasGesture.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/math/typeUtils.ts'
 
 
 

@@ -22,8 +22,8 @@ import MountController, { MountControllerRenderProps } from 'src/components/comp
 import React, { useMemo } from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
 import Modal from 'src/components/components/modal/Modal.tsx'
-import { Callback } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import rowC = EmotionCommon.rowC
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import UseEnterExitTransition from 'src/components/components/animations/UseEnterExitTransition.tsx'

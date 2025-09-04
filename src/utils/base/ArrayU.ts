@@ -1,18 +1,17 @@
-import { RangeU } from 'src/utils/base/RangeU'
-
-import { emptyval } from 'src/utils/base/TypeUtils.ts'
-import { ComparatorEq } from 'src/utils/base/TypeUtils.ts'
-import { defaultComparatorEq } from 'src/utils/base/TypeUtils.ts'
-import { defaultFilter } from 'src/utils/base/TypeUtils.ts'
-import { Mapper } from 'src/utils/base/TypeUtils.ts'
-import { Filter } from 'src/utils/base/TypeUtils.ts'
-import { MergerIndexed } from 'src/utils/base/TypeUtils.ts'
-import { CombinerIndexed } from 'src/utils/base/TypeUtils.ts'
-import { Nonemptyval } from 'src/utils/base/TypeUtils.ts'
-import { isArray } from 'src/utils/base/TypeUtils.ts'
-import { Sign } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
-import { ArrFilter } from 'src/utils/base/TypeUtils.ts'
+import { rangeClamp } from 'src/utils/base/math/rangeUtils.ts'
+import { emptyval } from 'src/utils/base/math/typeUtils.ts'
+import { ComparatorEq } from 'src/utils/base/math/typeUtils.ts'
+import { defaultComparatorEq } from 'src/utils/base/math/typeUtils.ts'
+import { defaultFilter } from 'src/utils/base/math/typeUtils.ts'
+import { Mapper } from 'src/utils/base/math/typeUtils.ts'
+import { Filter } from 'src/utils/base/math/typeUtils.ts'
+import { MergerIndexed } from 'src/utils/base/math/typeUtils.ts'
+import { CombinerIndexed } from 'src/utils/base/math/typeUtils.ts'
+import { Nonemptyval } from 'src/utils/base/math/typeUtils.ts'
+import { isArray } from 'src/utils/base/math/typeUtils.ts'
+import { Sign } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
+import { ArrFilter } from 'src/utils/base/math/typeUtils.ts'
 
 
 
@@ -58,7 +57,9 @@ export namespace ArrayU {
   
   
   export const setLast = <T>(arr: T[], last: T) => {
-    if (!arr.length) throw new Error("Array is empty, can't set last element, because it does not exist.")
+    if (!arr.length) throw new Error(
+      "Array is empty, can't set last element, because it does not exist."
+    )
     arr[arr.length-1] = last
   }
   
@@ -70,7 +71,7 @@ export namespace ArrayU {
   }
   
   
-  export const randomElem = <T>(arr: T[]): T => {
+  export const randomElem = <T>(arr: readonly T[]): T => {
     if (!arr.length) throw new Error("Array is empty, can't get random element.")
     return arr[Math.floor(Math.random() * arr.length)]
   }
@@ -532,8 +533,8 @@ export namespace ArrayU {
     startIdx = 0,
     orElse,
   }: FindByElseProps<T, E>): FindResult<T, E> => {
-    startIdx = RangeU.clamp(
-      startIdx>=0 ? startIdx : (arr.length+startIdx),
+    startIdx = rangeClamp(
+      startIdx >= 0 ? startIdx : (arr.length+startIdx),
       [0, arr.length]
     )
     for (let i = startIdx; i < arr.length; i++) {
@@ -579,7 +580,7 @@ export namespace ArrayU {
     startIdx = -1,
     orElse,
   }: FindByElseProps<T, E>): FindResult<T, E> => {
-    startIdx = RangeU.clamp(
+    startIdx = rangeClamp(
       startIdx>=0 ? startIdx : (arr.length + startIdx),
       [-1, arr.length - 1]
     )

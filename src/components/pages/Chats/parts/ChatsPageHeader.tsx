@@ -18,7 +18,7 @@ import FourDotsIc from 'src/components/elems/icons/SvgIcons/pack/ui/FourDotsIc.t
 import CountFormatShort from 'src/components/widgets/CountFormatShort.tsx'
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
 import Txt = EmotionCommon.Txt
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import RootRoute = AppRoutes.RootRoute
 
 

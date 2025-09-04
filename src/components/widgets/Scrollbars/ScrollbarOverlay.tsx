@@ -10,7 +10,7 @@ import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.
 import { ScrollProps, SetScrollProps } from 'src/components/widgets/Scrollbar/useContainerScrollState.ts'
 import absTlwh = EmotionCommon.absTlwh
 import ClassStyle = ReactU.ClassStyle
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 

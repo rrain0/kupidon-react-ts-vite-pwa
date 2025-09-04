@@ -1,8 +1,6 @@
-import { StringU } from 'src/utils/base/StringU.ts'
-
+import { camelCaseToWords } from 'src/utils/base/stringUtils.ts'
 import { CommonProps } from '@libs/widget-style-6/WidgetCommonEntities.ts'
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
-import camelCaseToWords = StringU.camelCaseToWords
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
 
 
 

@@ -4,19 +4,17 @@ import { ActionUiText } from 'src/locales/translations/ActionUiText'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 import DialogButtons from 'src/components/widgets/modals/DialogButtons'
 import Slider from 'src/components/widgets/Slider/Slider'
-
 import React from 'react'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { RangeU } from '@utils/base/RangeU'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 import col = EmotionCommon.col
-import { Setter } from '@utils/base/TypeUtils.ts'
-import NumRange = RangeU.NumRange
+import { Setter } from '@utils/base/math/typeUtils.ts'
+import { NumRange } from '@utils/base/math/rangeUtils.ts'
 import Txt = EmotionCommon.Txt
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 

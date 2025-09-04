@@ -2,13 +2,11 @@ import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
-import { StringU } from 'src/utils/base/StringU.ts'
-
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { falsy } from 'src/utils/base/TypeUtils.ts'
-import { RecordPu } from 'src/utils/base/TypeUtils.ts'
+import { camelCaseToKebabCase } from 'src/utils/base/stringUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { falsy } from 'src/utils/base/math/typeUtils.ts'
+import { RecordPu } from 'src/utils/base/math/typeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
-import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 

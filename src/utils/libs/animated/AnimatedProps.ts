@@ -3,7 +3,7 @@ import {
   AnimatedProperty,
   AnimatedPropertyUndefinedable,
 } from '@libs/animated/AnimatedProperty.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 
 
 

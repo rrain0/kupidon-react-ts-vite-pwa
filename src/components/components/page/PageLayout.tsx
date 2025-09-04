@@ -9,10 +9,10 @@ import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars.tsx
 import { ReactU } from 'src/utils/react/ReactU'
 
 import Children = ReactU.Children
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import { simpleGradBgCss } from 'src/styles/bg/simpleGradBg'
-import { assertNever } from '@utils/base/TypeUtils.ts'
+import { assertNever } from '@utils/base/math/typeUtils.ts'
 
 
 

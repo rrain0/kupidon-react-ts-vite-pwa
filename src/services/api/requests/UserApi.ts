@@ -14,10 +14,10 @@ import TechnicalError = ApiResponseUtils.TechnicalError
 import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
 import AuthenticationError = ApiResponseUtils.AuthenticationError
 import NoUserResponseError = ApiResponseUtils.NoUserResponseError
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import fetchToBlob = FileU.fetchToBlob
-import { Callback1 } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { Callback1 } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 

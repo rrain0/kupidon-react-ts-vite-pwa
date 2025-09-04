@@ -1,8 +1,6 @@
-import { StringU } from 'src/utils/base/StringU.ts'
+import { uncapitalize, camelCaseToKebabCase } from 'src/utils/base/stringUtils.ts'
 import { FlatStyleTf1 } from '@libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { WidgetProp, WidgetTransformer } from '@libs/widget-style-6/WidgetEntity.ts'
-import uncapitalize = StringU.uncapitalize
-import camelCaseToKebabCase = StringU.camelCaseToKebabCase
 
 
 

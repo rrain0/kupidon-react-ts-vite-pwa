@@ -6,8 +6,8 @@ import Values = ValidationCore.Values
 import ObjectMap = ObjectU.ObjectMap
 import Failures = ValidationCore.Failures
 import ObjectKeys = ObjectU.ObjectKeys
-import { Callback } from 'src/utils/base/TypeUtils.ts'
-import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
 
 
 

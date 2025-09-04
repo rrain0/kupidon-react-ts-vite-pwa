@@ -1,9 +1,9 @@
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
 
 import ObjectEntries = ObjectU.ObjectEntries
-import { isundef } from 'src/utils/base/TypeUtils.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { isundef } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 import stringifyEq = ObjectU.stringifyEq
 
 

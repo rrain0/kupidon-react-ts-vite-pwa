@@ -1,14 +1,12 @@
-import { StringU } from 'src/utils/base/StringU.ts'
-
+import { camelCaseToWords } from 'src/utils/base/stringUtils.ts'
 import {
   createCamelCaseWordsTree, nodeValue, WordsTree,
 } from '@libs/widget-style-6/transform/CamelCaseWordsTree.ts'
 import { WidgetProp, WidgetTransformer } from '@libs/widget-style-6/WidgetEntity.ts'
 import { isStyleValue, WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import camelCaseToWords = StringU.camelCaseToWords
-import { isArray } from 'src/utils/base/TypeUtils.ts'
-import { isfunction } from 'src/utils/base/TypeUtils.ts'
-import { isobject } from 'src/utils/base/TypeUtils.ts'
+import { isArray } from 'src/utils/base/math/typeUtils.ts'
+import { isfunction } from 'src/utils/base/math/typeUtils.ts'
+import { isobject } from 'src/utils/base/math/typeUtils.ts'
 
 
 

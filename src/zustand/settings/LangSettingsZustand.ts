@@ -3,9 +3,9 @@ import { ArrayU } from '@utils/base/ArrayU.ts'
 import { Lang } from '@utils/app/lang/Lang.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { isobject } from '@utils/base/TypeUtils.ts'
-import { nonemptyval } from '@utils/base/TypeUtils.ts'
-import { isemptyval } from '@utils/base/TypeUtils.ts'
+import { isobject } from '@utils/base/math/typeUtils.ts'
+import { nonemptyval } from '@utils/base/math/typeUtils.ts'
+import { isemptyval } from '@utils/base/math/typeUtils.ts'
 import NonEmptyArr = ArrayU.NonEmptyArr
 
 

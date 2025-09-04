@@ -23,7 +23,7 @@ import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
 import ClassStyle = ReactU.ClassStyle
 import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import { assertNever } from '@utils/base/TypeUtils.ts'
+import { assertNever } from '@utils/base/math/typeUtils.ts'
 import col = EmotionCommon.col
 
 

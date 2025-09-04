@@ -1,12 +1,10 @@
-import { StringU } from 'src/utils/base/StringU.ts'
-
+import { capitalize } from 'src/utils/base/stringUtils.ts'
 import { Pair } from 'src/utils/js/Pair.ts'
-import { WriteablePartial } from 'src/utils/base/TypeUtils.ts'
-import { isobject } from 'src/utils/base/TypeUtils.ts'
-import capitalize = StringU.capitalize
-import { isundef } from 'src/utils/base/TypeUtils.ts'
-import { isnull } from 'src/utils/base/TypeUtils.ts'
-import { isRecord } from 'src/utils/base/TypeUtils.ts'
+import { WriteablePartial } from 'src/utils/base/math/typeUtils.ts'
+import { isobject } from 'src/utils/base/math/typeUtils.ts'
+import { isundef } from 'src/utils/base/math/typeUtils.ts'
+import { isnull } from 'src/utils/base/math/typeUtils.ts'
+import { isRecord } from 'src/utils/base/math/typeUtils.ts'
 
 
 

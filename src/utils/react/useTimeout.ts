@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Callback } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/math/typeUtils.ts'
 
 
 

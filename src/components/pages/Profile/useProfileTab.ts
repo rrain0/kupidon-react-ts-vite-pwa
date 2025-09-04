@@ -8,7 +8,7 @@ import full = RouteBuilder.full
 import path = RouteBuilder.path
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import use = RouteBuilder.use
-import { isundef } from '@utils/base/TypeUtils.ts'
+import { isundef } from '@utils/base/math/typeUtils.ts'
 
 
 

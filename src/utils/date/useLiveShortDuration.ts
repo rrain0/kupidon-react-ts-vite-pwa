@@ -10,8 +10,8 @@ import {
 import { useEffect, useState } from 'react'
 
 import { JsU } from 'src/utils/js/JsU.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 import maxTimeout = JsU.maxTimeout
 
 

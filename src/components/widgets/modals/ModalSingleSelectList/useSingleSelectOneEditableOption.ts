@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/models/ui/Option.ts'
 
-import { Setter } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { Setter } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 export const useSingleSelectOneEditableOption = <T extends string>(

@@ -8,7 +8,7 @@ import { useUpNodesScrollLock } from '@utils/gestures/pointer/useUpNodesScrollLo
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import combineProps = ReactU.combineProps
 import stopPointerAndMouseEvents = PointerU.stopPointerAndMouseEvents
 import fixedBottom = EmotionCommon.fixedBottom

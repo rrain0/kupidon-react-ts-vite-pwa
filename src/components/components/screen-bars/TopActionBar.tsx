@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Grid from '@libs/short-propsed/components/Grid.tsx'
 
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import toPx = CssU.toPx
 import modalFloor100 = StyleVals.modalFloor100
 

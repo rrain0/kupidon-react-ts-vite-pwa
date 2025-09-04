@@ -4,8 +4,8 @@ import mime from 'mime'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
 import commonAxiosConfig = AxiosConfig.commonAxiosConfig
 
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
 
 

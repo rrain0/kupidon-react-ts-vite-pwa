@@ -1,5 +1,5 @@
 
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 
 
 

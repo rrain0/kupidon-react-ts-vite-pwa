@@ -4,16 +4,16 @@ import { ReactU } from '@utils/react/ReactU.ts'
 
 import { Link, useSearchParams } from 'react-router'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import RouteSegment = RouteBuilder.RouteSegment
 import fullParams = RouteBuilder.fullParams
 import AllowedNameParams = RouteBuilder.AllowedNameParams
 import AllowedNameParamsRoutes = RouteBuilder.AllowedNameParamsRoutes
 import ObjectMap = ObjectU.ObjectMap
-import { isobject } from '@utils/base/TypeUtils.ts'
+import { isobject } from '@utils/base/math/typeUtils.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import AnyParams = RouteBuilder.AnyParams
-import { Getter } from '@utils/base/TypeUtils.ts'
+import { Getter } from '@utils/base/math/typeUtils.ts'
 
 
 

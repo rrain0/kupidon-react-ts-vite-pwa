@@ -2,20 +2,23 @@ import { css } from '@emotion/react'
 import { animated, useSpring } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
-import { RangeU } from '@utils/base/RangeU'
+import {
+  rangeClamp,
+  rangeMap,
+  rangeMapClamp,
+  rangeZeroBased,
+} from '@utils/base/math/rangeUtils.ts'
 import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useSkipRepaintAfterMount } from '@utils/react/useSkipRepaintAfterMount.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
-
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { Mapper } from '@utils/base/TypeUtils.ts'
-import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
-import NumRange = RangeU.NumRange
-import zeroBasedRange = RangeU.zeroBased
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Mapper } from '@utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
+import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 
 
@@ -157,17 +160,17 @@ const RangePicker = React.memo((props: RangePickerProps) => {
     const minMax = getMinMax()
     const { vpx: trackX, width: trackW } = getTrackDimens()
     
-    const dPxToDProgress = (dPx: number) => RangeU.map(
+    const dPxToDProgress = (dPx: number) => rangeMap(
       dPx,
       [0, (trackW - 2*tipWidth)],
       [0, 100]
     )
-    const dProgressToDValue = (dProgress: number) => RangeU.map(
+    const dProgressToDValue = (dProgress: number) => rangeMap(
       dProgress,
       [0, 100],
-      zeroBasedRange(minMax)
+      rangeZeroBased(minMax)
     )
-    const progressToValue = (progress: number) => RangeU.clamp(
+    const progressToValue = (progress: number) => rangeClamp(
       minMax[0] + dProgressToDValue(progress),
       minMax
     )
@@ -202,14 +205,14 @@ const RangePicker = React.memo((props: RangePickerProps) => {
       
       if (getActiveTip() === 'left') {
         const [, progressRight] = getProgressRange()
-        const progressLeft = RangeU.clamp(
+        const progressLeft = rangeClamp(
           getStartProgress() + getCurrProgress(),
           [0, progressRight]
         )
         setProgressRange([progressLeft, progressRight])
         
         const [, rangeR] = getRange()
-        const rangeL = RangeU.clamp(
+        const rangeL = rangeClamp(
           progressToValue(progressLeft),
           [minMax[0], rangeR]
         )
@@ -217,14 +220,14 @@ const RangePicker = React.memo((props: RangePickerProps) => {
       }
       if (getActiveTip() === 'right') {
         const [progressLeft] = getProgressRange()
-        const progressRight = RangeU.clamp(
+        const progressRight = rangeClamp(
           getStartProgress() + getCurrProgress(),
           [progressLeft, 100]
         )
         setProgressRange([progressLeft, progressRight])
         
         const [rangeL] = getRange()
-        const rangeR = RangeU.clamp(
+        const rangeR = rangeClamp(
           progressToValue(progressRight),
           [rangeL, minMax[1]]
         )
@@ -327,12 +330,12 @@ const rightHandle = (t: AppTheme.Theme) => css`
 
 
 const progressToUiPercent = (progress: NumRange, trackW: number): NumRange => [
-  RangeU.map(
+  rangeMap(
     progress[0],
     [0, 100],
     [0, 100 * (trackW - 2 * tipWidth) / trackW ]
   ),
-  100 - RangeU.map(
+  100 - rangeMap(
     progress[1],
     [0, 100],
     [100 * 2 * tipWidth / trackW, 100]
@@ -341,10 +344,10 @@ const progressToUiPercent = (progress: NumRange, trackW: number): NumRange => [
 
 
 const rangeToProgress = (range: NumRange, minMax: NumRange): NumRange => {
-  const progressLeft = RangeU.mapClamp(
+  const progressLeft = rangeMapClamp(
     range[0], minMax, [0, 100]
   )
-  const progressRight = RangeU.mapClamp(
+  const progressRight = rangeMapClamp(
     range[1], minMax, [0, 100], [progressLeft, 100]
   )
   return [progressLeft, progressRight]

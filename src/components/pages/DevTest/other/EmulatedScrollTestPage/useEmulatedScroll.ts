@@ -2,12 +2,12 @@ import { useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import React from 'react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { RangeU } from '@utils/base/RangeU.ts'
+import { rangeClamp, rangeMap, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 
 import { useRefAsGetSet } from '@utils/react/state/useRefAsGetSet.ts'
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
-import { Getter } from '@utils/base/TypeUtils.ts'
-import NumRange = RangeU.NumRange
+import { Getter } from '@utils/base/math/typeUtils.ts'
+import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 
 
@@ -25,14 +25,15 @@ export const useEmulatedScroll = (
 ) => {
 
   const [getProgress, setProgress] = useRefAsGetSet(progress)
-  const progressToValue = () => RangeU.map(getProgress(), [0, 100], getMinMaxValue())
-  const valueToProgress = (dV: number) => RangeU.map(dV, getMinMaxValue(), [0, 100])
+  const progressToValue = () => rangeMap(getProgress(), [0, 100], getMinMaxValue())
+  const valueToProgress = (dV: number) => rangeMap(dV, getMinMaxValue(), [0, 100])
   
   const spring = useSpringValue(0)
-  const springClamped = spring.to(v => RangeU.clamp(v, getMinMaxValue()))
+  const springClamped = spring.to(v => rangeClamp(v, getMinMaxValue()))
   
   
-  const [getLastDvps, setLastDvps] = useRefGetSet([] as Array<{ ts: number, dT: number, dVp: number }>)
+  const [getLastDvps, setLastDvps] =
+    useRefGetSet([] as Array<{ ts: number, dT: number, dVp: number }>)
   const contentDrag = useDrag(gesture => {
     const {
       first: isFirst,
@@ -51,7 +52,7 @@ export const useEmulatedScroll = (
     //console.log(timeDelta, timeStamp, document.timeline.currentTime, +new Date())
     
     if (isFirst) {
-      const progress = RangeU.mapClamp(spring.get(), getMinMaxValue(), [0, 100])
+      const progress = rangeMapClamp(spring.get(), getMinMaxValue(), [0, 100])
       setProgress(progress)
     }
     
@@ -88,7 +89,7 @@ export const useEmulatedScroll = (
       setLastDvps([])
       //console.log('spd', spd)
       if (Math.abs(spd) > 350) {
-        const dProgress = RangeU.map(
+        const dProgress = rangeMap(
           spd,
           getMinMaxValue(),
           [0, 100]

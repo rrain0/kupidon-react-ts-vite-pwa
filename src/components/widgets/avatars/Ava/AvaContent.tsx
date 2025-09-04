@@ -10,7 +10,7 @@ import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import ImgSpark from 'src/components/elems/ImgSpark/ImgSpark.tsx'
 import { ImgSparkS6 } from 'src/components/elems/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/components/widgets/avatars/Ava/EmptyAva.tsx'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 

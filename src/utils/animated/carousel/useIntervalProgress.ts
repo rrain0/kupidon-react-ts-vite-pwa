@@ -1,10 +1,9 @@
-import { RangeU } from 'src/utils/base/RangeU.ts'
-
+import { rangeMap } from 'src/utils/base/math/rangeUtils.ts'
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Getter } from 'src/utils/base/TypeUtils.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { Getter } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
 
 
@@ -71,7 +70,7 @@ export const useIntervalProgress = ({
 
 
 // dValue -> dProgress
-const dValueToDProgress = (dValue: number, len: number) => RangeU.map(
+const dValueToDProgress = (dValue: number, len: number) => rangeMap(
   dValue, [0, len], [0, 100]
 )
 

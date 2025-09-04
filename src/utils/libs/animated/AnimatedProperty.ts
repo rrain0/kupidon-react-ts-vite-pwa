@@ -1,7 +1,7 @@
 
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
-import { Mapper } from 'src/utils/base/TypeUtils.ts'
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { Mapper } from 'src/utils/base/math/typeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
 
 
 

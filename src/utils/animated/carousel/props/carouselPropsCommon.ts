@@ -1,8 +1,5 @@
-import { MathU } from 'src/utils/base/MathU.ts'
-import { RangeU } from 'src/utils/base/RangeU.ts'
-
-import { Setter } from 'src/utils/base/TypeUtils.ts'
-import rf3 = MathU.rf3
+import { rangeClamp, rangeLoop } from 'src/utils/base/math/rangeUtils.ts'
+import { rf3 } from 'src/utils/base/math/mathUtils.ts'
 
 
 
@@ -37,9 +34,9 @@ export const getIndexesProps = ({
   const viewFirstP = viewFirstI * 100
   const viewEndP = viewEndI * 100
   const viewLastP = viewLastI * 100
-  const loopViewI = (v: number) => rf3(RangeU.loop(v, [viewFirstI, viewEndI]))
-  const loopViewP = (v: number) => rf3(RangeU.loop(v, [viewFirstP, viewEndP]))
-  const clampViewP = (v: number) => rf3(RangeU.clamp(v, [viewFirstP, viewLastP]))
+  const loopViewI = (v: number) => rf3(rangeLoop(v, [viewFirstI, viewEndI]))
+  const loopViewP = (v: number) => rf3(rangeLoop(v, [viewFirstP, viewEndP]))
+  const clampViewP = (v: number) => rf3(rangeClamp(v, [viewFirstP, viewLastP]))
   
   const itemFirstI = 0
   const itemEndI = itemsCnt <= 0 ? 1 : itemsCnt
@@ -47,9 +44,9 @@ export const getIndexesProps = ({
   const itemFirstP = itemFirstI * 100
   const itemEndP = itemEndI * 100
   const itemLastP = itemLastI * 100
-  const loopItemI = (v: number) => rf3(RangeU.loop(v, [0, itemEndI]))
-  const loopItemP = (v: number) => rf3(RangeU.loop(v, [0, itemEndP]))
-  const clampItemP = (v: number) => rf3(RangeU.clamp(v, [0, itemLastP]))
+  const loopItemI = (v: number) => rf3(rangeLoop(v, [0, itemEndI]))
+  const loopItemP = (v: number) => rf3(rangeLoop(v, [0, itemEndP]))
+  const clampItemP = (v: number) => rf3(rangeClamp(v, [0, itemLastP]))
   
   return {
     viewFirstI, viewEndI, viewLastI, viewFirstP, viewEndP, viewLastP,

@@ -4,14 +4,14 @@ import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { getClampedCarouselProps } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
-import { RangeU } from '@utils/base/RangeU.ts'
+import { rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/components/elems/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 
 import gridStackC = EmotionCommon.gridStackC
-import { Getter } from '@utils/base/TypeUtils.ts'
+import { Getter } from '@utils/base/math/typeUtils.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import colC = EmotionCommon.colC
 
@@ -113,7 +113,7 @@ const ProfilePageTabHeader = React.memo((props: ProfilePageTabHeaderProps) => {
     
     x -= 100 * (mainTabI - 1)
     
-    const k = RangeU.mapClamp(x, [-50, 50], [-1, 1])
+    const k = rangeMapClamp(x, [-50, 50], [-1, 1])
     const scale = 1 - 0.35 * Math.abs(k)
     const opacity = 1 - 0.6 * Math.abs(k)
     

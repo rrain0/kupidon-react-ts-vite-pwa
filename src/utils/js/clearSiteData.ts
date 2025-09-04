@@ -1,5 +1,5 @@
 
-import { isstring } from 'src/utils/base/TypeUtils.ts'
+import { isstring } from 'src/utils/base/math/typeUtils.ts'
 
 /*
   Use this article to determine what to clear

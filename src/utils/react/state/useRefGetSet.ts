@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react'
 
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
 
 
 

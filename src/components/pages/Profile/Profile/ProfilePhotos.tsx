@@ -2,6 +2,7 @@ import { css, keyframes } from '@emotion/react'
 import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { useAppTheme } from '@utils/app/theme/useAppTheme.ts'
+import { random } from '@utils/base/math/randomUtils.ts'
 import { useNoTouchAction } from '@utils/gestures/pointer/useNoTouchAction.ts'
 import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
 import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
@@ -32,8 +33,8 @@ import ProfilePhotosPhotoOptions, {
 } from 'src/components/pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { AsyncU } from '@utils/base/AsyncU.ts'
-import { RangeU } from '@utils/base/RangeU'
+import { withThrottle } from '@utils/base/asyncUtils.ts'
+import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
 import { ImageU } from 'src/utils/file/ImageU.ts'
@@ -42,7 +43,6 @@ import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import flexC = EmotionCommon.flexC
-
 import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
@@ -50,15 +50,14 @@ import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
 import blobToDataUrl = FileU.blobToDataUrl
-import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
 import trimExtension = FileU.trimExtension
 import Theme = AppTheme.Theme
 import replaceFirstToIfFoundBy = ArrayU.replaceFirstToIfFoundBy
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import throttle = AsyncU.withThrottle
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 import findBy = ArrayU.findBy
-import NumRange = RangeU.NumRange
+import { NumRange } from '@utils/base/math/rangeUtils.ts'
 import arr = ArrayU.arr
 
 
@@ -339,9 +338,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
                                     <PieProgress css={ImageParts.pieProgressS}
-                                      progress={
-                                        RangeU.map(conversionProgress, [0, 100], [5, 95])
-                                      }
+                                      progress={rangeMap(conversionProgress, [0, 100], [5, 95])}
                                     />
                                   </div>
                                 )
@@ -359,9 +356,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                                 return (
                                   <div css={ImageParts.placeholderBoxS}>
                                     <PieProgress css={ImageParts.pieProgressS}
-                                      progress={
-                                        RangeU.map(downloadProgress, [0, 100], [5, 95])
-                                      }
+                                      progress={rangeMap(downloadProgress, [0, 100], [5, 95])}
                                     />
                                   </div>
                                 )
@@ -387,9 +382,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
                             {showUploadProgress && (
                               <div css={photoDimmed}>
                                 <PieProgress css={ImageParts.pieProgressAccentS}
-                                  progress={
-                                    RangeU.map(uploadProgress, [0, 100], [5, 95])
-                                  }
+                                  progress={rangeMap(uploadProgress, [0, 100], [5, 95])}
                                 />
                               </div>
                             )}
@@ -619,8 +612,8 @@ const onFilesSelectedBuilder = (
             }),
           }))
         }
-        const updatePhotoThrottled = throttle(
-          RangeU.random(1500, 2300), updatePhoto
+        const updatePhotoThrottled = withThrottle(
+          random(1500, 2300), updatePhoto
         )
         
         ;(async() => {

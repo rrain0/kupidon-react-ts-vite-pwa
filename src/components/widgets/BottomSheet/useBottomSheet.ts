@@ -8,24 +8,23 @@ import React, {
 } from 'react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
-
-import { RangeU } from '@utils/base/RangeU'
+import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { CssParserU } from 'src/utils/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { Setter } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Setter } from '@utils/base/math/typeUtils.ts'
 import findLastBy3 = ArrayU.findLastBy3
-import { nonemptyval } from '@utils/base/TypeUtils.ts'
+import { nonemptyval } from '@utils/base/math/typeUtils.ts'
 import findBy3 = ArrayU.findBy3
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 import lastIndex = ArrayU.lastI
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
-import { isemptyval } from '@utils/base/TypeUtils.ts'
-import { Defined } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { isemptyval } from '@utils/base/math/typeUtils.ts'
+import { Defined } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 
@@ -203,7 +202,7 @@ export const useBottomSheet = (
     
     const idx = options.defaultOpenIdx ?? null
     
-    if (idx !== null) return RangeU.clamp(
+    if (idx !== null) return rangeClamp(
       idx, [realFirstOpenIdx, lastIndex(snapPointsPx)]
     )
     
@@ -317,7 +316,7 @@ export const useBottomSheet = (
       if (newState === 'adjusting')
         return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
       if (newSnapIdx === null) return null
-      return RangeU.clamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
+      return rangeClamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
     }()
     
     const toHeight = function() {
@@ -372,7 +371,7 @@ export const useBottomSheet = (
     const toFreeHeight = function() {
       if (isemptyval(toOpenSnap)) return false
       if (snapPoints[toOpenSnap] !== 'free') return false
-      return RangeU.has(
+      return rangeHas(
         sheetSpring.height.get(),
         [
           snapPointsPx[toOpenSnap],
@@ -591,9 +590,9 @@ function calculateSnapPointsPx(
             case 'px':
             case '':
             case undefined:
-              return RangeU.clamp(0, [+cssValue.value, computedSheetDimens.frameH])
+              return rangeClamp(0, [+cssValue.value, computedSheetDimens.frameH])
             case '%':
-              return RangeU.clamp(
+              return rangeClamp(
                 0,
                 [
                   Math.round(+cssValue.value / 100 * computedSheetDimens.frameH),
@@ -619,7 +618,7 @@ function calculateSnapPointsPx(
         startIdx: cssValueI + 1,
         orElse: Number.POSITIVE_INFINITY,
       }).elem as number
-      computed = RangeU.clamp(computed, [left, right])
+      computed = rangeClamp(computed, [left, right])
       
       snapPointsPx[cssValueI] = computed
     })

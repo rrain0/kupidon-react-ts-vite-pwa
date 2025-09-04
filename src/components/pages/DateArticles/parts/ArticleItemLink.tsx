@@ -9,8 +9,8 @@ import Children = ReactU.Children
 import RootRoute = AppRoutes.RootRoute
 import params = RouteBuilder.params
 import use = RouteBuilder.use
-import { assertNever } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { assertNever } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 

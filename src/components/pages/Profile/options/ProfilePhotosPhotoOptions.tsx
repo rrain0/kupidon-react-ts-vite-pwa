@@ -22,15 +22,15 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 import CrossInCircleIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import col = EmotionCommon.col
 import row = EmotionCommon.row
-import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
-import { Callback1 } from '@utils/base/TypeUtils.ts'
+import { Callback1 } from '@utils/base/math/typeUtils.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 
 

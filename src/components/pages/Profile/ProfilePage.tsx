@@ -12,6 +12,7 @@ import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
+import { random } from '@utils/base/math/randomUtils.ts'
 import { useCssWhRef } from '@utils/view/useCssWhRef.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -33,13 +34,12 @@ import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/Overflow
 import Preview from 'src/components/pages/Profile/Preview/Preview.tsx'
 import Profile from 'src/components/pages/Profile/Profile/Profile.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { RangeU } from '@utils/base/RangeU'
 import { useUiValues } from '@libs/ui-text/useUiText'
 import { profileUpdateApiRequest } from 'src/components/pages/Profile/ProfilePage.actions.ts'
 import { ProfilePageTabHeaderContext } from 'src/components/pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
-import { AsyncU } from '@utils/base/AsyncU.ts'
+import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { ObjectU } from '@utils/base/ObjectU.ts'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
@@ -51,7 +51,6 @@ import { useAsyncEffect } from 'src/utils/react/useAsyncEffect.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import blobToDataUrl = FileU.blobToDataUrl
 import fetchToBlob = FileU.fetchToBlob
-import withThrottle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import mapFailureCodeToUiText = ProfilePageValidation.mapFailureCodeToUiText
 import validators = ProfilePageValidation.validators
@@ -60,9 +59,9 @@ import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import ObjectKeys = ObjectU.ObjectKeys
 import arrOfIndices = ArrayU.arrOfIndices
-import { ValueOrMapper } from '@utils/base/TypeUtils.ts'
-import { isfunction } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { ValueOrMapper } from '@utils/base/math/typeUtils.ts'
+import { isfunction } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 
@@ -307,7 +306,7 @@ const ProfilePage = React.memo(() => {
           }))
         }
         const updatePhotoThrottled = withThrottle(
-          RangeU.random(1500, 2300), updatePhoto
+          random(1500, 2300), updatePhoto
         )
         
         ;(async() => {

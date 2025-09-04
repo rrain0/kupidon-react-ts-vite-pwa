@@ -17,8 +17,8 @@ import { transform6 } from '@libs/widget-style-6/transform/WidgetStyleTransform6
 import { transform7 } from '@libs/widget-style-6/transform/WidgetStyleTransform7.ts'
 import { CommonProps, CommonStates } from '@libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
-import { isObject } from 'src/utils/base/TypeUtils.ts'
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
+import { isObject } from 'src/utils/base/math/typeUtils.ts'
 
 
 /*

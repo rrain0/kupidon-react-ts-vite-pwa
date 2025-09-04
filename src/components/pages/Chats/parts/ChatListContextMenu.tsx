@@ -21,8 +21,8 @@ import ModalContextMenu from 'src/components/widgets/modals/ModalContextMenu/Mod
 import ModalDialog from 'src/components/widgets/modals/ModalDialog/ModalDialog.tsx'
 import ModalTileSelect from 'src/components/widgets/modals/ModalTileSelect/ModalTileSelect.tsx'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 import CrossIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossIc.tsx'
 
 

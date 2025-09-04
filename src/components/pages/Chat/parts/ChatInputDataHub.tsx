@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ChatMessageApi } from 'src/services/api/requests/ChatMessageApi.ts'
 import { ChatMessageContentA } from 'src/models/api/ChatMessageA.ts'
 import ChatInput from 'src/components/pages/Chat/parts/ChatInput.tsx'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 

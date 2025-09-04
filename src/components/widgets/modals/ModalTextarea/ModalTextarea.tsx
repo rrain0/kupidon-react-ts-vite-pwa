@@ -9,8 +9,8 @@ import Modal from 'src/components/components/modal/Modal.tsx'
 import Textarea from 'src/components/elems/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/components/elems/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
-import { Callback } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
 

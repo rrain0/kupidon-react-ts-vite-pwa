@@ -5,8 +5,8 @@ import { CssProp } from '@libs/widget-style-4/css/CssProp.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'
 import { CssSelectable } from '@libs/widget-style-4/css/CssSelectable.ts'
 import { CssState, useThis } from '@libs/widget-style-4/css/CssState.ts'
-import { isemptyval } from 'src/utils/base/TypeUtils.ts'
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
+import { isemptyval } from 'src/utils/base/math/typeUtils.ts'
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
 
 
 

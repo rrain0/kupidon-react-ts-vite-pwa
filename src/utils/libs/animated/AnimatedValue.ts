@@ -1,5 +1,3 @@
-import { AsyncU } from 'src/utils/base/AsyncU.ts'
-
 import { ReactU } from '@utils/react/ReactU.ts'
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
@@ -8,13 +6,13 @@ import {
 } from '@libs/animated/AnimationConfig.ts'
 import { addAnimation, removeAnimation } from '@libs/animated/runAnimations.ts'
 import { getTime } from '@libs/animated/util.ts'
-import { Mapper } from 'src/utils/base/TypeUtils.ts'
-import { Callback } from 'src/utils/base/TypeUtils.ts'
-import { noop } from 'src/utils/base/TypeUtils.ts'
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
-import withThrottle = AsyncU.withThrottle
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { Mapper } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { noop } from 'src/utils/base/math/typeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
+import { withThrottle } from 'src/utils/base/asyncUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 import noRepeatLog = ReactU.noRepeatLog
 import noRepeatLog2 = ReactU.noRepeatLog2
 

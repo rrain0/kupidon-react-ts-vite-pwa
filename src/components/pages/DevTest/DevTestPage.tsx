@@ -15,7 +15,7 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import CheckboxInput from 'src/components/elems/inputs/CheckboxInput/CheckboxInput.tsx'
 import { CheckboxInputStyle } from 'src/components/elems/inputs/CheckboxInput/CheckboxInputStyle.ts'
 import PieProgress, { PieProgressCssProps } from 'src/components/elems/PieProgress/PieProgress.tsx'
-import { RangeU } from '@utils/base/RangeU.ts'
+import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useBool } from '@utils/react/state/useBool.ts'
 import { useInterval } from '@utils/react/useInterval.ts'
 import RootRoute = AppRoutes.RootRoute
@@ -268,7 +268,7 @@ const PieProgressView = React.memo(() => {
           colorAccent: t.boxDefault.ct,
           color: 'transparent',
         })}
-        progress={RangeU.map(progress, [0, 100], [5, 95])}
+        progress={rangeMap(progress, [0, 100], [5, 95])}
       />
     </Flex>
   )

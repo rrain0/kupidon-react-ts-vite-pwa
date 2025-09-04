@@ -2,19 +2,17 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { css } from '@emotion/react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { MathU } from '@utils/base/MathU.ts'
-import { RangeU } from '@utils/base/RangeU.ts'
-
+import { rf3 } from '@utils/base/math/mathUtils.ts'
+import { rangeLoop, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import col = EmotionCommon.col
 import round = EmotionCommon.round
 import arr = ArrayU.arr
 import { ReactU } from 'src/utils/react/ReactU'
 import ClassStyle = ReactU.ClassStyle
-import rf3 = MathU.rf3
 
 
 
@@ -32,8 +30,8 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
   } = props
   
   const pLooped = progress?.map(p => {
-    const p1 = rf3(RangeU.loop(rf3(p / cnt / 100), [0, 1]))
-    p = rf3(RangeU.loop(rf3(p), [0, 100 * cnt]))
+    const p1 = rf3(rangeLoop(rf3(p / cnt / 100), [0, 1]))
+    p = rf3(rangeLoop(rf3(p), [0, 100 * cnt]))
     return { p, p1 }
   })
   
@@ -55,7 +53,7 @@ export const DotsScrollIndicator = React.memo((props: DotsScrollIndicatorProps) 
               }}
               animatedStyle={{
                 transform: pLooped?.map(p => {
-                  let yp = RangeU.mapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
+                  let yp = rangeMapClamp(p.p, [0, 100 * cnt], [0 - i, cnt - i], [0, 1])
                   yp = rf3(1 - yp)
                   return `translateY(calc( (  var(--indicator-len) - var(--sz)  ) * ${yp} ))`
                 }),

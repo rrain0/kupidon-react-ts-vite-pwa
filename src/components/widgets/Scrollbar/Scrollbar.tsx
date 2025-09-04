@@ -8,15 +8,14 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-
-import { RangeU } from '@utils/base/RangeU'
+import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/components/widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
 
 
 
@@ -157,12 +156,12 @@ const Scrollbar = React.memo((props: ScrollbarProps) => {
               }
             }
           }()
-          if (RangeU.has(p.start, [p.client, p.end]))
+          if (rangeHas(p.start, [p.client, p.end]))
             return { client: p.client, scrollProgress: p.scroll / p.scrollMax }
           else {
             let newScroll = toScrollScale(p.client - p.size/2 - p.trackStart)
-            newScroll = RangeU.clamp(0, [newScroll, p.scrollMax])
-            const newScrollProgress = RangeU.clamp(0, [newScroll / p.scrollMax, 1])
+            newScroll = rangeClamp(0, [newScroll, p.scrollMax])
+            const newScrollProgress = rangeClamp(0, [newScroll / p.scrollMax, 1])
             switch (direction) {
               case 'vertical': setContainerScroll({ top: newScroll }); break
               case 'horizontal': setContainerScroll({ left: newScroll }); break
@@ -199,7 +198,7 @@ const Scrollbar = React.memo((props: ScrollbarProps) => {
         }()
         const addTrack = p.client-dragStart.client
         let newScroll = dragStart.scrollProgress * p.scrollMax + toScrollScale(addTrack)
-        newScroll = RangeU.clamp(0, [newScroll, p.scrollMax])
+        newScroll = rangeClamp(0, [newScroll, p.scrollMax])
         
         switch (direction) {
           case 'vertical': setContainerScroll({ top: newScroll }); break

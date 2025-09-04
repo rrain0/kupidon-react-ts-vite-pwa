@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
 
 import ObjectMap = ObjectU.ObjectMap
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
 
 

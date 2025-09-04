@@ -1,9 +1,9 @@
 
 import { ViewU } from 'src/utils/view/ViewU'
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import WH = ViewU.WH
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
 
 

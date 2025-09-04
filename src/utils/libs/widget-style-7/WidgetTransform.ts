@@ -5,19 +5,19 @@ import {
   WidgetElemPropReplacer, WidgetState,
   WidgetStyleReplacer,
 } from '@libs/widget-style-7/WidgetConfig.ts'
-import { isfunction } from 'src/utils/base/TypeUtils.ts'
-import { isArray } from 'src/utils/base/TypeUtils.ts'
-import { isobject } from 'src/utils/base/TypeUtils.ts'
-import { isundef } from 'src/utils/base/TypeUtils.ts'
-import { isnull } from 'src/utils/base/TypeUtils.ts'
-import { isbool } from 'src/utils/base/TypeUtils.ts'
-import { isnumstr } from 'src/utils/base/TypeUtils.ts'
+import { isfunction } from 'src/utils/base/math/typeUtils.ts'
+import { isArray } from 'src/utils/base/math/typeUtils.ts'
+import { isobject } from 'src/utils/base/math/typeUtils.ts'
+import { isundef } from 'src/utils/base/math/typeUtils.ts'
+import { isnull } from 'src/utils/base/math/typeUtils.ts'
+import { isbool } from 'src/utils/base/math/typeUtils.ts'
+import { isnumstr } from 'src/utils/base/math/typeUtils.ts'
 import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { isRecord } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { isRecord } from 'src/utils/base/math/typeUtils.ts'
 import isEmptyObj = ObjectU.isEmptyObj
 import getPairOfSingleKeyObj = ObjectU.getPairOfSingleKeyObj
-import { isstring } from 'src/utils/base/TypeUtils.ts'
+import { isstring } from 'src/utils/base/math/typeUtils.ts'
 import isRecordAndEmpty = ObjectU.isRecordAndEmpty
 
 

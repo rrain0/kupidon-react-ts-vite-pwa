@@ -15,11 +15,11 @@ import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors
 import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
-import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
-import { ValueOrMapper } from 'src/utils/base/TypeUtils.ts'
-import { Callback } from 'src/utils/base/TypeUtils.ts'
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
-import { Mapper } from 'src/utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
+import { ValueOrMapper } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
+import { Mapper } from 'src/utils/base/math/typeUtils.ts'
 
 
 

@@ -1,4 +1,4 @@
-import { RangeU } from 'src/utils/base/RangeU.ts'
+import { rangeMap } from 'src/utils/base/math/rangeUtils.ts'
 import React from 'react'
 import DocumentErrorIc from 'src/components/elems/icons/SvgIcons/pack/ui/DocumentErrorIc.tsx'
 import PictureIc from 'src/components/elems/icons/SvgIcons/pack/ui/PictureIc.tsx'
@@ -8,7 +8,7 @@ import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
 import { ReactU } from '@utils/react/ReactU.ts'
 
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 
 
@@ -57,9 +57,7 @@ export const MediaUiState = React.memo((props: MediaUiStateProps) => {
         if (isLoadingWithProgress) {
           return (
             <PieProgress css={ImageParts.pieProgressSmS}
-              progress={
-                RangeU.map(progress, [0, 100], [5, 95])
-              }
+              progress={rangeMap(progress, [0, 100], [5, 95])}
             />
           )
         }

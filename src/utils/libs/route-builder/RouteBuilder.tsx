@@ -1,12 +1,12 @@
 import { ObjectU } from 'src/utils/base/ObjectU.ts'
 
-import { emptyval } from 'src/utils/base/TypeUtils.ts'
+import { emptyval } from 'src/utils/base/math/typeUtils.ts'
 import ObjectValues = ObjectU.ObjectValues
 import ObjectKeysType = ObjectU.ObjectKeysType
 import ObjectEntries = ObjectU.ObjectEntries
 import ObjectKeys = ObjectU.ObjectKeys
-import { isstring } from 'src/utils/base/TypeUtils.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { isstring } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 
 
 

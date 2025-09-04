@@ -1,6 +1,6 @@
 
-import { falsy } from 'src/utils/base/TypeUtils.ts'
-import { isnumber } from 'src/utils/base/TypeUtils.ts'
+import { falsy } from 'src/utils/base/math/typeUtils.ts'
+import { isnumber } from 'src/utils/base/math/typeUtils.ts'
 
 
 

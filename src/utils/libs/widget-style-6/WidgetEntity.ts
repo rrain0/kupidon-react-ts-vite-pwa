@@ -1,7 +1,7 @@
 
 import { StyleValue } from '@libs/widget-style-6/WidgetStyle.ts'
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
 
 

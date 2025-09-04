@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
-import { anyfun } from 'src/utils/base/TypeUtils.ts'
+import { anyfun } from 'src/utils/base/math/typeUtils.ts'
 
 
 

@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Setter } from 'src/utils/base/TypeUtils.ts'
-import { Mapper2 } from 'src/utils/base/TypeUtils.ts'
+import { Setter } from 'src/utils/base/math/typeUtils.ts'
+import { Mapper2 } from 'src/utils/base/math/typeUtils.ts'
 
 
 

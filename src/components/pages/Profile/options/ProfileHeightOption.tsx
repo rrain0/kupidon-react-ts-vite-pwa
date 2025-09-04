@@ -7,8 +7,7 @@ import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useO
 import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { RangeU } from '@utils/base/RangeU'
-import NumRange = RangeU.NumRange
+import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
 
 

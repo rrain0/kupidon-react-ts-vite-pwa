@@ -1,3 +1,4 @@
+import { random } from '@utils/base/math/randomUtils.ts'
 import { DateU } from '@utils/date/DateU.ts'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA } from 'src/models/api/UserA.ts'
@@ -10,11 +11,8 @@ import {
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { AsyncU } from '@utils/base/AsyncU.ts'
-
-import { RangeU } from '@utils/base/RangeU'
+import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import throttle = AsyncU.withThrottle
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
@@ -22,7 +20,7 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
 import ApiResponse = ApiResponseUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
-import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
 import findBy = ArrayU.findBy
@@ -200,8 +198,8 @@ export const profileUpdateApiRequest = (
           }),
         }))
       }
-      const updatePhotoThrottled = throttle(
-        RangeU.random(1500, 2300), updatePhoto
+      const updatePhotoThrottled = withThrottle(
+        random(1500, 2300), updatePhoto
       )
       
       

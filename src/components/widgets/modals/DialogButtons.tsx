@@ -6,8 +6,8 @@ import { ActionUiText } from 'src/locales/translations/ActionUiText'
 import Button from 'src/components/elems/buttons/Button/Button'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 import rowWrap = EmotionCommon.rowWrap
 
 

@@ -1,9 +1,6 @@
-import { AsyncU } from 'src/utils/base/AsyncU.ts'
-
+import { delay, newPromise } from 'src/utils/base/asyncUtils.ts'
 import { asMsgToClient, WsMsg } from 'src/utils/web-socket/WsU.ts'
-import newPromise = AsyncU.newPromise
-import { isstring } from 'src/utils/base/TypeUtils.ts'
-import delay = AsyncU.delay
+import { isstring } from 'src/utils/base/math/typeUtils.ts'
 
 
 

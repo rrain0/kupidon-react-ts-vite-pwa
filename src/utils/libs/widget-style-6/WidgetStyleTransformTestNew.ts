@@ -1,4 +1,3 @@
-import { StringU } from 'src/utils/base/StringU.ts'
 import { transform1 } from '@libs/widget-style-6/transform/WidgetStyleTransform1.ts'
 import { transformNew1 } from '@libs/widget-style-6/transform/WidgetStyleTransformNew1.ts'
 import {
@@ -19,8 +18,6 @@ import {
   CommonProps, CommonStates,
 } from '@libs/widget-style-6/WidgetCommonEntities.ts'
 import { WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import { Light } from 'src/styles/themes/themes/Light.tsx'
-import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
 
 
 
@@ -44,7 +41,6 @@ import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/Bott
 
 export namespace WidgetStyle6NewTest {
   
-  import camelCaseToWords = StringU.camelCaseToWords
   const elemFrame = WidgetElem.of({
     className: 'rruiFrame',
     props: { colorAccent: WidgetProp.ofName('--color-accent') },

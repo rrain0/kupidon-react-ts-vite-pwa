@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import ResponseError = ApiResponseUtils.ResponseError
 import ApiResponse = ApiResponseUtils.ApiResponse
-import { Callback } from 'src/utils/base/TypeUtils.ts'
+import { Callback } from 'src/utils/base/math/typeUtils.ts'
 
 
 

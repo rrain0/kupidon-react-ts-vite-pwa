@@ -17,7 +17,7 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
-import { ObjectUnionFix } from '@utils/base/TypeUtils.ts'
+import { ObjectUnionFix } from '@utils/base/math/typeUtils.ts'
 
 
 

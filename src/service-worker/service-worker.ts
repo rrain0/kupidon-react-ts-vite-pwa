@@ -3,7 +3,7 @@
 import { asMsgFromSw, SwMsg } from '@utils/service-worker/SwU.ts'
 import { asMsgFromWs, WsMsg } from '@utils/web-socket/WsU.ts'
 import { Env } from 'src/configs/Env.ts'
-import { AsyncU } from '@utils/base/AsyncU.ts'
+import { delay } from '@utils/base/asyncUtils.ts'
 import { WorkboxPlugin } from 'workbox-core'
 import { ExpirationPlugin } from 'workbox-expiration'
 import {
@@ -15,7 +15,6 @@ import {
 } from 'workbox-precaching'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
 import { CacheFirst, StaleWhileRevalidate } from 'workbox-strategies'
-import delay = AsyncU.delay
 import { WebSocketEx } from '@utils/web-socket/WebSocketEx'
 
 import { MockData } from 'src/_mock-data/MockData.ts'

@@ -3,9 +3,9 @@ import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { DefaultDarkTheme, DefaultLightTheme } from 'src/styles/themes/ThemesCollection.ts'
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { isobject } from '@utils/base/TypeUtils.ts'
-import { nonemptyval } from '@utils/base/TypeUtils.ts'
-import { isemptyval } from '@utils/base/TypeUtils.ts'
+import { isobject } from '@utils/base/math/typeUtils.ts'
+import { nonemptyval } from '@utils/base/math/typeUtils.ts'
+import { isemptyval } from '@utils/base/math/typeUtils.ts'
 
 
 

@@ -7,7 +7,7 @@ import updateFailures = ValidationActions.updateErrors
 import Values = ValidationCore.Values
 import FailureType = ValidationCore.FailureType
 import Failures = ValidationCore.Failures
-import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
 
 
 

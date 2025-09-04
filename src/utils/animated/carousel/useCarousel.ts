@@ -4,8 +4,6 @@ import { useDrag } from '@use-gesture/react'
 import {
   MergeProgressCallback,
 } from 'src/utils/animated/carousel/props/carouselPropsCommon.ts'
-import { MathU } from 'src/utils/base/MathU.ts'
-
 import { getDragDirection } from 'src/utils/gestures/drag/getDragDirection.ts'
 import { useIntervalProgress } from 'src/utils/animated/carousel/useIntervalProgress.ts'
 import { useWasGesture } from 'src/utils/gestures/pointer/useWasGesture.ts'
@@ -15,11 +13,10 @@ import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import { useStateAndRef } from 'src/utils/react/state/useStateAndRef.ts'
 import { useEvent } from 'src/utils/react/useEvent.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import rf3 = MathU.rf3
-import { Getter } from 'src/utils/base/TypeUtils.ts'
-import mod = MathU.mod
-import { isdef } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { rf3, mod } from 'src/utils/base/math/mathUtils.ts'
+import { Getter } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
 
 

@@ -8,7 +8,7 @@ import {
 import {
   useUpdateComponentStateUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
 
 

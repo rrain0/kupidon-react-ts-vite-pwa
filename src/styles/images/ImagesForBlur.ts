@@ -11,7 +11,8 @@ import im13 from '@im/for-blur/photo_2024-12-14_12-58-43.webp'
 import im14 from '@im/for-blur/photo_2024-12-14_13-00-29.webp'
 
 
-export const imagesForBlur = [
+
+export const ImagesForBlur = [
   im2,
   im3,
   im4,
@@ -23,5 +24,5 @@ export const imagesForBlur = [
   im11,
   im13,
   im14,
-]
+] as const
 

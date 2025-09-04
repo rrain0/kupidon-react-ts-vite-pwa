@@ -1,8 +1,7 @@
 import styled from '@emotion/styled'
 import spendingTimeGuitar from '@im/picture/spending-time--guitar.png'
-import { MathU } from '@utils/base/MathU.ts'
-import { RangeU } from '@utils/base/RangeU.ts'
-
+import { rf1 } from '@utils/base/math/mathUtils.ts'
+import { rangeLoop } from '@utils/base/math/rangeUtils.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
@@ -30,14 +29,14 @@ import flexC = EmotionCommon.flexC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import gridC = EmotionCommon.gridC
-import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
-import rf1 = MathU.rf1
+import ArrowAngledRoundedIc
+  from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
+import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
 import resetH = EmotionCommon.resetH
-import { isdef } from '@utils/base/TypeUtils.ts'
-import { isnull } from '@utils/base/TypeUtils.ts'
-import { isundef } from '@utils/base/TypeUtils.ts'
-import { Setter } from '@utils/base/TypeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
+import { isnull } from '@utils/base/math/typeUtils.ts'
+import { isundef } from '@utils/base/math/typeUtils.ts'
+import { Setter } from '@utils/base/math/typeUtils.ts'
 
 
 
@@ -181,7 +180,7 @@ const MbtiTestingPage = React.memo(() => {
     }
     if (isdef(firstSince)) return firstSince
     if (isdef(first)) return first
-    return RangeU.loop(since, [0, totalCnt])
+    return rangeLoop(since, [0, totalCnt])
   }
   
   const [curr, setCurr] = useState(() => getNext(
@@ -204,12 +203,12 @@ const MbtiTestingPage = React.memo(() => {
   }
   
   const fwd = () => {
-    const next = RangeU.loop(curr + 1, [0, totalCnt])
+    const next = rangeLoop(curr + 1, [0, totalCnt])
     setNext(next)
   }
   
   const back = () => {
-    const next = RangeU.loop(curr - 1, [0, totalCnt])
+    const next = rangeLoop(curr - 1, [0, totalCnt])
     setNext(next)
   }
   

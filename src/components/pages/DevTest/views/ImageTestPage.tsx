@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { RangeU } from '@utils/base/RangeU.ts'
+import { rangeLoop } from '@utils/base/math/rangeUtils.ts'
 import React, { useCallback, useState } from 'react'
 import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
@@ -34,7 +34,7 @@ const ImageTestPage = React.memo(() => {
   const [enableImgErr500Delayed, setEnableImgErr500Delayed] = useState(false)
   
   const [srcI, setSrcI] = useState(0)
-  const nextSrc = useCallback(() => setSrcI(i => RangeU.loop(i + 1, [0, 2])), [])
+  const nextSrc = useCallback(() => setSrcI(i => rangeLoop(i + 1, [0, 2])), [])
   
   const src = (() => {
     if (!enableSrc) return undefined

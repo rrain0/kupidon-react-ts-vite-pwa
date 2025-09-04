@@ -1,8 +1,8 @@
 
 import { getDataUrlProps } from '@utils/file/DataUrl.ts'
 import { FileU } from '@utils/file/FileU.ts'
-import { noop } from 'src/utils/base/TypeUtils.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
+import { noop } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import getFilenameFromPath = FileU.getFilenameFromPath
 import getExtension = FileU.getExtension
 

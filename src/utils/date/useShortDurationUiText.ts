@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { UiValues } from '@libs/ui-text/UiText.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { RangeU } from 'src/utils/base/RangeU.ts'
+import { rangeHas } from 'src/utils/base/math/rangeUtils.ts'
 import { Duration } from 'src/utils/date/useLiveShortDuration.ts'
 
 
@@ -62,7 +62,7 @@ export const useShortDurationUiText = (duration: Duration | undefined) => {
   const { years, months, weeks, days, hours, minutes, seconds } = duration
   if (years) {
     const lastDigit = years % 10
-    if (RangeU.has(lastDigit, [1, 4])) return `${years}${uiText.yearsShort1to4}`
+    if (rangeHas(lastDigit, [1, 4])) return `${years}${uiText.yearsShort1to4}`
     return `${years}${uiText.yearsShort5to0}`
   }
   if (months) return `${months}${uiText.monthsShort}`

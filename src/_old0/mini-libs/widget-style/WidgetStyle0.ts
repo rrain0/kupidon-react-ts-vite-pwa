@@ -2,13 +2,13 @@ import { css } from '@emotion/react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { ObjectU } from '@utils/base/ObjectU.ts'
 
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { isObject } from '@utils/base/TypeUtils.ts'
-import { isstring } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { isObject } from '@utils/base/math/typeUtils.ts'
+import { isstring } from '@utils/base/math/typeUtils.ts'
 import ValueOrArr = ArrayU.ValueOrArr
 import ObjectMap = ObjectU.ObjectMap
-import { RecordRo } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { RecordRo } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 

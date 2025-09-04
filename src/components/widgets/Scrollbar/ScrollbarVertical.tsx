@@ -8,17 +8,16 @@ import React, {
 } from 'react'
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-
-import { RangeU } from '@utils/base/RangeU'
+import { rangeClamp, rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/components/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { noop } from '@utils/base/TypeUtils.ts'
-import { SetterOrUpdater } from '@utils/base/TypeUtils.ts'
-import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { noop } from '@utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
 
 
 // TODO Доделать новый скроллбар
@@ -138,13 +137,13 @@ const ScrollbarVertical = React.memo((props: ScrollbarVerticalProps) => {
     if (first) {
       setIsDragging(true)
       if (!dragStartRef.current.isByThumbBox) {
-        setScroll(RangeU.clamp(yPercent, [0, 100]))
+        setScroll(rangeClamp(yPercent, [0, 100]))
       }
     }
     if (active) {
       if (yPercent < 0) setScroll(0)
       else if (yPercent>100) setScroll(100)
-      else setScroll(s => RangeU.clamp(s+dyPercent, [0, 100]))
+      else setScroll(s => rangeClamp(s+dyPercent, [0, 100]))
     }
     if (last) {
       setIsDragging(false)
@@ -173,7 +172,7 @@ const ScrollbarVertical = React.memo((props: ScrollbarVerticalProps) => {
     className: ScrollbarVerticalStyle.El.thumbBox.name,
     style: {
       height: visiblePartPercent+'%',
-      top: RangeU.map(scroll, [0, 100], [0, 100-visiblePartPercent])+'%',
+      top: rangeMap(scroll, [0, 100], [0, 100-visiblePartPercent])+'%',
     },
     onPointerDown: onThumbBoxPointerDown,
     ref: thumbBoxRef,

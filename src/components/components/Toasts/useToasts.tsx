@@ -5,10 +5,10 @@ import { toast, ToastItem } from 'react-toastify'
 
 import { asUiText, UiText } from '@libs/ui-text/UiText.ts'
 import { ToastBody, ToastType } from 'src/components/components/Toasts/ToastBody.tsx'
-import { falsy } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { Callback1 } from '@utils/base/TypeUtils.ts'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { falsy } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Callback1 } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 
 
 

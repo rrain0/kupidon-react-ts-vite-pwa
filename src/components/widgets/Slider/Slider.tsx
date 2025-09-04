@@ -1,10 +1,14 @@
 import { css } from '@emotion/react'
 import { animated, to, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
-import { RangeU } from '@utils/base/RangeU'
+import {
+  rangeClamp,
+  rangeMap,
+  rangeMapClamp,
+  rangeZeroBased,
+} from '@utils/base/math/rangeUtils.ts'
 import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
 import { useSkipRepaintAfterMount } from '@utils/react/useSkipRepaintAfterMount.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
@@ -12,11 +16,10 @@ import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import zeroBasedRange = RangeU.zeroBased
-import { Setter } from '@utils/base/TypeUtils.ts'
-import NumRange = RangeU.NumRange
-import { Callback1 } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Setter } from '@utils/base/math/typeUtils.ts'
+import { NumRange } from '@utils/base/math/rangeUtils.ts'
+import { Callback1 } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 // Slider or Scale Picker
@@ -65,41 +68,43 @@ const barRightOffset = 21
 
 
 // dPx -> dProgress -> dValue
-const dPxToDProgress = (dPx: number, trackW: number, lOffset: number, rOffset: number) => RangeU.map(
+const dPxToDProgress = (
+  dPx: number, trackW: number, lOffset: number, rOffset: number
+) => rangeMap(
   dPx,
   [0, (trackW - (lOffset + rOffset))],
   [0, 100]
 )
-const dProgressToDValue = (dProgress: number, minMax: NumRange) => RangeU.map(
+const dProgressToDValue = (dProgress: number, minMax: NumRange) => rangeMap(
   dProgress,
   [0, 100],
-  zeroBasedRange(minMax)
+  rangeZeroBased(minMax)
 )
 
 // progress -> clampedProgress -> value -> clampedValue
-const progressToClampedProgress = (progress: number) => RangeU.clamp(
+const progressToClampedProgress = (progress: number) => rangeClamp(
   progress,
   [0, 100]
 )
-const progressToValue = (progress: number, minMax: NumRange) => RangeU.clamp(
+const progressToValue = (progress: number, minMax: NumRange) => rangeClamp(
   minMax[0] + dProgressToDValue(progress, minMax),
   minMax
 )
-const valueToClampedValue = (value: number, minMax: NumRange) => RangeU.clamp(
+const valueToClampedValue = (value: number, minMax: NumRange) => rangeClamp(
   value,
   minMax
 )
 
 // progress -> uiPercent
 const progressToUiPercentRight =
-(progress: number, w: number, lOffset: number, rOffset: number): number => 100 - RangeU.map(
+(progress: number, w: number, lOffset: number, rOffset: number): number => 100 - rangeMap(
   progress,
   [0, 100],
   [100 * (lOffset + rOffset) / w, 100]
 )
 
 // value -> clampedProgress
-const valueToClampedProgress = (value: number, minMax: NumRange): number => RangeU.mapClamp(
+const valueToClampedProgress = (value: number, minMax: NumRange): number => rangeMapClamp(
   value,
   minMax,
   [0, 100]

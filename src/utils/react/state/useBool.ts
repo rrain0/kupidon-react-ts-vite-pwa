@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 
-import { ValueOrProducer } from 'src/utils/base/TypeUtils.ts'
+import { ValueOrProducer } from 'src/utils/base/math/typeUtils.ts'
 
 
 

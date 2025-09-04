@@ -63,6 +63,7 @@ export default [
         'no-constant-condition': 'off',
         'no-empty': 'off',
         'no-empty-pattern': 'off',
+        'no-empty-static-block': 'off',
         'no-self-assign': 'off',
         'no-unexpected-multiline': 'off',
         'prefer-const': 'warn',

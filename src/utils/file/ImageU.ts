@@ -4,7 +4,7 @@ import { isSafari, isMobileSafari } from 'react-device-detect'
 import { FileU } from 'src/utils/file/FileU.ts'
 
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
 import trimExtension = FileU.trimExtension
 
 

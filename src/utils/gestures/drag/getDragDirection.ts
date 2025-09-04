@@ -1,6 +1,4 @@
-import { MathU } from 'src/utils/base/MathU.ts'
-import tg45deg = MathU.tg45deg
-import tg80deg = MathU.tg80deg
+import { tg45deg, tg80deg } from 'src/utils/base/math/mathUtils.ts'
 
 
 

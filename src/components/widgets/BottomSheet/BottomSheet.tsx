@@ -14,10 +14,10 @@ import React, {
   useLayoutEffect,
 } from 'react'
 import combineProps = ReactU.combineProps
-import { Callback1 } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback1 } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
-import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
+import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
 
 
 

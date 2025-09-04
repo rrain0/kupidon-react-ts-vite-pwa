@@ -13,7 +13,8 @@ export const noop = () => { }
 export const emptyArr = []
 
 
-
+// Атрибут, который либо просто есть без значения, либо его нет,
+// то есть <div attr/> или <div/>
 export type HtmlEmptyAttr = '' | undefined
 export const toEmptyAttr = (value: any): HtmlEmptyAttr => value ? '' : undefined
 

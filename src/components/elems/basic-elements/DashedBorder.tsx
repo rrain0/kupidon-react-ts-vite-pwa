@@ -5,9 +5,9 @@ import React from 'react'
 
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { FunOrObj } from '@utils/base/TypeUtils.ts'
-import { isfunction } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { FunOrObj } from '@utils/base/math/typeUtils.ts'
+import { isfunction } from '@utils/base/math/typeUtils.ts'
 
 
 

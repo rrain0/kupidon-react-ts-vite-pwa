@@ -12,10 +12,10 @@ import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import Ripple from 'src/components/elems/Ripple/Ripple.tsx'
 import UseRipple from 'src/components/elems/Ripple/UseRipple.tsx'
 
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import combineProps = ReactU.combineProps
-import { HtmlEmptyAttr } from '@utils/base/TypeUtils.ts'
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { HtmlEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 
 
 

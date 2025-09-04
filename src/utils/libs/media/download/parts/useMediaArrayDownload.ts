@@ -1,7 +1,6 @@
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import { AsyncU } from 'src/utils/base/AsyncU.ts'
-import { RangeU } from 'src/utils/base/RangeU.ts'
-
+import { withThrottle } from 'src/utils/base/asyncUtils.ts'
+import { random } from 'src/utils/base/math/randomUtils.ts'
 import { FileU } from '@utils/file/FileU.ts'
 import { StagedProgress } from 'src/utils/ui/StagedProgress.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
@@ -12,11 +11,10 @@ import {
   MediaOperation,
   newDefaultMediaOperation,
 } from '@libs/media/Media.ts'
-import withThrottle = AsyncU.withThrottle
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import { SetterOrUpdater } from 'src/utils/base/TypeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
 
 
 
@@ -124,7 +122,7 @@ export const useMediaArrayDownload = <T extends MediaDownloadable | undefined>(
           }))
         }
         const updateMediaThrottled = withThrottle(
-          RangeU.random(1500, 2300), updateMedia,
+          random(1500, 2300), updateMedia,
         )
         
         ;(async () => {

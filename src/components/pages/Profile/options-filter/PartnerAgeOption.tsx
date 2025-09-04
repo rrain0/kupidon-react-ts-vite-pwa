@@ -1,6 +1,6 @@
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import HourglassGradIc from 'src/components/elems/icons/GradSvgIcons/pack/special/HourglassGradIc.tsx'
-import { RangeU } from '@utils/base/RangeU'
+import HourglassGradIc
+  from 'src/components/elems/icons/GradSvgIcons/pack/special/HourglassGradIc.tsx'
 import { useStateMapperSync } from '@utils/react/state/useStateMapperSync.ts'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -9,8 +9,7 @@ import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/components/widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
-import NumRange = RangeU.NumRange
-import NumRangeEndNullable = RangeU.NumRangeEndNullable
+import { NumRange, NumRangeEndNullable } from '@utils/base/math/rangeUtils.ts'
 
 
 

@@ -16,7 +16,7 @@ import { ViewU } from '@utils/view/ViewU.ts'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText'
-import { imagesForBlur } from 'src/styles/images/imagesForBlur.ts'
+import { ImagesForBlur } from 'src/styles/images/ImagesForBlur.ts'
 import {
   getMediaUiState,
   MediaInArrayDownloadable,
@@ -34,7 +34,7 @@ import ProfileCardsFullInfo from 'src/components/widgets/ProfileCards/ProfileCar
 import ProfileCardsInfoOverlay from 'src/components/widgets/ProfileCards/ProfileCardsInfoOverlay.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from '@utils/base/ArrayU'
-import { RangeU } from '@utils/base/RangeU'
+import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import Txt = EmotionCommon.Txt
 import flexC = EmotionCommon.flexC
 import fullMinMax = EmotionCommon.fullMinMax
@@ -47,7 +47,7 @@ import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
-import { Callback } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
 
 
 
@@ -143,7 +143,7 @@ export const ProfileCards = React.memo((props: ProfileCardsProps) => {
   const placeholderIm = useMemo(() => {
     if (photosCnt || !isInited) return undefined
     //return imagesForBlur[0]
-    return ArrayU.randomElem(imagesForBlur)
+    return ArrayU.randomElem(ImagesForBlur)
   }, [photosCnt, isInited])
   
   
@@ -210,21 +210,21 @@ export const ProfileCards = React.memo((props: ProfileCardsProps) => {
       
       const y = (() => {
         if (first) return pCurr
-        return -(viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+        return -(viewPosI - rangeMap(pCurr, [0, 80, 100], [0, 0, 1]))
       })()
       
       const scale = (() => {
         if (first) return 100
-        return 100 - 5 * (viewPosI - RangeU.map(pCurr, [0, 80, 100], [0, 0, 1]))
+        return 100 - 5 * (viewPosI - rangeMap(pCurr, [0, 80, 100], [0, 0, 1]))
       })() / 100
       
       const photoOpacity = (() => {
-        if (first) return 100 - RangeU.map(
+        if (first) return 100 - rangeMap(
           pCurr,
           [0, 30, 100],
           [0, 0, 100],
         )
-        if (last) return RangeU.map(
+        if (last) return rangeMap(
           pCurr,
           [0, 80, 100],
           [0, 0, 100],
@@ -248,8 +248,8 @@ export const ProfileCards = React.memo((props: ProfileCardsProps) => {
         })()
         
         if (first && color && shadowIntensity) {
-          const blurR = RangeU.map(shadowIntensity, [0, 1], [6, 30])
-          const spreadR = RangeU.map(shadowIntensity, [0, 1], [1, 30])
+          const blurR = rangeMap(shadowIntensity, [0, 1], [6, 30])
+          const spreadR = rangeMap(shadowIntensity, [0, 1], [1, 30])
           return `0 0 ${blurR}px ${spreadR}px ${color}`
         }
         

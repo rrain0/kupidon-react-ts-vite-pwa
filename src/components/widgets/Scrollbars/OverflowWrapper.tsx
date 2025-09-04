@@ -11,7 +11,7 @@ import gridStackC = EmotionCommon.gridStackC
 
 import clsx from 'clsx'
 import { isBrowser } from 'react-device-detect'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import fullMinMax = EmotionCommon.fullMinMax
 

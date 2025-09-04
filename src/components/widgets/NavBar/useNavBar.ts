@@ -4,7 +4,7 @@ import { useEffect, useId, useMemo, useState, useTransition } from 'react'
 import { NavBarPlace } from 'src/components/widgets/NavBar/NavBar.tsx'
 import { navStack } from 'src/components/widgets/NavBar/navStack.ts'
 import { NavBarStore, useNavBarZustand } from 'src/zustand/app/NavBarZustand.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 
 
 

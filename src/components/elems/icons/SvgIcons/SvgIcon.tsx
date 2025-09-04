@@ -2,8 +2,8 @@
 import clsx from 'clsx'
 import React from 'react'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { isdef } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/math/typeUtils.ts'
 
 
 

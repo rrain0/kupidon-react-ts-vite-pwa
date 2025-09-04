@@ -8,8 +8,8 @@ import PageContentLayout from 'src/components/components/page/PageContentLayout.
 import React, { useEffect, useState } from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
 import Modal from 'src/components/components/modal/Modal.tsx'
-import { Callback } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import Children = ReactU.Children
 import modalContextMenuCardBoxS = ModalElements.modalContextMenuCardBoxS
 import StyleProp = ReactU.StyleProp

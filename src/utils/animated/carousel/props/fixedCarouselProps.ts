@@ -2,12 +2,9 @@ import {
   GetCarouselProps,
   getIndexesProps, MergeProgressCallback,
 } from 'src/utils/animated/carousel/props/carouselPropsCommon.ts'
-import { MathU } from 'src/utils/base/MathU.ts'
-import { RangeU } from 'src/utils/base/RangeU.ts'
-
-import { Sign } from 'src/utils/base/TypeUtils.ts'
-import rf3 = MathU.rf3
-import rf5 = MathU.rf5
+import { rf3, rf5 } from 'src/utils/base/math/mathUtils.ts'
+import { rangeClamp } from 'src/utils/base/math/rangeUtils.ts'
+import { Sign } from 'src/utils/base/math/typeUtils.ts'
 
 
 
@@ -49,7 +46,7 @@ export const getFixedForwardLoopedCarouselProps = (props: GetCarouselProps) => {
   const _pos0P = rf3(startP + deltaP)
   const pos0PI = Math.floor(rf5(startP / 100))
   const pos0PBase = rf3(Math.floor(pos0PI) * 100)
-  const pCurr = rf3(RangeU.clamp(_pos0P - pos0PBase, [-100, 100]))
+  const pCurr = rf3(rangeClamp(_pos0P - pos0PBase, [-100, 100]))
   const pos0P = rf3(pos0PBase + pCurr)
   const dir = Math.sign(pCurr) as Sign
   const overflow = rf3(_pos0P - pos0P)
@@ -114,7 +111,7 @@ export const fixedForwardCarouselMergeProgress: MergeProgressCallback = (props) 
   const _pos0P = rf3(startP + deltaP)
   const pos0PI =Math.floor(rf5(startP / 100))
   const pos0PBase = rf3(Math.floor(pos0PI) * 100)
-  const pCurr = rf3(RangeU.clamp(rf3(_pos0P - pos0PBase), [-100, 100]))
+  const pCurr = rf3(rangeClamp(rf3(_pos0P - pos0PBase), [-100, 100]))
   const pos0P = rf3(pos0PBase + pCurr)
   const overflow = rf3(_pos0P - pos0P)
   

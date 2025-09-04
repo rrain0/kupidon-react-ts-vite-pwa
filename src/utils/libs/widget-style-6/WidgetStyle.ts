@@ -1,8 +1,8 @@
 
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { isArray } from 'src/utils/base/TypeUtils.ts'
-import { isnumber } from 'src/utils/base/TypeUtils.ts'
-import { isstring } from 'src/utils/base/TypeUtils.ts'
+import { isArray } from 'src/utils/base/math/typeUtils.ts'
+import { isnumber } from 'src/utils/base/math/typeUtils.ts'
+import { isstring } from 'src/utils/base/math/typeUtils.ts'
 
 
 // TODO Allow insert raw string css

@@ -3,7 +3,6 @@ import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import RulerVerticalGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { RangeU } from '@utils/base/RangeU'
 import { useStateMapperSync } from '@utils/react/state/useStateMapperSync.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import React, { useState } from 'react'
@@ -15,8 +14,7 @@ import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import ModalRangePicker from 'src/components/widgets/modals/ModalRangePicker/ModalRangePicker.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import NumRangeNullable = RangeU.NumRangeNullable
-import NumRange = RangeU.NumRange
+import { NumRange, NumRangeNullable } from '@utils/base/math/rangeUtils.ts'
 import rowWrap = EmotionCommon.rowWrap
 
 

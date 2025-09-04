@@ -8,12 +8,12 @@ import {
   AnimatedElemAttrs,
   AnimatedElemStyle,
 } from '@libs/animated/AnimatedProps.ts'
-import { isnumber } from 'src/utils/base/TypeUtils.ts'
+import { isnumber } from 'src/utils/base/math/typeUtils.ts'
 import ObjectMap = ObjectU.ObjectMap
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
-import { Pu } from 'src/utils/base/TypeUtils.ts'
-import { RecordPu } from 'src/utils/base/TypeUtils.ts'
-import { Setter } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { RecordPu } from 'src/utils/base/math/typeUtils.ts'
+import { Setter } from 'src/utils/base/math/typeUtils.ts'
 
 
 

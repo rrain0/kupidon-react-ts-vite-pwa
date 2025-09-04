@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback1 } from 'src/utils/base/TypeUtils.ts'
+import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
 
 
 

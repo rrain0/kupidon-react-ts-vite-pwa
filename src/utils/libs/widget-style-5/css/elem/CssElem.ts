@@ -2,7 +2,7 @@
 import { CssEnumAttr } from '@libs/widget-style-5/css/attr/CssEnumAttr.ts'
 import { CssVarProp } from '@libs/widget-style-5/css/prop/CssVarProp.ts'
 import { CssState, ElemStateValue } from '@libs/widget-style-5/css/CssState.ts'
-import { RecordRo } from 'src/utils/base/TypeUtils.ts'
+import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
 
 
 

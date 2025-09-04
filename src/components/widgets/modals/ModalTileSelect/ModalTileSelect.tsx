@@ -11,10 +11,10 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import { ArrayU } from '@utils/base/ArrayU'
 import { ReactU } from 'src/utils/react/ReactU'
 
-import { Callback } from '@utils/base/TypeUtils.ts'
-import { Setter } from '@utils/base/TypeUtils.ts'
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { emptyArr } from '@utils/base/TypeUtils.ts'
+import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Setter } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { emptyArr } from '@utils/base/math/typeUtils.ts'
 import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
 

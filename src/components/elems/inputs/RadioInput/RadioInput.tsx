@@ -13,8 +13,8 @@ import clsx from 'clsx'
 import resetInput = EmotionCommon.resetInput
 import absTlwh = EmotionCommon.absTlwh
 import row = EmotionCommon.row
-import { Pu } from '@utils/base/TypeUtils.ts'
-import { toEmptyAttr } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
 
 
 

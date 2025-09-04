@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
-import { Pu } from '@utils/base/TypeUtils.ts'
+import { Pu } from '@utils/base/math/typeUtils.ts'
 import Txt = EmotionCommon.Txt
 
 
