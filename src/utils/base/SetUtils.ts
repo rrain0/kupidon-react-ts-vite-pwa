@@ -1,5 +1,8 @@
 
 
+/* P.S. - Здесь имена начинаются с 'Set' потому что 'set' - это был бы сеттер */
+
+
 
 // Создать новый Set из элементов set, исключая элементы из exclude
 export const SetExclude = <T>(set: Set<T>, exclude: Set<any>): Set<T> => {
