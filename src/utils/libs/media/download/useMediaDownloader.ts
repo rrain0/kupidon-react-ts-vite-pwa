@@ -6,7 +6,7 @@ import {
   useMediaDownloadAutoRetry
 } from '@libs/media/download/parts/useMediaDownloadAutoRetry.ts'
 import { getMediaUiState, MediaDownloadable } from '@libs/media/Media.ts'
-import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 
 
 

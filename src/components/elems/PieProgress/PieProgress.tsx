@@ -4,7 +4,7 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import React from 'react'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import CssColor = CssU.CssColor
 import createCssCustomPropsMapper = ReactU.createCssCustomPropsMapper
 

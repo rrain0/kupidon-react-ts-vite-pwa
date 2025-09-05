@@ -4,7 +4,7 @@ import { HeaderArrowS } from 'src/components/elems/HeaderArrow/HeaderArrowS'
 import React from 'react'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

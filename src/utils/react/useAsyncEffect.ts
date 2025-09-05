@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react'
 
-import { Consumer } from 'src/utils/base/math/typeUtils.ts'
-import { Predicate } from 'src/utils/base/math/typeUtils.ts'
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { Consumer } from 'src/utils/base/typeUtils.ts'
+import { Predicate } from 'src/utils/base/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
 
 
 

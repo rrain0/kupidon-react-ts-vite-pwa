@@ -10,7 +10,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import col = EmotionCommon.col
 import gridStackC = EmotionCommon.gridStackC
 import hideScrollbar = EmotionCommon.noScrollbars
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

@@ -7,7 +7,7 @@ import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import EditableTextCard from 'src/components/components/EditableTextCard/EditableTextCard.tsx'
 import { FormFieldWrapRenderProps } from '@libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 const overlayName = 'profileAboutMe'

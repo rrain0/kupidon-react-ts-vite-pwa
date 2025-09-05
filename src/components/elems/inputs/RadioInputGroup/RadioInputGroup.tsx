@@ -6,8 +6,8 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import {
   RadioInputGroupStyle,
 } from 'src/components/elems/inputs/RadioInputGroup/RadioInputGroupStyle.ts'
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 

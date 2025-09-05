@@ -1,10 +1,10 @@
 import { capitalize } from 'src/utils/base/stringUtils.ts'
 import { Pair } from 'src/utils/js/Pair.ts'
-import { WriteablePartial } from 'src/utils/base/math/typeUtils.ts'
-import { isobject } from 'src/utils/base/math/typeUtils.ts'
-import { isundef } from 'src/utils/base/math/typeUtils.ts'
-import { isnull } from 'src/utils/base/math/typeUtils.ts'
-import { isRecord } from 'src/utils/base/math/typeUtils.ts'
+import { WriteablePartial } from 'src/utils/base/typeUtils.ts'
+import { isobject } from 'src/utils/base/typeUtils.ts'
+import { isundef } from 'src/utils/base/typeUtils.ts'
+import { isnull } from 'src/utils/base/typeUtils.ts'
+import { isRecord } from 'src/utils/base/typeUtils.ts'
 
 
 

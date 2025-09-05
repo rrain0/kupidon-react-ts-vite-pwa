@@ -17,11 +17,11 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput'
 import { ReactU } from 'src/utils/react/ReactU'
 
-import { Callback } from '@utils/base/math/typeUtils.ts'
-import { Setter } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
+import { Setter } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

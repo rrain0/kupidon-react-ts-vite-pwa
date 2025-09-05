@@ -14,10 +14,10 @@ import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/components/widgets/Scrollbar/ScrollbarVerticalStyle.ts'
 import reset = EmotionCommon.reset
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { noop } from '@utils/base/math/typeUtils.ts'
-import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { noop } from '@utils/base/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 // TODO Доделать новый скроллбар

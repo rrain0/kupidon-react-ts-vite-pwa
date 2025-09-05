@@ -17,8 +17,8 @@ import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

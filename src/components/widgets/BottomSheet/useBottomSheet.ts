@@ -13,18 +13,18 @@ import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { CssParserU } from 'src/utils/css/CssParserU.ts'
 import parseCssValue = CssParserU.parseCssStringValue
 import CssValue = CssParserU.CssValue
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { Setter } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { Setter } from '@utils/base/typeUtils.ts'
 import findLastBy3 = ArrayU.findLastBy3
-import { nonemptyval } from '@utils/base/math/typeUtils.ts'
+import { nonemptyval } from '@utils/base/typeUtils.ts'
 import findBy3 = ArrayU.findBy3
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 import lastIndex = ArrayU.lastI
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
-import { isemptyval } from '@utils/base/math/typeUtils.ts'
-import { Defined } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { isemptyval } from '@utils/base/typeUtils.ts'
+import { Defined } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

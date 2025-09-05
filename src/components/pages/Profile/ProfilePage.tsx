@@ -58,9 +58,9 @@ import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
 import arrOfIndices = ArrayU.arrOfIndices
-import { ValueOrMapper } from '@utils/base/math/typeUtils.ts'
-import { isfunction } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { ValueOrMapper } from '@utils/base/typeUtils.ts'
+import { isfunction } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

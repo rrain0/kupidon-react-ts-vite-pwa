@@ -1,12 +1,13 @@
-import styled from '@emotion/styled'
-import { withDefaults } from 'src/utils/react/withDefaults.tsx'
-import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import contents = EmotionCommon.contents
+import React from 'react'
 
 
 
-const Contents = withDefaults(styled.div(contents), {
-  'data-display-name': 'Contents',
+export type ContentsProps = React.ComponentProps<'div'>
+
+const Contents = React.memo((props: ContentsProps) => {
+  return (
+    <div data-display-name='Contents' {...props}/>
+  )
 })
 Contents.displayName = 'Contents'
 export default Contents

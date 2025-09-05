@@ -1,9 +1,9 @@
 import {
   ObjectStringKeys, objectKeys, objectValues, objectEntries
 } from 'src/utils/base/ObjectU.ts'
-import { emptyval } from 'src/utils/base/math/typeUtils.ts'
-import { isstring } from 'src/utils/base/math/typeUtils.ts'
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { emptyval } from 'src/utils/base/typeUtils.ts'
+import { isstring } from 'src/utils/base/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
 
 
 

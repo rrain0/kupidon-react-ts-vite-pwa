@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { Option } from 'src/models/ui/Option.ts'
 import { ArrayU } from '@utils/base/ArrayU'
 
-import { Setter } from '@utils/base/math/typeUtils.ts'
+import { Setter } from '@utils/base/typeUtils.ts'
 
 
 export const useMultiSelectOneEditableOption = <T extends string>(

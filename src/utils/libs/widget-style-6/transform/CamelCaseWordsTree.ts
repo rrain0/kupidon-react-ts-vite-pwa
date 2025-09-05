@@ -1,6 +1,6 @@
 import { camelCaseToWords } from 'src/utils/base/stringUtils.ts'
 import { CommonProps } from '@libs/widget-style-6/WidgetCommonEntities.ts'
-import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
+import { RecordRo } from 'src/utils/base/typeUtils.ts'
 
 
 

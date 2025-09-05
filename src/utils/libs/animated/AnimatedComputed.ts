@@ -1,7 +1,7 @@
 
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
-import { Mapper } from 'src/utils/base/math/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
+import { Mapper } from 'src/utils/base/typeUtils.ts'
+import { Callback1 } from 'src/utils/base/typeUtils.ts'
 
 
 

@@ -8,7 +8,7 @@ import {
   useUpdateElemStyleUpdaters, useUpdateElemAttrsUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
 import Flex from 'src/utils/libs/short-propsed/components/Flex.tsx'
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
 
 
 

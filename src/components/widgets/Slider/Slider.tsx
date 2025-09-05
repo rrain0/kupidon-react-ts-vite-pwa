@@ -16,10 +16,10 @@ import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { Setter } from '@utils/base/math/typeUtils.ts'
+import { Setter } from '@utils/base/typeUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
-import { Callback1 } from '@utils/base/math/typeUtils.ts'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 // Slider or Scale Picker

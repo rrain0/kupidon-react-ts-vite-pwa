@@ -31,12 +31,12 @@ import use = RouteBuilder.use
 import gridC = EmotionCommon.gridC
 import ArrowAngledRoundedIc
   from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 import resetH = EmotionCommon.resetH
-import { isdef } from '@utils/base/math/typeUtils.ts'
-import { isnull } from '@utils/base/math/typeUtils.ts'
-import { isundef } from '@utils/base/math/typeUtils.ts'
-import { Setter } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
+import { isnull } from '@utils/base/typeUtils.ts'
+import { isundef } from '@utils/base/typeUtils.ts'
+import { Setter } from '@utils/base/typeUtils.ts'
 
 
 

@@ -2,8 +2,8 @@ import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
 import { useBool } from '@utils/react/state/useBool.ts'
 import React, { useEffect } from 'react'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

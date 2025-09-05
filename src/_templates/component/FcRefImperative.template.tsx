@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useRef } from 'react'
 import { ReactU } from '@utils/react/ReactU.ts'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import Children = ReactU.Children
 
 

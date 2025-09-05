@@ -1,6 +1,6 @@
 
 import { Transformers } from '@libs/widget-style-4/style/WidgetStyle.ts'
-import { isnumber } from 'src/utils/base/math/typeUtils.ts'
+import { isnumber } from 'src/utils/base/typeUtils.ts'
 
 
 const hoverableMedia = '(hover: hover) and (pointer: fine)'

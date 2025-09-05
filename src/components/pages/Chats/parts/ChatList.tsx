@@ -20,9 +20,9 @@ import ChatListToItem from 'src/components/pages/Chats/parts/ChatListToItem.tsx'
 import { ChatListItemWidgetData } from 'src/components/pages/Chats/parts/ChatListItemWidget.tsx'
 import { offsetToPageContentPaddings } from 'src/components/components/page/offsetToPageContentPaddings.ts'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { isundef } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { isundef } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

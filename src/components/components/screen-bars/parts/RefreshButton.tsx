@@ -7,8 +7,8 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'
 import ArrowReloadIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowReloadIc.tsx'
 import { SvgIconS } from 'src/components/elems/icons/SvgIcons/SvgIconS.ts'
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 import rotateAnim = EmotionCommon.rotateAnim
 
 

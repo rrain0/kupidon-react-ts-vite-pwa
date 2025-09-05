@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt

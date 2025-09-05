@@ -1,7 +1,7 @@
 
 import { MbtiType } from 'src/models/MbtiType.ts'
 import { UiValues } from '@libs/ui-text/UiText.ts'
-import { RecordRo } from '@utils/base/math/typeUtils.ts'
+import { RecordRo } from '@utils/base/typeUtils.ts'
 
 
 

@@ -10,7 +10,7 @@ import Values = ValidationCore.Values
 import awaitDelay = ValidationActions.awaitDelay
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors
-import { Updater } from 'src/utils/base/math/typeUtils.ts'
+import { Updater } from 'src/utils/base/typeUtils.ts'
 
 
 

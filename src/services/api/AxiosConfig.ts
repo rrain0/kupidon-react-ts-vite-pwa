@@ -9,7 +9,7 @@ import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
 
 import { getAccessTokenData } from 'src/models/api/AccessTokenA.ts'
 import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import { ValueOrMapper } from '@utils/base/math/typeUtils.ts'
+import { ValueOrMapper } from '@utils/base/typeUtils.ts'
 
 
 

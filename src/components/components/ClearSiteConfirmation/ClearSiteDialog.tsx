@@ -20,7 +20,7 @@ import row = EmotionCommon.row
 import Theme = AppTheme.Theme
 import { SvgIconS } from 'src/components/elems/icons/SvgIcons/SvgIconS.ts'
 import Txt = EmotionCommon.Txt
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

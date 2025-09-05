@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react'
 
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Setter } from 'src/utils/base/math/typeUtils.ts'
-import { ValueOrProducer } from 'src/utils/base/math/typeUtils.ts'
-import { Updater } from 'src/utils/base/math/typeUtils.ts'
-import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
-import { isfunction } from 'src/utils/base/math/typeUtils.ts'
+import { Setter } from 'src/utils/base/typeUtils.ts'
+import { ValueOrProducer } from 'src/utils/base/typeUtils.ts'
+import { Updater } from 'src/utils/base/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
+import { isfunction } from 'src/utils/base/typeUtils.ts'
 
 
 

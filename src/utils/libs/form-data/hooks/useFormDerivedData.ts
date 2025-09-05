@@ -3,8 +3,8 @@ import { objectMap, objectKeys } from 'src/utils/base/ObjectU.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import Values = ValidationCore.Values
 import Failures = ValidationCore.Failures
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
-import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 
 
 

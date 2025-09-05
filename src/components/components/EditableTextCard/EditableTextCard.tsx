@@ -9,12 +9,12 @@ import { CardS } from 'src/components/elems/Card/CardS.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import PencilWrite2Ic from 'src/components/elems/icons/SvgIcons/pack/ui/PencilWrite2Ic.tsx'
 import Txt = EmotionCommon.Txt
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
-import { HtmlEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { HtmlEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 

@@ -1,5 +1,5 @@
-import { CallbackN } from 'src/utils/base/math/typeUtils.ts'
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { CallbackN } from 'src/utils/base/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
 
 
 

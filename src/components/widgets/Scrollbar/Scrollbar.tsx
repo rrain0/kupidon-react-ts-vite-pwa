@@ -14,8 +14,8 @@ import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarStyle } from 'src/components/widgets/Scrollbar/ScrollbarStyle.ts'
 import { ScrollProps } from 'src/components/widgets/Scrollbar/useContainerScrollState.ts'
 import reset = EmotionCommon.reset
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 

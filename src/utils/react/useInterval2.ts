@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
-import { isdef } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
+import { isdef } from 'src/utils/base/typeUtils.ts'
 
 
 

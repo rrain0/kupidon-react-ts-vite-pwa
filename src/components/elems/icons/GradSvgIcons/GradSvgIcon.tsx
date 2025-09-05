@@ -2,8 +2,8 @@
 import clsx from 'clsx'
 import React from 'react'
 import { GradSvgIconS6 } from 'src/components/elems/icons/GradSvgIcons/GradSvgIconS6.ts'
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

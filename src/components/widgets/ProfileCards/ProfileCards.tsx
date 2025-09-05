@@ -47,7 +47,7 @@ import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import minRatioPort = StyleVals.minRatioPort
 import maxRatioPort = StyleVals.maxRatioPort
 import full = EmotionCommon.full
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

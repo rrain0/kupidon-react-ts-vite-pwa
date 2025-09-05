@@ -1,4 +1,3 @@
-import styled from '@emotion/styled'
 import {
   CommonViewShortProps, processCommonViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processCommonViewShortProps.ts'
@@ -7,9 +6,9 @@ import React from 'react'
 
 
 
-export type GapProps = React.ComponentProps<typeof GapView> & CommonViewShortProps
+export type GapProps = React.ComponentProps<'div'> & CommonViewShortProps
 
-export const Gap = React.memo((props: GapProps) => {
+const Gap = React.memo((props: GapProps) => {
   
   const { css, commonViewRest } = processCommonViewShortProps(props)
   const { children, className, ...restProps } = commonViewRest
@@ -17,7 +16,7 @@ export const Gap = React.memo((props: GapProps) => {
   const commonStyleClassName = 'commonStyle'
   
   return (
-    <GapView
+    <div
       data-display-name='Flex'
       {...restProps}
       css={{
@@ -26,16 +25,8 @@ export const Gap = React.memo((props: GapProps) => {
       className={clsx(className, commonStyleClassName)}
     >
       {children}
-    </GapView>
+    </div>
   )
 })
 Gap.displayName = 'Gap'
 export default Gap
-
-
-
-const GapView = styled.div({ display: 'flex' })
-
-
-
-

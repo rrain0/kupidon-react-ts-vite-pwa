@@ -7,7 +7,7 @@ import axAccess = AxiosConfig.axAccess
 import TechnicalError = ApiResponseUtils.TechnicalError
 import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedResponse
 import AuthenticationError = ApiResponseUtils.AuthenticationError
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

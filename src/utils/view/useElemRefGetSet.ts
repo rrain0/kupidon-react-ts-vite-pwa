@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
-import { Setter } from 'src/utils/base/math/typeUtils.ts'
-import { Getter } from 'src/utils/base/math/typeUtils.ts'
+import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Setter } from 'src/utils/base/typeUtils.ts'
+import { Getter } from 'src/utils/base/typeUtils.ts'
 
 
 

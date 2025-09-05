@@ -20,7 +20,7 @@ import UpdateUserErrorData = UserApi.UpdateUserErrorData
 import CurrentUserSuccessData = UserApi.CurrentUserSuccessData
 import ApiResponse = ApiResponseUtils.ApiResponse
 import photosComparator = ProfilePageValidation.photosComparator
-import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
 import findBy = ArrayU.findBy

@@ -7,9 +7,9 @@ import { SelectItemS6 } from 'src/components/elems/select-item/SelectItem/Select
 import SelectMeter from 'src/components/elems/select-item/SelectMeter/SelectMeter'
 
 import { useCssWhRef } from 'src/utils/view/useCssWhRef'
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 

@@ -1,7 +1,7 @@
 
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useInterval2 } from 'src/utils/react/useInterval2.ts'
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
 
 
 

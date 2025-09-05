@@ -7,7 +7,7 @@ import {
   WidgetMultiStateTransformer, WidgetProp, WidgetStateValue,
   WidgetTransformerList,
 } from '@libs/widget-style-6/WidgetEntity.ts'
-import { isArray } from 'src/utils/base/math/typeUtils.ts'
+import { isArray } from 'src/utils/base/typeUtils.ts'
 
 
 

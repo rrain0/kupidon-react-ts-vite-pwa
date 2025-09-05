@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
 
 
 

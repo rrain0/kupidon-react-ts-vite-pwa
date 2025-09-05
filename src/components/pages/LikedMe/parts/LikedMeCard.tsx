@@ -15,9 +15,9 @@ import { ImgSparkS6 } from 'src/components/elems/ImgSpark/ImgSparkS6.ts'
 import EmptyAva from 'src/components/widgets/avatars/Ava/EmptyAva.tsx'
 import DislikeButton from 'src/components/widgets/ProfileCards/DislikeButton.tsx'
 import LikeButton from 'src/components/widgets/ProfileCards/LikeButton.tsx'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import Txt = EmotionCommon.Txt
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

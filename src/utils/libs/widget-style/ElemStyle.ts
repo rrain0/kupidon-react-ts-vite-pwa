@@ -1,5 +1,5 @@
-import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
-import { RecordPuro } from 'src/utils/base/math/typeUtils.ts'
+import { RecordRo } from 'src/utils/base/typeUtils.ts'
+import { RecordPuro } from 'src/utils/base/typeUtils.ts'
 
 
 

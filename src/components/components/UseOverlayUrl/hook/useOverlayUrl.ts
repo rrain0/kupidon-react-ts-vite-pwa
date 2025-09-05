@@ -4,7 +4,7 @@ import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

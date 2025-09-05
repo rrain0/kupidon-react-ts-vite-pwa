@@ -6,9 +6,9 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Grid from '@libs/short-propsed/components/Grid.tsx'
 
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
-import { isundef } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
+import { isundef } from '@utils/base/typeUtils.ts'
 import toPx = CssU.toPx
 import modalFloor100 = StyleVals.modalFloor100
 

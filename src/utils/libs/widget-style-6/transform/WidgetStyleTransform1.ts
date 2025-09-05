@@ -1,8 +1,8 @@
 import { capitalize } from 'src/utils/base/stringUtils.ts'
 import { isStyleValue, StyleValue, WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import { isobject } from 'src/utils/base/math/typeUtils.ts'
-import { isArray } from 'src/utils/base/math/typeUtils.ts'
-import { isfunction } from 'src/utils/base/math/typeUtils.ts'
+import { isobject } from 'src/utils/base/typeUtils.ts'
+import { isArray } from 'src/utils/base/typeUtils.ts'
+import { isfunction } from 'src/utils/base/typeUtils.ts'
 
 
 

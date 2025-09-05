@@ -5,7 +5,7 @@ import ProfileCardsStackList, {
 } from 'src/components/widgets/ProfileCards/ProfileCardsStackList.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

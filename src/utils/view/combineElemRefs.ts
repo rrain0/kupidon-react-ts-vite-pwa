@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { isfunction } from 'src/utils/base/math/typeUtils.ts'
-import { isobject } from 'src/utils/base/math/typeUtils.ts'
+import { isfunction } from 'src/utils/base/typeUtils.ts'
+import { isobject } from 'src/utils/base/typeUtils.ts'
 
 
 

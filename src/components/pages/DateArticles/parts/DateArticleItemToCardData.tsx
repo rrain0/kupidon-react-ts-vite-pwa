@@ -10,8 +10,8 @@ import { DateArticlesData } from 'src/configs/date-article/DateArticlesData.ts'
 import {
   DateArticleTypesData,
 } from 'src/configs/date-article/DateArticleTypesData.ts'
-import { assertNever } from '@utils/base/math/typeUtils.ts'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { assertNever } from '@utils/base/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

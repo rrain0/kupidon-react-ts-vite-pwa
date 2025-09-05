@@ -19,8 +19,8 @@ import ProfileCards, {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
 import arrOfIndices = ArrayU.arrOfIndices
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

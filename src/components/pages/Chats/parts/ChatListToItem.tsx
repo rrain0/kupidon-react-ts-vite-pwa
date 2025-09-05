@@ -16,10 +16,10 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { UiItemData } from 'src/components/pages/Chats/parts/ChatList.tsx'
 import ChatListItemButton from 'src/components/pages/Chats/parts/ChatListItemButton.tsx'
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
-import { Pu } from '@utils/base/math/typeUtils.ts'
-import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
-import { Callback1 } from '@utils/base/math/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
+import { Callback1 } from '@utils/base/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 import gridStackC = EmotionCommon.gridStackC
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use

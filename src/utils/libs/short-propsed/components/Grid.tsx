@@ -10,7 +10,7 @@ import React from 'react'
 
 export type GridProps = React.ComponentProps<typeof GridBox> & GridViewShortProps
 
-export const Grid = React.memo((props: GridProps) => {
+const Grid = React.memo((props: GridProps) => {
   
   const { css, gridViewRest } = processGridViewShortProps(props)
   const { children, className, ...restProps } = gridViewRest
@@ -36,7 +36,3 @@ export default Grid
 
 
 const GridBox = styled.div({ display: 'grid' })
-
-
-
-

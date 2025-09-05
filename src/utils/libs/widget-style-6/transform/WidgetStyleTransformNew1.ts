@@ -4,9 +4,9 @@ import {
 } from '@libs/widget-style-6/transform/CamelCaseWordsTree.ts'
 import { WidgetProp, WidgetTransformer } from '@libs/widget-style-6/WidgetEntity.ts'
 import { isStyleValue, WidgetStyleWithProps } from '@libs/widget-style-6/WidgetStyle.ts'
-import { isArray } from 'src/utils/base/math/typeUtils.ts'
-import { isfunction } from 'src/utils/base/math/typeUtils.ts'
-import { isobject } from 'src/utils/base/math/typeUtils.ts'
+import { isArray } from 'src/utils/base/typeUtils.ts'
+import { isfunction } from 'src/utils/base/typeUtils.ts'
+import { isobject } from 'src/utils/base/typeUtils.ts'
 
 
 

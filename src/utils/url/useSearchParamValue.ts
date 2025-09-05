@@ -8,7 +8,7 @@ import {
   SearchParamValueData, setSearchParam, stringifySearchParams,
 } from 'src/utils/url/SearchParamsU.ts'
 import { useSearchParamsZustand } from 'src/zustand/url/SearchParamsZustand.ts'
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
 
 
 

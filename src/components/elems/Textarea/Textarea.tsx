@@ -7,10 +7,10 @@ import clsx from 'clsx'
 import row = EmotionCommon.row
 import absTlwh = EmotionCommon.absTlwh
 import resetTextarea = EmotionCommon.resetTextarea
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import hoverable = EmotionCommon.hoverable
-import { Callback1 } from '@utils/base/math/typeUtils.ts'
-import { toEmptyAttr } from '@utils/base/math/typeUtils.ts'
+import { Callback1 } from '@utils/base/typeUtils.ts'
+import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
 

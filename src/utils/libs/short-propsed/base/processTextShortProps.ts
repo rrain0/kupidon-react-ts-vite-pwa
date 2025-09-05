@@ -1,7 +1,6 @@
-
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
-import { isdef } from 'src/utils/base/math/typeUtils.ts'
-import { ifBool } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
+import { isdef } from 'src/utils/base/typeUtils.ts'
+import { ifBool } from 'src/utils/base/typeUtils.ts'
 
 
 

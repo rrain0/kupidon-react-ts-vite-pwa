@@ -6,13 +6,13 @@ import {
 } from '@libs/animated/AnimationConfig.ts'
 import { addAnimation, removeAnimation } from '@libs/animated/runAnimations.ts'
 import { getTime } from '@libs/animated/util.ts'
-import { Mapper } from 'src/utils/base/math/typeUtils.ts'
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
-import { noop } from 'src/utils/base/math/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/math/typeUtils.ts'
+import { Mapper } from 'src/utils/base/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
+import { noop } from 'src/utils/base/typeUtils.ts'
+import { Callback1 } from 'src/utils/base/typeUtils.ts'
 import { withThrottle } from 'src/utils/base/asyncUtils.ts'
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
-import { isdef } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
+import { isdef } from 'src/utils/base/typeUtils.ts'
 import noRepeatLog = ReactU.noRepeatLog
 import noRepeatLog2 = ReactU.noRepeatLog2
 

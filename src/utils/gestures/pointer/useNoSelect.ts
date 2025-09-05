@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useId, useMemo } from 'react'
 import commonCss from 'src/styles/common/common.module.scss'
 
-import { isdef } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/typeUtils.ts'
 
 
 

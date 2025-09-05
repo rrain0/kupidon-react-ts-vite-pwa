@@ -5,7 +5,7 @@ import { UsersApi } from 'src/services/api/requests/UsersApi.ts'
 import { useFormApiRequest } from '@libs/api/useFormApiRequest.ts'
 import { UserPairA } from 'src/models/api/UserPairA.ts'
 import NewPairsList, { NewPairItem } from 'src/components/pages/Chats/parts/NewPairsList.tsx'
-import { isdef } from '@utils/base/math/typeUtils.ts'
+import { isdef } from '@utils/base/typeUtils.ts'
 
 
 

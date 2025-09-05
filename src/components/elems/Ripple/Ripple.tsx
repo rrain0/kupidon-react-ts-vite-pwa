@@ -14,7 +14,7 @@ import ClassStyle = ReactU.ClassStyle
 import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import FirstCanUndef = ArrayU.FirstCanUndef
 import useLog = ReactU.useLog
 

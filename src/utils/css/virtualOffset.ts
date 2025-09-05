@@ -1,8 +1,8 @@
 
 import { CssU } from 'src/utils/css/CssU.ts'
 import CssLength = CssU.CssLength
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
-import { isdef } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
+import { isdef } from 'src/utils/base/typeUtils.ts'
 import toPx = CssU.toPx
 
 

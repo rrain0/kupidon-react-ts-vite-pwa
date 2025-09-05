@@ -23,7 +23,7 @@ import BottomFloatingBar from 'src/components/components/screen-bars/BottomFloat
 import BackButton from 'src/components/components/screen-bars/parts/BackButton.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
-import { assertNever } from '@utils/base/math/typeUtils.ts'
+import { assertNever } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
 
 

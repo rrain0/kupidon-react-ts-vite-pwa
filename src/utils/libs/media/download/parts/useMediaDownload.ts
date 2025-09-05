@@ -12,7 +12,7 @@ import {
 } from '@libs/media/Media.ts'
 import fetchToBlob = FileU.fetchToBlob
 import blobToDataUrl = FileU.blobToDataUrl
-import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

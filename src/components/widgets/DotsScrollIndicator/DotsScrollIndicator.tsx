@@ -7,7 +7,7 @@ import { rangeLoop, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import React from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
 import round = EmotionCommon.round
 import arr = ArrayU.arr

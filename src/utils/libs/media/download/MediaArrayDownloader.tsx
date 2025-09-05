@@ -9,7 +9,7 @@ import {
 import { MediaDownloadable } from '@libs/media/Media.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 
-import { Pu } from 'src/utils/base/math/typeUtils.ts'
+import { Pu } from 'src/utils/base/typeUtils.ts'
 
 
 

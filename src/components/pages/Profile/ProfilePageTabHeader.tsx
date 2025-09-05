@@ -11,7 +11,7 @@ import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 
 import gridStackC = EmotionCommon.gridStackC
-import { Getter } from '@utils/base/math/typeUtils.ts'
+import { Getter } from '@utils/base/typeUtils.ts'
 import arrOfIndices = ArrayU.arrOfIndices
 import colC = EmotionCommon.colC
 

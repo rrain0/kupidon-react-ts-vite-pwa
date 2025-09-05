@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
 import { useIsMount } from 'src/utils/react/state/useIsMount.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback } from 'src/utils/base/math/typeUtils.ts'
-import { Producer } from 'src/utils/base/math/typeUtils.ts'
+import { Callback } from 'src/utils/base/typeUtils.ts'
+import { Producer } from 'src/utils/base/typeUtils.ts'
 
 
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { SelectMeterS6 } from 'src/components/elems/select-item/SelectMeter/SelectMeterS6.ts'
 import { ReactU } from 'src/utils/react/ReactU'
 
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 
 

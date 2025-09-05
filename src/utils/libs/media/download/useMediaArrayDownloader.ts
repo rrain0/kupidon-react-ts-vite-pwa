@@ -7,7 +7,7 @@ import { useMediaArrayDownload } from '@libs/media/download/parts/useMediaArrayD
 import {
   useMediaArrayDownloadAutoRetry
 } from '@libs/media/download/parts/useMediaArrayDownloadAutoRetry.ts'
-import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 import mapToIf = ArrayU.mapToIf
 
 

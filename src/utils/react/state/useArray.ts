@@ -3,8 +3,8 @@ import { ArrayU } from 'src/utils/base/ArrayU.ts'
 
 import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
 import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
-import { ValueOrProducer } from 'src/utils/base/math/typeUtils.ts'
-import { ArrFilter } from 'src/utils/base/math/typeUtils.ts'
+import { ValueOrProducer } from 'src/utils/base/typeUtils.ts'
+import { ArrFilter } from 'src/utils/base/typeUtils.ts'
 
 
 

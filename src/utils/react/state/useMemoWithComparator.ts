@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { stringifyEq } from 'src/utils/base/jsUtils.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { ComparatorEq } from 'src/utils/base/math/typeUtils.ts'
+import { ComparatorEq } from 'src/utils/base/typeUtils.ts'
 
 
 

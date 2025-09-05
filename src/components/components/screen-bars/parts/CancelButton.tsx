@@ -4,7 +4,7 @@ import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButtonS6.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 import CrossIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossIc.tsx'
 
 

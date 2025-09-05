@@ -50,12 +50,12 @@ import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
 import blobToDataUrl = FileU.blobToDataUrl
-import { SetterOrUpdater } from '@utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import trimExtension = FileU.trimExtension
 import Theme = AppTheme.Theme
 import replaceFirstToIfFoundBy = ArrayU.replaceFirstToIfFoundBy
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 import findBy = ArrayU.findBy
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 import arr = ArrayU.arr

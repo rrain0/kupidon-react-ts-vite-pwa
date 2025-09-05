@@ -32,7 +32,7 @@ import full = RouteBuilder.full
 import { SettingsOptions } from 'src/components/components/settings-options/SettingsOptions'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
 import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 
 
 

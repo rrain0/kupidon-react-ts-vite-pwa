@@ -1,7 +1,7 @@
 import { useAutoRetry } from 'src/utils/react/useAutoRetry.ts'
 
 import { MediaDownloadable } from '@libs/media/Media.ts'
-import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
+import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 
 
 

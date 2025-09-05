@@ -10,7 +10,7 @@ import React from 'react'
 
 export type FlexProps = React.ComponentProps<typeof FlexBox> & FlexViewShortProps
 
-export const Flex = React.memo((props: FlexProps) => {
+const Flex = React.memo((props: FlexProps) => {
   
   const { css, flexViewRest } = processFlexViewShortProps(props)
   const { children, className, ...restProps } = flexViewRest
@@ -36,7 +36,3 @@ export default Flex
 
 
 const FlexBox = styled.div({ display: 'flex' })
-
-
-
-

@@ -22,9 +22,9 @@ import { GenderOptionValues } from 'src/components/pages/Profile/options/Profile
 import { ReactU } from '@utils/react/ReactU.ts'
 
 import Children = ReactU.Children
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
-import { Callback } from '@utils/base/math/typeUtils.ts'
+import { Callback } from '@utils/base/typeUtils.ts'
 import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC

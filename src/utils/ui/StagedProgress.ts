@@ -1,5 +1,5 @@
 
-import { isdef } from 'src/utils/base/math/typeUtils.ts'
+import { isdef } from 'src/utils/base/typeUtils.ts'
 
 
 export class StagedProgress {

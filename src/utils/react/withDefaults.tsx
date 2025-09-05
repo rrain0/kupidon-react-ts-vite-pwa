@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { PartialDefaults } from 'src/utils/base/math/typeUtils.ts'
-import { HtmlDataAttrs } from 'src/utils/base/math/typeUtils.ts'
+import { PartialDefaults } from 'src/utils/base/typeUtils.ts'
+import { HtmlDataAttrs } from 'src/utils/base/typeUtils.ts'
 
 
 

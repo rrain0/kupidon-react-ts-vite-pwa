@@ -6,7 +6,7 @@ import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/Bott
 import OverflowWrapper from 'src/components/widgets/Scrollbars/OverflowWrapper.tsx'
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import React, { useRef } from 'react'
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 

@@ -10,7 +10,7 @@ import UseScrollbars from 'src/components/widgets/Scrollbars/UseScrollbars.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 
 import hideWindowScrollbar = EmotionCommon.noWindowScrollbars
-import { Pu } from '@utils/base/math/typeUtils.ts'
+import { Pu } from '@utils/base/typeUtils.ts'
 
 
 
