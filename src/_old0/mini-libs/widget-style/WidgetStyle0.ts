@@ -1,12 +1,10 @@
 import { css } from '@emotion/react'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { ObjectU } from '@utils/base/ObjectU.ts'
-
+import { objectMap } from '@utils/base/ObjectU.ts'
 import { Pu } from '@utils/base/math/typeUtils.ts'
 import { isObject } from '@utils/base/math/typeUtils.ts'
 import { isstring } from '@utils/base/math/typeUtils.ts'
 import ValueOrArr = ArrayU.ValueOrArr
-import ObjectMap = ObjectU.ObjectMap
 import { RecordRo } from '@utils/base/math/typeUtils.ts'
 import { isdef } from '@utils/base/math/typeUtils.ts'
 
@@ -51,7 +49,7 @@ export namespace WidgetStyle0 {
       return new CssWidget<E, S, P>(
         elementName,
         {
-          ...ObjectMap<Record<S, CssState>, Record<S, CssWidgetState>>(
+          ...objectMap<Record<S, CssState>, Record<S, CssWidgetState>>(
             element.states,
             ([stateName, cssState]) => [
               stateName,
@@ -63,7 +61,7 @@ export namespace WidgetStyle0 {
           [elementName]: new CssWidgetElement(element),
         } as Record<E, CssWidgetElement>,
         {
-          ...ObjectMap<Record<P, CssProp>, Record<P, CssWidgetProp>>(
+          ...objectMap<Record<P, CssProp>, Record<P, CssWidgetProp>>(
             element.props,
             ([propName, cssProp]) => [
               propName,
@@ -85,7 +83,7 @@ export namespace WidgetStyle0 {
         elementName,
         {
           ...this.states,
-          ...ObjectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
+          ...objectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
             element.states,
             ([stateName, cssState]) => [
               stateName,
@@ -99,7 +97,7 @@ export namespace WidgetStyle0 {
         } as Record<E | NE, CssWidgetElement>,
         {
           ...this.props,
-          ...ObjectMap<Record<NP, CssProp>, Record<NP, CssWidgetProp>>(
+          ...objectMap<Record<NP, CssProp>, Record<NP, CssWidgetProp>>(
             element.props,
             ([propName, cssProp]) => [
               propName,
@@ -122,7 +120,7 @@ export namespace WidgetStyle0 {
         this.root,
         {
           ...this.states,
-          ...ObjectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
+          ...objectMap<Record<NS, CssState>, Record<NS, CssWidgetState>>(
             element.states,
             ([stateName, cssState]) => [
               stateName,
@@ -136,7 +134,7 @@ export namespace WidgetStyle0 {
         } as Record<E | NE, CssWidgetElement>,
         {
           ...this.props,
-          ...ObjectMap<Record<NP, CssProp>, Record<NP, CssWidgetProp>>(
+          ...objectMap<Record<NP, CssProp>, Record<NP, CssWidgetProp>>(
             element.props,
             ([propName, cssProp]) => [
               propName,
@@ -162,14 +160,14 @@ export namespace WidgetStyle0 {
     constructor(
       readonly widget: CssWidget<E, S, any>,
     ) {
-      this.s = ObjectMap(widget.states, ([name]) => [
+      this.s = objectMap(widget.states, ([name]) => [
         name,
         () => {
           this.currState = name
           return this
         },
       ])
-      this.e = ObjectMap(widget.elements, ([name]) => [
+      this.e = objectMap(widget.elements, ([name]) => [
         name,
         () => {
           this.currElem = name

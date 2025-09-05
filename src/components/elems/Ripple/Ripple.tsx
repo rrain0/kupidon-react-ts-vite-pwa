@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { ArrayU } from '@utils/base/ArrayU.ts'
-import { ObjectU } from '@utils/base/ObjectU.ts'
-
+import { objectKeys } from '@utils/base/ObjectU.ts'
 import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
 import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
 import clsx from 'clsx'
@@ -18,7 +17,6 @@ import RippleMode = RippleS6.RippleMode
 import { Pu } from '@utils/base/math/typeUtils.ts'
 import FirstCanUndef = ArrayU.FirstCanUndef
 import useLog = ReactU.useLog
-import ObjectKeys = ObjectU.ObjectKeys
 
 
 
@@ -128,7 +126,7 @@ const Ripple = React.memo((props: RippleProps) => {
         transition: { ...prevS.transition, ...newStyle.transition },
       }
       setStyle(s)
-      const tProps = ObjectKeys(s.transition).filter(p => s.transition[p])
+      const tProps = objectKeys(s.transition).filter(p => s.transition[p])
       
       el.ontransitionend = null
       el.style.transition = tProps.map(p => s.transition[p]).join(', ') || 'none'

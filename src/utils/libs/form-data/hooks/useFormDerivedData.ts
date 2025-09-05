@@ -1,11 +1,8 @@
 import { useCallback, useMemo } from 'react'
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
+import { objectMap, objectKeys } from 'src/utils/base/ObjectU.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import Values = ValidationCore.Values
-import ObjectMap = ObjectU.ObjectMap
 import Failures = ValidationCore.Failures
-import ObjectKeys = ObjectU.ObjectKeys
 import { Callback } from 'src/utils/base/math/typeUtils.ts'
 import { SetterOrUpdater } from 'src/utils/base/math/typeUtils.ts'
 
@@ -36,7 +33,7 @@ export const useFormDerivedData = <
   
   
   const valuesProps = useMemo(() => {
-    const valuesProps = ObjectMap<Vs, Record<keyof Vs, FormValueProps>>(
+    const valuesProps = objectMap<Vs, Record<keyof Vs, FormValueProps>>(
       values,
       ([k, v]) => [k, {
         isInitial: false,
@@ -74,7 +71,7 @@ export const useFormDerivedData = <
       hasChanges: false,
       resetUserFields,
     }
-    ObjectKeys(userDefaultValues).forEach(k => {
+    objectKeys(userDefaultValues).forEach(k => {
       if (!valuesProps[k].isInitial) formProps.hasChanges = true
     })
     return formProps

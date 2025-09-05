@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { ObjectU } from '@utils/base/ObjectU.ts'
+import { objectEntries } from '@utils/base/ObjectU.ts'
 import { useNavigate, useSearchParams } from 'react-router'
 import { MbtiType } from 'src/models/MbtiType.ts'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
@@ -24,7 +24,6 @@ import Card from 'src/components/elems/Card/Card.tsx'
 import ProfilePageTabHeader from 'src/components/pages/Profile/ProfilePageTabHeader.tsx'
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { FormProps } from '@libs/form-data/hooks/useFormDerivedData.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
@@ -45,7 +44,6 @@ import RootRoute = AppRoutes.RootRoute
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import card2S = CardS.card2S
-import ObjectEntries = ObjectU.ObjectEntries
 
 
 
@@ -221,7 +219,7 @@ const Tests = React.memo((props: TestsProps) => {
           )}
           
           <MiniTypesBox>
-            {ObjectEntries(MbtiTypeData).map(([type, data]) => (
+            {objectEntries(MbtiTypeData).map(([type, data]) => (
               <TypeComponent key={type} type={type}/>
             ))}
           </MiniTypesBox>

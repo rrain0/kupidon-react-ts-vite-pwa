@@ -1,6 +1,4 @@
-import { ObjectU } from 'src/utils/base/ObjectU'
-import ObjectValuesType = ObjectU.ObjectValuesType
-import ObjectKeysType = ObjectU.ObjectKeysType
+import { ObjectStringKeys, ObjectValuesOfStringKeys } from 'src/utils/base/ObjectU'
 
 
 
@@ -16,8 +14,8 @@ type EventNameToType<El extends Element> = {
   onWheel: React.WheelEvent<El>
 }
 
-type AllEventNames<El extends Element> = ObjectKeysType<EventNameToType<El>>
-type AllEvents<El extends Element> = ObjectValuesType<EventNameToType<El>>
+type AllEventNames<El extends Element> = ObjectStringKeys<EventNameToType<El>>
+type AllEvents<El extends Element> = ObjectValuesOfStringKeys<EventNameToType<El>>
 
 
 

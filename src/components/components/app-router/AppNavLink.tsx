@@ -1,7 +1,6 @@
-import { ObjectU } from '@utils/base/ObjectU.ts'
+import { objectMap } from '@utils/base/ObjectU.ts'
 import React, { useMemo } from 'react'
 import { ReactU } from '@utils/react/ReactU.ts'
-
 import { NavLink, useSearchParams } from 'react-router'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import { Pu } from '@utils/base/math/typeUtils.ts'
@@ -9,7 +8,6 @@ import RouteSegment = RouteBuilder.RouteSegment
 import fullParams = RouteBuilder.fullParams
 import AllowedNameParams = RouteBuilder.AllowedNameParams
 import AllowedNameParamsRoutes = RouteBuilder.AllowedNameParamsRoutes
-import ObjectMap = ObjectU.ObjectMap
 import { isobject } from '@utils/base/math/typeUtils.ts'
 import fullAnySearchParams = RouteBuilder.fullAnySearchParams
 import AnyParams = RouteBuilder.AnyParams
@@ -43,7 +41,7 @@ const AppNavLink = ReactU.memo(<R extends RouteSegment>(props: AppNavLinkProps<R
   
   const allowedNamedParamsString = useMemo(() => {
     if (!allowedNamedParams) return allowedNamedParams
-    return ObjectMap<AllowedNameParamsRoutes<R>, AllowedNameParams<R>>(
+    return objectMap<AllowedNameParamsRoutes<R>, AllowedNameParams<R>>(
       allowedNamedParams,
       // @ts-expect-error
       ([k, v]) => {

@@ -1,5 +1,5 @@
-import { ObjectU } from '@utils/base/ObjectU.ts'
-import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
+import { objectPrefixAndCapitalizeKeys } from '@utils/base/ObjectU.ts'
+import { AttachRootElemParams, Widget } from '@libs/widget-style-6/Widget.ts'
 import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
@@ -10,7 +10,6 @@ import {
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
-import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 import row = WidgetStyleCommon.row
 
 
@@ -24,7 +23,7 @@ import row = WidgetStyleCommon.row
     const header = WidgetElem.of({
       upElem: buttonElems.button, upSelector: '>', className: 'rruiHeader',
     })
-    const arrowElems = ObjectPrefixCapitalizeKeys('arrow', SvgIconS6.buildWidgetElems({
+    const arrowElems = objectPrefixAndCapitalizeKeys('arrow', SvgIconS6.buildWidgetElems({
       upElem: buttonElems.button, upSelector: '>',
     }))
     

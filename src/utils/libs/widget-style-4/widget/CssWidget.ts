@@ -1,5 +1,4 @@
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
+import { ObjectStringKeys, ObjectValuesOfStringKeys } from 'src/utils/base/ObjectU.ts'
 import { CssAttr } from '@libs/widget-style-4/css/CssAttr.ts'
 import { CssAttrEnum } from '@libs/widget-style-4/css/CssAttrEnum.ts'
 import { CssPseudos } from '@libs/widget-style-4/css/CssPseudo.ts'
@@ -8,8 +7,6 @@ import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
 import { CssWidgetElem } from './CssWidgetElem.ts'
 import { CssProp } from '../css/CssProp.ts'
 import { CssElem } from '../css/CssElem.ts'
-import ObjectValuesType = ObjectU.ObjectValuesType
-import ObjectKeysType = ObjectU.ObjectKeysType
 
 
 
@@ -17,7 +14,7 @@ export class CssWidget<const in out Es extends RecordRo<string, CssWidgetElem<an
   
   constructor(
     // root element object
-    readonly root: NoInfer<ObjectValuesType<Es>>,
+    readonly root: NoInfer<ObjectValuesOfStringKeys<Es>>,
     // elements table: name -> element
     readonly elements: Es,
     // TODO shortcut states mapping: state -> element & state
@@ -42,11 +39,11 @@ export class CssWidget<const in out Es extends RecordRo<string, CssWidgetElem<an
   
   
   add<
-    const NewE extends Exclude<string, ObjectKeysType<Es>>,
+    const NewE extends Exclude<string, ObjectStringKeys<Es>>,
     const NewSs extends RecordRo<string, CssState>,
     const NewPs extends RecordRo<string, CssProp>,
   >(
-    up: ObjectKeysType<Es>,
+    up: ObjectStringKeys<Es>,
     selector: string,
     elementName: NewE,
     element: CssElem<NewSs, NewPs>

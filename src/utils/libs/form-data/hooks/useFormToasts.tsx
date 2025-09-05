@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
+import { objectMap } from 'src/utils/base/ObjectU.ts'
 import { ValidationActions } from '@libs/form-data/core/ValidationActions.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import { UiText, UiTextValues } from '@libs/ui-text/UiText.ts'
@@ -12,7 +11,6 @@ import awaitDelay = ValidationActions.awaitDelay
 import Failures = ValidationCore.Failures
 import updateFailures = ValidationActions.updateErrors
 import { Updater } from 'src/utils/base/math/typeUtils.ts'
-import ObjectMap = ObjectU.ObjectMap
 
 
 
@@ -88,7 +86,7 @@ export const useFormToasts = <Vs extends Values>(
         <ToastMsg
           uiOption={function() {
             if (serverFailure.code === 'UNKNOWN_ERROR') {
-              return ObjectMap<
+              return objectMap<
                 typeof ErrorUiText.unknownErrorTemplate,
                 UiText<keyof typeof ErrorUiText.unknownErrorTemplate>
               >(

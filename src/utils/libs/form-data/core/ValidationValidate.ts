@@ -1,9 +1,8 @@
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { objectKeys } from 'src/utils/base/ObjectU.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import Validators = ValidationCore.Validators
 import Failure = ValidationCore.Failure
 import Failures = ValidationCore.Failures
-import ObjectKeys = ObjectU.ObjectKeys
 import PartialFailureData = ValidationCore.PartialFailureData
 import Values = ValidationCore.Values
 
@@ -58,7 +57,7 @@ export namespace ValidationValidate {
     //console.log('VALIDATE II: VALUES',values)
     //console.log('VALIDATE III: PREV_FAILURES',prevFailures)
     
-    const fields = ObjectKeys<Vs>(values)
+    const fields = objectKeys<Vs>(values)
     const changedFields: Set<keyof Vs> = new Set(
       fields.filter(f => !(f in prevValues) || values[f]!==prevValues[f])
     )

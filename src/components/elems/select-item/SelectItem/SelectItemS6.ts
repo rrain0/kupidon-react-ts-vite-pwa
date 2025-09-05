@@ -1,4 +1,4 @@
-import { ObjectU } from '@utils/base/ObjectU.ts'
+import { objectPrefixAndCapitalizeKeys } from '@utils/base/ObjectU.ts'
 import { AttachRootElemParams, Widget, WidgetState } from '@libs/widget-style-6/Widget.ts'
 import { AdditionalStates } from '@libs/widget-style-6/WidgetEntities.ts'
 import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
@@ -16,7 +16,6 @@ import flexC = WidgetStyleCommon.flexC
 import absTrbl = WidgetStyleCommon.absTrbl
 import col = WidgetStyleCommon.col
 import Txt = WidgetStyleCommon.Txt
-import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
 
@@ -46,7 +45,7 @@ export namespace SelectItemS6 {
     const addBox = WidgetElem.of({
       upElem: buttonElems.button, upSelector: '>', className: 'rruiAddIconBox',
     })
-    const addElems = ObjectPrefixCapitalizeKeys('add', SvgIconS6.buildWidgetElems({
+    const addElems = objectPrefixAndCapitalizeKeys('add', SvgIconS6.buildWidgetElems({
       upElem: addBox, upSelector: '>',
     }))
     
@@ -63,7 +62,7 @@ export namespace SelectItemS6 {
     const _editElems = IconButtonS6.buildWidgetElems({
       upElem: edit, upSelector: '>',
     })
-    const editElems = ObjectPrefixCapitalizeKeys('edit', _editElems)
+    const editElems = objectPrefixAndCapitalizeKeys('edit', _editElems)
     const _editStates = IconButtonS6.buildWidgetStates(_editElems)
     // @ts-ignore // TODO Style
     ;(edit.states as any) = _editStates

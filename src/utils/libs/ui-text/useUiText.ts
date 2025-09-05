@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { objectEntries, objectMap } from 'src/utils/base/ObjectU.ts'
 import {
   PickedUiValues,
   PickedUiValuesArr,
@@ -8,8 +8,6 @@ import {
   UiValuesArr,
 } from '@libs/ui-text/UiText.ts'
 import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import ObjectMap = ObjectU.ObjectMap
-import ObjectEntries = ObjectU.ObjectEntries
 
 
 
@@ -18,7 +16,7 @@ export const pickUiValue = <V extends UiValue<any>>(
   uiValue: V,
   langs: string[],
 ): V[keyof V] => {
-  const entries = ObjectEntries(uiValue)
+  const entries = objectEntries(uiValue)
   if (!entries.length) {
     throw new Error('UiValue record must have at least one pair of lang-value')
   }
@@ -40,7 +38,7 @@ export const pickUiValues = <V extends UiValues>(
   uiValues: V,
   langs: string[],
 ): PickedUiValues<V> => {
-  return ObjectMap<V, PickedUiValues<V>>(
+  return objectMap<V, PickedUiValues<V>>(
     uiValues,
     ([key, values]) => [key, pickUiValue(values, langs)]
   )

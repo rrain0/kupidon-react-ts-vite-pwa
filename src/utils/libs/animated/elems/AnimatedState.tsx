@@ -1,4 +1,4 @@
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { objectMap } from 'src/utils/base/ObjectU.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React, { useMemo, useState } from 'react'
 import {
@@ -9,7 +9,6 @@ import {
   useUpdateComponentStateUpdaters,
 } from '@libs/animated/animatedUpdaters.ts'
 import { Pu } from 'src/utils/base/math/typeUtils.ts'
-import ObjectMap = ObjectU.ObjectMap
 
 
 
@@ -31,7 +30,7 @@ const AnimatedState = ReactU.memo(
     } = props
     
     const getInitialState = () => {
-      return ObjectMap<AnimatedComponentState<S>, S>(
+      return objectMap<AnimatedComponentState<S>, S>(
         animatedState,
         // @ts-expect-error
         ([prop, animated]) => [prop, animated?.get()]

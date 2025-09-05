@@ -40,7 +40,7 @@ import { ProfilePageTabHeaderContext } from 'src/components/pages/Profile/Profil
 import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.validation.ts'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
-import { ObjectU } from '@utils/base/ObjectU.ts'
+import { objectKeys } from '@utils/base/ObjectU.ts'
 import { FileU } from 'src/utils/file/FileU.ts'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from '@libs/form-data/hooks/useFormSubmit.ts'
@@ -57,7 +57,6 @@ import validators = ProfilePageValidation.validators
 import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
-import ObjectKeys = ObjectU.ObjectKeys
 import arrOfIndices = ArrayU.arrOfIndices
 import { ValueOrMapper } from '@utils/base/math/typeUtils.ts'
 import { isfunction } from '@utils/base/math/typeUtils.ts'
@@ -112,7 +111,7 @@ const ProfilePage = React.memo(() => {
     getCanSubmit: useCallback((failedFields: (keyof FormValues)[]) => {
       return failedFields
         .filter(ff => ff in userDefaultValues)
-        .length < ObjectKeys(userDefaultValues).length
+        .length < objectKeys(userDefaultValues).length
     }, []),
     request,
     isLoading,

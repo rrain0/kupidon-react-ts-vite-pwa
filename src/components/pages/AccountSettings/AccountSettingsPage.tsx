@@ -21,7 +21,7 @@ import ItemContainer from 'src/components/elems/basic-elements/ItemContainer'
 import {
   AccountSettingsPageValidation,
 } from 'src/components/pages/AccountSettings/AccountSettingsPage.validation.ts'
-import { ObjectU } from '@utils/base/ObjectU'
+import { objectKeys } from '@utils/base/ObjectU'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from '@libs/form-data/hooks/useFormSubmit'
 import { useFormToasts } from '@libs/form-data/hooks/useFormToasts'
@@ -35,7 +35,6 @@ import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues
-import ObjectKeys = ObjectU.ObjectKeys
 import validators = AccountSettingsPageValidation.validators
 import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText
@@ -92,7 +91,7 @@ const AccountSettingsPage = React.memo(() => {
       values: FormValues, failedFields: (keyof FormValues)[]
     ) => {
       const userToUpdate: UserToUpdate = { }
-      ObjectKeys(userDefaultValues)
+      objectKeys(userDefaultValues)
         .filter(fName => !['pwd', 'repeatPwd'].includes(fName))
         .forEach(fName => {
           if (!failedFields.includes(fName)) userToUpdate[fName] = values[fName]
@@ -121,7 +120,7 @@ const AccountSettingsPage = React.memo(() => {
       }
       return preparedFields
         .filter(ff => Object.hasOwn(userDefaultValues, ff))
-        .length < ObjectKeys(userDefaultValues).length
+        .length < objectKeys(userDefaultValues).length
     }, []),
     request,
     isLoading,
@@ -153,7 +152,7 @@ const AccountSettingsPage = React.memo(() => {
       const newValues = { ...s, initialValues: { ...s.initialValues } }
       //newValues.initialValues.name = u.name
       
-      ObjectKeys(userDefaultValues).forEach(fName => {
+      objectKeys(userDefaultValues).forEach(fName => {
         if (fieldIsInitial(fName) && fName in u)
           newValues[fName] = u[fName] as any
       })

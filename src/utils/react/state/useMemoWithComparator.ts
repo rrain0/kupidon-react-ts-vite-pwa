@@ -1,9 +1,7 @@
 import { useMemo } from 'react'
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
+import { stringifyEq } from 'src/utils/base/jsUtils.ts'
 import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
 import { ComparatorEq } from 'src/utils/base/math/typeUtils.ts'
-import stringifyEq = ObjectU.stringifyEq
 
 
 

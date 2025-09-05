@@ -1,5 +1,4 @@
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
+import { isRecordAndEmpty, isEmptyObj, getPairOfSingleKeyObj } from 'src/utils/base/ObjectU.ts'
 import { Pair } from '@utils/js/Pair.ts'
 import {
   WidgetElemPropReplacer, WidgetState,
@@ -15,10 +14,7 @@ import { isnumstr } from 'src/utils/base/math/typeUtils.ts'
 import { BuiltWidget, WidgetElem } from './WidgetBuildedConfig.ts'
 import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import { isRecord } from 'src/utils/base/math/typeUtils.ts'
-import isEmptyObj = ObjectU.isEmptyObj
-import getPairOfSingleKeyObj = ObjectU.getPairOfSingleKeyObj
 import { isstring } from 'src/utils/base/math/typeUtils.ts'
-import isRecordAndEmpty = ObjectU.isRecordAndEmpty
 
 
 

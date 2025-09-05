@@ -1,7 +1,5 @@
 import { css } from '@emotion/react'
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
-import ObjectMap = ObjectU.ObjectMap
+import { ObjectStringKeys, objectMap } from 'src/utils/base/ObjectU.ts'
 import { RecordRo } from 'src/utils/base/math/typeUtils.ts'
 import { isdef } from 'src/utils/base/math/typeUtils.ts'
 
@@ -22,7 +20,7 @@ export namespace WidgetStyle {
   > {
     
     constructor(
-      readonly root: NoInfer<ObjectU.ObjectKeysType<Es>>,
+      readonly root: NoInfer<ObjectStringKeys<Es>>,
       readonly states: RecordRo<S, CssWidgetState>,
       readonly elements: Es,
     ) { }
@@ -38,7 +36,7 @@ export namespace WidgetStyle {
   
     get use() { return new UseCssWidget(this) }
     
-    u(props: { e: ObjectU.ObjectKeysType<Es>, s: S }): UseCssWidget<Es, S> {
+    u(props: { e: ObjectStringKeys<Es>, s: S }): UseCssWidget<Es, S> {
       return this.use.e[props.e]().s[props.s]()
     }
     
@@ -52,7 +50,7 @@ export namespace WidgetStyle {
       return new CssWidget< RecordRo<E, CssWidgetElement<S, Ps>>, S >(
         elementName,
         {
-          ...ObjectMap<any, any>(
+          ...objectMap<any, any>(
             element.states,
             ([stateName, cssState]) => [
               stateName,
@@ -67,11 +65,11 @@ export namespace WidgetStyle {
     }
     
     add<
-      const NE extends Exclude<string, ObjectU.ObjectKeysType<Es>>,
+      const NE extends Exclude<string, ObjectStringKeys<Es>>,
       const NS extends Exclude<string, S>,
       const NPs extends Record<string, CssProp>,
     >(
-      up: ObjectU.ObjectKeysType<Es>,
+      up: ObjectStringKeys<Es>,
       selector: string,
       elementName: NE,
       element: Elem<NS, NPs>
@@ -80,7 +78,7 @@ export namespace WidgetStyle {
         this.root,
         {
           ...this.states,
-          ...ObjectMap<any, any>(
+          ...objectMap<any, any>(
             element.states,
             ([stateName, cssState]) => [
               stateName,
@@ -104,28 +102,28 @@ export namespace WidgetStyle {
   > {
     
     readonly s: RecordRo<S, () => UseCssWidget<Es, S>>
-    readonly e: RecordRo<ObjectU.ObjectKeysType<Es>, () => UseCssWidget<Es, S>>
+    readonly e: RecordRo<ObjectStringKeys<Es>, () => UseCssWidget<Es, S>>
     
     currState: S | null = null
-    currElem: ObjectU.ObjectKeysType<Es> | null = null
+    currElem: ObjectStringKeys<Es> | null = null
     
     constructor(
       readonly widget: CssWidget<Es, S>,
     ) {
-      this.s = ObjectMap(widget.states, ([name]) => [
+      this.s = objectMap(widget.states, ([name]) => [
         name,
         () => {
           this.currState = name
           return this
         },
       ])
-      this.e = ObjectMap<any, any>(widget.elements, ([name]) => [
+      this.e = objectMap<any, any>(widget.elements, ([name]) => [
         name,
         () => {
           this.currElem = name
           return this
         },
-      ]) as unknown as RecordRo<ObjectU.ObjectKeysType<Es>, () => UseCssWidget<Es, S>>
+      ]) as unknown as RecordRo<ObjectStringKeys<Es>, () => UseCssWidget<Es, S>>
     }
     
     // get widget
@@ -159,7 +157,7 @@ export namespace WidgetStyle {
             
             while (startName !== endName) {
               stateSelector = end().use + stateSelector
-              endName = end().upElementName as ObjectU.ObjectKeysType<Es>
+              endName = end().upElementName as ObjectStringKeys<Es>
             }
             
             if (stateSelector) {
@@ -170,7 +168,7 @@ export namespace WidgetStyle {
         }
         
         selector = e().use + selector
-        eName = e().upElementName as ObjectU.ObjectKeysType<Es>
+        eName = e().upElementName as ObjectStringKeys<Es>
       }
       
       return selector

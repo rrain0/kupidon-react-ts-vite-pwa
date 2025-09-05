@@ -1,10 +1,7 @@
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
+import {
+  ObjectStringKeys, objectKeys, objectValues, objectEntries
+} from 'src/utils/base/ObjectU.ts'
 import { emptyval } from 'src/utils/base/math/typeUtils.ts'
-import ObjectValues = ObjectU.ObjectValues
-import ObjectKeysType = ObjectU.ObjectKeysType
-import ObjectEntries = ObjectU.ObjectEntries
-import ObjectKeys = ObjectU.ObjectKeys
 import { isstring } from 'src/utils/base/math/typeUtils.ts'
 import { Pu } from 'src/utils/base/math/typeUtils.ts'
 
@@ -127,7 +124,7 @@ export namespace RouteBuilder {
   
   const copyRouteTree = <R extends RouteSegment>(node: R): R => {
     node = { ...node }
-    ObjectEntries(node).forEach(([k, v]) => {
+    objectEntries(node).forEach(([k, v]) => {
       const descendant = copyRouteTree(v)
       descendant[up] = node
       node[k] = descendant
@@ -145,12 +142,12 @@ export namespace RouteBuilder {
   
   export type AllowedNameParams<R extends RouteSegment> = (
     R[typeof params] extends object
-      ? { [Path in ObjectKeysType<R[typeof params]>]?: string | emptyval }
+      ? { [Path in ObjectStringKeys<R[typeof params]>]?: string | emptyval }
       : never
   )
   export type AllowedNameParamsRoutes<R extends RouteSegment> = (
     R[typeof params] extends object
-      ? { [Path in ObjectKeysType<R[typeof params]>]?: RouteSegment | string | emptyval }
+      ? { [Path in ObjectStringKeys<R[typeof params]>]?: RouteSegment | string | emptyval }
       : never
   )
   export type AnyParams = Pu<{ [param: string]: string | null }>
@@ -167,9 +164,9 @@ export namespace RouteBuilder {
     }>
   ): string {
     let fullPath = this[full]()
-    const allowedParamNames = ObjectKeys(this[params])
-    const allowedParamPaths = ObjectValues(this[params])
-    const newParams = ObjectEntries(applyParams).reduce((newParams, [type, applyParam]) => {
+    const allowedParamNames = objectKeys(this[params])
+    const allowedParamPaths = objectValues(this[params])
+    const newParams = objectEntries(applyParams).reduce((newParams, [type, applyParam]) => {
       
       if (applyParam) {
         if (type === 'allowedSearchParams') {
@@ -178,7 +175,7 @@ export namespace RouteBuilder {
           })
         }
         else if (type === 'allowedNamedParams') {
-          ObjectEntries(applyParam).forEach(([n, v]) => {
+          objectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamNames.includes(n)) {
               if (v === null) delete newParams[this[params]![n]]
               else if (isstring(v)) newParams[this[params]![n]] = v
@@ -186,7 +183,7 @@ export namespace RouteBuilder {
           })
         }
         else if (type === 'allowedParams') {
-          ObjectEntries(applyParam).forEach(([n, v]) => {
+          objectEntries(applyParam).forEach(([n, v]) => {
             if (allowedParamPaths.includes(n)) {
               if (v === null) delete newParams[n]
               else if (isstring(v)) newParams[n] = v
@@ -199,7 +196,7 @@ export namespace RouteBuilder {
           })
         }
         else if (type === 'anyParams') {
-          ObjectEntries(applyParam).forEach(([n, v]) => {
+          objectEntries(applyParam).forEach(([n, v]) => {
             if (v === null) delete newParams[n]
             else if (isstring(v)) newParams[n] = v
           })
@@ -258,7 +255,7 @@ export namespace RouteBuilder {
       [fullAnySearchParams]: getFullAnySearchParams,
       [fullAllowedNameParams]: getFullAllowedNameParams,
     }
-    ObjectValues(route).forEach(downRoute => downRoute[up] = route)
+    objectValues(route).forEach(downRoute => downRoute[up] = route)
     return route
   }
   

@@ -1,10 +1,8 @@
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
-
-import ObjectEntries = ObjectU.ObjectEntries
+import { stringifyEq } from 'src/utils/base/jsUtils.ts'
+import { objectEntries } from 'src/utils/base/ObjectU.ts'
 import { isundef } from 'src/utils/base/math/typeUtils.ts'
 import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import { isdef } from 'src/utils/base/math/typeUtils.ts'
-import stringifyEq = ObjectU.stringifyEq
 
 
 
@@ -35,7 +33,7 @@ export const parseSearchParams = (search = ''): SearchParamsData => (
 
 
 export const stringifySearchParams = (searchData: SearchParamsData = { }) => (
-  ObjectEntries(searchData).map(([param, values], i) => values.map((v, j) => (
+  objectEntries(searchData).map(([param, values], i) => values.map((v, j) => (
     `${!i && !j ? '?' : '&'}${param}${isundef(v) ? '' : `=${v}`}`
   )).join('')).join('')
 )

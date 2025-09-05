@@ -1,12 +1,11 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
 import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import { ObjectU } from 'src/utils/base/ObjectU.ts'
+import { objectMap } from 'src/utils/base/ObjectU.ts'
 import { camelCaseToKebabCase } from 'src/utils/base/stringUtils.ts'
 import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import { falsy } from 'src/utils/base/math/typeUtils.ts'
 import { RecordPu } from 'src/utils/base/math/typeUtils.ts'
-import ObjectMap = ObjectU.ObjectMap
 
 
 
@@ -34,7 +33,7 @@ export namespace ReactU {
   export const mapToCssCustomProps = (
     cssProps: RecordPu<string, string | number>
   ): RecordPu<`--${string}`, string | number> => {
-    return ObjectMap(
+    return objectMap(
       cssProps,
       ([propName, value]) => [mapToCssCustomProp(propName), value] as const
     )

@@ -1,17 +1,15 @@
-import { ObjectU } from '@utils/base/ObjectU.ts'
+import { objectPrefixAndCapitalizeKeys } from '@utils/base/ObjectU.ts'
 import { AttachRootElemParams, Widget } from '@libs/widget-style-6/Widget.ts'
 import { WidgetElem } from '@libs/widget-style-6/WidgetEntity.ts'
 import {
   AppStyle,
   AppWidgetStyle, combinePartsToTypeShapeSizeColor,
-  WidgetStyle, WidgetStyleObj,
+  WidgetStyle,
 } from '@libs/widget-style-6/WidgetStyle.ts'
 import { WidgetStyleCommon } from 'src/styles/common/WidgetStyleCommon.ts'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import imgCoverCenter = WidgetStyleCommon.imgCoverCenter
-import absTrbl = WidgetStyleCommon.absTrbl
 import flexC = WidgetStyleCommon.flexC
-import ObjectPrefixCapitalizeKeys = ObjectU.ObjectPrefixCapitalizeKeys
 
 
 
@@ -29,7 +27,7 @@ export namespace ImgSparkS6 {
     const spark = WidgetElem.of({
       upElem: imgFrame, upSelector: '>', className: 'rruiSparkingLine',
     })
-    const errIcon = ObjectPrefixCapitalizeKeys('err', SvgIconS6.buildWidgetElems({
+    const errIcon = objectPrefixAndCapitalizeKeys('err', SvgIconS6.buildWidgetElems({
       upElem: imgFrame, upSelector: '>',
     }))
     return {

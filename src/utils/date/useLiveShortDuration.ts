@@ -8,11 +8,9 @@ import {
   differenceInWeeks, differenceInYears,
 } from 'date-fns'
 import { useEffect, useState } from 'react'
-
-import { JsU } from 'src/utils/js/JsU.ts'
+import { maxTimeout } from 'src/utils/base/jsUtils.ts'
 import { Pu } from 'src/utils/base/math/typeUtils.ts'
 import { isdef } from 'src/utils/base/math/typeUtils.ts'
-import maxTimeout = JsU.maxTimeout
 
 
 
