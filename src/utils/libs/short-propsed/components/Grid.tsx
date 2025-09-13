@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import {
-  GridViewShortProps,
+  type GridViewShortProps,
   processGridViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processGridViewShortProps.ts'
 import clsx from 'clsx'

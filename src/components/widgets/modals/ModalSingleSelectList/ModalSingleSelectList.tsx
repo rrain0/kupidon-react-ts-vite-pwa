@@ -17,7 +17,7 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import ModalInput from 'src/components/widgets/modals/ModalInput/ModalInput'
 import { ReactU } from 'src/utils/react/ReactU'
 
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
 import { Pu } from '@utils/base/typeUtils.ts'
@@ -31,7 +31,7 @@ const overlayEdit = 'edit'
 
 type ModalSingleSelectListProps<T extends string> = {
   isOpen: boolean
-  onClose: Callback
+  onClose: Cb
   title: string
   options: Option<T>[]
   selected: T
@@ -41,7 +41,7 @@ type ModalSingleSelectListProps<T extends string> = {
   add: T[]
   edit: T[]
   setOptionText: Setter<Option<T>>
-  onCancel: Callback
+  onCancel: Cb
 }>
 
 const ModalSingleSelectList = ReactU.memo(

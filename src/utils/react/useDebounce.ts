@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
-import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
-import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
+import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -13,7 +13,7 @@ export const useDebounce = ({
   cancelOnUnmount = true,
   deps = [],
 }: {
-  callback: Callback
+  callback: Cb
   delay: number
   cancelOnUnmount?: boolean | undefined
   deps?: any[] | undefined

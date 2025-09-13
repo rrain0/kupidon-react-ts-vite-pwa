@@ -30,13 +30,13 @@ import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import { Callback1 } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import row = EmotionCommon.row
 import Txt = EmotionCommon.Txt
 import pinkHeartWithExclamation from 'src/assets/im/ic/pink-heart-with-exclamation.svg'
 import manWithHugeHeart from 'src/assets/im/ic/man-with-huge-heart.svg'
-import { useMbtiZustand } from 'src/zustand/mbti/MbtiZustand.ts'
+import { useMbtiZustand } from 'src/zustand/mbti/mbtiZustand.ts'
 import colC = EmotionCommon.colC
 import flexC = WidgetStyleCommon.flexC
 import gridStackC = EmotionCommon.gridStackC
@@ -53,8 +53,8 @@ const ResetMbtiTestOverlayName = 'resetMbtiTest'
 
 export type TestsProps = {
   formFieldWrapProps: ReturnType<typeof useFormData<FormValues>>['formFieldWrapProps']
-  onFormSubmitCallback: Callback1<React.FormEvent>
-  submit: Callback
+  onFormSubmitCallback: Cb1<React.FormEvent>
+  submit: Cb
   canSubmit: boolean
   formProps: FormProps
   isLoading: boolean

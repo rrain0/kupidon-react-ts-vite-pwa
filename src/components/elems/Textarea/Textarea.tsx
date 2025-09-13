@@ -9,7 +9,7 @@ import absTlwh = EmotionCommon.absTlwh
 import resetTextarea = EmotionCommon.resetTextarea
 import { Pu } from '@utils/base/typeUtils.ts'
 import hoverable = EmotionCommon.hoverable
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
@@ -18,7 +18,7 @@ import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 export type TextareaExtraProps = Pu<{
   isError: boolean
-  onValue: Callback1<string>
+  onValue: Cb1<string>
   hFitText: boolean
   startViews: React.ReactNode
   endViews: React.ReactNode

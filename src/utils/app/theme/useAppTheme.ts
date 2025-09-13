@@ -1,4 +1,4 @@
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 
 
 

@@ -159,7 +159,7 @@ export default defineConfig(({ command, mode }) => {
       }),
       VitePWA(pwaOptions),
       checker({
-        // use TypeScript check
+        // Use TypeScript check on the fly in development
         typescript: true,
       }),
     ],

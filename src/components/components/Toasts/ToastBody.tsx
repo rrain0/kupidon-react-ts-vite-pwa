@@ -19,14 +19,14 @@ import resetButton = EmotionCommon.resetButton
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import hoverable = EmotionCommon.hoverable
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 
 
 
 export type ToastType = 'normal' | 'loading' | 'info' | 'ok' | 'warn' | 'danger'
 export type ToastBodyProps = Pu<{
-  closeToast: Callback
+  closeToast: Cb
   showCloseButton: boolean
   type: ToastType
   children?: React.ReactNode

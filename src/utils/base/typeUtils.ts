@@ -128,7 +128,7 @@ export function isfunction<F extends Function, T>(value: T | F): value is F {
 export function isObject<O extends object, T>(value: T | O): value is O {
   return value instanceof Object
 }
-export function isArray<A extends unknown[], T>(value: T | A): value is A {
+export function isArray<A extends readonly any[], T>(value: T | A): value is A {
   return value instanceof Array
 }
 export function isFunction<F extends Function, T>(value: T | F): value is F {
@@ -149,12 +149,12 @@ export function isInt<N extends number, T>(v: T | N): v is N {
 
 
 
-export type Callback = () => void
-export type Callback1<T> = (value: T) => void
-export type Callback2<T1, T2> = (value1: T1, value2: T2) => void
-export type CallbackN<T extends any[]> = (...args: T) => void
-export type Setter<T> = Callback1<T>
-export type Consumer<T> = Callback1<T>
+export type Cb = () => void
+export type Cb1<T> = (value: T) => void
+export type Cb2<T1, T2> = (value1: T1, value2: T2) => void
+export type CbN<T extends any[]> = (...args: T) => void
+export type Setter<T> = Cb1<T>
+export type Consumer<T> = Cb1<T>
 export type Getter<T> = () => T
 export type Producer<T> = Getter<T>
 export type Mapper<In, Out = In> = (v: In) => Out

@@ -1,6 +1,6 @@
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 
 
 

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
-import { useIsMount } from 'src/utils/react/state/useIsMount.ts'
-import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { useAsRefGet } from 'src/utils/state/react/base/useAsRefGet.ts'
+import { useIsMount } from 'src/utils/state/react/base/useIsMount.ts'
+import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 import { Producer } from 'src/utils/base/typeUtils.ts'
 
 
@@ -16,7 +16,7 @@ import { Producer } from 'src/utils/base/typeUtils.ts'
 // because it is impossible to distinct re-renders without using state
 
 export const useEvent = (
-  onEvent: Callback | Producer<Callback>,
+  onEvent: Cb | Producer<Cb>,
   deps: any[] = [],
   triggerOnMount = false,
 ) => {
@@ -43,7 +43,7 @@ export const useEvent = (
   //const [getCurr] = useAsRefGet(deps)
   //const [getPrev, setPrev] = useRefGetSet<any[] | undefined>(undefined)
   
-  const [getCleanup, setCleanup] = useRefGetSet<void | Callback>(undefined)
+  const [getCleanup, setCleanup] = useRefGetSet<void | Cb>(undefined)
   
   useEffect(() => {
     setCleanupMarker(!cleanupMarker)

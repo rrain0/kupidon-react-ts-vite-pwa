@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useMemo } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
@@ -173,7 +172,7 @@ const RowOfPreviews = React.memo((props: RowOfPreviewsProps) => {
 const Overflow = styled.div`
   box-sizing: content-box;
   // Вертикальные маргины и паддинги нужны чтобы отображать тени у карточек
-  ${virtualOffset({ a: 16 })};
+  margin: -16px; padding: 16px;
   width: 100%;
   height: fit-content;
   overflow: auto;

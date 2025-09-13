@@ -10,8 +10,6 @@ import ArrowRefreshCwIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowR
 import DownloadIc from 'src/components/elems/icons/SvgIcons/pack/ui/DownloadIc.tsx'
 import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 import { BottomSheetBasicS6 } from 'src/components/widgets/BottomSheetBasic/BottomSheetBasicS6.ts'
-
-import { FileU } from 'src/utils/file/FileU.ts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import React from 'react'
 import Dropzone from 'react-dropzone'
@@ -22,7 +20,7 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import * as uuid from 'uuid'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import CrossInCircleIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import col = EmotionCommon.col
 import row = EmotionCommon.row
@@ -30,7 +28,7 @@ import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import flexC = EmotionCommon.flexC
 import Txt = EmotionCommon.Txt
 import resetH = EmotionCommon.resetH
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 
 
@@ -40,11 +38,11 @@ export const ProfilePhotosPhotoOptionsOverlayName = 'photoOptions'
 
 export type ProfilePhotosPhotoOptionsProps = {
   isOpen: boolean
-  close: Callback
+  close: Cb
   images: MediaInArrayDUC[]
   setImages: SetterOrUpdater<MediaInArrayDUC[]>
   lastIdx: number
-  onFilesSelected: Callback1<File[]>
+  onFilesSelected: Cb1<File[]>
 }
 
 

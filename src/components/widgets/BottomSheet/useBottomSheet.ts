@@ -6,20 +6,17 @@ import React, {
   useMemo, useRef,
   useState,
 } from 'react'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ArrayU, lastI } from '@utils/base/ArrayU.ts'
 import { ViewProps } from 'src/utils/view/ViewProps.ts'
 import { rangeClamp, rangeHas } from '@utils/base/math/rangeUtils.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
-import { CssParserU } from 'src/utils/css/CssParserU.ts'
-import parseCssValue = CssParserU.parseCssStringValue
-import CssValue = CssParserU.CssValue
+import { CssValue, parseCssStringValue } from '@utils/css/cssParserUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
 import findLastBy3 = ArrayU.findLastBy3
 import { nonemptyval } from '@utils/base/typeUtils.ts'
 import findBy3 = ArrayU.findBy3
-import { Callback } from '@utils/base/typeUtils.ts'
-import lastIndex = ArrayU.lastI
+import { Cb } from '@utils/base/typeUtils.ts'
 import findLastBy = ArrayU.findLastBy
 import findBy = ArrayU.findBy
 import { isemptyval } from '@utils/base/typeUtils.ts'
@@ -203,10 +200,10 @@ export const useBottomSheet = (
     const idx = options.defaultOpenIdx ?? null
     
     if (idx !== null) return rangeClamp(
-      idx, [realFirstOpenIdx, lastIndex(snapPointsPx)]
+      idx, [realFirstOpenIdx, lastI(snapPointsPx)]
     )
     
-    return Math.ceil((realFirstOpenIdx + lastIndex(snapPointsPx)) / 2)
+    return Math.ceil((realFirstOpenIdx + lastI(snapPointsPx)) / 2)
   }, [realFirstOpenIdx, options.defaultOpenIdx, snapPointsPx])
   
   // if there is snap point evaluated to 0, then closeIdx!==null
@@ -242,7 +239,7 @@ export const useBottomSheet = (
   const runAnimation = useCallback((
     endH: number,
     lastSpeed: number | null,
-    onFinish: Callback
+    onFinish: Cb
   ) => {
     const duration = function() {
       //console.log('lastSpeed',lastSpeed)
@@ -316,7 +313,7 @@ export const useBottomSheet = (
       if (newState === 'adjusting')
         return getSnapIndexToAdjust(currHeight, snapPoints, snapPointsPx)
       if (newSnapIdx === null) return null
-      return rangeClamp(newSnapIdx, [0, lastIndex(snapPointsPx)])
+      return rangeClamp(newSnapIdx, [0, lastI(snapPointsPx)])
     }()
     
     const toHeight = function() {
@@ -494,7 +491,7 @@ export const useBottomSheet = (
         dragStartRef.current.lastSpeed = speed
         if (diry < 0) {
           setNewState('snapping')
-          setNewSnapIdx(lastIndex(snapPoints))
+          setNewSnapIdx(lastI(snapPoints))
         } else {
           setNewState('closing')
         }
@@ -553,7 +550,7 @@ function calculateSnapPointsPx(
   const allowedUnits = ['px', '', undefined, '%']
   const allowedKeywords = ['fit-content', 'fit-header', 'free']
   const snapPointsCssValues = snapPoints.map(it => {
-    const cssValue = parseCssValue(it + '')
+    const cssValue = parseCssStringValue(it + '')
     if (
       !cssValue
       || (cssValue.type === 'keyword' && !allowedKeywords.includes(cssValue.value))

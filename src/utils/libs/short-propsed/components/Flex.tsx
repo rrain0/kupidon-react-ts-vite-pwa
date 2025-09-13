@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import {
-  FlexViewShortProps,
+  type FlexViewShortProps,
   processFlexViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processFlexViewShortProps.ts'
 import clsx from 'clsx'

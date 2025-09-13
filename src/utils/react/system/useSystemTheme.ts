@@ -1,5 +1,5 @@
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { useMedia } from 'src/utils/css/media/useMedia.ts'
+import { useMedia } from 'src/utils/css/react/media/useMedia.ts'
 import ThemeType = AppTheme.Type
 
 

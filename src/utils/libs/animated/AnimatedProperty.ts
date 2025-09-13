@@ -1,7 +1,7 @@
 
 import { AnimatedComputed } from '@libs/animated/AnimatedComputed.ts'
 import { Mapper } from 'src/utils/base/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -11,8 +11,8 @@ export interface AnimatedProperty<Value> {
   
   refresh(): void
   
-  onChange(listener: Callback1<Value>): void
-  removeOnChange(listener: Callback1<Value>): void
+  onChange(listener: Cb1<Value>): void
+  removeOnChange(listener: Cb1<Value>): void
 }
 
 

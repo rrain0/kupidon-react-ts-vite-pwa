@@ -1,4 +1,4 @@
-import { DateU } from '@utils/date/DateU.ts'
+import { getCurrentTimeZoneName } from '@utils/date/dateUtils.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { useFormApiRequest } from '@libs/api/useFormApiRequest.ts'
@@ -32,7 +32,6 @@ import mapFailureCodeToUiText = PwdChangePageValidation.mapFailureCodeToUiText
 import PageLayout from 'src/components/components/page/PageLayout'
 import PageContentLayout from 'src/components/components/page/PageContentLayout'
 import contents = EmotionCommon.contents
-import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 

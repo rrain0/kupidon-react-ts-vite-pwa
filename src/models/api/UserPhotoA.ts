@@ -1,4 +1,4 @@
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ArrayU, arrOfIndices } from '@utils/base/ArrayU.ts'
 import {
   MediaInArrayDUC,
   newDefaultEmptyRemoteMediaInArray, newDefaultRemoteMediaInArray,
@@ -19,7 +19,7 @@ export interface UserPhotoA {
 
 
 export function userPhotosAToMedias(photos: UserPhotoA[]): MediaInArrayDUC[] {
-  const profilePhotos = ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
+  const profilePhotos = arrOfIndices(profilePhotosCntMax).map(i => ({
     ...newDefaultEmptyRemoteMediaInArray(i),
     // TODO id - id collision with ids from backend?
     id: uuid.v4(),

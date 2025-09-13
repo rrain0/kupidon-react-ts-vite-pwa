@@ -1,5 +1,4 @@
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import ArrayElement = ArrayU.ArrayElement
+import { ArrayU, ArrElem } from 'src/utils/base/ArrayU.ts'
 
 
 
@@ -8,7 +7,7 @@ export namespace Lang {
   
   export const AllSupported = ['en-US', 'ru-RU'] as const
   
-  export type Supported = ArrayElement<typeof AllSupported>
+  export type Supported = ArrElem<typeof AllSupported>
   
   export const Default: Supported = 'en-US'
   

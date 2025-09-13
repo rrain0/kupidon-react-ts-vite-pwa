@@ -7,7 +7,7 @@ import Button from 'src/components/elems/buttons/Button/Button'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 
 import { Pu } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import rowWrap = EmotionCommon.rowWrap
 
 
@@ -24,15 +24,15 @@ type DialogButtonsProps = Pu<{
   position: 'center' | 'end'
   //variant: 'primarySmall' | 'textSmall'
   
-  onClose: Callback
-  onBack: Callback
+  onClose: Cb
+  onBack: Cb
   
-  onCancel: Callback
+  onCancel: Cb
   
-  onClear: Callback
-  onOk: Callback
-  onAccept: Callback
-  onYes: Callback
+  onClear: Cb
+  onOk: Cb
+  onAccept: Cb
+  onYes: Cb
   
   acceptVariant: 'text' | 'filledRounded'
   acceptSize: 'normal2' | 'big'

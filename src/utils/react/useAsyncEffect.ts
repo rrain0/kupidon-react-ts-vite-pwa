@@ -2,14 +2,14 @@ import { useCallback, useEffect, useRef } from 'react'
 
 import { Consumer } from 'src/utils/base/typeUtils.ts'
 import { Predicate } from 'src/utils/base/typeUtils.ts'
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 
 
 
 // TODO remove
 export const useAsyncEffect = 
 (
-  callback: (lock: Predicate<any>, unlock: Consumer<any>) => (void | Callback),
+  callback: (lock: Predicate<any>, unlock: Consumer<any>) => (void | Cb),
   deps: any[] | undefined
 ) => {
   

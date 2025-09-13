@@ -1,4 +1,4 @@
-import { useAsRefGet } from 'src/utils/react/state/useAsRefGet.ts'
+import { useAsRefGet } from 'src/utils/state/react/base/useAsRefGet.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
@@ -17,8 +17,8 @@ import awaitDelay = ValidationActions.awaitDelay
 import Values = ValidationCore.Values
 import { SetterOrUpdater } from 'src/utils/base/typeUtils.ts'
 import { ValueOrMapper } from 'src/utils/base/typeUtils.ts'
-import { Callback } from 'src/utils/base/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 import { Mapper } from 'src/utils/base/typeUtils.ts'
 
 
@@ -29,16 +29,16 @@ export type FormFieldWrapRenderProps<V> = {
   value: V
   highlight: boolean
   setValue: SetterOrUpdater<V>
-  onBlur: Callback
+  onBlur: Cb
   getChecked: Mapper<V, boolean>
   inputProps: {
     value: V
-    onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>
-    onBlur: Callback
+    onChange: Cb1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>
+    onBlur: Cb
   }
   radioInputProps: (value: V) => ({
     checked: boolean,
-    onChange: Callback1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>,
+    onChange: Cb1<React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>>,
   })
 }
   

@@ -42,8 +42,8 @@ import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
 import col = EmotionCommon.col
 import FormValues = ProfilePageValidation.FormValues
-import { Callback1 } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
 
@@ -54,8 +54,8 @@ import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
 export type ProfileProps = {
   formFieldWrapProps: ReturnType<typeof useFormData<FormValues>>['formFieldWrapProps']
-  onFormSubmitCallback: Callback1<React.FormEvent>
-  submit: Callback
+  onFormSubmitCallback: Cb1<React.FormEvent>
+  submit: Cb
   canSubmit: boolean
   formProps: FormProps
   isLoading: boolean

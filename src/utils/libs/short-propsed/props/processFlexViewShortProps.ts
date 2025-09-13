@@ -1,9 +1,9 @@
 import {
-  FlexShortProps,
+  type FlexShortProps,
   processFlexShortProps,
 } from 'src/utils/libs/short-propsed/base/processFlexShortProps.ts'
 import {
-  CommonViewShortProps,
+  type CommonViewShortProps,
   processCommonViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processCommonViewShortProps.ts'
 

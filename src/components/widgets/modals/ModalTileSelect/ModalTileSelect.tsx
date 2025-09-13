@@ -11,7 +11,7 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import { ArrayU } from '@utils/base/ArrayU'
 import { ReactU } from 'src/utils/react/ReactU'
 
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { emptyArr } from '@utils/base/typeUtils.ts'
@@ -35,14 +35,14 @@ const overlayRemove = 'remove'
 
 type ModalTileSelectProps<T extends string> = {
   isOpen: boolean
-  onClose: Callback
+  onClose: Cb
   title: string
   options: Option<T>[]
 } & Pu<{
   selected: T[]
   setSelected: Setter<T[]>
-  onCancel: Callback
-  onClear: Callback
+  onCancel: Cb
+  onClear: Cb
 }>
 
 const ModalTileSelect = ReactU.memo(

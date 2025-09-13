@@ -1,17 +1,15 @@
 import { Theme } from '@emotion/react'
 import { Interpolation } from '@emotion/serialize'
 import styled from '@emotion/styled'
-import { CssU } from '@utils/css/CssU.ts'
+import { cssMax, cssPlus, cssToPx } from '@utils/css/cssUtils.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import React, { CSSProperties } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import { ReactU } from 'src/utils/react/ReactU'
-
 import Children = ReactU.Children
 import { Pu } from '@utils/base/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
-import toPx = CssU.toPx
 import gridC = EmotionCommon.gridC
 import noPointer = EmotionCommon.noPointer
 
@@ -64,15 +62,15 @@ export const PageContentLayout = React.memo((props: PageContentLayoutProps) => {
     return 'col' as const
   })() */
     
-  const pt = CssU.max(
-    !noInsets && !full && !fullSm && (toPx(ptDefault) ?? '30px'),
-    CssU.plus(
+  const pt = cssMax(
+    !noInsets && !full && !fullSm && (cssToPx(ptDefault) ?? '30px'),
+    cssPlus(
       !noInsetsForFilledBars && 'var(--top-action-bars-h)',
       !noInsetsForTransBars && !full && !fullSm && 'var(--top-floating-bar-h)'
     )
   )
-  const pb = CssU.plus(
-    !noInsets && !full && !fullSm && (toPx(pbDefault) ?? '30px'),
+  const pb = cssPlus(
+    !noInsets && !full && !fullSm && (cssToPx(pbDefault) ?? '30px'),
     !noInsetsForFilledBars && 'var(--bottom-action-bars-h)',
     !noInsetsForTransBars && !full && !fullSm && 'var(--bottom-floating-bar-h)'
   )

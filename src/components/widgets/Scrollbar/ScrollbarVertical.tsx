@@ -9,7 +9,7 @@ import React, {
 import clsx from 'clsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import { rangeClamp, rangeMap } from '@utils/base/math/rangeUtils.ts'
-import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
+import { useAsRefGet } from '@utils/state/react/base/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import { ScrollbarVerticalStyle } from 'src/components/widgets/Scrollbar/ScrollbarVerticalStyle.ts'

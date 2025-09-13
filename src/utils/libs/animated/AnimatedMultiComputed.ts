@@ -4,7 +4,7 @@ import {
   AnimatedProperty, AnimatedPropsFromValues, AnimatedPropsToValues,
 } from '@libs/animated/AnimatedProperty.ts'
 import { Mapper } from 'src/utils/base/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 import { MapperN } from 'src/utils/base/typeUtils.ts'
 
 
@@ -60,9 +60,9 @@ implements AnimatedProperty<Value> {
   }
   
   
-  private listeners = new Set<Callback1<Value>>()
+  private listeners = new Set<Cb1<Value>>()
   
-  onChange(listener: Callback1<Value>) {
+  onChange(listener: Cb1<Value>) {
     this.listeners.add(listener)
     if (this.listeners.size === 1) {
       this.sources.forEach(
@@ -71,7 +71,7 @@ implements AnimatedProperty<Value> {
     }
   }
   
-  removeOnChange(listener: Callback1<Value>) {
+  removeOnChange(listener: Cb1<Value>) {
     this.listeners.delete(listener)
     if (!this.listeners.size) {
       this.sources.forEach(

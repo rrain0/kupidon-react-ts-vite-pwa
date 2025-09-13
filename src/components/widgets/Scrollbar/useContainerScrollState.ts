@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import {ViewProps} from "src/utils/view/ViewProps.ts"
 
 import { Setter } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -110,7 +110,7 @@ export const useContainerScrollState = ({
       const container = getContainer()
       const content = getContent()
       updateScrollProps()
-      const clearActions = [] as Callback[]
+      const clearActions = [] as Cb[]
       if (container && (!containerIsWindow || content)){
         const resizeObserver = new ResizeObserver((entries, observer) => {
           //console.log('entries',entries)

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { useClick } from '@utils/gestures/pointer/useClick.ts'
-import { useLongPress } from '@utils/gestures/pointer/useLongPress.ts'
+import { useClick } from '@utils/app/gestures/useClick.ts'
+import { useLongPress } from '@utils/app/gestures/useLongPress.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import {
   FlexViewShortProps,
@@ -15,7 +15,7 @@ import UseRipple from 'src/components/elems/Ripple/UseRipple.tsx'
 import { Pu } from '@utils/base/typeUtils.ts'
 import combineProps = ReactU.combineProps
 import { HtmlEmptyAttr } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -31,7 +31,7 @@ type ButtonProps = React.ComponentProps<typeof ButtonElem> & FlexViewShortProps 
   'data-locked': HtmlEmptyAttr
   'data-selected': HtmlEmptyAttr
   'data-error': HtmlEmptyAttr
-  onLongPress: Callback
+  onLongPress: Cb
 }>
 
 

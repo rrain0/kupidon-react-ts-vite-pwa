@@ -8,10 +8,10 @@ import {
   rangeMapClamp,
   rangeZeroBased,
 } from '@utils/base/math/rangeUtils.ts'
-import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
+import { useAsRefGet } from '@utils/state/react/base/useAsRefGet.ts'
 import { useSkipRepaintAfterMount } from '@utils/react/useSkipRepaintAfterMount.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
-import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'

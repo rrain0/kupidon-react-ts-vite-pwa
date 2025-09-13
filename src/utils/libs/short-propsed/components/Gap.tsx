@@ -1,5 +1,6 @@
 import {
-  CommonViewShortProps, processCommonViewShortProps,
+  type CommonViewShortProps,
+  processCommonViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processCommonViewShortProps.ts'
 import clsx from 'clsx'
 import React from 'react'
@@ -17,7 +18,7 @@ const Gap = React.memo((props: GapProps) => {
   
   return (
     <div
-      data-display-name='Flex'
+      data-display-name='Gap'
       {...restProps}
       css={{
         [`&.${commonStyleClassName}`]: css,

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
-import NonEmptyArr = ArrayU.NonEmptyArr
+import { NonEmptyArr } from 'src/utils/base/ArrayU.ts'
 
 
 

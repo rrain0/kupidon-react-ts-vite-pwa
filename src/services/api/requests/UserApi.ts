@@ -2,9 +2,8 @@ import { AxiosRequestConfig } from 'axios'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA, UserStrangerA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
-
-import { getDataUrlProps } from '@utils/file/DataUrl.ts'
-import { FileU } from '@utils/file/FileU.ts'
+import { getDataUrlProps } from '@utils/bin/dataUrl.ts'
+import { fetchToBlob } from '@utils/bin/binDataUtils.ts'
 import { AxiosConfig } from 'src/services/api/AxiosConfig.ts'
 import { ApiV1Routes } from 'src/services/api/ApiV1Routes.ts'
 import axAccess = AxiosConfig.axAccess
@@ -15,8 +14,7 @@ import handleAuthenticatedResponse = ApiResponseUtils.handleAuthenticatedRespons
 import AuthenticationError = ApiResponseUtils.AuthenticationError
 import NoUserResponseError = ApiResponseUtils.NoUserResponseError
 import { Pu } from '@utils/base/typeUtils.ts'
-import fetchToBlob = FileU.fetchToBlob
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'
 
 
@@ -126,7 +124,7 @@ export namespace UserApi {
   export const addProfilePhoto = async (
     photo: profilePhotoToAdd,
     options?: {
-      onProgress?: Callback1<number | undefined>
+      onProgress?: Cb1<number | undefined>
       abortCtrl?: AbortController
     }
   ) => {

@@ -2,7 +2,7 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import AnimatedState from '@animated/elems/AnimatedState.tsx'
 import styled from '@emotion/styled'
-import { DateU } from '@utils/date/DateU.ts'
+import { age } from '@utils/date/dateUtils.ts'
 import React from 'react'
 import { EmptyS6 } from '@libs/widget-style-6/EmptyS6.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
@@ -29,7 +29,7 @@ import { Pu } from '@utils/base/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import col = EmotionCommon.col
 import colC = EmotionCommon.colC
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 import absTlwh = EmotionCommon.absTlwh
 import flexC = EmotionCommon.flexC
@@ -47,14 +47,14 @@ export type ProfileCardsInfoOverlayProps = ClassStyle & Pu<{
     action: ProfileCardsAction
   }>
   photosCnt: number
-  openInfo: Callback
+  openInfo: Cb
   name: string
   birthDate: string
   aboutMe: string
   
-  onAccept: Callback
-  onReject: Callback
-  onBack: Callback
+  onAccept: Cb
+  onReject: Cb
+  onBack: Cb
 }>
 export const ProfileCardsInfoOverlay = React.memo((props: ProfileCardsInfoOverlayProps) => {
   const {
@@ -73,7 +73,7 @@ export const ProfileCardsInfoOverlay = React.memo((props: ProfileCardsInfoOverla
   
   const match = 'XX'
   
-  const nameAge = [name, DateU.age(birthDate)].filter(it => it).join(', ')
+  const nameAge = [name, age(birthDate)].filter(it => it).join(', ')
   
   return (
     <ProfileCardsInfoBox data-display-name='ProfileCardsInfoOverlay'>

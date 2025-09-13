@@ -7,7 +7,7 @@ import {
   UiValues,
   UiValuesArr,
 } from '@libs/ui-text/UiText.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 
 
 

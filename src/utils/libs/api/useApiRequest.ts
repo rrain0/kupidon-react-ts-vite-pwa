@@ -1,11 +1,11 @@
 
-import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
-import { useStateAndRef } from 'src/utils/react/state/useStateAndRef.ts'
+import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
+import { useStateAndRef } from 'src/utils/state/react/base/useStateAndRef.ts'
 import { useState } from 'react'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import ResponseError = ApiResponseUtils.ResponseError
 import ApiResponse = ApiResponseUtils.ApiResponse
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -85,7 +85,7 @@ export const useApiRequest = <D, E extends ResponseError>(
 
 
 export type UseApiRequestInitial = {
-  startRequest: Callback
+  startRequest: Cb
   isLoading: false
   isFinished: false
   isSuccess: false
@@ -95,7 +95,7 @@ export type UseApiRequestInitial = {
 }
 
 export type UseApiRequestLoading = {
-  startRequest: Callback
+  startRequest: Cb
   isLoading: true
   isFinished: false
   isSuccess: false
@@ -105,7 +105,7 @@ export type UseApiRequestLoading = {
 }
 
 export type UseApiRequestSuccess<D> = {
-  startRequest: Callback
+  startRequest: Cb
   isLoading: false
   isFinished: true
   isSuccess: true
@@ -115,7 +115,7 @@ export type UseApiRequestSuccess<D> = {
 }
 
 export type UseApiRequestError<E extends ResponseError> = {
-  startRequest: Callback
+  startRequest: Cb
   isLoading: false
   isFinished: true
   isSuccess: false

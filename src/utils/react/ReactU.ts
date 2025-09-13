@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React, { CSSProperties, useEffect } from 'react'
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { ArrayU, arrEq } from 'src/utils/base/ArrayU.ts'
 import { objectMap } from 'src/utils/base/ObjectU.ts'
 import { camelCaseToKebabCase } from 'src/utils/base/stringUtils.ts'
 import { Pu } from 'src/utils/base/typeUtils.ts'
@@ -65,7 +65,7 @@ export namespace ReactU {
   
   let prevLog2
   export const noRepeatLog2 = (...args: any[]) => {
-    if (!ArrayU.eq(args, prevLog2)) {
+    if (!arrEq(args, prevLog2)) {
       prevLog2 = args
       console.log(...args)
     }

@@ -2,16 +2,16 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { animated } from '@react-spring/web'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import { useResizeRef } from '@utils/view/useResizeRef.ts'
 import { getViewProps } from '@utils/view/ViewProps.ts'
 import React from 'react'
-import { useEmulatedScroll } from 'src/components/pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { useEmulatedScroll }
+  from 'src/components/pages/DevTest/other/EmulatedScrollTestPage/useEmulatedScroll.ts'
+import { arrOfNumbers } from '@utils/base/ArrayU.ts'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
-import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
-import arrOfNumbers = ArrayU.arrOfNumbers
 
 
 

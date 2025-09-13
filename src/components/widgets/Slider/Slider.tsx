@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { animated, to, useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import { getViewProps } from 'src/utils/view/ViewProps.ts'
 import {
   rangeClamp,
@@ -9,16 +9,16 @@ import {
   rangeMapClamp,
   rangeZeroBased,
 } from '@utils/base/math/rangeUtils.ts'
-import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
+import { useAsRefGet } from '@utils/state/react/base/useAsRefGet.ts'
 import { useSkipRepaintAfterMount } from '@utils/react/useSkipRepaintAfterMount.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
-import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useImperativeHandle, useLayoutEffect, useState } from 'react'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import { Setter } from '@utils/base/typeUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 
 
@@ -119,9 +119,9 @@ export type SliderExtraProps = {
   setValue: Setter<number>
   minMax: NumRange
 } & Pu<{
-  onValueDragStart: Callback1<number>
-  onValueDragging: Callback1<number>
-  onValueDragEnd: Callback1<number>
+  onValueDragStart: Cb1<number>
+  onValueDragging: Cb1<number>
+  onValueDragEnd: Cb1<number>
   isHideBar: boolean
 }>
 

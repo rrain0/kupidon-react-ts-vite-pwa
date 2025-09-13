@@ -1,5 +1,5 @@
 import {
-  CommonViewShortProps,
+  type CommonViewShortProps,
   processCommonViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processCommonViewShortProps.ts'
 

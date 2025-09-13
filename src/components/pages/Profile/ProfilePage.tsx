@@ -9,12 +9,11 @@ import {
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
-
+import { ArrayU, arrOfIndices } from '@utils/base/ArrayU.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import { random } from '@utils/base/math/randomUtils.ts'
 import { useCssWhRef } from '@utils/view/useCssWhRef.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useApiRequest } from '@libs/api/useApiRequest.ts'
 import { useFormApiRequest } from '@libs/api/useFormApiRequest.ts'
@@ -41,23 +40,20 @@ import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { objectKeys } from '@utils/base/ObjectU.ts'
-import { FileU } from 'src/utils/file/FileU.ts'
+import { blobToDataUrl, fetchToBlob } from '@utils/bin/binDataUtils.ts'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
 import { useFormSubmit } from '@libs/form-data/hooks/useFormSubmit.ts'
 import { useFormToasts } from '@libs/form-data/hooks/useFormToasts.tsx'
 import { useFormDerivedData } from '@libs/form-data/hooks/useFormDerivedData.ts'
 import { StagedProgress } from '@utils/ui/StagedProgress.ts'
 import { useAsyncEffect } from 'src/utils/react/useAsyncEffect.ts'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import blobToDataUrl = FileU.blobToDataUrl
-import fetchToBlob = FileU.fetchToBlob
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import mapFailureCodeToUiText = ProfilePageValidation.mapFailureCodeToUiText
 import validators = ProfilePageValidation.validators
 import defaultValues = ProfilePageValidation.defaultValues
 import FormValues = ProfilePageValidation.FormValues
 import userDefaultValues = ProfilePageValidation.userDefaultValues
-import arrOfIndices = ArrayU.arrOfIndices
 import { ValueOrMapper } from '@utils/base/typeUtils.ts'
 import { isfunction } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'

@@ -1,4 +1,4 @@
-import { ArrayU } from 'src/utils/base/ArrayU.ts'
+import { ArrayU, arrEq } from 'src/utils/base/ArrayU.ts'
 import { SelectPropValueTf5 } from '@libs/widget-style-6/transform/WidgetStyleTransform5.ts'
 
 
@@ -11,7 +11,7 @@ export const transform6 = (selectPropValue: SelectPropValueTf5[]): SelectPropVal
   selectPropValue.forEach(selPropVal => {
     if (!selPropVal.propValue) return
     const prevBatch = batches.at(-1)
-    if (prevBatch && ArrayU.eq(prevBatch.selector, selPropVal.selector)) {
+    if (prevBatch && arrEq(prevBatch.selector, selPropVal.selector)) {
       prevBatch.propValues.push(selPropVal.propValue)
     }
     else batches.push({ selector: selPropVal.selector, propValues: [selPropVal.propValue] })

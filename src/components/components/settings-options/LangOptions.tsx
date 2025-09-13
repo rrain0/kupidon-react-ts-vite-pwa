@@ -7,8 +7,8 @@ import PlanetFrameIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlanetFra
 import RadioInput from 'src/components/elems/inputs/RadioInput/RadioInput.tsx'
 import RadioInputGroup from 'src/components/elems/inputs/RadioInputGroup/RadioInputGroup.tsx'
 import { RadioInputStyle } from 'src/components/elems/inputs/RadioInput/RadioInputStyle.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
+import { useLangSettingsZustand } from 'src/zustand/settings/langSettingsZustand.ts'
 import { SettingsOptions } from './SettingsOptions.tsx'
 
 

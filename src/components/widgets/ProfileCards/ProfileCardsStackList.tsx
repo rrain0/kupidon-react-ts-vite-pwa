@@ -5,11 +5,11 @@ import {
   getFixedForwardLoopedCarouselProps,
 } from '@utils/animated/carousel/props/fixedCarouselProps.ts'
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { arrOfIndices } from '@utils/base/ArrayU.ts'
 import { rf3 } from '@utils/base/math/mathUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
-import { useStateAndRef } from '@utils/react/state/useStateAndRef.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useStateAndRef } from '@utils/state/react/base/useStateAndRef.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 import { UserToUserApi } from 'src/services/api/requests/UserToUserApi.ts'
 import { MediaInArrayDUC } from '@libs/media/Media.ts'
@@ -18,7 +18,6 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import ProfileCards, {
   ProfileCardsAction,
 } from 'src/components/widgets/ProfileCards/ProfileCards.tsx'
-import arrOfIndices = ArrayU.arrOfIndices
 import { Pu } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'
 

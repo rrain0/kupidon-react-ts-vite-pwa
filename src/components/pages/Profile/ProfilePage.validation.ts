@@ -10,7 +10,7 @@ import {
 } from 'src/components/pages/Profile/options-filter/ProfileImLookingForOption.tsx'
 import { JobOptionValues } from 'src/components/pages/Profile/options/ProfileJobOption.tsx'
 import { ErrorUiText } from 'src/locales/translations/ErrorUiText.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ArrayU, arrOfIndices } from '@utils/base/ArrayU.ts'
 import { DateTime } from '@utils/date/DateTime.ts'
 import { ValidationCore } from '@libs/form-data/core/ValidationCore.ts'
 import { UiTextValues } from '@libs/ui-text/UiText.ts'
@@ -111,7 +111,7 @@ export namespace ProfilePageValidation {
   
   export const userDefaultValues: UserValues = {
     name: '',
-    photos: ArrayU.arrOfIndices(profilePhotosCntMax).map(i => ({
+    photos: arrOfIndices(profilePhotosCntMax).map(i => ({
       ...newDefaultEmptyRemoteMediaInArray(i),
       // TODO id - id collision with ids from backend?
       id: uuid.v4(),

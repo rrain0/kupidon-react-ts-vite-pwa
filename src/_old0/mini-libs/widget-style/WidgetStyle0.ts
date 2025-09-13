@@ -1,10 +1,9 @@
 import { css } from '@emotion/react'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ValOrArr } from '@utils/base/ArrayU.ts'
 import { objectMap } from '@utils/base/ObjectU.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { isObject } from '@utils/base/typeUtils.ts'
 import { isstring } from '@utils/base/typeUtils.ts'
-import ValueOrArr = ArrayU.ValueOrArr
 import { RecordRo } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'
 
@@ -756,7 +755,7 @@ export namespace WidgetStyle0 {
   
   
   export type ElemStateDescriptor<S extends string>
-    = Record<S, ValueOrArr<Pseudo0 | DataAttr<any>>>
+    = Record<S, ValOrArr<Pseudo0 | DataAttr<any>>>
   
   
   export class Elem0<

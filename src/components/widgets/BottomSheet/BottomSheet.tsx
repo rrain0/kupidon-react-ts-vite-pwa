@@ -1,7 +1,7 @@
 import { animated } from '@react-spring/web'
 import { ReactDOMAttributes } from '@use-gesture/react/src/types.ts'
 
-import { useClick } from '@utils/gestures/pointer/useClick.ts'
+import { useClick } from '@utils/app/gestures/useClick.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import clsx from 'clsx'
 import { useUpNodesScrollLock } from '@utils/gestures/pointer/useUpNodesScrollLock.ts'
@@ -14,7 +14,7 @@ import React, {
   useLayoutEffect,
 } from 'react'
 import combineProps = ReactU.combineProps
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
 import { toEmptyAttr } from '@utils/base/typeUtils.ts'
@@ -33,8 +33,8 @@ export type BottomSheetRefsProps = {
   bottomSheetContentRef: React.RefObject<HTMLDivElement | null>
 }
 export type BottomSheetOptionsProps = ClassStyle & UseBottomSheetOptions & Pu<{
-  onComputedDimens: Callback1<ComputedBottomSheetDimens>
-  onSnapPointsPx: Callback1<number[]>
+  onComputedDimens: Cb1<ComputedBottomSheetDimens>
+  onSnapPointsPx: Cb1<number[]>
   bgDim: boolean
 }>
 export type BottomSheetChildren = Pu<{

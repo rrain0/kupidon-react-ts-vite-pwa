@@ -3,10 +3,10 @@ import { AnimatedProperty } from '@animated/AnimatedProperty.ts'
 import AnimatedDiv from '@animated/elems/AnimatedDiv.tsx'
 import styled from '@emotion/styled'
 
-import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
-import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
+import { useWasGesture } from '@utils/app/gestures/useWasGesture.ts'
+import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useEffect } from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
@@ -18,7 +18,7 @@ import ChatListItemButton from 'src/components/pages/Chats/parts/ChatListItemBut
 import AppLink from 'src/components/components/app-router/AppLink.tsx'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 import gridStackC = EmotionCommon.gridStackC
 import RootRoute = AppRoutes.RootRoute
@@ -48,7 +48,7 @@ export type ChatListToItemProps = UiItemData & Pu<{
   first: boolean
   isSelected: boolean
   isAnySelected: boolean
-  toggleSelection: Callback1<string>
+  toggleSelection: Cb1<string>
   setLastPointerDownItemId: (id: string) => void
   
   setUiItems: SetterOrUpdater<UiItemData[] | undefined>

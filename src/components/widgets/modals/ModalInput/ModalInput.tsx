@@ -9,7 +9,7 @@ import Modal from 'src/components/components/modal/Modal.tsx'
 import Input from 'src/components/elems/inputs/Input/Input.tsx'
 import { InputStyle } from 'src/components/elems/inputs/Input/InputStyle.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
@@ -21,9 +21,9 @@ import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 type ModalInputProps = React.ComponentProps<typeof Input> & Pu<{
   isOpen: boolean
   title: string
-  onClose: Callback
-  onCancel: Callback
-  onClear: Callback
+  onClose: Cb
+  onCancel: Cb
+  onClear: Cb
 }>
 
 

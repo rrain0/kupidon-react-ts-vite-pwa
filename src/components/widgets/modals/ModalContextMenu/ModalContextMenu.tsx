@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react'
 import { ReactU } from '@utils/react/ReactU.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import Card from 'src/components/elems/Card/Card.tsx'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
@@ -8,7 +8,7 @@ import PageContentLayout from 'src/components/components/page/PageContentLayout.
 import React, { useEffect, useState } from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
 import Modal from 'src/components/components/modal/Modal.tsx'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import Children = ReactU.Children
 import modalContextMenuCardBoxS = ModalElements.modalContextMenuCardBoxS
@@ -61,7 +61,7 @@ export default ModalContextMenu
 
 
 type ContextMenuProps = Pu<{
-  onClose: Callback
+  onClose: Cb
 }> & MountControllerRenderProps & Children
 const ContextMenu = React.memo((props: ContextMenuProps) => {
   const {
@@ -87,7 +87,7 @@ ContextMenu.displayName = 'ContextMenu'
 
 
 
-const useEnterExitAnimation = (isOpen: boolean, allowUnmount: Callback) => {
+const useEnterExitAnimation = (isOpen: boolean, allowUnmount: Cb) => {
   const [getEl, setEl] = useElemRefGetSet()
   
   type State = undefined | 'appearing' | 'appeared' | 'disappearing' | 'disappeared'

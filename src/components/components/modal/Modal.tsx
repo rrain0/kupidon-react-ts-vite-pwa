@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 import { PointerU } from '@utils/gestures/pointer/PointerU.ts'
-import { useClick } from '@utils/gestures/pointer/useClick.ts'
+import { useClick } from '@utils/app/gestures/useClick.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import React, { useImperativeHandle, useRef } from 'react'
 import { useUpNodesScrollLock } from '@utils/gestures/pointer/useUpNodesScrollLock.ts'

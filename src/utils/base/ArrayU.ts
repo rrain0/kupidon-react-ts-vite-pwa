@@ -9,9 +9,137 @@ import { MergerIndexed } from 'src/utils/base/typeUtils.ts'
 import { CombinerIndexed } from 'src/utils/base/typeUtils.ts'
 import { Nonemptyval } from 'src/utils/base/typeUtils.ts'
 import { isArray } from 'src/utils/base/typeUtils.ts'
-import { Sign } from 'src/utils/base/typeUtils.ts'
 import { isdef } from 'src/utils/base/typeUtils.ts'
 import { ArrFilter } from 'src/utils/base/typeUtils.ts'
+
+
+
+
+export type ArrFirstOptional<A extends readonly any[]> = (
+  A extends readonly [first?: infer F, ...infer R] ? [first?: F, ...R] : never
+)
+export type ArrElem<ArrayType extends readonly unknown[]> = (
+  ArrayType extends readonly (infer ElementType)[] ? ElementType : never
+)
+
+
+
+export const arrOfUndef = (len = 0): undefined[] => {
+  return Array(len).fill(undefined)
+}
+export const arrOfZeros = (len = 0): 0[] => {
+  return Array(len).fill(0)
+}
+export const arrOfIndices = (len = 0): number[] => {
+  return Array(len).fill(undefined).map((_, i) => i)
+}
+export const arrOfNumbers = (len = 0): number[] => {
+  return Array(len).fill(undefined).map((_, i) => i + 1)
+}
+
+export const arr = arrOfUndef
+
+
+
+export const lastI = (arr: any[]) => arr.length - 1
+export const lastIOr0 = (arr: any[]) => arr.length ? (arr.length - 1) : 0
+
+
+
+export const last = <T>(arr: T[]): T => {
+  if (!arr.length) throw new Error("Array is empty, can't get last element.")
+  return arr[arr.length-1]
+}
+export const lastOr = <T1, T2>(arr: T1[], orElse: T2): T1 | T2 => {
+  if (!arr.length) return orElse
+  return arr[arr.length-1]
+}
+
+
+
+export const arrSetLast = <T>(arr: T[], last: T) => {
+  if (!arr.length) throw new Error(
+    "Array is empty, can't set last element, because it does not exist."
+  )
+  arr[arr.length-1] = last
+}
+export const arrNextOr = <T1, T2>(arr: T1[], curr: T1, orElse: T2): T1 | T2 => {
+  const currIdx = arr.findIndex(it => it === curr)
+  if (currIdx === -1 || currIdx + 1 === arr.length) return orElse
+  return arr[currIdx + 1]
+}
+
+
+
+export const arrRandom = <T>(arr: readonly T[]): T => {
+  if (!arr.length) throw new Error("Array is empty, can't get random element.")
+  return arr[Math.floor(Math.random() * arr.length)]
+}
+
+
+
+export const arrEq = <A, B>(
+  arr1: readonly A[] | emptyval,
+  arr2: readonly B[] | emptyval,
+  valueComparator: ComparatorEq<A, B> = defaultComparatorEq
+): boolean => {
+  if (arr1 === arr2) return true
+  if (!arr1 || !arr2) return false
+  if (arr1.length !== arr2.length) return false
+  for (let i = 0; i < arr1.length; i++) {
+    if (!valueComparator(arr1[i], arr2[i])) return false
+  }
+  return true
+}
+export const arrEqAsSet = (arr1: any[] | emptyval, arr2: any[] | emptyval): boolean => {
+  if (arr1 === arr2) return true
+  if (!arr1 || !arr2) return false
+  if (arr1.length !== arr2.length) return false
+  const set = new Set([...arr1, ...arr2])
+  if (set.size !== arr1.length) return false
+  return true
+}
+
+
+
+
+
+
+export const arrHas = <T>(arr: T[], elem: T): boolean => (
+  arr.includes(elem)
+)
+export const arrHasAny = <V, T>(arr: readonly T[], value: V | T): value is T => (
+  arr.includes(value as any)
+)
+export const arrHasntAny = (arr: readonly any[], value: any): boolean => (
+  !arr.includes(value)
+)
+
+
+
+
+export type NonEmptyArr<T> = [T, ...T[]]
+
+export const arrIsNonEmpty = <T>(arr?: T[] | NonEmptyArr<T> | emptyval): arr is NonEmptyArr<T> => (
+  (arr?.length ?? 0) > 0
+)
+
+export type ArrayOfNonEmptyVals<A extends Array<any>> = (
+  A extends Array<infer E> ? Array<Nonemptyval<E>> : never
+)
+
+
+
+export type ValOrArr<T> = T | T[]
+
+
+
+
+export type Arraify<T> = T extends any[] ? T : T[]
+export const arraify = <T>(value: T | T[]): Arraify<T | T[]> => {
+  if (isArray(value)) return value
+  return [value]
+}
 
 
 
@@ -19,205 +147,7 @@ import { ArrFilter } from 'src/utils/base/typeUtils.ts'
 export namespace ArrayU {
   
   
-  export type FirstCanUndef<A extends readonly any[]> = (
-    A extends readonly [first?: infer F, ...infer R] ? [first?: F, ...R] : never
-  )
   
-  
-  
-  export const arrOfUndef = (len = 0): undefined[] => {
-    return Array(len).fill(undefined)
-  }
-  export const arrOfZeros = (len = 0): 0[] => {
-    return Array(len).fill(0)
-  }
-  export const arrOfIndices = (len = 0): number[] => {
-    return Array(len).fill(undefined).map((_, i) => i)
-  }
-  export const arrOfNumbers = (len = 0): number[] => {
-    return Array(len).fill(undefined).map((_, i) => i + 1)
-  }
-  export const arr = arrOfUndef
-  
-  
-  
-  
-  export const lastI = (arr: any[]): number => arr.length - 1
-  export const lastIOr0 = (arr: any[]): number => arr.length ? (arr.length - 1) : 0
-  
-  
-  export const last = <T>(arr: T[]): T => {
-    if (!arr.length) throw new Error("Array is empty, can't get last element.")
-    return arr[arr.length-1]
-  }
-  export const lastOr = <T1, T2>(arr: T1[], orElse: T2): T1 | T2 => {
-    if (!arr.length) return orElse
-    return arr[arr.length-1]
-  }
-  
-  
-  export const setLast = <T>(arr: T[], last: T) => {
-    if (!arr.length) throw new Error(
-      "Array is empty, can't set last element, because it does not exist."
-    )
-    arr[arr.length-1] = last
-  }
-  
-  
-  export const nextOr = <T1, T2>(arr: T1[], curr: T1, orElse: T2): T1 | T2 => {
-    const currIdx = arr.findIndex(it => it === curr)
-    if (currIdx === -1 || currIdx + 1 === arr.length) return orElse
-    return arr[currIdx + 1]
-  }
-  
-  
-  export const randomElem = <T>(arr: readonly T[]): T => {
-    if (!arr.length) throw new Error("Array is empty, can't get random element.")
-    return arr[Math.floor(Math.random() * arr.length)]
-  }
-  
-  
-  export const eq = <A, B>(
-    arr1: readonly A[] | emptyval,
-    arr2: readonly B[] | emptyval,
-    valueComparator: ComparatorEq<A, B> = defaultComparatorEq
-  ): boolean => {
-    if (arr1 === arr2) return true
-    if (!arr1 || !arr2) return false
-    if (arr1.length !== arr2.length) return false
-    for (let i = 0; i < arr1.length; i++) {
-      if (!valueComparator(arr1[i], arr2[i])) return false
-    }
-    return true
-  }
-  
-  
-  export const eqAsSet = (arr1: any[] | emptyval, arr2: any[] | emptyval): boolean => {
-    if (arr1 === arr2) return true
-    if (!arr1 || !arr2) return false
-    if (arr1.length !== arr2.length) return false
-    const set = new Set([...arr1, ...arr2])
-    if (set.size !== arr1.length) return false
-    return true
-  }
-  
-  
-  export const contains =
-    <V, T>(value: V | T, arr: readonly T[]): value is T => arr.includes(value as any)
-  export const notContains =
-    (value: any, arr: readonly any[]): boolean => !arr.includes(value)
-  
-  
-  
-  export const avg = (arr: number[]): number => {
-    if (!arr.length) return 0
-    return arr.reduce((prev, curr) => prev + curr, 0) / arr.length
-  }
-  
-  
-  
-  export const addRetainingLastElemsWithSameSign = (
-    arr: number[],
-    value: number,
-    maxLen: number | undefined = undefined
-  ): number[] => {
-    const a = [...arr, value]
-    let sign = 0
-    let lastRetainedIdx = 0
-    let i = lastI(a)
-    for ( ; i >= 0; i--) {
-      const s = Math.sign(a[i])
-      if (s !== 0) {
-        sign = s
-        break
-      }
-    }
-    for ( ; i >= 0; i--) {
-      const s = Math.sign(a[i])
-      if (s === -sign) {
-        lastRetainedIdx = i+1
-        break
-      }
-    }
-    const s = Math.max( 0, a.length - (maxLen ?? a.length), lastRetainedIdx )
-    return a.slice(s)
-  }
-  /*
-  console.log(addRetainingLastElemsWithSameSign([], 0, 3), 'expected: [0]')
-  console.log(addRetainingLastElemsWithSameSign([], 1, 3), 'expected: [1]')
-  console.log(addRetainingLastElemsWithSameSign([], -1, 3), 'expected: [-1]')
-  
-  console.log(addRetainingLastElemsWithSameSign([], 0, 0), 'expected: []')
-  console.log(addRetainingLastElemsWithSameSign([], 1, 0), 'expected: []')
-  console.log(addRetainingLastElemsWithSameSign([], -1, 0), 'expected: []')
-  
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 0), 'expected: []')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 0), 'expected: []')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 0), 'expected: []')
-  
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 4), 'expected: [0, 1, 0]')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 4), 'expected: [0, 1, 1]')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 4), 'expected: [-1]')
-  
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 3), 'expected: [0, 1, 0]')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 3), 'expected: [0, 1, 1]')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 3), 'expected: [-1]')
-  
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 0, 2), 'expected: [1, 0]')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], 1, 2), 'expected: [1, 1]')
-  console.log(addRetainingLastElemsWithSameSign([-1, 0, 1], -1, 2), 'expected: [-1]')
-  */
-  
-  
-  export const compare = <T>(arr: T[], other: T[]): Sign => {
-    if (arr === other) return 0
-    for (let i = 0; i < Math.max(arr.length, other.length); i++) {
-      if (i >= arr.length) return -1
-      if (i >= other.length) return 1
-      if (arr[i] < other[i]) return -1
-      if (arr[i] > other[i]) return 1
-      if (arr[i] === other[i]) return 0
-    }
-    return 0
-  }
-  export const isLower = <T>(arr: T[], other: T[]): boolean => compare(arr, other) === -1
-  export const isGreater = <T>(arr: T[], other: T[]): boolean => compare(arr, other) === 1
-  
-  
-  
-  
-  export type ArrayElement<ArrayType extends readonly unknown[]> =
-    ArrayType extends readonly (infer ElementType)[] ? ElementType : never
-  
-  export const ofFirstOrEmpty = <T>(arr?: readonly [T?, ...unknown[]] | emptyval): [T] | [] => {
-    if (arr?.length) return [arr[0] as T]
-    return []
-  }
-  
-  export const isNonEmpty = <T>(arr?: T[] | [T, ...T[]] | emptyval): arr is [T, ...T[]] => {
-    return (arr?.length ?? 0) > 0
-  }
-  
-  export type NonEmptyArr<T> = [T, ...T[]]
-  
-  export type ArrayOfNonEmpty<A extends Array<any>> = (
-    A extends Array<infer E> ? Array<Nonemptyval<E>> : never
-  )
-  
-  export type ValueOrArr<T> = T | T[]
-  
-  export type Arraify<T> = T extends any[] ? T : T[]
-  export const arraify = <T>(value: T | T[]): Arraify<T | T[]> => {
-    if (isArray(value)) return value
-    return [value]
-  }
-  
-  
-  
-  
-  export const has = <T>(arr: T[], elem: T): boolean => (
-    arr.includes(elem)
-  )
   
   export const flatPush = <T>(arr: T[], elem: T | T[]): T[] => {
     isArray(elem) ? arr.push(...elem) : arr.push(elem)

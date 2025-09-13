@@ -1,5 +1,5 @@
 import { random } from '@utils/base/math/randomUtils.ts'
-import { DateU } from '@utils/date/DateU.ts'
+import { getCurrentTimeZoneName } from '@utils/date/dateUtils.ts'
 import { ApiResponseUtils } from '@libs/api/ApiResponseUtils.ts'
 import { UserCurrentA } from 'src/models/api/UserA.ts'
 import { GenderA } from 'src/models/api/GenderA.ts'
@@ -12,7 +12,7 @@ import { ProfilePageValidation } from 'src/components/pages/Profile/ProfilePage.
 import { UserApi } from 'src/services/api/requests/UserApi.ts'
 import { ArrayU } from '@utils/base/ArrayU.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
-import { AuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { AuthZustand } from 'src/zustand/auth/authZustand.ts'
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
 import FormValues = ProfilePageValidation.FormValues
 import AddProfilePhotoErrorData = UserApi.AddProfilePhotoErrorData
@@ -24,7 +24,6 @@ import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import UserToUpdate = UserApi.UserToUpdate
 import AddProfilePhoto = UserApi.profilePhotoToAdd
 import findBy = ArrayU.findBy
-import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 

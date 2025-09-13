@@ -16,8 +16,8 @@ import { ProfileSharePageParts } from 'src/components/pages/Profile/ProfileShare
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import use = RouteBuilder.use
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full

@@ -1,26 +1,26 @@
 import {
-  ContentShortProps,
+  type ContentShortProps,
   processContentShortProps,
 } from 'src/utils/libs/short-propsed/base/processContentShortProps.ts'
 import {
-  PlacedShortProps,
+  type PlacedShortProps,
   processPlacedShortProps,
 } from 'src/utils/libs/short-propsed/base/processPlacedShortProps.ts'
 import {
-  PointerShortProps,
+  type PointerShortProps,
   processPointerShortProps,
 } from 'src/utils/libs/short-propsed/base/processPointerShortProps.ts'
 import {
-  PositionShortProps,
+  type PositionShortProps,
   processPositionShortProps,
 } from 'src/utils/libs/short-propsed/base/processPositionShortProps.ts'
 import {
   processSizeShortProps,
-  SizeShortProps,
+  type SizeShortProps,
 } from 'src/utils/libs/short-propsed/base/processSizeShortProps.ts'
 import {
+  type TextShortProps,
   processTextShortProps,
-  TextShortProps,
 } from 'src/utils/libs/short-propsed/base/processTextShortProps.ts'
 
 

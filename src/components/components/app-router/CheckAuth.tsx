@@ -3,7 +3,7 @@ import React from 'react'
 import { useLocation } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import Children = ReactU.Children
 

@@ -1,5 +1,3 @@
-
-import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React, { useEffect } from 'react'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
@@ -9,7 +7,8 @@ import TextAlignCenter from 'src/components/elems/basic-elements/TextAlignCenter
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import BlacklistIc from 'src/components/elems/icons/SvgIcons/pack/special/BlacklistIc.tsx'
-import ArchiveBoxOutlinedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArchiveBoxOutlinedIc.tsx'
+import ArchiveBoxOutlinedIc
+  from 'src/components/elems/icons/SvgIcons/pack/ui/ArchiveBoxOutlinedIc.tsx'
 import CrossInCircleIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossInCircleIc.tsx'
 import Pin2Ic from 'src/components/elems/icons/SvgIcons/pack/ui/Pin2Ic.tsx'
 import RestrictIc from 'src/components/elems/icons/SvgIcons/pack/ui/RestrictIc.tsx'
@@ -22,7 +21,7 @@ import ModalDialog from 'src/components/widgets/modals/ModalDialog/ModalDialog.t
 import ModalTileSelect from 'src/components/widgets/modals/ModalTileSelect/ModalTileSelect.tsx'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import CrossIc from 'src/components/elems/icons/SvgIcons/pack/ui/CrossIc.tsx'
 
 
@@ -47,15 +46,15 @@ export type ChatListContextMenuProps = Pu<{
   hasRemovable: boolean
   hasClearable: boolean
   
-  onUnselect: Callback
-  onPin: Callback,
-  onUnpin: Callback
-  onUnmute: Callback,
-  onMute: Callback
-  onArchive: Callback
-  onBlacklist: Callback
+  onUnselect: Cb
+  onPin: Cb,
+  onUnpin: Cb
+  onUnmute: Cb,
+  onMute: Cb
+  onArchive: Cb
+  onBlacklist: Cb
   onRemove: (params?: Pu<{ removeForAll: boolean }>) => void
-  onClear: Callback
+  onClear: Cb
 }>
 
 const ChatListContextMenu = React.memo(({
@@ -327,7 +326,7 @@ export default ChatListContextMenu
 
 const actionButtonS: AppWidgetStyle = t => [
   ButtonS6.S.text.rounded.sm.normal, {
-    button: { ...virtualOffset({ v: 8 }), ph: 6, hMin: '' },
+    button: { mv: -8, pv: 8, ph: 6, hMin: '' },
   },
 ]
 

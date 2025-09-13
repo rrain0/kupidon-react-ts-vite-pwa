@@ -1,6 +1,6 @@
 import { delayAction } from '@utils/base/asyncUtils.ts'
-import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
-import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
+import { useWasGesture } from '@utils/app/gestures/useWasGesture.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import React, { useEffect, useMemo, useState } from 'react'
 import { RippleAction, RippleProps } from 'src/components/elems/Ripple/Ripple.tsx'
 import { Pu } from '@utils/base/typeUtils.ts'

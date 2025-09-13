@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Contents from '@libs/short-propsed/components/Contents.tsx'
 
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import contents = EmotionCommon.contents
 

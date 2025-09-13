@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import React from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
@@ -71,7 +70,7 @@ export const NewPairsList = React.memo((props: NewPairsListProps) => {
         <Flex row g={23}
           css={[
             offsetToPageContentPaddings({ h: true }),
-            virtualOffset({ t: 8 }),
+            { marginTop: -8, paddingTop: 8 },
             { overflow: 'auto' },
             noScrollbars,
           ]}
@@ -103,8 +102,7 @@ const NewPairsText = styled.div`
 
 const allButtonS: AppWidgetStyle = {
   button: {
-    minHeight: 0,
-    ...virtualOffset({ v: 8 }),
+    minHeight: 0, mv: -8, pv: 8,
   },
 }
 

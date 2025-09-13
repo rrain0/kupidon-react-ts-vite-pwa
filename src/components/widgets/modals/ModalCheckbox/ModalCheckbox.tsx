@@ -11,9 +11,9 @@ import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomShee
 import CheckboxInputGroup from 'src/components/elems/inputs/CheckboxInputGroup/CheckboxInputGroup.tsx'
 import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import row = EmotionCommon.row
 
 
@@ -21,11 +21,11 @@ import row = EmotionCommon.row
 
 export type ModalCheckboxProps<V extends string> = {
   isOpen: boolean
-  close: Callback
+  close: Cb
   title: string
   options: Option<V>[]
   checked: V[]
-  onChange: Callback1<V>
+  onChange: Cb1<V>
 }
 
 

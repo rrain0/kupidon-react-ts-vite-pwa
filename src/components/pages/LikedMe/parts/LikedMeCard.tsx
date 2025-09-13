@@ -17,7 +17,7 @@ import DislikeButton from 'src/components/widgets/ProfileCards/DislikeButton.tsx
 import LikeButton from 'src/components/widgets/ProfileCards/LikeButton.tsx'
 import { Pu } from '@utils/base/typeUtils.ts'
 import Txt = EmotionCommon.Txt
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -33,7 +33,7 @@ export type LikedMeCardProps = {
   item: LikedMeCardItem
 } & Pu<{
   locked: boolean
-  onSelect: Callback
+  onSelect: Cb
 }>
 const LikedMeCard = React.memo((props: LikedMeCardProps) => {
   const {

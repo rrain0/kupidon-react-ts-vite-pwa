@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
+import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
 import { ReactU } from '@utils/react/ReactU.ts'
 import FormFieldWrap from '@libs/form-data/components/FormFieldWrap.tsx'
 import { useFormData } from '@libs/form-data/hooks/useFormData.ts'
@@ -22,7 +22,7 @@ import MountController, { MountControllerRenderProps } from 'src/components/comp
 import React, { useMemo } from 'react'
 import { ModalElements } from 'src/components/components/modal/ModalElements.tsx'
 import Modal from 'src/components/components/modal/Modal.tsx'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import rowC = EmotionCommon.rowC
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
@@ -33,7 +33,7 @@ import UseEnterExitTransition from 'src/components/components/animations/UseEnte
 
 export type ModalDialogProps<T extends string> = Pu<{
   isOpen: boolean
-  onModal: Callback
+  onModal: Cb
 }> & DialogViewProps<T>
 
 const ModalDialog = ReactU.memo(<T extends string>(props: ModalDialogProps<T>) => {
@@ -79,10 +79,10 @@ export type DialogViewProps<T extends string> = Pu<{
   title: string | number
   checkboxes: DialogCheckProps<T>[]
   
-  onClose: Callback
-  onBack: Callback
+  onClose: Cb
+  onBack: Cb
   
-  onCancel: Callback
+  onCancel: Cb
   
   onOk: DialogOnAccept<T>
   onYes: DialogOnAccept<T>

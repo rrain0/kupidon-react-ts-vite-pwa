@@ -7,9 +7,9 @@ import {
 import { addAnimation, removeAnimation } from '@libs/animated/runAnimations.ts'
 import { getTime } from '@libs/animated/util.ts'
 import { Mapper } from 'src/utils/base/typeUtils.ts'
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 import { noop } from 'src/utils/base/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 import { withThrottle } from 'src/utils/base/asyncUtils.ts'
 import { Pu } from 'src/utils/base/typeUtils.ts'
 import { isdef } from 'src/utils/base/typeUtils.ts'
@@ -38,15 +38,15 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   cachedValue!: Value // last rendered value
   animationData: any
   animationFun: AnimationFun<Value, any> | undefined
-  onUpdate: Callback1<AnimationConfigOnUpdateParams<Value>> | undefined
+  onUpdate: Cb1<AnimationConfigOnUpdateParams<Value>> | undefined
   
   
   
-  setFinishedState: Callback = noop
+  setFinishedState: Cb = noop
   finished = false
   whenFinished!: Promise<{ finished: true }>
   
-  setStoppedState: Callback = noop
+  setStoppedState: Cb = noop
   stopped = false
   whenStopped!: Promise<{ stopped: true }>
   
@@ -163,12 +163,12 @@ export class AnimatedValue<Value> implements AnimatedProperty<Value> {
   
   
   
-  private listeners = new Set<Callback1<Value>>()
+  private listeners = new Set<Cb1<Value>>()
   
-  onChange(listener: Callback1<Value>) {
+  onChange(listener: Cb1<Value>) {
     this.listeners.add(listener)
   }
-  removeOnChange(listener: Callback1<Value>) {
+  removeOnChange(listener: Cb1<Value>) {
     this.listeners.delete(listener)
   }
   

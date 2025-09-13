@@ -1,4 +1,4 @@
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { arrOfIndices } from '@utils/base/ArrayU.ts'
 import React, { useMemo, useRef, useState } from 'react'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Gap from '@libs/short-propsed/components/Gap.tsx'
@@ -13,7 +13,6 @@ import {
 } from 'src/components/widgets/BottomSheet/useBottomSheet.ts'
 import { css } from '@emotion/react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-
 import row = EmotionCommon.row
 import col = EmotionCommon.col
 import styled from '@emotion/styled'
@@ -22,7 +21,6 @@ import OverflowWrapper from 'src/components/widgets/Scrollbars/OverflowWrapper.t
 import { OverflowWrapperStyle } from 'src/components/widgets/Scrollbars/OverflowWrapperStyle.ts'
 import rowWrap = EmotionCommon.rowWrap
 import { ifNotNonNegInt, Setter } from '@utils/base/typeUtils.ts'
-import arrOfIndices = ArrayU.arrOfIndices
 
 
 

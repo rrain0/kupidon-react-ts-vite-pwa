@@ -30,9 +30,9 @@ import GearIc from 'src/components/elems/icons/SvgIcons/pack/ui/GearIc.tsx'
 import RootRoute = AppRoutes.RootRoute
 import full = RouteBuilder.full
 import { SettingsOptions } from 'src/components/components/settings-options/SettingsOptions'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -41,7 +41,7 @@ export const QuickSettingsOverlayName = 'quickSettings'
 
 export type SettingsProps = {
   isOpen: boolean
-  close: (action?: Callback) => void
+  close: (action?: Cb) => void
 }
 const QuickSettings = React.memo((props: SettingsProps) => {
   const { isOpen, close } = props
@@ -54,7 +54,7 @@ const QuickSettings = React.memo((props: SettingsProps) => {
   const actionText = useUiValues(ActionUiText)
   
   const navigate = useNavigate()
-  const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)
+  const [closeAction, setCloseAction] = useState<undefined | Cb>(undefined)
   
   const closeSettings = () => {
     close(closeAction)

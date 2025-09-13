@@ -1,4 +1,4 @@
-import { DateU } from '@utils/date/DateU.ts'
+import { getCurrentTimeZoneName } from '@utils/date/dateUtils.ts'
 import { noFormSubmit } from '@utils/js/noFormSubmit.ts'
 import React, { useCallback, useEffect } from 'react'
 import { UserApi } from 'src/services/api/requests/UserApi'
@@ -31,7 +31,7 @@ import DataField from 'src/components/elems/DataField/DataField'
 import { DataFieldStyle } from 'src/components/elems/DataField/DataFieldStyle'
 import Input from 'src/components/elems/inputs/Input/Input'
 import { InputStyle } from 'src/components/elems/inputs/Input/InputStyle'
-import { AuthZustand, useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { AuthZustand, useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import FormValues = AccountSettingsPageValidation.FormValues
 import UserToUpdate = UserApi.UserToUpdate
 import userDefaultValues = AccountSettingsPageValidation.userDefaultValues
@@ -40,7 +40,6 @@ import defaultValues = AccountSettingsPageValidation.defaultValues
 import mapFailureCodeToUiText = AccountSettingsPageValidation.mapFailureCodeToUiText
 import RootRoute = AppRoutes.RootRoute
 import contents = EmotionCommon.contents
-import getCurrentTimeZoneName = DateU.getCurrentTimeZoneName
 
 
 

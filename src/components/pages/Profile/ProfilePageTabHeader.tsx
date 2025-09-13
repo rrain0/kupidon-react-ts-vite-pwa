@@ -8,11 +8,9 @@ import { rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
 import React, { useContext } from 'react'
 import { Hdrs } from 'src/components/elems/basic-elements/Hdrs.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
-
+import { arrOfIndices } from '@utils/base/ArrayU.ts'
 import gridStackC = EmotionCommon.gridStackC
 import { Getter } from '@utils/base/typeUtils.ts'
-import arrOfIndices = ArrayU.arrOfIndices
 import colC = EmotionCommon.colC
 
 

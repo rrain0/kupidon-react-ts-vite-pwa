@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { UserStatus, useUsersStatusZustand } from 'src/zustand/status/UsersStatusZustand.ts'
+import { UserStatus, useUsersStatusZustand } from 'src/zustand/status/usersStatusZustand.ts'
 
 
 

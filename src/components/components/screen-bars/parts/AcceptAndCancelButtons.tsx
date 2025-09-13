@@ -1,5 +1,5 @@
 import { ReactU } from '@utils/react/ReactU.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 
@@ -7,7 +7,7 @@ import Flex from '@libs/short-propsed/components/Flex.tsx'
 import MountController, { MountControllerRenderProps } from 'src/components/components/animations/MountController.tsx'
 import AcceptButton from 'src/components/components/screen-bars/parts/AcceptButton.tsx'
 import CancelButton from 'src/components/components/screen-bars/parts/CancelButton.tsx'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import StyleProp = ReactU.StyleProp
 
@@ -16,8 +16,8 @@ import StyleProp = ReactU.StyleProp
 
 
 export type AcceptAndCancelButtonsProps = Pu<{
-  onAccept: Callback
-  onCancel: Callback
+  onAccept: Cb
+  onCancel: Cb
 }>
 const AcceptAndCancelButtons = React.memo((props: AcceptAndCancelButtonsProps) => {
   

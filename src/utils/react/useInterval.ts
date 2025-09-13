@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 
 
 
 
 export const useInterval = (
   interval: number,
-  callback: Callback,
+  callback: Cb,
   deps: any[] = [],
 ) => {
   useEffect(() => {

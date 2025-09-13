@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
+import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
 import React, { useCallback } from 'react'
 import { useSearchParams } from 'react-router'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
@@ -18,7 +18,7 @@ import PageScrollbars from 'src/components/widgets/Scrollbars/PageScrollbars'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 import Txt = EmotionCommon.Txt
 import { Pu } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -27,7 +27,7 @@ import { Callback } from '@utils/base/typeUtils.ts'
 export type LikedMePageProps = Pu<{
   items: LikedMeCardItem[]
   locked: boolean
-  unlock: Callback
+  unlock: Cb
   setSelected: (i: number) => void
 }>
 

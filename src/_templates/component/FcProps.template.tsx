@@ -12,8 +12,6 @@ export type MyComponentProps = Pu<{
   prop: number
 }> & ClassStyle & Children
 
-
-
 const MyComponent = React.memo((props: MyComponentProps) => {
   const {
     className, style, children,

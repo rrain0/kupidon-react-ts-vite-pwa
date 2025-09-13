@@ -2,8 +2,8 @@ import { css } from '@emotion/react'
 import { ButtonS6 } from 'src/components/elems/buttons/Button/ButtonS6.ts'
 import RulerVerticalGradIc
   from 'src/components/elems/icons/GradSvgIcons/pack/special/RulerVerticalGradIc.tsx'
-import { ArrayU } from '@utils/base/ArrayU.ts'
-import { useStateMapperSync } from '@utils/react/state/useStateMapperSync.ts'
+import { ArrayU, arrEq } from '@utils/base/ArrayU.ts'
+import { useStateMapperSync } from '@utils/state/react/useStateMapperSync.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import React, { useState } from 'react'
 import { useOverlayUrl } from 'src/components/components/UseOverlayUrl/hook/useOverlayUrl.ts'
@@ -118,7 +118,7 @@ const PartnerHeightOption = React.memo(() => {
         <div css={tilesGrid}>
           {tilesHeightValues.map(it => (
             <Button
-              css={ArrayU.eq(heightRange, it) ? activeBtnS : inactiveBtnS}
+              css={arrEq(heightRange, it) ? activeBtnS : inactiveBtnS}
               key={it.join(' ')}
               onClick={() => setHeightRange(it)}
             >

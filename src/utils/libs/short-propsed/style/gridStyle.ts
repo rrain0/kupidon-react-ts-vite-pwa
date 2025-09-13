@@ -1,5 +1,5 @@
 import {
-  GridViewShortProps,
+  type GridViewShortProps,
   processGridViewShortProps,
 } from 'src/utils/libs/short-propsed/props/processGridViewShortProps.ts'
 

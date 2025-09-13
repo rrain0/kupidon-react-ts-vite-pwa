@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { parseSearchParams } from 'src/utils/url/SearchParamsU.ts'
-import { useSearchParamsZustand } from 'src/zustand/url/SearchParamsZustand.ts'
+import { useSearchParamsZustand } from 'src/zustand/url/searchParamsZustand.ts'
 
 
 

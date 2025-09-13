@@ -1,6 +1,4 @@
 import styled from '@emotion/styled'
-
-import { virtualOffset } from '@utils/css/virtualOffset.ts'
 import { flexStyle } from '@libs/short-propsed/style/flexStyle.ts'
 import React from 'react'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
@@ -49,7 +47,7 @@ const ChatsPageHeader = React.memo((props: ChatsPageHeaderProps) => {
     >
       
       <Flex centerStart>
-        <Button css={IconButtonS6.t(searchButtonS)}>
+        <Button css={IconButtonS6.t(fourDotsButtonS)}>
           <FourDotsIc/>
         </Button>
       </Flex>
@@ -80,9 +78,9 @@ export default ChatsPageHeader
 
 
 
-const searchButtonS: AppWidgetStyle = t => [
+const fourDotsButtonS: AppWidgetStyle = t => [
   IconButtonS6.S.trans.round.lg.normal, {
-    button: { sz: 23 + 8 * 2, ...virtualOffset({ a: 8 }) },
+    button: { boxSizing: 'content-box', sz: 23, m: -8, p: 8 },
     icon: { color: t.page.ct3 },
   },
 ]
@@ -96,7 +94,7 @@ const ChatHeader = styled(Flex)(({ theme: t }) => [
 const likesButtonS: AppWidgetStyle = t => [
   ButtonS6.S.text.rect.md.normal, {
     button: {
-      hMin: 0, sz: 'ct', g: 0, ...virtualOffset({ a: 8 }),
+      hMin: 0, sz: 'ct', g: 0, m: -8, p: 8,
       alignItems: 'start',
       justifySelf: 'end',
     },

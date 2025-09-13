@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import LangSettings from 'src/components/widgets/LangSettings/LangSettings.tsx'
-import { useLangSettingsZustand } from 'src/zustand/settings/LangSettingsZustand.ts'
+import { useLangSettingsZustand } from 'src/zustand/settings/langSettingsZustand.ts'
 
 
 

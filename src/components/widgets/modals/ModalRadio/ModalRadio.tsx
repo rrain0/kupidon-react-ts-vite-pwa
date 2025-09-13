@@ -11,9 +11,9 @@ import RadioInputGroup from 'src/components/elems/inputs/RadioInputGroup/RadioIn
 import { RadioInputStyle } from 'src/components/elems/inputs/RadioInput/RadioInputStyle.ts'
 import { Option } from 'src/models/ui/Option.ts'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
-import { Callback1 } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 
 
@@ -21,11 +21,11 @@ import { Pu } from '@utils/base/typeUtils.ts'
 
 export type ModalRadioProps<V extends string> = Pu<{
   isOpen: boolean
-  close: Callback
+  close: Cb
   title: string
   options: Option<V>[]
   value: V
-  onSelect: Callback1<V>
+  onSelect: Cb1<V>
 }>
 
 

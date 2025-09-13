@@ -35,11 +35,11 @@ import PageContentLayout from 'src/components/components/page/PageContentLayout.
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import UseOverlayUrl from 'src/components/components/UseOverlayUrl/UseOverlayUrl.tsx'
-import { DateU } from '@utils/date/DateU.ts'
+import { ageYearsUi } from '@utils/date/dateUtils.ts'
 import { MockData } from 'src/_mock-data/MockData.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import use = RouteBuilder.use
 import flexC = EmotionCommon.flexC
@@ -111,7 +111,7 @@ const ProfileSummaryPage = React.memo(() => {
     })
   }, [remoteMainPhoto])
   
-  const info = [profile.city, DateU.ageYears(birthDate, lang)].filter(it => it).join(', ')
+  const info = [profile.city, ageYearsUi(birthDate, lang)].filter(it => it).join(', ')
   
   
   //console.log('mainPhoto', mainPhoto)

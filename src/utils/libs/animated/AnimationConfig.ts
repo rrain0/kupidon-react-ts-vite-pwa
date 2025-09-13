@@ -1,5 +1,5 @@
 
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 import { Pu } from 'src/utils/base/typeUtils.ts'
 
 
@@ -34,5 +34,5 @@ export type AnimationConfig<V, D = undefined> = Pu<{
 }> & (D extends undefined ? { initialData?: D } : { initialData: D }) & {
   animationFun: AnimationFun<V, D>
   
-  onUpdate?: Callback1<AnimationConfigOnUpdateParams<V>> | undefined
+  onUpdate?: Cb1<AnimationConfigOnUpdateParams<V>> | undefined
 }

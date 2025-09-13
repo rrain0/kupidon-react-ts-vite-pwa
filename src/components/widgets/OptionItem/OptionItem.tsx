@@ -12,7 +12,7 @@ import { SvgIconS6 } from 'src/components/elems/icons/SvgIcons/SvgIconS6.ts'
 
 import { Pu } from '@utils/base/typeUtils.ts'
 import ArrowAngledRoundedIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowAngledRoundedIc.tsx'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import maxLines = EmotionCommon.maxLines
 
 
@@ -22,7 +22,7 @@ export type OptionItemProps = Pu<{
   icon: React.ReactNode
   title: React.ReactNode
   value: React.ReactNode
-  onClick: Callback
+  onClick: Cb
 }>
 
 

@@ -22,7 +22,7 @@ import { useFormToasts } from '@libs/form-data/hooks/useFormToasts'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
 import { RouteBuilder } from '@libs/route-builder/RouteBuilder'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import { AutologinPageValidation } from 'src/components/pages/Autologin/AutologinPage.validation.ts'
 import FormValues = AutologinPageValidation.FormValues
 import validators = AutologinPageValidation.validators

@@ -5,7 +5,7 @@ import { useApiRequest } from '@libs/api/useApiRequest.ts'
 import { ChatMessageA } from 'src/models/api/ChatMessageA.ts'
 import { ChatMessageUi } from 'src/components/pages/Chat/parts/ChatMessage.tsx'
 import ChatMessages from 'src/components/pages/Chat/parts/ChatMessages.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 
 
 

@@ -1,5 +1,5 @@
 import { objectMap } from 'src/utils/base/ObjectU.ts'
-import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
+import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
 import React, { useLayoutEffect } from 'react'
 import { AnimatedProperty } from '@libs/animated/AnimatedProperty.ts'
 import {
@@ -8,7 +8,7 @@ import {
   AnimatedElemStyle,
 } from '@libs/animated/AnimatedProps.ts'
 import { isnumber } from 'src/utils/base/typeUtils.ts'
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 import { Pu } from 'src/utils/base/typeUtils.ts'
 import { RecordPu } from 'src/utils/base/typeUtils.ts'
 import { Setter } from 'src/utils/base/typeUtils.ts'
@@ -25,7 +25,7 @@ const useCreateComponentStateUpdaters = <S extends Record<string, any>>(
   
   return objectMap<
     AnimatedComponentState<S>,
-    { [Prop in keyof S]: Callback1<S[Prop]> }
+    { [Prop in keyof S]: Cb1<S[Prop]> }
   >(
     animatedState,
     ([prop]) => [

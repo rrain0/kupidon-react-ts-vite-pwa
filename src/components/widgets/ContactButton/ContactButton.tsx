@@ -23,7 +23,7 @@ import _2gisLogo from '@im/ic/2gis-logo.webp'
 import yandexMapsLogo from '@im/ic/yandex-maps-logo.webp'
 import LocationIc from 'src/components/elems/icons/SvgIcons/pack/ui/LocationIc.tsx'
 import CheckmarkBoldIc from 'src/components/elems/icons/SvgIcons/pack/ui/CheckmarkBoldIc.tsx'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -56,7 +56,7 @@ const uiVals = {
 
 export type ContactButtonProps = ClassStyle & {
   contact: Contact
-  onClick?: Callback | undefined
+  onClick?: Cb | undefined
 }
 export const ContactButton = React.memo((props: ContactButtonProps) => {
   const {

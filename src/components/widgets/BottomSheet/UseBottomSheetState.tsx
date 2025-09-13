@@ -1,4 +1,4 @@
-import { useStateSync } from '@utils/react/state/useStateSync.ts'
+import { useStateSync } from '@utils/state/react/useStateSync.ts'
 import React, { useCallback, useMemo, useState } from 'react'
 
 import {
@@ -6,7 +6,7 @@ import {
   SheetSnapPoints, SheetSnapsHalfScreen,
   SheetState, UseBottomSheetOptions,
 } from 'src/components/widgets/BottomSheet/useBottomSheet.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 
 
@@ -15,7 +15,7 @@ import { Pu } from '@utils/base/typeUtils.ts'
 export type UseBottomSheetStateProps = {
   isOpen: boolean
 } & Pu<{
-  onClose: Callback
+  onClose: Cb
   defaultOpenIdx: number
   snapPoints: SheetSnapPoints
   closeable: boolean
@@ -99,6 +99,6 @@ export default UseBottomSheetState
 
 
 export type UseBottomSheetStateRenderProps = {
-  setClosing: Callback
+  setClosing: Cb
   sheetProps: UseBottomSheetOptions
 }

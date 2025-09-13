@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 
-import { useBool } from '@utils/react/state/useBool.ts'
+import { useBool } from '@utils/state/react/base/useBool.ts'
 import React, { useLayoutEffect } from 'react'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
 import Button from 'src/components/elems/buttons/Button/Button.tsx'
@@ -8,7 +8,7 @@ import { IconButtonS6 } from 'src/components/elems/buttons/IconButton/IconButton
 import ArrowReloadIc from 'src/components/elems/icons/SvgIcons/pack/ui/ArrowReloadIc.tsx'
 import { SvgIconS } from 'src/components/elems/icons/SvgIcons/SvgIconS.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import rotateAnim = EmotionCommon.rotateAnim
 
 
@@ -16,7 +16,7 @@ import rotateAnim = EmotionCommon.rotateAnim
 
 export type RefreshButtonProps = Pu<{
   isRefreshing: boolean
-  onRefresh: Callback
+  onRefresh: Cb
 }>
 const RefreshButton = React.memo((props: RefreshButtonProps) => {
   

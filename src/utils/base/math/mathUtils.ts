@@ -113,3 +113,14 @@ export const div = (a: number, b: number): number => floorTo0(a / b)
 export const divCeil = (a: number, b: number): number => ceilToInfs(a / b)
 
 
+
+
+
+export const avg = (numbers: Iterable<number>): number => {
+  let sum = 0, cnt = 0
+  for (const n of numbers) { sum += n; cnt++ }
+  return cnt && sum / cnt
+}
+
+
+

@@ -19,7 +19,7 @@ import BackButton from 'src/components/components/screen-bars/parts/BackButton.t
 import PageContentLayout from 'src/components/components/page/PageContentLayout.tsx'
 import PageLayout from 'src/components/components/page/PageLayout.tsx'
 import TopActionBar from 'src/components/components/screen-bars/TopActionBar.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import Txt = EmotionCommon.Txt
 import { Pu } from '@utils/base/typeUtils.ts'
 

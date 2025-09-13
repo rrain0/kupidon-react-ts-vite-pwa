@@ -9,7 +9,7 @@ import ModalPortal from 'src/components/components/modal/ModalPortal.tsx'
 import UseBottomSheetState from 'src/components/widgets/BottomSheet/UseBottomSheetState.tsx'
 import BottomSheetBasic from 'src/components/widgets/BottomSheetBasic/BottomSheetBasic.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import col = EmotionCommon.col
 import { Setter } from '@utils/base/typeUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
@@ -21,7 +21,7 @@ import { Pu } from '@utils/base/typeUtils.ts'
 
 export type ModalSliderProps = {
   isOpen: boolean
-  onClose: Callback
+  onClose: Cb
   title: string
   text: string
   
@@ -32,8 +32,8 @@ export type ModalSliderProps = {
   children: React.ReactNode
   onValueDragEnd: Setter<number>
   isHideBar: boolean
-  onClear: Callback
-  onCancel: Callback
+  onClear: Cb
+  onCancel: Cb
 }>
 
 

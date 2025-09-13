@@ -28,7 +28,7 @@ import Button from 'src/components/elems/buttons/Button/Button.tsx'
 import Input from 'src/components/elems/inputs/Input/Input'
 import PwdInput from 'src/components/elems/inputs/PwdInput/PwdInput'
 import { InputStyle } from 'src/components/elems/inputs/Input/InputStyle'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import { LoginPageValidation } from 'src/components/pages/Login/LoginPage.validation.ts'
 import FormValues = LoginPageValidation.FormValues
 import validators = LoginPageValidation.validators

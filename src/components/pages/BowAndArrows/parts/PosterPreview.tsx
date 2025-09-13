@@ -6,10 +6,10 @@ import {
   getLoopedCarouselProps,
 } from '@utils/animated/carousel/props/defaultCarouselProps.ts'
 import { createTrackPropsGetter } from '@utils/animated/carousel/createTrackPropsGetter.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { arrOfIndices, arrOfZeros } from '@utils/base/ArrayU.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
 import { useInterval2 } from '@utils/react/useInterval2.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import { AppWidgetStyle } from '@libs/widget-style-6/WidgetStyle'
 import React, { useEffect, useState } from 'react'
 import { PosterData } from 'src/configs/poster/PosterData.ts'
@@ -25,8 +25,6 @@ import { SelectMeterS6 } from 'src/components/elems/select-item/SelectMeter/Sele
 import { useCarousel } from '@utils/animated/carousel/useCarousel.ts'
 import Txt = EmotionCommon.Txt
 import rowC = EmotionCommon.rowC
-import arrOfIndices = ArrayU.arrOfIndices
-import arrOfZeros = ArrayU.arrOfZeros
 import absTlwh = EmotionCommon.absTlwh
 
 

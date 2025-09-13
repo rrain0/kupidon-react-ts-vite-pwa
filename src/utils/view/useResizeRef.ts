@@ -1,13 +1,13 @@
 import { useCallback } from 'react'
-import { useAsCallback } from 'src/utils/react/state/useAsCallback.ts'
-import { useRefGetSet } from 'src/utils/react/state/useRefGetSet.ts'
-import { Callback1 } from 'src/utils/base/typeUtils.ts'
+import { useAsCallback } from 'src/utils/state/react/base/useAsCallback.ts'
+import { useRefGetSet } from 'src/utils/state/react/base/useRefGetSet.ts'
+import { Cb1 } from 'src/utils/base/typeUtils.ts'
 
 
 
 // Does not trigger rerender (if you do not set state inside callback)
 export const useResizeRef = <T extends HTMLElement = HTMLDivElement>(
-  onResize: Callback1<T | null> // supports not stable
+  onResize: Cb1<T | null> // supports not stable
 ) => {
   const onResizeStable = useAsCallback(onResize)
   

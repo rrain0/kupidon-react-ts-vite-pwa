@@ -7,8 +7,8 @@ import { asUiText, UiText } from '@libs/ui-text/UiText.ts'
 import { ToastBody, ToastType } from 'src/components/components/Toasts/ToastBody.tsx'
 import { falsy } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
-import { Callback1 } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb1 } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -91,12 +91,12 @@ export class ToastMsgData {
   lifetime: number | undefined
   dragToClose: boolean
   showCloseButton: boolean
-  onClose: Callback | undefined
+  onClose: Cb | undefined
   closeOnUnmount: boolean
   
   id: string | number | undefined = undefined
   runCloseCallback = true
-  onChange: Callback1<ToastItem> = (toast: ToastItem) => {
+  onChange: Cb1<ToastItem> = (toast: ToastItem) => {
     if (toast.status === 'removed' && toast.data === this) {
       this.id = undefined
       this.unsubscribeOnChange?.()
@@ -106,7 +106,7 @@ export class ToastMsgData {
       }
     }
   }
-  unsubscribeOnChange: Callback | undefined = undefined
+  unsubscribeOnChange: Cb | undefined = undefined
   show() {
     if (this.id === undefined) {
       this.unsubscribeOnChange = toast.onChange(this.onChange)

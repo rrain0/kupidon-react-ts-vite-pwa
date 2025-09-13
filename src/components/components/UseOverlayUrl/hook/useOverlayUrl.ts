@@ -1,10 +1,10 @@
 
-import { useBool } from '@utils/react/state/useBool.ts'
+import { useBool } from '@utils/state/react/base/useBool.ts'
 import { useSearchParamValue } from '@utils/url/useSearchParamValue.ts'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
 import { AppRoutes } from 'src/configs/AppRoutes.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 
 
 
@@ -26,8 +26,8 @@ export const useOverlayUrl = (overlayName: string) => {
     setParam({ noParam: true, back: true })
   }, [])
   
-  const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)
-  const closeWithAction = useCallback((action?: Callback) => {
+  const [closeAction, setCloseAction] = useState<undefined | Cb>(undefined)
+  const closeWithAction = useCallback((action?: Cb) => {
     close()
     setCloseAction(() => action)
   }, [])
@@ -82,7 +82,7 @@ export const _useOverlayUrl = (overlayName: string) => {
   
   
   
-  const [closeAction, setCloseAction] = useState<undefined | Callback>(undefined)
+  const [closeAction, setCloseAction] = useState<undefined | Cb>(undefined)
   
   useEffect(() => {
     if (!isOpen && closeAction) {
@@ -96,7 +96,7 @@ export const _useOverlayUrl = (overlayName: string) => {
     enableClose()
   }, [])
   
-  const closeWithAction = useCallback((action?: Callback) => {
+  const closeWithAction = useCallback((action?: Cb) => {
     enableClose()
     setCloseAction(() => action)
   }, [])

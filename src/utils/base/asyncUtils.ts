@@ -1,5 +1,5 @@
-import { CallbackN } from 'src/utils/base/typeUtils.ts'
-import { Callback } from 'src/utils/base/typeUtils.ts'
+import { CbN } from 'src/utils/base/typeUtils.ts'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 
 
 
@@ -20,7 +20,7 @@ export const timeout = (delay: number, callback: () => void) => (
 export const delay = async (delay: number) => new Promise<void>(
   resolve => setTimeout(resolve, delay)
 )
-export const delayAction = async (delay: number, action: Callback) => new Promise<void>(
+export const delayAction = async (delay: number, action: Cb) => new Promise<void>(
   resolve => setTimeout(() => { action(); resolve() }, delay)
 )
 
@@ -41,8 +41,8 @@ export const asyncAction = async <T>(
 
 export const withThrottle = <Args extends any[]>(
   interval: number,
-  callback: CallbackN<Args>
-): CallbackN<Args> => {
+  callback: CbN<Args>
+): CbN<Args> => {
   let timerId: NodeJS.Timeout | null = null
   let prev = 0
   

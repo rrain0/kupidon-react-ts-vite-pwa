@@ -9,7 +9,7 @@ import Modal from 'src/components/components/modal/Modal.tsx'
 import Textarea from 'src/components/elems/Textarea/Textarea.tsx'
 import { TextareaStyle } from 'src/components/elems/Textarea/TextareaStyle.ts'
 import { ActionUiText } from 'src/locales/translations/ActionUiText.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 
@@ -19,9 +19,9 @@ import { Hdrs } from 'components/elems/basic-elements/Hdrs'
 export type ModalTextareaProps = React.ComponentProps<typeof Textarea> & Pu<{
   title: string
   isOpen: boolean
-  onClose: Callback
-  onClear: Callback
-  onCancel: Callback
+  onClose: Cb
+  onClear: Cb
+  onCancel: Cb
 }>
 
 

@@ -8,7 +8,7 @@ import { RouteBuilder } from '@libs/route-builder/RouteBuilder.tsx'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import AppNavigate from 'src/components/components/app-router/AppNavigate.tsx'
 import CheckAuth from 'src/components/components/app-router/CheckAuth.tsx'
-import { useAuthZustand } from 'src/zustand/auth/AuthZustand.ts'
+import { useAuthZustand } from 'src/zustand/auth/authZustand.ts'
 import RootRoute = AppRoutes.RootRoute
 import path = RouteBuilder.path
 import use = RouteBuilder.use

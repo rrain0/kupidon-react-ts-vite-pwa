@@ -1,11 +1,9 @@
 import { Global } from '@emotion/react'
-import { CssU } from '@utils/css/CssU.ts'
+import { cssToPx } from '@utils/css/cssUtils.ts'
 import React, { ReactNode } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Grid from '@libs/short-propsed/components/Grid.tsx'
-
 import { Pu } from '@utils/base/typeUtils.ts'
-import toPx = CssU.toPx
 import modalFloor100 = StyleVals.modalFloor100
 
 
@@ -30,7 +28,7 @@ const TopActionBar = React.memo((props: TopActionBarProps) => {
       
       <Global
         styles={{
-          ':root': { '--top-action-bar-h': toPx(h) },
+          ':root': { '--top-action-bar-h': cssToPx(h) },
         }}
       />
       

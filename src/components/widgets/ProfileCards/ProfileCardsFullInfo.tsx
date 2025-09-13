@@ -24,7 +24,7 @@ import { ReactU } from '@utils/react/ReactU.ts'
 import Children = ReactU.Children
 import { Pu } from '@utils/base/typeUtils.ts'
 import ClassStyle = ReactU.ClassStyle
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import Txt = EmotionCommon.Txt
 import rowWrap = EmotionCommon.rowWrap
 import rowC = EmotionCommon.rowC
@@ -35,7 +35,7 @@ import round = EmotionCommon.round
 
 export type ProfileCardsFullInfoProps = ClassStyle & Children & Pu<{
   isOpen: boolean
-  close: Callback
+  close: Cb
   animatedOpacity: AnimatedProperty<number>
   name: string
   birthDate: string

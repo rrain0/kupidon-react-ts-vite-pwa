@@ -3,9 +3,11 @@ import { config, useSprings, animated, UseSpringProps } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
 import { useAppTheme } from '@utils/app/theme/useAppTheme.ts'
 import { random } from '@utils/base/math/randomUtils.ts'
+import { trimExt } from '@utils/bin/fileUtils.ts'
 import { useNoTouchAction } from '@utils/gestures/pointer/useNoTouchAction.ts'
-import { useWasGesture } from '@utils/gestures/pointer/useWasGesture.ts'
-import { useAsCallback } from '@utils/react/state/useAsCallback.ts'
+import { useWasGesture } from '@utils/app/gestures/useWasGesture.ts'
+import { useAsCallback } from '@utils/state/react/base/useAsCallback.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import React, {
   useCallback,
   useEffect,
@@ -32,33 +34,29 @@ import ProfilePhotosPhotoOptions, {
   ProfilePhotosPhotoOptionsOverlayName,
 } from 'src/components/pages/Profile/options/ProfilePhotosPhotoOptions.tsx'
 import { EmotionCommon } from 'src/styles/common/EmotionCommon.ts'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ArrayU, arr } from '@utils/base/ArrayU.ts'
 import { withThrottle } from '@utils/base/asyncUtils.ts'
 import { rangeMap } from '@utils/base/math/rangeUtils.ts'
-import { FileU } from 'src/utils/file/FileU.ts'
-import { getDataUrlProps } from '@utils/file/DataUrl.ts'
-import { ImageU } from 'src/utils/file/ImageU.ts'
+import { blobToDataUrl } from '@utils/bin/binDataUtils.ts'
+import { getDataUrlProps } from '@utils/bin/dataUrl.ts'
+import { compressImage } from '@utils/bin/imageUtils.ts'
 import { StagedProgress } from '@utils/ui/StagedProgress.ts'
-import { useAsRefGet } from '@utils/react/state/useAsRefGet.ts'
+import { useAsRefGet } from '@utils/state/react/base/useAsRefGet.ts'
 import { useNoSelect } from '@utils/gestures/pointer/useNoSelect.ts'
 import { AppTheme } from 'src/styles/themes/AppTheme.ts'
 import flexC = EmotionCommon.flexC
 import PieProgress from 'src/components/elems/PieProgress/PieProgress.tsx'
 import SparkingLoadingLine from 'src/components/elems/SparkingLoadingLine/SparkingLoadingLine.tsx'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 import bgBorderMask = EmotionCommon.bgInBorder
 import PlusIc from 'src/components/elems/icons/SvgIcons/pack/ui/PlusIc.tsx'
 import * as uuid from 'uuid'
-import blobToDataUrl = FileU.blobToDataUrl
-import { SetterOrUpdater } from '@utils/base/typeUtils.ts'
-import trimExtension = FileU.trimExtension
+import { Cb, SetterOrUpdater } from '@utils/base/typeUtils.ts'
 import Theme = AppTheme.Theme
 import replaceFirstToIfFoundBy = ArrayU.replaceFirstToIfFoundBy
 import mapFirstToIfFoundBy = ArrayU.mapFirstToIfFoundBy
-import { Callback } from '@utils/base/typeUtils.ts'
 import findBy = ArrayU.findBy
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
-import arr = ArrayU.arr
 
 
 
@@ -182,7 +180,7 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
   //const setLogData = useSetRecoilState(LogLayerRecoil)
   
   const [springs, springApi] = useSprings(images.length, springStyle(), [images])
-  const applyDragRef = useRef<Callback>(undefined)
+  const [getApplyDrag, setApplyDrag] = useRefGetSet<Cb | undefined>(undefined)
   const drag = useDrag(gesture => {
     const {
       first, active, last,
@@ -222,15 +220,13 @@ const ProfilePhotos = React.memo((props: ProfilePhotosProps) => {
       }
     }
     applyDrag()
-    applyDragRef.current = applyDrag
+    setApplyDrag(applyDrag)
     if (last) {
       setDragState(undefined)
-      applyDragRef.current = undefined
+      setApplyDrag(undefined)
     }
   }, { })
-  useEffect(() => {
-    if (dragState === 'dragging') applyDragRef.current?.()
-  }, [dragState])
+  useEffect(() => { if (dragState === 'dragging') getApplyDrag?.() }, [dragState])
   
   
   
@@ -557,7 +553,7 @@ const onFilesSelectedBuilder = (
   images: MediaInArrayDUC[],
   lastIdx: number,
   setImages: SetterOrUpdater<MediaInArrayDUC[]>,
-  closeMenu: Callback,
+  closeMenu: Cb,
 ) => (files: File[]) => {
   const imgFiles = files.filter(it => it.type.startsWith('image/'))
   if (imgFiles.length) {
@@ -628,7 +624,7 @@ const onFilesSelectedBuilder = (
             //await wait(10000)
             //throw 'test error'
             
-            const compressedFile = await ImageU.compress(imgFile, {
+            const compressedFile = await compressImage(imgFile, {
               onProgress, abortCtrl: compressAbortCtrl,
             })
             abortCtrl.signal.throwIfAborted()
@@ -647,7 +643,7 @@ const onFilesSelectedBuilder = (
               ...newDefaultLocalMediaInArray(photo.remoteI),
               isInited: true,
               id: uuid.v4(),
-              name: trimExtension(imgFile.name),
+              name: trimExt(imgFile.name),
               ext,
               dataUrl: imgDataUrl,
               isReady: true,

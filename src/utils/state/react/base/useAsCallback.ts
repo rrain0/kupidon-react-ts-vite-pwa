@@ -1,0 +1,15 @@
+import { useCallback } from 'react'
+
+import { useAsRefGet } from 'src/utils/state/react/base/useAsRefGet.ts'
+import type { anyfun } from 'src/utils/base/typeUtils.ts'
+
+
+
+export function useAsCallback<F extends anyfun>(fun: F | undefined, deps: any[] = []): F {
+  const [getFun] = useAsRefGet(fun)
+  const stableFun = useCallback(((...args: Parameters<F>) => {
+    return getFun()?.(...args)
+  }) as F, deps)
+  return stableFun
+}
+

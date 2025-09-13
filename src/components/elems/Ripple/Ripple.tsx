@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { ArrayU } from '@utils/base/ArrayU.ts'
+import { ArrFirstOptional } from '@utils/base/ArrayU.ts'
 import { objectKeys } from '@utils/base/ObjectU.ts'
-import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
-import { useElemRefGetSet } from '@utils/view/useElemRefGetSet.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
+import { useElemRefGetSet } from '@utils/elem/react/useElemRefGetSet.ts'
 import clsx from 'clsx'
 import React, { useEffect, useState } from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
@@ -15,7 +15,6 @@ import WH = ViewU.WH
 import XY = ViewU.XY
 import RippleMode = RippleS6.RippleMode
 import { Pu } from '@utils/base/typeUtils.ts'
-import FirstCanUndef = ArrayU.FirstCanUndef
 import useLog = ReactU.useLog
 
 
@@ -84,7 +83,7 @@ const Ripple = React.memo((props: RippleProps) => {
       if (newNext) {
         let newStateI = newNext.findIndex(it => it !== state)
         if (newStateI === -1) newStateI = newNext.length
-        const [newState, ...restNext] = newNext.slice(newStateI) as FirstCanUndef<typeof newNext>
+        const [newState, ...restNext] = newNext.slice(newStateI) as ArrFirstOptional<typeof newNext>
         if (newState) setState(newState)
         return restNext
       }

@@ -30,8 +30,8 @@ import RadioInputGroup from 'src/components/elems/inputs/RadioInputGroup/RadioIn
 import { RadioInputStyle } from 'src/components/elems/inputs/RadioInput/RadioInputStyle'
 import col = EmotionCommon.col
 import { SettingsOptions } from 'src/components/components/settings-options/SettingsOptions'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
-import { useThemeSettingsZustand } from 'src/zustand/settings/ThemeSettingsZustand.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
+import { useThemeSettingsZustand } from 'src/zustand/settings/themeSettingsZustand.ts'
 
 
 

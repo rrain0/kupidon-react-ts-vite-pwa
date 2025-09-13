@@ -8,7 +8,7 @@ import SelectMeter from 'src/components/elems/select-item/SelectMeter/SelectMete
 
 import { useCssWhRef } from 'src/utils/view/useCssWhRef'
 import { Pu } from '@utils/base/typeUtils.ts'
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
@@ -25,7 +25,7 @@ type SelectItemProps =
     isEdit: boolean
     //isError: boolean
     //onClickAdd: Callback
-    onClickEdit: Callback
+    onClickEdit: Cb
     metersValues: IndicatorSelection[]
     children: React.ReactNode
   }>

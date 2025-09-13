@@ -1,10 +1,7 @@
-
-import { getDataUrlProps } from '@utils/file/DataUrl.ts'
-import { FileU } from '@utils/file/FileU.ts'
+import { getDataUrlProps } from 'src/utils/bin/dataUrl.ts'
 import { noop } from 'src/utils/base/typeUtils.ts'
 import { Pu } from 'src/utils/base/typeUtils.ts'
-import getFilenameFromPath = FileU.getFilenameFromPath
-import getExtension = FileU.getExtension
+import { pathToExt, pathToFilename } from 'src/utils/bin/fileUtils.ts'
 
 
 
@@ -73,8 +70,8 @@ export const urlToMedia = (url = '', { needDownload = true } = { }): MediaDownlo
     ...newDefaultRemoteMedia(),
     id: url,
     remoteUrl: url,
-    name: getFilenameFromPath(url),
-    ext: getExtension(url),
+    name: pathToFilename(url),
+    ext: pathToExt(url),
     isInited: true,
     needDownload,
   }

@@ -2,15 +2,16 @@ import styled from '@emotion/styled'
 import React, { useEffect, useState } from 'react'
 import nextUp from '@im/mock/NEXT UP.jpg'
 import isagi from '@im/mock/Isagi - Blue Lock 250d5ed0b02d009af2f7fa46732b468b.jpg'
-import { ArrayU } from 'src/utils/base/ArrayU'
-import { Callback } from 'src/utils/base/typeUtils.ts'
-import lastIndex = ArrayU.lastI
+import { arrEq, lastI } from 'src/utils/base/ArrayU'
+import { Cb } from 'src/utils/base/typeUtils.ts'
 
 export { }
 
+
+
+
+
 /* Write here what you wanna test 🎉🎉🎉 */
-
-
 
 
 
@@ -20,19 +21,19 @@ function onEventTest() {
   const prevValues: any[] = []
   
   
-  const useEvent = (onEvent: Callback, deps?: any[] | undefined) => {
+  const useEvent = (onEvent: Cb, deps?: any[] | undefined) => {
     
     const [idx] = useState(prevValues.length)
     
     useEffect(() => {
       prevValues.push([])
-      return () => void prevValues.splice(lastIndex(prevValues), 1)
+      return () => void prevValues.splice(lastI(prevValues), 1)
     }, [])
     
     
     useEffect(() => {
       const prev = prevValues[idx]
-      if (!ArrayU.eq(prev, deps)) {
+      if (!arrEq(prev, deps)) {
         prevValues[idx] = deps
         onEvent()
       }

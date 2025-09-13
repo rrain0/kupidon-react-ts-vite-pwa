@@ -1,4 +1,4 @@
-import { Pu } from 'src/utils/base/typeUtils.ts'
+import type { Pu } from 'src/utils/base/typeUtils.ts'
 import { isdef } from 'src/utils/base/typeUtils.ts'
 
 
@@ -32,11 +32,12 @@ export type SizeShortProps = Pu<{
   hCt: boolean // true => { height: 'fit-content' }
   szCt: boolean // true => { width: 'fit-content', height: 'fit-content' }
   
-  ratio: number | string
-  rad: number | string
+  ratio: number | string // => { aspectRatio: ratio }
+  rad: number | string // => { borderRadius: rad }
   
   round: boolean // true => { borderRadius: 999999 }
   
+  // margins
   m: number | string
   mv: number | string
   mh: number | string
@@ -44,6 +45,7 @@ export type SizeShortProps = Pu<{
   mr: number | string
   mb: number | string
   ml: number | string
+  // paddings
   p: number | string
   pv: number | string
   ph: number | string

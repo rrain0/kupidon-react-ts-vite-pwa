@@ -1,11 +1,10 @@
 import { useSpringValue } from '@react-spring/web'
 import { useDrag } from '@use-gesture/react'
+import { avg } from '@utils/base/math/mathUtils.ts'
 import React from 'react'
-import { ArrayU } from '@utils/base/ArrayU.ts'
 import { rangeClamp, rangeMap, rangeMapClamp } from '@utils/base/math/rangeUtils.ts'
-
-import { useRefAsGetSet } from '@utils/react/state/useRefAsGetSet.ts'
-import { useRefGetSet } from '@utils/react/state/useRefGetSet.ts'
+import { useRefAsGetSet } from '@utils/state/react/base/useRefAsGetSet.ts'
+import { useRefGetSet } from '@utils/state/react/base/useRefGetSet.ts'
 import { Getter } from '@utils/base/typeUtils.ts'
 import { NumRange } from '@utils/base/math/rangeUtils.ts'
 
@@ -85,7 +84,7 @@ export const useEmulatedScroll = (
     
     if (isLast) {
       clearDvps()
-      const spd = 500 * ArrayU.avg(getLastDvps().map(it => it.dVp / it.dT))
+      const spd = 500 * avg(getLastDvps().map(it => it.dVp / it.dT))
       setLastDvps([])
       //console.log('spd', spd)
       if (Math.abs(spd) > 350) {

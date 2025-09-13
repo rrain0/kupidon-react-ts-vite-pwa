@@ -8,8 +8,8 @@ import { TitleUiText } from 'src/locales/translations/TitleUiText.ts'
 import OptionItem from 'src/components/widgets/OptionItem/OptionItem.tsx'
 import { FormFieldWrapRenderProps } from '@libs/form-data/components/FormFieldWrap.tsx'
 import { useUiValues } from '@libs/ui-text/useUiText.ts'
-import { DateU } from 'src/utils/date/DateU'
-import { useAppZustand } from 'src/zustand/app/AppZustand.ts'
+import { ageYearsUi } from '@utils/date/dateUtils.ts'
+import { useAppZustand } from 'src/zustand/app/appZustand.ts'
 import { toEmptyAttr } from '@utils/base/typeUtils.ts'
 
 
@@ -25,7 +25,7 @@ const ProfileBirthDateOption = React.memo((props: FormFieldWrapRenderProps<strin
   
   const [saved, setSaved] = useState(props.value)
   
-  const age = DateU.ageYears(props.value, lang)
+  const age = ageYearsUi(props.value, lang)
   
   const { isOpen, open, close } = useOverlayUrl(overlayName)
   

@@ -1,18 +1,18 @@
 import { Global } from '@emotion/react'
-import { CssU } from '@utils/css/CssU.ts'
+import { cssToPx } from '@utils/css/cssUtils.ts'
 import React from 'react'
 import { StyleVals } from 'src/styles/StyleVals.ts'
 import Flex from '@libs/short-propsed/components/Flex.tsx'
 import Grid from '@libs/short-propsed/components/Grid.tsx'
-
-import AcceptAndCancelButtons from 'src/components/components/screen-bars/parts/AcceptAndCancelButtons.tsx'
-import QuickSettingsButton from 'src/components/components/screen-bars/parts/QuickSettingsButton.tsx'
+import AcceptAndCancelButtons
+  from 'src/components/components/screen-bars/parts/AcceptAndCancelButtons.tsx'
+import QuickSettingsButton
+  from 'src/components/components/screen-bars/parts/QuickSettingsButton.tsx'
 import RefreshButton from 'src/components/components/screen-bars/parts/RefreshButton.tsx'
 import { Pu } from '@utils/base/typeUtils.ts'
 import { isdef } from '@utils/base/typeUtils.ts'
 import { isundef } from '@utils/base/typeUtils.ts'
-import toPx = CssU.toPx
-import { Callback } from '@utils/base/typeUtils.ts'
+import { Cb } from '@utils/base/typeUtils.ts'
 import modalFloor100 = StyleVals.modalFloor100
 
 
@@ -33,8 +33,8 @@ export type BottomFloatingBarProps = Pu<{
   settingsButtonLeft: boolean
   refreshPageButton: boolean
   
-  onAccept: Callback
-  onCancel: Callback
+  onAccept: Cb
+  onCancel: Cb
 }>
 
 
@@ -56,7 +56,7 @@ const BottomFloatingBar = React.memo((props: BottomFloatingBarProps) => {
       
       <Global
         styles={{
-          ':root': { '--bottom-floating-bar-h': toPx(h) },
+          ':root': { '--bottom-floating-bar-h': cssToPx(h) },
         }}
       />
       
